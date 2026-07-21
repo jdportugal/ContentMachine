@@ -115,12 +115,18 @@ class TopicsBuilder
     private function tagsNormalizadas(AggregatedItem $item): array
     {
         $tags = array_values(array_filter(array_map(
-            fn ($t) => Str::of($t)->lower()->trim()->toString(),
+            fn ($t) => Str::of($t)->lower()->ascii()->trim()->toString(),
             $item->tags
         )));
 
-        $conteudo = trim($item->titulo."\n".Str::limit($item->transcricao, 4000, ''));
-        $sinais = array_values(array_unique(array_merge($tags, $this->palavrasSalientes($conteudo, 6))));
+        // Conjunto amplo de palavras candidatas (tags + título + transcrição).
+        // O agrupamento a jusante só mantém as partilhadas por 2+ itens, por
+        // isso um conjunto largo capta os temas comuns sem gerar ruído.
+        $conteudo = trim($item->titulo."\n".Str::limit($item->transcricao, 2500, ''));
+        $sinais = array_values(array_unique(array_merge(
+            $tags,
+            array_slice($this->palavrasChave($conteudo), 0, 50)
+        )));
 
         return $sinais !== [] ? $sinais : $this->palavrasChave($item->titulo);
     }
@@ -128,30 +134,12 @@ class TopicsBuilder
     /** @return array<int,string> */
     private function palavrasChave(string $texto): array
     {
-        $palavras = preg_split('/[^\p{L}\p{N}]+/u', Str::lower($texto)) ?: [];
+        $palavras = preg_split('/[^\p{L}\p{N}]+/u', Str::ascii(Str::lower($texto))) ?: [];
 
         return array_values(array_unique(array_filter(
             $palavras,
             fn ($p) => Str::length($p) >= 4 && ! in_array($p, self::STOPWORDS, true)
         )));
-    }
-
-    /**
-     * As K palavras mais frequentes e significativas de um texto (transcrição).
-     *
-     * @return array<int,string>
-     */
-    private function palavrasSalientes(string $texto, int $k): array
-    {
-        $freq = [];
-        foreach (preg_split('/[^\p{L}\p{N}]+/u', Str::lower($texto)) ?: [] as $p) {
-            if (Str::length($p) >= 4 && ! in_array($p, self::STOPWORDS, true)) {
-                $freq[$p] = ($freq[$p] ?? 0) + 1;
-            }
-        }
-        arsort($freq);
-
-        return array_slice(array_keys($freq), 0, $k);
     }
 
     /**

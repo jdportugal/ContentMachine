@@ -61,6 +61,9 @@ class RelatorioTest extends TestCase
         $this->assertNotEmpty($rel['destaques']);
         $this->assertNotEmpty($rel['topicos']);
         $this->assertStringContainsString('2 item', $rel['resumo']);
+        // Redação: texto escrito (não vazio) sobre o que os canais cobrem.
+        $this->assertNotEmpty($rel['redacao']);
+        $this->assertStringContainsString('peça(s)', $rel['redacao']);
         // O item com fonte citada deve pontuar mais alto nos destaques.
         $this->assertSame('youtube', $rel['destaques'][0]['plataforma']);
     }
@@ -90,10 +93,11 @@ class RelatorioTest extends TestCase
         $this->semearItem($hoje, 'youtube', 'a', ['ia'], ['https://fonte/1']);
 
         Livewire::test(Noticias::class)
+            ->set('recolherPrimeiro', false) // não ir à rede durante o teste
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', $hoje)
             ->call('criarRelatorio')
-            ->assertSet('relatorio', fn ($v) => is_array($v) && $v['total'] === 1);
+            ->assertSet('relatorio', fn ($v) => is_array($v) && $v['total'] === 1 && filled($v['redacao']));
 
         $nota = $this->vault->get("noticias/relatorios/dia-{$hoje}.md");
         $this->assertNotNull($nota);

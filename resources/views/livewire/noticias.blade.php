@@ -122,10 +122,15 @@
                 <input type="date" wire:model="dataRelatorio"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
 
+                <label class="mt-3 flex items-start gap-2 cursor-pointer text-ink-soft hover:text-ink text-sm">
+                    <input type="checkbox" wire:model="recolherPrimeiro" class="accent-teal w-4 h-4 mt-0.5">
+                    <span>Recolher vídeos de hoje primeiro <span class="text-ink-faint">(vasculha os canais antes de redigir)</span></span>
+                </label>
+
                 <button wire:click="criarRelatorio" wire:loading.attr="disabled" wire:target="criarRelatorio"
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
                     <span wire:loading.remove wire:target="criarRelatorio">Criar relatório de notícias</span>
-                    <span wire:loading wire:target="criarRelatorio">A destilar…</span>
+                    <span wire:loading wire:target="criarRelatorio">A recolher e redigir…</span>
                 </button>
 
                 @if ($relatorioGuardado)
@@ -148,7 +153,16 @@
                         <x-selo label="IATECA" sub="NOTÍCIAS" date="MMXXVI" color="#c89b3c" />
                     </div>
 
-                    <p class="text-lg text-ink-soft italic dropcap">{{ $relatorio['resumo'] }}</p>
+                    @if (!empty($relatorio['redacao']))
+                        <div class="mt-2 space-y-3 text-ink leading-relaxed max-w-3xl">
+                            @foreach (preg_split('/\n\n+/', trim($relatorio['redacao'])) as $i => $par)
+                                <p class="{{ $i === 0 ? 'dropcap text-lg' : '' }}">{{ $par }}</p>
+                            @endforeach
+                        </div>
+                        <div class="mt-1 font-mono text-[0.6rem] text-ink-faint">redação · {{ $relatorio['redacao_metodo'] ?? 'heuristica' }}</div>
+                    @else
+                        <p class="text-lg text-ink-soft italic dropcap">{{ $relatorio['resumo'] }}</p>
+                    @endif
 
                     @if (!empty($relatorio['por_plataforma']))
                         <div class="mt-3 flex flex-wrap gap-2">

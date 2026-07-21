@@ -29,6 +29,9 @@ class Noticias extends Component
     /** Data de referência do relatório (YYYY-MM-DD). */
     public string $dataRelatorio = '';
 
+    /** Recolher conteúdo novo (vídeos de hoje) antes de redigir o relatório. */
+    public bool $recolherPrimeiro = true;
+
     /** Relatório gerado nesta sessão (para mostrar). @var array<string,mixed>|null */
     public ?array $relatorio = null;
 
@@ -60,8 +63,13 @@ class Noticias extends Component
     }
 
     /** Gera um relatório a partir dos itens agregados no período escolhido. */
-    public function criarRelatorio(RelatorioBuilder $builder, VaultContract $vault): void
+    public function criarRelatorio(RelatorioBuilder $builder, VaultContract $vault, NewsAggregator $aggregator): void
     {
+        // Recolhe primeiro conteúdo novo dos canais (apanha os vídeos de hoje).
+        if ($this->recolherPrimeiro) {
+            $this->resumoAgregacao = $aggregator->aggregate();
+        }
+
         $ref = Carbon::parse($this->dataRelatorio !== '' ? $this->dataRelatorio : now()->toDateString());
 
         [$inicio, $fim] = $this->modoRelatorio === 'semana'

@@ -17,6 +17,7 @@ class RelatorioBuilder
     public function __construct(
         private readonly VaultContract $vault,
         private readonly TopicsBuilder $topicos,
+        private readonly LlmClient $llm,
     ) {}
 
     /**
@@ -42,6 +43,8 @@ class RelatorioBuilder
             'por_plataforma' => $porPlataforma,
             'metodo' => $resultadoTopicos['metodo'],
             'resumo' => $this->resumo(count($itens), $porPlataforma, $resultadoTopicos['topicos']),
+            'redacao' => $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim),
+            'redacao_metodo' => $this->llm->disponivel() && $itens !== [] ? 'llm' : 'heuristica',
             'topicos' => $resultadoTopicos['topicos'],
             'destaques' => $this->destaques($itens),
             'ideias_guiao' => $this->ideiasGuiao($resultadoTopicos['topicos']),
@@ -52,7 +55,7 @@ class RelatorioBuilder
     /** Corpo Markdown do relatório (legível no Obsidian). */
     public function corpoMarkdown(array $rel): string
     {
-        $l = ["# {$rel['titulo']}", '', "> {$rel['total']} item(s) · método: {$rel['metodo']} · {$rel['gerado_em']}", '', '## Resumo', '', $rel['resumo'], ''];
+        $l = ["# {$rel['titulo']}", '', "> {$rel['total']} item(s) · método: {$rel['metodo']} · {$rel['gerado_em']}", '', '## Síntese', '', $rel['redacao'] ?? '', '', '## Resumo', '', $rel['resumo'], ''];
 
         $l[] = '## Destaques';
         $l[] = '';
@@ -203,6 +206,114 @@ class RelatorioBuilder
         }
 
         return array_values(array_slice(array_unique($fontes), 0, 20));
+    }
+
+    /**
+     * Redação — texto escrito sobre tudo o que os canais estão a cobrir.
+     * Usa o LLM quando há chave; senão compõe uma síntese a partir dos tópicos
+     * e de frases reais das transcrições.
+     *
+     * @param  array<int,AggregatedItem>  $itens
+     * @param  array<int,array<string,mixed>>  $topicos
+     */
+    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): string
+    {
+        if ($itens === []) {
+            return 'Não há conteúdo agregado neste período para redigir. Corra a recolha e tente de novo.';
+        }
+
+        if ($this->llm->disponivel()) {
+            $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim);
+            if ($texto !== null && $texto !== '') {
+                return $texto;
+            }
+        }
+
+        return $this->redacaoHeuristica($itens, $topicos, $modo, $inicio, $fim);
+    }
+
+    /** @param array<int,AggregatedItem> $itens */
+    private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
+    {
+        $material = collect($itens)->map(fn (AggregatedItem $i) => [
+            'titulo' => $i->titulo,
+            'canal' => $i->canal,
+            'plataforma' => $i->plataforma,
+            'excerto' => Str::limit(trim($i->transcricao), 1800, ''),
+        ])->all();
+
+        $periodo = $modo === 'semana'
+            ? 'a semana de '.$inicio->translatedFormat('d/m').' a '.$fim->translatedFormat('d/m')
+            : 'o dia '.$inicio->translatedFormat('d/m/Y');
+
+        $prompt = 'És um editor de notícias. Escreve, em português europeu, um relatório corrido (3 a 6 parágrafos) '
+            ."sobre tudo o que está a ser coberto pelos canais acompanhados durante {$periodo}. "
+            .'Sintetiza os temas transversais, o que é efectivamente dito nos vídeos (usa os excertos), '
+            .'aponta o que se destaca e relaciona conteúdos entre canais. Não inventes factos nem números; '
+            ."baseia-te só no material. Sem títulos nem listas — apenas texto corrido.\n\n"
+            .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+        return $this->llm->texto($prompt);
+    }
+
+    /**
+     * @param  array<int,AggregatedItem>  $itens
+     * @param  array<int,array<string,mixed>>  $topicos
+     */
+    private function redacaoHeuristica(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): string
+    {
+        $porTitulo = [];
+        foreach ($itens as $item) {
+            $porTitulo[$item->titulo] = $item;
+        }
+
+        $periodo = $modo === 'semana'
+            ? 'na semana de '.$inicio->translatedFormat('d \d\e M').' a '.$fim->translatedFormat('d \d\e M')
+            : 'no dia '.$inicio->translatedFormat('d \d\e F \d\e Y');
+
+        $plataformas = implode(', ', array_keys($this->contarPorPlataforma($itens)));
+        $temas = collect($topicos)->take(4)->pluck('topico');
+
+        $paras = [];
+        $paras[] = 'Os canais acompanhados publicaram '.count($itens).' peça(s) '.$periodo.', em '.$plataformas.'.'
+            .($temas->isNotEmpty() ? ' A cobertura concentrou-se em '.Str::lower($temas->implode(', ')).'.' : '');
+
+        foreach (array_slice($topicos, 0, 4) as $t) {
+            $n = count($t['itens']);
+            $canais = collect($t['itens'])->pluck('plataforma')->unique()->implode(', ');
+
+            $frase = '';
+            foreach ($t['itens'] as $it) {
+                $item = $porTitulo[$it['titulo']] ?? null;
+                if ($item && trim($item->transcricao) !== '') {
+                    $frase = $this->primeiraFrase($item->transcricao);
+                    break;
+                }
+            }
+
+            $p = 'Em torno de «'.$t['topico'].'» reuniram-se '.$n.' peça(s) ('.$canais.').';
+            if ($frase !== '') {
+                $p .= ' A dada altura ouve-se: «'.$frase.'».';
+            }
+            $paras[] = $p;
+        }
+
+        return implode("\n\n", $paras);
+    }
+
+    /** Primeira frase legível de um texto, até $max caracteres. */
+    private function primeiraFrase(string $texto, int $max = 220): string
+    {
+        $texto = trim(preg_replace('/\s+/', ' ', $texto) ?? '');
+        if ($texto === '') {
+            return '';
+        }
+
+        if (preg_match('/^(.{20,}?[.!?])\s/u', $texto.' ', $m)) {
+            return Str::limit($m[1], $max, '…');
+        }
+
+        return Str::limit($texto, $max, '…');
     }
 
     /**
