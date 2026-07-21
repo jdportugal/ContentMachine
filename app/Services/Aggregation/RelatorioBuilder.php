@@ -33,6 +33,8 @@ class RelatorioBuilder
             ? 'Relatório — semana de '.$inicio->translatedFormat('d \d\e M').' a '.$fim->translatedFormat('d \d\e M \d\e Y')
             : 'Relatório — '.$inicio->translatedFormat('d \d\e F \d\e Y');
 
+        [$redacao, $redacaoMetodo] = $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim);
+
         return [
             'titulo' => $titulo,
             'modo' => $modo,
@@ -43,8 +45,8 @@ class RelatorioBuilder
             'por_plataforma' => $porPlataforma,
             'metodo' => $resultadoTopicos['metodo'],
             'resumo' => $this->resumo(count($itens), $porPlataforma, $resultadoTopicos['topicos']),
-            'redacao' => $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim),
-            'redacao_metodo' => $this->llm->disponivel() && $itens !== [] ? 'llm' : 'heuristica',
+            'redacao' => $redacao,
+            'redacao_metodo' => $redacaoMetodo,
             'topicos' => $resultadoTopicos['topicos'],
             'destaques' => $this->destaques($itens),
             'ideias_guiao' => $this->ideiasGuiao($resultadoTopicos['topicos']),
@@ -123,16 +125,23 @@ class RelatorioBuilder
             ->all();
     }
 
-    /** Extrai o texto da transcrição do corpo Markdown da nota do item. */
+    /** Extrai (e limpa) o texto da transcrição do corpo Markdown da nota do item. */
     private function transcricaoDoCorpo(string $corpo): string
     {
-        if (preg_match('/##\s*Transcri[cç][aã]o\s*\n+(.*)$/isu', $corpo, $m)) {
-            $texto = trim($m[1]);
-
-            return $texto === '_Sem transcrição disponível._' ? '' : $texto;
+        if (! preg_match('/##\s*Transcri[cç][aã]o\s*\n+(.*)$/isu', $corpo, $m)) {
+            return '';
         }
 
-        return '';
+        $texto = trim($m[1]);
+        if ($texto === '_Sem transcrição disponível._') {
+            return '';
+        }
+
+        // Remove marcadores de legenda ([música], [music], (risos)…) que poluem
+        // os tópicos e a redação.
+        $texto = preg_replace('/[\[\(][^\]\)]{0,30}[\]\)]/u', ' ', $texto) ?? $texto;
+
+        return trim(preg_replace('/[ \t]+/', ' ', $texto) ?? $texto);
     }
 
     /**
@@ -216,20 +225,20 @@ class RelatorioBuilder
      * @param  array<int,AggregatedItem>  $itens
      * @param  array<int,array<string,mixed>>  $topicos
      */
-    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): string
+    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): array
     {
         if ($itens === []) {
-            return 'Não há conteúdo agregado neste período para redigir. Corra a recolha e tente de novo.';
+            return ['Não há conteúdo agregado neste período para redigir. Corra a recolha e tente de novo.', 'vazio'];
         }
 
         if ($this->llm->disponivel()) {
             $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim);
             if ($texto !== null && $texto !== '') {
-                return $texto;
+                return [$texto, 'llm'];
             }
         }
 
-        return $this->redacaoHeuristica($itens, $topicos, $modo, $inicio, $fim);
+        return [$this->redacaoHeuristica($itens, $topicos, $modo, $inicio, $fim), 'heuristica'];
     }
 
     /** @param array<int,AggregatedItem> $itens */
@@ -246,8 +255,9 @@ class RelatorioBuilder
             ? 'a semana de '.$inicio->translatedFormat('d/m').' a '.$fim->translatedFormat('d/m')
             : 'o dia '.$inicio->translatedFormat('d/m/Y');
 
-        $prompt = 'És um editor de notícias. Escreve, em português europeu, um relatório corrido (3 a 6 parágrafos) '
-            ."sobre tudo o que está a ser coberto pelos canais acompanhados durante {$periodo}. "
+        $prompt = 'És um editor de notícias português. Escreve, em PORTUGUÊS EUROPEU (de Portugal — evita brasileirismos '
+            .'como «você», gerúndios «está a fazer» e não «fazendo»; usa «ecrã», «utilizador»), um relatório corrido '
+            ."(3 a 6 parágrafos) sobre tudo o que está a ser coberto pelos canais acompanhados durante {$periodo}. "
             .'Sintetiza os temas transversais, o que é efectivamente dito nos vídeos (usa os excertos), '
             .'aponta o que se destaca e relaciona conteúdos entre canais. Não inventes factos nem números; '
             ."baseia-te só no material. Sem títulos nem listas — apenas texto corrido.\n\n"
