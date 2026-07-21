@@ -4,6 +4,7 @@ namespace App\Services\Aggregation;
 
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
+use Illuminate\Support\Str;
 
 /**
  * Orquestra a agregação multi-plataforma: recolhe itens dos canais configurados,
@@ -18,6 +19,7 @@ class NewsAggregator
         private readonly YtDlpRunnerContract $runner,
         private readonly TranscriptParser $parser,
         private readonly TopicsBuilder $topicos,
+        private readonly LlmClient $llm,
     ) {}
 
     /**
@@ -86,9 +88,32 @@ class NewsAggregator
             'data' => $item->dia(),
             'url' => $item->url,
             'thumbnail' => $item->thumbnail,
+            'descricao' => Str::of($item->descricao)->squish()->limit(800)->toString(),
+            'resumo' => $this->resumoDoItem($item),
             'tags' => $item->tags,
             'fontes' => $item->fontes,
         ], $corpo);
+    }
+
+    /**
+     * Resumo de conteúdo (1-2 frases) do que o vídeo ABORDA, gerado por LLM a
+     * partir da transcrição — não a descrição promocional do autor. Sem LLM ou
+     * sem transcrição devolve vazio (a interface cai para o início da transcrição).
+     */
+    private function resumoDoItem(AggregatedItem $item): string
+    {
+        $transcricao = trim($item->transcricao);
+        if ($transcricao === '' || ! config('contentmachine.aggregation.gerar_resumos', true) || ! $this->llm->disponivel()) {
+            return '';
+        }
+
+        $prompt = 'Em 1 a 2 frases curtas e em PORTUGUÊS EUROPEU, resume O QUE ESTE VÍDEO ABORDA '
+            .'(o conteúdo tratado, não promoções, patrocínios nem links). Responde apenas com o resumo, sem aspas.'
+            ."\n\nTítulo: {$item->titulo}\nTranscrição (excerto): ".Str::limit($transcricao, 3000, '');
+
+        $resumo = $this->llm->texto($prompt);
+
+        return $resumo !== null ? Str::of($resumo)->squish()->limit(400)->toString() : '';
     }
 
     /**

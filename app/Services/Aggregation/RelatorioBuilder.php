@@ -117,12 +117,21 @@ class RelatorioBuilder
                 data: (string) $n->get('data', ''),
                 url: (string) $n->get('url', ''),
                 thumbnail: (string) $n->get('thumbnail', ''),
+                descricao: $this->descricaoDaNota($n),
                 transcricao: $this->transcricaoDoCorpo($n->body),
                 tags: array_values((array) $n->get('tags', [])),
                 fontes: array_values((array) $n->get('fontes', [])),
             ))
             ->values()
             ->all();
+    }
+
+    /** Sinopse de conteúdo: o resumo por IA (preferido) ou o início da transcrição. */
+    private function descricaoDaNota(VaultNote $n): string
+    {
+        $resumo = trim((string) $n->get('resumo', ''));
+
+        return $resumo !== '' ? $resumo : Str::limit($this->transcricaoDoCorpo($n->body), 240, '');
     }
 
     /** Extrai (e limpa) o texto da transcrição do corpo Markdown da nota do item. */
@@ -244,11 +253,12 @@ class RelatorioBuilder
     /** @param array<int,AggregatedItem> $itens */
     private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
     {
-        $material = collect($itens)->map(fn (AggregatedItem $i) => [
+        $material = collect($itens)->take(12)->map(fn (AggregatedItem $i) => [
             'titulo' => $i->titulo,
             'canal' => $i->canal,
             'plataforma' => $i->plataforma,
-            'excerto' => Str::limit(trim($i->transcricao), 1800, ''),
+            'resumo' => Str::limit(trim($i->descricao), 500, ''),
+            'transcricao' => Str::limit(trim($i->transcricao), 3500, ''),
         ])->all();
 
         $periodo = $modo === 'semana'
@@ -256,12 +266,17 @@ class RelatorioBuilder
             : 'o dia '.$inicio->translatedFormat('d/m/Y');
 
         $prompt = 'És um editor de notícias português. Escreve, em PORTUGUÊS EUROPEU (de Portugal — evita brasileirismos '
-            .'como «você», gerúndios «está a fazer» e não «fazendo»; usa «ecrã», «utilizador»), um relatório corrido '
-            ."(3 a 6 parágrafos) sobre tudo o que está a ser coberto pelos canais acompanhados durante {$periodo}. "
-            .'Sintetiza os temas transversais, o que é efectivamente dito nos vídeos (usa os excertos), '
-            .'aponta o que se destaca e relaciona conteúdos entre canais. Não inventes factos nem números; '
-            ."baseia-te só no material. Sem títulos nem listas — apenas texto corrido.\n\n"
-            .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            .'como «você» ou gerúndios «está fazendo»; usa «está a fazer», «ecrã», «utilizador»), um relatório APROFUNDADO '
+            ."sobre o que os canais acompanhados cobriram em {$periodo}.\n\n"
+            ."Estrutura obrigatória:\n"
+            ."1) Um parágrafo de abertura com o fio condutor do período.\n"
+            .'2) UM PARÁGRAFO POR VÍDEO (usa TODOS os itens do material): identifica o criador/canal e o título, '
+            .'a tese central, e 2 a 3 pontos CONCRETOS do que é efectivamente dito — apoia-te na transcrição e na '
+            ."descrição, não apenas no título. Menciona nomes próprios, produtos e números que apareçam (ex.: «Hermes agent»).\n"
+            ."3) Um parágrafo final a ligar os temas transversais entre os vídeos.\n\n"
+            .'Vai fundo no conteúdo — NÃO te limites a uma frase por vídeo nem a citar uma única linha solta. '
+            .'Não inventes factos; usa apenas o material. Texto corrido, sem títulos nem listas.'
+            ."\n\n".json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         return $this->llm->texto($prompt);
     }

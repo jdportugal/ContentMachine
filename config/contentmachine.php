@@ -76,6 +76,10 @@ return [
         'llm_provider' => env('LLM_PROVIDER', 'auto'),
         'claude_cli_bin' => env('CLAUDE_CLI_BIN', 'claude'),
         'claude_cli_model' => env('CLAUDE_CLI_MODEL', ''),
+
+        // Gerar um resumo de conteúdo por vídeo (via LLM) na agregação.
+        // Torna a recolha mais lenta (uma chamada por vídeo); desligue com RESUMOS_VIDEO=false.
+        'gerar_resumos' => (bool) env('RESUMOS_VIDEO', true),
     ],
 
     /*

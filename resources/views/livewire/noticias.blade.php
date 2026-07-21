@@ -62,6 +62,17 @@
                             <div class="min-w-0 flex-1">
                                 <a href="{{ $nota->get('url') }}" target="_blank" rel="noopener"
                                    class="font-body text-ink hover:text-teal transition line-clamp-2">{{ $nota->title() }}</a>
+                                @php
+                                    // Sinopse: resumo por IA (preferido) ou o início da transcrição — nunca os links promocionais.
+                                    $sinopse = trim((string) $nota->get('resumo'));
+                                    if ($sinopse === '' && preg_match('/##\s*Transcri[cç][aã]o\s*\n+(.*)$/isu', $nota->body, $mm)) {
+                                        $sinopse = \Illuminate\Support\Str::of($mm[1])->squish()->limit(200)->toString();
+                                        $sinopse = $sinopse === '_Sem transcrição disponível._' ? '' : $sinopse;
+                                    }
+                                @endphp
+                                @if ($sinopse !== '')
+                                    <p class="mt-1 text-sm text-ink-soft line-clamp-2">{{ $sinopse }}</p>
+                                @endif
                                 <div class="mt-1 flex items-center gap-2 flex-wrap">
                                     <x-badge tone="leather"><span style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span> {{ $nota->get('plataforma') }}</x-badge>
                                     <span class="font-mono text-[0.62rem] text-ink-faint">{{ $nota->get('canal') }}</span>
