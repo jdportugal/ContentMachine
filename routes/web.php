@@ -10,12 +10,22 @@ use App\Livewire\Publicacoes\Carrosseis;
 use App\Livewire\Publicacoes\Posts;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
+use App\Models\ClipProject;
 use Illuminate\Support\Facades\Route;
 
 Route::livewire('/', Painel::class)->name('painel');
 Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
 Route::livewire('/clips', Clips::class)->name('clips');
 Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
+
+// Serve/descarrega o ficheiro final de um clip.
+Route::get('/clips-animados/{project}/media', function (ClipProject $project) {
+    abort_unless($project->output_path && is_file($project->output_path), 404);
+
+    return request()->boolean('download')
+        ? response()->download($project->output_path)
+        : response()->file($project->output_path);
+})->name('clips-animados.media');
 
 Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');
 Route::livewire('/publicacoes/posts', Posts::class)->name('publicacoes.posts');
