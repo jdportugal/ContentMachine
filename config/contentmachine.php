@@ -69,11 +69,16 @@ return [
     */
     'clips' => [
         'driver' => env('CLIPS_DRIVER', 'fake'),
+        // Planeador de animações: 'claude' (CLI/subscrição) ou 'openai' (API).
+        'planner' => env('CLIPS_PLANNER', 'claude'),
+        'claude_binary' => env('CLIPS_CLAUDE_BINARY', 'claude'),
         'width' => (int) env('CLIPS_WIDTH', 1080),
         'height' => (int) env('CLIPS_HEIGHT', 1920),
         'fps' => (int) env('CLIPS_FPS', 30),
         'voice_id' => env('ELEVENLABS_VOICE_ID', 'EXAVITQu4vr4xnSDxMaL'),
         'openai_model' => env('CLIPS_OPENAI_MODEL', 'gpt-4o'),
+        // Sugestão de idioma para o Whisper ('' = deteção automática).
+        'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', 'pt'),
         'remotion_path' => base_path('remotion'),
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),

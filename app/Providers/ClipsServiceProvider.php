@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Clips\Api\ClaudeAnimationPlanner;
 use App\Services\Clips\Api\ElevenLabsVoiceoverService;
 use App\Services\Clips\Api\OpenAiAnimationPlanner;
 use App\Services\Clips\Api\OpenAiTranscriptionService;
@@ -33,10 +34,15 @@ class ClipsServiceProvider extends ServiceProvider
             VoiceoverService::class,
             $api ? ElevenLabsVoiceoverService::class : FakeVoiceoverService::class
         );
-        $this->app->bind(
-            AnimationPlanner::class,
-            $api ? OpenAiAnimationPlanner::class : FakeAnimationPlanner::class
-        );
+        $this->app->bind(AnimationPlanner::class, function () use ($api) {
+            if (! $api) {
+                return new FakeAnimationPlanner;
+            }
+
+            return config('contentmachine.clips.planner') === 'openai'
+                ? new OpenAiAnimationPlanner
+                : new ClaudeAnimationPlanner;
+        });
         $this->app->bind(
             RemotionRenderer::class,
             $api ? CliRemotionRenderer::class : FakeRemotionRenderer::class

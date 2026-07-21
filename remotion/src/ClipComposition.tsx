@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
 import { COLORS } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
 import { loadFonts } from "./fonts";
@@ -32,12 +32,19 @@ export const ClipComposition: React.FC<ClipProps> = ({
   const { fps: configFps } = useVideoConfig();
   const effectiveFps = fps ?? configFps;
 
+  // Bare filenames are resolved from Remotion's public/ folder; full URLs pass through.
+  const resolvedAudio = audioSrc
+    ? /^https?:\/\//.test(audioSrc)
+      ? audioSrc
+      : staticFile(audioSrc)
+    : null;
+
   return (
     <AbsoluteFill>
       {/* Opaque clips get papyrus + foxing; transparent overlays get nothing. */}
       {!transparent && <FoxingBackground />}
 
-      {audioSrc ? <Audio src={audioSrc} /> : null}
+      {resolvedAudio ? <Audio src={resolvedAudio} /> : null}
 
       {animations.map((anim, i) => {
         const from = Math.round(anim.start * effectiveFps);

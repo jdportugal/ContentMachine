@@ -15,14 +15,20 @@ class OpenAiTranscriptionService implements TranscriptionService
             throw new RuntimeException('OPENAI_API_KEY em falta para transcrição.');
         }
 
+        $payload = [
+            'model' => 'whisper-1',
+            'response_format' => 'verbose_json',
+            'timestamp_granularities[]' => 'word',
+        ];
+
+        if ($language = config('contentmachine.clips.transcribe_language')) {
+            $payload['language'] = $language;
+        }
+
         $response = Http::withToken($key)
             ->timeout(300)
             ->attach('file', file_get_contents($audioPath), basename($audioPath))
-            ->post('https://api.openai.com/v1/audio/transcriptions', [
-                'model' => 'whisper-1',
-                'response_format' => 'verbose_json',
-                'timestamp_granularities[]' => 'word',
-            ])
+            ->post('https://api.openai.com/v1/audio/transcriptions', $payload)
             ->throw()
             ->json();
 

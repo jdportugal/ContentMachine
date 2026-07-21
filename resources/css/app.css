@@ -64,6 +64,8 @@
         font-weight: 500;
     }
     p { text-wrap: pretty; }
+
+    [x-cloak] { display: none !important; }
 }
 
 /* ---------- Texturas de fundo (Nocturna) ---------- */

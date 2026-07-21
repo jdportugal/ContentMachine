@@ -52,8 +52,30 @@
                             <span class="h-px flex-1 bg-ink-soft/15"></span>
                         </div>
 
+                        <div x-data="voiceRecorder" class="space-y-3">
+                            <label class="eyebrow block">Gravar voz</label>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <button type="button" x-show="!recording" @click="start()"
+                                        class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-leather/50
+                                               text-leather font-mono text-xs hover:bg-leather/10 transition">
+                                    <span class="text-base leading-none">●</span> Gravar
+                                </button>
+                                <button type="button" x-show="recording" x-cloak @click="stop()"
+                                        class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-bad/60
+                                               text-bad font-mono text-xs hover:bg-bad/10 transition">
+                                    <span class="text-base leading-none animate-pulse">■</span>
+                                    Parar · <span x-text="elapsed + 's'"></span>
+                                </button>
+                                <span x-show="uploading" x-cloak class="font-mono text-[0.6rem] text-ink-faint">a enviar gravação…</span>
+                                <span x-show="ready && !recording && !uploading" x-cloak class="font-mono text-[0.6rem] text-teal">gravação pronta ✔</span>
+                                <span x-show="error" x-cloak class="font-mono text-[0.6rem] text-bad" x-text="error"></span>
+                            </div>
+                            <audio x-ref="player" x-show="ready" x-cloak controls
+                                   class="w-full rounded-sm border border-ink-soft/15"></audio>
+                        </div>
+
                         <div>
-                            <label class="eyebrow block mb-2">Carregar locução (áudio)</label>
+                            <label class="eyebrow block mb-2">Ou carregar locução (áudio)</label>
                             <input type="file" wire:model="audio" accept="audio/*"
                                    class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4
                                           file:rounded-sm file:border file:border-teal/40 file:bg-transparent
@@ -151,4 +173,64 @@
             @endforelse
         </div>
     </div>
+
+    @script
+    <script>
+        Alpine.data('voiceRecorder', () => ({
+            recording: false,
+            uploading: false,
+            ready: false,
+            elapsed: 0,
+            error: null,
+            recorder: null,
+            chunks: [],
+            timer: null,
+
+            async start() {
+                this.error = null;
+                if (!navigator.mediaDevices?.getUserMedia) {
+                    this.error = 'Gravação não suportada neste navegador.';
+                    return;
+                }
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    this.chunks = [];
+                    this.recorder = new MediaRecorder(stream);
+                    this.recorder.ondataavailable = (e) => { if (e.data.size) this.chunks.push(e.data); };
+                    this.recorder.onstop = () => this.finish(stream);
+                    this.recorder.start();
+                    this.recording = true;
+                    this.ready = false;
+                    this.elapsed = 0;
+                    this.timer = setInterval(() => this.elapsed++, 1000);
+                } catch (e) {
+                    this.error = 'Sem acesso ao microfone.';
+                }
+            },
+
+            stop() {
+                clearInterval(this.timer);
+                this.recording = false;
+                if (this.recorder && this.recorder.state !== 'inactive') {
+                    this.recorder.stop();
+                }
+            },
+
+            finish(stream) {
+                stream.getTracks().forEach((t) => t.stop());
+                const blob = new Blob(this.chunks, { type: 'audio/webm' });
+                this.$refs.player.src = URL.createObjectURL(blob);
+                this.ready = true;
+
+                const file = new File([blob], 'gravacao.webm', { type: 'audio/webm' });
+                this.uploading = true;
+                this.$wire.upload('audio', file,
+                    () => { this.uploading = false; },
+                    () => { this.uploading = false; this.error = 'Falha ao enviar a gravação.'; },
+                    () => {}
+                );
+            },
+        }));
+    </script>
+    @endscript
 </div>
