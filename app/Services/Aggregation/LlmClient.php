@@ -6,15 +6,19 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 
 /**
- * Cliente mínimo para geração de texto via LLM.
+ * Cliente de geração de texto via LLM, com CADEIA de fornecedores: tenta cada
+ * um por ordem e usa o primeiro que devolver texto. Assim, se o CLI do Claude
+ * falhar (ex.: sem login no contexto do servidor), cai para uma API em vez de
+ * degradar para heurística.
  *
- * Fornecedores suportados (config `contentmachine.aggregation.llm_provider`):
- *   - 'claude-cli' → corre o CLI do Claude Code (`claude -p`), reutilizando a
- *     sessão/subscrição já autenticada — SEM chave de API nem faturação por token.
- *   - 'openai' / 'gemini' → via API (requer chave em config/services).
- *   - 'auto' → CLI do Claude se existir, senão OpenAI, senão Gemini.
- *   - 'none' → desligado (a app degrada para heurística).
+ * Fornecedores:
+ *   - 'claude-cli' → `claude -p` (grátis; reutiliza a sessão, mas só funciona
+ *     onde o `claude` esteja autenticado — pouco fiável a partir de um servidor).
+ *   - 'anthropic'  → API da Anthropic (chave ANTHROPIC_API_KEY) — Claude fiável.
+ *   - 'openai' / 'gemini' → via API (requer chave).
  *
+ * config `contentmachine.aggregation.llm_provider`:
+ *   'auto' (cadeia por disponibilidade) | um nome específico | 'none' (desligado).
  * Nunca lança — em falha devolve null.
  */
 class LlmClient
@@ -22,54 +26,72 @@ class LlmClient
     /** @var array<string,?string> cache de resolução de binários */
     private static array $binCache = [];
 
+    /** Último fornecedor que produziu texto (para rotular a saída). */
+    private ?string $ultimoFornecedor = null;
+
     public function disponivel(): bool
     {
-        return $this->fornecedor() !== null;
+        return $this->fornecedores() !== [];
     }
 
-    /** Nome do fornecedor efectivo (para rotular a saída), ou null. */
+    /** Nome do fornecedor que produziu o último texto (ou o primeiro disponível). */
     public function fornecedorAtivo(): ?string
     {
-        return $this->fornecedor();
+        return $this->ultimoFornecedor ?? ($this->fornecedores()[0] ?? null);
     }
 
     /**
-     * Gera texto a partir de um prompt. Devolve null se indisponível ou em falha.
+     * Gera texto. Tenta os fornecedores por ordem até um devolver algo.
      *
-     * @param  bool  $comFerramentas  Permite ao Claude (CLI) usar pesquisa/leitura web
-     *                                para ir buscar contexto às fontes. Ignorado por OpenAI/Gemini.
+     * @param  bool  $comFerramentas  Permite ao Claude (CLI) usar pesquisa/leitura web.
      */
     public function texto(string $prompt, bool $comFerramentas = false): ?string
     {
-        try {
-            return match ($this->fornecedor()) {
-                'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
-                'openai' => $this->openai((string) config('services.openai.key'), $prompt),
-                'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt),
-                default => null,
-            };
-        } catch (\Throwable) {
-            return null;
+        foreach ($this->fornecedores() as $fornecedor) {
+            try {
+                $texto = match ($fornecedor) {
+                    'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
+                    'anthropic' => $this->anthropic((string) config('services.anthropic.key'), $prompt),
+                    'openai' => $this->openai((string) config('services.openai.key'), $prompt),
+                    'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt),
+                    default => null,
+                };
+            } catch (\Throwable) {
+                $texto = null;
+            }
+
+            if ($texto !== null && $texto !== '') {
+                $this->ultimoFornecedor = $fornecedor;
+
+                return $texto;
+            }
         }
+
+        return null;
     }
 
-    /** Determina o fornecedor efectivo, respeitando a config e a disponibilidade. */
-    private function fornecedor(): ?string
+    /**
+     * Cadeia ordenada de fornecedores a tentar, filtrada por disponibilidade.
+     *
+     * @return array<int,string>
+     */
+    private function fornecedores(): array
     {
         $escolha = (string) config('contentmachine.aggregation.llm_provider', 'auto');
 
-        return match ($escolha) {
-            'none' => null,
-            'claude-cli' => $this->claudeBin() !== null ? 'claude-cli' : null,
-            'openai' => filled(config('services.openai.key')) ? 'openai' : null,
-            'gemini' => filled(config('services.gemini.key')) ? 'gemini' : null,
-            default => match (true) { // 'auto'
-                $this->claudeBin() !== null => 'claude-cli',
-                filled(config('services.openai.key')) => 'openai',
-                filled(config('services.gemini.key')) => 'gemini',
-                default => null,
-            },
+        $ordem = match ($escolha) {
+            'none' => [],
+            'auto' => ['claude-cli', 'anthropic', 'openai', 'gemini'],
+            default => [$escolha],
         };
+
+        return array_values(array_filter($ordem, fn (string $f) => match ($f) {
+            'claude-cli' => $this->claudeBin() !== null,
+            'anthropic' => filled(config('services.anthropic.key')),
+            'openai' => filled(config('services.openai.key')),
+            'gemini' => filled(config('services.gemini.key')),
+            default => false,
+        }));
     }
 
     /** Corre o CLI do Claude Code em modo não-interativo (prompt via stdin). */
@@ -89,41 +111,38 @@ class LlmClient
 
         $timeout = (int) config('contentmachine.aggregation.claude_cli_timeout', 240);
 
-        // Ferramentas de pesquisa/leitura web (para ir buscar contexto às fontes).
         if ($comFerramentas && (bool) config('contentmachine.aggregation.claude_cli_web', true)) {
             $args[] = '--allowedTools';
             $args[] = 'WebSearch';
             $args[] = 'WebFetch';
-            $timeout = max($timeout, 600); // a pesquisa web acrescenta latência
+            $timeout = max($timeout, 600);
         }
 
-        // Corre num directório neutro para não puxar contexto de projecto.
         $r = Process::path(sys_get_temp_dir())
             ->timeout($timeout)
+            ->env($this->ambiente())
             ->input($prompt)
             ->run($args);
 
         return $r->successful() ? (trim($r->output()) ?: null) : null;
     }
 
-    /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */
-    private function claudeBin(): ?string
+    /** API da Anthropic (Messages). Devolve o texto ou null. */
+    private function anthropic(string $chave, string $prompt): ?string
     {
-        $bin = (string) config('contentmachine.aggregation.claude_cli_bin', 'claude');
-
-        if (array_key_exists($bin, self::$binCache)) {
-            return self::$binCache[$bin];
+        if (blank($chave)) {
+            return null;
         }
 
-        if (str_contains($bin, '/')) {
-            return self::$binCache[$bin] = (is_executable($bin) ? $bin : null);
-        }
+        $r = Http::timeout(120)
+            ->withHeaders(['x-api-key' => $chave, 'anthropic-version' => '2023-06-01'])
+            ->post('https://api.anthropic.com/v1/messages', [
+                'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8'),
+                'max_tokens' => (int) config('contentmachine.aggregation.anthropic_max_tokens', 8000),
+                'messages' => [['role' => 'user', 'content' => $prompt]],
+            ]);
 
-        // Resolve pelo PATH do shell de login (inclui ~/.local/bin, etc.).
-        $r = Process::run(['bash', '-lc', 'command -v '.escapeshellarg($bin)]);
-        $caminho = trim($r->output());
-
-        return self::$binCache[$bin] = ($r->successful() && $caminho !== '' ? $caminho : null);
+        return $r->successful() ? (trim((string) $r->json('content.0.text')) ?: null) : null;
     }
 
     private function openai(string $chave, string $prompt): ?string
@@ -132,7 +151,7 @@ class LlmClient
             return null;
         }
 
-        $r = Http::timeout(90)->withToken($chave)
+        $r = Http::timeout(120)->withToken($chave)
             ->post('https://api.openai.com/v1/chat/completions', [
                 'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
                 'messages' => [['role' => 'user', 'content' => $prompt]],
@@ -149,11 +168,59 @@ class LlmClient
         }
 
         $modelo = (string) config('contentmachine.aggregation.gemini_model', 'gemini-1.5-flash');
-        $r = Http::timeout(90)
+        $r = Http::timeout(120)
             ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", [
                 'contents' => [['parts' => [['text' => $prompt]]]],
             ]);
 
         return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : null;
+    }
+
+    /**
+     * Ambiente para o subprocesso do Claude: parte do ambiente actual (para não
+     * perder as variáveis da sessão que o autenticam) e garante HOME/PATH.
+     *
+     * @return array<string,string>
+     */
+    private function ambiente(): array
+    {
+        $env = [];
+        foreach ($_SERVER as $k => $val) {
+            if (is_string($val) && (str_starts_with((string) $k, 'CLAUDE') || in_array($k, ['HOME', 'PATH', 'USER', 'SHELL', 'ANTHROPIC_API_KEY'], true))) {
+                $env[$k] = $val;
+            }
+        }
+
+        $home = getenv('HOME') ?: ($env['HOME'] ?? '');
+        if ($home === '' && function_exists('posix_getpwuid')) {
+            $home = posix_getpwuid(posix_getuid())['dir'] ?? '';
+        }
+        if ($home !== '') {
+            $env['HOME'] = $home;
+        }
+        if (empty($env['PATH']) && ($p = getenv('PATH')) !== false) {
+            $env['PATH'] = $p;
+        }
+
+        return $env;
+    }
+
+    /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */
+    private function claudeBin(): ?string
+    {
+        $bin = (string) config('contentmachine.aggregation.claude_cli_bin', 'claude');
+
+        if (array_key_exists($bin, self::$binCache)) {
+            return self::$binCache[$bin];
+        }
+
+        if (str_contains($bin, '/')) {
+            return self::$binCache[$bin] = (is_executable($bin) ? $bin : null);
+        }
+
+        $r = Process::run(['bash', '-lc', 'command -v '.escapeshellarg($bin)]);
+        $caminho = trim($r->output());
+
+        return self::$binCache[$bin] = ($r->successful() && $caminho !== '' ? $caminho : null);
     }
 }

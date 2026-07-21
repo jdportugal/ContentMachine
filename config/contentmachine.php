@@ -67,6 +67,8 @@ return [
         ],
         'openai_model' => env('AGGREGATION_OPENAI_MODEL', 'gpt-4o-mini'),
         'gemini_model' => env('AGGREGATION_GEMINI_MODEL', 'gemini-1.5-flash'),
+        'anthropic_model' => env('AGGREGATION_ANTHROPIC_MODEL', 'claude-opus-4-8'),
+        'anthropic_max_tokens' => (int) env('AGGREGATION_ANTHROPIC_MAX_TOKENS', 8000),
 
         // Fornecedor de LLM para a redação/tópicos:
         //   'auto'       → usa o CLI do Claude se existir, senão OpenAI/Gemini

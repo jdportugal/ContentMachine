@@ -59,6 +59,10 @@ return [
         'key' => env('OPENAI_API_KEY'),
     ],
 
+    'anthropic' => [
+        'key' => env('ANTHROPIC_API_KEY'),
+    ],
+
     'youtube' => [
         'key' => env('YOUTUBE_API_KEY'),
     ],

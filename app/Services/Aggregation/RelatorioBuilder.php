@@ -262,23 +262,30 @@ class RelatorioBuilder
         $periodo = $modo === 'semana'
             ? 'os últimos 7 dias (até '.$fim->translatedFormat('d/m/Y').')'
             : 'o dia '.$inicio->translatedFormat('d/m/Y');
+        $gancho = $modo === 'semana' ? 'Esta semana em IA…' : 'Hoje em IA…';
 
-        $prompt = 'És o redator de um boletim de NOTÍCIAS de inteligência artificial. Recebes transcrições de vários '
-            ."vídeos de criadores e as fontes que citam, referentes a {$periodo}. A tua tarefa é escrever um GUIÃO "
-            ."coerente, em PORTUGUÊS EUROPEU, pronto a ser LIDO EM VOZ ALTA.\n\n"
-            ."Regras:\n"
-            .'- Cobre APENAS notícias relevantes: lançamentos, novos modelos/produtos, atualizações importantes, '
-            .'aquisições, financiamentos, estudos, números e acontecimentos. IGNORA tutoriais, opiniões pessoais, '
-            ."promoções, patrocínios, apelos «subscreve» e tudo o que não seja notícia. Nem todos os itens têm de ser usados.\n"
-            .'- O guião é AUTÓNOMO e IMPESSOAL: NUNCA menciones os vídeos, os criadores, os canais nem o formato '
-            ."(nada de «num vídeo», «o criador diz», «segundo o canal»). Relata os factos como um pivô de telejornal.\n"
-            .'- Estrutura como um alinhamento de notícias: abertura curta, cada notícia num bloco com transições '
-            ."fluidas, e um fecho breve. Menciona nomes próprios, produtos, datas e números concretos.\n"
-            .'- Se faltar CONTEXTO a uma notícia (o que aconteceu ao certo, datas, números, quem), USA as ferramentas '
-            .'de pesquisa web e as fontes indicadas para confirmar e enriquecer. NÃO inventes: se não confirmares um '
-            ."facto, sê prudente ou omite-o.\n"
+        $prompt = 'És o guionista de um vídeo-resumo de notícias de inteligência artificial (estilo «Esta semana em IA»). '
+            ."A partir do material abaixo — transcrições de vídeos de criadores e as fontes que citam, referentes a {$periodo} — "
+            ."escreve o GUIÃO para ser NARRADO num vídeo.\n\n"
+            ."TOM E ESTILO:\n"
+            .'- Conversacional, envolvente e entusiasta, como um criador a explicar as novidades a um público interessado; '
+            ."podes usar «nós» e dirigir-te ao espectador.\n"
+            ."- Abre com um gancho no espírito «{$gancho}».\n"
+            .'- NÃO te limites a enunciar factos: EXPLICA porque é que cada novidade importa e é impressionante '
+            ."(«…e isto é impressionante porque…»), dá contexto e liga as histórias entre si.\n"
+            .'- Comprimento não é problema — desenvolve bem cada notícia (o guião pode servir para vários vídeos ou cursos), '
+            ."sobretudo no resumo semanal.\n\n"
+            ."CONTEÚDO:\n"
+            .'- Cobre APENAS notícias relevantes: lançamentos, novos modelos/produtos, atualizações importantes, aquisições, '
+            .'financiamentos, estudos, números. IGNORA tutoriais, opiniões pessoais, promoções, patrocínios e apelos '
+            ."«subscreve». Nem todos os itens têm de ser usados.\n"
+            .'- IMPESSOAL quanto à origem: NUNCA menciones os vídeos, os criadores nem os canais («num vídeo», «o criador '
+            ."diz», «este canal»). Apresenta as notícias como tuas.\n"
+            ."- Menciona nomes próprios, produtos, datas e números concretos (ex.: «Fable 5», «Kimi K3», «Hermes»).\n"
+            .'- Se faltar CONTEXTO a uma notícia, USA a pesquisa web e as fontes indicadas para confirmar e enriquecer. '
+            ."NÃO inventes: se não confirmares, sê prudente ou omite.\n"
             ."- Português europeu (evita brasileirismos como «você» ou «está fazendo»).\n\n"
-            ."Material (transcrições + fontes):\n"
+            ."MATERIAL (transcrições + fontes):\n"
             .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         return $this->llm->texto($prompt, comFerramentas: true);
