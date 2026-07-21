@@ -129,7 +129,7 @@
                     @endforeach
                 </div>
 
-                <label class="eyebrow block mb-1.5">{{ $modoRelatorio === 'semana' ? 'Semana de (qualquer dia)' : 'Dia' }}</label>
+                <label class="eyebrow block mb-1.5">{{ $modoRelatorio === 'semana' ? '7 dias até' : 'Dia' }}</label>
                 <input type="date" wire:model="dataRelatorio"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
 

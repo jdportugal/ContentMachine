@@ -253,7 +253,7 @@ class RelatorioBuilder
     /** @param array<int,AggregatedItem> $itens */
     private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
     {
-        $material = collect($itens)->take(12)->map(fn (AggregatedItem $i) => [
+        $material = collect($itens)->take(20)->map(fn (AggregatedItem $i) => [
             'titulo' => $i->titulo,
             'canal' => $i->canal,
             'plataforma' => $i->plataforma,

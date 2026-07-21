@@ -72,8 +72,10 @@ class Noticias extends Component
 
         $ref = Carbon::parse($this->dataRelatorio !== '' ? $this->dataRelatorio : now()->toDateString());
 
+        // 'semana' = janela dos últimos 7 dias até à data escolhida (não a
+        // semana de calendário), para apanhar todo o conteúdo recente agregado.
         [$inicio, $fim] = $this->modoRelatorio === 'semana'
-            ? [$ref->copy()->startOfWeek(), $ref->copy()->endOfWeek()]
+            ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
         $relatorio = $builder->gerar($inicio, $fim, $this->modoRelatorio);
