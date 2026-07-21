@@ -58,4 +58,24 @@ return [
             'linkedin' => ['likes' => 1.0, 'comentarios' => 3.5, 'partilhas' => 3.0, 'guardados' => 1.0],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Clips Animados (estúdio de animação)
+    |--------------------------------------------------------------------------
+    | Pipeline de geração de clips: transcrição (Whisper), planeamento de
+    | animações (GPT + style md), render (Remotion) e composição (ffmpeg).
+    | Driver 'fake' corre sem chaves; 'api' liga os serviços reais.
+    */
+    'clips' => [
+        'driver' => env('CLIPS_DRIVER', 'fake'),
+        'width' => (int) env('CLIPS_WIDTH', 1080),
+        'height' => (int) env('CLIPS_HEIGHT', 1920),
+        'fps' => (int) env('CLIPS_FPS', 30),
+        'voice_id' => env('ELEVENLABS_VOICE_ID', 'EXAVITQu4vr4xnSDxMaL'),
+        'openai_model' => env('CLIPS_OPENAI_MODEL', 'gpt-4o'),
+        'remotion_path' => base_path('remotion'),
+        'style_md' => base_path('vault/estilo-animacao.md'),
+        'disk' => env('CLIPS_DISK', 'local'),
+    ],
 ];
