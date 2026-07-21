@@ -20,7 +20,7 @@ class Definicoes extends Component
     /** Fontes do agregador como texto (uma por linha), por fonte. @var array<string,string> */
     public array $fontes = [];
 
-    /** Canais a agregar (URLs) como texto (um por linha), por plataforma. @var array<string,string> */
+    /** Canais a agregar — lista de URLs por plataforma. @var array<string,array<int,string>> */
     public array $canais = [];
 
     public ?string $guardado = null;
@@ -34,8 +34,9 @@ class Definicoes extends Component
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
+        // Cada plataforma tem uma lista de URLs; garante ≥1 linha para escrever.
         $this->canais = collect($tudo['canais'])
-            ->map(fn (array $lista) => implode("\n", $lista))
+            ->map(fn (array $lista) => $lista === [] ? [''] : array_values($lista))
             ->all();
     }
 
@@ -45,10 +46,27 @@ class Definicoes extends Component
             'geral' => $this->geral,
             'perfis' => $this->perfis,
             'agregador' => $this->emListas($this->fontes),
-            'canais' => $this->emListas($this->canais),
+            'canais' => collect($this->canais)
+                ->map(fn (array $lista) => array_values(array_filter(array_map('trim', $lista))))
+                ->all(),
         ]);
 
         $this->guardado = now()->translatedFormat('H:i');
+    }
+
+    public function adicionarCanal(string $plataforma): void
+    {
+        $this->canais[$plataforma][] = '';
+    }
+
+    public function removerCanal(string $plataforma, int $i): void
+    {
+        unset($this->canais[$plataforma][$i]);
+        $this->canais[$plataforma] = array_values($this->canais[$plataforma]);
+
+        if ($this->canais[$plataforma] === []) {
+            $this->canais[$plataforma] = [''];
+        }
     }
 
     /**

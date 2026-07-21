@@ -68,6 +68,17 @@ class SettingsRepository
     {
         $limpo = array_replace_recursive($this->defaults(), $data);
 
+        // As listas (canais/fontes) são substituídas por inteiro — não fundidas
+        // por índice — para que remover ou esvaziar uma entrada seja respeitado
+        // (o array_replace_recursive, sozinho, reintroduziria as sementes).
+        foreach (['canais', 'agregador'] as $grupo) {
+            if (isset($data[$grupo]) && is_array($data[$grupo])) {
+                foreach ($data[$grupo] as $chave => $lista) {
+                    $limpo[$grupo][$chave] = array_values((array) $lista);
+                }
+            }
+        }
+
         $frontmatter = array_merge([
             'titulo' => 'Definições',
             'tipo' => 'definicoes',

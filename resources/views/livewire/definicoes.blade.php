@@ -69,7 +69,7 @@
 
         {{-- Canais a agregar (yt-dlp) --}}
         <x-panel eyebrow="Agregador" title="Canais a agregar" glyph="▶">
-            <p class="text-ink-soft -mt-2 mb-4">Ligações de canais/perfis que o agregador vasculha via yt-dlp — um URL por linha. YouTube e TikTok funcionam sem credenciais; Instagram e LinkedIn são <span class="text-ink">melhor-esforço</span> (podem exigir autenticação).</p>
+            <p class="text-ink-soft -mt-2 mb-4">Ligações de canais/perfis que o agregador vasculha via yt-dlp — pode adicionar <span class="text-ink">vários por plataforma</span> com «+ acrescentar canal». YouTube e TikTok funcionam sem credenciais; Instagram e LinkedIn são <span class="text-ink">melhor-esforço</span> (podem exigir autenticação).</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 @php
                     $rotulosCanais = [
@@ -79,17 +79,29 @@
                         'linkedin' => ['Perfis de LinkedIn', 'https://www.linkedin.com/in/perfil/'],
                     ];
                 @endphp
-                @foreach ($canais as $plataforma => $texto)
+                @foreach ($canais as $plataforma => $lista)
                     @php
                         $rc = $rotulosCanais[$plataforma] ?? [ucfirst($plataforma), 'https://…'];
                         $m = $plataformasMeta[$plataforma] ?? ['cor' => '#2dbab4', 'glifo' => '•'];
                     @endphp
-                    <div>
-                        <label class="eyebrow block mb-1.5">
+                    <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
+                        <label class="eyebrow block mb-2">
                             <span style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span> {{ $rc[0] }}
                         </label>
-                        <textarea wire:model="canais.{{ $plataforma }}" rows="3" placeholder="{{ $rc[1] }}"
-                                  class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none"></textarea>
+                        <div class="space-y-2">
+                            @foreach ($lista as $i => $url)
+                                <div class="flex gap-2" wire:key="canal-{{ $plataforma }}-{{ $i }}">
+                                    <input type="url" wire:model="canais.{{ $plataforma }}.{{ $i }}" placeholder="{{ $rc[1] }}"
+                                           class="flex-1 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                                    <button type="button" wire:click="removerCanal('{{ $plataforma }}', {{ $i }})"
+                                            class="shrink-0 text-ink-faint hover:text-bad px-2 text-lg" title="Remover">×</button>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button type="button" wire:click="adicionarCanal('{{ $plataforma }}')"
+                                class="mt-2 border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-teal/40 rounded-sm px-3 py-1 font-mono text-xs transition">
+                            + acrescentar canal
+                        </button>
                     </div>
                 @endforeach
             </div>
