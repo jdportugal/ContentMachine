@@ -67,6 +67,15 @@ return [
         ],
         'openai_model' => env('AGGREGATION_OPENAI_MODEL', 'gpt-4o-mini'),
         'gemini_model' => env('AGGREGATION_GEMINI_MODEL', 'gemini-1.5-flash'),
+
+        // Fornecedor de LLM para a redação/tópicos:
+        //   'auto'       → usa o CLI do Claude se existir, senão OpenAI/Gemini
+        //   'claude-cli' → corre o CLI do Claude Code (reutiliza a tua sessão, sem chave de API)
+        //   'openai' | 'gemini' → via API (requer chave)
+        //   'none'       → desligado (heurística)
+        'llm_provider' => env('LLM_PROVIDER', 'auto'),
+        'claude_cli_bin' => env('CLAUDE_CLI_BIN', 'claude'),
+        'claude_cli_model' => env('CLAUDE_CLI_MODEL', ''),
     ],
 
     /*

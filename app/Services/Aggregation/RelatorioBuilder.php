@@ -234,7 +234,7 @@ class RelatorioBuilder
         if ($this->llm->disponivel()) {
             $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim);
             if ($texto !== null && $texto !== '') {
-                return [$texto, 'llm'];
+                return [$texto, $this->llm->fornecedorAtivo() ?? 'llm'];
             }
         }
 
