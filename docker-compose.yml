@@ -1,0 +1,88 @@
+services:
+  # ---- Aplicação (PHP-FPM) ----
+  app:
+    build:
+      context: .
+      target: app
+    image: contentmachine-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      REDIS_HOST: redis
+    volumes:
+      - ./vault:/var/www/html/vault
+      - storage:/var/www/html/storage
+      - public:/var/www/html/public
+    depends_on:
+      - postgres
+      - redis
+
+  # ---- Servidor web (Nginx) ----
+  web:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - public:/var/www/html/public:ro
+    depends_on:
+      - app
+
+  # ---- Trabalhador de filas ----
+  queue:
+    image: contentmachine-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      REDIS_HOST: redis
+    command: php artisan queue:work --tries=3 --sleep=3
+    volumes:
+      - ./vault:/var/www/html/vault
+      - storage:/var/www/html/storage
+    depends_on:
+      - app
+
+  # ---- Agendador (cron do Laravel) ----
+  scheduler:
+    image: contentmachine-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      REDIS_HOST: redis
+    command: php artisan schedule:work
+    volumes:
+      - ./vault:/var/www/html/vault
+      - storage:/var/www/html/storage
+    depends_on:
+      - app
+
+  # ---- Base de dados (metadados da app; o conteúdo vive no vault) ----
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-contentmachine}
+      POSTGRES_USER: ${DB_USERNAME:-contentmachine}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # ---- Redis (filas + cache) ----
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:
+  storage:
+  public:
