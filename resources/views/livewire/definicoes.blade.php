@@ -67,6 +67,34 @@
             </div>
         </x-panel>
 
+        {{-- Canais a agregar (yt-dlp) --}}
+        <x-panel eyebrow="Agregador" title="Canais a agregar" glyph="▶">
+            <p class="text-ink-soft -mt-2 mb-4">Ligações de canais/perfis que o agregador vasculha via yt-dlp — um URL por linha. YouTube e TikTok funcionam sem credenciais; Instagram e LinkedIn são <span class="text-ink">melhor-esforço</span> (podem exigir autenticação).</p>
+            <div class="grid sm:grid-cols-2 gap-5">
+                @php
+                    $rotulosCanais = [
+                        'youtube' => ['Canais de YouTube', 'https://www.youtube.com/@canal'],
+                        'instagram' => ['Perfis de Instagram', 'https://www.instagram.com/perfil/'],
+                        'tiktok' => ['Contas de TikTok', 'https://www.tiktok.com/@conta'],
+                        'linkedin' => ['Perfis de LinkedIn', 'https://www.linkedin.com/in/perfil/'],
+                    ];
+                @endphp
+                @foreach ($canais as $plataforma => $texto)
+                    @php
+                        $rc = $rotulosCanais[$plataforma] ?? [ucfirst($plataforma), 'https://…'];
+                        $m = $plataformasMeta[$plataforma] ?? ['cor' => '#2dbab4', 'glifo' => '•'];
+                    @endphp
+                    <div>
+                        <label class="eyebrow block mb-1.5">
+                            <span style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span> {{ $rc[0] }}
+                        </label>
+                        <textarea wire:model="canais.{{ $plataforma }}" rows="3" placeholder="{{ $rc[1] }}"
+                                  class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none"></textarea>
+                    </div>
+                @endforeach
+            </div>
+        </x-panel>
+
         {{-- Barra de acção --}}
         <div class="flex items-center gap-4">
             <button type="submit"
