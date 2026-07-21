@@ -59,6 +59,11 @@ return [
         'key' => env('OPENAI_API_KEY'),
     ],
 
+    // ShortsCreator — API Flask de edição de vídeo (corte + legendas + música).
+    'shorts' => [
+        'base_url' => env('SHORTS_API_URL', 'http://localhost:5000'),
+    ],
+
     'youtube' => [
         'key' => env('YOUTUBE_API_KEY'),
     ],

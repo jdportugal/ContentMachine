@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 Route::livewire('/', Painel::class)->name('painel');
 Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
 Route::livewire('/clips', Clips::class)->name('clips');
+
+// Serve o short gravado (storage/app/shorts/{slug}.mp4) para pré-visualização.
+Route::get('/clips/{slug}/video', function (string $slug) {
+    $path = storage_path('app/shorts/'.basename($slug).'.mp4');
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->name('clips.video');
 Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
 
 Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');

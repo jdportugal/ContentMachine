@@ -36,6 +36,10 @@ class SettingsRepository
                 'twitter' => [],   // contas
                 'tiktok' => [],    // contas
             ],
+            'shorts' => [
+                // URL base da API ShortsCreator. Vazio → usa config/services (env SHORTS_API_URL).
+                'api_url' => '',
+            ],
         ];
     }
 

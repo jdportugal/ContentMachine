@@ -16,6 +16,7 @@ return [
             'rascunhos' => 'rascunhos',
             'noticias' => 'noticias',
             'publicacoes' => 'publicacoes',
+            'clips' => 'clips',
         ],
     ],
 

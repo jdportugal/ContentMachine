@@ -20,6 +20,9 @@ class Definicoes extends Component
     /** Fontes do agregador como texto (uma por linha), por fonte. @var array<string,string> */
     public array $fontes = [];
 
+    /** @var array<string,string> */
+    public array $shorts = [];
+
     public ?string $guardado = null;
 
     public function mount(SettingsRepository $definicoes): void
@@ -28,6 +31,7 @@ class Definicoes extends Component
 
         $this->geral = $tudo['geral'];
         $this->perfis = $tudo['perfis'];
+        $this->shorts = $tudo['shorts'];
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
@@ -47,6 +51,7 @@ class Definicoes extends Component
             'geral' => $this->geral,
             'perfis' => $this->perfis,
             'agregador' => $agregador,
+            'shorts' => $this->shorts,
         ]);
 
         $this->guardado = now()->translatedFormat('H:i');
