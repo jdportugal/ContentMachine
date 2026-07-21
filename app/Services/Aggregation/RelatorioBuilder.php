@@ -112,11 +112,24 @@ class RelatorioBuilder
                 data: (string) $n->get('data', ''),
                 url: (string) $n->get('url', ''),
                 thumbnail: (string) $n->get('thumbnail', ''),
+                transcricao: $this->transcricaoDoCorpo($n->body),
                 tags: array_values((array) $n->get('tags', [])),
                 fontes: array_values((array) $n->get('fontes', [])),
             ))
             ->values()
             ->all();
+    }
+
+    /** Extrai o texto da transcrição do corpo Markdown da nota do item. */
+    private function transcricaoDoCorpo(string $corpo): string
+    {
+        if (preg_match('/##\s*Transcri[cç][aã]o\s*\n+(.*)$/isu', $corpo, $m)) {
+            $texto = trim($m[1]);
+
+            return $texto === '_Sem transcrição disponível._' ? '' : $texto;
+        }
+
+        return '';
     }
 
     /**

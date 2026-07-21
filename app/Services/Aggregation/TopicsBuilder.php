@@ -13,6 +13,17 @@ use Illuminate\Support\Str;
  */
 class TopicsBuilder
 {
+    /** Palavras vazias (PT/EN) ignoradas na extração de palavras-chave. */
+    private const STOPWORDS = [
+        'the', 'and', 'for', 'you', 'your', 'with', 'this', 'that', 'from', 'have', 'has', 'are', 'was', 'were', 'will',
+        'what', 'how', 'why', 'who', 'they', 'their', 'them', 'about', 'just', 'like', 'into', 'more', 'some', 'then',
+        'than', 'been', 'only', 'over', 'also', 'make', 'made', 'when', 'which', 'there', 'here', 'very', 'much', 'well',
+        'even', 'still', 'because', 'would', 'could', 'should', 'these', 'those', 'them', 'want', 'need', 'know', 'going',
+        'como', 'para', 'uma', 'que', 'dos', 'das', 'com', 'por', 'mais', 'muito', 'sobre', 'isto', 'isso', 'você',
+        'então', 'porque', 'quando', 'também', 'pode', 'podem', 'vamos', 'fazer', 'sua', 'seu', 'meu', 'minha', 'não',
+        'ser', 'está', 'estão', 'tem', 'têm', 'aqui', 'entre', 'depois', 'antes', 'cada', 'todo', 'toda', 'todos', 'todas',
+    ];
+
     /**
      * @param  array<int,AggregatedItem>  $itens
      * @return array{gerado_em:string,metodo:string,topicos:array<int,array{topico:string,itens:array<int,array{titulo:string,url:string,plataforma:string}>,fontes:array<int,string>}>}
@@ -94,30 +105,53 @@ class TopicsBuilder
         ];
     }
 
-    /** @return array<int,string> */
+    /**
+     * Sinais de agrupamento de um item: as suas tags + as palavras mais
+     * salientes do TÍTULO e da TRANSCRIÇÃO, para que os tópicos reflictam o
+     * que é dito nos vídeos e não apenas as tags declaradas.
+     *
+     * @return array<int,string>
+     */
     private function tagsNormalizadas(AggregatedItem $item): array
     {
-        $tags = array_map(fn ($t) => Str::of($t)->lower()->trim()->toString(), $item->tags);
-        $tags = array_values(array_filter($tags));
+        $tags = array_values(array_filter(array_map(
+            fn ($t) => Str::of($t)->lower()->trim()->toString(),
+            $item->tags
+        )));
 
-        if ($tags !== []) {
-            return array_unique($tags);
-        }
+        $conteudo = trim($item->titulo."\n".Str::limit($item->transcricao, 4000, ''));
+        $sinais = array_values(array_unique(array_merge($tags, $this->palavrasSalientes($conteudo, 6))));
 
-        // Sem tags: extrai palavras-chave do título (sem stopwords).
-        return $this->palavrasChave($item->titulo);
+        return $sinais !== [] ? $sinais : $this->palavrasChave($item->titulo);
     }
 
     /** @return array<int,string> */
     private function palavrasChave(string $texto): array
     {
-        $stop = ['the', 'and', 'for', 'you', 'your', 'with', 'this', 'that', 'from', 'como', 'para', 'uma', 'que', 'dos', 'das', 'com', 'por'];
         $palavras = preg_split('/[^\p{L}\p{N}]+/u', Str::lower($texto)) ?: [];
 
         return array_values(array_unique(array_filter(
             $palavras,
-            fn ($p) => Str::length($p) >= 4 && ! in_array($p, $stop, true)
+            fn ($p) => Str::length($p) >= 4 && ! in_array($p, self::STOPWORDS, true)
         )));
+    }
+
+    /**
+     * As K palavras mais frequentes e significativas de um texto (transcrição).
+     *
+     * @return array<int,string>
+     */
+    private function palavrasSalientes(string $texto, int $k): array
+    {
+        $freq = [];
+        foreach (preg_split('/[^\p{L}\p{N}]+/u', Str::lower($texto)) ?: [] as $p) {
+            if (Str::length($p) >= 4 && ! in_array($p, self::STOPWORDS, true)) {
+                $freq[$p] = ($freq[$p] ?? 0) + 1;
+            }
+        }
+        arsort($freq);
+
+        return array_slice(array_keys($freq), 0, $k);
     }
 
     /**
@@ -140,9 +174,10 @@ class TopicsBuilder
             'plataforma' => $i->plataforma,
             'url' => $i->url,
             'tags' => array_slice($i->tags, 0, 8),
+            'excerto' => Str::limit(trim($i->transcricao), 1500, ''),
         ])->all();
 
-        $prompt = 'Agrupa os seguintes conteúdos por tópico coberto. Responde SÓ com JSON no formato '
+        $prompt = 'Agrupa os seguintes conteúdos por tópico coberto, inferindo o tópico sobretudo a partir do EXCERTO da transcrição (o que é realmente dito no vídeo) e do título. Responde SÓ com JSON no formato '
             .'{"topicos":[{"topico":"...","itens":[{"titulo":"...","url":"...","plataforma":"..."}]}]}. '
             ."Usa português europeu nos nomes dos tópicos.\n\n"
             .json_encode($resumo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
