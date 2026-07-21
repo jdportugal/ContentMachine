@@ -254,31 +254,34 @@ class RelatorioBuilder
     private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
     {
         $material = collect($itens)->take(20)->map(fn (AggregatedItem $i) => [
-            'titulo' => $i->titulo,
-            'canal' => $i->canal,
-            'plataforma' => $i->plataforma,
-            'resumo' => Str::limit(trim($i->descricao), 500, ''),
+            'assunto' => $i->titulo, // pista do tema — NÃO deve ser mencionado no guião
             'transcricao' => Str::limit(trim($i->transcricao), 3500, ''),
+            'fontes' => array_values(array_slice($i->fontes, 0, 6)),
         ])->all();
 
         $periodo = $modo === 'semana'
-            ? 'a semana de '.$inicio->translatedFormat('d/m').' a '.$fim->translatedFormat('d/m')
+            ? 'os últimos 7 dias (até '.$fim->translatedFormat('d/m/Y').')'
             : 'o dia '.$inicio->translatedFormat('d/m/Y');
 
-        $prompt = 'És um editor de notícias português. Escreve, em PORTUGUÊS EUROPEU (de Portugal — evita brasileirismos '
-            .'como «você» ou gerúndios «está fazendo»; usa «está a fazer», «ecrã», «utilizador»), um relatório APROFUNDADO '
-            ."sobre o que os canais acompanhados cobriram em {$periodo}.\n\n"
-            ."Estrutura obrigatória:\n"
-            ."1) Um parágrafo de abertura com o fio condutor do período.\n"
-            .'2) UM PARÁGRAFO POR VÍDEO (usa TODOS os itens do material): identifica o criador/canal e o título, '
-            .'a tese central, e 2 a 3 pontos CONCRETOS do que é efectivamente dito — apoia-te na transcrição e na '
-            ."descrição, não apenas no título. Menciona nomes próprios, produtos e números que apareçam (ex.: «Hermes agent»).\n"
-            ."3) Um parágrafo final a ligar os temas transversais entre os vídeos.\n\n"
-            .'Vai fundo no conteúdo — NÃO te limites a uma frase por vídeo nem a citar uma única linha solta. '
-            .'Não inventes factos; usa apenas o material. Texto corrido, sem títulos nem listas.'
-            ."\n\n".json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        $prompt = 'És o redator de um boletim de NOTÍCIAS de inteligência artificial. Recebes transcrições de vários '
+            ."vídeos de criadores e as fontes que citam, referentes a {$periodo}. A tua tarefa é escrever um GUIÃO "
+            ."coerente, em PORTUGUÊS EUROPEU, pronto a ser LIDO EM VOZ ALTA.\n\n"
+            ."Regras:\n"
+            .'- Cobre APENAS notícias relevantes: lançamentos, novos modelos/produtos, atualizações importantes, '
+            .'aquisições, financiamentos, estudos, números e acontecimentos. IGNORA tutoriais, opiniões pessoais, '
+            ."promoções, patrocínios, apelos «subscreve» e tudo o que não seja notícia. Nem todos os itens têm de ser usados.\n"
+            .'- O guião é AUTÓNOMO e IMPESSOAL: NUNCA menciones os vídeos, os criadores, os canais nem o formato '
+            ."(nada de «num vídeo», «o criador diz», «segundo o canal»). Relata os factos como um pivô de telejornal.\n"
+            .'- Estrutura como um alinhamento de notícias: abertura curta, cada notícia num bloco com transições '
+            ."fluidas, e um fecho breve. Menciona nomes próprios, produtos, datas e números concretos.\n"
+            .'- Se faltar CONTEXTO a uma notícia (o que aconteceu ao certo, datas, números, quem), USA as ferramentas '
+            .'de pesquisa web e as fontes indicadas para confirmar e enriquecer. NÃO inventes: se não confirmares um '
+            ."facto, sê prudente ou omite-o.\n"
+            ."- Português europeu (evita brasileirismos como «você» ou «está fazendo»).\n\n"
+            ."Material (transcrições + fontes):\n"
+            .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
-        return $this->llm->texto($prompt);
+        return $this->llm->texto($prompt, comFerramentas: true);
     }
 
     /**

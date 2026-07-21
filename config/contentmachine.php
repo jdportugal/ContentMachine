@@ -76,6 +76,9 @@ return [
         'llm_provider' => env('LLM_PROVIDER', 'auto'),
         'claude_cli_bin' => env('CLAUDE_CLI_BIN', 'claude'),
         'claude_cli_model' => env('CLAUDE_CLI_MODEL', ''),
+        // Permite ao Claude usar pesquisa/leitura web para ir buscar contexto às
+        // fontes ao redigir o guião. Torna a geração mais lenta. CLAUDE_CLI_WEB=false desliga.
+        'claude_cli_web' => (bool) env('CLAUDE_CLI_WEB', true),
 
         // Gerar um resumo de conteúdo por vídeo (via LLM) na agregação.
         // Torna a recolha mais lenta (uma chamada por vídeo); desligue com RESUMOS_VIDEO=false.

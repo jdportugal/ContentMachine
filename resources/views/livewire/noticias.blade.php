@@ -165,12 +165,14 @@
                     </div>
 
                     @if (!empty($relatorio['redacao']))
-                        <div class="mt-2 space-y-3 text-ink leading-relaxed max-w-3xl">
-                            @foreach (preg_split('/\n\n+/', trim($relatorio['redacao'])) as $i => $par)
-                                <p class="{{ $i === 0 ? 'dropcap text-lg' : '' }}">{{ $par }}</p>
-                            @endforeach
+                        <div class="mt-2 max-w-3xl text-ink leading-relaxed
+                                    [&_p]:my-3 [&_strong]:text-teal [&_strong]:font-display [&_strong]:text-lg
+                                    [&_hr]:my-4 [&_hr]:border-0 [&_hr]:border-t [&_hr]:border-ink-soft/15
+                                    [&_h1]:font-display [&_h1]:text-2xl [&_h1]:text-ink [&_h2]:font-display [&_h2]:text-xl [&_h2]:text-ink
+                                    [&_ul]:list-disc [&_ul]:pl-5 [&_li]:my-1 [&_a]:text-teal">
+                            {!! \Illuminate\Support\Str::markdown($relatorio['redacao'], ['html_input' => 'escape', 'allow_unsafe_links' => false]) !!}
                         </div>
-                        <div class="mt-1 font-mono text-[0.6rem] text-ink-faint">redação · {{ $relatorio['redacao_metodo'] ?? 'heuristica' }}</div>
+                        <div class="mt-2 font-mono text-[0.6rem] text-ink-faint">guião · {{ $relatorio['redacao_metodo'] ?? 'heuristica' }}</div>
                     @else
                         <p class="text-lg text-ink-soft italic dropcap">{{ $relatorio['resumo'] }}</p>
                     @endif

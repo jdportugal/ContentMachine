@@ -33,12 +33,17 @@ class LlmClient
         return $this->fornecedor();
     }
 
-    /** Gera texto a partir de um prompt. Devolve null se indisponível ou em falha. */
-    public function texto(string $prompt): ?string
+    /**
+     * Gera texto a partir de um prompt. Devolve null se indisponível ou em falha.
+     *
+     * @param  bool  $comFerramentas  Permite ao Claude (CLI) usar pesquisa/leitura web
+     *                                para ir buscar contexto às fontes. Ignorado por OpenAI/Gemini.
+     */
+    public function texto(string $prompt, bool $comFerramentas = false): ?string
     {
         try {
             return match ($this->fornecedor()) {
-                'claude-cli' => $this->claudeCli($prompt),
+                'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
                 'openai' => $this->openai((string) config('services.openai.key'), $prompt),
                 'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt),
                 default => null,
@@ -68,7 +73,7 @@ class LlmClient
     }
 
     /** Corre o CLI do Claude Code em modo não-interativo (prompt via stdin). */
-    private function claudeCli(string $prompt): ?string
+    private function claudeCli(string $prompt, bool $comFerramentas = false): ?string
     {
         $bin = $this->claudeBin();
         if ($bin === null) {
@@ -82,9 +87,19 @@ class LlmClient
             $args[] = $modelo;
         }
 
+        $timeout = (int) config('contentmachine.aggregation.claude_cli_timeout', 240);
+
+        // Ferramentas de pesquisa/leitura web (para ir buscar contexto às fontes).
+        if ($comFerramentas && (bool) config('contentmachine.aggregation.claude_cli_web', true)) {
+            $args[] = '--allowedTools';
+            $args[] = 'WebSearch';
+            $args[] = 'WebFetch';
+            $timeout = max($timeout, 600); // a pesquisa web acrescenta latência
+        }
+
         // Corre num directório neutro para não puxar contexto de projecto.
         $r = Process::path(sys_get_temp_dir())
-            ->timeout((int) config('contentmachine.aggregation.claude_cli_timeout', 240))
+            ->timeout($timeout)
             ->input($prompt)
             ->run($args);
 
