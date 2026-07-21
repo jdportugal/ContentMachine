@@ -3,9 +3,10 @@
 namespace App\Livewire;
 
 use App\Services\Aggregation\NewsAggregator;
-use App\Services\News\NewsManager;
+use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -15,40 +16,27 @@ use Livewire\Component;
 #[Title('Agregador de Notícias')]
 class Noticias extends Component
 {
-    /** @var array<int,string> */
-    public array $fontes = [];
-
-    public ?string $guardado = null;
-
     /** Resumo da última agregação (contagens, dias, avisos). */
     public ?array $resumoAgregacao = null;
 
     /** Dia actualmente em foco na vista de itens agregados. */
     public string $diaSelecionado = '';
 
+    // ----- Relatório por período -----
+    /** 'dia' | 'semana' */
+    public string $modoRelatorio = 'dia';
+
+    /** Data de referência do relatório (YYYY-MM-DD). */
+    public string $dataRelatorio = '';
+
+    /** Relatório gerado nesta sessão (para mostrar). @var array<string,mixed>|null */
+    public ?array $relatorio = null;
+
+    public ?string $relatorioGuardado = null;
+
     public function mount(): void
     {
-        $this->fontes = config('contentmachine.news.fontes', []);
-    }
-
-    public function guardarNoVault(NewsManager $news, VaultContract $vault): void
-    {
-        $relatorio = $news->relatorio($this->fontes);
-
-        $corpo = "## Resumo\n\n{$relatorio['resumo']}\n\n## Destaques\n\n"
-            .collect($relatorio['destaques'])->map(fn ($d) => "- **[{$d['fonte']}]** {$d['titulo']} — *{$d['angulo']}* (relevância {$d['relevancia']})")->implode("\n")
-            ."\n\n## Ideias de guião\n\n"
-            .collect($relatorio['ideias_guiao'])->map(fn ($i) => "- {$i}")->implode("\n");
-
-        $nota = $vault->create('noticias', [
-            'titulo' => $relatorio['titulo'],
-            'tipo' => 'relatorio',
-            'fontes' => $this->fontes,
-            'estado' => 'arquivado',
-            'tags' => ['noticias', 'relatorio'],
-        ], $corpo);
-
-        $this->guardado = $nota->title();
+        $this->dataRelatorio = now()->toDateString();
     }
 
     /**
@@ -71,7 +59,40 @@ class Noticias extends Component
         $this->diaSelecionado = $dia;
     }
 
-    public function render(NewsManager $news, VaultContract $vault)
+    /** Gera um relatório a partir dos itens agregados no período escolhido. */
+    public function criarRelatorio(RelatorioBuilder $builder, VaultContract $vault): void
+    {
+        $ref = Carbon::parse($this->dataRelatorio !== '' ? $this->dataRelatorio : now()->toDateString());
+
+        [$inicio, $fim] = $this->modoRelatorio === 'semana'
+            ? [$ref->copy()->startOfWeek(), $ref->copy()->endOfWeek()]
+            : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
+
+        $relatorio = $builder->gerar($inicio, $fim, $this->modoRelatorio);
+
+        // Persiste no vault (frontmatter + JSON para re-exibição + corpo Markdown).
+        $slug = $this->modoRelatorio === 'semana'
+            ? 'semana-'.$inicio->toDateString()
+            : 'dia-'.$inicio->toDateString();
+
+        $nota = $vault->put("noticias/relatorios/{$slug}.md", [
+            'titulo' => $relatorio['titulo'],
+            'tipo' => 'relatorio',
+            'modo' => $relatorio['modo'],
+            'inicio' => $relatorio['inicio'],
+            'fim' => $relatorio['fim'],
+            'total' => $relatorio['total'],
+            'gerado_em' => $relatorio['gerado_em'],
+            'estado' => 'arquivado',
+            'tags' => ['noticias', 'relatorio', $relatorio['modo']],
+            'dados' => json_encode($relatorio, JSON_UNESCAPED_UNICODE),
+        ], $builder->corpoMarkdown($relatorio));
+
+        $this->relatorio = $relatorio;
+        $this->relatorioGuardado = $nota->path;
+    }
+
+    public function render(VaultContract $vault)
     {
         $notas = $vault->all('noticias');
 
@@ -89,18 +110,37 @@ class Noticias extends Component
         $itensDoDia = $itens->filter(fn (VaultNote $n) => (string) $n->get('data') === $dia)->values();
         $topicosDoDia = $this->notaTopicos($notas, $dia);
 
+        // Sem relatório desta sessão? Mostra o último guardado (se existir).
+        $relatorio = $this->relatorio ?? $this->ultimoRelatorio($notas);
+
         return view('livewire.noticias', [
-            'fontesDisponiveis' => $news->fontes(),
-            'relatorio' => $news->relatorio($this->fontes ?: $news->fontes()),
             'dias' => $dias,
             'diaAtivo' => $dia,
             'itensDoDia' => $itensDoDia,
             'topicosHtml' => $topicosDoDia?->html(),
+            'relatorio' => $relatorio,
         ]);
     }
 
     private function notaTopicos(Collection $notas, string $dia): ?VaultNote
     {
         return $notas->first(fn (VaultNote $n) => $n->get('tipo') === 'topicos' && (string) $n->get('data') === $dia);
+    }
+
+    /** @return array<string,mixed>|null */
+    private function ultimoRelatorio(Collection $notas): ?array
+    {
+        $nota = $notas
+            ->filter(fn (VaultNote $n) => $n->get('tipo') === 'relatorio' && filled($n->get('dados')))
+            ->sortByDesc(fn (VaultNote $n) => (string) $n->get('gerado_em', $n->get('inicio', '')))
+            ->first();
+
+        if (! $nota) {
+            return null;
+        }
+
+        $dados = json_decode((string) $nota->get('dados'), true);
+
+        return is_array($dados) ? $dados : null;
     }
 }

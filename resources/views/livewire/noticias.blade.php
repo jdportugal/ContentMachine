@@ -100,78 +100,119 @@
         @endif
     </x-panel>
 
+    {{-- ============ Relatório por período ============ --}}
     <div class="grid lg:grid-cols-4 gap-6">
-        {{-- Configuração de fontes --}}
+        {{-- Gerador --}}
         <div class="lg:col-span-1">
-            <x-panel eyebrow="Fontes" title="Recolha" glyph="☙">
-                <div class="space-y-2">
-                    @foreach ($fontesDisponiveis as $fonte)
-                        <label class="flex items-center gap-2 cursor-pointer text-ink-soft hover:text-ink">
-                            <input type="checkbox" wire:model.live="fontes" value="{{ $fonte }}"
-                                   class="accent-teal w-4 h-4">
-                            <span class="capitalize font-body">{{ $fonte }}</span>
-                        </label>
+            <x-panel eyebrow="Relatório" title="Criar relatório" glyph="☙">
+                <p class="text-ink-soft text-sm -mt-2 mb-4">Destila os itens já agregados num relatório, pronto a virar guião.</p>
+
+                <label class="eyebrow block mb-1.5">Período</label>
+                <div class="flex gap-2 mb-4">
+                    @foreach (['dia' => 'Dia', 'semana' => 'Semana'] as $modo => $rotulo)
+                        <button type="button" wire:click="$set('modoRelatorio', '{{ $modo }}')"
+                                class="flex-1 px-3 py-1.5 rounded-sm border font-mono text-xs transition
+                                       {{ $modoRelatorio === $modo ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
+                            {{ $rotulo }}
+                        </button>
                     @endforeach
                 </div>
 
-                <button wire:click="guardarNoVault"
-                        class="mt-5 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved">
-                    Guardar relatório no vault
+                <label class="eyebrow block mb-1.5">{{ $modoRelatorio === 'semana' ? 'Semana de (qualquer dia)' : 'Dia' }}</label>
+                <input type="date" wire:model="dataRelatorio"
+                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+
+                <button wire:click="criarRelatorio" wire:loading.attr="disabled" wire:target="criarRelatorio"
+                        class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
+                    <span wire:loading.remove wire:target="criarRelatorio">Criar relatório de notícias</span>
+                    <span wire:loading wire:target="criarRelatorio">A destilar…</span>
                 </button>
 
-                @if ($guardado)
-                    <div class="mt-3 border border-good/40 bg-good/10 text-good rounded-sm px-3 py-2 font-mono text-xs">
-                        ✓ «{{ $guardado }}» arquivado no vault.
+                @if ($relatorioGuardado)
+                    <div class="mt-3 border border-good/40 bg-good/10 text-good rounded-sm px-3 py-2 font-mono text-xs break-all">
+                        ✓ Guardado no vault: {{ $relatorioGuardado }}
                     </div>
                 @endif
             </x-panel>
         </div>
 
-        {{-- Relatório --}}
+        {{-- Relatório gerado --}}
         <div class="lg:col-span-3">
             <x-panel>
-                <div class="flex items-start justify-between gap-4 mb-2">
-                    <div>
-                        <div class="eyebrow mb-1">Relatório personalizado</div>
-                        <h2 class="font-display text-3xl text-ink leading-tight">{{ $relatorio['titulo'] }}</h2>
-                    </div>
-                    <x-selo label="IATECA" sub="NOTÍCIAS" date="MMXXVI" color="#c89b3c" />
-                </div>
-
-                <p class="text-lg text-ink-soft italic dropcap">{{ $relatorio['resumo'] }}</p>
-
-                <x-fleuron glyph="☙" />
-
-                <div class="eyebrow mb-2">Destaques</div>
-                <div class="space-y-1">
-                    @forelse ($relatorio['destaques'] as $d)
-                        <div class="flex items-start gap-3 py-2.5 border-b border-ink-soft/10 last:border-0">
-                            <x-badge tone="leather">{{ $d['fonte'] }}</x-badge>
-                            <div class="min-w-0 flex-1">
-                                <div class="text-ink">{{ $d['titulo'] }}</div>
-                                <div class="text-sm text-ink-soft italic">↳ {{ $d['angulo'] }}</div>
-                            </div>
-                            <div class="shrink-0 text-right">
-                                <div class="font-display text-2xl text-teal leading-none">{{ $d['relevancia'] }}</div>
-                                <div class="eyebrow !text-[0.55rem]">relevância</div>
-                            </div>
+                @if ($relatorio)
+                    <div class="flex items-start justify-between gap-4 mb-2">
+                        <div>
+                            <div class="eyebrow mb-1">Relatório · {{ $relatorio['modo'] }} · {{ $relatorio['total'] }} item(s)</div>
+                            <h2 class="font-display text-3xl text-ink leading-tight">{{ $relatorio['titulo'] }}</h2>
                         </div>
-                    @empty
-                        <p class="text-ink-soft italic">Seleccione pelo menos uma fonte à esquerda.</p>
-                    @endforelse
-                </div>
+                        <x-selo label="IATECA" sub="NOTÍCIAS" date="MMXXVI" color="#c89b3c" />
+                    </div>
 
-                @if (!empty($relatorio['ideias_guiao']))
-                    <x-fleuron glyph="✒" />
-                    <div class="eyebrow mb-2">Ideias de guião</div>
-                    <ul class="space-y-2">
-                        @foreach ($relatorio['ideias_guiao'] as $ideia)
-                            <li class="flex gap-3 text-ink">
-                                <span class="text-gold shrink-0">❦</span>
-                                <span>{{ $ideia }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <p class="text-lg text-ink-soft italic dropcap">{{ $relatorio['resumo'] }}</p>
+
+                    @if (!empty($relatorio['por_plataforma']))
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            @foreach ($relatorio['por_plataforma'] as $plat => $n)
+                                <x-badge tone="leather">{{ $plat }} · {{ $n }}</x-badge>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (!empty($relatorio['destaques']))
+                        <x-fleuron glyph="☙" />
+                        <div class="eyebrow mb-2">Destaques</div>
+                        <div class="space-y-1">
+                            @foreach ($relatorio['destaques'] as $d)
+                                <div class="flex items-start gap-3 py-2.5 border-b border-ink-soft/10 last:border-0">
+                                    <x-badge tone="leather">{{ $d['plataforma'] }}</x-badge>
+                                    <div class="min-w-0 flex-1">
+                                        <a href="{{ $d['url'] }}" target="_blank" rel="noopener" class="text-ink hover:text-teal transition line-clamp-2">{{ $d['titulo'] }}</a>
+                                        <div class="text-sm text-ink-soft italic">↳ {{ $d['angulo'] }}</div>
+                                    </div>
+                                    <div class="shrink-0 text-right">
+                                        <div class="font-display text-2xl text-teal leading-none">{{ $d['relevancia'] }}</div>
+                                        <div class="eyebrow !text-[0.55rem]">relevância</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (!empty($relatorio['topicos']))
+                        <x-fleuron glyph="❧" />
+                        <div class="eyebrow mb-2">Tópicos</div>
+                        <div class="space-y-3">
+                            @foreach ($relatorio['topicos'] as $t)
+                                <div>
+                                    <div class="font-display text-lg text-ink">{{ $t['topico'] }}</div>
+                                    <ul class="mt-1 space-y-0.5">
+                                        @foreach ($t['itens'] as $it)
+                                            <li class="text-sm text-ink-soft flex items-center gap-2">
+                                                <x-badge tone="teal">{{ $it['plataforma'] }}</x-badge>
+                                                <a href="{{ $it['url'] }}" target="_blank" rel="noopener" class="hover:text-teal truncate">{{ $it['titulo'] }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (!empty($relatorio['ideias_guiao']))
+                        <x-fleuron glyph="✒" />
+                        <div class="eyebrow mb-2">Ideias de guião</div>
+                        <ul class="space-y-2">
+                            @foreach ($relatorio['ideias_guiao'] as $ideia)
+                                <li class="flex gap-3 text-ink"><span class="text-gold shrink-0">❦</span><span>{{ $ideia }}</span></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                @else
+                    <div class="py-16 text-center">
+                        <div class="text-5xl text-gold/60 mb-3 select-none">☙</div>
+                        <p class="text-ink-soft italic">Escolha um período e carregue em «Criar relatório de notícias».</p>
+                        <p class="text-ink-faint text-sm mt-2">O relatório usa os itens já recolhidos com «Agregar agora».</p>
+                    </div>
                 @endif
             </x-panel>
         </div>
