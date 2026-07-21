@@ -17,12 +17,15 @@ RUN npm run build
 FROM php:8.4-fpm AS app
 
 # Dependências de sistema + extensões PHP
+# python3 + yt-dlp: agregador multi-plataforma (metadados-only, sem descarregar média).
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git unzip libpq-dev libzip-dev libicu-dev libpng-dev libonig-dev \
+        python3 python3-pip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j"$(nproc)" pdo pdo_pgsql bcmath pcntl zip intl gd \
     && pecl install redis \
     && docker-php-ext-enable redis \
+    && pip3 install --no-cache-dir --break-system-packages yt-dlp \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Composer

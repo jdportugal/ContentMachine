@@ -36,6 +36,13 @@ class SettingsRepository
                 'twitter' => [],   // contas
                 'tiktok' => [],    // contas
             ],
+            // Canais a agregar por plataforma (via yt-dlp). Sementes = Nick Saraev.
+            'canais' => [
+                'youtube' => ['https://www.youtube.com/@nicksaraev'],
+                'instagram' => ['https://www.instagram.com/nick_saraev/'],
+                'tiktok' => ['https://www.tiktok.com/@nick.saraev'],
+                'linkedin' => ['https://www.linkedin.com/in/nick-saraev/'],
+            ],
         ];
     }
 

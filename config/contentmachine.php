@@ -46,6 +46,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Agregador de média (yt-dlp, modo metadados-only)
+    |--------------------------------------------------------------------------
+    | Recolhe conteúdo recente dos canais configurados (YouTube, TikTok,
+    | Instagram, LinkedIn) SEM descarregar vídeo — apenas metadados e legendas.
+    |
+    | 'ytdlp_cmd' é o comando base: 'yt-dlp' (Docker) ou 'python3 -m yt_dlp'
+    | (instalação local via pip --user). 'extractor_args' força, por plataforma,
+    | argumentos de extractor — o cliente 'android' do YouTube evita o erro
+    | recorrente "The page needs to be reloaded".
+    */
+    'aggregation' => [
+        'ytdlp_cmd' => env('YTDLP_CMD', 'yt-dlp'),
+        'limite_por_canal' => (int) env('AGGREGATION_LIMIT', 5),
+        'sub_langs' => ['pt', 'en'],
+        'timeout' => (int) env('AGGREGATION_TIMEOUT', 120),
+        'extractor_args' => [
+            'youtube.com' => 'youtube:player_client=android',
+            'youtu.be' => 'youtube:player_client=android',
+        ],
+        'openai_model' => env('AGGREGATION_OPENAI_MODEL', 'gpt-4o-mini'),
+        'gemini_model' => env('AGGREGATION_GEMINI_MODEL', 'gemini-1.5-flash'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Scoring (padrão head-of-content)
     |--------------------------------------------------------------------------
     | Pesos por plataforma para o cálculo do índice de desempenho (0–100).
