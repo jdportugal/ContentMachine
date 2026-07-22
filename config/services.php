@@ -59,9 +59,15 @@ return [
         'key' => env('OPENAI_API_KEY'),
     ],
 
-    // ShortsCreator — API Flask de edição de vídeo (corte + legendas + música).
+    // Gerador de Clips — motor LOCAL e independente (ffmpeg + Whisper), sem API
+    // externa. Reimplementa a lógica do serviço Flask "ShortsCreator".
     'shorts' => [
-        'base_url' => env('SHORTS_API_URL', 'http://localhost:5000'),
+        'ffmpeg' => env('FFMPEG_BINARY', 'ffmpeg'),
+        'ffprobe' => env('FFPROBE_BINARY', 'ffprobe'),
+        'python' => env('WHISPER_PYTHON', 'python3'),
+        'whisper_model' => env('WHISPER_MODEL', 'tiny'),
+        'transcribe_script' => base_path('scripts/transcribe.py'),
+        'fonts_path' => resource_path('fonts'),
     ],
 
     'youtube' => [

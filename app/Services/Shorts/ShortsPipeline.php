@@ -2,25 +2,27 @@
 
 namespace App\Services\Shorts;
 
+use App\Services\Aggregation\LlmClient;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
-use Illuminate\Support\Facades\Http;
 
 /**
  * Orquestra o fluxo "vídeo longo → shorts" em PASSOS DISCRETOS e RE-EXECUTÁVEIS,
+ * de forma LOCAL e independente (ffmpeg + Whisper via {@see LocalVideoEngine}),
  * persistindo cada peça como uma nota do vault (pasta `clips`).
  *
  * Fonte (tipo: clip-fonte):  o vídeo longo + a transcrição completa.
  * Clip  (tipo: clip):        janela [inicio,fim] + subtitle_data editável +
- *                            estilo + job de corte + output gravado.
+ *                            estilo + clip cortado + short final gravado.
  *
  * Passos:
- *   1. criarFonte()          — regista o vídeo de origem.
- *   2. transcreverFonte()    — /generate-subtitles (Whisper) → transcrição.
+ *   1. criarFonte()          — regista o vídeo de origem (caminho local ou URL).
+ *   2. transcreverFonte()    — Whisper → transcrição completa (palavra a palavra).
  *   3. sugerirSegmentos()    — IA (OpenAI) escolhe janelas [opcional].
  *   4. criarClip()           — desloca a transcrição para a janela do clip.
- *   5. cortarClip()          — /split-video (corta do original) → job de corte.
- *   6. gravarLegendas()      — /add-subtitles no clip já cortado → output.
+ *   5. cortarClip()          — corta o clip do vídeo original (ffmpeg).
+ *   6. gravarLegendas()      — grava as legendas ASS no clip cortado → short.
+ *   7. adicionarMusica()     — mistura música de fundo [opcional].
  *
  * "Regenerar" = gravarLegendas() de novo com subtitle_data editado, SEM
  * voltar a cortar nem a transcrever.
@@ -32,9 +34,17 @@ class ShortsPipeline
     public const CLIPES = 'clips';
 
     public function __construct(
-        private readonly ShortsClient $client,
+        private readonly LocalVideoEngine $engine,
         private readonly VaultContract $vault,
+        private readonly LlmClient $llm,
+        private readonly MusicLibrary $musica,
     ) {}
+
+    /** Há um fornecedor de IA disponível (CLI do Claude ou uma chave de API)? */
+    public function temIA(): bool
+    {
+        return $this->llm->disponivel();
+    }
 
     /** Estilo por defeito das legendas gravadas. */
     public static function estiloPorDefeito(): array
@@ -45,13 +55,14 @@ class ShortsPipeline
             'font-family' => 'Luckiest Guy',
             'outline-width' => 6,
             'line-color' => '#2dbab4',
+            'highlight-color' => '#F5C542',
             'outline-color' => '#000000',
         ];
     }
 
     // --- 1. Fonte -----------------------------------------------------
 
-    /** Regista um vídeo de origem (URL acessível por HTTP). */
+    /** Regista um vídeo de origem (caminho local absoluto ou URL http). */
     public function criarFonte(string $ref, string $titulo = '', string $lingua = 'pt'): VaultNote
     {
         return $this->vault->create(self::FONTES, [
@@ -68,25 +79,14 @@ class ShortsPipeline
 
     /**
      * Transcreve o vídeo completo (Whisper) e guarda a transcrição na fonte.
-     * Passo re-executável; requer o serviço com Whisper disponível.
+     * Passo re-executável; requer o script de transcrição com Whisper.
      */
-    public function transcreverFonte(string $fontePath, int $timeout = 900): VaultNote
+    public function transcreverFonte(string $fontePath): VaultNote
     {
         $fonte = $this->exigirNota($fontePath);
-        $ref = (string) $fonte->get('fonte');
+        $origem = $this->engine->resolveSource((string) $fonte->get('fonte'), $this->tempDir());
 
-        $resposta = $this->client->generateSubtitles($ref, (string) $fonte->get('lingua', 'pt'));
-
-        // Caso já exista transcrição no servidor para este project_id.
-        if (($resposta['status'] ?? null) === 'already_exists') {
-            $transcricao = $this->client->downloadSubtitlesData($resposta['project_id']);
-        } else {
-            if (empty($resposta['job_id'])) {
-                throw new ShortsException('Transcrição sem job_id.');
-            }
-            $this->client->waitForJob($resposta['job_id'], $timeout);
-            $transcricao = $this->client->downloadSubtitlesData($resposta['job_id']);
-        }
+        $transcricao = $this->engine->transcribe($origem, (string) $fonte->get('lingua', 'pt'));
 
         return $this->vault->updateFrontmatter($fonte->path, [
             'estado' => 'transcrita',
@@ -97,50 +97,103 @@ class ShortsPipeline
     // --- 3. Sugestão de segmentos por IA -----------------------------
 
     /**
-     * Usa a OpenAI (gpt-4.1) para escolher 3–10 janelas ~60s a partir da
-     * transcrição. Requer OPENAI_API_KEY; caso contrário lança — a UI deve
-     * degradar para entrada manual de janelas.
+     * Escolhe automaticamente 3–10 segmentos (título, descrição, janela e tags)
+     * a partir da transcrição, via IA — por defeito o CLI do Claude Code (sem
+     * chave de API). É o equivalente ao "AI Agent" do fluxo n8n.
      *
-     * @return array<int,array{title:string,description:string,start_time:string,end_time:string,tags:array}>
+     * @return array<int,array{title:string,description:string,start_time:mixed,end_time:mixed,tags:array}>
      */
     public function sugerirSegmentos(string $fontePath, int $quantidade = 5): array
     {
-        $chave = config('services.openai.key');
-
-        if (blank($chave)) {
-            throw new ShortsException('Sem OPENAI_API_KEY — introduza as janelas dos clips manualmente.');
+        if (! $this->llm->disponivel()) {
+            throw new ShortsException('Sem IA disponível (o CLI do Claude não foi encontrado e não há chave de API).');
         }
 
         $fonte = $this->exigirNota($fontePath);
         $transcricao = $this->transcricao($fonte);
 
         if (empty($transcricao)) {
-            throw new ShortsException('A fonte ainda não foi transcrita.');
+            throw new ShortsException('A fonte ainda não foi transcrita — transcreva primeiro.');
         }
 
         $texto = collect($transcricao)
             ->map(fn ($s) => sprintf('[%s-%s] %s', $s['start'] ?? 0, $s['end'] ?? 0, $s['text'] ?? ''))
             ->implode("\n");
 
-        $prompt = 'És um editor de shorts. A partir desta transcrição com marcas temporais (em segundos), '
-            ."escolhe {$quantidade} segmentos autónomos e cativantes, cada um com ~60s. "
-            .'Responde APENAS com JSON: {"segments":[{"title":"","description":"",'
-            ."\"start_time\":segundos,\"end_time\":segundos,\"tags\":[\"\"]}]}.\n\nTRANSCRIÇÃO:\n".$texto;
+        $prompt = "És um editor especialista em YouTube Shorts. A partir desta transcrição com marcas "
+            ."temporais (em segundos), escolhe {$quantidade} segmentos autónomos e cativantes, cada um "
+            .'com cerca de 60 segundos, que funcionem bem vistos isoladamente. Para cada um dá um título, '
+            .'uma descrição, tags relevantes e as marcas de início/fim usando os tempos fornecidos. '
+            ."Responde APENAS com JSON válido, sem texto à volta, no formato:\n"
+            .'{"segments":[{"title":"","description":"","start_time":segundos,"end_time":segundos,"tags":["",""]}]}'
+            ."\n\nTRANSCRIÇÃO:\n".$texto;
 
-        $resposta = Http::withToken($chave)
-            ->timeout(120)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-4.1',
-                'messages' => [['role' => 'user', 'content' => $prompt]],
-                'response_format' => ['type' => 'json_object'],
-            ])
-            ->throw()
-            ->json();
+        $resposta = $this->llm->texto($prompt);
 
-        $conteudo = $resposta['choices'][0]['message']['content'] ?? '{}';
-        $dados = json_decode($conteudo, true) ?: [];
+        if (blank($resposta)) {
+            throw new ShortsException('A IA não devolveu sugestões.');
+        }
+
+        $dados = $this->extrairJson($resposta);
 
         return $dados['segments'] ?? [];
+    }
+
+    /**
+     * Gera (via IA) uma descrição para um clip, a partir do seu texto de legendas
+     * e título, e guarda-a. Útil para clips que ainda não têm descrição.
+     */
+    public function gerarDescricao(string $clipPath): VaultNote
+    {
+        if (! $this->llm->disponivel()) {
+            throw new ShortsException('Sem IA disponível para gerar a descrição.');
+        }
+
+        $clip = $this->exigirNota($clipPath);
+
+        $texto = collect($this->subtitleData($clip))
+            ->map(fn ($s) => trim((string) ($s['text'] ?? '')))
+            ->filter()
+            ->implode(' ');
+
+        if (blank($texto)) {
+            $texto = $clip->title();
+        }
+
+        $tags = implode(', ', (array) $clip->get('tags', []));
+
+        $prompt = "Escreve uma descrição curta e cativante (2 a 3 frases, em português de Portugal) para um YouTube Short, "
+            ."pronta a publicar. Responde APENAS com a descrição — sem aspas, sem rótulos, sem hashtags.\n\n"
+            ."Título: ".$clip->title()."\n"
+            .($tags !== '' ? "Tags: {$tags}\n" : '')
+            ."\nConteúdo falado no clip:\n".$texto;
+
+        $descricao = $this->llm->texto($prompt);
+
+        if (blank($descricao)) {
+            throw new ShortsException('A IA não devolveu uma descrição.');
+        }
+
+        return $this->vault->updateFrontmatter($clip->path, [
+            'descricao' => trim((string) $descricao),
+        ]);
+    }
+
+    /** Extrai o objeto JSON da resposta do LLM (tolera cercas ```json e texto à volta). */
+    private function extrairJson(string $resposta): array
+    {
+        $resposta = trim($resposta);
+
+        // Remove cercas de código, se existirem.
+        if (preg_match('/```(?:json)?\s*(\{.*\})\s*```/s', $resposta, $m)) {
+            $resposta = $m[1];
+        } elseif (preg_match('/(\{.*\})/s', $resposta, $m)) {
+            $resposta = $m[1];
+        }
+
+        $dados = json_decode($resposta, true);
+
+        return is_array($dados) ? $dados : [];
     }
 
     // --- 4. Criar clip ------------------------------------------------
@@ -156,6 +209,7 @@ class ShortsPipeline
         int|float|string $fim,
         array $tags = [],
         ?array $estilo = null,
+        string $descricao = '',
     ): VaultNote {
         $fonte = $this->exigirNota($fontePath);
 
@@ -163,6 +217,7 @@ class ShortsPipeline
 
         return $this->vault->create(self::CLIPES, [
             'titulo' => $titulo !== '' ? $titulo : 'Clip',
+            'descricao' => $descricao,
             'tipo' => 'clip',
             'fonte_path' => $fonte->path,
             'fonte' => (string) $fonte->get('fonte'),
@@ -173,10 +228,20 @@ class ShortsPipeline
             'modo_palavra' => 'karaoke',
             'estilo' => $estilo ?? self::estiloPorDefeito(),
             'subtitle_data' => json_encode($subtitleData, JSON_UNESCAPED_UNICODE),
-            'split_job_id' => '',
-            'output_job_id' => '',
+            'clip_path' => '',
             'output_path' => '',
+            'musica' => '',
         ], 'Short gerado a partir de '.$fonte->title().'.');
+    }
+
+    /** Guarda os detalhes editáveis do clip (título, descrição, tags). */
+    public function guardarDetalhes(string $clipPath, string $titulo, string $descricao, array $tags): VaultNote
+    {
+        return $this->vault->updateFrontmatter($clipPath, [
+            'titulo' => $titulo !== '' ? $titulo : 'Clip',
+            'descricao' => $descricao,
+            'tags' => array_values($tags),
+        ]);
     }
 
     /** Guarda subtitle_data (editado), estilo e modo de palavra num clip. */
@@ -191,21 +256,17 @@ class ShortsPipeline
 
     // --- 5. Cortar ----------------------------------------------------
 
-    /** /split-video: corta o clip do vídeo original. Guarda o split_job_id. */
-    public function cortarClip(string $clipPath, int $timeout = 600): VaultNote
+    /** Corta o clip do vídeo original (ffmpeg). Guarda o caminho do clip cortado. */
+    public function cortarClip(string $clipPath): VaultNote
     {
         $clip = $this->exigirNota($clipPath);
+        $origem = $this->engine->resolveSource((string) $clip->get('fonte'), $this->tempDir());
 
-        $jobId = $this->client->splitVideo([
-            'url' => (string) $clip->get('fonte'),
-            'start_time' => SubtitleShifter::secondsToTimestamp((float) $clip->get('inicio')),
-            'end_time' => SubtitleShifter::secondsToTimestamp((float) $clip->get('fim')),
-        ]);
-
-        $this->client->waitForJob($jobId, $timeout);
+        $destino = $this->clipDir($clip).'/raw.mp4';
+        $this->engine->split($origem, (float) $clip->get('inicio'), (float) $clip->get('fim'), $destino);
 
         return $this->vault->updateFrontmatter($clip->path, [
-            'split_job_id' => $jobId,
+            'clip_path' => $destino,
             'estado' => 'cortado',
         ]);
     }
@@ -213,16 +274,17 @@ class ShortsPipeline
     // --- 6. Gravar legendas / Regenerar ------------------------------
 
     /**
-     * /add-subtitles no clip já cortado, com o subtitle_data (editável) e o
-     * estilo do clip. Se ainda não estiver cortado, corta primeiro.
+     * Grava as legendas ASS no clip já cortado, com o subtitle_data (editável)
+     * e o estilo do clip. Se ainda não estiver cortado, corta primeiro. Se
+     * houver música associada, mistura-a no fim.
      * É este o passo do botão "Regenerar" — não volta a transcrever.
      */
-    public function gravarLegendas(string $clipPath, int $timeout = 600): VaultNote
+    public function gravarLegendas(string $clipPath): VaultNote
     {
         $clip = $this->exigirNota($clipPath);
 
-        if (blank($clip->get('split_job_id'))) {
-            $clip = $this->cortarClip($clipPath, $timeout);
+        if (blank($clip->get('clip_path')) || ! is_file((string) $clip->get('clip_path'))) {
+            $clip = $this->cortarClip($clipPath);
         }
 
         $subtitleData = $this->subtitleData($clip);
@@ -239,26 +301,81 @@ class ShortsPipeline
         }
         unset($seg);
 
-        $jobId = $this->client->addSubtitles([
-            'job_id' => (string) $clip->get('split_job_id'),
-            'subtitle_data' => array_values($subtitleData),
-            'settings' => (array) $clip->get('estilo', self::estiloPorDefeito()),
-            'word_level_mode' => $modo,
-            'return_subtitles_file' => false,
-        ]);
+        $dir = $this->clipDir($clip);
+        $legendado = $dir.'/final.mp4';
 
-        $this->client->waitForJob($jobId, $timeout);
+        $this->engine->burnSubtitles(
+            (string) $clip->get('clip_path'),
+            array_values($subtitleData),
+            (array) $clip->get('estilo', self::estiloPorDefeito()),
+            $modo,
+            $legendado,
+        );
 
-        $slug = pathinfo($clip->path, PATHINFO_FILENAME);
-        $destino = storage_path('app/shorts/'.$slug.'.mp4');
-        $bytes = $this->client->download($jobId, $destino);
+        // Música de fundo: faixa específica ou, se não especificada, uma da
+        // biblioteca escolhida ao acaso. 'nenhuma' desliga.
+        $origemMusica = $this->resolverMusica((string) $clip->get('musica'));
+        $final = $legendado;
+        if ($origemMusica !== null) {
+            $final = $dir.'/final-music.mp4';
+            $this->engine->addMusic($legendado, $origemMusica, [
+                'volume' => (float) $clip->get('musica_volume', 0.1),
+                'fade_in' => 1.0,
+                'fade_out' => 2.0,
+                'loop_music' => true,
+            ], $final);
+        }
 
         return $this->vault->updateFrontmatter($clip->path, [
-            'output_job_id' => $jobId,
-            'output_path' => $destino,
-            'output_bytes' => $bytes,
+            'output_path' => $final,
+            'output_bytes' => is_file($final) ? filesize($final) : 0,
             'estado' => 'pronto',
         ]);
+    }
+
+    /**
+     * Associa a escolha de música de fundo ao clip.
+     * $musica: '' (aleatória da biblioteca) | 'nenhuma' | nome de faixa da
+     * biblioteca | caminho local/URL.
+     */
+    public function definirMusica(string $clipPath, string $musica, float $volume = 0.1): VaultNote
+    {
+        return $this->vault->updateFrontmatter($clipPath, [
+            'musica' => $musica,
+            'musica_volume' => $volume,
+        ]);
+    }
+
+    /** A biblioteca de músicas (para a UI listar/carregar faixas). */
+    public function biblioteca(): MusicLibrary
+    {
+        return $this->musica;
+    }
+
+    /**
+     * Resolve a escolha de música para um caminho local, ou null (sem música).
+     *   'nenhuma'         → sem música
+     *   '' | 'aleatoria'  → faixa aleatória da biblioteca (null se vazia)
+     *   caminho/URL       → esse ficheiro (descarregado se URL)
+     *   nome de faixa     → faixa da biblioteca (aleatória se não existir)
+     */
+    private function resolverMusica(string $sel): ?string
+    {
+        $sel = trim($sel);
+
+        if ($sel === 'nenhuma') {
+            return null;
+        }
+
+        if ($sel === '' || $sel === 'aleatoria') {
+            return $this->musica->randomPath();
+        }
+
+        if (preg_match('#^https?://#i', $sel) || str_contains($sel, '/')) {
+            return $this->engine->resolveSource($sel, $this->tempDir());
+        }
+
+        return $this->musica->pathFor($sel) ?? $this->musica->randomPath();
     }
 
     // --- Auxiliares ---------------------------------------------------
@@ -279,6 +396,23 @@ class ShortsPipeline
         $data = is_string($raw) && $raw !== '' ? json_decode($raw, true) : $raw;
 
         return is_array($data) ? $data : [];
+    }
+
+    /** Pasta de trabalho do clip (storage/app/shorts/{slug}). */
+    private function clipDir(VaultNote $clip): string
+    {
+        $dir = storage_path('app/shorts/'.$clip->slug());
+        @mkdir($dir, 0775, true);
+
+        return $dir;
+    }
+
+    private function tempDir(): string
+    {
+        $dir = storage_path('app/shorts/_sources');
+        @mkdir($dir, 0775, true);
+
+        return $dir;
     }
 
     private function exigirNota(string $path): VaultNote

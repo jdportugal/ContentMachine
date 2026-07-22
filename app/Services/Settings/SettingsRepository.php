@@ -37,8 +37,9 @@ class SettingsRepository
                 'tiktok' => [],    // contas
             ],
             'shorts' => [
-                // URL base da API ShortsCreator. Vazio → usa config/services (env SHORTS_API_URL).
-                'api_url' => '',
+                // Modelo Whisper para transcrição local (tiny|base|small|medium).
+                // Vazio → usa config/services (env WHISPER_MODEL).
+                'whisper_model' => '',
             ],
         ];
     }
