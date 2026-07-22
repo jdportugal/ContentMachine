@@ -2,11 +2,14 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class PaginasTest extends TestCase
 {
+    use RefreshDatabase;
+
     public static function rotas(): array
     {
         return [

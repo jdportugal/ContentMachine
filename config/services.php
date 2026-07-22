@@ -74,6 +74,10 @@ return [
         'fonts_path' => resource_path('fonts'),
     ],
 
+    'elevenlabs' => [
+        'key' => env('ELEVENLABS_API_KEY'),
+    ],
+
     'youtube' => [
         'key' => env('YOUTUBE_API_KEY'),
     ],
