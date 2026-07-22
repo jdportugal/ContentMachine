@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Models\ClipProject;
 use App\Services\Clips\Contracts\AnimationPlanner;
+use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\PlanValidator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,22 +17,34 @@ class PlanAnimationsJob implements ShouldQueue
 
     public function __construct(public int $projectId) {}
 
-    public function handle(AnimationPlanner $planner, PlanValidator $validator): void
+    public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research): void
     {
         $p = ClipProject::findOrFail($this->projectId);
 
         try {
             $p->update(['status' => ClipProject::STATUS_PLANNING]);
-
-            $mode = $p->type === ClipProject::TYPE_ANIMATION ? 'dense' : 'sparse';
             $c = config('contentmachine.clips');
+            $isOverlay = $p->type === ClipProject::TYPE_OVERLAY;
+            $allowed = $isOverlay ? ($p->meta['allowed_present'] ?? ['video', 'over', 'split', 'animation']) : [];
 
-            $plan = $planner->plan($p->transcript, $mode, [
+            // Deep-research the topic so visuals carry real context (not just the speech).
+            $facts = ($c['research'] ?? false) ? $research->research($p->transcript) : [];
+            if (! empty($facts)) {
+                $p->update(['meta' => array_merge($p->meta ?? [], ['research' => $facts])]);
+            }
+
+            // Both cover the full duration. Overlay clips intercut presentation modes
+            // (video / over / split / animation) chosen by the planner per scene.
+            $plan = $planner->plan($p->transcript, 'dense', [
                 'width' => $c['width'],
                 'height' => $c['height'],
                 'fps' => $c['fps'],
+                'facts' => $facts,
+                'images' => $p->images ?? [],
+                'overlay' => $isOverlay,
+                'presents' => $allowed,
             ]);
-            $plan = $validator->validate($plan);
+            $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null);
 
             $p->update(['plan' => $plan]);
 

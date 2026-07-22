@@ -26,6 +26,7 @@ class ClipProject extends Model
         'transcript' => 'array',
         'plan' => 'array',
         'meta' => 'array',
+        'images' => 'array',
     ];
 
     public function isActive(): bool

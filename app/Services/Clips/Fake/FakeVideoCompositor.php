@@ -22,6 +22,14 @@ class FakeVideoCompositor implements VideoCompositor
         return $outPath;
     }
 
+    public function splitStack(string $topVideo, string $bottomVideo, string $outPath): string
+    {
+        @mkdir(dirname($outPath), 0777, true);
+        file_put_contents($outPath, 'FAKE-SPLIT');
+
+        return $outPath;
+    }
+
     public function probeDuration(string $videoPath): float
     {
         return 3.0;

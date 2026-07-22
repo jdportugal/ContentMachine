@@ -72,13 +72,18 @@ return [
         // Planeador de animações: 'claude' (CLI/subscrição) ou 'openai' (API).
         'planner' => env('CLIPS_PLANNER', 'claude'),
         'claude_binary' => env('CLIPS_CLAUDE_BINARY', 'claude'),
+        // Nº de tentativas do CLI Claude (falhas transitórias: sobrecarga da API, etc.).
+        'claude_attempts' => (int) env('CLIPS_CLAUDE_ATTEMPTS', 3),
+        // Pesquisa profunda (web) do tópico antes do planeamento.
+        'research' => (bool) env('CLIPS_RESEARCH', true),
         'width' => (int) env('CLIPS_WIDTH', 1080),
         'height' => (int) env('CLIPS_HEIGHT', 1920),
         'fps' => (int) env('CLIPS_FPS', 30),
         'voice_id' => env('ELEVENLABS_VOICE_ID', 'EXAVITQu4vr4xnSDxMaL'),
         'openai_model' => env('CLIPS_OPENAI_MODEL', 'gpt-4o'),
-        // Sugestão de idioma para o Whisper ('' = deteção automática).
-        'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', 'pt'),
+        // Sugestão de idioma para o Whisper ('' = deteção automática, para o
+        // idioma seguir a fala; defina p.ex. 'pt' só se quiser forçar).
+        'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', ''),
         'remotion_path' => base_path('remotion'),
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),

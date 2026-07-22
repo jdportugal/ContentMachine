@@ -16,9 +16,21 @@ class OpenAiPlannerTest extends TestCase
             'api.openai.com/*' => Http::response([
                 'choices' => [[
                     'message' => [
-                        'content' => json_encode(['animations' => [
-                            ['start' => 0, 'end' => 1, 'primitive' => 'kinetic-text', 'text' => 'Olá', 'params' => []],
-                            ['start' => 1, 'end' => 2, 'primitive' => 'not-a-real-one', 'text' => 'x'],
+                        'content' => json_encode(['scenes' => [
+                            [
+                                'start' => 0, 'end' => 2, 'background' => 'papyrus', 'transitionIn' => 'cut',
+                                'karaoke' => true, 'punchWord' => 'OLÁ',
+                                'layers' => [
+                                    ['type' => 'kinetic-text', 'text' => 'Olá', 'params' => []],
+                                    ['type' => 'not-a-real-one', 'text' => 'x'],
+                                ],
+                            ],
+                            [
+                                'start' => 2, 'end' => 4, 'background' => 'vellum', 'transitionIn' => 'crossfade',
+                                'layers' => [['type' => 'timeline', 'params' => [
+                                    'items' => [['label' => 'Fable 3'], ['label' => 'Fable 5', 'highlight' => true]],
+                                ]]],
+                            ],
                         ]]),
                     ],
                 ]],
@@ -36,8 +48,14 @@ class OpenAiPlannerTest extends TestCase
 
         $this->assertSame('dense', $plan['mode']);
         $this->assertSame(2.0, $plan['duration']);
-        // invalid primitive dropped, valid one kept
-        $this->assertCount(1, $plan['animations']);
-        $this->assertSame('kinetic-text', $plan['animations'][0]['primitive']);
+        $this->assertCount(2, $plan['scenes']);
+        // scene 1: karaoke + punch word, invalid layer dropped, valid kept
+        $this->assertTrue($plan['scenes'][0]['karaoke']);
+        $this->assertSame('OLÁ', $plan['scenes'][0]['punchWord']);
+        $this->assertCount(1, $plan['scenes'][0]['layers']);
+        $this->assertSame('kinetic-text', $plan['scenes'][0]['layers'][0]['type']);
+        // scene 2: timeline layer with params preserved
+        $this->assertSame('timeline', $plan['scenes'][1]['layers'][0]['type']);
+        $this->assertTrue($plan['scenes'][1]['layers'][0]['params']['items'][1]['highlight']);
     }
 }

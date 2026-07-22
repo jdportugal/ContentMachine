@@ -10,6 +10,9 @@ interface VideoCompositor
     /** Overlay $overlay (with alpha) onto $baseVideo → $outPath (mp4). Returns the path. */
     public function overlay(string $baseVideo, string $overlay, string $outPath): string;
 
+    /** Stack $topVideo over $bottomVideo (each half height) → $outPath. Audio from bottom. */
+    public function splitStack(string $topVideo, string $bottomVideo, string $outPath): string;
+
     /** Duration of a video in seconds. */
     public function probeDuration(string $videoPath): float;
 }

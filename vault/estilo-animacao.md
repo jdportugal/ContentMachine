@@ -32,6 +32,17 @@ Vocabulário **fechado**. O planeador só pode usar estes nomes no campo
 | `count-up` | número a subir (métricas, datas) | `to` (obrigatório), `prefix?`, `suffix?` | 0.6 – 3.0 |
 | `image-reveal` | revelação com máscara de uma figura | `src?`, `caption?` | 0.6 – 4.0 |
 | `ambient` | movimento de fundo subtil (deriva papiro/foxing) | — | qualquer |
+| `timeline` | linha temporal com marcos; o mais recente destacado | `items[]`, `caption?` | 2.0 – 6.0 |
+| `bar-chart` | barras a crescer com valores | `bars[]`, `title?`, `unit?` | 1.5 – 5.0 |
+| `comparison` | duas colunas lado a lado (A vs B) | `left{}`, `right{}` | 2.0 – 6.0 |
+| `bullet-list` | itens a aparecer um a um | `items[]`, `title?` | 1.5 – 6.0 |
+
+### Visualizações de dados — esquemas de `params`
+
+- `timeline` → `{ "items": [{ "label": str, "sublabel"?: str, "highlight"?: bool }], "caption"?: str }`
+- `bar-chart` → `{ "title"?: str, "unit"?: str, "bars": [{ "label": str, "value": number, "highlight"?: bool }] }`
+- `comparison` → `{ "left": { "title": str, "points": [str] }, "right": { "title": str, "points": [str] } }`
+- `bullet-list` → `{ "title"?: str, "items": [str] }`
 
 ## Tokens
 
@@ -54,6 +65,13 @@ Paleta (hex), usada tanto no prompt como em `remotion/src/style-tokens.ts`:
 
 ## Regras
 
+- **Idioma**: todo o texto visível (campo `text` e rótulos dentro de `params`)
+  no **mesmo idioma da fala/transcrição**. Nunca traduzir.
+- **Pensar visualmente**: preferir visualizações quando o conteúdo o justifica —
+  sequências/versões ao longo do tempo → `timeline` (mais recente com
+  `highlight`); quantidades/benchmarks → `bar-chart`; contraste entre duas
+  coisas → `comparison`; enumerações/passos → `bullet-list`. Os dados são
+  gerados pelo planeador a partir do que sabe, com rótulos curtos.
 - **Modo `dense`** (separador "Animação"): a linha temporal cobre **100%** da
   duração — cada segundo tem animação. Onde o planeador não colocar nada,
   preenche-se com `ambient` (feito automaticamente pelo validador).

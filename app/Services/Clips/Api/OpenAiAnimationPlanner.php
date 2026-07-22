@@ -24,8 +24,8 @@ class OpenAiAnimationPlanner implements AnimationPlanner
                 'response_format' => ['type' => 'json_object'],
                 'temperature' => 0.5,
                 'messages' => [
-                    ['role' => 'system', 'content' => $this->systemPrompt($mode)],
-                    ['role' => 'user', 'content' => $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0))],
+                    ['role' => 'system', 'content' => $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? [])],
+                    ['role' => 'user', 'content' => $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0), $options['facts'] ?? [], $options['images'] ?? [])],
                 ],
             ])
             ->throw()
@@ -34,6 +34,6 @@ class OpenAiAnimationPlanner implements AnimationPlanner
         $content = $response['choices'][0]['message']['content'] ?? '{}';
         $decoded = $this->extractJson($content);
 
-        return $this->envelope($transcript, $mode, $options, $decoded['animations'] ?? []);
+        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? []);
     }
 }

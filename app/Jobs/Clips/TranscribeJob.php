@@ -10,6 +10,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Storage;
 
 class TranscribeJob implements ShouldQueue
 {
@@ -27,12 +28,14 @@ class TranscribeJob implements ShouldQueue
             $dir = storage_path("app/clips/{$p->id}");
             @mkdir($dir, 0777, true);
 
+            $disk = Storage::disk(config('contentmachine.clips.disk'));
+
             if ($p->input_kind === 'text') {
                 $audio = $tts->synthesize($p->source_text, "$dir/voz.mp3");
             } elseif ($p->input_kind === 'video') {
-                $audio = $ff->extractAudio(storage_path("app/{$p->source_path}"), "$dir/audio.wav");
+                $audio = $ff->extractAudio($disk->path($p->source_path), "$dir/audio.m4a");
             } else {
-                $audio = storage_path("app/{$p->source_path}");
+                $audio = $disk->path($p->source_path);
             }
 
             $p->update([

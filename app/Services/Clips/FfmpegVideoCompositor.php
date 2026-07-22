@@ -24,6 +24,14 @@ class FfmpegVideoCompositor implements VideoCompositor
         return $outPath;
     }
 
+    public function splitStack(string $topVideo, string $bottomVideo, string $outPath): string
+    {
+        @mkdir(dirname($outPath), 0777, true);
+        $this->run($this->buildSplitArgs($topVideo, $bottomVideo, $outPath));
+
+        return $outPath;
+    }
+
     public function probeDuration(string $videoPath): float
     {
         $process = new Process([
@@ -35,12 +43,12 @@ class FfmpegVideoCompositor implements VideoCompositor
         return (float) trim($process->getOutput());
     }
 
-    /** @return array<int,string> */
+    /** @return array<int,string> Good-quality AAC — used for both the render and Whisper (which accepts m4a). */
     public function buildExtractArgs(string $videoPath, string $outPath): array
     {
         return [
             'ffmpeg', '-y', '-i', $videoPath,
-            '-vn', '-acodec', 'pcm_s16le', '-ar', '16000', '-ac', '1',
+            '-vn', '-c:a', 'aac', '-b:a', '160k',
             $outPath,
         ];
     }
@@ -52,6 +60,21 @@ class FfmpegVideoCompositor implements VideoCompositor
             'ffmpeg', '-y', '-i', $baseVideo, '-i', $overlay,
             '-filter_complex', '[0:v][1:v]overlay=0:0:format=auto',
             '-c:a', 'copy',
+            $outPath,
+        ];
+    }
+
+    /** @return array<int,string> top (animation) over bottom (source video); audio from bottom. */
+    public function buildSplitArgs(string $topVideo, string $bottomVideo, string $outPath): array
+    {
+        $half = '[%d:v]scale=1080:960:force_original_aspect_ratio=increase,crop=1080:960,setsar=1';
+
+        return [
+            'ffmpeg', '-y', '-i', $topVideo, '-i', $bottomVideo,
+            '-filter_complex',
+            sprintf($half, 0).'[t];'.sprintf($half, 1).'[b];[t][b]vstack=inputs=2[v]',
+            '-map', '[v]', '-map', '1:a?',
+            '-c:a', 'aac', '-shortest',
             $outPath,
         ];
     }

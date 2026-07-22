@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
 import { COLORS } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
+import { SceneTrack } from "./scenes";
 import { loadFonts } from "./fonts";
 import type { ClipProps } from "./types";
 
@@ -28,36 +29,40 @@ export const ClipComposition: React.FC<ClipProps> = ({
   transparent,
   audioSrc,
   animations,
+  scenes,
+  words,
+  videoSrc,
 }) => {
   const { fps: configFps } = useVideoConfig();
   const effectiveFps = fps ?? configFps;
 
-  // Bare filenames are resolved from Remotion's public/ folder; full URLs pass through.
-  const resolvedAudio = audioSrc
-    ? /^https?:\/\//.test(audioSrc)
-      ? audioSrc
-      : staticFile(audioSrc)
-    : null;
+  const resolve = (src?: string) => (src ? (/^https?:\/\//.test(src) ? src : staticFile(src)) : null);
+  const resolvedAudio = resolve(audioSrc);
+  const resolvedVideo = resolve(videoSrc);
+
+  const useScenes = Array.isArray(scenes) && scenes.length > 0;
 
   return (
     <AbsoluteFill>
-      {/* Opaque clips get papyrus + foxing; transparent overlays get nothing. */}
-      {!transparent && <FoxingBackground />}
+      {/* Opaque animation clips get papyrus + foxing. Overlay clips (with a source
+          video) let each scene composite the video per its `present` mode. */}
+      {!transparent && !resolvedVideo && <FoxingBackground />}
 
       {resolvedAudio ? <Audio src={resolvedAudio} /> : null}
 
-      {animations.map((anim, i) => {
-        const from = Math.round(anim.start * effectiveFps);
-        const durationInFrames = Math.max(
-          1,
-          Math.round((anim.end - anim.start) * effectiveFps)
-        );
-        return (
-          <Sequence key={i} from={from} durationInFrames={durationInFrames} name={anim.primitive}>
-            {renderPrimitive(anim, effectiveFps)}
-          </Sequence>
-        );
-      })}
+      {useScenes ? (
+        <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} />
+      ) : (
+        (animations ?? []).map((anim, i) => {
+          const from = Math.round(anim.start * effectiveFps);
+          const durationInFrames = Math.max(1, Math.round((anim.end - anim.start) * effectiveFps));
+          return (
+            <Sequence key={i} from={from} durationInFrames={durationInFrames} name={anim.primitive}>
+              {renderPrimitive(anim, effectiveFps)}
+            </Sequence>
+          );
+        })
+      )}
     </AbsoluteFill>
   );
 };

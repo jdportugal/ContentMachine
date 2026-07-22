@@ -13,11 +13,42 @@ class CliRemotionRenderer implements RemotionRenderer
         @mkdir(dirname($outPath), 0777, true);
 
         // Remotion loads local assets via staticFile() from its public/ folder, not
-        // filesystem paths or file:// URLs. Stage the audio there and reference it by name.
-        $staged = null;
+        // filesystem paths or file:// URLs. Stage the audio + any images there and
+        // reference them by filename.
+        $staged = [];
         if (! empty($props['audioSrc']) && ! preg_match('#^https?://#', $props['audioSrc'])) {
-            $staged = $this->stageAsset($props['audioSrc']);
-            $props['audioSrc'] = basename($staged);
+            $file = $this->stageAsset($props['audioSrc']);
+            $staged[] = $file;
+            $props['audioSrc'] = basename($file);
+        }
+        // Source video (overlay clips) — copied into public/ so it's bundled by Remotion.
+        if (! empty($props['videoSrc']) && ! preg_match('#^https?://#', $props['videoSrc']) && is_file($props['videoSrc'])) {
+            $file = $this->stageAsset($props['videoSrc']);
+            $staged[] = $file;
+            $props['videoSrc'] = basename($file);
+        }
+        if (! empty($props['scenes'])) {
+            // Stage any local image file referenced anywhere in a layer's params
+            // (image-reveal.src, bar.image, timeline item.image, …) into public/.
+            $isImage = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp)$#i', $s);
+            $stage = function (&$node) use (&$stage, &$staged, $isImage) {
+                if (is_array($node)) {
+                    foreach ($node as &$v) {
+                        $stage($v);
+                    }
+                    unset($v);
+                } elseif (is_string($node) && $isImage($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
+                    $file = $this->stageAsset($node);
+                    $staged[] = $file;
+                    $node = basename($file);
+                }
+            };
+            foreach ($props['scenes'] as &$scene) {
+                if (! empty($scene['layers']) && is_array($scene['layers'])) {
+                    $stage($scene['layers']);
+                }
+            }
+            unset($scene);
         }
 
         $propsFile = tempnam(sys_get_temp_dir(), 'clip_props_').'.json';
@@ -36,16 +67,16 @@ class CliRemotionRenderer implements RemotionRenderer
             }
         } finally {
             @unlink($propsFile);
-            if ($staged) {
-                @unlink($staged);
+            foreach ($staged as $file) {
+                @unlink($file);
             }
         }
 
         return $outPath;
     }
 
-    /** Copy a local asset into Remotion's public/ dir; returns the staged absolute path. */
-    private function stageAsset(string $sourcePath): string
+    /** Stage a local asset into Remotion's public/ dir; returns the staged path. Large files are symlinked. */
+    private function stageAsset(string $sourcePath, bool $symlink = false): string
     {
         $publicDir = rtrim(config('contentmachine.clips.remotion_path'), '/').'/public';
         @mkdir($publicDir, 0777, true);
@@ -53,8 +84,11 @@ class CliRemotionRenderer implements RemotionRenderer
         $name = 'clip-asset-'.md5($sourcePath.microtime()).'.'.pathinfo($sourcePath, PATHINFO_EXTENSION);
         $dest = "$publicDir/$name";
 
+        if ($symlink && @symlink($sourcePath, $dest)) {
+            return $dest;
+        }
         if (! @copy($sourcePath, $dest)) {
-            throw new RuntimeException("Não foi possível preparar o áudio para render: {$sourcePath}");
+            throw new RuntimeException("Não foi possível preparar o ficheiro para render: {$sourcePath}");
         }
 
         return $dest;

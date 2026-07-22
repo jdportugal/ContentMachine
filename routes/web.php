@@ -18,6 +18,15 @@ Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
 Route::livewire('/clips', Clips::class)->name('clips');
 Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
 
+// Serve uma imagem carregada (miniatura), pelo nome de ficheiro (aleatório).
+Route::get('/clips-animados/upload/{name}', function (string $name) {
+    abort_unless((bool) preg_match('/^[A-Za-z0-9]+\.[A-Za-z0-9]+$/', $name), 404);
+    $disk = \Illuminate\Support\Facades\Storage::disk(config('contentmachine.clips.disk'));
+    abort_unless($disk->exists("clips/uploads/{$name}"), 404);
+
+    return response()->file($disk->path("clips/uploads/{$name}"));
+})->name('clips-animados.upload');
+
 // Serve/descarrega o ficheiro final de um clip.
 Route::get('/clips-animados/{project}/media', function (ClipProject $project) {
     abort_unless($project->output_path && is_file($project->output_path), 404);

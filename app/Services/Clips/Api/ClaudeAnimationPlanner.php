@@ -3,46 +3,26 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\Contracts\AnimationPlanner;
-use RuntimeException;
-use Symfony\Component\Process\Process;
 
 /**
  * Animation planner backed by the authenticated `claude` CLI (uses the user's
- * Claude subscription, not per-token API billing). Runs headlessly with
- * --output-format json and parses the model's JSON from the result envelope.
+ * Claude subscription, not per-token API billing).
  */
 class ClaudeAnimationPlanner implements AnimationPlanner
 {
     use BuildsAnimationPrompt;
+    use RunsClaudeCli;
 
     public function plan(array $transcript, string $mode, array $options = []): array
     {
-        $binary = config('contentmachine.clips.claude_binary');
+        $envelope = $this->runClaude(
+            $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0), $options['facts'] ?? [], $options['images'] ?? []),
+            $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? []),
+            ['maxTurns' => 1],
+        );
 
-        $process = new Process([
-            $binary,
-            '-p', $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0)),
-            '--append-system-prompt', $this->systemPrompt($mode),
-            '--output-format', 'json',
-            '--max-turns', '1',
-        ]);
-        // Run from a neutral dir so it doesn't inherit this project's CLAUDE.md context.
-        $process->setWorkingDirectory(sys_get_temp_dir());
-        $process->setTimeout(180);
-        $process->run();
+        $decoded = $this->extractJson((string) ($envelope['result'] ?? ''));
 
-        if (! $process->isSuccessful()) {
-            throw new RuntimeException('Claude CLI falhou: '.$process->getErrorOutput());
-        }
-
-        $envelope = json_decode($process->getOutput(), true) ?: [];
-
-        if (($envelope['is_error'] ?? false) || ! isset($envelope['result'])) {
-            throw new RuntimeException('Resposta inesperada do Claude CLI: '.substr($process->getOutput(), 0, 300));
-        }
-
-        $decoded = $this->extractJson((string) $envelope['result']);
-
-        return $this->envelope($transcript, $mode, $options, $decoded['animations'] ?? []);
+        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? []);
     }
 }

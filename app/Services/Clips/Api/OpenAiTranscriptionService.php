@@ -50,6 +50,7 @@ class OpenAiTranscriptionService implements TranscriptionService
         return [
             'duration' => $duration,
             'text' => $response['text'] ?? '',
+            'language' => $response['language'] ?? null,
             'words' => $words,
             'segments' => $segments,
         ];
