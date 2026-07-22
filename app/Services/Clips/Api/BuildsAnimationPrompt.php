@@ -25,6 +25,10 @@ trait BuildsAnimationPrompt
     protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = []): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
+        $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
+        $designBlock = trim($design) !== ''
+            ? "\n\n=== SISTEMA DE DESIGN (identidade da marca — segue-o em TODAS as cenas) ===\n".$design
+            : '';
         $layers = implode(', ', $this->layerTypes);
         $allowed = ! empty($allowedPresents) ? array_values(array_intersect($this->presents, $allowedPresents)) : $this->presents;
         $allowedLine = "USA APENAS estes valores de \"present\": [".implode(', ', $allowed).'] — nunca outros.';
@@ -106,6 +110,7 @@ A camada principal de CADA cena deve ACRESCENTAR contexto visual com base na PES
 - kinetic-text / fade / highlight / seal-stamp / etc.: o texto vai no campo "text" da layer, params = {}.
 
 {$rule}
+{$designBlock}
 
 === MANUAL DE ESTILO (estilo-animacao.md) ===
 {$style}

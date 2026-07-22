@@ -15,15 +15,15 @@
 <body class="bg-nocturna min-h-screen text-ink antialiased">
     <div class="flex min-h-screen">
         {{-- ============ Estante lateral (navegação) ============ --}}
-        <aside class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/40 flex flex-col">
-            <div class="px-6 py-6 border-b border-ink-soft/15">
+        <aside class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/40 flex flex-col sticky top-0 h-screen">
+            <div class="px-6 py-3 border-b border-ink-soft/15">
                 <a href="{{ route('painel') }}" class="block">
-                    <span class="font-display text-3xl text-teal tracking-wide" style="letter-spacing:.06em">IATECA</span>
-                    <span class="block eyebrow mt-1">Máquina · de · Conteúdo</span>
+                    <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">IATECA</span>
+                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Máquina · de · Conteúdo</span>
                 </a>
             </div>
 
-            <nav class="flex-1 py-4 space-y-0.5 overflow-y-auto">
+            <nav class="flex-1 py-2 space-y-0.5">
                 @php
                     $nav = [
                         ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#2dbab4', 'glyph' => '◆'],
@@ -34,6 +34,7 @@
                         ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#8b6db0', 'glyph' => '❦'],
                         ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#6fbf73', 'glyph' => '⌛'],
                         ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#d8a24a', 'glyph' => '☙'],
+                        ['route' => 'design-system',   'label' => 'Sistema de Design', 'sub' => 'Marca do conteúdo',  'color' => '#c77dae', 'glyph' => '❖'],
                         ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#9a8c78', 'glyph' => '⚙'],
                     ];
                 @endphp
@@ -41,23 +42,27 @@
                 @foreach ($nav as $i => $item)
                     @php $active = request()->routeIs($item['route'].'*'); @endphp
                     <a href="{{ route($item['route']) }}"
-                       class="group flex items-center gap-3 pl-4 pr-4 py-2.5 mx-2 rounded-sm transition
+                       class="group flex items-center gap-3 pl-4 pr-4 py-1.5 mx-2 rounded-sm transition
                               {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                         <span class="w-1.5 self-stretch rounded-full transition-all"
                               style="background: {{ $active ? $item['color'] : 'transparent' }}; box-shadow: {{ $active ? '0 0 8px '.$item['color'].'88' : 'none' }}"></span>
-                        <span class="w-5 text-center text-base" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
+                        <span class="w-5 text-center text-sm" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
                         <span class="flex-1 min-w-0">
-                            <span class="block font-display text-lg leading-tight">{{ $item['label'] }}</span>
-                            <span class="block text-[0.68rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
+                            <span class="block font-display text-base leading-tight">{{ $item['label'] }}</span>
+                            <span class="block text-[0.62rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
                         </span>
                         <span class="font-mono text-[0.6rem] text-ink-faint">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</span>
                     </a>
                 @endforeach
             </nav>
 
-            <div class="px-6 py-4 border-t border-ink-soft/15">
-                <div class="font-mono text-[0.62rem] text-ink-faint leading-relaxed">
-                    <div>CÉREBRO · <span class="text-teal">Obsidian Vault</span></div>
+            <div class="px-6 py-2.5 border-t border-ink-soft/15">
+                <div class="font-mono text-[0.6rem] text-ink-faint leading-relaxed">
+                    <div>CÉREBRO ·
+                        <a href="obsidian://open?path={{ rawurlencode(config('contentmachine.vault.path')) }}"
+                           class="text-teal underline decoration-teal/40 underline-offset-2 hover:decoration-teal transition"
+                           title="Abrir a vault no Obsidian">Obsidian Vault</a>
+                    </div>
                     <div>006.3 · IAT · '26</div>
                 </div>
             </div>

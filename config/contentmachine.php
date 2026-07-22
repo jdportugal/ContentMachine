@@ -234,4 +234,17 @@ return [
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sistema de Design (guia de marca para o CONTEÚDO gerado)
+    |--------------------------------------------------------------------------
+    | Ficheiro Markdown, editável na app e legível no Obsidian, que descreve a
+    | identidade visual/verbal a aplicar ao conteúdo GERADO (clips animados e
+    | publicações). É injetado nos prompts LLM desses geradores. Distinto do
+    | design da própria interface da app (IATECA-design-system.md).
+    */
+    'design_system' => [
+        'path' => env('DESIGN_SYSTEM_PATH', base_path('vault/design-system.md')),
+    ],
 ];

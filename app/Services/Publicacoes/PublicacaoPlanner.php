@@ -69,9 +69,14 @@ class PublicacaoPlanner
             $blocoRefs = "\n\nImagens de referência que acompanham esta peça (tem-nas em conta ao redigir; o texto deve fazer sentido junto delas):\n{$lista}";
         }
 
+        $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
+        $blocoDesign = trim($design) !== ''
+            ? "\n\n=== SISTEMA DE DESIGN (identidade da marca — respeita voz, tom e regras) ===\n{$design}\n"
+            : '';
+
         return <<<PROMPT
         És o redator da IATECA, uma biblioteca para a era das máquinas que pensam.
-        Escreve em português europeu, tom sóbrio e culto, SEM emojis.
+        Escreve em português europeu, tom sóbrio e culto, SEM emojis.{$blocoDesign}
 
         Compõe uma peça do tipo «{$kind['label']}» para {$plataforma}.
         Orientação do formato: {$orientacao}

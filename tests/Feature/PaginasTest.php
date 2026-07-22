@@ -26,6 +26,7 @@ class PaginasTest extends TestCase
             'oficina-resumo' => ['/publicacoes/resumo-semana', 'Resumo da semana'],
             'rascunhos' => ['/rascunhos', 'Rascunhos'],
             'noticias' => ['/noticias', 'Agregador de Notícias'],
+            'design-system' => ['/design-system', 'Sistema de Design'],
             'definicoes' => ['/definicoes', 'Definições'],
         ];
     }

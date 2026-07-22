@@ -4,6 +4,7 @@ use App\Livewire\Ativos;
 use App\Livewire\Clips;
 use App\Livewire\ClipsAnimados;
 use App\Livewire\Definicoes;
+use App\Livewire\DesignSystem;
 use App\Livewire\Monitorizacao;
 use App\Livewire\Noticias;
 use App\Livewire\Painel;
@@ -71,4 +72,5 @@ Route::livewire('/publicacoes/{tipo}', Oficina::class)->name('publicacoes.oficin
 
 Route::livewire('/rascunhos', Rascunhos::class)->name('rascunhos');
 Route::livewire('/noticias', Noticias::class)->name('noticias');
+Route::livewire('/design-system', DesignSystem::class)->name('design-system');
 Route::livewire('/definicoes', Definicoes::class)->name('definicoes');

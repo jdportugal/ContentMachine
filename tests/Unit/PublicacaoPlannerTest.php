@@ -9,20 +9,31 @@ use Tests\TestCase;
 
 class PublicacaoPlannerTest extends TestCase
 {
+    /** Último prompt recebido pelo LlmClient falso (para asserções de injeção). */
+    private ?string $ultimoPrompt = null;
+
     private function planner(?string $resposta): PublicacaoPlanner
     {
-        // LlmClient falso: devolve sempre a resposta canónica (ou null).
-        $llm = new class($resposta) extends LlmClient
+        // LlmClient falso: regista o prompt e devolve a resposta canónica (ou null).
+        $test = $this;
+        $llm = new class($resposta, $test) extends LlmClient
         {
-            public function __construct(private ?string $resposta) {}
+            public function __construct(private ?string $resposta, private PublicacaoPlannerTest $test) {}
 
             public function texto(string $prompt, bool $comFerramentas = false): ?string
             {
+                $this->test->registarPrompt($prompt);
+
                 return $this->resposta;
             }
         };
 
         return new PublicacaoPlanner($llm, new PublicacaoKinds);
+    }
+
+    public function registarPrompt(string $prompt): void
+    {
+        $this->ultimoPrompt = $prompt;
     }
 
     public function test_usa_o_json_da_ia_quando_disponivel(): void
@@ -72,5 +83,33 @@ class PublicacaoPlannerTest extends TestCase
 
         $this->assertCount(1, $plano->slides);
         $this->assertNotSame('', $plano->legenda);
+    }
+
+    public function test_injeta_sistema_de_design_no_prompt(): void
+    {
+        $tmp = sys_get_temp_dir().'/cm-ds-planner-'.uniqid().'.md';
+        file_put_contents($tmp, "# Marca\n\nAssinatura secreta: RUBRICA-XYZ.");
+        config(['contentmachine.design_system.path' => $tmp]);
+
+        try {
+            // Um brief não vazio força o caminho da IA (que constrói o prompt).
+            $this->planner('resposta inválida')->planear('post', 'um tema', 'instagram');
+
+            $this->assertNotNull($this->ultimoPrompt);
+            $this->assertStringContainsString('SISTEMA DE DESIGN', (string) $this->ultimoPrompt);
+            $this->assertStringContainsString('RUBRICA-XYZ', (string) $this->ultimoPrompt);
+        } finally {
+            @unlink($tmp);
+        }
+    }
+
+    public function test_prompt_sem_sistema_de_design_quando_inexistente(): void
+    {
+        config(['contentmachine.design_system.path' => sys_get_temp_dir().'/cm-nao-existe-'.uniqid().'.md']);
+
+        $this->planner('resposta inválida')->planear('post', 'um tema', 'instagram');
+
+        $this->assertNotNull($this->ultimoPrompt);
+        $this->assertStringNotContainsString('SISTEMA DE DESIGN', (string) $this->ultimoPrompt);
     }
 }
