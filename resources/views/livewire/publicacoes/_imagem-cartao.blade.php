@@ -20,12 +20,6 @@
                 class="block w-full border border-ink-soft/20 rounded-sm overflow-hidden bg-vellum/40 shadow-engraved hover:border-teal/50 transition">
             <img src="{{ $src($im) }}" class="w-full block" alt="Cartão {{ $i + 1 }}">
         </button>
-        <input type="text" wire:model="editar.{{ $i }}" placeholder="alterar: «fundo mais escuro»…"
-               class="mt-1.5 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink font-body text-xs focus:border-teal focus:outline-none">
-        <button type="button" wire:click="regenerarCartao({{ $i }})"
-                class="mt-1.5 w-full border border-gold/40 text-gold hover:bg-gold/10 rounded-sm px-2 py-1 font-mono text-[0.6rem] transition">
-            ↻ {{ trim($editar[$i] ?? '') !== '' ? 'aplicar edição' : 'regenerar' }}
-        </button>
         @if (count($h))
             <div class="mt-2">
                 <div class="font-mono text-[0.55rem] text-ink-faint mb-1">versões anteriores</div>
@@ -41,10 +35,9 @@
             </div>
         @endif
     @else
-        <button type="button" wire:click="regenerarCartao({{ $i }})"
-                class="w-full aspect-[4/5] rounded-sm border border-dashed border-gold/40 text-gold/70 hover:bg-gold/5 flex flex-col items-center justify-center gap-1 transition">
-            <span class="text-2xl">❖</span>
-            <span class="font-mono text-[0.6rem]">gerar imagem</span>
-        </button>
+        <div class="aspect-[4/5] rounded-sm border border-dashed border-ink-soft/25 text-ink-faint flex flex-col items-center justify-center gap-1 text-center p-2">
+            <span class="text-2xl text-gold/50">❖</span>
+            <span class="font-mono text-[0.55rem]">sem imagem</span>
+        </div>
     @endif
 </div>
