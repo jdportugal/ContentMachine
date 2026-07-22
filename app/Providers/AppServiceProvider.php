@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $driver = (string) config('contentmachine.publicacoes.render_driver', 'svg');
 
             return $driver === 'kie' && filled(config('services.kie.key'))
-                ? new KieSlideRenderer
+                ? $this->app->make(KieSlideRenderer::class)
                 : new SvgSlideRenderer;
         });
     }

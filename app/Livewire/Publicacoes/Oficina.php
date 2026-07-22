@@ -4,6 +4,7 @@ namespace App\Livewire\Publicacoes;
 
 use App\Jobs\GerarImagensJob;
 use App\Jobs\PlanearPublicacaoJob;
+use App\Jobs\RegenerarCartaoJob;
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\PublicacaoKinds;
 use App\Services\Vault\VaultContract;
@@ -15,8 +16,8 @@ use Livewire\Component;
 
 /**
  * Oficina genérica de publicações: compõe, planeia com IA e desenha em imagem
- * qualquer TIPO do registo (config publicacoes.tipos). Substitui as oficinas
- * dedicadas de posts e carrosséis por uma única, guiada pela configuração.
+ * qualquer TIPO do registo (config publicacoes.tipos). Cada cartão tem a sua
+ * imagem ao lado, com regeneração/edição por instrução e histórico de versões.
  */
 #[Layout('components.layouts.app')]
 class Oficina extends Component
@@ -34,19 +35,29 @@ class Oficina extends Component
     /** @var array<int,array{titulo:string,texto:string}> cartões (carrossel) */
     public array $slides = [];
 
-    /** @var array<int,string> pré-visualizações (SVG inline ou URL) */
-    public array $previews = [];
+    // --- Imagens por cartão (índice 0..N-1; peça única usa índice 0) ---
+    /** @var array<int,string> imagem actual (caminho web) por cartão */
+    public array $img = [];
+
+    /** @var array<int,string> instrução de edição por cartão */
+    public array $editar = [];
+
+    /** @var array<int,array<int,string>> histórico de versões por cartão (recente primeiro) */
+    public array $hist = [];
+
+    /** @var array<int,string> token de regeneração em curso por cartão */
+    public array $gerando = [];
 
     public ?string $guardado = null;
 
     public ?string $aviso = null;
 
-    /** Redação em curso: token do plano em fila + estado da sondagem. */
+    /** Redação em curso. */
     public ?string $planToken = null;
 
     public bool $aRedigir = false;
 
-    /** Desenho de imagens em curso. */
+    /** Desenho de TODAS as imagens em curso. */
     public ?string $imgToken = null;
 
     public bool $aGerar = false;
@@ -67,7 +78,6 @@ class Oficina extends Component
             $this->slides = array_fill(0, $min, ['titulo' => '', 'texto' => '']);
         }
 
-        // Edição: ?nota=<slug> → carrega a publicação existente do vault.
         $slug = (string) request()->query('nota', '');
         if ($slug !== '') {
             $this->carregarNota($vault, $slug);
@@ -85,7 +95,8 @@ class Oficina extends Component
         $this->notaPath = $nota->path;
         $this->titulo = (string) $nota->get('titulo', '');
         $this->plataforma = (string) $nota->get('plataforma', $this->plataforma);
-        $this->previews = array_values((array) $nota->get('imagens', []));
+        $this->img = array_values((array) $nota->get('imagens', []));
+        $this->hist = (array) $nota->get('imagens_hist', []);
 
         if ($this->ehCarrossel()) {
             $slides = $this->slidesDoCorpo($nota->body);
@@ -133,7 +144,26 @@ class Oficina extends Component
         return $this->kinds()->formato($this->tipo) === 'carousel';
     }
 
-    // ---------------------------------------------------------------- acções
+    /** Número de cartões: carrossel = nº de slides; peça única = 1. */
+    public function numCartoes(): int
+    {
+        return $this->ehCarrossel() ? count($this->slides) : 1;
+    }
+
+    /** Título/texto de um cartão pelo índice. @return array{titulo:string,texto:string} */
+    private function dadosCartao(int $i): array
+    {
+        if ($this->ehCarrossel()) {
+            return [
+                'titulo' => trim((string) ($this->slides[$i]['titulo'] ?? '')),
+                'texto' => trim((string) ($this->slides[$i]['texto'] ?? '')),
+            ];
+        }
+
+        return ['titulo' => $this->titulo !== '' ? $this->titulo : 'Peça', 'texto' => $this->legenda];
+    }
+
+    // ---------------------------------------------------------------- cartões
 
     public function adicionarSlide(): void
     {
@@ -146,18 +176,27 @@ class Oficina extends Component
     public function removerSlide(int $i): void
     {
         $min = $this->kinds()->cartoes($this->tipo)['min'];
-        if (count($this->slides) > $min) {
-            unset($this->slides[$i]);
-            $this->slides = array_values($this->slides);
+        if (count($this->slides) <= $min) {
+            return;
+        }
+
+        unset($this->slides[$i]);
+        $this->slides = array_values($this->slides);
+
+        // Reindexa os mapas de imagem para acompanhar os índices dos cartões.
+        foreach (['img', 'editar', 'hist', 'gerando'] as $prop) {
+            $arr = $this->{$prop};
+            unset($arr[$i]);
+            $novo = [];
+            foreach ($arr as $k => $v) {
+                $novo[$k > $i ? $k - 1 : $k] = $v;
+            }
+            $this->{$prop} = $novo;
         }
     }
 
-    /**
-     * Despacha a redação para uma fila e passa a sondar o resultado. A geração
-     * corre num worker («php artisan queue:work»), onde o CLI do Claude autentica
-     * — ao contrário do processo do servidor web. Se a fila for síncrona, o
-     * trabalho corre já e o resultado é aplicado de imediato.
-     */
+    // ------------------------------------------------------------- redação IA
+
     public function redigirComIa(): void
     {
         $this->aviso = null;
@@ -174,11 +213,9 @@ class Oficina extends Component
 
         PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken);
 
-        // Fila síncrona (ex.: testes): o resultado já está pronto.
         $this->verificarPlano();
     }
 
-    /** Sondado por wire:poll enquanto $aRedigir: aplica o plano quando pronto. */
     public function verificarPlano(): void
     {
         if (! $this->aRedigir || $this->planToken === null) {
@@ -186,9 +223,8 @@ class Oficina extends Component
         }
 
         $r = Cache::get(PlanearPublicacaoJob::key($this->planToken));
-
         if ($r === null) {
-            return; // ainda a processar
+            return;
         }
 
         $this->aRedigir = false;
@@ -217,7 +253,7 @@ class Oficina extends Component
 
         $this->aviso = ($r['fonte'] ?? null) === 'ia'
             ? 'Redigido pela IA ('.($r['fornecedor'] ?: 'LLM').'). Reveja e ajuste antes de guardar.'
-            : 'IA indisponível neste contexto — gerei um rascunho local a partir do seu texto. É propositadamente básico; para redação forte, corra «php artisan queue:work» num terminal com a sua sessão do Claude.';
+            : 'IA indisponível neste contexto — gerei um rascunho local. Para redação forte, corra «php artisan queue:work» num terminal com a sua sessão do Claude.';
     }
 
     public function cancelarRedacao(): void
@@ -227,24 +263,26 @@ class Oficina extends Component
         $this->aviso = null;
     }
 
-    /**
-     * Despacha o desenho dos cartões para a fila (o kie.ai/nano-banana-pro é
-     * lento demais para o pedido web) e passa a sondar. Fila síncrona → pronto já.
-     */
+    // ------------------------------------------------------------- imagens
+
+    /** Gera (ou regenera) TODAS as imagens de uma vez, com consistência visual. */
     public function gerarImagens(): void
     {
         $plano = $this->planoAtual();
-
         if ($plano->slides === []) {
-            $this->addError('brief', 'Componha a peça antes de gerar imagens.');
+            $this->addError('slides', 'Componha a peça antes de gerar imagens.');
 
             return;
+        }
+
+        // As imagens actuais passam a histórico.
+        foreach ($this->img as $i => $atual) {
+            $this->empurrarHistorico($i, $atual);
         }
 
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
 
-        // Fila 'media' (lenta) — separada da redação, para não a bloquear.
         GerarImagensJob::dispatch(
             $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken,
         )->onQueue('media');
@@ -252,43 +290,105 @@ class Oficina extends Component
         $this->verificarImagens();
     }
 
-    /** Sondado por wire:poll enquanto $aGerar: mostra as imagens quando prontas. */
+    /** Regenera UM cartão. Com instrução + imagem actual → edição imagem→imagem. */
+    public function regenerarCartao(int $i): void
+    {
+        $dados = $this->dadosCartao($i);
+        if ($dados['titulo'] === '' && $dados['texto'] === '') {
+            return;
+        }
+
+        $atual = $this->img[$i] ?? null;
+        if ($atual !== null) {
+            $this->empurrarHistorico($i, $atual);
+        }
+
+        $token = (string) Str::uuid();
+        $this->gerando[$i] = $token;
+
+        RegenerarCartaoJob::dispatch(
+            $this->tipo, $this->plataforma, $i, $dados['titulo'], $dados['texto'],
+            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token,
+        )->onQueue('media');
+
+        $this->verificarImagens();
+    }
+
+    /** Sondado por wire:poll: aplica imagens prontas (lote e por cartão). */
     public function verificarImagens(): void
     {
-        if (! $this->aGerar || $this->imgToken === null) {
-            return;
+        // Lote (gerar todas).
+        if ($this->aGerar && $this->imgToken !== null) {
+            $r = Cache::get(GerarImagensJob::key($this->imgToken));
+            if ($r !== null) {
+                $this->aGerar = false;
+                Cache::forget(GerarImagensJob::key($this->imgToken));
+                if (empty($r['erro'])) {
+                    foreach (($r['imagens'] ?? []) as $i => $path) {
+                        $this->img[$i] = $path;
+                    }
+                } else {
+                    $this->addError('slides', 'O desenho das imagens falhou. Confirme o worker e a chave do kie.ai.');
+                }
+            }
         }
 
-        $r = Cache::get(GerarImagensJob::key($this->imgToken));
+        // Por cartão.
+        foreach ($this->gerando as $i => $token) {
+            $r = Cache::get(RegenerarCartaoJob::key($token));
+            if ($r === null) {
+                continue;
+            }
+            Cache::forget(RegenerarCartaoJob::key($token));
+            unset($this->gerando[$i]);
 
-        if ($r === null) {
+            if (empty($r['erro'])) {
+                $this->img[$i] = (string) $r['imagem'];
+                $this->editar[$i] = '';
+            } else {
+                $this->addError('slides', 'A regeneração do cartão '.($i + 1).' falhou.');
+            }
+        }
+    }
+
+    /** Restaura uma versão anterior de um cartão (troca com a actual). */
+    public function restaurarVersao(int $i, string $path): void
+    {
+        $atual = $this->img[$i] ?? null;
+        // Remove a versão escolhida do histórico e coloca a actual lá.
+        $this->hist[$i] = array_values(array_filter($this->hist[$i] ?? [], fn ($p) => $p !== $path));
+        if ($atual !== null && $atual !== $path) {
+            array_unshift($this->hist[$i], $atual);
+        }
+        $this->img[$i] = $path;
+    }
+
+    private function empurrarHistorico(int $i, ?string $path): void
+    {
+        if ($path === null || $path === '') {
             return;
         }
-
-        $this->aGerar = false;
-        Cache::forget(GerarImagensJob::key($this->imgToken));
-
-        if (! empty($r['erro'])) {
-            $this->addError('slides', 'O desenho das imagens falhou. Confirme o worker e a chave do kie.ai.');
-
-            return;
+        $this->hist[$i] = $this->hist[$i] ?? [];
+        if (! in_array($path, $this->hist[$i], true)) {
+            array_unshift($this->hist[$i], $path);
+            $this->hist[$i] = array_slice($this->hist[$i], 0, 8); // limita o histórico
         }
-
-        $this->previews = $r['imagens'] ?? [];
     }
 
     public function cancelarImagens(): void
     {
         $this->aGerar = false;
         $this->imgToken = null;
+        $this->gerando = [];
     }
+
+    // ------------------------------------------------------------- guardar
 
     public function criarRascunho(VaultContract $vault): void
     {
         $this->validate($this->rules());
 
         $plano = $this->planoAtual();
-
         if ($this->ehCarrossel() && count($plano->slides) < 2) {
             $this->addError('slides', 'Um carrossel precisa de pelo menos 2 cartões com texto.');
 
@@ -307,14 +407,15 @@ class Oficina extends Component
             'cartoes' => count($plano->slides),
             'tags' => array_values(array_unique([$this->tipo, $this->plataforma])),
         ];
-        if ($this->previews !== []) {
-            $frontmatter['imagens'] = array_values($this->previews);
+        if ($this->img !== []) {
+            ksort($this->img);
+            $frontmatter['imagens'] = array_values($this->img);
+            $frontmatter['imagens_hist'] = $this->hist;
         }
 
         $body = $plano->toBody($formato);
 
         if ($this->notaPath !== null) {
-            // Edição: preserva estado/agendamento e o slug, actualiza o resto.
             $existente = $vault->get($this->notaPath);
             $frontmatter = array_merge(
                 (array) ($existente?->frontmatter ?? []),
@@ -324,15 +425,14 @@ class Oficina extends Component
             $nota = $vault->put($this->notaPath, $frontmatter, $body);
             $this->guardado = $nota->title();
 
-            return; // fica na peça editada
+            return;
         }
 
         $frontmatter['estado'] = 'rascunho';
         $nota = $vault->create('rascunhos', $frontmatter, $body);
 
         $this->guardado = $nota->title();
-        $this->previews = [];
-        $this->reset('brief');
+        $this->reset('brief', 'img', 'hist', 'editar', 'gerando');
         if ($this->ehCarrossel()) {
             $this->slides = array_fill(0, max(2, $this->kinds()->cartoes($this->tipo)['min']), ['titulo' => '', 'texto' => '']);
             $this->titulo = '';

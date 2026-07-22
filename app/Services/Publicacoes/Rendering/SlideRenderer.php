@@ -3,6 +3,7 @@
 namespace App\Services\Publicacoes\Rendering;
 
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
+use App\Services\Publicacoes\Dto\SlidePlano;
 
 /**
  * Desenha os cartões de um plano em imagens. Cada implementação é um "driver":
@@ -19,4 +20,15 @@ interface SlideRenderer
      * @return array<int,string>  uma imagem por cartão, pela ordem dos cartões
      */
     public function render(PublicacaoPlan $plan, array $kind): array;
+
+    /**
+     * Desenha UM cartão. Se $refImagem (bytes) e $instrucao forem dados, o driver
+     * regenera a partir da imagem existente (edição imagem→imagem); caso
+     * contrário compõe de novo a partir do texto do cartão.
+     *
+     * @param  array<string,mixed>  $kind
+     * @param  string|null  $refImagem  bytes da imagem de referência (ou null)
+     * @param  int  $ordem  1-based; 1 = capa
+     */
+    public function renderCartao(SlidePlano $slide, array $kind, ?string $refImagem = null, string $instrucao = '', int $ordem = 1, int $total = 1): string;
 }

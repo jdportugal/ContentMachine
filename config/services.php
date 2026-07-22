@@ -80,6 +80,8 @@ return [
         'image_model' => env('KIE_IMAGE_MODEL', 'nano-banana-2'),
         // Modelo com melhor rendição de texto — usado nos cartões (texto-intensivos).
         'text_model' => env('KIE_TEXT_IMAGE_MODEL', 'nano-banana-pro'),
+        // Host de carregamento de ficheiros (referências para edição imagem→imagem).
+        'file_base_url' => env('KIE_FILE_BASE_URL', 'https://kieai.redpandaai.co'),
     ],
 
 ];

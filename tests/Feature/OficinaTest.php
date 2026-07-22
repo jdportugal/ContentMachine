@@ -65,9 +65,10 @@ class OficinaTest extends TestCase
             ->call('gerarImagens')
             ->assertSet('aGerar', false);
 
-        $previews = $componente->get('previews');
-        $this->assertCount(2, $previews);
-        $this->assertStringContainsString('media/publicacoes/', $previews[0]);
+        $img = $componente->get('img');
+        $this->assertCount(2, $img);
+        $this->assertStringContainsString('media/publicacoes/', $img[0]);
+        $this->assertStringContainsString('media/publicacoes/', $img[1]);
     }
 
     public function test_editar_publicacao_existente_actualiza_a_mesma_nota(): void
@@ -118,6 +119,29 @@ class OficinaTest extends TestCase
             ->assertSet('aGerar', true);
 
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class);
+    }
+
+    public function test_regenerar_cartao_despacha_job_e_marca_em_curso(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('slides', [['titulo' => 'Capa', 'texto' => 'A'], ['titulo' => 'Dois', 'texto' => 'B']])
+            ->call('regenerarCartao', 0);
+
+        $this->assertArrayHasKey(0, $c->get('gerando'));
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\RegenerarCartaoJob::class);
+    }
+
+    public function test_restaurar_versao_troca_a_imagem_actual(): void
+    {
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('img', [0 => 'media/publicacoes/actual/1.png'])
+            ->set('hist', [0 => ['media/publicacoes/antiga/1.png']])
+            ->call('restaurarVersao', 0, 'media/publicacoes/antiga/1.png');
+
+        $this->assertSame('media/publicacoes/antiga/1.png', $c->get('img')[0]);
+        $this->assertContains('media/publicacoes/actual/1.png', $c->get('hist')[0]);
     }
 
     public function test_redigir_com_ia_usa_heuristica_quando_llm_indisponivel(): void

@@ -13,13 +13,16 @@ tags:
   - carrossel
   - instagram
 imagens:
-  - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/1.png
+  - media/publicacoes/beeaaeb2-54c4-41aa-9f13-82c45994edd7/1.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/2.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/3.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/4.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/5.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/6.png
   - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/7.png
+imagens_hist:
+  -
+    - media/publicacoes/4ba35454-a3c8-4c22-a372-91e5dd81bc8e/1.png
 ---
 
 ## Acabou de instalar o Claude Code?

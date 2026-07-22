@@ -41,6 +41,21 @@ class SvgSlideRenderer implements SlideRenderer
         return $svgs;
     }
 
+    public function renderCartao(SlidePlano $slide, array $kind, ?string $refImagem = null, string $instrucao = '', int $ordem = 1, int $total = 1): string
+    {
+        // O SVG é determinístico a partir do texto — a instrução de edição não
+        // se aplica (é uma funcionalidade do driver kie). Redesenha o cartão.
+        [$w, $h] = $this->dimensoes((string) ($kind['proporcao'] ?? '1:1'));
+
+        return $this->cartao(
+            $slide,
+            (string) ($kind['gabarito'] ?? 'quadrado'),
+            (string) ($kind['formato'] ?? 'single'),
+            $w, $h, $ordem - 1, $total,
+            (string) ($kind['_cor'] ?? self::TEAL),
+        );
+    }
+
     // ----------------------------------------------------------------- cartão
 
     private function cartao(SlidePlano $s, string $gabarito, string $formato, int $w, int $h, int $idx, int $total, string $accent): string
