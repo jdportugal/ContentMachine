@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
  */
 class PublicacaoPlanner
 {
+    /** Fonte do último plano: 'ia' (LLM) ou 'heuristica' (fallback local). */
+    public ?string $fonte = null;
+
+    /** Fornecedor de LLM usado quando $fonte === 'ia' (ex.: 'claude-cli'). */
+    public ?string $fornecedor = null;
+
     public function __construct(
         private readonly LlmClient $llm,
         private readonly PublicacaoKinds $kinds,
@@ -24,15 +30,22 @@ class PublicacaoPlanner
     {
         $kind = $this->kinds->get($tipo) ?? [];
         $brief = trim($brief);
+        $this->fonte = null;
+        $this->fornecedor = null;
 
         if ($brief !== '') {
             $texto = $this->llm->texto($this->prompt($tipo, $kind, $brief, $plataforma));
             $plano = $this->deJson($texto);
 
             if ($plano instanceof PublicacaoPlan && $plano->slides !== []) {
+                $this->fonte = 'ia';
+                $this->fornecedor = $this->llm->fornecedorAtivo();
+
                 return $this->normalizarCartoes($plano, $tipo);
             }
         }
+
+        $this->fonte = 'heuristica';
 
         return $this->heuristica($tipo, $kind, $brief, $plataforma);
     }
@@ -111,7 +124,7 @@ class PublicacaoPlanner
         $c = $this->kinds->cartoes($tipo);
         $brief = $brief !== '' ? $brief : 'Nova peça';
 
-        $titulo = Str::limit($this->primeiraFrase($brief), 70, '');
+        $titulo = $this->tituloDe($brief);
         $tags = array_values(array_filter([$tipo, $plataforma]));
 
         if ($formato === 'single') {
@@ -123,16 +136,18 @@ class PublicacaoPlanner
             );
         }
 
+        // Capa + um cartão por frase do brief, com um rótulo derivado da própria
+        // frase (não «Ponto N»). Sem texto inventado — o corpo é a frase original.
         $partes = $this->frases($brief);
-        $slides = [new SlidePlano(1, $titulo, 'Um fio sobre '.Str::lower($titulo).'.')];
+        $slides = [new SlidePlano(1, $titulo, '')];
 
-        foreach ($partes as $i => $frase) {
-            $slides[] = new SlidePlano(count($slides) + 1, 'Ponto '.($i + 1), $frase);
+        foreach ($partes as $frase) {
+            $slides[] = new SlidePlano(count($slides) + 1, $this->rotulo($frase), $frase);
         }
 
-        // Garante o mínimo do tipo; recorta ao máximo.
+        // Garante o mínimo do tipo repetindo/desdobrando o que existe.
         while (count($slides) < $c['min']) {
-            $slides[] = new SlidePlano(count($slides) + 1, 'Ponto '.count($slides), 'A desenvolver.');
+            $slides[] = new SlidePlano(count($slides) + 1, 'Em síntese', $titulo.'.');
         }
         $slides = array_slice($slides, 0, $c['max']);
         foreach ($slides as $i => $s) {
@@ -140,6 +155,25 @@ class PublicacaoPlanner
         }
 
         return new PublicacaoPlan($titulo, $brief, $tags, $slides);
+    }
+
+    /** Título limpo a partir do brief: primeira frase, sem cortar a meio de palavra. */
+    private function tituloDe(string $brief): string
+    {
+        $frase = $this->primeiraFrase($brief);
+        // Corta antes de dois-pontos/travessão (listas) para não arrastar a enumeração.
+        $frase = trim(preg_split('/\s*[:—–-]\s+/u', $frase)[0] ?? $frase);
+
+        return Str::limit($frase, 70, '');
+    }
+
+    /** Rótulo curto (2–4 palavras) derivado da frase, em maiúscula inicial. */
+    private function rotulo(string $frase): string
+    {
+        $palavras = preg_split('/\s+/u', trim($frase)) ?: [];
+        $rotulo = trim(implode(' ', array_slice($palavras, 0, 4)), " .,;:—–-");
+
+        return $rotulo !== '' ? Str::ucfirst($rotulo) : 'Ponto';
     }
 
     /** Divide o brief em frases não vazias (por pontuação ou linhas). */

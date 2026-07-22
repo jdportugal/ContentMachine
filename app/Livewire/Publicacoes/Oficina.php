@@ -128,7 +128,10 @@ class Oficina extends Component
             $this->legenda = $plano->legenda !== '' ? $plano->legenda : ($plano->slides[0]->texto ?? '');
         }
 
-        $this->aviso = 'Rascunho redigido pela IA. Reveja e ajuste antes de guardar.';
+        // Transparência: distingue texto da IA de um rascunho local (heurística).
+        $this->aviso = $planner->fonte === 'ia'
+            ? 'Redigido pela IA ('.($planner->fornecedor ?: 'LLM').'). Reveja e ajuste antes de guardar.'
+            : 'IA indisponível neste contexto — gerei um rascunho local a partir do seu texto. É propositadamente básico; ligue um fornecedor de LLM para redação forte.';
     }
 
     public function gerarImagens(SlideRenderer $renderer): void
