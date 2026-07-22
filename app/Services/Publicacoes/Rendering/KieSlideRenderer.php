@@ -108,7 +108,10 @@ class KieSlideRenderer implements SlideRenderer
 
             $estado = (string) $r->json('data.state');
             if ($estado === 'success') {
-                $url = (string) ($r->json('data.resultJson.resultUrls.0') ?? '');
+                // 'resultJson' vem como STRING JSON (não objecto aninhado).
+                $resultJson = $r->json('data.resultJson');
+                $dados = is_string($resultJson) ? (json_decode($resultJson, true) ?: []) : (array) $resultJson;
+                $url = (string) ($dados['resultUrls'][0] ?? '');
                 if ($url === '') {
                     throw new \RuntimeException('kie.ai: sucesso sem URL.');
                 }
