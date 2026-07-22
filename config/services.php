@@ -72,4 +72,12 @@ return [
         'client_secret' => env('REDDIT_CLIENT_SECRET'),
     ],
 
+    // kie.ai — geração de imagens (modelos Nano Banana). Opcional: sem chave,
+    // as publicações são desenhadas em SVG (driver 'svg').
+    'kie' => [
+        'key' => env('KIE_API_KEY'),
+        'base_url' => env('KIE_BASE_URL', 'https://api.kie.ai'),
+        'image_model' => env('KIE_IMAGE_MODEL', 'nano-banana-2'),
+    ],
+
 ];
