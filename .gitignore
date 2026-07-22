@@ -31,3 +31,6 @@ Thumbs.db
 
 # Playwright MCP snapshots
 /.playwright-mcp/
+
+# Claude Code worktrees / session state (nested checkouts — never version these)
+/.claude/
