@@ -121,6 +121,55 @@ class OficinaTest extends TestCase
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class);
     }
 
+    public function test_referencias_guardadas_e_passadas_a_redacao_e_geracao(): void
+    {
+        // Referência já adicionada (o upload em si é testado pela stack do Livewire).
+        $ref = ['path' => 'media/publicacoes/refs/exemplo.png', 'descricao' => 'logótipo IATECA'];
+
+        // 1) O plano recebe as descrições.
+        $llm = new class extends LlmClient
+        {
+            public ?string $capturado = null;
+
+            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            {
+                $this->capturado = $prompt;
+
+                return null; // força heurística; só queremos o prompt
+            }
+        };
+        $this->app->instance(LlmClient::class, $llm);
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('brief', 'Um tema qualquer.')
+            ->call('redigirComIa');
+
+        $this->assertStringContainsString('logótipo IATECA', (string) $llm->capturado);
+
+        // 2) A geração recebe os caminhos das referências.
+        \Illuminate\Support\Facades\Queue::fake();
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('slides', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('gerarImagens');
+
+        \Illuminate\Support\Facades\Queue::assertPushed(
+            \App\Jobs\GerarImagensJob::class,
+            fn ($job) => $job->referencias === ['media/publicacoes/refs/exemplo.png'],
+        );
+
+        // 3) Guarda as referências na nota.
+        Livewire::test(Oficina::class, ['tipo' => 'post'])
+            ->set('referencias', [$ref])
+            ->set('titulo', 'Peça com ref')
+            ->set('legenda', 'Corpo.')
+            ->call('criarRascunho');
+
+        $nota = app(VaultContract::class)->all('rascunhos')->first();
+        $this->assertSame('logótipo IATECA', $nota->get('referencias')[0]['descricao']);
+    }
+
     public function test_resolucao_escolhida_e_guardada_na_nota(): void
     {
         Livewire::test(Oficina::class, ['tipo' => 'post'])

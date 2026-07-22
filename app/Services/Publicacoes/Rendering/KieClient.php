@@ -39,6 +39,26 @@ class KieClient
         return $this->generate($prompt, $proporcao, [$url]);
     }
 
+    /**
+     * Carrega ficheiros locais (caminhos web relativos a public/) e devolve os
+     * URLs do kie, para usar como referências visuais na geração.
+     *
+     * @param  array<int,string>  $caminhos
+     * @return array<int,string>
+     */
+    public function carregarReferencias(array $caminhos): array
+    {
+        $urls = [];
+        foreach ($caminhos as $rel) {
+            $abs = public_path($rel);
+            if (is_file($abs)) {
+                $urls[] = $this->upload(file_get_contents($abs), basename($rel));
+            }
+        }
+
+        return $urls;
+    }
+
     // ------------------------------------------------------------------ HTTP
 
     private function submeter(string $prompt, string $proporcao, array $refs): string
@@ -92,7 +112,7 @@ class KieClient
     }
 
     /** Carrega bytes de imagem para o armazenamento do kie; devolve URL público. */
-    private function upload(string $bytes, string $nome): string
+    public function upload(string $bytes, string $nome): string
     {
         $base = rtrim((string) config('services.kie.file_base_url', 'https://kieai.redpandaai.co'), '/');
 

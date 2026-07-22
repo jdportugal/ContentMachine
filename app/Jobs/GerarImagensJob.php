@@ -36,6 +36,7 @@ class GerarImagensJob implements ShouldQueue
         public array $slides,
         public string $token,
         public string $proporcao = '',
+        public array $referencias = [],
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
@@ -44,6 +45,7 @@ class GerarImagensJob implements ShouldQueue
         if ($this->proporcao !== '') {
             $kind['proporcao'] = $this->proporcao;
         }
+        $kind['_refs'] = $this->referencias;
         $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
 
         $plano = PublicacaoPlan::daOficina(

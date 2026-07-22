@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 /**
  * Oficina genérica de publicações: compõe, planeia com IA e desenha em imagem
@@ -22,6 +23,8 @@ use Livewire\Component;
 #[Layout('components.layouts.app')]
 class Oficina extends Component
 {
+    use WithFileUploads;
+
     public string $tipo = '';
 
     public string $titulo = '';
@@ -34,6 +37,12 @@ class Oficina extends Component
     public string $brief = '';
 
     public string $legenda = '';
+
+    /** @var array ficheiros a carregar (input) */
+    public array $uploads = [];
+
+    /** @var array<int,array{path:string,descricao:string}> imagens de referência */
+    public array $referencias = [];
 
     /** @var array<int,array{titulo:string,texto:string}> cartões (carrossel) */
     public array $slides = [];
@@ -102,6 +111,7 @@ class Oficina extends Component
         $this->proporcao = (string) $nota->get('proporcao', $this->proporcao);
         $this->img = array_values((array) $nota->get('imagens', []));
         $this->hist = (array) $nota->get('imagens_hist', []);
+        $this->referencias = array_values((array) $nota->get('referencias', []));
 
         if ($this->ehCarrossel()) {
             $slides = $this->slidesDoCorpo($nota->body);
@@ -200,6 +210,49 @@ class Oficina extends Component
         }
     }
 
+    // ------------------------------------------------- imagens de referência
+
+    /** Guarda os ficheiros carregados como referências (com descrição a preencher). */
+    public function updatedUploads(): void
+    {
+        $this->validate(['uploads.*' => 'image|max:8192'], [], ['uploads.*' => 'imagem']);
+
+        $dir = public_path('media/publicacoes/refs');
+        if (! is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+
+        foreach ($this->uploads as $file) {
+            $ext = strtolower($file->getClientOriginalExtension() ?: 'png');
+            $nome = (string) Str::uuid().'.'.$ext;
+            copy($file->getRealPath(), $dir.'/'.$nome);
+            $this->referencias[] = ['path' => 'media/publicacoes/refs/'.$nome, 'descricao' => ''];
+        }
+
+        $this->uploads = [];
+    }
+
+    public function removerReferencia(int $i): void
+    {
+        unset($this->referencias[$i]);
+        $this->referencias = array_values($this->referencias);
+    }
+
+    /** Descrições não vazias das referências (contexto para a redação). @return array<int,string> */
+    private function refDescricoes(): array
+    {
+        return array_values(array_filter(array_map(
+            fn ($r) => trim((string) ($r['descricao'] ?? '')),
+            $this->referencias,
+        )));
+    }
+
+    /** Caminhos das imagens de referência (para o gerador de imagens). @return array<int,string> */
+    private function refPaths(): array
+    {
+        return array_values(array_map(fn ($r) => (string) ($r['path'] ?? ''), $this->referencias));
+    }
+
     // ------------------------------------------------------------- redação IA
 
     public function redigirComIa(): void
@@ -216,7 +269,7 @@ class Oficina extends Component
         $this->aRedigir = true;
         $this->aviso = 'A IA está a redigir… (requer um worker: «php artisan queue:work»).';
 
-        PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken);
+        PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken, $this->refDescricoes());
 
         $this->verificarPlano();
     }
@@ -289,7 +342,7 @@ class Oficina extends Component
         $this->aGerar = true;
 
         GerarImagensJob::dispatch(
-            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao,
+            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refPaths(),
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -313,7 +366,7 @@ class Oficina extends Component
 
         RegenerarCartaoJob::dispatch(
             $this->tipo, $this->plataforma, $i, $dados['titulo'], $dados['texto'],
-            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token, $this->proporcao,
+            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token, $this->proporcao, $this->refPaths(),
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -418,6 +471,9 @@ class Oficina extends Component
             $frontmatter['imagens'] = array_values($this->img);
             $frontmatter['imagens_hist'] = $this->hist;
         }
+        if ($this->referencias !== []) {
+            $frontmatter['referencias'] = array_values($this->referencias);
+        }
 
         $body = $plano->toBody($formato);
 
@@ -438,7 +494,7 @@ class Oficina extends Component
         $nota = $vault->create('rascunhos', $frontmatter, $body);
 
         $this->guardado = $nota->title();
-        $this->reset('brief', 'img', 'hist', 'editar', 'gerando');
+        $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias');
         if ($this->ehCarrossel()) {
             $this->slides = array_fill(0, max(2, $this->kinds()->cartoes($this->tipo)['min']), ['titulo' => '', 'texto' => '']);
             $this->titulo = '';

@@ -23,6 +23,7 @@ class KieSlideRenderer implements SlideRenderer
 
         $proporcao = (string) ($kind['proporcao'] ?? '1:1');
         $total = count($plan->slides);
+        $refs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
         $urls = [];
         $ancora = null; // 1.º cartão serve de referência aos seguintes (consistência visual).
 
@@ -30,7 +31,7 @@ class KieSlideRenderer implements SlideRenderer
             $url = $this->kie->generate(
                 $this->prompt($slide, $kind, $i === 0, $i + 1, $total),
                 $proporcao,
-                $ancora !== null ? [$ancora] : [],
+                array_merge($refs, $ancora !== null ? [$ancora] : []),
             );
             $urls[] = $url;
             $ancora ??= $url;
@@ -43,14 +44,17 @@ class KieSlideRenderer implements SlideRenderer
     {
         $this->exigirChave();
         $proporcao = (string) ($kind['proporcao'] ?? '1:1');
+        $refs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
 
-        // Edição imagem→imagem: mantém o cartão e aplica a instrução.
+        // Edição imagem→imagem: mantém o cartão e aplica a instrução (+ referências).
         if ($refImagem !== null && trim($instrucao) !== '') {
-            return $this->kie->edit($this->promptEdicao($slide, $instrucao), $proporcao, $refImagem);
+            $url = $this->kie->upload($refImagem, 'atual.png');
+
+            return $this->kie->generate($this->promptEdicao($slide, $instrucao), $proporcao, array_merge($refs, [$url]));
         }
 
-        // Composição de novo a partir do texto.
-        return $this->kie->generate($this->prompt($slide, $kind, $ordem === 1, $ordem, $total), $proporcao);
+        // Composição de novo a partir do texto, com as referências.
+        return $this->kie->generate($this->prompt($slide, $kind, $ordem === 1, $ordem, $total), $proporcao, $refs);
     }
 
     private function exigirChave(): void

@@ -26,7 +26,8 @@ class PublicacaoPlanner
         private readonly PublicacaoKinds $kinds,
     ) {}
 
-    public function planear(string $tipo, string $brief, string $plataforma): PublicacaoPlan
+    /** @param array<int,string> $referencias descrições das imagens de referência */
+    public function planear(string $tipo, string $brief, string $plataforma, array $referencias = []): PublicacaoPlan
     {
         $kind = $this->kinds->get($tipo) ?? [];
         $brief = trim($brief);
@@ -34,7 +35,7 @@ class PublicacaoPlanner
         $this->fornecedor = null;
 
         if ($brief !== '') {
-            $texto = $this->llm->texto($this->prompt($tipo, $kind, $brief, $plataforma));
+            $texto = $this->llm->texto($this->prompt($tipo, $kind, $brief, $plataforma, $referencias));
             $plano = $this->deJson($texto);
 
             if ($plano instanceof PublicacaoPlan && $plano->slides !== []) {
@@ -52,7 +53,7 @@ class PublicacaoPlanner
 
     // ------------------------------------------------------------------ IA
 
-    private function prompt(string $tipo, array $kind, string $brief, string $plataforma): string
+    private function prompt(string $tipo, array $kind, string $brief, string $plataforma, array $referencias = []): string
     {
         $formato = $kind['formato'] ?? 'single';
         $c = $this->kinds->cartoes($tipo);
@@ -61,6 +62,12 @@ class PublicacaoPlanner
         $regraCartoes = $formato === 'carousel'
             ? "Gera entre {$c['min']} e {$c['max']} cartões (o primeiro é a capa)."
             : 'Gera exactamente 1 cartão.';
+
+        $blocoRefs = '';
+        if ($referencias !== []) {
+            $lista = implode("\n", array_map(fn ($d) => '- '.$d, $referencias));
+            $blocoRefs = "\n\nImagens de referência que acompanham esta peça (tem-nas em conta ao redigir; o texto deve fazer sentido junto delas):\n{$lista}";
+        }
 
         return <<<PROMPT
         És o redator da IATECA, uma biblioteca para a era das máquinas que pensam.
@@ -71,7 +78,7 @@ class PublicacaoPlanner
         {$regraCartoes}
 
         Tema / brief do utilizador:
-        {$brief}
+        {$brief}{$blocoRefs}
 
         Responde APENAS com JSON válido (sem texto à volta), nesta forma exacta:
         {

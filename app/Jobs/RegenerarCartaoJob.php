@@ -35,13 +35,14 @@ class RegenerarCartaoJob implements ShouldQueue
         public int $total,
         public string $token,
         public string $proporcao = '',
+        public array $referencias = [],
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
     {
         $kind = $kinds->get($this->tipo) ?? [];
         $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
-        $kind = array_merge($kind, ['_cor' => $cor]);
+        $kind = array_merge($kind, ['_cor' => $cor, '_refs' => $this->referencias]);
         if ($this->proporcao !== '') {
             $kind['proporcao'] = $this->proporcao;
         }

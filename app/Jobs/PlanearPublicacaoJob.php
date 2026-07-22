@@ -25,16 +25,18 @@ class PlanearPublicacaoJob implements ShouldQueue
 
     public int $timeout = 300;
 
+    /** @param array<int,string> $referencias descrições das imagens de referência */
     public function __construct(
         public string $tipo,
         public string $brief,
         public string $plataforma,
         public string $token,
+        public array $referencias = [],
     ) {}
 
     public function handle(PublicacaoPlanner $planner): void
     {
-        $plano = $planner->planear($this->tipo, $this->brief, $this->plataforma);
+        $plano = $planner->planear($this->tipo, $this->brief, $this->plataforma, $this->referencias);
 
         Cache::put(self::key($this->token), [
             'fonte' => $planner->fonte,

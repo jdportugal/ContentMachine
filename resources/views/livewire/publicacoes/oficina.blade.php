@@ -23,6 +23,33 @@
             </div>
         @endif
 
+        {{-- Imagens de referência --}}
+        <x-panel eyebrow="Contexto" title="Imagens de referência" glyph="❖">
+            <p class="text-ink-soft text-sm mb-3">Junte imagens (logótipo, produto, exemplos) e diga o que são. A IATECA usa as descrições ao redigir e as imagens como referência visual ao gerar os cartões.</p>
+            <input type="file" wire:model="uploads" multiple accept="image/*"
+                   class="block w-full text-sm text-ink-soft file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-teal/10 file:text-teal file:font-mono file:text-xs hover:file:bg-teal/20 file:cursor-pointer">
+            <div wire:loading wire:target="uploads" class="mt-2 font-mono text-xs text-teal">a carregar…</div>
+            @error('uploads.*') <span class="block text-bad text-sm mt-1">{{ $message }}</span> @enderror
+
+            @if (count($referencias))
+                <div class="mt-4 grid sm:grid-cols-2 gap-3">
+                    @foreach ($referencias as $r => $ref)
+                        <div class="flex gap-3 items-start border border-ink-soft/15 rounded-sm p-2 bg-vellum/30" wire:key="ref-{{ $r }}">
+                            <img src="{{ \Illuminate\Support\Str::startsWith($ref['path'], 'http') ? $ref['path'] : asset($ref['path']) }}"
+                                 class="w-14 h-14 object-cover rounded-sm border border-ink-soft/20 shrink-0">
+                            <div class="flex-1 min-w-0">
+                                <input type="text" wire:model.blur="referencias.{{ $r }}.descricao"
+                                       placeholder="o que é: «logótipo IATECA», «foto do produto»…"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink font-body text-sm focus:border-teal focus:outline-none">
+                                <button type="button" wire:click="removerReferencia({{ $r }})"
+                                        class="mt-1 text-ink-faint hover:text-bad font-mono text-[0.6rem]">× remover</button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </x-panel>
+
         {{-- Redação assistida por IA --}}
         <x-panel eyebrow="Assistente" title="Redigir com IA" glyph="✶">
             <p class="text-ink-soft text-sm mb-3">Descreva o tema; a IATECA compõe o {{ $this->kind['formato'] === 'carousel' ? 'carrossel' : 'texto' }}.</p>
