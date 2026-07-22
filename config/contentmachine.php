@@ -89,6 +89,96 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Publicações (oficina de peças para redes sociais)
+    |--------------------------------------------------------------------------
+    | Registo declarativo dos TIPOS de peça. Cada tipo é um "gabarito" que a
+    | oficina genérica (App\Livewire\Publicacoes\Oficina) sabe compor, planear
+    | com IA e desenhar em imagem — acrescentar um formato é só acrescentar uma
+    | entrada aqui. Inspirado nos PostTemplate do AdsMaker.
+    |
+    |   formato: 'single' (um corpo) | 'carousel' (vários cartões)
+    |   proporcao: relação da imagem (1:1, 4:5, 9:16)
+    |   cartoes: { min, max } (para carrosséis)
+    |   gabarito: identificador do desenho SVG (ver SvgSlideRenderer)
+    |   plano_prompt: orientação dada à IA ao redigir a peça
+    |
+    | render_driver: 'svg' (offline, determinístico) | 'kie' (kie.ai, requer chave)
+    */
+    'publicacoes' => [
+        'render_driver' => env('PUBLICACOES_RENDER', 'svg'),
+
+        'tipos' => [
+            'post' => [
+                'label' => 'Posts de página única',
+                'glifo' => '❦',
+                'descricao' => 'Peças quadradas — «Sabia que…», anúncios, avisos.',
+                'formato' => 'single',
+                'proporcao' => '1:1',
+                'cartoes' => ['min' => 1, 'max' => 1],
+                'gabarito' => 'quadrado',
+                'plataforma_padrao' => 'instagram',
+                'plano_prompt' => 'Uma peça única e autossuficiente. Título curto e uma legenda de 2 a 4 frases, tom sóbrio e culto, sem emojis.',
+            ],
+            'citacao' => [
+                'label' => 'Citações',
+                'glifo' => '❝',
+                'descricao' => 'Uma frase em destaque com a sua atribuição.',
+                'formato' => 'single',
+                'proporcao' => '1:1',
+                'cartoes' => ['min' => 1, 'max' => 1],
+                'gabarito' => 'citacao',
+                'plataforma_padrao' => 'instagram',
+                'plano_prompt' => 'Uma citação memorável. O título é a frase citada (curta, ≤ 140 caracteres); a legenda indica o autor e uma linha de contexto.',
+            ],
+            'dica' => [
+                'label' => 'Dicas rápidas',
+                'glifo' => '✦',
+                'descricao' => 'Uma dica prática — «Sabia que…», um truque, um princípio.',
+                'formato' => 'single',
+                'proporcao' => '4:5',
+                'cartoes' => ['min' => 1, 'max' => 1],
+                'gabarito' => 'dica',
+                'plataforma_padrao' => 'instagram',
+                'plano_prompt' => 'Uma dica acionável. Título com o benefício; legenda com o passo concreto em 2 a 3 frases.',
+            ],
+            'carrossel' => [
+                'label' => 'Carrosséis',
+                'glifo' => '☰',
+                'descricao' => 'Sequência de vários cartões — capa, conteúdo, despedida.',
+                'formato' => 'carousel',
+                'proporcao' => '4:5',
+                'cartoes' => ['min' => 2, 'max' => 10],
+                'gabarito' => 'capa-conteudo',
+                'plataforma_padrao' => 'instagram',
+                'plano_prompt' => 'Um carrossel didático. O primeiro cartão é a capa (promessa clara); os seguintes desenvolvem uma ideia cada; o último remata com síntese ou apelo. Cada cartão: título curto + 1 a 2 frases.',
+            ],
+            'lista' => [
+                'label' => 'Listas numeradas',
+                'glifo' => '≡',
+                'descricao' => 'N termos, passos ou princípios, um por cartão.',
+                'formato' => 'carousel',
+                'proporcao' => '4:5',
+                'cartoes' => ['min' => 3, 'max' => 8],
+                'gabarito' => 'lista',
+                'plataforma_padrao' => 'linkedin',
+                'plano_prompt' => 'Uma lista numerada. Capa com o tema («5 termos para começar»); cada cartão seguinte é um item numerado com título + uma frase de explicação.',
+            ],
+            'resumo-semana' => [
+                'label' => 'Resumo da semana',
+                'glifo' => '☙',
+                'descricao' => 'As notícias de IA da semana, em cartões — «Esta semana em IA».',
+                'formato' => 'carousel',
+                'proporcao' => '4:5',
+                'cartoes' => ['min' => 3, 'max' => 6],
+                'gabarito' => 'capa-conteudo',
+                'plataforma_padrao' => 'linkedin',
+                'plano_prompt' => 'Um resumo noticioso semanal, tom «Esta semana em IA»: capa com a data/semana; cada cartão traz uma novidade com título factual + uma frase de contexto; último cartão remata com um olhar para a frente.',
+            ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Scoring (padrão head-of-content)
     |--------------------------------------------------------------------------
     | Pesos por plataforma para o cálculo do índice de desempenho (0–100).
