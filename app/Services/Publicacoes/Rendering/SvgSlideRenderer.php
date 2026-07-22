@@ -60,7 +60,7 @@ class SvgSlideRenderer implements SlideRenderer
         $rodape = $this->rodape($w, $h, $idx, $total, $formato, $accent);
 
         return <<<SVG
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {$w} {$h}" width="{$w}" height="{$h}" font-family="{$this->esc(self::DISPLAY)}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {$w} {$h}" width="{$w}" height="{$h}" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block" font-family="{$this->esc(self::DISPLAY)}">
         <rect width="{$w}" height="{$h}" fill="{$fundo}"/>
         {$moldura}
         {$conteudo}
