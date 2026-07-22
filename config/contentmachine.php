@@ -16,6 +16,7 @@ return [
             'rascunhos' => 'rascunhos',
             'noticias' => 'noticias',
             'publicacoes' => 'publicacoes',
+            'clips' => 'clips',
         ],
     ],
 
@@ -46,10 +47,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Agregador de média (yt-dlp, modo metadados-only)
+    | Agregador de média (yt-dlp, metadados-only) + LLM (geração de texto)
     |--------------------------------------------------------------------------
     | Recolhe conteúdo recente dos canais configurados (YouTube, TikTok,
-    | Instagram, LinkedIn) SEM descarregar vídeo — apenas metadados e legendas.
+    | Instagram, LinkedIn) SEM descarregar vídeo — apenas metadados e legendas —
+    | e gere a cadeia de fornecedores de LLM (App\Services\Aggregation\LlmClient),
+    | por defeito o CLI do Claude Code, sem chave de API.
     |
     | 'ytdlp_cmd' é o comando base: 'yt-dlp' (Docker) ou 'python3 -m yt_dlp'
     | (instalação local via pip --user). 'extractor_args' força, por plataforma,
@@ -71,13 +74,14 @@ return [
         'anthropic_max_tokens' => (int) env('AGGREGATION_ANTHROPIC_MAX_TOKENS', 8000),
 
         // Fornecedor de LLM para a redação/tópicos:
-        //   'auto'       → usa o CLI do Claude se existir, senão OpenAI/Gemini
+        //   'auto'       → usa o CLI do Claude se existir, senão OpenAI/Gemini/Anthropic
         //   'claude-cli' → corre o CLI do Claude Code (reutiliza a tua sessão, sem chave de API)
-        //   'openai' | 'gemini' → via API (requer chave)
+        //   'openai' | 'gemini' | 'anthropic' → via API (requer chave)
         //   'none'       → desligado (heurística)
         'llm_provider' => env('LLM_PROVIDER', 'auto'),
         'claude_cli_bin' => env('CLAUDE_CLI_BIN', 'claude'),
         'claude_cli_model' => env('CLAUDE_CLI_MODEL', ''),
+        'claude_cli_timeout' => (int) env('CLAUDE_CLI_TIMEOUT', 240),
         // Permite ao Claude usar pesquisa/leitura web para ir buscar contexto às
         // fontes ao redigir o guião. Torna a geração mais lenta. CLAUDE_CLI_WEB=false desliga.
         'claude_cli_web' => (bool) env('CLAUDE_CLI_WEB', true),

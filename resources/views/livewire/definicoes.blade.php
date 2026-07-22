@@ -107,6 +107,17 @@
             </div>
         </x-panel>
 
+        {{-- Gerador de Clips --}}
+        <x-panel eyebrow="Oficina" title="Gerador de Clips" glyph="✂">
+            <p class="text-ink-soft -mt-2 mb-4">Endereço da API ShortsCreator que corta os vídeos e grava as legendas.</p>
+            <div>
+                <label class="eyebrow block mb-1.5">URL da API</label>
+                <input type="url" wire:model="shorts.api_url" placeholder="http://localhost:5000"
+                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                <p class="mt-1.5 font-mono text-xs text-ink-faint">Vazio → usa <span class="text-ink-soft">SHORTS_API_URL</span> do .env.</p>
+            </div>
+        </x-panel>
+
         {{-- Barra de acção --}}
         <div class="flex items-center gap-4">
             <button type="submit"

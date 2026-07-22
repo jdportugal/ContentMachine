@@ -43,6 +43,11 @@ class SettingsRepository
                 'tiktok' => ['https://www.tiktok.com/@nick.saraev'],
                 'linkedin' => ['https://www.linkedin.com/in/nick-saraev/'],
             ],
+            'shorts' => [
+                // Modelo Whisper para transcrição local (tiny|base|small|medium).
+                // Vazio → usa config/services (env WHISPER_MODEL).
+                'whisper_model' => '',
+            ],
         ];
     }
 

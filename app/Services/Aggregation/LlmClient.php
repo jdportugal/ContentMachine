@@ -23,6 +23,22 @@ use Illuminate\Support\Facades\Process;
  */
 class LlmClient
 {
+    /**
+     * Variáveis que marcam uma sessão do Claude Code em curso. Passadas a
+     * `claude -p` fá-lo-iam entrar em modo "sessão-filha" e falhar auth, por isso
+     * são removidas do subprocesso (via `env -u`).
+     */
+    private const MARCADORES_SESSAO = [
+        'CLAUDECODE',
+        'CLAUDE_CODE_ENTRYPOINT',
+        'CLAUDE_CODE_EXECPATH',
+        'CLAUDE_CODE_SESSION_ID',
+        'CLAUDE_CODE_CHILD_SESSION',
+        'CLAUDE_PID',
+        'CLAUDE_EFFORT',
+        'AI_AGENT',
+    ];
+
     /** @var array<string,?string> cache de resolução de binários */
     private static array $binCache = [];
 
@@ -102,7 +118,18 @@ class LlmClient
             return null;
         }
 
-        $args = [$bin, '-p', '--output-format', 'text'];
+        // Corre via `env -u …` para REMOVER os marcadores de sessão do Claude
+        // Code antes de invocar o `claude`. O Symfony Process reinjeta o ambiente
+        // herdado (getDefaultEnv), pelo que omití-los no ->env() não basta; se o
+        // subprocesso herdar CLAUDECODE/CLAUDE_CODE_*, o `claude -p` entra em modo
+        // "sessão-filha" e falha com "Not logged in". Com `env -u` são removidos
+        // à força e o `claude` autentica-se pelas credenciais em disco (~/.claude).
+        $args = ['/usr/bin/env'];
+        foreach (self::MARCADORES_SESSAO as $marcador) {
+            $args[] = '-u';
+            $args[] = $marcador;
+        }
+        array_push($args, $bin, '-p', '--output-format', 'text');
         $modelo = (string) config('contentmachine.aggregation.claude_cli_model', '');
         if ($modelo !== '') {
             $args[] = '--model';
@@ -177,32 +204,61 @@ class LlmClient
     }
 
     /**
-     * Ambiente para o subprocesso do Claude: parte do ambiente actual (para não
-     * perder as variáveis da sessão que o autenticam) e garante HOME/PATH.
+     * Ambiente para o subprocesso do `claude -p`: passa o ambiente REAL do
+     * processo (via getenv(), que funciona em CLI e na SAPI web — ao contrário
+     * de $_SERVER, que sob `php artisan serve` não expõe variáveis de ambiente)
+     * MAS remove os marcadores de sessão do Claude Code.
+     *
+     * O `claude` autentica-se pelas credenciais em disco (~/.claude, via HOME).
+     * Se herdar CLAUDECODE / CLAUDE_CODE_* de uma sessão-pai do Claude Code,
+     * entra em modo "sessão-filha" e falha com "Not logged in". Removê-los deixa
+     * o subprocesso correr como uma invocação de topo normal — funciona tanto
+     * dentro como fora de uma sessão do Claude Code.
      *
      * @return array<string,string>
      */
     private function ambiente(): array
     {
         $env = [];
-        foreach ($_SERVER as $k => $val) {
-            if (is_string($val) && (str_starts_with((string) $k, 'CLAUDE') || in_array($k, ['HOME', 'PATH', 'USER', 'SHELL', 'ANTHROPIC_API_KEY'], true))) {
-                $env[$k] = $val;
+
+        $todas = getenv();
+        if (is_array($todas)) {
+            foreach ($todas as $k => $val) {
+                if (is_string($val) && ! $this->ehMarcadorSessao((string) $k)) {
+                    $env[$k] = $val;
+                }
             }
         }
 
-        $home = getenv('HOME') ?: ($env['HOME'] ?? '');
-        if ($home === '' && function_exists('posix_getpwuid')) {
-            $home = posix_getpwuid(posix_getuid())['dir'] ?? '';
-        }
-        if ($home !== '') {
-            $env['HOME'] = $home;
-        }
-        if (empty($env['PATH']) && ($p = getenv('PATH')) !== false) {
-            $env['PATH'] = $p;
+        // Dados do utilizador (para fallback de HOME/USER/LOGNAME).
+        $pw = function_exists('posix_getpwuid') && function_exists('posix_getuid')
+            ? (posix_getpwuid(posix_getuid()) ?: [])
+            : [];
+
+        // Garante HOME + PATH e, crucialmente, USER/LOGNAME/SHELL: o `claude`
+        // precisa deles para aceder às credenciais (Keychain no macOS). Sob a SAPI
+        // cli-server (php artisan serve) o Symfony Process não os propaga, o que
+        // deixava o `claude` "Not logged in" mesmo com HOME definido.
+        $garantir = [
+            'HOME' => getenv('HOME') ?: ($env['HOME'] ?? ($pw['dir'] ?? '')),
+            'PATH' => getenv('PATH') ?: ($env['PATH'] ?? '/usr/local/bin:/usr/bin:/bin'),
+            'USER' => getenv('USER') ?: ($env['USER'] ?? ($pw['name'] ?? '')),
+            'LOGNAME' => getenv('LOGNAME') ?: ($env['LOGNAME'] ?? ($pw['name'] ?? '')),
+            'SHELL' => getenv('SHELL') ?: ($env['SHELL'] ?? ($pw['shell'] ?? '/bin/sh')),
+        ];
+        foreach ($garantir as $chave => $valor) {
+            if ((string) $valor !== '') {
+                $env[$chave] = (string) $valor;
+            }
         }
 
         return $env;
+    }
+
+    /** Variáveis que marcam uma sessão Claude Code em curso (a remover do subprocesso). */
+    private function ehMarcadorSessao(string $chave): bool
+    {
+        return in_array($chave, self::MARCADORES_SESSAO, true) || str_starts_with($chave, 'CLAUDE_CODE');
     }
 
     /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */

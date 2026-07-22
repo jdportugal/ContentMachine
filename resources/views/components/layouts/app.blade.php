@@ -30,6 +30,7 @@
                         ['route' => 'monitorizacao',   'label' => 'Monitorização',     'sub' => 'Redes sociais',      'color' => '#b5533f', 'glyph' => '❧'],
                         ['route' => 'clips',           'label' => 'Gerador de Clips',  'sub' => 'Vídeo',              'color' => '#c89b3c', 'glyph' => '✂'],
                         ['route' => 'clips-animados',  'label' => 'Clips Animados',    'sub' => 'Animação',           'color' => '#1f7a7a', 'glyph' => '❈'],
+                        ['route' => 'ativos',          'label' => 'Ativos',            'sub' => 'Media · Música',     'color' => '#a86f4a', 'glyph' => '♫'],
                         ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#8b6db0', 'glyph' => '❦'],
                         ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#6fbf73', 'glyph' => '⌛'],
                         ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#d8a24a', 'glyph' => '☙'],
@@ -68,6 +69,28 @@
                 {{ $slot }}
             </div>
         </main>
+    </div>
+
+    {{-- Toasts globais (canto inferior direito). Ao nível do <body>, fora do
+         scroller/transform, para o position:fixed fixar ao ecrã. Ouve o evento
+         'toast' despachado por qualquer componente Livewire. --}}
+    <div x-data="{ toasts: [] }"
+         @toast.window="const id = Date.now() + Math.random();
+                        toasts.push({ id, message: $event.detail.message, type: $event.detail.type || 'ok' });
+                        setTimeout(() => { toasts = toasts.filter(t => t.id !== id) }, 4500)"
+         style="position:fixed; bottom:1rem; right:1rem; z-index:9999; width:20rem; max-width:90vw; display:flex; flex-direction:column; gap:.5rem; pointer-events:none;">
+        <template x-for="t in toasts" :key="t.id">
+            <div x-transition.opacity
+                 style="pointer-events:auto;"
+                 :style="t.type === 'erro'
+                    ? 'border:1px solid rgba(181,83,63,.6); color:#d98b7a;'
+                    : 'border:1px solid rgba(111,191,115,.6); color:#8fce93;'"
+                 class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
+                <span x-text="t.type === 'erro' ? '✕' : '✓'"></span>
+                <span x-text="t.message" class="flex-1 break-words"></span>
+                <button type="button" @click="toasts = toasts.filter(x => x.id !== t.id)" class="opacity-50 hover:opacity-100">×</button>
+            </div>
+        </template>
     </div>
 
     @livewireScripts

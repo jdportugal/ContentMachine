@@ -63,6 +63,17 @@ return [
         'key' => env('ANTHROPIC_API_KEY'),
     ],
 
+    // Gerador de Clips — motor LOCAL e independente (ffmpeg + Whisper), sem API
+    // externa. Reimplementa a lógica do serviço Flask "ShortsCreator".
+    'shorts' => [
+        'ffmpeg' => env('FFMPEG_BINARY', 'ffmpeg'),
+        'ffprobe' => env('FFPROBE_BINARY', 'ffprobe'),
+        'python' => env('WHISPER_PYTHON', 'python3'),
+        'whisper_model' => env('WHISPER_MODEL', 'tiny'),
+        'transcribe_script' => base_path('scripts/transcribe.py'),
+        'fonts_path' => resource_path('fonts'),
+    ],
+
     'youtube' => [
         'key' => env('YOUTUBE_API_KEY'),
     ],

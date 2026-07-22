@@ -23,6 +23,9 @@ class Definicoes extends Component
     /** Canais a agregar — lista de URLs por plataforma. @var array<string,array<int,string>> */
     public array $canais = [];
 
+    /** @var array<string,string> */
+    public array $shorts = [];
+
     public ?string $guardado = null;
 
     public function mount(SettingsRepository $definicoes): void
@@ -31,6 +34,7 @@ class Definicoes extends Component
 
         $this->geral = $tudo['geral'];
         $this->perfis = $tudo['perfis'];
+        $this->shorts = $tudo['shorts'];
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
@@ -49,6 +53,7 @@ class Definicoes extends Component
             'canais' => collect($this->canais)
                 ->map(fn (array $lista) => array_values(array_filter(array_map('trim', $lista))))
                 ->all(),
+            'shorts' => $this->shorts,
         ]);
 
         $this->guardado = now()->translatedFormat('H:i');
