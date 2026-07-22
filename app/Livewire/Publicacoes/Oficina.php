@@ -195,9 +195,10 @@ class Oficina extends Component
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
 
+        // Fila 'media' (lenta) — separada da redação, para não a bloquear.
         GerarImagensJob::dispatch(
             $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken,
-        );
+        )->onQueue('media');
 
         $this->verificarImagens();
     }
