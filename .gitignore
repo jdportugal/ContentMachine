@@ -28,3 +28,6 @@ Thumbs.db
 
 # Imagens geradas das publicações (SVG/URLs)
 /public/media/
+
+# Playwright MCP snapshots
+/.playwright-mcp/
