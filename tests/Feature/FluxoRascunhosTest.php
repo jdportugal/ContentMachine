@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\Publicacoes\Posts;
+use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Rascunhos;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
@@ -31,7 +31,7 @@ class FluxoRascunhosTest extends TestCase
 
     public function test_criar_rascunho_grava_no_vault(): void
     {
-        Livewire::test(Posts::class)
+        Livewire::test(Oficina::class, ['tipo' => 'post'])
             ->set('titulo', 'Peça de teste')
             ->set('legenda', 'Corpo da peça de teste.')
             ->set('plataforma', 'instagram')
