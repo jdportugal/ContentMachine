@@ -70,6 +70,43 @@ class OficinaTest extends TestCase
         $this->assertStringContainsString('media/publicacoes/', $previews[0]);
     }
 
+    public function test_editar_publicacao_existente_actualiza_a_mesma_nota(): void
+    {
+        $vault = app(VaultContract::class);
+        $nota = $vault->create('rascunhos', [
+            'titulo' => 'Original', 'tipo' => 'carrossel', 'formato' => 'carousel',
+            'plataforma' => 'instagram', 'estado' => 'rascunho', 'origem' => 'publicacoes/oficina', 'cartoes' => 2,
+        ], "## Capa\n\nA promessa\n\n---\n\n## Dois\n\nO conteúdo");
+
+        $c = Livewire::withQueryParams(['nota' => $nota->slug()])
+            ->test(Oficina::class, ['tipo' => 'carrossel'])
+            ->assertSet('titulo', 'Original')
+            ->assertSet('notaPath', $nota->path);
+
+        // O corpo foi reconstruído em cartões editáveis.
+        $this->assertSame('Capa', $c->get('slides')[0]['titulo']);
+        $this->assertSame('O conteúdo', $c->get('slides')[1]['texto']);
+
+        $c->set('titulo', 'Alterado')->call('criarRascunho')->assertSet('guardado', 'Alterado');
+
+        // Actualizou a MESMA nota (não criou outra).
+        $notas = $vault->all('rascunhos');
+        $this->assertCount(1, $notas);
+        $this->assertSame('Alterado', $notas->first()->get('titulo'));
+        $this->assertSame('carrossel', $notas->first()->get('tipo'));
+    }
+
+    public function test_index_lista_publicacoes_criadas(): void
+    {
+        app(VaultContract::class)->create('rascunhos', [
+            'titulo' => 'Minha peça', 'tipo' => 'post', 'origem' => 'publicacoes/oficina',
+        ], 'corpo');
+
+        Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
+            ->assertSee('Minha peça')
+            ->assertSee('Publicações criadas');
+    }
+
     public function test_gerar_imagens_despacha_job(): void
     {
         \Illuminate\Support\Facades\Queue::fake();

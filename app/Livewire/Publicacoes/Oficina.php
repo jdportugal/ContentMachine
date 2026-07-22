@@ -51,7 +51,10 @@ class Oficina extends Component
 
     public bool $aGerar = false;
 
-    public function mount(string $tipo, PublicacaoKinds $kinds): void
+    /** Caminho da nota a editar (null = nova publicação). */
+    public ?string $notaPath = null;
+
+    public function mount(string $tipo, PublicacaoKinds $kinds, VaultContract $vault): void
     {
         abort_unless($kinds->exists($tipo), 404);
 
@@ -63,6 +66,52 @@ class Oficina extends Component
             $min = max(2, $kinds->cartoes($tipo)['min']);
             $this->slides = array_fill(0, $min, ['titulo' => '', 'texto' => '']);
         }
+
+        // Edição: ?nota=<slug> → carrega a publicação existente do vault.
+        $slug = (string) request()->query('nota', '');
+        if ($slug !== '') {
+            $this->carregarNota($vault, $slug);
+        }
+    }
+
+    /** Pré-preenche a oficina com uma publicação já gravada. */
+    private function carregarNota(VaultContract $vault, string $slug): void
+    {
+        $nota = $vault->get('rascunhos/'.$slug.'.md');
+        if (! $nota) {
+            return;
+        }
+
+        $this->notaPath = $nota->path;
+        $this->titulo = (string) $nota->get('titulo', '');
+        $this->plataforma = (string) $nota->get('plataforma', $this->plataforma);
+        $this->previews = array_values((array) $nota->get('imagens', []));
+
+        if ($this->ehCarrossel()) {
+            $slides = $this->slidesDoCorpo($nota->body);
+            $this->slides = $slides !== [] ? $slides : $this->slides;
+        } else {
+            $this->legenda = $nota->body;
+        }
+    }
+
+    /** Reconstrói os cartões a partir do corpo Markdown («## Título» + «---»). */
+    private function slidesDoCorpo(string $body): array
+    {
+        $slides = [];
+        foreach (preg_split('/\n\n---\n\n/', trim($body)) ?: [] as $bloco) {
+            $bloco = trim($bloco);
+            if ($bloco === '') {
+                continue;
+            }
+            if (preg_match('/^##\s*(.+?)(?:\n(.*))?$/s', $bloco, $m)) {
+                $slides[] = ['titulo' => trim($m[1]), 'texto' => trim($m[2] ?? '')];
+            } else {
+                $slides[] = ['titulo' => '', 'texto' => $bloco];
+            }
+        }
+
+        return $slides;
     }
 
     // --------------------------------------------------------------- helpers
@@ -248,22 +297,38 @@ class Oficina extends Component
 
         $formato = $this->kinds()->formato($this->tipo);
 
-        $nota = $vault->create('rascunhos', [
+        $frontmatter = [
             'titulo' => $this->titulo,
             'tipo' => $this->tipo,
             'formato' => $formato,
             'gabarito' => (string) ($this->kind['gabarito'] ?? ''),
             'plataforma' => $this->plataforma,
-            'estado' => 'rascunho',
             'origem' => 'publicacoes/oficina',
             'cartoes' => count($plano->slides),
             'tags' => array_values(array_unique([$this->tipo, $this->plataforma])),
-        ], $plano->toBody($formato));
-
-        // Reutiliza as imagens já desenhadas (ficheiros duráveis em public/media).
+        ];
         if ($this->previews !== []) {
-            $vault->updateFrontmatter($nota->path, ['imagens' => array_values($this->previews)]);
+            $frontmatter['imagens'] = array_values($this->previews);
         }
+
+        $body = $plano->toBody($formato);
+
+        if ($this->notaPath !== null) {
+            // Edição: preserva estado/agendamento e o slug, actualiza o resto.
+            $existente = $vault->get($this->notaPath);
+            $frontmatter = array_merge(
+                (array) ($existente?->frontmatter ?? []),
+                $frontmatter,
+                ['estado' => $existente?->get('estado', 'rascunho')],
+            );
+            $nota = $vault->put($this->notaPath, $frontmatter, $body);
+            $this->guardado = $nota->title();
+
+            return; // fica na peça editada
+        }
+
+        $frontmatter['estado'] = 'rascunho';
+        $nota = $vault->create('rascunhos', $frontmatter, $body);
 
         $this->guardado = $nota->title();
         $this->previews = [];
@@ -273,6 +338,14 @@ class Oficina extends Component
             $this->titulo = '';
         } else {
             $this->reset('titulo', 'legenda');
+        }
+    }
+
+    public function remover(VaultContract $vault): void
+    {
+        if ($this->notaPath !== null) {
+            $vault->delete($this->notaPath);
+            $this->redirect(route('publicacoes'), navigate: true);
         }
     }
 

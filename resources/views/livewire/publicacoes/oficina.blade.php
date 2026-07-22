@@ -12,8 +12,11 @@
         <div class="lg:col-span-3 space-y-6">
             @if ($guardado)
                 <div class="border border-good/40 bg-good/10 text-good rounded-sm px-4 py-3 font-mono text-sm">
-                    ✓ Rascunho «{{ $guardado }}» guardado no vault. Veja em
-                    <a href="{{ route('rascunhos') }}" class="underline">Rascunhos</a>.
+                    @if ($notaPath)
+                        ✓ Alterações a «{{ $guardado }}» guardadas.
+                    @else
+                        ✓ Rascunho «{{ $guardado }}» guardado. Veja em <a href="{{ route('publicacoes') }}" class="underline">Publicações</a>.
+                    @endif
                 </div>
             @endif
 
@@ -46,7 +49,7 @@
             </x-panel>
 
             {{-- Composição manual --}}
-            <x-panel eyebrow="Composição" :title="'Nova peça'" :glyph="$this->kind['glifo'] ?? '❦'">
+            <x-panel eyebrow="Composição" :title="$notaPath ? 'Editar peça' : 'Nova peça'" :glyph="$this->kind['glifo'] ?? '❦'">
                 <form wire:submit="criarRascunho" class="space-y-4">
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
@@ -100,10 +103,10 @@
                         </div>
                     @endif
 
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap gap-3 items-center">
                         <button type="submit"
                                 class="bg-teal text-papyrus font-display text-lg px-6 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved">
-                            Guardar rascunho
+                            {{ $notaPath ? 'Guardar alterações' : 'Guardar rascunho' }}
                         </button>
                         @if ($aGerar)
                             <div wire:poll.1500ms="verificarImagens" class="self-center flex items-center gap-2 font-mono text-xs text-gold">
@@ -115,6 +118,10 @@
                                     class="border border-gold/50 text-gold hover:bg-gold/10 rounded-sm px-5 py-2 font-mono text-xs transition self-center">
                                 ❖ gerar imagens
                             </button>
+                        @endif
+                        @if ($notaPath)
+                            <button type="button" wire:click="remover" wire:confirm="Remover esta publicação do vault?"
+                                    class="ml-auto text-ink-faint hover:text-bad font-mono text-xs">remover</button>
                         @endif
                     </div>
                 </form>
