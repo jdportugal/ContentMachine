@@ -19,15 +19,23 @@
     @forelse ($rascunhos as $nota)
         @php
             $tipo = $nota->get('tipo', 'peça');
+            $tipoLabel = config('contentmachine.publicacoes.tipos.'.$tipo.'.label', $tipo);
+            $cartoes = (int) $nota->get('cartoes', 0);
+            $imagens = (array) $nota->get('imagens', []);
+            $capa = $imagens[0] ?? null;
             $plataforma = $nota->get('plataforma');
             $meta = $plataforma ? config('contentmachine.plataformas_meta.'.$plataforma) : null;
             $agendado = $nota->get('estado') === 'agendado';
         @endphp
         <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 mb-4 shadow-engraved" wire:key="{{ $nota->slug() }}">
             <div class="flex items-start justify-between gap-4">
+                @if ($capa)
+                    <img src="{{ asset($capa) }}" alt="capa" class="hidden sm:block w-16 h-20 object-cover rounded-sm border border-ink-soft/20 shrink-0">
+                @endif
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <x-badge tone="teal">{{ $tipo }}</x-badge>
+                        <x-badge tone="teal">{{ $tipoLabel }}</x-badge>
+                        @if ($cartoes > 1)<x-badge tone="leather">{{ $cartoes }} cartões</x-badge>@endif
                         @if ($meta)<x-badge tone="leather" style="color: {{ $meta['cor'] }}">{{ $meta['label'] }}</x-badge>@endif
                         @if ($agendado)
                             <x-badge tone="good">✓ agendado · {{ \Illuminate\Support\Carbon::parse($nota->get('agendado_para'))->translatedFormat('d M Y') }}</x-badge>
