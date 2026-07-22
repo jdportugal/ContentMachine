@@ -8,6 +8,7 @@ use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -37,9 +38,27 @@ class Noticias extends Component
 
     public ?string $relatorioGuardado = null;
 
-    public function mount(): void
+    /** Caminho (no vault) do relatório arquivado atualmente em vista. */
+    public string $relatorioSelecionado = '';
+
+    public function mount(VaultContract $vault): void
     {
         $this->dataRelatorio = now()->toDateString();
+
+        // Abre no relatório mais recente já arquivado (se existir).
+        $ultimo = $this->notaUltimoRelatorio($vault->all('noticias'));
+        $this->relatorioSelecionado = $ultimo?->path ?? '';
+        $this->relatorio = $this->dadosDe($ultimo);
+    }
+
+    /** Ao escolher outro relatório no seletor, carrega-o do vault para vista. */
+    public function updatedRelatorioSelecionado(VaultContract $vault): void
+    {
+        $nota = $this->relatorioSelecionado !== '' ? $vault->get($this->relatorioSelecionado) : null;
+
+        $this->relatorio = $nota && $nota->get('tipo') === 'relatorio'
+            ? $this->dadosDe($nota)
+            : null;
     }
 
     /**
@@ -100,6 +119,8 @@ class Noticias extends Component
 
         $this->relatorio = $relatorio;
         $this->relatorioGuardado = $nota->path;
+        // Passa a vista para o relatório recém-arquivado.
+        $this->relatorioSelecionado = $nota->path;
     }
 
     public function render(VaultContract $vault)
@@ -120,15 +141,15 @@ class Noticias extends Component
         $itensDoDia = $itens->filter(fn (VaultNote $n) => (string) $n->get('data') === $dia)->values();
         $topicosDoDia = $this->notaTopicos($notas, $dia);
 
-        // Sem relatório desta sessão? Mostra o último guardado (se existir).
-        $relatorio = $this->relatorio ?? $this->ultimoRelatorio($notas);
-
+        // O relatório em vista é a propriedade pública $relatorio (partilhada
+        // automaticamente com a view pelo Livewire); aqui só listamos os
+        // arquivados para o seletor.
         return view('livewire.noticias', [
             'dias' => $dias,
             'diaAtivo' => $dia,
             'itensDoDia' => $itensDoDia,
             'topicosHtml' => $topicosDoDia?->html(),
-            'relatorio' => $relatorio,
+            'relatoriosPassados' => $this->relatoriosPassados($notas),
         ]);
     }
 
@@ -137,14 +158,46 @@ class Noticias extends Component
         return $notas->first(fn (VaultNote $n) => $n->get('tipo') === 'topicos' && (string) $n->get('data') === $dia);
     }
 
-    /** @return array<string,mixed>|null */
-    private function ultimoRelatorio(Collection $notas): ?array
+    /** Todas as notas de relatório arquivadas, da mais recente para a mais antiga. */
+    private function notasRelatorios(Collection $notas): Collection
     {
-        $nota = $notas
+        return $notas
             ->filter(fn (VaultNote $n) => $n->get('tipo') === 'relatorio' && filled($n->get('dados')))
             ->sortByDesc(fn (VaultNote $n) => (string) $n->get('gerado_em', $n->get('inicio', '')))
-            ->first();
+            ->values();
+    }
 
+    private function notaUltimoRelatorio(Collection $notas): ?VaultNote
+    {
+        return $this->notasRelatorios($notas)->first();
+    }
+
+    /**
+     * Opções para o seletor de relatórios anteriores: caminho + rótulo legível.
+     *
+     * @return array<int,array{path:string,rotulo:string}>
+     */
+    private function relatoriosPassados(Collection $notas): array
+    {
+        return $this->notasRelatorios($notas)
+            ->map(fn (VaultNote $n) => ['path' => $n->path, 'rotulo' => $this->rotuloRelatorio($n)])
+            ->all();
+    }
+
+    /** Rótulo curto para o seletor, ex.: «Dia · 22 jul 2026 · 12 item(s)». */
+    private function rotuloRelatorio(VaultNote $n): string
+    {
+        $modo = Str::ucfirst((string) $n->get('modo', 'dia'));
+        $inicio = (string) $n->get('inicio', '');
+        $data = $inicio !== '' ? Carbon::parse($inicio)->translatedFormat('d M Y') : '—';
+        $total = (int) $n->get('total', 0);
+
+        return "{$modo} · {$data} · {$total} item(s)";
+    }
+
+    /** @return array<string,mixed>|null */
+    private function dadosDe(?VaultNote $nota): ?array
+    {
         if (! $nota) {
             return null;
         }

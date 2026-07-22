@@ -97,12 +97,55 @@ class RelatorioTest extends TestCase
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', $hoje)
             ->call('criarRelatorio')
-            ->assertSet('relatorio', fn ($v) => is_array($v) && $v['total'] === 1 && filled($v['redacao']));
+            ->assertSet('relatorio', fn ($v) => is_array($v) && $v['total'] === 1 && filled($v['redacao']))
+            // Ao criar, a vista passa a apontar para o relatório recém-arquivado.
+            ->assertSet('relatorioSelecionado', "noticias/relatorios/dia-{$hoje}.md");
 
         $nota = $this->vault->get("noticias/relatorios/dia-{$hoje}.md");
         $this->assertNotNull($nota);
         $this->assertSame('relatorio', $nota->get('tipo'));
         $this->assertNotEmpty($nota->get('dados'));
+    }
+
+    /** Grava um relatório arquivado diretamente no vault (sem passar pela geração). */
+    private function semearRelatorio(string $slug, string $modo, string $inicio, string $titulo, int $total): void
+    {
+        $this->vault->put("noticias/relatorios/{$slug}.md", [
+            'titulo' => $titulo,
+            'tipo' => 'relatorio',
+            'modo' => $modo,
+            'inicio' => $inicio,
+            'fim' => $inicio,
+            'total' => $total,
+            'gerado_em' => $inicio.'T09:00:00+00:00',
+            'estado' => 'arquivado',
+            'tags' => ['noticias', 'relatorio', $modo],
+            'dados' => json_encode(['titulo' => $titulo, 'modo' => $modo, 'total' => $total, 'resumo' => 'x'], JSON_UNESCAPED_UNICODE),
+        ], "# {$titulo}");
+    }
+
+    public function test_seletor_lista_relatorios_arquivados_e_abre_no_mais_recente(): void
+    {
+        $this->semearRelatorio('dia-2026-07-20', 'dia', '2026-07-20', 'Antigo', 3);
+        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Recente', 12);
+
+        Livewire::test(Noticias::class)
+            // Abre no mais recente por defeito.
+            ->assertSet('relatorioSelecionado', 'noticias/relatorios/dia-2026-07-22.md')
+            ->assertViewHas('relatoriosPassados', fn ($lista) => count($lista) === 2
+                && $lista[0]['path'] === 'noticias/relatorios/dia-2026-07-22.md')
+            // Mostra o mais recente.
+            ->assertViewHas('relatorio', fn ($r) => is_array($r) && $r['titulo'] === 'Recente');
+    }
+
+    public function test_selecionar_relatorio_antigo_carrega_esse_relatorio(): void
+    {
+        $this->semearRelatorio('dia-2026-07-20', 'dia', '2026-07-20', 'Antigo', 3);
+        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Recente', 12);
+
+        Livewire::test(Noticias::class)
+            ->set('relatorioSelecionado', 'noticias/relatorios/dia-2026-07-20.md')
+            ->assertViewHas('relatorio', fn ($r) => is_array($r) && $r['titulo'] === 'Antigo' && $r['total'] === 3);
     }
 
     private function rrmdir(string $dir): void

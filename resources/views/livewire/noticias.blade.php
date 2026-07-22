@@ -155,6 +155,20 @@
         {{-- Relatório gerado --}}
         <div class="lg:col-span-3">
             <x-panel>
+                @if (!empty($relatoriosPassados))
+                    <div class="flex flex-wrap items-center gap-3 mb-4 pb-4 border-b border-ink-soft/15">
+                        <label for="relatorioSelecionado" class="eyebrow shrink-0">Relatórios anteriores</label>
+                        <select id="relatorioSelecionado" wire:model.live="relatorioSelecionado"
+                                class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5
+                                       text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                            @foreach ($relatoriosPassados as $r)
+                                <option value="{{ $r['path'] }}">{{ $r['rotulo'] }}</option>
+                            @endforeach
+                        </select>
+                        <span wire:loading wire:target="relatorioSelecionado" class="text-ink-faint font-mono text-xs shrink-0">a abrir…</span>
+                    </div>
+                @endif
+
                 @if ($relatorio)
                     <div class="flex items-start justify-between gap-4 mb-2">
                         <div>
