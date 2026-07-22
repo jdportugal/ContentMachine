@@ -69,6 +69,8 @@ class OficinaTest extends TestCase
     public function test_redigir_com_ia_usa_heuristica_quando_llm_indisponivel(): void
     {
         // LlmClient que nunca produz texto → força a heurística.
+        // Fila é síncrona nos testes, por isso o job corre já e o resultado
+        // é aplicado no mesmo pedido (redigirComIa → verificarPlano).
         $this->app->bind(LlmClient::class, fn () => new class extends LlmClient
         {
             public function texto(string $prompt, bool $comFerramentas = false): ?string
@@ -80,7 +82,8 @@ class OficinaTest extends TestCase
         $componente = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
             ->set('brief', "Primeira ideia. Segunda ideia. Terceira ideia.")
             ->call('redigirComIa')
-            ->assertHasNoErrors();
+            ->assertHasNoErrors()
+            ->assertSet('aRedigir', false); // resolvido de imediato (fila sync)
 
         $this->assertGreaterThanOrEqual(2, count($componente->get('slides')));
 
@@ -89,5 +92,17 @@ class OficinaTest extends TestCase
             ->set('brief', 'Uma ideia directa.')
             ->call('redigirComIa')
             ->assertSet('legenda', 'Uma ideia directa.');
+    }
+
+    public function test_redigir_com_ia_despacha_job_de_planeamento(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('brief', 'Um tema qualquer.')
+            ->call('redigirComIa')
+            ->assertSet('aRedigir', true); // job em fila, ainda por processar
+
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\PlanearPublicacaoJob::class);
     }
 }

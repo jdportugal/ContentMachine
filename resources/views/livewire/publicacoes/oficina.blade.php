@@ -23,15 +23,25 @@
                 <textarea wire:model="brief" rows="3" placeholder="Ex.: cinco termos essenciais para quem começa a usar IA…"
                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none"></textarea>
                 @error('brief') <span class="text-bad text-sm">{{ $message }}</span> @enderror
-                <div class="mt-3">
-                    <button type="button" wire:click="redigirComIa" wire:loading.attr="disabled"
-                            class="border border-teal/50 text-teal hover:bg-teal/10 rounded-sm px-4 py-1.5 font-mono text-xs transition">
-                        <span wire:loading.remove wire:target="redigirComIa">✶ redigir com IA</span>
-                        <span wire:loading wire:target="redigirComIa">a redigir…</span>
-                    </button>
+                <div class="mt-3 flex items-center gap-3">
+                    @if ($aRedigir)
+                        <div wire:poll.1000ms="verificarPlano" class="flex items-center gap-2 font-mono text-xs text-teal">
+                            <span class="inline-block animate-pulse">◌ a IA está a redigir…</span>
+                        </div>
+                        <button type="button" wire:click="cancelarRedacao"
+                                class="text-ink-faint hover:text-bad font-mono text-xs">cancelar</button>
+                    @else
+                        <button type="button" wire:click="redigirComIa"
+                                class="border border-teal/50 text-teal hover:bg-teal/10 rounded-sm px-4 py-1.5 font-mono text-xs transition">
+                            ✶ redigir com IA
+                        </button>
+                    @endif
                 </div>
                 @if ($aviso)
                     <p class="mt-3 text-ink-soft text-sm italic">{{ $aviso }}</p>
+                @endif
+                @if ($aRedigir)
+                    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">Precisa de um worker a correr: <span class="text-teal">php artisan queue:work</span></p>
                 @endif
             </x-panel>
 

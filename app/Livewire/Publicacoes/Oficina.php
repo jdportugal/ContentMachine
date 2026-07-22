@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Publicacoes;
 
+use App\Jobs\PlanearPublicacaoJob;
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\Dto\SlidePlano;
 use App\Services\Publicacoes\PublicacaoKinds;
-use App\Services\Publicacoes\PublicacaoPlanner;
 use App\Services\Publicacoes\Rendering\SlideRenderer;
 use App\Services\Vault\VaultContract;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -39,6 +41,11 @@ class Oficina extends Component
     public ?string $guardado = null;
 
     public ?string $aviso = null;
+
+    /** Redação em curso: token do plano em fila + estado da sondagem. */
+    public ?string $planToken = null;
+
+    public bool $aRedigir = false;
 
     public function mount(string $tipo, PublicacaoKinds $kinds): void
     {
@@ -103,7 +110,13 @@ class Oficina extends Component
         }
     }
 
-    public function redigirComIa(PublicacaoPlanner $planner): void
+    /**
+     * Despacha a redação para uma fila e passa a sondar o resultado. A geração
+     * corre num worker («php artisan queue:work»), onde o CLI do Claude autentica
+     * — ao contrário do processo do servidor web. Se a fila for síncrona, o
+     * trabalho corre já e o resultado é aplicado de imediato.
+     */
+    public function redigirComIa(): void
     {
         $this->aviso = null;
 
@@ -113,25 +126,63 @@ class Oficina extends Component
             return;
         }
 
-        $plano = $planner->planear($this->tipo, $this->brief, $this->plataforma);
+        $this->planToken = (string) Str::uuid();
+        $this->aRedigir = true;
+        $this->aviso = 'A IA está a redigir… (requer um worker: «php artisan queue:work»).';
+
+        PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken);
+
+        // Fila síncrona (ex.: testes): o resultado já está pronto.
+        $this->verificarPlano();
+    }
+
+    /** Sondado por wire:poll enquanto $aRedigir: aplica o plano quando pronto. */
+    public function verificarPlano(): void
+    {
+        if (! $this->aRedigir || $this->planToken === null) {
+            return;
+        }
+
+        $r = Cache::get(PlanearPublicacaoJob::key($this->planToken));
+
+        if ($r === null) {
+            return; // ainda a processar
+        }
+
+        $this->aRedigir = false;
+        Cache::forget(PlanearPublicacaoJob::key($this->planToken));
+
+        if (! empty($r['erro'])) {
+            $this->aviso = 'A redação falhou. Verifique se o worker está a correr e tente de novo.';
+
+            return;
+        }
 
         if ($this->titulo === '') {
-            $this->titulo = $plano->titulo;
+            $this->titulo = (string) ($r['titulo'] ?? '');
         }
 
         if ($this->ehCarrossel()) {
             $this->slides = array_map(
-                fn (SlidePlano $s) => ['titulo' => $s->titulo, 'texto' => $s->texto],
-                $plano->slides,
+                fn ($s) => ['titulo' => (string) ($s['titulo'] ?? ''), 'texto' => (string) ($s['texto'] ?? '')],
+                $r['slides'] ?? [],
             );
         } else {
-            $this->legenda = $plano->legenda !== '' ? $plano->legenda : ($plano->slides[0]->texto ?? '');
+            $this->legenda = ($r['legenda'] ?? '') !== ''
+                ? (string) $r['legenda']
+                : (string) ($r['slides'][0]['texto'] ?? '');
         }
 
-        // Transparência: distingue texto da IA de um rascunho local (heurística).
-        $this->aviso = $planner->fonte === 'ia'
-            ? 'Redigido pela IA ('.($planner->fornecedor ?: 'LLM').'). Reveja e ajuste antes de guardar.'
-            : 'IA indisponível neste contexto — gerei um rascunho local a partir do seu texto. É propositadamente básico; ligue um fornecedor de LLM para redação forte.';
+        $this->aviso = ($r['fonte'] ?? null) === 'ia'
+            ? 'Redigido pela IA ('.($r['fornecedor'] ?: 'LLM').'). Reveja e ajuste antes de guardar.'
+            : 'IA indisponível neste contexto — gerei um rascunho local a partir do seu texto. É propositadamente básico; para redação forte, corra «php artisan queue:work» num terminal com a sua sessão do Claude.';
+    }
+
+    public function cancelarRedacao(): void
+    {
+        $this->aRedigir = false;
+        $this->planToken = null;
+        $this->aviso = null;
     }
 
     public function gerarImagens(SlideRenderer $renderer): void
