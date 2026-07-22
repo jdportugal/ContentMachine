@@ -17,6 +17,33 @@ class PublicacaoPlan
         public array $slides,
     ) {}
 
+    /**
+     * Constrói um plano a partir do estado do formulário da oficina.
+     *
+     * @param  array<int,array{titulo?:string,texto?:string}>  $slides
+     * @param  array<int,string>  $tags
+     */
+    public static function daOficina(bool $carrossel, string $titulo, string $legenda, array $slides, array $tags): self
+    {
+        if ($carrossel) {
+            $out = [];
+            foreach ($slides as $s) {
+                $t = trim((string) ($s['titulo'] ?? ''));
+                $x = trim((string) ($s['texto'] ?? ''));
+                if ($t === '' && $x === '') {
+                    continue;
+                }
+                $out[] = new SlidePlano(count($out) + 1, $t !== '' ? $t : 'Cartão '.(count($out) + 1), $x);
+            }
+
+            return new self($titulo, '', $tags, $out);
+        }
+
+        return new self($titulo, $legenda, $tags, [
+            new SlidePlano(1, $titulo !== '' ? $titulo : 'Peça', $legenda),
+        ]);
+    }
+
     /** @param array<string,mixed> $dados */
     public static function fromArray(array $dados): self
     {

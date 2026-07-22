@@ -53,17 +53,34 @@ class OficinaTest extends TestCase
         $this->assertStringContainsString('---', $nota->body);
     }
 
-    public function test_gerar_imagens_preenche_previews_com_svg(): void
+    public function test_gerar_imagens_preenche_previews_com_ficheiros(): void
     {
-        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+        // Fila síncrona nos testes → o job corre já e as imagens ficam prontas.
+        $componente = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
             ->set('titulo', 'Com imagens')
             ->set('slides', [
                 ['titulo' => 'Capa', 'texto' => 'A'],
                 ['titulo' => 'Dois', 'texto' => 'B'],
             ])
             ->call('gerarImagens')
-            ->assertCount('previews', 2)
-            ->assertSee('<svg', false);
+            ->assertSet('aGerar', false);
+
+        $previews = $componente->get('previews');
+        $this->assertCount(2, $previews);
+        $this->assertStringContainsString('media/publicacoes/', $previews[0]);
+    }
+
+    public function test_gerar_imagens_despacha_job(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('titulo', 'Fila')
+            ->set('slides', [['titulo' => 'Capa', 'texto' => 'A'], ['titulo' => 'Dois', 'texto' => 'B']])
+            ->call('gerarImagens')
+            ->assertSet('aGerar', true);
+
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class);
     }
 
     public function test_redigir_com_ia_usa_heuristica_quando_llm_indisponivel(): void

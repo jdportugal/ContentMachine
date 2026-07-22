@@ -27,11 +27,13 @@ class KieSlideRenderer implements SlideRenderer
         }
 
         $proporcao = (string) ($kind['proporcao'] ?? '1:1');
+        $total = count($plan->slides);
         $urls = [];
         $ancora = null; // 1.º cartão serve de referência aos seguintes (consistência visual).
 
-        foreach ($plan->slides as $slide) {
-            $taskId = $this->submeter($chave, $this->prompt($slide, $kind), $proporcao, $ancora);
+        foreach ($plan->slides as $i => $slide) {
+            $prompt = $this->prompt($slide, $kind, $i === 0, $i + 1, $total);
+            $taskId = $this->submeter($chave, $prompt, $proporcao, $ancora);
             $url = $this->sondar($chave, $taskId);
             $urls[] = $url;
             $ancora ??= $url;
@@ -40,15 +42,32 @@ class KieSlideRenderer implements SlideRenderer
         return $urls;
     }
 
-    private function prompt(SlidePlano $s, array $kind): string
+    /**
+     * Prompt para o modelo com texto (nano-banana-pro): cartão editorial da
+     * IATECA com o texto EXACTO, legível e correctamente escrito.
+     */
+    private function prompt(SlidePlano $s, array $kind, bool $capa, int $ordem, int $total): string
     {
-        $gabarito = (string) ($kind['gabarito'] ?? 'quadrado');
-        $regraTexto = 'Renderiza TODO o texto na imagem como letras reais, nítidas e correctamente escritas em português. Sem emojis.';
+        $proporcao = (string) ($kind['proporcao'] ?? '1:1');
+        $papel = $capa
+            ? 'É a CAPA do carrossel: título grande e central, muito legível.'
+            : 'É um cartão de CONTEÚDO ('.$ordem.' de '.$total.'): título no topo e o texto por baixo, com respiração.';
+
+        $texto = $s->texto !== '' ? 'TEXTO DE APOIO (exacto): «'.$s->texto.'»' : '';
 
         return trim(<<<PROMPT
-        Cartão editorial da IATECA, estética de biblioteca antiga (pergaminho, tinta,
-        filete a ouro), gabarito «{$gabarito}». Título: «{$s->titulo}». Texto: «{$s->texto}».
-        {$regraTexto}
+        Cartão para redes sociais da IATECA — uma biblioteca para a era das máquinas que pensam.
+        Estética: página de livro antigo / gravura. Fundo de pergaminho creme, tinta castanho-escura,
+        filete e ornamentos discretos a ouro velho, tipografia serifada elegante e centrada.
+        Sóbrio e culto. SEM pessoas, SEM logótipos de marcas, SEM emojis, SEM molduras de fotografia.
+        Proporção {$proporcao}. {$papel}
+
+        Compõe o seguinte texto, escrito EXACTAMENTE assim, em português europeu:
+        TÍTULO: «{$s->titulo}»
+        {$texto}
+
+        Regra de texto: renderiza TODO o texto como letras reais, nítidas, bem espaçadas e SEM erros
+        ortográficos. Não inventes, traduzas nem alteres palavras. O texto é o elemento central do cartão.
         PROMPT);
     }
 
@@ -66,7 +85,8 @@ class KieSlideRenderer implements SlideRenderer
         $r = Http::timeout(60)
             ->withToken($chave)
             ->post(rtrim((string) config('services.kie.base_url'), '/').'/api/v1/jobs/createTask', [
-                'model' => (string) config('services.kie.image_model'),
+                // Modelo com texto (nano-banana-pro): cartões são texto-intensivos.
+                'model' => (string) config('services.kie.text_model', 'nano-banana-pro'),
                 'input' => $input,
             ]);
 

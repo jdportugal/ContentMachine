@@ -78,6 +78,8 @@ return [
         'key' => env('KIE_API_KEY'),
         'base_url' => env('KIE_BASE_URL', 'https://api.kie.ai'),
         'image_model' => env('KIE_IMAGE_MODEL', 'nano-banana-2'),
+        // Modelo com melhor rendição de texto — usado nos cartões (texto-intensivos).
+        'text_model' => env('KIE_TEXT_IMAGE_MODEL', 'nano-banana-pro'),
     ],
 
 ];

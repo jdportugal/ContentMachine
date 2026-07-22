@@ -2,11 +2,10 @@
 
 namespace App\Livewire\Publicacoes;
 
+use App\Jobs\GerarImagensJob;
 use App\Jobs\PlanearPublicacaoJob;
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
-use App\Services\Publicacoes\Dto\SlidePlano;
 use App\Services\Publicacoes\PublicacaoKinds;
-use App\Services\Publicacoes\Rendering\SlideRenderer;
 use App\Services\Vault\VaultContract;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -47,6 +46,11 @@ class Oficina extends Component
 
     public bool $aRedigir = false;
 
+    /** Desenho de imagens em curso. */
+    public ?string $imgToken = null;
+
+    public bool $aGerar = false;
+
     public function mount(string $tipo, PublicacaoKinds $kinds): void
     {
         abort_unless($kinds->exists($tipo), 404);
@@ -78,17 +82,6 @@ class Oficina extends Component
     public function ehCarrossel(): bool
     {
         return $this->kinds()->formato($this->tipo) === 'carousel';
-    }
-
-    private function cor(): string
-    {
-        return (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
-    }
-
-    /** Definição do tipo enriquecida com a cor de acento da plataforma. */
-    private function kindCor(): array
-    {
-        return array_merge($this->kind, ['_cor' => $this->cor()]);
     }
 
     // ---------------------------------------------------------------- acções
@@ -185,7 +178,11 @@ class Oficina extends Component
         $this->aviso = null;
     }
 
-    public function gerarImagens(SlideRenderer $renderer): void
+    /**
+     * Despacha o desenho dos cartões para a fila (o kie.ai/nano-banana-pro é
+     * lento demais para o pedido web) e passa a sondar. Fila síncrona → pronto já.
+     */
+    public function gerarImagens(): void
     {
         $plano = $this->planoAtual();
 
@@ -195,10 +192,48 @@ class Oficina extends Component
             return;
         }
 
-        $this->previews = $renderer->render($plano, $this->kindCor());
+        $this->imgToken = (string) Str::uuid();
+        $this->aGerar = true;
+
+        GerarImagensJob::dispatch(
+            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken,
+        );
+
+        $this->verificarImagens();
     }
 
-    public function criarRascunho(VaultContract $vault, SlideRenderer $renderer): void
+    /** Sondado por wire:poll enquanto $aGerar: mostra as imagens quando prontas. */
+    public function verificarImagens(): void
+    {
+        if (! $this->aGerar || $this->imgToken === null) {
+            return;
+        }
+
+        $r = Cache::get(GerarImagensJob::key($this->imgToken));
+
+        if ($r === null) {
+            return;
+        }
+
+        $this->aGerar = false;
+        Cache::forget(GerarImagensJob::key($this->imgToken));
+
+        if (! empty($r['erro'])) {
+            $this->addError('slides', 'O desenho das imagens falhou. Confirme o worker e a chave do kie.ai.');
+
+            return;
+        }
+
+        $this->previews = $r['imagens'] ?? [];
+    }
+
+    public function cancelarImagens(): void
+    {
+        $this->aGerar = false;
+        $this->imgToken = null;
+    }
+
+    public function criarRascunho(VaultContract $vault): void
     {
         $this->validate($this->rules());
 
@@ -224,9 +259,9 @@ class Oficina extends Component
             'tags' => array_values(array_unique([$this->tipo, $this->plataforma])),
         ], $plano->toBody($formato));
 
-        $imagens = $this->escreverImagens($nota->slug(), $renderer->render($plano, $this->kindCor()));
-        if ($imagens !== []) {
-            $vault->updateFrontmatter($nota->path, ['imagens' => $imagens]);
+        // Reutiliza as imagens já desenhadas (ficheiros duráveis em public/media).
+        if ($this->previews !== []) {
+            $vault->updateFrontmatter($nota->path, ['imagens' => array_values($this->previews)]);
         }
 
         $this->guardado = $nota->title();
@@ -258,55 +293,13 @@ class Oficina extends Component
     /** Constrói um plano a partir do estado actual do formulário (sem IA). */
     private function planoAtual(): PublicacaoPlan
     {
-        if ($this->ehCarrossel()) {
-            $slides = [];
-            foreach ($this->slides as $s) {
-                $titulo = trim((string) ($s['titulo'] ?? ''));
-                $texto = trim((string) ($s['texto'] ?? ''));
-                if ($titulo === '' && $texto === '') {
-                    continue;
-                }
-                $slides[] = new SlidePlano(count($slides) + 1, $titulo !== '' ? $titulo : 'Cartão '.(count($slides) + 1), $texto);
-            }
-
-            return new PublicacaoPlan($this->titulo, '', [$this->tipo, $this->plataforma], $slides);
-        }
-
-        return new PublicacaoPlan(
-            titulo: $this->titulo,
-            legenda: $this->legenda,
-            tags: [$this->tipo, $this->plataforma],
-            slides: [new SlidePlano(1, $this->titulo !== '' ? $this->titulo : 'Peça', $this->legenda)],
+        return PublicacaoPlan::daOficina(
+            $this->ehCarrossel(),
+            $this->titulo,
+            $this->legenda,
+            $this->slides,
+            [$this->tipo, $this->plataforma],
         );
-    }
-
-    /**
-     * Escreve cada artefacto: SVG inline → ficheiro em public/media; URL → guarda tal e qual.
-     *
-     * @param  array<int,string>  $artefactos
-     * @return array<int,string>  caminhos web relativos
-     */
-    private function escreverImagens(string $slug, array $artefactos): array
-    {
-        $dir = public_path('media/publicacoes/'.$slug);
-        $caminhos = [];
-
-        foreach ($artefactos as $i => $arte) {
-            if (! str_starts_with(ltrim($arte), '<svg')) {
-                $caminhos[] = $arte; // URL de imagem (ex.: kie.ai)
-
-                continue;
-            }
-
-            if (! is_dir($dir)) {
-                @mkdir($dir, 0775, true);
-            }
-            $rel = 'media/publicacoes/'.$slug.'/'.($i + 1).'.svg';
-            file_put_contents(public_path($rel), $arte);
-            $caminhos[] = $rel;
-        }
-
-        return $caminhos;
     }
 
     public function render()

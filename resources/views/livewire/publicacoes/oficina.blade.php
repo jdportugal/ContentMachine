@@ -105,11 +105,17 @@
                                 class="bg-teal text-papyrus font-display text-lg px-6 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved">
                             Guardar rascunho
                         </button>
-                        <button type="button" wire:click="gerarImagens" wire:loading.attr="disabled"
-                                class="border border-gold/50 text-gold hover:bg-gold/10 rounded-sm px-5 py-2 font-mono text-xs transition self-center">
-                            <span wire:loading.remove wire:target="gerarImagens">❖ gerar imagens</span>
-                            <span wire:loading wire:target="gerarImagens">a desenhar…</span>
-                        </button>
+                        @if ($aGerar)
+                            <div wire:poll.1500ms="verificarImagens" class="self-center flex items-center gap-2 font-mono text-xs text-gold">
+                                <span class="inline-block animate-pulse">❖ a desenhar cartões…</span>
+                                <button type="button" wire:click="cancelarImagens" class="text-ink-faint hover:text-bad">cancelar</button>
+                            </div>
+                        @else
+                            <button type="button" wire:click="gerarImagens"
+                                    class="border border-gold/50 text-gold hover:bg-gold/10 rounded-sm px-5 py-2 font-mono text-xs transition self-center">
+                                ❖ gerar imagens
+                            </button>
+                        @endif
                     </div>
                 </form>
             </x-panel>
@@ -122,15 +128,17 @@
                 <div class="grid grid-cols-2 gap-3">
                     @foreach ($previews as $i => $arte)
                         <div class="border border-ink-soft/20 rounded-sm overflow-hidden bg-vellum/40 shadow-engraved" wire:key="prev-{{ $i }}">
-                            @if (\Illuminate\Support\Str::startsWith(ltrim($arte), '<svg'))
-                                <div class="w-full">{!! $arte !!}</div>
-                            @else
-                                <img src="{{ $arte }}" alt="Cartão {{ $i + 1 }}" class="w-full block">
-                            @endif
+                            <img src="{{ \Illuminate\Support\Str::startsWith($arte, 'http') ? $arte : asset($arte) }}" alt="Cartão {{ $i + 1 }}" class="w-full block">
                         </div>
                     @endforeach
                 </div>
-                <p class="mt-2 font-mono text-[0.6rem] text-ink-faint">{{ count($previews) }} cartão(ões) · gabarito «{{ $this->kind['gabarito'] ?? '' }}»</p>
+                <p class="mt-2 font-mono text-[0.6rem] text-ink-faint">{{ count($previews) }} cartão(ões) · {{ config('contentmachine.publicacoes.render_driver') === 'kie' && config('services.kie.key') ? 'kie.ai · nano-banana-pro' : 'SVG' }}</p>
+            @elseif ($aGerar)
+                <div class="aspect-[4/5] frame-engraved bg-vellum/60 rounded-sm p-8 flex flex-col items-center justify-center text-center shadow-engraved">
+                    <span class="text-4xl text-gold/60 animate-pulse select-none">❖</span>
+                    <p class="mt-4 text-ink-soft italic">A desenhar os cartões…</p>
+                    <p class="mt-2 font-mono text-[0.6rem] text-ink-faint">Requer um worker: php artisan queue:work</p>
+                </div>
             @else
                 <div class="aspect-[4/5] frame-engraved foxing bg-vellum/60 rounded-sm p-8 flex flex-col items-center justify-center text-center shadow-engraved">
                     <span class="text-5xl text-gold/60 select-none">{{ $this->kind['glifo'] ?? '❦' }}</span>
