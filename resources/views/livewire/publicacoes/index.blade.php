@@ -7,6 +7,7 @@
 
     {{-- Publicações criadas --}}
     <x-panel eyebrow="Estante" title="Publicações criadas" glyph="❦" class="mb-8">
+      <div @if ($this->algumAGerar) wire:poll.3s @endif>
         @forelse ($this->publicacoes as $nota)
             @php
                 $tipo = $nota->get('tipo', 'post');
@@ -17,9 +18,14 @@
                 $meta = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'));
                 $agendado = $nota->get('estado') === 'agendado';
                 $editUrl = route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]);
+                $gerando = $this->aGerar($nota->slug());
             @endphp
             <div class="flex items-center gap-4 py-3 border-b border-ink-soft/10 last:border-0" wire:key="pub-{{ $nota->slug() }}">
-                @if ($capa)
+                @if ($gerando)
+                    <div class="shrink-0 w-14 h-16 rounded-sm border border-gold/30 bg-vellum/40 flex items-center justify-center" title="A gerar imagens…">
+                        <span class="inline-block w-5 h-5 border-2 border-gold/30 border-t-gold rounded-full animate-spin"></span>
+                    </div>
+                @elseif ($capa)
                     <button type="button" @click="$dispatch('abrir-lightbox', {imgs: @js($galeria), i: 0})"
                             title="Ver em ecrã inteiro" class="shrink-0 rounded-sm overflow-hidden border border-ink-soft/20 hover:border-teal/60 transition">
                         <img src="{{ \Illuminate\Support\Str::startsWith($capa, 'http') ? $capa : asset($capa) }}" alt="capa" class="w-14 h-16 object-cover block">
@@ -32,7 +38,9 @@
                         <x-badge tone="teal">{{ $def['label'] ?? $tipo }}</x-badge>
                         @if (($n = (int) $nota->get('cartoes', 0)) > 1)<x-badge tone="leather">{{ $n }} cartões</x-badge>@endif
                         @if ($meta)<x-badge tone="leather" style="color: {{ $meta['cor'] }}">{{ $meta['label'] }}</x-badge>@endif
-                        @if ($agendado)<x-badge tone="good">✓ agendado</x-badge>@else<x-badge tone="warn">rascunho</x-badge>@endif
+                        @if ($gerando)
+                            <span class="font-mono text-[0.6rem] px-1.5 py-0.5 rounded-sm border border-gold/40 text-gold animate-pulse">❖ a gerar…</span>
+                        @elseif ($agendado)<x-badge tone="good">✓ agendado</x-badge>@else<x-badge tone="warn">rascunho</x-badge>@endif
                     </div>
                     <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}" class="font-display text-xl text-ink hover:text-teal transition leading-tight">{{ $nota->title() }}</a>
                 </div>
@@ -44,6 +52,7 @@
         @empty
             <x-empty-state>Ainda não há publicações. Componha a primeira abaixo.</x-empty-state>
         @endforelse
+      </div>
     </x-panel>
 
     {{-- Nova publicação --}}

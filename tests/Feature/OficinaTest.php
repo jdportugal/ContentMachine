@@ -97,6 +97,38 @@ class OficinaTest extends TestCase
         $this->assertSame('carrossel', $notas->first()->get('tipo'));
     }
 
+    public function test_dashboard_mostra_loader_enquanto_gera(): void
+    {
+        $nota = app(VaultContract::class)->create('rascunhos', [
+            'titulo' => 'Em geração', 'tipo' => 'carrossel', 'origem' => 'publicacoes/oficina',
+        ], 'corpo');
+
+        \Illuminate\Support\Facades\Cache::put(\App\Jobs\GerarImagensJob::notaKey($nota->slug()), true, now()->addMinutes(5));
+
+        Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
+            ->assertSee('a gerar');
+    }
+
+    public function test_gerar_imagens_para_nota_guardada_persiste_e_limpa_flag(): void
+    {
+        $vault = app(VaultContract::class);
+        $nota = $vault->create('rascunhos', [
+            'titulo' => 'Guardada', 'tipo' => 'carrossel', 'formato' => 'carousel', 'origem' => 'publicacoes/oficina',
+        ], "## A\n\na\n\n---\n\n## B\n\nb");
+
+        \Illuminate\Support\Facades\Cache::put(\App\Jobs\GerarImagensJob::notaKey($nota->slug()), true, now()->addMinutes(5));
+
+        // Fila síncrona → o job corre já (desenha em SVG nos testes).
+        \App\Jobs\GerarImagensJob::dispatch(
+            'carrossel', 'Guardada', 'instagram', '', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']],
+            'tok-'.uniqid(), '', [], $nota->slug(),
+        );
+
+        $atualizada = $vault->get($nota->path);
+        $this->assertNotEmpty($atualizada->get('imagens'));
+        $this->assertFalse(\Illuminate\Support\Facades\Cache::has(\App\Jobs\GerarImagensJob::notaKey($nota->slug())));
+    }
+
     public function test_index_lista_publicacoes_criadas(): void
     {
         app(VaultContract::class)->create('rascunhos', [

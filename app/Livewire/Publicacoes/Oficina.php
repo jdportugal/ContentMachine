@@ -341,8 +341,14 @@ class Oficina extends Component
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
 
+        // Se a peça já está guardada, marca-a «a gerar» para o painel a mostrar.
+        $slug = $this->notaPath !== null ? pathinfo($this->notaPath, PATHINFO_FILENAME) : '';
+        if ($slug !== '') {
+            Cache::put(GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
+        }
+
         GerarImagensJob::dispatch(
-            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refPaths(),
+            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refPaths(), $slug,
         )->onQueue('media');
 
         $this->verificarImagens();

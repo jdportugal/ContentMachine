@@ -37,39 +37,75 @@ class GerarImagensJob implements ShouldQueue
         public string $token,
         public string $proporcao = '',
         public array $referencias = [],
+        public string $notaSlug = '', // se definido, persiste as imagens na nota
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
     {
-        $kind = $kinds->get($this->tipo) ?? [];
-        if ($this->proporcao !== '') {
-            $kind['proporcao'] = $this->proporcao;
+        try {
+            $kind = $kinds->get($this->tipo) ?? [];
+            if ($this->proporcao !== '') {
+                $kind['proporcao'] = $this->proporcao;
+            }
+            $kind['_refs'] = $this->referencias;
+            $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
+
+            $plano = PublicacaoPlan::daOficina(
+                $kinds->formato($this->tipo) === 'carousel',
+                $this->titulo,
+                $this->legenda,
+                $this->slides,
+                [$this->tipo, $this->plataforma],
+            );
+
+            if ($plano->slides === []) {
+                Cache::put(self::key($this->token), ['imagens' => []], now()->addMinutes(30));
+
+                return;
+            }
+
+            $paths = $this->escrever($renderer->render($plano, array_merge($kind, ['_cor' => $cor])));
+            Cache::put(self::key($this->token), ['imagens' => $paths], now()->addMinutes(30));
+
+            // Persiste na nota (para o painel refletir as imagens sem a oficina aberta).
+            if ($this->notaSlug !== '' && $paths !== []) {
+                $this->persistirNota($paths);
+            }
+        } finally {
+            $this->limparFlag();
         }
-        $kind['_refs'] = $this->referencias;
-        $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
-
-        $plano = PublicacaoPlan::daOficina(
-            $kinds->formato($this->tipo) === 'carousel',
-            $this->titulo,
-            $this->legenda,
-            $this->slides,
-            [$this->tipo, $this->plataforma],
-        );
-
-        if ($plano->slides === []) {
-            Cache::put(self::key($this->token), ['imagens' => []], now()->addMinutes(30));
-
-            return;
-        }
-
-        $artefactos = $renderer->render($plano, array_merge($kind, ['_cor' => $cor]));
-
-        Cache::put(self::key($this->token), ['imagens' => $this->escrever($artefactos)], now()->addMinutes(30));
     }
 
     public function failed(\Throwable $e): void
     {
         Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(30));
+        $this->limparFlag();
+    }
+
+    private function persistirNota(array $paths): void
+    {
+        try {
+            $vault = app(\App\Services\Vault\VaultContract::class);
+            $nota = $vault->get('rascunhos/'.$this->notaSlug.'.md');
+            if ($nota) {
+                $vault->updateFrontmatter($nota->path, ['imagens' => $paths]);
+            }
+        } catch (\Throwable) {
+            // não bloqueia a geração se a persistência falhar
+        }
+    }
+
+    private function limparFlag(): void
+    {
+        if ($this->notaSlug !== '') {
+            Cache::forget(self::notaKey($this->notaSlug));
+        }
+    }
+
+    /** Chave de cache que marca uma publicação como «a gerar» (para o painel). */
+    public static function notaKey(string $slug): string
+    {
+        return 'publicacao.gerando.'.$slug;
     }
 
     /**
