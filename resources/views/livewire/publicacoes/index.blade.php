@@ -11,18 +11,22 @@
             @php
                 $tipo = $nota->get('tipo', 'post');
                 $def = config('contentmachine.publicacoes.tipos.'.$tipo, []);
-                $capa = ((array) $nota->get('imagens', []))[0] ?? null;
+                $imagens = (array) $nota->get('imagens', []);
+                $capa = $imagens[0] ?? null;
+                $galeria = collect($imagens)->map(fn ($p) => \Illuminate\Support\Str::startsWith($p, 'http') ? $p : asset($p))->values();
                 $meta = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'));
                 $agendado = $nota->get('estado') === 'agendado';
+                $editUrl = route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]);
             @endphp
             <div class="flex items-center gap-4 py-3 border-b border-ink-soft/10 last:border-0" wire:key="pub-{{ $nota->slug() }}">
-                <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}" class="shrink-0">
-                    @if ($capa)
-                        <img src="{{ \Illuminate\Support\Str::startsWith($capa, 'http') ? $capa : asset($capa) }}" alt="capa" class="w-14 h-16 object-cover rounded-sm border border-ink-soft/20">
-                    @else
-                        <div class="w-14 h-16 rounded-sm border border-ink-soft/20 bg-vellum/50 flex items-center justify-center text-2xl text-gold/60">{{ $def['glifo'] ?? '❦' }}</div>
-                    @endif
-                </a>
+                @if ($capa)
+                    <button type="button" @click="$dispatch('abrir-lightbox', {imgs: @js($galeria), i: 0})"
+                            title="Ver em ecrã inteiro" class="shrink-0 rounded-sm overflow-hidden border border-ink-soft/20 hover:border-teal/60 transition">
+                        <img src="{{ \Illuminate\Support\Str::startsWith($capa, 'http') ? $capa : asset($capa) }}" alt="capa" class="w-14 h-16 object-cover block">
+                    </button>
+                @else
+                    <a href="{{ $editUrl }}" class="shrink-0 w-14 h-16 rounded-sm border border-ink-soft/20 bg-vellum/50 flex items-center justify-center text-2xl text-gold/60">{{ $def['glifo'] ?? '❦' }}</a>
+                @endif
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 mb-1 flex-wrap">
                         <x-badge tone="teal">{{ $def['label'] ?? $tipo }}</x-badge>
@@ -61,4 +65,6 @@
             </a>
         @endforeach
     </div>
+
+    @include('livewire.publicacoes._lightbox')
 </div>

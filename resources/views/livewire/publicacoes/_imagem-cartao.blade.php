@@ -3,6 +3,11 @@
     $g = $gerando[$i] ?? null;
     $h = $hist[$i] ?? [];
     $src = fn ($p) => \Illuminate\Support\Str::startsWith($p, 'http') ? $p : asset($p);
+    // Lista ordenada de todas as imagens da peça + posição deste cartão nela.
+    $ordenadas = $img;
+    ksort($ordenadas);
+    $galeria = array_values(array_map($src, $ordenadas));
+    $pos = count(array_filter(array_keys($ordenadas), fn ($k) => $k < $i));
 @endphp
 <div class="w-44 shrink-0">
     @if ($g)
@@ -10,9 +15,11 @@
             <span class="font-mono text-[0.6rem] text-gold animate-pulse">❖ a desenhar…</span>
         </div>
     @elseif ($im)
-        <div class="border border-ink-soft/20 rounded-sm overflow-hidden bg-vellum/40 shadow-engraved">
+        <button type="button" @click="$dispatch('abrir-lightbox', {imgs: @js($galeria), i: {{ $pos }}})"
+                title="Ver em ecrã inteiro"
+                class="block w-full border border-ink-soft/20 rounded-sm overflow-hidden bg-vellum/40 shadow-engraved hover:border-teal/50 transition">
             <img src="{{ $src($im) }}" class="w-full block" alt="Cartão {{ $i + 1 }}">
-        </div>
+        </button>
         <input type="text" wire:model="editar.{{ $i }}" placeholder="alterar: «fundo mais escuro»…"
                class="mt-1.5 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink font-body text-xs focus:border-teal focus:outline-none">
         <button type="button" wire:click="regenerarCartao({{ $i }})"

@@ -275,6 +275,8 @@ class SvgSlideRenderer implements SlideRenderer
         return match ($proporcao) {
             '4:5' => [1080, 1350],
             '9:16' => [1080, 1920],
+            '16:9' => [1920, 1080],
+            '3:4' => [1080, 1440],
             default => [1080, 1080],
         };
     }

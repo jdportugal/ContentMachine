@@ -34,6 +34,7 @@ class RegenerarCartaoJob implements ShouldQueue
         public int $ordem,
         public int $total,
         public string $token,
+        public string $proporcao = '',
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
@@ -41,6 +42,9 @@ class RegenerarCartaoJob implements ShouldQueue
         $kind = $kinds->get($this->tipo) ?? [];
         $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
         $kind = array_merge($kind, ['_cor' => $cor]);
+        if ($this->proporcao !== '') {
+            $kind['proporcao'] = $this->proporcao;
+        }
 
         $slide = new SlidePlano($this->ordem, $this->titulo, $this->texto);
 

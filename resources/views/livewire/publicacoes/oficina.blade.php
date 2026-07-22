@@ -47,8 +47,8 @@
         {{-- Composição + imagens por cartão --}}
         <x-panel eyebrow="Composição" :title="$notaPath ? 'Editar peça' : 'Nova peça'" :glyph="$this->kind['glifo'] ?? '❦'">
             <form wire:submit="criarRascunho" class="space-y-4">
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div>
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="sm:col-span-1">
                         <label class="eyebrow block mb-1.5">Título</label>
                         <input type="text" wire:model="titulo" placeholder="Título da peça"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
@@ -63,6 +63,16 @@
                             <option value="tiktok">TikTok</option>
                             <option value="youtube">YouTube</option>
                         </select>
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Resolução</label>
+                        <select wire:model="proporcao"
+                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
+                            @foreach (config('contentmachine.publicacoes.proporcoes') as $valor => $rotulo)
+                                <option value="{{ $valor }}">{{ $rotulo }}</option>
+                            @endforeach
+                        </select>
+                        <p class="mt-1 font-mono text-[0.55rem] text-ink-faint">altere antes de gerar as imagens</p>
                     </div>
                 </div>
 
@@ -131,4 +141,6 @@
             </form>
         </x-panel>
     </div>
+
+    @include('livewire.publicacoes._lightbox')
 </div>

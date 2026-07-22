@@ -107,6 +107,15 @@ return [
     'publicacoes' => [
         'render_driver' => env('PUBLICACOES_RENDER', 'svg'),
 
+        // Resoluções (proporção) disponíveis na oficina. A predefinição de cada
+        // tipo vem do seu campo 'proporcao'; o utilizador pode trocar antes de gerar.
+        'proporcoes' => [
+            '1:1' => 'Quadrado · 1:1',
+            '4:5' => 'Retrato · 4:5',
+            '9:16' => 'Vertical / story · 9:16',
+            '16:9' => 'Horizontal · 16:9',
+        ],
+
         'tipos' => [
             'post' => [
                 'label' => 'Posts de página única',

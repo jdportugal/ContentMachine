@@ -121,6 +121,31 @@ class OficinaTest extends TestCase
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class);
     }
 
+    public function test_resolucao_escolhida_e_guardada_na_nota(): void
+    {
+        Livewire::test(Oficina::class, ['tipo' => 'post'])
+            ->assertSet('proporcao', '1:1') // predefinição do tipo
+            ->set('titulo', 'Peça vertical')
+            ->set('legenda', 'Corpo do post.')
+            ->set('proporcao', '9:16')
+            ->call('criarRascunho');
+
+        $nota = app(VaultContract::class)->all('rascunhos')->first();
+        $this->assertSame('9:16', $nota->get('proporcao'));
+    }
+
+    public function test_gerar_imagens_passa_a_resolucao_ao_job(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('proporcao', '16:9')
+            ->set('slides', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('gerarImagens');
+
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class, fn ($job) => $job->proporcao === '16:9');
+    }
+
     public function test_regenerar_cartao_despacha_job_e_marca_em_curso(): void
     {
         \Illuminate\Support\Facades\Queue::fake();

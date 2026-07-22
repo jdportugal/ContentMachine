@@ -28,6 +28,9 @@ class Oficina extends Component
 
     public string $plataforma = 'instagram';
 
+    /** Resolução (proporção) escolhida — predefinida pelo tipo. */
+    public string $proporcao = '1:1';
+
     public string $brief = '';
 
     public string $legenda = '';
@@ -72,6 +75,7 @@ class Oficina extends Component
         $this->tipo = $tipo;
         $def = $kinds->get($tipo);
         $this->plataforma = (string) ($def['plataforma_padrao'] ?? 'instagram');
+        $this->proporcao = (string) ($def['proporcao'] ?? '1:1');
 
         if ($this->ehCarrossel()) {
             $min = max(2, $kinds->cartoes($tipo)['min']);
@@ -95,6 +99,7 @@ class Oficina extends Component
         $this->notaPath = $nota->path;
         $this->titulo = (string) $nota->get('titulo', '');
         $this->plataforma = (string) $nota->get('plataforma', $this->plataforma);
+        $this->proporcao = (string) $nota->get('proporcao', $this->proporcao);
         $this->img = array_values((array) $nota->get('imagens', []));
         $this->hist = (array) $nota->get('imagens_hist', []);
 
@@ -284,7 +289,7 @@ class Oficina extends Component
         $this->aGerar = true;
 
         GerarImagensJob::dispatch(
-            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken,
+            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao,
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -308,7 +313,7 @@ class Oficina extends Component
 
         RegenerarCartaoJob::dispatch(
             $this->tipo, $this->plataforma, $i, $dados['titulo'], $dados['texto'],
-            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token,
+            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token, $this->proporcao,
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -403,6 +408,7 @@ class Oficina extends Component
             'formato' => $formato,
             'gabarito' => (string) ($this->kind['gabarito'] ?? ''),
             'plataforma' => $this->plataforma,
+            'proporcao' => $this->proporcao,
             'origem' => 'publicacoes/oficina',
             'cartoes' => count($plano->slides),
             'tags' => array_values(array_unique([$this->tipo, $this->plataforma])),

@@ -35,11 +35,15 @@ class GerarImagensJob implements ShouldQueue
         public string $legenda,
         public array $slides,
         public string $token,
+        public string $proporcao = '',
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
     {
         $kind = $kinds->get($this->tipo) ?? [];
+        if ($this->proporcao !== '') {
+            $kind['proporcao'] = $this->proporcao;
+        }
         $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
 
         $plano = PublicacaoPlan::daOficina(
