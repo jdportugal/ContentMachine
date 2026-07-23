@@ -1,11 +1,11 @@
-# Rascunhos como fila «pronto» + Vídeo longo → brief da oficina
+# Rascunhos «pronto» + Vídeo longo → brief + arrastar-e-largar vídeos
 
 **Data:** 2026-07-23
-**Estado:** aprovado para planeamento
+**Estado:** em revisão
 
 ## Objetivo
 
-Duas mudanças ligadas ao fluxo de produção:
+Três mudanças ligadas ao fluxo de produção dos Clips:
 
 1. **Rascunhos** deixa de listar tudo o que está no vault e passa a ser uma
    **fila unificada de conteúdo pronto a agendar** — publicações marcadas como
@@ -13,6 +13,8 @@ Duas mudanças ligadas ao fluxo de produção:
 2. Ao carregar um **vídeo longo** nos Clips, além de gerar shorts passa a ser
    possível **gerar texto que alimenta o gerador de publicações** (semeia o
    brief da oficina a partir da transcrição).
+3. **Arrastar e largar** vídeos longos diretamente no gerador de clips
+   (upload até 2 GB), a complementar o campo caminho/URL.
 
 ## Feature 1 — Rascunhos: fila unificada de «prontos»
 
@@ -105,6 +107,58 @@ resto — sem código de IA novo.
 
 O aviso de sessão é mostrado na index de Publicações (banner simples).
 
+## Feature 3 — Arrastar e largar vídeos longos no gerador de clips
+
+Complementa (não substitui) o campo caminho/URL do formulário «Novo vídeo
+longo». Cap de upload: **2 GB**.
+
+### Componente `Clips`
+
+- `use WithFileUploads;` + `public $novoVideo = null;`.
+- `adicionarFonte()` passa a aceitar upload OU caminho/URL:
+  - validação: `novoVideo` **ou** `novaFonte` obrigatório (um dos dois);
+    `novoVideo` → `file|mimetypes:video/mp4,video/quicktime|max:2097152` (2 GB em KB).
+  - se `novoVideo` presente:
+    `$ref = Storage::disk('local')->path($this->novoVideo->store('clips/uploads'))`
+    (caminho **absoluto** — `LocalVideoEngine::resolveSource` faz `is_file($ref)`).
+    Título por defeito = nome original do ficheiro se `novaFonteTitulo` vazio.
+  - senão: `$ref = trim($this->novaFonte)` (comportamento atual).
+  - `reset('novaFonte','novaFonteTitulo','novoVideo')` no fim.
+
+### Vista (dropzone Alpine + `$wire.upload`)
+
+Zona de largar por cima do campo caminho/URL:
+
+```
+<div x-data="{ over:false }"
+     x-on:dragover.prevent="over=true"
+     x-on:dragleave.prevent="over=false"
+     x-on:drop.prevent="over=false; if ($event.dataTransfer.files.length)
+        $wire.upload('novoVideo', $event.dataTransfer.files[0])"
+     :class="over ? 'border-teal' : 'border-ink-soft/25'"
+     class="border border-dashed rounded-sm p-6 text-center ...">
+   Arrasta o vídeo para aqui, ou <label>escolhe<input type="file"
+      wire:model="novoVideo" accept="video/mp4,video/quicktime" class="hidden"></label>
+</div>
+<div wire:loading wire:target="novoVideo">a carregar…</div>  {{-- barra de progresso Livewire --}}
+@error('novoVideo') ... @enderror
+```
+
+Reusa o `window.CMLoader.busy()` no submit, como os outros botões pesados.
+
+### Limites de upload (2 GB) — todas as camadas
+
+- **PHP (Docker):** novo `docker/php/uploads.ini` com
+  `upload_max_filesize=2G`, `post_max_size=2G`, `memory_limit=512M`,
+  `max_execution_time=0`, `max_input_time=0`; copiado no Dockerfile para
+  `/usr/local/etc/php/conf.d/uploads.ini`.
+- **Nginx (Docker):** `docker/nginx/default.conf` → `client_max_body_size 2G`.
+- **Livewire:** `config/livewire.php` → `temporary_file_upload.rules`
+  `max:2097152`.
+- **Dev local (`php artisan serve`):** o `php.ini` do PHP CLI do utilizador
+  também precisa de `upload_max_filesize`/`post_max_size` elevados —
+  `ponytail:` documentar no spec; o servidor embutido usa o php.ini do sistema.
+
 ## Migração / dados
 
 - Uma migração: adicionar `clip_projects.scheduled_for` (`date` nullable).
@@ -119,6 +173,9 @@ O aviso de sessão é mostrado na index de Publicações (banner simples).
 - Agendar um clip animado (BD) grava `scheduled_for`; desagendar limpa-o.
 - `gerarPublicacao` põe o texto da transcrição em `session('oficina_brief')`;
   a `Oficina::mount` pré-preenche `$this->brief` e limpa a sessão.
+- `adicionarFonte` com `novoVideo` carregado grava a fonte com o caminho
+  absoluto do ficheiro; com só `novaFonte` mantém o comportamento atual; sem
+  nenhum dos dois → erro de validação.
 
 ## Fora de âmbito
 
