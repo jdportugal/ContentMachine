@@ -150,7 +150,7 @@
         @elseif ($createType === 'animation')
             {{-- passo 2A: formulário de animação --}}
             <x-panel eyebrow="Passo · II — Animação" title="Nova animação" glyph="❈">
-                <form wire:submit="submitAnimation" class="space-y-5">
+                <form wire:submit="submitAnimation" x-on:submit="window.CMLoader.busy('A preparar o clip animado…')" class="space-y-5">
                     <div>
                         <label class="eyebrow block mb-2">Guião / texto para locução</label>
                         <textarea wire:model="text" rows="5"
@@ -205,7 +205,7 @@
         @elseif ($createType === 'overlay')
             {{-- passo 2B: formulário de vídeo+animações --}}
             <x-panel eyebrow="Passo · II — Vídeo + Animações" title="Vídeo com animações" glyph="❖">
-                <form wire:submit="submitOverlay" class="space-y-5">
+                <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('A preparar o clip…')" class="space-y-5">
                     <div>
                         <label class="eyebrow block mb-2">Carregar vídeo (mp4 / mov)</label>
                         <input type="file" wire:model="video" accept="video/mp4,video/quicktime"
@@ -404,7 +404,7 @@
     @if ($view === 'editTranscript')
         <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← voltar ao painel</button>
         <x-panel eyebrow="Editar transcrição" title="Corrigir e regenerar" glyph="✎">
-            <form wire:submit="regenerar" class="space-y-5">
+            <form wire:submit="regenerar" x-on:submit="window.CMLoader.busy('A regenerar as animações…')" class="space-y-5">
                 <div>
                     <label class="eyebrow block mb-2">Transcrição (corrija erros do reconhecimento)</label>
                     <textarea wire:model="editTranscriptText" rows="6" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>

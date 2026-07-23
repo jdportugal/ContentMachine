@@ -22,6 +22,7 @@
     @if ($recolheReal)
         <div class="flex flex-wrap items-center gap-3 mb-6 p-4 rounded-sm border border-ink-soft/15 bg-surface/30">
             <button wire:click="atualizar" wire:loading.attr="disabled" wire:target="atualizar"
+                    x-on:click="window.CMLoader.busy('A recolher via {{ $fonte }}…')"
                     @disabled(! $fonteDisponivel)
                     class="rounded-sm border border-teal/50 bg-teal/10 px-4 py-2 text-ink font-display text-lg
                            hover:bg-teal/20 hover:border-teal transition disabled:opacity-40">

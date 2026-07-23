@@ -13,6 +13,7 @@
                 (YouTube, TikTok, Instagram, LinkedIn) e arquiva cada item no vault <em>por dia</em>, com transcrição e uma lista de tópicos.
             </p>
             <button wire:click="agregarAgora" wire:loading.attr="disabled" wire:target="agregarAgora"
+                    x-on:click="window.CMLoader.busy('A vasculhar canais…')"
                     class="shrink-0 bg-teal text-papyrus font-display text-lg px-6 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
                 <span wire:loading.remove wire:target="agregarAgora">Agregar agora</span>
                 <span wire:loading wire:target="agregarAgora">A vasculhar canais…</span>
@@ -139,6 +140,7 @@
                 </label>
 
                 <button wire:click="criarRelatorio" wire:loading.attr="disabled" wire:target="criarRelatorio"
+                        x-on:click="window.CMLoader.busy('A recolher e redigir…')"
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
                     <span wire:loading.remove wire:target="criarRelatorio">Criar relatório de notícias</span>
                     <span wire:loading wire:target="criarRelatorio">A recolher e redigir…</span>

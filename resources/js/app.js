@@ -6,9 +6,28 @@
 //                      $this->dispatch('loader-hide')
 //   • JavaScript:      window.CMLoader.show('A processar…'); window.CMLoader.hide()
 //   • Browser event:   window.dispatchEvent(new CustomEvent('loader-show', {detail:{message}}))
+//   • Sync Livewire:   window.CMLoader.busy('A processar…')  ← shows now, auto-hides
+//                      when the Livewire request it triggers settles. Use on
+//                      wire:click / wire:submit that do slow work in-request.
 //
 // The markup lives in components/particle-loader.blade.php (rendered once in the
 // layout). Alpine is provided by Livewire, so we register on `alpine:init`.
+
+// When a busy()-armed action's Livewire request finishes (ok or error), drop the
+// overlay. ponytail: hides on the next settling commit, not strictly the armed
+// one — fine for one action at a time; revisit if concurrent busy actions appear.
+document.addEventListener('livewire:init', () => {
+    window.Livewire.hook('commit', ({ succeed, fail }) => {
+        const done = () => {
+            if (window.CMLoader && window.CMLoader._auto) {
+                window.CMLoader._auto = false;
+                window.CMLoader.hide();
+            }
+        };
+        succeed(done);
+        fail(done);
+    });
+});
 
 document.addEventListener('alpine:init', () => {
     window.Alpine.data('particleLoader', () => ({
@@ -34,7 +53,13 @@ document.addEventListener('alpine:init', () => {
             window.addEventListener('resize', () => { if (this.open) this.resize(); });
 
             // Global helper for non-Livewire callers.
-            window.CMLoader = { show: (m) => this.show(m), hide: () => this.hide() };
+            // .busy() arms auto-hide: the next Livewire request to settle hides it.
+            window.CMLoader = {
+                _auto: false,
+                show: (m) => this.show(m),
+                hide: () => this.hide(),
+                busy: (m) => { window.CMLoader._auto = true; this.show(m); },
+            };
 
             this.$watch('open', (v) => (v ? this.start() : this.stop()));
         },
