@@ -67,6 +67,8 @@ export const ClipComposition: React.FC<ClipProps> = ({
   fps,
   transparent,
   audioSrc,
+  musicSrc,
+  musicVolume,
   animations,
   scenes,
   words,
@@ -84,6 +86,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
 
   const resolve = (src?: string) => (src ? (/^https?:\/\//.test(src) ? src : staticFile(src)) : null);
   const resolvedAudio = resolve(audioSrc);
+  const resolvedMusic = resolve(musicSrc);
   const resolvedVideo = resolve(videoSrc);
 
   const useScenes = Array.isArray(scenes) && scenes.length > 0;
@@ -95,6 +98,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
       {!transparent && !resolvedVideo && <BackgroundTexture />}
 
       {resolvedAudio ? <Audio src={resolvedAudio} /> : null}
+      {resolvedMusic ? <Audio src={resolvedMusic} volume={musicVolume ?? 0.1} loop /> : null}
 
       {useScenes ? (
         <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} />

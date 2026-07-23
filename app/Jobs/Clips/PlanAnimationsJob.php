@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Models\ClipProject;
 use App\Services\Clips\Contracts\AnimationPlanner;
+use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\PlanValidator;
 use Illuminate\Bus\Queueable;
@@ -17,7 +18,7 @@ class PlanAnimationsJob implements ShouldQueue
 
     public function __construct(public int $projectId) {}
 
-    public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research): void
+    public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research, MetadataService $metadata): void
     {
         $p = ClipProject::findOrFail($this->projectId);
 
@@ -32,6 +33,13 @@ class PlanAnimationsJob implements ShouldQueue
             if (! empty($facts)) {
                 $p->update(['meta' => array_merge($p->meta ?? [], ['research' => $facts])]);
             }
+
+            // Suggested publishing metadata (título/descrição/tags) from the transcript.
+            $suggested = $metadata->suggest($p->transcript);
+            $p->update([
+                'title' => $suggested['title'] !== '' ? $suggested['title'] : $p->title,
+                'meta' => array_merge($p->meta ?? [], ['suggested' => $suggested]),
+            ]);
 
             // Both cover the full duration. Overlay clips intercut presentation modes
             // (video / over / split / animation) chosen by the planner per scene.

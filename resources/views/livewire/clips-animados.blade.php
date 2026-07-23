@@ -35,48 +35,74 @@
         @if ($this->projects->isEmpty())
             <x-empty-state glyph="❈" title="Sem clipes" note="Ainda não gerou nenhuma peça. Comece com «Novo clip»." />
         @else
-            <div class="grid md:grid-cols-2 gap-5">
+            <div class="space-y-5">
                 @foreach ($this->projects as $project)
-                    @php $e = $estados[$project->status] ?? $estados['draft']; $t = $tipos[$project->type] ?? $tipos['animation']; @endphp
+                    @php
+                        $e = $estados[$project->status] ?? $estados['draft'];
+                        $t = $tipos[$project->type] ?? $tipos['animation'];
+                        $sug = $project->meta['suggested'] ?? [];
+                    @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
-                        <div class="flex items-start justify-between gap-3">
-                            <div class="min-w-0">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="text-gold text-sm">{{ $t['glyph'] }}</span>
-                                    <span class="font-mono text-[0.58rem] text-ink-faint uppercase tracking-wider">{{ $t['label'] }}</span>
+                        <div class="grid md:grid-cols-2 gap-5">
+                            {{-- ESQUERDA: vídeo --}}
+                            <div class="flex items-center justify-center">
+                                @if ($project->status === 'done' && $project->output_path)
+                                    <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
+                                           src="{{ route('clips-animados.media', $project) }}"></video>
+                                @elseif ($project->status === 'failed')
+                                    <p class="text-sm text-bad/90 self-start">{{ \Illuminate\Support\Str::limit($project->error, 200) }}</p>
+                                @else
+                                    <div class="w-full self-start">
+                                        <div class="h-1 w-full bg-surface/40 rounded-full overflow-hidden">
+                                            <div class="h-full bg-teal/60 animate-pulse"
+                                                 style="width: {{ ['transcribing'=>33,'planning'=>60,'rendering'=>85][$project->status] ?? 12 }}%"></div>
+                                        </div>
+                                        <p class="mt-2 font-mono text-[0.58rem] text-ink-faint">{{ $e['label'] }}…</p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            {{-- DIREITA: título sugerido, descrição, tags, estado --}}
+                            <div class="min-w-0 flex flex-col">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-gold text-sm">{{ $t['glyph'] }}</span>
+                                        <span class="font-mono text-[0.58rem] text-ink-faint uppercase tracking-wider">{{ $t['label'] }}</span>
+                                    </div>
+                                    <x-badge :tone="$e['tone']">{{ $e['glyph'] }} {{ $e['label'] }}</x-badge>
                                 </div>
-                                <div class="font-display text-xl text-ink truncate">{{ $project->title ?? 'Sem título' }}</div>
+
+                                <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'Sem título' }}</div>
                                 <div class="font-mono text-[0.58rem] text-ink-faint">#{{ $project->id }} · {{ $project->created_at?->diffForHumans() }}</div>
-                            </div>
-                            <x-badge :tone="$e['tone']">{{ $e['glyph'] }} {{ $e['label'] }}</x-badge>
-                        </div>
 
-                        @if ($project->status === 'done' && $project->output_path)
-                            <video class="mt-3 w-full rounded-sm border border-ink-soft/15 bg-black" controls preload="metadata"
-                                   src="{{ route('clips-animados.media', $project) }}"></video>
-                        @elseif ($project->status === 'failed')
-                            <p class="mt-3 text-sm text-bad/90">{{ \Illuminate\Support\Str::limit($project->error, 160) }}</p>
-                        @else
-                            <div class="mt-3 h-1 w-full bg-surface/40 rounded-full overflow-hidden">
-                                <div class="h-full bg-teal/60 animate-pulse"
-                                     style="width: {{ ['transcribing'=>33,'planning'=>60,'rendering'=>85][$project->status] ?? 12 }}%"></div>
-                            </div>
-                        @endif
+                                @if (!empty($sug['description']))
+                                    <p class="mt-3 text-ink-soft text-sm leading-relaxed">{{ $sug['description'] }}</p>
+                                @endif
 
-                        {{-- acções --}}
-                        <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
-                            @if (!empty($project->plan['scenes']))
-                                <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ editar clip</button>
-                            @endif
-                            @if (!empty($project->transcript['text']))
-                                <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ editar transcrição · regenerar</button>
-                            @endif
-                            @if ($project->status === 'done' && $project->output_path)
-                                <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ descarregar</a>
-                            @endif
-                            <button type="button" wire:click="apagar({{ $project->id }})"
-                                    wire:confirm="Apagar este clip e os seus ficheiros? Esta acção é definitiva."
-                                    class="text-bad hover:underline ml-auto">✕ apagar</button>
+                                @if (!empty($sug['tags']))
+                                    <div class="mt-3 flex flex-wrap gap-1.5">
+                                        @foreach ($sug['tags'] as $tag)
+                                            <span class="font-mono text-[0.58rem] text-teal border border-teal/30 rounded-sm px-1.5 py-0.5">#{{ $tag }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                {{-- acções --}}
+                                <div class="mt-auto pt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
+                                    @if (!empty($project->plan['scenes']))
+                                        <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ editar clip</button>
+                                    @endif
+                                    @if (!empty($project->transcript['text']))
+                                        <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ editar transcrição · regenerar</button>
+                                    @endif
+                                    @if ($project->status === 'done' && $project->output_path)
+                                        <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ descarregar</a>
+                                    @endif
+                                    <button type="button" wire:click="apagar({{ $project->id }})"
+                                            wire:confirm="Apagar este clip e os seus ficheiros? Esta acção é definitiva."
+                                            class="text-bad hover:underline ml-auto">✕ apagar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -165,6 +191,8 @@
                         @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.musica-picker')
+
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
                             Gerar clip animado
@@ -209,6 +237,8 @@
                         </div>
                         @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
+
+                    @include('livewire.partials.musica-picker')
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
@@ -277,6 +307,16 @@
             </div>
         </div>
 
+        @if ($errors->any())
+            <div class="mb-4 border border-bad/40 bg-bad/5 rounded-sm p-3">
+                <ul class="text-bad text-sm space-y-0.5">
+                    @foreach ($errors->all() as $err)
+                        <li>• {{ $err }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if ($editMode === 'json')
             <x-panel eyebrow="Editar clip" title="Plano Remotion (JSON)" glyph="⌘">
                 <form wire:submit="guardarJson" class="space-y-4">
@@ -298,6 +338,8 @@
                     <input type="text" wire:model="editTitle" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none" />
                 </div>
 
+                @include('livewire.partials.musica-picker')
+
                 <div class="space-y-3">
                     @foreach ($editScenes as $i => $scene)
                         <div class="border border-ink-soft/15 rounded-sm p-3 bg-surface/20" wire:key="scene-{{ $i }}">
@@ -308,11 +350,11 @@
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">início</label>
-                                    <input type="number" step="0.1" min="0" wire:model="editScenes.{{ $i }}.start" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
+                                    <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.start" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fim</label>
-                                    <input type="number" step="0.1" min="0" wire:model="editScenes.{{ $i }}.end" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
+                                    <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.end" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fundo</label>

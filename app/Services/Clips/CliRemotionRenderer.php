@@ -21,6 +21,12 @@ class CliRemotionRenderer implements RemotionRenderer
             $staged[] = $file;
             $props['audioSrc'] = basename($file);
         }
+        // Background music track — staged into public/ like the narration audio.
+        if (! empty($props['musicSrc']) && ! preg_match('#^https?://#', $props['musicSrc']) && is_file($props['musicSrc'])) {
+            $file = $this->stageAsset($props['musicSrc']);
+            $staged[] = $file;
+            $props['musicSrc'] = basename($file);
+        }
         // Source video (overlay clips) — copied into public/ so it's bundled by Remotion.
         if (! empty($props['videoSrc']) && ! preg_match('#^https?://#', $props['videoSrc']) && is_file($props['videoSrc'])) {
             $file = $this->stageAsset($props['videoSrc']);

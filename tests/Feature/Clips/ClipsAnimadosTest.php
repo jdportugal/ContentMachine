@@ -7,6 +7,8 @@ use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Livewire\ClipsAnimados;
 use App\Models\ClipProject;
+use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Shorts\MusicLibrary;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
@@ -187,6 +189,32 @@ class ClipsAnimadosTest extends TestCase
             ->assertHasErrors('editPlanJson');
     }
 
+    public function test_edit_plan_accepts_all_renderer_transitions(): void
+    {
+        // The planner (and Remotion) support slide/zoom; the Cenas editor must not reject them.
+        Queue::fake();
+
+        $p = ClipProject::create([
+            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipProject::STATUS_DONE,
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 1.5, 'background' => 'vellum', 'transitionIn' => 'slide', 'karaoke' => false, 'layers' => []],
+                ['start' => 1.5, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'zoom', 'karaoke' => false, 'layers' => []],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->assertSet('editScenes.0.transitionIn', 'slide')
+            ->call('guardarPlano')
+            ->assertHasNoErrors()
+            ->assertSet('view', 'dashboard');
+
+        $p->refresh();
+        $this->assertSame(ClipProject::STATUS_RENDERING, $p->status);
+        $this->assertSame('slide', $p->plan['scenes'][0]['transitionIn']);
+        Queue::assertPushed(RenderJob::class);
+    }
+
     public function test_edit_plan_rejects_end_before_start(): void
     {
         $p = ClipProject::create([
@@ -226,6 +254,79 @@ class ClipsAnimadosTest extends TestCase
         $this->assertSame('Máquina', $p->transcript['text']);
         $this->assertSame(ClipProject::STATUS_PLANNING, $p->status);
         Queue::assertPushed(PlanAnimationsJob::class);
+    }
+
+    public function test_music_choice_persists_to_meta_on_create(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->set('createType', 'animation')
+            ->set('text', 'Olá mundo IATECA')
+            ->set('musica', 'faixa.mp3')
+            ->set('musicaVolume', 0.25)
+            ->call('submitAnimation')
+            ->assertHasNoErrors();
+
+        $meta = ClipProject::where('type', 'animation')->first()->meta;
+        $this->assertSame('faixa.mp3', $meta['musica']);
+        $this->assertEqualsWithDelta(0.25, $meta['musica_volume'], 0.0001);
+    }
+
+    public function test_render_job_mixes_chosen_music_and_omits_when_none(): void
+    {
+        // Isolated music library with one track.
+        $dir = storage_path('app/testing/musicas-'.uniqid());
+        @mkdir($dir, 0777, true);
+        file_put_contents("$dir/faixa.mp3", 'ID3');
+        $this->app->instance(MusicLibrary::class, new MusicLibrary($dir));
+
+        // Renderer that captures the props it was handed.
+        $renderer = new class implements RemotionRenderer
+        {
+            public array $props = [];
+
+            public function render(array $props, string $outPath): string
+            {
+                $this->props = $props;
+                @mkdir(dirname($outPath), 0777, true);
+                file_put_contents($outPath, 'X');
+
+                return $outPath;
+            }
+        };
+        $this->app->instance(RemotionRenderer::class, $renderer);
+
+        $plan = ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => []];
+
+        $chosen = ClipProject::create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'faixa.mp3', 'musica_volume' => 0.2]]);
+        $this->app->call([new RenderJob($chosen->id), 'handle']);
+        $this->assertSame("$dir/faixa.mp3", $renderer->props['musicSrc']);
+        $this->assertEqualsWithDelta(0.2, $renderer->props['musicVolume'], 0.0001);
+
+        $none = ClipProject::create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'nenhuma']]);
+        $this->app->call([new RenderJob($none->id), 'handle']);
+        $this->assertArrayNotHasKey('musicSrc', $renderer->props);
+
+        \Illuminate\Support\Facades\File::deleteDirectory($dir);
+    }
+
+    public function test_plan_job_suggests_title_description_and_tags(): void
+    {
+        Queue::fake(); // don't run the chained RenderJob
+
+        $p = ClipProject::create([
+            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio',
+            'title' => 'Sem título',
+            'transcript' => ['duration' => 2.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []],
+        ]);
+
+        $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
+
+        $p->refresh();
+        $this->assertNotSame('Sem título', $p->title);          // AI-suggested title replaced the placeholder
+        $this->assertNotEmpty($p->meta['suggested']['description']);
+        $this->assertNotEmpty($p->meta['suggested']['tags']);
     }
 
     public function test_delete_removes_the_project(): void

@@ -135,6 +135,8 @@ export interface ClipProps {
   mode: "dense" | "sparse";
   transparent: boolean;
   audioSrc?: string;
+  musicSrc?: string; // background music, mixed as a looping track
+  musicVolume?: number; // 0–1, defaults to 0.1
   theme?: ClipTheme; // design-system tokens (colours, fonts, texture)
   // v2 scene-based model (preferred). If absent, `animations` (v1) is rendered.
   scenes?: Scene[];
