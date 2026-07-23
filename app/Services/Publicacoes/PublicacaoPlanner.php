@@ -64,10 +64,36 @@ class PublicacaoPlanner
             : 'Gera exactamente 1 cartão.';
 
         $blocoRefs = '';
+        $temRefs = false;
         if ($referencias !== []) {
-            $lista = implode("\n", array_map(fn ($d) => '- '.$d, $referencias));
-            $blocoRefs = "\n\nImagens de referência que acompanham esta peça (tem-nas em conta ao redigir; o texto deve fazer sentido junto delas):\n{$lista}";
+            // Aceita descrições simples (['logótipo', …]) ou itens indexados
+            // (['indice' => 0, 'descricao' => 'logótipo']). Mostra o índice para a
+            // IA poder ATRIBUIR cada imagem aos cartões onde faz sentido.
+            $linhas = [];
+            foreach (array_values($referencias) as $pos => $ref) {
+                if (is_array($ref)) {
+                    $i = (int) ($ref['indice'] ?? $pos);
+                    $d = trim((string) ($ref['descricao'] ?? ''));
+                } else {
+                    $i = $pos;
+                    $d = trim((string) $ref);
+                }
+                $linhas[] = "[{$i}] ".($d !== '' ? $d : '(sem descrição)');
+            }
+            if ($linhas !== []) {
+                $temRefs = true;
+                $lista = implode("\n", $linhas);
+                $blocoRefs = "\n\nImagens de referência disponíveis (tem-nas em conta ao redigir; o texto deve fazer sentido junto delas). "
+                    ."Usa o ÍNDICE entre parênteses rectos para ATRIBUIR a cada cartão as imagens relevantes:\n{$lista}";
+            }
         }
+
+        $campoRefs = $temRefs
+            ? ', "referencias": [0]  // índices das imagens acima que este cartão usa (pode ser [])'
+            : '';
+        $regraCoerencia = $formato === 'carousel'
+            ? "\n        Coerência: os cartões formam UMA peça — encadeia-os (capa → desenvolvimento → remate), sem repetir, com um fio condutor claro."
+            : '';
 
         $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
         $blocoDesign = trim($design) !== ''
@@ -80,7 +106,7 @@ class PublicacaoPlanner
 
         Compõe uma peça do tipo «{$kind['label']}» para {$plataforma}.
         Orientação do formato: {$orientacao}
-        {$regraCartoes}
+        {$regraCartoes}{$regraCoerencia}
 
         Tema / brief do utilizador:
         {$brief}{$blocoRefs}
@@ -90,7 +116,7 @@ class PublicacaoPlanner
           "titulo": "string",
           "legenda": "string (a legenda/caption para a publicação)",
           "tags": ["string"],
-          "slides": [ {"ordem": 1, "titulo": "string curto", "texto": "1 a 2 frases"} ]
+          "slides": [ {"ordem": 1, "titulo": "string curto", "texto": "1 a 2 frases"{$campoRefs}} ]
         }
         PROMPT;
     }

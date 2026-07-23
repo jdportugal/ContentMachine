@@ -41,8 +41,20 @@ class Oficina extends Component
     /** @var array ficheiros a carregar (input) */
     public array $uploads = [];
 
-    /** @var array<int,array{path:string,descricao:string}> imagens de referência */
+    /** @var array<int,array{path:string,descricao:string}> imagens de referência (pool) */
     public array $referencias = [];
+
+    /** @var array<int,array<int,string>> imagens anexas por cartão (caminhos web) */
+    public array $anexos = [];
+
+    /** @var array<int,string> prompt kie por cartão (mostrado/editável na oficina) */
+    public array $prompts = [];
+
+    /** @var array<int,bool> cartões cujo prompt foi editado à mão (confirma antes de regenerar) */
+    public array $promptEditado = [];
+
+    /** @var array<int,mixed> ficheiros a carregar directamente num cartão (input) */
+    public array $cartaoUploads = [];
 
     /** @var array<int,array{titulo:string,texto:string}> cartões (carrossel) */
     public array $slides = [];
@@ -112,6 +124,8 @@ class Oficina extends Component
         $this->img = array_values((array) $nota->get('imagens', []));
         $this->hist = (array) $nota->get('imagens_hist', []);
         $this->referencias = array_values((array) $nota->get('referencias', []));
+        $this->anexos = (array) $nota->get('anexos', []);
+        $this->prompts = (array) $nota->get('prompts', []);
 
         if ($this->ehCarrossel()) {
             $slides = $this->slidesDoCorpo($nota->body);
@@ -204,8 +218,8 @@ class Oficina extends Component
         unset($this->slides[$i]);
         $this->slides = array_values($this->slides);
 
-        // Reindexa os mapas de imagem para acompanhar os índices dos cartões.
-        foreach (['img', 'editar', 'hist', 'gerando'] as $prop) {
+        // Reindexa os mapas por cartão para acompanhar os índices dos cartões.
+        foreach (['img', 'editar', 'hist', 'gerando', 'anexos', 'prompts', 'promptEditado'] as $prop) {
             $arr = $this->{$prop};
             unset($arr[$i]);
             $novo = [];
@@ -223,40 +237,279 @@ class Oficina extends Component
     {
         $this->validate(['uploads.*' => 'image|max:8192'], [], ['uploads.*' => 'imagem']);
 
-        $dir = public_path('media/publicacoes/refs');
-        if (! is_dir($dir)) {
-            @mkdir($dir, 0775, true);
-        }
-
         foreach ($this->uploads as $file) {
-            $ext = strtolower($file->getClientOriginalExtension() ?: 'png');
-            $nome = (string) Str::uuid().'.'.$ext;
-            copy($file->getRealPath(), $dir.'/'.$nome);
-            $this->referencias[] = ['path' => 'media/publicacoes/refs/'.$nome, 'descricao' => ''];
+            $this->referencias[] = ['path' => $this->guardarUpload($file), 'descricao' => ''];
         }
 
         $this->uploads = [];
     }
 
+    /** Copia um ficheiro carregado para a pasta de referências; devolve o caminho web. */
+    private function guardarUpload($file): string
+    {
+        $dir = public_path('media/publicacoes/refs');
+        if (! is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+        $ext = strtolower($file->getClientOriginalExtension() ?: 'png');
+        $nome = (string) Str::uuid().'.'.$ext;
+        copy($file->getRealPath(), $dir.'/'.$nome);
+
+        return 'media/publicacoes/refs/'.$nome;
+    }
+
     public function removerReferencia(int $i): void
     {
+        $path = (string) ($this->referencias[$i]['path'] ?? '');
         unset($this->referencias[$i]);
         $this->referencias = array_values($this->referencias);
+
+        // Solta a referência de quaisquer cartões onde estivesse anexa.
+        if ($path !== '') {
+            foreach (array_keys($this->anexos) as $c) {
+                $this->desanexar((int) $c, $path);
+            }
+        }
     }
 
-    /** Descrições não vazias das referências (contexto para a redação). @return array<int,string> */
-    private function refDescricoes(): array
+    /** Pool de referências indexada (índice + descrição) para a IA atribuir. @return array<int,array{indice:int,descricao:string}> */
+    private function refsIndexadas(): array
     {
-        return array_values(array_filter(array_map(
-            fn ($r) => trim((string) ($r['descricao'] ?? '')),
-            $this->referencias,
-        )));
+        $out = [];
+        foreach ($this->referencias as $k => $r) {
+            $out[] = ['indice' => (int) $k, 'descricao' => trim((string) ($r['descricao'] ?? ''))];
+        }
+
+        return $out;
     }
 
-    /** Caminhos das imagens de referência (para o gerador de imagens). @return array<int,string> */
+    /** Caminhos das imagens de referência (toda a pool). @return array<int,string> */
     private function refPaths(): array
     {
         return array_values(array_map(fn ($r) => (string) ($r['path'] ?? ''), $this->referencias));
+    }
+
+    /**
+     * Referências GERAIS: imagens da pool que NÃO estão anexadas a nenhum cartão
+     * específico. Uma imagem anexada a um cartão vai só a esse cartão (via anexos)
+     * — não é aplicada a toda a peça. As não-anexadas (ex.: logótipo) valem para
+     * todos os cartões, como antes.
+     *
+     * @return array<int,string>
+     */
+    private function refsGlobais(): array
+    {
+        $anexadas = [];
+        foreach ($this->anexos as $lista) {
+            foreach ((array) $lista as $p) {
+                $anexadas[(string) $p] = true;
+            }
+        }
+
+        return array_values(array_filter($this->refPaths(), fn ($p) => $p !== '' && ! isset($anexadas[$p])));
+    }
+
+    // -------------------------------------------------- anexos por cartão
+
+    /** Liga/desliga uma imagem da pool a um cartão. */
+    public function alternarAnexo(int $i, int $poolIndex): void
+    {
+        $path = (string) ($this->referencias[$poolIndex]['path'] ?? '');
+        if ($path === '') {
+            return;
+        }
+
+        $atual = $this->anexosDoCartao($i);
+        $this->anexos[$i] = in_array($path, $atual, true)
+            ? array_values(array_filter($atual, fn ($p) => $p !== $path))
+            : array_merge($atual, [$path]);
+
+        $this->invalidarPrompt($i);
+    }
+
+    /** Remove um anexo de um cartão (pela miniatura). */
+    public function desanexar(int $i, string $path): void
+    {
+        $this->anexos[$i] = array_values(array_filter($this->anexosDoCartao($i), fn ($p) => $p !== $path));
+        $this->invalidarPrompt($i);
+    }
+
+    /** Upload directo num cartão: junta à pool E anexa ao cartão. */
+    public function updatedCartaoUploads($value, $key): void
+    {
+        $i = (int) $key;
+        $files = array_filter(is_array($value) ? $value : [$value]);
+
+        foreach ($files as $file) {
+            \Illuminate\Support\Facades\Validator::make(
+                ['f' => $file], ['f' => 'image|max:8192'], [], ['f' => 'imagem'],
+            )->validate();
+
+            $path = $this->guardarUpload($file);
+            $this->referencias[] = ['path' => $path, 'descricao' => ''];
+            $this->anexos[$i] = array_merge($this->anexosDoCartao($i), [$path]);
+        }
+
+        unset($this->cartaoUploads[$key]);
+        $this->invalidarPrompt($i);
+    }
+
+    /** Caminhos das imagens anexas a um cartão. @return array<int,string> */
+    private function anexosDoCartao(int $i): array
+    {
+        return array_values(array_filter((array) ($this->anexos[$i] ?? [])));
+    }
+
+    /** Descrições das imagens anexas a um cartão (via pool). @return array<int,string> */
+    private function anexosDescrDoCartao(int $i): array
+    {
+        return array_values(array_filter(array_map(
+            fn ($p) => $this->descricaoDaRef((string) $p),
+            $this->anexosDoCartao($i),
+        )));
+    }
+
+    /** Descrição de uma referência pelo caminho (ou '' se não encontrada). */
+    private function descricaoDaRef(string $path): string
+    {
+        foreach ($this->referencias as $r) {
+            if (($r['path'] ?? '') === $path) {
+                return trim((string) ($r['descricao'] ?? ''));
+            }
+        }
+
+        return '';
+    }
+
+    /** Mapa cartão→caminhos anexos, só cartões com anexos. @return array<int,array<int,string>> */
+    private function anexosParaJob(): array
+    {
+        $out = [];
+        foreach (array_keys($this->anexos) as $i) {
+            $paths = $this->anexosDoCartao((int) $i);
+            if ($paths !== []) {
+                $out[(int) $i] = $paths;
+            }
+        }
+
+        return $out;
+    }
+
+    /** Mapa cartão→descrições anexas, só cartões com anexos. @return array<int,array<int,string>> */
+    private function anexosDescrParaJob(): array
+    {
+        $out = [];
+        foreach (array_keys($this->anexos) as $i) {
+            $d = $this->anexosDescrDoCartao((int) $i);
+            if ($d !== []) {
+                $out[(int) $i] = $d;
+            }
+        }
+
+        return $out;
+    }
+
+    // ------------------------------------------------ prompt kie por cartão
+
+    /** (Re)compõe o prompt kie de um cartão a partir do estado actual. */
+    public function montarPrompt(int $i): string
+    {
+        $dados = $this->dadosCartao($i);
+        $slide = new \App\Services\Publicacoes\Dto\SlidePlano($i + 1, $dados['titulo'], $dados['texto']);
+
+        $anteriores = [];
+        if ($this->ehCarrossel()) {
+            for ($k = 0; $k < $i; $k++) {
+                $t = trim((string) ($this->slides[$k]['titulo'] ?? ''));
+                if ($t !== '') {
+                    $anteriores[] = $t;
+                }
+            }
+        }
+
+        return app(\App\Services\Publicacoes\Rendering\KiePromptComposer::class)->paraCartao($slide, [
+            'proporcao' => $this->proporcao,
+            'capa' => $this->ehCarrossel() && $i === 0,
+            'ordem' => $i + 1,
+            'total' => $this->numCartoes(),
+            'postTitulo' => $this->titulo,
+            'anteriores' => $anteriores,
+            'anexos' => $this->anexosDescrDoCartao($i),
+        ]);
+    }
+
+    /** Botão «Regenerar prompt»: recompõe e limpa a marca de edição manual. */
+    public function regenerarPrompt(int $i): void
+    {
+        $this->prompts[$i] = $this->montarPrompt($i);
+        $this->promptEditado[$i] = false;
+    }
+
+    /** Marca um prompt como editado à mão (para confirmar antes de regenerar). */
+    public function updatedPrompts($value, $key): void
+    {
+        $this->promptEditado[(int) $key] = true;
+    }
+
+    /** Texto ou anexos mudaram: recompõe o prompt do cartão se não foi editado à mão. */
+    private function invalidarPrompt(int $i): void
+    {
+        if (! ($this->promptEditado[$i] ?? false)) {
+            $this->prompts[$i] = $this->montarPrompt($i);
+        }
+    }
+
+    /** O título/legenda mudou: recompõe os prompts não editados (título alimenta o contexto). */
+    public function updatedTitulo(): void
+    {
+        for ($i = 0; $i < $this->numCartoes(); $i++) {
+            $this->invalidarPrompt($i);
+        }
+    }
+
+    public function updatedLegenda(): void
+    {
+        if (! $this->ehCarrossel()) {
+            $this->invalidarPrompt(0);
+        }
+    }
+
+    public function updatedSlides($value, $key): void
+    {
+        $this->invalidarPrompt((int) explode('.', (string) $key)[0]);
+    }
+
+    /** Garante um prompt para cada cartão (compõe os em falta). Antes de gerar. */
+    private function garantirPrompts(): void
+    {
+        for ($i = 0; $i < $this->numCartoes(); $i++) {
+            if (trim((string) ($this->prompts[$i] ?? '')) === '') {
+                $this->prompts[$i] = $this->montarPrompt($i);
+            }
+        }
+    }
+
+    /**
+     * Semeia os anexos por cartão a partir dos índices de referência que a IA
+     * atribuiu a cada slide do plano (campo «referencias»).
+     *
+     * @param  array<int,array{referencias?:array<int,int>}>  $slides
+     */
+    private function semearAnexosDoPlano(array $slides): void
+    {
+        foreach (array_values($slides) as $i => $s) {
+            $indices = is_array($s['referencias'] ?? null) ? $s['referencias'] : [];
+            $paths = [];
+            foreach ($indices as $idx) {
+                $p = (string) ($this->referencias[(int) $idx]['path'] ?? '');
+                if ($p !== '') {
+                    $paths[] = $p;
+                }
+            }
+            if ($paths !== []) {
+                $this->anexos[$i] = array_values(array_unique($paths));
+            }
+        }
     }
 
     // ------------------------------------------------------------- redação IA
@@ -274,8 +527,9 @@ class Oficina extends Component
         $this->planToken = (string) Str::uuid();
         $this->aRedigir = true;
         $this->aviso = 'A IA está a redigir… (requer um worker: «php artisan queue:work»).';
+        $this->dispatch('loader-show', message: 'A IATECA está a redigir a publicação…');
 
-        PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken, $this->refDescricoes());
+        PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken, $this->refsIndexadas());
 
         $this->verificarPlano();
     }
@@ -292,6 +546,7 @@ class Oficina extends Component
         }
 
         $this->aRedigir = false;
+        $this->dispatch('loader-hide');
         Cache::forget(PlanearPublicacaoJob::key($this->planToken));
 
         if (! empty($r['erro'])) {
@@ -315,6 +570,13 @@ class Oficina extends Component
                 : (string) ($r['slides'][0]['texto'] ?? '');
         }
 
+        // A IA pode ter atribuído referências a cada cartão → semeia os anexos e
+        // recompõe os prompts com o conteúdo/anexos frescos.
+        $this->semearAnexosDoPlano($r['slides'] ?? []);
+        $this->prompts = [];
+        $this->promptEditado = [];
+        $this->garantirPrompts();
+
         $this->aviso = ($r['fonte'] ?? null) === 'ia'
             ? 'Redigido pela IA ('.($r['fornecedor'] ?: 'LLM').'). Reveja e ajuste antes de guardar.'
             : 'IA indisponível neste contexto — gerei um rascunho local. Para redação forte, corra «php artisan queue:work» num terminal com a sua sessão do Claude.';
@@ -325,6 +587,7 @@ class Oficina extends Component
         $this->aRedigir = false;
         $this->planToken = null;
         $this->aviso = null;
+        $this->dispatch('loader-hide');
     }
 
     // ------------------------------------------------------------- imagens
@@ -351,8 +614,12 @@ class Oficina extends Component
             $this->empurrarHistorico($i, $atual);
         }
 
+        // Garante que cada cartão tem um prompt (o que se envia = o que se mostra).
+        $this->garantirPrompts();
+
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
+        $this->dispatch('loader-show', message: 'A desenhar os cartões com o kie.ai…');
 
         // Marca a peça «a gerar»: alimenta o painel e permite retomar o estado
         // ao voltar à página (a sondagem passa a ser pela nota, não pelo token).
@@ -360,7 +627,8 @@ class Oficina extends Component
         Cache::put(GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
 
         GerarImagensJob::dispatch(
-            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refPaths(), $slug,
+            $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refsGlobais(), $slug,
+            $this->prompts, $this->anexosParaJob(), $this->anexosDescrParaJob(),
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -379,12 +647,19 @@ class Oficina extends Component
             $this->empurrarHistorico($i, $atual);
         }
 
+        $instrucao = (string) ($this->editar[$i] ?? '');
+        // Composição de raiz (sem instrução de edição) usa o prompt do cartão.
+        if (trim($instrucao) === '' && trim((string) ($this->prompts[$i] ?? '')) === '') {
+            $this->prompts[$i] = $this->montarPrompt($i);
+        }
+
         $token = (string) Str::uuid();
         $this->gerando[$i] = $token;
 
         RegenerarCartaoJob::dispatch(
             $this->tipo, $this->plataforma, $i, $dados['titulo'], $dados['texto'],
-            (string) ($this->editar[$i] ?? ''), $atual, $i + 1, $this->numCartoes(), $token, $this->proporcao, $this->refPaths(),
+            $instrucao, $atual, $i + 1, $this->numCartoes(), $token, $this->proporcao, $this->refsGlobais(),
+            (string) ($this->prompts[$i] ?? ''), $this->anexosDoCartao($i), $this->anexosDescrDoCartao($i),
         )->onQueue('media');
 
         $this->verificarImagens();
@@ -398,6 +673,7 @@ class Oficina extends Component
             $r = Cache::get(GerarImagensJob::key($this->imgToken));
             if ($r !== null) {
                 $this->aGerar = false;
+                $this->dispatch('loader-hide');
                 Cache::forget(GerarImagensJob::key($this->imgToken));
                 if (empty($r['erro'])) {
                     foreach (($r['imagens'] ?? []) as $i => $path) {
@@ -415,6 +691,7 @@ class Oficina extends Component
             $slug = pathinfo($this->notaPath, PATHINFO_FILENAME);
             if (! Cache::get(GerarImagensJob::notaKey($slug))) {
                 $this->aGerar = false;
+                $this->dispatch('loader-hide');
                 if ($nota = app(VaultContract::class)->get($this->notaPath)) {
                     $this->img = array_values((array) $nota->get('imagens', []));
                     $this->hist = (array) $nota->get('imagens_hist', $this->hist);
@@ -469,6 +746,7 @@ class Oficina extends Component
         $this->aGerar = false;
         $this->imgToken = null;
         $this->gerando = [];
+        $this->dispatch('loader-hide');
     }
 
     // ------------------------------------------------------------- guardar
@@ -491,7 +769,7 @@ class Oficina extends Component
         // Guardar uma peça NOVA limpa a oficina (compor a próxima); editar uma
         // peça já existente mantém-na aberta.
         if ($eraNovo) {
-            $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias');
+            $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias', 'anexos', 'prompts', 'promptEditado');
             if ($this->ehCarrossel()) {
                 $this->slides = array_fill(0, max(2, $this->kinds()->cartoes($this->tipo)['min']), ['titulo' => '', 'texto' => '']);
                 $this->titulo = '';
@@ -528,6 +806,13 @@ class Oficina extends Component
         }
         if ($this->referencias !== []) {
             $frontmatter['referencias'] = array_values($this->referencias);
+        }
+        if ($this->anexosParaJob() !== []) {
+            $frontmatter['anexos'] = $this->anexosParaJob();
+        }
+        $promptsGuardar = array_filter($this->prompts, fn ($p) => trim((string) $p) !== '');
+        if ($promptsGuardar !== []) {
+            $frontmatter['prompts'] = $promptsGuardar;
         }
 
         $body = $plano->toBody($formato);

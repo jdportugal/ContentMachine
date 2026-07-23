@@ -76,10 +76,10 @@ class DesignSystemTest extends TestCase
         ]);
 
         $this->assertSame('#123456', $t['colors']['bg']);            // válida → mantém
-        $this->assertSame('#1f7a7a', $t['colors']['accent']);        // inválida → default
+        $this->assertSame('#FFB347', $t['colors']['accent']);        // inválida → default (Nebula)
         $this->assertSame('Playfair Display', $t['fonts']['display']); // aspas removidas
-        $this->assertSame('EB Garamond', $t['fonts']['body']);       // em falta → default
-        $this->assertSame('paper', $t['texture']['kind']);           // inválida → default
+        $this->assertSame('Space Grotesk', $t['fonts']['body']);     // em falta → default (Nebula)
+        $this->assertSame('starfield', $t['texture']['kind']);       // inválida → default (Nebula)
     }
 
     public function test_tokens_round_trip(): void
@@ -89,7 +89,7 @@ class DesignSystemTest extends TestCase
 
         $repo->writeTokens(DesignTheme::defaults());
         $this->assertTrue($repo->tokensExist());
-        $this->assertSame('#1f7a7a', $repo->readTokens()['colors']['accent']);
+        $this->assertSame('#FFB347', $repo->readTokens()['colors']['accent']);
     }
 
     public function test_carregar_ficheiro_preenche_o_editor_sem_gravar(): void

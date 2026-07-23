@@ -76,6 +76,10 @@
         </main>
     </div>
 
+    {{-- Overlay de carregamento (partículas) — global, accionável por qualquer
+         componente via dispatch('loader-show'/'loader-hide') ou window.CMLoader. --}}
+    <x-particle-loader />
+
     {{-- Toasts globais (canto inferior direito). Ao nível do <body>, fora do
          scroller/transform, para o position:fixed fixar ao ecrã. Ouve o evento
          'toast' despachado por qualquer componente Livewire. --}}

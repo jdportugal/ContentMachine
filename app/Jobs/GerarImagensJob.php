@@ -27,7 +27,13 @@ class GerarImagensJob implements ShouldQueue
 
     public int $timeout = 900;
 
-    /** @param array<int,array{titulo?:string,texto?:string}> $slides */
+    /**
+     * @param  array<int,array{titulo?:string,texto?:string}>  $slides
+     * @param  array<int,string>  $referencias  referências globais (aplicadas a todos os cartões)
+     * @param  array<int,string>  $prompts  prompt kie por cartão (editado na oficina; '' = compõe)
+     * @param  array<int,array<int,string>>  $anexos  caminhos de imagens anexas por cartão
+     * @param  array<int,array<int,string>>  $anexosDescr  descrições das imagens anexas por cartão
+     */
     public function __construct(
         public string $tipo,
         public string $titulo,
@@ -38,6 +44,9 @@ class GerarImagensJob implements ShouldQueue
         public string $proporcao = '',
         public array $referencias = [],
         public string $notaSlug = '', // se definido, persiste as imagens na nota
+        public array $prompts = [],
+        public array $anexos = [],
+        public array $anexosDescr = [],
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
@@ -48,6 +57,9 @@ class GerarImagensJob implements ShouldQueue
                 $kind['proporcao'] = $this->proporcao;
             }
             $kind['_refs'] = $this->referencias;
+            $kind['_prompts'] = $this->prompts;
+            $kind['_anexos'] = $this->anexos;
+            $kind['_anexosDescr'] = $this->anexosDescr;
             $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
 
             $plano = PublicacaoPlan::daOficina(

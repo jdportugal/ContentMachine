@@ -2,22 +2,34 @@
 
 namespace App\Services\Publicacoes\Rendering;
 
-use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\Dto\SlidePlano;
 use App\Services\Support\DriverNotConfiguredException;
-use Illuminate\Support\Str;
 
 /**
  * Driver de produção: gera cada cartão com a API kie.ai (nano-banana-pro),
  * à imagem do AdsMaker. Devolve URLs de imagem.
+ *
+ * O prompt de texto de cada cartão vem do KiePromptComposer (partilhado com a
+ * oficina, que o mostra/edita). Se a oficina enviar um prompt já composto/editado
+ * (kind['_prompts'][i]), esse é usado tal e qual; caso contrário compõe-se aqui.
+ *
+ * Coerência do carrossel: cada cartão recebe como referência visual (image_input)
+ * as referências globais + os anexos próprios + TODAS as páginas já geradas antes
+ * dele — para manter a mesma identidade ao longo da peça.
  *
  * Requer KIE_API_KEY. Sem chave, a app usa o SvgSlideRenderer (ver
  * AppServiceProvider), por isso este driver não é exercido offline.
  */
 class KieSlideRenderer implements SlideRenderer
 {
-    public function __construct(private readonly KieClient $kie) {}
+    /** kie.ai aceita no máximo 8 imagens de referência (image_input) por pedido. */
+    private const MAX_IMAGE_INPUT = 8;
+
+    public function __construct(
+        private readonly KieClient $kie,
+        private readonly KiePromptComposer $composer,
+    ) {}
 
     public function render(PublicacaoPlan $plan, array $kind): array
     {
@@ -25,18 +37,40 @@ class KieSlideRenderer implements SlideRenderer
 
         $proporcao = (string) ($kind['proporcao'] ?? '1:1');
         $total = count($plan->slides);
-        $refs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
+
+        $baseRefs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
+        $anexosPaths = (array) ($kind['_anexos'] ?? []);   // [i => [caminho, …]]
+        $anexosDescr = (array) ($kind['_anexosDescr'] ?? []); // [i => [descrição, …]]
+        $prompts = (array) ($kind['_prompts'] ?? []);      // [i => prompt editado]
+
         $urls = [];
-        $ancora = null; // 1.º cartão serve de referência aos seguintes (consistência visual).
+        $anteriores = [];        // URLs kie de páginas já geradas (coerência visual)
+        $anterioresTitulos = []; // títulos anteriores (coerência textual no prompt)
 
         foreach ($plan->slides as $i => $slide) {
+            $anexoUrls = $this->kie->carregarReferencias($anexosPaths[$i] ?? []);
+
+            $prompt = trim((string) ($prompts[$i] ?? '')) !== ''
+                ? (string) $prompts[$i]
+                : $this->composer->paraCartao($slide, [
+                    'proporcao' => $proporcao,
+                    'capa' => $i === 0,
+                    'ordem' => $i + 1,
+                    'total' => $total,
+                    'postTitulo' => $plan->titulo,
+                    'anteriores' => $anterioresTitulos,
+                    'anexos' => array_values((array) ($anexosDescr[$i] ?? [])),
+                ]);
+
             $url = $this->kie->generate(
-                $this->prompt($slide, $kind, $i === 0, $i + 1, $total),
+                $prompt,
                 $proporcao,
-                array_merge($refs, $ancora !== null ? [$ancora] : []),
+                $this->limitarInput($anexoUrls, $baseRefs, $anteriores),
             );
+
             $urls[] = $url;
-            $ancora ??= $url;
+            $anteriores[] = $url;
+            $anterioresTitulos[] = $slide->titulo;
         }
 
         return $urls;
@@ -45,18 +79,56 @@ class KieSlideRenderer implements SlideRenderer
     public function renderCartao(SlidePlano $slide, array $kind, ?string $refImagem = null, string $instrucao = '', int $ordem = 1, int $total = 1): string
     {
         $this->exigirChave();
+
         $proporcao = (string) ($kind['proporcao'] ?? '1:1');
-        $refs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
+        $baseRefs = $this->kie->carregarReferencias($kind['_refs'] ?? []);
+        $anexoUrls = $this->kie->carregarReferencias((array) ($kind['_anexos'] ?? []));
 
         // Edição imagem→imagem: mantém o cartão e aplica a instrução (+ referências).
         if ($refImagem !== null && trim($instrucao) !== '') {
             $url = $this->kie->upload($refImagem, 'atual.png');
 
-            return $this->kie->generate($this->promptEdicao($slide, $instrucao), $proporcao, array_merge($refs, [$url]));
+            return $this->kie->generate(
+                $this->composer->paraEdicao($slide, $instrucao),
+                $proporcao,
+                // A imagem actual (a editar) é a prioridade máxima.
+                $this->limitarInput([$url], array_merge($anexoUrls, $baseRefs), []),
+            );
         }
 
-        // Composição de novo a partir do texto, com as referências.
-        return $this->kie->generate($this->prompt($slide, $kind, $ordem === 1, $ordem, $total), $proporcao, $refs);
+        // Composição de novo: usa o prompt enviado pela oficina, ou compõe-o.
+        $prompt = trim((string) ($kind['_prompt'] ?? '')) !== ''
+            ? (string) $kind['_prompt']
+            : $this->composer->paraCartao($slide, [
+                'proporcao' => $proporcao,
+                'capa' => $ordem === 1,
+                'ordem' => $ordem,
+                'total' => $total,
+                'anexos' => array_values((array) ($kind['_anexosDescr'] ?? [])),
+            ]);
+
+        return $this->kie->generate($prompt, $proporcao, $this->limitarInput($anexoUrls, $baseRefs, []));
+    }
+
+    /**
+     * Limita o image_input ao máximo do kie.ai (8), por ordem de prioridade:
+     * anexos do cartão → capa/âncora de identidade → referências globais →
+     * páginas anteriores mais recentes. Assim a coerência mantém-se (capa + as
+     * páginas mais próximas) sem exceder o limite da API.
+     *
+     * @param  array<int,string>  $anexos     imagens específicas do cartão
+     * @param  array<int,string>  $globais    referências aplicadas a toda a peça
+     * @param  array<int,string>  $anteriores páginas já geradas (0 = capa)
+     * @return array<int,string>
+     */
+    private function limitarInput(array $anexos, array $globais, array $anteriores): array
+    {
+        $capa = $anteriores !== [] ? [$anteriores[0]] : [];
+        $recentes = array_reverse(array_slice($anteriores, 1)); // mais recente primeiro
+
+        $ordenado = array_merge($anexos, $capa, $globais, $recentes);
+
+        return array_slice(array_values(array_unique($ordenado)), 0, self::MAX_IMAGE_INPUT);
     }
 
     private function exigirChave(): void
@@ -64,84 +136,5 @@ class KieSlideRenderer implements SlideRenderer
         if (! $this->kie->configurado()) {
             throw DriverNotConfiguredException::for('kie', 'KIE_API_KEY');
         }
-    }
-
-    /**
-     * Prompt para o modelo com texto (nano-banana-pro): cartão editorial da
-     * IATECA com o texto EXACTO, legível e correctamente escrito.
-     */
-    private function prompt(SlidePlano $s, array $kind, bool $capa, int $ordem, int $total): string
-    {
-        $proporcao = (string) ($kind['proporcao'] ?? '1:1');
-        $papel = $capa
-            ? 'É a CAPA do carrossel: título grande e central, muito legível.'
-            : 'É um cartão de CONTEÚDO ('.$ordem.' de '.$total.'): título no topo e o texto por baixo, com respiração.';
-
-        $texto = $s->texto !== '' ? 'TEXTO DE APOIO (exacto): «'.$s->texto.'»' : '';
-        $estilo = $this->estiloMarca();
-
-        return trim(<<<PROMPT
-        Cartão para redes sociais. Proporção {$proporcao}. {$papel}
-
-        {$estilo}
-
-        Regras invariáveis: SEM logótipos de marcas terceiras, SEM emojis, SEM marcas de água.
-        Compõe o seguinte texto, escrito EXACTAMENTE assim, em português europeu:
-        TÍTULO: «{$s->titulo}»
-        {$texto}
-
-        Regra de texto: renderiza TODO o texto como letras reais, nítidas, bem espaçadas e SEM erros
-        ortográficos. Não inventes, traduzas nem alteres palavras. O texto é o elemento central do cartão.
-        PROMPT);
-    }
-
-    /** Prompt de edição: parte da imagem dada e aplica só a mudança pedida. */
-    private function promptEdicao(SlidePlano $s, string $instrucao): string
-    {
-        return trim(<<<PROMPT
-        Edita a imagem fornecida deste cartão, mantendo a MESMA identidade visual da marca, a mesma
-        composição e o mesmo texto legível e sem erros.
-        Aplica APENAS esta alteração pedida: «{$instrucao}».
-        Mantém o título «{$s->titulo}» correcto e legível. Sem emojis, sem logótipos de terceiros.
-        PROMPT);
-    }
-
-    /**
-     * Diretriz de estilo para a imagem, a partir do Sistema de Design (design.md
-     * + tokens). Sem sistema de design configurado, usa a estética IATECA.
-     */
-    private function estiloMarca(): string
-    {
-        $design = app(DesignSystemRepository::class);
-        $md = trim($design->read());
-        $tokens = $design->readTokens();
-
-        if ($md === '' && ! $tokens) {
-            return 'Estética: página de livro antigo / gravura. Fundo de pergaminho creme, tinta '
-                .'castanho-escura, filete e ornamentos discretos a ouro velho, tipografia serifada '
-                .'elegante e centrada. Sóbrio e culto, sem pessoas nem molduras de fotografia.';
-        }
-
-        $linhas = ['ESTILO DE MARCA — aplica RIGOROSAMENTE esta identidade visual ao cartão:'];
-
-        if ($md !== '') {
-            $linhas[] = Str::limit($md, 1600);
-        }
-
-        if ($tokens) {
-            $c = $tokens['colors'] ?? [];
-            $f = $tokens['fonts'] ?? [];
-            $partes = array_filter([
-                (isset($c['bg'], $c['textOnBg']) ? "Paleta: fundo {$c['bg']}, texto {$c['textOnBg']}" : '')
-                    .(isset($c['accent']) ? ", destaque {$c['accent']}" : '').(isset($c['accent2']) ? " / {$c['accent2']}" : '').'.',
-                isset($f['display'], $f['body']) ? "Tipografia: títulos tipo «{$f['display']}», corpo tipo «{$f['body']}»." : '',
-                ! empty($tokens['texture']['kind']) ? "Fundo/textura: {$tokens['texture']['kind']}." : '',
-            ]);
-            if ($partes !== []) {
-                $linhas[] = 'Tokens concretos — '.implode(' ', $partes);
-            }
-        }
-
-        return implode("\n\n", $linhas);
     }
 }

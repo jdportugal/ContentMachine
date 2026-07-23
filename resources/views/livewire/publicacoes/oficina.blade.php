@@ -116,6 +116,7 @@
                                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-body text-sm focus:border-teal focus:outline-none">
                                         <textarea wire:model="slides.{{ $i }}.texto" rows="3" placeholder="Texto do cartão…"
                                                   class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none"></textarea>
+                                        @include('livewire.publicacoes._anexos-cartao', ['i' => $i])
                                         @include('livewire.publicacoes._editar-cartao', ['i' => $i])
                                         <button type="button" wire:click="removerSlide({{ $i }})"
                                                 class="text-ink-faint hover:text-bad font-mono text-[0.6rem]">× remover cartão</button>
@@ -136,6 +137,7 @@
                             <textarea wire:model="legenda" rows="6" placeholder="Escreva o texto da peça…"
                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none"></textarea>
                             @error('legenda') <span class="text-bad text-sm">{{ $message }}</span> @enderror
+                            @include('livewire.publicacoes._anexos-cartao', ['i' => 0])
                             @include('livewire.publicacoes._editar-cartao', ['i' => 0])
                         </div>
                         <div class="pt-6">

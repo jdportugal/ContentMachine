@@ -25,7 +25,10 @@ class PlanearPublicacaoJob implements ShouldQueue
 
     public int $timeout = 300;
 
-    /** @param array<int,string> $referencias descrições das imagens de referência */
+    /**
+     * @param array<int,array{indice:int,descricao:string}|string> $referencias
+     *   pool de imagens de referência (índice + descrição) para a IA atribuir
+     */
     public function __construct(
         public string $tipo,
         public string $brief,
@@ -44,7 +47,7 @@ class PlanearPublicacaoJob implements ShouldQueue
             'titulo' => $plano->titulo,
             'legenda' => $plano->legenda,
             'slides' => array_map(
-                fn ($s) => ['titulo' => $s->titulo, 'texto' => $s->texto],
+                fn ($s) => ['titulo' => $s->titulo, 'texto' => $s->texto, 'referencias' => $s->referencias],
                 $plano->slides,
             ),
         ], now()->addMinutes(15));

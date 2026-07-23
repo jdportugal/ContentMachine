@@ -336,4 +336,148 @@ class OficinaTest extends TestCase
 
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\PlanearPublicacaoJob::class);
     }
+
+    public function test_anexar_e_desanexar_imagem_da_pool_a_um_cartao(): void
+    {
+        $ref = ['path' => 'media/publicacoes/refs/a.png', 'descricao' => 'logo'];
+
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('slides', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('alternarAnexo', 0, 0);
+
+        $this->assertSame(['media/publicacoes/refs/a.png'], $c->get('anexos')[0]);
+
+        // Segundo toque no mesmo → solta.
+        $c->call('alternarAnexo', 0, 0);
+        $this->assertSame([], $c->get('anexos')[0] ?? []);
+    }
+
+    public function test_prompt_editado_marca_flag_e_regenerar_sobrepoe(): void
+    {
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('slides', [['titulo' => 'Capa', 'texto' => 'A'], ['titulo' => 'Dois', 'texto' => 'B']])
+            ->set('prompts.0', 'prompt escrito à mão');
+
+        $this->assertTrue($c->get('promptEditado')[0]);
+
+        $c->call('regenerarPrompt', 0);
+        $this->assertNotSame('prompt escrito à mão', $c->get('prompts')[0]);
+        $this->assertStringContainsString('Capa', $c->get('prompts')[0]);
+        $this->assertFalse($c->get('promptEditado')[0]);
+    }
+
+    public function test_anexar_recompoe_prompt_nao_editado(): void
+    {
+        $ref = ['path' => 'media/publicacoes/refs/a.png', 'descricao' => 'crachá dourado'];
+
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('slides', [['titulo' => 'Capa', 'texto' => 'A'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('alternarAnexo', 0, 0);
+
+        // O prompt (não editado) passou a mencionar a descrição do anexo.
+        $this->assertStringContainsString('crachá dourado', $c->get('prompts')[0]);
+    }
+
+    public function test_gerar_imagens_passa_prompts_e_anexos_ao_job(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        $ref = ['path' => 'media/publicacoes/refs/a.png', 'descricao' => 'logo'];
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('slides', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('alternarAnexo', 1, 0)
+            ->call('gerarImagens');
+
+        \Illuminate\Support\Facades\Queue::assertPushed(
+            \App\Jobs\GerarImagensJob::class,
+            fn ($job) => trim((string) ($job->prompts[0] ?? '')) !== ''
+                && ($job->anexos[1] ?? null) === ['media/publicacoes/refs/a.png']
+                && ($job->anexosDescr[1] ?? null) === ['logo'],
+        );
+    }
+
+    public function test_imagem_anexada_a_um_cartao_nao_vai_como_referencia_global(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        $soCard2 = ['path' => 'media/publicacoes/refs/so-card-2.png', 'descricao' => 'só no cartão 2'];
+        $logo = ['path' => 'media/publicacoes/refs/logo.png', 'descricao' => 'logótipo (geral)'];
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$soCard2, $logo])
+            ->set('slides', [
+                ['titulo' => 'A', 'texto' => 'a'],
+                ['titulo' => 'B', 'texto' => 'b'],
+                ['titulo' => 'C', 'texto' => 'c'],
+            ])
+            ->call('alternarAnexo', 1, 0)   // anexa "so-card-2" apenas ao cartão 2 (índice 1)
+            ->call('gerarImagens');
+
+        \Illuminate\Support\Facades\Queue::assertPushed(
+            \App\Jobs\GerarImagensJob::class,
+            function ($job) {
+                // A imagem anexada NÃO é referência global…
+                return ! in_array('media/publicacoes/refs/so-card-2.png', $job->referencias, true)
+                    // …mas o logótipo (não anexado) continua a valer para todos…
+                    && in_array('media/publicacoes/refs/logo.png', $job->referencias, true)
+                    // …e a imagem anexada vai só ao cartão 2.
+                    && ($job->anexos[1] ?? null) === ['media/publicacoes/refs/so-card-2.png']
+                    && ! isset($job->anexos[0]) && ! isset($job->anexos[2]);
+            },
+        );
+    }
+
+    public function test_anexos_e_prompts_persistem_na_nota(): void
+    {
+        $ref = ['path' => 'media/publicacoes/refs/a.png', 'descricao' => 'logo'];
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('titulo', 'Peça com anexos')
+            ->set('referencias', [$ref])
+            ->set('slides', [['titulo' => 'A', 'texto' => 'a'], ['titulo' => 'B', 'texto' => 'b']])
+            ->call('alternarAnexo', 0, 0)
+            ->call('regenerarPrompt', 1)
+            ->call('criarRascunho');
+
+        $nota = app(VaultContract::class)->all('rascunhos')->first();
+        $this->assertSame(['media/publicacoes/refs/a.png'], $nota->get('anexos')[0]);
+        $this->assertNotEmpty($nota->get('prompts')[1]);
+
+        // Reabrir a peça recarrega anexos e prompts.
+        $c = Livewire::withQueryParams(['nota' => $nota->slug()])
+            ->test(Oficina::class, ['tipo' => 'carrossel']);
+        $this->assertSame(['media/publicacoes/refs/a.png'], $c->get('anexos')[0]);
+        $this->assertNotEmpty($c->get('prompts')[1]);
+    }
+
+    public function test_redacao_semeia_anexos_dos_indices_atribuidos_pela_ia(): void
+    {
+        $this->app->instance(LlmClient::class, new class extends LlmClient
+        {
+            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            {
+                return json_encode([
+                    'titulo' => 'T', 'legenda' => 'L', 'tags' => ['x'],
+                    'slides' => [
+                        ['ordem' => 1, 'titulo' => 'Capa', 'texto' => 'a', 'referencias' => [0]],
+                        ['ordem' => 2, 'titulo' => 'Dois', 'texto' => 'b', 'referencias' => []],
+                    ],
+                ]);
+            }
+        });
+
+        $ref = ['path' => 'media/publicacoes/refs/a.png', 'descricao' => 'logo'];
+
+        $c = Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('referencias', [$ref])
+            ->set('brief', 'um tema')
+            ->call('redigirComIa'); // fila sync → verificarPlano corre já
+
+        $this->assertSame(['media/publicacoes/refs/a.png'], $c->get('anexos')[0]);
+        $this->assertArrayNotHasKey(1, $c->get('anexos'));
+    }
 }
