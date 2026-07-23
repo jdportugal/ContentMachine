@@ -13,6 +13,13 @@ use Illuminate\Support\Str;
  */
 class NewsAggregator
 {
+    /**
+     * Plataformas que o yt-dlp recolhe de forma fiável. Instagram/TikTok/LinkedIn
+     * estão «marked as broken» no yt-dlp (precisam de Apify) — são ignoradas com
+     * aviso até essa integração existir.
+     */
+    private const SUPORTADAS = ['youtube'];
+
     public function __construct(
         private readonly VaultContract $vault,
         private readonly SettingsRepository $definicoes,
@@ -41,6 +48,15 @@ class NewsAggregator
         foreach ($plataformas as $plataforma) {
             $canais = array_values(array_filter((array) ($canaisConfig[$plataforma] ?? [])));
             if ($canais === []) {
+                continue;
+            }
+
+            // Salta plataformas que o yt-dlp não consegue recolher (evita chamadas
+            // que falham/penduram e estouram o tempo do pedido).
+            if (! in_array($plataforma, self::SUPORTADAS, true)) {
+                $porPlataforma[$plataforma] = 0;
+                $avisos[] = $this->avisoIndisponivel($plataforma);
+
                 continue;
             }
 
@@ -186,7 +202,7 @@ class NewsAggregator
     private function avisoIndisponivel(string $plataforma): string
     {
         return match ($plataforma) {
-            'instagram', 'linkedin' => ucfirst($plataforma).': não disponível sem credenciais (extração via yt-dlp requer autenticação).',
+            'instagram', 'tiktok', 'linkedin' => ucfirst($plataforma).': ignorado — de momento só o YouTube é recolhido (as outras plataformas precisam de Apify).',
             default => ucfirst($plataforma).': nenhum item recolhido (canal inacessível ou sem publicações recentes).',
         };
     }

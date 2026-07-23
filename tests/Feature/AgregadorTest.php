@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\AgregarConteudoJob;
 use App\Livewire\Noticias;
 use App\Services\Aggregation\NewsAggregator;
 use App\Services\Aggregation\YtDlpRunnerContract;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
+use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\Support\FakeYtDlpRunner;
 use Tests\TestCase;
@@ -95,8 +97,8 @@ class AgregadorTest extends TestCase
 
         $this->assertNotEmpty($resumo['avisos']);
         $this->assertTrue(
-            collect($resumo['avisos'])->contains(fn ($a) => str_contains($a, 'Instagram') && str_contains($a, 'credenciais')),
-            'Esperava um aviso de Instagram indisponível sem credenciais.'
+            collect($resumo['avisos'])->contains(fn ($a) => str_contains($a, 'Instagram') && str_contains($a, 'Apify')),
+            'Esperava um aviso de Instagram ignorado (só YouTube; resto precisa de Apify).'
         );
     }
 
@@ -113,6 +115,17 @@ class AgregadorTest extends TestCase
             ->call('agregarAgora')
             ->assertSet('diaSelecionado', '2026-07-14')
             ->assertSee('Nick Saraev');
+    }
+
+    public function test_agregar_agora_despacha_job_e_nao_bloqueia(): void
+    {
+        Queue::fake();
+
+        Livewire::test(Noticias::class)
+            ->call('agregarAgora')
+            ->assertSet('aAgregar', true);
+
+        Queue::assertPushed(AgregarConteudoJob::class);
     }
 
     private function rrmdir(string $dir): void

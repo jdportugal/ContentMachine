@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Jobs\AgregarConteudoJob;
 use App\Jobs\GerarRelatorioJob;
-use App\Services\Aggregation\NewsAggregator;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Carbon;
@@ -49,6 +49,11 @@ class Noticias extends Component
 
     public ?string $avisoRelatorio = null;
 
+    /** Recolha (agregação) em curso na fila. */
+    public bool $aAgregar = false;
+
+    public ?string $agregacaoToken = null;
+
     public function mount(VaultContract $vault): void
     {
         $this->dataRelatorio = now()->toDateString();
@@ -72,13 +77,41 @@ class Noticias extends Component
     /**
      * Corre a agregação multi-plataforma e foca o dia mais recente.
      *
-     * O fluxo interactivo corre de forma síncrona para poder mostrar o resumo
-     * de imediato. Para agendar em fila (produção com worker), despacha-se o
-     * AgregarConteudoJob e a página lê depois os resultados do vault.
+     * Corre numa FILA (worker): a recolha faz dezenas de chamadas yt-dlp e
+     * estouraria o max_execution_time no pedido web. A página sonda o resultado.
      */
-    public function agregarAgora(NewsAggregator $aggregator): void
+    public function agregarAgora(): void
     {
-        $resumo = $aggregator->aggregate();
+        $this->agregacaoToken = (string) Str::uuid();
+        $this->aAgregar = true;
+        $this->dispatch('loader-show', message: 'A vasculhar os canais… (requer «php artisan queue:work»)');
+
+        AgregarConteudoJob::dispatch($this->agregacaoToken);
+
+        $this->verificarAgregacao();
+    }
+
+    /** Sondado (wire:poll) enquanto $aAgregar: mostra o resumo quando o worker termina. */
+    public function verificarAgregacao(): void
+    {
+        if (! $this->aAgregar || $this->agregacaoToken === null) {
+            return;
+        }
+
+        $resumo = Cache::get(AgregarConteudoJob::key($this->agregacaoToken));
+        if ($resumo === null) {
+            return;
+        }
+
+        $this->aAgregar = false;
+        $this->dispatch('loader-hide');
+        Cache::forget(AgregarConteudoJob::key($this->agregacaoToken));
+
+        if (! empty($resumo['erro'])) {
+            $this->avisoRelatorio = 'A recolha falhou. Verifique se o worker está a correr («php artisan queue:work»).';
+
+            return;
+        }
 
         $this->resumoAgregacao = $resumo;
         $this->diaSelecionado = $resumo['dias'][0] ?? $this->diaSelecionado;

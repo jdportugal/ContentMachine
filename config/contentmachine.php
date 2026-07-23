@@ -75,7 +75,7 @@ return [
         'ytdlp_cmd' => env('YTDLP_CMD', 'yt-dlp'),
         'limite_por_canal' => (int) env('AGGREGATION_LIMIT', 5),
         'sub_langs' => ['pt', 'en'],
-        'timeout' => (int) env('AGGREGATION_TIMEOUT', 120),
+        'timeout' => (int) env('AGGREGATION_TIMEOUT', 45), // fail-fast por chamada yt-dlp (canais pendurados falham depressa)
         'extractor_args' => [
             'youtube.com' => 'youtube:player_client=android',
             'youtu.be' => 'youtube:player_client=android',

@@ -12,13 +12,17 @@
                 Vasculha os canais configurados em <a href="{{ route('definicoes') }}" class="text-teal hover:underline">Definições</a>
                 (YouTube, TikTok, Instagram, LinkedIn) e arquiva cada item no vault <em>por dia</em>, com transcrição e uma lista de tópicos.
             </p>
-            <button wire:click="agregarAgora" wire:loading.attr="disabled" wire:target="agregarAgora"
-                    x-on:click="window.CMLoader.busy('A vasculhar canais…')"
+            <button wire:click="agregarAgora" @disabled($aAgregar)
                     class="shrink-0 bg-teal text-papyrus font-display text-lg px-6 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
-                <span wire:loading.remove wire:target="agregarAgora">Agregar agora</span>
-                <span wire:loading wire:target="agregarAgora">A vasculhar canais…</span>
+                {{ $aAgregar ? 'A vasculhar canais…' : 'Agregar agora' }}
             </button>
         </div>
+        @if ($aAgregar)
+            {{-- Sonda o worker até a recolha terminar. --}}
+            <div wire:poll.2s="verificarAgregacao" class="mt-2 font-mono text-[0.6rem] text-ink-faint">
+                A recolher na fila… precisa de um worker: <span class="text-teal">php artisan queue:work</span>
+            </div>
+        @endif
 
         @if ($resumoAgregacao)
             <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
