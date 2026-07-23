@@ -5,13 +5,7 @@
         cota="778.5 · IAT · '26"
         lead="Corte automático de vídeos longos em shorts legendados. Cada passo — cortar, legendar, regenerar — é independente e re-executável." />
 
-    {{-- Indicador de operação em curso — toast fixo no canto inferior direito. --}}
-    <div wire:loading wire:target="transcrever, sugerirIA, cortar, regenerar, gerarDescricao"
-         style="position:fixed; bottom:1rem; right:1rem; z-index:9998; width:20rem; max-width:90vw; border:1px solid rgba(90,123,255,.5); color:#5A7BFF;"
-         class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
-        <span class="animate-pulse">⏳</span>
-        <span class="flex-1">A processar localmente (ffmpeg)… pode demorar.</span>
-    </div>
+    {{-- Operações locais (ffmpeg/IA) usam o particle loader — ver os botões abaixo. --}}
 
     @if (! $fonteAtual)
         {{-- ================= LISTA DE VÍDEOS LONGOS ================= --}}
@@ -26,9 +20,29 @@
         {{-- Formulário de novo vídeo (revelado pelo botão) --}}
         @if ($mostrarNovaFonte)
             <x-panel eyebrow="Origem" title="Novo vídeo longo" glyph="▶" class="mb-6">
-                <form wire:submit="adicionarFonte" class="space-y-4">
+                <form wire:submit="adicionarFonte" x-on:submit="window.CMLoader.busy('A adicionar o vídeo…')" class="space-y-4">
+                    {{-- Arrastar e largar (até 2 GB) --}}
+                    <div x-data="{ over: false }"
+                         x-on:dragover.prevent="over = true"
+                         x-on:dragleave.prevent="over = false"
+                         x-on:drop.prevent="over = false; if ($event.dataTransfer.files.length) $wire.upload('novoVideo', $event.dataTransfer.files[0])"
+                         :class="over ? 'border-teal bg-teal/5' : 'border-ink-soft/25'"
+                         class="border border-dashed rounded-sm px-4 py-6 text-center transition">
+                        @if ($novoVideo)
+                            <p class="font-mono text-sm text-teal">✓ {{ $novoVideo->getClientOriginalName() }}</p>
+                            <button type="button" wire:click="$set('novoVideo', null)"
+                                    class="mt-1 font-mono text-[0.62rem] text-ink-faint hover:text-bad">remover</button>
+                        @else
+                            <p class="text-ink-soft text-sm">Arraste um vídeo (mp4 / mov) para aqui, ou
+                                <label class="text-teal hover:underline cursor-pointer">escolha um ficheiro<input type="file" wire:model="novoVideo" accept="video/mp4,video/quicktime" class="hidden"></label>
+                            </p>
+                        @endif
+                        <div wire:loading wire:target="novoVideo" class="mt-2 font-mono text-[0.62rem] text-ink-faint">a carregar…</div>
+                        @error('novoVideo') <span class="block mt-1 text-bad font-mono text-xs">{{ $message }}</span> @enderror
+                    </div>
+
                     <div>
-                        <label class="eyebrow block mb-1.5">Vídeo longo — caminho local ou URL</label>
+                        <label class="eyebrow block mb-1.5">…ou caminho local / URL</label>
                         <input type="text" wire:model="novaFonte" placeholder="/Users/.../video.mp4  ou  https://…"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                         @error('novaFonte') <span class="text-bad font-mono text-xs">{{ $message }}</span> @enderror
@@ -96,15 +110,22 @@
                 <span class="font-mono text-xs text-ink-faint truncate max-w-md">{{ $fonteAtual->get('fonte') }}</span>
                 <div class="ml-auto flex items-center gap-2">
                     <button wire:click="transcrever('{{ $fonteAtual->path }}')" wire:loading.attr="disabled"
+                            x-on:click="window.CMLoader.busy('A transcrever o vídeo…')"
                             class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal/10 transition">
                         {{ $temTranscricao ? 'Re-transcrever' : 'Transcrever' }}
                     </button>
                     @if ($temIA)
                         <button wire:click="sugerirIA('{{ $fonteAtual->path }}')" wire:loading.attr="disabled" @disabled(! $temTranscricao)
+                                x-on:click="window.CMLoader.busy('A escolher clips com IA…')"
                                 class="bg-gold text-ink font-display text-base px-4 py-1.5 rounded-sm hover:bg-gold/80 transition shadow-engraved disabled:opacity-40 disabled:cursor-not-allowed">
                             ✦ Escolher clips com IA
                         </button>
                     @endif
+                    <button wire:click="gerarPublicacao('{{ $fonteAtual->path }}')" @disabled(! $temTranscricao)
+                            title="Usa o texto do vídeo como brief no gerador de publicações"
+                            class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal/10 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                        ✎ Gerar publicação
+                    </button>
                     <button wire:click="removerFonte('{{ $fonteAtual->path }}')" wire:confirm="Remover este vídeo e os seus clips?"
                             class="border border-bad/30 text-bad font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-bad/10 transition">Remover</button>
                 </div>
@@ -175,8 +196,10 @@
                             <x-badge :tone="$tone">{{ $estado }}</x-badge>
                             <div class="ml-auto flex items-center gap-2">
                                 <button wire:click="cortar('{{ $clip->path }}')" wire:loading.attr="disabled"
+                                        x-on:click="window.CMLoader.busy('A cortar o clip (ffmpeg)…')"
                                         class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal/10 transition">Cortar</button>
                                 <button wire:click="regenerar('{{ $clip->path }}')" wire:loading.attr="disabled"
+                                        x-on:click="window.CMLoader.busy('A gravar o short com legendas…')"
                                         class="bg-teal text-papyrus font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal-deep transition shadow-engraved">Regenerar</button>
                                 <button wire:click="removerClip('{{ $clip->path }}')" wire:confirm="Remover este clip?"
                                         class="border border-bad/30 text-bad font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-bad/10 transition">✕</button>
@@ -217,6 +240,7 @@
                                                 <label class="eyebrow">Descrição</label>
                                                 @if ($temIA)
                                                     <button type="button" wire:click="gerarDescricao('{{ $clip->path }}')" wire:loading.attr="disabled"
+                                                            x-on:click="window.CMLoader.busy('A gerar descrição com IA…')"
                                                             class="font-mono text-[11px] text-gold hover:text-gold/80 uppercase tracking-wider">✦ Gerar com IA</button>
                                                 @endif
                                             </div>
@@ -314,6 +338,7 @@
                                 <div class="flex items-center gap-3 pt-1">
                                     <button wire:click="guardarLegendas" class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-sm hover:bg-teal/10 transition">Guardar</button>
                                     <button wire:click="regenerar('{{ $clip->path }}')" wire:loading.attr="disabled"
+                                            x-on:click="window.CMLoader.busy('A gravar o short com legendas…')"
                                             class="bg-teal text-papyrus font-display text-base px-5 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved">
                                         Guardar e regenerar short
                                     </button>

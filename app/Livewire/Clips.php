@@ -5,14 +5,18 @@ namespace App\Livewire;
 use App\Services\Shorts\MusicLibrary;
 use App\Services\Shorts\ShortsPipeline;
 use App\Services\Vault\VaultContract;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
 #[Title('Gerador de Clips')]
 class Clips extends Component
 {
+    use WithFileUploads;
     // Vídeo longo aberto (detalhe). Null → lista de vídeos.
     public ?string $fonteAberta = null;
 
@@ -25,6 +29,9 @@ class Clips extends Component
     public string $novaFonteTitulo = '';
 
     public string $novaFonteLingua = 'pt';
+
+    // Vídeo longo carregado por arrastar-e-largar (até 2 GB — ver config/livewire.php).
+    public $novoVideo = null;
 
     // Formulários "adicionar clip", por slug de fonte.
     /** @var array<string,string> */
@@ -77,19 +84,67 @@ class Clips extends Component
 
     public function adicionarFonte(ShortsPipeline $pipeline): void
     {
-        $this->validate(
-            ['novaFonte' => 'required|string'],
-            ['novaFonte.required' => 'Indique o caminho ou URL do vídeo.'],
-        );
+        // Aceita um ficheiro carregado OU um caminho/URL — pelo menos um.
+        $this->validate([
+            'novoVideo' => 'nullable|file|mimetypes:video/mp4,video/quicktime|max:2097152',
+            'novaFonte' => 'nullable|string',
+        ], [
+            'novoVideo.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
+            'novoVideo.max' => 'O vídeo é demasiado grande (máximo 2 GB).',
+        ]);
 
-        $fonte = $pipeline->criarFonte(trim($this->novaFonte), trim($this->novaFonteTitulo), $this->novaFonteLingua);
+        if ($this->novoVideo) {
+            // Caminho absoluto: LocalVideoEngine::resolveSource faz is_file($ref).
+            $ref = Storage::disk('local')->path($this->novoVideo->store('clips/uploads'));
+            $titulo = trim($this->novaFonteTitulo) !== ''
+                ? trim($this->novaFonteTitulo)
+                : $this->novoVideo->getClientOriginalName();
+        } elseif (trim($this->novaFonte) !== '') {
+            $ref = trim($this->novaFonte);
+            $titulo = trim($this->novaFonteTitulo);
+        } else {
+            $this->addError('novaFonte', 'Arraste um vídeo ou indique um caminho/URL.');
 
-        $this->reset('novaFonte', 'novaFonteTitulo');
+            return;
+        }
+
+        $fonte = $pipeline->criarFonte($ref, $titulo, $this->novaFonteLingua);
+
+        $this->reset('novaFonte', 'novaFonteTitulo', 'novoVideo');
         $this->mostrarNovaFonte = false;
         $this->notificar('Vídeo adicionado.');
 
         // Abre logo o vídeo para prosseguir (transcrever → escolher clips).
         $this->abrirFonte($fonte->path);
+    }
+
+    /**
+     * Gera uma publicação a partir do texto do vídeo: semeia o brief da oficina
+     * com a transcrição e envia para o seletor de formato das Publicações.
+     */
+    public function gerarPublicacao(string $fontePath, VaultContract $vault, ShortsPipeline $pipeline)
+    {
+        $fonte = $vault->get($fontePath);
+        if (! $fonte) {
+            $this->notificar('Vídeo não encontrado.', 'erro');
+
+            return null;
+        }
+
+        $segmentos = $pipeline->transcricao($fonte);
+        if (empty($segmentos)) {
+            $this->notificar('Transcreva o vídeo primeiro.', 'erro');
+
+            return null;
+        }
+
+        $texto = collect($segmentos)->pluck('text')->filter()->implode(' ');
+        // ponytail: corte simples a ~6000 chars p/ não inflar o prompt da IA.
+        $texto = Str::limit(trim($texto), 6000, '');
+
+        session(['oficina_brief' => $texto]);
+
+        return redirect()->route('publicacoes');
     }
 
     /** Abre um vídeo longo (vista de detalhe). */

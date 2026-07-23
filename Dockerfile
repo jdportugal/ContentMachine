@@ -28,6 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && pip3 install --no-cache-dir --break-system-packages yt-dlp \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Limites de upload (vídeos longos até 2 GB)
+COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 

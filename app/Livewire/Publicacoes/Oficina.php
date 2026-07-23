@@ -106,6 +106,14 @@ class Oficina extends Component
         $slug = (string) request()->query('nota', '');
         if ($slug !== '') {
             $this->carregarNota($vault, $slug);
+
+            return;
+        }
+
+        // Semeado a partir de um vídeo longo («Gerar publicação» nos Clips).
+        if (($seed = session('oficina_brief')) !== null) {
+            $this->brief = (string) $seed;
+            session()->forget('oficina_brief');
         }
     }
 

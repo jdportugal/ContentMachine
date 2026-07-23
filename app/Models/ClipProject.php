@@ -27,6 +27,7 @@ class ClipProject extends Model
         'plan' => 'array',
         'meta' => 'array',
         'images' => 'array',
+        'scheduled_for' => 'date',
     ];
 
     public function isActive(): bool

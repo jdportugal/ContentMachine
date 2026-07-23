@@ -5,6 +5,13 @@
         cota="686.2 · IAT · '26"
         lead="As suas peças para redes sociais. Componha novas ou reveja as já criadas." />
 
+    @if (session('oficina_brief'))
+        <div class="mb-6 flex items-start gap-2 border border-teal/40 bg-teal/10 text-teal rounded-sm px-4 py-3 font-mono text-sm">
+            <span>✎</span>
+            <span>Texto do vídeo carregado — escolha o formato abaixo e o brief já vem preenchido na oficina.</span>
+        </div>
+    @endif
+
     {{-- Publicações criadas --}}
     <x-panel eyebrow="Estante" title="Publicações criadas" glyph="❦" class="mb-8">
       <div @if ($this->algumAGerar) wire:poll.3s @endif>
@@ -17,6 +24,7 @@
                 $galeria = collect($imagens)->map(fn ($p) => \Illuminate\Support\Str::startsWith($p, 'http') ? $p : asset($p))->values();
                 $meta = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'));
                 $agendado = $nota->get('estado') === 'agendado';
+                $pronto = $nota->get('estado') === 'pronto';
                 $editUrl = route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]);
                 $gerando = $this->aGerar($nota->slug());
             @endphp
@@ -40,12 +48,20 @@
                         @if ($meta)<x-badge tone="leather" style="color: {{ $meta['cor'] }}">{{ $meta['label'] }}</x-badge>@endif
                         @if ($gerando)
                             <span class="font-mono text-[0.6rem] px-1.5 py-0.5 rounded-sm border border-gold/40 text-gold animate-pulse">❖ a gerar…</span>
-                        @elseif ($agendado)<x-badge tone="good">✓ agendado</x-badge>@else<x-badge tone="warn">rascunho</x-badge>@endif
+                        @elseif ($agendado)<x-badge tone="good">✓ agendado</x-badge>@elseif ($pronto)<x-badge tone="good">✓ pronto</x-badge>@else<x-badge tone="warn">rascunho</x-badge>@endif
                     </div>
                     <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}" class="font-display text-xl text-ink hover:text-teal transition leading-tight">{{ $nota->title() }}</a>
                 </div>
                 <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}"
                    class="shrink-0 font-mono text-[0.62rem] text-teal hover:underline">editar →</a>
+                @unless ($gerando || $agendado)
+                    <button wire:click="alternarPronto('{{ $nota->path }}')"
+                            class="shrink-0 font-mono text-[0.62rem] px-2 py-1 rounded-sm border transition
+                                   {{ $pronto ? 'border-good/40 text-good hover:bg-good/10' : 'border-teal/40 text-teal hover:bg-teal/10' }}"
+                            title="{{ $pronto ? 'Voltar a rascunho' : 'Marcar como pronto — vai para Rascunhos' }}">
+                        {{ $pronto ? 'reabrir' : 'marcar pronto' }}
+                    </button>
+                @endunless
                 <button wire:click="remover('{{ $nota->path }}')" wire:confirm="Remover esta publicação?"
                         class="shrink-0 text-ink-faint hover:text-bad px-1 text-lg" title="Remover">🗑</button>
             </div>

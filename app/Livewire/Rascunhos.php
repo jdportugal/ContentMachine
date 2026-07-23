@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\ClipProject;
 use App\Services\Vault\VaultContract;
+use App\Services\Vault\VaultNote;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -13,53 +16,141 @@ class Rascunhos extends Component
 {
     public string $filtro = 'todos';
 
-    /** @var array<string,string> data de agendamento por slug de nota (sem pontos p/ o wire:model) */
+    /** @var array<string,string> data de agendamento por id de item (sem pontos p/ o wire:model) */
     public array $datas = [];
 
-    public function agendar(string $path, VaultContract $vault): void
+    /** Id estável de um item (seguro para wire:model — sem pontos nem dois-pontos). */
+    private function idDe(string $source, string $ref): string
     {
-        $slug = pathinfo($path, PATHINFO_FILENAME);
-        $data = $this->datas[$slug] ?? null;
+        return $source.'_'.md5($ref);
+    }
+
+    public function agendar(string $source, string $ref, VaultContract $vault): void
+    {
+        $id = $this->idDe($source, $ref);
+        $data = $this->datas[$id] ?? null;
 
         if (blank($data)) {
-            $this->addError('datas.'.$slug, 'Escolha uma data.');
+            $this->addError('datas.'.$id, 'Escolha uma data.');
 
             return;
         }
 
-        $vault->updateFrontmatter($path, [
+        if ($source === 'animado') {
+            ClipProject::whereKey($ref)->update(['scheduled_for' => $data]);
+
+            return;
+        }
+
+        $vault->updateFrontmatter($ref, [
             'estado' => 'agendado',
             'agendado_para' => $data,
         ]);
     }
 
-    public function desagendar(string $path, VaultContract $vault): void
+    public function desagendar(string $source, string $ref, VaultContract $vault): void
     {
-        $vault->updateFrontmatter($path, [
-            'estado' => 'rascunho',
+        if ($source === 'animado') {
+            ClipProject::whereKey($ref)->update(['scheduled_for' => null]);
+
+            return;
+        }
+
+        $vault->updateFrontmatter($ref, [
+            'estado' => 'pronto',
             'agendado_para' => null,
         ]);
     }
 
-    public function remover(string $path, VaultContract $vault): void
+    public function remover(string $source, string $ref, VaultContract $vault): void
     {
-        $vault->delete($path);
+        if ($source === 'animado') {
+            ClipProject::whereKey($ref)->delete();
+
+            return;
+        }
+
+        $vault->delete($ref);
+    }
+
+    /** Normaliza uma nota do vault (post ou clip) para a forma comum. */
+    private function deNota(VaultNote $n, string $source, string $kind): array
+    {
+        $agendadoPara = $n->get('estado') === 'agendado' ? (string) $n->get('agendado_para') : null;
+        $imagens = (array) $n->get('imagens', []);
+        $capa = $imagens[0] ?? null;
+        if ($capa && ! Str::startsWith($capa, 'http')) {
+            $capa = asset($capa);
+        }
+
+        return [
+            'id' => $this->idDe($source, $n->path),
+            'source' => $source,
+            'ref' => $n->path,
+            'kind' => $kind,
+            'title' => $n->title(),
+            'cover' => $capa,
+            'excerpt' => Str::limit(strip_tags($n->html()), 160),
+            'scheduled' => $agendadoPara ?: null,
+        ];
+    }
+
+    /** @return \Illuminate\Support\Collection<int,array<string,mixed>> */
+    private function itens(VaultContract $vault): \Illuminate\Support\Collection
+    {
+        $prontos = ['pronto', 'agendado'];
+
+        // 1. Publicações marcadas como prontas.
+        $posts = $vault->all('rascunhos')
+            ->filter(fn (VaultNote $n) => in_array($n->get('estado'), $prontos, true))
+            ->map(function (VaultNote $n) {
+                $tipo = (string) $n->get('tipo', 'post');
+                $kind = config('contentmachine.publicacoes.tipos.'.$tipo.'.label', $tipo);
+
+                return $this->deNota($n, 'post', $kind);
+            });
+
+        // 2. Shorts (clips) já renderizados.
+        $clips = $vault->all('clips')
+            ->filter(fn (VaultNote $n) => $n->get('tipo') === 'clip' && in_array($n->get('estado'), $prontos, true))
+            ->map(fn (VaultNote $n) => $this->deNota($n, 'clip', 'Short'));
+
+        // 3. Clips animados concluídos (BD).
+        $animados = ClipProject::where('status', ClipProject::STATUS_DONE)
+            ->orderByDesc('updated_at')
+            ->get()
+            ->map(fn (ClipProject $p) => [
+                'id' => $this->idDe('animado', (string) $p->id),
+                'source' => 'animado',
+                'ref' => (string) $p->id,
+                'kind' => $p->type === ClipProject::TYPE_OVERLAY ? 'Vídeo animado' : 'Animação',
+                'title' => (string) ($p->title ?: 'Clip animado'),
+                'cover' => null,
+                'excerpt' => '',
+                'scheduled' => $p->scheduled_for?->toDateString(),
+            ]);
+
+        return $posts->values()
+            ->concat($clips->values())
+            ->concat($animados->values());
     }
 
     public function render(VaultContract $vault)
     {
-        $rascunhos = $vault->all('rascunhos');
+        $todos = $this->itens($vault);
 
-        if ($this->filtro !== 'todos') {
-            $rascunhos = $rascunhos->filter(fn ($n) => $n->get('estado') === $this->filtro)->values();
-        }
+        $itens = match ($this->filtro) {
+            'agendado' => $todos->filter(fn ($i) => $i['scheduled'] !== null),
+            'pronto' => $todos->filter(fn ($i) => $i['scheduled'] === null),
+            default => $todos,
+        };
 
         return view('livewire.rascunhos', [
-            'rascunhos' => $rascunhos,
+            'itens' => $itens->values(),
             'contagem' => [
-                'todos' => $vault->all('rascunhos')->count(),
-                'rascunho' => $vault->all('rascunhos')->filter(fn ($n) => $n->get('estado') === 'rascunho')->count(),
-                'agendado' => $vault->all('rascunhos')->filter(fn ($n) => $n->get('estado') === 'agendado')->count(),
+                'todos' => $todos->count(),
+                'pronto' => $todos->filter(fn ($i) => $i['scheduled'] === null)->count(),
+                'agendado' => $todos->filter(fn ($i) => $i['scheduled'] !== null)->count(),
             ],
         ]);
     }

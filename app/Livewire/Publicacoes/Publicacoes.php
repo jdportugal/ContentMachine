@@ -53,6 +53,25 @@ class Publicacoes extends Component
         unset($this->publicacoes);
     }
 
+    /** Alterna uma publicação entre «rascunho» (a trabalhar) e «pronto» (vai para Rascunhos). */
+    public function alternarPronto(string $path, VaultContract $vault): void
+    {
+        $nota = $vault->get($path);
+        if (! $nota) {
+            return;
+        }
+
+        // Não mexe numa peça já agendada.
+        if ($nota->get('estado') === 'agendado') {
+            return;
+        }
+
+        $vault->updateFrontmatter($path, [
+            'estado' => $nota->get('estado') === 'pronto' ? 'rascunho' : 'pronto',
+        ]);
+        unset($this->publicacoes);
+    }
+
     public function render()
     {
         return view('livewire.publicacoes.index');
