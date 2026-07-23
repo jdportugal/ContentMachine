@@ -121,11 +121,6 @@
                             ✦ Escolher clips com IA
                         </button>
                     @endif
-                    <button wire:click="gerarPublicacao('{{ $fonteAtual->path }}')" @disabled(! $temTranscricao)
-                            title="Usa o texto do vídeo como brief no gerador de publicações"
-                            class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal/10 transition disabled:opacity-40 disabled:cursor-not-allowed">
-                        ✎ Gerar publicação
-                    </button>
                     <button wire:click="removerFonte('{{ $fonteAtual->path }}')" wire:confirm="Remover este vídeo e os seus clips?"
                             class="border border-bad/30 text-bad font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-bad/10 transition">Remover</button>
                 </div>
@@ -134,11 +129,34 @@
             @if ($temIA)
                 <div class="mb-4 border border-gold/30 bg-gold/5 text-ink-soft rounded-sm px-4 py-2.5 font-mono text-xs">
                     @if ($temTranscricao)
-                        ✦ Carregue em <span class="text-gold">Escolher clips com IA</span> — a IA define o título, o início/fim e as tags de cada short automaticamente.
+                        ✦ Carregue em <span class="text-gold">Escolher clips com IA</span> — num só passo a IA cria os shorts (título, janela e tags) <em>e</em> sugere publicações a partir do vídeo.
                     @else
-                        1) <span class="text-teal">Transcreva</span> o vídeo · 2) depois <span class="text-gold">Escolher clips com IA</span> cria os shorts sozinha.
+                        1) <span class="text-teal">Transcreva</span> o vídeo · 2) depois <span class="text-gold">Escolher clips com IA</span> cria shorts e publicações sozinha.
                     @endif
                 </div>
+            @endif
+
+            {{-- Publicações sugeridas pela IA (a partir do vídeo) --}}
+            @php $pubsSugeridas = json_decode((string) $fonteAtual->get('publicacoes_sugeridas'), true) ?: []; @endphp
+            @if ($pubsSugeridas)
+                <x-panel eyebrow="A partir do vídeo" title="Publicações sugeridas" glyph="✎" class="mb-4">
+                    <div class="space-y-2">
+                        @foreach ($pubsSugeridas as $i => $pub)
+                            <div class="flex items-start gap-3 py-2 border-b border-ink-soft/10 last:border-0" wire:key="pub-sug-{{ $i }}">
+                                <div class="min-w-0 flex-1">
+                                    <div class="font-display text-lg text-ink leading-tight">{{ $pub['titulo'] ?? 'Publicação' }}</div>
+                                    @if (!empty($pub['angulo']))
+                                        <p class="text-sm text-ink-soft">{{ $pub['angulo'] }}</p>
+                                    @endif
+                                </div>
+                                <button wire:click="abrirPublicacao('{{ $fonteAtual->path }}', {{ $i }})"
+                                        class="shrink-0 border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal/10 transition">
+                                    Abrir nas Publicações →
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+                </x-panel>
             @endif
 
             {{-- Adicionar clip manualmente (opcional) --}}

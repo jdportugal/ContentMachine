@@ -7,6 +7,7 @@ use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
 use App\Models\ClipProject;
+use App\Services\Aggregation\LlmClient;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -125,20 +126,56 @@ class FluxoRascunhosTest extends TestCase
         $this->assertNull($p->fresh()->scheduled_for);
     }
 
-    public function test_gerar_publicacao_semeia_o_brief_da_oficina(): void
+    public function test_escolher_clips_com_ia_cria_clips_e_guarda_publicacoes(): void
+    {
+        $this->app->instance(LlmClient::class, new class extends LlmClient
+        {
+            public function disponivel(): bool
+            {
+                return true;
+            }
+
+            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            {
+                return json_encode([
+                    'segments' => [['title' => 'Short A', 'description' => 'd', 'start_time' => 0, 'end_time' => 2, 'tags' => ['x']]],
+                    'publications' => [['titulo' => 'Post A', 'angulo' => 'Ângulo A']],
+                ]);
+            }
+        });
+
+        $vault = app(VaultContract::class);
+        $fonte = $vault->create('clips/fontes', [
+            'titulo' => 'Aula', 'tipo' => 'clip-fonte', 'estado' => 'transcrita',
+            'transcricao' => json_encode([['text' => 'Olá mundo', 'start' => 0, 'end' => 2]]),
+        ], 'corpo');
+
+        Livewire::test(Clips::class)->call('sugerirIA', $fonte->path);
+
+        $clips = $vault->all('clips')->filter(fn ($n) => $n->get('tipo') === 'clip');
+        $this->assertCount(1, $clips);
+
+        $pubs = json_decode((string) $vault->get($fonte->path)->get('publicacoes_sugeridas'), true);
+        $this->assertSame('Post A', $pubs[0]['titulo']);
+        $this->assertSame('Ângulo A', $pubs[0]['angulo']);
+    }
+
+    public function test_abrir_publicacao_sugerida_semeia_o_brief_da_oficina(): void
     {
         $vault = app(VaultContract::class);
         $fonte = $vault->create('clips/fontes', [
             'titulo' => 'Aula', 'tipo' => 'clip-fonte', 'estado' => 'transcrita',
-            'transcricao' => json_encode([['text' => 'Isto é o texto falado do vídeo.', 'start' => 0, 'end' => 2]]),
+            'publicacoes_sugeridas' => json_encode([
+                ['titulo' => 'Cinco erros comuns', 'angulo' => 'Lista prática com o que evitar.'],
+            ]),
         ], 'corpo');
 
-        Livewire::test(Clips::class)->call('gerarPublicacao', $fonte->path);
+        Livewire::test(Clips::class)->call('abrirPublicacao', $fonte->path, 0);
 
-        $this->assertStringContainsString('texto falado', (string) session('oficina_brief'));
+        $this->assertStringContainsString('Cinco erros comuns', (string) session('oficina_brief'));
 
         Livewire::test(Oficina::class, ['tipo' => 'post'])
-            ->assertSet('brief', 'Isto é o texto falado do vídeo.');
+            ->assertSet('brief', "Cinco erros comuns\n\nLista prática com o que evitar.");
         $this->assertNull(session('oficina_brief'));
     }
 }

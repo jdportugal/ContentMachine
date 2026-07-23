@@ -18,7 +18,7 @@ use App\Services\Vault\VaultNote;
  * Passos:
  *   1. criarFonte()          — regista o vídeo de origem (caminho local ou URL).
  *   2. transcreverFonte()    — Whisper → transcrição completa (palavra a palavra).
- *   3. sugerirSegmentos()    — IA (OpenAI) escolhe janelas [opcional].
+ *   3. sugerirDoVideo()      — IA escolhe janelas de shorts + ideias de posts [opcional].
  *   4. criarClip()           — desloca a transcrição para a janela do clip.
  *   5. cortarClip()          — corta o clip do vídeo original (ffmpeg).
  *   6. gravarLegendas()      — grava as legendas ASS no clip cortado → short.
@@ -103,7 +103,14 @@ class ShortsPipeline
      *
      * @return array<int,array{title:string,description:string,start_time:mixed,end_time:mixed,tags:array}>
      */
-    public function sugerirSegmentos(string $fontePath, int $quantidade = 5): array
+    /**
+     * Num só pedido à IA, a partir da transcrição do vídeo:
+     *   • escolhe segmentos para shorts (título, descrição, janela, tags);
+     *   • propõe ideias de publicações (título + ângulo) para o gerador de posts.
+     *
+     * @return array{segments:array<int,array<string,mixed>>,publications:array<int,array{titulo:string,angulo:string}>}
+     */
+    public function sugerirDoVideo(string $fontePath, int $quantidade = 5, int $publicacoes = 3): array
     {
         if (! $this->llm->disponivel()) {
             throw new ShortsException('Sem IA disponível (o CLI do Claude não foi encontrado e não há chave de API).');
@@ -120,12 +127,16 @@ class ShortsPipeline
             ->map(fn ($s) => sprintf('[%s-%s] %s', $s['start'] ?? 0, $s['end'] ?? 0, $s['text'] ?? ''))
             ->implode("\n");
 
-        $prompt = "És um editor especialista em YouTube Shorts. A partir desta transcrição com marcas "
-            ."temporais (em segundos), escolhe {$quantidade} segmentos autónomos e cativantes, cada um "
-            .'com cerca de 60 segundos, que funcionem bem vistos isoladamente. Para cada um dá um título, '
-            .'uma descrição, tags relevantes e as marcas de início/fim usando os tempos fornecidos. '
+        $prompt = "És um editor especialista em conteúdo para redes sociais. A partir desta transcrição com "
+            ."marcas temporais (em segundos), faz DUAS coisas:\n"
+            ."1) Escolhe {$quantidade} segmentos autónomos e cativantes para YouTube Shorts, cada um com cerca "
+            .'de 60 segundos, que funcionem bem vistos isoladamente. Para cada um dá um título, uma descrição, '
+            ."tags relevantes e as marcas de início/fim usando os tempos fornecidos.\n"
+            ."2) Propõe {$publicacoes} ideias de publicação para redes sociais inspiradas no vídeo. Para cada uma "
+            .'dá um título e um ângulo (1 a 2 frases que orientem a redação do post, em português de Portugal). '
             ."Responde APENAS com JSON válido, sem texto à volta, no formato:\n"
-            .'{"segments":[{"title":"","description":"","start_time":segundos,"end_time":segundos,"tags":["",""]}]}'
+            .'{"segments":[{"title":"","description":"","start_time":segundos,"end_time":segundos,"tags":["",""]}],'
+            .'"publications":[{"titulo":"","angulo":""}]}'
             ."\n\nTRANSCRIÇÃO:\n".$texto;
 
         $resposta = $this->llm->texto($prompt);
@@ -136,7 +147,17 @@ class ShortsPipeline
 
         $dados = $this->extrairJson($resposta);
 
-        return $dados['segments'] ?? [];
+        return [
+            'segments' => $dados['segments'] ?? [],
+            'publications' => collect($dados['publications'] ?? [])
+                ->map(fn ($p) => [
+                    'titulo' => trim((string) ($p['titulo'] ?? $p['title'] ?? '')),
+                    'angulo' => trim((string) ($p['angulo'] ?? $p['angle'] ?? '')),
+                ])
+                ->filter(fn ($p) => $p['titulo'] !== '' || $p['angulo'] !== '')
+                ->values()
+                ->all(),
+        ];
     }
 
     /**

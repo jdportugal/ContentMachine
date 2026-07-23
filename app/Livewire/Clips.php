@@ -119,30 +119,23 @@ class Clips extends Component
     }
 
     /**
-     * Gera uma publicação a partir do texto do vídeo: semeia o brief da oficina
-     * com a transcrição e envia para o seletor de formato das Publicações.
+     * Abre uma publicação sugerida pela IA no gerador de posts: semeia o brief
+     * da oficina com o título+ângulo e envia para o seletor de formato.
      */
-    public function gerarPublicacao(string $fontePath, VaultContract $vault, ShortsPipeline $pipeline)
+    public function abrirPublicacao(string $fontePath, int $i, VaultContract $vault)
     {
         $fonte = $vault->get($fontePath);
-        if (! $fonte) {
-            $this->notificar('Vídeo não encontrado.', 'erro');
+        $sugestoes = $fonte ? json_decode((string) $fonte->get('publicacoes_sugeridas'), true) : null;
+        $sugestao = is_array($sugestoes) ? ($sugestoes[$i] ?? null) : null;
+
+        if (! $sugestao) {
+            $this->notificar('Sugestão não encontrada.', 'erro');
 
             return null;
         }
 
-        $segmentos = $pipeline->transcricao($fonte);
-        if (empty($segmentos)) {
-            $this->notificar('Transcreva o vídeo primeiro.', 'erro');
-
-            return null;
-        }
-
-        $texto = collect($segmentos)->pluck('text')->filter()->implode(' ');
-        // ponytail: corte simples a ~6000 chars p/ não inflar o prompt da IA.
-        $texto = Str::limit(trim($texto), 6000, '');
-
-        session(['oficina_brief' => $texto]);
+        $brief = trim(($sugestao['titulo'] ?? '')."\n\n".($sugestao['angulo'] ?? ''));
+        session(['oficina_brief' => Str::limit($brief, 6000, '')]);
 
         return redirect()->route('publicacoes');
     }
@@ -197,10 +190,12 @@ class Clips extends Component
         $this->notificar('Clip criado.');
     }
 
-    public function sugerirIA(string $fontePath, ShortsPipeline $pipeline): void
+    public function sugerirIA(string $fontePath, ShortsPipeline $pipeline, VaultContract $vault): void
     {
         try {
-            $segmentos = $pipeline->sugerirSegmentos($fontePath);
+            $sugestoes = $pipeline->sugerirDoVideo($fontePath);
+            $segmentos = $sugestoes['segments'];
+            $publicacoes = $sugestoes['publications'];
 
             foreach ($segmentos as $s) {
                 $pipeline->criarClip(
@@ -213,7 +208,12 @@ class Clips extends Component
                 );
             }
 
-            $this->notificar(count($segmentos).' clips sugeridos pela IA.');
+            // Guarda as ideias de publicação na fonte (persistem e re-exibem).
+            $vault->updateFrontmatter($fontePath, [
+                'publicacoes_sugeridas' => json_encode($publicacoes, JSON_UNESCAPED_UNICODE),
+            ]);
+
+            $this->notificar(count($segmentos).' clips e '.count($publicacoes).' publicações sugeridas pela IA.');
         } catch (\Throwable $e) {
             $this->notificar($e->getMessage(), 'erro');
         }
