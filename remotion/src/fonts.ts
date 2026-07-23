@@ -1,25 +1,86 @@
-// Loads the IATECA display/body faces from Google Fonts when the optional
-// @remotion/google-fonts package is present. Falls back silently to the serif
-// stacks in style-tokens.ts if loading fails, so renders never break.
+// Font loading for the clip renderer.
+//
+// Default (NEBULA) faces load from the bundled @remotion/google-fonts packages:
+// Anton (display) + Space Grotesk (body). A design system may request ANY Google
+// Font by family name — those can't be statically required (the bundler can't
+// resolve a computed path), so they're loaded by injecting the Google Fonts
+// stylesheet and waiting for the face via delayRender/continueRender. Failures
+// fall back silently to the sans-serif stacks in style-tokens, so a render never
+// hangs or breaks.
 
-let loaded = false;
+import { continueRender, delayRender } from "remotion";
 
-export function loadFonts(): void {
-  if (loaded) return;
-  loaded = true;
+let defaultsLoaded = false;
+
+/** NEBULA defaults — bundled packages, no network. */
+export function loadDefaultFonts(): void {
+  if (defaultsLoaded) return;
+  defaultsLoaded = true;
   try {
-    // Lazy require so a missing/broken package can never crash a render.
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const cormorant = require("@remotion/google-fonts/CormorantGaramond");
-    cormorant.loadFont();
+    require("@remotion/google-fonts/Anton").loadFont();
   } catch {
-    // Fallback serif stack is used automatically.
+    /* sans-serif fallback */
   }
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const eb = require("@remotion/google-fonts/EBGaramond");
-    eb.loadFont();
+    require("@remotion/google-fonts/SpaceGrotesk").loadFont();
   } catch {
-    // Fallback serif stack is used automatically.
+    /* sans-serif fallback */
+  }
+}
+
+const requested = new Set<string>();
+
+/** Load design-system fonts by Google-Fonts family name. Safe to call every render. */
+export function loadThemeFonts(...families: Array<string | undefined>): void {
+  for (const family of families) {
+    if (!family || requested.has(family)) continue;
+    requested.add(family);
+    ensureGoogleFont(family);
+  }
+}
+
+function ensureGoogleFont(family: string): void {
+  // Only meaningful in the render browser; guard for other contexts.
+  if (typeof document === "undefined") return;
+
+  const handle = delayRender(`font: ${family}`);
+  let settled = false;
+  const done = () => {
+    if (settled) return;
+    settled = true;
+    continueRender(handle);
+  };
+
+  // Safety net: never let a font stall a render.
+  const timeout = setTimeout(done, 8000);
+
+  try {
+    const fam = family.trim().replace(/\s+/g, "+");
+    const href = `https://fonts.googleapis.com/css2?family=${fam}:wght@400;500;600;700;900&display=swap`;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    link.onload = () => {
+      const fonts = (document as unknown as { fonts?: { ready: Promise<unknown> } }).fonts;
+      if (fonts?.ready) {
+        fonts.ready.then(() => {
+          clearTimeout(timeout);
+          done();
+        });
+      } else {
+        clearTimeout(timeout);
+        done();
+      }
+    };
+    link.onerror = () => {
+      clearTimeout(timeout);
+      done();
+    };
+    document.head.appendChild(link);
+  } catch {
+    clearTimeout(timeout);
+    done();
   }
 }

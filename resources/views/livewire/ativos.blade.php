@@ -7,7 +7,7 @@
 
     {{-- Indicador de upload em curso --}}
     <div wire:loading wire:target="novaMusica, adicionarMusica"
-         style="position:fixed; bottom:1rem; right:1rem; z-index:9998; width:20rem; max-width:90vw; border:1px solid rgba(45,186,180,.5); color:#2dbab4;"
+         style="position:fixed; bottom:1rem; right:1rem; z-index:9998; width:20rem; max-width:90vw; border:1px solid rgba(90,123,255,.5); color:#5A7BFF;"
          class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
         <span class="animate-pulse">⏳</span>
         <span class="flex-1">A carregar…</span>

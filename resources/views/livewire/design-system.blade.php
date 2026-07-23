@@ -26,7 +26,7 @@
                 </button>
                 <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">a receber…</span>
             </div>
-            @error('ficheiro') <p class="mt-2 text-sm" style="color:#d98b7a">{{ $message }}</p> @enderror
+            @error('ficheiro') <p class="mt-2 text-sm" style="color:#FF8FA6">{{ $message }}</p> @enderror
         </x-panel>
 
         {{-- Editor --}}
@@ -46,14 +46,47 @@
             <div class="mt-2 font-mono text-[0.62rem] text-ink-faint break-all">{{ $caminho }}</div>
         </x-panel>
 
+        {{-- Tema extraído (o que as animações vão usar) --}}
+        @if ($tokens)
+            <x-panel eyebrow="Aplicado às animações" title="Tema extraído" glyph="❖">
+                <p class="text-ink-soft -mt-2 mb-4">
+                    Cores, fontes e textura destilados do design acima. É isto que os
+                    <span class="text-teal">Clips Animados</span> passam a usar para combinar com a marca.
+                </p>
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <div class="eyebrow mb-2">Paleta</div>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach (($tokens['colors'] ?? []) as $nome => $cor)
+                                <div class="flex flex-col items-center gap-1">
+                                    <span class="w-10 h-10 rounded-sm border border-ink-soft/25" style="background: {{ $cor }}"></span>
+                                    <span class="font-mono text-[0.55rem] text-ink-faint">{{ $nome }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div>
+                        <div class="eyebrow mb-2">Tipografia &amp; textura</div>
+                        <dl class="font-mono text-sm space-y-1 text-ink-soft">
+                            <div><span class="text-ink-faint">display:</span> {{ $tokens['fonts']['display'] ?? '—' }}</div>
+                            <div><span class="text-ink-faint">body:</span> {{ $tokens['fonts']['body'] ?? '—' }}</div>
+                            <div><span class="text-ink-faint">mono:</span> {{ $tokens['fonts']['mono'] ?? '—' }}</div>
+                            <div><span class="text-ink-faint">textura:</span> {{ $tokens['texture']['kind'] ?? 'paper' }}</div>
+                        </dl>
+                    </div>
+                </div>
+            </x-panel>
+        @endif
+
         <div class="flex items-center gap-4">
-            <button type="submit"
+            <button type="submit" wire:loading.attr="disabled" wire:target="guardar"
                     class="rounded-sm border border-teal/50 bg-teal/10 px-5 py-2.5 text-ink font-display text-lg
-                           hover:bg-teal/20 hover:border-teal transition">
-                Guardar
+                           hover:bg-teal/20 hover:border-teal transition disabled:opacity-50">
+                <span wire:loading.remove wire:target="guardar">Guardar</span>
+                <span wire:loading wire:target="guardar">A guardar e extrair tema…</span>
             </button>
             @if ($guardado)
-                <span class="font-mono text-sm text-teal">✓ guardado às {{ $guardado }}</span>
+                <span class="font-mono text-sm text-teal" wire:loading.remove wire:target="guardar">✓ guardado às {{ $guardado }}</span>
             @endif
         </div>
     </form>

@@ -6,39 +6,44 @@
 @source '../../app/Livewire';
 
 /* ============================================================
-   IATECA — variante NOCTURNA (dark)
-   Adaptação escura do sistema de identidade IATECA.
-   Verde-azulado dominante · couro e ouro como ornamento.
+   NEBULA — Futuristic Blue Design System (app UI)
+   Deep-space navy · molten-gold headlines · electric-blue accent.
+   Token NAMES are kept stable (papyrus/vellum/ink/teal/gold) so
+   the existing utility classes across every view re-skin at once;
+   only the VALUES change to Nebula.
    ============================================================ */
 @theme {
-    /* Superfícies */
-    --color-papyrus: #1a1410;   /* fundo principal (papiro escuro) */
-    --color-vellum: #221a13;    /* cartões / fichas */
-    --color-surface: #2a1f16;   /* superfície elevada */
-    --color-shelf: #5a3a22;     /* madeira de estante */
+    /* Superfícies (navy / void) */
+    --color-papyrus: #05060E;   /* void — fundo principal */
+    --color-vellum: #0C1225;    /* panel — cartões / superfícies */
+    --color-surface: #111A38;   /* superfície elevada (hover, painéis internos) */
+    --color-shelf: #0A1030;     /* deep-navy — campo de contraste */
 
-    /* Tinta (texto sobre fundo escuro) */
-    --color-ink: #f4ead5;       /* texto principal (papiro claro) */
-    --color-ink-soft: #b8a68c;  /* texto secundário / filetes */
-    --color-ink-faint: #6f5f4b; /* notas ténues */
+    /* Texto (branco-estelar sobre navy) */
+    --color-ink: #EAF0FF;       /* texto principal (star-white) */
+    --color-ink-soft: #A9B6D6;  /* texto secundário / filetes */
+    --color-ink-faint: #6C7AA6; /* notas ténues / meta */
 
-    /* Cor primária */
-    --color-teal: #2dbab4;      /* acento primário (teal-bright) */
-    --color-teal-deep: #1f7a7a;
+    /* Acento primário (azul elétrico) */
+    --color-teal: #5A7BFF;      /* electric-blue — acento interativo (texto/bordas) */
+    --color-teal-deep: #2A3BEB; /* azul sólido (preenchimento de botões) */
 
-    /* Acentos ornamentais */
-    --color-leather: #b5533f;
-    --color-gold: #c89b3c;
+    /* Ouro fundido + quente (títulos / ornamento) */
+    --color-gold: #FFB347;      /* molten-gold (mid) */
+    --color-leather: #FF7A3D;   /* laranja-quente (cauda do degradé) */
+
+    /* Azul de sobrancelha (eyebrow) */
+    --color-star: #7DA2FF;
 
     /* Estados */
-    --color-good: #6fbf73;
-    --color-warn: #d8a24a;
-    --color-bad: #d76a5a;
+    --color-good: #12B76A;      /* sucesso / completo */
+    --color-warn: #FFB347;      /* aviso (ouro) */
+    --color-bad: #FF5C7A;       /* erro (glitter red) */
 
-    /* Tipografia */
-    --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
-    --font-body: 'EB Garamond', ui-serif, Georgia, serif;
-    --font-sc: 'Cormorant SC', ui-serif, Georgia, serif;
+    /* Tipografia — duas famílias: Anton (display) + Space Grotesk (corpo) */
+    --font-display: 'Anton', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-sc: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
@@ -46,41 +51,59 @@
     /* Escala tipográfica global — tudo assenta em rem, por isso aumentar a
        raiz aumenta texto e espaçamento de forma proporcional e coerente. */
     html {
-        font-size: 19px;
+        font-size: 18px;
     }
 
     body {
         font-family: var(--font-body);
-        font-size: 1.075rem;
-        line-height: 1.65;
+        font-size: 1.05rem;
+        line-height: 1.6;
         color: var(--color-ink);
         background-color: var(--color-papyrus);
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
     }
+    /* Display Anton — peso único (400), condensado, MAIÚSCULAS. */
     h1, h2, h3, h4 {
         font-family: var(--font-display);
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.005em;
+        line-height: 0.98;
         text-wrap: balance;
-        font-weight: 500;
+    }
+    /* Títulos de página (h1) recebem o degradé de ouro fundido. */
+    h1 {
+        background-image: linear-gradient(100deg, #FFE59A 0%, var(--color-gold) 55%, var(--color-leather) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
     p { text-wrap: pretty; }
+
+    ::selection { background: var(--color-leather); color: #05060E; }
 
     [x-cloak] { display: none !important; }
 }
 
-/* ---------- Texturas de fundo (Nocturna) ---------- */
+/* ---------- Fundo Nebula (void + deep-field + starfield) ---------- */
 .bg-nocturna {
-    background-color: #1a1410;
+    background-color: #05060E;
     background-image:
-        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(45, 186, 180, 0.06), transparent 60%),
-        radial-gradient(ellipse 120% 80% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 60%),
-        radial-gradient(circle at 18% 30%, rgba(200, 155, 60, 0.04) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 72% 60%, rgba(200, 155, 60, 0.03) 0 1px, transparent 1.5px),
-        repeating-linear-gradient(92deg, transparent 0 23px, rgba(0, 0, 0, 0.15) 23px 24px);
+        radial-gradient(120% 80% at 80% -10%, rgba(26, 43, 168, 0.45), transparent 55%),
+        radial-gradient(ellipse 120% 70% at 50% 0%, rgba(42, 59, 235, 0.10), transparent 60%),
+        radial-gradient(circle at 18% 30%, rgba(234, 240, 255, 0.55) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 72% 60%, rgba(175, 198, 255, 0.42) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 42% 82%, rgba(234, 240, 255, 0.34) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 88% 20%, rgba(207, 224, 255, 0.46) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 30% 68%, rgba(207, 224, 255, 0.30) 0 1px, transparent 1.6px);
+    background-size:
+        auto, auto,
+        300px 300px, 380px 380px, 260px 260px, 500px 500px, 340px 340px;
     background-attachment: fixed;
 }
 
-/* Foxing — manchas suaves nos cantos */
+/* Brilho ambiente nos cantos (substitui o "foxing" de papel). */
 .foxing { position: relative; }
 .foxing::before {
     content: '';
@@ -89,67 +112,68 @@
     pointer-events: none;
     border-radius: inherit;
     background-image:
-        radial-gradient(ellipse 30px 18px at 12% 22%, rgba(181, 83, 63, 0.10), transparent 70%),
-        radial-gradient(ellipse 18px 12px at 88% 14%, rgba(200, 155, 60, 0.08), transparent 70%),
-        radial-gradient(ellipse 22px 14px at 78% 82%, rgba(181, 83, 63, 0.08), transparent 70%);
+        radial-gradient(ellipse 40px 24px at 10% 16%, rgba(90, 123, 255, 0.10), transparent 70%),
+        radial-gradient(ellipse 28px 18px at 90% 12%, rgba(255, 179, 71, 0.08), transparent 70%),
+        radial-gradient(ellipse 30px 20px at 82% 86%, rgba(90, 123, 255, 0.08), transparent 70%);
 }
 
-/* ---------- Moldura gravada ---------- */
+/* ---------- Moldura fina (sem gravura de papel) ---------- */
 .frame-engraved {
     position: relative;
-    outline: 1px solid color-mix(in srgb, var(--color-ink-soft) 45%, transparent);
+    outline: 1px solid color-mix(in srgb, var(--color-ink-soft) 22%, transparent);
     outline-offset: 6px;
 }
 .frame-engraved::before {
     content: '';
     position: absolute;
     inset: 3px;
-    border: 1px solid color-mix(in srgb, var(--color-ink-soft) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-ink-soft) 14%, transparent);
     pointer-events: none;
 }
 
-/* Sombra "gravura" (sem blur moderno) */
-.shadow-engraved { box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35); }
+/* Sombra suave Nebula (substitui a sombra "gravura"). */
+.shadow-engraved { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); }
 
-/* ---------- Drop cap ---------- */
+/* ---------- Drop cap (ouro) ---------- */
 .dropcap::first-letter {
     font-family: var(--font-display);
     float: left;
     font-size: 3.4em;
     line-height: 0.8;
     padding: 0.08em 0.12em 0 0;
-    color: var(--color-teal);
+    color: var(--color-gold);
 }
 
-/* ---------- Small caps / etiquetas ---------- */
+/* ---------- Eyebrow / etiquetas (Space Grotesk, azul) ---------- */
 .eyebrow {
     font-family: var(--font-sc);
-    letter-spacing: 0.32em;
+    font-weight: 600;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--color-ink-soft);
+    color: var(--color-star);
     font-size: 0.72rem;
 }
 
-/* ---------- Lombada de livro (nav) ---------- */
+/* ---------- Aba de navegação (substitui a lombada de livro) ---------- */
 .book-spine {
     position: relative;
+    border-radius: 8px;
     background: linear-gradient(
-        180deg,
-        #0f0b08 0%,
-        var(--spine-color, #1f7a7a) 22%,
-        color-mix(in srgb, var(--spine-color, #1f7a7a) 70%, white) 50%,
-        var(--spine-color, #1f7a7a) 78%,
-        #0f0b08 100%
+        90deg,
+        color-mix(in srgb, var(--spine-color, #5A7BFF) 20%, transparent) 0%,
+        transparent 55%
     );
-    box-shadow: inset 0 18px 0 -16px var(--color-gold), inset 0 -18px 0 -16px var(--color-gold);
+    box-shadow: inset 3px 0 0 0 var(--spine-color, #5A7BFF),
+                0 0 22px -6px color-mix(in srgb, var(--spine-color, #5A7BFF) 60%, transparent);
 }
 
-/* Selo de biblioteca */
+/* Selo / emblema circular */
 .selo {
-    font-family: var(--font-sc);
-    letter-spacing: 0.16em;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     transform: rotate(-7deg);
-    opacity: 0.85;
+    opacity: 0.9;
     border: 2px solid currentColor;
     position: relative;
 }
@@ -159,5 +183,5 @@
     inset: 4px;
     border: 1px solid currentColor;
     border-radius: inherit;
-    opacity: 0.6;
+    opacity: 0.5;
 }

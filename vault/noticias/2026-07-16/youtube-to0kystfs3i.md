@@ -6,6 +6,8 @@ canal: 'Nick Saraev'
 data: '2026-07-16'
 url: 'https://www.youtube.com/watch?v=To0kYStFS3I'
 thumbnail: 'https://i.ytimg.com/vi/To0kYStFS3I/maxresdefault.jpg'
+descricao: "🔥 Join Maker School & get customer #1 guaranteed: https://skool.com/makerschool/about 📁 Get all my free resources: https://skool.com/maker-zero/about ➡️ If this is your first video: I'm Nick Saraev. I run LeftClick, an AI growth consultancy. We've done work for large brands you're likely familiar with, like Mr. Beast, Anthropic, OpenAI, and a few others. In plain English: I help people build systems that generate leads, close deals, and scale businesses, mostly using new AI models like Claude. I also make videos about how to do all of that here on YouTube. It hasn't always been this way. My family immigrated from a Soviet bloc country (People's Republic of Bulgaria) in the 90s. They worked extremely hard, and we were broke for a very long time. I grew up wishing for more security, stabil..."
+resumo: 'O vídeo testa e avalia o novo modelo de IA Kimi K3 (da Moonshot), comparando o seu desempenho em engenharia de software e outros benchmarks com modelos de topo como o Fable 5 e o GPT‑5.6. Discute ainda o impacto que este modelo open source chinês poderá ter no equilíbrio de poder do setor e na viabilidade económica de fornecedores fechados como a Anthropic e a OpenAI.'
 tags:
   - automation
   - 'content creation'

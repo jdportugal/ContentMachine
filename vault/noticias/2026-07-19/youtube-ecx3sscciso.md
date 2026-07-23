@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Nick Saraev'
 data: '2026-07-19'
 url: 'https://www.youtube.com/watch?v=eCx3SSCcISo'
-thumbnail: 'https://i.ytimg.com/vi_webp/eCx3SSCcISo/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/eCx3SSCcISo/maxresdefault.jpg'
+descricao: "🔥 Join Maker School & get customer #1 guaranteed: https://skool.com/makerschool/about 💎 Get this system for FREE here: https://skool.com/maker-zero/about ➡️ If this is your first video: I'm Nick Saraev. I run LeftClick, an AI growth agency. We've done work for large brands you're likely familiar with, like Mr. Beast, Anthropic, OpenAI, and a few others. In plain English: I help people build systems that generate leads, close deals, and scale businesses, mostly using new AI models like Claude. I also make videos about how to do all of that here on YouTube. It hasn't always been this way. My family immigrated from a Soviet bloc country (People's Republic of Bulgaria) in the 90s. They worked extremely hard, and we were broke for a very long time. I grew up wishing for more security, stabili..."
+resumo: 'O vídeo explica como construir uma base de conhecimento interna para empresas usando RAG (retrieval-augmented generation), inspirada no sistema criado pela Cerebras, que integra dados de fontes como Slack, Confluence e repositórios GitHub num espaço de embeddings pesquisável por IA. O apresentador demonstra o conceito e constrói um sistema semelhante passo a passo, contrastando-o com abordagens ma...'
 tags:
   - automation
   - 'content creation'
@@ -520,8 +522,8 @@ cluster, but small runs are fine." Maybe
 Owen then says, "Yeah, I can reproduce
 this with 128 hours." The log stop
 before the cache warm-up, though.
-Basically, what happens is question
-summary, right? Maybe here's a
+[gasps] Basically, what happens is
+question summary, right? Maybe here's a
 resolution a few minutes later. We take
 all of the information in a chat thread
 sort of divided into these windows and

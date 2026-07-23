@@ -6,10 +6,11 @@ canal: 'Duncan Rogoff | Learn Claude Code'
 data: '2026-07-20'
 url: 'https://www.youtube.com/watch?v=Ta6Ca6FUZ3A'
 thumbnail: 'https://i.ytimg.com/vi/Ta6Ca6FUZ3A/maxresdefault.jpg'
+descricao: 'Learn Claude Code + all my resources. Only $9. 👉 https://www.skool.com/claudecodeclub Summary ⤵️ Claude Fable 5 builds beautiful $10,000 websites... but what actually makes a website worth that much? In this video I show you a brand new skill that builds high-converting mobile microsites for any industry, and I use Claude Code to build one live for a plumbing company from scratch. ⏱️ Timestamps 00:00 - Intro: $10K Microsites With Fable 5 00:34 - Why Mobile Optimized Sites Win 01:46 - What Makes A Site Convert 01:55 - Setting Up Cloud Code Project 02:19 - Installing The Microsite Skill 03:05 - Building A Plumbing Site 03:11 - Five Stages Of The Skill 03:20 - Researching Real Customer Language 03:49 - Turning Offers Into Stories 05:00 - Pulling Reviews And Testimonials 06:22 - Generating Vi...'
+resumo: 'O vídeo mostra como usar uma nova skill do Claude Code (Fable 5) para gerar automaticamente microsites otimizados para telemóvel e orientados à conversão, bastando indicar a indústria pretendida. O autor demonstra o processo criando um site para o setor da canalização e explica o que distingue um site meramente bonito de um que gera conversões.'
 tags: {}
 fontes:
   - 'https://www.skool.com/claudecodeclub'
-resumo: 'O vídeo mostra como usar uma nova skill do Claude Code (com o modelo Fable 5) para gerar rapidamente microsites otimizados para telemóvel e orientados para conversão, dirigidos a diferentes setores. Explica ainda o que distingue um site "bonito" de um que gera conversões e, portanto, tem valor comercial, usando o exemplo prático de um site para a área da canalização.'
 ---
 
 ## Descrição

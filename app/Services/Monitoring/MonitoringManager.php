@@ -21,6 +21,7 @@ class MonitoringManager
     {
         return match (config('contentmachine.monitoring.driver', 'fake')) {
             'api' => new ApiMonitoringDriver($plataforma, $this->scorer),
+            'ytdlp' => new YtDlpMonitoringDriver($plataforma, $this->scorer, app(MonitoringStore::class)),
             default => new FakeMonitoringDriver($plataforma, $this->scorer),
         };
     }

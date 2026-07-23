@@ -6,6 +6,8 @@ canal: 'Chase AI'
 data: '2026-07-17'
 url: 'https://www.youtube.com/watch?v=MeYdaNnXuHI'
 thumbnail: 'https://i.ytimg.com/vi/MeYdaNnXuHI/maxresdefault.jpg'
+descricao: '⚡Master Claude Code, Build Your Agency, Land Your First Client⚡ https://www.skool.com/chase-ai 🔥FREE community🔥 https://www.skool.com/chase-ai-community 💻 Need custom work? Book a consult 💻 https://chaseai.io Kimi K3 is posting better numbers than any open source AI model ever, and even beating out Fable 5 and GPT 5.6 in several benchmarks. In this video, we dive into the numbers to make sense of this new entrant, and also pit it head to head versus the best the frontier labs have to offer. ⏰TIMESTAMPS: 0:00 - Intro 0:46 - The Numbers 5:38 - Head to Head Test 12:19 - The Verdict RESOURCES FROM THIS VIDEO: ➡️ Master Claude Code: https://www.skool.com/chase-ai ➡️ My Website: https://www.chaseai.io #claudecode #kimi'
+resumo: 'O vídeo analisa o novo modelo openweight chinês Kimi K3, examinando os seus benchmarks de programação e design de front-end, o custo por token e a velocidade, comparando-o com o GPT 5.6 e o Fable 5. Inclui um teste prático frente a frente na área de design de front-end para avaliar se o entusiasmo em torno do modelo é justificado.'
 tags: {}
 fontes:
   - 'https://www.skool.com/chase-ai'

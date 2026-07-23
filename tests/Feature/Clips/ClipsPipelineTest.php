@@ -19,6 +19,55 @@ class ClipsPipelineTest extends TestCase
         config()->set('contentmachine.clips.driver', 'fake');
     }
 
+    public function test_render_injecta_o_tema_do_design_system(): void
+    {
+        // Tokens de tema guardados pelo Sistema de Design.
+        $dir = sys_get_temp_dir().'/cm-theme-'.uniqid();
+        mkdir($dir, 0775, true);
+        config(['contentmachine.design_system.path' => $dir.'/design-system.md']);
+        app(\App\Services\DesignSystem\DesignSystemRepository::class)
+            ->writeTokens(\App\Services\DesignSystem\DesignTheme::sanitize([
+                'colors' => ['bg' => '#0a1230'],
+                'fonts' => ['display' => 'Anton'],
+                'texture' => ['kind' => 'starfield'],
+            ]));
+
+        // Renderizador que captura os props recebidos.
+        $captured = [];
+        $this->app->instance(\App\Services\Clips\Contracts\RemotionRenderer::class, new class($captured) implements \App\Services\Clips\Contracts\RemotionRenderer
+        {
+            public function __construct(public array &$captured) {}
+
+            public function render(array $props, string $outPath): string
+            {
+                $this->captured = $props;
+                @mkdir(dirname($outPath), 0777, true);
+                file_put_contents($outPath, 'X');
+
+                return $outPath;
+            }
+        });
+
+        $p = ClipProject::create([
+            'type' => ClipProject::TYPE_ANIMATION,
+            'input_kind' => 'text',
+            'source_text' => 'Olá',
+            'status' => ClipProject::STATUS_PLANNING,
+            'transcript' => ['words' => []],
+            'plan' => ['scenes' => [['start' => 0, 'end' => 1, 'background' => 'papyrus', 'layers' => []]]],
+        ]);
+
+        \App\Jobs\Clips\RenderJob::dispatchSync($p->id);
+
+        $this->assertArrayHasKey('theme', $captured);
+        $this->assertSame('#0a1230', $captured['theme']['colors']['bg']);
+        $this->assertSame('Anton', $captured['theme']['fonts']['display']);
+        $this->assertSame('starfield', $captured['theme']['texture']['kind']);
+
+        array_map('unlink', glob($dir.'/*') ?: []);
+        @rmdir($dir);
+    }
+
     public function test_animation_pipeline_reaches_done_with_fakes(): void
     {
         $p = ClipProject::create([

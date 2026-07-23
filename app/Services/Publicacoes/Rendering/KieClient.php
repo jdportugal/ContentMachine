@@ -75,9 +75,16 @@ class KieClient
                 'input' => $input,
             ]);
 
+        // A API devolve 200 mesmo em erro de negócio (ex.: 402 sem créditos),
+        // com o motivo em `msg` — expõe-no para a mensagem ser accionável.
         $taskId = (string) $r->json('data.taskId');
         if (! $r->successful() || $taskId === '') {
-            throw new \RuntimeException('kie.ai: submissão falhou ('.$r->status().').');
+            $msg = trim((string) ($r->json('msg') ?? ''));
+            $code = $r->json('code');
+            throw new \RuntimeException(
+                'kie.ai: '.($msg !== '' ? $msg : 'submissão falhou ('.$r->status().').')
+                .($code ? ' [código '.$code.']' : '')
+            );
         }
 
         return $taskId;

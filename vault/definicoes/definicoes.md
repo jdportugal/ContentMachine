@@ -7,13 +7,13 @@ geral:
 perfis:
   youtube:
     handle: ''
-    url: ''
+    url: 'https://www.youtube.com/channel/UCM1_2Qs_zNYbfowyBbksE7Q'
   instagram:
     handle: ''
-    url: ''
+    url: 'https://www.instagram.com/aiwithjd/'
   tiktok:
     handle: ''
-    url: ''
+    url: 'https://www.tiktok.com/@aiautomationwithjd'
   linkedin:
     handle: ''
     url: ''
@@ -40,6 +40,8 @@ canais:
     - 'https://www.tiktok.com/@nick.saraev'
   linkedin:
     - 'https://www.linkedin.com/in/nick-saraev/'
+shorts:
+  whisper_model: ''
 ---
 
 Definições operacionais da Máquina de Conteúdo.

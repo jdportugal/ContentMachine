@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Simon Says AI'
 data: '2026-06-01'
 url: 'https://www.youtube.com/watch?v=m5LjHMGV2Cs'
-thumbnail: 'https://i.ytimg.com/vi_webp/m5LjHMGV2Cs/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/m5LjHMGV2Cs/maxresdefault.jpg'
+descricao: '🟠 Simon Says AI Pro Community Claude Code mastery course. Build real systems and get paid by clients. https://www.skool.com/simon-says-ai-pro/about 🟢 Simon Says AI Free Community All my FREE guides and build resources: https://www.skool.com/simon-says-ai/about Claude, ChatGPT, Gemini, and Codex are incredible tools, but they can be weak for judgment calls. Ask for one answer and you often get something that sounds smart, agrees with your framing, and misses the opposing view. In this video, I show how to run an LLM Council in Codex: multiple AI subagents with different perspectives, a review layer, a final council report, and follow-up questions grounded in the full 360-degree analysis. I also show where the idea came from, how to create the skill, how to run it, and how to remix it into...'
+resumo: 'Este vídeo explica porque é que modelos de IA como o Claude, o ChatGPT e o Gemini tendem a concordar com o utilizador (devido ao treino por RLHF), dando conselhos pouco fiáveis. Mostra como contornar esse problema enviando a mesma pergunta a um "conselho" de vários agentes de IA com personas independentes, para obter perspetivas menos enviesadas, e como personalizar esse conselho como o próprio qu...'
 tags: {}
 fontes:
   - 'https://www.skool.com/simon-says-ai-pro/about'

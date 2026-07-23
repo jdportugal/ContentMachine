@@ -1,0 +1,22 @@
+{
+    "colors": {
+        "bg": "#05060E",
+        "bgAlt": "#0C1225",
+        "bgContrast": "#0A0714",
+        "textOnBg": "#EAF0FF",
+        "textOnContrast": "#EAF0FF",
+        "mutedOnBg": "#A9B6D6",
+        "mutedOnContrast": "#B8C4E2",
+        "accent": "#FFB347",
+        "accent2": "#2A3BEB",
+        "accent3": "#C77DFF"
+    },
+    "fonts": {
+        "display": "Anton",
+        "body": "Space Grotesk",
+        "mono": "Space Mono"
+    },
+    "texture": {
+        "kind": "starfield"
+    }
+}

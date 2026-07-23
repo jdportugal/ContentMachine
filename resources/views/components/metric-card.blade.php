@@ -3,7 +3,7 @@
     'value',
     'delta' => null,      // ex.: +12.4  (percentagem)
     'unit' => null,
-    'accent' => '#2dbab4',
+    'accent' => '#5A7BFF',
 ])
 @php
     $deltaNum = is_numeric($delta) ? (float) $delta : null;

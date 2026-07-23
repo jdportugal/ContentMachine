@@ -27,7 +27,7 @@
             <p class="text-ink-soft -mt-2 mb-4">Identificador (@handle) e ligação de cada perfil que monitorizamos.</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 @foreach ($perfis as $rede => $dados)
-                    @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#2dbab4', 'glifo' => '•']; @endphp
+                    @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#5A7BFF', 'glifo' => '•']; @endphp
                     <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-xl" style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span>
@@ -82,7 +82,7 @@
                 @foreach ($canais as $plataforma => $lista)
                     @php
                         $rc = $rotulosCanais[$plataforma] ?? [ucfirst($plataforma), 'https://…'];
-                        $m = $plataformasMeta[$plataforma] ?? ['cor' => '#2dbab4', 'glifo' => '•'];
+                        $m = $plataformasMeta[$plataforma] ?? ['cor' => '#5A7BFF', 'glifo' => '•'];
                     @endphp
                     <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
                         <label class="eyebrow block mb-2">

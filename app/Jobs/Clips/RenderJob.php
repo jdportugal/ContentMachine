@@ -35,6 +35,12 @@ class RenderJob implements ShouldQueue
 
             $plan['audioSrc'] = $p->audio_path;
 
+            // Tema do Sistema de Design (cores/fontes/textura) — faz a animação
+            // combinar com a marca. Null → o renderizador usa os defaults IATECA.
+            if ($theme = app(\App\Services\DesignSystem\DesignSystemRepository::class)->readTokens()) {
+                $plan['theme'] = $theme;
+            }
+
             // Overlay clips: Remotion composites the source video per-scene (over / split /
             // video / animation). Everything renders in one opaque pass — no ffmpeg step.
             if ($p->type === ClipProject::TYPE_OVERLAY) {

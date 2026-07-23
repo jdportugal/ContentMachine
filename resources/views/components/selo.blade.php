@@ -1,4 +1,4 @@
-@props(['label' => 'IATECA', 'sub' => 'EX · LIBRIS', 'date' => 'MMXXVI', 'color' => '#2dbab4'])
+@props(['label' => 'IATECA', 'sub' => 'EX · LIBRIS', 'date' => 'MMXXVI', 'color' => '#5A7BFF'])
 {{-- Selo circular estilo carimbo de biblioteca --}}
 <div class="selo inline-flex flex-col items-center justify-center rounded-full w-28 h-28 text-center"
      style="color: {{ $color }}">

@@ -119,6 +119,12 @@ class Oficina extends Component
         } else {
             $this->legenda = $nota->body;
         }
+
+        // Se esta peça está a gerar imagens (noutra sessão/aba ou antes de sair),
+        // retoma o estado «a gerar» — a view volta a sondar e recarrega quando terminar.
+        if (Cache::get(GerarImagensJob::notaKey($slug))) {
+            $this->aGerar = true;
+        }
     }
 
     /** Reconstrói os cartões a partir do corpo Markdown («## Título» + «---»). */
@@ -324,13 +330,20 @@ class Oficina extends Component
     // ------------------------------------------------------------- imagens
 
     /** Gera (ou regenera) TODAS as imagens de uma vez, com consistência visual. */
-    public function gerarImagens(): void
+    public function gerarImagens(VaultContract $vault): void
     {
         $plano = $this->planoAtual();
         if ($plano->slides === []) {
             $this->addError('slides', 'Componha a peça antes de gerar imagens.');
 
             return;
+        }
+
+        // Grava a peça (se ainda não estava) ANTES de gerar, para que o trabalho
+        // seja recuperável como os vídeos: fica em Rascunhos e as imagens gravam-se
+        // na nota, mesmo que o utilizador saia da página.
+        if ($this->notaPath === null) {
+            $this->notaPath = $this->persistir($vault, $plano)->path;
         }
 
         // As imagens actuais passam a histórico.
@@ -341,11 +354,10 @@ class Oficina extends Component
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
 
-        // Se a peça já está guardada, marca-a «a gerar» para o painel a mostrar.
-        $slug = $this->notaPath !== null ? pathinfo($this->notaPath, PATHINFO_FILENAME) : '';
-        if ($slug !== '') {
-            Cache::put(GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
-        }
+        // Marca a peça «a gerar»: alimenta o painel e permite retomar o estado
+        // ao voltar à página (a sondagem passa a ser pela nota, não pelo token).
+        $slug = pathinfo($this->notaPath, PATHINFO_FILENAME);
+        Cache::put(GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
 
         GerarImagensJob::dispatch(
             $this->tipo, $this->titulo, $this->plataforma, $this->legenda, $this->slides, $this->imgToken, $this->proporcao, $this->refPaths(), $slug,
@@ -381,7 +393,7 @@ class Oficina extends Component
     /** Sondado por wire:poll: aplica imagens prontas (lote e por cartão). */
     public function verificarImagens(): void
     {
-        // Lote (gerar todas).
+        // Lote gerado NESTA sessão (temos o token em cache).
         if ($this->aGerar && $this->imgToken !== null) {
             $r = Cache::get(GerarImagensJob::key($this->imgToken));
             if ($r !== null) {
@@ -392,7 +404,20 @@ class Oficina extends Component
                         $this->img[$i] = $path;
                     }
                 } else {
-                    $this->addError('slides', 'O desenho das imagens falhou. Confirme o worker e a chave do kie.ai.');
+                    $this->addError('slides', 'O desenho das imagens falhou'
+                        .(! empty($r['msg']) ? ': '.$r['msg'] : '. Confirme o worker (fila «media») e os créditos do kie.ai.'));
+                }
+            }
+        }
+        // Lote RETOMADO — voltámos à peça e o token perdeu-se. Sonda a flag da
+        // nota; quando a geração termina, recarrega as imagens gravadas na nota.
+        elseif ($this->aGerar && $this->imgToken === null && $this->notaPath !== null) {
+            $slug = pathinfo($this->notaPath, PATHINFO_FILENAME);
+            if (! Cache::get(GerarImagensJob::notaKey($slug))) {
+                $this->aGerar = false;
+                if ($nota = app(VaultContract::class)->get($this->notaPath)) {
+                    $this->img = array_values((array) $nota->get('imagens', []));
+                    $this->hist = (array) $nota->get('imagens_hist', $this->hist);
                 }
             }
         }
@@ -459,6 +484,30 @@ class Oficina extends Component
             return;
         }
 
+        $eraNovo = $this->notaPath === null;
+        $nota = $this->persistir($vault, $plano);
+        $this->guardado = $nota->title();
+
+        // Guardar uma peça NOVA limpa a oficina (compor a próxima); editar uma
+        // peça já existente mantém-na aberta.
+        if ($eraNovo) {
+            $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias');
+            if ($this->ehCarrossel()) {
+                $this->slides = array_fill(0, max(2, $this->kinds()->cartoes($this->tipo)['min']), ['titulo' => '', 'texto' => '']);
+                $this->titulo = '';
+            } else {
+                $this->reset('titulo', 'legenda');
+            }
+        }
+    }
+
+    /**
+     * Grava (ou atualiza) a peça no vault e devolve a nota, sem efeitos na UI.
+     * Usado por «Guardar» e pela gravação automática antes de gerar imagens.
+     * Não altera $this->notaPath — cabe a quem chama decidir se a peça fica «aberta».
+     */
+    private function persistir(VaultContract $vault, PublicacaoPlan $plano): \App\Services\Vault\VaultNote
+    {
         $formato = $this->kinds()->formato($this->tipo);
 
         $frontmatter = [
@@ -490,23 +539,13 @@ class Oficina extends Component
                 $frontmatter,
                 ['estado' => $existente?->get('estado', 'rascunho')],
             );
-            $nota = $vault->put($this->notaPath, $frontmatter, $body);
-            $this->guardado = $nota->title();
 
-            return;
+            return $vault->put($this->notaPath, $frontmatter, $body);
         }
 
         $frontmatter['estado'] = 'rascunho';
-        $nota = $vault->create('rascunhos', $frontmatter, $body);
 
-        $this->guardado = $nota->title();
-        $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias');
-        if ($this->ehCarrossel()) {
-            $this->slides = array_fill(0, max(2, $this->kinds()->cartoes($this->tipo)['min']), ['titulo' => '', 'texto' => '']);
-            $this->titulo = '';
-        } else {
-            $this->reset('titulo', 'legenda');
-        }
+        return $vault->create('rascunhos', $frontmatter, $body);
     }
 
     public function remover(VaultContract $vault): void

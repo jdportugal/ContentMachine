@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\DesignSystem\DesignThemeExtractor;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -47,19 +48,26 @@ class DesignSystem extends Component
         $this->dispatch('toast', message: 'Ficheiro carregado — reveja e guarde.', type: 'ok');
     }
 
-    public function guardar(DesignSystemRepository $design): void
+    public function guardar(DesignSystemRepository $design, DesignThemeExtractor $extractor): void
     {
         $design->write($this->conteudo);
 
+        // Extrai os tokens de tema (cores/fontes/textura) do Markdown, para que
+        // as animações passem a MATCH o design. Falha → mantém/usa defaults.
+        $design->writeTokens($extractor->extract($this->conteudo));
+
         $this->guardado = now()->timezone(config('app.timezone'))->translatedFormat('H:i');
         $this->atualizado = $design->updatedAt();
-        $this->dispatch('toast', message: 'Sistema de design guardado.', type: 'ok');
+        $this->dispatch('toast', message: 'Sistema de design guardado e tema extraído.', type: 'ok');
     }
 
     public function render()
     {
+        $design = app(DesignSystemRepository::class);
+
         return view('livewire.design-system', [
-            'caminho' => app(DesignSystemRepository::class)->path(),
+            'caminho' => $design->path(),
+            'tokens' => $design->readTokens(),
         ]);
     }
 }

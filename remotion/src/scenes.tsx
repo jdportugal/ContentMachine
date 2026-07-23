@@ -14,11 +14,19 @@ import type { KaraokeWord, Present, Scene } from "./types";
 
 const EASE = Easing.inOut(Easing.cubic);
 
-const BG_COLOR: Record<string, string | null> = {
-  papyrus: COLORS.papyrus,
-  vellum: COLORS.vellum,
-  ink: COLORS.ink,
-  video: null, // transparent — the source video (overlay) shows through
+// Resolved lazily (at render time) so it reflects the active theme — COLORS is
+// mutated by applyTheme() AFTER this module loads, so a captured object would be stale.
+const bgColorFor = (bg?: string): string | null => {
+  switch (bg) {
+    case "vellum":
+      return COLORS.vellum;
+    case "ink":
+      return COLORS.ink;
+    case "video":
+      return null; // transparent — the source video (overlay) shows through
+    default:
+      return COLORS.papyrus;
+  }
 };
 
 // ── punch word (big serif-italic-caps emphasis) ──────────────────────────────
@@ -36,14 +44,13 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
       <div
         style={{
           fontFamily: FONTS.display,
-          fontStyle: "italic",
-          fontWeight: 600,
+          fontWeight: 400, // Anton — single weight, no italic
           textTransform: "uppercase",
-          letterSpacing: "0.03em",
+          letterSpacing: "0.01em",
           fontSize,
-          lineHeight: 1.02,
-          color: dark ? COLORS.papyrus : COLORS.ink,
-          textShadow: dark ? "0 0 24px rgba(45,186,180,0.35)" : ENGRAVE_SHADOW,
+          lineHeight: 0.98,
+          color: dark ? COLORS.textOnDark : COLORS.textOnLight,
+          textShadow: dark ? `0 0 28px ${COLORS.tealBright}66` : `0 0 26px ${COLORS.teal}44`,
           transform: `scale(${scale})`,
           opacity,
           textAlign: "center",
@@ -69,9 +76,9 @@ const LiveBackground: React.FC<{ color: string }> = ({ color }) => {
       <AbsoluteFill
         style={{
           backgroundImage:
-            `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, rgba(200,155,60,0.07), transparent 46%),` +
-            `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, rgba(139,58,42,0.06), transparent 48%),` +
-            `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, rgba(31,122,122,0.05), transparent 52%)`,
+            `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, ${COLORS.gold}12, transparent 46%),` +
+            `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, ${COLORS.leather}10, transparent 48%),` +
+            `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, ${COLORS.teal}0d, transparent 52%)`,
         }}
       />
     </AbsoluteFill>
@@ -103,7 +110,7 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
 
   // How the scene sits relative to the source video (overlay clips only).
   const present: Present = videoSrc ? (scene.present ?? "video") : "animation";
-  const bgColor = BG_COLOR[scene.background ?? "papyrus"] ?? COLORS.papyrus;
+  const bgColor = bgColorFor(scene.background ?? "papyrus") ?? COLORS.papyrus;
   const dark = present === "animation" ? scene.background === "ink" : true; // over video → light text
   const layers = Array.isArray(scene.layers) ? scene.layers : [];
 
@@ -177,7 +184,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 
   return (
     <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: "13%" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: "rgba(250,243,224,0.9)", borderRadius: 14, padding: "20px 34px", boxShadow: ENGRAVE_SHADOW }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, borderRadius: 14, padding: "20px 34px", boxShadow: ENGRAVE_SHADOW }}>
         {group.map((w, i) => {
           const globalIdx = line * LINE + i;
           const isActive = globalIdx === idx && t >= w.start && t < w.end;
@@ -186,11 +193,11 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
             <span
               key={i}
               style={{
-                fontFamily: FONTS.display,
+                fontFamily: FONTS.body,
                 fontWeight: 600,
                 fontSize: 58,
                 lineHeight: 1.2,
-                color: isActive ? COLORS.teal : COLORS.ink,
+                color: isActive ? COLORS.teal : COLORS.textOnLight,
                 transform: `scale(${pop})`,
                 display: "inline-block",
               }}

@@ -1,4 +1,4 @@
-// Shared prop/plan types for the IATECA clip renderer.
+// Shared prop/plan types for the NEBULA clip renderer.
 
 export type PrimitiveName =
   | "fade"
@@ -108,6 +108,25 @@ export interface KaraokeWord {
   end: number; // seconds (absolute)
 }
 
+// Design-system theme (extracted from the app's Sistema de Design). All fields
+// optional — applyTheme keeps the NEBULA default for anything missing.
+export interface ClipTheme {
+  colors?: Partial<{
+    bg: string;
+    bgAlt: string;
+    bgContrast: string;
+    textOnBg: string;
+    textOnContrast: string;
+    mutedOnBg: string;
+    mutedOnContrast: string;
+    accent: string;
+    accent2: string;
+    accent3: string;
+  }>;
+  fonts?: Partial<{ display: string; body: string; mono: string }>;
+  texture?: { kind?: "paper" | "starfield" | "gradient" | "solid"; css?: string };
+}
+
 export interface ClipProps {
   duration: number; // seconds
   width: number;
@@ -116,6 +135,7 @@ export interface ClipProps {
   mode: "dense" | "sparse";
   transparent: boolean;
   audioSrc?: string;
+  theme?: ClipTheme; // design-system tokens (colours, fonts, texture)
   // v2 scene-based model (preferred). If absent, `animations` (v1) is rendered.
   scenes?: Scene[];
   words?: KaraokeWord[]; // drives karaoke captions

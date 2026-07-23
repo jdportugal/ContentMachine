@@ -2,9 +2,11 @@
 
 namespace App\Services\Publicacoes\Rendering;
 
+use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\Dto\SlidePlano;
 use App\Services\Support\DriverNotConfiguredException;
+use Illuminate\Support\Str;
 
 /**
  * Driver de produção: gera cada cartão com a API kie.ai (nano-banana-pro),
@@ -76,14 +78,14 @@ class KieSlideRenderer implements SlideRenderer
             : 'É um cartão de CONTEÚDO ('.$ordem.' de '.$total.'): título no topo e o texto por baixo, com respiração.';
 
         $texto = $s->texto !== '' ? 'TEXTO DE APOIO (exacto): «'.$s->texto.'»' : '';
+        $estilo = $this->estiloMarca();
 
         return trim(<<<PROMPT
-        Cartão para redes sociais da IATECA — uma biblioteca para a era das máquinas que pensam.
-        Estética: página de livro antigo / gravura. Fundo de pergaminho creme, tinta castanho-escura,
-        filete e ornamentos discretos a ouro velho, tipografia serifada elegante e centrada.
-        Sóbrio e culto. SEM pessoas, SEM logótipos de marcas, SEM emojis, SEM molduras de fotografia.
-        Proporção {$proporcao}. {$papel}
+        Cartão para redes sociais. Proporção {$proporcao}. {$papel}
 
+        {$estilo}
+
+        Regras invariáveis: SEM logótipos de marcas terceiras, SEM emojis, SEM marcas de água.
         Compõe o seguinte texto, escrito EXACTAMENTE assim, em português europeu:
         TÍTULO: «{$s->titulo}»
         {$texto}
@@ -97,10 +99,49 @@ class KieSlideRenderer implements SlideRenderer
     private function promptEdicao(SlidePlano $s, string $instrucao): string
     {
         return trim(<<<PROMPT
-        Edita a imagem fornecida deste cartão da IATECA, mantendo a mesma estética de livro antigo
-        (pergaminho, tinta, ouro), a mesma composição e o mesmo texto legível e sem erros.
+        Edita a imagem fornecida deste cartão, mantendo a MESMA identidade visual da marca, a mesma
+        composição e o mesmo texto legível e sem erros.
         Aplica APENAS esta alteração pedida: «{$instrucao}».
-        Mantém o título «{$s->titulo}» correcto e legível. Sem emojis, sem logótipos, sem pessoas.
+        Mantém o título «{$s->titulo}» correcto e legível. Sem emojis, sem logótipos de terceiros.
         PROMPT);
+    }
+
+    /**
+     * Diretriz de estilo para a imagem, a partir do Sistema de Design (design.md
+     * + tokens). Sem sistema de design configurado, usa a estética IATECA.
+     */
+    private function estiloMarca(): string
+    {
+        $design = app(DesignSystemRepository::class);
+        $md = trim($design->read());
+        $tokens = $design->readTokens();
+
+        if ($md === '' && ! $tokens) {
+            return 'Estética: página de livro antigo / gravura. Fundo de pergaminho creme, tinta '
+                .'castanho-escura, filete e ornamentos discretos a ouro velho, tipografia serifada '
+                .'elegante e centrada. Sóbrio e culto, sem pessoas nem molduras de fotografia.';
+        }
+
+        $linhas = ['ESTILO DE MARCA — aplica RIGOROSAMENTE esta identidade visual ao cartão:'];
+
+        if ($md !== '') {
+            $linhas[] = Str::limit($md, 1600);
+        }
+
+        if ($tokens) {
+            $c = $tokens['colors'] ?? [];
+            $f = $tokens['fonts'] ?? [];
+            $partes = array_filter([
+                (isset($c['bg'], $c['textOnBg']) ? "Paleta: fundo {$c['bg']}, texto {$c['textOnBg']}" : '')
+                    .(isset($c['accent']) ? ", destaque {$c['accent']}" : '').(isset($c['accent2']) ? " / {$c['accent2']}" : '').'.',
+                isset($f['display'], $f['body']) ? "Tipografia: títulos tipo «{$f['display']}», corpo tipo «{$f['body']}»." : '',
+                ! empty($tokens['texture']['kind']) ? "Fundo/textura: {$tokens['texture']['kind']}." : '',
+            ]);
+            if ($partes !== []) {
+                $linhas[] = 'Tokens concretos — '.implode(' ', $partes);
+            }
+        }
+
+        return implode("\n\n", $linhas);
     }
 }

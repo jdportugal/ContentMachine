@@ -6,6 +6,8 @@ canal: 'Nick Saraev'
 data: '2026-07-14'
 url: 'https://www.youtube.com/watch?v=8rVQuZlRaqo'
 thumbnail: 'https://i.ytimg.com/vi/8rVQuZlRaqo/maxresdefault.jpg'
+descricao: "🔥 Join Maker School & get customer #1 guaranteed: https://skool.com/makerschool/about 💎 Get the AI agent workflow here (free): https://www.skool.com/maker-zero ➡️ If this is your first video: I'm Nick Saraev. I run LeftClick, an AI growth consultancy. We've done work for large brands you're likely familiar with, like Mr. Beast, Anthropic, OpenAI, and a few others. In plain English: I help people build systems that generate leads, close deals, and scale businesses, mostly using new AI models like Claude. I also make videos about how to do all of that here on YouTube. It hasn't always been this way. My family immigrated from a Soviet bloc country (People's Republic of Bulgaria) in the 90s. They worked extremely hard, and we were broke for a very long time. I grew up wishing for more securi..."
+resumo: 'O vídeo mostra um fluxo de trabalho prático em que agentes de IA são integrados num espaço partilhado entre humanos e IA para realizar tarefas de trabalho intelectual numa empresa. Usando uma ferramenta de gestão de projetos (Linear) com estados definidos e etiquetas como "AI ready", o autor demonstra como delegar tarefas concretas — por exemplo, gerar ideias para vídeos do YouTube — a agentes de...'
 tags:
   - automation
   - 'content creation'

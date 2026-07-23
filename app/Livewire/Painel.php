@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\Monitoring\MonitoringManager;
+use App\Services\Monitoring\MonitoringStats;
 use App\Services\News\NewsManager;
 use App\Services\Vault\VaultContract;
 use Livewire\Attributes\Layout;
@@ -13,7 +14,7 @@ use Livewire\Component;
 #[Title('Painel')]
 class Painel extends Component
 {
-    public function render(MonitoringManager $monitoring, NewsManager $news, VaultContract $vault)
+    public function render(MonitoringManager $monitoring, MonitoringStats $stats, NewsManager $news, VaultContract $vault)
     {
         // Resumo de desempenho por plataforma (melhor conteúdo recente).
         $plataformas = $monitoring->todos()->map(function ($driver, $p) {
@@ -26,13 +27,12 @@ class Painel extends Component
             ];
         })->values();
 
-        $rascunhos = $vault->all('rascunhos');
         $relatorio = $news->relatorio();
 
         return view('livewire.painel', [
             'plataformas' => $plataformas,
-            'totalRascunhos' => $rascunhos->count(),
-            'agendados' => $rascunhos->filter(fn ($n) => filled($n->get('agendado_para')))->count(),
+            // Totais de canal (subscritores, publicações, desempenho) das redes.
+            'estatisticas' => $stats->totais($monitoring->plataformas()),
             'destaquesNoticias' => array_slice($relatorio['destaques'], 0, 3),
         ]);
     }

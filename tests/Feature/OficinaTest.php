@@ -153,6 +153,53 @@ class OficinaTest extends TestCase
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\GerarImagensJob::class);
     }
 
+    public function test_gerar_imagens_grava_rascunho_automaticamente(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+
+        Livewire::test(Oficina::class, ['tipo' => 'carrossel'])
+            ->set('titulo', 'Peça recuperável')
+            ->set('slides', [['titulo' => 'Capa', 'texto' => 'A'], ['titulo' => 'Dois', 'texto' => 'B']])
+            ->call('gerarImagens')
+            // A peça passa a estar «aberta» (com nota) — recuperável como os vídeos.
+            ->assertSet('notaPath', fn ($v) => is_string($v) && $v !== '');
+
+        // A nota existe no vault (aparece em Rascunhos) e está marcada «a gerar».
+        $nota = app(VaultContract::class)->all('rascunhos')->first();
+        $this->assertNotNull($nota);
+        $this->assertSame('Peça recuperável', $nota->get('titulo'));
+        $slug = pathinfo($nota->path, PATHINFO_FILENAME);
+        $this->assertTrue((bool) \Illuminate\Support\Facades\Cache::get(\App\Jobs\GerarImagensJob::notaKey($slug)));
+    }
+
+    public function test_voltar_a_peca_retoma_estado_a_gerar_e_recarrega_do_vault(): void
+    {
+        // Uma peça guardada, marcada «a gerar».
+        $nota = app(VaultContract::class)->create('rascunhos', [
+            'titulo' => 'Em curso', 'tipo' => 'post', 'formato' => 'single',
+            'plataforma' => 'instagram', 'origem' => 'publicacoes/oficina',
+        ], 'legenda');
+        $slug = pathinfo($nota->path, PATHINFO_FILENAME);
+        \Illuminate\Support\Facades\Cache::put(\App\Jobs\GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
+
+        // Ao abrir a peça, retoma o estado «a gerar» (a view volta a sondar).
+        $c = Livewire::withQueryParams(['nota' => $slug])
+            ->test(Oficina::class, ['tipo' => 'post'])
+            ->assertSet('aGerar', true);
+
+        // Enquanto a flag está activa, mantém-se a gerar.
+        $c->call('verificarImagens')->assertSet('aGerar', true);
+
+        // A geração termina: o job grava as imagens na nota e limpa a flag.
+        app(VaultContract::class)->updateFrontmatter($nota->path, ['imagens' => ['media/publicacoes/x/1.svg']]);
+        \Illuminate\Support\Facades\Cache::forget(\App\Jobs\GerarImagensJob::notaKey($slug));
+
+        // A sondagem seguinte recarrega as imagens da nota e sai de «a gerar».
+        $c->call('verificarImagens')
+            ->assertSet('aGerar', false)
+            ->assertSet('img', ['media/publicacoes/x/1.svg']);
+    }
+
     public function test_referencias_guardadas_e_passadas_a_redacao_e_geracao(): void
     {
         // Referência já adicionada (o upload em si é testado pela stack do Livewire).

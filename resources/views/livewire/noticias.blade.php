@@ -21,9 +21,9 @@
 
         @if ($resumoAgregacao)
             <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <x-metric-card label="Itens recolhidos" :value="$resumoAgregacao['total']" accent="#2dbab4" />
+                <x-metric-card label="Itens recolhidos" :value="$resumoAgregacao['total']" accent="#5A7BFF" />
                 @foreach ($resumoAgregacao['por_plataforma'] as $plat => $n)
-                    <x-metric-card :label="$plat" :value="$n" :accent="config('contentmachine.plataformas_meta.'.$plat.'.cor', '#9a8c78')" />
+                    <x-metric-card :label="$plat" :value="$n" :accent="config('contentmachine.plataformas_meta.'.$plat.'.cor', '#8AE0FF')" />
                 @endforeach
             </div>
             @if (!empty($resumoAgregacao['avisos']))
@@ -53,7 +53,7 @@
                 <div class="lg:col-span-2 space-y-3">
                     <div class="eyebrow mb-1">Itens de {{ \Illuminate\Support\Carbon::parse($diaAtivo)->translatedFormat('d M Y') }}</div>
                     @forelse ($itensDoDia as $nota)
-                        @php $m = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'), ['cor' => '#9a8c78', 'glifo' => '•']); @endphp
+                        @php $m = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'), ['cor' => '#8AE0FF', 'glifo' => '•']); @endphp
                         <div class="flex gap-4 py-3 border-b border-ink-soft/10 last:border-0">
                             @if ($nota->get('thumbnail'))
                                 <img src="{{ $nota->get('thumbnail') }}" alt="" loading="lazy"
@@ -175,7 +175,7 @@
                             <div class="eyebrow mb-1">Relatório · {{ $relatorio['modo'] }} · {{ $relatorio['total'] }} item(s)</div>
                             <h2 class="font-display text-3xl text-ink leading-tight">{{ $relatorio['titulo'] }}</h2>
                         </div>
-                        <x-selo label="IATECA" sub="NOTÍCIAS" date="MMXXVI" color="#c89b3c" />
+                        <x-selo label="IATECA" sub="NOTÍCIAS" date="MMXXVI" color="#FFB347" />
                     </div>
 
                     @if (!empty($relatorio['redacao']))

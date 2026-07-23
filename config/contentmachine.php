@@ -30,14 +30,26 @@ return [
     'monitoring' => [
         'driver' => env('MONITORING_DRIVER', 'fake'),
         'plataformas' => ['youtube', 'instagram', 'tiktok', 'linkedin'],
+        // Nº de publicações recentes a recolher por rede.
+        'limite' => (int) env('MONITORING_LIMITE', 12),
+        // Redes que NÃO expõem métricas públicas (ex.: Instagram esconde gostos/
+        // visualizações a quem não tem sessão). Mostramos só miniaturas + datas.
+        'sem_metricas' => ['instagram'],
+        // Actores Apify para as redes não-YouTube (YouTube usa yt-dlp, grátis).
+        // Requer APIFY_TOKEN. Sobreponha os actores por env se usar outros.
+        'apify' => [
+            'instagram' => env('APIFY_ACTOR_INSTAGRAM', 'apify~instagram-scraper'),
+            'tiktok' => env('APIFY_ACTOR_TIKTOK', 'clockworks~tiktok-scraper'),
+            'linkedin' => env('APIFY_ACTOR_LINKEDIN', ''), // sem actor fiável por defeito
+        ],
     ],
 
     // Metadados de apresentação por plataforma (label, cor de acento, glifo).
     'plataformas_meta' => [
-        'youtube' => ['label' => 'YouTube',   'cor' => '#d76a5a', 'glifo' => '▶'],
-        'instagram' => ['label' => 'Instagram', 'cor' => '#c85a9c', 'glifo' => '◉'],
-        'tiktok' => ['label' => 'TikTok',    'cor' => '#2dbab4', 'glifo' => '♪'],
-        'linkedin' => ['label' => 'LinkedIn',  'cor' => '#1f7a7a', 'glifo' => '▮'],
+        'youtube' => ['label' => 'YouTube',   'cor' => '#FF5C7A', 'glifo' => '▶'],
+        'instagram' => ['label' => 'Instagram', 'cor' => '#C77DFF', 'glifo' => '◉'],
+        'tiktok' => ['label' => 'TikTok',    'cor' => '#4DE0E0', 'glifo' => '♪'],
+        'linkedin' => ['label' => 'LinkedIn',  'cor' => '#5A7BFF', 'glifo' => '▮'],
     ],
 
     'news' => [

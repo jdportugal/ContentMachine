@@ -78,7 +78,7 @@ class GerarImagensJob implements ShouldQueue
 
     public function failed(\Throwable $e): void
     {
-        Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(30));
+        Cache::put(self::key($this->token), ['erro' => true, 'msg' => $e->getMessage()], now()->addMinutes(30));
         $this->limparFlag();
     }
 

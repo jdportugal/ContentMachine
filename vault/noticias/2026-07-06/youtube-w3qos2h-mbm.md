@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Dan Martell'
 data: '2026-07-06'
 url: 'https://www.youtube.com/watch?v=W3qOS2h_MBM'
-thumbnail: 'https://i.ytimg.com/vi_webp/W3qOS2h_MBM/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/W3qOS2h_MBM/maxresdefault.jpg'
+descricao: "✅ Get your FREE Sell by Chat Playbook here: https://go.danmartell.com/4aCktFm Every week I'm hiring for my AI venture studio, and the gap between what the market thinks pays and what actually pays has never been wider. I'm breaking down every high income skill worth learning right now, ranking them by how hard they are to enter, whether AI can replace them, and what they'll realistically pay you five years from now. Some of the \"safe\" careers people are still betting on are dead. And a few of the ones you've never even heard of are about to make a whole new wave of millionaires. Stick around because the ones near the top of my list are the ones almost nobody is talking about yet. ▸▸ Subscribe to The Martell Method Newsletter: https://bit.ly/3XEBXez ▸▸ Get My New Book (Buy Back Your Time):..."
+resumo: 'O vídeo classifica 19 competências que permitem ganhar dinheiro na era da inteligência artificial, avaliando cada uma segundo a barreira de entrada, a resistência à substituição pela IA e a rentabilidade. São dados exemplos como gestão de redes sociais, oratória e ofícios manuais (canalizadores, eletricistas), mostrando quais se mantêm valiosas e quais tendem a ser automatizadas.'
 tags:
   - 'make money online'
   - AI

@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -26,16 +26,16 @@
             <nav class="flex-1 py-2 space-y-0.5">
                 @php
                     $nav = [
-                        ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#2dbab4', 'glyph' => '◆'],
-                        ['route' => 'monitorizacao',   'label' => 'Monitorização',     'sub' => 'Redes sociais',      'color' => '#b5533f', 'glyph' => '❧'],
-                        ['route' => 'clips',           'label' => 'Gerador de Clips',  'sub' => 'Vídeo',              'color' => '#c89b3c', 'glyph' => '✂'],
-                        ['route' => 'clips-animados',  'label' => 'Clips Animados',    'sub' => 'Animação',           'color' => '#1f7a7a', 'glyph' => '❈'],
-                        ['route' => 'ativos',          'label' => 'Ativos',            'sub' => 'Media · Música',     'color' => '#a86f4a', 'glyph' => '♫'],
-                        ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#8b6db0', 'glyph' => '❦'],
-                        ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#6fbf73', 'glyph' => '⌛'],
-                        ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#d8a24a', 'glyph' => '☙'],
-                        ['route' => 'design-system',   'label' => 'Sistema de Design', 'sub' => 'Marca do conteúdo',  'color' => '#c77dae', 'glyph' => '❖'],
-                        ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#9a8c78', 'glyph' => '⚙'],
+                        ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#FFB347', 'glyph' => '◆'],
+                        ['route' => 'monitorizacao',   'label' => 'Monitorização',     'sub' => 'Redes sociais',      'color' => '#C77DFF', 'glyph' => '◈'],
+                        ['route' => 'clips',           'label' => 'Gerador de Clips',  'sub' => 'Vídeo',              'color' => '#5A7BFF', 'glyph' => '▲'],
+                        ['route' => 'clips-animados',  'label' => 'Clips Animados',    'sub' => 'Animação',           'color' => '#4DE0E0', 'glyph' => '✦'],
+                        ['route' => 'ativos',          'label' => 'Ativos',            'sub' => 'Media · Música',     'color' => '#4DE08A', 'glyph' => '♫'],
+                        ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#9C7DFF', 'glyph' => '◇'],
+                        ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#FF8A4D', 'glyph' => '⬡'],
+                        ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#FFD98A', 'glyph' => '✷'],
+                        ['route' => 'design-system',   'label' => 'Sistema de Design', 'sub' => 'Marca do conteúdo',  'color' => '#FF5C7A', 'glyph' => '❖'],
+                        ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#8AE0FF', 'glyph' => '⚙'],
                     ];
                 @endphp
 
@@ -88,8 +88,8 @@
             <div x-transition.opacity
                  style="pointer-events:auto;"
                  :style="t.type === 'erro'
-                    ? 'border:1px solid rgba(181,83,63,.6); color:#d98b7a;'
-                    : 'border:1px solid rgba(111,191,115,.6); color:#8fce93;'"
+                    ? 'border:1px solid rgba(255,92,122,.6); color:#FF8FA6;'
+                    : 'border:1px solid rgba(18,183,106,.6); color:#4DE08A;'"
                  class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
                 <span x-text="t.type === 'erro' ? '✕' : '✓'"></span>
                 <span x-text="t.message" class="flex-1 break-words"></span>

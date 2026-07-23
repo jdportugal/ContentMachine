@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Dan Martell'
 data: '2026-07-15'
 url: 'https://www.youtube.com/watch?v=Bm84BAtOfQw'
-thumbnail: 'https://i.ytimg.com/vi_webp/Bm84BAtOfQw/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/Bm84BAtOfQw/maxresdefault.jpg'
+descricao: "✅ Get Your FREE AI Company Operating System here: https://go.danmartell.com/3SXCfgk 👥 Are you building an AI software company? Partner with me: https://go.danmartell.com/4pjN7RP By 2030, the biggest wave of new jobs isn't going to reward people who can chat with AI. It's going to reward people who can build with it. Right now most people are still typing prompts one at a time, while a small group is quietly building AI agents that run their businesses in the background. In this video, I show you exactly how I went from doing the work to directing it, and how you can build your first AI agent this week even if you've never touched code. Watch until the end and you'll walk away with a repeatable way to think about every future agent you build. Prompts from the video: Identity files prompt:..."
+resumo: 'Este vídeo é um guia prático sobre como construir o teu primeiro agente de IA, explicando a diferença entre um chatbot (que apenas responde a perguntas) e um agente (que executa fluxos de trabalho completos de forma autónoma através de um ciclo de diagnosticar, planear, agir e avaliar). Aborda ainda como decidir que tarefas vale a pena delegar a um agente, usando critérios como serem repetitivas,...'
 tags:
   - AI
   - 'AI Agent'

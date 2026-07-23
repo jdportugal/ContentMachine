@@ -5,13 +5,21 @@
         cota="006.3 · IAT · '26"
         lead="Vista geral da casa — desempenho das redes, rascunhos em curso e o que há de novo no mundo." />
 
-    {{-- KPIs de topo --}}
+    {{-- Totais dos canais --}}
+    @php use App\Services\Monitoring\MonitoringStats; @endphp
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <x-metric-card label="Rascunhos" :value="$totalRascunhos" unit="no vault" accent="#6fbf73" />
-        <x-metric-card label="Agendados" :value="$agendados" unit="a publicar" accent="#c89b3c" />
-        <x-metric-card label="Plataformas" :value="count($plataformas)" unit="monitorizadas" accent="#2dbab4" />
-        <x-metric-card label="Notícias" :value="count($destaquesNoticias)" unit="destaques hoje" accent="#d8a24a" />
+        <x-metric-card label="Subscritores" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF" />
+        <x-metric-card label="Publicações" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="publicadas" accent="#FFB347" />
+        <x-metric-card label="Visualizações" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recentes" accent="#FF7A3D" />
+        <x-metric-card label="Interações" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recentes" accent="#C77DFF" />
     </div>
+    @unless ($estatisticas['temDados'])
+        <p class="mt-2 font-mono text-xs text-ink-faint">
+            Sem dados de canal ainda — vá a
+            <a href="{{ route('monitorizacao') }}" class="text-teal hover:underline">Monitorização</a>
+            e carregue em «Atualizar dados» para recolher dos seus canais.
+        </p>
+    @endunless
 
     {{-- Desempenho por plataforma --}}
     <div class="mt-8">

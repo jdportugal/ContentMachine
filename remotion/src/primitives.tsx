@@ -8,7 +8,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { COLORS, ENGRAVE_SHADOW, FONTS } from "./style-tokens";
+import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient } from "./style-tokens";
 import type { Animation } from "./types";
 
 // Every primitive receives the animation descriptor plus the composition fps.
@@ -22,9 +22,11 @@ export interface PrimitiveProps {
 
 const EASE = Easing.inOut(Easing.cubic);
 
-// Background-aware text colors (light text on dark scenes).
-const inkC = (dark?: boolean) => (dark ? COLORS.papyrus : COLORS.ink);
-const softC = (dark?: boolean) => (dark ? "rgba(244,234,213,0.72)" : COLORS.inkSoft);
+// Background-aware text colors. `dark` = the scene sits on the contrast (ink)
+// background. Uses the semantic text tokens so light AND dark design systems
+// both read correctly (see style-tokens applyTheme).
+const inkC = (dark?: boolean) => (dark ? COLORS.textOnDark : COLORS.textOnLight);
+const softC = (dark?: boolean) => (dark ? COLORS.mutedOnDark : COLORS.mutedOnLight);
 
 // Local duration (in frames) of the animation window.
 const winFrames = (anim: Animation, fps: number) =>
@@ -48,14 +50,21 @@ const Center: React.FC<{ children: React.ReactNode; style?: React.CSSProperties 
   </AbsoluteFill>
 );
 
-const titleStyleFor = (dark?: boolean): React.CSSProperties => ({
+// Nebula signature: display headlines are Anton uppercase, clipped to the
+// molten-gold gradient. `dark` no longer changes the colour (the gold reads on
+// any Nebula surface) but is kept in the signature so callers stay unchanged.
+const titleStyleFor = (_dark?: boolean): React.CSSProperties => ({
   fontFamily: FONTS.display,
-  color: inkC(dark),
-  fontWeight: 600,
+  fontWeight: 400, // Anton ships a single weight
   fontSize: 96,
-  lineHeight: 1.1,
-  textShadow: dark ? "none" : ENGRAVE_SHADOW,
+  lineHeight: 0.95,
+  textTransform: "uppercase",
   margin: 0,
+  backgroundImage: headlineGradient(),
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  WebkitTextFillColor: "transparent",
 });
 
 // ── data-viz coercion helpers (params may be missing/malformed) ──────────────
@@ -96,18 +105,21 @@ const coerceBars = (v: unknown) =>
   });
 
 // Multi-series data for line-chart (each series may target the left or right axis).
-const SERIES_COLORS = [COLORS.teal, COLORS.leather, COLORS.gold, COLORS.inkSoft];
-const coerceSeries = (v: unknown) =>
-  (Array.isArray(v) ? v : []).slice(0, 4).map((raw, i) => {
+// Built lazily so it reflects the active theme (COLORS is themed after load).
+const seriesColors = () => [COLORS.teal, COLORS.leather, COLORS.gold, COLORS.inkSoft];
+const coerceSeries = (v: unknown) => {
+  const SERIES = seriesColors();
+  return (Array.isArray(v) ? v : []).slice(0, 4).map((raw, i) => {
     const o = asRecord(raw);
     return {
       label: asStr(o.label),
-      color: asStr(o.color) || SERIES_COLORS[i % SERIES_COLORS.length],
+      color: asStr(o.color) || SERIES[i % SERIES.length],
       points: (Array.isArray(o.points) ? o.points : []).slice(0, 12).map(asNum),
       highlight: o.highlight === true,
       axis: o.axis === "right" ? ("right" as const) : ("left" as const),
     };
   });
+};
 
 // Points for a 2-axis scatter / quadrant chart.
 const coerceScatter = (v: unknown) =>
@@ -259,7 +271,19 @@ const KineticText: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           return (
             <span
               key={i}
-              style={{ display: "inline-block", opacity, transform: `translateY(${rise}px)` }}
+              style={{
+                // The gradient clip lives on each word (not the parent) — an
+                // inline-block child would otherwise inherit transparent text
+                // with no background of its own and vanish.
+                display: "inline-block",
+                opacity,
+                transform: `translateY(${rise}px)`,
+                backgroundImage: headlineGradient(),
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+              }}
             >
               {w}
             </span>
@@ -319,21 +343,22 @@ const FleuronDraw: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const glyphOpacity = interpolate(draw, [0.4, 1], [0, 1], { extrapolateLeft: "clamp" });
   return (
     <Center>
-      <div style={{ display: "flex", alignItems: "center", gap: 18, color: COLORS.leather }}>
-        <span style={{ height: 3, width: lineW, background: COLORS.gold, display: "block" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 18, color: COLORS.teal }}>
+        <span style={{ height: 3, width: lineW, background: COLORS.teal, display: "block", borderRadius: 999 }} />
         <span
           style={{
-            fontFamily: FONTS.display,
-            fontSize: 84,
+            fontFamily: FONTS.body,
+            fontSize: 72,
             transform: `scale(${glyphScale})`,
             opacity: glyphOpacity,
-            color: COLORS.leather,
+            color: COLORS.tealBright,
+            textShadow: `0 0 22px ${COLORS.teal}88`,
             lineHeight: 1,
           }}
         >
-          &#10087;
+          &#10022;
         </span>
-        <span style={{ height: 3, width: lineW, background: COLORS.gold, display: "block" }} />
+        <span style={{ height: 3, width: lineW, background: COLORS.teal, display: "block", borderRadius: 999 }} />
       </div>
     </Center>
   );
@@ -346,8 +371,8 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const s = spring({ frame, fps, config: { damping: 12, mass: 0.9 }, durationInFrames: Math.min(dur, fps) });
   const scale = interpolate(s, [0, 1], [1.7, 1]);
   const rotate = interpolate(s, [0, 1], [-24, -7]);
-  const opacity = interpolate(s, [0, 1], [0, 0.85]);
-  const label = anim.text ?? "IATECA";
+  const opacity = interpolate(s, [0, 1], [0, 0.92]);
+  const label = anim.text ?? "NEBULA";
   return (
     <Center>
       <div
@@ -356,17 +381,18 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           height: 420,
           borderRadius: "50%",
           border: `8px solid ${COLORS.leather}`,
-          boxShadow: `inset 0 0 0 12px ${COLORS.papyrus}, inset 0 0 0 16px ${COLORS.leather}`,
+          boxShadow: `inset 0 0 0 12px ${COLORS.papyrus}, inset 0 0 0 16px ${COLORS.leather}, 0 0 60px ${COLORS.leather}66`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           transform: `scale(${scale}) rotate(${rotate}deg)`,
           opacity,
-          color: COLORS.leather,
+          color: COLORS.teal,
           fontFamily: FONTS.display,
-          fontWeight: 700,
-          letterSpacing: "0.18em",
-          fontSize: 64,
+          fontWeight: 400,
+          textTransform: "uppercase",
+          letterSpacing: "0.12em",
+          fontSize: 72,
         }}
       >
         <span style={{ transform: "translateY(-2px)" }}>{label}</span>
@@ -478,10 +504,11 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
               color: COLORS.inkSoft,
               fontFamily: FONTS.display,
               fontSize: 56,
+              textTransform: "uppercase",
               letterSpacing: "0.1em",
             }}
           >
-            {anim.text ?? "IATECA"}
+            {anim.text ?? "NEBULA"}
           </div>
         )}
       </div>
@@ -682,7 +709,7 @@ const Card: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   return (
     <Center>
       <div style={{ background: COLORS.vellum, border: "1px solid rgba(91,70,54,0.25)", borderRadius: 18, padding: "56px 64px", boxShadow: ENGRAVE_SHADOW, transform: `scale(${scale})`, opacity, maxWidth: "84%" }}>
-        {title ? <div style={{ fontFamily: FONTS.display, color: COLORS.ink, fontWeight: 600, fontSize: 78, lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+        {title ? <div style={{ fontFamily: FONTS.display, color: COLORS.textOnLight, fontWeight: 600, fontSize: 78, lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
         {lines.map((l, i) => (
           <div key={i} style={{ fontFamily: FONTS.body, color: COLORS.inkSoft, fontSize:  52, lineHeight: 1.45 }}>{l}</div>
         ))}
@@ -710,7 +737,7 @@ const Terminal: React.FC<PrimitiveProps> = ({ anim }) => {
             <span key={c} style={{ width: 16, height: 16, borderRadius: "50%", background: c, display: "inline-block" }} />
           ))}
         </div>
-        <pre style={{ fontFamily: FONTS.mono, color: COLORS.papyrus, fontSize: 34, lineHeight: 1.5, whiteSpace: "pre-wrap", margin: 0, textAlign: "left" }}>
+        <pre style={{ fontFamily: FONTS.mono, color: COLORS.textOnDark, fontSize: 34, lineHeight: 1.5, whiteSpace: "pre-wrap", margin: 0, textAlign: "left" }}>
           {shown}
           <span style={{ opacity: caretOn ? 1 : 0, color: COLORS.tealBright }}>▋</span>
         </pre>
@@ -937,7 +964,7 @@ const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           return (
             <div key={i} style={{ position: "absolute", left: `${(p.x / 1000) * 100}%`, top: `${(p.y / 1000) * 100}%`, width: `${(boxW / 1000) * 100}%`, height: `${(boxH / 1000) * 100}%`, transform: `translate(-50%,-50%) scale(${0.7 + 0.3 * s})`, opacity: op, background: COLORS.vellum, border: `3px solid ${border}`, borderRadius: 14, boxShadow: ENGRAVE_SHADOW, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 14, overflow: "hidden" }}>
               {node.image ? <Img src={node.image} style={{ maxWidth: "60%", maxHeight: "48%", objectFit: "contain" }} /> : null}
-              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.ink, fontWeight: 600, fontSize: nodeFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
+              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.textOnLight, fontWeight: 600, fontSize: nodeFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
             </div>
           );
         })}

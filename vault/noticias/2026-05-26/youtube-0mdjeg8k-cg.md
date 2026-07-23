@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Simon Says AI'
 data: '2026-05-26'
 url: 'https://www.youtube.com/watch?v=0mDjeG8K-cg'
-thumbnail: 'https://i.ytimg.com/vi_webp/0mDjeG8K-cg/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/0mDjeG8K-cg/maxresdefault.jpg'
+descricao: '🟠 Simon Says AI Pro Community Claude Code mastery course. Build real systems and get paid by clients. https://www.skool.com/simon-says-ai-pro-9357/about 🟢 Simon Says AI Free Community All my FREE guides and build resources: https://www.skool.com/simon-says-ai-7422/about Karpathy LLM Knowledge Base Gist https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f Your ChatGPT and Claude history is stored somewhere, but that does not make it memory. This video shows how I turned years of AI conversations into a navigable second brain. I walk through the full setup: the main superbrain, the Obsidian and Karpathy-style wiki layer, how to ingest ChatGPT and Claude exports, a public article demo, a project-specific sub-brain demo, and the maintenance/linting loop that keeps the system use...'
+resumo: 'O utilizador pediu um resumo direto do conteúdo do vídeo — uma tarefa de resposta única, sem trabalho criativo nem exploração de código. Vou responder diretamente. Este vídeo mostra como construir um "segundo cérebro" de memória a partir do histórico de conversas do ChatGPT e do Claude, organizado automaticamente pelo Claude Code num grafo de conhecimento com temas, entidades e ligações entre conv...'
 tags: {}
 fontes:
   - 'https://www.skool.com/simon-says-ai-pro-9357/about'
