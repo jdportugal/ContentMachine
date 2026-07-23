@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\GerarRelatorioJob;
 use App\Livewire\Noticias;
 use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -105,6 +107,21 @@ class RelatorioTest extends TestCase
         $this->assertNotNull($nota);
         $this->assertSame('relatorio', $nota->get('tipo'));
         $this->assertNotEmpty($nota->get('dados'));
+    }
+
+    public function test_criar_relatorio_despacha_job_e_fica_a_gerar(): void
+    {
+        Queue::fake();
+
+        Livewire::test(Noticias::class)
+            ->set('recolherPrimeiro', false)
+            ->set('modoRelatorio', 'dia')
+            ->set('dataRelatorio', Carbon::today()->toDateString())
+            ->call('criarRelatorio')
+            // Não bloqueia o pedido web: fica a gerar e sonda o worker.
+            ->assertSet('aGerar', true);
+
+        Queue::assertPushed(GerarRelatorioJob::class);
     }
 
     /** Grava um relatório arquivado diretamente no vault (sem passar pela geração). */

@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Jobs\GerarRelatorioJob;
 use App\Services\Aggregation\NewsAggregator;
-use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -40,6 +41,13 @@ class Noticias extends Component
 
     /** Caminho (no vault) do relatório arquivado atualmente em vista. */
     public string $relatorioSelecionado = '';
+
+    /** Geração em curso na fila (controla a sondagem). */
+    public bool $aGerar = false;
+
+    public ?string $relatorioToken = null;
+
+    public ?string $avisoRelatorio = null;
 
     public function mount(VaultContract $vault): void
     {
@@ -81,46 +89,55 @@ class Noticias extends Component
         $this->diaSelecionado = $dia;
     }
 
-    /** Gera um relatório a partir dos itens agregados no período escolhido. */
-    public function criarRelatorio(RelatorioBuilder $builder, VaultContract $vault, NewsAggregator $aggregator): void
+    /**
+     * Dispara a geração do relatório numa FILA (worker) e passa a sondar o
+     * resultado — a redação com IA/pesquisa web demora e estouraria o
+     * max_execution_time se corresse no pedido web. Mesmo padrão da oficina.
+     */
+    public function criarRelatorio(): void
     {
-        // Recolhe primeiro conteúdo novo dos canais (apanha os vídeos de hoje).
-        if ($this->recolherPrimeiro) {
-            $this->resumoAgregacao = $aggregator->aggregate();
+        $this->relatorioToken = (string) Str::uuid();
+        $this->aGerar = true;
+        $this->avisoRelatorio = null;
+        $this->dispatch('loader-show', message: 'A recolher e redigir o relatório… (requer «php artisan queue:work»)');
+
+        GerarRelatorioJob::dispatch(
+            $this->modoRelatorio,
+            $this->dataRelatorio,
+            $this->recolherPrimeiro,
+            $this->relatorioToken,
+        );
+
+        $this->verificarRelatorio(app(VaultContract::class));
+    }
+
+    /** Sondado (wire:poll) enquanto $aGerar: carrega o relatório quando o worker termina. */
+    public function verificarRelatorio(VaultContract $vault): void
+    {
+        if (! $this->aGerar || $this->relatorioToken === null) {
+            return;
         }
 
-        $ref = Carbon::parse($this->dataRelatorio !== '' ? $this->dataRelatorio : now()->toDateString());
+        $r = Cache::get(GerarRelatorioJob::key($this->relatorioToken));
+        if ($r === null) {
+            return;
+        }
 
-        // 'semana' = janela dos últimos 7 dias até à data escolhida (não a
-        // semana de calendário), para apanhar todo o conteúdo recente agregado.
-        [$inicio, $fim] = $this->modoRelatorio === 'semana'
-            ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
-            : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
+        $this->aGerar = false;
+        $this->dispatch('loader-hide');
+        Cache::forget(GerarRelatorioJob::key($this->relatorioToken));
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modoRelatorio);
+        if (! empty($r['erro'])) {
+            $this->avisoRelatorio = 'A geração falhou. Verifique se o worker está a correr («php artisan queue:work») e tente de novo.';
 
-        // Persiste no vault (frontmatter + JSON para re-exibição + corpo Markdown).
-        $slug = $this->modoRelatorio === 'semana'
-            ? 'semana-'.$inicio->toDateString()
-            : 'dia-'.$inicio->toDateString();
+            return;
+        }
 
-        $nota = $vault->put("noticias/relatorios/{$slug}.md", [
-            'titulo' => $relatorio['titulo'],
-            'tipo' => 'relatorio',
-            'modo' => $relatorio['modo'],
-            'inicio' => $relatorio['inicio'],
-            'fim' => $relatorio['fim'],
-            'total' => $relatorio['total'],
-            'gerado_em' => $relatorio['gerado_em'],
-            'estado' => 'arquivado',
-            'tags' => ['noticias', 'relatorio', $relatorio['modo']],
-            'dados' => json_encode($relatorio, JSON_UNESCAPED_UNICODE),
-        ], $builder->corpoMarkdown($relatorio));
-
-        $this->relatorio = $relatorio;
-        $this->relatorioGuardado = $nota->path;
+        $nota = $vault->get($r['path']);
+        $this->relatorio = $this->dadosDe($nota);
+        $this->relatorioGuardado = $r['path'];
         // Passa a vista para o relatório recém-arquivado.
-        $this->relatorioSelecionado = $nota->path;
+        $this->relatorioSelecionado = $r['path'];
     }
 
     public function render(VaultContract $vault)

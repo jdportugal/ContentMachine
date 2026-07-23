@@ -139,12 +139,23 @@
                     <span>Recolher vídeos de hoje primeiro <span class="text-ink-faint">(vasculha os canais antes de redigir)</span></span>
                 </label>
 
-                <button wire:click="criarRelatorio" wire:loading.attr="disabled" wire:target="criarRelatorio"
-                        x-on:click="window.CMLoader.busy('A recolher e redigir…')"
+                <button wire:click="criarRelatorio" @disabled($aGerar)
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
-                    <span wire:loading.remove wire:target="criarRelatorio">Criar relatório de notícias</span>
-                    <span wire:loading wire:target="criarRelatorio">A recolher e redigir…</span>
+                    {{ $aGerar ? 'A recolher e redigir…' : 'Criar relatório de notícias' }}
                 </button>
+
+                @if ($aGerar)
+                    {{-- Sonda o worker até o relatório ficar pronto. --}}
+                    <div wire:poll.2s="verificarRelatorio" class="mt-2 font-mono text-[0.6rem] text-ink-faint">
+                        A correr na fila… precisa de um worker: <span class="text-teal">php artisan queue:work</span>
+                    </div>
+                @endif
+
+                @if ($avisoRelatorio)
+                    <div class="mt-3 border border-bad/40 bg-bad/10 text-bad rounded-sm px-3 py-2 font-mono text-xs">
+                        {{ $avisoRelatorio }}
+                    </div>
+                @endif
 
                 @if ($relatorioGuardado)
                     <div class="mt-3 border border-good/40 bg-good/10 text-good rounded-sm px-3 py-2 font-mono text-xs break-all">
