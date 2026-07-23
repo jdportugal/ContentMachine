@@ -162,9 +162,16 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
 };
 
 // ── karaoke captions (word-synced, global across karaoke scenes) ──────────────
+// Captions lead the audio by a hair. Frame quantization always rounds a word's
+// highlight to appear at/after its onset (never before), and viewers read a
+// little ahead — both make an exactly-synced caption feel late. A small lead
+// cancels that. ponytail: perceptual tuning knob — nudge up if still late, down
+// if it now reads early.
+const CAPTION_LEAD = 0.1; // seconds
+
 const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: number }> = ({ words, scenes, fps }) => {
   const frame = useCurrentFrame();
-  const t = frame / fps;
+  const t = frame / fps + CAPTION_LEAD;
 
   const active = scenes.some((s) => s.karaoke && t >= s.start && t < s.end);
   if (!active || words.length === 0) return null;

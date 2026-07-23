@@ -24,7 +24,8 @@ class ClipsAnimados extends Component
 
     public const BACKGROUNDS = ['papyrus', 'vellum', 'ink', 'video'];
 
-    public const TRANSITIONS = ['cut', 'crossfade', 'whip'];
+    // Keep in sync with the Remotion `Transition` type (remotion/src/types.ts).
+    public const TRANSITIONS = ['cut', 'crossfade', 'whip', 'slide', 'zoom'];
 
     /** dashboard | create | editPlan | editTranscript */
     public string $view = 'dashboard';
@@ -43,6 +44,10 @@ class ClipsAnimados extends Component
     public string $newImageDesc = '';
     /** @var array<int,array{id:string,path:string,description:string}> */
     public array $images = [];
+
+    // música de fundo (mesma biblioteca dos shorts) — '' = aleatória, 'nenhuma' = sem música
+    public string $musica = '';
+    public float $musicaVolume = 0.1;
 
     // ---- edição ----
     public ?int $editingId = null;
@@ -73,7 +78,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -186,6 +191,7 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
+            'meta' => $this->musicaMeta(),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -213,7 +219,7 @@ class ClipsAnimados extends Component
             'title' => $this->video->getClientOriginalName(),
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => ['allowed_present' => array_values($this->allowedPresents)],
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents)]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -229,6 +235,8 @@ class ClipsAnimados extends Component
         $p = ClipProject::findOrFail($id);
         $this->editingId = $p->id;
         $this->editTitle = (string) $p->title;
+        $this->musica = (string) ($p->meta['musica'] ?? '');
+        $this->musicaVolume = (float) ($p->meta['musica_volume'] ?? 0.1);
         $this->editScenes = array_map(function ($s) {
             [$target, $text] = $this->extractLayerText($s['layers'] ?? []);
 
@@ -320,6 +328,7 @@ class ClipsAnimados extends Component
         $p->update([
             'title' => $this->editTitle ?: $p->title,
             'plan' => $decoded,
+            'meta' => $this->musicaMeta($p->meta ?? []),
             'status' => ClipProject::STATUS_RENDERING,
             'error' => null,
         ]);
@@ -378,12 +387,22 @@ class ClipsAnimados extends Component
         $p->update([
             'title' => $this->editTitle ?: $p->title,
             'plan' => $plan,
+            'meta' => $this->musicaMeta($p->meta ?? []),
             'status' => ClipProject::STATUS_RENDERING,
             'error' => null,
         ]);
 
         RenderJob::dispatch($p->id);
         $this->voltar();
+    }
+
+    /** Merge the current music choice into a meta array (base preserved). */
+    private function musicaMeta(array $base = []): array
+    {
+        return array_merge($base, [
+            'musica' => trim($this->musica),
+            'musica_volume' => $this->musicaVolume,
+        ]);
     }
 
     // =====================================================================
@@ -474,11 +493,12 @@ class ClipsAnimados extends Component
         return $text === '' ? 'Sem título' : Str::limit($text, 48);
     }
 
-    public function render()
+    public function render(\App\Services\Shorts\MusicLibrary $music)
     {
         return view('livewire.clips-animados', [
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
+            'musicas' => $music->all(),
         ]);
     }
 }

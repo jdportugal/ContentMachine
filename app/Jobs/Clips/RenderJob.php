@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Models\ClipProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,7 +17,7 @@ class RenderJob implements ShouldQueue
 
     public function __construct(public int $projectId) {}
 
-    public function handle(RemotionRenderer $renderer): void
+    public function handle(RemotionRenderer $renderer, MusicLibrary $music): void
     {
         $p = ClipProject::findOrFail($this->projectId);
 
@@ -34,6 +35,12 @@ class RenderJob implements ShouldQueue
             $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
 
             $plan['audioSrc'] = $p->audio_path;
+
+            // Background music (mixed as a looping <Audio> track by Remotion).
+            if ($track = $this->resolveMusic($p, $music)) {
+                $plan['musicSrc'] = $track;
+                $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
+            }
 
             // Tema do Sistema de Design (cores/fontes/textura) — faz a animação
             // combinar com a marca. Null → o renderizador usa os defaults IATECA.
@@ -54,6 +61,25 @@ class RenderJob implements ShouldQueue
             $p->update(['status' => ClipProject::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
+    }
+
+    /**
+     * Resolve the clip's music choice to an absolute file path, or null.
+     * Mirrors the shorts pipeline: 'nenhuma' → none, ''/'aleatoria' → random
+     * track, a name → that track (falling back to random if it vanished).
+     */
+    private function resolveMusic(ClipProject $p, MusicLibrary $music): ?string
+    {
+        $choice = trim((string) ($p->meta['musica'] ?? ''));
+
+        if ($choice === 'nenhuma') {
+            return null;
+        }
+        if ($choice === '' || $choice === 'aleatoria') {
+            return $music->randomPath();
+        }
+
+        return $music->pathFor($choice) ?? $music->randomPath();
     }
 
     /** Map image-reveal layers' `params.src` (an image id) to the absolute file path. */
