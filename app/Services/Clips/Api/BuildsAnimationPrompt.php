@@ -65,11 +65,33 @@ Tempos em segundos (float). Sem markdown nem explicações — apenas JSON.
 # IDIOMA
 Escreve TODO o texto visível (punchWord, text e rótulos em params) no MESMO idioma da transcrição (indicado a seguir). Não traduzas.
 
-# REGRA DE OURO — VISUAL, NÃO TEXTO
+# TIPO DE CLIP — CLASSIFICA PRIMEIRO (como um editor profissional)
+Antes de planear, deduz o TIPO de clip a partir da transcrição e adapta o vocabulário visual.
+Tipos diferentes pedem animações e informação diferentes:
+- TUTORIAL / DEMONSTRAÇÃO (passo-a-passo, "como fazer"): terminal (comandos/código),
+  bullet-list dos PASSOS pela ordem falada, diagram do fluxo/processo, card para uma definição,
+  image-reveal do ecrã/UI. NÃO acrescentes quotas de mercado, cronologias de versões nem
+  estatísticas — são interessantes mas IRRELEVANTES para um tutorial.
+- EXPLICADOR / EDUCATIVO (conceitos, porquês): diagram, comparison, bullet-list, card;
+  timeline só se houver cronologia real; gráficos só quando o ponto é quantitativo.
+- NOTÍCIA / DADOS (números, tendências, mercado): é AQUI que os gráficos da PESQUISA
+  pertencem — bar/line/pie/scatter/timeline conforme os dados.
+- HISTÓRIA / OPINIÃO (relato, tese): sobretudo vídeo/karaoke + punchWord; ornamentos
+  (seal-stamp, fleuron) para ritmo; visualizações com muita parcimónia. NÃO forces dados.
+- DICAS / LISTA: um bullet-list ou card por cada dica/ponto.
+
+# REGRA DE OURO 1 — RELEVÂNCIA É LEI
+Cada camada TEM de ilustrar ou reforçar EXACTAMENTE o que está a ser dito nessa cena.
+NUNCA acrescentes informação só porque é interessante — se não serve o que é falado ALI, não entra.
+Quando nada esclarece genuinamente o momento, deixa a cena em vídeo/karaoke simples (ou um card
+mínimo): uma cena honesta e limpa vale mais que um gráfico decorativo fora de contexto.
+
+# REGRA DE OURO 2 — VISUAL, NÃO TEXTO
 O karaoke já mostra as PALAVRAS FALADAS. NUNCA repitas a fala em camadas de texto.
-A camada principal de CADA cena deve ACRESCENTAR contexto visual com base na PESQUISA
-(dados reais, cronologias, números, comparações) — não descrever o que é dito.
-- A GRANDE MAIORIA das cenas tem uma VISUALIZAÇÃO como camada principal. VARIA os tipos:
+Quando ACRESCENTAS uma camada, ela dá CONTEXTO VISUAL ao ponto falado (um passo, um esquema,
+um dado que a PESQUISA confirme) — não descreve o que é dito.
+- Escolhe uma VISUALIZAÇÃO como camada principal QUANDO ela clarifica o ponto (não por defeito).
+  Adequa o tipo ao TIPO DE CLIP acima e VARIA-os:
   "timeline" (evolução/versões no tempo, mais recente com highlight:true),
   "bar-chart" (comparar quantidades pontuais),
   "line-chart" (tendência/evolução — VÁRIAS linhas; DOIS eixos Y quando as escalas/unidades diferem),
@@ -79,6 +101,9 @@ A camada principal de CADA cena deve ACRESCENTAR contexto visual com base na PES
   "terminal" (simular ESCREVER num terminal — comandos/código a aparecer letra a letra, fundo 'ink'),
   "diagram" (esquema com nós ligados por SETAS — fluxos, processos, relações, ciclos; os nós podem ter imagens).
 - NÃO uses sempre o mesmo tipo de gráfico — alterna bar/line/pie/timeline/diagram conforme os dados.
+- A PESQUISA é MATÉRIA-PRIMA OPCIONAL, não uma quota a cumprir: usa um facto SÓ quando reforça
+  diretamente o que é dito naquela cena. Ignora (não ilustres) os factos que não encaixam no que
+  está a ser falado, por mais interessantes que sejam.
 - DADOS FIÁVEIS: usa APENAS números/factos que vêm da PESQUISA. NUNCA inventes valores. Se não
   houver dados numéricos fiáveis, usa visualizações qualitativas (bullet-list, comparison, diagram, card).
 - FORMATO VERTICAL (retrato 9:16): prefere empilhar em cima/em baixo, NÃO lado a lado. Diagramas em
@@ -139,7 +164,8 @@ PROMPT;
             ."Palavras com timestamps (para karaoke e ritmo): {$words}\n\n"
             ."=== PESQUISA (usa estes dados reais nas visualizações) ===\n{$research}\n"
             .$imagesBlock
-            ."\nDevolve o plano de CENAS em JSON, com visualizações baseadas na PESQUISA e nas IMAGENS.";
+            ."\nDevolve o plano de CENAS em JSON. Classifica primeiro o TIPO de clip e mantém cada "
+            ."cena RELEVANTE ao que é dito — usa a PESQUISA e as IMAGENS só quando reforçam o ponto falado.";
     }
 
     protected function envelope(array $transcript, string $mode, array $options, array $scenes): array
