@@ -10,6 +10,7 @@ import {
 } from "remotion";
 import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient } from "./style-tokens";
 import type { Animation } from "./types";
+import { CUSTOM_PRIMITIVES } from "./effects";
 
 // Every primitive receives the animation descriptor plus the composition fps.
 // `useCurrentFrame()` is LOCAL to the wrapping <Sequence>, i.e. it starts at 0
@@ -465,7 +466,36 @@ const CountUp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   );
 };
 
-// ── image-reveal (clip/mask reveal; papyrus panel fallback) ──────────────────
+// ── image-reveal (multiple entrance animations, selected by params.variant) ──
+//   fullscreen | pan | kenburns → image fills the whole screen (Ken-Burns zoom)
+//   drop-float → drops in from above and floats centred
+//   rise       → rises in from below and floats centred
+//   zoom       → fades + scales up, centred (floating card)
+//   slide      → slides in from a side (params.direction: left|right)
+//   framed     → the old bordered papyrus panel with a left-to-right wipe
+//   (default: fullscreen for photos, float for transparent cut-outs/logos)
+const IMG_FULLSCREEN = new Set(["fullscreen", "pan", "kenburns"]);
+
+const ImagePlaceholder: React.FC<{ text?: string }> = ({ text }) => (
+  <div
+    style={{
+      width: "100%",
+      height: "100%",
+      background: `repeating-linear-gradient(115deg, ${COLORS.papyrus} 0px, ${COLORS.papyrus} 22px, ${COLORS.vellum} 22px, ${COLORS.vellum} 46px)`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: COLORS.inkSoft,
+      fontFamily: FONTS.display,
+      fontSize: 56,
+      textTransform: "uppercase",
+      letterSpacing: "0.1em",
+    }}
+  >
+    {text ?? "NEBULA"}
+  </div>
+);
+
 const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
   const dur = winFrames(anim, fps);
@@ -475,48 +505,74 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const caption = asStr(anim.params?.caption);
   const transparent = anim.params?.transparent === true;
   const backing = asStr(anim.params?.backing); // contrasting panel colour when tones clash
-  const reveal = interpolate(frame, [0, dur * 0.7], [0, 100], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: EASE,
-  });
-  const clip = `inset(0 ${100 - reveal}% 0 0)`;
-  // Transparent images: no opaque frame; if a contrasting backing was set (tones
-  // would clash) draw a subtle rounded panel so the image stays visible.
-  const boxStyle: React.CSSProperties = transparent
-    ? { width: "80%", aspectRatio: "1 / 1", overflow: "hidden", clipPath: clip, display: "flex", alignItems: "center", justifyContent: "center", padding: backing ? 40 : 0, background: backing || undefined, borderRadius: backing ? 24 : 0, boxShadow: backing ? ENGRAVE_SHADOW : undefined }
-    : { width: "78%", aspectRatio: "4 / 5", overflow: "hidden", clipPath: clip, border: `6px solid ${COLORS.leather}`, background: COLORS.vellum, boxShadow: ENGRAVE_SHADOW };
+  const variant = (asStr(anim.params?.variant) || (transparent ? "float" : "fullscreen")).toLowerCase();
+
+  const opacity = interpolate(frame, [0, Math.min(10, dur)], [0, 1], { extrapolateRight: "clamp" });
+
+  const captionEl = caption ? (
+    <div style={{ fontFamily: FONTS.body, fontStyle: "italic", color: softC(dark), fontSize: 38, textAlign: "center", maxWidth: "80%" }}>
+      {caption}
+    </div>
+  ) : null;
+
+  // ── Full-screen (Ken-Burns): the image fills the frame and slowly zooms/pans ──
+  if (IMG_FULLSCREEN.has(variant)) {
+    const zoom = interpolate(frame, [0, dur], [1.08, 1.18], { extrapolateRight: "clamp" });
+    const panX = variant === "pan" ? interpolate(frame, [0, dur], [-3, 3], { extrapolateRight: "clamp" }) : 0;
+    return (
+      <AbsoluteFill style={{ overflow: "hidden", opacity, background: COLORS.ink }}>
+        {src ? (
+          <Img src={src} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom}) translateX(${panX}%)` }} />
+        ) : (
+          <ImagePlaceholder text={anim.text ?? undefined} />
+        )}
+        {captionEl ? (
+          <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 120 }}>
+            <div style={{ fontFamily: FONTS.body, fontStyle: "italic", color: "#fff", fontSize: 40, textAlign: "center", maxWidth: "82%", textShadow: "0 2px 18px rgba(0,0,0,0.55)" }}>
+              {caption}
+            </div>
+          </AbsoluteFill>
+        ) : null}
+      </AbsoluteFill>
+    );
+  }
+
+  // ── Contained "floating card" variants ──
+  const inDur = Math.max(1, Math.round(Math.min(fps * 0.7, dur * 0.5)));
+  const entry = spring({ frame, fps, config: { damping: 16, stiffness: 130 }, durationInFrames: inDur });
+  const dir = asStr(anim.params?.direction) === "right" ? 1 : -1;
+  const idleY = Math.sin(frame / 46) * 6; // gentle float
+  const idleScale = 1 + Math.sin(frame / 80) * 0.004;
+
+  let ty = 0; // in vh (composition height)
+  let tx = 0; // in vw
+  let enterScale = 1;
+  if (variant === "drop-float") ty = interpolate(entry, [0, 1], [-75, 0]);
+  else if (variant === "rise") ty = interpolate(entry, [0, 1], [75, 0]);
+  else if (variant === "slide") tx = interpolate(entry, [0, 1], [70 * dir, 0]);
+  else if (variant === "zoom") enterScale = interpolate(entry, [0, 1], [0.72, 1]);
+  // "float"/"framed"/unknown → no entrance translate (fade + idle only)
+
+  const framed = variant === "framed";
   const fit: "cover" | "contain" = transparent ? "contain" : "cover";
+  const boxStyle: React.CSSProperties = framed
+    ? { width: "78%", aspectRatio: "4 / 5", overflow: "hidden", border: `6px solid ${COLORS.leather}`, background: COLORS.vellum, boxShadow: ENGRAVE_SHADOW }
+    : transparent
+      ? { width: "80%", aspectRatio: "1 / 1", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: backing ? 40 : 0, background: backing || undefined, borderRadius: backing ? 24 : 0, boxShadow: backing ? ENGRAVE_SHADOW : undefined }
+      : { width: "74%", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: 22, background: COLORS.vellum, boxShadow: ENGRAVE_SHADOW };
+
   return (
     <Center style={{ flexDirection: "column", gap: 28 }}>
-      <div style={boxStyle}>
-        {src ? (
-          <Img src={src} style={{ width: "100%", height: "100%", objectFit: fit }} />
-        ) : (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background: `repeating-linear-gradient(115deg, ${COLORS.papyrus} 0px, ${COLORS.papyrus} 22px, ${COLORS.vellum} 22px, ${COLORS.vellum} 46px)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: COLORS.inkSoft,
-              fontFamily: FONTS.display,
-              fontSize: 56,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-            }}
-          >
-            {anim.text ?? "NEBULA"}
-          </div>
-        )}
+      <div
+        style={{
+          ...boxStyle,
+          opacity,
+          transform: `translate(${tx}vw, ${ty}vh) translateY(${idleY}px) scale(${enterScale * idleScale})`,
+        }}
+      >
+        {src ? <Img src={src} style={{ width: "100%", height: "100%", objectFit: fit }} /> : <ImagePlaceholder text={anim.text ?? undefined} />}
       </div>
-      {caption ? (
-        <div style={{ fontFamily: FONTS.body, fontStyle: "italic", color: softC(dark), fontSize: 38, textAlign: "center", maxWidth: "80%" }}>
-          {caption}
-        </div>
-      ) : null}
+      {captionEl}
     </Center>
   );
 };
@@ -995,9 +1051,25 @@ export const PRIMITIVES: Record<string, React.FC<PrimitiveProps>> = {
   comparison: Comparison,
   "bullet-list": BulletList,
   diagram: Diagram,
+  // Custom, AI-generated SFX (rebuilt from the active clip_effects rows).
+  ...CUSTOM_PRIMITIVES,
 };
+
+// A generated effect that throws at runtime (on params the test-render didn't
+// exercise) must not take the whole clip down with it — render nothing instead.
+class EffectBoundary extends React.Component<{ children: React.ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 
 export function renderPrimitive(anim: Animation, fps: number, dark = false): React.ReactNode {
   const Comp = PRIMITIVES[anim.primitive] ?? Fade;
-  return <Comp anim={anim} fps={fps} dark={dark} />;
+  const node = <Comp anim={anim} fps={fps} dark={dark} />;
+  // Isolate custom effects behind an error boundary; built-ins are trusted.
+  return anim.primitive in CUSTOM_PRIMITIVES ? <EffectBoundary>{node}</EffectBoundary> : node;
 }

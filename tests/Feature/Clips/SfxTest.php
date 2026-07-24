@@ -1,0 +1,324 @@
+<?php
+
+namespace Tests\Feature\Clips;
+
+use App\Jobs\Clips\GenerateEffectJob;
+use App\Jobs\Clips\RenderEffectSampleJob;
+use App\Livewire\ClipsAnimados;
+use App\Models\ClipEffect;
+use App\Services\Clips\Api\BuildsAnimationPrompt;
+use App\Services\Clips\EffectGenerator;
+use App\Services\Clips\EffectLibrary;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
+use Livewire\Livewire;
+use RuntimeException;
+use Tests\TestCase;
+
+class SfxTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private string $remotionTemp;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Never touch the real remotion/src/effects during tests.
+        $this->remotionTemp = sys_get_temp_dir().'/cm-remotion-'.uniqid();
+        mkdir($this->remotionTemp.'/src/effects', 0775, true);
+        config([
+            'contentmachine.clips.remotion_path' => $this->remotionTemp,
+            // Isolate preview lookups from the real render artifacts on disk.
+            'contentmachine.clips.effects_previews' => $this->remotionTemp.'/previews',
+        ]);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->rrmdir($this->remotionTemp);
+        parent::tearDown();
+    }
+
+    public function test_gerar_sfx_creates_pending_effect_and_dispatches_generation(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->set('sfxPrompt', 'a glitch flicker that snaps the headline into place')
+            ->call('gerarSfx')
+            ->assertHasNoErrors()
+            ->assertSet('sfxPrompt', '');
+
+        $effect = ClipEffect::sole();
+        $this->assertSame('pending', $effect->status);
+        $this->assertStringContainsString('glitch flicker', $effect->prompt);
+        Queue::assertPushed(GenerateEffectJob::class);
+    }
+
+    public function test_opening_sfx_dispatches_missing_built_in_previews(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)->call('abrirSfx')->assertSet('view', 'sfx');
+
+        Queue::assertPushed(RenderEffectSampleJob::class);
+    }
+
+    public function test_active_effect_joins_the_planner_vocabulary_and_survives_sanitizing(): void
+    {
+        ClipEffect::create([
+            'prompt' => 'glitch', 'slug' => 'glitch-flicker', 'display_name' => 'Glitch',
+            'description' => 'Glitch flicker', 'param_schema' => '{ "intensity"?: number }',
+            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+        ]);
+
+        $planner = new class
+        {
+            use BuildsAnimationPrompt;
+
+            public function types(): array
+            {
+                return $this->allLayerTypes();
+            }
+
+            public function sanitize(array $layers): array
+            {
+                return $this->sanitizeLayers($layers);
+            }
+        };
+
+        $this->assertContains('glitch-flicker', $planner->types());
+
+        // The critical guarantee: a planner-emitted layer using the custom slug
+        // is NOT stripped by sanitizing (would silently vanish otherwise).
+        $kept = $planner->sanitize([['type' => 'glitch-flicker', 'text' => 'Hi', 'params' => []]]);
+        $this->assertCount(1, $kept);
+        $this->assertSame('glitch-flicker', $kept[0]['type']);
+    }
+
+    public function test_sync_filesystem_registers_active_effects_and_drops_orphans(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        ClipEffect::create([
+            'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
+            'description' => 'Neon pulse', 'param_schema' => '{}',
+            'tsx' => "// neon\nexport default () => null;", 'status' => ClipEffect::STATUS_ACTIVE,
+        ]);
+
+        // Leave a stale file behind from a since-deleted effect.
+        file_put_contents($library->effectsDir().'/ghost.tsx', 'export default () => null;');
+
+        $library->syncFilesystem();
+
+        $index = file_get_contents($library->effectsDir().'/index.ts');
+        $this->assertStringContainsString('"neon-pulse": Effect_neon_pulse', $index);
+        $this->assertStringContainsString('import Effect_neon_pulse from "./neon-pulse";', $index);
+        $this->assertFileExists($library->effectFile('neon-pulse'));
+        $this->assertFileDoesNotExist($library->effectsDir().'/ghost.tsx');
+        $this->assertContains('neon-pulse', $library->activeSlugs());
+    }
+
+    public function test_generator_rejects_hardcoded_brand_colours(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'bad-fx', 'displayName' => 'Bad', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => 'Hi', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'
+                ."\nexport default () => ({ color: \"#ff0000\" });",
+        ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageMatches('/hex/i');
+        app(EffectGenerator::class)->generate('anything');
+    }
+
+    public function test_generator_accepts_token_based_component(): void
+    {
+        $tsx = 'import React from "react";'
+            ."\nimport { AbsoluteFill } from \"remotion\";"
+            ."\nimport { COLORS } from \"../style-tokens\";"
+            ."\nimport type { PrimitiveProps } from \"../primitives\";"
+            ."\nconst E: React.FC<PrimitiveProps> = () => <AbsoluteFill style={{ backgroundColor: COLORS.papyrus }} />;"
+            ."\nexport default E;";
+
+        $this->fakeClaudeReturning([
+            'slug' => 'Soft Wipe', 'displayName' => 'Soft wipe', 'description' => 'A soft wipe',
+            'paramSchema' => '{}', 'sampleText' => 'Hi', 'sampleParams' => ['intensity' => 2], 'tsx' => $tsx,
+        ]);
+
+        $data = app(EffectGenerator::class)->generate('a soft wipe');
+
+        $this->assertSame('soft-wipe', $data['slug']); // normalised from "Soft Wipe"
+        $this->assertSame($tsx, $data['tsx']);
+        $this->assertSame(['intensity' => 2], $data['sample_params']);
+    }
+
+    public function test_editing_an_active_effect_regenerates_keeping_its_slug(): void
+    {
+        Queue::fake();
+
+        $effect = ClipEffect::create([
+            'prompt' => 'a soft drop', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
+            'description' => 'Soft drop', 'param_schema' => '{}',
+            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarSfx', $effect->id)
+            ->assertSet('editingSfxId', $effect->id)
+            ->assertSet('sfxEditPrompt', 'a soft drop')
+            ->set('sfxEditPrompt', 'a soft drop that bounces twice')
+            ->call('guardarSfxEdicao')
+            ->assertHasNoErrors()
+            ->assertSet('editingSfxId', null);
+
+        $effect->refresh();
+        $this->assertSame('updating', $effect->status);
+        $this->assertSame('a soft drop that bounces twice', $effect->prompt);
+        $this->assertSame('soft-drop', $effect->slug); // slug preserved
+
+        Queue::assertPushed(GenerateEffectJob::class, fn (GenerateEffectJob $job) => $job->isEdit === true && $job->effectId === $effect->id);
+    }
+
+    public function test_generator_keeps_the_given_slug_and_skips_the_collision_check(): void
+    {
+        // An effect already owns this slug — editing it must NOT trip "already exists".
+        ClipEffect::create([
+            'prompt' => 'x', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
+            'description' => 'x', 'param_schema' => '{}',
+            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+        ]);
+
+        $this->fakeClaudeReturning([
+            'slug' => 'a-totally-different-name', 'displayName' => 'Soft drop', 'description' => 'x',
+            'paramSchema' => '{}', 'sampleText' => 'Hi', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+        ]);
+
+        $data = app(EffectGenerator::class)->generate('bounce twice', keepSlug: 'soft-drop');
+
+        $this->assertSame('soft-drop', $data['slug']); // kept, ignoring the model's proposed slug
+    }
+
+    public function test_disallowing_an_effect_removes_it_from_the_planner_but_keeps_it_registered(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        $effect = ClipEffect::create([
+            'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
+            'description' => 'Neon pulse', 'param_schema' => '{}',
+            'tsx' => "// neon\nexport default () => null;", 'status' => ClipEffect::STATUS_ACTIVE,
+            'enabled' => true,
+        ]);
+        $library->syncFilesystem();
+
+        $this->assertContains('neon-pulse', $library->activeSlugs());
+
+        // Disallow it.
+        $effect->update(['enabled' => false]);
+
+        $this->assertNotContains('neon-pulse', $library->activeSlugs());        // planner no longer sees it
+        $this->assertTrue($library->active()->contains('slug', 'neon-pulse'));  // still registered
+        $this->assertFileExists($library->effectFile('neon-pulse'));            // still on disk / usable manually
+    }
+
+    public function test_alternar_sfx_toggles_the_allowed_flag(): void
+    {
+        $effect = ClipEffect::create([
+            'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
+            'description' => 'x', 'param_schema' => '{}',
+            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE, 'enabled' => true,
+        ]);
+
+        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id);
+        $this->assertFalse($effect->refresh()->enabled);
+
+        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id);
+        $this->assertTrue($effect->refresh()->enabled);
+    }
+
+    public function test_disabling_a_builtin_removes_it_from_the_planner(): void
+    {
+        $planner = new class
+        {
+            use BuildsAnimationPrompt;
+
+            public function types(): array
+            {
+                return $this->allLayerTypes();
+            }
+
+            public function sanitize(array $layers): array
+            {
+                return $this->sanitizeLayers($layers);
+            }
+        };
+        $library = app(EffectLibrary::class);
+
+        $this->assertContains('seal-stamp', $planner->types());
+
+        $library->toggleBuiltin('seal-stamp'); // disallow
+
+        $this->assertNotContains('seal-stamp', $planner->types());
+        $this->assertCount(0, $planner->sanitize([['type' => 'seal-stamp', 'text' => 'x', 'params' => []]]));
+
+        $library->toggleBuiltin('seal-stamp'); // allow again
+        $this->assertContains('seal-stamp', $planner->types());
+    }
+
+    public function test_alternar_builtin_toggles_and_ignores_unknown_slugs(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        Livewire::test(ClipsAnimados::class)->call('alternarBuiltin', 'fade');
+        $this->assertFalse($library->builtinAllowed('fade'));
+
+        Livewire::test(ClipsAnimados::class)->call('alternarBuiltin', 'fade');
+        $this->assertTrue($library->builtinAllowed('fade'));
+
+        // A non-built-in slug is ignored (no row created).
+        $library->toggleBuiltin('not-a-real-primitive');
+        $this->assertSame([], $library->disabledBuiltins());
+    }
+
+    public function test_only_active_effects_can_be_edited(): void
+    {
+        $failed = ClipEffect::create([
+            'prompt' => 'x', 'slug' => 'pending-abcd1234', 'display_name' => 'Broken',
+            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => ClipEffect::STATUS_FAILED,
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarSfx', $failed->id)
+            ->assertSet('editingSfxId', null);
+    }
+
+    /** Fake the Anthropic API so EffectGenerator::generate() returns the given payload as its TSX JSON. */
+    private function fakeClaudeReturning(array $payload): void
+    {
+        config(['services.anthropic.key' => 'test-key']);
+        Http::fake([
+            'api.anthropic.com/*' => Http::response([
+                'content' => [['type' => 'text', 'text' => json_encode($payload)]],
+            ]),
+        ]);
+    }
+
+    private function rrmdir(string $dir): void
+    {
+        if (! is_dir($dir)) {
+            return;
+        }
+        foreach (scandir($dir) ?: [] as $f) {
+            if ($f === '.' || $f === '..') {
+                continue;
+            }
+            $path = $dir.'/'.$f;
+            is_dir($path) ? $this->rrmdir($path) : @unlink($path);
+        }
+        @rmdir($dir);
+    }
+}

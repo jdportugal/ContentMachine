@@ -286,7 +286,7 @@ class ClipsAnimadosTest extends TestCase
         {
             public array $props = [];
 
-            public function render(array $props, string $outPath): string
+            public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
             {
                 $this->props = $props;
                 @mkdir(dirname($outPath), 0777, true);

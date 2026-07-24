@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 
 class CliRemotionRenderer implements RemotionRenderer
 {
-    public function render(array $props, string $outPath): string
+    public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
     {
         @mkdir(dirname($outPath), 0777, true);
 
@@ -62,7 +62,7 @@ class CliRemotionRenderer implements RemotionRenderer
 
         try {
             $process = new Process(
-                $this->buildRenderArgs($props, $outPath, $propsFile),
+                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
                 config('contentmachine.clips.remotion_path')
             );
             $process->setTimeout(600);
@@ -103,10 +103,10 @@ class CliRemotionRenderer implements RemotionRenderer
     /**
      * @return array<int,string> the argv for the remotion render command
      */
-    public function buildRenderArgs(array $props, string $outPath, string $propsFile): array
+    public function buildRenderArgs(array $props, string $outPath, string $propsFile, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): array
     {
         $args = [
-            'npx', 'remotion', 'render', 'src/index.ts', 'ClipComposition', $outPath,
+            'npx', 'remotion', 'render', $entry, $composition, $outPath,
             "--props={$propsFile}",
         ];
 
@@ -120,4 +120,3 @@ class CliRemotionRenderer implements RemotionRenderer
         return $args;
     }
 }
-

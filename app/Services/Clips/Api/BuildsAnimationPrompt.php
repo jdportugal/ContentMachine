@@ -2,6 +2,9 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Clips\EffectLibrary;
+use App\Services\DesignSystem\DesignSystemRepository;
+
 /**
  * Shared prompt-building + output-sanitizing for LLM animation planners
  * (OpenAI and Claude). Produces the scene-based plan (v2): a list of scenes,
@@ -19,19 +22,22 @@ trait BuildsAnimationPrompt
     ];
 
     protected array $backgrounds = ['papyrus', 'vellum', 'ink', 'video'];
+
     protected array $transitions = ['cut', 'crossfade', 'whip', 'slide', 'zoom'];
+
     protected array $presents = ['animation', 'over', 'video', 'split'];
 
     protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = []): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
-        $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
+        $design = app(DesignSystemRepository::class)->read();
         $designBlock = trim($design) !== ''
             ? "\n\n=== DESIGN SYSTEM (brand identity — follow it in ALL scenes) ===\n".$design
             : '';
-        $layers = implode(', ', $this->layerTypes);
+        $customBlock = app(EffectLibrary::class)->promptBlock();
+        $layers = implode(', ', $this->allLayerTypes());
         $allowed = ! empty($allowedPresents) ? array_values(array_intersect($this->presents, $allowedPresents)) : $this->presents;
-        $allowedLine = "USE ONLY these \"present\" values: [".implode(', ', $allowed).'] — never others.';
+        $allowedLine = 'USE ONLY these "present" values: ['.implode(', ', $allowed).'] — never others.';
         $rule = $overlay
             ? "\n".$allowedLine."\n".<<<'R'
                 VIDEO+ANIMATIONS MODE: there is a background VIDEO that plays from start to finish. The scenes cover
@@ -130,16 +136,27 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 - card:        { "title": str, "lines"?: [str] }
 - terminal:    { "lines": [str] }
 - diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <index>, "to": <index> }] }   // 2–6 nodes; without edges it links in sequence/cycle
-- image-reveal:{ "src": "<id of the provided image>", "caption"?: str }
+- image-reveal:{ "src": "<id of the provided image>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }
+  - variant controls the image animation. Prefer "fullscreen" (image fills the screen with a slow zoom) and "pan" for photos/screenshots; use "drop-float" (drops from above, floats centred), "rise", "zoom" or "slide" for a floating-card look. VARY the variant across scenes — do NOT reuse the same one every time. Use "framed" rarely (bordered panel). "direction" only applies to "slide".
 - The provided IMAGES can go into image-reveal OR as "image" in timeline/bar-chart/comparison (use ONLY ids from the list).
 - kinetic-text / fade / highlight / seal-stamp / etc.: the text goes in the layer's "text" field, params = {}.
 
 {$rule}
 {$designBlock}
+{$customBlock}
 
 === STYLE MANUAL (estilo-animacao.md) ===
 {$style}
 PROMPT;
+    }
+
+    /** Built-in layer types + active custom SFX slugs (both usable by the planner). */
+    protected function allLayerTypes(): array
+    {
+        $library = app(EffectLibrary::class);
+        $builtins = array_values(array_diff($this->layerTypes, $library->disabledBuiltins()));
+
+        return array_merge($builtins, $library->activeSlugs());
     }
 
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string
@@ -165,7 +182,7 @@ PROMPT;
             ."=== RESEARCH (use this real data in the visualizations) ===\n{$research}\n"
             .$imagesBlock
             ."\nReturn the SCENES plan in JSON. Classify the clip TYPE first and keep each "
-            ."scene RELEVANT to what is said — use the RESEARCH and the IMAGES only when they reinforce the spoken point.";
+            .'scene RELEVANT to what is said — use the RESEARCH and the IMAGES only when they reinforce the spoken point.';
     }
 
     protected function envelope(array $transcript, string $mode, array $options, array $scenes): array
@@ -207,8 +224,9 @@ PROMPT;
     protected function sanitizeLayers(array $layers): array
     {
         $out = [];
+        $allowed = $this->allLayerTypes();
         foreach ($layers as $l) {
-            if (! in_array($l['type'] ?? null, $this->layerTypes, true)) {
+            if (! in_array($l['type'] ?? null, $allowed, true)) {
                 continue;
             }
             $out[] = [

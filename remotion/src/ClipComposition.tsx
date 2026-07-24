@@ -11,7 +11,7 @@ loadDefaultFonts();
 // Background behind opaque (non-overlay) scenes. Adapts to the active design
 // system's texture: 'paper' = IATECA foxing, 'starfield' = dark + stars,
 // 'gradient' = base→contrast wash, 'solid' = flat. An explicit texture.css wins.
-const BackgroundTexture: React.FC = () => {
+export const BackgroundTexture: React.FC = () => {
   if (TEXTURE.css) {
     return <AbsoluteFill style={{ background: TEXTURE.css }} />;
   }

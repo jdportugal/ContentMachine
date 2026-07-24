@@ -12,7 +12,10 @@ use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
 use App\Models\ClipProject;
+use App\Services\Clips\EffectLibrary;
+use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::livewire('/', Painel::class)->name('painel');
 Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
@@ -42,7 +45,7 @@ Route::get('/clips/{slug}/video', function (string $slug) {
 
 // Serve uma faixa da biblioteca de música (storage/app/shorts/musicas) para pré-visualização.
 Route::get('/clips/musica/{name}', function (string $name) {
-    $path = app(\App\Services\Shorts\MusicLibrary::class)->pathFor($name);
+    $path = app(MusicLibrary::class)->pathFor($name);
     abort_unless($path !== null, 404);
 
     return response()->file($path);
@@ -52,7 +55,7 @@ Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados')
 // Serve uma imagem carregada (miniatura), pelo nome de ficheiro (aleatório).
 Route::get('/clips-animados/upload/{name}', function (string $name) {
     abort_unless((bool) preg_match('/^[A-Za-z0-9]+\.[A-Za-z0-9]+$/', $name), 404);
-    $disk = \Illuminate\Support\Facades\Storage::disk(config('contentmachine.clips.disk'));
+    $disk = Storage::disk(config('contentmachine.clips.disk'));
     abort_unless($disk->exists("clips/uploads/{$name}"), 404);
 
     return response()->file($disk->path("clips/uploads/{$name}"));
@@ -66,6 +69,16 @@ Route::get('/clips-animados/{project}/media', function (ClipProject $project) {
         ? response()->download($project->output_path)
         : response()->file($project->output_path);
 })->name('clips-animados.media');
+
+// Serve the cached showcase preview of an SFX (built-in or custom), for the
+// current design system. 404 until the sample has been rendered.
+Route::get('/clips-animados/sfx/{slug}/preview', function (string $slug) {
+    abort_unless((bool) preg_match('/^[a-z][a-z0-9-]*$/', $slug), 404);
+    $path = app(EffectLibrary::class)->previewPath($slug);
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->name('clips-animados.sfx-preview');
 
 Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');
 Route::livewire('/publicacoes/{tipo}', Oficina::class)->name('publicacoes.oficina');

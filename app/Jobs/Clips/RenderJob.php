@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Models\ClipProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -44,7 +45,7 @@ class RenderJob implements ShouldQueue
 
             // Design System theme (colors/fonts/texture) — makes the animation
             // match the brand. Null → the renderer uses the IATECA defaults.
-            if ($theme = app(\App\Services\DesignSystem\DesignSystemRepository::class)->readTokens()) {
+            if ($theme = app(DesignSystemRepository::class)->readTokens()) {
                 $plan['theme'] = $theme;
             }
 

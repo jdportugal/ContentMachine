@@ -38,7 +38,7 @@ class ClipsPipelineTest extends TestCase
         {
             public function __construct(public array &$captured) {}
 
-            public function render(array $props, string $outPath): string
+            public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
             {
                 $this->captured = $props;
                 @mkdir(dirname($outPath), 0777, true);

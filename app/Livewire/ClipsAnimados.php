@@ -2,12 +2,18 @@
 
 namespace App\Livewire;
 
+use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\PlanAnimationsJob;
+use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
+use App\Models\ClipEffect;
 use App\Models\ClipProject;
+use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\TranscriptRebuilder;
+use App\Services\Shorts\MusicLibrary;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,36 +33,55 @@ class ClipsAnimados extends Component
     // Keep in sync with the Remotion `Transition` type (remotion/src/types.ts).
     public const TRANSITIONS = ['cut', 'crossfade', 'whip', 'slide', 'zoom'];
 
-    /** dashboard | create | editPlan | editTranscript */
+    /** dashboard | create | editPlan | editTranscript | sfx */
     public string $view = 'dashboard';
+
+    // ---- SFX studio ----
+    public string $sfxPrompt = '';
+
+    public ?int $editingSfxId = null;
+
+    public string $sfxEditPrompt = '';
 
     // ---- creation ----
     /** null | animation | overlay */
     public ?string $createType = null;
+
     public string $text = '';
+
     public $audio = null;
+
     public $video = null;
+
     /** which presentation styles the AI may use for a video clip */
     public array $allowedPresents = ['video', 'over', 'split', 'animation'];
 
     // images (with description) so the planner can use them animated
     public $newImage = null;
+
     public string $newImageDesc = '';
+
     /** @var array<int,array{id:string,path:string,description:string}> */
     public array $images = [];
 
     // background music (same library as shorts) — '' = random, 'nenhuma' = no music
     public string $musica = '';
+
     public float $musicaVolume = 0.1;
 
     // ---- editing ----
     public ?int $editingId = null;
+
     public string $editTitle = '';
+
     /** @var array<int,array<string,mixed>> scene rows (layers preserved verbatim) */
     public array $editScenes = [];
+
     /** 'cenas' (field editor) | 'json' (raw Remotion plan) */
     public string $editMode = 'cenas';
+
     public string $editPlanJson = '';
+
     public string $editTranscriptText = '';
 
     // =====================================================================
@@ -78,9 +103,136 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'sfxPrompt', 'editingSfxId', 'sfxEditPrompt']);
         $this->resetValidation();
         $this->view = 'dashboard';
+    }
+
+    // =====================================================================
+    // SFX studio
+    // =====================================================================
+
+    public function abrirSfx(): void
+    {
+        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+        $this->resetValidation();
+        $this->view = 'sfx';
+        $this->ensurePreviews();
+    }
+
+    public function editarSfx(int $id): void
+    {
+        $effect = ClipEffect::find($id);
+        if (! $effect || ! $effect->isActive()) {
+            return; // only live effects can be refined
+        }
+        $this->editingSfxId = $effect->id;
+        $this->sfxEditPrompt = (string) $effect->prompt;
+        $this->resetValidation();
+    }
+
+    public function cancelarSfxEdicao(): void
+    {
+        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+        $this->resetValidation();
+    }
+
+    public function guardarSfxEdicao(): void
+    {
+        $this->validate(
+            ['sfxEditPrompt' => 'required|string|min:8|max:600'],
+            [
+                'sfxEditPrompt.required' => 'Describe the change you want.',
+                'sfxEditPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+            ],
+        );
+
+        $effect = ClipEffect::find($this->editingSfxId);
+        if ($effect && $effect->isActive()) {
+            $effect->update([
+                'prompt' => trim($this->sfxEditPrompt),
+                'status' => ClipEffect::STATUS_UPDATING,
+                'error' => null,
+            ]);
+            GenerateEffectJob::dispatch($effect->id, isEdit: true);
+        }
+
+        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+    }
+
+    /** Dispatch a cached-preview render for any built-in / active effect missing one. */
+    public function ensurePreviews(): void
+    {
+        $library = app(EffectLibrary::class);
+        foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
+            if (! $library->previewExists($slug)) {
+                RenderEffectSampleJob::dispatch($slug, $sample['text'], $sample['params']);
+            }
+        }
+        foreach ($library->active() as $effect) {
+            if (! $library->previewExists($effect->slug)) {
+                RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
+            }
+        }
+    }
+
+    public function gerarSfx(): void
+    {
+        $this->validate(
+            ['sfxPrompt' => 'required|string|min:8|max:600'],
+            [
+                'sfxPrompt.required' => 'Describe the effect you want.',
+                'sfxPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+            ],
+        );
+
+        $effect = ClipEffect::create([
+            'prompt' => trim($this->sfxPrompt),
+            'slug' => 'pending-'.Str::lower(Str::random(8)),
+            'display_name' => Str::limit(trim($this->sfxPrompt), 40),
+            'description' => '',
+            'param_schema' => '{}',
+            'tsx' => '',
+            'status' => ClipEffect::STATUS_PENDING,
+        ]);
+
+        GenerateEffectJob::dispatch($effect->id);
+        $this->sfxPrompt = '';
+    }
+
+    /** Allow/disallow a live custom effect for use by the planner in generated videos. */
+    public function alternarSfx(int $id): void
+    {
+        $effect = ClipEffect::find($id);
+        if ($effect && $effect->isActive()) {
+            $effect->update(['enabled' => ! $effect->enabled]);
+        }
+    }
+
+    /** Allow/disallow a built-in effect for the planner. */
+    public function alternarBuiltin(string $slug, EffectLibrary $library): void
+    {
+        $library->toggleBuiltin($slug);
+    }
+
+    public function apagarSfx(int $id, EffectLibrary $library): void
+    {
+        if ($effect = ClipEffect::find($id)) {
+            $library->remove($effect);
+        }
+    }
+
+    /** @return Collection<int,ClipEffect> */
+    public function getEffectsProperty()
+    {
+        return ClipEffect::latest()->get();
+    }
+
+    public function getSfxBusyProperty(): bool
+    {
+        return ClipEffect::whereIn('status', [ClipEffect::STATUS_PENDING, ClipEffect::STATUS_UPDATING])->exists()
+            || collect(EffectLibrary::BUILTIN_SAMPLES)->keys()
+                ->contains(fn ($slug) => ! app(EffectLibrary::class)->previewExists($slug));
     }
 
     public function adicionarImagem(): void
@@ -470,7 +622,7 @@ class ClipsAnimados extends Component
     // Data for the view
     // =====================================================================
 
-    /** @return \Illuminate\Support\Collection<int,ClipProject> */
+    /** @return Collection<int,ClipProject> */
     public function getProjectsProperty()
     {
         return ClipProject::latest()->take(50)->get();
@@ -493,12 +645,31 @@ class ClipsAnimados extends Component
         return $text === '' ? 'Untitled' : Str::limit($text, 48);
     }
 
-    public function render(\App\Services\Shorts\MusicLibrary $music)
+    public function render(MusicLibrary $music, EffectLibrary $library)
     {
+        $builtins = [];
+        $ready = [];
+        if ($this->view === 'sfx') {
+            $disabledBuiltins = $library->disabledBuiltins();
+            foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
+                $builtins[] = ['slug' => $slug, 'label' => $sample['label'], 'allowed' => ! in_array($slug, $disabledBuiltins, true)];
+                if ($library->previewExists($slug)) {
+                    $ready[] = $slug;
+                }
+            }
+            foreach ($this->effects as $effect) {
+                if ($library->previewExists($effect->slug)) {
+                    $ready[] = $effect->slug;
+                }
+            }
+        }
+
         return view('livewire.clips-animados', [
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
             'musicas' => $music->all(),
+            'builtins' => $builtins,
+            'sfxReady' => $ready,
         ]);
     }
 }
