@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\Aggregation\YtDlpRunner;
 use App\Services\Aggregation\YtDlpRunnerContract;
+use App\Services\Projects\ProjectContext;
 use App\Services\Publicacoes\Rendering\KieSlideRenderer;
 use App\Services\Publicacoes\Rendering\SlideRenderer;
 use App\Services\Publicacoes\Rendering\SvgSlideRenderer;
@@ -20,9 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // O vault (cérebro/memória) é um singleton apontado à pasta configurada.
-        $this->app->singleton(VaultContract::class, function () {
-            return new VaultRepository(config('contentmachine.vault.path'));
+        // The active project for this process (defaults to the first registered).
+        $this->app->singleton(ProjectContext::class);
+
+        // The vault (brain/memory) points at the ACTIVE project's directory,
+        // resolved per request from the ProjectContext (set by SetActiveProject).
+        // Bound (not singleton) so it always reflects the current project.
+        $this->app->bind(VaultContract::class, function ($app) {
+            return new VaultRepository($app->make(ProjectContext::class)->vaultPath());
         });
 
         $this->app->alias(VaultContract::class, VaultRepository::class);

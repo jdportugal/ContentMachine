@@ -23,6 +23,10 @@
                 </a>
             </div>
 
+            <div class="px-4 py-3 border-b border-ink-soft/15">
+                @livewire('project-switcher')
+            </div>
+
             <nav class="flex-1 py-2 space-y-0.5">
                 @php
                     $nav = [

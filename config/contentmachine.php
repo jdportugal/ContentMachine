@@ -22,6 +22,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Projects (workspaces)
+    |--------------------------------------------------------------------------
+    | Each project is its own vault directory with its own settings, design
+    | system and language. The active project (per session) repoints the vault.
+    | No database — the registry is a JSON file. `default_vault` is the legacy
+    | single vault, adopted as the first project; it is NEVER mutated (unlike
+    | `vault.path`, which the SetActiveProject middleware overwrites per request).
+    */
+    'projects' => [
+        'root' => env('PROJECTS_PATH', base_path('vaults')),      // where NEW project vaults live
+        'registry' => storage_path('app/projects.json'),          // the project list (slug/name/path/language)
+        'default_vault' => env('VAULT_PATH', base_path('vault')), // stable path of the seeded default project
+        'default_name' => 'IATECA',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Drivers
     |--------------------------------------------------------------------------
     | 'fake' uses simulated data (no API keys). The real drivers are stubs
