@@ -2,10 +2,12 @@
 
 namespace App\Jobs\Clips;
 
-use App\Models\ClipEffect;
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -21,11 +23,14 @@ use Illuminate\Support\Str;
  */
 class GenerateEffectJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     public int $timeout = 900;
 
-    public function __construct(public int $effectId, public bool $isEdit = false) {}
+    public function __construct(public string $effectId, public bool $isEdit = false)
+    {
+        $this->captureProject();
+    }
 
     /** Serialize generations — they share the single _candidate.tsx slot. */
     public function middleware(): array
@@ -33,9 +38,11 @@ class GenerateEffectJob implements ShouldQueue
         return [(new WithoutOverlapping('generate-effect'))->releaseAfter(60)->expireAfter(900)];
     }
 
-    public function handle(EffectGenerator $generator, EffectLibrary $library, RemotionRenderer $renderer): void
+    public function handle(EffectGenerator $generator, EffectLibrary $library, EffectStore $store, RemotionRenderer $renderer): void
     {
-        $effect = ClipEffect::find($this->effectId);
+        $this->activateProject();
+
+        $effect = $store->find($this->effectId);
         if (! $effect) {
             return;
         }
@@ -77,8 +84,8 @@ class GenerateEffectJob implements ShouldQueue
             // A failed EDIT of a live effect keeps it active + unchanged; a failed
             // CREATE (or edit of a non-live effect) is marked failed.
             $effect->update($keepSlug
-                ? ['status' => ClipEffect::STATUS_ACTIVE, 'error' => Str::limit('Edit failed: '.$e->getMessage(), 500)]
-                : ['status' => ClipEffect::STATUS_FAILED, 'error' => Str::limit($e->getMessage(), 500)]
+                ? ['status' => EffectRecord::STATUS_ACTIVE, 'error' => Str::limit('Edit failed: '.$e->getMessage(), 500)]
+                : ['status' => EffectRecord::STATUS_FAILED, 'error' => Str::limit($e->getMessage(), 500)]
             );
         }
     }

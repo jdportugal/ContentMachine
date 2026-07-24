@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\DesignSystem\DesignSystemRepository;
@@ -23,13 +24,17 @@ class RenderJob implements ShouldQueue
         $this->captureProject();
     }
 
-    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store): void
+    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store, EffectLibrary $effects): void
     {
         $this->activateProject();
         $p = $store->findOrFail($this->projectId);
 
         try {
             $p->update(['status' => ClipRecord::STATUS_RENDERING]);
+
+            // The remotion effects folder is global — sync the active project's
+            // custom SFX before rendering so a clip gets its own project's effects.
+            $effects->syncFilesystem();
 
             $dir = $store->storageDir($p->id);
             @mkdir($dir, 0777, true);

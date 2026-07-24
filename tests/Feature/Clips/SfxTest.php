@@ -5,10 +5,11 @@ namespace Tests\Feature\Clips;
 use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Livewire\ClipsAnimados;
-use App\Models\ClipEffect;
 use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
@@ -30,7 +31,6 @@ class SfxTest extends TestCase
         mkdir($this->remotionTemp.'/src/effects', 0775, true);
         config([
             'contentmachine.clips.remotion_path' => $this->remotionTemp,
-            // Isolate preview lookups from the real render artifacts on disk.
             'contentmachine.clips.effects_previews' => $this->remotionTemp.'/previews',
         ]);
     }
@@ -39,6 +39,17 @@ class SfxTest extends TestCase
     {
         $this->rrmdir($this->remotionTemp);
         parent::tearDown();
+    }
+
+    private function effects(): EffectStore
+    {
+        return app(EffectStore::class);
+    }
+
+    /** @param array<string,mixed> $attrs */
+    private function makeEffect(array $attrs): EffectRecord
+    {
+        return $this->effects()->create($attrs);
     }
 
     public function test_gerar_sfx_creates_pending_effect_and_dispatches_generation(): void
@@ -51,7 +62,7 @@ class SfxTest extends TestCase
             ->assertHasNoErrors()
             ->assertSet('sfxPrompt', '');
 
-        $effect = ClipEffect::sole();
+        $effect = $this->effects()->all()->sole();
         $this->assertSame('pending', $effect->status);
         $this->assertStringContainsString('glitch flicker', $effect->prompt);
         Queue::assertPushed(GenerateEffectJob::class);
@@ -68,10 +79,10 @@ class SfxTest extends TestCase
 
     public function test_active_effect_joins_the_planner_vocabulary_and_survives_sanitizing(): void
     {
-        ClipEffect::create([
+        $this->makeEffect([
             'prompt' => 'glitch', 'slug' => 'glitch-flicker', 'display_name' => 'Glitch',
             'description' => 'Glitch flicker', 'param_schema' => '{ "intensity"?: number }',
-            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+            'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
         ]);
 
         $planner = new class
@@ -91,8 +102,6 @@ class SfxTest extends TestCase
 
         $this->assertContains('glitch-flicker', $planner->types());
 
-        // The critical guarantee: a planner-emitted layer using the custom slug
-        // is NOT stripped by sanitizing (would silently vanish otherwise).
         $kept = $planner->sanitize([['type' => 'glitch-flicker', 'text' => 'Hi', 'params' => []]]);
         $this->assertCount(1, $kept);
         $this->assertSame('glitch-flicker', $kept[0]['type']);
@@ -102,13 +111,12 @@ class SfxTest extends TestCase
     {
         $library = app(EffectLibrary::class);
 
-        ClipEffect::create([
+        $this->makeEffect([
             'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
             'description' => 'Neon pulse', 'param_schema' => '{}',
-            'tsx' => "// neon\nexport default () => null;", 'status' => ClipEffect::STATUS_ACTIVE,
+            'tsx' => "// neon\nexport default () => null;", 'status' => EffectRecord::STATUS_ACTIVE,
         ]);
 
-        // Leave a stale file behind from a since-deleted effect.
         file_put_contents($library->effectsDir().'/ghost.tsx', 'export default () => null;');
 
         $library->syncFilesystem();
@@ -151,7 +159,7 @@ class SfxTest extends TestCase
 
         $data = app(EffectGenerator::class)->generate('a soft wipe');
 
-        $this->assertSame('soft-wipe', $data['slug']); // normalised from "Soft Wipe"
+        $this->assertSame('soft-wipe', $data['slug']);
         $this->assertSame($tsx, $data['tsx']);
         $this->assertSame(['intensity' => 2], $data['sample_params']);
     }
@@ -160,15 +168,15 @@ class SfxTest extends TestCase
     {
         Queue::fake();
 
-        $effect = ClipEffect::create([
+        $effect = $this->makeEffect([
             'prompt' => 'a soft drop', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
             'description' => 'Soft drop', 'param_schema' => '{}',
-            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+            'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
         ]);
 
         Livewire::test(ClipsAnimados::class)
-            ->call('editarSfx', $effect->id)
-            ->assertSet('editingSfxId', $effect->id)
+            ->call('editarSfx', $effect->id())
+            ->assertSet('editingSfxId', $effect->id())
             ->assertSet('sfxEditPrompt', 'a soft drop')
             ->set('sfxEditPrompt', 'a soft drop that bounces twice')
             ->call('guardarSfxEdicao')
@@ -178,18 +186,17 @@ class SfxTest extends TestCase
         $effect->refresh();
         $this->assertSame('updating', $effect->status);
         $this->assertSame('a soft drop that bounces twice', $effect->prompt);
-        $this->assertSame('soft-drop', $effect->slug); // slug preserved
+        $this->assertSame('soft-drop', $effect->slug);
 
-        Queue::assertPushed(GenerateEffectJob::class, fn (GenerateEffectJob $job) => $job->isEdit === true && $job->effectId === $effect->id);
+        Queue::assertPushed(GenerateEffectJob::class, fn (GenerateEffectJob $job) => $job->isEdit === true && $job->effectId === $effect->id());
     }
 
     public function test_generator_keeps_the_given_slug_and_skips_the_collision_check(): void
     {
-        // An effect already owns this slug — editing it must NOT trip "already exists".
-        ClipEffect::create([
+        $this->makeEffect([
             'prompt' => 'x', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
             'description' => 'x', 'param_schema' => '{}',
-            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE,
+            'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
         ]);
 
         $this->fakeClaudeReturning([
@@ -200,43 +207,42 @@ class SfxTest extends TestCase
 
         $data = app(EffectGenerator::class)->generate('bounce twice', keepSlug: 'soft-drop');
 
-        $this->assertSame('soft-drop', $data['slug']); // kept, ignoring the model's proposed slug
+        $this->assertSame('soft-drop', $data['slug']);
     }
 
     public function test_disallowing_an_effect_removes_it_from_the_planner_but_keeps_it_registered(): void
     {
         $library = app(EffectLibrary::class);
 
-        $effect = ClipEffect::create([
+        $effect = $this->makeEffect([
             'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
             'description' => 'Neon pulse', 'param_schema' => '{}',
-            'tsx' => "// neon\nexport default () => null;", 'status' => ClipEffect::STATUS_ACTIVE,
+            'tsx' => "// neon\nexport default () => null;", 'status' => EffectRecord::STATUS_ACTIVE,
             'enabled' => true,
         ]);
         $library->syncFilesystem();
 
         $this->assertContains('neon-pulse', $library->activeSlugs());
 
-        // Disallow it.
         $effect->update(['enabled' => false]);
 
-        $this->assertNotContains('neon-pulse', $library->activeSlugs());        // planner no longer sees it
-        $this->assertTrue($library->active()->contains('slug', 'neon-pulse'));  // still registered
-        $this->assertFileExists($library->effectFile('neon-pulse'));            // still on disk / usable manually
+        $this->assertNotContains('neon-pulse', $library->activeSlugs());
+        $this->assertTrue($library->active()->contains('slug', 'neon-pulse'));
+        $this->assertFileExists($library->effectFile('neon-pulse'));
     }
 
     public function test_alternar_sfx_toggles_the_allowed_flag(): void
     {
-        $effect = ClipEffect::create([
+        $effect = $this->makeEffect([
             'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon',
             'description' => 'x', 'param_schema' => '{}',
-            'tsx' => 'export default () => null;', 'status' => ClipEffect::STATUS_ACTIVE, 'enabled' => true,
+            'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
         ]);
 
-        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id);
+        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id());
         $this->assertFalse($effect->refresh()->enabled);
 
-        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id);
+        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id());
         $this->assertTrue($effect->refresh()->enabled);
     }
 
@@ -260,12 +266,12 @@ class SfxTest extends TestCase
 
         $this->assertContains('seal-stamp', $planner->types());
 
-        $library->toggleBuiltin('seal-stamp'); // disallow
+        $library->toggleBuiltin('seal-stamp');
 
         $this->assertNotContains('seal-stamp', $planner->types());
         $this->assertCount(0, $planner->sanitize([['type' => 'seal-stamp', 'text' => 'x', 'params' => []]]));
 
-        $library->toggleBuiltin('seal-stamp'); // allow again
+        $library->toggleBuiltin('seal-stamp');
         $this->assertContains('seal-stamp', $planner->types());
     }
 
@@ -279,20 +285,19 @@ class SfxTest extends TestCase
         Livewire::test(ClipsAnimados::class)->call('alternarBuiltin', 'fade');
         $this->assertTrue($library->builtinAllowed('fade'));
 
-        // A non-built-in slug is ignored (no row created).
         $library->toggleBuiltin('not-a-real-primitive');
         $this->assertSame([], $library->disabledBuiltins());
     }
 
     public function test_only_active_effects_can_be_edited(): void
     {
-        $failed = ClipEffect::create([
+        $failed = $this->makeEffect([
             'prompt' => 'x', 'slug' => 'pending-abcd1234', 'display_name' => 'Broken',
-            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => ClipEffect::STATUS_FAILED,
+            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_FAILED,
         ]);
 
         Livewire::test(ClipsAnimados::class)
-            ->call('editarSfx', $failed->id)
+            ->call('editarSfx', $failed->id())
             ->assertSet('editingSfxId', null);
     }
 

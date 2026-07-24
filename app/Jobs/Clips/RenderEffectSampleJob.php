@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Clips;
 
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectLibrary;
 use Illuminate\Bus\Queueable;
@@ -16,18 +17,28 @@ use Illuminate\Queue\InteractsWithQueue;
  */
 class RenderEffectSampleJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     public int $timeout = 600;
 
     /** @param  array<string,mixed>  $params */
-    public function __construct(public string $slug, public ?string $text, public array $params) {}
+    public function __construct(public string $slug, public ?string $text, public array $params)
+    {
+        $this->captureProject();
+    }
 
     public function handle(EffectLibrary $library, RemotionRenderer $renderer): void
     {
+        $this->activateProject();
+
         $out = $library->previewPath($this->slug);
         if (is_file($out)) {
             return; // already cached for this design system
+        }
+
+        // A custom effect must be present in remotion/src/effects for this project.
+        if (! $library->isBuiltin($this->slug)) {
+            $library->syncFilesystem();
         }
 
         @mkdir(dirname($out), 0777, true);

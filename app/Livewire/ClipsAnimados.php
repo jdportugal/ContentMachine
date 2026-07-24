@@ -7,11 +7,12 @@ use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
-use App\Models\ClipEffect;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\Clips\TranscriptRebuilder;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
@@ -39,7 +40,7 @@ class ClipsAnimados extends Component
     // ---- SFX studio ----
     public string $sfxPrompt = '';
 
-    public ?int $editingSfxId = null;
+    public ?string $editingSfxId = null;
 
     public string $sfxEditPrompt = '';
 
@@ -120,13 +121,19 @@ class ClipsAnimados extends Component
         $this->ensurePreviews();
     }
 
-    public function editarSfx(int $id): void
+    /** The vault-backed SFX store for the active project. */
+    private function effects(): EffectStore
     {
-        $effect = ClipEffect::find($id);
+        return app(EffectStore::class);
+    }
+
+    public function editarSfx(string $id): void
+    {
+        $effect = $this->effects()->find($id);
         if (! $effect || ! $effect->isActive()) {
             return; // only live effects can be refined
         }
-        $this->editingSfxId = $effect->id;
+        $this->editingSfxId = $effect->id();
         $this->sfxEditPrompt = (string) $effect->prompt;
         $this->resetValidation();
     }
@@ -147,14 +154,14 @@ class ClipsAnimados extends Component
             ],
         );
 
-        $effect = ClipEffect::find($this->editingSfxId);
+        $effect = $this->effects()->find($this->editingSfxId);
         if ($effect && $effect->isActive()) {
             $effect->update([
                 'prompt' => trim($this->sfxEditPrompt),
-                'status' => ClipEffect::STATUS_UPDATING,
+                'status' => EffectRecord::STATUS_UPDATING,
                 'error' => null,
             ]);
-            GenerateEffectJob::dispatch($effect->id, isEdit: true);
+            GenerateEffectJob::dispatch($effect->id(), isEdit: true);
         }
 
         $this->reset(['editingSfxId', 'sfxEditPrompt']);
@@ -186,24 +193,24 @@ class ClipsAnimados extends Component
             ],
         );
 
-        $effect = ClipEffect::create([
+        $effect = $this->effects()->create([
             'prompt' => trim($this->sfxPrompt),
             'slug' => 'pending-'.Str::lower(Str::random(8)),
             'display_name' => Str::limit(trim($this->sfxPrompt), 40),
             'description' => '',
             'param_schema' => '{}',
             'tsx' => '',
-            'status' => ClipEffect::STATUS_PENDING,
+            'status' => EffectRecord::STATUS_PENDING,
         ]);
 
-        GenerateEffectJob::dispatch($effect->id);
+        GenerateEffectJob::dispatch($effect->id());
         $this->sfxPrompt = '';
     }
 
     /** Allow/disallow a live custom effect for use by the planner in generated videos. */
-    public function alternarSfx(int $id): void
+    public function alternarSfx(string $id): void
     {
-        $effect = ClipEffect::find($id);
+        $effect = $this->effects()->find($id);
         if ($effect && $effect->isActive()) {
             $effect->update(['enabled' => ! $effect->enabled]);
         }
@@ -215,22 +222,22 @@ class ClipsAnimados extends Component
         $library->toggleBuiltin($slug);
     }
 
-    public function apagarSfx(int $id, EffectLibrary $library): void
+    public function apagarSfx(string $id, EffectLibrary $library): void
     {
-        if ($effect = ClipEffect::find($id)) {
+        if ($effect = $this->effects()->find($id)) {
             $library->remove($effect);
         }
     }
 
-    /** @return Collection<int,ClipEffect> */
+    /** @return Collection<int,EffectRecord> */
     public function getEffectsProperty()
     {
-        return ClipEffect::latest()->get();
+        return $this->effects()->all();
     }
 
     public function getSfxBusyProperty(): bool
     {
-        return ClipEffect::whereIn('status', [ClipEffect::STATUS_PENDING, ClipEffect::STATUS_UPDATING])->exists()
+        return $this->effects()->all()->contains(fn (EffectRecord $e) => in_array($e->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true))
             || collect(EffectLibrary::BUILTIN_SAMPLES)->keys()
                 ->contains(fn ($slug) => ! app(EffectLibrary::class)->previewExists($slug));
     }

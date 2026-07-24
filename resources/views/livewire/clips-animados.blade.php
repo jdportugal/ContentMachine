@@ -515,15 +515,15 @@
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
                                     @if ($effect->status === 'active')
-                                        <button type="button" wire:click="alternarSfx({{ $effect->id }})"
+                                        <button type="button" wire:click="alternarSfx('{{ $effect->id }}')"
                                                 title="{{ $effect->enabled ? 'Allowed in generated videos — click to disallow' : 'Disallowed — click to allow' }}"
                                                 class="font-mono text-[0.62rem] px-2 py-1 rounded-sm border {{ $effect->enabled ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
                                             {{ $effect->enabled ? '● on' : '○ off' }}
                                         </button>
-                                        <button type="button" wire:click="editarSfx({{ $effect->id }})" title="Refine this effect"
+                                        <button type="button" wire:click="editarSfx('{{ $effect->id }}')" title="Refine this effect"
                                                 class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
                                     @endif
-                                    <button type="button" wire:click="apagarSfx({{ $effect->id }})"
+                                    <button type="button" wire:click="apagarSfx('{{ $effect->id }}')"
                                             wire:confirm="Delete this effect? Clips already rendered keep their video." title="Delete this effect"
                                             class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕</button>
                                 </div>

@@ -2,8 +2,8 @@
 
 namespace App\Services\Clips;
 
-use App\Models\ClipEffect;
 use App\Services\Clips\Api\RunsClaudeCli;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
 use RuntimeException;
 
@@ -21,7 +21,7 @@ class EffectGenerator
     /** Names that can never be a custom slug (built-ins + reserved). */
     private const RESERVED = ['_candidate', 'fade', 'slide', 'scale'];
 
-    public function __construct(private DesignSystemRepository $design) {}
+    public function __construct(private DesignSystemRepository $design, private EffectStore $effects) {}
 
     /**
      * @param  string|null  $keepSlug  when editing, force this existing slug (skips the collision check)
@@ -60,7 +60,7 @@ class EffectGenerator
     private function slug(string $raw): string
     {
         $slug = $this->normalizeSlug($raw);
-        if (ClipEffect::where('slug', $slug)->exists()) {
+        if ($this->effects->slugExists($slug)) {
             throw new RuntimeException("An effect named «{$slug}» already exists.");
         }
 

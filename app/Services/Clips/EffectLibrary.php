@@ -2,19 +2,20 @@
 
 namespace App\Services\Clips;
 
-use App\Models\ClipEffect;
-use App\Models\DisabledBuiltinEffect;
+use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Schema;
 
 /**
- * The SFX library: bridges the custom-effect DB rows with the Remotion
+ * The SFX library: bridges the custom-effect vault records with the Remotion
  * filesystem, the planner vocabulary and the showcase previews.
  *
- * The DB (clip_effects) is the source of truth. The filesystem — one
- * remotion/src/effects/<slug>.tsx per active effect plus a generated index.ts —
- * is a render artifact rebuilt from the active rows by syncFilesystem().
+ * The vault (EffectStore, per project) is the source of truth. The filesystem —
+ * one remotion/src/effects/<slug>.tsx per active effect plus a generated
+ * index.ts — is a render artifact rebuilt from the active records by
+ * syncFilesystem(). Because it is global, callers re-sync for the active project
+ * before rendering (see RenderJob).
  */
 class EffectLibrary
 {
@@ -52,35 +53,25 @@ const Candidate: React.FC<PrimitiveProps> = () => null;
 export default Candidate;
 TSX;
 
-    public function __construct(private DesignSystemRepository $design) {}
+    public function __construct(private DesignSystemRepository $design, private EffectStore $effects) {}
 
     // ── planner vocabulary ───────────────────────────────────────────────
 
-    /** @return Collection<int,ClipEffect> */
+    /** @return Collection<int,EffectRecord> */
     public function active(): Collection
     {
-        // Tolerate the table not existing yet (e.g. planner prompt built in a
-        // unit test with no migrations, or before the first migrate).
-        try {
-            if (! Schema::hasTable('clip_effects')) {
-                return collect();
-            }
-        } catch (\Throwable) {
-            return collect();
-        }
-
-        return ClipEffect::where('status', ClipEffect::STATUS_ACTIVE)->orderBy('display_name')->get();
+        return $this->effects->active();
     }
 
     /**
      * Active AND allowed effects — the ones the planner may use. Disallowed
      * effects stay in active() (registered/previewable) but drop out here.
      *
-     * @return Collection<int,ClipEffect>
+     * @return Collection<int,EffectRecord>
      */
     public function enabled(): Collection
     {
-        return $this->active()->where('enabled', true)->values();
+        return $this->effects->enabled();
     }
 
     /** Allowed custom slugs, usable by the planner as scene-layer `type` values. @return string[] */
@@ -97,15 +88,7 @@ TSX;
     /** Built-in slugs the user has disallowed for the planner. @return string[] */
     public function disabledBuiltins(): array
     {
-        try {
-            if (! Schema::hasTable('disabled_builtin_effects')) {
-                return [];
-            }
-        } catch (\Throwable) {
-            return [];
-        }
-
-        return DisabledBuiltinEffect::pluck('slug')->all();
+        return $this->effects->disabledBuiltins();
     }
 
     public function builtinAllowed(string $slug): bool
@@ -119,12 +102,11 @@ TSX;
         if (! $this->isBuiltin($slug)) {
             return;
         }
-        $row = DisabledBuiltinEffect::where('slug', $slug)->first();
-        if ($row) {
-            $row->delete();
-        } else {
-            DisabledBuiltinEffect::create(['slug' => $slug]);
-        }
+        $disabled = $this->disabledBuiltins();
+        $disabled = in_array($slug, $disabled, true)
+            ? array_values(array_diff($disabled, [$slug]))
+            : [...$disabled, $slug];
+        $this->effects->setDisabledBuiltins($disabled);
     }
 
     /** Prompt block describing the allowed custom effects (name + schema), or '' if none. */
@@ -134,7 +116,7 @@ TSX;
         if ($effects->isEmpty()) {
             return '';
         }
-        $lines = $effects->map(fn (ClipEffect $e) => "- {$e->slug}: {$e->description} — params: {$e->param_schema}")->implode("\n");
+        $lines = $effects->map(fn (EffectRecord $e) => "- {$e->slug}: {$e->description} — params: {$e->param_schema}")->implode("\n");
 
         return "\n\n=== CUSTOM BRAND EFFECTS (generated, follow the design system — use like any other layer type) ===\n".$lines;
     }
@@ -167,16 +149,16 @@ TSX;
     }
 
     /** Write an effect's source to disk, mark it active, and rebuild index.ts. */
-    public function promote(ClipEffect $effect): void
+    public function promote(EffectRecord $effect): void
     {
         file_put_contents($this->effectFile($effect->slug), $effect->tsx);
-        $effect->update(['status' => ClipEffect::STATUS_ACTIVE, 'error' => null]);
+        $effect->update(['status' => EffectRecord::STATUS_ACTIVE, 'error' => null]);
         $this->resetCandidate();
         $this->syncFilesystem();
     }
 
-    /** Delete an effect: its DB row, its source file, its preview, then rebuild index.ts. */
-    public function remove(ClipEffect $effect): void
+    /** Delete an effect: its vault record, its source file, its preview, then rebuild index.ts. */
+    public function remove(EffectRecord $effect): void
     {
         @unlink($this->effectFile($effect->slug));
         if ($effect->preview_path) {
@@ -218,14 +200,14 @@ TSX;
         file_put_contents($dir.'/index.ts', $this->renderIndex($active));
     }
 
-    /** @param  Collection<int,ClipEffect>  $active */
+    /** @param  Collection<int,EffectRecord>  $active */
     private function renderIndex(Collection $active): string
     {
-        $imports = $active->map(fn (ClipEffect $e) => "import {$this->ident($e->slug)} from \"./{$e->slug}\";")->implode("\n");
-        $entries = $active->map(fn (ClipEffect $e) => "  \"{$e->slug}\": {$this->ident($e->slug)},")->implode("\n");
+        $imports = $active->map(fn (EffectRecord $e) => "import {$this->ident($e->slug)} from \"./{$e->slug}\";")->implode("\n");
+        $entries = $active->map(fn (EffectRecord $e) => "  \"{$e->slug}\": {$this->ident($e->slug)},")->implode("\n");
 
         $header = "import type React from \"react\";\nimport type { PrimitiveProps } from \"../primitives\";";
-        $note = "// AUTO-GENERATED by App\\Services\\Clips\\EffectLibrary::syncFilesystem().\n// Do NOT edit by hand — it is rebuilt from the active `clip_effects` rows.";
+        $note = "// AUTO-GENERATED by App\\Services\\Clips\\EffectLibrary::syncFilesystem().\n// Do NOT edit by hand — it is rebuilt from the active project's SFX records.";
         $body = $entries === '' ? '{}' : "{\n{$entries}\n}";
 
         return "{$header}\n".($imports !== '' ? $imports."\n" : '')."\n{$note}\nexport const CUSTOM_PRIMITIVES: Record<string, React.FC<PrimitiveProps>> = {$body};\n";
