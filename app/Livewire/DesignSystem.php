@@ -10,15 +10,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Sistema de Design')]
+#[Title('Design System')]
 class DesignSystem extends Component
 {
     use WithFileUploads;
 
-    /** Markdown do sistema de design (editável). */
+    /** Design system Markdown (editable). */
     public string $conteudo = '';
 
-    /** Ficheiro .md carregado para semear o editor. */
+    /** Uploaded .md file to seed the editor. */
     public $ficheiro = null;
 
     public ?string $guardado = null;
@@ -27,38 +27,38 @@ class DesignSystem extends Component
 
     public function mount(DesignSystemRepository $design): void
     {
-        // Semeia o editor com o guardado, ou o modelo inicial se ainda vazio.
+        // Seed the editor with the saved content, or the starter template if still empty.
         $this->conteudo = $design->readOrTemplate();
         $this->atualizado = $design->updatedAt();
     }
 
-    /** Carrega um .md para o editor (não grava — o utilizador revê e guarda). */
+    /** Loads a .md into the editor (does not save — the user reviews and saves). */
     public function carregar(): void
     {
         $this->validate([
             'ficheiro' => 'required|file|max:1024|mimetypes:text/plain,text/markdown,text/x-markdown',
         ], [
-            'ficheiro.required' => 'Escolha um ficheiro .md.',
-            'ficheiro.max' => 'O ficheiro é demasiado grande (máximo 1 MB).',
-            'ficheiro.mimetypes' => 'O ficheiro tem de ser Markdown/texto (.md).',
-        ], ['ficheiro' => 'ficheiro']);
+            'ficheiro.required' => 'Choose a .md file.',
+            'ficheiro.max' => 'The file is too large (maximum 1 MB).',
+            'ficheiro.mimetypes' => 'The file must be Markdown/text (.md).',
+        ], ['ficheiro' => 'file']);
 
         $this->conteudo = (string) file_get_contents($this->ficheiro->getRealPath());
         $this->ficheiro = null;
-        $this->dispatch('toast', message: 'Ficheiro carregado — reveja e guarde.', type: 'ok');
+        $this->dispatch('toast', message: 'File loaded — review and save.', type: 'ok');
     }
 
     public function guardar(DesignSystemRepository $design, DesignThemeExtractor $extractor): void
     {
         $design->write($this->conteudo);
 
-        // Extrai os tokens de tema (cores/fontes/textura) do Markdown, para que
-        // as animações passem a MATCH o design. Falha → mantém/usa defaults.
+        // Extract the theme tokens (colors/fonts/texture) from the Markdown, so that
+        // the animations MATCH the design. On failure → keep/use defaults.
         $design->writeTokens($extractor->extract($this->conteudo));
 
         $this->guardado = now()->timezone(config('app.timezone'))->translatedFormat('H:i');
         $this->atualizado = $design->updatedAt();
-        $this->dispatch('toast', message: 'Sistema de design guardado e tema extraído.', type: 'ok');
+        $this->dispatch('toast', message: 'Design system saved and theme extracted.', type: 'ok');
     }
 
     public function render()

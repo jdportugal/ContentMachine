@@ -5,11 +5,11 @@ namespace App\Services\Publicacoes\Rendering;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Adaptador HTTP para a API kie.ai (modelos Nano Banana), à imagem do KieClient
- * do AdsMaker: submeter tarefa, sondar resultado, carregar imagem de referência.
+ * HTTP adapter for the kie.ai API (Nano Banana models), like AdsMaker's
+ * KieClient: submit task, poll result, upload reference image.
  *
- *  - generate(): texto → imagem (com referências opcionais para consistência).
- *  - edit(): imagem → imagem — carrega a imagem de referência e pede uma edição.
+ *  - generate(): text → image (with optional references for consistency).
+ *  - edit(): image → image — uploads the reference image and requests an edit.
  */
 class KieClient
 {
@@ -20,7 +20,7 @@ class KieClient
         return filled(config('services.kie.key'));
     }
 
-    /** Texto → imagem. $refs são URLs (kie) usadas como referência visual. */
+    /** Text → image. $refs are URLs (kie) used as visual reference. */
     public function generate(string $prompt, string $proporcao, array $refs = []): string
     {
         $taskId = $this->submeter($prompt, $proporcao, $refs);
@@ -29,8 +29,8 @@ class KieClient
     }
 
     /**
-     * Imagem → imagem: carrega os bytes da imagem de referência para o
-     * armazenamento do kie e pede uma edição segundo a instrução.
+     * Image → image: uploads the reference image bytes to
+     * kie's storage and requests an edit according to the instruction.
      */
     public function edit(string $prompt, string $proporcao, string $refBytes, string $refNome = 'ref.png'): string
     {
@@ -40,8 +40,8 @@ class KieClient
     }
 
     /**
-     * Carrega ficheiros locais (caminhos web relativos a public/) e devolve os
-     * URLs do kie, para usar como referências visuais na geração.
+     * Uploads local files (web paths relative to public/) and returns the
+     * kie URLs, to use as visual references in generation.
      *
      * @param  array<int,string>  $caminhos
      * @return array<int,string>
@@ -75,15 +75,15 @@ class KieClient
                 'input' => $input,
             ]);
 
-        // A API devolve 200 mesmo em erro de negócio (ex.: 402 sem créditos),
-        // com o motivo em `msg` — expõe-no para a mensagem ser accionável.
+        // The API returns 200 even on a business error (e.g. 402 out of credits),
+        // with the reason in `msg` — expose it so the message is actionable.
         $taskId = (string) $r->json('data.taskId');
         if (! $r->successful() || $taskId === '') {
             $msg = trim((string) ($r->json('msg') ?? ''));
             $code = $r->json('code');
             throw new \RuntimeException(
-                'kie.ai: '.($msg !== '' ? $msg : 'submissão falhou ('.$r->status().').')
-                .($code ? ' [código '.$code.']' : '')
+                'kie.ai: '.($msg !== '' ? $msg : 'submission failed ('.$r->status().').')
+                .($code ? ' [code '.$code.']' : '')
             );
         }
 
@@ -98,27 +98,27 @@ class KieClient
 
             $estado = (string) $r->json('data.state');
             if ($estado === 'success') {
-                // 'resultJson' vem como STRING JSON (não objecto aninhado).
+                // 'resultJson' comes as a JSON STRING (not a nested object).
                 $resultJson = $r->json('data.resultJson');
                 $dados = is_string($resultJson) ? (json_decode($resultJson, true) ?: []) : (array) $resultJson;
                 $url = (string) ($dados['resultUrls'][0] ?? '');
                 if ($url === '') {
-                    throw new \RuntimeException('kie.ai: sucesso sem URL.');
+                    throw new \RuntimeException('kie.ai: success without a URL.');
                 }
 
                 return $url;
             }
             if ($estado === 'fail') {
-                throw new \RuntimeException('kie.ai: geração falhou.');
+                throw new \RuntimeException('kie.ai: generation failed.');
             }
 
             usleep(2_000_000);
         }
 
-        throw new \RuntimeException('kie.ai: esgotou o tempo de sondagem.');
+        throw new \RuntimeException('kie.ai: polling timed out.');
     }
 
-    /** Carrega bytes de imagem para o armazenamento do kie; devolve URL público. */
+    /** Uploads image bytes to kie's storage; returns a public URL. */
     public function upload(string $bytes, string $nome): string
     {
         $base = rtrim((string) config('services.kie.file_base_url', 'https://kieai.redpandaai.co'), '/');
@@ -132,7 +132,7 @@ class KieClient
 
         $url = (string) ($r->json('data.downloadUrl') ?? $r->json('data.url') ?? '');
         if (! $r->successful() || $url === '') {
-            throw new \RuntimeException('kie.ai: carregamento da referência falhou ('.$r->status().').');
+            throw new \RuntimeException('kie.ai: reference upload failed ('.$r->status().').');
         }
 
         return $url;

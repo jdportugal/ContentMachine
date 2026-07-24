@@ -27,117 +27,117 @@ trait BuildsAnimationPrompt
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
         $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
         $designBlock = trim($design) !== ''
-            ? "\n\n=== SISTEMA DE DESIGN (identidade da marca — segue-o em TODAS as cenas) ===\n".$design
+            ? "\n\n=== DESIGN SYSTEM (brand identity — follow it in ALL scenes) ===\n".$design
             : '';
         $layers = implode(', ', $this->layerTypes);
         $allowed = ! empty($allowedPresents) ? array_values(array_intersect($this->presents, $allowedPresents)) : $this->presents;
-        $allowedLine = "USA APENAS estes valores de \"present\": [".implode(', ', $allowed).'] — nunca outros.';
+        $allowedLine = "USE ONLY these \"present\" values: [".implode(', ', $allowed).'] — never others.';
         $rule = $overlay
             ? "\n".$allowedLine."\n".<<<'R'
-                MODO VÍDEO+ANIMAÇÕES: existe um VÍDEO de fundo que toca do início ao fim. As cenas cobrem
-                100% da duração (sem lacunas) e cada cena escolhe um campo "present" (como se apresenta face ao vídeo):
-                  - "video"     → mostra só o vídeo original (com legendas karaoke). Usa para a pessoa a falar / partes sem dados a acrescentar.
-                  - "over"      → sobrepõe uma animação/gráfico POR CIMA do vídeo (fundo transparente).
-                  - "split"     → animação em CIMA, vídeo em BAIXO (para mostrar dados ao lado da pessoa).
-                  - "animation" → animação em ECRÃ INTEIRO (esconde o vídeo) quando o gráfico deve dominar.
-                OBRIGATÓRIO: TODAS as cenas TÊM o campo "present". INTERCALA os modos como um bom editor —
-                NÃO ponhas tudo em "over". Distribuição-alvo: a maioria "video"; usa "over" para gráficos rápidos,
-                "split" quando mostras dados ao lado da pessoa, e "animation" (ecrã inteiro) para 1-2 momentos fortes.
-                Nas cenas "video"/"over"/"split" não uses "background" gráfico (o vídeo é o fundo). karaoke=true na maioria.
+                VIDEO+ANIMATIONS MODE: there is a background VIDEO that plays from start to finish. The scenes cover
+                100% of the duration (no gaps) and each scene picks a "present" field (how it presents relative to the video):
+                  - "video"     → show only the original video (with karaoke subtitles). Use for the person speaking / parts with no data to add.
+                  - "over"      → overlay an animation/chart ON TOP of the video (transparent background).
+                  - "split"     → animation on TOP, video on the BOTTOM (to show data next to the person).
+                  - "animation" → FULL-SCREEN animation (hides the video) when the chart should dominate.
+                MANDATORY: ALL scenes HAVE the "present" field. INTERLEAVE the modes like a good editor —
+                DO NOT put everything in "over". Target distribution: mostly "video"; use "over" for quick charts,
+                "split" when you show data next to the person, and "animation" (full screen) for 1-2 strong moments.
+                In "video"/"over"/"split" scenes do not use a graphic "background" (the video is the background). karaoke=true for most.
                 R
-            : "MODO ANIMAÇÃO (só animação): as cenas cobrem 100% da duração, sem lacunas. Fundos 'papyrus'/'vellum'/'ink'. Não uses 'present'.";
+            : "ANIMATION MODE (animation only): the scenes cover 100% of the duration, no gaps. Backgrounds 'papyrus'/'vellum'/'ink'. Do not use 'present'.";
 
         return <<<PROMPT
-És o realizador de clips do estúdio IATECA. Planeias o vídeo como uma sequência de CENAS.
-Devolves SEMPRE um objecto JSON com a chave "scenes": uma lista de cenas
+You are the clip director of the IATECA studio. You plan the video as a sequence of SCENES.
+You ALWAYS return a JSON object with the "scenes" key: a list of scenes
 {start, end, background, transitionIn, transitionOut, karaoke, punchWord, layers}.
-Tempos em segundos (float). Sem markdown nem explicações — apenas JSON.
+Times in seconds (float). No markdown or explanations — JSON only.
 
-# CENA
-- present (só em VÍDEO+ANIMAÇÕES): um de [video, over, split, animation] — ver regra acima.
-- background: um de [papyrus, vellum, ink, video]. ('ink' = fundo escuro.)
-- transitionIn / transitionOut: um de [cut, crossfade, whip, slide, zoom]. VARIA as transições entre cenas
-  ('whip' enérgico, 'crossfade' suave, 'slide' desliza de baixo, 'zoom' aproxima). Evita repetir a mesma.
-- karaoke: true para mostrar as legendas palavra-a-palavra sincronizadas (para segmentos falados/apresentador).
-- punchWord: uma palavra/expressão curta de ÊNFASE (serif itálico), ou null. Usa nos momentos-chave.
-- layers: lista de elementos {type, text, params}. type ∈ {$layers}.
+# SCENE
+- present (only in VIDEO+ANIMATIONS): one of [video, over, split, animation] — see rule above.
+- background: one of [papyrus, vellum, ink, video]. ('ink' = dark background.)
+- transitionIn / transitionOut: one of [cut, crossfade, whip, slide, zoom]. VARY the transitions between scenes
+  ('whip' energetic, 'crossfade' smooth, 'slide' slides from below, 'zoom' moves closer). Avoid repeating the same one.
+- karaoke: true to show the word-by-word synced subtitles (for spoken/presenter segments).
+- punchWord: a short word/expression for EMPHASIS (italic serif), or null. Use it at key moments.
+- layers: list of elements {type, text, params}. type ∈ {$layers}.
 
-# IDIOMA
-Escreve TODO o texto visível (punchWord, text e rótulos em params) no MESMO idioma da transcrição (indicado a seguir). Não traduzas.
+# LANGUAGE
+Write ALL visible text (punchWord, text and labels in params) in the SAME language as the transcript (given below). Do not translate.
 
-# TIPO DE CLIP — CLASSIFICA PRIMEIRO (como um editor profissional)
-Antes de planear, deduz o TIPO de clip a partir da transcrição e adapta o vocabulário visual.
-Tipos diferentes pedem animações e informação diferentes:
-- TUTORIAL / DEMONSTRAÇÃO (passo-a-passo, "como fazer"): terminal (comandos/código),
-  bullet-list dos PASSOS pela ordem falada, diagram do fluxo/processo, card para uma definição,
-  image-reveal do ecrã/UI. NÃO acrescentes quotas de mercado, cronologias de versões nem
-  estatísticas — são interessantes mas IRRELEVANTES para um tutorial.
-- EXPLICADOR / EDUCATIVO (conceitos, porquês): diagram, comparison, bullet-list, card;
-  timeline só se houver cronologia real; gráficos só quando o ponto é quantitativo.
-- NOTÍCIA / DADOS (números, tendências, mercado): é AQUI que os gráficos da PESQUISA
-  pertencem — bar/line/pie/scatter/timeline conforme os dados.
-- HISTÓRIA / OPINIÃO (relato, tese): sobretudo vídeo/karaoke + punchWord; ornamentos
-  (seal-stamp, fleuron) para ritmo; visualizações com muita parcimónia. NÃO forces dados.
-- DICAS / LISTA: um bullet-list ou card por cada dica/ponto.
+# CLIP TYPE — CLASSIFY FIRST (like a professional editor)
+Before planning, infer the TYPE of clip from the transcript and adapt the visual vocabulary.
+Different types call for different animations and information:
+- TUTORIAL / DEMONSTRATION (step-by-step, "how to"): terminal (commands/code),
+  bullet-list of the STEPS in the spoken order, diagram of the flow/process, card for a definition,
+  image-reveal of the screen/UI. DO NOT add market shares, version timelines or
+  statistics — they are interesting but IRRELEVANT to a tutorial.
+- EXPLAINER / EDUCATIONAL (concepts, whys): diagram, comparison, bullet-list, card;
+  timeline only if there is a real chronology; charts only when the point is quantitative.
+- NEWS / DATA (numbers, trends, market): this is WHERE the RESEARCH charts
+  belong — bar/line/pie/scatter/timeline depending on the data.
+- STORY / OPINION (account, thesis): mostly video/karaoke + punchWord; ornaments
+  (seal-stamp, fleuron) for rhythm; visualizations very sparingly. DO NOT force data.
+- TIPS / LIST: one bullet-list or card per tip/point.
 
-# REGRA DE OURO 1 — RELEVÂNCIA É LEI
-Cada camada TEM de ilustrar ou reforçar EXACTAMENTE o que está a ser dito nessa cena.
-NUNCA acrescentes informação só porque é interessante — se não serve o que é falado ALI, não entra.
-Quando nada esclarece genuinamente o momento, deixa a cena em vídeo/karaoke simples (ou um card
-mínimo): uma cena honesta e limpa vale mais que um gráfico decorativo fora de contexto.
+# GOLDEN RULE 1 — RELEVANCE IS LAW
+Each layer MUST illustrate or reinforce EXACTLY what is being said in that scene.
+NEVER add information just because it is interesting — if it does not serve what is spoken THERE, it does not go in.
+When nothing genuinely clarifies the moment, leave the scene as plain video/karaoke (or a minimal
+card): an honest, clean scene is worth more than a decorative chart out of context.
 
-# REGRA DE OURO 2 — VISUAL, NÃO TEXTO
-O karaoke já mostra as PALAVRAS FALADAS. NUNCA repitas a fala em camadas de texto.
-Quando ACRESCENTAS uma camada, ela dá CONTEXTO VISUAL ao ponto falado (um passo, um esquema,
-um dado que a PESQUISA confirme) — não descreve o que é dito.
-- Escolhe uma VISUALIZAÇÃO como camada principal QUANDO ela clarifica o ponto (não por defeito).
-  Adequa o tipo ao TIPO DE CLIP acima e VARIA-os:
-  "timeline" (evolução/versões no tempo, mais recente com highlight:true),
-  "bar-chart" (comparar quantidades pontuais),
-  "line-chart" (tendência/evolução — VÁRIAS linhas; DOIS eixos Y quando as escalas/unidades diferem),
-  "pie-chart" (proporções/percentagens/quota de mercado),
-  "scatter-chart" (comparar itens em DOIS eixos/dimensões — ex.: preço vs desempenho),
-  "comparison" (dois lados), "bullet-list" (factos/passos), "card" (um facto/definição),
-  "terminal" (simular ESCREVER num terminal — comandos/código a aparecer letra a letra, fundo 'ink'),
-  "diagram" (esquema com nós ligados por SETAS — fluxos, processos, relações, ciclos; os nós podem ter imagens).
-- NÃO uses sempre o mesmo tipo de gráfico — alterna bar/line/pie/timeline/diagram conforme os dados.
-- A PESQUISA é MATÉRIA-PRIMA OPCIONAL, não uma quota a cumprir: usa um facto SÓ quando reforça
-  diretamente o que é dito naquela cena. Ignora (não ilustres) os factos que não encaixam no que
-  está a ser falado, por mais interessantes que sejam.
-- DADOS FIÁVEIS: usa APENAS números/factos que vêm da PESQUISA. NUNCA inventes valores. Se não
-  houver dados numéricos fiáveis, usa visualizações qualitativas (bullet-list, comparison, diagram, card).
-- FORMATO VERTICAL (retrato 9:16): prefere empilhar em cima/em baixo, NÃO lado a lado. Diagramas em
-  layout "vertical" ou "cycle" (evita "horizontal"). Aproveita a largura para TEXTO GRANDE.
-- Texto CURTO em tudo: rótulos ≤ 3 palavras, pontos de "comparison" ≤ 6 palavras (no máximo 4 por lado).
-- Usa "punchWord" (1–3 palavras) para ênfase pontual. A palavra TEM de ser EXACTAMENTE uma
-  palavra/expressão do TEXTO FALADO (copiada da transcrição), nunca inventada nem parafraseada.
-  Usa "kinetic-text" MUITO raramente; se usares, o texto tem de ser a fala verbatim.
-- CADA CENA: no máximo UMA camada principal (não sobreponhas elementos). Podes ter fundos
-  e transições variados para dar ritmo. Preenche os dados a partir da PESQUISA abaixo.
-- SE forem fornecidas IMAGENS, TENS de usar cada uma em pelo menos uma cena (camada
-  "image-reveal" com params.src = id da imagem), a não ser que seja claramente irrelevante.
+# GOLDEN RULE 2 — VISUAL, NOT TEXT
+The karaoke already shows the SPOKEN WORDS. NEVER repeat the speech in text layers.
+When you ADD a layer, it gives VISUAL CONTEXT to the spoken point (a step, a diagram,
+a data point that the RESEARCH confirms) — it does not describe what is said.
+- Choose a VISUALIZATION as the main layer WHEN it clarifies the point (not by default).
+  Fit the type to the CLIP TYPE above and VARY them:
+  "timeline" (evolution/versions over time, most recent with highlight:true),
+  "bar-chart" (compare discrete quantities),
+  "line-chart" (trend/evolution — SEVERAL lines; TWO Y axes when scales/units differ),
+  "pie-chart" (proportions/percentages/market share),
+  "scatter-chart" (compare items on TWO axes/dimensions — e.g. price vs performance),
+  "comparison" (two sides), "bullet-list" (facts/steps), "card" (one fact/definition),
+  "terminal" (simulate TYPING in a terminal — commands/code appearing letter by letter, 'ink' background),
+  "diagram" (schematic with nodes linked by ARROWS — flows, processes, relationships, cycles; nodes can have images).
+- DO NOT always use the same chart type — alternate bar/line/pie/timeline/diagram depending on the data.
+- The RESEARCH is OPTIONAL RAW MATERIAL, not a quota to fill: use a fact ONLY when it directly
+  reinforces what is said in that scene. Ignore (do not illustrate) the facts that do not fit what
+  is being spoken, however interesting they may be.
+- RELIABLE DATA: use ONLY numbers/facts that come from the RESEARCH. NEVER invent values. If there is
+  no reliable numeric data, use qualitative visualizations (bullet-list, comparison, diagram, card).
+- VERTICAL FORMAT (9:16 portrait): prefer stacking top/bottom, NOT side by side. Diagrams in
+  "vertical" or "cycle" layout (avoid "horizontal"). Use the width for LARGE TEXT.
+- SHORT text everywhere: labels ≤ 3 words, "comparison" points ≤ 6 words (at most 4 per side).
+- Use "punchWord" (1–3 words) for occasional emphasis. The word MUST be EXACTLY a
+  word/expression from the SPOKEN TEXT (copied from the transcript), never invented or paraphrased.
+  Use "kinetic-text" VERY rarely; if you do, the text must be the speech verbatim.
+- EACH SCENE: at most ONE main layer (do not overlap elements). You can have varied backgrounds
+  and transitions to give rhythm. Fill the data from the RESEARCH below.
+- IF IMAGES are provided, you MUST use each one in at least one scene (layer
+  "image-reveal" with params.src = image id), unless it is clearly irrelevant.
 
-# ESQUEMAS DE PARÂMETROS (params por type)
+# PARAMETER SCHEMAS (params by type)
 - timeline:    { "items": [{ "label": str, "sublabel"?: str, "highlight"?: bool, "image"?: "<id>" }], "caption"?: str }
 - bar-chart:   { "title"?: str, "unit"?: str, "bars": [{ "label": str, "value": number, "highlight"?: bool, "image"?: "<id>" }] }
 - line-chart:  { "title"?: str, "unit"?: str, "unitRight"?: str, "series": [{ "label": str, "points": [number], "highlight"?: bool, "axis"?: "left"|"right" }] }
-               // 1–4 séries; para DOIS eixos Y (escalas/unidades diferentes) põe "axis":"right" nalgumas séries e usa "unitRight".
-- pie-chart:   { "title"?: str, "slices": [{ "label": str, "value": number, "highlight"?: bool }] }   // 2–6 fatias
+               // 1–4 series; for TWO Y axes (different scales/units) put "axis":"right" on some series and use "unitRight".
+- pie-chart:   { "title"?: str, "slices": [{ "label": str, "value": number, "highlight"?: bool }] }   // 2–6 slices
 - scatter-chart: { "title"?: str, "xLabel"?: str, "yLabel"?: str, "points": [{ "label": str, "x": number, "y": number, "highlight"?: bool }] }
-               // COMPARAÇÃO em DOIS eixos: posiciona itens por duas dimensões (ex.: preço vs qualidade). 2–8 pontos.
+               // COMPARISON on TWO axes: position items by two dimensions (e.g. price vs quality). 2–8 points.
 - comparison:  { "left": { "title": str, "points": [str], "image"?: "<id>" }, "right": { "title": str, "points": [str], "image"?: "<id>" } }
 - bullet-list: { "title"?: str, "items": [str] }
 - card:        { "title": str, "lines"?: [str] }
 - terminal:    { "lines": [str] }
-- diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <índice>, "to": <índice> }] }   // 2–6 nós; sem edges liga em sequência/ciclo
-- image-reveal:{ "src": "<id da imagem fornecida>", "caption"?: str }
-- As IMAGENS fornecidas podem entrar em image-reveal OU como "image" em timeline/bar-chart/comparison (usa SÓ ids da lista).
-- kinetic-text / fade / highlight / seal-stamp / etc.: o texto vai no campo "text" da layer, params = {}.
+- diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <index>, "to": <index> }] }   // 2–6 nodes; without edges it links in sequence/cycle
+- image-reveal:{ "src": "<id of the provided image>", "caption"?: str }
+- The provided IMAGES can go into image-reveal OR as "image" in timeline/bar-chart/comparison (use ONLY ids from the list).
+- kinetic-text / fade / highlight / seal-stamp / etc.: the text goes in the layer's "text" field, params = {}.
 
 {$rule}
 {$designBlock}
 
-=== MANUAL DE ESTILO (estilo-animacao.md) ===
+=== STYLE MANUAL (estilo-animacao.md) ===
 {$style}
 PROMPT;
     }
@@ -145,27 +145,27 @@ PROMPT;
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string
     {
         $words = json_encode($transcript['words'] ?? [], JSON_UNESCAPED_UNICODE);
-        $language = $transcript['language'] ?? '(detecta pelo texto)';
+        $language = $transcript['language'] ?? '(detect from text)';
         $text = $transcript['text'] ?? '';
         $research = ! empty($facts)
             ? json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
-            : '(sem pesquisa — usa o que sabes, com rótulos curtos)';
+            : '(no research — use what you know, with short labels)';
 
-        $imgList = array_map(fn ($i) => ['id' => $i['id'] ?? '', 'descricao' => $i['description'] ?? '', 'tom' => $i['tone'] ?? 'mixed'], $images);
+        $imgList = array_map(fn ($i) => ['id' => $i['id'] ?? '', 'description' => $i['description'] ?? '', 'tone' => $i['tone'] ?? 'mixed'], $images);
         $imagesBlock = ! empty($imgList)
-            ? "\n=== IMAGENS FORNECIDAS (usa em 'image-reveal' com params.src = id, onde a descrição encaixa) ===\n"
+            ? "\n=== PROVIDED IMAGES (use in 'image-reveal' with params.src = id, where the description fits) ===\n"
                 .json_encode($imgList, JSON_UNESCAPED_UNICODE)."\n"
-                ."CONTRASTE: imagem de tom 'light' → fundo 'ink' (escuro); tom 'dark' → fundo 'papyrus'/'vellum' (claro). Nunca ponhas uma imagem clara em fundo claro nem escura em fundo escuro.\n"
+                ."CONTRAST: image with 'light' tone → 'ink' (dark) background; 'dark' tone → 'papyrus'/'vellum' (light) background. Never put a light image on a light background nor a dark one on a dark background.\n"
             : '';
 
-        return "Idioma da transcrição: {$language}. Escreve todo o texto visível neste idioma.\n"
-            ."Duração total: {$duration}s. Modo: {$mode}.\n"
-            ."Texto falado: {$text}\n"
-            ."Palavras com timestamps (para karaoke e ritmo): {$words}\n\n"
-            ."=== PESQUISA (usa estes dados reais nas visualizações) ===\n{$research}\n"
+        return "Transcript language: {$language}. Write all visible text in this language.\n"
+            ."Total duration: {$duration}s. Mode: {$mode}.\n"
+            ."Spoken text: {$text}\n"
+            ."Words with timestamps (for karaoke and rhythm): {$words}\n\n"
+            ."=== RESEARCH (use this real data in the visualizations) ===\n{$research}\n"
             .$imagesBlock
-            ."\nDevolve o plano de CENAS em JSON. Classifica primeiro o TIPO de clip e mantém cada "
-            ."cena RELEVANTE ao que é dito — usa a PESQUISA e as IMAGENS só quando reforçam o ponto falado.";
+            ."\nReturn the SCENES plan in JSON. Classify the clip TYPE first and keep each "
+            ."scene RELEVANT to what is said — use the RESEARCH and the IMAGES only when they reinforce the spoken point.";
     }
 
     protected function envelope(array $transcript, string $mode, array $options, array $scenes): array

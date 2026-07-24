@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Máquina de Conteúdo' }} · IATECA</title>
+    <title>{{ $title ?? 'Content Machine' }} · IATECA</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,28 +14,28 @@
 </head>
 <body class="bg-nocturna min-h-screen text-ink antialiased">
     <div class="flex min-h-screen">
-        {{-- ============ Estante lateral (navegação) ============ --}}
+        {{-- ============ Side shelf (navigation) ============ --}}
         <aside class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/40 flex flex-col sticky top-0 h-screen">
             <div class="px-6 py-3 border-b border-ink-soft/15">
                 <a href="{{ route('painel') }}" class="block">
                     <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">IATECA</span>
-                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Máquina · de · Conteúdo</span>
+                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Content · Machine</span>
                 </a>
             </div>
 
             <nav class="flex-1 py-2 space-y-0.5">
                 @php
                     $nav = [
-                        ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#FFB347', 'glyph' => '◆'],
-                        ['route' => 'monitorizacao',   'label' => 'Monitorização',     'sub' => 'Redes sociais',      'color' => '#C77DFF', 'glyph' => '◈'],
-                        ['route' => 'clips',           'label' => 'Gerador de Clips',  'sub' => 'Vídeo',              'color' => '#5A7BFF', 'glyph' => '▲'],
-                        ['route' => 'clips-animados',  'label' => 'Clips Animados',    'sub' => 'Animação',           'color' => '#4DE0E0', 'glyph' => '✦'],
-                        ['route' => 'ativos',          'label' => 'Ativos',            'sub' => 'Media · Música',     'color' => '#4DE08A', 'glyph' => '♫'],
-                        ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#9C7DFF', 'glyph' => '◇'],
-                        ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#FF8A4D', 'glyph' => '⬡'],
-                        ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#FFD98A', 'glyph' => '✷'],
-                        ['route' => 'design-system',   'label' => 'Sistema de Design', 'sub' => 'Marca do conteúdo',  'color' => '#FF5C7A', 'glyph' => '❖'],
-                        ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#8AE0FF', 'glyph' => '⚙'],
+                        ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
+                        ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
+                        ['route' => 'clips',           'label' => 'Clip Generator',    'sub' => 'Video',              'color' => '#5A7BFF', 'glyph' => '▲'],
+                        ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦'],
+                        ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
+                        ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇'],
+                        ['route' => 'rascunhos',       'label' => 'Drafts',            'sub' => 'Scheduling',         'color' => '#FF8A4D', 'glyph' => '⬡'],
+                        ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#FFD98A', 'glyph' => '✷'],
+                        ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#FF5C7A', 'glyph' => '❖'],
+                        ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#8AE0FF', 'glyph' => '⚙'],
                     ];
                 @endphp
 
@@ -58,17 +58,17 @@
 
             <div class="px-6 py-2.5 border-t border-ink-soft/15">
                 <div class="font-mono text-[0.6rem] text-ink-faint leading-relaxed">
-                    <div>CÉREBRO ·
+                    <div>BRAIN ·
                         <a href="obsidian://open?path={{ rawurlencode(config('contentmachine.vault.path')) }}"
                            class="text-teal underline decoration-teal/40 underline-offset-2 hover:decoration-teal transition"
-                           title="Abrir a vault no Obsidian">Obsidian Vault</a>
+                           title="Open the vault in Obsidian">Obsidian Vault</a>
                     </div>
                     <div>006.3 · IAT · '26</div>
                 </div>
             </div>
         </aside>
 
-        {{-- ============ Conteúdo ============ --}}
+        {{-- ============ Content ============ --}}
         <main class="flex-1 min-w-0 overflow-x-hidden">
             <div class="max-w-6xl mx-auto px-8 py-8">
                 {{ $slot }}
@@ -76,13 +76,13 @@
         </main>
     </div>
 
-    {{-- Overlay de carregamento (partículas) — global, accionável por qualquer
-         componente via dispatch('loader-show'/'loader-hide') ou window.CMLoader. --}}
+    {{-- Loading overlay (particles) — global, triggerable by any component
+         via dispatch('loader-show'/'loader-hide') or window.CMLoader. --}}
     <x-particle-loader />
 
-    {{-- Toasts globais (canto inferior direito). Ao nível do <body>, fora do
-         scroller/transform, para o position:fixed fixar ao ecrã. Ouve o evento
-         'toast' despachado por qualquer componente Livewire. --}}
+    {{-- Global toasts (bottom-right corner). At <body> level, outside the
+         scroller/transform, so position:fixed pins to the screen. Listens for the
+         'toast' event dispatched by any Livewire component. --}}
     <div x-data="{ toasts: [] }"
          @toast.window="const id = Date.now() + Math.random();
                         toasts.push({ id, message: $event.detail.message, type: $event.detail.type || 'ok' });

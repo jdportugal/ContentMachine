@@ -6,15 +6,15 @@ use Illuminate\Contracts\Support\Arrayable;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 /**
- * Representa uma nota do vault (um ficheiro .md com frontmatter YAML).
- * Imutável do ponto de vista de consumo; usada como DTO pelas páginas.
+ * Represents a vault note (a .md file with YAML frontmatter).
+ * Immutable from the consumption standpoint; used as a DTO by the pages.
  */
 class VaultNote implements Arrayable
 {
     public function __construct(
-        public readonly string $path,        // caminho relativo à raiz do vault, ex.: "rascunhos/post-abc.md"
-        public array $frontmatter,           // propriedades YAML
-        public string $body,                 // corpo em Markdown
+        public readonly string $path,        // path relative to the vault root, e.g. "rascunhos/post-abc.md"
+        public array $frontmatter,           // YAML properties
+        public string $body,                 // Markdown body
     ) {}
 
     public function slug(): string
@@ -41,7 +41,7 @@ class VaultNote implements Arrayable
             ?? str($this->slug())->replace('-', ' ')->title();
     }
 
-    /** Renderiza o corpo Markdown para HTML. */
+    /** Renders the Markdown body to HTML. */
     public function html(): string
     {
         return (new GithubFlavoredMarkdownConverter)->convert($this->body)->getContent();

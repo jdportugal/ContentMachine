@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Desenha os cartões de uma peça fora do ciclo do pedido web.
+ * Draws the cards of a piece outside the web request cycle.
  *
- * O renderizador SVG é instantâneo, mas o kie.ai (nano-banana-pro) submete e
- * sonda uma tarefa por cartão — lento demais para um pedido web. Corre aqui,
- * numa fila, à imagem do GeneratePostImagesJob do AdsMaker. As imagens ficam
- * em public/media/publicacoes/{token}/ e os caminhos ficam em cache para a
- * oficina os ler por sondagem.
+ * The SVG renderer is instantaneous, but kie.ai (nano-banana-pro) submits and
+ * polls one task per card — too slow for a web request. It runs here,
+ * in a queue, like AdsMaker's GeneratePostImagesJob. The images go
+ * in public/media/publicacoes/{token}/ and the paths are cached for the
+ * workshop to read them by polling.
  */
 class GerarImagensJob implements ShouldQueue
 {
@@ -29,10 +29,10 @@ class GerarImagensJob implements ShouldQueue
 
     /**
      * @param  array<int,array{titulo?:string,texto?:string}>  $slides
-     * @param  array<int,string>  $referencias  referências globais (aplicadas a todos os cartões)
-     * @param  array<int,string>  $prompts  prompt kie por cartão (editado na oficina; '' = compõe)
-     * @param  array<int,array<int,string>>  $anexos  caminhos de imagens anexas por cartão
-     * @param  array<int,array<int,string>>  $anexosDescr  descrições das imagens anexas por cartão
+     * @param  array<int,string>  $referencias  global references (applied to all cards)
+     * @param  array<int,string>  $prompts  kie prompt per card (edited in the workshop; '' = compose)
+     * @param  array<int,array<int,string>>  $anexos  paths of attached images per card
+     * @param  array<int,array<int,string>>  $anexosDescr  descriptions of the attached images per card
      */
     public function __construct(
         public string $tipo,
@@ -43,7 +43,7 @@ class GerarImagensJob implements ShouldQueue
         public string $token,
         public string $proporcao = '',
         public array $referencias = [],
-        public string $notaSlug = '', // se definido, persiste as imagens na nota
+        public string $notaSlug = '', // if set, persists the images on the note
         public array $prompts = [],
         public array $anexos = [],
         public array $anexosDescr = [],
@@ -79,7 +79,7 @@ class GerarImagensJob implements ShouldQueue
             $paths = $this->escrever($renderer->render($plano, array_merge($kind, ['_cor' => $cor])));
             Cache::put(self::key($this->token), ['imagens' => $paths], now()->addMinutes(30));
 
-            // Persiste na nota (para o painel refletir as imagens sem a oficina aberta).
+            // Persist on the note (so the dashboard reflects the images without the workshop open).
             if ($this->notaSlug !== '' && $paths !== []) {
                 $this->persistirNota($paths);
             }
@@ -103,7 +103,7 @@ class GerarImagensJob implements ShouldQueue
                 $vault->updateFrontmatter($nota->path, ['imagens' => $paths]);
             }
         } catch (\Throwable) {
-            // não bloqueia a geração se a persistência falhar
+            // does not block generation if persistence fails
         }
     }
 
@@ -114,18 +114,18 @@ class GerarImagensJob implements ShouldQueue
         }
     }
 
-    /** Chave de cache que marca uma publicação como «a gerar» (para o painel). */
+    /** Cache key that marks a post as «generating» (for the dashboard). */
     public static function notaKey(string $slug): string
     {
         return 'publicacao.gerando.'.$slug;
     }
 
     /**
-     * Persiste cada artefacto de forma durável: SVG inline → ficheiro .svg;
-     * URL (kie.ai) → descarrega o PNG para .png (as URLs do kie expiram).
+     * Persists each artefact durably: inline SVG → .svg file;
+     * URL (kie.ai) → downloads the PNG to .png (kie URLs expire).
      *
      * @param  array<int,string>  $artefactos
-     * @return array<int,string>  caminhos web relativos
+     * @return array<int,string>  relative web paths
      */
     private function escrever(array $artefactos): array
     {
@@ -147,14 +147,14 @@ class GerarImagensJob implements ShouldQueue
                 continue;
             }
 
-            // URL de imagem (kie.ai) — descarrega para ficheiro durável.
+            // Image URL (kie.ai) — download to a durable file.
             try {
                 $bytes = Http::timeout(60)->get($arte)->body();
                 $p = $rel.'/'.$n.'.png';
                 file_put_contents(public_path($p), $bytes);
                 $caminhos[] = $p;
             } catch (\Throwable) {
-                $caminhos[] = $arte; // guarda o URL como último recurso
+                $caminhos[] = $arte; // keep the URL as a last resort
             }
         }
 

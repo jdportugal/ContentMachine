@@ -34,7 +34,7 @@ class PlanAnimationsJob implements ShouldQueue
                 $p->update(['meta' => array_merge($p->meta ?? [], ['research' => $facts])]);
             }
 
-            // Suggested publishing metadata (título/descrição/tags) from the transcript.
+            // Suggested publishing metadata (title/description/tags) from the transcript.
             $suggested = $metadata->suggest($p->transcript);
             $p->update([
                 'title' => $suggested['title'] !== '' ? $suggested['title'] : $p->title,

@@ -3,7 +3,7 @@
     $g = $gerando[$i] ?? null;
     $h = $hist[$i] ?? [];
     $src = fn ($p) => \Illuminate\Support\Str::startsWith($p, 'http') ? $p : asset($p);
-    // Lista ordenada de todas as imagens da peça + posição deste cartão nela.
+    // Ordered list of all the piece's images + this card's position in it.
     $ordenadas = $img;
     ksort($ordenadas);
     $galeria = array_values(array_map($src, $ordenadas));
@@ -12,20 +12,20 @@
 <div class="w-44 shrink-0">
     @if ($g)
         <div class="aspect-[4/5] rounded-sm border border-gold/30 bg-vellum/40 flex items-center justify-center text-center p-2">
-            <span class="font-mono text-[0.6rem] text-gold animate-pulse">❖ a desenhar…</span>
+            <span class="font-mono text-[0.6rem] text-gold animate-pulse">❖ drawing…</span>
         </div>
     @elseif ($im)
         <button type="button" @click="$dispatch('abrir-lightbox', {imgs: @js($galeria), i: {{ $pos }}})"
-                title="Ver em ecrã inteiro"
+                title="View fullscreen"
                 class="block w-full border border-ink-soft/20 rounded-sm overflow-hidden bg-vellum/40 shadow-engraved hover:border-teal/50 transition">
-            <img src="{{ $src($im) }}" class="w-full block" alt="Cartão {{ $i + 1 }}">
+            <img src="{{ $src($im) }}" class="w-full block" alt="Card {{ $i + 1 }}">
         </button>
         @if (count($h))
             <div class="mt-2">
-                <div class="font-mono text-[0.55rem] text-ink-faint mb-1">versões anteriores</div>
+                <div class="font-mono text-[0.55rem] text-ink-faint mb-1">previous versions</div>
                 <div class="flex gap-1 flex-wrap">
                     @foreach ($h as $k => $hp)
-                        <button type="button" wire:click="restaurarVersao({{ $i }}, @js($hp))" title="Restaurar esta versão"
+                        <button type="button" wire:click="restaurarVersao({{ $i }}, @js($hp))" title="Restore this version"
                                 wire:key="h-{{ $i }}-{{ $k }}"
                                 class="w-8 h-10 rounded-sm overflow-hidden border border-ink-soft/20 hover:border-teal transition">
                             <img src="{{ $src($hp) }}" class="w-full h-full object-cover">
@@ -37,7 +37,7 @@
     @else
         <div class="aspect-[4/5] rounded-sm border border-dashed border-ink-soft/25 text-ink-faint flex flex-col items-center justify-center gap-1 text-center p-2">
             <span class="text-2xl text-gold/50">❖</span>
-            <span class="font-mono text-[0.55rem]">sem imagem</span>
+            <span class="font-mono text-[0.55rem]">no image</span>
         </div>
     @endif
 </div>

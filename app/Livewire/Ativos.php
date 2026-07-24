@@ -9,12 +9,12 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 /**
- * Ativos — biblioteca de media reutilizável na app. Por agora, faixas de música
- * de fundo (usadas pelo Gerador de Clips); pensada para crescer para outros
- * tipos de ativos (logótipos, intros, etc.).
+ * Assets — library of reusable media in the app. For now, background music
+ * tracks (used by the Clip Generator); designed to grow to other
+ * types of assets (logos, intros, etc.).
  */
 #[Layout('components.layouts.app')]
-#[Title('Ativos')]
+#[Title('Assets')]
 class Ativos extends Component
 {
     use WithFileUploads;
@@ -31,21 +31,21 @@ class Ativos extends Component
         $this->validate([
             'novaMusica' => 'required|file|mimes:mp3,wav,m4a,aac,ogg,flac|max:30720',
         ], [
-            'novaMusica.required' => 'Escolha um ficheiro de áudio.',
-            'novaMusica.mimes' => 'Formato não suportado (use mp3, wav, m4a, aac, ogg ou flac).',
-            'novaMusica.max' => 'Ficheiro demasiado grande (máx. 30 MB).',
+            'novaMusica.required' => 'Choose an audio file.',
+            'novaMusica.mimes' => 'Unsupported format (use mp3, wav, m4a, aac, ogg or flac).',
+            'novaMusica.max' => 'File too large (max. 30 MB).',
         ]);
 
         $lib->add($this->novaMusica->getRealPath(), $this->novaMusica->getClientOriginalName());
 
         $this->reset('novaMusica');
-        $this->notificar('Música adicionada à biblioteca.');
+        $this->notificar('Music added to the library.');
     }
 
     public function removerMusica(string $name, MusicLibrary $lib): void
     {
         $lib->remove($name);
-        $this->notificar('Música removida.');
+        $this->notificar('Music removed.');
     }
 
     public function render(MusicLibrary $lib)

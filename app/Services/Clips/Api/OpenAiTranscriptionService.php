@@ -12,7 +12,7 @@ class OpenAiTranscriptionService implements TranscriptionService
     {
         $key = config('services.openai.key');
         if (! $key) {
-            throw new RuntimeException('OPENAI_API_KEY em falta para transcrição.');
+            throw new RuntimeException('OPENAI_API_KEY missing for transcription.');
         }
 
         $payload = [

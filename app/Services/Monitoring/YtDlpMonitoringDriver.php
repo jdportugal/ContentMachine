@@ -5,10 +5,10 @@ namespace App\Services\Monitoring;
 use App\Services\Scoring\EngagementScorer;
 
 /**
- * Driver de monitorização com dados REAIS do canal do utilizador, recolhidos
- * via yt-dlp e guardados no MonitoringStore (ver YtDlpMonitoringFetcher). Lê o
- * armazenado (rápido); se ainda não houve recolha, devolve vazio — a UI mostra
- * «sem dados, atualize». Deriva resumo/último-por-tipo/melhores dos itens reais.
+ * Monitoring driver with REAL data from the user's channel, collected
+ * via yt-dlp and stored in the MonitoringStore (see YtDlpMonitoringFetcher). Reads the
+ * stored data (fast); if no collection has happened yet, returns empty — the UI shows
+ * «no data, refresh». Derives summary/latest-per-type/best from the real items.
  */
 class YtDlpMonitoringDriver implements MonitoringDriver
 {
@@ -50,9 +50,9 @@ class YtDlpMonitoringDriver implements MonitoringDriver
     }
 
     /**
-     * Cartões de resumo derivados dos itens REAIS recolhidos. Sem métricas de
-     * canal (subscritores, etc.) que o yt-dlp não expõe — usa agregados das
-     * publicações recentes, sem deltas inventados.
+     * Summary cards derived from the REAL collected items. Without channel
+     * metrics (subscribers, etc.) that yt-dlp does not expose — uses aggregates
+     * of the recent posts, with no made-up deltas.
      *
      * @return array<int,array<string,mixed>>
      */
@@ -64,19 +64,19 @@ class YtDlpMonitoringDriver implements MonitoringDriver
             return [];
         }
 
-        $publicacoes = ['label' => 'Publicações recentes', 'value' => (string) count($itens), 'delta' => null, 'unit' => 'recolhidas'];
+        $publicacoes = ['label' => 'Recent posts', 'value' => (string) count($itens), 'delta' => null, 'unit' => 'collected'];
 
-        // Redes sem métricas públicas (Instagram) só mostram a contagem — os
-        // gostos/visualizações viriam a zero e seriam enganadores.
+        // Networks without public metrics (Instagram) only show the count — the
+        // likes/views would come out as zero and would be misleading.
         if (in_array($this->plataforma, (array) config('contentmachine.monitoring.sem_metricas', []), true)) {
             return [$publicacoes];
         }
 
         return [
             $publicacoes,
-            ['label' => 'Visualizações', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'views'))), 'delta' => null, 'unit' => 'recentes'],
-            ['label' => 'Gostos', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'likes'))), 'delta' => null, 'unit' => 'recentes'],
-            ['label' => 'Comentários', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'comentarios'))), 'delta' => null, 'unit' => 'recentes'],
+            ['label' => 'Views', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'views'))), 'delta' => null, 'unit' => 'recent'],
+            ['label' => 'Likes', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'likes'))), 'delta' => null, 'unit' => 'recent'],
+            ['label' => 'Comments', 'value' => MonitoringStats::numero((int) array_sum(array_column($itens, 'comentarios'))), 'delta' => null, 'unit' => 'recent'],
         ];
     }
 }

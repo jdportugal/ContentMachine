@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Definições')]
+#[Title('Settings')]
 class Definicoes extends Component
 {
     /** @var array<string,string> */
@@ -17,10 +17,10 @@ class Definicoes extends Component
     /** @var array<string,array<string,string>> */
     public array $perfis = [];
 
-    /** Fontes do agregador como texto (uma por linha), por fonte. @var array<string,string> */
+    /** Aggregator sources as text (one per line), per source. @var array<string,string> */
     public array $fontes = [];
 
-    /** Canais a agregar — lista de URLs por plataforma. @var array<string,array<int,string>> */
+    /** Channels to aggregate — list of URLs per platform. @var array<string,array<int,string>> */
     public array $canais = [];
 
     /** @var array<string,string> */
@@ -38,7 +38,7 @@ class Definicoes extends Component
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
-        // Cada plataforma tem uma lista de URLs; garante ≥1 linha para escrever.
+        // Each platform has a list of URLs; ensure ≥1 line to write into.
         $this->canais = collect($tudo['canais'])
             ->map(fn (array $lista) => $lista === [] ? [''] : array_values($lista))
             ->all();
@@ -75,7 +75,7 @@ class Definicoes extends Component
     }
 
     /**
-     * Converte um mapa de textos (uma entrada por linha) num mapa de listas.
+     * Converts a map of texts (one entry per line) into a map of lists.
      *
      * @param  array<string,string>  $mapa
      * @return array<string,array<int,string>>

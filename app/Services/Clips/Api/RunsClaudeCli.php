@@ -19,7 +19,7 @@ trait RunsClaudeCli
     {
         $binary = config('contentmachine.clips.claude_binary');
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
-        $lastError = 'sem detalhe';
+        $lastError = 'no detail';
 
         $args = [$binary, '-p', $user];
         if ($system !== null) {
@@ -45,15 +45,15 @@ trait RunsClaudeCli
             try {
                 $process->run();
             } catch (\Throwable $e) {
-                $lastError = 'processo: '.$e->getMessage();
+                $lastError = 'process: '.$e->getMessage();
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
             }
 
             if (! $process->isSuccessful()) {
-                $lastError = 'saída '.$process->getExitCode().': '
-                    .(trim($process->getErrorOutput()) ?: trim(substr($process->getOutput(), 0, 200)) ?: 'sem output');
+                $lastError = 'exit '.$process->getExitCode().': '
+                    .(trim($process->getErrorOutput()) ?: trim(substr($process->getOutput(), 0, 200)) ?: 'no output');
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
@@ -71,7 +71,7 @@ trait RunsClaudeCli
             return $envelope;
         }
 
-        throw new RuntimeException("Claude CLI falhou após {$attempts} tentativa(s) — {$lastError}");
+        throw new RuntimeException("Claude CLI failed after {$attempts} attempt(s) — {$lastError}");
     }
 
     private function claudeBackoff(int $attempt, int $attempts): void

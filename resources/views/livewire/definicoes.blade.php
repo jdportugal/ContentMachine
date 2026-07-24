@@ -1,30 +1,30 @@
 <div>
     <x-page-header
         eyebrow="Tomus · VIII"
-        title="Definições"
+        title="Settings"
         cota="005.1 · IAT · '26"
-        lead="As variáveis da casa — marca, perfis sociais e as fontes que o agregador vai vasculhar. Guardadas no vault." />
+        lead="The house variables — brand, social profiles and the sources the aggregator will crawl. Stored in the vault." />
 
     <form wire:submit="guardar" class="space-y-6">
-        {{-- Geral --}}
-        <x-panel eyebrow="Casa" title="Geral" glyph="◆">
+        {{-- General --}}
+        <x-panel eyebrow="House" title="General" glyph="◆">
             <div class="grid sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="eyebrow block mb-1.5">Nome da marca</label>
+                    <label class="eyebrow block mb-1.5">Brand name</label>
                     <input type="text" wire:model="geral.nome_marca"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
                 </div>
                 <div>
-                    <label class="eyebrow block mb-1.5">Sítio / website</label>
+                    <label class="eyebrow block mb-1.5">Site / website</label>
                     <input type="url" wire:model="geral.sitio" placeholder="https://…"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
                 </div>
             </div>
         </x-panel>
 
-        {{-- Perfis sociais --}}
-        <x-panel eyebrow="Redes" title="Perfis sociais" glyph="❧">
-            <p class="text-ink-soft -mt-2 mb-4">Identificador (@handle) e ligação de cada perfil que monitorizamos.</p>
+        {{-- Social profiles --}}
+        <x-panel eyebrow="Networks" title="Social profiles" glyph="❧">
+            <p class="text-ink-soft -mt-2 mb-4">Handle (@handle) and link for each profile we monitor.</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 @foreach ($perfis as $rede => $dados)
                     @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#5A7BFF', 'glifo' => '•']; @endphp
@@ -33,10 +33,10 @@
                             <span class="text-xl" style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span>
                             <span class="font-display text-xl text-ink">{{ $m['label'] }}</span>
                         </div>
-                        <label class="eyebrow block mb-1">Identificador</label>
+                        <label class="eyebrow block mb-1">Handle</label>
                         <input type="text" wire:model="perfis.{{ $rede }}.handle" placeholder="@ateca"
                                class="w-full mb-3 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
-                        <label class="eyebrow block mb-1">Ligação</label>
+                        <label class="eyebrow block mb-1">Link</label>
                         <input type="url" wire:model="perfis.{{ $rede }}.url" placeholder="https://…"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     </div>
@@ -44,20 +44,20 @@
             </div>
         </x-panel>
 
-        {{-- Fontes do agregador --}}
-        <x-panel eyebrow="Agregador" title="Fontes a vasculhar" glyph="☙">
-            <p class="text-ink-soft -mt-2 mb-4">Uma entrada por linha — canais, subreddits, contas ou ligações que alimentam o relatório de notícias.</p>
+        {{-- Aggregator sources --}}
+        <x-panel eyebrow="Aggregator" title="Sources to crawl" glyph="☙">
+            <p class="text-ink-soft -mt-2 mb-4">One entry per line — channels, subreddits, accounts or links that feed the news report.</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 @php
                     $rotulos = [
-                        'youtube' => ['Canais de YouTube', 'canal ou URL por linha'],
-                        'reddit' => ['Subreddits', 'r/nome por linha'],
-                        'twitter' => ['Contas de X / Twitter', '@conta por linha'],
-                        'tiktok' => ['Contas de TikTok', '@conta por linha'],
+                        'youtube' => ['YouTube channels', 'channel or URL per line'],
+                        'reddit' => ['Subreddits', 'r/name per line'],
+                        'twitter' => ['X / Twitter accounts', '@account per line'],
+                        'tiktok' => ['TikTok accounts', '@account per line'],
                     ];
                 @endphp
                 @foreach ($fontes as $fonte => $texto)
-                    @php $r = $rotulos[$fonte] ?? [ucfirst($fonte), 'uma por linha']; @endphp
+                    @php $r = $rotulos[$fonte] ?? [ucfirst($fonte), 'one per line']; @endphp
                     <div>
                         <label class="eyebrow block mb-1.5">{{ $r[0] }}</label>
                         <textarea wire:model="fontes.{{ $fonte }}" rows="4" placeholder="{{ $r[1] }}"
@@ -67,16 +67,16 @@
             </div>
         </x-panel>
 
-        {{-- Canais a agregar (yt-dlp) --}}
-        <x-panel eyebrow="Agregador" title="Canais a agregar" glyph="▶">
-            <p class="text-ink-soft -mt-2 mb-4">Ligações de canais/perfis que o agregador vasculha via yt-dlp — pode adicionar <span class="text-ink">vários por plataforma</span> com «+ acrescentar canal». YouTube e TikTok funcionam sem credenciais; Instagram e LinkedIn são <span class="text-ink">melhor-esforço</span> (podem exigir autenticação).</p>
+        {{-- Channels to aggregate (yt-dlp) --}}
+        <x-panel eyebrow="Aggregator" title="Channels to aggregate" glyph="▶">
+            <p class="text-ink-soft -mt-2 mb-4">Links to channels/profiles the aggregator crawls via yt-dlp — you can add <span class="text-ink">several per platform</span> with «+ add channel». YouTube and TikTok work without credentials; Instagram and LinkedIn are <span class="text-ink">best-effort</span> (may require authentication).</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 @php
                     $rotulosCanais = [
-                        'youtube' => ['Canais de YouTube', 'https://www.youtube.com/@canal'],
-                        'instagram' => ['Perfis de Instagram', 'https://www.instagram.com/perfil/'],
-                        'tiktok' => ['Contas de TikTok', 'https://www.tiktok.com/@conta'],
-                        'linkedin' => ['Perfis de LinkedIn', 'https://www.linkedin.com/in/perfil/'],
+                        'youtube' => ['YouTube channels', 'https://www.youtube.com/@channel'],
+                        'instagram' => ['Instagram profiles', 'https://www.instagram.com/profile/'],
+                        'tiktok' => ['TikTok accounts', 'https://www.tiktok.com/@account'],
+                        'linkedin' => ['LinkedIn profiles', 'https://www.linkedin.com/in/profile/'],
                     ];
                 @endphp
                 @foreach ($canais as $plataforma => $lista)
@@ -94,43 +94,43 @@
                                     <input type="url" wire:model="canais.{{ $plataforma }}.{{ $i }}" placeholder="{{ $rc[1] }}"
                                            class="flex-1 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                                     <button type="button" wire:click="removerCanal('{{ $plataforma }}', {{ $i }})"
-                                            class="shrink-0 text-ink-faint hover:text-bad px-2 text-lg" title="Remover">×</button>
+                                            class="shrink-0 text-ink-faint hover:text-bad px-2 text-lg" title="Remove">×</button>
                                 </div>
                             @endforeach
                         </div>
                         <button type="button" wire:click="adicionarCanal('{{ $plataforma }}')"
                                 class="mt-2 border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-teal/40 rounded-sm px-3 py-1 font-mono text-xs transition">
-                            + acrescentar canal
+                            + add channel
                         </button>
                     </div>
                 @endforeach
             </div>
         </x-panel>
 
-        {{-- Gerador de Clips --}}
-        <x-panel eyebrow="Oficina" title="Gerador de Clips" glyph="✂">
-            <p class="text-ink-soft -mt-2 mb-4">Endereço da API ShortsCreator que corta os vídeos e grava as legendas.</p>
+        {{-- Clip Generator --}}
+        <x-panel eyebrow="Workshop" title="Clip Generator" glyph="✂">
+            <p class="text-ink-soft -mt-2 mb-4">Address of the ShortsCreator API that cuts the videos and records the subtitles.</p>
             <div>
-                <label class="eyebrow block mb-1.5">URL da API</label>
+                <label class="eyebrow block mb-1.5">API URL</label>
                 <input type="url" wire:model="shorts.api_url" placeholder="http://localhost:5000"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
-                <p class="mt-1.5 font-mono text-xs text-ink-faint">Vazio → usa <span class="text-ink-soft">SHORTS_API_URL</span> do .env.</p>
+                <p class="mt-1.5 font-mono text-xs text-ink-faint">Empty → uses <span class="text-ink-soft">SHORTS_API_URL</span> from .env.</p>
             </div>
         </x-panel>
 
-        {{-- Barra de acção --}}
+        {{-- Action bar --}}
         <div class="flex items-center gap-4">
             <button type="submit"
                     class="bg-teal text-papyrus font-display text-xl px-7 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved">
-                Guardar definições
+                Save settings
             </button>
             @if ($guardado)
-                <span class="text-good font-mono text-sm">✓ Guardado às {{ $guardado }} no vault (definicoes/definicoes.md).</span>
+                <span class="text-good font-mono text-sm">✓ Saved at {{ $guardado }} to the vault (definicoes/definicoes.md).</span>
             @endif
         </div>
 
         <p class="font-mono text-xs text-ink-faint pt-2 border-t border-ink-soft/10">
-            🔒 Nota: as chaves de API (Apify, TubeLab, Gemini…) vivem no <span class="text-ink-soft">.env</span>, por segurança — não são geridas aqui.
+            🔒 Note: API keys (Apify, TubeLab, Gemini…) live in <span class="text-ink-soft">.env</span>, for security — they are not managed here.
         </p>
     </form>
 </div>

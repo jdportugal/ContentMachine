@@ -13,19 +13,19 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Gera o relatório de notícias FORA do ciclo do pedido web.
+ * Generates the news report OUTSIDE the web request cycle.
  *
- * Porquê uma fila: a redação usa o CLI do Claude (com pesquisa web) e pode
- * demorar minutos. Corria antes de forma síncrona no pedido web e estourava o
- * max_execution_time (300s). Agora corre num WORKER («php artisan queue:work»),
- * escreve o relatório no vault e deixa o caminho em cache; a página lê-o por
- * sondagem (wire:poll) — o mesmo padrão da oficina de publicações.
+ * Why a queue: the writing uses the Claude CLI (with web search) and can
+ * take minutes. It used to run synchronously in the web request and blew the
+ * max_execution_time (300s). Now it runs in a WORKER («php artisan queue:work»),
+ * writes the report to the vault and leaves the path in cache; the page reads it by
+ * polling (wire:poll) — the same pattern as the posts workshop.
  */
 class GerarRelatorioJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
-    // Folga acima do timeout do CLI Claude (até 600s com pesquisa web).
+    // Headroom above the Claude CLI timeout (up to 600s with web search).
     public int $timeout = 900;
 
     public function __construct(
@@ -37,14 +37,14 @@ class GerarRelatorioJob implements ShouldQueue
 
     public function handle(RelatorioBuilder $builder, VaultContract $vault, NewsAggregator $aggregator): void
     {
-        // Recolhe primeiro conteúdo novo dos canais (apanha os vídeos de hoje).
+        // Collect new channel content first (catches today's videos).
         if ($this->recolher) {
             $aggregator->aggregate();
         }
 
         $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
 
-        // 'semana' = janela dos últimos 7 dias até à data escolhida.
+        // 'semana' = window of the last 7 days up to the chosen date.
         [$inicio, $fim] = $this->modo === 'semana'
             ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];

@@ -96,7 +96,7 @@ class PublicacaoPlannerTest extends TestCase
             $this->planner('resposta inválida')->planear('post', 'um tema', 'instagram');
 
             $this->assertNotNull($this->ultimoPrompt);
-            $this->assertStringContainsString('SISTEMA DE DESIGN', (string) $this->ultimoPrompt);
+            $this->assertStringContainsString('DESIGN SYSTEM', (string) $this->ultimoPrompt);
             $this->assertStringContainsString('RUBRICA-XYZ', (string) $this->ultimoPrompt);
         } finally {
             @unlink($tmp);
@@ -110,6 +110,6 @@ class PublicacaoPlannerTest extends TestCase
         $this->planner('resposta inválida')->planear('post', 'um tema', 'instagram');
 
         $this->assertNotNull($this->ultimoPrompt);
-        $this->assertStringNotContainsString('SISTEMA DE DESIGN', (string) $this->ultimoPrompt);
+        $this->assertStringNotContainsString('DESIGN SYSTEM', (string) $this->ultimoPrompt);
     }
 }

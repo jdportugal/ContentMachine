@@ -6,18 +6,18 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\Process\Process;
 
 /**
- * Motor LOCAL e independente de edição de vídeo — a reimplementação, com
- * ffmpeg/ffprobe (e Whisper via script Python), das operações que o serviço
- * Flask "ShortsCreator" fazia por HTTP:
+ * LOCAL and independent video-editing engine — the reimplementation, with
+ * ffmpeg/ffprobe (and Whisper via a Python script), of the operations that the
+ * Flask "ShortsCreator" service did over HTTP:
  *
- *   transcribe()     ← /generate-subtitles  (Whisper, palavra a palavra)
- *   split()          ← /split-video         (corte [inicio,fim])
- *   burnSubtitles()  ← /add-subtitles        (grava legendas ASS/libass)
- *   addMusic()       ← /add-music            (mistura música de fundo)
+ *   transcribe()     ← /generate-subtitles  (Whisper, word by word)
+ *   split()          ← /split-video         (cut [inicio,fim])
+ *   burnSubtitles()  ← /add-subtitles        (burns ASS/libass subtitles)
+ *   addMusic()       ← /add-music            (mixes background music)
  *
- * Não há jobs assíncronos nem polling: cada método corre de forma síncrona e
- * bloqueante e devolve o caminho do ficheiro produzido. A mesma lógica de
- * corte→legendas→música do fluxo n8n, mas sem API externa.
+ * There are no async jobs or polling: each method runs synchronously and
+ * blocking and returns the path of the produced file. The same
+ * cut→subtitles→music logic as the n8n flow, but without an external API.
  */
 class LocalVideoEngine
 {
@@ -37,9 +37,9 @@ class LocalVideoEngine
     }
 
     /**
-     * Resolve uma referência de vídeo para um caminho local legível.
-     * Aceita caminho absoluto local (usado diretamente) ou URL http(s)
-     * (descarregado para $tempDir). Devolve o caminho local.
+     * Resolves a video reference to a readable local path.
+     * Accepts an absolute local path (used directly) or an http(s) URL
+     * (downloaded to $tempDir). Returns the local path.
      */
     public function resolveSource(string $ref, string $tempDir): string
     {
@@ -56,14 +56,14 @@ class LocalVideoEngine
         }
 
         if (! is_file($ref)) {
-            throw new ShortsException("Ficheiro de vídeo não encontrado: {$ref}");
+            throw new ShortsException("Video file not found: {$ref}");
         }
 
         return $ref;
     }
 
     /**
-     * ffprobe → metadados do vídeo.
+     * ffprobe → video metadata.
      *
      * @return array{duration:float,width:int,height:int,has_audio:bool}
      */
@@ -96,8 +96,8 @@ class LocalVideoEngine
     }
 
     /**
-     * Corta [startSec, endSec] do vídeo original, re-codificando (libx264 +
-     * aac 320k), como o split_video do original.
+     * Cuts [startSec, endSec] from the original video, re-encoding (libx264 +
+     * aac 320k), like the original's split_video.
      */
     public function split(string $source, float $startSec, float $endSec, string $dest): string
     {
@@ -106,7 +106,7 @@ class LocalVideoEngine
         $end = min($endSec, $meta['duration'] > 0 ? $meta['duration'] : $endSec);
 
         if ($start >= $end) {
-            throw new ShortsException('O início do clip tem de ser anterior ao fim.');
+            throw new ShortsException('The clip start must be before the end.');
         }
 
         @mkdir(dirname($dest), 0775, true);
@@ -126,8 +126,8 @@ class LocalVideoEngine
     }
 
     /**
-     * Grava as legendas (subtitle_data + estilo + modo de palavra) no clip já
-     * cortado, via libass. É este o passo re-executável do botão "Regenerar".
+     * Burns the subtitles (subtitle_data + style + word mode) into the already
+     * cut clip, via libass. This is the re-runnable step of the "Regenerate" button.
      *
      * @param  array<int,array<string,mixed>>  $subtitleData
      * @param  array<string,mixed>  $settings
@@ -163,8 +163,8 @@ class LocalVideoEngine
     }
 
     /**
-     * Mistura música de fundo no vídeo (volume, fades, loop), como o
-     * add_music_to_video do original.
+     * Mixes background music into the video (volume, fades, loop), like the
+     * original's add_music_to_video.
      *
      * @param  array{volume?:float,fade_in?:float,fade_out?:float,loop_music?:bool}  $settings
      */
@@ -179,19 +179,19 @@ class LocalVideoEngine
 
         @mkdir(dirname($dest), 0775, true);
 
-        // Repetição da música: número FINITO de repetições (como o original:
-        // ceil(duração_vídeo / duração_música)). Um -stream_loop -1 (infinito)
-        // deixaria o ffmpeg vivo para sempre após escrever a saída.
+        // Music repetition: a FINITE number of repeats (like the original:
+        // ceil(video_duration / music_duration)). A -stream_loop -1 (infinite)
+        // would keep ffmpeg alive forever after writing the output.
         $streamLoop = 0;
         if ($loop && $dur > 0) {
             $musicDur = $this->probe($musicPath)['duration'];
             if ($musicDur > 0 && $musicDur < $dur) {
-                $streamLoop = (int) ceil($dur / $musicDur) - 1; // -stream_loop N = N+1 leituras
+                $streamLoop = (int) ceil($dur / $musicDur) - 1; // -stream_loop N = N+1 reads
             }
         }
 
-        // Cadeia de filtros da música: volume → fades → atrim (limita à duração
-        // do vídeo, para que a saída termine exatamente no fim do vídeo).
+        // Music filter chain: volume → fades → atrim (limits to the video
+        // duration, so the output ends exactly at the end of the video).
         $music = "[1:a]volume={$this->num($vol)}";
         if ($fadeIn > 0) {
             $music .= ",afade=t=in:st=0:d={$this->num($fadeIn)}";
@@ -235,8 +235,8 @@ class LocalVideoEngine
     }
 
     /**
-     * Transcreve o vídeo completo com Whisper (via scripts/transcribe.py) e
-     * devolve o subtitle_data no mesmo formato do original:
+     * Transcribes the full video with Whisper (via scripts/transcribe.py) and
+     * returns the subtitle_data in the same format as the original:
      * [{start,end,text,words:[{word,start,end}]}].
      *
      * @return array<int,array<string,mixed>>
@@ -244,7 +244,7 @@ class LocalVideoEngine
     public function transcribe(string $videoPath, string $language = 'pt'): array
     {
         if ($this->transcribeScript === '' || ! is_file($this->transcribeScript)) {
-            throw new ShortsException('Script de transcrição não encontrado ('.$this->transcribeScript.').');
+            throw new ShortsException('Transcription script not found ('.$this->transcribeScript.').');
         }
 
         $out = $this->run([
@@ -257,16 +257,16 @@ class LocalVideoEngine
         $data = json_decode($out, true);
 
         if (! is_array($data)) {
-            throw new ShortsException('Transcrição inválida (o script não devolveu JSON).');
+            throw new ShortsException('Invalid transcript (the script did not return JSON).');
         }
 
-        // O script pode devolver {subtitle_data:[...]} ou o array direto.
+        // The script may return {subtitle_data:[...]} or the array directly.
         return $data['subtitle_data'] ?? $data;
     }
 
     // --- Infra --------------------------------------------------------
 
-    /** Executa um processo e devolve o stdout; lança ShortsException em falha. */
+    /** Runs a process and returns stdout; throws ShortsException on failure. */
     private function run(array $command, ?int $timeout = null): string
     {
         $process = new Process($command, timeout: $timeout ?? $this->timeout);
@@ -274,17 +274,17 @@ class LocalVideoEngine
 
         if (! $process->isSuccessful()) {
             $err = trim($process->getErrorOutput()) ?: trim($process->getOutput());
-            $bin = $command[0] ?? 'processo';
-            throw new ShortsException("Falha em {$bin}: ".mb_substr($err, -600));
+            $bin = $command[0] ?? 'process';
+            throw new ShortsException("Failure in {$bin}: ".mb_substr($err, -600));
         }
 
         return $process->getOutput();
     }
 
-    /** Escapa um caminho para valor de argumento de filtro ffmpeg (-vf/-filter_complex). */
+    /** Escapes a path for an ffmpeg filter argument value (-vf/-filter_complex). */
     private function filterArg(string $path): string
     {
-        // Dentro de aspas simples do libass: escapar \ : ' e envolver em ''.
+        // Inside libass single quotes: escape \ : ' and wrap in ''.
         $escaped = str_replace(['\\', ':', "'"], ['\\\\', '\\:', "\\'"], $path);
 
         return "'".$escaped."'";

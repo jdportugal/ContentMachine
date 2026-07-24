@@ -13,27 +13,27 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Gerador de Clips')]
+#[Title('Clip Generator')]
 class Clips extends Component
 {
     use WithFileUploads;
-    // Vídeo longo aberto (detalhe). Null → lista de vídeos.
+    // Long video open (detail). Null → list of videos.
     public ?string $fonteAberta = null;
 
-    // Mostrar o formulário de novo vídeo (revelado por botão).
+    // Show the new video form (revealed by button).
     public bool $mostrarNovaFonte = false;
 
-    // Formulário "nova fonte".
+    // "New source" form.
     public string $novaFonte = '';
 
     public string $novaFonteTitulo = '';
 
     public string $novaFonteLingua = 'pt';
 
-    // Vídeo longo carregado por arrastar-e-largar (até 2 GB — ver config/livewire.php).
+    // Long video uploaded via drag-and-drop (up to 2 GB — see config/livewire.php).
     public $novoVideo = null;
 
-    // Formulários "adicionar clip", por slug de fonte.
+    // "Add clip" forms, by source slug.
     /** @var array<string,string> */
     public array $clipTitulo = [];
 
@@ -46,7 +46,7 @@ class Clips extends Component
     /** @var array<string,string> */
     public array $clipTags = [];
 
-    // Editor de legendas do clip aberto.
+    // Caption editor for the open clip.
     public ?string $clipAberto = null;
 
     /** @var array<int,array<string,mixed>> */
@@ -57,21 +57,21 @@ class Clips extends Component
 
     public string $modoPalavra = 'karaoke';
 
-    // Detalhes editáveis do clip aberto (título, descrição, tags).
+    // Editable details of the open clip (title, description, tags).
     public string $clipTituloEdit = '';
 
     public string $clipDescricao = '';
 
     public string $clipTagsEdit = '';
 
-    // Escolha de música do clip aberto: '' (aleatória) | 'nenhuma' | nome de faixa.
+    // Music choice for the open clip: '' (random) | 'nenhuma' | track name.
     public string $musica = '';
 
     public float $musicaVolume = 0.1;
 
-    // --- Fontes (vídeos longos) ---------------------------------------
+    // --- Sources (long videos) ---------------------------------------
 
-    /** Envia uma notificação (toast) para o cliente. */
+    /** Sends a notification (toast) to the client. */
     private function notificar(string $texto, string $tipo = 'ok'): void
     {
         $this->dispatch('toast', message: $texto, type: $tipo);
@@ -84,17 +84,17 @@ class Clips extends Component
 
     public function adicionarFonte(ShortsPipeline $pipeline): void
     {
-        // Aceita um ficheiro carregado OU um caminho/URL — pelo menos um.
+        // Accepts an uploaded file OR a path/URL — at least one.
         $this->validate([
             'novoVideo' => 'nullable|file|mimetypes:video/mp4,video/quicktime|max:2097152',
             'novaFonte' => 'nullable|string',
         ], [
-            'novoVideo.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
-            'novoVideo.max' => 'O vídeo é demasiado grande (máximo 2 GB).',
+            'novoVideo.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
+            'novoVideo.max' => 'The video is too large (maximum 2 GB).',
         ]);
 
         if ($this->novoVideo) {
-            // Caminho absoluto: LocalVideoEngine::resolveSource faz is_file($ref).
+            // Absolute path: LocalVideoEngine::resolveSource does is_file($ref).
             $ref = Storage::disk('local')->path($this->novoVideo->store('clips/uploads'));
             $titulo = trim($this->novaFonteTitulo) !== ''
                 ? trim($this->novaFonteTitulo)
@@ -103,7 +103,7 @@ class Clips extends Component
             $ref = trim($this->novaFonte);
             $titulo = trim($this->novaFonteTitulo);
         } else {
-            $this->addError('novaFonte', 'Arraste um vídeo ou indique um caminho/URL.');
+            $this->addError('novaFonte', 'Drag a video or provide a path/URL.');
 
             return;
         }
@@ -112,15 +112,15 @@ class Clips extends Component
 
         $this->reset('novaFonte', 'novaFonteTitulo', 'novoVideo');
         $this->mostrarNovaFonte = false;
-        $this->notificar('Vídeo adicionado.');
+        $this->notificar('Video added.');
 
-        // Abre logo o vídeo para prosseguir (transcrever → escolher clips).
+        // Opens the video right away to continue (transcribe → choose clips).
         $this->abrirFonte($fonte->path);
     }
 
     /**
-     * Abre uma publicação sugerida pela IA no gerador de posts: semeia o brief
-     * da oficina com o título+ângulo e envia para o seletor de formato.
+     * Opens an AI-suggested post in the post generator: seeds the workshop brief
+     * with the title+angle and sends it to the format selector.
      */
     public function abrirPublicacao(string $fontePath, int $i, VaultContract $vault)
     {
@@ -129,7 +129,7 @@ class Clips extends Component
         $sugestao = is_array($sugestoes) ? ($sugestoes[$i] ?? null) : null;
 
         if (! $sugestao) {
-            $this->notificar('Sugestão não encontrada.', 'erro');
+            $this->notificar('Suggestion not found.', 'erro');
 
             return null;
         }
@@ -140,14 +140,14 @@ class Clips extends Component
         return redirect()->route('publicacoes');
     }
 
-    /** Abre um vídeo longo (vista de detalhe). */
+    /** Opens a long video (detail view). */
     public function abrirFonte(string $path): void
     {
         $this->fonteAberta = $path;
         $this->fechar();
     }
 
-    /** Volta à lista de vídeos longos. */
+    /** Returns to the list of long videos. */
     public function voltarFontes(): void
     {
         $this->fonteAberta = null;
@@ -156,7 +156,7 @@ class Clips extends Component
 
     public function transcrever(string $path, ShortsPipeline $pipeline): void
     {
-        $this->executar(fn () => $pipeline->transcreverFonte($path), 'Transcrição concluída.');
+        $this->executar(fn () => $pipeline->transcreverFonte($path), 'Transcription complete.');
     }
 
     public function removerFonte(string $path, VaultContract $vault): void
@@ -176,7 +176,7 @@ class Clips extends Component
         $fim = trim($this->clipFim[$slug] ?? '');
 
         if ($inicio === '' || $fim === '') {
-            $this->notificar('Indique o início e o fim do clip.', 'erro');
+            $this->notificar('Enter the start and end of the clip.', 'erro');
 
             return;
         }
@@ -187,7 +187,7 @@ class Clips extends Component
         $pipeline->criarClip($fontePath, trim($this->clipTitulo[$slug] ?? ''), $inicio, $fim, $tags);
 
         unset($this->clipTitulo[$slug], $this->clipInicio[$slug], $this->clipFim[$slug], $this->clipTags[$slug]);
-        $this->notificar('Clip criado.');
+        $this->notificar('Clip created.');
     }
 
     public function sugerirIA(string $fontePath, ShortsPipeline $pipeline, VaultContract $vault): void
@@ -208,12 +208,12 @@ class Clips extends Component
                 );
             }
 
-            // Guarda as ideias de publicação na fonte (persistem e re-exibem).
+            // Saves the post ideas on the source (they persist and re-display).
             $vault->updateFrontmatter($fontePath, [
                 'publicacoes_sugeridas' => json_encode($publicacoes, JSON_UNESCAPED_UNICODE),
             ]);
 
-            $this->notificar(count($segmentos).' clips e '.count($publicacoes).' publicações sugeridas pela IA.');
+            $this->notificar(count($segmentos).' clips and '.count($publicacoes).' posts suggested by AI.');
         } catch (\Throwable $e) {
             $this->notificar($e->getMessage(), 'erro');
         }
@@ -228,7 +228,7 @@ class Clips extends Component
                 $this->clipDescricao = (string) $clip->get('descricao', '');
             }
 
-            $this->notificar('Descrição gerada pela IA.');
+            $this->notificar('Description generated by AI.');
         } catch (\Throwable $e) {
             $this->notificar($e->getMessage(), 'erro');
         }
@@ -236,7 +236,7 @@ class Clips extends Component
 
     public function cortar(string $path, ShortsPipeline $pipeline): void
     {
-        $this->executar(fn () => $pipeline->cortarClip($path), 'Clip cortado.');
+        $this->executar(fn () => $pipeline->cortarClip($path), 'Clip cut.');
     }
 
     public function regenerar(string $path, ShortsPipeline $pipeline): void
@@ -245,7 +245,7 @@ class Clips extends Component
             $this->persistirClipAberto($pipeline);
         }
 
-        $this->executar(fn () => $pipeline->gravarLegendas($path), 'Short gravado com as legendas.');
+        $this->executar(fn () => $pipeline->gravarLegendas($path), 'Short rendered with the captions.');
     }
 
     public function removerClip(string $path, VaultContract $vault): void
@@ -257,7 +257,7 @@ class Clips extends Component
         }
     }
 
-    // --- Editor de legendas ------------------------------------------
+    // --- Caption editor ------------------------------------------
 
     public function abrir(string $path, VaultContract $vault, ShortsPipeline $pipeline): void
     {
@@ -304,12 +304,12 @@ class Clips extends Component
         }
 
         $this->persistirClipAberto($pipeline);
-        $this->notificar('Alterações guardadas.');
+        $this->notificar('Changes saved.');
     }
 
-    // --- Auxiliares ---------------------------------------------------
+    // --- Helpers ---------------------------------------------------
 
-    /** Persiste tudo o que o editor do clip aberto pode alterar. */
+    /** Persists everything the open clip's editor can change. */
     private function persistirClipAberto(ShortsPipeline $pipeline): void
     {
         if ($this->clipAberto === null) {
@@ -357,7 +357,7 @@ class Clips extends Component
 
         $fonteAtual = $this->fonteAberta ? $vault->get($this->fonteAberta) : null;
         if ($this->fonteAberta && ! $fonteAtual) {
-            $this->fonteAberta = null; // a fonte foi removida entretanto
+            $this->fonteAberta = null; // the source was removed in the meantime
         }
 
         return view('livewire.clips', [

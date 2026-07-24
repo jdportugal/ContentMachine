@@ -11,15 +11,15 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Rascunhos e Agendamento')]
+#[Title('Drafts and Scheduling')]
 class Rascunhos extends Component
 {
     public string $filtro = 'todos';
 
-    /** @var array<string,string> data de agendamento por id de item (sem pontos p/ o wire:model) */
+    /** @var array<string,string> scheduling date per item id (no dots for wire:model) */
     public array $datas = [];
 
-    /** Id estável de um item (seguro para wire:model — sem pontos nem dois-pontos). */
+    /** Stable id for an item (safe for wire:model — no dots or colons). */
     private function idDe(string $source, string $ref): string
     {
         return $source.'_'.md5($ref);
@@ -31,7 +31,7 @@ class Rascunhos extends Component
         $data = $this->datas[$id] ?? null;
 
         if (blank($data)) {
-            $this->addError('datas.'.$id, 'Escolha uma data.');
+            $this->addError('datas.'.$id, 'Choose a date.');
 
             return;
         }
@@ -73,7 +73,7 @@ class Rascunhos extends Component
         $vault->delete($ref);
     }
 
-    /** Normaliza uma nota do vault (post ou clip) para a forma comum. */
+    /** Normalizes a vault note (post or clip) into the common shape. */
     private function deNota(VaultNote $n, string $source, string $kind): array
     {
         $agendadoPara = $n->get('estado') === 'agendado' ? (string) $n->get('agendado_para') : null;
@@ -100,7 +100,7 @@ class Rascunhos extends Component
     {
         $prontos = ['pronto', 'agendado'];
 
-        // 1. Publicações marcadas como prontas.
+        // 1. Posts marked as ready.
         $posts = $vault->all('rascunhos')
             ->filter(fn (VaultNote $n) => in_array($n->get('estado'), $prontos, true))
             ->map(function (VaultNote $n) {
@@ -110,12 +110,12 @@ class Rascunhos extends Component
                 return $this->deNota($n, 'post', $kind);
             });
 
-        // 2. Shorts (clips) já renderizados.
+        // 2. Shorts (clips) already rendered.
         $clips = $vault->all('clips')
             ->filter(fn (VaultNote $n) => $n->get('tipo') === 'clip' && in_array($n->get('estado'), $prontos, true))
             ->map(fn (VaultNote $n) => $this->deNota($n, 'clip', 'Short'));
 
-        // 3. Clips animados concluídos (BD).
+        // 3. Completed animated clips (DB).
         $animados = ClipProject::where('status', ClipProject::STATUS_DONE)
             ->orderByDesc('updated_at')
             ->get()
@@ -123,8 +123,8 @@ class Rascunhos extends Component
                 'id' => $this->idDe('animado', (string) $p->id),
                 'source' => 'animado',
                 'ref' => (string) $p->id,
-                'kind' => $p->type === ClipProject::TYPE_OVERLAY ? 'Vídeo animado' : 'Animação',
-                'title' => (string) ($p->title ?: 'Clip animado'),
+                'kind' => $p->type === ClipProject::TYPE_OVERLAY ? 'Animated video' : 'Animation',
+                'title' => (string) ($p->title ?: 'Animated clip'),
                 'cover' => null,
                 'excerpt' => '',
                 'scheduled' => $p->scheduled_for?->toDateString(),

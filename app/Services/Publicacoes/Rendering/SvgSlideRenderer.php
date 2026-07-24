@@ -6,21 +6,21 @@ use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\Dto\SlidePlano;
 
 /**
- * Renderizador SVG determinístico e sem dependências — o análogo offline do
- * gerador de imagens do AdsMaker. Desenha cada cartão num gabarito da linha
- * gráfica «nocturna» da IATECA (pergaminho, tinta, ouro, verde-azulado).
+ * Deterministic, dependency-free SVG renderer — the offline analogue of the
+ * AdsMaker image generator. Draws each card in a template of IATECA's
+ * «nocturnal» graphic line (parchment, ink, gold, teal).
  *
- * Puro: não toca no sistema de ficheiros; devolve markup SVG por cartão.
+ * Pure: does not touch the filesystem; returns SVG markup per card.
  */
 class SvgSlideRenderer implements SlideRenderer
 {
-    private const BG = '#efe6d2';       // pergaminho
-    private const BG2 = '#e7dcc4';      // pergaminho escuro (fundo capa)
-    private const INK = '#2b2822';      // tinta
-    private const SOFT = '#6b6152';     // tinta suave
-    private const FAINT = '#a99f8c';    // tinta ténue
-    private const GOLD = '#c89b3c';     // ouro
-    private const TEAL = '#1f7a7a';     // verde-azulado
+    private const BG = '#efe6d2';       // parchment
+    private const BG2 = '#e7dcc4';      // dark parchment (cover background)
+    private const INK = '#2b2822';      // ink
+    private const SOFT = '#6b6152';     // soft ink
+    private const FAINT = '#a99f8c';    // faint ink
+    private const GOLD = '#c89b3c';     // gold
+    private const TEAL = '#1f7a7a';     // teal
 
     private const DISPLAY = "Georgia, 'Times New Roman', serif";
     private const MONO = "'Courier New', monospace";
@@ -43,8 +43,8 @@ class SvgSlideRenderer implements SlideRenderer
 
     public function renderCartao(SlidePlano $slide, array $kind, ?string $refImagem = null, string $instrucao = '', int $ordem = 1, int $total = 1): string
     {
-        // O SVG é determinístico a partir do texto — a instrução de edição não
-        // se aplica (é uma funcionalidade do driver kie). Redesenha o cartão.
+        // The SVG is deterministic from the text — the edit instruction does not
+        // apply (it is a kie driver feature). Redraws the card.
         [$w, $h] = $this->dimensoes((string) ($kind['proporcao'] ?? '1:1'));
 
         return $this->cartao(
@@ -56,7 +56,7 @@ class SvgSlideRenderer implements SlideRenderer
         );
     }
 
-    // ----------------------------------------------------------------- cartão
+    // ----------------------------------------------------------------- card
 
     private function cartao(SlidePlano $s, string $gabarito, string $formato, int $w, int $h, int $idx, int $total, string $accent): string
     {
@@ -84,7 +84,7 @@ class SvgSlideRenderer implements SlideRenderer
         SVG;
     }
 
-    /** Moldura gravada interior + cantos. */
+    /** Engraved inner frame + corners. */
     private function moldura(int $w, int $h, string $accent): string
     {
         $m = 56;
@@ -98,7 +98,7 @@ class SvgSlideRenderer implements SlideRenderer
         SVG;
     }
 
-    /** Rodapé: cota da biblioteca + índice do cartão (nos carrosséis). */
+    /** Footer: library shelfmark + card index (in carousels). */
     private function rodape(int $w, int $h, int $idx, int $total, string $formato, string $accent): string
     {
         $y = $h - 84;
@@ -114,7 +114,7 @@ class SvgSlideRenderer implements SlideRenderer
         return $svg;
     }
 
-    // ---------------------------------------------------------------- gabaritos
+    // ---------------------------------------------------------------- templates
 
     private function gabaritoQuadrado(SlidePlano $s, int $w, int $h, string $accent): string
     {
@@ -191,7 +191,7 @@ class SvgSlideRenderer implements SlideRenderer
         return $numero.$regua.$titulo.$corpo;
     }
 
-    // ------------------------------------------------------------- primitivas
+    // ------------------------------------------------------------- primitives
 
     private function eyebrow(string $texto, float $x, float $y, string $accent): string
     {
@@ -210,8 +210,8 @@ class SvgSlideRenderer implements SlideRenderer
     }
 
     /**
-     * Título com quebra em várias linhas (tspan). $anchor 'middle' (por
-     * omissão) centra em $x; 'start' alinha à esquerda a partir de $x.
+     * Title with wrapping over several lines (tspan). $anchor 'middle' (default)
+     * centers on $x; 'start' left-aligns from $x.
      */
     private function titulo(string $texto, float $x, float $y, int $w, int $tamanho, int $maxChars, bool $italico = false, string $anchor = 'middle'): string
     {
@@ -242,7 +242,7 @@ class SvgSlideRenderer implements SlideRenderer
         return '<text x="'.$this->n($x).'" y="'.$this->n($y).'" text-anchor="'.$anchor.'" font-family="'.$this->esc(self::DISPLAY).'" font-size="'.$tamanho.'" fill="'.self::SOFT.'">'.$tspans.'</text>';
     }
 
-    /** Quebra o texto em linhas de no máximo ~$maxChars caracteres (por palavras). */
+    /** Breaks the text into lines of at most ~$maxChars characters (by words). */
     private function quebrar(string $texto, int $maxChars): array
     {
         $texto = trim(preg_replace('/\s+/u', ' ', $texto) ?? '');
@@ -286,7 +286,7 @@ class SvgSlideRenderer implements SlideRenderer
         return htmlspecialchars($texto, ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 
-    /** Formata número para atributo SVG (sem casas decimais supérfluas). */
+    /** Formats a number for an SVG attribute (without superfluous decimals). */
     private function n(float $v): string
     {
         return rtrim(rtrim(number_format($v, 2, '.', ''), '0'), '.');

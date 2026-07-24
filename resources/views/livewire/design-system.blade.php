@@ -1,16 +1,16 @@
 <div>
     <x-page-header
         eyebrow="Tomus · IX"
-        title="Sistema de Design"
+        title="Design System"
         cota="006.1 · IAT · '26"
-        lead="A identidade de marca aplicada ao conteúdo gerado — clips animados e publicações. Guardada no vault e injetada nos prompts dos geradores. Não altera o design da própria aplicação." />
+        lead="The brand identity applied to generated content — animated clips and posts. Stored in the vault and injected into the generators' prompts. It does not change the design of the application itself." />
 
     <form wire:submit="guardar" class="space-y-6">
-        {{-- Carregar um .md --}}
-        <x-panel eyebrow="Semear" title="Carregar design.md" glyph="⬆">
+        {{-- Load a .md --}}
+        <x-panel eyebrow="Seed" title="Load design.md" glyph="⬆">
             <p class="text-ink-soft -mt-2 mb-4">
-                Carregue um ficheiro Markdown para preencher o editor. Nada é guardado até premir
-                <span class="text-teal">Guardar</span> — assim pode rever antes.
+                Load a Markdown file to fill the editor. Nothing is saved until you press
+                <span class="text-teal">Save</span> — so you can review first.
             </p>
             <div class="flex flex-wrap items-center gap-3">
                 <input type="file" wire:model="ficheiro" accept=".md,.markdown,text/markdown"
@@ -22,21 +22,21 @@
                         class="rounded-sm border border-ink-soft/25 bg-surface/40 px-4 py-2 text-ink font-body
                                hover:border-teal transition disabled:opacity-40"
                         @disabled(! $ficheiro)>
-                    Carregar para o editor
+                    Load into editor
                 </button>
-                <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">a receber…</span>
+                <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">receiving…</span>
             </div>
             @error('ficheiro') <p class="mt-2 text-sm" style="color:#FF8FA6">{{ $message }}</p> @enderror
         </x-panel>
 
         {{-- Editor --}}
-        <x-panel eyebrow="Cérebro" title="design-system.md" glyph="✎">
+        <x-panel eyebrow="Brain" title="design-system.md" glyph="✎">
             <div class="flex items-center justify-between gap-3 -mt-2 mb-3">
                 <p class="text-ink-soft">
-                    Markdown livre — voz, paleta, tipografia, regras de composição. Quanto mais claro, melhor o gerador o segue.
+                    Free-form Markdown — voice, palette, typography, composition rules. The clearer it is, the better the generator follows it.
                 </p>
                 @if ($atualizado)
-                    <span class="shrink-0 font-mono text-[0.68rem] text-ink-faint">guardado · {{ $atualizado }}</span>
+                    <span class="shrink-0 font-mono text-[0.68rem] text-ink-faint">saved · {{ $atualizado }}</span>
                 @endif
             </div>
             <textarea wire:model="conteudo" rows="24" spellcheck="false"
@@ -46,16 +46,16 @@
             <div class="mt-2 font-mono text-[0.62rem] text-ink-faint break-all">{{ $caminho }}</div>
         </x-panel>
 
-        {{-- Tema extraído (o que as animações vão usar) --}}
+        {{-- Extracted theme (what the animations will use) --}}
         @if ($tokens)
-            <x-panel eyebrow="Aplicado às animações" title="Tema extraído" glyph="❖">
+            <x-panel eyebrow="Applied to animations" title="Extracted theme" glyph="❖">
                 <p class="text-ink-soft -mt-2 mb-4">
-                    Cores, fontes e textura destilados do design acima. É isto que os
-                    <span class="text-teal">Clips Animados</span> passam a usar para combinar com a marca.
+                    Colors, fonts and texture distilled from the design above. This is what the
+                    <span class="text-teal">Animated Clips</span> now use to match the brand.
                 </p>
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
-                        <div class="eyebrow mb-2">Paleta</div>
+                        <div class="eyebrow mb-2">Palette</div>
                         <div class="flex flex-wrap gap-2">
                             @foreach (($tokens['colors'] ?? []) as $nome => $cor)
                                 <div class="flex flex-col items-center gap-1">
@@ -66,12 +66,12 @@
                         </div>
                     </div>
                     <div>
-                        <div class="eyebrow mb-2">Tipografia &amp; textura</div>
+                        <div class="eyebrow mb-2">Typography &amp; texture</div>
                         <dl class="font-mono text-sm space-y-1 text-ink-soft">
                             <div><span class="text-ink-faint">display:</span> {{ $tokens['fonts']['display'] ?? '—' }}</div>
                             <div><span class="text-ink-faint">body:</span> {{ $tokens['fonts']['body'] ?? '—' }}</div>
                             <div><span class="text-ink-faint">mono:</span> {{ $tokens['fonts']['mono'] ?? '—' }}</div>
-                            <div><span class="text-ink-faint">textura:</span> {{ $tokens['texture']['kind'] ?? 'paper' }}</div>
+                            <div><span class="text-ink-faint">texture:</span> {{ $tokens['texture']['kind'] ?? 'paper' }}</div>
                         </dl>
                     </div>
                 </div>
@@ -82,11 +82,11 @@
             <button type="submit" wire:loading.attr="disabled" wire:target="guardar"
                     class="rounded-sm border border-teal/50 bg-teal/10 px-5 py-2.5 text-ink font-display text-lg
                            hover:bg-teal/20 hover:border-teal transition disabled:opacity-50">
-                <span wire:loading.remove wire:target="guardar">Guardar</span>
-                <span wire:loading wire:target="guardar">A guardar e extrair tema…</span>
+                <span wire:loading.remove wire:target="guardar">Save</span>
+                <span wire:loading wire:target="guardar">Saving and extracting theme…</span>
             </button>
             @if ($guardado)
-                <span class="font-mono text-sm text-teal" wire:loading.remove wire:target="guardar">✓ guardado às {{ $guardado }}</span>
+                <span class="font-mono text-sm text-teal" wire:loading.remove wire:target="guardar">✓ saved at {{ $guardado }}</span>
             @endif
         </div>
     </form>

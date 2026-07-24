@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 use Throwable;
 
 /**
- * Recolhe o desempenho REAL das redes não-YouTube (Instagram, TikTok, LinkedIn)
- * via actores Apify, a partir do URL do perfil em Definições. Normaliza para o
- * formato do domínio, pontua e guarda no MonitoringStore (mesmo formato que o
- * driver de yt-dlp). Sem token/actor, ou em falha, devolve vazio (nunca falso).
+ * Collects the REAL performance of non-YouTube networks (Instagram, TikTok, LinkedIn)
+ * via Apify actors, from the profile URL in Settings. Normalizes to the
+ * domain format, scores and stores it in the MonitoringStore (same format as the
+ * yt-dlp driver). Without token/actor, or on failure, returns empty (never false).
  */
 class ApifyMonitoringFetcher
 {
@@ -32,7 +32,7 @@ class ApifyMonitoringFetcher
         return $itens;
     }
 
-    /** Se há actor + token configurados para esta rede. */
+    /** Whether an actor + token are configured for this network. */
     public function disponivel(string $plataforma): bool
     {
         return filled(config("contentmachine.monitoring.apify.{$plataforma}"))
@@ -70,7 +70,7 @@ class ApifyMonitoringFetcher
 
         $canal = ['subscribers' => $seguidores, 'posts' => count($itens), 'nome' => ''];
 
-        // Guarda uma cópia local das miniaturas (os CDN bloqueiam o hotlink).
+        // Keep a local copy of the thumbnails (the CDNs block hotlinking).
         $thumbs = app(ThumbnailCache::class);
         foreach ($itens as &$it) {
             $it['thumbnail'] = $thumbs->localizar($plataforma, (string) $it['id'], (string) ($it['thumbnail'] ?? ''));
@@ -80,7 +80,7 @@ class ApifyMonitoringFetcher
         return [$this->pontuar($plataforma, $itens), $canal];
     }
 
-    /** @return array<string,mixed> input do actor por plataforma */
+    /** @return array<string,mixed> actor input per platform */
     private function input(string $plataforma, string $url, int $limite): array
     {
         return match ($plataforma) {
@@ -104,7 +104,7 @@ class ApifyMonitoringFetcher
         };
     }
 
-    /** @return array<string,mixed>|null item normalizado */
+    /** @return array<string,mixed>|null normalized item */
     private function mapear(string $plataforma, array $r): ?array
     {
         return match ($plataforma) {

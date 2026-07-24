@@ -5,19 +5,19 @@ namespace App\Services\Shorts;
 use Illuminate\Support\Str;
 
 /**
- * Biblioteca de músicas de fundo para os shorts (pasta local
- * storage/app/shorts/musicas). Permite carregar faixas e escolher uma ao
- * acaso — o equivalente ao nó "List Music Files" + "Select Music" do fluxo
- * n8n (que listava uma pasta do Drive e sorteava uma faixa).
+ * Background music library for the shorts (local folder
+ * storage/app/shorts/musicas). Allows loading tracks and picking one at
+ * random — the equivalent of the "List Music Files" + "Select Music" nodes from the
+ * n8n flow (which listed a Drive folder and drew a random track).
  */
 class MusicLibrary
 {
-    /** Extensões de áudio aceites. */
+    /** Accepted audio extensions. */
     public const EXTENSOES = ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'flac'];
 
     public function __construct(private readonly string $dir) {}
 
-    /** Caminho da pasta da biblioteca (criada se não existir). */
+    /** Path of the library folder (created if it does not exist). */
     public function dir(): string
     {
         if (! is_dir($this->dir)) {
@@ -28,7 +28,7 @@ class MusicLibrary
     }
 
     /**
-     * Todas as faixas na biblioteca, por nome.
+     * All the tracks in the library, by name.
      *
      * @return array<int,array{name:string,path:string,size:int}>
      */
@@ -52,8 +52,8 @@ class MusicLibrary
     }
 
     /**
-     * Copia um ficheiro para a biblioteca com um nome seguro e único.
-     * Devolve o nome final (basename) gravado.
+     * Copies a file into the library with a safe and unique name.
+     * Returns the final name (basename) written.
      */
     public function add(string $sourcePath, string $originalName): string
     {
@@ -63,7 +63,7 @@ class MusicLibrary
         return $nome;
     }
 
-    /** Caminho absoluto de uma faixa pelo nome, ou null se não existir. */
+    /** Absolute path of a track by name, or null if it does not exist. */
     public function pathFor(string $name): ?string
     {
         $p = $this->dir().'/'.basename($name);
@@ -71,7 +71,7 @@ class MusicLibrary
         return is_file($p) ? $p : null;
     }
 
-    /** Caminho de uma faixa escolhida ao acaso, ou null se a biblioteca estiver vazia. */
+    /** Path of a randomly chosen track, or null if the library is empty. */
     public function randomPath(): ?string
     {
         $all = $this->all();
@@ -83,7 +83,7 @@ class MusicLibrary
         return $all[random_int(0, count($all) - 1)]['path'];
     }
 
-    /** Remove uma faixa pelo nome. */
+    /** Removes a track by name. */
     public function remove(string $name): bool
     {
         $p = $this->pathFor($name);
@@ -91,7 +91,7 @@ class MusicLibrary
         return $p !== null && @unlink($p);
     }
 
-    /** Gera um nome de ficheiro seguro e único dentro da pasta. */
+    /** Generates a safe and unique filename within the folder. */
     private function nomeSeguro(string $original): string
     {
         $ext = strtolower(pathinfo($original, PATHINFO_EXTENSION));

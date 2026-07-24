@@ -3,9 +3,9 @@
 namespace App\Services\Monitoring;
 
 /**
- * Agrega as estatísticas de canal recolhidas (via yt-dlp) em totais para o
- * Painel: subscritores, publicações e desempenho recente somados pelas redes
- * monitorizadas. Só conta redes já recolhidas — sem números inventados.
+ * Aggregates the collected channel statistics (via yt-dlp) into totals for the
+ * Dashboard: subscribers, posts and recent performance summed across the
+ * monitored networks. Only counts networks already collected — no made-up numbers.
  */
 class MonitoringStats
 {
@@ -50,16 +50,16 @@ class MonitoringStats
         ];
     }
 
-    /** Formata números grandes à portuguesa: 1 480 · 41,2 mil · 2,1 M. */
+    /** Formats large numbers English-style: 1,480 · 41.2k · 2.1M. */
     public static function numero(int $n): string
     {
         if ($n >= 1_000_000) {
-            return rtrim(rtrim(number_format($n / 1_000_000, 1, ',', ' '), '0'), ',').' M';
+            return rtrim(rtrim(number_format($n / 1_000_000, 1, '.', ','), '0'), '.').'M';
         }
         if ($n >= 1_000) {
-            return rtrim(rtrim(number_format($n / 1_000, 1, ',', ' '), '0'), ',').' mil';
+            return rtrim(rtrim(number_format($n / 1_000, 1, '.', ','), '0'), '.').'k';
         }
 
-        return number_format($n, 0, ',', ' ');
+        return number_format($n, 0, '.', ',');
     }
 }

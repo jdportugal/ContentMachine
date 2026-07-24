@@ -106,7 +106,7 @@ class OficinaTest extends TestCase
         \Illuminate\Support\Facades\Cache::put(\App\Jobs\GerarImagensJob::notaKey($nota->slug()), true, now()->addMinutes(5));
 
         Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
-            ->assertSee('a gerar');
+            ->assertSee('generating');
     }
 
     public function test_gerar_imagens_para_nota_guardada_persiste_e_limpa_flag(): void
@@ -137,7 +137,7 @@ class OficinaTest extends TestCase
 
         Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
             ->assertSee('Minha peça')
-            ->assertSee('Publicações criadas');
+            ->assertSee('Created posts');
     }
 
     public function test_gerar_imagens_despacha_job(): void

@@ -3,27 +3,27 @@
 namespace App\Services\Shorts;
 
 /**
- * Porta para PHP da lógica do nó "Prepare Clip Subtitles" do fluxo n8n
- * "Long to shorts": recorta a transcrição completa do vídeo para a janela
- * de um clip e desloca todos os tempos (segmento + palavra) para começarem
- * em zero.
+ * PHP port of the logic of the "Prepare Clip Subtitles" node from the n8n
+ * "Long to shorts" flow: trims the full video transcript to a clip's
+ * window and shifts all the times (segment + word) to start
+ * at zero.
  *
- * Sem dependências externas — é o núcleo testável do pipeline.
+ * No external dependencies — it is the testable core of the pipeline.
  */
 class SubtitleShifter
 {
     /**
-     * Converte um instante em segundos (float).
+     * Converts an instant to seconds (float).
      *
-     * Aceita, tal como o Flask `parse_time_to_seconds`:
-     *   - número (int|float) → segundos;
-     *   - string numérica "12.5" → segundos;
+     * Accepts, like the Flask `parse_time_to_seconds`:
+     *   - number (int|float) → seconds;
+     *   - numeric string "12.5" → seconds;
      *   - "HH:MM:SS" → h*3600 + m*60 + s;
-     *   - "HH:MM:SS[,.:]mmm" com 1–3 dígitos de milissegundos.
+     *   - "HH:MM:SS[,.:]mmm" with 1–3 millisecond digits.
      *
-     * NOTA de paridade: os milissegundos são preenchidos à DIREITA até 3
-     * dígitos (":5" → ".500", não ".005"), replicando o `ljust(3, '0')` do
-     * servidor. Use sempre 3 dígitos para evitar surpresas.
+     * Parity NOTE: the milliseconds are padded to the RIGHT up to 3
+     * digits (":5" → ".500", not ".005"), replicating the server's `ljust(3, '0')`.
+     * Always use 3 digits to avoid surprises.
      */
     public static function parseTimeToSeconds(int|float|string|null $input): float
     {
@@ -41,14 +41,14 @@ class SubtitleShifter
             return (float) $s;
         }
 
-        // HH:MM:SS com milissegundos (separador , . ou :) e 1–3 dígitos.
+        // HH:MM:SS with milliseconds (separator , . or :) and 1–3 digits.
         if (preg_match('/^(\d{1,2}):(\d{1,2}):(\d{1,2})[,.:]\s*(\d{1,3})$/', $s, $m)) {
             $ms = str_pad($m[4], 3, '0', STR_PAD_RIGHT);
 
             return (int) $m[1] * 3600 + (int) $m[2] * 60 + (int) $m[3] + (int) $ms / 1000.0;
         }
 
-        // HH:MM:SS sem milissegundos.
+        // HH:MM:SS without milliseconds.
         if (preg_match('/^(\d{1,2}):(\d{1,2}):(\d{1,2})$/', $s, $m)) {
             return (int) $m[1] * 3600 + (int) $m[2] * 60 + (int) $m[3];
         }
@@ -57,7 +57,7 @@ class SubtitleShifter
     }
 
     /**
-     * Formata segundos como "HH:MM:SS.mmm" (útil para chamar /split-video).
+     * Formats seconds as "HH:MM:SS.mmm" (useful for calling /split-video).
      */
     public static function secondsToTimestamp(float $seconds): string
     {
@@ -78,16 +78,16 @@ class SubtitleShifter
     }
 
     /**
-     * Recorta e desloca a transcrição para a janela [cutStart, cutEnd].
+     * Trims and shifts the transcript to the window [cutStart, cutEnd].
      *
-     * Mantém os segmentos que se sobrepõem à janela (end > cutStart &&
-     * start < cutEnd), subtrai cutStart a todos os tempos (segmento e cada
-     * palavra) e limita o mínimo a 0.
+     * Keeps the segments that overlap the window (end > cutStart &&
+     * start < cutEnd), subtracts cutStart from all the times (segment and each
+     * word) and clamps the minimum to 0.
      *
-     * @param  array<int,array<string,mixed>>  $subtitleData  Segmentos {start,end,text,words:[{word,start,end}]} em segundos.
-     * @param  int|float|string  $cutStart  Início do corte (formato aceite por parseTimeToSeconds).
-     * @param  int|float|string  $cutEnd  Fim do corte.
-     * @return array<int,array<string,mixed>> Segmentos deslocados para começar em 0.
+     * @param  array<int,array<string,mixed>>  $subtitleData  Segments {start,end,text,words:[{word,start,end}]} in seconds.
+     * @param  int|float|string  $cutStart  Cut start (format accepted by parseTimeToSeconds).
+     * @param  int|float|string  $cutEnd  Cut end.
+     * @return array<int,array<string,mixed>> Segments shifted to start at 0.
      */
     public static function shift(array $subtitleData, int|float|string $cutStart, int|float|string $cutEnd): array
     {
@@ -100,7 +100,7 @@ class SubtitleShifter
             $segStart = self::parseTimeToSeconds($seg['start'] ?? 0);
             $segEnd = self::parseTimeToSeconds($seg['end'] ?? 0);
 
-            // Só mantém segmentos que se sobrepõem à janela do clip.
+            // Only keep segments that overlap the clip window.
             if (! ($segEnd > $start && $segStart < $end)) {
                 continue;
             }
@@ -126,13 +126,13 @@ class SubtitleShifter
     }
 
     /**
-     * Garante coerência entre o texto (possivelmente editado pelo utilizador)
-     * e a lista de palavras usada pelo modo karaoke.
+     * Ensures consistency between the text (possibly edited by the user)
+     * and the word list used by karaoke mode.
      *
-     * Se o texto atual corresponder às palavras existentes, mantém os tempos
-     * originais (precisos, do Whisper). Se o texto foi editado, redistribui as
-     * novas palavras uniformemente pela janela [start, end] para que o modo
-     * karaoke continue a funcionar.
+     * If the current text matches the existing words, keeps the original
+     * (precise, Whisper) times. If the text was edited, redistributes the
+     * new words uniformly across the window [start, end] so that karaoke
+     * mode keeps working.
      *
      * @param  array<int,array<string,mixed>>  $existingWords
      * @return array<int,array<string,mixed>>

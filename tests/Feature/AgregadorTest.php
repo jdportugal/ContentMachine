@@ -106,7 +106,7 @@ class AgregadorTest extends TestCase
     {
         $this->get('/noticias')
             ->assertOk()
-            ->assertSee('Agregar agora');
+            ->assertSee('Aggregate now');
     }
 
     public function test_botao_agregar_agora_corre_e_mostra_dia(): void

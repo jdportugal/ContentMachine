@@ -12,7 +12,7 @@ class ElevenLabsVoiceoverService implements VoiceoverService
     {
         $key = config('services.elevenlabs.key');
         if (! $key) {
-            throw new RuntimeException('ELEVENLABS_API_KEY em falta para locução.');
+            throw new RuntimeException('ELEVENLABS_API_KEY missing for voiceover.');
         }
 
         $voiceId = config('contentmachine.clips.voice_id');

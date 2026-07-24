@@ -8,17 +8,17 @@ use App\Services\Publicacoes\Dto\SlidePlano;
 use Illuminate\Support\Str;
 
 /**
- * Planeia uma publicação a partir de um "brief" livre. Pede à IA (LlmClient,
- * cadeia de fornecedores) um plano em JSON estrito; se a IA não estiver
- * disponível ou o JSON for inválido, cai numa heurística determinística.
- * Espelha o PlanPostJob do AdsMaker, adaptado ao vault e a funcionar offline.
+ * Plans a post from a free-form "brief". Asks the AI (LlmClient,
+ * provider chain) for a plan in strict JSON; if the AI is not
+ * available or the JSON is invalid, falls back to a deterministic heuristic.
+ * Mirrors AdsMaker's PlanPostJob, adapted to the vault and working offline.
  */
 class PublicacaoPlanner
 {
-    /** Fonte do último plano: 'ia' (LLM) ou 'heuristica' (fallback local). */
+    /** Source of the last plan: 'ia' (LLM) or 'heuristica' (local fallback). */
     public ?string $fonte = null;
 
-    /** Fornecedor de LLM usado quando $fonte === 'ia' (ex.: 'claude-cli'). */
+    /** LLM provider used when $fonte === 'ia' (e.g. 'claude-cli'). */
     public ?string $fornecedor = null;
 
     public function __construct(
@@ -26,7 +26,7 @@ class PublicacaoPlanner
         private readonly PublicacaoKinds $kinds,
     ) {}
 
-    /** @param array<int,string> $referencias descrições das imagens de referência */
+    /** @param array<int,string> $referencias descriptions of the reference images */
     public function planear(string $tipo, string $brief, string $plataforma, array $referencias = []): PublicacaoPlan
     {
         $kind = $this->kinds->get($tipo) ?? [];
@@ -51,7 +51,7 @@ class PublicacaoPlanner
         return $this->heuristica($tipo, $kind, $brief, $plataforma);
     }
 
-    // ------------------------------------------------------------------ IA
+    // ------------------------------------------------------------------ AI
 
     private function prompt(string $tipo, array $kind, string $brief, string $plataforma, array $referencias = []): string
     {
@@ -60,15 +60,15 @@ class PublicacaoPlanner
         $orientacao = (string) ($kind['plano_prompt'] ?? '');
 
         $regraCartoes = $formato === 'carousel'
-            ? "Gera entre {$c['min']} e {$c['max']} cartões (o primeiro é a capa)."
-            : 'Gera exactamente 1 cartão.';
+            ? "Generate between {$c['min']} and {$c['max']} cards (the first is the cover)."
+            : 'Generate exactly 1 card.';
 
         $blocoRefs = '';
         $temRefs = false;
         if ($referencias !== []) {
-            // Aceita descrições simples (['logótipo', …]) ou itens indexados
-            // (['indice' => 0, 'descricao' => 'logótipo']). Mostra o índice para a
-            // IA poder ATRIBUIR cada imagem aos cartões onde faz sentido.
+            // Accepts plain descriptions (['logótipo', …]) or indexed items
+            // (['indice' => 0, 'descricao' => 'logótipo']). Shows the index so the
+            // AI can ASSIGN each image to the cards where it makes sense.
             $linhas = [];
             foreach (array_values($referencias) as $pos => $ref) {
                 if (is_array($ref)) {
@@ -78,45 +78,45 @@ class PublicacaoPlanner
                     $i = $pos;
                     $d = trim((string) $ref);
                 }
-                $linhas[] = "[{$i}] ".($d !== '' ? $d : '(sem descrição)');
+                $linhas[] = "[{$i}] ".($d !== '' ? $d : '(no description)');
             }
             if ($linhas !== []) {
                 $temRefs = true;
                 $lista = implode("\n", $linhas);
-                $blocoRefs = "\n\nImagens de referência disponíveis (tem-nas em conta ao redigir; o texto deve fazer sentido junto delas). "
-                    ."Usa o ÍNDICE entre parênteses rectos para ATRIBUIR a cada cartão as imagens relevantes:\n{$lista}";
+                $blocoRefs = "\n\nAvailable reference images (take them into account when writing; the text should make sense alongside them). "
+                    ."Use the INDEX in square brackets to ASSIGN the relevant images to each card:\n{$lista}";
             }
         }
 
         $campoRefs = $temRefs
-            ? ', "referencias": [0]  // índices das imagens acima que este cartão usa (pode ser [])'
+            ? ', "referencias": [0]  // indices of the images above that this card uses (may be [])'
             : '';
         $regraCoerencia = $formato === 'carousel'
-            ? "\n        Coerência: os cartões formam UMA peça — encadeia-os (capa → desenvolvimento → remate), sem repetir, com um fio condutor claro."
+            ? "\n        Coherence: the cards form ONE piece — chain them (cover → development → conclusion), without repeating, with a clear thread."
             : '';
 
         $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
         $blocoDesign = trim($design) !== ''
-            ? "\n\n=== SISTEMA DE DESIGN (identidade da marca — respeita voz, tom e regras) ===\n{$design}\n"
+            ? "\n\n=== DESIGN SYSTEM (brand identity — respect voice, tone and rules) ===\n{$design}\n"
             : '';
 
         return <<<PROMPT
-        És o redator da IATECA, uma biblioteca para a era das máquinas que pensam.
-        Escreve em português europeu, tom sóbrio e culto, SEM emojis.{$blocoDesign}
+        You are the writer of IATECA, a library for the age of thinking machines.
+        Write in European Portuguese, sober and cultured tone, NO emojis.{$blocoDesign}
 
-        Compõe uma peça do tipo «{$kind['label']}» para {$plataforma}.
-        Orientação do formato: {$orientacao}
+        Compose a piece of type «{$kind['label']}» for {$plataforma}.
+        Format guidance: {$orientacao}
         {$regraCartoes}{$regraCoerencia}
 
-        Tema / brief do utilizador:
+        User theme / brief:
         {$brief}{$blocoRefs}
 
-        Responde APENAS com JSON válido (sem texto à volta), nesta forma exacta:
+        Respond ONLY with valid JSON (no surrounding text), in this exact shape:
         {
           "titulo": "string",
-          "legenda": "string (a legenda/caption para a publicação)",
+          "legenda": "string (the caption for the post)",
           "tags": ["string"],
-          "slides": [ {"ordem": 1, "titulo": "string curto", "texto": "1 a 2 frases"{$campoRefs}} ]
+          "slides": [ {"ordem": 1, "titulo": "short string", "texto": "1 to 2 sentences"{$campoRefs}} ]
         }
         PROMPT;
     }
@@ -137,7 +137,7 @@ class PublicacaoPlanner
         return PublicacaoPlan::fromArray($dados);
     }
 
-    /** Remove cercas de código (```json … ```) e recorta ao primeiro objecto JSON. */
+    /** Removes code fences (```json … ```) and trims to the first JSON object. */
     private function stripFences(string $texto): string
     {
         $texto = trim($texto);
@@ -154,7 +154,7 @@ class PublicacaoPlanner
         return (string) $texto;
     }
 
-    // ----------------------------------------------------------- heurística
+    // ----------------------------------------------------------- heuristic
 
     private function heuristica(string $tipo, array $kind, string $brief, string $plataforma): PublicacaoPlan
     {
@@ -174,8 +174,8 @@ class PublicacaoPlanner
             );
         }
 
-        // Capa + um cartão por frase do brief, com um rótulo derivado da própria
-        // frase (não «Ponto N»). Sem texto inventado — o corpo é a frase original.
+        // Cover + one card per brief sentence, with a label derived from the
+        // sentence itself (not «Ponto N»). No invented text — the body is the original sentence.
         $partes = $this->frases($brief);
         $slides = [new SlidePlano(1, $titulo, '')];
 
@@ -183,7 +183,7 @@ class PublicacaoPlanner
             $slides[] = new SlidePlano(count($slides) + 1, $this->rotulo($frase), $frase);
         }
 
-        // Garante o mínimo do tipo repetindo/desdobrando o que existe.
+        // Ensures the type's minimum by repeating/expanding what exists.
         while (count($slides) < $c['min']) {
             $slides[] = new SlidePlano(count($slides) + 1, 'Em síntese', $titulo.'.');
         }
@@ -195,17 +195,17 @@ class PublicacaoPlanner
         return new PublicacaoPlan($titulo, $brief, $tags, $slides);
     }
 
-    /** Título limpo a partir do brief: primeira frase, sem cortar a meio de palavra. */
+    /** Clean title from the brief: first sentence, without cutting mid-word. */
     private function tituloDe(string $brief): string
     {
         $frase = $this->primeiraFrase($brief);
-        // Corta antes de dois-pontos/travessão (listas) para não arrastar a enumeração.
+        // Cut before a colon/dash (lists) so the enumeration is not dragged along.
         $frase = trim(preg_split('/\s*[:—–-]\s+/u', $frase)[0] ?? $frase);
 
         return Str::limit($frase, 70, '');
     }
 
-    /** Rótulo curto (2–4 palavras) derivado da frase, em maiúscula inicial. */
+    /** Short label (2–4 words) derived from the sentence, capitalized. */
     private function rotulo(string $frase): string
     {
         $palavras = preg_split('/\s+/u', trim($frase)) ?: [];
@@ -214,7 +214,7 @@ class PublicacaoPlanner
         return $rotulo !== '' ? Str::ucfirst($rotulo) : 'Ponto';
     }
 
-    /** Divide o brief em frases não vazias (por pontuação ou linhas). */
+    /** Splits the brief into non-empty sentences (by punctuation or lines). */
     private function frases(string $texto): array
     {
         $pedacos = preg_split('/(?<=[.!?])\s+|\R+/u', trim($texto)) ?: [];
@@ -229,7 +229,7 @@ class PublicacaoPlanner
         return $frases[0] ?? trim($texto);
     }
 
-    /** Aplica os limites de cartões do tipo a um plano vindo da IA. */
+    /** Applies the type's card limits to a plan coming from the AI. */
     private function normalizarCartoes(PublicacaoPlan $plano, string $tipo): PublicacaoPlan
     {
         $formato = $this->kinds->formato($tipo);

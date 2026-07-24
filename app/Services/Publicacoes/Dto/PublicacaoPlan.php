@@ -3,9 +3,9 @@
 namespace App\Services\Publicacoes\Dto;
 
 /**
- * Plano estruturado de uma publicação: título, legenda, etiquetas e cartões.
- * É o resultado do planeamento (IA ou heurística) e a fonte para o corpo
- * Markdown gravado no vault e para o desenho das imagens.
+ * Structured plan of a post: title, caption, tags and cards.
+ * It is the result of planning (AI or heuristic) and the source for the
+ * Markdown body written to the vault and for drawing the images.
  */
 class PublicacaoPlan
 {
@@ -18,7 +18,7 @@ class PublicacaoPlan
     ) {}
 
     /**
-     * Constrói um plano a partir do estado do formulário da oficina.
+     * Builds a plan from the workshop form state.
      *
      * @param  array<int,array{titulo?:string,texto?:string}>  $slides
      * @param  array<int,string>  $tags
@@ -56,7 +56,7 @@ class PublicacaoPlan
             }
         }
 
-        // Normaliza a ordem para 1..N sequencial e estável.
+        // Normalize the order to a sequential and stable 1..N.
         usort($slides, fn (SlidePlano $a, SlidePlano $b) => $a->ordem <=> $b->ordem);
         foreach ($slides as $i => $slide) {
             $slide->ordem = $i + 1;
@@ -76,10 +76,10 @@ class PublicacaoPlan
     }
 
     /**
-     * Serializa o plano no corpo Markdown do vault.
-     *  - single: a legenda (ou o texto do único cartão).
-     *  - carousel: «## Cartão N» separados por «---», preservando a convenção
-     *    já usada nos carrosséis existentes.
+     * Serializes the plan into the vault's Markdown body.
+     *  - single: the caption (or the text of the single card).
+     *  - carousel: «## Cartão N» separated by «---», preserving the convention
+     *    already used in existing carousels.
      */
     public function toBody(string $formato): string
     {

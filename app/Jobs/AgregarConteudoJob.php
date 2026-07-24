@@ -11,9 +11,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Corre a agregação (yt-dlp) FORA do pedido web: são dezenas de chamadas de
- * subprocesso que estouram o max_execution_time se corressem no pedido. O
- * resumo fica em cache; a página de Notícias lê-o por sondagem (wire:poll).
+ * Runs the aggregation (yt-dlp) OUTSIDE the web request: it is dozens of
+ * subprocess calls that blow the max_execution_time if they run in the request. The
+ * summary is cached; the News page reads it by polling (wire:poll).
  */
 class AgregarConteudoJob implements ShouldQueue
 {

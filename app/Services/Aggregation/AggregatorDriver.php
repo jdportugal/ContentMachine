@@ -4,11 +4,11 @@ namespace App\Services\Aggregation;
 
 interface AggregatorDriver
 {
-    /** Nome da plataforma que este driver serve (ex.: 'youtube'). */
+    /** Name of the platform this driver serves (e.g. 'youtube'). */
     public function plataforma(): string;
 
     /**
-     * Recolhe os itens recentes de uma lista de canais/URLs.
+     * Collects the recent items from a list of channels/URLs.
      *
      * @param  array<int,string>  $canais
      * @return array<int,AggregatedItem>

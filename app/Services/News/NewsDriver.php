@@ -5,9 +5,9 @@ namespace App\Services\News;
 interface NewsDriver
 {
     /**
-     * Gera (ou obtém) um relatório personalizado a partir das fontes indicadas.
+     * Generates (or fetches) a personalized report from the given sources.
      *
-     * @param  array<int,string>  $fontes  ex.: ['youtube','reddit','twitter','tiktok']
+     * @param  array<int,string>  $fontes  e.g. ['youtube','reddit','twitter','tiktok']
      * @return array{
      *   titulo:string,
      *   gerado_em:string,

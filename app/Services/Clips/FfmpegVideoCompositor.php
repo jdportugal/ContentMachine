@@ -86,7 +86,7 @@ class FfmpegVideoCompositor implements VideoCompositor
         $process->run();
 
         if (! $process->isSuccessful()) {
-            throw new RuntimeException('ffmpeg falhou: '.$process->getErrorOutput());
+            throw new RuntimeException('ffmpeg failed: '.$process->getErrorOutput());
         }
     }
 }

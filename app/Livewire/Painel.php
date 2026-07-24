@@ -11,12 +11,12 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Painel')]
+#[Title('Dashboard')]
 class Painel extends Component
 {
     public function render(MonitoringManager $monitoring, MonitoringStats $stats, NewsManager $news, VaultContract $vault)
     {
-        // Resumo de desempenho por plataforma (melhor conteúdo recente).
+        // Performance summary per platform (best recent content).
         $plataformas = $monitoring->todos()->map(function ($driver, $p) {
             $melhores = $driver->melhores(1);
 
@@ -31,7 +31,7 @@ class Painel extends Component
 
         return view('livewire.painel', [
             'plataformas' => $plataformas,
-            // Totais de canal (subscritores, publicações, desempenho) das redes.
+            // Channel totals (subscribers, posts, performance) for the networks.
             'estatisticas' => $stats->totais($monitoring->plataformas()),
             'destaquesNoticias' => array_slice($relatorio['destaques'], 0, 3),
         ]);

@@ -6,24 +6,24 @@ use Illuminate\Support\Collection;
 
 interface VaultContract
 {
-    /** Lista todas as notas de uma pasta (recursivo), ordenadas por data desc. */
+    /** Lists all notes in a folder (recursive), sorted by date desc. */
     public function all(string $folder = '', bool $recursive = true): Collection;
 
-    /** Obtém uma nota pelo caminho relativo. */
+    /** Gets a note by its relative path. */
     public function get(string $path): ?VaultNote;
 
-    /** Cria/actualiza uma nota e devolve o caminho relativo escrito. */
+    /** Creates/updates a note and returns the written relative path. */
     public function put(string $path, array $frontmatter, string $body): VaultNote;
 
-    /** Cria uma nota nova numa pasta, gerando um slug a partir do título. */
+    /** Creates a new note in a folder, generating a slug from the title. */
     public function create(string $folder, array $frontmatter, string $body = ''): VaultNote;
 
-    /** Actualiza apenas o frontmatter de uma nota existente. */
+    /** Updates only the frontmatter of an existing note. */
     public function updateFrontmatter(string $path, array $patch): VaultNote;
 
-    /** Remove uma nota. */
+    /** Removes a note. */
     public function delete(string $path): bool;
 
-    /** Caminho absoluto da raiz do vault. */
+    /** Absolute path of the vault root. */
     public function root(): string;
 }

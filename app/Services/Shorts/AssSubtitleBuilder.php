@@ -3,32 +3,32 @@
 namespace App\Services\Shorts;
 
 /**
- * Constrói um ficheiro ASS (Advanced SubStation Alpha) a partir do
- * `subtitle_data` editável de um clip — o equivalente LOCAL e independente ao
- * `add_subtitles_to_video` do serviço Flask "ShortsCreator" (que usava
- * MoviePy/PIL). Aqui a legendagem é gravada pelo libass do ffmpeg, sem
- * qualquer API externa.
+ * Builds an ASS (Advanced SubStation Alpha) file from a clip's
+ * editable `subtitle_data` — the LOCAL and independent equivalent of the
+ * `add_subtitles_to_video` from the Flask "ShortsCreator" service (which used
+ * MoviePy/PIL). Here the subtitling is burned by ffmpeg's libass, without
+ * any external API.
  *
- * Mantém a MESMA lógica de estilo do original:
- *   - `position`     → alinhamento numérico ASS (grelha 3×3);
- *   - `font-family`  → Fontname (fontes vendidas em resources/fonts);
- *   - `font-size`    → Fontsize em px do vídeo (PlayRes = dimensões do vídeo);
- *   - `line-color`/`normal-color` → cor do texto;
- *   - `outline-color`/`outline-width` → contorno;
+ * Keeps the SAME style logic as the original:
+ *   - `position`     → ASS numeric alignment (3×3 grid);
+ *   - `font-family`  → Fontname (fonts bundled in resources/fonts);
+ *   - `font-size`    → Fontsize in video px (PlayRes = video dimensions);
+ *   - `line-color`/`normal-color` → text color;
+ *   - `outline-color`/`outline-width` → outline;
  *   - `word_level_mode`: off | karaoke | popup | typewriter.
  *
- * É puro (sem I/O, sem ffmpeg) — o núcleo testável do motor de legendas.
+ * It is pure (no I/O, no ffmpeg) — the testable core of the subtitle engine.
  */
 class AssSubtitleBuilder
 {
-    /** Grelha de posição → Alignment ASS (teclado numérico: 1=fundo-esq … 9=topo-dir). */
+    /** Position grid → ASS Alignment (numeric keypad: 1=bottom-left … 9=top-right). */
     private const ALIGN = [
         'bottom-left' => 1, 'bottom-center' => 2, 'bottom-right' => 3,
         'center-left' => 4, 'center-center' => 5, 'center-right' => 6,
         'top-left' => 7, 'top-center' => 8, 'top-right' => 9,
     ];
 
-    /** font-family (como no original) → nome interno da fonte para o libass. */
+    /** font-family (as in the original) → internal font name for libass. */
     private const FONT_NAME = [
         'Luckiest Guy' => 'Luckiest Guy',
         'Anton' => 'Anton',
@@ -39,13 +39,13 @@ class AssSubtitleBuilder
     ];
 
     /**
-     * Gera o conteúdo ASS completo.
+     * Generates the full ASS content.
      *
-     * @param  array<int,array<string,mixed>>  $subtitleData  Segmentos {start,end,text,words[]} (segundos, relativos ao clip).
-     * @param  array<string,mixed>  $settings  Estilo (position, font-family, font-size, line-color, outline-*).
+     * @param  array<int,array<string,mixed>>  $subtitleData  Segments {start,end,text,words[]} (seconds, relative to the clip).
+     * @param  array<string,mixed>  $settings  Style (position, font-family, font-size, line-color, outline-*).
      * @param  string  $wordMode  off|karaoke|popup|typewriter.
-     * @param  int  $videoW  Largura do vídeo (px) — PlayResX.
-     * @param  int  $videoH  Altura do vídeo (px) — PlayResY.
+     * @param  int  $videoW  Video width (px) — PlayResX.
+     * @param  int  $videoH  Video height (px) — PlayResY.
      */
     public function build(array $subtitleData, array $settings, string $wordMode, int $videoW, int $videoH): string
     {
@@ -64,7 +64,7 @@ class AssSubtitleBuilder
         $upper = ($settings['text-transform'] ?? '') === 'uppercase';
         $maxWords = max(1, (int) ($settings['max-words-per-line'] ?? 4));
 
-        // Cores inline para o destaque palavra-a-palavra do modo karaoke.
+        // Inline colors for the word-by-word highlight of karaoke mode.
         $corBase = $this->inlineColor($primaryHex);
         $corDestaque = $this->inlineColor($highlightHex);
 
@@ -99,9 +99,9 @@ class AssSubtitleBuilder
         return $this->header($videoW, $videoH, $styleDefault)."\n".implode("\n", $events)."\n";
     }
 
-    // --- Modos de palavra ---------------------------------------------
+    // --- Word modes ---------------------------------------------------
 
-    /** off: uma legenda por segmento, com quebra de linha a cada N palavras. */
+    /** off: one caption per segment, with a line break every N words. */
     private function sentence(array &$events, float $start, float $end, string $text, int $maxWords, bool $upper): void
     {
         $wrapped = $this->wrap($text, max(1, $maxWords));
@@ -109,13 +109,13 @@ class AssSubtitleBuilder
     }
 
     /**
-     * karaoke: legenda estilo "shorts" — mostra grupos de até $maxWords palavras
-     * de cada vez e destaca (a amarelo) a palavra que está a ser dita, palavra a
-     * palavra. Sem palavras, cai para `off`.
+     * karaoke: "shorts"-style caption — shows groups of up to $maxWords words
+     * at a time and highlights (in yellow) the word being said, word by
+     * word. Without words, falls back to `off`.
      *
-     * Para cada grupo, emite um evento por palavra: mostra o grupo inteiro com a
-     * palavra activa na cor de destaque e as restantes na cor base. Os eventos são
-     * contíguos (de uma palavra até ao início da seguinte) para não haver falhas.
+     * For each group, it emits one event per word: shows the whole group with the
+     * active word in the highlight color and the rest in the base color. The events are
+     * contiguous (from one word to the start of the next) so there are no gaps.
      */
     private function karaoke(array &$events, float $start, float $end, string $text, array $words, bool $upper, int $maxWords, string $corBase, string $corDestaque): void
     {
@@ -130,7 +130,7 @@ class AssSubtitleBuilder
             $grupoInicio = (float) ($grupo[0]['start'] ?? 0);
             $grupoFim = max($grupoInicio, (float) ($grupo[$n - 1]['end'] ?? $grupoInicio));
 
-            // Tokens do grupo (já escapados e, se pedido, em maiúsculas).
+            // Group tokens (already escaped and, if requested, uppercased).
             $tokens = array_map(function ($w) use ($upper) {
                 $t = trim((string) $w['word']);
 
@@ -144,7 +144,7 @@ class AssSubtitleBuilder
                     $fim = $ini + 0.05;
                 }
 
-                // Linha do grupo com a i-ésima palavra destacada.
+                // Group line with the i-th word highlighted.
                 $partes = [];
                 foreach ($tokens as $j => $tok) {
                     $partes[] = $j === $i
@@ -157,7 +157,7 @@ class AssSubtitleBuilder
         }
     }
 
-    /** popup: uma palavra de cada vez, no seu intervalo. */
+    /** popup: one word at a time, within its interval. */
     private function popup(array &$events, array $words, bool $upper): void
     {
         foreach ($words as $w) {
@@ -168,7 +168,7 @@ class AssSubtitleBuilder
         }
     }
 
-    /** typewriter: texto que se acumula palavra a palavra. */
+    /** typewriter: text that accumulates word by word. */
     private function typewriter(array &$events, array $words, bool $upper): void
     {
         $acc = '';
@@ -180,15 +180,15 @@ class AssSubtitleBuilder
         }
     }
 
-    // --- Auxiliares ---------------------------------------------------
+    // --- Helpers ------------------------------------------------------
 
     private function header(int $w, int $h, string $styleDefault): string
     {
         return implode("\n", [
             '[Script Info]',
             'ScriptType: v4.00+',
-            // WrapStyle 0 = quebra automática inteligente: linhas longas ajustam-se
-            // à largura do vídeo.
+            // WrapStyle 0 = smart automatic wrapping: long lines adjust
+            // to the video width.
             'WrapStyle: 0',
             'ScaledBorderAndShadow: yes',
             'YCbCr Matrix: TV.709',
@@ -209,7 +209,7 @@ class AssSubtitleBuilder
         return sprintf('Dialogue: 0,%s,%s,%s,,0,0,0,,%s', $this->ts($start), $this->ts($end), $style, $text);
     }
 
-    /** Segundos → "H:MM:SS.cc" (centésimos), formato de tempo do ASS. */
+    /** Seconds → "H:MM:SS.cc" (hundredths), ASS time format. */
     private function ts(float $seconds): string
     {
         $seconds = max(0.0, $seconds);
@@ -222,11 +222,11 @@ class AssSubtitleBuilder
         return sprintf('%d:%02d:%02d.%02d', $h, $m, $s, $c);
     }
 
-    /** '#RRGGBB' → 'BBGGRR' (ASS usa BGR). */
+    /** '#RRGGBB' → 'BBGGRR' (ASS uses BGR). */
     private function bgr(string $hex): string
     {
         $hex = ltrim(trim($hex), '#');
-        $hex = ltrim($hex, '#'); // tolera "##RRGGBB"
+        $hex = ltrim($hex, '#'); // tolerates "##RRGGBB"
 
         if (strlen($hex) === 3) {
             $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
@@ -239,19 +239,19 @@ class AssSubtitleBuilder
         return strtoupper(substr($hex, 4, 2).substr($hex, 2, 2).substr($hex, 0, 2));
     }
 
-    /** '#RRGGBB' → '&H00BBGGRR' (cor de estilo ASS, com alfa; 00 = opaco). */
+    /** '#RRGGBB' → '&H00BBGGRR' (ASS style color, with alpha; 00 = opaque). */
     private function toAssColor(string $hex): string
     {
         return '&H00'.$this->bgr($hex);
     }
 
-    /** '#RRGGBB' → '&HBBGGRR&' (override de cor inline, ex.: {\1c&HBBGGRR&}). */
+    /** '#RRGGBB' → '&HBBGGRR&' (inline color override, e.g. {\1c&HBBGGRR&}). */
     private function inlineColor(string $hex): string
     {
         return '&H'.$this->bgr($hex).'&';
     }
 
-    /** Escapa texto para um evento ASS (chavetas e quebras de linha). */
+    /** Escapes text for an ASS event (braces and line breaks). */
     private function esc(string $text): string
     {
         $text = str_replace(['{', '}'], ['(', ')'], $text);
@@ -260,7 +260,7 @@ class AssSubtitleBuilder
         return $text;
     }
 
-    /** Quebra o texto a cada $max palavras usando \N (quebra dura ASS). */
+    /** Breaks the text every $max words using \N (ASS hard break). */
     private function wrap(string $text, int $max): string
     {
         $words = preg_split('/\s+/', trim($text), -1, PREG_SPLIT_NO_EMPTY) ?: [];
@@ -272,7 +272,7 @@ class AssSubtitleBuilder
         return implode("\n", $lines);
     }
 
-    /** Formata um float sem casas supérfluas (para o campo Outline do ASS). */
+    /** Formats a float without superfluous decimals (for the ASS Outline field). */
     private function num(float $n): string
     {
         return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.') ?: '0';

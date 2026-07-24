@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 /**
- * Deriva uma lista de tópicos ("o que já foi coberto e está no ar") a partir
- * de um conjunto de itens de um dia. Usa um LLM se houver chave configurada
- * (OpenAI ou Gemini); caso contrário, recorre a uma heurística determinística
- * de agrupamento por tags/palavras-chave. Nunca lança — degrada para heurística.
+ * Derives a list of topics ("what has already been covered and is live") from
+ * a set of items from one day. Uses an LLM if there is a configured key
+ * (OpenAI or Gemini); otherwise falls back to a deterministic heuristic
+ * grouping by tags/keywords. Never throws — degrades to the heuristic.
  */
 class TopicsBuilder
 {
-    /** Palavras vazias (PT/EN) ignoradas na extração de palavras-chave. */
+    /** Stop words (PT/EN) ignored in keyword extraction. */
     private const STOPWORDS = [
         'the', 'and', 'for', 'you', 'your', 'with', 'this', 'that', 'from', 'have', 'has', 'are', 'was', 'were', 'will',
         'what', 'how', 'why', 'who', 'they', 'their', 'them', 'about', 'just', 'like', 'into', 'more', 'some', 'then',
@@ -45,7 +45,7 @@ class TopicsBuilder
      */
     private function viaHeuristica(array $itens): array
     {
-        // Frequência de tags (normalizadas) entre todos os itens.
+        // Tag frequency (normalized) across all items.
         $freq = [];
         foreach ($itens as $i => $item) {
             foreach ($this->tagsNormalizadas($item) as $tag) {
@@ -53,7 +53,7 @@ class TopicsBuilder
             }
         }
 
-        // Tags partilhadas por 2+ itens tornam-se tópicos, das mais comuns às menos.
+        // Tags shared by 2+ items become topics, from the most common to the least.
         uasort($freq, fn ($a, $b) => count($b) <=> count($a));
 
         $topicos = [];
@@ -69,7 +69,7 @@ class TopicsBuilder
             $atribuidos = array_merge($atribuidos, $novos);
         }
 
-        // Itens ainda sem tópico → "Outros temas".
+        // Items still without a topic → "Outros temas".
         $restantes = array_values(array_diff(array_keys($itens), $atribuidos));
         if ($restantes !== []) {
             $topicos[] = $this->montarTopico('Outros temas', $restantes, $itens);
@@ -106,9 +106,9 @@ class TopicsBuilder
     }
 
     /**
-     * Sinais de agrupamento de um item: as suas tags + as palavras mais
-     * salientes do TÍTULO e da TRANSCRIÇÃO, para que os tópicos reflictam o
-     * que é dito nos vídeos e não apenas as tags declaradas.
+     * Grouping signals of an item: its tags + the most
+     * salient words of the TITLE and the TRANSCRIPT, so the topics reflect
+     * what is said in the videos and not just the declared tags.
      *
      * @return array<int,string>
      */
@@ -119,9 +119,9 @@ class TopicsBuilder
             $item->tags
         )));
 
-        // Conjunto amplo de palavras candidatas (tags + título + transcrição).
-        // O agrupamento a jusante só mantém as partilhadas por 2+ itens, por
-        // isso um conjunto largo capta os temas comuns sem gerar ruído.
+        // Broad set of candidate words (tags + title + transcript).
+        // Downstream grouping only keeps those shared by 2+ items, so
+        // a broad set captures the common themes without generating noise.
         $conteudo = trim($item->titulo."\n".Str::limit($item->transcricao, 2500, ''));
         $sinais = array_values(array_unique(array_merge(
             $tags,
@@ -143,7 +143,7 @@ class TopicsBuilder
     }
 
     /**
-     * Tenta derivar tópicos via LLM. Devolve null se não houver chave ou em falha.
+     * Tries to derive topics via LLM. Returns null if there is no key or on failure.
      *
      * @param  array<int,AggregatedItem>  $itens
      * @return array{metodo:string,topicos:array<int,array<string,mixed>>}|null
@@ -165,9 +165,9 @@ class TopicsBuilder
             'excerto' => Str::limit(trim($i->transcricao), 1500, ''),
         ])->all();
 
-        $prompt = 'Agrupa os seguintes conteúdos por tópico coberto, inferindo o tópico sobretudo a partir do EXCERTO da transcrição (o que é realmente dito no vídeo) e do título. Responde SÓ com JSON no formato '
+        $prompt = 'Group the following content by covered topic, inferring the topic mainly from the EXCERPT of the transcript (what is actually said in the video) and the title. Respond ONLY with JSON in the format '
             .'{"topicos":[{"topico":"...","itens":[{"titulo":"...","url":"...","plataforma":"..."}]}]}. '
-            ."Usa português europeu nos nomes dos tópicos.\n\n"
+            ."Use European Portuguese for the topic names.\n\n"
             .json_encode($resumo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         try {
@@ -186,7 +186,7 @@ class TopicsBuilder
                 return null;
             }
 
-            // Garante a estrutura de fontes em cada tópico.
+            // Ensures the sources structure in each topic.
             foreach ($topicos as &$t) {
                 $t['itens'] = array_values($t['itens'] ?? []);
                 $t['fontes'] = array_values($t['fontes'] ?? []);

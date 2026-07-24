@@ -15,33 +15,33 @@ class ClaudeResearchService implements ResearchService
     public function research(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = $transcript['language'] ?? '(o idioma do texto)';
+        $language = $transcript['language'] ?? '(the text language)';
         if ($text === '') {
             return $this->empty();
         }
 
         $prompt = <<<PROMPT
-Pesquisa na WEB sobre o tópico do seguinte texto falado e reúne FACTOS REAIS e ACTUAIS
-para enriquecer um vídeo curto vertical. Faz VÁRIAS pesquisas.
+Search the WEB about the topic of the following spoken text and gather REAL and CURRENT FACTS
+to enrich a short vertical video. Do SEVERAL searches.
 
-VERIFICAÇÃO (obrigatória):
-- Confirma CADA número/facto em pelo menos DUAS fontes independentes e recentes.
-- Só inclui dados de que tens ALTA confiança e com URL de fonte. Em caso de dúvida, OMITE.
-- Nunca inventes números nem datas. Prefere valores exactos e actuais; indica a época no rótulo.
+VERIFICATION (mandatory):
+- Confirm EACH number/fact in at least TWO independent and recent sources.
+- Only include data you have HIGH confidence in and with a source URL. When in doubt, OMIT.
+- Never invent numbers or dates. Prefer exact and current values; state the period in the label.
 
-Devolve APENAS JSON (sem markdown), rótulos curtos, no idioma {$language}:
+Return ONLY JSON (no markdown), short labels, in the {$language} language:
 {
   "topic": "…",
-  "summary": "1-2 frases",
-  "timeline": [{"label":"…","sublabel":"ano/época"}],
-  "stats": [{"label":"…","value":<número>,"unit":"…"}],
+  "summary": "1-2 sentences",
+  "timeline": [{"label":"…","sublabel":"year/period"}],
+  "stats": [{"label":"…","value":<number>,"unit":"…"}],
   "comparisons": [{"title":"…","left":{"title":"…","points":["…"]},"right":{"title":"…","points":["…"]}}],
   "keyPoints": ["…","…"],
   "sources": ["url","url"]
 }
-Deixa listas vazias se não houver dados verificáveis.
+Leave lists empty if there is no verifiable data.
 
-TEXTO FALADO:
+SPOKEN TEXT:
 {$text}
 PROMPT;
 

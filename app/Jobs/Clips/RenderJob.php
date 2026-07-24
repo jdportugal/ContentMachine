@@ -42,8 +42,8 @@ class RenderJob implements ShouldQueue
                 $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
             }
 
-            // Tema do Sistema de Design (cores/fontes/textura) — faz a animação
-            // combinar com a marca. Null → o renderizador usa os defaults IATECA.
+            // Design System theme (colors/fonts/texture) — makes the animation
+            // match the brand. Null → the renderer uses the IATECA defaults.
             if ($theme = app(\App\Services\DesignSystem\DesignSystemRepository::class)->readTokens()) {
                 $plan['theme'] = $theme;
             }

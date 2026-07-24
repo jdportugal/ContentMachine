@@ -16,9 +16,9 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 /**
- * Oficina genérica de publicações: compõe, planeia com IA e desenha em imagem
- * qualquer TIPO do registo (config publicacoes.tipos). Cada cartão tem a sua
- * imagem ao lado, com regeneração/edição por instrução e histórico de versões.
+ * Generic post workshop: composes, plans with AI and renders to image
+ * any TYPE from the registry (config publicacoes.tipos). Each card has its
+ * image beside it, with regeneration/editing by instruction and version history.
  */
 #[Layout('components.layouts.app')]
 class Oficina extends Component
@@ -31,62 +31,62 @@ class Oficina extends Component
 
     public string $plataforma = 'instagram';
 
-    /** Resolução (proporção) escolhida — predefinida pelo tipo. */
+    /** Chosen resolution (ratio) — defaulted by type. */
     public string $proporcao = '1:1';
 
     public string $brief = '';
 
     public string $legenda = '';
 
-    /** @var array ficheiros a carregar (input) */
+    /** @var array files to upload (input) */
     public array $uploads = [];
 
-    /** @var array<int,array{path:string,descricao:string}> imagens de referência (pool) */
+    /** @var array<int,array{path:string,descricao:string}> reference images (pool) */
     public array $referencias = [];
 
-    /** @var array<int,array<int,string>> imagens anexas por cartão (caminhos web) */
+    /** @var array<int,array<int,string>> images attached per card (web paths) */
     public array $anexos = [];
 
-    /** @var array<int,string> prompt kie por cartão (mostrado/editável na oficina) */
+    /** @var array<int,string> kie prompt per card (shown/editable in the workshop) */
     public array $prompts = [];
 
-    /** @var array<int,bool> cartões cujo prompt foi editado à mão (confirma antes de regenerar) */
+    /** @var array<int,bool> cards whose prompt was edited by hand (confirm before regenerating) */
     public array $promptEditado = [];
 
-    /** @var array<int,mixed> ficheiros a carregar directamente num cartão (input) */
+    /** @var array<int,mixed> files to upload directly into a card (input) */
     public array $cartaoUploads = [];
 
-    /** @var array<int,array{titulo:string,texto:string}> cartões (carrossel) */
+    /** @var array<int,array{titulo:string,texto:string}> cards (carousel) */
     public array $slides = [];
 
-    // --- Imagens por cartão (índice 0..N-1; peça única usa índice 0) ---
-    /** @var array<int,string> imagem actual (caminho web) por cartão */
+    // --- Images per card (index 0..N-1; single piece uses index 0) ---
+    /** @var array<int,string> current image (web path) per card */
     public array $img = [];
 
-    /** @var array<int,string> instrução de edição por cartão */
+    /** @var array<int,string> edit instruction per card */
     public array $editar = [];
 
-    /** @var array<int,array<int,string>> histórico de versões por cartão (recente primeiro) */
+    /** @var array<int,array<int,string>> version history per card (recent first) */
     public array $hist = [];
 
-    /** @var array<int,string> token de regeneração em curso por cartão */
+    /** @var array<int,string> in-progress regeneration token per card */
     public array $gerando = [];
 
     public ?string $guardado = null;
 
     public ?string $aviso = null;
 
-    /** Redação em curso. */
+    /** Writing in progress. */
     public ?string $planToken = null;
 
     public bool $aRedigir = false;
 
-    /** Desenho de TODAS as imagens em curso. */
+    /** Rendering of ALL images in progress. */
     public ?string $imgToken = null;
 
     public bool $aGerar = false;
 
-    /** Caminho da nota a editar (null = nova publicação). */
+    /** Path of the note being edited (null = new post). */
     public ?string $notaPath = null;
 
     public function mount(string $tipo, PublicacaoKinds $kinds, VaultContract $vault): void
@@ -110,14 +110,14 @@ class Oficina extends Component
             return;
         }
 
-        // Semeado a partir de um vídeo longo («Gerar publicação» nos Clips).
+        // Seeded from a long video ("Generate post" in Clips).
         if (($seed = session('oficina_brief')) !== null) {
             $this->brief = (string) $seed;
             session()->forget('oficina_brief');
         }
     }
 
-    /** Pré-preenche a oficina com uma publicação já gravada. */
+    /** Pre-fills the workshop with an already saved post. */
     private function carregarNota(VaultContract $vault, string $slug): void
     {
         $nota = $vault->get('rascunhos/'.$slug.'.md');
@@ -142,14 +142,14 @@ class Oficina extends Component
             $this->legenda = $nota->body;
         }
 
-        // Se esta peça está a gerar imagens (noutra sessão/aba ou antes de sair),
-        // retoma o estado «a gerar» — a view volta a sondar e recarrega quando terminar.
+        // If this piece is generating images (in another session/tab or before leaving),
+        // resume the "generating" state — the view polls again and reloads when it finishes.
         if (Cache::get(GerarImagensJob::notaKey($slug))) {
             $this->aGerar = true;
         }
     }
 
-    /** Reconstrói os cartões a partir do corpo Markdown («## Título» + «---»). */
+    /** Rebuilds the cards from the Markdown body ("## Title" + "---"). */
     private function slidesDoCorpo(string $body): array
     {
         $slides = [];
@@ -187,13 +187,13 @@ class Oficina extends Component
         return $this->kinds()->formato($this->tipo) === 'carousel';
     }
 
-    /** Número de cartões: carrossel = nº de slides; peça única = 1. */
+    /** Number of cards: carousel = number of slides; single piece = 1. */
     public function numCartoes(): int
     {
         return $this->ehCarrossel() ? count($this->slides) : 1;
     }
 
-    /** Título/texto de um cartão pelo índice. @return array{titulo:string,texto:string} */
+    /** Title/text of a card by index. @return array{titulo:string,texto:string} */
     private function dadosCartao(int $i): array
     {
         if ($this->ehCarrossel()) {
@@ -203,10 +203,10 @@ class Oficina extends Component
             ];
         }
 
-        return ['titulo' => $this->titulo !== '' ? $this->titulo : 'Peça', 'texto' => $this->legenda];
+        return ['titulo' => $this->titulo !== '' ? $this->titulo : 'Piece', 'texto' => $this->legenda];
     }
 
-    // ---------------------------------------------------------------- cartões
+    // ------------------------------------------------------------------ cards
 
     public function adicionarSlide(): void
     {
@@ -226,7 +226,7 @@ class Oficina extends Component
         unset($this->slides[$i]);
         $this->slides = array_values($this->slides);
 
-        // Reindexa os mapas por cartão para acompanhar os índices dos cartões.
+        // Reindex the per-card maps to follow the card indices.
         foreach (['img', 'editar', 'hist', 'gerando', 'anexos', 'prompts', 'promptEditado'] as $prop) {
             $arr = $this->{$prop};
             unset($arr[$i]);
@@ -238,12 +238,12 @@ class Oficina extends Component
         }
     }
 
-    // ------------------------------------------------- imagens de referência
+    // -------------------------------------------------- reference images
 
-    /** Guarda os ficheiros carregados como referências (com descrição a preencher). */
+    /** Saves the uploaded files as references (with description to fill in). */
     public function updatedUploads(): void
     {
-        $this->validate(['uploads.*' => 'image|max:8192'], [], ['uploads.*' => 'imagem']);
+        $this->validate(['uploads.*' => 'image|max:8192'], [], ['uploads.*' => 'image']);
 
         foreach ($this->uploads as $file) {
             $this->referencias[] = ['path' => $this->guardarUpload($file), 'descricao' => ''];
@@ -252,7 +252,7 @@ class Oficina extends Component
         $this->uploads = [];
     }
 
-    /** Copia um ficheiro carregado para a pasta de referências; devolve o caminho web. */
+    /** Copies an uploaded file to the references folder; returns the web path. */
     private function guardarUpload($file): string
     {
         $dir = public_path('media/publicacoes/refs');
@@ -272,7 +272,7 @@ class Oficina extends Component
         unset($this->referencias[$i]);
         $this->referencias = array_values($this->referencias);
 
-        // Solta a referência de quaisquer cartões onde estivesse anexa.
+        // Detach the reference from any cards where it was attached.
         if ($path !== '') {
             foreach (array_keys($this->anexos) as $c) {
                 $this->desanexar((int) $c, $path);
@@ -280,7 +280,7 @@ class Oficina extends Component
         }
     }
 
-    /** Pool de referências indexada (índice + descrição) para a IA atribuir. @return array<int,array{indice:int,descricao:string}> */
+    /** Indexed reference pool (index + description) for the AI to assign. @return array<int,array{indice:int,descricao:string}> */
     private function refsIndexadas(): array
     {
         $out = [];
@@ -291,17 +291,17 @@ class Oficina extends Component
         return $out;
     }
 
-    /** Caminhos das imagens de referência (toda a pool). @return array<int,string> */
+    /** Paths of the reference images (the whole pool). @return array<int,string> */
     private function refPaths(): array
     {
         return array_values(array_map(fn ($r) => (string) ($r['path'] ?? ''), $this->referencias));
     }
 
     /**
-     * Referências GERAIS: imagens da pool que NÃO estão anexadas a nenhum cartão
-     * específico. Uma imagem anexada a um cartão vai só a esse cartão (via anexos)
-     * — não é aplicada a toda a peça. As não-anexadas (ex.: logótipo) valem para
-     * todos os cartões, como antes.
+     * GLOBAL references: pool images that are NOT attached to any specific
+     * card. An image attached to a card goes only to that card (via anexos)
+     * — it is not applied to the whole piece. Unattached ones (e.g. logo) apply to
+     * all cards, as before.
      *
      * @return array<int,string>
      */
@@ -317,9 +317,9 @@ class Oficina extends Component
         return array_values(array_filter($this->refPaths(), fn ($p) => $p !== '' && ! isset($anexadas[$p])));
     }
 
-    // -------------------------------------------------- anexos por cartão
+    // -------------------------------------------------- attachments per card
 
-    /** Liga/desliga uma imagem da pool a um cartão. */
+    /** Toggles a pool image on/off for a card. */
     public function alternarAnexo(int $i, int $poolIndex): void
     {
         $path = (string) ($this->referencias[$poolIndex]['path'] ?? '');
@@ -335,14 +335,14 @@ class Oficina extends Component
         $this->invalidarPrompt($i);
     }
 
-    /** Remove um anexo de um cartão (pela miniatura). */
+    /** Removes an attachment from a card (via the thumbnail). */
     public function desanexar(int $i, string $path): void
     {
         $this->anexos[$i] = array_values(array_filter($this->anexosDoCartao($i), fn ($p) => $p !== $path));
         $this->invalidarPrompt($i);
     }
 
-    /** Upload directo num cartão: junta à pool E anexa ao cartão. */
+    /** Direct upload into a card: adds to the pool AND attaches to the card. */
     public function updatedCartaoUploads($value, $key): void
     {
         $i = (int) $key;
@@ -350,7 +350,7 @@ class Oficina extends Component
 
         foreach ($files as $file) {
             \Illuminate\Support\Facades\Validator::make(
-                ['f' => $file], ['f' => 'image|max:8192'], [], ['f' => 'imagem'],
+                ['f' => $file], ['f' => 'image|max:8192'], [], ['f' => 'image'],
             )->validate();
 
             $path = $this->guardarUpload($file);
@@ -362,13 +362,13 @@ class Oficina extends Component
         $this->invalidarPrompt($i);
     }
 
-    /** Caminhos das imagens anexas a um cartão. @return array<int,string> */
+    /** Paths of the images attached to a card. @return array<int,string> */
     private function anexosDoCartao(int $i): array
     {
         return array_values(array_filter((array) ($this->anexos[$i] ?? [])));
     }
 
-    /** Descrições das imagens anexas a um cartão (via pool). @return array<int,string> */
+    /** Descriptions of the images attached to a card (via the pool). @return array<int,string> */
     private function anexosDescrDoCartao(int $i): array
     {
         return array_values(array_filter(array_map(
@@ -377,7 +377,7 @@ class Oficina extends Component
         )));
     }
 
-    /** Descrição de uma referência pelo caminho (ou '' se não encontrada). */
+    /** Description of a reference by path (or '' if not found). */
     private function descricaoDaRef(string $path): string
     {
         foreach ($this->referencias as $r) {
@@ -389,7 +389,7 @@ class Oficina extends Component
         return '';
     }
 
-    /** Mapa cartão→caminhos anexos, só cartões com anexos. @return array<int,array<int,string>> */
+    /** Map card→attached paths, only cards with attachments. @return array<int,array<int,string>> */
     private function anexosParaJob(): array
     {
         $out = [];
@@ -403,7 +403,7 @@ class Oficina extends Component
         return $out;
     }
 
-    /** Mapa cartão→descrições anexas, só cartões com anexos. @return array<int,array<int,string>> */
+    /** Map card→attached descriptions, only cards with attachments. @return array<int,array<int,string>> */
     private function anexosDescrParaJob(): array
     {
         $out = [];
@@ -417,9 +417,9 @@ class Oficina extends Component
         return $out;
     }
 
-    // ------------------------------------------------ prompt kie por cartão
+    // ------------------------------------------------ kie prompt per card
 
-    /** (Re)compõe o prompt kie de um cartão a partir do estado actual. */
+    /** (Re)composes a card's kie prompt from the current state. */
     public function montarPrompt(int $i): string
     {
         $dados = $this->dadosCartao($i);
@@ -446,20 +446,20 @@ class Oficina extends Component
         ]);
     }
 
-    /** Botão «Regenerar prompt»: recompõe e limpa a marca de edição manual. */
+    /** "Regenerate prompt" button: recomposes and clears the manual-edit mark. */
     public function regenerarPrompt(int $i): void
     {
         $this->prompts[$i] = $this->montarPrompt($i);
         $this->promptEditado[$i] = false;
     }
 
-    /** Marca um prompt como editado à mão (para confirmar antes de regenerar). */
+    /** Marks a prompt as hand-edited (to confirm before regenerating). */
     public function updatedPrompts($value, $key): void
     {
         $this->promptEditado[(int) $key] = true;
     }
 
-    /** Texto ou anexos mudaram: recompõe o prompt do cartão se não foi editado à mão. */
+    /** Text or attachments changed: recomposes the card's prompt if not hand-edited. */
     private function invalidarPrompt(int $i): void
     {
         if (! ($this->promptEditado[$i] ?? false)) {
@@ -467,7 +467,7 @@ class Oficina extends Component
         }
     }
 
-    /** O título/legenda mudou: recompõe os prompts não editados (título alimenta o contexto). */
+    /** The title/caption changed: recomposes the non-edited prompts (title feeds the context). */
     public function updatedTitulo(): void
     {
         for ($i = 0; $i < $this->numCartoes(); $i++) {
@@ -487,7 +487,7 @@ class Oficina extends Component
         $this->invalidarPrompt((int) explode('.', (string) $key)[0]);
     }
 
-    /** Garante um prompt para cada cartão (compõe os em falta). Antes de gerar. */
+    /** Ensures a prompt for each card (composes the missing ones). Before generating. */
     private function garantirPrompts(): void
     {
         for ($i = 0; $i < $this->numCartoes(); $i++) {
@@ -498,8 +498,8 @@ class Oficina extends Component
     }
 
     /**
-     * Semeia os anexos por cartão a partir dos índices de referência que a IA
-     * atribuiu a cada slide do plano (campo «referencias»).
+     * Seeds the per-card attachments from the reference indices that the AI
+     * assigned to each plan slide (field "referencias").
      *
      * @param  array<int,array{referencias?:array<int,int>}>  $slides
      */
@@ -520,22 +520,22 @@ class Oficina extends Component
         }
     }
 
-    // ------------------------------------------------------------- redação IA
+    // ------------------------------------------------------------- AI writing
 
     public function redigirComIa(): void
     {
         $this->aviso = null;
 
         if (trim($this->brief) === '') {
-            $this->addError('brief', 'Escreva um tema ou brief para a IA desenvolver.');
+            $this->addError('brief', 'Write a topic or brief for the AI to develop.');
 
             return;
         }
 
         $this->planToken = (string) Str::uuid();
         $this->aRedigir = true;
-        $this->aviso = 'A IA está a redigir… (requer um worker: «php artisan queue:work»).';
-        $this->dispatch('loader-show', message: 'A IATECA está a redigir a publicação…');
+        $this->aviso = 'The AI is writing… (requires a worker: "php artisan queue:work").';
+        $this->dispatch('loader-show', message: 'IATECA is writing the post…');
 
         PlanearPublicacaoJob::dispatch($this->tipo, $this->brief, $this->plataforma, $this->planToken, $this->refsIndexadas());
 
@@ -558,7 +558,7 @@ class Oficina extends Component
         Cache::forget(PlanearPublicacaoJob::key($this->planToken));
 
         if (! empty($r['erro'])) {
-            $this->aviso = 'A redação falhou. Verifique se o worker está a correr e tente de novo.';
+            $this->aviso = 'Writing failed. Check that the worker is running and try again.';
 
             return;
         }
@@ -578,16 +578,16 @@ class Oficina extends Component
                 : (string) ($r['slides'][0]['texto'] ?? '');
         }
 
-        // A IA pode ter atribuído referências a cada cartão → semeia os anexos e
-        // recompõe os prompts com o conteúdo/anexos frescos.
+        // The AI may have assigned references to each card → seed the attachments and
+        // recompose the prompts with the fresh content/attachments.
         $this->semearAnexosDoPlano($r['slides'] ?? []);
         $this->prompts = [];
         $this->promptEditado = [];
         $this->garantirPrompts();
 
         $this->aviso = ($r['fonte'] ?? null) === 'ia'
-            ? 'Redigido pela IA ('.($r['fornecedor'] ?: 'LLM').'). Reveja e ajuste antes de guardar.'
-            : 'IA indisponível neste contexto — gerei um rascunho local. Para redação forte, corra «php artisan queue:work» num terminal com a sua sessão do Claude.';
+            ? 'Written by AI ('.($r['fornecedor'] ?: 'LLM').'). Review and adjust before saving.'
+            : 'AI unavailable in this context — I generated a local draft. For strong writing, run "php artisan queue:work" in a terminal with your Claude session.';
     }
 
     public function cancelarRedacao(): void
@@ -598,39 +598,39 @@ class Oficina extends Component
         $this->dispatch('loader-hide');
     }
 
-    // ------------------------------------------------------------- imagens
+    // ------------------------------------------------------------- images
 
-    /** Gera (ou regenera) TODAS as imagens de uma vez, com consistência visual. */
+    /** Generates (or regenerates) ALL images at once, with visual consistency. */
     public function gerarImagens(VaultContract $vault): void
     {
         $plano = $this->planoAtual();
         if ($plano->slides === []) {
-            $this->addError('slides', 'Componha a peça antes de gerar imagens.');
+            $this->addError('slides', 'Compose the piece before generating images.');
 
             return;
         }
 
-        // Grava a peça (se ainda não estava) ANTES de gerar, para que o trabalho
-        // seja recuperável como os vídeos: fica em Rascunhos e as imagens gravam-se
-        // na nota, mesmo que o utilizador saia da página.
+        // Save the piece (if not already) BEFORE generating, so the work
+        // is recoverable like the videos: it stays in Drafts and the images are saved
+        // in the note, even if the user leaves the page.
         if ($this->notaPath === null) {
             $this->notaPath = $this->persistir($vault, $plano)->path;
         }
 
-        // As imagens actuais passam a histórico.
+        // The current images move to history.
         foreach ($this->img as $i => $atual) {
             $this->empurrarHistorico($i, $atual);
         }
 
-        // Garante que cada cartão tem um prompt (o que se envia = o que se mostra).
+        // Ensure each card has a prompt (what is sent = what is shown).
         $this->garantirPrompts();
 
         $this->imgToken = (string) Str::uuid();
         $this->aGerar = true;
-        $this->dispatch('loader-show', message: 'A desenhar os cartões com o kie.ai…');
+        $this->dispatch('loader-show', message: 'Rendering the cards with kie.ai…');
 
-        // Marca a peça «a gerar»: alimenta o painel e permite retomar o estado
-        // ao voltar à página (a sondagem passa a ser pela nota, não pelo token).
+        // Mark the piece as "generating": feeds the panel and allows resuming the state
+        // when returning to the page (polling switches to the note, not the token).
         $slug = pathinfo($this->notaPath, PATHINFO_FILENAME);
         Cache::put(GerarImagensJob::notaKey($slug), true, now()->addMinutes(15));
 
@@ -642,7 +642,7 @@ class Oficina extends Component
         $this->verificarImagens();
     }
 
-    /** Regenera UM cartão. Com instrução + imagem actual → edição imagem→imagem. */
+    /** Regenerates ONE card. With instruction + current image → image→image editing. */
     public function regenerarCartao(int $i): void
     {
         $dados = $this->dadosCartao($i);
@@ -656,7 +656,7 @@ class Oficina extends Component
         }
 
         $instrucao = (string) ($this->editar[$i] ?? '');
-        // Composição de raiz (sem instrução de edição) usa o prompt do cartão.
+        // Composing from scratch (no edit instruction) uses the card's prompt.
         if (trim($instrucao) === '' && trim((string) ($this->prompts[$i] ?? '')) === '') {
             $this->prompts[$i] = $this->montarPrompt($i);
         }
@@ -673,10 +673,10 @@ class Oficina extends Component
         $this->verificarImagens();
     }
 
-    /** Sondado por wire:poll: aplica imagens prontas (lote e por cartão). */
+    /** Polled by wire:poll: applies ready images (batch and per card). */
     public function verificarImagens(): void
     {
-        // Lote gerado NESTA sessão (temos o token em cache).
+        // Batch generated in THIS session (we have the token in cache).
         if ($this->aGerar && $this->imgToken !== null) {
             $r = Cache::get(GerarImagensJob::key($this->imgToken));
             if ($r !== null) {
@@ -688,13 +688,13 @@ class Oficina extends Component
                         $this->img[$i] = $path;
                     }
                 } else {
-                    $this->addError('slides', 'O desenho das imagens falhou'
-                        .(! empty($r['msg']) ? ': '.$r['msg'] : '. Confirme o worker (fila «media») e os créditos do kie.ai.'));
+                    $this->addError('slides', 'Rendering the images failed'
+                        .(! empty($r['msg']) ? ': '.$r['msg'] : '. Check the worker (queue "media") and your kie.ai credits.'));
                 }
             }
         }
-        // Lote RETOMADO — voltámos à peça e o token perdeu-se. Sonda a flag da
-        // nota; quando a geração termina, recarrega as imagens gravadas na nota.
+        // Batch RESUMED — we came back to the piece and the token was lost. Polls the note's
+        // flag; when generation finishes, reloads the images saved in the note.
         elseif ($this->aGerar && $this->imgToken === null && $this->notaPath !== null) {
             $slug = pathinfo($this->notaPath, PATHINFO_FILENAME);
             if (! Cache::get(GerarImagensJob::notaKey($slug))) {
@@ -707,7 +707,7 @@ class Oficina extends Component
             }
         }
 
-        // Por cartão.
+        // Per card.
         foreach ($this->gerando as $i => $token) {
             $r = Cache::get(RegenerarCartaoJob::key($token));
             if ($r === null) {
@@ -720,16 +720,16 @@ class Oficina extends Component
                 $this->img[$i] = (string) $r['imagem'];
                 $this->editar[$i] = '';
             } else {
-                $this->addError('slides', 'A regeneração do cartão '.($i + 1).' falhou.');
+                $this->addError('slides', 'Regenerating card '.($i + 1).' failed.');
             }
         }
     }
 
-    /** Restaura uma versão anterior de um cartão (troca com a actual). */
+    /** Restores a previous version of a card (swaps with the current one). */
     public function restaurarVersao(int $i, string $path): void
     {
         $atual = $this->img[$i] ?? null;
-        // Remove a versão escolhida do histórico e coloca a actual lá.
+        // Remove the chosen version from history and put the current one there.
         $this->hist[$i] = array_values(array_filter($this->hist[$i] ?? [], fn ($p) => $p !== $path));
         if ($atual !== null && $atual !== $path) {
             array_unshift($this->hist[$i], $atual);
@@ -745,7 +745,7 @@ class Oficina extends Component
         $this->hist[$i] = $this->hist[$i] ?? [];
         if (! in_array($path, $this->hist[$i], true)) {
             array_unshift($this->hist[$i], $path);
-            $this->hist[$i] = array_slice($this->hist[$i], 0, 8); // limita o histórico
+            $this->hist[$i] = array_slice($this->hist[$i], 0, 8); // limit the history
         }
     }
 
@@ -757,7 +757,7 @@ class Oficina extends Component
         $this->dispatch('loader-hide');
     }
 
-    // ------------------------------------------------------------- guardar
+    // ------------------------------------------------------------- save
 
     public function criarRascunho(VaultContract $vault): void
     {
@@ -765,7 +765,7 @@ class Oficina extends Component
 
         $plano = $this->planoAtual();
         if ($this->ehCarrossel() && count($plano->slides) < 2) {
-            $this->addError('slides', 'Um carrossel precisa de pelo menos 2 cartões com texto.');
+            $this->addError('slides', 'A carousel needs at least 2 cards with text.');
 
             return;
         }
@@ -774,8 +774,8 @@ class Oficina extends Component
         $nota = $this->persistir($vault, $plano);
         $this->guardado = $nota->title();
 
-        // Guardar uma peça NOVA limpa a oficina (compor a próxima); editar uma
-        // peça já existente mantém-na aberta.
+        // Saving a NEW piece clears the workshop (to compose the next one); editing an
+        // existing piece keeps it open.
         if ($eraNovo) {
             $this->reset('brief', 'img', 'hist', 'editar', 'gerando', 'referencias', 'anexos', 'prompts', 'promptEditado');
             if ($this->ehCarrossel()) {
@@ -788,9 +788,9 @@ class Oficina extends Component
     }
 
     /**
-     * Grava (ou atualiza) a peça no vault e devolve a nota, sem efeitos na UI.
-     * Usado por «Guardar» e pela gravação automática antes de gerar imagens.
-     * Não altera $this->notaPath — cabe a quem chama decidir se a peça fica «aberta».
+     * Saves (or updates) the piece in the vault and returns the note, without UI effects.
+     * Used by "Save" and by the automatic save before generating images.
+     * Does not change $this->notaPath — the caller decides whether the piece stays "open".
      */
     private function persistir(VaultContract $vault, PublicacaoPlan $plano): \App\Services\Vault\VaultNote
     {
@@ -864,7 +864,7 @@ class Oficina extends Component
         return $regras;
     }
 
-    /** Constrói um plano a partir do estado actual do formulário (sem IA). */
+    /** Builds a plan from the current form state (without AI). */
     private function planoAtual(): PublicacaoPlan
     {
         return PublicacaoPlan::daOficina(
@@ -879,6 +879,6 @@ class Oficina extends Component
     public function render()
     {
         return view('livewire.publicacoes.oficina')
-            ->title(($this->kind['label'] ?? 'Publicação'));
+            ->title(($this->kind['label'] ?? 'Post'));
     }
 }

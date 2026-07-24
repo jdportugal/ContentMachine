@@ -14,7 +14,7 @@ class OpenAiAnimationPlanner implements AnimationPlanner
     {
         $key = config('services.openai.key');
         if (! $key) {
-            throw new RuntimeException('OPENAI_API_KEY em falta para o planeador.');
+            throw new RuntimeException('OPENAI_API_KEY missing for the planner.');
         }
 
         $response = Http::withToken($key)

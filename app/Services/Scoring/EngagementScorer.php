@@ -3,15 +3,15 @@
 namespace App\Services\Scoring;
 
 /**
- * Índice de desempenho de conteúdo (padrão head-of-content).
- * Combina taxa de interação ponderada por plataforma com o "outlier multiple"
- * (quantas vezes acima da mediana do canal um conteúdo se destacou).
+ * Content performance index (head-of-content pattern).
+ * Combines a platform-weighted interaction rate with the "outlier multiple"
+ * (how many times above the channel median a piece of content stood out).
  */
 class EngagementScorer
 {
     /**
-     * @param  array<string,float>  $item  métricas normalizadas do conteúdo
-     * @param  float  $medianaViews  mediana de views do canal (para outlier)
+     * @param  array<string,float>  $item  normalized content metrics
+     * @param  float  $medianaViews  channel median views (for the outlier)
      * @return array{score:int, taxa_interacao:float, outlier:float}
      */
     public function score(string $plataforma, array $item, float $medianaViews = 0.0): array
@@ -27,13 +27,13 @@ class EngagementScorer
             + ($item['partilhas'] ?? 0) * $pesos['partilhas']
             + ($item['guardados'] ?? 0) * $pesos['guardados'];
 
-        $taxa = $interacoesPonderadas / $views; // interações ponderadas por view
+        $taxa = $interacoesPonderadas / $views; // weighted interactions per view
 
         $outlier = $medianaViews > 0 ? $views / $medianaViews : 1.0;
 
-        // Índice 0–100: taxa de interação (log-comprimida) reforçada pelo outlier.
-        $base = min(1.0, $taxa * 8);                 // ~12.5% de taxa ponderada = topo
-        $bonus = min(0.35, ($outlier - 1) * 0.12);   // desempenho acima da mediana
+        // Index 0–100: interaction rate (log-compressed) reinforced by the outlier.
+        $base = min(1.0, $taxa * 8);                 // ~12.5% weighted rate = top
+        $bonus = min(0.35, ($outlier - 1) * 0.12);   // performance above the median
         $score = (int) round(max(0, min(1.0, $base + $bonus)) * 100);
 
         return [
@@ -43,7 +43,7 @@ class EngagementScorer
         ];
     }
 
-    /** Mediana de uma lista de valores (para o cálculo de outliers). */
+    /** Median of a list of values (for the outlier calculation). */
     public function mediana(array $valores): float
     {
         $valores = array_values(array_filter($valores, 'is_numeric'));

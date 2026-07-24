@@ -10,7 +10,7 @@ class KiePromptComposerTest extends TestCase
 {
     private function composer(): KiePromptComposer
     {
-        // Aponta o sistema de design para um caminho inexistente → estética por omissão.
+        // Points the design system at a non-existent path → default aesthetic.
         config(['contentmachine.design_system.path' => sys_get_temp_dir().'/nao-existe-'.uniqid().'.md']);
 
         return app(KiePromptComposer::class);
@@ -25,9 +25,9 @@ class KiePromptComposerTest extends TestCase
 
         $this->assertStringContainsString('Título Certo', $prompt);
         $this->assertStringContainsString('Corpo do cartão', $prompt);
-        // A diretriz de estilo de marca (seja a do design, seja a de omissão) entra no prompt.
+        // The brand style directive (design's or the default) makes it into the prompt.
         $this->assertStringContainsString($composer->estiloMarca(), $prompt);
-        $this->assertStringContainsString('Regras invariáveis', $prompt);
+        $this->assertStringContainsString('Invariable rules', $prompt);
     }
 
     public function test_posicao_e_contexto_nunca_texto_a_desenhar(): void
@@ -36,10 +36,10 @@ class KiePromptComposerTest extends TestCase
             'ordem' => 3, 'total' => 7,
         ]);
 
-        // A posição aparece como CONTEXTO explícito, não como texto a compor.
-        $this->assertStringContainsString('não desenhar', $prompt);
-        $this->assertStringContainsString('SEM numeração de página', $prompt);
-        $this->assertStringContainsString('cartão 3 de 7', $prompt);
+        // The position appears as explicit CONTEXT, not as text to compose.
+        $this->assertStringContainsString('do not draw', $prompt);
+        $this->assertStringContainsString('NO page numbering', $prompt);
+        $this->assertStringContainsString('card 3 of 7', $prompt);
     }
 
     public function test_prompt_traz_coerencia_dos_cartoes_anteriores(): void
@@ -51,7 +51,7 @@ class KiePromptComposerTest extends TestCase
 
         $this->assertStringContainsString('Capa', $prompt);
         $this->assertStringContainsString('Primeiro ponto', $prompt);
-        $this->assertStringContainsString('mesma identidade visual', mb_strtolower($prompt));
+        $this->assertStringContainsString('same visual identity', mb_strtolower($prompt));
     }
 
     public function test_prompt_descreve_imagens_anexas(): void
@@ -62,6 +62,6 @@ class KiePromptComposerTest extends TestCase
 
         $this->assertStringContainsString('logótipo IATECA', $prompt);
         $this->assertStringContainsString('foto do produto', $prompt);
-        $this->assertStringContainsString('referência anexas', $prompt);
+        $this->assertStringContainsString('attached to this card', $prompt);
     }
 }

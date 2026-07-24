@@ -5,10 +5,10 @@ namespace App\Services\Settings;
 use App\Services\Vault\VaultContract;
 
 /**
- * Definições operacionais da aplicação (não-secretas), guardadas no vault
- * como uma nota Markdown com frontmatter — legível no Obsidian e versionável.
+ * Operational (non-secret) app settings, stored in the vault as a Markdown
+ * note with frontmatter — readable in Obsidian and versionable.
  *
- * As CHAVES DE API continuam no .env (segredos), nunca aqui.
+ * API KEYS stay in .env (secrets), never here.
  */
 class SettingsRepository
 {
@@ -16,7 +16,7 @@ class SettingsRepository
 
     public function __construct(private readonly VaultContract $vault) {}
 
-    /** Estrutura e valores por defeito. */
+    /** Structure and default values. */
     public function defaults(): array
     {
         return [
@@ -31,12 +31,12 @@ class SettingsRepository
                 'linkedin' => ['handle' => '', 'url' => ''],
             ],
             'agregador' => [
-                'youtube' => [],   // canais a vigiar
+                'youtube' => [],   // channels to watch
                 'reddit' => [],    // subreddits
-                'twitter' => [],   // contas
-                'tiktok' => [],    // contas
+                'twitter' => [],   // accounts
+                'tiktok' => [],    // accounts
             ],
-            // Canais a agregar por plataforma (via yt-dlp). Sementes = Nick Saraev.
+            // Channels to aggregate per platform (via yt-dlp). Seeds = Nick Saraev.
             'canais' => [
                 'youtube' => ['https://www.youtube.com/@nicksaraev'],
                 'instagram' => ['https://www.instagram.com/nick_saraev/'],
@@ -44,20 +44,20 @@ class SettingsRepository
                 'linkedin' => ['https://www.linkedin.com/in/nick-saraev/'],
             ],
             'shorts' => [
-                // Modelo Whisper para transcrição local (tiny|base|small|medium).
-                // Vazio → usa config/services (env WHISPER_MODEL).
+                // Whisper model for local transcription (tiny|base|small|medium).
+                // Empty → uses config/services (env WHISPER_MODEL).
                 'whisper_model' => '',
             ],
         ];
     }
 
-    /** Todas as definições (defaults + guardadas). */
+    /** All settings (defaults + stored). */
     public function all(): array
     {
         $nota = $this->vault->get(self::PATH);
         $guardadas = $nota?->frontmatter ?? [];
 
-        // Remove metadados de sistema que o vault possa ter acrescentado.
+        // Remove system metadata that the vault may have added.
         unset($guardadas['data'], $guardadas['atualizado_em'], $guardadas['titulo'], $guardadas['tipo']);
 
         return array_replace_recursive($this->defaults(), $guardadas);
@@ -68,14 +68,14 @@ class SettingsRepository
         return data_get($this->all(), $chave, $default);
     }
 
-    /** Persiste as definições, preservando os defaults em falta. */
+    /** Persists the settings, preserving missing defaults. */
     public function save(array $data): void
     {
         $limpo = array_replace_recursive($this->defaults(), $data);
 
-        // As listas (canais/fontes) são substituídas por inteiro — não fundidas
-        // por índice — para que remover ou esvaziar uma entrada seja respeitado
-        // (o array_replace_recursive, sozinho, reintroduziria as sementes).
+        // The lists (channels/sources) are replaced wholesale — not merged
+        // by index — so that removing or emptying an entry is respected
+        // (array_replace_recursive alone would reintroduce the seeds).
         foreach (['canais', 'agregador'] as $grupo) {
             if (isset($data[$grupo]) && is_array($data[$grupo])) {
                 foreach ($data[$grupo] as $chave => $lista) {

@@ -6,7 +6,7 @@
     $toneClass = $tone === 'good' ? 'text-good' : ($tone === 'warn' ? 'text-warn' : 'text-bad');
 @endphp
 <div class="flex items-center gap-4 py-3 border-b border-ink-soft/10 last:border-0">
-    {{-- Miniatura da publicação; sem miniatura, o círculo de score. --}}
+    {{-- Post thumbnail; without a thumbnail, the score circle. --}}
     @if ($thumb !== '')
         <div class="shrink-0 w-14 h-14 rounded-sm overflow-hidden border border-ink-soft/20 bg-surface/40 relative">
             <img src="{{ $thumb }}" alt="" referrerpolicy="no-referrer" loading="lazy"
@@ -27,9 +27,9 @@
             <x-badge tone="teal">{{ $item['tipo'] }}</x-badge>
             <span class="font-mono text-[0.62rem] text-ink-faint">{{ \Illuminate\Support\Carbon::parse($item['publicado_em'])->translatedFormat('d M') }}</span>
             @if ($metricas)
-                <span class="font-mono text-[0.62rem] text-ink-faint">· {{ number_format(($item['views'] ?? 0) / 1000, 1) }} mil views</span>
+                <span class="font-mono text-[0.62rem] text-ink-faint">· {{ number_format(($item['views'] ?? 0) / 1000, 1) }}k views</span>
                 @if (($item['outlier'] ?? 0) >= 1.5)
-                    <x-badge tone="gold">▲ {{ $item['outlier'] }}× mediana</x-badge>
+                    <x-badge tone="gold">▲ {{ $item['outlier'] }}× median</x-badge>
                 @endif
             @endif
         </div>

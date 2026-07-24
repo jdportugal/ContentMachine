@@ -69,7 +69,7 @@ class CliRemotionRenderer implements RemotionRenderer
             $process->run();
 
             if (! $process->isSuccessful()) {
-                throw new RuntimeException('Remotion falhou: '.$process->getErrorOutput());
+                throw new RuntimeException('Remotion failed: '.$process->getErrorOutput());
             }
         } finally {
             @unlink($propsFile);
@@ -94,7 +94,7 @@ class CliRemotionRenderer implements RemotionRenderer
             return $dest;
         }
         if (! @copy($sourcePath, $dest)) {
-            throw new RuntimeException("Não foi possível preparar o ficheiro para render: {$sourcePath}");
+            throw new RuntimeException("Could not prepare the file for render: {$sourcePath}");
         }
 
         return $dest;

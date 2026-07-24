@@ -24,15 +24,15 @@ class AnimationPromptTest extends TestCase
     {
         $prompt = $this->builder()->sys('dense', true, ['video', 'over', 'split', 'animation']);
 
-        // Classifica o tipo de clip e dá orientação por tipo.
-        $this->assertStringContainsString('TIPO DE CLIP', $prompt);
+        // Classifies the clip type and gives per-type guidance.
+        $this->assertStringContainsString('CLIP TYPE', $prompt);
         $this->assertStringContainsString('TUTORIAL', $prompt);
 
-        // A relevância é a regra de ouro; nada irrelevante entra.
-        $this->assertStringContainsString('RELEVÂNCIA É LEI', $prompt);
+        // Relevance is the golden rule; nothing irrelevant gets in.
+        $this->assertStringContainsString('RELEVANCE IS LAW', $prompt);
 
-        // A pesquisa deixou de ser obrigatória em todas as cenas.
-        $this->assertStringContainsString('MATÉRIA-PRIMA OPCIONAL', $prompt);
-        $this->assertStringNotContainsString('A GRANDE MAIORIA das cenas tem uma VISUALIZAÇÃO', $prompt);
+        // Research is no longer mandatory in every scene.
+        $this->assertStringContainsString('OPTIONAL RAW MATERIAL', $prompt);
+        $this->assertStringNotContainsString('MAJORITY of scenes has a VISUALIZATION', $prompt);
     }
 }

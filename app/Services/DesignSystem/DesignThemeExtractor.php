@@ -42,46 +42,46 @@ class DesignThemeExtractor
     private function systemPrompt(): string
     {
         return <<<'PROMPT'
-        És um sistema que converte um guia de design (Markdown) num conjunto de tokens
-        para um motor de renderização de vídeo. Devolves SEMPRE e APENAS um objeto JSON
-        válido (sem markdown, sem comentários, sem texto à volta), nesta forma EXACTA:
+        You are a system that converts a design guide (Markdown) into a set of tokens
+        for a video rendering engine. You ALWAYS return ONLY a valid JSON object
+        (no markdown, no comments, no surrounding text), in this EXACT shape:
 
         {
           "colors": {
-            "bg": "#rrggbb",            // fundo principal
-            "bgAlt": "#rrggbb",         // superfície alternativa (cartões)
-            "bgContrast": "#rrggbb",    // fundo de contraste (o mais escuro/forte)
-            "textOnBg": "#rrggbb",      // texto sobre bg/bgAlt (TEM de contrastar)
-            "textOnContrast": "#rrggbb",// texto sobre bgContrast (TEM de contrastar)
-            "mutedOnBg": "#rrggbb",     // texto secundário sobre bg
+            "bg": "#rrggbb",            // main background
+            "bgAlt": "#rrggbb",         // alternative surface (cards)
+            "bgContrast": "#rrggbb",    // contrast background (the darkest/strongest)
+            "textOnBg": "#rrggbb",      // text over bg/bgAlt (MUST contrast)
+            "textOnContrast": "#rrggbb",// text over bgContrast (MUST contrast)
+            "mutedOnBg": "#rrggbb",     // secondary text over bg
             "mutedOnContrast": "#rrggbb",
-            "accent": "#rrggbb",        // cor de destaque principal
-            "accent2": "#rrggbb",       // destaque secundário
-            "accent3": "#rrggbb"        // terceiro destaque/ornamento
+            "accent": "#rrggbb",        // primary accent color
+            "accent2": "#rrggbb",       // secondary accent
+            "accent3": "#rrggbb"        // third accent/ornament
           },
           "fonts": {
-            "display": "Nome de família Google Fonts",  // títulos
-            "body": "Nome de família Google Fonts",     // corpo
-            "mono": "Nome de família Google Fonts"       // monoespaçada
+            "display": "Google Fonts family name",  // headings
+            "body": "Google Fonts family name",     // body
+            "mono": "Google Fonts family name"       // monospaced
           },
           "texture": { "kind": "paper" | "starfield" | "gradient" | "solid" }
         }
 
-        REGRAS:
-        - Extrai as cores REAIS do design (paleta, fundos, destaques). Usa hex #rrggbb.
-        - Garante CONTRASTE: se o fundo for escuro, o texto tem de ser claro (e vice-versa).
-        - As fontes TÊM de ser nomes reais do Google Fonts (ex.: "Anton", "Inter",
-          "Montserrat", "Playfair Display"). Se o design indicar uma fonte não-Google,
-          escolhe a alternativa Google Fonts mais próxima.
-        - texture.kind: "starfield" para temas espaciais/escuros com estrelas; "gradient"
-          para degradés; "solid" para fundo liso; "paper" para papel/textura orgânica.
-        - Responde SÓ com o JSON.
+        RULES:
+        - Extract the REAL colors from the design (palette, backgrounds, accents). Use hex #rrggbb.
+        - Ensure CONTRAST: if the background is dark, the text must be light (and vice-versa).
+        - Fonts MUST be real Google Fonts names (e.g. "Anton", "Inter",
+          "Montserrat", "Playfair Display"). If the design specifies a non-Google font,
+          choose the closest Google Fonts alternative.
+        - texture.kind: "starfield" for dark/space themes with stars; "gradient"
+          for gradients; "solid" for a flat background; "paper" for paper/organic texture.
+        - Reply ONLY with the JSON.
         PROMPT;
     }
 
     private function userPrompt(string $markdown): string
     {
-        return "Guia de design (Markdown):\n\n".$markdown."\n\nDevolve o JSON de tokens.";
+        return "Design guide (Markdown):\n\n".$markdown."\n\nReturn the tokens JSON.";
     }
 
     /** Strip code fences and decode the first JSON object found. */

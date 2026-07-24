@@ -1,7 +1,7 @@
 @props([
     'label',
     'value',
-    'delta' => null,      // ex.: +12.4  (percentagem)
+    'delta' => null,      // e.g.: +12.4  (percentage)
     'unit' => null,
     'accent' => '#5A7BFF',
 ])
@@ -22,7 +22,7 @@
     @if ($delta !== null)
         <div class="mt-1.5 font-mono text-xs {{ $deltaColor }}">
             {{ $deltaArrow }} {{ $deltaNum !== null ? number_format(abs($deltaNum), 1).'%' : $delta }}
-            <span class="text-ink-faint">vs. período anterior</span>
+            <span class="text-ink-faint">vs. previous period</span>
         </div>
     @endif
 </div>

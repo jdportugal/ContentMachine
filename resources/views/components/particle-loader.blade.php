@@ -6,7 +6,7 @@
      class="cm-loader" role="status" aria-live="polite" aria-busy="true">
     <canvas x-ref="canvas" class="cm-loader__canvas"></canvas>
     <div class="cm-loader__center">
-        <p class="cm-loader__msg" x-text="message">A processar</p>
+        <p class="cm-loader__msg" x-text="message">Processing</p>
         <div class="cm-loader__dots" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
 </div>

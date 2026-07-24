@@ -3,13 +3,13 @@
 namespace App\Services\Aggregation;
 
 /**
- * Converte legendas WebVTT (nomeadamente as auto-legendas do YouTube, com
- * marcações de tempo por palavra e linhas repetidas em rolo) em texto corrido
- * e legível. Função pura — sem I/O, fácil de testar com fixtures.
+ * Converts WebVTT subtitles (namely YouTube's auto-captions, with
+ * per-word timings and rolling repeated lines) into flowing,
+ * readable text. Pure function — no I/O, easy to test with fixtures.
  */
 class TranscriptParser
 {
-    /** Converte um documento VTT em texto simples deduplicado. */
+    /** Converts a VTT document into deduplicated plain text. */
     public function vttToText(string $vtt): string
     {
         $linhas = preg_split('/\r\n|\r|\n/', $vtt) ?: [];
@@ -23,7 +23,7 @@ class TranscriptParser
                 continue;
             }
 
-            // Cabeçalhos e metadados do formato.
+            // Format headers and metadata.
             if ($texto === 'WEBVTT'
                 || str_starts_with($texto, 'Kind:')
                 || str_starts_with($texto, 'Language:')
@@ -31,22 +31,22 @@ class TranscriptParser
                 continue;
             }
 
-            // Linhas de tempo (cue timings) e cabeçalhos numéricos de cue.
+            // Cue timing lines and numeric cue headers.
             if (str_contains($texto, '-->') || ctype_digit($texto)) {
                 continue;
             }
 
-            // Remove marcações inline (<00:00:00.120>, <c>, </c>, etc.).
+            // Remove inline markup (<00:00:00.120>, <c>, </c>, etc.).
             $texto = preg_replace('/<[^>]+>/', '', $texto) ?? $texto;
-            // Descodifica entidades e normaliza espaços.
+            // Decode entities and normalize whitespace.
             $texto = trim(preg_replace('/\s+/', ' ', html_entity_decode($texto, ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?? $texto);
 
             if ($texto === '') {
                 continue;
             }
 
-            // As auto-legendas repetem a linha anterior antes de acrescentar a
-            // seguinte — guardamos apenas quando difere da última mantida.
+            // Auto-captions repeat the previous line before adding the
+            // next — we keep only when it differs from the last kept one.
             if ($texto === $ultima) {
                 continue;
             }

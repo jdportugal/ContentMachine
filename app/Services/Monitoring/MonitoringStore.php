@@ -6,9 +6,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Guarda os itens de monitorização já recolhidos (por plataforma), para que o
- * driver leia depressa e a recolha lenta via yt-dlp aconteça só quando o
- * utilizador «Atualiza». Persistido na cache até nova recolha.
+ * Stores the already-collected monitoring items (per platform), so the
+ * driver reads quickly and the slow yt-dlp collection only happens when the
+ * user hits «Refresh». Persisted in cache until the next collection.
  */
 class MonitoringStore
 {
@@ -26,7 +26,7 @@ class MonitoringStore
     }
 
     /**
-     * Estatísticas de canal (subscritores, nº total de publicações, nome).
+     * Channel statistics (subscribers, total number of posts, name).
      *
      * @return array<string,mixed>
      */
@@ -37,7 +37,7 @@ class MonitoringStore
         return is_array($dados['canal'] ?? null) ? $dados['canal'] : [];
     }
 
-    /** Última recolha (ex.: «22/07 14:05»), ou null se nunca recolhido. */
+    /** Last collection (e.g. «22/07 14:05»), or null if never collected. */
     public function atualizadoEm(string $plataforma): ?string
     {
         $em = Cache::get($this->key($plataforma))['em'] ?? null;

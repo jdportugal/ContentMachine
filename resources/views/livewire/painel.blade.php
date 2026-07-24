@@ -1,29 +1,29 @@
 <div>
     <x-page-header
         eyebrow="Tomus · I"
-        title="Painel"
+        title="Dashboard"
         cota="006.3 · IAT · '26"
-        lead="Vista geral da casa — desempenho das redes, rascunhos em curso e o que há de novo no mundo." />
+        lead="Overview of the house — network performance, drafts in progress and what's new in the world." />
 
-    {{-- Totais dos canais --}}
+    {{-- Channel totals --}}
     @php use App\Services\Monitoring\MonitoringStats; @endphp
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <x-metric-card label="Subscritores" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF" />
-        <x-metric-card label="Publicações" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="publicadas" accent="#FFB347" />
-        <x-metric-card label="Visualizações" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recentes" accent="#FF7A3D" />
-        <x-metric-card label="Interações" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recentes" accent="#C77DFF" />
+        <x-metric-card label="Subscribers" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF" />
+        <x-metric-card label="Posts" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="published" accent="#FFB347" />
+        <x-metric-card label="Views" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recent" accent="#FF7A3D" />
+        <x-metric-card label="Interactions" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recent" accent="#C77DFF" />
     </div>
     @unless ($estatisticas['temDados'])
         <p class="mt-2 font-mono text-xs text-ink-faint">
-            Sem dados de canal ainda — vá a
-            <a href="{{ route('monitorizacao') }}" class="text-teal hover:underline">Monitorização</a>
-            e carregue em «Atualizar dados» para recolher dos seus canais.
+            No channel data yet — go to
+            <a href="{{ route('monitorizacao') }}" class="text-teal hover:underline">Monitoring</a>
+            and click «Update data» to collect from your channels.
         </p>
     @endunless
 
-    {{-- Desempenho por plataforma --}}
+    {{-- Performance by platform --}}
     <div class="mt-8">
-        <div class="eyebrow mb-3">Redes · desempenho recente</div>
+        <div class="eyebrow mb-3">Networks · recent performance</div>
         <div class="grid md:grid-cols-2 gap-4">
             @foreach ($plataformas as $p)
                 @php $meta = config('contentmachine.plataformas_meta.'.$p['plataforma']); @endphp
@@ -34,7 +34,7 @@
                             <h3 class="font-display text-2xl text-ink">{{ $meta['label'] }}</h3>
                         </div>
                         <a href="{{ route('monitorizacao', ['rede' => $p['plataforma']]) }}"
-                           class="font-mono text-[0.62rem] text-teal hover:underline">ver tudo →</a>
+                           class="font-mono text-[0.62rem] text-teal hover:underline">view all →</a>
                     </div>
 
                     @if ($p['resumo'])
@@ -46,7 +46,7 @@
 
                     @if ($p['melhor'])
                         <div class="mt-4 pt-3 border-t border-ink-soft/10">
-                            <div class="eyebrow mb-1">Melhor conteúdo</div>
+                            <div class="eyebrow mb-1">Best content</div>
                             <x-content-row :item="$p['melhor']" />
                         </div>
                     @endif
@@ -55,11 +55,11 @@
         </div>
     </div>
 
-    {{-- Notícias em destaque --}}
+    {{-- Featured news --}}
     <div class="mt-8">
         <div class="flex items-center justify-between mb-3">
-            <div class="eyebrow">Do mundo · destaques</div>
-            <a href="{{ route('noticias') }}" class="font-mono text-[0.62rem] text-teal hover:underline">agregador →</a>
+            <div class="eyebrow">From the world · highlights</div>
+            <a href="{{ route('noticias') }}" class="font-mono text-[0.62rem] text-teal hover:underline">aggregator →</a>
         </div>
         <x-panel glyph="☙">
             @foreach ($destaquesNoticias as $d)

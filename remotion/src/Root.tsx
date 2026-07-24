@@ -11,7 +11,7 @@ const defaultProps: ClipProps = {
   mode: "dense",
   transparent: false,
   animations: [
-    { start: 0, end: 2.5, primitive: "kinetic-text", text: "Máquina de Conteúdo", params: {} },
+    { start: 0, end: 2.5, primitive: "kinetic-text", text: "Content Machine", params: {} },
     { start: 2.5, end: 4, primitive: "fleuron-draw", text: "", params: {} },
     { start: 4, end: 6, primitive: "seal-stamp", text: "IATECA", params: {} },
   ],

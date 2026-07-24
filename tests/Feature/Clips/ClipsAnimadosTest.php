@@ -22,7 +22,7 @@ class ClipsAnimadosTest extends TestCase
 
     public function test_dashboard_renders_with_title(): void
     {
-        $this->get('/clips-animados')->assertOk()->assertSee('Clips Animados')->assertSee('Novo clip');
+        $this->get('/clips-animados')->assertOk()->assertSee('Animated Clips')->assertSee('New clip');
     }
 
     public function test_create_flow_makes_an_animation_project(): void

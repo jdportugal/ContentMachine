@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 
 /**
- * Cliente de geração de texto via LLM, com CADEIA de fornecedores: tenta cada
- * um por ordem e usa o primeiro que devolver texto. Assim, se o CLI do Claude
- * falhar (ex.: sem login no contexto do servidor), cai para uma API em vez de
- * degradar para heurística.
+ * Text generation client via LLM, with a CHAIN of providers: it tries each
+ * one in order and uses the first that returns text. This way, if the Claude CLI
+ * fails (e.g. not logged in in the server context), it falls back to an API instead of
+ * degrading to a heuristic.
  *
- * Fornecedores:
- *   - 'claude-cli' → `claude -p` (grátis; reutiliza a sessão, mas só funciona
- *     onde o `claude` esteja autenticado — pouco fiável a partir de um servidor).
- *   - 'anthropic'  → API da Anthropic (chave ANTHROPIC_API_KEY) — Claude fiável.
- *   - 'openai' / 'gemini' → via API (requer chave).
+ * Providers:
+ *   - 'claude-cli' → `claude -p` (free; reuses the session, but only works
+ *     where `claude` is authenticated — unreliable from a server).
+ *   - 'anthropic'  → Anthropic API (ANTHROPIC_API_KEY key) — reliable Claude.
+ *   - 'openai' / 'gemini' → via API (requires a key).
  *
  * config `contentmachine.aggregation.llm_provider`:
- *   'auto' (cadeia por disponibilidade) | um nome específico | 'none' (desligado).
- * Nunca lança — em falha devolve null.
+ *   'auto' (chain by availability) | a specific name | 'none' (disabled).
+ * Never throws — on failure returns null.
  */
 class LlmClient
 {
     /**
-     * Variáveis que marcam uma sessão do Claude Code em curso. Passadas a
-     * `claude -p` fá-lo-iam entrar em modo "sessão-filha" e falhar auth, por isso
-     * são removidas do subprocesso (via `env -u`).
+     * Variables that mark an in-progress Claude Code session. Passed to
+     * `claude -p` they would make it enter "child-session" mode and fail auth, so
+     * they are removed from the subprocess (via `env -u`).
      */
     private const MARCADORES_SESSAO = [
         'CLAUDECODE',
@@ -39,10 +39,10 @@ class LlmClient
         'AI_AGENT',
     ];
 
-    /** @var array<string,?string> cache de resolução de binários */
+    /** @var array<string,?string> binary resolution cache */
     private static array $binCache = [];
 
-    /** Último fornecedor que produziu texto (para rotular a saída). */
+    /** Last provider that produced text (to label the output). */
     private ?string $ultimoFornecedor = null;
 
     public function disponivel(): bool
@@ -50,16 +50,16 @@ class LlmClient
         return $this->fornecedores() !== [];
     }
 
-    /** Nome do fornecedor que produziu o último texto (ou o primeiro disponível). */
+    /** Name of the provider that produced the last text (or the first available). */
     public function fornecedorAtivo(): ?string
     {
         return $this->ultimoFornecedor ?? ($this->fornecedores()[0] ?? null);
     }
 
     /**
-     * Gera texto. Tenta os fornecedores por ordem até um devolver algo.
+     * Generates text. Tries the providers in order until one returns something.
      *
-     * @param  bool  $comFerramentas  Permite ao Claude (CLI) usar pesquisa/leitura web.
+     * @param  bool  $comFerramentas  Allows Claude (CLI) to use web search/reading.
      */
     public function texto(string $prompt, bool $comFerramentas = false): ?string
     {
@@ -87,7 +87,7 @@ class LlmClient
     }
 
     /**
-     * Cadeia ordenada de fornecedores a tentar, filtrada por disponibilidade.
+     * Ordered chain of providers to try, filtered by availability.
      *
      * @return array<int,string>
      */
@@ -110,7 +110,7 @@ class LlmClient
         }));
     }
 
-    /** Corre o CLI do Claude Code em modo não-interativo (prompt via stdin). */
+    /** Runs the Claude Code CLI in non-interactive mode (prompt via stdin). */
     private function claudeCli(string $prompt, bool $comFerramentas = false): ?string
     {
         $bin = $this->claudeBin();
@@ -118,12 +118,12 @@ class LlmClient
             return null;
         }
 
-        // Corre via `env -u …` para REMOVER os marcadores de sessão do Claude
-        // Code antes de invocar o `claude`. O Symfony Process reinjeta o ambiente
-        // herdado (getDefaultEnv), pelo que omití-los no ->env() não basta; se o
-        // subprocesso herdar CLAUDECODE/CLAUDE_CODE_*, o `claude -p` entra em modo
-        // "sessão-filha" e falha com "Not logged in". Com `env -u` são removidos
-        // à força e o `claude` autentica-se pelas credenciais em disco (~/.claude).
+        // Run via `env -u …` to REMOVE the Claude Code session markers
+        // before invoking `claude`. Symfony Process re-injects the inherited
+        // environment (getDefaultEnv), so omitting them in ->env() is not enough; if the
+        // subprocess inherits CLAUDECODE/CLAUDE_CODE_*, `claude -p` enters
+        // "child-session" mode and fails with "Not logged in". With `env -u` they are removed
+        // by force and `claude` authenticates via the on-disk credentials (~/.claude).
         $args = ['/usr/bin/env'];
         foreach (self::MARCADORES_SESSAO as $marcador) {
             $args[] = '-u';
@@ -154,7 +154,7 @@ class LlmClient
         return $r->successful() ? (trim($r->output()) ?: null) : null;
     }
 
-    /** API da Anthropic (Messages). Devolve o texto ou null. */
+    /** Anthropic API (Messages). Returns the text or null. */
     private function anthropic(string $chave, string $prompt): ?string
     {
         if (blank($chave)) {
@@ -204,16 +204,16 @@ class LlmClient
     }
 
     /**
-     * Ambiente para o subprocesso do `claude -p`: passa o ambiente REAL do
-     * processo (via getenv(), que funciona em CLI e na SAPI web — ao contrário
-     * de $_SERVER, que sob `php artisan serve` não expõe variáveis de ambiente)
-     * MAS remove os marcadores de sessão do Claude Code.
+     * Environment for the `claude -p` subprocess: passes the REAL process
+     * environment (via getenv(), which works in CLI and in the web SAPI — unlike
+     * $_SERVER, which under `php artisan serve` does not expose environment variables)
+     * BUT removes the Claude Code session markers.
      *
-     * O `claude` autentica-se pelas credenciais em disco (~/.claude, via HOME).
-     * Se herdar CLAUDECODE / CLAUDE_CODE_* de uma sessão-pai do Claude Code,
-     * entra em modo "sessão-filha" e falha com "Not logged in". Removê-los deixa
-     * o subprocesso correr como uma invocação de topo normal — funciona tanto
-     * dentro como fora de uma sessão do Claude Code.
+     * `claude` authenticates via the on-disk credentials (~/.claude, via HOME).
+     * If it inherits CLAUDECODE / CLAUDE_CODE_* from a parent Claude Code session,
+     * it enters "child-session" mode and fails with "Not logged in". Removing them lets
+     * the subprocess run as a normal top-level invocation — it works both
+     * inside and outside a Claude Code session.
      *
      * @return array<string,string>
      */
@@ -230,15 +230,15 @@ class LlmClient
             }
         }
 
-        // Dados do utilizador (para fallback de HOME/USER/LOGNAME).
+        // User data (for HOME/USER/LOGNAME fallback).
         $pw = function_exists('posix_getpwuid') && function_exists('posix_getuid')
             ? (posix_getpwuid(posix_getuid()) ?: [])
             : [];
 
-        // Garante HOME + PATH e, crucialmente, USER/LOGNAME/SHELL: o `claude`
-        // precisa deles para aceder às credenciais (Keychain no macOS). Sob a SAPI
-        // cli-server (php artisan serve) o Symfony Process não os propaga, o que
-        // deixava o `claude` "Not logged in" mesmo com HOME definido.
+        // Ensures HOME + PATH and, crucially, USER/LOGNAME/SHELL: `claude`
+        // needs them to access the credentials (Keychain on macOS). Under the
+        // cli-server SAPI (php artisan serve) Symfony Process does not propagate them, which
+        // left `claude` "Not logged in" even with HOME set.
         $garantir = [
             'HOME' => getenv('HOME') ?: ($env['HOME'] ?? ($pw['dir'] ?? '')),
             'PATH' => getenv('PATH') ?: ($env['PATH'] ?? '/usr/local/bin:/usr/bin:/bin'),
@@ -255,13 +255,13 @@ class LlmClient
         return $env;
     }
 
-    /** Variáveis que marcam uma sessão Claude Code em curso (a remover do subprocesso). */
+    /** Variables that mark an in-progress Claude Code session (to remove from the subprocess). */
     private function ehMarcadorSessao(string $chave): bool
     {
         return in_array($chave, self::MARCADORES_SESSAO, true) || str_starts_with($chave, 'CLAUDE_CODE');
     }
 
-    /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */
+    /** Absolute path of the `claude` binary, or null if unavailable (cached). */
     private function claudeBin(): ?string
     {
         $bin = (string) config('contentmachine.aggregation.claude_cli_bin', 'claude');

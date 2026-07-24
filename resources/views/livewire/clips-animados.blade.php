@@ -1,39 +1,39 @@
 <div @if ($view === 'dashboard' && $this->hasActive) wire:poll.3s @endif>
     @php
         $estados = [
-            'draft'        => ['label' => 'Rascunho',      'tone' => 'neutral', 'glyph' => '·'],
-            'transcribing' => ['label' => 'A transcrever', 'tone' => 'gold',    'glyph' => '❧'],
-            'planning'     => ['label' => 'A planear',     'tone' => 'gold',    'glyph' => '❧'],
-            'rendering'    => ['label' => 'A renderizar',  'tone' => 'gold',    'glyph' => '❧'],
-            'done'         => ['label' => 'Pronto',        'tone' => 'good',    'glyph' => '✔'],
-            'failed'       => ['label' => 'Falhou',        'tone' => 'bad',     'glyph' => '✕'],
+            'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
+            'transcribing' => ['label' => 'Transcribing',  'tone' => 'gold',    'glyph' => '❧'],
+            'planning'     => ['label' => 'Planning',      'tone' => 'gold',    'glyph' => '❧'],
+            'rendering'    => ['label' => 'Rendering',     'tone' => 'gold',    'glyph' => '❧'],
+            'done'         => ['label' => 'Ready',         'tone' => 'good',    'glyph' => '✔'],
+            'failed'       => ['label' => 'Failed',        'tone' => 'bad',     'glyph' => '✕'],
         ];
         $tipos = [
-            'animation' => ['label' => 'Animação',           'glyph' => '❈'],
-            'overlay'   => ['label' => 'Vídeo + Animações',  'glyph' => '❖'],
+            'animation' => ['label' => 'Animation',          'glyph' => '❈'],
+            'overlay'   => ['label' => 'Video + Animations', 'glyph' => '❖'],
         ];
     @endphp
 
     <x-page-header
         eyebrow="Tomus · IV"
-        title="Clips Animados"
+        title="Animated Clips"
         cota="741.5 · IAT · '26"
-        lead="Estúdio de animação: da locução à peça animada, com timestamps e planeamento assistido." />
+        lead="Animation studio: from voiceover to animated piece, with timestamps and assisted planning." />
 
     {{-- ============================================================ --}}
     {{-- DASHBOARD                                                    --}}
     {{-- ============================================================ --}}
     @if ($view === 'dashboard')
         <div class="flex items-center justify-between mb-6">
-            <div class="eyebrow">Clipes gerados · {{ $this->projects->count() }}</div>
+            <div class="eyebrow">Clips generated · {{ $this->projects->count() }}</div>
             <button type="button" wire:click="novoClip"
                     class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
-                ✦ Novo clip
+                ✦ New clip
             </button>
         </div>
 
         @if ($this->projects->isEmpty())
-            <x-empty-state glyph="❈" title="Sem clipes" note="Ainda não gerou nenhuma peça. Comece com «Novo clip»." />
+            <x-empty-state glyph="❈" title="No clips" note="You haven't generated any piece yet. Start with «New clip»." />
         @else
             <div class="space-y-5">
                 @foreach ($this->projects as $project)
@@ -44,7 +44,7 @@
                     @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
                         <div class="grid md:grid-cols-2 gap-5">
-                            {{-- ESQUERDA: vídeo --}}
+                            {{-- LEFT: video --}}
                             <div class="flex items-center justify-center">
                                 @if ($project->status === 'done' && $project->output_path)
                                     <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
@@ -62,7 +62,7 @@
                                 @endif
                             </div>
 
-                            {{-- DIREITA: título sugerido, descrição, tags, estado --}}
+                            {{-- RIGHT: suggested title, description, tags, status --}}
                             <div class="min-w-0 flex flex-col">
                                 <div class="flex items-start justify-between gap-3">
                                     <div class="flex items-center gap-2">
@@ -72,7 +72,7 @@
                                     <x-badge :tone="$e['tone']">{{ $e['glyph'] }} {{ $e['label'] }}</x-badge>
                                 </div>
 
-                                <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'Sem título' }}</div>
+                                <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'No title' }}</div>
                                 <div class="font-mono text-[0.58rem] text-ink-faint">#{{ $project->id }} · {{ $project->created_at?->diffForHumans() }}</div>
 
                                 @if (!empty($sug['description']))
@@ -87,20 +87,20 @@
                                     </div>
                                 @endif
 
-                                {{-- acções --}}
+                                {{-- actions --}}
                                 <div class="mt-auto pt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
                                     @if (!empty($project->plan['scenes']))
-                                        <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ editar clip</button>
+                                        <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ edit clip</button>
                                     @endif
                                     @if (!empty($project->transcript['text']))
-                                        <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ editar transcrição · regenerar</button>
+                                        <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ edit transcript · regenerate</button>
                                     @endif
                                     @if ($project->status === 'done' && $project->output_path)
-                                        <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ descarregar</a>
+                                        <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
                                     @endif
                                     <button type="button" wire:click="apagar({{ $project->id }})"
-                                            wire:confirm="Apagar este clip e os seus ficheiros? Esta acção é definitiva."
-                                            class="text-bad hover:underline ml-auto">✕ apagar</button>
+                                            wire:confirm="Delete this clip and its files? This action is permanent."
+                                            class="text-bad hover:underline ml-auto">✕ delete</button>
                                 </div>
                             </div>
                         </div>
@@ -111,83 +111,83 @@
     @endif
 
     {{-- ============================================================ --}}
-    {{-- CRIAÇÃO                                                      --}}
+    {{-- CREATION                                                     --}}
     {{-- ============================================================ --}}
     @if ($view === 'create')
-        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← voltar ao painel</button>
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
         @if ($createType === null)
-            {{-- passo 1: escolher tipo --}}
-            <div class="eyebrow mb-4">Passo · I — que tipo de clip?</div>
+            {{-- step 1: choose type --}}
+            <div class="eyebrow mb-4">Step · I — what kind of clip?</div>
             <div class="grid md:grid-cols-2 gap-6">
                 <button type="button" wire:click="escolherTipo('animation')" class="text-left group">
                     <x-panel class="h-full transition group-hover:border-teal/40">
                         <div class="flex items-start justify-between">
                             <div>
-                                <div class="eyebrow mb-2">Tipo · A</div>
-                                <h2 class="font-display text-3xl text-ink">Animação</h2>
-                                <p class="mt-2 text-ink-soft">De um texto ou locução — vídeo totalmente animado, com animação em cada segundo.</p>
+                                <div class="eyebrow mb-2">Type · A</div>
+                                <h2 class="font-display text-3xl text-ink">Animation</h2>
+                                <p class="mt-2 text-ink-soft">From text or voiceover — fully animated video, with animation on every second.</p>
                             </div>
                             <span class="text-4xl text-gold/70 select-none">❈</span>
                         </div>
-                        <div class="mt-6 font-mono text-[0.62rem] text-teal">escolher →</div>
+                        <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
                     </x-panel>
                 </button>
                 <button type="button" wire:click="escolherTipo('overlay')" class="text-left group">
                     <x-panel class="h-full transition group-hover:border-teal/40">
                         <div class="flex items-start justify-between">
                             <div>
-                                <div class="eyebrow mb-2">Tipo · B</div>
-                                <h2 class="font-display text-3xl text-ink">Vídeo + Animações</h2>
-                                <p class="mt-2 text-ink-soft">De um vídeo já pronto — animações sobrepostas apenas nos momentos que valem a pena.</p>
+                                <div class="eyebrow mb-2">Type · B</div>
+                                <h2 class="font-display text-3xl text-ink">Video + Animations</h2>
+                                <p class="mt-2 text-ink-soft">From a ready-made video — overlaid animations only at the moments worth it.</p>
                             </div>
                             <span class="text-4xl text-gold/70 select-none">❖</span>
                         </div>
-                        <div class="mt-6 font-mono text-[0.62rem] text-teal">escolher →</div>
+                        <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
                     </x-panel>
                 </button>
             </div>
         @elseif ($createType === 'animation')
-            {{-- passo 2A: formulário de animação --}}
-            <x-panel eyebrow="Passo · II — Animação" title="Nova animação" glyph="❈">
-                <form wire:submit="submitAnimation" x-on:submit="window.CMLoader.busy('A preparar o clip animado…')" class="space-y-5">
+            {{-- step 2A: animation form --}}
+            <x-panel eyebrow="Step · II — Animation" title="New animation" glyph="❈">
+                <form wire:submit="submitAnimation" x-on:submit="window.CMLoader.busy('Preparing the animated clip…')" class="space-y-5">
                     <div>
-                        <label class="eyebrow block mb-2">Guião / texto para locução</label>
+                        <label class="eyebrow block mb-2">Script / text for voiceover</label>
                         <textarea wire:model="text" rows="5"
-                                  placeholder="Escreva o texto. Será convertido em locução e transcrito para obter os tempos exactos."
+                                  placeholder="Write the text. It will be converted to voiceover and transcribed to get the exact timings."
                                   class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink placeholder:text-ink-faint focus:border-teal/50 focus:outline-none"></textarea>
                         @error('text') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <div class="flex items-center gap-3">
                         <span class="h-px flex-1 bg-ink-soft/15"></span>
-                        <span class="font-mono text-[0.6rem] text-ink-faint uppercase tracking-widest">ou</span>
+                        <span class="font-mono text-[0.6rem] text-ink-faint uppercase tracking-widest">or</span>
                         <span class="h-px flex-1 bg-ink-soft/15"></span>
                     </div>
 
                     <div x-data="voiceRecorder" class="space-y-3">
-                        <label class="eyebrow block">Gravar voz</label>
+                        <label class="eyebrow block">Record voice</label>
                         <div class="flex flex-wrap items-center gap-3">
                             <button type="button" x-show="!recording" @click="start()"
                                     class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-leather/50 text-leather font-mono text-xs hover:bg-leather/10 transition">
-                                <span class="text-base leading-none">●</span> Gravar
+                                <span class="text-base leading-none">●</span> Record
                             </button>
                             <button type="button" x-show="recording" x-cloak @click="stop()"
                                     class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-bad/60 text-bad font-mono text-xs hover:bg-bad/10 transition">
-                                <span class="text-base leading-none animate-pulse">■</span> Parar · <span x-text="elapsed + 's'"></span>
+                                <span class="text-base leading-none animate-pulse">■</span> Stop · <span x-text="elapsed + 's'"></span>
                             </button>
-                            <span x-show="uploading" x-cloak class="font-mono text-[0.6rem] text-ink-faint">a enviar gravação…</span>
-                            <span x-show="ready && !recording && !uploading" x-cloak class="font-mono text-[0.6rem] text-teal">gravação pronta ✔</span>
+                            <span x-show="uploading" x-cloak class="font-mono text-[0.6rem] text-ink-faint">uploading recording…</span>
+                            <span x-show="ready && !recording && !uploading" x-cloak class="font-mono text-[0.6rem] text-teal">recording ready ✔</span>
                             <span x-show="error" x-cloak class="font-mono text-[0.6rem] text-bad" x-text="error"></span>
                         </div>
                         <audio x-ref="player" x-show="ready" x-cloak controls class="w-full rounded-sm border border-ink-soft/15"></audio>
                     </div>
 
                     <div>
-                        <label class="eyebrow block mb-2">Ou carregar locução (áudio)</label>
+                        <label class="eyebrow block mb-2">Or upload voiceover (audio)</label>
                         <input type="file" wire:model="audio" accept="audio/*"
                                class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
-                        <div wire:loading wire:target="audio" class="mt-1 font-mono text-[0.6rem] text-ink-faint">a carregar…</div>
+                        <div wire:loading wire:target="audio" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
                         @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
@@ -195,33 +195,33 @@
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
-                            Gerar clip animado
+                            Generate animated clip
                         </button>
-                        <span wire:loading wire:target="submitAnimation" class="font-mono text-[0.6rem] text-ink-faint">a preparar…</span>
+                        <span wire:loading wire:target="submitAnimation" class="font-mono text-[0.6rem] text-ink-faint">preparing…</span>
                     </div>
-                    <p class="font-mono text-[0.6rem] text-ink-faint">Modo denso — cada segundo da locução recebe animação.</p>
+                    <p class="font-mono text-[0.6rem] text-ink-faint">Dense mode — every second of the voiceover gets animation.</p>
                 </form>
             </x-panel>
         @elseif ($createType === 'overlay')
-            {{-- passo 2B: formulário de vídeo+animações --}}
-            <x-panel eyebrow="Passo · II — Vídeo + Animações" title="Vídeo com animações" glyph="❖">
-                <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('A preparar o clip…')" class="space-y-5">
+            {{-- step 2B: video+animations form --}}
+            <x-panel eyebrow="Step · II — Video + Animations" title="Video with animations" glyph="❖">
+                <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('Preparing the clip…')" class="space-y-5">
                     <div>
-                        <label class="eyebrow block mb-2">Carregar vídeo (mp4 / mov)</label>
+                        <label class="eyebrow block mb-2">Upload video (mp4 / mov)</label>
                         <input type="file" wire:model="video" accept="video/mp4,video/quicktime"
                                class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
-                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">a carregar…</div>
+                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
                         @error('video') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
-                        <label class="eyebrow block mb-2">Estilos permitidos</label>
+                        <label class="eyebrow block mb-2">Allowed styles</label>
                         @php
                             $styles = [
-                                'video'     => ['t' => 'Só vídeo', 'd' => 'vídeo + legendas'],
-                                'over'      => ['t' => 'Animação por cima', 'd' => 'gráfico sobre o vídeo'],
-                                'split'     => ['t' => 'Ecrã dividido', 'd' => 'animação em cima, vídeo em baixo'],
-                                'animation' => ['t' => 'Ecrã inteiro', 'd' => 'animação cobre o vídeo'],
+                                'video'     => ['t' => 'Video only', 'd' => 'video + subtitles'],
+                                'over'      => ['t' => 'Animation on top', 'd' => 'graphic over the video'],
+                                'split'     => ['t' => 'Split screen', 'd' => 'animation on top, video below'],
+                                'animation' => ['t' => 'Full screen', 'd' => 'animation covers the video'],
                             ];
                         @endphp
                         <div class="grid sm:grid-cols-2 gap-2">
@@ -242,19 +242,19 @@
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
-                            Gerar clip
+                            Generate clip
                         </button>
-                        <span wire:loading wire:target="submitOverlay" class="font-mono text-[0.6rem] text-ink-faint">a preparar…</span>
+                        <span wire:loading wire:target="submitOverlay" class="font-mono text-[0.6rem] text-ink-faint">preparing…</span>
                     </div>
-                    <p class="font-mono text-[0.6rem] text-ink-faint">A IA intercala automaticamente os estilos escolhidos, conforme o conteúdo.</p>
+                    <p class="font-mono text-[0.6rem] text-ink-faint">The AI automatically interleaves the chosen styles, according to the content.</p>
                 </form>
             </x-panel>
         @endif
 
-        {{-- Imagens (opcional) — para ambos os tipos --}}
+        {{-- Images (optional) — for both types --}}
         @if ($createType !== null)
-            <x-panel class="mt-6" eyebrow="Opcional" title="Imagens" glyph="▣">
-                <p class="text-ink-soft text-sm mb-4">Carregue imagens e descreva o que mostram. A IA usa-as animadas nas cenas onde encaixam.</p>
+            <x-panel class="mt-6" eyebrow="Optional" title="Images" glyph="▣">
+                <p class="text-ink-soft text-sm mb-4">Upload images and describe what they show. The AI uses them animated in the scenes where they fit.</p>
 
                 @if (!empty($images))
                     <div class="space-y-2 mb-4">
@@ -272,19 +272,19 @@
 
                 <div class="grid grid-cols-12 gap-2 items-end">
                     <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">ficheiro</label>
+                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">file</label>
                         <input type="file" wire:model="newImage" accept="image/*"
                                class="block w-full text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
-                        <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">a carregar…</div>
+                        <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">uploading…</div>
                     </div>
                     <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">descrição</label>
-                        <input type="text" wire:model="newImageDesc" placeholder="ex.: logótipo da empresa"
+                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">description</label>
+                        <input type="text" wire:model="newImageDesc" placeholder="e.g.: company logo"
                                class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                     </div>
                     <div class="col-span-2">
                         <button type="button" wire:click="adicionarImagem"
-                                class="w-full font-mono text-[0.62rem] px-3 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">+ juntar</button>
+                                class="w-full font-mono text-[0.62rem] px-3 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">+ add</button>
                     </div>
                 </div>
                 @error('newImage') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
@@ -294,14 +294,14 @@
     @endif
 
     {{-- ============================================================ --}}
-    {{-- EDITAR CLIP (animações)                                      --}}
+    {{-- EDIT CLIP (animations)                                       --}}
     {{-- ============================================================ --}}
     @if ($view === 'editPlan')
         <div class="flex items-center justify-between mb-6">
-            <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">← voltar ao painel</button>
+            <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">← back to dashboard</button>
             <div class="flex gap-1 font-mono text-[0.62rem]">
                 <button type="button" wire:click="$set('editMode','cenas')"
-                        class="px-3 py-1 rounded-sm border {{ $editMode === 'cenas' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">Cenas</button>
+                        class="px-3 py-1 rounded-sm border {{ $editMode === 'cenas' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">Scenes</button>
                 <button type="button" wire:click="$set('editMode','json')"
                         class="px-3 py-1 rounded-sm border {{ $editMode === 'json' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">JSON (Remotion)</button>
             </div>
@@ -318,23 +318,23 @@
         @endif
 
         @if ($editMode === 'json')
-            <x-panel eyebrow="Editar clip" title="Plano Remotion (JSON)" glyph="⌘">
+            <x-panel eyebrow="Edit clip" title="Remotion plan (JSON)" glyph="⌘">
                 <form wire:submit="guardarJson" class="space-y-4">
-                    <p class="text-ink-soft text-sm">Edita directamente o plano que vai para o Remotion (cenas, camadas, params). O áudio, karaoke e imagens são acrescentados no render.</p>
+                    <p class="text-ink-soft text-sm">Edit directly the plan that goes to Remotion (scenes, layers, params). Audio, karaoke and images are added at render.</p>
                     <textarea wire:model="editPlanJson" rows="22" spellcheck="false"
                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink font-mono text-xs leading-relaxed focus:border-teal/50 focus:outline-none" style="tab-size:2"></textarea>
                     @error('editPlanJson') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                     <div class="flex items-center gap-3">
-                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Guardar JSON e re-renderizar</button>
-                        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancelar</button>
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Save JSON and re-render</button>
+                        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
                     </div>
                 </form>
             </x-panel>
         @else
-        <x-panel eyebrow="Editar clip" title="Cenas" glyph="✎">
+        <x-panel eyebrow="Edit clip" title="Scenes" glyph="✎">
             <form wire:submit="guardarPlano" class="space-y-5">
                 <div>
-                    <label class="eyebrow block mb-2">Título</label>
+                    <label class="eyebrow block mb-2">Title</label>
                     <input type="text" wire:model="editTitle" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none" />
                 </div>
 
@@ -344,32 +344,32 @@
                     @foreach ($editScenes as $i => $scene)
                         <div class="border border-ink-soft/15 rounded-sm p-3 bg-surface/20" wire:key="scene-{{ $i }}">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="eyebrow">Cena {{ $i + 1 }} · <span class="text-ink-faint normal-case tracking-normal">{{ $scene['layersSummary'] ?? '—' }}</span></span>
-                                <button type="button" wire:click="removerCena({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remover">✕</button>
+                                <span class="eyebrow">Scene {{ $i + 1 }} · <span class="text-ink-faint normal-case tracking-normal">{{ $scene['layersSummary'] ?? '—' }}</span></span>
+                                <button type="button" wire:click="removerCena({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remove">✕</button>
                             </div>
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">início</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">start</label>
                                     <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.start" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fim</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">end</label>
                                     <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.end" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fundo</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">background</label>
                                     <select wire:model="editScenes.{{ $i }}.background" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none">
                                         @foreach ($backgrounds as $bg)<option value="{{ $bg }}">{{ $bg }}</option>@endforeach
                                     </select>
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">transição</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">transition</label>
                                     <select wire:model="editScenes.{{ $i }}.transitionIn" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none">
                                         @foreach ($transitions as $tr)<option value="{{ $tr }}">{{ $tr }}</option>@endforeach
                                     </select>
                                 </div>
                                 <div class="col-span-12">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">texto do elemento</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">element text</label>
                                     <input type="text" wire:model="editScenes.{{ $i }}.layerText" placeholder="—" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-7">
@@ -386,35 +386,35 @@
                     @error('editScenes.*.end') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                 </div>
 
-                <button type="button" wire:click="adicionarCena" class="font-mono text-[0.62rem] text-teal hover:underline">+ adicionar cena</button>
+                <button type="button" wire:click="adicionarCena" class="font-mono text-[0.62rem] text-teal hover:underline">+ add scene</button>
 
                 <div class="flex items-center gap-3 pt-2 border-t border-ink-soft/15">
-                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition mt-4">Guardar e re-renderizar</button>
-                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mt-4">cancelar</button>
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition mt-4">Save and re-render</button>
+                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mt-4">cancel</button>
                 </div>
-                <p class="font-mono text-[0.6rem] text-ink-faint">Edita o ritmo das cenas (tempos, fundo, transição, ênfase, karaoke). As camadas de cada cena são preservadas. Lacunas em modo denso preenchem-se com «ambient».</p>
+                <p class="font-mono text-[0.6rem] text-ink-faint">Edit the pacing of the scenes (timings, background, transition, emphasis, karaoke). Each scene's layers are preserved. Gaps in dense mode are filled with «ambient».</p>
             </form>
         </x-panel>
         @endif
     @endif
 
     {{-- ============================================================ --}}
-    {{-- EDITAR TRANSCRIÇÃO                                           --}}
+    {{-- EDIT TRANSCRIPT                                              --}}
     {{-- ============================================================ --}}
     @if ($view === 'editTranscript')
-        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← voltar ao painel</button>
-        <x-panel eyebrow="Editar transcrição" title="Corrigir e regenerar" glyph="✎">
-            <form wire:submit="regenerar" x-on:submit="window.CMLoader.busy('A regenerar as animações…')" class="space-y-5">
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+        <x-panel eyebrow="Edit transcript" title="Correct and regenerate" glyph="✎">
+            <form wire:submit="regenerar" x-on:submit="window.CMLoader.busy('Regenerating the animations…')" class="space-y-5">
                 <div>
-                    <label class="eyebrow block mb-2">Transcrição (corrija erros do reconhecimento)</label>
+                    <label class="eyebrow block mb-2">Transcript (correct recognition errors)</label>
                     <textarea wire:model="editTranscriptText" rows="6" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
                     @error('editTranscriptText') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                 </div>
                 <div class="flex items-center gap-3">
-                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Regenerar animações</button>
-                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancelar</button>
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Regenerate animations</button>
+                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
                 </div>
-                <p class="font-mono text-[0.6rem] text-ink-faint">A IA volta a planear as animações a partir do texto corrigido e renderiza de novo.</p>
+                <p class="font-mono text-[0.6rem] text-ink-faint">The AI re-plans the animations from the corrected text and renders again.</p>
             </form>
         </x-panel>
     @endif
@@ -427,7 +427,7 @@
 
             async start() {
                 this.error = null;
-                if (!navigator.mediaDevices?.getUserMedia) { this.error = 'Gravação não suportada neste navegador.'; return; }
+                if (!navigator.mediaDevices?.getUserMedia) { this.error = 'Recording not supported in this browser.'; return; }
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     this.chunks = [];
@@ -437,7 +437,7 @@
                     this.recorder.start();
                     this.recording = true; this.ready = false; this.elapsed = 0;
                     this.timer = setInterval(() => this.elapsed++, 1000);
-                } catch (e) { this.error = 'Sem acesso ao microfone.'; }
+                } catch (e) { this.error = 'No microphone access.'; }
             },
             stop() {
                 clearInterval(this.timer);
@@ -453,7 +453,7 @@
                 this.uploading = true;
                 this.$wire.upload('audio', file,
                     () => { this.uploading = false; },
-                    () => { this.uploading = false; this.error = 'Falha ao enviar a gravação.'; },
+                    () => { this.uploading = false; this.error = 'Failed to upload the recording.'; },
                     () => {}
                 );
             },

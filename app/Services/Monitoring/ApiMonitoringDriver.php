@@ -7,13 +7,13 @@ use App\Services\Support\DriverNotConfiguredException;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Driver real (ponto de integração). Padrão head-of-content:
+ * Real driver (integration point). Head-of-content pattern:
  *   - YouTube  → TubeLab Outliers API
- *   - Instagram/TikTok/LinkedIn → actores Apify
+ *   - Instagram/TikTok/LinkedIn → Apify actors
  *
- * Requer credenciais em config/services. Sem elas, lança
- * DriverNotConfiguredException — a app usa 'fake' por defeito, por isso
- * este caminho só é atingido após configuração explícita.
+ * Requires credentials in config/services. Without them, it throws
+ * DriverNotConfiguredException — the app uses 'fake' by default, so
+ * this path is only reached after explicit configuration.
  */
 class ApiMonitoringDriver implements MonitoringDriver
 {
@@ -67,8 +67,8 @@ class ApiMonitoringDriver implements MonitoringDriver
     }
 
     /**
-     * Chama a API externa. Isolado para facilitar testes/mock quando as
-     * credenciais existirem. Enquanto não houver chave, falha de forma clara.
+     * Calls the external API. Isolated to ease testing/mocking once the
+     * credentials exist. While there is no key, it fails clearly.
      */
     private function obterRaw(string $recurso): array
     {
@@ -81,11 +81,11 @@ class ApiMonitoringDriver implements MonitoringDriver
             throw DriverNotConfiguredException::for($this->plataforma, $chave);
         }
 
-        // Ponto de integração: mapear a resposta da API para o formato normalizado
+        // Integration point: map the API response to the normalized format
         // (id, plataforma, tipo, titulo, url, publicado_em, views, likes, comentarios,
-        //  partilhas, guardados). Http já disponível para quando as chaves existirem.
-        // Ex.: return Http::withToken($token)->get(...)->json('itens', []);
-        unset($recurso); // recurso usado no mapeamento real por endpoint
+        //  partilhas, guardados). Http already available for when the keys exist.
+        // e.g. return Http::withToken($token)->get(...)->json('itens', []);
+        unset($recurso); // resource used in the real per-endpoint mapping
 
         return Http::withToken($token)->throw()->timeout(20)
             ->get(config('services.apify.base_url', 'https://api.apify.com'))

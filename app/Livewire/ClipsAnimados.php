@@ -17,7 +17,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Clips Animados')]
+#[Title('Animated Clips')]
 class ClipsAnimados extends Component
 {
     use WithFileUploads;
@@ -30,7 +30,7 @@ class ClipsAnimados extends Component
     /** dashboard | create | editPlan | editTranscript */
     public string $view = 'dashboard';
 
-    // ---- criação ----
+    // ---- creation ----
     /** null | animation | overlay */
     public ?string $createType = null;
     public string $text = '';
@@ -39,17 +39,17 @@ class ClipsAnimados extends Component
     /** which presentation styles the AI may use for a video clip */
     public array $allowedPresents = ['video', 'over', 'split', 'animation'];
 
-    // imagens (com descrição) para o planeador poder usá-las animadas
+    // images (with description) so the planner can use them animated
     public $newImage = null;
     public string $newImageDesc = '';
     /** @var array<int,array{id:string,path:string,description:string}> */
     public array $images = [];
 
-    // música de fundo (mesma biblioteca dos shorts) — '' = aleatória, 'nenhuma' = sem música
+    // background music (same library as shorts) — '' = random, 'nenhuma' = no music
     public string $musica = '';
     public float $musicaVolume = 0.1;
 
-    // ---- edição ----
+    // ---- editing ----
     public ?int $editingId = null;
     public string $editTitle = '';
     /** @var array<int,array<string,mixed>> scene rows (layers preserved verbatim) */
@@ -60,7 +60,7 @@ class ClipsAnimados extends Component
     public string $editTranscriptText = '';
 
     // =====================================================================
-    // Navegação
+    // Navigation
     // =====================================================================
 
     public function novoClip(): void
@@ -89,11 +89,11 @@ class ClipsAnimados extends Component
             'newImage' => 'required|image|max:20480',
             'newImageDesc' => 'required|string|max:200',
         ], [
-            'newImage.required' => 'Escolha uma imagem.',
-            'newImage.image' => 'O ficheiro tem de ser uma imagem.',
-            'newImage.max' => 'A imagem é demasiado grande (máximo 20 MB).',
-            'newImageDesc.required' => 'Descreva o que a imagem mostra.',
-        ], ['newImage' => 'imagem', 'newImageDesc' => 'descrição']);
+            'newImage.required' => 'Choose an image.',
+            'newImage.image' => 'The file must be an image.',
+            'newImage.max' => 'The image is too large (maximum 20 MB).',
+            'newImageDesc.required' => 'Describe what the image shows.',
+        ], ['newImage' => 'image', 'newImageDesc' => 'description']);
 
         $path = $this->newImage->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
@@ -167,7 +167,7 @@ class ClipsAnimados extends Component
     }
 
     // =====================================================================
-    // Criação
+    // Creation
     // =====================================================================
 
     public function submitAnimation(): void
@@ -176,10 +176,10 @@ class ClipsAnimados extends Component
             'text' => 'required_without:audio|nullable|string|max:5000',
             'audio' => 'nullable|file|mimetypes:audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/mp4,audio/aac,audio/ogg,audio/webm,video/webm,video/mp4|max:51200',
         ], [
-            'text.required_without' => 'Escreva um texto, grave a voz ou carregue um ficheiro de áudio.',
-            'audio.mimetypes' => 'Formato de áudio não suportado. Grave de novo ou carregue mp3/wav/m4a.',
-            'audio.max' => 'A locução é demasiado grande (máximo 50 MB).',
-        ], ['text' => 'texto', 'audio' => 'locução']);
+            'text.required_without' => 'Write a text, record your voice or upload an audio file.',
+            'audio.mimetypes' => 'Unsupported audio format. Record again or upload mp3/wav/m4a.',
+            'audio.max' => 'The voiceover is too large (maximum 50 MB).',
+        ], ['text' => 'text', 'audio' => 'voiceover']);
 
         $kind = $this->audio ? 'audio' : 'text';
         $path = $this->audio ? $this->audio->store('clips/uploads') : null;
@@ -205,11 +205,11 @@ class ClipsAnimados extends Component
             'allowedPresents' => 'array|min:1',
             'allowedPresents.*' => 'in:video,over,split,animation',
         ], [
-            'video.required' => 'Carregue um vídeo (mp4 ou mov).',
-            'video.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
-            'video.max' => 'O vídeo é demasiado grande (máximo 500 MB).',
-            'allowedPresents.min' => 'Escolha pelo menos um estilo.',
-        ], ['video' => 'vídeo']);
+            'video.required' => 'Upload a video (mp4 or mov).',
+            'video.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
+            'video.max' => 'The video is too large (maximum 500 MB).',
+            'allowedPresents.min' => 'Choose at least one style.',
+        ], ['video' => 'video']);
 
         $path = $this->video->store('clips/uploads');
 
@@ -227,7 +227,7 @@ class ClipsAnimados extends Component
     }
 
     // =====================================================================
-    // Editar clip (animações → re-render)
+    // Edit clip (animations → re-render)
     // =====================================================================
 
     public function editarClip(int $id): void
@@ -301,12 +301,12 @@ class ClipsAnimados extends Component
     {
         $decoded = json_decode($this->editPlanJson, true);
         if (! is_array($decoded)) {
-            $this->addError('editPlanJson', 'JSON inválido: '.json_last_error_msg());
+            $this->addError('editPlanJson', 'Invalid JSON: '.json_last_error_msg());
 
             return;
         }
         if (! isset($decoded['scenes']) || ! is_array($decoded['scenes'])) {
-            $this->addError('editPlanJson', 'O plano precisa de uma lista "scenes".');
+            $this->addError('editPlanJson', 'The plan needs a "scenes" list.');
 
             return;
         }
@@ -320,7 +320,7 @@ class ClipsAnimados extends Component
         $decoded['fps'] = (int) ($decoded['fps'] ?? $c['fps']);
 
         if ($decoded['duration'] <= 0) {
-            $this->addError('editPlanJson', 'O plano precisa de "duration" (segundos) maior que zero.');
+            $this->addError('editPlanJson', 'The plan needs "duration" (seconds) greater than zero.');
 
             return;
         }
@@ -366,8 +366,8 @@ class ClipsAnimados extends Component
             'editScenes.*.punchWord' => 'nullable|string|max:60',
             'editScenes.*.layerText' => 'nullable|string|max:280',
         ], [
-            'editScenes.min' => 'O clip precisa de pelo menos uma cena.',
-            'editScenes.*.end.gt' => 'O fim tem de ser maior que o início.',
+            'editScenes.min' => 'The clip needs at least one scene.',
+            'editScenes.*.end.gt' => 'The end must be greater than the start.',
         ]);
 
         $p = ClipProject::findOrFail($this->editingId);
@@ -406,7 +406,7 @@ class ClipsAnimados extends Component
     }
 
     // =====================================================================
-    // Editar transcrição (→ replaneia + re-render)
+    // Edit transcript (→ replans + re-render)
     // =====================================================================
 
     public function editarTranscricao(int $id): void
@@ -422,7 +422,7 @@ class ClipsAnimados extends Component
     {
         $this->validate(
             ['editTranscriptText' => 'required|string|max:5000'],
-            ['editTranscriptText.required' => 'A transcrição não pode ficar vazia.'],
+            ['editTranscriptText.required' => 'The transcript cannot be empty.'],
         );
 
         $p = ClipProject::findOrFail($this->editingId);
@@ -445,7 +445,7 @@ class ClipsAnimados extends Component
     }
 
     // =====================================================================
-    // Apagar
+    // Delete
     // =====================================================================
 
     public function apagar(int $id): void
@@ -467,7 +467,7 @@ class ClipsAnimados extends Component
     }
 
     // =====================================================================
-    // Dados para a vista
+    // Data for the view
     // =====================================================================
 
     /** @return \Illuminate\Support\Collection<int,ClipProject> */
@@ -490,7 +490,7 @@ class ClipsAnimados extends Component
     {
         $text = trim((string) $text);
 
-        return $text === '' ? 'Sem título' : Str::limit($text, 48);
+        return $text === '' ? 'Untitled' : Str::limit($text, 48);
     }
 
     public function render(\App\Services\Shorts\MusicLibrary $music)

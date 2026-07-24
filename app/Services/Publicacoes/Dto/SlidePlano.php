@@ -3,13 +3,13 @@
 namespace App\Services\Publicacoes\Dto;
 
 /**
- * Um cartão planeado de uma publicação (capa ou conteúdo).
+ * A planned card of a post (cover or content).
  */
 class SlidePlano
 {
     /**
-     * @param  array<int,int>  $referencias  índices (na pool de referências) das
-     *   imagens que a IA associou a este cartão. Semeiam os anexos na oficina.
+     * @param  array<int,int>  $referencias  indices (in the reference pool) of the
+     *   images the AI associated with this card. They seed the attachments in the workshop.
      */
     public function __construct(
         public int $ordem,

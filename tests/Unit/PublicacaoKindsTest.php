@@ -35,7 +35,7 @@ class PublicacaoKindsTest extends TestCase
 
         $this->assertSame('carousel', $kinds->formato('carrossel'));
         $this->assertSame('single', $kinds->formato('post'));
-        $this->assertSame('Carrosséis', $kinds->get('carrossel')['label']);
+        $this->assertSame('Carousels', $kinds->get('carrossel')['label']);
         $this->assertNull($kinds->get('inexistente'));
     }
 

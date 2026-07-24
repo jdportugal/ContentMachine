@@ -6,7 +6,7 @@ use App\Services\Scoring\EngagementScorer;
 use Illuminate\Support\Collection;
 
 /**
- * Resolve o driver de monitorização por plataforma, segundo a config.
+ * Resolves the monitoring driver per platform, according to the config.
  */
 class MonitoringManager
 {

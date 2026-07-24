@@ -6,7 +6,7 @@ interface MetadataService
 {
     /**
      * Suggest publishing metadata (title, description, tags) for a clip from
-     * its transcript — the equivalent of the shorts pipeline's título/descrição/tags.
+     * its transcript — the equivalent of the shorts pipeline's title/description/tags.
      *
      * @return array{title:string,description:string,tags:array<int,string>}
      */

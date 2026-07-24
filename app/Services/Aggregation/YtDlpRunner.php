@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 
 /**
- * Implementação real do runner: invoca o yt-dlp em modo METADADOS-ONLY
- * (nunca descarrega média — apenas JSON e legendas de texto) e faz GETs HTTP.
+ * Real runner implementation: invokes yt-dlp in METADATA-ONLY mode
+ * (never downloads media — only JSON and text subtitles) and makes HTTP GETs.
  *
- * O comando base é configurável (config `contentmachine.aggregation.ytdlp_cmd`)
- * para suportar tanto `yt-dlp` (Docker) como `python3 -m yt_dlp` (local).
+ * The base command is configurable (config `contentmachine.aggregation.ytdlp_cmd`)
+ * to support both `yt-dlp` (Docker) and `python3 -m yt_dlp` (local).
  */
 class YtDlpRunner implements YtDlpRunnerContract
 {
@@ -88,8 +88,8 @@ class YtDlpRunner implements YtDlpRunnerContract
     }
 
     /**
-     * Argumentos de extractor específicos por plataforma (ex.: forçar o cliente
-     * `android` do YouTube, que evita o erro "The page needs to be reloaded").
+     * Platform-specific extractor arguments (e.g. force YouTube's `android`
+     * client, which avoids the "The page needs to be reloaded" error).
      *
      * @return array<int,string>
      */
