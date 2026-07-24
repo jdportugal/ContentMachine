@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Middleware\SetActiveProject;
+use App\Livewire\Definicoes;
 use App\Livewire\ProjectSwitcher;
 use App\Services\Monitoring\MonitoringStore;
 use App\Services\Projects\ProjectActivator;
@@ -70,6 +71,21 @@ class ProjectsTest extends TestCase
 
         $this->assertTrue(app(ProjectRepository::class)->exists('second-brand'));
         $this->assertSame('second-brand', session('project_slug'));
+    }
+
+    public function test_settings_page_updates_the_active_project_language(): void
+    {
+        $repo = app(ProjectRepository::class);
+        $default = $repo->default();
+        $target = $default->language === 'pt' ? 'en' : 'pt';
+
+        Livewire::test(Definicoes::class)
+            ->assertSet('idioma', $default->language)
+            ->set('idioma', $target)
+            ->call('guardar')
+            ->assertHasNoErrors();
+
+        $this->assertSame($target, $repo->find($default->slug)->language);
     }
 
     public function test_monitoring_data_is_isolated_per_project(): void

@@ -53,6 +53,29 @@ class ProjectRepository
         return $this->find($slug) !== null;
     }
 
+    /** Update a project's editable fields (name, language) in the registry. */
+    public function update(string $slug, array $attrs): Project
+    {
+        $this->all(); // ensure the default is seeded
+        $rows = $this->load();
+        foreach ($rows as &$row) {
+            if (($row['slug'] ?? null) === $slug) {
+                if (isset($attrs['name'])) {
+                    $row['name'] = trim((string) $attrs['name']) ?: $row['name'];
+                }
+                if (isset($attrs['language'])) {
+                    $row['language'] = (string) $attrs['language'] ?: $row['language'];
+                }
+                $this->save($rows);
+
+                return Project::fromArray($row);
+            }
+        }
+        unset($row);
+
+        throw new \RuntimeException("Project [{$slug}] not found.");
+    }
+
     /** Create a new project: a fresh vault directory + a registry entry. */
     public function create(string $name, string $language = 'en'): Project
     {

@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Services\Projects\ProjectContext;
+use App\Services\Projects\ProjectRepository;
 use App\Services\Settings\SettingsRepository;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -26,15 +28,27 @@ class Definicoes extends Component
     /** @var array<string,string> */
     public array $shorts = [];
 
+    /** API keys (local). @var array<string,string> */
+    public array $chaves = [];
+
+    /** Service/model config. @var array<string,string> */
+    public array $modelos = [];
+
+    /** Active project's language (stored in the project registry, not the vault). */
+    public string $idioma = 'en';
+
     public ?string $guardado = null;
 
-    public function mount(SettingsRepository $definicoes): void
+    public function mount(SettingsRepository $definicoes, ProjectContext $projeto): void
     {
         $tudo = $definicoes->all();
 
+        $this->idioma = $projeto->current()->language ?: 'en';
         $this->geral = $tudo['geral'];
         $this->perfis = $tudo['perfis'];
         $this->shorts = $tudo['shorts'];
+        $this->chaves = $tudo['chaves'];
+        $this->modelos = $tudo['modelos'];
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
@@ -44,8 +58,13 @@ class Definicoes extends Component
             ->all();
     }
 
-    public function guardar(SettingsRepository $definicoes): void
+    public function guardar(SettingsRepository $definicoes, ProjectContext $projeto, ProjectRepository $projetos): void
     {
+        // Language lives in the project registry (not the vault) — update it there.
+        $idioma = in_array($this->idioma, ['en', 'pt'], true) ? $this->idioma : 'en';
+        $projetos->update($projeto->current()->slug, ['language' => $idioma]);
+        app()->setLocale($idioma);
+
         $definicoes->save([
             'geral' => $this->geral,
             'perfis' => $this->perfis,
@@ -54,6 +73,8 @@ class Definicoes extends Component
                 ->map(fn (array $lista) => array_values(array_filter(array_map('trim', $lista))))
                 ->all(),
             'shorts' => $this->shorts,
+            'chaves' => array_map('trim', $this->chaves),
+            'modelos' => array_map('trim', $this->modelos),
         ]);
 
         $this->guardado = now()->translatedFormat('H:i');

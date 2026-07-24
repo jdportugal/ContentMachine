@@ -19,6 +19,15 @@
                     <input type="url" wire:model="geral.sitio" placeholder="https://…"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
                 </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">Project language</label>
+                    <select wire:model="idioma"
+                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
+                        <option value="en">English</option>
+                        <option value="pt">Português</option>
+                    </select>
+                    <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Used for this project's generated content.</p>
+                </div>
             </div>
         </x-panel>
 
@@ -118,6 +127,71 @@
             </div>
         </x-panel>
 
+        {{-- API keys --}}
+        <x-panel eyebrow="Credentials" title="API keys" glyph="🔑">
+            <p class="text-ink-soft -mt-2 mb-4">
+                Stored in the vault for local use. Empty → falls back to the matching <span class="font-mono text-ink-soft">.env</span> value.
+                Setting the <span class="text-teal">Anthropic</span> key routes all Claude features through the API.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4">
+                @foreach ([
+                    'anthropic' => 'Anthropic (Claude)',
+                    'openai' => 'OpenAI',
+                    'gemini' => 'Gemini',
+                    'apify' => 'Apify token',
+                    'kie' => 'kie.ai',
+                    'elevenlabs' => 'ElevenLabs',
+                    'youtube' => 'YouTube Data',
+                    'tubelab' => 'TubeLab',
+                    'reddit_client_id' => 'Reddit client id',
+                    'reddit_client_secret' => 'Reddit client secret',
+                ] as $chave => $rotulo)
+                    <div>
+                        <label class="eyebrow block mb-1.5">{{ $rotulo }}</label>
+                        <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}" placeholder="•••• (from .env)"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    </div>
+                @endforeach
+            </div>
+        </x-panel>
+
+        {{-- Models & providers --}}
+        <x-panel eyebrow="Engine" title="Models & limits" glyph="⚙">
+            <p class="text-ink-soft -mt-2 mb-4">Empty → uses the config/.env default.</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="eyebrow block mb-1.5">LLM provider</label>
+                    <input type="text" wire:model="modelos.llm_provider" placeholder="auto | anthropic | openai | gemini | none"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">Anthropic model</label>
+                    <input type="text" wire:model="modelos.anthropic_model" placeholder="claude-opus-4-8"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">OpenAI model</label>
+                    <input type="text" wire:model="modelos.openai_model" placeholder="gpt-4o-mini"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">Gemini model</label>
+                    <input type="text" wire:model="modelos.gemini_model" placeholder="gemini-1.5-flash"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">Videos per channel</label>
+                    <input type="number" min="1" wire:model="modelos.aggregation_limit" placeholder="5"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">yt-dlp timeout (s)</label>
+                    <input type="number" min="5" wire:model="modelos.aggregation_timeout" placeholder="45"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                </div>
+            </div>
+        </x-panel>
+
         {{-- Action bar --}}
         <div class="flex items-center gap-4">
             <button type="submit"
@@ -130,7 +204,7 @@
         </div>
 
         <p class="font-mono text-xs text-ink-faint pt-2 border-t border-ink-soft/10">
-            🔒 Note: API keys (Apify, TubeLab, Gemini…) live in <span class="text-ink-soft">.env</span>, for security — they are not managed here.
+            🔒 Keys are saved in the vault (<span class="text-ink-soft">definicoes/definicoes.md</span>) for local use. Don't sync the vault to a public location with real keys in it.
         </p>
     </form>
 </div>
