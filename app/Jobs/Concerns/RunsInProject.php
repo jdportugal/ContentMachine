@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Concerns;
 
+use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
 
@@ -27,7 +28,9 @@ trait RunsInProject
             return;
         }
         if ($project = app(ProjectRepository::class)->find($this->projectSlug)) {
-            app(ProjectContext::class)->set($project);
+            // Full switch (vault + design-system + clip-style + models + locale),
+            // so background renders/plans use the clip's own project — not default.
+            app(ProjectActivator::class)->activate($project);
         }
     }
 }

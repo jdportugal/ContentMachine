@@ -2,6 +2,7 @@
 
 namespace App\Services\Monitoring;
 
+use App\Services\Projects\ProjectContext;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
@@ -14,7 +15,10 @@ class MonitoringStore
 {
     private function key(string $plataforma): string
     {
-        return "monitoring.ytdlp.{$plataforma}";
+        // Per-project: monitoring/channel data must not leak across workspaces.
+        $project = app(ProjectContext::class)->current()->slug;
+
+        return "monitoring.ytdlp.{$project}.{$plataforma}";
     }
 
     /** @return array<int,array<string,mixed>> */

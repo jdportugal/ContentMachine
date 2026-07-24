@@ -31,10 +31,10 @@ class ClipsPipelineTest extends TestCase
 
     public function test_render_injects_the_design_system_theme(): void
     {
-        // Theme tokens saved by the Design System.
-        $dir = sys_get_temp_dir().'/cm-theme-'.uniqid();
-        mkdir($dir, 0775, true);
-        config(['contentmachine.design_system.path' => $dir.'/design-system.md']);
+        // Theme tokens saved by the Design System — for the DEFAULT project, since
+        // the render job activates the clip's project (default here) and repoints
+        // the design-system path at it.
+        config(['contentmachine.design_system.path' => config('contentmachine.projects.default_vault').'/design-system.md']);
         app(DesignSystemRepository::class)
             ->writeTokens(DesignTheme::sanitize([
                 'colors' => ['bg' => '#0a1230'],
@@ -73,9 +73,6 @@ class ClipsPipelineTest extends TestCase
         $this->assertSame('#0a1230', $captured['theme']['colors']['bg']);
         $this->assertSame('Anton', $captured['theme']['fonts']['display']);
         $this->assertSame('starfield', $captured['theme']['texture']['kind']);
-
-        array_map('unlink', glob($dir.'/*') ?: []);
-        @rmdir($dir);
     }
 
     public function test_animation_pipeline_reaches_done_with_fakes(): void

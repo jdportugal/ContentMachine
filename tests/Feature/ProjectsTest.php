@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Http\Middleware\SetActiveProject;
 use App\Livewire\ProjectSwitcher;
+use App\Services\Monitoring\MonitoringStore;
+use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
 use Illuminate\Http\Request;
@@ -68,5 +70,37 @@ class ProjectsTest extends TestCase
 
         $this->assertTrue(app(ProjectRepository::class)->exists('second-brand'));
         $this->assertSame('second-brand', session('project_slug'));
+    }
+
+    public function test_monitoring_data_is_isolated_per_project(): void
+    {
+        config(['cache.default' => 'array']);
+        $store = app(MonitoringStore::class);
+        $repo = app(ProjectRepository::class);
+        $context = app(ProjectContext::class);
+
+        $context->set($repo->default());
+        $store->guardar('youtube', [['id' => 'default-video']]);
+
+        // A different project sees none of the default project's monitoring data.
+        $context->set($repo->create('Brand B', 'en'));
+        $this->assertFalse($store->recolhido('youtube'));
+        $store->guardar('youtube', [['id' => 'brandb-video']]);
+        $this->assertSame('brandb-video', $store->itens('youtube')[0]['id']);
+
+        // Back to default → its own data, untouched.
+        $context->set($repo->default());
+        $this->assertSame('default-video', $store->itens('youtube')[0]['id']);
+    }
+
+    public function test_activator_repoints_design_and_style_for_background_jobs(): void
+    {
+        $project = app(ProjectRepository::class)->create('Brand B', 'pt');
+        app(ProjectActivator::class)->activate($project);
+
+        $this->assertSame($project->path.'/design-system.md', config('contentmachine.design_system.path'));
+        $this->assertSame($project->path.'/estilo-animacao.md', config('contentmachine.clips.style_md'));
+        $this->assertSame($project->path, config('contentmachine.vault.path'));
+        $this->assertSame('pt', app()->getLocale());
     }
 }
