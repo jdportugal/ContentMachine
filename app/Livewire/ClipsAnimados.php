@@ -8,13 +8,13 @@ use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Models\ClipEffect;
-use App\Models\ClipProject;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\PlanValidator;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\TranscriptRebuilder;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
@@ -70,7 +70,7 @@ class ClipsAnimados extends Component
     public float $musicaVolume = 0.1;
 
     // ---- editing ----
-    public ?int $editingId = null;
+    public ?string $editingId = null;
 
     public string $editTitle = '';
 
@@ -322,6 +322,12 @@ class ClipsAnimados extends Component
     // Creation
     // =====================================================================
 
+    /** The vault-backed clip store for the active project. */
+    private function clips(): ClipStore
+    {
+        return app(ClipStore::class);
+    }
+
     public function submitAnimation(): void
     {
         $this->validate([
@@ -336,8 +342,8 @@ class ClipsAnimados extends Component
         $kind = $this->audio ? 'audio' : 'text';
         $path = $this->audio ? $this->audio->store('clips/uploads') : null;
 
-        $project = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION,
+        $project = $this->clips()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
             'input_kind' => $kind,
             'title' => $this->tituloDe($this->text),
             'source_text' => $kind === 'text' ? $this->text : null,
@@ -365,8 +371,8 @@ class ClipsAnimados extends Component
 
         $path = $this->video->store('clips/uploads');
 
-        $project = ClipProject::create([
-            'type' => ClipProject::TYPE_OVERLAY,
+        $project = $this->clips()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
             'input_kind' => 'video',
             'title' => $this->video->getClientOriginalName(),
             'source_path' => $path,
@@ -382,9 +388,9 @@ class ClipsAnimados extends Component
     // Edit clip (animations → re-render)
     // =====================================================================
 
-    public function editarClip(int $id): void
+    public function editarClip(string $id): void
     {
-        $p = ClipProject::findOrFail($id);
+        $p = $this->clips()->findOrFail($id);
         $this->editingId = $p->id;
         $this->editTitle = (string) $p->title;
         $this->musica = (string) ($p->meta['musica'] ?? '');
@@ -463,7 +469,7 @@ class ClipsAnimados extends Component
             return;
         }
 
-        $p = ClipProject::findOrFail($this->editingId);
+        $p = $this->clips()->findOrFail($this->editingId);
         $c = config('contentmachine.clips');
         // Keep render essentials sane if the author removed them.
         $decoded['duration'] = (float) ($decoded['duration'] ?? $p->plan['duration'] ?? 0.0);
@@ -481,7 +487,7 @@ class ClipsAnimados extends Component
             'title' => $this->editTitle ?: $p->title,
             'plan' => $decoded,
             'meta' => $this->musicaMeta($p->meta ?? []),
-            'status' => ClipProject::STATUS_RENDERING,
+            'status' => ClipRecord::STATUS_RENDERING,
             'error' => null,
         ]);
 
@@ -522,7 +528,7 @@ class ClipsAnimados extends Component
             'editScenes.*.end.gt' => 'The end must be greater than the start.',
         ]);
 
-        $p = ClipProject::findOrFail($this->editingId);
+        $p = $this->clips()->findOrFail($this->editingId);
         $plan = $p->plan ?? [];
         $plan['scenes'] = array_map(fn ($s) => [
             'start' => (float) $s['start'],
@@ -540,7 +546,7 @@ class ClipsAnimados extends Component
             'title' => $this->editTitle ?: $p->title,
             'plan' => $plan,
             'meta' => $this->musicaMeta($p->meta ?? []),
-            'status' => ClipProject::STATUS_RENDERING,
+            'status' => ClipRecord::STATUS_RENDERING,
             'error' => null,
         ]);
 
@@ -561,9 +567,9 @@ class ClipsAnimados extends Component
     // Edit transcript (→ replans + re-render)
     // =====================================================================
 
-    public function editarTranscricao(int $id): void
+    public function editarTranscricao(string $id): void
     {
-        $p = ClipProject::findOrFail($id);
+        $p = $this->clips()->findOrFail($id);
         $this->editingId = $p->id;
         $this->editTranscriptText = (string) ($p->transcript['text'] ?? '');
         $this->resetValidation();
@@ -577,7 +583,7 @@ class ClipsAnimados extends Component
             ['editTranscriptText.required' => 'The transcript cannot be empty.'],
         );
 
-        $p = ClipProject::findOrFail($this->editingId);
+        $p = $this->clips()->findOrFail($this->editingId);
         $transcript = $p->transcript ?? [];
         $transcript['text'] = trim($this->editTranscriptText);
         $transcript['words'] = TranscriptRebuilder::rebuild(
@@ -588,7 +594,7 @@ class ClipsAnimados extends Component
 
         $p->update([
             'transcript' => $transcript,
-            'status' => ClipProject::STATUS_PLANNING,
+            'status' => ClipRecord::STATUS_PLANNING,
             'error' => null,
         ]);
 
@@ -600,17 +606,15 @@ class ClipsAnimados extends Component
     // Delete
     // =====================================================================
 
-    public function apagar(int $id): void
+    public function apagar(string $id): void
     {
-        $p = ClipProject::find($id);
+        $p = $this->clips()->find($id);
         if (! $p) {
             return;
         }
 
-        $dir = storage_path("app/clips/{$p->id}");
-        if (is_dir($dir)) {
-            File::deleteDirectory($dir);
-        }
+        // The uploaded source lives on the storage disk; the record + its render
+        // outputs are removed by the store.
         if ($p->source_path) {
             Storage::disk(config('contentmachine.clips.disk'))->delete($p->source_path);
         }
@@ -622,20 +626,20 @@ class ClipsAnimados extends Component
     // Data for the view
     // =====================================================================
 
-    /** @return Collection<int,ClipProject> */
+    /** @return Collection<int,ClipRecord> */
     public function getProjectsProperty()
     {
-        return ClipProject::latest()->take(50)->get();
+        return $this->clips()->all()->take(50);
     }
 
-    public function getEditingProperty(): ?ClipProject
+    public function getEditingProperty(): ?ClipRecord
     {
-        return $this->editingId ? ClipProject::find($this->editingId) : null;
+        return $this->editingId ? $this->clips()->find($this->editingId) : null;
     }
 
     public function getHasActiveProperty(): bool
     {
-        return $this->projects->contains(fn (ClipProject $p) => $p->isActive());
+        return $this->projects->contains(fn (ClipRecord $p) => $p->isActive());
     }
 
     private function tituloDe(?string $text): string

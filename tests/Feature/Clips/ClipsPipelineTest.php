@@ -2,9 +2,14 @@
 
 namespace Tests\Feature\Clips;
 
+use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
-use App\Models\ClipProject;
+use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\Contracts\TranscriptionService;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
+use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\DesignSystem\DesignTheme;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -19,22 +24,27 @@ class ClipsPipelineTest extends TestCase
         config()->set('contentmachine.clips.driver', 'fake');
     }
 
-    public function test_render_injecta_o_tema_do_design_system(): void
+    private function store(): ClipStore
     {
-        // Tokens de tema guardados pelo Sistema de Design.
+        return app(ClipStore::class);
+    }
+
+    public function test_render_injects_the_design_system_theme(): void
+    {
+        // Theme tokens saved by the Design System.
         $dir = sys_get_temp_dir().'/cm-theme-'.uniqid();
         mkdir($dir, 0775, true);
         config(['contentmachine.design_system.path' => $dir.'/design-system.md']);
-        app(\App\Services\DesignSystem\DesignSystemRepository::class)
-            ->writeTokens(\App\Services\DesignSystem\DesignTheme::sanitize([
+        app(DesignSystemRepository::class)
+            ->writeTokens(DesignTheme::sanitize([
                 'colors' => ['bg' => '#0a1230'],
                 'fonts' => ['display' => 'Anton'],
                 'texture' => ['kind' => 'starfield'],
             ]));
 
-        // Renderizador que captura os props recebidos.
+        // Renderer that captures the props it receives.
         $captured = [];
-        $this->app->instance(\App\Services\Clips\Contracts\RemotionRenderer::class, new class($captured) implements \App\Services\Clips\Contracts\RemotionRenderer
+        $this->app->instance(RemotionRenderer::class, new class($captured) implements RemotionRenderer
         {
             public function __construct(public array &$captured) {}
 
@@ -48,16 +58,16 @@ class ClipsPipelineTest extends TestCase
             }
         });
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
             'input_kind' => 'text',
             'source_text' => 'Olá',
-            'status' => ClipProject::STATUS_PLANNING,
+            'status' => ClipRecord::STATUS_PLANNING,
             'transcript' => ['words' => []],
             'plan' => ['scenes' => [['start' => 0, 'end' => 1, 'background' => 'papyrus', 'layers' => []]]],
         ]);
 
-        \App\Jobs\Clips\RenderJob::dispatchSync($p->id);
+        RenderJob::dispatchSync($p->id);
 
         $this->assertArrayHasKey('theme', $captured);
         $this->assertSame('#0a1230', $captured['theme']['colors']['bg']);
@@ -70,8 +80,8 @@ class ClipsPipelineTest extends TestCase
 
     public function test_animation_pipeline_reaches_done_with_fakes(): void
     {
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
             'input_kind' => 'text',
             'source_text' => 'Olá mundo IATECA',
         ]);
@@ -79,7 +89,7 @@ class ClipsPipelineTest extends TestCase
         TranscribeJob::dispatch($p->id); // sync queue in tests → runs the whole chain
         $p->refresh();
 
-        $this->assertSame(ClipProject::STATUS_DONE, $p->status);
+        $this->assertSame(ClipRecord::STATUS_DONE, $p->status);
         $this->assertNotEmpty($p->plan['scenes']);
         $this->assertNotNull($p->output_path);
     }
@@ -89,8 +99,7 @@ class ClipsPipelineTest extends TestCase
         Storage::fake('local');
         Storage::disk('local')->put('clips/uploads/gravacao.webm', 'RECORDING-BYTES');
 
-        // Transcription that fails unless the audio file is found at the resolved path —
-        // guards against the storage-root mismatch (storage/app vs storage/app/private).
+        // Transcription that fails unless the audio file is found at the resolved path.
         $this->app->instance(TranscriptionService::class, new class implements TranscriptionService
         {
             public function transcribe(string $audioPath): array
@@ -103,8 +112,8 @@ class ClipsPipelineTest extends TestCase
             }
         });
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
             'input_kind' => 'audio',
             'source_path' => 'clips/uploads/gravacao.webm',
         ]);
@@ -112,13 +121,13 @@ class ClipsPipelineTest extends TestCase
         TranscribeJob::dispatch($p->id);
         $p->refresh();
 
-        $this->assertSame(ClipProject::STATUS_DONE, $p->status);
+        $this->assertSame(ClipRecord::STATUS_DONE, $p->status);
     }
 
     public function test_overlay_pipeline_reaches_done_with_fakes(): void
     {
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_OVERLAY,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
             'input_kind' => 'video',
             'source_path' => 'clips/uploads/example.mp4',
         ]);
@@ -126,14 +135,14 @@ class ClipsPipelineTest extends TestCase
         TranscribeJob::dispatch($p->id);
         $p->refresh();
 
-        $this->assertSame(ClipProject::STATUS_DONE, $p->status);
+        $this->assertSame(ClipRecord::STATUS_DONE, $p->status);
         $this->assertNotNull($p->output_path);
     }
 
     public function test_overlay_plan_carries_per_scene_present_modes(): void
     {
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_OVERLAY,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
             'input_kind' => 'video',
             'source_path' => 'clips/uploads/example.mp4',
         ]);
@@ -141,8 +150,7 @@ class ClipsPipelineTest extends TestCase
         TranscribeJob::dispatch($p->id);
         $p->refresh();
 
-        $this->assertSame(ClipProject::STATUS_DONE, $p->status);
-        // the planner assigns a presentation mode per scene (video / over / split / animation)
+        $this->assertSame(ClipRecord::STATUS_DONE, $p->status);
         $presents = array_column($p->plan['scenes'], 'present');
         $this->assertContains('video', $presents);
         $this->assertContains('over', $presents);

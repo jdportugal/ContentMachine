@@ -2,11 +2,13 @@
 
 namespace App\Jobs\Clips;
 
-use App\Models\ClipProject;
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\PlanValidator;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,18 +16,22 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class PlanAnimationsJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public function __construct(public int $projectId) {}
-
-    public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research, MetadataService $metadata): void
+    public function __construct(public string $projectId)
     {
-        $p = ClipProject::findOrFail($this->projectId);
+        $this->captureProject();
+    }
+
+    public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research, MetadataService $metadata, ClipStore $store): void
+    {
+        $this->activateProject();
+        $p = $store->findOrFail($this->projectId);
 
         try {
-            $p->update(['status' => ClipProject::STATUS_PLANNING]);
+            $p->update(['status' => ClipRecord::STATUS_PLANNING]);
             $c = config('contentmachine.clips');
-            $isOverlay = $p->type === ClipProject::TYPE_OVERLAY;
+            $isOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
             $allowed = $isOverlay ? ($p->meta['allowed_present'] ?? ['video', 'over', 'split', 'animation']) : [];
 
             // Deep-research the topic so visuals carry real context (not just the speech).
@@ -58,7 +64,7 @@ class PlanAnimationsJob implements ShouldQueue
 
             RenderJob::dispatch($p->id);
         } catch (\Throwable $e) {
-            $p->update(['status' => ClipProject::STATUS_FAILED, 'error' => $e->getMessage()]);
+            $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Services\Projects\ProjectContext;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -28,6 +29,9 @@ abstract class TestCase extends BaseTestCase
             'contentmachine.projects.root' => $this->vaultTemp.'/_projects',
         ]);
         $this->app->singleton(VaultContract::class, fn () => new VaultRepository($this->vaultTemp));
+        // ProjectContext may have resolved its default (real vault) during boot,
+        // before the config above. Reset it so it re-reads the temp paths.
+        $this->app->forgetInstance(ProjectContext::class);
     }
 
     protected function tearDown(): void

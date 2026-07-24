@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Models\ClipProject;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -37,7 +39,7 @@ class Rascunhos extends Component
         }
 
         if ($source === 'animado') {
-            ClipProject::whereKey($ref)->update(['scheduled_for' => $data]);
+            app(ClipStore::class)->find($ref)?->update(['scheduled_for' => $data]);
 
             return;
         }
@@ -51,7 +53,7 @@ class Rascunhos extends Component
     public function desagendar(string $source, string $ref, VaultContract $vault): void
     {
         if ($source === 'animado') {
-            ClipProject::whereKey($ref)->update(['scheduled_for' => null]);
+            app(ClipStore::class)->find($ref)?->update(['scheduled_for' => null]);
 
             return;
         }
@@ -65,7 +67,7 @@ class Rascunhos extends Component
     public function remover(string $source, string $ref, VaultContract $vault): void
     {
         if ($source === 'animado') {
-            ClipProject::whereKey($ref)->delete();
+            app(ClipStore::class)->find($ref)?->delete();
 
             return;
         }
@@ -95,8 +97,8 @@ class Rascunhos extends Component
         ];
     }
 
-    /** @return \Illuminate\Support\Collection<int,array<string,mixed>> */
-    private function itens(VaultContract $vault): \Illuminate\Support\Collection
+    /** @return Collection<int,array<string,mixed>> */
+    private function itens(VaultContract $vault): Collection
     {
         $prontos = ['pronto', 'agendado'];
 
@@ -115,19 +117,18 @@ class Rascunhos extends Component
             ->filter(fn (VaultNote $n) => $n->get('tipo') === 'clip' && in_array($n->get('estado'), $prontos, true))
             ->map(fn (VaultNote $n) => $this->deNota($n, 'clip', 'Short'));
 
-        // 3. Completed animated clips (DB).
-        $animados = ClipProject::where('status', ClipProject::STATUS_DONE)
-            ->orderByDesc('updated_at')
-            ->get()
-            ->map(fn (ClipProject $p) => [
-                'id' => $this->idDe('animado', (string) $p->id),
+        // 3. Completed animated clips (vault, per-project).
+        $animados = app(ClipStore::class)->all()
+            ->filter(fn (ClipRecord $p) => $p->status === ClipRecord::STATUS_DONE)
+            ->map(fn (ClipRecord $p) => [
+                'id' => $this->idDe('animado', $p->id),
                 'source' => 'animado',
-                'ref' => (string) $p->id,
-                'kind' => $p->type === ClipProject::TYPE_OVERLAY ? 'Animated video' : 'Animation',
+                'ref' => $p->id,
+                'kind' => $p->type === ClipRecord::TYPE_OVERLAY ? 'Animated video' : 'Animation',
                 'title' => (string) ($p->title ?: 'Animated clip'),
                 'cover' => null,
                 'excerpt' => '',
-                'scheduled' => $p->scheduled_for?->toDateString(),
+                'scheduled' => $p->scheduled_for ?: null,
             ]);
 
         return $posts->values()

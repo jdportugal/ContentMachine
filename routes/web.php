@@ -11,8 +11,8 @@ use App\Livewire\Painel;
 use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
-use App\Models\ClipProject;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -61,13 +61,14 @@ Route::get('/clips-animados/upload/{name}', function (string $name) {
     return response()->file($disk->path("clips/uploads/{$name}"));
 })->name('clips-animados.upload');
 
-// Serve/descarrega o ficheiro final de um clip.
-Route::get('/clips-animados/{project}/media', function (ClipProject $project) {
-    abort_unless($project->output_path && is_file($project->output_path), 404);
+// Serve/download a clip's final file (vault-backed, resolved for the active project).
+Route::get('/clips-animados/{id}/media', function (string $id) {
+    $clip = app(ClipStore::class)->find($id);
+    abort_unless($clip && $clip->output_path && is_file($clip->output_path), 404);
 
     return request()->boolean('download')
-        ? response()->download($project->output_path)
-        : response()->file($project->output_path);
+        ? response()->download($clip->output_path)
+        : response()->file($clip->output_path);
 })->name('clips-animados.media');
 
 // Serve the cached showcase preview of an SFX (built-in or custom), for the

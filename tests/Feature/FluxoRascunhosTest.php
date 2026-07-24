@@ -6,8 +6,8 @@ use App\Livewire\Clips;
 use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
-use App\Models\ClipProject;
 use App\Services\Aggregation\LlmClient;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -111,19 +111,20 @@ class FluxoRascunhosTest extends TestCase
 
     public function test_agendar_e_desagendar_clip_animado(): void
     {
-        $p = ClipProject::create([
+        $store = app(ClipStore::class);
+        $p = $store->create([
             'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim X', 'status' => 'done',
         ]);
 
         Livewire::test(Rascunhos::class)
             ->assertSee('Anim X')
-            ->set('datas.'.$this->idDe('animado', (string) $p->id), '2026-09-03')
-            ->call('agendar', 'animado', (string) $p->id);
+            ->set('datas.'.$this->idDe('animado', $p->id), '2026-09-03')
+            ->call('agendar', 'animado', $p->id);
 
-        $this->assertSame('2026-09-03', $p->fresh()->scheduled_for->toDateString());
+        $this->assertSame('2026-09-03', $store->find($p->id)->scheduled_for);
 
-        Livewire::test(Rascunhos::class)->call('desagendar', 'animado', (string) $p->id);
-        $this->assertNull($p->fresh()->scheduled_for);
+        Livewire::test(Rascunhos::class)->call('desagendar', 'animado', $p->id);
+        $this->assertNull($store->find($p->id)->scheduled_for);
     }
 
     public function test_escolher_clips_com_ia_cria_clips_e_guarda_publicacoes(): void

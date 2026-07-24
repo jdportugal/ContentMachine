@@ -54,7 +54,7 @@
                             <div class="flex items-center justify-center">
                                 @if ($project->status === 'done' && $project->output_path)
                                     <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
-                                           src="{{ route('clips-animados.media', $project) }}"></video>
+                                           src="{{ route('clips-animados.media', $project->id) }}"></video>
                                 @elseif ($project->status === 'failed')
                                     <p class="text-sm text-bad/90 self-start">{{ \Illuminate\Support\Str::limit($project->error, 200) }}</p>
                                 @else
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'No title' }}</div>
-                                <div class="font-mono text-[0.58rem] text-ink-faint">#{{ $project->id }} · {{ $project->created_at?->diffForHumans() }}</div>
+                                <div class="font-mono text-[0.58rem] text-ink-faint">{{ $project->created_at ? \Illuminate\Support\Carbon::parse($project->created_at)->diffForHumans() : '' }}</div>
 
                                 @if (!empty($sug['description']))
                                     <p class="mt-3 text-ink-soft text-sm leading-relaxed">{{ $sug['description'] }}</p>
@@ -96,15 +96,15 @@
                                 {{-- actions --}}
                                 <div class="mt-auto pt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
                                     @if (!empty($project->plan['scenes']))
-                                        <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ edit clip</button>
+                                        <button type="button" wire:click="editarClip('{{ $project->id }}')" class="text-teal hover:underline">✎ edit clip</button>
                                     @endif
                                     @if (!empty($project->transcript['text']))
-                                        <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ edit transcript · regenerate</button>
+                                        <button type="button" wire:click="editarTranscricao('{{ $project->id }}')" class="text-teal hover:underline">✎ edit transcript · regenerate</button>
                                     @endif
                                     @if ($project->status === 'done' && $project->output_path)
-                                        <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
+                                        <a href="{{ route('clips-animados.media', ['id' => $project->id, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
                                     @endif
-                                    <button type="button" wire:click="apagar({{ $project->id }})"
+                                    <button type="button" wire:click="apagar('{{ $project->id }}')"
                                             wire:confirm="Delete this clip and its files? This action is permanent."
                                             class="text-bad hover:underline ml-auto">✕ delete</button>
                                 </div>

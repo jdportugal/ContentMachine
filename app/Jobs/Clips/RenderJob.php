@@ -2,8 +2,10 @@
 
 namespace App\Jobs\Clips;
 
-use App\Models\ClipProject;
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
@@ -14,18 +16,22 @@ use Illuminate\Support\Facades\Storage;
 
 class RenderJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public function __construct(public int $projectId) {}
-
-    public function handle(RemotionRenderer $renderer, MusicLibrary $music): void
+    public function __construct(public string $projectId)
     {
-        $p = ClipProject::findOrFail($this->projectId);
+        $this->captureProject();
+    }
+
+    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store): void
+    {
+        $this->activateProject();
+        $p = $store->findOrFail($this->projectId);
 
         try {
-            $p->update(['status' => ClipProject::STATUS_RENDERING]);
+            $p->update(['status' => ClipRecord::STATUS_RENDERING]);
 
-            $dir = storage_path("app/clips/{$p->id}");
+            $dir = $store->storageDir($p->id);
             @mkdir($dir, 0777, true);
             $plan = $p->plan;
 
@@ -51,15 +57,15 @@ class RenderJob implements ShouldQueue
 
             // Overlay clips: Remotion composites the source video per-scene (over / split /
             // video / animation). Everything renders in one opaque pass — no ffmpeg step.
-            if ($p->type === ClipProject::TYPE_OVERLAY) {
+            if ($p->type === ClipRecord::TYPE_OVERLAY) {
                 $plan['transparent'] = false;
                 $plan['videoSrc'] = Storage::disk(config('contentmachine.clips.disk'))->path($p->source_path);
             }
 
             $out = $renderer->render($plan, "$dir/clip.mp4");
-            $p->update(['output_path' => $out, 'status' => ClipProject::STATUS_DONE]);
+            $p->update(['output_path' => $out, 'status' => ClipRecord::STATUS_DONE]);
         } catch (\Throwable $e) {
-            $p->update(['status' => ClipProject::STATUS_FAILED, 'error' => $e->getMessage()]);
+            $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -69,7 +75,7 @@ class RenderJob implements ShouldQueue
      * Mirrors the shorts pipeline: 'nenhuma' → none, ''/'aleatoria' → random
      * track, a name → that track (falling back to random if it vanished).
      */
-    private function resolveMusic(ClipProject $p, MusicLibrary $music): ?string
+    private function resolveMusic(ClipRecord $p, MusicLibrary $music): ?string
     {
         $choice = trim((string) ($p->meta['musica'] ?? ''));
 
@@ -84,7 +90,7 @@ class RenderJob implements ShouldQueue
     }
 
     /** Map image-reveal layers' `params.src` (an image id) to the absolute file path. */
-    private function resolveImages(array $scenes, ClipProject $p): array
+    private function resolveImages(array $scenes, ClipRecord $p): array
     {
         $byId = [];
         $transById = [];
