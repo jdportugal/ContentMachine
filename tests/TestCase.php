@@ -27,6 +27,8 @@ abstract class TestCase extends BaseTestCase
             'contentmachine.projects.default_vault' => $this->vaultTemp,
             'contentmachine.projects.registry' => $this->vaultTemp.'/projects.json',
             'contentmachine.projects.root' => $this->vaultTemp.'/_projects',
+            // Shared API keys live outside the vault — isolate them per test too.
+            'contentmachine.settings.keys_path' => $this->vaultTemp.'/settings-keys.json',
         ]);
         $this->app->singleton(VaultContract::class, fn () => new VaultRepository($this->vaultTemp));
         // ProjectContext may have resolved its default (real vault) during boot,

@@ -39,6 +39,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Settings — shared vs per-project
+    |--------------------------------------------------------------------------
+    | All operational settings are per-project (in each project's vault) EXCEPT
+    | the API keys, which are shared across every project and stored here (outside
+    | any vault). Everything else — channels, sources, profiles, model config —
+    | stays per-project.
+    */
+    'settings' => [
+        'keys_path' => storage_path('app/settings-keys.json'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Drivers
     |--------------------------------------------------------------------------
     | 'fake' uses simulated data (no API keys). The real drivers are stubs

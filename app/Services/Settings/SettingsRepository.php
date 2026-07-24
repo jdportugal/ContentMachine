@@ -5,16 +5,20 @@ namespace App\Services\Settings;
 use App\Services\Vault\VaultContract;
 
 /**
- * Operational (non-secret) app settings, stored in the vault as a Markdown
- * note with frontmatter — readable in Obsidian and versionable.
+ * Operational app settings, stored in the vault as a Markdown note with
+ * frontmatter — readable in Obsidian and versionable.
  *
- * API KEYS stay in .env (secrets), never here.
+ * For LOCAL use, API keys and service/model config live here too (`chaves`,
+ * `modelos`) so everything is editable in-app instead of the `.env`. The
+ * SettingsOverlayProvider maps them onto config() at boot; an empty value
+ * falls back to whatever the `.env`/config default provides. Do not enable
+ * vault sync to a public location with real keys in it.
  */
 class SettingsRepository
 {
     private const PATH = 'definicoes/definicoes.md';
 
-    public function __construct(private readonly VaultContract $vault) {}
+    public function __construct(private readonly VaultContract $vault, private readonly SharedKeys $keys) {}
 
     /** Structure and default values. */
     public function defaults(): array
@@ -48,6 +52,28 @@ class SettingsRepository
                 // Empty → uses config/services (env WHISPER_MODEL).
                 'whisper_model' => '',
             ],
+            // API keys (local use). Empty → falls back to the .env value.
+            'chaves' => [
+                'anthropic' => '',
+                'openai' => '',
+                'gemini' => '',
+                'apify' => '',
+                'tubelab' => '',
+                'elevenlabs' => '',
+                'youtube' => '',
+                'reddit_client_id' => '',
+                'reddit_client_secret' => '',
+                'kie' => '',
+            ],
+            // Service/model config. Empty → falls back to the .env/config default.
+            'modelos' => [
+                'llm_provider' => '',        // auto | claude-cli | anthropic | openai | gemini | none
+                'anthropic_model' => '',
+                'openai_model' => '',
+                'gemini_model' => '',
+                'aggregation_limit' => '',   // videos per channel
+                'aggregation_timeout' => '', // seconds per yt-dlp call
+            ],
         ];
     }
 
@@ -60,7 +86,11 @@ class SettingsRepository
         // Remove system metadata that the vault may have added.
         unset($guardadas['data'], $guardadas['atualizado_em'], $guardadas['titulo'], $guardadas['tipo']);
 
-        return array_replace_recursive($this->defaults(), $guardadas);
+        $merged = array_replace_recursive($this->defaults(), $guardadas);
+        // API keys are GLOBAL (shared across projects) — override any per-project copy.
+        $merged['chaves'] = array_replace($this->defaults()['chaves'], $this->keys->all());
+
+        return $merged;
     }
 
     public function get(string $chave, mixed $default = null): mixed
@@ -68,10 +98,21 @@ class SettingsRepository
         return data_get($this->all(), $chave, $default);
     }
 
-    /** Persists the settings, preserving missing defaults. */
+    /**
+     * Persists the settings. Merges onto the CURRENTLY stored values (not just
+     * the defaults), so a partial save updates only the groups it includes and
+     * never wipes the others.
+     */
     public function save(array $data): void
     {
-        $limpo = array_replace_recursive($this->defaults(), $data);
+        // API keys go to the global shared store; everything else is per-project.
+        if (isset($data['chaves']) && is_array($data['chaves'])) {
+            $this->keys->save($data['chaves']);
+            unset($data['chaves']);
+        }
+
+        $limpo = array_replace_recursive($this->all(), $data);
+        unset($limpo['chaves']); // never persist keys in the per-project vault note
 
         // The lists (channels/sources) are replaced wholesale — not merged
         // by index — so that removing or emptying an entry is respected
@@ -92,7 +133,7 @@ class SettingsRepository
         $this->vault->put(
             self::PATH,
             $frontmatter,
-            "Definições operacionais da Máquina de Conteúdo.\n\n> As chaves de API vivem no `.env`, não neste ficheiro."
+            "Definições operacionais da Máquina de Conteúdo.\n\n> As chaves de API são partilhadas entre projetos (guardadas fora do vault), não neste ficheiro."
         );
     }
 }
