@@ -122,6 +122,16 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
   and transitions to give rhythm. Fill the data from the RESEARCH below.
 - IF IMAGES are provided, you MUST use each one in at least one scene (layer
   "image-reveal" with params.src = image id), unless it is clearly irrelevant.
+- GENERATE AN IMAGE whenever a scene talks about something CONCRETE or VISUAL (a person, place,
+  object, product, situation, metaphor) and no provided image fits: add an "image-reveal" layer with
+  "generate": "<a vivid, specific description of the image to CREATE>" (instead of "src"). The studio
+  makes it with AI. Describe it in ENGLISH, concrete and photographic — subject, setting, mood,
+  lighting — and NEVER ask for any text, words, letters or logos inside the image.
+- BE VISUAL AND DENSE — this is what makes the clip good: MOST scenes must SHOW something tied to the
+  EXACT words spoken there — a generated image, a provided image, a chart, a diagram or a card.
+  Do NOT leave long stretches of plain karaoke with nothing on screen. Target a fresh, RELEVANT
+  visual roughly every 2–5 seconds; keep scenes short and the motion varied (alternate backgrounds,
+  transitions and image variants) so the video never feels static.
 
 # PARAMETER SCHEMAS (params by type)
 - timeline:    { "items": [{ "label": str, "sublabel"?: str, "highlight"?: bool, "image"?: "<id>" }], "caption"?: str }
@@ -136,8 +146,8 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 - card:        { "title": str, "lines"?: [str] }
 - terminal:    { "lines": [str] }
 - diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <index>, "to": <index> }] }   // 2–6 nodes; without edges it links in sequence/cycle
-- image-reveal:{ "src": "<id of the provided image>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }
-  - variant controls the image animation. Prefer "fullscreen" (image fills the screen with a slow zoom) and "pan" for photos/screenshots; use "drop-float" (drops from above, floats centred), "rise", "zoom" or "slide" for a floating-card look. VARY the variant across scenes — do NOT reuse the same one every time. Use "framed" rarely (bordered panel). "direction" only applies to "slide".
+- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }
+  - Use EITHER "src" (a provided image id) OR "generate" (a description → AI image), never both. variant controls the image animation. Prefer "fullscreen" (image fills the screen with a slow zoom) and "pan" for photos/screenshots; use "drop-float" (drops from above, floats centred), "rise", "zoom" or "slide" for a floating-card look. VARY the variant across scenes — do NOT reuse the same one every time. Use "framed" rarely (bordered panel). "direction" only applies to "slide".
 - The provided IMAGES can go into image-reveal OR as "image" in timeline/bar-chart/comparison (use ONLY ids from the list).
 - kinetic-text / fade / highlight / seal-stamp / etc.: the text goes in the layer's "text" field, params = {}.
 

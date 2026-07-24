@@ -6,6 +6,7 @@ use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
+use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
@@ -17,6 +18,9 @@ use Illuminate\Queue\InteractsWithQueue;
 class PlanAnimationsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
+
+    // Planning + research + on-demand image generation (Nano Banana) can be slow.
+    public int $timeout = 900;
 
     public function __construct(public string $projectId)
     {
@@ -59,6 +63,19 @@ class PlanAnimationsJob implements ShouldQueue
                 'presents' => $allowed,
             ]);
             $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null);
+
+            // Fulfil the planner's image-generation requests (Nano Banana), so
+            // scenes that asked for a picture actually get one, on-brand.
+            if (config('contentmachine.clips.generate_images', true)) {
+                $result = app(PlanImageAugmentor::class)->augment(
+                    $plan,
+                    $p->images ?? [],
+                    (string) config('contentmachine.clips.image_style', ''),
+                    (int) config('contentmachine.clips.image_max', 6),
+                );
+                $plan = $result['plan'];
+                $p->update(['images' => $result['images']]);
+            }
 
             $p->update(['plan' => $plan]);
 

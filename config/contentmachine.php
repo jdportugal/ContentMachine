@@ -275,6 +275,12 @@ return [
         'remotion_path' => base_path('remotion'),
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),
+        // Auto-generate on-brand images (Nano Banana / kie.ai) for scenes the
+        // planner marks with `generate`. Needs the kie key; off = skipped cleanly.
+        'generate_images' => (bool) env('CLIPS_GENERATE_IMAGES', true),
+        'image_max' => (int) env('CLIPS_IMAGE_MAX', 6),        // per clip, to bound cost/time
+        'image_aspect' => env('CLIPS_IMAGE_ASPECT', '9:16'),   // portrait clips
+        'image_style' => env('CLIPS_IMAGE_STYLE', 'cinematic, photographic, high detail, dramatic lighting, vertical composition, no text or watermarks'),
     ],
 
     /*
