@@ -47,8 +47,11 @@ class GenerateEffectJob implements ShouldQueue
             return;
         }
 
-        // Editing keeps the effect's own slug (so clips referencing it keep working).
-        $keepSlug = ($this->isEdit && ! str_starts_with((string) $effect->slug, 'pending-')) ? $effect->slug : null;
+        // Keep the effect's own slug unless it's a fresh placeholder — so custom
+        // edits AND built-in overrides (slug = the built-in) regenerate in place,
+        // while a brand-new custom effect gets a slug from the model.
+        $keepSlug = ! str_starts_with((string) $effect->slug, 'pending-') ? $effect->slug : null;
+        $wasActive = $effect->isActive(); // a failed EDIT of a live effect must not break it
         $tmp = null;
 
         try {
@@ -82,8 +85,8 @@ class GenerateEffectJob implements ShouldQueue
                 @unlink($tmp);
             }
             // A failed EDIT of a live effect keeps it active + unchanged; a failed
-            // CREATE (or edit of a non-live effect) is marked failed.
-            $effect->update($keepSlug
+            // CREATE (or override of a not-yet-live effect) is marked failed.
+            $effect->update($wasActive
                 ? ['status' => EffectRecord::STATUS_ACTIVE, 'error' => Str::limit('Edit failed: '.$e->getMessage(), 500)]
                 : ['status' => EffectRecord::STATUS_FAILED, 'error' => Str::limit($e->getMessage(), 500)]
             );

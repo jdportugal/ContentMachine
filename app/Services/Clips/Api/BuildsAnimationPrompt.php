@@ -166,7 +166,8 @@ PROMPT;
         $library = app(EffectLibrary::class);
         $builtins = array_values(array_diff($this->layerTypes, $library->disabledBuiltins()));
 
-        return array_merge($builtins, $library->activeSlugs());
+        // activeSlugs may include built-in overrides (same slug) — dedupe.
+        return array_values(array_unique(array_merge($builtins, $library->activeSlugs())));
     }
 
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string

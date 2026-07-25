@@ -454,6 +454,26 @@
             </form>
         </x-panel>
 
+        {{-- Refine panel: a custom effect OR a built-in override --}}
+        @if ($editingSfxId || $sfxOverrideSlug)
+            <div class="foxing bg-vellum/60 border border-teal/30 rounded-sm p-4 mt-6">
+                <form wire:submit="guardarSfxEdicao" class="space-y-3">
+                    <label class="eyebrow block">{{ $sfxOverrideSlug ? 'Customize built-in · '.$sfxOverrideSlug : 'Refine this effect' }}</label>
+                    <textarea wire:model="sfxEditPrompt" rows="3"
+                              placeholder="{{ $sfxOverrideSlug ? 'Describe how this built-in effect should look and behave…' : '' }}"
+                              class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
+                    @error('sfxEditPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                    <div class="flex items-center gap-3">
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                            ✦ {{ $sfxOverrideSlug ? 'Create override' : 'Regenerate' }}
+                        </button>
+                        <button type="button" wire:click="cancelarSfxEdicao" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
+                        <span class="font-mono text-[0.6rem] text-ink-faint">{{ $sfxOverrideSlug ? 'Creates a custom version that replaces the built-in for this project.' : 'Same slug; the live version stays until the new one renders.' }}</span>
+                    </div>
+                </form>
+            </div>
+        @endif
+
         {{-- Custom (generated) effects --}}
         @if ($this->effects->isNotEmpty())
             <div class="mt-8">
@@ -461,24 +481,6 @@
                     <div class="eyebrow">Your effects · {{ $this->effects->count() }}</div>
                     <span class="font-mono text-[0.55rem] text-ink-faint">● on = allowed in generated videos · ○ off = kept but not used</span>
                 </div>
-
-                @if ($editingSfxId)
-                    <div class="foxing bg-vellum/60 border border-teal/30 rounded-sm p-4 mb-4">
-                        <form wire:submit="guardarSfxEdicao" class="space-y-3">
-                            <label class="eyebrow block">Refine this effect</label>
-                            <textarea wire:model="sfxEditPrompt" rows="3"
-                                      class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
-                            @error('sfxEditPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
-                            <div class="flex items-center gap-3">
-                                <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
-                                    ✦ Regenerate
-                                </button>
-                                <button type="button" wire:click="cancelarSfxEdicao" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
-                                <span class="font-mono text-[0.6rem] text-ink-faint">Same slug; the live version stays until the new one renders.</span>
-                            </div>
-                        </form>
-                    </div>
-                @endif
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     @foreach ($this->effects as $effect)
@@ -554,17 +556,35 @@
                                     <p class="font-mono text-[0.52rem] text-ink-faint mt-2">Rendering…</p>
                                 </div>
                             @endif
+                            @if ($b['override'] === 'active')
+                                <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">custom</div>
+                            @elseif (in_array($b['override'], ['pending', 'updating'], true))
+                                <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
+                                    <p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p>
+                                </div>
+                            @endif
                         </div>
                         <div class="flex items-start justify-between gap-1 mt-2">
                             <div class="min-w-0">
                                 <p class="font-display text-sm text-ink truncate">{{ $b['label'] }}</p>
                                 <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ $b['slug'] }}</p>
                             </div>
-                            <button type="button" wire:click="alternarBuiltin('{{ $b['slug'] }}')"
-                                    title="{{ $b['allowed'] ? 'Allowed in generated videos — click to disallow' : 'Disallowed — click to allow' }}"
-                                    class="font-mono text-[0.62rem] px-2 py-1 rounded-sm border shrink-0 {{ $b['allowed'] ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
-                                {{ $b['allowed'] ? '● on' : '○ off' }}
-                            </button>
+                            <div class="flex items-center gap-1 shrink-0">
+                                <button type="button" wire:click="alternarBuiltin('{{ $b['slug'] }}')"
+                                        title="{{ $b['allowed'] ? 'Allowed in generated videos — click to disallow' : 'Disallowed — click to allow' }}"
+                                        class="font-mono text-[0.6rem] px-1.5 py-1 rounded-sm border {{ $b['allowed'] ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
+                                    {{ $b['allowed'] ? '● on' : '○ off' }}
+                                </button>
+                                <button type="button" wire:click="editarBuiltin('{{ $b['slug'] }}')"
+                                        title="{{ $b['override'] ? 'Edit your custom version' : 'Customize this built-in' }}"
+                                        class="text-sm leading-none px-1.5 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
+                                @if ($b['override'])
+                                    <button type="button" wire:click="resetBuiltin('{{ $b['slug'] }}')"
+                                            wire:confirm="Reset «{{ $b['slug'] }}» to the default built-in? Your custom version is deleted."
+                                            title="Reset to the default built-in"
+                                            class="text-sm leading-none px-1.5 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">↺</button>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @endforeach

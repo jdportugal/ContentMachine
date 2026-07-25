@@ -35,8 +35,8 @@ class EffectGenerator
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null
-            ? $this->normalizeSlug($keepSlug)                 // editing — keep the effect's own slug
-            : $this->slug((string) ($data['slug'] ?? ''));    // creating — a fresh, unused slug
+            ? $this->normalizeSlug($keepSlug, allowBuiltin: true) // editing / built-in override — keep the given slug
+            : $this->slug((string) ($data['slug'] ?? ''));        // creating — a fresh, unused slug
         $tsx = trim((string) ($data['tsx'] ?? ''));
         if ($tsx === '') {
             throw new RuntimeException('The model returned no component code.');
@@ -67,17 +67,21 @@ class EffectGenerator
         return $slug;
     }
 
-    /** Validate/normalise a slug's format (no uniqueness check). */
-    private function normalizeSlug(string $raw): string
+    /**
+     * Validate/normalise a slug's format (no uniqueness check). $allowBuiltin
+     * permits a built-in slug — used when the effect intentionally OVERRIDES a
+     * standard VFX (same slug replaces the built-in in the render registry).
+     */
+    private function normalizeSlug(string $raw, bool $allowBuiltin = false): string
     {
         $slug = strtolower(trim($raw));
         $slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
         $slug = trim((string) $slug, '-');
 
-        if ($slug === '' || ! preg_match('/^[a-z][a-z0-9-]*$/', $slug) || strlen($slug) > 40) {
+        if ($slug === '' || $slug === '_candidate' || ! preg_match('/^[a-z][a-z0-9-]*$/', $slug) || strlen($slug) > 40) {
             throw new RuntimeException("Invalid effect name «{$raw}».");
         }
-        if (in_array($slug, self::RESERVED, true) || array_key_exists($slug, EffectLibrary::BUILTIN_SAMPLES)) {
+        if (! $allowBuiltin && (in_array($slug, self::RESERVED, true) || array_key_exists($slug, EffectLibrary::BUILTIN_SAMPLES))) {
             throw new RuntimeException("«{$slug}» is a built-in effect name — choose another.");
         }
 

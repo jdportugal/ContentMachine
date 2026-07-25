@@ -301,6 +301,55 @@ class SfxTest extends TestCase
             ->assertSet('editingSfxId', null);
     }
 
+    public function test_editing_a_builtin_creates_an_override_with_its_slug(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarBuiltin', 'seal-stamp')
+            ->assertSet('sfxOverrideSlug', 'seal-stamp')
+            ->assertSet('editingSfxId', null)
+            ->set('sfxEditPrompt', 'make the seal gold and larger with a soft shine')
+            ->call('guardarSfxEdicao')
+            ->assertHasNoErrors()
+            ->assertSet('sfxOverrideSlug', null);
+
+        $override = $this->effects()->all()->firstWhere('slug', 'seal-stamp');
+        $this->assertNotNull($override);
+        $this->assertSame('pending', $override->status);
+        Queue::assertPushed(GenerateEffectJob::class);
+    }
+
+    public function test_generator_allows_a_builtin_slug_for_overrides(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'ignored-by-override', 'displayName' => 'Seal', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => 'IATECA', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+        ]);
+
+        // Keeping a built-in slug is allowed (it overrides the built-in).
+        $data = app(EffectGenerator::class)->generate('a gold seal', keepSlug: 'seal-stamp');
+        $this->assertSame('seal-stamp', $data['slug']);
+    }
+
+    public function test_resetting_a_builtin_removes_the_override_and_its_file(): void
+    {
+        $library = app(EffectLibrary::class);
+        $override = $this->makeEffect([
+            'prompt' => 'gold seal', 'slug' => 'seal-stamp', 'display_name' => 'Seal (custom)',
+            'description' => 'Override of the built-in seal-stamp.', 'param_schema' => '{}',
+            'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+        $library->syncFilesystem();
+        $this->assertFileExists($library->effectFile('seal-stamp'));
+
+        Livewire::test(ClipsAnimados::class)->call('resetBuiltin', 'seal-stamp');
+
+        $this->assertNull($this->effects()->find($override->id()));
+        $this->assertFileDoesNotExist($library->effectFile('seal-stamp'));
+    }
+
     /** Fake the Anthropic API so EffectGenerator::generate() returns the given payload as its TSX JSON. */
     private function fakeClaudeReturning(array $payload): void
     {

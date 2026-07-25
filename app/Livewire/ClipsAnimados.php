@@ -45,6 +45,9 @@ class ClipsAnimados extends Component
 
     public string $sfxEditPrompt = '';
 
+    /** Set while creating an override for a built-in effect (the built-in's slug). */
+    public ?string $sfxOverrideSlug = null;
+
     // ---- creation ----
     /** null | animation | overlay */
     public ?string $createType = null;
@@ -105,7 +108,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'sfxPrompt', 'editingSfxId', 'sfxEditPrompt']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'sfxPrompt', 'editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -116,7 +119,7 @@ class ClipsAnimados extends Component
 
     public function abrirSfx(): void
     {
-        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
         $this->resetValidation();
         $this->view = 'sfx';
         $this->ensurePreviews();
@@ -139,9 +142,36 @@ class ClipsAnimados extends Component
         $this->resetValidation();
     }
 
+    /** Open the refine panel for a built-in: edit its override, or start a new one. */
+    public function editarBuiltin(string $slug): void
+    {
+        if (! app(EffectLibrary::class)->isBuiltin($slug)) {
+            return;
+        }
+        $this->resetValidation();
+        $override = $this->effects()->all()->firstWhere('slug', $slug);
+        if ($override && $override->isActive()) {
+            $this->editingSfxId = $override->id();
+            $this->sfxOverrideSlug = null;
+            $this->sfxEditPrompt = (string) $override->prompt;
+        } else {
+            $this->editingSfxId = null;
+            $this->sfxOverrideSlug = $slug;
+            $this->sfxEditPrompt = '';
+        }
+    }
+
+    /** Revert a built-in to its default by deleting its override. */
+    public function resetBuiltin(string $slug, EffectLibrary $library): void
+    {
+        if ($override = $this->effects()->all()->firstWhere('slug', $slug)) {
+            $library->remove($override);
+        }
+    }
+
     public function cancelarSfxEdicao(): void
     {
-        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
         $this->resetValidation();
     }
 
@@ -155,17 +185,33 @@ class ClipsAnimados extends Component
             ],
         );
 
-        $effect = $this->effects()->find($this->editingSfxId);
-        if ($effect && $effect->isActive()) {
-            $effect->update([
+        if ($this->editingSfxId) {
+            // Refine an existing effect (custom or a built-in override).
+            $effect = $this->effects()->find($this->editingSfxId);
+            if ($effect && $effect->isActive()) {
+                $effect->update([
+                    'prompt' => trim($this->sfxEditPrompt),
+                    'status' => EffectRecord::STATUS_UPDATING,
+                    'error' => null,
+                ]);
+                GenerateEffectJob::dispatch($effect->id(), isEdit: true);
+            }
+        } elseif ($this->sfxOverrideSlug && app(EffectLibrary::class)->isBuiltin($this->sfxOverrideSlug)) {
+            // Create an override of a built-in: same slug replaces it in the registry.
+            $slug = $this->sfxOverrideSlug;
+            $effect = $this->effects()->create([
                 'prompt' => trim($this->sfxEditPrompt),
-                'status' => EffectRecord::STATUS_UPDATING,
-                'error' => null,
+                'slug' => $slug,
+                'display_name' => Str::title(str_replace('-', ' ', $slug)).' (custom)',
+                'description' => "Override of the built-in {$slug}.",
+                'param_schema' => '{}',
+                'tsx' => '',
+                'status' => EffectRecord::STATUS_PENDING,
             ]);
-            GenerateEffectJob::dispatch($effect->id(), isEdit: true);
+            GenerateEffectJob::dispatch($effect->id());
         }
 
-        $this->reset(['editingSfxId', 'sfxEditPrompt']);
+        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
     }
 
     /** Dispatch a cached-preview render for any built-in / active effect missing one. */
@@ -230,10 +276,12 @@ class ClipsAnimados extends Component
         }
     }
 
-    /** @return Collection<int,EffectRecord> */
+    /** Custom effects only — built-in overrides belong to their built-in tile. @return Collection<int,EffectRecord> */
     public function getEffectsProperty()
     {
-        return $this->effects()->all();
+        $library = app(EffectLibrary::class);
+
+        return $this->effects()->all()->reject(fn (EffectRecord $e) => $library->isBuiltin($e->slug))->values();
     }
 
     public function getSfxBusyProperty(): bool
@@ -613,8 +661,18 @@ class ClipsAnimados extends Component
         $ready = [];
         if ($this->view === 'sfx') {
             $disabledBuiltins = $library->disabledBuiltins();
+            // Overrides are custom effects whose slug matches a built-in.
+            $overrides = $this->effects()->all()
+                ->filter(fn (EffectRecord $e) => $library->isBuiltin($e->slug))
+                ->keyBy('slug');
             foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
-                $builtins[] = ['slug' => $slug, 'label' => $sample['label'], 'allowed' => ! in_array($slug, $disabledBuiltins, true)];
+                $override = $overrides->get($slug);
+                $builtins[] = [
+                    'slug' => $slug,
+                    'label' => $sample['label'],
+                    'allowed' => ! in_array($slug, $disabledBuiltins, true),
+                    'override' => $override?->status,   // null | pending | updating | active | failed
+                ];
                 if ($library->previewExists($slug)) {
                     $ready[] = $slug;
                 }
