@@ -55,7 +55,7 @@ trait BuildsAnimationPrompt
                 .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption. So carry a visual layer whenever you can — a chart/card/diagram/timeline when there is a real point, '
                 .($canGenerateImages
                     ? 'and OTHERWISE an image-reveal with "generate" describing an image of what is being said.'
-                    : 'or a card/bullet-list/diagram/comparison built from the point (you CANNOT create images — never use image-reveal without a PROVIDED src). If nothing concrete fits, leave the scene as plain karaoke.');
+                    : 'or a card/bullet-list/diagram/comparison built from the point (you CANNOT create images — never use image-reveal without a PROVIDED src). EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken point into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene as bare karaoke.');
 
         // Image guidance + image-reveal schema depend on whether the studio can
         // actually generate images (kie credits). No credits → provided images
@@ -68,8 +68,8 @@ trait BuildsAnimationPrompt
                 G
             : <<<'G'
                 - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
-                - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate" and do NOT use image-reveal without a PROVIDED src. For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. If nothing concrete fits, leave the scene as plain karaoke.
-                - BE VISUAL where it helps: use charts/cards/diagrams/bullet-lists tied to the EXACT words spoken there, and vary the motion. Do not force a visual onto a moment that has nothing to show.
+                - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate" and do NOT use image-reveal without a PROVIDED src. For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken words into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene bare.
+                - BE VISUAL: give EVERY scene a visual tied to the EXACT words spoken there — chart/card/diagram/bullet-list — and vary the motion so no scene is empty.
                 G;
 
         $imageRevealSchema = $canGenerateImages
@@ -77,6 +77,13 @@ trait BuildsAnimationPrompt
                 .'  - Use EITHER "src" (a provided image id) OR "generate" (a description → AI image), never both. variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
             : '- image-reveal:{ "src": "<id of a PROVIDED image>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
                 .'  - Use ONLY with a PROVIDED image id (src) — image generation is OFF, there is no "generate". VARY the variant across scenes.';
+
+        // What to do with a scene that has no natural chart/data visual. A lone big
+        // word is never a whole scene; with images off the fallback is a card/list
+        // (never bare), with images on it is a generated image.
+        $bareRule = $canGenerateImages
+            ? 'If a scene has no real visual, give it an image — never a lone big word, never a bare caption-only frame.'
+            : 'If a scene has no chart/data visual, build a card or bullet-list from the spoken point — never a lone big word, and NEVER a bare caption-only frame.';
 
         return <<<PROMPT
 You are the clip director of the IATECA studio. You plan the video as a sequence of SCENES.
@@ -144,9 +151,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
   word/expression from the SPOKEN TEXT (copied from the transcript), never invented or paraphrased.
 - NEVER make a scene whose whole content is a single word or short text. Do NOT use "kinetic-text"
   as a standalone "title card", and a punchWord is emphasis ON TOP of a real visual (chart / image /
-  card / diagram), NEVER a scene's only content. If a scene has no real visual, leave it as plain
-  karaoke (the captions carry the words) rather than a lone big word — the karaoke already shows the
-  speech, so text is how the words appear, not a separate one-word slide.
+  card / diagram), NEVER a scene's only content. {$bareRule}
 - EACH SCENE: at most ONE main layer (do not overlap elements). You can have varied backgrounds
   and transitions to give rhythm. Fill the data from the RESEARCH below.
 {$imageGuidance}

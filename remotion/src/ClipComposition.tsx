@@ -101,7 +101,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
       {resolvedMusic ? <Audio src={resolvedMusic} volume={musicVolume ?? 0.1} loop /> : null}
 
       {useScenes ? (
-        <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} />
+        <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} transparent={!!transparent} />
       ) : (
         (animations ?? []).map((anim, i) => {
           const from = Math.round(anim.start * effectiveFps);

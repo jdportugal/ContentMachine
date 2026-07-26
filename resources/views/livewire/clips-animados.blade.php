@@ -1,4 +1,4 @@
-<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'sfx' && $this->sfxBusy)) wire:poll.3s @endif>
+<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'sfx' && ($this->sfxBusy || $this->showreelBusy))) wire:poll.3s @endif>
     @php
         $estados = [
             'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
@@ -453,6 +453,27 @@
                 </div>
             </form>
         </x-panel>
+
+        {{-- Showreel: one video cycling through every effect, name centered --}}
+        <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-6">
+            <div class="flex items-center justify-between gap-4 mb-3">
+                <div>
+                    <div class="eyebrow">Showreel</div>
+                    <p class="text-ink-soft text-sm mt-1">One video that plays every effect in turn, each with its name in the middle.</p>
+                </div>
+                <button type="button" wire:click="gerarShowreel" wire:loading.attr="disabled" wire:target="gerarShowreel"
+                        @if ($this->showreelBusy) disabled @endif
+                        class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
+                    @if ($this->showreelBusy) rendering… @elseif ($this->showreelReady) ↻ Rebuild @else ✦ Build showreel @endif
+                </button>
+            </div>
+            @if ($this->showreelBusy)
+                <p class="font-mono text-[0.6rem] text-ink-faint">Rendering the reel — this can take a minute. It refreshes automatically.</p>
+            @elseif ($this->showreelReady)
+                <video class="rounded-sm border border-ink-soft/15 bg-black w-full max-h-[70vh]" controls preload="metadata"
+                       src="{{ route('clips-animados.showreel') }}?v={{ now()->timestamp }}"></video>
+            @endif
+        </div>
 
         {{-- Refine panel: a custom effect OR a built-in override --}}
         @if ($editingSfxId || $sfxOverrideSlug)

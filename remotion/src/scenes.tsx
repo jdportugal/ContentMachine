@@ -65,14 +65,17 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
 
 // ── one scene ────────────────────────────────────────────────────────────────
 // A background that never sits still — slow-drifting ink-blot gradients over the
-// scene colour, so there is always subtle motion on screen.
-const LiveBackground: React.FC<{ color: string }> = ({ color }) => {
+// scene colour, so there is always subtle motion on screen. When `solid` is false
+// the base colour is NOT painted, so the composition's themed BackgroundTexture
+// (the same starfield the effect previews show) shows through — only the drifting
+// blobs are layered on top for motion.
+const LiveBackground: React.FC<{ color: string; solid: boolean }> = ({ color, solid }) => {
   const frame = useCurrentFrame();
   const dx = Math.sin(frame / 70) * 8;
   const dy = Math.cos(frame / 90) * 9;
   const dx2 = Math.cos(frame / 58) * 10;
   return (
-    <AbsoluteFill style={{ backgroundColor: color, overflow: "hidden" }}>
+    <AbsoluteFill style={{ backgroundColor: solid ? color : undefined, overflow: "hidden" }}>
       <AbsoluteFill
         style={{
           backgroundImage:
@@ -85,7 +88,7 @@ const LiveBackground: React.FC<{ color: string }> = ({ color }) => {
   );
 };
 
-const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null }> = ({ scene, fps, durSec, videoSrc }) => {
+const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = ({ scene, fps, durSec, videoSrc, transparent }) => {
   const frame = useCurrentFrame();
   const tin = scene.transitionIn ?? "cut";
   const inDur = tin === "whip" ? 8 : tin === "cut" ? 0 : 6;
@@ -114,6 +117,15 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
   const dark = present === "animation" ? scene.background === "ink" : true; // over video → light text
   const layers = Array.isArray(scene.layers) ? scene.layers : [];
 
+  // The composition renders its themed BackgroundTexture (starfield) behind this
+  // scene only for an opaque (non-transparent) animation clip with no source video.
+  // When it does, let it show through for EVERY animation background so real clips
+  // match the effect demos — a flat papyrus/vellum/ink panel would hide the
+  // starfield. Paint an opaque base only when there's no backdrop to reveal:
+  // over-video (split) scenes and transparent (externally-composited) renders.
+  const hasBackdrop = present === "animation" && !transparent;
+  const solidBg = !hasBackdrop;
+
   const video = videoSrc ? (
     <OffthreadVideo
       src={videoSrc}
@@ -131,7 +143,7 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
         transform: `translateY(${tY + idleY}px) scale(${entryScale * idleScale})`,
       }}
     >
-      {present === "animation" || present === "split" ? <LiveBackground color={bgColor} /> : null}
+      {present === "animation" || present === "split" ? <LiveBackground color={bgColor} solid={solidBg} /> : null}
       {present !== "video"
         ? layers.map((layer, i) => {
             const pseudo = { start: 0, end: durSec, primitive: layer.type, text: layer.text, params: layer.params };
@@ -219,7 +231,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 };
 
 // ── the scene track ──────────────────────────────────────────────────────────
-export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null }> = ({ scenes, words, fps, videoSrc }) => {
+export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null; transparent: boolean }> = ({ scenes, words, fps, videoSrc, transparent }) => {
   return (
     <>
       {scenes.map((scene, i) => {
@@ -228,7 +240,7 @@ export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: 
         const durFrames = Math.max(1, Math.round(durSec * fps));
         return (
           <Sequence key={i} from={from} durationInFrames={durFrames} name={`scene-${i}`}>
-            <SceneBody scene={scene} fps={fps} durSec={durSec} videoSrc={videoSrc} />
+            <SceneBody scene={scene} fps={fps} durSec={durSec} videoSrc={videoSrc} transparent={transparent} />
           </Sequence>
         );
       })}

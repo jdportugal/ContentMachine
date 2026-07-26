@@ -81,6 +81,15 @@ Route::get('/clips-animados/sfx/{slug}/preview', function (string $slug) {
     return response()->file($path);
 })->name('clips-animados.sfx-preview');
 
+// Serve the cached SFX showreel (one video cycling through every effect) for the
+// current design system + effect set. 404 until it has been rendered.
+Route::get('/clips-animados/showreel', function () {
+    $path = app(EffectLibrary::class)->showreelPath();
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->name('clips-animados.showreel');
+
 Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');
 Route::livewire('/publicacoes/{tipo}', Oficina::class)->name('publicacoes.oficina');
 

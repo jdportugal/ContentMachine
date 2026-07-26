@@ -44,6 +44,10 @@ class EffectLibrary
         'diagram' => ['label' => 'Diagram', 'text' => '', 'params' => ['title' => 'Flow', 'layout' => 'vertical', 'nodes' => [['label' => 'Input'], ['label' => 'Process'], ['label' => 'Output']]]],
     ];
 
+    /** Built-ins whose whole content IS their `text` (centered) — for the showreel,
+     *  the effect name becomes that text, so the name shows without a second overlay. */
+    private const TEXT_EFFECTS = ['kinetic-text', 'fade', 'slide', 'scale', 'highlight', 'seal-stamp', 'underline-sweep'];
+
     private const CANDIDATE_STUB = <<<'TSX'
 import React from "react";
 import type { PrimitiveProps } from "../primitives";
@@ -289,5 +293,90 @@ TSX;
     public function previewExists(string $slug): bool
     {
         return is_file($this->previewPath($slug));
+    }
+
+    // ── showreel (one video cycling through every effect, name centered) ──
+
+    /** Every effect to feature, in order: all built-ins then active custom effects. */
+    public function showreelEntries(): array
+    {
+        $entries = [];
+        foreach (self::BUILTIN_SAMPLES as $slug => $s) {
+            $entries[] = ['slug' => $slug, 'label' => $s['label'], 'text' => $s['text'], 'params' => $s['params']];
+        }
+        foreach ($this->active() as $e) {
+            if ($this->isBuiltin($e->slug)) {
+                continue; // an override — already featured under its built-in slug
+            }
+            $entries[] = [
+                'slug' => $e->slug,
+                'label' => $e->display_name ?: \Illuminate\Support\Str::title(str_replace('-', ' ', $e->slug)),
+                'text' => $e->sample_text,
+                'params' => $e->sample_params ?? [],
+            ];
+        }
+
+        return $entries;
+    }
+
+    /**
+     * A single plan that plays each effect for a beat with its NAME centered. For
+     * text effects the name is the animated text itself; for visual effects (charts,
+     * etc.) the name is overlaid via a centered kinetic-text layer.
+     */
+    public function showreelPlan(): array
+    {
+        $c = config('contentmachine.clips');
+        $per = 2.4;
+        $anims = [];
+        $t = 0.0;
+        foreach ($this->showreelEntries() as $e) {
+            $start = $t;
+            $end = $t + $per;
+            $isText = in_array($e['slug'], self::TEXT_EFFECTS, true);
+            $anims[] = [
+                'start' => $start, 'end' => $end, 'primitive' => $e['slug'],
+                'text' => $isText ? $e['label'] : (string) ($e['text'] ?? ''),
+                'params' => $e['params'] ?: (object) [],
+            ];
+            if (! $isText) {
+                // Overlay the name (on top) for effects that don't carry their own text.
+                $anims[] = ['start' => $start, 'end' => $end, 'primitive' => 'kinetic-text', 'text' => $e['label'], 'params' => (object) []];
+            }
+            $t = $end;
+        }
+
+        $plan = [
+            'duration' => $t ?: $per,
+            'width' => (int) $c['width'],
+            'height' => (int) $c['height'],
+            'fps' => (int) $c['fps'],
+            'mode' => 'dense',
+            'transparent' => false,
+            'animations' => $anims,
+        ];
+        if ($theme = $this->design->readTokens()) {
+            $plan['theme'] = $theme;
+        }
+
+        return $plan;
+    }
+
+    /** Cache key: invalidates when the design system OR the featured effect set changes. */
+    private function showreelHash(): string
+    {
+        $sig = array_map(fn ($e) => $e['slug'].':'.$e['label'], $this->showreelEntries());
+
+        return substr(md5($this->designHash().'|'.implode(',', $sig)), 0, 8);
+    }
+
+    public function showreelPath(): string
+    {
+        return $this->previewDir().'/showreel-'.$this->showreelHash().'.mp4';
+    }
+
+    public function showreelExists(): bool
+    {
+        return is_file($this->showreelPath());
     }
 }

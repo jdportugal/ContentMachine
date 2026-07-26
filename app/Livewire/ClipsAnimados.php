@@ -6,6 +6,7 @@ use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
+use App\Jobs\Clips\RenderShowreelJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\ImageProbe;
@@ -228,6 +229,29 @@ class ClipsAnimados extends Component
                 RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
             }
         }
+    }
+
+    /** Render one video cycling through every effect, each with its name centered. */
+    public function gerarShowreel(EffectLibrary $library): void
+    {
+        if ($library->showreelExists()) {
+            return; // cached for the current design system + effect set
+        }
+        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
+        \Illuminate\Support\Facades\Cache::put(RenderShowreelJob::flagKey($slug), true, now()->addMinutes(20));
+        RenderShowreelJob::dispatch();
+    }
+
+    public function getShowreelReadyProperty(EffectLibrary $library): bool
+    {
+        return $library->showreelExists();
+    }
+
+    public function getShowreelBusyProperty(): bool
+    {
+        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
+
+        return \Illuminate\Support\Facades\Cache::has(RenderShowreelJob::flagKey($slug));
     }
 
     public function gerarSfx(): void
