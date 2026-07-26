@@ -71,20 +71,43 @@ class SceneVisualFiller
     private function layerHasContent(array $layer): bool
     {
         $p = is_array($layer['params'] ?? null) ? $layer['params'] : [];
+        $text = $layer['text'] ?? null;
 
         return match ($layer['type'] ?? '') {
             'image-reveal' => ! empty($p['src']),
-            'timeline', 'bullet-list' => ! empty($p['items']),
+            // Text primitives need at least one non-blank string (matches the
+            // primitives, which filter out empty lines before rendering).
+            'card' => $this->hasText($p['title'] ?? null) || $this->hasText($text) || $this->hasAnyText($p['lines'] ?? $p['items'] ?? null),
+            'bullet-list' => $this->hasText($p['title'] ?? null) || $this->hasAnyText($p['items'] ?? null),
+            'terminal' => $this->hasAnyText($p['lines'] ?? null),
+            'timeline' => ! empty($p['items']),
             'bar-chart' => ! empty($p['bars']),
             'line-chart' => ! empty($p['series']),
             'pie-chart' => ! empty($p['slices']),
             'scatter-chart' => ! empty($p['points']),
             'diagram' => ! empty($p['nodes']),
-            'terminal' => ! empty($p['lines']),
             'comparison' => ! empty($p['left']) || ! empty($p['right']),
-            'card' => ! empty($p['title']) || ! empty($p['lines']),
-            default => true, // text / ornament layers (kinetic-text, seal-stamp, ambient, count-up, …)
+            default => true, // ornament / speech layers (kinetic-text, seal-stamp, ambient, count-up, …)
         };
+    }
+
+    private function hasText(mixed $v): bool
+    {
+        return is_string($v) && trim($v) !== '';
+    }
+
+    private function hasAnyText(mixed $list): bool
+    {
+        if (! is_array($list)) {
+            return false;
+        }
+        foreach ($list as $item) {
+            if ($this->hasText($item) || (is_array($item) && $this->hasText($item['label'] ?? null))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** Any scene still without a foreground layer gets ambient motion (never a blank frame). */

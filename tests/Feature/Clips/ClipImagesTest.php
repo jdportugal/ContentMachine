@@ -140,6 +140,24 @@ class ClipImagesTest extends TestCase
         $this->assertCount(1, $out['scenes'][5]['layers']);
     }
 
+    public function test_drop_dead_layers_removes_effectively_blank_text_layers(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'card', 'params' => ['title' => '', 'lines' => ['']]]]],   // blank → dropped
+            ['layers' => [['type' => 'card', 'text' => 'Titled via text', 'params' => []]]],    // title from text → kept
+            ['layers' => [['type' => 'bullet-list', 'params' => ['items' => ['', '  ']]]]],      // blank items → dropped
+            ['layers' => [['type' => 'terminal', 'params' => ['lines' => []]]]],                 // empty → dropped
+        ]];
+
+        $out = $filler->dropDeadLayers($plan);
+
+        $this->assertCount(0, $out['scenes'][0]['layers']);
+        $this->assertCount(1, $out['scenes'][1]['layers']);
+        $this->assertCount(0, $out['scenes'][2]['layers']);
+        $this->assertCount(0, $out['scenes'][3]['layers']);
+    }
+
     public function test_filler_falls_back_to_ambient_for_still_bare_scenes(): void
     {
         $filler = new SceneVisualFiller;
