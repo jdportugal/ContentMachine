@@ -352,6 +352,27 @@ class SfxTest extends TestCase
         Queue::assertPushed(GenerateEffectJob::class);
     }
 
+    public function test_override_generation_tells_the_model_the_builtin_param_contract(): void
+    {
+        config(['services.anthropic.key' => 'test-key']);
+        Http::fake(function ($request) {
+            $userMsg = (string) ($request->data()['messages'][0]['content'] ?? '');
+            // The override must be told the card's REAL params (title/lines), not invent its own.
+            $this->assertStringContainsString('OVERRIDE CONTRACT', $userMsg);
+            $this->assertStringContainsString('title', $userMsg);
+            $this->assertStringContainsString('lines', $userMsg);
+
+            return Http::response(['content' => [['type' => 'text', 'text' => json_encode([
+                'slug' => 'card', 'displayName' => 'Def', 'description' => 'x', 'paramSchema' => '{}',
+                'sampleText' => '', 'sampleParams' => ['title' => 'X', 'lines' => ['y']],
+                'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+            ])]]]);
+        });
+
+        $data = app(EffectGenerator::class)->generate('type the definition letter by letter', keepSlug: 'card');
+        $this->assertSame('card', $data['slug']);
+    }
+
     public function test_generator_allows_a_builtin_slug_for_overrides(): void
     {
         $this->fakeClaudeReturning([

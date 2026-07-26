@@ -31,7 +31,12 @@ class EffectGenerator
      */
     public function generate(string $description, ?string $keepSlug = null): array
     {
-        $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => 300]);
+        // If this OVERRIDES a built-in, the component must read the SAME params
+        // the planner sends that built-in — otherwise clips using it render blank.
+        $builtin = $keepSlug !== null ? strtolower(trim($keepSlug)) : '';
+        $overrideSlug = array_key_exists($builtin, EffectLibrary::BUILTIN_SAMPLES) ? $builtin : null;
+
+        $envelope = $this->runClaude($this->userPrompt($description, $overrideSlug), $this->systemPrompt(), ['timeout' => 300]);
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null
@@ -183,9 +188,21 @@ Below are the exact tokens (contract) and the brand guide. Match their spirit.
 PROMPT;
     }
 
-    private function userPrompt(string $description): string
+    private function userPrompt(string $description, ?string $overrideSlug = null): string
     {
-        return "Create this effect:\n\n{$description}\n\n"
+        $contract = '';
+        if ($overrideSlug !== null) {
+            $sample = EffectLibrary::BUILTIN_SAMPLES[$overrideSlug]['params'] ?? [];
+            $example = json_encode($sample) ?: '{}';
+            $contract = "\n\n# OVERRIDE CONTRACT — CRITICAL\n"
+                ."This effect REPLACES the built-in \"{$overrideSlug}\". The clip planner sends it the EXACT SAME params as that built-in, "
+                .'so you MUST read those same fields from `anim.params` (and `anim.text` where the built-in uses it) — do NOT invent new param names, '
+                ."or existing clips will render blank.\n"
+                ."The params it will receive look EXACTLY like this example — read these keys:\n{$example}\n"
+                .'Keep that data contract; only change how it LOOKS/animates per the request below. Set sampleParams to a value of this same shape.';
+        }
+
+        return "Create this effect:\n\n{$description}{$contract}\n\n"
             .'Return ONLY the JSON object described above. The "tsx" must be a complete, '
             .'compiling component that uses ONLY the design-system tokens for colours and fonts.';
     }
