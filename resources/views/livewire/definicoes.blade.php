@@ -189,6 +189,12 @@
                     <input type="number" min="5" wire:model="modelos.aggregation_timeout" placeholder="45"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                 </div>
+                <div>
+                    <label class="eyebrow block mb-1.5">ElevenLabs voice ID</label>
+                    <input type="text" wire:model="modelos.elevenlabs_voice" placeholder="EXAVITQu4vr4xnSDxMaL"
+                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Voice for the clip voiceover. Empty = default.</p>
+                </div>
             </div>
         </x-panel>
 

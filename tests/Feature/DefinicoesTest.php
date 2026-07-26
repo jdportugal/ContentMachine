@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Livewire\Definicoes;
+use App\Services\Settings\SettingsOverlay;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
@@ -26,6 +27,19 @@ class DefinicoesTest extends TestCase
     {
         array_map('unlink', glob($this->tmp.'/definicoes/*.md') ?: []);
         parent::tearDown();
+    }
+
+    public function test_saving_an_elevenlabs_voice_id_overlays_the_clip_voice_config(): void
+    {
+        Livewire::test(Definicoes::class)
+            ->set('modelos.elevenlabs_voice', 'VOICE-XYZ')
+            ->call('guardar')
+            ->assertHasNoErrors();
+
+        $this->assertSame('VOICE-XYZ', app(SettingsRepository::class)->all()['modelos']['elevenlabs_voice']);
+
+        app(SettingsOverlay::class)->apply(app(SettingsRepository::class));
+        $this->assertSame('VOICE-XYZ', config('contentmachine.clips.voice_id'));
     }
 
     public function test_defaults_quando_vazio(): void

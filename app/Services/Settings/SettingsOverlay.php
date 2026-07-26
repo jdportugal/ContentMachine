@@ -34,6 +34,7 @@ class SettingsOverlay
         'modelos.gemini_model' => 'contentmachine.aggregation.gemini_model',
         'modelos.aggregation_limit' => 'contentmachine.aggregation.limite_por_canal',
         'modelos.aggregation_timeout' => 'contentmachine.aggregation.timeout',
+        'modelos.elevenlabs_voice' => 'contentmachine.clips.voice_id',
     ];
 
     public function apply(SettingsRepository $settings): void

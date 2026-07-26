@@ -73,6 +73,7 @@ class SettingsRepository
                 'gemini_model' => '',
                 'aggregation_limit' => '',   // videos per channel
                 'aggregation_timeout' => '', // seconds per yt-dlp call
+                'elevenlabs_voice' => '',    // ElevenLabs voice id for the clip voiceover
             ],
         ];
     }
