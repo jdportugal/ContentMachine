@@ -85,7 +85,11 @@ class PlanAnimationsJob implements ShouldQueue
                 $p->update(['images' => $result['images']]);
             }
 
-            // Anything still bare (no image made) gets ambient motion, never black.
+            // Remove layers that would render an empty placeholder (image with no
+            // src because generation failed, or a chart with no data).
+            $plan = $filler->dropDeadLayers($plan);
+
+            // Anything now bare gets ambient motion, never a broken placeholder.
             if (! $isOverlay) {
                 $plan = $filler->fallbackAmbient($plan);
             }

@@ -118,6 +118,28 @@ class ClipImagesTest extends TestCase
         $this->assertStringContainsString('foxes run', $l2['params']['generate']);
     }
 
+    public function test_drop_dead_layers_removes_empty_image_and_chart_layers(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-reveal', 'params' => ['caption' => 'x']]]],              // no src → dropped
+            ['layers' => [['type' => 'image-reveal', 'params' => ['src' => 'gen_abc']]]],            // has src → kept
+            ['layers' => [['type' => 'bar-chart', 'params' => []]]],                                 // no data → dropped
+            ['layers' => [['type' => 'bar-chart', 'params' => ['bars' => [['label' => 'A', 'value' => 1]]]]]], // kept
+            ['layers' => [['type' => 'card', 'params' => ['title' => 'Hi']]]],                       // kept
+            ['layers' => [['type' => 'kinetic-text', 'text' => 'yo', 'params' => []]]],              // text → kept
+        ]];
+
+        $out = $filler->dropDeadLayers($plan);
+
+        $this->assertCount(0, $out['scenes'][0]['layers']);
+        $this->assertCount(1, $out['scenes'][1]['layers']);
+        $this->assertCount(0, $out['scenes'][2]['layers']);
+        $this->assertCount(1, $out['scenes'][3]['layers']);
+        $this->assertCount(1, $out['scenes'][4]['layers']);
+        $this->assertCount(1, $out['scenes'][5]['layers']);
+    }
+
     public function test_filler_falls_back_to_ambient_for_still_bare_scenes(): void
     {
         $filler = new SceneVisualFiller;

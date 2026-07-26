@@ -40,6 +40,53 @@ class SceneVisualFiller
         return $plan;
     }
 
+    /**
+     * Remove layers that would render an empty-state placeholder: an image-reveal
+     * with no image (generation failed / no src) or a chart/diagram with no data.
+     * Those show a striped block or a faint "—" and look broken. Run AFTER image
+     * generation, so failed images are cleaned up and the scene can fall back.
+     */
+    public function dropDeadLayers(array $plan): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes)) {
+            return $plan;
+        }
+        foreach ($scenes as &$scene) {
+            if (! isset($scene['layers']) || ! is_array($scene['layers'])) {
+                continue;
+            }
+            $scene['layers'] = array_values(array_filter(
+                $scene['layers'],
+                fn ($l) => is_array($l) && $this->layerHasContent($l),
+            ));
+        }
+        unset($scene);
+        $plan['scenes'] = $scenes;
+
+        return $plan;
+    }
+
+    /** True unless the layer would render its empty-state placeholder. */
+    private function layerHasContent(array $layer): bool
+    {
+        $p = is_array($layer['params'] ?? null) ? $layer['params'] : [];
+
+        return match ($layer['type'] ?? '') {
+            'image-reveal' => ! empty($p['src']),
+            'timeline', 'bullet-list' => ! empty($p['items']),
+            'bar-chart' => ! empty($p['bars']),
+            'line-chart' => ! empty($p['series']),
+            'pie-chart' => ! empty($p['slices']),
+            'scatter-chart' => ! empty($p['points']),
+            'diagram' => ! empty($p['nodes']),
+            'terminal' => ! empty($p['lines']),
+            'comparison' => ! empty($p['left']) || ! empty($p['right']),
+            'card' => ! empty($p['title']) || ! empty($p['lines']),
+            default => true, // text / ornament layers (kinetic-text, seal-stamp, ambient, count-up, …)
+        };
+    }
+
     /** Any scene still without a foreground layer gets ambient motion (never a blank frame). */
     public function fallbackAmbient(array $plan): array
     {
