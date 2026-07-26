@@ -158,18 +158,31 @@ class ClipImagesTest extends TestCase
         $this->assertCount(0, $out['scenes'][3]['layers']);
     }
 
-    public function test_filler_falls_back_to_ambient_for_still_bare_scenes(): void
+    public function test_fill_bare_scenes_adds_a_kinetic_headline_over_ambient(): void
     {
         $filler = new SceneVisualFiller;
         $plan = ['scenes' => [
-            ['layers' => []],                          // bare → ambient
-            ['layers' => [['type' => 'card']]],        // has visual → untouched
+            ['start' => 0, 'end' => 2, 'punchWord' => 'MISSISSIPPI', 'layers' => []],   // bare + punch → headline
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => ['title' => 'Hi']]]], // untouched
+            ['start' => 4, 'end' => 6, 'layers' => []],                                   // bare, no words → ambient only
         ]];
+        $transcript = ['words' => []];
 
-        $out = $filler->fallbackAmbient($plan);
+        $out = $filler->fillBareScenes($plan, $transcript);
 
-        $this->assertSame('ambient', $out['scenes'][0]['layers'][0]['type']);
+        // Scene 0: ambient + a kinetic headline of the punch word; punchWord moved into it.
+        $types0 = array_column($out['scenes'][0]['layers'], 'type');
+        $this->assertContains('ambient', $types0);
+        $this->assertContains('kinetic-text', $types0);
+        $kinetic = collect($out['scenes'][0]['layers'])->firstWhere('type', 'kinetic-text');
+        $this->assertSame('MISSISSIPPI', $kinetic['text']);
+        $this->assertNull($out['scenes'][0]['punchWord']);
+
+        // Scene 1 untouched.
         $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
+
+        // Scene 2: no punch, no words → ambient only.
+        $this->assertSame([['type' => 'ambient', 'text' => null, 'params' => []]], $out['scenes'][2]['layers']);
     }
 
     public function test_planner_prompt_offers_image_generation(): void

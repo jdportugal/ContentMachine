@@ -89,9 +89,10 @@ class PlanAnimationsJob implements ShouldQueue
             // src because generation failed, or a chart with no data).
             $plan = $filler->dropDeadLayers($plan);
 
-            // Anything now bare gets ambient motion, never a broken placeholder.
+            // Anything now bare gets a big kinetic headline over ambient motion
+            // (no-image fallback), never a broken placeholder or a near-blank frame.
             if (! $isOverlay) {
-                $plan = $filler->fallbackAmbient($plan);
+                $plan = $filler->fillBareScenes($plan, $p->transcript ?? []);
             }
 
             $p->update(['plan' => $plan]);

@@ -110,8 +110,14 @@ class SceneVisualFiller
         return false;
     }
 
-    /** Any scene still without a foreground layer gets ambient motion (never a blank frame). */
-    public function fallbackAmbient(array $plan): array
+    /**
+     * Any scene still without a foreground layer gets a strong typographic
+     * centerpiece (a big kinetic headline of its key term) over ambient motion,
+     * instead of a near-blank frame. When there is genuinely no text, ambient
+     * alone. This is the no-image fallback — with image credits the scene would
+     * have gotten a picture instead.
+     */
+    public function fillBareScenes(array $plan, array $transcript): array
     {
         $scenes = $plan['scenes'] ?? [];
         if (! is_array($scenes)) {
@@ -121,12 +127,31 @@ class SceneVisualFiller
             if ($this->hasForeground($scene)) {
                 continue;
             }
-            $scene['layers'] = [['type' => 'ambient', 'text' => null, 'params' => []]];
+            $layers = [['type' => 'ambient', 'text' => null, 'params' => []]];
+            $headline = $this->headline($scene, $transcript);
+            if ($headline !== '') {
+                $layers[] = ['type' => 'kinetic-text', 'text' => $headline, 'params' => []];
+                $scene['punchWord'] = null; // it is now the centered headline, not a small top word
+            }
+            $scene['layers'] = $layers;
         }
         unset($scene);
         $plan['scenes'] = $scenes;
 
         return $plan;
+    }
+
+    /** A short headline for a bare scene: its punch word, else a few of its spoken words. */
+    private function headline(array $scene, array $transcript): string
+    {
+        $punch = $this->hasText($scene['punchWord'] ?? null) ? trim((string) $scene['punchWord']) : '';
+        if ($punch !== '') {
+            return $punch;
+        }
+        $spoken = $this->spokenText($transcript, (float) ($scene['start'] ?? 0), (float) ($scene['end'] ?? 0));
+        $words = preg_split('/\s+/', $spoken, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        return implode(' ', array_slice($words, 0, 5));
     }
 
     private function hasForeground(array $scene): bool
