@@ -3,6 +3,7 @@
 namespace App\Services\Clips;
 
 use App\Services\Publicacoes\Rendering\KieClient;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -18,9 +19,22 @@ class ClipImageGenerator
 {
     public function __construct(private KieClient $kie) {}
 
+    private const OUT_KEY = 'clips.images_unavailable';
+
     public function configured(): bool
     {
         return $this->kie->configurado();
+    }
+
+    /**
+     * Whether images can actually be generated right now: configured AND not
+     * recently rejected for credits. A 402 flips this off for a while so the
+     * planner is told not to make image scenes (uses provided images / other
+     * content instead) — it re-checks after the window.
+     */
+    public function available(): bool
+    {
+        return $this->configured() && ! Cache::get(self::OUT_KEY, false);
     }
 
     /**
@@ -57,7 +71,13 @@ class ClipImageGenerator
                 'generated' => true,
             ];
         } catch (\Throwable $e) {
-            Log::warning('Clip image generation failed: '.$e->getMessage());
+            $msg = $e->getMessage();
+            // Out of credits / rate-limited → mark images unavailable for a while
+            // so we stop trying and plan around it.
+            if (str_contains($msg, '402') || stripos($msg, 'insufficient') !== false || stripos($msg, 'credit') !== false) {
+                Cache::put(self::OUT_KEY, true, now()->addMinutes(30));
+            }
+            Log::warning('Clip image generation failed: '.$msg);
 
             return null;
         }

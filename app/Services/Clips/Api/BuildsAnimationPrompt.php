@@ -27,7 +27,7 @@ trait BuildsAnimationPrompt
 
     protected array $presents = ['animation', 'over', 'video', 'split'];
 
-    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = []): string
+    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
         $design = app(DesignSystemRepository::class)->read();
@@ -52,7 +52,31 @@ trait BuildsAnimationPrompt
                 In "video"/"over"/"split" scenes do not use a graphic "background" (the video is the background). karaoke=true for most.
                 R
             : "ANIMATION MODE (animation only): the scenes cover 100% of the duration, no gaps. Backgrounds 'papyrus'/'vellum'/'ink'. Do not use 'present'.\n"
-                .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption — that looks broken. So EVERY scene MUST carry a visual layer: a chart/card/diagram/timeline when there is a real point, and OTHERWISE an image-reveal with "generate" describing an image of what is being said. NEVER leave a scene without a layer.';
+                .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption. So carry a visual layer whenever you can — a chart/card/diagram/timeline when there is a real point, '
+                .($canGenerateImages
+                    ? 'and OTHERWISE an image-reveal with "generate" describing an image of what is being said.'
+                    : 'or a card/bullet-list/diagram/comparison built from the point (you CANNOT create images — never use image-reveal without a PROVIDED src). If nothing concrete fits, leave the scene as plain karaoke.');
+
+        // Image guidance + image-reveal schema depend on whether the studio can
+        // actually generate images (kie credits). No credits → provided images
+        // and non-image visuals only.
+        $imageGuidance = $canGenerateImages
+            ? <<<'G'
+                - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
+                - GENERATE AN IMAGE whenever a scene talks about something CONCRETE or VISUAL (a person, place, object, product, situation, metaphor) and no provided image fits: add an "image-reveal" layer with "generate": "<a vivid, specific description of the image to CREATE>" (instead of "src"). Describe it in ENGLISH, concrete and photographic — subject, setting, mood, lighting — and NEVER ask for any text, words, letters or logos in the image.
+                - BE VISUAL AND DENSE: most scenes should SHOW something tied to the EXACT words spoken there — a generated image, a provided image, a chart, a diagram or a card. Aim for a fresh, RELEVANT visual and vary the motion so the video never feels static.
+                G
+            : <<<'G'
+                - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
+                - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate" and do NOT use image-reveal without a PROVIDED src. For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. If nothing concrete fits, leave the scene as plain karaoke.
+                - BE VISUAL where it helps: use charts/cards/diagrams/bullet-lists tied to the EXACT words spoken there, and vary the motion. Do not force a visual onto a moment that has nothing to show.
+                G;
+
+        $imageRevealSchema = $canGenerateImages
+            ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use EITHER "src" (a provided image id) OR "generate" (a description → AI image), never both. variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
+            : '- image-reveal:{ "src": "<id of a PROVIDED image>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use ONLY with a PROVIDED image id (src) — image generation is OFF, there is no "generate". VARY the variant across scenes.';
 
         return <<<PROMPT
 You are the clip director of the IATECA studio. You plan the video as a sequence of SCENES.
@@ -125,18 +149,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
   speech, so text is how the words appear, not a separate one-word slide.
 - EACH SCENE: at most ONE main layer (do not overlap elements). You can have varied backgrounds
   and transitions to give rhythm. Fill the data from the RESEARCH below.
-- IF IMAGES are provided, you MUST use each one in at least one scene (layer
-  "image-reveal" with params.src = image id), unless it is clearly irrelevant.
-- GENERATE AN IMAGE whenever a scene talks about something CONCRETE or VISUAL (a person, place,
-  object, product, situation, metaphor) and no provided image fits: add an "image-reveal" layer with
-  "generate": "<a vivid, specific description of the image to CREATE>" (instead of "src"). The studio
-  makes it with AI. Describe it in ENGLISH, concrete and photographic — subject, setting, mood,
-  lighting — and NEVER ask for any text, words, letters or logos inside the image.
-- BE VISUAL AND DENSE — this is what makes the clip good: MOST scenes must SHOW something tied to the
-  EXACT words spoken there — a generated image, a provided image, a chart, a diagram or a card.
-  Do NOT leave long stretches of plain karaoke with nothing on screen. Target a fresh, RELEVANT
-  visual roughly every 2–5 seconds; keep scenes short and the motion varied (alternate backgrounds,
-  transitions and image variants) so the video never feels static.
+{$imageGuidance}
 
 # PARAMETER SCHEMAS (params by type)
 - timeline:    { "items": [{ "label": str, "sublabel"?: str, "highlight"?: bool, "image"?: "<id>" }], "caption"?: str }
@@ -151,8 +164,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 - card:        { "title": str, "lines"?: [str] }
 - terminal:    { "lines": [str] }
 - diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <index>, "to": <index> }] }   // 2–6 nodes; without edges it links in sequence/cycle
-- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }
-  - Use EITHER "src" (a provided image id) OR "generate" (a description → AI image), never both. variant controls the image animation. Prefer "fullscreen" (image fills the screen with a slow zoom) and "pan" for photos/screenshots; use "drop-float" (drops from above, floats centred), "rise", "zoom" or "slide" for a floating-card look. VARY the variant across scenes — do NOT reuse the same one every time. Use "framed" rarely (bordered panel). "direction" only applies to "slide".
+{$imageRevealSchema}
 - The provided IMAGES can go into image-reveal OR as "image" in timeline/bar-chart/comparison (use ONLY ids from the list).
 - kinetic-text / fade / highlight / seal-stamp / etc.: the text goes in the layer's "text" field, params = {}.
 

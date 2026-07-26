@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
@@ -39,6 +40,11 @@ class PlanAnimationsJob implements ShouldQueue
             $isOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
             $allowed = $isOverlay ? ($p->meta['allowed_present'] ?? ['video', 'over', 'split', 'animation']) : [];
 
+            // Can we actually make AI images? (config on AND kie has credits). If not,
+            // the planner is told to use provided images / non-image content only.
+            $imagesOn = (bool) ($c['generate_images'] ?? true)
+                && app(ClipImageGenerator::class)->available();
+
             // Deep-research the topic so visuals carry real context (not just the speech).
             $facts = ($c['research'] ?? false) ? $research->research($p->transcript) : [];
             if (! empty($facts)) {
@@ -62,19 +68,20 @@ class PlanAnimationsJob implements ShouldQueue
                 'images' => $p->images ?? [],
                 'overlay' => $isOverlay,
                 'presents' => $allowed,
+                'can_generate_images' => $imagesOn,
             ]);
             $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null);
 
-            // Animation clips have NO background video, so an empty scene is a blank
-            // frame. Give every empty scene an image-reveal `generate` from its
-            // spoken words so the clip isn't just a title.
+            // If we can make images, give every empty animation scene an image-reveal
+            // `generate` from its spoken words. If not, we leave it for the non-image
+            // fallback (the planner was already told to use other content).
             $filler = app(SceneVisualFiller::class);
-            if (! $isOverlay) {
+            if (! $isOverlay && $imagesOn) {
                 $plan = $filler->requestImages($plan, $p->transcript ?? []);
             }
 
             // Fulfil the image-generation requests (Nano Banana), on-brand.
-            if (config('contentmachine.clips.generate_images', true)) {
+            if ($imagesOn) {
                 $result = app(PlanImageAugmentor::class)->augment(
                     $plan,
                     $p->images ?? [],

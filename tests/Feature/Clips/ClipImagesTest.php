@@ -6,6 +6,7 @@ use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\SceneVisualFiller;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 class ClipImagesTest extends TestCase
@@ -173,20 +174,41 @@ class ClipImagesTest extends TestCase
         $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
     }
 
-    public function test_planner_prompt_offers_image_generation(): void
+    public function test_planner_prompt_toggles_image_generation_by_availability(): void
     {
         $planner = new class
         {
             use BuildsAnimationPrompt;
 
-            public function prompt(): string
+            public function withImages(): string
             {
-                return $this->systemPrompt('dense');
+                return $this->systemPrompt('dense', false, [], true);
+            }
+
+            public function withoutImages(): string
+            {
+                return $this->systemPrompt('dense', false, [], false);
             }
         };
 
-        $prompt = $planner->prompt();
-        $this->assertStringContainsString('generate', $prompt);
-        $this->assertStringContainsString('GENERATE AN IMAGE', $prompt);
+        $on = $planner->withImages();
+        $this->assertStringContainsString('GENERATE AN IMAGE', $on);
+
+        $off = $planner->withoutImages();
+        $this->assertStringNotContainsString('GENERATE AN IMAGE', $off);
+        $this->assertStringContainsString('IMAGE GENERATION IS UNAVAILABLE', $off);
+    }
+
+    public function test_generator_availability_reflects_a_credit_failure(): void
+    {
+        config(['services.kie.key' => 'test-kie-key', 'cache.default' => 'array']);
+        Cache::forget('clips.images_unavailable');
+
+        $gen = app(ClipImageGenerator::class);
+        $this->assertTrue($gen->available());
+
+        // A recorded 402 makes images unavailable (so the planner plans around it).
+        Cache::put('clips.images_unavailable', true, now()->addMinutes(30));
+        $this->assertFalse($gen->available());
     }
 }

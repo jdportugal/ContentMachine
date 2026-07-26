@@ -25,7 +25,7 @@ class PlanImageAugmentor
             return ['plan' => $plan, 'images' => $images];
         }
 
-        $configured = $this->generator->configured();
+        $configured = $this->generator->available();
         $byPrompt = [];   // prompt => generated image id (dedup)
         $generated = 0;
 
