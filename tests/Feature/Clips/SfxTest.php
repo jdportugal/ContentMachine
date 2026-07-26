@@ -301,6 +301,38 @@ class SfxTest extends TestCase
             ->assertSet('editingSfxId', null);
     }
 
+    public function test_generator_uniquifies_a_slug_that_already_exists(): void
+    {
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'non-linear-diagram', 'display_name' => 'Diagram',
+            'description' => 'x', 'param_schema' => '{}', 'tsx' => 'export default () => null;',
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        $this->fakeClaudeReturning([
+            'slug' => 'non-linear-diagram', 'displayName' => 'Diagram', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+        ]);
+
+        // No more "already exists" error — the slug is made unique instead.
+        $data = app(EffectGenerator::class)->generate('another diagram');
+        $this->assertSame('non-linear-diagram-2', $data['slug']);
+    }
+
+    public function test_generator_uniquifies_a_builtin_name_for_new_effects(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'diagram', 'displayName' => 'Diagram', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+        ]);
+
+        // A fresh effect must not silently override the built-in 'diagram'.
+        $data = app(EffectGenerator::class)->generate('a diagram-like effect');
+        $this->assertSame('diagram-2', $data['slug']);
+    }
+
     public function test_editing_a_builtin_creates_an_override_with_its_slug(): void
     {
         Queue::fake();

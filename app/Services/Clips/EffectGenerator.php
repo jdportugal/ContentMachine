@@ -56,15 +56,26 @@ class EffectGenerator
         ];
     }
 
-    /** Validate/normalise a fresh slug and ensure it is not already taken. */
+    /** Validate a fresh slug's format, then make it UNIQUE (append -2, -3, …). */
     private function slug(string $raw): string
     {
-        $slug = $this->normalizeSlug($raw);
-        if ($this->effects->slugExists($slug)) {
-            throw new RuntimeException("An effect named «{$slug}» already exists.");
+        // Format only — a built-in/existing name is not an error here; we uniquify it.
+        $base = $this->normalizeSlug($raw, allowBuiltin: true);
+        $slug = $base;
+        $i = 2;
+        while ($this->isTaken($slug)) {
+            $slug = $base.'-'.$i++;
         }
 
         return $slug;
+    }
+
+    /** A slug already used by a built-in, a reserved name, or an existing effect. */
+    private function isTaken(string $slug): bool
+    {
+        return in_array($slug, self::RESERVED, true)
+            || array_key_exists($slug, EffectLibrary::BUILTIN_SAMPLES)
+            || $this->effects->slugExists($slug);
     }
 
     /**
