@@ -8,6 +8,7 @@ use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\PlanValidator;
+use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use Illuminate\Bus\Queueable;
@@ -64,17 +65,29 @@ class PlanAnimationsJob implements ShouldQueue
             ]);
             $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null);
 
-            // Fulfil the planner's image-generation requests (Nano Banana), so
-            // scenes that asked for a picture actually get one, on-brand.
+            // Animation clips have NO background video, so an empty scene is a blank
+            // frame. Give every empty scene an image-reveal `generate` from its
+            // spoken words so the clip isn't just a title.
+            $filler = app(SceneVisualFiller::class);
+            if (! $isOverlay) {
+                $plan = $filler->requestImages($plan, $p->transcript ?? []);
+            }
+
+            // Fulfil the image-generation requests (Nano Banana), on-brand.
             if (config('contentmachine.clips.generate_images', true)) {
                 $result = app(PlanImageAugmentor::class)->augment(
                     $plan,
                     $p->images ?? [],
                     (string) config('contentmachine.clips.image_style', ''),
-                    (int) config('contentmachine.clips.image_max', 6),
+                    (int) config('contentmachine.clips.image_max', 8),
                 );
                 $plan = $result['plan'];
                 $p->update(['images' => $result['images']]);
+            }
+
+            // Anything still bare (no image made) gets ambient motion, never black.
+            if (! $isOverlay) {
+                $plan = $filler->fallbackAmbient($plan);
             }
 
             $p->update(['plan' => $plan]);

@@ -51,7 +51,8 @@ trait BuildsAnimationPrompt
                 "split" when you show data next to the person, and "animation" (full screen) for 1-2 strong moments.
                 In "video"/"over"/"split" scenes do not use a graphic "background" (the video is the background). karaoke=true for most.
                 R
-            : "ANIMATION MODE (animation only): the scenes cover 100% of the duration, no gaps. Backgrounds 'papyrus'/'vellum'/'ink'. Do not use 'present'.";
+            : "ANIMATION MODE (animation only): the scenes cover 100% of the duration, no gaps. Backgrounds 'papyrus'/'vellum'/'ink'. Do not use 'present'.\n"
+                .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption — that looks broken. So EVERY scene MUST carry a visual layer: a chart/card/diagram/timeline when there is a real point, and OTHERWISE an image-reveal with "generate" describing an image of what is being said. NEVER leave a scene without a layer.';
 
         return <<<PROMPT
 You are the clip director of the IATECA studio. You plan the video as a sequence of SCENES.

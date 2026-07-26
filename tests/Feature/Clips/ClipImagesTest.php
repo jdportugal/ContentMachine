@@ -5,6 +5,7 @@ namespace Tests\Feature\Clips;
 use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\PlanImageAugmentor;
+use App\Services\Clips\SceneVisualFiller;
 use Tests\TestCase;
 
 class ClipImagesTest extends TestCase
@@ -88,6 +89,47 @@ class ClipImagesTest extends TestCase
         $this->assertArrayNotHasKey('generate', $params);
         $this->assertArrayNotHasKey('src', $params);
         $this->assertSame([], $result['images']);
+    }
+
+    public function test_filler_gives_empty_animation_scenes_a_generate_directive(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => []],                                 // empty → generate
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => []]]], // has visual → untouched
+            ['start' => 4, 'end' => 6, 'layers' => [['type' => 'ambient', 'params' => []]]], // ambient only → generate
+        ]];
+        $transcript = ['words' => [
+            ['word' => 'hello', 'start' => 0.1], ['word' => 'world', 'start' => 0.5],
+            ['word' => 'foxes', 'start' => 4.2], ['word' => 'run', 'start' => 4.8],
+        ]];
+
+        $out = $filler->requestImages($plan, $transcript);
+
+        $l0 = end($out['scenes'][0]['layers']);
+        $this->assertSame('image-reveal', $l0['type']);
+        $this->assertStringContainsString('hello world', $l0['params']['generate']);
+
+        $this->assertCount(1, $out['scenes'][1]['layers']); // card scene untouched
+        $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
+
+        $l2 = end($out['scenes'][2]['layers']);             // ambient-only scene now has a visual
+        $this->assertSame('image-reveal', $l2['type']);
+        $this->assertStringContainsString('foxes run', $l2['params']['generate']);
+    }
+
+    public function test_filler_falls_back_to_ambient_for_still_bare_scenes(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => []],                          // bare → ambient
+            ['layers' => [['type' => 'card']]],        // has visual → untouched
+        ]];
+
+        $out = $filler->fallbackAmbient($plan);
+
+        $this->assertSame('ambient', $out['scenes'][0]['layers'][0]['type']);
+        $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
     }
 
     public function test_planner_prompt_offers_image_generation(): void
