@@ -158,31 +158,19 @@ class ClipImagesTest extends TestCase
         $this->assertCount(0, $out['scenes'][3]['layers']);
     }
 
-    public function test_fill_bare_scenes_adds_a_kinetic_headline_over_ambient(): void
+    public function test_fill_bare_scenes_uses_ambient_and_drops_a_lone_punchword(): void
     {
         $filler = new SceneVisualFiller;
         $plan = ['scenes' => [
-            ['start' => 0, 'end' => 2, 'punchWord' => 'MISSISSIPPI', 'layers' => []],   // bare + punch → headline
-            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => ['title' => 'Hi']]]], // untouched
-            ['start' => 4, 'end' => 6, 'layers' => []],                                   // bare, no words → ambient only
+            ['punchWord' => 'MISSISSIPPI', 'layers' => []],                      // bare + punch → ambient, no lone word
+            ['layers' => [['type' => 'card', 'params' => ['title' => 'Hi']]]],   // has visual → untouched
         ]];
-        $transcript = ['words' => []];
 
-        $out = $filler->fillBareScenes($plan, $transcript);
+        $out = $filler->fillBareScenes($plan);
 
-        // Scene 0: ambient + a kinetic headline of the punch word; punchWord moved into it.
-        $types0 = array_column($out['scenes'][0]['layers'], 'type');
-        $this->assertContains('ambient', $types0);
-        $this->assertContains('kinetic-text', $types0);
-        $kinetic = collect($out['scenes'][0]['layers'])->firstWhere('type', 'kinetic-text');
-        $this->assertSame('MISSISSIPPI', $kinetic['text']);
-        $this->assertNull($out['scenes'][0]['punchWord']);
-
-        // Scene 1 untouched.
+        $this->assertSame([['type' => 'ambient', 'text' => null, 'params' => []]], $out['scenes'][0]['layers']);
+        $this->assertNull($out['scenes'][0]['punchWord']); // no scene is "just one word"
         $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
-
-        // Scene 2: no punch, no words → ambient only.
-        $this->assertSame([['type' => 'ambient', 'text' => null, 'params' => []]], $out['scenes'][2]['layers']);
     }
 
     public function test_planner_prompt_offers_image_generation(): void

@@ -118,7 +118,11 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 - SHORT text everywhere: labels ≤ 3 words, "comparison" points ≤ 6 words (at most 4 per side).
 - Use "punchWord" (1–3 words) for occasional emphasis. The word MUST be EXACTLY a
   word/expression from the SPOKEN TEXT (copied from the transcript), never invented or paraphrased.
-  Use "kinetic-text" VERY rarely; if you do, the text must be the speech verbatim.
+- NEVER make a scene whose whole content is a single word or short text. Do NOT use "kinetic-text"
+  as a standalone "title card", and a punchWord is emphasis ON TOP of a real visual (chart / image /
+  card / diagram), NEVER a scene's only content. If a scene has no real visual, leave it as plain
+  karaoke (the captions carry the words) rather than a lone big word — the karaoke already shows the
+  speech, so text is how the words appear, not a separate one-word slide.
 - EACH SCENE: at most ONE main layer (do not overlap elements). You can have varied backgrounds
   and transitions to give rhythm. Fill the data from the RESEARCH below.
 - IF IMAGES are provided, you MUST use each one in at least one scene (layer
