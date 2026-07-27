@@ -111,6 +111,56 @@ class SceneVisualFiller
     }
 
     /**
+     * Eliminate bare scenes (no foreground visual) by absorbing each into an
+     * adjacent scene that HAS a visual: extend that neighbour's real graphic to
+     * cover the bare stretch instead of leaving a blank frame. Prefer the previous
+     * scene (visual holds a bit longer), else the next; a bare scene with no visual
+     * neighbour (e.g. every scene is bare) is left for fillBareScenes. The karaoke
+     * captions keep flowing, so no invented text and no duplicated words.
+     */
+    public function mergeBareScenes(array $plan): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes) || count($scenes) < 2) {
+            return $plan;
+        }
+
+        // Forward: absorb a bare scene into the previous kept scene when that one
+        // has a visual (covers interior and trailing bare runs).
+        $kept = [];
+        foreach ($scenes as $scene) {
+            $prev = $kept === [] ? null : $kept[array_key_last($kept)];
+            if (! $this->hasForeground($scene) && $prev !== null && $this->hasForeground($prev)) {
+                $i = array_key_last($kept);
+                $kept[$i]['end'] = $scene['end'] ?? $kept[$i]['end'];
+                $kept[$i]['transitionOut'] = $scene['transitionOut'] ?? ($kept[$i]['transitionOut'] ?? 'cut');
+
+                continue; // drop the bare scene
+            }
+            $kept[] = $scene;
+        }
+
+        // Backward: any bare scene still standing (a leading bare run) is absorbed
+        // into the NEXT kept scene when that one has a visual.
+        $out = [];
+        foreach (array_reverse($kept) as $scene) {
+            $next = $out === [] ? null : $out[array_key_last($out)];
+            if (! $this->hasForeground($scene) && $next !== null && $this->hasForeground($next)) {
+                $i = array_key_last($out);
+                $out[$i]['start'] = $scene['start'] ?? $out[$i]['start'];
+                $out[$i]['transitionIn'] = $scene['transitionIn'] ?? ($out[$i]['transitionIn'] ?? 'cut');
+
+                continue; // drop the bare scene
+            }
+            $out[] = $scene;
+        }
+
+        $plan['scenes'] = array_values(array_reverse($out));
+
+        return $plan;
+    }
+
+    /**
      * Any scene still without a foreground layer gets a clean ambient background
      * (never a broken placeholder). The karaoke captions carry the words — we do
      * NOT turn a bare scene into a giant single word: a lone punch word is dropped
@@ -123,11 +173,14 @@ class SceneVisualFiller
         if (! is_array($scenes)) {
             return $plan;
         }
+        // Only fall back to an `ambient` layer if that effect is enabled; when it's
+        // toggled off the scene stays bare and the composition starfield shows through.
+        $ambientAllowed = app(EffectLibrary::class)->builtinAllowed('ambient');
         foreach ($scenes as &$scene) {
             if ($this->hasForeground($scene)) {
                 continue;
             }
-            $scene['layers'] = [['type' => 'ambient', 'text' => null, 'params' => []]];
+            $scene['layers'] = $ambientAllowed ? [['type' => 'ambient', 'text' => null, 'params' => []]] : [];
             $scene['punchWord'] = null; // no lone word as the whole scene
         }
         unset($scene);

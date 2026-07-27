@@ -65,7 +65,10 @@ class CliRemotionRenderer implements RemotionRenderer
                 $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
                 config('contentmachine.clips.remotion_path')
             );
-            $process->setTimeout(600);
+            // Full clips (many scenes, ~1-2k frames) can outrun 10 min; keep this
+            // below the queue retry_after (1800) so the worker fails cleanly if it
+            // ever truly hangs, but give real renders room.
+            $process->setTimeout((float) config('contentmachine.clips.render_timeout', 1500));
             $process->run();
 
             if (! $process->isSuccessful()) {

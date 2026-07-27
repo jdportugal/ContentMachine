@@ -123,8 +123,9 @@ export interface ClipTheme {
     accent2: string;
     accent3: string;
   }>;
-  fonts?: Partial<{ display: string; body: string; mono: string }>;
+  fonts?: Partial<{ display: string; body: string; mono: string; displayWeight: number; bodyWeight: number }>;
   texture?: { kind?: "paper" | "starfield" | "gradient" | "solid"; css?: string };
+  style?: { headline?: "gradient" | "flat"; shadow?: "soft" | "hard"; panelBorder?: number; sharp?: boolean; uppercaseTitles?: boolean };
 }
 
 export interface ClipProps {

@@ -43,6 +43,10 @@ export const FONTS = {
   display: '"Anton", "Arial Narrow", "Helvetica Neue", Arial, sans-serif',
   body: '"Space Grotesk", "Helvetica Neue", Arial, sans-serif',
   mono: '"JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace',
+  // Design-driven weights (applyTheme overrides). Headings/titles use displayWeight,
+  // body text uses bodyWeight — so e.g. "Fraunces 900" renders black, not semibold.
+  displayWeight: 400,
+  bodyWeight: 400,
 };
 
 // Molten-gold gradient — Nebula's signature headline treatment (clipped to text).
@@ -51,8 +55,28 @@ export const headlineGradient = (): string =>
   `linear-gradient(100deg, ${COLORS.tealBright} 0%, ${COLORS.teal} 55%, ${COLORS.gold} 100%)`;
 
 // Soft glow used across primitives on the dark Nebula base (no hard engraving
-// shadow). applyTheme() swaps to a hard shadow if a *light* design system loads.
-export let ENGRAVE_SHADOW = "0 2px 18px rgba(0,0,0,0.35)";
+// shadow). applyTheme() swaps to a hard offset shadow for 'hard'-style designs.
+export let ENGRAVE_SHADOW = "0 2px 18px rgba(0,0,0,0.35)"; // text shadow
+export let PANEL_SHADOW = "0 2px 18px rgba(0,0,0,0.35)";   // card/panel box-shadow
+
+// Treatment tokens (applyTheme overrides). Defaults reproduce the soft, rounded,
+// gradient-headline Nebula look; a print/brutalist design flips these to flat
+// ink headlines, hard offset shadows, thick borders and square corners.
+export const STYLE = {
+  headline: "gradient" as "gradient" | "flat",
+  shadow: "soft" as "soft" | "hard",
+  panelBorder: 0, // px ink border on panels
+  sharp: false, // true = 0 corner radius
+  uppercaseTitles: false,
+};
+
+// Text colour that reads on a given surface: light text on dark surfaces, ink on
+// light ones — so a paper panel gets ink text, a dark panel gets star-white.
+export const textForBg = (bg: string): string => (isDark(bg) ? COLORS.textOnLight : COLORS.ink);
+
+// Ink border for panels (only when STYLE.panelBorder > 0).
+export const panelBorder = (): string | undefined =>
+  STYLE.panelBorder > 0 ? `${STYLE.panelBorder}px solid ${COLORS.ink}` : undefined;
 
 // Background texture behind opaque scenes. Nebula default = 'starfield'.
 export const TEXTURE = {
@@ -78,8 +102,9 @@ export interface ThemeInput {
     accent2: string;
     accent3: string;
   }>;
-  fonts?: Partial<{ display: string; body: string; mono: string }>;
+  fonts?: Partial<{ display: string; body: string; mono: string; displayWeight: number; bodyWeight: number }>;
   texture?: { kind?: "paper" | "starfield" | "gradient" | "solid"; css?: string };
+  style?: { headline?: "gradient" | "flat"; shadow?: "soft" | "hard"; panelBorder?: number; sharp?: boolean; uppercaseTitles?: boolean };
 }
 
 const fontStack = (name: string | undefined, fallback: string): string | undefined =>
@@ -114,12 +139,27 @@ export function applyTheme(theme?: ThemeInput | null): void {
   if (display) FONTS.display = display;
   if (body) FONTS.body = body;
   if (mono) FONTS.mono = mono;
+  if (typeof f.displayWeight === "number") FONTS.displayWeight = f.displayWeight;
+  if (typeof f.bodyWeight === "number") FONTS.bodyWeight = f.bodyWeight;
 
   if (theme.texture?.kind) TEXTURE.kind = theme.texture.kind;
   if (theme.texture?.css) TEXTURE.css = theme.texture.css;
 
-  // Dark backgrounds want a soft glow, not a hard engraving shadow.
-  ENGRAVE_SHADOW = isDark(COLORS.papyrus) ? "0 2px 18px rgba(0,0,0,0.35)" : "2px 2px 0 rgba(36,26,18,.2)";
+  const st = theme.style ?? {};
+  if (st.headline) STYLE.headline = st.headline;
+  if (st.shadow) STYLE.shadow = st.shadow;
+  if (typeof st.panelBorder === "number") STYLE.panelBorder = Math.max(0, Math.min(8, Math.round(st.panelBorder)));
+  if (typeof st.sharp === "boolean") STYLE.sharp = st.sharp;
+  if (typeof st.uppercaseTitles === "boolean") STYLE.uppercaseTitles = st.uppercaseTitles;
+
+  // Hard = an offset ink block shadow (print look); soft = a blurred glow.
+  if (STYLE.shadow === "hard") {
+    ENGRAVE_SHADOW = `4px 4px 0 ${COLORS.ink}`;
+    PANEL_SHADOW = `12px 12px 0 ${COLORS.ink}`;
+  } else {
+    ENGRAVE_SHADOW = isDark(COLORS.papyrus) ? "0 2px 18px rgba(0,0,0,0.35)" : "2px 2px 0 rgba(36,26,18,.2)";
+    PANEL_SHADOW = ENGRAVE_SHADOW;
+  }
 }
 
 /** Rough luminance test on a #rrggbb colour (used to pick shadow/texture style). */

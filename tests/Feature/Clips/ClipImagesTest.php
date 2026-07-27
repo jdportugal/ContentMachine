@@ -174,6 +174,29 @@ class ClipImagesTest extends TestCase
         $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
     }
 
+    public function test_merge_bare_scenes_absorbs_them_into_a_neighbour_visual(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 5, 'transitionOut' => 'cut', 'layers' => []],                        // leading bare → next
+            ['start' => 5, 'end' => 10, 'transitionOut' => 'whip', 'layers' => [['type' => 'card', 'params' => ['title' => 'A']]]],
+            ['start' => 10, 'end' => 15, 'transitionIn' => 'slide', 'transitionOut' => 'zoom', 'layers' => []], // interior bare → previous
+            ['start' => 15, 'end' => 20, 'transitionOut' => 'cut', 'layers' => [['type' => 'bar-chart', 'params' => ['bars' => [['label' => 'x', 'value' => 1]]]]]],
+            ['start' => 20, 'end' => 25, 'transitionOut' => 'cut', 'layers' => []],                       // trailing bare → previous
+        ]];
+
+        $out = $filler->mergeBareScenes($plan)['scenes'];
+
+        // No bare scenes survive, coverage stays contiguous 0..25.
+        $this->assertCount(2, $out);
+        // card absorbs the leading (0..5) + interior (10..15) bare → 0..15;
+        // bar-chart absorbs the trailing bare (20..25) → 15..25.
+        $this->assertSame([0.0, 15.0, 25.0], [(float) $out[0]['start'], (float) $out[0]['end'], (float) $out[1]['end']]);
+        $this->assertSame('card', $out[0]['layers'][0]['type']);
+        $this->assertSame('bar-chart', $out[1]['layers'][0]['type']);
+        $this->assertEmpty(array_filter($out, fn ($s) => empty($s['layers'])));
+    }
+
     public function test_planner_prompt_toggles_image_generation_by_availability(): void
     {
         $planner = new class

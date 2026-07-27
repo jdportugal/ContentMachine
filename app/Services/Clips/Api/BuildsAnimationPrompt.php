@@ -13,14 +13,6 @@ use App\Services\DesignSystem\DesignSystemRepository;
  */
 trait BuildsAnimationPrompt
 {
-    /** Element types usable as scene layers. */
-    protected array $layerTypes = [
-        'kinetic-text', 'fade', 'slide', 'scale', 'highlight', 'fleuron-draw',
-        'seal-stamp', 'underline-sweep', 'count-up', 'image-reveal', 'ambient',
-        'timeline', 'bar-chart', 'line-chart', 'pie-chart', 'scatter-chart', 'comparison',
-        'bullet-list', 'card', 'terminal', 'diagram',
-    ];
-
     protected array $backgrounds = ['papyrus', 'vellum', 'ink', 'video'];
 
     protected array $transitions = ['cut', 'crossfade', 'whip', 'slide', 'zoom'];
@@ -30,9 +22,17 @@ trait BuildsAnimationPrompt
     protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
-        $design = app(DesignSystemRepository::class)->read();
+        $designRepo = app(DesignSystemRepository::class);
+        $design = $designRepo->read();
         $designBlock = trim($design) !== ''
             ? "\n\n=== DESIGN SYSTEM (brand identity — follow it in ALL scenes) ===\n".$design
+            : '';
+        // Also hand the LLM the CONCRETE extracted tokens (the exact palette, fonts and
+        // treatment the renderer will apply), so scene choices line up with the render.
+        $tokens = $designRepo->readTokens();
+        $tokensBlock = $tokens
+            ? "\n\n=== EXTRACTED DESIGN TOKENS (the concrete palette/fonts/style the renderer uses) ===\n"
+                .json_encode($tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             : '';
         $customBlock = app(EffectLibrary::class)->promptBlock();
         $layers = implode(', ', $this->allLayerTypes());
@@ -175,6 +175,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 
 {$rule}
 {$designBlock}
+{$tokensBlock}
 {$customBlock}
 
 === STYLE MANUAL (estilo-animacao.md) ===
@@ -185,11 +186,7 @@ PROMPT;
     /** Built-in layer types + active custom SFX slugs (both usable by the planner). */
     protected function allLayerTypes(): array
     {
-        $library = app(EffectLibrary::class);
-        $builtins = array_values(array_diff($this->layerTypes, $library->disabledBuiltins()));
-
-        // activeSlugs may include built-in overrides (same slug) — dedupe.
-        return array_values(array_unique(array_merge($builtins, $library->activeSlugs())));
+        return app(EffectLibrary::class)->allowedLayerTypes();
     }
 
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string

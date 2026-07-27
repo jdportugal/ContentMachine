@@ -11,7 +11,13 @@ class PlanValidator
      * sort by start, and — in dense mode — fill gaps with `ambient` so coverage
      * is total. In sparse mode gaps are preserved.
      */
-    public function validate(array $plan, string $transcriptText = '', bool $overlay = false, ?array $allowed = null): array
+    /**
+     * @param  string[]|null  $allowedLayers  Layer types the clip may contain (from
+     *   EffectLibrary::allowedLayerTypes()). Layers of any other type are stripped
+     *   and disabled fillers (e.g. a toggled-off `ambient`) are never injected.
+     *   null = no restriction (all types allowed), used by the pure unit tests.
+     */
+    public function validate(array $plan, string $transcriptText = '', bool $overlay = false, ?array $allowed = null, ?array $allowedLayers = null): array
     {
         // v2 scene-based plan.
         if (isset($plan['scenes'])) {
@@ -19,7 +25,8 @@ class PlanValidator
                 array_values($plan['scenes']),
                 (float) ($plan['duration'] ?? 0.0),
                 $plan['mode'] ?? 'dense',
-                $transcriptText
+                $transcriptText,
+                $allowedLayers
             );
 
             if ($overlay) {
@@ -29,7 +36,13 @@ class PlanValidator
             return $plan;
         }
 
-        return $this->validateAnimations($plan);
+        return $this->validateAnimations($plan, $allowedLayers);
+    }
+
+    /** Whether `ambient` may be injected as a gap/bare filler. */
+    private function ambientAllowed(?array $allowedLayers): bool
+    {
+        return $allowedLayers === null || in_array('ambient', $allowedLayers, true);
     }
 
     /**
@@ -80,13 +93,21 @@ class PlanValidator
         'bullet-list', 'card', 'terminal', 'diagram', 'seal-stamp', 'fleuron-draw', 'count-up', 'image-reveal',
     ];
 
-    public function validateScenes(array $scenes, float $duration, string $mode, string $transcriptText = ''): array
+    public function validateScenes(array $scenes, float $duration, string $mode, string $transcriptText = '', ?array $allowedLayers = null): array
     {
         $normalizedTranscript = $transcriptText !== '' ? $this->normalize($transcriptText) : '';
 
-        $scenes = array_values(array_filter(array_map(function ($s) use ($duration, $normalizedTranscript) {
+        $scenes = array_values(array_filter(array_map(function ($s) use ($duration, $normalizedTranscript, $allowedLayers) {
             $s['start'] = max(0.0, min((float) ($s['start'] ?? 0), $duration));
             $s['end'] = max(0.0, min((float) ($s['end'] ?? 0), $duration));
+            // Drop layers whose type is disabled/unknown, so a toggled-off effect
+            // can never survive the planner into the render.
+            if ($allowedLayers !== null) {
+                $s['layers'] = array_values(array_filter(
+                    is_array($s['layers'] ?? null) ? $s['layers'] : [],
+                    fn ($l) => is_array($l) && in_array($l['type'] ?? '', $allowedLayers, true),
+                ));
+            }
             $s['layers'] = $this->capLayers($s);
 
             // A full-frame image already carries the point → avoid punch-word overlap.
@@ -106,12 +127,15 @@ class PlanValidator
         usort($scenes, fn ($x, $y) => $x['start'] <=> $y['start']);
 
         if ($mode === 'dense') {
+            // A gap scene needs no foreground layer — the composition starfield shows
+            // through. Only add an `ambient` layer if that effect is enabled.
+            $gapLayers = $this->ambientAllowed($allowedLayers) ? [['type' => 'ambient', 'text' => null, 'params' => []]] : [];
             foreach ($this->coverageGaps($scenes, $duration) as [$gs, $ge]) {
                 $scenes[] = [
                     'start' => $gs, 'end' => $ge,
                     'background' => 'papyrus', 'transitionIn' => 'crossfade', 'transitionOut' => 'cut',
                     'karaoke' => false, 'punchWord' => null,
-                    'layers' => [['type' => 'ambient', 'text' => null, 'params' => []]],
+                    'layers' => $gapLayers,
                 ];
             }
             usort($scenes, fn ($x, $y) => $x['start'] <=> $y['start']);
@@ -159,7 +183,7 @@ class PlanValidator
         return trim($s);
     }
 
-    private function validateAnimations(array $plan): array
+    private function validateAnimations(array $plan, ?array $allowedLayers = null): array
     {
         $duration = (float) ($plan['duration'] ?? 0.0);
         $mode = $plan['mode'] ?? 'dense';
@@ -176,7 +200,7 @@ class PlanValidator
 
         usort($anims, fn ($x, $y) => $x['start'] <=> $y['start']);
 
-        if ($mode === 'dense') {
+        if ($mode === 'dense' && $this->ambientAllowed($allowedLayers)) {
             foreach ($this->coverageGaps($anims, $duration) as [$gs, $ge]) {
                 $anims[] = [
                     'start' => $gs, 'end' => $ge,

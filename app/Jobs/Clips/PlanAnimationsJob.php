@@ -7,6 +7,7 @@ use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
+use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\SceneVisualFiller;
@@ -70,7 +71,7 @@ class PlanAnimationsJob implements ShouldQueue
                 'presents' => $allowed,
                 'can_generate_images' => $imagesOn,
             ]);
-            $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null);
+            $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null, app(EffectLibrary::class)->allowedLayerTypes());
 
             // If we can make images, give every empty animation scene an image-reveal
             // `generate` from its spoken words. If not, we leave it for the non-image
@@ -96,9 +97,10 @@ class PlanAnimationsJob implements ShouldQueue
             // src because generation failed, or a chart with no data).
             $plan = $filler->dropDeadLayers($plan);
 
-            // Anything now bare gets a clean ambient background (never a broken
-            // placeholder, and never a lone one-word scene).
+            // Eliminate bare scenes by extending a neighbour's real visual over them;
+            // anything still bare (e.g. an all-bare plan) gets a clean fallback.
             if (! $isOverlay) {
+                $plan = $filler->mergeBareScenes($plan);
                 $plan = $filler->fillBareScenes($plan);
             }
 

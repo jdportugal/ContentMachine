@@ -8,7 +8,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient } from "./style-tokens";
+import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import type { Animation } from "./types";
 import { CUSTOM_PRIMITIVES } from "./effects";
 
@@ -54,19 +54,34 @@ const Center: React.FC<{ children: React.ReactNode; style?: React.CSSProperties 
 // Nebula signature: display headlines are Anton uppercase, clipped to the
 // molten-gold gradient. `dark` no longer changes the colour (the gold reads on
 // any Nebula surface) but is kept in the signature so callers stay unchanged.
-const titleStyleFor = (_dark?: boolean): React.CSSProperties => ({
-  fontFamily: FONTS.display,
-  fontWeight: 400, // Anton ships a single weight
-  fontSize: 96,
-  lineHeight: 0.95,
-  textTransform: "uppercase",
-  margin: 0,
-  backgroundImage: headlineGradient(),
-  WebkitBackgroundClip: "text",
-  backgroundClip: "text",
-  color: "transparent",
-  WebkitTextFillColor: "transparent",
-});
+const titleStyleFor = (dark?: boolean): React.CSSProperties => {
+  const base: React.CSSProperties = {
+    fontFamily: FONTS.display,
+    fontWeight: FONTS.displayWeight,
+    fontSize: 96,
+    lineHeight: 0.95,
+    textTransform: "uppercase",
+    margin: 0,
+  };
+  // Flat = solid ink/paper colour (surface-appropriate) with an optional hard
+  // offset shadow — the print look. Gradient = molten-gold clipped fill (Nebula).
+  if (STYLE.headline === "flat") {
+    return {
+      ...base,
+      color: inkC(dark),
+      letterSpacing: "-0.02em",
+      textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : undefined,
+    };
+  }
+  return {
+    ...base,
+    backgroundImage: headlineGradient(),
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    color: "transparent",
+    WebkitTextFillColor: "transparent",
+  };
+};
 
 // ── data-viz coercion helpers (params may be missing/malformed) ──────────────
 const asStr = (v: unknown): string => (typeof v === "string" ? v : "");
@@ -390,7 +405,7 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           opacity,
           color: COLORS.teal,
           fontFamily: FONTS.display,
-          fontWeight: 400,
+          fontWeight: FONTS.displayWeight,
           textTransform: "uppercase",
           letterSpacing: "0.12em",
           fontSize: 72,
@@ -556,10 +571,10 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const framed = variant === "framed";
   const fit: "cover" | "contain" = transparent ? "contain" : "cover";
   const boxStyle: React.CSSProperties = framed
-    ? { width: "78%", aspectRatio: "4 / 5", overflow: "hidden", border: `6px solid ${COLORS.leather}`, background: COLORS.vellum, boxShadow: ENGRAVE_SHADOW }
+    ? { width: "78%", aspectRatio: "4 / 5", overflow: "hidden", border: `6px solid ${COLORS.leather}`, background: COLORS.vellum, boxShadow: PANEL_SHADOW }
     : transparent
       ? { width: "80%", aspectRatio: "1 / 1", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: backing ? 40 : 0, background: backing || undefined, borderRadius: backing ? 24 : 0, boxShadow: backing ? ENGRAVE_SHADOW : undefined }
-      : { width: "74%", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: 22, background: COLORS.vellum, boxShadow: ENGRAVE_SHADOW };
+      : { width: "74%", aspectRatio: "4 / 5", overflow: "hidden", borderRadius: 22, background: COLORS.vellum, boxShadow: PANEL_SHADOW };
 
   return (
     <Center style={{ flexDirection: "column", gap: 28 }}>
@@ -636,7 +651,7 @@ const Timeline: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
                   <Img src={it.image} style={{ width: 88, height: 88, objectFit: "contain", borderRadius: 8, border: `3px solid ${accent}` }} />
                 ) : null}
                 <div>
-                  <div style={{ fontFamily: FONTS.display, fontWeight: it.highlight ? 600 : 500, color: it.highlight ? COLORS.teal : inkC(dark), fontSize: it.highlight ?  78 : 60, lineHeight: 1.05, textShadow: ENGRAVE_SHADOW }}>{it.label}</div>
+                  <div style={{ fontFamily: FONTS.display, fontWeight: FONTS.displayWeight, color: it.highlight ? COLORS.teal : inkC(dark), fontSize: it.highlight ?  78 : 60, lineHeight: 1.05, textShadow: ENGRAVE_SHADOW }}>{it.label}</div>
                   {it.sublabel ? <div style={{ fontFamily: FONTS.mono, color: softC(dark), fontSize: 26 }}>{it.sublabel}</div> : null}
                 </div>
               </div>
@@ -662,11 +677,12 @@ const BarChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ alignItems: "stretch", padding: "12% 12%" }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize:  82, textAlign: "center", marginBottom: 64, textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize:  82, textAlign: "center", marginBottom: 64, textTransform: STYLE.uppercaseTitles ? "uppercase" : undefined, textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <div style={{ display: "flex", flexDirection: "column", gap: 44 }}>
         {bars.map((b, i) => {
           const g = interpolate(frame, [i * step, i * step + fps * 0.8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
           const color = b.highlight ? COLORS.teal : COLORS.leather;
+          const track = STYLE.panelBorder > 0 ? `${Math.min(3, STYLE.panelBorder)}px solid ${COLORS.ink}` : undefined;
           return (
             <div key={i}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
@@ -676,8 +692,8 @@ const BarChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
                 </span>
                 <span style={{ fontFamily: FONTS.mono, color, fontSize:  50 }}>{fmtValue(b.value * g, 0)}{unit}</span>
               </div>
-              <div style={{ height: 40, background: "rgba(91,70,54,0.15)", borderRadius: 4, overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${(b.value / maxVal) * 100 * g}%`, background: color, opacity: b.highlight ? 1 : 0.7 }} />
+              <div style={{ height: 40, background: track ? COLORS.vellum : "rgba(91,70,54,0.15)", border: track, borderRadius: STYLE.sharp ? 0 : 4, overflow: "hidden" }}>
+                <div style={{ height: "100%", width: `${(b.value / maxVal) * 100 * g}%`, background: color, opacity: STYLE.shadow === "hard" || b.highlight ? 1 : 0.7 }} />
               </div>
             </div>
           );
@@ -705,11 +721,11 @@ const Comparison: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   const block = (col: { title: string; points: string[] }, delay: number, accent: string) => (
     <div style={{ width: "100%", textAlign: "center" }}>
-      <div style={{ fontFamily: FONTS.display, color: accent, fontWeight: 600, fontSize: 84, lineHeight: 1.05, marginBottom: 22, textShadow: ENGRAVE_SHADOW, opacity: interpolate(frame, [delay, delay + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>{col.title}</div>
+      <div style={{ fontFamily: FONTS.display, color: accent, fontWeight: FONTS.displayWeight, fontSize: 84, lineHeight: 1.05, marginBottom: 22, textShadow: ENGRAVE_SHADOW, opacity: interpolate(frame, [delay, delay + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>{col.title}</div>
       {col.points.map((p, i) => {
         const at = delay + fps * 0.3 + i * fps * 0.3;
         const t = interpolate(frame, [at, at + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-        return <div key={i} style={{ fontFamily: FONTS.body, color: inkC(dark), fontSize: ptFont, lineHeight: 1.35, marginBottom: 12, opacity: t, transform: `translateY(${(1 - t) * 18}px)` }}>{p}</div>;
+        return <div key={i} style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: inkC(dark), fontSize: ptFont, lineHeight: 1.35, marginBottom: 12, opacity: t, transform: `translateY(${(1 - t) * 18}px)` }}>{p}</div>;
       })}
     </div>
   );
@@ -735,14 +751,14 @@ const BulletList: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ alignItems: "flex-start", textAlign: "left", padding: "12% 11%" }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize: 88, marginBottom: 52, textAlign: "left", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 88, marginBottom: 52, textAlign: "left", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <div style={{ display: "flex", flexDirection: "column", gap: 40, width: "100%" }}>
         {items.map((it, i) => {
           const t = interpolate(frame, [i * step, i * step + fps * 0.5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
           return (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 28, opacity: t, transform: `translateX(${(1 - t) * 30}px)` }}>
               <span style={{ color: COLORS.teal, fontSize: 40, lineHeight: 1.35, flexShrink: 0 }}>◆</span>
-              <span style={{ fontFamily: FONTS.body, color: inkC(dark), fontSize: itemFont, lineHeight: 1.35, textAlign: "left" }}>{it}</span>
+              <span style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: inkC(dark), fontSize: itemFont, lineHeight: 1.35, textAlign: "left" }}>{it}</span>
             </div>
           );
         })}
@@ -764,10 +780,10 @@ const Card: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center>
-      <div style={{ background: COLORS.vellum, border: "1px solid rgba(91,70,54,0.25)", borderRadius: 18, padding: "56px 64px", boxShadow: ENGRAVE_SHADOW, transform: `scale(${scale})`, opacity, maxWidth: "84%" }}>
-        {title ? <div style={{ fontFamily: FONTS.display, color: COLORS.textOnLight, fontWeight: 600, fontSize: 78, lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      <div style={{ background: COLORS.vellum, border: panelBorder() ?? "1px solid rgba(91,70,54,0.25)", borderRadius: STYLE.sharp ? 0 : 18, padding: "56px 64px", boxShadow: PANEL_SHADOW, transform: `scale(${scale})`, opacity, maxWidth: "84%" }}>
+        {title ? <div style={{ fontFamily: FONTS.display, color: textForBg(COLORS.vellum), fontWeight: FONTS.displayWeight, fontSize: 78, lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textTransform: STYLE.uppercaseTitles ? "uppercase" : undefined, letterSpacing: STYLE.uppercaseTitles ? "-0.02em" : undefined, textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : undefined }}>{title}</div> : null}
         {lines.map((l, i) => (
-          <div key={i} style={{ fontFamily: FONTS.body, color: COLORS.inkSoft, fontSize:  52, lineHeight: 1.45 }}>{l}</div>
+          <div key={i} style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: textForBg(COLORS.vellum), fontSize:  52, lineHeight: 1.45, opacity: 0.85 }}>{l}</div>
         ))}
       </div>
     </Center>
@@ -787,7 +803,7 @@ const Terminal: React.FC<PrimitiveProps> = ({ anim }) => {
 
   return (
     <Center>
-      <div style={{ background: COLORS.ink, borderRadius: 14, padding: "40px 44px", width: "84%", boxShadow: ENGRAVE_SHADOW, opacity }}>
+      <div style={{ background: COLORS.ink, borderRadius: 14, padding: "40px 44px", width: "84%", boxShadow: PANEL_SHADOW, opacity }}>
         <div style={{ display: "flex", gap: 10, marginBottom: 24 }}>
           {[COLORS.leather, COLORS.gold, COLORS.tealBright].map((c) => (
             <span key={c} style={{ width: 16, height: 16, borderRadius: "50%", background: c, display: "inline-block" }} />
@@ -825,7 +841,7 @@ const LineChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ flexDirection: "column", padding: "12% 8%" }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize: 74, marginBottom: 30, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 74, marginBottom: 30, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }}>
         {/* baseline + left axis */}
         <line x1={padL} y1={H - padB} x2={W - padR} y2={H - padB} stroke={softC(dark)} strokeOpacity={0.4} strokeWidth={2} />
@@ -883,7 +899,7 @@ const ScatterChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ flexDirection: "column", padding: "9% 6%", gap: 16 }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize: 72, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 72, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }}>
         <line x1={pL} y1={pT} x2={pL} y2={H - pB} stroke={softC(dark)} strokeWidth={4} strokeDasharray={H} strokeDashoffset={H * (1 - axisDraw)} />
         <line x1={pL} y1={H - pB} x2={W - pR} y2={H - pB} stroke={softC(dark)} strokeWidth={4} strokeDasharray={W} strokeDashoffset={W * (1 - axisDraw)} />
@@ -924,7 +940,7 @@ const PieChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ flexDirection: "column", padding: "12% 8%", gap: 40 }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize:  74, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize:  74, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <svg viewBox="0 0 400 400" style={{ width: "62%" }}>
         <g transform="rotate(-90 200 200)">
           {slices.map((s, i) => {
@@ -990,7 +1006,7 @@ const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ flexDirection: "column", padding: "10% 6%", gap: 20 }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: 600, fontSize: 60, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 60, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <div style={{ position: "relative", width: "100%", aspectRatio: "1 / 1" }}>
         <svg viewBox="0 0 1000 1000" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
           <defs>
@@ -1018,9 +1034,9 @@ const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           const op = interpolate(frame, [at, at + fps * 0.3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           const border = node.highlight ? COLORS.teal : COLORS.leather;
           return (
-            <div key={i} style={{ position: "absolute", left: `${(p.x / 1000) * 100}%`, top: `${(p.y / 1000) * 100}%`, width: `${(boxW / 1000) * 100}%`, height: `${(boxH / 1000) * 100}%`, transform: `translate(-50%,-50%) scale(${0.7 + 0.3 * s})`, opacity: op, background: COLORS.vellum, border: `3px solid ${border}`, borderRadius: 14, boxShadow: ENGRAVE_SHADOW, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 14, overflow: "hidden" }}>
+            <div key={i} style={{ position: "absolute", left: `${(p.x / 1000) * 100}%`, top: `${(p.y / 1000) * 100}%`, width: `${(boxW / 1000) * 100}%`, height: `${(boxH / 1000) * 100}%`, transform: `translate(-50%,-50%) scale(${0.7 + 0.3 * s})`, opacity: op, background: COLORS.vellum, border: `3px solid ${border}`, borderRadius: 14, boxShadow: PANEL_SHADOW, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 14, overflow: "hidden" }}>
               {node.image ? <Img src={node.image} style={{ maxWidth: "60%", maxHeight: "48%", objectFit: "contain" }} /> : null}
-              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.textOnLight, fontWeight: 600, fontSize: nodeFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
+              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.textOnLight, fontWeight: FONTS.displayWeight, fontSize: nodeFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
             </div>
           );
         })}

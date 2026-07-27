@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { applyTheme, COLORS, TEXTURE, ThemeInput } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
 import { SceneTrack } from "./scenes";
@@ -7,6 +7,64 @@ import { loadDefaultFonts, loadThemeFonts } from "./fonts";
 import type { ClipProps } from "./types";
 
 loadDefaultFonts();
+
+// Deterministic pseudo-random in [0,1) from a seed — no Math.random (Remotion
+// re-renders each frame, so runtime randomness would flicker).
+const rand = (n: number): number => {
+  const x = Math.sin(n * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+// A field of drifting, twinkling particles. Positions/sizes are baked once from
+// the seed; each frame only moves (gentle oscillation) and fades (twinkle) them.
+const STAR_COUNT = 110;
+const STARS = Array.from({ length: STAR_COUNT }, (_, i) => ({
+  x: rand(i * 3.1 + 0.5) * 100, // base position, %
+  y: rand(i * 7.7 + 1.5) * 100,
+  size: 1 + rand(i * 2.3 + 2.5) * 2.4, // px
+  ax: 2.5 + rand(i * 1.7 + 3.5) * 6, // float amplitude, % — roam more
+  ay: 2 + rand(i * 4.3 + 4.5) * 5,
+  wf: 0.01 + rand(i * 5.5 + 5.5) * 0.02, // float angular speed
+  wt: 0.02 + rand(i * 6.2 + 6.5) * 0.04, // twinkle angular speed
+  phase: rand(i * 9.1 + 7.5) * Math.PI * 2,
+  bright: rand(i * 8.4 + 8.5), // brightest few get a glow + accent tint
+}));
+
+const Starfield: React.FC = () => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.papyrus, overflow: "hidden" }}>
+      {/* depth wash behind the particles */}
+      <AbsoluteFill
+        style={{ backgroundImage: `linear-gradient(180deg, ${COLORS.vellum} 0%, ${COLORS.papyrus} 60%, ${COLORS.ink} 100%)` }}
+      />
+      {STARS.map((s, i) => {
+        const left = s.x + Math.sin(frame * s.wf + s.phase) * s.ax;
+        const top = s.y + Math.cos(frame * s.wf * 0.8 + s.phase) * s.ay;
+        // Gentle twinkle only — keep brightness fairly constant (was a big fade).
+        const twinkle = 0.7 + 0.3 * (0.5 + 0.5 * Math.sin(frame * s.wt + s.phase));
+        const glow = s.bright > 0.82;
+        const color = glow ? COLORS.tealBright : COLORS.textOnLight;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${left}%`,
+              top: `${top}%`,
+              width: s.size,
+              height: s.size,
+              borderRadius: "50%",
+              background: color,
+              opacity: twinkle,
+              boxShadow: glow ? `0 0 ${s.size * 3}px ${color}` : undefined,
+            }}
+          />
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
 
 // Background behind opaque (non-overlay) scenes. Adapts to the active design
 // system's texture: 'paper' = IATECA foxing, 'starfield' = dark + stars,
@@ -29,35 +87,18 @@ export const BackgroundTexture: React.FC = () => {
   }
 
   if (TEXTURE.kind === "starfield") {
-    return (
-      <AbsoluteFill
-        style={{
-          backgroundColor: COLORS.papyrus,
-          backgroundImage: `radial-gradient(circle at 18% 22%, ${COLORS.textOnLight}cc 0 1.4px, transparent 2px),
-                            radial-gradient(circle at 64% 38%, ${COLORS.textOnLight}99 0 1.1px, transparent 2px),
-                            radial-gradient(circle at 42% 72%, ${COLORS.textOnLight}aa 0 1.3px, transparent 2px),
-                            radial-gradient(circle at 82% 84%, ${COLORS.textOnLight}88 0 1px, transparent 2px),
-                            radial-gradient(circle at 30% 90%, ${COLORS.textOnLight}99 0 1.2px, transparent 2px),
-                            radial-gradient(circle at 88% 16%, ${COLORS.tealBright}55 0 1.6px, transparent 3px),
-                            linear-gradient(180deg, ${COLORS.vellum} 0%, ${COLORS.papyrus} 60%, ${COLORS.ink} 100%)`,
-          backgroundSize: "300px 300px, 380px 380px, 260px 260px, 420px 420px, 340px 340px, 500px 500px, 100% 100%",
-        }}
-      />
-    );
+    return <Starfield />;
   }
 
   // 'paper' — IATECA foxing (blots tinted from the ornament accents).
   return (
     <AbsoluteFill
       style={{
+        // Flat base + a fine halftone dot grid (ink-tinted) — a print texture, no
+        // gradient wash. The dot ink adapts to the theme's contrast colour.
         backgroundColor: COLORS.papyrus,
-        backgroundImage: `radial-gradient(circle at 18% 22%, ${COLORS.leather}10 0 2px, transparent 3px),
-                          radial-gradient(circle at 64% 38%, ${COLORS.leather}0d 0 3px, transparent 4px),
-                          radial-gradient(circle at 42% 72%, ${COLORS.gold}10 0 2px, transparent 3px),
-                          radial-gradient(circle at 82% 84%, ${COLORS.leather}0d 0 2px, transparent 3px),
-                          radial-gradient(circle at 30% 90%, ${COLORS.gold}0d 0 3px, transparent 4px),
-                          linear-gradient(180deg, ${COLORS.vellum} 0%, ${COLORS.papyrus} 100%)`,
-        backgroundSize: "540px 540px, 620px 620px, 480px 480px, 700px 700px, 560px 560px, 100% 100%",
+        backgroundImage: `radial-gradient(circle at 2px 2px, ${COLORS.ink}22 0 1.6px, transparent 2px)`,
+        backgroundSize: "15px 15px",
       }}
     />
   );
@@ -79,7 +120,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
   // before children render, so every primitive picks up the design system.
   applyTheme(theme as ThemeInput | undefined);
   const t = theme as ThemeInput | undefined;
-  loadThemeFonts(t?.fonts?.display, t?.fonts?.body);
+  loadThemeFonts(t?.fonts?.display, t?.fonts?.body, t?.fonts?.mono);
 
   const { fps: configFps } = useVideoConfig();
   const effectiveFps = fps ?? configFps;

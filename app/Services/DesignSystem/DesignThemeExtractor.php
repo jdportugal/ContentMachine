@@ -61,10 +61,19 @@ class DesignThemeExtractor
           },
           "fonts": {
             "display": "Google Fonts family name",  // headings
+            "displayWeight": 400,                   // primary heading weight (100-900)
             "body": "Google Fonts family name",     // body
+            "bodyWeight": 400,                      // primary body weight (100-900)
             "mono": "Google Fonts family name"       // monospaced
           },
-          "texture": { "kind": "paper" | "starfield" | "gradient" | "solid" }
+          "texture": { "kind": "paper" | "starfield" | "gradient" | "solid" },
+          "style": {
+            "headline": "gradient" | "flat",   // flat = solid ink colour titles, no gradient
+            "shadow": "soft" | "hard",          // hard = offset block shadow (Npx Npx 0)
+            "panelBorder": 0,                    // px of solid ink border on cards (0-8)
+            "sharp": true | false,               // true = square corners (no radius)
+            "uppercaseTitles": true | false
+          }
         }
 
         RULES:
@@ -73,8 +82,20 @@ class DesignThemeExtractor
         - Fonts MUST be real Google Fonts names (e.g. "Anton", "Inter",
           "Montserrat", "Playfair Display"). If the design specifies a non-Google font,
           choose the closest Google Fonts alternative.
+        - displayWeight / bodyWeight: the WEIGHT the design specifies for headings and
+          body (e.g. "Fraunces 900" -> displayWeight 900; "Spline Sans 400/600/700" ->
+          bodyWeight 400, the base weight). Use the heaviest weight named for headings.
+          If no weight is stated, use 700 for display and 400 for body.
         - texture.kind: "starfield" for dark/space themes with stars; "gradient"
-          for gradients; "solid" for a flat background; "paper" for paper/organic texture.
+          for gradients; "solid" for a FLAT single-colour background; "paper" for a flat
+          background with a subtle dot/halftone/grain texture. If the design says "flat",
+          "no gradients", "tinta plana" or shows a solid colour with dots, use "paper" or
+          "solid" — NOT "gradient".
+        - style: read the design's TREATMENT. Bold serif titles, hard/offset block shadows
+          ("Npx Npx 0", "sombra dura"), thick borders and square corners = a print/brutalist
+          look -> headline "flat", shadow "hard", panelBorder 3, sharp true, uppercaseTitles
+          true (if titles are caixa alta/uppercase). Soft glows, gradients and rounded cards
+          -> headline "gradient", shadow "soft", panelBorder 0, sharp false. Choose per the design.
         - Reply ONLY with the JSON.
         PROMPT;
     }

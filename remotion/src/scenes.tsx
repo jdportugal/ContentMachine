@@ -8,7 +8,7 @@ import {
   spring,
   useCurrentFrame,
 } from "remotion";
-import { COLORS, ENGRAVE_SHADOW, FONTS } from "./style-tokens";
+import { COLORS, ENGRAVE_SHADOW, FONTS, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
 import type { KaraokeWord, Present, Scene } from "./types";
 
@@ -44,13 +44,13 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
       <div
         style={{
           fontFamily: FONTS.display,
-          fontWeight: 400, // Anton — single weight, no italic
+          fontWeight: FONTS.displayWeight,
           textTransform: "uppercase",
           letterSpacing: "0.01em",
           fontSize,
           lineHeight: 0.98,
           color: dark ? COLORS.textOnDark : COLORS.textOnLight,
-          textShadow: dark ? `0 0 28px ${COLORS.tealBright}66` : `0 0 26px ${COLORS.teal}44`,
+          textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : dark ? `0 0 28px ${COLORS.tealBright}66` : `0 0 26px ${COLORS.teal}44`,
           transform: `scale(${scale})`,
           opacity,
           textAlign: "center",
@@ -74,16 +74,20 @@ const LiveBackground: React.FC<{ color: string; solid: boolean }> = ({ color, so
   const dx = Math.sin(frame / 70) * 8;
   const dy = Math.cos(frame / 90) * 9;
   const dx2 = Math.cos(frame / 58) * 10;
+  // Print/flat designs keep a truly flat field — no drifting colour blobs.
+  const flat = STYLE.headline === "flat";
   return (
     <AbsoluteFill style={{ backgroundColor: solid ? color : undefined, overflow: "hidden" }}>
-      <AbsoluteFill
-        style={{
-          backgroundImage:
-            `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, ${COLORS.gold}12, transparent 46%),` +
-            `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, ${COLORS.leather}10, transparent 48%),` +
-            `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, ${COLORS.teal}0d, transparent 52%)`,
-        }}
-      />
+      {flat ? null : (
+        <AbsoluteFill
+          style={{
+            backgroundImage:
+              `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, ${COLORS.gold}12, transparent 46%),` +
+              `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, ${COLORS.leather}10, transparent 48%),` +
+              `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, ${COLORS.teal}0d, transparent 52%)`,
+          }}
+        />
+      )}
     </AbsoluteFill>
   );
 };
@@ -203,7 +207,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 
   return (
     <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: "13%" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, borderRadius: 14, padding: "20px 34px", boxShadow: ENGRAVE_SHADOW }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, border: panelBorder(), borderRadius: STYLE.sharp ? 0 : 14, padding: "20px 34px", boxShadow: PANEL_SHADOW }}>
         {group.map((w, i) => {
           const globalIdx = line * LINE + i;
           const isActive = globalIdx === idx && t >= w.start && t < w.end;
@@ -216,7 +220,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
                 fontWeight: 600,
                 fontSize: 58,
                 lineHeight: 1.2,
-                color: isActive ? COLORS.teal : COLORS.textOnLight,
+                color: isActive ? COLORS.teal : textForBg(COLORS.vellum),
                 transform: `scale(${pop})`,
                 display: "inline-block",
               }}

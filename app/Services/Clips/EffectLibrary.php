@@ -84,6 +84,21 @@ TSX;
         return $this->enabled()->pluck('slug')->all();
     }
 
+    /**
+     * Every layer type the planner AND renderer may use: enabled built-ins plus
+     * enabled custom effects. The single source of truth for what a clip may
+     * contain — disabled effects (e.g. a toggled-off `ambient`) drop out here, so
+     * neither the prompt vocabulary nor the gap/bare fillers reintroduce them.
+     *
+     * @return string[]
+     */
+    public function allowedLayerTypes(): array
+    {
+        $builtins = array_values(array_diff(array_keys(self::BUILTIN_SAMPLES), $this->disabledBuiltins()));
+
+        return array_values(array_unique(array_merge($builtins, $this->activeSlugs())));
+    }
+
     public function isBuiltin(string $slug): bool
     {
         return array_key_exists($slug, self::BUILTIN_SAMPLES);
