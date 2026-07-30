@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Services\Monitoring\MonitoringManager;
 use App\Services\Monitoring\MonitoringStats;
-use App\Services\News\NewsManager;
 use App\Services\Vault\VaultContract;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -14,7 +13,7 @@ use Livewire\Component;
 #[Title('Dashboard')]
 class Painel extends Component
 {
-    public function render(MonitoringManager $monitoring, MonitoringStats $stats, NewsManager $news, VaultContract $vault)
+    public function render(MonitoringManager $monitoring, MonitoringStats $stats, VaultContract $vault)
     {
         // Performance summary per platform (best recent content).
         $plataformas = $monitoring->todos()->map(function ($driver, $p) {
@@ -27,13 +26,30 @@ class Painel extends Component
             ];
         })->values();
 
-        $relatorio = $news->relatorio();
-
         return view('livewire.painel', [
             'plataformas' => $plataformas,
             // Channel totals (subscribers, posts, performance) for the networks.
             'estatisticas' => $stats->totais($monitoring->plataformas()),
-            'destaquesNoticias' => array_slice($relatorio['destaques'], 0, 3),
+            // Read the LAST generated report from the vault. NEVER generate live here:
+            // the 'api' news driver throws (no Apify key) or blocks 30s, which crashed «/».
+            'destaquesNoticias' => array_slice($this->ultimosDestaques($vault), 0, 3),
         ]);
+    }
+
+    /** Highlights from the most recent stored news report, or [] — never throws. */
+    private function ultimosDestaques(VaultContract $vault): array
+    {
+        try {
+            $nota = $vault->all('noticias')
+                ->filter(fn ($n) => $n->get('tipo') === 'relatorio' && filled($n->get('dados')))
+                ->sortByDesc(fn ($n) => (string) $n->get('gerado_em', $n->get('inicio', '')))
+                ->first();
+
+            $dados = $nota ? json_decode((string) $nota->get('dados'), true) : null;
+
+            return is_array($dados['destaques'] ?? null) ? $dados['destaques'] : [];
+        } catch (\Throwable) {
+            return [];
+        }
     }
 }

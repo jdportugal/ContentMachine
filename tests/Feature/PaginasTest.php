@@ -54,4 +54,17 @@ class PaginasTest extends TestCase
             ->assertOk()
             ->assertSee('recent performance', false);
     }
+
+    public function test_dashboard_does_not_crash_with_the_real_drivers_and_no_apify_key(): void
+    {
+        // Regression: the dashboard used to call the live news driver, which throws
+        // when Apify isn't set → «/» returned 500. It must now read the stored report.
+        config([
+            'contentmachine.monitoring.driver' => 'ytdlp',
+            'contentmachine.news.driver' => 'api',
+            'services.apify.token' => null,
+        ]);
+
+        $this->get('/')->assertOk();
+    }
 }

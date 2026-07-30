@@ -62,16 +62,18 @@
             <a href="{{ route('noticias') }}" class="font-mono text-[0.62rem] text-teal hover:underline">aggregator →</a>
         </div>
         <x-panel glyph="☙">
-            @foreach ($destaquesNoticias as $d)
+            @forelse ($destaquesNoticias as $d)
                 <div class="flex items-start gap-3 py-2.5 border-b border-ink-soft/10 last:border-0">
-                    <x-badge tone="leather">{{ $d['fonte'] }}</x-badge>
+                    <x-badge tone="leather">{{ $d['fonte'] ?? $d['plataforma'] ?? '—' }}</x-badge>
                     <div class="min-w-0 flex-1">
-                        <div class="text-ink">{{ $d['titulo'] }}</div>
-                        <div class="text-sm text-ink-soft italic">{{ $d['angulo'] }}</div>
+                        <div class="text-ink">{{ $d['titulo'] ?? '' }}</div>
+                        <div class="text-sm text-ink-soft italic">{{ $d['angulo'] ?? '' }}</div>
                     </div>
-                    <div class="font-mono text-xs text-teal shrink-0">{{ $d['relevancia'] }}</div>
+                    <div class="font-mono text-xs text-teal shrink-0">{{ $d['relevancia'] ?? '' }}</div>
                 </div>
-            @endforeach
+            @empty
+                <p class="text-ink-soft text-sm py-2">No report yet — generate one in the <a href="{{ route('noticias') }}" class="text-teal hover:underline">News aggregator</a>.</p>
+            @endforelse
         </x-panel>
     </div>
 </div>

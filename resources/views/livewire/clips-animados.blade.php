@@ -24,9 +24,9 @@
     {{-- DASHBOARD                                                    --}}
     {{-- ============================================================ --}}
     @if ($view === 'dashboard')
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div class="eyebrow">Clips generated · {{ $this->projects->count() }}</div>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
                 <a href="{{ route('clips-animados.sfx') }}"
                         class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
                     ✷ SFX

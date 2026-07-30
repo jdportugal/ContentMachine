@@ -13,9 +13,19 @@
     @livewireStyles
 </head>
 <body class="bg-nocturna min-h-screen text-ink antialiased">
-    <div class="flex min-h-screen">
-        {{-- ============ Side shelf (navigation) ============ --}}
-        <aside class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/40 flex flex-col sticky top-0 h-screen">
+    <div x-data="{ nav: false }" class="flex min-h-screen">
+        {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
+        <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
+            <a href="{{ route('painel') }}" class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</a>
+            <button type="button" @click="nav = !nav" aria-label="Toggle menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
+        </header>
+
+        {{-- Drawer backdrop (mobile) --}}
+        <div x-show="nav" x-cloak x-transition.opacity @click="nav = false" class="lg:hidden fixed inset-0 z-40 bg-black/50"></div>
+
+        {{-- ============ Side shelf (navigation) — off-canvas drawer on mobile, static on lg+ ============ --}}
+        <aside @click="nav = false" x-bind:class="{ '!translate-x-0': nav }"
+               class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
             <div class="px-6 py-3 border-b border-ink-soft/15">
                 <a href="{{ route('painel') }}" class="block">
                     <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</span>
@@ -74,8 +84,8 @@
         </aside>
 
         {{-- ============ Content ============ --}}
-        <main class="flex-1 min-w-0 overflow-x-hidden">
-            <div class="max-w-6xl mx-auto px-8 py-8">
+        <main class="flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 {{ $slot }}
             </div>
         </main>
