@@ -65,6 +65,24 @@ class DefinicoesTest extends TestCase
         $this->assertArrayHasKey('youtube', $s->get('perfis'));
     }
 
+    public function test_saving_persists_every_tab_regardless_of_the_open_one(): void
+    {
+        // Values set across different tabs, with the API-keys tab left open on save,
+        // must all persist (state is server-side; tabs are just a display filter).
+        Livewire::test(Definicoes::class)
+            ->set('geral.nome_marca', 'Brand Machine')     // General tab
+            ->set('chaves.openai', 'sk-test')               // API Keys tab
+            ->set('modelos.openai_model', 'gpt-4o-mini')    // AI & Engine tab
+            ->set('secao', 'chaves')
+            ->call('guardar')
+            ->assertHasNoErrors();
+
+        $s = app(SettingsRepository::class);
+        $this->assertSame('Brand Machine', $s->get('geral.nome_marca'));
+        $this->assertSame('sk-test', $s->get('chaves.openai'));
+        $this->assertSame('gpt-4o-mini', $s->get('modelos.openai_model'));
+    }
+
     public function test_componente_guarda_fontes_como_lista(): void
     {
         Livewire::test(Definicoes::class)

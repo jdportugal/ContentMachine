@@ -40,6 +40,9 @@ class Definicoes extends Component
     /** Active project's language (stored in the project registry, not the vault). */
     public string $idioma = 'en';
 
+    /** Active settings tab: geral | fontes | social | motor | chaves. */
+    public string $secao = 'geral';
+
     public ?string $guardado = null;
 
     public function mount(SettingsRepository $definicoes, ProjectContext $projeto): void
