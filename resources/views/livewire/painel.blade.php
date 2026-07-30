@@ -62,7 +62,7 @@
             <a href="{{ route('noticias') }}" class="font-mono text-[0.62rem] text-teal hover:underline">agregador →</a>
         </div>
         <x-panel glyph="☙">
-            @foreach ($destaquesNoticias as $d)
+            @forelse ($destaquesNoticias as $d)
                 <div class="flex items-start gap-3 py-2.5 border-b border-ink-soft/10 last:border-0">
                     <x-badge tone="leather">{{ $d['fonte'] }}</x-badge>
                     <div class="min-w-0 flex-1">
@@ -71,7 +71,12 @@
                     </div>
                     <div class="font-mono text-xs text-teal shrink-0">{{ $d['relevancia'] }}</div>
                 </div>
-            @endforeach
+            @empty
+                <p class="font-mono text-xs text-ink-faint">
+                    Sem destaques ainda — gere um relatório no
+                    <a href="{{ route('noticias') }}" class="text-teal hover:underline">agregador</a>.
+                </p>
+            @endforelse
         </x-panel>
     </div>
 </div>

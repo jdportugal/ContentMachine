@@ -13,17 +13,42 @@
     @livewireStyles
 </head>
 <body class="bg-nocturna min-h-screen text-ink antialiased">
-    <div class="flex min-h-screen">
+    <div x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false" class="lg:flex min-h-screen">
+        {{-- ============ Barra superior (só telemóvel) ============ --}}
+        <header class="lg:hidden sticky top-0 z-30 flex items-center justify-between gap-3 h-14 px-4 border-b border-ink-soft/15 bg-papyrus/95 backdrop-blur">
+            <a href="{{ route('painel') }}" class="flex items-baseline gap-2 min-w-0">
+                <span class="font-display text-lg text-teal" style="letter-spacing:.06em">IATECA</span>
+                <span class="eyebrow text-[0.5rem] truncate">Máquina · de · Conteúdo</span>
+            </a>
+            <button type="button" @click="sidebarOpen = true" aria-label="Abrir menu"
+                    class="p-2 -mr-2 text-ink-soft hover:text-ink transition">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                    <path d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+            </button>
+        </header>
+
+        {{-- Fundo escurecido (só telemóvel, quando o menu está aberto) --}}
+        <div x-cloak x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
+             class="lg:hidden fixed inset-0 z-40 bg-black/60"></div>
+
         {{-- ============ Estante lateral (navegação) ============ --}}
-        <aside class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/40 flex flex-col sticky top-0 h-screen">
-            <div class="px-6 py-3 border-b border-ink-soft/15">
-                <a href="{{ route('painel') }}" class="block">
+        <aside class="fixed inset-y-0 left-0 z-50 flex h-screen w-64 max-w-[85vw] shrink-0 flex-col border-r border-ink-soft/15 bg-vellum backdrop-blur transform transition-transform duration-200 ease-out lg:sticky lg:top-0 lg:z-auto lg:max-w-none lg:bg-vellum/40 lg:backdrop-blur-none"
+               :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
+            <div class="px-6 py-3 border-b border-ink-soft/15 flex items-center justify-between gap-2">
+                <a href="{{ route('painel') }}" class="block min-w-0" @click="sidebarOpen = false">
                     <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">IATECA</span>
                     <span class="block eyebrow mt-0.5 text-[0.55rem]">Máquina · de · Conteúdo</span>
                 </a>
+                <button type="button" @click="sidebarOpen = false" aria-label="Fechar menu"
+                        class="lg:hidden p-1 -mr-1 text-ink-soft hover:text-ink transition">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M6 6l12 12M18 6L6 18" />
+                    </svg>
+                </button>
             </div>
 
-            <nav class="flex-1 py-2 space-y-0.5">
+            <nav class="flex-1 overflow-y-auto py-2 space-y-0.5">
                 @php
                     $nav = [
                         ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#FFB347', 'glyph' => '◆'],
@@ -41,7 +66,7 @@
 
                 @foreach ($nav as $i => $item)
                     @php $active = request()->routeIs($item['route'].'*'); @endphp
-                    <a href="{{ route($item['route']) }}"
+                    <a href="{{ route($item['route']) }}" @click="sidebarOpen = false"
                        class="group flex items-center gap-3 pl-4 pr-4 py-1.5 mx-2 rounded-sm transition
                               {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                         <span class="w-1.5 self-stretch rounded-full transition-all"
@@ -70,7 +95,7 @@
 
         {{-- ============ Conteúdo ============ --}}
         <main class="flex-1 min-w-0 overflow-x-hidden">
-            <div class="max-w-6xl mx-auto px-8 py-8">
+            <div class="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
                 {{ $slot }}
             </div>
         </main>

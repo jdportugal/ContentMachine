@@ -54,4 +54,23 @@ class PaginasTest extends TestCase
             ->assertOk()
             ->assertSee('desempenho recente', false);
     }
+
+    /**
+     * O Painel é a página de entrada (/). Com os drivers reais ('api') ainda
+     * por configurar — ou quando o endpoint externo falha — os fetches ao vivo
+     * lançam. A página tem de degradar com elegância (sem dados) em vez de
+     * devolver 500. Regressão do bug «/ não abre, só as subpáginas».
+     */
+    public function test_painel_nao_rebenta_com_drivers_api_por_configurar(): void
+    {
+        config([
+            'contentmachine.monitoring.driver' => 'api',
+            'contentmachine.news.driver' => 'api',
+        ]);
+
+        \Livewire\Livewire::test(\App\Livewire\Painel::class)
+            ->assertOk()
+            ->assertSee('desempenho recente', false)
+            ->assertSee('Sem destaques ainda', false);
+    }
 }

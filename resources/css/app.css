@@ -53,6 +53,13 @@
     html {
         font-size: 18px;
     }
+    /* Em telemóveis reduz-se a raiz — como tudo assenta em rem, texto e
+       espaçamento encolhem proporcionalmente para caber no ecrã estreito. */
+    @media (max-width: 640px) {
+        html {
+            font-size: 15px;
+        }
+    }
 
     body {
         font-family: var(--font-body);
