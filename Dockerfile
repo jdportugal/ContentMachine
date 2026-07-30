@@ -52,3 +52,50 @@ RUN composer dump-autoload --optimize --no-dev \
 
 ENTRYPOINT ["docker/php/entrypoint.sh"]
 CMD ["php-fpm"]
+
+# ============================================================
+# Etapa 3 — imagem AUTOSSUFICIENTE (single-container) para deploy
+# ------------------------------------------------------------
+# É esta a imagem publicada no GHCR e usada pelo ContentMachine-deploy
+# (install.sh): serve HTTP em :8080 (nginx → php-fpm) e corre o worker de
+# fila num só contentor, em /app, com SQLite — sem Postgres/Redis/Nginx à
+# parte. A etapa 'app' (php-fpm puro) mantém-se para o docker-compose local.
+# ============================================================
+FROM app AS deploy
+
+# Servidor web + gestor de processos (+ curl para o HEALTHCHECK).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        nginx supervisor curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Mover a app para /app — contrato do instalador: os volumes persistentes são
+# montados em /app/storage, /app/vault e /app/database. Os caminhos do Laravel
+# são dinâmicos (base_path), por isso mover é seguro.
+RUN mv /var/www/html /app
+WORKDIR /app
+
+COPY docker/nginx/deploy.conf /etc/nginx/sites-available/default
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/php/deploy-entrypoint.sh /usr/local/bin/deploy-entrypoint.sh
+RUN chmod +x /usr/local/bin/deploy-entrypoint.sh \
+    && chown -R www-data:www-data storage bootstrap/cache
+
+# Defaults de produção autossuficientes (sem serviços externos). O instalador
+# passa apenas APP_URL/ASSET_URL/WATCHTOWER_*; o resto assenta nestes.
+ENV APP_ENV=production \
+    APP_DEBUG=false \
+    DB_CONNECTION=sqlite \
+    DB_DATABASE=/app/database/database.sqlite \
+    CACHE_STORE=database \
+    SESSION_DRIVER=database \
+    QUEUE_CONNECTION=database \
+    VAULT_PATH=/app/vault \
+    APP_PORT=8080
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=45s --retries=3 \
+    CMD curl -fsS http://127.0.0.1:8080/up || exit 1
+
+ENTRYPOINT ["/usr/local/bin/deploy-entrypoint.sh"]
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

@@ -52,6 +52,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          # Imagem autossuficiente (nginx + php-fpm + fila, serve :8080) que o
+          # ContentMachine-deploy/install.sh corre num único contentor.
+          target: deploy
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
