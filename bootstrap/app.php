@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Behind Caddy/any reverse proxy: trust X-Forwarded-* so the app knows the
+        // request is HTTPS and generates https:// URLs (no mixed-content on assets).
+        $middleware->trustProxies(at: '*');
+
         // Resolve the active project (per session) and repoint the vault at it.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
     })
