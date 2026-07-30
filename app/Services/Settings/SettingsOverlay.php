@@ -28,6 +28,7 @@ class SettingsOverlay
         'chaves.reddit_client_id' => 'services.reddit.client_id',
         'chaves.reddit_client_secret' => 'services.reddit.client_secret',
         'chaves.kie' => 'services.kie.key',
+        'chaves.blotato' => 'services.blotato.key',
         'modelos.llm_provider' => 'contentmachine.aggregation.llm_provider',
         'modelos.anthropic_model' => 'contentmachine.aggregation.anthropic_model',
         'modelos.openai_model' => 'contentmachine.aggregation.openai_model',

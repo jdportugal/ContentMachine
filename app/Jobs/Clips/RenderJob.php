@@ -3,10 +3,13 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
@@ -24,7 +27,7 @@ class RenderJob implements ShouldQueue
         $this->captureProject();
     }
 
-    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store, EffectLibrary $effects): void
+    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store, EffectLibrary $effects, BackgroundLibrary $backgrounds, BackgroundStore $backgroundStore): void
     {
         $this->activateProject();
         $p = $store->findOrFail($this->projectId);
@@ -32,9 +35,10 @@ class RenderJob implements ShouldQueue
         try {
             $p->update(['status' => ClipRecord::STATUS_RENDERING]);
 
-            // The remotion effects folder is global — sync the active project's
-            // custom SFX before rendering so a clip gets its own project's effects.
+            // The remotion effects + backgrounds folders are global — sync the active
+            // project's custom SFX and code backgrounds before rendering.
             $effects->syncFilesystem();
+            $backgrounds->syncFilesystem();
 
             $dir = $store->storageDir($p->id);
             @mkdir($dir, 0777, true);
@@ -45,6 +49,16 @@ class RenderJob implements ShouldQueue
 
             // Resolve image-reveal layers' image ids to absolute file paths.
             $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
+
+            // Attach each effect's sound (sfx-audio/<slug>.*) to the layers using it.
+            $plan['scenes'] = $this->attachEffectAudio($plan['scenes'], app(EffectStore::class));
+
+            // Resolve the chosen backdrop slug → a concrete component/video the
+            // renderer understands. A vanished/removed background drops to the theme.
+            $plan['background'] = $this->resolveBackground($plan['background'] ?? null, $backgroundStore);
+            if ($plan['background'] === null) {
+                unset($plan['background']);
+            }
 
             $plan['audioSrc'] = $p->audio_path;
 
@@ -92,6 +106,52 @@ class RenderJob implements ShouldQueue
         }
 
         return $music->pathFor($choice) ?? $music->randomPath();
+    }
+
+    /**
+     * Resolve a stored background slug into the concrete shape ClipComposition
+     * expects: code → {kind:code, slug}; video → {kind:video, src:<abs mp4 path>}
+     * (staged into Remotion's public/ by the renderer). A slug that no longer maps
+     * to an active background → null (falls back to the themed backdrop). An already
+     * resolved array (e.g. a hand-edited plan) is passed through.
+     */
+    private function resolveBackground(mixed $background, BackgroundStore $store): ?array
+    {
+        if (is_array($background)) {
+            return $background; // already resolved (raw plan edit)
+        }
+        if (! is_string($background) || $background === '') {
+            return null;
+        }
+
+        $rec = $store->findBySlug($background);
+        if (! $rec || ! $rec->isActive()) {
+            return null;
+        }
+
+        return $rec->kind === BackgroundStore::KIND_VIDEO
+            ? ['kind' => 'video', 'src' => $store->videoPath($rec->id())]
+            : ['kind' => 'code', 'slug' => $rec->slug];
+    }
+
+    /** Set layer.audioSrc to the effect's sound file (by slug), for layers that have one. */
+    private function attachEffectAudio(array $scenes, EffectStore $effects): array
+    {
+        foreach ($scenes as &$scene) {
+            if (empty($scene['layers']) || ! is_array($scene['layers'])) {
+                continue;
+            }
+            foreach ($scene['layers'] as &$layer) {
+                $slug = is_array($layer) ? ($layer['type'] ?? null) : null;
+                if ($slug && ($path = $effects->audioPath($slug))) {
+                    $layer['audioSrc'] = $path;
+                }
+            }
+            unset($layer);
+        }
+        unset($scene);
+
+        return $scenes;
     }
 
     /** Map image-reveal layers' `params.src` (an image id) to the absolute file path. */

@@ -119,6 +119,132 @@ class ClipImagesTest extends TestCase
         $this->assertStringContainsString('foxes run', $l2['params']['generate']);
     }
 
+    public function test_enforce_intro_is_a_no_op_without_intro_effects(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [['start' => 0, 'end' => 2, 'layers' => [['type' => 'card', 'params' => []]]]]];
+
+        $this->assertSame($plan, $filler->enforceIntro($plan, []));
+    }
+
+    public function test_enforce_intro_respects_a_first_scene_that_already_opens_with_an_intro(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => [['type' => 'logo-burst', 'text' => 'Hi', 'params' => []]]],
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => []]]],
+        ]];
+
+        $this->assertSame($plan, $filler->enforceIntro($plan, ['logo-burst', 'seal-stamp']));
+    }
+
+    public function test_enforce_intro_forces_the_opening_scene_to_the_intro_effect(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'punchWord' => 'BOOM', 'layers' => [['type' => 'bar-chart', 'text' => 'Sales', 'params' => ['bars' => []]]]],
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-burst']);
+
+        $this->assertSame([['type' => 'logo-burst', 'text' => 'BOOM', 'params' => []]], $out['scenes'][0]['layers']);
+        $this->assertNull($out['scenes'][0]['punchWord']);
+        $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']); // rest untouched
+    }
+
+    public function test_enforce_intro_shows_full_screen_on_an_overlay_scene(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'present' => 'video', 'layers' => []],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-burst']);
+
+        $this->assertSame('animation', $out['scenes'][0]['present']);
+        $this->assertSame('logo-burst', $out['scenes'][0]['layers'][0]['type']);
+    }
+
+    public function test_enforce_intro_caps_a_long_opening_and_keeps_the_original_content(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 6, 'layers' => [['type' => 'bar-chart', 'text' => 'Sales', 'params' => ['bars' => []]]]],
+            ['start' => 6, 'end' => 8, 'layers' => [['type' => 'card', 'params' => []]]],
+            ['start' => 8, 'end' => 10, 'layers' => [['type' => 'terminal', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-burst']);
+
+        // Intro is a short scene (median of the others = 2s), original content follows.
+        $this->assertCount(4, $out['scenes']);
+        $this->assertSame('logo-burst', $out['scenes'][0]['layers'][0]['type']);
+        $this->assertSame(0.0, (float) $out['scenes'][0]['start']);
+        $this->assertSame(2.0, (float) $out['scenes'][0]['end']);
+        $this->assertSame('bar-chart', $out['scenes'][1]['layers'][0]['type']);
+        $this->assertSame(2.0, (float) $out['scenes'][1]['start']);
+        $this->assertSame(6.0, (float) $out['scenes'][1]['end']);
+    }
+
+    public function test_enforce_intro_caps_a_long_planner_intro_by_sliding_the_next_scene(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 6, 'layers' => [['type' => 'logo-burst', 'text' => 'Hi', 'params' => []]]],
+            ['start' => 6, 'end' => 8, 'layers' => [['type' => 'card', 'params' => []]]],
+            ['start' => 8, 'end' => 10, 'layers' => [['type' => 'terminal', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-burst']);
+
+        // No new scene; the intro is shortened and the next scene starts earlier.
+        $this->assertCount(3, $out['scenes']);
+        $this->assertSame(2.0, (float) $out['scenes'][0]['end']);
+        $this->assertSame(2.0, (float) $out['scenes'][1]['start']);
+        $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
+    }
+
+    public function test_enforce_intro_feeds_a_provided_image_to_a_forced_image_intro(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => [['type' => 'card', 'params' => []]]],
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'terminal', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-assemble'], 'img_logo');
+
+        $this->assertSame('logo-assemble', $out['scenes'][0]['layers'][0]['type']);
+        $this->assertSame('img_logo', $out['scenes'][0]['layers'][0]['params']['src']);
+    }
+
+    public function test_enforce_intro_injects_the_image_when_the_planner_forgot_the_src(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => [['type' => 'logo-assemble', 'params' => []]]], // opened with intro, no src
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-assemble'], 'img_logo');
+
+        $this->assertSame('img_logo', $out['scenes'][0]['layers'][0]['params']['src']);
+    }
+
+    public function test_enforce_intro_keeps_a_src_the_planner_already_chose(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => [['type' => 'logo-assemble', 'params' => ['src' => 'img_chosen']]]],
+            ['start' => 2, 'end' => 4, 'layers' => [['type' => 'card', 'params' => []]]],
+        ]];
+
+        $out = $filler->enforceIntro($plan, ['logo-assemble'], 'img_logo');
+
+        $this->assertSame('img_chosen', $out['scenes'][0]['layers'][0]['params']['src']); // untouched
+    }
+
     public function test_drop_dead_layers_removes_empty_image_and_chart_layers(): void
     {
         $filler = new SceneVisualFiller;
@@ -233,5 +359,108 @@ class ClipImagesTest extends TestCase
         // A recorded 402 makes images unavailable (so the planner plans around it).
         Cache::put('clips.images_unavailable', true, now()->addMinutes(30));
         $this->assertFalse($gen->available());
+    }
+
+    /** The src of the image-reveal layer in a scene, or null. */
+    private function imageSrc(array $scene): ?string
+    {
+        foreach ($scene['layers'] ?? [] as $l) {
+            if (($l['type'] ?? '') === 'image-reveal') {
+                return $l['params']['src'] ?? null;
+            }
+        }
+
+        return null;
+    }
+
+    public function test_provided_image_is_forced_into_the_lowest_value_scene(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => [['type' => 'bar-chart', 'params' => ['bars' => [['label' => 'A', 'value' => 1]]]]]], // data → rank 2
+            ['start' => 2, 'end' => 4, 'punchWord' => 'HELLO', 'layers' => [['type' => 'kinetic-text', 'text' => 'Hello', 'params' => []]]], // ornament → rank 0
+        ]];
+
+        $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a', 'path' => 'x.png']], ['bar-chart', 'kinetic-text', 'image-reveal', 'ambient']);
+
+        // Went to the ornament scene, not the chart.
+        $this->assertSame('img_a', $this->imageSrc($out['scenes'][1]));
+        $this->assertNull($out['scenes'][1]['punchWord']);          // image carries the frame
+        $this->assertSame('bar-chart', $out['scenes'][0]['layers'][0]['type']); // chart untouched
+    }
+
+    public function test_provided_images_go_to_distinct_scenes_by_priority(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'pie-chart', 'params' => ['slices' => [['label' => 'A', 'value' => 1]]]]]], // rank 2
+            ['layers' => [['type' => 'ambient', 'params' => []]]],                                                 // rank 0
+            ['layers' => [['type' => 'image-reveal', 'params' => ['generate' => 'a fox']]]],                       // rank 1 (AI image)
+        ]];
+
+        $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a'], ['id' => 'img_b']], ['pie-chart', 'ambient', 'image-reveal']);
+
+        // Priority order [1 (ambient), 2 (ai-image), 0 (chart)] → a to scene1, b to scene2.
+        $this->assertSame('img_a', $this->imageSrc($out['scenes'][1]));
+        $this->assertSame('img_b', $this->imageSrc($out['scenes'][2]));
+        $this->assertSame('pie-chart', $out['scenes'][0]['layers'][0]['type']); // real data preserved
+        // Ambient kept underneath the image on scene 1.
+        $this->assertSame('ambient', $out['scenes'][1]['layers'][0]['type']);
+    }
+
+    public function test_already_placed_image_is_not_duplicated(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-reveal', 'params' => ['src' => 'img_a']]]],
+            ['layers' => [['type' => 'kinetic-text', 'text' => 'x', 'params' => []]]],
+        ]];
+
+        $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a']], ['image-reveal', 'kinetic-text']);
+
+        $this->assertSame($plan['scenes'], $out['scenes']); // planner already used it — no change
+    }
+
+    public function test_no_enforcement_when_image_reveal_is_disabled(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [['layers' => [['type' => 'kinetic-text', 'text' => 'x', 'params' => []]]]]];
+
+        // image-reveal not in the allowed set → nothing can show an image, so no-op.
+        $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a']], ['kinetic-text', 'ambient']);
+
+        $this->assertSame($plan['scenes'], $out['scenes']);
+    }
+
+    public function test_text_heavy_scene_borrows_time_from_a_following_low_value_scene(): void
+    {
+        $filler = new SceneVisualFiller;
+        $items = ['Install the CLI and authenticate', 'Configure the environment file', 'Run the first migration', 'Deploy to production'];
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 1.5, 'layers' => [['type' => 'bullet-list', 'params' => ['items' => $items]]]], // ~105 chars → needs ~6s
+            ['start' => 1.5, 'end' => 8.0, 'layers' => [['type' => 'ambient', 'params' => []]]],                     // low-value → lends time
+        ]];
+
+        $out = $filler->enforceReadingTime($plan)['scenes'];
+
+        // The bullet-list scene grew toward its reading time; coverage stays contiguous.
+        $this->assertGreaterThanOrEqual(4.5, $out[0]['end'] - $out[0]['start']);
+        $this->assertSame((float) $out[0]['end'], (float) $out[1]['start']); // no gap
+        $this->assertSame(8.0, (float) $out[1]['end']);                      // total unchanged
+    }
+
+    public function test_reading_time_never_steals_from_a_real_visual(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 1.5, 'layers' => [['type' => 'bullet-list', 'params' => ['items' => ['Install the CLI and authenticate now', 'Configure the environment file fully']]]]],
+            ['start' => 1.5, 'end' => 6.0, 'layers' => [['type' => 'bar-chart', 'params' => ['bars' => [['label' => 'A', 'value' => 1]]]]]], // real visual → protected
+        ]];
+
+        $out = $filler->enforceReadingTime($plan)['scenes'];
+
+        // The chart keeps its full window — nothing borrowed.
+        $this->assertSame(1.5, (float) $out[0]['end']);
+        $this->assertSame(1.5, (float) $out[1]['start']);
     }
 }

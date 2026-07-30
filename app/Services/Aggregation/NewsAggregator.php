@@ -2,8 +2,11 @@
 
 namespace App\Services\Aggregation;
 
+use App\Services\Monitoring\ApifyClient;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
+use App\Services\Vault\VaultNote;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -13,13 +16,6 @@ use Illuminate\Support\Str;
  */
 class NewsAggregator
 {
-    /**
-     * Platforms that yt-dlp collects reliably. Instagram/TikTok/LinkedIn
-     * are «marked as broken» in yt-dlp (they need Apify) — they are skipped with
-     * a warning until that integration exists.
-     */
-    private const SUPORTADAS = ['youtube'];
-
     public function __construct(
         private readonly VaultContract $vault,
         private readonly SettingsRepository $definicoes,
@@ -27,6 +23,7 @@ class NewsAggregator
         private readonly TranscriptParser $parser,
         private readonly TopicsBuilder $topicos,
         private readonly LlmClient $llm,
+        private readonly ApifyClient $apify,
     ) {}
 
     /**
@@ -44,6 +41,7 @@ class NewsAggregator
         $todos = [];
         $porPlataforma = [];
         $avisos = [];
+        $arquivados = $this->idsArquivadosPorPlataforma($this->vault->all('noticias'));
 
         foreach ($plataformas as $plataforma) {
             $canais = array_values(array_filter((array) ($canaisConfig[$plataforma] ?? [])));
@@ -51,19 +49,24 @@ class NewsAggregator
                 continue;
             }
 
-            // Skip platforms that yt-dlp cannot collect (avoids calls
-            // that fail/hang and blow the request timeout).
-            if (! in_array($plataforma, self::SUPORTADAS, true)) {
+            $driver = $this->driver($plataforma);
+
+            // Non-YouTube networks need Apify (actor + token). Skip cleanly with a
+            // warning when it is not configured, instead of failing the run.
+            if ($driver instanceof ApifyDriver && ! $driver->disponivel()) {
                 $porPlataforma[$plataforma] = 0;
                 $avisos[] = $this->avisoIndisponivel($plataforma);
 
                 continue;
             }
 
-            $itens = $this->driver($plataforma)->collect($canais, $limite);
+            $jaArquivados = $arquivados[$plataforma] ?? [];
+            $itens = $driver->collect($canais, $limite, $jaArquivados);
             $porPlataforma[$plataforma] = count($itens);
 
-            if ($itens === []) {
+            // Only warn when NOTHING has ever been collected for this platform;
+            // an empty result with prior archives just means "nothing new".
+            if ($itens === [] && $jaArquivados === []) {
                 $avisos[] = $this->avisoIndisponivel($plataforma);
             }
 
@@ -84,10 +87,38 @@ class NewsAggregator
         ];
     }
 
-    /** Creates the driver suited to the platform. All use yt-dlp at the moment. */
+    /** Creates the driver suited to the platform: yt-dlp for YouTube, Apify for the rest. */
     private function driver(string $plataforma): AggregatorDriver
     {
-        return new YtDlpDriver($this->runner, $this->parser, $plataforma);
+        return $plataforma === 'youtube'
+            ? new YtDlpDriver($this->runner, $this->parser, $plataforma)
+            : new ApifyDriver($this->apify, $plataforma);
+    }
+
+    /**
+     * Slugged item ids already archived, grouped by platform, so drivers can skip
+     * re-fetching them. The id is the note filename minus the "{plataforma}-" prefix
+     * (see AggregatedItem::caminho()).
+     *
+     * @param  Collection<int,VaultNote>  $notas
+     * @return array<string,array<string,bool>>
+     */
+    private function idsArquivadosPorPlataforma(Collection $notas): array
+    {
+        $map = [];
+
+        foreach ($notas as $nota) {
+            if ($nota->get('tipo') !== 'item_agregado') {
+                continue;
+            }
+            $plataforma = (string) $nota->get('plataforma');
+            $id = Str::after(pathinfo($nota->path, PATHINFO_FILENAME), $plataforma.'-');
+            if ($id !== '') {
+                $map[$plataforma][$id] = true;
+            }
+        }
+
+        return $map;
     }
 
     private function arquivarItem(AggregatedItem $item): void
@@ -202,7 +233,7 @@ class NewsAggregator
     private function avisoIndisponivel(string $plataforma): string
     {
         return match ($plataforma) {
-            'instagram', 'tiktok', 'linkedin' => ucfirst($plataforma).': skipped — for now only YouTube is collected (the other platforms need Apify).',
+            'instagram', 'tiktok', 'linkedin' => ucfirst($plataforma).': no items collected — check the Apify actor/token in Settings and the profile URLs.',
             default => ucfirst($plataforma).': no items collected (channel unreachable or no recent posts).',
         };
     }

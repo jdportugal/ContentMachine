@@ -1,4 +1,4 @@
-<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'sfx' && ($this->sfxBusy || $this->showreelBusy))) wire:poll.3s @endif>
+<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'backgrounds' && ($this->backgroundsBusy || $this->backgroundReelBusy))) wire:poll.3s @endif>
     @php
         $estados = [
             'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
@@ -27,9 +27,13 @@
         <div class="flex items-center justify-between mb-6">
             <div class="eyebrow">Clips generated · {{ $this->projects->count() }}</div>
             <div class="flex items-center gap-3">
-                <button type="button" wire:click="abrirSfx"
+                <a href="{{ route('clips-animados.sfx') }}"
                         class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
                     ✷ SFX
+                </a>
+                <button type="button" wire:click="abrirBackgrounds"
+                        class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
+                    ◆ Backgrounds
                 </button>
                 <button type="button" wire:click="novoClip"
                         class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
@@ -103,6 +107,11 @@
                                     @endif
                                     @if ($project->status === 'done' && $project->output_path)
                                         <a href="{{ route('clips-animados.media', ['id' => $project->id, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
+                                        @if ($project->finished)
+                                            <span class="text-good">✓ in Finished</span>
+                                        @else
+                                            <button type="button" wire:click="promover('{{ $project->id }}')" class="text-teal hover:underline">→ send to Finished</button>
+                                        @endif
                                     @endif
                                     <button type="button" wire:click="apagar('{{ $project->id }}')"
                                             wire:confirm="Delete this clip and its files? This action is permanent."
@@ -197,6 +206,8 @@
                         @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.backdrop-picker')
+
                     @include('livewire.partials.musica-picker')
 
                     <div class="flex items-center gap-3 pt-2">
@@ -244,6 +255,8 @@
                         @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.backdrop-picker')
+
                     @include('livewire.partials.musica-picker')
 
                     <div class="flex items-center gap-3 pt-2">
@@ -261,40 +274,7 @@
         @if ($createType !== null)
             <x-panel class="mt-6" eyebrow="Optional" title="Images" glyph="▣">
                 <p class="text-ink-soft text-sm mb-4">Upload images and describe what they show. The AI uses them animated in the scenes where they fit.</p>
-
-                @if (!empty($images))
-                    <div class="space-y-2 mb-4">
-                        @foreach ($images as $i => $img)
-                            <div class="flex items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="img-{{ $i }}">
-                                <img src="{{ route('clips-animados.upload', basename($img['path'])) }}"
-                                     onerror="this.style.visibility='hidden'"
-                                     class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
-                                <span class="flex-1 min-w-0 text-sm text-ink truncate">{{ $img['description'] }}</span>
-                                <button type="button" wire:click="removerImagem({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70">✕</button>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div class="grid grid-cols-12 gap-2 items-end">
-                    <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">file</label>
-                        <input type="file" wire:model="newImage" accept="image/*"
-                               class="block w-full text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
-                        <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">uploading…</div>
-                    </div>
-                    <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">description</label>
-                        <input type="text" wire:model="newImageDesc" placeholder="e.g.: company logo"
-                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
-                    </div>
-                    <div class="col-span-2">
-                        <button type="button" wire:click="adicionarImagem"
-                                class="w-full font-mono text-[0.62rem] px-3 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">+ add</button>
-                    </div>
-                </div>
-                @error('newImage') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
-                @error('newImageDesc') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                @include('livewire.partials.clip-images')
             </x-panel>
         @endif
     @endif
@@ -322,6 +302,11 @@
                 </ul>
             </div>
         @endif
+
+        <x-panel class="mb-6" eyebrow="Uploaded" title="Images" glyph="▣">
+            <p class="text-ink-soft text-sm mb-4">Replace a picture (keeps its place in the video), or add/remove uploads. Changes re-render the current plan — a replaced image shows immediately; a newly added one only appears if a scene references it.</p>
+            @include('livewire.partials.clip-images')
+        </x-panel>
 
         @if ($editMode === 'json')
             <x-panel eyebrow="Edit clip" title="Remotion plan (JSON)" glyph="⌘">
@@ -426,128 +411,147 @@
     @endif
 
     {{-- ============================================================ --}}
-    {{-- SFX STUDIO                                                   --}}
+    {{-- BACKGROUNDS STUDIO                                          --}}
     {{-- ============================================================ --}}
-    @if ($view === 'sfx')
+    @if ($view === 'backgrounds')
         <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
-        <x-panel eyebrow="Effects library" title="SFX" glyph="✷">
+        <x-panel eyebrow="Backgrounds library" title="Backgrounds" glyph="◆">
             <p class="text-ink-soft text-sm mb-5">
-                The motion vocabulary the renderer can already produce — plus your own. Describe a new effect and
-                the AI writes a Remotion component that follows the design system; once it renders, the planner can
-                use it on any clip.
+                The full-screen backdrop a clip renders behind every scene. Generate an animated one from a
+                description (the AI writes a Remotion component that follows the design system and loops for any
+                length), or upload a video. Enabled backgrounds can be picked automatically by the clip generator
+                or chosen by hand when you create a clip.
             </p>
 
-            <form wire:submit="gerarSfx" class="space-y-3 mb-2">
-                <label class="eyebrow block">Describe a new effect</label>
-                <textarea wire:model="sfxPrompt" rows="3" placeholder="e.g. a glitch flicker that snaps the headline into place, with a quick chromatic-aberration split"
+            <form wire:submit="gerarBackground" class="space-y-3 mb-6">
+                <label class="eyebrow block">Generate an animated background</label>
+                <textarea wire:model="bgPrompt" rows="3" placeholder="e.g. a slow aurora of teal and gold light drifting over deep ink, with faint floating particles"
                           class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
-                @error('sfxPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                @error('bgPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                 <div class="flex items-center gap-3">
-                    <button type="submit"
-                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
-                            wire:loading.attr="disabled" wire:target="gerarSfx">
-                        ✦ Create effect
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
+                            wire:loading.attr="disabled" wire:target="gerarBackground">
+                        ✦ Create background
                     </button>
-                    <span class="font-mono text-[0.6rem] text-ink-faint">Colours &amp; fonts are locked to the design system.</span>
+                    <span class="font-mono text-[0.6rem] text-ink-faint">Colours are locked to the design system.</span>
                 </div>
+            </form>
+
+            <form wire:submit="uploadBackground" class="space-y-3 border-t border-ink-soft/15 pt-5">
+                <label class="eyebrow block">…or upload a video background (mp4 / mov)</label>
+                <input type="text" wire:model="bgVideoName" placeholder="Name (e.g. City timelapse)"
+                       class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none" />
+                @error('bgVideoName') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                <input type="file" wire:model="bgVideo" accept="video/mp4,video/quicktime"
+                       class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                <div wire:loading wire:target="bgVideo" class="font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                @error('bgVideo') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
+                        wire:loading.attr="disabled" wire:target="bgVideo,uploadBackground">
+                    ✦ Add video background
+                </button>
             </form>
         </x-panel>
 
-        {{-- Showreel: one video cycling through every effect, name centered --}}
-        <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-6">
-            <div class="flex items-center justify-between gap-4 mb-3">
-                <div>
-                    <div class="eyebrow">Showreel</div>
-                    <p class="text-ink-soft text-sm mt-1">One video that plays every effect in turn, each with its name in the middle.</p>
+        {{-- Reel: one video cycling through every background, name centered --}}
+        @if ($this->backgrounds->isNotEmpty())
+            <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-6">
+                <div class="flex items-center justify-between gap-4 mb-3">
+                    <div>
+                        <div class="eyebrow">Preview all</div>
+                        <p class="text-ink-soft text-sm mt-1">One video that plays every background in turn, each with its name in the middle.</p>
+                    </div>
+                    <button type="button" wire:click="gerarBackgroundReel" wire:loading.attr="disabled" wire:target="gerarBackgroundReel"
+                            @if ($this->backgroundReelBusy) disabled @endif
+                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
+                        @if ($this->backgroundReelBusy) rendering… @elseif ($this->backgroundReelReady) ↻ Rebuild @else ✦ Build preview @endif
+                    </button>
                 </div>
-                <button type="button" wire:click="gerarShowreel" wire:loading.attr="disabled" wire:target="gerarShowreel"
-                        @if ($this->showreelBusy) disabled @endif
-                        class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
-                    @if ($this->showreelBusy) rendering… @elseif ($this->showreelReady) ↻ Rebuild @else ✦ Build showreel @endif
-                </button>
+                @if ($this->backgroundReelBusy)
+                    <p class="font-mono text-[0.6rem] text-ink-faint">Rendering the reel — this can take a minute. It refreshes automatically.</p>
+                @elseif ($this->backgroundReelReady)
+                    <video class="rounded-sm border border-ink-soft/15 bg-black w-full max-h-[70vh]" controls preload="metadata"
+                           src="{{ route('clips-animados.background-reel') }}?v={{ now()->timestamp }}"></video>
+                @endif
             </div>
-            @if ($this->showreelBusy)
-                <p class="font-mono text-[0.6rem] text-ink-faint">Rendering the reel — this can take a minute. It refreshes automatically.</p>
-            @elseif ($this->showreelReady)
-                <video class="rounded-sm border border-ink-soft/15 bg-black w-full max-h-[70vh]" controls preload="metadata"
-                       src="{{ route('clips-animados.showreel') }}?v={{ now()->timestamp }}"></video>
-            @endif
-        </div>
+        @endif
 
-        {{-- Refine panel: a custom effect OR a built-in override --}}
-        @if ($editingSfxId || $sfxOverrideSlug)
+        {{-- Refine panel for a code background --}}
+        @if ($editingBgId)
             <div class="foxing bg-vellum/60 border border-teal/30 rounded-sm p-4 mt-6">
-                <form wire:submit="guardarSfxEdicao" class="space-y-3">
-                    <label class="eyebrow block">{{ $sfxOverrideSlug ? 'Customize built-in · '.$sfxOverrideSlug : 'Refine this effect' }}</label>
-                    <textarea wire:model="sfxEditPrompt" rows="3"
-                              placeholder="{{ $sfxOverrideSlug ? 'Describe how this built-in effect should look and behave…' : '' }}"
+                <form wire:submit="guardarBackgroundEdicao" class="space-y-3">
+                    <label class="eyebrow block">Refine this background</label>
+                    <textarea wire:model="bgEditPrompt" rows="3"
                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
-                    @error('sfxEditPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                    @error('bgEditPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                     <div class="flex items-center gap-3">
-                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
-                            ✦ {{ $sfxOverrideSlug ? 'Create override' : 'Regenerate' }}
-                        </button>
-                        <button type="button" wire:click="cancelarSfxEdicao" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
-                        <span class="font-mono text-[0.6rem] text-ink-faint">{{ $sfxOverrideSlug ? 'Creates a custom version that replaces the built-in for this project.' : 'Same slug; the live version stays until the new one renders.' }}</span>
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">✦ Regenerate</button>
+                        <button type="button" wire:click="cancelarBackgroundEdicao" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
+                        <span class="font-mono text-[0.6rem] text-ink-faint">Same slug; the live version stays until the new one renders.</span>
                     </div>
                 </form>
             </div>
         @endif
 
-        {{-- Custom (generated) effects --}}
-        @if ($this->effects->isNotEmpty())
+        {{-- Backgrounds grid --}}
+        @if ($this->backgrounds->isNotEmpty())
             <div class="mt-8">
                 <div class="flex items-baseline justify-between mb-4 gap-3">
-                    <div class="eyebrow">Your effects · {{ $this->effects->count() }}</div>
-                    <span class="font-mono text-[0.55rem] text-ink-faint">● on = allowed in generated videos · ○ off = kept but not used</span>
+                    <div class="eyebrow">Your backgrounds · {{ $this->backgrounds->count() }}</div>
+                    <span class="font-mono text-[0.55rem] text-ink-faint">● on = pickable for clips · ○ off = kept but not used</span>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    @foreach ($this->effects as $effect)
-                        <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition {{ $effect->status === 'active' && ! $effect->enabled ? 'opacity-60' : '' }}" wire:key="sfx-{{ $effect->id }}">
+                    @foreach ($this->backgrounds as $bg)
+                        <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition {{ $bg->status === 'active' && ! $bg->enabled ? 'opacity-60' : '' }}" wire:key="bg-{{ $bg->id }}">
                             <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
-                                @if (in_array($effect->status, ['active', 'updating'], true) && in_array($effect->slug, $sfxReady, true))
-                                    <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $effect->slug) }}" autoplay loop muted playsinline></video>
-                                    @if ($effect->status === 'updating')
+                                @if (in_array($bg->id, $bgReady, true) && in_array($bg->status, ['active', 'updating'], true))
+                                    <video class="w-full h-full object-cover" src="{{ route('clips-animados.background-preview', $bg->id) }}" autoplay loop muted playsinline></video>
+                                    @if ($bg->status === 'updating')
                                         <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
                                             <p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p>
                                         </div>
                                     @endif
-                                @elseif ($effect->status === 'failed')
+                                    @if ($bg->kind === 'video')
+                                        <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-ink/40 text-vellum border border-vellum/20">video</div>
+                                    @endif
+                                @elseif ($bg->status === 'failed')
                                     <div class="p-2 text-center">
                                         <div class="text-bad text-lg">✕</div>
-                                        <p class="font-mono text-[0.52rem] text-bad/90 mt-1 line-clamp-4">{{ \Illuminate\Support\Str::limit($effect->error, 120) }}</p>
+                                        <p class="font-mono text-[0.52rem] text-bad/90 mt-1 line-clamp-4">{{ \Illuminate\Support\Str::limit($bg->error, 120) }}</p>
                                     </div>
                                 @else
                                     <div class="text-center">
                                         <div class="h-1 w-16 mx-auto bg-surface/40 rounded-full overflow-hidden">
                                             <div class="h-full bg-teal/60 animate-pulse w-2/3"></div>
                                         </div>
-                                        <p class="font-mono text-[0.52rem] text-ink-faint mt-2">{{ $effect->status === 'updating' ? 'Updating…' : 'Generating…' }}</p>
+                                        <p class="font-mono text-[0.52rem] text-ink-faint mt-2">{{ $bg->status === 'updating' ? 'Updating…' : 'Generating…' }}</p>
                                     </div>
                                 @endif
                             </div>
                             <div class="flex items-start justify-between gap-1 mt-2">
                                 <div class="min-w-0">
-                                    <p class="font-display text-sm text-ink truncate">{{ $effect->display_name }}</p>
-                                    <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ in_array($effect->status, ['active', 'updating'], true) ? $effect->slug : $effect->status }}</p>
-                                    @if ($effect->status === 'active' && $effect->error)
-                                        <p class="font-mono text-[0.5rem] text-bad/80 truncate" title="{{ $effect->error }}">⚠ {{ $effect->error }}</p>
+                                    <p class="font-display text-sm text-ink truncate">{{ $bg->display_name }}</p>
+                                    <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ in_array($bg->status, ['active', 'updating'], true) ? $bg->slug : $bg->status }}</p>
+                                    @if ($bg->status === 'active' && $bg->error)
+                                        <p class="font-mono text-[0.5rem] text-bad/80 truncate" title="{{ $bg->error }}">⚠ {{ $bg->error }}</p>
                                     @endif
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
-                                    @if ($effect->status === 'active')
-                                        <button type="button" wire:click="alternarSfx('{{ $effect->id }}')"
-                                                title="{{ $effect->enabled ? 'Allowed in generated videos — click to disallow' : 'Disallowed — click to allow' }}"
-                                                class="font-mono text-[0.62rem] px-2 py-1 rounded-sm border {{ $effect->enabled ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
-                                            {{ $effect->enabled ? '● on' : '○ off' }}
+                                    @if ($bg->status === 'active')
+                                        <button type="button" wire:click="alternarBackground('{{ $bg->id }}')"
+                                                title="{{ $bg->enabled ? 'Pickable for clips — click to disable' : 'Disabled — click to enable' }}"
+                                                class="font-mono text-[0.62rem] px-2 py-1 rounded-sm border {{ $bg->enabled ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
+                                            {{ $bg->enabled ? '● on' : '○ off' }}
                                         </button>
-                                        <button type="button" wire:click="editarSfx('{{ $effect->id }}')" title="Refine this effect"
-                                                class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
+                                        @if ($bg->kind !== 'video')
+                                            <button type="button" wire:click="editarBackground('{{ $bg->id }}')" title="Refine this background"
+                                                    class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
+                                        @endif
                                     @endif
-                                    <button type="button" wire:click="apagarSfx('{{ $effect->id }}')"
-                                            wire:confirm="Delete this effect? Clips already rendered keep their video." title="Delete this effect"
+                                    <button type="button" wire:click="apagarBackground('{{ $bg->id }}')"
+                                            wire:confirm="Delete this background? Clips already rendered keep their video." title="Delete this background"
                                             class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕</button>
                                 </div>
                             </div>
@@ -555,62 +559,9 @@
                     @endforeach
                 </div>
             </div>
+        @else
+            <x-empty-state glyph="◇" title="No backgrounds yet" note="Generate an animated backdrop or upload a video to get started." />
         @endif
-
-        {{-- Built-in effects --}}
-        <div class="mt-8">
-            <div class="flex items-baseline justify-between mb-4 gap-3">
-                <div class="eyebrow">Built-in · {{ count($builtins) }}</div>
-                <span class="font-mono text-[0.55rem] text-ink-faint">disallow any you don't want the planner to use</span>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                @foreach ($builtins as $b)
-                    <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition {{ $b['allowed'] ? '' : 'opacity-60' }}" wire:key="builtin-{{ $b['slug'] }}">
-                        <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
-                            @if (in_array($b['slug'], $sfxReady, true))
-                                <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $b['slug']) }}" autoplay loop muted playsinline></video>
-                            @else
-                                <div class="text-center">
-                                    <div class="h-1 w-16 mx-auto bg-surface/40 rounded-full overflow-hidden">
-                                        <div class="h-full bg-ink-soft/40 animate-pulse w-1/2"></div>
-                                    </div>
-                                    <p class="font-mono text-[0.52rem] text-ink-faint mt-2">Rendering…</p>
-                                </div>
-                            @endif
-                            @if ($b['override'] === 'active')
-                                <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">custom</div>
-                            @elseif (in_array($b['override'], ['pending', 'updating'], true))
-                                <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
-                                    <p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="flex items-start justify-between gap-1 mt-2">
-                            <div class="min-w-0">
-                                <p class="font-display text-sm text-ink truncate">{{ $b['label'] }}</p>
-                                <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ $b['slug'] }}</p>
-                            </div>
-                            <div class="flex items-center gap-1 shrink-0">
-                                <button type="button" wire:click="alternarBuiltin('{{ $b['slug'] }}')"
-                                        title="{{ $b['allowed'] ? 'Allowed in generated videos — click to disallow' : 'Disallowed — click to allow' }}"
-                                        class="font-mono text-[0.6rem] px-1.5 py-1 rounded-sm border {{ $b['allowed'] ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
-                                    {{ $b['allowed'] ? '● on' : '○ off' }}
-                                </button>
-                                <button type="button" wire:click="editarBuiltin('{{ $b['slug'] }}')"
-                                        title="{{ $b['override'] ? 'Edit your custom version' : 'Customize this built-in' }}"
-                                        class="text-sm leading-none px-1.5 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
-                                @if ($b['override'])
-                                    <button type="button" wire:click="resetBuiltin('{{ $b['slug'] }}')"
-                                            wire:confirm="Reset «{{ $b['slug'] }}» to the default built-in? Your custom version is deleted."
-                                            title="Reset to the default built-in"
-                                            class="text-sm leading-none px-1.5 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">↺</button>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
     @endif
 
     @script

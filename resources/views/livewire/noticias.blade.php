@@ -12,11 +12,26 @@
                 Scans the channels configured in <a href="{{ route('definicoes') }}" class="text-teal hover:underline">Settings</a>
                 (YouTube, TikTok, Instagram, LinkedIn) and archives each item in the vault <em>by day</em>, with a transcript and a list of topics.
             </p>
-            <button wire:click="agregarAgora" @disabled($aAgregar)
+            <button wire:click="agregarAgora" @disabled($aAgregar || empty($plataformasSelecionadas))
                     class="shrink-0 bg-teal text-papyrus font-display text-lg px-6 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
                 {{ $aAgregar ? 'Scanning channels…' : 'Aggregate now' }}
             </button>
         </div>
+
+        {{-- Platform selector: choose which channels to collect from. --}}
+        @if (!empty($plataformasDisponiveis))
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="eyebrow shrink-0">Collect from:</span>
+                @foreach ($plataformasDisponiveis as $p)
+                    @php $pm = config('contentmachine.plataformas_meta.'.$p, ['label' => ucfirst($p), 'glifo' => '•', 'cor' => '#8AE0FF']); @endphp
+                    <button type="button" wire:click="alternarPlataforma('{{ $p }}')" @disabled($aAgregar)
+                            class="font-mono text-xs px-3 py-1 rounded-sm border transition disabled:opacity-50
+                                   {{ in_array($p, $plataformasSelecionadas, true) ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
+                        <span style="color: {{ $pm['cor'] }}">{{ $pm['glifo'] }}</span> {{ $pm['label'] }}
+                    </button>
+                @endforeach
+            </div>
+        @endif
         @if ($aAgregar)
             {{-- Poll the worker until the collection finishes. --}}
             <div wire:poll.2s="verificarAgregacao" class="mt-2 font-mono text-[0.6rem] text-ink-faint">
@@ -43,14 +58,27 @@
         {{-- Day selector --}}
         @if ($dias->isNotEmpty())
             <x-fleuron glyph="☙" />
-            <div class="flex flex-wrap gap-2 mb-4">
-                @foreach ($dias as $d)
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                @foreach ($dias->take(3) as $d)
                     <button wire:click="focarDia('{{ $d }}')"
                             class="font-mono text-xs px-3 py-1 rounded-sm border transition
                                    {{ $d === $diaAtivo ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
                         {{ \Illuminate\Support\Carbon::parse($d)->translatedFormat('d M Y') }}
                     </button>
                 @endforeach
+                @php $diasAntigos = $dias->slice(3)->values(); @endphp
+                @if ($diasAntigos->isNotEmpty())
+                    <select wire:change="focarDia($event.target.value)"
+                            class="font-mono text-xs px-3 py-1 rounded-sm border bg-papyrus/60 focus:border-teal focus:outline-none
+                                   {{ $diasAntigos->contains($diaAtivo) ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft' }}">
+                        <option value="" disabled {{ $diasAntigos->contains($diaAtivo) ? '' : 'selected' }}>Older days…</option>
+                        @foreach ($diasAntigos as $d)
+                            <option value="{{ $d }}" {{ $d === $diaAtivo ? 'selected' : '' }}>
+                                {{ \Illuminate\Support\Carbon::parse($d)->translatedFormat('d M Y') }}
+                            </option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
 
             <div class="grid lg:grid-cols-3 gap-6">
@@ -138,10 +166,13 @@
                 <input type="date" wire:model="dataRelatorio"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
 
-                <label class="mt-3 flex items-start gap-2 cursor-pointer text-ink-soft hover:text-ink text-sm">
-                    <input type="checkbox" wire:model="recolherPrimeiro" class="accent-teal w-4 h-4 mt-0.5">
-                    <span>Collect today's videos first <span class="text-ink-faint">(scans the channels before writing)</span></span>
-                </label>
+                <label class="eyebrow block mb-1.5 mt-3">Language</label>
+                <select wire:model="idiomaRelatorio"
+                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    @foreach (['English', 'European Portuguese', 'Spanish', 'French', 'German'] as $lang)
+                        <option value="{{ $lang }}">{{ $lang }}</option>
+                    @endforeach
+                </select>
 
                 <button wire:click="criarRelatorio" @disabled($aGerar)
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">

@@ -34,6 +34,6 @@ class OpenAiAnimationPlanner implements AnimationPlanner
         $content = $response['choices'][0]['message']['content'] ?? '{}';
         $decoded = $this->extractJson($content);
 
-        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? []);
+        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? [], is_string($decoded['background'] ?? null) ? $decoded['background'] : null);
     }
 }

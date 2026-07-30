@@ -11,7 +11,8 @@ interface AggregatorDriver
      * Collects the recent items from a list of channels/URLs.
      *
      * @param  array<int,string>  $canais
+     * @param  array<string,bool>  $idsArquivados  slugged item ids already in the vault, to skip re-fetching
      * @return array<int,AggregatedItem>
      */
-    public function collect(array $canais, int $limitePorCanal): array;
+    public function collect(array $canais, int $limitePorCanal, array $idsArquivados = []): array;
 }

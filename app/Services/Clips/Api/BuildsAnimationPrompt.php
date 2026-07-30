@@ -2,6 +2,7 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\EffectLibrary;
 use App\Services\DesignSystem\DesignSystemRepository;
 
@@ -35,7 +36,14 @@ trait BuildsAnimationPrompt
                 .json_encode($tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             : '';
         $customBlock = app(EffectLibrary::class)->promptBlock();
+        $backgroundBlock = app(BackgroundLibrary::class)->promptBlock();
         $layers = implode(', ', $this->allLayerTypes());
+        // Intro effects: the FIRST scene should open with one of these (if any are marked).
+        $introSlugs = app(EffectLibrary::class)->introSlugs();
+        $introBlock = empty($introSlugs) ? '' : "\n# OPENING (INTRO)\n"
+            .'The FIRST scene MUST open the video with one of these INTRO effects as its main layer '
+            .'(type = one of them), chosen to fit the topic: ['.implode(', ', $introSlugs).']. '
+            ."Give it a short hook title, keep it brief, then move on to the content.\n";
         $allowed = ! empty($allowedPresents) ? array_values(array_intersect($this->presents, $allowedPresents)) : $this->presents;
         $allowedLine = 'USE ONLY these "present" values: ['.implode(', ', $allowed).'] — never others.';
         $rule = $overlay
@@ -102,6 +110,7 @@ Times in seconds (float). No markdown or explanations — JSON only.
 
 # LANGUAGE
 Write ALL visible text (punchWord, text and labels in params) in the SAME language as the transcript (given below). Do not translate.
+{$introBlock}
 
 # CLIP TYPE — CLASSIFY FIRST (like a professional editor)
 Before planning, infer the TYPE of clip from the transcript and adapt the visual vocabulary.
@@ -177,6 +186,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 {$designBlock}
 {$tokensBlock}
 {$customBlock}
+{$backgroundBlock}
 
 === STYLE MANUAL (estilo-animacao.md) ===
 {$style}
@@ -215,9 +225,9 @@ PROMPT;
             .'scene RELEVANT to what is said — use the RESEARCH and the IMAGES only when they reinforce the spoken point.';
     }
 
-    protected function envelope(array $transcript, string $mode, array $options, array $scenes): array
+    protected function envelope(array $transcript, string $mode, array $options, array $scenes, ?string $backgroundPick = null): array
     {
-        return [
+        $env = [
             'duration' => (float) ($transcript['duration'] ?? 0.0),
             'mode' => $mode,
             'width' => $options['width'] ?? config('contentmachine.clips.width'),
@@ -226,6 +236,13 @@ PROMPT;
             'transparent' => $mode === 'sparse',
             'scenes' => $this->sanitizeScenes($scenes),
         ];
+        // The planner's raw background suggestion — PlanAnimationsJob resolves it
+        // against the clip's manual choice into the final `background` slug.
+        if (is_string($backgroundPick) && $backgroundPick !== '') {
+            $env['background_pick'] = $backgroundPick;
+        }
+
+        return $env;
     }
 
     protected function sanitizeScenes(array $scenes): array

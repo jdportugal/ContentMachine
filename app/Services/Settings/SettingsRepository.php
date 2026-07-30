@@ -64,6 +64,16 @@ class SettingsRepository
                 'reddit_client_id' => '',
                 'reddit_client_secret' => '',
                 'kie' => '',
+                'blotato' => '',
+            ],
+            // Blotato connected-account ids per platform (copied from the Blotato
+            // dashboard). Empty → that platform can't be posted to.
+            'blotato' => [
+                'youtube' => '',
+                'instagram' => '',
+                'tiktok' => '',
+                'linkedin' => '',
+                'threads' => '',
             ],
             // Service/model config. Empty → falls back to the .env/config default.
             'modelos' => [

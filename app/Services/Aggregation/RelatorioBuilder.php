@@ -23,17 +23,19 @@ class RelatorioBuilder
     /**
      * @return array<string,mixed>
      */
-    public function gerar(Carbon $inicio, Carbon $fim, string $modo): array
+    /** @param  string  $idioma  Output language for the write-up (e.g. 'English', 'European Portuguese'). */
+    public function gerar(Carbon $inicio, Carbon $fim, string $modo, string $idioma = 'English'): array
     {
         $itens = $this->itensDoPeriodo($inicio, $fim);
         $resultadoTopicos = $this->topicos->build($itens);
         $porPlataforma = $this->contarPorPlataforma($itens);
 
+        $rotulo = str_contains(strtolower($idioma), 'portug') ? 'Relatório' : 'Report';
         $titulo = $modo === 'semana'
-            ? 'Relatório — semana de '.$inicio->translatedFormat('d \d\e M').' a '.$fim->translatedFormat('d \d\e M \d\e Y')
-            : 'Relatório — '.$inicio->translatedFormat('d \d\e F \d\e Y');
+            ? $rotulo.' — '.$inicio->translatedFormat('d M').' – '.$fim->translatedFormat('d M Y')
+            : $rotulo.' — '.$inicio->translatedFormat('d M Y');
 
-        [$redacao, $redacaoMetodo] = $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim);
+        [$redacao, $redacaoMetodo] = $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim, $idioma);
 
         return [
             'titulo' => $titulo,
@@ -234,14 +236,14 @@ class RelatorioBuilder
      * @param  array<int,AggregatedItem>  $itens
      * @param  array<int,array<string,mixed>>  $topicos
      */
-    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): array
+    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim, string $idioma): array
     {
         if ($itens === []) {
-            return ['Não há conteúdo agregado neste período para redigir. Corra a recolha e tente de novo.', 'vazio'];
+            return ['No content aggregated in this period. Run the collection and try again.', 'vazio'];
         }
 
         if ($this->llm->disponivel()) {
-            $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim);
+            $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim, $idioma);
             if ($texto !== null && $texto !== '') {
                 return [$texto, $this->llm->fornecedorAtivo() ?? 'llm'];
             }
@@ -251,10 +253,10 @@ class RelatorioBuilder
     }
 
     /** @param array<int,AggregatedItem> $itens */
-    private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
+    private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim, string $idioma): ?string
     {
         $material = collect($itens)->take(20)->map(fn (AggregatedItem $i) => [
-            'subject' => $i->titulo, // topic hint — must NOT be mentioned in the script
+            'subject' => $i->titulo, // topic hint — must NOT be mentioned in the bit
             'transcript' => Str::limit(trim($i->transcricao), 3500, ''),
             'sources' => array_values(array_slice($i->fontes, 0, 6)),
         ])->all();
@@ -262,29 +264,30 @@ class RelatorioBuilder
         $periodo = $modo === 'semana'
             ? 'the last 7 days (until '.$fim->translatedFormat('d/m/Y').')'
             : 'the day '.$inicio->translatedFormat('d/m/Y');
-        $gancho = $modo === 'semana' ? 'Esta semana em IA…' : 'Hoje em IA…';
 
-        $prompt = 'You are the scriptwriter of an artificial intelligence news round-up video (in the style of «This Week in AI»). '
+        $prompt = 'You are an AI-news editor. '
             ."From the material below — transcripts of creators' videos and the sources they cite, for {$periodo} — "
-            ."write the SCRIPT to be NARRATED in a video.\n\n"
-            ."TONE AND STYLE:\n"
-            .'- Conversational, engaging and enthusiastic, like a creator explaining the news to an interested audience; '
-            ."you may use «we» and address the viewer.\n"
-            ."- Open with a hook in the spirit of «{$gancho}».\n"
-            .'- Do NOT just state facts: EXPLAIN why each piece of news matters and is impressive '
-            ."(«…and this is impressive because…»), give context and connect the stories to each other.\n"
-            .'- Length is not a problem — develop each news item well (the script can serve several videos or courses), '
-            ."especially in the weekly round-up.\n\n"
+            ."produce a set of SHORT, SELF-CONTAINED news bits.\n\n"
+            ."OUTPUT LANGUAGE: write EVERYTHING in {$idioma}.\n\n"
+            ."STRUCTURE — this is the most important rule:\n"
+            .'- Output a SERIES OF SEPARATE BITS, one per relevant news item. Do NOT write a continuous, '
+            ."connected narration or a single flowing script.\n"
+            .'- Each bit MUST stand entirely on its own: NO overall intro, NO outro, NO hook, NO references to '
+            ."other bits or to «this week»/«today» — a reader could see any single bit in isolation.\n"
+            .'- Format each bit as: a bold one-line headline (`**Headline**`), then 2–4 sentences. '
+            ."Separate consecutive bits with a line containing only `---`.\n\n"
+            ."TONE:\n"
+            .'- Clear and engaging. Do NOT just state facts: EXPLAIN what happened and why it matters '
+            ."(«…and this matters because…»).\n\n"
             ."CONTENT:\n"
             .'- Cover ONLY relevant news: releases, new models/products, major updates, acquisitions, '
             .'funding rounds, studies, numbers. IGNORE tutorials, personal opinions, promotions, sponsorships and '
             ."«subscribe» calls to action. Not all items have to be used.\n"
             .'- IMPERSONAL about the origin: NEVER mention the videos, the creators or the channels («in a video», «the creator '
-            ."says», «this channel»). Present the news as your own.\n"
+            ."says», «this channel»). Present the news directly.\n"
             ."- Mention proper names, products, dates and concrete numbers (e.g. «Fable 5», «Kimi K3», «Hermes»).\n"
             .'- If a news item lacks CONTEXT, USE web search and the given sources to confirm and enrich it. '
-            ."Do NOT invent: if you cannot confirm, be cautious or omit it.\n"
-            ."- European Portuguese (avoid Brazilianisms like «você» or «está fazendo»).\n\n"
+            ."Do NOT invent: if you cannot confirm, be cautious or omit it.\n\n"
             ."MATERIAL (transcripts + sources):\n"
             .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 

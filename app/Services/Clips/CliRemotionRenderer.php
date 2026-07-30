@@ -33,17 +33,35 @@ class CliRemotionRenderer implements RemotionRenderer
             $staged[] = $file;
             $props['videoSrc'] = basename($file);
         }
+        // Custom video background — staged into public/ like the source video.
+        if (! empty($props['background']['src']) && ! preg_match('#^https?://#', $props['background']['src']) && is_file($props['background']['src'])) {
+            $file = $this->stageAsset($props['background']['src']);
+            $staged[] = $file;
+            $props['background']['src'] = basename($file);
+        }
+        // Backgrounds reel — stage each video entry's file into public/. NB: use a
+        // distinct loop var — $entry is this method's Remotion entry-point parameter.
+        if (! empty($props['entries']) && is_array($props['entries'])) {
+            foreach ($props['entries'] as &$reelEntry) {
+                if (! empty($reelEntry['src']) && ! preg_match('#^https?://#', $reelEntry['src']) && is_file($reelEntry['src'])) {
+                    $file = $this->stageAsset($reelEntry['src']);
+                    $staged[] = $file;
+                    $reelEntry['src'] = basename($file);
+                }
+            }
+            unset($reelEntry);
+        }
         if (! empty($props['scenes'])) {
-            // Stage any local image file referenced anywhere in a layer's params
-            // (image-reveal.src, bar.image, timeline item.image, …) into public/.
-            $isImage = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp)$#i', $s);
-            $stage = function (&$node) use (&$stage, &$staged, $isImage) {
+            // Stage any local image OR audio file referenced anywhere in a layer
+            // (image-reveal.src, bar.image, timeline item.image, layer.audioSrc, …).
+            $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg)$#i', $s);
+            $stage = function (&$node) use (&$stage, &$staged, $isAsset) {
                 if (is_array($node)) {
                     foreach ($node as &$v) {
                         $stage($v);
                     }
                     unset($v);
-                } elseif (is_string($node) && $isImage($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
+                } elseif (is_string($node) && $isAsset($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
                     $file = $this->stageAsset($node);
                     $staged[] = $file;
                     $node = basename($file);

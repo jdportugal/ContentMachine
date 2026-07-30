@@ -43,11 +43,24 @@ class KieSlideRenderer implements SlideRenderer
         $anexosDescr = (array) ($kind['_anexosDescr'] ?? []); // [i => [description, …]]
         $prompts = (array) ($kind['_prompts'] ?? []);      // [i => edited prompt]
 
+        $progress = ($kind['_progress'] ?? null) instanceof KieProgress ? $kind['_progress'] : null;
+
         $urls = [];
         $anteriores = [];        // kie URLs of already-generated pages (visual coherence)
         $anterioresTitulos = []; // previous titles (textual coherence in the prompt)
 
         foreach ($plan->slides as $i => $slide) {
+            // Resume: a card finished on a previous attempt is reused verbatim — no
+            // prompt, no reference upload, no kie call. Only its URL feeds coherence.
+            $done = $progress?->card($i)['url'] ?? null;
+            if (is_string($done) && $done !== '') {
+                $urls[] = $done;
+                $anteriores[] = $done;
+                $anterioresTitulos[] = $slide->titulo;
+
+                continue;
+            }
+
             $anexoUrls = $this->kie->carregarReferencias($anexosPaths[$i] ?? []);
 
             $prompt = trim((string) ($prompts[$i] ?? '')) !== ''
@@ -62,7 +75,9 @@ class KieSlideRenderer implements SlideRenderer
                     'anexos' => array_values((array) ($anexosDescr[$i] ?? [])),
                 ]);
 
-            $url = $this->kie->generate(
+            $url = $this->gerarCartao(
+                $progress,
+                $i,
                 $prompt,
                 $proporcao,
                 $this->limitarInput($anexoUrls, $baseRefs, $anteriores),
@@ -108,6 +123,30 @@ class KieSlideRenderer implements SlideRenderer
             ]);
 
         return $this->kie->generate($prompt, $proporcao, $this->limitarInput($anexoUrls, $baseRefs, []));
+    }
+
+    /**
+     * Generate one card, resuming through the progress store when present: if the
+     * card was already submitted (has a taskId), re-poll that same task — kie does
+     * NOT regenerate — instead of a fresh createTask. The taskId is persisted BEFORE
+     * polling, so a crash/blip mid-poll still resumes rather than duplicating.
+     */
+    private function gerarCartao(?KieProgress $progress, int $i, string $prompt, string $proporcao, array $refs): string
+    {
+        if (! $progress instanceof KieProgress) {
+            return $this->kie->generate($prompt, $proporcao, $refs);
+        }
+
+        $taskId = $progress->card($i)['taskId'] ?? null;
+        if (! is_string($taskId) || $taskId === '') {
+            $taskId = $this->kie->submit($prompt, $proporcao, $refs);
+            $progress->save($i, ['taskId' => $taskId]);
+        }
+
+        $url = $this->kie->poll($taskId);
+        $progress->save($i, ['url' => $url]);
+
+        return $url;
     }
 
     /**

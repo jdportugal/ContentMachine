@@ -1,10 +1,11 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { applyTheme, COLORS, TEXTURE, ThemeInput } from "./style-tokens";
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig, Video } from "remotion";
+import { applyTheme, COLORS, isDark, TEXTURE, ThemeInput } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
+import { CUSTOM_BACKGROUNDS } from "./backgrounds";
 import { SceneTrack } from "./scenes";
 import { loadDefaultFonts, loadThemeFonts } from "./fonts";
-import type { ClipProps } from "./types";
+import type { Animation, ClipProps } from "./types";
 
 loadDefaultFonts();
 
@@ -104,6 +105,30 @@ export const BackgroundTexture: React.FC = () => {
   );
 };
 
+// A custom full-clip backdrop chosen for this clip — a generated component (by
+// slug) or a looping video — replacing the themed BackgroundTexture. Fills the
+// whole frame behind every scene; scenes that show the source video composite
+// over it. The video loops so it fills a clip of any length.
+const ClipBackground: React.FC<{ background: NonNullable<ClipProps["background"]>; fps: number }> = ({ background, fps }) => {
+  const { durationInFrames } = useVideoConfig();
+  if (background.kind === "video") {
+    const src = /^https?:\/\//.test(background.src) ? background.src : staticFile(background.src);
+    return (
+      <AbsoluteFill>
+        <Video src={src} muted loop style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </AbsoluteFill>
+    );
+  }
+  const Comp = CUSTOM_BACKGROUNDS[background.slug];
+  if (!Comp) return <BackgroundTexture />; // slug vanished (project switched?) → themed fallback
+  const anim: Animation = { start: 0, end: durationInFrames / fps, primitive: background.slug as Animation["primitive"], text: "", params: {} };
+  return (
+    <AbsoluteFill>
+      <Comp anim={anim} fps={fps} dark={isDark(COLORS.papyrus)} />
+    </AbsoluteFill>
+  );
+};
+
 export const ClipComposition: React.FC<ClipProps> = ({
   fps,
   transparent,
@@ -113,6 +138,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
   animations,
   scenes,
   words,
+  background,
   videoSrc,
   theme,
 }) => {
@@ -134,9 +160,10 @@ export const ClipComposition: React.FC<ClipProps> = ({
 
   return (
     <AbsoluteFill>
-      {/* Opaque animation clips get the themed background. Overlay clips (with a
-          source video) let each scene composite the video per its `present` mode. */}
-      {!transparent && !resolvedVideo && <BackgroundTexture />}
+      {/* Backdrop: a custom background (behind animation AND overlay scenes) wins;
+          otherwise opaque animation clips get the themed texture, and overlay clips
+          (source video) let each scene composite the video per its `present` mode. */}
+      {!transparent && (background ? <ClipBackground background={background} fps={effectiveFps} /> : (!resolvedVideo && <BackgroundTexture />))}
 
       {resolvedAudio ? <Audio src={resolvedAudio} /> : null}
       {resolvedMusic ? <Audio src={resolvedMusic} volume={musicVolume ?? 0.1} loop /> : null}

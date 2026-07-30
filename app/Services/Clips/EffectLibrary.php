@@ -128,6 +128,70 @@ TSX;
         $this->effects->setDisabledBuiltins($disabled);
     }
 
+    // ── intro effects: ones the planner may open the video with ──────────
+
+    public function builtinIsIntro(string $slug): bool
+    {
+        return in_array($slug, $this->effects->introBuiltins(), true);
+    }
+
+    /** Mark/unmark a built-in as usable at the start (no-op for non-built-in slugs). */
+    public function toggleIntroBuiltin(string $slug): void
+    {
+        if (! $this->isBuiltin($slug)) {
+            return;
+        }
+        $intro = $this->effects->introBuiltins();
+        $intro = in_array($slug, $intro, true)
+            ? array_values(array_diff($intro, [$slug]))
+            : [...$intro, $slug];
+        $this->effects->setIntroBuiltins($intro);
+    }
+
+    /**
+     * Does this effect display an image? Image effects read `params.src` (an image
+     * id) and render an <Img>. True for the built-in image-reveal and any custom
+     * effect whose component/schema shows it takes an image — so the pipeline knows
+     * to feed it a provided image.
+     */
+    public function usesImage(string $slug): bool
+    {
+        if ($slug === 'image-reveal') {
+            return true;
+        }
+        $rec = $this->effects->all()->firstWhere('slug', $slug);
+        if (! $rec) {
+            return false;
+        }
+        $tsx = strtolower((string) $rec->tsx);
+        $schema = strtolower((string) $rec->param_schema);
+
+        return str_contains($tsx, '<img')
+            || str_contains($schema, 'src')
+            || str_contains($schema, 'image')
+            || str_contains($schema, '"url"');
+    }
+
+    /**
+     * Slugs flagged as intro AND actually usable — enabled custom effects with
+     * intro=true plus allowed built-ins marked intro. The planner opens with one.
+     *
+     * @return string[]
+     */
+    public function introSlugs(): array
+    {
+        $custom = $this->enabled()
+            ->filter(fn (EffectRecord $e) => (bool) $e->get('intro', false))
+            ->pluck('slug')
+            ->all();
+        $builtins = array_values(array_intersect(
+            $this->effects->introBuiltins(),
+            array_diff(array_keys(self::BUILTIN_SAMPLES), $this->disabledBuiltins()),
+        ));
+
+        return array_values(array_unique(array_merge($builtins, $custom)));
+    }
+
     /** Prompt block describing the allowed custom effects (name + schema), or '' if none. */
     public function promptBlock(): string
     {
@@ -137,7 +201,8 @@ TSX;
         }
         $lines = $effects->map(fn (EffectRecord $e) => "- {$e->slug}: {$e->description} — params: {$e->param_schema}")->implode("\n");
 
-        return "\n\n=== CUSTOM BRAND EFFECTS (generated, follow the design system — use like any other layer type) ===\n".$lines;
+        return "\n\n=== CUSTOM BRAND EFFECTS (generated, follow the design system — use like any other layer type) ===\n".$lines
+            ."\nIf an effect's params include \"src\" (or image) it DISPLAYS AN IMAGE: set \"src\" to a PROVIDED image id when you use it — without one it renders empty.";
     }
 
     // ── filesystem sync ──────────────────────────────────────────────────

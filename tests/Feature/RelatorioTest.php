@@ -95,7 +95,6 @@ class RelatorioTest extends TestCase
         $this->semearItem($hoje, 'youtube', 'a', ['ia'], ['https://fonte/1']);
 
         Livewire::test(Noticias::class)
-            ->set('recolherPrimeiro', false) // não ir à rede durante o teste
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', $hoje)
             ->call('criarRelatorio')
@@ -114,7 +113,6 @@ class RelatorioTest extends TestCase
         Queue::fake();
 
         Livewire::test(Noticias::class)
-            ->set('recolherPrimeiro', false)
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', Carbon::today()->toDateString())
             ->call('criarRelatorio')

@@ -27,7 +27,7 @@ class YtDlpDriver implements AggregatorDriver
         return $this->plataforma;
     }
 
-    public function collect(array $canais, int $limitePorCanal): array
+    public function collect(array $canais, int $limitePorCanal, array $idsArquivados = []): array
     {
         $itens = [];
 
@@ -37,7 +37,7 @@ class YtDlpDriver implements AggregatorDriver
                 continue;
             }
 
-            foreach ($this->itensDoCanal($canal, $limitePorCanal) as $item) {
+            foreach ($this->itensDoCanal($canal, $limitePorCanal, $idsArquivados) as $item) {
                 $itens[] = $item;
             }
         }
@@ -46,9 +46,10 @@ class YtDlpDriver implements AggregatorDriver
     }
 
     /**
+     * @param  array<string,bool>  $idsArquivados
      * @return array<int,AggregatedItem>
      */
-    private function itensDoCanal(string $canal, int $limite): array
+    private function itensDoCanal(string $canal, int $limite, array $idsArquivados): array
     {
         try {
             $listagem = $this->runner->listing($this->normalizarCanal($canal), $limite);
@@ -62,6 +63,13 @@ class YtDlpDriver implements AggregatorDriver
         foreach (array_slice($entradas, 0, $limite) as $entrada) {
             $url = $this->urlDaEntrada($entrada);
             if ($url === null) {
+                continue;
+            }
+
+            // Skip videos already in the vault BEFORE the costly metadata +
+            // transcript + LLM work — this is what makes daily re-runs fast.
+            $idEntrada = (string) ($entrada['id'] ?? '');
+            if ($idEntrada !== '' && isset($idsArquivados[Str::slug($idEntrada)])) {
                 continue;
             }
 

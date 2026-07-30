@@ -4,7 +4,7 @@ namespace Tests\Feature\Clips;
 
 use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
-use App\Livewire\ClipsAnimados;
+use App\Livewire\ClipsAnimadosSfx;
 use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
@@ -56,7 +56,7 @@ class SfxTest extends TestCase
     {
         Queue::fake();
 
-        Livewire::test(ClipsAnimados::class)
+        Livewire::test(ClipsAnimadosSfx::class)
             ->set('sfxPrompt', 'a glitch flicker that snaps the headline into place')
             ->call('gerarSfx')
             ->assertHasNoErrors()
@@ -68,11 +68,11 @@ class SfxTest extends TestCase
         Queue::assertPushed(GenerateEffectJob::class);
     }
 
-    public function test_opening_sfx_dispatches_missing_built_in_previews(): void
+    public function test_opening_sfx_page_dispatches_missing_built_in_previews(): void
     {
         Queue::fake();
 
-        Livewire::test(ClipsAnimados::class)->call('abrirSfx')->assertSet('view', 'sfx');
+        Livewire::test(ClipsAnimadosSfx::class); // mount() ensures previews
 
         Queue::assertPushed(RenderEffectSampleJob::class);
     }
@@ -174,7 +174,7 @@ class SfxTest extends TestCase
             'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
         ]);
 
-        Livewire::test(ClipsAnimados::class)
+        Livewire::test(ClipsAnimadosSfx::class)
             ->call('editarSfx', $effect->id())
             ->assertSet('editingSfxId', $effect->id())
             ->assertSet('sfxEditPrompt', 'a soft drop')
@@ -239,10 +239,10 @@ class SfxTest extends TestCase
             'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
         ]);
 
-        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id());
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarSfx', $effect->id());
         $this->assertFalse($effect->refresh()->enabled);
 
-        Livewire::test(ClipsAnimados::class)->call('alternarSfx', $effect->id());
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarSfx', $effect->id());
         $this->assertTrue($effect->refresh()->enabled);
     }
 
@@ -279,10 +279,10 @@ class SfxTest extends TestCase
     {
         $library = app(EffectLibrary::class);
 
-        Livewire::test(ClipsAnimados::class)->call('alternarBuiltin', 'fade');
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarBuiltin', 'fade');
         $this->assertFalse($library->builtinAllowed('fade'));
 
-        Livewire::test(ClipsAnimados::class)->call('alternarBuiltin', 'fade');
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarBuiltin', 'fade');
         $this->assertTrue($library->builtinAllowed('fade'));
 
         $library->toggleBuiltin('not-a-real-primitive');
@@ -296,7 +296,7 @@ class SfxTest extends TestCase
             'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_FAILED,
         ]);
 
-        Livewire::test(ClipsAnimados::class)
+        Livewire::test(ClipsAnimadosSfx::class)
             ->call('editarSfx', $failed->id())
             ->assertSet('editingSfxId', null);
     }
@@ -337,7 +337,7 @@ class SfxTest extends TestCase
     {
         Queue::fake();
 
-        Livewire::test(ClipsAnimados::class)
+        Livewire::test(ClipsAnimadosSfx::class)
             ->call('editarBuiltin', 'seal-stamp')
             ->assertSet('sfxOverrideSlug', 'seal-stamp')
             ->assertSet('editingSfxId', null)
@@ -397,10 +397,282 @@ class SfxTest extends TestCase
         $library->syncFilesystem();
         $this->assertFileExists($library->effectFile('seal-stamp'));
 
-        Livewire::test(ClipsAnimados::class)->call('resetBuiltin', 'seal-stamp');
+        Livewire::test(ClipsAnimadosSfx::class)->call('resetBuiltin', 'seal-stamp');
 
         $this->assertNull($this->effects()->find($override->id()));
         $this->assertFileDoesNotExist($library->effectFile('seal-stamp'));
+    }
+
+    // ── per-effect sound (audio attached to an effect) ───────────────────
+
+    public function test_audio_store_round_trips_by_slug(): void
+    {
+        $src = tempnam(sys_get_temp_dir(), 'aud_').'.wav';
+        file_put_contents($src, 'RIFFfake');
+
+        $store = $this->effects();
+        $this->assertNull($store->audioPath('fade'));
+
+        $store->putAudio('fade', $src, 'wav');
+        $this->assertNotNull($store->audioPath('fade'));
+        $this->assertStringEndsWith('/fade.wav', $store->audioPath('fade'));
+        $this->assertContains('fade', $store->audioSlugs());
+
+        // Prefix slug must not match (fade.* is literal "fade." + ext).
+        $this->assertNull($store->audioPath('fade-in'));
+
+        // Replacing swaps the extension, leaving exactly one file.
+        $mp3 = tempnam(sys_get_temp_dir(), 'aud_').'.mp3';
+        file_put_contents($mp3, 'ID3fake');
+        $store->putAudio('fade', $mp3, 'mp3');
+        $this->assertStringEndsWith('/fade.mp3', $store->audioPath('fade'));
+        $this->assertCount(1, glob($store->audioDir().'/fade.*'));
+
+        $store->deleteAudio('fade');
+        $this->assertNull($store->audioPath('fade'));
+
+        @unlink($src);
+        @unlink($mp3);
+    }
+
+    public function test_uploading_a_sound_attaches_it_to_the_effect(): void
+    {
+        Livewire::test(ClipsAnimadosSfx::class)
+            ->call('abrirAudio', 'slide')
+            ->assertSet('audioEditingSlug', 'slide')
+            ->set('audioUpload', \Illuminate\Http\UploadedFile::fake()->create('whoosh.mp3', 8, 'audio/mpeg'))
+            ->call('uploadAudio')
+            ->assertHasNoErrors()
+            ->assertSet('audioEditingSlug', null);
+
+        $this->assertNotNull($this->effects()->audioPath('slide'));
+    }
+
+    public function test_generating_a_sound_calls_elevenlabs_and_stores_the_mp3(): void
+    {
+        config(['services.elevenlabs.key' => 'test-key']);
+        Http::fake(['api.elevenlabs.io/v1/sound-generation' => Http::response('ID3-fake-mp3-bytes')]);
+
+        Livewire::test(ClipsAnimadosSfx::class)
+            ->call('abrirAudio', 'seal-stamp')
+            ->set('audioGenPrompt', 'a heavy wax stamp thud')
+            ->call('gerarAudio')
+            ->assertHasNoErrors()
+            ->assertSet('audioEditingSlug', null);
+
+        $path = $this->effects()->audioPath('seal-stamp');
+        $this->assertNotNull($path);
+        $this->assertStringEndsWith('.mp3', $path);
+        $this->assertSame('ID3-fake-mp3-bytes', file_get_contents($path));
+    }
+
+    public function test_render_job_attaches_effect_audio_to_the_layers_using_it(): void
+    {
+        $src = tempnam(sys_get_temp_dir(), 'aud_').'.mp3';
+        file_put_contents($src, 'ID3fake');
+        $this->effects()->putAudio('kinetic-text', $src, 'mp3');
+
+        $scenes = [
+            ['layers' => [['type' => 'kinetic-text', 'text' => 'Hi'], ['type' => 'fade', 'text' => 'x']]],
+        ];
+        $method = new \ReflectionMethod(\App\Jobs\Clips\RenderJob::class, 'attachEffectAudio');
+        $method->setAccessible(true);
+        $out = $method->invoke(new \App\Jobs\Clips\RenderJob('p1'), $scenes, $this->effects());
+
+        $this->assertSame($this->effects()->audioPath('kinetic-text'), $out[0]['layers'][0]['audioSrc']);
+        $this->assertArrayNotHasKey('audioSrc', $out[0]['layers'][1]); // fade has no sound
+        @unlink($src);
+    }
+
+    // ── intro effects (used at the start of a video) ─────────────────────
+
+    public function test_marking_a_custom_effect_as_intro_lists_it_and_tells_the_planner(): void
+    {
+        $effect = $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'logo-burst', 'display_name' => 'Logo burst',
+            'description' => 'x', 'param_schema' => '{}', 'tsx' => 'export default () => null;',
+            'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+        ]);
+        $library = app(EffectLibrary::class);
+
+        $this->assertNotContains('logo-burst', $library->introSlugs());
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarIntro', $effect->id());
+        $this->assertTrue((bool) $effect->refresh()->get('intro'));
+        $this->assertContains('logo-burst', $library->introSlugs());
+
+        // The planner is told to open with it.
+        $planner = new class
+        {
+            use BuildsAnimationPrompt;
+
+            public function sys(): string
+            {
+                return $this->systemPrompt('dense');
+            }
+        };
+        $prompt = $planner->sys();
+        $this->assertStringContainsString('OPENING', $prompt);
+        $this->assertStringContainsString('logo-burst', $prompt);
+
+        // Unmarking removes it again.
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarIntro', $effect->id());
+        $this->assertFalse((bool) $effect->refresh()->get('intro'));
+        $this->assertNotContains('logo-burst', $library->introSlugs());
+    }
+
+    public function test_marking_a_builtin_as_intro_lists_it_and_drops_when_disallowed(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('alternarIntroBuiltin', 'seal-stamp');
+        $this->assertTrue($library->builtinIsIntro('seal-stamp'));
+        $this->assertContains('seal-stamp', $library->introSlugs());
+
+        // A disallowed built-in is not offered as an intro even if flagged.
+        $library->toggleBuiltin('seal-stamp');
+        $this->assertNotContains('seal-stamp', $library->introSlugs());
+
+        // Unknown slug is a no-op.
+        $library->toggleIntroBuiltin('not-a-real-primitive');
+        $this->assertNotContains('not-a-real-primitive', $library->introSlugs());
+    }
+
+    public function test_editing_an_effect_snapshots_the_previous_version(): void
+    {
+        Queue::fake();
+
+        $effect = $this->makeEffect([
+            'prompt' => 'a soft drop', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
+            'description' => 'Soft drop', 'param_schema' => '{}', 'tsx' => 'export default () => "V1";',
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class)
+            ->call('editarSfx', $effect->id())
+            ->set('sfxEditPrompt', 'make it bounce twice on landing')
+            ->call('guardarSfxEdicao')
+            ->assertHasNoErrors();
+
+        $versions = $effect->refresh()->get('versions', []);
+        $this->assertCount(1, $versions);
+        $this->assertSame('export default () => "V1";', $versions[0]['tsx']);
+        $this->assertSame('a soft drop', $versions[0]['prompt']);        // the prompt that made V1
+        $this->assertSame('make it bounce twice on landing', $effect->prompt); // now the new prompt
+        Queue::assertPushed(GenerateEffectJob::class);
+
+        // The history panel renders its versions on the effect's detail page.
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->call('abrirHistorico', $effect->id())
+            ->assertSet('historyId', $effect->id())
+            ->assertSee('Version history')
+            ->assertSee('restore');
+    }
+
+    public function test_detail_page_resolves_a_custom_effect(): void
+    {
+        Queue::fake();
+        $effect = $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon Pulse', 'description' => 'a neon glow',
+            'param_schema' => '{}', 'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->assertSet('detailKey', $effect->id())
+            ->assertSee('Neon Pulse')
+            ->assertSee('Refine with AI')
+            ->assertSee('Delete');
+    }
+
+    public function test_detail_page_resolves_a_builtin_by_slug(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => 'seal-stamp'])
+            ->assertSet('detailKey', 'seal-stamp')
+            ->assertSee('built-in')
+            ->assertSee('Customize with AI');
+    }
+
+    public function test_deleting_from_the_detail_page_redirects_to_the_gallery(): void
+    {
+        $effect = $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'neon-pulse', 'display_name' => 'Neon', 'description' => 'x',
+            'param_schema' => '{}', 'tsx' => 'export default () => null;', 'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->call('apagarSfx', $effect->id())
+            ->assertRedirect(route('clips-animados.sfx'));
+
+        $this->assertNull($this->effects()->find($effect->id()));
+    }
+
+    public function test_reverting_restores_a_previous_version_and_re_renders_its_preview(): void
+    {
+        Queue::fake();
+
+        $effect = $this->makeEffect([
+            'prompt' => 'gold version', 'slug' => 'soft-drop', 'display_name' => 'Soft drop',
+            'description' => 'now gold', 'param_schema' => '{ "g": true }', 'tsx' => 'export default () => "V2";',
+            'sample_text' => 'Hi', 'sample_params' => [], 'status' => EffectRecord::STATUS_ACTIVE,
+            'versions' => [[
+                'prompt' => 'a soft drop', 'tsx' => 'export default () => "V1";', 'param_schema' => '{}',
+                'display_name' => 'Soft drop', 'description' => 'Soft drop', 'sample_text' => 'Hi', 'sample_params' => [],
+                'created_at' => now()->toIso8601String(),
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('reverterSfx', $effect->id(), 0);
+
+        $effect->refresh();
+        $this->assertSame('export default () => "V1";', $effect->tsx);   // restored
+        $this->assertSame('active', $effect->status);
+        // The just-replaced V2 is kept in history so the restore is reversible.
+        $this->assertTrue(collect($effect->get('versions', []))->contains(fn ($v) => ($v['tsx'] ?? '') === 'export default () => "V2";'));
+        // The restored component is written to the registry and the preview re-renders.
+        $this->assertSame('export default () => "V1";', file_get_contents(app(EffectLibrary::class)->effectFile('soft-drop')));
+        Queue::assertPushed(RenderEffectSampleJob::class, fn ($job) => $job->slug === 'soft-drop');
+    }
+
+    public function test_showreel_url_cache_buster_is_the_file_mtime_not_the_render_time(): void
+    {
+        Queue::fake();
+        $path = app(EffectLibrary::class)->showreelPath();
+        @mkdir(dirname($path), 0777, true);
+        file_put_contents($path, 'fake mp4');
+        touch($path, 1600000000); // a fixed mtime in the past
+        clearstatcache(true, $path);
+
+        // The video src is busted by the file's mtime (stable across renders), not
+        // now() — so polling no longer reloads the reel and jumps the page.
+        Livewire::test(ClipsAnimadosSfx::class)->assertSee('?v=1600000000', false);
+    }
+
+    public function test_uses_image_detects_image_based_effects(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        // Built-in image layer.
+        $this->assertTrue($library->usesImage('image-reveal'));
+        // Built-in text effect.
+        $this->assertFalse($library->usesImage('kinetic-text'));
+
+        // Custom effect whose component renders an <Img> → image-based.
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'logo-assemble', 'display_name' => 'Logo', 'description' => 'assembles a logo',
+            'param_schema' => '{ "src"?: "<image id>" }', 'status' => EffectRecord::STATUS_ACTIVE,
+            'tsx' => 'import { Img } from "remotion";'."\nexport default ({ anim }) => <Img src={anim.params.src} />;",
+        ]);
+        // Custom effect with no image at all.
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'glow-pulse', 'display_name' => 'Glow', 'description' => 'a pulsing glow',
+            'param_schema' => '{ "intensity"?: number }', 'status' => EffectRecord::STATUS_ACTIVE,
+            'tsx' => 'export default () => null;',
+        ]);
+
+        $this->assertTrue($library->usesImage('logo-assemble'));
+        $this->assertFalse($library->usesImage('glow-pulse'));
     }
 
     /** Fake the Anthropic API so EffectGenerator::generate() returns the given payload as its TSX JSON. */

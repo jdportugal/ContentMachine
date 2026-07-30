@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Services\Aggregation\NewsAggregator;
 use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Vault\VaultContract;
 use Illuminate\Bus\Queueable;
@@ -31,17 +30,13 @@ class GerarRelatorioJob implements ShouldQueue
     public function __construct(
         public string $modo,
         public string $data,
-        public bool $recolher,
         public string $token,
+        public string $idioma = 'English',
     ) {}
 
-    public function handle(RelatorioBuilder $builder, VaultContract $vault, NewsAggregator $aggregator): void
+    public function handle(RelatorioBuilder $builder, VaultContract $vault): void
     {
-        // Collect new channel content first (catches today's videos).
-        if ($this->recolher) {
-            $aggregator->aggregate();
-        }
-
+        // Report is built only from already-scraped items (no channel scan here).
         $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
 
         // 'semana' = window of the last 7 days up to the chosen date.
@@ -49,7 +44,7 @@ class GerarRelatorioJob implements ShouldQueue
             ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modo);
+        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $this->idioma);
 
         $slug = $this->modo === 'semana'
             ? 'semana-'.$inicio->toDateString()

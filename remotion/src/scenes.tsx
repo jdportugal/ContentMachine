@@ -1,11 +1,13 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
   Easing,
   interpolate,
   OffthreadVideo,
   Sequence,
   spring,
+  staticFile,
   useCurrentFrame,
 } from "remotion";
 import { COLORS, ENGRAVE_SHADOW, FONTS, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
@@ -13,6 +15,8 @@ import { renderPrimitive } from "./primitives";
 import type { KaraokeWord, Present, Scene } from "./types";
 
 const EASE = Easing.inOut(Easing.cubic);
+
+const resolveSrc = (src: string): string => (/^https?:\/\//.test(src) ? src : staticFile(src));
 
 // Resolved lazily (at render time) so it reflects the active theme — COLORS is
 // mutated by applyTheme() AFTER this module loads, so a captured object would be stale.
@@ -151,7 +155,12 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
       {present !== "video"
         ? layers.map((layer, i) => {
             const pseudo = { start: 0, end: durSec, primitive: layer.type, text: layer.text, params: layer.params };
-            return <React.Fragment key={i}>{renderPrimitive(pseudo, fps, dark)}</React.Fragment>;
+            return (
+              <React.Fragment key={i}>
+                {renderPrimitive(pseudo, fps, dark)}
+                {layer.audioSrc ? <Audio src={resolveSrc(layer.audioSrc)} volume={0.8} /> : null}
+              </React.Fragment>
+            );
           })
         : null}
       {scene.punchWord ? <PunchWord text={String(scene.punchWord)} fps={fps} dark={dark} /> : null}

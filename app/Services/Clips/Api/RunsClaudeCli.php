@@ -2,21 +2,28 @@
 
 namespace App\Services\Clips\Api;
 
+use Illuminate\Support\Facades\Http;
 use RuntimeException;
 use Symfony\Component\Process\Process;
 
 /**
- * Runs the authenticated `claude` CLI headlessly (uses the Claude subscription).
- * Retries transient failures (API overload, streaming hiccups, concurrent use).
+ * Runs Claude headlessly. Uses the Anthropic API when a key is configured
+ * (`services.anthropic.key`); otherwise the authenticated `claude` CLI (the
+ * subscription). Retries transient failures (overload, streaming hiccups).
  */
 trait RunsClaudeCli
 {
     /**
      * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
-     * @return array the parsed result envelope
+     * @return array the parsed result envelope (has a `result` string)
      */
     protected function runClaude(string $user, ?string $system = null, array $opts = []): array
     {
+        // API only when a key is set — no CLI fallback in that case.
+        if (filled(config('services.anthropic.key'))) {
+            return $this->runClaudeApi($user, $system, $opts);
+        }
+
         $binary = config('contentmachine.clips.claude_binary');
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
         $lastError = 'no detail';
@@ -79,5 +86,71 @@ trait RunsClaudeCli
         if ($attempt < $attempts) {
             sleep($attempt * 3);
         }
+    }
+
+    /**
+     * Calls the Anthropic Messages API and returns a CLI-compatible envelope.
+     * Enables web search when the caller requested web tools, so research-style
+     * prompts keep working. Retries transient failures.
+     *
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @return array{result:string}
+     */
+    private function runClaudeApi(string $user, ?string $system, array $opts): array
+    {
+        $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
+        $usaWeb = str_contains((string) ($opts['allowedTools'] ?? ''), 'Web');
+
+        $payload = [
+            'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8'),
+            'max_tokens' => (int) config('contentmachine.aggregation.anthropic_max_tokens', 8000),
+            'messages' => [['role' => 'user', 'content' => $user]],
+        ];
+        if ($system !== null && $system !== '') {
+            $payload['system'] = $system;
+        }
+        if ($usaWeb) {
+            $payload['tools'] = [['type' => 'web_search_20250305', 'name' => 'web_search']];
+        }
+
+        $lastError = 'no detail';
+
+        for ($i = 1; $i <= $attempts; $i++) {
+            try {
+                $r = Http::timeout($opts['timeout'] ?? 300)
+                    ->withHeaders([
+                        'x-api-key' => (string) config('services.anthropic.key'),
+                        'anthropic-version' => '2023-06-01',
+                    ])
+                    ->post('https://api.anthropic.com/v1/messages', $payload);
+            } catch (\Throwable $e) {
+                $lastError = 'http: '.$e->getMessage();
+                $this->claudeBackoff($i, $attempts);
+
+                continue;
+            }
+
+            if (! $r->successful()) {
+                $lastError = 'status '.$r->status().': '.substr((string) $r->body(), 0, 200);
+                $this->claudeBackoff($i, $attempts);
+
+                continue;
+            }
+
+            // Concatenate the text blocks of the response (skips tool_use blocks).
+            $texto = collect($r->json('content', []))
+                ->where('type', 'text')
+                ->pluck('text')
+                ->implode('');
+
+            if (trim($texto) !== '') {
+                return ['result' => $texto];
+            }
+
+            $lastError = 'empty response';
+            $this->claudeBackoff($i, $attempts);
+        }
+
+        throw new RuntimeException("Claude API failed after {$attempts} attempt(s) — {$lastError}");
     }
 }

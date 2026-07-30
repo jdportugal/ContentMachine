@@ -125,6 +125,71 @@ class EffectStore
         file_put_contents($this->disabledPath(), json_encode(array_values(array_unique($slugs)), JSON_PRETTY_PRINT));
     }
 
+    // ── intro built-ins (per project): built-ins the planner may open with ─
+
+    private function introPath(): string
+    {
+        return $this->dir().'/_intro-builtins.json';
+    }
+
+    /** @return string[] */
+    public function introBuiltins(): array
+    {
+        $file = $this->introPath();
+        if (! is_file($file)) {
+            return [];
+        }
+        $data = json_decode((string) file_get_contents($file), true);
+
+        return is_array($data) ? array_values(array_filter($data, 'is_string')) : [];
+    }
+
+    /** @param string[] $slugs */
+    public function setIntroBuiltins(array $slugs): void
+    {
+        @mkdir($this->dir(), 0775, true);
+        file_put_contents($this->introPath(), json_encode(array_values(array_unique($slugs)), JSON_PRETTY_PRINT));
+    }
+
+    // ── per-effect audio (SFX sound) ─────────────────────────────────────
+    // A sound attached to an effect lives at sfx-audio/<slug>.<ext>; the
+    // filename IS the slug, so custom effects and built-ins are keyed alike.
+    // Slugs are kebab-case ([a-z0-9-]) so they carry no glob metacharacters.
+
+    public function audioDir(): string
+    {
+        return rtrim($this->context->vaultPath(), '/').'/sfx-audio';
+    }
+
+    /** Absolute path of the sound attached to $slug, or null. */
+    public function audioPath(string $slug): ?string
+    {
+        return (glob($this->audioDir().'/'.$slug.'.*') ?: [])[0] ?? null;
+    }
+
+    /** @return string[] slugs that have a sound attached */
+    public function audioSlugs(): array
+    {
+        return collect(glob($this->audioDir().'/*.*') ?: [])
+            ->map(fn (string $f) => pathinfo($f, PATHINFO_FILENAME))
+            ->all();
+    }
+
+    /** Store $sourcePath as the sound for $slug, replacing any existing. */
+    public function putAudio(string $slug, string $sourcePath, string $ext): void
+    {
+        $this->deleteAudio($slug);
+        @mkdir($this->audioDir(), 0775, true);
+        copy($sourcePath, $this->audioDir().'/'.$slug.'.'.strtolower($ext ?: 'mp3'));
+    }
+
+    public function deleteAudio(string $slug): void
+    {
+        foreach (glob($this->audioDir().'/'.$slug.'.*') ?: [] as $f) {
+            @unlink($f);
+        }
+    }
+
     private function hydrate(string $file): ?EffectRecord
     {
         $data = json_decode((string) file_get_contents($file), true);

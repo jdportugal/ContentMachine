@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\AgregarConteudoJob;
 use App\Jobs\GerarRelatorioJob;
+use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Carbon;
@@ -31,8 +32,8 @@ class Noticias extends Component
     /** Reference date of the report (YYYY-MM-DD). */
     public string $dataRelatorio = '';
 
-    /** Collect new content (today's videos) before writing the report. */
-    public bool $recolherPrimeiro = true;
+    /** Output language for the report write-up. */
+    public string $idiomaRelatorio = 'English';
 
     /** Report generated in this session (to display). @var array<string,mixed>|null */
     public ?array $relatorio = null;
@@ -54,8 +55,21 @@ class Noticias extends Component
 
     public ?string $agregacaoToken = null;
 
-    public function mount(VaultContract $vault): void
+    /** Platforms with configured channels, available to aggregate. @var array<int,string> */
+    public array $plataformasDisponiveis = [];
+
+    /** Platforms selected for the next aggregation (defaults to all available). @var array<int,string> */
+    public array $plataformasSelecionadas = [];
+
+    public function mount(VaultContract $vault, SettingsRepository $definicoes): void
     {
+        $canais = (array) $definicoes->get('canais', []);
+        $this->plataformasDisponiveis = array_values(array_filter(
+            array_keys($canais),
+            fn ($p) => array_filter((array) ($canais[$p] ?? [])) !== [],
+        ));
+        $this->plataformasSelecionadas = $this->plataformasDisponiveis;
+
         $this->dataRelatorio = now()->toDateString();
 
         // Opens on the most recent already-archived report (if any).
@@ -82,13 +96,25 @@ class Noticias extends Component
      */
     public function agregarAgora(): void
     {
+        if ($this->plataformasSelecionadas === []) {
+            return;
+        }
+
         $this->agregacaoToken = (string) Str::uuid();
         $this->aAgregar = true;
-        $this->dispatch('loader-show', message: 'Scanning the channels… (requires «php artisan queue:work»)');
+        $this->dispatch('loader-show', message: 'Scanning the channels…');
 
-        AgregarConteudoJob::dispatch($this->agregacaoToken);
+        AgregarConteudoJob::dispatch($this->agregacaoToken, array_values($this->plataformasSelecionadas));
 
         $this->verificarAgregacao();
+    }
+
+    /** Toggles a platform in/out of the aggregation selection. */
+    public function alternarPlataforma(string $plataforma): void
+    {
+        $this->plataformasSelecionadas = in_array($plataforma, $this->plataformasSelecionadas, true)
+            ? array_values(array_diff($this->plataformasSelecionadas, [$plataforma]))
+            : [...$this->plataformasSelecionadas, $plataforma];
     }
 
     /** Polled (wire:poll) while $aAgregar: shows the summary when the worker finishes. */
@@ -132,13 +158,13 @@ class Noticias extends Component
         $this->relatorioToken = (string) Str::uuid();
         $this->aGerar = true;
         $this->avisoRelatorio = null;
-        $this->dispatch('loader-show', message: 'Collecting and writing the report… (requires «php artisan queue:work»)');
+        $this->dispatch('loader-show', message: 'Collecting and writing the report…');
 
         GerarRelatorioJob::dispatch(
             $this->modoRelatorio,
             $this->dataRelatorio,
-            $this->recolherPrimeiro,
             $this->relatorioToken,
+            $this->idiomaRelatorio,
         );
 
         $this->verificarRelatorio(app(VaultContract::class));

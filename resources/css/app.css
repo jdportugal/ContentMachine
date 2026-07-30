@@ -1,7 +1,10 @@
-@import 'tailwindcss';
+/* source(none) disables Tailwind's automatic whole-project scan: without it,
+   Tailwind watches every git-tracked file (including vault/*.md and the SQLite
+   DB), so each write during aggregation triggers a dev full-reload. We list the
+   real class sources explicitly instead. */
+@import 'tailwindcss' source(none);
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 @source '../views';
 @source '../../app/Livewire';
 

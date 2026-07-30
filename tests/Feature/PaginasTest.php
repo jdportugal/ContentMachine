@@ -24,7 +24,7 @@ class PaginasTest extends TestCase
             'workshop-carousel' => ['/publicacoes/carrossel', 'Carousels'],
             'workshop-list' => ['/publicacoes/lista', 'Numbered lists'],
             'workshop-summary' => ['/publicacoes/resumo-semana', 'Week in review'],
-            'drafts' => ['/rascunhos', 'Drafts'],
+            'drafts' => ['/finished', 'Finished'],
             'news' => ['/noticias', 'News Aggregator'],
             'design-system' => ['/design-system', 'Design System'],
             'settings' => ['/definicoes', 'Settings'],

@@ -95,9 +95,15 @@ class LlmClient
     {
         $escolha = (string) config('contentmachine.aggregation.llm_provider', 'auto');
 
+        // When an Anthropic API key is set, use the API only — do not fall back
+        // to the `claude` CLI (which needs an interactive session).
+        $temChaveAnthropic = filled(config('services.anthropic.key'));
+
         $ordem = match ($escolha) {
             'none' => [],
-            'auto' => ['claude-cli', 'anthropic', 'openai', 'gemini'],
+            'auto' => $temChaveAnthropic
+                ? ['anthropic', 'openai', 'gemini']
+                : ['claude-cli', 'anthropic', 'openai', 'gemini'],
             default => [$escolha],
         };
 

@@ -41,6 +41,387 @@ class SceneVisualFiller
     }
 
     /**
+     * Guarantee the video OPENS with an intro effect, kept as short as a normal
+     * scene. The planner is only nudged to do this, so this makes it reliable:
+     * if any effect is marked intro, the opening becomes a short intro scene
+     * (the median duration of the other scenes, capped to the opening's own span)
+     * showing the intro effect. Any displaced content is preserved right after.
+     * No-op when nothing is marked intro or there are no scenes.
+     *
+     * When the intro effect shows an image, `$introImageId` (a provided image id)
+     * is placed on its `params.src` so a branded/logo intro actually uses an
+     * uploaded image instead of rendering empty.
+     *
+     * @param  string[]  $introSlugs
+     */
+    public function enforceIntro(array $plan, array $introSlugs, ?string $introImageId = null): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if ($introSlugs === [] || ! is_array($scenes) || $scenes === []) {
+            return $plan;
+        }
+        $scenes = array_values($scenes);
+        $first = $scenes[0];
+        $layers = is_array($first['layers'] ?? null) ? $first['layers'] : [];
+
+        $opensWithIntro = false;
+        foreach ($layers as $layer) {
+            if (is_array($layer) && in_array($layer['type'] ?? null, $introSlugs, true)) {
+                $opensWithIntro = true;
+                break;
+            }
+        }
+
+        $start = (float) ($first['start'] ?? 0);
+        $end = (float) ($first['end'] ?? 0);
+        // Intro length: match a normal scene (median of the others; 2s fallback),
+        // never longer than the opening scene's own span.
+        $target = $this->typicalSceneDuration(array_slice($scenes, 1)) ?? 2.0;
+        $tooLong = ($end - $start) > $target + self::EPS;
+
+        // Planner already opens with a normal-length intro: the only thing left is
+        // to make sure an image-based intro actually gets its image.
+        if ($opensWithIntro && ! $tooLong) {
+            $withImage = $this->withIntroImage($layers, $introSlugs, $introImageId);
+            if ($withImage === $layers) {
+                return $plan; // nothing to change
+            }
+            $scenes[0]['layers'] = $withImage;
+            $plan['scenes'] = $scenes;
+
+            return $plan;
+        }
+
+        $introEnd = $tooLong ? $start + $target : $end;
+
+        // The intro scene. If the planner already opened with an intro effect, keep
+        // its content and just cap the length; otherwise swap in the intro effect.
+        if ($opensWithIntro) {
+            $introScene = array_merge($first, ['end' => $introEnd, 'layers' => $this->withIntroImage($layers, $introSlugs, $introImageId)]);
+        } else {
+            $introScene = array_merge($first, [
+                'end' => $introEnd,
+                'layers' => [[
+                    'type' => $introSlugs[0],
+                    'text' => (string) ($first['punchWord'] ?? ($layers[0]['text'] ?? '')),
+                    'params' => $introImageId !== null ? ['src' => $introImageId] : [],
+                ]],
+                'punchWord' => null, // the intro effect carries the frame
+            ]);
+            // Overlay clips: a video/over/split scene would hide the effect — show it full-screen.
+            if (isset($first['present'])) {
+                $introScene['present'] = 'animation';
+            }
+        }
+
+        if ($introEnd >= $end - self::EPS) {
+            $scenes[0] = $introScene; // opening is already short — it just becomes the intro
+        } elseif ($opensWithIntro) {
+            // Planner's intro spanned the whole scene: shorten it and let the next
+            // scene start earlier (there is no other content to preserve).
+            if (isset($scenes[1])) {
+                $scenes[0] = $introScene;
+                $scenes[1]['start'] = $introEnd;
+            }
+            // Single all-intro scene with nothing after → leave it (nothing to slide into).
+        } else {
+            // Keep the planner's original opening content in a remainder scene right
+            // after the intro, so nothing it made is lost.
+            array_splice($scenes, 0, 1, [$introScene, array_merge($first, ['start' => $introEnd, 'end' => $end])]);
+        }
+
+        $plan['scenes'] = array_values($scenes);
+
+        return $plan;
+    }
+
+    /**
+     * Set `params.src` to a provided image id on the first intro-effect layer that
+     * has no image yet — so an image-based intro shows the uploaded image. Returns
+     * the layers unchanged when there is no image, no intro layer, or one is set.
+     *
+     * @param  array<int,mixed>  $layers
+     * @param  string[]  $introSlugs
+     * @return array<int,mixed>
+     */
+    private function withIntroImage(array $layers, array $introSlugs, ?string $introImageId): array
+    {
+        if ($introImageId === null) {
+            return $layers;
+        }
+        foreach ($layers as &$layer) {
+            if (is_array($layer) && in_array($layer['type'] ?? null, $introSlugs, true)) {
+                $params = is_array($layer['params'] ?? null) ? $layer['params'] : [];
+                if (empty($params['src'])) {
+                    $params['src'] = $introImageId;
+                    $layer['params'] = $params;
+                }
+                break;
+            }
+        }
+        unset($layer);
+
+        return $layers;
+    }
+
+    /** Median duration of the given scenes, or null if none have a real span. */
+    private function typicalSceneDuration(array $scenes): ?float
+    {
+        $durations = [];
+        foreach ($scenes as $s) {
+            $d = (float) ($s['end'] ?? 0) - (float) ($s['start'] ?? 0);
+            if ($d > self::EPS) {
+                $durations[] = $d;
+            }
+        }
+        if ($durations === []) {
+            return null;
+        }
+        sort($durations);
+
+        return $durations[intdiv(count($durations), 2)];
+    }
+
+    /** Ornament/speech layers that carry little information — safe to replace with an image. */
+    private const ORNAMENTS = ['ambient', 'kinetic-text', 'seal-stamp', 'fleuron-draw', 'underline-sweep', 'highlight', 'count-up'];
+
+    /** Layer types whose content is a block of text worth reading (drives dwell time). */
+    private const TEXT_HEAVY = ['bullet-list', 'card', 'comparison', 'terminal', 'timeline', 'diagram'];
+
+    private const EPS = 0.05;
+
+    /**
+     * Give text-dense scenes enough time to be read. A scene whose text visual runs
+     * shorter than its estimated reading time is extended by borrowing seconds from
+     * the FOLLOWING low-value scene (bare / ambient / ornament) — never from a real
+     * visual. Only the visual boundary moves, so coverage stays contiguous and the
+     * audio + karaoke (absolute-timed) stay in sync. A neighbour shrunk to nothing is
+     * dropped. Complements mergeBareScenes (which already holds a visual over gaps).
+     */
+    public function enforceReadingTime(array $plan): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes) || count($scenes) < 2) {
+            return $plan;
+        }
+        $scenes = array_values($scenes);
+        $n = count($scenes);
+
+        for ($i = 0; $i < $n - 1; $i++) {
+            $need = $this->readingSeconds($scenes[$i]);
+            if ($need <= 0) {
+                continue;
+            }
+            $deficit = $need - ((float) ($scenes[$i]['end'] ?? 0) - (float) ($scenes[$i]['start'] ?? 0));
+
+            // Borrow from consecutive following low-value scenes until satisfied.
+            $j = $i + 1;
+            while ($deficit > self::EPS && $j < $n && $this->isLowValue($scenes[$j])) {
+                $jStart = (float) ($scenes[$j]['start'] ?? 0);
+                $jEnd = (float) ($scenes[$j]['end'] ?? 0);
+                $jDur = $jEnd - $jStart;
+                if ($jDur <= self::EPS) {
+                    $j++;
+
+                    continue;
+                }
+                // Take what's needed; if that would leave a sliver, consume it whole.
+                $take = min($deficit, $jDur);
+                if ($jDur - $take < 0.6) {
+                    $take = $jDur;
+                }
+                $scenes[$i]['end'] = (float) $scenes[$i]['end'] + $take;
+                $scenes[$j]['start'] = $jStart + $take;
+                $deficit -= $take;
+                if ((float) $scenes[$j]['start'] >= $jEnd - self::EPS) {
+                    $j++; // neighbour fully absorbed — move to the next
+                }
+            }
+        }
+
+        // Drop any neighbour that was fully consumed.
+        $plan['scenes'] = array_values(array_filter(
+            $scenes,
+            fn ($s) => (float) ($s['end'] ?? 0) - (float) ($s['start'] ?? 0) > self::EPS,
+        ));
+
+        return $plan;
+    }
+
+    /** Estimated seconds needed to read a scene's text visual (0 if it isn't text-heavy). */
+    private function readingSeconds(array $scene): float
+    {
+        $len = 0;
+        foreach ($scene['layers'] ?? [] as $l) {
+            if (is_array($l) && in_array($l['type'] ?? '', self::TEXT_HEAVY, true)) {
+                $len += $this->textLength($l['params'] ?? []);
+            }
+        }
+        if ($len < 40) {
+            return 0.0; // trivial amount of text — no minimum
+        }
+
+        return max(2.5, min(6.0, $len / 16.0)); // ~16 chars/sec, clamped to a sane window
+    }
+
+    /** Total length of all string content nested anywhere in a value. */
+    private function textLength(mixed $node): int
+    {
+        if (is_string($node)) {
+            return mb_strlen($node);
+        }
+        if (is_array($node)) {
+            $sum = 0;
+            foreach ($node as $v) {
+                $sum += $this->textLength($v);
+            }
+
+            return $sum;
+        }
+
+        return 0;
+    }
+
+    /** A scene safe to shrink for a neighbour's dwell: no foreground, or only ornaments. */
+    private function isLowValue(array $scene): bool
+    {
+        $foreground = array_values(array_filter(
+            $scene['layers'] ?? [],
+            fn ($l) => is_array($l) && ($l['type'] ?? '') !== 'ambient',
+        ));
+
+        return $foreground === [] || $this->allOrnaments($foreground);
+    }
+
+    /**
+     * MANDATORY provided images: every image the user attached to the clip must show
+     * in at least one frame. The planner is asked to place them, but this GUARANTEES
+     * it — any provided image not referenced anywhere is injected as an image-reveal
+     * layer (the built-in SFX that displays an image), preferring scenes with no real
+     * visual (bare / ambient / ornament), then AI-generated images, and only then a
+     * data visual. No-op if image-reveal is disabled (nothing can show an image) or no
+     * images were provided.
+     *
+     * @param  array<int,array<string,mixed>>  $images  the clip's provided images ({id,path,…})
+     * @param  string[]|null  $allowedLayers  enabled layer types (image-reveal must be among them)
+     */
+    public function ensureProvidedImages(array $plan, array $images, ?array $allowedLayers = null): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes) || $scenes === [] || $images === []) {
+            return $plan;
+        }
+        if ($allowedLayers !== null && ! in_array('image-reveal', $allowedLayers, true)) {
+            return $plan; // the only image-capable layer is off — cannot enforce
+        }
+
+        $providedIds = array_values(array_filter(
+            array_map(fn ($i) => is_array($i) ? ($i['id'] ?? null) : null, $images),
+            fn ($v) => is_string($v) && $v !== '',
+        ));
+        if ($providedIds === []) {
+            return $plan;
+        }
+
+        $unused = array_values(array_diff($providedIds, $this->usedImageIds($scenes, $providedIds)));
+        if ($unused === []) {
+            return $plan; // the planner already placed every provided image
+        }
+
+        // Scene indices ranked by how little is lost if replaced (lowest first);
+        // scenes already showing a provided image are excluded.
+        $order = $this->placementOrder($scenes, $providedIds);
+        if ($order === []) {
+            return $plan;
+        }
+        $slots = count($order);
+
+        foreach ($unused as $k => $imgId) {
+            $idx = $order[$k % $slots];
+            $imageLayer = ['type' => 'image-reveal', 'text' => null, 'params' => ['src' => $imgId, 'variant' => 'fullscreen']];
+
+            if ($k < $slots) {
+                // First pass: the image OWNS this scene (keep any ambient underneath).
+                $ambient = array_values(array_filter(
+                    $scenes[$idx]['layers'] ?? [],
+                    fn ($l) => is_array($l) && ($l['type'] ?? '') === 'ambient',
+                ));
+                $scenes[$idx]['layers'] = array_merge($ambient, [$imageLayer]);
+                $scenes[$idx]['punchWord'] = null; // the image carries the frame
+            } else {
+                // ponytail: more images than scenes (rare — clips have many scenes).
+                // Best-effort: append; the extra image at least enters the plan.
+                $scenes[$idx]['layers'][] = $imageLayer;
+            }
+        }
+
+        $plan['scenes'] = array_values($scenes);
+
+        return $plan;
+    }
+
+    /** Provided image ids referenced anywhere in the scenes (src, chart image fields, nodes…). @return string[] */
+    private function usedImageIds(array $scenes, array $providedIds): array
+    {
+        $found = [];
+        $walk = function ($node) use (&$walk, &$found, $providedIds) {
+            if (is_array($node)) {
+                foreach ($node as $v) {
+                    $walk($v);
+                }
+            } elseif (is_string($node) && in_array($node, $providedIds, true)) {
+                $found[$node] = true;
+            }
+        };
+        foreach ($scenes as $s) {
+            $walk($s['layers'] ?? []);
+        }
+
+        return array_keys($found);
+    }
+
+    /**
+     * Scene indices to place images into, lowest-cost first: rank 0 = no real visual
+     * (bare/ornament), rank 1 = an AI/other image-reveal, rank 2 = a data visual.
+     * Scenes already showing a provided image are omitted. Ties keep scene order.
+     *
+     * @return int[]
+     */
+    private function placementOrder(array $scenes, array $providedIds): array
+    {
+        $ranked = [];
+        foreach ($scenes as $i => $scene) {
+            $layers = array_values(array_filter($scene['layers'] ?? [], 'is_array'));
+            if ($this->usedImageIds([$scene], $providedIds) !== []) {
+                continue; // already fulfils a provided image — leave it be
+            }
+            $foreground = array_values(array_filter($layers, fn ($l) => ($l['type'] ?? '') !== 'ambient'));
+
+            if ($foreground === [] || $this->allOrnaments($foreground)) {
+                $ranked[$i] = 0;
+            } elseif (count($foreground) === 1 && ($foreground[0]['type'] ?? '') === 'image-reveal') {
+                $ranked[$i] = 1; // an AI/other image — a user image is preferred here
+            } else {
+                $ranked[$i] = 2;
+            }
+        }
+        asort($ranked); // stable on PHP 8: rank asc, scene order preserved for ties
+
+        return array_keys($ranked);
+    }
+
+    private function allOrnaments(array $foreground): bool
+    {
+        foreach ($foreground as $l) {
+            if (! in_array($l['type'] ?? '', self::ORNAMENTS, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Remove layers that would render an empty-state placeholder: an image-reveal
      * with no image (generation failed / no src) or a chart/diagram with no data.
      * Those show a striped block or a faint "—" and look broken. Run AFTER image

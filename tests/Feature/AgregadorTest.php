@@ -26,6 +26,10 @@ class AgregadorTest extends TestCase
         config(['contentmachine.vault.path' => $this->tmp]);
         $this->app->singleton(VaultContract::class, fn () => new VaultRepository($this->tmp));
 
+        // Sem token Apify: Instagram/TikTok/LinkedIn ficam indisponíveis e são
+        // ignorados com aviso (evita chamadas reais à API nos testes).
+        config(['services.apify.token' => null]);
+
         $meta = $this->itemFixture();
         $url = $meta['webpage_url'];
 

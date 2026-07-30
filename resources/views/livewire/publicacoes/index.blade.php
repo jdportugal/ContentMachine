@@ -58,8 +58,8 @@
                     <button wire:click="alternarPronto('{{ $nota->path }}')"
                             class="shrink-0 font-mono text-[0.62rem] px-2 py-1 rounded-sm border transition
                                    {{ $pronto ? 'border-good/40 text-good hover:bg-good/10' : 'border-teal/40 text-teal hover:bg-teal/10' }}"
-                            title="{{ $pronto ? 'Back to draft' : 'Mark as ready — goes to Drafts' }}">
-                        {{ $pronto ? 'reopen' : 'mark ready' }}
+                            title="{{ $pronto ? 'Back to draft' : 'Send to Finished — ready to publish' }}">
+                        {{ $pronto ? 'reopen' : 'send to Finished' }}
                     </button>
                 @endunless
                 <button wire:click="remover('{{ $nota->path }}')" wire:confirm="Remove this post?"

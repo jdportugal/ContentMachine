@@ -145,10 +145,35 @@
                     'tubelab' => 'TubeLab',
                     'reddit_client_id' => 'Reddit client id',
                     'reddit_client_secret' => 'Reddit client secret',
+                    'blotato' => 'Blotato (publishing)',
                 ] as $chave => $rotulo)
                     <div>
                         <label class="eyebrow block mb-1.5">{{ $rotulo }}</label>
                         <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}" placeholder="•••• (from .env)"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    </div>
+                @endforeach
+            </div>
+        </x-panel>
+
+        {{-- Blotato connected accounts --}}
+        <x-panel eyebrow="Publishing" title="Blotato accounts" glyph="📡">
+            <p class="text-ink-soft -mt-2 mb-4">
+                Paste the connected-account id per platform from your
+                <span class="text-teal">Blotato dashboard</span>. A platform with no id can't be posted to.
+                Needs the Blotato key above.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4">
+                @foreach ([
+                    'youtube' => 'YouTube',
+                    'instagram' => 'Instagram',
+                    'tiktok' => 'TikTok',
+                    'linkedin' => 'LinkedIn',
+                    'threads' => 'Threads',
+                ] as $plat => $rotulo)
+                    <div>
+                        <label class="eyebrow block mb-1.5">{{ $rotulo }} account id</label>
+                        <input type="text" autocomplete="off" wire:model="blotato.{{ $plat }}" placeholder="e.g. 12345"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     </div>
                 @endforeach

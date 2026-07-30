@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Services\Publicacoes\Dto\PublicacaoPlan;
 use App\Services\Publicacoes\PublicacaoKinds;
+use App\Services\Publicacoes\Rendering\KieProgress;
 use App\Services\Publicacoes\Rendering\SlideRenderer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,6 +27,18 @@ class GerarImagensJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable;
 
     public int $timeout = 900;
+
+    /**
+     * Retry the piece a few times: with the per-card KieProgress store, a retry
+     * resumes (reuses finished cards, re-polls in-flight ones) instead of
+     * regenerating the whole carousel — so retrying only fetches the failed card.
+     */
+    public int $tries = 3;
+
+    public function backoff(): int
+    {
+        return 15;
+    }
 
     /**
      * @param  array<int,array{titulo?:string,texto?:string}>  $slides
@@ -60,6 +73,10 @@ class GerarImagensJob implements ShouldQueue
             $kind['_prompts'] = $this->prompts;
             $kind['_anexos'] = $this->anexos;
             $kind['_anexosDescr'] = $this->anexosDescr;
+            // Per-card progress (keyed by this job's token) so a retry resumes only
+            // the card that failed instead of regenerating the whole piece.
+            $progress = new KieProgress($this->token);
+            $kind['_progress'] = $progress;
             $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
 
             $plano = PublicacaoPlan::daOficina(
@@ -78,6 +95,7 @@ class GerarImagensJob implements ShouldQueue
 
             $paths = $this->escrever($renderer->render($plano, array_merge($kind, ['_cor' => $cor])));
             Cache::put(self::key($this->token), ['imagens' => $paths], now()->addMinutes(30));
+            $progress->clear(); // piece finished — drop the resume state
 
             // Persist on the note (so the dashboard reflects the images without the workshop open).
             if ($this->notaSlug !== '' && $paths !== []) {
@@ -91,6 +109,8 @@ class GerarImagensJob implements ShouldQueue
     public function failed(\Throwable $e): void
     {
         Cache::put(self::key($this->token), ['erro' => true, 'msg' => $e->getMessage()], now()->addMinutes(30));
+        // All retries exhausted — drop the resume state so a fresh request starts clean.
+        (new KieProgress($this->token))->clear();
         $this->limparFlag();
     }
 

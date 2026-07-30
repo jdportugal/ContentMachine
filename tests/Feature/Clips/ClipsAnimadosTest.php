@@ -183,6 +183,74 @@ class ClipsAnimadosTest extends TestCase
         Queue::assertPushed(RenderJob::class);
     }
 
+    public function test_editing_a_clip_loads_its_uploaded_images(): void
+    {
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_logo', 'path' => 'clips/uploads/logo.png', 'description' => 'the logo']],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'layers' => []],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->assertSet('images.0.id', 'img_logo')
+            ->assertSet('images.0.description', 'the logo');
+    }
+
+    public function test_replacing_an_image_keeps_its_id_and_swaps_the_file(): void
+    {
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_logo', 'path' => 'clips/uploads/old.png', 'description' => 'the logo']],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'layers' => []],
+            ]],
+        ]);
+
+        $component = Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->set('imageReplace.0', UploadedFile::fake()->image('new.png', 120, 120))
+            ->assertHasNoErrors()
+            ->assertSet('images.0.id', 'img_logo'); // id preserved → plan keeps using it
+
+        $newPath = $component->get('images')[0]['path'];
+        $this->assertNotSame('clips/uploads/old.png', $newPath); // file swapped
+    }
+
+    public function test_removing_a_used_image_persists_and_blanks_its_plan_reference(): void
+    {
+        Queue::fake();
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [
+                ['id' => 'img_a', 'path' => 'clips/uploads/a.png', 'description' => 'A'],
+                ['id' => 'img_b', 'path' => 'clips/uploads/b.png', 'description' => 'B'],
+            ],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => 'img_a', 'variant' => 'fullscreen']]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('removerImagem', 0) // drop img_a (the referenced one)
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertCount(1, $p->images);
+        $this->assertSame('img_b', $p->images[0]['id']);
+        // The now-dangling reference is blanked so the render shows a placeholder, not a 404.
+        $this->assertSame('', $p->plan['scenes'][0]['layers'][0]['params']['src']);
+    }
+
     public function test_edit_raw_json_rejects_invalid_json(): void
     {
         $p = $this->store()->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => ['duration' => 3.0, 'scenes' => []]]);

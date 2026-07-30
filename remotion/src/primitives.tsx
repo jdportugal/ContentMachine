@@ -8,6 +8,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
+import { fillTextBox, fitText } from "@remotion/layout-utils";
 import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import type { Animation } from "./types";
 import { CUSTOM_PRIMITIVES } from "./effects";
@@ -50,6 +51,93 @@ const Center: React.FC<{ children: React.ReactNode; style?: React.CSSProperties 
     {children}
   </AbsoluteFill>
 );
+
+// ── box-aware text fitting ───────────────────────────────────────────────────
+// The renderer runs in a real browser, so we can MEASURE (via layout-utils) how
+// text wraps and make it fit — the two levers a human would use: shrink the font,
+// and if it still won't fit, trim words (…). `fillTextBox` reports, word by word,
+// whether the text spills past `maxLines` lines of `maxWidth` at a given size.
+
+type BoxOpts = {
+  maxWidth: number;
+  maxLines: number;
+  fontFamily: string;
+  fontWeight?: number | string;
+  letterSpacing?: string;
+  textTransform?: "none" | "uppercase";
+};
+
+const fitsInBox = (text: string, fontSize: number, o: BoxOpts): boolean => {
+  const box = fillTextBox({ maxBoxWidth: o.maxWidth, maxLines: o.maxLines });
+  for (const w of text.split(/\s+/).filter(Boolean)) {
+    if (box.add({ text: w + " ", fontSize, fontFamily: o.fontFamily, fontWeight: o.fontWeight, letterSpacing: o.letterSpacing, textTransform: o.textTransform }).exceedsBox) {
+      return false;
+    }
+  }
+  return true;
+};
+
+// Largest font in [min, max] at which `text` fits the box; the floor if none do.
+const fitFontToBox = (text: string, maxFontSize: number, minFontSize: number, o: BoxOpts): number => {
+  for (let size = Math.round(maxFontSize); size > minFontSize; size -= 2) {
+    if (fitsInBox(text, size, o)) return size;
+  }
+  return minFontSize;
+};
+
+// Drop trailing words (adding …) until the text fits the box at `fontSize`.
+const truncateToBox = (text: string, fontSize: number, o: BoxOpts): string => {
+  if (fitsInBox(text, fontSize, o)) return text;
+  const words = text.split(/\s+/).filter(Boolean);
+  while (words.length > 1) {
+    words.pop();
+    const candidate = words.join(" ") + "…";
+    if (fitsInBox(candidate, fontSize, o)) return candidate;
+  }
+  return text; // one giant word — the CSS clamp below still keeps it inside the box
+};
+
+// Renders text that ALWAYS fits its box: shrinks the font toward `minFontSize` to
+// fit `maxWidth` × `maxLines`, then trims words (…) if it still overflows, with a
+// CSS line-clamp as the final safety net. `maxLines` defaults to 1 (single-line
+// labels, the old behaviour — just fitted and clamped instead of overflowing).
+const FitText: React.FC<{
+  text: string;
+  maxWidth: number;
+  maxFontSize: number;
+  minFontSize?: number;
+  maxLines?: number;
+  fontFamily: string;
+  fontWeight?: number | string;
+  letterSpacing?: string;
+  uppercase?: boolean;
+  style?: React.CSSProperties;
+}> = ({ text, maxWidth, maxFontSize, minFontSize = 0, maxLines = 1, fontFamily, fontWeight, letterSpacing, uppercase, style }) => {
+  const o: BoxOpts = { maxWidth, maxLines, fontFamily, fontWeight, letterSpacing, textTransform: uppercase ? "uppercase" : "none" };
+  const floor = Math.max(1, minFontSize);
+  const size = fitFontToBox(text || " ", maxFontSize, floor, o);
+  const shown = truncateToBox(text || " ", size, o);
+  return (
+    <span
+      style={{
+        ...style,
+        fontFamily,
+        fontWeight,
+        letterSpacing,
+        textTransform: uppercase ? "uppercase" : undefined,
+        fontSize: size,
+        maxWidth,
+        display: "-webkit-box",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: maxLines,
+        overflow: "hidden",
+        whiteSpace: "normal",
+      }}
+    >
+      {shown}
+    </span>
+  );
+};
 
 // Nebula signature: display headlines are Anton uppercase, clipped to the
 // molten-gold gradient. `dark` no longer changes the colour (the gold reads on
@@ -268,9 +356,11 @@ const KineticText: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const dur = winFrames(anim, fps);
   const words = (anim.text ?? "").split(/\s+/).filter(Boolean);
   const perWord = words.length > 0 ? Math.max(3, (dur * 0.6) / words.length) : 1;
+  // Shrink the headline so the whole phrase fits ~3 lines of the frame width.
+  const fitFont = fitFontToBox(anim.text ?? " ", 96, 44, { maxWidth: 900, maxLines: 3, fontFamily: FONTS.display, fontWeight: FONTS.displayWeight, textTransform: "uppercase" });
   return (
     <Center>
-      <p style={{ ...titleStyleFor(dark), display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.28em" }}>
+      <p style={{ ...titleStyleFor(dark), fontSize: fitFont, maxWidth: 900, overflow: "hidden", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.28em" }}>
         {words.map((w, i) => {
           const startAt = i * perWord;
           const local = frame - startAt;
@@ -720,12 +810,33 @@ const Comparison: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const ptFont = maxPts >= 4 || longest > 30 ? 48 : maxPts >= 3 || longest > 20 ? 56 : 64;
 
   const block = (col: { title: string; points: string[] }, delay: number, accent: string) => (
-    <div style={{ width: "100%", textAlign: "center" }}>
-      <div style={{ fontFamily: FONTS.display, color: accent, fontWeight: FONTS.displayWeight, fontSize: 84, lineHeight: 1.05, marginBottom: 22, textShadow: ENGRAVE_SHADOW, opacity: interpolate(frame, [delay, delay + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>{col.title}</div>
+    <div style={{ width: "100%", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <FitText
+        text={col.title}
+        maxWidth={860}
+        maxFontSize={84}
+        minFontSize={44}
+        maxLines={2}
+        fontFamily={FONTS.display}
+        fontWeight={FONTS.displayWeight}
+        style={{ color: accent, lineHeight: 1.05, marginBottom: 22, textShadow: ENGRAVE_SHADOW, opacity: interpolate(frame, [delay, delay + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}
+      />
       {col.points.map((p, i) => {
         const at = delay + fps * 0.3 + i * fps * 0.3;
         const t = interpolate(frame, [at, at + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-        return <div key={i} style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: inkC(dark), fontSize: ptFont, lineHeight: 1.35, marginBottom: 12, opacity: t, transform: `translateY(${(1 - t) * 18}px)` }}>{p}</div>;
+        return (
+          <FitText
+            key={i}
+            text={p}
+            maxWidth={860}
+            maxFontSize={ptFont}
+            minFontSize={30}
+            maxLines={2}
+            fontFamily={FONTS.body}
+            fontWeight={FONTS.bodyWeight}
+            style={{ color: inkC(dark), lineHeight: 1.35, marginBottom: 12, opacity: t, transform: `translateY(${(1 - t) * 18}px)` }}
+          />
+        );
       })}
     </div>
   );
@@ -751,14 +862,34 @@ const BulletList: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center style={{ alignItems: "flex-start", textAlign: "left", padding: "12% 11%" }}>
-      {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 88, marginBottom: 52, textAlign: "left", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
+      {title ? (
+        <FitText
+          text={title}
+          maxWidth={840}
+          maxFontSize={88}
+          minFontSize={44}
+          maxLines={2}
+          fontFamily={FONTS.display}
+          fontWeight={FONTS.displayWeight}
+          style={{ color: inkC(dark), marginBottom: 52, textAlign: "left", textShadow: ENGRAVE_SHADOW }}
+        />
+      ) : null}
       <div style={{ display: "flex", flexDirection: "column", gap: 40, width: "100%" }}>
         {items.map((it, i) => {
           const t = interpolate(frame, [i * step, i * step + fps * 0.5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
           return (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 28, opacity: t, transform: `translateX(${(1 - t) * 30}px)` }}>
-              <span style={{ color: COLORS.teal, fontSize: 40, lineHeight: 1.35, flexShrink: 0 }}>◆</span>
-              <span style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: inkC(dark), fontSize: itemFont, lineHeight: 1.35, textAlign: "left" }}>{it}</span>
+            <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 28, opacity: t, transform: `translateX(${(1 - t) * 30}px)` }}>
+              <span style={{ color: COLORS.teal, fontSize: 40, lineHeight: 1.2, flexShrink: 0 }}>◆</span>
+              <FitText
+                text={it}
+                maxWidth={760}
+                maxFontSize={itemFont}
+                minFontSize={32}
+                maxLines={2}
+                fontFamily={FONTS.body}
+                fontWeight={FONTS.bodyWeight}
+                style={{ color: inkC(dark), lineHeight: 1.2, textAlign: "left" }}
+              />
             </div>
           );
         })}
@@ -780,10 +911,33 @@ const Card: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 
   return (
     <Center>
-      <div style={{ background: COLORS.vellum, border: panelBorder() ?? "1px solid rgba(91,70,54,0.25)", borderRadius: STYLE.sharp ? 0 : 18, padding: "56px 64px", boxShadow: PANEL_SHADOW, transform: `scale(${scale})`, opacity, maxWidth: "84%" }}>
-        {title ? <div style={{ fontFamily: FONTS.display, color: textForBg(COLORS.vellum), fontWeight: FONTS.displayWeight, fontSize: 78, lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textTransform: STYLE.uppercaseTitles ? "uppercase" : undefined, letterSpacing: STYLE.uppercaseTitles ? "-0.02em" : undefined, textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : undefined }}>{title}</div> : null}
+      <div style={{ background: COLORS.vellum, border: panelBorder() ?? "1px solid rgba(91,70,54,0.25)", borderRadius: STYLE.sharp ? 0 : 18, padding: "56px 64px", boxShadow: PANEL_SHADOW, transform: `scale(${scale})`, opacity, maxWidth: "84%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {title ? (
+          <FitText
+            text={title}
+            maxWidth={760}
+            maxFontSize={78}
+            minFontSize={40}
+            maxLines={2}
+            fontFamily={FONTS.display}
+            fontWeight={FONTS.displayWeight}
+            uppercase={STYLE.uppercaseTitles}
+            letterSpacing={STYLE.uppercaseTitles ? "-0.02em" : undefined}
+            style={{ color: textForBg(COLORS.vellum), lineHeight: 1.08, marginBottom: lines.length ? 28 : 0, textAlign: "center", textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : undefined }}
+          />
+        ) : null}
         {lines.map((l, i) => (
-          <div key={i} style={{ fontFamily: FONTS.body, fontWeight: FONTS.bodyWeight, color: textForBg(COLORS.vellum), fontSize:  52, lineHeight: 1.45, opacity: 0.85 }}>{l}</div>
+          <FitText
+            key={i}
+            text={l}
+            maxWidth={760}
+            maxFontSize={52}
+            minFontSize={30}
+            maxLines={2}
+            fontFamily={FONTS.body}
+            fontWeight={FONTS.bodyWeight}
+            style={{ color: textForBg(COLORS.vellum), lineHeight: 1.45, opacity: 0.85, textAlign: "center" }}
+          />
         ))}
       </div>
     </Center>
@@ -1083,9 +1237,29 @@ class EffectBoundary extends React.Component<{ children: React.ReactNode }, { fa
   }
 }
 
+// A local image staged into public/ (e.g. "clip-asset-<hash>.png") must be loaded
+// via staticFile() or Remotion can't serve it → 404. Built-in primitives call
+// staticFile themselves; custom (generated) effects use <Img src={params.src}>
+// raw, so we resolve every local image path in their params to a staticFile URL
+// here. https/absolute paths pass through untouched.
+const LOCAL_IMG = /\.(png|jpe?g|webp|gif|bmp|avif)$/i;
+const resolveAssetUrls = (value: unknown): unknown => {
+  if (typeof value === "string") {
+    return LOCAL_IMG.test(value) && !/^https?:\/\//.test(value) && !value.startsWith("/") ? staticFile(value) : value;
+  }
+  if (Array.isArray(value)) return value.map(resolveAssetUrls);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, resolveAssetUrls(v)]));
+  }
+  return value;
+};
+
 export function renderPrimitive(anim: Animation, fps: number, dark = false): React.ReactNode {
+  const isCustom = anim.primitive in CUSTOM_PRIMITIVES;
+  // Custom effects load images raw, so hand them staticFile()-resolved paths.
+  const a = isCustom && anim.params ? { ...anim, params: resolveAssetUrls(anim.params) as typeof anim.params } : anim;
   const Comp = PRIMITIVES[anim.primitive] ?? Fade;
-  const node = <Comp anim={anim} fps={fps} dark={dark} />;
+  const node = <Comp anim={a} fps={fps} dark={dark} />;
   // Isolate custom effects behind an error boundary; built-ins are trusted.
-  return anim.primitive in CUSTOM_PRIMITIVES ? <EffectBoundary>{node}</EffectBoundary> : node;
+  return isCustom ? <EffectBoundary>{node}</EffectBoundary> : node;
 }

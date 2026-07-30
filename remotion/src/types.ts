@@ -88,6 +88,7 @@ export interface Layer {
   params?: AnimationParams;
   anim?: LayerAnim;
   position?: LayerPosition;
+  audioSrc?: string; // sound attached to this effect, played once at scene start
 }
 
 export interface Scene {
@@ -142,6 +143,9 @@ export interface ClipProps {
   // v2 scene-based model (preferred). If absent, `animations` (v1) is rendered.
   scenes?: Scene[];
   words?: KaraokeWord[]; // drives karaoke captions
+  // Full-clip custom backdrop (behind all scenes), replacing the themed texture.
+  // Resolved by RenderJob: code = a generated component (by slug); video = an mp4.
+  background?: { kind: "code"; slug: string } | { kind: "video"; src: string };
   videoSrc?: string; // source video (overlay clips) — scenes composite it per `present`
   animations?: Animation[]; // legacy flat model (backward compatible)
   // Index signature required so ClipProps satisfies Remotion's

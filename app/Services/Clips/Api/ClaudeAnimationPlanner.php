@@ -23,6 +23,6 @@ class ClaudeAnimationPlanner implements AnimationPlanner
 
         $decoded = $this->extractJson((string) ($envelope['result'] ?? ''));
 
-        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? []);
+        return $this->envelope($transcript, $mode, $options, $decoded['scenes'] ?? [], is_string($decoded['background'] ?? null) ? $decoded['background'] : null);
     }
 }

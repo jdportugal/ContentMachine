@@ -99,4 +99,11 @@ return [
         'file_base_url' => env('KIE_FILE_BASE_URL', 'https://kieai.redpandaai.co'),
     ],
 
+    // Blotato — social publishing/scheduling. Optional: with no key the
+    // Finished hub's publish actions are disabled.
+    'blotato' => [
+        'key' => env('BLOTATO_API_KEY'),
+        'base_url' => env('BLOTATO_BASE_URL', 'https://backend.blotato.com'),
+    ],
+
 ];

@@ -53,7 +53,7 @@ class Publicacoes extends Component
         unset($this->publicacoes);
     }
 
-    /** Toggles a post between "draft" (in progress) and "ready" (goes to Drafts). */
+    /** Toggles a post between "draft" (in progress) and "ready" (goes to Finished). */
     public function alternarPronto(string $path, VaultContract $vault): void
     {
         $nota = $vault->get($path);

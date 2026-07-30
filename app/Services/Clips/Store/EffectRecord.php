@@ -6,6 +6,9 @@ namespace App\Services\Clips\Store;
  * A custom SFX, stored as a JSON file in the active project's vault
  * (sfx/<id>.json). Keyed by a stable id; `slug` is the layer type. Replaces the
  * old Eloquent ClipEffect — same fields and helpers.
+ *
+ * Also reused verbatim for custom BACKGROUNDS (BackgroundStore): identical
+ * shape, different vault dir — hence the store union below.
  */
 class EffectRecord
 {
@@ -18,7 +21,7 @@ class EffectRecord
     public const STATUS_UPDATING = 'updating';
 
     /** @param array<string,mixed> $attributes */
-    public function __construct(private EffectStore $store, public array $attributes) {}
+    public function __construct(private EffectStore|BackgroundStore $store, public array $attributes) {}
 
     public function __get(string $key): mixed
     {

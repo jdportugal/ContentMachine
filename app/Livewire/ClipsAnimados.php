@@ -2,19 +2,19 @@
 
 namespace App\Livewire;
 
-use App\Jobs\Clips\GenerateEffectJob;
+use App\Jobs\Clips\GenerateBackgroundJob;
 use App\Jobs\Clips\PlanAnimationsJob;
-use App\Jobs\Clips\RenderEffectSampleJob;
+use App\Jobs\Clips\RenderBackgroundReelJob;
+use App\Jobs\Clips\RenderBackgroundSampleJob;
 use App\Jobs\Clips\RenderJob;
-use App\Jobs\Clips\RenderShowreelJob;
 use App\Jobs\Clips\TranscribeJob;
-use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ImageProbe;
 use App\Services\Clips\PlanValidator;
+use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectRecord;
-use App\Services\Clips\Store\EffectStore;
 use App\Services\Clips\TranscriptRebuilder;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
@@ -36,18 +36,22 @@ class ClipsAnimados extends Component
     // Keep in sync with the Remotion `Transition` type (remotion/src/types.ts).
     public const TRANSITIONS = ['cut', 'crossfade', 'whip', 'slide', 'zoom'];
 
-    /** dashboard | create | editPlan | editTranscript | sfx */
+    /** dashboard | create | editPlan | editTranscript | backgrounds */
     public string $view = 'dashboard';
 
-    // ---- SFX studio ----
-    public string $sfxPrompt = '';
+    // ---- Backgrounds studio ----
+    public string $bgPrompt = '';
 
-    public ?string $editingSfxId = null;
+    public $bgVideo = null;
 
-    public string $sfxEditPrompt = '';
+    public string $bgVideoName = '';
 
-    /** Set while creating an override for a built-in effect (the built-in's slug). */
-    public ?string $sfxOverrideSlug = null;
+    public ?string $editingBgId = null;
+
+    public string $bgEditPrompt = '';
+
+    /** Backdrop choice for a new clip: 'auto' | 'none' | an enabled background slug. */
+    public string $background = 'auto';
 
     // ---- creation ----
     /** null | animation | overlay */
@@ -69,6 +73,9 @@ class ClipsAnimados extends Component
 
     /** @var array<int,array{id:string,path:string,description:string}> */
     public array $images = [];
+
+    /** Per-row replacement uploads while editing a clip (keyed by image index). */
+    public array $imageReplace = [];
 
     // background music (same library as shorts) — '' = random, 'nenhuma' = no music
     public string $musica = '';
@@ -101,6 +108,12 @@ class ClipsAnimados extends Component
         $this->view = 'create';
     }
 
+    /** Promotes a finished clip to the Finished hub (ready to publish). */
+    public function promover(string $id): void
+    {
+        app(ClipStore::class)->find($id)?->update(['finished' => true]);
+    }
+
     public function escolherTipo(string $type): void
     {
         $this->createType = in_array($type, ['animation', 'overlay'], true) ? $type : null;
@@ -109,210 +122,9 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'musica', 'musicaVolume', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'sfxPrompt', 'editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt']);
         $this->resetValidation();
         $this->view = 'dashboard';
-    }
-
-    // =====================================================================
-    // SFX studio
-    // =====================================================================
-
-    public function abrirSfx(): void
-    {
-        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
-        $this->resetValidation();
-        $this->view = 'sfx';
-        $this->ensurePreviews();
-    }
-
-    /** The vault-backed SFX store for the active project. */
-    private function effects(): EffectStore
-    {
-        return app(EffectStore::class);
-    }
-
-    public function editarSfx(string $id): void
-    {
-        $effect = $this->effects()->find($id);
-        if (! $effect || ! $effect->isActive()) {
-            return; // only live effects can be refined
-        }
-        $this->editingSfxId = $effect->id();
-        $this->sfxEditPrompt = (string) $effect->prompt;
-        $this->resetValidation();
-    }
-
-    /** Open the refine panel for a built-in: edit its override, or start a new one. */
-    public function editarBuiltin(string $slug): void
-    {
-        if (! app(EffectLibrary::class)->isBuiltin($slug)) {
-            return;
-        }
-        $this->resetValidation();
-        $override = $this->effects()->all()->firstWhere('slug', $slug);
-        if ($override && $override->isActive()) {
-            $this->editingSfxId = $override->id();
-            $this->sfxOverrideSlug = null;
-            $this->sfxEditPrompt = (string) $override->prompt;
-        } else {
-            $this->editingSfxId = null;
-            $this->sfxOverrideSlug = $slug;
-            $this->sfxEditPrompt = '';
-        }
-    }
-
-    /** Revert a built-in to its default by deleting its override. */
-    public function resetBuiltin(string $slug, EffectLibrary $library): void
-    {
-        if ($override = $this->effects()->all()->firstWhere('slug', $slug)) {
-            $library->remove($override);
-        }
-    }
-
-    public function cancelarSfxEdicao(): void
-    {
-        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
-        $this->resetValidation();
-    }
-
-    public function guardarSfxEdicao(): void
-    {
-        $this->validate(
-            ['sfxEditPrompt' => 'required|string|min:8|max:600'],
-            [
-                'sfxEditPrompt.required' => 'Describe the change you want.',
-                'sfxEditPrompt.min' => 'Give a bit more detail (at least 8 characters).',
-            ],
-        );
-
-        if ($this->editingSfxId) {
-            // Refine an existing effect (custom or a built-in override).
-            $effect = $this->effects()->find($this->editingSfxId);
-            if ($effect && $effect->isActive()) {
-                $effect->update([
-                    'prompt' => trim($this->sfxEditPrompt),
-                    'status' => EffectRecord::STATUS_UPDATING,
-                    'error' => null,
-                ]);
-                GenerateEffectJob::dispatch($effect->id(), isEdit: true);
-            }
-        } elseif ($this->sfxOverrideSlug && app(EffectLibrary::class)->isBuiltin($this->sfxOverrideSlug)) {
-            // Create an override of a built-in: same slug replaces it in the registry.
-            $slug = $this->sfxOverrideSlug;
-            $effect = $this->effects()->create([
-                'prompt' => trim($this->sfxEditPrompt),
-                'slug' => $slug,
-                'display_name' => Str::title(str_replace('-', ' ', $slug)).' (custom)',
-                'description' => "Override of the built-in {$slug}.",
-                'param_schema' => '{}',
-                'tsx' => '',
-                'status' => EffectRecord::STATUS_PENDING,
-            ]);
-            GenerateEffectJob::dispatch($effect->id());
-        }
-
-        $this->reset(['editingSfxId', 'sfxEditPrompt', 'sfxOverrideSlug']);
-    }
-
-    /** Dispatch a cached-preview render for any built-in / active effect missing one. */
-    public function ensurePreviews(): void
-    {
-        $library = app(EffectLibrary::class);
-        foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
-            if (! $library->previewExists($slug)) {
-                RenderEffectSampleJob::dispatch($slug, $sample['text'], $sample['params']);
-            }
-        }
-        foreach ($library->active() as $effect) {
-            if (! $library->previewExists($effect->slug)) {
-                RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
-            }
-        }
-    }
-
-    /** Render one video cycling through every effect, each with its name centered. */
-    public function gerarShowreel(EffectLibrary $library): void
-    {
-        if ($library->showreelExists()) {
-            return; // cached for the current design system + effect set
-        }
-        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
-        \Illuminate\Support\Facades\Cache::put(RenderShowreelJob::flagKey($slug), true, now()->addMinutes(20));
-        RenderShowreelJob::dispatch();
-    }
-
-    public function getShowreelReadyProperty(EffectLibrary $library): bool
-    {
-        return $library->showreelExists();
-    }
-
-    public function getShowreelBusyProperty(): bool
-    {
-        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
-
-        return \Illuminate\Support\Facades\Cache::has(RenderShowreelJob::flagKey($slug));
-    }
-
-    public function gerarSfx(): void
-    {
-        $this->validate(
-            ['sfxPrompt' => 'required|string|min:8|max:600'],
-            [
-                'sfxPrompt.required' => 'Describe the effect you want.',
-                'sfxPrompt.min' => 'Give a bit more detail (at least 8 characters).',
-            ],
-        );
-
-        $effect = $this->effects()->create([
-            'prompt' => trim($this->sfxPrompt),
-            'slug' => 'pending-'.Str::lower(Str::random(8)),
-            'display_name' => Str::limit(trim($this->sfxPrompt), 40),
-            'description' => '',
-            'param_schema' => '{}',
-            'tsx' => '',
-            'status' => EffectRecord::STATUS_PENDING,
-        ]);
-
-        GenerateEffectJob::dispatch($effect->id());
-        $this->sfxPrompt = '';
-    }
-
-    /** Allow/disallow a live custom effect for use by the planner in generated videos. */
-    public function alternarSfx(string $id): void
-    {
-        $effect = $this->effects()->find($id);
-        if ($effect && $effect->isActive()) {
-            $effect->update(['enabled' => ! $effect->enabled]);
-        }
-    }
-
-    /** Allow/disallow a built-in effect for the planner. */
-    public function alternarBuiltin(string $slug, EffectLibrary $library): void
-    {
-        $library->toggleBuiltin($slug);
-    }
-
-    public function apagarSfx(string $id, EffectLibrary $library): void
-    {
-        if ($effect = $this->effects()->find($id)) {
-            $library->remove($effect);
-        }
-    }
-
-    /** Custom effects only — built-in overrides belong to their built-in tile. @return Collection<int,EffectRecord> */
-    public function getEffectsProperty()
-    {
-        $library = app(EffectLibrary::class);
-
-        return $this->effects()->all()->reject(fn (EffectRecord $e) => $library->isBuiltin($e->slug))->values();
-    }
-
-    public function getSfxBusyProperty(): bool
-    {
-        return $this->effects()->all()->contains(fn (EffectRecord $e) => in_array($e->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true))
-            || collect(EffectLibrary::BUILTIN_SAMPLES)->keys()
-                ->contains(fn ($slug) => ! app(EffectLibrary::class)->previewExists($slug));
     }
 
     public function adicionarImagem(): void
@@ -329,23 +141,287 @@ class ClipsAnimados extends Component
 
         $path = $this->newImage->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
-        $this->images[] = [
-            'id' => 'img_'.substr(md5($path), 0, 8),
-            'path' => $path,
-            'description' => trim($this->newImageDesc),
-            'transparent' => ImageProbe::hasAlpha($abs),
-            'tone' => ImageProbe::tone($abs),
-        ];
+        $this->images[] = array_merge(
+            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => trim($this->newImageDesc)],
+            $this->probeImage($abs),
+        );
         $this->reset(['newImage', 'newImageDesc']);
+    }
+
+    /** Replace an already-uploaded image's file, keeping its id so the plan (which
+     *  references images by id) keeps using it — the new picture just shows on
+     *  re-render. Fires when a per-row replace file input receives a file. */
+    public function updatedImageReplace(mixed $value, string $key): void
+    {
+        $i = (int) $key;
+        if (! $value || ! isset($this->images[$i])) {
+            unset($this->imageReplace[$i]);
+
+            return;
+        }
+        $this->validateOnly("imageReplace.$i", ["imageReplace.$i" => 'image|max:20480'], [
+            "imageReplace.$i.image" => 'The file must be an image.',
+            "imageReplace.$i.max" => 'The image is too large (maximum 20 MB).',
+        ]);
+
+        $path = $value->store('clips/uploads');
+        $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
+        // Same id/description; swap the file (old file is cleaned up on save).
+        $this->images[$i] = array_merge($this->images[$i], ['path' => $path], $this->probeImage($abs));
+        unset($this->imageReplace[$i]);
     }
 
     public function removerImagem(int $i): void
     {
-        if (isset($this->images[$i])) {
-            Storage::disk(config('contentmachine.clips.disk'))->delete($this->images[$i]['path']);
-            unset($this->images[$i]);
-            $this->images = array_values($this->images);
+        if (! isset($this->images[$i])) {
+            return;
         }
+        // When editing a saved clip, defer file deletion to save (so a cancel keeps
+        // the clip intact). During creation the upload is discardable immediately.
+        if (! $this->editingId) {
+            Storage::disk(config('contentmachine.clips.disk'))->delete($this->images[$i]['path']);
+        }
+        unset($this->images[$i]);
+        $this->images = array_values($this->images);
+    }
+
+    /** @return array{transparent:bool,tone:string} */
+    private function probeImage(string $abs): array
+    {
+        return ['transparent' => ImageProbe::hasAlpha($abs), 'tone' => ImageProbe::tone($abs)];
+    }
+
+    /** Delete uploaded files removed/replaced during editing (paths gone from $this->images). */
+    private function pruneImageFiles(array $oldImages): void
+    {
+        $keep = array_column($this->images, 'path');
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        foreach ($oldImages as $img) {
+            $path = $img['path'] ?? null;
+            if (is_string($path) && $path !== '' && ! in_array($path, $keep, true)) {
+                $disk->delete($path);
+            }
+        }
+    }
+
+    /** Blank image-id references in the plan that no longer point to an uploaded image
+     *  (removed while editing) so the render shows a placeholder instead of 404ing. */
+    private function stripMissingImageRefs(array $plan): array
+    {
+        $valid = array_column($this->images, 'id');
+        $walk = function (&$node) use (&$walk, $valid) {
+            if (is_array($node)) {
+                foreach ($node as &$v) {
+                    $walk($v);
+                }
+                unset($v);
+            } elseif (is_string($node) && preg_match('/^(img|gen)_/', $node) && ! in_array($node, $valid, true)) {
+                $node = '';
+            }
+        };
+        if (empty($plan['scenes']) || ! is_array($plan['scenes'])) {
+            return $plan;
+        }
+        foreach ($plan['scenes'] as &$scene) {
+            if (! empty($scene['layers']) && is_array($scene['layers'])) {
+                $walk($scene['layers']);
+            }
+        }
+        unset($scene);
+
+        return $plan;
+    }
+
+    // =====================================================================
+    // Backgrounds studio
+    // =====================================================================
+
+    public function abrirBackgrounds(): void
+    {
+        $this->reset(['editingBgId', 'bgEditPrompt', 'bgPrompt', 'bgVideo', 'bgVideoName']);
+        $this->resetValidation();
+        $this->view = 'backgrounds';
+        $this->ensureBackgroundPreviews();
+    }
+
+    /** The vault-backed background store for the active project. */
+    private function backgrounds(): BackgroundStore
+    {
+        return app(BackgroundStore::class);
+    }
+
+    /** Render a preview for any active code background missing one (video previews are the file itself). */
+    public function ensureBackgroundPreviews(): void
+    {
+        $library = app(BackgroundLibrary::class);
+        foreach ($library->active() as $bg) {
+            if ($bg->kind !== BackgroundStore::KIND_VIDEO && $library->previewFileFor($bg) === null) {
+                RenderBackgroundSampleJob::dispatch($bg->slug);
+            }
+        }
+    }
+
+    /** Generate a new CODE background from a description. */
+    public function gerarBackground(): void
+    {
+        $this->validate(
+            ['bgPrompt' => 'required|string|min:8|max:600'],
+            [
+                'bgPrompt.required' => 'Describe the background you want.',
+                'bgPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+            ],
+        );
+
+        $bg = $this->backgrounds()->create([
+            'kind' => BackgroundStore::KIND_CODE,
+            'prompt' => trim($this->bgPrompt),
+            'slug' => 'pending-'.Str::lower(Str::random(8)),
+            'display_name' => Str::limit(trim($this->bgPrompt), 40),
+            'description' => '',
+            'tsx' => '',
+            'status' => EffectRecord::STATUS_PENDING,
+        ]);
+
+        GenerateBackgroundJob::dispatch($bg->id());
+        $this->bgPrompt = '';
+    }
+
+    /** Upload an mp4 as a VIDEO background (looped to fill any clip length). */
+    public function uploadBackground(): void
+    {
+        $this->validate([
+            'bgVideo' => 'required|file|mimetypes:video/mp4,video/quicktime|max:512000',
+            'bgVideoName' => 'required|string|max:60',
+        ], [
+            'bgVideo.required' => 'Choose a video file.',
+            'bgVideo.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
+            'bgVideo.max' => 'The video is too large (maximum 500 MB).',
+            'bgVideoName.required' => 'Give the background a name.',
+        ], ['bgVideo' => 'video', 'bgVideoName' => 'name']);
+
+        $name = trim($this->bgVideoName);
+        $slug = $this->uniqueBackgroundSlug(Str::slug($name) ?: 'background');
+
+        $bg = $this->backgrounds()->create([
+            'kind' => BackgroundStore::KIND_VIDEO,
+            'slug' => $slug,
+            'display_name' => $name,
+            'description' => "Video backdrop «{$name}».",
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        $target = $this->backgrounds()->videoPath($bg->id());
+        @mkdir(dirname($target), 0775, true);
+        copy($this->bgVideo->getRealPath(), $target);
+
+        $this->reset(['bgVideo', 'bgVideoName']);
+    }
+
+    private function uniqueBackgroundSlug(string $base): string
+    {
+        $slug = $base;
+        $i = 2;
+        while ($this->backgrounds()->slugExists($slug)) {
+            $slug = $base.'-'.$i++;
+        }
+
+        return $slug;
+    }
+
+    public function editarBackground(string $id): void
+    {
+        $bg = $this->backgrounds()->find($id);
+        if (! $bg || ! $bg->isActive() || $bg->kind === BackgroundStore::KIND_VIDEO) {
+            return; // only live code backgrounds can be refined
+        }
+        $this->editingBgId = $bg->id();
+        $this->bgEditPrompt = (string) $bg->prompt;
+        $this->resetValidation();
+    }
+
+    public function cancelarBackgroundEdicao(): void
+    {
+        $this->reset(['editingBgId', 'bgEditPrompt']);
+        $this->resetValidation();
+    }
+
+    public function guardarBackgroundEdicao(): void
+    {
+        $this->validate(
+            ['bgEditPrompt' => 'required|string|min:8|max:600'],
+            [
+                'bgEditPrompt.required' => 'Describe the change you want.',
+                'bgEditPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+            ],
+        );
+
+        $bg = $this->backgrounds()->find($this->editingBgId);
+        if ($bg && $bg->isActive() && $bg->kind !== BackgroundStore::KIND_VIDEO) {
+            $bg->update([
+                'prompt' => trim($this->bgEditPrompt),
+                'status' => EffectRecord::STATUS_UPDATING,
+                'error' => null,
+            ]);
+            GenerateBackgroundJob::dispatch($bg->id(), isEdit: true);
+        }
+
+        $this->reset(['editingBgId', 'bgEditPrompt']);
+    }
+
+    /** Allow/disallow a live background for the planner (and manual picking). */
+    public function alternarBackground(string $id): void
+    {
+        $bg = $this->backgrounds()->find($id);
+        if ($bg && $bg->isActive()) {
+            $bg->update(['enabled' => ! $bg->enabled]);
+        }
+    }
+
+    public function apagarBackground(string $id, BackgroundLibrary $library): void
+    {
+        if ($bg = $this->backgrounds()->find($id)) {
+            $library->remove($bg);
+        }
+    }
+
+    /** @return Collection<int,EffectRecord> */
+    public function getBackgroundsProperty()
+    {
+        return $this->backgrounds()->all();
+    }
+
+    /** Enabled backgrounds for the new-clip picker. @return Collection<int,EffectRecord> */
+    public function getEnabledBackgroundsProperty()
+    {
+        return $this->backgrounds()->enabled();
+    }
+
+    public function getBackgroundsBusyProperty(): bool
+    {
+        return $this->backgrounds()->all()->contains(fn (EffectRecord $b) => in_array($b->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true));
+    }
+
+    /** Render one video cycling through every background, each with its name centered. */
+    public function gerarBackgroundReel(BackgroundLibrary $library): void
+    {
+        if ($library->reelExists() || $library->active()->isEmpty()) {
+            return; // cached for the current design system + background set, or nothing to show
+        }
+        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
+        \Illuminate\Support\Facades\Cache::put(RenderBackgroundReelJob::flagKey($slug), true, now()->addMinutes(20));
+        RenderBackgroundReelJob::dispatch();
+    }
+
+    public function getBackgroundReelReadyProperty(BackgroundLibrary $library): bool
+    {
+        return $library->reelExists();
+    }
+
+    public function getBackgroundReelBusyProperty(): bool
+    {
+        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
+
+        return \Illuminate\Support\Facades\Cache::has(RenderBackgroundReelJob::flagKey($slug));
     }
 
     // =====================================================================
@@ -379,7 +455,7 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(),
+            'meta' => $this->musicaMeta(['background' => $this->background]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -407,7 +483,7 @@ class ClipsAnimados extends Component
             'title' => $this->video->getClientOriginalName(),
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents)]),
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -425,6 +501,8 @@ class ClipsAnimados extends Component
         $this->editTitle = (string) $p->title;
         $this->musica = (string) ($p->meta['musica'] ?? '');
         $this->musicaVolume = (float) ($p->meta['musica_volume'] ?? 0.1);
+        $this->images = array_values($p->images ?? []);
+        $this->imageReplace = [];
         $this->editScenes = array_map(function ($s) {
             [$target, $text] = $this->extractLayerText($s['layers'] ?? []);
 
@@ -513,13 +591,18 @@ class ClipsAnimados extends Component
             return;
         }
 
+        $oldImages = $p->images ?? [];
+        $decoded = $this->stripMissingImageRefs($decoded);
+
         $p->update([
             'title' => $this->editTitle ?: $p->title,
             'plan' => $decoded,
+            'images' => $this->images ?: null,
             'meta' => $this->musicaMeta($p->meta ?? []),
             'status' => ClipRecord::STATUS_RENDERING,
             'error' => null,
         ]);
+        $this->pruneImageFiles($oldImages);
 
         RenderJob::dispatch($p->id);
         $this->voltar();
@@ -559,6 +642,7 @@ class ClipsAnimados extends Component
         ]);
 
         $p = $this->clips()->findOrFail($this->editingId);
+        $oldImages = $p->images ?? [];
         $plan = $p->plan ?? [];
         $plan['scenes'] = array_map(fn ($s) => [
             'start' => (float) $s['start'],
@@ -570,15 +654,18 @@ class ClipsAnimados extends Component
             'punchWord' => ($s['punchWord'] ?? '') === '' ? null : $s['punchWord'],
             'layers' => $this->applyLayerText($s['layers'] ?? [], $s['textTarget'] ?? 'text', $s['layerText'] ?? ''),
         ], $this->editScenes);
+        $plan = $this->stripMissingImageRefs($plan);
         $plan = $validator->validate($plan);
 
         $p->update([
             'title' => $this->editTitle ?: $p->title,
             'plan' => $plan,
+            'images' => $this->images ?: null,
             'meta' => $this->musicaMeta($p->meta ?? []),
             'status' => ClipRecord::STATUS_RENDERING,
             'error' => null,
         ]);
+        $this->pruneImageFiles($oldImages);
 
         RenderJob::dispatch($p->id);
         $this->voltar();
@@ -679,31 +766,14 @@ class ClipsAnimados extends Component
         return $text === '' ? 'Untitled' : Str::limit($text, 48);
     }
 
-    public function render(MusicLibrary $music, EffectLibrary $library)
+    public function render(MusicLibrary $music)
     {
-        $builtins = [];
-        $ready = [];
-        if ($this->view === 'sfx') {
-            $disabledBuiltins = $library->disabledBuiltins();
-            // Overrides are custom effects whose slug matches a built-in.
-            $overrides = $this->effects()->all()
-                ->filter(fn (EffectRecord $e) => $library->isBuiltin($e->slug))
-                ->keyBy('slug');
-            foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
-                $override = $overrides->get($slug);
-                $builtins[] = [
-                    'slug' => $slug,
-                    'label' => $sample['label'],
-                    'allowed' => ! in_array($slug, $disabledBuiltins, true),
-                    'override' => $override?->status,   // null | pending | updating | active | failed
-                ];
-                if ($library->previewExists($slug)) {
-                    $ready[] = $slug;
-                }
-            }
-            foreach ($this->effects as $effect) {
-                if ($library->previewExists($effect->slug)) {
-                    $ready[] = $effect->slug;
+        $bgReady = [];
+        if ($this->view === 'backgrounds') {
+            $bgLibrary = app(BackgroundLibrary::class);
+            foreach ($this->backgrounds as $bg) {
+                if ($bgLibrary->previewFileFor($bg) !== null) {
+                    $bgReady[] = $bg->id();
                 }
             }
         }
@@ -712,8 +782,7 @@ class ClipsAnimados extends Component
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
             'musicas' => $music->all(),
-            'builtins' => $builtins,
-            'sfxReady' => $ready,
+            'bgReady' => $bgReady,
         ]);
     }
 }

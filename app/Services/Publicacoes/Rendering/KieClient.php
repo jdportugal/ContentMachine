@@ -2,6 +2,7 @@
 
 namespace App\Services\Publicacoes\Rendering;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -25,6 +26,22 @@ class KieClient
     {
         $taskId = $this->submeter($prompt, $proporcao, $refs);
 
+        return $this->sondar($taskId);
+    }
+
+    /**
+     * Submit a generation task and return its taskId WITHOUT polling. Lets a caller
+     * persist the taskId before the slow poll, so a retry resumes that same task
+     * (see KieProgress) instead of submitting a duplicate generation.
+     */
+    public function submit(string $prompt, string $proporcao, array $refs = []): string
+    {
+        return $this->submeter($prompt, $proporcao, $refs);
+    }
+
+    /** Poll a previously-submitted task until it finishes; returns the image URL. */
+    public function poll(string $taskId): string
+    {
         return $this->sondar($taskId);
     }
 
@@ -93,23 +110,29 @@ class KieClient
     private function sondar(string $taskId): string
     {
         for ($i = 0; $i < self::MAX_SONDAGENS; $i++) {
-            $r = Http::timeout(30)->withToken($this->chave())
-                ->get($this->base().'/api/v1/jobs/recordInfo', ['taskId' => $taskId]);
+            try {
+                $r = Http::timeout(30)->withToken($this->chave())
+                    ->get($this->base().'/api/v1/jobs/recordInfo', ['taskId' => $taskId]);
 
-            $estado = (string) $r->json('data.state');
-            if ($estado === 'success') {
-                // 'resultJson' comes as a JSON STRING (not a nested object).
-                $resultJson = $r->json('data.resultJson');
-                $dados = is_string($resultJson) ? (json_decode($resultJson, true) ?: []) : (array) $resultJson;
-                $url = (string) ($dados['resultUrls'][0] ?? '');
-                if ($url === '') {
-                    throw new \RuntimeException('kie.ai: success without a URL.');
+                $estado = (string) $r->json('data.state');
+                if ($estado === 'success') {
+                    // 'resultJson' comes as a JSON STRING (not a nested object).
+                    $resultJson = $r->json('data.resultJson');
+                    $dados = is_string($resultJson) ? (json_decode($resultJson, true) ?: []) : (array) $resultJson;
+                    $url = (string) ($dados['resultUrls'][0] ?? '');
+                    if ($url === '') {
+                        throw new \RuntimeException('kie.ai: success without a URL.');
+                    }
+
+                    return $url;
                 }
-
-                return $url;
-            }
-            if ($estado === 'fail') {
-                throw new \RuntimeException('kie.ai: generation failed.');
+                if ($estado === 'fail') {
+                    throw new \RuntimeException('kie.ai: generation failed.');
+                }
+            } catch (ConnectionException) {
+                // Transient network blip (DNS/timeout) — kie is still generating the
+                // image; keep polling instead of aborting work it will complete.
+                // Persistent failures still surface as a timeout after MAX_SONDAGENS.
             }
 
             usleep(2_000_000);
