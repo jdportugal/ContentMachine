@@ -6,14 +6,19 @@ external Postgres/Redis — and serves on **port 8080**.
 
 ## 1. Publish the image (automatic)
 
-Pushing to `main` (or `i18n/translate-to-english`) runs `.github/workflows/publish.yml`,
-which builds for **linux/amd64** (the cloud target) and pushes to GHCR:
+The dedicated **`production`** branch is the live line — merge into it to release.
+A push to `production` runs `.github/workflows/publish.yml`, which builds for
+**linux/amd64** (the cloud target) and pushes to GHCR:
 
 ```
 ghcr.io/jdportugal/contentmachine:latest
 ```
 
 `GITHUB_TOKEN` is automatic — no secrets to set.
+
+**Releasing:** develop on feature branches; when ready, merge into `production`
+(`git checkout production && git merge <branch> && git push`). That build becomes
+the new `:latest`; `docker compose pull && up -d` on the host picks it up.
 
 ## 2. Make the package public (once)
 

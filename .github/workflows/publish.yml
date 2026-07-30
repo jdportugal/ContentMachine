@@ -1,10 +1,11 @@
 name: Publish image
 
-# Build the combined image and push it multi-arch to GHCR on every push to the
-# deploy branch. GITHUB_TOKEN is automatic — no secrets to configure.
+# Build the combined image and push :latest to GHCR. The dedicated `production`
+# branch is the live line — merge into it to release. Any branch can still build
+# manually via "Run workflow". GITHUB_TOKEN is automatic — no secrets to set.
 on:
   push:
-    branches: [main, i18n/translate-to-english]
+    branches: [production]
   workflow_dispatch:
 
 permissions:
