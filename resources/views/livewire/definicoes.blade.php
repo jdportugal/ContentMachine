@@ -14,6 +14,7 @@
                 'social' => '❧ Social & Publishing',
                 'motor'  => '⚙ AI & Engine',
                 'chaves' => '🔑 API Keys',
+                'sistema' => '↻ Updates',
             ] as $id => $rotulo)
                 <button type="button" wire:click="$set('secao', '{{ $id }}')"
                         class="font-mono text-[0.7rem] px-3.5 py-2 rounded-sm border transition {{ $secao === $id ? 'border-teal/60 text-teal bg-teal/5' : 'border-ink-soft/20 text-ink-soft hover:text-ink hover:border-ink-soft/40' }}">
@@ -246,7 +247,50 @@
             </x-panel>
         @endif
 
-        {{-- ── Action bar (always visible; saves every tab) ─────────────────── --}}
+        {{-- ══════════════════════════ UPDATES ══════════════════════════ --}}
+        @if ($secao === 'sistema')
+            <x-panel eyebrow="Deployment" title="Updates" glyph="↻">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="eyebrow">Running version</span>
+                    <span class="font-mono text-sm text-ink">{{ $versaoAtual }}</span>
+                </div>
+
+                @unless ($podeAtualizar)
+                    <p class="text-ink-soft text-sm mb-3">One-click update isn't wired on this install (no Watchtower sidecar). You can still check below; to update manually, run <span class="font-mono text-ink-soft">docker compose pull &amp;&amp; docker compose up -d</span> on the host.</p>
+                @endunless
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" wire:click="verificarAtualizacoes" wire:loading.attr="disabled" wire:target="verificarAtualizacoes"
+                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                        <span wire:loading.remove wire:target="verificarAtualizacoes">↻ Check for updates</span>
+                        <span wire:loading wire:target="verificarAtualizacoes">checking…</span>
+                    </button>
+
+                    @if ($atualizacao === 'available' && $podeAtualizar)
+                        <button type="button" wire:click="instalarAtualizacao"
+                                wire:confirm="Install the new version now? The app will restart — reload this page in ~30 seconds."
+                                class="font-display text-lg px-6 py-2 rounded-sm bg-teal text-papyrus hover:bg-teal-deep transition shadow-engraved">
+                            ⬇ Install &amp; restart
+                        </button>
+                    @endif
+                </div>
+
+                <div class="mt-4 font-mono text-sm">
+                    @if ($atualizacao === 'uptodate')
+                        <span class="text-good">✓ You're on the latest version.</span>
+                    @elseif ($atualizacao === 'available')
+                        <span class="text-gold">● A new version is available.</span>
+                    @elseif ($atualizacao === 'updating')
+                        <span class="text-teal">↻ Update triggered — pulling the new image and restarting. Reload this page in ~30 seconds.</span>
+                    @elseif ($atualizacao === 'error')
+                        <span class="text-ink-faint">Couldn't check right now (dev build, or the registry was unreachable).</span>
+                    @endif
+                </div>
+            </x-panel>
+        @endif
+
+        {{-- ── Action bar (saves every settings tab) ────────────────────────── --}}
+        @if ($secao !== 'sistema')
         <div class="flex items-center gap-4">
             <button type="submit"
                     class="bg-teal text-papyrus font-display text-xl px-7 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved">
@@ -260,5 +304,6 @@
         <p class="font-mono text-xs text-ink-faint pt-2 border-t border-ink-soft/10">
             🔒 Keys are saved in the vault (<span class="text-ink-soft">definicoes/definicoes.md</span>) for local use. Don't sync the vault to a public location with real keys in it. Saving persists <span class="text-ink-soft">every tab</span>, not just the open one.
         </p>
+        @endif
     </form>
 </div>

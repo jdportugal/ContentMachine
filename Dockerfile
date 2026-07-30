@@ -58,9 +58,12 @@ COPY . .
 COPY --from=assets /build/public/build ./public/build
 RUN composer dump-autoload --optimize --no-dev
 
+# Baked build version (git sha) — powers the in-app "Check for updates" check.
+ARG APP_VERSION=dev
 ENV APP_ENV=production \
     APP_DEBUG=false \
-    VAULT_PATH=/app/vault
+    VAULT_PATH=/app/vault \
+    APP_VERSION=${APP_VERSION}
 
 COPY docker/supervisord.conf /etc/supervisor/conf.d/app.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh

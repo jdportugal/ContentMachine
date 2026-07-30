@@ -295,4 +295,22 @@ return [
     'design_system' => [
         'path' => env('DESIGN_SYSTEM_PATH', base_path('vault/design-system.md')),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Self-update (Docker deploy)
+    |--------------------------------------------------------------------------
+    | Powers the "Check for updates" button. `version` is baked into the image at
+    | build time (the git sha). The check compares the running image's tag digest
+    | against `:latest` on GHCR (anonymous, public). The update itself is performed
+    | by a Watchtower sidecar reached over the compose network — the installer sets
+    | WATCHTOWER_URL + WATCHTOWER_TOKEN. Empty watchtower_url → the update button is
+    | hidden (e.g. local/dev), but the version check still works.
+    */
+    'update' => [
+        'version' => env('APP_VERSION', 'dev'),
+        'image' => env('APP_IMAGE', 'ghcr.io/jdportugal/contentmachine'),
+        'watchtower_url' => env('WATCHTOWER_URL'),
+        'watchtower_token' => env('WATCHTOWER_TOKEN'),
+    ],
 ];

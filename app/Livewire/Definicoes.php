@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
 use App\Services\Settings\SettingsRepository;
+use App\Services\UpdateService;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -40,8 +41,11 @@ class Definicoes extends Component
     /** Active project's language (stored in the project registry, not the vault). */
     public string $idioma = 'en';
 
-    /** Active settings tab: geral | fontes | social | motor | chaves. */
+    /** Active settings tab: geral | fontes | social | motor | chaves | sistema. */
     public string $secao = 'geral';
+
+    /** Update state: idle | checking | available | uptodate | error | updating. */
+    public string $atualizacao = 'idle';
 
     public ?string $guardado = null;
 
@@ -103,6 +107,24 @@ class Definicoes extends Component
         }
     }
 
+    /** Compare the running image against `:latest` on GHCR. */
+    public function verificarAtualizacoes(UpdateService $updates): void
+    {
+        $this->atualizacao = 'checking';
+        $disponivel = $updates->updateAvailable();
+        $this->atualizacao = $disponivel === null ? 'error' : ($disponivel ? 'available' : 'uptodate');
+    }
+
+    /** Trigger the Watchtower sidecar to pull + recreate this container. */
+    public function instalarAtualizacao(UpdateService $updates): void
+    {
+        if (! $updates->updatable()) {
+            return;
+        }
+        $updates->triggerUpdate();
+        $this->atualizacao = 'updating';
+    }
+
     /**
      * Converts a map of texts (one entry per line) into a map of lists.
      *
@@ -120,10 +142,12 @@ class Definicoes extends Component
             ->all();
     }
 
-    public function render()
+    public function render(UpdateService $updates)
     {
         return view('livewire.definicoes', [
             'plataformasMeta' => config('contentmachine.plataformas_meta'),
+            'versaoAtual' => $updates->shortVersion(),
+            'podeAtualizar' => $updates->updatable(),
         ]);
     }
 }
