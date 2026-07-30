@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350" font-family="Georgia, &apos;Times New Roman&apos;, serif">
+<rect width="1080" height="1350" fill="#e7dcc4"/>
+<rect x="56" y="56" width="968" height="1238" fill="none" stroke="#c89b3c" stroke-opacity="0.55" stroke-width="2"/>
+<rect x="66" y="66" width="948" height="1218" fill="none" stroke="#c85a9c" stroke-opacity="0.25" stroke-width="1"/>
+<text x="540" y="300" text-anchor="middle" font-family="&apos;Courier New&apos;, monospace" font-size="24" letter-spacing="6" fill="#c85a9c">CARROSSEL</text><text x="540" y="470" text-anchor="middle" font-family="Georgia, &apos;Times New Roman&apos;, serif" font-size="92" fill="#2b2822" font-weight="600"><tspan x="540" dy="0">Capa</tspan></text><text x="540" y="990" text-anchor="middle" font-size="44" fill="#c89b3c">&#10087;</text><text x="540" y="1050" text-anchor="middle" font-family="Georgia, &apos;Times New Roman&apos;, serif" font-size="34" fill="#6b6152"><tspan x="540" dy="0">A promessa</tspan></text><text x="540" y="1200" text-anchor="middle" font-family="&apos;Courier New&apos;, monospace" font-size="22" letter-spacing="3" fill="#c85a9c">DESLIZE &#8594;</text>
+<text x="92" y="1266" font-family="&apos;Courier New&apos;, monospace" font-size="20" letter-spacing="2" fill="#a99f8c">IATECA · 686.2 · IAT</text><text x="988" y="1266" text-anchor="end" font-family="&apos;Courier New&apos;, monospace" font-size="20" letter-spacing="2" fill="#c85a9c">01 / 03</text>
+</svg>

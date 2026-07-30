@@ -1,0 +1,24 @@
+# Local dev / single-host run of the combined image. Everything (web + worker +
+# scheduler) runs in the one `app` container. For a public HTTPS deploy behind
+# Caddy on a Droplet, use deploy/install.sh instead.
+services:
+  app:
+    build:
+      context: .
+    image: contentmachine
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    # Runs in the offline 'fake' driver by default. To add API keys, copy
+    # .env.example → .env and run:  docker compose --env-file .env up -d
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:8080}
+    volumes:
+      - storage:/app/storage
+      - vault:/app/vault
+      - db:/app/database
+
+volumes:
+  storage:
+  vault:
+  db:

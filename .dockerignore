@@ -1,0 +1,34 @@
+.git
+.github
+.gitattributes
+
+# Never leak host deps into the build (Remotion's node_modules is built INSIDE
+# the image; **/node_modules also keeps the root Vite deps out of the final layer).
+**/node_modules
+vendor
+public/build
+public/hot
+
+# Secrets + local state
+.env
+.env.*
+!.env.example
+storage/*.key
+storage/app/app_key
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+database/database.sqlite
+
+# Runtime content (lives on a volume, not baked in)
+vault
+vaults
+
+# Dev-only
+tests
+.playwright-mcp
+deploy
+*.md
+!Brand-Machine-design-system.md
+install.sh
