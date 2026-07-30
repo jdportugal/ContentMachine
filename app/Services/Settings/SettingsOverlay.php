@@ -52,5 +52,40 @@ class SettingsOverlay
                 config([$to => is_string($value) ? trim($value) : $value]);
             }
         }
+
+        $this->autoDrivers();
+    }
+
+    /**
+     * Derive the real drivers automatically on the deployed image (production), so
+     * a deploy needs NO .env: the image already ships yt-dlp (real monitoring +
+     * aggregation), and clip/news generation switches on the moment the keys are
+     * set in Settings. Local/testing keep the 'fake' defaults. An explicit non-fake
+     * env value (e.g. MONITORING_DRIVER=api) is always honoured.
+     */
+    private function autoDrivers(): void
+    {
+        if (! app()->environment('production')) {
+            return;
+        }
+
+        // Real monitoring — yt-dlp is built into the image; YouTube needs no key.
+        if (config('contentmachine.monitoring.driver') === 'fake') {
+            config(['contentmachine.monitoring.driver' => 'ytdlp']);
+        }
+
+        // Clip + news generation go real once an LLM key is configured (in Settings).
+        $hasLlm = filled(config('services.anthropic.key'))
+            || filled(config('services.openai.key'))
+            || filled(config('services.gemini.key'));
+
+        if ($hasLlm) {
+            if (config('contentmachine.news.driver') === 'fake') {
+                config(['contentmachine.news.driver' => 'api']);
+            }
+            if (config('contentmachine.clips.driver') === 'fake') {
+                config(['contentmachine.clips.driver' => 'api']);
+            }
+        }
     }
 }
