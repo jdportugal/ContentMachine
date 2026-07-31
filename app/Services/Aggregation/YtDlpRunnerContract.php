@@ -25,4 +25,7 @@ interface YtDlpRunnerContract
 
     /** Downloads the textual content of a URL (e.g. VTT subtitles). Returns null on failure. */
     public function fetch(string $url): ?string;
+
+    /** The most recent yt-dlp error during this runner's lifetime, or null. */
+    public function lastError(): ?string;
 }

@@ -64,10 +64,16 @@ class NewsAggregator
             $itens = $driver->collect($canais, $limite, $jaArquivados);
             $porPlataforma[$plataforma] = count($itens);
 
-            // Only warn when NOTHING has ever been collected for this platform;
-            // an empty result with prior archives just means "nothing new".
-            if ($itens === [] && $jaArquivados === []) {
-                $avisos[] = $this->avisoIndisponivel($plataforma);
+            if ($itens === []) {
+                // A concrete yt-dlp error (bot-check, extractor breakage, stale
+                // binary) is a real failure — surface it even when prior items
+                // exist, so it isn't mistaken for "nothing new".
+                $erroYtDlp = $plataforma === 'youtube' ? $this->runner->lastError() : null;
+                if ($erroYtDlp !== null) {
+                    $avisos[] = 'YouTube: '.$erroYtDlp;
+                } elseif ($jaArquivados === []) {
+                    $avisos[] = $this->avisoIndisponivel($plataforma);
+                }
             }
 
             foreach ($itens as $item) {

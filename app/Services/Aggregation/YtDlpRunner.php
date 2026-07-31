@@ -3,7 +3,9 @@
 namespace App\Services\Aggregation;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Str;
 
 /**
  * Real runner implementation: invokes yt-dlp in METADATA-ONLY mode
@@ -20,6 +22,8 @@ class YtDlpRunner implements YtDlpRunnerContract
     private array $extractorArgs;
 
     private int $timeout;
+
+    private ?string $lastError = null;
 
     public function __construct()
     {
@@ -51,6 +55,12 @@ class YtDlpRunner implements YtDlpRunnerContract
         return $json ?? [];
     }
 
+    /** The most recent yt-dlp error during this runner's lifetime, if any. */
+    public function lastError(): ?string
+    {
+        return $this->lastError;
+    }
+
     public function fetch(string $url): ?string
     {
         try {
@@ -73,6 +83,13 @@ class YtDlpRunner implements YtDlpRunnerContract
         $resultado = Process::timeout($this->timeout)->run([...$this->base, ...$args]);
 
         if (! $resultado->successful()) {
+            // Keep the real reason instead of swallowing it — YouTube failures on a
+            // datacenter IP ("Sign in to confirm you're not a bot", extractor
+            // breakage, stale yt-dlp) are otherwise invisible.
+            $err = trim($resultado->errorOutput()) ?: trim($resultado->output());
+            $this->lastError = $err !== '' ? Str::of($err)->squish()->limit(280)->toString() : 'yt-dlp exited with a non-zero status';
+            Log::warning('yt-dlp failed', ['args' => $args, 'error' => $this->lastError]);
+
             return null;
         }
 
