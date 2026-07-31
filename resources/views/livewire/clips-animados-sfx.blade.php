@@ -260,6 +260,14 @@
                                 @if (in_array($effect->slug, $sfxAudio, true))
                                     <div class="absolute top-1 right-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">🔊</div>
                                 @endif
+                                @if ($effect->status === 'active')
+                                    {{-- On/off right here — no need to open the effect. --}}
+                                    <button type="button" wire:click.stop.prevent="alternarSfx('{{ $effect->id }}')"
+                                            title="{{ $effect->enabled ? 'Allowed in clips — click to turn off' : 'Off — click to allow in clips' }}"
+                                            class="absolute bottom-1 left-1 z-10 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $effect->enabled ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
+                                        {{ $effect->enabled ? '● on' : '○ off' }}
+                                    </button>
+                                @endif
                             </div>
                             <div class="mt-2 min-w-0">
                                 <p class="font-display text-sm text-ink truncate">{{ $effect->display_name }}</p>
@@ -296,6 +304,12 @@
                             @if ($b['override'] === 'active')
                                 <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">custom</div>
                             @endif
+                            {{-- On/off right here — no need to open the effect. --}}
+                            <button type="button" wire:click.stop.prevent="alternarBuiltin('{{ $b['slug'] }}')"
+                                    title="{{ $b['allowed'] ? 'Allowed in clips — click to turn off' : 'Off — click to allow in clips' }}"
+                                    class="absolute bottom-1 left-1 z-10 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $b['allowed'] ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
+                                {{ $b['allowed'] ? '● on' : '○ off' }}
+                            </button>
                         </div>
                         <div class="mt-2 min-w-0">
                             <p class="font-display text-sm text-ink truncate">{{ $b['label'] }}</p>
