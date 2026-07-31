@@ -258,8 +258,7 @@
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     @foreach ($this->effects as $effect)
-                        <a href="{{ route('clips-animados.sfx.detail', $effect->id) }}" wire:navigate
-                           class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition hover:border-teal/40 {{ $effect->status === 'active' && ! $effect->enabled ? 'opacity-60' : '' }}" wire:key="sfx-{{ $effect->id }}">
+                        <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col relative transition hover:border-teal/40 {{ $effect->status === 'active' && ! $effect->enabled ? 'opacity-60' : '' }}" wire:key="sfx-{{ $effect->id }}">
                             <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
                                 @if (in_array($effect->status, ['active', 'updating'], true) && in_array($effect->slug, $sfxReady, true))
                                     <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $effect->slug) }}" autoplay loop muted playsinline></video>
@@ -280,11 +279,11 @@
                                 @if (in_array($effect->slug, $sfxAudio, true))
                                     <div class="absolute top-1 right-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">🔊</div>
                                 @endif
+                                {{-- On/off right here (z-20, above the overlay link) — no need to open the effect. --}}
                                 @if ($effect->status === 'active')
-                                    {{-- On/off right here — no need to open the effect. --}}
-                                    <button type="button" wire:click.stop.prevent="alternarSfx('{{ $effect->id }}')"
+                                    <button type="button" wire:click="alternarSfx('{{ $effect->id }}')"
                                             title="{{ $effect->enabled ? 'Allowed in clips — click to turn off' : 'Off — click to allow in clips' }}"
-                                            class="absolute bottom-1 left-1 z-10 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $effect->enabled ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
+                                            class="absolute bottom-1 left-1 z-20 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $effect->enabled ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
                                         {{ $effect->enabled ? '● on' : '○ off' }}
                                     </button>
                                 @endif
@@ -293,7 +292,11 @@
                                 <p class="font-display text-sm text-ink truncate">{{ $effect->display_name }}</p>
                                 <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ in_array($effect->status, ['active', 'updating'], true) ? $effect->slug : $effect->status }}</p>
                             </div>
-                        </a>
+
+                            {{-- Full-card link to open the effect (z-10, below the toggle). --}}
+                            <a href="{{ route('clips-animados.sfx.detail', $effect->id) }}" wire:navigate
+                               class="absolute inset-0 z-10 rounded-sm" aria-label="Open {{ $effect->display_name }}"></a>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -307,8 +310,7 @@
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 @foreach ($builtins as $b)
-                    <a href="{{ route('clips-animados.sfx.detail', $b['slug']) }}" wire:navigate
-                       class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition hover:border-teal/40 {{ $b['allowed'] ? '' : 'opacity-60' }}" wire:key="builtin-{{ $b['slug'] }}">
+                    <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col relative transition hover:border-teal/40 {{ $b['allowed'] ? '' : 'opacity-60' }}" wire:key="builtin-{{ $b['slug'] }}">
                         <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
                             @if (in_array($b['slug'], $sfxReady, true))
                                 <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $b['slug']) }}" autoplay loop muted playsinline></video>
@@ -324,10 +326,10 @@
                             @if ($b['override'] === 'active')
                                 <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">custom</div>
                             @endif
-                            {{-- On/off right here — no need to open the effect. --}}
-                            <button type="button" wire:click.stop.prevent="alternarBuiltin('{{ $b['slug'] }}')"
+                            {{-- On/off right here (z-20, above the overlay link) — no need to open the effect. --}}
+                            <button type="button" wire:click="alternarBuiltin('{{ $b['slug'] }}')"
                                     title="{{ $b['allowed'] ? 'Allowed in clips — click to turn off' : 'Off — click to allow in clips' }}"
-                                    class="absolute bottom-1 left-1 z-10 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $b['allowed'] ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
+                                    class="absolute bottom-1 left-1 z-20 font-mono text-[0.5rem] px-1.5 py-0.5 rounded-sm border backdrop-blur-sm transition {{ $b['allowed'] ? 'bg-teal/25 text-teal border-teal/40 hover:bg-teal/40' : 'bg-black/60 text-ink-faint border-ink-soft/30 hover:text-ink' }}">
                                 {{ $b['allowed'] ? '● on' : '○ off' }}
                             </button>
                         </div>
@@ -335,7 +337,11 @@
                             <p class="font-display text-sm text-ink truncate">{{ $b['label'] }}</p>
                             <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ $b['slug'] }}</p>
                         </div>
-                    </a>
+
+                        {{-- Full-card link to open the effect (z-10, below the toggle). --}}
+                        <a href="{{ route('clips-animados.sfx.detail', $b['slug']) }}" wire:navigate
+                           class="absolute inset-0 z-10 rounded-sm" aria-label="Open {{ $b['label'] }}"></a>
+                    </div>
                 @endforeach
             </div>
         </div>
