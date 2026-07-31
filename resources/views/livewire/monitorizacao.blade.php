@@ -69,6 +69,86 @@
         </p>
     @endif
 
+    {{-- ═══════════ Views over time (day / month) ═══════════ --}}
+    @php
+        $corBarra = $meta['cor'] ?? '#4DE0E0';
+        $maxDia = max(1, ...array_map(fn ($b) => $b['views'], $serieDia));
+        $maxMes = max(1, ...array_map(fn ($b) => $b['views'], $serieMes));
+        $temDia = collect($serieDia)->sum('views') > 0;
+        $temViews = $temDia || collect($serieMes)->sum('views') > 0;
+    @endphp
+    @if ($temViews)
+        <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-8" x-data="{ g: '{{ $temDia ? 'dia' : 'mes' }}' }">
+            <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                <div>
+                    <div class="eyebrow">Trend</div>
+                    <p class="text-ink-soft text-sm mt-1">Views of the posts published in each period.</p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" @click="g='dia'" :class="g==='dia' ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft'" class="font-mono text-xs px-3 py-1 rounded-sm border transition">By day</button>
+                    <button type="button" @click="g='mes'" :class="g==='mes' ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft'" class="font-mono text-xs px-3 py-1 rounded-sm border transition">By month</button>
+                </div>
+            </div>
+
+            @foreach (['dia' => [$serieDia, $maxDia], 'mes' => [$serieMes, $maxMes]] as $g => [$serie, $max])
+                <div x-show="g === '{{ $g }}'" @if ($g === 'mes') x-cloak @endif>
+                    <div class="flex items-end gap-1 h-40 overflow-x-auto">
+                        @foreach ($serie as $b)
+                            <div class="flex-1 min-w-[10px] flex flex-col justify-end h-full"
+                                 title="{{ $b['label'] }} · {{ number_format($b['views']) }} views · {{ $b['posts'] }} post{{ $b['posts'] === 1 ? '' : 's' }}">
+                                <div class="w-full rounded-t-sm transition-all" style="height: {{ max($b['views'] > 0 ? 3 : 0, round($b['views'] / $max * 100)) }}%; background: {{ $corBarra }}99;"></div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="flex gap-1 mt-1">
+                        @foreach ($serie as $b)
+                            <div class="flex-1 min-w-[10px] text-center font-mono text-[0.5rem] text-ink-faint truncate">{{ $b['label'] }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+    {{-- ═══════════ Averages by content type ═══════════ --}}
+    @if (! empty($mediasPorTipo))
+        <x-panel eyebrow="Averages" title="Averages by type" glyph="∑" class="mt-8">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="text-left font-mono text-[0.58rem] text-ink-faint uppercase tracking-wide">
+                            <th class="py-1.5 pr-3">Type</th>
+                            <th class="py-1.5 px-3 text-right">Posts</th>
+                            <th class="py-1.5 px-3 text-right">Avg views</th>
+                            <th class="py-1.5 px-3 text-right">Avg likes</th>
+                            <th class="py-1.5 px-3 text-right">Engagement</th>
+                            @if ($subscribers > 0)
+                                <th class="py-1.5 pl-3 text-right">Subs / post</th>
+                            @endif
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($mediasPorTipo as $m)
+                            <tr class="border-t border-ink-soft/10">
+                                <td class="py-2 pr-3 font-body text-ink capitalize">{{ $m['tipo'] }}</td>
+                                <td class="py-2 px-3 text-right font-mono text-ink-soft">{{ number_format($m['posts']) }}</td>
+                                <td class="py-2 px-3 text-right font-mono text-ink">{{ number_format($m['views_med']) }}</td>
+                                <td class="py-2 px-3 text-right font-mono text-ink-soft">{{ number_format($m['likes_med']) }}</td>
+                                <td class="py-2 px-3 text-right font-mono text-ink-soft">{{ number_format($m['engajamento'], 1) }}%</td>
+                                @if ($subscribers > 0)
+                                    <td class="py-2 pl-3 text-right font-mono text-teal">{{ number_format($m['subs_por']) }}</td>
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @if ($subscribers > 0)
+                <p class="font-mono text-[0.55rem] text-ink-faint mt-3">Channel: {{ number_format($subscribers) }} subscribers · «Subs / post» = subscribers ÷ posts of that type.</p>
+            @endif
+        </x-panel>
+    @endif
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         {{-- Latest of each type (requested emphasis) --}}
         <x-panel eyebrow="Emphasis" title="Latest of each genre" glyph="❧">

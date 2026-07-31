@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Monitoring\MonitoringAnalytics;
 use App\Services\Monitoring\MonitoringManager;
 use App\Services\Monitoring\MonitoringRefresher;
 use App\Services\Monitoring\MonitoringStore;
@@ -69,6 +70,11 @@ class Monitorizacao extends Component
 
         $driver = $monitoring->driver($this->rede);
 
+        // Analytics over the whole collected set: day/month charts + per-type averages.
+        $analytics = new MonitoringAnalytics;
+        $conteudos = $driver->conteudosRecentes(500);
+        $subscribers = (int) ($store->canal($this->rede)['subscribers'] ?? 0);
+
         return view('livewire.monitorizacao', [
             'plataformas' => $plataformas,
             'meta' => config('contentmachine.plataformas_meta.'.$this->rede),
@@ -76,6 +82,10 @@ class Monitorizacao extends Component
             'ultimoPorTipo' => $driver->ultimoPorTipo(),
             'melhores' => $driver->melhores(5),
             'recentes' => $driver->conteudosRecentes(12),
+            'serieDia' => $analytics->serie($conteudos, 'dia'),
+            'serieMes' => $analytics->serie($conteudos, 'mes'),
+            'mediasPorTipo' => $analytics->mediasPorTipo($conteudos, $subscribers),
+            'subscribers' => $subscribers,
             // Manual collection context (real-data mode).
             'recolheReal' => in_array(config('contentmachine.monitoring.driver'), ['ytdlp', 'real'], true),
             'fonte' => $refresher->fonte($this->rede),
