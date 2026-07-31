@@ -90,6 +90,7 @@
                         <div class="flex gap-4 py-3 border-b border-ink-soft/10 last:border-0">
                             @if ($nota->get('thumbnail'))
                                 <img src="{{ $nota->get('thumbnail') }}" alt="" loading="lazy"
+                                     onerror="this.style.display='none'"
                                      class="shrink-0 w-28 h-16 object-cover rounded-sm border border-ink-soft/15">
                             @endif
                             <div class="min-w-0 flex-1">

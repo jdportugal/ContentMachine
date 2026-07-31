@@ -69,6 +69,9 @@ services:
       - storage:/app/storage
       - vault:/app/vault
       - db:/app/database
+      # Downloaded post thumbnails + AI-generated images live under public/media.
+      # Persist them, or every image update wipes them from the container layer.
+      - media:/app/public/media
     expose:
       - "${APP_PORT}"
 
@@ -103,6 +106,7 @@ volumes:
   storage:
   vault:
   db:
+  media:
   caddy_data:
   caddy_config:
 EOF
