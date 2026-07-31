@@ -87,6 +87,8 @@
                                 <button type="button" wire:click="abrirHistorico('{{ $d['overrideId'] }}')"
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">⟲ History ({{ $d['versions'] }})</button>
                             @endif
+                            <a href="{{ route('clips-animados.sfx-export', $d['slug']) }}"
+                               class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓ Export</a>
                             @if ($d['override'])
                                 <button type="button" wire:click="resetBuiltin('{{ $d['slug'] }}')"
                                         wire:confirm="Reset «{{ $d['slug'] }}» to the default built-in? Your custom version is deleted."

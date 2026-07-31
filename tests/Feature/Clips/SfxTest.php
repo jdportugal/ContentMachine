@@ -758,4 +758,35 @@ class SfxTest extends TestCase
         $this->expectException(\RuntimeException::class);
         app(EffectPortability::class)->import(['type' => 'something-else', 'effects' => []]);
     }
+
+    public function test_export_and_import_a_builtin_reapplies_its_intro(): void
+    {
+        $library = app(EffectLibrary::class);
+        $library->toggleIntroBuiltin('fade'); // a built-in customization worth carrying
+        $this->assertTrue($library->builtinIsIntro('fade'));
+
+        $port = app(EffectPortability::class);
+        $payload = $port->export('fade');
+
+        $this->assertTrue($payload['effects'][0]['builtin']);
+        $this->assertTrue($payload['effects'][0]['intro']);
+        $this->assertArrayNotHasKey('tsx', $payload['effects'][0]); // built-ins carry no source
+
+        // Turn it off, then import → the built-in reference re-applies it (non-destructive).
+        $library->toggleIntroBuiltin('fade');
+        $this->assertFalse($library->builtinIsIntro('fade'));
+
+        $this->assertSame(1, $port->import($payload));
+        $this->assertTrue(app(EffectLibrary::class)->builtinIsIntro('fade'));
+    }
+
+    public function test_export_all_includes_customized_builtins(): void
+    {
+        app(EffectLibrary::class)->toggleIntroBuiltin('fade');
+
+        $payload = app(EffectPortability::class)->export('all');
+        $slugs = array_column($payload['effects'], 'slug');
+
+        $this->assertContains('fade', $slugs);
+    }
 }
