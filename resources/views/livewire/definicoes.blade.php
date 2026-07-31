@@ -283,7 +283,7 @@
                     @elseif ($atualizacao === 'updating')
                         <span class="text-teal">↻ Update triggered — pulling the new image and restarting. Reload this page in ~30 seconds. (It also auto-updates within 30 min if anything blocks this.)</span>
                     @elseif ($atualizacao === 'update-failed')
-                        <span class="text-warn">⚠ Couldn't reach the updater sidecar. It should still auto-update within 30 min — or run <span class="text-ink">cd /opt/brand-machine &amp;&amp; docker compose pull &amp;&amp; docker compose up -d</span> on the host to update now.</span>
+                        <span class="text-warn">⚠ Couldn't reach the updater sidecar — its setup may be missing on this host. Re-run the installer on the host to repair it and update now: <span class="text-ink">curl -fsSL https://raw.githubusercontent.com/jdportugal/ContentMachine/production/install.sh | bash</span></span>
                     @elseif ($atualizacao === 'error')
                         <span class="text-ink-faint">Couldn't check right now (dev build, or the registry was unreachable).</span>
                     @endif
