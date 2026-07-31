@@ -339,10 +339,22 @@ class Rascunhos extends Component
         $porEstado = $todos->groupBy('state');
 
         $agendados = ($porEstado->get('scheduled') ?? collect())->values();
+        $porPublicar = ($porEstado->get('unpublished') ?? collect())->values();
+
+        // Seed each item's platform selection as an ARRAY before it's rendered.
+        // The platform checkboxes bind to plataformas.<id>; if that key isn't an
+        // array, Livewire treats a lone checkbox as a boolean and the next
+        // render's in_array() throws a 500. Seeding from the saved platforms also
+        // pre-checks what was chosen before.
+        foreach ($porPublicar as $item) {
+            if (! is_array($this->plataformas[$item['id']] ?? null)) {
+                $this->plataformas[$item['id']] = array_values((array) ($item['plataformas'] ?? []));
+            }
+        }
 
         return view('livewire.rascunhos', [
             'aba' => $this->aba,
-            'unpublished' => ($porEstado->get('unpublished') ?? collect())->values(),
+            'unpublished' => $porPublicar,
             'scheduled' => $agendados,
             'posted' => ($porEstado->get('posted') ?? collect())->values(),
             'calendario' => $this->calendario($agendados),

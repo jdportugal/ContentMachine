@@ -60,9 +60,10 @@
                 <div class="mt-4 pt-4 border-t border-ink-soft/10">
                     <label class="eyebrow block mb-2">Where to post</label>
                     <div class="flex flex-wrap gap-2">
+                        @php $selecionadas = is_array($plataformas[$item['id']] ?? null) ? $plataformas[$item['id']] : []; @endphp
                         @foreach ($platLabels as $plat => $label)
                             <label class="flex items-center gap-2 px-3 py-1.5 rounded-sm border border-ink-soft/20 cursor-pointer text-sm
-                                          {{ in_array($plat, $plataformas[$item['id']] ?? [], true) ? 'bg-teal/10 border-teal/40 text-ink' : 'text-ink-soft' }}">
+                                          {{ in_array($plat, $selecionadas, true) ? 'bg-teal/10 border-teal/40 text-ink' : 'text-ink-soft' }}">
                                 <input type="checkbox" value="{{ $plat }}" wire:model.live="plataformas.{{ $item['id'] }}" class="accent-teal">
                                 {{ $label }}
                             </label>

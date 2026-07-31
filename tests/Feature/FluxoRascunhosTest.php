@@ -111,6 +111,20 @@ class FluxoRascunhosTest extends TestCase
         $this->assertStringStartsWith('2026-09-01', (string) $actualizada->get('agendado_para'));
     }
 
+    public function test_selecting_a_platform_does_not_500_when_it_arrives_as_a_boolean(): void
+    {
+        // Regression: the platform checkbox binds to plataformas.<id>. If that key
+        // isn't an array, Livewire coerces a lone checkbox to a boolean, and the
+        // next render's in_array() used to throw a 500. Render must survive it.
+        $vault = app(VaultContract::class);
+        $nota = $vault->create('rascunhos', ['titulo' => 'Post', 'tipo' => 'post', 'estado' => 'pronto'], 'corpo');
+        $id = $this->idDe('post', $nota->path);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, true) // what a lone checkbox click produces
+            ->assertOk();
+    }
+
     public function test_agendar_short_renderizado(): void
     {
         $this->comBlotato(['tiktok' => 'acc-tt']);
