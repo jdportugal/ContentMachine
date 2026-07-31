@@ -34,6 +34,15 @@ if [ -z "${APP_KEY:-}" ]; then
     export APP_KEY
 fi
 
+# One-time self-heal: builds before the resolve-time driver fix could run the
+# FAKE renderer in production, leaving tiny "FAKE-*" stubs (FAKE-VIDEO, FAKE-FINAL,
+# FAKE-AUDIO…) cached on the storage volume. is_file() treats them as valid
+# renders, so they'd never regenerate. Purge them so real renders take over.
+# Content-matched + size-capped, so real media (always far larger) is never touched.
+find storage/app -type f -size -4k 2>/dev/null | while IFS= read -r f; do
+    case "$(head -c 5 "$f" 2>/dev/null)" in FAKE-) rm -f "$f" ;; esac
+done
+
 # Migrations (queue/session/cache/app tables). Safe to re-run.
 php artisan migrate --force || true
 # public/storage symlink for the public disk.
