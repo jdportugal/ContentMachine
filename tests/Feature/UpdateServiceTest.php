@@ -68,7 +68,7 @@ class UpdateServiceTest extends TestCase
         ]);
         Http::fake(['watchtower:8080/*' => Http::response('ok')]);
 
-        $this->assertTrue(app(UpdateService::class)->triggerUpdate());
+        $this->assertSame('triggered', app(UpdateService::class)->triggerUpdate());
 
         Http::assertSent(fn ($req) => $req->method() === 'POST'
             && $req->url() === 'http://watchtower:8080/v1/update'
@@ -79,7 +79,49 @@ class UpdateServiceTest extends TestCase
     {
         config(['contentmachine.update.watchtower_url' => '']);
         Http::fake();
-        $this->assertFalse(app(UpdateService::class)->triggerUpdate());
+        $this->assertSame('not-wired', app(UpdateService::class)->triggerUpdate());
         Http::assertNothingSent();
+    }
+
+    public function test_trigger_update_reports_a_token_mismatch(): void
+    {
+        config([
+            'contentmachine.update.watchtower_url' => 'http://watchtower:8080',
+            'contentmachine.update.watchtower_token' => 'wrong',
+        ]);
+        Http::fake(['watchtower:8080/*' => Http::response('Unauthorized', 401)]);
+        $this->assertSame('unauthorized', app(UpdateService::class)->triggerUpdate());
+    }
+
+    public function test_trigger_update_reports_a_disabled_api(): void
+    {
+        config([
+            'contentmachine.update.watchtower_url' => 'http://watchtower:8080',
+            'contentmachine.update.watchtower_token' => 't',
+        ]);
+        Http::fake(['watchtower:8080/*' => Http::response('Not Found', 404)]);
+        $this->assertSame('unsupported', app(UpdateService::class)->triggerUpdate());
+    }
+
+    public function test_trigger_update_reports_an_unreachable_sidecar(): void
+    {
+        config([
+            'contentmachine.update.watchtower_url' => 'http://watchtower:8080',
+            'contentmachine.update.watchtower_token' => 't',
+        ]);
+        Http::fake(fn () => throw new \Illuminate\Http\Client\ConnectionException('cURL error 7: Connection refused'));
+        $this->assertSame('unreachable', app(UpdateService::class)->triggerUpdate());
+    }
+
+    public function test_trigger_update_treats_a_dropped_reply_as_success(): void
+    {
+        // Watchtower recreates THIS container mid-request → the reply is lost. That is
+        // the success path, not a failure.
+        config([
+            'contentmachine.update.watchtower_url' => 'http://watchtower:8080',
+            'contentmachine.update.watchtower_token' => 't',
+        ]);
+        Http::fake(fn () => throw new \Illuminate\Http\Client\ConnectionException('Empty reply from server'));
+        $this->assertSame('triggered', app(UpdateService::class)->triggerUpdate());
     }
 }

@@ -119,10 +119,13 @@ class Definicoes extends Component
     public function instalarAtualizacao(UpdateService $updates): void
     {
         if (! $updates->updatable()) {
+            $this->atualizacao = 'error';
+
             return;
         }
-        $updates->triggerUpdate();
-        $this->atualizacao = 'updating';
+        // 'triggered' → restarting; anything else is a real failure the user should
+        // see (with the manual command as a fallback), not a silent "updating…".
+        $this->atualizacao = $updates->triggerUpdate() === 'triggered' ? 'updating' : 'update-failed';
     }
 
     /**

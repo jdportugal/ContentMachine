@@ -72,12 +72,15 @@ services:
     expose:
       - "${APP_PORT}"
 
-  # Performs the actual pull + recreate when the app's "Check for updates" button
-  # fires. On-demand only (no auto-polling); only touches the labelled app.
+  # Keeps the app on the latest image. Two ways in, so an update never silently
+  # stalls: the "Install & restart" button fires the HTTP API for an instant
+  # update, AND a periodic poll (every 30 min) auto-pulls as a reliable fallback.
+  # --http-api-periodic-polls keeps the poll running alongside the API. Only the
+  # labelled app is touched; --cleanup removes the superseded image.
   watchtower:
     image: containrrr/watchtower
     restart: unless-stopped
-    command: --http-api-update --cleanup --label-enable
+    command: --http-api-update --http-api-periodic-polls --interval 1800 --cleanup --label-enable
     environment:
       WATCHTOWER_HTTP_API_TOKEN: ${WT_TOKEN}
     volumes:

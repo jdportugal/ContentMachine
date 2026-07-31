@@ -54,24 +54,45 @@ class UpdateService
         return $latest !== $mine;
     }
 
-    /** Ask Watchtower to pull `:latest` and recreate the app. Returns false if not wired. */
-    public function triggerUpdate(): bool
+    /**
+     * Ask Watchtower to pull `:latest` and recreate the app. Returns a status the UI
+     * can be honest about, instead of always claiming success:
+     *   'triggered'    — Watchtower accepted it (or dropped the reply mid-recreate).
+     *   'not-wired'    — no Watchtower configured (shouldn't reach here; guard in UI).
+     *   'unreachable'  — Watchtower isn't running / not on the network.
+     *   'unauthorized' — token mismatch between the app and the sidecar.
+     *   'unsupported'  — the sidecar's HTTP API isn't enabled (--http-api-update).
+     */
+    public function triggerUpdate(): string
     {
         $url = trim((string) config('contentmachine.update.watchtower_url'));
         $token = (string) config('contentmachine.update.watchtower_token');
         if ($url === '') {
-            return false;
+            return 'not-wired';
         }
 
-        // Short timeout: Watchtower recreates THIS container, so the response often
-        // never comes back — firing the request is enough. Swallow the expected drop.
         try {
-            Http::withToken($token)->timeout(5)->post(rtrim($url, '/').'/v1/update');
+            $resp = Http::withToken($token)->timeout(8)->post(rtrim($url, '/').'/v1/update');
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            // Watchtower recreates THIS container, so a dropped reply mid-flight is the
+            // SUCCESS path. But a refused connection / unknown host means the sidecar
+            // isn't reachable — a real, reportable failure.
+            $msg = strtolower($e->getMessage());
+            $down = str_contains($msg, 'refused')
+                || str_contains($msg, 'could not resolve')
+                || str_contains($msg, 'name or service not known')
+                || str_contains($msg, 'no route to host');
+
+            return $down ? 'unreachable' : 'triggered';
         } catch (\Throwable) {
-            // connection reset as the container is recreated — that's success, not failure
+            return 'triggered';
         }
 
-        return true;
+        return match (true) {
+            $resp->status() === 401 || $resp->status() === 403 => 'unauthorized',
+            $resp->status() === 404 => 'unsupported',
+            default => 'triggered',
+        };
     }
 
     /** `ghcr.io/owner/name` (or `owner/name`) → `owner/name`; null if not a GHCR image. */
