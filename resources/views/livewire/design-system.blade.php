@@ -53,7 +53,7 @@
                     Colors, fonts and texture distilled from the design above. This is what the
                     <span class="text-teal">Animated Clips</span> now use to match the brand.
                 </p>
-                <div class="grid sm:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <div class="eyebrow mb-2">Palette</div>
                         <div class="flex flex-wrap gap-2">

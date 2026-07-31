@@ -30,18 +30,23 @@ class ClipsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $api = config('contentmachine.clips.driver') === 'api';
+        // The clips driver is read at RESOLVE time, not here at register time: the
+        // SettingsOverlay (which derives clips.driver=api from the configured LLM
+        // key on the deployed image) only runs in a provider's boot(), AFTER every
+        // register(). Binding the concrete classes eagerly would freeze them to the
+        // pre-overlay 'fake' default with no .env → fake renders in production.
+        $api = fn () => config('contentmachine.clips.driver') === 'api';
 
         $this->app->bind(
             TranscriptionService::class,
-            $api ? OpenAiTranscriptionService::class : FakeTranscriptionService::class
+            fn ($app) => $app->make($api() ? OpenAiTranscriptionService::class : FakeTranscriptionService::class)
         );
         $this->app->bind(
             VoiceoverService::class,
-            $api ? ElevenLabsVoiceoverService::class : FakeVoiceoverService::class
+            fn ($app) => $app->make($api() ? ElevenLabsVoiceoverService::class : FakeVoiceoverService::class)
         );
         $this->app->bind(AnimationPlanner::class, function () use ($api) {
-            if (! $api) {
+            if (! $api()) {
                 return new FakeAnimationPlanner;
             }
 
@@ -51,19 +56,19 @@ class ClipsServiceProvider extends ServiceProvider
         });
         $this->app->bind(
             ResearchService::class,
-            $api ? ClaudeResearchService::class : FakeResearchService::class
+            fn ($app) => $app->make($api() ? ClaudeResearchService::class : FakeResearchService::class)
         );
         $this->app->bind(
             MetadataService::class,
-            $api ? ClaudeMetadataService::class : FakeMetadataService::class
+            fn ($app) => $app->make($api() ? ClaudeMetadataService::class : FakeMetadataService::class)
         );
         $this->app->bind(
             RemotionRenderer::class,
-            $api ? CliRemotionRenderer::class : FakeRemotionRenderer::class
+            fn ($app) => $app->make($api() ? CliRemotionRenderer::class : FakeRemotionRenderer::class)
         );
         $this->app->bind(
             VideoCompositor::class,
-            $api ? FfmpegVideoCompositor::class : FakeVideoCompositor::class
+            fn ($app) => $app->make($api() ? FfmpegVideoCompositor::class : FakeVideoCompositor::class)
         );
     }
 }

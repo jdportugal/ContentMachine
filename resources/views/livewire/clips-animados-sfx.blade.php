@@ -11,7 +11,7 @@
         <a href="{{ route('clips-animados.sfx') }}" wire:navigate class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6 inline-block">← back to SFX</a>
 
         <x-panel eyebrow="{{ $d['kind'] === 'builtin' ? 'Built-in effect' : 'Effect' }}" title="{{ $d['label'] }}" glyph="✷">
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- big preview --}}
                 <div class="relative aspect-[9/16] max-h-[60vh] mx-auto rounded-sm overflow-hidden bg-black/60 flex items-center justify-center w-full">
                     @if (($d['status'] ?? null) === 'failed')
@@ -132,7 +132,7 @@
                     </div>
                 @endif
                 <p class="font-mono text-[0.55rem] text-ink-faint mb-4">Plays once each time this effect appears in a clip.</p>
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <form wire:submit="uploadAudio" class="space-y-2">
                         <label class="eyebrow block">Upload a sound</label>
                         <input type="file" wire:model="audioUpload" accept="audio/*"

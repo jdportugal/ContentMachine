@@ -26,7 +26,7 @@
         {{-- ══════════════════════════ GENERAL ══════════════════════════ --}}
         @if ($secao === 'geral')
             <x-panel eyebrow="House" title="General" glyph="◆">
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="eyebrow block mb-1.5">Brand name</label>
                         <input type="text" wire:model="geral.nome_marca"
@@ -54,7 +54,7 @@
         @if ($secao === 'fontes')
             <x-panel eyebrow="Aggregator" title="Sources to crawl" glyph="☙">
                 <p class="text-ink-soft -mt-2 mb-4">One entry per line — channels, subreddits, accounts or links that feed the news report.</p>
-                <div class="grid sm:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     @php
                         $rotulos = [
                             'youtube' => ['YouTube channels', 'channel or URL per line'],
@@ -76,7 +76,7 @@
 
             <x-panel eyebrow="Aggregator" title="Channels to aggregate" glyph="▶">
                 <p class="text-ink-soft -mt-2 mb-4">Links to channels/profiles the aggregator crawls via yt-dlp — you can add <span class="text-ink">several per platform</span> with «+ add channel». YouTube and TikTok work without credentials; Instagram and LinkedIn are <span class="text-ink">best-effort</span> (may require authentication).</p>
-                <div class="grid sm:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     @php
                         $rotulosCanais = [
                             'youtube' => ['YouTube channels', 'https://www.youtube.com/@channel'],
@@ -118,7 +118,7 @@
         @if ($secao === 'social')
             <x-panel eyebrow="Networks" title="Social profiles" glyph="❧">
                 <p class="text-ink-soft -mt-2 mb-4">Handle (@handle) and link for each profile we monitor.</p>
-                <div class="grid sm:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     @foreach ($perfis as $rede => $dados)
                         @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#5A7BFF', 'glifo' => '•']; @endphp
                         <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
@@ -143,7 +143,7 @@
                     <span class="text-teal">Blotato dashboard</span>. A platform with no id can't be posted to.
                     Needs the Blotato key (API Keys tab).
                 </p>
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach ([
                         'youtube' => 'YouTube',
                         'instagram' => 'Instagram',
@@ -165,7 +165,7 @@
         @if ($secao === 'motor')
             <x-panel eyebrow="Engine" title="Models & limits" glyph="⚙">
                 <p class="text-ink-soft -mt-2 mb-4">Empty → uses the config/.env default.</p>
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="eyebrow block mb-1.5">LLM provider</label>
                         <input type="text" wire:model="modelos.llm_provider" placeholder="auto | anthropic | openai | gemini | none"
@@ -223,7 +223,7 @@
                     Stored in the vault for local use. Empty → falls back to the matching <span class="font-mono text-ink-soft">.env</span> value.
                     Setting the <span class="text-teal">Anthropic</span> key routes all Claude features through the API.
                 </p>
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach ([
                         'anthropic' => 'Anthropic (Claude)',
                         'openai' => 'OpenAI',

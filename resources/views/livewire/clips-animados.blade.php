@@ -53,7 +53,7 @@
                         $sug = $project->meta['suggested'] ?? [];
                     @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
-                        <div class="grid md:grid-cols-2 gap-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             {{-- LEFT: video --}}
                             <div class="flex items-center justify-center">
                                 @if ($project->status === 'done' && $project->output_path)
@@ -134,7 +134,7 @@
         @if ($createType === null)
             {{-- step 1: choose type --}}
             <div class="eyebrow mb-4">Step · I — what kind of clip?</div>
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <button type="button" wire:click="escolherTipo('animation')" class="text-left group">
                     <x-panel class="h-full transition group-hover:border-teal/40">
                         <div class="flex items-start justify-between">
@@ -241,7 +241,7 @@
                                 'animation' => ['t' => 'Full screen', 'd' => 'animation covers the video'],
                             ];
                         @endphp
-                        <div class="grid sm:grid-cols-2 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach ($styles as $key => $s)
                                 <label class="cursor-pointer flex items-start gap-2 rounded-sm border p-3 transition {{ in_array($key, $allowedPresents) ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
                                     <input type="checkbox" wire:model="allowedPresents" value="{{ $key }}" class="accent-teal mt-1" />

@@ -6,8 +6,11 @@ use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Livewire\ClipsAnimadosSfx;
 use App\Services\Clips\Api\BuildsAnimationPrompt;
+use App\Services\Clips\CliRemotionRenderer;
+use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Fake\FakeRemotionRenderer;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -699,5 +702,21 @@ class SfxTest extends TestCase
             is_dir($path) ? $this->rrmdir($path) : @unlink($path);
         }
         @rmdir($dir);
+    }
+
+    /**
+     * Regression: the clip service bindings must read clips.driver at RESOLVE time,
+     * not at register() time. On the deployed image there is no .env and the
+     * SettingsOverlay flips clips.driver to 'api' during boot() — after every
+     * provider's register(). An eager binding would freeze to the fake stub and
+     * produce "FAKE-VIDEO" previews/renders in production.
+     */
+    public function test_remotion_renderer_honours_driver_changed_after_register(): void
+    {
+        config(['contentmachine.clips.driver' => 'fake']);
+        $this->assertInstanceOf(FakeRemotionRenderer::class, app(RemotionRenderer::class));
+
+        config(['contentmachine.clips.driver' => 'api']);
+        $this->assertInstanceOf(CliRemotionRenderer::class, app(RemotionRenderer::class));
     }
 }

@@ -81,9 +81,9 @@
                 @endif
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {{-- Items of the day --}}
-                <div class="lg:col-span-2 space-y-3">
+                <div class="lg:col-span-2 space-y-3 min-w-0">
                     <div class="eyebrow mb-1">Items from {{ \Illuminate\Support\Carbon::parse($diaAtivo)->translatedFormat('d M Y') }}</div>
                     @forelse ($itensDoDia as $nota)
                         @php $m = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'), ['cor' => '#8AE0FF', 'glifo' => '•']); @endphp
@@ -126,7 +126,7 @@
                 </div>
 
                 {{-- Topics of the day --}}
-                <div>
+                <div class="min-w-0">
                     <div class="eyebrow mb-1">Topics «on air»</div>
                     @if ($topicosHtml)
                         <div class="prose-nocturna text-ink-soft text-sm leading-relaxed [&_h2]:font-display [&_h2]:text-ink [&_h2]:text-lg [&_h2]:mt-4 [&_h2]:mb-1 [&_a]:text-teal [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-0.5">
@@ -145,9 +145,9 @@
     </x-panel>
 
     {{-- ============ Report by period ============ --}}
-    <div class="grid lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {{-- Generator --}}
-        <div class="lg:col-span-1">
+        <div class="lg:col-span-1 min-w-0">
             <x-panel eyebrow="Report" title="Create report" glyph="☙">
                 <p class="text-ink-soft text-sm -mt-2 mb-4">Distills the already aggregated items into a report, ready to become a script.</p>
 
@@ -201,7 +201,7 @@
         </div>
 
         {{-- Generated report --}}
-        <div class="lg:col-span-3">
+        <div class="lg:col-span-3 min-w-0">
             <x-panel>
                 @if (!empty($relatoriosPassados))
                     <div class="flex flex-wrap items-center gap-3 mb-4 pb-4 border-b border-ink-soft/15">

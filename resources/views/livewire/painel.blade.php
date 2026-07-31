@@ -24,7 +24,7 @@
     {{-- Performance by platform --}}
     <div class="mt-8">
         <div class="eyebrow mb-3">Networks · recent performance</div>
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ($plataformas as $p)
                 @php $meta = config('contentmachine.plataformas_meta.'.$p['plataforma']); @endphp
                 <x-panel>

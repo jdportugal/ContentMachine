@@ -47,7 +47,7 @@
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                         @error('novaFonte') <span class="text-bad font-mono text-xs">{{ $message }}</span> @enderror
                     </div>
-                    <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="sm:col-span-2">
                             <label class="eyebrow block mb-1.5">Title (optional)</label>
                             <input type="text" wire:model="novaFonteTitulo" placeholder="Interview, lecture…"
@@ -162,7 +162,7 @@
             {{-- Add clip manually (optional) --}}
             <details class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
                 <summary class="eyebrow cursor-pointer select-none">Add clip manually (optional)</summary>
-                <div class="grid sm:grid-cols-4 gap-3 mt-3">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mt-3">
                     <input type="text" wire:model="clipTitulo.{{ $fonteAtual->slug() }}" placeholder="Title"
                            class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-body text-sm focus:border-teal focus:outline-none">
                     <input type="text" wire:model="clipInicio.{{ $fonteAtual->slug() }}" placeholder="Start (00:00:05 or 5)"
@@ -227,7 +227,7 @@
                         {{-- Expanded editor: video (left) + details (right) + editor below --}}
                         @if ($aberto)
                             <div class="border-t border-ink-soft/15 p-4 space-y-5">
-                                <div class="grid lg:grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                     {{-- Video with/without subtitles --}}
                                     <div x-data="{ v: '{{ $tipo }}' }">
                                         @if ($temVideo)
@@ -298,7 +298,7 @@
                                 {{-- Style --}}
                                 <div>
                                     <div class="eyebrow mb-2">Subtitle style</div>
-                                    <div class="grid sm:grid-cols-3 gap-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                         <div>
                                             <label class="font-mono text-xs text-ink-faint block mb-1">Position</label>
                                             <select wire:model="estilo.position" class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1.5 text-ink font-mono text-xs focus:border-teal focus:outline-none">
@@ -335,7 +335,7 @@
                                 {{-- Background music --}}
                                 <div>
                                     <div class="eyebrow mb-2">Background music</div>
-                                    <div class="grid sm:grid-cols-4 gap-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                                         <select wire:model="musica"
                                                 class="sm:col-span-3 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1.5 text-ink font-mono text-xs focus:border-teal focus:outline-none">
                                             <option value="">Random (from library)</option>

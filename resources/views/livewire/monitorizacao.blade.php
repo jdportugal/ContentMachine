@@ -69,7 +69,7 @@
         </p>
     @endif
 
-    <div class="grid lg:grid-cols-2 gap-6 mt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         {{-- Latest of each type (requested emphasis) --}}
         <x-panel eyebrow="Emphasis" title="Latest of each genre" glyph="❧">
             <p class="text-sm text-ink-soft mb-3 -mt-2">Performance of the most recent content of each published type.</p>

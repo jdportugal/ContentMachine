@@ -74,7 +74,7 @@
         {{-- Composition + images per card --}}
         <x-panel eyebrow="Composition" :title="$notaPath ? 'Edit piece' : 'New piece'" :glyph="$this->kind['glifo'] ?? '❦'">
             <form wire:submit="criarRascunho" class="space-y-4">
-                <div class="grid sm:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="sm:col-span-1">
                         <label class="eyebrow block mb-1.5">Title</label>
                         <input type="text" wire:model="titulo" placeholder="Piece title"

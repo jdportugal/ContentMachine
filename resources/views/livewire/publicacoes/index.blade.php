@@ -73,7 +73,7 @@
 
     {{-- New post --}}
     <div class="eyebrow mb-3">New post · choose the format</div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($this->tipos as $tipo => $def)
             <a href="{{ route('publicacoes.oficina', $tipo) }}" class="block group" wire:key="tipo-{{ $tipo }}">
                 <x-panel class="h-full transition group-hover:border-teal/40">
