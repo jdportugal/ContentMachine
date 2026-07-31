@@ -39,15 +39,10 @@ done
 DOMAIN="${DOMAIN:-${IP}.sslip.io}"    # <ip>.sslip.io resolves to <ip>; Caddy gets a cert
 log "deploying at https://${DOMAIN}"
 
-# Token shared between the app and the Watchtower sidecar, so the in-app
-# "Check for updates" button can trigger a pull + recreate. Generated once.
-
 mkdir -p "${DIR}"; cd "${DIR}"
 
-# Token the app uses to trigger Watchtower (regenerated each install; baked into
-# the compose below). No .env — all config is either automatic here or set in the
-# app's Settings page (API keys, channels, models…). Drop a stale one if present.
-WT_TOKEN="$(head -c 24 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+# No .env — all config is either automatic here or set in the app's Settings page
+# (API keys, channels, models…). Drop a stale one if present.
 rm -f .env 2>/dev/null || true
 
 cat > docker-compose.yml <<EOF
@@ -60,11 +55,6 @@ services:
     environment:
       APP_URL: https://${DOMAIN}
       ASSET_URL: https://${DOMAIN}
-      WATCHTOWER_URL: http://watchtower:8080
-      WATCHTOWER_TOKEN: ${WT_TOKEN}
-    labels:
-      # let Watchtower update THIS container on demand
-      com.centurylinklabs.watchtower.enable: "true"
     volumes:
       - storage:/app/storage
       - vault:/app/vault
@@ -74,20 +64,6 @@ services:
       - media:/app/public/media
     expose:
       - "${APP_PORT}"
-
-  # Keeps the app on the latest image. Two ways in, so an update never silently
-  # stalls: the "Install & restart" button fires the HTTP API for an instant
-  # update, AND a periodic poll (every 30 min) auto-pulls as a reliable fallback.
-  # --http-api-periodic-polls keeps the poll running alongside the API. Only the
-  # labelled app is touched; --cleanup removes the superseded image.
-  watchtower:
-    image: containrrr/watchtower
-    restart: unless-stopped
-    command: --http-api-update --http-api-periodic-polls --interval 1800 --cleanup --label-enable
-    environment:
-      WATCHTOWER_HTTP_API_TOKEN: ${WT_TOKEN}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   caddy:
     image: caddy:2
@@ -140,6 +116,38 @@ MSG
   log "transient pull error — retrying…"; retry docker compose pull
 fi
 log "starting…"; docker compose up -d
+
+# ── Auto-update: a host systemd timer pulls the latest image every 5 min and
+# recreates the app only if it changed (a no-op otherwise). Host-side, Docker
+# only — no in-container sidecar, network path, or shared token to go wrong.
+if command -v systemctl >/dev/null 2>&1; then
+  log "installing the auto-update timer…"
+  cat > /etc/systemd/system/brand-machine-update.service <<UNIT
+[Unit]
+Description=Update Brand Machine to the latest image
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=${DIR}
+ExecStart=/bin/sh -c 'docker compose pull --quiet && docker compose up -d'
+UNIT
+  cat > /etc/systemd/system/brand-machine-update.timer <<UNIT
+[Unit]
+Description=Check for Brand Machine updates every 5 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+UNIT
+  systemctl daemon-reload 2>/dev/null || true
+  systemctl enable --now brand-machine-update.timer 2>/dev/null || true
+fi
 log "done"
 
 cat <<EOF
@@ -147,7 +155,8 @@ cat <<EOF
 ✓ Brand Machine is up:  https://${DOMAIN}
   (first request takes a few seconds while Caddy fetches the certificate)
 
+  updates: automatic — a systemd timer pulls the latest every 5 min.
   logs:    cd ${DIR} && docker compose logs -f
-  update:  cd ${DIR} && docker compose pull && docker compose up -d
+  now:     cd ${DIR} && docker compose pull && docker compose up -d   (update instantly)
   keys:    open the app → Settings → API Keys (no .env, no SSH)
 EOF

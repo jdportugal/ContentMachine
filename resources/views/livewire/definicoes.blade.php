@@ -256,7 +256,7 @@
                 </div>
 
                 @unless ($podeAtualizar)
-                    <p class="text-ink-soft text-sm mb-3">One-click update isn't wired on this install (no Watchtower sidecar). You can still check below; to update manually, run <span class="font-mono text-ink-soft">docker compose pull &amp;&amp; docker compose up -d</span> on the host.</p>
+                    <p class="text-ink-soft text-sm mb-3">Updates install <span class="text-teal">automatically every ~5 min</span> — nothing to click. To update instantly, run <span class="font-mono text-ink-soft">cd /opt/brand-machine &amp;&amp; docker compose pull &amp;&amp; docker compose up -d</span> on the host.</p>
                 @endunless
 
                 <div class="flex flex-wrap items-center gap-3">
@@ -279,7 +279,7 @@
                     @if ($atualizacao === 'uptodate')
                         <span class="text-good">✓ You're on the latest version.</span>
                     @elseif ($atualizacao === 'available')
-                        <span class="text-gold">● A new version is available.</span>
+                        <span class="text-gold">● A new version is available — it installs automatically within ~5 min (or run the command above to get it now).</span>
                     @elseif ($atualizacao === 'updating')
                         <span class="text-teal">↻ Update triggered — pulling the new image and restarting. Reload this page in ~30 seconds. (It also auto-updates within 30 min if anything blocks this.)</span>
                     @elseif ($atualizacao === 'update-failed')
