@@ -63,4 +63,29 @@ class MonitoringAnalyticsTest extends TestCase
         $medias = (new MonitoringAnalytics)->mediasPorTipo([['tipo' => 'short', 'views' => 10]], 0);
         $this->assertNull($medias[0]['subs_por']);
     }
+
+    public function test_serie_buckets_every_metric(): void
+    {
+        Carbon::setTestNow('2026-07-31 12:00:00');
+        $serie = (new MonitoringAnalytics)->serie([
+            ['tipo' => 'short', 'views' => 100, 'likes' => 9, 'comentarios' => 3, 'partilhas' => 2, 'guardados' => 5, 'publicado_em' => '2026-07-31'],
+        ], 'dia', 14);
+
+        $hoje = end($serie);
+        $this->assertSame(9, $hoje['likes']);
+        $this->assertSame(3, $hoje['comentarios']);
+        $this->assertSame(2, $hoje['partilhas']);
+        $this->assertSame(5, $hoje['guardados']);
+    }
+
+    public function test_curve_path_builds_a_smooth_line_and_closed_area(): void
+    {
+        $paths = MonitoringAnalytics::curvePath([0, 5, 2, 8, 4]);
+
+        $this->assertStringStartsWith('M ', $paths['line']);
+        $this->assertStringContainsString(' C ', $paths['line']); // cubic bézier segments = smooth
+        $this->assertStringEndsWith('Z', $paths['area']);         // area closes to the baseline
+
+        $this->assertSame(['line' => '', 'area' => ''], MonitoringAnalytics::curvePath([]));
+    }
 }

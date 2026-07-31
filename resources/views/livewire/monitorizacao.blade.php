@@ -69,20 +69,28 @@
         </p>
     @endif
 
-    {{-- ═══════════ Views over time (day / month) ═══════════ --}}
+    {{-- ═══════════ Stats over time — a curve per metric (day / month) ═══════════ --}}
     @php
-        $corBarra = $meta['cor'] ?? '#4DE0E0';
-        $maxDia = max(1, ...array_map(fn ($b) => $b['views'], $serieDia));
-        $maxMes = max(1, ...array_map(fn ($b) => $b['views'], $serieMes));
-        $temDia = collect($serieDia)->sum('views') > 0;
-        $temViews = $temDia || collect($serieMes)->sum('views') > 0;
+        $corBase = $meta['cor'] ?? '#4DE0E0';
+        // One curve per stat. Kept only when there's something to show.
+        $metricas = [
+            ['key' => 'views',       'label' => 'Views',    'cor' => $corBase],
+            ['key' => 'likes',       'label' => 'Likes',    'cor' => '#FF5C7A'],
+            ['key' => 'comentarios', 'label' => 'Comments', 'cor' => '#9C7DFF'],
+            ['key' => 'partilhas',   'label' => 'Shares',   'cor' => '#4DE0E0'],
+            ['key' => 'guardados',   'label' => 'Saves',    'cor' => '#FFB347'],
+            ['key' => 'posts',       'label' => 'Posts',    'cor' => '#4DE08A'],
+        ];
+        $somaAmbos = fn (string $k) => collect($serieDia)->sum($k) + collect($serieMes)->sum($k);
+        $metricas = array_values(array_filter($metricas, fn ($m) => $somaAmbos($m['key']) > 0));
+        $temDia = collect($serieDia)->sum('views') > 0 || collect($serieDia)->sum('posts') > 0;
     @endphp
-    @if ($temViews)
+    @if (! empty($metricas))
         <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-8" x-data="{ g: '{{ $temDia ? 'dia' : 'mes' }}' }">
             <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
                 <div>
-                    <div class="eyebrow">Trend</div>
-                    <p class="text-ink-soft text-sm mt-1">Views of the posts published in each period.</p>
+                    <div class="eyebrow">Trends</div>
+                    <p class="text-ink-soft text-sm mt-1">Every stat over time — totals per period.</p>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
                     <button type="button" @click="g='dia'" :class="g==='dia' ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft'" class="font-mono text-xs px-3 py-1 rounded-sm border transition">By day</button>
@@ -90,21 +98,27 @@
                 </div>
             </div>
 
-            @foreach (['dia' => [$serieDia, $maxDia], 'mes' => [$serieMes, $maxMes]] as $g => [$serie, $max])
-                <div x-show="g === '{{ $g }}'" @if ($g === 'mes') x-cloak @endif>
-                    <div class="flex items-end gap-1 h-40 overflow-x-auto">
-                        @foreach ($serie as $b)
-                            <div class="flex-1 min-w-[10px] flex flex-col justify-end h-full"
-                                 title="{{ $b['label'] }} · {{ number_format($b['views']) }} views · {{ $b['posts'] }} post{{ $b['posts'] === 1 ? '' : 's' }}">
-                                <div class="w-full rounded-t-sm transition-all" style="height: {{ max($b['views'] > 0 ? 3 : 0, round($b['views'] / $max * 100)) }}%; background: {{ $corBarra }}99;"></div>
+            @foreach (['dia' => $serieDia, 'mes' => $serieMes] as $g => $serie)
+                @php
+                    $labels = array_column($serie, 'label');
+                    $primeira = $labels[0] ?? '';
+                    $ultima = end($labels) ?: '';
+                @endphp
+                <div x-show="g === '{{ $g }}'" @if ($g === 'mes') x-cloak @endif class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    @foreach ($metricas as $m)
+                        @php $total = collect($serie)->sum($m['key']); @endphp
+                        <div class="rounded-sm border border-ink-soft/15 bg-surface/20 p-3 min-w-0">
+                            <div class="flex items-baseline justify-between gap-2 mb-2">
+                                <span class="font-mono text-[0.62rem] uppercase tracking-wide" style="color: {{ $m['cor'] }}">{{ $m['label'] }}</span>
+                                <span class="font-display text-lg text-ink leading-none">{{ number_format($total) }}</span>
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="flex gap-1 mt-1">
-                        @foreach ($serie as $b)
-                            <div class="flex-1 min-w-[10px] text-center font-mono text-[0.5rem] text-ink-faint truncate">{{ $b['label'] }}</div>
-                        @endforeach
-                    </div>
+                            <x-curve-chart :points="array_map(fn ($b) => $b[$m['key']], $serie)" :color="$m['cor']" :height="52" />
+                            <div class="flex justify-between font-mono text-[0.5rem] text-ink-faint mt-1">
+                                <span>{{ $primeira }}</span>
+                                <span>{{ $ultima }}</span>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             @endforeach
         </div>
