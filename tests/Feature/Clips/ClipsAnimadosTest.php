@@ -153,6 +153,35 @@ class ClipsAnimadosTest extends TestCase
         Queue::assertPushed(RenderJob::class);
     }
 
+    public function test_changing_a_scene_animation_swaps_the_layer_effect(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'punchWord' => null, 'layers' => [['type' => 'kinetic-text', 'text' => 'Olá', 'params' => []]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->assertSet('editScenes.0.animacao', 'kinetic-text')
+            ->call('escolherAnimacao', 0)
+            ->assertSet('animacaoPickerCena', 0)
+            ->call('mudarAnimacao', 0, 'fade')
+            ->assertSet('editScenes.0.animacao', 'fade')
+            ->assertSet('animacaoPickerCena', null)
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertSame('fade', $p->plan['scenes'][0]['layers'][0]['type']); // animation swapped
+        $this->assertSame('Olá', $p->plan['scenes'][0]['layers'][0]['text']);   // scene text preserved
+    }
+
     public function test_edit_raw_json_saves_plan_verbatim_and_renders(): void
     {
         Queue::fake();

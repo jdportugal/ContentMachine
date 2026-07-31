@@ -6,7 +6,9 @@ use App\Jobs\Clips\GenerateBackgroundJob;
 use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderBackgroundReelJob;
 use App\Jobs\Clips\RenderBackgroundSampleJob;
+use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
+use App\Services\Clips\EffectLibrary;
 use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ImageProbe;
@@ -89,6 +91,9 @@ class ClipsAnimados extends Component
 
     /** @var array<int,array<string,mixed>> scene rows (layers preserved verbatim) */
     public array $editScenes = [];
+
+    /** Index of the scene whose "change animation" picker is open, or null. */
+    public ?int $animacaoPickerCena = null;
 
     /** 'cenas' (field editor) | 'json' (raw Remotion plan) */
     public string $editMode = 'cenas';
@@ -518,6 +523,7 @@ class ClipsAnimados extends Component
                 'textTarget' => $target,
                 'layers' => $s['layers'] ?? [], // preserved; text merged back on save
                 'layersSummary' => implode(', ', array_map(fn ($l) => $l['type'] ?? '?', $s['layers'] ?? [])) ?: '—',
+                'animacao' => $s['layers'][0]['type'] ?? null,
             ];
         }, $p->plan['scenes'] ?? []);
         $this->editPlanJson = json_encode($p->plan ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -549,6 +555,7 @@ class ClipsAnimados extends Component
             'start' => 0, 'end' => 1, 'background' => 'papyrus',
             'transitionIn' => 'crossfade', 'transitionOut' => 'cut',
             'karaoke' => false, 'punchWord' => '', 'layers' => [], 'layersSummary' => '—',
+            'animacao' => null,
         ];
     }
 
@@ -556,6 +563,63 @@ class ClipsAnimados extends Component
     {
         unset($this->editScenes[$i]);
         $this->editScenes = array_values($this->editScenes);
+        $this->animacaoPickerCena = null;
+    }
+
+    /** Open the animation picker for a scene, queueing any missing sample renders. */
+    public function escolherAnimacao(int $i, EffectLibrary $library): void
+    {
+        $this->animacaoPickerCena = $i;
+
+        // Make sure every pickable animation has a rendered sample to show.
+        foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $s) {
+            if (! in_array($slug, $library->disabledBuiltins(), true) && ! $library->previewExists($slug)) {
+                RenderEffectSampleJob::dispatch($slug, $s['text'], $s['params']);
+            }
+        }
+        foreach ($library->enabled() as $e) {
+            if (! $library->previewExists($e->slug)) {
+                RenderEffectSampleJob::dispatch($e->slug, $e->sample_text, $e->sample_params ?? []);
+            }
+        }
+    }
+
+    public function fecharAnimacoes(): void
+    {
+        $this->animacaoPickerCena = null;
+    }
+
+    /** Swap a scene's animation to $slug — sets the first layer's effect type. */
+    public function mudarAnimacao(int $i, string $slug): void
+    {
+        if (! isset($this->editScenes[$i])) {
+            return;
+        }
+        $layers = $this->editScenes[$i]['layers'] ?? [];
+        if (empty($layers)) {
+            $layers = [['type' => $slug, 'params' => []]];
+        } else {
+            $layers[0]['type'] = $slug;
+        }
+
+        $this->editScenes[$i]['layers'] = $layers;
+        $this->editScenes[$i]['animacao'] = $slug;
+        $this->editScenes[$i]['layersSummary'] = implode(', ', array_map(fn ($l) => $l['type'] ?? '?', $layers)) ?: '—';
+        $this->animacaoPickerCena = null;
+    }
+
+    /** Built-in + enabled custom effects the picker offers, deduped by slug. @return array<int,array{slug:string,label:string,kind:string}> */
+    private function animacoesDisponiveis(EffectLibrary $library): array
+    {
+        $lista = [];
+        foreach (array_diff(array_keys(EffectLibrary::BUILTIN_SAMPLES), $library->disabledBuiltins()) as $slug) {
+            $lista[$slug] = ['slug' => $slug, 'label' => EffectLibrary::BUILTIN_SAMPLES[$slug]['label'] ?? $slug, 'kind' => 'builtin'];
+        }
+        foreach ($library->enabled() as $e) {
+            $lista[$e->slug] = ['slug' => $e->slug, 'label' => $e->display_name ?: $e->slug, 'kind' => 'custom'];
+        }
+
+        return array_values($lista);
     }
 
     /**
@@ -778,11 +842,24 @@ class ClipsAnimados extends Component
             }
         }
 
+        $animacoes = [];
+        $sfxReady = [];
+        if ($this->view === 'editPlan') {
+            $library = app(EffectLibrary::class);
+            $animacoes = $this->animacoesDisponiveis($library);
+            $sfxReady = array_values(array_filter(
+                array_column($animacoes, 'slug'),
+                fn ($slug) => $library->previewExists($slug),
+            ));
+        }
+
         return view('livewire.clips-animados', [
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
             'musicas' => $music->all(),
             'bgReady' => $bgReady,
+            'animacoes' => $animacoes,
+            'sfxReady' => $sfxReady,
         ]);
     }
 }

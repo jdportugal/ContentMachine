@@ -338,6 +338,48 @@
                                 <span class="eyebrow">Scene {{ $i + 1 }} · <span class="text-ink-faint normal-case tracking-normal">{{ $scene['layersSummary'] ?? '—' }}</span></span>
                                 <button type="button" wire:click="removerCena({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remove">✕</button>
                             </div>
+
+                            {{-- Animation: its sample + a picker to swap it. --}}
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-14 aspect-[9/16] rounded-sm overflow-hidden bg-black/50 shrink-0 flex items-center justify-center">
+                                    @if (! empty($scene['animacao']) && in_array($scene['animacao'], $sfxReady, true))
+                                        <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $scene['animacao']) }}" autoplay loop muted playsinline onerror="this.style.display='none'"></video>
+                                    @else
+                                        <span class="font-mono text-[0.45rem] text-ink-faint text-center px-1">no sample</span>
+                                    @endif
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="font-mono text-[0.55rem] text-ink-faint">animation</div>
+                                    <div class="font-display text-ink truncate">{{ $scene['animacao'] ?? '—' }}</div>
+                                </div>
+                                <button type="button" wire:click="escolherAnimacao({{ $i }})"
+                                        class="font-mono text-[0.62rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition shrink-0">⇆ Change</button>
+                            </div>
+
+                            @if ($animacaoPickerCena === $i)
+                                <div class="mb-3 border border-teal/30 rounded-sm p-2 bg-vellum/40" @if (count($animacoes) > count($sfxReady)) wire:poll.4s @endif>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="eyebrow">Choose an animation</span>
+                                        <button type="button" wire:click="fecharAnimacoes" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">close</button>
+                                    </div>
+                                    <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 max-h-96 overflow-y-auto">
+                                        @foreach ($animacoes as $a)
+                                            <button type="button" wire:click="mudarAnimacao({{ $i }}, '{{ $a['slug'] }}')" wire:key="anim-{{ $i }}-{{ $a['slug'] }}"
+                                                    class="rounded-sm border p-1 flex flex-col transition hover:border-teal/50 {{ ($scene['animacao'] ?? null) === $a['slug'] ? 'border-teal/60 bg-teal/10' : 'border-ink-soft/15' }}">
+                                                <div class="aspect-[9/16] rounded-sm overflow-hidden bg-black/50 flex items-center justify-center">
+                                                    @if (in_array($a['slug'], $sfxReady, true))
+                                                        <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $a['slug']) }}" autoplay loop muted playsinline onerror="this.style.display='none'"></video>
+                                                    @else
+                                                        <span class="font-mono text-[0.45rem] text-ink-faint animate-pulse">rendering…</span>
+                                                    @endif
+                                                </div>
+                                                <span class="font-mono text-[0.5rem] text-ink truncate mt-1 text-center w-full">{{ $a['label'] }}</span>
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">start</label>
