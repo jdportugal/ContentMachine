@@ -10,6 +10,7 @@ use App\Services\Clips\CliRemotionRenderer;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\EffectPortability;
 use App\Services\Clips\Fake\FakeRemotionRenderer;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
@@ -718,5 +719,43 @@ class SfxTest extends TestCase
 
         config(['contentmachine.clips.driver' => 'api']);
         $this->assertInstanceOf(CliRemotionRenderer::class, app(RemotionRenderer::class));
+    }
+
+    public function test_export_then_import_recreates_the_effect_with_a_fresh_unique_slug(): void
+    {
+        Queue::fake();
+
+        $original = $this->makeEffect([
+            'prompt' => 'glitch', 'slug' => 'glitch-flicker', 'display_name' => 'Glitch',
+            'description' => 'A glitch flicker', 'tsx' => 'export default () => null;',
+            'sample_text' => 'HELLO', 'sample_params' => ['intensity' => 3],
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        $port = app(EffectPortability::class);
+        $payload = $port->export($original->id());
+
+        $this->assertSame('brand-machine/sfx', $payload['type']);
+        $this->assertCount(1, $payload['effects']);
+        $this->assertStringContainsString('export default', $payload['effects'][0]['tsx']);
+        $this->assertSame(['intensity' => 3], $payload['effects'][0]['sample_params']);
+
+        // Import the same payload back → a NEW record with a collision-free slug.
+        $this->assertSame(1, $port->import($payload));
+
+        $all = $this->effects()->all();
+        $this->assertCount(2, $all);
+        $imported = $all->first(fn (EffectRecord $r) => $r->id() !== $original->id());
+        $this->assertNotSame('glitch-flicker', $imported->slug);
+        $this->assertSame('Glitch', $imported->display_name);
+        $this->assertSame(EffectRecord::STATUS_ACTIVE, $imported->status);
+
+        Queue::assertPushed(RenderEffectSampleJob::class);
+    }
+
+    public function test_import_rejects_a_file_that_is_not_an_sfx_export(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        app(EffectPortability::class)->import(['type' => 'something-else', 'effects' => []]);
     }
 }

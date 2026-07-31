@@ -69,6 +69,8 @@
                             @else
                                 <span class="font-mono text-[0.62rem] text-ink-faint self-center">{{ $d['status'] === 'updating' ? 'Updating…' : 'Generating…' }}</span>
                             @endif
+                            <a href="{{ route('clips-animados.sfx-export', $d['id']) }}"
+                               class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓ Export</a>
                             <button type="button" wire:click="apagarSfx('{{ $d['id'] }}')"
                                     wire:confirm="Delete this effect? Clips already rendered keep their video."
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕ Delete</button>
@@ -206,6 +208,22 @@
                     <span class="font-mono text-[0.6rem] text-ink-faint">Colours &amp; fonts are locked to the design system.</span>
                 </div>
             </form>
+
+            {{-- Export / import — move a whole effect set (component + sound) between installs. --}}
+            <div class="mt-4 pt-4 border-t border-ink-soft/10 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <a href="{{ route('clips-animados.sfx-export', 'all') }}"
+                   class="font-mono text-xs px-3 py-1.5 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓ Export all effects</a>
+                <form wire:submit="importarSfx" class="flex items-center gap-2">
+                    <input type="file" wire:model="importFile" accept="application/json,.json"
+                           class="text-xs text-ink-soft file:mr-2 file:py-1 file:px-2 file:rounded-sm file:border file:border-ink-soft/20 file:bg-surface/40 file:text-ink-soft" />
+                    <button type="submit" wire:loading.attr="disabled" wire:target="importFile,importarSfx"
+                            class="font-mono text-xs px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition whitespace-nowrap">
+                        <span wire:loading.remove wire:target="importFile,importarSfx">⤒ Import</span>
+                        <span wire:loading wire:target="importFile,importarSfx">importing…</span>
+                    </button>
+                </form>
+                @error('importFile') <span class="text-bad text-xs">{{ $message }}</span> @enderror
+            </div>
         </x-panel>
 
         {{-- Showreel --}}

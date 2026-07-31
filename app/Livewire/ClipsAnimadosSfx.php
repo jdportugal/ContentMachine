@@ -53,10 +53,44 @@ class ClipsAnimadosSfx extends Component
 
     public string $audioGenPrompt = '';
 
+    /** Import: an uploaded Brand Machine SFX export file. */
+    public $importFile = null;
+
     public function mount(?string $key = null): void
     {
         $this->detailKey = $key;
         $this->ensurePreviews();
+    }
+
+    /** Import effects from an uploaded Brand Machine SFX export file. */
+    public function importarSfx(\App\Services\Clips\EffectPortability $port): void
+    {
+        $this->validate(
+            ['importFile' => 'required|file|max:51200'],
+            ['importFile.required' => 'Choose an export file first.'],
+        );
+
+        try {
+            $payload = json_decode((string) file_get_contents($this->importFile->getRealPath()), true);
+            if (! is_array($payload)) {
+                throw new \RuntimeException('The file is not valid JSON.');
+            }
+            $n = $port->import($payload);
+        } catch (\Throwable $e) {
+            $this->dispatch('toast', message: 'Import failed: '.$e->getMessage(), type: 'erro');
+
+            return;
+        }
+
+        $this->reset('importFile');
+
+        if ($n === 0) {
+            $this->dispatch('toast', message: 'No effects found in that file.', type: 'erro');
+
+            return;
+        }
+
+        $this->dispatch('toast', message: $n.' effect'.($n === 1 ? '' : 's').' imported — rendering previews…', type: 'ok');
     }
 
     /**
