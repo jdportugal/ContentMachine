@@ -527,8 +527,13 @@ class ClipsAnimados extends Component
 
         return array_map(function (array $r) use ($uploads, $byId) {
             $id = $uploads[$r['key']] ?? null;
+            $img = $id ? ($byId[$id] ?? null) : null;
 
-            return $r + ['uploadedId' => $id, 'path' => $id ? ($byId[$id]['path'] ?? null) : null];
+            return $r + [
+                'uploadedId' => $id,
+                'path' => $img['path'] ?? null,
+                'fromLibrary' => (bool) ($img['library'] ?? false),
+            ];
         }, $p->meta['image_requests'] ?? []);
     }
 

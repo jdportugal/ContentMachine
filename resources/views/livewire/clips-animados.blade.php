@@ -154,7 +154,9 @@
 
                         <span class="flex-1 min-w-0 text-sm text-ink">
                             {{ trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt'] }}
-                            @if (!empty($r['uploadedId']))
+                            @if (!empty($r['fromLibrary']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· from library</span>
+                            @elseif (!empty($r['uploadedId']))
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
                             @else
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· will be generated</span>

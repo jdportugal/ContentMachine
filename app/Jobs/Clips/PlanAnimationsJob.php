@@ -8,6 +8,8 @@ use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\ImageLibrary;
+use App\Services\Clips\ImageLibraryMatcher;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\SceneVisualFiller;
@@ -82,14 +84,32 @@ class PlanAnimationsJob implements ShouldQueue
             }
 
             // The full script/plan is ready — every image the planner wants exists as
-            // a `generate` request. Before those get generated, offer the user the
-            // chance to upload their own for any of them (FinalizeClipPlanJob then
-            // generates whatever they skipped). No suggestions → nothing to collect,
-            // so go straight to finalisation.
+            // a `generate` request. First reuse anything already in the project's
+            // image library (a logo, a brand shot); whatever is left, offer the user
+            // the chance to upload before it is generated. No pending suggestions →
+            // go straight to finalisation.
             $p->update(['plan' => $plan]);
             $requests = $imagesOn ? ImageRequests::collect($plan) : [];
 
-            if ($requests === []) {
+            $library = app(ImageLibrary::class);
+            $matched = $requests !== [] ? app(ImageLibraryMatcher::class)->match($requests, $library->all()) : [];
+            $uploads = [];
+            $images = $p->images ?? [];
+            foreach ($matched as $key => $libId) {
+                $entry = $library->attachToClip($libId);
+                if ($entry !== null) {
+                    $images[] = $entry;
+                    $uploads[$key] = $entry['id'];
+                }
+            }
+            $p->update(['images' => $images]);
+
+            // Only the suggestions the library did NOT satisfy still need the user.
+            $pending = array_filter($requests, fn (array $r) => ! isset($uploads[$r['key']]));
+
+            if ($pending === []) {
+                // Fully covered (library matches, or nothing to generate): finalise.
+                $p->update(['meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads])]);
                 FinalizeClipPlanJob::dispatch($p->id);
 
                 return;
@@ -97,7 +117,7 @@ class PlanAnimationsJob implements ShouldQueue
 
             $p->update([
                 'status' => ClipRecord::STATUS_COLLECTING,
-                'meta' => array_merge($p->meta ?? [], ['image_requests' => $requests, 'image_uploads' => []]),
+                'meta' => array_merge($p->meta ?? [], ['image_requests' => $requests, 'image_uploads' => $uploads]),
             ]);
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);

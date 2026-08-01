@@ -65,6 +65,14 @@ Route::get('/clips-animados/upload/{name}', function (string $name) {
     return response()->file($disk->path("clips/uploads/{$name}"));
 })->name('clips-animados.upload');
 
+// Serve an image-library thumbnail (per-project vault), by id.
+Route::get('/clips-animados/library-image/{id}', function (string $id) {
+    $img = app(\App\Services\Clips\ImageLibrary::class)->find($id);
+    abort_unless($img && is_file($img['path']), 404);
+
+    return response()->file($img['path']);
+})->name('clips-animados.library-image');
+
 // Serve/download a clip's final file (vault-backed, resolved for the active project).
 Route::get('/clips-animados/{id}/media', function (string $id) {
     $clip = app(ClipStore::class)->find($id);
