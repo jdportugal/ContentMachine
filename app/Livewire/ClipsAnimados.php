@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Jobs\Clips\FinalizeClipPlanJob;
 use App\Jobs\Clips\GenerateBackgroundJob;
 use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderBackgroundReelJob;
@@ -56,6 +57,12 @@ class ClipsAnimados extends Component
     public string $background = 'auto';
 
     // ---- creation ----
+    // ---- collect images (review of the planner's image suggestions) ----
+    public ?string $reviewingId = null;
+
+    /** Per-suggestion upload files, keyed by the suggestion's key. */
+    public array $reviewUploads = [];
+
     /** null | animation | overlay */
     public ?string $createType = null;
 
@@ -127,7 +134,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -443,7 +450,7 @@ class ClipsAnimados extends Component
     {
         $this->validate([
             'text' => 'required_without:audio|nullable|string|max:5000',
-            'audio' => 'nullable|file|mimetypes:audio/mpeg,audio/mp3,audio/wav,audio/x-wav,audio/mp4,audio/aac,audio/ogg,audio/webm,video/webm,video/mp4|max:51200',
+            'audio' => 'nullable|file|mimetypes:audio/*,video/webm,video/mp4|max:51200',
         ], [
             'text.required_without' => 'Write a text, record your voice or upload an audio file.',
             'audio.mimetypes' => 'Unsupported audio format. Record again or upload mp3/wav/m4a.',
@@ -493,6 +500,129 @@ class ClipsAnimados extends Component
 
         TranscribeJob::dispatch($project->id);
         $this->voltar();
+    }
+
+    // =====================================================================
+    // Collect images (upload your own for a suggestion, or let it be generated)
+    // =====================================================================
+
+    public function revisarImagens(string $id): void
+    {
+        $this->clips()->findOrFail($id);
+        $this->reviewingId = $id;
+        $this->reset('reviewUploads');
+        $this->resetValidation();
+        $this->view = 'reviewImages';
+    }
+
+    /** The planner's image suggestions, each with the user's upload state. @return array<int,array<string,mixed>> */
+    public function getImageRequestsProperty(): array
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        if (! $p) {
+            return [];
+        }
+        $uploads = $p->meta['image_uploads'] ?? [];
+        $byId = collect($p->images ?? [])->keyBy('id');
+
+        return array_map(function (array $r) use ($uploads, $byId) {
+            $id = $uploads[$r['key']] ?? null;
+
+            return $r + ['uploadedId' => $id, 'path' => $id ? ($byId[$id]['path'] ?? null) : null];
+        }, $p->meta['image_requests'] ?? []);
+    }
+
+    /** A file dropped on a suggestion's upload input: store it and pin it to that suggestion. */
+    public function updatedReviewUploads(mixed $value, string $key): void
+    {
+        if (! $value || ! $this->reviewingId) {
+            unset($this->reviewUploads[$key]);
+
+            return;
+        }
+        $this->validateOnly("reviewUploads.$key", ["reviewUploads.$key" => 'image|max:20480'], [
+            "reviewUploads.$key.image" => 'The file must be an image.',
+            "reviewUploads.$key.max" => 'The image is too large (maximum 20 MB).',
+        ]);
+
+        $p = $this->clips()->findOrFail($this->reviewingId);
+        $req = collect($p->meta['image_requests'] ?? [])->firstWhere('key', $key);
+        if (! $req) {
+            unset($this->reviewUploads[$key]);
+
+            return;
+        }
+
+        $path = $value->store('clips/uploads');
+        $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
+        $entry = array_merge(
+            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => $req['prompt']],
+            $this->probeImage($abs),
+        );
+
+        $uploads = $p->meta['image_uploads'] ?? [];
+        // Replace any previous upload for this suggestion (drops its file).
+        $images = $this->dropImage($p->images ?? [], $uploads[$key] ?? null);
+        $images[] = $entry;
+        $uploads[$key] = $entry['id'];
+
+        $p->update([
+            'images' => $images,
+            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
+        ]);
+        unset($this->reviewUploads[$key]);
+    }
+
+    /** Drop the user's upload for a suggestion — it goes back to being generated. */
+    public function removerImagemSugerida(string $key): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        if (! $p) {
+            return;
+        }
+        $uploads = $p->meta['image_uploads'] ?? [];
+        $id = $uploads[$key] ?? null;
+        if (! $id) {
+            return;
+        }
+        unset($uploads[$key]);
+        $p->update([
+            'images' => $this->dropImage($p->images ?? [], $id),
+            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
+        ]);
+    }
+
+    /** Continue: generate whatever was left, then render. */
+    public function finalizarImagens(): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        if ($p) {
+            $p->update(['status' => ClipRecord::STATUS_PLANNING, 'error' => null]);
+            FinalizeClipPlanJob::dispatch($p->id);
+        }
+        $this->voltar();
+    }
+
+    /** Remove an image (by id) from a list and delete its file. @return array<int,array<string,mixed>> */
+    private function dropImage(array $images, ?string $id): array
+    {
+        if (! $id) {
+            return array_values($images);
+        }
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        $kept = [];
+        foreach ($images as $img) {
+            if (($img['id'] ?? null) === $id) {
+                if (! empty($img['path'])) {
+                    $disk->delete($img['path']);
+                }
+
+                continue;
+            }
+            $kept[] = $img;
+        }
+
+        return array_values($kept);
     }
 
     // =====================================================================

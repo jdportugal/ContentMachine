@@ -3,13 +3,12 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
-use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\EffectLibrary;
-use App\Services\Clips\PlanImageAugmentor;
+use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
@@ -82,66 +81,24 @@ class PlanAnimationsJob implements ShouldQueue
                 $plan = $filler->requestImages($plan, $p->transcript ?? []);
             }
 
-            // Fulfil the image-generation requests (Nano Banana), on-brand.
-            if ($imagesOn) {
-                $result = app(PlanImageAugmentor::class)->augment(
-                    $plan,
-                    $p->images ?? [],
-                    (string) config('contentmachine.clips.image_style', ''),
-                    (int) config('contentmachine.clips.image_max', 8),
-                );
-                $plan = $result['plan'];
-                $p->update(['images' => $result['images']]);
-            }
-
-            // Remove layers that would render an empty placeholder (image with no
-            // src because generation failed, or a chart with no data).
-            $plan = $filler->dropDeadLayers($plan);
-
-            // Resolve the clip's backdrop: the manual choice (meta['background']:
-            // 'auto' | 'none' | a slug) wins; on 'auto' the planner's suggestion is
-            // honoured if enabled, else a random enabled background. Stored as a slug.
-            $plannerPick = is_string($plan['background_pick'] ?? null) ? $plan['background_pick'] : null;
-            unset($plan['background_pick']);
-            $bgSlug = app(BackgroundLibrary::class)->resolveChoice((string) ($p->meta['background'] ?? 'auto'), $plannerPick);
-            if ($bgSlug !== null) {
-                $plan['background'] = $bgSlug;
-            } else {
-                unset($plan['background']);
-            }
-
-            // Eliminate bare scenes by extending a neighbour's real visual over them;
-            // anything still bare (e.g. an all-bare plan) gets a clean fallback.
-            if (! $isOverlay) {
-                // MANDATORY: every image the user attached must land in some frame.
-                // Runs BEFORE the bare-scene passes so a provided image claims a bare
-                // scene (giving it a visual) instead of that scene being merged/filled.
-                $plan = $filler->ensureProvidedImages($plan, $p->images ?? [], app(EffectLibrary::class)->allowedLayerTypes());
-                $plan = $filler->mergeBareScenes($plan);
-                $plan = $filler->fillBareScenes($plan);
-                // Text-dense scenes get enough time to be read, borrowing from adjacent
-                // low-value scenes (sync-safe — karaoke/audio are absolute-timed).
-                $plan = $filler->enforceReadingTime($plan);
-            }
-
-            // Guarantee the video OPENS with an intro effect (if any are marked) —
-            // for all clip types. The planner is only nudged; this makes it reliable.
-            // If an intro effect shows an image and the clip has uploaded images, feed
-            // it one (prefer a transparent one — usually the logo) and force that
-            // image-capable intro first.
-            $library = app(EffectLibrary::class);
-            $intros = $library->introSlugs();
-            $introImageId = null;
-            if (($p->images ?? []) !== [] && collect($intros)->contains(fn (string $s) => $library->usesImage($s))) {
-                usort($intros, fn (string $a, string $b) => (int) $library->usesImage($b) <=> (int) $library->usesImage($a));
-                $logo = collect($p->images)->firstWhere('transparent', true) ?: $p->images[0];
-                $introImageId = $logo['id'] ?? null;
-            }
-            $plan = $filler->enforceIntro($plan, $intros, $introImageId);
-
+            // The full script/plan is ready — every image the planner wants exists as
+            // a `generate` request. Before those get generated, offer the user the
+            // chance to upload their own for any of them (FinalizeClipPlanJob then
+            // generates whatever they skipped). No suggestions → nothing to collect,
+            // so go straight to finalisation.
             $p->update(['plan' => $plan]);
+            $requests = $imagesOn ? ImageRequests::collect($plan) : [];
 
-            RenderJob::dispatch($p->id);
+            if ($requests === []) {
+                FinalizeClipPlanJob::dispatch($p->id);
+
+                return;
+            }
+
+            $p->update([
+                'status' => ClipRecord::STATUS_COLLECTING,
+                'meta' => array_merge($p->meta ?? [], ['image_requests' => $requests, 'image_uploads' => []]),
+            ]);
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;

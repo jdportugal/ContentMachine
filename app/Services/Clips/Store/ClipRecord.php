@@ -16,6 +16,9 @@ class ClipRecord
 
     public const STATUS_PLANNING = 'planning';
 
+    // Plan is ready; waiting for the user to upload/keep-generated the suggested images.
+    public const STATUS_COLLECTING = 'collecting';
+
     public const STATUS_RENDERING = 'rendering';
 
     public const STATUS_DONE = 'done';

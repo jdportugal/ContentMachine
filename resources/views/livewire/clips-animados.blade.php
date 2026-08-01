@@ -4,6 +4,7 @@
             'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
             'transcribing' => ['label' => 'Transcribing',  'tone' => 'gold',    'glyph' => '❧'],
             'planning'     => ['label' => 'Planning',      'tone' => 'gold',    'glyph' => '❧'],
+            'collecting'   => ['label' => 'Your images',   'tone' => 'gold',    'glyph' => '◆'],
             'rendering'    => ['label' => 'Rendering',     'tone' => 'gold',    'glyph' => '❧'],
             'done'         => ['label' => 'Ready',         'tone' => 'good',    'glyph' => '✔'],
             'failed'       => ['label' => 'Failed',        'tone' => 'bad',     'glyph' => '✕'],
@@ -61,6 +62,12 @@
                                            src="{{ route('clips-animados.media', $project->id) }}"></video>
                                 @elseif ($project->status === 'failed')
                                     <p class="text-sm text-bad/90 self-start">{{ \Illuminate\Support\Str::limit($project->error, 200) }}</p>
+                                @elseif ($project->status === 'collecting')
+                                    <div class="w-full self-start text-center">
+                                        <p class="font-mono text-[0.6rem] text-ink-faint mb-2">The plan is ready — upload your own images or let them be generated.</p>
+                                        <button type="button" wire:click="revisarImagens('{{ $project->id }}')"
+                                                class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">◆ Collect images</button>
+                                    </div>
                                 @else
                                     <div class="w-full self-start">
                                         <div class="h-1 w-full bg-surface/40 rounded-full overflow-hidden">
@@ -99,7 +106,7 @@
 
                                 {{-- actions --}}
                                 <div class="mt-auto pt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
-                                    @if (!empty($project->plan['scenes']))
+                                    @if (!empty($project->plan['scenes']) && $project->status !== 'collecting')
                                         <button type="button" wire:click="editarClip('{{ $project->id }}')" class="text-teal hover:underline">✎ edit clip</button>
                                     @endif
                                     @if (!empty($project->transcript['text']))
@@ -123,6 +130,60 @@
                 @endforeach
             </div>
         @endif
+    @endif
+
+    {{-- ============================================================ --}}
+    {{-- COLLECT IMAGES (upload your own, or let it be generated)     --}}
+    {{-- ============================================================ --}}
+    @if ($view === 'reviewImages')
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+
+        <x-panel eyebrow="Step · III — Images" title="Your images or generated" glyph="◆">
+            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. Upload your own for any of them — a Gronk logo, a real screenshot, whatever you have. Anything you leave is generated automatically when you continue.</p>
+
+            <div class="space-y-2 mb-6">
+                @forelse ($this->imageRequests as $r)
+                    <div class="flex flex-wrap items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="req-{{ $r['key'] }}">
+                        @if (!empty($r['path']))
+                            <img src="{{ route('clips-animados.upload', basename($r['path'])) }}"
+                                 onerror="this.style.visibility='hidden'"
+                                 class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
+                        @else
+                            <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">✦</div>
+                        @endif
+
+                        <span class="flex-1 min-w-0 text-sm text-ink">
+                            {{ trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt'] }}
+                            @if (!empty($r['uploadedId']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
+                            @else
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· will be generated</span>
+                            @endif
+                        </span>
+
+                        @if (!empty($r['uploadedId']))
+                            <button type="button" wire:click="removerImagemSugerida('{{ $r['key'] }}')"
+                                    class="text-bad font-mono text-sm hover:opacity-70" title="remove — generate instead">✕</button>
+                        @else
+                            <label class="font-mono text-[0.6rem] text-teal hover:opacity-70 cursor-pointer whitespace-nowrap">
+                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ upload</span>
+                                <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
+                                <input type="file" class="hidden" accept="image/*" wire:model="reviewUploads.{{ $r['key'] }}" />
+                            </label>
+                        @endif
+                        @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
+                    </div>
+                @empty
+                    <p class="text-ink-soft text-sm">No image suggestions for this clip.</p>
+                @endforelse
+            </div>
+
+            <button type="button" wire:click="finalizarImagens"
+                    x-on:click="window.CMLoader?.busy('Generating the animation…')"
+                    class="font-display text-lg px-6 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                ✦ Generate the rest &amp; continue →
+            </button>
+        </x-panel>
     @endif
 
     {{-- ============================================================ --}}
