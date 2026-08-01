@@ -37,7 +37,7 @@
                 @livewire('project-switcher')
             </div>
 
-            <nav class="flex-1 py-2 space-y-0.5">
+            <nav class="flex-1 min-h-0 overflow-y-auto py-2 space-y-0.5">
                 @php
                     $nav = [
                         ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
