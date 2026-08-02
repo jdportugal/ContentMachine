@@ -627,7 +627,15 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
     return (
       <AbsoluteFill style={{ overflow: "hidden", opacity, background: COLORS.ink }}>
         {src ? (
-          <Img src={src} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom}) translateX(${panX}%)` }} />
+          <>
+            {/* Blurred fill so the frame is never empty behind a non-matching aspect
+                ratio — only decorative, so it may crop. */}
+            <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom}) translateX(${panX}%)`, filter: "blur(32px) brightness(0.5)" }} />
+            {/* The real image, shown whole — keeps its proportions, never cut. */}
+            <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+              <Img src={src} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+            </AbsoluteFill>
+          </>
         ) : (
           <ImagePlaceholder text={anim.text ?? undefined} />
         )}
@@ -659,7 +667,8 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   // "float"/"framed"/unknown → no entrance translate (fade + idle only)
 
   const framed = variant === "framed";
-  const fit: "cover" | "contain" = transparent ? "contain" : "cover";
+  // Always contain — the image keeps its proportions and is never cropped.
+  const fit: "cover" | "contain" = "contain";
   const boxStyle: React.CSSProperties = framed
     ? { width: "78%", aspectRatio: "4 / 5", overflow: "hidden", border: `6px solid ${COLORS.leather}`, background: COLORS.vellum, boxShadow: PANEL_SHADOW }
     : transparent
