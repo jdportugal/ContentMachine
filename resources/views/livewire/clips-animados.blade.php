@@ -624,6 +624,21 @@
                     ✦ Add video background
                 </button>
             </form>
+
+            {{-- Export / import — move backgrounds (component or mp4) between installs. --}}
+            <div class="flex flex-wrap items-center gap-3 border-t border-ink-soft/15 pt-5 mt-5">
+                @if ($this->backgrounds->isNotEmpty())
+                    <a href="{{ route('clips-animados.background-export', 'all') }}"
+                       class="font-mono text-xs px-3 py-1.5 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓ Export all backgrounds</a>
+                @endif
+                <form wire:submit="importarBackgrounds" class="flex items-center gap-2">
+                    <input type="file" wire:model="importBackgroundFile" accept="application/json,.json"
+                           class="block text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
+                    <button type="submit" wire:loading.attr="disabled" wire:target="importBackgroundFile,importarBackgrounds"
+                            class="font-mono text-xs px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-40">⤒ Import</button>
+                </form>
+            </div>
+            @error('importBackgroundFile') <p class="text-bad text-sm mt-2">{{ $message }}</p> @enderror
         </x-panel>
 
         {{-- Reel: one video cycling through every background, name centered --}}
@@ -721,6 +736,8 @@
                                             <button type="button" wire:click="editarBackground('{{ $bg->id }}')" title="Refine this background"
                                                     class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
                                         @endif
+                                        <a href="{{ route('clips-animados.background-export', $bg->id) }}" title="Export this background"
+                                           class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓</a>
                                     @endif
                                     <button type="button" wire:click="apagarBackground('{{ $bg->id }}')"
                                             wire:confirm="Delete this background? Clips already rendered keep their video." title="Delete this background"

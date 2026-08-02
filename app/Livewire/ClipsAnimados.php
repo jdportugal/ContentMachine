@@ -50,6 +50,9 @@ class ClipsAnimados extends Component
 
     public string $bgVideoName = '';
 
+    /** Uploaded Brand Machine background export file, awaiting import. */
+    public $importBackgroundFile = null;
+
     public ?string $editingBgId = null;
 
     public string $bgEditPrompt = '';
@@ -395,6 +398,36 @@ class ClipsAnimados extends Component
         if ($bg = $this->backgrounds()->find($id)) {
             $library->remove($bg);
         }
+    }
+
+    /** Import backgrounds from an uploaded Brand Machine export file. */
+    public function importarBackgrounds(\App\Services\Clips\BackgroundPortability $port): void
+    {
+        $this->validate(
+            ['importBackgroundFile' => 'required|file|max:512000'],
+            ['importBackgroundFile.required' => 'Choose an export file first.'],
+        );
+
+        try {
+            $payload = json_decode((string) file_get_contents($this->importBackgroundFile->getRealPath()), true);
+            if (! is_array($payload)) {
+                throw new \RuntimeException('The file is not valid JSON.');
+            }
+            $n = $port->import($payload);
+        } catch (\Throwable $e) {
+            $this->dispatch('toast', message: 'Import failed: '.$e->getMessage(), type: 'erro');
+
+            return;
+        }
+
+        $this->reset('importBackgroundFile');
+        $this->ensureBackgroundPreviews();
+
+        $this->dispatch(
+            'toast',
+            message: $n === 0 ? 'No backgrounds found in that file.' : $n.' background'.($n === 1 ? '' : 's').' imported.',
+            type: $n === 0 ? 'erro' : 'ok',
+        );
     }
 
     /** @return Collection<int,EffectRecord> */

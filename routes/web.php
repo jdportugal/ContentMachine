@@ -109,6 +109,21 @@ Route::get('/clips-animados/sfx/{id}/export', function (string $id) {
     ]);
 })->name('clips-animados.sfx-export');
 
+// Download a background (or every one, id = 'all') as a self-contained JSON file —
+// component source or mp4, plus metadata — for backup or moving between installs.
+Route::get('/clips-animados/background/{id}/export', function (string $id) {
+    abort_unless((bool) preg_match('/^[a-z0-9-]+$/i', $id), 404);
+    $payload = app(\App\Services\Clips\BackgroundPortability::class)->export($id);
+    abort_if($payload === null, 404);
+
+    $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    $name = $id === 'all' ? 'brand-machine-backgrounds.json' : 'background-'.$id.'.json';
+
+    return response()->streamDownload(fn () => print($json), $name, [
+        'Content-Type' => 'application/json',
+    ]);
+})->name('clips-animados.background-export');
+
 // Serve the cached showcase preview of an SFX (built-in or custom), for the
 // current design system. 404 until the sample has been rendered.
 Route::get('/clips-animados/sfx/{slug}/preview', function (string $slug) {
