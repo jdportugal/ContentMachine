@@ -139,7 +139,7 @@
         <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
         <x-panel eyebrow="Step · III — Images" title="Your images or generated" glyph="◆">
-            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. Upload your own for any of them — a Gronk logo, a real screenshot, whatever you have. Anything you leave is generated automatically when you continue.</p>
+            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. A green thumbnail means one from your Assets library was matched automatically — change it, upload your own, or leave it. Anything not set is generated when you continue.</p>
 
             <div class="space-y-2 mb-6">
                 @forelse ($this->imageRequests as $r)
@@ -147,7 +147,7 @@
                         @if (!empty($r['path']))
                             <img src="{{ route('clips-animados.upload', basename($r['path'])) }}"
                                  onerror="this.style.visibility='hidden'"
-                                 class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
+                                 class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
                         @else
                             <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">✦</div>
                         @endif
@@ -163,17 +163,42 @@
                             @endif
                         </span>
 
-                        @if (!empty($r['uploadedId']))
-                            <button type="button" wire:click="removerImagemSugerida('{{ $r['key'] }}')"
-                                    class="text-bad font-mono text-sm hover:opacity-70" title="remove — generate instead">✕</button>
-                        @else
-                            <label class="font-mono text-[0.6rem] text-teal hover:opacity-70 cursor-pointer whitespace-nowrap">
-                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ upload</span>
+                        <div class="flex items-center gap-3 font-mono text-[0.6rem] whitespace-nowrap">
+                            @if (!empty($this->libraryImages))
+                                <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')"
+                                        class="text-teal hover:opacity-70">▦ {{ !empty($r['uploadedId']) ? 'change' : 'library' }}</button>
+                            @endif
+                            <label class="text-teal hover:opacity-70 cursor-pointer">
+                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ {{ !empty($r['uploadedId']) ? 'replace' : 'upload' }}</span>
                                 <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
                                 <input type="file" class="hidden" accept="image/*" wire:model="reviewUploads.{{ $r['key'] }}" />
                             </label>
-                        @endif
+                            @if (!empty($r['uploadedId']))
+                                <button type="button" wire:click="removerImagemSugerida('{{ $r['key'] }}')"
+                                        class="text-bad hover:opacity-70" title="drop — generate instead">✕ generate</button>
+                            @endif
+                        </div>
                         @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
+
+                        {{-- Library picker for this suggestion --}}
+                        @if ($libraryPickerKey === $r['key'])
+                            <div class="w-full mt-1 border-t border-ink-soft/15 pt-2">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-mono text-[0.55rem] text-ink-faint uppercase tracking-wider">Pick from library</span>
+                                    <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')" class="font-mono text-[0.55rem] text-ink-faint hover:text-ink">close</button>
+                                </div>
+                                <div class="flex gap-2 overflow-x-auto pb-1">
+                                    @foreach ($this->libraryImages as $lib)
+                                        <button type="button" wire:click="usarImagemBiblioteca('{{ $r['key'] }}', '{{ $lib['id'] }}')"
+                                                class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
+                                            <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                 class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="{{ $lib['name'] }}" />
+                                            <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 @empty
                     <p class="text-ink-soft text-sm">No image suggestions for this clip.</p>

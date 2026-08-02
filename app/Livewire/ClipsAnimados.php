@@ -12,6 +12,7 @@ use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\EffectLibrary;
 use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\BackgroundLibrary;
+use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageProbe;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\Store\BackgroundStore;
@@ -134,7 +135,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -595,6 +596,42 @@ class ClipsAnimados extends Component
             'images' => $this->dropImage($p->images ?? [], $id),
             'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
         ]);
+    }
+
+    /** Which suggestion's library picker is open (its key), or null. */
+    public ?string $libraryPickerKey = null;
+
+    /** Images in the project's library, for the collect-screen picker. @return array<int,array<string,mixed>> */
+    public function getLibraryImagesProperty(): array
+    {
+        return app(ImageLibrary::class)->all();
+    }
+
+    public function abrirBibliotecaImagens(string $key): void
+    {
+        $this->libraryPickerKey = $this->libraryPickerKey === $key ? null : $key;
+    }
+
+    /** Pin a specific library image to a suggestion (replaces any current choice). */
+    public function usarImagemBiblioteca(string $key, string $libId): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        if (! $p) {
+            return;
+        }
+        $entry = app(ImageLibrary::class)->attachToClip($libId);
+        if ($entry === null) {
+            return;
+        }
+        $uploads = $p->meta['image_uploads'] ?? [];
+        $images = $this->dropImage($p->images ?? [], $uploads[$key] ?? null);
+        $images[] = $entry;
+        $uploads[$key] = $entry['id'];
+        $p->update([
+            'images' => $images,
+            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
+        ]);
+        $this->libraryPickerKey = null;
     }
 
     /** Continue: generate whatever was left, then render. */
