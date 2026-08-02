@@ -64,6 +64,12 @@ class SceneVisualFiller
         $first = $scenes[0];
         $layers = is_array($first['layers'] ?? null) ? $first['layers'] : [];
 
+        // The intro must show the OPENING part's own image (the one the user chose /
+        // that was generated for it), not a generic logo — otherwise the opening
+        // shows the wrong picture. Fall back to the passed logo only if the opening
+        // scene has no image of its own.
+        $introImageId = $this->firstImageSrc($layers) ?? $introImageId;
+
         $opensWithIntro = false;
         foreach ($layers as $layer) {
             if (is_array($layer) && in_array($layer['type'] ?? null, $introSlugs, true)) {
@@ -144,6 +150,21 @@ class SceneVisualFiller
      * @param  string[]  $introSlugs
      * @return array<int,mixed>
      */
+    /** The `src` of the first image-reveal layer in a set (the scene's own image), or null. */
+    private function firstImageSrc(array $layers): ?string
+    {
+        foreach ($layers as $layer) {
+            if (is_array($layer) && ($layer['type'] ?? null) === 'image-reveal') {
+                $src = $layer['params']['src'] ?? null;
+                if (is_string($src) && $src !== '') {
+                    return $src;
+                }
+            }
+        }
+
+        return null;
+    }
+
     private function withIntroImage(array $layers, array $introSlugs, ?string $introImageId): array
     {
         if ($introImageId === null) {

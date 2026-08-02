@@ -162,6 +162,7 @@ class ClipsAnimados extends Component
             ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => trim($this->newImageDesc)],
             $this->probeImage($abs),
         );
+        $this->guardarNaBiblioteca($this->newImage, trim($this->newImageDesc));
         $this->reset(['newImage', 'newImageDesc']);
     }
 
@@ -185,6 +186,7 @@ class ClipsAnimados extends Component
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
         // Same id/description; swap the file (old file is cleaned up on save).
         $this->images[$i] = array_merge($this->images[$i], ['path' => $path], $this->probeImage($abs));
+        $this->guardarNaBiblioteca($value, (string) ($this->images[$i]['description'] ?? ''));
         unset($this->imageReplace[$i]);
     }
 
@@ -200,6 +202,16 @@ class ClipsAnimados extends Component
         }
         unset($this->images[$i]);
         $this->images = array_values($this->images);
+    }
+
+    /** Keep any user upload in the project's Assets library for reuse. Best-effort. */
+    private function guardarNaBiblioteca(mixed $upload, string $description = ''): void
+    {
+        try {
+            app(ImageLibrary::class)->add($upload->getRealPath(), $upload->getClientOriginalName(), $description);
+        } catch (\Throwable) {
+            // Never block a clip upload on a library write.
+        }
     }
 
     /** @return array{transparent:bool,tone:string,video:bool} */
@@ -600,10 +612,12 @@ class ClipsAnimados extends Component
 
         $path = $value->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
+        $desc = trim(Str::after($req['prompt'], 'Illustrate this moment:')) ?: $req['prompt'];
         $entry = array_merge(
-            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => $req['prompt']],
+            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => $desc],
             $this->probeImage($abs),
         );
+        $this->guardarNaBiblioteca($value, $desc);
 
         $uploads = $p->meta['image_uploads'] ?? [];
         // Replace any previous upload for this suggestion (drops its file).
@@ -884,6 +898,7 @@ class ClipsAnimados extends Component
             $this->probeImage($abs),
         );
         $this->aplicarImagemCena($i, $entry);
+        $this->guardarNaBiblioteca($value);
         unset($this->sceneImageUploads[$key]);
     }
 
