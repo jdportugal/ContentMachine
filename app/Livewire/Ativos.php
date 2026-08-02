@@ -22,8 +22,11 @@ class Ativos extends Component
 
     public $novaMusica = null;
 
-    /** Dropped/selected image files awaiting persistence into the library. */
+    /** Dropped/selected image files staged for describing before they are saved. */
     public array $novasImagens = [];
+
+    /** Description typed for each staged image, keyed by its index in $novasImagens. */
+    public array $descricoes = [];
 
     private function notificar(string $texto, string $tipo = 'ok'): void
     {
@@ -52,10 +55,17 @@ class Ativos extends Component
         $this->notificar('Music removed.');
     }
 
-    /** Persist dropped/selected images into the library (fires on drop and on browse). */
+    /** A fresh selection replaces any half-described previous one. */
     public function updatedNovasImagens(): void
     {
-        $files = array_filter($this->novasImagens);
+        $this->reset('descricoes');
+        $this->resetValidation();
+    }
+
+    /** Save the staged images with the descriptions typed for each. */
+    public function adicionarImagens(ImageLibrary $lib): void
+    {
+        $files = array_values(array_filter($this->novasImagens));
         if ($files === []) {
             return;
         }
@@ -64,13 +74,18 @@ class Ativos extends Component
             ['novasImagens.*.image' => 'Only image files are allowed.', 'novasImagens.*.max' => 'Each image must be under 20 MB.'],
         );
 
-        $lib = app(ImageLibrary::class);
-        foreach ($files as $f) {
-            $lib->add($f->getRealPath(), $f->getClientOriginalName());
+        foreach ($files as $i => $f) {
+            $lib->add($f->getRealPath(), $f->getClientOriginalName(), (string) ($this->descricoes[$i] ?? ''));
         }
         $n = count($files);
-        $this->reset('novasImagens');
+        $this->reset('novasImagens', 'descricoes');
         $this->notificar($n.' '.($n === 1 ? 'image' : 'images').' added to the library.');
+    }
+
+    public function descartarImagens(): void
+    {
+        $this->reset('novasImagens', 'descricoes');
+        $this->resetValidation();
     }
 
     public function atualizarDescricao(string $id, string $descricao, ImageLibrary $lib): void

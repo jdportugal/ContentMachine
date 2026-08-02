@@ -71,7 +71,7 @@ class ImageLibrary
      *
      * @return array{id:string,name:string,description:string,ext:string,path:string,transparent:bool,tone:string}
      */
-    public function add(string $sourcePath, string $originalName): array
+    public function add(string $sourcePath, string $originalName, ?string $description = null): array
     {
         $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
         if (! in_array($ext, self::EXTENSOES, true)) {
@@ -79,6 +79,7 @@ class ImageLibrary
         }
         $name = trim(Str::of(pathinfo($originalName, PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish());
         $name = $name === '' ? 'image' : $name;
+        $description = trim((string) $description);
 
         @mkdir($this->dir(), 0775, true);
         $id = $this->uniqueId();
@@ -88,7 +89,7 @@ class ImageLibrary
         $entry = [
             'id' => $id,
             'name' => $name,
-            'description' => $name,
+            'description' => $description !== '' ? $description : $name,
             'ext' => $ext,
             'path' => $file,
             'transparent' => ImageProbe::hasAlpha($file),

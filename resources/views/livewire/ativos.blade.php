@@ -69,6 +69,34 @@
         </div>
         @error('novasImagens.*') <p class="text-bad font-mono text-xs mb-3">{{ $message }}</p> @enderror
 
+        {{-- Staged images: describe each, then add to the library --}}
+        @if (!empty($novasImagens))
+            <div class="border border-teal/30 rounded-sm bg-teal/5 p-4 mb-4">
+                <p class="font-mono text-xs text-ink-soft mb-3">Describe each image so the clip planner can match it, then add them.</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
+                    @foreach ($novasImagens as $i => $img)
+                        <div class="border border-ink-soft/15 rounded-sm bg-surface/40 overflow-hidden" wire:key="staged-{{ $i }}">
+                            <div class="aspect-square bg-vellum/40">
+                                @if (method_exists($img, 'temporaryUrl'))
+                                    <img src="{{ $img->temporaryUrl() }}" class="w-full h-full object-contain" alt="" />
+                                @endif
+                            </div>
+                            <input type="text" wire:model.blur="descricoes.{{ $i }}"
+                                   placeholder="Describe (e.g. Gronk logo)"
+                                   class="w-full bg-transparent border-t border-ink-soft/15 px-2 py-1.5 font-mono text-[11px] text-ink placeholder:text-ink-faint focus:outline-none focus:bg-surface/40" />
+                        </div>
+                    @endforeach
+                </div>
+                <div class="flex items-center gap-3">
+                    <button wire:click="adicionarImagens" wire:loading.attr="disabled"
+                            class="bg-teal/90 text-papyrus font-display text-base px-5 py-1.5 rounded-sm hover:bg-teal-deep transition disabled:opacity-40">
+                        Add {{ count($novasImagens) }} to library
+                    </button>
+                    <button wire:click="descartarImagens" class="font-mono text-xs text-ink-faint hover:text-bad">discard</button>
+                </div>
+            </div>
+        @endif
+
         @if (empty($imagens))
             <x-empty-state glyph="▦" title="Empty library"
                 note="Add images above to have them reused automatically in animated clips." />
