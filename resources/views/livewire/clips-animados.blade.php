@@ -468,6 +468,48 @@
                                 </div>
                             @endif
 
+                            {{-- Scene image: preview + replace (upload or pick from library). --}}
+                            @php $sceneImg = $this->sceneImages[$i] ?? null; @endphp
+                            @if ($sceneImg)
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
+                                         onerror="this.style.visibility='hidden'"
+                                         class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0" alt="" />
+                                    <div class="min-w-0 flex-1">
+                                        <div class="font-mono text-[0.55rem] text-ink-faint">image{{ $sceneImg['library'] ? ' · from library' : '' }}</div>
+                                        <div class="flex items-center gap-3 font-mono text-[0.6rem] mt-1">
+                                            @if (!empty($this->libraryImages))
+                                                <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="text-teal hover:opacity-70">▦ library</button>
+                                            @endif
+                                            <label class="text-teal hover:opacity-70 cursor-pointer">
+                                                <span wire:loading.remove wire:target="sceneImageUploads.{{ $i }}">↑ replace</span>
+                                                <span wire:loading wire:target="sceneImageUploads.{{ $i }}">uploading…</span>
+                                                <input type="file" class="hidden" accept="image/*" wire:model="sceneImageUploads.{{ $i }}" />
+                                            </label>
+                                        </div>
+                                        @error('sceneImageUploads.'.$i) <p class="text-bad text-xs mt-0.5">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                @if ($sceneLibraryPicker === $i)
+                                    <div class="mb-3 border border-teal/30 rounded-sm p-2 bg-vellum/40">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="eyebrow">Pick from library</span>
+                                            <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">close</button>
+                                        </div>
+                                        <div class="flex gap-2 overflow-x-auto pb-1">
+                                            @foreach ($this->libraryImages as $lib)
+                                                <button type="button" wire:click="usarImagemBibliotecaCena({{ $i }}, '{{ $lib['id'] }}')" wire:key="scenelib-{{ $i }}-{{ $lib['id'] }}"
+                                                        class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
+                                                    <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                         class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="" />
+                                                    <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
+                                                </button>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">start</label>

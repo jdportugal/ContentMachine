@@ -73,6 +73,17 @@ Route::get('/clips-animados/library-image/{id}', function (string $id) {
     return response()->file($img['path']);
 })->name('clips-animados.library-image');
 
+// Serve any image belonging to a clip (uploads or generated), by clip id + image id.
+Route::get('/clips-animados/{id}/image/{imageId}', function (string $id, string $imageId) {
+    $clip = app(ClipStore::class)->find($id);
+    abort_unless($clip !== null, 404);
+    $img = collect($clip->images ?? [])->firstWhere('id', $imageId);
+    $disk = Storage::disk(config('contentmachine.clips.disk'));
+    abort_unless($img && ! empty($img['path']) && $disk->exists($img['path']), 404);
+
+    return response()->file($disk->path($img['path']));
+})->name('clips-animados.clip-image');
+
 // Serve/download a clip's final file (vault-backed, resolved for the active project).
 Route::get('/clips-animados/{id}/media', function (string $id) {
     $clip = app(ClipStore::class)->find($id);

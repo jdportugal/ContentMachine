@@ -135,7 +135,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -792,6 +792,103 @@ class ClipsAnimados extends Component
         }
 
         return array_values($lista);
+    }
+
+    // ---- per-scene image (see & replace in the scene editor) ----
+
+    /** Per-scene replacement upload while editing a plan (keyed by scene index). */
+    public array $sceneImageUploads = [];
+
+    /** Scene index whose "pick from library" panel is open, or null. */
+    public ?int $sceneLibraryPicker = null;
+
+    /**
+     * The image each scene currently shows (first layer with a src that resolves to
+     * one of the clip's images), so the editor can preview and replace it.
+     *
+     * @return array<int,array{id:string,layerIndex:int,library:bool}>
+     */
+    public function getSceneImagesProperty(): array
+    {
+        $byId = collect($this->images)->keyBy('id');
+        $out = [];
+        foreach ($this->editScenes as $i => $scene) {
+            foreach ($scene['layers'] ?? [] as $li => $layer) {
+                $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
+                if (is_string($src) && $src !== '' && $byId->has($src)) {
+                    $out[$i] = ['id' => $src, 'layerIndex' => (int) $li, 'library' => (bool) ($byId[$src]['library'] ?? false)];
+                    break;
+                }
+            }
+        }
+
+        return $out;
+    }
+
+    public function updatedSceneImageUploads(mixed $value, string $key): void
+    {
+        $i = (int) $key;
+        if (! $value || ! isset($this->editScenes[$i])) {
+            unset($this->sceneImageUploads[$key]);
+
+            return;
+        }
+        $this->validateOnly("sceneImageUploads.$i", ["sceneImageUploads.$i" => 'image|max:20480'], [
+            "sceneImageUploads.$i.image" => 'The file must be an image.',
+            "sceneImageUploads.$i.max" => 'The image is too large (maximum 20 MB).',
+        ]);
+
+        $path = $value->store('clips/uploads');
+        $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
+        $entry = array_merge(
+            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => ''],
+            $this->probeImage($abs),
+        );
+        $this->aplicarImagemCena($i, $entry);
+        unset($this->sceneImageUploads[$key]);
+    }
+
+    public function abrirBibliotecaCena(int $i): void
+    {
+        $this->sceneLibraryPicker = $this->sceneLibraryPicker === $i ? null : $i;
+    }
+
+    public function usarImagemBibliotecaCena(int $i, string $libId): void
+    {
+        $entry = app(ImageLibrary::class)->attachToClip($libId);
+        if ($entry !== null) {
+            $this->aplicarImagemCena($i, $entry);
+        }
+        $this->sceneLibraryPicker = null;
+    }
+
+    /** Point a scene's image layer at a new image (added to the clip's images). */
+    private function aplicarImagemCena(int $i, array $entry): void
+    {
+        $layers = $this->editScenes[$i]['layers'] ?? [];
+        $target = null;
+        // Prefer the layer already showing an image; else the first image-reveal.
+        foreach ($layers as $li => $layer) {
+            $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
+            if (is_string($src) && $src !== '') {
+                $target = $li;
+                break;
+            }
+        }
+        if ($target === null) {
+            foreach ($layers as $li => $layer) {
+                if (is_array($layer) && ($layer['type'] ?? null) === 'image-reveal') {
+                    $target = $li;
+                    break;
+                }
+            }
+        }
+        if ($target === null) {
+            return; // nothing in this scene shows an image
+        }
+        $layers[$target]['params'] = array_merge($layers[$target]['params'] ?? [], ['src' => $entry['id']]);
+        $this->editScenes[$i]['layers'] = $layers;
+        $this->images[] = $entry;
     }
 
     /**
