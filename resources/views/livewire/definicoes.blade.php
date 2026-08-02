@@ -187,6 +187,22 @@
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     </div>
                     <div>
+                        <label class="eyebrow block mb-1.5">Clip LLM provider</label>
+                        <select wire:model="modelos.clip_provider"
+                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                            <option value="">claude (default)</option>
+                            <option value="claude">claude</option>
+                            <option value="tensorx">tensorx</option>
+                        </select>
+                        <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Planner/metadata/research engine. Tensorix needs its key set.</p>
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Tensorix model</label>
+                        <input type="text" wire:model="modelos.tensorx_model" placeholder="deepseek/deepseek-r1-0528"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        <p class="font-mono text-[0.55rem] text-ink-faint mt-1">e.g. deepseek/deepseek-r1-0528, z-ai/glm-5.2. Empty = default.</p>
+                    </div>
+                    <div>
                         <label class="eyebrow block mb-1.5">Videos per channel</label>
                         <input type="number" min="1" wire:model="modelos.aggregation_limit" placeholder="5"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
@@ -222,10 +238,12 @@
                 <p class="text-ink-soft -mt-2 mb-4">
                     Stored in the vault for local use. Empty → falls back to the matching <span class="font-mono text-ink-soft">.env</span> value.
                     Setting the <span class="text-teal">Anthropic</span> key routes all Claude features through the API.
+                    A <span class="text-teal">Tensorix</span> key is used as an automatic fallback if Claude fails — or as the primary clip LLM (set the provider to <span class="font-mono text-ink-soft">tensorx</span> under Engine).
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach ([
                         'anthropic' => 'Anthropic (Claude)',
+                        'tensorx' => 'Tensorix (tensorx.ai / DeepSeek)',
                         'openai' => 'OpenAI',
                         'gemini' => 'Gemini',
                         'apify' => 'Apify token',

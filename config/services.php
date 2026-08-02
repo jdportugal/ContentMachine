@@ -63,6 +63,14 @@ return [
         'key' => env('ANTHROPIC_API_KEY'),
     ],
 
+    // Tensorix (tensorx.ai) — OpenAI-compatible gateway to DeepSeek et al. Used as a
+    // drop-in alternative to (or fallback for) the Claude API in the clip pipeline.
+    'tensorx' => [
+        'key' => env('TENSORX_API_KEY'),
+        'base_url' => env('TENSORX_BASE_URL', 'https://api.tensorx.ai/v1'),
+        'model' => env('TENSORX_MODEL', 'deepseek/deepseek-r1-0528'),
+    ],
+
     // Clip Generator — LOCAL, standalone engine (ffmpeg + Whisper), with no
     // external API. Reimplements the logic of the Flask "ShortsCreator" service.
     'shorts' => [

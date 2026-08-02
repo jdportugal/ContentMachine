@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Symfony\Component\Process\Process;
 
@@ -19,11 +20,38 @@ trait RunsClaudeCli
      */
     protected function runClaude(string $user, ?string $system = null, array $opts = []): array
     {
-        // API only when a key is set — no CLI fallback in that case.
-        if (filled(config('services.anthropic.key'))) {
-            return $this->runClaudeApi($user, $system, $opts);
+        $tensorxReady = filled(config('services.tensorx.key'));
+
+        // Tensorix (tensorx.ai) as the PRIMARY clip LLM — fully replaces Claude.
+        if ($tensorxReady && config('contentmachine.clips.llm_primary') === 'tensorx') {
+            return $this->runTensorx($user, $system, $opts);
         }
 
+        try {
+            // API only when a key is set — otherwise the authenticated CLI.
+            return filled(config('services.anthropic.key'))
+                ? $this->runClaudeApi($user, $system, $opts)
+                : $this->runClaudeCli($user, $system, $opts);
+        } catch (\Throwable $e) {
+            // Automatic fallback: Claude is down but Tensorix is configured.
+            if ($tensorxReady) {
+                Log::warning('Claude failed — falling back to Tensorix: '.$e->getMessage());
+
+                return $this->runTensorx($user, $system, $opts);
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Call the authenticated `claude` CLI (subscription, no API key). Retries
+     * transient failures (overload, streaming hiccups).
+     *
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @return array the parsed result envelope (has a `result` string)
+     */
+    private function runClaudeCli(string $user, ?string $system, array $opts): array
+    {
         $binary = config('contentmachine.clips.claude_binary');
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
         $lastError = 'no detail';
@@ -152,5 +180,60 @@ trait RunsClaudeCli
         }
 
         throw new RuntimeException("Claude API failed after {$attempts} attempt(s) — {$lastError}");
+    }
+
+    /**
+     * Call Tensorix (tensorx.ai) — an OpenAI-compatible chat endpoint fronting
+     * DeepSeek et al. Returns a CLI-compatible envelope ({result:string}). Web
+     * search is not available here, so research runs on the model's own knowledge.
+     * Retries transient failures.
+     *
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @return array{result:string}
+     */
+    private function runTensorx(string $user, ?string $system, array $opts): array
+    {
+        $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
+        $base = rtrim((string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'), '/');
+
+        $payload = [
+            'model' => (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
+            'messages' => array_values(array_filter([
+                ($system !== null && $system !== '') ? ['role' => 'system', 'content' => $system] : null,
+                ['role' => 'user', 'content' => $user],
+            ])),
+        ];
+
+        $lastError = 'no detail';
+
+        for ($i = 1; $i <= $attempts; $i++) {
+            try {
+                $r = Http::timeout($opts['timeout'] ?? 300)
+                    ->withToken((string) config('services.tensorx.key'))
+                    ->post($base.'/chat/completions', $payload);
+            } catch (\Throwable $e) {
+                $lastError = 'http: '.$e->getMessage();
+                $this->claudeBackoff($i, $attempts);
+
+                continue;
+            }
+
+            if (! $r->successful()) {
+                $lastError = 'status '.$r->status().': '.substr((string) $r->body(), 0, 200);
+                $this->claudeBackoff($i, $attempts);
+
+                continue;
+            }
+
+            $texto = (string) $r->json('choices.0.message.content', '');
+            if (trim($texto) !== '') {
+                return ['result' => $texto];
+            }
+
+            $lastError = 'empty response';
+            $this->claudeBackoff($i, $attempts);
+        }
+
+        throw new RuntimeException("Tensorix API failed after {$attempts} attempt(s) — {$lastError}");
     }
 }

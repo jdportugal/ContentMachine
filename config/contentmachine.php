@@ -262,6 +262,10 @@ return [
         'claude_binary' => env('CLIPS_CLAUDE_BINARY', 'claude'),
         // Number of Claude CLI attempts (transient failures: API overload, etc.).
         'claude_attempts' => (int) env('CLIPS_CLAUDE_ATTEMPTS', 3),
+        // Primary LLM for planning/metadata/research: 'claude' (default) or
+        // 'tensorx' (tensorx.ai, OpenAI-compatible) to fully replace it. Either way,
+        // a configured Tensorix key is used as an automatic fallback if Claude fails.
+        'llm_primary' => env('CLIPS_LLM_PRIMARY', 'claude'),
         // Deep (web) research of the topic before planning.
         'research' => (bool) env('CLIPS_RESEARCH', true),
         'width' => (int) env('CLIPS_WIDTH', 1080),

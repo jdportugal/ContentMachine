@@ -65,6 +65,7 @@ class SettingsRepository
                 'reddit_client_secret' => '',
                 'kie' => '',
                 'blotato' => '',
+                'tensorx' => '',
             ],
             // Blotato connected-account ids per platform (copied from the Blotato
             // dashboard). Empty → that platform can't be posted to.
@@ -84,6 +85,8 @@ class SettingsRepository
                 'aggregation_limit' => '',   // videos per channel
                 'aggregation_timeout' => '', // seconds per yt-dlp call
                 'elevenlabs_voice' => '',    // ElevenLabs voice id for the clip voiceover
+                'clip_provider' => '',       // 'claude' (default) | 'tensorx' — primary clip LLM
+                'tensorx_model' => '',       // e.g. deepseek/deepseek-r1-0528
             ],
         ];
     }

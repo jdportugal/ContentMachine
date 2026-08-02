@@ -29,6 +29,7 @@ class SettingsOverlay
         'chaves.reddit_client_secret' => 'services.reddit.client_secret',
         'chaves.kie' => 'services.kie.key',
         'chaves.blotato' => 'services.blotato.key',
+        'chaves.tensorx' => 'services.tensorx.key',
         'modelos.llm_provider' => 'contentmachine.aggregation.llm_provider',
         'modelos.anthropic_model' => 'contentmachine.aggregation.anthropic_model',
         'modelos.openai_model' => 'contentmachine.aggregation.openai_model',
@@ -36,6 +37,8 @@ class SettingsOverlay
         'modelos.aggregation_limit' => 'contentmachine.aggregation.limite_por_canal',
         'modelos.aggregation_timeout' => 'contentmachine.aggregation.timeout',
         'modelos.elevenlabs_voice' => 'contentmachine.clips.voice_id',
+        'modelos.clip_provider' => 'contentmachine.clips.llm_primary',
+        'modelos.tensorx_model' => 'services.tensorx.model',
     ];
 
     public function apply(SettingsRepository $settings): void
@@ -77,7 +80,8 @@ class SettingsOverlay
         // Clip + news generation go real once an LLM key is configured (in Settings).
         $hasLlm = filled(config('services.anthropic.key'))
             || filled(config('services.openai.key'))
-            || filled(config('services.gemini.key'));
+            || filled(config('services.gemini.key'))
+            || filled(config('services.tensorx.key'));
 
         if ($hasLlm) {
             if (config('contentmachine.news.driver') === 'fake') {
