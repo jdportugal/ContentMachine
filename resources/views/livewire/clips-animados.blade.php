@@ -144,7 +144,10 @@
             <div class="space-y-2 mb-6">
                 @forelse ($this->imageRequests as $r)
                     <div class="flex flex-wrap items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="req-{{ $r['key'] }}">
-                        @if (!empty($r['path']))
+                        @if (!empty($r['path']) && !empty($r['video']))
+                            <video src="{{ route('clips-animados.upload', basename($r['path'])) }}" muted playsinline
+                                   class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40"></video>
+                        @elseif (!empty($r['path']))
                             <img src="{{ route('clips-animados.upload', basename($r['path'])) }}"
                                  onerror="this.style.visibility='hidden'"
                                  class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
@@ -171,7 +174,7 @@
                             <label class="text-teal hover:opacity-70 cursor-pointer">
                                 <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ {{ !empty($r['uploadedId']) ? 'replace' : 'upload' }}</span>
                                 <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
-                                <input type="file" class="hidden" accept="image/*" wire:model="reviewUploads.{{ $r['key'] }}" />
+                                <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="reviewUploads.{{ $r['key'] }}" />
                             </label>
                             @if (!empty($r['uploadedId']))
                                 <button type="button" wire:click="removerImagemSugerida('{{ $r['key'] }}')"
@@ -191,8 +194,13 @@
                                     @foreach ($this->libraryImages as $lib)
                                         <button type="button" wire:click="usarImagemBiblioteca('{{ $r['key'] }}', '{{ $lib['id'] }}')"
                                                 class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
-                                            <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
-                                                 class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="{{ $lib['name'] }}" />
+                                            @if (!empty($lib['video']))
+                                                <video src="{{ route('clips-animados.library-image', $lib['id']) }}" muted playsinline
+                                                       class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition"></video>
+                                            @else
+                                                <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                     class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="{{ $lib['name'] }}" />
+                                            @endif
                                             <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
                                         </button>
                                     @endforeach
@@ -472,11 +480,16 @@
                             @php $sceneImg = $this->sceneImages[$i] ?? null; @endphp
                             @if ($sceneImg)
                                 <div class="flex items-center gap-3 mb-3">
-                                    <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
-                                         onerror="this.style.visibility='hidden'"
-                                         class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0" alt="" />
+                                    @if (!empty($sceneImg['video']))
+                                        <video src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}" muted playsinline
+                                               class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0"></video>
+                                    @else
+                                        <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
+                                             onerror="this.style.visibility='hidden'"
+                                             class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0" alt="" />
+                                    @endif
                                     <div class="min-w-0 flex-1">
-                                        <div class="font-mono text-[0.55rem] text-ink-faint">image{{ $sceneImg['library'] ? ' · from library' : '' }}</div>
+                                        <div class="font-mono text-[0.55rem] text-ink-faint">{{ !empty($sceneImg['video']) ? 'video' : 'image' }}{{ $sceneImg['library'] ? ' · from library' : '' }}</div>
                                         <div class="flex items-center gap-3 font-mono text-[0.6rem] mt-1">
                                             @if (!empty($this->libraryImages))
                                                 <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="text-teal hover:opacity-70">▦ library</button>
@@ -484,7 +497,7 @@
                                             <label class="text-teal hover:opacity-70 cursor-pointer">
                                                 <span wire:loading.remove wire:target="sceneImageUploads.{{ $i }}">↑ replace</span>
                                                 <span wire:loading wire:target="sceneImageUploads.{{ $i }}">uploading…</span>
-                                                <input type="file" class="hidden" accept="image/*" wire:model="sceneImageUploads.{{ $i }}" />
+                                                <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="sceneImageUploads.{{ $i }}" />
                                             </label>
                                         </div>
                                         @error('sceneImageUploads.'.$i) <p class="text-bad text-xs mt-0.5">{{ $message }}</p> @enderror
@@ -500,8 +513,13 @@
                                             @foreach ($this->libraryImages as $lib)
                                                 <button type="button" wire:click="usarImagemBibliotecaCena({{ $i }}, '{{ $lib['id'] }}')" wire:key="scenelib-{{ $i }}-{{ $lib['id'] }}"
                                                         class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
-                                                    <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
-                                                         class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="" />
+                                                    @if (!empty($lib['video']))
+                                                        <video src="{{ route('clips-animados.library-image', $lib['id']) }}" muted playsinline
+                                                               class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition"></video>
+                                                    @else
+                                                        <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                             class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="" />
+                                                    @endif
                                                     <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
                                                 </button>
                                             @endforeach

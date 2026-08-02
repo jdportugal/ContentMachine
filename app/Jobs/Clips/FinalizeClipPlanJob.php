@@ -104,7 +104,9 @@ class FinalizeClipPlanJob implements ShouldQueue
             $introImageId = null;
             if (($p->images ?? []) !== [] && collect($intros)->contains(fn (string $s) => $library->usesImage($s))) {
                 usort($intros, fn (string $a, string $b) => (int) $library->usesImage($b) <=> (int) $library->usesImage($a));
-                $logo = collect($p->images)->firstWhere('transparent', true) ?: $p->images[0];
+                // The intro effect shows the logo via <Img>, so never feed it a video.
+                $logo = collect($p->images)->firstWhere('transparent', true)
+                    ?: collect($p->images)->first(fn ($i) => empty($i['video']));
                 $introImageId = $logo['id'] ?? null;
             }
             $plan = $filler->enforceIntro($plan, $intros, $introImageId);

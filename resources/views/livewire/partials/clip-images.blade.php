@@ -4,14 +4,19 @@
     <div class="space-y-2 mb-4">
         @foreach ($images as $i => $img)
             <div class="flex items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="clip-img-{{ $i }}">
-                <img src="{{ route('clips-animados.upload', basename($img['path'])) }}"
-                     onerror="this.style.visibility='hidden'"
-                     class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
+                @if (!empty($img['video']))
+                    <video src="{{ route('clips-animados.upload', basename($img['path'])) }}" muted playsinline
+                           class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40"></video>
+                @else
+                    <img src="{{ route('clips-animados.upload', basename($img['path'])) }}"
+                         onerror="this.style.visibility='hidden'"
+                         class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
+                @endif
                 <span class="flex-1 min-w-0 text-sm text-ink truncate">{{ $img['description'] ?? '' }}</span>
                 <label class="font-mono text-[0.6rem] text-teal hover:opacity-70 cursor-pointer whitespace-nowrap" title="Replace this image (keeps its place in the video)">
                     <span wire:loading.remove wire:target="imageReplace.{{ $i }}">↻ replace</span>
                     <span wire:loading wire:target="imageReplace.{{ $i }}">uploading…</span>
-                    <input type="file" class="hidden" accept="image/*" wire:model="imageReplace.{{ $i }}" />
+                    <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="imageReplace.{{ $i }}" />
                 </label>
                 <button type="button" wire:click="removerImagem({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remove">✕</button>
             </div>
@@ -23,7 +28,7 @@
 <div class="grid grid-cols-12 gap-2 items-end">
     <div class="col-span-5">
         <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">file</label>
-        <input type="file" wire:model="newImage" accept="image/*"
+        <input type="file" wire:model="newImage" accept="image/*,video/mp4,video/quicktime,video/webm"
                class="block w-full text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
         <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">uploading…</div>
     </div>

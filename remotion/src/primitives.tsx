@@ -4,6 +4,7 @@ import {
   Easing,
   Img,
   interpolate,
+  OffthreadVideo,
   spring,
   staticFile,
   useCurrentFrame,
@@ -607,6 +608,10 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const rawSrc = asStr(anim.params?.src);
   // Bare filenames resolve from Remotion's public/ folder; full URLs pass through.
   const src = rawSrc ? (/^https?:\/\//.test(rawSrc) ? rawSrc : staticFile(rawSrc)) : "";
+  // A video source plays inset just like an image shows — same fit rules.
+  const isVideo = /\.(mp4|mov|webm|m4v)$/i.test(rawSrc);
+  const media = (style: React.CSSProperties) =>
+    isVideo ? <OffthreadVideo src={src} muted style={style} /> : <Img src={src} style={style} />;
   const caption = asStr(anim.params?.caption);
   const transparent = anim.params?.transparent === true;
   const backing = asStr(anim.params?.backing); // contrasting panel colour when tones clash
@@ -630,10 +635,10 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           <>
             {/* Blurred fill so the frame is never empty behind a non-matching aspect
                 ratio — only decorative, so it may crop. */}
-            <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom}) translateX(${panX}%)`, filter: "blur(32px) brightness(0.5)" }} />
-            {/* The real image, shown whole — keeps its proportions, never cut. */}
+            {media({ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom}) translateX(${panX}%)`, filter: "blur(32px) brightness(0.5)" })}
+            {/* The real image/video, shown whole — keeps its proportions, never cut. */}
             <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-              <Img src={src} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+              {media({ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" })}
             </AbsoluteFill>
           </>
         ) : (
@@ -684,7 +689,7 @@ const ImageReveal: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           transform: `translate(${tx}vw, ${ty}vh) translateY(${idleY}px) scale(${enterScale * idleScale})`,
         }}
       >
-        {src ? <Img src={src} style={{ width: "100%", height: "100%", objectFit: fit }} /> : <ImagePlaceholder text={anim.text ?? undefined} />}
+        {src ? media({ width: "100%", height: "100%", objectFit: fit }) : <ImagePlaceholder text={anim.text ?? undefined} />}
       </div>
       {captionEl}
     </Center>

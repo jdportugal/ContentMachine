@@ -14,6 +14,7 @@ use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageProbe;
+use App\Services\Clips\Media;
 use App\Services\Clips\PlanValidator;
 use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipRecord;
@@ -146,14 +147,14 @@ class ClipsAnimados extends Component
     public function adicionarImagem(): void
     {
         $this->validate([
-            'newImage' => 'required|image|max:20480',
+            'newImage' => 'required|file|'.Media::mimesRule().'|max:102400',
             'newImageDesc' => 'required|string|max:200',
         ], [
-            'newImage.required' => 'Choose an image.',
-            'newImage.image' => 'The file must be an image.',
-            'newImage.max' => 'The image is too large (maximum 20 MB).',
-            'newImageDesc.required' => 'Describe what the image shows.',
-        ], ['newImage' => 'image', 'newImageDesc' => 'description']);
+            'newImage.required' => 'Choose an image or video.',
+            'newImage.mimes' => 'The file must be an image or a video.',
+            'newImage.max' => 'The file is too large (maximum 100 MB).',
+            'newImageDesc.required' => 'Describe what it shows.',
+        ], ['newImage' => 'file', 'newImageDesc' => 'description']);
 
         $path = $this->newImage->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
@@ -175,9 +176,9 @@ class ClipsAnimados extends Component
 
             return;
         }
-        $this->validateOnly("imageReplace.$i", ["imageReplace.$i" => 'image|max:20480'], [
-            "imageReplace.$i.image" => 'The file must be an image.',
-            "imageReplace.$i.max" => 'The image is too large (maximum 20 MB).',
+        $this->validateOnly("imageReplace.$i", ["imageReplace.$i" => 'file|'.Media::mimesRule().'|max:102400'], [
+            "imageReplace.$i.mimes" => 'The file must be an image or a video.',
+            "imageReplace.$i.max" => 'The file is too large (maximum 100 MB).',
         ]);
 
         $path = $value->store('clips/uploads');
@@ -201,10 +202,14 @@ class ClipsAnimados extends Component
         $this->images = array_values($this->images);
     }
 
-    /** @return array{transparent:bool,tone:string} */
+    /** @return array{transparent:bool,tone:string,video:bool} */
     private function probeImage(string $abs): array
     {
-        return ['transparent' => ImageProbe::hasAlpha($abs), 'tone' => ImageProbe::tone($abs)];
+        if (Media::isVideo($abs)) {
+            return ['transparent' => false, 'tone' => 'mixed', 'video' => true];
+        }
+
+        return ['transparent' => ImageProbe::hasAlpha($abs), 'tone' => ImageProbe::tone($abs), 'video' => false];
     }
 
     /** Delete uploaded files removed/replaced during editing (paths gone from $this->images). */
@@ -567,6 +572,7 @@ class ClipsAnimados extends Component
                 'uploadedId' => $id,
                 'path' => $img['path'] ?? null,
                 'fromLibrary' => (bool) ($img['library'] ?? false),
+                'video' => (bool) ($img['video'] ?? false),
             ];
         }, $p->meta['image_requests'] ?? []);
     }
@@ -579,9 +585,9 @@ class ClipsAnimados extends Component
 
             return;
         }
-        $this->validateOnly("reviewUploads.$key", ["reviewUploads.$key" => 'image|max:20480'], [
-            "reviewUploads.$key.image" => 'The file must be an image.',
-            "reviewUploads.$key.max" => 'The image is too large (maximum 20 MB).',
+        $this->validateOnly("reviewUploads.$key", ["reviewUploads.$key" => 'file|'.Media::mimesRule().'|max:102400'], [
+            "reviewUploads.$key.mimes" => 'The file must be an image or a video.',
+            "reviewUploads.$key.max" => 'The file is too large (maximum 100 MB).',
         ]);
 
         $p = $this->clips()->findOrFail($this->reviewingId);
@@ -849,7 +855,7 @@ class ClipsAnimados extends Component
             foreach ($scene['layers'] ?? [] as $li => $layer) {
                 $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
                 if (is_string($src) && $src !== '' && $byId->has($src)) {
-                    $out[$i] = ['id' => $src, 'layerIndex' => (int) $li, 'library' => (bool) ($byId[$src]['library'] ?? false)];
+                    $out[$i] = ['id' => $src, 'layerIndex' => (int) $li, 'library' => (bool) ($byId[$src]['library'] ?? false), 'video' => (bool) ($byId[$src]['video'] ?? false)];
                     break;
                 }
             }
@@ -866,9 +872,9 @@ class ClipsAnimados extends Component
 
             return;
         }
-        $this->validateOnly("sceneImageUploads.$i", ["sceneImageUploads.$i" => 'image|max:20480'], [
-            "sceneImageUploads.$i.image" => 'The file must be an image.',
-            "sceneImageUploads.$i.max" => 'The image is too large (maximum 20 MB).',
+        $this->validateOnly("sceneImageUploads.$i", ["sceneImageUploads.$i" => 'file|'.Media::mimesRule().'|max:102400'], [
+            "sceneImageUploads.$i.mimes" => 'The file must be an image or a video.',
+            "sceneImageUploads.$i.max" => 'The file is too large (maximum 100 MB).',
         ]);
 
         $path = $value->store('clips/uploads');

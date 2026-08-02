@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\Clips\ImageLibrary;
+use App\Services\Clips\Media;
 use App\Services\Shorts\MusicLibrary;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -70,8 +71,8 @@ class Ativos extends Component
             return;
         }
         $this->validate(
-            ['novasImagens.*' => 'image|max:20480'],
-            ['novasImagens.*.image' => 'Only image files are allowed.', 'novasImagens.*.max' => 'Each image must be under 20 MB.'],
+            ['novasImagens.*' => 'file|'.Media::mimesRule().'|max:102400'],
+            ['novasImagens.*.mimes' => 'Only images and videos are allowed.', 'novasImagens.*.max' => 'Each file must be under 100 MB.'],
         );
 
         foreach ($files as $i => $f) {

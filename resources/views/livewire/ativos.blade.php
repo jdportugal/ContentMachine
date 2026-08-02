@@ -47,10 +47,10 @@
         @endif
     </x-panel>
 
-    {{-- Image library --}}
-    <x-panel eyebrow="Images" title="Image library" glyph="▦" class="mb-6">
+    {{-- Image & video library --}}
+    <x-panel eyebrow="Images & video" title="Image library" glyph="▦" class="mb-6">
         <p class="font-mono text-xs text-ink-faint mb-3">
-            Reusable images (logos, brand shots, screenshots; png, jpg, webp, gif; max. 20 MB each). When generating an animated clip, the planner searches here first — a good match is reused instead of asking you or generating one. Describe each image so it can be matched.
+            Reusable images and videos (logos, brand shots, screenshots, clips; png, jpg, webp, gif, mp4, mov; max. 100 MB each). When generating an animated clip, the planner searches here first — a good match is reused instead of asking you or generating one. Anything you add plays inset in the clip. Describe each item so it can be matched.
         </p>
 
         <div x-data="{ over: false }"
@@ -62,7 +62,7 @@
             <p class="font-mono text-xs text-ink-soft">
                 Drag &amp; drop images here, or
                 <label class="text-teal underline decoration-teal/40 underline-offset-2 hover:decoration-teal cursor-pointer">browse
-                    <input type="file" class="hidden" multiple accept="image/*" wire:model="novasImagens" />
+                    <input type="file" class="hidden" multiple accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="novasImagens" />
                 </label>
             </p>
             <p wire:loading wire:target="novasImagens" class="font-mono text-[10px] text-ink-faint mt-2">uploading…</p>
@@ -76,8 +76,11 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
                     @foreach ($novasImagens as $i => $img)
                         <div class="border border-ink-soft/15 rounded-sm bg-surface/40 overflow-hidden" wire:key="staged-{{ $i }}">
-                            <div class="aspect-square bg-vellum/40">
-                                @if (method_exists($img, 'temporaryUrl'))
+                            @php $stagedVideo = method_exists($img, 'getMimeType') && str_starts_with((string) $img->getMimeType(), 'video'); @endphp
+                            <div class="aspect-square bg-vellum/40 flex items-center justify-center">
+                                @if ($stagedVideo)
+                                    <span class="font-mono text-[0.6rem] text-ink-faint">▶ video</span>
+                                @elseif (method_exists($img, 'temporaryUrl'))
                                     <img src="{{ $img->temporaryUrl() }}" class="w-full h-full object-contain" alt="" />
                                 @endif
                             </div>
@@ -105,9 +108,14 @@
                 @foreach ($imagens as $img)
                     <div class="border border-ink-soft/15 rounded-sm bg-surface/30 overflow-hidden" wire:key="lib-{{ $img['id'] }}">
                         <div class="relative aspect-square bg-vellum/40">
-                            <img src="{{ route('clips-animados.library-image', $img['id']) }}"
-                                 onerror="this.style.visibility='hidden'"
-                                 class="w-full h-full object-contain" alt="{{ $img['name'] }}" />
+                            @if (!empty($img['video']))
+                                <video src="{{ route('clips-animados.library-image', $img['id']) }}" muted playsinline controls
+                                       class="w-full h-full object-contain"></video>
+                            @else
+                                <img src="{{ route('clips-animados.library-image', $img['id']) }}"
+                                     onerror="this.style.visibility='hidden'"
+                                     class="w-full h-full object-contain" alt="{{ $img['name'] }}" />
+                            @endif
                             <button wire:click="removerImagem('{{ $img['id'] }}')" wire:confirm="Remove this image from the library?"
                                     class="absolute top-1 right-1 w-6 h-6 rounded-sm bg-nocturna/70 text-bad font-mono text-sm hover:bg-nocturna">✕</button>
                         </div>

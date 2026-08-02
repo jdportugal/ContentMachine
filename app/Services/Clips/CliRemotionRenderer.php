@@ -54,7 +54,7 @@ class CliRemotionRenderer implements RemotionRenderer
         if (! empty($props['scenes'])) {
             // Stage any local image OR audio file referenced anywhere in a layer
             // (image-reveal.src, bar.image, timeline item.image, layer.audioSrc, …).
-            $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg)$#i', $s);
+            $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg|mp4|mov|webm|m4v)$#i', $s);
             $stage = function (&$node) use (&$stage, &$staged, $isAsset) {
                 if (is_array($node)) {
                     foreach ($node as &$v) {

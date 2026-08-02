@@ -74,9 +74,10 @@ class ImageLibrary
     public function add(string $sourcePath, string $originalName, ?string $description = null): array
     {
         $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-        if (! in_array($ext, self::EXTENSOES, true)) {
+        if (! in_array($ext, array_merge(self::EXTENSOES, Media::VIDEO_EXT), true)) {
             $ext = 'png';
         }
+        $isVideo = in_array($ext, Media::VIDEO_EXT, true);
         $name = trim(Str::of(pathinfo($originalName, PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish());
         $name = $name === '' ? 'image' : $name;
         $description = trim((string) $description);
@@ -92,8 +93,9 @@ class ImageLibrary
             'description' => $description !== '' ? $description : $name,
             'ext' => $ext,
             'path' => $file,
-            'transparent' => ImageProbe::hasAlpha($file),
-            'tone' => ImageProbe::tone($file),
+            'video' => $isVideo,
+            'transparent' => $isVideo ? false : ImageProbe::hasAlpha($file),
+            'tone' => $isVideo ? 'mixed' : ImageProbe::tone($file),
         ];
         $this->writeMeta($entry);
 
@@ -141,6 +143,7 @@ class ImageLibrary
             'description' => $img['description'] ?: $img['name'],
             'tone' => $img['tone'],
             'transparent' => $img['transparent'],
+            'video' => (bool) ($img['video'] ?? false),
             'library' => true,
         ];
     }
