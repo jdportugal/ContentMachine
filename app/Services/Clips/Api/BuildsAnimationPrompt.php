@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\BackgroundLibrary;
+use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\EffectLibrary;
 use App\Services\DesignSystem\DesignSystemRepository;
 
@@ -23,6 +24,7 @@ trait BuildsAnimationPrompt
     protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
+        $language = ClipLanguage::name();
         $designRepo = app(DesignSystemRepository::class);
         $design = $designRepo->read();
         $designBlock = trim($design) !== ''
@@ -109,7 +111,8 @@ Times in seconds (float). No markdown or explanations — JSON only.
 - layers: list of elements {type, text, params}. type ∈ {$layers}.
 
 # LANGUAGE
-Write ALL visible text (punchWord, text and labels in params) in the SAME language as the transcript (given below). Do not translate.
+Write ALL visible text (text and labels in params) in {$language} — the PROJECT's language — even when the transcript is in another language.
+ONLY exception: "punchWord", which is copied EXACTLY from the spoken text, so it stays as spoken.
 {$introBlock}
 
 # CLIP TYPE — CLASSIFY FIRST (like a professional editor)
@@ -202,7 +205,7 @@ PROMPT;
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string
     {
         $words = json_encode($transcript['words'] ?? [], JSON_UNESCAPED_UNICODE);
-        $language = $transcript['language'] ?? '(detect from text)';
+        $language = ClipLanguage::name();
         $text = $transcript['text'] ?? '';
         $research = ! empty($facts)
             ? json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
@@ -215,7 +218,7 @@ PROMPT;
                 ."CONTRAST: image with 'light' tone → 'ink' (dark) background; 'dark' tone → 'papyrus'/'vellum' (light) background. Never put a light image on a light background nor a dark one on a dark background.\n"
             : '';
 
-        return "Transcript language: {$language}. Write all visible text in this language.\n"
+        return "Project language: {$language}. Write ALL visible text in this language (punchWord excepted — copy it from the spoken text).\n"
             ."Total duration: {$duration}s. Mode: {$mode}.\n"
             ."Spoken text: {$text}\n"
             ."Words with timestamps (for karaoke and rhythm): {$words}\n\n"

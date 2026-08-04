@@ -2,6 +2,7 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\Contracts\MetadataService;
 
 /**
@@ -15,7 +16,7 @@ class ClaudeMetadataService implements MetadataService
     public function suggest(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = $transcript['language'] ?? 'European Portuguese';
+        $language = ClipLanguage::name();
         if ($text === '') {
             return $this->empty();
         }

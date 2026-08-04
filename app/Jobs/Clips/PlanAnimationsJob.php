@@ -89,7 +89,7 @@ class PlanAnimationsJob implements ShouldQueue
             // the chance to upload before it is generated. No pending suggestions →
             // go straight to finalisation.
             $p->update(['plan' => $plan]);
-            $requests = $imagesOn ? ImageRequests::collect($plan) : [];
+            $requests = $imagesOn ? ImageRequests::collect($plan, $p->transcript ?? [], $filler) : [];
 
             $library = app(ImageLibrary::class);
             $matched = $requests !== [] ? app(ImageLibraryMatcher::class)->match($requests, $library->all()) : [];

@@ -2,6 +2,7 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\Contracts\ResearchService;
 
 /**
@@ -15,7 +16,7 @@ class ClaudeResearchService implements ResearchService
     public function research(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = $transcript['language'] ?? '(the text language)';
+        $language = ClipLanguage::name();
         if ($text === '') {
             return $this->empty();
         }

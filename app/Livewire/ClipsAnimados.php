@@ -574,9 +574,10 @@ class ClipsAnimados extends Component
             return [];
         }
         $uploads = $p->meta['image_uploads'] ?? [];
+        $asText = $p->meta['image_text'] ?? [];
         $byId = collect($p->images ?? [])->keyBy('id');
 
-        return array_map(function (array $r) use ($uploads, $byId) {
+        return array_map(function (array $r) use ($uploads, $asText, $byId) {
             $id = $uploads[$r['key']] ?? null;
             $img = $id ? ($byId[$id] ?? null) : null;
 
@@ -585,8 +586,40 @@ class ClipsAnimados extends Component
                 'path' => $img['path'] ?? null,
                 'fromLibrary' => (bool) ($img['library'] ?? false),
                 'video' => (bool) ($img['video'] ?? false),
+                // upload = the user's own file/library pick · generate = AI image ·
+                // text = no image at all (the scene becomes a non-image visual).
+                'mode' => $id ? 'upload' : (! empty($asText[$r['key']]) ? 'text' : 'generate'),
             ];
         }, $p->meta['image_requests'] ?? []);
+    }
+
+    /**
+     * Choose what a suggestion becomes: 'generate' (AI image, the default) or
+     * 'text' (no image — the scene turns into a card/list/diagram built from what
+     * is said there). Either way any file the user had pinned to it is dropped.
+     * 'upload' is not set here — it happens by uploading or picking from the library.
+     */
+    public function modoImagem(string $key, string $mode): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        if (! $p || ! in_array($mode, ['generate', 'text'], true)) {
+            return;
+        }
+        $uploads = $p->meta['image_uploads'] ?? [];
+        $asText = $p->meta['image_text'] ?? [];
+        $images = $this->dropImage($p->images ?? [], $uploads[$key] ?? null);
+        unset($uploads[$key]);
+        if ($mode === 'text') {
+            $asText[$key] = true;
+        } else {
+            unset($asText[$key]);
+        }
+
+        $p->update([
+            'images' => $images,
+            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads, 'image_text' => $asText]),
+        ]);
+        $this->libraryPickerKey = null;
     }
 
     /** A file dropped on a suggestion's upload input: store it and pin it to that suggestion. */
@@ -612,7 +645,7 @@ class ClipsAnimados extends Component
 
         $path = $value->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
-        $desc = trim(Str::after($req['prompt'], 'Illustrate this moment:')) ?: $req['prompt'];
+        $desc = ($req['label'] ?? '') ?: (trim(Str::after($req['prompt'], 'Illustrate this moment:')) ?: $req['prompt']);
         $entry = array_merge(
             ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => $desc],
             $this->probeImage($abs),
@@ -627,28 +660,12 @@ class ClipsAnimados extends Component
 
         $p->update([
             'images' => $images,
-            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
+            'meta' => array_merge($p->meta ?? [], [
+                'image_uploads' => $uploads,
+                'image_text' => array_diff_key($p->meta['image_text'] ?? [], [$key => true]), // an upload cancels "no image"
+            ]),
         ]);
         unset($this->reviewUploads[$key]);
-    }
-
-    /** Drop the user's upload for a suggestion — it goes back to being generated. */
-    public function removerImagemSugerida(string $key): void
-    {
-        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
-        if (! $p) {
-            return;
-        }
-        $uploads = $p->meta['image_uploads'] ?? [];
-        $id = $uploads[$key] ?? null;
-        if (! $id) {
-            return;
-        }
-        unset($uploads[$key]);
-        $p->update([
-            'images' => $this->dropImage($p->images ?? [], $id),
-            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
-        ]);
     }
 
     /** Which suggestion's library picker is open (its key), or null. */
@@ -682,7 +699,10 @@ class ClipsAnimados extends Component
         $uploads[$key] = $entry['id'];
         $p->update([
             'images' => $images,
-            'meta' => array_merge($p->meta ?? [], ['image_uploads' => $uploads]),
+            'meta' => array_merge($p->meta ?? [], [
+                'image_uploads' => $uploads,
+                'image_text' => array_diff_key($p->meta['image_text'] ?? [], [$key => true]), // a library pick cancels "no image"
+            ]),
         ]);
         $this->libraryPickerKey = null;
     }

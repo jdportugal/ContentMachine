@@ -7,6 +7,7 @@ use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Livewire\ClipsAnimados;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\ImageRequests;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Shorts\MusicLibrary;
@@ -427,6 +428,29 @@ class ClipsAnimadosTest extends TestCase
         $this->assertNotSame('Sem título', $p->title);
         $this->assertNotEmpty($p->meta['suggested']['description']);
         $this->assertNotEmpty($p->meta['suggested']['tags']);
+    }
+
+    /** Each image suggestion is upload / AI image / no image (a text scene instead). */
+    public function test_image_suggestion_mode_switches_between_generate_and_text(): void
+    {
+        $key = ImageRequests::key('a laptop on a desk');
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_COLLECTING,
+            'meta' => ['image_requests' => [['key' => $key, 'prompt' => 'a laptop on a desk']]],
+        ]);
+
+        $c = Livewire::test(ClipsAnimados::class)->call('revisarImagens', $p->id);
+        $this->assertSame('generate', $c->instance()->imageRequests[0]['mode']);
+
+        $c->call('modoImagem', $key, 'text');
+        $this->assertTrue($p->refresh()->meta['image_text'][$key]);
+        $this->assertSame('text', $c->instance()->imageRequests[0]['mode']);
+
+        $c->call('modoImagem', $key, 'generate');
+        $this->assertSame([], $p->refresh()->meta['image_text']);
+        $this->assertSame('generate', $c->instance()->imageRequests[0]['mode']);
     }
 
     public function test_delete_removes_the_project(): void

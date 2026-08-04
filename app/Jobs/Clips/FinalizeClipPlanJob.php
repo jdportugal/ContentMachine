@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\Api\SceneTextVisuals;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\EffectLibrary;
@@ -49,6 +50,13 @@ class FinalizeClipPlanJob implements ShouldQueue
 
             // The user's uploads claim their suggestion slots; generation fills the rest.
             $plan = ImageRequests::applyUploads($plan, $p->meta['image_uploads'] ?? []);
+
+            // Suggestions the user turned down ("no image") become non-image scenes
+            // (card / list / diagram) built from what is said there.
+            $declined = array_keys(array_filter($p->meta['image_text'] ?? []));
+            if ($declined !== []) {
+                $plan = app(SceneTextVisuals::class)->replace($plan, $declined, $p->transcript ?? []);
+            }
 
             $filler = app(SceneVisualFiller::class);
 

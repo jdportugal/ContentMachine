@@ -600,7 +600,7 @@ class SceneVisualFiller
     }
 
     /** The words spoken within [start,end], as a short prompt seed. */
-    private function spokenText(array $transcript, float $start, float $end): string
+    public function spokenText(array $transcript, float $start, float $end): string
     {
         $words = $transcript['words'] ?? [];
         if (! is_array($words) || $words === []) {

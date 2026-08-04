@@ -139,7 +139,7 @@
         <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
         <x-panel eyebrow="Step · III — Images" title="Your images or generated" glyph="◆">
-            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. A green thumbnail means one from your Assets library was matched automatically — change it, upload your own, or leave it. Anything not set is generated when you continue.</p>
+            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. For each one choose: <span class="text-teal">upload</span> your own file (or pick one from the library), let it be an <span class="text-teal">AI image</span>, or <span class="text-teal">no image</span> — that scene then becomes a text visual (card / list / diagram) like the non-image scenes. A green thumbnail was matched automatically from your Assets library.</p>
 
             <div class="space-y-2 mb-6">
                 @forelse ($this->imageRequests as $r)
@@ -152,33 +152,39 @@
                                  onerror="this.style.visibility='hidden'"
                                  class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
                         @else
-                            <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">✦</div>
+                            <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">{{ $r['mode'] === 'text' ? '✎' : '✦' }}</div>
                         @endif
 
                         <span class="flex-1 min-w-0 text-sm text-ink">
-                            {{ trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt'] }}
+                            {{ $r['label'] ?? (trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt']) }}
                             @if (!empty($r['fromLibrary']))
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· from library</span>
-                            @elseif (!empty($r['uploadedId']))
+                            @elseif ($r['mode'] === 'upload')
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
+                            @elseif ($r['mode'] === 'text')
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· no image — becomes a text scene</span>
                             @else
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· will be generated</span>
                             @endif
                         </span>
 
-                        <div class="flex items-center gap-3 font-mono text-[0.6rem] whitespace-nowrap">
-                            @if (!empty($this->libraryImages))
-                                <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')"
-                                        class="text-teal hover:opacity-70">▦ {{ !empty($r['uploadedId']) ? 'change' : 'library' }}</button>
-                            @endif
-                            <label class="text-teal hover:opacity-70 cursor-pointer">
-                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ {{ !empty($r['uploadedId']) ? 'replace' : 'upload' }}</span>
+                        {{-- What this suggestion becomes: your file · an AI image · no image at all. --}}
+                        <div class="flex items-center gap-1 font-mono text-[0.6rem] whitespace-nowrap">
+                            @php $on = 'border-teal/60 text-teal bg-teal/10'; $off = 'border-ink-soft/20 text-ink-faint hover:text-ink'; @endphp
+                            <label class="px-2 py-1 rounded-sm border cursor-pointer {{ $r['mode'] === 'upload' ? $on : $off }}">
+                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ upload</span>
                                 <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
                                 <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="reviewUploads.{{ $r['key'] }}" />
                             </label>
-                            @if (!empty($r['uploadedId']))
-                                <button type="button" wire:click="removerImagemSugerida('{{ $r['key'] }}')"
-                                        class="text-bad hover:opacity-70" title="drop — generate instead">✕ generate</button>
+                            <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'generate')"
+                                    class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }}"
+                                    title="let the studio generate this image">✦ AI image</button>
+                            <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'text')"
+                                    class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'text' ? $on : $off }}"
+                                    title="no image — this scene becomes a card/list/diagram like the others">✎ no image</button>
+                            @if (!empty($this->libraryImages))
+                                <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')"
+                                        class="px-2 py-1 text-teal hover:opacity-70">▦ library</button>
                             @endif
                         </div>
                         @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
