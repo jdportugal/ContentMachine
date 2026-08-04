@@ -71,6 +71,9 @@ return [
             'instagram' => env('APIFY_ACTOR_INSTAGRAM', 'apify~instagram-scraper'),
             'tiktok' => env('APIFY_ACTOR_TIKTOK', 'clockworks~tiktok-scraper'),
             'linkedin' => env('APIFY_ACTOR_LINKEDIN', ''), // no reliable actor by default
+            // Only used as a FALLBACK: YouTube is collected with yt-dlp, and this
+            // takes over when YouTube blocks it ("Sign in to confirm you're not a bot").
+            'youtube' => env('APIFY_ACTOR_YOUTUBE', 'streamers~youtube-scraper'),
         ],
     ],
 

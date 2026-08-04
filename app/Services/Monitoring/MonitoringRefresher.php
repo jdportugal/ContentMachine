@@ -21,9 +21,17 @@ class MonitoringRefresher
     {
         $limite ??= (int) config('contentmachine.monitoring.limite', 12);
 
-        return $plataforma === 'youtube'
-            ? $this->ytdlp->atualizar($plataforma, $channelUrl, $limite)
-            : $this->apify->atualizar($plataforma, $channelUrl, $limite);
+        if ($plataforma !== 'youtube') {
+            return $this->apify->atualizar($plataforma, $channelUrl, $limite);
+        }
+
+        // YouTube's bot check can leave yt-dlp with nothing at all. Apify reaches
+        // the channel another way — use it rather than showing an empty dashboard.
+        $itens = $this->ytdlp->atualizar($plataforma, $channelUrl, $limite);
+
+        return $itens === [] && $this->apify->disponivel('youtube')
+            ? $this->apify->atualizar($plataforma, $channelUrl, $limite)
+            : $itens;
     }
 
     /** Whether the network has a collection source configured (YouTube always; others via Apify). */

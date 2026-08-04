@@ -62,18 +62,20 @@ class NewsAggregator
 
             $jaArquivados = $arquivados[$plataforma] ?? [];
             $itens = $driver->collect($canais, $limite, $jaArquivados);
+
+            // A concrete yt-dlp error (bot-check, extractor breakage, stale binary)
+            // is a real failure — YouTube is then collected through Apify instead,
+            // which reaches the same videos (subtitles included) another way.
+            $erroYtDlp = $plataforma === 'youtube' ? $this->runner->lastError() : null;
+            if ($erroYtDlp !== null) {
+                [$itens, $aviso] = $this->recuperarComApify($canais, $limite, $jaArquivados, $itens, $erroYtDlp);
+                $avisos[] = $aviso;
+            }
+
             $porPlataforma[$plataforma] = count($itens);
 
-            if ($itens === []) {
-                // A concrete yt-dlp error (bot-check, extractor breakage, stale
-                // binary) is a real failure — surface it even when prior items
-                // exist, so it isn't mistaken for "nothing new".
-                $erroYtDlp = $plataforma === 'youtube' ? $this->runner->lastError() : null;
-                if ($erroYtDlp !== null) {
-                    $avisos[] = 'YouTube: '.$erroYtDlp;
-                } elseif ($jaArquivados === []) {
-                    $avisos[] = $this->avisoIndisponivel($plataforma);
-                }
+            if ($itens === [] && $erroYtDlp === null && $jaArquivados === []) {
+                $avisos[] = $this->avisoIndisponivel($plataforma);
             }
 
             foreach ($itens as $item) {
@@ -91,6 +93,38 @@ class NewsAggregator
             'dias' => $dias,
             'avisos' => $avisos,
         ];
+    }
+
+    /**
+     * yt-dlp hit a wall on YouTube (typically "Sign in to confirm you're not a
+     * bot"). Collect the same channels through Apify and keep whatever yt-dlp did
+     * manage to get, merged by id. Returns the items plus the warning to show.
+     *
+     * @param  array<int,string>  $canais
+     * @param  array<string,bool>  $jaArquivados
+     * @param  array<int,AggregatedItem>  $itens  what yt-dlp collected before failing
+     * @return array{0:array<int,AggregatedItem>,1:string}
+     */
+    private function recuperarComApify(array $canais, int $limite, array $jaArquivados, array $itens, string $erro): array
+    {
+        $apify = new ApifyDriver($this->apify, 'youtube', $this->parser);
+        if (! $apify->disponivel()) {
+            return [$itens, 'YouTube: '.$erro.' — configure an Apify token/actor to collect it anyway.'];
+        }
+
+        $porId = [];
+        foreach ($itens as $item) {
+            $porId[$item->id] = $item;
+        }
+        foreach ($apify->collect($canais, $limite, $jaArquivados) as $item) {
+            $porId[$item->id] ??= $item;
+        }
+
+        $recuperados = array_values($porId);
+
+        return [$recuperados, count($recuperados) > count($itens)
+            ? 'YouTube: yt-dlp blocked ('.$erro.') — collected via Apify instead.'
+            : 'YouTube: '.$erro.' — the Apify fallback returned nothing either.'];
     }
 
     /** Creates the driver suited to the platform: yt-dlp for YouTube, Apify for the rest. */

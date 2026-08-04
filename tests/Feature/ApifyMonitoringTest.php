@@ -6,6 +6,7 @@ use App\Services\Monitoring\ApifyClient;
 use App\Services\Monitoring\ApifyMonitoringFetcher;
 use App\Services\Monitoring\MonitoringRefresher;
 use App\Services\Monitoring\MonitoringStore;
+use App\Services\Monitoring\YtDlpMonitoringFetcher;
 use App\Services\Scoring\EngagementScorer;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
@@ -91,6 +92,38 @@ class ApifyMonitoringTest extends TestCase
     {
         $this->assertFalse($this->fetcher()->disponivel('linkedin'));
         $this->assertSame([], $this->fetcher()->atualizar('linkedin', 'https://linkedin.com/in/x'));
+    }
+
+    /** yt-dlp sem nada (bot-check do YouTube) → o refresher cai no Apify. */
+    public function test_youtube_sem_dados_do_ytdlp_recolhe_pelo_apify(): void
+    {
+        config(['contentmachine.monitoring.apify.youtube' => 'streamers~youtube-scraper']);
+        $this->app->instance(YtDlpMonitoringFetcher::class, new class(app(MonitoringStore::class)) extends YtDlpMonitoringFetcher
+        {
+            public function __construct(private MonitoringStore $s)
+            {
+                // sem runner: simula o yt-dlp bloqueado, que não devolve nada
+            }
+
+            public function atualizar(string $plataforma, string $channelUrl, int $limite = 12): array
+            {
+                return [];
+            }
+        });
+
+        Http::fake(['api.apify.com/*' => Http::response([
+            ['id' => 'v1', 'title' => 'Vídeo A', 'url' => 'https://www.youtube.com/watch?v=v1',
+                'viewCount' => 9000, 'likes' => 300, 'commentsCount' => 12, 'duration' => '00:04:10',
+                'date' => '2026-07-02T10:00:00.000Z', 'numberOfSubscribers' => 12000],
+        ])]);
+
+        $itens = app(MonitoringRefresher::class)->atualizar('youtube', 'https://www.youtube.com/@aiwithjd');
+
+        $this->assertCount(1, $itens);
+        $this->assertSame(9000, $itens[0]['views']);
+        $this->assertSame(250, $itens[0]['duracao_seg']);   // "00:04:10" → segundos
+        $this->assertSame('2026-07-02', $itens[0]['publicado_em']);
+        $this->assertSame(12000, app(MonitoringStore::class)->canal('youtube')['subscribers']);
     }
 
     public function test_refresher_encaminha_por_plataforma(): void

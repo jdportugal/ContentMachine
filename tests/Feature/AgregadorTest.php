@@ -9,6 +9,7 @@ use App\Services\Aggregation\YtDlpRunnerContract;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\Support\FakeYtDlpRunner;
@@ -104,6 +105,52 @@ class AgregadorTest extends TestCase
             collect($resumo['avisos'])->contains(fn ($a) => str_contains($a, 'Instagram') && str_contains($a, 'Apify')),
             'Esperava um aviso de Instagram ignorado (só YouTube; resto precisa de Apify).'
         );
+    }
+
+    /** yt-dlp bloqueado pelo bot-check do YouTube → recolhe pelo Apify. */
+    public function test_youtube_bloqueado_no_ytdlp_e_recolhido_via_apify(): void
+    {
+        $erro = 'ERROR: [youtube] ZFxh7sqbUZo: Sign in to confirm you’re not a bot.';
+        $this->app->instance(YtDlpRunnerContract::class, new class($erro) extends FakeYtDlpRunner
+        {
+            public function __construct(private string $erro)
+            {
+                parent::__construct();
+            }
+
+            public function lastError(): ?string
+            {
+                return $this->erro;
+            }
+        });
+
+        config(['services.apify.token' => 'tok-de-teste']);
+        Http::fake(['*run-sync-get-dataset-items*' => Http::response([[
+            'id' => 'ZFxh7sqbUZo',
+            'title' => 'Como automatizar tudo',
+            'url' => 'https://www.youtube.com/watch?v=ZFxh7sqbUZo',
+            'channelName' => 'Nick Saraev',
+            'date' => '2026-07-20T10:00:00.000Z',
+            'text' => 'Descrição do vídeo https://exemplo.pt',
+            'thumbnailUrl' => 'https://i.ytimg.com/vi/ZFxh7sqbUZo/hq.jpg',
+            'hashtags' => ['automacao'],
+            'subtitles' => [['language' => 'pt', 'srt' => "1\n00:00:01,000 --> 00:00:03,000\nprimeiro passo do fluxo\n"]],
+        ]])]);
+
+        $resumo = app(NewsAggregator::class)->aggregate(['youtube']);
+
+        $this->assertSame(1, $resumo['por_plataforma']['youtube']);
+        $this->assertTrue(
+            collect($resumo['avisos'])->contains(fn ($a) => str_contains($a, 'Apify')),
+            'Esperava aviso a dizer que a recolha passou pelo Apify.'
+        );
+
+        // Mesmo id do yt-dlp (o id do vídeo), com transcrição das legendas.
+        $nota = app(VaultContract::class)->get('noticias/2026-07-20/youtube-zfxh7sqbuzo.md');
+        $this->assertNotNull($nota);
+        $this->assertSame('Nick Saraev', $nota->get('canal'));
+        $this->assertStringContainsString('primeiro passo do fluxo', $nota->body);
+        $this->assertStringNotContainsString('-->', $nota->body); // cues limpos
     }
 
     public function test_pagina_noticias_responde_200(): void

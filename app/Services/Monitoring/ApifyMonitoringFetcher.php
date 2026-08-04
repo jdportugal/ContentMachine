@@ -100,6 +100,13 @@ class ApifyMonitoringFetcher
                 'urls' => [$url],
                 'limit' => $limite,
             ],
+            'youtube' => [
+                'startUrls' => [['url' => $url]],
+                'maxResults' => $limite,
+                'maxResultsShorts' => 0,
+                'maxResultStreams' => 0,
+                'downloadSubtitles' => false, // metrics only here
+            ],
             default => ['urls' => [$url], 'limit' => $limite],
         };
     }
@@ -111,8 +118,49 @@ class ApifyMonitoringFetcher
             'instagram' => $this->mapearInstagram($r),
             'tiktok' => $this->mapearTiktok($r),
             'linkedin' => $this->mapearLinkedin($r),
+            'youtube' => $this->mapearYoutube($r),
             default => null,
         };
+    }
+
+    /** YouTube — only reached when yt-dlp is blocked (MonitoringRefresher falls back here). */
+    private function mapearYoutube(array $r): ?array
+    {
+        $url = (string) ($r['url'] ?? $r['videoUrl'] ?? '');
+        $id = (string) ($r['id'] ?? $r['videoId'] ?? ($url !== '' ? md5($url) : ''));
+        if ($id === '') {
+            return null;
+        }
+
+        return [
+            'id' => $id,
+            'plataforma' => 'youtube',
+            'tipo' => 'vídeo',
+            'titulo' => $this->titulo($r['title'] ?? null, 'Vídeo'),
+            'url' => $url,
+            'thumbnail' => (string) ($r['thumbnailUrl'] ?? $r['thumbnail'] ?? ''),
+            'publicado_em' => $this->data($r['date'] ?? $r['uploadDate'] ?? null),
+            'duracao_seg' => $this->duracaoSeg($r['duration'] ?? null),
+            'views' => (int) ($r['viewCount'] ?? $r['viewsCount'] ?? 0),
+            'likes' => (int) ($r['likes'] ?? $r['likeCount'] ?? 0),
+            'comentarios' => (int) ($r['commentsCount'] ?? $r['commentCount'] ?? 0),
+            'partilhas' => 0,
+            'guardados' => 0,
+        ];
+    }
+
+    /** "HH:MM:SS" / "MM:SS" / seconds → seconds. */
+    private function duracaoSeg(mixed $duracao): int
+    {
+        if (is_numeric($duracao)) {
+            return (int) $duracao;
+        }
+        $partes = array_map('intval', explode(':', trim((string) ($duracao ?? ''))));
+        if ($partes === [] || count($partes) > 3) {
+            return 0;
+        }
+
+        return (int) array_reduce($partes, fn ($total, $p) => $total * 60 + $p, 0);
     }
 
     private function mapearInstagram(array $r): ?array
@@ -201,6 +249,7 @@ class ApifyMonitoringFetcher
             'instagram' => (int) ($r['ownerFollowersCount'] ?? Arr::get($r, 'owner.followersCount', 0)),
             'tiktok' => (int) Arr::get($r, 'authorMeta.fans', 0),
             'linkedin' => (int) ($r['authorFollowersCount'] ?? Arr::get($r, 'author.followers', 0)),
+            'youtube' => (int) ($r['numberOfSubscribers'] ?? 0),
             default => 0,
         };
     }

@@ -14,12 +14,17 @@ use Throwable;
  * post to an AggregatedItem, using the CAPTION as the textual content (there is
  * no spoken transcript) so topics/summaries downstream work unchanged.
  * Degrades to [] when the actor/token is missing or the run fails — never throws.
+ *
+ * Also serves YouTube, but only as NewsAggregator's fallback for when yt-dlp is
+ * blocked by the bot check — there the actor returns real subtitles, so the item
+ * carries a proper transcript.
  */
 class ApifyDriver implements AggregatorDriver
 {
     public function __construct(
         private readonly ApifyClient $apify,
         private readonly string $plataforma,
+        private readonly ?TranscriptParser $parser = null,
     ) {}
 
     public function plataforma(): string
@@ -97,6 +102,15 @@ class ApifyDriver implements AggregatorDriver
                 'urls' => [$url],
                 'limit' => $limite,
             ],
+            'youtube' => [
+                'startUrls' => [['url' => $url]],
+                'maxResults' => $limite,
+                'maxResultsShorts' => 0,
+                'maxResultStreams' => 0,
+                'downloadSubtitles' => true,   // the transcript is the point
+                'saveSubsToKVS' => false,      // inline in the item, no extra fetch
+                'subtitlesLanguage' => 'any',
+            ],
             default => ['urls' => [$url], 'limit' => $limite],
         };
     }
@@ -108,8 +122,71 @@ class ApifyDriver implements AggregatorDriver
             'instagram' => $this->item($r, (string) ($r['url'] ?? $r['inputUrl'] ?? ''), (string) ($r['id'] ?? $r['shortCode'] ?? ''), (string) ($r['caption'] ?? ''), (string) ($r['ownerUsername'] ?? $r['ownerFullName'] ?? ''), (string) ($r['displayUrl'] ?? ''), $r['timestamp'] ?? null),
             'tiktok' => $this->item($r, (string) ($r['webVideoUrl'] ?? $r['url'] ?? ''), (string) ($r['id'] ?? ''), (string) ($r['text'] ?? ''), (string) (Arr::get($r, 'authorMeta.name') ?? Arr::get($r, 'authorMeta.nickName') ?? ''), (string) (Arr::get($r, 'videoMeta.coverUrl') ?? Arr::get($r, 'videoMeta.originalCoverUrl') ?? ($r['covers'][0] ?? '')), $r['createTimeISO'] ?? $r['createTime'] ?? null),
             'linkedin' => $this->item($r, (string) ($r['url'] ?? $r['postUrl'] ?? ''), (string) ($r['id'] ?? $r['urn'] ?? ''), (string) ($r['text'] ?? $r['commentary'] ?? ''), (string) ($r['authorName'] ?? Arr::get($r, 'author.name') ?? ''), '', $r['postedAtISO'] ?? $r['date'] ?? null),
+            'youtube' => $this->youtube($r),
             default => null,
         };
+    }
+
+    /**
+     * A YouTube video from the actor. Unlike the other networks this one HAS a
+     * spoken transcript (the downloaded subtitles), so description and transcript
+     * are separate — matching what YtDlpDriver produces, ids included.
+     *
+     * @param  array<string,mixed>  $r
+     */
+    private function youtube(array $r): ?AggregatedItem
+    {
+        $url = (string) ($r['url'] ?? $r['videoUrl'] ?? $r['watchUrl'] ?? '');
+        $rawId = (string) ($r['id'] ?? $r['videoId'] ?? '');
+        if ($rawId === '' && $url !== '' && preg_match('#[?&]v=([\w-]+)#', $url, $m)) {
+            $rawId = $m[1];
+        }
+        if ($rawId === '') {
+            return null;
+        }
+
+        $descricao = trim((string) ($r['text'] ?? $r['description'] ?? ''));
+        $transcricao = $this->legendas($r['subtitles'] ?? null);
+
+        return new AggregatedItem(
+            // Same id as yt-dlp's (the video id), so an item collected either way
+            // is the same note and is not archived twice.
+            id: Str::slug($rawId) !== '' ? Str::slug($rawId) : md5($rawId),
+            plataforma: 'youtube',
+            titulo: (string) ($r['title'] ?? 'Sem título'),
+            canal: (string) ($r['channelName'] ?? $r['channelUsername'] ?? ''),
+            data: $this->data($r['date'] ?? $r['uploadDate'] ?? null),
+            url: $url !== '' ? $url : "https://www.youtube.com/watch?v={$rawId}",
+            thumbnail: (string) ($r['thumbnailUrl'] ?? $r['thumbnail'] ?? ''),
+            descricao: $descricao,
+            transcricao: $transcricao,
+            tags: array_values(array_filter(array_map('strval', (array) ($r['hashtags'] ?? [])))),
+            fontes: $this->fontes($descricao."\n".$transcricao),
+        );
+    }
+
+    /**
+     * Readable transcript from the actor's `subtitles`. The shape varies with the
+     * requested format (plain text, or SRT/VTT cues), so anything that still looks
+     * like cues goes through the VTT parser. '' when there are no subtitles.
+     */
+    private function legendas(mixed $subtitles): string
+    {
+        foreach (is_array($subtitles) ? $subtitles : [] as $sub) {
+            $texto = is_string($sub)
+                ? $sub
+                : (string) ($sub['plaintext'] ?? $sub['text'] ?? $sub['srt'] ?? $sub['vtt'] ?? '');
+            $texto = trim($texto);
+            if ($texto === '') {
+                continue;
+            }
+
+            return str_contains($texto, '-->') && $this->parser !== null
+                ? $this->parser->vttToText($texto)
+                : $texto;
+        }
+
+        return '';
     }
 
     /** @param array<string,mixed> $r */
