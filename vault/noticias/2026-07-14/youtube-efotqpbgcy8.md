@@ -6,6 +6,8 @@ canal: 'Nate Herk | AI Automation'
 data: '2026-07-14'
 url: 'https://www.youtube.com/watch?v=eFOTQpbGcy8'
 thumbnail: 'https://i.ytimg.com/vi/eFOTQpbGcy8/maxresdefault.jpg'
+descricao: "My playbook for growing a $1M AI agency: https://app.aiautomationsociety.ai/opaa-ads-optin My FREE resources: https://www.skool.com/ai-automation-society/about?el=200k-ai-job&hcategory=youtube-videos&utm_campaign=free-group My Tools💻 FREE MONTH voice to text: https://get.glaido.com/nate Code NATEHERK for 10% off VPS (annual plan): https://www.hostinger.com/vps/claude-code-hosting The $200K AI Job That Didn't Exist Last Year is real, and most people will miss it until it's too late. Twelve months ago nobody was hiring for this, and now companies are quietly building it from the inside out. I break down the exact four step roadmap to land this $200K job using AI. Hope you enjoy! Sponsorship Inquiries: 📧 nate@smoothmedia.co Connect with me: https://www.linkedin.com/in/nateherkelman/ https:/..."
+resumo: 'Este vídeo aborda uma nova oportunidade de carreira ligada à inteligência artificial, explicando como quem domina ferramentas de IA pode destacar-se profissionalmente num mercado em que uma pessoa passou a fazer o trabalho de várias. Usa o exemplo da empresa Chegg, afetada pelo ChatGPT, para ilustrar como a IA está a transformar os empregos e a criar procura por especialistas, consultores e agênci...'
 tags:
   - "The $200K AI Job That Didn't Exist Last Year"
   - 'Nate Herk'

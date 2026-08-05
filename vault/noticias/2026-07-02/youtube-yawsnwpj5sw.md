@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Charlie Automates'
 data: '2026-07-02'
 url: 'https://www.youtube.com/watch?v=yawSNWPJ5sw'
-thumbnail: 'https://i.ytimg.com/vi_webp/yawSNWPJ5sw/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/yawSNWPJ5sw/maxresdefault.jpg'
+descricao: 'Work With Me (Solve Your Revenue Bottleneck with Charlie OS): https://charlieautomates.com/charlie-os-vs/ ———————————— Join my community with 3,200+ business owners (choose premium for weekly calls): https://www.skool.com/cc-strategic-ai/about ———————————— Videos referenced: - SkillSmith Tutorial: https://youtu.be/FOvN28l_q9s - GHL Tutorial: https://youtu.be/TtdoDYI3m8A Other 🔑 resources: Apify: https://www.apify.com?fpr=charles Claude Estate Hustle (FREE TRAINING): https://charlieautomates.com/claude-estate-register/?utm_source=Apify-Lead-YT ———————————— Timeline: 00:00 80 Cent Lead System 00:35 One Command Workflow 01:07 Claude Code Setup 01:50 Connect Apify MCP 03:09 Run Lead Finder Skill 04:07 Apify Actors 04:26 Email Drafting 04:59 Improve Email Personalization 05:47 Tools and MCP Ad...'
+resumo: 'Este vídeo mostra como montar um sistema de geração de leads dentro do Claude Code, ligando-o à plataforma de scraping Apify (via MCP) e usando o plugin Skill Smith para criar fluxos de trabalho. Com um único comando em linguagem natural, o sistema recolhe leads verificados (nome, empresa, email, LinkedIn) e gera emails personalizados, apresentado como alternativa mais barata a ferramentas como o...'
 tags:
   - entrepreneur
   - money

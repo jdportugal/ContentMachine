@@ -8,8 +8,8 @@ total: 1
 
 # Tópicos cobertos — 2025-02-04
 
-> 1 item(s) agregado(s) · método: llm · 2026-07-21T13:55:17+00:00
+> 1 item(s) agregado(s) · método: llm · 2026-07-24T10:12:02+00:00
 
-## Ferramentas de Inteligência Artificial
+## Ferramentas de IA
 
-- **[tiktok]** [Comment "KREA" to get this AI Tool. Krea AI just launched a cool new ...](https://www.tiktok.com/@nick.saraev/video/7467463972367699242)
+- **[tiktok]** [Comment "KREA" to get this AI Tool.](https://www.tiktok.com/@nick.saraev/video/7467463972367699242)

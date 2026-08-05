@@ -6,6 +6,8 @@ canal: 'Duncan Rogoff | Learn Claude Code'
 data: '2026-07-14'
 url: 'https://www.youtube.com/watch?v=x750lB2ZP9U'
 thumbnail: 'https://i.ytimg.com/vi/x750lB2ZP9U/maxresdefault.jpg'
+descricao: "Learn Claude Code + ALL my resources! Only $9. 👉 https://www.skool.com/claudecodeclub Summary ⤵️ Claude Code completely changed how I grew my personal brand, and I did it without a ghostwriter, an agency, or a content team. In this video I'm breaking down the exact Claude Code skills, agents, and systems I used to go from 1,500 to over 14,000 LinkedIn followers and generate 6,000+ leads for my business. 00:00 - Intro 01:30 - Stage 1 06:56 - Stage 2 11:19 - Stage 3 28:07 - Stage 4 50:46 - Stage 5 1:07:53 - Stage 6 1:25:36 - Learn Claude Code"
+resumo: 'O vídeo ensina a usar o Claude Code para criar conteúdo e fazer crescer uma marca pessoal no LinkedIn, apresentando três skills: encontrar temas em tendência no teu nicho, criar lead magnets direcionados ao teu público e escrever publicações no teu tom de voz.'
 tags: {}
 fontes:
   - 'https://www.skool.com/claudecodeclub'

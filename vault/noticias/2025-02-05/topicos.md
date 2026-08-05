@@ -8,8 +8,8 @@ total: 1
 
 # Tópicos cobertos — 2025-02-05
 
-> 1 item(s) agregado(s) · método: llm · 2026-07-21T13:55:14+00:00
+> 1 item(s) agregado(s) · método: llm · 2026-07-24T10:12:00+00:00
 
-## Frameworks de ChatGPT
+## Dicas sobre ChatGPT
 
-- **[tiktok]** [Comment ROSES to get this CHATGPT Framework. Want to become a ChatGPT...](https://www.tiktok.com/@nick.saraev/video/7467806029946932522)
+- **[tiktok]** [Comment ROSES to get this CHATGPT Framework.](https://www.tiktok.com/@nick.saraev/video/7467806029946932522)

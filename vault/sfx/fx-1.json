@@ -1,0 +1,22 @@
+{
+    "id": "fx-1",
+    "prompt": "Create a new image reveal where the image witouth any boarders comes from the top incresingly slowly and stays bouncing on the center of the screen",
+    "slug": "image-drop-bounce",
+    "display_name": "Image drop & bounce",
+    "description": "A borderless image drops in from the top, decelerating, then settles bouncing gently in the centre.",
+    "param_schema": "{ src: string; size?: number; radius?: number; bounce?: number }",
+    "sample_text": "",
+    "sample_params": {
+        "src": "https://picsum.photos/seed/nebula/800/800",
+        "size": 720,
+        "radius": 0,
+        "bounce": 26
+    },
+    "tsx": "import React from \"react\";\nimport { AbsoluteFill, useCurrentFrame, interpolate, spring } from \"remotion\";\nimport { ENGRAVE_SHADOW } from \"../style-tokens\";\nimport type { PrimitiveProps } from \"../primitives\";\n\nconst num = (v: unknown, fallback: number): number =>\n  typeof v === \"number\" && Number.isFinite(v) ? v : fallback;\nconst str = (v: unknown): string => (typeof v === \"string\" ? v : \"\");\n\nconst ImageDropBounce: React.FC<PrimitiveProps> = ({ anim, fps }) => {\n  const frame = useCurrentFrame();\n  const p = anim.params ?? {};\n\n  const src = str(p.src) || str((p as Record<string, unknown>).image) || str((p as Record<string, unknown>).url);\n  const size = num(p.size, 720);\n  const radius = num(p.radius, 0);\n  const bounceAmp = num(p.bounce, 26);\n\n  // Entrance: decelerating drop from above the frame that overshoots and settles.\n  const entrance = spring({\n    frame,\n    fps,\n    config: { damping: 12, mass: 1.1, stiffness: 90 },\n  });\n  const dropY = interpolate(entrance, [0, 1], [-(1920 / 2 + size / 2 + 200), 0]);\n\n  // Persistent gentle bounce once it has arrived (amplitude ramps in with the entrance).\n  const idleY = Math.sin((frame / fps) * Math.PI * 1.6) * bounceAmp * entrance;\n\n  const translateY = dropY + idleY;\n\n  return (\n    <AbsoluteFill style={{ alignItems: \"center\", justifyContent: \"center\" }}>\n      {src ? (\n        <img\n          src={src}\n          alt=\"\"\n          style={{\n            width: size,\n            height: size,\n            objectFit: \"cover\",\n            borderRadius: radius,\n            transform: `translateY(${translateY}px)`,\n            boxShadow: ENGRAVE_SHADOW,\n            display: \"block\",\n          }}\n        />\n      ) : null}\n    </AbsoluteFill>\n  );\n};\n\nexport default ImageDropBounce;",
+    "status": "active",
+    "error": null,
+    "preview_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/effects/image-drop-bounce-155b728a.mp4",
+    "enabled": true,
+    "created_at": "2026-07-24 15:57:25",
+    "updated_at": "2026-07-24 18:52:47"
+}

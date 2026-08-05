@@ -1,0 +1,31 @@
+{
+    "colors": {
+        "bg": "#2F5D50",
+        "bgAlt": "#F4EDE2",
+        "bgContrast": "#1A1410",
+        "textOnBg": "#F4EDE2",
+        "textOnContrast": "#C8941E",
+        "mutedOnBg": "#C8941E",
+        "mutedOnContrast": "#F4EDE2",
+        "accent": "#C8941E",
+        "accent2": "#B4451F",
+        "accent3": "#6B5B8A"
+    },
+    "fonts": {
+        "display": "Fraunces",
+        "body": "Spline Sans",
+        "mono": "Spline Sans Mono",
+        "displayWeight": 900,
+        "bodyWeight": 400
+    },
+    "texture": {
+        "kind": "paper"
+    },
+    "style": {
+        "headline": "flat",
+        "shadow": "hard",
+        "panelBorder": 3,
+        "sharp": true,
+        "uppercaseTitles": true
+    }
+}

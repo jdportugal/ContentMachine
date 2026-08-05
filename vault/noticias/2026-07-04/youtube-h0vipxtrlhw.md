@@ -5,7 +5,9 @@ plataforma: youtube
 canal: Futurepedia
 data: '2026-07-04'
 url: 'https://www.youtube.com/watch?v=H0vIPXtrlHw'
-thumbnail: 'https://i.ytimg.com/vi_webp/H0vIPXtrlHw/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/H0vIPXtrlHw/maxresdefault.jpg'
+descricao: "*Free Claude Skills Guide:* https://clickhubspot.com/gl9j More from Futurepedia: 👉 Join the Skill Leap AI education platform! Try it free and explore 20+ top-rated courses in AI: https://bit.ly/futurepediaSL Summary: Learn how to use Claude Skills to 10x what you're able to get done in Claude. I cover what claude skills are, how to use the built-in skills, and how to create and refine your own skills. These are one of the biggest unlocks in all of Claude. Chapters 0:00 Intro 0:27 What Are Skills? 1:36 Built-In Skills 2:53 Create Your Own Skills 5:53 Download Skills 6:50 Next Steps"
+resumo: 'O vídeo explica o que são as "skills" do Claude — conjuntos de instruções guardadas num ficheiro markdown que automatizam tarefas repetidas — mostrando como ativá-las nas definições, usar as skills pré-instaladas e plugins, e criar e refinar as próprias.'
 tags:
   - 'Claude Skills'
   - 'Claude AI features'

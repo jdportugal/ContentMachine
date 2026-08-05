@@ -3,12 +3,12 @@ titulo: 'Tópicos — 2026-07-14'
 tipo: topicos
 data: '2026-07-14'
 metodo: llm
-total: 3
+total: 4
 ---
 
 # Tópicos cobertos — 2026-07-14
 
-> 3 item(s) agregado(s) · método: llm · 2026-07-21T13:54:43+00:00
+> 4 item(s) agregado(s) · método: llm · 2026-07-24T10:10:50+00:00
 
 ## Agentes de IA e Fluxos de Trabalho
 
@@ -21,3 +21,7 @@ total: 3
 ## Oportunidades de Carreira em IA
 
 - **[youtube]** [The $200K AI Job That Didn't Exist Last Year](https://www.youtube.com/watch?v=eFOTQpbGcy8)
+
+## Rendimentos Passivos com IA
+
+- **[youtube]** [Realistic Claude AI Side Hustle for Beginners](https://www.youtube.com/watch?v=lvuZrxCZOAs)

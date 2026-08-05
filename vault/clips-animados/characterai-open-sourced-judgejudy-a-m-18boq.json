@@ -1,0 +1,1248 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Character.ai Open-Sourced an AI Judge for Video Slop",
+    "source_text": "Character.AI open-sourced JudgeJudy, a multimodal evaluation framework aimed at AI video \"slop\"\n\nVideo generation quality has raced ahead with models like Kling, Seedance, Veo and Sora, but evaluation has lagged: frame-level tools such as CLIP score and LPIPS check whether a single frame matches its prompt or drifts from the next one, and say nothing about whether a clip actually told the intended story, kept a character consistent across shots, obeyed physics or synced its audio to the action. JudgeJudy, released under an MIT license, combines AI judges with custom rubrics, automated metrics and human scoring across text, image, audio and video, including temporal consistency (frame-to-frame SSIM) and CLIP-temporal metrics, with provider support for Seedance, WAN, Veo 3 and Sora 2. This matters because generation is now effectively free compared to studio costs while judging quality still requires a human — the bottleneck has moved from making video to knowing which video is worth keeping.",
+    "source_path": null,
+    "images": [],
+    "meta": {
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Evaluating AI-generated video: from frame-level metrics to multimodal judge harnesses",
+            "summary": "Video generation has scaled faster than video evaluation: per-second API prices have collapsed while quality judging still leans on frame-level metrics from 2004-2021 or on humans. Character.AI publishes an eval harness called judgejudy on GitHub, alongside academic suites like VBench that score generated video across many dimensions.",
+            "timeline": [
+                {
+                    "label": "SSIM structural similarity metric published",
+                    "sublabel": "2004"
+                },
+                {
+                    "label": "LPIPS deep perceptual metric (CVPR)",
+                    "sublabel": "2018"
+                },
+                {
+                    "label": "CLIPScore reference-free metric (EMNLP)",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "VBench video benchmark, 16 dimensions (CVPR)",
+                    "sublabel": "2024"
+                },
+                {
+                    "label": "VBench-2.0, 18 dimensions",
+                    "sublabel": "March 2025"
+                },
+                {
+                    "label": "Google Veo 3 launches at I/O with native audio",
+                    "sublabel": "20 May 2025"
+                },
+                {
+                    "label": "OpenAI Sora 2 launches",
+                    "sublabel": "30 Sept 2025"
+                },
+                {
+                    "label": "Kling AI hits $240M annualized run rate",
+                    "sublabel": "Dec 2025"
+                },
+                {
+                    "label": "OpenAI notifies developers of Sora API removal",
+                    "sublabel": "24 March 2026"
+                },
+                {
+                    "label": "Sora web and app experience shut down",
+                    "sublabel": "26 April 2026"
+                },
+                {
+                    "label": "Kling AI raises $2.8B from Alibaba, Tencent, Baidu",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "Character.AI judgejudy eval harness on GitHub",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "Sora API scheduled shutdown",
+                    "sublabel": "24 Sept 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Sora 2 API, 720p (2026)",
+                    "value": 0.1,
+                    "unit": "USD per second"
+                },
+                {
+                    "label": "Sora 2 Pro API, 1080p (2026)",
+                    "value": 0.7,
+                    "unit": "USD per second"
+                },
+                {
+                    "label": "Veo 3.1 standard with audio (2026)",
+                    "value": 0.4,
+                    "unit": "USD per second"
+                },
+                {
+                    "label": "Veo 3.1 Fast, 720p with audio (2026)",
+                    "value": 0.1,
+                    "unit": "USD per second"
+                },
+                {
+                    "label": "20-second Sora 2 clip at 720p (2026)",
+                    "value": 2,
+                    "unit": "USD"
+                },
+                {
+                    "label": "VBench evaluation dimensions",
+                    "value": 16,
+                    "unit": "dimensions"
+                },
+                {
+                    "label": "VBench-2.0 evaluation dimensions",
+                    "value": 18,
+                    "unit": "dimensions"
+                },
+                {
+                    "label": "Kling AI annualized run rate, Dec 2025",
+                    "value": 240,
+                    "unit": "million USD"
+                },
+                {
+                    "label": "Kling AI funding round, July 2026",
+                    "value": 2.8,
+                    "unit": "billion USD"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Frame-level metrics vs multimodal judging",
+                    "left": {
+                        "title": "Classic frame metrics",
+                        "points": [
+                            "SSIM (2004): pixel-structure similarity",
+                            "LPIPS (2018): deep-feature perceptual distance",
+                            "CLIPScore (2021): reference-free text-image match",
+                            "Score single frames or frame pairs"
+                        ]
+                    },
+                    "right": {
+                        "title": "Benchmark and judge suites",
+                        "points": [
+                            "VBench: 16 dimensions incl. temporal flickering, motion smoothness",
+                            "VBench-2.0: 18 dimensions across 5 categories",
+                            "Subject-identity consistency scored explicitly",
+                            "LLM/MLLM judges with rubrics plus human scoring"
+                        ]
+                    }
+                },
+                {
+                    "title": "Generation price vs judging effort",
+                    "left": {
+                        "title": "Generating",
+                        "points": [
+                            "$0.10/sec for Sora 2 at 720p",
+                            "$0.40/sec for Veo 3.1 with audio",
+                            "A 20-second clip costs about $2",
+                            "Priced per second, on demand"
+                        ]
+                    },
+                    "right": {
+                        "title": "Judging",
+                        "points": [
+                            "No single per-second price exists",
+                            "Human raters still anchor benchmarks",
+                            "Metrics from 2004-2021 dominate tooling",
+                            "Consistency and physics remain hard to score"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Character.AI's GitHub org publishes judgejudy, described as an eval harness, updated July 2026",
+                "SSIM dates to 2004, LPIPS to 2018, CLIPScore to 2021 - the metrics predate modern video models",
+                "VBench scores generated video on 16 dimensions; VBench-2.0 uses 18",
+                "Sora 2 at 720p costs $0.10 per second; a 20-second clip is about $2",
+                "Veo 3.1 with audio costs $0.40 per second at 720p and 1080p",
+                "OpenAI shut down the Sora app on 26 April 2026 and will remove the Sora API on 24 Sept 2026",
+                "Kling AI reached a $240M annualized run rate in Dec 2025 and raised $2.8B in July 2026"
+            ],
+            "sources": [
+                "https://github.com/character-ai",
+                "https://ai.google.dev/gemini-api/docs/pricing",
+                "https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview",
+                "https://platform.openai.com/docs/pricing/",
+                "https://developers.openai.com/api/docs/deprecations",
+                "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation",
+                "https://openai.com/index/sora-2/",
+                "https://www.cnbc.com/2025/05/20/google-ai-video-generator-audio-veo-3.html",
+                "https://arxiv.org/abs/2311.17982",
+                "https://openaccess.thecvf.com/content/CVPR2024/papers/Huang_VBench_Comprehensive_Benchmark_Suite_for_Video_Generative_Models_CVPR_2024_paper.pdf",
+                "https://arxiv.org/abs/2503.21755",
+                "https://openaccess.thecvf.com/content_cvpr_2018/html/Zhang_The_Unreasonable_Effectiveness_CVPR_2018_paper.html",
+                "https://ece.uwaterloo.ca/~z70wang/research/ssim/",
+                "https://www.semanticscholar.org/paper/CLIPScore:-A-Reference-free-Evaluation-Metric-for-Hessel-Holtzman/38b0567e83386ddc294d6c81b541deacbd8e3c2a",
+                "https://ir.kuaishou.com/news-releases/news-release-details/kling-ai-annualized-revenue-run-rate-hits-usd240-million/",
+                "https://www.bloomberg.com/news/articles/2026-07-02/china-s-kling-ai-raises-2-billion-to-expand-ai-video-operations",
+                "https://finance.yahoo.com/technology/ai/articles/alibaba-tencent-back-kuaishous-kling-093538982.html"
+            ]
+        },
+        "suggested": {
+            "title": "Character.ai Open-Sourced an AI Judge for Video Slop",
+            "description": "Video generation has raced ahead with models like Kling, Veo and Sora, but the tools for judging that output never kept up. Character.ai's MIT-licensed Judge Judy framework scores clips across text, image, audio and video, checking temporal consistency, character continuity, physics and audio sync instead of just single frames. Generation is nearly free now, so the real bottleneck is knowing which video is worth keeping.",
+            "tags": []
+        }
+    },
+    "id": "characterai-open-sourced-judgejudy-a-m-18boq",
+    "created_at": "2026-07-26T07:10:21+00:00",
+    "updated_at": "2026-07-26T17:38:19+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/characterai-open-sourced-judgejudy-a-m-18boq/voz.mp3",
+    "transcript": {
+        "duration": 76.16000366210938,
+        "text": "Character.ai open-sourced Judge Judy, a multimodal evaluation framework aimed at AI video slop. Video generation quality has raced ahead with models like Kling, Cdance, VO, and Sora, but evaluation has lagged. Frame-level tools such as ClipScore and LPEPS check whether a single frame matches its prompt or drifts from the next one, and say nothing about whether a clip actually told the intended story, kept a character consistent across shots, obeyed physics, or synced its audio to the action. Judge Judy, released under an MIT license, combines AI judges with custom rubrics, automated metrics, and human scoring across text, image, audio, and video, including temporal consistency, frame-to-frame SSIM, and clip temporal metrics with provider for Cdance, Juan, VO3, and Sora 2. This matters because generation is now effectively free compared to studio costs, while judging quality still requires a human. The bottleneck has moved from making video to knowing which video is worth keeping.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Character.ai",
+                "start": 0,
+                "end": 0.495
+            },
+            {
+                "word": "open-sourced",
+                "start": 0.495,
+                "end": 0.989
+            },
+            {
+                "word": "Judge",
+                "start": 0.989,
+                "end": 1.484
+            },
+            {
+                "word": "Judy,",
+                "start": 1.484,
+                "end": 1.978
+            },
+            {
+                "word": "a",
+                "start": 1.978,
+                "end": 2.473
+            },
+            {
+                "word": "multimodal",
+                "start": 2.473,
+                "end": 2.967
+            },
+            {
+                "word": "evaluation",
+                "start": 2.967,
+                "end": 3.462
+            },
+            {
+                "word": "framework",
+                "start": 3.462,
+                "end": 3.957
+            },
+            {
+                "word": "aimed",
+                "start": 3.957,
+                "end": 4.451
+            },
+            {
+                "word": "at",
+                "start": 4.451,
+                "end": 4.946
+            },
+            {
+                "word": "AI",
+                "start": 4.946,
+                "end": 5.44
+            },
+            {
+                "word": "video",
+                "start": 5.44,
+                "end": 5.935
+            },
+            {
+                "word": "slop.",
+                "start": 5.935,
+                "end": 6.43
+            },
+            {
+                "word": "Video",
+                "start": 6.43,
+                "end": 6.924
+            },
+            {
+                "word": "generation",
+                "start": 6.924,
+                "end": 7.419
+            },
+            {
+                "word": "quality",
+                "start": 7.419,
+                "end": 7.913
+            },
+            {
+                "word": "has",
+                "start": 7.913,
+                "end": 8.408
+            },
+            {
+                "word": "raced",
+                "start": 8.408,
+                "end": 8.902
+            },
+            {
+                "word": "ahead",
+                "start": 8.902,
+                "end": 9.397
+            },
+            {
+                "word": "with",
+                "start": 9.397,
+                "end": 9.892
+            },
+            {
+                "word": "models",
+                "start": 9.892,
+                "end": 10.386
+            },
+            {
+                "word": "like",
+                "start": 10.386,
+                "end": 10.881
+            },
+            {
+                "word": "Kling,",
+                "start": 10.881,
+                "end": 11.375
+            },
+            {
+                "word": "Cdance,",
+                "start": 11.375,
+                "end": 11.87
+            },
+            {
+                "word": "VO,",
+                "start": 11.87,
+                "end": 12.364
+            },
+            {
+                "word": "and",
+                "start": 12.364,
+                "end": 12.859
+            },
+            {
+                "word": "Sora,",
+                "start": 12.859,
+                "end": 13.354
+            },
+            {
+                "word": "but",
+                "start": 13.354,
+                "end": 13.848
+            },
+            {
+                "word": "evaluation",
+                "start": 13.848,
+                "end": 14.343
+            },
+            {
+                "word": "has",
+                "start": 14.343,
+                "end": 14.837
+            },
+            {
+                "word": "lagged.",
+                "start": 14.837,
+                "end": 15.332
+            },
+            {
+                "word": "Frame-level",
+                "start": 15.332,
+                "end": 15.827
+            },
+            {
+                "word": "tools",
+                "start": 15.827,
+                "end": 16.321
+            },
+            {
+                "word": "such",
+                "start": 16.321,
+                "end": 16.816
+            },
+            {
+                "word": "as",
+                "start": 16.816,
+                "end": 17.31
+            },
+            {
+                "word": "ClipScore",
+                "start": 17.31,
+                "end": 17.805
+            },
+            {
+                "word": "and",
+                "start": 17.805,
+                "end": 18.299
+            },
+            {
+                "word": "LPEPS",
+                "start": 18.299,
+                "end": 18.794
+            },
+            {
+                "word": "check",
+                "start": 18.794,
+                "end": 19.289
+            },
+            {
+                "word": "whether",
+                "start": 19.289,
+                "end": 19.783
+            },
+            {
+                "word": "a",
+                "start": 19.783,
+                "end": 20.278
+            },
+            {
+                "word": "single",
+                "start": 20.278,
+                "end": 20.772
+            },
+            {
+                "word": "frame",
+                "start": 20.772,
+                "end": 21.267
+            },
+            {
+                "word": "matches",
+                "start": 21.267,
+                "end": 21.761
+            },
+            {
+                "word": "its",
+                "start": 21.761,
+                "end": 22.256
+            },
+            {
+                "word": "prompt",
+                "start": 22.256,
+                "end": 22.751
+            },
+            {
+                "word": "or",
+                "start": 22.751,
+                "end": 23.245
+            },
+            {
+                "word": "drifts",
+                "start": 23.245,
+                "end": 23.74
+            },
+            {
+                "word": "from",
+                "start": 23.74,
+                "end": 24.234
+            },
+            {
+                "word": "the",
+                "start": 24.234,
+                "end": 24.729
+            },
+            {
+                "word": "next",
+                "start": 24.729,
+                "end": 25.224
+            },
+            {
+                "word": "one,",
+                "start": 25.224,
+                "end": 25.718
+            },
+            {
+                "word": "and",
+                "start": 25.718,
+                "end": 26.213
+            },
+            {
+                "word": "say",
+                "start": 26.213,
+                "end": 26.707
+            },
+            {
+                "word": "nothing",
+                "start": 26.707,
+                "end": 27.202
+            },
+            {
+                "word": "about",
+                "start": 27.202,
+                "end": 27.696
+            },
+            {
+                "word": "whether",
+                "start": 27.696,
+                "end": 28.191
+            },
+            {
+                "word": "a",
+                "start": 28.191,
+                "end": 28.686
+            },
+            {
+                "word": "clip",
+                "start": 28.686,
+                "end": 29.18
+            },
+            {
+                "word": "actually",
+                "start": 29.18,
+                "end": 29.675
+            },
+            {
+                "word": "told",
+                "start": 29.675,
+                "end": 30.169
+            },
+            {
+                "word": "the",
+                "start": 30.169,
+                "end": 30.664
+            },
+            {
+                "word": "intended",
+                "start": 30.664,
+                "end": 31.159
+            },
+            {
+                "word": "story,",
+                "start": 31.159,
+                "end": 31.653
+            },
+            {
+                "word": "kept",
+                "start": 31.653,
+                "end": 32.148
+            },
+            {
+                "word": "a",
+                "start": 32.148,
+                "end": 32.642
+            },
+            {
+                "word": "character",
+                "start": 32.642,
+                "end": 33.137
+            },
+            {
+                "word": "consistent",
+                "start": 33.137,
+                "end": 33.631
+            },
+            {
+                "word": "across",
+                "start": 33.631,
+                "end": 34.126
+            },
+            {
+                "word": "shots,",
+                "start": 34.126,
+                "end": 34.621
+            },
+            {
+                "word": "obeyed",
+                "start": 34.621,
+                "end": 35.115
+            },
+            {
+                "word": "physics,",
+                "start": 35.115,
+                "end": 35.61
+            },
+            {
+                "word": "or",
+                "start": 35.61,
+                "end": 36.104
+            },
+            {
+                "word": "synced",
+                "start": 36.104,
+                "end": 36.599
+            },
+            {
+                "word": "its",
+                "start": 36.599,
+                "end": 37.093
+            },
+            {
+                "word": "audio",
+                "start": 37.093,
+                "end": 37.588
+            },
+            {
+                "word": "to",
+                "start": 37.588,
+                "end": 38.083
+            },
+            {
+                "word": "the",
+                "start": 38.083,
+                "end": 38.577
+            },
+            {
+                "word": "action.",
+                "start": 38.577,
+                "end": 39.072
+            },
+            {
+                "word": "Judge",
+                "start": 39.072,
+                "end": 39.566
+            },
+            {
+                "word": "Judy,",
+                "start": 39.566,
+                "end": 40.061
+            },
+            {
+                "word": "released",
+                "start": 40.061,
+                "end": 40.556
+            },
+            {
+                "word": "under",
+                "start": 40.556,
+                "end": 41.05
+            },
+            {
+                "word": "an",
+                "start": 41.05,
+                "end": 41.545
+            },
+            {
+                "word": "MIT",
+                "start": 41.545,
+                "end": 42.039
+            },
+            {
+                "word": "license,",
+                "start": 42.039,
+                "end": 42.534
+            },
+            {
+                "word": "combines",
+                "start": 42.534,
+                "end": 43.028
+            },
+            {
+                "word": "AI",
+                "start": 43.028,
+                "end": 43.523
+            },
+            {
+                "word": "judges",
+                "start": 43.523,
+                "end": 44.018
+            },
+            {
+                "word": "with",
+                "start": 44.018,
+                "end": 44.512
+            },
+            {
+                "word": "custom",
+                "start": 44.512,
+                "end": 45.007
+            },
+            {
+                "word": "rubrics,",
+                "start": 45.007,
+                "end": 45.501
+            },
+            {
+                "word": "automated",
+                "start": 45.501,
+                "end": 45.996
+            },
+            {
+                "word": "metrics,",
+                "start": 45.996,
+                "end": 46.49
+            },
+            {
+                "word": "and",
+                "start": 46.49,
+                "end": 46.985
+            },
+            {
+                "word": "human",
+                "start": 46.985,
+                "end": 47.48
+            },
+            {
+                "word": "scoring",
+                "start": 47.48,
+                "end": 47.974
+            },
+            {
+                "word": "across",
+                "start": 47.974,
+                "end": 48.469
+            },
+            {
+                "word": "text,",
+                "start": 48.469,
+                "end": 48.963
+            },
+            {
+                "word": "image,",
+                "start": 48.963,
+                "end": 49.458
+            },
+            {
+                "word": "audio,",
+                "start": 49.458,
+                "end": 49.953
+            },
+            {
+                "word": "and",
+                "start": 49.953,
+                "end": 50.447
+            },
+            {
+                "word": "video,",
+                "start": 50.447,
+                "end": 50.942
+            },
+            {
+                "word": "including",
+                "start": 50.942,
+                "end": 51.436
+            },
+            {
+                "word": "temporal",
+                "start": 51.436,
+                "end": 51.931
+            },
+            {
+                "word": "consistency,",
+                "start": 51.931,
+                "end": 52.425
+            },
+            {
+                "word": "frame-to-frame",
+                "start": 52.425,
+                "end": 52.92
+            },
+            {
+                "word": "SSIM,",
+                "start": 52.91999816894531,
+                "end": 53.70000076293945
+            },
+            {
+                "word": "and",
+                "start": 54.099998474121094,
+                "end": 54.7400016784668
+            },
+            {
+                "word": "clip",
+                "start": 54.7400016784668,
+                "end": 55.02000045776367
+            },
+            {
+                "word": "temporal",
+                "start": 55.02000045776367,
+                "end": 55.459999084472656
+            },
+            {
+                "word": "metrics",
+                "start": 55.459999084472656,
+                "end": 55.959999084472656
+            },
+            {
+                "word": "with",
+                "start": 55.959999084472656,
+                "end": 56.540000915527344
+            },
+            {
+                "word": "provider",
+                "start": 56.540000915527344,
+                "end": 57.040000915527344
+            },
+            {
+                "word": "for",
+                "start": 57.040000915527344,
+                "end": 57.47999954223633
+            },
+            {
+                "word": "Cdance,",
+                "start": 57.47999954223633,
+                "end": 58.099998474121094
+            },
+            {
+                "word": "Juan,",
+                "start": 58.560001373291016,
+                "end": 58.880001068115234
+            },
+            {
+                "word": "VO3,",
+                "start": 59.41999816894531,
+                "end": 60.220001220703125
+            },
+            {
+                "word": "and",
+                "start": 60.68000030517578,
+                "end": 61.02000045776367
+            },
+            {
+                "word": "Sora",
+                "start": 61.02000045776367,
+                "end": 61.02000045776367
+            },
+            {
+                "word": "2.",
+                "start": 61.02000045776367,
+                "end": 61.52000045776367
+            },
+            {
+                "word": "This",
+                "start": 62.599998474121094,
+                "end": 62.97999954223633
+            },
+            {
+                "word": "matters",
+                "start": 62.97999954223633,
+                "end": 63.31999969482422
+            },
+            {
+                "word": "because",
+                "start": 63.31999969482422,
+                "end": 63.779998779296875
+            },
+            {
+                "word": "generation",
+                "start": 63.779998779296875,
+                "end": 64.33999633789062
+            },
+            {
+                "word": "is",
+                "start": 64.33999633789062,
+                "end": 64.5999984741211
+            },
+            {
+                "word": "now",
+                "start": 64.5999984741211,
+                "end": 64.86000061035156
+            },
+            {
+                "word": "effectively",
+                "start": 64.86000061035156,
+                "end": 65.33999633789062
+            },
+            {
+                "word": "free",
+                "start": 65.33999633789062,
+                "end": 65.87999725341797
+            },
+            {
+                "word": "compared",
+                "start": 65.87999725341797,
+                "end": 66.33999633789062
+            },
+            {
+                "word": "to",
+                "start": 66.33999633789062,
+                "end": 66.68000030517578
+            },
+            {
+                "word": "studio",
+                "start": 66.68000030517578,
+                "end": 67.0999984741211
+            },
+            {
+                "word": "costs,",
+                "start": 67.0999984741211,
+                "end": 67.54000091552734
+            },
+            {
+                "word": "while",
+                "start": 67.9800033569336,
+                "end": 68.26000213623047
+            },
+            {
+                "word": "judging",
+                "start": 68.26000213623047,
+                "end": 68.55999755859375
+            },
+            {
+                "word": "quality",
+                "start": 68.55999755859375,
+                "end": 69.12000274658203
+            },
+            {
+                "word": "still",
+                "start": 69.12000274658203,
+                "end": 69.5999984741211
+            },
+            {
+                "word": "requires",
+                "start": 69.5999984741211,
+                "end": 69.94000244140625
+            },
+            {
+                "word": "a",
+                "start": 69.94000244140625,
+                "end": 70.4800033569336
+            },
+            {
+                "word": "human.",
+                "start": 70.4800033569336,
+                "end": 70.4800033569336
+            },
+            {
+                "word": "The",
+                "start": 71,
+                "end": 71.54000091552734
+            },
+            {
+                "word": "bottleneck",
+                "start": 71.54000091552734,
+                "end": 71.94000244140625
+            },
+            {
+                "word": "has",
+                "start": 71.94000244140625,
+                "end": 72.27999877929688
+            },
+            {
+                "word": "moved",
+                "start": 72.27999877929688,
+                "end": 72.66000366210938
+            },
+            {
+                "word": "from",
+                "start": 72.66000366210938,
+                "end": 72.95999908447266
+            },
+            {
+                "word": "making",
+                "start": 72.95999908447266,
+                "end": 73.27999877929688
+            },
+            {
+                "word": "video",
+                "start": 73.27999877929688,
+                "end": 73.62000274658203
+            },
+            {
+                "word": "to",
+                "start": 73.62000274658203,
+                "end": 73.9000015258789
+            },
+            {
+                "word": "knowing",
+                "start": 73.9000015258789,
+                "end": 74.0999984741211
+            },
+            {
+                "word": "which",
+                "start": 74.0999984741211,
+                "end": 74.44000244140625
+            },
+            {
+                "word": "video",
+                "start": 74.44000244140625,
+                "end": 74.80000305175781
+            },
+            {
+                "word": "is",
+                "start": 74.80000305175781,
+                "end": 75.0999984741211
+            },
+            {
+                "word": "worth",
+                "start": 75.0999984741211,
+                "end": 75.36000061035156
+            },
+            {
+                "word": "keeping.",
+                "start": 75.36000061035156,
+                "end": 75.72000122070312
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 76.16000366210938,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 6.43,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "video slop",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "JUDGE JUDY",
+                            "lines": [
+                                "Character.AI eval harness",
+                                "Open source · multimodal"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.43,
+                "end": 15.332,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "lagged",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "items": [
+                                {
+                                    "label": "Veo 3, native audio",
+                                    "sublabel": "May 2025"
+                                },
+                                {
+                                    "label": "Sora 2 launches",
+                                    "sublabel": "Sept 2025"
+                                },
+                                {
+                                    "label": "Kling $240M run rate",
+                                    "sublabel": "Dec 2025"
+                                },
+                                {
+                                    "label": "Kling raises $2.8B",
+                                    "sublabel": "July 2026",
+                                    "highlight": true
+                                }
+                            ],
+                            "caption": "Generation raced ahead"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.332,
+                "end": 25.718,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "single frame",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Frame-level metrics",
+                            "items": [
+                                "SSIM — 2004",
+                                "LPIPS — 2018",
+                                "CLIPScore — 2021",
+                                "One frame, or two"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.718,
+                "end": 34.621,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "intended story",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "They score",
+                                "points": [
+                                    "One frame vs its prompt",
+                                    "Drift to the next frame"
+                                ]
+                            },
+                            "right": {
+                                "title": "A clip needs",
+                                "points": [
+                                    "The intended story",
+                                    "One character, many shots"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.621,
+                "end": 39.072,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "obeyed physics",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Still unscored",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Action on screen"
+                                },
+                                {
+                                    "label": "Physics obeyed"
+                                },
+                                {
+                                    "label": "Audio in sync",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 39.072,
+                "end": 62.6,
+                "background": "vellum",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "MIT license",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Judge Judy · MIT",
+                            "items": [
+                                "AI judges",
+                                "Custom rubrics",
+                                "Automated metrics",
+                                "Human scoring"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 62.6,
+                "end": 71,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "effectively free",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "Cost to generate",
+                            "unit": "USD per second",
+                            "bars": [
+                                {
+                                    "label": "Sora 2 720p",
+                                    "value": 0.1,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Veo 3.1 Fast",
+                                    "value": 0.1
+                                },
+                                {
+                                    "label": "Veo 3.1 audio",
+                                    "value": 0.4
+                                },
+                                {
+                                    "label": "Sora 2 Pro",
+                                    "value": 0.7
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 71,
+                "end": 76.16,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "worth keeping",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "The bottleneck moved",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Making video"
+                                },
+                                {
+                                    "label": "Knowing what to keep",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/characterai-open-sourced-judgejudy-a-m-18boq/clip.mp4",
+    "error": null
+}

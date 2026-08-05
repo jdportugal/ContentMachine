@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Brock Mesarich | AI for Non Techies'
 data: '2026-07-10'
 url: 'https://www.youtube.com/watch?v=qotnt0fzT5Y'
-thumbnail: 'https://i.ytimg.com/vi_webp/qotnt0fzT5Y/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/qotnt0fzT5Y/maxresdefault.jpg'
+descricao: '📚 Join My Skool Community: https://bit.ly/4t2yNgG 🔥 Get My 15 Claude Skills I Can''t Live Without: https://bit.ly/4vYG9Vh 🔗 Connect to 9,000+ Apps with Zapier MCP: https://bit.ly/3R5N3Za OpenAI just released ChatGPT Work, and it looks almost exactly like Claude Cowork. In this video I walk through everything new including the GPT-5.6 models, test it across the web, mobile, and desktop apps, and run a real task that builds a morning briefing from my calendar and email. I also break down how it compares to Claude Cowork feature by feature, plus the one th 0:00 - ChatGPT Work Just Dropped 0:48 - Where You Can Use It (Web, Mobile, Desktop) 2:31 - Live Demo: Morning Briefing "Site" 3:06 - ChatGPT Work vs Claude Cowork 4:22 - Moving Your Claude Skills into ChatGPT Work 6:35 - Plugins + the Zap...'
+resumo: 'O vídeo apresenta o novo ChatGPT Work da OpenAI (uma versão do Codex para utilizadores não técnicos, acessível na web, ambiente de trabalho e telemóvel), a par do novo modelo GPT-5.6, mostrando a interface, os modos de utilização e a sincronização entre dispositivos. Faz ainda a comparação com o Claude Cowork da Anthropic para avaliar se o substitui.'
 tags:
   - 'chatgpt work'
   - 'chatgpt work demo'
@@ -41,308 +43,308 @@ OpenAI just released ChatGPT Work, and it looks almost exactly like Claude Cowor
 
 ## Transcrição
 
-A OpenAI acaba de abandonar o trabalho de GPT em chats, e
-esta é a versão deles do trabalho colaborativo de Claude.
-É basicamente o aplicativo Codex, mas para
-pessoas sem conhecimentos técnicos. E poderíamos
-acessar isso em alguns
-lugares diferentes. Podemos usar isso no aplicativo web de bate-papo GPT
-, bem como no aplicativo para desktop e
-no aplicativo para dispositivos móveis. Então, neste vídeo, vou
-abordar todas as novidades
-desta versão. Vou até
-comparar com o Claude Co-Work, porque
-algumas pessoas vão chamar isso de "o
-assassino do Claude Co-Work". Então, vamos
-colocar isso à prova. Portanto, se você usa um ambiente de
-trabalho colaborativo ou um aplicativo de bate-papo com pagamento por desempenho (GPT), este
-vídeo será extremamente relevante
-para você. Então, sem mais delongas, vamos
-direto ao assunto. Gostaria de
-mencionar rapidamente que eles também lançaram o
-modelo GPT 5.6, que é o modelo de linguagem mais recente para grandes linguagens
-. E é isso que
-realmente está impulsionando o funcionamento do GPT em chats. Assim,
-além dessa nova forma de interagir com o
-chat GPT, também ganhamos um novo
-modelo mais poderoso. Agora, vamos falar sobre
-onde podemos usar isso. Como vocês podem
-ver aqui, estou no chat.openai.com,
-que é o aplicativo web deles. E esta é a
-interface que veremos logo de início
-. E bem no topo, você
-pode ver que está escrito "chat", e
-agora há este botão de trabalho bem aqui. Se eu
-clicar em "trabalho", veremos algumas
-coisas diferentes. Então, temos
-aqui nossa caixa de texto normal, que
-nos permite trabalhar dentro de
-projetos específicos. E então pudemos ver todos os
-nossos conectores bem aqui. Então, qualquer um dos
-aplicativos aos quais quisermos nos conectar. Em seguida,
-temos o modelo 5.6 que foi selecionado.
-Podíamos alternar entre o 5.6 Teralight,
-que é o modelo mais rápido deles, e o
-5.6 Sole Ultra, que é o
-modelo mais potente. Outro lugar onde
-poderíamos usar isso é no aplicativo móvel de bate-papo GPT
-, como você pode ver aqui, que foi
-aberto. Então, para acessarmos
-isso, ao abrirmos um novo chat,
-veremos a opção "Chat" bem no topo.
-Vamos clicar ali e depois
-em "Trabalhar". Isso nos leva agora
-ao trabalho com GPT (Get-Point Transfer), e podemos começar a
-executar diferentes tarefas aqui. Ele
-nos oferece até mesmo algumas tarefas de teste diferentes
-que podemos executar, e então
-podemos selecionar qual modelo queremos
-usar. Gostaria de mencionar que
-tudo o que fazemos no aplicativo de bate-papo GPT
-no computador, também podemos fazer no
-aplicativo para celular. Então, como vocês podem ver, eu
-gerei essa imagem com a habilidade que eu
-carreguei no meu computador, e eu consigo
-acessar esse chat diretamente no meu celular.
-Assim, eles se sincronizam entre nossos diferentes
-dispositivos. E essa é uma funcionalidade
-que a Anthropic lançou no Claude
-Co-work ontem mesmo. Eles adicionaram o
-Claude Co-work para dispositivos móveis, que
-basicamente permite sincronizar qualquer tarefa do Co-work
-do seu celular para o seu computador
-também. Agora, o próximo lugar onde poderíamos usar
-isso é dentro do aplicativo ChatGPT para desktop
-. E o motivo de eu estar mostrando
-isso aqui, e não dentro
-deste aplicativo, é porque, por algum motivo,
-não tenho acesso a isso no
-meu aplicativo para desktop neste momento. Mas, como você pode ver à
-esquerda, o ChatGPT está ativado
-. E também podemos selecionar
-diferentes pastas em nosso computador para
-trabalhar, assim como você pode fazer
-no Claude Co-work. Para demonstrar
-isso na prática, vim aqui e
-dei a seguinte tarefa: "Gere um
-resumo matinal em HTML." O que aconteceu foi que o programa analisou
-meu Google
-Agenda, meu Gmail e até verificou a previsão do
-tempo em Denver e as diferentes
-prioridades de criação de conteúdo para mim. E então me deu
-este HTML aqui que eu pude abrir da mesma forma que
-faço dentro do Claude
-Co-work. Mas, no contexto do ChatGPT,
-isso não é chamado de artefato como
-estamos acostumados a ver no Claude. Isso se
-chama site. É assim que o ChatGPT
-chama isso. Basicamente, aparece "
-Bom dia, Brock". Isso mostra as principais
-coisas que preciso abordar hoje. Mostra
-tudo no meu calendário. E ainda
-me oferece um filtro de decisão bem
-aqui. Em seguida, quero falar sobre as
-semelhanças entre o trabalho com o ChatGPT e o
-Claude Co-work, que estamos tão acostumados a
-usar. Além disso, também falaremos
-sobre o Codex e o Claude Code, e como eles se
-comparam e se posicionam em relação a esses.
-E então vamos discutir
-se isso substitui ou não a sua necessidade
-de usar o Claude Co-work, caso você
-já tenha configurado um sistema que esteja funcionando
-para você lá. Em seguida, mostrarei
-mais alguns casos de uso que você pode testar
-para entender as funcionalidades
-disso. Então, em primeiro lugar, temos o Claude
-Co-work, que possui habilidades, artefatos ao vivo
-e tarefas agendadas. Bem, o
-funcionamento do ChatGPT é basicamente a mesma
-coisa. Temos habilidades, temos sites,
-que são exatamente a mesma coisa que
-artefatos ativos, e também temos
-tarefas agendadas que podemos executar dentro
-do ChatGPT. E, caso você não saiba
-o que é Claude Co-work, Claude Co-work
-é a versão não técnica do Claude
-Code. Assim, em vez de usar o Claude para
-tarefas de programação, poderíamos fazer com que o Claude trabalhasse
-dentro das pastas e arquivos do nosso
-computador. Então, ele realmente poderia fazer o
-trabalho que fazemos no computador
-. Agora, o ChatGPT funciona exatamente da mesma
-forma. É basicamente o Codex para
-leigos em tecnologia. E, caso você não saiba o que
-é Codex, o Codex é a plataforma de IA agética da OpenAI
-, muito semelhante ao código Claude.
-É realmente poderoso. Você pode criar
-agentes específicos, subagentes, executar
-tarefas agendadas, etc. Mas é voltado
-principalmente para desenvolvedores. Assim, agora,
-dentro do trabalho do ChatGPT, temos praticamente o
-mesmo poder de fogo que o Codex. Agora, se
-você é usuário do Claude, provavelmente está se
-perguntando: "Brock, será que perdi os
-últimos 6 meses desenvolvendo dentro do Claude
-Co-work, já que o ChatGPT já está disponível?"
-E para responder a essa pergunta de forma bem simples,
-se algum dia você quiser mudar de um espaço de
-coworking para um escritório tradicional, é muito fácil fazer isso,
-porque eles funcionam fundamentalmente da
-mesma maneira. Por exemplo, dentro da Claude
-Co-work, desenvolvemos habilidades específicas, que
-são diferentes automações que nossos
-agentes podem executar, pois são simplesmente um
-conjunto claro de instruções para que um agente
-realize uma tarefa específica. E se você for
-como eu, provavelmente já
-acumulou 10, 20, 50 habilidades diferentes
-que usa diariamente dentro do Claude.
-A boa notícia é que, como esses são
-arquivos skill.md, podemos integrá-los
-diretamente ao ChatGPT. Então, poderíamos
-migrar se quiséssemos. Para
-mostrar o que quero dizer, aqui está uma
-habilidade do Claude que eu criei chamada "
-Infográfico Explicativo". Então, este é um conjunto de
-instruções para gerar
-imagens explicativas, e eu o elaborei
-nos últimos dois meses no
-Claude Co-work. Agora, vou mostrar
-como eu poderia simplesmente pegar isso do
-Claude e carregar no ChatGPT para
-obter exatamente o mesmo resultado, já que é
-o mesmo conjunto de instruções para a
-tarefa específica. Então, vou vir
-aqui e clicar em baixar habilidade. Vou
-salvar na minha área de trabalho. E a partir
-daqui, vou simplesmente
-abrir o ChatGPT. Para acessar
-suas habilidades dentro do ChatGPT,
-vamos até o lado esquerdo,
-onde aparecem os plugins. E aqui,
-vamos clicar em habilidades. Como você pode
-ver, eu já adicionei alguns, mas
-vou clicar em adicionar, clicar em fazer
-upload do seu computador e, em seguida,
-vou arrastar o arquivo MD da habilidade que
-acabamos de baixar do Claude. Pronto, assim, sem mais nem menos
-, já temos a
-habilidade de infográfico explicativo carregada. E se eu
-clicar, são exatamente as mesmas
-instruções que vimos antes em
-Claude. Para executar isso, eu
-poderia simplesmente clicar e digitar "
-infográfico explicativo". Então,
-digamos que eu queira que você crie um
-infográfico explicando como o ChatGPT
-funciona. Então agora ele vai executar e
-gerar essa imagem para mim. E a melhor
-parte é que, como estou usando o ChatGPT em vez
-do Claude, o ChatGPT possui uma
-ferramenta nativa de geração de imagens. Assim, ele consegue
-gerar a imagem sem precisar usar
-algo como o algoritmo de Higgsfield, por exemplo.
-Porque antes precisaríamos adicionar
-um conector específico que nos permitisse
-gerar imagens, mas o ChatGPT já possui esse
-recurso integrado. E aqui
-está o resultado. É exatamente assim que
-ficaria dentro do Claude,
-porque utiliza a mesma habilidade. Agora,
-assim como Claude, podemos trabalhar dentro
-dos diferentes aplicativos que utilizamos. Então,
-seja usando ferramentas como Gmail, Google
-Agenda, Slack, etc., podemos extrair
-informações dessas plataformas, bem como enviar
-e-mails e coisas do tipo. Portanto, em vez de serem
-chamados de conectores,
-são chamados de plugins. Então, deixe-me mostrar
-como adicionar um muito rapidamente. Então você
-vai clicar nesse pequeno
-botão de plugins e clicar em conectar plugins. Vou
-clicar em "Ver todos os plugins". E a partir
-daqui, podemos selecionar qualquer uma das
-diferentes opções que utilizamos. Agora,
-digamos que haja um aplicativo específico ao qual você deseja se conectar, mas que
-não consegue encontrar
-aqui. Então, vou mostrar um
-truque de como você pode fazer isso. Então,
-vamos usar algo chamado Zapier
-MCP. Se você quiser experimentar,
-o link está na descrição abaixo. Caso você
-não saiba o que é isso, trata-se de uma
-plataforma que permite conectar-se a
-mais de 9.000 aplicativos diferentes. E se você
-não estiver usando isso de verdade, acho que está
-perdendo algumas das vantagens de
-usar o Claude e agora o ChatGPT. Portanto,
-para configurar um servidor MCP e
-conectar-se a qualquer um desses 9.000
-aplicativos diferentes, precisamos fazer algumas coisas
-. Em seguida, vamos acessar os plugins
-e, dentro deles, clicar no
-botão de adição (+). A partir daqui, vamos apenas
-adicionar o nome Zapier. Então, o que
-vou fazer é acessar o Painel de
-Controle do Zapier, clicar em "Novo servidor MCP",
-clicar em "ChatGPT" e clicar neste botão para
-ativar o modo de desenvolvedor. Então, vou
-rolar a página para baixo e verificar se esta opção está ativada, assim
-como este botão aqui. Em
-seguida, basta copiar este URL. Vamos simplesmente
-colar isso, clicar em "
-Entendi" e depois em "Criar". A
-partir daqui, basta entrarmos na
-nossa conta do Zapier e a
-instalação deverá estar concluída. Então, dentro desse
-servidor MCP, poderíamos simplesmente adicionar qualquer um dos
-aplicativos que quiséssemos. Por exemplo, eu uso o Beehiiv
-porque é um aplicativo que utilizo para gerenciar
-meu marketing por e-mail, e não consigo me conectar
-a ele diretamente dentro do ChatGPT. Então,
-eu poderia vir, clicar em "Adicionar aplicativos" e adicionar
-qualquer um deles, e poderíamos tê-los
-adicionados em segundos. Em seguida, poderíamos
-executar tarefas agendadas diretamente dentro do fluxo de
-trabalho do ChatGPT. Assim, poderíamos executar tarefas
-como resumos diários de e-mails, monitoramento de e-mails,
-análise de tendências de conteúdo por IA e, basicamente,
-qualquer uma dessas automações que
-temos no Claude pode ser migrada
-diretamente para o ChatGPT. Agora, vamos falar
-sobre o que provavelmente é o elefante na sala.
-É necessário que você migre
-para o ChatGPT em vez de usar o Claude
-Co-work? E a resposta é não. Como
-ambas funcionam fundamentalmente da
-mesma maneira, você pode trabalhar em pastas específicas
-do seu computador com diferentes habilidades
-e tarefas agendadas, etc. Você pode
-escolher qual plataforma deseja
-usar. Por exemplo, se um novo modelo
-da OpenAI for lançado e você realmente
-quiser testá-lo por ser mais capaz
-que o modelo Anthropic mais recente, você pode
-usar o aplicativo ChatGPT Work e
-compará-lo com o Co-work. Assim, à medida que
-continuamos a desenvolver nossos
-sistemas operacionais em qualquer uma dessas diferentes
-aplicações, eles não estão necessariamente
-presos a essa plataforma em particular.
-E pronto, esse é o
-trabalho do ChatGPT. Espero que este vídeo tenha respondido a
-algumas perguntas. Pessoalmente, sou
-um usuário avançado do Cowork. Sim, é
-legal testar isso com os modelos mais recentes
-da Anthropic para ver o quão capaz
-é, mas pessoalmente provavelmente
-vou continuar usando o
-ecossistema Claude, já que gosto de como ele
-funciona. Mas não se preocupe. Se você quiser
-migrar, é muito fácil, como
-mencionei neste vídeo. De qualquer forma, deixe
-sua opinião nos comentários.
-Você vai mudar? Inscreva-se neste
-canal para mais conteúdo como este e nos
-vemos no próximo vídeo.
+Open AI just dropped chat GPT work, and
+this is their version of Claude co-work.
+This is basically the Codex app, but for
+non-technical people. And we could
+access this in a couple of different
+places. We can use this in the chat GPT
+web app, as well as the desktop app and
+the mobile app. So, in this video, I'm
+going to go over everything that is new
+with this release. I'm even going to
+compare it to Claude co-work, because
+some people are going to call this the
+Claude co-work killer. So, we're going
+to put it to the test. So, if you are a
+co-work user or a chat GPT user, this
+video is going to be extremely relevant
+for you. So, without further ado, let's
+dive right in. Now, I do want to quickly
+mention that they also launched the GPT
+5.6 model, which is their newest large
+language model. And this is what is
+actually powering chat GPT work. So, on
+top of this new way to interact with
+chat GPT, we also get a new more
+powerful model. Now, let's talk about
+where we can use this. So, as you can
+see right here, I'm on chat.openai.com,
+which is their web app. And this is the
+interface that we're going to see right
+off the bat. And at the very top, you
+can see that it says chat, and there is
+now this work button right here. If I
+click on work, we're going to see a
+couple of different things. So, we have
+our normal text box here, and then it
+allows us to work inside of specific
+projects. And then we could see all of
+our connectors right here. So, any of
+the apps we want to connect to. Then we
+have the 5.6 model that is selected. We
+could toggle between 5.6 teralight,
+which is their fastest model, all the
+way up to 5.6 sole ultra, which is their
+most capable model. The next place we
+could use this is the chat GPT mobile
+app, as you could see right here pulled
+up. And so, how we are able to access
+this is when we pull up a new chat,
+we're going to see chat at the very top.
+We're going to click on that, and we're
+going to click on work. This now brings
+us to chat GPT work, and we could begin
+performing different tasks here. It even
+gives us a couple of different test
+tasks that we could run, and then we
+could also select which model we want to
+use. Now, I do want to mention that
+anything that we do on the chat GPT app
+on our computer, we can do on our mobile
+app as well. So, you could see that I
+generated that image with that skill I
+uploaded on my computer, and I can
+access this chat directly on my phone.
+So, they sync between our different
+devices. And this is actually a feature
+that Anthropic just released into Claude
+Co-work literally yesterday. They added
+Claude Co-work for mobile, which
+basically allows you to sync any Co-work
+task from your phone to your computer as
+well. Now, the next place we could use
+this is inside of the ChatGPT desktop
+app. And the reason that I'm showing
+this right here and not me inside of
+this app is because for whatever reason,
+I don't have access to this right now on
+my desktop app. But as you can see on
+the left, we have ChatGPT work toggled
+on. And then we can also select
+different folders on our computer to
+work inside of just like you can do
+inside of Claude Co-work. Now, to show
+this live in action, I came here and I
+gave it the task, "Give me a morning
+briefing HTML." What it did is it went
+ahead, it looked through my Google
+Calendar, my Gmail, even looked at
+Denver's weather and different creator
+priorities for me. And then it gave me
+this HTML here that I could pull up just
+like I could do inside of Claude
+Co-work. But inside of ChatGPT work,
+this is not called an artifact like
+we're used to inside of Claude. This is
+called a site. That is what ChatGPT
+calls this. So, basically it just shows
+good morning, Brock. It shows my main
+things for me to tackle today. Shows
+everything on my calendar. And then it
+even gives me a decision filter right
+here. Next up, I want to talk about the
+similarities between ChatGPT work and
+Claude Co-work that we are so used to
+using. As well as we're going to talk
+about Codex and Claude Code and how it
+compares and stacks up to those as well.
+And then we're going to talk about
+whether or not this replaces your need
+for using Claude Co-work if you've
+already set up a system that's working
+for you there. Then I'll show you a
+couple more use cases that you can test
+out to understand the capabilities of
+this. So, first of all, we have Claude
+Co-work, which has skills, live
+artifacts, and scheduled tasks. Well,
+ChatGPT work is basically the exact same
+thing. We have skills, we have sites,
+which is exact same thing as live
+artifacts, and then we also have
+scheduled tasks that we could run inside
+of ChatGPT work. And if you don't know
+what Claude Co-work is, Claude Co-work
+is the non-technical version of Claude
+Code. So, instead of using Claude for
+coding tasks, we could have Claude work
+inside of the folders and files on our
+computer. So, it could really do the
+work that we can do on our computer for
+us. Now, ChatGPT work is the exact same
+thing. It is basically just Codex for
+non-techies. And if you don't know what
+Codex is, Codex is OpenAI's agentic AI
+platform, very similar to Claude code.
+It's really powerful. You could build
+specific agents, sub-agents, run
+scheduled tasks, etc. But, it's geared
+more towards developers. And so, now
+inside of ChatGPT work, we kind of get
+that same firepower as Codex. Now, if
+you are a Claude user, you're probably
+asking like, "Brock, have I wasted the
+last 6 months building inside of Claude
+Co-work since ChatGPT work is now out?"
+And to answer that question very simply,
+if you ever did want to switch from
+Co-work to Work, it's very simple to do
+because they work fundamentally the
+same. So, for example, inside of Claude
+Co-work, we build specific skills, which
+are different automations that our
+agents can run because they are just a
+clear set of instructions for an agent
+to do a specific task. And if you're
+anything like me, you've probably
+accumulated 10, 20, 50 different skills
+that you run daily inside of Claude.
+Now, the good thing is, since these are
+skill.md files, we can plug these
+directly into ChatGPT work. So, we could
+migrate if we want to. Now, in order to
+show you what I mean, here is a Claude
+skill that I've created called Explainer
+Infographic. So, this is a set of
+instructions in order to generate
+explainer images, and I've crafted this
+the last couple of months inside of
+Claude Co-work. Now, I'm going to show
+you how simply I could take this from
+Claude and upload it into ChatGPT work
+and get the exact same output since it's
+the same set of instructions for the
+specific task. So, I'm just going to
+come over here, click on download skill.
+I'm going to save it to my desktop. And
+then from here, I'm just going to pull
+up ChatGPT work. And in order to access
+your skills inside of ChatGPT, we're
+going to come over to the left-hand side
+where it shows plugins. And then here,
+we're going to click on skills. You can
+see I have a couple already added, but
+I'm just going to click add, click
+upload from your computer, and then I'm
+going to drag in that skill MD file that
+we just downloaded from Claude. Now,
+just like that, we have the explanatory
+infographic skill uploaded. And if I
+click on it, it's that exact same set of
+instructions that we saw earlier in
+Claude. Now, in order to run this, I
+could just click at and then type in
+explanatory infographic. Then let's just
+say, I want you to generate an
+infographic explaining how ChatGPT work
+works. And so now it's going to run and
+generate this image for me. And the best
+part is, since I'm using ChatGPT instead
+of Claude, ChatGPT has a native image
+generation tool. So it's able to
+generate the image without having to use
+something like Higgsfield, for example.
+Because before we would have had to add
+a specific connector that allows us to
+generate images, but ChatGPT has this
+feature built in. And here we go, here
+is the output. This is exactly what this
+would look like inside of Claude,
+because it's using the same skill. Now,
+just like Claude, we can work inside of
+the different applications we use. So
+whether we use things like Gmail, Google
+Calendar, Slack, etc., we could pull
+information from there, as well as send
+emails and stuff like that. So instead
+of these being called connectors, they
+are called plugins. So let me show you
+how to add one very quickly. So you're
+going to click on this little plugins
+button, click connect plugins. I'm going
+to click on browse all plugins. And from
+here, we could select any of the
+different ones that we use. Now, let's
+say there's an app you want to connect
+to in particular that you can't find
+right here. So I'm going to show you a
+hack on how you can do that. So we're
+going to use something called the Zapier
+MCP. If you want to try it out, there's
+a link in the description below. If you
+don't know what this is, this is a
+platform that allows you to connect to
+9,000 plus different apps. And if you're
+not using it honestly, I think you're
+missing out on some of the powers of
+using Claude and now ChatGPT work. So in
+order to set up an MCP server and
+connect to any of those 9,000 different
+apps, there's a couple things we need to
+do. Next, we're going to come to plugins
+and then under plugins, click this plus
+button. From here, we're just going to
+add the name Zapier. And then what I'm
+going to do is I'm going to come to
+Zapier MCP, click on new MCP server,
+click ChatGPT, click this button to turn
+on developer mode. So I'm just going to
+scroll down, make sure this is enabled
+as well as this button right here. And
+then just copy this URL. We're just
+going to paste this in, click
+understand, and then click create. Then
+from here, we just have to sign in to
+our Zapier account, and then we should
+have it installed. Then inside of that
+MCP server, we could just add any of the
+apps we want. For example, I use Beehiiv
+because this is an app that I use to run
+my email marketing, and I can't connect
+to this directly inside of ChatGPT. So,
+I could come and click add apps and add
+any of these, and we could have them
+added in seconds. Now, next up, we could
+run scheduled tasks directly inside of
+ChatGPT work. So, we could run things
+like daily email briefs, email monitor,
+AI content trend scanner, and basically
+any of these different automations we
+have inside of Claude we can migrate
+directly to ChatGPT. Now, let's talk
+about probably the elephant in the room.
+Is it necessary for you to switch over
+to ChatGPT work instead of using Claude
+Co-work? And the answer is no. Since
+these do both work fundamentally the
+same, you could work in specific folders
+on your computer with different skills
+and scheduled tasks, etc. You can pick
+and choose which platform you want to
+use. So, for example, if a new model
+comes out from OpenAI that you really
+want to test because it's more capable
+than the latest Anthropic model, you can
+switch over to the ChatGPT work app and
+test it out compared to Co-work. So, as
+we continue to build out our operating
+systems in either of these different
+applications, they aren't necessarily
+stuck to that platform in particular.
+And there we have it, that is ChatGPT
+work. Hopefully, this video answered
+some questions. For me personally, I am
+a Co-work power user. So, yes, it is
+cool testing this out with the newest
+models from Anthropic to see how capable
+it is, but I personally I'm probably
+going to stick to using the Claude
+ecosystem since I just like the way it
+works. But, do not worry. If you do want
+to migrate, it's very easy as I
+mentioned in this video. Anyways, let me
+know your thoughts in the comments. Are
+you going to switch? Subscribe to this
+channel for more content like this, and
+I'll see you in the next video.

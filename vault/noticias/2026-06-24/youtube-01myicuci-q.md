@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Charlie Automates'
 data: '2026-06-24'
 url: 'https://www.youtube.com/watch?v=01mYICuCI_Q'
-thumbnail: 'https://i.ytimg.com/vi_webp/01mYICuCI_Q/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/01mYICuCI_Q/maxresdefault.jpg'
+descricao: 'Work With Me (Solve Your Revenue Bottleneck with Charlie OS in 60-days): https://charlieautomates.com/charlie-os-vs/ ———————————— Join my community with 3,200+ business owners (choose premium for weekly calls): https://www.skool.com/cc-strategic-ai/about ———————————— 🔑 Resources: REPOS: SEED - https://www.charlieautomates.com/free-resources/#seed PAUL - https://www.charlieautomates.com/free-resources/#paul-plugin Video Tutorials: Graphify Tutorial - https://youtu.be/EKbQ5sajVxA?si=M-9Z9hTfPz-jPJVp Hermes VPS Setup - https://youtu.be/UWhc6Uwkl-c?si=Fqw5z2-ElI4-EOmF SEED & PAUL Deep Dive Podcast - https://youtu.be/NB9Pf4cdFeM CLI Tools: Railway CLI Link - https://docs.railway.com/cli Github CLI link - https://cli.github.com/ ———————————— Timeline: 00:00 Why Agentic OS Matters 00:31 Three St...'
+resumo: 'O vídeo explica como montar um "sistema operativo agêntico" para o Claude Code em três passos — o "brain" (Obsidian e Graphify para organizar e relacionar os ativos do código), o "build" (construção de um dashboard agêntico com as frameworks Seed e Paul) e o "ship" (correr o projeto localmente ou publicá-lo online, por exemplo via Railway). Ao longo do processo mostra a instalação das ferramentas...'
 tags:
   - entrepreneur
   - money

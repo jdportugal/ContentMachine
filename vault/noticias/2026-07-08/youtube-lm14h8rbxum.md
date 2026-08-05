@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Charlie Automates'
 data: '2026-07-08'
 url: 'https://www.youtube.com/watch?v=LM14h8RBXuM'
-thumbnail: 'https://i.ytimg.com/vi_webp/LM14h8RBXuM/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/LM14h8RBXuM/maxresdefault.jpg'
+descricao: 'Work With Me (Solve Your Revenue Bottleneck with Charlie OS): https://charlieautomates.com/charlie-os-vs/ ———————————— Join my community with 3,200+ business owners (choose premium for weekly calls): https://www.skool.com/cc-strategic-ai/about ———————————— Videos referenced: - Graphify Tutorial: https://youtu.be/EKbQ5sajVxA - Podcast with CREATOR of Graphify: https://youtu.be/Ro3Xf1AxVjs Other 🔑 resources: Understand Anything Resource Link: https://www.charlieautomates.com/free-resources/#understand-anything The 6-Figure Claude Estate Hustle Series (FREE TRAINING): https://charlieautomates.com/claude-estate-register/?utm_source=Apify-Lead-YT ———————————— Timeline: 00:00 The Problem 00:34 Meet Understand Anything 01:10 Install and Run Command 01:35 Mapping to Graph Brain 02:13 Dashboard an...'
+resumo: 'Este vídeo mostra o plugin "Understand Anything" (o repositório número um do dia no GitHub), explicando como instalá-lo e usá-lo no Claude Code através do comando `/understand` para mapear qualquer repositório de código. Demonstra ainda como a ferramenta transforma os ficheiros de um projeto num "grafo cerebral" e num dashboard visual com visão geral e tour guiado, ajudando quem não é programador...'
 tags:
   - entrepreneur
   - money

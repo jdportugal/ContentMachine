@@ -6,6 +6,8 @@ canal: 'Brock Mesarich | AI for Non Techies'
 data: '2026-07-09'
 url: 'https://www.youtube.com/watch?v=kIiHhWVOlCM'
 thumbnail: 'https://i.ytimg.com/vi/kIiHhWVOlCM/maxresdefault.jpg'
+descricao: "📚 Join My Skool Community: https://bit.ly/4t2yNgG 🔥 Get My 15 Claude Skills I Can't Live Without: https://bit.ly/4vYG9Vh 🔗 Zapier MCP: https://bit.ly/3SRmnMd ✅ Claude Cowork: http://clau.de/BrockMesarich Anthropic just released Claude Cowork for mobile and web, and this was probably the most requested feature since Cowork launched. In this video I test Cowork on my phone, walk through the new desktop and web app changes, and show real tasks running in the cloud with my computer completely closed. I also break down how the cloud sessions actually work, plus the one big caveat nobody is talking about that you need to know before you rely on this. By the end you'll know exactly what Cowork mobile can and can't do, and whether it fits into your workflow. 0:00 - Claude Cowork Comes to Mobil..."
+resumo: 'O vídeo apresenta e testa o Claude Co-work para telemóvel e web, mostrando que agora as tarefas (incluindo as agendadas) continuam a correr mesmo com o computador fechado. Aborda ainda as alterações na app de desktop e web, nomeadamente a nova interface com os modos "home" (chat/Co-work) e "code", e o aumento temporário para o dobro do uso no Co-work.'
 tags:
   - 'claude cowork'
   - 'cowork mobile'
@@ -25,7 +27,7 @@ fontes:
   - 'https://bit.ly/4t2yNgG'
   - 'https://bit.ly/4vYG9Vh'
   - 'https://bit.ly/3SRmnMd'
-  - 'https://claude.ai/'
+  - 'http://clau.de/BrockMesarich'
 ---
 
 ## Descrição
@@ -33,7 +35,7 @@ fontes:
 📚 Join My Skool Community: https://bit.ly/4t2yNgG
 🔥 Get My 15 Claude Skills I Can't Live Without: https://bit.ly/4vYG9Vh
 🔗 Zapier MCP: https://bit.ly/3SRmnMd
-🔗 Claude Cowork Web App: https://claude.ai/
+✅ Claude Cowork: http://clau.de/BrockMesarich
 
 Anthropic just released Claude Cowork for mobile and web, and this was probably the most requested feature since Cowork launched. In this video I test Cowork on my phone, walk through the new desktop and web app changes, and show real tasks running in the cloud with my computer completely closed. I also break down how the cloud sessions actually work, plus the one big caveat nobody is talking about that you need to know before you rely on this. By the end you'll know exactly what Cowork mobile can and can't do, and whether it fits into your workflow.
 

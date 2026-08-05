@@ -7,7 +7,7 @@ data: '2026-05-12'
 url: 'https://www.youtube.com/watch?v=BcM90wJyEN4'
 thumbnail: 'https://i.ytimg.com/vi/BcM90wJyEN4/maxresdefault.jpg'
 descricao: "🚀 Claude Code Mastery fast track https://www.skool.com/simon-says-ai-pro/about 📚 30+ FREE guides https://www.skool.com/simon-says-ai/about Claude Code is powerful, but by default it’s still weak at many types of tasks: memory, research, design, browser control, media generation, and ops. In this video, I break down the 7 tools I’d add first to patch those gaps and turn Claude Code into an AI employee team: Obsidian, UI UX Pro Max, NotebookLM, Picsart, Remotion, Playwright CLI, and GWS. Whether you're brand new to Claude Code or you've already been using it for a while, this should give you a much stronger AI agent stack. ⏰ TIMESTAMPS: 0:00 Intro 0:42 Obsidian memory 5:37 UI UX Pro Max 8:17 NotebookLM 10:58 Picsart 12:13 Remotion 13:08 Playwright CLI 14:05 GWS 16:01 Conclusion"
-resumo: 'O vídeo mostra sete ferramentas e extensões para expandir o Claude Code para além de programação — incluindo o Obsidian como camada de memória (um "segundo cérebro" em grafo de notas interligadas) e soluções para investigação, design web, automação e criação de imagens/vídeos.'
+resumo: 'O vídeo apresenta sete ferramentas e integrações para expandir as capacidades do Claude Code para além da programação — em áreas como pesquisa, design web, memória e automação —, começando pelo Obsidian, usado como camada de memória através de um grafo de notas interligadas que o Claude gere automaticamente.'
 tags: {}
 fontes:
   - 'https://www.skool.com/simon-says-ai-pro/about'
