@@ -24,7 +24,7 @@
         <div x-show="nav" x-cloak x-transition.opacity @click="nav = false" class="lg:hidden fixed inset-0 z-40 bg-black/50"></div>
 
         {{-- ============ Side shelf (navigation) — off-canvas drawer on mobile, static on lg+ ============ --}}
-        <aside @click="nav = false" x-bind:class="{ '!translate-x-0': nav }"
+        <aside x-bind:class="{ '!translate-x-0': nav }"
                class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
             <div class="px-6 py-3 border-b border-ink-soft/15">
                 <a href="{{ route('painel') }}" class="block">
@@ -37,7 +37,10 @@
                 @livewire('project-switcher')
             </div>
 
-            <nav class="flex-1 min-h-0 overflow-y-auto py-2 space-y-0.5">
+            {{-- Closing the drawer belongs to the DESTINATION links only: on the
+                 <aside> it also swallowed taps on the project switcher, closing
+                 the drawer the moment its dropdown opened. --}}
+            <nav @click="nav = false" class="flex-1 min-h-0 overflow-y-auto py-2 space-y-0.5">
                 @php
                     $nav = [
                         ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
