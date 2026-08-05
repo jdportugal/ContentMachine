@@ -210,7 +210,7 @@ class OficinaTest extends TestCase
         {
             public ?string $capturado = null;
 
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 $this->capturado = $prompt;
 
@@ -304,7 +304,7 @@ class OficinaTest extends TestCase
         // é aplicado no mesmo pedido (redigirComIa → verificarPlano).
         $this->app->bind(LlmClient::class, fn () => new class extends LlmClient
         {
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return null;
             }
@@ -458,7 +458,7 @@ class OficinaTest extends TestCase
     {
         $this->app->instance(LlmClient::class, new class extends LlmClient
         {
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return json_encode([
                     'titulo' => 'T', 'legenda' => 'L', 'tags' => ['x'],

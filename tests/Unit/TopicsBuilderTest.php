@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\Aggregation\AggregatedItem;
+use App\Services\Aggregation\LlmClient;
 use App\Services\Aggregation\TopicsBuilder;
 use Tests\TestCase;
 
@@ -31,7 +32,16 @@ class TopicsBuilderTest extends TestCase
             $this->item('b', 'Conversa longa', ['entrevista'], 'o orcamento familiar orcamento é chave orcamento planeamento orcamento'),
         ];
 
-        $resultado = (new TopicsBuilder)->build($itens);
+        // Sem qualquer LLM configurado → cai na heurística.
+        $semLlm = new class extends LlmClient
+        {
+            public function disponivel(): bool
+            {
+                return false;
+            }
+        };
+
+        $resultado = (new TopicsBuilder($semLlm))->build($itens);
 
         $this->assertSame('heuristica', $resultado['metodo']);
 

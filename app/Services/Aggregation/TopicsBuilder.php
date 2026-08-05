@@ -2,17 +2,21 @@
 
 namespace App\Services\Aggregation;
 
-use Illuminate\Support\Facades\Http;
+use App\Services\Projects\ProjectLanguage;
 use Illuminate\Support\Str;
 
 /**
  * Derives a list of topics ("what has already been covered and is live") from
- * a set of items from one day. Uses an LLM if there is a configured key
- * (OpenAI or Gemini); otherwise falls back to a deterministic heuristic
- * grouping by tags/keywords. Never throws — degrades to the heuristic.
+ * a set of items from one day. Uses the app's LLM chain (Claude → GPT → DeepSeek),
+ * so the configured provider is the one that names the topics; it only falls back
+ * to a deterministic tag/keyword grouping when NO provider is configured. That
+ * fallback produces topic names like "Said", so it is a last resort, never a
+ * default. Never throws.
  */
 class TopicsBuilder
 {
+    public function __construct(private readonly LlmClient $llm) {}
+
     /** Stop words (PT/EN) ignored in keyword extraction. */
     private const STOPWORDS = [
         'the', 'and', 'for', 'you', 'your', 'with', 'this', 'that', 'from', 'have', 'has', 'are', 'was', 'were', 'will',
@@ -150,10 +154,7 @@ class TopicsBuilder
      */
     private function viaLlm(array $itens): ?array
     {
-        $chaveOpenai = config('services.openai.key');
-        $chaveGemini = config('services.gemini.key');
-
-        if (empty($chaveOpenai) && empty($chaveGemini) || $itens === []) {
+        if ($itens === [] || ! $this->llm->disponivel()) {
             return null;
         }
 
@@ -165,21 +166,23 @@ class TopicsBuilder
             'excerto' => Str::limit(trim($i->transcricao), 1500, ''),
         ])->all();
 
+        $idioma = ProjectLanguage::name();
         $prompt = 'Group the following content by covered topic, inferring the topic mainly from the EXCERPT of the transcript (what is actually said in the video) and the title. Respond ONLY with JSON in the format '
             .'{"topicos":[{"topico":"...","itens":[{"titulo":"...","url":"...","plataforma":"..."}]}]}. '
-            ."Use European Portuguese for the topic names.\n\n"
+            ."Write the topic names in {$idioma}.\n\n"
             .json_encode($resumo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         try {
-            $json = ! empty($chaveOpenai)
-                ? $this->chamarOpenai((string) $chaveOpenai, $prompt)
-                : $this->chamarGemini((string) $chaveGemini, $prompt);
+            // Same chain as the rest of the app (Claude → GPT → DeepSeek), so the
+            // topics come from the provider that is configured, not from whichever
+            // key this class happened to know about.
+            $json = $this->llm->texto($prompt, json: true);
 
             if ($json === null) {
                 return null;
             }
 
-            $dados = json_decode($json, true);
+            $dados = json_decode($this->soJson($json), true);
             $topicos = $dados['topicos'] ?? null;
 
             if (! is_array($topicos) || $topicos === []) {
@@ -198,29 +201,16 @@ class TopicsBuilder
         }
     }
 
-    private function chamarOpenai(string $chave, string $prompt): ?string
+    /** The JSON object inside a reply, unwrapping any ```json fence or prose around it. */
+    private function soJson(string $conteudo): string
     {
-        $r = Http::timeout(60)
-            ->withToken($chave)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
-                'messages' => [['role' => 'user', 'content' => $prompt]],
-                'response_format' => ['type' => 'json_object'],
-                'temperature' => 0.2,
-            ]);
+        $conteudo = trim($conteudo);
+        if (preg_match('/```(?:json)?\s*(.*?)```/s', $conteudo, $m)) {
+            $conteudo = trim($m[1]);
+        }
+        $ini = strpos($conteudo, '{');
+        $fim = strrpos($conteudo, '}');
 
-        return $r->successful() ? ($r->json('choices.0.message.content') ?? null) : null;
-    }
-
-    private function chamarGemini(string $chave, string $prompt): ?string
-    {
-        $modelo = (string) config('contentmachine.aggregation.gemini_model', 'gemini-1.5-flash');
-        $r = Http::timeout(60)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", [
-                'contents' => [['parts' => [['text' => $prompt]]]],
-                'generationConfig' => ['responseMimeType' => 'application/json'],
-            ]);
-
-        return $r->successful() ? ($r->json('candidates.0.content.parts.0.text') ?? null) : null;
+        return $ini !== false && $fim !== false && $fim > $ini ? substr($conteudo, $ini, $fim - $ini + 1) : $conteudo;
     }
 }

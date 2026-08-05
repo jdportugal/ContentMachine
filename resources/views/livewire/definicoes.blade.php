@@ -168,7 +168,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="eyebrow block mb-1.5">LLM provider</label>
-                        <input type="text" wire:model="modelos.llm_provider" placeholder="auto | anthropic | openai | gemini | none"
+                        <input type="text" wire:model="modelos.llm_provider" placeholder="auto | anthropic | openai | tensorx | gemini | none"
                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     </div>
                     <div>
@@ -190,11 +190,12 @@
                         <label class="eyebrow block mb-1.5">Clip LLM provider</label>
                         <select wire:model="modelos.clip_provider"
                                 class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
-                            <option value="">claude (default)</option>
+                            <option value="">claude → gpt → deepseek (default)</option>
                             <option value="claude">claude</option>
-                            <option value="tensorx">tensorx</option>
+                            <option value="openai">openai (gpt)</option>
+                            <option value="tensorx">tensorx (deepseek)</option>
                         </select>
-                        <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Planner/metadata/research engine. Tensorix needs its key set.</p>
+                        <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Planner/metadata/research engine. The one you pick is tried FIRST; the others stay as fallback. Each needs its key set.</p>
                     </div>
                     <div>
                         <label class="eyebrow block mb-1.5">Tensorix model</label>

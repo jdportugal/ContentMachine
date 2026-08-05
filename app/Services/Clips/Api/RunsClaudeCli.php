@@ -8,39 +8,103 @@ use RuntimeException;
 use Symfony\Component\Process\Process;
 
 /**
- * Runs Claude headlessly. Uses the Anthropic API when a key is configured
- * (`services.anthropic.key`); otherwise the authenticated `claude` CLI (the
- * subscription). Retries transient failures (overload, streaming hiccups).
+ * Runs the clip pipeline's LLM calls against whichever provider is configured,
+ * in the house order: CLAUDE (Anthropic API when a key is set, else the
+ * authenticated `claude` CLI) → GPT (OpenAI) → DEEPSEEK (Tensorix). The provider
+ * picked in Settings (`clips.llm_primary`) goes first; the others stay behind it,
+ * so one being down or unconfigured never stops the pipeline. Each retries its own
+ * transient failures (overload, streaming hiccups).
  */
 trait RunsClaudeCli
 {
+    /** Cached `claude` binary lookup (per process) — probing costs a subprocess. */
+    private static ?bool $claudeBinExists = null;
+
     /**
      * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
      * @return array the parsed result envelope (has a `result` string)
      */
     protected function runClaude(string $user, ?string $system = null, array $opts = []): array
     {
-        $tensorxReady = filled(config('services.tensorx.key'));
+        $erro = null;
 
-        // Tensorix (tensorx.ai) as the PRIMARY clip LLM — fully replaces Claude.
-        if ($tensorxReady && config('contentmachine.clips.llm_primary') === 'tensorx') {
-            return $this->runTensorx($user, $system, $opts);
-        }
-
-        try {
-            // API only when a key is set — otherwise the authenticated CLI.
-            return filled(config('services.anthropic.key'))
-                ? $this->runClaudeApi($user, $system, $opts)
-                : $this->runClaudeCli($user, $system, $opts);
-        } catch (\Throwable $e) {
-            // Automatic fallback: Claude is down but Tensorix is configured.
-            if ($tensorxReady) {
-                Log::warning('Claude failed — falling back to Tensorix: '.$e->getMessage());
-
-                return $this->runTensorx($user, $system, $opts);
+        foreach ($this->cadeiaLlm() as $fornecedor) {
+            try {
+                return match ($fornecedor) {
+                    // API only when a key is set — otherwise the authenticated CLI.
+                    'claude' => filled(config('services.anthropic.key'))
+                        ? $this->runClaudeApi($user, $system, $opts)
+                        : $this->runClaudeCli($user, $system, $opts),
+                    'openai' => $this->runOpenAi($user, $system, $opts),
+                    'tensorx' => $this->runTensorx($user, $system, $opts),
+                };
+            } catch (\Throwable $e) {
+                $erro = $e;
+                Log::warning("Clip LLM '{$fornecedor}' failed — trying the next: ".$e->getMessage());
             }
-            throw $e;
         }
+
+        throw $erro ?? new RuntimeException('No LLM is configured for clips — set a Claude, OpenAI or Tensorix key in Settings.');
+    }
+
+    /**
+     * Providers to try, in order: the one chosen in Settings first, then
+     * Claude → GPT → DeepSeek. Only those actually configured.
+     *
+     * @return array<int,string>
+     */
+    private function cadeiaLlm(): array
+    {
+        $ordem = ['claude', 'openai', 'tensorx'];
+
+        $escolhido = (string) config('contentmachine.clips.llm_primary', '');
+        if (in_array($escolhido, $ordem, true)) {
+            $ordem = array_merge([$escolhido], array_values(array_diff($ordem, [$escolhido])));
+        }
+
+        return array_values(array_filter($ordem, fn (string $f) => match ($f) {
+            'claude' => filled(config('services.anthropic.key')) || $this->claudeBinaryExists(),
+            'openai' => filled(config('services.openai.key')),
+            'tensorx' => filled(config('services.tensorx.key')),
+        }));
+    }
+
+    /** Whether the `claude` CLI is actually installed (a server usually has no session). */
+    private function claudeBinaryExists(): bool
+    {
+        if (self::$claudeBinExists !== null) {
+            return self::$claudeBinExists;
+        }
+
+        $bin = (string) config('contentmachine.clips.claude_binary', 'claude');
+        if (str_contains($bin, '/')) {
+            return self::$claudeBinExists = is_executable($bin);
+        }
+
+        $p = new Process(['bash', '-lc', 'command -v '.escapeshellarg($bin)]);
+        $p->setTimeout(10);
+        $p->run();
+
+        return self::$claudeBinExists = $p->isSuccessful() && trim($p->getOutput()) !== '';
+    }
+
+    /**
+     * GPT (OpenAI). Same chat-completions shape as Tensorix — the clip prompts are
+     * plain text in, text out, so any of the three can serve them.
+     *
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     */
+    private function runOpenAi(string $user, ?string $system, array $opts): array
+    {
+        return $this->runChatCompletions(
+            'OpenAI',
+            'https://api.openai.com/v1',
+            (string) config('services.openai.key'),
+            (string) config('contentmachine.clips.openai_model', 'gpt-4o'),
+            $user,
+            $system,
+            $opts,
+        );
     }
 
     /**
@@ -193,11 +257,31 @@ trait RunsClaudeCli
      */
     private function runTensorx(string $user, ?string $system, array $opts): array
     {
+        return $this->runChatCompletions(
+            'Tensorix',
+            (string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'),
+            (string) config('services.tensorx.key'),
+            (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
+            $user,
+            $system,
+            $opts,
+        );
+    }
+
+    /**
+     * One OpenAI-compatible chat call (GPT, Tensorix/DeepSeek), retrying transient
+     * failures, returned in the CLI's envelope shape ({result:string}).
+     *
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @return array{result:string}
+     */
+    private function runChatCompletions(string $nome, string $baseUrl, string $key, string $model, string $user, ?string $system, array $opts): array
+    {
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
-        $base = rtrim((string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'), '/');
+        $base = rtrim($baseUrl, '/');
 
         $payload = [
-            'model' => (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
+            'model' => $model,
             'messages' => array_values(array_filter([
                 ($system !== null && $system !== '') ? ['role' => 'system', 'content' => $system] : null,
                 ['role' => 'user', 'content' => $user],
@@ -209,7 +293,7 @@ trait RunsClaudeCli
         for ($i = 1; $i <= $attempts; $i++) {
             try {
                 $r = Http::timeout($opts['timeout'] ?? 300)
-                    ->withToken((string) config('services.tensorx.key'))
+                    ->withToken($key)
                     ->post($base.'/chat/completions', $payload);
             } catch (\Throwable $e) {
                 $lastError = 'http: '.$e->getMessage();
@@ -234,6 +318,6 @@ trait RunsClaudeCli
             $this->claudeBackoff($i, $attempts);
         }
 
-        throw new RuntimeException("Tensorix API failed after {$attempts} attempt(s) — {$lastError}");
+        throw new RuntimeException("{$nome} API failed after {$attempts} attempt(s) — {$lastError}");
     }
 }

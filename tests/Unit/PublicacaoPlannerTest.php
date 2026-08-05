@@ -20,7 +20,7 @@ class PublicacaoPlannerTest extends TestCase
         {
             public function __construct(private ?string $resposta, private PublicacaoPlannerTest $test) {}
 
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 $this->test->registarPrompt($prompt);
 

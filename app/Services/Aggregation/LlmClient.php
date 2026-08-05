@@ -60,16 +60,18 @@ class LlmClient
      * Generates text. Tries the providers in order until one returns something.
      *
      * @param  bool  $comFerramentas  Allows Claude (CLI) to use web search/reading.
+     * @param  bool  $json  Ask for a JSON-only reply (pinned where the API supports it).
      */
-    public function texto(string $prompt, bool $comFerramentas = false): ?string
+    public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
     {
         foreach ($this->fornecedores() as $fornecedor) {
             try {
                 $texto = match ($fornecedor) {
                     'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
                     'anthropic' => $this->anthropic((string) config('services.anthropic.key'), $prompt),
-                    'openai' => $this->openai((string) config('services.openai.key'), $prompt),
-                    'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt),
+                    'openai' => $this->openai((string) config('services.openai.key'), $prompt, $json),
+                    'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt, $json),
+                    'tensorx' => $this->tensorx((string) config('services.tensorx.key'), $prompt),
                     default => null,
                 };
             } catch (\Throwable) {
@@ -87,31 +89,41 @@ class LlmClient
     }
 
     /**
-     * Ordered chain of providers to try, filtered by availability.
+     * The house order: CLAUDE → GPT → DEEPSEEK (Tensorix) → Gemini. Every provider
+     * with a key stays in the chain, so a configured provider is always used and a
+     * failing one falls through to the next instead of dropping to the heuristic.
      *
      * @return array<int,string>
      */
+    private const ORDEM = ['anthropic', 'claude-cli', 'openai', 'tensorx', 'gemini'];
+
+    /** @return array<int,string> */
     private function fornecedores(): array
     {
         $escolha = (string) config('contentmachine.aggregation.llm_provider', 'auto');
+        if ($escolha === 'none') {
+            return [];
+        }
 
-        // When an Anthropic API key is set, use the API only — do not fall back
-        // to the `claude` CLI (which needs an interactive session).
-        $temChaveAnthropic = filled(config('services.anthropic.key'));
+        // An explicitly configured provider goes FIRST — the rest stay behind it as
+        // fallback, so choosing one never means "nothing else may answer".
+        $ordem = self::ORDEM;
+        if ($escolha !== '' && $escolha !== 'auto') {
+            $ordem = array_merge([$escolha], array_values(array_diff($ordem, [$escolha])));
+        }
 
-        $ordem = match ($escolha) {
-            'none' => [],
-            'auto' => $temChaveAnthropic
-                ? ['anthropic', 'openai', 'gemini']
-                : ['claude-cli', 'anthropic', 'openai', 'gemini'],
-            default => [$escolha],
-        };
+        // The Claude API and the `claude` CLI are the same provider: with a key, use
+        // the API (the CLI needs an interactive session, absent on a server).
+        if (filled(config('services.anthropic.key')) && $escolha !== 'claude-cli') {
+            $ordem = array_values(array_diff($ordem, ['claude-cli']));
+        }
 
         return array_values(array_filter($ordem, fn (string $f) => match ($f) {
             'claude-cli' => $this->claudeBin() !== null,
             'anthropic' => filled(config('services.anthropic.key')),
             'openai' => filled(config('services.openai.key')),
             'gemini' => filled(config('services.gemini.key')),
+            'tensorx' => filled(config('services.tensorx.key')),
             default => false,
         }));
     }
@@ -178,23 +190,46 @@ class LlmClient
         return $r->successful() ? (trim((string) $r->json('content.0.text')) ?: null) : null;
     }
 
-    private function openai(string $chave, string $prompt): ?string
+    private function openai(string $chave, string $prompt, bool $json = false): ?string
     {
         if (blank($chave)) {
             return null;
         }
 
         $r = Http::timeout(120)->withToken($chave)
-            ->post('https://api.openai.com/v1/chat/completions', [
+            ->post('https://api.openai.com/v1/chat/completions', array_filter([
                 'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
                 'messages' => [['role' => 'user', 'content' => $prompt]],
                 'temperature' => 0.4,
+                'response_format' => $json ? ['type' => 'json_object'] : null,
+            ]));
+
+        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
+    }
+
+    /**
+     * Tensorix (tensorx.ai) — the OpenAI-compatible gateway the clip pipeline
+     * already uses. Kept in this chain too, so a deploy whose only key is Tensorix
+     * still WRITES the news (instead of silently degrading to the heuristic).
+     * No web search here: it fills in from the transcripts and cited sources.
+     */
+    private function tensorx(string $chave, string $prompt): ?string
+    {
+        if (blank($chave)) {
+            return null;
+        }
+
+        $base = rtrim((string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'), '/');
+        $r = Http::timeout(300)->withToken($chave)
+            ->post($base.'/chat/completions', [
+                'model' => (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
+                'messages' => [['role' => 'user', 'content' => $prompt]],
             ]);
 
         return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
     }
 
-    private function gemini(string $chave, string $prompt): ?string
+    private function gemini(string $chave, string $prompt, bool $json = false): ?string
     {
         if (blank($chave)) {
             return null;
@@ -202,9 +237,10 @@ class LlmClient
 
         $modelo = (string) config('contentmachine.aggregation.gemini_model', 'gemini-1.5-flash');
         $r = Http::timeout(120)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", [
+            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", array_filter([
                 'contents' => [['parts' => [['text' => $prompt]]]],
-            ]);
+                'generationConfig' => $json ? ['responseMimeType' => 'application/json'] : null,
+            ]));
 
         return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : null;
     }

@@ -175,7 +175,7 @@ class FluxoRascunhosTest extends TestCase
                 return true;
             }
 
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return json_encode([
                     'segments' => [['title' => 'Short A', 'description' => 'd', 'start_time' => 0, 'end_time' => 2, 'tags' => ['x']]],
