@@ -10,6 +10,9 @@ storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
 database/database.sqlite
+/contentmachine
+*.sqlite
+*.sqlite3
 .env
 .env.*
 !.env.example

@@ -21,6 +21,14 @@
 /storage/*.key
 /storage/pail
 /vendor
+
+# Bases de dados SQLite locais — NUNCA versionar. Podem conter sessões, cache,
+# utilizadores e outros dados de runtime. (DB_DATABASE=contentmachine cria este
+# ficheiro na raiz; o nome por defeito do Laravel é database/database.sqlite.)
+/contentmachine
+*.sqlite
+*.sqlite-journal
+*.sqlite3
 _ide_helper.php
 Homestead.json
 Homestead.yaml

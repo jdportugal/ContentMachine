@@ -207,13 +207,22 @@ class LlmClient
      * Ambiente para o subprocesso do `claude -p`: passa o ambiente REAL do
      * processo (via getenv(), que funciona em CLI e na SAPI web — ao contrário
      * de $_SERVER, que sob `php artisan serve` não expõe variáveis de ambiente)
-     * MAS remove os marcadores de sessão do Claude Code.
+     * MAS remove os marcadores de sessão do Claude Code E os segredos alheios.
      *
      * O `claude` autentica-se pelas credenciais em disco (~/.claude, via HOME).
      * Se herdar CLAUDECODE / CLAUDE_CODE_* de uma sessão-pai do Claude Code,
      * entra em modo "sessão-filha" e falha com "Not logged in". Removê-los deixa
      * o subprocesso correr como uma invocação de topo normal — funciona tanto
      * dentro como fora de uma sessão do Claude Code.
+     *
+     * IMPORTANTE (segurança): esta redação corre com `--allowedTools WebSearch
+     * WebFetch` sobre material NÃO fiável (transcrições de vídeos de terceiros).
+     * Uma injeção de prompt escondida nesse material poderia levar o agente a
+     * ler variáveis de ambiente e exfiltrá-las via WebFetch. Por isso removemos
+     * do subprocesso TODAS as chaves de outros fornecedores (OpenAI, Gemini,
+     * kie.ai, ElevenLabs, Apify, YouTube, Reddit…), a APP_KEY e as credenciais
+     * de base de dados — nada disso é preciso para correr o `claude`. Só a
+     * própria autenticação da Anthropic (ANTHROPIC_*) é preservada.
      *
      * @return array<string,string>
      */
@@ -224,7 +233,8 @@ class LlmClient
         $todas = getenv();
         if (is_array($todas)) {
             foreach ($todas as $k => $val) {
-                if (is_string($val) && ! $this->ehMarcadorSessao((string) $k)) {
+                $k = (string) $k;
+                if (is_string($val) && ! $this->ehMarcadorSessao($k) && ! $this->ehSegredoAlheio($k)) {
                     $env[$k] = $val;
                 }
             }
@@ -259,6 +269,28 @@ class LlmClient
     private function ehMarcadorSessao(string $chave): bool
     {
         return in_array($chave, self::MARCADORES_SESSAO, true) || str_starts_with($chave, 'CLAUDE_CODE');
+    }
+
+    /**
+     * Segredo que NÃO pertence ao `claude` e não deve entrar no subprocesso.
+     *
+     * O `claude` só precisa de HOME/PATH/USER/… (reinjetados em ambiente()) e,
+     * quando não há sessão em disco, da sua própria chave ANTHROPIC_*. Tudo o
+     * resto que pareça uma credencial (chaves de outros fornecedores, tokens,
+     * segredos, palavras-passe, APP_KEY) é retido para não ficar ao alcance de
+     * um agente com ferramentas web a processar conteúdo não fiável.
+     */
+    private function ehSegredoAlheio(string $chave): bool
+    {
+        // A autenticação da própria Anthropic é legítima neste subprocesso.
+        if (str_starts_with($chave, 'ANTHROPIC_')) {
+            return false;
+        }
+
+        return (bool) preg_match(
+            '/(API_KEY|_TOKEN$|_SECRET|SECRET_|PASSWORD|_KEY$|CLIENT_ID)/i',
+            $chave
+        );
     }
 
     /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */
