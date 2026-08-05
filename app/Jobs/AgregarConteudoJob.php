@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\NewsAggregator;
+use App\Services\Projects\ProjectContext;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -43,18 +44,56 @@ class AgregarConteudoJob implements ShouldQueue
         // project's channels/settings and write to its vault, in its language.
         $this->activateProject();
 
-        $resumo = $aggregator->aggregate($this->plataformas, $this->limite);
+        try {
+            $resumo = $aggregator->aggregate($this->plataformas, $this->limite);
 
-        Cache::put(self::key($this->token), $resumo, now()->addMinutes(30));
+            Cache::put(self::key($this->token), $resumo, now()->addMinutes(30));
+        } finally {
+            $this->libertar();
+        }
     }
 
     public function failed(\Throwable $e): void
     {
         Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(30));
+        $this->libertar();
     }
 
     public static function key(string $token): string
     {
         return 'noticias.agregacao.'.$token;
+    }
+
+    /**
+     * Takes the single aggregation slot of the active project. Returns false when
+     * one is already running — the collection is dozens of yt-dlp subprocesses
+     * writing the same vault, so two at once fight over it. Shared (cache) rather
+     * than component state so the guard also holds across tabs and page reloads.
+     */
+    public static function reservar(string $token): bool
+    {
+        // TTL is the fallback for a worker killed hard enough to skip failed().
+        return Cache::add(self::chaveEmCurso(self::slugAtivo()), $token, now()->addMinutes(20));
+    }
+
+    /** Token of the aggregation running for the active project, if any. */
+    public static function emCurso(): ?string
+    {
+        return Cache::get(self::chaveEmCurso(self::slugAtivo()));
+    }
+
+    private function libertar(): void
+    {
+        Cache::forget(self::chaveEmCurso($this->projectSlug));
+    }
+
+    private static function slugAtivo(): string
+    {
+        return app(ProjectContext::class)->current()->slug;
+    }
+
+    private static function chaveEmCurso(string $slug): string
+    {
+        return 'noticias.agregacao.em-curso.'.$slug;
     }
 }

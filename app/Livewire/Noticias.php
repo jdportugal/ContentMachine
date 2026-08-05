@@ -71,6 +71,10 @@ class Noticias extends Component
         ));
         $this->plataformasSelecionadas = $this->plataformasDisponiveis;
 
+        // A reload mid-run must not show an idle "Aggregate now" button: rejoin
+        // the running collection and keep polling it.
+        $this->juntarAoQueCorre();
+
         $this->dataRelatorio = now()->toDateString();
         $this->idiomaRelatorio = ProjectLanguage::name(); // still switchable in the form
 
@@ -98,17 +102,39 @@ class Noticias extends Component
      */
     public function agregarAgora(): void
     {
-        if ($this->plataformasSelecionadas === []) {
+        if ($this->aAgregar || $this->plataformasSelecionadas === []) {
             return;
         }
 
-        $this->agregacaoToken = (string) Str::uuid();
+        $token = (string) Str::uuid();
+
+        // One aggregation per project at a time. If another tab (or an earlier
+        // visit to this page) already started one, join that run instead of
+        // stacking a second yt-dlp storm onto the same vault.
+        if (! AgregarConteudoJob::reservar($token)) {
+            $this->juntarAoQueCorre();
+            $this->dispatch('toast', message: 'A collection is already running — waiting for it to finish.');
+
+            return;
+        }
+
+        $this->agregacaoToken = $token;
         $this->aAgregar = true;
         $this->dispatch('loader-show', message: 'Scanning the channels…');
 
-        AgregarConteudoJob::dispatch($this->agregacaoToken, array_values($this->plataformasSelecionadas));
+        AgregarConteudoJob::dispatch($token, array_values($this->plataformasSelecionadas));
 
         $this->verificarAgregacao();
+    }
+
+    /** Picks up an aggregation already in flight, so the page polls it instead of starting another. */
+    private function juntarAoQueCorre(): void
+    {
+        if ($token = AgregarConteudoJob::emCurso()) {
+            $this->agregacaoToken = $token;
+            $this->aAgregar = true;
+            $this->dispatch('loader-show', message: 'Scanning the channels…');
+        }
     }
 
     /** Toggles a platform in/out of the aggregation selection. */
@@ -133,7 +159,8 @@ class Noticias extends Component
 
         $this->aAgregar = false;
         $this->dispatch('loader-hide');
-        Cache::forget(AgregarConteudoJob::key($this->agregacaoToken));
+        // The summary is left in cache (it expires on its own): a second tab
+        // watching the same run still needs to read it.
 
         if (! empty($resumo['erro'])) {
             $this->avisoRelatorio = 'The collection failed. Check that the worker is running («php artisan queue:work»).';
