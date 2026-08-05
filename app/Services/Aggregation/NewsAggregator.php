@@ -3,6 +3,7 @@
 namespace App\Services\Aggregation;
 
 use App\Services\Monitoring\ApifyClient;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
@@ -194,7 +195,7 @@ class NewsAggregator
             return '';
         }
 
-        $prompt = 'In 1 to 2 short sentences and in EUROPEAN PORTUGUESE, summarize WHAT THIS VIDEO COVERS '
+        $prompt = 'In 1 to 2 short sentences and in '.ProjectLanguage::name().', summarize WHAT THIS VIDEO COVERS '
             .'(the content addressed, not promotions, sponsorships or links). Respond only with the summary, no quotes.'
             ."\n\nTitle: {$item->titulo}\nTranscript (excerpt): ".Str::limit($transcricao, 3000, '');
 

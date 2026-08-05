@@ -2,10 +2,10 @@
 
 namespace App\Services\Clips\Api;
 
-use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\SceneVisualFiller;
+use App\Services\Projects\ProjectLanguage;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -84,7 +84,7 @@ class SceneTextVisuals
             return [];
         }
 
-        $language = ClipLanguage::name();
+        $language = ProjectLanguage::name();
         $list = json_encode(
             array_map(fn (int $i, string $spoken) => ['scene' => $i, 'spoken' => $spoken], array_keys($targets), $targets),
             JSON_UNESCAPED_UNICODE,

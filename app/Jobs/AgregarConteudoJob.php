@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\NewsAggregator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,6 +21,7 @@ class AgregarConteudoJob implements ShouldQueue
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
+    use RunsInProject;
     use SerializesModels;
 
     public int $timeout = 900;
@@ -31,10 +33,16 @@ class AgregarConteudoJob implements ShouldQueue
         public readonly string $token,
         public readonly ?array $plataformas = null,
         public readonly ?int $limite = null,
-    ) {}
+    ) {
+        $this->captureProject();
+    }
 
     public function handle(NewsAggregator $aggregator): void
     {
+        // The worker has no session: without this the run would read the DEFAULT
+        // project's channels/settings and write to its vault, in its language.
+        $this->activateProject();
+
         $resumo = $aggregator->aggregate($this->plataformas, $this->limite);
 
         Cache::put(self::key($this->token), $resumo, now()->addMinutes(30));

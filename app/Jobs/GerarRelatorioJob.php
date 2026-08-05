@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\RelatorioBuilder;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Vault\VaultContract;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,20 +24,28 @@ use Illuminate\Support\Facades\Cache;
  */
 class GerarRelatorioJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     // Headroom above the Claude CLI timeout (up to 600s with web search).
     public int $timeout = 900;
 
+    /** @param string $idioma Output language; '' follows the project's own. */
     public function __construct(
         public string $modo,
         public string $data,
         public string $token,
-        public string $idioma = 'English',
-    ) {}
+        public string $idioma = '',
+    ) {
+        $this->captureProject();
+    }
 
     public function handle(RelatorioBuilder $builder, VaultContract $vault): void
     {
+        // The worker has no session: activate the project so the report is written
+        // in ITS language and archived in ITS vault.
+        $this->activateProject();
+        $idioma = $this->idioma !== '' ? $this->idioma : ProjectLanguage::name();
+
         // Report is built only from already-scraped items (no channel scan here).
         $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
 
@@ -44,7 +54,7 @@ class GerarRelatorioJob implements ShouldQueue
             ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $this->idioma);
+        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma);
 
         $slug = $this->modo === 'semana'
             ? 'semana-'.$inicio->toDateString()

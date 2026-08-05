@@ -3,9 +3,9 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\BackgroundLibrary;
-use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\EffectLibrary;
 use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\Projects\ProjectLanguage;
 
 /**
  * Shared prompt-building + output-sanitizing for LLM animation planners
@@ -24,7 +24,7 @@ trait BuildsAnimationPrompt
     protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
-        $language = ClipLanguage::name();
+        $language = ProjectLanguage::name();
         $designRepo = app(DesignSystemRepository::class);
         $design = $designRepo->read();
         $designBlock = trim($design) !== ''
@@ -205,7 +205,7 @@ PROMPT;
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string
     {
         $words = json_encode($transcript['words'] ?? [], JSON_UNESCAPED_UNICODE);
-        $language = ClipLanguage::name();
+        $language = ProjectLanguage::name();
         $text = $transcript['text'] ?? '';
         $research = ! empty($facts)
             ? json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)

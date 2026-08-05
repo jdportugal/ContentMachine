@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\AgregarConteudoJob;
 use App\Jobs\GerarRelatorioJob;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
@@ -32,8 +33,8 @@ class Noticias extends Component
     /** Reference date of the report (YYYY-MM-DD). */
     public string $dataRelatorio = '';
 
-    /** Output language for the report write-up. */
-    public string $idiomaRelatorio = 'English';
+    /** Output language for the report write-up (defaults to the project's own). */
+    public string $idiomaRelatorio = '';
 
     /** Report generated in this session (to display). @var array<string,mixed>|null */
     public ?array $relatorio = null;
@@ -71,6 +72,7 @@ class Noticias extends Component
         $this->plataformasSelecionadas = $this->plataformasDisponiveis;
 
         $this->dataRelatorio = now()->toDateString();
+        $this->idiomaRelatorio = ProjectLanguage::name(); // still switchable in the form
 
         // Opens on the most recent already-archived report (if any).
         $ultimo = $this->notaUltimoRelatorio($vault->all('noticias'));

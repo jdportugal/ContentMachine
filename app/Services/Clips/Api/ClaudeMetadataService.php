@@ -2,8 +2,8 @@
 
 namespace App\Services\Clips\Api;
 
-use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\Contracts\MetadataService;
+use App\Services\Projects\ProjectLanguage;
 
 /**
  * Suggest a title, description and tags for a clip from its transcript, via the
@@ -16,7 +16,7 @@ class ClaudeMetadataService implements MetadataService
     public function suggest(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = ClipLanguage::name();
+        $language = ProjectLanguage::name();
         if ($text === '') {
             return $this->empty();
         }

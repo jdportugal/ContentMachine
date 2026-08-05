@@ -2,8 +2,8 @@
 
 namespace App\Services\Clips\Api;
 
-use App\Services\Clips\ClipLanguage;
 use App\Services\Clips\Contracts\ResearchService;
+use App\Services\Projects\ProjectLanguage;
 
 /**
  * Deep-research the transcript's topic via the `claude` CLI with web search,
@@ -16,7 +16,7 @@ class ClaudeResearchService implements ResearchService
     public function research(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = ClipLanguage::name();
+        $language = ProjectLanguage::name();
         if ($text === '') {
             return $this->empty();
         }
