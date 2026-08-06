@@ -112,8 +112,8 @@ class AutenticacaoTest extends TestCase
 
     // ── registration ────────────────────────────────────────────────────────
 
-    /** With no account yet, sign-up is the first-run setup — no code needed. */
-    public function test_primeiro_registo_e_aberto(): void
+    /** On a fresh install, sign-up creates the first account and signs it in. */
+    public function test_primeiro_registo_cria_a_conta(): void
     {
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Owner')
@@ -127,11 +127,13 @@ class AutenticacaoTest extends TestCase
         $this->assertSame(1, User::query()->count());
     }
 
-    /** With sign-up open, anyone may create an account (REGISTRATION_OPEN=true). */
-    public function test_registo_aberto_permite_qualquer_pessoa(): void
+    /**
+     * Sign-up stays available once accounts exist — there is no "closed" state
+     * and no flag that could put one back.
+     */
+    public function test_registo_continua_aberto_com_contas_existentes(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_open' => true]);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Colleague')
@@ -142,52 +144,23 @@ class AutenticacaoTest extends TestCase
             ->assertHasNoErrors();
 
         $this->assertTrue(Auth::check());
+        $this->assertSame(2, User::query()->count());
     }
 
-    /**
-     * THE important one: with sign-up closed, a stranger must not be able to
-     * register their way into the dashboard — that would undo the whole fix.
-     */
-    public function test_registo_fechado_recusa_estranhos(): void
+    /** The sign-up page never renders a "closed" state. */
+    public function test_a_pagina_de_registo_mostra_sempre_o_formulario(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_open' => false]);
 
-        Livewire::test(\App\Livewire\Auth\Register::class)
-            ->set('name', 'Intruder')
-            ->set('email', 'intruder@example.test')
-            ->set('password', 'a-very-long-password')
-            ->set('password_confirmation', 'a-very-long-password')
-            ->call('registar')
-            ->assertHasErrors('email');
-
-        $this->assertFalse(Auth::check());
-        $this->assertSame(0, User::query()->where('email', 'intruder@example.test')->count());
-    }
-
-    /**
-     * Closing sign-up must never strand a fresh install: with no account at all,
-     * the first one can still be created regardless of the flag.
-     */
-    public function test_primeiro_registo_e_possivel_mesmo_com_registo_fechado(): void
-    {
-        config(['contentmachine.auth.registration_open' => false]);
-
-        Livewire::test(\App\Livewire\Auth\Register::class)
-            ->set('name', 'Owner')
-            ->set('email', 'owner@example.test')
-            ->set('password', 'a-very-long-password')
-            ->set('password_confirmation', 'a-very-long-password')
-            ->call('registar')
-            ->assertHasNoErrors();
-
-        $this->assertTrue(Auth::check());
+        $this->get('/register')
+            ->assertOk()
+            ->assertDontSee('Registration is closed')
+            ->assertSee('Create account');
     }
 
     public function test_registo_exige_password_forte_e_email_unico(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_open' => true]);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Someone')

@@ -1,28 +1,6 @@
 <?php
 
-// REGISTRATION_OPEN: unset OR EMPTY both mean "not configured", so both fall back
-// to the default. Without this, `REGISTRATION_OPEN=` (declared with no value, as
-// deploy templates often do) reaches filter_var('') === false and silently closes
-// sign-up — indistinguishable from a broken deploy from the outside.
-$registoAberto = env('REGISTRATION_OPEN');
-$registoAberto = ($registoAberto === null || $registoAberto === '')
-    ? true
-    : filter_var($registoAberto, FILTER_VALIDATE_BOOL);
-
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sign-up
-    |--------------------------------------------------------------------------
-    | Open sign-up: anyone who reaches /register can create an account, and an
-    | account can read every API key stored above. Set REGISTRATION_OPEN=false
-    | once the accounts you need exist. A fresh install with no users can always
-    | create its first account, whatever the flag says.
-    */
-    'auth' => [
-        'registration_open' => $registoAberto,
-    ],
 
     /*
     |--------------------------------------------------------------------------

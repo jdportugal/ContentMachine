@@ -5,21 +5,19 @@ namespace App\Livewire\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Throwable;
 
 /**
- * Sign-up.
+ * Sign-up. Always available: anyone who reaches /register may create an account.
  *
- * Allowed when REGISTRATION_OPEN is on (the default), or when the install has no
- * users yet — so a fresh deploy can always create its first account even if the
- * flag was turned off.
+ * There is deliberately no "registration closed" state — no flag, no invite
+ * code, no first-run special case. Sign-up either works or the page does not
+ * exist, and it works.
  *
- * WARNING: an account here can read every stored API key, so open sign-up on a
- * public URL is equivalent to leaving the dashboard open. Set
- * REGISTRATION_OPEN=false once the accounts you need exist.
+ * WARNING: an account here can read every stored API key, so on a public URL
+ * this is equivalent to leaving the dashboard open. Closing it again means
+ * putting a gate back in front of this component (or removing the route).
  */
 #[Layout('components.layouts.guest')]
 class Register extends Component
@@ -32,41 +30,8 @@ class Register extends Component
 
     public string $password_confirmation = '';
 
-    /**
-     * True while the install has no account at all — the first-run case.
-     *
-     * Treated as "first run" if the users table cannot be read at all: on a
-     * half-migrated deploy the sign-up page must still work, otherwise a failed
-     * migration locks you out of your own install with no way back in.
-     */
-    public function getPrimeiroUtilizadorProperty(): bool
-    {
-        try {
-            return ! User::query()->exists();
-        } catch (Throwable) {
-            return true;
-        }
-    }
-
-    /** Whether sign-up can be completed at all right now. */
-    public function getAbertoProperty(): bool
-    {
-        return $this->registoAberto() || $this->primeiroUtilizador;
-    }
-
-    private function registoAberto(): bool
-    {
-        return (bool) config('contentmachine.auth.registration_open', false);
-    }
-
     public function registar(): void
     {
-        if (! $this->aberto) {
-            throw ValidationException::withMessages([
-                'email' => 'Registration is closed on this install.',
-            ]);
-        }
-
         $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
