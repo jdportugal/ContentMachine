@@ -50,14 +50,14 @@
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
             </div>
 
-            @unless ($this->primeiroUtilizador)
+            @if ($this->exigeCodigo)
                 <div>
                     <label for="codigo" class="eyebrow block mb-1.5">Registration code</label>
                     <input id="codigo" type="text" wire:model="codigo" required autocomplete="off"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     @error('codigo') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
                 </div>
-            @endunless
+            @endif
 
             <button type="submit"
                     class="w-full font-mono text-xs uppercase tracking-wider px-3 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50"

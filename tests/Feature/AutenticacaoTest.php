@@ -127,14 +127,31 @@ class AutenticacaoTest extends TestCase
         $this->assertSame(1, User::query()->count());
     }
 
-    /**
-     * THE important one: once an account exists, a stranger must not be able to
-     * register their way into the dashboard — that would undo the whole fix.
-     */
-    public function test_registo_fecha_depois_do_primeiro_utilizador(): void
+    /** With sign-up open, anyone may create an account (REGISTRATION_OPEN=true). */
+    public function test_registo_aberto_permite_qualquer_pessoa(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_code' => '']);
+        config(['contentmachine.auth.registration_open' => true]);
+
+        Livewire::test(\App\Livewire\Auth\Register::class)
+            ->set('name', 'Colleague')
+            ->set('email', 'colleague@example.test')
+            ->set('password', 'a-very-long-password')
+            ->set('password_confirmation', 'a-very-long-password')
+            ->call('registar')
+            ->assertHasNoErrors();
+
+        $this->assertTrue(Auth::check());
+    }
+
+    /**
+     * THE important one: with sign-up closed, a stranger must not be able to
+     * register their way into the dashboard — that would undo the whole fix.
+     */
+    public function test_registo_fechado_recusa_estranhos(): void
+    {
+        $this->utilizador();
+        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => '']);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Intruder')
@@ -151,7 +168,7 @@ class AutenticacaoTest extends TestCase
     public function test_registo_com_codigo_errado_e_recusado(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_code' => 'the-real-code']);
+        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Intruder')
@@ -168,7 +185,7 @@ class AutenticacaoTest extends TestCase
     public function test_registo_com_codigo_certo_e_aceite(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_code' => 'the-real-code']);
+        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Colleague')
@@ -186,7 +203,7 @@ class AutenticacaoTest extends TestCase
     public function test_registo_exige_password_forte_e_email_unico(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_code' => 'the-real-code']);
+        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Someone')

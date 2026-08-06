@@ -8,18 +8,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Throwable;
 
 /**
  * Sign-up.
  *
- * This app sits on a public URL and holds every API key, so registration is NOT
- * open to the world — that would hand the dashboard to whoever finds it, which
- * is how the keys leaked in the first place. It is allowed when either:
+ * Allowed when any of these holds:
  *
- *   1. the install has no users yet (first-run setup), or
- *   2. the visitor supplies the registration code (REGISTRATION_CODE).
+ *   1. REGISTRATION_OPEN is on (the default) — anyone may sign up,
+ *   2. the install has no users yet (first-run setup), or
+ *   3. the visitor supplies the registration code (REGISTRATION_CODE).
  *
- * With no code configured and an account already present, sign-up is closed.
+ * WARNING: an account here can read every stored API key. Leaving sign-up open
+ * on a public URL is equivalent to leaving the dashboard open. Once your own
+ * account exists, set REGISTRATION_OPEN=false and invite people with a code.
  */
 #[Layout('components.layouts.guest')]
 class Register extends Component
@@ -34,16 +36,37 @@ class Register extends Component
 
     public string $codigo = '';
 
-    /** True while the install has no account at all — the first-run case. */
+    /**
+     * True while the install has no account at all — the first-run case.
+     *
+     * Treated as "first run" if the users table cannot be read at all: on a
+     * half-migrated deploy the sign-up page must still work, otherwise a failed
+     * migration locks you out of your own install with no way back in.
+     */
     public function getPrimeiroUtilizadorProperty(): bool
     {
-        return ! User::query()->exists();
+        try {
+            return ! User::query()->exists();
+        } catch (Throwable) {
+            return true;
+        }
     }
 
     /** Whether sign-up can be completed at all right now. */
     public function getAbertoProperty(): bool
     {
-        return $this->primeiroUtilizador || $this->codigoConfigurado() !== '';
+        return $this->registoAberto() || $this->primeiroUtilizador || $this->codigoConfigurado() !== '';
+    }
+
+    private function registoAberto(): bool
+    {
+        return (bool) config('contentmachine.auth.registration_open', false);
+    }
+
+    /** Whether this visitor has to supply the invite code. */
+    public function getExigeCodigoProperty(): bool
+    {
+        return ! $this->registoAberto() && ! $this->primeiroUtilizador;
     }
 
     private function codigoConfigurado(): string
@@ -65,8 +88,9 @@ class Register extends Component
             'password' => ['required', 'string', 'min:12', 'confirmed'],
         ]);
 
-        // The code is required for every account after the first.
-        if (! $this->primeiroUtilizador) {
+        // The code is required only when sign-up is not open and an account
+        // already exists.
+        if (! $this->registoAberto() && ! $this->primeiroUtilizador) {
             $esperado = $this->codigoConfigurado();
             if ($esperado === '' || ! hash_equals($esperado, trim($this->codigo))) {
                 throw ValidationException::withMessages([

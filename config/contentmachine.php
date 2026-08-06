@@ -12,6 +12,10 @@ return [
     | Empty (the default) = sign-up closes as soon as an account exists.
     */
     'auth' => [
+        // Open sign-up. Anyone who reaches /register can create an account and
+        // therefore read every API key — set REGISTRATION_OPEN=false once your
+        // own account exists, and use a registration code to invite anyone else.
+        'registration_open' => filter_var(env('REGISTRATION_OPEN', true), FILTER_VALIDATE_BOOL),
         'registration_code' => env('REGISTRATION_CODE', ''),
     ],
 
