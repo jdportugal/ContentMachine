@@ -37,7 +37,8 @@ fi
 # The dashboard password (HTTP Basic over the whole app — RequireDashboardAuth).
 # Persisted next to APP_KEY so it survives restarts/redeploys. Generated if the
 # operator did not set one, so a deploy is NEVER reachable without a password.
-# Printed on every boot: there is no other way to recover it.
+# NEVER printed: container logs get shipped, shared and pasted around. The boot
+# message below points at the file instead, so retrieving it is a deliberate act.
 PASSFILE=storage/app/app_password
 if [ -z "${APP_PASSWORD:-}" ]; then
     if [ -f "${PASSFILE}" ]; then
@@ -54,7 +55,9 @@ fi
 printf '%s' "${APP_PASSWORD}" > "${PASSFILE}"
 chmod 600 "${PASSFILE}" 2>/dev/null || true
 export APP_PASSWORD
-echo "[content-machine] dashboard login — any username, password: ${APP_PASSWORD}"
+echo "[content-machine] dashboard is password-protected (HTTP Basic, any username)."
+echo "[content-machine] read the password:  docker compose exec app cat ${PASSFILE}"
+echo "[content-machine] or set your own:    APP_PASSWORD in the compose environment."
 
 # One-time self-heal: builds before the resolve-time driver fix could run the
 # FAKE renderer in production, leaving tiny "FAKE-*" stubs (FAKE-VIDEO, FAKE-FINAL,
