@@ -1,16 +1,14 @@
-name: Build and publish image
+name: Publish image
 
 # Build the combined image and push :latest to GHCR. The dedicated `production`
 # branch is the live line — merge into it to release. Any branch can still build
 # manually via "Run workflow". GITHUB_TOKEN is automatic — no secrets to set.
 #
-# Renamed from publish.yml on 2026-08-06: pushes to `production` stopped creating
-# runs entirely (six commits, zero runs, while the workflow still reported itself
-# active and its file was byte-identical to the last one that built). Renaming
-# forces GitHub to register this as a new workflow, which clears that state. If
-# runs still do not appear, the cause is account-level — check
-# Settings → Actions → General and the billing spending limit — and deploy with
-# deploy/rebuild.sh meanwhile, which needs no CI at all.
+# If a push does not produce a run, check https://www.githubstatus.com before
+# looking here: during the 2026-08-06 Actions incident GitHub throttled webhook
+# delivery, so pushes were recorded but triggered no workflow runs for hours.
+# "Run workflow" is dispatched directly rather than by webhook, so it still works
+# in that situation; deploy/rebuild.sh builds on the host with no CI at all.
 on:
   push:
     branches: [production]
