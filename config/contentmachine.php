@@ -1,5 +1,14 @@
 <?php
 
+// REGISTRATION_OPEN: unset OR EMPTY both mean "not configured", so both fall back
+// to the default. Without this, `REGISTRATION_OPEN=` (declared with no value, as
+// deploy templates often do) reaches filter_var('') === false and silently closes
+// sign-up — indistinguishable from a broken deploy from the outside.
+$registoAberto = env('REGISTRATION_OPEN');
+$registoAberto = ($registoAberto === null || $registoAberto === '')
+    ? true
+    : filter_var($registoAberto, FILTER_VALIDATE_BOOL);
+
 return [
 
     /*
@@ -15,7 +24,7 @@ return [
         // Open sign-up. Anyone who reaches /register can create an account and
         // therefore read every API key — set REGISTRATION_OPEN=false once your
         // own account exists, and use a registration code to invite anyone else.
-        'registration_open' => filter_var(env('REGISTRATION_OPEN', true), FILTER_VALIDATE_BOOL),
+        'registration_open' => $registoAberto,
         'registration_code' => env('REGISTRATION_CODE', ''),
     ],
 
