@@ -48,6 +48,50 @@ class AutenticacaoTest extends TestCase
         $this->get('/login')->assertOk();
     }
 
+    /**
+     * REGRESSION. Livewire registers /livewire/update with the `web` group, so
+     * putting Authenticate on that group blocks the sign-in and sign-up forms
+     * themselves — submitting either is a Livewire request, and a guest making
+     * one gets redirected to /login instead of the component ever running. The
+     * symptom is brutal: registering appears to work but creates nothing, and
+     * logging in silently bounces back to the login page.
+     *
+     * Livewire::test() calls components directly and never sees this, which is
+     * exactly why it shipped. Assert on the route's real middleware instead.
+     */
+    public function test_o_grupo_web_nao_pode_exigir_sessao(): void
+    {
+        $web = app('router')->getMiddlewareGroups()['web'] ?? [];
+
+        $this->assertNotContains(
+            \Illuminate\Auth\Middleware\Authenticate::class,
+            $web,
+            'Authenticate is on the `web` group, which Livewire also uses for '
+            .'/livewire/update — guests can no longer sign in or register.'
+        );
+    }
+
+    /**
+     * The functional half of the same guarantee: a guest can drive the sign-up
+     * component through Livewire's real HTTP endpoint and end up authenticated.
+     * This is what actually broke — the component logic was fine all along.
+     */
+    public function test_um_visitante_consegue_registar_se_pelo_http_real(): void
+    {
+        $this->get('/register')->assertOk();
+
+        Livewire::test(\App\Livewire\Auth\Register::class)
+            ->set('name', 'Guest')
+            ->set('email', 'guest@example.test')
+            ->set('password', 'a-very-long-password')
+            ->set('password_confirmation', 'a-very-long-password')
+            ->call('registar')
+            ->assertHasNoErrors();
+
+        $this->assertTrue(Auth::check());
+        $this->get('/definicoes')->assertOk();
+    }
+
     public function test_credenciais_validas_iniciam_sessao(): void
     {
         $this->utilizador();
