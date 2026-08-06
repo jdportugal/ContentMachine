@@ -16,12 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         // request is HTTPS and generates https:// URLs (no mixed-content on assets).
         $middleware->trustProxies(at: '*');
 
-        // Password-gate the whole app (see RequireDashboardAuth). Global, not
-        // web-group only, so the file-serving routes are covered too — they hand
-        // out rendered media and would otherwise stay open.
-        $middleware->prepend(\App\Http\Middleware\RequireDashboardAuth::class);
+        // Require a signed-in user for EVERYTHING in routes/web.php — pages and
+        // the file-serving routes alike (those hand out rendered media and would
+        // otherwise stay open). The sign-in screen opts out via withoutMiddleware.
+        $middleware->web(append: [\Illuminate\Auth\Middleware\Authenticate::class]);
 
         // Resolve the active project (per session) and repoint the vault at it.
+        // After Authenticate, so it only ever runs for a real session.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

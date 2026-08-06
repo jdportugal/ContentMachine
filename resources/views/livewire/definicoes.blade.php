@@ -14,6 +14,7 @@
                 'social' => '❧ Social & Publishing',
                 'motor'  => '⚙ AI & Engine',
                 'chaves' => '🔑 API Keys',
+                'conta'  => '👤 Account',
                 'sistema' => '↻ Updates',
             ] as $id => $rotulo)
                 <button type="button" wire:click="$set('secao', '{{ $id }}')"
@@ -272,6 +273,51 @@
                                    class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                         </div>
                     @endforeach
+                </div>
+            </x-panel>
+        @endif
+
+        {{-- ══════════════════════════ ACCOUNT ══════════════════════════ --}}
+        @if ($secao === 'conta')
+            <x-panel eyebrow="Access" title="Account" glyph="👤">
+                <p class="text-ink-soft -mt-2 mb-4">
+                    The single account that signs in to this install. If you are still using the
+                    password the deploy generated, change it here and then delete
+                    <span class="font-mono text-ink-soft">storage/app/admin_password</span>.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="eyebrow block mb-1.5">Email</label>
+                        <input type="email" autocomplete="username" wire:model="conta.email"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.email') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Current password</label>
+                        <input type="password" autocomplete="current-password" wire:model="conta.atual" placeholder="required to save"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.atual') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">New password</label>
+                        <input type="password" autocomplete="new-password" wire:model="conta.nova" placeholder="leave blank to keep"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.nova') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Confirm new password</label>
+                        <input type="password" autocomplete="new-password" wire:model="conta.nova_confirmation"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-3">
+                    <button type="button" wire:click="guardarConta"
+                            class="font-mono text-xs uppercase tracking-wider px-3.5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                        Update account
+                    </button>
+                    @if ($contaGuardada)
+                        <span class="font-mono text-[0.65rem] text-teal">✓ saved at {{ $contaGuardada }}</span>
+                    @endif
                 </div>
             </x-panel>
         @endif

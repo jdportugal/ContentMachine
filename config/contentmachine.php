@@ -4,19 +4,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Dashboard access
+    | Sign-up
     |--------------------------------------------------------------------------
-    | One shared password guarding the WHOLE app (HTTP Basic, see
-    | RequireDashboardAuth). There are no user accounts — but the app stores the
-    | API keys and every generated asset, so it must never be world-readable.
-    | In Docker the entrypoint generates and persists one automatically.
-    |
-    | When this is empty the middleware falls back to storage/app/app_password:
-    | `php artisan serve` (what the container runs) does not forward APP_PASSWORD
-    | to the server process it spawns, so the file is the reliable channel.
+    | This install is reachable on a public URL and holds every API key, so
+    | registration is NOT open to the world. It is allowed when the install has
+    | no users yet (first-run setup) or when the visitor supplies this code.
+    | Empty (the default) = sign-up closes as soon as an account exists.
     */
-    'dashboard' => [
-        'password' => env('APP_PASSWORD', ''),
+    'auth' => [
+        'registration_code' => env('REGISTRATION_CODE', ''),
     ],
 
     /*

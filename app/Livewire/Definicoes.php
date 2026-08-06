@@ -6,6 +6,8 @@ use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
 use App\Services\Settings\SettingsRepository;
 use App\Services\UpdateService;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -42,6 +44,11 @@ class Definicoes extends Component
     /** Which keys already have a value stored, so the UI can say so without revealing it. @var array<string,bool> */
     public array $chavesDefinidas = [];
 
+    /** Sign-in account: email + password change. @var array<string,string> */
+    public array $conta = ['email' => '', 'atual' => '', 'nova' => '', 'nova_confirmation' => ''];
+
+    public ?string $contaGuardada = null;
+
     /** Service/model config. @var array<string,string> */
     public array $modelos = [];
 
@@ -72,6 +79,7 @@ class Definicoes extends Component
             ->map(fn ($v) => is_string($v) && trim($v) !== '')
             ->all();
         $this->chaves = array_map(fn () => '', $this->chavesDefinidas);
+        $this->conta['email'] = (string) (auth()->user()?->email ?? '');
         $this->modelos = $tudo['modelos'];
         $this->blotato = $tudo['blotato'];
         $this->fontes = collect($tudo['agregador'])
@@ -111,6 +119,42 @@ class Definicoes extends Component
         $this->chavesDefinidas = collect($definicoes->all()['chaves'])
             ->map(fn ($v) => is_string($v) && trim($v) !== '')
             ->all();
+    }
+
+    /**
+     * Change the sign-in email/password. The current password is required even
+     * for an email change: a session left open on a shared machine must not be
+     * enough to take the account over.
+     */
+    public function guardarConta(): void
+    {
+        $utilizador = auth()->user();
+        if ($utilizador === null) {
+            return;
+        }
+
+        $this->validate([
+            'conta.email' => ['required', 'string', 'email', 'max:255'],
+            'conta.atual' => ['required', 'string'],
+            'conta.nova' => ['nullable', 'string', 'min:12', 'confirmed'],
+        ], attributes: [
+            'conta.email' => 'email',
+            'conta.atual' => 'current password',
+            'conta.nova' => 'new password',
+        ]);
+
+        if (! Hash::check($this->conta['atual'], $utilizador->password)) {
+            throw ValidationException::withMessages(['conta.atual' => 'That is not your current password.']);
+        }
+
+        $utilizador->email = $this->conta['email'];
+        if (($this->conta['nova'] ?? '') !== '') {
+            $utilizador->password = Hash::make($this->conta['nova']);
+        }
+        $utilizador->save();
+
+        $this->conta['atual'] = $this->conta['nova'] = $this->conta['nova_confirmation'] = '';
+        $this->contaGuardada = now()->translatedFormat('H:i');
     }
 
     /** Remove a stored API key (e.g. a leaked one). Blank fields never erase — this does. */

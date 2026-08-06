@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\User;
 use App\Services\Projects\ProjectContext;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
@@ -34,6 +35,19 @@ abstract class TestCase extends BaseTestCase
         // ProjectContext may have resolved its default (real vault) during boot,
         // before the config above. Reset it so it re-reads the temp paths.
         $this->app->forgetInstance(ProjectContext::class);
+    }
+
+    /**
+     * Sign in, so a test can reach the app: every route in routes/web.php now
+     * requires a session (see Authenticate in bootstrap/app.php).
+     *
+     * The user is deliberately NOT persisted — actingAs() puts it straight on the
+     * guard, so this works in the tests that have no database at all. Guest
+     * behaviour is covered on purpose in AutenticacaoTest, not here.
+     */
+    protected function comSessaoIniciada(): static
+    {
+        return $this->actingAs(new User(['name' => 'Test', 'email' => 'test@example.test']));
     }
 
     protected function tearDown(): void

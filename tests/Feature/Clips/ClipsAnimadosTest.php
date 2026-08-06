@@ -23,6 +23,13 @@ class ClipsAnimadosTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
+    }
+
     private function store(): ClipStore
     {
         return app(ClipStore::class);

@@ -10,6 +10,13 @@ class PaginasTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
+    }
+
     public static function routes(): array
     {
         return [

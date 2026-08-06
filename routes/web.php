@@ -14,8 +14,32 @@ use App\Livewire\Rascunhos;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Shorts\MusicLibrary;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+
+// ── Authentication ───────────────────────────────────────────────────────────
+// Everything else in this file requires a signed-in user (Authenticate is
+// appended to the web group in bootstrap/app.php); these two are the way in and
+// out, so they opt out of it explicitly.
+Route::livewire('/login', \App\Livewire\Auth\Login::class)
+    ->name('login')
+    ->withoutMiddleware(\Illuminate\Auth\Middleware\Authenticate::class)
+    ->middleware('guest');
+
+Route::livewire('/register', \App\Livewire\Auth\Register::class)
+    ->name('register')
+    ->withoutMiddleware(\Illuminate\Auth\Middleware\Authenticate::class)
+    ->middleware('guest');
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login');
+})->name('logout');
 
 Route::livewire('/', Painel::class)->name('painel');
 Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');

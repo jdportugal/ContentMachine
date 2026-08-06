@@ -18,6 +18,8 @@ class ClipsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
         $this->tmp = sys_get_temp_dir().'/cm-clips-'.uniqid();
         mkdir($this->tmp, 0775, true);
         config(['contentmachine.vault.path' => $this->tmp]);

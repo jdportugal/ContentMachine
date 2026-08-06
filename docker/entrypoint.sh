@@ -34,31 +34,6 @@ if [ -z "${APP_KEY:-}" ]; then
     export APP_KEY
 fi
 
-# The dashboard password (HTTP Basic over the whole app — RequireDashboardAuth).
-# Persisted next to APP_KEY so it survives restarts/redeploys. Generated if the
-# operator did not set one, so a deploy is NEVER reachable without a password.
-# NEVER printed: container logs get shipped, shared and pasted around. The boot
-# message below points at the file instead, so retrieving it is a deliberate act.
-PASSFILE=storage/app/app_password
-if [ -z "${APP_PASSWORD:-}" ]; then
-    if [ -f "${PASSFILE}" ]; then
-        APP_PASSWORD="$(cat "${PASSFILE}")"
-    else
-        APP_PASSWORD="$(head -c 18 /dev/urandom | base64 | tr -d '/+=' | cut -c1-24)"
-    fi
-fi
-# ALWAYS write the file, including when the operator supplied APP_PASSWORD:
-# `php artisan serve` (the web process below) only forwards an allowlist of
-# variables to the server it spawns, and APP_PASSWORD is not on it. The file is
-# how the app actually reads the password — skip it and the gate sees none and
-# refuses every request.
-printf '%s' "${APP_PASSWORD}" > "${PASSFILE}"
-chmod 600 "${PASSFILE}" 2>/dev/null || true
-export APP_PASSWORD
-echo "[content-machine] dashboard is password-protected (HTTP Basic, any username)."
-echo "[content-machine] read the password:  docker compose exec app cat ${PASSFILE}"
-echo "[content-machine] or set your own:    APP_PASSWORD in the compose environment."
-
 # One-time self-heal: builds before the resolve-time driver fix could run the
 # FAKE renderer in production, leaving tiny "FAKE-*" stubs (FAKE-VIDEO, FAKE-FINAL,
 # FAKE-AUDIO…) cached on the storage volume. is_file() treats them as valid
@@ -72,6 +47,18 @@ done
 php artisan migrate --force || true
 # public/storage symlink for the public disk.
 php artisan storage:link 2>/dev/null || true
+
+# The admin account. Seeded at boot rather than offered as a "create the first
+# account" screen: this app is on a public URL, and such a screen belongs to
+# whoever reaches it first. No-op once a user exists.
+# The generated password is written to storage/app/admin_password — never to
+# stdout, because container logs get shipped, shared and pasted around.
+php artisan app:ensure-admin --no-interaction || true
+if [ -f storage/app/admin_password ]; then
+    echo "[content-machine] admin account ready. Read the first-login password with:"
+    echo "[content-machine]   docker compose exec app cat storage/app/admin_password"
+    echo "[content-machine] change it under Settings → Account, then delete that file."
+fi
 
 # exec so SIGTERM reaches supervisor (clean shutdown of every child).
 exec supervisord -c /etc/supervisor/conf.d/app.conf

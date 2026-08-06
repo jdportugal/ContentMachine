@@ -74,6 +74,18 @@
                 @endforeach
             </nav>
 
+            <div class="px-6 py-2.5 border-t border-ink-soft/15 flex items-center justify-between gap-2">
+                <span class="font-mono text-[0.6rem] text-ink-faint truncate" title="{{ auth()->user()?->email }}">
+                    {{ auth()->user()?->email }}
+                </span>
+                <form method="POST" action="{{ route('logout') }}" class="shrink-0">
+                    @csrf
+                    <button type="submit" class="font-mono text-[0.6rem] text-ink-faint hover:text-rust underline underline-offset-2 transition">
+                        Sign out
+                    </button>
+                </form>
+            </div>
+
             <div class="px-6 py-2.5 border-t border-ink-soft/15">
                 <div class="font-mono text-[0.6rem] text-ink-faint leading-relaxed">
                     <div>BRAIN ·
