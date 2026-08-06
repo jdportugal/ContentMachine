@@ -93,4 +93,44 @@ class DefinicoesTest extends TestCase
 
         $this->assertSame(['canal-a', 'canal-b'], app(SettingsRepository::class)->get('agregador.youtube'));
     }
+
+    /**
+     * The keys must NEVER reach the browser. $chaves is a public Livewire
+     * property, so anything loaded into it is serialised into the page — that is
+     * exactly how they leaked. The page may say a key is set; never its value.
+     */
+    public function test_a_pagina_nunca_devolve_o_valor_das_chaves(): void
+    {
+        app(SettingsRepository::class)->save(['chaves' => ['openai' => 'sk-CANARIO-12345']]);
+
+        Livewire::test(Definicoes::class)
+            ->assertSet('chaves.openai', '')
+            ->assertSet('chavesDefinidas.openai', true)
+            ->assertDontSee('sk-CANARIO-12345');
+    }
+
+    /** A blank field means "keep the stored key", not "erase it". */
+    public function test_guardar_com_campo_vazio_nao_apaga_a_chave(): void
+    {
+        app(SettingsRepository::class)->save(['chaves' => ['openai' => 'sk-mantida']]);
+
+        Livewire::test(Definicoes::class)
+            ->set('geral.nome_marca', 'Brand Machine')
+            ->call('guardar')
+            ->assertHasNoErrors();
+
+        $this->assertSame('sk-mantida', app(SettingsRepository::class)->get('chaves.openai'));
+    }
+
+    /** …but removing one on purpose still works. */
+    public function test_limpar_chave_remove_a_chave_guardada(): void
+    {
+        app(SettingsRepository::class)->save(['chaves' => ['openai' => 'sk-comprometida']]);
+
+        Livewire::test(Definicoes::class)
+            ->call('limparChave', 'openai')
+            ->assertSet('chavesDefinidas.openai', false);
+
+        $this->assertSame('', app(SettingsRepository::class)->get('chaves.openai'));
+    }
 }

@@ -4,6 +4,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Dashboard access
+    |--------------------------------------------------------------------------
+    | One shared password guarding the WHOLE app (HTTP Basic, see
+    | RequireDashboardAuth). There are no user accounts — but the app stores the
+    | API keys and every generated asset, so it must never be world-readable.
+    | In Docker the entrypoint generates and persists one automatically.
+    |
+    | When this is empty the middleware falls back to storage/app/app_password:
+    | `php artisan serve` (what the container runs) does not forward APP_PASSWORD
+    | to the server process it spawns, so the file is the reliable channel.
+    */
+    'dashboard' => [
+        'password' => env('APP_PASSWORD', ''),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Vault (the "brain" / memory — Obsidian)
     |--------------------------------------------------------------------------
     | Folder of Markdown files (.md with YAML frontmatter) that serves as the

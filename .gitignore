@@ -21,6 +21,14 @@
 /storage/*.key
 /storage/pail
 /vendor
+
+# Local SQLite databases — NEVER commit. They can hold sessions, cache, users
+# and other runtime data. (DB_DATABASE=contentmachine creates this file at the
+# repo root; Laravel's own default is database/database.sqlite.)
+/contentmachine
+*.sqlite
+*.sqlite-journal
+*.sqlite3
 _ide_helper.php
 Homestead.json
 Homestead.yaml

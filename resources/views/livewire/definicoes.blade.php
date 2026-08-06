@@ -237,7 +237,8 @@
         @if ($secao === 'chaves')
             <x-panel eyebrow="Credentials" title="API keys" glyph="🔑">
                 <p class="text-ink-soft -mt-2 mb-4">
-                    Stored in the vault for local use. Empty → falls back to the matching <span class="font-mono text-ink-soft">.env</span> value.
+                    Stored server-side and never sent back to the browser — a saved key shows as <span class="text-teal">● saved</span>, not as its value.
+                    Leave a field blank to keep the stored key; type to replace it, or <span class="font-mono text-ink-soft">remove</span> to delete it.
                     Setting the <span class="text-teal">Anthropic</span> key routes all Claude features through the API.
                     A <span class="text-teal">Tensorix</span> key is used as an automatic fallback if Claude fails — or as the primary clip LLM (set the provider to <span class="font-mono text-ink-soft">tensorx</span> under Engine).
                 </p>
@@ -257,8 +258,17 @@
                         'blotato' => 'Blotato (publishing)',
                     ] as $chave => $rotulo)
                         <div>
-                            <label class="eyebrow block mb-1.5">{{ $rotulo }}</label>
-                            <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}" placeholder="•••• (from .env)"
+                            <label class="eyebrow block mb-1.5 flex items-center gap-2">
+                                {{ $rotulo }}
+                                @if ($chavesDefinidas[$chave] ?? false)
+                                    <span class="text-teal font-mono text-[0.6rem]">● saved</span>
+                                    <button type="button" wire:click="limparChave('{{ $chave }}')"
+                                            wire:confirm="Remove the stored {{ $rotulo }} key?"
+                                            class="ml-auto font-mono text-[0.6rem] text-ink-faint hover:text-rust underline">remove</button>
+                                @endif
+                            </label>
+                            <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}"
+                                   placeholder="{{ ($chavesDefinidas[$chave] ?? false) ? 'saved — type to replace' : 'not set (falls back to .env)' }}"
                                    class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                         </div>
                     @endforeach

@@ -34,6 +34,28 @@ if [ -z "${APP_KEY:-}" ]; then
     export APP_KEY
 fi
 
+# The dashboard password (HTTP Basic over the whole app — RequireDashboardAuth).
+# Persisted next to APP_KEY so it survives restarts/redeploys. Generated if the
+# operator did not set one, so a deploy is NEVER reachable without a password.
+# Printed on every boot: there is no other way to recover it.
+PASSFILE=storage/app/app_password
+if [ -z "${APP_PASSWORD:-}" ]; then
+    if [ -f "${PASSFILE}" ]; then
+        APP_PASSWORD="$(cat "${PASSFILE}")"
+    else
+        APP_PASSWORD="$(head -c 18 /dev/urandom | base64 | tr -d '/+=' | cut -c1-24)"
+    fi
+fi
+# ALWAYS write the file, including when the operator supplied APP_PASSWORD:
+# `php artisan serve` (the web process below) only forwards an allowlist of
+# variables to the server it spawns, and APP_PASSWORD is not on it. The file is
+# how the app actually reads the password — skip it and the gate sees none and
+# refuses every request.
+printf '%s' "${APP_PASSWORD}" > "${PASSFILE}"
+chmod 600 "${PASSFILE}" 2>/dev/null || true
+export APP_PASSWORD
+echo "[content-machine] dashboard login — any username, password: ${APP_PASSWORD}"
+
 # One-time self-heal: builds before the resolve-time driver fix could run the
 # FAKE renderer in production, leaving tiny "FAKE-*" stubs (FAKE-VIDEO, FAKE-FINAL,
 # FAKE-AUDIO…) cached on the storage volume. is_file() treats them as valid

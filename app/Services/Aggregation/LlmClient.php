@@ -266,7 +266,8 @@ class LlmClient
         $todas = getenv();
         if (is_array($todas)) {
             foreach ($todas as $k => $val) {
-                if (is_string($val) && ! $this->ehMarcadorSessao((string) $k)) {
+                $k = (string) $k;
+                if (is_string($val) && ! $this->ehMarcadorSessao($k) && ! $this->ehSegredoAlheio($k)) {
                     $env[$k] = $val;
                 }
             }
@@ -301,6 +302,30 @@ class LlmClient
     private function ehMarcadorSessao(string $chave): bool
     {
         return in_array($chave, self::MARCADORES_SESSAO, true) || str_starts_with($chave, 'CLAUDE_CODE');
+    }
+
+    /**
+     * A secret that does NOT belong to `claude` and must not enter the subprocess.
+     *
+     * SECURITY: this write-up runs with `--allowedTools WebSearch WebFetch` over
+     * UNTRUSTED material (third-party video transcripts). A prompt injection
+     * hidden in that material could try to read environment variables and
+     * exfiltrate them via WebFetch. So every other provider's credential
+     * (OpenAI, Gemini, kie.ai, ElevenLabs, Apify, YouTube, Reddit…), the APP_KEY
+     * and the database credentials are withheld — `claude` needs none of them.
+     * Only Anthropic's own auth (ANTHROPIC_*) is preserved.
+     */
+    private function ehSegredoAlheio(string $chave): bool
+    {
+        // Anthropic's own authentication is legitimate in this subprocess.
+        if (str_starts_with($chave, 'ANTHROPIC_')) {
+            return false;
+        }
+
+        return (bool) preg_match(
+            '/(API_KEY|_TOKEN$|_SECRET|SECRET_|PASSWORD|_KEY$|CLIENT_ID)/i',
+            $chave
+        );
     }
 
     /** Absolute path of the `claude` binary, or null if unavailable (cached). */

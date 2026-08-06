@@ -20,6 +20,9 @@ storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
 database/database.sqlite
+/contentmachine
+*.sqlite
+*.sqlite3
 
 # Runtime content (lives on a volume, not baked in)
 vault

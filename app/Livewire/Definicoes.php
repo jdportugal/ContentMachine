@@ -29,8 +29,18 @@ class Definicoes extends Component
     /** @var array<string,string> */
     public array $shorts = [];
 
-    /** API keys (local). @var array<string,string> */
+    /**
+     * API keys — WRITE-ONLY. Never populated from storage: a public Livewire
+     * property is serialised into the page, so loading the real values here
+     * would ship every key to the browser on each render. Blank means "leave as
+     * is"; only what the user types is saved.
+     *
+     * @var array<string,string>
+     */
     public array $chaves = [];
+
+    /** Which keys already have a value stored, so the UI can say so without revealing it. @var array<string,bool> */
+    public array $chavesDefinidas = [];
 
     /** Service/model config. @var array<string,string> */
     public array $modelos = [];
@@ -57,7 +67,11 @@ class Definicoes extends Component
         $this->geral = $tudo['geral'];
         $this->perfis = $tudo['perfis'];
         $this->shorts = $tudo['shorts'];
-        $this->chaves = $tudo['chaves'];
+        // Only WHETHER each key is set — never the value (see $chaves).
+        $this->chavesDefinidas = collect($tudo['chaves'])
+            ->map(fn ($v) => is_string($v) && trim($v) !== '')
+            ->all();
+        $this->chaves = array_map(fn () => '', $this->chavesDefinidas);
         $this->modelos = $tudo['modelos'];
         $this->blotato = $tudo['blotato'];
         $this->fontes = collect($tudo['agregador'])
@@ -84,12 +98,31 @@ class Definicoes extends Component
                 ->map(fn (array $lista) => array_values(array_filter(array_map('trim', $lista))))
                 ->all(),
             'shorts' => $this->shorts,
-            'chaves' => array_map('trim', $this->chaves),
+            // Only what was actually typed: a blank field means "keep the stored
+            // key", never "erase it" (the fields render empty by design — see
+            // $chaves). Use limparChave() to remove one on purpose.
+            'chaves' => array_filter(array_map('trim', $this->chaves), fn (string $v) => $v !== ''),
             'modelos' => array_map('trim', $this->modelos),
             'blotato' => array_map('trim', $this->blotato),
         ]);
 
         $this->guardado = now()->translatedFormat('H:i');
+        $this->chaves = array_map(fn () => '', $this->chaves);
+        $this->chavesDefinidas = collect($definicoes->all()['chaves'])
+            ->map(fn ($v) => is_string($v) && trim($v) !== '')
+            ->all();
+    }
+
+    /** Remove a stored API key (e.g. a leaked one). Blank fields never erase — this does. */
+    public function limparChave(string $chave, SettingsRepository $definicoes): void
+    {
+        if (! array_key_exists($chave, $this->chavesDefinidas)) {
+            return;
+        }
+
+        $definicoes->save(['chaves' => [$chave => '']]);
+        $this->chaves[$chave] = '';
+        $this->chavesDefinidas[$chave] = false;
     }
 
     public function adicionarCanal(string $plataforma): void
