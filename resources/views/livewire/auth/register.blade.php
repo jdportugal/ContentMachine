@@ -10,7 +10,7 @@
         <div class="bg-vellum/40 border border-ink-soft/15 rounded-sm shadow-engraved px-6 py-6 text-center">
             <p class="text-ink-soft font-mono text-sm">Registration is closed on this install.</p>
             <p class="text-ink-faint font-mono text-[0.65rem] mt-2">
-                Set <span class="text-teal">REGISTRATION_CODE</span> to invite someone.
+                Set <span class="text-teal">REGISTRATION_OPEN=true</span> to allow sign-ups.
             </p>
             <a href="{{ route('login') }}" class="inline-block mt-4 font-mono text-[0.7rem] text-teal underline underline-offset-2">Back to sign in</a>
         </div>
@@ -49,15 +49,6 @@
                 <input id="password_confirmation" type="password" wire:model="password_confirmation" required autocomplete="new-password"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
             </div>
-
-            @if ($this->exigeCodigo)
-                <div>
-                    <label for="codigo" class="eyebrow block mb-1.5">Registration code</label>
-                    <input id="codigo" type="text" wire:model="codigo" required autocomplete="off"
-                           class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
-                    @error('codigo') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
-                </div>
-            @endif
 
             <button type="submit"
                     class="w-full font-mono text-xs uppercase tracking-wider px-3 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50"

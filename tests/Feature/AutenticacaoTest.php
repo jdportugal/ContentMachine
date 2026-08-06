@@ -151,7 +151,7 @@ class AutenticacaoTest extends TestCase
     public function test_registo_fechado_recusa_estranhos(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => '']);
+        config(['contentmachine.auth.registration_open' => false]);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Intruder')
@@ -165,52 +165,35 @@ class AutenticacaoTest extends TestCase
         $this->assertSame(0, User::query()->where('email', 'intruder@example.test')->count());
     }
 
-    public function test_registo_com_codigo_errado_e_recusado(): void
+    /**
+     * Closing sign-up must never strand a fresh install: with no account at all,
+     * the first one can still be created regardless of the flag.
+     */
+    public function test_primeiro_registo_e_possivel_mesmo_com_registo_fechado(): void
     {
-        $this->utilizador();
-        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
+        config(['contentmachine.auth.registration_open' => false]);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
-            ->set('name', 'Intruder')
-            ->set('email', 'intruder@example.test')
+            ->set('name', 'Owner')
+            ->set('email', 'owner@example.test')
             ->set('password', 'a-very-long-password')
             ->set('password_confirmation', 'a-very-long-password')
-            ->set('codigo', 'guessing')
-            ->call('registar')
-            ->assertHasErrors('codigo');
-
-        $this->assertFalse(Auth::check());
-    }
-
-    public function test_registo_com_codigo_certo_e_aceite(): void
-    {
-        $this->utilizador();
-        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
-
-        Livewire::test(\App\Livewire\Auth\Register::class)
-            ->set('name', 'Colleague')
-            ->set('email', 'colleague@example.test')
-            ->set('password', 'a-very-long-password')
-            ->set('password_confirmation', 'a-very-long-password')
-            ->set('codigo', 'the-real-code')
             ->call('registar')
             ->assertHasNoErrors();
 
         $this->assertTrue(Auth::check());
-        $this->assertSame(2, User::query()->count());
     }
 
     public function test_registo_exige_password_forte_e_email_unico(): void
     {
         $this->utilizador();
-        config(['contentmachine.auth.registration_open' => false, 'contentmachine.auth.registration_code' => 'the-real-code']);
+        config(['contentmachine.auth.registration_open' => true]);
 
         Livewire::test(\App\Livewire\Auth\Register::class)
             ->set('name', 'Someone')
             ->set('email', 'admin@example.test') // already taken
             ->set('password', 'short')
             ->set('password_confirmation', 'short')
-            ->set('codigo', 'the-real-code')
             ->call('registar')
             ->assertHasErrors(['email', 'password']);
     }

@@ -15,17 +15,13 @@ return [
     |--------------------------------------------------------------------------
     | Sign-up
     |--------------------------------------------------------------------------
-    | This install is reachable on a public URL and holds every API key, so
-    | registration is NOT open to the world. It is allowed when the install has
-    | no users yet (first-run setup) or when the visitor supplies this code.
-    | Empty (the default) = sign-up closes as soon as an account exists.
+    | Open sign-up: anyone who reaches /register can create an account, and an
+    | account can read every API key stored above. Set REGISTRATION_OPEN=false
+    | once the accounts you need exist. A fresh install with no users can always
+    | create its first account, whatever the flag says.
     */
     'auth' => [
-        // Open sign-up. Anyone who reaches /register can create an account and
-        // therefore read every API key — set REGISTRATION_OPEN=false once your
-        // own account exists, and use a registration code to invite anyone else.
         'registration_open' => $registoAberto,
-        'registration_code' => env('REGISTRATION_CODE', ''),
     ],
 
     /*

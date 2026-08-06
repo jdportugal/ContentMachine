@@ -13,15 +13,13 @@ use Throwable;
 /**
  * Sign-up.
  *
- * Allowed when any of these holds:
+ * Allowed when REGISTRATION_OPEN is on (the default), or when the install has no
+ * users yet — so a fresh deploy can always create its first account even if the
+ * flag was turned off.
  *
- *   1. REGISTRATION_OPEN is on (the default) — anyone may sign up,
- *   2. the install has no users yet (first-run setup), or
- *   3. the visitor supplies the registration code (REGISTRATION_CODE).
- *
- * WARNING: an account here can read every stored API key. Leaving sign-up open
- * on a public URL is equivalent to leaving the dashboard open. Once your own
- * account exists, set REGISTRATION_OPEN=false and invite people with a code.
+ * WARNING: an account here can read every stored API key, so open sign-up on a
+ * public URL is equivalent to leaving the dashboard open. Set
+ * REGISTRATION_OPEN=false once the accounts you need exist.
  */
 #[Layout('components.layouts.guest')]
 class Register extends Component
@@ -33,8 +31,6 @@ class Register extends Component
     public string $password = '';
 
     public string $password_confirmation = '';
-
-    public string $codigo = '';
 
     /**
      * True while the install has no account at all — the first-run case.
@@ -55,23 +51,12 @@ class Register extends Component
     /** Whether sign-up can be completed at all right now. */
     public function getAbertoProperty(): bool
     {
-        return $this->registoAberto() || $this->primeiroUtilizador || $this->codigoConfigurado() !== '';
+        return $this->registoAberto() || $this->primeiroUtilizador;
     }
 
     private function registoAberto(): bool
     {
         return (bool) config('contentmachine.auth.registration_open', false);
-    }
-
-    /** Whether this visitor has to supply the invite code. */
-    public function getExigeCodigoProperty(): bool
-    {
-        return ! $this->registoAberto() && ! $this->primeiroUtilizador;
-    }
-
-    private function codigoConfigurado(): string
-    {
-        return trim((string) config('contentmachine.auth.registration_code', ''));
     }
 
     public function registar(): void
@@ -87,17 +72,6 @@ class Register extends Component
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:12', 'confirmed'],
         ]);
-
-        // The code is required only when sign-up is not open and an account
-        // already exists.
-        if (! $this->registoAberto() && ! $this->primeiroUtilizador) {
-            $esperado = $this->codigoConfigurado();
-            if ($esperado === '' || ! hash_equals($esperado, trim($this->codigo))) {
-                throw ValidationException::withMessages([
-                    'codigo' => 'That registration code is not valid.',
-                ]);
-            }
-        }
 
         $utilizador = User::create([
             'name' => $this->name,
