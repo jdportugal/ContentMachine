@@ -876,23 +876,58 @@ class ClipsAnimados extends Component
     public ?int $sceneLibraryPicker = null;
 
     /**
-     * The image each scene currently shows (first layer with a src that resolves to
-     * one of the clip's images), so the editor can preview and replace it.
+     * The layer in a scene that shows an image — the one already carrying a src,
+     * otherwise the first image-reveal (an image slot waiting to be filled).
+     * Returns null when nothing in the scene shows an image at all.
      *
-     * @return array<int,array{id:string,layerIndex:int,library:bool}>
+     * Shared by the editor UI and aplicarImagemCena() on purpose: if the two
+     * disagreed, the editor would offer an upload that silently went nowhere.
+     */
+    private function camadaDeImagem(int $i): ?int
+    {
+        $layers = $this->editScenes[$i]['layers'] ?? [];
+        foreach ($layers as $li => $layer) {
+            $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
+            if (is_string($src) && $src !== '') {
+                return (int) $li;
+            }
+        }
+        foreach ($layers as $li => $layer) {
+            if (is_array($layer) && ($layer['type'] ?? null) === 'image-reveal') {
+                return (int) $li;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * The image slot of every scene that shows one, so the editor can preview and
+     * replace it. `id` is null when the slot is still EMPTY — the scene shows an
+     * image but none has been supplied yet (the user picked "upload my own" and
+     * has not uploaded, or the image it referenced was removed). Those scenes get
+     * the upload/library controls too; without them there is no way to give a
+     * segment its picture from the editor.
+     *
+     * @return array<int,array{id:?string,layerIndex:int,library:bool,video:bool}>
      */
     public function getSceneImagesProperty(): array
     {
         $byId = collect($this->images)->keyBy('id');
         $out = [];
         foreach ($this->editScenes as $i => $scene) {
-            foreach ($scene['layers'] ?? [] as $li => $layer) {
-                $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
-                if (is_string($src) && $src !== '' && $byId->has($src)) {
-                    $out[$i] = ['id' => $src, 'layerIndex' => (int) $li, 'library' => (bool) ($byId[$src]['library'] ?? false), 'video' => (bool) ($byId[$src]['video'] ?? false)];
-                    break;
-                }
+            $li = $this->camadaDeImagem($i);
+            if ($li === null) {
+                continue;
             }
+            $src = $scene['layers'][$li]['params']['src'] ?? null;
+            $img = (is_string($src) && $byId->has($src)) ? $byId[$src] : null;
+            $out[$i] = [
+                'id' => $img['id'] ?? null,
+                'layerIndex' => $li,
+                'library' => (bool) ($img['library'] ?? false),
+                'video' => (bool) ($img['video'] ?? false),
+            ];
         }
 
         return $out;
@@ -939,27 +974,11 @@ class ClipsAnimados extends Component
     /** Point a scene's image layer at a new image (added to the clip's images). */
     private function aplicarImagemCena(int $i, array $entry): void
     {
-        $layers = $this->editScenes[$i]['layers'] ?? [];
-        $target = null;
-        // Prefer the layer already showing an image; else the first image-reveal.
-        foreach ($layers as $li => $layer) {
-            $src = is_array($layer) ? ($layer['params']['src'] ?? null) : null;
-            if (is_string($src) && $src !== '') {
-                $target = $li;
-                break;
-            }
-        }
-        if ($target === null) {
-            foreach ($layers as $li => $layer) {
-                if (is_array($layer) && ($layer['type'] ?? null) === 'image-reveal') {
-                    $target = $li;
-                    break;
-                }
-            }
-        }
+        $target = $this->camadaDeImagem($i);
         if ($target === null) {
             return; // nothing in this scene shows an image
         }
+        $layers = $this->editScenes[$i]['layers'] ?? [];
         $layers[$target]['params'] = array_merge($layers[$target]['params'] ?? [], ['src' => $entry['id']]);
         $this->editScenes[$i]['layers'] = $layers;
         $this->images[] = $entry;

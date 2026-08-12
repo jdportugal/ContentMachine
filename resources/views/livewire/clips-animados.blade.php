@@ -485,23 +485,39 @@
                             {{-- Scene image: preview + replace (upload or pick from library). --}}
                             @php $sceneImg = $this->sceneImages[$i] ?? null; @endphp
                             @if ($sceneImg)
+                                @php $temImagem = !empty($sceneImg['id']); @endphp
                                 <div class="flex items-center gap-3 mb-3">
-                                    @if (!empty($sceneImg['video']))
-                                        <video src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}" muted playsinline
-                                               class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0"></video>
-                                    @else
-                                        <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
-                                             onerror="this.style.visibility='hidden'"
-                                             class="w-14 aspect-[9/16] object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40 shrink-0" alt="" />
-                                    @endif
+                                    {{-- The placeholder sits BEHIND the preview: an empty slot shows it, and
+                                         so does an image that cannot be previewed yet — one just added here
+                                         is only on the record after Save, so its thumbnail 404s until then.
+                                         Without this the row collapsed to a blank gap and read as broken. --}}
+                                    <div class="relative w-14 aspect-[9/16] shrink-0 rounded-sm border border-dashed border-ink-soft/40 bg-vellum/20 flex items-center justify-center text-ink-faint text-lg">
+                                        <span aria-hidden="true">+</span>
+                                        @if ($temImagem)
+                                            @if (!empty($sceneImg['video']))
+                                                <video src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}" muted playsinline
+                                                       class="absolute inset-0 w-full h-full object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40"></video>
+                                            @else
+                                                <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
+                                                     onerror="this.style.display='none'"
+                                                     class="absolute inset-0 w-full h-full object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
+                                            @endif
+                                        @endif
+                                    </div>
                                     <div class="min-w-0 flex-1">
-                                        <div class="font-mono text-[0.55rem] text-ink-faint">{{ !empty($sceneImg['video']) ? 'video' : 'image' }}{{ $sceneImg['library'] ? ' · from library' : '' }}</div>
+                                        <div class="font-mono text-[0.55rem] text-ink-faint">
+                                            @if (! $temImagem)
+                                                no image yet
+                                            @else
+                                                {{ !empty($sceneImg['video']) ? 'video' : 'image' }}{{ $sceneImg['library'] ? ' · from library' : '' }}
+                                            @endif
+                                        </div>
                                         <div class="flex items-center gap-3 font-mono text-[0.6rem] mt-1">
                                             @if (!empty($this->libraryImages))
                                                 <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="text-teal hover:opacity-70">▦ library</button>
                                             @endif
                                             <label class="text-teal hover:opacity-70 cursor-pointer">
-                                                <span wire:loading.remove wire:target="sceneImageUploads.{{ $i }}">↑ replace</span>
+                                                <span wire:loading.remove wire:target="sceneImageUploads.{{ $i }}">↑ {{ $temImagem ? 'replace' : 'add image' }}</span>
                                                 <span wire:loading wire:target="sceneImageUploads.{{ $i }}">uploading…</span>
                                                 <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="sceneImageUploads.{{ $i }}" />
                                             </label>
