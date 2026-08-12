@@ -17,7 +17,11 @@ use Illuminate\Support\Str;
  */
 class ClipImageGenerator
 {
-    public function __construct(private KieClient $kie) {}
+    public function __construct(private KieClient $kie)
+    {
+        // Clip images bill to their own step's key, not the post cards' one.
+        $this->kie->passo = 'clips_imagens';
+    }
 
     private const OUT_KEY = 'clips.images_unavailable';
 

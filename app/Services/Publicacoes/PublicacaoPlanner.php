@@ -21,10 +21,14 @@ class PublicacaoPlanner
     /** LLM provider used when $fonte === 'ia' (e.g. 'claude-cli'). */
     public ?string $fornecedor = null;
 
+    private readonly LlmClient $llm;
+
     public function __construct(
-        private readonly LlmClient $llm,
+        LlmClient $llm,
         private readonly PublicacaoKinds $kinds,
-    ) {}
+    ) {
+        $this->llm = $llm->paraPasso('publicacoes_plano');
+    }
 
     /** @param array<int,string> $referencias descriptions of the reference images */
     public function planear(string $tipo, string $brief, string $plataforma, array $referencias = []): PublicacaoPlan

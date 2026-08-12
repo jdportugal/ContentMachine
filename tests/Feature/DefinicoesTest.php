@@ -133,4 +133,38 @@ class DefinicoesTest extends TestCase
 
         $this->assertSame('', app(SettingsRepository::class)->get('chaves.openai'));
     }
+
+    /** A second key for the same provider is added, not swapped in. */
+    public function test_guardar_adiciona_uma_segunda_chave_ao_mesmo_fornecedor(): void
+    {
+        Livewire::test(Definicoes::class)
+            ->set('chaves.openai', 'sk-primeira')
+            ->set('rotulos.openai', 'Personal')
+            ->call('guardar')
+            ->set('chaves.openai', 'sk-segunda')
+            ->set('rotulos.openai', 'Client')
+            ->call('guardar')
+            ->assertDontSee('sk-primeira')
+            ->assertDontSee('sk-segunda');
+
+        $guardadas = app(\App\Services\Settings\SharedKeys::class)->entries()['openai'];
+        $this->assertSame(['Personal', 'Client'], array_column($guardadas, 'label'));
+        // The first stays the provider default.
+        $this->assertSame('sk-primeira', app(SettingsRepository::class)->get('chaves.openai'));
+    }
+
+    /** Pinning a step to a key round-trips through the Steps tab. */
+    public function test_a_ligacao_de_um_passo_a_uma_chave_persiste(): void
+    {
+        $id = app(\App\Services\Settings\SharedKeys::class)->add('openai', 'sk-plan', 'Plan');
+
+        Livewire::test(Definicoes::class)
+            ->set('secao', 'passos')
+            ->set('passos.clips_plano', $id)
+            ->call('guardar')
+            ->assertHasNoErrors()
+            ->assertSee('Clips · animation plan');
+
+        $this->assertSame($id, app(SettingsRepository::class)->get('passos.clips_plano'));
+    }
 }

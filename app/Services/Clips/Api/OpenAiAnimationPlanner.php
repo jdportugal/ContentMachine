@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\Contracts\AnimationPlanner;
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -12,7 +13,7 @@ class OpenAiAnimationPlanner implements AnimationPlanner
 
     public function plan(array $transcript, string $mode, array $options = []): array
     {
-        $key = config('services.openai.key');
+        $key = StepKey::key('clips_plano', 'openai');
         if (! $key) {
             throw new RuntimeException('OPENAI_API_KEY missing for the planner.');
         }

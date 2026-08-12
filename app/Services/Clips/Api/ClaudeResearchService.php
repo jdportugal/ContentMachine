@@ -13,6 +13,11 @@ class ClaudeResearchService implements ResearchService
 {
     use RunsClaudeCli;
 
+    protected function passo(): string
+    {
+        return 'clips_pesquisa';
+    }
+
     public function research(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));

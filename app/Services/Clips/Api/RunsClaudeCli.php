@@ -2,6 +2,7 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
@@ -21,6 +22,21 @@ trait RunsClaudeCli
     private static ?bool $claudeBinExists = null;
 
     /**
+     * Pipeline step this service is (see config contentmachine.passos), so the
+     * user can pin it to one specific key in Settings. '' = not a listed step.
+     */
+    protected function passo(): string
+    {
+        return '';
+    }
+
+    /** The key to use for a chain provider, honouring this step's binding. */
+    private function chaveLlm(string $fornecedor): string
+    {
+        return StepKey::key($this->passo(), $fornecedor === 'claude' ? 'anthropic' : $fornecedor);
+    }
+
+    /**
      * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
      * @return array the parsed result envelope (has a `result` string)
      */
@@ -32,7 +48,7 @@ trait RunsClaudeCli
             try {
                 return match ($fornecedor) {
                     // API only when a key is set — otherwise the authenticated CLI.
-                    'claude' => filled(config('services.anthropic.key'))
+                    'claude' => filled($this->chaveLlm('claude'))
                         ? $this->runClaudeApi($user, $system, $opts)
                         : $this->runClaudeCli($user, $system, $opts),
                     'openai' => $this->runOpenAi($user, $system, $opts),
@@ -48,8 +64,10 @@ trait RunsClaudeCli
     }
 
     /**
-     * Providers to try, in order: the one chosen in Settings first, then
-     * Claude → GPT → DeepSeek. Only those actually configured.
+     * Providers to try, in order: the key pinned to THIS step first (Settings →
+     * Steps), else the one chosen globally, then Claude → GPT → DeepSeek. Only
+     * those actually configured. The rest stay behind as fallback, so a pinned
+     * provider being down never stops the pipeline.
      *
      * @return array<int,string>
      */
@@ -57,15 +75,23 @@ trait RunsClaudeCli
     {
         $ordem = ['claude', 'openai', 'tensorx'];
 
-        $escolhido = (string) config('contentmachine.clips.llm_primary', '');
+        // A step pinned to one key implies its provider — that wins over the global choice.
+        $fixado = match (StepKey::provider($this->passo())) {
+            'anthropic' => 'claude',
+            'openai' => 'openai',
+            'tensorx' => 'tensorx',
+            default => '',
+        };
+
+        $escolhido = $fixado ?: (string) config('contentmachine.clips.llm_primary', '');
         if (in_array($escolhido, $ordem, true)) {
             $ordem = array_merge([$escolhido], array_values(array_diff($ordem, [$escolhido])));
         }
 
         return array_values(array_filter($ordem, fn (string $f) => match ($f) {
-            'claude' => filled(config('services.anthropic.key')) || $this->claudeBinaryExists(),
-            'openai' => filled(config('services.openai.key')),
-            'tensorx' => filled(config('services.tensorx.key')),
+            'claude' => filled($this->chaveLlm('claude')) || $this->claudeBinaryExists(),
+            'openai' => filled($this->chaveLlm('openai')),
+            'tensorx' => filled($this->chaveLlm('tensorx')),
         }));
     }
 
@@ -99,7 +125,7 @@ trait RunsClaudeCli
         return $this->runChatCompletions(
             'OpenAI',
             'https://api.openai.com/v1',
-            (string) config('services.openai.key'),
+            $this->chaveLlm('openai'),
             (string) config('contentmachine.clips.openai_model', 'gpt-4o'),
             $user,
             $system,
@@ -211,7 +237,7 @@ trait RunsClaudeCli
             try {
                 $r = Http::timeout($opts['timeout'] ?? 300)
                     ->withHeaders([
-                        'x-api-key' => (string) config('services.anthropic.key'),
+                        'x-api-key' => $this->chaveLlm('claude'),
                         'anthropic-version' => '2023-06-01',
                     ])
                     ->post('https://api.anthropic.com/v1/messages', $payload);
@@ -260,7 +286,7 @@ trait RunsClaudeCli
         return $this->runChatCompletions(
             'Tensorix',
             (string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'),
-            (string) config('services.tensorx.key'),
+            $this->chaveLlm('tensorx'),
             (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
             $user,
             $system,

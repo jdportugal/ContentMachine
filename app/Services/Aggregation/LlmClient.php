@@ -2,6 +2,7 @@
 
 namespace App\Services\Aggregation;
 
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 
@@ -45,6 +46,31 @@ class LlmClient
     /** Last provider that produced text (to label the output). */
     private ?string $ultimoFornecedor = null;
 
+    /**
+     * Pipeline step this client writes for (config contentmachine.passos), so the
+     * user can pin it to one specific key in Settings → Steps.
+     */
+    private string $passo = 'noticias_escrita';
+
+    /**
+     * Binds this client to another step (e.g. post planning). Mutates rather than
+     * cloning: LlmClient is not a shared binding, so every consumer that injects
+     * one already holds its own — and a clone would silently detach any test
+     * double the container was handed.
+     */
+    public function paraPasso(string $passo): static
+    {
+        $this->passo = $passo;
+
+        return $this;
+    }
+
+    /** The key to use for a provider, honouring this step's binding. */
+    private function chave(string $fornecedor): string
+    {
+        return StepKey::key($this->passo, $fornecedor);
+    }
+
     public function disponivel(): bool
     {
         return $this->fornecedores() !== [];
@@ -68,10 +94,10 @@ class LlmClient
             try {
                 $texto = match ($fornecedor) {
                     'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
-                    'anthropic' => $this->anthropic((string) config('services.anthropic.key'), $prompt),
-                    'openai' => $this->openai((string) config('services.openai.key'), $prompt, $json),
-                    'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt, $json),
-                    'tensorx' => $this->tensorx((string) config('services.tensorx.key'), $prompt),
+                    'anthropic' => $this->anthropic($this->chave('anthropic'), $prompt),
+                    'openai' => $this->openai($this->chave('openai'), $prompt, $json),
+                    'gemini' => $this->gemini($this->chave('gemini'), $prompt, $json),
+                    'tensorx' => $this->tensorx($this->chave('tensorx'), $prompt),
                     default => null,
                 };
             } catch (\Throwable) {
@@ -105,6 +131,10 @@ class LlmClient
             return [];
         }
 
+        // A step pinned to one key in Settings implies its provider — that beats
+        // the global choice (the pick is more specific).
+        $escolha = StepKey::provider($this->passo) ?: $escolha;
+
         // An explicitly configured provider goes FIRST — the rest stay behind it as
         // fallback, so choosing one never means "nothing else may answer".
         $ordem = self::ORDEM;
@@ -114,16 +144,16 @@ class LlmClient
 
         // The Claude API and the `claude` CLI are the same provider: with a key, use
         // the API (the CLI needs an interactive session, absent on a server).
-        if (filled(config('services.anthropic.key')) && $escolha !== 'claude-cli') {
+        if (filled($this->chave('anthropic')) && $escolha !== 'claude-cli') {
             $ordem = array_values(array_diff($ordem, ['claude-cli']));
         }
 
         return array_values(array_filter($ordem, fn (string $f) => match ($f) {
             'claude-cli' => $this->claudeBin() !== null,
-            'anthropic' => filled(config('services.anthropic.key')),
-            'openai' => filled(config('services.openai.key')),
-            'gemini' => filled(config('services.gemini.key')),
-            'tensorx' => filled(config('services.tensorx.key')),
+            'anthropic' => filled($this->chave('anthropic')),
+            'openai' => filled($this->chave('openai')),
+            'gemini' => filled($this->chave('gemini')),
+            'tensorx' => filled($this->chave('tensorx')),
             default => false,
         }));
     }
