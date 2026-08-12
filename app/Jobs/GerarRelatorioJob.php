@@ -29,12 +29,16 @@ class GerarRelatorioJob implements ShouldQueue
     // Headroom above the Claude CLI timeout (up to 600s with web search).
     public int $timeout = 900;
 
-    /** @param string $idioma Output language; '' follows the project's own. */
+    /**
+     * @param  string  $idioma  Output language; '' follows the project's own.
+     * @param  string  $tipo  RelatorioBuilder::TIPO_NOTICIAS | TIPO_DICAS
+     */
     public function __construct(
         public string $modo,
         public string $data,
         public string $token,
         public string $idioma = '',
+        public string $tipo = RelatorioBuilder::TIPO_NOTICIAS,
     ) {
         $this->captureProject();
     }
@@ -54,22 +58,26 @@ class GerarRelatorioJob implements ShouldQueue
             ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma);
+        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma, $this->tipo);
 
-        $slug = $this->modo === 'semana'
+        $dicas = $this->tipo === RelatorioBuilder::TIPO_DICAS;
+
+        // Tips are archived alongside the reports but under their own slug prefix
+        // and note type, so regenerating one never overwrites the other.
+        $slug = ($dicas ? 'dicas-' : '').($this->modo === 'semana'
             ? 'semana-'.$inicio->toDateString()
-            : 'dia-'.$inicio->toDateString();
+            : 'dia-'.$inicio->toDateString());
 
         $nota = $vault->put("noticias/relatorios/{$slug}.md", [
             'titulo' => $relatorio['titulo'],
-            'tipo' => 'relatorio',
+            'tipo' => $dicas ? 'relatorio_dicas' : 'relatorio',
             'modo' => $relatorio['modo'],
             'inicio' => $relatorio['inicio'],
             'fim' => $relatorio['fim'],
             'total' => $relatorio['total'],
             'gerado_em' => $relatorio['gerado_em'],
             'estado' => 'arquivado',
-            'tags' => ['noticias', 'relatorio', $relatorio['modo']],
+            'tags' => ['noticias', $dicas ? 'dicas' : 'relatorio', $relatorio['modo']],
             'dados' => json_encode($relatorio, JSON_UNESCAPED_UNICODE),
         ], $builder->corpoMarkdown($relatorio));
 
