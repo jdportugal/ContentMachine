@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- European-Portuguese UI copy; **no emojis** (IATECA "nocturna" design system; use glyphs like ❦ ☰ ❧).
+- European-Portuguese UI copy; **no emojis** (Brand Machine "nocturna" design system; use glyphs like ❦ ☰ ❧).
 - No new Composer/NPM dependencies. SVG rendering only — no Puppeteer/Satori/Sharp/GD.
 - Everything must work with `LLM_PROVIDER=none` and no API keys (deterministic fallback).
 - Follow existing patterns: contract + driver + fake; `tipo` frontmatter discriminator; `x-panel`/`x-page-header`/`x-fleuron` Blade components; vault note per piece.
@@ -85,7 +85,7 @@ Each kind also carries `glifo`, `descricao`, `plano_prompt` (IA guidance), `plat
 
 **Consumes:** `LlmClient` (constructor-injected, mockable), `PublicacaoKinds`. **Produces:** `planear(string $tipo, string $brief, string $plataforma): PublicacaoPlan`.
 
-Behaviour: builds a kind-specific prompt (IATECA voice + kind `plano_prompt` + card-count bounds + "responde SÓ com JSON") → `LlmClient::texto()`. Strip ```json fences, `json_decode`, hydrate `PublicacaoPlan::fromArray`. If LLM returns null OR JSON invalid → `heuristica($tipo,$brief,$plataforma)`: single → one slide = brief; carousel → split brief into sentences/lines, clamp to kind's card bounds, first card = title cover. Never throws.
+Behaviour: builds a kind-specific prompt (Brand Machine voice + kind `plano_prompt` + card-count bounds + "responde SÓ com JSON") → `LlmClient::texto()`. Strip ```json fences, `json_decode`, hydrate `PublicacaoPlan::fromArray`. If LLM returns null OR JSON invalid → `heuristica($tipo,$brief,$plataforma)`: single → one slide = brief; carousel → split brief into sentences/lines, clamp to kind's card bounds, first card = title cover. Never throws.
 
 - [ ] Write test: bind a fake `LlmClient` returning fenced JSON `{"titulo":..,"legenda":..,"tags":[..],"slides":[{"ordem":1,"titulo":..,"texto":..}, ...]}` → assert plan hydrated. Second test: fake returns `null` → heuristic produces a valid plan with slide count within the kind's bounds.
 - [ ] Run → fail.

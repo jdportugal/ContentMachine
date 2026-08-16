@@ -1,10 +1,10 @@
-# IATECA — Variante Nocturna (Dark)
+# Brand Machine — Variante Nocturna (Dark)
 
-> Adaptação escura do sistema de identidade **IATECA** (ver ficheiro fonte [`IATECA-design-system.md`](../IATECA-design-system.md)) para a aplicação *Máquina de Conteúdo*. Mantém o espírito «biblioteca para a era das máquinas que pensam», apenas em fundo escuro.
+> Adaptação escura do sistema de identidade **Brand Machine** (ver ficheiro fonte [`Brand-Machine-design-system.md`](../Brand-Machine-design-system.md)) para a aplicação *Máquina de Conteúdo*. Mantém o espírito «biblioteca para a era das máquinas que pensam», apenas em fundo escuro.
 
 ## Princípio
 
-A variante **Nocturna** já está prevista no manual IATECA (secção 2 — «Variações de paleta»): `papyrus: #1a1410`, `teal: #2dbab4`. Esta app assenta toda nessa variante. Regra herdada: **verde-azulado é dominante; couro e ouro são ornamento**, nunca corpo de texto.
+A variante **Nocturna** já está prevista no manual Brand Machine (secção 2 — «Variações de paleta»): `papyrus: #1a1410`, `teal: #2dbab4`. Esta app assenta toda nessa variante. Regra herdada: **verde-azulado é dominante; couro e ouro são ornamento**, nunca corpo de texto.
 
 ## Paleta (tokens Tailwind v4 · `resources/css/app.css`)
 
@@ -55,4 +55,4 @@ Google Fonts carregadas em `resources/views/components/layouts/app.blade.php`:
 - ❌ ícones «tech» de linha — usar glifos de biblioteca (❦ ❧ ☙ ◆ ⌛ ✂)
 
 ---
-*IATECA · Nocturna · v1 · MMXXVI*
+*Brand Machine · Nocturna · v1 · MMXXVI*

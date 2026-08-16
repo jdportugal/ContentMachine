@@ -5,23 +5,27 @@ namespace App\Services\Settings;
 use App\Services\Vault\VaultContract;
 
 /**
- * Definições operacionais da aplicação (não-secretas), guardadas no vault
- * como uma nota Markdown com frontmatter — legível no Obsidian e versionável.
+ * Operational app settings, stored in the vault as a Markdown note with
+ * frontmatter — readable in Obsidian and versionable.
  *
- * As CHAVES DE API continuam no .env (segredos), nunca aqui.
+ * For LOCAL use, API keys and service/model config live here too (`chaves`,
+ * `modelos`) so everything is editable in-app instead of the `.env`. The
+ * SettingsOverlayProvider maps them onto config() at boot; an empty value
+ * falls back to whatever the `.env`/config default provides. Do not enable
+ * vault sync to a public location with real keys in it.
  */
 class SettingsRepository
 {
     private const PATH = 'definicoes/definicoes.md';
 
-    public function __construct(private readonly VaultContract $vault) {}
+    public function __construct(private readonly VaultContract $vault, private readonly SharedKeys $keys) {}
 
-    /** Estrutura e valores por defeito. */
+    /** Structure and default values. */
     public function defaults(): array
     {
         return [
             'geral' => [
-                'nome_marca' => 'IATECA',
+                'nome_marca' => 'Brand Machine',
                 'sitio' => '',
             ],
             'perfis' => [
@@ -31,12 +35,12 @@ class SettingsRepository
                 'linkedin' => ['handle' => '', 'url' => ''],
             ],
             'agregador' => [
-                'youtube' => [],   // canais a vigiar
+                'youtube' => [],   // channels to watch
                 'reddit' => [],    // subreddits
-                'twitter' => [],   // contas
-                'tiktok' => [],    // contas
+                'twitter' => [],   // accounts
+                'tiktok' => [],    // accounts
             ],
-            // Canais a agregar por plataforma (via yt-dlp). Sementes = Nick Saraev.
+            // Channels to aggregate per platform (via yt-dlp). Seeds = Nick Saraev.
             'canais' => [
                 'youtube' => ['https://www.youtube.com/@nicksaraev'],
                 'instagram' => ['https://www.instagram.com/nick_saraev/'],
@@ -44,23 +48,67 @@ class SettingsRepository
                 'linkedin' => ['https://www.linkedin.com/in/nick-saraev/'],
             ],
             'shorts' => [
-                // Modelo Whisper para transcrição local (tiny|base|small|medium).
-                // Vazio → usa config/services (env WHISPER_MODEL).
+                // Whisper model for local transcription (tiny|base|small|medium).
+                // Empty → uses config/services (env WHISPER_MODEL).
                 'whisper_model' => '',
             ],
+            // API keys (local use). Empty → falls back to the .env value.
+            'chaves' => [
+                'anthropic' => '',
+                'openai' => '',
+                'gemini' => '',
+                'apify' => '',
+                'tubelab' => '',
+                'elevenlabs' => '',
+                'youtube' => '',
+                'reddit_client_id' => '',
+                'reddit_client_secret' => '',
+                'kie' => '',
+                'blotato' => '',
+                'tensorx' => '',
+            ],
+            // Blotato connected-account ids per platform (copied from the Blotato
+            // dashboard). Empty → that platform can't be posted to.
+            'blotato' => [
+                'youtube' => '',
+                'instagram' => '',
+                'tiktok' => '',
+                'linkedin' => '',
+                'threads' => '',
+            ],
+            // Service/model config. Empty → falls back to the .env/config default.
+            'modelos' => [
+                'llm_provider' => '',        // auto | claude-cli | anthropic | openai | gemini | none
+                'anthropic_model' => '',
+                'openai_model' => '',
+                'gemini_model' => '',
+                'aggregation_limit' => '',   // videos per channel
+                'aggregation_timeout' => '', // seconds per yt-dlp call
+                'elevenlabs_voice' => '',    // ElevenLabs voice id for the clip voiceover
+                'clip_provider' => '',       // 'claude' (default) | 'tensorx' — primary clip LLM
+                'tensorx_model' => '',       // e.g. deepseek/deepseek-r1-0528
+            ],
+            // Per-step API key: step id (config contentmachine.passos) => key id
+            // (e.g. 'openai:2') or 'local'. Empty = auto (provider chain +
+            // that provider's default key). Per project, like the models above.
+            'passos' => array_map(fn () => '', config('contentmachine.passos', [])),
         ];
     }
 
-    /** Todas as definições (defaults + guardadas). */
+    /** All settings (defaults + stored). */
     public function all(): array
     {
         $nota = $this->vault->get(self::PATH);
         $guardadas = $nota?->frontmatter ?? [];
 
-        // Remove metadados de sistema que o vault possa ter acrescentado.
+        // Remove system metadata that the vault may have added.
         unset($guardadas['data'], $guardadas['atualizado_em'], $guardadas['titulo'], $guardadas['tipo']);
 
-        return array_replace_recursive($this->defaults(), $guardadas);
+        $merged = array_replace_recursive($this->defaults(), $guardadas);
+        // API keys are GLOBAL (shared across projects) — override any per-project copy.
+        $merged['chaves'] = array_replace($this->defaults()['chaves'], $this->keys->all());
+
+        return $merged;
     }
 
     public function get(string $chave, mixed $default = null): mixed
@@ -68,14 +116,25 @@ class SettingsRepository
         return data_get($this->all(), $chave, $default);
     }
 
-    /** Persiste as definições, preservando os defaults em falta. */
+    /**
+     * Persists the settings. Merges onto the CURRENTLY stored values (not just
+     * the defaults), so a partial save updates only the groups it includes and
+     * never wipes the others.
+     */
     public function save(array $data): void
     {
-        $limpo = array_replace_recursive($this->defaults(), $data);
+        // API keys go to the global shared store; everything else is per-project.
+        if (isset($data['chaves']) && is_array($data['chaves'])) {
+            $this->keys->save($data['chaves']);
+            unset($data['chaves']);
+        }
 
-        // As listas (canais/fontes) são substituídas por inteiro — não fundidas
-        // por índice — para que remover ou esvaziar uma entrada seja respeitado
-        // (o array_replace_recursive, sozinho, reintroduziria as sementes).
+        $limpo = array_replace_recursive($this->all(), $data);
+        unset($limpo['chaves']); // never persist keys in the per-project vault note
+
+        // The lists (channels/sources) are replaced wholesale — not merged
+        // by index — so that removing or emptying an entry is respected
+        // (array_replace_recursive alone would reintroduce the seeds).
         foreach (['canais', 'agregador'] as $grupo) {
             if (isset($data[$grupo]) && is_array($data[$grupo])) {
                 foreach ($data[$grupo] as $chave => $lista) {
@@ -92,7 +151,7 @@ class SettingsRepository
         $this->vault->put(
             self::PATH,
             $frontmatter,
-            "Definições operacionais da Máquina de Conteúdo.\n\n> As chaves de API vivem no `.env`, não neste ficheiro."
+            "Definições operacionais da Máquina de Conteúdo.\n\n> As chaves de API são partilhadas entre projetos (guardadas fora do vault), não neste ficheiro."
         );
     }
 }

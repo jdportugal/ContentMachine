@@ -6,8 +6,8 @@ use App\Services\Scoring\EngagementScorer;
 use Illuminate\Support\Carbon;
 
 /**
- * Driver simulado — dados curados por plataforma, sem qualquer chamada externa.
- * Serve para desenvolver a interface antes de ligar os drivers reais (Apify/TubeLab).
+ * Simulated driver — curated data per platform, without any external call.
+ * Used to develop the interface before wiring up the real drivers (Apify/TubeLab).
  */
 class FakeMonitoringDriver implements MonitoringDriver
 {
@@ -25,28 +25,28 @@ class FakeMonitoringDriver implements MonitoringDriver
     {
         return match ($this->plataforma) {
             'youtube' => [
-                ['label' => 'Subscritores', 'value' => '48,2 mil', 'delta' => 3.1, 'unit' => 'total'],
-                ['label' => 'Visualizações (28d)', 'value' => '612 mil', 'delta' => 12.4, 'unit' => '28 dias'],
-                ['label' => 'Tempo de visionamento', 'value' => '19,4 mil h', 'delta' => 8.7, 'unit' => '28 dias'],
-                ['label' => 'Novos subscritores', 'value' => '+1 480', 'delta' => -4.2, 'unit' => '28 dias'],
+                ['label' => 'Subscribers', 'value' => '48.2k', 'delta' => 3.1, 'unit' => 'total'],
+                ['label' => 'Views (28d)', 'value' => '612k', 'delta' => 12.4, 'unit' => '28 days'],
+                ['label' => 'Watch time', 'value' => '19.4k h', 'delta' => 8.7, 'unit' => '28 days'],
+                ['label' => 'New subscribers', 'value' => '+1,480', 'delta' => -4.2, 'unit' => '28 days'],
             ],
             'instagram' => [
-                ['label' => 'Seguidores', 'value' => '31,7 mil', 'delta' => 2.2, 'unit' => 'total'],
-                ['label' => 'Alcance (28d)', 'value' => '284 mil', 'delta' => 18.9, 'unit' => '28 dias'],
-                ['label' => 'Interações', 'value' => '41,3 mil', 'delta' => 6.5, 'unit' => '28 dias'],
-                ['label' => 'Guardados', 'value' => '5 902', 'delta' => 22.0, 'unit' => '28 dias'],
+                ['label' => 'Followers', 'value' => '31.7k', 'delta' => 2.2, 'unit' => 'total'],
+                ['label' => 'Reach (28d)', 'value' => '284k', 'delta' => 18.9, 'unit' => '28 days'],
+                ['label' => 'Interactions', 'value' => '41.3k', 'delta' => 6.5, 'unit' => '28 days'],
+                ['label' => 'Saves', 'value' => '5,902', 'delta' => 22.0, 'unit' => '28 days'],
             ],
             'tiktok' => [
-                ['label' => 'Seguidores', 'value' => '76,9 mil', 'delta' => 9.4, 'unit' => 'total'],
-                ['label' => 'Visualizações (28d)', 'value' => '2,1 M', 'delta' => 34.2, 'unit' => '28 dias'],
-                ['label' => 'Gostos', 'value' => '188 mil', 'delta' => 27.8, 'unit' => '28 dias'],
-                ['label' => 'Partilhas', 'value' => '12,4 mil', 'delta' => 41.0, 'unit' => '28 dias'],
+                ['label' => 'Followers', 'value' => '76.9k', 'delta' => 9.4, 'unit' => 'total'],
+                ['label' => 'Views (28d)', 'value' => '2.1M', 'delta' => 34.2, 'unit' => '28 days'],
+                ['label' => 'Likes', 'value' => '188k', 'delta' => 27.8, 'unit' => '28 days'],
+                ['label' => 'Shares', 'value' => '12.4k', 'delta' => 41.0, 'unit' => '28 days'],
             ],
             'linkedin' => [
-                ['label' => 'Seguidores', 'value' => '9 340', 'delta' => 4.7, 'unit' => 'total'],
-                ['label' => 'Impressões (28d)', 'value' => '58,6 mil', 'delta' => 11.2, 'unit' => '28 dias'],
-                ['label' => 'Interações', 'value' => '3 210', 'delta' => 5.3, 'unit' => '28 dias'],
-                ['label' => 'Taxa de cliques', 'value' => '2,8', 'delta' => -1.1, 'unit' => '%'],
+                ['label' => 'Followers', 'value' => '9,340', 'delta' => 4.7, 'unit' => 'total'],
+                ['label' => 'Impressions (28d)', 'value' => '58.6k', 'delta' => 11.2, 'unit' => '28 days'],
+                ['label' => 'Interactions', 'value' => '3,210', 'delta' => 5.3, 'unit' => '28 days'],
+                ['label' => 'Click-through rate', 'value' => '2.8', 'delta' => -1.1, 'unit' => '%'],
             ],
             default => [],
         };
@@ -75,7 +75,7 @@ class FakeMonitoringDriver implements MonitoringDriver
         foreach ($this->conteudosRecentes(100) as $item) {
             $tipo = $item['tipo'];
             if (! isset($porTipo[$tipo])) {
-                $porTipo[$tipo] = $item; // já ordenado por data desc → o primeiro é o mais recente
+                $porTipo[$tipo] = $item; // already sorted by date desc → the first is the most recent
             }
         }
 
@@ -91,7 +91,7 @@ class FakeMonitoringDriver implements MonitoringDriver
     }
 
     /**
-     * Conteúdos curados por plataforma.
+     * Curated content per platform.
      *
      * @return array<int, array<string,mixed>>
      */

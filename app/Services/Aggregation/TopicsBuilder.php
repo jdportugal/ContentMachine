@@ -2,18 +2,22 @@
 
 namespace App\Services\Aggregation;
 
-use Illuminate\Support\Facades\Http;
+use App\Services\Projects\ProjectLanguage;
 use Illuminate\Support\Str;
 
 /**
- * Deriva uma lista de tópicos ("o que já foi coberto e está no ar") a partir
- * de um conjunto de itens de um dia. Usa um LLM se houver chave configurada
- * (OpenAI ou Gemini); caso contrário, recorre a uma heurística determinística
- * de agrupamento por tags/palavras-chave. Nunca lança — degrada para heurística.
+ * Derives a list of topics ("what has already been covered and is live") from
+ * a set of items from one day. Uses the app's LLM chain (Claude → GPT → DeepSeek),
+ * so the configured provider is the one that names the topics; it only falls back
+ * to a deterministic tag/keyword grouping when NO provider is configured. That
+ * fallback produces topic names like "Said", so it is a last resort, never a
+ * default. Never throws.
  */
 class TopicsBuilder
 {
-    /** Palavras vazias (PT/EN) ignoradas na extração de palavras-chave. */
+    public function __construct(private readonly LlmClient $llm) {}
+
+    /** Stop words (PT/EN) ignored in keyword extraction. */
     private const STOPWORDS = [
         'the', 'and', 'for', 'you', 'your', 'with', 'this', 'that', 'from', 'have', 'has', 'are', 'was', 'were', 'will',
         'what', 'how', 'why', 'who', 'they', 'their', 'them', 'about', 'just', 'like', 'into', 'more', 'some', 'then',
@@ -45,7 +49,7 @@ class TopicsBuilder
      */
     private function viaHeuristica(array $itens): array
     {
-        // Frequência de tags (normalizadas) entre todos os itens.
+        // Tag frequency (normalized) across all items.
         $freq = [];
         foreach ($itens as $i => $item) {
             foreach ($this->tagsNormalizadas($item) as $tag) {
@@ -53,7 +57,7 @@ class TopicsBuilder
             }
         }
 
-        // Tags partilhadas por 2+ itens tornam-se tópicos, das mais comuns às menos.
+        // Tags shared by 2+ items become topics, from the most common to the least.
         uasort($freq, fn ($a, $b) => count($b) <=> count($a));
 
         $topicos = [];
@@ -69,7 +73,7 @@ class TopicsBuilder
             $atribuidos = array_merge($atribuidos, $novos);
         }
 
-        // Itens ainda sem tópico → "Outros temas".
+        // Items still without a topic → "Outros temas".
         $restantes = array_values(array_diff(array_keys($itens), $atribuidos));
         if ($restantes !== []) {
             $topicos[] = $this->montarTopico('Outros temas', $restantes, $itens);
@@ -106,9 +110,9 @@ class TopicsBuilder
     }
 
     /**
-     * Sinais de agrupamento de um item: as suas tags + as palavras mais
-     * salientes do TÍTULO e da TRANSCRIÇÃO, para que os tópicos reflictam o
-     * que é dito nos vídeos e não apenas as tags declaradas.
+     * Grouping signals of an item: its tags + the most
+     * salient words of the TITLE and the TRANSCRIPT, so the topics reflect
+     * what is said in the videos and not just the declared tags.
      *
      * @return array<int,string>
      */
@@ -119,9 +123,9 @@ class TopicsBuilder
             $item->tags
         )));
 
-        // Conjunto amplo de palavras candidatas (tags + título + transcrição).
-        // O agrupamento a jusante só mantém as partilhadas por 2+ itens, por
-        // isso um conjunto largo capta os temas comuns sem gerar ruído.
+        // Broad set of candidate words (tags + title + transcript).
+        // Downstream grouping only keeps those shared by 2+ items, so
+        // a broad set captures the common themes without generating noise.
         $conteudo = trim($item->titulo."\n".Str::limit($item->transcricao, 2500, ''));
         $sinais = array_values(array_unique(array_merge(
             $tags,
@@ -143,17 +147,14 @@ class TopicsBuilder
     }
 
     /**
-     * Tenta derivar tópicos via LLM. Devolve null se não houver chave ou em falha.
+     * Tries to derive topics via LLM. Returns null if there is no key or on failure.
      *
      * @param  array<int,AggregatedItem>  $itens
      * @return array{metodo:string,topicos:array<int,array<string,mixed>>}|null
      */
     private function viaLlm(array $itens): ?array
     {
-        $chaveOpenai = config('services.openai.key');
-        $chaveGemini = config('services.gemini.key');
-
-        if (empty($chaveOpenai) && empty($chaveGemini) || $itens === []) {
+        if ($itens === [] || ! $this->llm->disponivel()) {
             return null;
         }
 
@@ -165,28 +166,30 @@ class TopicsBuilder
             'excerto' => Str::limit(trim($i->transcricao), 1500, ''),
         ])->all();
 
-        $prompt = 'Agrupa os seguintes conteúdos por tópico coberto, inferindo o tópico sobretudo a partir do EXCERTO da transcrição (o que é realmente dito no vídeo) e do título. Responde SÓ com JSON no formato '
+        $idioma = ProjectLanguage::name();
+        $prompt = 'Group the following content by covered topic, inferring the topic mainly from the EXCERPT of the transcript (what is actually said in the video) and the title. Respond ONLY with JSON in the format '
             .'{"topicos":[{"topico":"...","itens":[{"titulo":"...","url":"...","plataforma":"..."}]}]}. '
-            ."Usa português europeu nos nomes dos tópicos.\n\n"
+            ."Write the topic names in {$idioma}.\n\n"
             .json_encode($resumo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         try {
-            $json = ! empty($chaveOpenai)
-                ? $this->chamarOpenai((string) $chaveOpenai, $prompt)
-                : $this->chamarGemini((string) $chaveGemini, $prompt);
+            // Same chain as the rest of the app (Claude → GPT → DeepSeek), so the
+            // topics come from the provider that is configured, not from whichever
+            // key this class happened to know about.
+            $json = $this->llm->texto($prompt, json: true);
 
             if ($json === null) {
                 return null;
             }
 
-            $dados = json_decode($json, true);
+            $dados = json_decode($this->soJson($json), true);
             $topicos = $dados['topicos'] ?? null;
 
             if (! is_array($topicos) || $topicos === []) {
                 return null;
             }
 
-            // Garante a estrutura de fontes em cada tópico.
+            // Ensures the sources structure in each topic.
             foreach ($topicos as &$t) {
                 $t['itens'] = array_values($t['itens'] ?? []);
                 $t['fontes'] = array_values($t['fontes'] ?? []);
@@ -198,29 +201,16 @@ class TopicsBuilder
         }
     }
 
-    private function chamarOpenai(string $chave, string $prompt): ?string
+    /** The JSON object inside a reply, unwrapping any ```json fence or prose around it. */
+    private function soJson(string $conteudo): string
     {
-        $r = Http::timeout(60)
-            ->withToken($chave)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
-                'messages' => [['role' => 'user', 'content' => $prompt]],
-                'response_format' => ['type' => 'json_object'],
-                'temperature' => 0.2,
-            ]);
+        $conteudo = trim($conteudo);
+        if (preg_match('/```(?:json)?\s*(.*?)```/s', $conteudo, $m)) {
+            $conteudo = trim($m[1]);
+        }
+        $ini = strpos($conteudo, '{');
+        $fim = strrpos($conteudo, '}');
 
-        return $r->successful() ? ($r->json('choices.0.message.content') ?? null) : null;
-    }
-
-    private function chamarGemini(string $chave, string $prompt): ?string
-    {
-        $modelo = (string) config('contentmachine.aggregation.gemini_model', 'gemini-1.5-flash');
-        $r = Http::timeout(60)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", [
-                'contents' => [['parts' => [['text' => $prompt]]]],
-                'generationConfig' => ['responseMimeType' => 'application/json'],
-            ]);
-
-        return $r->successful() ? ($r->json('candidates.0.content.parts.0.text') ?? null) : null;
+        return $ini !== false && $fim !== false && $fim > $ini ? substr($conteudo, $ini, $fim - $ini + 1) : $conteudo;
     }
 }

@@ -18,6 +18,8 @@ class ClipsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
         $this->tmp = sys_get_temp_dir().'/cm-clips-'.uniqid();
         mkdir($this->tmp, 0775, true);
         config(['contentmachine.vault.path' => $this->tmp]);
@@ -38,7 +40,7 @@ class ClipsTest extends TestCase
 
     public function test_pagina_responde_200(): void
     {
-        $this->get('/clips')->assertOk()->assertSee('Gerador de Clips');
+        $this->get('/clips')->assertOk()->assertSee('Clip Generator');
     }
 
     public function test_adicionar_fonte_e_criar_clip(): void
@@ -49,7 +51,7 @@ class ClipsTest extends TestCase
             ->set('novaFonte', '/videos/aula.mp4')
             ->set('novaFonteTitulo', 'Aula')
             ->call('adicionarFonte')
-            ->assertDispatched('toast', message: 'Vídeo adicionado.');
+            ->assertDispatched('toast', message: 'Video added.');
 
         $fontes = $vault->all('clips/fontes');
         $this->assertCount(1, $fontes);
@@ -62,7 +64,7 @@ class ClipsTest extends TestCase
             ->set("clipFim.$slug", '20')
             ->set("clipTitulo.$slug", 'Clip A')
             ->call('adicionarClip', $path, $slug)
-            ->assertDispatched('toast', message: 'Clip criado.');
+            ->assertDispatched('toast', message: 'Clip created.');
 
         $this->assertCount(1, $vault->all('clips', recursive: false));
     }
@@ -86,7 +88,7 @@ class ClipsTest extends TestCase
             ->assertSet('clipAberto', $clip->path)
             ->set('segmentos.0.text', 'texto editado pelo utilizador')
             ->call('regenerar', $clip->path)
-            ->assertDispatched('toast', message: 'Short gravado com as legendas.');
+            ->assertDispatched('toast', message: 'Short rendered with the captions.');
 
         $atualizado = $vault->get($clip->path);
         $this->assertSame('pronto', $atualizado->get('estado'));

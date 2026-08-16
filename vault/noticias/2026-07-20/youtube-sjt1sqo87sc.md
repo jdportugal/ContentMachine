@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Jack Roberts'
 data: '2026-07-20'
 url: 'https://www.youtube.com/watch?v=sJt1sQO87sc'
-thumbnail: 'https://i.ytimg.com/vi_webp/sJt1sQO87sc/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/sJt1sQO87sc/maxresdefault.jpg'
+descricao: "📈FULL Hermes Course: https://bit.ly/4wRk62c ⚡️ Zapier: https://bit.ly/4ftQzVq 🔥 Firecrawl: https://bit.ly/4aHCD8A Hermes agent just got five major upgrades and I'm showing you all of them. New models including Grok 4.5 and Kimi K3, parallel tool calls, 60x faster web search with Firecrawl, completion contracts, and a compounding Obsidian memory you can feed from your browser in real time. This is the most productive version of Hermes that has ever existed. Resources 🔥 Glaido: https://bit.ly/4eGoI3R (use code: WHSAAKXOfor 1 FREE month) 💬 ChatGPT - https://chatgpt.com/ ☁️ Claude - https://claude.ai/ ♊ Gemini - https://gemini.google.com/ 📝 NotebookLM - https://notebooklm.google.com/ ⚡ Zapier - https://bit.ly/4ftQzVq 🔥 Firecrawl - https://bit.ly/4aHCD8A 🌿 Obsidian - https://obsidian...."
+resumo: 'Este vídeo mostra cinco atualizações para o "Hermes agent", começando pela integração de novos modelos de IA (como o Grok 4.5, o GPT 5.6 e o Kimmy K3) e explicando como configurá-los e usar as suas capacidades, nomeadamente o acesso rápido a informação através do X/Twitter. Ao longo do vídeo, o autor demonstra como estas melhorias tornam o agente mais poderoso e produtivo.'
 tags: {}
 fontes:
   - 'https://bit.ly/4wRk62c'
@@ -23,7 +25,6 @@ fontes:
   - 'https://platform.moonshot.cn'
   - 'https://bit.ly/4kol0y5'
   - 'https://www.skool.com/aiautomationsbyjack'
-resumo: 'O vídeo apresenta cinco atualizações ao agente de IA "Hermes", começando pela possibilidade de trocar o modelo subjacente (como GPT-5.6, Grok 4.5 e Kimi K3) e mostrando como integrá-los e usá-los para tarefas como pesquisa rápida de informação. No essencial, é um tutorial sobre como potenciar este agente através de novos modelos e funcionalidades.'
 ---
 
 ## Descrição
@@ -34,7 +35,7 @@ resumo: 'O vídeo apresenta cinco atualizações ao agente de IA "Hermes", come�
 
 Hermes agent just got five major upgrades and I'm showing you all of them. New models including Grok 4.5 and Kimi K3, parallel tool calls, 60x faster web search with Firecrawl, completion contracts, and a compounding Obsidian memory you can feed from your browser in real time. This is the most productive version of Hermes that has ever existed.
 
-🧠 Resources
+Resources
 🔥 Glaido: https://bit.ly/4eGoI3R (use code: WHSAAKXOfor 1 FREE month)
 💬 ChatGPT - https://chatgpt.com/
 ☁️ Claude - https://claude.ai/

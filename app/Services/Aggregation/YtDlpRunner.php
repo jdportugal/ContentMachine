@@ -3,14 +3,16 @@
 namespace App\Services\Aggregation;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Str;
 
 /**
- * Implementação real do runner: invoca o yt-dlp em modo METADADOS-ONLY
- * (nunca descarrega média — apenas JSON e legendas de texto) e faz GETs HTTP.
+ * Real runner implementation: invokes yt-dlp in METADATA-ONLY mode
+ * (never downloads media — only JSON and text subtitles) and makes HTTP GETs.
  *
- * O comando base é configurável (config `contentmachine.aggregation.ytdlp_cmd`)
- * para suportar tanto `yt-dlp` (Docker) como `python3 -m yt_dlp` (local).
+ * The base command is configurable (config `contentmachine.aggregation.ytdlp_cmd`)
+ * to support both `yt-dlp` (Docker) and `python3 -m yt_dlp` (local).
  */
 class YtDlpRunner implements YtDlpRunnerContract
 {
@@ -20,6 +22,8 @@ class YtDlpRunner implements YtDlpRunnerContract
     private array $extractorArgs;
 
     private int $timeout;
+
+    private ?string $lastError = null;
 
     public function __construct()
     {
@@ -51,6 +55,12 @@ class YtDlpRunner implements YtDlpRunnerContract
         return $json ?? [];
     }
 
+    /** The most recent yt-dlp error during this runner's lifetime, if any. */
+    public function lastError(): ?string
+    {
+        return $this->lastError;
+    }
+
     public function fetch(string $url): ?string
     {
         try {
@@ -73,6 +83,13 @@ class YtDlpRunner implements YtDlpRunnerContract
         $resultado = Process::timeout($this->timeout)->run([...$this->base, ...$args]);
 
         if (! $resultado->successful()) {
+            // Keep the real reason instead of swallowing it — YouTube failures on a
+            // datacenter IP ("Sign in to confirm you're not a bot", extractor
+            // breakage, stale yt-dlp) are otherwise invisible.
+            $err = trim($resultado->errorOutput()) ?: trim($resultado->output());
+            $this->lastError = $err !== '' ? Str::of($err)->squish()->limit(280)->toString() : 'yt-dlp exited with a non-zero status';
+            Log::warning('yt-dlp failed', ['args' => $args, 'error' => $this->lastError]);
+
             return null;
         }
 
@@ -88,8 +105,8 @@ class YtDlpRunner implements YtDlpRunnerContract
     }
 
     /**
-     * Argumentos de extractor específicos por plataforma (ex.: forçar o cliente
-     * `android` do YouTube, que evita o erro "The page needs to be reloaded").
+     * Platform-specific extractor arguments (e.g. force YouTube's `android`
+     * client, which avoids the "The page needs to be reloaded" error).
      *
      * @return array<int,string>
      */

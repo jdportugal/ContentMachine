@@ -5,7 +5,9 @@ plataforma: youtube
 canal: Futurepedia
 data: '2026-07-11'
 url: 'https://www.youtube.com/watch?v=tqKGaqaQkNk'
-thumbnail: 'https://i.ytimg.com/vi_webp/tqKGaqaQkNk/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/tqKGaqaQkNk/maxresdefault.jpg'
+descricao: '*Free ChatGPT at Work Guide:* https://clickhubspot.com/4qny More from Futurepedia: 👉 Join the Skill Leap AI education platform! Try it free and explore 20+ top-rated courses in AI: https://bit.ly/futurepediaSL Summary: ChatGPT just launched a new product called Work. This takes ChatGPT from an assistant that answers questions to an agent that completes tasks on its own. And it’s specifically built for non-technical users. You use natural language to ask ChatGPT Work to tackle entire workflows with a single prompt. Give it a goal and it can connect to tools, create files and documents, and build polished sites and deliverables to achieve it. Then even automate that task in the future. For most people who use ChatGPT, this will be one of the biggest upgrades they’ve had. I cover every featu...'
+resumo: 'O vídeo apresenta o ChatGPT Work, um novo produto que transforma o ChatGPT de assistente em agente capaz de executar tarefas e fluxos de trabalho completos a partir de um só pedido em linguagem natural, destinado a utilizadores não técnicos. Mostra um passo a passo das suas funcionalidades — ligação a ferramentas, criação de ficheiros e sites, e automatização de tarefas — sobretudo através da app...'
 tags: {}
 fontes:
   - 'https://clickhubspot.com/4qny'

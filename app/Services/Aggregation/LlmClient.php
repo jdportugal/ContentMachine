@@ -2,31 +2,32 @@
 
 namespace App\Services\Aggregation;
 
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 
 /**
- * Cliente de geração de texto via LLM, com CADEIA de fornecedores: tenta cada
- * um por ordem e usa o primeiro que devolver texto. Assim, se o CLI do Claude
- * falhar (ex.: sem login no contexto do servidor), cai para uma API em vez de
- * degradar para heurística.
+ * Text generation client via LLM, with a CHAIN of providers: it tries each
+ * one in order and uses the first that returns text. This way, if the Claude CLI
+ * fails (e.g. not logged in in the server context), it falls back to an API instead of
+ * degrading to a heuristic.
  *
- * Fornecedores:
- *   - 'claude-cli' → `claude -p` (grátis; reutiliza a sessão, mas só funciona
- *     onde o `claude` esteja autenticado — pouco fiável a partir de um servidor).
- *   - 'anthropic'  → API da Anthropic (chave ANTHROPIC_API_KEY) — Claude fiável.
- *   - 'openai' / 'gemini' → via API (requer chave).
+ * Providers:
+ *   - 'claude-cli' → `claude -p` (free; reuses the session, but only works
+ *     where `claude` is authenticated — unreliable from a server).
+ *   - 'anthropic'  → Anthropic API (ANTHROPIC_API_KEY key) — reliable Claude.
+ *   - 'openai' / 'gemini' → via API (requires a key).
  *
  * config `contentmachine.aggregation.llm_provider`:
- *   'auto' (cadeia por disponibilidade) | um nome específico | 'none' (desligado).
- * Nunca lança — em falha devolve null.
+ *   'auto' (chain by availability) | a specific name | 'none' (disabled).
+ * Never throws — on failure returns null.
  */
 class LlmClient
 {
     /**
-     * Variáveis que marcam uma sessão do Claude Code em curso. Passadas a
-     * `claude -p` fá-lo-iam entrar em modo "sessão-filha" e falhar auth, por isso
-     * são removidas do subprocesso (via `env -u`).
+     * Variables that mark an in-progress Claude Code session. Passed to
+     * `claude -p` they would make it enter "child-session" mode and fail auth, so
+     * they are removed from the subprocess (via `env -u`).
      */
     private const MARCADORES_SESSAO = [
         'CLAUDECODE',
@@ -39,37 +40,64 @@ class LlmClient
         'AI_AGENT',
     ];
 
-    /** @var array<string,?string> cache de resolução de binários */
+    /** @var array<string,?string> binary resolution cache */
     private static array $binCache = [];
 
-    /** Último fornecedor que produziu texto (para rotular a saída). */
+    /** Last provider that produced text (to label the output). */
     private ?string $ultimoFornecedor = null;
+
+    /**
+     * Pipeline step this client writes for (config contentmachine.passos), so the
+     * user can pin it to one specific key in Settings → Steps.
+     */
+    private string $passo = 'noticias_escrita';
+
+    /**
+     * Binds this client to another step (e.g. post planning). Mutates rather than
+     * cloning: LlmClient is not a shared binding, so every consumer that injects
+     * one already holds its own — and a clone would silently detach any test
+     * double the container was handed.
+     */
+    public function paraPasso(string $passo): static
+    {
+        $this->passo = $passo;
+
+        return $this;
+    }
+
+    /** The key to use for a provider, honouring this step's binding. */
+    private function chave(string $fornecedor): string
+    {
+        return StepKey::key($this->passo, $fornecedor);
+    }
 
     public function disponivel(): bool
     {
         return $this->fornecedores() !== [];
     }
 
-    /** Nome do fornecedor que produziu o último texto (ou o primeiro disponível). */
+    /** Name of the provider that produced the last text (or the first available). */
     public function fornecedorAtivo(): ?string
     {
         return $this->ultimoFornecedor ?? ($this->fornecedores()[0] ?? null);
     }
 
     /**
-     * Gera texto. Tenta os fornecedores por ordem até um devolver algo.
+     * Generates text. Tries the providers in order until one returns something.
      *
-     * @param  bool  $comFerramentas  Permite ao Claude (CLI) usar pesquisa/leitura web.
+     * @param  bool  $comFerramentas  Allows Claude (CLI) to use web search/reading.
+     * @param  bool  $json  Ask for a JSON-only reply (pinned where the API supports it).
      */
-    public function texto(string $prompt, bool $comFerramentas = false): ?string
+    public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
     {
         foreach ($this->fornecedores() as $fornecedor) {
             try {
                 $texto = match ($fornecedor) {
                     'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
-                    'anthropic' => $this->anthropic((string) config('services.anthropic.key'), $prompt),
-                    'openai' => $this->openai((string) config('services.openai.key'), $prompt),
-                    'gemini' => $this->gemini((string) config('services.gemini.key'), $prompt),
+                    'anthropic' => $this->anthropic($this->chave('anthropic'), $prompt),
+                    'openai' => $this->openai($this->chave('openai'), $prompt, $json),
+                    'gemini' => $this->gemini($this->chave('gemini'), $prompt, $json),
+                    'tensorx' => $this->tensorx($this->chave('tensorx'), $prompt),
                     default => null,
                 };
             } catch (\Throwable) {
@@ -87,30 +115,50 @@ class LlmClient
     }
 
     /**
-     * Cadeia ordenada de fornecedores a tentar, filtrada por disponibilidade.
+     * The house order: CLAUDE → GPT → DEEPSEEK (Tensorix) → Gemini. Every provider
+     * with a key stays in the chain, so a configured provider is always used and a
+     * failing one falls through to the next instead of dropping to the heuristic.
      *
      * @return array<int,string>
      */
+    private const ORDEM = ['anthropic', 'claude-cli', 'openai', 'tensorx', 'gemini'];
+
+    /** @return array<int,string> */
     private function fornecedores(): array
     {
         $escolha = (string) config('contentmachine.aggregation.llm_provider', 'auto');
+        if ($escolha === 'none') {
+            return [];
+        }
 
-        $ordem = match ($escolha) {
-            'none' => [],
-            'auto' => ['claude-cli', 'anthropic', 'openai', 'gemini'],
-            default => [$escolha],
-        };
+        // A step pinned to one key in Settings implies its provider — that beats
+        // the global choice (the pick is more specific).
+        $escolha = StepKey::provider($this->passo) ?: $escolha;
+
+        // An explicitly configured provider goes FIRST — the rest stay behind it as
+        // fallback, so choosing one never means "nothing else may answer".
+        $ordem = self::ORDEM;
+        if ($escolha !== '' && $escolha !== 'auto') {
+            $ordem = array_merge([$escolha], array_values(array_diff($ordem, [$escolha])));
+        }
+
+        // The Claude API and the `claude` CLI are the same provider: with a key, use
+        // the API (the CLI needs an interactive session, absent on a server).
+        if (filled($this->chave('anthropic')) && $escolha !== 'claude-cli') {
+            $ordem = array_values(array_diff($ordem, ['claude-cli']));
+        }
 
         return array_values(array_filter($ordem, fn (string $f) => match ($f) {
             'claude-cli' => $this->claudeBin() !== null,
-            'anthropic' => filled(config('services.anthropic.key')),
-            'openai' => filled(config('services.openai.key')),
-            'gemini' => filled(config('services.gemini.key')),
+            'anthropic' => filled($this->chave('anthropic')),
+            'openai' => filled($this->chave('openai')),
+            'gemini' => filled($this->chave('gemini')),
+            'tensorx' => filled($this->chave('tensorx')),
             default => false,
         }));
     }
 
-    /** Corre o CLI do Claude Code em modo não-interativo (prompt via stdin). */
+    /** Runs the Claude Code CLI in non-interactive mode (prompt via stdin). */
     private function claudeCli(string $prompt, bool $comFerramentas = false): ?string
     {
         $bin = $this->claudeBin();
@@ -118,12 +166,12 @@ class LlmClient
             return null;
         }
 
-        // Corre via `env -u …` para REMOVER os marcadores de sessão do Claude
-        // Code antes de invocar o `claude`. O Symfony Process reinjeta o ambiente
-        // herdado (getDefaultEnv), pelo que omití-los no ->env() não basta; se o
-        // subprocesso herdar CLAUDECODE/CLAUDE_CODE_*, o `claude -p` entra em modo
-        // "sessão-filha" e falha com "Not logged in". Com `env -u` são removidos
-        // à força e o `claude` autentica-se pelas credenciais em disco (~/.claude).
+        // Run via `env -u …` to REMOVE the Claude Code session markers
+        // before invoking `claude`. Symfony Process re-injects the inherited
+        // environment (getDefaultEnv), so omitting them in ->env() is not enough; if the
+        // subprocess inherits CLAUDECODE/CLAUDE_CODE_*, `claude -p` enters
+        // "child-session" mode and fails with "Not logged in". With `env -u` they are removed
+        // by force and `claude` authenticates via the on-disk credentials (~/.claude).
         $args = ['/usr/bin/env'];
         foreach (self::MARCADORES_SESSAO as $marcador) {
             $args[] = '-u';
@@ -154,7 +202,7 @@ class LlmClient
         return $r->successful() ? (trim($r->output()) ?: null) : null;
     }
 
-    /** API da Anthropic (Messages). Devolve o texto ou null. */
+    /** Anthropic API (Messages). Returns the text or null. */
     private function anthropic(string $chave, string $prompt): ?string
     {
         if (blank($chave)) {
@@ -172,23 +220,46 @@ class LlmClient
         return $r->successful() ? (trim((string) $r->json('content.0.text')) ?: null) : null;
     }
 
-    private function openai(string $chave, string $prompt): ?string
+    private function openai(string $chave, string $prompt, bool $json = false): ?string
     {
         if (blank($chave)) {
             return null;
         }
 
         $r = Http::timeout(120)->withToken($chave)
-            ->post('https://api.openai.com/v1/chat/completions', [
+            ->post('https://api.openai.com/v1/chat/completions', array_filter([
                 'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
                 'messages' => [['role' => 'user', 'content' => $prompt]],
                 'temperature' => 0.4,
+                'response_format' => $json ? ['type' => 'json_object'] : null,
+            ]));
+
+        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
+    }
+
+    /**
+     * Tensorix (tensorx.ai) — the OpenAI-compatible gateway the clip pipeline
+     * already uses. Kept in this chain too, so a deploy whose only key is Tensorix
+     * still WRITES the news (instead of silently degrading to the heuristic).
+     * No web search here: it fills in from the transcripts and cited sources.
+     */
+    private function tensorx(string $chave, string $prompt): ?string
+    {
+        if (blank($chave)) {
+            return null;
+        }
+
+        $base = rtrim((string) config('services.tensorx.base_url', 'https://api.tensorx.ai/v1'), '/');
+        $r = Http::timeout(300)->withToken($chave)
+            ->post($base.'/chat/completions', [
+                'model' => (string) config('services.tensorx.model', 'deepseek/deepseek-r1-0528'),
+                'messages' => [['role' => 'user', 'content' => $prompt]],
             ]);
 
         return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
     }
 
-    private function gemini(string $chave, string $prompt): ?string
+    private function gemini(string $chave, string $prompt, bool $json = false): ?string
     {
         if (blank($chave)) {
             return null;
@@ -196,33 +267,25 @@ class LlmClient
 
         $modelo = (string) config('contentmachine.aggregation.gemini_model', 'gemini-1.5-flash');
         $r = Http::timeout(120)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", [
+            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$modelo}:generateContent?key={$chave}", array_filter([
                 'contents' => [['parts' => [['text' => $prompt]]]],
-            ]);
+                'generationConfig' => $json ? ['responseMimeType' => 'application/json'] : null,
+            ]));
 
         return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : null;
     }
 
     /**
-     * Ambiente para o subprocesso do `claude -p`: passa o ambiente REAL do
-     * processo (via getenv(), que funciona em CLI e na SAPI web — ao contrário
-     * de $_SERVER, que sob `php artisan serve` não expõe variáveis de ambiente)
-     * MAS remove os marcadores de sessão do Claude Code E os segredos alheios.
+     * Environment for the `claude -p` subprocess: passes the REAL process
+     * environment (via getenv(), which works in CLI and in the web SAPI — unlike
+     * $_SERVER, which under `php artisan serve` does not expose environment variables)
+     * BUT removes the Claude Code session markers.
      *
-     * O `claude` autentica-se pelas credenciais em disco (~/.claude, via HOME).
-     * Se herdar CLAUDECODE / CLAUDE_CODE_* de uma sessão-pai do Claude Code,
-     * entra em modo "sessão-filha" e falha com "Not logged in". Removê-los deixa
-     * o subprocesso correr como uma invocação de topo normal — funciona tanto
-     * dentro como fora de uma sessão do Claude Code.
-     *
-     * IMPORTANTE (segurança): esta redação corre com `--allowedTools WebSearch
-     * WebFetch` sobre material NÃO fiável (transcrições de vídeos de terceiros).
-     * Uma injeção de prompt escondida nesse material poderia levar o agente a
-     * ler variáveis de ambiente e exfiltrá-las via WebFetch. Por isso removemos
-     * do subprocesso TODAS as chaves de outros fornecedores (OpenAI, Gemini,
-     * kie.ai, ElevenLabs, Apify, YouTube, Reddit…), a APP_KEY e as credenciais
-     * de base de dados — nada disso é preciso para correr o `claude`. Só a
-     * própria autenticação da Anthropic (ANTHROPIC_*) é preservada.
+     * `claude` authenticates via the on-disk credentials (~/.claude, via HOME).
+     * If it inherits CLAUDECODE / CLAUDE_CODE_* from a parent Claude Code session,
+     * it enters "child-session" mode and fails with "Not logged in". Removing them lets
+     * the subprocess run as a normal top-level invocation — it works both
+     * inside and outside a Claude Code session.
      *
      * @return array<string,string>
      */
@@ -240,15 +303,15 @@ class LlmClient
             }
         }
 
-        // Dados do utilizador (para fallback de HOME/USER/LOGNAME).
+        // User data (for HOME/USER/LOGNAME fallback).
         $pw = function_exists('posix_getpwuid') && function_exists('posix_getuid')
             ? (posix_getpwuid(posix_getuid()) ?: [])
             : [];
 
-        // Garante HOME + PATH e, crucialmente, USER/LOGNAME/SHELL: o `claude`
-        // precisa deles para aceder às credenciais (Keychain no macOS). Sob a SAPI
-        // cli-server (php artisan serve) o Symfony Process não os propaga, o que
-        // deixava o `claude` "Not logged in" mesmo com HOME definido.
+        // Ensures HOME + PATH and, crucially, USER/LOGNAME/SHELL: `claude`
+        // needs them to access the credentials (Keychain on macOS). Under the
+        // cli-server SAPI (php artisan serve) Symfony Process does not propagate them, which
+        // left `claude` "Not logged in" even with HOME set.
         $garantir = [
             'HOME' => getenv('HOME') ?: ($env['HOME'] ?? ($pw['dir'] ?? '')),
             'PATH' => getenv('PATH') ?: ($env['PATH'] ?? '/usr/local/bin:/usr/bin:/bin'),
@@ -265,24 +328,26 @@ class LlmClient
         return $env;
     }
 
-    /** Variáveis que marcam uma sessão Claude Code em curso (a remover do subprocesso). */
+    /** Variables that mark an in-progress Claude Code session (to remove from the subprocess). */
     private function ehMarcadorSessao(string $chave): bool
     {
         return in_array($chave, self::MARCADORES_SESSAO, true) || str_starts_with($chave, 'CLAUDE_CODE');
     }
 
     /**
-     * Segredo que NÃO pertence ao `claude` e não deve entrar no subprocesso.
+     * A secret that does NOT belong to `claude` and must not enter the subprocess.
      *
-     * O `claude` só precisa de HOME/PATH/USER/… (reinjetados em ambiente()) e,
-     * quando não há sessão em disco, da sua própria chave ANTHROPIC_*. Tudo o
-     * resto que pareça uma credencial (chaves de outros fornecedores, tokens,
-     * segredos, palavras-passe, APP_KEY) é retido para não ficar ao alcance de
-     * um agente com ferramentas web a processar conteúdo não fiável.
+     * SECURITY: this write-up runs with `--allowedTools WebSearch WebFetch` over
+     * UNTRUSTED material (third-party video transcripts). A prompt injection
+     * hidden in that material could try to read environment variables and
+     * exfiltrate them via WebFetch. So every other provider's credential
+     * (OpenAI, Gemini, kie.ai, ElevenLabs, Apify, YouTube, Reddit…), the APP_KEY
+     * and the database credentials are withheld — `claude` needs none of them.
+     * Only Anthropic's own auth (ANTHROPIC_*) is preserved.
      */
     private function ehSegredoAlheio(string $chave): bool
     {
-        // A autenticação da própria Anthropic é legítima neste subprocesso.
+        // Anthropic's own authentication is legitimate in this subprocess.
         if (str_starts_with($chave, 'ANTHROPIC_')) {
             return false;
         }
@@ -293,7 +358,7 @@ class LlmClient
         );
     }
 
-    /** Caminho absoluto do binário `claude`, ou null se indisponível (com cache). */
+    /** Absolute path of the `claude` binary, or null if unavailable (cached). */
     private function claudeBin(): ?string
     {
         $bin = (string) config('contentmachine.aggregation.claude_cli_bin', 'claude');

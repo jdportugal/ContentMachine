@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Brock Mesarich | AI for Non Techies'
 data: '2026-07-17'
 url: 'https://www.youtube.com/watch?v=V1SWuUosVMI'
-thumbnail: 'https://i.ytimg.com/vi_webp/V1SWuUosVMI/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/V1SWuUosVMI/maxresdefault.jpg'
+descricao: "✅ Claude Cowork: http://clau.de/BrockMesarich 🔗 This video is sponsored by ‪@anthropic-ai‬ 🔗 Claude Cowork Prompt Pack: https://brockster6202.gumroad.com/l/zxmjvu 📚 Join my Skool Community for all of my resources: https://bit.ly/4t2yNgG 🔗 Zapier MCP: https://bit.ly/4ynGCRW I've been using Claude Cowork every single day for the last six months to run my business, and most people are barely scratching the surface of what it can do. In this video I walk through exactly how I have it set up, including the one file that makes Claude actually understand who you are, the skills and connectors I run daily, and the tasks that finish work before I even wake up. I also made you a free prompt pack so you can copy and paste everything and build it with me. By the end you'll have Claude doing real..."
+resumo: 'Este vídeo mostra como configurar e utilizar o Claude Cowork no dia a dia de um negócio, explicando os quatro níveis da ferramenta e como ela executa tarefas em pastas e aplicações do computador (como organizar recibos em folhas de cálculo ou tratar faturas por cobrar). Inclui também os prompts exatos para o espectador replicar a configuração.'
 tags:
   - 'claude cowork'
   - cowork

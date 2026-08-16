@@ -7,17 +7,17 @@ use App\Services\Scoring\EngagementScorer;
 use Throwable;
 
 /**
- * Recolhe o desempenho REAL do canal do utilizador via yt-dlp (sem chaves de
- * API). Lê o URL do perfil em Definições, lista as publicações recentes e
- * enriquece cada uma com métricas (visualizações, gostos, comentários, data).
- * Normaliza para o formato do domínio, pontua e guarda no MonitoringStore.
+ * Collects the user channel's REAL performance via yt-dlp (without API
+ * keys). Reads the profile URL from Settings, lists the recent posts and
+ * enriches each one with metrics (views, likes, comments, date).
+ * Normalizes to the domain format, scores and stores in the MonitoringStore.
  *
- * yt-dlp lê o YouTube de forma fiável; Instagram/TikTok podem exigir login e
- * devolver vazio — nesse caso a plataforma fica «sem dados» (nunca falso).
+ * yt-dlp reads YouTube reliably; Instagram/TikTok may require login and
+ * return empty — in that case the platform is «no data» (never false).
  */
 class YtDlpMonitoringFetcher
 {
-    /** Quantas entradas listar (leve, metadados-only) para contar publicações. */
+    /** How many entries to list (light, metadata-only) to count posts. */
     private const LISTAGEM_MAX = 200;
 
     public function __construct(
@@ -27,7 +27,7 @@ class YtDlpMonitoringFetcher
     ) {}
 
     /**
-     * Recolhe, pontua e guarda. Devolve os itens (pode ser vazio).
+     * Collects, scores and stores. Returns the items (may be empty).
      *
      * @return array<int,array<string,mixed>>
      */
@@ -48,9 +48,9 @@ class YtDlpMonitoringFetcher
             return [[], []];
         }
 
-        // Uma listagem leve por URL (até LISTAGEM_MAX): serve para CONTAR o total
-        // de publicações e para captar as estatísticas de canal (subscritores,
-        // nome) que o yt-dlp devolve no topo — sem custo extra.
+        // A light listing per URL (up to LISTAGEM_MAX): serves to COUNT the total
+        // number of posts and to capture the channel stats (subscribers,
+        // name) that yt-dlp returns at the top — at no extra cost.
         $entries = [];
         $canal = ['subscribers' => 0, 'posts' => 0, 'nome' => ''];
         foreach ($this->listingUrls($plataforma, $channelUrl) as $listUrl) {
@@ -74,7 +74,7 @@ class YtDlpMonitoringFetcher
         }
         $canal['posts'] = count($entries);
 
-        // Só os `limite` mais recentes recebem metadados completos (passo lento).
+        // Only the most recent `limite` get full metadata (slow step).
         $itens = [];
         foreach (array_slice(array_values($entries), 0, $limite) as $entry) {
             $url = $this->urlDe($entry);
@@ -88,7 +88,7 @@ class YtDlpMonitoringFetcher
                 $meta = [];
             }
 
-            // Subscritores também vêm no metadado do vídeo (rede de segurança).
+            // Subscribers also come in the video metadata (safety net).
             $canal['subscribers'] = max($canal['subscribers'], (int) ($meta['channel_follower_count'] ?? 0));
 
             $item = $this->normalizar(array_merge($entry, $meta), $plataforma, $url);
@@ -97,7 +97,7 @@ class YtDlpMonitoringFetcher
             }
         }
 
-        // Cópia local das miniaturas (CDN podem bloquear o hotlink no browser).
+        // Local copy of the thumbnails (CDNs may block hotlinking in the browser).
         $thumbs = app(ThumbnailCache::class);
         foreach ($itens as &$it) {
             $it['thumbnail'] = $thumbs->localizar($plataforma, (string) $it['id'], (string) ($it['thumbnail'] ?? ''));
@@ -108,9 +108,9 @@ class YtDlpMonitoringFetcher
     }
 
     /**
-     * URLs a listar. Um URL de canal do YouTube (raiz) lista os SEPARADORES, não
-     * os vídeos — por isso apontamos explicitamente para /videos e /shorts. Se o
-     * URL já visar um separador/playlist/vídeo, usa-se tal e qual.
+     * URLs to list. A YouTube channel URL (root) lists the TABS, not
+     * the videos — so we point explicitly to /videos and /shorts. If the
+     * URL already targets a tab/playlist/video, it is used as-is.
      *
      * @return array<int,string>
      */
@@ -162,7 +162,7 @@ class YtDlpMonitoringFetcher
             'likes' => (int) ($m['like_count'] ?? 0),
             'comentarios' => (int) ($m['comment_count'] ?? 0),
             'partilhas' => (int) ($m['repost_count'] ?? 0),
-            'guardados' => 0, // não exposto por yt-dlp
+            'guardados' => 0, // not exposed by yt-dlp
         ];
     }
 
@@ -197,7 +197,7 @@ class YtDlpMonitoringFetcher
     }
 
     /**
-     * Pontua cada item (índice de desempenho ponderado) face à mediana de views.
+     * Scores each item (weighted performance index) against the median of views.
      *
      * @param  array<int,array<string,mixed>>  $itens
      * @return array<int,array<string,mixed>>

@@ -6,6 +6,8 @@ canal: 'Nate Herk | AI Automation'
 data: '2026-07-20'
 url: 'https://www.youtube.com/watch?v=8MEJen0nblQ'
 thumbnail: 'https://i.ytimg.com/vi/8MEJen0nblQ/maxresdefault.jpg'
+descricao: 'Try ClickUp free for a month, then 15% off Biz plan w/ code NATEHERKB2: https://clickup.com/ My playbook for growing a $1M AI agency: https://app.aiautomationsociety.ai/opaa-ads-optin My FREE resources: https://www.skool.com/ai-automation-society/about?el=nate-b-jones-pod&hcategory=youtube-videos&utm_campaign=free-group My Tools💻 FREE MONTH voice to text: https://get.glaido.com/nate Code NATEHERK for 10% off VPS (annual plan): https://www.hostinger.com/vps/claude-code-hosting I sat down with Nate B. Jones to talk about what AI adoption actually looks like inside real companies, not on Twitter. We get into why most rollouts stall even after a company has already paid for the tools, why people who struggle to sell AI usually have a storytelling problem instead, and why the non-technical sid...'
+resumo: 'Este episódio explica por que ofertas de IA não vendem: o problema é de storytelling, não de tecnologia — deves vender a transformação e o impacto real, não a IA em si. Aborda ainda a necessidade de líderes e CEOs se tornarem tecnicamente fluentes e usarem ferramentas de IA na primeira pessoa, e a importância de sermos deliberados nas histórias que contamos sobre a inteligência artificial.'
 tags: {}
 fontes:
   - 'https://clickup.com/'
@@ -16,7 +18,6 @@ fontes:
   - 'https://www.linkedin.com/in/nateherkelman/'
   - 'https://x.com/nateherk'
   - 'https://www.instagram.com/nateherk/'
-resumo: 'Este vídeo é uma entrevista com Nate B. Jones sobre como vender ofertas de IA, defendendo que o problema de vendas é, na verdade, de contar histórias — vender a transformação e o impacto real, e não a IA em si. Aborda também a necessidade de as lideranças (C-suite) se tornarem tecnicamente fluentes e adotarem elas próprias as ferramentas de IA, e a importância de sermos intencionais nas narrativas...'
 ---
 
 ## Descrição

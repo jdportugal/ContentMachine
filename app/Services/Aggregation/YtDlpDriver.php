@@ -5,9 +5,9 @@ namespace App\Services\Aggregation;
 use Illuminate\Support\Str;
 
 /**
- * Driver de agregação assente no yt-dlp. Suporta plenamente YouTube e TikTok;
- * para Instagram e LinkedIn tenta na mesma, mas degrada graciosamente quando o
- * yt-dlp não consegue extrair (normalmente por exigir autenticação).
+ * Aggregation driver based on yt-dlp. Fully supports YouTube and TikTok;
+ * for Instagram and LinkedIn it still tries, but degrades gracefully when
+ * yt-dlp cannot extract (usually because it requires authentication).
  */
 class YtDlpDriver implements AggregatorDriver
 {
@@ -27,7 +27,7 @@ class YtDlpDriver implements AggregatorDriver
         return $this->plataforma;
     }
 
-    public function collect(array $canais, int $limitePorCanal): array
+    public function collect(array $canais, int $limitePorCanal, array $idsArquivados = []): array
     {
         $itens = [];
 
@@ -37,7 +37,7 @@ class YtDlpDriver implements AggregatorDriver
                 continue;
             }
 
-            foreach ($this->itensDoCanal($canal, $limitePorCanal) as $item) {
+            foreach ($this->itensDoCanal($canal, $limitePorCanal, $idsArquivados) as $item) {
                 $itens[] = $item;
             }
         }
@@ -46,9 +46,10 @@ class YtDlpDriver implements AggregatorDriver
     }
 
     /**
+     * @param  array<string,bool>  $idsArquivados
      * @return array<int,AggregatedItem>
      */
-    private function itensDoCanal(string $canal, int $limite): array
+    private function itensDoCanal(string $canal, int $limite, array $idsArquivados): array
     {
         try {
             $listagem = $this->runner->listing($this->normalizarCanal($canal), $limite);
@@ -62,6 +63,13 @@ class YtDlpDriver implements AggregatorDriver
         foreach (array_slice($entradas, 0, $limite) as $entrada) {
             $url = $this->urlDaEntrada($entrada);
             if ($url === null) {
+                continue;
+            }
+
+            // Skip videos already in the vault BEFORE the costly metadata +
+            // transcript + LLM work — this is what makes daily re-runs fast.
+            $idEntrada = (string) ($entrada['id'] ?? '');
+            if ($idEntrada !== '' && isset($idsArquivados[Str::slug($idEntrada)])) {
                 continue;
             }
 
@@ -85,10 +93,10 @@ class YtDlpDriver implements AggregatorDriver
     }
 
     /**
-     * Normaliza o URL de um canal. No YouTube, um URL de canal "nu" (@handle,
-     * /channel/ID, /c/nome, /user/nome) lista os SEPARADORES do canal (Vídeos,
-     * Shorts, Live…) em vez dos vídeos — apontamos explicitamente ao separador
-     * /videos para obter publicações reais.
+     * Normalizes a channel URL. On YouTube, a "bare" channel URL (@handle,
+     * /channel/ID, /c/name, /user/name) lists the channel's TABS (Videos,
+     * Shorts, Live…) instead of the videos — we point explicitly at the
+     * /videos tab to get real posts.
      */
     private function normalizarCanal(string $canal): string
     {
@@ -98,7 +106,7 @@ class YtDlpDriver implements AggregatorDriver
 
         $canal = rtrim($canal, '/');
 
-        // Já aponta a um separador ou a um vídeo/playlist específico.
+        // Already points at a tab or at a specific video/playlist.
         if (preg_match('#/(videos|shorts|streams|playlists|featured|community|podcasts)$#i', $canal)
             || str_contains($canal, 'watch?v=')
             || str_contains($canal, '/playlist')) {
@@ -163,9 +171,9 @@ class YtDlpDriver implements AggregatorDriver
     /** @param array<string,mixed> $meta */
     private function transcricao(array $meta): string
     {
-        // Tenta cada legenda candidata por ordem de preferência até obter texto —
-        // as auto-legendas TRADUZIDAS (ex.: pt) são frequentemente limitadas
-        // (HTTP 429), pelo que é essencial recuar para o idioma original.
+        // Try each candidate subtitle in order of preference until getting text —
+        // the TRANSLATED auto-captions (e.g. pt) are frequently rate-limited
+        // (HTTP 429), so falling back to the original language is essential.
         foreach ($this->urlsLegenda($meta) as $url) {
             $vtt = $this->runner->fetch($url);
 
@@ -181,8 +189,8 @@ class YtDlpDriver implements AggregatorDriver
     }
 
     /**
-     * URLs VTT candidatos, por ordem de preferência: legendas manuais primeiro,
-     * depois auto-legendas, seguindo a ordem de idiomas configurada.
+     * Candidate VTT URLs, in order of preference: manual subtitles first,
+     * then auto-captions, following the configured language order.
      *
      * @param  array<string,mixed>  $meta
      * @return array<int,string>
@@ -212,7 +220,7 @@ class YtDlpDriver implements AggregatorDriver
     }
 
     /**
-     * Extrai ligações (fontes) do texto, sem duplicados.
+     * Extracts links (sources) from the text, without duplicates.
      *
      * @return array<int,string>
      */

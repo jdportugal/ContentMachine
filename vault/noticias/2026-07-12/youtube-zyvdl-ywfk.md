@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Nate Herk | AI Automation'
 data: '2026-07-12'
 url: 'https://www.youtube.com/watch?v=zyvdl__Ywfk'
-thumbnail: 'https://i.ytimg.com/vi_webp/zyvdl__Ywfk/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/zyvdl__Ywfk/maxresdefault.jpg'
+descricao: 'Claim 2,000 FREE Clay credits here: https://bit.ly/4gzSl9L My playbook for growing a $1M AI agency: https://app.aiautomationsociety.ai/opaa-ads-optin My FREE resources: https://www.skool.com/ai-automation-society/about?el=claude-code-clay&hcategory=youtube-videos&utm_campaign=free-group My Tools💻 FREE MONTH voice to text: https://get.glaido.com/nate Code NATEHERK for 10% off VPS (annual plan): https://www.hostinger.com/vps/claude-code-hosting Finding leads is the thing that blocks most people from landing their first client, so in this video I connect Claude Code to Clay and build a lead generation machine you run entirely in plain English. Claude Code is the orchestrator and Clay handles the data, sourcing real businesses, enriching them with verified emails and phone numbers through its...'
+resumo: 'Este vídeo mostra como usar o Claude Code como orquestrador em conjunto com o Clay para gerar leads de cold outreach, explicando como encontrar e enriquecer contactos (empresas, emails, telefones) e escrever mensagens personalizadas através de linguagem natural. Aborda ainda os principais obstáculos da prospeção fria — encontrar o negócio certo, obter contactos reais e redigir abordagens que não p...'
 tags: {}
 fontes:
   - 'https://bit.ly/4gzSl9L'

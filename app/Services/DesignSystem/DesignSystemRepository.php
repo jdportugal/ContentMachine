@@ -3,18 +3,18 @@
 namespace App\Services\DesignSystem;
 
 /**
- * Sistema de Design do CONTEÚDO gerado — a identidade visual/verbal que os
- * geradores (clips animados, publicações) devem seguir. Guardado como um
- * ficheiro Markdown simples no vault (o "cérebro"), legível no Obsidian e
- * versionável. Distinto do design da interface da app.
+ * Design System for the generated CONTENT — the visual/verbal identity that the
+ * generators (animated clips, posts) must follow. Stored as a
+ * simple Markdown file in the vault (the "brain"), readable in Obsidian and
+ * versionable. Distinct from the app's interface design.
  *
- * A leitura é usada pelos prompts LLM dos geradores; a escrita vem do
- * separador "Sistema de Design". Ficheiro em falta = string vazia (sem erro),
- * espelhando o tratamento de `estilo-animacao.md`.
+ * Reading is used by the generators' LLM prompts; writing comes from
+ * the "Design System" tab. Missing file = empty string (no error),
+ * mirroring the handling of `estilo-animacao.md`.
  */
 class DesignSystemRepository
 {
-    /** Modelo inicial, escrito quando o ficheiro ainda não existe. */
+    /** Initial template, written when the file does not exist yet. */
     private const TEMPLATE = <<<'MD'
 # Nebula — Sistema de Design
 
@@ -55,13 +55,13 @@ MD;
         return is_file($this->path());
     }
 
-    /** Conteúdo Markdown atual, ou '' se o ficheiro não existir. */
+    /** Current Markdown content, or '' if the file does not exist. */
     public function read(): string
     {
         return $this->exists() ? (string) file_get_contents($this->path()) : '';
     }
 
-    /** Conteúdo a usar nos geradores: o guardado, ou o modelo inicial. */
+    /** Content to use in the generators: the stored one, or the initial template. */
     public function readOrTemplate(): string
     {
         $conteudo = $this->read();
@@ -69,7 +69,7 @@ MD;
         return trim($conteudo) !== '' ? $conteudo : self::TEMPLATE;
     }
 
-    /** Grava o Markdown no vault (criando a pasta se necessário). */
+    /** Writes the Markdown to the vault (creating the folder if needed). */
     public function write(string $conteudo): void
     {
         $path = $this->path();
@@ -82,7 +82,7 @@ MD;
         file_put_contents($path, $conteudo);
     }
 
-    /** Última modificação (H:i local), ou null se o ficheiro não existir. */
+    /** Last modification (local H:i), or null if the file does not exist. */
     public function updatedAt(): ?string
     {
         if (! $this->exists()) {
@@ -96,7 +96,7 @@ MD;
 
     // ---------------------------------------------------------------- tokens
 
-    /** Caminho do JSON de tokens (tema) ao lado do design-system.md. */
+    /** Path of the tokens (theme) JSON next to design-system.md. */
     public function tokensPath(): string
     {
         return preg_replace('/\.md$/i', '', $this->path()).'.tokens.json';
@@ -108,8 +108,8 @@ MD;
     }
 
     /**
-     * Tokens do tema guardados (para o renderizador). Null se ainda não foram
-     * extraídos — o renderizador usa então os seus defaults (IATECA).
+     * Stored theme tokens (for the renderer). Null if they have not been
+     * extracted yet — the renderer then uses its own defaults (Brand Machine).
      *
      * @return array<string,mixed>|null
      */

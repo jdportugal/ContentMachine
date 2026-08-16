@@ -1,0 +1,364 @@
+---
+titulo: "Anthropic Engineers Just Fixed Claude Code and Nobody's Talking About it!"
+tipo: item_agregado
+plataforma: youtube
+canal: 'Duncan Rogoff | Learn Claude Code'
+data: '2026-07-28'
+url: 'https://www.youtube.com/watch?v=UBFHTHUs1wA'
+thumbnail: 'https://i.ytimg.com/vi/UBFHTHUs1wA/maxresdefault.jpg'
+descricao: "Learn Claude Code + all my resources. Only $9. 👉 https://www.skool.com/claudecodeclub Summary ⤵️ An Anthropic engineer just published the new rules for prompting Claude Code — and they quietly deleted over 80% of Claude Code's system prompt with zero loss in coding performance. If you've been stuffing your CLAUDE.md file with rules, you're doing it wrong (and it's costing you tokens, speed, and money). 👉 Read the full article: https://x.com/trq212/article/2080710971228918066 ⏱️ TIMESTAMPS 00:00 - Anthropic Engineer's New Rules 00:35 - What Context Engineering Really Means 01:23 - Why 80% Got Deleted 02:07 - The Hidden /doctor Skill 02:41 - How The Health Check Works 03:04 - How to Find Dead Weight 03:21 - How to Trim CLAUDE.md 04:05 - How to Use Lazy Loading 04:36 - How to Fix Permission..."
+resumo: 'Este vídeo analisa um artigo do Tariq, engenheiro da equipa técnica do Claude Code na Anthropic, sobre as novas regras de engenharia de contexto para os modelos Claude 5, explicando que a Anthropic removeu mais de 80% do system prompt do Claude Code sem perda de desempenho. Aborda ainda como ajustar as tuas skills e ficheiros CLAUDE.md, incluindo a skill /doctor que já vem incluída no Claude Code.'
+tags: {}
+fontes:
+  - 'https://www.skool.com/claudecodeclub'
+  - 'https://x.com/trq212/article/2080710971228918066'
+---
+
+## Descrição
+
+Learn Claude Code + all my resources. Only $9.
+👉 https://www.skool.com/claudecodeclub
+
+Summary ⤵️
+An Anthropic engineer just published the new rules for prompting Claude Code — and they quietly deleted over 80% of Claude Code's system prompt with zero loss in coding performance. 
+
+If you've been stuffing your CLAUDE.md file with rules, you're doing it wrong (and it's costing you tokens, speed, and money).
+
+👉 Read the full article: https://x.com/trq212/article/2080710971228918066
+
+⏱️ TIMESTAMPS
+00:00 - Anthropic Engineer's New Rules
+00:35 - What Context Engineering Really Means
+01:23 - Why 80% Got Deleted
+02:07 - The Hidden /doctor Skill
+02:41 - How The Health Check Works
+03:04 - How to Find Dead Weight
+03:21 - How to Trim CLAUDE.md
+04:05 - How to Use Lazy Loading
+04:36 - How to Fix Permission Settings
+05:16 - Why Over-Constraining Hurts Results
+06:02 - How Skills Replace Memory Bloat
+06:41 - How to Give Claude Judgment
+07:18 - How to Use Progressive Disclosure
+07:57 - How to Structure File Trees
+08:15 - My Real /doctor Results
+
+## Transcrição
+
+I just stumbled across this post from
+one of the engineers at Anthropic, and
+this is Tariq, and he's on the technical
+team of Claude Code. And if you've been
+using Claude Code for any amount of
+time, this is worth paying attention to.
+It's going to make your systems faster,
+it's going to make things cost less, and
+it's going to make everything more
+efficient. It's kind of completely
+changed the way I think about using
+Claude Code. I'm even going to show you
+a skill that ships with Claude Code that
+nobody is talking about, and I'm
+honestly not sure why. So, Tariq wrote
+this article titled The New Rules of
+Context Engineering for Claude 5 models.
+I know that sounds too technical, and
+maybe it is. And basically, this all
+just has to do with how we train Claude,
+and it seems like right now, most people
+are just doing it wrong. But it's really
+not your fault, like the models have
+changed and have gotten so much better
+over time that if you haven't thought
+about these things for a while, they're
+really worth revisiting. So, the way we
+prompt Claude has fundamentally changed.
+So, when you send a message to Claude,
+the prompt is only a small part of the
+context it gets. Much of your context is
+assembled from your system prompt, any
+of the skills you've created, your
+Claude MD files both at the global level
+and the project level, any memory that
+Claude has saved, and any other sources
+that you give it. So, when I use the
+word context engineering, that's
+essentially what it means. How do you
+engineer the context that you are giving
+Claude to be the most optimized, most
+efficient, and most successful? And so,
+the way that you do this makes a big
+impact on the results that you generate
+when you're using Claude Code or
+building your own agents. So, this is
+the part that I thought was really
+interesting. Tariq says that most
+recently, the engineering team at
+Anthropic noticed a large jump in the
+way we prompt the newest generation of
+Claude models. So again, like Opus 5,
+Sonnet 5, Fable 5, all the 5s. They said
+that they removed over 80% of Claude
+Code's system prompt for all of the
+newest models with no measurable loss in
+our coding evaluations. That basically
+means that these models have just gotten
+so insanely smart that you don't need to
+give them nearly as much information as
+you had to before in order to get a
+really impactful output. So, the rest of
+this article just basically goes to
+break out what they've learned about
+prompting this brand new class of models
+and how you can utilize it to update
+your own context engineering. What's
+pretty cool is they've actually already
+put all of the best practices into a
+skill called the Claude doctor skill.
+This ships with Claude. You can use this
+inside of the terminal. I checked to see
+in the desktop app, it didn't look like
+it was available there, but you can use
+the command {slash} doctor in Claude
+code to right-size your skills and your
+Claude MD file. So, I wanted to just
+give you this at a high level so you can
+basically understand what the {slash}
+doctor skill actually even does. And so,
+I just asked Claude. I just said, "Hey,
+like tell me simply at a high level what
+this skill does." So, the {slash} doctor
+skill is a full health check of your
+Claude code setup. It's read-only first,
+so it's going to scan everything. It
+reports back to you, and then it asks
+you before actually making any changes.
+So, that's key cuz you don't want Claude
+just doing a whole bunch of your stuff
+on your system that you don't
+understand. And so, there are nine core
+things that it looks at. So, the install
+health, any duplicate or leftover
+installs, any broken settings files, or
+any broken or colliding agent
+definitions. Any dead weight. This one
+is huge. Like, are there any skills or
+MCP servers or plugins that you never
+actually use? It's actually going to
+look at your own usage counters and your
+session transcripts. It's just going to
+remove things that you're not actually
+using so you don't bloat all of the
+context. These next two are huge and
+they have to do with cleaning up your
+Claude MD file. So, it's basically going
+to check to make sure there's no
+repetition or redundancy anywhere else
+on your system. It's going to look to
+see if it can just trim your core Claude
+MD file. It's going to look to see if
+you put too much context into your
+Claude MD file when really like the
+session could just figure it out itself.
+Like, how your directories are laid out,
+what your tech stacks are, are there any
+standard build commands? Like, your
+Claude MD file loads every single
+session and so, you pay for it every
+time. And so, the slimmer this file can
+be, the better. And there's a couple of
+ways that you can architect your files
+that are going to be significantly more
+efficient and save you time and save you
+on tokens. And number five is really the
+way to do that. It's this idea of lazy
+loading. So, always loaded guidance that
+would be better as a subdirectory or a
+skill. And so now, instead of cramming
+as much as you possibly can into this
+Claude MD file, the right way to do it
+is keep this file like really
+high-level. Almost think of it as like
+chapters or a glossary or an index that
+references all of your other files. And
+so, it basically just says like, "Hey,
+here are the skills that you have access
+to. Here's what each one does. Like, you
+now know what to do." It's going to look
+to see if you have any scripts that
+block your loop every tool call. It's
+going to actually look at your context
+weight to see what's eating your context
+budget before you type anything. So,
+that's super helpful. It's just going to
+make sure you're on the latest version
+of Claude. You all probably are cuz this
+thing updates automatically. And any
+permission fixes. So, it's going to make
+sure that auto mode is your default so
+that it Claude isn't constantly
+bothering you for feedback. So, I'm just
+going to go ahead and run it just to see
+the type of output it gets because
+again, it's going to create this
+consolidated clean this up question and
+like a little report for me so I can see
+where I'm like bloating my system. And
+then I can decide what I want Claude to
+change and what I want to keep. So,
+while that's cooking, let me just go
+back to this article because I think
+it's really interesting. And so, one of
+the core things that they found is that
+at this point like the Anthropic
+engineering team was over-constraining
+Claude code both through the system
+prompt and in our Claude MD files and
+skills. So, there were a couple of
+examples that when they would like read
+through their transcripts of how they
+used Claude, they would actually see
+these conflicting messages that say
+like, "Hey, like leave all the
+documentation in." Or like, "Hey, like
+don't add any documentation." And so, it
+was saying that the system is pretty
+smart and like Claude can actually
+generally interpret the user's prompts
+and what they want to do. But it still
+has to do a little bit of extra work
+when it has like two competing
+instructions. And so again, if you've
+been using Claude for a while, this is
+worth looking at cuz it seems like these
+are just kind of like remnants from a
+past way of coding with these LLMs. Like
+they were once needed to avoid these
+worst-case scenarios. Like, so giving
+Claude a whole bunch of these guardrails
+and constraints, but they have found
+that since they can actually delete many
+of them and let the model use any of the
+surrounding context and its own
+judgment, and they're literally getting
+the same results, and it's way faster
+and way cheaper. Additionally, Claude
+code now has many more tools than it
+originally had. So, Claude used to rely
+on Claude MD as a source of memory,
+information, and guidance. But now, you
+have that memory, but you also have
+artifacts, and you have skills. So,
+Claude can use these to create new ways
+of loading and sharing context across
+sessions. And so, if you've been
+creating skills for a while, you
+understand this. Like, a skill is a set
+set of rules or instructions or a
+process that you want Claude to follow.
+And so, instead of coding everything
+into your MD files, you just say, "Hey
+Claude, when you need to, like, search
+YouTube, like, go use this skill." And
+then all of the context is loaded in
+that skill, and it doesn't blow up the
+rest. And so, again, it's this idea of
+what we were doing before and what we
+were doing now. And so, there's just a
+couple of the core ones that I think are
+the most important. Like, before you
+would give Claude like all these rules.
+Like, do like 1 2 3 4 5, and like don't
+do these 10 things, right? But now, all
+you have to do is give Claude judgment.
+Let it know what you're trying to
+accomplish, and say, "Hey, you figure
+out the best way to do this." And so,
+one of the other core takeaways from
+this with this idea of using progressive
+disclosure instead of putting all of
+your information up front. Before,
+because Claude was focused on coding,
+the system prompt included detailed
+information on how to do code review and
+verification. These were not always
+needed, but when they were, it was
+crucial information, so they kept it
+despite it not always being needed. But
+since then, Claude code has gotten way
+more confident at using progressive
+disclosure, which just means loading the
+right context at the right time. So,
+calling the information that you need
+when you need it, and not calling it
+when you don't. So, for example, they
+moved the verification and code review
+into their own skills that Claude code
+could selectively call, again, only when
+needed. You can also do this for tools.
+So, instead of like loading all of your
+tools at once, just use tool search with
+some basic definitions on what your
+tools do. So, Claude will search for
+those definitions, figure out what tool
+was right for the job, and call on it
+only then. And I think I touched on this
+before, but like that same way of
+thinking can be applied to your Claude
+and skill files. And so, a common myth
+is that you want to make these a central
+repository for every known practice that
+you might run into. But instead,
+consider having a tree of files that can
+be loaded at the right time. So,
+basically the top-level Claude MD or
+skill file that tells Claude where to
+search for things, and then all of the
+sub files for any specific individual
+task. So, it's only loading the
+necessary information and nothing more.
+And so, really this all boils down to
+just simplify everything. And so, thanks
+to Reek for that. Let's go back through
+and just see what the doctor skill found
+on my own machine, just so I can give
+you an idea of the types of things that
+you might find. I did run this the other
+day, so we should be in like a pretty
+reasonable place, but I still think it's
+interesting nonetheless. So, the install
+is healthy, I'm on the latest version,
+nothing is broken. The real finding is
+skill blow. Shocking. I have 113
+personal skills, so they eat about uh
+10,000 tokens of context in every single
+session just to list them. So, uh that's
+already over budget, I should probably
+cut those down. 25 of those skills have
+never once been used. So, it goes ahead
+and lists all the different types of
+skills and plugins that I never used.
+The bulk of my token usage does look
+like it's coming from these 88 personal
+skills. Okay, that's great. It looked at
+the 50 most recent sessions, went ahead
+and listed any extensions that I'm not
+using. I already ran this dedupe, and
+the Claude MD file, so that's actually
+looking pretty good, but you can see
+here that checks two and three basically
+look at your overall Claude MD or your
+system prompt to figure out can we make
+it like more streamlined and more
+optimized. It checks your lazy loading,
+checks to make sure which version you're
+on, it checks auto mode, and gives you
+any warnings, and then basically asks
+how you want to proceed. If you want to
+learn how to use Claude code and get
+access to all my resources, just check
+the link in the description. If you want
+to see a skill that takes all of the
+guesswork out of prompting Claude, check
+out this video right here. I'll see you
+over there.

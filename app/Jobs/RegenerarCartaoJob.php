@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Regenera a imagem de UM cartão. Se houver imagem de referência + instrução,
- * faz edição imagem→imagem (kie.ai); caso contrário compõe de novo a partir do
- * texto. Espelha o EditSlideImageJob do AdsMaker. Corre na fila 'media'.
+ * Regenerates the image of ONE card. If there is a reference image + instruction,
+ * it does an image→image edit (kie.ai); otherwise it composes again from the
+ * text. Mirrors AdsMaker's EditSlideImageJob. Runs on the 'media' queue.
  */
 class RegenerarCartaoJob implements ShouldQueue
 {
@@ -30,15 +30,15 @@ class RegenerarCartaoJob implements ShouldQueue
         public string $titulo,
         public string $texto,
         public string $instrucao,
-        public ?string $refImagem,   // caminho web da imagem actual (ou null)
+        public ?string $refImagem,   // web path of the current image (or null)
         public int $ordem,
         public int $total,
         public string $token,
         public string $proporcao = '',
         public array $referencias = [],
-        public string $prompt = '',        // prompt kie editado na oficina ('' = compõe)
-        public array $anexos = [],          // caminhos de imagens anexas a este cartão
-        public array $anexosDescr = [],     // descrições das imagens anexas a este cartão
+        public string $prompt = '',        // kie prompt edited in the workshop ('' = compose)
+        public array $anexos = [],          // paths of images attached to this card
+        public array $anexosDescr = [],     // descriptions of the images attached to this card
     ) {}
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
@@ -58,7 +58,7 @@ class RegenerarCartaoJob implements ShouldQueue
 
         $slide = new SlidePlano($this->ordem, $this->titulo, $this->texto);
 
-        // Bytes da referência (para edição imagem→imagem), se existir e houver instrução.
+        // Reference bytes (for image→image edit), if it exists and there is an instruction.
         $refBytes = null;
         if ($this->refImagem !== null && trim($this->instrucao) !== '' && is_file(public_path($this->refImagem))) {
             $refBytes = file_get_contents(public_path($this->refImagem));

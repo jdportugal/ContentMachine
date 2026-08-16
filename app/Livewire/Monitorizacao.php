@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Monitoring\MonitoringAnalytics;
 use App\Services\Monitoring\MonitoringManager;
 use App\Services\Monitoring\MonitoringRefresher;
 use App\Services\Monitoring\MonitoringStore;
@@ -12,7 +13,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Monitorização')]
+#[Title('Monitoring')]
 class Monitorizacao extends Component
 {
     #[Url]
@@ -26,23 +27,23 @@ class Monitorizacao extends Component
     }
 
     /**
-     * Recolhe o desempenho real do canal da rede em foco (YouTube via yt-dlp;
-     * Instagram/TikTok/LinkedIn via Apify), a partir do URL do perfil em
-     * Definições. Síncrono — apanha as métricas e guarda.
+     * Collects the real channel performance for the focused network (YouTube via yt-dlp;
+     * Instagram/TikTok/LinkedIn via Apify), from the profile URL in
+     * Settings. Synchronous — fetches the metrics and saves them.
      */
     public function atualizar(MonitoringRefresher $refresher, SettingsRepository $settings): void
     {
         $url = (string) ($settings->get("perfis.{$this->rede}.url") ?? '');
 
         if (trim($url) === '') {
-            $this->dispatch('toast', message: 'Defina o URL do perfil desta rede em Definições.', type: 'erro');
+            $this->dispatch('toast', message: 'Set the profile URL for this network in Settings.', type: 'erro');
 
             return;
         }
 
         if (! $refresher->disponivel($this->rede)) {
             $this->dispatch('toast',
-                message: 'Recolha por Apify não configurada — defina APIFY_TOKEN (e o actor) no .env.',
+                message: 'Apify collection not configured — set APIFY_TOKEN (and the actor) in .env.',
                 type: 'erro',
             );
 
@@ -53,8 +54,8 @@ class Monitorizacao extends Component
 
         $this->dispatch('toast',
             message: $itens === []
-                ? 'Sem dados obtidos ('.$refresher->fonte($this->rede).' não devolveu publicações para esta rede).'
-                : count($itens).' publicações recolhidas.',
+                ? 'No data obtained ('.$refresher->fonte($this->rede).' returned no posts for this network).'
+                : count($itens).' posts collected.',
             type: $itens === [] ? 'erro' : 'ok',
         );
     }
@@ -69,6 +70,11 @@ class Monitorizacao extends Component
 
         $driver = $monitoring->driver($this->rede);
 
+        // Analytics over the whole collected set: day/month charts + per-type averages.
+        $analytics = new MonitoringAnalytics;
+        $conteudos = $driver->conteudosRecentes(500);
+        $subscribers = (int) ($store->canal($this->rede)['subscribers'] ?? 0);
+
         return view('livewire.monitorizacao', [
             'plataformas' => $plataformas,
             'meta' => config('contentmachine.plataformas_meta.'.$this->rede),
@@ -76,11 +82,15 @@ class Monitorizacao extends Component
             'ultimoPorTipo' => $driver->ultimoPorTipo(),
             'melhores' => $driver->melhores(5),
             'recentes' => $driver->conteudosRecentes(12),
-            // Contexto da recolha manual (modo com dados reais).
+            'serieDia' => $analytics->serie($conteudos, 'dia'),
+            'serieMes' => $analytics->serie($conteudos, 'mes'),
+            'mediasPorTipo' => $analytics->mediasPorTipo($conteudos, $subscribers),
+            'subscribers' => $subscribers,
+            // Manual collection context (real-data mode).
             'recolheReal' => in_array(config('contentmachine.monitoring.driver'), ['ytdlp', 'real'], true),
             'fonte' => $refresher->fonte($this->rede),
             'fonteDisponivel' => $refresher->disponivel($this->rede),
-            // Instagram esconde gostos/visualizações a quem não tem sessão.
+            // Instagram hides likes/views from users without a session.
             'semMetricas' => in_array($this->rede, (array) config('contentmachine.monitoring.sem_metricas', []), true),
             'atualizadoEm' => $store->atualizadoEm($this->rede),
             'perfilUrl' => (string) ($settings->get("perfis.{$this->rede}.url") ?? ''),

@@ -73,7 +73,7 @@ class MonitorizacaoYtDlpTest extends TestCase
         $this->assertCount(2, $driver->conteudosRecentes(12));
         $resumo = $driver->resumo();
         $this->assertNotEmpty($resumo);
-        $this->assertSame('Publicações recentes', $resumo[0]['label']);
+        $this->assertSame('Recent posts', $resumo[0]['label']);
         $this->assertSame('2', $resumo[0]['value']);
         // Melhor desempenho ordenado por score (o short viral pontua mais alto).
         $this->assertSame('v2', $driver->melhores(5)[0]['id']);

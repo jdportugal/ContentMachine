@@ -4,6 +4,9 @@ namespace App\Livewire;
 
 use App\Jobs\AgregarConteudoJob;
 use App\Jobs\GerarRelatorioJob;
+use App\Services\Aggregation\RelatorioBuilder;
+use App\Services\Projects\ProjectLanguage;
+use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Carbon;
@@ -15,83 +18,151 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Agregador de Notícias')]
+#[Title('News Aggregator')]
 class Noticias extends Component
 {
-    /** Resumo da última agregação (contagens, dias, avisos). */
+    /** Summary of the last aggregation (counts, days, warnings). */
     public ?array $resumoAgregacao = null;
 
-    /** Dia actualmente em foco na vista de itens agregados. */
+    /** Day currently in focus in the aggregated items view. */
     public string $diaSelecionado = '';
 
-    // ----- Relatório por período -----
+    // ----- Report by period -----
+    /**
+     * What to write from the aggregated material: 'noticias' (news bits) or
+     * 'dicas' (tool-usage tips, as short-form scripts). Same pipeline, same
+     * archive — only the write-up and the note type differ.
+     */
+    public string $tipoRelatorio = RelatorioBuilder::TIPO_NOTICIAS;
+
     /** 'dia' | 'semana' */
     public string $modoRelatorio = 'dia';
 
-    /** Data de referência do relatório (YYYY-MM-DD). */
+    /** Reference date of the report (YYYY-MM-DD). */
     public string $dataRelatorio = '';
 
-    /** Recolher conteúdo novo (vídeos de hoje) antes de redigir o relatório. */
-    public bool $recolherPrimeiro = true;
+    /** Output language for the report write-up (defaults to the project's own). */
+    public string $idiomaRelatorio = '';
 
-    /** Relatório gerado nesta sessão (para mostrar). @var array<string,mixed>|null */
+    /** Report generated in this session (to display). @var array<string,mixed>|null */
     public ?array $relatorio = null;
 
     public ?string $relatorioGuardado = null;
 
-    /** Caminho (no vault) do relatório arquivado atualmente em vista. */
+    /** Path (in the vault) of the archived report currently in view. */
     public string $relatorioSelecionado = '';
 
-    /** Geração em curso na fila (controla a sondagem). */
+    /** Generation in progress in the queue (controls polling). */
     public bool $aGerar = false;
 
     public ?string $relatorioToken = null;
 
     public ?string $avisoRelatorio = null;
 
-    /** Recolha (agregação) em curso na fila. */
+    /** Collection (aggregation) in progress in the queue. */
     public bool $aAgregar = false;
 
     public ?string $agregacaoToken = null;
 
-    public function mount(VaultContract $vault): void
-    {
-        $this->dataRelatorio = now()->toDateString();
+    /** Platforms with configured channels, available to aggregate. @var array<int,string> */
+    public array $plataformasDisponiveis = [];
 
-        // Abre no relatório mais recente já arquivado (se existir).
+    /** Platforms selected for the next aggregation (defaults to all available). @var array<int,string> */
+    public array $plataformasSelecionadas = [];
+
+    public function mount(VaultContract $vault, SettingsRepository $definicoes): void
+    {
+        $canais = (array) $definicoes->get('canais', []);
+        $this->plataformasDisponiveis = array_values(array_filter(
+            array_keys($canais),
+            fn ($p) => array_filter((array) ($canais[$p] ?? [])) !== [],
+        ));
+        $this->plataformasSelecionadas = $this->plataformasDisponiveis;
+
+        // A reload mid-run must not show an idle "Aggregate now" button: rejoin
+        // the running collection and keep polling it.
+        $this->juntarAoQueCorre();
+
+        $this->dataRelatorio = now()->toDateString();
+        $this->idiomaRelatorio = ProjectLanguage::name(); // still switchable in the form
+
+        // Opens on the most recent already-archived report (if any).
         $ultimo = $this->notaUltimoRelatorio($vault->all('noticias'));
         $this->relatorioSelecionado = $ultimo?->path ?? '';
         $this->relatorio = $this->dadosDe($ultimo);
     }
 
-    /** Ao escolher outro relatório no seletor, carrega-o do vault para vista. */
+    /** When choosing another report in the selector, loads it from the vault for viewing. */
     public function updatedRelatorioSelecionado(VaultContract $vault): void
     {
         $nota = $this->relatorioSelecionado !== '' ? $vault->get($this->relatorioSelecionado) : null;
 
-        $this->relatorio = $nota && $nota->get('tipo') === 'relatorio'
+        $this->relatorio = $nota && in_array($nota->get('tipo'), ['relatorio', 'relatorio_dicas'], true)
             ? $this->dadosDe($nota)
             : null;
     }
 
+    /** Switching between news and tips opens that kind's own latest archive. */
+    public function updatedTipoRelatorio(VaultContract $vault): void
+    {
+        $ultimo = $this->notaUltimoRelatorio($vault->all('noticias'));
+        $this->relatorioSelecionado = $ultimo?->path ?? '';
+        $this->relatorio = $this->dadosDe($ultimo);
+        $this->relatorioGuardado = null;
+    }
+
     /**
-     * Corre a agregação multi-plataforma e foca o dia mais recente.
+     * Runs the multi-platform aggregation and focuses on the most recent day.
      *
-     * Corre numa FILA (worker): a recolha faz dezenas de chamadas yt-dlp e
-     * estouraria o max_execution_time no pedido web. A página sonda o resultado.
+     * Runs in a QUEUE (worker): the collection makes dozens of yt-dlp calls and
+     * would blow the max_execution_time in the web request. The page polls the result.
      */
     public function agregarAgora(): void
     {
-        $this->agregacaoToken = (string) Str::uuid();
-        $this->aAgregar = true;
-        $this->dispatch('loader-show', message: 'A vasculhar os canais… (requer «php artisan queue:work»)');
+        if ($this->aAgregar || $this->plataformasSelecionadas === []) {
+            return;
+        }
 
-        AgregarConteudoJob::dispatch($this->agregacaoToken);
+        $token = (string) Str::uuid();
+
+        // One aggregation per project at a time. If another tab (or an earlier
+        // visit to this page) already started one, join that run instead of
+        // stacking a second yt-dlp storm onto the same vault.
+        if (! AgregarConteudoJob::reservar($token)) {
+            $this->juntarAoQueCorre();
+            $this->dispatch('toast', message: 'A collection is already running — waiting for it to finish.');
+
+            return;
+        }
+
+        $this->agregacaoToken = $token;
+        $this->aAgregar = true;
+        $this->dispatch('loader-show', message: 'Scanning the channels…');
+
+        AgregarConteudoJob::dispatch($token, array_values($this->plataformasSelecionadas));
 
         $this->verificarAgregacao();
     }
 
-    /** Sondado (wire:poll) enquanto $aAgregar: mostra o resumo quando o worker termina. */
+    /** Picks up an aggregation already in flight, so the page polls it instead of starting another. */
+    private function juntarAoQueCorre(): void
+    {
+        if ($token = AgregarConteudoJob::emCurso()) {
+            $this->agregacaoToken = $token;
+            $this->aAgregar = true;
+            $this->dispatch('loader-show', message: 'Scanning the channels…');
+        }
+    }
+
+    /** Toggles a platform in/out of the aggregation selection. */
+    public function alternarPlataforma(string $plataforma): void
+    {
+        $this->plataformasSelecionadas = in_array($plataforma, $this->plataformasSelecionadas, true)
+            ? array_values(array_diff($this->plataformasSelecionadas, [$plataforma]))
+            : [...$this->plataformasSelecionadas, $plataforma];
+    }
+
+    /** Polled (wire:poll) while $aAgregar: shows the summary when the worker finishes. */
     public function verificarAgregacao(): void
     {
         if (! $this->aAgregar || $this->agregacaoToken === null) {
@@ -105,10 +176,11 @@ class Noticias extends Component
 
         $this->aAgregar = false;
         $this->dispatch('loader-hide');
-        Cache::forget(AgregarConteudoJob::key($this->agregacaoToken));
+        // The summary is left in cache (it expires on its own): a second tab
+        // watching the same run still needs to read it.
 
         if (! empty($resumo['erro'])) {
-            $this->avisoRelatorio = 'A recolha falhou. Verifique se o worker está a correr («php artisan queue:work»).';
+            $this->avisoRelatorio = 'The collection failed. Check that the worker is running («php artisan queue:work»).';
 
             return;
         }
@@ -123,28 +195,31 @@ class Noticias extends Component
     }
 
     /**
-     * Dispara a geração do relatório numa FILA (worker) e passa a sondar o
-     * resultado — a redação com IA/pesquisa web demora e estouraria o
-     * max_execution_time se corresse no pedido web. Mesmo padrão da oficina.
+     * Triggers report generation in a QUEUE (worker) and starts polling the
+     * result — writing with AI/web search takes time and would blow the
+     * max_execution_time if it ran in the web request. Same pattern as the workshop.
      */
     public function criarRelatorio(): void
     {
         $this->relatorioToken = (string) Str::uuid();
         $this->aGerar = true;
         $this->avisoRelatorio = null;
-        $this->dispatch('loader-show', message: 'A recolher e redigir o relatório… (requer «php artisan queue:work»)');
+        $this->dispatch('loader-show', message: $this->ehDicas()
+            ? 'Mining the material for tips…'
+            : 'Collecting and writing the report…');
 
         GerarRelatorioJob::dispatch(
             $this->modoRelatorio,
             $this->dataRelatorio,
-            $this->recolherPrimeiro,
             $this->relatorioToken,
+            $this->idiomaRelatorio,
+            $this->tipoRelatorio,
         );
 
         $this->verificarRelatorio(app(VaultContract::class));
     }
 
-    /** Sondado (wire:poll) enquanto $aGerar: carrega o relatório quando o worker termina. */
+    /** Polled (wire:poll) while $aGerar: loads the report when the worker finishes. */
     public function verificarRelatorio(VaultContract $vault): void
     {
         if (! $this->aGerar || $this->relatorioToken === null) {
@@ -161,7 +236,7 @@ class Noticias extends Component
         Cache::forget(GerarRelatorioJob::key($this->relatorioToken));
 
         if (! empty($r['erro'])) {
-            $this->avisoRelatorio = 'A geração falhou. Verifique se o worker está a correr («php artisan queue:work») e tente de novo.';
+            $this->avisoRelatorio = 'The generation failed. Check that the worker is running («php artisan queue:work») and try again.';
 
             return;
         }
@@ -169,7 +244,7 @@ class Noticias extends Component
         $nota = $vault->get($r['path']);
         $this->relatorio = $this->dadosDe($nota);
         $this->relatorioGuardado = $r['path'];
-        // Passa a vista para o relatório recém-arquivado.
+        // Switches the view to the just-archived report.
         $this->relatorioSelecionado = $r['path'];
     }
 
@@ -191,9 +266,9 @@ class Noticias extends Component
         $itensDoDia = $itens->filter(fn (VaultNote $n) => (string) $n->get('data') === $dia)->values();
         $topicosDoDia = $this->notaTopicos($notas, $dia);
 
-        // O relatório em vista é a propriedade pública $relatorio (partilhada
-        // automaticamente com a view pelo Livewire); aqui só listamos os
-        // arquivados para o seletor.
+        // The report in view is the public property $relatorio (shared
+        // automatically with the view by Livewire); here we only list the
+        // archived ones for the selector.
         return view('livewire.noticias', [
             'dias' => $dias,
             'diaAtivo' => $dia,
@@ -208,11 +283,19 @@ class Noticias extends Component
         return $notas->first(fn (VaultNote $n) => $n->get('tipo') === 'topicos' && (string) $n->get('data') === $dia);
     }
 
-    /** Todas as notas de relatório arquivadas, da mais recente para a mais antiga. */
+    /** Whether the tool-tips kind is the one selected. */
+    public function ehDicas(): bool
+    {
+        return $this->tipoRelatorio === RelatorioBuilder::TIPO_DICAS;
+    }
+
+    /** Archived notes OF THE SELECTED KIND, from the most recent to the oldest. */
     private function notasRelatorios(Collection $notas): Collection
     {
+        $tipo = $this->ehDicas() ? 'relatorio_dicas' : 'relatorio';
+
         return $notas
-            ->filter(fn (VaultNote $n) => $n->get('tipo') === 'relatorio' && filled($n->get('dados')))
+            ->filter(fn (VaultNote $n) => $n->get('tipo') === $tipo && filled($n->get('dados')))
             ->sortByDesc(fn (VaultNote $n) => (string) $n->get('gerado_em', $n->get('inicio', '')))
             ->values();
     }
@@ -223,7 +306,7 @@ class Noticias extends Component
     }
 
     /**
-     * Opções para o seletor de relatórios anteriores: caminho + rótulo legível.
+     * Options for the previous-reports selector: path + readable label.
      *
      * @return array<int,array{path:string,rotulo:string}>
      */
@@ -234,7 +317,7 @@ class Noticias extends Component
             ->all();
     }
 
-    /** Rótulo curto para o seletor, ex.: «Dia · 22 jul 2026 · 12 item(s)». */
+    /** Short label for the selector, e.g. «Dia · 22 jul 2026 · 12 item(s)». */
     private function rotuloRelatorio(VaultNote $n): string
     {
         $modo = Str::ucfirst((string) $n->get('modo', 'dia'));

@@ -1,0 +1,938 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Why Snorkel AI Simulates Agents Instead of Replaying Traces",
+    "source_text": "Snorkel AI pushes \"agent simulations\" over production traces, running millions per month\n\nProduction traces show what an agent did on one run, but they can't be replayed cleanly — database state, tool versions and environments shift, so A/B comparisons never test apples against apples. Snorkel AI's approach converts those traces into offline, repeatable simulation benchmarks that mirror a company's own tools, APIs, policies and workflows, letting agent configurations be compared in parallel on cost, latency and retry counts rather than pass rate alone.",
+    "source_path": null,
+    "images": null,
+    "meta": {
+        "background": "auto",
+        "musica": "",
+        "musica_volume": 0.5,
+        "research": {
+            "topic": "Snorkel AI: from agent traces to replayable agent simulations",
+            "summary": "Snorkel AI argues production traces can't be replayed cleanly because databases, tool versions and environments drift, so it converts them into offline, deterministic simulation environments that mirror a company's own tools, APIs and policies. The company backs this with its own benchmark suite (Terminal-Bench, Snorkel Agentic Coding, SnorkelFinance, UNDERWRITE) and a $3M open-benchmarks grant program.",
+            "timeline": [
+                {
+                    "label": "Snorkel AI founded by Stanford AI Lab alumni",
+                    "sublabel": "2019"
+                },
+                {
+                    "label": "$100M Series D led by Addition, $1.3B valuation",
+                    "sublabel": "May 2025"
+                },
+                {
+                    "label": "Gartner: over 40% of agentic AI projects to be canceled by end-2027",
+                    "sublabel": "June 2025"
+                },
+                {
+                    "label": "Open Benchmarks Grants launched: $3M with Hugging Face, PyTorch, Together AI, Prime Intellect, Factory, Harbor",
+                    "sublabel": "February 2026"
+                },
+                {
+                    "label": "SnorkelFinance agentic financial QA benchmark released",
+                    "sublabel": "2026"
+                },
+                {
+                    "label": "Terminal-Bench 2.1 with Stanford, Laude Institute and Harbor: 28 tasks fixed, continuous validation added",
+                    "sublabel": "2026"
+                },
+                {
+                    "label": "Talk 'From Agent Traces to Agent Simulations' at AI Engineer World's Fair",
+                    "sublabel": "2026"
+                },
+                {
+                    "label": "First wave of Open Benchmarks Grants projects; Senior SWE-Bench with Princeton and UW–Madison",
+                    "sublabel": "24 July 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Open Benchmarks Grants commitment",
+                    "value": 3,
+                    "unit": "USD million"
+                },
+                {
+                    "label": "Terminal-Bench 2.0/2.1 curated terminal tasks",
+                    "value": 89,
+                    "unit": "tasks"
+                },
+                {
+                    "label": "Terminal-Bench 2.0 tasks corrected in 2.1",
+                    "value": 28,
+                    "unit": "tasks"
+                },
+                {
+                    "label": "Snorkel Agentic Coding Benchmark multi-step tasks",
+                    "value": 100,
+                    "unit": "tasks"
+                },
+                {
+                    "label": "SnorkelFinance expert-verified questions (20 companies, 5 verticals)",
+                    "value": 290,
+                    "unit": "questions"
+                },
+                {
+                    "label": "Insurance underwriting agent pass@1 before Snorkel data",
+                    "value": 10.9,
+                    "unit": "%"
+                },
+                {
+                    "label": "Insurance underwriting agent pass@1 after Snorkel data",
+                    "value": 42,
+                    "unit": "%"
+                },
+                {
+                    "label": "Agentic AI projects Gartner expects canceled by end-2027",
+                    "value": 40,
+                    "unit": "%"
+                },
+                {
+                    "label": "Snorkel AI Series D round (May 2025)",
+                    "value": 100,
+                    "unit": "USD million"
+                },
+                {
+                    "label": "Snorkel AI valuation at Series D (May 2025)",
+                    "value": 1.3,
+                    "unit": "USD billion"
+                },
+                {
+                    "label": "Total funding raised since 2019",
+                    "value": 237,
+                    "unit": "USD million"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Traces vs simulations",
+                    "left": {
+                        "title": "Production traces",
+                        "points": [
+                            "Record what one run actually did",
+                            "Database state and tool versions drift",
+                            "Cannot be replayed cleanly",
+                            "A/B runs never test identical conditions"
+                        ]
+                    },
+                    "right": {
+                        "title": "Offline simulations",
+                        "points": [
+                            "Deterministic, sandboxed, repeatable",
+                            "Mirror your own tools, APIs and policies",
+                            "Configs compared in parallel",
+                            "Doubles as eval, integration test and training data"
+                        ]
+                    }
+                },
+                {
+                    "title": "Public benchmarks vs private benchmarks",
+                    "left": {
+                        "title": "Public (SWE-bench, Terminal-Bench)",
+                        "points": [
+                            "Generic environments",
+                            "Narrow capability slices",
+                            "Mostly pass rate",
+                            "Frontier agents still fail a large share of tasks"
+                        ]
+                    },
+                    "right": {
+                        "title": "Company-specific",
+                        "points": [
+                            "Your internal APIs and policies",
+                            "Cost per task, latency, retry count",
+                            "Versioned as software, run in CI/CD",
+                            "Closes the loop from observability to experiments"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Snorkel's pitch: turn production traces into offline simulation environments, then treat those benchmarks as versioned software in CI/CD.",
+                "Snorkel says its enterprise environments include thousands of tau-bench-style tasks with databases, policy docs, domain tools and simulated users.",
+                "In its insurance underwriting environment, Snorkel reports agent pass@1 rising from 10.9% to 42.0%.",
+                "Terminal-Bench 2.1 fixed 28 of the 89 tasks in 2.0 — evidence that even flagship benchmarks rot as dependencies drift.",
+                "SnorkelFinance runs agents against 10-K-derived questions with no document access, forcing SQL and code-execution tool use; top models score around 85%.",
+                "Gartner expects over 40% of agentic AI projects to be canceled by end-2027, citing costs, unclear value and weak risk controls.",
+                "Snorkel's $3M Open Benchmarks Grants pays in compute credits, data access and research collaboration, with results released under open licenses."
+            ],
+            "sources": [
+                "https://www.prnewswire.com/news-releases/snorkel-ai-highlights-first-wave-of-open-benchmarks-grants-projects-302833805.html",
+                "https://www.hpcwire.com/bigdatawire/this-just-in/snorkel-ai-highlights-first-wave-of-open-benchmarks-grants-projects/",
+                "https://finance.yahoo.com/technology/ai/articles/snorkel-ai-highlights-first-wave-143000416.html",
+                "https://benchmarks.snorkel.ai/",
+                "https://snorkel.ai/blog/introducing-the-snorkel-agentic-coding-benchmark/",
+                "https://snorkel.ai/leaderboard/agentic-coding/",
+                "https://snorkel.ai/blog/terminal-bench-2-0-raising-the-bar-for-ai-agent-evaluation/",
+                "https://www.tbench.ai/news/terminal-bench-2-1",
+                "https://www.tbench.ai/leaderboard/terminal-bench/2.1",
+                "https://snorkel.ai/leaderboard/snorkel-finance/",
+                "https://huggingface.co/datasets/snorkelai/finqa-data",
+                "https://snorkel.ai/data-series/enterprise-environments/",
+                "https://www.zenml.io/llmops-database/ai-agent-development-and-evaluation-platform-for-insurance-underwriting",
+                "https://snorkel.ai/research-paper/benchmarking-agents-in-insurance-underwriting-environments/",
+                "https://snorkel.ai/ai-engineer-world-fair/",
+                "https://finance.biggo.com/news/1ad22afe5f5c6d79",
+                "https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027",
+                "https://www.forbes.com/sites/robertszczerba/2026/07/07/why-40-of-agentic-ai-projects-may-be-canceled-by-2027/",
+                "https://www.businesswire.com/news/home/20250529083998/en/Snorkel-AI-Announces-$100-Million-Series-D-and-Expanded-Platform-to-Power-Next-Phase-of-AI-with-Expert-Data",
+                "https://www.forbes.com/sites/rashishrivastava/2025/05/29/snorkel-ai-raises-100-million-to-build-better-evaluators-for-ai-models/"
+            ]
+        },
+        "suggested": {
+            "title": "Why Snorkel AI Simulates Agents Instead of Replaying Traces",
+            "description": "Production traces show what an AI agent did on a single run, but they can't be replayed cleanly — database state, tool versions, and environments all shift, so A/B comparisons never test like for like. Snorkel AI converts those traces into offline, repeatable simulation benchmarks that mirror a company's own tools, APIs, policies, and workflows. Agent configurations can then be compared in parallel on cost, latency, and retry counts instead of pass rate alone.",
+            "tags": [
+                "snorkel ai",
+                "ai agents",
+                "agent evaluation",
+                "simulation benchmarks",
+                "production traces",
+                "llm testing",
+                "ai infrastructure",
+                "machine learning"
+            ]
+        }
+    },
+    "id": "snorkel-ai-pushes-agent-simulations-ov-ve7o5",
+    "created_at": "2026-07-27T11:49:17+00:00",
+    "updated_at": "2026-07-27T11:59:45+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/snorkel-ai-pushes-agent-simulations-ov-ve7o5/voz.mp3",
+    "transcript": {
+        "duration": 43,
+        "text": "Snorkel AI pushes agent simulations over production traces, running millions per month production traces show what an agent did on one run, but they can't be replayed cleanly. Database state, tool versions and environments shift, so A-B comparisons never test apples against apples. Snorkel AI's approach converts those traces into offline, repeatable simulation benchmarks that mirror a company's own tools, APIs, policies and workflows, letting agent configurations be compared in parallel on cost, latency and retry counts, rather than pass rate alone.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Snorkel",
+                "start": 0,
+                "end": 0.5
+            },
+            {
+                "word": "AI",
+                "start": 0.5,
+                "end": 1.059999942779541
+            },
+            {
+                "word": "pushes",
+                "start": 1.059999942779541,
+                "end": 1.559999942779541
+            },
+            {
+                "word": "agent",
+                "start": 1.559999942779541,
+                "end": 2.2799999713897705
+            },
+            {
+                "word": "simulations",
+                "start": 2.2799999713897705,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "over",
+                "start": 2.859999895095825,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "production",
+                "start": 3.6600000858306885,
+                "end": 4.159999847412109
+            },
+            {
+                "word": "traces",
+                "start": 4.159999847412109,
+                "end": 4.659999847412109
+            },
+            {
+                "word": "running",
+                "start": 5.179999828338623,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "millions",
+                "start": 5.340000152587891,
+                "end": 5.78000020980835
+            },
+            {
+                "word": "per",
+                "start": 5.78000020980835,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "month",
+                "start": 6.300000190734863,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "production",
+                "start": 6.300000190734863,
+                "end": 6.78000020980835
+            },
+            {
+                "word": "traces",
+                "start": 6.78000020980835,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "show",
+                "start": 7.159999847412109,
+                "end": 7.860000133514404
+            },
+            {
+                "word": "what",
+                "start": 7.860000133514404,
+                "end": 8.039999961853027
+            },
+            {
+                "word": "an",
+                "start": 8.039999961853027,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "agent",
+                "start": 8.5600004196167,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "did",
+                "start": 8.5600004196167,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "on",
+                "start": 8.880000114440918,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "one",
+                "start": 9.100000381469727,
+                "end": 9.380000114440918
+            },
+            {
+                "word": "run",
+                "start": 9.380000114440918,
+                "end": 9.680000305175781
+            },
+            {
+                "word": "but",
+                "start": 10.34000015258789,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "they",
+                "start": 10.460000038146973,
+                "end": 10.65999984741211
+            },
+            {
+                "word": "can't",
+                "start": 10.65999984741211,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "be",
+                "start": 11.039999961853027,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "replayed",
+                "start": 11.300000190734863,
+                "end": 11.960000038146973
+            },
+            {
+                "word": "cleanly",
+                "start": 11.960000038146973,
+                "end": 13.180000305175781
+            },
+            {
+                "word": "Database",
+                "start": 13.520000457763672,
+                "end": 13.760000228881836
+            },
+            {
+                "word": "state",
+                "start": 13.760000228881836,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "tool",
+                "start": 14.819999694824219,
+                "end": 14.979999542236328
+            },
+            {
+                "word": "versions",
+                "start": 14.979999542236328,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "and",
+                "start": 15.319999694824219,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "environments",
+                "start": 15.739999771118164,
+                "end": 16.34000015258789
+            },
+            {
+                "word": "shift",
+                "start": 16.34000015258789,
+                "end": 17.18000030517578
+            },
+            {
+                "word": "so",
+                "start": 17.68000030517578,
+                "end": 17.920000076293945
+            },
+            {
+                "word": "A",
+                "start": 17.920000076293945,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "B",
+                "start": 18.34000015258789,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "comparisons",
+                "start": 18.479999542236328,
+                "end": 19.1200008392334
+            },
+            {
+                "word": "never",
+                "start": 19.1200008392334,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "test",
+                "start": 19.8799991607666,
+                "end": 20.219999313354492
+            },
+            {
+                "word": "apples",
+                "start": 20.219999313354492,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "against",
+                "start": 20.579999923706055,
+                "end": 21.100000381469727
+            },
+            {
+                "word": "apples",
+                "start": 21.100000381469727,
+                "end": 21.639999389648438
+            },
+            {
+                "word": "Snorkel",
+                "start": 22.719999313354492,
+                "end": 23
+            },
+            {
+                "word": "AI's",
+                "start": 23,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "approach",
+                "start": 24.1200008392334,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "converts",
+                "start": 24.1200008392334,
+                "end": 24.65999984741211
+            },
+            {
+                "word": "those",
+                "start": 24.65999984741211,
+                "end": 25.100000381469727
+            },
+            {
+                "word": "traces",
+                "start": 25.100000381469727,
+                "end": 25.34000015258789
+            },
+            {
+                "word": "into",
+                "start": 25.34000015258789,
+                "end": 25.700000762939453
+            },
+            {
+                "word": "offline",
+                "start": 25.700000762939453,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "repeatable",
+                "start": 27.079999923706055,
+                "end": 27.360000610351562
+            },
+            {
+                "word": "simulation",
+                "start": 27.360000610351562,
+                "end": 27.959999084472656
+            },
+            {
+                "word": "benchmarks",
+                "start": 27.959999084472656,
+                "end": 28.6200008392334
+            },
+            {
+                "word": "that",
+                "start": 28.6200008392334,
+                "end": 29.280000686645508
+            },
+            {
+                "word": "mirror",
+                "start": 29.280000686645508,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "a",
+                "start": 29.639999389648438,
+                "end": 29.8799991607666
+            },
+            {
+                "word": "company's",
+                "start": 29.8799991607666,
+                "end": 30.31999969482422
+            },
+            {
+                "word": "own",
+                "start": 30.31999969482422,
+                "end": 30.579999923706055
+            },
+            {
+                "word": "tools",
+                "start": 30.579999923706055,
+                "end": 31.059999465942383
+            },
+            {
+                "word": "APIs",
+                "start": 31.520000457763672,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "policies",
+                "start": 32.84000015258789,
+                "end": 32.84000015258789
+            },
+            {
+                "word": "and",
+                "start": 32.84000015258789,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "workflows",
+                "start": 33.119998931884766,
+                "end": 33.7400016784668
+            },
+            {
+                "word": "letting",
+                "start": 34.65999984741211,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "agent",
+                "start": 34.68000030517578,
+                "end": 35.2400016784668
+            },
+            {
+                "word": "configurations",
+                "start": 35.2400016784668,
+                "end": 35.900001525878906
+            },
+            {
+                "word": "be",
+                "start": 35.900001525878906,
+                "end": 36.63999938964844
+            },
+            {
+                "word": "compared",
+                "start": 36.63999938964844,
+                "end": 36.63999938964844
+            },
+            {
+                "word": "in",
+                "start": 36.63999938964844,
+                "end": 37.119998931884766
+            },
+            {
+                "word": "parallel",
+                "start": 37.119998931884766,
+                "end": 37.36000061035156
+            },
+            {
+                "word": "on",
+                "start": 37.36000061035156,
+                "end": 38.29999923706055
+            },
+            {
+                "word": "cost",
+                "start": 38.29999923706055,
+                "end": 38.779998779296875
+            },
+            {
+                "word": "latency",
+                "start": 39.41999816894531,
+                "end": 39.41999816894531
+            },
+            {
+                "word": "and",
+                "start": 39.41999816894531,
+                "end": 39.720001220703125
+            },
+            {
+                "word": "retry",
+                "start": 39.720001220703125,
+                "end": 40.18000030517578
+            },
+            {
+                "word": "counts",
+                "start": 40.18000030517578,
+                "end": 40.560001373291016
+            },
+            {
+                "word": "rather",
+                "start": 40.97999954223633,
+                "end": 41.2400016784668
+            },
+            {
+                "word": "than",
+                "start": 41.2400016784668,
+                "end": 41.619998931884766
+            },
+            {
+                "word": "pass",
+                "start": 41.619998931884766,
+                "end": 41.91999816894531
+            },
+            {
+                "word": "rate",
+                "start": 41.91999816894531,
+                "end": 42.08000183105469
+            },
+            {
+                "word": "alone",
+                "start": 42.08000183105469,
+                "end": 42.68000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 43,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 6.5,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "agent simulations",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Snorkel AI's bet",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Production traces"
+                                },
+                                {
+                                    "label": "Agent simulations",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.5,
+                "end": 10.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "one run",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "What a trace is",
+                            "lines": [
+                                "A record of one single run",
+                                "What the agent actually did"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.3,
+                "end": 13.5,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "cleanly",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "No clean replay",
+                            "lines": [
+                                "The same run cannot be repeated",
+                                "The world underneath has moved"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.5,
+                "end": 17.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "shift",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "What drifts",
+                            "items": [
+                                "Database state",
+                                "Tool versions",
+                                "Environments"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 22.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "apples against apples",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "Run A",
+                                "points": [
+                                    "Old tool versions",
+                                    "Yesterday's data",
+                                    "One environment"
+                                ]
+                            },
+                            "right": {
+                                "title": "Run B",
+                                "points": [
+                                    "New tool versions",
+                                    "Today's data",
+                                    "Another environment"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.7,
+                "end": 27.08,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "offline",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "The conversion",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Traces"
+                                },
+                                {
+                                    "label": "Offline sandbox"
+                                },
+                                {
+                                    "label": "Repeatable benchmark",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.08,
+                "end": 34.6,
+                "background": "vellum",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "repeatable",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Simulation benchmarks",
+                            "lines": [
+                                "Deterministic and sandboxed",
+                                "Versioned as software, run in CI/CD"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 38.3,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "in parallel",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Configs, side by side",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Config A"
+                                },
+                                {
+                                    "label": "Same simulation",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Config B"
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 2,
+                                    "to": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.3,
+                "end": 41,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "retry counts",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Judged on",
+                            "items": [
+                                "Cost per task",
+                                "Latency",
+                                "Retry counts"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41,
+                "end": 43,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "pass rate",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "Underwriting agent pass@1",
+                            "unit": "%",
+                            "bars": [
+                                {
+                                    "label": "Before",
+                                    "value": 10.9
+                                },
+                                {
+                                    "label": "After",
+                                    "value": 42,
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/snorkel-ai-pushes-agent-simulations-ov-ve7o5/clip.mp4"
+}

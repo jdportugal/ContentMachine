@@ -37,10 +37,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ContentMachine — integrações de conteúdo (todas por preencher)
+    | ContentMachine — content integrations (all to be filled in)
     |--------------------------------------------------------------------------
-    | Chaves vazias por defeito; a app corre com os drivers 'fake'. Preencha
-    | no .env quando quiser ligar os drivers reais.
+    | Empty keys by default; the app runs with the 'fake' drivers. Fill them
+    | in the .env when you want to wire up the real drivers.
     */
     'apify' => [
         'token' => env('APIFY_TOKEN'),
@@ -63,8 +63,16 @@ return [
         'key' => env('ANTHROPIC_API_KEY'),
     ],
 
-    // Gerador de Clips — motor LOCAL e independente (ffmpeg + Whisper), sem API
-    // externa. Reimplementa a lógica do serviço Flask "ShortsCreator".
+    // Tensorix (tensorx.ai) — OpenAI-compatible gateway to DeepSeek et al. Used as a
+    // drop-in alternative to (or fallback for) the Claude API in the clip pipeline.
+    'tensorx' => [
+        'key' => env('TENSORX_API_KEY'),
+        'base_url' => env('TENSORX_BASE_URL', 'https://api.tensorx.ai/v1'),
+        'model' => env('TENSORX_MODEL', 'deepseek/deepseek-r1-0528'),
+    ],
+
+    // Clip Generator — LOCAL, standalone engine (ffmpeg + Whisper), with no
+    // external API. Reimplements the logic of the Flask "ShortsCreator" service.
     'shorts' => [
         'ffmpeg' => env('FFMPEG_BINARY', 'ffmpeg'),
         'ffprobe' => env('FFPROBE_BINARY', 'ffprobe'),
@@ -87,16 +95,23 @@ return [
         'client_secret' => env('REDDIT_CLIENT_SECRET'),
     ],
 
-    // kie.ai — geração de imagens (modelos Nano Banana). Opcional: sem chave,
-    // as publicações são desenhadas em SVG (driver 'svg').
+    // kie.ai — image generation (Nano Banana models). Optional: with no key,
+    // posts are drawn in SVG (driver 'svg').
     'kie' => [
         'key' => env('KIE_API_KEY'),
         'base_url' => env('KIE_BASE_URL', 'https://api.kie.ai'),
         'image_model' => env('KIE_IMAGE_MODEL', 'nano-banana-2'),
-        // Modelo com melhor rendição de texto — usado nos cartões (texto-intensivos).
+        // Model with the best text rendering — used on the cards (text-heavy).
         'text_model' => env('KIE_TEXT_IMAGE_MODEL', 'nano-banana-pro'),
-        // Host de carregamento de ficheiros (referências para edição imagem→imagem).
+        // File upload host (references for image→image editing).
         'file_base_url' => env('KIE_FILE_BASE_URL', 'https://kieai.redpandaai.co'),
+    ],
+
+    // Blotato — social publishing/scheduling. Optional: with no key the
+    // Finished hub's publish actions are disabled.
+    'blotato' => [
+        'key' => env('BLOTATO_API_KEY'),
+        'base_url' => env('BLOTATO_BASE_URL', 'https://backend.blotato.com'),
     ],
 
 ];

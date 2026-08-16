@@ -10,14 +10,14 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Redige uma publicação com IA fora do ciclo do pedido web.
+ * Writes a post with AI outside the web request cycle.
  *
- * Porquê uma fila: a redação usa o CLI do Claude (a subscrição, sem chave de
- * API). Esse CLI só autentica num processo que herda a sessão — o servidor web
- * («php artisan serve») não a herda, mas um WORKER («php artisan queue:work»)
- * sim. É o mesmo padrão do agregador de notícias e do AdsMaker de referência.
+ * Why a queue: the writing uses the Claude CLI (the subscription, without an
+ * API key). That CLI only authenticates in a process that inherits the session — the web server
+ * («php artisan serve») does not inherit it, but a WORKER («php artisan queue:work»)
+ * does. It is the same pattern as the news aggregator and the reference AdsMaker.
  *
- * O resultado fica em cache; a oficina lê-o por sondagem (wire:poll).
+ * The result is cached; the workshop reads it by polling (wire:poll).
  */
 class PlanearPublicacaoJob implements ShouldQueue
 {
@@ -27,7 +27,7 @@ class PlanearPublicacaoJob implements ShouldQueue
 
     /**
      * @param array<int,array{indice:int,descricao:string}|string> $referencias
-     *   pool de imagens de referência (índice + descrição) para a IA atribuir
+     *   pool of reference images (index + description) for the AI to assign
      */
     public function __construct(
         public string $tipo,

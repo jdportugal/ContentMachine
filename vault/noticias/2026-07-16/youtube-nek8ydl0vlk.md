@@ -7,7 +7,7 @@ data: '2026-07-16'
 url: 'https://www.youtube.com/watch?v=neK8ydl0Vlk'
 thumbnail: 'https://i.ytimg.com/vi/neK8ydl0Vlk/maxresdefault.jpg'
 descricao: "⚡Master Claude Code, Build Your Agency, Land Your First Client⚡ https://www.skool.com/chase-ai 🔥FREE community🔥 https://www.skool.com/chase-ai-community 💻 Need custom work? Book a consult 💻 https://chaseai.io Herdr is the new multiplex terminal GOAT for those who want to easily control multiple coding agents from one place. It's like Claude's agent view but for ANY and all coding harnesses. And its completely free. ⏰TIMESTAMPS: 0:00 - Intro 0:30 - Herdr 2:56 - Demo 9:00 - Outro RESOURCES FROM THIS VIDEO: ➡️ Master Claude Code: https://www.skool.com/chase-ai ➡️ My Website: https://www.chaseai.io ➡️ Herdr: https://github.com/ogulcancelik/herdr/tree/master #claudecode"
-resumo: 'O tutorial mostra como usar o Herder, uma ferramenta open-source e leve (para Mac e Windows) que funciona como multiplexador de terminais para controlar vários agentes de programação (como Claude Code e Codex) a partir de um único espaço. Destaca as três vantagens principais — organização, monitorização de vários separadores e persistência em segundo plano — e compara-a com alternativas como o tmu...'
+resumo: 'O Herder, uma ferramenta open-source multiplexadora de terminais para Mac e Windows, que permite controlar e monitorizar vários agentes de código (como Claude e Codex) num só espaço, com foco em organização, monitorização e persistência em segundo plano.'
 tags: {}
 fontes:
   - 'https://www.skool.com/chase-ai'

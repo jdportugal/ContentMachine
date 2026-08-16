@@ -6,6 +6,8 @@ canal: Futurepedia
 data: '2026-07-19'
 url: 'https://www.youtube.com/watch?v=3RWm4inkS2E'
 thumbnail: 'https://i.ytimg.com/vi/3RWm4inkS2E/maxresdefault.jpg'
+descricao: "*Free Claude Design Guide:* https://clickhubspot.com/wd1o More from Futurepedia: 👉 Join the Skill Leap AI education platform! Try it free and explore 20+ top-rated courses in AI: https://bit.ly/futurepediaSL Summary Claude Design had massive upgrades. A big enough overhaul for me to call it Claude Design 2.0. A big one is new templates including everything from Mobile App Design to 3D Objects. I cover the entire platform, how to get the most out of every feature, build stunning websites, and even how I've been using it to create amazing motion graphics for my videos extremely simply. Chapters 0:00 Intro 0:41 Getting Started 1:07 Templates 2:49 Design Systems 4:57 UI Mockups 9:39 Slides 10:34 Documents 11:11 Other templates on brand 11:49 Animations"
+resumo: 'Este vídeo é um guia completo sobre o Claude Design, mostrando a plataforma e as suas novas funcionalidades, nomeadamente os variados modelos disponíveis (desde design de apps móveis, slides e documentos a objetos 3D, emails e diagramas) e como tirar o máximo partido de cada um. Destaca ainda o uso da ferramenta para criar grafismos em movimento (motion graphics) apenas através de um prompt.'
 tags:
   - 'claude design tutorial'
   - 'claude design'
@@ -41,478 +43,478 @@ Chapters
 
 ## Transcrição
 
-O Cloud Design recebeu
-recentemente algumas atualizações significativas que o tornaram uma
-plataforma muito poderosa. Uma grande novidade foram
-todos os novos modelos que eles adicionaram recentemente.
-Tudo, desde design de aplicativos móveis até
-objetos 3D. Na verdade, eu não abordei o
-Claude Design quando foi lançado pela primeira vez
-porque outro problema que eles tinham eram os
-limites de uso. Embora o produto fosse
-bacana, eu não queria direcionar as pessoas para um
-site que elas mal conseguiam usar. Mas isso também já
-foi resolvido. Então, quero abordar
-toda a plataforma, como tirar o máximo proveito
-de cada recurso e mostrar um
-caso de uso realmente surpreendente que
-implementei em todos os meus
-vídeos recentes, incluindo este que você está assistindo
-agora. Criei todos esses
-gráficos em movimento no Cloud Design apenas com um
-comando.
-Para abrir o Claude Design, você pode encontrá-
-lo no painel lateral do Claude. Basta
-acessar a seção de design e você será direcionado para
-lá. O mesmo se aplica se estiver na
-aplicação para computador, ou pode aceder diretamente a
-cla.ai. IA/design. E se você tiver uma
-conta paga do Claude, já terá
-acesso a isso. E o uso agora está
-incluído nos seus créditos de uso do Claude
-. Assim, você poderá aproveitá-lo bastante
-. Antes, os estoques acabavam muito
-rápido.
-Depois de entrar, você verá que pode simplesmente
-pedir algo na caixa de diálogo ou, na
-maioria das vezes, trabalhará com
-modelos predefinidos. Antes havia cinco
-opções de modelos, mas agora eles
-expandiram enormemente o que está disponível
-aqui. Esses modelos integrados fornecem um
-ponto de partida estruturado para diferentes
-tipos de trabalho criativo. Então, vou mostrar uma
-geração rápida que fiz com cada um deles para que
-vocês possam ter uma ideia do que são.
-Embora eu tenha certeza de que essas opções mudarão
-com o tempo, elas podem ser ligeiramente
-diferentes quando você estiver
-assistindo a este vídeo. E esses eram apenas
-testes usando instruções aleatórias. Vou mostrar
-como usar algumas dessas técnicas na prática daqui a
-pouco. Utilizei design de aplicativo móvel
-para um app de meditação, slides para uma apresentação
-sobre o futuro da alimentação, um documento para
-um relatório anual, um wireframe para um
-aplicativo de bem-estar móvel, uma animação mostrando uma
-mensagem e, em seguida, alguns cartões que aparecem na tela.
-Mais tarde, mostrarei muitos outros exemplos de animação
-que tenho usado nos meus
-vídeos. Essa funcionalidade é incrível.
-Tenho um protótipo da interface de usuário de uma ferramenta de produção musical
-, um currículo para um designer de produto e um
-objeto 3D. Este foi realmente incrível e
-diferente dos demais. Então, fiz alguns
-testes com controles deslizantes em um
-abajur personalizável. É o
-interior isométrico de uma cafeteria. E o mais
-legal é que você pode exportá-los em
-diferentes formatos de ativos 3D. Em seguida, avançando
-na lista de projetos, fiz um relatório de pesquisa
-sobre o caminho para a Inteligência Artificial Geral (AGI), um e-mail em HTML para o
-lançamento de um produto de uma marca de cuidados com a pele
-, uma combinação de cores e tipografia para uma
-marca de cerâmica moderna, um diagrama de
-fluxo de trabalho criativo e um folheto para um
-festival de cinema independente. Espero que
-isso deixe claro o quão diversos são os tipos
-de designs que você pode criar aqui a partir de
-modelos, agora muito mais do que os
-cinco que existiam antes.
-E esses modelos são ótimos, mas você
-provavelmente percebeu, conforme eu os analisava, que
-Claude tem algumas tendências de design específicas
-para as quais ele gravita. Você
-precisa evitar que isso aconteça.
-Caso contrário, ficará igual a tudo o que
-qualquer outra pessoa faz aqui. A melhor maneira
-de fazer isso é com sistemas de design. Estas
-são as diretrizes de estilo e tom de voz da sua marca
-. Assim, criará
-sempre o estilo da sua marca em todos os
-projetos. Você pode simplesmente inserir
-imagens de referência aqui e guiá-lo
-através de sugestões, mas a maioria das pessoas
-precisará de mais de um elemento em um determinado
-estilo. Portanto, geralmente é melhor criar
-primeiro o sistema de design. Então, vou criar
-um e depois vou gerar cada um desses
-modelos novamente para a mesma marca usando
-esse sistema de design. Então você poderá ver a
-grande diferença que isso faz. Você pode
-criar um com este botão de adição ou
-também pode visualizar todos os seus sistemas de design
-nesta aba e clicar em "Criar sistema de design"
-para criar um novo. Vou criar algo aqui.
-Você também pode criar usando o código Claude.
-Começando pelo nome, vou
-criar um para esta futura marca de combustível,
-uma bebida energética que desenvolvi a partir do nosso logotipo.
-Talvez precisemos de novas
-fontes de receita. Em seguida, você pode carregar
-informações que já possui através do
-GitHub, Figma ou enviando seus próprios
-recursos, imagens, logotipos, site etc. E
-pode adicionar notas adicionais.
-Na verdade, vou enviar apenas esta imagem e
-deixar que o programa extraia o que puder a partir dela.
-E só para deixar um breve comentário, criamos
-bebidas energéticas para ajudar a dar energia para a era da IA. Vou
-manter as coisas simples. Com isso,
-vou clicar em continuar para a geração. Se
-esta for a sua própria marca, você terá
-mais elementos para orientá-la. Então, em poucos
-minutos, tenho de volta aquele sistema de projeto de combustível futuro
-. Há muita informação
-aqui. O que a marca representa, a voz
-e o tom, a iconografia, a ideia para uma
-página de destino, os botões, o produto principal,
-um monograma e uma marca denominativa, todas essas
-paletas de cores, qual estilo usar nos
-slides, como devem ser os emblemas e botões, enfim,
-tudo isso. Então
-posso modificar qualquer coisa que eu queira alterar,
-como esta marca d'água que ela gerou. Eu
-poderia enviar uma versão com o logotipo real
-e, claro, alterar qualquer
-parte dessas descrições ou qualquer outra coisa aqui,
-manualmente
-ou pedindo ao Claude para fazer as alterações. Mas isso
-funciona. O sistema de projeto está totalmente configurado. Vou
-fazer alguma coisa com isso. Vou
-começar com um protótipo da interface do usuário. Em seguida,
-selecionarei o sistema de design que acabei de criar.
-Eu sugiro criar o site da Future Fuel
-com páginas para a página inicial, loja,
-ingredientes e sobre nós. Apenas uma
-sugestão simples. O sistema de projeto possui todo o
-contexto necessário para guiá-lo a partir daí. E
-quase sempre surgem
-algumas perguntas no início. Como
-as quatro páginas devem ser estruturadas? Um
-arquivo com menu superior. Como a interatividade decide
-por mim. Escreva a história da origem.
-Escreva todo o texto e uma das
-opções de construção para o herói da casa.
-Então eu enviarei e eles construirão
-tudo isso. Estou usando prompts simples
-na maior parte deste texto. Para muitos
-casos de uso, você precisará ser mais
-específico em relação à tarefa. Por isso, criamos um
-guia gratuito chamado Claw Design in Action (Design de Garras em Ação).
-Sete casos de uso para experimentar hoje. Cada
-caso de uso possui um prompt otimizado para que você obtenha
-o resultado exato que procura muito mais
-rapidamente. Apresentações personalizadas, páginas de destino com
-capturas de tela da concorrência,
-modelos para redes sociais e muito mais. Isso
-lhe dará a sugestão correta na primeira
-tentativa e economizará muito tempo de iteração
-em cada etapa, desde a solicitação até a exportação.
-Esse é um guia gratuito, disponível no link na
-descrição. A construção está concluída e já está com um
-ótimo aspecto. Logo acima, ele
-contém ajustes para as diferentes
-variantes de heróis, pois eu solicitei isso
-ao responder aquelas perguntas. B está
-bem. A opção C eu gosto bastante, mas vou escolher a
-A. Parece que ela também tem uma opção para ativar/desativar
-essa barra de anúncios. Ao
-prosseguir, encontramos alguns efeitos de foco interessantes.
-E role para baixo, você encontrará os diferentes
-sabores. Este site está ficando ótimo. Vou
-ver se isso realmente me leva à
-página da loja. Sim, faz sentido. Perfeito. Vou
-testar mais alguns botões.
-Selecione algumas. Clique em "Adicionar ao carrinho". Aqui
-está. Então eu vou abrir isso. Eles
-estão lá no carrinho, com o valor total. Dê uma
-olhada rápida nas outras páginas. Temos os
-ingredientes. Este layout é muito bom.
-Gosto de poder selecioná-los a cada ano.
-Incrível. Em seguida, a página "Sobre". Não vou
-ler isso. Ficou ótimo. Então,
-foi realmente muito bom no primeiro arremesso.
-Agora, se você usa código clawed, pode
-estar pensando: "Não poderia simplesmente fazer isso lá dentro
-?" Você poderia. Mas o que torna o design
-tão útil para construir algo assim
-é a facilidade e rapidez com que se pode fazer
-alterações. Você pode fazer edições simples sem
-precisar enviar uma solicitação e esperar que o
-código seja gerado e retorne. Por
-exemplo, se eu quiser que isso fique na
-linha seguinte, posso simplesmente fazer essa alteração.
-E se eu selecionar algo, posso fazer
-todo tipo de edição em linha. Posso alterar
-qualquer palavra, além do tamanho, da fonte, do espaçamento;
-consigo fazer tudo com muita precisão,
-deixar exatamente como eu quero, clicar em
-salvar e pronto. Seria muito mais
-trabalhoso se eu quisesse fazer essas edições
-no Cloud Code. E posso transformar isso em
-código quando terminar, se quiser. Mostrarei
-isso em um minuto. Mas também existem outras maneiras
-de fazer mudanças aqui. Posso
-selecionar qualquer área e fazer anotações. Eu poderia
-desenhar nele em qualquer lugar. Você tem todas essas
-opções para edições posteriores, o que é
-realmente conveniente. Outra coisa que
-pode ser muito útil se você não consegue pensar
-em nada que queira mudar ou simplesmente
-precisa de inspiração, é aquele painel de ajustes que
-mostrei, onde ficam os diferentes
-layouts de herói e a opção de ativar/desativar o banner. Às vezes,
-gosto de pedir apenas mais ajustes para poder experimentar
-. Adicione uma série de ajustes diferentes
-para que eu possa experimentar em todo o
-site. Você poderia, é claro, ser mais
-preciso do que isso, mas vou enviar a solicitação
-. Em seguida, ele retorna com várias
-opções de personalização diferentes que posso
-testar e ver o que gosto ou
-de onde posso me inspirar. Cores, formas, tamanhos,
-todo tipo de ajustes. Gosto muito de fazer
-isso para ver se há algo em que
-eu não tenha pensado. Além disso, você
-pode fazer todo tipo de coisa aqui dentro
-. Talvez eu queira que essa imagem principal seja
-substituída por um vídeo em loop. Então,
-rapidinho, pedi para o chat gerar uma
-imagem mais ampla com um pouco de espaço negativo
-à esquerda. Em seguida, animei com o VO
-e obtive essa animação simples em loop
-. Talvez isso dê um toque especial
-ao site. Então, vou inserir o vídeo.
-Depois, peço ao Claude para substituir o
-fundo do herói por esse vídeo. E,
-rapidinho, aqui está. Deixou esse pequeno
-botão aqui. Então, vou me livrar disso
-. E agora sim, ficou muito bom.
-Provavelmente eu redimensionaria a imagem para que você
-pudesse ver a lata inteira, mas você entendeu a
-ideia. Existem inúmeras maneiras únicas de você
-usar a criatividade no site. E o
-design é suficientemente capaz para lidar com grande parte
-disso. Então, quando você quiser migrar para
-uma plataforma ainda mais poderosa, poderá
-enviar isso diretamente para o código. E você
-precisará fazer isso para a maioria dos sites que
-colocará em produção. Eu
-precisaria conectar um banco de dados para salvar os
-dados dos clientes. Integre também o Stripe ou
-algo similar para receber pagamentos. Tudo isso
-eu faria no Cloud Code. Para
-isso, basta vir até aqui e compartilhar. Além disso,
-existem várias opções para exportar.
-Vou enviar para a Cloud Code. Em seguida, você
-pode simplesmente copiar esse prompt e colá-lo
-no Cloud Code ou, pessoalmente, eu prefiro
-baixar o arquivo zip, abri-lo e
-usá-lo como projeto do Cloud Code para começar a trabalhar
-. Qualquer uma das opções
-funciona. Em seguida, o projeto passa rapidamente por
-iterações de design e é então submetido a
-todo o poder do código para ser construído e
-implementado.
-Em seguida, quero mostrar o recurso de slides.
-Esta é bem simples e
-algo que você pode fazer em outras ferramentas, mas
-é interessante aqui porque temos esse
-sistema de design, então podemos usá-lo em
-todos os diferentes formatos. Eu já os
-selecionei. Agora, gostaria de uma
-apresentação sobre como nossa bebida energética
-resolve o problema da falta de energia necessária
-para acompanhar a inteligência artificial. Em seguida, preciso
-responder à lista de perguntas e
-enviar. Eis o resultado. Parece uma
-apresentação sólida e seguiu
-muito bem o sistema de design. Combina muito bem
-com a identidade visual do site. E você pode fazer
-todos esses mesmos tipos de edições em linha
-com cores, tamanho, fonte, tudo isso.
-Você também pode fazer anotações e desenhos como
-antes. E também existe essa mesma
-função de ajustes. Você poderia pedir uma lista
-de ajustes para experimentar. Possui suas
-anotações para a fala. Em resumo, uma
-apresentação sólida. Eu poderia disponibilizar
-isso como um PowerPoint ou PDF editável.
-Ou, o que eu realmente gosto, já que tenho um
-conector do Canva configurado, posso exportar
-diretamente para lá para fazer edições adicionais.
-Esses slides estão ótimos. Vou sair
-. Agora, vamos mostrar
-também a opção de documento. Outra que vou analisar
-rapidamente. Então, usando esse mesmo
-sistema de design, vou criar um modelo de fatura para o varejo
-. Com isso, você pode criar todo tipo de
-documento que esteja alinhado à sua marca. Sabe,
-é muito prático para fazer
-contratos, formulários legais, faturas,
-qualquer coisa desse tipo. Em seguida, basta
-responder a algumas perguntas rápidas novamente e
-enviar. E agora sim, uma fatura com ótima aparência
-. Está totalmente de acordo com a marca e
-é ótimo, desde que eu só precise dele como
-uma fatura eletrônica e nunca precise
-imprimi-la. E, claro, também estão disponíveis todos os
-mesmos recursos de edição. Isso é semelhante
-ao recurso de slides. Então vou
-deixar aí e voltar para fora. E a maioria desses
-outros modelos funciona de
-maneira muito semelhante, com a capacidade de criar e
-editar facilmente dessa forma. Design de aplicativo móvel
-, wireframe, pesquisa de currículo,
-HTML, e-mail, flyer. Você pode criar esses
-recursos personalizados de acordo com a marca em todos os
-formatos diferentes, exceto no 3D, que é um pouco diferente.
-Tentei fazer com que o programa criasse a lata a partir da
-imagem. Isso não funcionou muito bem. Então, o 3D é
-praticamente um recurso à parte. É incrível
-mesmo. Animações é outro recurso que
-parece ser uma categoria à parte
-. É também a funcionalidade que eu
-mais tenho usado pessoalmente, de longe.
-Vou começar com um exemplo simples, usando esse
-sistema de design para a primeira demonstração. Em seguida,
-mostrarei alguns que realmente tenho
-usado em produção. Crie uma
-animação de revelação do logotipo atraente e que combine com a marca.
-Ok, não havia nenhuma pergunta para
-esta. E foi isso que recebi de volta.
-Essa foi uma ótima revelação de logotipo. Sinceramente,
-isso parece incrível. Definitivamente, há mais coisas envolvidas
-do que eu esperava com base nessa
-pergunta. Então, isso é legal. É claro que eu
-poderia pedir uma revelação de logotipo como essa em
-qualquer ferramenta de conversão de imagem em vídeo e obter algo com
-boa aparência. Tenho usado
-isso de forma muito útil para vídeos,
-especialmente para minhas introduções. A maior parte dos
-meus vídeos geralmente consiste em uma
-gravação de tela e não precisa de muita edição,
-mas normalmente a introdução e outras partes são
-distribuídas ao longo do vídeo. Haverá
-trechos em que estarei apenas explicando
-algo e precisarei de uma visualização. É aí que
-eu quero alguns
-gráficos em movimento. A equipe de design é realmente muito boa em
-criar esses modelos a partir de uma simples sugestão
-e uma transcrição. Então, a imagem volta
-perfeitamente sincronizada com o que estou dizendo
-no vídeo. Vou começar com um exemplo
-usando a introdução do meu último vídeo
-sobre trabalho com chat. Vou usar um
-sistema de design que tenho para chatpt. Então, continuo
-experimentando diferentes maneiras de
-dar instruções, mas tenho obtido
-resultados tão bons quanto antes, mantendo as instruções relativamente
-simples, assim como fazia com instruções mais longas
-. Continuarei fazendo mais
-testes e provavelmente acabarei fazendo um
-vídeo completo só sobre esse recurso
-eventualmente. Mas agora preciso inserir a
-transcrição com os respectivos registros de data e hora. Uma
-maneira muito fácil de conseguir isso é simplesmente arrastar e soltar o
-vídeo no Gemini e pedir para reproduzi-lo. Em seguida,
-ele retorna com a informação e um botão para
-copiá-la com apenas um clique. Então eu colo
-isso e está pronto. E isso
-me levanta uma questão sobre onde eu
-quero deixar espaço para a
-pessoa que está falando. Basicamente, posso dizer que ele pode escolher, desde que haja
-espaço em algum lugar.
-Enquanto aguardo, mostrarei alguns outros
-exemplos. Aqui está um exemplo em que eu estava tentando
-transmitir a ideia que eu queria
-ao meu editor. Então eu tinha uma imagem do GPT (
-imagem 2) do que eu queria, a coloquei
-aqui e descrevi como eu queria que fosse
-animada e obtive isso. Então, passei
-isso para o meu editor e ele criou
-esta versão para o vídeo. Foi uma
-maneira muito rápida de transmitir a ideia. Mas
-fazer isso me fez perceber que provavelmente eu conseguiria chegar
-a um ponto em que poderia
-simplesmente usar as animações como estão. Aqui está
-um exemplo que usei integralmente em um vídeo. E isso,
-sabe, faz mais sentido com a minha participação
-falando por cima. Vou mostrar a versão
-editada em um instante.
-É incrível para mim conseguir
-fazer isso aqui. Então, veja como ficou
-no vídeo onde adicionei a imagem da pessoa falando por cima
-.
-Em Claude, a maioria das pessoas se repete constantemente, digitando as
-mesmas instruções e adicionando o mesmo
-contexto. Habilidades resolvem isso. Escreva uma vez
-e Claude se lembrará para sempre. Neste
-vídeo, vou mostrar o que são habilidades,
-como usar as habilidades predefinidas, como se
-manter seguro usando habilidades externas e como
-criar e aprimorar as suas próprias, que é
-o maior desbloqueio em todo o jogo Claude.
-Estive testando outras coisas.
-Fez um trabalho muito bom nessa
-animação do mapa. Um bom zoom e destaque
-quando a Torre Eiffel aparece.
-Não ficou tão bom assim e, na verdade, foi preciso muita
-revisão e ajustes para conseguir que ficasse com
-essa aparência. Mas a parte da animação do mapa
-foi toda baseada em um comando de texto. Acabei incluindo
-algumas imagens da
-Torre Eiffel para aproximar essa parte da realidade. Mas
-todo o resto foi feito do zero, sem nenhuma
-referência. Isso é bom. Mas você
-também pode obter bons resultados com outras ferramentas.
-Para vídeos animados, sabe, vídeos explicativos
-ou outros tipos de conteúdo impessoal no estilo do YouTube
-. Essa não é exatamente a ferramenta adequada para
-isso. Mas, especificamente para o tipo de
-motion graphics que eu pessoalmente uso em
-vídeos, o tipo que vai em conteúdos com pessoas falando diretamente para a câmera,
-como este, você consegue ótimos
-resultados que são totalmente utilizáveis, e é
-muito fácil fazer edições com
-linguagem natural. A animação de trabalho do chatbt está
-concluída. Claro que eu ia falar
-durante toda a apresentação, e isso deixou um espaço livre
-para mim à direita, e essas opções ficaram
-ótimas. Sinceramente, nem sei o que
-eu pediria para editar. Talvez
-aqui no roteiro eu esteja me referindo
-à maioria dos usuários de GPT em chats. Então, eu diria que
-por volta dos 30 segundos, a animação
-deve deixar a maioria dos ícones de pessoa
-verdes, já que se refere à maioria dos
-usuários. Além disso, a seta está ligeiramente
-sobrepondo os ícones abaixo. Mova-o
-um pouco para a direita. E vou incluir
-uma captura de tela para que saibam a que me
-refiro. Depois voltou ao normal
-e agora está perfeito. A partir
-daí, posso simplesmente clicar em compartilhar e exportar
-como MP4 e importar diretamente para minha
-plataforma de edição. Só para dar mais um
-exemplo, enviei a mesma solicitação para uma
-animação em tela cheia, e o resultado foi
-este. Talvez você não queira
-aquele espaço lateral para a
-pessoa falando, como eu queria. Mais uma vez, está
-incrível. Esse tipo de coisa demora muito
-para ser feita manualmente. Isso tem
-me poupado muito tempo. Novamente,
-tentarei fazer um vídeo completo sobre esse processo
-em breve. Estou fazendo mais alguns testes
-primeiro, mas inscreva-se para receber a notificação
-quando for publicado. E isso resume tudo
-sobre o Cloud Design. É uma
-plataforma incrível, especialmente com os
-limites de uso flexíveis, a fácil conexão com o
-Claude Code e uma maneira simplificada de
-criar designs consistentes e alinhados à marca em
-todos os novos formatos. Espero
-que isso te ajude a começar e nos
-vemos na próxima!
+Cloud Design has had some massive
+upgrades recently that make it a very
+powerful platform. A big one has been
+all the new templates they just added.
+Everything from mobile app design to 3D
+objects. And I actually didn't cover
+Claude Design when it first came out
+because another issue they had was usage
+limits. Even though the product was
+cool, I didn't want to send people to a
+site they could barely use. But that's
+been fixed as well. So, I want to cover
+the whole platform, how to get the most
+out of every feature, and show one
+really surprising use case that I've
+implemented into every one of my recent
+videos, including what you're watching
+right now. I created all of these motion
+graphics in Cloud Design with just a
+prompt.
+To open up Claude Design, you can find
+it on the side panel in Claude. Just go
+down to design and it will take you
+right there. Same thing if you're in the
+desktop app, or you can go straight to
+cla.ai. AI/design. And if you have any
+paid Claude account, you already have
+access to this. And the usage is now
+bundled into your existing Claude usage
+credits. So you can get a lot of use out
+of it. Now you used to run out crazy
+fast.
+Once you're in, you'll see you can just
+ask for something in the prompt box or
+most of the time you'll work from
+templates. They used to have five
+template options, but now they have
+massively expanded on what's available
+here. These built-in templates provide a
+structured starting point for different
+kinds of creative work. So, I'll show a
+quick generation I did with each one so
+you can get an idea of what they are.
+Although, I'm sure these will change
+over time, so they might be slightly
+different options by the time you're
+watching this video. And these were just
+tests using random prompts. I'll show
+actually using some of these in practice
+in a minute. I used mobile app design
+for a meditation app, slides for a deck
+about the future of food, document for
+an annual report, wireframe of a mobile
+wellness app, animation showing a
+prompt, then some cards popping up. I'll
+do a lot more animation examples later
+that I've actually been using in my
+videos. This feature is awesome. I've
+got a UI mockup of a music production
+tool, a resume for a product designer,
+3D object. This one was really cool and
+different from the rest. So, I did a few
+tested out some sliders with a
+customizable table lamp. It's isometric
+coffee shop interior. And what's really
+cool is you can export these in
+different 3D asset formats. Then moving
+down the line, I did a research report
+about the path to AGI, HTML email for a
+product launch email for a skincare
+brand, color plus type pairing for a
+modern ceramics brand, diagram for a
+creative workflow, and a flyer for an
+independent film festival. Hopefully
+that gets across how diverse the types
+of designs you can make in here from
+templates are now much more than the
+five they had before.
+And those templates are great, but you
+probably noticed as I went through those
+Claude has some specific design
+tendencies it gravitates towards. You
+need to steer it away from that.
+Otherwise, it will look just like what
+anyone else makes in here. The best way
+to do that is with design systems. This
+is your brand's style and voice
+guidelines. So, it will create in your
+brand's style every time across
+projects. You can just drop reference
+images right in here and guide it
+through prompting, but most people will
+need more than one thing in a given
+style. So, it's usually best to create
+the design system first. So, I'll create
+one and then I'll generate each of those
+templates again for the same brand using
+that design system. Then you can see how
+big of a difference it makes. You can
+create one with this plus button or you
+can also see all your design systems on
+this tab and click create design system
+for a new one. I'm going to create here.
+You could also create using claude code.
+Starting with the name, I'm going to
+create one for this future fuel brand,
+an energy drink I made from our logo.
+Maybe we need to bring in some new
+revenue streams. Then you can upload
+information you already have through
+GitHub, Figma, or by uploading your own
+assets, images, logos, website, etc. And
+you can add additional notes. I'll
+actually just upload this one image and
+let it extract what it can from there.
+And just a short note, we create energy
+drinks to help fuel up for the AI era.
+I'm keeping it simple. Just from that,
+I'll click continue to generation. If
+this is your own real brand, you'll have
+more to guide it with. Then in a few
+minutes, I have that future fuel design
+system back. There's tons of information
+in here. what the brand is, the voice
+and tone, iconography, idea for a
+landing page, buttons, the hero product,
+a monogram and word mark, all these
+color palettes, what style to use in
+slides, what the badges and buttons
+should look like, just all of it. Then I
+can modify anything I want to change
+like this word mark it generated. I
+could upload one with the actual logo
+and then I could of course change any
+part of these descriptions or anything
+at all throughout this either manually
+or ask Claude for changes. But this
+works. The design system is all set.
+I'll go make something with it.
+I'll start with a UI mockup. Then I'll
+select the design system I just made.
+I'll say create the future fuel website
+with pages for the homepage, shop,
+ingredients, and about us. Just a simple
+prompt. The design system has all the
+context to guide it from there. And it's
+almost always going to come back with
+some questions at the beginning. How
+should the four pages be structured? One
+file with topnav. how interactive decide
+for me. Write the origin story. Write
+out all of the copy and one build but
+two to three options for the home hero.
+Then I'll send it off and it will build
+all of that. I'm using simple prompt
+throughout most of this. For a lot of
+use cases, you'll want to get more
+specific to the task. So, we created a
+free guide called Claw Design in Action.
+Seven use cases to try today. Each use
+case has an optimized prompt to get you
+the exact result you're looking for much
+faster. tailored pitch decks, landing
+page from competitor screenshots, social
+media templates, and more. These will
+give you the right prompt on the first
+try and save you a lot of iteration time
+with every step from prompt to export.
+That's a free guide at the link in the
+description. The build is done, and this
+looks great already. Right up top, it
+has tweaks for the different hero
+variants because I asked it to do that
+when answering those questions. B is all
+right. C I like a lot, but I'll go with
+A. Looks like it also has a toggle for
+this announcements bar. Then going
+through, there's some nice hover states.
+And scroll down, we've got the different
+flavors. This site is looking great.
+I'll see if this actually takes me to
+the shop page. Yep, it does. Perfect.
+I'll just try out some more buttons.
+Select a few. Hit add to cart. There it
+is. Then I'll open that up. There they
+are in the cart with the total. Quick
+check on the other pages. We have the
+ingredients. This is a nice layout. I
+like how you can select them each year.
+Awesome. Then the about page. Not going
+to read through that. Looks great. So,
+that was really solid on the first shot.
+Now, if you use clawed code, you might
+be thinking, couldn't I just do this in
+there? You could. But what makes design
+so helpful for building something like
+this is how easy and quick it is to make
+changes. You can do simple edits without
+having to send off a prompt and wait for
+code to build it out and come back. For
+example, if I want this to be on the
+next line, I can just make that change.
+And if I select something, I can make
+all sorts of inline edits. Can change
+any words, also the size, font, spacing,
+all of that I can do really precisely,
+get it just how I want, and then click
+save, and it's committed. It's much more
+tedious if I wanted to make those edits
+in Cloud Code. And I can push this to
+code once I'm done if I want. I'll show
+that in a minute. But there's other ways
+to make changes in here, too. I can
+select any area and annotate. I could
+draw on it anywhere. You have all these
+options for follow-up edits that are
+really convenient. Another thing that
+can be really useful if you can't think
+of what you might want to change or just
+need some inspiration, that tweaks panel
+I showed where it had the different hero
+layouts and banner toggle. Sometimes I
+like to just ask for more tweaks to play
+with. Add a bunch of different tweaks
+for me to experiment with across the
+site. You could of course be more
+precise than that, but I'll send that
+off. Then it comes back with a bunch of
+different customization options I can
+test out and see what I like or draw
+inspiration from. colors, shapes, sizes,
+all sorts of tweaks. I really like to do
+that to see if there might be something
+I haven't thought of. Beyond that, you
+can do there's all sorts of stuff in
+here. Maybe I want this hero image to be
+replaced with a looping video. So,
+really quick, I had chatt generate a
+wider image with some negative space on
+the left. Then, I animated it with VO
+and I've got this simple looping
+animation. Maybe that'll add a nice vibe
+to the site. So, I'll drop the video in.
+Then ask Claude to replace the hero
+background with that video. And pretty
+quick, here it is. It left this little
+button here. So, I'll just get rid of
+that. And now that looks pretty good.
+I'd probably want to resize this so you
+can see the full can, but you get the
+idea. There's tons of unique ways you
+can get creative with the site. And
+design is capable enough to handle a lot
+of it. Then, when you want to move into
+an even more powerful platform, you can
+send this right over to code. And you
+will need to do that for most sites
+you're going to put into production. I
+would need to connect a database to save
+customer data. Also build in Stripe or
+something to take payments. All of that
+stuff I would do in Cloud Code. To do
+that, you just come up to share. Then
+there's multiple options for exporting.
+I will send it to Cloud Code. Then you
+can just copy this prompt and paste it
+into Cloud Code or personally I prefer
+to download the zip file, open it, then
+use that as code's project to work in
+and kick it off that way. Either way
+works. Then you have the project quickly
+iterated upon in design moved into the
+full power of code to build toward
+deployment.
+Next, I want to show the slides feature.
+This one is pretty straightforward and
+something you can do in other tools, but
+it's nice in here because we have that
+design system, so we can use that across
+all the different formats. I've got them
+selected. Now, I'll ask for a
+presentation about how our energy drink
+solves the problem of a lack of energy
+to keep up with AI. Then I need to
+answer the list of questions and send it
+off. Here's the result. It looks like a
+solid presentation and it followed the
+design system really well. Feels very on
+brand with the website. And you can make
+all those same types of inline edits
+with colors, size, font, all of that.
+You could also annotate and draw like
+before. And there's also that same
+tweaks feature. You could ask for a list
+of tweaks to mess around with. Has your
+speaking notes. So all in all, a solid
+presentation. I could come up and share
+this as an editable PowerPoint or PDF.
+or what I really like since I have a
+Canva connector set up, I can export it
+straight there for further edits.
+Those slides look great. I'm going to
+exit out. Now, we'll show the document
+option as well. Another one I'm going to
+go through quickly. So, using that same
+design system, I'll do a retail invoice
+template. You can make all sorts of
+onbrand documents with this. You know,
+it's really convenient to make
+contracts, legal forms, invoices,
+anything like that. Then, you just
+answer a few quick questions again and
+send it. And now that is a great looking
+invoice. It's completely on brand and
+it's good as long as I only need it as
+an electronic invoice and never need to
+print it. Then of course there's all the
+same editing features. This is similar
+to the slides feature. So I'll just
+leave it there and go back out. And most
+of these other templates work very
+similarly with the ability to design and
+edit easily like this. mobile app
+design, the wireframe, resume research,
+HTML, email, flyer. You can create these
+onbrand assets across all the different
+formats except 3D is a bit different. I
+tried having it create the can from the
+image. That didn't work great. So 3D is
+kind of its own feature. It is amazing
+though. Animations is another one that
+feels like its own separate type of
+feature. It's also the feature I've been
+using the most personally by far.
+I'll start with a simple one using this
+design system for the first demo. Then
+I'll show some that I've actually been
+using in production. Create a nice logo
+reveal animation that fits the brand.
+Okay, it didn't have any questions for
+this one. And this is what came back.
+That is a great logo reveal. Honestly,
+that looks awesome. Definitely more to
+it than I was expecting from that
+prompt. So, that's cool. Of course, I
+could ask for a logo reveal like this in
+any imagetovideo tool and get something
+that looks good. How I've been using
+this that's so helpful is for videos,
+especially my intros. The big chunks of
+my videos usually have a screen
+recording and don't need much editing,
+but usually the intro and then kind of
+sprinkled throughout. There will be
+sections where I'm just explaining
+something and need a visualization.
+That's where I want some motion
+graphics. Design is really good at
+creating those from just a simple prompt
+and a transcript. Then it comes back
+perfectly synced up with what I'm saying
+in the video. I'll kick off an example
+using the intro to my last video I did
+about chatpt work. I'll use a design
+system I have for chatpt. Then I'm still
+experimenting with different ways to
+prompt, but I've been getting just as
+good of results, keeping it fairly
+simple as I was with longer
+instructions. I'll keep doing more
+testing and probably end up making a
+full video just on this feature
+eventually. But now I need to input the
+transcript with timestamps. A really
+easy way to get that is to just drop the
+video into Gemini and ask for it. Then
+it comes back with it and a button to
+copy it in just a click. Then I paste
+that in and this is good to go. And it
+has one question for me about where I
+want it to leave space for the talking
+head. I'll say basically it can choose
+as long as there's space somewhere.
+While I'm waiting, I'll show some other
+examples. Here's one where I was trying
+to get the idea of what I wanted across
+to my editor. So I had an image from GPT
+image 2 of what I wanted, then dropped
+it into here and described how I wanted
+it animated and got this. Then I passed
+that off to my editor and he created
+this one for the video. It was a really
+fast way to get the idea across. But
+doing that made me realize I could
+probably get it to a point where I can
+just use the animations as is. So here's
+one I used fully in a video. And this,
+you know, makes more sense with my
+talking head over it. I'll show it
+edited in just a second. Like this one
+right here is amazing to me to be able
+to do. So here's what it looked like in
+the video where I added the talking head
+over it. Most people repeat themselves
+over and over in Claude, typing out the
+same instructions and adding the same
+context. Skills fix that. Write it once
+and Claude remembers it forever. In this
+video, I'll show you what skills are,
+how to use the pre-built skills, how to
+stay safe using external skills, and how
+to build and refine your own, which is
+the biggest unlock in all of Claude.
+I've been testing some other stuff. It
+did a pretty good job on this map
+animation. a nice zoom and highlighting
+when the Eiffel Tower pops up. That's
+not as great and actually took a lot of
+back and forth to even get it looking
+this good. But the map animation part
+was all from a text prompt. I ended up
+dropping in some images of the Eiffel
+Tower to get that part closer. But
+everything else was from scratch without
+a reference. So that's good. But you can
+get good results in other tools, too.
+For animated, you know, explainer videos
+or other kinds of faceless YouTube style
+content. This is not really the tool for
+that. But specifically for the type of
+motion graphics I personally use in
+videos, the type that go in talking head
+content like this, you can get great
+results that are fully usable and it's
+just so easy to make edits with natural
+language. That chatbt work animation is
+done. Now I'd of course be talking
+throughout this and it left the space
+for me on the right and these look
+really good. Honestly, I don't even know
+what I would ask for it to edit. Maybe
+right here in the script I'm referring
+to most chat GPT users. So, I could say
+at around 30 seconds, the animation
+should turn most of the person icons
+green since it's referring to most
+users. Also, the arrow is slightly
+overlapping the icons underneath. Move
+it just a bit to the right. And I'll
+drop in a screenshot so it knows what
+I'm referring to there. Then that came
+back and it is perfect now. And from
+there, I can just click share and export
+this as an MP4 and drop it right into my
+editing platform. As just one more
+example, I sent that same prompt for a
+more full screen animation, and it
+looked like this. You might not want
+that space on the side for the talking
+head like I had. Again, it looks
+amazing. This type of stuff takes so
+long to do manually. It has been saving
+me a huge amount of time. Again, I'll
+try making a full video on this process
+soon. I'm experimenting just a little
+more first, but hit subscribe so you see
+that when it's posted. And that is all
+of Cloud Design. It's an awesome
+platform, especially with the relaxed
+usage limits, the easy connection to
+claude code, and a streamlined way to
+create consistent onbrand designs across
+all the new different formats. Hopefully
+that helps you get started with it and
+I'll see you in the next

@@ -16,6 +16,8 @@ class OficinaTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
         $this->tmp = sys_get_temp_dir().'/cm-oficina-'.uniqid();
         mkdir($this->tmp, 0775, true);
         config(['contentmachine.vault.path' => $this->tmp]);
@@ -106,7 +108,7 @@ class OficinaTest extends TestCase
         \Illuminate\Support\Facades\Cache::put(\App\Jobs\GerarImagensJob::notaKey($nota->slug()), true, now()->addMinutes(5));
 
         Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
-            ->assertSee('a gerar');
+            ->assertSee('generating');
     }
 
     public function test_gerar_imagens_para_nota_guardada_persiste_e_limpa_flag(): void
@@ -137,7 +139,7 @@ class OficinaTest extends TestCase
 
         Livewire::test(\App\Livewire\Publicacoes\Publicacoes::class)
             ->assertSee('Minha peça')
-            ->assertSee('Publicações criadas');
+            ->assertSee('Created posts');
     }
 
     public function test_gerar_imagens_despacha_job(): void
@@ -203,14 +205,14 @@ class OficinaTest extends TestCase
     public function test_referencias_guardadas_e_passadas_a_redacao_e_geracao(): void
     {
         // Referência já adicionada (o upload em si é testado pela stack do Livewire).
-        $ref = ['path' => 'media/publicacoes/refs/exemplo.png', 'descricao' => 'logótipo IATECA'];
+        $ref = ['path' => 'media/publicacoes/refs/exemplo.png', 'descricao' => 'logótipo Brand Machine'];
 
         // 1) O plano recebe as descrições.
         $llm = new class extends LlmClient
         {
             public ?string $capturado = null;
 
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 $this->capturado = $prompt;
 
@@ -224,7 +226,7 @@ class OficinaTest extends TestCase
             ->set('brief', 'Um tema qualquer.')
             ->call('redigirComIa');
 
-        $this->assertStringContainsString('logótipo IATECA', (string) $llm->capturado);
+        $this->assertStringContainsString('logótipo Brand Machine', (string) $llm->capturado);
 
         // 2) A geração recebe os caminhos das referências.
         \Illuminate\Support\Facades\Queue::fake();
@@ -246,7 +248,7 @@ class OficinaTest extends TestCase
             ->call('criarRascunho');
 
         $nota = app(VaultContract::class)->all('rascunhos')->first();
-        $this->assertSame('logótipo IATECA', $nota->get('referencias')[0]['descricao']);
+        $this->assertSame('logótipo Brand Machine', $nota->get('referencias')[0]['descricao']);
     }
 
     public function test_resolucao_escolhida_e_guardada_na_nota(): void
@@ -304,7 +306,7 @@ class OficinaTest extends TestCase
         // é aplicado no mesmo pedido (redigirComIa → verificarPlano).
         $this->app->bind(LlmClient::class, fn () => new class extends LlmClient
         {
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return null;
             }
@@ -458,7 +460,7 @@ class OficinaTest extends TestCase
     {
         $this->app->instance(LlmClient::class, new class extends LlmClient
         {
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return json_encode([
                     'titulo' => 'T', 'legenda' => 'L', 'tags' => ['x'],

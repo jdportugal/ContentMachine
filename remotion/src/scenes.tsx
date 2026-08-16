@@ -1,18 +1,22 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
   Easing,
   interpolate,
   OffthreadVideo,
   Sequence,
   spring,
+  staticFile,
   useCurrentFrame,
 } from "remotion";
-import { COLORS, ENGRAVE_SHADOW, FONTS } from "./style-tokens";
+import { COLORS, ENGRAVE_SHADOW, FONTS, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
 import type { KaraokeWord, Present, Scene } from "./types";
 
 const EASE = Easing.inOut(Easing.cubic);
+
+const resolveSrc = (src: string): string => (/^https?:\/\//.test(src) ? src : staticFile(src));
 
 // Resolved lazily (at render time) so it reflects the active theme — COLORS is
 // mutated by applyTheme() AFTER this module loads, so a captured object would be stale.
@@ -44,13 +48,13 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
       <div
         style={{
           fontFamily: FONTS.display,
-          fontWeight: 400, // Anton — single weight, no italic
+          fontWeight: FONTS.displayWeight,
           textTransform: "uppercase",
           letterSpacing: "0.01em",
           fontSize,
           lineHeight: 0.98,
           color: dark ? COLORS.textOnDark : COLORS.textOnLight,
-          textShadow: dark ? `0 0 28px ${COLORS.tealBright}66` : `0 0 26px ${COLORS.teal}44`,
+          textShadow: STYLE.shadow === "hard" ? ENGRAVE_SHADOW : dark ? `0 0 28px ${COLORS.tealBright}66` : `0 0 26px ${COLORS.teal}44`,
           transform: `scale(${scale})`,
           opacity,
           textAlign: "center",
@@ -65,27 +69,34 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
 
 // ── one scene ────────────────────────────────────────────────────────────────
 // A background that never sits still — slow-drifting ink-blot gradients over the
-// scene colour, so there is always subtle motion on screen.
-const LiveBackground: React.FC<{ color: string }> = ({ color }) => {
+// scene colour, so there is always subtle motion on screen. When `solid` is false
+// the base colour is NOT painted, so the composition's themed BackgroundTexture
+// (the same starfield the effect previews show) shows through — only the drifting
+// blobs are layered on top for motion.
+const LiveBackground: React.FC<{ color: string; solid: boolean }> = ({ color, solid }) => {
   const frame = useCurrentFrame();
   const dx = Math.sin(frame / 70) * 8;
   const dy = Math.cos(frame / 90) * 9;
   const dx2 = Math.cos(frame / 58) * 10;
+  // Print/flat designs keep a truly flat field — no drifting colour blobs.
+  const flat = STYLE.headline === "flat";
   return (
-    <AbsoluteFill style={{ backgroundColor: color, overflow: "hidden" }}>
-      <AbsoluteFill
-        style={{
-          backgroundImage:
-            `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, ${COLORS.gold}12, transparent 46%),` +
-            `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, ${COLORS.leather}10, transparent 48%),` +
-            `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, ${COLORS.teal}0d, transparent 52%)`,
-        }}
-      />
+    <AbsoluteFill style={{ backgroundColor: solid ? color : undefined, overflow: "hidden" }}>
+      {flat ? null : (
+        <AbsoluteFill
+          style={{
+            backgroundImage:
+              `radial-gradient(circle at ${28 + dx}% ${24 + dy}%, ${COLORS.gold}12, transparent 46%),` +
+              `radial-gradient(circle at ${72 + dx2}% ${74 - dy}%, ${COLORS.leather}10, transparent 48%),` +
+              `radial-gradient(circle at ${50 - dx}% ${90 + dy}%, ${COLORS.teal}0d, transparent 52%)`,
+          }}
+        />
+      )}
     </AbsoluteFill>
   );
 };
 
-const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null }> = ({ scene, fps, durSec, videoSrc }) => {
+const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = ({ scene, fps, durSec, videoSrc, transparent }) => {
   const frame = useCurrentFrame();
   const tin = scene.transitionIn ?? "cut";
   const inDur = tin === "whip" ? 8 : tin === "cut" ? 0 : 6;
@@ -114,6 +125,15 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
   const dark = present === "animation" ? scene.background === "ink" : true; // over video → light text
   const layers = Array.isArray(scene.layers) ? scene.layers : [];
 
+  // The composition renders its themed BackgroundTexture (starfield) behind this
+  // scene only for an opaque (non-transparent) animation clip with no source video.
+  // When it does, let it show through for EVERY animation background so real clips
+  // match the effect demos — a flat papyrus/vellum/ink panel would hide the
+  // starfield. Paint an opaque base only when there's no backdrop to reveal:
+  // over-video (split) scenes and transparent (externally-composited) renders.
+  const hasBackdrop = present === "animation" && !transparent;
+  const solidBg = !hasBackdrop;
+
   const video = videoSrc ? (
     <OffthreadVideo
       src={videoSrc}
@@ -131,11 +151,16 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
         transform: `translateY(${tY + idleY}px) scale(${entryScale * idleScale})`,
       }}
     >
-      {present === "animation" || present === "split" ? <LiveBackground color={bgColor} /> : null}
+      {present === "animation" || present === "split" ? <LiveBackground color={bgColor} solid={solidBg} /> : null}
       {present !== "video"
         ? layers.map((layer, i) => {
             const pseudo = { start: 0, end: durSec, primitive: layer.type, text: layer.text, params: layer.params };
-            return <React.Fragment key={i}>{renderPrimitive(pseudo, fps, dark)}</React.Fragment>;
+            return (
+              <React.Fragment key={i}>
+                {renderPrimitive(pseudo, fps, dark)}
+                {layer.audioSrc ? <Audio src={resolveSrc(layer.audioSrc)} volume={0.8} /> : null}
+              </React.Fragment>
+            );
           })
         : null}
       {scene.punchWord ? <PunchWord text={String(scene.punchWord)} fps={fps} dark={dark} /> : null}
@@ -191,7 +216,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 
   return (
     <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: "13%" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, borderRadius: 14, padding: "20px 34px", boxShadow: ENGRAVE_SHADOW }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, border: panelBorder(), borderRadius: STYLE.sharp ? 0 : 14, padding: "20px 34px", boxShadow: PANEL_SHADOW }}>
         {group.map((w, i) => {
           const globalIdx = line * LINE + i;
           const isActive = globalIdx === idx && t >= w.start && t < w.end;
@@ -204,7 +229,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
                 fontWeight: 600,
                 fontSize: 58,
                 lineHeight: 1.2,
-                color: isActive ? COLORS.teal : COLORS.textOnLight,
+                color: isActive ? COLORS.teal : textForBg(COLORS.vellum),
                 transform: `scale(${pop})`,
                 display: "inline-block",
               }}
@@ -219,7 +244,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 };
 
 // ── the scene track ──────────────────────────────────────────────────────────
-export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null }> = ({ scenes, words, fps, videoSrc }) => {
+export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null; transparent: boolean }> = ({ scenes, words, fps, videoSrc, transparent }) => {
   return (
     <>
       {scenes.map((scene, i) => {
@@ -228,7 +253,7 @@ export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: 
         const durFrames = Math.max(1, Math.round(durSec * fps));
         return (
           <Sequence key={i} from={from} durationInFrames={durFrames} name={`scene-${i}`}>
-            <SceneBody scene={scene} fps={fps} durSec={durSec} videoSrc={videoSrc} />
+            <SceneBody scene={scene} fps={fps} durSec={durSec} videoSrc={videoSrc} transparent={transparent} />
           </Sequence>
         );
       })}

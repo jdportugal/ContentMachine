@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Máquina de Conteúdo' }} · IATECA</title>
+    <title>{{ $title ?? 'Brand Machine' }} · AI Content Machines</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,60 +13,53 @@
     @livewireStyles
 </head>
 <body class="bg-nocturna min-h-screen text-ink antialiased">
-    <div x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false" class="lg:flex min-h-screen">
-        {{-- ============ Barra superior (só telemóvel) ============ --}}
-        <header class="lg:hidden sticky top-0 z-30 flex items-center justify-between gap-3 h-14 px-4 border-b border-ink-soft/15 bg-papyrus/95 backdrop-blur">
-            <a href="{{ route('painel') }}" class="flex items-baseline gap-2 min-w-0">
-                <span class="font-display text-lg text-teal" style="letter-spacing:.06em">IATECA</span>
-                <span class="eyebrow text-[0.5rem] truncate">Máquina · de · Conteúdo</span>
-            </a>
-            <button type="button" @click="sidebarOpen = true" aria-label="Abrir menu"
-                    class="p-2 -mr-2 text-ink-soft hover:text-ink transition">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-                    <path d="M4 7h16M4 12h16M4 17h16" />
-                </svg>
-            </button>
+    <div x-data="{ nav: false }" class="flex min-h-screen">
+        {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
+        <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
+            <a href="{{ route('painel') }}" class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</a>
+            <button type="button" @click="nav = !nav" aria-label="Toggle menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
         </header>
 
-        {{-- Fundo escurecido (só telemóvel, quando o menu está aberto) --}}
-        <div x-cloak x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
-             class="lg:hidden fixed inset-0 z-40 bg-black/60"></div>
+        {{-- Drawer backdrop (mobile) --}}
+        <div x-show="nav" x-cloak x-transition.opacity @click="nav = false" class="lg:hidden fixed inset-0 z-40 bg-black/50"></div>
 
-        {{-- ============ Estante lateral (navegação) ============ --}}
-        <aside class="fixed inset-y-0 left-0 z-50 flex h-screen w-64 max-w-[85vw] shrink-0 flex-col border-r border-ink-soft/15 bg-vellum backdrop-blur transform transition-transform duration-200 ease-out lg:sticky lg:top-0 lg:z-auto lg:max-w-none lg:bg-vellum/40 lg:backdrop-blur-none"
-               :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
-            <div class="px-6 py-3 border-b border-ink-soft/15 flex items-center justify-between gap-2">
-                <a href="{{ route('painel') }}" class="block min-w-0" @click="sidebarOpen = false">
-                    <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">IATECA</span>
-                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Máquina · de · Conteúdo</span>
+        {{-- ============ Side shelf (navigation) — off-canvas drawer on mobile, static on lg+ ============ --}}
+        <aside x-bind:class="{ '!translate-x-0': nav }"
+               class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
+            <div class="px-6 py-3 border-b border-ink-soft/15">
+                <a href="{{ route('painel') }}" class="block">
+                    <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</span>
+                    <span class="block eyebrow mt-0.5 text-[0.55rem]">AI Content Machines</span>
                 </a>
-                <button type="button" @click="sidebarOpen = false" aria-label="Fechar menu"
-                        class="lg:hidden p-1 -mr-1 text-ink-soft hover:text-ink transition">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-                        <path d="M6 6l12 12M18 6L6 18" />
-                    </svg>
-                </button>
             </div>
 
-            <nav class="flex-1 overflow-y-auto py-2 space-y-0.5">
+            <div class="px-4 py-3 border-b border-ink-soft/15">
+                @livewire('project-switcher')
+            </div>
+
+            {{-- Closing the drawer belongs to the DESTINATION links only: on the
+                 <aside> it also swallowed taps on the project switcher, closing
+                 the drawer the moment its dropdown opened. --}}
+            <nav @click="nav = false" class="flex-1 min-h-0 overflow-y-auto py-2 space-y-0.5">
                 @php
                     $nav = [
-                        ['route' => 'painel',          'label' => 'Painel',            'sub' => 'Vista geral',        'color' => '#FFB347', 'glyph' => '◆'],
-                        ['route' => 'monitorizacao',   'label' => 'Monitorização',     'sub' => 'Redes sociais',      'color' => '#C77DFF', 'glyph' => '◈'],
-                        ['route' => 'clips',           'label' => 'Gerador de Clips',  'sub' => 'Vídeo',              'color' => '#5A7BFF', 'glyph' => '▲'],
-                        ['route' => 'clips-animados',  'label' => 'Clips Animados',    'sub' => 'Animação',           'color' => '#4DE0E0', 'glyph' => '✦'],
-                        ['route' => 'ativos',          'label' => 'Ativos',            'sub' => 'Media · Música',     'color' => '#4DE08A', 'glyph' => '♫'],
-                        ['route' => 'publicacoes',     'label' => 'Publicações',       'sub' => 'Posts · Carrosséis', 'color' => '#9C7DFF', 'glyph' => '◇'],
-                        ['route' => 'rascunhos',       'label' => 'Rascunhos',         'sub' => 'Agendamento',        'color' => '#FF8A4D', 'glyph' => '⬡'],
-                        ['route' => 'noticias',        'label' => 'Notícias',          'sub' => 'Agregador',          'color' => '#FFD98A', 'glyph' => '✷'],
-                        ['route' => 'design-system',   'label' => 'Sistema de Design', 'sub' => 'Marca do conteúdo',  'color' => '#FF5C7A', 'glyph' => '❖'],
-                        ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#8AE0FF', 'glyph' => '⚙'],
+                        ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
+                        ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
+                        ['route' => 'clips',           'label' => 'Clip Generator',    'sub' => 'Video',              'color' => '#5A7BFF', 'glyph' => '▲'],
+                        ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦'],
+                        ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio',      'sub' => 'Effects · Intros',   'color' => '#6FE0D0', 'glyph' => '✶'],
+                        ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
+                        ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇'],
+                        ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Publishing',         'color' => '#FF8A4D', 'glyph' => '⬡'],
+                        ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#FFD98A', 'glyph' => '✷'],
+                        ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#FF5C7A', 'glyph' => '❖'],
+                        ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#8AE0FF', 'glyph' => '⚙'],
                     ];
                 @endphp
 
                 @foreach ($nav as $i => $item)
                     @php $active = request()->routeIs($item['route'].'*'); @endphp
-                    <a href="{{ route($item['route']) }}" @click="sidebarOpen = false"
+                    <a href="{{ route($item['route']) }}"
                        class="group flex items-center gap-3 pl-4 pr-4 py-1.5 mx-2 rounded-sm transition
                               {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                         <span class="w-1.5 self-stretch rounded-full transition-all"
@@ -81,33 +74,45 @@
                 @endforeach
             </nav>
 
+            <div class="px-6 py-2.5 border-t border-ink-soft/15 flex items-center justify-between gap-2">
+                <span class="font-mono text-[0.6rem] text-ink-faint truncate" title="{{ auth()->user()?->email }}">
+                    {{ auth()->user()?->email }}
+                </span>
+                <form method="POST" action="{{ route('logout') }}" class="shrink-0">
+                    @csrf
+                    <button type="submit" class="font-mono text-[0.6rem] text-ink-faint hover:text-rust underline underline-offset-2 transition">
+                        Sign out
+                    </button>
+                </form>
+            </div>
+
             <div class="px-6 py-2.5 border-t border-ink-soft/15">
                 <div class="font-mono text-[0.6rem] text-ink-faint leading-relaxed">
-                    <div>CÉREBRO ·
+                    <div>BRAIN ·
                         <a href="obsidian://open?path={{ rawurlencode(config('contentmachine.vault.path')) }}"
                            class="text-teal underline decoration-teal/40 underline-offset-2 hover:decoration-teal transition"
-                           title="Abrir a vault no Obsidian">Obsidian Vault</a>
+                           title="Open the vault in Obsidian">Obsidian Vault</a>
                     </div>
-                    <div>006.3 · IAT · '26</div>
+                    <div>006.3 · ACM · '26</div>
                 </div>
             </div>
         </aside>
 
-        {{-- ============ Conteúdo ============ --}}
-        <main class="flex-1 min-w-0 overflow-x-hidden">
-            <div class="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        {{-- ============ Content ============ --}}
+        <main class="flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 {{ $slot }}
             </div>
         </main>
     </div>
 
-    {{-- Overlay de carregamento (partículas) — global, accionável por qualquer
-         componente via dispatch('loader-show'/'loader-hide') ou window.CMLoader. --}}
+    {{-- Loading overlay (particles) — global, triggerable by any component
+         via dispatch('loader-show'/'loader-hide') or window.CMLoader. --}}
     <x-particle-loader />
 
-    {{-- Toasts globais (canto inferior direito). Ao nível do <body>, fora do
-         scroller/transform, para o position:fixed fixar ao ecrã. Ouve o evento
-         'toast' despachado por qualquer componente Livewire. --}}
+    {{-- Global toasts (bottom-right corner). At <body> level, outside the
+         scroller/transform, so position:fixed pins to the screen. Listens for the
+         'toast' event dispatched by any Livewire component. --}}
     <div x-data="{ toasts: [] }"
          @toast.window="const id = Date.now() + Math.random();
                         toasts.push({ id, message: $event.detail.message, type: $event.detail.type || 'ok' });

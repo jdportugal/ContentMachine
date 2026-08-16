@@ -3,13 +3,13 @@
 namespace App\Services\Publicacoes;
 
 /**
- * Acesso ao registo declarativo de tipos de publicação
- * (config `contentmachine.publicacoes.tipos`). É a única fonte de verdade
- * sobre os formatos; a oficina, o planeador e o renderizador leem daqui.
+ * Access to the declarative registry of post types
+ * (config `contentmachine.publicacoes.tipos`). It is the single source of truth
+ * about the formats; the workshop, the planner and the renderer read from here.
  */
 class PublicacaoKinds
 {
-    /** @return array<string,array<string,mixed>> tipos indexados por identificador */
+    /** @return array<string,array<string,mixed>> types indexed by identifier */
     public function all(): array
     {
         return (array) config('contentmachine.publicacoes.tipos', []);
@@ -26,13 +26,13 @@ class PublicacaoKinds
         return array_key_exists($tipo, $this->all());
     }
 
-    /** 'single' | 'carousel' — 'single' por omissão para tipos desconhecidos. */
+    /** 'single' | 'carousel' — 'single' by default for unknown types. */
     public function formato(string $tipo): string
     {
         return $this->get($tipo)['formato'] ?? 'single';
     }
 
-    /** @return array{min:int,max:int} limites de cartões do tipo. */
+    /** @return array{min:int,max:int} the type's card limits. */
     public function cartoes(string $tipo): array
     {
         $c = $this->get($tipo)['cartoes'] ?? ['min' => 1, 'max' => 1];

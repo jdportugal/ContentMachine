@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Publicações')]
+#[Title('Posts')]
 class Publicacoes extends Component
 {
     /** @return array<string,array<string,mixed>> */
@@ -20,7 +20,7 @@ class Publicacoes extends Component
         return app(PublicacaoKinds::class)->all();
     }
 
-    /** Publicações já compostas na oficina, mais recentes primeiro. */
+    /** Posts already composed in the workshop, most recent first. */
     #[Computed]
     public function publicacoes()
     {
@@ -28,13 +28,13 @@ class Publicacoes extends Component
             ->filter(fn ($n) => $n->get('origem') === 'publicacoes/oficina');
     }
 
-    /** A publicação está a gerar imagens? (bandeira de cache posta pela oficina/job) */
+    /** Is the post generating images? (cache flag set by the workshop/job) */
     public function aGerar(string $slug): bool
     {
         return \Illuminate\Support\Facades\Cache::has(\App\Jobs\GerarImagensJob::notaKey($slug));
     }
 
-    /** Há alguma publicação a gerar? (controla a sondagem do painel) */
+    /** Is any post generating? (controls the panel's polling) */
     #[Computed]
     public function algumAGerar(): bool
     {
@@ -53,7 +53,7 @@ class Publicacoes extends Component
         unset($this->publicacoes);
     }
 
-    /** Alterna uma publicação entre «rascunho» (a trabalhar) e «pronto» (vai para Rascunhos). */
+    /** Toggles a post between "draft" (in progress) and "ready" (goes to Finished). */
     public function alternarPronto(string $path, VaultContract $vault): void
     {
         $nota = $vault->get($path);
@@ -61,7 +61,7 @@ class Publicacoes extends Component
             return;
         }
 
-        // Não mexe numa peça já agendada.
+        // Do not touch a piece that is already scheduled.
         if ($nota->get('estado') === 'agendado') {
             return;
         }

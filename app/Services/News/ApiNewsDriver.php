@@ -6,8 +6,8 @@ use App\Services\Support\DriverNotConfiguredException;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Driver real (ponto de integração): recolhe conteúdo das fontes (Apify/Reddit/
- * YouTube) e sintetiza um relatório com um modelo (Gemini/OpenAI). Requer chaves.
+ * Real driver (integration point): collects content from the sources (Apify/Reddit/
+ * YouTube) and synthesizes a report with a model (Gemini/OpenAI). Requires keys.
  */
 class ApiNewsDriver implements NewsDriver
 {
@@ -19,8 +19,8 @@ class ApiNewsDriver implements NewsDriver
             throw DriverNotConfiguredException::for('news', 'services.apify.token');
         }
 
-        // Ponto de integração: 1) recolher itens por fonte via Apify/APIs;
-        // 2) enviar para o modelo de síntese; 3) devolver no formato do contrato.
+        // Integration point: 1) collect items per source via Apify/APIs;
+        // 2) send to the synthesis model; 3) return in the contract format.
         $itens = Http::withToken($token)->throw()->timeout(30)
             ->post(config('services.apify.base_url', 'https://api.apify.com'), ['fontes' => $fontes])
             ->json();

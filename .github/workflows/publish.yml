@@ -1,0 +1,52 @@
+name: Publish image
+
+# Build the combined image and push :latest to GHCR. The dedicated `production`
+# branch is the live line — merge into it to release. Any branch can still build
+# manually via "Run workflow". GITHUB_TOKEN is automatic — no secrets to set.
+#
+# If a push does not produce a run, check https://www.githubstatus.com before
+# looking here: during the 2026-08-06 Actions incident GitHub throttled webhook
+# delivery, so pushes were recorded but triggered no workflow runs for hours.
+# "Run workflow" is dispatched directly rather than by webhook, so it still works
+# in that situation; deploy/rebuild.sh builds on the host with no CI at all.
+on:
+  push:
+    branches: [production]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lowercase image name
+        id: img
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/contentmachine" >> "$GITHUB_OUTPUT"
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          # amd64 only for now — the cloud (Droplet / App Platform) runs amd64, and
+          # `remotion browser ensure` doesn't have a headless Chrome for linux/arm64
+          # on this Remotion version, which would fail an arm64 leg. Add arm64 back
+          # (linux/amd64,linux/arm64) once verified — Mac can run the amd64 image via
+          # emulation meanwhile.
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            APP_VERSION=${{ github.sha }}
+          tags: |
+            ${{ steps.img.outputs.name }}:latest
+            ${{ steps.img.outputs.name }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

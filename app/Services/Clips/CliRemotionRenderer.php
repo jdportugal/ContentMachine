@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 
 class CliRemotionRenderer implements RemotionRenderer
 {
-    public function render(array $props, string $outPath): string
+    public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
     {
         @mkdir(dirname($outPath), 0777, true);
 
@@ -33,17 +33,35 @@ class CliRemotionRenderer implements RemotionRenderer
             $staged[] = $file;
             $props['videoSrc'] = basename($file);
         }
+        // Custom video background — staged into public/ like the source video.
+        if (! empty($props['background']['src']) && ! preg_match('#^https?://#', $props['background']['src']) && is_file($props['background']['src'])) {
+            $file = $this->stageAsset($props['background']['src']);
+            $staged[] = $file;
+            $props['background']['src'] = basename($file);
+        }
+        // Backgrounds reel — stage each video entry's file into public/. NB: use a
+        // distinct loop var — $entry is this method's Remotion entry-point parameter.
+        if (! empty($props['entries']) && is_array($props['entries'])) {
+            foreach ($props['entries'] as &$reelEntry) {
+                if (! empty($reelEntry['src']) && ! preg_match('#^https?://#', $reelEntry['src']) && is_file($reelEntry['src'])) {
+                    $file = $this->stageAsset($reelEntry['src']);
+                    $staged[] = $file;
+                    $reelEntry['src'] = basename($file);
+                }
+            }
+            unset($reelEntry);
+        }
         if (! empty($props['scenes'])) {
-            // Stage any local image file referenced anywhere in a layer's params
-            // (image-reveal.src, bar.image, timeline item.image, …) into public/.
-            $isImage = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp)$#i', $s);
-            $stage = function (&$node) use (&$stage, &$staged, $isImage) {
+            // Stage any local image OR audio file referenced anywhere in a layer
+            // (image-reveal.src, bar.image, timeline item.image, layer.audioSrc, …).
+            $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg|mp4|mov|webm|m4v)$#i', $s);
+            $stage = function (&$node) use (&$stage, &$staged, $isAsset) {
                 if (is_array($node)) {
                     foreach ($node as &$v) {
                         $stage($v);
                     }
                     unset($v);
-                } elseif (is_string($node) && $isImage($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
+                } elseif (is_string($node) && $isAsset($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
                     $file = $this->stageAsset($node);
                     $staged[] = $file;
                     $node = basename($file);
@@ -62,14 +80,17 @@ class CliRemotionRenderer implements RemotionRenderer
 
         try {
             $process = new Process(
-                $this->buildRenderArgs($props, $outPath, $propsFile),
+                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
                 config('contentmachine.clips.remotion_path')
             );
-            $process->setTimeout(600);
+            // Full clips (many scenes, ~1-2k frames) can outrun 10 min; keep this
+            // below the queue retry_after (1800) so the worker fails cleanly if it
+            // ever truly hangs, but give real renders room.
+            $process->setTimeout((float) config('contentmachine.clips.render_timeout', 1500));
             $process->run();
 
             if (! $process->isSuccessful()) {
-                throw new RuntimeException('Remotion falhou: '.$process->getErrorOutput());
+                throw new RuntimeException('Remotion failed: '.$process->getErrorOutput());
             }
         } finally {
             @unlink($propsFile);
@@ -94,7 +115,7 @@ class CliRemotionRenderer implements RemotionRenderer
             return $dest;
         }
         if (! @copy($sourcePath, $dest)) {
-            throw new RuntimeException("Não foi possível preparar o ficheiro para render: {$sourcePath}");
+            throw new RuntimeException("Could not prepare the file for render: {$sourcePath}");
         }
 
         return $dest;
@@ -103,10 +124,10 @@ class CliRemotionRenderer implements RemotionRenderer
     /**
      * @return array<int,string> the argv for the remotion render command
      */
-    public function buildRenderArgs(array $props, string $outPath, string $propsFile): array
+    public function buildRenderArgs(array $props, string $outPath, string $propsFile, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): array
     {
         $args = [
-            'npx', 'remotion', 'render', 'src/index.ts', 'ClipComposition', $outPath,
+            'npx', 'remotion', 'render', $entry, $composition, $outPath,
             "--props={$propsFile}",
         ];
 
@@ -120,4 +141,3 @@ class CliRemotionRenderer implements RemotionRenderer
         return $args;
     }
 }
-

@@ -36,10 +36,23 @@ class DesignTheme
                 'display' => 'Anton',
                 'body' => 'Space Grotesk',
                 'mono' => 'JetBrains Mono',
+                'displayWeight' => 400, // primary weight for headings/titles
+                'bodyWeight' => 400,    // primary weight for body text
             ],
             'texture' => ['kind' => 'starfield'],
+            'style' => [
+                'headline' => 'gradient', // 'gradient' | 'flat' (solid ink colour, no clip)
+                'shadow' => 'soft',       // 'soft' (blur) | 'hard' (Npx Npx 0 offset)
+                'panelBorder' => 0,       // px ink border around panels/cards (0 = none)
+                'sharp' => false,         // true = 0 corner radius (print look)
+                'uppercaseTitles' => false,
+            ],
         ];
     }
+
+    private const HEADLINES = ['gradient', 'flat'];
+
+    private const SHADOWS = ['soft', 'hard'];
 
     /**
      * Normalise arbitrary input into a valid theme, filling gaps with defaults.
@@ -58,10 +71,12 @@ class DesignTheme
         }
 
         $fonts = [];
-        foreach ($def['fonts'] as $key => $fallback) {
+        foreach (['display', 'body', 'mono'] as $key) {
             $val = $input['fonts'][$key] ?? null;
-            $fonts[$key] = is_string($val) && trim($val) !== '' ? self::cleanFont($val) : $fallback;
+            $fonts[$key] = is_string($val) && trim($val) !== '' ? self::cleanFont($val) : $def['fonts'][$key];
         }
+        $fonts['displayWeight'] = self::cleanWeight($input['fonts']['displayWeight'] ?? null, $def['fonts']['displayWeight']);
+        $fonts['bodyWeight'] = self::cleanWeight($input['fonts']['bodyWeight'] ?? null, $def['fonts']['bodyWeight']);
 
         $kind = $input['texture']['kind'] ?? null;
         $texture = ['kind' => in_array($kind, self::TEXTURES, true) ? $kind : $def['texture']['kind']];
@@ -69,7 +84,17 @@ class DesignTheme
             $texture['css'] = trim($input['texture']['css']);
         }
 
-        return ['colors' => $colors, 'fonts' => $fonts, 'texture' => $texture];
+        $ds = $def['style'];
+        $s = is_array($input['style'] ?? null) ? $input['style'] : [];
+        $style = [
+            'headline' => in_array($s['headline'] ?? null, self::HEADLINES, true) ? $s['headline'] : $ds['headline'],
+            'shadow' => in_array($s['shadow'] ?? null, self::SHADOWS, true) ? $s['shadow'] : $ds['shadow'],
+            'panelBorder' => is_numeric($s['panelBorder'] ?? null) ? max(0, min(8, (int) $s['panelBorder'])) : $ds['panelBorder'],
+            'sharp' => is_bool($s['sharp'] ?? null) ? $s['sharp'] : $ds['sharp'],
+            'uppercaseTitles' => is_bool($s['uppercaseTitles'] ?? null) ? $s['uppercaseTitles'] : $ds['uppercaseTitles'],
+        ];
+
+        return ['colors' => $colors, 'fonts' => $fonts, 'texture' => $texture, 'style' => $style];
     }
 
     /** #rgb, #rrggbb, or rgb()/rgba() strings are accepted as colours. */
@@ -79,6 +104,17 @@ class DesignTheme
 
         return (bool) preg_match('/^#([0-9a-f]{3}|[0-9a-f]{6})$/i', $v)
             || (bool) preg_match('/^rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*(,\s*[\d.]+\s*)?\)$/i', $v);
+    }
+
+    /** Coerce a font weight to a valid CSS weight (100–900, nearest 100). */
+    private static function cleanWeight(mixed $v, int $fallback): int
+    {
+        if (! is_numeric($v)) {
+            return $fallback;
+        }
+        $w = (int) round(((int) $v) / 100) * 100;
+
+        return max(100, min(900, $w));
     }
 
     /** Keep a plausible Google-Fonts family name (letters, digits, spaces). */

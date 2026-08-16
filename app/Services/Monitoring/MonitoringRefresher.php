@@ -3,9 +3,9 @@
 namespace App\Services\Monitoring;
 
 /**
- * Encaminha a recolha de cada rede para a fonte certa: YouTube via yt-dlp
- * (grátis, local); Instagram/TikTok/LinkedIn via actores Apify. Ambos escrevem
- * no mesmo MonitoringStore, pelo que o driver lê tudo de forma uniforme.
+ * Routes the collection of each network to the right source: YouTube via yt-dlp
+ * (free, local); Instagram/TikTok/LinkedIn via Apify actors. Both write to
+ * the same MonitoringStore, so the driver reads everything uniformly.
  */
 class MonitoringRefresher
 {
@@ -15,24 +15,32 @@ class MonitoringRefresher
     ) {}
 
     /**
-     * @return array<int,array<string,mixed>> itens recolhidos (pode ser vazio)
+     * @return array<int,array<string,mixed>> collected items (may be empty)
      */
     public function atualizar(string $plataforma, string $channelUrl, ?int $limite = null): array
     {
         $limite ??= (int) config('contentmachine.monitoring.limite', 12);
 
-        return $plataforma === 'youtube'
-            ? $this->ytdlp->atualizar($plataforma, $channelUrl, $limite)
-            : $this->apify->atualizar($plataforma, $channelUrl, $limite);
+        if ($plataforma !== 'youtube') {
+            return $this->apify->atualizar($plataforma, $channelUrl, $limite);
+        }
+
+        // YouTube's bot check can leave yt-dlp with nothing at all. Apify reaches
+        // the channel another way — use it rather than showing an empty dashboard.
+        $itens = $this->ytdlp->atualizar($plataforma, $channelUrl, $limite);
+
+        return $itens === [] && $this->apify->disponivel('youtube')
+            ? $this->apify->atualizar($plataforma, $channelUrl, $limite)
+            : $itens;
     }
 
-    /** Se a rede tem fonte de recolha configurada (YouTube sempre; outras via Apify). */
+    /** Whether the network has a collection source configured (YouTube always; others via Apify). */
     public function disponivel(string $plataforma): bool
     {
         return $plataforma === 'youtube' || $this->apify->disponivel($plataforma);
     }
 
-    /** Nome da fonte, para mensagens. */
+    /** Source name, for messages. */
     public function fonte(string $plataforma): string
     {
         return $plataforma === 'youtube' ? 'yt-dlp' : 'Apify';

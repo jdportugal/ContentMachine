@@ -2,8 +2,15 @@
 
 namespace App\Jobs\Clips;
 
-use App\Models\ClipProject;
+use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\Store\BackgroundStore;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectStore;
+use App\Services\DesignSystem\DesignSystemRepository;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,18 +20,27 @@ use Illuminate\Support\Facades\Storage;
 
 class RenderJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public function __construct(public int $projectId) {}
-
-    public function handle(RemotionRenderer $renderer, MusicLibrary $music): void
+    public function __construct(public string $projectId)
     {
-        $p = ClipProject::findOrFail($this->projectId);
+        $this->captureProject();
+    }
+
+    public function handle(RemotionRenderer $renderer, MusicLibrary $music, ClipStore $store, EffectLibrary $effects, BackgroundLibrary $backgrounds, BackgroundStore $backgroundStore): void
+    {
+        $this->activateProject();
+        $p = $store->findOrFail($this->projectId);
 
         try {
-            $p->update(['status' => ClipProject::STATUS_RENDERING]);
+            $p->update(['status' => ClipRecord::STATUS_RENDERING]);
 
-            $dir = storage_path("app/clips/{$p->id}");
+            // The remotion effects + backgrounds folders are global — sync the active
+            // project's custom SFX and code backgrounds before rendering.
+            $effects->syncFilesystem();
+            $backgrounds->syncFilesystem();
+
+            $dir = $store->storageDir($p->id);
             @mkdir($dir, 0777, true);
             $plan = $p->plan;
 
@@ -34,6 +50,16 @@ class RenderJob implements ShouldQueue
             // Resolve image-reveal layers' image ids to absolute file paths.
             $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
 
+            // Attach each effect's sound (sfx-audio/<slug>.*) to the layers using it.
+            $plan['scenes'] = $this->attachEffectAudio($plan['scenes'], app(EffectStore::class));
+
+            // Resolve the chosen backdrop slug → a concrete component/video the
+            // renderer understands. A vanished/removed background drops to the theme.
+            $plan['background'] = $this->resolveBackground($plan['background'] ?? null, $backgroundStore);
+            if ($plan['background'] === null) {
+                unset($plan['background']);
+            }
+
             $plan['audioSrc'] = $p->audio_path;
 
             // Background music (mixed as a looping <Audio> track by Remotion).
@@ -42,23 +68,23 @@ class RenderJob implements ShouldQueue
                 $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
             }
 
-            // Tema do Sistema de Design (cores/fontes/textura) — faz a animação
-            // combinar com a marca. Null → o renderizador usa os defaults IATECA.
-            if ($theme = app(\App\Services\DesignSystem\DesignSystemRepository::class)->readTokens()) {
+            // Design System theme (colors/fonts/texture) — makes the animation
+            // match the brand. Null → the renderer uses the Brand Machine defaults.
+            if ($theme = app(DesignSystemRepository::class)->readTokens()) {
                 $plan['theme'] = $theme;
             }
 
             // Overlay clips: Remotion composites the source video per-scene (over / split /
             // video / animation). Everything renders in one opaque pass — no ffmpeg step.
-            if ($p->type === ClipProject::TYPE_OVERLAY) {
+            if ($p->type === ClipRecord::TYPE_OVERLAY) {
                 $plan['transparent'] = false;
                 $plan['videoSrc'] = Storage::disk(config('contentmachine.clips.disk'))->path($p->source_path);
             }
 
             $out = $renderer->render($plan, "$dir/clip.mp4");
-            $p->update(['output_path' => $out, 'status' => ClipProject::STATUS_DONE]);
+            $p->update(['output_path' => $out, 'status' => ClipRecord::STATUS_DONE]);
         } catch (\Throwable $e) {
-            $p->update(['status' => ClipProject::STATUS_FAILED, 'error' => $e->getMessage()]);
+            $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -68,7 +94,7 @@ class RenderJob implements ShouldQueue
      * Mirrors the shorts pipeline: 'nenhuma' → none, ''/'aleatoria' → random
      * track, a name → that track (falling back to random if it vanished).
      */
-    private function resolveMusic(ClipProject $p, MusicLibrary $music): ?string
+    private function resolveMusic(ClipRecord $p, MusicLibrary $music): ?string
     {
         $choice = trim((string) ($p->meta['musica'] ?? ''));
 
@@ -82,8 +108,54 @@ class RenderJob implements ShouldQueue
         return $music->pathFor($choice) ?? $music->randomPath();
     }
 
+    /**
+     * Resolve a stored background slug into the concrete shape ClipComposition
+     * expects: code → {kind:code, slug}; video → {kind:video, src:<abs mp4 path>}
+     * (staged into Remotion's public/ by the renderer). A slug that no longer maps
+     * to an active background → null (falls back to the themed backdrop). An already
+     * resolved array (e.g. a hand-edited plan) is passed through.
+     */
+    private function resolveBackground(mixed $background, BackgroundStore $store): ?array
+    {
+        if (is_array($background)) {
+            return $background; // already resolved (raw plan edit)
+        }
+        if (! is_string($background) || $background === '') {
+            return null;
+        }
+
+        $rec = $store->findBySlug($background);
+        if (! $rec || ! $rec->isActive()) {
+            return null;
+        }
+
+        return $rec->kind === BackgroundStore::KIND_VIDEO
+            ? ['kind' => 'video', 'src' => $store->videoPath($rec->id())]
+            : ['kind' => 'code', 'slug' => $rec->slug];
+    }
+
+    /** Set layer.audioSrc to the effect's sound file (by slug), for layers that have one. */
+    private function attachEffectAudio(array $scenes, EffectStore $effects): array
+    {
+        foreach ($scenes as &$scene) {
+            if (empty($scene['layers']) || ! is_array($scene['layers'])) {
+                continue;
+            }
+            foreach ($scene['layers'] as &$layer) {
+                $slug = is_array($layer) ? ($layer['type'] ?? null) : null;
+                if ($slug && ($path = $effects->audioPath($slug))) {
+                    $layer['audioSrc'] = $path;
+                }
+            }
+            unset($layer);
+        }
+        unset($scene);
+
+        return $scenes;
+    }
+
     /** Map image-reveal layers' `params.src` (an image id) to the absolute file path. */
-    private function resolveImages(array $scenes, ClipProject $p): array
+    private function resolveImages(array $scenes, ClipRecord $p): array
     {
         $byId = [];
         $transById = [];

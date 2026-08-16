@@ -3,12 +3,12 @@ titulo: 'Tópicos — 2026-07-09'
 tipo: topicos
 data: '2026-07-09'
 metodo: llm
-total: 2
+total: 4
 ---
 
 # Tópicos cobertos — 2026-07-09
 
-> 2 item(s) agregado(s) · método: llm · 2026-07-21T13:54:52+00:00
+> 4 item(s) agregado(s) · método: llm · 2026-07-24T10:11:13+00:00
 
 ## Investimento e Finanças Pessoais
 
@@ -17,3 +17,4 @@ total: 2
 ## Tecnologia e Aplicações de IA
 
 - **[youtube]** [Anthropic Just Dropped Claude Cowork Mobile (Full Breakdown)](https://www.youtube.com/watch?v=kIiHhWVOlCM)
+- **[youtube]** [GPT 5.6 SOL IS HERE! How to use it.](https://www.youtube.com/watch?v=7pVTQSA4s5I)

@@ -6,6 +6,8 @@ canal: 'Jack Roberts'
 data: '2026-07-15'
 url: 'https://www.youtube.com/watch?v=FByzhiP2gzo'
 thumbnail: 'https://i.ytimg.com/vi/FByzhiP2gzo/maxresdefault.jpg'
+descricao: '⚡️ Vercel: https://bit.ly/45bedRz 📈 ALL Systems: https://bit.ly/4kol0y5 🩵 Free Resources: https://bit.ly/3RNNDLa Fable 5 is the most powerful model going, but running it as your everyday driver will torch your budget fast. So this walks through one simple system — compress, judge, execute — that only tags Fable 5 in for the calls that actually change the outcome: taste, architecture, strategy, review, and codify. You and I build it across three real use cases: a routing control system inside Hermes that knows exactly when to escalate (and always quotes the cost before it spends a cent), shipping a full website with a live autonomous agent in one shot on Vercel, and using Fable 5 as a strategist that reasons over all your data without ever paying frontier prices just to read it. Every mo...'
+resumo: 'O vídeo mostra como combinar o modelo Fable 5 com o agente de IA Hermes através de um sistema de fluxo de trabalho ("comprimir, avaliar e executar"), no qual modelos mais baratos tratam do trabalho pesado e o Fable 5 é reservado para decisões de maior valor, como gosto, arquitetura e revisão estratégica. Apresenta três casos de uso práticos para obter melhores resultados sem gastar muito dinheiro.'
 tags: {}
 fontes:
   - 'https://bit.ly/45bedRz'

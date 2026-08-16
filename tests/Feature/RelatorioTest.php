@@ -95,7 +95,6 @@ class RelatorioTest extends TestCase
         $this->semearItem($hoje, 'youtube', 'a', ['ia'], ['https://fonte/1']);
 
         Livewire::test(Noticias::class)
-            ->set('recolherPrimeiro', false) // não ir à rede durante o teste
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', $hoje)
             ->call('criarRelatorio')
@@ -114,7 +113,6 @@ class RelatorioTest extends TestCase
         Queue::fake();
 
         Livewire::test(Noticias::class)
-            ->set('recolherPrimeiro', false)
             ->set('modoRelatorio', 'dia')
             ->set('dataRelatorio', Carbon::today()->toDateString())
             ->call('criarRelatorio')
@@ -163,6 +161,109 @@ class RelatorioTest extends TestCase
         Livewire::test(Noticias::class)
             ->set('relatorioSelecionado', 'noticias/relatorios/dia-2026-07-20.md')
             ->assertViewHas('relatorio', fn ($r) => is_array($r) && $r['titulo'] === 'Antigo' && $r['total'] === 3);
+    }
+
+    // ───────────────────────── Tool tips (same pipeline, other write-up) ─────
+
+    /** An LLM double that captures the prompt and answers with a fixed script. */
+    private function llmEspiao(): object
+    {
+        $llm = new class extends \App\Services\Aggregation\LlmClient
+        {
+            public ?string $capturado = null;
+
+            public function disponivel(): bool
+            {
+                return true;
+            }
+
+            public function fornecedorAtivo(): ?string
+            {
+                return 'espiao';
+            }
+
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
+            {
+                $this->capturado = $prompt;
+
+                return "**Burning tokens?**\n\nUse /compact.";
+            }
+        };
+        $this->app->instance(\App\Services\Aggregation\LlmClient::class, $llm);
+
+        return $llm;
+    }
+
+    public function test_dicas_pedem_guioes_de_utilizacao_e_nao_noticias(): void
+    {
+        $hoje = Carbon::today();
+        $this->semearItem($hoje->toDateString(), 'youtube', 'a', ['ia']);
+        $llm = $this->llmEspiao();
+
+        $rel = app(RelatorioBuilder::class)->gerar($hoje, $hoje, 'dia', 'English', RelatorioBuilder::TIPO_DICAS);
+
+        $this->assertSame(RelatorioBuilder::TIPO_DICAS, $rel['tipo']);
+        $this->assertStringContainsString('Burning tokens?', $rel['redacao']);
+        $this->assertStringContainsString('Tool tips —', $rel['titulo']);
+
+        // The prompt must ask for usage tips, not for a news round-up.
+        $this->assertStringContainsString('SHORT-FORM VIDEO SCRIPTS', (string) $llm->capturado);
+        $this->assertStringContainsString('WHAT COUNTS AS A TIP', (string) $llm->capturado);
+        $this->assertStringNotContainsString('AI-news editor', (string) $llm->capturado);
+    }
+
+    /** Without an LLM a tip could only be invented — say so instead of faking one. */
+    public function test_dicas_sem_llm_dizem_que_falta_uma_chave_em_vez_de_inventar(): void
+    {
+        $hoje = Carbon::today();
+        $this->semearItem($hoje->toDateString(), 'youtube', 'a', ['ia']);
+
+        $rel = app(RelatorioBuilder::class)->gerar($hoje, $hoje, 'dia', 'English', RelatorioBuilder::TIPO_DICAS);
+
+        $this->assertSame('sem-llm', $rel['redacao_metodo']);
+        $this->assertStringContainsString('need an AI provider', $rel['redacao']);
+        // The rest of the report still stands — it is collected, not written.
+        $this->assertSame(1, $rel['total']);
+        $this->assertNotEmpty($rel['topicos']);
+    }
+
+    public function test_dicas_arquivam_em_nota_propria_sem_sobrepor_o_relatorio_do_mesmo_dia(): void
+    {
+        $hoje = Carbon::today()->toDateString();
+        $this->semearItem($hoje, 'youtube', 'a', ['ia']);
+        $this->llmEspiao();
+
+        Livewire::test(Noticias::class)
+            ->set('dataRelatorio', $hoje)
+            ->call('criarRelatorio')                      // news (default kind)
+            ->set('tipoRelatorio', RelatorioBuilder::TIPO_DICAS)
+            ->call('criarRelatorio')                      // tips
+            ->assertSet('relatorioSelecionado', "noticias/relatorios/dicas-dia-{$hoje}.md");
+
+        $noticias = $this->vault->get("noticias/relatorios/dia-{$hoje}.md");
+        $dicas = $this->vault->get("noticias/relatorios/dicas-dia-{$hoje}.md");
+
+        $this->assertSame('relatorio', $noticias?->get('tipo'));
+        $this->assertSame('relatorio_dicas', $dicas?->get('tipo'));
+    }
+
+    public function test_o_seletor_de_arquivo_so_mostra_o_genero_escolhido(): void
+    {
+        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Notícias', 12);
+        $this->vault->put('noticias/relatorios/dicas-dia-2026-07-22.md', [
+            'titulo' => 'Dicas', 'tipo' => 'relatorio_dicas', 'modo' => 'dia',
+            'inicio' => '2026-07-22', 'fim' => '2026-07-22', 'total' => 4,
+            'gerado_em' => '2026-07-22T10:00:00+00:00', 'estado' => 'arquivado',
+            'tags' => ['noticias', 'dicas', 'dia'],
+            'dados' => json_encode(['titulo' => 'Dicas', 'modo' => 'dia', 'total' => 4, 'resumo' => 'x']),
+        ], '# Dicas');
+
+        Livewire::test(Noticias::class)
+            ->assertViewHas('relatoriosPassados', fn ($l) => count($l) === 1)
+            ->assertViewHas('relatorio', fn ($r) => $r['titulo'] === 'Notícias')
+            ->set('tipoRelatorio', RelatorioBuilder::TIPO_DICAS)
+            ->assertViewHas('relatoriosPassados', fn ($l) => count($l) === 1)
+            ->assertViewHas('relatorio', fn ($r) => $r['titulo'] === 'Dicas');
     }
 
     private function rrmdir(string $dir): void

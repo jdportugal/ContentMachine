@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\Contracts\VoiceoverService;
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -10,9 +11,9 @@ class ElevenLabsVoiceoverService implements VoiceoverService
 {
     public function synthesize(string $text, string $outPath): string
     {
-        $key = config('services.elevenlabs.key');
+        $key = StepKey::key('clips_voz', 'elevenlabs');
         if (! $key) {
-            throw new RuntimeException('ELEVENLABS_API_KEY em falta para locução.');
+            throw new RuntimeException('ELEVENLABS_API_KEY missing for voiceover.');
         }
 
         $voiceId = config('contentmachine.clips.voice_id');

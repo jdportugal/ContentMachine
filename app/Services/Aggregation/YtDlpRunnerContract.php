@@ -3,26 +3,29 @@
 namespace App\Services\Aggregation;
 
 /**
- * Fronteira fina em torno do binário yt-dlp e de pedidos HTTP simples.
- * Isolada para permitir substituição por um duplo de teste (fake) nos testes,
- * mantendo os drivers verificáveis sem rede.
+ * Thin boundary around the yt-dlp binary and simple HTTP requests.
+ * Isolated to allow replacement by a test double (fake) in tests,
+ * keeping the drivers verifiable without a network.
  */
 interface YtDlpRunnerContract
 {
     /**
-     * Lista os itens recentes de um canal/playlist (metadados leves, sem descarregar).
+     * Lists the recent items of a channel/playlist (lightweight metadata, no download).
      *
      * @return array{_type?:string,entries?:array<int,array<string,mixed>>}
      */
     public function listing(string $channelUrl, int $limit): array;
 
     /**
-     * Metadados completos de um único item (JSON do yt-dlp), sem descarregar média.
+     * Full metadata of a single item (yt-dlp JSON), without downloading media.
      *
      * @return array<string,mixed>
      */
     public function metadata(string $url): array;
 
-    /** Descarrega o conteúdo textual de um URL (ex.: legendas VTT). Devolve null em falha. */
+    /** Downloads the textual content of a URL (e.g. VTT subtitles). Returns null on failure. */
     public function fetch(string $url): ?string;
+
+    /** The most recent yt-dlp error during this runner's lifetime, or null. */
+    public function lastError(): ?string;
 }

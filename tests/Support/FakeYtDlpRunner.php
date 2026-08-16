@@ -50,4 +50,9 @@ class FakeYtDlpRunner implements YtDlpRunnerContract
     {
         return $this->vtt !== '' ? $this->vtt : null;
     }
+
+    public function lastError(): ?string
+    {
+        return null;
+    }
 }

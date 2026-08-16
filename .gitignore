@@ -22,9 +22,9 @@
 /storage/pail
 /vendor
 
-# Bases de dados SQLite locais — NUNCA versionar. Podem conter sessões, cache,
-# utilizadores e outros dados de runtime. (DB_DATABASE=contentmachine cria este
-# ficheiro na raiz; o nome por defeito do Laravel é database/database.sqlite.)
+# Local SQLite databases — NEVER commit. They can hold sessions, cache, users
+# and other runtime data. (DB_DATABASE=contentmachine creates this file at the
+# repo root; Laravel's own default is database/database.sqlite.)
 /contentmachine
 *.sqlite
 *.sqlite-journal
@@ -42,3 +42,6 @@ Thumbs.db
 
 # Claude Code worktrees / session state (nested checkouts — never version these)
 /.claude/
+
+# Local Whisper virtualenv (runtime artifact, platform-specific — never commit)
+/storage/whisper-venv

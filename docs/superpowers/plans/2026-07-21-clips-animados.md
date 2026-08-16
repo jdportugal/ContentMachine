@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- All UI copy in **European Portuguese**, inside the IATECA design system (page-header, panels, fleurons, mono cotas). No emojis in-brand.
+- All UI copy in **European Portuguese**, inside the Brand Machine design system (page-header, panels, fleurons, mono cotas). No emojis in-brand.
 - Output default **1080×1920, 30fps**.
 - Animation primitives are a **closed vocabulary** defined in `vault/estilo-animacao.md`: `fade`, `slide`, `scale`, `kinetic-text`, `highlight`, `fleuron-draw`, `seal-stamp`, `underline-sweep`, `count-up`, `image-reveal`, `ambient`.
 - Driver selection via `CLIPS_DRIVER` env (`fake` | `api`), default `fake`. Tests always run under `fake`.
@@ -183,7 +183,7 @@ git commit -m "Clips: config, clip_projects migration e modelo"
 
 ---
 
-### Task 2: Style md (closed vocabulary + IATECA tokens)
+### Task 2: Style md (closed vocabulary + Brand Machine tokens)
 
 **Files:**
 - Create: `vault/estilo-animacao.md`
@@ -197,7 +197,7 @@ git commit -m "Clips: config, clip_projects migration e modelo"
 
 ```bash
 git add vault/estilo-animacao.md
-git commit -m "Clips: style md (vocabulario de animacao + tokens IATECA)"
+git commit -m "Clips: style md (vocabulario de animacao + tokens Brand Machine)"
 ```
 
 ---
@@ -400,13 +400,13 @@ class FakeTranscriptionService implements TranscriptionService {
     public function transcribe(string $audioPath): array {
         return [
             'duration' => 3.0,
-            'text' => 'Olá mundo IATECA',
+            'text' => 'Olá mundo Brand Machine',
             'words' => [
                 ['word' => 'Olá', 'start' => 0.0, 'end' => 1.0],
                 ['word' => 'mundo', 'start' => 1.0, 'end' => 2.0],
-                ['word' => 'IATECA', 'start' => 2.0, 'end' => 3.0],
+                ['word' => 'Brand Machine', 'start' => 2.0, 'end' => 3.0],
             ],
-            'segments' => [['start' => 0.0, 'end' => 3.0, 'text' => 'Olá mundo IATECA']],
+            'segments' => [['start' => 0.0, 'end' => 3.0, 'text' => 'Olá mundo Brand Machine']],
         ];
     }
 }
@@ -689,7 +689,7 @@ uses(RefreshDatabase::class);
 it('runs the animation pipeline to done with fakes', function () {
     config()->set('queue.default', 'sync');
     config()->set('contentmachine.clips.driver', 'fake');
-    $p = ClipProject::create(['type' => 'animation', 'input_kind' => 'text', 'source_text' => 'Olá mundo IATECA']);
+    $p = ClipProject::create(['type' => 'animation', 'input_kind' => 'text', 'source_text' => 'Olá mundo Brand Machine']);
     TranscribeJob::dispatch($p->id);
     $p->refresh();
     expect($p->status)->toBe(ClipProject::STATUS_DONE)
@@ -769,7 +769,7 @@ it('runs the animation pipeline to done with fakes', function () {
 - Produces: a component with `activeTab` ('animation'|'overlay'), text/upload inputs, `submitAnimation()` and `submitOverlay()` that create a `ClipProject` + dispatch `TranscribeJob`, `projects` computed prop (latest 10 by type), and `wire:poll.3s` while any project `isActive()`.
 
 - [ ] **Step 1: Component.** `use WithFileUploads`. Props: `activeTab='animation'`, `text=''`, `audio=null`, `video=null`. `submitAnimation()`: validate (`text` required without `audio`, or `audio` mimetypes), store upload if present, create project (`input_kind` = text|audio), `TranscribeJob::dispatch`. `submitOverlay()`: validate `video` required (mimetypes:mp4,mov), store, create `overlay` project, dispatch. `getProjectsProperty()` returns recent projects. Reset inputs after submit.
-- [ ] **Step 2: Blade.** IATECA-styled: `x-page-header`, a two-tab switch (teal underline on active), the active tab's form, and a list of projects with status badge (map status→PT label + glyph), `wire:poll.3s`, a preview `<video>` + download link when `output_path` set. Use existing components (`x-panel`, `x-badge`, `x-empty-state`, fleuron).
+- [ ] **Step 2: Blade.** Brand Machine-styled: `x-page-header`, a two-tab switch (teal underline on active), the active tab's form, and a list of projects with status badge (map status→PT label + glyph), `wire:poll.3s`, a preview `<video>` + download link when `output_path` set. Use existing components (`x-panel`, `x-badge`, `x-empty-state`, fleuron).
 - [ ] **Step 3: Feature test.** Create `tests/Feature/Clips/ClipsAnimadosTest.php`:
 
 ```php
@@ -783,7 +783,7 @@ it('creates an animation project and dispatches the pipeline', function () {
     Queue::fake();
     Livewire::test(ClipsAnimados::class)
         ->set('activeTab', 'animation')
-        ->set('text', 'Olá mundo IATECA')
+        ->set('text', 'Olá mundo Brand Machine')
         ->call('submitAnimation')
         ->assertHasNoErrors();
     expect(ClipProject::where('type', 'animation')->count())->toBe(1);
@@ -816,7 +816,7 @@ it('requires a video for the overlay tab', function () {
 ## Self-Review
 
 **Spec coverage:**
-- Two tabs → Task 11. Text/voiceover input → Tasks 7/9/11. Transcription w/ timestamps → Tasks 3/9. AI plan with start/end + style md → Tasks 2/9. Remotion full render → Task 8/10. Every-second coverage (dense) → Task 4 (PlanValidator) + Task 9 prompt. Video+overlay sparse → Tasks 4/7/8/10. Data/async → Tasks 1/7. Driver pattern → Tasks 3/5/6/9/10. IATECA styling → Tasks 2/11. ✅ all covered.
+- Two tabs → Task 11. Text/voiceover input → Tasks 7/9/11. Transcription w/ timestamps → Tasks 3/9. AI plan with start/end + style md → Tasks 2/9. Remotion full render → Task 8/10. Every-second coverage (dense) → Task 4 (PlanValidator) + Task 9 prompt. Video+overlay sparse → Tasks 4/7/8/10. Data/async → Tasks 1/7. Driver pattern → Tasks 3/5/6/9/10. Brand Machine styling → Tasks 2/11. ✅ all covered.
 
 **Placeholder scan:** Task 8 and Tasks 9–10 describe some components at the step level rather than full source (Remotion TSX + Http bodies) — these are large and framework-specific; each step names exact files, exact CLI/HTTP calls, exact props/response mapping, and a concrete verification command, which is sufficient for an implementer. No "TBD"/"handle edge cases" placeholders remain.
 

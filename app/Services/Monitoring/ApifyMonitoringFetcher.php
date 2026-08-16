@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 use Throwable;
 
 /**
- * Recolhe o desempenho REAL das redes não-YouTube (Instagram, TikTok, LinkedIn)
- * via actores Apify, a partir do URL do perfil em Definições. Normaliza para o
- * formato do domínio, pontua e guarda no MonitoringStore (mesmo formato que o
- * driver de yt-dlp). Sem token/actor, ou em falha, devolve vazio (nunca falso).
+ * Collects the REAL performance of non-YouTube networks (Instagram, TikTok, LinkedIn)
+ * via Apify actors, from the profile URL in Settings. Normalizes to the
+ * domain format, scores and stores it in the MonitoringStore (same format as the
+ * yt-dlp driver). Without token/actor, or on failure, returns empty (never false).
  */
 class ApifyMonitoringFetcher
 {
@@ -32,7 +32,7 @@ class ApifyMonitoringFetcher
         return $itens;
     }
 
-    /** Se há actor + token configurados para esta rede. */
+    /** Whether an actor + token are configured for this network. */
     public function disponivel(string $plataforma): bool
     {
         return filled(config("contentmachine.monitoring.apify.{$plataforma}"))
@@ -70,7 +70,7 @@ class ApifyMonitoringFetcher
 
         $canal = ['subscribers' => $seguidores, 'posts' => count($itens), 'nome' => ''];
 
-        // Guarda uma cópia local das miniaturas (os CDN bloqueiam o hotlink).
+        // Keep a local copy of the thumbnails (the CDNs block hotlinking).
         $thumbs = app(ThumbnailCache::class);
         foreach ($itens as &$it) {
             $it['thumbnail'] = $thumbs->localizar($plataforma, (string) $it['id'], (string) ($it['thumbnail'] ?? ''));
@@ -80,7 +80,7 @@ class ApifyMonitoringFetcher
         return [$this->pontuar($plataforma, $itens), $canal];
     }
 
-    /** @return array<string,mixed> input do actor por plataforma */
+    /** @return array<string,mixed> actor input per platform */
     private function input(string $plataforma, string $url, int $limite): array
     {
         return match ($plataforma) {
@@ -100,19 +100,67 @@ class ApifyMonitoringFetcher
                 'urls' => [$url],
                 'limit' => $limite,
             ],
+            'youtube' => [
+                'startUrls' => [['url' => $url]],
+                'maxResults' => $limite,
+                'maxResultsShorts' => 0,
+                'maxResultStreams' => 0,
+                'downloadSubtitles' => false, // metrics only here
+            ],
             default => ['urls' => [$url], 'limit' => $limite],
         };
     }
 
-    /** @return array<string,mixed>|null item normalizado */
+    /** @return array<string,mixed>|null normalized item */
     private function mapear(string $plataforma, array $r): ?array
     {
         return match ($plataforma) {
             'instagram' => $this->mapearInstagram($r),
             'tiktok' => $this->mapearTiktok($r),
             'linkedin' => $this->mapearLinkedin($r),
+            'youtube' => $this->mapearYoutube($r),
             default => null,
         };
+    }
+
+    /** YouTube — only reached when yt-dlp is blocked (MonitoringRefresher falls back here). */
+    private function mapearYoutube(array $r): ?array
+    {
+        $url = (string) ($r['url'] ?? $r['videoUrl'] ?? '');
+        $id = (string) ($r['id'] ?? $r['videoId'] ?? ($url !== '' ? md5($url) : ''));
+        if ($id === '') {
+            return null;
+        }
+
+        return [
+            'id' => $id,
+            'plataforma' => 'youtube',
+            'tipo' => 'vídeo',
+            'titulo' => $this->titulo($r['title'] ?? null, 'Vídeo'),
+            'url' => $url,
+            'thumbnail' => (string) ($r['thumbnailUrl'] ?? $r['thumbnail'] ?? ''),
+            'publicado_em' => $this->data($r['date'] ?? $r['uploadDate'] ?? null),
+            'duracao_seg' => $this->duracaoSeg($r['duration'] ?? null),
+            'views' => (int) ($r['viewCount'] ?? $r['viewsCount'] ?? 0),
+            'likes' => (int) ($r['likes'] ?? $r['likeCount'] ?? 0),
+            'comentarios' => (int) ($r['commentsCount'] ?? $r['commentCount'] ?? 0),
+            'partilhas' => 0,
+            'guardados' => 0,
+        ];
+    }
+
+    /** "HH:MM:SS" / "MM:SS" / seconds → seconds. */
+    private function duracaoSeg(mixed $duracao): int
+    {
+        if (is_numeric($duracao)) {
+            return (int) $duracao;
+        }
+        $partes = array_map('intval', explode(':', trim((string) ($duracao ?? ''))));
+        if ($partes === [] || count($partes) > 3) {
+            return 0;
+        }
+
+        return (int) array_reduce($partes, fn ($total, $p) => $total * 60 + $p, 0);
     }
 
     private function mapearInstagram(array $r): ?array
@@ -201,6 +249,7 @@ class ApifyMonitoringFetcher
             'instagram' => (int) ($r['ownerFollowersCount'] ?? Arr::get($r, 'owner.followersCount', 0)),
             'tiktok' => (int) Arr::get($r, 'authorMeta.fans', 0),
             'linkedin' => (int) ($r['authorFollowersCount'] ?? Arr::get($r, 'author.followers', 0)),
+            'youtube' => (int) ($r['numberOfSubscribers'] ?? 0),
             default => 0,
         };
     }

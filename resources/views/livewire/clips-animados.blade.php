@@ -1,39 +1,50 @@
-<div @if ($view === 'dashboard' && $this->hasActive) wire:poll.3s @endif>
+<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'backgrounds' && ($this->backgroundsBusy || $this->backgroundReelBusy))) wire:poll.3s @endif>
     @php
         $estados = [
-            'draft'        => ['label' => 'Rascunho',      'tone' => 'neutral', 'glyph' => '·'],
-            'transcribing' => ['label' => 'A transcrever', 'tone' => 'gold',    'glyph' => '❧'],
-            'planning'     => ['label' => 'A planear',     'tone' => 'gold',    'glyph' => '❧'],
-            'rendering'    => ['label' => 'A renderizar',  'tone' => 'gold',    'glyph' => '❧'],
-            'done'         => ['label' => 'Pronto',        'tone' => 'good',    'glyph' => '✔'],
-            'failed'       => ['label' => 'Falhou',        'tone' => 'bad',     'glyph' => '✕'],
+            'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
+            'transcribing' => ['label' => 'Transcribing',  'tone' => 'gold',    'glyph' => '❧'],
+            'planning'     => ['label' => 'Planning',      'tone' => 'gold',    'glyph' => '❧'],
+            'collecting'   => ['label' => 'Your images',   'tone' => 'gold',    'glyph' => '◆'],
+            'rendering'    => ['label' => 'Rendering',     'tone' => 'gold',    'glyph' => '❧'],
+            'done'         => ['label' => 'Ready',         'tone' => 'good',    'glyph' => '✔'],
+            'failed'       => ['label' => 'Failed',        'tone' => 'bad',     'glyph' => '✕'],
         ];
         $tipos = [
-            'animation' => ['label' => 'Animação',           'glyph' => '❈'],
-            'overlay'   => ['label' => 'Vídeo + Animações',  'glyph' => '❖'],
+            'animation' => ['label' => 'Animation',          'glyph' => '❈'],
+            'overlay'   => ['label' => 'Video + Animations', 'glyph' => '❖'],
         ];
     @endphp
 
     <x-page-header
         eyebrow="Tomus · IV"
-        title="Clips Animados"
-        cota="741.5 · IAT · '26"
-        lead="Estúdio de animação: da locução à peça animada, com timestamps e planeamento assistido." />
+        title="Animated Clips"
+        cota="741.5 · ACM · '26"
+        lead="Animation studio: from voiceover to animated piece, with timestamps and assisted planning." />
 
     {{-- ============================================================ --}}
     {{-- DASHBOARD                                                    --}}
     {{-- ============================================================ --}}
     @if ($view === 'dashboard')
-        <div class="flex items-center justify-between mb-6">
-            <div class="eyebrow">Clipes gerados · {{ $this->projects->count() }}</div>
-            <button type="button" wire:click="novoClip"
-                    class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
-                ✦ Novo clip
-            </button>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div class="eyebrow">Clips generated · {{ $this->projects->count() }}</div>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                <a href="{{ route('clips-animados.sfx') }}"
+                        class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
+                    ✷ SFX
+                </a>
+                <button type="button" wire:click="abrirBackgrounds"
+                        class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
+                    ◆ Backgrounds
+                </button>
+                <button type="button" wire:click="novoClip"
+                        class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                    ✦ New clip
+                </button>
+            </div>
         </div>
 
         @if ($this->projects->isEmpty())
-            <x-empty-state glyph="❈" title="Sem clipes" note="Ainda não gerou nenhuma peça. Comece com «Novo clip»." />
+            <x-empty-state glyph="❈" title="No clips" note="You haven't generated any piece yet. Start with «New clip»." />
         @else
             <div class="space-y-5">
                 @foreach ($this->projects as $project)
@@ -43,14 +54,20 @@
                         $sug = $project->meta['suggested'] ?? [];
                     @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
-                        <div class="grid md:grid-cols-2 gap-5">
-                            {{-- ESQUERDA: vídeo --}}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            {{-- LEFT: video --}}
                             <div class="flex items-center justify-center">
                                 @if ($project->status === 'done' && $project->output_path)
                                     <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
-                                           src="{{ route('clips-animados.media', $project) }}"></video>
+                                           src="{{ route('clips-animados.media', $project->id) }}"></video>
                                 @elseif ($project->status === 'failed')
                                     <p class="text-sm text-bad/90 self-start">{{ \Illuminate\Support\Str::limit($project->error, 200) }}</p>
+                                @elseif ($project->status === 'collecting')
+                                    <div class="w-full self-start text-center">
+                                        <p class="font-mono text-[0.6rem] text-ink-faint mb-2">The plan is ready — upload your own images or let them be generated.</p>
+                                        <button type="button" wire:click="revisarImagens('{{ $project->id }}')"
+                                                class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">◆ Collect images</button>
+                                    </div>
                                 @else
                                     <div class="w-full self-start">
                                         <div class="h-1 w-full bg-surface/40 rounded-full overflow-hidden">
@@ -62,7 +79,7 @@
                                 @endif
                             </div>
 
-                            {{-- DIREITA: título sugerido, descrição, tags, estado --}}
+                            {{-- RIGHT: suggested title, description, tags, status --}}
                             <div class="min-w-0 flex flex-col">
                                 <div class="flex items-start justify-between gap-3">
                                     <div class="flex items-center gap-2">
@@ -72,8 +89,8 @@
                                     <x-badge :tone="$e['tone']">{{ $e['glyph'] }} {{ $e['label'] }}</x-badge>
                                 </div>
 
-                                <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'Sem título' }}</div>
-                                <div class="font-mono text-[0.58rem] text-ink-faint">#{{ $project->id }} · {{ $project->created_at?->diffForHumans() }}</div>
+                                <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'No title' }}</div>
+                                <div class="font-mono text-[0.58rem] text-ink-faint">{{ $project->created_at ? \Illuminate\Support\Carbon::parse($project->created_at)->diffForHumans() : '' }}</div>
 
                                 @if (!empty($sug['description']))
                                     <p class="mt-3 text-ink-soft text-sm leading-relaxed">{{ $sug['description'] }}</p>
@@ -87,20 +104,25 @@
                                     </div>
                                 @endif
 
-                                {{-- acções --}}
+                                {{-- actions --}}
                                 <div class="mt-auto pt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem]">
-                                    @if (!empty($project->plan['scenes']))
-                                        <button type="button" wire:click="editarClip({{ $project->id }})" class="text-teal hover:underline">✎ editar clip</button>
+                                    @if (!empty($project->plan['scenes']) && $project->status !== 'collecting')
+                                        <button type="button" wire:click="editarClip('{{ $project->id }}')" class="text-teal hover:underline">✎ edit clip</button>
                                     @endif
                                     @if (!empty($project->transcript['text']))
-                                        <button type="button" wire:click="editarTranscricao({{ $project->id }})" class="text-teal hover:underline">✎ editar transcrição · regenerar</button>
+                                        <button type="button" wire:click="editarTranscricao('{{ $project->id }}')" class="text-teal hover:underline">✎ edit transcript · regenerate</button>
                                     @endif
                                     @if ($project->status === 'done' && $project->output_path)
-                                        <a href="{{ route('clips-animados.media', ['project' => $project, 'download' => 1]) }}" class="text-teal hover:underline">↓ descarregar</a>
+                                        <a href="{{ route('clips-animados.media', ['id' => $project->id, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
+                                        @if ($project->finished)
+                                            <span class="text-good">✓ in Finished</span>
+                                        @else
+                                            <button type="button" wire:click="promover('{{ $project->id }}')" class="text-teal hover:underline">→ send to Finished</button>
+                                        @endif
                                     @endif
-                                    <button type="button" wire:click="apagar({{ $project->id }})"
-                                            wire:confirm="Apagar este clip e os seus ficheiros? Esta acção é definitiva."
-                                            class="text-bad hover:underline ml-auto">✕ apagar</button>
+                                    <button type="button" wire:click="apagar('{{ $project->id }}')"
+                                            wire:confirm="Delete this clip and its files? This action is permanent."
+                                            class="text-bad hover:underline ml-auto">✕ delete</button>
                                 </div>
                             </div>
                         </div>
@@ -111,120 +133,217 @@
     @endif
 
     {{-- ============================================================ --}}
-    {{-- CRIAÇÃO                                                      --}}
+    {{-- COLLECT IMAGES (upload your own, or let it be generated)     --}}
+    {{-- ============================================================ --}}
+    @if ($view === 'reviewImages')
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+
+        <x-panel eyebrow="Step · III — Images" title="Your images or generated" glyph="◆">
+            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. For each one choose: <span class="text-teal">upload</span> your own file (or pick one from the library), let it be an <span class="text-teal">AI image</span>, or <span class="text-teal">no image</span> — that scene then becomes a text visual (card / list / diagram) like the non-image scenes. A green thumbnail was matched automatically from your Assets library.</p>
+
+            <div class="space-y-2 mb-6">
+                @forelse ($this->imageRequests as $r)
+                    <div class="flex flex-wrap items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="req-{{ $r['key'] }}">
+                        @if (!empty($r['path']) && !empty($r['video']))
+                            <video src="{{ route('clips-animados.upload', basename($r['path'])) }}" muted playsinline
+                                   class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40"></video>
+                        @elseif (!empty($r['path']))
+                            <img src="{{ route('clips-animados.upload', basename($r['path'])) }}"
+                                 onerror="this.style.visibility='hidden'"
+                                 class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
+                        @else
+                            <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">{{ $r['mode'] === 'text' ? '✎' : '✦' }}</div>
+                        @endif
+
+                        <span class="flex-1 min-w-0 text-sm text-ink">
+                            {{ $r['label'] ?? (trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt']) }}
+                            @if (!empty($r['fromLibrary']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· from library</span>
+                            @elseif ($r['mode'] === 'upload')
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
+                            @elseif ($r['mode'] === 'text')
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· no image — becomes a text scene</span>
+                            @else
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· will be generated</span>
+                            @endif
+                        </span>
+
+                        {{-- What this suggestion becomes: your file · an AI image · no image at all. --}}
+                        <div class="flex items-center gap-1 font-mono text-[0.6rem] whitespace-nowrap">
+                            @php $on = 'border-teal/60 text-teal bg-teal/10'; $off = 'border-ink-soft/20 text-ink-faint hover:text-ink'; @endphp
+                            <label class="px-2 py-1 rounded-sm border cursor-pointer {{ $r['mode'] === 'upload' ? $on : $off }}">
+                                <span wire:loading.remove wire:target="reviewUploads.{{ $r['key'] }}">↑ upload</span>
+                                <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
+                                <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="reviewUploads.{{ $r['key'] }}" />
+                            </label>
+                            <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'generate')"
+                                    class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }}"
+                                    title="let the studio generate this image">✦ AI image</button>
+                            <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'text')"
+                                    class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'text' ? $on : $off }}"
+                                    title="no image — this scene becomes a card/list/diagram like the others">✎ no image</button>
+                            @if (!empty($this->libraryImages))
+                                <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')"
+                                        class="px-2 py-1 text-teal hover:opacity-70">▦ library</button>
+                            @endif
+                        </div>
+                        @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
+
+                        {{-- Library picker for this suggestion --}}
+                        @if ($libraryPickerKey === $r['key'])
+                            <div class="w-full mt-1 border-t border-ink-soft/15 pt-2">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-mono text-[0.55rem] text-ink-faint uppercase tracking-wider">Pick from library</span>
+                                    <button type="button" wire:click="abrirBibliotecaImagens('{{ $r['key'] }}')" class="font-mono text-[0.55rem] text-ink-faint hover:text-ink">close</button>
+                                </div>
+                                <div class="flex gap-2 overflow-x-auto pb-1">
+                                    @foreach ($this->libraryImages as $lib)
+                                        <button type="button" wire:click="usarImagemBiblioteca('{{ $r['key'] }}', '{{ $lib['id'] }}')"
+                                                class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
+                                            @if (!empty($lib['video']))
+                                                <video src="{{ route('clips-animados.library-image', $lib['id']) }}" muted playsinline
+                                                       class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition"></video>
+                                            @else
+                                                <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                     class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="{{ $lib['name'] }}" />
+                                            @endif
+                                            <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @empty
+                    <p class="text-ink-soft text-sm">No image suggestions for this clip.</p>
+                @endforelse
+            </div>
+
+            <button type="button" wire:click="finalizarImagens"
+                    x-on:click="window.CMLoader?.busy('Generating the animation…')"
+                    class="font-display text-lg px-6 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                ✦ Generate the rest &amp; continue →
+            </button>
+        </x-panel>
+    @endif
+
+    {{-- ============================================================ --}}
+    {{-- CREATION                                                     --}}
     {{-- ============================================================ --}}
     @if ($view === 'create')
-        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← voltar ao painel</button>
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
         @if ($createType === null)
-            {{-- passo 1: escolher tipo --}}
-            <div class="eyebrow mb-4">Passo · I — que tipo de clip?</div>
-            <div class="grid md:grid-cols-2 gap-6">
+            {{-- step 1: choose type --}}
+            <div class="eyebrow mb-4">Step · I — what kind of clip?</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <button type="button" wire:click="escolherTipo('animation')" class="text-left group">
                     <x-panel class="h-full transition group-hover:border-teal/40">
                         <div class="flex items-start justify-between">
                             <div>
-                                <div class="eyebrow mb-2">Tipo · A</div>
-                                <h2 class="font-display text-3xl text-ink">Animação</h2>
-                                <p class="mt-2 text-ink-soft">De um texto ou locução — vídeo totalmente animado, com animação em cada segundo.</p>
+                                <div class="eyebrow mb-2">Type · A</div>
+                                <h2 class="font-display text-3xl text-ink">Animation</h2>
+                                <p class="mt-2 text-ink-soft">From text or voiceover — fully animated video, with animation on every second.</p>
                             </div>
                             <span class="text-4xl text-gold/70 select-none">❈</span>
                         </div>
-                        <div class="mt-6 font-mono text-[0.62rem] text-teal">escolher →</div>
+                        <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
                     </x-panel>
                 </button>
                 <button type="button" wire:click="escolherTipo('overlay')" class="text-left group">
                     <x-panel class="h-full transition group-hover:border-teal/40">
                         <div class="flex items-start justify-between">
                             <div>
-                                <div class="eyebrow mb-2">Tipo · B</div>
-                                <h2 class="font-display text-3xl text-ink">Vídeo + Animações</h2>
-                                <p class="mt-2 text-ink-soft">De um vídeo já pronto — animações sobrepostas apenas nos momentos que valem a pena.</p>
+                                <div class="eyebrow mb-2">Type · B</div>
+                                <h2 class="font-display text-3xl text-ink">Video + Animations</h2>
+                                <p class="mt-2 text-ink-soft">From a ready-made video — overlaid animations only at the moments worth it.</p>
                             </div>
                             <span class="text-4xl text-gold/70 select-none">❖</span>
                         </div>
-                        <div class="mt-6 font-mono text-[0.62rem] text-teal">escolher →</div>
+                        <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
                     </x-panel>
                 </button>
             </div>
         @elseif ($createType === 'animation')
-            {{-- passo 2A: formulário de animação --}}
-            <x-panel eyebrow="Passo · II — Animação" title="Nova animação" glyph="❈">
-                <form wire:submit="submitAnimation" x-on:submit="window.CMLoader.busy('A preparar o clip animado…')" class="space-y-5">
+            {{-- step 2A: animation form --}}
+            <x-panel eyebrow="Step · II — Animation" title="New animation" glyph="❈">
+                <form wire:submit="submitAnimation" x-on:submit="window.CMLoader.busy('Preparing the animated clip…')" class="space-y-5">
                     <div>
-                        <label class="eyebrow block mb-2">Guião / texto para locução</label>
+                        <label class="eyebrow block mb-2">Script / text for voiceover</label>
                         <textarea wire:model="text" rows="5"
-                                  placeholder="Escreva o texto. Será convertido em locução e transcrito para obter os tempos exactos."
+                                  placeholder="Write the text. It will be converted to voiceover and transcribed to get the exact timings."
                                   class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink placeholder:text-ink-faint focus:border-teal/50 focus:outline-none"></textarea>
                         @error('text') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <div class="flex items-center gap-3">
                         <span class="h-px flex-1 bg-ink-soft/15"></span>
-                        <span class="font-mono text-[0.6rem] text-ink-faint uppercase tracking-widest">ou</span>
+                        <span class="font-mono text-[0.6rem] text-ink-faint uppercase tracking-widest">or</span>
                         <span class="h-px flex-1 bg-ink-soft/15"></span>
                     </div>
 
                     <div x-data="voiceRecorder" class="space-y-3">
-                        <label class="eyebrow block">Gravar voz</label>
+                        <label class="eyebrow block">Record voice</label>
                         <div class="flex flex-wrap items-center gap-3">
                             <button type="button" x-show="!recording" @click="start()"
                                     class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-leather/50 text-leather font-mono text-xs hover:bg-leather/10 transition">
-                                <span class="text-base leading-none">●</span> Gravar
+                                <span class="text-base leading-none">●</span> Record
                             </button>
                             <button type="button" x-show="recording" x-cloak @click="stop()"
                                     class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-bad/60 text-bad font-mono text-xs hover:bg-bad/10 transition">
-                                <span class="text-base leading-none animate-pulse">■</span> Parar · <span x-text="elapsed + 's'"></span>
+                                <span class="text-base leading-none animate-pulse">■</span> Stop · <span x-text="elapsed + 's'"></span>
                             </button>
-                            <span x-show="uploading" x-cloak class="font-mono text-[0.6rem] text-ink-faint">a enviar gravação…</span>
-                            <span x-show="ready && !recording && !uploading" x-cloak class="font-mono text-[0.6rem] text-teal">gravação pronta ✔</span>
+                            <span x-show="uploading" x-cloak class="font-mono text-[0.6rem] text-ink-faint">uploading recording…</span>
+                            <span x-show="ready && !recording && !uploading" x-cloak class="font-mono text-[0.6rem] text-teal">recording ready ✔</span>
                             <span x-show="error" x-cloak class="font-mono text-[0.6rem] text-bad" x-text="error"></span>
                         </div>
                         <audio x-ref="player" x-show="ready" x-cloak controls class="w-full rounded-sm border border-ink-soft/15"></audio>
                     </div>
 
                     <div>
-                        <label class="eyebrow block mb-2">Ou carregar locução (áudio)</label>
+                        <label class="eyebrow block mb-2">Or upload voiceover (audio)</label>
                         <input type="file" wire:model="audio" accept="audio/*"
                                class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
-                        <div wire:loading wire:target="audio" class="mt-1 font-mono text-[0.6rem] text-ink-faint">a carregar…</div>
+                        <div wire:loading wire:target="audio" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
                         @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
+
+                    @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
-                            Gerar clip animado
+                            Generate animated clip
                         </button>
-                        <span wire:loading wire:target="submitAnimation" class="font-mono text-[0.6rem] text-ink-faint">a preparar…</span>
+                        <span wire:loading wire:target="submitAnimation" class="font-mono text-[0.6rem] text-ink-faint">preparing…</span>
                     </div>
-                    <p class="font-mono text-[0.6rem] text-ink-faint">Modo denso — cada segundo da locução recebe animação.</p>
+                    <p class="font-mono text-[0.6rem] text-ink-faint">Dense mode — every second of the voiceover gets animation.</p>
                 </form>
             </x-panel>
         @elseif ($createType === 'overlay')
-            {{-- passo 2B: formulário de vídeo+animações --}}
-            <x-panel eyebrow="Passo · II — Vídeo + Animações" title="Vídeo com animações" glyph="❖">
-                <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('A preparar o clip…')" class="space-y-5">
+            {{-- step 2B: video+animations form --}}
+            <x-panel eyebrow="Step · II — Video + Animations" title="Video with animations" glyph="❖">
+                <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('Preparing the clip…')" class="space-y-5">
                     <div>
-                        <label class="eyebrow block mb-2">Carregar vídeo (mp4 / mov)</label>
+                        <label class="eyebrow block mb-2">Upload video (mp4 / mov)</label>
                         <input type="file" wire:model="video" accept="video/mp4,video/quicktime"
                                class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
-                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">a carregar…</div>
+                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
                         @error('video') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
-                        <label class="eyebrow block mb-2">Estilos permitidos</label>
+                        <label class="eyebrow block mb-2">Allowed styles</label>
                         @php
                             $styles = [
-                                'video'     => ['t' => 'Só vídeo', 'd' => 'vídeo + legendas'],
-                                'over'      => ['t' => 'Animação por cima', 'd' => 'gráfico sobre o vídeo'],
-                                'split'     => ['t' => 'Ecrã dividido', 'd' => 'animação em cima, vídeo em baixo'],
-                                'animation' => ['t' => 'Ecrã inteiro', 'd' => 'animação cobre o vídeo'],
+                                'video'     => ['t' => 'Video only', 'd' => 'video + subtitles'],
+                                'over'      => ['t' => 'Animation on top', 'd' => 'graphic over the video'],
+                                'split'     => ['t' => 'Split screen', 'd' => 'animation on top, video below'],
+                                'animation' => ['t' => 'Full screen', 'd' => 'animation covers the video'],
                             ];
                         @endphp
-                        <div class="grid sm:grid-cols-2 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             @foreach ($styles as $key => $s)
                                 <label class="cursor-pointer flex items-start gap-2 rounded-sm border p-3 transition {{ in_array($key, $allowedPresents) ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
                                     <input type="checkbox" wire:model="allowedPresents" value="{{ $key }}" class="accent-teal mt-1" />
@@ -238,70 +357,39 @@
                         @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.backdrop-picker')
+
                     @include('livewire.partials.musica-picker')
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
-                            Gerar clip
+                            Generate clip
                         </button>
-                        <span wire:loading wire:target="submitOverlay" class="font-mono text-[0.6rem] text-ink-faint">a preparar…</span>
+                        <span wire:loading wire:target="submitOverlay" class="font-mono text-[0.6rem] text-ink-faint">preparing…</span>
                     </div>
-                    <p class="font-mono text-[0.6rem] text-ink-faint">A IA intercala automaticamente os estilos escolhidos, conforme o conteúdo.</p>
+                    <p class="font-mono text-[0.6rem] text-ink-faint">The AI automatically interleaves the chosen styles, according to the content.</p>
                 </form>
             </x-panel>
         @endif
 
-        {{-- Imagens (opcional) — para ambos os tipos --}}
+        {{-- Images (optional) — for both types --}}
         @if ($createType !== null)
-            <x-panel class="mt-6" eyebrow="Opcional" title="Imagens" glyph="▣">
-                <p class="text-ink-soft text-sm mb-4">Carregue imagens e descreva o que mostram. A IA usa-as animadas nas cenas onde encaixam.</p>
-
-                @if (!empty($images))
-                    <div class="space-y-2 mb-4">
-                        @foreach ($images as $i => $img)
-                            <div class="flex items-center gap-3 bg-surface/30 border border-ink-soft/15 rounded-sm p-2" wire:key="img-{{ $i }}">
-                                <img src="{{ route('clips-animados.upload', basename($img['path'])) }}"
-                                     onerror="this.style.visibility='hidden'"
-                                     class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
-                                <span class="flex-1 min-w-0 text-sm text-ink truncate">{{ $img['description'] }}</span>
-                                <button type="button" wire:click="removerImagem({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70">✕</button>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div class="grid grid-cols-12 gap-2 items-end">
-                    <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">ficheiro</label>
-                        <input type="file" wire:model="newImage" accept="image/*"
-                               class="block w-full text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
-                        <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">a carregar…</div>
-                    </div>
-                    <div class="col-span-5">
-                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">descrição</label>
-                        <input type="text" wire:model="newImageDesc" placeholder="ex.: logótipo da empresa"
-                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
-                    </div>
-                    <div class="col-span-2">
-                        <button type="button" wire:click="adicionarImagem"
-                                class="w-full font-mono text-[0.62rem] px-3 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">+ juntar</button>
-                    </div>
-                </div>
-                @error('newImage') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
-                @error('newImageDesc') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+            <x-panel class="mt-6" eyebrow="Optional" title="Images" glyph="▣">
+                <p class="text-ink-soft text-sm mb-4">Upload images and describe what they show. The AI uses them animated in the scenes where they fit.</p>
+                @include('livewire.partials.clip-images')
             </x-panel>
         @endif
     @endif
 
     {{-- ============================================================ --}}
-    {{-- EDITAR CLIP (animações)                                      --}}
+    {{-- EDIT CLIP (animations)                                       --}}
     {{-- ============================================================ --}}
     @if ($view === 'editPlan')
         <div class="flex items-center justify-between mb-6">
-            <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">← voltar ao painel</button>
+            <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">← back to dashboard</button>
             <div class="flex gap-1 font-mono text-[0.62rem]">
                 <button type="button" wire:click="$set('editMode','cenas')"
-                        class="px-3 py-1 rounded-sm border {{ $editMode === 'cenas' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">Cenas</button>
+                        class="px-3 py-1 rounded-sm border {{ $editMode === 'cenas' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">Scenes</button>
                 <button type="button" wire:click="$set('editMode','json')"
                         class="px-3 py-1 rounded-sm border {{ $editMode === 'json' ? 'border-teal/50 text-teal' : 'border-ink-soft/20 text-ink-soft' }}">JSON (Remotion)</button>
             </div>
@@ -317,24 +405,29 @@
             </div>
         @endif
 
+        <x-panel class="mb-6" eyebrow="Uploaded" title="Images" glyph="▣">
+            <p class="text-ink-soft text-sm mb-4">Replace a picture (keeps its place in the video), or add/remove uploads. Changes re-render the current plan — a replaced image shows immediately; a newly added one only appears if a scene references it.</p>
+            @include('livewire.partials.clip-images')
+        </x-panel>
+
         @if ($editMode === 'json')
-            <x-panel eyebrow="Editar clip" title="Plano Remotion (JSON)" glyph="⌘">
+            <x-panel eyebrow="Edit clip" title="Remotion plan (JSON)" glyph="⌘">
                 <form wire:submit="guardarJson" class="space-y-4">
-                    <p class="text-ink-soft text-sm">Edita directamente o plano que vai para o Remotion (cenas, camadas, params). O áudio, karaoke e imagens são acrescentados no render.</p>
+                    <p class="text-ink-soft text-sm">Edit directly the plan that goes to Remotion (scenes, layers, params). Audio, karaoke and images are added at render.</p>
                     <textarea wire:model="editPlanJson" rows="22" spellcheck="false"
                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink font-mono text-xs leading-relaxed focus:border-teal/50 focus:outline-none" style="tab-size:2"></textarea>
                     @error('editPlanJson') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                     <div class="flex items-center gap-3">
-                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Guardar JSON e re-renderizar</button>
-                        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancelar</button>
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Save JSON and re-render</button>
+                        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
                     </div>
                 </form>
             </x-panel>
         @else
-        <x-panel eyebrow="Editar clip" title="Cenas" glyph="✎">
+        <x-panel eyebrow="Edit clip" title="Scenes" glyph="✎">
             <form wire:submit="guardarPlano" class="space-y-5">
                 <div>
-                    <label class="eyebrow block mb-2">Título</label>
+                    <label class="eyebrow block mb-2">Title</label>
                     <input type="text" wire:model="editTitle" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none" />
                 </div>
 
@@ -344,32 +437,142 @@
                     @foreach ($editScenes as $i => $scene)
                         <div class="border border-ink-soft/15 rounded-sm p-3 bg-surface/20" wire:key="scene-{{ $i }}">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="eyebrow">Cena {{ $i + 1 }} · <span class="text-ink-faint normal-case tracking-normal">{{ $scene['layersSummary'] ?? '—' }}</span></span>
-                                <button type="button" wire:click="removerCena({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remover">✕</button>
+                                <span class="eyebrow">Scene {{ $i + 1 }} · <span class="text-ink-faint normal-case tracking-normal">{{ $scene['layersSummary'] ?? '—' }}</span></span>
+                                <button type="button" wire:click="removerCena({{ $i }})" class="text-bad font-mono text-sm hover:opacity-70" title="remove">✕</button>
                             </div>
+
+                            {{-- Animation: its sample + a picker to swap it. --}}
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-14 aspect-[9/16] rounded-sm overflow-hidden bg-black/50 shrink-0 flex items-center justify-center">
+                                    @if (! empty($scene['animacao']) && in_array($scene['animacao'], $sfxReady, true))
+                                        <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $scene['animacao']) }}" autoplay loop muted playsinline onerror="this.style.display='none'"></video>
+                                    @else
+                                        <span class="font-mono text-[0.45rem] text-ink-faint text-center px-1">no sample</span>
+                                    @endif
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="font-mono text-[0.55rem] text-ink-faint">animation</div>
+                                    <div class="font-display text-ink truncate">{{ $scene['animacao'] ?? '—' }}</div>
+                                </div>
+                                <button type="button" wire:click="escolherAnimacao({{ $i }})"
+                                        class="font-mono text-[0.62rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition shrink-0">⇆ Change</button>
+                            </div>
+
+                            @if ($animacaoPickerCena === $i)
+                                <div class="mb-3 border border-teal/30 rounded-sm p-2 bg-vellum/40" @if (count($animacoes) > count($sfxReady)) wire:poll.4s @endif>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="eyebrow">Choose an animation</span>
+                                        <button type="button" wire:click="fecharAnimacoes" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">close</button>
+                                    </div>
+                                    <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 max-h-96 overflow-y-auto">
+                                        @foreach ($animacoes as $a)
+                                            <button type="button" wire:click="mudarAnimacao({{ $i }}, '{{ $a['slug'] }}')" wire:key="anim-{{ $i }}-{{ $a['slug'] }}"
+                                                    class="rounded-sm border p-1 flex flex-col transition hover:border-teal/50 {{ ($scene['animacao'] ?? null) === $a['slug'] ? 'border-teal/60 bg-teal/10' : 'border-ink-soft/15' }}">
+                                                <div class="aspect-[9/16] rounded-sm overflow-hidden bg-black/50 flex items-center justify-center">
+                                                    @if (in_array($a['slug'], $sfxReady, true))
+                                                        <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $a['slug']) }}" autoplay loop muted playsinline onerror="this.style.display='none'"></video>
+                                                    @else
+                                                        <span class="font-mono text-[0.45rem] text-ink-faint animate-pulse">rendering…</span>
+                                                    @endif
+                                                </div>
+                                                <span class="font-mono text-[0.5rem] text-ink truncate mt-1 text-center w-full">{{ $a['label'] }}</span>
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            {{-- Scene image: preview + replace (upload or pick from library). --}}
+                            @php $sceneImg = $this->sceneImages[$i] ?? null; @endphp
+                            @if ($sceneImg)
+                                @php $temImagem = !empty($sceneImg['id']); @endphp
+                                <div class="flex items-center gap-3 mb-3">
+                                    {{-- The placeholder sits BEHIND the preview: an empty slot shows it, and
+                                         so does an image that cannot be previewed yet — one just added here
+                                         is only on the record after Save, so its thumbnail 404s until then.
+                                         Without this the row collapsed to a blank gap and read as broken. --}}
+                                    <div class="relative w-14 aspect-[9/16] shrink-0 rounded-sm border border-dashed border-ink-soft/40 bg-vellum/20 flex items-center justify-center text-ink-faint text-lg">
+                                        <span aria-hidden="true">+</span>
+                                        @if ($temImagem)
+                                            @if (!empty($sceneImg['video']))
+                                                <video src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}" muted playsinline
+                                                       class="absolute inset-0 w-full h-full object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40"></video>
+                                            @else
+                                                <img src="{{ route('clips-animados.clip-image', ['id' => $editingId, 'imageId' => $sceneImg['id']]) }}"
+                                                     onerror="this.style.display='none'"
+                                                     class="absolute inset-0 w-full h-full object-cover rounded-sm border {{ $sceneImg['library'] ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="font-mono text-[0.55rem] text-ink-faint">
+                                            @if (! $temImagem)
+                                                no image yet
+                                            @else
+                                                {{ !empty($sceneImg['video']) ? 'video' : 'image' }}{{ $sceneImg['library'] ? ' · from library' : '' }}
+                                            @endif
+                                        </div>
+                                        <div class="flex items-center gap-3 font-mono text-[0.6rem] mt-1">
+                                            @if (!empty($this->libraryImages))
+                                                <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="text-teal hover:opacity-70">▦ library</button>
+                                            @endif
+                                            <label class="text-teal hover:opacity-70 cursor-pointer">
+                                                <span wire:loading.remove wire:target="sceneImageUploads.{{ $i }}">↑ {{ $temImagem ? 'replace' : 'add image' }}</span>
+                                                <span wire:loading wire:target="sceneImageUploads.{{ $i }}">uploading…</span>
+                                                <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="sceneImageUploads.{{ $i }}" />
+                                            </label>
+                                        </div>
+                                        @error('sceneImageUploads.'.$i) <p class="text-bad text-xs mt-0.5">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                @if ($sceneLibraryPicker === $i)
+                                    <div class="mb-3 border border-teal/30 rounded-sm p-2 bg-vellum/40">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="eyebrow">Pick from library</span>
+                                            <button type="button" wire:click="abrirBibliotecaCena({{ $i }})" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">close</button>
+                                        </div>
+                                        <div class="flex gap-2 overflow-x-auto pb-1">
+                                            @foreach ($this->libraryImages as $lib)
+                                                <button type="button" wire:click="usarImagemBibliotecaCena({{ $i }}, '{{ $lib['id'] }}')" wire:key="scenelib-{{ $i }}-{{ $lib['id'] }}"
+                                                        class="shrink-0 w-16 group text-left" title="{{ $lib['description'] }}">
+                                                    @if (!empty($lib['video']))
+                                                        <video src="{{ route('clips-animados.library-image', $lib['id']) }}" muted playsinline
+                                                               class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition"></video>
+                                                    @else
+                                                        <img src="{{ route('clips-animados.library-image', $lib['id']) }}"
+                                                             class="w-16 h-16 object-contain rounded-sm border border-ink-soft/20 bg-vellum/40 group-hover:border-teal transition" alt="" />
+                                                    @endif
+                                                    <span class="block font-mono text-[0.5rem] text-ink-faint truncate mt-0.5">{{ $lib['description'] ?: $lib['name'] }}</span>
+                                                </button>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">início</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">start</label>
                                     <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.start" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fim</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">end</label>
                                     <input type="number" step="any" min="0" wire:model="editScenes.{{ $i }}.end" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">fundo</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">background</label>
                                     <select wire:model="editScenes.{{ $i }}.background" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none">
                                         @foreach ($backgrounds as $bg)<option value="{{ $bg }}">{{ $bg }}</option>@endforeach
                                     </select>
                                 </div>
                                 <div class="col-span-3">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">transição</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">transition</label>
                                     <select wire:model="editScenes.{{ $i }}.transitionIn" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none">
                                         @foreach ($transitions as $tr)<option value="{{ $tr }}">{{ $tr }}</option>@endforeach
                                     </select>
                                 </div>
                                 <div class="col-span-12">
-                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">texto do elemento</label>
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">element text</label>
                                     <input type="text" wire:model="editScenes.{{ $i }}.layerText" placeholder="—" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
                                 <div class="col-span-7">
@@ -386,37 +589,208 @@
                     @error('editScenes.*.end') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                 </div>
 
-                <button type="button" wire:click="adicionarCena" class="font-mono text-[0.62rem] text-teal hover:underline">+ adicionar cena</button>
+                <button type="button" wire:click="adicionarCena" class="font-mono text-[0.62rem] text-teal hover:underline">+ add scene</button>
 
                 <div class="flex items-center gap-3 pt-2 border-t border-ink-soft/15">
-                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition mt-4">Guardar e re-renderizar</button>
-                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mt-4">cancelar</button>
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition mt-4">Save and re-render</button>
+                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mt-4">cancel</button>
                 </div>
-                <p class="font-mono text-[0.6rem] text-ink-faint">Edita o ritmo das cenas (tempos, fundo, transição, ênfase, karaoke). As camadas de cada cena são preservadas. Lacunas em modo denso preenchem-se com «ambient».</p>
+                <p class="font-mono text-[0.6rem] text-ink-faint">Edit the pacing of the scenes (timings, background, transition, emphasis, karaoke). Each scene's layers are preserved. Gaps in dense mode are filled with «ambient».</p>
             </form>
         </x-panel>
         @endif
     @endif
 
     {{-- ============================================================ --}}
-    {{-- EDITAR TRANSCRIÇÃO                                           --}}
+    {{-- EDIT TRANSCRIPT                                              --}}
     {{-- ============================================================ --}}
     @if ($view === 'editTranscript')
-        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← voltar ao painel</button>
-        <x-panel eyebrow="Editar transcrição" title="Corrigir e regenerar" glyph="✎">
-            <form wire:submit="regenerar" x-on:submit="window.CMLoader.busy('A regenerar as animações…')" class="space-y-5">
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+        <x-panel eyebrow="Edit transcript" title="Correct and regenerate" glyph="✎">
+            <form wire:submit="regenerar" x-on:submit="window.CMLoader.busy('Regenerating the animations…')" class="space-y-5">
                 <div>
-                    <label class="eyebrow block mb-2">Transcrição (corrija erros do reconhecimento)</label>
+                    <label class="eyebrow block mb-2">Transcript (correct recognition errors)</label>
                     <textarea wire:model="editTranscriptText" rows="6" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
                     @error('editTranscriptText') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                 </div>
                 <div class="flex items-center gap-3">
-                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Regenerar animações</button>
-                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancelar</button>
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Regenerate animations</button>
+                    <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
                 </div>
-                <p class="font-mono text-[0.6rem] text-ink-faint">A IA volta a planear as animações a partir do texto corrigido e renderiza de novo.</p>
+                <p class="font-mono text-[0.6rem] text-ink-faint">The AI re-plans the animations from the corrected text and renders again.</p>
             </form>
         </x-panel>
+    @endif
+
+    {{-- ============================================================ --}}
+    {{-- BACKGROUNDS STUDIO                                          --}}
+    {{-- ============================================================ --}}
+    @if ($view === 'backgrounds')
+        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+
+        <x-panel eyebrow="Backgrounds library" title="Backgrounds" glyph="◆">
+            <p class="text-ink-soft text-sm mb-5">
+                The full-screen backdrop a clip renders behind every scene. Generate an animated one from a
+                description (the AI writes a Remotion component that follows the design system and loops for any
+                length), or upload a video. Enabled backgrounds can be picked automatically by the clip generator
+                or chosen by hand when you create a clip.
+            </p>
+
+            <form wire:submit="gerarBackground" class="space-y-3 mb-6">
+                <label class="eyebrow block">Generate an animated background</label>
+                <textarea wire:model="bgPrompt" rows="3" placeholder="e.g. a slow aurora of teal and gold light drifting over deep ink, with faint floating particles"
+                          class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
+                @error('bgPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                <div class="flex items-center gap-3">
+                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
+                            wire:loading.attr="disabled" wire:target="gerarBackground">
+                        ✦ Create background
+                    </button>
+                    <span class="font-mono text-[0.6rem] text-ink-faint">Colours are locked to the design system.</span>
+                </div>
+            </form>
+
+            <form wire:submit="uploadBackground" class="space-y-3 border-t border-ink-soft/15 pt-5">
+                <label class="eyebrow block">…or upload a video background (mp4 / mov)</label>
+                <input type="text" wire:model="bgVideoName" placeholder="Name (e.g. City timelapse)"
+                       class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none" />
+                @error('bgVideoName') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                <input type="file" wire:model="bgVideo" accept="video/mp4,video/quicktime"
+                       class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                <div wire:loading wire:target="bgVideo" class="font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                @error('bgVideo') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
+                        wire:loading.attr="disabled" wire:target="bgVideo,uploadBackground">
+                    ✦ Add video background
+                </button>
+            </form>
+
+            {{-- Export / import — move backgrounds (component or mp4) between installs. --}}
+            <div class="flex flex-wrap items-center gap-3 border-t border-ink-soft/15 pt-5 mt-5">
+                @if ($this->backgrounds->isNotEmpty())
+                    <a href="{{ route('clips-animados.background-export', 'all') }}"
+                       class="font-mono text-xs px-3 py-1.5 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓ Export all backgrounds</a>
+                @endif
+                <form wire:submit="importarBackgrounds" class="flex items-center gap-2">
+                    <input type="file" wire:model="importBackgroundFile" accept="application/json,.json"
+                           class="block text-xs text-ink-soft file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-[0.6rem] file:cursor-pointer" />
+                    <button type="submit" wire:loading.attr="disabled" wire:target="importBackgroundFile,importarBackgrounds"
+                            class="font-mono text-xs px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-40">⤒ Import</button>
+                </form>
+            </div>
+            @error('importBackgroundFile') <p class="text-bad text-sm mt-2">{{ $message }}</p> @enderror
+        </x-panel>
+
+        {{-- Reel: one video cycling through every background, name centered --}}
+        @if ($this->backgrounds->isNotEmpty())
+            <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-6">
+                <div class="flex items-center justify-between gap-4 mb-3">
+                    <div>
+                        <div class="eyebrow">Preview all</div>
+                        <p class="text-ink-soft text-sm mt-1">One video that plays every background in turn, each with its name in the middle.</p>
+                    </div>
+                    <button type="button" wire:click="gerarBackgroundReel" wire:loading.attr="disabled" wire:target="gerarBackgroundReel"
+                            @if ($this->backgroundReelBusy) disabled @endif
+                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
+                        @if ($this->backgroundReelBusy) rendering… @elseif ($this->backgroundReelReady) ↻ Rebuild @else ✦ Build preview @endif
+                    </button>
+                </div>
+                @if ($this->backgroundReelBusy)
+                    <p class="font-mono text-[0.6rem] text-ink-faint">Rendering the reel — this can take a minute. It refreshes automatically.</p>
+                @elseif ($this->backgroundReelReady)
+                    <video class="rounded-sm border border-ink-soft/15 bg-black w-full max-h-[70vh]" controls preload="metadata"
+                           src="{{ route('clips-animados.background-reel') }}?v={{ now()->timestamp }}"></video>
+                @endif
+            </div>
+        @endif
+
+        {{-- Refine panel for a code background --}}
+        @if ($editingBgId)
+            <div class="foxing bg-vellum/60 border border-teal/30 rounded-sm p-4 mt-6">
+                <form wire:submit="guardarBackgroundEdicao" class="space-y-3">
+                    <label class="eyebrow block">Refine this background</label>
+                    <textarea wire:model="bgEditPrompt" rows="3"
+                              class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
+                    @error('bgEditPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                    <div class="flex items-center gap-3">
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">✦ Regenerate</button>
+                        <button type="button" wire:click="cancelarBackgroundEdicao" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
+                        <span class="font-mono text-[0.6rem] text-ink-faint">Same slug; the live version stays until the new one renders.</span>
+                    </div>
+                </form>
+            </div>
+        @endif
+
+        {{-- Backgrounds grid --}}
+        @if ($this->backgrounds->isNotEmpty())
+            <div class="mt-8">
+                <div class="flex items-baseline justify-between mb-4 gap-3">
+                    <div class="eyebrow">Your backgrounds · {{ $this->backgrounds->count() }}</div>
+                    <span class="font-mono text-[0.55rem] text-ink-faint">● on = pickable for clips · ○ off = kept but not used</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    @foreach ($this->backgrounds as $bg)
+                        <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition {{ $bg->status === 'active' && ! $bg->enabled ? 'opacity-60' : '' }}" wire:key="bg-{{ $bg->id }}">
+                            <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
+                                @if (in_array($bg->id, $bgReady, true) && in_array($bg->status, ['active', 'updating'], true))
+                                    <video class="w-full h-full object-cover" src="{{ route('clips-animados.background-preview', $bg->id) }}" autoplay loop muted playsinline></video>
+                                    @if ($bg->status === 'updating')
+                                        <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
+                                            <p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p>
+                                        </div>
+                                    @endif
+                                    @if ($bg->kind === 'video')
+                                        <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-ink/40 text-vellum border border-vellum/20">video</div>
+                                    @endif
+                                @elseif ($bg->status === 'failed')
+                                    <div class="p-2 text-center">
+                                        <div class="text-bad text-lg">✕</div>
+                                        <p class="font-mono text-[0.52rem] text-bad/90 mt-1 line-clamp-4">{{ \Illuminate\Support\Str::limit($bg->error, 120) }}</p>
+                                    </div>
+                                @else
+                                    <div class="text-center">
+                                        <div class="h-1 w-16 mx-auto bg-surface/40 rounded-full overflow-hidden">
+                                            <div class="h-full bg-teal/60 animate-pulse w-2/3"></div>
+                                        </div>
+                                        <p class="font-mono text-[0.52rem] text-ink-faint mt-2">{{ $bg->status === 'updating' ? 'Updating…' : 'Generating…' }}</p>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="flex items-start justify-between gap-1 mt-2">
+                                <div class="min-w-0">
+                                    <p class="font-display text-sm text-ink truncate">{{ $bg->display_name }}</p>
+                                    <p class="font-mono text-[0.5rem] text-ink-faint truncate">{{ in_array($bg->status, ['active', 'updating'], true) ? $bg->slug : $bg->status }}</p>
+                                    @if ($bg->status === 'active' && $bg->error)
+                                        <p class="font-mono text-[0.5rem] text-bad/80 truncate" title="{{ $bg->error }}">⚠ {{ $bg->error }}</p>
+                                    @endif
+                                </div>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    @if ($bg->status === 'active')
+                                        <button type="button" wire:click="alternarBackground('{{ $bg->id }}')"
+                                                title="{{ $bg->enabled ? 'Pickable for clips — click to disable' : 'Disabled — click to enable' }}"
+                                                class="font-mono text-[0.62rem] px-2 py-1 rounded-sm border {{ $bg->enabled ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">
+                                            {{ $bg->enabled ? '● on' : '○ off' }}
+                                        </button>
+                                        @if ($bg->kind !== 'video')
+                                            <button type="button" wire:click="editarBackground('{{ $bg->id }}')" title="Refine this background"
+                                                    class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎</button>
+                                        @endif
+                                        <a href="{{ route('clips-animados.background-export', $bg->id) }}" title="Export this background"
+                                           class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">⤓</a>
+                                    @endif
+                                    <button type="button" wire:click="apagarBackground('{{ $bg->id }}')"
+                                            wire:confirm="Delete this background? Clips already rendered keep their video." title="Delete this background"
+                                            class="text-sm leading-none px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <x-empty-state glyph="◇" title="No backgrounds yet" note="Generate an animated backdrop or upload a video to get started." />
+        @endif
     @endif
 
     @script
@@ -427,7 +801,7 @@
 
             async start() {
                 this.error = null;
-                if (!navigator.mediaDevices?.getUserMedia) { this.error = 'Gravação não suportada neste navegador.'; return; }
+                if (!navigator.mediaDevices?.getUserMedia) { this.error = 'Recording not supported in this browser.'; return; }
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     this.chunks = [];
@@ -437,7 +811,7 @@
                     this.recorder.start();
                     this.recording = true; this.ready = false; this.elapsed = 0;
                     this.timer = setInterval(() => this.elapsed++, 1000);
-                } catch (e) { this.error = 'Sem acesso ao microfone.'; }
+                } catch (e) { this.error = 'No microphone access.'; }
             },
             stop() {
                 clearInterval(this.timer);
@@ -453,7 +827,7 @@
                 this.uploading = true;
                 this.$wire.upload('audio', file,
                     () => { this.uploading = false; },
-                    () => { this.uploading = false; this.error = 'Falha ao enviar a gravação.'; },
+                    () => { this.uploading = false; this.error = 'Failed to upload the recording.'; },
                     () => {}
                 );
             },

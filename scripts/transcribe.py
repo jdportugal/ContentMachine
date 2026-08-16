@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Transcrição local com Whisper (word-level) — o equivalente independente ao
-endpoint /generate-subtitles do serviço Flask "ShortsCreator".
+Local transcription with Whisper (word-level) — the standalone equivalent of the
+/generate-subtitles endpoint of the Flask "ShortsCreator" service.
 
-Corre com faster-whisper (preferido, sem torch) ou, em alternativa, com o
-openai-whisper. Imprime em stdout o `subtitle_data` no MESMO formato do
-original, para ser deslocado por clip e gravado como legendas:
+Runs with faster-whisper (preferred, no torch) or, alternatively, with
+openai-whisper. Prints `subtitle_data` to stdout in the SAME format as the
+original, to be shifted per clip and saved as subtitles:
 
     [{"start": float, "end": float, "text": str,
       "words": [{"word": str, "start": float, "end": float}]}]
 
-Uso:
+Usage:
     python3 transcribe.py --input video.mp4 --language pt --model tiny
 """
 import argparse
@@ -82,12 +82,12 @@ def main():
             data = transcribe_openai_whisper(args.input, args.language, args.model)
     except ImportError:
         sys.stderr.write(
-            "Nem faster-whisper nem openai-whisper estão instalados. "
-            "Instale um deles: pip install faster-whisper\n"
+            "Neither faster-whisper nor openai-whisper is installed. "
+            "Install one of them: pip install faster-whisper\n"
         )
         sys.exit(2)
     except Exception as exc:  # noqa: BLE001
-        sys.stderr.write(f"Erro na transcrição: {exc}\n")
+        sys.stderr.write(f"Transcription error: {exc}\n")
         sys.exit(1)
 
     json.dump({"subtitle_data": data}, sys.stdout, ensure_ascii=False)

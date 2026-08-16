@@ -8,7 +8,7 @@ use Throwable;
 /**
  * Turns the freeform design-system Markdown into a structured theme (colours,
  * fonts, texture) that the Remotion renderer consumes. Uses the authenticated
- * `claude` CLI. Any failure (no CLI, bad JSON, timeout) falls back to the IATECA
+ * `claude` CLI. Any failure (no CLI, bad JSON, timeout) falls back to the Brand Machine
  * defaults so a render is never blocked.
  */
 class DesignThemeExtractor
@@ -42,46 +42,67 @@ class DesignThemeExtractor
     private function systemPrompt(): string
     {
         return <<<'PROMPT'
-        És um sistema que converte um guia de design (Markdown) num conjunto de tokens
-        para um motor de renderização de vídeo. Devolves SEMPRE e APENAS um objeto JSON
-        válido (sem markdown, sem comentários, sem texto à volta), nesta forma EXACTA:
+        You are a system that converts a design guide (Markdown) into a set of tokens
+        for a video rendering engine. You ALWAYS return ONLY a valid JSON object
+        (no markdown, no comments, no surrounding text), in this EXACT shape:
 
         {
           "colors": {
-            "bg": "#rrggbb",            // fundo principal
-            "bgAlt": "#rrggbb",         // superfície alternativa (cartões)
-            "bgContrast": "#rrggbb",    // fundo de contraste (o mais escuro/forte)
-            "textOnBg": "#rrggbb",      // texto sobre bg/bgAlt (TEM de contrastar)
-            "textOnContrast": "#rrggbb",// texto sobre bgContrast (TEM de contrastar)
-            "mutedOnBg": "#rrggbb",     // texto secundário sobre bg
+            "bg": "#rrggbb",            // main background
+            "bgAlt": "#rrggbb",         // alternative surface (cards)
+            "bgContrast": "#rrggbb",    // contrast background (the darkest/strongest)
+            "textOnBg": "#rrggbb",      // text over bg/bgAlt (MUST contrast)
+            "textOnContrast": "#rrggbb",// text over bgContrast (MUST contrast)
+            "mutedOnBg": "#rrggbb",     // secondary text over bg
             "mutedOnContrast": "#rrggbb",
-            "accent": "#rrggbb",        // cor de destaque principal
-            "accent2": "#rrggbb",       // destaque secundário
-            "accent3": "#rrggbb"        // terceiro destaque/ornamento
+            "accent": "#rrggbb",        // primary accent color
+            "accent2": "#rrggbb",       // secondary accent
+            "accent3": "#rrggbb"        // third accent/ornament
           },
           "fonts": {
-            "display": "Nome de família Google Fonts",  // títulos
-            "body": "Nome de família Google Fonts",     // corpo
-            "mono": "Nome de família Google Fonts"       // monoespaçada
+            "display": "Google Fonts family name",  // headings
+            "displayWeight": 400,                   // primary heading weight (100-900)
+            "body": "Google Fonts family name",     // body
+            "bodyWeight": 400,                      // primary body weight (100-900)
+            "mono": "Google Fonts family name"       // monospaced
           },
-          "texture": { "kind": "paper" | "starfield" | "gradient" | "solid" }
+          "texture": { "kind": "paper" | "starfield" | "gradient" | "solid" },
+          "style": {
+            "headline": "gradient" | "flat",   // flat = solid ink colour titles, no gradient
+            "shadow": "soft" | "hard",          // hard = offset block shadow (Npx Npx 0)
+            "panelBorder": 0,                    // px of solid ink border on cards (0-8)
+            "sharp": true | false,               // true = square corners (no radius)
+            "uppercaseTitles": true | false
+          }
         }
 
-        REGRAS:
-        - Extrai as cores REAIS do design (paleta, fundos, destaques). Usa hex #rrggbb.
-        - Garante CONTRASTE: se o fundo for escuro, o texto tem de ser claro (e vice-versa).
-        - As fontes TÊM de ser nomes reais do Google Fonts (ex.: "Anton", "Inter",
-          "Montserrat", "Playfair Display"). Se o design indicar uma fonte não-Google,
-          escolhe a alternativa Google Fonts mais próxima.
-        - texture.kind: "starfield" para temas espaciais/escuros com estrelas; "gradient"
-          para degradés; "solid" para fundo liso; "paper" para papel/textura orgânica.
-        - Responde SÓ com o JSON.
+        RULES:
+        - Extract the REAL colors from the design (palette, backgrounds, accents). Use hex #rrggbb.
+        - Ensure CONTRAST: if the background is dark, the text must be light (and vice-versa).
+        - Fonts MUST be real Google Fonts names (e.g. "Anton", "Inter",
+          "Montserrat", "Playfair Display"). If the design specifies a non-Google font,
+          choose the closest Google Fonts alternative.
+        - displayWeight / bodyWeight: the WEIGHT the design specifies for headings and
+          body (e.g. "Fraunces 900" -> displayWeight 900; "Spline Sans 400/600/700" ->
+          bodyWeight 400, the base weight). Use the heaviest weight named for headings.
+          If no weight is stated, use 700 for display and 400 for body.
+        - texture.kind: "starfield" for dark/space themes with stars; "gradient"
+          for gradients; "solid" for a FLAT single-colour background; "paper" for a flat
+          background with a subtle dot/halftone/grain texture. If the design says "flat",
+          "no gradients", "tinta plana" or shows a solid colour with dots, use "paper" or
+          "solid" — NOT "gradient".
+        - style: read the design's TREATMENT. Bold serif titles, hard/offset block shadows
+          ("Npx Npx 0", "sombra dura"), thick borders and square corners = a print/brutalist
+          look -> headline "flat", shadow "hard", panelBorder 3, sharp true, uppercaseTitles
+          true (if titles are caixa alta/uppercase). Soft glows, gradients and rounded cards
+          -> headline "gradient", shadow "soft", panelBorder 0, sharp false. Choose per the design.
+        - Reply ONLY with the JSON.
         PROMPT;
     }
 
     private function userPrompt(string $markdown): string
     {
-        return "Guia de design (Markdown):\n\n".$markdown."\n\nDevolve o JSON de tokens.";
+        return "Design guide (Markdown):\n\n".$markdown."\n\nReturn the tokens JSON.";
     }
 
     /** Strip code fences and decode the first JSON object found. */

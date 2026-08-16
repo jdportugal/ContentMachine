@@ -1,0 +1,1176 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "AI Firms Are Buying Old Books in Bulk — Then Shredding Them",
+    "source_text": "AI companies are buying antique books in bulk, scanning them, and shredding the originals.\n A 404 Media investigation published 21 July 2026 identified ISBNdb as a broker marketing physical-book acquisition to AI developers at volumes of 1,000 to 1 million titles per order, with buyer anonymity and NDAs included. Pre-2022 print commands a premium precisely because it predates generative text — it is guaranteed to be human-written and free of AI slop. The destruction is a cost choice rather than a technical necessity: machines like the Treventus ScanRobot digitize fragile volumes non-destructively at 2,500 pages per hour, but cutting spines off is cheaper at industrial scale, and a 2025 US court ruling treated destructive scanning of legally purchased books as fair use. One caveat worth keeping: neither ISBNdb's marketing nor the public reporting ties a specific completed order to a named AI buyer.",
+    "source_path": null,
+    "images": null,
+    "meta": {
+        "background": "auto",
+        "musica": "free-flow.mp3",
+        "musica_volume": 0.5,
+        "research": {
+            "topic": "AI companies buying and destructively scanning old print books",
+            "summary": "A 404 Media investigation published 21 July 2026 identified ISBNdb as a broker marketing bulk print-book acquisition to AI developers, pitching pre-2022 books as training data free of AI-generated text, with strict NDAs and orders of 1,000 to 1 million books. The only court-proven case of mass destruction is Anthropic's 'Project Panama', unsealed in Bartz v. Anthropic, where a 2025 ruling treated destructive scanning of legally purchased books as fair use.",
+            "timeline": [
+                {
+                    "label": "Anthropic ramps up 'Project Panama' to destructively scan books",
+                    "sublabel": "early 2024"
+                },
+                {
+                    "label": "Judge Alsup: training is fair use; destroying the purchased print original is a lawful format shift",
+                    "sublabel": "23 June 2025"
+                },
+                {
+                    "label": "4,000+ pages unsealed; Washington Post reveals Project Panama",
+                    "sublabel": "27 January 2026"
+                },
+                {
+                    "label": "Booksellers report sudden bulk orders of obscure and out-of-print titles",
+                    "sublabel": "from April 2026"
+                },
+                {
+                    "label": "Court grants final approval to Anthropic's $1.5B pirated-books settlement",
+                    "sublabel": "20 July 2026"
+                },
+                {
+                    "label": "404 Media identifies ISBNdb brokering print books to AI labs under NDA",
+                    "sublabel": "21 July 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "ISBNdb minimum order",
+                    "value": 1000,
+                    "unit": "books"
+                },
+                {
+                    "label": "ISBNdb maximum advertised order",
+                    "value": 1000000,
+                    "unit": "books"
+                },
+                {
+                    "label": "Treventus ScanRobot 2.0 MDS non-destructive speed",
+                    "value": 2500,
+                    "unit": "pages/hour"
+                },
+                {
+                    "label": "Pirated book copies in Anthropic's court record",
+                    "value": 7000000,
+                    "unit": "copies"
+                },
+                {
+                    "label": "Anthropic settlement, final approval July 2026",
+                    "value": 1500000000,
+                    "unit": "USD"
+                },
+                {
+                    "label": "Approx. gross settlement payout per work",
+                    "value": 3000,
+                    "unit": "USD"
+                },
+                {
+                    "label": "Court pages unsealed in Bartz v. Anthropic",
+                    "value": 4000,
+                    "unit": "pages"
+                },
+                {
+                    "label": "Google Books titles digitized non-destructively",
+                    "value": 40000000,
+                    "unit": "books"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Two ways to digitize a book",
+                    "left": {
+                        "title": "Destructive (industrial)",
+                        "points": [
+                            "Hydraulic cutter slices off the spine",
+                            "Loose pages fed through high-speed scanner",
+                            "Paper recycled; no physical copy survives",
+                            "Ruled fair use for legally bought copies, June 2025"
+                        ]
+                    },
+                    "right": {
+                        "title": "Non-destructive (robotic)",
+                        "points": [
+                            "ScanRobot 2.0 MDS: 2,500 pages/hour",
+                            "Vacuum and air jets turn pages; 60° cradle",
+                            "Book stays intact and reshelvable",
+                            "Google Books returns library volumes after scanning"
+                        ]
+                    }
+                },
+                {
+                    "title": "What is proven vs what is not",
+                    "left": {
+                        "title": "Documented in court",
+                        "points": [
+                            "Anthropic's Project Panama, from unsealed filings",
+                            "Internal doc: 'destructively scan all the books in the world'",
+                            "Tens of millions of USD spent on acquisition and scanning",
+                            "Ex-Google Books executive Tom Turvey hired to source books"
+                        ]
+                    },
+                    "right": {
+                        "title": "Unconfirmed",
+                        "points": [
+                            "No named AI buyer tied to a completed ISBNdb order",
+                            "No confirmation a million-book order was ever filled",
+                            "Fate of brokered books not established",
+                            "One 70-book order traced to resale arbitrage, not AI"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "ISBNdb pitches pre-2022 print as structurally free of AI slop: it predates generative text.",
+                "Marketing promises a strict NDA on every engagement so identity, strategy and acquisition targets stay hidden.",
+                "ISBNdb's own copy concedes the optics problem: 'AI company destroys two million books' is not a sympathetic headline.",
+                "Destruction is a cost decision, not a technical one: robots scan fragile books intact at 2,500 pages/hour.",
+                "Alsup's fair-use ruling is a district-court decision only; Anthropic settled, so no appellate precedent exists.",
+                "The same ruling found Anthropic's library of 7M+ pirated books was not fair use, leading to a $1.5B settlement.",
+                "One bookseller told 404 Media weekly sales jumped from under 20 books to several hundred starting April 2026.",
+                "Concern centers on rare, foreign-language and out-of-print titles where few copies remain in circulation."
+            ],
+            "sources": [
+                "https://www.404media.co/ai-companies-are-buying-tons-of-old-books-because-theyre-free-of-ai-slop/",
+                "https://news.slashdot.org/story/26/07/21/206243/ai-companies-are-buying-tons-of-old-books-because-theyre-free-of-ai-slop",
+                "https://isbndb.com/print-books-for-ai-training",
+                "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-companies-are-reportedly-shredding-millions-of-books-to-train-models-tech-giants-outsource-to-middlemen-to-secretly-buy-up-books-for-training-material",
+                "https://www.pcgamer.com/software/ai/ai-companies-are-anonymously-buying-and-destroying-millions-of-books-through-middleman-services-to-avoid-headlines-about-ai-companies-buying-and-destroying-millions-of-books/",
+                "https://futurism.com/artificial-intelligence/ai-companies-destroying-rare-books",
+                "https://mlq.ai/news/what-the-evidence-actually-shows-about-ai-companies-destroying-books/",
+                "https://www.washingtonpost.com/technology/2026/01/27/anthropic-ai-scan-destroy-books/",
+                "https://authorsguild.org/news/mixed-decision-in-anthropic-ai-case/",
+                "https://www.boyarmiller.com/bartz-v-anthropic-a-split-decision-that-reshapes-ai-copyright-law/",
+                "https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/",
+                "https://www.jurist.org/news/2026/07/judge-approves-record-1-5-billion-settlement-involving-anthropic/",
+                "https://locusmag.com/2026/07/anthropic-settlement-receives-final-approval/",
+                "https://www.popsci.com/technology/book-scanning-robot/",
+                "https://www.treventus.com/scanner/automatic-book-scanner",
+                "https://blog.google/products/search/google-books-library-project/",
+                "https://newsonline.library.vanderbilt.edu/2025/09/260000-volumes-from-vanderbilts-heard-libraries-to-be-digitized-by-google-books/"
+            ]
+        },
+        "suggested": {
+            "title": "AI Firms Are Buying Old Books in Bulk — Then Shredding Them",
+            "description": "A July 2026 investigation found brokers marketing bulk physical book acquisition to AI developers, offering 1,000 to 1 million titles per order with buyer anonymity and NDAs attached. Pre-2022 print sells at a premium because it's guaranteed human-written, and destructive scanning is chosen for cost rather than necessity — non-destructive robots exist, but cutting spines is cheaper at scale. No public reporting has yet tied a specific completed order to a named AI buyer.",
+            "tags": [
+                "ai training data",
+                "book scanning",
+                "404 media",
+                "generative ai",
+                "copyright",
+                "fair use",
+                "tech news",
+                "data ethics"
+            ]
+        }
+    },
+    "id": "ai-companies-are-buying-antique-books-in-z20wi",
+    "created_at": "2026-07-29T18:05:23+00:00",
+    "updated_at": "2026-07-30T08:37:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-companies-are-buying-antique-books-in-z20wi/voz.mp3",
+    "transcript": {
+        "duration": 73.51000213623047,
+        "text": "AI companies are buying antique books in bulk, scanning them and shredding the originals. A 404 media investigation published 20-ver-sil-July-2026 identified ISBNB as a broker marketing physical book acquisition to AI developers at volumes of 1,000 to 1 million titles per order, with buyer anonymity and NDAs included. Pre-2022 print commands are premium precisely because it predates generative text. It is guaranteed to be human-written and free of AI slop. The destruction is a cost choice rather than a technical necessity. Machines like the Treventa scan robot digitize fragile volumes non-destructively at 2,500 pages per hour. But cutting spines off is cheaper at industrial scale, and a 2025 U.S. court ruling treated destructive scanning of legally purchased books as fair use. One caveat worth keeping, neither ISBNB's marketing nor the public reporting ties a specific completed order to a named AI buyer.",
+        "language": "english",
+        "words": [
+            {
+                "word": "AI",
+                "start": 0,
+                "end": 0.41999998688697815
+            },
+            {
+                "word": "companies",
+                "start": 0.41999998688697815,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "are",
+                "start": 0.7599999904632568,
+                "end": 1.1799999475479126
+            },
+            {
+                "word": "buying",
+                "start": 1.1799999475479126,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "antique",
+                "start": 1.2200000286102295,
+                "end": 1.7599999904632568
+            },
+            {
+                "word": "books",
+                "start": 1.7599999904632568,
+                "end": 2.0399999618530273
+            },
+            {
+                "word": "in",
+                "start": 2.0399999618530273,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "bulk,",
+                "start": 2.740000009536743,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "scanning",
+                "start": 3.640000104904175,
+                "end": 3.640000104904175
+            },
+            {
+                "word": "them",
+                "start": 3.640000104904175,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "and",
+                "start": 4.059999942779541,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "shredding",
+                "start": 4.679999828338623,
+                "end": 5.039999961853027
+            },
+            {
+                "word": "the",
+                "start": 5.039999961853027,
+                "end": 5.420000076293945
+            },
+            {
+                "word": "originals.",
+                "start": 5.420000076293945,
+                "end": 5.980000019073486
+            },
+            {
+                "word": "A",
+                "start": 7.079999923706055,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "404",
+                "start": 7.159999847412109,
+                "end": 7.940000057220459
+            },
+            {
+                "word": "media",
+                "start": 7.940000057220459,
+                "end": 8.300000190734863
+            },
+            {
+                "word": "investigation",
+                "start": 8.300000190734863,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "published",
+                "start": 8.979999542236328,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "20-ver-sil-July-2026",
+                "start": 9.72,
+                "end": 10.24
+            },
+            {
+                "word": "identified",
+                "start": 10.24,
+                "end": 10.76
+            },
+            {
+                "word": "ISBNB",
+                "start": 10.76,
+                "end": 11.279
+            },
+            {
+                "word": "as",
+                "start": 11.279,
+                "end": 11.799
+            },
+            {
+                "word": "a",
+                "start": 11.799,
+                "end": 12.319
+            },
+            {
+                "word": "broker",
+                "start": 12.319,
+                "end": 12.839
+            },
+            {
+                "word": "marketing",
+                "start": 12.839,
+                "end": 13.358
+            },
+            {
+                "word": "physical",
+                "start": 13.358,
+                "end": 13.878
+            },
+            {
+                "word": "book",
+                "start": 13.878,
+                "end": 14.398
+            },
+            {
+                "word": "acquisition",
+                "start": 14.398,
+                "end": 14.918
+            },
+            {
+                "word": "to",
+                "start": 14.918,
+                "end": 15.438
+            },
+            {
+                "word": "AI",
+                "start": 15.438,
+                "end": 15.957
+            },
+            {
+                "word": "developers",
+                "start": 15.957,
+                "end": 16.477
+            },
+            {
+                "word": "at",
+                "start": 16.477,
+                "end": 16.997
+            },
+            {
+                "word": "volumes",
+                "start": 16.997,
+                "end": 17.517
+            },
+            {
+                "word": "of",
+                "start": 17.517,
+                "end": 18.036
+            },
+            {
+                "word": "1,000",
+                "start": 18.036,
+                "end": 18.556
+            },
+            {
+                "word": "to",
+                "start": 18.556,
+                "end": 19.076
+            },
+            {
+                "word": "1",
+                "start": 19.076,
+                "end": 19.596
+            },
+            {
+                "word": "million",
+                "start": 19.596,
+                "end": 20.116
+            },
+            {
+                "word": "titles",
+                "start": 20.116,
+                "end": 20.635
+            },
+            {
+                "word": "per",
+                "start": 20.635,
+                "end": 21.155
+            },
+            {
+                "word": "order,",
+                "start": 21.155,
+                "end": 21.675
+            },
+            {
+                "word": "with",
+                "start": 21.675,
+                "end": 22.195
+            },
+            {
+                "word": "buyer",
+                "start": 22.195,
+                "end": 22.714
+            },
+            {
+                "word": "anonymity",
+                "start": 22.714,
+                "end": 23.234
+            },
+            {
+                "word": "and",
+                "start": 23.234,
+                "end": 23.754
+            },
+            {
+                "word": "NDAs",
+                "start": 23.754,
+                "end": 24.274
+            },
+            {
+                "word": "included.",
+                "start": 24.274,
+                "end": 24.794
+            },
+            {
+                "word": "Pre-2022",
+                "start": 24.794,
+                "end": 25.313
+            },
+            {
+                "word": "print",
+                "start": 25.313,
+                "end": 25.833
+            },
+            {
+                "word": "commands",
+                "start": 25.833,
+                "end": 26.353
+            },
+            {
+                "word": "are",
+                "start": 26.353,
+                "end": 26.873
+            },
+            {
+                "word": "premium",
+                "start": 26.873,
+                "end": 27.392
+            },
+            {
+                "word": "precisely",
+                "start": 27.392,
+                "end": 27.912
+            },
+            {
+                "word": "because",
+                "start": 27.912,
+                "end": 28.432
+            },
+            {
+                "word": "it",
+                "start": 28.432,
+                "end": 28.952
+            },
+            {
+                "word": "predates",
+                "start": 28.952,
+                "end": 29.472
+            },
+            {
+                "word": "generative",
+                "start": 29.472,
+                "end": 29.991
+            },
+            {
+                "word": "text.",
+                "start": 29.991,
+                "end": 30.511
+            },
+            {
+                "word": "It",
+                "start": 30.511,
+                "end": 31.031
+            },
+            {
+                "word": "is",
+                "start": 31.031,
+                "end": 31.551
+            },
+            {
+                "word": "guaranteed",
+                "start": 31.551,
+                "end": 32.07
+            },
+            {
+                "word": "to",
+                "start": 32.07,
+                "end": 32.59
+            },
+            {
+                "word": "be",
+                "start": 32.59,
+                "end": 33.11
+            },
+            {
+                "word": "human-written",
+                "start": 33.11,
+                "end": 33.63
+            },
+            {
+                "word": "and",
+                "start": 33.63,
+                "end": 34.15
+            },
+            {
+                "word": "free",
+                "start": 34.15,
+                "end": 34.669
+            },
+            {
+                "word": "of",
+                "start": 34.669,
+                "end": 35.189
+            },
+            {
+                "word": "AI",
+                "start": 35.189,
+                "end": 35.709
+            },
+            {
+                "word": "slop.",
+                "start": 35.709,
+                "end": 36.229
+            },
+            {
+                "word": "The",
+                "start": 36.229,
+                "end": 36.748
+            },
+            {
+                "word": "destruction",
+                "start": 36.748,
+                "end": 37.268
+            },
+            {
+                "word": "is",
+                "start": 37.268,
+                "end": 37.788
+            },
+            {
+                "word": "a",
+                "start": 37.788,
+                "end": 38.308
+            },
+            {
+                "word": "cost",
+                "start": 38.308,
+                "end": 38.828
+            },
+            {
+                "word": "choice",
+                "start": 38.828,
+                "end": 39.347
+            },
+            {
+                "word": "rather",
+                "start": 39.347,
+                "end": 39.867
+            },
+            {
+                "word": "than",
+                "start": 39.867,
+                "end": 40.387
+            },
+            {
+                "word": "a",
+                "start": 40.387,
+                "end": 40.907
+            },
+            {
+                "word": "technical",
+                "start": 40.907,
+                "end": 41.426
+            },
+            {
+                "word": "necessity.",
+                "start": 41.426,
+                "end": 41.946
+            },
+            {
+                "word": "Machines",
+                "start": 41.946,
+                "end": 42.466
+            },
+            {
+                "word": "like",
+                "start": 42.466,
+                "end": 42.986
+            },
+            {
+                "word": "the",
+                "start": 42.986,
+                "end": 43.506
+            },
+            {
+                "word": "Treventa",
+                "start": 43.506,
+                "end": 44.025
+            },
+            {
+                "word": "scan",
+                "start": 44.025,
+                "end": 44.545
+            },
+            {
+                "word": "robot",
+                "start": 44.545,
+                "end": 45.065
+            },
+            {
+                "word": "digitize",
+                "start": 45.065,
+                "end": 45.585
+            },
+            {
+                "word": "fragile",
+                "start": 45.585,
+                "end": 46.104
+            },
+            {
+                "word": "volumes",
+                "start": 46.104,
+                "end": 46.624
+            },
+            {
+                "word": "non-destructively",
+                "start": 46.624,
+                "end": 47.144
+            },
+            {
+                "word": "at",
+                "start": 47.144,
+                "end": 47.664
+            },
+            {
+                "word": "2,500",
+                "start": 47.664,
+                "end": 48.184
+            },
+            {
+                "word": "pages",
+                "start": 48.184,
+                "end": 48.703
+            },
+            {
+                "word": "per",
+                "start": 48.703,
+                "end": 49.223
+            },
+            {
+                "word": "hour.",
+                "start": 49.223,
+                "end": 49.743
+            },
+            {
+                "word": "But",
+                "start": 49.743,
+                "end": 50.263
+            },
+            {
+                "word": "cutting",
+                "start": 50.263,
+                "end": 50.782
+            },
+            {
+                "word": "spines",
+                "start": 50.782,
+                "end": 51.302
+            },
+            {
+                "word": "off",
+                "start": 51.302,
+                "end": 51.822
+            },
+            {
+                "word": "is",
+                "start": 51.822,
+                "end": 52.342
+            },
+            {
+                "word": "cheaper",
+                "start": 52.342,
+                "end": 52.862
+            },
+            {
+                "word": "at",
+                "start": 52.862,
+                "end": 53.381
+            },
+            {
+                "word": "industrial",
+                "start": 53.381,
+                "end": 53.901
+            },
+            {
+                "word": "scale,",
+                "start": 53.901,
+                "end": 54.421
+            },
+            {
+                "word": "and",
+                "start": 54.421,
+                "end": 54.941
+            },
+            {
+                "word": "a",
+                "start": 54.941,
+                "end": 55.46
+            },
+            {
+                "word": "2025",
+                "start": 55.46,
+                "end": 55.98
+            },
+            {
+                "word": "U.S.",
+                "start": 55.98,
+                "end": 56.5
+            },
+            {
+                "word": "court",
+                "start": 56.5,
+                "end": 56.560001373291016
+            },
+            {
+                "word": "ruling",
+                "start": 56.560001373291016,
+                "end": 56.91999816894531
+            },
+            {
+                "word": "treated",
+                "start": 57.060001373291016,
+                "end": 57.86000061035156
+            },
+            {
+                "word": "destructive",
+                "start": 57.86000061035156,
+                "end": 58.540000915527344
+            },
+            {
+                "word": "scanning",
+                "start": 58.540000915527344,
+                "end": 58.97999954223633
+            },
+            {
+                "word": "of",
+                "start": 58.97999954223633,
+                "end": 59.439998626708984
+            },
+            {
+                "word": "legally",
+                "start": 59.439998626708984,
+                "end": 59.7400016784668
+            },
+            {
+                "word": "purchased",
+                "start": 59.7400016784668,
+                "end": 60.2599983215332
+            },
+            {
+                "word": "books",
+                "start": 60.2599983215332,
+                "end": 60.65999984741211
+            },
+            {
+                "word": "as",
+                "start": 60.65999984741211,
+                "end": 61.540000915527344
+            },
+            {
+                "word": "fair",
+                "start": 61.540000915527344,
+                "end": 61.91999816894531
+            },
+            {
+                "word": "use.",
+                "start": 61.91999816894531,
+                "end": 62.52000045776367
+            },
+            {
+                "word": "One",
+                "start": 63.599998474121094,
+                "end": 63.79999923706055
+            },
+            {
+                "word": "caveat",
+                "start": 63.79999923706055,
+                "end": 64.16000366210938
+            },
+            {
+                "word": "worth",
+                "start": 64.16000366210938,
+                "end": 64.54000091552734
+            },
+            {
+                "word": "keeping,",
+                "start": 64.54000091552734,
+                "end": 64.87999725341797
+            },
+            {
+                "word": "neither",
+                "start": 66.18000030517578,
+                "end": 66.9800033569336
+            },
+            {
+                "word": "ISBNB's",
+                "start": 66.9800033569336,
+                "end": 67.77999877929688
+            },
+            {
+                "word": "marketing",
+                "start": 67.77999877929688,
+                "end": 67.77999877929688
+            },
+            {
+                "word": "nor",
+                "start": 67.77999877929688,
+                "end": 68.5199966430664
+            },
+            {
+                "word": "the",
+                "start": 68.5199966430664,
+                "end": 68.76000213623047
+            },
+            {
+                "word": "public",
+                "start": 68.76000213623047,
+                "end": 69
+            },
+            {
+                "word": "reporting",
+                "start": 69,
+                "end": 69.44000244140625
+            },
+            {
+                "word": "ties",
+                "start": 69.44000244140625,
+                "end": 69.80000305175781
+            },
+            {
+                "word": "a",
+                "start": 69.80000305175781,
+                "end": 70.18000030517578
+            },
+            {
+                "word": "specific",
+                "start": 70.18000030517578,
+                "end": 70.55999755859375
+            },
+            {
+                "word": "completed",
+                "start": 70.55999755859375,
+                "end": 71.05999755859375
+            },
+            {
+                "word": "order",
+                "start": 71.05999755859375,
+                "end": 71.37999725341797
+            },
+            {
+                "word": "to",
+                "start": 71.37999725341797,
+                "end": 71.62000274658203
+            },
+            {
+                "word": "a",
+                "start": 71.62000274658203,
+                "end": 72.12000274658203
+            },
+            {
+                "word": "named",
+                "start": 72.12000274658203,
+                "end": 72.12000274658203
+            },
+            {
+                "word": "AI",
+                "start": 72.12000274658203,
+                "end": 72.72000122070312
+            },
+            {
+                "word": "buyer.",
+                "start": 72.72000122070312,
+                "end": 73.12000274658203
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 73.51000213623047,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 16.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "ISBNB",
+                        "params": []
+                    }
+                ]
+            },
+            {
+                "start": 16.9,
+                "end": 24.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "NDAs",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "Order size on offer",
+                        "params": {
+                            "title": "Order size on offer",
+                            "unit": "books",
+                            "bars": [
+                                {
+                                    "label": "Minimum",
+                                    "value": 1000
+                                },
+                                {
+                                    "label": "Maximum",
+                                    "value": 1000000,
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.8,
+                "end": 30.6,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "Pre-2022",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "Pre-2022 print = premium",
+                        "params": {
+                            "title": "Pre-2022 print = premium",
+                            "lines": [
+                                "Printed before generative text existed",
+                                "Provenance guaranteed by the date"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.6,
+                "end": 36.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "AI slop",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "Why the old paper is wanted",
+                        "params": {
+                            "title": "Why the old paper is wanted",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Pre-2022 print"
+                                },
+                                {
+                                    "label": "Human-written text"
+                                },
+                                {
+                                    "label": "Clean training data",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.3,
+                "end": 42,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "cost choice",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "Why books get destroyed",
+                        "params": {
+                            "title": "Why books get destroyed",
+                            "items": [
+                                "Cheaper per page",
+                                "Faster on a production line",
+                                "No technical limit forces it"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 42,
+                "end": 49.9,
+                "background": "vellum",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "non-destructively",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "Treventus ScanRobot 2.0 MDS",
+                        "params": {
+                            "title": "Treventus ScanRobot 2.0 MDS",
+                            "lines": [
+                                "2,500 pages per hour",
+                                "Fragile volumes stay intact"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 49.9,
+                "end": 55.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "cheaper",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "Two ways to digitize a book",
+                        "params": {
+                            "left": {
+                                "title": "Destructive",
+                                "points": [
+                                    "Spine sliced off",
+                                    "Loose pages, high speed",
+                                    "No physical copy survives",
+                                    "Cheaper at industrial scale"
+                                ]
+                            },
+                            "right": {
+                                "title": "Non-destructive",
+                                "points": [
+                                    "Air jets turn the pages",
+                                    "Book stays reshelvable",
+                                    "Used by Google Books",
+                                    "Slower per volume"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 55.4,
+                "end": 62.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "fair use",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "How it became lawful",
+                        "params": {
+                            "caption": "Bartz v. Anthropic",
+                            "items": [
+                                {
+                                    "label": "Project Panama scanning ramps up",
+                                    "sublabel": "early 2024"
+                                },
+                                {
+                                    "label": "Destroying the print original ruled fair use",
+                                    "sublabel": "June 2025",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "4,000+ pages unsealed",
+                                    "sublabel": "January 2026"
+                                },
+                                {
+                                    "label": "$1.5B settlement approved",
+                                    "sublabel": "July 2026"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 62.7,
+                "end": 73.51,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "One caveat",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "Proven vs unconfirmed",
+                        "params": {
+                            "left": {
+                                "title": "Documented in court",
+                                "points": [
+                                    "Anthropic's Project Panama",
+                                    "Unsealed court filings",
+                                    "$1.5B settlement, July 2026"
+                                ]
+                            },
+                            "right": {
+                                "title": "Not established",
+                                "points": [
+                                    "No named AI buyer",
+                                    "No completed order proven",
+                                    "Fate of brokered books unknown"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-companies-are-buying-antique-books-in-z20wi/clip.mp4",
+    "error": null
+}

@@ -1,6 +1,6 @@
 import { Config } from "@remotion/cli/config";
 
-// Rendering configuration for IATECA clips.
+// Rendering configuration for Brand Machine clips.
 //
 // PNG frames preserve per-pixel alpha, which is required so transparent
 // overlays keep their alpha channel through to the encoder.

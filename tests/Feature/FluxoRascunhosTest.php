@@ -6,11 +6,13 @@ use App\Livewire\Clips;
 use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
-use App\Models\ClipProject;
 use App\Services\Aggregation\LlmClient;
+use App\Services\Clips\Store\ClipStore;
+use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -82,48 +84,86 @@ class FluxoRascunhosTest extends TestCase
         $this->assertSame('rascunho', $vault->get($nota->path)->get('estado'));
     }
 
+    /** Configures a Blotato key + account ids and fakes the publish endpoint. */
+    private function comBlotato(array $accounts): void
+    {
+        config(['services.blotato.key' => 'test-key']);
+        app(SettingsRepository::class)->save(['blotato' => $accounts]);
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'x'])]);
+    }
+
     public function test_agendar_publicacao_pronta(): void
     {
+        $this->comBlotato(['linkedin' => 'acc-1']);
         $vault = app(VaultContract::class);
         $nota = $vault->create('rascunhos', ['titulo' => 'A agendar', 'tipo' => 'post', 'estado' => 'pronto'], 'corpo');
+        $id = $this->idDe('post', $nota->path);
 
         Livewire::test(Rascunhos::class)
-            ->set('datas.'.$this->idDe('post', $nota->path), '2026-09-01')
-            ->call('agendar', 'post', $nota->path);
+            ->set('plataformas.'.$id, ['linkedin'])
+            ->set('quando.'.$id, 'time')
+            ->set('datas.'.$id, '2026-09-01T09:00')
+            ->call('publicar', 'post', $nota->path)
+            ->assertHasNoErrors();
 
         $actualizada = $vault->get($nota->path);
         $this->assertSame('agendado', $actualizada->get('estado'));
-        $this->assertSame('2026-09-01', $actualizada->get('agendado_para'));
+        $this->assertStringStartsWith('2026-09-01', (string) $actualizada->get('agendado_para'));
+    }
+
+    public function test_selecting_a_platform_does_not_500_when_it_arrives_as_a_boolean(): void
+    {
+        // Regression: the platform checkbox binds to plataformas.<id>. If that key
+        // isn't an array, Livewire coerces a lone checkbox to a boolean, and the
+        // next render's in_array() used to throw a 500. Render must survive it.
+        $vault = app(VaultContract::class);
+        $nota = $vault->create('rascunhos', ['titulo' => 'Post', 'tipo' => 'post', 'estado' => 'pronto'], 'corpo');
+        $id = $this->idDe('post', $nota->path);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, true) // what a lone checkbox click produces
+            ->assertOk();
     }
 
     public function test_agendar_short_renderizado(): void
     {
+        $this->comBlotato(['tiktok' => 'acc-tt']);
         $vault = app(VaultContract::class);
         $clip = $vault->create('clips', ['titulo' => 'Short A', 'tipo' => 'clip', 'estado' => 'pronto'], 'corpo');
+        $id = $this->idDe('clip', $clip->path);
 
         Livewire::test(Rascunhos::class)
             ->assertSee('Short A')
-            ->set('datas.'.$this->idDe('clip', $clip->path), '2026-09-02')
-            ->call('agendar', 'clip', $clip->path);
+            ->set('plataformas.'.$id, ['tiktok'])
+            ->set('quando.'.$id, 'time')
+            ->set('datas.'.$id, '2026-09-02T09:00')
+            ->call('publicar', 'clip', $clip->path)
+            ->assertHasNoErrors();
 
         $this->assertSame('agendado', $vault->get($clip->path)->get('estado'));
     }
 
     public function test_agendar_e_desagendar_clip_animado(): void
     {
-        $p = ClipProject::create([
-            'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim X', 'status' => 'done',
+        $this->comBlotato(['youtube' => 'acc-yt']);
+        $store = app(ClipStore::class);
+        $p = $store->create([
+            'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim X', 'status' => 'done', 'finished' => true,
         ]);
+        $id = $this->idDe('animado', $p->id);
 
         Livewire::test(Rascunhos::class)
             ->assertSee('Anim X')
-            ->set('datas.'.$this->idDe('animado', (string) $p->id), '2026-09-03')
-            ->call('agendar', 'animado', (string) $p->id);
+            ->set('plataformas.'.$id, ['youtube'])
+            ->set('quando.'.$id, 'time')
+            ->set('datas.'.$id, '2026-09-03T09:00')
+            ->call('publicar', 'animado', $p->id)
+            ->assertHasNoErrors();
 
-        $this->assertSame('2026-09-03', $p->fresh()->scheduled_for->toDateString());
+        $this->assertStringStartsWith('2026-09-03', (string) $store->find($p->id)->scheduled_for);
 
-        Livewire::test(Rascunhos::class)->call('desagendar', 'animado', (string) $p->id);
-        $this->assertNull($p->fresh()->scheduled_for);
+        Livewire::test(Rascunhos::class)->call('desagendar', 'animado', $p->id);
+        $this->assertNull($store->find($p->id)->scheduled_for);
     }
 
     public function test_escolher_clips_com_ia_cria_clips_e_guarda_publicacoes(): void
@@ -135,7 +175,7 @@ class FluxoRascunhosTest extends TestCase
                 return true;
             }
 
-            public function texto(string $prompt, bool $comFerramentas = false): ?string
+            public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 return json_encode([
                     'segments' => [['title' => 'Short A', 'description' => 'd', 'start_time' => 0, 'end_time' => 2, 'tags' => ['x']]],

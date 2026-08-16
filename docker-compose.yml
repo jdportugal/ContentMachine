@@ -1,88 +1,24 @@
+# Local dev / single-host run of the combined image. Everything (web + worker +
+# scheduler) runs in the one `app` container. For a public HTTPS deploy behind
+# Caddy on a Droplet, use deploy/install.sh instead.
 services:
-  # ---- Aplicação (PHP-FPM) ----
   app:
     build:
       context: .
-      target: app
-    image: contentmachine-app
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      REDIS_HOST: redis
-    volumes:
-      - ./vault:/var/www/html/vault
-      - storage:/var/www/html/storage
-      - public:/var/www/html/public
-    depends_on:
-      - postgres
-      - redis
-
-  # ---- Servidor web (Nginx) ----
-  web:
-    image: nginx:1.27-alpine
+    image: contentmachine
     restart: unless-stopped
     ports:
-      - "${APP_PORT:-8080}:80"
-    volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - public:/var/www/html/public:ro
-    depends_on:
-      - app
-
-  # ---- Trabalhador de filas ----
-  queue:
-    image: contentmachine-app
-    restart: unless-stopped
-    env_file: .env
+      - "${APP_PORT:-8080}:8080"
+    # Runs in the offline 'fake' driver by default. To add API keys, copy
+    # .env.example → .env and run:  docker compose --env-file .env up -d
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      REDIS_HOST: redis
-    command: php artisan queue:work --tries=3 --sleep=3
+      APP_URL: ${APP_URL:-http://localhost:8080}
     volumes:
-      - ./vault:/var/www/html/vault
-      - storage:/var/www/html/storage
-    depends_on:
-      - app
-
-  # ---- Agendador (cron do Laravel) ----
-  scheduler:
-    image: contentmachine-app
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      REDIS_HOST: redis
-    command: php artisan schedule:work
-    volumes:
-      - ./vault:/var/www/html/vault
-      - storage:/var/www/html/storage
-    depends_on:
-      - app
-
-  # ---- Base de dados (metadados da app; o conteúdo vive no vault) ----
-  postgres:
-    image: postgres:16-alpine
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${DB_DATABASE:-contentmachine}
-      POSTGRES_USER: ${DB_USERNAME:-contentmachine}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  # ---- Redis (filas + cache) ----
-  redis:
-    image: redis:7-alpine
-    restart: unless-stopped
-    volumes:
-      - redisdata:/data
+      - storage:/app/storage
+      - vault:/app/vault
+      - db:/app/database
 
 volumes:
-  pgdata:
-  redisdata:
   storage:
-  public:
+  vault:
+  db:

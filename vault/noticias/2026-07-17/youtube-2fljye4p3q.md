@@ -5,7 +5,9 @@ plataforma: youtube
 canal: 'Jack Roberts'
 data: '2026-07-17'
 url: 'https://www.youtube.com/watch?v=_2FlJYE4p3Q'
-thumbnail: 'https://i.ytimg.com/vi_webp/_2FlJYE4p3Q/maxresdefault.webp'
+thumbnail: 'https://i.ytimg.com/vi/_2FlJYE4p3Q/maxresdefault.jpg'
+descricao: "👉 Grab Higgsfield: https://bit.ly/3T6KBlL 📈 ALL Systems: https://bit.ly/4kol0y5 🩵 Free Website Prompt: https://bit.ly/4vG1mSd Claude's Fable 5 is genuinely the best design model on the planet right now, and Jack built a full skill system that gets you gorgeous, animated product websites for around $10 a build. One prompt. No prior experience needed. This video shows you the exact system, the free skill download, and every step from blank page to client-ready site. *RESOURCES MENTIONED* 🔥 Glaido: https://bit.ly/4eGoI3R ☁️ Claude (Fable 5 / Opus 4.8) - https://claude.ai/ 💬 ChatGPT 5.6 - https://chatgpt.com/ 🎨 Higgsfield: https://bit.ly/3T6KBlL 💻 Cursor - https://cursor.com/ *TIMESTAMPS* 00:00 Intro 01:10 What Fable 5 actually produces 02:20 Why the driver matters as much as the model..."
+resumo: 'O vídeo mostra como usar o Claude Fable 5 em conjunto com uma nova skill de design para criar websites bonitos e sofisticados, com animações e efeitos de scroll, num único prompt e mantendo os custos baixos. Aborda ainda a importância do prompting e das skills para obter bons resultados, demonstrando vários exemplos de sites gerados desta forma.'
 tags: {}
 fontes:
   - 'https://bit.ly/3T6KBlL'

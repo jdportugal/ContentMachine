@@ -5,7 +5,7 @@ namespace App\Services\News;
 use Illuminate\Support\Carbon;
 
 /**
- * Driver simulado — relatório curado, sem chamadas externas.
+ * Simulated driver — curated report, no external calls.
  */
 class FakeNewsDriver implements NewsDriver
 {

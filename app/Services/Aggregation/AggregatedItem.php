@@ -5,14 +5,14 @@ namespace App\Services\Aggregation;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
- * Um item de conteúdo normalizado, independente da plataforma de origem.
- * É o formato comum produzido pelos drivers e consumido pelo agregador.
+ * A normalized content item, independent of the source platform.
+ * It is the common format produced by the drivers and consumed by the aggregator.
  */
 class AggregatedItem implements Arrayable
 {
     /**
      * @param  array<int,string>  $tags
-     * @param  array<int,string>  $fontes  URLs mencionadas no conteúdo
+     * @param  array<int,string>  $fontes  URLs mentioned in the content
      */
     public function __construct(
         public readonly string $id,
@@ -28,13 +28,13 @@ class AggregatedItem implements Arrayable
         public readonly array $fontes = [],
     ) {}
 
-    /** Dia de arquivo (YYYY-MM-DD) usado para organizar o vault. */
+    /** Archive day (YYYY-MM-DD) used to organize the vault. */
     public function dia(): string
     {
         return $this->data !== '' ? $this->data : now()->toDateString();
     }
 
-    /** Caminho relativo da nota no vault. */
+    /** Relative path of the note in the vault. */
     public function caminho(): string
     {
         return "noticias/{$this->dia()}/{$this->plataforma}-{$this->id}.md";

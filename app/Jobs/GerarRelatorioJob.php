@@ -2,8 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Services\Aggregation\NewsAggregator;
+use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\RelatorioBuilder;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Vault\VaultContract;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,58 +14,70 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Gera o relatório de notícias FORA do ciclo do pedido web.
+ * Generates the news report OUTSIDE the web request cycle.
  *
- * Porquê uma fila: a redação usa o CLI do Claude (com pesquisa web) e pode
- * demorar minutos. Corria antes de forma síncrona no pedido web e estourava o
- * max_execution_time (300s). Agora corre num WORKER («php artisan queue:work»),
- * escreve o relatório no vault e deixa o caminho em cache; a página lê-o por
- * sondagem (wire:poll) — o mesmo padrão da oficina de publicações.
+ * Why a queue: the writing uses the Claude CLI (with web search) and can
+ * take minutes. It used to run synchronously in the web request and blew the
+ * max_execution_time (300s). Now it runs in a WORKER («php artisan queue:work»),
+ * writes the report to the vault and leaves the path in cache; the page reads it by
+ * polling (wire:poll) — the same pattern as the posts workshop.
  */
 class GerarRelatorioJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    // Folga acima do timeout do CLI Claude (até 600s com pesquisa web).
+    // Headroom above the Claude CLI timeout (up to 600s with web search).
     public int $timeout = 900;
 
+    /**
+     * @param  string  $idioma  Output language; '' follows the project's own.
+     * @param  string  $tipo  RelatorioBuilder::TIPO_NOTICIAS | TIPO_DICAS
+     */
     public function __construct(
         public string $modo,
         public string $data,
-        public bool $recolher,
         public string $token,
-    ) {}
+        public string $idioma = '',
+        public string $tipo = RelatorioBuilder::TIPO_NOTICIAS,
+    ) {
+        $this->captureProject();
+    }
 
-    public function handle(RelatorioBuilder $builder, VaultContract $vault, NewsAggregator $aggregator): void
+    public function handle(RelatorioBuilder $builder, VaultContract $vault): void
     {
-        // Recolhe primeiro conteúdo novo dos canais (apanha os vídeos de hoje).
-        if ($this->recolher) {
-            $aggregator->aggregate();
-        }
+        // The worker has no session: activate the project so the report is written
+        // in ITS language and archived in ITS vault.
+        $this->activateProject();
+        $idioma = $this->idioma !== '' ? $this->idioma : ProjectLanguage::name();
 
+        // Report is built only from already-scraped items (no channel scan here).
         $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
 
-        // 'semana' = janela dos últimos 7 dias até à data escolhida.
+        // 'semana' = window of the last 7 days up to the chosen date.
         [$inicio, $fim] = $this->modo === 'semana'
             ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
             : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modo);
+        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma, $this->tipo);
 
-        $slug = $this->modo === 'semana'
+        $dicas = $this->tipo === RelatorioBuilder::TIPO_DICAS;
+
+        // Tips are archived alongside the reports but under their own slug prefix
+        // and note type, so regenerating one never overwrites the other.
+        $slug = ($dicas ? 'dicas-' : '').($this->modo === 'semana'
             ? 'semana-'.$inicio->toDateString()
-            : 'dia-'.$inicio->toDateString();
+            : 'dia-'.$inicio->toDateString());
 
         $nota = $vault->put("noticias/relatorios/{$slug}.md", [
             'titulo' => $relatorio['titulo'],
-            'tipo' => 'relatorio',
+            'tipo' => $dicas ? 'relatorio_dicas' : 'relatorio',
             'modo' => $relatorio['modo'],
             'inicio' => $relatorio['inicio'],
             'fim' => $relatorio['fim'],
             'total' => $relatorio['total'],
             'gerado_em' => $relatorio['gerado_em'],
             'estado' => 'arquivado',
-            'tags' => ['noticias', 'relatorio', $relatorio['modo']],
+            'tags' => ['noticias', $dicas ? 'dicas' : 'relatorio', $relatorio['modo']],
             'dados' => json_encode($relatorio, JSON_UNESCAPED_UNICODE),
         ], $builder->corpoMarkdown($relatorio));
 

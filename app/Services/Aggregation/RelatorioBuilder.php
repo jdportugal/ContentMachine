@@ -8,12 +8,22 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
- * Constrói um relatório de notícias a partir dos itens já agregados no vault,
- * para um período (um dia ou uma semana). Reutiliza o TopicsBuilder para os
- * tópicos e sintetiza resumo, destaques, fontes e ideias de guião.
+ * Builds a report from the items already aggregated in the vault, for a period
+ * (a day or a week). Reuses the TopicsBuilder for the topics and synthesizes
+ * summary, highlights, sources and script ideas.
+ *
+ * Two kinds, same pipeline — only the write-up differs:
+ *   - 'noticias' → news bits: what happened and why it matters.
+ *   - 'dicas'    → tool-tip scripts: the practical trick buried in the material
+ *     («this new Claude Code skill», «burning tokens? try this»), written to be
+ *     read out loud as a short-form video.
  */
 class RelatorioBuilder
 {
+    public const TIPO_NOTICIAS = 'noticias';
+
+    public const TIPO_DICAS = 'dicas';
+
     public function __construct(
         private readonly VaultContract $vault,
         private readonly TopicsBuilder $topicos,
@@ -21,22 +31,29 @@ class RelatorioBuilder
     ) {}
 
     /**
+     * @param  string  $idioma  Output language for the write-up (e.g. 'English', 'European Portuguese').
+     * @param  string  $tipo  self::TIPO_NOTICIAS | self::TIPO_DICAS
      * @return array<string,mixed>
      */
-    public function gerar(Carbon $inicio, Carbon $fim, string $modo): array
+    public function gerar(Carbon $inicio, Carbon $fim, string $modo, string $idioma = 'English', string $tipo = self::TIPO_NOTICIAS): array
     {
         $itens = $this->itensDoPeriodo($inicio, $fim);
         $resultadoTopicos = $this->topicos->build($itens);
         $porPlataforma = $this->contarPorPlataforma($itens);
 
+        $pt = str_contains(strtolower($idioma), 'portug');
+        $rotulo = $tipo === self::TIPO_DICAS
+            ? ($pt ? 'Dicas' : 'Tool tips')
+            : ($pt ? 'Relatório' : 'Report');
         $titulo = $modo === 'semana'
-            ? 'Relatório — semana de '.$inicio->translatedFormat('d \d\e M').' a '.$fim->translatedFormat('d \d\e M \d\e Y')
-            : 'Relatório — '.$inicio->translatedFormat('d \d\e F \d\e Y');
+            ? $rotulo.' — '.$inicio->translatedFormat('d M').' – '.$fim->translatedFormat('d M Y')
+            : $rotulo.' — '.$inicio->translatedFormat('d M Y');
 
-        [$redacao, $redacaoMetodo] = $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim);
+        [$redacao, $redacaoMetodo] = $this->redacao($itens, $resultadoTopicos['topicos'], $modo, $inicio, $fim, $idioma, $tipo);
 
         return [
             'titulo' => $titulo,
+            'tipo' => $tipo,
             'modo' => $modo,
             'inicio' => $inicio->toDateString(),
             'fim' => $fim->toDateString(),
@@ -49,15 +66,18 @@ class RelatorioBuilder
             'redacao_metodo' => $redacaoMetodo,
             'topicos' => $resultadoTopicos['topicos'],
             'destaques' => $this->destaques($itens),
-            'ideias_guiao' => $this->ideiasGuiao($resultadoTopicos['topicos']),
+            'ideias_guiao' => $this->ideiasGuiao($resultadoTopicos['topicos'], $tipo),
             'fontes' => $this->fontesUnicas($itens),
         ];
     }
 
-    /** Corpo Markdown do relatório (legível no Obsidian). */
+    /** Markdown body of the report (readable in Obsidian). */
     public function corpoMarkdown(array $rel): string
     {
-        $l = ["# {$rel['titulo']}", '', "> {$rel['total']} item(s) · método: {$rel['metodo']} · {$rel['gerado_em']}", '', '## Síntese', '', $rel['redacao'] ?? '', '', '## Resumo', '', $rel['resumo'], ''];
+        $dicas = ($rel['tipo'] ?? self::TIPO_NOTICIAS) === self::TIPO_DICAS;
+        $sintese = $dicas ? '## Guiões de dicas' : '## Síntese';
+
+        $l = ["# {$rel['titulo']}", '', "> {$rel['total']} item(s) · método: {$rel['metodo']} · {$rel['gerado_em']}", '', $sintese, '', $rel['redacao'] ?? '', '', '## Resumo', '', $rel['resumo'], ''];
 
         $l[] = '## Destaques';
         $l[] = '';
@@ -77,7 +97,7 @@ class RelatorioBuilder
         }
 
         if ($rel['ideias_guiao'] !== []) {
-            $l[] = '## Ideias de guião';
+            $l[] = $dicas ? '## Ângulos por explorar' : '## Ideias de guião';
             $l[] = '';
             foreach ($rel['ideias_guiao'] as $ideia) {
                 $l[] = "- {$ideia}";
@@ -126,7 +146,7 @@ class RelatorioBuilder
             ->all();
     }
 
-    /** Sinopse de conteúdo: o resumo por IA (preferido) ou o início da transcrição. */
+    /** Content synopsis: the AI summary (preferred) or the start of the transcript. */
     private function descricaoDaNota(VaultNote $n): string
     {
         $resumo = trim((string) $n->get('resumo', ''));
@@ -134,7 +154,7 @@ class RelatorioBuilder
         return $resumo !== '' ? $resumo : Str::limit($this->transcricaoDoCorpo($n->body), 240, '');
     }
 
-    /** Extrai (e limpa) o texto da transcrição do corpo Markdown da nota do item. */
+    /** Extracts (and cleans) the transcript text from the item note's Markdown body. */
     private function transcricaoDoCorpo(string $corpo): string
     {
         if (! preg_match('/##\s*Transcri[cç][aã]o\s*\n+(.*)$/isu', $corpo, $m)) {
@@ -146,8 +166,8 @@ class RelatorioBuilder
             return '';
         }
 
-        // Remove marcadores de legenda ([música], [music], (risos)…) que poluem
-        // os tópicos e a redação.
+        // Remove caption markers ([música], [music], (risos)…) that pollute
+        // the topics and the script.
         $texto = preg_replace('/[\[\(][^\]\)]{0,30}[\]\)]/u', ' ', $texto) ?? $texto;
 
         return trim(preg_replace('/[ \t]+/', ' ', $texto) ?? $texto);
@@ -169,7 +189,7 @@ class RelatorioBuilder
     }
 
     /**
-     * Destaques por relevância (heurística: nº de fontes citadas + riqueza de tags).
+     * Highlights by relevance (heuristic: number of cited sources + tag richness).
      *
      * @param  array<int,AggregatedItem>  $itens
      * @return array<int,array<string,mixed>>
@@ -201,12 +221,14 @@ class RelatorioBuilder
      * @param  array<int,array<string,mixed>>  $topicos
      * @return array<int,string>
      */
-    private function ideiasGuiao(array $topicos): array
+    private function ideiasGuiao(array $topicos, string $tipo = self::TIPO_NOTICIAS): array
     {
         $ideias = [];
         foreach (array_slice($topicos, 0, 4) as $t) {
             $n = count($t['itens']);
-            $ideias[] = "Peça sobre «{$t['topico']}» — {$n} referência(s) reunida(s) esta altura.";
+            $ideias[] = $tipo === self::TIPO_DICAS
+                ? "Tip angle on «{$t['topico']}» — {$n} reference(s) to mine for a practical trick."
+                : "Peça sobre «{$t['topico']}» — {$n} referência(s) reunida(s) esta altura.";
         }
 
         return $ideias;
@@ -227,65 +249,131 @@ class RelatorioBuilder
     }
 
     /**
-     * Redação — texto escrito sobre tudo o que os canais estão a cobrir.
-     * Usa o LLM quando há chave; senão compõe uma síntese a partir dos tópicos
-     * e de frases reais das transcrições.
+     * Script — written text about everything the channels are covering.
+     * Uses the LLM when there is a key; otherwise composes a synthesis from the topics
+     * and real sentences from the transcripts.
      *
      * @param  array<int,AggregatedItem>  $itens
      * @param  array<int,array<string,mixed>>  $topicos
      */
-    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim): array
+    private function redacao(array $itens, array $topicos, string $modo, Carbon $inicio, Carbon $fim, string $idioma, string $tipo = self::TIPO_NOTICIAS): array
     {
         if ($itens === []) {
-            return ['Não há conteúdo agregado neste período para redigir. Corra a recolha e tente de novo.', 'vazio'];
+            return ['No content aggregated in this period. Run the collection and try again.', 'vazio'];
+        }
+
+        // Tips are their own pipeline step, so they can be pinned to their own key.
+        if ($tipo === self::TIPO_DICAS) {
+            $this->llm->paraPasso('noticias_dicas');
         }
 
         if ($this->llm->disponivel()) {
-            $texto = $this->redacaoViaLlm($itens, $modo, $inicio, $fim);
+            $texto = $tipo === self::TIPO_DICAS
+                ? $this->dicasViaLlm($itens, $idioma)
+                : $this->redacaoViaLlm($itens, $modo, $inicio, $fim, $idioma);
             if ($texto !== null && $texto !== '') {
                 return [$texto, $this->llm->fornecedorAtivo() ?? 'llm'];
             }
         }
 
+        // A tip has to BE a real trick someone demonstrated; there is no honest way
+        // to compose one heuristically from transcripts without inventing it. So say
+        // so plainly — the topics, highlights and sources below still stand.
+        if ($tipo === self::TIPO_DICAS) {
+            return ['Tool tips need an AI provider — set an LLM key in Settings (or pin one to the news-writing step) and generate again.', 'sem-llm'];
+        }
+
         return [$this->redacaoHeuristica($itens, $topicos, $modo, $inicio, $fim), 'heuristica'];
     }
 
-    /** @param array<int,AggregatedItem> $itens */
-    private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim): ?string
+    /**
+     * Tool-usage tips, written as short-form scripts. Same material as the news
+     * write-up, but mining it for the PRACTICAL move — the setting, the flag, the
+     * workflow — rather than for what was announced.
+     *
+     * @param  array<int,AggregatedItem>  $itens
+     */
+    private function dicasViaLlm(array $itens, string $idioma): ?string
     {
         $material = collect($itens)->take(20)->map(fn (AggregatedItem $i) => [
-            'assunto' => $i->titulo, // pista do tema — NÃO deve ser mencionado no guião
-            'transcricao' => Str::limit(trim($i->transcricao), 3500, ''),
-            'fontes' => array_values(array_slice($i->fontes, 0, 6)),
+            'subject' => $i->titulo, // topic hint — must NOT be mentioned in the script
+            'transcript' => Str::limit(trim($i->transcricao), 3500, ''),
+            'sources' => array_values(array_slice($i->fontes, 0, 6)),
+        ])->all();
+
+        return $this->llm->texto(
+            'You write SHORT-FORM VIDEO SCRIPTS about how to actually USE AI tools. '
+            ."From the material below — transcripts of creators' videos and the sources they cite — "
+            ."extract the practical TIPS and turn each into its own script.\n\n"
+            ."OUTPUT LANGUAGE: write EVERYTHING in {$idioma}.\n\n"
+            ."WHAT COUNTS AS A TIP — the whole point:\n"
+            .'- A concrete, actionable move with a tool: a feature most people miss, a setting or flag, a workflow, '
+            ."a prompt pattern, a way to cut cost or time, a fix for a common failure.\n"
+            .'- Examples of the register: «this new Claude Code skill does X for you», '
+            ."«burning tokens on the new model? do this instead».\n"
+            .'- NOT a tip: an announcement, a funding round, a benchmark, a release date, an opinion. '
+            ."If the material only announces something, SKIP it — do not stretch news into a fake tip.\n\n"
+            ."STRUCTURE — one script per tip:\n"
+            .'- Start with a bold one-line HOOK (`**Hook**`) written as the problem the viewer already has '
+            ."(«If you're …, you're wasting …»), or as the thing they don't know exists.\n"
+            ."- Then 3–6 short sentences, in this order: the problem → the tip → HOW to do it, concretely "
+            ."(name the command, the setting, the menu, the exact wording).\n"
+            .'- End with the one-line payoff: what changes for them.'
+            ."\n- Separate consecutive scripts with a line containing only `---`.\n"
+            .'- Each script MUST stand alone: NO overall intro or outro, NO «in this video», '
+            ."NO references to the other scripts or to «this week».\n\n"
+            ."RULES:\n"
+            .'- Speak DIRECTLY to the viewer («you»), spoken register, short sentences — this gets read out loud.\n'
+            .'- NEVER mention the videos, the creators or the channels you got this from. State the tip as your own.\n'
+            .'- Name the tool, the model, the command and the numbers exactly («Claude Code», «--resume», «60% fewer tokens»). '
+            ."A vague tip is worthless.\n"
+            .'- Do NOT invent steps. If the material does not say HOW, use web search and the given sources to confirm the '
+            ."exact procedure; if you still cannot confirm it, drop that tip.\n"
+            .'- Quality over quantity: 3 real tips beat 10 padded ones. If the material holds no genuine tip, '
+            ."say so in one line instead of inventing.\n\n"
+            ."MATERIAL (transcripts + sources):\n"
+            .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            comFerramentas: true,
+        );
+    }
+
+    /** @param array<int,AggregatedItem> $itens */
+    private function redacaoViaLlm(array $itens, string $modo, Carbon $inicio, Carbon $fim, string $idioma): ?string
+    {
+        $material = collect($itens)->take(20)->map(fn (AggregatedItem $i) => [
+            'subject' => $i->titulo, // topic hint — must NOT be mentioned in the bit
+            'transcript' => Str::limit(trim($i->transcricao), 3500, ''),
+            'sources' => array_values(array_slice($i->fontes, 0, 6)),
         ])->all();
 
         $periodo = $modo === 'semana'
-            ? 'os últimos 7 dias (até '.$fim->translatedFormat('d/m/Y').')'
-            : 'o dia '.$inicio->translatedFormat('d/m/Y');
-        $gancho = $modo === 'semana' ? 'Esta semana em IA…' : 'Hoje em IA…';
+            ? 'the last 7 days (until '.$fim->translatedFormat('d/m/Y').')'
+            : 'the day '.$inicio->translatedFormat('d/m/Y');
 
-        $prompt = 'És o guionista de um vídeo-resumo de notícias de inteligência artificial (estilo «Esta semana em IA»). '
-            ."A partir do material abaixo — transcrições de vídeos de criadores e as fontes que citam, referentes a {$periodo} — "
-            ."escreve o GUIÃO para ser NARRADO num vídeo.\n\n"
-            ."TOM E ESTILO:\n"
-            .'- Conversacional, envolvente e entusiasta, como um criador a explicar as novidades a um público interessado; '
-            ."podes usar «nós» e dirigir-te ao espectador.\n"
-            ."- Abre com um gancho no espírito «{$gancho}».\n"
-            .'- NÃO te limites a enunciar factos: EXPLICA porque é que cada novidade importa e é impressionante '
-            ."(«…e isto é impressionante porque…»), dá contexto e liga as histórias entre si.\n"
-            .'- Comprimento não é problema — desenvolve bem cada notícia (o guião pode servir para vários vídeos ou cursos), '
-            ."sobretudo no resumo semanal.\n\n"
-            ."CONTEÚDO:\n"
-            .'- Cobre APENAS notícias relevantes: lançamentos, novos modelos/produtos, atualizações importantes, aquisições, '
-            .'financiamentos, estudos, números. IGNORA tutoriais, opiniões pessoais, promoções, patrocínios e apelos '
-            ."«subscreve». Nem todos os itens têm de ser usados.\n"
-            .'- IMPESSOAL quanto à origem: NUNCA menciones os vídeos, os criadores nem os canais («num vídeo», «o criador '
-            ."diz», «este canal»). Apresenta as notícias como tuas.\n"
-            ."- Menciona nomes próprios, produtos, datas e números concretos (ex.: «Fable 5», «Kimi K3», «Hermes»).\n"
-            .'- Se faltar CONTEXTO a uma notícia, USA a pesquisa web e as fontes indicadas para confirmar e enriquecer. '
-            ."NÃO inventes: se não confirmares, sê prudente ou omite.\n"
-            ."- Português europeu (evita brasileirismos como «você» ou «está fazendo»).\n\n"
-            ."MATERIAL (transcrições + fontes):\n"
+        $prompt = 'You are an AI-news editor. '
+            ."From the material below — transcripts of creators' videos and the sources they cite, for {$periodo} — "
+            ."produce a set of SHORT, SELF-CONTAINED news bits.\n\n"
+            ."OUTPUT LANGUAGE: write EVERYTHING in {$idioma}.\n\n"
+            ."STRUCTURE — this is the most important rule:\n"
+            .'- Output a SERIES OF SEPARATE BITS, one per relevant news item. Do NOT write a continuous, '
+            ."connected narration or a single flowing script.\n"
+            .'- Each bit MUST stand entirely on its own: NO overall intro, NO outro, NO hook, NO references to '
+            ."other bits or to «this week»/«today» — a reader could see any single bit in isolation.\n"
+            .'- Format each bit as: a bold one-line headline (`**Headline**`), then 2–4 sentences. '
+            ."Separate consecutive bits with a line containing only `---`.\n\n"
+            ."TONE:\n"
+            .'- Clear and engaging. Do NOT just state facts: EXPLAIN what happened and why it matters '
+            ."(«…and this matters because…»).\n\n"
+            ."CONTENT:\n"
+            .'- Cover ONLY relevant news: releases, new models/products, major updates, acquisitions, '
+            .'funding rounds, studies, numbers. IGNORE tutorials, personal opinions, promotions, sponsorships and '
+            ."«subscribe» calls to action. Not all items have to be used.\n"
+            .'- IMPERSONAL about the origin: NEVER mention the videos, the creators or the channels («in a video», «the creator '
+            ."says», «this channel»). Present the news directly.\n"
+            ."- Mention proper names, products, dates and concrete numbers (e.g. «Fable 5», «Kimi K3», «Hermes»).\n"
+            .'- If a news item lacks CONTEXT, USE web search and the given sources to confirm and enrich it. '
+            ."Do NOT invent: if you cannot confirm, be cautious or omit it.\n\n"
+            ."MATERIAL (transcripts + sources):\n"
             .json_encode($material, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         return $this->llm->texto($prompt, comFerramentas: true);
@@ -336,7 +424,7 @@ class RelatorioBuilder
         return implode("\n\n", $paras);
     }
 
-    /** Primeira frase legível de um texto, até $max caracteres. */
+    /** First readable sentence of a text, up to $max characters. */
     private function primeiraFrase(string $texto, int $max = 220): string
     {
         $texto = trim(preg_replace('/\s+/', ' ', $texto) ?? '');

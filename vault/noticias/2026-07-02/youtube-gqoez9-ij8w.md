@@ -7,7 +7,7 @@ data: '2026-07-02'
 url: 'https://www.youtube.com/watch?v=Gqoez9-Ij8w'
 thumbnail: 'https://i.ytimg.com/vi/Gqoez9-Ij8w/maxresdefault.jpg'
 descricao: "✅ Get Your FREE AI Company Operating System here: https://go.danmartell.com/4vCemJu 👥 Are you building an AI software company? Partner with me: https://go.danmartell.com/3SHuV8j I've spent thousands of hours and burned real money figuring out what actually works with AI. Along the way, I've built a portfolio of companies that runs on this stuff every day. In this video, I'm handing you 40 truths that would have saved me years of trial and error. Some of them will sting, but the ones that hit hardest are usually the ones you needed to hear the most. ▸▸ Subscribe to The Martell Method Newsletter: https://bit.ly/3XEBXez ▸▸ Get My New Book (Buy Back Your Time): https://bit.ly/3pCTG78 IG: @danmartell"
-resumo: 'O vídeo apresenta 40 dicas e princípios práticos sobre como usar ferramentas de inteligência artificial de forma mais eficaz, explicando erros comuns e como comunicar com a IA para obter melhores resultados (dar exemplos claros, instruções específicas, contestar as respostas em vez de as aceitar e usar a voz em vez de escrever).'
+resumo: 'O vídeo apresenta 40 dicas e verdades práticas sobre como usar IA de forma mais eficaz, abordando temas como escrever bons prompts, dar exemplos concretos, questionar as respostas em vez de as aceitar, ser direto nas instruções e usar a voz em vez de escrever.'
 tags:
   - AI
   - 'AI Hacks'

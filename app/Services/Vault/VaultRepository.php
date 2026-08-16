@@ -8,8 +8,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Lê e escreve o vault Obsidian (pasta de ficheiros .md com frontmatter YAML).
- * É a ponte entre a aplicação e o "cérebro"/memória do sistema.
+ * Reads and writes the Obsidian vault (folder of .md files with YAML frontmatter).
+ * It is the bridge between the app and the system's "brain"/memory.
  */
 class VaultRepository implements VaultContract
 {
@@ -75,7 +75,7 @@ class VaultRepository implements VaultContract
         $note = $this->get($path);
 
         if (! $note) {
-            throw new \RuntimeException("Nota não encontrada: {$path}");
+            throw new \RuntimeException("Note not found: {$path}");
         }
 
         $frontmatter = array_merge($note->frontmatter, $patch, [
@@ -135,7 +135,7 @@ class VaultRepository implements VaultContract
         return str_ends_with($path, '.md') ? $path : $path.'.md';
     }
 
-    /** Impede escape da raiz do vault (path traversal). */
+    /** Prevents escaping the vault root (path traversal). */
     private function sanitize(string $path): string
     {
         $path = str_replace('\\', '/', $path);

@@ -1,11 +1,13 @@
-# Máquina de Conteúdo · IATECA
+# Brand Machine
+
+> by **AI Content Machines**
 
 Aplicação Laravel que centraliza a produção de conteúdo: monitorização de redes
 sociais, geradores de peças, rascunhos com agendamento e um agregador de notícias.
 Usa uma **vault Obsidian** (pasta de ficheiros Markdown) como memória — o "cérebro"
 do sistema — e está **dockerizada** para ser distribuível.
 
-Interface toda em **português europeu**, com o sistema de identidade **IATECA** na
+Interface toda em **português europeu**, com o sistema de identidade **Brand Machine** na
 variante escura **Nocturna** (ver [`docs/design-nocturna.md`](docs/design-nocturna.md)).
 
 ## Funcionalidades

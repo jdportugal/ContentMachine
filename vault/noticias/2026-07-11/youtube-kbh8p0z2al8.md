@@ -7,7 +7,7 @@ data: '2026-07-11'
 url: 'https://www.youtube.com/watch?v=KBH8P0z2AL8'
 thumbnail: 'https://i.ytimg.com/vi/KBH8P0z2AL8/maxresdefault.jpg'
 descricao: '🚨Higgsfield: https://higgsfield.ai/s/cli-chase-h-ai-ejnlNI ⚡Master Claude Code, Build Your Agency, Land Your First Client⚡ https://www.skool.com/chase-ai 🔥FREE community🔥 https://www.skool.com/chase-ai-community 💻 Need custom work? Book a consult 💻 https://chaseai.io Animated websites just became extremely easy with this skill that works with both claude code and the new GPT 5.6 Sol. ⏰TIMESTAMPS: 0:00 - Intro 0:57 - The Skill 2:36 - Demo 9:18 - Outro RESOURCES FROM THIS VIDEO: ➡️ Master Claude Code: https://www.skool.com/chase-ai ➡️ My Website: https://www.chaseai.io ➡️ Scroll World (mine): https://github.com/cth9191/scroll-world ➡️ Scroll World (original): https://github.com/oso95/scroll-world #claudecode'
-resumo: 'O vídeo mostra como usar uma "skill" para IA (no Claude Code e no GPT-5.6) que gera websites com animações de scroll suaves e coerentes, partindo de uma imagem que é transformada em vídeo e depois decomposta em frames associados à posição de scroll. Explica ainda o funcionamento técnico do processo (geração de imagens e vídeos através de um MCP, extração de frames com FFmpeg e coerência entre cena...'
+resumo: 'O vídeo mostra como usar uma "skill" de animações de scroll (baseada no Scroll World) com Claude Fable 5 e GPT-5.6, através do MCP da Higgs Field, para gerar imagens e vídeos que, convertidos em frames com FFmpeg, criam sites com animações de scroll fluidas. Explica ainda o processo técnico por detrás, incluindo a coerência entre cenas e melhorias como escalões de orçamento e otimização para mobil...'
 tags: {}
 fontes:
   - 'https://higgsfield.ai/s/cli-chase-h-ai-ejnlNI'

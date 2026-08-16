@@ -7,7 +7,7 @@ data: '2026-07-21'
 url: 'https://www.youtube.com/watch?v=Joqh7Tui9B8'
 thumbnail: 'https://i.ytimg.com/vi/Joqh7Tui9B8/maxresdefault.jpg'
 descricao: '⚡Master Claude Code, Build Your Agency, Land Your First Client⚡ https://www.skool.com/chase-ai 🔥FREE community🔥 https://www.skool.com/chase-ai-community 💻 Need custom work? Book a consult 💻 https://chaseai.io Is the loop engineering era already over? Graph engineering is the latest AI buzzword and in this video I break down what it is, how it works, and if you should even care (you should). ⏰TIMESTAMPS: 0:00 - Intro 0:38 - Loops vs Graphs 3:41 - Graph Engineering 6:53 - Use Cases 9:51 - Outro RESOURCES FROM THIS VIDEO: ➡️ Master Claude Code: https://www.skool.com/chase-ai ➡️ My Website: https://www.chaseai.io #claudecode'
-resumo: 'O vídeo explica o conceito de "graph engineering" como evolução do "loop engineering", clarificando se é uma ideia útil ou apenas mais um exagero da moda da IA. Recorrendo ao exemplo de um relatório matinal automatizado, mostra os componentes de um loop (gatilho, tarefa e critério de sucesso) e como passar de um único agente para vários agentes coordenados num grafo.'
+resumo: 'O vídeo explica o conceito de "graph engineering" como uma evolução do "loop engineering", mostrando primeiro os três componentes de um loop (gatilho, tarefa e critério de sucesso) através do exemplo de um agente que gera um relatório matinal diário a partir de redes sociais e email. Em seguida, demonstra como transformar esse mesmo processo, executado por um único agente, numa versão com múltiplo...'
 tags: {}
 fontes:
   - 'https://www.skool.com/chase-ai'

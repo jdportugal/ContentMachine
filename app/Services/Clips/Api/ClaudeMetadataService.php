@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\Contracts\MetadataService;
+use App\Services\Projects\ProjectLanguage;
 
 /**
  * Suggest a title, description and tags for a clip from its transcript, via the
@@ -12,27 +13,32 @@ class ClaudeMetadataService implements MetadataService
 {
     use RunsClaudeCli;
 
+    protected function passo(): string
+    {
+        return 'clips_metadados';
+    }
+
     public function suggest(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
-        $language = $transcript['language'] ?? 'português de Portugal';
+        $language = ProjectLanguage::name();
         if ($text === '') {
             return $this->empty();
         }
 
         $prompt = <<<PROMPT
-A partir do texto falado abaixo, sugere metadados prontos a publicar para um
-vídeo curto vertical, no idioma {$language}.
+From the spoken text below, suggest ready-to-publish metadata for a
+short vertical video, in the {$language} language.
 
-Devolve APENAS JSON (sem markdown):
+Return ONLY JSON (no markdown):
 {
-  "title": "título curto e cativante (máx. 70 caracteres)",
-  "description": "descrição de 2 a 3 frases, pronta a publicar, sem hashtags",
+  "title": "short and captivating title (max. 70 characters)",
+  "description": "2 to 3 sentence description, ready to publish, no hashtags",
   "tags": ["tag1", "tag2", "…"]
 }
-5 a 8 tags relevantes, sem o símbolo #.
+5 to 8 relevant tags, without the # symbol.
 
-TEXTO FALADO:
+SPOKEN TEXT:
 {$text}
 PROMPT;
 

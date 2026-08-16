@@ -4,5 +4,5 @@ namespace App\Services\Shorts;
 
 use RuntimeException;
 
-/** Erro do serviço ShortsCreator (HTTP, job falhado ou timeout). */
+/** ShortsCreator service error (HTTP, failed job or timeout). */
 class ShortsException extends RuntimeException {}

@@ -6,11 +6,14 @@ use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Livewire\ClipsAnimados;
-use App\Models\ClipProject;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\ImageRequests;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
@@ -20,9 +23,21 @@ class ClipsAnimadosTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
+    }
+
+    private function store(): ClipStore
+    {
+        return app(ClipStore::class);
+    }
+
     public function test_dashboard_renders_with_title(): void
     {
-        $this->get('/clips-animados')->assertOk()->assertSee('Clips Animados')->assertSee('Novo clip');
+        $this->get('/clips-animados')->assertOk()->assertSee('Animated Clips')->assertSee('New clip');
     }
 
     public function test_create_flow_makes_an_animation_project(): void
@@ -32,12 +47,12 @@ class ClipsAnimadosTest extends TestCase
         Livewire::test(ClipsAnimados::class)
             ->call('novoClip')
             ->call('escolherTipo', 'animation')
-            ->set('text', 'Olá mundo IATECA')
+            ->set('text', 'Olá mundo Brand Machine')
             ->call('submitAnimation')
             ->assertHasNoErrors()
             ->assertSet('view', 'dashboard');
 
-        $this->assertSame(1, ClipProject::where('type', 'animation')->count());
+        $this->assertSame(1, $this->store()->all()->where('type', 'animation')->count());
         Queue::assertPushed(TranscribeJob::class);
     }
 
@@ -52,7 +67,7 @@ class ClipsAnimadosTest extends TestCase
             ->call('submitAnimation')
             ->assertHasNoErrors();
 
-        $this->assertSame('audio', ClipProject::where('type', 'animation')->first()->input_kind);
+        $this->assertSame('audio', $this->store()->all()->firstWhere('type', 'animation')->input_kind);
         Queue::assertPushed(TranscribeJob::class);
     }
 
@@ -61,7 +76,7 @@ class ClipsAnimadosTest extends TestCase
         Queue::fake();
         Storage::fake('local');
 
-        $component = Livewire::test(ClipsAnimados::class)
+        Livewire::test(ClipsAnimados::class)
             ->call('novoClip')
             ->call('escolherTipo', 'animation')
             ->set('newImage', UploadedFile::fake()->image('logo.png', 120, 120))
@@ -69,11 +84,11 @@ class ClipsAnimadosTest extends TestCase
             ->call('adicionarImagem')
             ->assertHasNoErrors()
             ->assertSet('images', fn ($v) => count($v) === 1)
-            ->set('text', 'Olá mundo IATECA')
+            ->set('text', 'Olá mundo Brand Machine')
             ->call('submitAnimation')
             ->assertHasNoErrors();
 
-        $p = ClipProject::where('type', 'animation')->first();
+        $p = $this->store()->all()->firstWhere('type', 'animation');
         $this->assertCount(1, $p->images);
         $this->assertSame('logótipo da empresa', $p->images[0]['description']);
         $this->assertStringStartsWith('img_', $p->images[0]['id']);
@@ -109,7 +124,7 @@ class ClipsAnimadosTest extends TestCase
             ->call('submitOverlay')
             ->assertHasNoErrors();
 
-        $this->assertSame(1, ClipProject::where('type', 'overlay')->count());
+        $this->assertSame(1, $this->store()->all()->where('type', 'overlay')->count());
         Queue::assertPushed(TranscribeJob::class);
     }
 
@@ -117,10 +132,10 @@ class ClipsAnimadosTest extends TestCase
     {
         Queue::fake();
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
             'input_kind' => 'audio',
-            'status' => ClipProject::STATUS_DONE,
+            'status' => ClipRecord::STATUS_DONE,
             'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
                 ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'punchWord' => null, 'layers' => [['type' => 'timeline', 'text' => null, 'params' => ['caption' => 'Modelos', 'items' => [['label' => 'A']]]]]],
             ]],
@@ -129,7 +144,7 @@ class ClipsAnimadosTest extends TestCase
         Livewire::test(ClipsAnimados::class)
             ->call('editarClip', $p->id)
             ->assertSet('view', 'editPlan')
-            ->assertSet('editScenes.0.layerText', 'Modelos')   // timeline caption is the editable text
+            ->assertSet('editScenes.0.layerText', 'Modelos')
             ->set('editScenes.0.background', 'ink')
             ->set('editScenes.0.punchWord', 'ÊNFASE')
             ->set('editScenes.0.layerText', 'Cronologia')
@@ -138,21 +153,49 @@ class ClipsAnimadosTest extends TestCase
             ->assertSet('view', 'dashboard');
 
         $p->refresh();
-        $this->assertSame(ClipProject::STATUS_RENDERING, $p->status);
+        $this->assertSame(ClipRecord::STATUS_RENDERING, $p->status);
         $this->assertSame('ink', $p->plan['scenes'][0]['background']);
         $this->assertSame('ÊNFASE', $p->plan['scenes'][0]['punchWord']);
-        // the visual layer survives the edit and its text was updated
         $this->assertSame('timeline', $p->plan['scenes'][0]['layers'][0]['type']);
         $this->assertSame('Cronologia', $p->plan['scenes'][0]['layers'][0]['params']['caption']);
         Queue::assertPushed(RenderJob::class);
+    }
+
+    public function test_changing_a_scene_animation_swaps_the_layer_effect(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'punchWord' => null, 'layers' => [['type' => 'kinetic-text', 'text' => 'Olá', 'params' => []]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->assertSet('editScenes.0.animacao', 'kinetic-text')
+            ->call('escolherAnimacao', 0)
+            ->assertSet('animacaoPickerCena', 0)
+            ->call('mudarAnimacao', 0, 'fade')
+            ->assertSet('editScenes.0.animacao', 'fade')
+            ->assertSet('animacaoPickerCena', null)
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertSame('fade', $p->plan['scenes'][0]['layers'][0]['type']); // animation swapped
+        $this->assertSame('Olá', $p->plan['scenes'][0]['layers'][0]['text']);   // scene text preserved
     }
 
     public function test_edit_raw_json_saves_plan_verbatim_and_renders(): void
     {
         Queue::fake();
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipProject::STATUS_DONE,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
             'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
                 ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'layers' => [['type' => 'card', 'params' => ['title' => 'Antigo']]]],
             ]],
@@ -171,15 +214,141 @@ class ClipsAnimadosTest extends TestCase
             ->assertSet('view', 'dashboard');
 
         $p->refresh();
-        $this->assertSame(ClipProject::STATUS_RENDERING, $p->status);
+        $this->assertSame(ClipRecord::STATUS_RENDERING, $p->status);
         $this->assertEquals(5.0, $p->plan['duration']);
-        $this->assertSame('pie-chart', $p->plan['scenes'][0]['layers'][0]['type']); // verbatim, not capped/normalized
+        $this->assertSame('pie-chart', $p->plan['scenes'][0]['layers'][0]['type']);
         Queue::assertPushed(RenderJob::class);
+    }
+
+    public function test_editing_a_clip_loads_its_uploaded_images(): void
+    {
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_logo', 'path' => 'clips/uploads/logo.png', 'description' => 'the logo']],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'layers' => []],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->assertSet('images.0.id', 'img_logo')
+            ->assertSet('images.0.description', 'the logo');
+    }
+
+    public function test_replacing_an_image_keeps_its_id_and_swaps_the_file(): void
+    {
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_logo', 'path' => 'clips/uploads/old.png', 'description' => 'the logo']],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'layers' => []],
+            ]],
+        ]);
+
+        $component = Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->set('imageReplace.0', UploadedFile::fake()->image('new.png', 120, 120))
+            ->assertHasNoErrors()
+            ->assertSet('images.0.id', 'img_logo'); // id preserved → plan keeps using it
+
+        $newPath = $component->get('images')[0]['path'];
+        $this->assertNotSame('clips/uploads/old.png', $newPath); // file swapped
+    }
+
+    public function test_removing_a_used_image_persists_and_blanks_its_plan_reference(): void
+    {
+        Queue::fake();
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [
+                ['id' => 'img_a', 'path' => 'clips/uploads/a.png', 'description' => 'A'],
+                ['id' => 'img_b', 'path' => 'clips/uploads/b.png', 'description' => 'B'],
+            ],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => 'img_a', 'variant' => 'fullscreen']]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('removerImagem', 0) // drop img_a (the referenced one)
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertCount(1, $p->images);
+        $this->assertSame('img_b', $p->images[0]['id']);
+        // The now-dangling reference is blanked so the render shows a placeholder, not a 404.
+        $this->assertSame('', $p->plan['scenes'][0]['layers'][0]['params']['src']);
+    }
+
+    /**
+     * A scene can show an image while having none: the user chose to supply their
+     * own and has not yet, or the image it referenced was removed (which blanks
+     * the src — see the test above). The editor must still offer an upload there,
+     * otherwise that segment can never get its picture back.
+     */
+    public function test_a_scene_with_an_empty_image_slot_still_offers_an_upload(): void
+    {
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => '', 'variant' => 'fullscreen']]]],
+                // A text-only scene shows no image at all and must NOT offer one.
+                ['start' => 3, 'end' => 6, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'kinetic-text', 'text' => 'Sem imagem', 'params' => []]]],
+            ]],
+        ]);
+
+        $componente = Livewire::test(ClipsAnimados::class)->call('editarClip', $p->id);
+        $slots = $componente->instance()->sceneImages;
+
+        $this->assertArrayHasKey(0, $slots, 'the image scene offers no slot to fill');
+        $this->assertNull($slots[0]['id'], 'the slot should read as empty');
+        $this->assertSame(0, $slots[0]['layerIndex']);
+        $this->assertArrayNotHasKey(1, $slots, 'a text-only scene must not offer an image upload');
+    }
+
+    public function test_uploading_fills_an_empty_scene_image_slot(): void
+    {
+        Queue::fake();
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => '', 'variant' => 'fullscreen']]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->set('sceneImageUploads.0', UploadedFile::fake()->image('minha.png', 120, 120))
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertCount(1, $p->images, 'the upload was not attached to the clip');
+        $this->assertSame(
+            $p->images[0]['id'],
+            $p->plan['scenes'][0]['layers'][0]['params']['src'],
+            'the scene still does not point at the uploaded image'
+        );
     }
 
     public function test_edit_raw_json_rejects_invalid_json(): void
     {
-        $p = ClipProject::create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => ['duration' => 3.0, 'scenes' => []]]);
+        $p = $this->store()->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => ['duration' => 3.0, 'scenes' => []]]);
 
         Livewire::test(ClipsAnimados::class)
             ->call('editarClip', $p->id)
@@ -191,11 +360,10 @@ class ClipsAnimadosTest extends TestCase
 
     public function test_edit_plan_accepts_all_renderer_transitions(): void
     {
-        // The planner (and Remotion) support slide/zoom; the Cenas editor must not reject them.
         Queue::fake();
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipProject::STATUS_DONE,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
             'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
                 ['start' => 0, 'end' => 1.5, 'background' => 'vellum', 'transitionIn' => 'slide', 'karaoke' => false, 'layers' => []],
                 ['start' => 1.5, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'zoom', 'karaoke' => false, 'layers' => []],
@@ -210,15 +378,15 @@ class ClipsAnimadosTest extends TestCase
             ->assertSet('view', 'dashboard');
 
         $p->refresh();
-        $this->assertSame(ClipProject::STATUS_RENDERING, $p->status);
+        $this->assertSame(ClipRecord::STATUS_RENDERING, $p->status);
         $this->assertSame('slide', $p->plan['scenes'][0]['transitionIn']);
         Queue::assertPushed(RenderJob::class);
     }
 
     public function test_edit_plan_rejects_end_before_start(): void
     {
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio',
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio',
             'plan' => ['duration' => 3.0, 'mode' => 'dense', 'scenes' => [
                 ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'transitionIn' => 'cut', 'layers' => []],
             ]],
@@ -236,9 +404,9 @@ class ClipsAnimadosTest extends TestCase
     {
         Queue::fake();
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio',
-            'status' => ClipProject::STATUS_DONE,
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
             'transcript' => ['duration' => 2.0, 'text' => 'Marquina', 'words' => [['word' => 'Marquina', 'start' => 0.0, 'end' => 2.0]], 'segments' => []],
         ]);
 
@@ -252,7 +420,7 @@ class ClipsAnimadosTest extends TestCase
 
         $p->refresh();
         $this->assertSame('Máquina', $p->transcript['text']);
-        $this->assertSame(ClipProject::STATUS_PLANNING, $p->status);
+        $this->assertSame(ClipRecord::STATUS_PLANNING, $p->status);
         Queue::assertPushed(PlanAnimationsJob::class);
     }
 
@@ -262,31 +430,29 @@ class ClipsAnimadosTest extends TestCase
 
         Livewire::test(ClipsAnimados::class)
             ->set('createType', 'animation')
-            ->set('text', 'Olá mundo IATECA')
+            ->set('text', 'Olá mundo Brand Machine')
             ->set('musica', 'faixa.mp3')
             ->set('musicaVolume', 0.25)
             ->call('submitAnimation')
             ->assertHasNoErrors();
 
-        $meta = ClipProject::where('type', 'animation')->first()->meta;
+        $meta = $this->store()->all()->firstWhere('type', 'animation')->meta;
         $this->assertSame('faixa.mp3', $meta['musica']);
         $this->assertEqualsWithDelta(0.25, $meta['musica_volume'], 0.0001);
     }
 
     public function test_render_job_mixes_chosen_music_and_omits_when_none(): void
     {
-        // Isolated music library with one track.
         $dir = storage_path('app/testing/musicas-'.uniqid());
         @mkdir($dir, 0777, true);
         file_put_contents("$dir/faixa.mp3", 'ID3');
         $this->app->instance(MusicLibrary::class, new MusicLibrary($dir));
 
-        // Renderer that captures the props it was handed.
         $renderer = new class implements RemotionRenderer
         {
             public array $props = [];
 
-            public function render(array $props, string $outPath): string
+            public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
             {
                 $this->props = $props;
                 @mkdir(dirname($outPath), 0777, true);
@@ -299,24 +465,24 @@ class ClipsAnimadosTest extends TestCase
 
         $plan = ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => []];
 
-        $chosen = ClipProject::create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'faixa.mp3', 'musica_volume' => 0.2]]);
+        $chosen = $this->store()->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'faixa.mp3', 'musica_volume' => 0.2]]);
         $this->app->call([new RenderJob($chosen->id), 'handle']);
         $this->assertSame("$dir/faixa.mp3", $renderer->props['musicSrc']);
         $this->assertEqualsWithDelta(0.2, $renderer->props['musicVolume'], 0.0001);
 
-        $none = ClipProject::create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'nenhuma']]);
+        $none = $this->store()->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'nenhuma']]);
         $this->app->call([new RenderJob($none->id), 'handle']);
         $this->assertArrayNotHasKey('musicSrc', $renderer->props);
 
-        \Illuminate\Support\Facades\File::deleteDirectory($dir);
+        File::deleteDirectory($dir);
     }
 
     public function test_plan_job_suggests_title_description_and_tags(): void
     {
-        Queue::fake(); // don't run the chained RenderJob
+        Queue::fake();
 
-        $p = ClipProject::create([
-            'type' => ClipProject::TYPE_ANIMATION, 'input_kind' => 'audio',
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio',
             'title' => 'Sem título',
             'transcript' => ['duration' => 2.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []],
         ]);
@@ -324,17 +490,40 @@ class ClipsAnimadosTest extends TestCase
         $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
 
         $p->refresh();
-        $this->assertNotSame('Sem título', $p->title);          // AI-suggested title replaced the placeholder
+        $this->assertNotSame('Sem título', $p->title);
         $this->assertNotEmpty($p->meta['suggested']['description']);
         $this->assertNotEmpty($p->meta['suggested']['tags']);
     }
 
+    /** Each image suggestion is upload / AI image / no image (a text scene instead). */
+    public function test_image_suggestion_mode_switches_between_generate_and_text(): void
+    {
+        $key = ImageRequests::key('a laptop on a desk');
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_COLLECTING,
+            'meta' => ['image_requests' => [['key' => $key, 'prompt' => 'a laptop on a desk']]],
+        ]);
+
+        $c = Livewire::test(ClipsAnimados::class)->call('revisarImagens', $p->id);
+        $this->assertSame('generate', $c->instance()->imageRequests[0]['mode']);
+
+        $c->call('modoImagem', $key, 'text');
+        $this->assertTrue($p->refresh()->meta['image_text'][$key]);
+        $this->assertSame('text', $c->instance()->imageRequests[0]['mode']);
+
+        $c->call('modoImagem', $key, 'generate');
+        $this->assertSame([], $p->refresh()->meta['image_text']);
+        $this->assertSame('generate', $c->instance()->imageRequests[0]['mode']);
+    }
+
     public function test_delete_removes_the_project(): void
     {
-        $p = ClipProject::create(['type' => 'animation', 'input_kind' => 'text', 'source_text' => 'x']);
+        $p = $this->store()->create(['type' => 'animation', 'input_kind' => 'text', 'source_text' => 'x']);
 
         Livewire::test(ClipsAnimados::class)->call('apagar', $p->id);
 
-        $this->assertDatabaseMissing('clip_projects', ['id' => $p->id]);
+        $this->assertNull($this->store()->find($p->id));
     }
 }

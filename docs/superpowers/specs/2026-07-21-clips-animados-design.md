@@ -41,7 +41,7 @@ pelo planeador GPT como pelas composições Remotion. Define:
 - **Vocabulário fechado de primitivas de animação:** `fade`, `slide`,
   `scale` (zoom), `kinetic-text` (revelação palavra a palavra), `highlight`,
   `fleuron-draw`, `seal-stamp`, `underline-sweep`, `count-up`, `image-reveal`.
-- **Tokens visuais IATECA:** paleta papiro/verde-azulado, tipografia
+- **Tokens visuais Brand Machine:** paleta papiro/verde-azulado, tipografia
   (Cormorant Garamond, EB Garamond, JetBrains Mono), textura *foxing*,
   ornamentos — para os clips ficarem com a identidade da casa.
 - **Regras de tempo:** duração mín./máx. por primitiva, *easing*, sobreposição.
@@ -142,7 +142,7 @@ config/contentmachine.php                # secção 'clips' (driver, voz, dimens
 
 - Dimensões de saída: **1080×1920 vertical** (formato shorts/reels).
 - Voz TTS: uma voz ElevenLabs por defeito, configurável em Definições depois.
-- Todos os textos de interface em Português europeu, dentro do sistema IATECA
+- Todos os textos de interface em Português europeu, dentro do sistema Brand Machine
   (page-header, painéis, fleurões, cotas mono).
 
 ## 10. Testes
