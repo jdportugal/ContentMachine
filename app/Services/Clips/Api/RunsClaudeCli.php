@@ -18,8 +18,14 @@ use Symfony\Component\Process\Process;
  */
 trait RunsClaudeCli
 {
-    /** Cached `claude` binary lookup (per process) — probing costs a subprocess. */
-    private static ?bool $claudeBinExists = null;
+    /**
+     * Cached `claude` binary lookup (per process) — probing costs a subprocess.
+     * Keyed BY BINARY PATH: a single bool would answer for whichever path was
+     * probed first, so changing clips.claude_binary would get a stale verdict.
+     *
+     * @var array<string,bool>
+     */
+    private static array $claudeBinExists = [];
 
     /**
      * Pipeline step this service is (see config contentmachine.passos), so the
@@ -98,20 +104,21 @@ trait RunsClaudeCli
     /** Whether the `claude` CLI is actually installed (a server usually has no session). */
     private function claudeBinaryExists(): bool
     {
-        if (self::$claudeBinExists !== null) {
-            return self::$claudeBinExists;
+        $bin = (string) config('contentmachine.clips.claude_binary', 'claude');
+
+        if (isset(self::$claudeBinExists[$bin])) {
+            return self::$claudeBinExists[$bin];
         }
 
-        $bin = (string) config('contentmachine.clips.claude_binary', 'claude');
         if (str_contains($bin, '/')) {
-            return self::$claudeBinExists = is_executable($bin);
+            return self::$claudeBinExists[$bin] = is_executable($bin);
         }
 
         $p = new Process(['bash', '-lc', 'command -v '.escapeshellarg($bin)]);
         $p->setTimeout(10);
         $p->run();
 
-        return self::$claudeBinExists = $p->isSuccessful() && trim($p->getOutput()) !== '';
+        return self::$claudeBinExists[$bin] = $p->isSuccessful() && trim($p->getOutput()) !== '';
     }
 
     /**
@@ -177,8 +184,7 @@ trait RunsClaudeCli
             }
 
             if (! $process->isSuccessful()) {
-                $lastError = 'exit '.$process->getExitCode().': '
-                    .(trim($process->getErrorOutput()) ?: trim(substr($process->getOutput(), 0, 200)) ?: 'no output');
+                $lastError = 'exit '.$process->getExitCode().': '.$this->cliFailureReason($process);
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
@@ -187,7 +193,7 @@ trait RunsClaudeCli
             $envelope = json_decode($process->getOutput(), true) ?: [];
 
             if (($envelope['is_error'] ?? false) || ! empty($envelope['api_error_status']) || ! isset($envelope['result'])) {
-                $lastError = 'envelope: '.(($envelope['api_error_status'] ?? null) ?: substr($process->getOutput(), 0, 200));
+                $lastError = 'envelope: '.$this->cliFailureReason($process);
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
@@ -197,6 +203,37 @@ trait RunsClaudeCli
         }
 
         throw new RuntimeException("Claude CLI failed after {$attempts} attempt(s) — {$lastError}");
+    }
+
+    /**
+     * Why a `claude` CLI run failed, in one line.
+     *
+     * The CLI reports failures INSIDE its JSON envelope (stderr is usually empty),
+     * and the useful fields sit past the long `usage` block — so a blind prefix of
+     * the raw output truncates mid-word and tells you nothing. Pull the fields that
+     * actually say what happened, and only fall back to raw output if it is not JSON.
+     */
+    private function cliFailureReason(Process $process): string
+    {
+        if ($stderr = trim($process->getErrorOutput())) {
+            return substr($stderr, 0, 400);
+        }
+
+        $out = trim($process->getOutput());
+        $envelope = json_decode($out, true);
+        if (! is_array($envelope)) {
+            return $out !== '' ? substr($out, 0, 400) : 'no output';
+        }
+
+        // `result` carries the CLI's own error text when is_error is set.
+        $parts = array_filter([
+            $envelope['api_error_status'] ?? null,
+            $envelope['subtype'] ?? null,
+            isset($envelope['stop_reason']) ? 'stop_reason='.$envelope['stop_reason'] : null,
+            is_string($envelope['result'] ?? null) ? substr($envelope['result'], 0, 400) : null,
+        ]);
+
+        return $parts ? implode(' · ', $parts) : substr($out, 0, 400);
     }
 
     private function claudeBackoff(int $attempt, int $attempts): void

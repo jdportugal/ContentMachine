@@ -13,7 +13,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Clip Generator')]
+#[Title('Shorts Generator')]
 class Clips extends Component
 {
     use WithFileUploads;

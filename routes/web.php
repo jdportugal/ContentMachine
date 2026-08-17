@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
     Route::livewire('/clips', Clips::class)->name('clips');
+    // Content Transformer subtabs. Registered before '/clips/{slug}/video' so the
+    // literal segments are never swallowed by that wildcard.
+    Route::livewire('/clips/posts', \App\Livewire\PostsGenerator::class)->name('clips.posts');
+    Route::livewire('/clips/repurpose', \App\Livewire\ContentRepurpose::class)->name('clips.repurpose');
 
     // Serve o vídeo do clip para pré-visualização. Devolve o melhor disponível:
     // short final (com música > legendado) ou, se ainda só foi cortado, o corte cru.
@@ -80,6 +84,22 @@ Route::middleware('auth')->group(function () {
     })->name('clips.musica');
     Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
     Route::livewire('/clips-animados/sfx', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx');
+    Route::livewire('/clips-animados/vfx', \App\Livewire\ClipsAnimadosVfx::class)->name('clips-animados.vfx');
+
+    // Serve a VFX Lab render: inline for the preview player, ?download=1 to save it.
+    // 404 until the render finishes (or forever, if it failed).
+    Route::get('/clips-animados/vfx/{id}/media', function (string $id) {
+        abort_unless((bool) preg_match('/^[a-z0-9-]+$/', $id), 404);
+        $store = app(\App\Services\Clips\Store\VfxStore::class);
+        $vfx = $store->find($id);
+        abort_unless($vfx !== null, 404);
+        $path = $store->videoFor($vfx);
+        abort_unless($path !== null, 404);
+
+        return request()->boolean('download')
+            ? response()->download($path)
+            : response()->file($path);
+    })->name('clips-animados.vfx-media');
     // Per-effect detail page (custom effect id or built-in slug). One segment, so it
     // never collides with the /sfx/{slug}/preview and /sfx/{slug}/audio asset routes.
     Route::livewire('/clips-animados/sfx/{key}', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx.detail');

@@ -40,7 +40,7 @@ class ClipsTest extends TestCase
 
     public function test_pagina_responde_200(): void
     {
-        $this->get('/clips')->assertOk()->assertSee('Clip Generator');
+        $this->get('/clips')->assertOk()->assertSee('Shorts Generator');
     }
 
     public function test_adicionar_fonte_e_criar_clip(): void

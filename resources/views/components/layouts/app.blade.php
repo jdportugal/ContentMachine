@@ -45,9 +45,15 @@
                     $nav = [
                         ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
                         ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
-                        ['route' => 'clips',           'label' => 'Clip Generator',    'sub' => 'Video',              'color' => '#5A7BFF', 'glyph' => '▲'],
-                        ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦'],
-                        ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio',      'sub' => 'Effects · Intros',   'color' => '#6FE0D0', 'glyph' => '✶'],
+                        // 'clips*' would also match every 'clips-animados…' route — hence the explicit list.
+                        // One entry covering three subtabs: Shorts · Posts · Repurpose.
+                        ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#5A7BFF', 'glyph' => '▲', 'match' => ['clips', 'clips.*']],
+                        // 'match' overrides the default "<route>*" highlight test. Animated Clips
+                        // needs it because 'clips-animados*' would also match the studio's own
+                        // routes, lighting up two entries at once; the studio needs it because
+                        // its one entry covers two pages (SFX + VFX subtabs).
+                        ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
+                        ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio',  'sub' => 'SFX · VFX',          'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*']],
                         ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
                         ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇'],
                         ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Publishing',         'color' => '#FF8A4D', 'glyph' => '⬡'],
@@ -58,8 +64,9 @@
                 @endphp
 
                 @foreach ($nav as $i => $item)
-                    @php $active = request()->routeIs($item['route'].'*'); @endphp
+                    @php $active = request()->routeIs(...($item['match'] ?? [$item['route'].'*'])); @endphp
                     <a href="{{ route($item['route']) }}"
+                       @if ($active) aria-current="page" @endif
                        class="group flex items-center gap-3 pl-4 pr-4 py-1.5 mx-2 rounded-sm transition
                               {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                         <span class="w-1.5 self-stretch rounded-full transition-all"

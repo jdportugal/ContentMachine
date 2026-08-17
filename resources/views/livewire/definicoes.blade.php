@@ -224,7 +224,7 @@
                 </div>
             </x-panel>
 
-            <x-panel eyebrow="Workshop" title="Clip Generator" glyph="✂">
+            <x-panel eyebrow="Workshop" title="Shorts Generator" glyph="✂">
                 <p class="text-ink-soft -mt-2 mb-4">Address of the ShortsCreator API that cuts the videos and records the subtitles.</p>
                 <div>
                     <label class="eyebrow block mb-1.5">API URL</label>

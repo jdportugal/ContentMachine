@@ -44,6 +44,21 @@ class ClipsAnimados extends Component
     /** dashboard | create | editPlan | editTranscript | backgrounds */
     public string $view = 'dashboard';
 
+    /**
+     * Arriving from Content Repurpose ("turn this post into a video") opens the
+     * creation form with the post's text already in the script box — the mirror
+     * of how Oficina picks up session('oficina_brief') coming the other way.
+     */
+    public function mount(): void
+    {
+        if (($seed = session('animado_texto')) !== null) {
+            session()->forget('animado_texto');
+            $this->text = (string) $seed;
+            $this->createType = 'animation';
+            $this->view = 'create';
+        }
+    }
+
     // ---- Backgrounds studio ----
     public string $bgPrompt = '';
 

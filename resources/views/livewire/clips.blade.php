@@ -1,9 +1,11 @@
 <div>
     <x-page-header
         eyebrow="Tomus · III"
-        title="Clip Generator"
+        title="Shorts Generator"
         cota="778.5 · ACM · '26"
         lead="Automatic cutting of long videos into subtitled shorts. Each step — cut, subtitle, regenerate — is independent and re-runnable." />
+
+    @include('livewire.partials.transformer-tabs')
 
     {{-- Local operations (ffmpeg/AI) use the particle loader — see the buttons below. --}}
 

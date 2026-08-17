@@ -45,4 +45,44 @@ class MonitoringRefresher
     {
         return $plataforma === 'youtube' ? 'yt-dlp' : 'Apify';
     }
+
+    /** Why the last collection came back empty, or null when it genuinely was. */
+    public function ultimoErro(): ?string
+    {
+        return $this->apify->ultimoErro();
+    }
+
+    /**
+     * Collect every network that has both a profile URL and a working source, in
+     * one pass. Each network is independent: one failing never stops the rest.
+     *
+     * @param  array<string,string>  $urls  platform => profile URL
+     * @return array<string,array{ok:bool,count:int,error:?string}> per platform
+     */
+    public function atualizarTodas(array $urls, ?int $limite = null): array
+    {
+        $resultado = [];
+
+        foreach ($urls as $plataforma => $url) {
+            if (trim((string) $url) === '') {
+                continue; // no profile configured — not a failure, just nothing to do
+            }
+            if (! $this->disponivel($plataforma)) {
+                $resultado[$plataforma] = ['ok' => false, 'count' => 0, 'error' => 'no collection source configured'];
+
+                continue;
+            }
+
+            $itens = $this->atualizar($plataforma, $url, $limite);
+            $erro = $this->ultimoErro();
+
+            $resultado[$plataforma] = [
+                'ok' => $erro === null,
+                'count' => count($itens),
+                'error' => $erro,
+            ];
+        }
+
+        return $resultado;
+    }
 }

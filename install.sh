@@ -45,6 +45,19 @@ mkdir -p "${DIR}"; cd "${DIR}"
 # (API keys, channels, models…). Drop a stale one if present.
 rm -f .env 2>/dev/null || true
 
+# The nightly collection (monitoring:collect) runs at 00:00 in the app's timezone.
+# Adopt the host's so "midnight" is the operator's midnight, not UTC. Falls back
+# to UTC on hosts without timedatectl or /etc/timezone.
+TZ_HOST="${APP_TIMEZONE:-}"
+if [ -z "$TZ_HOST" ]; then
+  TZ_HOST="$(timedatectl show -p Timezone --value 2>/dev/null || true)"
+fi
+if [ -z "$TZ_HOST" ] && [ -r /etc/timezone ]; then
+  TZ_HOST="$(cat /etc/timezone 2>/dev/null || true)"
+fi
+[ -z "$TZ_HOST" ] && TZ_HOST="UTC"
+log "timezone: ${TZ_HOST} (nightly collection runs at 00:00 there)"
+
 cat > docker-compose.yml <<EOF
 services:
   app:
@@ -55,6 +68,7 @@ services:
     environment:
       APP_URL: https://${DOMAIN}
       ASSET_URL: https://${DOMAIN}
+      APP_TIMEZONE: ${TZ_HOST}
     volumes:
       - storage:/app/storage
       - vault:/app/vault

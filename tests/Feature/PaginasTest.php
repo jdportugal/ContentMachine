@@ -22,7 +22,7 @@ class PaginasTest extends TestCase
         return [
             'dashboard' => ['/', 'Dashboard'],
             'monitoring' => ['/monitorizacao', 'Monitoring'],
-            'clips' => ['/clips', 'Clip Generator'],
+            'clips' => ['/clips', 'Shorts Generator'],
             'animated-clips' => ['/clips-animados', 'Animated Clips'],
             'posts' => ['/publicacoes', 'Posts'],
             'workshop-post' => ['/publicacoes/post', 'Single-page posts'],

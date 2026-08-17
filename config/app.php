@@ -65,7 +65,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Drives the nightly schedule (monitoring:collect at 00:00), so "midnight"
+    // means the operator's midnight, not UTC. Left as UTC when unset.
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------

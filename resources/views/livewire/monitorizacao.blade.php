@@ -29,6 +29,16 @@
                 <span wire:loading.remove wire:target="atualizar">Refresh data</span>
                 <span wire:loading wire:target="atualizar">Collecting via {{ $fonte }}…</span>
             </button>
+
+            {{-- Every network at once. Independent of $fonteDisponivel, which only
+                 reflects the network currently in focus. --}}
+            <button wire:click="atualizarTodas" wire:loading.attr="disabled" wire:target="atualizarTodas"
+                    x-on:click="window.CMLoader.busy('Collecting every network…')"
+                    class="rounded-sm border border-ink-soft/25 px-4 py-2 text-ink-soft font-display text-lg
+                           hover:text-ink hover:border-teal/40 transition disabled:opacity-40">
+                <span wire:loading.remove wire:target="atualizarTodas">⟳ Collect all networks</span>
+                <span wire:loading wire:target="atualizarTodas">Collecting all…</span>
+            </button>
             <div class="font-mono text-xs text-ink-faint">
                 @if ($atualizadoEm)
                     last collection · {{ $atualizadoEm }} · via {{ $fonte }}
@@ -44,6 +54,7 @@
             @else
                 <span class="font-mono text-[0.62rem] text-ink-faint truncate max-w-full">{{ $perfilUrl }}</span>
             @endif
+            <span class="font-mono text-[0.6rem] text-ink-faint w-full">Collected automatically every night at 00:00 (needs the scheduler running).</span>
         </div>
 
         @if (empty($resumo) && empty($recentes))

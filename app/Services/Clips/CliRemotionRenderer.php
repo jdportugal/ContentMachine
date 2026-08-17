@@ -132,8 +132,14 @@ class CliRemotionRenderer implements RemotionRenderer
         ];
 
         if (! empty($props['transparent'])) {
+            // Alpha survives only with ALL four: the 4444 profile carries the
+            // channel, PNG frames preserve it through the pipeline, and
+            // yuva444p10le is the only pixel format here that encodes it.
+            // Drop any one and the output is silently opaque.
             $args[] = '--codec=prores';
             $args[] = '--prores-profile=4444';
+            $args[] = '--image-format=png';
+            $args[] = '--pixel-format=yuva444p10le';
         } else {
             $args[] = '--codec=h264';
         }
