@@ -93,6 +93,13 @@
                                 {{ $v->get('aspect', '—') }} · {{ $v->get('width') }}×{{ $v->get('height') }} · {{ $v->get('duration') }}s
                                 @if ($v->get('transparent')) · <span class="text-teal">alpha</span> @endif
                             </p>
+                            {{-- Which page it filmed. An AI-guessed URL is the likeliest
+                                 thing to be wrong, so it is always shown. --}}
+                            @if ($v->get('site_url'))
+                                <p class="font-mono text-[0.55rem] text-teal mt-1 truncate" title="{{ $v->get('site_url') }}">🎞 {{ $v->get('site_url') }}</p>
+                            @elseif ($v->get('site_error'))
+                                <p class="font-mono text-[0.55rem] text-bad/80 mt-1">site capture failed — built without it</p>
+                            @endif
                         </div>
 
                         <div class="mt-3 flex flex-wrap gap-2">

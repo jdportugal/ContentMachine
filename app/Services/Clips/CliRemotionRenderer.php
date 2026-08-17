@@ -12,9 +12,46 @@ class CliRemotionRenderer implements RemotionRenderer
     {
         @mkdir(dirname($outPath), 0777, true);
 
-        // Remotion loads local assets via staticFile() from its public/ folder, not
-        // filesystem paths or file:// URLs. Stage the audio + any images there and
-        // reference them by filename.
+        [$props, $staged] = $this->stageProps($props);
+
+        $propsFile = tempnam(sys_get_temp_dir(), 'clip_props_').'.json';
+        file_put_contents($propsFile, json_encode($props, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        try {
+            $process = new Process(
+                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
+                config('contentmachine.clips.remotion_path')
+            );
+            // Full clips (many scenes, ~1-2k frames) can outrun 10 min; keep this
+            // below the queue retry_after (1800) so the worker fails cleanly if it
+            // ever truly hangs, but give real renders room.
+            $process->setTimeout((float) config('contentmachine.clips.render_timeout', 1500));
+            $process->run();
+
+            if (! $process->isSuccessful()) {
+                throw new RuntimeException('Remotion failed: '.$process->getErrorOutput());
+            }
+        } finally {
+            @unlink($propsFile);
+            foreach ($staged as $file) {
+                @unlink($file);
+            }
+        }
+
+        return $outPath;
+    }
+
+    /**
+     * Copy every local asset the props reference into Remotion's public/ and
+     * rewrite the reference to its basename — Remotion resolves staticFile()
+     * from there, not from filesystem paths.
+     *
+     * Public so the rewriting can be tested without running a render.
+     *
+     * @return array{0:array<string,mixed>,1:array<int,string>} [props, staged files]
+     */
+    public function stageProps(array $props): array
+    {
         $staged = [];
         if (! empty($props['audioSrc']) && ! preg_match('#^https?://#', $props['audioSrc'])) {
             $file = $this->stageAsset($props['audioSrc']);
@@ -51,22 +88,25 @@ class CliRemotionRenderer implements RemotionRenderer
             }
             unset($reelEntry);
         }
-        if (! empty($props['scenes'])) {
-            // Stage any local image OR audio file referenced anywhere in a layer
-            // (image-reveal.src, bar.image, timeline item.image, layer.audioSrc, …).
-            $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg|mp4|mov|webm|m4v)$#i', $s);
-            $stage = function (&$node) use (&$stage, &$staged, $isAsset) {
-                if (is_array($node)) {
-                    foreach ($node as &$v) {
-                        $stage($v);
-                    }
-                    unset($v);
-                } elseif (is_string($node) && $isAsset($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
-                    $file = $this->stageAsset($node);
-                    $staged[] = $file;
-                    $node = basename($file);
+        // Stage any local image / audio / video referenced anywhere in a layer
+        // (image-reveal.src, bar.image, timeline item.image, layer.audioSrc, …)
+        // or in a single effect's params (the SampleEffect path used by the VFX
+        // Lab and the SFX test-render, where a site capture arrives as params.src).
+        $isAsset = static fn (string $s): bool => (bool) preg_match('#\.(png|jpe?g|gif|webp|bmp|mp3|wav|m4a|aac|ogg|mp4|mov|webm|m4v)$#i', $s);
+        $stage = function (&$node) use (&$stage, &$staged, $isAsset) {
+            if (is_array($node)) {
+                foreach ($node as &$v) {
+                    $stage($v);
                 }
-            };
+                unset($v);
+            } elseif (is_string($node) && $isAsset($node) && ! preg_match('#^https?://#', $node) && is_file($node)) {
+                $file = $this->stageAsset($node);
+                $staged[] = $file;
+                $node = basename($file);
+            }
+        };
+
+        if (! empty($props['scenes'])) {
             foreach ($props['scenes'] as &$scene) {
                 if (! empty($scene['layers']) && is_array($scene['layers'])) {
                     $stage($scene['layers']);
@@ -74,32 +114,11 @@ class CliRemotionRenderer implements RemotionRenderer
             }
             unset($scene);
         }
-
-        $propsFile = tempnam(sys_get_temp_dir(), 'clip_props_').'.json';
-        file_put_contents($propsFile, json_encode($props, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
-        try {
-            $process = new Process(
-                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
-                config('contentmachine.clips.remotion_path')
-            );
-            // Full clips (many scenes, ~1-2k frames) can outrun 10 min; keep this
-            // below the queue retry_after (1800) so the worker fails cleanly if it
-            // ever truly hangs, but give real renders room.
-            $process->setTimeout((float) config('contentmachine.clips.render_timeout', 1500));
-            $process->run();
-
-            if (! $process->isSuccessful()) {
-                throw new RuntimeException('Remotion failed: '.$process->getErrorOutput());
-            }
-        } finally {
-            @unlink($propsFile);
-            foreach ($staged as $file) {
-                @unlink($file);
-            }
+        if (! empty($props['params']) && is_array($props['params'])) {
+            $stage($props['params']);
         }
 
-        return $outPath;
+        return [$props, $staged];
     }
 
     /** Stage a local asset into Remotion's public/ dir; returns the staged path. Large files are symlinked. */

@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Capture\SiteFootage;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
@@ -46,8 +47,13 @@ class GenerateVfxJob implements ShouldQueue
         return [(new WithoutOverlapping('generate-effect'))->releaseAfter(60)->expireAfter(1800)];
     }
 
-    public function handle(EffectGenerator $generator, EffectLibrary $library, VfxStore $store, RemotionRenderer $renderer): void
-    {
+    public function handle(
+        EffectGenerator $generator,
+        EffectLibrary $library,
+        VfxStore $store,
+        RemotionRenderer $renderer,
+        SiteFootage $footage,
+    ): void {
         $this->activateProject();
 
         $vfx = $store->find($this->vfxId);
@@ -66,7 +72,16 @@ class GenerateVfxJob implements ShouldQueue
         $tmp = null;
 
         try {
-            $data = $generator->generate((string) $vfx->prompt, canvas: $canvas);
+            // If the prompt is about a real product or site, record it scrolling
+            // and hand the footage to the component instead of a mock-up.
+            $site = $footage->forPrompt(
+                (string) $vfx->prompt,
+                $canvas['width'],
+                $canvas['height'],
+                (float) $vfx->get('duration', 5)
+            );
+
+            $data = $generator->generate((string) $vfx->prompt, canvas: $canvas, siteCapture: $site['path']);
 
             $library->writeCandidate($data['tsx']);
 
@@ -95,6 +110,10 @@ class GenerateVfxJob implements ShouldQueue
                 'ext' => $ext,
                 'display_name' => $data['display_name'],
                 'tsx' => $data['tsx'],   // kept so a future re-render needs no second generation
+                // Surfaced in the UI: an AI-guessed URL is the likeliest thing to
+                // be wrong, so you can see which page it actually filmed.
+                'site_url' => $site['url'],
+                'site_error' => $site['error'],
                 'error' => null,
             ]);
         } catch (\Throwable $e) {

@@ -280,6 +280,9 @@ return [
         // follows the speech; set e.g. 'pt' only if you want to force it).
         'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', ''),
         'remotion_path' => base_path('remotion'),
+        // Scroll-captures of websites, cached by url+size+length. Outside the
+        // vault: they are re-fetchable, and they are large.
+        'site_captures' => storage_path('app/clips/site-captures'),
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),
         // Auto-generate on-brand images (Nano Banana / kie.ai) for scenes the
@@ -316,6 +319,7 @@ return [
         'clips_pesquisa' => ['label' => 'Clips · research', 'kind' => 'llm'],
         'clips_plano' => ['label' => 'Clips · animation plan', 'kind' => 'llm'],
         'clips_metadados' => ['label' => 'Clips · title & metadata', 'kind' => 'llm'],
+        'vfx_site' => ['label' => 'VFX · which site to film', 'kind' => 'llm'],
         'clips_transcricao' => ['label' => 'Clips · transcription', 'kind' => 'stt'],
         'clips_voz' => ['label' => 'Clips · voiceover', 'kind' => 'tts'],
         'clips_sfx' => ['label' => 'Clips · sound effects', 'kind' => 'tts'],

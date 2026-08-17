@@ -3,6 +3,7 @@
 namespace App\Jobs\Editor;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Capture\SiteFootage;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
@@ -93,7 +94,10 @@ class GenerateEditSfxJob implements ShouldQueue
             foreach ($momentos as $i => $momento) {
                 $canvas = ['width' => $largura, 'height' => $altura, 'transparent' => true];
 
-                $data = $generator->generate($momento['brief'], canvas: $canvas);
+                $site = app(SiteFootage::class)
+                    ->forPrompt($momento['brief'], $largura, $altura, (float) $momento['duration']);
+
+                $data = $generator->generate($momento['brief'], canvas: $canvas, siteCapture: $site['path']);
                 $library->writeCandidate($data['tsx']);
 
                 // ProRes 4444 with alpha must be a .mov.
@@ -116,6 +120,7 @@ class GenerateEditSfxJob implements ShouldQueue
                     'brief' => $momento['brief'],
                     'over' => $momento['text'],
                     'name' => $data['display_name'] ?? 'Effect '.($i + 1),
+                    'site_url' => $site['url'],
                 ];
             }
 
