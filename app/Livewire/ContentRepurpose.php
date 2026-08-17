@@ -28,6 +28,15 @@ use Livewire\Component;
 #[Title('Content Repurpose')]
 class ContentRepurpose extends Component
 {
+    /**
+     * Caps on the seeded text. The brief is only read by the planner's prompt, so
+     * it can carry the whole transcript; the animated-clip script is validated at
+     * max:5000 and would be rejected above it.
+     */
+    private const MAX_BRIEF = 20000;
+
+    private const MAX_SCRIPT = 5000;
+
     /** Which side to show: 'video' (→ post/carousel) or 'post' (→ video). */
     public string $de = 'video';
 
@@ -105,7 +114,8 @@ class ContentRepurpose extends Component
             return null;
         }
 
-        session(['oficina_brief' => Str::limit($texto, 6000, '')]);
+        // The whole spoken text, not a summary — the planner writes from this.
+        session(['oficina_brief' => Str::limit($texto, self::MAX_BRIEF, '')]);
 
         return redirect()->route('publicacoes.oficina', $tipo);
     }
@@ -125,7 +135,7 @@ class ContentRepurpose extends Component
             return null;
         }
 
-        session(['animado_texto' => $texto]);
+        session(['animado_texto' => Str::limit($texto, self::MAX_SCRIPT, '')]);
 
         return redirect()->route('clips-animados');
     }

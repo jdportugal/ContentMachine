@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Clips;
 
+use App\Livewire\Clips;
 use App\Livewire\ClipsAnimados;
 use App\Livewire\ContentRepurpose;
 use App\Livewire\PostsGenerator;
@@ -114,6 +115,58 @@ class ContentTransformerTest extends TestCase
         $this->assertStringContainsString('Break the interview', (string) session('oficina_brief'));
     }
 
+    /**
+     * The angle is only an instruction. Without the video's own words the planner
+     * has nothing to write FROM and invents the substance, so the transcript must
+     * ride along with it.
+     */
+    public function test_opening_an_idea_sends_the_source_transcript_not_just_the_angle(): void
+    {
+        $vault = app(VaultContract::class);
+        $fonte = $vault->create('clips/fontes', [
+            'titulo' => 'Interview', 'tipo' => 'clip-fonte', 'fonte' => 'v.mp4', 'lingua' => 'pt',
+            'estado' => 'transcrita',
+            'transcricao' => json_encode([
+                ['start' => 0, 'end' => 3, 'text' => 'we scraped reddit with apify', 'words' => []],
+                ['start' => 3, 'end' => 6, 'text' => 'then elevenlabs read the script', 'words' => []],
+            ]),
+            'publicacoes_sugeridas' => json_encode([
+                ['titulo' => 'The three-step method', 'angulo' => 'Break it into a how-to.'],
+            ]),
+        ], 'Source.');
+
+        Livewire::test(PostsGenerator::class)
+            ->call('abrir', $fonte->path, 0, 'post')
+            ->assertRedirect(route('publicacoes.oficina', 'post'));
+
+        $brief = (string) session('oficina_brief');
+        $this->assertStringContainsString('The three-step method', $brief, 'the angle should still be there');
+        $this->assertStringContainsString('we scraped reddit with apify', $brief);
+        $this->assertStringContainsString('then elevenlabs read the script', $brief);
+    }
+
+    /** The same handoff from the Shorts Generator must carry the transcript too. */
+    public function test_the_shorts_generator_handoff_also_sends_the_transcript(): void
+    {
+        $vault = app(VaultContract::class);
+        $fonte = $vault->create('clips/fontes', [
+            'titulo' => 'Interview', 'tipo' => 'clip-fonte', 'fonte' => 'v.mp4', 'lingua' => 'pt',
+            'estado' => 'transcrita',
+            'transcricao' => json_encode([
+                ['start' => 0, 'end' => 3, 'text' => 'the whole point is repetition', 'words' => []],
+            ]),
+            'publicacoes_sugeridas' => json_encode([
+                ['titulo' => 'On repetition', 'angulo' => 'Make it a single post.'],
+            ]),
+        ], 'Source.');
+
+        Livewire::test(Clips::class)
+            ->call('abrirPublicacao', $fonte->path, 0)
+            ->assertRedirect(route('publicacoes'));
+
+        $this->assertStringContainsString('the whole point is repetition', (string) session('oficina_brief'));
+    }
+
     public function test_opening_a_missing_idea_does_not_redirect(): void
     {
         $vault = app(VaultContract::class);
@@ -182,6 +235,11 @@ class ContentTransformerTest extends TestCase
 
     // ── repurpose: video → post/carousel ─────────────────────────────────
 
+    /**
+     * The AI must receive everything the clip SAYS, not just its title. Note the
+     * real subtitle_data shape: SEGMENTS of {start,end,text,words[]}, which is
+     * what SubtitleShifter::shift() writes.
+     */
     public function test_a_finished_short_becomes_a_carousel_seeded_with_its_spoken_words(): void
     {
         $vault = app(VaultContract::class);
@@ -191,7 +249,14 @@ class ContentTransformerTest extends TestCase
             'estado' => 'pronto',
             'descricao' => 'A short about attention.',
             'subtitle_data' => json_encode([
-                ['word' => 'attention'], ['word' => 'is'], ['word' => 'earned'],
+                [
+                    'start' => 0, 'end' => 2, 'text' => 'attention is earned',
+                    'words' => [['word' => 'attention', 'start' => 0, 'end' => 1]],
+                ],
+                [
+                    'start' => 2, 'end' => 4, 'text' => 'never demanded',
+                    'words' => [['word' => 'never', 'start' => 2, 'end' => 3]],
+                ],
             ]),
         ], 'Short.');
 
@@ -202,7 +267,32 @@ class ContentTransformerTest extends TestCase
 
         $brief = (string) session('oficina_brief');
         $this->assertStringContainsString('Why nobody reads your posts', $brief);
+        // EVERY segment, not just the first — the planner gets the whole clip.
         $this->assertStringContainsString('attention is earned', $brief);
+        $this->assertStringContainsString('never demanded', $brief);
+    }
+
+    /** A long spoken text must survive intact, not be clipped to a summary. */
+    public function test_the_full_spoken_text_is_sent_not_a_truncated_snippet(): void
+    {
+        $frases = [];
+        for ($i = 1; $i <= 200; $i++) {
+            $frases[] = ['start' => $i, 'end' => $i + 1, 'text' => "sentence number {$i}", 'words' => []];
+        }
+
+        $vault = app(VaultContract::class);
+        $short = $vault->create('clips', [
+            'titulo' => 'A long one', 'tipo' => 'clip', 'estado' => 'pronto',
+            'descricao' => '', 'subtitle_data' => json_encode($frases),
+        ], 'Short.');
+
+        Livewire::test(ContentRepurpose::class)
+            ->call('paraPublicacao', 'short', $short->path, 'post')
+            ->assertRedirect(route('publicacoes.oficina', 'post'));
+
+        $brief = (string) session('oficina_brief');
+        $this->assertStringContainsString('sentence number 1 ', $brief);
+        $this->assertStringContainsString('sentence number 200', $brief, 'the tail of the transcript was dropped');
     }
 
     public function test_a_video_with_no_text_is_refused_rather_than_seeding_an_empty_brief(): void

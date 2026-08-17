@@ -7,7 +7,6 @@ use App\Services\Clips\Store\ClipStore;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 /**
  * What counts as "finished" content, in ONE place.
@@ -54,23 +53,31 @@ class FinishedContent
     // ── text extraction (what a repurpose seeds the target editor with) ──
 
     /**
-     * The words spoken in a short, recovered from its shifted subtitle data.
-     * Falls back to the description/title when the clip has no subtitles yet.
+     * Everything actually SAID in a short, from its shifted subtitle data.
+     *
+     * subtitle_data is an array of SEGMENTS — {start, end, text, words[]} — so the
+     * spoken text is each segment's `text`, joined. Repurposing must hand the AI
+     * this, not just the title: a one-line title gives it nothing to write from.
+     * Falls back to the description when the clip has no subtitles yet.
      */
     public function shortText(VaultNote $short): string
     {
-        $words = json_decode((string) $short->get('subtitle_data'), true);
-        if (is_array($words)) {
-            $spoken = collect($words)
-                ->map(fn ($w) => is_array($w) ? ($w['word'] ?? $w['text'] ?? '') : (string) $w)
-                ->filter()
-                ->implode(' ');
-            if (trim($spoken) !== '') {
-                return $this->compose($short->title(), trim($spoken));
-            }
-        }
+        $segmentos = json_decode((string) $short->get('subtitle_data'), true);
 
-        return $this->compose($short->title(), (string) $short->get('descricao'));
+        $falado = is_array($segmentos)
+            ? collect($segmentos)
+                ->map(fn ($s) => is_array($s)
+                    // A segment carries `text`; tolerate a bare word list too.
+                    ? trim((string) ($s['text'] ?? $s['word'] ?? ''))
+                    : trim((string) $s))
+                ->filter()
+                ->implode(' ')
+            : '';
+
+        return $this->compose(
+            $short->title(),
+            trim($falado) !== '' ? trim($falado) : (string) $short->get('descricao')
+        );
     }
 
     /** An animated clip's script — what it was generated from. */
@@ -88,13 +95,23 @@ class FinishedContent
         return $this->compose($post->title(), trim(strip_tags($post->html())));
     }
 
-    /** Title + body, trimmed to the editors' brief/script limit. */
+    /**
+     * A long video's full transcript as continuous prose, for seeding a post
+     * brief with the actual source material.
+     *
+     * @param  array<int,array<string,mixed>>  $transcricao  segments from ShortsPipeline::transcricao()
+     */
+    public function transcriptText(array $transcricao): string
+    {
+        return trim(collect($transcricao)
+            ->map(fn ($s) => is_array($s) ? trim((string) ($s['text'] ?? '')) : trim((string) $s))
+            ->filter()
+            ->implode(' '));
+    }
+
+    /** Title + body. Callers cap it for their own target. */
     private function compose(string $title, string $body): string
     {
-        $text = trim($title."\n\n".$body);
-
-        // Oficina's brief caps at 6000 and the animated-clip script at 5000;
-        // stay under the smaller one so either target accepts the seed.
-        return Str::limit($text, 5000, '');
+        return trim($title."\n\n".trim($body));
     }
 }

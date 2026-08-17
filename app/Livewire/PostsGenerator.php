@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Content\FinishedContent;
 use App\Services\Shorts\ShortsPipeline;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
@@ -27,6 +28,9 @@ use Livewire\Component;
 #[Title('Posts Generator')]
 class PostsGenerator extends Component
 {
+    /** Brief cap. Only the planner's prompt reads it, so it can carry the transcript. */
+    private const MAX_BRIEF = 20000;
+
     /** Source whose suggestions are expanded, or null for all collapsed. */
     public ?string $aberta = null;
 
@@ -83,7 +87,7 @@ class PostsGenerator extends Component
      * Open one idea in the post workshop, pre-filled. $tipo picks the format
      * directly ('post', 'carrossel', …); without it the user chooses.
      */
-    public function abrir(string $path, int $i, ?string $tipo, VaultContract $vault)
+    public function abrir(string $path, int $i, ?string $tipo, VaultContract $vault, ShortsPipeline $pipeline, FinishedContent $conteudo)
     {
         $fonte = $vault->get($path);
         $sugestao = $fonte ? ($this->sugestoes($fonte)[$i] ?? null) : null;
@@ -94,8 +98,17 @@ class PostsGenerator extends Component
             return null;
         }
 
-        $brief = trim(((string) ($sugestao['titulo'] ?? ''))."\n\n".((string) ($sugestao['angulo'] ?? '')));
-        session(['oficina_brief' => Str::limit($brief, 6000, '')]);
+        // The angle alone gives the planner nothing to write FROM — it would
+        // invent the substance. Send the video's own words as the source
+        // material, with the chosen angle as the instruction on top.
+        $angulo = trim(((string) ($sugestao['titulo'] ?? ''))."\n\n".((string) ($sugestao['angulo'] ?? '')));
+        $transcricao = $conteudo->transcriptText($pipeline->transcricao($fonte));
+
+        $brief = $transcricao !== ''
+            ? $angulo."\n\n--- Source video transcript ---\n".$transcricao
+            : $angulo;
+
+        session(['oficina_brief' => Str::limit($brief, self::MAX_BRIEF, '')]);
 
         return $tipo
             ? redirect()->route('publicacoes.oficina', $tipo)
