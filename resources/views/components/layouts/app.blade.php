@@ -52,6 +52,7 @@
                         // needs it because 'clips-animados*' would also match the studio's own
                         // routes, lighting up two entries at once; the studio needs it because
                         // its one entry covers two pages (SFX + VFX subtabs).
+                        ['route' => 'video-editor',    'label' => 'Video Editor',      'sub' => 'Cut · Sync · SFX',   'color' => '#FF9E5A', 'glyph' => '✂', 'match' => ['video-editor', 'video-editor.*']],
                         ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
                         ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio',  'sub' => 'SFX · VFX',          'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*']],
                         ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
