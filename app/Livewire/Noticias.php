@@ -118,9 +118,11 @@ class Noticias extends Component
             return;
         }
 
+        // No full-screen overlay here: the collection runs for minutes, so the
+        // progress lives in a card inside the panel and the rest of the page
+        // stays usable. $aAgregar drives it (see the view).
         $this->agregacaoToken = $token;
         $this->aAgregar = true;
-        $this->dispatch('loader-show', message: 'Scanning the channels…');
 
         AgregarConteudoJob::dispatch($token, array_values($this->plataformasSelecionadas));
 
@@ -133,7 +135,6 @@ class Noticias extends Component
         if ($token = AgregarConteudoJob::emCurso()) {
             $this->agregacaoToken = $token;
             $this->aAgregar = true;
-            $this->dispatch('loader-show', message: 'Scanning the channels…');
         }
     }
 
@@ -158,7 +159,6 @@ class Noticias extends Component
         }
 
         $this->aAgregar = false;
-        $this->dispatch('loader-hide');
         // The summary is left in cache (it expires on its own): a second tab
         // watching the same run still needs to read it.
 

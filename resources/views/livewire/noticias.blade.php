@@ -33,9 +33,19 @@
             </div>
         @endif
         @if ($aAgregar)
-            {{-- Poll the worker until the collection finishes. --}}
-            <div wire:poll.2s="verificarAgregacao" class="mt-2 font-mono text-[0.6rem] text-ink-faint">
-                Collecting in the queue… needs a worker: <span class="text-teal">php artisan queue:work</span>
+            {{-- Loader card, not the full-screen overlay: the collection takes
+                 minutes and the rest of the page stays usable meanwhile.
+                 Polls the worker until it finishes. --}}
+            <div wire:poll.2s="verificarAgregacao"
+                 role="status" aria-live="polite" aria-busy="true"
+                 class="mt-3 flex items-center gap-4 rounded-sm border border-teal/30 bg-teal/5 px-4 py-3 shadow-engraved">
+                <div class="cm-loader__dots mt-0! shrink-0" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="min-w-0">
+                    <p class="cm-loader__msg text-sm!">Scanning the channels…</p>
+                    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">
+                        Collecting in the queue… needs a worker: <span class="text-teal">php artisan queue:work</span>
+                    </p>
+                </div>
             </div>
         @endif
 
