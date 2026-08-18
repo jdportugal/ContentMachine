@@ -108,6 +108,43 @@ class VideoEditorTest extends TestCase
         $this->assertSame([], (new DuplicateTakeDetector($this->llm('{"groups": [[7,9]]}')))->detect($segments));
     }
 
+    /** The prompt now asks for {"segments":[…],"line":"…"} — both shapes parse. */
+    public function test_the_object_group_shape_is_understood(): void
+    {
+        $segments = $this->transcript([
+            [0.0, 2.0, 'Today I want to talk about'],
+            [2.5, 4.5, 'Today I want to talk about pricing.'],
+        ]);
+
+        $removals = (new DuplicateTakeDetector(
+            $this->llm('{"groups": [{"segments": [0, 1], "line": "Today I want to talk about pricing"}]}')
+        ))->detect($segments);
+
+        $this->assertCount(1, $removals);
+        $this->assertEqualsWithDelta(0.0, $removals[0]->start, 0.001);
+    }
+
+    /**
+     * A retake is stop-and-start-over, so its attempts sit together. A group
+     * spanning distant segments is topic-matching (an intro grouped with its
+     * closing recap) and deleting it would cut real content — refuse it.
+     */
+    public function test_a_group_of_far_apart_segments_is_refused(): void
+    {
+        $linhas = [[0.0, 2.0, 'Welcome, today we cover pricing']];
+        for ($i = 1; $i <= 9; $i++) {
+            $linhas[] = [$i * 3.0, $i * 3.0 + 2.0, "Point number {$i}"];
+        }
+        $linhas[] = [30.0, 32.0, 'So that was pricing — thanks for watching'];
+        $segments = $this->transcript($linhas);
+
+        $this->assertSame(
+            [],
+            (new DuplicateTakeDetector($this->llm('{"groups": [[0,10]]}')))->detect($segments),
+            'the recap must not be deleted as a "retake" of the intro'
+        );
+    }
+
     /** A flaky model must not cost the dead-air pass or the transcript. */
     public function test_an_unusable_response_yields_no_cuts_instead_of_throwing(): void
     {

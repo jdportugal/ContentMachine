@@ -52,6 +52,16 @@ class DuplicateTakeDetector
                 continue;
             }
 
+            // Retakes are stop-and-start-over, so the attempts sit together in
+            // the recording. A "group" spanning distant segments is the model
+            // matching topic, not takes — the exact mistake that deletes a recap
+            // because it resembles the intro. Refuse it wholesale.
+            foreach (array_slice($validos, 1) as $k => $i) {
+                if ($i - $validos[$k] > 4) {
+                    continue 2;
+                }
+            }
+
             array_pop($validos); // the last take is the keeper
 
             foreach ($validos as $i) {
@@ -108,28 +118,48 @@ class DuplicateTakeDetector
         return <<<PROMPT
         You are editing a raw screen recording. The speaker often re-reads the same
         sentence several times until they get it right; only the LAST attempt should
-        survive.
+        survive. Everything you group EXCEPT the last take of each group is DELETED
+        from the video.
 
         Below is the transcript, one numbered segment per line.
 
         Find groups of segments that are RETAKES OF THE SAME LINE — the speaker
-        saying (or trying to say) the same thing more than once. Include false
-        starts and stumbles that were then restarted, even when the wording differs.
+        saying (or trying to say) the same thing more than once.
+
+        How a retake looks in a transcript:
+        - The attempts sit NEXT TO each other (same segment or a couple apart).
+          A retake means the speaker stopped and started over — the attempts are
+          never far apart in the recording.
+        - The attempts usually share their OPENING words: "So the model will—",
+          "So the model will take your prompt and…".
+        - An early attempt is often a fragment: it breaks off mid-sentence, ends in
+          a stumble, filler ("uh", "wait", "sorry, again") or trails into the restart.
+        - The wording may differ between attempts — group by what the speaker was
+          TRYING to say, not by exact words.
+
+        Work through the transcript in order and, for each candidate group, verify
+        BOTH before including it:
+        1. ADJACENT: the segments are within a few lines of each other. The same
+           idea recapped later in the video (an intro restated in a summary, a
+           point repeated across sections) is structure, NOT a retake — never
+           group segments from different parts of the recording.
+        2. REDUNDANT: if only the last take stays, no information is lost. If an
+           earlier "attempt" contains anything the last one does not, it is not a
+           retake — leave it alone.
 
         Do NOT group:
         - sentences that merely share a topic or a few words,
         - a phrase deliberately repeated for emphasis,
+        - a recap, summary or callback of something said earlier,
         - normal speech that happens to be similar.
 
-        When unsure, leave it out. A missed retake costs a second of video; a wrong
-        one deletes something the speaker meant to keep.
-
         Respond with ONLY a JSON object, no prose:
-        {"groups": [[3,4,5], [11,12]]}
+        {"groups": [{"segments": [3, 4, 5], "line": "the sentence being re-attempted"}]}
 
-        Each inner array lists the segment numbers of one retake group, in order.
-        The LAST number in each group is the take that will be kept. Return
-        {"groups": []} if there are none.
+        `segments` lists the segment numbers of one retake group in order — the
+        LAST number is the take that will be kept. `line` is a short quote of the
+        line they all attempt; if you cannot quote one line the group is wrong.
+        Return {"groups": []} if there are none.
 
         TRANSCRIPT:
         {$corpo}
@@ -155,6 +185,10 @@ class DuplicateTakeDetector
             return [];
         }
 
-        return array_values(array_filter($dados['groups'], 'is_array'));
+        // Either shape: [{"segments":[3,4],"line":"…"}] or the bare [[3,4]].
+        return array_values(array_filter(array_map(
+            fn ($g) => is_array($g['segments'] ?? null) ? $g['segments'] : $g,
+            array_filter($dados['groups'], 'is_array')
+        ), 'is_array'));
     }
 }
