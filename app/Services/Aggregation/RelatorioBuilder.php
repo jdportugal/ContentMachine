@@ -364,10 +364,15 @@ class RelatorioBuilder
             ."    > Lead sentence\n"
             ."    Body (4–6 sentences)\n"
             ."  Separate consecutive bits with a line containing only `---`.\n"
-            .'- The LEAD (the `>` line) is ONE punchy sentence that may sit ON SCREEN for the whole video: '
-            .'it must carry the entire story by itself — who did what, with the number or name that makes it matter '
-            .'(«OpenAI cuts GPT-5 API prices by 60%», not «Big news from OpenAI»). '
-            ."Max ~12 words, no filler, no cliffhanger bait, present tense.\n"
+            .'- The LEAD (the `>` line) is a CREATOR-STYLE HOOK that may sit ON SCREEN for the whole video. '
+            ."Write it the way top YouTubers open: STAKES first — what this changes for the viewer — with tension. Formulas:\n"
+            ."    · consequence: «Claude Code just made prompt engineering obsolete»\n"
+            ."    · number + impact: «GPT-5 just got 60% cheaper — for everyone»\n"
+            ."    · viewer stake: «Your AI bill is about to drop by half»\n"
+            ."    · contrast/record: «The biggest open-source model ever just dropped»\n"
+            .'  6–12 words, present tense, precise NON-ROUND numbers («\$1.5k», «60%», not «thousands»). '
+            .'It must still NAME the subject — it stays on screen, so it is a claim, not a tease: '
+            ."NEVER «You won't believe what OpenAI did» and never generic «Big news from X».\n"
             .'- The BODY does not repeat the lead — it goes DEEPER: the concrete details (versions, prices, dates, '
             .'availability), the context that explains it (what came before, who it competes with), why it matters, '
             ."and what happens next when known. Substance over padding: every sentence must add a fact or a consequence.\n\n"
