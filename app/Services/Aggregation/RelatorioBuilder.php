@@ -316,7 +316,7 @@ class RelatorioBuilder
             ."STRUCTURE — one script per tip:\n"
             .'- Start with a bold one-line HOOK (`**Hook**`) written as the problem the viewer already has '
             ."(«If you're …, you're wasting …»), or as the thing they don't know exists.\n"
-            ."- Then 3–6 short sentences, in this order: the problem → the tip → HOW to do it, concretely "
+            .'- Then 3–6 short sentences, in this order: the problem → the tip → HOW to do it, concretely '
             ."(name the command, the setting, the menu, the exact wording).\n"
             .'- End with the one-line payoff: what changes for them.'
             ."\n- Separate consecutive scripts with a line containing only `---`.\n"
@@ -359,8 +359,18 @@ class RelatorioBuilder
             ."connected narration or a single flowing script.\n"
             .'- Each bit MUST stand entirely on its own: NO overall intro, NO outro, NO hook, NO references to '
             ."other bits or to «this week»/«today» — a reader could see any single bit in isolation.\n"
-            .'- Format each bit as: a bold one-line headline (`**Headline**`), then 2–4 sentences. '
-            ."Separate consecutive bits with a line containing only `---`.\n\n"
+            ."- Format each bit EXACTLY as:\n"
+            ."    **Headline**\n"
+            ."    > Lead sentence\n"
+            ."    Body (4–6 sentences)\n"
+            ."  Separate consecutive bits with a line containing only `---`.\n"
+            .'- The LEAD (the `>` line) is ONE punchy sentence that may sit ON SCREEN for the whole video: '
+            .'it must carry the entire story by itself — who did what, with the number or name that makes it matter '
+            .'(«OpenAI cuts GPT-5 API prices by 60%», not «Big news from OpenAI»). '
+            ."Max ~12 words, no filler, no cliffhanger bait, present tense.\n"
+            .'- The BODY does not repeat the lead — it goes DEEPER: the concrete details (versions, prices, dates, '
+            .'availability), the context that explains it (what came before, who it competes with), why it matters, '
+            ."and what happens next when known. Substance over padding: every sentence must add a fact or a consequence.\n\n"
             ."TONE:\n"
             .'- Clear and engaging. Do NOT just state facts: EXPLAIN what happened and why it matters '
             ."(«…and this matters because…»).\n\n"
