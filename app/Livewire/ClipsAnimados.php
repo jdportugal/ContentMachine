@@ -9,9 +9,10 @@ use App\Jobs\Clips\RenderBackgroundReelJob;
 use App\Jobs\Clips\RenderBackgroundSampleJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
-use App\Services\Clips\EffectLibrary;
 use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\BackgroundLibrary;
+use App\Services\Clips\BackgroundPortability;
+use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageProbe;
 use App\Services\Clips\Media;
@@ -21,8 +22,10 @@ use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\TranscriptRebuilder;
+use App\Services\Projects\ProjectContext;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
@@ -54,6 +57,12 @@ class ClipsAnimados extends Component
         if (($seed = session('animado_texto')) !== null) {
             session()->forget('animado_texto');
             $this->text = (string) $seed;
+            // News bits carry an on-screen LEAD as a `> …` line: lift it into the
+            // lead field and out of the script, so it is shown, not spoken.
+            if (preg_match('/^>\s*(\S.*)$/m', $this->text, $m)) {
+                $this->lead = trim($m[1]);
+                $this->text = trim(str_replace($m[0], '', $this->text));
+            }
             $this->createType = 'animation';
             $this->view = 'create';
         }
@@ -91,6 +100,9 @@ class ClipsAnimados extends Component
     public $audio = null;
 
     public $video = null;
+
+    /** News LEAD — optional line pinned on screen for the whole clip. */
+    public string $lead = '';
 
     /** which presentation styles the AI may use for a video clip */
     public array $allowedPresents = ['video', 'over', 'split', 'animation'];
@@ -154,7 +166,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'lead', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -433,7 +445,7 @@ class ClipsAnimados extends Component
     }
 
     /** Import backgrounds from an uploaded Brand Machine export file. */
-    public function importarBackgrounds(\App\Services\Clips\BackgroundPortability $port): void
+    public function importarBackgrounds(BackgroundPortability $port): void
     {
         $this->validate(
             ['importBackgroundFile' => 'required|file|max:512000'],
@@ -485,8 +497,8 @@ class ClipsAnimados extends Component
         if ($library->reelExists() || $library->active()->isEmpty()) {
             return; // cached for the current design system + background set, or nothing to show
         }
-        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
-        \Illuminate\Support\Facades\Cache::put(RenderBackgroundReelJob::flagKey($slug), true, now()->addMinutes(20));
+        $slug = app(ProjectContext::class)->current()->slug;
+        Cache::put(RenderBackgroundReelJob::flagKey($slug), true, now()->addMinutes(20));
         RenderBackgroundReelJob::dispatch();
     }
 
@@ -497,9 +509,9 @@ class ClipsAnimados extends Component
 
     public function getBackgroundReelBusyProperty(): bool
     {
-        $slug = app(\App\Services\Projects\ProjectContext::class)->current()->slug;
+        $slug = app(ProjectContext::class)->current()->slug;
 
-        return \Illuminate\Support\Facades\Cache::has(RenderBackgroundReelJob::flagKey($slug));
+        return Cache::has(RenderBackgroundReelJob::flagKey($slug));
     }
 
     // =====================================================================
@@ -533,7 +545,7 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['background' => $this->background]),
+            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead)]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -561,7 +573,7 @@ class ClipsAnimados extends Component
             'title' => $this->video->getClientOriginalName(),
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background]),
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background, 'lead' => trim($this->lead)]),
         ]);
 
         TranscribeJob::dispatch($project->id);

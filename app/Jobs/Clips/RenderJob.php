@@ -62,6 +62,11 @@ class RenderJob implements ShouldQueue
 
             $plan['audioSrc'] = $p->audio_path;
 
+            // The news LEAD, pinned on screen for the whole clip (opt-in per clip).
+            if (($lead = trim((string) ($p->meta['lead'] ?? ''))) !== '') {
+                $plan['banner'] = $lead;
+            }
+
             // Background music (mixed as a looping <Audio> track by Remotion).
             if ($track = $this->resolveMusic($p, $music)) {
                 $plan['musicSrc'] = $track;

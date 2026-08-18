@@ -308,6 +308,8 @@
                         @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.lead-field')
+
                     @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
@@ -356,6 +358,8 @@
                         </div>
                         @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
+
+                    @include('livewire.partials.lead-field')
 
                     @include('livewire.partials.backdrop-picker')
 
