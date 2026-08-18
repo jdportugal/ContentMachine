@@ -245,6 +245,44 @@ class ClipImagesTest extends TestCase
         $this->assertSame('img_chosen', $out['scenes'][0]['layers'][0]['params']['src']); // untouched
     }
 
+    /**
+     * The planner sometimes copies the schema's own "<id>" placeholder or invents
+     * an id — that string survives resolution and renders the placeholder block.
+     */
+    public function test_placeholder_and_invented_image_ids_are_stripped(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-reveal', 'params' => ['src' => '<id of a PROVIDED image>']]]],
+            ['layers' => [['type' => 'image-reveal', 'params' => ['src' => 'img_real']]]],
+            ['layers' => [['type' => 'timeline', 'params' => ['items' => [['label' => 'v1', 'image' => 'img_invented']]]]]],
+        ]];
+
+        $out = $filler->stripUnknownImageIds($plan, ['img_real']);
+
+        $this->assertArrayNotHasKey('src', $out['scenes'][0]['layers'][0]['params']);
+        $this->assertSame('img_real', $out['scenes'][1]['layers'][0]['params']['src']);
+        $this->assertArrayNotHasKey('image', $out['scenes'][2]['layers'][0]['params']['items'][0]);
+
+        // …so dropDeadLayers can then remove the now-empty image layer.
+        $this->assertCount(0, $filler->dropDeadLayers($out)['scenes'][0]['layers']);
+    }
+
+    /** A custom effect that displays an image is as dead without one as image-reveal. */
+    public function test_an_image_using_custom_effect_without_a_src_is_dropped(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-slide-caption', 'params' => []]]],
+            ['layers' => [['type' => 'image-slide-caption', 'params' => ['src' => 'img_a']]]],
+        ]];
+
+        $out = $filler->dropDeadLayers($plan, ['image-slide-caption']);
+
+        $this->assertCount(0, $out['scenes'][0]['layers']);
+        $this->assertCount(1, $out['scenes'][1]['layers']);
+    }
+
     public function test_drop_dead_layers_removes_empty_image_and_chart_layers(): void
     {
         $filler = new SceneVisualFiller;
@@ -447,6 +485,21 @@ class ClipImagesTest extends TestCase
         $this->assertGreaterThanOrEqual(4.5, $out[0]['end'] - $out[0]['start']);
         $this->assertSame((float) $out[0]['end'], (float) $out[1]['start']); // no gap
         $this->assertSame(8.0, (float) $out[1]['end']);                      // total unchanged
+    }
+
+    /** A visual's entrance animation needs ~2-3s to play — a 0.8s scene truncates it. */
+    public function test_a_too_short_visual_scene_is_extended_so_its_animation_finishes(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 0.8, 'layers' => [['type' => 'bar-chart', 'params' => ['bars' => [['label' => 'A', 'value' => 1]]]]]],
+            ['start' => 0.8, 'end' => 8.0, 'layers' => [['type' => 'ambient', 'params' => []]]], // low-value → lends time
+        ]];
+
+        $out = $filler->enforceReadingTime($plan)['scenes'];
+
+        $this->assertGreaterThanOrEqual(3.0, $out[0]['end'] - $out[0]['start'], 'a chart needs its draw-in to finish');
+        $this->assertSame((float) $out[0]['end'], (float) $out[1]['start']); // still contiguous
     }
 
     public function test_reading_time_never_steals_from_a_real_visual(): void

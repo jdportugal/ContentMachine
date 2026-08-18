@@ -72,9 +72,18 @@ class FinalizeClipPlanJob implements ShouldQueue
                 $p->update(['images' => $result['images']]);
             }
 
+            // An src/image that is not a real image id (the planner copied the
+            // schema's "<id>" placeholder, or invented one) would render the
+            // placeholder block — clear it so the layer is dropped or falls back.
+            $library = app(EffectLibrary::class);
+            $validIds = array_values(array_filter(array_map(fn ($i) => $i['id'] ?? null, $p->images ?? [])));
+            $plan = $filler->stripUnknownImageIds($plan, $validIds);
+
             // Remove layers that would render an empty placeholder (image with no
-            // src because generation failed, or a chart with no data).
-            $plan = $filler->dropDeadLayers($plan);
+            // src because generation failed, or a chart with no data) — including
+            // custom effects that display an image but got none.
+            $imageSlugs = array_values(array_filter($library->activeSlugs(), fn ($s) => $library->usesImage($s)));
+            $plan = $filler->dropDeadLayers($plan, $imageSlugs);
 
             // Resolve the clip's backdrop: the manual choice (meta['background']:
             // 'auto' | 'none' | a slug) wins; on 'auto' the planner's suggestion is
@@ -107,7 +116,6 @@ class FinalizeClipPlanJob implements ShouldQueue
             // If an intro effect shows an image and the clip has uploaded images, feed
             // it one (prefer a transparent one — usually the logo) and force that
             // image-capable intro first.
-            $library = app(EffectLibrary::class);
             $intros = $library->introSlugs();
             $introImageId = null;
             if (($p->images ?? []) !== [] && collect($intros)->contains(fn (string $s) => $library->usesImage($s))) {
