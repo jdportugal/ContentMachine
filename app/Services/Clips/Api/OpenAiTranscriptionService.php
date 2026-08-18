@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Api;
 
 use App\Services\Clips\Contracts\TranscriptionService;
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -10,7 +11,7 @@ class OpenAiTranscriptionService implements TranscriptionService
 {
     public function transcribe(string $audioPath): array
     {
-        $key = config('services.openai.key');
+        $key = StepKey::key('clips_transcricao', 'openai');
         if (! $key) {
             throw new RuntimeException('OPENAI_API_KEY missing for transcription.');
         }

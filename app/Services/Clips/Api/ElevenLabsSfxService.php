@@ -2,6 +2,7 @@
 
 namespace App\Services\Clips\Api;
 
+use App\Services\Settings\StepKey;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -10,7 +11,7 @@ class ElevenLabsSfxService
 {
     public function generate(string $prompt, string $outPath): string
     {
-        $key = config('services.elevenlabs.key');
+        $key = StepKey::key('clips_sfx', 'elevenlabs');
         if (! $key) {
             throw new RuntimeException('ELEVENLABS_API_KEY missing for sound generation.');
         }

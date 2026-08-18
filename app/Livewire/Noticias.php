@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\AgregarConteudoJob;
 use App\Jobs\GerarRelatorioJob;
+use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Projects\ProjectLanguage;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
@@ -27,6 +28,13 @@ class Noticias extends Component
     public string $diaSelecionado = '';
 
     // ----- Report by period -----
+    /**
+     * What to write from the aggregated material: 'noticias' (news bits) or
+     * 'dicas' (tool-usage tips, as short-form scripts). Same pipeline, same
+     * archive — only the write-up and the note type differ.
+     */
+    public string $tipoRelatorio = RelatorioBuilder::TIPO_NOTICIAS;
+
     /** 'dia' | 'semana' */
     public string $modoRelatorio = 'dia';
 
@@ -89,9 +97,18 @@ class Noticias extends Component
     {
         $nota = $this->relatorioSelecionado !== '' ? $vault->get($this->relatorioSelecionado) : null;
 
-        $this->relatorio = $nota && $nota->get('tipo') === 'relatorio'
+        $this->relatorio = $nota && in_array($nota->get('tipo'), ['relatorio', 'relatorio_dicas'], true)
             ? $this->dadosDe($nota)
             : null;
+    }
+
+    /** Switching between news and tips opens that kind's own latest archive. */
+    public function updatedTipoRelatorio(VaultContract $vault): void
+    {
+        $ultimo = $this->notaUltimoRelatorio($vault->all('noticias'));
+        $this->relatorioSelecionado = $ultimo?->path ?? '';
+        $this->relatorio = $this->dadosDe($ultimo);
+        $this->relatorioGuardado = null;
     }
 
     /**
@@ -187,13 +204,16 @@ class Noticias extends Component
         $this->relatorioToken = (string) Str::uuid();
         $this->aGerar = true;
         $this->avisoRelatorio = null;
-        $this->dispatch('loader-show', message: 'Collecting and writing the report…');
+        $this->dispatch('loader-show', message: $this->ehDicas()
+            ? 'Mining the material for tips…'
+            : 'Collecting and writing the report…');
 
         GerarRelatorioJob::dispatch(
             $this->modoRelatorio,
             $this->dataRelatorio,
             $this->relatorioToken,
             $this->idiomaRelatorio,
+            $this->tipoRelatorio,
         );
 
         $this->verificarRelatorio(app(VaultContract::class));
@@ -263,11 +283,19 @@ class Noticias extends Component
         return $notas->first(fn (VaultNote $n) => $n->get('tipo') === 'topicos' && (string) $n->get('data') === $dia);
     }
 
-    /** All archived report notes, from the most recent to the oldest. */
+    /** Whether the tool-tips kind is the one selected. */
+    public function ehDicas(): bool
+    {
+        return $this->tipoRelatorio === RelatorioBuilder::TIPO_DICAS;
+    }
+
+    /** Archived notes OF THE SELECTED KIND, from the most recent to the oldest. */
     private function notasRelatorios(Collection $notas): Collection
     {
+        $tipo = $this->ehDicas() ? 'relatorio_dicas' : 'relatorio';
+
         return $notas
-            ->filter(fn (VaultNote $n) => $n->get('tipo') === 'relatorio' && filled($n->get('dados')))
+            ->filter(fn (VaultNote $n) => $n->get('tipo') === $tipo && filled($n->get('dados')))
             ->sortByDesc(fn (VaultNote $n) => (string) $n->get('gerado_em', $n->get('inicio', '')))
             ->values();
     }

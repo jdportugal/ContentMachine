@@ -13,6 +13,9 @@ services:
     # .env.example → .env and run:  docker compose --env-file .env up -d
     environment:
       APP_URL: ${APP_URL:-http://localhost:8080}
+      # Nightly social collection runs at 00:00 in THIS timezone. Defaults to the
+      # host's, so "midnight" is your midnight rather than UTC.
+      APP_TIMEZONE: ${APP_TIMEZONE:-UTC}
     volumes:
       - storage:/app/storage
       - vault:/app/vault

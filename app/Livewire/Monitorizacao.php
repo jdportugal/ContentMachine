@@ -51,12 +51,55 @@ class Monitorizacao extends Component
         }
 
         $itens = $refresher->atualizar($this->rede, $url);
+        $erro = $refresher->ultimoErro();
+
+        // Say WHY when it failed. An empty result used to read the same whether
+        // the actor errored or the profile genuinely had no posts.
+        $this->dispatch('toast',
+            message: match (true) {
+                $erro !== null => $refresher->fonte($this->rede).' failed: '.$erro,
+                $itens === [] => 'No data obtained ('.$refresher->fonte($this->rede).' returned no posts for this network).',
+                default => count($itens).' posts collected.',
+            },
+            type: ($erro !== null || $itens === []) ? 'erro' : 'ok',
+        );
+    }
+
+    /**
+     * Collects every network that has a profile URL configured, in one go. Each
+     * is independent — one failing network never stops the others — and the
+     * toast summarises what came back per network.
+     */
+    public function atualizarTodas(MonitoringRefresher $refresher, SettingsRepository $settings): void
+    {
+        $urls = [];
+        foreach ((array) config('contentmachine.monitoring.plataformas', []) as $p) {
+            $urls[$p] = (string) ($settings->get("perfis.{$p}.url") ?? '');
+        }
+
+        if (trim(implode('', $urls)) === '') {
+            $this->dispatch('toast', message: 'No profile URLs set — add them in Settings.', type: 'erro');
+
+            return;
+        }
+
+        $resultado = $refresher->atualizarTodas($urls);
+
+        if ($resultado === []) {
+            $this->dispatch('toast', message: 'Nothing to collect.', type: 'erro');
+
+            return;
+        }
+
+        $partes = [];
+        foreach ($resultado as $plataforma => $r) {
+            $partes[] = $r['ok'] ? "{$plataforma} {$r['count']}" : "{$plataforma} failed";
+        }
+        $falhas = collect($resultado)->filter(fn ($r) => ! $r['ok']);
 
         $this->dispatch('toast',
-            message: $itens === []
-                ? 'No data obtained ('.$refresher->fonte($this->rede).' returned no posts for this network).'
-                : count($itens).' posts collected.',
-            type: $itens === [] ? 'erro' : 'ok',
+            message: implode(' · ', $partes).($falhas->isNotEmpty() ? ' — '.$falhas->first()['error'] : ''),
+            type: $falhas->count() === count($resultado) ? 'erro' : 'ok',
         );
     }
 

@@ -88,6 +88,10 @@ class SettingsRepository
                 'clip_provider' => '',       // 'claude' (default) | 'tensorx' — primary clip LLM
                 'tensorx_model' => '',       // e.g. deepseek/deepseek-r1-0528
             ],
+            // Per-step API key: step id (config contentmachine.passos) => key id
+            // (e.g. 'openai:2') or 'local'. Empty = auto (provider chain +
+            // that provider's default key). Per project, like the models above.
+            'passos' => array_map(fn () => '', config('contentmachine.passos', [])),
         ];
     }
 

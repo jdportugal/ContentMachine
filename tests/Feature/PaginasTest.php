@@ -10,12 +10,19 @@ class PaginasTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
+    }
+
     public static function routes(): array
     {
         return [
             'dashboard' => ['/', 'Dashboard'],
             'monitoring' => ['/monitorizacao', 'Monitoring'],
-            'clips' => ['/clips', 'Clip Generator'],
+            'clips' => ['/clips', 'Shorts Generator'],
             'animated-clips' => ['/clips-animados', 'Animated Clips'],
             'posts' => ['/publicacoes', 'Posts'],
             'workshop-post' => ['/publicacoes/post', 'Single-page posts'],

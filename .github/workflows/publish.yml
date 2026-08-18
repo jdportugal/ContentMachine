@@ -3,6 +3,12 @@ name: Publish image
 # Build the combined image and push :latest to GHCR. The dedicated `production`
 # branch is the live line — merge into it to release. Any branch can still build
 # manually via "Run workflow". GITHUB_TOKEN is automatic — no secrets to set.
+#
+# If a push does not produce a run, check https://www.githubstatus.com before
+# looking here: during the 2026-08-06 Actions incident GitHub throttled webhook
+# delivery, so pushes were recorded but triggered no workflow runs for hours.
+# "Run workflow" is dispatched directly rather than by webhook, so it still works
+# in that situation; deploy/rebuild.sh builds on the host with no CI at all.
 on:
   push:
     branches: [production]

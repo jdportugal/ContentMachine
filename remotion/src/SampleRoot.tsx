@@ -22,10 +22,14 @@ interface SampleProps {
   width: number;
   height: number;
   fps: number;
+  // Alpha output (VFX Lab overlays): skip the themed backdrop so every pixel the
+  // effect does not draw stays transparent. Painting it would make the render
+  // opaque no matter which codec flags the renderer passes.
+  transparent?: boolean;
   [key: string]: unknown;
 }
 
-const SampleEffect: React.FC<SampleProps> = ({ text, params, theme }) => {
+const SampleEffect: React.FC<SampleProps> = ({ text, params, theme, transparent }) => {
   applyTheme(theme);
   loadThemeFonts(theme?.fonts?.display, theme?.fonts?.body);
 
@@ -41,7 +45,7 @@ const SampleEffect: React.FC<SampleProps> = ({ text, params, theme }) => {
 
   return (
     <AbsoluteFill>
-      <BackgroundTexture />
+      {!transparent && <BackgroundTexture />}
       <Candidate anim={anim} fps={fps} dark={dark} />
     </AbsoluteFill>
   );
@@ -54,6 +58,7 @@ const defaultProps: SampleProps = {
   width: 1080,
   height: 1920,
   fps: 30,
+  transparent: false,
 };
 
 export const SampleRoot: React.FC = () => {

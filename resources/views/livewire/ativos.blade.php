@@ -3,7 +3,7 @@
         eyebrow="Tomus · IV"
         title="Assets"
         cota="778.6 · ACM · '26"
-        lead="Reusable media library in the app. Tracks uploaded here become available as background music in the Clip Generator." />
+        lead="Reusable media library in the app. Tracks uploaded here become available as background music in the Shorts Generator." />
 
     {{-- Upload-in-progress indicator --}}
     <div wire:loading wire:target="novaMusica, adicionarMusica, novasImagens"

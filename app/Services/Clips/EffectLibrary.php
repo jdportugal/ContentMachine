@@ -332,8 +332,14 @@ TSX;
         return $plan;
     }
 
-    /** SampleEffect props for the isolated candidate test-render. */
-    public function candidateSampleProps(?string $text, array $params): array
+    /**
+     * SampleEffect props for the isolated candidate render. Used both as the SFX
+     * test-render (defaults: the project's clip size, 2.5s, opaque) and by the VFX
+     * Lab, which overrides size/duration/transparency to produce the final asset.
+     *
+     * @param  array{duration?:float,width?:int,height?:int,transparent?:bool}  $canvas
+     */
+    public function candidateSampleProps(?string $text, array $params, array $canvas = []): array
     {
         $c = config('contentmachine.clips');
         $props = [
@@ -349,7 +355,7 @@ TSX;
             $props['theme'] = $theme;
         }
 
-        return $props;
+        return array_merge($props, $canvas);
     }
 
     // ── previews (cached, keyed by the active design system) ─────────────

@@ -2,6 +2,7 @@
 
 namespace App\Services\Publicacoes\Rendering;
 
+use App\Services\Settings\StepKey;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
@@ -16,9 +17,16 @@ class KieClient
 {
     private const MAX_SONDAGENS = 90;
 
+    /**
+     * Which pipeline step this instance renders for — decides which kie.ai key it
+     * bills to (Settings → Steps). Post cards by default; ClipImageGenerator
+     * switches its own copy to the clip-images step.
+     */
+    public string $passo = 'publicacoes_cartoes';
+
     public function configurado(): bool
     {
-        return filled(config('services.kie.key'));
+        return filled($this->chave());
     }
 
     /** Text → image. $refs are URLs (kie) used as visual reference. */
@@ -163,7 +171,7 @@ class KieClient
 
     private function chave(): string
     {
-        return (string) config('services.kie.key');
+        return StepKey::key($this->passo, 'kie');
     }
 
     private function base(): string

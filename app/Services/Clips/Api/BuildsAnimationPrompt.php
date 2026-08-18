@@ -60,6 +60,11 @@ trait BuildsAnimationPrompt
                 DO NOT put everything in "over". Target distribution: mostly "video"; use "over" for quick charts,
                 "split" when you show data next to the person, and "animation" (full screen) for 1-2 strong moments.
                 In "video"/"over"/"split" scenes do not use a graphic "background" (the video is the background). karaoke=true for most.
+                ADAPT THE VISUAL TO THE MODE — the video must stay VISIBLE in "over" and "split":
+                  - "over" → only COMPACT visuals (card, small chart, count-up, punchWord) that leave the person clearly visible.
+                    NEVER a fullscreen visual in "over": for image-reveal use variant "framed"/"drop-float"/"rise" (never "fullscreen"/"pan"),
+                    and put big diagrams/timelines/comparisons in "split" or "animation" instead.
+                  - "split" → the animation gets ONLY the top half: design it compact (few items, short labels).
                 R
             : "ANIMATION MODE (animation only): the scenes cover 100% of the duration, no gaps. Backgrounds 'papyrus'/'vellum'/'ink'. Do not use 'present'.\n"
                 .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption. So carry a visual layer whenever you can — a chart/card/diagram/timeline when there is a real point, '
@@ -166,6 +171,16 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
   card / diagram), NEVER a scene's only content. {$bareRule}
 - EACH SCENE: at most ONE main layer (do not overlap elements). You can have varied backgrounds
   and transitions to give rhythm. Fill the data from the RESEARCH below.
+
+# PACING — LET EVERY ANIMATION FINISH
+Every visual animates IN (charts draw, diagrams connect, images reveal) — a scene that ends too
+soon cuts the animation off mid-play and looks broken.
+- A scene carrying a visual layer lasts AT LEAST 2s; charts, diagrams, timelines and terminal need
+  AT LEAST 3s (to draw AND be read). Text-heavy visuals (bullet-list, comparison) need longer still.
+- NEVER make a sub-second scene. Rather than chopping the speech into many tiny scenes, HOLD one
+  visual across several sentences and let the karaoke carry the words.
+- Fewer, longer scenes beat many fast ones: plan the scene boundaries around the visuals' needs,
+  not one scene per sentence.
 {$imageGuidance}
 
 # PARAMETER SCHEMAS (params by type)
@@ -183,6 +198,9 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
 - diagram:     { "title"?: str, "layout"?: "vertical"|"horizontal"|"cycle", "nodes": [{ "label": str, "image"?: "<id>", "highlight"?: bool }], "edges"?: [{ "from": <index>, "to": <index> }] }   // 2–6 nodes; without edges it links in sequence/cycle
 {$imageRevealSchema}
 - The provided IMAGES can go into image-reveal OR as "image" in timeline/bar-chart/comparison (use ONLY ids from the list).
+- "src"/"image" values must be an id COPIED EXACTLY from the PROVIDED IMAGES list. NEVER write the
+  schema's placeholder ("<id>", "<id of a PROVIDED image>") or an invented id — that renders a broken
+  placeholder block on screen. No provided image fits? OMIT the field (or the layer) entirely.
 - kinetic-text / fade / highlight / seal-stamp / etc.: the text goes in the layer's "text" field, params = {}.
 
 {$rule}

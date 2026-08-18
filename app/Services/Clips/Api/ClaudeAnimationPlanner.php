@@ -13,6 +13,11 @@ class ClaudeAnimationPlanner implements AnimationPlanner
     use BuildsAnimationPrompt;
     use RunsClaudeCli;
 
+    protected function passo(): string
+    {
+        return 'clips_plano';
+    }
+
     public function plan(array $transcript, string $mode, array $options = []): array
     {
         $envelope = $this->runClaude(

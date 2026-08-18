@@ -48,5 +48,17 @@ php artisan migrate --force || true
 # public/storage symlink for the public disk.
 php artisan storage:link 2>/dev/null || true
 
+# The admin account. Seeded at boot rather than offered as a "create the first
+# account" screen: this app is on a public URL, and such a screen belongs to
+# whoever reaches it first. No-op once a user exists.
+# The generated password is written to storage/app/admin_password — never to
+# stdout, because container logs get shipped, shared and pasted around.
+php artisan app:ensure-admin --no-interaction || true
+if [ -f storage/app/admin_password ]; then
+    echo "[content-machine] admin account ready. Read the first-login password with:"
+    echo "[content-machine]   docker compose exec app cat storage/app/admin_password"
+    echo "[content-machine] change it under Settings → Account, then delete that file."
+fi
+
 # exec so SIGTERM reaches supervisor (clean shutdown of every child).
 exec supervisord -c /etc/supervisor/conf.d/app.conf

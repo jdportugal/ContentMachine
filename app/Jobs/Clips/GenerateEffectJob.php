@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Capture\SiteFootage;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectGenerator;
 use App\Services\Clips\EffectLibrary;
@@ -38,8 +39,13 @@ class GenerateEffectJob implements ShouldQueue
         return [(new WithoutOverlapping('generate-effect'))->releaseAfter(60)->expireAfter(900)];
     }
 
-    public function handle(EffectGenerator $generator, EffectLibrary $library, EffectStore $store, RemotionRenderer $renderer): void
-    {
+    public function handle(
+        EffectGenerator $generator,
+        EffectLibrary $library,
+        EffectStore $store,
+        RemotionRenderer $renderer,
+        SiteFootage $footage,
+    ): void {
         $this->activateProject();
 
         $effect = $store->find($this->effectId);
@@ -55,7 +61,11 @@ class GenerateEffectJob implements ShouldQueue
         $tmp = null;
 
         try {
-            $data = $generator->generate($effect->prompt, $keepSlug);
+            // An SFX is a clip layer, so it is captured at the project's clip size.
+            $c = config('contentmachine.clips');
+            $site = $footage->forPrompt((string) $effect->prompt, (int) $c['width'], (int) $c['height'], 2.5);
+
+            $data = $generator->generate($effect->prompt, $keepSlug, siteCapture: $site['path']);
 
             // Isolated test-render (src/sample.ts → SampleEffect) to a TEMP file, so
             // an edit that fails never overwrites the live version or its preview.
@@ -77,7 +87,12 @@ class GenerateEffectJob implements ShouldQueue
             }
             $tmp = null;
 
-            $effect->update($data + ['preview_path' => $preview, 'error' => null]);
+            $effect->update($data + [
+                'preview_path' => $preview,
+                'site_url' => $site['url'],     // which page it filmed, if any
+                'site_error' => $site['error'],
+                'error' => null,
+            ]);
             $library->promote($effect); // writes <slug>.tsx, marks active, rebuilds index.ts
         } catch (\Throwable $e) {
             $library->resetCandidate();

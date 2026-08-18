@@ -39,7 +39,10 @@ class SettingsOverlay
         'modelos.elevenlabs_voice' => 'contentmachine.clips.voice_id',
         'modelos.clip_provider' => 'contentmachine.clips.llm_primary',
         'modelos.tensorx_model' => 'services.tensorx.model',
+        'shorts.whisper_model' => 'services.shorts.whisper_model',
     ];
+
+    public function __construct(private readonly SharedKeys $keys) {}
 
     public function apply(SettingsRepository $settings): void
     {
@@ -56,7 +59,47 @@ class SettingsOverlay
             }
         }
 
+        $this->steps((array) data_get($all, 'passos', []));
         $this->autoDrivers();
+    }
+
+    /**
+     * Resolves the per-step key bindings (step => key id) into
+     * `contentmachine.passos_resolvidos` (step => provider + secret), so a step
+     * can look its key up with a plain config read. A binding whose key was since
+     * deleted is dropped — the step falls back to auto rather than failing.
+     *
+     * @param  array<string,mixed>  $passos
+     */
+    private function steps(array $passos): void
+    {
+        $resolvidos = [];
+
+        foreach ($passos as $passo => $escolha) {
+            $escolha = trim((string) $escolha);
+            if ($escolha === '' || ! isset(config('contentmachine.passos')[$passo])) {
+                continue;
+            }
+
+            // 'local' is a keyless engine (local Whisper), not a stored key.
+            if ($escolha === 'local') {
+                $resolvidos[$passo] = ['provider' => 'local', 'key' => ''];
+
+                continue;
+            }
+
+            $valor = $this->keys->value($escolha);
+            if ($valor === null || $valor === '') {
+                continue;
+            }
+
+            $resolvidos[$passo] = [
+                'provider' => explode(':', $escolha, 2)[0],
+                'key' => $valor,
+            ];
+        }
+
+        config(['contentmachine.passos_resolvidos' => $resolvidos]);
     }
 
     /**

@@ -16,6 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
         // request is HTTPS and generates https:// URLs (no mixed-content on assets).
         $middleware->trustProxies(at: '*');
 
+        // NOTE: authentication is applied to the route group in routes/web.php,
+        // NOT here. Livewire registers its /livewire/update endpoint with the
+        // `web` group, so gating this group blocks the sign-in and sign-up forms
+        // themselves — their submissions ARE Livewire requests — and every login
+        // attempt just bounces back to /login.
+
         // Resolve the active project (per session) and repoint the vault at it.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
     })

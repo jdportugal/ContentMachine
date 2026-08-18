@@ -5,6 +5,8 @@
         cota="741.5 · ACM · '26"
         lead="The motion vocabulary the renderer can produce — create effects, attach sounds, and mark which ones open a video." />
 
+    @include('livewire.partials.studio-tabs')
+
     @if ($this->detail)
         {{-- ══════════════════════════ DETAIL VIEW (one effect) ══════════════════════════ --}}
         @php($d = $this->detail)

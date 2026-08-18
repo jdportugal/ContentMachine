@@ -25,18 +25,26 @@ class EffectGenerator
 
     /**
      * @param  string|null  $keepSlug  when editing, force this existing slug (skips the collision check)
+     * @param  array{width?:int,height?:int,transparent?:bool}  $canvas  frame the component must compose for;
+     *                                                                   defaults to the project's clip size (9:16)
+     * @param  string|null  $siteCapture  absolute path to a scroll-capture mp4 of a real website; when
+     *                                    given the component must PLAY it rather than mock up a browser
      * @return array{slug:string,display_name:string,description:string,param_schema:string,sample_text:string,sample_params:array,tsx:string}
      *
      * @throws RuntimeException on malformed output or a design-system violation
      */
-    public function generate(string $description, ?string $keepSlug = null): array
+    public function generate(string $description, ?string $keepSlug = null, array $canvas = [], ?string $siteCapture = null): array
     {
         // If this OVERRIDES a built-in, the component must read the SAME params
         // the planner sends that built-in — otherwise clips using it render blank.
         $builtin = $keepSlug !== null ? strtolower(trim($keepSlug)) : '';
         $overrideSlug = array_key_exists($builtin, EffectLibrary::BUILTIN_SAMPLES) ? $builtin : null;
 
-        $envelope = $this->runClaude($this->userPrompt($description, $overrideSlug), $this->systemPrompt(), ['timeout' => 300]);
+        $envelope = $this->runClaude(
+            $this->userPrompt($description, $overrideSlug),
+            $this->systemPrompt($canvas, $siteCapture),
+            ['timeout' => 300]
+        );
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null
@@ -49,6 +57,14 @@ class EffectGenerator
         $this->guard($tsx);
 
         $params = is_array($data['sampleParams'] ?? null) ? $data['sampleParams'] : [];
+
+        // Force the capture in rather than trusting the model to echo the path
+        // back: it is the ONE param whose value we already know, and a mistyped
+        // filename renders an empty frame with no error. The renderer stages this
+        // absolute path into Remotion's public/ and rewrites it to the basename.
+        if ($siteCapture !== null && is_file($siteCapture)) {
+            $params['src'] = $siteCapture;
+        }
 
         return [
             'slug' => $slug,
@@ -130,10 +146,86 @@ class EffectGenerator
         }
     }
 
-    private function systemPrompt(): string
+    /**
+     * The frame contract: size, orientation, and the no-background law.
+     *
+     * A primitive is a LAYER — the composition draws the themed brand backdrop
+     * behind it (BackgroundTexture, halftone texture included), exactly as the
+     * built-ins timeline.tsx/diagram.tsx assume. A component that paints its own
+     * full-frame fill covers that backdrop, so the brand background visibly
+     * vanishes the moment the animation starts — and in a real clip it would hide
+     * the chosen background or the source video too.
+     *
+     * Defaults to the project's own clip size, so the SFX studio keeps its size.
+     *
+     * @param  array{width?:int,height?:int,transparent?:bool}  $canvas
+     */
+    private function canvasRules(array $canvas): string
+    {
+        $c = config('contentmachine.clips');
+        $w = (int) ($canvas['width'] ?? $c['width']);
+        $h = (int) ($canvas['height'] ?? $c['height']);
+
+        $shape = match (true) {
+            $w > $h => 'LANDSCAPE (wide) — lay content out horizontally; a tall stack of lines will overflow. '
+                .'Headlines can run much wider, so use fewer, longer lines.',
+            $h > $w => 'PORTRAIT (tall) — lay content out vertically; keep lines short and stack them.',
+            default => 'SQUARE — keep content compact and centred.',
+        };
+
+        $rules = "- Compose for the whole {$w}x{$h} frame; centre content. Use <AbsoluteFill>.\n"
+            ."- The canvas is {$shape}\n"
+            .'- Size everything RELATIVE to the frame (vw/vh, %, or a scale derived from '
+            ."useVideoConfig().width/height) — never hardcode pixel sizes tuned to one aspect ratio.\n"
+            .'- NEVER PAINT A FULL-FRAME BACKGROUND — this is the single most common mistake. '
+            .'You are a LAYER: the composition ALREADY draws the themed brand backdrop (with its '
+            .'texture) behind you. Put NO background / backgroundColor / backgroundImage on your outer '
+            .'<AbsoluteFill>, and no frame-filling <div> or wash anywhere. Doing so hides the brand '
+            .'background, so it appears to vanish the instant your animation starts. The outer '
+            ."<AbsoluteFill> should carry layout/typography only (e.g. fontFamily), like the built-ins do.\n"
+            .'- Panels, cards, pills and shapes BEHIND TEXT are fine and encouraged — the ban is on '
+            .'covering the whole frame.';
+
+        if (! empty($canvas['transparent'])) {
+            $rules .= "\n- TRANSPARENT OUTPUT: this renders with an alpha channel to be overlaid on other "
+                .'footage, and NO backdrop is drawn behind you. The no-full-frame-background rule above is '
+                .'therefore absolute — every pixel you do not draw stays transparent.';
+        }
+
+        return $rules;
+    }
+
+    /**
+     * The contract for an effect that must show a REAL website, captured as a
+     * scrolling video. Without this the model mocks up a fake browser chrome,
+     * which is exactly what the capture exists to avoid.
+     */
+    private function siteRules(?string $siteCapture): string
+    {
+        if ($siteCapture === null) {
+            return '';
+        }
+
+        return "\n\n# SITE CAPTURE — CRITICAL\n"
+            .'A real scroll-recording of the website this effect is about is ALREADY captured and '
+            ."will be passed to you as `anim.params.src` (a filename). You MUST show it.\n"
+            ."- Render it with Remotion's <OffthreadVideo>, NOT <Img> and NOT a mock-up:\n"
+            ."    import { OffthreadVideo, staticFile } from \"remotion\";\n"
+            ."    const src = String(anim.params?.src ?? \"\");\n"
+            ."    {src ? <OffthreadVideo src={staticFile(src)} muted /> : null}\n"
+            ."- Do NOT draw fake browser chrome, address bars or invented screenshots — the\n"
+            ."  capture IS the real page. A device/browser frame AROUND it is fine as decoration.\n"
+            ."- Treat it as the hero: give it most of the frame, and let your own titles,\n"
+            ."  captions and ornaments sit over or beside it.\n"
+            .'- It is silent and already scrolling; do not add your own scroll transform to it.';
+    }
+
+    /** @param array{width?:int,height?:int,transparent?:bool} $canvas */
+    private function systemPrompt(array $canvas = [], ?string $siteCapture = null): string
     {
         $tokens = @file_get_contents(base_path('remotion/src/style-tokens.ts')) ?: '';
         $design = $this->design->readOrTemplate();
+        $canvasRules = $this->canvasRules($canvas).$this->siteRules($siteCapture);
 
         return <<<PROMPT
 You are a senior Remotion + React engineer for the Brand Machine studio. You write ONE new
@@ -168,7 +260,7 @@ Return a SINGLE JSON object (no markdown, no prose) with EXACTLY these keys:
 - `useCurrentFrame()` is LOCAL (starts at 0 when the layer begins). The layer's
   length in frames is `Math.round((anim.end - anim.start) * fps)`.
 - Read the text from `anim.text` and options from `anim.params` (coerce/guard — params may be missing).
-- Fill the whole 1080x1920 frame; centre content. Use <AbsoluteFill>.
+{$canvasRules}
 
 # DESIGN SYSTEM — LAW (this is what "follow the design system" means)
 - NEVER hardcode a colour (no #hex, no rgb()/hsl()) and NEVER hardcode a font family.

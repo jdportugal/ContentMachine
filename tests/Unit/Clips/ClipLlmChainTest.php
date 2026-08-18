@@ -79,4 +79,45 @@ class ClipLlmChainTest extends TestCase
 
         $this->runner()->run();
     }
+
+    /**
+     * A failing CLI reports WHY inside its JSON envelope, after a long `usage`
+     * block. Reporting a blind prefix of the raw output truncates mid-word and
+     * hides the reason — which is exactly what made a real failure undiagnosable.
+     */
+    public function test_a_failing_cli_reports_the_reason_not_a_truncated_prefix(): void
+    {
+        $envelope = json_encode([
+            'is_error' => true,
+            'duration_api_ms' => 0,
+            'num_turns' => 1,
+            'stop_reason' => 'stop_sequence',
+            'session_id' => 'c9d458ae-0000-0000-0000-000000000000',
+            'total_cost_usd' => 0,
+            // Long enough to push everything useful past a 200-char prefix.
+            'usage' => ['output_tokens_details' => ['thinking_tokens' => 0], 'padding' => str_repeat('x', 300)],
+            'subtype' => 'error_during_execution',
+            'result' => 'Credit balance is too low to run this request.',
+        ]);
+
+        $bin = sys_get_temp_dir().'/fake-claude-'.uniqid().'.sh';
+        file_put_contents($bin, "#!/bin/sh\ncat <<'JSON'\n{$envelope}\nJSON\nexit 1\n");
+        chmod($bin, 0755);
+
+        config([
+            'contentmachine.clips.claude_binary' => $bin,
+            'contentmachine.clips.claude_attempts' => 1,
+        ]);
+
+        try {
+            $this->runner()->run();
+            $this->fail('The failing CLI should have thrown.');
+        } catch (\Throwable $e) {
+            $this->assertStringContainsString('Credit balance is too low', $e->getMessage());
+            $this->assertStringContainsString('error_during_execution', $e->getMessage());
+            $this->assertStringContainsString('stop_reason=stop_sequence', $e->getMessage());
+        } finally {
+            @unlink($bin);
+        }
+    }
 }

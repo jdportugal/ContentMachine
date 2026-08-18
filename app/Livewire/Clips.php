@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Content\FinishedContent;
 use App\Services\Shorts\MusicLibrary;
 use App\Services\Shorts\ShortsPipeline;
 use App\Services\Vault\VaultContract;
@@ -13,7 +14,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Clip Generator')]
+#[Title('Shorts Generator')]
 class Clips extends Component
 {
     use WithFileUploads;
@@ -120,10 +121,17 @@ class Clips extends Component
 
     /**
      * Opens an AI-suggested post in the post generator: seeds the workshop brief
-     * with the title+angle and sends it to the format selector.
+     * with the chosen angle AND the video's own transcript, then sends it to the
+     * format selector. The angle alone is an instruction with no source material,
+     * so the planner would invent the substance.
      */
-    public function abrirPublicacao(string $fontePath, int $i, VaultContract $vault)
-    {
+    public function abrirPublicacao(
+        string $fontePath,
+        int $i,
+        VaultContract $vault,
+        ShortsPipeline $pipeline,
+        FinishedContent $conteudo,
+    ) {
         $fonte = $vault->get($fontePath);
         $sugestoes = $fonte ? json_decode((string) $fonte->get('publicacoes_sugeridas'), true) : null;
         $sugestao = is_array($sugestoes) ? ($sugestoes[$i] ?? null) : null;
@@ -134,8 +142,14 @@ class Clips extends Component
             return null;
         }
 
-        $brief = trim(($sugestao['titulo'] ?? '')."\n\n".($sugestao['angulo'] ?? ''));
-        session(['oficina_brief' => Str::limit($brief, 6000, '')]);
+        $angulo = trim(($sugestao['titulo'] ?? '')."\n\n".($sugestao['angulo'] ?? ''));
+        $transcricao = $conteudo->transcriptText($pipeline->transcricao($fonte));
+
+        $brief = $transcricao !== ''
+            ? $angulo."\n\n--- Source video transcript ---\n".$transcricao
+            : $angulo;
+
+        session(['oficina_brief' => Str::limit($brief, 20000, '')]);
 
         return redirect()->route('publicacoes');
     }

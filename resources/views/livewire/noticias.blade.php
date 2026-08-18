@@ -156,11 +156,32 @@
     </x-panel>
 
     {{-- ============ Report by period ============ --}}
+    @php($ehDicas = $tipoRelatorio === 'dicas')
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {{-- Generator --}}
         <div class="lg:col-span-1 min-w-0">
-            <x-panel eyebrow="Report" title="Create report" glyph="☙">
-                <p class="text-ink-soft text-sm -mt-2 mb-4">Distills the already aggregated items into a report, ready to become a script.</p>
+            <x-panel eyebrow="{{ $ehDicas ? 'Tool tips' : 'Report' }}"
+                     title="{{ $ehDicas ? 'Create tip scripts' : 'Create report' }}"
+                     glyph="{{ $ehDicas ? '✦' : '☙' }}">
+                <p class="text-ink-soft text-sm -mt-2 mb-4">
+                    @if ($ehDicas)
+                        Mines the aggregated items for the practical tricks buried in them — a setting, a flag, a workflow —
+                        and writes each as its own short-form script.
+                    @else
+                        Distills the already aggregated items into a report, ready to become a script.
+                    @endif
+                </p>
+
+                <label class="eyebrow block mb-1.5">Write</label>
+                <div class="flex gap-2 mb-4">
+                    @foreach (['noticias' => 'News', 'dicas' => 'Tool tips'] as $tipo => $rotulo)
+                        <button type="button" wire:click="$set('tipoRelatorio', '{{ $tipo }}')"
+                                class="flex-1 px-3 py-1.5 rounded-sm border font-mono text-xs transition
+                                       {{ $tipoRelatorio === $tipo ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
+                            {{ $rotulo }}
+                        </button>
+                    @endforeach
+                </div>
 
                 <label class="eyebrow block mb-1.5">Period</label>
                 <div class="flex gap-2 mb-4">
@@ -187,7 +208,11 @@
 
                 <button wire:click="criarRelatorio" @disabled($aGerar)
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
-                    {{ $aGerar ? 'Collecting and writing…' : 'Create news report' }}
+                    @if ($aGerar)
+                        {{ $ehDicas ? 'Mining for tips…' : 'Collecting and writing…' }}
+                    @else
+                        {{ $ehDicas ? 'Create tip scripts' : 'Create news report' }}
+                    @endif
                 </button>
 
                 @if ($aGerar)
@@ -216,7 +241,7 @@
             <x-panel>
                 @if (!empty($relatoriosPassados))
                     <div class="flex flex-wrap items-center gap-3 mb-4 pb-4 border-b border-ink-soft/15">
-                        <label for="relatorioSelecionado" class="eyebrow shrink-0">Previous reports</label>
+                        <label for="relatorioSelecionado" class="eyebrow shrink-0">{{ $ehDicas ? 'Previous tip scripts' : 'Previous reports' }}</label>
                         <select id="relatorioSelecionado" wire:model.live="relatorioSelecionado"
                                 class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5
                                        text-ink font-mono text-sm focus:border-teal focus:outline-none">
@@ -231,10 +256,10 @@
                 @if ($relatorio)
                     <div class="flex items-start justify-between gap-4 mb-2">
                         <div>
-                            <div class="eyebrow mb-1">Report · {{ $relatorio['modo'] }} · {{ $relatorio['total'] }} item(s)</div>
+                            <div class="eyebrow mb-1">{{ $ehDicas ? 'Tool tips' : 'Report' }} · {{ $relatorio['modo'] }} · {{ $relatorio['total'] }} item(s)</div>
                             <h2 class="font-display text-3xl text-ink leading-tight">{{ $relatorio['titulo'] }}</h2>
                         </div>
-                        <x-selo label="Brand Machine" sub="NEWS" date="MMXXVI" color="#FFB347" />
+                        <x-selo label="Brand Machine" sub="{{ $ehDicas ? 'TIPS' : 'NEWS' }}" date="MMXXVI" color="#FFB347" />
                     </div>
 
                     @if (!empty($relatorio['redacao']))
@@ -300,7 +325,7 @@
 
                     @if (!empty($relatorio['ideias_guiao']))
                         <x-fleuron glyph="✒" />
-                        <div class="eyebrow mb-2">Script ideas</div>
+                        <div class="eyebrow mb-2">{{ $ehDicas ? 'Angles left to mine' : 'Script ideas' }}</div>
                         <ul class="space-y-2">
                             @foreach ($relatorio['ideias_guiao'] as $ideia)
                                 <li class="flex gap-3 text-ink"><span class="text-gold shrink-0">❦</span><span>{{ $ideia }}</span></li>
@@ -309,9 +334,11 @@
                     @endif
                 @else
                     <div class="py-16 text-center">
-                        <div class="text-5xl text-gold/60 mb-3 select-none">☙</div>
-                        <p class="text-ink-soft italic">Choose a period and click «Create news report».</p>
-                        <p class="text-ink-faint text-sm mt-2">The report uses the items already collected with «Aggregate now».</p>
+                        <div class="text-5xl text-gold/60 mb-3 select-none">{{ $ehDicas ? '✦' : '☙' }}</div>
+                        <p class="text-ink-soft italic">Choose a period and click «{{ $ehDicas ? 'Create tip scripts' : 'Create news report' }}».</p>
+                        <p class="text-ink-faint text-sm mt-2">
+                            {{ $ehDicas ? 'The tips are mined from' : 'The report uses' }} the items already collected with «Aggregate now».
+                        </p>
                     </div>
                 @endif
             </x-panel>

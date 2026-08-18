@@ -4,6 +4,7 @@ namespace App\Services\Monitoring;
 
 use App\Services\Scoring\EngagementScorer;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -15,6 +16,9 @@ use Throwable;
  */
 class ApifyMonitoringFetcher
 {
+    /** Why the last collection failed, or null if it succeeded. */
+    private ?string $ultimoErro = null;
+
     public function __construct(
         private readonly ApifyClient $apify,
         private readonly EngagementScorer $scorer,
@@ -22,14 +26,33 @@ class ApifyMonitoringFetcher
     ) {}
 
     /**
+     * Collect and store. Returns the items, or [] on failure — never throws, so a
+     * dead actor cannot break the dashboard. Call ultimoErro() for the reason.
+     *
      * @return array<int,array<string,mixed>>
      */
     public function atualizar(string $plataforma, string $channelUrl, int $limite = 12): array
     {
-        [$itens, $canal] = $this->recolher($plataforma, $channelUrl, $limite);
+        $this->ultimoErro = null;
+
+        [$itens, $canal, $ok] = $this->recolher($plataforma, $channelUrl, $limite);
+
+        // A FAILED collection must not be written: guardar() replaces the whole
+        // cached entry, so storing the empty result would erase the last good
+        // data and leave an empty dashboard that looks like "nothing was posted".
+        if (! $ok) {
+            return [];
+        }
+
         $this->store->guardar($plataforma, $itens, $canal);
 
         return $itens;
+    }
+
+    /** Why the last atualizar() collected nothing, or null when it succeeded. */
+    public function ultimoErro(): ?string
+    {
+        return $this->ultimoErro;
     }
 
     /** Whether an actor + token are configured for this network. */
@@ -40,19 +63,29 @@ class ApifyMonitoringFetcher
     }
 
     /**
-     * @return array{0:array<int,array<string,mixed>>,1:array<string,mixed>} [itens, canal]
+     * @return array{0:array<int,array<string,mixed>>,1:array<string,mixed>,2:bool} [itens, canal, ok]
      */
     private function recolher(string $plataforma, string $channelUrl, int $limite): array
     {
         $actor = (string) config("contentmachine.monitoring.apify.{$plataforma}");
         if ($actor === '' || trim($channelUrl) === '') {
-            return [[], []];
+            $this->ultimoErro = $actor === ''
+                ? "No Apify actor configured for {$plataforma} (set APIFY_ACTOR_".strtoupper($plataforma).')'
+                : "No profile URL set for {$plataforma}.";
+
+            return [[], [], false];
         }
 
         try {
             $raw = $this->apify->runActor($actor, $this->input($plataforma, $channelUrl, $limite));
-        } catch (Throwable) {
-            return [[], []];
+        } catch (Throwable $e) {
+            // Log it: this used to be swallowed whole, which made every Apify
+            // failure — bad token, dead actor, rate limit — look identical to
+            // "the profile has no posts", with nothing in the log to go on.
+            $this->ultimoErro = Str::limit($e->getMessage(), 300);
+            Log::warning("Apify collection failed for {$plataforma} (actor {$actor}): ".$e->getMessage());
+
+            return [[], [], false];
         }
 
         $itens = [];
@@ -77,7 +110,7 @@ class ApifyMonitoringFetcher
         }
         unset($it);
 
-        return [$this->pontuar($plataforma, $itens), $canal];
+        return [$this->pontuar($plataforma, $itens), $canal, true];
     }
 
     /** @return array<string,mixed> actor input per platform */

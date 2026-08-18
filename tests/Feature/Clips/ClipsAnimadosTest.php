@@ -23,6 +23,13 @@ class ClipsAnimadosTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
+    }
+
     private function store(): ClipStore
     {
         return app(ClipStore::class);
@@ -279,6 +286,64 @@ class ClipsAnimadosTest extends TestCase
         $this->assertSame('img_b', $p->images[0]['id']);
         // The now-dangling reference is blanked so the render shows a placeholder, not a 404.
         $this->assertSame('', $p->plan['scenes'][0]['layers'][0]['params']['src']);
+    }
+
+    /**
+     * A scene can show an image while having none: the user chose to supply their
+     * own and has not yet, or the image it referenced was removed (which blanks
+     * the src — see the test above). The editor must still offer an upload there,
+     * otherwise that segment can never get its picture back.
+     */
+    public function test_a_scene_with_an_empty_image_slot_still_offers_an_upload(): void
+    {
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => '', 'variant' => 'fullscreen']]]],
+                // A text-only scene shows no image at all and must NOT offer one.
+                ['start' => 3, 'end' => 6, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'kinetic-text', 'text' => 'Sem imagem', 'params' => []]]],
+            ]],
+        ]);
+
+        $componente = Livewire::test(ClipsAnimados::class)->call('editarClip', $p->id);
+        $slots = $componente->instance()->sceneImages;
+
+        $this->assertArrayHasKey(0, $slots, 'the image scene offers no slot to fill');
+        $this->assertNull($slots[0]['id'], 'the slot should read as empty');
+        $this->assertSame(0, $slots[0]['layerIndex']);
+        $this->assertArrayNotHasKey(1, $slots, 'a text-only scene must not offer an image upload');
+    }
+
+    public function test_uploading_fills_an_empty_scene_image_slot(): void
+    {
+        Queue::fake();
+        Storage::fake('local');
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'status' => ClipRecord::STATUS_DONE,
+            'images' => [],
+            'plan' => ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'papyrus', 'karaoke' => false, 'punchWord' => null,
+                    'layers' => [['type' => 'image-reveal', 'text' => null, 'params' => ['src' => '', 'variant' => 'fullscreen']]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->set('sceneImageUploads.0', UploadedFile::fake()->image('minha.png', 120, 120))
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertCount(1, $p->images, 'the upload was not attached to the clip');
+        $this->assertSame(
+            $p->images[0]['id'],
+            $p->plan['scenes'][0]['layers'][0]['params']['src'],
+            'the scene still does not point at the uploaded image'
+        );
     }
 
     public function test_edit_raw_json_rejects_invalid_json(): void

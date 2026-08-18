@@ -278,11 +278,11 @@ class Rascunhos extends Component
     /** All promoted items across the three sources. @return Collection<int,array<string,mixed>> */
     private function itens(VaultContract $vault): Collection
     {
-        // Posts explicitly marked ready/scheduled/posted.
-        $prontos = ['pronto', 'agendado', 'publicado'];
+        // Which items count as finished lives in FinishedContent — the repurpose
+        // tab reads the same rule, so it must not be restated here.
+        $finished = app(\App\Services\Content\FinishedContent::class);
 
-        $posts = $vault->all('rascunhos')
-            ->filter(fn (VaultNote $n) => in_array($n->get('estado'), $prontos, true))
+        $posts = $finished->posts()
             ->map(function (VaultNote $n) {
                 $tipo = (string) $n->get('tipo', 'post');
                 $kind = config('contentmachine.publicacoes.tipos.'.$tipo.'.label', $tipo);
@@ -290,13 +290,10 @@ class Rascunhos extends Component
                 return $this->deNota($n, 'post', $kind);
             });
 
-        $clips = $vault->all('clips')
-            ->filter(fn (VaultNote $n) => $n->get('tipo') === 'clip' && in_array($n->get('estado'), $prontos, true))
+        $clips = $finished->shorts()
             ->map(fn (VaultNote $n) => $this->deNota($n, 'clip', 'Short'));
 
-        // Animated clips explicitly promoted (finished = true).
-        $animados = app(ClipStore::class)->all()
-            ->filter(fn (ClipRecord $p) => $p->status === ClipRecord::STATUS_DONE && (bool) $p->get('finished'))
+        $animados = $finished->animated()
             ->map(fn (ClipRecord $p) => [
                 'id' => $this->idDe('animado', $p->id),
                 'source' => 'animado',

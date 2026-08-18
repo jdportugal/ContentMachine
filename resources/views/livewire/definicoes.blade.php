@@ -14,6 +14,8 @@
                 'social' => '❧ Social & Publishing',
                 'motor'  => '⚙ AI & Engine',
                 'chaves' => '🔑 API Keys',
+                'passos' => '⇄ Keys per step',
+                'conta'  => '👤 Account',
                 'sistema' => '↻ Updates',
             ] as $id => $rotulo)
                 <button type="button" wire:click="$set('secao', '{{ $id }}')"
@@ -222,13 +224,28 @@
                 </div>
             </x-panel>
 
-            <x-panel eyebrow="Workshop" title="Clip Generator" glyph="✂">
+            <x-panel eyebrow="Workshop" title="Shorts Generator" glyph="✂">
                 <p class="text-ink-soft -mt-2 mb-4">Address of the ShortsCreator API that cuts the videos and records the subtitles.</p>
                 <div>
                     <label class="eyebrow block mb-1.5">API URL</label>
                     <input type="url" wire:model="shorts.api_url" placeholder="http://localhost:5000"
                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                     <p class="mt-1.5 font-mono text-xs text-ink-faint">Empty → uses <span class="text-ink-soft">SHORTS_API_URL</span> from .env.</p>
+                </div>
+                <div class="mt-4">
+                    <label class="eyebrow block mb-1.5">Local Whisper model</label>
+                    <select wire:model="shorts.whisper_model"
+                            class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        <option value="">default (tiny)</option>
+                        @foreach (['tiny', 'base', 'small', 'medium', 'large-v3'] as $m)
+                            <option value="{{ $m }}">{{ $m }}</option>
+                        @endforeach
+                    </select>
+                    <p class="mt-1.5 font-mono text-xs text-ink-faint">
+                        Transcription that runs on this machine — <span class="text-teal">no OpenAI key needed</span>. Bigger = more accurate and slower;
+                        the model downloads itself on first use. Used whenever there is no OpenAI key, or when a step is pinned to
+                        <span class="text-ink-soft">local Whisper</span> under Keys per step.
+                    </p>
                 </div>
             </x-panel>
         @endif
@@ -237,7 +254,9 @@
         @if ($secao === 'chaves')
             <x-panel eyebrow="Credentials" title="API keys" glyph="🔑">
                 <p class="text-ink-soft -mt-2 mb-4">
-                    Stored in the vault for local use. Empty → falls back to the matching <span class="font-mono text-ink-soft">.env</span> value.
+                    Stored server-side and never sent back to the browser — a saved key shows as <span class="text-teal">● saved</span>, not as its value.
+                    A provider can hold <strong>several</strong> keys: type one in and Save to add it, name it if you want to tell them apart.
+                    The <strong>first</strong> key of a provider is its default; pin a specific one to a specific pipeline step under <span class="font-mono text-ink-soft">Keys per step</span>.
                     Setting the <span class="text-teal">Anthropic</span> key routes all Claude features through the API.
                     A <span class="text-teal">Tensorix</span> key is used as an automatic fallback if Claude fails — or as the primary clip LLM (set the provider to <span class="font-mono text-ink-soft">tensorx</span> under Engine).
                 </p>
@@ -257,11 +276,107 @@
                         'blotato' => 'Blotato (publishing)',
                     ] as $chave => $rotulo)
                         <div>
-                            <label class="eyebrow block mb-1.5">{{ $rotulo }}</label>
-                            <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}" placeholder="•••• (from .env)"
-                                   class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                            <label class="eyebrow block mb-1.5 flex items-center gap-2">
+                                {{ $rotulo }}
+                                @if ($chavesDefinidas[$chave] ?? false)
+                                    <span class="text-teal font-mono text-[0.6rem]">● saved</span>
+                                    <button type="button" wire:click="limparChave('{{ $chave }}')"
+                                            wire:confirm="Remove EVERY stored {{ $rotulo }} key?"
+                                            class="ml-auto font-mono text-[0.6rem] text-ink-faint hover:text-rust underline">remove all</button>
+                                @endif
+                            </label>
+
+                            {{-- Stored keys: id + name only, never the secret. --}}
+                            @foreach ($chavesGuardadas[$chave] ?? [] as $i => $guardada)
+                                <div class="flex items-center gap-2 mb-1.5 font-mono text-[0.65rem] text-ink-soft">
+                                    <span class="text-teal">●</span>
+                                    <span>{{ $guardada['label'] ?: 'key ' . ($i + 1) }}</span>
+                                    @if ($i === 0)<span class="text-ink-faint">(default)</span>@endif
+                                    <span class="text-ink-faint">{{ $guardada['id'] }}</span>
+                                    <button type="button" wire:click="removerChave('{{ $guardada['id'] }}')"
+                                            wire:confirm="Remove this {{ $rotulo }} key?"
+                                            class="ml-auto text-ink-faint hover:text-rust underline">remove</button>
+                                </div>
+                            @endforeach
+
+                            <div class="flex gap-2">
+                                <input type="password" autocomplete="off" wire:model="chaves.{{ $chave }}"
+                                       placeholder="{{ ($chavesDefinidas[$chave] ?? false) ? 'add another key' : 'not set (falls back to .env)' }}"
+                                       class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                                <input type="text" wire:model="rotulos.{{ $chave }}" placeholder="name (optional)"
+                                       class="w-32 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-xs focus:border-teal focus:outline-none">
+                            </div>
                         </div>
                     @endforeach
+                </div>
+            </x-panel>
+        @endif
+
+        {{-- ══════════════════════════ KEYS PER STEP ══════════════════════════ --}}
+        @if ($secao === 'passos')
+            <x-panel eyebrow="Routing" title="Keys per step" glyph="⇄">
+                <p class="text-ink-soft -mt-2 mb-4">
+                    Which stored key each pipeline step bills to. <span class="font-mono text-ink-soft">auto</span> keeps the
+                    normal behaviour (the provider chain, each provider's default key); pick a key to pin that step to it —
+                    that also makes its provider the one tried first. Add the keys under <span class="font-mono text-ink-soft">API Keys</span>.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach ($passosMeta as $passo => $meta)
+                        <div>
+                            <label class="eyebrow block mb-1.5">{{ $meta['label'] }}</label>
+                            <select wire:model="passos.{{ $passo }}"
+                                    class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                                @foreach ($passosOpcoes[$passo] ?? [] as $valor => $rotulo)
+                                    <option value="{{ $valor }}">{{ $rotulo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
+                </div>
+            </x-panel>
+        @endif
+
+        {{-- ══════════════════════════ ACCOUNT ══════════════════════════ --}}
+        @if ($secao === 'conta')
+            <x-panel eyebrow="Access" title="Account" glyph="👤">
+                <p class="text-ink-soft -mt-2 mb-4">
+                    The single account that signs in to this install. If you are still using the
+                    password the deploy generated, change it here and then delete
+                    <span class="font-mono text-ink-soft">storage/app/admin_password</span>.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="eyebrow block mb-1.5">Email</label>
+                        <input type="email" autocomplete="username" wire:model="conta.email"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.email') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Current password</label>
+                        <input type="password" autocomplete="current-password" wire:model="conta.atual" placeholder="required to save"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.atual') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">New password</label>
+                        <input type="password" autocomplete="new-password" wire:model="conta.nova" placeholder="leave blank to keep"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        @error('conta.nova') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Confirm new password</label>
+                        <input type="password" autocomplete="new-password" wire:model="conta.nova_confirmation"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-3">
+                    <button type="button" wire:click="guardarConta"
+                            class="font-mono text-xs uppercase tracking-wider px-3.5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
+                        Update account
+                    </button>
+                    @if ($contaGuardada)
+                        <span class="font-mono text-[0.65rem] text-teal">✓ saved at {{ $contaGuardada }}</span>
+                    @endif
                 </div>
             </x-panel>
         @endif

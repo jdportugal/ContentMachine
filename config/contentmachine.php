@@ -280,6 +280,9 @@ return [
         // follows the speech; set e.g. 'pt' only if you want to force it).
         'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', ''),
         'remotion_path' => base_path('remotion'),
+        // Scroll-captures of websites, cached by url+size+length. Outside the
+        // vault: they are re-fetchable, and they are large.
+        'site_captures' => storage_path('app/clips/site-captures'),
         'style_md' => base_path('vault/estilo-animacao.md'),
         'disk' => env('CLIPS_DISK', 'local'),
         // Auto-generate on-brand images (Nano Banana / kie.ai) for scenes the
@@ -288,7 +291,53 @@ return [
         'image_max' => (int) env('CLIPS_IMAGE_MAX', 8),        // per clip, to bound cost/time
         'image_aspect' => env('CLIPS_IMAGE_ASPECT', '9:16'),   // portrait clips
         'image_style' => env('CLIPS_IMAGE_STYLE', 'cinematic, photographic, high detail, dramatic lighting, vertical composition, no text or watermarks'),
+        // Transcription engine: 'auto' (OpenAI when a key is set, else local
+        // Whisper), 'openai' or 'local'. The per-step binding in Settings wins.
+        'transcriber' => env('CLIPS_TRANSCRIBER', 'auto'),
+        // Time budget for local Whisper (the model size is services.shorts.whisper_model,
+        // shared with the Shorts pipeline and editable in Settings → AI & Engine).
+        'whisper_timeout' => (int) env('WHISPER_TIMEOUT', 1800),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pipeline steps → API key
+    |--------------------------------------------------------------------------
+    | Every step that calls a paid provider is listed here so Settings can offer
+    | a per-step key picker: with two OpenAI keys you can bill the animation plan
+    | to one and the transcription to the other. `kind` decides which providers
+    | are offered; an unbound step keeps the old behaviour (provider chain +
+    | that provider's default key).
+    |
+    | `passos_resolvidos` is filled in at runtime by SettingsOverlay — never here.
+    */
+    'passos' => [
+        'noticias_escrita' => ['label' => 'News · writing', 'kind' => 'llm'],
+        'noticias_dicas' => ['label' => 'News · tool-tip scripts', 'kind' => 'llm'],
+        'publicacoes_plano' => ['label' => 'Posts · planning', 'kind' => 'llm'],
+        'shorts_selecao' => ['label' => 'Shorts · clip selection', 'kind' => 'llm'],
+        'clips_pesquisa' => ['label' => 'Clips · research', 'kind' => 'llm'],
+        'clips_plano' => ['label' => 'Clips · animation plan', 'kind' => 'llm'],
+        'clips_metadados' => ['label' => 'Clips · title & metadata', 'kind' => 'llm'],
+        'vfx_site' => ['label' => 'VFX · which site to film', 'kind' => 'llm'],
+        'clips_transcricao' => ['label' => 'Clips · transcription', 'kind' => 'stt'],
+        'clips_voz' => ['label' => 'Clips · voiceover', 'kind' => 'tts'],
+        'clips_sfx' => ['label' => 'Clips · sound effects', 'kind' => 'tts'],
+        'clips_imagens' => ['label' => 'Clips · scene images', 'kind' => 'image'],
+        'publicacoes_cartoes' => ['label' => 'Posts · card rendering', 'kind' => 'image'],
+    ],
+
+    // Providers each kind of step may be pinned to. 'local' is not an API key —
+    // it is local Whisper (scripts/transcribe.py), usable with no key at all.
+    'passos_fornecedores' => [
+        'llm' => ['anthropic', 'openai', 'gemini', 'tensorx'],
+        'stt' => ['openai', 'local'],
+        'tts' => ['elevenlabs'],
+        'image' => ['kie'],
+    ],
+
+    // step => ['provider' => …, 'key' => …]. Written by SettingsOverlay at boot.
+    'passos_resolvidos' => [],
 
     /*
     |--------------------------------------------------------------------------

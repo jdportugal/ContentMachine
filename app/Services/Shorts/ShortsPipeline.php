@@ -33,12 +33,16 @@ class ShortsPipeline
 
     public const CLIPES = 'clips';
 
+    private readonly LlmClient $llm;
+
     public function __construct(
         private readonly LocalVideoEngine $engine,
         private readonly VaultContract $vault,
-        private readonly LlmClient $llm,
+        LlmClient $llm,
         private readonly MusicLibrary $musica,
-    ) {}
+    ) {
+        $this->llm = $llm->paraPasso('shorts_selecao');
+    }
 
     /** Is there an AI provider available (Claude CLI or an API key)? */
     public function temIA(): bool

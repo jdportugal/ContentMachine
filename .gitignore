@@ -21,6 +21,28 @@
 /storage/*.key
 /storage/pail
 /vendor
+
+# Local SQLite databases — NEVER commit. They can hold sessions, cache, users
+# and other runtime data. (DB_DATABASE=contentmachine creates this file at the
+# repo root; Laravel's own default is database/database.sqlite.)
+/contentmachine
+*.sqlite
+*.sqlite-journal
+
+# Per-project Remotion components, REBUILT from the active project's vault by
+# EffectLibrary/BackgroundLibrary::syncFilesystem(). Committing them would bake
+# one project's effects into the image. The index.ts stubs stay tracked (empty),
+# as does _candidate.tsx (the generation scratch slot).
+/remotion/src/effects/*.tsx
+!/remotion/src/effects/_candidate.tsx
+/remotion/src/backgrounds/*.tsx
+
+# VFX Lab renders — generated videos, runtime output like storage/.
+/vault/vfx/
+
+# Serena MCP workspace index.
+/.serena/
+*.sqlite3
 _ide_helper.php
 Homestead.json
 Homestead.yaml

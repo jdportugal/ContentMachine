@@ -269,20 +269,37 @@ class SceneVisualFiller
         return $plan;
     }
 
-    /** Estimated seconds needed to read a scene's text visual (0 if it isn't text-heavy). */
+    /** Visuals whose entrance animation takes ~2s to play — cutting away sooner truncates it. */
+    private const ANIMATED = ['bar-chart', 'line-chart', 'pie-chart', 'scatter-chart', 'timeline', 'diagram', 'terminal'];
+
+    /**
+     * Seconds this scene's visual needs on screen (0 when there is nothing to wait
+     * for). Two components, the larger wins: a FLOOR for the entrance animation to
+     * actually finish (every real visual animates in; charts/diagrams draw over
+     * ~2s), and reading time for text-heavy content.
+     */
     private function readingSeconds(array $scene): float
     {
+        $floor = 0.0;
         $len = 0;
         foreach ($scene['layers'] ?? [] as $l) {
-            if (is_array($l) && in_array($l['type'] ?? '', self::TEXT_HEAVY, true)) {
+            if (! is_array($l)) {
+                continue;
+            }
+            $type = $l['type'] ?? '';
+            if ($type === 'ambient' || in_array($type, self::ORNAMENTS, true)) {
+                continue;
+            }
+            $floor = max($floor, in_array($type, self::ANIMATED, true) ? 3.0 : 2.0);
+            if (in_array($type, self::TEXT_HEAVY, true)) {
                 $len += $this->textLength($l['params'] ?? []);
             }
         }
         if ($len < 40) {
-            return 0.0; // trivial amount of text — no minimum
+            return $floor; // little/no text — just let the animation finish
         }
 
-        return max(2.5, min(6.0, $len / 16.0)); // ~16 chars/sec, clamped to a sane window
+        return max($floor, min(6.0, $len / 16.0)); // ~16 chars/sec, clamped to a sane window
     }
 
     /** Total length of all string content nested anywhere in a value. */
@@ -443,12 +460,57 @@ class SceneVisualFiller
     }
 
     /**
+     * Clear image references that point at nothing: the planner sometimes copies
+     * the schema's own placeholder ("<id of a PROVIDED image>") or invents an id,
+     * and that string survives resolution untouched — the layer then renders the
+     * striped placeholder block instead of a picture. A src/image value must be a
+     * known image id (or an existing file, e.g. a site capture); anything else is
+     * removed so dropDeadLayers can drop or fall back the layer honestly.
+     *
+     * @param  string[]  $validIds
+     */
+    public function stripUnknownImageIds(array $plan, array $validIds): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes)) {
+            return $plan;
+        }
+        $ok = fn ($v) => is_string($v) && $v !== '' && (in_array($v, $validIds, true) || is_file($v));
+        $walk = function (&$node) use (&$walk, $ok) {
+            if (! is_array($node)) {
+                return;
+            }
+            foreach (['src', 'image', 'img'] as $k) {
+                if (array_key_exists($k, $node) && ! $ok($node[$k])) {
+                    unset($node[$k]);
+                }
+            }
+            foreach ($node as &$v) {
+                $walk($v);
+            }
+            unset($v);
+        };
+        foreach ($scenes as &$scene) {
+            if (isset($scene['layers']) && is_array($scene['layers'])) {
+                $walk($scene['layers']);
+            }
+        }
+        unset($scene);
+        $plan['scenes'] = $scenes;
+
+        return $plan;
+    }
+
+    /**
      * Remove layers that would render an empty-state placeholder: an image-reveal
      * with no image (generation failed / no src) or a chart/diagram with no data.
      * Those show a striped block or a faint "—" and look broken. Run AFTER image
      * generation, so failed images are cleaned up and the scene can fall back.
+     *
+     * @param  string[]  $imageSlugs  custom effect slugs that DISPLAY an image —
+     *                                without a src they render their placeholder too
      */
-    public function dropDeadLayers(array $plan): array
+    public function dropDeadLayers(array $plan, array $imageSlugs = []): array
     {
         $scenes = $plan['scenes'] ?? [];
         if (! is_array($scenes)) {
@@ -460,7 +522,7 @@ class SceneVisualFiller
             }
             $scene['layers'] = array_values(array_filter(
                 $scene['layers'],
-                fn ($l) => is_array($l) && $this->layerHasContent($l),
+                fn ($l) => is_array($l) && $this->layerHasContent($l, $imageSlugs),
             ));
         }
         unset($scene);
@@ -469,11 +531,17 @@ class SceneVisualFiller
         return $plan;
     }
 
-    /** True unless the layer would render its empty-state placeholder. */
-    private function layerHasContent(array $layer): bool
+    /** True unless the layer would render its empty-state placeholder. @param string[] $imageSlugs */
+    private function layerHasContent(array $layer, array $imageSlugs = []): bool
     {
         $p = is_array($layer['params'] ?? null) ? $layer['params'] : [];
         $text = $layer['text'] ?? null;
+
+        // A custom effect that displays an image is as dead without one as
+        // image-reveal is — it renders its own "IMAGE / PLACEHOLDER" frame.
+        if (in_array($layer['type'] ?? '', $imageSlugs, true)) {
+            return ! empty($p['src']) || ! empty($p['image']);
+        }
 
         return match ($layer['type'] ?? '') {
             'image-reveal' => ! empty($p['src']),

@@ -13,6 +13,11 @@ class ClaudeMetadataService implements MetadataService
 {
     use RunsClaudeCli;
 
+    protected function passo(): string
+    {
+        return 'clips_metadados';
+    }
+
     public function suggest(array $transcript): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));

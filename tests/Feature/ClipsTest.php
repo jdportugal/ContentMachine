@@ -18,6 +18,8 @@ class ClipsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Every route requires a session now (see Authenticate in bootstrap/app.php).
+        $this->comSessaoIniciada();
         $this->tmp = sys_get_temp_dir().'/cm-clips-'.uniqid();
         mkdir($this->tmp, 0775, true);
         config(['contentmachine.vault.path' => $this->tmp]);
@@ -38,7 +40,7 @@ class ClipsTest extends TestCase
 
     public function test_pagina_responde_200(): void
     {
-        $this->get('/clips')->assertOk()->assertSee('Clip Generator');
+        $this->get('/clips')->assertOk()->assertSee('Shorts Generator');
     }
 
     public function test_adicionar_fonte_e_criar_clip(): void
