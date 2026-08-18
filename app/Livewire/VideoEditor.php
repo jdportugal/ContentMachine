@@ -177,8 +177,11 @@ class VideoEditor extends Component
     public function aprovar(): void
     {
         if ($edit = $this->edicao) {
-            RenderEditJob::dispatch($edit->id());
+            // Status BEFORE dispatch: on the sync queue the job runs inline, and
+            // updating this (stale) instance afterwards would clobber the result
+            // the job just saved — the edit then shows "rendering" forever.
             $edit->update(['status' => EditorStore::RENDERING]);
+            RenderEditJob::dispatch($edit->id());
         }
     }
 
