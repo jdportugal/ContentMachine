@@ -146,6 +146,7 @@ export interface ClipProps {
   // Full-clip custom backdrop (behind all scenes), replacing the themed texture.
   // Resolved by RenderJob: code = a generated component (by slug); video = an mp4.
   background?: { kind: "code"; slug: string } | { kind: "video"; src: string };
+  banner?: string; // the news LEAD — pinned on screen for the whole clip
   videoSrc?: string; // source video (overlay clips) — scenes composite it per `present`
   animations?: Animation[]; // legacy flat model (backward compatible)
   // Index signature required so ClipProps satisfies Remotion's

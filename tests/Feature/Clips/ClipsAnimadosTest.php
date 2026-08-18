@@ -56,6 +56,33 @@ class ClipsAnimadosTest extends TestCase
         Queue::assertPushed(TranscribeJob::class);
     }
 
+    /** The optional LEAD is stored on the clip so RenderJob can pin it on screen. */
+    public function test_a_lead_is_stored_in_the_clip_meta(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('novoClip')
+            ->call('escolherTipo', 'animation')
+            ->set('text', 'Olá mundo')
+            ->set('lead', 'GPT-5 just got 60% cheaper')
+            ->call('submitAnimation')
+            ->assertHasNoErrors();
+
+        $this->assertSame('GPT-5 just got 60% cheaper', $this->store()->all()->first()->meta['lead']);
+    }
+
+    /** A news bit's `> lead` line is lifted into the lead field, not spoken. */
+    public function test_a_seeded_news_bit_splits_lead_from_script(): void
+    {
+        session(['animado_texto' => "**Headline**\n> GPT-5 just got 60% cheaper\nThe body that gets spoken."]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->assertSet('lead', 'GPT-5 just got 60% cheaper')
+            ->assertSet('createType', 'animation')
+            ->assertSet('text', fn ($t) => ! str_contains($t, '60% cheaper') && str_contains($t, 'body that gets spoken'));
+    }
+
     public function test_accepts_a_browser_recording_detected_as_video_webm(): void
     {
         Queue::fake();

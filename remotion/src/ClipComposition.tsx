@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig, Video } from "remotion";
-import { applyTheme, COLORS, isDark, TEXTURE, ThemeInput } from "./style-tokens";
+import { applyTheme, COLORS, ENGRAVE_SHADOW, FONTS, isDark, TEXTURE, ThemeInput } from "./style-tokens";
 import { renderPrimitive } from "./primitives";
 import { CUSTOM_BACKGROUNDS } from "./backgrounds";
 import { SceneTrack } from "./scenes";
@@ -129,6 +129,41 @@ const ClipBackground: React.FC<{ background: NonNullable<ClipProps["background"]
   );
 };
 
+// The news LEAD, pinned on screen for the whole clip: a compact bar near the
+// top that slides in once and stays. Sits ABOVE the scene track and below
+// nothing — captions live at the bottom, so the two never collide.
+const LeadBanner: React.FC<{ text: string; fps: number }> = ({ text, fps }) => {
+  const frame = useCurrentFrame();
+  const { width } = useVideoConfig();
+  const t = Math.min(1, frame / (0.6 * fps));
+  const ease = 1 - Math.pow(1 - t, 3);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", pointerEvents: "none" }}>
+      <div
+        style={{
+          marginTop: "5%",
+          maxWidth: "88%",
+          transform: `translateY(${(ease - 1) * 60}px)`,
+          opacity: ease,
+          backgroundColor: `${COLORS.ink}E6`,
+          border: `1px solid ${COLORS.teal}66`,
+          borderRadius: 6,
+          padding: `${width * 0.012}px ${width * 0.028}px`,
+          fontFamily: FONTS.display,
+          fontWeight: FONTS.displayWeight,
+          fontSize: width * 0.045,
+          lineHeight: 1.2,
+          color: COLORS.papyrus,
+          textAlign: "center",
+          textShadow: ENGRAVE_SHADOW,
+        }}
+      >
+        {text}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 export const ClipComposition: React.FC<ClipProps> = ({
   fps,
   transparent,
@@ -139,6 +174,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
   scenes,
   words,
   background,
+  banner,
   videoSrc,
   theme,
 }) => {
@@ -181,6 +217,8 @@ export const ClipComposition: React.FC<ClipProps> = ({
           );
         })
       )}
+
+      {banner && typeof banner === "string" ? <LeadBanner text={banner} fps={effectiveFps} /> : null}
     </AbsoluteFill>
   );
 };
