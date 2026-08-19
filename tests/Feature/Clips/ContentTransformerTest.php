@@ -7,6 +7,8 @@ use App\Livewire\ClipsAnimados;
 use App\Livewire\ContentRepurpose;
 use App\Livewire\PostsGenerator;
 use App\Services\Aggregation\LlmClient;
+use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Content\FinishedContent;
 use App\Services\Vault\VaultContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -305,6 +307,51 @@ class ContentTransformerTest extends TestCase
 
         Livewire::test(ContentRepurpose::class)
             ->call('paraPublicacao', 'short', $short->path, 'carrossel')
+            ->assertNoRedirect();
+
+        $this->assertNull(session('oficina_brief'));
+    }
+
+    /**
+     * Audio-input and uploaded-video animated clips have no `source_text`; their
+     * words live only in the STT transcript. Repurposing must use it, or the
+     * brief is just the title and the planner invents everything.
+     */
+    public function test_an_animated_clip_without_a_script_seeds_its_transcript(): void
+    {
+        $clip = app(ClipStore::class)->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
+            'input_kind' => 'video',
+            'title' => 'Talking-head cut',
+            'status' => ClipRecord::STATUS_DONE,
+            'finished' => true,
+            'source_text' => null,
+            'transcript' => ['text' => 'what I actually said on camera', 'words' => [], 'segments' => []],
+        ]);
+
+        Livewire::test(ContentRepurpose::class)
+            ->call('paraPublicacao', 'animado', $clip->id, 'carrossel')
+            ->assertRedirect(route('publicacoes.oficina', 'carrossel'));
+
+        $brief = (string) session('oficina_brief');
+        $this->assertStringContainsString('Talking-head cut', $brief);
+        $this->assertStringContainsString('what I actually said on camera', $brief);
+    }
+
+    /** A title alone is not source material — refuse it, don't seed it silently. */
+    public function test_an_animated_clip_with_only_a_title_is_refused(): void
+    {
+        $clip = app(ClipStore::class)->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
+            'input_kind' => 'video',
+            'title' => 'Untranscribed upload',
+            'status' => ClipRecord::STATUS_DONE,
+            'finished' => true,
+            'source_text' => null,
+        ]);
+
+        Livewire::test(ContentRepurpose::class)
+            ->call('paraPublicacao', 'animado', $clip->id, 'post')
             ->assertNoRedirect();
 
         $this->assertNull(session('oficina_brief'));

@@ -80,13 +80,20 @@ class FinishedContent
         );
     }
 
-    /** An animated clip's script — what it was generated from. */
+    /**
+     * An animated clip's spoken text. Typed-text clips carry their script in
+     * `source_text`; audio and uploaded-video clips have none, so their words
+     * live only in the STT `transcript` envelope ({text, segments, …}).
+     */
     public function animatedText(ClipRecord $clip): string
     {
-        return $this->compose(
-            (string) ($clip->title ?: 'Animated clip'),
-            (string) ($clip->get('source_text') ?: '')
-        );
+        $body = trim((string) ($clip->get('source_text') ?: ''));
+
+        if ($body === '') {
+            $body = trim((string) (((array) $clip->get('transcript'))['text'] ?? ''));
+        }
+
+        return $this->compose((string) ($clip->title ?: 'Animated clip'), $body);
     }
 
     /** A post's body, as plain text, for seeding a video script. */
@@ -109,9 +116,13 @@ class FinishedContent
             ->implode(' '));
     }
 
-    /** Title + body. Callers cap it for their own target. */
+    /**
+     * Title + body. Callers cap it for their own target. Empty body → empty
+     * string: a bare title is not source material, and returning it would slip
+     * past the callers' "has no text to work from" guards.
+     */
     private function compose(string $title, string $body): string
     {
-        return trim($title."\n\n".trim($body));
+        return trim($body) === '' ? '' : trim($title."\n\n".trim($body));
     }
 }
