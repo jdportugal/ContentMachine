@@ -96,6 +96,32 @@ class FinishedTest extends TestCase
         $this->assertSame(['linkedin'], $note->get('plataformas'));
     }
 
+    public function test_caption_uses_the_description_and_tags_and_keeps_the_title(): void
+    {
+        app(SettingsRepository::class)->save(['blotato' => ['youtube' => 'acc-yt']]);
+        $note = app(VaultContract::class)->create('rascunhos', [
+            'titulo' => 'My finished post',
+            'tipo' => 'post',
+            'estado' => 'pronto',
+            'descricao' => 'The real caption text.',
+            'tags' => ['ia', 'prompt engineering'],
+        ], 'The body.');
+        $id = 'post_'.md5($note->path);
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'p3'])]);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, ['youtube'])
+            ->call('publicar', 'post', $note->path)
+            ->assertHasNoErrors();
+
+        Http::assertSent(function (Request $r) {
+            $post = $r->data()['post'];
+
+            return $post['content']['text'] === "The real caption text.\n\n#ia #promptengineering"
+                && $post['target']['title'] === 'My finished post';
+        });
+    }
+
     public function test_publish_requires_a_platform(): void
     {
         $path = $this->seedPost();

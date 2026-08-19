@@ -108,7 +108,7 @@ class Rascunhos extends Component
         }
 
         $accounts = (array) $settings->get('blotato', []);
-        $texto = (string) $item['title']; // ponytail: caption = title; add a caption field if it needs to differ
+        $texto = $this->legenda($item);
 
         $ids = [];
         $erros = [];
@@ -120,7 +120,7 @@ class Rascunhos extends Component
                 continue;
             }
             try {
-                $r = $blotato->publish($acc, $p, $texto, $urls, $scheduledTime, $slot);
+                $r = $blotato->publish($acc, $p, $texto, $urls, $scheduledTime, $slot, (string) $item['title']);
                 $ids[$p] = $r['id'] ?? ($r['submissionId'] ?? true);
             } catch (Throwable $e) {
                 $erros[] = ucfirst($p).': '.$e->getMessage();
@@ -144,6 +144,24 @@ class Rascunhos extends Component
             $this->aviso .= ' Some failed — '.implode('; ', $erros);
         }
         $this->aba = $posted ? 'posted' : 'scheduled';
+    }
+
+    /**
+     * The caption Blotato posts: the item's own description (or body) with its
+     * tags appended as hashtags. Falls back to the title when there's no text.
+     */
+    private function legenda(array $item): string
+    {
+        $texto = trim((string) ($item['caption'] ?? '')) ?: (string) $item['title'];
+
+        $hashtags = collect($item['tags'] ?? [])
+            ->map(fn ($t) => preg_replace('/\s+/u', '', ltrim(trim((string) $t), '#')))
+            ->filter()
+            ->unique()
+            ->map(fn ($t) => '#'.$t)
+            ->implode(' ');
+
+        return $hashtags === '' ? $texto : $texto."\n\n".$hashtags;
     }
 
     /** Removes an item from a schedule (local view only). */
@@ -245,6 +263,23 @@ class Rascunhos extends Component
         return 'unpublished';
     }
 
+    /**
+     * The caption text of a note: its `descricao` when it has one, otherwise the
+     * body's first section as plain text — a carousel's body is every card,
+     * split by `---`, and only the cover card reads like a caption.
+     */
+    private function textoDaNota(VaultNote $n): string
+    {
+        $descricao = trim((string) $n->get('descricao', ''));
+        if ($descricao !== '') {
+            return $descricao;
+        }
+
+        $primeira = preg_split('/^\s*---\s*$/m', trim($n->body))[0] ?? '';
+
+        return trim(html_entity_decode(strip_tags(Str::markdown($primeira))));
+    }
+
     /** Normalizes a vault note (post or short) into the common shape. */
     private function deNota(VaultNote $n, string $source, string $kind): array
     {
@@ -267,6 +302,8 @@ class Rascunhos extends Component
             'ref' => $n->path,
             'kind' => $kind,
             'title' => $n->title(),
+            'caption' => $this->textoDaNota($n),
+            'tags' => array_values((array) $n->get('tags', [])),
             'cover' => $capa,
             'excerpt' => Str::limit(strip_tags($n->html()), 160),
             'scheduled_for' => $scheduledFor,
@@ -300,6 +337,9 @@ class Rascunhos extends Component
                 'ref' => $p->id,
                 'kind' => $p->type === ClipRecord::TYPE_OVERLAY ? 'Animated video' : 'Animation',
                 'title' => (string) ($p->title ?: 'Animated clip'),
+                // An animated clip's caption/tags are the planner's suggestion.
+                'caption' => trim((string) (((array) $p->get('meta', []))['suggested']['description'] ?? '')),
+                'tags' => array_values((array) (((array) $p->get('meta', []))['suggested']['tags'] ?? [])),
                 'cover' => null,
                 'excerpt' => '',
                 'scheduled_for' => $p->get('scheduled_for') ?: null,

@@ -79,6 +79,7 @@ class BlotatoClient
      *
      * @param  array<int,string>  $mediaUrls  public URLs from uploadMedia()
      * @param  string|null  $scheduledTime  ISO-8601 with offset; null = immediate/slot
+     * @param  string|null  $title  platform title (YouTube); defaults to the caption's first line
      * @return array<string,mixed>
      */
     public function publish(
@@ -88,6 +89,7 @@ class BlotatoClient
         array $mediaUrls = [],
         ?string $scheduledTime = null,
         bool $useNextFreeSlot = false,
+        ?string $title = null,
     ): array {
         $body = [
             'post' => [
@@ -97,7 +99,7 @@ class BlotatoClient
                     'mediaUrls' => array_values($mediaUrls),
                     'platform' => $targetType,
                 ],
-                'target' => array_merge(['targetType' => $targetType], $this->targetExtras($targetType, $text)),
+                'target' => array_merge(['targetType' => $targetType], $this->targetExtras($targetType, $title ?: $text)),
             ],
         ];
 
@@ -116,11 +118,11 @@ class BlotatoClient
      * ponytail: hardcoded publishing defaults (public visibility, comments on).
      * Add per-post overrides in the UI if a platform's options need to vary.
      */
-    private function targetExtras(string $targetType, string $text): array
+    private function targetExtras(string $targetType, string $title): array
     {
         return match ($targetType) {
             'youtube' => [
-                'title' => Str::limit($text, 95, ''),
+                'title' => Str::limit(strtok($title, "\n") ?: $title, 95, ''),
                 'privacyStatus' => 'public',
                 'shouldNotifySubscribers' => false,
             ],

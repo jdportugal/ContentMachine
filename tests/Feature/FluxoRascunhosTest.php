@@ -149,6 +149,7 @@ class FluxoRascunhosTest extends TestCase
         $store = app(ClipStore::class);
         $p = $store->create([
             'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim X', 'status' => 'done', 'finished' => true,
+            'meta' => ['suggested' => ['description' => 'What the clip is about.', 'tags' => ['ia', 'video']]],
         ]);
         $id = $this->idDe('animado', $p->id);
 
@@ -161,6 +162,10 @@ class FluxoRascunhosTest extends TestCase
             ->assertHasNoErrors();
 
         $this->assertStringStartsWith('2026-09-03', (string) $store->find($p->id)->scheduled_for);
+
+        Http::assertSent(fn ($r) => str_contains($r->url(), '/v2/posts')
+            && $r->data()['post']['content']['text'] === "What the clip is about.\n\n#ia #video"
+            && $r->data()['post']['target']['title'] === 'Anim X');
 
         Livewire::test(Rascunhos::class)->call('desagendar', 'animado', $p->id);
         $this->assertNull($store->find($p->id)->scheduled_for);
