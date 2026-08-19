@@ -122,6 +122,84 @@ class FinishedTest extends TestCase
         });
     }
 
+    public function test_dm_for_link_adds_the_cta_and_registers_the_zernio_automation(): void
+    {
+        config(['services.zernio.key' => 'sk_test']);
+        app(SettingsRepository::class)->save([
+            'blotato' => ['instagram' => 'acc-ig'],
+            'zernio' => ['profile' => 'profile_1', 'instagram' => 'zern-ig'],
+        ]);
+        $note = app(VaultContract::class)->create('rascunhos', [
+            'titulo' => 'Lead magnet post', 'tipo' => 'post', 'estado' => 'pronto', 'descricao' => 'The caption.',
+        ], 'body');
+        $id = 'post_'.md5($note->path);
+
+        Http::fake([
+            '*/v2/posts' => Http::response(['id' => 'p9']),
+            '*/comment-automations' => Http::response(['automation' => ['id' => 'auto_9']]),
+        ]);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, ['instagram'])
+            ->set('dm.'.$id.'.ativo', true)
+            ->set('dm.'.$id.'.keyword', 'GUIDE')
+            ->set('dm.'.$id.'.link', 'https://example.com/guide')
+            ->call('publicar', 'post', $note->path)
+            ->assertHasNoErrors();
+
+        // The caption carries the CTA, so the keyword people DM is on the post.
+        Http::assertSent(fn (Request $r) => str_contains($r->url(), '/v2/posts')
+            && str_contains($r->data()['post']['content']['text'], 'DM «GUIDE»'));
+
+        // And the automation that answers them is live, with the link.
+        Http::assertSent(fn (Request $r) => str_contains($r->url(), '/comment-automations')
+            && $r->data()['keywords'] === ['GUIDE']
+            && $r->data()['buttons'][0]['url'] === 'https://example.com/guide');
+
+        $this->assertSame(['instagram' => 'auto_9'], app(VaultContract::class)->get($note->path)->get('dm_automations'));
+    }
+
+    public function test_dm_for_link_needs_a_keyword_and_a_real_link(): void
+    {
+        config(['services.zernio.key' => 'sk_test']);
+        $path = $this->seedPost();
+        $id = 'post_'.md5($path);
+        Http::fake();
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, ['linkedin'])
+            ->set('dm.'.$id.'.ativo', true)
+            ->call('publicar', 'post', $path)
+            ->assertHasErrors('dm.'.$id.'.keyword')
+            ->set('dm.'.$id.'.keyword', 'GUIDE')
+            ->set('dm.'.$id.'.link', 'not-a-url')
+            ->call('publicar', 'post', $path)
+            ->assertHasErrors('dm.'.$id.'.link');
+
+        Http::assertNothingSent();
+    }
+
+    /** A post that never reaches Instagram can't have a DM automation — say so, don't fail the post. */
+    public function test_dm_on_a_non_instagram_post_still_publishes_and_warns(): void
+    {
+        config(['services.zernio.key' => 'sk_test']);
+        $path = $this->seedPost();
+        $id = 'post_'.md5($path);
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'p10'])]);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, ['linkedin'])
+            ->set('dm.'.$id.'.ativo', true)
+            ->set('dm.'.$id.'.keyword', 'GUIDE')
+            ->set('dm.'.$id.'.link', 'https://example.com/guide')
+            ->call('publicar', 'post', $path)
+            ->assertHasNoErrors()
+            ->assertSet('aba', 'posted')
+            ->assertSee('only watches Instagram');
+
+        Http::assertNotSent(fn (Request $r) => str_contains($r->url(), '/comment-automations'));
+    }
+
     public function test_publish_requires_a_platform(): void
     {
         $path = $this->seedPost();

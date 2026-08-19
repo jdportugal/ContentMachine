@@ -72,6 +72,54 @@
                     @error('plataformas.'.$item['id']) <span class="block text-bad text-xs mt-1">{{ $message }}</span> @enderror
                 </div>
 
+                {{-- DM for link (Zernio) --}}
+                <div class="mt-4 pt-4 border-t border-ink-soft/10">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" wire:model.live="dm.{{ $item['id'] }}.ativo" class="accent-teal" @disabled(! $zernioReady)>
+                        <span class="eyebrow">DM for link</span>
+                        <span class="font-mono text-[0.6rem] text-ink-faint">
+                            @if ($zernioReady)
+                                Instagram · a comment or DM with the word gets the link
+                            @else
+                                needs the Zernio key & ids (Settings)
+                            @endif
+                        </span>
+                    </label>
+
+                    @if ($dm[$item['id']]['ativo'] ?? false)
+                        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="eyebrow block mb-1.5 text-[0.55rem]">Keyword</label>
+                                <input type="text" wire:model.live.debounce.400ms="dm.{{ $item['id'] }}.keyword" placeholder="GUIDE"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                                @error('dm.'.$item['id'].'.keyword') <span class="block text-bad text-xs mt-1">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="eyebrow block mb-1.5 text-[0.55rem]">Link they get</label>
+                                <input type="url" wire:model="dm.{{ $item['id'] }}.link" placeholder="https://…"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                                @error('dm.'.$item['id'].'.link') <span class="block text-bad text-xs mt-1">{{ $message }}</span> @enderror
+                            </div>
+                            {{-- Blank fields send the placeholder, so what's shown is what goes out. --}}
+                            <div class="sm:col-span-2">
+                                <label class="eyebrow block mb-1.5 text-[0.55rem]">Call to action (added to the caption)</label>
+                                <input type="text" wire:model="dm.{{ $item['id'] }}.cta" placeholder="{{ $this->dmPadrao($item['id'], 'cta') }}"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink text-sm focus:border-teal focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="eyebrow block mb-1.5 text-[0.55rem]">DM they receive</label>
+                                <input type="text" wire:model="dm.{{ $item['id'] }}.mensagem" placeholder="{{ $this->dmPadrao($item['id'], 'mensagem') }}"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink text-sm focus:border-teal focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="eyebrow block mb-1.5 text-[0.55rem]">Public reply to the comment</label>
+                                <input type="text" wire:model="dm.{{ $item['id'] }}.resposta" placeholder="{{ $this->dmPadrao($item['id'], 'resposta') }}"
+                                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink text-sm focus:border-teal focus:outline-none">
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
                 {{-- When --}}
                 <div class="mt-4 flex flex-wrap items-end gap-4">
                     <div>

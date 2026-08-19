@@ -114,4 +114,10 @@ return [
         'base_url' => env('BLOTATO_BASE_URL', 'https://backend.blotato.com'),
     ],
 
+    // Zernio — comment/DM automations ("DM me GUIDE and I'll send the link").
+    'zernio' => [
+        'key' => env('ZERNIO_API_KEY'),
+        'base_url' => env('ZERNIO_BASE_URL', 'https://zernio.com/api/v1'),
+    ],
+
 ];

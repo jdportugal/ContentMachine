@@ -161,6 +161,23 @@
                     @endforeach
                 </div>
             </x-panel>
+
+            <x-panel eyebrow="Publishing" title="Zernio DM automations" glyph="📬">
+                <p class="text-ink-soft -mt-2 mb-4">
+                    Powers <span class="text-teal">“DM me GUIDE and I'll send the link”</span> on a finished post.
+                    Copy the profile and Instagram account ids from your Zernio dashboard; Instagram is the only
+                    platform we publish to that Zernio can comment/DM on. Needs the Zernio key (API Keys tab).
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach (['profile' => 'Profile id', 'instagram' => 'Instagram account id'] as $campo => $rotulo)
+                        <div>
+                            <label class="eyebrow block mb-1.5">{{ $rotulo }}</label>
+                            <input type="text" autocomplete="off" wire:model="zernio.{{ $campo }}" placeholder="e.g. profile_abc123"
+                                   class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                        </div>
+                    @endforeach
+                </div>
+            </x-panel>
         @endif
 
         {{-- ══════════════════════════ AI & ENGINE ══════════════════════════ --}}
@@ -274,6 +291,7 @@
                         'reddit_client_id' => 'Reddit client id',
                         'reddit_client_secret' => 'Reddit client secret',
                         'blotato' => 'Blotato (publishing)',
+                        'zernio' => 'Zernio (DM automations)',
                     ] as $chave => $rotulo)
                         <div>
                             <label class="eyebrow block mb-1.5 flex items-center gap-2">

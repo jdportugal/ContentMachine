@@ -29,6 +29,7 @@ class SettingsOverlay
         'chaves.reddit_client_secret' => 'services.reddit.client_secret',
         'chaves.kie' => 'services.kie.key',
         'chaves.blotato' => 'services.blotato.key',
+        'chaves.zernio' => 'services.zernio.key',
         'chaves.tensorx' => 'services.tensorx.key',
         'modelos.llm_provider' => 'contentmachine.aggregation.llm_provider',
         'modelos.anthropic_model' => 'contentmachine.aggregation.anthropic_model',

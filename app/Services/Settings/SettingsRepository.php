@@ -65,6 +65,7 @@ class SettingsRepository
                 'reddit_client_secret' => '',
                 'kie' => '',
                 'blotato' => '',
+                'zernio' => '',
                 'tensorx' => '',
             ],
             // Blotato connected-account ids per platform (copied from the Blotato
@@ -75,6 +76,12 @@ class SettingsRepository
                 'tiktok' => '',
                 'linkedin' => '',
                 'threads' => '',
+            ],
+            // Zernio ids for the DM automations. Instagram only: it's the one
+            // platform we publish to that Zernio can comment/DM on.
+            'zernio' => [
+                'profile' => '',
+                'instagram' => '',
             ],
             // Service/model config. Empty → falls back to the .env/config default.
             'modelos' => [

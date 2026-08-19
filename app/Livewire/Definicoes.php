@@ -70,6 +70,9 @@ class Definicoes extends Component
     /** Blotato connected-account ids per platform. @var array<string,string> */
     public array $blotato = [];
 
+    /** Zernio ids for the DM automations (profile + Instagram account). @var array<string,string> */
+    public array $zernio = [];
+
     /** Active project's language (stored in the project registry, not the vault). */
     public string $idioma = 'en';
 
@@ -94,6 +97,7 @@ class Definicoes extends Component
         $this->modelos = $tudo['modelos'];
         $this->passos = array_map(fn ($v) => (string) $v, $tudo['passos'] ?? []);
         $this->blotato = $tudo['blotato'];
+        $this->zernio = $tudo['zernio'];
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
@@ -120,6 +124,7 @@ class Definicoes extends Component
             'shorts' => $this->shorts,
             'modelos' => array_map('trim', $this->modelos),
             'blotato' => array_map('trim', $this->blotato),
+            'zernio' => array_map('trim', $this->zernio),
             'passos' => array_map('trim', $this->passos),
         ]);
 

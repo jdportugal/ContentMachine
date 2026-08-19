@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Publishing\BlotatoClient;
+use App\Services\Publishing\ZernioClient;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
@@ -40,6 +41,15 @@ class Rascunhos extends Component
     /** datetime-local value per item id (when quando=time). @var array<string,string> */
     public array $datas = [];
 
+    /**
+     * "DM for link" per item id: ativo, keyword, link, cta, mensagem, resposta.
+     * Blank copy fields fall back to the defaults below, so the placeholders the
+     * user sees are exactly what gets sent.
+     *
+     * @var array<string,array<string,mixed>>
+     */
+    public array $dm = [];
+
     /** Calendar month cursor, "YYYY-MM". */
     public string $mes = '';
 
@@ -69,6 +79,19 @@ class Rascunhos extends Component
             $this->addError('plataformas.'.$id, 'Pick at least one platform.');
 
             return;
+        }
+
+        if ($this->dmLigado($id)) {
+            if ($this->dmCampo($id, 'keyword') === '') {
+                $this->addError('dm.'.$id.'.keyword', 'Pick the word people will DM you.');
+
+                return;
+            }
+            if (! filter_var($this->dmCampo($id, 'link'), FILTER_VALIDATE_URL)) {
+                $this->addError('dm.'.$id.'.link', 'The link people get must be a full URL.');
+
+                return;
+            }
         }
 
         $modo = $this->quando[$id] ?? 'now';
@@ -108,7 +131,7 @@ class Rascunhos extends Component
         }
 
         $accounts = (array) $settings->get('blotato', []);
-        $texto = $this->legenda($item);
+        $texto = $this->legenda($item, $id);
 
         $ids = [];
         $erros = [];
@@ -133,26 +156,130 @@ class Rascunhos extends Component
             return;
         }
 
+        $automacoes = $this->registarDm($id, $item, array_keys($ids), $settings, $erros);
+
         $posted = ! $scheduledTime && ! $slot; // immediate
         if ($posted) {
             $scheduledFor = now()->toIso8601String(); // stamp the moment it went out
         }
-        $this->guardarEstado($source, $ref, $vault, $posted ? 'posted' : 'scheduled', $scheduledFor, array_keys($ids), $ids);
+        $this->guardarEstado(
+            $source, $ref, $vault,
+            $posted ? 'posted' : 'scheduled',
+            $scheduledFor, array_keys($ids), $ids,
+            $automacoes === [] ? [] : ['dm_automations' => $automacoes],
+        );
 
         $this->aviso = ($posted ? 'Posted' : 'Scheduled').' to '.implode(', ', array_keys($ids)).'.';
+        if ($automacoes !== []) {
+            $this->aviso .= ' DM automation live for «'.$this->dmCampo($id, 'keyword').'».';
+        }
         if ($erros !== []) {
             $this->aviso .= ' Some failed — '.implode('; ', $erros);
         }
         $this->aba = $posted ? 'posted' : 'scheduled';
     }
 
+    // ── DM for link (Zernio) ─────────────────────────────────────────────
+
+    /** Is "DM for link" switched on for this item? */
+    private function dmLigado(string $id): bool
+    {
+        return (bool) ($this->dm[$id]['ativo'] ?? false);
+    }
+
+    /** One typed DM field, trimmed. */
+    private function dmCampo(string $id, string $campo): string
+    {
+        return trim((string) ($this->dm[$id][$campo] ?? ''));
+    }
+
     /**
-     * The caption Blotato posts: the item's own description (or body) with its
-     * tags appended as hashtags. Falls back to the title when there's no text.
+     * Default copy for a DM campaign — shown as the field's placeholder AND used
+     * when the field is left blank, so what the user reads is what gets sent.
      */
-    private function legenda(array $item): string
+    public function dmPadrao(string $id, string $campo): string
+    {
+        $palavra = $this->dmCampo($id, 'keyword') ?: 'LINK';
+
+        return match ($campo) {
+            'cta' => "📬 DM «{$palavra}» and I'll send you the link.",
+            'mensagem' => "Here's the link you asked for 👇",
+            'resposta' => 'Sent you a DM 📩',
+            default => '',
+        };
+    }
+
+    /** A typed DM field, or its default when left blank. */
+    private function dmTexto(string $id, string $campo): string
+    {
+        return $this->dmCampo($id, $campo) ?: $this->dmPadrao($id, $campo);
+    }
+
+    /**
+     * Registers the comment/DM automation with Zernio after a successful publish.
+     *
+     * Instagram-only: it's the one platform we publish to that Zernio can watch.
+     * Anything that goes wrong lands in $erros next to the publishing errors —
+     * the post is already out, so a failed automation must not read as a failure
+     * to publish.
+     *
+     * @param  array<int,string>  $publicadas  platforms the post actually went to
+     * @param  array<int,string>  $erros  by reference, appended to
+     * @return array<string,string>  platform => automation id
+     */
+    private function registarDm(string $id, array $item, array $publicadas, SettingsRepository $settings, array &$erros): array
+    {
+        if (! $this->dmLigado($id)) {
+            return [];
+        }
+
+        if (! in_array('instagram', $publicadas, true)) {
+            $erros[] = 'DM automation skipped: Zernio only watches Instagram.';
+
+            return [];
+        }
+
+        $zernio = (array) $settings->get('zernio', []);
+        $perfil = trim((string) ($zernio['profile'] ?? ''));
+        $conta = trim((string) ($zernio['instagram'] ?? ''));
+        if ($perfil === '' || $conta === '') {
+            $erros[] = 'DM automation skipped: no Zernio profile/account id in Settings.';
+
+            return [];
+        }
+
+        try {
+            $r = app(ZernioClient::class)->commentToDm(
+                profileId: $perfil,
+                accountId: $conta,
+                name: Str::limit((string) $item['title'], 60, ''),
+                dmMessage: $this->dmTexto($id, 'mensagem'),
+                keywords: [$this->dmCampo($id, 'keyword')],
+                linkUrl: $this->dmCampo($id, 'link'),
+                linkLabel: 'Open the link',
+                commentReply: $this->dmTexto($id, 'resposta'),
+            );
+
+            return ['instagram' => (string) ($r['automation']['id'] ?? '')];
+        } catch (Throwable $e) {
+            $erros[] = 'DM automation: '.$e->getMessage();
+
+            return [];
+        }
+    }
+
+    /**
+     * The caption Blotato posts: the item's own description (or body), the DM
+     * call to action when one is set, then its tags as hashtags. Falls back to
+     * the title when there's no text.
+     */
+    private function legenda(array $item, ?string $id = null): string
     {
         $texto = trim((string) ($item['caption'] ?? '')) ?: (string) $item['title'];
+
+        if ($id !== null && $this->dmLigado($id)) {
+            $texto .= "\n\n".$this->dmTexto($id, 'cta');
+        }
 
         $hashtags = collect($item['tags'] ?? [])
             ->map(fn ($t) => preg_replace('/\s+/u', '', ltrim(trim((string) $t), '#')))
@@ -183,8 +310,12 @@ class Rascunhos extends Component
         $vault->delete($ref);
     }
 
-    /** Writes publish state back to the item's store (vault note or clip record). */
-    private function guardarEstado(string $source, string $ref, VaultContract $vault, string $estado, ?string $scheduledFor, array $plats, array $ids): void
+    /**
+     * Writes publish state back to the item's store (vault note or clip record).
+     *
+     * @param  array<string,mixed>  $extra  merged in as-is (e.g. dm_automations)
+     */
+    private function guardarEstado(string $source, string $ref, VaultContract $vault, string $estado, ?string $scheduledFor, array $plats, array $ids, array $extra = []): void
     {
         if ($source === 'animado') {
             app(ClipStore::class)->find($ref)?->update([
@@ -192,12 +323,12 @@ class Rascunhos extends Component
                 'scheduled_for' => $scheduledFor,
                 'plataformas' => $plats,
                 'blotato_ids' => $ids,
-            ]);
+            ] + $extra);
 
             return;
         }
 
-        $vault->updateFrontmatter($ref, [
+        $vault->updateFrontmatter($ref, $extra + [
             'estado' => match ($estado) {
                 'posted' => 'publicado',
                 'scheduled' => 'agendado',
@@ -387,6 +518,11 @@ class Rascunhos extends Component
             if (! is_array($this->plataformas[$item['id']] ?? null)) {
                 $this->plataformas[$item['id']] = array_values((array) ($item['plataformas'] ?? []));
             }
+            // Same reason as above: the DM block binds to dm.<id>.<field>, so the
+            // key has to exist as an array before the checkbox renders.
+            if (! is_array($this->dm[$item['id']] ?? null)) {
+                $this->dm[$item['id']] = ['ativo' => false, 'keyword' => '', 'link' => '', 'cta' => '', 'mensagem' => '', 'resposta' => ''];
+            }
         }
 
         return view('livewire.rascunhos', [
@@ -397,6 +533,7 @@ class Rascunhos extends Component
             'calendario' => $this->calendario($agendados),
             'diasDoMes' => $this->diasDoMes(),
             'blotatoReady' => filled(config('services.blotato.key')),
+            'zernioReady' => filled(config('services.zernio.key')),
             'contagem' => [
                 'unpublished' => ($porEstado->get('unpublished') ?? collect())->count(),
                 'scheduled' => $agendados->count(),
