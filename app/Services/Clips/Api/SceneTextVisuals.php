@@ -39,8 +39,8 @@ class SceneTextVisuals
         $targets = [];
         foreach ($scenes as $i => $scene) {
             foreach ($scene['layers'] ?? [] as $layer) {
-                $prompt = ImageRequests::pendingPrompt($layer);
-                if ($prompt !== '' && in_array(ImageRequests::key($prompt), $keys, true)) {
+                $key = ImageRequests::layerKey($layer);
+                if ($key !== '' && in_array($key, $keys, true)) {
                     $targets[$i] = $filler->spokenText($transcript, (float) ($scene['start'] ?? 0), (float) ($scene['end'] ?? 0));
                     break;
                 }
@@ -55,7 +55,7 @@ class SceneTextVisuals
         foreach ($targets as $i => $_) {
             $scenes[$i]['layers'] = array_values(array_filter(
                 $scenes[$i]['layers'] ?? [],
-                fn ($l) => ! (is_array($l) && ImageRequests::pendingPrompt($l) !== ''),
+                fn ($l) => ! (is_array($l) && ImageRequests::layerKey($l) !== ''),
             ));
             if (isset($layers[$i])) {
                 $scenes[$i]['layers'][] = $layers[$i];

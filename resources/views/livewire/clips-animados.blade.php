@@ -1,4 +1,4 @@
-<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'backgrounds' && ($this->backgroundsBusy || $this->backgroundReelBusy))) wire:poll.3s @endif>
+<div @if (($view === 'dashboard' && $this->hasActive) || ($view === 'backgrounds' && ($this->backgroundsBusy || $this->backgroundReelBusy)) || ($view === 'reviewImages' && $this->siteCollecting)) wire:poll.3s @endif>
     @php
         $estados = [
             'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
@@ -163,6 +163,10 @@
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
                             @elseif ($r['mode'] === 'text')
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· no image — becomes a text scene</span>
+                            @elseif (!empty($r['collecting']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-teal">· filming {{ $r['site'] }}…</span>
+                            @elseif (!empty($r['site']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· films {{ $r['site'] }} on approve</span>
                             @else
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· will be generated</span>
                             @endif
@@ -176,9 +180,17 @@
                                 <span wire:loading wire:target="reviewUploads.{{ $r['key'] }}">uploading…</span>
                                 <input type="file" class="hidden" accept="image/*,video/mp4,video/quicktime,video/webm" wire:model="reviewUploads.{{ $r['key'] }}" />
                             </label>
-                            <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'generate')"
-                                    class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }}"
-                                    title="let the studio generate this image">✦ AI image</button>
+                            @if (!empty($r['site']))
+                                <button type="button" wire:click="coletarSite('{{ $r['key'] }}')" @if (!empty($r['collecting'])) disabled @endif
+                                        class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' && !$r['uploadedId'] ? $on : $off }} @if (!empty($r['collecting'])) opacity-60 cursor-wait @endif"
+                                        title="film {{ $r['site'] }} now, to see it before approving">
+                                    {{ !empty($r['collecting']) ? '⏺ filming…' : '⏺ collect now' }}
+                                </button>
+                            @else
+                                <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'generate')"
+                                        class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }}"
+                                        title="let the studio generate this image">✦ AI image</button>
+                            @endif
                             <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'text')"
                                     class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'text' ? $on : $off }}"
                                     title="no image — this scene becomes a card/list/diagram like the others">✎ no image</button>
@@ -188,6 +200,7 @@
                             @endif
                         </div>
                         @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
+                        @if (!empty($r['siteError'])) <p class="w-full text-bad text-xs">Could not film the page: {{ $r['siteError'] }}</p> @endif
 
                         {{-- Library picker for this suggestion --}}
                         @if ($libraryPickerKey === $r['key'])

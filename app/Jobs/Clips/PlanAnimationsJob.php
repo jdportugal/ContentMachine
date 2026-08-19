@@ -89,10 +89,17 @@ class PlanAnimationsJob implements ShouldQueue
             // the chance to upload before it is generated. No pending suggestions →
             // go straight to finalisation.
             $p->update(['plan' => $plan]);
-            $requests = $imagesOn ? ImageRequests::collect($plan, $p->transcript ?? [], $filler) : [];
+            // Site suggestions (pages the planner wants FILMED) don't need the image
+            // generator, so they are collected even when AI images are off.
+            $requests = ImageRequests::collect($plan, $p->transcript ?? [], $filler);
+            if (! $imagesOn) {
+                $requests = array_values(array_filter($requests, fn (array $r) => ! empty($r['site'])));
+            }
 
             $library = app(ImageLibrary::class);
-            $matched = $requests !== [] ? app(ImageLibraryMatcher::class)->match($requests, $library->all()) : [];
+            // A site suggestion's "prompt" is a URL — meaningless to the library matcher.
+            $matchable = array_values(array_filter($requests, fn (array $r) => empty($r['site'])));
+            $matched = $matchable !== [] ? app(ImageLibraryMatcher::class)->match($matchable, $library->all()) : [];
             $uploads = [];
             $images = $p->images ?? [];
             foreach ($matched as $key => $libId) {

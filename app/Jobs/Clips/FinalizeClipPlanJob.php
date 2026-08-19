@@ -48,6 +48,17 @@ class FinalizeClipPlanJob implements ShouldQueue
             $imagesOn = (bool) ($c['generate_images'] ?? true)
                 && app(ClipImageGenerator::class)->available();
 
+            // Film any website suggestion the user approved without collecting —
+            // "collect now" is optional; approval means "film the rest for me".
+            $uploads = $p->meta['image_uploads'] ?? [];
+            $declined = $p->meta['image_text'] ?? [];
+            foreach ($p->meta['image_requests'] ?? [] as $r) {
+                if (! empty($r['site']) && ! isset($uploads[$r['key']]) && empty($declined[$r['key']])) {
+                    CollectSiteJob::dispatchSync($p->id, $r['key']);
+                }
+            }
+            $p = $store->findOrFail($this->projectId); // captures may have added images/uploads
+
             // The user's uploads claim their suggestion slots; generation fills the rest.
             $plan = ImageRequests::applyUploads($plan, $p->meta['image_uploads'] ?? []);
 

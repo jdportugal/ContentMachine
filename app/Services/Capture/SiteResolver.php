@@ -32,6 +32,14 @@ class SiteResolver
         return $url !== null && $this->responde($url) ? $url : null;
     }
 
+    /** Validate a URL supplied by someone else (e.g. the clip planner): shape, SSRF guard, and it must respond. */
+    public function validar(string $url): ?string
+    {
+        $limpo = $this->normalizar($url);
+
+        return $limpo !== null && $this->responde($limpo) ? $limpo : null;
+    }
+
     /** Shape check. Rejects anything that is not a plain public http(s) URL. */
     public function normalizar(string $raw): ?string
     {

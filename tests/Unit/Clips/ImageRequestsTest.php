@@ -49,4 +49,26 @@ class ImageRequestsTest extends TestCase
         $this->assertSame('img_upload', $out['scenes'][1]['layers'][0]['params']['src']); // dup prompt too
         $this->assertSame('img_x', $out['scenes'][2]['layers'][0]['params']['src']);       // untouched
     }
+
+    public function test_site_layers_become_capture_suggestions_and_uploads_pin_by_site_key(): void
+    {
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-reveal', 'params' => ['site' => 'https://example.com']]]],
+            ['layers' => [['type' => 'image-reveal', 'params' => ['site' => 'https://example.com']]]], // dup site
+            ['layers' => [['type' => 'image-reveal', 'params' => ['generate' => 'a logo']]]],
+        ]];
+
+        $requests = ImageRequests::collect($plan);
+
+        $this->assertCount(2, $requests);
+        $this->assertSame('https://example.com', $requests[0]['site']);
+        $this->assertSame(ImageRequests::key('site:https://example.com'), $requests[0]['key']);
+        $this->assertNull($requests[1]['site']); // generate suggestions carry no site
+
+        $out = ImageRequests::applyUploads($plan, [$requests[0]['key'] => 'img_capture']);
+
+        $this->assertSame('img_capture', $out['scenes'][0]['layers'][0]['params']['src']);
+        $this->assertSame('img_capture', $out['scenes'][1]['layers'][0]['params']['src']); // dup site too
+        $this->assertArrayNotHasKey('src', $out['scenes'][2]['layers'][0]['params']);       // generate untouched
+    }
 }

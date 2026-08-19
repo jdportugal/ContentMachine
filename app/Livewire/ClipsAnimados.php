@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Jobs\Clips\CollectSiteJob;
 use App\Jobs\Clips\FinalizeClipPlanJob;
 use App\Jobs\Clips\GenerateBackgroundJob;
 use App\Jobs\Clips\PlanAnimationsJob;
@@ -602,9 +603,11 @@ class ClipsAnimados extends Component
         }
         $uploads = $p->meta['image_uploads'] ?? [];
         $asText = $p->meta['image_text'] ?? [];
+        $collecting = $p->meta['site_collecting'] ?? [];
+        $siteErrors = $p->meta['site_errors'] ?? [];
         $byId = collect($p->images ?? [])->keyBy('id');
 
-        return array_map(function (array $r) use ($uploads, $asText, $byId) {
+        return array_map(function (array $r) use ($uploads, $asText, $collecting, $siteErrors, $byId) {
             $id = $uploads[$r['key']] ?? null;
             $img = $id ? ($byId[$id] ?? null) : null;
 
@@ -613,11 +616,36 @@ class ClipsAnimados extends Component
                 'path' => $img['path'] ?? null,
                 'fromLibrary' => (bool) ($img['library'] ?? false),
                 'video' => (bool) ($img['video'] ?? false),
+                'collecting' => ! empty($collecting[$r['key']]),
+                'siteError' => $siteErrors[$r['key']] ?? null,
                 // upload = the user's own file/library pick · generate = AI image ·
                 // text = no image at all (the scene becomes a non-image visual).
                 'mode' => $id ? 'upload' : (! empty($asText[$r['key']]) ? 'text' : 'generate'),
             ];
         }, $p->meta['image_requests'] ?? []);
+    }
+
+    /** Is any website capture running for the clip under review? (drives polling) */
+    public function getSiteCollectingProperty(): bool
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+
+        return $p !== null && array_filter($p->meta['site_collecting'] ?? []) !== [];
+    }
+
+    /** "Collect now": film the website behind a suggestion so it can be seen before approving. */
+    public function coletarSite(string $key): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        $req = $p ? collect($p->meta['image_requests'] ?? [])->firstWhere('key', $key) : null;
+        if (! $p || empty($req['site'])) {
+            return;
+        }
+        $p->update(['meta' => array_merge($p->meta ?? [], [
+            'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], [$key => true]),
+            'site_errors' => array_diff_key($p->meta['site_errors'] ?? [], [$key => true]),
+        ])]);
+        CollectSiteJob::dispatch($p->id, $key);
     }
 
     /**

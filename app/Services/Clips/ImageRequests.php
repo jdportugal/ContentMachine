@@ -27,24 +27,30 @@ final class ImageRequests
      * the label is instead the words spoken in that scene: the suggestion reads in
      * the video's own language. Without one it falls back to the prompt.
      *
-     * @return array<int,array{key:string,prompt:string,label:string}>
+     * A suggestion with a `site` is not an image to make but a page to FILM — the
+     * planner named a real website and the studio scroll-captures it to a video.
+     *
+     * @return array<int,array{key:string,prompt:string,label:string,site:?string}>
      */
     public static function collect(array $plan, array $transcript = [], ?SceneVisualFiller $filler = null): array
     {
         $out = [];
         foreach ($plan['scenes'] ?? [] as $scene) {
             foreach ($scene['layers'] ?? [] as $layer) {
-                $prompt = self::pendingPrompt($layer);
-                if ($prompt === '' || isset($out[self::key($prompt)])) {
+                $key = self::layerKey($layer);
+                if ($key === '' || isset($out[$key])) {
                     continue;
                 }
+                $site = self::pendingSite($layer);
+                $prompt = $site !== '' ? $site : self::pendingPrompt($layer);
                 $spoken = $transcript !== [] && $filler !== null
                     ? $filler->spokenText($transcript, (float) ($scene['start'] ?? 0), (float) ($scene['end'] ?? 0))
                     : '';
-                $out[self::key($prompt)] = [
-                    'key' => self::key($prompt),
+                $out[$key] = [
+                    'key' => $key,
                     'prompt' => $prompt,
                     'label' => $spoken !== '' ? $spoken : trim(Str::after($prompt, 'Illustrate this moment:')),
+                    'site' => $site !== '' ? $site : null,
                 ];
             }
         }
@@ -68,8 +74,8 @@ final class ImageRequests
                 continue;
             }
             foreach ($scene['layers'] as &$layer) {
-                $prompt = self::pendingPrompt($layer);
-                $id = $prompt === '' ? null : ($uploads[self::key($prompt)] ?? null);
+                $key = self::layerKey($layer);
+                $id = $key === '' ? null : ($uploads[$key] ?? null);
                 if ($id) {
                     $layer['params']['src'] = $id;
                 }
@@ -90,5 +96,28 @@ final class ImageRequests
         $prompt = $layer['params']['generate'] ?? null;
 
         return is_string($prompt) ? trim($prompt) : '';
+    }
+
+    /** The website URL an unfulfilled image-reveal layer wants filmed, or '' if none. */
+    public static function pendingSite(mixed $layer): string
+    {
+        if (! is_array($layer) || ($layer['type'] ?? null) !== 'image-reveal' || ! empty($layer['params']['src'])) {
+            return '';
+        }
+        $site = $layer['params']['site'] ?? null;
+
+        return is_string($site) ? trim($site) : '';
+    }
+
+    /** The suggestion key an unfulfilled layer belongs to ('' if it needs nothing). Site wins over generate. */
+    public static function layerKey(mixed $layer): string
+    {
+        $site = self::pendingSite($layer);
+        if ($site !== '') {
+            return self::key('site:'.$site);
+        }
+        $prompt = self::pendingPrompt($layer);
+
+        return $prompt === '' ? '' : self::key($prompt);
     }
 }

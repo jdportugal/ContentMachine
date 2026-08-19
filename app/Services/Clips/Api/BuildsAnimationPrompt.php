@@ -80,18 +80,20 @@ trait BuildsAnimationPrompt
                 - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
                 - GENERATE AN IMAGE whenever a scene talks about something CONCRETE or VISUAL (a person, place, object, product, situation, metaphor) and no provided image fits: add an "image-reveal" layer with "generate": "<a vivid, specific description of the image to CREATE>" (instead of "src"). Describe it in ENGLISH, concrete and photographic — subject, setting, mood, lighting — and NEVER ask for any text, words, letters or logos in the image.
                 - BE VISUAL AND DENSE: most scenes should SHOW something tied to the EXACT words spoken there — a generated image, a provided image, a chart, a diagram or a card. Aim for a fresh, RELEVANT visual and vary the motion so the video never feels static.
+                - FILM A REAL WEBSITE when a scene talks about a specific product, company, tool or site whose actual page should be on screen: add an "image-reveal" layer with "site": "<the official https URL>" (instead of "generate"/"src") — the studio scroll-captures the REAL page and plays that video. Only when you are confident of the URL; a wrong page is worse than none.
                 G
             : <<<'G'
                 - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
                 - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate" and do NOT use image-reveal without a PROVIDED src. For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken words into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene bare.
                 - BE VISUAL: give EVERY scene a visual tied to the EXACT words spoken there — chart/card/diagram/bullet-list — and vary the motion so no scene is empty.
+                - FILM A REAL WEBSITE when a scene talks about a specific product, company, tool or site whose actual page should be on screen: add an "image-reveal" layer with "site": "<the official https URL>" — the studio scroll-captures the REAL page and plays that video. Only when you are confident of the URL; a wrong page is worse than none.
                 G;
 
         $imageRevealSchema = $canGenerateImages
-            ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
-                .'  - Use EITHER "src" (a provided image id) OR "generate" (a description → AI image), never both. variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
-            : '- image-reveal:{ "src": "<id of a PROVIDED image>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
-                .'  - Use ONLY with a PROVIDED image id (src) — image generation is OFF, there is no "generate". VARY the variant across scenes.';
+            ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use EXACTLY ONE of "src" (a provided image id), "generate" (a description → AI image) or "site" (a real page → filmed). variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
+            : '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use EITHER "src" (a provided image id) OR "site" (a real page → filmed) — image generation is OFF, there is no "generate". VARY the variant across scenes.';
 
         // What to do with a scene that has no natural chart/data visual. A lone big
         // word is never a whole scene; with images off the fallback is a card/list
