@@ -57,7 +57,11 @@ class GenerateEffectJob implements ShouldQueue
         // edits AND built-in overrides (slug = the built-in) regenerate in place,
         // while a brand-new custom effect gets a slug from the model.
         $keepSlug = ! str_starts_with((string) $effect->slug, 'pending-') ? $effect->slug : null;
-        $wasActive = $effect->isActive(); // a failed EDIT of a live effect must not break it
+        // A failed EDIT of a live effect must not break it. "Live" = there is
+        // already a committed component to fall back on — NOT status === active,
+        // because every caller flips the status to `updating` before dispatching,
+        // which made a failed refine mark a perfectly good effect as failed.
+        $wasActive = $this->isEdit || trim((string) $effect->tsx) !== '';
         $tmp = null;
 
         try {

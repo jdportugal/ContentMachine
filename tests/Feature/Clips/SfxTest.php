@@ -147,6 +147,96 @@ class SfxTest extends TestCase
         app(EffectGenerator::class)->generate('anything');
     }
 
+    /** Shadows and scrims are written as neutral rgba() everywhere — including in
+     *  the design tokens themselves — so a neutral literal must be allowed. */
+    public function test_guard_allows_neutral_black_and_white_rgba(): void
+    {
+        $tsx = 'import React from "react";'
+            ."\nimport { COLORS } from \"../style-tokens\";"
+            ."\nexport default () => <div style={{ color: COLORS.teal,"
+            ."\n  boxShadow: \"0 2px 18px rgba(0,0,0,0.35)\","
+            ."\n  background: \"rgba(255, 255, 255, .06)\" }} />;";
+
+        $this->fakeClaudeReturning([
+            'slug' => 'shadowy', 'displayName' => 'Shadowy', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [], 'tsx' => $tsx,
+        ]);
+
+        $this->assertSame($tsx, app(EffectGenerator::class)->generate('a soft shadow')['tsx']);
+    }
+
+    /**
+     * A refine that the model gets wrong must leave the working effect alone.
+     *
+     * The caller flips the status to `updating` before dispatching, so the job
+     * cannot ask "is it active?" to know whether there's a live version to keep —
+     * it would answer no, and a rejected rewrite would mark a good effect failed.
+     */
+    public function test_a_failed_refine_keeps_the_live_effect_active(): void
+    {
+        $effect = $this->makeEffect([
+            'prompt' => 'a soft wipe', 'slug' => 'soft-wipe', 'display_name' => 'Soft wipe',
+            'description' => 'x', 'param_schema' => '{}',
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => null;",
+            'status' => EffectRecord::STATUS_UPDATING, // what the studio set before dispatching
+        ]);
+
+        // The model comes back with a hardcoded colour → the guard rejects it.
+        $this->fakeClaudeReturning([
+            'slug' => 'soft-wipe', 'displayName' => 'Soft wipe', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import { COLORS } from "../style-tokens";'."\nexport default () => ({ color: \"#ff0000\" });",
+        ]);
+
+        (new GenerateEffectJob($effect->id(), isEdit: true))->handle(
+            app(EffectGenerator::class), app(EffectLibrary::class), $this->effects(),
+            app(RemotionRenderer::class), app(\App\Services\Capture\SiteFootage::class),
+        );
+
+        $depois = $this->effects()->find($effect->id());
+        $this->assertSame(EffectRecord::STATUS_ACTIVE, $depois->status);          // still usable
+        $this->assertStringContainsString('export default () => null;', $depois->tsx); // old code intact
+        $this->assertStringContainsString('Edit failed', (string) $depois->error);
+    }
+
+    /** A literal carrying HUE is still a design-system violation. */
+    public function test_guard_rejects_a_tinted_rgba(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'tinted', 'displayName' => 'Tinted', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import React from "react";'
+                ."\nimport { COLORS } from \"../style-tokens\";"
+                ."\nexport default () => <div style={{ boxShadow: \"0 0 30px rgba(255,180,70,.4)\" }} />;",
+        ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageMatches('/colour literal/i');
+        app(EffectGenerator::class)->generate('a tinted glow');
+    }
+
+    /** An effect that only moves an image has no colour or type of its own — it
+     *  must not be forced to import tokens it never uses. */
+    public function test_guard_does_not_demand_tokens_from_a_component_that_paints_nothing(): void
+    {
+        $tsx = 'import React from "react";'
+            ."\nimport { AbsoluteFill, Img, interpolate, useCurrentFrame } from \"remotion\";"
+            ."\nimport type { PrimitiveProps } from \"../primitives\";"
+            ."\nconst Zoom: React.FC<PrimitiveProps> = ({ anim, frame }) => {"
+            ."\n  const f = useCurrentFrame();"
+            ."\n  const scale = interpolate(f, [0, 30], [1, 1.2]);"
+            ."\n  return <AbsoluteFill><Img src={String(anim.params?.src ?? \"\")} style={{ transform: `scale(\${scale})`, width: frame.width }} /></AbsoluteFill>;"
+            ."\n};"
+            ."\nexport default Zoom;";
+
+        $this->fakeClaudeReturning([
+            'slug' => 'image-zoom-in', 'displayName' => 'Image zoom in', 'description' => 'Zooms an image',
+            'paramSchema' => '{}', 'sampleText' => '', 'sampleParams' => [], 'tsx' => $tsx,
+        ]);
+
+        $this->assertSame($tsx, app(EffectGenerator::class)->generate('zoom an image in')['tsx']);
+    }
+
     public function test_generator_accepts_token_based_component(): void
     {
         $tsx = 'import React from "react";'

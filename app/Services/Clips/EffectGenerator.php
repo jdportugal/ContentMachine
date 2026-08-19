@@ -151,21 +151,59 @@ class EffectGenerator
     {
         $fail = fn (string $why) => throw new RuntimeException("Effect rejected: {$why}");
 
-        if (! str_contains($tsx, 'style-tokens')) {
-            $fail('it must import colours/fonts from "../style-tokens" (the design system).');
-        }
         if (! preg_match('/export\s+default/', $tsx)) {
             $fail('it must `export default` the React component.');
+        }
+        // The import is only required of a component that actually paints
+        // something branded. An effect that just moves an image around (a zoom, a
+        // drop-and-bounce) has no colour or type of its own to take from the
+        // system, and demanding the import of it only forces a dead line.
+        if ($this->usaMarca($tsx) && ! str_contains($tsx, 'style-tokens')) {
+            $fail('it must import colours/fonts from "../style-tokens" (the design system).');
         }
         if (preg_match('/#[0-9a-fA-F]{3,8}\b/', $tsx)) {
             $fail('hardcoded hex colour found — use COLORS.* tokens so it follows the design system.');
         }
-        if (preg_match('/\b(rgb|rgba|hsl|hsla)\s*\(\s*\d/', $tsx)) {
-            $fail('hardcoded colour literal found — use COLORS.* tokens.');
+        if ($cor = $this->corLiteral($tsx)) {
+            $fail("hardcoded colour literal «{$cor}» found — use COLORS.* tokens (neutral black/white "
+                .'rgba() is allowed for shadows and scrims).');
         }
         if (preg_match('/fontFamily\s*:\s*["\'`]/', $tsx)) {
             $fail('hardcoded fontFamily found — use FONTS.* tokens.');
         }
+    }
+
+    /** Does the component paint brand surface — a colour or a typeface of its own? */
+    private function usaMarca(string $tsx): bool
+    {
+        return (bool) preg_match('/\b(color|backgroundColor|background|borderColor|fill|stroke|fontFamily|boxShadow|textShadow)\s*:/', $tsx);
+    }
+
+    /**
+     * The first hardcoded COLOUR literal, or '' if there is none.
+     *
+     * rgb()/rgba() built from neutral black or white is not a brand colour — it's
+     * the standard way to write a shadow, a scrim or a translucent well, the
+     * design tokens themselves do it, and a model will always reach for it. Only
+     * a literal carrying actual hue is a design-system violation.
+     */
+    private function corLiteral(string $tsx): string
+    {
+        if (! preg_match_all('/\b(?:rgba?|hsla?)\s*\([^)]*\)/i', $tsx, $m)) {
+            return '';
+        }
+        foreach ($m[0] as $literal) {
+            preg_match_all('/-?\d*\.?\d+/', $literal, $nums);
+            $canais = array_slice(array_map('floatval', $nums[0]), 0, 3);
+            // Neutral = all three channels equal (0,0,0 / 255,255,255 / any grey).
+            if (count($canais) === 3 && count(array_unique($canais)) === 1 && stripos($literal, 'hsl') === false) {
+                continue;
+            }
+
+            return $literal;
+        }
+
+        return '';
     }
 
     /**
@@ -314,11 +352,20 @@ Return a SINGLE JSON object (no markdown, no prose) with EXACTLY these keys:
 {$canvasRules}
 
 # DESIGN SYSTEM — LAW (this is what "follow the design system" means)
-- NEVER hardcode a colour (no #hex, no rgb()/hsl()) and NEVER hardcode a font family.
+- NEVER hardcode a colour that carries HUE — no #hex at all, no rgb()/hsl() with a
+  tint — and NEVER hardcode a font family. Every generation is REJECTED over this,
+  so it is worth re-reading your own code for a stray #hex before you answer.
   Use ONLY the tokens: COLORS.papyrus/vellum/ink (backgrounds), COLORS.textOnLight/textOnDark
   (text — pick by `dark`), COLORS.mutedOnLight/mutedOnDark, COLORS.teal/tealBright/leather/gold (accents).
   Fonts: FONTS.display (headlines, condensed/uppercase), FONTS.body, FONTS.mono. Headline gold
   treatment: headlineGradient() clipped to text. Soft shadow: ENGRAVE_SHADOW.
+- Need a token colour at partial strength? Append an alpha suffix to the token
+  (`\${{COLORS.teal}}66`) or set `opacity` — never retype the colour as rgba().
+  NEUTRAL black/white IS allowed for shadows, scrims and translucent wells:
+  rgba(0,0,0,.35) and rgba(255,255,255,.06) are fine, rgba(255,180,70,.4) is not.
+- An effect that paints no colour and sets no font (it only moves an image, say)
+  needs no tokens and no style-tokens import — leave them out rather than adding
+  an unused line.
 - These tokens are re-themed per render from the brand below, so using them = following the brand.
 
 Below are the exact tokens (contract) and the brand guide. Match their spirit.
