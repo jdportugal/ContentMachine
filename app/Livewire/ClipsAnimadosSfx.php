@@ -166,6 +166,58 @@ class ClipsAnimadosSfx extends Component
             : 'No live effects to rewrite.');
     }
 
+    /** How many effects are sitting failed with a working version to go back to. */
+    public function getRecuperaveisProperty(): int
+    {
+        return $this->effects()->all()
+            ->filter(fn (EffectRecord $e) => $e->status === EffectRecord::STATUS_FAILED && $this->codigoBomDe($e) !== null)
+            ->count();
+    }
+
+    /**
+     * Bring every failed effect back to its last working component.
+     *
+     * A failed generation never overwrites the record's code, so in most cases the
+     * effect's own `tsx` is still the good one and only its status is wrong — that
+     * is what the rewrite pass got wrong. Where the code really is gone, the last
+     * snapshot in its history is used instead.
+     */
+    public function recuperarFalhados(EffectLibrary $library): void
+    {
+        $n = 0;
+        foreach ($this->effects()->all() as $effect) {
+            if ($effect->status !== EffectRecord::STATUS_FAILED) {
+                continue;
+            }
+            $tsx = $this->codigoBomDe($effect);
+            if ($tsx === null) {
+                continue;
+            }
+            $effect->update(['tsx' => $tsx, 'status' => EffectRecord::STATUS_ACTIVE, 'error' => null]);
+            $library->promote($effect); // rewrites <slug>.tsx and rebuilds the registry
+            $n++;
+        }
+
+        $this->dispatch('toast', type: $n ? 'ok' : 'erro', message: $n
+            ? $n.' effect'.($n === 1 ? '' : 's').' brought back.'
+            : 'Nothing to bring back — no failed effect has a working version stored.');
+    }
+
+    /** The last component known to work for an effect: its own, else its newest snapshot. */
+    private function codigoBomDe(EffectRecord $effect): ?string
+    {
+        if (trim((string) $effect->tsx) !== '') {
+            return (string) $effect->tsx;
+        }
+        foreach (array_reverse((array) $effect->get('versions', [])) as $v) {
+            if (is_array($v) && trim((string) ($v['tsx'] ?? '')) !== '') {
+                return (string) $v['tsx'];
+            }
+        }
+
+        return null;
+    }
+
     /** Which formats already have a cached preview. @return array<string,bool> */
     private function formatosProntos(EffectLibrary $library, string $slug): array
     {
@@ -322,8 +374,11 @@ class ClipsAnimadosSfx extends Component
     public function reverterSfx(string $id, int $index): void
     {
         $effect = $this->effects()->find($id);
-        if (! $effect || ! $effect->isActive()) {
-            return; // only a live effect can be restored in place
+        // A FAILED effect is the one you most need to roll back — refusing it
+        // there left a bad rewrite with no way home. Only a generation still in
+        // flight is refused, since the job would overwrite the restore.
+        if (! $effect || in_array($effect->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true)) {
+            return;
         }
         $versions = $effect->get('versions', []);
         if (! is_array($versions) || ! isset($versions[$index]) || ! is_array($versions[$index])) {

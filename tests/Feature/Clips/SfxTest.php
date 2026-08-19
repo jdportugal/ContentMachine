@@ -199,6 +199,71 @@ class SfxTest extends TestCase
         $this->assertStringContainsString('Edit failed', (string) $depois->error);
     }
 
+    /**
+     * A failed effect is exactly the one you need to roll back — restoring it was
+     * refused ("only a live effect"), which left a bad rewrite with no way home.
+     */
+    public function test_a_failed_effect_can_be_restored_from_its_history(): void
+    {
+        $bom = 'import { COLORS } from "../style-tokens";'."\nexport default () => null; // the good one";
+        $effect = $this->makeEffect([
+            'prompt' => 'a soft wipe', 'slug' => 'soft-wipe', 'display_name' => 'Soft wipe',
+            'description' => 'x', 'param_schema' => '{}', 'tsx' => 'broken',
+            'status' => EffectRecord::STATUS_FAILED, 'error' => 'Edit failed: something',
+            'versions' => [['prompt' => 'a soft wipe', 'tsx' => $bom, 'created_at' => now()->toIso8601String()]],
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->assertSee('Restore a working version')
+            ->call('reverterSfx', $effect->id(), 0);
+
+        $depois = $this->effects()->find($effect->id());
+        $this->assertSame(EffectRecord::STATUS_ACTIVE, $depois->status);
+        $this->assertSame($bom, $depois->tsx);
+        $this->assertNull($depois->error);
+        // The component is back on disk, so renders pick it up again.
+        $this->assertStringContainsString('the good one', (string) file_get_contents(app(EffectLibrary::class)->effectFile('soft-wipe')));
+    }
+
+    /**
+     * "Export all" walked only ACTIVE effects, so after a bad regeneration marked
+     * them failed the download 404'd — the one moment a backup actually matters.
+     */
+    public function test_export_all_includes_failed_effects_that_still_have_code(): void
+    {
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'broken-fx', 'display_name' => 'Broken', 'description' => 'x',
+            'param_schema' => '{}', 'tsx' => 'export default () => null;',
+            'status' => EffectRecord::STATUS_FAILED, 'error' => 'Edit failed: something',
+        ]);
+        // A record with no component at all is still not exportable.
+        $this->makeEffect([
+            'prompt' => 'y', 'slug' => 'empty-fx', 'display_name' => 'Empty', 'description' => 'y',
+            'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_PENDING,
+        ]);
+
+        $payload = app(EffectPortability::class)->export('all');
+
+        $this->assertNotNull($payload);
+        $this->assertSame(['broken-fx'], array_column($payload['effects'], 'slug'));
+
+        $this->comSessaoIniciada()->get(route('clips-animados.sfx-export', 'all'))->assertOk();
+    }
+
+    /** A restore must not race a generation that is still running. */
+    public function test_restoring_is_refused_while_a_generation_is_in_flight(): void
+    {
+        $effect = $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'busy-fx', 'display_name' => 'Busy', 'description' => 'x',
+            'param_schema' => '{}', 'tsx' => 'current', 'status' => EffectRecord::STATUS_UPDATING,
+            'versions' => [['prompt' => 'x', 'tsx' => 'older']],
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('reverterSfx', $effect->id(), 0);
+
+        $this->assertSame('current', $this->effects()->find($effect->id())->tsx);
+    }
+
     /** A literal carrying HUE is still a design-system violation. */
     public function test_guard_rejects_a_tinted_rgba(): void
     {

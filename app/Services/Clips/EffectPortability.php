@@ -39,7 +39,10 @@ class EffectPortability
         $entries = [];
 
         if ($id === 'all') {
-            foreach ($this->store->active()->values() as $e) {
+            // Everything that HAS a component, whatever its status. A backup that
+            // skipped failed effects would come up empty exactly when it's needed —
+            // after a bad regeneration — and their code is still recoverable.
+            foreach ($this->store->all()->filter(fn (EffectRecord $e) => trim((string) $e->tsx) !== '')->values() as $e) {
                 $entries[] = $this->exportOne($e);
             }
             foreach (array_keys(EffectLibrary::BUILTIN_SAMPLES) as $slug) {

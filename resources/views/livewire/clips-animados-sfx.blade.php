@@ -89,6 +89,12 @@
                             @elseif ($d['status'] === 'failed')
                                 <button type="button" wire:click="editarSfx('{{ $d['id'] }}')"
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎ Try again</button>
+                                {{-- A failed effect is exactly the one you need to roll back — the
+                                     previous version is still on the record, so offer it here too. --}}
+                                @if ($d['versions'])
+                                    <button type="button" wire:click="abrirHistorico('{{ $d['id'] }}')"
+                                            class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/40 text-teal hover:bg-teal/10 transition">⟲ Restore a working version ({{ $d['versions'] }})</button>
+                                @endif
                             @else
                                 <span class="font-mono text-[0.62rem] text-ink-faint self-center">{{ $d['status'] === 'updating' ? 'Updating…' : 'Generating…' }}</span>
                             @endif
@@ -284,11 +290,19 @@
                             sized themselves from the whole frame, so in a half-frame scene they overflow and get cut.
                         </p>
                     </div>
-                    <button type="button" wire:click="tornarResponsivos" wire:loading.attr="disabled" wire:target="tornarResponsivos"
-                            wire:confirm="Rewrite every live effect for the three frames? Each keeps its description; the previous version stays in its history."
-                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
-                        ⌗ Rewrite all
-                    </button>
+                    <div class="flex flex-col gap-2 shrink-0">
+                        <button type="button" wire:click="tornarResponsivos" wire:loading.attr="disabled" wire:target="tornarResponsivos"
+                                wire:confirm="Rewrite every live effect for the three frames? Each keeps its description; the previous version stays in its history."
+                                class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50">
+                            ⌗ Rewrite all
+                        </button>
+                        @if ($this->recuperaveis)
+                            <button type="button" wire:click="recuperarFalhados" wire:loading.attr="disabled" wire:target="recuperarFalhados"
+                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-gold/50 text-gold hover:bg-gold/10 transition disabled:opacity-50">
+                                ⟲ Bring back {{ $this->recuperaveis }} failed
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
         @endif
