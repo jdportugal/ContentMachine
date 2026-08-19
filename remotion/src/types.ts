@@ -147,6 +147,10 @@ export interface ClipProps {
   // Resolved by RenderJob: code = a generated component (by slug); video = an mp4.
   background?: { kind: "code"; slug: string } | { kind: "video"; src: string };
   banner?: string; // the news LEAD — pinned on screen for the whole clip
+  // Which box the effects must lay out for. Only needed when the size alone
+  // can't say it: a 1080×960 half-frame sample is wider than tall but is NOT
+  // landscape. Real clips leave it out and it's derived from width/height.
+  format?: "portrait" | "half" | "landscape";
   videoSrc?: string; // source video (overlay clips) — scenes composite it per `present`
   animations?: Animation[]; // legacy flat model (backward compatible)
   // Index signature required so ClipProps satisfies Remotion's

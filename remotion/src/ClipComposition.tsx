@@ -1,7 +1,8 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig, Video } from "remotion";
-import { applyTheme, COLORS, ENGRAVE_SHADOW, FONTS, isDark, TEXTURE, ThemeInput } from "./style-tokens";
-import { renderPrimitive } from "./primitives";
+import { applyTheme, COLORS, ENGRAVE_SHADOW, FONTS, isDark, STYLE, TEXTURE, textForBg, ThemeInput } from "./style-tokens";
+import { frameProps, renderPrimitive } from "./primitives";
+import type { ClipFormat } from "./primitives";
 import { CUSTOM_BACKGROUNDS } from "./backgrounds";
 import { SceneTrack } from "./scenes";
 import { loadDefaultFonts, loadThemeFonts } from "./fonts";
@@ -110,7 +111,7 @@ export const BackgroundTexture: React.FC = () => {
 // whole frame behind every scene; scenes that show the source video composite
 // over it. The video loops so it fills a clip of any length.
 const ClipBackground: React.FC<{ background: NonNullable<ClipProps["background"]>; fps: number }> = ({ background, fps }) => {
-  const { durationInFrames } = useVideoConfig();
+  const { durationInFrames, width, height } = useVideoConfig();
   if (background.kind === "video") {
     const src = /^https?:\/\//.test(background.src) ? background.src : staticFile(background.src);
     return (
@@ -124,7 +125,7 @@ const ClipBackground: React.FC<{ background: NonNullable<ClipProps["background"]
   const anim: Animation = { start: 0, end: durationInFrames / fps, primitive: background.slug as Animation["primitive"], text: "", params: {} };
   return (
     <AbsoluteFill>
-      <Comp anim={anim} fps={fps} dark={isDark(COLORS.papyrus)} />
+      <Comp anim={anim} fps={fps} dark={isDark(COLORS.papyrus)} {...frameProps(width, height)} />
     </AbsoluteFill>
   );
 };
@@ -147,13 +148,16 @@ const LeadBanner: React.FC<{ text: string; fps: number }> = ({ text, fps }) => {
           opacity: ease,
           backgroundColor: `${COLORS.ink}E6`,
           border: `1px solid ${COLORS.teal}66`,
-          borderRadius: 6,
+          borderRadius: STYLE.sharp ? 0 : 6,
           padding: `${width * 0.012}px ${width * 0.028}px`,
           fontFamily: FONTS.display,
           fontWeight: FONTS.displayWeight,
           fontSize: width * 0.045,
           lineHeight: 1.2,
-          color: COLORS.papyrus,
+          // The text sits on the `ink` surface, so it takes the semantic text
+          // token for that surface. `papyrus` is a BACKGROUND slot — on a dark
+          // design system it's near-black, which is what made the lead unreadable.
+          color: textForBg(COLORS.ink),
           textAlign: "center",
           textShadow: ENGRAVE_SHADOW,
         }}
@@ -177,6 +181,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
   banner,
   videoSrc,
   theme,
+  format,
 }) => {
   // Re-theme the live tokens for this render, then load any theme fonts. Runs
   // before children render, so every primitive picks up the design system.
@@ -184,8 +189,10 @@ export const ClipComposition: React.FC<ClipProps> = ({
   const t = theme as ThemeInput | undefined;
   loadThemeFonts(t?.fonts?.display, t?.fonts?.body, t?.fonts?.mono);
 
-  const { fps: configFps } = useVideoConfig();
+  const { fps: configFps, width: compWidth, height: compHeight } = useVideoConfig();
   const effectiveFps = fps ?? configFps;
+  // The whole frame — the box a top-level animation lays itself out in.
+  const fullBox = frameProps(compWidth, compHeight, format as ClipFormat | undefined);
 
   const resolve = (src?: string) => (src ? (/^https?:\/\//.test(src) ? src : staticFile(src)) : null);
   const resolvedAudio = resolve(audioSrc);
@@ -212,7 +219,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
           const durationInFrames = Math.max(1, Math.round((anim.end - anim.start) * effectiveFps));
           return (
             <Sequence key={i} from={from} durationInFrames={durationInFrames} name={anim.primitive}>
-              {renderPrimitive(anim, effectiveFps)}
+              {renderPrimitive(anim, effectiveFps, false, fullBox)}
             </Sequence>
           );
         })

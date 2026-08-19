@@ -22,8 +22,12 @@ class RenderEffectSampleJob implements ShouldQueue
     public int $timeout = 600;
 
     /** @param  array<string,mixed>  $params */
-    public function __construct(public string $slug, public ?string $text, public array $params)
-    {
+    public function __construct(
+        public string $slug,
+        public ?string $text,
+        public array $params,
+        public string $format = EffectLibrary::FORMAT_PORTRAIT,
+    ) {
         $this->captureProject();
     }
 
@@ -31,7 +35,7 @@ class RenderEffectSampleJob implements ShouldQueue
     {
         $this->activateProject();
 
-        $out = $library->previewPath($this->slug);
+        $out = $library->previewPath($this->slug, $this->format);
         if (is_file($out)) {
             return; // already cached for this design system
         }
@@ -42,6 +46,6 @@ class RenderEffectSampleJob implements ShouldQueue
         }
 
         @mkdir(dirname($out), 0777, true);
-        $renderer->render($library->samplePlan($this->slug, $this->text, $this->params), $out);
+        $renderer->render($library->samplePlan($this->slug, $this->text, $this->params, $this->format), $out);
     }
 }

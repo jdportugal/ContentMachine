@@ -48,9 +48,9 @@ class EffectGenerator
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null
-            ? $this->normalizeSlug($keepSlug, allowBuiltin: true) // editing / built-in override — keep the given slug
-            : $this->slug((string) ($data['slug'] ?? ''));        // creating — a fresh, unused slug
-        $tsx = trim((string) ($data['tsx'] ?? ''));
+            ? $this->normalizeSlug($keepSlug, allowBuiltin: true)  // editing / built-in override — keep the given slug
+            : $this->slug($this->texto($data['slug'] ?? null));    // creating — a fresh, unused slug
+        $tsx = trim($this->texto($data['tsx'] ?? null));
         if ($tsx === '') {
             throw new RuntimeException('The model returned no component code.');
         }
@@ -68,13 +68,35 @@ class EffectGenerator
 
         return [
             'slug' => $slug,
-            'display_name' => trim((string) ($data['displayName'] ?? $slug)) ?: $slug,
-            'description' => trim((string) ($data['description'] ?? '')) ?: 'Custom effect.',
-            'param_schema' => trim((string) ($data['paramSchema'] ?? '{}')) ?: '{}',
-            'sample_text' => trim((string) ($data['sampleText'] ?? '')),
+            'display_name' => trim($this->texto($data['displayName'] ?? null)) ?: $slug,
+            'description' => trim($this->texto($data['description'] ?? null)) ?: 'Custom effect.',
+            'param_schema' => trim($this->texto($data['paramSchema'] ?? null)) ?: '{}',
+            'sample_text' => trim($this->texto($data['sampleText'] ?? null)),
             'sample_params' => $params,
             'tsx' => $tsx,
         ];
+    }
+
+    /**
+     * One field of the model's JSON, as a string.
+     *
+     * The model decides the SHAPE of what it returns, and it doesn't always match
+     * the contract: `paramSchema` is asked for as a one-liner like
+     * `{ "intensity"?: number }`, which reads like an object, so it often comes
+     * back as a real JSON object. Casting that with (string) raises "Array to
+     * string conversion" and the whole generation fails on a cosmetic field.
+     * Encode structures back to JSON instead; scalars cast as before.
+     */
+    private function texto(mixed $valor): string
+    {
+        if (is_array($valor)) {
+            return (string) json_encode($valor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+        if (is_bool($valor)) {
+            return $valor ? 'true' : 'false';
+        }
+
+        return is_scalar($valor) ? (string) $valor : '';
     }
 
     /** Validate a fresh slug's format, then make it UNIQUE (append -2, -3, …). */
@@ -163,21 +185,48 @@ class EffectGenerator
     private function canvasRules(array $canvas): string
     {
         $c = config('contentmachine.clips');
+        // A scene effect must serve all three frames, so its sizes come from the
+        // project's portrait clip. A caller that names a canvas (the VFX Lab, which
+        // makes ONE standalone asset at a fixed size) gets that canvas instead.
+        $fixo = isset($canvas['width'], $canvas['height']);
         $w = (int) ($canvas['width'] ?? $c['width']);
         $h = (int) ($canvas['height'] ?? $c['height']);
 
-        $shape = match (true) {
-            $w > $h => 'LANDSCAPE (wide) — lay content out horizontally; a tall stack of lines will overflow. '
-                .'Headlines can run much wider, so use fewer, longer lines.',
-            $h > $w => 'PORTRAIT (tall) — lay content out vertically; keep lines short and stack them.',
-            default => 'SQUARE — keep content compact and centred.',
-        };
+        if ($fixo) {
+            $shape = match (true) {
+                $w > $h => 'LANDSCAPE (wide) — lay content out horizontally; a tall stack of lines will overflow. '
+                    .'Headlines can run much wider, so use fewer, longer lines.',
+                $h > $w => 'PORTRAIT (tall) — lay content out vertically; keep lines short and stack them.',
+                default => 'SQUARE — keep content compact and centred.',
+            };
+            $rules = "- Compose for the whole {$w}x{$h} frame; centre content. Use <AbsoluteFill>.\n"
+                ."- The canvas is {$shape}\n"
+                .'- Size everything RELATIVE to the frame (%, or a scale derived from the `frame` prop) — '
+                ."never hardcode pixel sizes tuned to one aspect ratio.\n";
+        } else {
+            $pw = min($w, $h);   // the portrait clip, whichever way round the config reads
+            $ph = max($w, $h);
+            $half = (int) round($ph / 2);
 
-        $rules = "- Compose for the whole {$w}x{$h} frame; centre content. Use <AbsoluteFill>.\n"
-            ."- The canvas is {$shape}\n"
-            .'- Size everything RELATIVE to the frame (vw/vh, %, or a scale derived from '
-            ."useVideoConfig().width/height) — never hardcode pixel sizes tuned to one aspect ratio.\n"
-            .'- NEVER PAINT A FULL-FRAME BACKGROUND — this is the single most common mistake. '
+            $rules = "- Compose for the box you are GIVEN; centre content. Use <AbsoluteFill>.\n"
+                ."- ONE component, THREE frames. The same effect is used in all of them, so it must\n"
+                ."  lay itself out from the `format` and `frame` props it receives:\n"
+                ."    · format \"portrait\"  — {$pw}x{$ph}, the whole frame. Stack content vertically, short lines.\n"
+                ."    · format \"half\"      — {$pw}x{$half}, the TOP HALF of an overlay clip (the source video\n"
+                ."      takes the bottom). Half the height, same width: drop to fewer elements, flatten tall\n"
+                ."      stacks into a row, shrink type. What fits portrait will NOT fit here.\n"
+                ."    · format \"landscape\" — {$ph}x{$pw}, a wide clip. Lay content out horizontally; a tall\n"
+                ."      stack overflows. Headlines run wider, so use fewer, longer lines.\n"
+                .'- Size everything from `frame.width` / `frame.height` (the props), or from % of your own '
+                ."container — NEVER from useVideoConfig(), which reports the whole composition and is WRONG\n"
+                ."  in the half frame (it would say {$ph} tall when you only have {$half}). Never hardcode\n"
+                ."  pixel sizes tuned to one aspect ratio.\n"
+                .'- Branch on `format` where a shape genuinely needs a different arrangement (a vertical '
+                ."timeline becoming horizontal, say) rather than trying to make one layout serve all three.\n";
+        }
+
+        $rules .=
+            '- NEVER PAINT A FULL-FRAME BACKGROUND — this is the single most common mistake. '
             .'You are a LAYER: the composition ALREADY draws the themed brand backdrop (with its '
             .'texture) behind you. Put NO background / backgroundColor / backgroundImage on your outer '
             .'<AbsoluteFill>, and no frame-filling <div> or wash anywhere. Doing so hides the brand '
@@ -253,9 +302,11 @@ Return a SINGLE JSON object (no markdown, no prose) with EXACTLY these keys:
     import {{ AbsoluteFill, useCurrentFrame, interpolate, spring, Easing }} from "remotion";
     import {{ COLORS, FONTS, headlineGradient, ENGRAVE_SHADOW }} from "../style-tokens";
     import type {{ PrimitiveProps }} from "../primitives";
-    const MyEffect: React.FC<PrimitiveProps> = ({{ anim, fps, dark }}) => {{ ... }};
+    const MyEffect: React.FC<PrimitiveProps> = ({{ anim, fps, dark, format, frame }}) => {{ ... }};
     export default MyEffect;
-- PrimitiveProps = {{ anim: Animation; fps: number; dark?: boolean }}.
+- PrimitiveProps = {{ anim: Animation; fps: number; dark?: boolean;
+  format: "portrait" | "half" | "landscape"; frame: {{ width: number; height: number }} }}.
+  `frame` is the box you must fill, in px — it is NOT always the composition size.
   Animation = {{ start:number; end:number; primitive:string; text?:string; params?:Record<string,unknown> }}.
 - `useCurrentFrame()` is LOCAL (starts at 0 when the layer begins). The layer's
   length in frames is `Math.round((anim.end - anim.start) * fps)`.

@@ -252,15 +252,20 @@ class VfxLabTest extends TestCase
      */
     public function test_only_one_sidebar_entry_is_highlighted_on_a_studio_page(): void
     {
-        $current = fn (string $url) => substr_count(
+        $current = fn (string $url, string $tipo) => substr_count(
             (string) $this->comSessaoIniciada()->get($url)->getContent(),
-            'aria-current="page"'
+            'data-nav="'.$tipo.'" aria-current="page"'
         );
 
-        // One per page: the sidebar entry + the active subtab on the studio pages.
-        $this->assertSame(1, $current('/clips-animados'));
-        $this->assertSame(2, $current('/clips-animados/sfx'));
-        $this->assertSame(2, $current('/clips-animados/vfx'));
+        foreach (['/clips-animados', '/clips-animados/sfx', '/clips-animados/vfx'] as $url) {
+            $this->assertSame(1, $current($url, 'entry'), "wrong sidebar entry highlight on {$url}");
+        }
+
+        // Animated Clips is one page; the studio's two share an entry, so its
+        // subs unfold under it and exactly one of them is current.
+        $this->assertSame(0, $current('/clips-animados', 'sub'));
+        $this->assertSame(1, $current('/clips-animados/sfx', 'sub'));
+        $this->assertSame(1, $current('/clips-animados/vfx', 'sub'));
     }
 
     // ── the prompt contract ──────────────────────────────────────────────
@@ -284,12 +289,16 @@ class VfxLabTest extends TestCase
         $this->assertStringContainsString('PORTRAIT', $portrait);
         $this->assertStringNotContainsString('LANDSCAPE', $portrait);
 
-        // The SFX studio (no canvas given) still gets the project's own size.
+        // The SFX studio (no canvas given) makes a SCENE effect, which has to work
+        // in all three frames — so it gets the three-frame contract, not one canvas.
         $default = $this->systemPromptFor([]);
-        $this->assertStringContainsString(
-            config('contentmachine.clips.width').'x'.config('contentmachine.clips.height'),
-            $default
-        );
+        $w = (int) config('contentmachine.clips.width');
+        $h = (int) config('contentmachine.clips.height');
+        $this->assertStringContainsString($w.'x'.$h, $default);                    // portrait
+        $this->assertStringContainsString($w.'x'.(int) round($h / 2), $default);   // half
+        $this->assertStringContainsString($h.'x'.$w, $default);                    // landscape
+        // The trap the old effects fell into: sizing from the whole composition.
+        $this->assertStringContainsString('NEVER from useVideoConfig()', $default);
         $this->assertStringContainsString('NEVER PAINT A FULL-FRAME BACKGROUND', $default);
 
         // Alpha renders have no backdrop at all, so the ban is restated as absolute.

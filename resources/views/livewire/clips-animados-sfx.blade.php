@@ -14,15 +14,35 @@
 
         <x-panel eyebrow="{{ $d['kind'] === 'builtin' ? 'Built-in effect' : 'Effect' }}" title="{{ $d['label'] }}" glyph="✷">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {{-- big preview --}}
-                <div class="relative aspect-[9/16] max-h-[60vh] mx-auto rounded-sm overflow-hidden bg-black/60 flex items-center justify-center w-full">
-                    @if (($d['status'] ?? null) === 'failed')
+                {{-- big preview, in the box you pick. One component serves all three
+                     formats — this renders the SAME effect in each frame so you can
+                     see how it lays itself out (half = top half of an overlay clip). --}}
+                <div>
+                <div class="flex flex-wrap gap-1.5 mb-2">
+                    @foreach (\App\Services\Clips\EffectLibrary::FORMATS as $fmt => $rotulo)
+                        <button type="button" wire:click="verFormato('{{ $fmt }}')"
+                                class="font-mono text-[0.6rem] px-2.5 py-1 rounded-sm border transition
+                                       {{ $formato === $fmt ? 'border-teal/50 text-teal bg-teal/10' : 'border-ink-soft/20 text-ink-faint hover:text-ink' }}">
+                            {{ $rotulo }}@unless ($d['formatos'][$fmt] ?? false)<span class="opacity-60"> ○</span>@endunless
+                        </button>
+                    @endforeach
+                </div>
+                <div class="relative {{ ['portrait' => 'aspect-[9/16]', 'half' => 'aspect-[9/8]', 'landscape' => 'aspect-video'][$formato] ?? 'aspect-[9/16]' }} max-h-[60vh] mx-auto rounded-sm overflow-hidden bg-black/60 flex items-center justify-center w-full">
+                    @if (! ($d['formatos'][$formato] ?? false) && ($d['status'] ?? 'active') !== 'failed')
+                        <div class="text-center">
+                            <div class="h-1 w-20 mx-auto bg-surface/40 rounded-full overflow-hidden">
+                                <div class="h-full bg-teal/60 animate-pulse w-2/3"></div>
+                            </div>
+                            <p class="font-mono text-[0.6rem] text-ink-faint mt-3">Rendering the {{ strtolower(\App\Services\Clips\EffectLibrary::FORMATS[$formato]) }} preview…</p>
+                        </div>
+                    @elseif (($d['status'] ?? null) === 'failed')
                         <div class="p-3 text-center">
                             <div class="text-bad text-2xl">✕</div>
                             <p class="font-mono text-[0.6rem] text-bad/90 mt-2">{{ \Illuminate\Support\Str::limit($d['error'] ?? 'Generation failed', 200) }}</p>
                         </div>
                     @elseif (in_array($d['slug'], $sfxReady, true) && ($d['status'] ?? 'active') !== 'pending')
-                        <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $d['slug']) }}" autoplay loop muted playsinline></video>
+                        <video class="w-full h-full object-cover" wire:key="prev-{{ $d['slug'] }}-{{ $formato }}"
+                               src="{{ route('clips-animados.sfx-preview', ['slug' => $d['slug'], 'format' => $formato]) }}" autoplay loop muted playsinline></video>
                         @if (in_array($d['status'] ?? null, ['updating'], true) || in_array($d['override'] ?? null, ['pending', 'updating'], true))
                             <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
                                 <p class="font-mono text-xs text-teal animate-pulse">Updating…</p>
@@ -36,6 +56,7 @@
                             <p class="font-mono text-[0.6rem] text-ink-faint mt-3">Rendering preview…</p>
                         </div>
                     @endif
+                </div>
                 </div>
 
                 {{-- meta + actions --}}
@@ -250,6 +271,27 @@
                        src="{{ route('clips-animados.showreel') }}?v={{ $this->showreelVersion }}"></video>
             @endif
         </div>
+
+        {{-- Rewrite every effect for the three frames --}}
+        @if ($this->effects->isNotEmpty())
+            <div class="foxing bg-vellum/40 border border-ink-soft/15 rounded-sm p-4 mt-6">
+                <div class="flex items-center justify-between gap-4">
+                    <div>
+                        <div class="eyebrow">Frames</div>
+                        <p class="text-ink-soft text-sm mt-1">
+                            An effect has to work in three boxes: full portrait, half portrait (over-video scenes,
+                            where the video takes the bottom half) and landscape. Effects written before this
+                            sized themselves from the whole frame, so in a half-frame scene they overflow and get cut.
+                        </p>
+                    </div>
+                    <button type="button" wire:click="tornarResponsivos" wire:loading.attr="disabled" wire:target="tornarResponsivos"
+                            wire:confirm="Rewrite every live effect for the three frames? Each keeps its description; the previous version stays in its history."
+                            class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-50 shrink-0">
+                        ⌗ Rewrite all
+                    </button>
+                </div>
+            </div>
+        @endif
 
         {{-- Custom (generated) effects --}}
         @if ($this->effects->isNotEmpty())

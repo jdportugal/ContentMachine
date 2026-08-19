@@ -3,6 +3,8 @@ import { AbsoluteFill, Composition, useVideoConfig } from "remotion";
 import Candidate from "./effects/_candidate";
 import { BackgroundTexture } from "./ClipComposition";
 import { applyTheme, COLORS, isDark, ThemeInput } from "./style-tokens";
+import { frameProps } from "./primitives";
+import type { ClipFormat } from "./primitives";
 import { loadDefaultFonts, loadThemeFonts } from "./fonts";
 import type { Animation, AnimationParams } from "./types";
 
@@ -26,14 +28,17 @@ interface SampleProps {
   // effect does not draw stays transparent. Painting it would make the render
   // opaque no matter which codec flags the renderer passes.
   transparent?: boolean;
+  // Which box the effect is being previewed in — "half" can't be guessed from
+  // the size alone (1080×960 is wider than it is tall, but it is NOT landscape).
+  format?: ClipFormat;
   [key: string]: unknown;
 }
 
-const SampleEffect: React.FC<SampleProps> = ({ text, params, theme, transparent }) => {
+const SampleEffect: React.FC<SampleProps> = ({ text, params, theme, transparent, format }) => {
   applyTheme(theme);
   loadThemeFonts(theme?.fonts?.display, theme?.fonts?.body);
 
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames, width, height } = useVideoConfig();
   const dark = isDark(COLORS.papyrus);
   const anim: Animation = {
     start: 0,
@@ -46,7 +51,7 @@ const SampleEffect: React.FC<SampleProps> = ({ text, params, theme, transparent 
   return (
     <AbsoluteFill>
       {!transparent && <BackgroundTexture />}
-      <Candidate anim={anim} fps={fps} dark={dark} />
+      <Candidate anim={anim} fps={fps} dark={dark} {...frameProps(width, height, format)} />
     </AbsoluteFill>
   );
 };
@@ -59,6 +64,7 @@ const defaultProps: SampleProps = {
   height: 1920,
   fps: 30,
   transparent: false,
+  format: "portrait",
 };
 
 export const SampleRoot: React.FC = () => {

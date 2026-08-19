@@ -96,6 +96,11 @@ class PlanAnimationsJob implements ShouldQueue
                 $requests = array_values(array_filter($requests, fn (array $r) => ! empty($r['site'])));
             }
 
+            // The intro effect is bolted on AFTER planning (FinalizeClipPlanJob →
+            // enforceIntro), so an image-showing intro has no layer in the plan and
+            // would never be asked about — it just rendered empty. Ask for it here.
+            $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
+
             $library = app(ImageLibrary::class);
             // A site suggestion's "prompt" is a URL — meaningless to the library matcher.
             $matchable = array_values(array_filter($requests, fn (array $r) => empty($r['site'])));

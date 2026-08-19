@@ -114,6 +114,7 @@ class ClipsAnimadosSfx extends Component
                 'status' => $rec->status, 'enabled' => (bool) $rec->enabled, 'intro' => (bool) $rec->get('intro', false),
                 'description' => (string) $rec->description, 'error' => $rec->error,
                 'versions' => count($rec->get('versions', [])), 'record' => $rec,
+                'formatos' => $this->formatosProntos($library, $rec->slug),
             ];
         }
         if ($library->isBuiltin($this->detailKey)) {
@@ -125,10 +126,52 @@ class ClipsAnimadosSfx extends Component
                 'allowed' => $library->builtinAllowed($this->detailKey), 'intro' => $library->builtinIsIntro($this->detailKey),
                 'override' => $override?->status, 'overrideId' => $override?->id(),
                 'versions' => $override ? count($override->get('versions', [])) : 0, 'record' => $override,
+                'formatos' => $this->formatosProntos($library, $this->detailKey),
             ];
         }
 
         return null;
+    }
+
+    /**
+     * Regenerate every live custom effect against the current contract.
+     *
+     * Effects written before the format contract size themselves from
+     * useVideoConfig() — the whole composition — so in the half-frame box they
+     * lay out for a frame twice as tall as they get and the bottom is clipped.
+     * Their prompt (what the effect IS) doesn't change; only the code is rewritten,
+     * and the previous version is snapshotted so "go back" undoes it.
+     */
+    public function tornarResponsivos(EffectLibrary $library): void
+    {
+        $n = 0;
+        foreach ($this->effects()->all() as $effect) {
+            if (! $effect->isActive() || trim((string) $effect->prompt) === '') {
+                continue;
+            }
+            $effect->update([
+                'versions' => $this->pushVersion($effect->get('versions', []), $this->snapshotVersion($effect)),
+                'status' => EffectRecord::STATUS_UPDATING,
+                'error' => null,
+            ]);
+            foreach (array_keys(EffectLibrary::FORMATS) as $formato) {
+                @unlink($library->previewPath($effect->slug, $formato)); // stale: re-render after
+            }
+            GenerateEffectJob::dispatch($effect->id(), isEdit: true);
+            $n++;
+        }
+
+        $this->dispatch('toast', type: $n ? 'ok' : 'erro', message: $n
+            ? $n.' effect'.($n === 1 ? '' : 's').' being rewritten for portrait, half and landscape…'
+            : 'No live effects to rewrite.');
+    }
+
+    /** Which formats already have a cached preview. @return array<string,bool> */
+    private function formatosProntos(EffectLibrary $library, string $slug): array
+    {
+        return collect(EffectLibrary::FORMATS)
+            ->map(fn ($label, $formato) => $library->previewExists($slug, $formato))
+            ->all();
     }
 
     /** The vault-backed SFX store for the active project. */
@@ -307,6 +350,44 @@ class ClipsAnimadosSfx extends Component
         RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
 
         $this->historyId = null;
+    }
+
+    /** Which box the open effect is being previewed in: portrait|half|landscape. */
+    public string $formato = EffectLibrary::FORMAT_PORTRAIT;
+
+    /**
+     * Switch the preview to another format, rendering it on first view.
+     *
+     * An effect is ONE component that lays itself out for whichever box it gets,
+     * so this is a preview of the same code in a different frame — not a separate
+     * variant to maintain.
+     */
+    public function verFormato(string $formato): void
+    {
+        if (! array_key_exists($formato, EffectLibrary::FORMATS)) {
+            return;
+        }
+        $this->formato = $formato;
+
+        $d = $this->detail;
+        if ($d === null || app(EffectLibrary::class)->previewExists($d['slug'], $formato)) {
+            return;
+        }
+
+        [$texto, $params] = $this->amostraDe($d);
+        RenderEffectSampleJob::dispatch($d['slug'], $texto, $params, $formato);
+    }
+
+    /** The sample text/params to preview an effect with. @return array{0:?string,1:array<string,mixed>} */
+    private function amostraDe(array $d): array
+    {
+        $rec = $d['record'] ?? null;
+        if ($rec instanceof EffectRecord && ! app(EffectLibrary::class)->isBuiltin($d['slug'])) {
+            return [$rec->sample_text, $rec->sample_params ?? []];
+        }
+        $sample = EffectLibrary::BUILTIN_SAMPLES[$d['slug']] ?? ['text' => '', 'params' => []];
+
+        return [$sample['text'], $sample['params']];
     }
 
     /** Dispatch a cached-preview render for any built-in / active effect missing one. */

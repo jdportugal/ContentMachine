@@ -58,6 +58,45 @@ final class ImageRequests
         return array_values($out);
     }
 
+    /** The suggestion key for the intro effect's image — fixed, it has no prompt to hash. */
+    public const INTRO_KEY = 'intro';
+
+    /**
+     * Adds a suggestion for the intro effect's image when one is needed.
+     *
+     * An intro effect (a logo assembling out of particles, say) shows an image but
+     * is added to the plan only at the end, by enforceIntro — so it owns no
+     * image-reveal layer and collect() can't see it. Without this the studio never
+     * asks, and the intro renders with nothing in it.
+     *
+     * No-op when no marked intro shows an image, or the clip already has an image
+     * to feed it (the same one enforceIntro would pick).
+     *
+     * @param  array<int,array<string,mixed>>  $requests
+     * @param  array<int,array<string,mixed>>  $images  images already on the clip
+     * @return array<int,array<string,mixed>>
+     */
+    public static function withIntro(array $requests, EffectLibrary $library, array $images = []): array
+    {
+        if ($images !== [] || isset(array_column($requests, null, 'key')[self::INTRO_KEY])) {
+            return $requests;
+        }
+
+        $intro = collect($library->introSlugs())->first(fn (string $s) => $library->usesImage($s));
+        if ($intro === null) {
+            return $requests;
+        }
+
+        $requests[] = [
+            'key' => self::INTRO_KEY,
+            'prompt' => 'The brand logo, centred on a transparent background.',
+            'label' => 'Opening image — your logo, shown by the «'.$intro.'» intro',
+            'site' => null,
+        ];
+
+        return $requests;
+    }
+
     /**
      * Set `src` on every suggestion the user uploaded an image for (key => image id),
      * so PlanImageAugmentor skips it and generates only the rest.

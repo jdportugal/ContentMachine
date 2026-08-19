@@ -9,9 +9,10 @@ import {
   spring,
   staticFile,
   useCurrentFrame,
+  useVideoConfig,
 } from "remotion";
 import { COLORS, ENGRAVE_SHADOW, FONTS, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
-import { renderPrimitive } from "./primitives";
+import { frameProps, renderPrimitive } from "./primitives";
 import type { KaraokeWord, Present, Scene } from "./types";
 
 const EASE = Easing.inOut(Easing.cubic);
@@ -98,6 +99,7 @@ const LiveBackground: React.FC<{ color: string; solid: boolean }> = ({ color, so
 
 const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = ({ scene, fps, durSec, videoSrc, transparent }) => {
   const frame = useCurrentFrame();
+  const { width: compWidth, height: compHeight } = useVideoConfig();
   const tin = scene.transitionIn ?? "cut";
   const inDur = tin === "whip" ? 8 : tin === "cut" ? 0 : 6;
 
@@ -143,6 +145,13 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
     />
   ) : null;
 
+  // The box the layers actually get. A split scene is the TOP HALF of the frame —
+  // effects have to lay out for 1080×960, not for the composition's 1080×1920,
+  // or they overflow and the bottom is clipped away.
+  const box = present === "split"
+    ? frameProps(compWidth, Math.round(compHeight / 2), "half")
+    : frameProps(compWidth, compHeight);
+
   const content = (
     <AbsoluteFill
       style={{
@@ -157,7 +166,7 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
             const pseudo = { start: 0, end: durSec, primitive: layer.type, text: layer.text, params: layer.params };
             return (
               <React.Fragment key={i}>
-                {renderPrimitive(pseudo, fps, dark)}
+                {renderPrimitive(pseudo, fps, dark, box)}
                 {layer.audioSrc ? <Audio src={resolveSrc(layer.audioSrc)} volume={0.8} /> : null}
               </React.Fragment>
             );

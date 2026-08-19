@@ -4,6 +4,8 @@ namespace Tests\Feature\Clips;
 
 use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\ClipImageGenerator;
+use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\SceneVisualFiller;
 use Illuminate\Support\Facades\Cache;
@@ -203,6 +205,49 @@ class ClipImagesTest extends TestCase
         $this->assertSame(2.0, (float) $out['scenes'][0]['end']);
         $this->assertSame(2.0, (float) $out['scenes'][1]['start']);
         $this->assertSame('card', $out['scenes'][1]['layers'][0]['type']);
+    }
+
+    /** An intro effect that shows an image is added after planning, so it has no
+     *  layer to be collected from — the studio must still ask for its image. */
+    public function test_an_image_showing_intro_is_asked_for_even_though_it_has_no_layer(): void
+    {
+        $library = new class extends EffectLibrary
+        {
+            public function __construct() {}
+
+            public function introSlugs(): array
+            {
+                return ['particle-image-assemble'];
+            }
+
+            public function usesImage(string $slug): bool
+            {
+                return $slug === 'particle-image-assemble';
+            }
+        };
+
+        $pedidos = ImageRequests::withIntro([], $library);
+
+        $this->assertSame([ImageRequests::INTRO_KEY], array_column($pedidos, 'key'));
+        $this->assertStringContainsString('particle-image-assemble', $pedidos[0]['label']);
+
+        // Already has an image to feed it, or an intro that shows none → don't ask.
+        $this->assertSame([], ImageRequests::withIntro([], $library, [['id' => 'img_1']]));
+        $semImagem = new class extends EffectLibrary
+        {
+            public function __construct() {}
+
+            public function introSlugs(): array
+            {
+                return ['kinetic-text'];
+            }
+
+            public function usesImage(string $slug): bool
+            {
+                return false;
+            }
+        };
+        $this->assertSame([], ImageRequests::withIntro([], $semImagem));
     }
 
     public function test_enforce_intro_feeds_a_provided_image_to_a_forced_image_intro(): void

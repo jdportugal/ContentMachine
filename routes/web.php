@@ -191,9 +191,12 @@ Route::middleware('auth')->group(function () {
 
     // Serve the cached showcase preview of an SFX (built-in or custom), for the
     // current design system. 404 until the sample has been rendered.
-    Route::get('/clips-animados/sfx/{slug}/preview', function (string $slug) {
+    Route::get('/clips-animados/sfx/{slug}/preview', function (string $slug, Request $request) {
         abort_unless((bool) preg_match('/^[a-z][a-z0-9-]*$/', $slug), 404);
-        $path = app(EffectLibrary::class)->previewPath($slug);
+        // ?format=half|landscape — the same effect previewed in another box.
+        $format = (string) $request->query('format', EffectLibrary::FORMAT_PORTRAIT);
+        abort_unless(array_key_exists($format, EffectLibrary::FORMATS), 404);
+        $path = app(EffectLibrary::class)->previewPath($slug, $format);
         abort_unless(is_file($path), 404);
 
         return response()->file($path);

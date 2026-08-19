@@ -40,45 +40,143 @@
             {{-- Closing the drawer belongs to the DESTINATION links only: on the
                  <aside> it also swallowed taps on the project switcher, closing
                  the drawer the moment its dropdown opened. --}}
-            <nav @click="nav = false" class="flex-1 min-h-0 overflow-y-auto py-2 space-y-0.5">
+            {{-- Collapsed sections live in localStorage ($persist, from Livewire's
+                 Alpine), so the shelf stays how you left it across page loads.
+                 Storing what's CLOSED means a new section arrives open. --}}
+            <nav @click="nav = false"
+                 x-data="{
+                    fechados: $persist([]).as('cm-shelf-fechados'),
+                    aberto(chave, forcado) { return forcado || ! this.fechados.includes(chave) },
+                    alternar(chave) {
+                        this.fechados = this.fechados.includes(chave)
+                            ? this.fechados.filter(c => c !== chave)
+                            : [...this.fechados, chave]
+                    },
+                 }"
+                 class="flex-1 min-h-0 overflow-y-auto py-2">
                 @php
-                    $nav = [
-                        ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
-                        ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
-                        // 'clips*' would also match every 'clips-animados…' route — hence the explicit list.
-                        // One entry covering three subtabs: Shorts · Posts · Repurpose.
-                        ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#5A7BFF', 'glyph' => '▲', 'match' => ['clips', 'clips.*']],
-                        // 'match' overrides the default "<route>*" highlight test. Animated Clips
-                        // needs it because 'clips-animados*' would also match the studio's own
-                        // routes, lighting up two entries at once; the studio needs it because
-                        // its one entry covers two pages (SFX + VFX subtabs).
-                        ['route' => 'video-editor',    'label' => 'Video Editor',      'sub' => 'Cut · Sync · SFX',   'color' => '#FF9E5A', 'glyph' => '✂', 'match' => ['video-editor', 'video-editor.*']],
-                        ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
-                        ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio',  'sub' => 'SFX · VFX',          'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*']],
-                        ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
-                        ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇'],
-                        ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Publishing',         'color' => '#FF8A4D', 'glyph' => '⬡'],
-                        ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#FFD98A', 'glyph' => '✷'],
-                        ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#FF5C7A', 'glyph' => '❖'],
-                        ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#8AE0FF', 'glyph' => '⚙'],
+                    // Grouped by pipeline stage: what you gather → what you make →
+                    // what you make it from → where it goes out. Groups without a
+                    // title (Dashboard, Settings) are the un-staged bookends.
+                    //
+                    // 'match' overrides the default "<route>*" highlight test. Content
+                    // Transformer needs it because 'clips*' would also match every
+                    // 'clips-animados…' route; Animated Clips and Effects Studio need it
+                    // because they split those same routes between two entries.
+                    //
+                    // 'subs' are the pages that share one entry — they're listed here
+                    // AND as an in-page tab bar (partials/*-tabs.blade.php), and only
+                    // unfold in the shelf while their parent is the active section.
+                    $grupos = [
+                        ['titulo' => null, 'itens' => [
+                            ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
+                        ]],
+                        ['titulo' => 'Source', 'itens' => [
+                            ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#FFD98A', 'glyph' => '✷'],
+                            ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
+                        ]],
+                        ['titulo' => 'Create', 'itens' => [
+                            ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#5A7BFF', 'glyph' => '▲', 'match' => ['clips', 'clips.*'], 'subs' => [
+                                ['route' => 'clips',           'label' => 'Shorts Generator',  'match' => 'clips'],
+                                ['route' => 'clips.posts',     'label' => 'Posts Generator'],
+                                ['route' => 'clips.repurpose', 'label' => 'Content Repurpose'],
+                            ]],
+                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
+                            ['route' => 'video-editor',    'label' => 'Video Editor',      'sub' => 'Cut · Sync · SFX',   'color' => '#FF9E5A', 'glyph' => '✂', 'match' => ['video-editor', 'video-editor.*']],
+                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX',          'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*'], 'subs' => [
+                                ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio', 'match' => 'clips-animados.sfx*'],
+                                ['route' => 'clips-animados.vfx', 'label' => 'VFX Lab',    'match' => 'clips-animados.vfx*'],
+                            ]],
+                            ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇', 'match' => ['publicacoes', 'publicacoes.*'],
+                                // The workshop is one page per publication type — the types
+                                // live in config, so the shelf can't hardcode them.
+                                'subs' => collect(config('contentmachine.publicacoes.tipos', []))
+                                    ->map(fn ($t, $tipo) => [
+                                        'route' => 'publicacoes.oficina',
+                                        'params' => ['tipo' => $tipo],
+                                        'label' => $t['label'] ?? $tipo,
+                                    ])->values()->all(),
+                            ],
+                        ]],
+                        ['titulo' => 'Library', 'itens' => [
+                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
+                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#FF5C7A', 'glyph' => '❖'],
+                        ]],
+                        ['titulo' => 'Publish', 'itens' => [
+                            ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Scheduling · Posted', 'color' => '#FF8A4D', 'glyph' => '⬡'],
+                        ]],
+                        ['titulo' => null, 'itens' => [
+                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#8AE0FF', 'glyph' => '⚙'],
+                        ]],
                     ];
+                    $n = 0; // running number across the whole shelf
                 @endphp
 
-                @foreach ($nav as $i => $item)
-                    @php $active = request()->routeIs(...($item['match'] ?? [$item['route'].'*'])); @endphp
-                    <a href="{{ route($item['route']) }}"
-                       @if ($active) aria-current="page" @endif
-                       class="group flex items-center gap-3 pl-4 pr-4 py-1.5 mx-2 rounded-sm transition
-                              {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
-                        <span class="w-1.5 self-stretch rounded-full transition-all"
-                              style="background: {{ $active ? $item['color'] : 'transparent' }}; box-shadow: {{ $active ? '0 0 8px '.$item['color'].'88' : 'none' }}"></span>
-                        <span class="w-5 text-center text-sm" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
-                        <span class="flex-1 min-w-0">
-                            <span class="block font-display text-base leading-tight">{{ $item['label'] }}</span>
-                            <span class="block text-[0.62rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
-                        </span>
-                        <span class="font-mono text-[0.6rem] text-ink-faint">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</span>
-                    </a>
+                @foreach ($grupos as $grupo)
+                    @php
+                        // A section holding the page you're on stays open no matter what
+                        // was collapsed before — otherwise the shelf hides where you are.
+                        $chave = strtolower($grupo['titulo'] ?? '');
+                        $grupoAtivo = collect($grupo['itens'])
+                            ->contains(fn ($i) => request()->routeIs(...($i['match'] ?? [$i['route'].'*'])));
+                    @endphp
+
+                    @if ($grupo['titulo'])
+                        <button type="button" @click.stop="alternar('{{ $chave }}')"
+                                :aria-expanded="String(aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }}))"
+                                class="w-full flex items-center gap-1.5 px-6 pt-2 pb-0 eyebrow text-[0.55rem] text-ink-faint/70 hover:text-ink-soft transition">
+                            <span class="w-2 text-[0.5rem] leading-none"
+                                  x-text="aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }}) ? '▾' : '▸'">▾</span>
+                            <span>{{ $grupo['titulo'] }}</span>
+                            <span class="ml-auto normal-case tracking-normal font-mono text-[0.55rem]"
+                                  x-show="! aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }})" x-cloak>{{ count($grupo['itens']) }}</span>
+                        </button>
+                    @elseif (! $loop->first)
+                        {{-- Settings has no stage; a rule keeps it from reading as part of PUBLISH. --}}
+                        <div class="mx-6 mt-2.5 mb-1.5 border-t border-ink-soft/15"></div>
+                    @endif
+
+                    <div class="space-y-0.5"
+                         @if ($grupo['titulo']) x-show="aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }})" x-collapse @endif>
+                        @foreach ($grupo['itens'] as $item)
+                            @php $active = request()->routeIs(...($item['match'] ?? [$item['route'].'*'])); @endphp
+                            {{-- data-nav marks the shelf's own links, so a test can tell an
+                                 active ENTRY from an active sub or in-page tab. --}}
+                            <a href="{{ route($item['route']) }}"
+                               data-nav="entry" @if ($active)aria-current="page"@endif
+                               class="group flex items-center gap-3 pl-4 pr-4 py-0.5 mx-2 rounded-sm transition
+                                      {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
+                                <span class="w-1.5 self-stretch rounded-full transition-all"
+                                      style="background: {{ $active ? $item['color'] : 'transparent' }}; box-shadow: {{ $active ? '0 0 8px '.$item['color'].'88' : 'none' }}"></span>
+                                <span class="w-5 text-center text-sm" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
+                                <span class="flex-1 min-w-0">
+                                    <span class="block font-display text-base leading-tight">{{ $item['label'] }}</span>
+                                    <span class="block text-[0.62rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
+                                </span>
+                                <span class="font-mono text-[0.6rem] text-ink-faint">{{ str_pad($n++, 2, '0', STR_PAD_LEFT) }}</span>
+                            </a>
+
+                            @if ($active && ! empty($item['subs']))
+                                {{-- ml-16 puts the rule between the glyph and the label column,
+                                     so a sub's text lines up with its parent's title. --}}
+                                <div class="ml-16 mr-4 pl-3 border-l border-ink-soft/40 space-y-px py-0.5">
+                                    @foreach ($item['subs'] as $sub)
+                                        @php
+                                            $subAtivo = request()->routeIs($sub['match'] ?? $sub['route'])
+                                                && collect($sub['params'] ?? [])->every(fn ($v, $k) => request()->route($k) === $v);
+                                        @endphp
+                                        <a href="{{ route($sub['route'], $sub['params'] ?? []) }}"
+                                           data-nav="sub" @if ($subAtivo)aria-current="page"@endif
+                                           class="flex items-center gap-2 rounded-sm px-2 py-1 font-mono text-[0.62rem] transition
+                                                  {{ $subAtivo ? 'bg-surface/50 text-ink' : 'text-ink-faint hover:text-ink hover:bg-surface/30' }}">
+                                            <span style="color: {{ $subAtivo ? $item['color'] : 'transparent' }}">·</span>
+                                            <span class="truncate">{{ $sub['label'] }}</span>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
                 @endforeach
             </nav>
 

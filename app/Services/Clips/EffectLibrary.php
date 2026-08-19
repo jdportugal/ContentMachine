@@ -19,6 +19,36 @@ use Illuminate\Support\Collection;
  */
 class EffectLibrary
 {
+    /**
+     * The three boxes an effect has to work in. One component serves all three —
+     * it receives the format and the real frame size and lays itself out for
+     * them (see EffectGenerator's canvas rules and PrimitiveProps in Remotion).
+     *
+     * `half` is the top half of an overlay clip, where the source video takes the
+     * bottom: same width, half the height — NOT a landscape box.
+     */
+    public const FORMAT_PORTRAIT = 'portrait';
+
+    public const FORMAT_HALF = 'half';
+
+    public const FORMAT_LANDSCAPE = 'landscape';
+
+    public const FORMATS = [
+        self::FORMAT_PORTRAIT => 'Full portrait',
+        self::FORMAT_HALF => 'Half portrait',
+        self::FORMAT_LANDSCAPE => 'Landscape',
+    ];
+
+    /** The pixel box of a format, from the project's portrait clip size. @return array{0:int,1:int} */
+    public static function formatSize(string $format, int $width, int $height): array
+    {
+        return match ($format) {
+            self::FORMAT_HALF => [$width, (int) round($height / 2)],
+            self::FORMAT_LANDSCAPE => [$height, $width],
+            default => [$width, $height],
+        };
+    }
+
     /** Built-in primitives + a representative sample so the showcase can render each. */
     public const BUILTIN_SAMPLES = [
         'kinetic-text' => ['label' => 'Kinetic text', 'text' => 'Kinetic text in motion', 'params' => []],
@@ -306,14 +336,16 @@ TSX;
     // ── sample plans (for previews / test-renders) ───────────────────────
 
     /** Flat ClipComposition plan rendering a single known effect (built-in or active). */
-    public function samplePlan(string $slug, ?string $text, array $params): array
+    public function samplePlan(string $slug, ?string $text, array $params, string $format = self::FORMAT_PORTRAIT): array
     {
         $c = config('contentmachine.clips');
         $dur = 2.5;
+        [$w, $h] = self::formatSize($format, (int) $c['width'], (int) $c['height']);
         $plan = [
             'duration' => $dur,
-            'width' => (int) $c['width'],
-            'height' => (int) $c['height'],
+            'width' => $w,
+            'height' => $h,
+            'format' => $format,
             'fps' => (int) $c['fps'],
             'mode' => 'dense',
             'transparent' => false,
@@ -371,14 +403,17 @@ TSX;
         return (string) config('contentmachine.clips.effects_previews', storage_path('app/clips/effects'));
     }
 
-    public function previewPath(string $slug): string
+    public function previewPath(string $slug, string $format = self::FORMAT_PORTRAIT): string
     {
-        return $this->previewDir().'/'.$slug.'-'.$this->designHash().'.mp4';
+        // Portrait keeps the historic filename, so existing previews stay valid.
+        $sufixo = $format === self::FORMAT_PORTRAIT ? '' : '-'.$format;
+
+        return $this->previewDir().'/'.$slug.$sufixo.'-'.$this->designHash().'.mp4';
     }
 
-    public function previewExists(string $slug): bool
+    public function previewExists(string $slug, string $format = self::FORMAT_PORTRAIT): bool
     {
-        return is_file($this->previewPath($slug));
+        return is_file($this->previewPath($slug, $format));
     }
 
     // ── showreel (one video cycling through every effect, name centered) ──

@@ -72,11 +72,11 @@ class ContentTransformerTest extends TestCase
     public function test_exactly_one_sidebar_entry_and_one_subtab_are_current(): void
     {
         foreach (['/clips', '/clips/posts', '/clips/repurpose'] as $url) {
-            $this->assertSame(
-                2, // the sidebar entry + the active subtab
-                substr_count((string) $this->get($url)->getContent(), 'aria-current="page"'),
-                "wrong highlight count on {$url}"
-            );
+            $html = (string) $this->get($url)->getContent();
+
+            $this->assertSame(1, substr_count($html, 'data-nav="entry" aria-current="page"'), "wrong sidebar entry highlight on {$url}");
+            $this->assertSame(1, substr_count($html, 'data-nav="sub" aria-current="page"'), "wrong sidebar subtab highlight on {$url}");
+            $this->assertSame(3, substr_count($html, 'aria-current="page"'), "wrong total highlight count on {$url}"); // entry + shelf sub + in-page tab
         }
     }
 

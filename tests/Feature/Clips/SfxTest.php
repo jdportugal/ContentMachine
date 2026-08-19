@@ -168,6 +168,103 @@ class SfxTest extends TestCase
         $this->assertSame(['intensity' => 2], $data['sample_params']);
     }
 
+    /**
+     * The contract asks for paramSchema as a one-liner like `{ "intensity"?: number }`,
+     * so the model frequently returns a real JSON OBJECT. Casting that to a string
+     * raised "Array to string conversion" and killed the whole generation over a
+     * cosmetic field.
+     */
+    public function test_an_object_shaped_param_schema_does_not_break_generation(): void
+    {
+        $tsx = 'import React from "react";'
+            ."\nimport { COLORS } from \"../style-tokens\";"
+            ."\nexport default () => null;";
+
+        $this->fakeClaudeReturning([
+            'slug' => 'objecty', 'displayName' => ['not', 'a string'], 'description' => ['also' => 'object'],
+            'paramSchema' => ['intensity' => 'number', 'nested' => ['a' => 1]],
+            'sampleText' => 'Hi', 'sampleParams' => ['intensity' => 2], 'tsx' => $tsx,
+        ]);
+
+        $data = app(EffectGenerator::class)->generate('anything');
+
+        $this->assertSame('{"intensity":"number","nested":{"a":1}}', $data['param_schema']);
+        $this->assertSame('["not","a string"]', $data['display_name']);
+        $this->assertSame('{"also":"object"}', $data['description']);
+        $this->assertSame($tsx, $data['tsx']);
+    }
+
+    public function test_a_sample_is_rendered_and_cached_per_frame_format(): void
+    {
+        $library = app(EffectLibrary::class);
+        $w = (int) config('contentmachine.clips.width');
+        $h = (int) config('contentmachine.clips.height');
+
+        // Half is the SAME width and half the height — not a landscape box.
+        $this->assertSame([$w, $h], EffectLibrary::formatSize('portrait', $w, $h));
+        $this->assertSame([$w, (int) round($h / 2)], EffectLibrary::formatSize('half', $w, $h));
+        $this->assertSame([$h, $w], EffectLibrary::formatSize('landscape', $w, $h));
+
+        // The plan carries the box AND names the format: a 1080×960 frame is wider
+        // than it is tall, so the renderer could not tell "half" from "landscape".
+        $plano = $library->samplePlan('card', 'Hi', [], 'half');
+        $this->assertSame($w, $plano['width']);
+        $this->assertSame((int) round($h / 2), $plano['height']);
+        $this->assertSame('half', $plano['format']);
+
+        // Each format caches to its own file; portrait keeps the historic name.
+        $this->assertNotSame($library->previewPath('card'), $library->previewPath('card', 'half'));
+        $this->assertSame($library->previewPath('card'), $library->previewPath('card', 'portrait'));
+    }
+
+    public function test_switching_the_preview_format_renders_that_frame_once(): void
+    {
+        Queue::fake();
+        $effect = $this->makeEffect([
+            'slug' => 'my-effect', 'display_name' => 'My effect', 'prompt' => 'a soft wipe',
+            'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+            'sample_text' => 'Hello', 'sample_params' => ['a' => 1],
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->assertSet('formato', 'portrait')
+            ->call('verFormato', 'half')
+            ->assertSet('formato', 'half')
+            ->call('verFormato', 'bogus')      // unknown format is ignored
+            ->assertSet('formato', 'half');
+
+        Queue::assertPushed(RenderEffectSampleJob::class, fn (RenderEffectSampleJob $j) => $j->slug === 'my-effect'
+            && $j->format === 'half'
+            && $j->text === 'Hello'
+            && $j->params === ['a' => 1]);
+        Queue::assertNotPushed(RenderEffectSampleJob::class, fn (RenderEffectSampleJob $j) => $j->format === 'bogus');
+    }
+
+    public function test_rewriting_all_effects_regenerates_them_keeping_their_prompt(): void
+    {
+        Queue::fake();
+        $vivo = $this->makeEffect([
+            'slug' => 'live-one', 'prompt' => 'a soft wipe', 'tsx' => 'x',
+            'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+        ]);
+        $falhado = $this->makeEffect([
+            'slug' => 'broken-one', 'prompt' => 'nope', 'tsx' => '',
+            'status' => EffectRecord::STATUS_FAILED,
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('tornarResponsivos');
+
+        // Only the live one is rewritten, in place, with its description intact —
+        // and its previous version is kept so "go back" undoes the rewrite.
+        Queue::assertPushed(GenerateEffectJob::class, fn (GenerateEffectJob $j) => $j->effectId === $vivo->id() && $j->isEdit === true);
+        Queue::assertNotPushed(GenerateEffectJob::class, fn (GenerateEffectJob $j) => $j->effectId === $falhado->id());
+
+        $depois = $this->effects()->find($vivo->id());
+        $this->assertSame(EffectRecord::STATUS_UPDATING, $depois->status);
+        $this->assertSame('a soft wipe', $depois->prompt);
+        $this->assertCount(1, $depois->get('versions', []));
+    }
+
     public function test_editing_an_active_effect_regenerates_keeping_its_slug(): void
     {
         Queue::fake();

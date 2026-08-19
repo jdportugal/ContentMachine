@@ -131,8 +131,11 @@ class FinalizeClipPlanJob implements ShouldQueue
             $introImageId = null;
             if (($p->images ?? []) !== [] && collect($intros)->contains(fn (string $s) => $library->usesImage($s))) {
                 usort($intros, fn (string $a, string $b) => (int) $library->usesImage($b) <=> (int) $library->usesImage($a));
-                // The intro effect shows the logo via <Img>, so never feed it a video.
-                $logo = collect($p->images)->firstWhere('transparent', true)
+                // An image uploaded FOR the intro wins: the user picked it for this
+                // exact slot. Otherwise fall back to the logo-ish guess.
+                $logo = collect($p->images)->firstWhere('id', $p->meta['image_uploads'][ImageRequests::INTRO_KEY] ?? null)
+                    // The intro effect shows the logo via <Img>, so never feed it a video.
+                    ?: collect($p->images)->firstWhere('transparent', true)
                     ?: collect($p->images)->first(fn ($i) => empty($i['video']));
                 $introImageId = $logo['id'] ?? null;
             }

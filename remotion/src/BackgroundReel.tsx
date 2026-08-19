@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, Sequence, staticFile, useVideoConfig, Video } from "remotion";
 import { applyTheme, COLORS, FONTS, isDark, ThemeInput } from "./style-tokens";
 import { CUSTOM_BACKGROUNDS } from "./backgrounds";
+import { frameProps } from "./primitives";
 import { loadDefaultFonts, loadThemeFonts } from "./fonts";
 import type { Animation } from "./types";
 
@@ -30,6 +31,7 @@ export interface ReelProps {
 
 // The full-screen backdrop for one entry: a generated component or a looping video.
 const ReelBackdrop: React.FC<{ entry: ReelEntry; fps: number; durationInFrames: number }> = ({ entry, fps, durationInFrames }) => {
+  const { width, height } = useVideoConfig();
   if (entry.kind === "video" && entry.src) {
     const src = /^https?:\/\//.test(entry.src) ? entry.src : staticFile(entry.src);
     return (
@@ -43,7 +45,7 @@ const ReelBackdrop: React.FC<{ entry: ReelEntry; fps: number; durationInFrames: 
   const anim: Animation = { start: 0, end: durationInFrames / fps, primitive: entry.slug as Animation["primitive"], text: "", params: {} };
   return (
     <AbsoluteFill>
-      <Comp anim={anim} fps={fps} dark={isDark(COLORS.papyrus)} />
+      <Comp anim={anim} fps={fps} dark={isDark(COLORS.papyrus)} {...frameProps(width, height)} />
     </AbsoluteFill>
   );
 };

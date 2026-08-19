@@ -17,11 +17,35 @@ import { CUSTOM_PRIMITIVES } from "./effects";
 // Every primitive receives the animation descriptor plus the composition fps.
 // `useCurrentFrame()` is LOCAL to the wrapping <Sequence>, i.e. it starts at 0
 // when the animation window begins.
+/**
+ * The shape of the box an effect must fill.
+ *
+ * `portrait` is the whole 9:16 frame, `half` is the top half of an overlay clip
+ * (the source video takes the bottom), `landscape` is a 16:9 clip. An effect is
+ * ONE component that lays itself out for whichever it is handed — which is why
+ * layout must come from these props and never from useVideoConfig(): that always
+ * reports the full composition, so a half-frame effect sized from it overflows
+ * and gets clipped.
+ */
+export type ClipFormat = "portrait" | "half" | "landscape";
+
 export interface PrimitiveProps {
   anim: Animation;
   fps: number;
   dark?: boolean; // true when the scene background is dark (ink) → light text
+  format: ClipFormat;
+  frame: { width: number; height: number }; // the real box, in px
 }
+
+/** The format/frame pair for a component that fills a whole w×h frame. */
+export const frameProps = (
+  width: number,
+  height: number,
+  format?: ClipFormat,
+): { format: ClipFormat; frame: { width: number; height: number } } => ({
+  format: format ?? (width > height ? "landscape" : "portrait"),
+  frame: { width, height },
+});
 
 const EASE = Easing.inOut(Easing.cubic);
 
@@ -1268,12 +1292,17 @@ const resolveAssetUrls = (value: unknown): unknown => {
   return value;
 };
 
-export function renderPrimitive(anim: Animation, fps: number, dark = false): React.ReactNode {
+export function renderPrimitive(
+  anim: Animation,
+  fps: number,
+  dark = false,
+  box?: { format: ClipFormat; frame: { width: number; height: number } },
+): React.ReactNode {
   const isCustom = anim.primitive in CUSTOM_PRIMITIVES;
   // Custom effects load images raw, so hand them staticFile()-resolved paths.
   const a = isCustom && anim.params ? { ...anim, params: resolveAssetUrls(anim.params) as typeof anim.params } : anim;
   const Comp = PRIMITIVES[anim.primitive] ?? Fade;
-  const node = <Comp anim={a} fps={fps} dark={dark} />;
+  const node = <Comp anim={a} fps={fps} dark={dark} {...(box ?? frameProps(1080, 1920))} />;
   // Isolate custom effects behind an error boundary; built-ins are trusted.
   return isCustom ? <EffectBoundary>{node}</EffectBoundary> : node;
 }
