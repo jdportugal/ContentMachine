@@ -227,10 +227,15 @@ class EffectPortability
     /** A slug that clashes with neither a built-in nor an existing custom effect. */
     private function uniqueSlug(string $desired): string
     {
+        // A custom effect whose slug IS a built-in name is an OVERRIDE of that
+        // built-in — the studio's "Customize" makes exactly that. Renaming it on
+        // import broke the link twice over: the built-in went back to its default
+        // look, and the import left a stray duplicate beside it. Only a slug
+        // already taken by another CUSTOM effect needs a new name.
         $desired = $desired !== '' ? $desired : 'effect';
         $slug = $desired;
         $n = 1;
-        while ($this->library->isBuiltin($slug) || $this->store->slugExists($slug)) {
+        while ($this->store->slugExists($slug)) {
             $slug = $desired.'-'.(++$n);
         }
 

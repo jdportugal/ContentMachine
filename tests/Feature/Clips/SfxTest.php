@@ -1005,6 +1005,38 @@ class SfxTest extends TestCase
         Queue::assertPushed(RenderEffectSampleJob::class);
     }
 
+    /**
+     * A custom effect named after a built-in IS an override of it (that's what the
+     * studio's "Customize" produces). Importing must keep the name, or the built-in
+     * quietly goes back to its default and the import leaves a duplicate beside it.
+     */
+    public function test_importing_an_override_of_a_builtin_keeps_its_slug(): void
+    {
+        Queue::fake();
+
+        $payload = [
+            'type' => 'brand-machine/sfx',
+            'version' => 1,
+            'effects' => [[
+                'slug' => 'diagram', 'display_name' => 'Diagram (custom)', 'description' => 'My diagram',
+                'prompt' => 'a nicer diagram', 'tsx' => 'export default () => null;',
+                'sample_text' => '', 'sample_params' => [],
+            ]],
+        ];
+
+        $this->assertSame(1, app(EffectPortability::class)->import($payload));
+
+        $imported = $this->effects()->all()->sole();
+        $this->assertSame('diagram', $imported->slug);
+        // Still overriding: the built-in registry resolves this slug to the record.
+        $this->assertContains('diagram', app(EffectLibrary::class)->activeSlugs());
+
+        // A SECOND import can't take the name — that one gets a fresh slug.
+        app(EffectPortability::class)->import($payload);
+        $slugs = $this->effects()->all()->pluck('slug')->sort()->values()->all();
+        $this->assertSame(['diagram', 'diagram-2'], $slugs);
+    }
+
     public function test_import_rejects_a_file_that_is_not_an_sfx_export(): void
     {
         $this->expectException(\RuntimeException::class);
