@@ -102,6 +102,11 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
     Route::livewire('/clips-animados/sfx', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx');
     Route::livewire('/clips-animados/vfx', \App\Livewire\ClipsAnimadosVfx::class)->name('clips-animados.vfx');
+    // Backgrounds live inside the Animated Clips component, but they belong to the
+    // Effects Studio's tab strip — which links, so the view needs a URL of its own.
+    Route::livewire('/clips-animados/backgrounds', ClipsAnimados::class)
+        ->defaults('view', 'backgrounds')
+        ->name('clips-animados.backgrounds');
 
     // Serve a VFX Lab render: inline for the preview player, ?download=1 to save it.
     // 404 until the render finishes (or forever, if it failed).

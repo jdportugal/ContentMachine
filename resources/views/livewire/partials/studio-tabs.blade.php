@@ -1,11 +1,13 @@
-{{-- Subtabs for the Effects Studio — SFX (clip vocabulary) and VFX (standalone
-     long-form assets) share one nav entry. Links, not wire:click: they are two
-     separate Livewire pages, so wire:navigate swaps them without a full reload.
+{{-- Subtabs for the Effects Studio — SFX (clip vocabulary), VFX (standalone
+     long-form assets) and Backgrounds (the backdrop a clip renders behind every
+     scene) share one nav entry. Links, not wire:click: they are separate Livewire
+     pages, so wire:navigate swaps them without a full reload.
      Styled like the platform tabs in monitorizacao.blade.php. --}}
 @php
     $studioTabs = [
         ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio', 'glyph' => '✶', 'color' => '#6FE0D0', 'match' => 'clips-animados.sfx*'],
         ['route' => 'clips-animados.vfx', 'label' => 'VFX Lab', 'glyph' => '✧', 'color' => '#8FE0B0', 'match' => 'clips-animados.vfx*'],
+        ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'glyph' => '◆', 'color' => '#C9A227', 'match' => 'clips-animados.backgrounds'],
     ];
 @endphp
 <div class="flex flex-wrap gap-2 mb-6">
