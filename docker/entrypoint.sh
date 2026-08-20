@@ -71,4 +71,4 @@ if [ -f storage/app/admin_password ]; then
 fi
 
 # exec so SIGTERM reaches supervisor (clean shutdown of every child).
-exec supervisord -c /etc/supervisor/conf.d/app.conf
+exec supervisord -c /etc/supervisor/supervisord.conf

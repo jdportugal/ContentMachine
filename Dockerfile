@@ -67,7 +67,12 @@ ENV APP_ENV=production \
     VAULT_PATH=/app/vault \
     APP_VERSION=${APP_VERSION}
 
-COPY docker/supervisord.conf /etc/supervisor/conf.d/app.conf
+# The CANONICAL path, not conf.d/: `supervisorctl` with no -c searches its own
+# default locations, and conf.d/app.conf is not one of them — it would find the
+# supervisord.conf Debian's package ships instead and talk to that file's socket,
+# /var/run/supervisor.sock, which nothing ever created. Same file for both halves
+# means `docker compose exec app supervisorctl status` just works.
+COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
