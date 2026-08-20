@@ -82,7 +82,6 @@
                                 ['route' => 'clips.repurpose', 'label' => 'Content Repurpose'],
                             ]],
                             ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
-                            ['route' => 'video-editor',    'label' => 'Video Editor',      'sub' => 'Cut · Sync · SFX',   'color' => '#FF9E5A', 'glyph' => '✂', 'match' => ['video-editor', 'video-editor.*']],
                             ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
                                 ['route' => 'clips-animados.sfx',         'label' => 'SFX Studio',  'match' => 'clips-animados.sfx*'],
                                 ['route' => 'clips-animados.vfx',         'label' => 'VFX Lab',     'match' => 'clips-animados.vfx*'],

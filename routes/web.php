@@ -54,23 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/clips/posts', \App\Livewire\PostsGenerator::class)->name('clips.posts');
     Route::livewire('/clips/repurpose', \App\Livewire\ContentRepurpose::class)->name('clips.repurpose');
 
-    Route::livewire('/video-editor', \App\Livewire\VideoEditor::class)->name('video-editor');
-
-    // Serve/download an edited track. Roles come from the record's own outputs
-    // map, so a crafted role can never reach an arbitrary path.
-    Route::get('/video-editor/{id}/{role}', function (string $id, string $role) {
-        abort_unless((bool) preg_match('/^[a-z0-9-]+$/', $id), 404);
-        $edit = app(\App\Services\Editor\EditorStore::class)->find($id);
-        abort_unless($edit !== null, 404);
-
-        $path = ((array) $edit->get('outputs', []))[$role] ?? null;
-        abort_unless(is_string($path) && is_file($path), 404);
-
-        return request()->boolean('download')
-            ? response()->download($path)
-            : response()->file($path);
-    })->name('video-editor.media');
-
     // Serve o vídeo do clip para pré-visualização. Devolve o melhor disponível:
     // short final (com música > legendado) ou, se ainda só foi cortado, o corte cru.
     // ?v=raw força o corte cru; ?v=final força o short legendado.
