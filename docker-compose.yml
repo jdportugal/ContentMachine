@@ -16,6 +16,11 @@ services:
       # Nightly social collection runs at 00:00 in THIS timezone. Defaults to the
       # host's, so "midnight" is your midnight rather than UTC.
       APP_TIMEZONE: ${APP_TIMEZONE:-UTC}
+      # Output ceiling for the clip/SFX LLM calls — an SFX response is a whole TSX
+      # component wrapped in JSON, and too low a ceiling truncates it mid-file.
+      CLIPS_MAX_TOKENS: ${CLIPS_MAX_TOKENS:-16000}
+      # Seconds one model call may take before it is retried from scratch.
+      CLIPS_LLM_TIMEOUT: ${CLIPS_LLM_TIMEOUT:-600}
     volumes:
       - storage:/app/storage
       - vault:/app/vault

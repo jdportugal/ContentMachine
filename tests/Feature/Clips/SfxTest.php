@@ -932,6 +932,36 @@ class SfxTest extends TestCase
     }
 
     /** Fake the Anthropic API so EffectGenerator::generate() returns the given payload as its TSX JSON. */
+    /**
+     * A max_tokens cut is HTTP 200 with half a body. It used to be passed on as a
+     * success, so the truncated JSON blew up in the parser and every such failure
+     * reported itself as "the model did not return valid JSON" — which named
+     * neither the cause nor the fix.
+     */
+    public function test_a_truncated_api_response_reports_the_token_ceiling(): void
+    {
+        config(['services.anthropic.key' => 'test-key', 'contentmachine.clips.max_tokens' => 4096]);
+        Http::fake(['api.anthropic.com/*' => Http::response([
+            'stop_reason' => 'max_tokens',
+            'content' => [['type' => 'text', 'text' => '{"slug":"half","tsx":"import Rea']],
+        ])]);
+
+        $this->expectExceptionMessageMatches('/max_tokens=4096/');
+        app(EffectGenerator::class)->generate('something long');
+    }
+
+    /** Whatever else came back, the error has to carry enough to debug it. */
+    public function test_unparseable_output_reports_what_the_model_actually_said(): void
+    {
+        config(['services.anthropic.key' => 'test-key']);
+        Http::fake(['api.anthropic.com/*' => Http::response([
+            'content' => [['type' => 'text', 'text' => 'I cannot help with that request.']],
+        ])]);
+
+        $this->expectExceptionMessageMatches('/I cannot help with that request/');
+        app(EffectGenerator::class)->generate('anything');
+    }
+
     private function fakeClaudeReturning(array $payload): void
     {
         config(['services.anthropic.key' => 'test-key']);

@@ -27,7 +27,7 @@ class GenerateBackgroundJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public int $timeout = 900;
+    public int $timeout = 1800;
 
     public function __construct(public string $backgroundId, public bool $isEdit = false)
     {
@@ -37,7 +37,7 @@ class GenerateBackgroundJob implements ShouldQueue
     /** Serialize with SFX generation — both share the single _candidate.tsx slot. */
     public function middleware(): array
     {
-        return [(new WithoutOverlapping('generate-effect'))->releaseAfter(60)->expireAfter(900)];
+        return [(new WithoutOverlapping('generate-effect'))->releaseAfter(60)->expireAfter(1800)];
     }
 
     public function handle(BackgroundGenerator $generator, BackgroundLibrary $library, EffectLibrary $effects, BackgroundStore $store, RemotionRenderer $renderer): void

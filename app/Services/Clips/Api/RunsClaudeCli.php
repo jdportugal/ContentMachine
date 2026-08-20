@@ -258,7 +258,7 @@ trait RunsClaudeCli
 
         $payload = [
             'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8'),
-            'max_tokens' => (int) config('contentmachine.aggregation.anthropic_max_tokens', 8000),
+            'max_tokens' => (int) config('contentmachine.clips.max_tokens', 16000),
             'messages' => [['role' => 'user', 'content' => $user]],
         ];
         if ($system !== null && $system !== '') {
@@ -290,6 +290,18 @@ trait RunsClaudeCli
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
+            }
+
+            // A max_tokens cut comes back as HTTP 200 with half a response. Passing
+            // that on as success hands the caller truncated JSON, which surfaces as
+            // "the model did not return valid JSON" — the wrong error, on the wrong
+            // layer. Retrying hits the same ceiling at the same place, so fail
+            // straight through to the next provider instead of burning the attempts.
+            if ($r->json('stop_reason') === 'max_tokens') {
+                throw new RuntimeException(
+                    'Claude API truncated the response at max_tokens='.$payload['max_tokens'].
+                    ' — raise CLIPS_MAX_TOKENS.'
+                );
             }
 
             // Concatenate the text blocks of the response (skips tool_use blocks).
@@ -370,6 +382,11 @@ trait RunsClaudeCli
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
+            }
+
+            // Same truncation trap as the Anthropic path, under the OpenAI name.
+            if ($r->json('choices.0.finish_reason') === 'length') {
+                throw new RuntimeException("{$nome} truncated the response (finish_reason=length) — its output ceiling is too low for this prompt.");
             }
 
             $texto = (string) $r->json('choices.0.message.content', '');

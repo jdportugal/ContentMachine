@@ -262,6 +262,14 @@ return [
         'driver' => env('CLIPS_DRIVER', 'fake'),
         // Animation planner: 'claude' (CLI/subscription) or 'openai' (API).
         'planner' => env('CLIPS_PLANNER', 'claude'),
+        // Output ceiling for the clip/SFX LLM calls. Separate from aggregation's
+        // 8000: these prompts return a whole TSX component wrapped in JSON, which
+        // is several times a news summary and silently truncates at that ceiling.
+        'max_tokens' => (int) env('CLIPS_MAX_TOKENS', 16000),
+        // How long ONE call to the model may take. Writing a whole component is a
+        // minutes-long response, and a ceiling below that times out and retries
+        // from scratch — three times — turning one slow generation into three.
+        'llm_timeout' => (int) env('CLIPS_LLM_TIMEOUT', 600),
         'claude_binary' => env('CLIPS_CLAUDE_BINARY', 'claude'),
         // Number of Claude CLI attempts (transient failures: API overload, etc.).
         'claude_attempts' => (int) env('CLIPS_CLAUDE_ATTEMPTS', 3),

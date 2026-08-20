@@ -31,7 +31,7 @@ class BackgroundGenerator
      */
     public function generate(string $description, ?string $keepSlug = null): array
     {
-        $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => 300]);
+        $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600)]);
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null ? $this->normalizeSlug($keepSlug) : $this->uniqueSlug((string) ($data['slug'] ?? ''));
@@ -165,7 +165,15 @@ PROMPT;
         }
         $data = json_decode($content, true);
         if (! is_array($data)) {
-            throw new RuntimeException('The model did not return valid JSON.');
+            // Without the output there is nothing to debug: a truncation, a refusal
+            // and a chatty preamble all read as this one sentence. The tail is the
+            // tell — a cut-off response ends mid-token.
+            throw new RuntimeException(sprintf(
+                'The model did not return valid JSON (%s, %d chars). It ended with: %s',
+                json_last_error_msg(),
+                strlen($content),
+                $content === '' ? '(nothing)' : '…'.substr($content, -180)
+            ));
         }
 
         return $data;

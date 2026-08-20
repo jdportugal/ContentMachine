@@ -12,6 +12,14 @@ set -euo pipefail
 IMAGE="${IMAGE:-ghcr.io/jdportugal/contentmachine:latest}"   # public GHCR image
 APP_PORT="${APP_PORT:-8080}"                                 # port the image serves on
 DIR="${DIR:-/opt/brand-machine}"                             # where compose lives
+# Output ceiling for the clip/SFX LLM calls. Written into the compose file rather
+# than left to the config default so it is VISIBLE and editable on the box: an SFX
+# response is a whole TSX component wrapped in JSON, and a ceiling that is too low
+# truncates it mid-file. Raise this if generation reports a truncated response.
+CLIPS_MAX_TOKENS="${CLIPS_MAX_TOKENS:-16000}"
+# Seconds ONE model call may take. Writing a component is a minutes-long response;
+# a ceiling below it times out and retries the whole generation from scratch.
+CLIPS_LLM_TIMEOUT="${CLIPS_LLM_TIMEOUT:-600}"
 
 log()   { echo "[brand-machine] $*"; }
 retry() { local n=0; until "$@"; do n=$((n+1)); [ "$n" -ge 30 ] && return 1; sleep 5; done; }
@@ -69,6 +77,8 @@ services:
       APP_URL: https://${DOMAIN}
       ASSET_URL: https://${DOMAIN}
       APP_TIMEZONE: ${TZ_HOST}
+      CLIPS_MAX_TOKENS: "${CLIPS_MAX_TOKENS}"
+      CLIPS_LLM_TIMEOUT: "${CLIPS_LLM_TIMEOUT}"
     volumes:
       - storage:/app/storage
       - vault:/app/vault
