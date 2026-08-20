@@ -3,6 +3,16 @@
 set -e
 cd /app
 
+# The render ceilings, which have to hold this order or a still-running render is
+# handed to a second worker and two of them write the same file:
+#   CLIPS_RENDER_TIMEOUT  <  QUEUE_TIMEOUT  <  DB_QUEUE_RETRY_AFTER
+# A real clip (scenes with SFX, karaoke and images over a source video) runs well
+# past the old 25 minutes on a 2-vCPU host. Supervisor needs QUEUE_TIMEOUT to
+# exist, so give it a default here rather than in the program line.
+: "${QUEUE_TIMEOUT:=3300}"
+: "${DB_QUEUE_RETRY_AFTER:=3600}"
+export QUEUE_TIMEOUT DB_QUEUE_RETRY_AFTER
+
 # Runtime dirs — volumes (storage / vault / database) start empty on a fresh host.
 mkdir -p \
     "${VAULT_PATH:-/app/vault}" \

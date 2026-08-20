@@ -21,6 +21,16 @@ services:
       CLIPS_MAX_TOKENS: ${CLIPS_MAX_TOKENS:-16000}
       # Seconds one model call may take before it is retried from scratch.
       CLIPS_LLM_TIMEOUT: ${CLIPS_LLM_TIMEOUT:-600}
+      # Seconds one Remotion render may take. Must stay below the worker's
+      # --timeout (1700) and the queue's retry_after (1800) — raise all three.
+      # The three render ceilings, in the order they must hold:
+      #   CLIPS_RENDER_TIMEOUT < QUEUE_TIMEOUT < DB_QUEUE_RETRY_AFTER
+      CLIPS_RENDER_TIMEOUT: ${CLIPS_RENDER_TIMEOUT:-3000}
+      QUEUE_TIMEOUT: ${QUEUE_TIMEOUT:-3300}
+      DB_QUEUE_RETRY_AFTER: ${DB_QUEUE_RETRY_AFTER:-3600}
+      # Frames painted in parallel. Empty = one per core. Each one in flight is
+      # another headless Chrome tab — lower it if RAM runs out before cores do.
+      CLIPS_RENDER_CONCURRENCY: ${CLIPS_RENDER_CONCURRENCY:-0}
     volumes:
       - storage:/app/storage
       - vault:/app/vault

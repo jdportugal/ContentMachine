@@ -20,6 +20,14 @@ CLIPS_MAX_TOKENS="${CLIPS_MAX_TOKENS:-16000}"
 # Seconds ONE model call may take. Writing a component is a minutes-long response;
 # a ceiling below it times out and retries the whole generation from scratch.
 CLIPS_LLM_TIMEOUT="${CLIPS_LLM_TIMEOUT:-600}"
+# Seconds one Remotion render may take. Must stay below the worker's --timeout
+# (1700) and the queue's retry_after (1800); raising it means raising all three.
+CLIPS_RENDER_TIMEOUT="${CLIPS_RENDER_TIMEOUT:-3000}"
+QUEUE_TIMEOUT="${QUEUE_TIMEOUT:-3300}"
+DB_QUEUE_RETRY_AFTER="${DB_QUEUE_RETRY_AFTER:-3600}"
+# Frames painted in parallel. 0 = one per core. Each one in flight is another
+# headless Chrome tab — lower it if RAM runs out before cores do.
+CLIPS_RENDER_CONCURRENCY="${CLIPS_RENDER_CONCURRENCY:-0}"
 
 log()   { echo "[brand-machine] $*"; }
 retry() { local n=0; until "$@"; do n=$((n+1)); [ "$n" -ge 30 ] && return 1; sleep 5; done; }
@@ -79,6 +87,10 @@ services:
       APP_TIMEZONE: ${TZ_HOST}
       CLIPS_MAX_TOKENS: "${CLIPS_MAX_TOKENS}"
       CLIPS_LLM_TIMEOUT: "${CLIPS_LLM_TIMEOUT}"
+      CLIPS_RENDER_TIMEOUT: "${CLIPS_RENDER_TIMEOUT}"
+      QUEUE_TIMEOUT: "${QUEUE_TIMEOUT}"
+      DB_QUEUE_RETRY_AFTER: "${DB_QUEUE_RETRY_AFTER}"
+      CLIPS_RENDER_CONCURRENCY: "${CLIPS_RENDER_CONCURRENCY}"
     volumes:
       - storage:/app/storage
       - vault:/app/vault

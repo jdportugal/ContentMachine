@@ -17,6 +17,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessTimedOutException;
 
 class RenderJob implements ShouldQueue
 {
@@ -90,6 +91,18 @@ class RenderJob implements ShouldQueue
             $p->update(['output_path' => $out, 'status' => ClipRecord::STATUS_DONE]);
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
+
+            // A render killed by the clock will be killed by it again: each retry
+            // costs another full ceiling of worker time and cannot end differently.
+            // Fail it outright and leave the retries for the transient failures
+            // they exist for — three attempts at 1500s is 75 minutes of a blocked
+            // worker, and the clip flips rendering→failed once per attempt.
+            if ($e instanceof ProcessTimedOutException) {
+                $this->fail($e);
+
+                return;
+            }
+
             throw $e;
         }
     }

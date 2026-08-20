@@ -270,6 +270,16 @@ return [
         // minutes-long response, and a ceiling below that times out and retries
         // from scratch — three times — turning one slow generation into three.
         'llm_timeout' => (int) env('CLIPS_LLM_TIMEOUT', 600),
+        // How long ONE Remotion render may take. Not a free number: it has to stay
+        // below the worker's --timeout, which stays below the queue's retry_after
+        // (see config/queue.php) — a render still going when retry_after passes is
+        // handed to a second worker, and two of them then write the same file.
+        // Raising this means raising all three, in that order.
+        'render_timeout' => (int) env('CLIPS_RENDER_TIMEOUT', 3000),
+        // Frames painted in parallel. 0 = one per core. Each one in flight is
+        // another headless Chrome tab, so lower it if the host runs out of memory
+        // before it runs out of cores.
+        'render_concurrency' => (int) env('CLIPS_RENDER_CONCURRENCY', 0),
         'claude_binary' => env('CLIPS_CLAUDE_BINARY', 'claude'),
         // Number of Claude CLI attempts (transient failures: API overload, etc.).
         'claude_attempts' => (int) env('CLIPS_CLAUDE_ATTEMPTS', 3),
