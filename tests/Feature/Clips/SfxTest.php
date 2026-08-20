@@ -485,6 +485,45 @@ class SfxTest extends TestCase
         $this->assertFalse($depois->instance()->sfxBusy);
     }
 
+    /**
+     * Half and landscape used to wait for the tab click that first asked for one, so
+     * opening an effect meant clicking and waiting ~20s for a render to start from
+     * scratch — every effect, every time. They are built up front now.
+     */
+    public function test_opening_the_studio_queues_every_framing_that_is_missing(): void
+    {
+        Queue::fake();
+        $library = app(EffectLibrary::class);
+        $effect = $this->makeEffect([
+            'slug' => 'flywheel', 'display_name' => 'Flywheel', 'prompt' => 'a spinning flywheel',
+            'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+            'sample_text' => 'Flywheel', 'sample_params' => ['speed' => 2],
+        ]);
+
+        // Portrait is already cached, as it would be straight after generation.
+        @mkdir($library->previewDir(), 0777, true);
+        file_put_contents($library->previewPath('flywheel'), 'video');
+
+        Livewire::test(ClipsAnimadosSfx::class);
+
+        foreach (['half', 'landscape'] as $formato) {
+            Queue::assertPushed(RenderEffectSampleJob::class, fn (RenderEffectSampleJob $j) => $j->slug === 'flywheel'
+                && $j->format === $formato
+                && $j->text === 'Flywheel'
+                && $j->params === ['speed' => 2]);
+        }
+        // The one already on disk is not re-queued.
+        Queue::assertNotPushed(RenderEffectSampleJob::class, fn (RenderEffectSampleJob $j) => $j->slug === 'flywheel'
+            && $j->format === 'portrait');
+
+        // Bulk work goes behind generation: the worker drains `default` first, so a
+        // backfill of the whole library never delays someone's next effect.
+        Queue::assertPushed(RenderEffectSampleJob::class,
+            fn (RenderEffectSampleJob $j) => $j->queue === 'previews');
+
+        $this->assertSame('flywheel', $effect->slug);
+    }
+
     public function test_rewriting_all_effects_regenerates_them_keeping_their_prompt(): void
     {
         Queue::fake();

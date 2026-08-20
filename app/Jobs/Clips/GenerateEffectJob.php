@@ -99,11 +99,15 @@ class GenerateEffectJob implements ShouldQueue
             ]);
             $library->promote($effect); // writes <slug>.tsx, marks active, rebuilds index.ts
 
-            // The half and landscape previews are the same component in another box,
-            // so this rewrite made them stale. Drop and re-queue in one step — the
-            // caller used to delete them and leave nothing to render them again,
-            // which parked the studio on "Rendering the half portrait preview…".
-            foreach ($library->dropSecondaryPreviews($data['slug']) as $formato) {
+            // Portrait is rendered above as the gate. Queue the other framings now
+            // rather than on the tab click that first asks for one: a sample takes
+            // ~20s, so lazily rendering them meant opening an effect, clicking, and
+            // waiting — every time, for every effect. They are the same component in
+            // another box, so a rewrite makes any cached ones stale; dropping and
+            // re-queueing in one step is also what keeps the studio from parking on
+            // "Rendering the half portrait preview…" with nothing on its way.
+            $library->dropSecondaryPreviews($data['slug']);
+            foreach ([EffectLibrary::FORMAT_HALF, EffectLibrary::FORMAT_LANDSCAPE] as $formato) {
                 RenderEffectSampleJob::dispatch($data['slug'], $data['sample_text'], $data['sample_params'], $formato);
             }
         } catch (\Throwable $e) {

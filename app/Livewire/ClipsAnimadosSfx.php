@@ -459,18 +459,37 @@ class ClipsAnimadosSfx extends Component
         return [$sample['text'], $sample['params']];
     }
 
-    /** Dispatch a cached-preview render for any built-in / active effect missing one. */
+    /**
+     * Dispatch a cached-preview render for every built-in / active effect missing
+     * one, in every framing.
+     *
+     * All three, not just portrait: a sample render takes ~20s, so leaving half and
+     * landscape to the tab click meant a wait every time one was first opened. The
+     * jobs are idempotent (each returns immediately if its file is already there),
+     * so this backfills what a library predates and then costs nothing — until a
+     * design-system change invalidates the previews and it rebuilds them.
+     *
+     * ponytail: queued on the same worker as generation, so a first run on a large
+     * library makes a new effect wait behind the backfill. Give the renders their
+     * own queue if that becomes the complaint.
+     */
     public function ensurePreviews(): void
     {
         $library = app(EffectLibrary::class);
+        $formatos = array_keys(EffectLibrary::FORMATS);
+
         foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
-            if (! $library->previewExists($slug)) {
-                RenderEffectSampleJob::dispatch($slug, $sample['text'], $sample['params']);
+            foreach ($formatos as $formato) {
+                if (! $library->previewExists($slug, $formato)) {
+                    RenderEffectSampleJob::dispatch($slug, $sample['text'], $sample['params'], $formato);
+                }
             }
         }
         foreach ($library->active() as $effect) {
-            if (! $library->previewExists($effect->slug)) {
-                RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
+            foreach ($formatos as $formato) {
+                if (! $library->previewExists($effect->slug, $formato)) {
+                    RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? [], $formato);
+                }
             }
         }
     }

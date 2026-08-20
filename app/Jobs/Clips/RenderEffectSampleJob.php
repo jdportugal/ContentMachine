@@ -29,6 +29,10 @@ class RenderEffectSampleJob implements ShouldQueue
         public string $format = EffectLibrary::FORMAT_PORTRAIT,
     ) {
         $this->captureProject();
+        // Previews are bulk, best-effort work: opening the studio can queue one
+        // per effect per framing. On its own queue, listed after `default` on the
+        // worker, a backfill can never make someone's generation wait behind it.
+        $this->onQueue('previews');
     }
 
     public function handle(EffectLibrary $library, RemotionRenderer $renderer): void
