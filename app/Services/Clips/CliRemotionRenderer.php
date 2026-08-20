@@ -19,7 +19,7 @@ class CliRemotionRenderer implements RemotionRenderer
 
         try {
             $process = new Process(
-                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition),
+                $this->buildRenderArgs($props, $outPath, $propsFile, $entry, $composition, $this->concurrency()),
                 config('contentmachine.clips.remotion_path')
             );
             // Full clips (many scenes, ~1-2k frames) can outrun 10 min; keep this
@@ -143,11 +143,40 @@ class CliRemotionRenderer implements RemotionRenderer
     /**
      * @return array<int,string> the argv for the remotion render command
      */
-    public function buildRenderArgs(array $props, string $outPath, string $propsFile, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): array
+    /**
+     * How many frames Remotion paints in parallel.
+     *
+     * Left unset, Remotion's own default behaved like 1 here — a 900-frame clip
+     * took 125s wall for 146s of CPU, i.e. one core busy while the rest idled.
+     * Passing the core count took the same render to 67s on 2 cores and 49s on 4,
+     * for the same total CPU. The work was never the problem; the parallelism was.
+     *
+     * Each frame in flight is another headless Chrome tab, so this is also the
+     * memory dial — cap it with CLIPS_RENDER_CONCURRENCY on a box that is tighter
+     * on RAM than on cores.
+     */
+    private function concurrency(): int
+    {
+        $configured = (int) config('contentmachine.clips.render_concurrency', 0);
+
+        return $configured > 0 ? $configured : $this->cores();
+    }
+
+    /** Cores available to this host, 2 if it will not say. Container-free on purpose. */
+    private function cores(): int
+    {
+        $n = (int) trim((string) (@shell_exec('nproc 2>/dev/null')
+            ?: @shell_exec('sysctl -n hw.ncpu 2>/dev/null')));
+
+        return max(1, $n ?: 2);
+    }
+
+    public function buildRenderArgs(array $props, string $outPath, string $propsFile, string $entry = 'src/index.ts', string $composition = 'ClipComposition', ?int $concurrency = null): array
     {
         $args = [
             'npx', 'remotion', 'render', $entry, $composition, $outPath,
             "--props={$propsFile}",
+            '--concurrency='.($concurrency ?: $this->cores()),
         ];
 
         if (! empty($props['transparent'])) {

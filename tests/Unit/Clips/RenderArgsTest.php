@@ -20,6 +20,33 @@ class RenderArgsTest extends TestCase
         $this->assertNotContains('--codec=prores', $args);
     }
 
+    /**
+     * Left unset, Remotion's own default painted one frame at a time here: 125s
+     * wall for 146s of CPU on a 900-frame clip, one core busy and the rest idle.
+     * Passing the core count took the same render to 67s on 2 cores, 49s on 4.
+     */
+    public function test_render_is_told_how_many_frames_to_paint_at_once(): void
+    {
+        $args = (new CliRemotionRenderer)->buildRenderArgs(
+            ['transparent' => false], '/out/clip.mp4', '/tmp/p.json', 'src/index.ts', 'ClipComposition', 4
+        );
+
+        $this->assertContains('--concurrency=4', $args);
+    }
+
+    /** No answer from the caller still beats Remotion's default — never absent. */
+    public function test_concurrency_is_always_passed(): void
+    {
+        $args = (new CliRemotionRenderer)->buildRenderArgs(
+            ['transparent' => false], '/out/clip.mp4', '/tmp/p.json'
+        );
+
+        $this->assertNotEmpty(
+            preg_grep('/^--concurrency=[1-9][0-9]*$/', $args),
+            'every render must carry an explicit --concurrency'
+        );
+    }
+
     public function test_transparent_render_uses_prores_4444(): void
     {
         $args = (new CliRemotionRenderer)->buildRenderArgs(
