@@ -2,6 +2,8 @@
     'label',
     'value',
     'delta' => null,      // e.g.: +12.4  (percentage)
+    'previous' => null,   // the same figure a day earlier, already formatted
+    'previousLabel' => 'yesterday',
     'unit' => null,
     'accent' => '#5A7BFF',
 ])
@@ -19,6 +21,11 @@
         <span class="font-display text-4xl text-ink leading-none">{{ $value }}</span>
         @if ($unit)<span class="font-mono text-xs text-ink-faint">{{ $unit }}</span>@endif
     </div>
+    @if ($previous !== null)
+        <div class="mt-1 font-mono text-[0.65rem] text-ink-faint">
+            {{ $previous }} <span class="opacity-70">{{ $previousLabel }}</span>
+        </div>
+    @endif
     @if ($delta !== null)
         <div class="mt-1.5 font-mono text-xs {{ $deltaColor }}">
             {{ $deltaArrow }} {{ $deltaNum !== null ? number_format(abs($deltaNum), 1).'%' : $delta }}

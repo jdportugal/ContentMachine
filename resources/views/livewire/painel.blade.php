@@ -5,13 +5,30 @@
         cota="006.3 · ACM · '26"
         lead="Overview of the house — network performance, drafts in progress and what's new in the world." />
 
-    {{-- Channel totals --}}
-    @php use App\Services\Monitoring\MonitoringStats; @endphp
+    {{-- Channel totals, each with the same figure as of the last recorded day --}}
+    @php
+        use App\Services\Monitoring\MonitoringStats;
+        // «yesterday» when it really is; otherwise name the day, so an older
+        // figure is never read as last night's.
+        $ontemData = $ontem['data'] ?? null;
+        $ontemRotulo = $ontemData === null
+            ? null
+            : ($ontemData === now()->subDay()->toDateString()
+                ? 'yesterday'
+                : \Illuminate\Support\Carbon::parse($ontemData)->format('j M'));
+        $antes = fn (string $m) => $ontemData === null
+            ? null
+            : MonitoringStats::numero((int) ($ontem['metricas'][$m] ?? 0));
+    @endphp
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <x-metric-card label="Subscribers" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF" />
-        <x-metric-card label="Posts" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="published" accent="#FFB347" />
-        <x-metric-card label="Views" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recent" accent="#FF7A3D" />
-        <x-metric-card label="Interactions" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recent" accent="#C77DFF" />
+        <x-metric-card label="Subscribers" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF"
+                       :previous="$antes('subscritores')" :previous-label="$ontemRotulo" />
+        <x-metric-card label="Posts" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="published" accent="#FFB347"
+                       :previous="$antes('publicacoes')" :previous-label="$ontemRotulo" />
+        <x-metric-card label="Views" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recent" accent="#FF7A3D"
+                       :previous="$antes('visualizacoes')" :previous-label="$ontemRotulo" />
+        <x-metric-card label="Interactions" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recent" accent="#C77DFF"
+                       :previous="$antes('interacoes')" :previous-label="$ontemRotulo" />
     </div>
     @unless ($estatisticas['temDados'])
         <p class="mt-2 font-mono text-xs text-ink-faint">

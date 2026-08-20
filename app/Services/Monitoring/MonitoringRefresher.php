@@ -12,6 +12,8 @@ class MonitoringRefresher
     public function __construct(
         private readonly YtDlpMonitoringFetcher $ytdlp,
         private readonly ApifyMonitoringFetcher $apify,
+        private readonly MonitoringStats $stats,
+        private readonly MonitoringHistory $history,
     ) {}
 
     /**
@@ -81,6 +83,19 @@ class MonitoringRefresher
                 'count' => count($itens),
                 'error' => $erro,
             ];
+        }
+
+        // The store only ever holds the CURRENT numbers, so a day's totals are
+        // gone the moment the next collection overwrites them. Record them here,
+        // after the pass, while they still describe a whole day — every route into
+        // a collection (the nightly command, the Monitoring tab's button) ends up
+        // in this method. Never at the cost of the collection itself.
+        if ($resultado !== []) {
+            try {
+                $this->history->registar($this->stats->totais(array_keys($resultado)));
+            } catch (\Throwable) {
+                // a missed day of history is not worth failing a collection over
+            }
         }
 
         return $resultado;

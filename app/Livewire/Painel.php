@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Monitoring\MonitoringHistory;
 use App\Services\Monitoring\MonitoringManager;
 use App\Services\Monitoring\MonitoringStats;
 use App\Services\Vault\VaultContract;
@@ -13,7 +14,7 @@ use Livewire\Component;
 #[Title('Dashboard')]
 class Painel extends Component
 {
-    public function render(MonitoringManager $monitoring, MonitoringStats $stats, VaultContract $vault)
+    public function render(MonitoringManager $monitoring, MonitoringStats $stats, VaultContract $vault, MonitoringHistory $history)
     {
         // Performance summary per platform (best recent content).
         $plataformas = $monitoring->todos()->map(function ($driver, $p) {
@@ -30,6 +31,10 @@ class Painel extends Component
             'plataformas' => $plataformas,
             // Channel totals (subscribers, posts, performance) for the networks.
             'estatisticas' => $stats->totais($monitoring->plataformas()),
+            // The same totals as of the last recorded day, for the line under each
+            // card. Null until a collection has run on some earlier day — nothing
+            // recorded the numbers before, so there is no history to backfill.
+            'ontem' => $history->anterior(),
             // Read the LAST generated report from the vault. NEVER generate live here:
             // the 'api' news driver throws (no Apify key) or blocks 30s, which crashed «/».
             'destaquesNoticias' => array_slice($this->ultimosDestaques($vault), 0, 3),
