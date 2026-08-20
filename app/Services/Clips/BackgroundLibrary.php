@@ -201,6 +201,19 @@ class BackgroundLibrary
         return $this->previewDir().'/'.$slug.'-'.$this->designHash().'.mp4';
     }
 
+    /**
+     * A token that changes whenever a background's servable preview does, 0 when
+     * there is none. The preview URL is keyed by record id and the cache filename
+     * by the DESIGN hash, so a re-render under a new design resolves to the same
+     * URL and the browser keeps showing the video it already has.
+     */
+    public function previewVersionFor(EffectRecord $background): int
+    {
+        $file = $this->previewFileFor($background);
+
+        return $file === null ? 0 : (int) @filemtime($file);
+    }
+
     /** The servable preview file for a background, or null if not ready. */
     public function previewFileFor(EffectRecord $background): ?string
     {

@@ -198,6 +198,58 @@ class BackgroundsTest extends TestCase
     }
 
     /** Fake the Anthropic API so BackgroundGenerator::generate() returns the given payload. */
+    /**
+     * ensureBackgroundPreviews() queues a render for an ACTIVE background with no
+     * preview — after a design-system change, that is every one of them. Busy only
+     * looked at status, which never moves, so wire:poll stayed off and the renders
+     * landed on a page that never asked again: permanently blank until a reload.
+     */
+    public function test_a_background_waiting_on_its_preview_keeps_the_page_polling(): void
+    {
+        Queue::fake();
+        $library = app(BackgroundLibrary::class);
+        $bg = $this->store()->create([
+            'kind' => BackgroundStore::KIND_CODE,
+            'slug' => 'drifty', 'display_name' => 'Drifty', 'prompt' => 'a drift',
+            'description' => '', 'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+        ]);
+
+        $c = Livewire::test(ClipsAnimados::class)->set('view', 'backgrounds');
+        $this->assertTrue($c->instance()->backgroundsBusy, 'the preview is still rendering');
+        $this->assertSame(0, $library->previewVersionFor($bg));
+
+        // Once the render lands the page settles, and the preview gets a version
+        // so the browser fetches it instead of reusing the one it had.
+        @mkdir($library->previewDir(), 0777, true);
+        file_put_contents($library->previewPath('drifty'), 'video');
+
+        $settled = Livewire::test(ClipsAnimados::class)->set('view', 'backgrounds');
+        $this->assertFalse($settled->instance()->backgroundsBusy);
+        $this->assertNotSame(0, $library->previewVersionFor($this->store()->find($bg->id())));
+    }
+
+    /** The backgrounds studio is reachable by URL, so the Effects Studio tabs can link to it. */
+    public function test_the_backgrounds_url_opens_the_backgrounds_studio(): void
+    {
+        Queue::fake();
+        $this->store()->create([
+            'kind' => BackgroundStore::KIND_CODE,
+            'slug' => 'drifty', 'display_name' => 'Drifty', 'prompt' => 'a drift',
+            'description' => '', 'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+        ]);
+
+        $this->actingAs(\App\Models\User::factory()->create())
+            ->get(route('clips-animados.backgrounds'))
+            ->assertOk()
+            ->assertSee('Backgrounds library')
+            ->assertSee('SFX Studio')      // the studio tab strip is on the page
+            ->assertSee('VFX Lab');
+
+        // Landing there queues the missing preview, exactly as the in-page button did.
+        Queue::assertPushed(\App\Jobs\Clips\RenderBackgroundSampleJob::class,
+            fn ($j) => $j->slug === 'drifty');
+    }
+
     private function fakeClaudeReturning(array $payload): void
     {
         config(['services.anthropic.key' => 'test-key']);

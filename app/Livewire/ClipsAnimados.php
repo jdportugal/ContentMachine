@@ -53,8 +53,14 @@ class ClipsAnimados extends Component
      * creation form with the post's text already in the script box — the mirror
      * of how Oficina picks up session('oficina_brief') coming the other way.
      */
-    public function mount(): void
+    public function mount(string $view = 'dashboard'): void
     {
+        // Route default (see clips-animados.backgrounds) — opening the backgrounds
+        // studio by URL must do what the in-page button does, previews included.
+        if ($view === 'backgrounds') {
+            $this->abrirBackgrounds();
+        }
+
         if (($seed = session('animado_texto')) !== null) {
             session()->forget('animado_texto');
             $this->text = (string) $seed;
@@ -489,7 +495,23 @@ class ClipsAnimados extends Component
 
     public function getBackgroundsBusyProperty(): bool
     {
-        return $this->backgrounds()->all()->contains(fn (EffectRecord $b) => in_array($b->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true));
+        $library = app(BackgroundLibrary::class);
+
+        return $this->backgrounds()->all()->contains(function (EffectRecord $b) use ($library) {
+            if (in_array($b->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true)) {
+                return true;
+            }
+
+            // ensureBackgroundPreviews() queues a render for an ACTIVE background
+            // that has none — after a design-system change, that is every one of
+            // them. Their status never moves, so nothing here called the page busy,
+            // wire:poll stayed off, and the renders landed on a page that never
+            // asked again: the backgrounds looked permanently broken until a manual
+            // reload. A preview on its way is exactly what "busy" means.
+            return $b->kind !== BackgroundStore::KIND_VIDEO
+                && $b->isActive()
+                && $library->previewFileFor($b) === null;
+        });
     }
 
     /** Render one video cycling through every background, each with its name centered. */
@@ -1249,12 +1271,12 @@ class ClipsAnimados extends Component
 
     public function render(MusicLibrary $music)
     {
-        $bgReady = [];
+        $bgReady = [];   // id => preview version, for both membership and cache-busting
         if ($this->view === 'backgrounds') {
             $bgLibrary = app(BackgroundLibrary::class);
             foreach ($this->backgrounds as $bg) {
                 if ($bgLibrary->previewFileFor($bg) !== null) {
-                    $bgReady[] = $bg->id();
+                    $bgReady[$bg->id()] = $bgLibrary->previewVersionFor($bg);
                 }
             }
         }

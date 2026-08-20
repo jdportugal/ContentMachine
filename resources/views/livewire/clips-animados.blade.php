@@ -32,10 +32,10 @@
                         class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
                     ✷ SFX
                 </a>
-                <button type="button" wire:click="abrirBackgrounds"
+                <a href="{{ route('clips-animados.backgrounds') }}" wire:navigate
                         class="font-display text-lg px-5 py-2 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-ink-soft/50 transition">
                     ◆ Backgrounds
-                </button>
+                </a>
                 <button type="button" wire:click="novoClip"
                         class="font-display text-lg px-5 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
                     ✦ New clip
@@ -643,7 +643,8 @@
     {{-- BACKGROUNDS STUDIO                                          --}}
     {{-- ============================================================ --}}
     @if ($view === 'backgrounds')
-        <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
+        @include('livewire.partials.studio-tabs')
+        <a href="{{ route('clips-animados') }}" wire:navigate class="inline-block font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to Animated Clips</a>
 
         <x-panel eyebrow="Backgrounds library" title="Backgrounds" glyph="◆">
             <p class="text-ink-soft text-sm mb-5">
@@ -750,8 +751,12 @@
                     @foreach ($this->backgrounds as $bg)
                         <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col transition {{ $bg->status === 'active' && ! $bg->enabled ? 'opacity-60' : '' }}" wire:key="bg-{{ $bg->id }}">
                             <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
-                                @if (in_array($bg->id, $bgReady, true) && in_array($bg->status, ['active', 'updating'], true))
-                                    <video class="w-full h-full object-cover" src="{{ route('clips-animados.background-preview', $bg->id) }}" autoplay loop muted playsinline></video>
+                                @if (isset($bgReady[$bg->id]) && in_array($bg->status, ['active', 'updating'], true))
+                                    {{-- ?v= and the key carry the render's version: the URL is keyed by
+                                         record id, so without it a re-rendered preview is served from
+                                         the copy the browser already has. --}}
+                                    <video class="w-full h-full object-cover" wire:key="bgprev-{{ $bg->id }}-{{ $bgReady[$bg->id] }}"
+                                           src="{{ route('clips-animados.background-preview', ['id' => $bg->id, 'v' => $bgReady[$bg->id]]) }}" autoplay loop muted playsinline></video>
                                     @if ($bg->status === 'updating')
                                         <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
                                             <p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p>
