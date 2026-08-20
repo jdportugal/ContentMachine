@@ -395,6 +395,96 @@ class SfxTest extends TestCase
         Queue::assertNotPushed(RenderEffectSampleJob::class, fn (RenderEffectSampleJob $j) => $j->format === 'bogus');
     }
 
+    /**
+     * Rewriting deleted all three framings' previews but only ever wrote portrait
+     * back, so half and landscape were left missing with nothing on the way — the
+     * studio sat on "Rendering the half portrait preview…" forever.
+     */
+    public function test_a_rewrite_re_renders_the_framings_it_invalidates(): void
+    {
+        Queue::fake();
+        $library = app(EffectLibrary::class);
+        $effect = $this->makeEffect([
+            'slug' => 'wiper', 'display_name' => 'Wiper', 'prompt' => 'a soft wipe',
+            'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+            'sample_text' => 'Hello', 'sample_params' => ['a' => 1],
+        ]);
+
+        // A half preview the user has already opened; landscape was never rendered.
+        @mkdir($library->previewDir(), 0777, true);
+        file_put_contents($library->previewPath('wiper'), 'video');
+        file_put_contents($library->previewPath('wiper', 'half'), 'video');
+
+        Livewire::test(ClipsAnimadosSfx::class)->call('tornarResponsivos');
+
+        // Rewriting must NOT strand them: it used to delete all three here and only
+        // write portrait back, leaving half and landscape gone with nothing queued.
+        $this->assertTrue($library->previewExists('wiper'), 'the card must not go blank mid-rewrite');
+        $this->assertTrue($library->previewExists('wiper', 'half'));
+        Queue::assertPushed(GenerateEffectJob::class);
+
+        // The job owns invalidation, so the drop and the re-render happen together.
+        $this->assertSame(['half'], $library->dropSecondaryPreviews('wiper'), 'only framings that existed');
+        $this->assertFalse($library->previewExists('wiper', 'half'));
+    }
+
+    /**
+     * Same slug + same design = same preview URL, so a rewritten effect kept
+     * showing the video the browser already had.
+     */
+    public function test_a_re_rendered_preview_gets_a_new_url(): void
+    {
+        $library = app(EffectLibrary::class);
+        @mkdir($library->previewDir(), 0777, true);
+        $path = $library->previewPath('wiper');
+
+        $this->assertSame(0, $library->previewVersion('wiper'), 'no preview, no version');
+
+        file_put_contents($path, 'first');
+        touch($path, 1_000_000);
+        $antes = $library->previewVersion('wiper');
+
+        file_put_contents($path, 'second');
+        touch($path, 2_000_000);
+
+        $this->assertNotSame($antes, $library->previewVersion('wiper'));
+    }
+
+    /** Nothing polled while a half/landscape sample rendered, so the spinner never cleared. */
+    public function test_the_page_polls_while_the_open_framing_has_no_preview(): void
+    {
+        Queue::fake();
+        $effect = $this->makeEffect([
+            'slug' => 'poller', 'display_name' => 'Poller', 'prompt' => 'a soft wipe',
+            'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
+            'sample_text' => 'Hello', 'sample_params' => [],
+        ]);
+
+        // Everything else settled FIRST, so the only thing that can keep the page
+        // polling is the framing being looked at.
+        $library = app(EffectLibrary::class);
+        @mkdir($library->previewDir(), 0777, true);
+        foreach (array_keys(EffectLibrary::BUILTIN_SAMPLES) as $slug) {
+            file_put_contents($library->previewPath($slug), 'video');
+        }
+        file_put_contents($library->previewPath('poller'), 'video');
+
+        $parado = Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()]);
+        $this->assertFalse($parado->instance()->sfxBusy, 'portrait is cached — nothing to wait for');
+
+        // Switch to a framing that has none: its sample is rendering, so the page
+        // has to keep polling or the spinner never clears.
+        $aRenderizar = Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()]);
+        $aRenderizar->call('verFormato', 'half');
+        $this->assertTrue($aRenderizar->instance()->sfxBusy);
+
+        // And settles again once that render lands.
+        file_put_contents($library->previewPath('poller', 'half'), 'video');
+        $depois = Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()]);
+        $depois->set('formato', 'half');
+        $this->assertFalse($depois->instance()->sfxBusy);
+    }
+
     public function test_rewriting_all_effects_regenerates_them_keeping_their_prompt(): void
     {
         Queue::fake();

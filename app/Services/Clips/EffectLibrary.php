@@ -416,6 +416,45 @@ TSX;
         return is_file($this->previewPath($slug, $format));
     }
 
+    /**
+     * A token that changes whenever the cached preview does, 0 when there is none.
+     *
+     * The filename carries the DESIGN hash, so a new design invalidates it — but a
+     * rewritten component keeps the same slug and the same design, and so the same
+     * URL. The browser then holds on to the video it already has and the effect
+     * looks unchanged. Hanging this off the URL is what makes the new render show.
+     */
+    public function previewVersion(string $slug, string $format = self::FORMAT_PORTRAIT): int
+    {
+        return (int) @filemtime($this->previewPath($slug, $format));
+    }
+
+    /**
+     * Drop the cached previews of the framings other than portrait and say which
+     * were actually there.
+     *
+     * They are previews of the SAME component, so rewriting it makes them stale
+     * too — but they are rendered lazily, on the tab click that first asks for one.
+     * Deleting them without re-rendering leaves the studio spinning on "Rendering
+     * the half portrait preview…" with nothing on its way, so invalidation returns
+     * the list and the caller re-renders exactly those. Portrait is excluded: it is
+     * written directly by whoever regenerates the effect.
+     *
+     * @return array<int,string>
+     */
+    public function dropSecondaryPreviews(string $slug): array
+    {
+        $dropped = [];
+        foreach ([self::FORMAT_HALF, self::FORMAT_LANDSCAPE] as $format) {
+            if ($this->previewExists($slug, $format)) {
+                @unlink($this->previewPath($slug, $format));
+                $dropped[] = $format;
+            }
+        }
+
+        return $dropped;
+    }
+
     // ── showreel (one video cycling through every effect, name centered) ──
 
     /** Every effect to feature, in order: all built-ins then active custom effects. */

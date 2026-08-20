@@ -98,6 +98,14 @@ class GenerateEffectJob implements ShouldQueue
                 'error' => null,
             ]);
             $library->promote($effect); // writes <slug>.tsx, marks active, rebuilds index.ts
+
+            // The half and landscape previews are the same component in another box,
+            // so this rewrite made them stale. Drop and re-queue in one step — the
+            // caller used to delete them and leave nothing to render them again,
+            // which parked the studio on "Rendering the half portrait preview…".
+            foreach ($library->dropSecondaryPreviews($data['slug']) as $formato) {
+                RenderEffectSampleJob::dispatch($data['slug'], $data['sample_text'], $data['sample_params'], $formato);
+            }
         } catch (\Throwable $e) {
             $library->resetCandidate();
             if ($tmp) {

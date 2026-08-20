@@ -40,9 +40,12 @@
                             <div class="text-bad text-2xl">✕</div>
                             <p class="font-mono text-[0.6rem] text-bad/90 mt-2">{{ \Illuminate\Support\Str::limit($d['error'] ?? 'Generation failed', 200) }}</p>
                         </div>
-                    @elseif (in_array($d['slug'], $sfxReady, true) && ($d['status'] ?? 'active') !== 'pending')
-                        <video class="w-full h-full object-cover" wire:key="prev-{{ $d['slug'] }}-{{ $formato }}"
-                               src="{{ route('clips-animados.sfx-preview', ['slug' => $d['slug'], 'format' => $formato]) }}" autoplay loop muted playsinline></video>
+                    @elseif (isset($sfxReady[$d['slug']]) && ($d['status'] ?? 'active') !== 'pending')
+                        {{-- ?v= and the key both carry the render's version: same slug + same
+                             design = same URL, so without it the browser keeps the video it
+                             already has and a rewritten effect looks unchanged. --}}
+                        <video class="w-full h-full object-cover" wire:key="prev-{{ $d['slug'] }}-{{ $formato }}-{{ $d['formatos'][$formato] ?? 0 }}"
+                               src="{{ route('clips-animados.sfx-preview', ['slug' => $d['slug'], 'format' => $formato, 'v' => $d['formatos'][$formato] ?? 0]) }}" autoplay loop muted playsinline></video>
                         @if (in_array($d['status'] ?? null, ['updating'], true) || in_array($d['override'] ?? null, ['pending', 'updating'], true))
                             <div class="absolute inset-0 bg-black/55 flex items-center justify-center">
                                 <p class="font-mono text-xs text-teal animate-pulse">Updating…</p>
@@ -318,8 +321,9 @@
                     @foreach ($this->effects as $effect)
                         <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col relative transition hover:border-teal/40 {{ $effect->status === 'active' && ! $effect->enabled ? 'opacity-60' : '' }}" wire:key="sfx-{{ $effect->id }}">
                             <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
-                                @if (in_array($effect->status, ['active', 'updating'], true) && in_array($effect->slug, $sfxReady, true))
-                                    <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $effect->slug) }}" autoplay loop muted playsinline></video>
+                                @if (in_array($effect->status, ['active', 'updating'], true) && isset($sfxReady[$effect->slug]))
+                                    <video class="w-full h-full object-cover" wire:key="thumb-{{ $effect->slug }}-{{ $sfxReady[$effect->slug] }}"
+                                           src="{{ route('clips-animados.sfx-preview', ['slug' => $effect->slug, 'v' => $sfxReady[$effect->slug]]) }}" autoplay loop muted playsinline></video>
                                     @if ($effect->status === 'updating')
                                         <div class="absolute inset-0 bg-black/55 flex items-center justify-center"><p class="font-mono text-[0.55rem] text-teal animate-pulse">Updating…</p></div>
                                     @endif
@@ -370,8 +374,9 @@
                 @foreach ($builtins as $b)
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-2 flex flex-col relative transition hover:border-teal/40 {{ $b['allowed'] ? '' : 'opacity-60' }}" wire:key="builtin-{{ $b['slug'] }}">
                         <div class="relative aspect-[9/16] rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
-                            @if (in_array($b['slug'], $sfxReady, true))
-                                <video class="w-full h-full object-cover" src="{{ route('clips-animados.sfx-preview', $b['slug']) }}" autoplay loop muted playsinline></video>
+                            @if (isset($sfxReady[$b['slug']]))
+                                <video class="w-full h-full object-cover" wire:key="thumb-{{ $b['slug'] }}-{{ $sfxReady[$b['slug']] }}"
+                                       src="{{ route('clips-animados.sfx-preview', ['slug' => $b['slug'], 'v' => $sfxReady[$b['slug']]]) }}" autoplay loop muted playsinline></video>
                             @else
                                 <div class="text-center">
                                     <div class="h-1 w-16 mx-auto bg-surface/40 rounded-full overflow-hidden"><div class="h-full bg-ink-soft/40 animate-pulse w-1/2"></div></div>

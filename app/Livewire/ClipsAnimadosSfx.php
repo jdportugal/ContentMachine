@@ -154,9 +154,10 @@ class ClipsAnimadosSfx extends Component
                 'status' => EffectRecord::STATUS_UPDATING,
                 'error' => null,
             ]);
-            foreach (array_keys(EffectLibrary::FORMATS) as $formato) {
-                @unlink($library->previewPath($effect->slug, $formato)); // stale: re-render after
-            }
+            // Previews are invalidated by GenerateEffectJob once the rewrite lands:
+            // deleting them here dropped the half/landscape ones with nothing left
+            // to re-render them, and dropped the portrait one before its
+            // replacement existed, so the card went blank for the whole rewrite.
             GenerateEffectJob::dispatch($effect->id(), isEdit: true);
             $n++;
         }
@@ -218,11 +219,18 @@ class ClipsAnimadosSfx extends Component
         return null;
     }
 
-    /** Which formats already have a cached preview. @return array<string,bool> */
+    /**
+     * Which formats have a cached preview, as a token that changes when the file
+     * does (0 = none). Still falsy when missing, so it reads as a yes/no; the
+     * value is what the view hangs off the URL so a re-render is actually fetched
+     * instead of served from the browser's copy of the previous one.
+     *
+     * @return array<string,int>
+     */
     private function formatosProntos(EffectLibrary $library, string $slug): array
     {
         return collect(EffectLibrary::FORMATS)
-            ->map(fn ($label, $formato) => $library->previewExists($slug, $formato))
+            ->map(fn ($label, $formato) => $library->previewVersion($slug, $formato))
             ->all();
     }
 
@@ -401,8 +409,14 @@ class ClipsAnimadosSfx extends Component
             'error' => null,
         ]);
         $library->promote($effect); // write the restored component + rebuild the registry
-        @unlink($library->previewPath($effect->slug)); // drop the stale preview so it re-renders
+        // Going back to an older version changes the code, so every framing's
+        // preview is stale — not just portrait, which used to be the only one
+        // dropped while half and landscape kept showing the version we left.
+        @unlink($library->previewPath($effect->slug));
         RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? []);
+        foreach ($library->dropSecondaryPreviews($effect->slug) as $formato) {
+            RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? [], $formato);
+        }
 
         $this->historyId = null;
     }
@@ -636,6 +650,16 @@ class ClipsAnimadosSfx extends Component
 
     public function getSfxBusyProperty(): bool
     {
+        // The open effect waiting on the framing you are LOOKING at counts as busy.
+        // Without it nothing polls while a half/landscape sample renders — those are
+        // only ever missing one at a time, never on the pending/updating list — so
+        // the render landed and the panel sat on "Rendering the half portrait
+        // preview…" until the page was reloaded by hand.
+        $aberto = $this->detail['slug'] ?? null;
+        if ($aberto !== null && ! app(EffectLibrary::class)->previewExists($aberto, $this->formato)) {
+            return true;
+        }
+
         return $this->effects()->all()->contains(fn (EffectRecord $e) => in_array($e->status, [EffectRecord::STATUS_PENDING, EffectRecord::STATUS_UPDATING], true))
             || collect(EffectLibrary::BUILTIN_SAMPLES)->keys()
                 ->contains(fn ($slug) => ! app(EffectLibrary::class)->previewExists($slug));
@@ -650,7 +674,7 @@ class ClipsAnimadosSfx extends Component
             ->keyBy('slug');
 
         $builtins = [];
-        $ready = [];
+        $ready = [];   // slug => preview version, for both membership and cache-busting
         foreach (EffectLibrary::BUILTIN_SAMPLES as $slug => $sample) {
             $override = $overrides->get($slug);
             $builtins[] = [
@@ -661,12 +685,12 @@ class ClipsAnimadosSfx extends Component
                 'override' => $override?->status,   // null | pending | updating | active | failed
             ];
             if ($library->previewExists($slug)) {
-                $ready[] = $slug;
+                $ready[$slug] = $library->previewVersion($slug);
             }
         }
         foreach ($this->effects as $effect) {
             if ($library->previewExists($effect->slug)) {
-                $ready[] = $effect->slug;
+                $ready[$effect->slug] = $library->previewVersion($effect->slug);
             }
         }
 
