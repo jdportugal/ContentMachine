@@ -85,14 +85,22 @@ class SceneVisualFiller
         $target = $this->typicalSceneDuration(array_slice($scenes, 1)) ?? 2.0;
         $tooLong = ($end - $start) > $target + self::EPS;
 
-        // Planner already opens with a normal-length intro: the only thing left is
-        // to make sure an image-based intro actually gets its image.
+        // The intro ALWAYS shows full-frame: on an overlay clip, a video/over/split
+        // opening would hide the effect behind the video or squeeze it into half
+        // the frame — so the intro scene is forced to `animation` in every path.
+        $fullFrame = isset($first['present']) && $first['present'] !== 'animation';
+
+        // Planner already opens with a normal-length intro: make sure an image-based
+        // intro gets its image, and that the scene shows the effect full-frame.
         if ($opensWithIntro && ! $tooLong) {
             $withImage = $this->withIntroImage($layers, $introSlugs, $introImageId);
-            if ($withImage === $layers) {
+            if ($withImage === $layers && ! $fullFrame) {
                 return $plan; // nothing to change
             }
             $scenes[0]['layers'] = $withImage;
+            if ($fullFrame) {
+                $scenes[0]['present'] = 'animation';
+            }
             $plan['scenes'] = $scenes;
 
             return $plan;
@@ -114,10 +122,9 @@ class SceneVisualFiller
                 ]],
                 'punchWord' => null, // the intro effect carries the frame
             ]);
-            // Overlay clips: a video/over/split scene would hide the effect — show it full-screen.
-            if (isset($first['present'])) {
-                $introScene['present'] = 'animation';
-            }
+        }
+        if ($fullFrame) {
+            $introScene['present'] = 'animation'; // never split/video/over — see above
         }
 
         if ($introEnd >= $end - self::EPS) {
@@ -659,8 +666,40 @@ class SceneVisualFiller
         return $plan;
     }
 
+    /**
+     * Overlay clips only: an `animation` scene with no visual has nothing behind it,
+     * so it renders as a bare backdrop plus the karaoke punch word. The source video
+     * is always available in an overlay clip, so show it for that beat instead.
+     * Scene timing is untouched, so audio/karaoke stay in sync.
+     */
+    public function showVideoOnBareScenes(array $plan): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes)) {
+            return $plan;
+        }
+        foreach ($scenes as &$scene) {
+            if (is_array($scene) && ! $this->hasForeground($scene)) {
+                $scene['present'] = 'video';
+            }
+        }
+        unset($scene);
+        $plan['scenes'] = $scenes;
+
+        return $plan;
+    }
+
     private function hasForeground(array $scene): bool
     {
+        // Overlay clips composite the source video per scene: a `video`/`over`/
+        // `split` scene already has a picture on screen, so it is never bare no
+        // matter what layers it carries. Only `animation` scenes render on nothing
+        // but the backdrop, which is what makes an empty one "just a punch word".
+        $present = $scene['present'] ?? null;
+        if (is_string($present) && $present !== 'animation') {
+            return true;
+        }
+
         return (bool) array_filter(
             $scene['layers'] ?? [],
             fn ($l) => is_array($l) && ($l['type'] ?? '') !== 'ambient',

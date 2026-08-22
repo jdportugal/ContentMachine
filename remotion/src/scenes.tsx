@@ -35,7 +35,7 @@ const bgColorFor = (bg?: string): string | null => {
 };
 
 // ── punch word (big serif-italic-caps emphasis) ──────────────────────────────
-const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ text, fps, dark }) => {
+const PunchWord: React.FC<{ text: string; fps: number; dark: boolean; top?: string }> = ({ text, fps, dark, top = "0%" }) => {
   const frame = useCurrentFrame();
   const s = spring({ frame, fps, config: { damping: 14, stiffness: 160 } });
   const opacity = interpolate(frame, [0, 8], [0, 1], { extrapolateRight: "clamp" });
@@ -45,7 +45,7 @@ const PunchWord: React.FC<{ text: string; fps: number; dark: boolean }> = ({ tex
   const len = text.length;
   const fontSize = len <= 8 ? 118 : len <= 16 ? 84 : 62;
   return (
-    <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", paddingTop: "12%" }}>
+    <AbsoluteFill style={{ top, justifyContent: "flex-start", alignItems: "center", paddingTop: "12%" }}>
       <div
         style={{
           fontFamily: FONTS.display,
@@ -172,7 +172,7 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
             );
           })
         : null}
-      {scene.punchWord ? <PunchWord text={String(scene.punchWord)} fps={fps} dark={dark} /> : null}
+      {scene.punchWord && present !== "split" ? <PunchWord text={String(scene.punchWord)} fps={fps} dark={dark} /> : null}
     </AbsoluteFill>
   );
 
@@ -183,6 +183,7 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
         <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "50%", overflow: "hidden" }}>
           {content}
         </div>
+        {scene.punchWord ? <PunchWord text={String(scene.punchWord)} fps={fps} dark={dark} top="50%" /> : null}
       </AbsoluteFill>
     );
   }

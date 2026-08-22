@@ -846,6 +846,11 @@ class ClipsAnimados extends Component
                 'layers' => $s['layers'] ?? [], // preserved; text merged back on save
                 'layersSummary' => implode(', ', array_map(fn ($l) => $l['type'] ?? '?', $s['layers'] ?? [])) ?: '—',
                 'animacao' => $s['layers'][0]['type'] ?? null,
+                // The whole scene as planned. Saving MERGES edits over this, so keys
+                // the editor has no field for (present, …) survive a save+re-render
+                // instead of being silently dropped (which turned every overlay
+                // scene into a plain video beat).
+                'original' => $s,
             ];
         }, $p->plan['scenes'] ?? []);
         $this->editPlanJson = json_encode($p->plan ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -877,7 +882,7 @@ class ClipsAnimados extends Component
             'start' => 0, 'end' => 1, 'background' => 'papyrus',
             'transitionIn' => 'crossfade', 'transitionOut' => 'cut',
             'karaoke' => false, 'punchWord' => '', 'layers' => [], 'layersSummary' => '—',
-            'animacao' => null,
+            'animacao' => null, 'original' => [],
         ];
     }
 
@@ -926,6 +931,9 @@ class ClipsAnimados extends Component
 
         $this->editScenes[$i]['layers'] = $layers;
         $this->editScenes[$i]['animacao'] = $slug;
+        if (($this->editScenes[$i]['original']['present'] ?? null) === 'video') {
+            unset($this->editScenes[$i]['original']['present']); // validator assigns a graphic mode
+        }
         $this->editScenes[$i]['layersSummary'] = implode(', ', array_map(fn ($l) => $l['type'] ?? '?', $layers)) ?: '—';
         $this->animacaoPickerCena = null;
     }
@@ -1147,7 +1155,7 @@ class ClipsAnimados extends Component
         $p = $this->clips()->findOrFail($this->editingId);
         $oldImages = $p->images ?? [];
         $plan = $p->plan ?? [];
-        $plan['scenes'] = array_map(fn ($s) => [
+        $plan['scenes'] = array_map(fn ($s) => array_merge(is_array($s['original'] ?? null) ? $s['original'] : [], [
             'start' => (float) $s['start'],
             'end' => (float) $s['end'],
             'background' => $s['background'],
@@ -1156,9 +1164,16 @@ class ClipsAnimados extends Component
             'karaoke' => (bool) $s['karaoke'],
             'punchWord' => ($s['punchWord'] ?? '') === '' ? null : $s['punchWord'],
             'layers' => $this->applyLayerText($s['layers'] ?? [], $s['textTarget'] ?? 'text', $s['layerText'] ?? ''),
-        ], $this->editScenes);
+        ]), $this->editScenes);
         $plan = $this->stripMissingImageRefs($plan);
-        $plan = $validator->validate($plan);
+        // Overlay context matters: without it the validator can't keep/assign the
+        // per-scene `present` modes (an overlay scene with none shows only video).
+        $plan = $validator->validate(
+            $plan,
+            '', // no transcript check — edited punch words are the user's call
+            $p->type === ClipRecord::TYPE_OVERLAY,
+            $p->meta['allowed_present'] ?? null,
+        );
 
         $p->update([
             'title' => $this->editTitle ?: $p->title,
@@ -1293,6 +1308,9 @@ class ClipsAnimados extends Component
         }
 
         return view('livewire.clips-animados', [
+            'custos' => $this->view === 'dashboard'
+                ? app(\App\Services\Costs\CostLedger::class)->totaisPorPeca('clip')
+                : [],
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
             'musicas' => $music->all(),

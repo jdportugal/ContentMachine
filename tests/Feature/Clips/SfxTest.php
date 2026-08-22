@@ -133,6 +133,37 @@ class SfxTest extends TestCase
         $this->assertContains('neon-pulse', $library->activeSlugs());
     }
 
+    /**
+     * An effect that hardcodes the portrait canvas ignores the `frame` prop, so in a
+     * half frame it paints past the edge and gets cropped. Sync flags it so the
+     * renderer scales it to fit; an effect that sizes itself from `frame` must not
+     * be flagged, or it would be needlessly shrunk.
+     */
+    public function test_sync_flags_effects_that_hardcode_the_portrait_canvas(): void
+    {
+        $library = app(EffectLibrary::class);
+
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'locked-fx', 'display_name' => 'Locked',
+            'description' => 'Hardcodes the frame', 'param_schema' => '{}',
+            'tsx' => 'export default () => <div style={{ width: 1080, height: 1920 }} />;',
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+        $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'fluid-fx', 'display_name' => 'Fluid',
+            'description' => 'Sizes from the frame prop', 'param_schema' => '{}',
+            'tsx' => 'export default ({ frame }) => <div style={{ height: frame.height * 0.5 }} />;',
+            'status' => EffectRecord::STATUS_ACTIVE,
+        ]);
+
+        $library->syncFilesystem();
+        $index = file_get_contents($library->effectsDir().'/index.ts');
+
+        $this->assertStringContainsString('PORTRAIT_STAGE = { width: 1080, height: 1920 }', $index);
+        $this->assertMatchesRegularExpression('/PORTRAIT_LOCKED.*"locked-fx"/', $index);
+        $this->assertDoesNotMatchRegularExpression('/PORTRAIT_LOCKED.*"fluid-fx"/', $index);
+    }
+
     public function test_generator_rejects_hardcoded_brand_colours(): void
     {
         $this->fakeClaudeReturning([

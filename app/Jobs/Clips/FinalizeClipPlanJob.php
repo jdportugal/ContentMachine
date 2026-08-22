@@ -37,6 +37,7 @@ class FinalizeClipPlanJob implements ShouldQueue
     public function handle(ClipStore $store): void
     {
         $this->activateProject();
+        app(\App\Services\Costs\CostLedger::class)->contexto('clip', $this->projectId);
         $p = $store->findOrFail($this->projectId);
 
         try {
@@ -120,6 +121,20 @@ class FinalizeClipPlanJob implements ShouldQueue
                 // Text-dense scenes get enough time to be read, borrowing from adjacent
                 // low-value scenes (sync-safe — karaoke/audio are absolute-timed).
                 $plan = $filler->enforceReadingTime($plan);
+            } else {
+                // Overlay clips were left out of the bare-scene passes entirely, so an
+                // `animation` scene the planner gave no layers rendered as nothing but
+                // the karaoke punch word. There is always a source video here, so the
+                // honest recovery is to just show it for that beat — same timing, no
+                // blank frame, and no neighbour's graphic held for twice as long.
+                // Unless the user DISALLOWED video-only beats (allowed_present): then
+                // recover like animation clips — a neighbour's visual covers the beat.
+                if (in_array('video', $p->meta['allowed_present'] ?? ['video'], true)) {
+                    $plan = $filler->showVideoOnBareScenes($plan);
+                } else {
+                    $plan = $filler->mergeBareScenes($plan);
+                    $plan = $filler->fillBareScenes($plan);
+                }
             }
 
             // Guarantee the video OPENS with an intro effect (if any are marked) —
@@ -138,6 +153,14 @@ class FinalizeClipPlanJob implements ShouldQueue
                     ?: collect($p->images)->firstWhere('transparent', true)
                     ?: collect($p->images)->first(fn ($i) => empty($i['video']));
                 $introImageId = $logo['id'] ?? null;
+            }
+            // An intro effect that DISPLAYS an image renders empty without one, and
+            // enforceIntro runs after dropDeadLayers so nothing would catch it — the
+            // clip just opened on a blank frame. With no image to hand it, only
+            // intros that stand on their own are eligible; if that leaves none, the
+            // planner's own opening is kept instead of a forced empty one.
+            if ($introImageId === null) {
+                $intros = array_values(array_filter($intros, fn (string $s) => ! $library->usesImage($s)));
             }
             $plan = $filler->enforceIntro($plan, $intros, $introImageId);
 

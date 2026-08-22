@@ -349,6 +349,10 @@ Return a SINGLE JSON object (no markdown, no prose) with EXACTLY these keys:
 - `useCurrentFrame()` is LOCAL (starts at 0 when the layer begins). The layer's
   length in frames is `Math.round((anim.end - anim.start) * fps)`.
 - Read the text from `anim.text` and options from `anim.params` (coerce/guard — params may be missing).
+- TEXT IS NEVER CLIPPED. `anim.text` and params text vary wildly in length: never
+  put text in a fixed-height box with `overflow: hidden` — let the box grow with
+  its content (auto/min-height), and/or shrink the font for long text. A label cut
+  mid-word is a rejected effect.
 {$canvasRules}
 
 # DESIGN SYSTEM — LAW (this is what "follow the design system" means)

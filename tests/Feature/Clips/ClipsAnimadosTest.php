@@ -188,6 +188,70 @@ class ClipsAnimadosTest extends TestCase
         Queue::assertPushed(RenderJob::class);
     }
 
+    /**
+     * Saving the scene editor rebuilt each scene from a whitelist of fields and
+     * silently dropped `present` — on an overlay clip the renderer then defaulted
+     * every scene to "video", so a save+re-render ignored all animations and just
+     * showed the source video. Edits must merge OVER the original scene.
+     */
+    public function test_saving_an_overlay_plan_keeps_each_scenes_present_mode(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
+            'input_kind' => 'video',
+            'status' => ClipRecord::STATUS_DONE,
+            'meta' => ['allowed_present' => ['split', 'animation']],
+            'plan' => ['duration' => 6.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'present' => 'animation', 'layers' => [['type' => 'bullet-list', 'text' => null, 'params' => ['title' => 'T', 'items' => ['a']]]]],
+                ['start' => 3, 'end' => 6, 'background' => 'video', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'present' => 'split', 'layers' => [['type' => 'card', 'text' => null, 'params' => ['title' => 'C', 'lines' => ['x']]]]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->set('editScenes.0.punchWord', 'marca')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertSame('animation', $p->plan['scenes'][0]['present']);
+        $this->assertSame('split', $p->plan['scenes'][1]['present']);
+        $this->assertSame('bullet-list', $p->plan['scenes'][0]['layers'][0]['type']);
+        Queue::assertPushed(RenderJob::class);
+    }
+
+    /**
+     * Picking an animation for a scene that was presenting as plain "video" must
+     * make it visible: `present` is cleared so the validator assigns a graphic
+     * mode; leaving it "video" would hide the newly chosen layer entirely.
+     */
+    public function test_picking_an_animation_for_a_video_scene_makes_it_visible(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
+            'input_kind' => 'video',
+            'status' => ClipRecord::STATUS_DONE,
+            'meta' => ['allowed_present' => ['split', 'animation']],
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'present' => 'video', 'layers' => []],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('mudarAnimacao', 0, 'kinetic-text')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $p->refresh();
+        $this->assertSame('kinetic-text', $p->plan['scenes'][0]['layers'][0]['type']);
+        $this->assertContains($p->plan['scenes'][0]['present'], ['split', 'animation'], 'the scene must present its new animation, not plain video');
+    }
+
     public function test_changing_a_scene_animation_swaps_the_layer_effect(): void
     {
         Queue::fake();

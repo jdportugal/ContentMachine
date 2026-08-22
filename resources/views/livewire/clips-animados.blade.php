@@ -52,6 +52,7 @@
                         $e = $estados[$project->status] ?? $estados['draft'];
                         $t = $tipos[$project->type] ?? $tipos['animation'];
                         $sug = $project->meta['suggested'] ?? [];
+                        $custo = $custos[$project->id] ?? 0.0;
                     @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -87,6 +88,10 @@
                                         <span class="font-mono text-[0.58rem] text-ink-faint uppercase tracking-wider">{{ $t['label'] }}</span>
                                     </div>
                                     <x-badge :tone="$e['tone']">{{ $e['glyph'] }} {{ $e['label'] }}</x-badge>
+                                    @if ($custo > 0)
+                                        <span class="font-mono text-[0.62rem] text-ink-soft border border-ink-soft/25 rounded-sm px-2 py-0.5"
+                                              title="Provider spend recorded for this clip (images, LLM tokens, voiceover)">≈ ${{ number_format($custo, 2) }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="font-display text-xl text-ink mt-2">{{ $project->title ?? 'No title' }}</div>

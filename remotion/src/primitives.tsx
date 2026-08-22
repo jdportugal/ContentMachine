@@ -12,7 +12,16 @@ import {
 import { fillTextBox, fitText } from "@remotion/layout-utils";
 import { COLORS, ENGRAVE_SHADOW, FONTS, headlineGradient, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import type { Animation } from "./types";
-import { CUSTOM_PRIMITIVES } from "./effects";
+import { CUSTOM_PRIMITIVES, PORTRAIT_LOCKED, PORTRAIT_STAGE } from "./effects";
+
+// `./effects` is GENERATED (EffectLibrary::syncFilesystem). An index rewritten by an
+// OLDER build of the app — a queue worker still holding pre-upgrade PHP in memory, a
+// half-updated container — simply lacks these exports, and reading them unguarded
+// took the whole render down with "Cannot read properties of undefined". Degrade to
+// "nothing is portrait-locked" instead, i.e. exactly the behaviour before the flag
+// existed. A render is worth more than the scaling fix-up.
+const STAGE = PORTRAIT_STAGE ?? { width: 1080, height: 1920 };
+const LOCKED: ReadonlySet<string> = PORTRAIT_LOCKED ?? new Set<string>();
 
 // Every primitive receives the animation descriptor plus the composition fps.
 // `useCurrentFrame()` is LOCAL to the wrapping <Sequence>, i.e. it starts at 0
@@ -59,23 +68,68 @@ const softC = (dark?: boolean) => (dark ? COLORS.mutedOnDark : COLORS.mutedOnLig
 const winFrames = (anim: Animation, fps: number) =>
   Math.max(1, Math.round((anim.end - anim.start) * fps));
 
-// Shared centered layout wrapper.
+// How long a reveal may take. Effects pace their stagger/draw-on off the layer's
+// window, and a layer gets the WHOLE scene — so on a 10s scene a count-up crawled
+// to its number over 8.5s (at the 2s mark it still read 52 of 1000) and a
+// line-chart drew for 7.5s. Content should land at a readable speed and then
+// hold, so the pacing window is capped; the entrance springs above already do the
+// same with `Math.min(dur, fps)`. Scenes shorter than the cap are unaffected, and
+// exit fades / full-scene motion (Fade, Ambient, ImageReveal's ken-burns) keep
+// the real duration and still use winFrames.
+const PACE_SECONDS = 3;
+const paceFrames = (anim: Animation, fps: number) =>
+  Math.min(winFrames(anim, fps), Math.round(fps * PACE_SECONDS));
+
+// Shared centered layout wrapper — and the single place that guarantees no
+// effect overflows the box the scene hands it (the top half of a `split` scene
+// included). The children's natural height is measured (reveals animate via
+// opacity/transform, which don't affect layout, so the measure is stable across
+// frames) and, only when it exceeds the available space, the whole content is
+// uniformly scaled down to fit. An effect that fits renders exactly as designed;
+// one too tall — including any future primitive built on Center — shrinks
+// instead of painting past the edge and getting cropped.
 const Center: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
   children,
   style,
-}) => (
-  <AbsoluteFill
-    style={{
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      padding: "0 8%",
-      ...style,
-    }}
-  >
-    {children}
-  </AbsoluteFill>
-);
+}) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState(1);
+  React.useLayoutEffect(() => {
+    const el = ref.current;
+    const parent = el?.parentElement;
+    if (!el || !parent || el.offsetHeight === 0) return;
+    const cs = getComputedStyle(parent);
+    const avail = parent.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const next = Math.min(1, avail / el.offsetHeight);
+    setScale((s) => (Math.abs(s - next) > 0.002 ? next : s));
+  });
+  return (
+    <AbsoluteFill
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "0 8%",
+        ...style,
+      }}
+    >
+      <div
+        ref={ref}
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "inherit",
+          alignItems: "inherit",
+          justifyContent: "inherit",
+          gap: "inherit",
+          transform: scale < 1 ? `scale(${scale})` : undefined,
+        }}
+      >
+        {children}
+      </div>
+    </AbsoluteFill>
+  );
+};
 
 // ── box-aware text fitting ───────────────────────────────────────────────────
 // The renderer runs in a real browser, so we can MEASURE (via layout-utils) how
@@ -378,7 +432,7 @@ const Scale: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── kinetic-text (word fade + rise reveal) ───────────────────────────────────
 const KineticText: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const words = (anim.text ?? "").split(/\s+/).filter(Boolean);
   const perWord = words.length > 0 ? Math.max(3, (dur * 0.6) / words.length) : 1;
   // Shrink the headline so the whole phrase fits ~3 lines of the frame width.
@@ -428,7 +482,7 @@ const KineticText: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── highlight (teal sweep behind/under text) ─────────────────────────────────
 const Highlight: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const opacity = interpolate(frame, [0, Math.min(8, dur)], [0, 1], { extrapolateRight: "clamp" });
   const sweep = interpolate(frame, [Math.min(6, dur), dur * 0.7], [0, 100], {
     extrapolateLeft: "clamp",
@@ -463,7 +517,7 @@ const Highlight: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── fleuron-draw (ornamental divider drawing in) ─────────────────────────────
 const FleuronDraw: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const draw = interpolate(frame, [0, dur * 0.7], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -504,6 +558,8 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const rotate = interpolate(s, [0, 1], [-24, -7]);
   const opacity = interpolate(s, [0, 1], [0, 0.92]);
   const label = anim.text ?? "NEBULA";
+  // The circle is fixed — so the label isn't: shrink it until it fits inside.
+  const stampFont = fitFontToBox(label, 72, 26, { maxWidth: 300, maxLines: 3, fontFamily: FONTS.display, fontWeight: FONTS.displayWeight, letterSpacing: "0.12em", textTransform: "uppercase" });
   return (
     <Center>
       <div
@@ -523,7 +579,8 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           fontWeight: FONTS.displayWeight,
           textTransform: "uppercase",
           letterSpacing: "0.12em",
-          fontSize: 72,
+          fontSize: stampFont,
+          textAlign: "center",
         }}
       >
         <span style={{ transform: "translateY(-2px)" }}>{label}</span>
@@ -535,7 +592,7 @@ const SealStamp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── underline-sweep ──────────────────────────────────────────────────────────
 const UnderlineSweep: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const opacity = interpolate(frame, [0, Math.min(8, dur)], [0, 1], { extrapolateRight: "clamp" });
   const w = interpolate(frame, [Math.min(6, dur), dur * 0.8], [0, 100], {
     extrapolateLeft: "clamp",
@@ -564,7 +621,7 @@ const UnderlineSweep: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── count-up ──────────────────────────────────────────────────────────────────
 const CountUp: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const to = anim.params?.to ?? 100;
   const from = anim.params?.from ?? 0;
   const prefix = anim.params?.prefix ?? "";
@@ -747,7 +804,7 @@ const Ambient: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── timeline ─────────────────────────────────────────────────────────────────
 const Timeline: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const items = coerceTimelineItems(anim.params?.items);
   const caption = asStr(anim.params?.caption);
   if (items.length === 0) return <Center><Placeholder /></Center>;
@@ -794,7 +851,7 @@ const Timeline: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── bar-chart ────────────────────────────────────────────────────────────────
 const BarChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const bars = coerceBars(anim.params?.bars);
   const title = asStr(anim.params?.title);
   const unit = asStr(anim.params?.unit);
@@ -834,7 +891,7 @@ const BarChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── comparison ───────────────────────────────────────────────────────────────
 const Comparison: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const left = coerceColumn(anim.params?.left);
   const right = coerceColumn(anim.params?.right);
   if (!left.title && !right.title && left.points.length === 0 && right.points.length === 0) {
@@ -891,7 +948,7 @@ const Comparison: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── bullet-list ──────────────────────────────────────────────────────────────
 const BulletList: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const title = asStr(anim.params?.title);
   const items = coerceStrList(anim.params?.items, 6, 52);
   if (items.length === 0) return <Center><Placeholder /></Center>;
@@ -1001,9 +1058,15 @@ const Terminal: React.FC<PrimitiveProps> = ({ anim }) => {
             <span key={c} style={{ width: 16, height: 16, borderRadius: "50%", background: c, display: "inline-block" }} />
           ))}
         </div>
-        <pre style={{ fontFamily: FONTS.mono, color: COLORS.textOnDark, fontSize: 34, lineHeight: 1.5, whiteSpace: "pre-wrap", margin: 0, textAlign: "left" }}>
-          {shown}
-          <span style={{ opacity: caretOn ? 1 : 0, color: COLORS.tealBright }}>▋</span>
+        {/* The full text sizes the panel invisibly, the typed part overlays it —
+            so the panel (and Center's fit measure) holds its final height from
+            frame one instead of growing as the text types on. */}
+        <pre style={{ position: "relative", fontFamily: FONTS.mono, color: COLORS.textOnDark, fontSize: 34, lineHeight: 1.5, whiteSpace: "pre-wrap", margin: 0, textAlign: "left" }}>
+          <span style={{ visibility: "hidden" }}>{full}▋</span>
+          <span style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
+            {shown}
+            <span style={{ opacity: caretOn ? 1 : 0, color: COLORS.tealBright }}>▋</span>
+          </span>
         </pre>
       </div>
     </Center>
@@ -1013,7 +1076,7 @@ const Terminal: React.FC<PrimitiveProps> = ({ anim }) => {
 // ── line-chart (multi-series line graph, animated draw-in) ───────────────────
 const LineChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const series = coerceSeries(anim.params?.series);
   const title = asStr(anim.params?.title);
   const unit = asStr(anim.params?.unit);
@@ -1073,7 +1136,7 @@ const LineChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── scatter-chart (2-axis comparison / quadrant) ─────────────────────────────
 const ScatterChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const pts = coerceScatter(anim.params?.points);
   const title = asStr(anim.params?.title);
   const xLabel = asStr(anim.params?.xLabel);
@@ -1119,7 +1182,7 @@ const ScatterChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 // ── pie-chart (animated donut) ───────────────────────────────────────────────
 const PieChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const slices = coerceSlices(anim.params?.slices);
   const title = asStr(anim.params?.title);
   const total = slices.reduce((a, s) => a + s.value, 0);
@@ -1162,9 +1225,9 @@ const PieChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
 };
 
 // ── diagram (nodes + arrows; flow / cycle; optional image nodes) ─────────────
-const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
+const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark, frame: box }) => {
   const frame = useCurrentFrame();
-  const dur = winFrames(anim, fps);
+  const dur = paceFrames(anim, fps);
   const nodes = coerceNodes(anim.params?.nodes);
   const title = asStr(anim.params?.title);
   const layoutRaw = asStr(anim.params?.layout);
@@ -1195,9 +1258,12 @@ const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   const boxW = layout === "cycle" ? 290 : 360;
   const boxH = layout === "cycle" ? 150 : 176;
   const nodeFont = layout === "cycle" ? 30 : 36;
+  // The square's real px width (the Center wrapper's content box: 6% padding a
+  // side) — the 1000-space scale, needed to fit label text in px.
+  const side = box.width * 0.88;
 
   return (
-    <Center style={{ flexDirection: "column", padding: "10% 6%", gap: 20 }}>
+    <Center style={{ flexDirection: "column", padding: "24px 6%", gap: 20 }}>
       {title ? <div style={{ fontFamily: FONTS.display, color: inkC(dark), fontWeight: FONTS.displayWeight, fontSize: 60, textAlign: "center", textShadow: ENGRAVE_SHADOW }}>{title}</div> : null}
       <div style={{ position: "relative", width: "100%", aspectRatio: "1 / 1" }}>
         <svg viewBox="0 0 1000 1000" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
@@ -1225,10 +1291,14 @@ const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
           const s = spring({ frame: frame - at, fps, config: { damping: 13 } });
           const op = interpolate(frame, [at, at + fps * 0.3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           const border = node.highlight ? COLORS.teal : COLORS.leather;
+          // A label is never clipped: shrink the font until it fits ≤3 lines of
+          // the box width, and let the box GROW (minHeight, no overflow) for
+          // whatever height that needs — the design height only sets the floor.
+          const labelFont = fitFontToBox(node.label, nodeFont, 22, { maxWidth: (boxW / 1000) * side - 40, maxLines: 3, fontFamily: FONTS.display, fontWeight: FONTS.displayWeight });
           return (
-            <div key={i} style={{ position: "absolute", left: `${(p.x / 1000) * 100}%`, top: `${(p.y / 1000) * 100}%`, width: `${(boxW / 1000) * 100}%`, height: `${(boxH / 1000) * 100}%`, transform: `translate(-50%,-50%) scale(${0.7 + 0.3 * s})`, opacity: op, background: COLORS.vellum, border: `3px solid ${border}`, borderRadius: 14, boxShadow: PANEL_SHADOW, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 14, overflow: "hidden" }}>
-              {node.image ? <Img src={node.image} style={{ maxWidth: "60%", maxHeight: "48%", objectFit: "contain" }} /> : null}
-              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.textOnLight, fontWeight: FONTS.displayWeight, fontSize: nodeFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
+            <div key={i} style={{ position: "absolute", left: `${(p.x / 1000) * 100}%`, top: `${(p.y / 1000) * 100}%`, width: `${(boxW / 1000) * 100}%`, minHeight: `${(boxH / 1000) * 100}%`, transform: `translate(-50%,-50%) scale(${0.7 + 0.3 * s})`, opacity: op, background: COLORS.vellum, border: `3px solid ${border}`, borderRadius: 14, boxShadow: PANEL_SHADOW, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 14 }}>
+              {node.image ? <Img src={node.image} style={{ maxWidth: "60%", maxHeight: (boxH / 1000) * side * 0.48, objectFit: "contain" }} /> : null}
+              <span style={{ fontFamily: FONTS.display, color: node.highlight ? COLORS.teal : COLORS.textOnLight, fontWeight: FONTS.displayWeight, fontSize: labelFont, lineHeight: 1.1, textAlign: "center" }}>{node.label}</span>
             </div>
           );
         })}
@@ -1292,6 +1362,35 @@ const resolveAssetUrls = (value: unknown): unknown => {
   return value;
 };
 
+// A generated effect flagged PORTRAIT_LOCKED draws at the portrait STAGE whatever box
+// it is handed, so in a smaller one — the top half of a `split` scene — it paints
+// past the edge and the overflow is cropped away (a 3-node diagram showed only its
+// first node). Give it the canvas it assumes and scale that to fit, centred: all of
+// its content stays on screen, just smaller. A full-size box scales by 1 and is
+// left untouched, as is every effect that honours the `frame` prop.
+const fitPortraitStage = (
+  node: React.ReactNode,
+  frame: { width: number; height: number },
+): React.ReactNode => {
+  const scale = Math.min(frame.width / STAGE.width, frame.height / STAGE.height);
+  if (scale >= 1) return node;
+  return (
+    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+      <div
+        style={{
+          position: "relative",
+          flexShrink: 0,
+          width: STAGE.width,
+          height: STAGE.height,
+          transform: `scale(${scale})`,
+        }}
+      >
+        {node}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 export function renderPrimitive(
   anim: Animation,
   fps: number,
@@ -1302,7 +1401,10 @@ export function renderPrimitive(
   // Custom effects load images raw, so hand them staticFile()-resolved paths.
   const a = isCustom && anim.params ? { ...anim, params: resolveAssetUrls(anim.params) as typeof anim.params } : anim;
   const Comp = PRIMITIVES[anim.primitive] ?? Fade;
-  const node = <Comp anim={a} fps={fps} dark={dark} {...(box ?? frameProps(1080, 1920))} />;
+  const props = box ?? frameProps(STAGE.width, STAGE.height);
+  const node = <Comp anim={a} fps={fps} dark={dark} {...props} />;
+  const body =
+    isCustom && LOCKED.has(anim.primitive) ? fitPortraitStage(node, props.frame) : node;
   // Isolate custom effects behind an error boundary; built-ins are trusted.
-  return isCustom ? <EffectBoundary>{node}</EffectBoundary> : node;
+  return isCustom ? <EffectBoundary>{body}</EffectBoundary> : body;
 }
