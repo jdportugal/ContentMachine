@@ -258,6 +258,19 @@ return [
     | (GPT + style md), render (Remotion) and composition (ffmpeg).
     | The 'fake' driver runs without keys; 'api' wires up the real services.
     */
+    // Unit prices (USD) used by the cost ledger. Adjust to your real plans.
+    'custos' => [
+        'kie_imagem' => env('CUSTO_KIE_IMAGEM', 0.04),          // per generated image
+        'elevenlabs_1k_chars' => env('CUSTO_TTS_1K', 0.30),     // per 1k synthesized chars
+        // USD per 1M tokens [input, output], per LlmClient provider.
+        'llm_mtok' => [
+            'anthropic' => [3.0, 15.0],
+            'openai' => [0.15, 0.60],
+            'tensorx' => [0.50, 2.00],
+            'gemini' => [0.10, 0.40],
+        ],
+    ],
+
     'clips' => [
         'driver' => env('CLIPS_DRIVER', 'fake'),
         // Animation planner: 'claude' (CLI/subscription) or 'openai' (API).

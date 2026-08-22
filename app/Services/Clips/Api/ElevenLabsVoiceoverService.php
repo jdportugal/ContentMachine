@@ -18,6 +18,12 @@ class ElevenLabsVoiceoverService implements VoiceoverService
 
         $voiceId = config('contentmachine.clips.voice_id');
 
+        app(\App\Services\Costs\CostLedger::class)->registar(
+            'elevenlabs',
+            mb_strlen($text) / 1000 * (float) config('contentmachine.custos.elevenlabs_1k_chars', 0.30),
+            mb_strlen($text).' chars',
+        );
+
         $bytes = Http::withHeaders([
             'xi-api-key' => $key,
             'accept' => 'audio/mpeg',

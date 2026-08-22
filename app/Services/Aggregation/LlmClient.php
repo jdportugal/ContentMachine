@@ -217,7 +217,22 @@ class LlmClient
                 'messages' => [['role' => 'user', 'content' => $prompt]],
             ]);
 
+        if ($r->successful()) {
+            $this->registarTokens('anthropic', (int) $r->json('usage.input_tokens'), (int) $r->json('usage.output_tokens'));
+        }
+
         return $r->successful() ? (trim((string) $r->json('content.0.text')) ?: null) : null;
+    }
+
+    /** Record an API call's token spend in the cost ledger (CLI calls cost 0 — not recorded). */
+    private function registarTokens(string $fornecedor, int $entrada, int $saida): void
+    {
+        [$pIn, $pOut] = (array) config("contentmachine.custos.llm_mtok.{$fornecedor}", [0, 0]);
+        app(\App\Services\Costs\CostLedger::class)->registar(
+            $fornecedor,
+            ($entrada * (float) $pIn + $saida * (float) $pOut) / 1_000_000,
+            "{$entrada}+{$saida} tokens",
+        );
     }
 
     private function openai(string $chave, string $prompt, bool $json = false): ?string
@@ -233,6 +248,10 @@ class LlmClient
                 'temperature' => 0.4,
                 'response_format' => $json ? ['type' => 'json_object'] : null,
             ]));
+
+        if ($r->successful()) {
+            $this->registarTokens('openai', (int) $r->json('usage.prompt_tokens'), (int) $r->json('usage.completion_tokens'));
+        }
 
         return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
     }
@@ -256,6 +275,10 @@ class LlmClient
                 'messages' => [['role' => 'user', 'content' => $prompt]],
             ]);
 
+        if ($r->successful()) {
+            $this->registarTokens('tensorx', (int) $r->json('usage.prompt_tokens'), (int) $r->json('usage.completion_tokens'));
+        }
+
         return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
     }
 
@@ -271,6 +294,10 @@ class LlmClient
                 'contents' => [['parts' => [['text' => $prompt]]]],
                 'generationConfig' => $json ? ['responseMimeType' => 'application/json'] : null,
             ]));
+
+        if ($r->successful()) {
+            $this->registarTokens('gemini', (int) $r->json('usageMetadata.promptTokenCount'), (int) $r->json('usageMetadata.candidatesTokenCount'));
+        }
 
         return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : null;
     }

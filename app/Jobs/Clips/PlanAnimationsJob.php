@@ -35,6 +35,7 @@ class PlanAnimationsJob implements ShouldQueue
     public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research, MetadataService $metadata, ClipStore $store): void
     {
         $this->activateProject();
+        app(\App\Services\Costs\CostLedger::class)->contexto('clip', $this->projectId);
         $p = $store->findOrFail($this->projectId);
 
         try {

@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // The active project for this process (defaults to the first registered).
         $this->app->singleton(ProjectContext::class);
+        // Singleton: the piece-context a job sets must be seen by every client.
+        $this->app->singleton(\App\Services\Costs\CostLedger::class);
 
         // The vault (brain/memory) points at the ACTIVE project's directory,
         // resolved per request from the ProjectContext (set by SetActiveProject).

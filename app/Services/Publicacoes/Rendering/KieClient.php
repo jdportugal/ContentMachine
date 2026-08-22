@@ -131,6 +131,11 @@ class KieClient
                     if ($url === '') {
                         throw new \RuntimeException('kie.ai: success without a URL.');
                     }
+                    app(\App\Services\Costs\CostLedger::class)->registar(
+                        'kie.ai',
+                        (float) config('contentmachine.custos.kie_imagem', 0.04),
+                        'image',
+                    );
 
                     return $url;
                 }
