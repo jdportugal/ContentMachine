@@ -64,7 +64,8 @@ class PublicacaoPlanner
         $orientacao = (string) ($kind['plano_prompt'] ?? '');
 
         $regraCartoes = $formato === 'carousel'
-            ? "Generate between {$c['min']} and {$c['max']} cards (the first is the cover)."
+            ? "Generate between {$c['min']} and {$c['max']} cards. Card 1 is the COVER and must be a HOOK: "
+                .'a short title (max 7 words) that creates curiosity or tension and makes the reader swipe — tease, never summarise.'
             : 'Generate exactly 1 card.';
 
         $blocoRefs = '';
@@ -97,8 +98,10 @@ class PublicacaoPlanner
             : '';
         $regraCoerencia = $formato === 'carousel'
             ? "\n        Coherence: the cards form ONE piece — chain them (cover → development → conclusion), without repeating, with a clear thread."
+                ."\n        Each card's first words should pick up the thought the previous card left open."
             : '';
 
+        $lingua = \App\Services\Projects\ProjectLanguage::name();
         $design = app(\App\Services\DesignSystem\DesignSystemRepository::class)->read();
         $blocoDesign = trim($design) !== ''
             ? "\n\n=== DESIGN SYSTEM (brand identity — respect voice, tone and rules) ===\n{$design}\n"
@@ -106,7 +109,8 @@ class PublicacaoPlanner
 
         return <<<PROMPT
         You are the writer of Brand Machine, a library for the age of thinking machines.
-        Write in European Portuguese, sober and cultured tone, NO emojis.{$blocoDesign}
+        Write in {$lingua}, sober and cultured tone, NO emojis.
+        Never use «» guillemets or decorative quotation marks in titles, texts or the caption.{$blocoDesign}
 
         Compose a piece of type «{$kind['label']}» for {$plataforma}.
         Format guidance: {$orientacao}
@@ -120,7 +124,7 @@ class PublicacaoPlanner
           "titulo": "string",
           "legenda": "string (the caption for the post)",
           "tags": ["string"],
-          "slides": [ {"ordem": 1, "titulo": "short string", "texto": "1 to 2 sentences"{$campoRefs}} ]
+          "slides": [ {"ordem": 1, "titulo": "short string", "texto": "1 to 2 sentences", "visual": "concrete image idea for this card — a scene, object or visual metaphor that carries the message (never 'text on background')"{$campoRefs}} ]
         }
         PROMPT;
     }

@@ -49,9 +49,12 @@ class KiePromptComposerTest extends TestCase
             'anteriores' => ['Capa', 'Primeiro ponto'],
         ]);
 
-        $this->assertStringContainsString('Capa', $prompt);
-        $this->assertStringContainsString('Primeiro ponto', $prompt);
-        $this->assertStringContainsString('same visual identity', mb_strtolower($prompt));
+        // Coherence now points at the ATTACHED previous pages (sent as image
+        // input), not at a list of their titles — the card is the next page of
+        // the same series.
+        $this->assertStringContainsString('NEXT PAGE', $prompt);
+        $this->assertStringContainsString('same palette, typography, layout system', $prompt);
+        $this->assertStringContainsString('"Guia"', $prompt);
     }
 
     public function test_prompt_descreve_imagens_anexas(): void

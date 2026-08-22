@@ -81,6 +81,9 @@ class Oficina extends Component
 
     public bool $aRedigir = false;
 
+    /** When the write was requested (unix ts) — lets the poll give up eventually. */
+    public ?int $planPedidoEm = null;
+
     /** Rendering of ALL images in progress. */
     public ?string $imgToken = null;
 
@@ -534,6 +537,7 @@ class Oficina extends Component
 
         $this->planToken = (string) Str::uuid();
         $this->aRedigir = true;
+        $this->planPedidoEm = now()->getTimestamp();
         $this->aviso = 'The AI is writing… (requires a worker: "php artisan queue:work").';
         $this->dispatch('loader-show', message: 'Brand Machine is writing the post…');
 
@@ -550,6 +554,15 @@ class Oficina extends Component
 
         $r = Cache::get(PlanearPublicacaoJob::key($this->planToken));
         if ($r === null) {
+            // The job runs for at most 5 minutes and its result lives for 60 — after
+            // 15 with nothing, the result is gone (expired / worker never ran / app
+            // restarted). Give up honestly instead of spinning forever.
+            if ($this->planPedidoEm !== null && now()->getTimestamp() - $this->planPedidoEm > 15 * 60) {
+                $this->aRedigir = false;
+                $this->dispatch('loader-hide');
+                $this->aviso = 'The writing took too long or its result was lost — check that the worker is running and try again.';
+            }
+
             return;
         }
 
@@ -569,7 +582,7 @@ class Oficina extends Component
 
         if ($this->ehCarrossel()) {
             $this->slides = array_map(
-                fn ($s) => ['titulo' => (string) ($s['titulo'] ?? ''), 'texto' => (string) ($s['texto'] ?? '')],
+                fn ($s) => ['titulo' => (string) ($s['titulo'] ?? ''), 'texto' => (string) ($s['texto'] ?? ''), 'visual' => (string) ($s['visual'] ?? '')],
                 $r['slides'] ?? [],
             );
         } else {

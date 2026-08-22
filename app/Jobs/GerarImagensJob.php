@@ -9,6 +9,7 @@ use App\Services\Publicacoes\Rendering\SlideRenderer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Jobs\Concerns\RunsInProject;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Http;
  */
 class GerarImagensJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     public int $timeout = 900;
 
@@ -60,10 +61,14 @@ class GerarImagensJob implements ShouldQueue
         public array $prompts = [],
         public array $anexos = [],
         public array $anexosDescr = [],
-    ) {}
+    ) {
+        $this->captureProject();
+    }
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
     {
+        $this->activateProject();
+        app(\App\Services\Costs\CostLedger::class)->contexto('publicacao', $this->notaSlug !== '' ? $this->notaSlug : $this->token);
         try {
             $kind = $kinds->get($this->tipo) ?? [];
             if ($this->proporcao !== '') {

@@ -33,7 +33,7 @@ class PublicacaoPlan
                 if ($t === '' && $x === '') {
                     continue;
                 }
-                $out[] = new SlidePlano(count($out) + 1, $t !== '' ? $t : 'Cartão '.(count($out) + 1), $x);
+                $out[] = new SlidePlano(count($out) + 1, $t !== '' ? $t : 'Cartão '.(count($out) + 1), $x, visual: trim((string) ($s['visual'] ?? '')));
             }
 
             return new self($titulo, '', $tags, $out);

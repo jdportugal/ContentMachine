@@ -36,6 +36,28 @@ class PublicacaoPlannerTest extends TestCase
         $this->ultimoPrompt = $prompt;
     }
 
+    /** O prompt pede capa-gancho, ideia visual por cartão e proíbe «». */
+    public function test_o_prompt_pede_gancho_visual_e_proibe_guillemets(): void
+    {
+        $this->planner(null)->planear('carrossel', 'termos de IA', 'instagram');
+
+        $this->assertStringContainsString('HOOK', (string) $this->ultimoPrompt);
+        $this->assertStringContainsString('"visual"', (string) $this->ultimoPrompt);
+        $this->assertStringContainsString('Never use «» guillemets', (string) $this->ultimoPrompt);
+    }
+
+    /** O prompt escreve na língua do PROJETO ativo — não em PT fixo. */
+    public function test_o_prompt_escreve_na_lingua_do_projeto(): void
+    {
+        app()->setLocale('en');
+        $this->planner(null)->planear('carrossel', 'AI terms', 'instagram');
+        $this->assertStringContainsString('Write in English', (string) $this->ultimoPrompt);
+
+        app()->setLocale('pt');
+        $this->planner(null)->planear('carrossel', 'termos de IA', 'instagram');
+        $this->assertStringContainsString('Write in European Portuguese', (string) $this->ultimoPrompt);
+    }
+
     public function test_usa_o_json_da_ia_quando_disponivel(): void
     {
         $json = <<<'JSON'

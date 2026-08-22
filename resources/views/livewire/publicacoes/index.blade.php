@@ -52,6 +52,10 @@
                     </div>
                     <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}" class="font-display text-xl text-ink hover:text-teal transition leading-tight">{{ $nota->title() }}</a>
                 </div>
+                @if (($custos[$nota->slug()] ?? 0) > 0)
+                    <span class="shrink-0 font-mono text-[0.62rem] text-ink-soft border border-ink-soft/25 rounded-sm px-2 py-0.5"
+                          title="Provider spend recorded for this post (card images, LLM tokens)">≈ ${{ number_format($custos[$nota->slug()], 2) }}</span>
+                @endif
                 <a href="{{ route('publicacoes.oficina', ['tipo' => $tipo, 'nota' => $nota->slug()]) }}"
                    class="shrink-0 font-mono text-[0.62rem] text-teal hover:underline">edit →</a>
                 @unless ($gerando || $agendado)

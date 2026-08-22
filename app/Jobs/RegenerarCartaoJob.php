@@ -8,6 +8,7 @@ use App\Services\Publicacoes\Rendering\SlideRenderer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Jobs\Concerns\RunsInProject;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Http;
  */
 class RegenerarCartaoJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     public int $timeout = 600;
 
@@ -39,10 +40,14 @@ class RegenerarCartaoJob implements ShouldQueue
         public string $prompt = '',        // kie prompt edited in the workshop ('' = compose)
         public array $anexos = [],          // paths of images attached to this card
         public array $anexosDescr = [],     // descriptions of the images attached to this card
-    ) {}
+    ) {
+        $this->captureProject();
+    }
 
     public function handle(SlideRenderer $renderer, PublicacaoKinds $kinds): void
     {
+        $this->activateProject();
+        app(\App\Services\Costs\CostLedger::class)->contexto('publicacao', $this->token);
         $kind = $kinds->get($this->tipo) ?? [];
         $cor = (string) (config('contentmachine.plataformas_meta.'.$this->plataforma.'.cor') ?? '#1f7a7a');
         $kind = array_merge($kind, [

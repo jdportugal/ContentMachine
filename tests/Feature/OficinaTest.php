@@ -11,6 +11,51 @@ use Tests\TestCase;
 
 class OficinaTest extends TestCase
 {
+    /**
+     * A write whose cached result was lost (expired TTL, app restart, worker never
+     * ran) left the spinner up FOREVER — the poll found nothing and kept waiting.
+     * After 15 minutes with no result it must give up and say so.
+     */
+    public function test_a_escrita_desiste_quando_o_resultado_se_perde(): void
+    {
+        \Livewire\Livewire::test(\App\Livewire\Publicacoes\Oficina::class, ['tipo' => 'carrossel'])
+            ->set('aRedigir', true)
+            ->set('planToken', 'tok-perdido')
+            ->set('planPedidoEm', now()->getTimestamp() - 16 * 60)
+            ->call('verificarPlano')
+            ->assertSet('aRedigir', false)
+            ->assertSet('aviso', fn ($v) => is_string($v) && str_contains($v, 'try again'));
+    }
+
+    /** Within the window, no result just means "still writing" — keep waiting. */
+    public function test_a_escrita_continua_a_espera_dentro_da_janela(): void
+    {
+        \Livewire\Livewire::test(\App\Livewire\Publicacoes\Oficina::class, ['tipo' => 'carrossel'])
+            ->set('aRedigir', true)
+            ->set('planToken', 'tok-recente')
+            ->set('planPedidoEm', now()->getTimestamp() - 60)
+            ->call('verificarPlano')
+            ->assertSet('aRedigir', true);
+    }
+
+    /** O prompt do cartão é visual-first, encadeia a série e não desenha «». */
+    public function test_prompt_do_cartao_e_visual_e_sem_guillemets(): void
+    {
+        $composer = app(\App\Services\Publicacoes\Rendering\KiePromptComposer::class);
+        $slide = new \App\Services\Publicacoes\Dto\SlidePlano(2, 'Token', 'A unidade mínima.', [], 'uma balança antiga');
+
+        $prompt = $composer->paraCartao($slide, [
+            'capa' => false, 'ordem' => 2, 'total' => 5,
+            'postTitulo' => 'Termos de IA', 'anteriores' => ['Capa'],
+        ]);
+
+        $this->assertStringContainsString('uma balança antiga', $prompt, 'a ideia visual do planner entra no prompt');
+        $this->assertStringContainsString('NEXT PAGE', $prompt, 'a coerência aponta para as páginas anexadas');
+        $this->assertStringContainsString('TITLE: Token', $prompt);
+        $this->assertStringNotContainsString('«Token»', $prompt, 'o texto a desenhar não leva guillemets');
+        $this->assertStringContainsString('Do NOT draw quotation marks', $prompt);
+    }
+
     private string $tmp;
 
     protected function setUp(): void

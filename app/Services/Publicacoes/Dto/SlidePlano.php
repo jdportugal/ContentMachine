@@ -16,6 +16,7 @@ class SlidePlano
         public string $titulo,
         public string $texto,
         public array $referencias = [],
+        public string $visual = '', // the card's image idea (scene/metaphor), from the planner
     ) {}
 
     /** @param array<string,mixed> $dados */
@@ -32,6 +33,7 @@ class SlidePlano
             titulo: trim((string) ($dados['titulo'] ?? '')),
             texto: trim((string) ($dados['texto'] ?? '')),
             referencias: $refs,
+            visual: trim((string) ($dados['visual'] ?? '')),
         );
     }
 }

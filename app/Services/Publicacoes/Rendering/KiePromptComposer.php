@@ -41,17 +41,23 @@ class KiePromptComposer
         $anexos = array_values(array_filter($ctx['anexos'] ?? [], fn ($d) => trim((string) $d) !== ''));
 
         $papel = $capa
-            ? 'It is the COVER of the carousel: large, central, highly legible title.'
-            : 'It is a CONTENT card: title at the top and the text below, with breathing room.';
+            ? 'It is the COVER of the carousel — a scroll-stopping HOOK: one bold, striking visual with the title large and highly legible over/around it.'
+            : 'It is a CONTENT card: a strong visual carries the idea; the title and text are composed INTO the design, with breathing room.';
+
+        // The card's image idea, from the planner; without one, derive from the text.
+        $visual = trim($s->visual) !== ''
+            ? $s->visual
+            : 'a concrete scene, object or visual metaphor that embodies the card\'s message';
 
         // The position is CONTEXT — never text to be drawn.
         $contexto = $total > 1
-            ? "CONTEXT (do not draw): this is card {$ordem} of {$total} of a cohesive carousel"
-                .($ctx['postTitulo'] ?? '' ? " titled «{$ctx['postTitulo']}»" : '').'.'
+            ? "CONTEXT (do not draw): this is card {$ordem} of {$total} of one cohesive carousel"
+                .($ctx['postTitulo'] ?? '' ? ' titled "'.$ctx['postTitulo'].'"' : '').'.'
             : '';
         if ($anteriores !== []) {
-            $contexto .= "\nPrevious cards (to keep the SAME visual identity, palette and composition): "
-                .implode(' · ', array_map(fn ($t) => '«'.$t.'»', $anteriores)).'.';
+            $contexto .= "\nSERIES: the attached input images ARE the cover and most recent pages of this same carousel. "
+                .'Design this card as the NEXT PAGE of that series — exactly the same palette, typography, layout system '
+                .'and illustration style, but NEW content and a varied composition (a page from the same book, never a copy).';
         }
 
         $blocoAnexos = $anexos !== []
@@ -59,23 +65,29 @@ class KiePromptComposer
                 .implode('; ', $anexos).'.'
             : '';
 
-        $texto = $s->texto !== '' ? 'SUPPORTING TEXT (exact): «'.$s->texto.'»' : '';
+        $texto = $s->texto !== '' ? "TEXT: {$s->texto}" : '';
         $estilo = $this->estiloMarca();
+        $lingua = \App\Services\Projects\ProjectLanguage::name();
 
         return trim(<<<PROMPT
         Card for social media. Aspect ratio {$proporcao}. {$papel}
         {$contexto}
 
+        VISUAL (the heart of the card): {$visual}.
+        The card must be a designed graphic composition — the visual occupies most of the card
+        and the text is set into it. Never text alone on a plain background.
+
         {$estilo}{$blocoAnexos}
 
         Invariable rules: NO third-party brand logos, NO emojis, NO watermarks,
-        NO page numbering or counters (do not write «{$ordem}/{$total}», «{$ordem} of {$total}» or anything of the sort on the card).
-        Compose the following text, written EXACTLY like this, in European Portuguese:
-        TITLE: «{$s->titulo}»
+        NO page numbering or counters (never write "{$ordem}/{$total}" or "{$ordem} of {$total}" on the card).
+        Do NOT draw quotation marks or «» guillemets — no characters that are not in the text below.
+        Render EXACTLY this text, in {$lingua}, and nothing else:
+        TITLE: {$s->titulo}
         {$texto}
 
         Text rule: render ALL text as real, sharp, well-spaced letters and WITHOUT spelling
-        errors. Do not invent, translate or alter words. The text is the central element of the card.
+        errors. Do not invent, translate or alter words.
         PROMPT);
     }
 
@@ -85,9 +97,9 @@ class KiePromptComposer
         return trim(<<<PROMPT
         Edit the provided image of this card, keeping the SAME brand visual identity, the same
         composition and the same legible, error-free text.
-        Apply ONLY this requested change: «{$instrucao}».
-        Keep the title «{$s->titulo}» correct and legible. No emojis, no third-party logos,
-        no page numbering.
+        Apply ONLY this requested change: {$instrucao}
+        Keep the title "{$s->titulo}" correct and legible. No emojis, no third-party logos,
+        no page numbering, no drawn quotation marks or «» guillemets.
         PROMPT);
     }
 
@@ -118,7 +130,7 @@ class KiePromptComposer
             $partes = array_filter([
                 (isset($c['bg'], $c['textOnBg']) ? "Palette: background {$c['bg']}, text {$c['textOnBg']}" : '')
                     .(isset($c['accent']) ? ", accent {$c['accent']}" : '').(isset($c['accent2']) ? " / {$c['accent2']}" : '').'.',
-                isset($f['display'], $f['body']) ? "Typography: titles like «{$f['display']}», body like «{$f['body']}»." : '',
+                isset($f['display'], $f['body']) ? "Typography: titles like {$f['display']}, body like {$f['body']}." : '',
                 ! empty($tokens['texture']['kind']) ? "Background/texture: {$tokens['texture']['kind']}." : '',
             ]);
             if ($partes !== []) {

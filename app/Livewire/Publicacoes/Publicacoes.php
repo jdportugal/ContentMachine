@@ -74,6 +74,8 @@ class Publicacoes extends Component
 
     public function render()
     {
-        return view('livewire.publicacoes.index');
+        return view('livewire.publicacoes.index', [
+            'custos' => app(\App\Services\Costs\CostLedger::class)->totaisPorPeca('publicacao'),
+        ]);
     }
 }

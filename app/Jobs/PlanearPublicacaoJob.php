@@ -6,6 +6,7 @@ use App\Services\Publicacoes\PublicacaoPlanner;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Jobs\Concerns\RunsInProject;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Cache;
  */
 class PlanearPublicacaoJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     public int $timeout = 300;
 
@@ -35,10 +36,14 @@ class PlanearPublicacaoJob implements ShouldQueue
         public string $plataforma,
         public string $token,
         public array $referencias = [],
-    ) {}
+    ) {
+        $this->captureProject();
+    }
 
     public function handle(PublicacaoPlanner $planner): void
     {
+        $this->activateProject();
+        app(\App\Services\Costs\CostLedger::class)->contexto('publicacao', $this->token);
         $plano = $planner->planear($this->tipo, $this->brief, $this->plataforma, $this->referencias);
 
         Cache::put(self::key($this->token), [
@@ -47,15 +52,15 @@ class PlanearPublicacaoJob implements ShouldQueue
             'titulo' => $plano->titulo,
             'legenda' => $plano->legenda,
             'slides' => array_map(
-                fn ($s) => ['titulo' => $s->titulo, 'texto' => $s->texto, 'referencias' => $s->referencias],
+                fn ($s) => ['titulo' => $s->titulo, 'texto' => $s->texto, 'visual' => $s->visual, 'referencias' => $s->referencias],
                 $plano->slides,
             ),
-        ], now()->addMinutes(15));
+        ], now()->addMinutes(60));
     }
 
     public function failed(\Throwable $e): void
     {
-        Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(15));
+        Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(60));
     }
 
     public static function key(string $token): string
