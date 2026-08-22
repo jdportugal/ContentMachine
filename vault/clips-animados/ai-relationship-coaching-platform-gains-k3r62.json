@@ -1,0 +1,706 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "AI Is Changing Couples Therapy — Meet CoupleWork",
+    "source_path": "clips/uploads/0ZYi7uTHQ6l37NwJWu0cD30O9kBOhpJMhFRh7cbj.mp4",
+    "images": [],
+    "meta": {
+        "allowed_present": [
+            "over",
+            "split"
+        ],
+        "background": "auto",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "AI relationship coaching and CoupleWork",
+            "summary": "CoupleWork, co-founded by veteran couples counselor Clay Cockrell, offers an AI coach named Maxine built on Gottman Method and Emotionally Focused Therapy, as Americans increasingly turn to AI chatbots for emotional support.",
+            "timeline": [
+                {
+                    "label": "13.1% of US youth (12-21) used AI chatbots for mental health advice",
+                    "sublabel": "2025 (RAND)"
+                },
+                {
+                    "label": "Pew: 49% of US adults now use AI chatbots",
+                    "sublabel": "Feb 2026 survey"
+                },
+                {
+                    "label": "19.2% of US youth using AI chatbots for mental health advice",
+                    "sublabel": "2026 (RAND)"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "US adults using AI chatbots (Pew, Feb 2026)",
+                    "value": 49,
+                    "unit": "%"
+                },
+                {
+                    "label": "US adults using chatbots for emotional support (Pew, 2026)",
+                    "value": 10,
+                    "unit": "%"
+                },
+                {
+                    "label": "Adults under 30 using chatbots for emotional support (Pew, 2026)",
+                    "value": 20,
+                    "unit": "%"
+                },
+                {
+                    "label": "Youth 12-21 using AI chatbots for mental health advice (RAND, 2026)",
+                    "value": 19.2,
+                    "unit": "%"
+                },
+                {
+                    "label": "CoupleWork subscription, covers both partners",
+                    "value": 24.95,
+                    "unit": "USD/month"
+                },
+                {
+                    "label": "Typical US couples therapy session, upper range (2026)",
+                    "value": 300,
+                    "unit": "USD"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "AI coaching vs traditional couples therapy",
+                    "left": {
+                        "title": "CoupleWork AI (Maxine)",
+                        "points": [
+                            "$24.95/month for both partners",
+                            "24/7 voice or text access",
+                            "Built on Gottman Method and EFT frameworks"
+                        ]
+                    },
+                    "right": {
+                        "title": "Traditional couples therapy",
+                        "points": [
+                            "$150-$300 per session out of pocket (US, 2026)",
+                            "Often not covered by insurance",
+                            "Licensed human therapist"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Clay Cockrell, a New York couples counselor with 30+ years of experience who pioneered walk-and-talk therapy in Central Park, co-founded CoupleWork.",
+                "CoupleWork's AI coach Maxine handles communication, conflict resolution, intimacy, and infidelity, remembering relationship context across sessions.",
+                "Pew (Feb 2026): 1 in 10 US adults use AI chatbots for emotional support, rising to 1 in 5 among adults under 30.",
+                "RAND (2026): AI mental-health advice use among ages 12-21 jumped from 13.1% to 19.2% in one year.",
+                "One CoupleWork subscription costs less than a fraction of a single traditional therapy session."
+            ],
+            "sources": [
+                "https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/",
+                "https://www.pewresearch.org/chart/search-and-work-are-the-most-common-uses-for-chatbots-1-in-10-use-these-tools-for-emotional-support/",
+                "https://www.rand.org/news/press/2026/06/nearly-1-in-5-us-adolescents-and-young-adults-use-ai.html",
+                "https://www.washingtontimes.com/news/2026/jun/11/nearly-1-5-teens-young-adults-turn-ai-chatbots-mental-health-advice/",
+                "https://www.startuphub.ai/ai-news/artificial-intelligence/2026/ai-for-relationships-promise-and-peril",
+                "https://couplework.ai/about-us/",
+                "https://www.futurepedia.io/tool/couplework",
+                "https://apps.apple.com/us/app/couplework-ai-couples-coach/id6504302751",
+                "https://thriveworks.com/help-with/beginning-therapy/how-much-is-couples-therapy/",
+                "https://www.connectedcouples.app/blog/couples-therapy-statistics"
+            ]
+        },
+        "suggested": {
+            "title": "AI Is Changing Couples Therapy — Meet CoupleWork",
+            "description": "Veteran couples counselor Clay Cockrell co-founded CoupleWork, a platform using AI to coach people through modern relationship challenges. As more people turn to AI for emotional support, Cockrell believes it can strengthen human connection — while cautioning that not every AI tool out there is helping. Here's how AI is reshaping relationship counseling.",
+            "tags": [
+                "AI relationship coaching",
+                "CoupleWork",
+                "couples therapy",
+                "artificial intelligence",
+                "relationship advice",
+                "Clay Cockrell",
+                "mental health tech"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "The brand logo, centred on a transparent background.",
+                "label": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "image_text": []
+    },
+    "id": "ai-relationship-coaching-platform-gains-k3r62",
+    "created_at": "2026-08-21T16:48:02+00:00",
+    "updated_at": "2026-08-21T16:59:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-relationship-coaching-platform-gains-k3r62/audio.m4a",
+    "transcript": {
+        "duration": 35.52000045776367,
+        "text": "This AI relationship coaching platform is gaining traction. AI is transforming the landscape of relationship counseling, according to experts. CoupleWork, co-founded by experienced couples counselor Clay Cockrell, leverages AI to provide relationship coaching. With a significant number of users turning to AI for emotional support, the platform aims to address unique challenges of modern relationships. Cockrell emphasizes the potential of AI to enhance human connections, although he learns that not all current implementations are beneficial. The platform seeks to harness AI's capability to improve relationship dynamics effectively.",
+        "language": "english",
+        "words": [
+            {
+                "word": "This",
+                "start": 0,
+                "end": 0.2800000011920929
+            },
+            {
+                "word": "AI",
+                "start": 0.2800000011920929,
+                "end": 0.5
+            },
+            {
+                "word": "relationship",
+                "start": 0.5,
+                "end": 1.1200000047683716
+            },
+            {
+                "word": "coaching",
+                "start": 1.1200000047683716,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "platform",
+                "start": 1.4199999570846558,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "is",
+                "start": 1.9600000381469727,
+                "end": 2.299999952316284
+            },
+            {
+                "word": "gaining",
+                "start": 2.299999952316284,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "traction",
+                "start": 2.559999942779541,
+                "end": 3.0199999809265137
+            },
+            {
+                "word": "AI",
+                "start": 3.5999999046325684,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "is",
+                "start": 3.6600000858306885,
+                "end": 4.179999828338623
+            },
+            {
+                "word": "transforming",
+                "start": 4.179999828338623,
+                "end": 4.179999828338623
+            },
+            {
+                "word": "the",
+                "start": 4.179999828338623,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "landscape",
+                "start": 4.800000190734863,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "of",
+                "start": 4.800000190734863,
+                "end": 5.119999885559082
+            },
+            {
+                "word": "relationship",
+                "start": 5.119999885559082,
+                "end": 5.639999866485596
+            },
+            {
+                "word": "counseling",
+                "start": 5.639999866485596,
+                "end": 6.059999942779541
+            },
+            {
+                "word": "according",
+                "start": 6.239999771118164,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "to",
+                "start": 6.460000038146973,
+                "end": 6.820000171661377
+            },
+            {
+                "word": "experts",
+                "start": 6.820000171661377,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "CoupleWork",
+                "start": 7.960000038146973,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "co",
+                "start": 8.619999885559082,
+                "end": 8.9399995803833
+            },
+            {
+                "word": "founded",
+                "start": 8.9399995803833,
+                "end": 8.9399995803833
+            },
+            {
+                "word": "by",
+                "start": 8.9399995803833,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "experienced",
+                "start": 9.279999732971191,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "couples",
+                "start": 9.720000267028809,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "counselor",
+                "start": 10.260000228881836,
+                "end": 10.720000267028809
+            },
+            {
+                "word": "Clay",
+                "start": 10.720000267028809,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "Cockrell",
+                "start": 11.100000381469727,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "leverages",
+                "start": 11.920000076293945,
+                "end": 12.239999771118164
+            },
+            {
+                "word": "AI",
+                "start": 12.239999771118164,
+                "end": 12.520000457763672
+            },
+            {
+                "word": "to",
+                "start": 12.520000457763672,
+                "end": 12.760000228881836
+            },
+            {
+                "word": "provide",
+                "start": 12.760000228881836,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "relationship",
+                "start": 13.100000381469727,
+                "end": 13.720000267028809
+            },
+            {
+                "word": "coaching",
+                "start": 13.720000267028809,
+                "end": 14.15999984741211
+            },
+            {
+                "word": "With",
+                "start": 14.399999618530273,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "a",
+                "start": 14.920000076293945,
+                "end": 15.15999984741211
+            },
+            {
+                "word": "significant",
+                "start": 15.15999984741211,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "number",
+                "start": 15.460000038146973,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "of",
+                "start": 15.739999771118164,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "users",
+                "start": 16.200000762939453,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "turning",
+                "start": 16.200000762939453,
+                "end": 16.540000915527344
+            },
+            {
+                "word": "to",
+                "start": 16.540000915527344,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "AI",
+                "start": 16.920000076293945,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "for",
+                "start": 16.979999542236328,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "emotional",
+                "start": 17.219999313354492,
+                "end": 17.6200008392334
+            },
+            {
+                "word": "support",
+                "start": 17.6200008392334,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "the",
+                "start": 18.18000030517578,
+                "end": 18.3799991607666
+            },
+            {
+                "word": "platform",
+                "start": 18.3799991607666,
+                "end": 18.65999984741211
+            },
+            {
+                "word": "aims",
+                "start": 18.65999984741211,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "to",
+                "start": 18.940000534057617,
+                "end": 19.34000015258789
+            },
+            {
+                "word": "address",
+                "start": 19.34000015258789,
+                "end": 19.34000015258789
+            },
+            {
+                "word": "unique",
+                "start": 19.34000015258789,
+                "end": 19.68000030517578
+            },
+            {
+                "word": "challenges",
+                "start": 19.68000030517578,
+                "end": 19.979999542236328
+            },
+            {
+                "word": "of",
+                "start": 19.979999542236328,
+                "end": 20.299999237060547
+            },
+            {
+                "word": "modern",
+                "start": 20.299999237060547,
+                "end": 20.65999984741211
+            },
+            {
+                "word": "relationships",
+                "start": 20.65999984741211,
+                "end": 21.420000076293945
+            },
+            {
+                "word": "Cockrell",
+                "start": 22.760000228881836,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "emphasizes",
+                "start": 22.899999618530273,
+                "end": 23.5
+            },
+            {
+                "word": "the",
+                "start": 23.5,
+                "end": 23.780000686645508
+            },
+            {
+                "word": "potential",
+                "start": 23.780000686645508,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "of",
+                "start": 24.100000381469727,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "AI",
+                "start": 24.3799991607666,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "to",
+                "start": 24.479999542236328,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "enhance",
+                "start": 24.959999084472656,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "human",
+                "start": 24.959999084472656,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "connections",
+                "start": 25.299999237060547,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "although",
+                "start": 26.299999237060547,
+                "end": 26.65999984741211
+            },
+            {
+                "word": "he",
+                "start": 26.65999984741211,
+                "end": 27
+            },
+            {
+                "word": "learns",
+                "start": 27,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "that",
+                "start": 27.139999389648438,
+                "end": 27.360000610351562
+            },
+            {
+                "word": "not",
+                "start": 27.360000610351562,
+                "end": 27.600000381469727
+            },
+            {
+                "word": "all",
+                "start": 27.600000381469727,
+                "end": 27.81999969482422
+            },
+            {
+                "word": "current",
+                "start": 27.81999969482422,
+                "end": 28.200000762939453
+            },
+            {
+                "word": "implementations",
+                "start": 28.200000762939453,
+                "end": 28.739999771118164
+            },
+            {
+                "word": "are",
+                "start": 28.739999771118164,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "beneficial",
+                "start": 28.979999542236328,
+                "end": 29.5
+            },
+            {
+                "word": "The",
+                "start": 30.079999923706055,
+                "end": 30.260000228881836
+            },
+            {
+                "word": "platform",
+                "start": 30.260000228881836,
+                "end": 30.540000915527344
+            },
+            {
+                "word": "seeks",
+                "start": 30.540000915527344,
+                "end": 30.8799991607666
+            },
+            {
+                "word": "to",
+                "start": 30.8799991607666,
+                "end": 31.15999984741211
+            },
+            {
+                "word": "harness",
+                "start": 31.15999984741211,
+                "end": 31.219999313354492
+            },
+            {
+                "word": "AI's",
+                "start": 31.219999313354492,
+                "end": 31.719999313354492
+            },
+            {
+                "word": "capability",
+                "start": 31.719999313354492,
+                "end": 32.08000183105469
+            },
+            {
+                "word": "to",
+                "start": 32.08000183105469,
+                "end": 32.459999084472656
+            },
+            {
+                "word": "improve",
+                "start": 32.459999084472656,
+                "end": 32.459999084472656
+            },
+            {
+                "word": "relationship",
+                "start": 32.459999084472656,
+                "end": 33.099998474121094
+            },
+            {
+                "word": "dynamics",
+                "start": 33.099998474121094,
+                "end": 33.58000183105469
+            },
+            {
+                "word": "effectively",
+                "start": 33.58000183105469,
+                "end": 34.119998931884766
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.52000045776367,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.6,
+                "background": "video",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "gaining traction",
+                "present": "over",
+                "layers": []
+            },
+            {
+                "start": 3.6,
+                "end": 7.96,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "transforming",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "AI Meets Counseling",
+                            "lines": [
+                                "49% of US adults now use AI chatbots",
+                                "Pew Research, Feb 2026"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.96,
+                "end": 14.4,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "CoupleWork",
+                "present": "split",
+                "layers": []
+            },
+            {
+                "start": 14.4,
+                "end": 21.42,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "emotional support",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "AI for Emotional Support",
+                            "unit": "%",
+                            "bars": [
+                                {
+                                    "label": "All adults",
+                                    "value": 10
+                                },
+                                {
+                                    "label": "Under 30",
+                                    "value": 20,
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.42,
+                "end": 29.5,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "human connections",
+                "present": "over",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Promise & Peril",
+                            "lines": [
+                                "AI can strengthen human connection",
+                                "Not every implementation helps"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.5,
+                "end": 35.52000045776367,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "effectively",
+                "present": "split",
+                "layers": []
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-relationship-coaching-platform-gains-k3r62/clip.mp4"
+}

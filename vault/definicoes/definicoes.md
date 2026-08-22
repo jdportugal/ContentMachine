@@ -53,6 +53,15 @@ canais:
     - 'https://www.linkedin.com/in/nick-saraev/'
 shorts:
   whisper_model: ''
+blotato:
+  youtube: '20629'
+  instagram: '23253'
+  tiktok: '22655'
+  linkedin: ''
+  threads: ''
+zernio:
+  profile: ''
+  instagram: ''
 modelos:
   llm_provider: ''
   anthropic_model: ''
@@ -61,6 +70,22 @@ modelos:
   aggregation_limit: ''
   aggregation_timeout: ''
   elevenlabs_voice: BNgbHR0DNeZixGQVzloa
+  clip_provider: ''
+  tensorx_model: ''
+passos:
+  noticias_escrita: ''
+  noticias_dicas: ''
+  publicacoes_plano: ''
+  shorts_selecao: ''
+  clips_pesquisa: ''
+  clips_plano: ''
+  clips_metadados: ''
+  vfx_site: ''
+  clips_transcricao: ''
+  clips_voz: ''
+  clips_sfx: ''
+  clips_imagens: ''
+  publicacoes_cartoes: ''
 ---
 
 Definições operacionais da Máquina de Conteúdo.

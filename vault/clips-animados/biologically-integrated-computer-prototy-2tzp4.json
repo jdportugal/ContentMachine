@@ -1,0 +1,801 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "This Computer Runs on Living Human Neurons",
+    "source_path": "clips/uploads/wcWenQcR4ZaTMqknAmQrOXW3nT2ZzqrftLAmA1ec.mp4",
+    "images": [
+        {
+            "id": "img_f740e318",
+            "path": "clips/uploads/jxtQZpmXVdWnzh2iSYtTF7GLLOEJS727oPhebp2Q.png",
+            "description": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        }
+    ],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "background": "auto",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.2,
+        "research": {
+            "topic": "Cortical Labs CL1 — biological computer with living human neurons in Singapore",
+            "summary": "On August 17, 2026, DayOne, Cortical Labs and NUS Medicine launched Singapore's first biological data center prototype: a server rack of 20 CL1 units, each running ~800,000 lab-grown human neurons on a silicon electrode chip at roughly 30 watts per unit.",
+            "timeline": [
+                {
+                    "label": "DishBrain neurons learn Pong in ~5 min",
+                    "sublabel": "Oct 2022"
+                },
+                {
+                    "label": "CL1 biological computer unveiled ($35,000)",
+                    "sublabel": "Mar 2025"
+                },
+                {
+                    "label": "First CL1 units ship to researchers",
+                    "sublabel": "Mid 2025"
+                },
+                {
+                    "label": "20-unit biological server rack live at NUS, Singapore",
+                    "sublabel": "Aug 17, 2026"
+                },
+                {
+                    "label": "Planned ~1,000-unit Bio Data Centre",
+                    "sublabel": "From late 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Human neurons per CL1 unit",
+                    "value": 800000,
+                    "unit": "neurons"
+                },
+                {
+                    "label": "Power draw per CL1 unit",
+                    "value": 30,
+                    "unit": "watts"
+                },
+                {
+                    "label": "CL1 units in Singapore rack",
+                    "value": 20,
+                    "unit": "units"
+                },
+                {
+                    "label": "Full rack power consumption",
+                    "value": 1000,
+                    "unit": "watts (max)"
+                },
+                {
+                    "label": "CL1 unit price",
+                    "value": 35000,
+                    "unit": "USD"
+                },
+                {
+                    "label": "Neuron viability on chip",
+                    "value": 6,
+                    "unit": "months (up to)"
+                },
+                {
+                    "label": "Wetware-as-a-Service access",
+                    "value": 300,
+                    "unit": "USD/week"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Biological computing vs traditional AI hardware",
+                    "left": {
+                        "title": "CL1 neuron rack",
+                        "points": [
+                            "~30 W per unit; full rack 850–1,000 W",
+                            "Neurons adapt and learn from electrical feedback",
+                            "Cells stay viable up to 6 months"
+                        ]
+                    },
+                    "right": {
+                        "title": "GPU-based AI servers",
+                        "points": [
+                            "Single AI GPU can draw ~700 W or more",
+                            "Fixed silicon; learning done in software",
+                            "Hardware runs for years but at high energy cost"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Neurons are grown from human induced pluripotent stem cells (from donor blood or skin) onto a multielectrode silicon chip",
+                "In 2022 the same team's DishBrain showed 800,000 neurons learning Pong in about 5 minutes",
+                "The Singapore rack at NUS Medicine is the world's first independently operated biologically integrated server rack",
+                "Sold at $35,000 per unit, ~$20,000/unit in 30-unit racks, or remote 'Wetware-as-a-Service' access for ~$300/week",
+                "Target uses: drug discovery, disease modeling and energy-efficient adaptive computing — still a research prototype"
+            ],
+            "sources": [
+                "https://www.prnewswire.com/apac/news-releases/dayone-launches-singapores-first-biological-data-center-prototype-with-cortical-labs-and-nus-medicine-302852460.html",
+                "https://www.datacenterdynamics.com/en/news/dayone-partners-with-cortical-labs-nus-medicine-for-deployment-of-singapores-first-biological-data-center-prototype/",
+                "https://thenextweb.com/news/singapore-biological-data-centre-cortical-labs-neurons",
+                "https://www.techtimes.com/articles/324670/20260817/worlds-first-brain-cell-server-rack-opens-singapore-neurons-expire-six-months.htm",
+                "https://www.forbes.com/sites/johnkoetsier/2025/06/04/hardware-software-meet-wetware-a-computer-with-800000-human-neurons/",
+                "https://gizmodo.com/this-35000-computer-is-powered-by-trapped-human-brain-cells-2000573993",
+                "https://www.notebookcheck.net/CL1-wetware-computer-plays-Doom-as-its-living-brain-cells-form-data-centers-that-sip-power-unlike-Nvidia-GPUs.1246944.0.html",
+                "https://www.cell.com/neuron/fulltext/S0896-6273(22)00806-6",
+                "https://corticallabs.com/cl1"
+            ]
+        },
+        "suggested": {
+            "title": "This Computer Runs on Living Human Neurons",
+            "description": "Cortical Labs has unveiled a working computer in Singapore built with living human neurons grown from stem cells. Each unit packs around 200,000 neurons on a chip that adapts and responds to electrical signals, all while consuming just 30 watts. This biological prototype could reshape how we approach complex problem solving.",
+            "tags": [
+                "biocomputing",
+                "cortical labs",
+                "human neurons",
+                "artificial intelligence",
+                "future technology",
+                "brain on a chip",
+                "science news"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "The brand logo, centred on a transparent background.",
+                "label": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "image_text": []
+    },
+    "id": "biologically-integrated-computer-prototy-2tzp4",
+    "created_at": "2026-08-21T13:01:16+00:00",
+    "updated_at": "2026-08-21T14:23:59+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/biologically-integrated-computer-prototy-2tzp4/audio.m4a",
+    "transcript": {
+        "duration": 33.040000915527344,
+        "text": "A biologically integrated computer was just announced. A groundbreaking computer made with living human neurons is now operational at Singapore. Cortical Labs has developed a unique computer prototype that incorporates living human neurons grown from stem cells. Each unit has around 200 000 neurons on a chip that processes electrical signals, allowing the cells to adapt and respond. This biologically integrated server rack consumes only 30 watts, significantly less than traditional AI ships. While it's still a prototype, this innovation could pave the way for future applications in complex problem solving.",
+        "language": "english",
+        "words": [
+            {
+                "word": "A",
+                "start": 0,
+                "end": 0.3199999928474426
+            },
+            {
+                "word": "biologically",
+                "start": 0.3199999928474426,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "integrated",
+                "start": 0.9200000166893005,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "computer",
+                "start": 1.4600000381469727,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "was",
+                "start": 1.899999976158142,
+                "end": 2.200000047683716
+            },
+            {
+                "word": "just",
+                "start": 2.200000047683716,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "announced.",
+                "start": 2.6600000858306885,
+                "end": 2.9800000190734863
+            },
+            {
+                "word": "A",
+                "start": 3.4000000953674316,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "groundbreaking",
+                "start": 3.4000000953674316,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "computer",
+                "start": 3.880000114440918,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "made",
+                "start": 4.360000133514404,
+                "end": 4.599999904632568
+            },
+            {
+                "word": "with",
+                "start": 4.599999904632568,
+                "end": 5
+            },
+            {
+                "word": "living",
+                "start": 5,
+                "end": 5.039999961853027
+            },
+            {
+                "word": "human",
+                "start": 5.039999961853027,
+                "end": 5.420000076293945
+            },
+            {
+                "word": "neurons",
+                "start": 5.420000076293945,
+                "end": 5.639999866485596
+            },
+            {
+                "word": "is",
+                "start": 5.639999866485596,
+                "end": 5.940000057220459
+            },
+            {
+                "word": "now",
+                "start": 5.940000057220459,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "operational",
+                "start": 6.239999771118164,
+                "end": 6.559999942779541
+            },
+            {
+                "word": "at",
+                "start": 6.559999942779541,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "Singapore.",
+                "start": 6.860000133514404,
+                "end": 7.179999828338623
+            },
+            {
+                "word": "Cortical",
+                "start": 7.78000020980835,
+                "end": 8.180000305175781
+            },
+            {
+                "word": "Labs",
+                "start": 8.180000305175781,
+                "end": 8.479999542236328
+            },
+            {
+                "word": "has",
+                "start": 8.479999542236328,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "developed",
+                "start": 8.84000015258789,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "a",
+                "start": 9.039999961853027,
+                "end": 9.300000190734863
+            },
+            {
+                "word": "unique",
+                "start": 9.300000190734863,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "computer",
+                "start": 9.520000457763672,
+                "end": 9.9399995803833
+            },
+            {
+                "word": "prototype",
+                "start": 9.9399995803833,
+                "end": 10.359999656677246
+            },
+            {
+                "word": "that",
+                "start": 10.359999656677246,
+                "end": 10.699999809265137
+            },
+            {
+                "word": "incorporates",
+                "start": 10.699999809265137,
+                "end": 11.15999984741211
+            },
+            {
+                "word": "living",
+                "start": 11.15999984741211,
+                "end": 11.520000457763672
+            },
+            {
+                "word": "human",
+                "start": 11.520000457763672,
+                "end": 11.920000076293945
+            },
+            {
+                "word": "neurons",
+                "start": 11.920000076293945,
+                "end": 12.180000305175781
+            },
+            {
+                "word": "grown",
+                "start": 12.180000305175781,
+                "end": 12.739999771118164
+            },
+            {
+                "word": "from",
+                "start": 12.739999771118164,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "stem",
+                "start": 13.039999961853027,
+                "end": 13.300000190734863
+            },
+            {
+                "word": "cells.",
+                "start": 13.300000190734863,
+                "end": 13.640000343322754
+            },
+            {
+                "word": "Each",
+                "start": 13.979999542236328,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "unit",
+                "start": 14.239999771118164,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "has",
+                "start": 14.479999542236328,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "around",
+                "start": 14.899999618530273,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "200",
+                "start": 15.34000015258789,
+                "end": 15.859999656677246
+            },
+            {
+                "word": "000",
+                "start": 15.859999656677246,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "neurons",
+                "start": 16.15999984741211,
+                "end": 16.399999618530273
+            },
+            {
+                "word": "on",
+                "start": 16.399999618530273,
+                "end": 16.600000381469727
+            },
+            {
+                "word": "a",
+                "start": 16.600000381469727,
+                "end": 16.899999618530273
+            },
+            {
+                "word": "chip",
+                "start": 16.899999618530273,
+                "end": 16.899999618530273
+            },
+            {
+                "word": "that",
+                "start": 16.899999618530273,
+                "end": 17.280000686645508
+            },
+            {
+                "word": "processes",
+                "start": 17.280000686645508,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "electrical",
+                "start": 17.65999984741211,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "signals,",
+                "start": 18.219999313354492,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "allowing",
+                "start": 19.15999984741211,
+                "end": 19.299999237060547
+            },
+            {
+                "word": "the",
+                "start": 19.299999237060547,
+                "end": 19.559999465942383
+            },
+            {
+                "word": "cells",
+                "start": 19.559999465942383,
+                "end": 19.65999984741211
+            },
+            {
+                "word": "to",
+                "start": 19.65999984741211,
+                "end": 19.959999084472656
+            },
+            {
+                "word": "adapt",
+                "start": 19.959999084472656,
+                "end": 20.1200008392334
+            },
+            {
+                "word": "and",
+                "start": 20.1200008392334,
+                "end": 20.459999084472656
+            },
+            {
+                "word": "respond.",
+                "start": 20.459999084472656,
+                "end": 20.780000686645508
+            },
+            {
+                "word": "This",
+                "start": 21.18000030517578,
+                "end": 21.639999389648438
+            },
+            {
+                "word": "biologically",
+                "start": 21.639999389648438,
+                "end": 22.18000030517578
+            },
+            {
+                "word": "integrated",
+                "start": 22.18000030517578,
+                "end": 22.719999313354492
+            },
+            {
+                "word": "server",
+                "start": 22.719999313354492,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "rack",
+                "start": 23.079999923706055,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "consumes",
+                "start": 23.360000610351562,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "only",
+                "start": 23.68000030517578,
+                "end": 24.059999465942383
+            },
+            {
+                "word": "30",
+                "start": 24.059999465942383,
+                "end": 24.420000076293945
+            },
+            {
+                "word": "watts,",
+                "start": 24.420000076293945,
+                "end": 24.700000762939453
+            },
+            {
+                "word": "significantly",
+                "start": 25.139999389648438,
+                "end": 25.5
+            },
+            {
+                "word": "less",
+                "start": 25.5,
+                "end": 25.899999618530273
+            },
+            {
+                "word": "than",
+                "start": 25.899999618530273,
+                "end": 26.139999389648438
+            },
+            {
+                "word": "traditional",
+                "start": 26.139999389648438,
+                "end": 26.520000457763672
+            },
+            {
+                "word": "AI",
+                "start": 26.520000457763672,
+                "end": 26.84000015258789
+            },
+            {
+                "word": "ships.",
+                "start": 26.84000015258789,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "While",
+                "start": 27.8799991607666,
+                "end": 28
+            },
+            {
+                "word": "it's",
+                "start": 28,
+                "end": 28.200000762939453
+            },
+            {
+                "word": "still",
+                "start": 28.200000762939453,
+                "end": 28.299999237060547
+            },
+            {
+                "word": "a",
+                "start": 28.299999237060547,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "prototype,",
+                "start": 28.559999465942383,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "this",
+                "start": 28.81999969482422,
+                "end": 29.040000915527344
+            },
+            {
+                "word": "innovation",
+                "start": 29.040000915527344,
+                "end": 29.440000534057617
+            },
+            {
+                "word": "could",
+                "start": 29.440000534057617,
+                "end": 29.780000686645508
+            },
+            {
+                "word": "pave",
+                "start": 29.780000686645508,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "the",
+                "start": 29.979999542236328,
+                "end": 30.100000381469727
+            },
+            {
+                "word": "way",
+                "start": 30.100000381469727,
+                "end": 30.260000228881836
+            },
+            {
+                "word": "for",
+                "start": 30.260000228881836,
+                "end": 30.459999084472656
+            },
+            {
+                "word": "future",
+                "start": 30.459999084472656,
+                "end": 30.68000030517578
+            },
+            {
+                "word": "applications",
+                "start": 30.68000030517578,
+                "end": 31.280000686645508
+            },
+            {
+                "word": "in",
+                "start": 31.280000686645508,
+                "end": 31.520000457763672
+            },
+            {
+                "word": "complex",
+                "start": 31.520000457763672,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "problem",
+                "start": 31.899999618530273,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "solving.",
+                "start": 32.220001220703125,
+                "end": 32.52000045776367
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 33.040000915527344,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.4,
+                "background": "papyrus",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "A Computer Made of Living Neurons",
+                        "params": {
+                            "src": "img_f740e318",
+                            "count": 2000
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.4,
+                "end": 7.78,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "living human neurons",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Live in Singapore",
+                            "lines": [
+                                "First biological server rack",
+                                "Running on human neurons"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.78,
+                "end": 13.98,
+                "background": "vellum",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "stem cells",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "How Cortical Labs Builds It",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Stem cells"
+                                },
+                                {
+                                    "label": "Grown neurons"
+                                },
+                                {
+                                    "label": "Electrode chip"
+                                },
+                                {
+                                    "label": "CL1 computer",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.98,
+                "end": 21.18,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "200 000",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Neurons on a Chip",
+                            "lines": [
+                                "Process electrical signals",
+                                "Cells adapt and respond"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.18,
+                "end": 27.88,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "30 watts",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "Power per Unit",
+                            "unit": "W",
+                            "bars": [
+                                {
+                                    "label": "CL1 rack unit",
+                                    "value": 30,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "AI GPU",
+                                    "value": 700
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.88,
+                "end": 33.04,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "prototype",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "What It Could Unlock",
+                            "items": [
+                                "Drug discovery",
+                                "Disease modeling",
+                                "Adaptive computing"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/biologically-integrated-computer-prototy-2tzp4/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    }
+}

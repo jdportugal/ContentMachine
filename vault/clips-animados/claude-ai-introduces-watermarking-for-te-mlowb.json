@@ -1,0 +1,808 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Claude AI Will Watermark All Text — Here's What It Means",
+    "source_path": "clips/uploads/6VB3u0akukNw4wqX4U98tA9rOQ4HYEeQF7uTW5tc.mp4",
+    "images": [
+        {
+            "id": "img_1a2f9fd2",
+            "path": "clips/uploads/wZ6uXk5Z0QBUwuQaSNbfMautWzc7MLgvf6o6tHgH.png",
+            "description": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "background": "particle-drift",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.2,
+        "research": {
+            "topic": "Anthropic adds invisible watermarks to Claude's AI-generated text",
+            "summary": "In August 2026 Anthropic announced that Claude models will embed an invisible statistical watermark in generated text plus signed provenance metadata in files, to comply with the EU AI Act's Article 50 transparency rules — applied globally, not just in the EU.",
+            "timeline": [
+                {
+                    "label": "Google DeepMind publishes SynthID Text, the method Claude's watermark builds on",
+                    "sublabel": "2024"
+                },
+                {
+                    "label": "EU Commission adopts guidelines on AI transparency obligations",
+                    "sublabel": "Jul 20, 2026"
+                },
+                {
+                    "label": "EU AI Act Article 50 transparency rules become applicable",
+                    "sublabel": "Aug 2, 2026"
+                },
+                {
+                    "label": "Anthropic announces Claude text watermarking",
+                    "sublabel": "Aug 11, 2026"
+                },
+                {
+                    "label": "Deadline for pre-existing generative AI systems to meet machine-readable marking rule",
+                    "sublabel": "Dec 2, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Max EU fine for Article 50 non-compliance",
+                    "value": 15,
+                    "unit": "million €"
+                },
+                {
+                    "label": "Or share of worldwide annual turnover",
+                    "value": 3,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "What the watermark does vs. doesn't do",
+                    "left": {
+                        "title": "Does",
+                        "points": [
+                            "Subtly biases word choices — invisible, detectable in patterns",
+                            "Travels with copied text",
+                            "Adds signed provenance metadata to files",
+                            "Detection API planned for third parties"
+                        ]
+                    },
+                    "right": {
+                        "title": "Doesn't",
+                        "points": [
+                            "Doesn't track individual users",
+                            "Doesn't claim ownership of your content",
+                            "Can't tell full generation from light editing",
+                            "Weaker on short texts and code"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Watermarking applies worldwide, not only to EU users",
+                "Based on Google DeepMind's SynthID Text approach (published in Nature, 2024)",
+                "Models released after Aug 2, 2026 watermark by default; older models to follow",
+                "SEO experts say rankings are unaffected — Google penalizes spam, not AI use",
+                "Anthropic signed the EU Code of Practice on transparency of AI-generated content"
+            ],
+            "sources": [
+                "https://techcrunch.com/2026/08/11/anthropic-says-it-will-watermark-text-generated-by-its-ai-models/",
+                "https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/",
+                "https://www.anthropic.com/news/claude-text-watermark",
+                "https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content",
+                "https://www.euronews.com/next/2026/08/11/eu-compliance-delivered-globally-anthropic-to-watermark-claudes-output-worldwide",
+                "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts/",
+                "https://www.cooley.com/news/insight/2026/2026-08-03-eu-ai-act-transparency-obligations-take-effect-2-august-2026",
+                "https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act",
+                "https://www.searchenginejournal.com/what-a-claude-watermark-can-cant-tell-you-about-authorship/585754/",
+                "https://ahrefs.com/blog/claude-now-watermarks-everything-it-writes/"
+            ]
+        },
+        "suggested": {
+            "title": "Claude AI Will Watermark All Text — Here's What It Means",
+            "description": "Anthropic has announced that future versions of Claude will embed watermarks in all generated text to comply with the EU AI Act. The move raises questions about SEO and content originality, but Anthropic says it's a transparency measure, not a tool for tracking users. Here's what content creators need to know.",
+            "tags": [
+                "Claude AI",
+                "Anthropic",
+                "AI watermarking",
+                "EU AI Act",
+                "AI generated content",
+                "SEO",
+                "AI news",
+                "AI regulation"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "The brand logo, centred on a transparent background.",
+                "label": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "image_text": []
+    },
+    "id": "claude-ai-introduces-watermarking-for-te-mlowb",
+    "created_at": "2026-08-20T11:11:26+00:00",
+    "updated_at": "2026-08-21T11:11:05+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/claude-ai-introduces-watermarking-for-te-mlowb/audio.m4a",
+    "transcript": {
+        "duration": 34.470001220703125,
+        "text": "Claude has just introduced watermarking for text outputs. Claude AI will now embed watermarks and generate text to comply with regulations. Anthropic has announced that future versions of Claude will include a watermark in all generated text. This watermark is designed to comply with the EU AI Act and does not claim ownership over use-generated content. Concerns have risen regarding the potential impact on SEO and content originality, but Anthropic assures that the watermark serves as a compliance measure rather than a means of tracking individual users. The watermarking process aims to enhance transparency in AI-generated content.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Claude",
+                "start": 0,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "has",
+                "start": 0.5400000214576721,
+                "end": 0.6399999856948853
+            },
+            {
+                "word": "just",
+                "start": 0.6399999856948853,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "introduced",
+                "start": 0.9800000190734863,
+                "end": 1.3200000524520874
+            },
+            {
+                "word": "watermarking",
+                "start": 1.3200000524520874,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "for",
+                "start": 2.059999942779541,
+                "end": 2.319999933242798
+            },
+            {
+                "word": "text",
+                "start": 2.319999933242798,
+                "end": 2.5799999237060547
+            },
+            {
+                "word": "outputs.",
+                "start": 2.5799999237060547,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "Claude",
+                "start": 3.880000114440918,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "AI",
+                "start": 3.880000114440918,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "will",
+                "start": 4.039999961853027,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "now",
+                "start": 4.400000095367432,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "embed",
+                "start": 4.800000190734863,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "watermarks",
+                "start": 4.800000190734863,
+                "end": 5.28000020980835
+            },
+            {
+                "word": "and",
+                "start": 5.28000020980835,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "generate",
+                "start": 5.519999980926514,
+                "end": 5.900000095367432
+            },
+            {
+                "word": "text",
+                "start": 5.900000095367432,
+                "end": 6.159999847412109
+            },
+            {
+                "word": "to",
+                "start": 6.159999847412109,
+                "end": 6.360000133514404
+            },
+            {
+                "word": "comply",
+                "start": 6.360000133514404,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "with",
+                "start": 6.679999828338623,
+                "end": 6.940000057220459
+            },
+            {
+                "word": "regulations.",
+                "start": 6.940000057220459,
+                "end": 8.100000381469727
+            },
+            {
+                "word": "Anthropic",
+                "start": 8.1,
+                "end": 8.426
+            },
+            {
+                "word": "has",
+                "start": 8.426,
+                "end": 8.751
+            },
+            {
+                "word": "announced",
+                "start": 8.751,
+                "end": 9.077
+            },
+            {
+                "word": "that",
+                "start": 9.077,
+                "end": 9.402
+            },
+            {
+                "word": "future",
+                "start": 9.402,
+                "end": 9.728
+            },
+            {
+                "word": "versions",
+                "start": 9.728,
+                "end": 10.054
+            },
+            {
+                "word": "of",
+                "start": 10.054,
+                "end": 10.379
+            },
+            {
+                "word": "Claude",
+                "start": 10.379,
+                "end": 10.705
+            },
+            {
+                "word": "will",
+                "start": 10.705,
+                "end": 11.03
+            },
+            {
+                "word": "include",
+                "start": 11.03,
+                "end": 11.356
+            },
+            {
+                "word": "a",
+                "start": 11.356,
+                "end": 11.682
+            },
+            {
+                "word": "watermark",
+                "start": 11.682,
+                "end": 12.007
+            },
+            {
+                "word": "in",
+                "start": 12.007,
+                "end": 12.333
+            },
+            {
+                "word": "all",
+                "start": 12.333,
+                "end": 12.658
+            },
+            {
+                "word": "generated",
+                "start": 12.658,
+                "end": 12.984
+            },
+            {
+                "word": "text.",
+                "start": 12.984,
+                "end": 13.31
+            },
+            {
+                "word": "This",
+                "start": 13.31,
+                "end": 13.635
+            },
+            {
+                "word": "watermark",
+                "start": 13.635,
+                "end": 13.961
+            },
+            {
+                "word": "is",
+                "start": 13.961,
+                "end": 14.286
+            },
+            {
+                "word": "designed",
+                "start": 14.286,
+                "end": 14.612
+            },
+            {
+                "word": "to",
+                "start": 14.612,
+                "end": 14.938
+            },
+            {
+                "word": "comply",
+                "start": 14.938,
+                "end": 15.263
+            },
+            {
+                "word": "with",
+                "start": 15.263,
+                "end": 15.589
+            },
+            {
+                "word": "the",
+                "start": 15.589,
+                "end": 15.914
+            },
+            {
+                "word": "EU",
+                "start": 15.914,
+                "end": 16.24
+            },
+            {
+                "word": "AI",
+                "start": 16.24,
+                "end": 16.566
+            },
+            {
+                "word": "Act",
+                "start": 16.566,
+                "end": 16.891
+            },
+            {
+                "word": "and",
+                "start": 16.891,
+                "end": 17.217
+            },
+            {
+                "word": "does",
+                "start": 17.217,
+                "end": 17.542
+            },
+            {
+                "word": "not",
+                "start": 17.542,
+                "end": 17.868
+            },
+            {
+                "word": "claim",
+                "start": 17.868,
+                "end": 18.194
+            },
+            {
+                "word": "ownership",
+                "start": 18.194,
+                "end": 18.519
+            },
+            {
+                "word": "over",
+                "start": 18.519,
+                "end": 18.845
+            },
+            {
+                "word": "use-generated",
+                "start": 18.845,
+                "end": 19.17
+            },
+            {
+                "word": "content.",
+                "start": 19.17,
+                "end": 19.496
+            },
+            {
+                "word": "Concerns",
+                "start": 19.496,
+                "end": 19.822
+            },
+            {
+                "word": "have",
+                "start": 19.822,
+                "end": 20.147
+            },
+            {
+                "word": "risen",
+                "start": 20.147,
+                "end": 20.473
+            },
+            {
+                "word": "regarding",
+                "start": 20.473,
+                "end": 20.798
+            },
+            {
+                "word": "the",
+                "start": 20.798,
+                "end": 21.124
+            },
+            {
+                "word": "potential",
+                "start": 21.124,
+                "end": 21.45
+            },
+            {
+                "word": "impact",
+                "start": 21.45,
+                "end": 21.775
+            },
+            {
+                "word": "on",
+                "start": 21.775,
+                "end": 22.101
+            },
+            {
+                "word": "SEO",
+                "start": 22.101,
+                "end": 22.426
+            },
+            {
+                "word": "and",
+                "start": 22.426,
+                "end": 22.752
+            },
+            {
+                "word": "content",
+                "start": 22.752,
+                "end": 23.078
+            },
+            {
+                "word": "originality,",
+                "start": 23.078,
+                "end": 23.403
+            },
+            {
+                "word": "but",
+                "start": 23.403,
+                "end": 23.729
+            },
+            {
+                "word": "Anthropic",
+                "start": 23.729,
+                "end": 24.054
+            },
+            {
+                "word": "assures",
+                "start": 24.054,
+                "end": 24.38
+            },
+            {
+                "word": "that",
+                "start": 24.38,
+                "end": 24.706
+            },
+            {
+                "word": "the",
+                "start": 24.706,
+                "end": 25.031
+            },
+            {
+                "word": "watermark",
+                "start": 25.031,
+                "end": 25.357
+            },
+            {
+                "word": "serves",
+                "start": 25.357,
+                "end": 25.682
+            },
+            {
+                "word": "as",
+                "start": 25.682,
+                "end": 26.008
+            },
+            {
+                "word": "a",
+                "start": 26.008,
+                "end": 26.334
+            },
+            {
+                "word": "compliance",
+                "start": 26.334,
+                "end": 26.659
+            },
+            {
+                "word": "measure",
+                "start": 26.659,
+                "end": 26.985
+            },
+            {
+                "word": "rather",
+                "start": 26.985,
+                "end": 27.31
+            },
+            {
+                "word": "than",
+                "start": 27.31,
+                "end": 27.636
+            },
+            {
+                "word": "a",
+                "start": 27.636,
+                "end": 27.962
+            },
+            {
+                "word": "means",
+                "start": 27.962,
+                "end": 28.287
+            },
+            {
+                "word": "of",
+                "start": 28.287,
+                "end": 28.613
+            },
+            {
+                "word": "tracking",
+                "start": 28.613,
+                "end": 28.938
+            },
+            {
+                "word": "individual",
+                "start": 28.938,
+                "end": 29.264
+            },
+            {
+                "word": "users.",
+                "start": 29.264,
+                "end": 29.59
+            },
+            {
+                "word": "The",
+                "start": 29.59,
+                "end": 29.915
+            },
+            {
+                "word": "watermarking",
+                "start": 29.915,
+                "end": 30.241
+            },
+            {
+                "word": "process",
+                "start": 30.241,
+                "end": 30.566
+            },
+            {
+                "word": "aims",
+                "start": 30.566,
+                "end": 30.892
+            },
+            {
+                "word": "to",
+                "start": 30.892,
+                "end": 31.218
+            },
+            {
+                "word": "enhance",
+                "start": 31.218,
+                "end": 31.543
+            },
+            {
+                "word": "transparency",
+                "start": 31.543,
+                "end": 31.869
+            },
+            {
+                "word": "in",
+                "start": 31.869,
+                "end": 32.194
+            },
+            {
+                "word": "AI-generated",
+                "start": 32.194,
+                "end": 32.52
+            },
+            {
+                "word": "content.",
+                "start": 32.52000045776367,
+                "end": 32.959999084472656
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.470001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.88,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "watermarking",
+                        "params": {
+                            "src": "img_1a2f9fd2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.88,
+                "end": 8.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "How It Works",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Claude output"
+                                },
+                                {
+                                    "label": "Invisible watermark",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Compliant text"
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.1,
+                "end": 13.31,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "all generated text",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "caption": "Road to Watermarking",
+                            "items": [
+                                {
+                                    "label": "SynthID Text published",
+                                    "sublabel": "2024"
+                                },
+                                {
+                                    "label": "EU transparency guidelines",
+                                    "sublabel": "Jul 2026"
+                                },
+                                {
+                                    "label": "Article 50 applies",
+                                    "sublabel": "Aug 2, 2026"
+                                },
+                                {
+                                    "label": "Claude watermark announced",
+                                    "sublabel": "Aug 11, 2026",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.31,
+                "end": 19.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "EU AI Act",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "EU AI Act — Article 50",
+                            "lines": [
+                                "Transparency rules live since Aug 2, 2026",
+                                "No ownership claim on your content",
+                                "Fines up to €15M or 3% of turnover"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.5,
+                "end": 29.59,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "tracking",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 29.59,
+                "end": 34.47,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "transparency",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Why It Matters",
+                            "items": [
+                                "Applies worldwide, not just EU",
+                                "Built on SynthID Text",
+                                "SEO rankings unaffected"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/claude-ai-introduces-watermarking-for-te-mlowb/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube"
+    ],
+    "blotato_ids": {
+        "youtube": true
+    }
+}

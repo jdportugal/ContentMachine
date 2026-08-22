@@ -1,0 +1,820 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Are AI Companies Secretly Buying Books in Bulk?",
+    "source_path": "clips/uploads/D6zTykRZBf6rCwGcKBcSQLYFqYyY45zht9slcmrX.mp4",
+    "images": [],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "background": "auto",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "AI companies suspected behind anonymous bulk book orders",
+            "summary": "Booksellers across Europe, the US and Australia report anonymous bulk orders of obscure titles, suspected to feed AI training data. A 404 Media investigation (Aug 17, 2026) hid an AirTag in a ~1,000-book order and tracked it to Amazon's LAS8 warehouse in Las Vegas, where a unit called VGT3 cuts spines off books, scans them, and discards the paper.",
+            "timeline": [
+                {
+                    "label": "Court rules destructive scanning of purchased books is fair use (Bartz v. Anthropic)",
+                    "sublabel": "Jun 2025"
+                },
+                {
+                    "label": "Anthropic agrees to $1.5B copyright settlement with authors",
+                    "sublabel": "Sep 2025"
+                },
+                {
+                    "label": "Washington Post details Anthropic's destructive scanning of millions of print books",
+                    "sublabel": "Jan 2026"
+                },
+                {
+                    "label": "Galway bookshop Kennys gets 'bananas' anonymous order for 5,000 titles",
+                    "sublabel": "May 2026"
+                },
+                {
+                    "label": "Irish Times reports mystery bulk orders unsettling Europe's booksellers",
+                    "sublabel": "Aug 10, 2026"
+                },
+                {
+                    "label": "404 Media AirTag tracks 1,000-book order to Amazon AI scanning facility",
+                    "sublabel": "Aug 17, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Books in the AirTag-tracked order",
+                    "value": 1000,
+                    "unit": "books"
+                },
+                {
+                    "label": "Titles in anonymous Galway bookshop order (May 2026)",
+                    "value": 5000,
+                    "unit": "books"
+                },
+                {
+                    "label": "Anthropic authors' copyright settlement (2025)",
+                    "value": 1500000000,
+                    "unit": "USD"
+                },
+                {
+                    "label": "Payout per pirated book in Anthropic settlement",
+                    "value": 3000,
+                    "unit": "USD"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Normal bulk buyers vs suspected AI buyers",
+                    "left": {
+                        "title": "Typical trade buyers",
+                        "points": [
+                            "Curated, related titles",
+                            "Price-sensitive",
+                            "Known identity"
+                        ]
+                    },
+                    "right": {
+                        "title": "Suspected AI buyers",
+                        "points": [
+                            "Random ISBN-driven lists",
+                            "Little regard for price",
+                            "Anonymous via middlemen"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "AirTag hidden in a rare-book shipment ended at Amazon warehouse LAS8, 5801 Nicco Way, Las Vegas",
+                "Inside unit 'VGT3' workers cut spines off books and feed pages into scanners; mascot is a T. rex holding a book",
+                "Amazon previously denied destructive scanning and declined to explain the discrepancy",
+                "Similar anonymous bulk orders reported by booksellers in Ireland, UK, Germany, Spain, US and Australia",
+                "Precedent: a 2025 US ruling found buying, destructively scanning, and discarding print books can be fair use",
+                "Anthropic destructively scanned millions of purchased print books for AI training, per court records"
+            ],
+            "sources": [
+                "https://www.404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility/",
+                "https://www.tomshardware.com/tech-industry/artificial-intelligence/secret-tracking-device-placed-in-rare-book-ends-up-in-amazon-processing-facility-destroying-books-to-train-ai-models-is-all-the-vegas-warehouse-does",
+                "https://www.geekwire.com/2026/how-an-airtag-planted-by-a-reporter-led-to-a-secret-amazon-site-where-old-books-are-cut-apart-and-scanned/",
+                "https://www.irishtimes.com/world/europe/2026/08/10/a-mysterious-buying-spree-is-unsettling-europes-booksellers/",
+                "https://www.rte.ie/news/2026/0810/1587288-galway-books-ai/",
+                "https://www.washingtonpost.com/technology/2026/01/27/anthropic-ai-scan-destroy-books/",
+                "https://www.pcgamer.com/software/ai/ai-companies-are-anonymously-buying-and-destroying-millions-of-books-through-middleman-services-to-avoid-headlines-about-ai-companies-buying-and-destroying-millions-of-books/",
+                "https://www.irishexaminer.com/business/technology/arid-41897035.html"
+            ]
+        },
+        "suggested": {
+            "title": "Are AI Companies Secretly Buying Books in Bulk?",
+            "description": "Booksellers have spent nearly a year puzzling over anonymous bulk book orders placed with little regard for price. One investigation tracked a 1,000-book offer to an Amazon facility where workers reportedly altered books for scanning, fueling suspicions that AI companies are cataloging every published title for training data. Amazon has declined to comment, leaving the publishing industry with big unanswered questions.",
+            "tags": [
+                "AI",
+                "publishing industry",
+                "Amazon",
+                "book scanning",
+                "AI training data",
+                "tech news",
+                "booksellers"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "The brand logo, centred on a transparent background.",
+                "label": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+                "site": null
+            }
+        ],
+        "image_uploads": []
+    },
+    "id": "ai-companies-suspected-behind-bulk-book-mowha",
+    "created_at": "2026-08-21T16:35:21+00:00",
+    "updated_at": "2026-08-21T16:43:49+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-companies-suspected-behind-bulk-book-mowha/audio.m4a",
+    "transcript": {
+        "duration": 36.709999084472656,
+        "text": "AI companies suspected behind bulk book orders. Booksellers suspect AI companies are secretly ordering massive quantities of books. For nearly a year, booksellers have noticed a trend of anonymous bulk orders with little regard for pricing. A recent investigation involved tracking an offer of 1,000 books, which ultimately led to an Amazon facility where workers reportedly altered the books for scanning efficiency. This raises concerns that AI companies are meticulously cataloging every published title for training purposes. Amazon has not commented on the situation, leaving many questions about the implications for the publishing industry.",
+        "language": "english",
+        "words": [
+            {
+                "word": "AI",
+                "start": 0,
+                "end": 0.3799999952316284
+            },
+            {
+                "word": "companies",
+                "start": 0.3799999952316284,
+                "end": 0.7799999713897705
+            },
+            {
+                "word": "suspected",
+                "start": 0.7799999713897705,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "behind",
+                "start": 1.2200000286102295,
+                "end": 1.7000000476837158
+            },
+            {
+                "word": "bulk",
+                "start": 1.7000000476837158,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "book",
+                "start": 2.0799999237060547,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "orders",
+                "start": 2.380000114440918,
+                "end": 2.9000000953674316
+            },
+            {
+                "word": "Booksellers",
+                "start": 3.859999895095825,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "suspect",
+                "start": 4.239999771118164,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "AI",
+                "start": 4.699999809265137,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "companies",
+                "start": 5.019999980926514,
+                "end": 5.420000076293945
+            },
+            {
+                "word": "are",
+                "start": 5.420000076293945,
+                "end": 5.659999847412109
+            },
+            {
+                "word": "secretly",
+                "start": 5.659999847412109,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "ordering",
+                "start": 6.119999885559082,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "massive",
+                "start": 6.460000038146973,
+                "end": 6.980000019073486
+            },
+            {
+                "word": "quantities",
+                "start": 6.980000019073486,
+                "end": 7.360000133514404
+            },
+            {
+                "word": "of",
+                "start": 7.360000133514404,
+                "end": 8.140000343322754
+            },
+            {
+                "word": "books",
+                "start": 8.140000343322754,
+                "end": 8.520000457763672
+            },
+            {
+                "word": "For",
+                "start": 8.699999809265137,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "nearly",
+                "start": 8.84000015258789,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "a",
+                "start": 9.100000381469727,
+                "end": 9.380000114440918
+            },
+            {
+                "word": "year",
+                "start": 9.380000114440918,
+                "end": 9.5600004196167
+            },
+            {
+                "word": "booksellers",
+                "start": 9.9399995803833,
+                "end": 10.300000190734863
+            },
+            {
+                "word": "have",
+                "start": 10.300000190734863,
+                "end": 10.539999961853027
+            },
+            {
+                "word": "noticed",
+                "start": 10.539999961853027,
+                "end": 10.779999732971191
+            },
+            {
+                "word": "a",
+                "start": 10.779999732971191,
+                "end": 11.239999771118164
+            },
+            {
+                "word": "trend",
+                "start": 11.239999771118164,
+                "end": 11.239999771118164
+            },
+            {
+                "word": "of",
+                "start": 11.239999771118164,
+                "end": 11.579999923706055
+            },
+            {
+                "word": "anonymous",
+                "start": 11.579999923706055,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "bulk",
+                "start": 11.979999542236328,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "orders",
+                "start": 12.359999656677246,
+                "end": 12.720000267028809
+            },
+            {
+                "word": "with",
+                "start": 12.720000267028809,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "little",
+                "start": 13.0600004196167,
+                "end": 13.279999732971191
+            },
+            {
+                "word": "regard",
+                "start": 13.279999732971191,
+                "end": 13.5600004196167
+            },
+            {
+                "word": "for",
+                "start": 13.5600004196167,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "pricing",
+                "start": 14.34000015258789,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "A",
+                "start": 15.15999984741211,
+                "end": 15.279999732971191
+            },
+            {
+                "word": "recent",
+                "start": 15.279999732971191,
+                "end": 15.5
+            },
+            {
+                "word": "investigation",
+                "start": 15.5,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "involved",
+                "start": 16.15999984741211,
+                "end": 16.68000030517578
+            },
+            {
+                "word": "tracking",
+                "start": 16.68000030517578,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "an",
+                "start": 16.979999542236328,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "offer",
+                "start": 17.34000015258789,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "of",
+                "start": 17.459999084472656,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "1",
+                "start": 17.65999984741211,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "000",
+                "start": 18.1200008392334,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "books",
+                "start": 18.1200008392334,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "which",
+                "start": 18.860000610351562,
+                "end": 19
+            },
+            {
+                "word": "ultimately",
+                "start": 19,
+                "end": 19.459999084472656
+            },
+            {
+                "word": "led",
+                "start": 19.459999084472656,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "to",
+                "start": 19.780000686645508,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "an",
+                "start": 19.8799991607666,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "Amazon",
+                "start": 20.040000915527344,
+                "end": 20.34000015258789
+            },
+            {
+                "word": "facility",
+                "start": 20.34000015258789,
+                "end": 20.979999542236328
+            },
+            {
+                "word": "where",
+                "start": 20.979999542236328,
+                "end": 21.280000686645508
+            },
+            {
+                "word": "workers",
+                "start": 21.280000686645508,
+                "end": 21.639999389648438
+            },
+            {
+                "word": "reportedly",
+                "start": 21.639999389648438,
+                "end": 22.34000015258789
+            },
+            {
+                "word": "altered",
+                "start": 22.34000015258789,
+                "end": 22.780000686645508
+            },
+            {
+                "word": "the",
+                "start": 22.780000686645508,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "books",
+                "start": 23.079999923706055,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "for",
+                "start": 23.079999923706055,
+                "end": 23.399999618530273
+            },
+            {
+                "word": "scanning",
+                "start": 23.399999618530273,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "efficiency",
+                "start": 23.68000030517578,
+                "end": 24.299999237060547
+            },
+            {
+                "word": "This",
+                "start": 24.780000686645508,
+                "end": 25.040000915527344
+            },
+            {
+                "word": "raises",
+                "start": 25.040000915527344,
+                "end": 25.31999969482422
+            },
+            {
+                "word": "concerns",
+                "start": 25.31999969482422,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "that",
+                "start": 25.799999237060547,
+                "end": 26.059999465942383
+            },
+            {
+                "word": "AI",
+                "start": 26.059999465942383,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "companies",
+                "start": 26.34000015258789,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "are",
+                "start": 26.780000686645508,
+                "end": 27.079999923706055
+            },
+            {
+                "word": "meticulously",
+                "start": 27.079999923706055,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "cataloging",
+                "start": 27.700000762939453,
+                "end": 28.34000015258789
+            },
+            {
+                "word": "every",
+                "start": 28.34000015258789,
+                "end": 28.780000686645508
+            },
+            {
+                "word": "published",
+                "start": 28.780000686645508,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "title",
+                "start": 29.15999984741211,
+                "end": 29.5
+            },
+            {
+                "word": "for",
+                "start": 29.5,
+                "end": 29.760000228881836
+            },
+            {
+                "word": "training",
+                "start": 29.760000228881836,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "purposes",
+                "start": 30.079999923706055,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "Amazon",
+                "start": 31.399999618530273,
+                "end": 31.600000381469727
+            },
+            {
+                "word": "has",
+                "start": 31.600000381469727,
+                "end": 31.799999237060547
+            },
+            {
+                "word": "not",
+                "start": 31.799999237060547,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "commented",
+                "start": 32.060001373291016,
+                "end": 32.29999923706055
+            },
+            {
+                "word": "on",
+                "start": 32.29999923706055,
+                "end": 32.52000045776367
+            },
+            {
+                "word": "the",
+                "start": 32.52000045776367,
+                "end": 32.63999938964844
+            },
+            {
+                "word": "situation",
+                "start": 32.63999938964844,
+                "end": 33.08000183105469
+            },
+            {
+                "word": "leaving",
+                "start": 33.439998626708984,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "many",
+                "start": 33.52000045776367,
+                "end": 33.84000015258789
+            },
+            {
+                "word": "questions",
+                "start": 33.84000015258789,
+                "end": 34.13999938964844
+            },
+            {
+                "word": "about",
+                "start": 34.13999938964844,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "the",
+                "start": 34.400001525878906,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "implications",
+                "start": 35.060001373291016,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "for",
+                "start": 35.060001373291016,
+                "end": 35.34000015258789
+            },
+            {
+                "word": "the",
+                "start": 35.34000015258789,
+                "end": 35.540000915527344
+            },
+            {
+                "word": "publishing",
+                "start": 35.540000915527344,
+                "end": 35.900001525878906
+            },
+            {
+                "word": "industry",
+                "start": 35.900001525878906,
+                "end": 36.36000061035156
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.709999084472656,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 8.7,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "massive",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Anonymous Bulk Orders",
+                            "lines": [
+                                "Reported in Ireland, UK, Germany, Spain, US, Australia",
+                                "Obscure titles, ordered via middlemen"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.7,
+                "end": 15.16,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "pricing",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "Typical Trade Buyers",
+                                "points": [
+                                    "Curated, related titles",
+                                    "Price-sensitive",
+                                    "Known identity"
+                                ]
+                            },
+                            "right": {
+                                "title": "Suspected AI Buyers",
+                                "points": [
+                                    "Random ISBN lists",
+                                    "Ignore pricing",
+                                    "Anonymous middlemen"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.16,
+                "end": 18.86,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "1,000 Books Tracked",
+                            "lines": [
+                                "Reporters hid an AirTag in the shipment",
+                                "404 Media investigation, Aug 2026"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.86,
+                "end": 24.78,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "altered",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Where The Books Went",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Bulk order shipped"
+                                },
+                                {
+                                    "label": "AirTag tracked"
+                                },
+                                {
+                                    "label": "Amazon LAS8, Vegas"
+                                },
+                                {
+                                    "label": "Spines cut, pages scanned",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.78,
+                "end": 31.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "cataloging",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "caption": "The paper trail",
+                            "items": [
+                                {
+                                    "label": "Fair use ruling",
+                                    "sublabel": "Jun 2025"
+                                },
+                                {
+                                    "label": "$1.5B settlement",
+                                    "sublabel": "Sep 2025"
+                                },
+                                {
+                                    "label": "5,000-title order",
+                                    "sublabel": "May 2026"
+                                },
+                                {
+                                    "label": "AirTag exposé",
+                                    "sublabel": "Aug 2026",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.4,
+                "end": 36.709999084472656,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "questions",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Amazon: Silent",
+                            "lines": [
+                                "Previously denied destructive scanning",
+                                "Publishing industry left in the dark"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-companies-suspected-behind-bulk-book-mowha/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    }
+}
