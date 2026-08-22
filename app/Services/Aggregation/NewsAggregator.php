@@ -31,11 +31,20 @@ class NewsAggregator
      * Runs the aggregation and writes to the vault.
      *
      * @param  array<int,string>|null  $plataformas  Limits to these platforms (null = all configured).
+     * @param  int  $diasAtras  Which single day to collect: 0 = today (the classic
+     *   latest-N run), 1 = yesterday, 2 = the day before. A past day lists deeper
+     *   per channel and keeps ONLY the items uploaded on that exact day, archived
+     *   under it.
      * @return array{gerado_em:string,total:int,por_plataforma:array<string,int>,dias:array<int,string>,avisos:array<int,string>}
      */
-    public function aggregate(?array $plataformas = null, ?int $limite = null): array
+    public function aggregate(?array $plataformas = null, ?int $limite = null, int $diasAtras = 0): array
     {
         $limite ??= (int) config('contentmachine.aggregation.limite_por_canal', 5);
+        $diasAtras = max(0, min(7, $diasAtras));
+        // Reaching a past day means listing deeper; capped so it cannot become
+        // hundreds of yt-dlp calls per channel.
+        $limite = min($limite * ($diasAtras + 1), 60);
+        $alvo = now()->subDays($diasAtras)->toDateString();
         $canaisConfig = (array) $this->definicoes->get('canais', []);
         $plataformas ??= array_keys($canaisConfig);
 
@@ -71,6 +80,13 @@ class NewsAggregator
             if ($erroYtDlp !== null) {
                 [$itens, $aviso] = $this->recuperarComApify($canais, $limite, $jaArquivados, $itens, $erroYtDlp);
                 $avisos[] = $aviso;
+            }
+
+            // Collecting a PAST day keeps only that exact day's uploads — the
+            // deeper listing must not resurface a quiet channel's old videos, nor
+            // re-mix today's. Today (0) keeps the classic behaviour: the latest N.
+            if ($diasAtras > 0) {
+                $itens = array_values(array_filter($itens, fn ($i) => $i->dia() === $alvo));
             }
 
             $porPlataforma[$plataforma] = count($itens);

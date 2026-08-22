@@ -21,7 +21,14 @@
         {{-- Platform selector: choose which channels to collect from. --}}
         @if (!empty($plataformasDisponiveis))
             <div class="flex flex-wrap items-center gap-2 mb-2">
-                <span class="eyebrow shrink-0">Collect from:</span>
+                <span class="eyebrow shrink-0">Day:</span>
+                <select wire:model="diaAgregacao" @disabled($aAgregar)
+                        class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink font-mono text-xs focus:border-teal focus:outline-none disabled:opacity-50">
+                    <option value="0">today</option>
+                    <option value="1">1 day ago</option>
+                    <option value="2">2 days ago</option>
+                </select>
+                <span class="eyebrow shrink-0 ml-3">Collect from:</span>
                 @foreach ($plataformasDisponiveis as $p)
                     @php $pm = config('contentmachine.plataformas_meta.'.$p, ['label' => ucfirst($p), 'glifo' => '•', 'cor' => '#8AE0FF']); @endphp
                     <button type="button" wire:click="alternarPlataforma('{{ $p }}')" @disabled($aAgregar)

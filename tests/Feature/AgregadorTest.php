@@ -86,6 +86,38 @@ class AgregadorTest extends TestCase
         $this->assertStringContainsString('the way the most productive people', $nota->body);
     }
 
+    /**
+     * Agregar um dia PASSADO («1 day ago»): lista mais fundo por canal e guarda
+     * SÓ os itens desse dia exato — nem os uploads antigos de um canal parado,
+     * nem os de hoje.
+     */
+    public function test_agregar_um_dia_passado_guarda_so_esse_dia(): void
+    {
+        $meta = $this->itemFixture();
+        $velho = array_merge($meta, ['id' => 'vid-velho', 'webpage_url' => 'https://www.youtube.com/watch?v=vid-velho',
+            'upload_date' => now()->subDays(30)->format('Ymd')]);
+        $ontem = array_merge($meta, ['id' => 'vid-ontem', 'webpage_url' => 'https://www.youtube.com/watch?v=vid-ontem',
+            'upload_date' => now()->subDay()->format('Ymd')]);
+
+        $this->app->instance(YtDlpRunnerContract::class, new FakeYtDlpRunner(
+            metadados: [
+                $velho['webpage_url'] => $velho,
+                $ontem['webpage_url'] => $ontem,
+            ],
+            vtt: file_get_contents(__DIR__.'/../Fixtures/captions.en.vtt'),
+            entradasPorNeedle: ['youtube.com' => [
+                ['id' => $velho['id'], 'url' => $velho['webpage_url']],
+                ['id' => $ontem['id'], 'url' => $ontem['webpage_url']],
+            ]],
+        ));
+
+        $resumo = app(\App\Services\Aggregation\NewsAggregator::class)->aggregate(['youtube'], 5, diasAtras: 1);
+
+        $this->assertSame(1, $resumo['por_plataforma']['youtube'], 'só o item dentro da janela entra');
+        $this->assertContains(now()->subDay()->toDateString(), $resumo['dias']);
+        $this->assertNotContains(now()->subDays(30)->toDateString(), $resumo['dias']);
+    }
+
     public function test_gera_nota_de_topicos_do_dia(): void
     {
         app(NewsAggregator::class)->aggregate();

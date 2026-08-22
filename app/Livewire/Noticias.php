@@ -117,6 +117,9 @@ class Noticias extends Component
      * Runs in a QUEUE (worker): the collection makes dozens of yt-dlp calls and
      * would blow the max_execution_time in the web request. The page polls the result.
      */
+    /** Which day the collection targets: 0 = today, 1 = yesterday, 2 = two days ago. */
+    public int $diaAgregacao = 0;
+
     public function agregarAgora(): void
     {
         if ($this->aAgregar || $this->plataformasSelecionadas === []) {
@@ -141,7 +144,7 @@ class Noticias extends Component
         $this->agregacaoToken = $token;
         $this->aAgregar = true;
 
-        AgregarConteudoJob::dispatch($token, array_values($this->plataformasSelecionadas));
+        AgregarConteudoJob::dispatch($token, array_values($this->plataformasSelecionadas), null, max(0, min(2, (int) $this->diaAgregacao)));
 
         $this->verificarAgregacao();
     }

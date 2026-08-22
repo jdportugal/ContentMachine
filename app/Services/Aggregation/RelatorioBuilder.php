@@ -318,8 +318,13 @@ class RelatorioBuilder
             ."(«If you're …, you're wasting …»), or as the thing they don't know exists.\n"
             .'- Then 3–6 short sentences, in this order: the problem → the tip → HOW to do it, concretely '
             ."(name the command, the setting, the menu, the exact wording).\n"
-            .'- End with the one-line payoff: what changes for them.'
-            ."\n- Separate consecutive scripts with a line containing only `---`.\n"
+            .'- Add a PROOF BEAT when the material has one — a real number or before/after '
+            ."(«I ran the same prompt with and without it: 445 lines vs 246»).\n"
+            .'- End with the payoff (what changes for them) plus ONE CTA sentence: '
+            ."«comment WORD and I'll send you the link», where WORD is one lowercase keyword tied to the tool.\n"
+            .'- Register: spoken and casual — «you», contractions, short sentences, the occasional '
+            ."«right?». A creator talking, not documentation.\n"
+            ."- Separate consecutive scripts with a line containing only `---`.\n"
             .'- Each script MUST stand alone: NO overall intro or outro, NO «in this video», '
             ."NO references to the other scripts or to «this week».\n\n"
             ."RULES:\n"
@@ -373,12 +378,17 @@ class RelatorioBuilder
             .'  6–12 words, present tense, precise NON-ROUND numbers («\$1.5k», «60%», not «thousands»). '
             .'It must still NAME the subject — it stays on screen, so it is a claim, not a tease: '
             ."NEVER «You won't believe what OpenAI did» and never generic «Big news from X».\n"
-            .'- The BODY does not repeat the lead — it goes DEEPER: the concrete details (versions, prices, dates, '
-            .'availability), the context that explains it (what came before, who it competes with), why it matters, '
-            ."and what happens next when known. Substance over padding: every sentence must add a fact or a consequence.\n\n"
+            .'- The BODY is the SPOKEN SCRIPT of a 30–45s creator video (60–120 words), in this shape:\n'
+            ."    1. COLD OPEN — the claim itself, conversational: «Anthropic just dropped X», «You don't need to pay for Y anymore». Never «in today's news».\n"
+            ."    2. WHAT IT IS — 2–4 short sentences with the concrete details (names, versions, prices, dates, limits), each framed as what it changes FOR THE VIEWER, not as an announcement.\n"
+            ."    3. PROOF BEAT when the material has one — a number, a before/after, a deadline («that's 445 lines down to 246», «the deadline is July 17th»).\n"
+            ."    4. CTA CLOSE — exactly one sentence: «If you want the link, just comment WORD and I'll send it to you», where WORD is ONE lowercase keyword tied to the subject.\n"
+            .'- It does not repeat the lead word-for-word — it re-says it the way a person talks. '
+            ."Substance over padding: every sentence adds a fact or a consequence.\n\n"
             ."TONE:\n"
-            .'- Clear and engaging. Do NOT just state facts: EXPLAIN what happened and why it matters '
-            ."(«…and this matters because…»).\n\n"
+            .'- Spoken, direct and casual — talk TO the viewer («you», «you guys»), short sentences, contractions, '
+            ."the occasional rhetorical tap («right?», «and here is the crazy part»). This gets read out loud by a "
+            ."creator, not by a news anchor — no editorial phrases like «this matters because».\n\n"
             ."CONTENT:\n"
             .'- Cover ONLY relevant news: releases, new models/products, major updates, acquisitions, '
             .'funding rounds, studies, numbers. IGNORE tutorials, personal opinions, promotions, sponsorships and '

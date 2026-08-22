@@ -34,6 +34,7 @@ class AgregarConteudoJob implements ShouldQueue
         public readonly string $token,
         public readonly ?array $plataformas = null,
         public readonly ?int $limite = null,
+        public readonly int $diasAtras = 0,
     ) {
         $this->captureProject();
     }
@@ -45,7 +46,7 @@ class AgregarConteudoJob implements ShouldQueue
         $this->activateProject();
 
         try {
-            $resumo = $aggregator->aggregate($this->plataformas, $this->limite);
+            $resumo = $aggregator->aggregate($this->plataformas, $this->limite, $this->diasAtras);
 
             Cache::put(self::key($this->token), $resumo, now()->addMinutes(30));
         } finally {
