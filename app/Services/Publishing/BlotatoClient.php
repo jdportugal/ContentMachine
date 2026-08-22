@@ -91,6 +91,11 @@ class BlotatoClient
         bool $useNextFreeSlot = false,
         ?string $title = null,
     ): array {
+        // Blotato enforces Instagram's cap and 422s the whole post over it.
+        if ($targetType === 'instagram') {
+            $text = $this->capHashtags($text, 5);
+        }
+
         $body = [
             'post' => [
                 'accountId' => $accountId,
@@ -131,12 +136,27 @@ class BlotatoClient
                 'disabledComments' => false,
                 'disabledDuet' => false,
                 'disabledStitch' => false,
-                'isBrandContent' => false,
+                'isBrandedContent' => false,
                 'isYourBrand' => false,
                 'isAiGenerated' => true,
             ],
             default => [], // instagram, linkedin, threads: targetType only
         };
+    }
+
+    /** Keep the first $max hashtags and drop the rest, wherever they appear. */
+    private function capHashtags(string $text, int $max): string
+    {
+        $i = 0;
+        $out = (string) preg_replace_callback(
+            '/#[\pL\pN_]+/u',
+            function (array $m) use (&$i, $max): string {
+                return ++$i <= $max ? $m[0] : '';
+            },
+            $text,
+        );
+
+        return trim((string) preg_replace('/ {2,}/', ' ', $out));
     }
 
     private function mime(string $path): string

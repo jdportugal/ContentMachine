@@ -55,7 +55,11 @@
         {{-- ══════════════════════════ SOURCES ══════════════════════════ --}}
         @if ($secao === 'fontes')
             <x-panel eyebrow="Aggregator" title="Sources to crawl" glyph="☙">
-                <p class="text-ink-soft -mt-2 mb-4">One entry per line — channels, subreddits, accounts or links that feed the news report.</p>
+                <div class="flex items-start justify-between gap-3 -mt-2 mb-4">
+                    <p class="text-ink-soft">One entry per line — channels, subreddits, accounts or links that feed the news report.</p>
+                    <button type="button" wire:click="exportarFontes" title="Download all aggregator sources and channels as JSON"
+                            class="shrink-0 border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-teal/40 rounded-sm px-3 py-1 font-mono text-xs transition">⇩ Export</button>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     @php
                         $rotulos = [
@@ -165,9 +169,14 @@
             <x-panel eyebrow="Publishing" title="Zernio DM automations" glyph="📬">
                 <p class="text-ink-soft -mt-2 mb-4">
                     Powers <span class="text-teal">“DM me GUIDE and I'll send the link”</span> on a finished post.
-                    Copy the profile and Instagram account ids from your Zernio dashboard; Instagram is the only
-                    platform we publish to that Zernio can comment/DM on. Needs the Zernio key (API Keys tab).
+                    Instagram is the only platform we publish to that Zernio can comment/DM on.
+                    With the Zernio key set (API Keys tab), «Fetch from Zernio» fills both ids from the
+                    account connected there.
                 </p>
+                <div class="-mt-2 mb-4">
+                    <button type="button" wire:click="buscarZernio" title="Ask Zernio for the connected Instagram account and fill both ids"
+                            class="border border-ink-soft/25 text-ink-soft hover:text-ink hover:border-teal/40 rounded-sm px-3 py-1 font-mono text-xs transition">⇣ Fetch from Zernio</button>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach (['profile' => 'Profile id', 'instagram' => 'Instagram account id'] as $campo => $rotulo)
                         <div>

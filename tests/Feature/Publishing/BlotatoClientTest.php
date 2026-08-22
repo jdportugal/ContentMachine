@@ -87,6 +87,46 @@ class BlotatoClientTest extends TestCase
         Http::assertSent(fn (Request $r) => ($r->data()['useNextFreeSlot'] ?? null) === true);
     }
 
+    /** Blotato 400s a TikTok post without `isBrandedContent` (their exact name). */
+    public function test_tiktok_target_carries_the_branded_content_disclosure(): void
+    {
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'p1'])]);
+
+        $this->client()->publish('acc', 'tiktok', 'hello');
+
+        Http::assertSent(fn (Request $r) => str_contains($r->url(), '/v2/posts')
+            && $r['post']['target']['isBrandedContent'] === false
+            && $r['post']['target']['isAiGenerated'] === true);
+    }
+
+    /** Blotato 422s an Instagram post with more than 5 hashtags — cap, don't fail. */
+    public function test_instagram_captions_are_capped_at_five_hashtags(): void
+    {
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'p1'])]);
+
+        $this->client()->publish('acc', 'instagram', "Great news!
+
+#ai #video #claude #news #tech #automation #extra");
+
+        Http::assertSent(fn (Request $r) => $r['post']['content']['text'] === "Great news!
+
+#ai #video #claude #news #tech");
+    }
+
+    /** Other platforms keep every hashtag — the cap is Instagram's rule alone. */
+    public function test_other_platforms_keep_all_hashtags(): void
+    {
+        Http::fake(['*/v2/posts' => Http::response(['id' => 'p1'])]);
+
+        $this->client()->publish('acc', 'youtube', "T
+
+#a #b #c #d #e #f #g");
+
+        Http::assertSent(fn (Request $r) => $r['post']['content']['text'] === "T
+
+#a #b #c #d #e #f #g");
+    }
+
     public function test_youtube_target_gets_required_extras(): void
     {
         Http::fake(['*/v2/posts' => Http::response(['id' => 'yt'])]);

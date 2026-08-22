@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\Projects\ProjectContext;
+use App\Services\Publishing\ZernioClient;
 use App\Services\Projects\ProjectRepository;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Settings\SharedKeys;
@@ -207,6 +208,53 @@ class Definicoes extends Component
 
         $definicoes->save(['chaves' => [$chave => '']]);
         $this->recarregarChaves();
+    }
+
+    /**
+     * Fill the Zernio DM-automation ids by asking Zernio for its connected
+     * Instagram account — the dashboard doesn't surface them, the API does.
+     */
+    public function buscarZernio(): void
+    {
+        try {
+            $contas = app(ZernioClient::class)->accounts('instagram');
+        } catch (\Throwable $e) {
+            $this->dispatch('toast', message: 'Zernio: '.$e->getMessage(), type: 'erro');
+
+            return;
+        }
+
+        $conta = $contas[0] ?? null;
+        if (! is_array($conta)) {
+            $this->dispatch('toast', message: 'Zernio has no connected Instagram account yet — connect it on zernio.com first.', type: 'erro');
+
+            return;
+        }
+
+        $perfil = $conta['profileId'] ?? null; // expanded object or plain id
+        $this->zernio['instagram'] = (string) ($conta['_id'] ?? '');
+        $this->zernio['profile'] = (string) (is_array($perfil) ? ($perfil['_id'] ?? '') : ($perfil ?? ''));
+        $this->dispatch('toast', message: 'Zernio ids filled from @'.($conta['username'] ?? '?').' — remember to Save.');
+    }
+
+    /**
+     * Download the aggregator's configured sources (sources to crawl + channels
+     * to aggregate) as JSON — exports what is on screen, unsaved edits included.
+     */
+    public function exportarFontes(): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        $dados = [
+            'agregador' => $this->emListas($this->fontes),
+            'canais' => collect($this->canais)
+                ->map(fn (array $lista) => array_values(array_filter(array_map('trim', $lista))))
+                ->all(),
+        ];
+
+        return response()->streamDownload(
+            fn () => print json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'aggregator-sources.json',
+            ['Content-Type' => 'application/json'],
+        );
     }
 
     public function adicionarCanal(string $plataforma): void

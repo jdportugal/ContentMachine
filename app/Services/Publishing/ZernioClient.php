@@ -36,6 +36,21 @@ class ZernioClient
     }
 
     /**
+     * The accounts connected in Zernio, optionally filtered by platform — each
+     * row carries `_id` (the account id) and `profileId` (its profile), which
+     * are exactly the two ids the DM automations need.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public function accounts(?string $platform = null): array
+    {
+        return $this->http()
+            ->get('/accounts', array_filter(['platform' => $platform, 'status' => 'connected']))
+            ->throw()
+            ->json('accounts') ?? [];
+    }
+
+    /**
      * Creates an account-wide comment-to-DM automation.
      *
      * Account-wide (no platformPostId) because we publish through Blotato and

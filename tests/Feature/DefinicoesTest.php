@@ -94,6 +94,33 @@ class DefinicoesTest extends TestCase
         $this->assertSame(['canal-a', 'canal-b'], app(SettingsRepository::class)->get('agregador.youtube'));
     }
 
+    public function test_exportar_fontes_descarrega_o_json_das_fontes(): void
+    {
+        Livewire::test(Definicoes::class)
+            ->set('fontes.youtube', "canal-a\ncanal-b")
+            ->set('canais.youtube.0', 'https://www.youtube.com/@canal')
+            ->call('exportarFontes')
+            ->assertFileDownloaded('aggregator-sources.json');
+    }
+
+    public function test_buscar_zernio_preenche_os_ids_da_conta_instagram(): void
+    {
+        config(['services.zernio.key' => 'zk_test']);
+        \Illuminate\Support\Facades\Http::fake([
+            'zernio.com/api/v1/accounts*' => \Illuminate\Support\Facades\Http::response(['accounts' => [[
+                '_id' => 'acc_ig_1',
+                'platform' => 'instagram',
+                'username' => 'aicontentmachines',
+                'profileId' => ['_id' => 'prof_1', 'name' => 'Default'],
+            ]]]),
+        ]);
+
+        Livewire::test(Definicoes::class)
+            ->call('buscarZernio')
+            ->assertSet('zernio.instagram', 'acc_ig_1')
+            ->assertSet('zernio.profile', 'prof_1');
+    }
+
     /**
      * The keys must NEVER reach the browser. $chaves is a public Livewire
      * property, so anything loaded into it is serialised into the page — that is
