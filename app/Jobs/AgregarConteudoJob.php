@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\NewsAggregator;
 use App\Services\Projects\ProjectContext;
+use App\Services\Support\JobFailure;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -56,7 +57,10 @@ class AgregarConteudoJob implements ShouldQueue
 
     public function failed(\Throwable $e): void
     {
-        Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(30));
+        Cache::put(self::key($this->token), [
+            'erro' => true,
+            'motivo' => JobFailure::motivo($e),
+        ], now()->addMinutes(30));
         $this->libertar();
     }
 

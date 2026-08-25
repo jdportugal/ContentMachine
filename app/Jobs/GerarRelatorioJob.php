@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Jobs\Concerns\RunsInProject;
 use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Projects\ProjectLanguage;
+use App\Services\Support\JobFailure;
 use App\Services\Vault\VaultContract;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -86,7 +87,10 @@ class GerarRelatorioJob implements ShouldQueue
 
     public function failed(\Throwable $e): void
     {
-        Cache::put(self::key($this->token), ['erro' => true], now()->addMinutes(30));
+        Cache::put(self::key($this->token), [
+            'erro' => true,
+            'motivo' => JobFailure::motivo($e),
+        ], now()->addMinutes(30));
     }
 
     public static function key(string $token): string

@@ -93,6 +93,52 @@ class MonitoringCollectionTest extends TestCase
                 && str_contains($params['message'], 'Apify failed'));
     }
 
+    /**
+     * Actors report failures as dataset rows ({"error": "not_found"}). Mapping
+     * one produced a fake post (md5 id, zero metrics) and the "successful" save
+     * overwrote the last good collection with garbage.
+     */
+    public function test_error_rows_are_not_posts_and_fail_the_collection(): void
+    {
+        $store = app(MonitoringStore::class);
+        $store->guardar('instagram', [['id' => 'old', 'plataforma' => 'instagram', 'views' => 10]], ['subscribers' => 5]);
+
+        Http::fake(['api.apify.com/*' => Http::response([
+            ['url' => 'https://instagram.com/x/', 'username' => 'x', 'error' => 'not_found', 'errorDescription' => 'Post does not exist'],
+        ])]);
+        Log::shouldReceive('warning')->once()->withArgs(fn (string $m) => str_contains($m, 'not_found'));
+
+        $fetcher = $this->fetcher();
+        $this->assertSame([], $fetcher->atualizar('instagram', 'https://instagram.com/x/'));
+
+        $this->assertStringContainsString('not_found', (string) $fetcher->ultimoErro());
+        $this->assertSame('old', $store->itens('instagram')[0]['id']); // old data intact
+    }
+
+    /** Post rows carry no follower count — the profile actor fills followers + real total posts. */
+    public function test_instagram_followers_come_from_the_profile_actor(): void
+    {
+        Http::fake([
+            'api.apify.com/v2/acts/apify~instagram-scraper/*' => Http::response([
+                ['id' => 'p1', 'url' => 'https://instagram.com/p/1', 'type' => 'Video', 'likesCount' => 3,
+                    'videoPlayCount' => 33, 'videoViewCount' => 11, 'timestamp' => '2026-08-22T02:00:43.000Z'],
+            ]),
+            'api.apify.com/v2/acts/apify~instagram-profile-scraper/*' => Http::response([
+                ['username' => 'x', 'followersCount' => 42, 'postsCount' => 17],
+            ]),
+        ]);
+
+        $this->fetcher()->atualizar('instagram', 'https://instagram.com/x/');
+
+        $canal = app(MonitoringStore::class)->canal('instagram');
+        $this->assertSame(42, $canal['subscribers']);
+        $this->assertSame(17, $canal['posts']);
+
+        $item = app(MonitoringStore::class)->itens('instagram')[0];
+        $this->assertSame(33, $item['views']);                          // plays beat videoViewCount
+        $this->assertStringContainsString('T', $item['publicado_em']);  // hour kept (best-time chart)
+    }
+
     public function test_a_successful_collection_stores_and_reports_no_error(): void
     {
         Http::fake(['api.apify.com/*' => Http::response([

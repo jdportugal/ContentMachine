@@ -62,13 +62,16 @@ return [
         'plataformas' => ['youtube', 'instagram', 'tiktok', 'linkedin'],
         // Number of recent posts to collect per network.
         'limite' => (int) env('MONITORING_LIMITE', 12),
-        // Networks that do NOT expose public metrics (e.g. Instagram hides likes/
-        // views from logged-out visitors). We show only thumbnails + dates.
-        'sem_metricas' => ['instagram'],
+        // Networks that do NOT expose public metrics — we show only thumbnails +
+        // dates for these. Empty by default: the Apify actors DO return likes/
+        // views for Instagram (the old yt-dlp path was the one that could not).
+        'sem_metricas' => array_filter(explode(',', (string) env('MONITORING_SEM_METRICAS', ''))),
         // Apify actors for the non-YouTube networks (YouTube uses yt-dlp, free).
         // Requires APIFY_TOKEN. Override the actors per env if you use others.
         'apify' => [
             'instagram' => env('APIFY_ACTOR_INSTAGRAM', 'apify~instagram-scraper'),
+            // Profile details (followers, total posts) — the post rows don't carry them.
+            'instagram_profile' => env('APIFY_ACTOR_INSTAGRAM_PROFILE', 'apify~instagram-profile-scraper'),
             'tiktok' => env('APIFY_ACTOR_TIKTOK', 'clockworks~tiktok-scraper'),
             'linkedin' => env('APIFY_ACTOR_LINKEDIN', ''), // no reliable actor by default
             // Only used as a FALLBACK: YouTube is collected with yt-dlp, and this
@@ -107,8 +110,18 @@ return [
     'aggregation' => [
         'ytdlp_cmd' => env('YTDLP_CMD', 'yt-dlp'),
         'limite_por_canal' => (int) env('AGGREGATION_LIMIT', 5),
+        // How many days back a normal run may reach. Channels post at very
+        // different rates, and without this a quiet channel's months-old video
+        // arrives as if it were today's news. 0 = no window (keep the latest N
+        // per channel, however old).
+        'dias_recentes' => (int) env('AGGREGATION_RECENT_DAYS', 7),
         'sub_langs' => ['pt', 'en'],
         'timeout' => (int) env('AGGREGATION_TIMEOUT', 45), // fail-fast per yt-dlp call (hung channels fail fast)
+        // Collect YouTube through the Apify actor instead of local yt-dlp. One
+        // API call per channel rather than one subprocess per video, so a run
+        // over many channels finishes in minutes and no dead handle stalls it.
+        // false (or no actor/token) falls back to yt-dlp.
+        'youtube_via_apify' => (bool) env('AGGREGATION_YOUTUBE_VIA_APIFY', true),
         'extractor_args' => [
             'youtube.com' => 'youtube:player_client=android',
             'youtu.be' => 'youtube:player_client=android',
@@ -261,7 +274,9 @@ return [
     // Unit prices (USD) used by the cost ledger. Adjust to your real plans.
     'custos' => [
         'kie_imagem' => env('CUSTO_KIE_IMAGEM', 0.04),          // per generated image
+        'kie_video' => env('CUSTO_KIE_VIDEO', 0.40),            // per generated video (5s)
         'elevenlabs_1k_chars' => env('CUSTO_TTS_1K', 0.30),     // per 1k synthesized chars
+        'apify_busca' => env('CUSTO_APIFY_BUSCA', 0.01),        // per image-search run
         // USD per 1M tokens [input, output], per LlmClient provider.
         'llm_mtok' => [
             'anthropic' => [3.0, 15.0],
@@ -278,7 +293,17 @@ return [
         // Output ceiling for the clip/SFX LLM calls. Separate from aggregation's
         // 8000: these prompts return a whole TSX component wrapped in JSON, which
         // is several times a news summary and silently truncates at that ceiling.
-        'max_tokens' => (int) env('CLIPS_MAX_TOKENS', 16000),
+        // Raised from 16000 when adaptive thinking was turned on: thinking tokens
+        // count against this ceiling, so the old value left a whole TSX component
+        // barely any room and truncated (which surfaces as the explicit
+        // "raise CLIPS_MAX_TOKENS" error). llm_timeout below is already 600s, so
+        // the longer response has time to arrive.
+        'max_tokens' => (int) env('CLIPS_MAX_TOKENS', 32000),
+        // The Anthropic model for the clip/SFX calls, SEPARATE from aggregation's.
+        // Writing a Remotion component that lays itself out across three frames is
+        // a harder task than summarising a news item, and these calls are few —
+        // so they get the current top model while the aggregator keeps its own.
+        'anthropic_model' => env('CLIPS_ANTHROPIC_MODEL', 'claude-opus-5'),
         // How long ONE call to the model may take. Writing a whole component is a
         // minutes-long response, and a ceiling below that times out and retries
         // from scratch — three times — turning one slow generation into three.
@@ -320,7 +345,24 @@ return [
         // planner marks with `generate`. Needs the kie key; off = skipped cleanly.
         'generate_images' => (bool) env('CLIPS_GENERATE_IMAGES', true),
         'image_max' => (int) env('CLIPS_IMAGE_MAX', 8),        // per clip, to bound cost/time
+        // How much clip one generated image has to earn. The planner is told to be
+        // visually dense and the bare-scene filler tops up whatever is left, so
+        // without a per-length budget a 25-second clip asked for as many pictures
+        // as a three-minute one — seven paid generations to approve on a short.
+        // Lower = more images. image_max above is still the hard ceiling.
+        'image_every_seconds' => (int) env('CLIPS_IMAGE_EVERY_SECONDS', 12),
         'image_aspect' => env('CLIPS_IMAGE_ASPECT', '9:16'),   // portrait clips
+        // Search the web for the REAL image a suggestion asks for (a person, a
+        // logo, a product, a page) before falling back to a generated one. Off =
+        // suggestions arrive empty and are generated/uploaded as before.
+        'fetch_images' => (bool) env('CLIPS_FETCH_IMAGES', true),
+        // A picture whose long edge is under this looks awful fullscreen in a
+        // portrait frame, so it is rejected rather than fetched.
+        'fetch_min_width' => (int) env('CLIPS_FETCH_MIN_WIDTH', 600),
+        'fetch_max_bytes' => (int) env('CLIPS_FETCH_MAX_BYTES', 10485760),
+        // Fallback image search when the model's own web search names nothing.
+        // Any Apify image-search actor; empty disables the fallback.
+        'image_search_actor' => env('APIFY_ACTOR_IMAGE_SEARCH', 'apify~google-images-scraper'),
         'image_style' => env('CLIPS_IMAGE_STYLE', 'cinematic, photographic, high detail, dramatic lighting, vertical composition, no text or watermarks'),
         // Transcription engine: 'auto' (OpenAI when a key is set, else local
         // Whisper), 'openai' or 'local'. The per-step binding in Settings wins.
@@ -394,6 +436,34 @@ return [
     | WATCHTOWER_URL + WATCHTOWER_TOKEN. Empty watchtower_url → the update button is
     | hidden (e.g. local/dev), but the version check still works.
     */
+    /*
+    |--------------------------------------------------------------------------
+    | Queue workers (Settings → Workers)
+    |--------------------------------------------------------------------------
+    | The queues the app dispatches to, and how to run a worker for each. This is
+    | the ONLY source of manageable queue names — the Settings panel starts and
+    | stops workers by running a process, so a name that did not come from this
+    | whitelist must never reach that command line.
+    |
+    | `php_binary` matters: under PHP-FPM, PHP_BINARY is the *php-fpm* binary,
+    | which cannot run artisan. Set WORKER_PHP_BINARY to the CLI php when the
+    | Start button reports that it could not launch.
+    |
+    | Managing workers only works where the web process and the workers share a
+    | host and a process namespace. In the Docker deploy they are separate
+    | containers, so the panel shows status as unavailable rather than lying.
+    */
+    'workers' => [
+        'php_binary' => env('WORKER_PHP_BINARY', ''),
+        'timeout' => (int) env('WORKER_TIMEOUT', 1800),
+        'tries' => (int) env('WORKER_TRIES', 3),
+        'queues' => [
+            'default' => 'Clips, plans, renders — the main pipeline',
+            'previews' => 'SFX and background preview renders',
+            'media' => 'Publicações card images (kie.ai)',
+        ],
+    ],
+
     'update' => [
         'version' => env('APP_VERSION', 'dev'),
         'image' => env('APP_IMAGE', 'ghcr.io/jdportugal/contentmachine'),

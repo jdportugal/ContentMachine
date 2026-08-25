@@ -52,6 +52,7 @@ class YtDlpMonitoringFetcher
         // number of posts and to capture the channel stats (subscribers,
         // name) that yt-dlp returns at the top — at no extra cost.
         $entries = [];
+        $porLista = [];
         $canal = ['subscribers' => 0, 'posts' => 0, 'nome' => ''];
         foreach ($this->listingUrls($plataforma, $channelUrl) as $listUrl) {
             try {
@@ -65,18 +66,42 @@ class YtDlpMonitoringFetcher
             }
             $canal['subscribers'] = max($canal['subscribers'], (int) ($listing['channel_follower_count'] ?? 0));
 
+            $lista = [];
             foreach (($listing['entries'] ?? []) as $entry) {
                 $id = (string) ($entry['id'] ?? $this->urlDe($entry) ?? '');
                 if ($id !== '' && ! isset($entries[$id])) {
                     $entries[$id] = $entry;
+                    $lista[] = $entry;
                 }
+            }
+            if ($lista !== []) {
+                $porLista[] = $lista;
             }
         }
         $canal['posts'] = count($entries);
 
-        // Only the most recent `limite` get full metadata (slow step).
+        // Only the most recent `limite` get full metadata (slow step). A FAIR
+        // share per listing: /videos returns up to 200 entries, so slicing the
+        // merged list handed every slot to regular videos and the /shorts tab
+        // never made the cut. The flat listing carries no dates to sort across
+        // tabs — give each tab an equal quota, backfill leftovers, and sort by
+        // the real date once the metadata is in.
+        $quota = (int) ceil($limite / max(1, count($porLista)));
+        $escolhidos = [];
+        foreach ($porLista as $lista) {
+            $escolhidos = array_merge($escolhidos, array_slice($lista, 0, $quota));
+        }
+        foreach ($porLista as $lista) {
+            foreach (array_slice($lista, $quota) as $entry) {
+                if (count($escolhidos) >= $limite) {
+                    break 2;
+                }
+                $escolhidos[] = $entry;
+            }
+        }
+
         $itens = [];
-        foreach (array_slice(array_values($entries), 0, $limite) as $entry) {
+        foreach (array_slice($escolhidos, 0, $limite) as $entry) {
             $url = $this->urlDe($entry);
             if ($url === null) {
                 continue;
@@ -96,6 +121,9 @@ class YtDlpMonitoringFetcher
                 $itens[] = $item;
             }
         }
+
+        // Videos and shorts were fetched tab by tab — order them by real date.
+        usort($itens, fn ($a, $b) => strcmp((string) $b['publicado_em'], (string) $a['publicado_em']));
 
         // Local copy of the thumbnails (CDNs may block hotlinking in the browser).
         $thumbs = app(ThumbnailCache::class);
@@ -184,13 +212,14 @@ class YtDlpMonitoringFetcher
 
     private function data(array $m): string
     {
-        // yt-dlp: upload_date = YYYYMMDD; timestamp = epoch.
+        // yt-dlp: timestamp = epoch (carries the hour — the best-time chart
+        // needs it); upload_date = YYYYMMDD (date only) as fallback.
+        if (! empty($m['timestamp']) && is_numeric($m['timestamp'])) {
+            return date('c', (int) $m['timestamp']);
+        }
         $d = (string) ($m['upload_date'] ?? '');
         if (preg_match('/^\d{8}$/', $d)) {
             return substr($d, 0, 4).'-'.substr($d, 4, 2).'-'.substr($d, 6, 2);
-        }
-        if (! empty($m['timestamp']) && is_numeric($m['timestamp'])) {
-            return date('Y-m-d', (int) $m['timestamp']);
         }
 
         return now()->toDateString();

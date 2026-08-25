@@ -33,8 +33,9 @@ class MonitoringHistory
      * Record today's totals, replacing today's note if there already is one.
      *
      * @param  array<string,mixed>  $totais  as returned by MonitoringStats::totais()
+     * @param  array<string,int>  $redes  followers per platform (for per-network trends)
      */
-    public function registar(array $totais, ?Carbon $quando = null): void
+    public function registar(array $totais, array $redes = [], ?Carbon $quando = null): void
     {
         $dia = ($quando ?? now())->toDateString();
 
@@ -43,17 +44,54 @@ class MonitoringHistory
             $metricas[$m] = (int) ($totais[$m] ?? 0);
         }
 
+        $frontmatter = [
+            'titulo' => 'Channel totals — '.$dia,
+            'tipo' => self::TIPO,
+            'data' => $dia,
+            'metricas' => $metricas,
+            'tags' => ['monitorizacao', 'estatisticas'],
+        ];
+        if ($redes !== []) {
+            $frontmatter['redes'] = array_map('intval', $redes);
+        }
+
         $this->vault->put(
             self::FOLDER.'/'.$dia.'.md',
-            [
-                'titulo' => 'Channel totals — '.$dia,
-                'tipo' => self::TIPO,
-                'data' => $dia,
-                'metricas' => $metricas,
-                'tags' => ['monitorizacao', 'estatisticas'],
-            ],
+            $frontmatter,
             "Summed channel totals for {$dia}, written by the monitoring collection.\n"
         );
+    }
+
+    /**
+     * The recorded days (oldest→newest), at most the last $dias, for evolution
+     * charts: each entry carries the date label and the four daily totals.
+     *
+     * @return array<int,array{data:string,label:string,subscritores:int,publicacoes:int,visualizacoes:int,interacoes:int}>
+     */
+    public function serie(int $dias = 30): array
+    {
+        try {
+            $notas = $this->vault->all(self::FOLDER)
+                ->filter(fn ($n) => $n->get('tipo') === self::TIPO && is_string($n->get('data')))
+                ->sortBy(fn ($n) => (string) $n->get('data'))
+                ->values()
+                ->take(-$dias);
+        } catch (\Throwable) {
+            return [];
+        }
+
+        return $notas->map(function ($n) {
+            $dia = (string) $n->get('data');
+            $metricas = (array) $n->get('metricas', []);
+            $linha = ['data' => $dia, 'label' => Carbon::parse($dia)->translatedFormat('d/m')];
+            foreach (self::METRICAS as $m) {
+                $linha[$m] = (int) ($metricas[$m] ?? 0);
+            }
+            // Followers per platform — older notes predate this and carry none.
+            $linha['redes'] = array_map('intval', (array) $n->get('redes', []));
+
+            return $linha;
+        })->values()->all();
     }
 
     /**

@@ -21,7 +21,11 @@ trait BuildsAnimationPrompt
 
     protected array $presents = ['animation', 'over', 'video', 'split'];
 
-    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true): string
+    /**
+     * @param  string  $instructions  extra direction for THIS clip only (the
+     *                                project's own manual is read from disk)
+     */
+    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true, string $instructions = ''): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
         $language = ProjectLanguage::name();
@@ -40,6 +44,12 @@ trait BuildsAnimationPrompt
         $customBlock = app(EffectLibrary::class)->promptBlock();
         $backgroundBlock = app(BackgroundLibrary::class)->promptBlock();
         $layers = implode(', ', $this->allLayerTypes());
+        // Site filming and image generation both ride on the image-reveal layer —
+        // when it is toggled off in the SFX showcase, the whole image block must
+        // go too, or the prompt contradicts the type list and the sanitizer.
+        if (! in_array('image-reveal', $this->allLayerTypes(), true)) {
+            $canGenerateImages = false;
+        }
         // Intro effects: the FIRST scene should open with one of these (if any are marked).
         $introSlugs = app(EffectLibrary::class)->introSlugs();
         $introBlock = empty($introSlugs) ? '' : "\n# OPENING (INTRO)\n"
@@ -70,7 +80,7 @@ trait BuildsAnimationPrompt
                 .'THERE IS NO BACKGROUND VIDEO: a scene with no layer is a BLANK screen with only a caption. So carry a visual layer whenever you can — a chart/card/diagram/timeline when there is a real point, '
                 .($canGenerateImages
                     ? 'and OTHERWISE an image-reveal with "generate" describing an image of what is being said.'
-                    : 'or a card/bullet-list/diagram/comparison built from the point (you CANNOT create images — never use image-reveal without a PROVIDED src). EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken point into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene as bare karaoke.');
+                    : 'or a card/bullet-list/diagram/comparison built from the point (you CANNOT create images — image-reveal only with a PROVIDED src or a real "site" URL to film). EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken point into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene as bare karaoke.');
 
         // Image guidance + image-reveal schema depend on whether the studio can
         // actually generate images (kie credits). No credits → provided images
@@ -80,20 +90,22 @@ trait BuildsAnimationPrompt
                 - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
                 - GENERATE AN IMAGE whenever a scene talks about something CONCRETE or VISUAL (a person, place, object, product, situation, metaphor) and no provided image fits: add an "image-reveal" layer with "generate": "<a vivid, specific description of the image to CREATE>" (instead of "src"). Describe it in ENGLISH, concrete and photographic — subject, setting, mood, lighting — and NEVER ask for any text, words, letters or logos in the image.
                 - BE VISUAL AND DENSE: most scenes should SHOW something tied to the EXACT words spoken there — a generated image, a provided image, a chart, a diagram or a card. Aim for a fresh, RELEVANT visual and vary the motion so the video never feels static.
-                - FILM A REAL WEBSITE when a scene talks about a specific product, company, tool or site whose actual page should be on screen: add an "image-reveal" layer with "site": "<the official https URL>" (instead of "generate"/"src") — the studio scroll-captures the REAL page and plays that video. Only when you are confident of the URL; a wrong page is worse than none.
+                - FILM A REAL WEBSITE — WHENEVER a scene talks about a specific product, company, tool or site with a public page (an AI product → its homepage, a repo → its GitHub page), PREFER "site" over "generate": add an "image-reveal" layer with "site": "<the official https URL>" (instead of "generate"/"src") — the studio scroll-captures the REAL page and plays that video. The real page beats an invented image; only skip it when you cannot name the URL with confidence.
+                - ONE SCREENSHOT INSTEAD OF A SCROLL — add "site_still": true alongside "site" when the point is the page's TOP: a logo, a headline, an app's main screen, a short scene. The studio then takes a single clean screenshot instead of six seconds of scrolling, which on a brief scene reads as restless.
                 G
             : <<<'G'
                 - IF IMAGES are provided, you MUST use each one in at least one scene (layer "image-reveal" with params.src = image id), unless clearly irrelevant.
-                - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate" and do NOT use image-reveal without a PROVIDED src. For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken words into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene bare.
+                - IMAGE GENERATION IS UNAVAILABLE: you CANNOT create new images, so do NOT use "generate". image-reveal is still ALLOWED with a PROVIDED src or with "site" (filming a real page needs no image generation — USE IT whenever the scene's subject has a public page). For a concrete point, build a NON-image visual instead — card, bullet-list, diagram, comparison, timeline, or a chart when the point is quantitative — from what is said. EVERY scene MUST carry a visual layer: when no chart/data fits, distil the spoken words into a card (short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene bare.
                 - BE VISUAL: give EVERY scene a visual tied to the EXACT words spoken there — chart/card/diagram/bullet-list — and vary the motion so no scene is empty.
-                - FILM A REAL WEBSITE when a scene talks about a specific product, company, tool or site whose actual page should be on screen: add an "image-reveal" layer with "site": "<the official https URL>" — the studio scroll-captures the REAL page and plays that video. Only when you are confident of the URL; a wrong page is worse than none.
+                - FILM A REAL WEBSITE — WHENEVER a scene talks about a specific product, company, tool or site with a public page (an AI product → its homepage, a repo → its GitHub page), add an "image-reveal" layer with "site": "<the official https URL>" — the studio scroll-captures the REAL page and plays that video. The real page beats any other visual for that scene; only skip it when you cannot name the URL with confidence.
+                - ONE SCREENSHOT INSTEAD OF A SCROLL — add "site_still": true alongside "site" when the point is the page's TOP: a logo, a headline, an app's main screen, a short scene. The studio then takes a single clean screenshot instead of six seconds of scrolling, which on a brief scene reads as restless.
                 G;
 
         $imageRevealSchema = $canGenerateImages
-            ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
-                .'  - Use EXACTLY ONE of "src" (a provided image id), "generate" (a description → AI image) or "site" (a real page → filmed). variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
-            : '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
-                .'  - Use EITHER "src" (a provided image id) OR "site" (a real page → filmed) — image generation is OFF, there is no "generate". VARY the variant across scenes.';
+            ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "site_still"?: bool, "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use EXACTLY ONE of "src" (a provided image id), "generate" (a description → AI image) or "site" (a real page → filmed, or screenshotted with "site_still"). variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
+            : '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "site_still"?: bool, "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
+                .'  - Use EITHER "src" (a provided image id) OR "site" (a real page → filmed, or screenshotted with "site_still") — image generation is OFF, there is no "generate". VARY the variant across scenes.';
 
         // What to do with a scene that has no natural chart/data visual. A lone big
         // word is never a whole scene; with images off the fallback is a card/list
@@ -101,6 +113,17 @@ trait BuildsAnimationPrompt
         $bareRule = $canGenerateImages
             ? 'If a scene has no real visual, give it an image — never a lone big word, never a bare caption-only frame.'
             : 'If a scene has no chart/data visual, build a card or bullet-list from the spoken point — never a lone big word, and NEVER a bare caption-only frame.';
+
+        // Direction for THIS clip alone. It goes LAST, after the project's style
+        // manual, and is allowed to override it: asking for something different
+        // on one video is the entire point of writing it.
+        $clipBlock = trim($instructions) !== ''
+            ? "\n\n=== INSTRUCTIONS FOR THIS CLIP (highest priority) ===\n"
+                ."Written by the director for this video only. Where these disagree with the style\n"
+                ."manual or the general guidance above, THESE WIN. Anything they do not mention\n"
+                ."stays exactly as specified above.\n\n"
+                .trim($instructions)
+            : '';
 
         return <<<PROMPT
 You are the clip director of the Brand Machine studio. You plan the video as a sequence of SCENES.
@@ -213,6 +236,7 @@ soon cuts the animation off mid-play and looks broken.
 
 === STYLE MANUAL (estilo-animacao.md) ===
 {$style}
+{$clipBlock}
 PROMPT;
     }
 

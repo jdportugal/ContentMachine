@@ -46,6 +46,7 @@ class CollectSiteJob implements ShouldQueue
 
         $req = collect($p->meta['image_requests'] ?? [])->firstWhere('key', $this->key);
         $site = is_array($req) ? (string) ($req['site'] ?? '') : '';
+        $still = is_array($req) && ! empty($req['still']);
 
         try {
             $url = $site !== '' ? $resolver->validar($site) : null;
@@ -54,11 +55,16 @@ class CollectSiteJob implements ShouldQueue
             }
 
             $c = config('contentmachine.clips');
-            $src = $capture->capture($url, (int) $c['width'], (int) $c['height'], self::SECONDS);
+            // Websites are landscape media — film a 16:9 desktop viewport, not the
+            // portrait clip frame. ImageReveal contains (never crops), so it shows
+            // whole in every variant, letterboxed over the blurred backdrop.
+            $src = $still
+                ? $capture->still($url, 1920, 1080)
+                : $capture->capture($url, 1920, 1080, self::SECONDS);
 
             // Store on the clips disk like an upload, so previews/renders find it.
             $disk = Storage::disk($c['disk']);
-            $path = 'clips/uploads/site-'.$this->key.'.mp4';
+            $path = 'clips/uploads/site-'.$this->key.($still ? '.png' : '.mp4');
             $disk->put($path, fopen($src, 'r'));
 
             $entry = [
@@ -67,8 +73,14 @@ class CollectSiteJob implements ShouldQueue
                 'description' => 'Website: '.$url,
                 'transparent' => false,
                 'tone' => 'mixed',
-                'video' => true,
+                'video' => ! $still,
             ];
+
+            // Filming the page took ~30s. Re-read before composing `images`/`meta`,
+            // which are written whole — otherwise this puts back the state as it
+            // was when the capture started and drops anything the user did while
+            // waiting. Same lost update as GenerateRequestImageJob.
+            $p->refresh();
 
             $uploads = $p->meta['image_uploads'] ?? [];
             $previous = $uploads[$this->key] ?? null;
@@ -96,6 +108,7 @@ class CollectSiteJob implements ShouldQueue
                 ]),
             ]);
         } catch (\Throwable $e) {
+            $p->refresh();  // same reason as above — `meta` is written whole
             $p->update(['meta' => array_merge($p->meta ?? [], [
                 'site_collecting' => array_diff_key($p->meta['site_collecting'] ?? [], [$this->key => true]),
                 'site_errors' => array_merge($p->meta['site_errors'] ?? [], [$this->key => Str::limit($e->getMessage(), 200)]),

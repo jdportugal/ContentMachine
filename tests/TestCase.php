@@ -33,6 +33,19 @@ abstract class TestCase extends BaseTestCase
             // Shared API keys live outside the vault — isolate them per test too.
             'contentmachine.settings.keys_path' => $this->vaultTemp.'/settings-keys.json',
         ]);
+        // SettingsOverlayProvider applies the overlay at BOOT — before the
+        // isolation above — so a real key in storage/app/settings-keys.json is
+        // already sitting in config() by the time a test runs. That makes the
+        // suite depend on the developer's own credentials (it flips drivers from
+        // 'fake' to 'api', and a stray call would bill them). Start every test
+        // from no keys; a test that needs one sets it.
+        config([
+            'services.anthropic.key' => '',
+            'services.openai.key' => '',
+            'services.gemini.key' => '',
+            'services.tensorx.key' => '',
+        ]);
+
         $this->app->singleton(VaultContract::class, fn () => new VaultRepository($this->vaultTemp));
         // ProjectContext may have resolved its default (real vault) during boot,
         // before the config above. Reset it so it re-reads the temp paths.

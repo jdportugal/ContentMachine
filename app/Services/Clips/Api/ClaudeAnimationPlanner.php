@@ -22,7 +22,7 @@ class ClaudeAnimationPlanner implements AnimationPlanner
     {
         $envelope = $this->runClaude(
             $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0), $options['facts'] ?? [], $options['images'] ?? []),
-            $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? [], (bool) ($options['can_generate_images'] ?? true)),
+            $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? [], (bool) ($options['can_generate_images'] ?? true), (string) ($options['instructions'] ?? '')),
             ['maxTurns' => 1],
         );
 

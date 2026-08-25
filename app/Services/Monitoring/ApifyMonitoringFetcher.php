@@ -90,18 +90,46 @@ class ApifyMonitoringFetcher
 
         $itens = [];
         $seguidores = 0;
+        $totalPosts = 0;
+        $erros = [];
         foreach ($raw as $r) {
             if (! is_array($r)) {
                 continue;
             }
+            // Actors report failures as dataset rows ({"error": "not_found", ...}).
+            // Mapping one produced a fake post with an md5 id and zero metrics —
+            // and the "successful" save overwrote the last good collection.
+            if (isset($r['error']) || isset($r['errorCode'])) {
+                $erros[] = trim(($r['error'] ?? '').' — '.($r['errorDescription'] ?? $r['errorCode'] ?? ''), ' —');
+                continue;
+            }
             $seguidores = max($seguidores, $this->seguidores($plataforma, $r));
+            $totalPosts = max($totalPosts, $this->totalPosts($plataforma, $r));
             $item = $this->mapear($plataforma, $r);
             if ($item !== null) {
                 $itens[] = $item;
             }
         }
 
-        $canal = ['subscribers' => $seguidores, 'posts' => count($itens), 'nome' => ''];
+        if ($itens === [] && $erros !== []) {
+            $this->ultimoErro = Str::limit(implode(' · ', array_unique($erros)), 300);
+            Log::warning("Apify collection failed for {$plataforma} (actor {$actor}): ".$this->ultimoErro
+                .' — check the profile URL in Settings.');
+
+            return [[], [], false];
+        }
+
+        // Instagram post rows do not carry the profile's follower count
+        // (ownerFollowersCount comes back null) — one extra profile-details run
+        // fills followers and the REAL total posts. Never fails the collection.
+        if ($plataforma === 'instagram' && $seguidores === 0 && $itens !== []) {
+            [$seguidores, $totalPosts] = $this->perfilInstagram($channelUrl);
+        }
+
+        $canal = ['subscribers' => $seguidores, 'posts' => $totalPosts > 0 ? $totalPosts : count($itens), 'nome' => ''];
+
+        // Actors put pinned posts first — the app expects most-recent-first.
+        usort($itens, fn ($a, $b) => strcmp((string) $b['publicado_em'], (string) $a['publicado_em']));
 
         // Keep a local copy of the thumbnails (the CDNs block hotlinking).
         $thumbs = app(ThumbnailCache::class);
@@ -111,6 +139,38 @@ class ApifyMonitoringFetcher
         unset($it);
 
         return [$this->pontuar($plataforma, $itens), $canal, true];
+    }
+
+    /**
+     * Followers + total posts of an Instagram profile, via the dedicated
+     * profile-details actor. [0, 0] on any failure — worth nothing more.
+     *
+     * @return array{0:int,1:int} [followers, total posts]
+     */
+    private function perfilInstagram(string $url): array
+    {
+        if (! preg_match('#instagram\.com/([^/?\#]+)#i', $url, $m)) {
+            return [0, 0];
+        }
+
+        try {
+            $raw = $this->apify->runActor(
+                (string) config('contentmachine.monitoring.apify.instagram_profile', 'apify~instagram-profile-scraper'),
+                ['usernames' => [$m[1]]],
+            );
+        } catch (Throwable $e) {
+            Log::warning('Apify instagram profile lookup failed: '.$e->getMessage());
+
+            return [0, 0];
+        }
+
+        foreach ($raw as $r) {
+            if (is_array($r) && ! isset($r['error'])) {
+                return [(int) ($r['followersCount'] ?? 0), (int) ($r['postsCount'] ?? 0)];
+            }
+        }
+
+        return [0, 0];
     }
 
     /** @return array<string,mixed> actor input per platform */
@@ -219,7 +279,7 @@ class ApifyMonitoringFetcher
             'thumbnail' => (string) ($r['displayUrl'] ?? ''),
             'publicado_em' => $this->data($r['timestamp'] ?? null),
             'duracao_seg' => (int) ($r['videoDuration'] ?? 0),
-            'views' => (int) ($r['videoViewCount'] ?? $r['videoPlayCount'] ?? 0),
+            'views' => (int) ($r['videoPlayCount'] ?? $r['videoViewCount'] ?? 0),
             'likes' => (int) ($r['likesCount'] ?? 0),
             'comentarios' => (int) ($r['commentsCount'] ?? 0),
             'partilhas' => 0,
@@ -276,6 +336,15 @@ class ApifyMonitoringFetcher
         ];
     }
 
+    /** The profile's REAL total post count, when a row carries it. */
+    private function totalPosts(string $plataforma, array $r): int
+    {
+        return match ($plataforma) {
+            'tiktok' => (int) Arr::get($r, 'authorMeta.video', 0),
+            default => 0,
+        };
+    }
+
     private function seguidores(string $plataforma, array $r): int
     {
         return match ($plataforma) {
@@ -300,12 +369,14 @@ class ApifyMonitoringFetcher
 
     private function data(mixed $valor): string
     {
+        // Keep the full timestamp — the actors send ISO datetimes and the
+        // best-time-to-post chart needs the hour; truncating to Y-m-d starved it.
         if (is_numeric($valor)) {
-            return date('Y-m-d', (int) $valor);
+            return date('c', (int) $valor);
         }
         $s = trim((string) ($valor ?? ''));
         if ($s !== '' && ($ts = strtotime($s)) !== false) {
-            return date('Y-m-d', $ts);
+            return date('c', $ts);
         }
 
         return now()->toDateString();

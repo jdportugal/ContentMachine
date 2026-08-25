@@ -67,6 +67,24 @@ class DesignSystemTest extends TestCase
         $this->assertSame('starfield', $tokens['texture']['kind']);
     }
 
+    /**
+     * The animation style manual is per-project and already feeds every clip's
+     * prompt — this page is the only way to edit it without opening the vault.
+     */
+    public function test_o_manual_de_animacao_do_projeto_e_lido_e_guardado(): void
+    {
+        $caminho = $this->tmp.'/estilo-animacao.md';
+        config(['contentmachine.clips.style_md' => $caminho]);
+        file_put_contents($caminho, "# Estilo\nSempre escuro.");
+
+        Livewire::test(DesignSystem::class)
+            ->assertSet('estilo', "# Estilo\nSempre escuro.")
+            ->set('estilo', "# Estilo\nSempre claro, sem gráficos.")
+            ->call('guardar');
+
+        $this->assertSame("# Estilo\nSempre claro, sem gráficos.", file_get_contents($caminho));
+    }
+
     public function test_sanitize_preenche_defaults_e_valida(): void
     {
         $t = DesignTheme::sanitize([

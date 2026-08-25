@@ -18,6 +18,13 @@ class DesignSystem extends Component
     /** Design system Markdown (editable). */
     public string $conteudo = '';
 
+    /**
+     * The project's animation style manual (estilo-animacao.md), appended to
+     * every clip's planning prompt. Lives beside the design system because it
+     * is the same job: telling the generators how this project should look.
+     */
+    public string $estilo = '';
+
     /** Uploaded .md file to seed the editor. */
     public $ficheiro = null;
 
@@ -30,6 +37,13 @@ class DesignSystem extends Component
         // Seed the editor with the saved content, or the starter template if still empty.
         $this->conteudo = $design->readOrTemplate();
         $this->atualizado = $design->updatedAt();
+        $this->estilo = (string) (@file_get_contents($this->caminhoEstilo()) ?: '');
+    }
+
+    /** The active project's style manual — repointed per project by ProjectActivator. */
+    private function caminhoEstilo(): string
+    {
+        return (string) config('contentmachine.clips.style_md');
     }
 
     /** Loads a .md into the editor (does not save — the user reviews and saves). */
@@ -56,6 +70,10 @@ class DesignSystem extends Component
         // the animations MATCH the design. On failure → keep/use defaults.
         $design->writeTokens($extractor->extract($this->conteudo));
 
+        $caminho = $this->caminhoEstilo();
+        @mkdir(dirname($caminho), 0775, true);
+        file_put_contents($caminho, $this->estilo);
+
         $this->guardado = now()->timezone(config('app.timezone'))->translatedFormat('H:i');
         $this->atualizado = $design->updatedAt();
         $this->dispatch('toast', message: 'Design system saved and theme extracted.', type: 'ok');
@@ -67,6 +85,7 @@ class DesignSystem extends Component
 
         return view('livewire.design-system', [
             'caminho' => $design->path(),
+            'caminhoEstilo' => $this->caminhoEstilo(),
             'tokens' => $design->readTokens(),
         ]);
     }

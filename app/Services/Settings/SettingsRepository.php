@@ -70,6 +70,12 @@ class SettingsRepository
             ],
             // Blotato connected-account ids per platform (copied from the Blotato
             // dashboard). Empty → that platform can't be posted to.
+            // Daily hands-free pipeline: news → report → top-3 animated clip →
+            // scheduled on Blotato's next free slot. Off by default, per project.
+            'auto' => [
+                'ligado' => false,
+                'hora' => '09:00',
+            ],
             'blotato' => [
                 'youtube' => '',
                 'instagram' => '',

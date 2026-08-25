@@ -1,0 +1,875 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Canadian Dollar Falls as US Slaps 50% Tariffs",
+    "source_text": "Canadian Dollar Drops After Failed Trade Talks.\nThe Canadian dollar takes a hit as trade negotiations collapse.\nAfter talks between Ottawa and Washington broke down, the U.S. imposed 50% tariffs on $20 billion worth of Canadian imports. This includes a variety of goods, from dairy to wood products, which could lead to higher prices for consumers. The situation adds pressure on Canada’s economy, already facing challenges. If you want the link, just comment canada.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "img_56770e3a",
+            "path": "clips/uploads/site-a8c13047.mp4",
+            "description": "Website: https://www.aljazeera.com/news/2026/8/22/us-imposes-50-tariffs-on-20bn-worth-of-canadian-goods-after-talks-fail",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "gen_649b0c06",
+            "path": "clips/generated/kijndamfflsb.png",
+            "description": "Close-up of Canadian dollar coins and folded banknotes scattered on a dark desk under a hard single spotlight, deep shadows, gritty press-photo mood, no text or lettering visible",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_651eccfe",
+            "path": "clips/generated/r48lqafxrjac.png",
+            "description": "An empty long polished wooden negotiating table in a cold government meeting room, two leather chairs pushed back on opposite sides, abandoned water glasses and paper folders, grey morning light throu...",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "background": "orange-dot-grid",
+        "lead": "",
+        "instructions": "",
+        "musica": "documentary-song.mp3",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "US–Canada trade talks collapse: 50% Section 338 tariffs and the falling loonie (August 2026)",
+            "summary": "After Canada walked away from negotiations on Aug 21, 2026, the US imposed 50% tariffs on roughly US$20 billion of Canadian goods — about 5% of Canada's exports to the US — using Section 338 of the 1930 Tariff Act for the first time ever. The Canadian dollar fell to around 1.386 per USD, Ottawa set dollar-for-dollar retaliation for Sept 8, and Trump threatened 50% tariffs on all Canadian autos and steel from Jan 1, 2027.",
+            "timeline": [
+                {
+                    "label": "Trump ends trade talks over Ontario's Reagan tariff ad",
+                    "sublabel": "Oct 2025"
+                },
+                {
+                    "label": "Three Section 338 proclamations signed — first use since 1930",
+                    "sublabel": "Jul 20, 2026"
+                },
+                {
+                    "label": "Original start date delayed 3 days as talks continue",
+                    "sublabel": "Aug 19, 2026"
+                },
+                {
+                    "label": "Talks collapse: Carney says US 'asked too much, offered too little'",
+                    "sublabel": "Aug 21, 2026"
+                },
+                {
+                    "label": "50% tariffs take effect at 12:01 a.m. ET",
+                    "sublabel": "Aug 22, 2026"
+                },
+                {
+                    "label": "Trump announces 50% auto and steel tariffs; loonie tumbles",
+                    "sublabel": "Aug 24, 2026"
+                },
+                {
+                    "label": "Canada's dollar-for-dollar retaliation begins",
+                    "sublabel": "Sep 8, 2026"
+                },
+                {
+                    "label": "50% on all Canadian cars, trucks, parts and steel",
+                    "sublabel": "Jan 1, 2027"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "New US tariff rate on listed Canadian goods",
+                    "value": 50,
+                    "unit": "%"
+                },
+                {
+                    "label": "Canadian imports covered (2025 value)",
+                    "value": 20,
+                    "unit": "US$ billion"
+                },
+                {
+                    "label": "Share of Canada's goods exports to the US hit",
+                    "value": 5,
+                    "unit": "%"
+                },
+                {
+                    "label": "Canadian tariff lines affected",
+                    "value": 554,
+                    "unit": "lines"
+                },
+                {
+                    "label": "USD/CAD exchange rate",
+                    "value": 1.386,
+                    "unit": "CAD per USD (Aug 25, 2026)"
+                },
+                {
+                    "label": "Loonie intraday drop, worst in G10",
+                    "value": 0.7,
+                    "unit": "% (Aug 24, 2026)"
+                },
+                {
+                    "label": "US share of Canada's goods exports — lowest since early 1980s",
+                    "value": 71.7,
+                    "unit": "% (2025)"
+                },
+                {
+                    "label": "US goods imports from Canada",
+                    "value": 381.9,
+                    "unit": "US$ billion (2025)"
+                },
+                {
+                    "label": "US goods trade deficit with Canada",
+                    "value": 48.3,
+                    "unit": "US$ billion (2025)"
+                },
+                {
+                    "label": "Canada inflation rate",
+                    "value": 3,
+                    "unit": "% y/y (July 2026)"
+                },
+                {
+                    "label": "Bank of Canada policy rate",
+                    "value": 2.25,
+                    "unit": "%"
+                },
+                {
+                    "label": "Canada unemployment rate",
+                    "value": 6.5,
+                    "unit": "% (June 2026)"
+                },
+                {
+                    "label": "Combined US duties on Canadian softwood lumber",
+                    "value": 24.83,
+                    "unit": "% (2026 revision)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Hitting now vs. coming January",
+                    "left": {
+                        "title": "In effect Aug 22, 2026",
+                        "points": [
+                            "50% on ~US$20B of goods",
+                            "Dairy, wine, lumber, cement, furniture",
+                            "Hockey sticks, cosmetics, clothing, cameras",
+                            "~5% of Canada's US-bound exports"
+                        ]
+                    },
+                    "right": {
+                        "title": "Announced for Jan 1, 2027",
+                        "points": [
+                            "50% on all cars, trucks and auto parts",
+                            "Autos currently taxed at 25%",
+                            "Steel already at 50%",
+                            "US-built vehicles exempt"
+                        ]
+                    }
+                },
+                {
+                    "title": "US action vs. Canadian response",
+                    "left": {
+                        "title": "Washington",
+                        "points": [
+                            "Section 338 of the 1930 Tariff Act",
+                            "First presidential use in ~96 years",
+                            "Overrides USMCA duty-free treatment",
+                            "Cites Canadian rules on autos, alcohol, dairy"
+                        ]
+                    },
+                    "right": {
+                        "title": "Ottawa",
+                        "points": [
+                            "Dollar-for-dollar match from Sept 8",
+                            "Targets steel, dairy, appliances, electronics",
+                            "Also farm equipment, pulp and paper",
+                            "Carney: 'the old relationship is over'"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "The tariffs use Section 338 of the Smoot-Hawley-era Tariff Act of 1930 — never before used by any president to impose duties.",
+                "Three proclamations signed July 20, 2026 cover 554 tariff lines: 439 motor-vehicle, 63 alcoholic beverage, 52 dairy.",
+                "Unlike earlier measures, Section 338 duties apply even to goods that would qualify duty-free under USMCA.",
+                "Carney says the US 'asked too much and offered too little,' refusing exclusive access to Canada's critical minerals.",
+                "Trump cited a US$60 billion trade gap; official USTR data put the 2025 US goods deficit with Canada at US$48.3 billion.",
+                "BMO estimates the new tariffs could shave about half a percentage point off Canadian growth.",
+                "Canada is already diversifying: non-US exports hit an all-time high in 2025, up 17.2%.",
+                "Carney has said over 85% of Canada–US trade remains tariff-free under USMCA."
+            ],
+            "sources": [
+                "https://www.aljazeera.com/news/2026/8/22/us-imposes-50-tariffs-on-20bn-worth-of-canadian-goods-after-talks-fail",
+                "https://www.pbs.org/newshour/economy/what-to-know-about-trumps-50-tariffs-on-canadian-goods-that-just-went-into-effect",
+                "https://www.whitecase.com/insight-alert/trump-administration-imposes-50-tariffs-certain-canadian-products-first-use-section",
+                "https://globaltradealert.org/blog/s338-the-return-of-the-authority",
+                "https://www.mofo.com/resources/insights/260729-revival-of-a-dormant-tariff-authority-section-338",
+                "https://www.cnn.com/2026/08/21/economy/us-canada-trade",
+                "https://www.npr.org/2026/08/22/nx-s1-5941584/us-canada-tariffs",
+                "https://www.aljazeera.com/news/2026/8/22/carney-canada-will-enact-retaliatory-us-tariffs-starting-september-8",
+                "https://www.cbsnews.com/news/trump-canadian-automotive-steel-tariffs/",
+                "https://www.cnbc.com/2026/08/24/trump-canada-auto-tariffs-trade-war.html",
+                "https://www.bloomberg.com/news/articles/2026-08-24/canadian-dollar-tumbles-as-trade-rift-threatens-growth-outlook",
+                "https://tradingeconomics.com/canada/currency",
+                "https://www150.statcan.gc.ca/n1/daily-quotidien/260219/dq260219a-eng.htm",
+                "https://ustr.gov/countries-regions/americas/canada",
+                "https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm",
+                "https://www.bankofcanada.ca/2026/06/fad-press-release-2026-06-10/",
+                "https://www.theglobeandmail.com/business/article-duty-rates-canadian-softwood-levies-commerce-department/",
+                "https://www.bnnbloomberg.ca/tariffs/2026/08/24/re-escalating-trade-war-puts-canadas-economic-rebound-at-risk-economists/"
+            ]
+        },
+        "suggested": {
+            "title": "Canadian Dollar Falls as US Slaps 50% Tariffs",
+            "description": "The Canadian dollar dropped sharply after trade talks between Ottawa and Washington collapsed, prompting the US to impose 50% tariffs on $20 billion worth of Canadian imports. Everything from dairy to wood products is affected, which could push consumer prices higher on both sides of the border. The move adds fresh pressure to an already strained Canadian economy.",
+            "tags": [
+                "canadian dollar",
+                "tariffs",
+                "canada us trade",
+                "trade war",
+                "economy",
+                "forex",
+                "breaking news"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "191bfa26",
+                "prompt": "Close-up of Canadian dollar coins and folded banknotes scattered on a dark desk under a hard single spotlight, deep shadows, gritty press-photo mood, no text or lettering visible",
+                "label": "Canadian dollar drops after failed trade talks",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "e1a6e389",
+                "prompt": "An empty long polished wooden negotiating table in a cold government meeting room, two leather chairs pushed back on opposite sides, abandoned water glasses and paper folders, grey morning light through tall windows, no text or lettering",
+                "label": "After talks between Ottawa and Washington broke down",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "1a3bd3e0",
+                "prompt": "A shopper's hand reaching for a milk carton on a bright refrigerated supermarket dairy shelf, shallow depth of field, cool fluorescent light, documentary photography, no text or lettering on any packaging",
+                "label": "which could lead to higher prices for consumers",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "a8c13047",
+                "prompt": "https://www.aljazeera.com/news/2026/8/22/us-imposes-50-tariffs-on-20bn-worth-of-canadian-goods-after-talks-fail",
+                "label": "If you want the link just comment Canada",
+                "site": "https://www.aljazeera.com/news/2026/8/22/us-imposes-50-tariffs-on-20bn-worth-of-canadian-goods-after-talks-fail",
+                "still": false
+            }
+        ],
+        "image_uploads": {
+            "a8c13047": "img_56770e3a",
+            "191bfa26": "gen_649b0c06",
+            "1a3bd3e0": "gen_748edff1",
+            "e1a6e389": "gen_651eccfe"
+        },
+        "site_collecting": [],
+        "image_text": {
+            "1a3bd3e0": true
+        },
+        "site_errors": []
+    },
+    "id": "canadian-dollar-drops-after-failed-trade-o8h2y",
+    "created_at": "2026-08-25T13:04:07+00:00",
+    "updated_at": "2026-08-25T13:55:19+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/canadian-dollar-drops-after-failed-trade-o8h2y/voz.mp3",
+    "transcript": {
+        "duration": 36.68000030517578,
+        "text": "Canadian dollar drops after failed trade talks. The Canadian dollar takes a hit as trade negotiations collapse. After talks between Ottawa and Washington broke down, the US imposed 50% tariffs on 20 billion worth of Canadian imports. This includes a variety of goods, from dairy to wood products, which could lead to higher prices for consumers. The situation adds pressure on Canada's economy, already facing challenges. If you want the link, just comment, Canada.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Canadian",
+                "start": 0,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "dollar",
+                "start": 0.6000000238418579,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "drops",
+                "start": 0.9800000190734863,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "after",
+                "start": 1.399999976158142,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "failed",
+                "start": 2.0799999237060547,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "trade",
+                "start": 2.740000009536743,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "talks",
+                "start": 3.259999990463257,
+                "end": 3.799999952316284
+            },
+            {
+                "word": "The",
+                "start": 5.28000020980835,
+                "end": 5.28000020980835
+            },
+            {
+                "word": "Canadian",
+                "start": 5.28000020980835,
+                "end": 5.679999828338623
+            },
+            {
+                "word": "dollar",
+                "start": 5.679999828338623,
+                "end": 5.980000019073486
+            },
+            {
+                "word": "takes",
+                "start": 5.980000019073486,
+                "end": 6.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 6.260000228881836,
+                "end": 6.619999885559082
+            },
+            {
+                "word": "hit",
+                "start": 6.619999885559082,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "as",
+                "start": 6.639999866485596,
+                "end": 7.019999980926514
+            },
+            {
+                "word": "trade",
+                "start": 7.019999980926514,
+                "end": 7.320000171661377
+            },
+            {
+                "word": "negotiations",
+                "start": 7.320000171661377,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "collapse",
+                "start": 8.0600004196167,
+                "end": 8.720000267028809
+            },
+            {
+                "word": "After",
+                "start": 10.199999809265137,
+                "end": 10.199999809265137
+            },
+            {
+                "word": "talks",
+                "start": 10.199999809265137,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "between",
+                "start": 10.5600004196167,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "Ottawa",
+                "start": 10.979999542236328,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "and",
+                "start": 11.260000228881836,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "Washington",
+                "start": 11.979999542236328,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "broke",
+                "start": 11.979999542236328,
+                "end": 12.300000190734863
+            },
+            {
+                "word": "down",
+                "start": 12.300000190734863,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "the",
+                "start": 13.300000190734863,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "US",
+                "start": 13.399999618530273,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "imposed",
+                "start": 13.739999771118164,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "50",
+                "start": 14.239999771118164,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "",
+                "start": 14.920000076293945,
+                "end": 15.279999732971191
+            },
+            {
+                "word": "tariffs",
+                "start": 15.279999732971191,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "on",
+                "start": 15.680000305175781,
+                "end": 16.239999771118164
+            },
+            {
+                "word": "20",
+                "start": 16.239999771118164,
+                "end": 16.639999389648438
+            },
+            {
+                "word": "billion",
+                "start": 16.639999389648438,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "worth",
+                "start": 16.920000076293945,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "of",
+                "start": 17.219999313354492,
+                "end": 17.81999969482422
+            },
+            {
+                "word": "Canadian",
+                "start": 17.81999969482422,
+                "end": 17.81999969482422
+            },
+            {
+                "word": "imports",
+                "start": 17.81999969482422,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "This",
+                "start": 19.31999969482422,
+                "end": 19.6200008392334
+            },
+            {
+                "word": "includes",
+                "start": 19.6200008392334,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "a",
+                "start": 20.100000381469727,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "variety",
+                "start": 20.399999618530273,
+                "end": 20.700000762939453
+            },
+            {
+                "word": "of",
+                "start": 20.700000762939453,
+                "end": 21.5
+            },
+            {
+                "word": "goods",
+                "start": 21.5,
+                "end": 21.5
+            },
+            {
+                "word": "from",
+                "start": 22.059999465942383,
+                "end": 22.34000015258789
+            },
+            {
+                "word": "dairy",
+                "start": 22.34000015258789,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "to",
+                "start": 22.559999465942383,
+                "end": 23
+            },
+            {
+                "word": "wood",
+                "start": 23,
+                "end": 23.219999313354492
+            },
+            {
+                "word": "products",
+                "start": 23.219999313354492,
+                "end": 23.799999237060547
+            },
+            {
+                "word": "which",
+                "start": 24.219999313354492,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "could",
+                "start": 24.459999084472656,
+                "end": 24.700000762939453
+            },
+            {
+                "word": "lead",
+                "start": 24.700000762939453,
+                "end": 24.920000076293945
+            },
+            {
+                "word": "to",
+                "start": 24.920000076293945,
+                "end": 25.34000015258789
+            },
+            {
+                "word": "higher",
+                "start": 25.34000015258789,
+                "end": 25.5
+            },
+            {
+                "word": "prices",
+                "start": 25.5,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "for",
+                "start": 25.860000610351562,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "consumers",
+                "start": 26.280000686645508,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "The",
+                "start": 27.260000228881836,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "situation",
+                "start": 27.700000762939453,
+                "end": 28.280000686645508
+            },
+            {
+                "word": "adds",
+                "start": 28.280000686645508,
+                "end": 28.639999389648438
+            },
+            {
+                "word": "pressure",
+                "start": 28.639999389648438,
+                "end": 29.059999465942383
+            },
+            {
+                "word": "on",
+                "start": 29.059999465942383,
+                "end": 29.399999618530273
+            },
+            {
+                "word": "Canada's",
+                "start": 29.399999618530273,
+                "end": 29.920000076293945
+            },
+            {
+                "word": "economy",
+                "start": 29.920000076293945,
+                "end": 30.360000610351562
+            },
+            {
+                "word": "already",
+                "start": 30.6200008392334,
+                "end": 31.15999984741211
+            },
+            {
+                "word": "facing",
+                "start": 31.15999984741211,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "challenges",
+                "start": 31.639999389648438,
+                "end": 32.5
+            },
+            {
+                "word": "If",
+                "start": 32.68000030517578,
+                "end": 33.279998779296875
+            },
+            {
+                "word": "you",
+                "start": 33.279998779296875,
+                "end": 33.41999816894531
+            },
+            {
+                "word": "want",
+                "start": 33.41999816894531,
+                "end": 33.58000183105469
+            },
+            {
+                "word": "the",
+                "start": 33.58000183105469,
+                "end": 33.7599983215332
+            },
+            {
+                "word": "link",
+                "start": 33.7599983215332,
+                "end": 34
+            },
+            {
+                "word": "just",
+                "start": 34.439998626708984,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "comment",
+                "start": 34.900001525878906,
+                "end": 35.2599983215332
+            },
+            {
+                "word": "Canada",
+                "start": 36.08000183105469,
+                "end": 36.18000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.68000030517578,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.28,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "variant": "fullscreen",
+                            "caption": "USD/CAD 1.386 — Aug 25, 2026",
+                            "src": "gen_649b0c06"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.28,
+                "end": 10.2,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "collapse",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "1.386 CAD PER USD",
+                            "lines": [
+                                "Down 0.7% intraday — worst in the G10",
+                                "Aug 24, 2026",
+                                "Source: Bloomberg / Trading Economics"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 13.3,
+                "background": "vellum",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "variant": "pan",
+                            "direction": "left",
+                            "caption": "Talks collapse — Aug 21, 2026",
+                            "src": "gen_651eccfe"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.3,
+                "end": 19.32,
+                "background": "papyrus",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "50",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "WHAT THE 50% HITS",
+                            "unit": "US$ billion",
+                            "bars": [
+                                {
+                                    "label": "Goods now taxed",
+                                    "value": 20,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "All US imports from Canada, 2025",
+                                    "value": 381.9
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.32,
+                "end": 24.22,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "dairy",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "554 TARIFF LINES",
+                            "items": [
+                                "Dairy and alcoholic beverages",
+                                "Wine, lumber, cement",
+                                "Furniture and hockey sticks",
+                                "Cosmetics, clothing, cameras"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.22,
+                "end": 27.26,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "variant": "zoom",
+                            "caption": "~5% of Canada's US-bound exports",
+                            "src": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.26,
+                "end": 32.68,
+                "background": "papyrus",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "pressure",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "CANADA, BEFORE THE TARIFFS",
+                            "unit": "%",
+                            "bars": [
+                                {
+                                    "label": "Unemployment, Jun 2026",
+                                    "value": 6.5,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Inflation y/y, Jul 2026",
+                                    "value": 3
+                                },
+                                {
+                                    "label": "Policy rate",
+                                    "value": 2.25
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.68,
+                "end": 36.68,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "site": "https://www.aljazeera.com/news/2026/8/22/us-imposes-50-tariffs-on-20bn-worth-of-canadian-goods-after-talks-fail",
+                            "variant": "fullscreen",
+                            "caption": "The filing, in full",
+                            "src": "img_56770e3a"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "orange-dot-grid"
+    },
+    "error": "Remotion failed: Error: ENOSPC: no space left on device, write\n    at async write (node:internal/fs/promises:745:8)\n    at async writeFileHandle (node:internal/fs/promises:502:7)\n    at async screenshotTask (/Users/joaoferreira/Desktop/ContentMachine/remotion/node_modules/@remotion/renderer/dist/screenshot-task.js:69:13)\n",
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/canadian-dollar-drops-after-failed-trade-o8h2y/clip.mp4"
+}

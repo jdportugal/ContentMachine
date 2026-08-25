@@ -54,6 +54,32 @@ class KieClient
     }
 
     /**
+     * Image → VIDEO: animates the given start image according to the prompt
+     * (kie's kling image-to-video — 5s, silent) and returns the video URL.
+     * `$imageUrl` must be a kie file URL (see upload()).
+     */
+    public function generateVideo(string $prompt, string $imageUrl): string
+    {
+        $r = Http::timeout(60)->withToken($this->chave())
+            ->post($this->base().'/api/v1/jobs/createTask', [
+                'model' => (string) config('services.kie.video_model', 'kling-2.6/image-to-video'),
+                'input' => [
+                    'prompt' => \Illuminate\Support\Str::limit($prompt, 990, ''),
+                    'image_urls' => [$imageUrl],
+                    'sound' => false,
+                    'duration' => '5',
+                ],
+            ]);
+
+        // Videos take minutes, not seconds — poll a longer window, price as video.
+        return $this->sondar(
+            $this->taskIdDe($r),
+            custo: (float) config('contentmachine.custos.kie_video', 0.40),
+            tentativas: 300,
+        );
+    }
+
+    /**
      * Image → image: uploads the reference image bytes to
      * kie's storage and requests an edit according to the instruction.
      */
@@ -100,8 +126,13 @@ class KieClient
                 'input' => $input,
             ]);
 
-        // The API returns 200 even on a business error (e.g. 402 out of credits),
-        // with the reason in `msg` — expose it so the message is actionable.
+        return $this->taskIdDe($r);
+    }
+
+    /** The submitted task's id — or a readable failure (kie returns 200 with the
+     * business error in `msg`, e.g. 402 out of credits). */
+    private function taskIdDe(\Illuminate\Http\Client\Response $r): string
+    {
         $taskId = (string) $r->json('data.taskId');
         if (! $r->successful() || $taskId === '') {
             $msg = trim((string) ($r->json('msg') ?? ''));
@@ -115,9 +146,9 @@ class KieClient
         return $taskId;
     }
 
-    private function sondar(string $taskId): string
+    private function sondar(string $taskId, ?float $custo = null, ?int $tentativas = null): string
     {
-        for ($i = 0; $i < self::MAX_SONDAGENS; $i++) {
+        for ($i = 0; $i < ($tentativas ?? self::MAX_SONDAGENS); $i++) {
             try {
                 $r = Http::timeout(30)->withToken($this->chave())
                     ->get($this->base().'/api/v1/jobs/recordInfo', ['taskId' => $taskId]);
@@ -133,8 +164,8 @@ class KieClient
                     }
                     app(\App\Services\Costs\CostLedger::class)->registar(
                         'kie.ai',
-                        (float) config('contentmachine.custos.kie_imagem', 0.04),
-                        'image',
+                        $custo ?? (float) config('contentmachine.custos.kie_imagem', 0.04),
+                        $custo !== null ? 'video' : 'image',
                     );
 
                     return $url;

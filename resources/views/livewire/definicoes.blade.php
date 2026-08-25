@@ -16,6 +16,7 @@
                 'chaves' => '🔑 API Keys',
                 'passos' => '⇄ Keys per step',
                 'conta'  => '👤 Account',
+                'workers' => '⚒ Workers',
                 'sistema' => '↻ Updates',
             ] as $id => $rotulo)
                 <button type="button" wire:click="$set('secao', '{{ $id }}')"
@@ -47,6 +48,24 @@
                             <option value="pt">Português</option>
                         </select>
                         <p class="font-mono text-[0.55rem] text-ink-faint mt-1">Used for this project's generated content.</p>
+                    </div>
+                </div>
+            </x-panel>
+
+            <x-panel eyebrow="Hands-free" title="Daily auto clip" glyph="✦">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="flex items-center gap-2.5 cursor-pointer">
+                            <input type="checkbox" wire:model="auto.ligado"
+                                   class="accent-teal w-4 h-4">
+                            <span class="font-body text-ink">Auto mode</span>
+                        </label>
+                        <p class="font-mono text-[0.55rem] text-ink-faint mt-1.5">Every day at the chosen time: gather the news, write the report, turn the top 3 stories into one animated clip (ElevenLabs voiceover) and schedule it on the next free Blotato slot — on every platform with an account configured.</p>
+                    </div>
+                    <div>
+                        <label class="eyebrow block mb-1.5">Run at</label>
+                        <input type="time" wire:model="auto.hora"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-body focus:border-teal focus:outline-none">
                     </div>
                 </div>
             </x-panel>
@@ -452,8 +471,103 @@
             </x-panel>
         @endif
 
+        {{-- ══════════════════════════ WORKERS ══════════════════════════ --}}
+        @if ($secao === 'workers')
+            {{-- Poll only while something is moving: a worker mid-job, or work
+                 waiting with nobody to do it. Idle and all-stopped are steady. --}}
+            <div @if ($this->workersBusy) wire:poll.5s @endif>
+                <x-panel eyebrow="Engine room" title="Queue workers" glyph="⚒">
+                    <p class="text-ink-soft -mt-2 mb-4">
+                        Each queue needs its own worker process. A queue with no worker accepts jobs and never runs
+                        them — they wait silently and forever. Note a worker loads the code once at boot, so
+                        <span class="text-ink">Restart</span> is what makes a code change take effect.
+                    </p>
+
+                    @if (! $workersGeriveis)
+                        <div class="rounded-sm border border-warn/40 bg-warn/5 px-4 py-3 font-mono text-xs text-warn">
+                            ⚠ Workers can't be inspected from here — the web process can't read the process table
+                            (in the Docker deploy the workers live in another container). Manage them where they run.
+                        </div>
+                    @else
+                        <div class="space-y-2">
+                            @foreach ($workers as $w)
+                                <div class="flex flex-wrap items-center gap-3 rounded-sm border border-ink-soft/15 bg-papyrus/40 px-4 py-3"
+                                     wire:key="worker-{{ $w['queue'] }}">
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-mono text-sm text-ink">{{ $w['queue'] }}</span>
+                                            @if ($w['running'])
+                                                <span class="font-mono text-[0.6rem] px-2 py-0.5 rounded-sm border border-good/40 text-good">● running</span>
+                                                @if ($w['busy'] === true)
+                                                    <span class="font-mono text-[0.6rem] px-2 py-0.5 rounded-sm border border-teal/40 text-teal">◐ busy</span>
+                                                @elseif ($w['busy'] === false)
+                                                    <span class="font-mono text-[0.6rem] px-2 py-0.5 rounded-sm border border-ink-soft/25 text-ink-faint">○ free</span>
+                                                @else
+                                                    <span class="font-mono text-[0.6rem] px-2 py-0.5 rounded-sm border border-ink-soft/25 text-ink-faint">— unknown</span>
+                                                @endif
+                                            @else
+                                                <span class="font-mono text-[0.6rem] px-2 py-0.5 rounded-sm border border-bad/40 text-bad">■ stopped</span>
+                                            @endif
+                                        </div>
+                                        <p class="font-mono text-[0.6rem] text-ink-faint mt-1">
+                                            {{ $w['label'] }}
+                                            @if ($w['running'])
+                                                · pid {{ implode(', ', $w['pids']) }}@if ($w['uptime']) · up {{ $w['uptime'] }}@endif
+                                            @endif
+                                        </p>
+                                    </div>
+
+                                    <div class="font-mono text-[0.65rem] text-right shrink-0">
+                                        <div class="{{ $w['pending'] > 0 && ! $w['running'] ? 'text-warn' : 'text-ink-soft' }}">
+                                            {{ $w['pending'] }} waiting
+                                        </div>
+                                        @if ($w['reserved'] > 0)
+                                            <div class="text-teal">{{ $w['reserved'] }} in flight</div>
+                                        @endif
+                                    </div>
+
+                                    <div class="flex gap-1.5 shrink-0">
+                                        @if ($w['running'])
+                                            <button type="button" wire:click="reiniciarWorker('{{ $w['queue'] }}')"
+                                                    wire:loading.attr="disabled" wire:target="reiniciarWorker('{{ $w['queue'] }}')"
+                                                    class="font-mono text-[0.65rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">↻ Restart</button>
+                                            <button type="button" wire:click="pararWorker('{{ $w['queue'] }}')"
+                                                    wire:confirm="Stop the «{{ $w['queue'] }}» worker? It finishes the job in hand first."
+                                                    wire:loading.attr="disabled" wire:target="pararWorker('{{ $w['queue'] }}')"
+                                                    class="font-mono text-[0.65rem] px-3 py-1.5 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-bad hover:border-bad/40 transition">■ Stop</button>
+                                        @else
+                                            <button type="button" wire:click="iniciarWorker('{{ $w['queue'] }}')"
+                                                    wire:loading.attr="disabled" wire:target="iniciarWorker('{{ $w['queue'] }}')"
+                                                    class="font-mono text-[0.65rem] px-3 py-1.5 rounded-sm border border-good/50 text-good hover:bg-good/10 transition">▶ Start</button>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                @if ($w['pending'] > 0 && ! $w['running'])
+                                    <p class="font-mono text-[0.6rem] text-warn pl-4 -mt-1">
+                                        ↑ {{ $w['pending'] }} job{{ $w['pending'] === 1 ? '' : 's' }} waiting with no worker to run them.
+                                    </p>
+                                @endif
+                            @endforeach
+                        </div>
+
+                        <p class="font-mono text-[0.6rem] text-ink-faint mt-4 pt-3 border-t border-ink-soft/10">
+                            @if ($workersSupervisionados)
+                                supervisord runs these and restarts them automatically, so
+                                <span class="text-ink-soft">Stop is temporary</span> — a stopped worker is back within seconds.
+                                Use it to free the machine for a moment, not to keep one off.
+                            @else
+                                Started from here, a worker outlives this page but <span class="text-ink-soft">not a reboot</span> —
+                                it's a plain background process, not a supervised service.
+                            @endif
+                        </p>
+                    @endif
+                </x-panel>
+            </div>
+        @endif
+
         {{-- ── Action bar (saves every settings tab) ────────────────────────── --}}
-        @if ($secao !== 'sistema')
+        @if (! in_array($secao, ['sistema', 'workers'], true))
         <div class="flex items-center gap-4">
             <button type="submit"
                     class="bg-teal text-papyrus font-display text-xl px-7 py-2.5 rounded-sm hover:bg-teal-deep transition shadow-engraved">

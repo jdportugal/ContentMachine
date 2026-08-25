@@ -16,6 +16,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Second half of planning: the user has (optionally) uploaded images for the
@@ -143,6 +144,34 @@ class FinalizeClipPlanJob implements ShouldQueue
             // it one (prefer a transparent one — usually the logo) and force that
             // image-capable intro first.
             $intros = $library->introSlugs();
+
+            // ── Animated intro video ─────────────────────────────────────────
+            // The user approved (or the library matched) an animated intro: the
+            // clip opens with the `video-intro` effect playing it, and a freshly
+            // generated video is saved to the assets library for future reuse.
+            $videoIntroId = $this->resolverVideoDeIntro($p);
+            if ($videoIntroId !== null && in_array('video-intro', $intros, true)) {
+                $plan = $filler->enforceIntro($plan, ['video-intro'], $videoIntroId);
+                // enforceIntro prefers the opening scene's own image — right for
+                // logo intros, wrong here: the intro plays THE VIDEO, always.
+                if (isset($plan['scenes'][0]['layers']) && is_array($plan['scenes'][0]['layers'])) {
+                    foreach ($plan['scenes'][0]['layers'] as &$l) {
+                        if (is_array($l) && ($l['type'] ?? '') === 'video-intro') {
+                            $l['params']['src'] = $videoIntroId;
+                        }
+                    }
+                    unset($l);
+                }
+                $p->update(['plan' => $plan]);
+                RenderJob::dispatch($p->id);
+
+                return;
+            }
+
+            // Without an approved video, `video-intro` is unusable — it plays
+            // videos, and the classic path below would hand it a random still.
+            $intros = array_values(array_diff($intros, ['video-intro']));
+
             $introImageId = null;
             if (($p->images ?? []) !== [] && collect($intros)->contains(fn (string $s) => $library->usesImage($s))) {
                 usort($intros, fn (string $a, string $b) => (int) $library->usesImage($b) <=> (int) $library->usesImage($a));
@@ -162,7 +191,10 @@ class FinalizeClipPlanJob implements ShouldQueue
             if ($introImageId === null) {
                 $intros = array_values(array_filter($intros, fn (string $s) => ! $library->usesImage($s)));
             }
-            $plan = $filler->enforceIntro($plan, $intros, $introImageId);
+            // Uploaded videos play fine on scenes (image-reveal), but an image intro
+            // effect cannot render one — never let enforceIntro steal a video src.
+            $videoIds = collect($p->images ?? [])->filter(fn ($i) => ! empty($i['video']))->pluck('id')->all();
+            $plan = $filler->enforceIntro($plan, $intros, $introImageId, $videoIds);
 
             $p->update(['plan' => $plan]);
 
@@ -170,6 +202,83 @@ class FinalizeClipPlanJob implements ShouldQueue
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
+        }
+    }
+
+    /**
+     * The video the intro should play, or null for the classic image intro:
+     *  - a video the library matched / the user uploaded for the suggestion;
+     *  - or one generated NOW (kie image→video) from the approved start image —
+     *    and saved into the assets library (video + descriptions) for reuse.
+     * "Image only" and "no image" both return null; failures degrade to null so
+     * the clip still renders with a normal intro.
+     */
+    private function resolverVideoDeIntro($p): ?string
+    {
+        $key = ImageRequests::VIDEO_KEY;
+        $req = collect($p->meta['image_requests'] ?? [])->firstWhere('key', $key);
+        if (! is_array($req) || ! empty(($p->meta['image_text'] ?? [])[$key])) {
+            return null;
+        }
+
+        $porId = collect($p->images ?? [])->keyBy('id');
+        $escolhido = ($p->meta['image_uploads'] ?? [])[$key] ?? null;
+        $entrada = $escolhido !== null ? $porId->get($escolhido) : null;
+        if (is_array($entrada) && ! empty($entrada['video'])) {
+            return (string) $entrada['id']; // reused asset / uploaded video — nothing to generate
+        }
+        if (($p->meta['video_mode'] ?? 'video') !== 'video') {
+            return null; // kept as a still image
+        }
+
+        // The start frame: the user's replacement image if given, else the generated one.
+        $inicio = is_array($entrada) ? $entrada : $porId->get($req['imagem'] ?? null);
+        if (! is_array($inicio) || empty($inicio['path'])) {
+            return null;
+        }
+
+        try {
+            $disk = Storage::disk(config('contentmachine.clips.disk'));
+            $bytes = $disk->exists($inicio['path']) ? $disk->get($inicio['path'])
+                : (is_file($inicio['path']) ? file_get_contents($inicio['path']) : null);
+            if (! $bytes) {
+                return null;
+            }
+
+            $kie = app(\App\Services\Publicacoes\Rendering\KieClient::class);
+            $kie->passo = 'clips_imagens';
+            $url = $kie->generateVideo(
+                (string) ($req['video_prompt'] ?? $req['label'] ?? ''),
+                $kie->upload($bytes, 'intro.png'),
+            );
+
+            $rel = 'clips/uploads/intro-video-'.$p->id.'.mp4';
+            $disk->put($rel, \Illuminate\Support\Facades\Http::timeout(120)->get($url)->body());
+
+            $descricao = trim((string) ($req['label'] ?? 'Animated intro'));
+            $entry = [
+                'id' => 'vid_'.substr(md5($rel), 0, 8),
+                'path' => $rel,
+                'description' => $descricao,
+                'transparent' => false,
+                'tone' => 'mixed',
+                'video' => true,
+            ];
+            $p->update(['images' => array_merge($p->images ?? [], [$entry])]);
+
+            // The reusable asset: the next short can match it by name + description.
+            app(\App\Services\Clips\ImageLibrary::class)->add(
+                $disk->path($rel),
+                \Illuminate\Support\Str::slug(\Illuminate\Support\Str::limit($descricao, 60, '')).'.mp4',
+                'Animated video: '.$descricao
+                    .(! empty($req['imagem_prompt']) ? ' — start frame: '.$req['imagem_prompt'] : ''),
+            );
+
+            return $entry['id'];
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Intro video generation failed: '.$e->getMessage());
+
+            return null;
         }
     }
 }

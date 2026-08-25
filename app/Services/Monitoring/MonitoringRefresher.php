@@ -14,6 +14,7 @@ class MonitoringRefresher
         private readonly ApifyMonitoringFetcher $apify,
         private readonly MonitoringStats $stats,
         private readonly MonitoringHistory $history,
+        private readonly MonitoringStore $store,
     ) {}
 
     /**
@@ -92,7 +93,16 @@ class MonitoringRefresher
         // in this method. Never at the cost of the collection itself.
         if ($resultado !== []) {
             try {
-                $this->history->registar($this->stats->totais(array_keys($resultado)));
+                // Per-network followers ride along, so trends (and the follower
+                // predictions) can be computed per platform, not just globally.
+                $redes = [];
+                foreach (array_keys($resultado) as $p) {
+                    $subs = (int) ($this->store->canal($p)['subscribers'] ?? 0);
+                    if ($subs > 0) {
+                        $redes[$p] = $subs;
+                    }
+                }
+                $this->history->registar($this->stats->totais(array_keys($resultado)), $redes);
             } catch (\Throwable) {
                 // a missed day of history is not worth failing a collection over
             }

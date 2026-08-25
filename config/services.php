@@ -103,6 +103,8 @@ return [
         'image_model' => env('KIE_IMAGE_MODEL', 'nano-banana-2'),
         // Model with the best text rendering — used on the cards (text-heavy).
         'text_model' => env('KIE_TEXT_IMAGE_MODEL', 'nano-banana-pro'),
+        // Image→video model for animated intro assets (5s, silent).
+        'video_model' => env('KIE_VIDEO_MODEL', 'kling-2.6/image-to-video'),
         // File upload host (references for image→image editing).
         'file_base_url' => env('KIE_FILE_BASE_URL', 'https://kieai.redpandaai.co'),
     ],

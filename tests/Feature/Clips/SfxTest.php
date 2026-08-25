@@ -311,6 +311,43 @@ class SfxTest extends TestCase
         app(EffectGenerator::class)->generate('a tinted glow');
     }
 
+    /**
+     * "Reveal an image" used to produce a component reading `anim.params.imageSrc`.
+     * It compiled, it rendered, it passed every gate — and it was empty in every
+     * clip, because `src` is the only key the planner and the user's uploads fill.
+     */
+    public function test_guard_rejects_an_image_effect_that_reads_the_wrong_param(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'image-reveal-letters', 'displayName' => 'Letters reveal',
+            'description' => 'Letters drop away to reveal an image',
+            'paramSchema' => '{}', 'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import React from "react";'
+                ."\nimport { AbsoluteFill } from \"remotion\";"
+                ."\nimport type { PrimitiveProps } from \"../primitives\";"
+                ."\nconst R: React.FC<PrimitiveProps> = ({ anim }) => {"
+                ."\n  const imageSrc = anim.params?.imageSrc ?? \"\";"
+                ."\n  return <AbsoluteFill>{imageSrc && <img src={imageSrc} alt=\"\" />}</AbsoluteFill>;"
+                ."\n};"
+                ."\nexport default R;",
+        ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageMatches('/params\.src/');
+        app(EffectGenerator::class)->generate('letters fall away to reveal an image');
+    }
+
+    /** And the contract that prevents it is stated in the prompt, always. */
+    public function test_the_system_prompt_names_params_src_as_the_image_key(): void
+    {
+        $m = new \ReflectionMethod(EffectGenerator::class, 'systemPrompt');
+        $m->setAccessible(true);
+        $prompt = (string) $m->invoke(app(EffectGenerator::class), [], null);
+
+        $this->assertStringContainsString('anim.params?.src', $prompt);
+        $this->assertStringContainsString('imageSrc', $prompt);   // named as the trap
+    }
+
     /** An effect that only moves an image has no colour or type of its own — it
      *  must not be forced to import tokens it never uses. */
     public function test_guard_does_not_demand_tokens_from_a_component_that_paints_nothing(): void
@@ -1108,6 +1145,31 @@ class SfxTest extends TestCase
 
         $this->expectExceptionMessageMatches('/max_tokens=4096/');
         app(EffectGenerator::class)->generate('something long');
+    }
+
+    /**
+     * Writing a component is a reasoning task, and the Opus 4.x family does NOT
+     * think unless asked — so every SFX was generated in one pass with no
+     * reasoning at all. Clips also take their own model key, so raising it does
+     * not drag the news aggregator along.
+     */
+    public function test_the_api_call_asks_for_adaptive_thinking_and_the_clips_model(): void
+    {
+        $this->fakeClaudeReturning([
+            'slug' => 'soft-wipe', 'displayName' => 'Soft wipe', 'description' => 'A soft wipe',
+            'paramSchema' => '{}', 'sampleText' => '', 'sampleParams' => [],
+            'tsx' => 'import React from "react";'."\nexport default () => null;",
+        ]);
+
+        app(EffectGenerator::class)->generate('a soft wipe');
+
+        Http::assertSent(function ($request) {
+            $body = $request->data();
+
+            return ($body['thinking']['type'] ?? null) === 'adaptive'
+                && $body['model'] === config('contentmachine.clips.anthropic_model')
+                && $body['max_tokens'] === (int) config('contentmachine.clips.max_tokens');
+        });
     }
 
     /** Whatever else came back, the error has to carry enough to debug it. */

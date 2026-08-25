@@ -6,7 +6,9 @@ use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Livewire\ClipsAnimados;
+use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\RemotionRenderer;
+use App\Services\Clips\Fake\FakeAnimationPlanner;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
@@ -70,6 +72,22 @@ class ClipsAnimadosTest extends TestCase
             ->assertHasNoErrors();
 
         $this->assertSame('GPT-5 just got 60% cheaper', $this->store()->all()->first()->meta['lead']);
+    }
+
+    /** Per-clip direction rides on the clip so PlanAnimationsJob can hand it to the planner. */
+    public function test_instructions_for_one_clip_are_stored_in_its_meta(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('novoClip')
+            ->call('escolherTipo', 'animation')
+            ->set('text', 'Olá mundo')
+            ->set('instructions', "  Dark and cinematic. No charts.  \n")
+            ->call('submitAnimation')
+            ->assertHasNoErrors();
+
+        $this->assertSame('Dark and cinematic. No charts.', $this->store()->all()->first()->meta['instructions']);
     }
 
     /** A news bit's `> lead` line is lifted into the lead field, not spoken. */
@@ -584,6 +602,38 @@ class ClipsAnimadosTest extends TestCase
         $this->assertNotSame('Sem título', $p->title);
         $this->assertNotEmpty($p->meta['suggested']['description']);
         $this->assertNotEmpty($p->meta['suggested']['tags']);
+    }
+
+    /**
+     * The whole point of the per-clip box: what the user typed must reach the
+     * planner. A silent break here means the instructions are simply ignored.
+     */
+    public function test_the_clips_instructions_reach_the_planner(): void
+    {
+        Queue::fake();
+
+        $planner = new class extends FakeAnimationPlanner
+        {
+            public array $vistas = [];
+
+            public function plan(array $transcript, string $mode, array $options = []): array
+            {
+                $this->vistas = $options;
+
+                return parent::plan($transcript, $mode, $options);
+            }
+        };
+        $this->app->instance(AnimationPlanner::class, $planner);
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio',
+            'transcript' => ['duration' => 2.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []],
+            'meta' => ['instructions' => 'Dark and cinematic. No charts.'],
+        ]);
+
+        $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
+
+        $this->assertSame('Dark and cinematic. No charts.', $planner->vistas['instructions'] ?? null);
     }
 
     /** Each image suggestion is upload / AI image / no image (a text scene instead). */

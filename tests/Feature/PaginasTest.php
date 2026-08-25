@@ -51,7 +51,7 @@ class PaginasTest extends TestCase
         $this->get('/monitorizacao?rede=youtube')
             ->assertOk()
             ->assertSee('Latest of each genre')
-            ->assertSee('Top performers');
+            ->assertSee('Top performing posts');
     }
 
     public function test_dashboard_reads_drafts_from_vault(): void

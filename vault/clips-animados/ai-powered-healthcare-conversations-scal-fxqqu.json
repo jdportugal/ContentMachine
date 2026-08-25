@@ -1,0 +1,752 @@
+{
+    "status": "collecting",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Meet DORA: The AI Making 200,000 Real Hospital Calls",
+    "source_path": "clips/uploads/hZxlMwfpMFbzguJV99vAKfsMB7uOGXgoGb46Q4dk.mp4",
+    "images": [
+        {
+            "id": "gen_7cc80d0d",
+            "path": "clips/generated/hymbksidejbt.png",
+            "description": "The brand logo, centred on a transparent background.",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "background": "auto",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.2,
+        "research": {
+            "topic": "Dora, Ufonia's AI clinical voice assistant, scales in the NHS and expands to the US",
+            "summary": "Dora, built by Oxford-based Ufonia (the spoken text's 'Synphony' is a mis-transcription), phones patients to run routine clinical conversations such as post-cataract-surgery follow-ups, with 150,000+ autonomous consultations across ~15 NHS trusts. The company is now expanding into the US, with a full launch planned at ASCRS 2026; the '200,000 calls', '20 hospitals' and 'a million patients' figures could not be verified in two independent sources.",
+            "timeline": [
+                {
+                    "label": "Ufonia founded in Oxford, UK",
+                    "sublabel": "2017"
+                },
+                {
+                    "label": "$4M Series A raised",
+                    "sublabel": "2022"
+                },
+                {
+                    "label": "150,000+ clinical calls across ~15 NHS trusts",
+                    "sublabel": "by 2026"
+                },
+                {
+                    "label": "Dora Advance goes live in the US; full launch at ASCRS",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Autonomous clinical calls in the UK",
+                    "value": 150000,
+                    "unit": "calls (150,000+, by 2026)"
+                },
+                {
+                    "label": "NHS trusts using Dora",
+                    "value": 15,
+                    "unit": "trusts (15-16)"
+                },
+                {
+                    "label": "Patient recommendation score",
+                    "value": 8,
+                    "unit": "out of 10"
+                },
+                {
+                    "label": "Series A funding (2022)",
+                    "value": 4,
+                    "unit": "million USD"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Follow-up call: Dora vs clinic staff",
+                    "left": {
+                        "title": "Dora AI call",
+                        "points": [
+                            "Normal phone call, no app or device needed",
+                            "Automates routine post-op and pre-op checks",
+                            "Frees clinician time for complex cases"
+                        ]
+                    },
+                    "right": {
+                        "title": "Traditional follow-up",
+                        "points": [
+                            "Requires clinician or nurse time per patient",
+                            "Adds pressure to stretched outpatient clinics",
+                            "Slots limited by staff capacity"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "The company is Ufonia (Oxford, UK), founded by neurosurgeon-led team in 2017 — 'Synphony' in the audio is a transcription error",
+                "First use case: post-cataract-surgery follow-up calls, later expanded to pre-operative checks and referral management",
+                "Verified scale is 150,000+ clinical conversations across ~15 NHS trusts — the '200,000 calls / 20 hospitals' claim was not confirmed",
+                "US expansion underway: Dora Advance is live in US clinical trials, full launch planned at ASCRS 2026 in Washington, DC",
+                "The 'one million patients in two years' target could not be verified in independent sources"
+            ],
+            "sources": [
+                "https://www.ufonia.com/updates/dora-advance-goes-live-in-the-us",
+                "https://www.oahp.org.uk/case-studies/meet-dora-the-ai-clinical-assistant-revolutionising-patient-follow-up/",
+                "https://www.healthinnovationoxford.org/our-work/strategic-and-industry-partnerships-2/economic-growth-case-studies/ai-assistant-improves-patient-experience-and-eases-nhs-pressure/",
+                "https://www.fhft.nhs.uk/news/patients-loving-ai-digital-assistant-dora",
+                "https://www.startuphub.ai/investment_rounds/ufonia-series-a-2022",
+                "https://tracxn.com/d/companies/ufonia/__8z7bNNzl-8QEXbVWNy1hnjWh_dnlllBNctU-OkfNnIk",
+                "https://sbrihealthcare.co.uk/impact-case-studies/case-studies/ufonia"
+            ]
+        },
+        "suggested": {
+            "title": "Meet DORA: The AI Making 200,000 Real Hospital Calls",
+            "description": "DORA, a clinical conversation AI developed by Synphony, has already handled around 200,000 real clinical calls across 20 UK hospitals. It manages post-operative follow-ups and pre-operative checks, freeing clinicians for more critical work. Now expanding into the US, the company aims to scale DORA to serve a million patients within the next two years.",
+            "tags": [
+                "AI in healthcare",
+                "clinical AI",
+                "DORA",
+                "healthcare technology",
+                "AI agents",
+                "patient care",
+                "digital health",
+                "health innovation"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "The brand logo, centred on a transparent background.",
+                "label": "Opening image — your logo, shown by the «particle-image-assemble» intro",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "intro": "gen_7cc80d0d"
+        },
+        "image_text": [],
+        "site_collecting": [],
+        "site_errors": []
+    },
+    "id": "ai-powered-healthcare-conversations-scal-fxqqu",
+    "created_at": "2026-08-22T15:21:10+00:00",
+    "updated_at": "2026-08-22T21:24:42+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-powered-healthcare-conversations-scal-fxqqu/audio.m4a",
+    "transcript": {
+        "duration": 33.91999816894531,
+        "text": "AI-powered healthcare conversations scale up Synphony AI agent, DORA, is set to assist Emilio patients in the next two years DORA, a clinical conversation AI development by Synphony, has already conducted around 200,000 real clinical calls across 20 hospitals in the UK The AI is designed to handle post-operative follow-ups and pre-operative checks, freeing up clinicians' time for more critical tasks As the company expands its service in the US, it aims to scale its operations to serve Emilio patients within the next two years, ensuring its safety and effectiveness as it grows",
+        "language": "english",
+        "words": [
+            {
+                "word": "AI-powered",
+                "start": 0,
+                "end": 0.411
+            },
+            {
+                "word": "healthcare",
+                "start": 0.411,
+                "end": 0.822
+            },
+            {
+                "word": "conversations",
+                "start": 0.822,
+                "end": 1.233
+            },
+            {
+                "word": "scale",
+                "start": 1.233,
+                "end": 1.645
+            },
+            {
+                "word": "up",
+                "start": 1.645,
+                "end": 2.056
+            },
+            {
+                "word": "Synphony",
+                "start": 2.056,
+                "end": 2.467
+            },
+            {
+                "word": "AI",
+                "start": 2.467,
+                "end": 2.878
+            },
+            {
+                "word": "agent,",
+                "start": 2.878,
+                "end": 3.289
+            },
+            {
+                "word": "DORA,",
+                "start": 3.289,
+                "end": 3.7
+            },
+            {
+                "word": "is",
+                "start": 3.7,
+                "end": 4.112
+            },
+            {
+                "word": "set",
+                "start": 4.112,
+                "end": 4.523
+            },
+            {
+                "word": "to",
+                "start": 4.523,
+                "end": 4.934
+            },
+            {
+                "word": "assist",
+                "start": 4.934,
+                "end": 5.345
+            },
+            {
+                "word": "Emilio",
+                "start": 5.345,
+                "end": 5.756
+            },
+            {
+                "word": "patients",
+                "start": 5.756,
+                "end": 6.167
+            },
+            {
+                "word": "in",
+                "start": 6.167,
+                "end": 6.578
+            },
+            {
+                "word": "the",
+                "start": 6.578,
+                "end": 6.99
+            },
+            {
+                "word": "next",
+                "start": 6.99,
+                "end": 7.401
+            },
+            {
+                "word": "two",
+                "start": 7.401,
+                "end": 7.812
+            },
+            {
+                "word": "years",
+                "start": 7.812,
+                "end": 8.223
+            },
+            {
+                "word": "DORA,",
+                "start": 8.223,
+                "end": 8.634
+            },
+            {
+                "word": "a",
+                "start": 8.634,
+                "end": 9.045
+            },
+            {
+                "word": "clinical",
+                "start": 9.045,
+                "end": 9.457
+            },
+            {
+                "word": "conversation",
+                "start": 9.457,
+                "end": 9.868
+            },
+            {
+                "word": "AI",
+                "start": 9.868,
+                "end": 10.279
+            },
+            {
+                "word": "development",
+                "start": 10.279,
+                "end": 10.69
+            },
+            {
+                "word": "by",
+                "start": 10.69,
+                "end": 11.101
+            },
+            {
+                "word": "Synphony,",
+                "start": 11.101,
+                "end": 11.512
+            },
+            {
+                "word": "has",
+                "start": 11.512,
+                "end": 11.923
+            },
+            {
+                "word": "already",
+                "start": 11.923,
+                "end": 12.335
+            },
+            {
+                "word": "conducted",
+                "start": 12.335,
+                "end": 12.746
+            },
+            {
+                "word": "around",
+                "start": 12.746,
+                "end": 13.157
+            },
+            {
+                "word": "200,000",
+                "start": 13.157,
+                "end": 13.568
+            },
+            {
+                "word": "real",
+                "start": 13.568,
+                "end": 13.979
+            },
+            {
+                "word": "clinical",
+                "start": 13.979,
+                "end": 14.39
+            },
+            {
+                "word": "calls",
+                "start": 14.39,
+                "end": 14.802
+            },
+            {
+                "word": "across",
+                "start": 14.802,
+                "end": 15.213
+            },
+            {
+                "word": "20",
+                "start": 15.213,
+                "end": 15.624
+            },
+            {
+                "word": "hospitals",
+                "start": 15.624,
+                "end": 16.035
+            },
+            {
+                "word": "in",
+                "start": 16.035,
+                "end": 16.446
+            },
+            {
+                "word": "the",
+                "start": 16.446,
+                "end": 16.857
+            },
+            {
+                "word": "UK",
+                "start": 16.857,
+                "end": 17.268
+            },
+            {
+                "word": "The",
+                "start": 17.268,
+                "end": 17.68
+            },
+            {
+                "word": "AI",
+                "start": 17.68,
+                "end": 18.091
+            },
+            {
+                "word": "is",
+                "start": 18.091,
+                "end": 18.502
+            },
+            {
+                "word": "designed",
+                "start": 18.502,
+                "end": 18.913
+            },
+            {
+                "word": "to",
+                "start": 18.913,
+                "end": 19.324
+            },
+            {
+                "word": "handle",
+                "start": 19.324,
+                "end": 19.735
+            },
+            {
+                "word": "post-operative",
+                "start": 19.735,
+                "end": 20.147
+            },
+            {
+                "word": "follow-ups",
+                "start": 20.147,
+                "end": 20.558
+            },
+            {
+                "word": "and",
+                "start": 20.558,
+                "end": 20.969
+            },
+            {
+                "word": "pre-operative",
+                "start": 20.969,
+                "end": 21.38
+            },
+            {
+                "word": "checks,",
+                "start": 21.3799991607666,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "freeing",
+                "start": 22.520000457763672,
+                "end": 22.6200008392334
+            },
+            {
+                "word": "up",
+                "start": 22.6200008392334,
+                "end": 22.920000076293945
+            },
+            {
+                "word": "clinicians'",
+                "start": 22.920000076293945,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "time",
+                "start": 23.520000457763672,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "for",
+                "start": 23.520000457763672,
+                "end": 23.739999771118164
+            },
+            {
+                "word": "more",
+                "start": 23.739999771118164,
+                "end": 23.940000534057617
+            },
+            {
+                "word": "critical",
+                "start": 23.940000534057617,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "tasks",
+                "start": 24.15999984741211,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "As",
+                "start": 24.6200008392334,
+                "end": 25.360000610351562
+            },
+            {
+                "word": "the",
+                "start": 25.360000610351562,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "company",
+                "start": 25.520000457763672,
+                "end": 25.780000686645508
+            },
+            {
+                "word": "expands",
+                "start": 25.780000686645508,
+                "end": 26.219999313354492
+            },
+            {
+                "word": "its",
+                "start": 26.219999313354492,
+                "end": 26.420000076293945
+            },
+            {
+                "word": "service",
+                "start": 26.420000076293945,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "in",
+                "start": 26.68000030517578,
+                "end": 26.81999969482422
+            },
+            {
+                "word": "the",
+                "start": 26.81999969482422,
+                "end": 27
+            },
+            {
+                "word": "US,",
+                "start": 27,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "it",
+                "start": 27.6200008392334,
+                "end": 27.719999313354492
+            },
+            {
+                "word": "aims",
+                "start": 27.719999313354492,
+                "end": 27.84000015258789
+            },
+            {
+                "word": "to",
+                "start": 27.84000015258789,
+                "end": 28.200000762939453
+            },
+            {
+                "word": "scale",
+                "start": 28.200000762939453,
+                "end": 28.200000762939453
+            },
+            {
+                "word": "its",
+                "start": 28.200000762939453,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "operations",
+                "start": 28.440000534057617,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "to",
+                "start": 28.799999237060547,
+                "end": 29.040000915527344
+            },
+            {
+                "word": "serve",
+                "start": 29.040000915527344,
+                "end": 29.260000228881836
+            },
+            {
+                "word": "Emilio",
+                "start": 29.260000228881836,
+                "end": 29.6200008392334
+            },
+            {
+                "word": "patients",
+                "start": 29.6200008392334,
+                "end": 30
+            },
+            {
+                "word": "within",
+                "start": 30,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "the",
+                "start": 30.18000030517578,
+                "end": 30.3799991607666
+            },
+            {
+                "word": "next",
+                "start": 30.3799991607666,
+                "end": 30.579999923706055
+            },
+            {
+                "word": "two",
+                "start": 30.579999923706055,
+                "end": 30.81999969482422
+            },
+            {
+                "word": "years,",
+                "start": 30.81999969482422,
+                "end": 31.059999465942383
+            },
+            {
+                "word": "ensuring",
+                "start": 31.34000015258789,
+                "end": 31.540000915527344
+            },
+            {
+                "word": "its",
+                "start": 31.540000915527344,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "safety",
+                "start": 31.81999969482422,
+                "end": 32.099998474121094
+            },
+            {
+                "word": "and",
+                "start": 32.099998474121094,
+                "end": 32.34000015258789
+            },
+            {
+                "word": "effectiveness",
+                "start": 32.34000015258789,
+                "end": 32.779998779296875
+            },
+            {
+                "word": "as",
+                "start": 32.779998779296875,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "it",
+                "start": 33.18000030517578,
+                "end": 33.31999969482422
+            },
+            {
+                "word": "grows",
+                "start": 33.31999969482422,
+                "end": 33.599998474121094
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 33.91999816894531,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.35,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "DORA",
+                "present": "animation",
+                "layers": []
+            },
+            {
+                "start": 5.35,
+                "end": 11.51,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "two years",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "DORA — Clinical Voice AI",
+                            "lines": [
+                                "Built by Oxford-based Ufonia",
+                                "Phones patients for routine clinical conversations"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.51,
+                "end": 17.27,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "200,000",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "caption": "Verified scale in the NHS",
+                            "items": [
+                                {
+                                    "label": "Founded in Oxford",
+                                    "sublabel": "2017"
+                                },
+                                {
+                                    "label": "$4M Series A",
+                                    "sublabel": "2022"
+                                },
+                                {
+                                    "label": "150,000+ clinical calls, ~15 NHS trusts",
+                                    "sublabel": "by 2026",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.27,
+                "end": 24.62,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "critical tasks",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "What DORA Handles",
+                            "items": [
+                                "Post-op follow-up calls",
+                                "Pre-op checks",
+                                "Frees clinician time"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.62,
+                "end": 29.62,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "US",
+                "present": "split",
+                "layers": []
+            },
+            {
+                "start": 29.62,
+                "end": 33.91999816894531,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "safety",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Scaling Safely",
+                            "lines": [
+                                "Full US launch at ASCRS 2026",
+                                "Patients rate it 8/10"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background_pick": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/ai-powered-healthcare-conversations-scal-fxqqu/clip.mp4"
+}

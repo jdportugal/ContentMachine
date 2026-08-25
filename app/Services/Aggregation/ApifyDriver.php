@@ -47,63 +47,80 @@ class ApifyDriver implements AggregatorDriver
 
         $actor = (string) config("contentmachine.monitoring.apify.{$this->plataforma}");
         $thumbs = app(ThumbnailCache::class);
+
+        $urls = array_values(array_filter(array_map('trim', $canais)));
+        if ($urls === []) {
+            return [];
+        }
+
+        // ONE actor run for every channel, not one per channel: the actor inputs
+        // are all list-shaped, and a run costs the better part of a minute — a
+        // couple of dozen channels sequentially is an hour of waiting, and it
+        // blocks the platforms queued behind this one.
+        try {
+            $raw = $this->apify->runActor($actor, $this->input($urls, $limitePorCanal), 600);
+        } catch (Throwable) {
+            return [];
+        }
+
+        // The per-channel cap is enforced HERE rather than trusted to the actor:
+        // whether its limit counts per start-url or per run varies by actor, and
+        // one busy channel must not crowd out the rest.
+        $porCanal = [];
         $itens = [];
 
-        foreach ($canais as $canal) {
-            $canal = trim($canal);
-            if ($canal === '') {
+        foreach ($raw as $r) {
+            if (! is_array($r)) {
+                continue;
+            }
+            $item = $this->mapear($r);
+            if ($item === null) {
+                continue;
+            }
+            // Already in the vault — skip the thumbnail fetch + re-archive.
+            if (isset($idsArquivados[$item->id])) {
                 continue;
             }
 
-            try {
-                $raw = $this->apify->runActor($actor, $this->input($canal, $limitePorCanal));
-            } catch (Throwable) {
+            $canal = $item->canal !== '' ? $item->canal : '(sem canal)';
+            $porCanal[$canal] = ($porCanal[$canal] ?? 0) + 1;
+            if ($porCanal[$canal] > $limitePorCanal) {
                 continue;
             }
 
-            foreach ($raw as $r) {
-                if (! is_array($r)) {
-                    continue;
-                }
-                $item = $this->mapear($r);
-                if ($item === null) {
-                    continue;
-                }
-                // Already in the vault — skip the thumbnail fetch + re-archive.
-                if (isset($idsArquivados[$item->id])) {
-                    continue;
-                }
-                // Cache the thumbnail locally (IG/TikTok CDNs block hotlinking).
-                $thumb = $thumbs->localizar($this->plataforma, $item->id, $item->thumbnail);
-                $itens[] = $thumb === $item->thumbnail ? $item : $this->comThumbnail($item, $thumb);
-            }
+            // Cache the thumbnail locally (IG/TikTok CDNs block hotlinking).
+            $thumb = $thumbs->localizar($this->plataforma, $item->id, $item->thumbnail);
+            $itens[] = $thumb === $item->thumbnail ? $item : $this->comThumbnail($item, $thumb);
         }
 
         return $itens;
     }
 
-    /** @return array<string,mixed> actor input per platform */
-    private function input(string $url, int $limite): array
+    /**
+     * @param  array<int,string>  $urls  every channel for this platform, in one run
+     * @return array<string,mixed> actor input per platform
+     */
+    private function input(array $urls, int $limite): array
     {
         return match ($this->plataforma) {
             'instagram' => [
-                'directUrls' => [$url],
+                'directUrls' => $urls,
                 'resultsType' => 'posts',
                 'resultsLimit' => $limite,
                 'addParentData' => true,
             ],
             'tiktok' => [
-                'profiles' => [$this->tiktokHandle($url)],
+                'profiles' => array_map(fn (string $u) => $this->tiktokHandle($u), $urls),
                 'resultsPerPage' => $limite,
                 'shouldDownloadVideos' => false,
                 'shouldDownloadCovers' => false,
             ],
             'linkedin' => [
-                'urls' => [$url],
+                'urls' => $urls,
                 'limit' => $limite,
             ],
             'youtube' => [
-                'startUrls' => [['url' => $url]],
+                'startUrls' => array_map(fn (string $u) => ['url' => $u], $urls),
                 'maxResults' => $limite,
                 'maxResultsShorts' => 0,
                 'maxResultStreams' => 0,
@@ -111,7 +128,7 @@ class ApifyDriver implements AggregatorDriver
                 'saveSubsToKVS' => false,      // inline in the item, no extra fetch
                 'subtitlesLanguage' => 'any',
             ],
-            default => ['urls' => [$url], 'limit' => $limite],
+            default => ['urls' => $urls, 'limit' => $limite],
         };
     }
 

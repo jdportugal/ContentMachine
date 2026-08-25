@@ -3,16 +3,18 @@
 namespace App\Livewire;
 
 use App\Services\Projects\ProjectContext;
-use App\Services\Publishing\ZernioClient;
 use App\Services\Projects\ProjectRepository;
+use App\Services\Publishing\ZernioClient;
 use App\Services\Settings\SettingsRepository;
 use App\Services\Settings\SharedKeys;
+use App\Services\System\QueueWorkers;
 use App\Services\UpdateService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 #[Layout('components.layouts.app')]
 #[Title('Settings')]
@@ -74,6 +76,9 @@ class Definicoes extends Component
     /** Zernio ids for the DM automations (profile + Instagram account). @var array<string,string> */
     public array $zernio = [];
 
+    /** Daily auto mode: ['ligado' => bool, 'hora' => 'HH:MM'] */
+    public array $auto = [];
+
     /** Active project's language (stored in the project registry, not the vault). */
     public string $idioma = 'en';
 
@@ -99,6 +104,7 @@ class Definicoes extends Component
         $this->passos = array_map(fn ($v) => (string) $v, $tudo['passos'] ?? []);
         $this->blotato = $tudo['blotato'];
         $this->zernio = $tudo['zernio'];
+        $this->auto = $tudo['auto'];
         $this->fontes = collect($tudo['agregador'])
             ->map(fn (array $lista) => implode("\n", $lista))
             ->all();
@@ -126,6 +132,10 @@ class Definicoes extends Component
             'modelos' => array_map('trim', $this->modelos),
             'blotato' => array_map('trim', $this->blotato),
             'zernio' => array_map('trim', $this->zernio),
+            'auto' => [
+                'ligado' => (bool) ($this->auto['ligado'] ?? false),
+                'hora' => preg_match('/^\d{2}:\d{2}$/', (string) ($this->auto['hora'] ?? '')) ? $this->auto['hora'] : '09:00',
+            ],
             'passos' => array_map('trim', $this->passos),
         ]);
 
@@ -241,7 +251,7 @@ class Definicoes extends Component
      * Download the aggregator's configured sources (sources to crawl + channels
      * to aggregate) as JSON — exports what is on screen, unsaved edits included.
      */
-    public function exportarFontes(): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function exportarFontes(): StreamedResponse
     {
         $dados = [
             'agregador' => $this->emListas($this->fontes),
@@ -340,7 +350,79 @@ class Definicoes extends Component
         return $opcoes;
     }
 
-    public function render(UpdateService $updates)
+    // ── queue workers ────────────────────────────────────────────────────
+
+    /**
+     * Poll the Workers panel only while something is actually moving — a running
+     * worker with a job in hand, or a queue with work and nobody to do it. Idle
+     * and all-stopped are both steady states that do not need a 5s reload.
+     */
+    public function getWorkersBusyProperty(): bool
+    {
+        foreach ($this->workersStatus() as $w) {
+            if ($w['busy'] || ($w['pending'] > 0 && ! $w['running'])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    public function workersStatus(): array
+    {
+        return app(QueueWorkers::class)->status();
+    }
+
+    public function iniciarWorker(string $queue, QueueWorkers $workers): void
+    {
+        $this->acaoWorker($workers, $queue, 'start', 'started', 'could not be started');
+    }
+
+    public function pararWorker(string $queue, QueueWorkers $workers): void
+    {
+        $this->acaoWorker($workers, $queue, 'stop', 'stopped', 'was not running');
+    }
+
+    public function reiniciarWorker(string $queue, QueueWorkers $workers): void
+    {
+        $this->acaoWorker($workers, $queue, 'restart', 'restarted', 'could not be restarted');
+    }
+
+    /**
+     * Run one worker action and report it.
+     *
+     * The queue name arrives from the browser, so it is checked against the
+     * configured list before anything builds a command line from it — the service
+     * refuses an unknown name, and this turns that refusal into a message rather
+     * than a 500.
+     */
+    private function acaoWorker(QueueWorkers $workers, string $queue, string $acao, string $ok, string $falha): void
+    {
+        if (! $workers->isQueue($queue)) {
+            $this->dispatch('toast', message: 'Unknown queue.', type: 'erro');
+
+            return;
+        }
+
+        try {
+            $feito = $workers->{$acao}($queue);
+        } catch (\Throwable $e) {
+            $this->dispatch('toast', message: $queue.': '.$e->getMessage(), type: 'erro');
+
+            return;
+        }
+
+        $this->dispatch(
+            'toast',
+            message: $feito
+                ? 'Worker for «'.$queue.'» '.$ok.'.'
+                : 'Worker for «'.$queue.'» '.$falha.'.',
+            type: $feito ? 'ok' : 'erro',
+        );
+    }
+
+    public function render(UpdateService $updates, QueueWorkers $workers)
     {
         return view('livewire.definicoes', [
             'plataformasMeta' => config('contentmachine.plataformas_meta'),
@@ -348,6 +430,9 @@ class Definicoes extends Component
             'podeAtualizar' => $updates->updatable(),
             'passosMeta' => config('contentmachine.passos', []),
             'passosOpcoes' => $this->opcoesPorPasso(),
+            'workers' => $workers->status(),
+            'workersGeriveis' => $workers->manageable(),
+            'workersSupervisionados' => $workers->supervised(),
         ]);
     }
 }

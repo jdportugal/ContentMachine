@@ -45,6 +45,9 @@ class NewsAggregator
         // hundreds of yt-dlp calls per channel.
         $limite = min($limite * ($diasAtras + 1), 60);
         $alvo = now()->subDays($diasAtras)->toDateString();
+        // How far back a NORMAL run may reach. 0 disables the window entirely.
+        $janela = (int) config('contentmachine.aggregation.dias_recentes', 7);
+        $desde = now()->subDays(max(0, $janela - 1))->toDateString();
         $canaisConfig = (array) $this->definicoes->get('canais', []);
         $plataformas ??= array_keys($canaisConfig);
 
@@ -76,7 +79,9 @@ class NewsAggregator
             // A concrete yt-dlp error (bot-check, extractor breakage, stale binary)
             // is a real failure — YouTube is then collected through Apify instead,
             // which reaches the same videos (subtitles included) another way.
-            $erroYtDlp = $plataforma === 'youtube' ? $this->runner->lastError() : null;
+            // Only when yt-dlp actually ran: otherwise a stale lastError() would
+            // fire a second, paid Apify run right after a successful one.
+            $erroYtDlp = $driver instanceof YtDlpDriver ? $this->runner->lastError() : null;
             if ($erroYtDlp !== null) {
                 [$itens, $aviso] = $this->recuperarComApify($canais, $limite, $jaArquivados, $itens, $erroYtDlp);
                 $avisos[] = $aviso;
@@ -84,9 +89,16 @@ class NewsAggregator
 
             // Collecting a PAST day keeps only that exact day's uploads — the
             // deeper listing must not resurface a quiet channel's old videos, nor
-            // re-mix today's. Today (0) keeps the classic behaviour: the latest N.
+            // re-mix today's.
+            //
+            // A normal run keeps a RECENT WINDOW instead. Without it there is no
+            // date filter at all, so a channel that last posted months ago still
+            // hands over that video and it lands in today's report as if it were
+            // news. A quiet channel contributing nothing is the correct outcome.
             if ($diasAtras > 0) {
                 $itens = array_values(array_filter($itens, fn ($i) => $i->dia() === $alvo));
+            } elseif ($janela > 0) {
+                $itens = array_values(array_filter($itens, fn ($i) => $i->dia() >= $desde));
             }
 
             $porPlataforma[$plataforma] = count($itens);
@@ -145,11 +157,26 @@ class NewsAggregator
     }
 
     /** Creates the driver suited to the platform: yt-dlp for YouTube, Apify for the rest. */
+    /**
+     * YouTube goes through Apify like every other network: yt-dlp runs locally,
+     * one blocking subprocess per video, so a couple of dozen channels take the
+     * better part of an hour and any bot check or dead handle stalls the whole
+     * run. The actor returns real subtitles, so items keep their transcript.
+     *
+     * yt-dlp stays as the fallback for when no actor/token is configured — it is
+     * still the only way to collect without paying for a run.
+     */
     private function driver(string $plataforma): AggregatorDriver
     {
-        return $plataforma === 'youtube'
-            ? new YtDlpDriver($this->runner, $this->parser, $plataforma)
-            : new ApifyDriver($this->apify, $plataforma);
+        if ($plataforma !== 'youtube') {
+            return new ApifyDriver($this->apify, $plataforma);
+        }
+
+        $apify = new ApifyDriver($this->apify, 'youtube', $this->parser);
+
+        return config('contentmachine.aggregation.youtube_via_apify', true) && $apify->disponivel()
+            ? $apify
+            : new YtDlpDriver($this->runner, $this->parser, $plataforma);
     }
 
     /**

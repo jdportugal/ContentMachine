@@ -144,7 +144,7 @@
         <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mb-6">← back to dashboard</button>
 
         <x-panel eyebrow="Step · III — Images" title="Your images or generated" glyph="◆">
-            <p class="text-ink-soft text-sm mb-5">The plan suggests these images. For each one choose: <span class="text-teal">upload</span> your own file (or pick one from the library), let it be an <span class="text-teal">AI image</span>, or <span class="text-teal">no image</span> — that scene then becomes a text visual (card / list / diagram) like the non-image scenes. A green thumbnail was matched automatically from your Assets library.</p>
+            <p class="text-ink-soft text-sm mb-5">The plan suggests these images, and the studio already went looking for the real ones — a photo, a logo, the actual page. For each one you can keep what was found, <span class="text-teal">upload</span> your own file (or pick one from the library), search <span class="text-teal">again</span>, let it be an <span class="text-teal">AI image</span>, or choose <span class="text-teal">no image</span> — that scene then becomes a text visual (card / list / diagram) like the non-image scenes. Green thumbnails came from your Assets library or from the web.</p>
 
             <div class="space-y-2 mb-6">
                 @forelse ($this->imageRequests as $r)
@@ -155,7 +155,9 @@
                         @elseif (!empty($r['path']))
                             <img src="{{ route('clips-animados.upload', basename($r['path'])) }}"
                                  onerror="this.style.visibility='hidden'"
-                                 class="w-12 h-12 object-cover rounded-sm border {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
+                                 onclick="window.dispatchEvent(new CustomEvent('abrir-lightbox', {detail: {imgs: ['{{ route('clips-animados.upload', basename($r['path'])) }}'], i: 0}}))"
+                                 title="click to enlarge"
+                                 class="w-12 h-12 object-cover rounded-sm border cursor-zoom-in {{ !empty($r['fromLibrary']) ? 'border-good/50' : 'border-ink-soft/20' }} bg-vellum/40" alt="" />
                         @else
                             <div class="w-12 h-12 rounded-sm border border-dashed border-ink-soft/30 flex items-center justify-center text-ink-faint text-lg bg-vellum/20">{{ $r['mode'] === 'text' ? '✎' : '✦' }}</div>
                         @endif
@@ -164,12 +166,32 @@
                             {{ $r['label'] ?? (trim(\Illuminate\Support\Str::after($r['prompt'], 'Illustrate this moment:')) ?: $r['prompt']) }}
                             @if (!empty($r['fromLibrary']))
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· from library</span>
+                            @elseif ($r['mode'] === 'upload' && !empty($r['fetched']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· found on the web</span>
+                                @if (!empty($r['source']))
+                                    <a href="{{ $r['source'] }}" target="_blank" rel="noopener noreferrer"
+                                       class="ml-1 font-mono text-[0.55rem] text-ink-faint hover:text-teal underline"
+                                       title="{{ $r['source'] }}">source ↗</a>
+                                @endif
+                            @elseif ($r['mode'] === 'upload' && !empty($r['gerado']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-good">· AI image — ready</span>
                             @elseif ($r['mode'] === 'upload')
                                 <span class="ml-1 font-mono text-[0.55rem] text-good">· your image</span>
                             @elseif ($r['mode'] === 'text')
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· no image — becomes a text scene</span>
-                            @elseif (!empty($r['collecting']))
+                            @elseif (!empty($r['animado']) && !empty($r['collecting']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-teal">· generating the image…</span>
+                            @elseif (!empty($r['animado']) && empty($r['path']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· animated intro — generate the image first, then decide</span>
+                            @elseif (!empty($r['animado']))
+                                <span class="ml-1 font-mono text-[0.55rem] {{ ($r['videoMode'] ?? 'video') === 'video' ? 'text-teal' : 'text-ink-faint' }}">
+                                    · animated intro — {{ ($r['videoMode'] ?? 'video') === 'video' ? 'the video is generated on approve' : 'kept as a still image' }}</span>
+                            @elseif (!empty($r['collecting']) && !empty($r['site']))
                                 <span class="ml-1 font-mono text-[0.55rem] text-teal">· filming {{ $r['site'] }}…</span>
+                            @elseif (!empty($r['searching']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-teal">· searching the web for a real image…</span>
+                            @elseif (!empty($r['collecting']))
+                                <span class="ml-1 font-mono text-[0.55rem] text-teal">· generating the image…</span>
                             @elseif (!empty($r['site']))
                                 <span class="ml-1 font-mono text-[0.55rem] text-ink-faint">· films {{ $r['site'] }} on approve</span>
                             @else
@@ -191,10 +213,35 @@
                                         title="film {{ $r['site'] }} now, to see it before approving">
                                     {{ !empty($r['collecting']) ? '⏺ filming…' : '⏺ collect now' }}
                                 </button>
+                            @elseif (!empty($r['animado']) && empty($r['path']))
+                                <button type="button" wire:click="recriarImagemIntro" @if (!empty($r['collecting'])) disabled @endif
+                                        class="px-2 py-1 rounded-sm border {{ $on }} @if (!empty($r['collecting'])) opacity-60 cursor-wait @endif"
+                                        title="generate the start image — the video choice unlocks once you see it">
+                                    {{ !empty($r['collecting']) ? '✦ generating…' : '✦ generate image' }}</button>
+                            @elseif (!empty($r['animado']))
+                                <button type="button" wire:click="modoVideoIntro('video')"
+                                        class="px-2 py-1 rounded-sm border {{ ($r['videoMode'] ?? 'video') === 'video' && $r['mode'] === 'generate' ? $on : $off }}"
+                                        title="animate this image into the intro video (and save it as a reusable asset)">▶ video</button>
+                                <button type="button" wire:click="modoVideoIntro('image')"
+                                        class="px-2 py-1 rounded-sm border {{ ($r['videoMode'] ?? 'video') === 'image' && $r['mode'] === 'generate' ? $on : $off }}"
+                                        title="keep it as a still image — no video is generated">▣ image only</button>
+                                <button type="button" wire:click="recriarImagemIntro" @if (!empty($r['collecting'])) disabled @endif
+                                        class="px-2 py-1 rounded-sm border {{ $off }} @if (!empty($r['collecting'])) opacity-60 cursor-wait @endif"
+                                        title="generate a different take of this image">{{ !empty($r['collecting']) ? '↻ generating…' : '↻ new image' }}</button>
                             @else
-                                <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'generate')"
-                                        class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }}"
-                                        title="let the studio generate this image">✦ AI image</button>
+                                <button type="button" wire:click="procurarImagem('{{ $r['key'] }}')" @if (!empty($r['collecting'])) disabled @endif
+                                        class="px-2 py-1 rounded-sm border {{ !empty($r['fetched']) ? $on : $off }} @if (!empty($r['collecting'])) opacity-60 cursor-wait @endif"
+                                        title="search the web for the REAL image this scene needs — a photo, a logo, a page">
+                                    {{ !empty($r['searching']) ? '⌕ searching…' : (empty($r['path']) ? '⌕ find image' : '⌕ find another') }}</button>
+                                <button type="button" wire:click="gerarImagemAgora('{{ $r['key'] }}')" @if (!empty($r['collecting'])) disabled @endif
+                                        class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'generate' ? $on : $off }} @if (!empty($r['collecting'])) opacity-60 cursor-wait @endif"
+                                        title="generate this image now — see it here before approving">
+                                    {{ !empty($r['collecting']) && empty($r['searching']) ? '✦ generating…' : (empty($r['path']) ? '✦ generate now' : '↻ new image') }}</button>
+                            @endif
+                            @if (empty($r['site']))
+                                <button type="button" wire:click="editarPrompt('{{ $r['key'] }}')"
+                                        class="px-2 py-1 rounded-sm border {{ $promptKey === $r['key'] ? $on : $off }}"
+                                        title="view and edit the image-generation prompt">✎ prompt</button>
                             @endif
                             <button type="button" wire:click="modoImagem('{{ $r['key'] }}', 'text')"
                                     class="px-2 py-1 rounded-sm border {{ $r['mode'] === 'text' ? $on : $off }}"
@@ -206,6 +253,21 @@
                         </div>
                         @error('reviewUploads.'.$r['key']) <p class="w-full text-bad text-xs">{{ $message }}</p> @enderror
                         @if (!empty($r['siteError'])) <p class="w-full text-bad text-xs">Could not film the page: {{ $r['siteError'] }}</p> @endif
+
+                        {{-- Generation-prompt editor for this suggestion --}}
+                        @if ($promptKey === $r['key'])
+                            <div class="w-full mt-1 border-t border-ink-soft/15 pt-2">
+                                <label class="font-mono text-[0.55rem] text-ink-faint uppercase tracking-wider block mb-1">Image-generation prompt (English)</label>
+                                <textarea wire:model="promptEdits.{{ $r['key'] }}" rows="3"
+                                          class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-xs focus:border-teal focus:outline-none"></textarea>
+                                <div class="mt-1 flex items-center gap-2">
+                                    <button type="button" wire:click="gerarImagemAgora('{{ $r['key'] }}')"
+                                            class="px-3 py-1 rounded-sm border border-teal/60 text-teal bg-teal/10 font-mono text-[0.6rem]">✦ generate with this prompt</button>
+                                    <button type="button" wire:click="editarPrompt('{{ $r['key'] }}')"
+                                            class="font-mono text-[0.6rem] text-ink-faint hover:text-ink">close</button>
+                                </div>
+                            </div>
+                        @endif
 
                         {{-- Library picker for this suggestion --}}
                         @if ($libraryPickerKey === $r['key'])
@@ -237,10 +299,12 @@
                 @endforelse
             </div>
 
-            <button type="button" wire:click="finalizarImagens"
+            {{-- Disabled while images are still arriving: continuing now would
+                 settle the plan and throw away whatever landed a second later. --}}
+            <button type="button" wire:click="finalizarImagens" @if ($this->siteCollecting) disabled @endif
                     x-on:click="window.CMLoader?.busy('Generating the animation…')"
-                    class="font-display text-lg px-6 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">
-                ✦ Generate the rest &amp; continue →
+                    class="font-display text-lg px-6 py-2.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition @if ($this->siteCollecting) opacity-50 cursor-wait hover:bg-transparent @endif">
+                {{ $this->siteCollecting ? 'Still collecting images…' : '✦ Generate the rest & continue →' }}
             </button>
         </x-panel>
     @endif
@@ -328,6 +392,8 @@
 
                     @include('livewire.partials.lead-field')
 
+                    @include('livewire.partials.instructions-field')
+
                     @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
@@ -378,6 +444,8 @@
                     </div>
 
                     @include('livewire.partials.lead-field')
+
+                    @include('livewire.partials.instructions-field')
 
                     @include('livewire.partials.backdrop-picker')
 
@@ -861,4 +929,5 @@
         }));
     </script>
     @endscript
+    @include('livewire.publicacoes._lightbox')
 </div>

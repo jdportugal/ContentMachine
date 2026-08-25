@@ -52,6 +52,7 @@ class EffectLibrary
     /** Built-in primitives + a representative sample so the showcase can render each. */
     public const BUILTIN_SAMPLES = [
         'kinetic-text' => ['label' => 'Kinetic text', 'text' => 'Kinetic text in motion', 'params' => []],
+        'video-intro' => ['label' => 'Video intro', 'text' => '', 'params' => []],
         'fade' => ['label' => 'Fade', 'text' => 'Fade in', 'params' => []],
         'slide' => ['label' => 'Slide', 'text' => 'Slide in', 'params' => ['direction' => 'left']],
         'scale' => ['label' => 'Scale', 'text' => 'Scale up', 'params' => []],
@@ -186,7 +187,7 @@ TSX;
      */
     public function usesImage(string $slug): bool
     {
-        if ($slug === 'image-reveal') {
+        if ($slug === 'image-reveal' || $slug === 'video-intro') {
             return true;
         }
         $rec = $this->effects->all()->firstWhere('slug', $slug);

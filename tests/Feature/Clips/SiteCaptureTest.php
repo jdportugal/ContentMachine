@@ -46,6 +46,38 @@ class SiteCaptureTest extends TestCase
 
     // ── what the model may hand us ───────────────────────────────────────
 
+    /**
+     * A node failure must report its CAUSE. Node prints the message first and a
+     * long stack after it, so keeping the last 300 characters kept only stack
+     * frames — a `puppeteer-core` that was in package.json but never installed
+     * surfaced to the user as "at ModuleLoader.resolve (node:internal/…)", naming
+     * neither the missing package nor the fix.
+     */
+    public function test_a_node_failure_reports_its_cause_not_a_stack_frame(): void
+    {
+        $m = new \ReflectionMethod(SiteCapture::class, 'razaoNode');
+        $m->setAccessible(true);
+        $razao = fn (string $stderr) => $m->invoke(app(SiteCapture::class), $stderr);
+
+        // The real failure: declared in package.json, never installed.
+        $this->assertStringContainsString(
+            "Cannot find package 'puppeteer-core'",
+            $razao(
+                "node:internal/modules/esm/resolve:265\n    throw new ERR_MODULE_NOT_FOUND(\n          ^\n\n"
+                ."Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'puppeteer-core' imported from /x/capture-site.mjs\n"
+                ."    at packageResolve (node:internal/modules/esm/resolve:854:9)\n"
+                .'    at moduleResolve (node:internal/modules/esm/loader:735:20)'
+            ),
+        );
+
+        $this->assertStringContainsString('Navigation timeout', $razao(
+            "TimeoutError: Navigation timeout of 30000 ms exceeded\n    at new Deferred (/x/Deferred.js:50:29)"
+        ));
+
+        // Nothing recognisable — still say whatever there was.
+        $this->assertStringContainsString('boom', $razao('boom'));
+    }
+
     public function test_a_plain_url_is_accepted(): void
     {
         $this->assertSame(

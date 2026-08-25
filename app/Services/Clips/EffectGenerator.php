@@ -25,8 +25,11 @@ class EffectGenerator
 
     /**
      * @param  string|null  $keepSlug  when editing, force this existing slug (skips the collision check)
-     * @param  array{width?:int,height?:int,transparent?:bool}  $canvas  frame the component must compose for;
-     *                                                                   defaults to the project's clip size (9:16)
+     * @param  array{width?:int,height?:int,transparent?:bool,format?:string}  $canvas  frame the component must compose
+     *                                                                                  for; defaults to the project's clip size (9:16).
+     *                                                                                  `format` is the ClipFormat the renderer will
+     *                                                                                  actually hand the component — it must match, or
+     *                                                                                  the component lays out for the wrong shape.
      * @param  string|null  $siteCapture  absolute path to a scroll-capture mp4 of a real website; when
      *                                    given the component must PLAY it rather than mock up a browser
      * @return array{slug:string,display_name:string,description:string,param_schema:string,sample_text:string,sample_params:array,tsx:string}
@@ -43,7 +46,7 @@ class EffectGenerator
         $envelope = $this->runClaude(
             $this->userPrompt($description, $overrideSlug),
             $this->systemPrompt($canvas, $siteCapture),
-            ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600)]
+            ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true]
         );
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
@@ -171,6 +174,38 @@ class EffectGenerator
         if (preg_match('/fontFamily\s*:\s*["\'`]/', $tsx)) {
             $fail('hardcoded fontFamily found — use FONTS.* tokens.');
         }
+        if ($this->mostraImagem($tsx) && ! $this->leParamSrc($tsx)) {
+            $fail('it renders an image but never reads `anim.params.src` — that is the ONLY key the planner '
+                .'and the user\'s uploads fill, so under any other name (imageSrc, imageUrl, image, url) the '
+                .'effect renders empty in every clip.');
+        }
+        // Remotion's <Img> holds the frame (delayRender) until the image has
+        // loaded; a raw <img> does not, so a headless render captures the frame
+        // before it arrives and the image is missing or flickers. Every built-in
+        // primitive uses <Img> — a generated one must too.
+        if (preg_match('/<img[\s>]/', $tsx)) {
+            $fail('it uses a raw <img> — import { Img } from "remotion" and use <Img>, which holds the frame '
+                .'until the image has loaded. A raw <img> renders blank in an actual render.');
+        }
+    }
+
+    /** Does the component paint an image at all? */
+    private function mostraImagem(string $tsx): bool
+    {
+        return (bool) preg_match('/<(?:img|Img)[\s>]/', $tsx);
+    }
+
+    /**
+     * Does it read `src` off the params?
+     *
+     * Deliberately loose — it accepts `anim.params?.src`, `anim.params.src`,
+     * `params["src"]` and `const { src } = anim.params`. A false REJECT costs a
+     * whole (slow, paid) generation, while the failure this catches is the exact
+     * observed one: a param named imageSrc, which `\bsrc\b` will not match.
+     */
+    private function leParamSrc(string $tsx): bool
+    {
+        return (bool) preg_match('/params[^;\n]{0,80}\bsrc\b|\bsrc\b[^;\n]{0,80}params/', $tsx);
     }
 
     /** Does the component paint brand surface — a colour or a typeface of its own? */
@@ -218,7 +253,7 @@ class EffectGenerator
      *
      * Defaults to the project's own clip size, so the SFX studio keeps its size.
      *
-     * @param  array{width?:int,height?:int,transparent?:bool}  $canvas
+     * @param  array{width?:int,height?:int,transparent?:bool,format?:string}  $canvas
      */
     private function canvasRules(array $canvas): string
     {
@@ -237,8 +272,15 @@ class EffectGenerator
                 $h > $w => 'PORTRAIT (tall) — lay content out vertically; keep lines short and stack them.',
                 default => 'SQUARE — keep content compact and centred.',
             };
+            // Name the literal `format` value it will receive. `format` has only
+            // three values and none of them is "square", so a component branching
+            // on it for a 1:1 canvas would otherwise guess — and the prompt's shape
+            // word and the runtime prop have to agree or the layout is wrong.
+            $formato = $canvas['format'] ?? ($w > $h ? 'landscape' : 'portrait');
             $rules = "- Compose for the whole {$w}x{$h} frame; centre content. Use <AbsoluteFill>.\n"
                 ."- The canvas is {$shape}\n"
+                .'- You will receive `frame` = { width: '.$w.', height: '.$h.' } and `format` = "'.$formato.'". '
+                ."Lay out from `frame` and the shape above — `format` is only a coarse hint.\n"
                 .'- Size everything RELATIVE to the frame (%, or a scale derived from the `frame` prop) — '
                 ."never hardcode pixel sizes tuned to one aspect ratio.\n";
         } else {
@@ -283,6 +325,37 @@ class EffectGenerator
     }
 
     /**
+     * The contract for an effect that SHOWS AN IMAGE.
+     *
+     * `params.src` is the one key the whole pipeline fills — the planner sets it
+     * to a provided image id, ImageRequests::applyUploads writes the user's
+     * upload into it, enforceIntro feeds the logo through it. A model asked to
+     * "reveal an image" invents its own name (`imageSrc`, `imageUrl`, `photo`)
+     * unless told, and then every gate passes: it compiles, it renders, and it is
+     * simply always empty because nothing ever fills the key it reads.
+     */
+    private function imageRules(): string
+    {
+        return "\n\n# IMAGES — CRITICAL\n"
+            ."If this effect SHOWS AN IMAGE (revealing, zooming, masking or framing a photo or a logo),\n"
+            ."the image is handed to you by the pipeline in `anim.params.src` — THAT EXACT KEY.\n"
+            ."- Read it as: const src = String(anim.params?.src ?? \"\");\n"
+            ."- Any other name (`imageSrc`, `imageUrl`, `image`, `photo`, `url`) is NEVER filled, so the\n"
+            ."  effect renders empty in every real clip. This is the single most common failure.\n"
+            ."- Render it with Remotion's <Img> (import { Img } from \"remotion\"). The value is already a\n"
+            ."  usable URL — do NOT wrap it in staticFile().\n"
+            ."- Declare it: paramSchema must include \"src\", e.g. { \"src\"?: string, \"caption\"?: string }.\n"
+            .'- `src` CAN be missing (the studio preview, a clip with no image): draw a neutral placeholder '
+            ."box IN YOUR OWN MARKUP in that case — never a blank frame, and NEVER put an external URL\n"
+            ."  (via.placeholder.com, unsplash, picsum…) in sampleParams. Nothing outside this project is\n"
+            ."  reachable from the renderer, so such a preview is always broken.\n"
+            .'- The IMAGE is the subject. Any letters, words or shapes you animate around it must come from '
+            .'`anim.text` / `anim.params` — do NOT invent filler content to animate (a hardcoded '
+            .'"ABCDEFGHIJKLMNOPQRSTUVWXYZ", lorem ipsum, placeholder captions). With no image and no text an '
+            .'effect must render its placeholder, not a wall of invented letters.';
+    }
+
+    /**
      * The contract for an effect that must show a REAL website, captured as a
      * scrolling video. Without this the model mocks up a fake browser chrome,
      * which is exactly what the capture exists to avoid.
@@ -307,12 +380,12 @@ class EffectGenerator
             .'- It is silent and already scrolling; do not add your own scroll transform to it.';
     }
 
-    /** @param array{width?:int,height?:int,transparent?:bool} $canvas */
+    /** @param array{width?:int,height?:int,transparent?:bool,format?:string} $canvas */
     private function systemPrompt(array $canvas = [], ?string $siteCapture = null): string
     {
         $tokens = @file_get_contents(base_path('remotion/src/style-tokens.ts')) ?: '';
         $design = $this->design->readOrTemplate();
-        $canvasRules = $this->canvasRules($canvas).$this->siteRules($siteCapture);
+        $canvasRules = $this->canvasRules($canvas).$this->imageRules().$this->siteRules($siteCapture);
 
         return <<<PROMPT
 You are a senior Remotion + React engineer for the Brand Machine studio. You write ONE new

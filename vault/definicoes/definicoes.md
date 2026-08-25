@@ -10,10 +10,10 @@ perfis:
     url: 'https://www.youtube.com/channel/UCM1_2Qs_zNYbfowyBbksE7Q'
   instagram:
     handle: ''
-    url: 'https://www.instagram.com/aiwithjd/'
+    url: 'https://www.instagram.com/aicontentmachines/'
   tiktok:
     handle: ''
-    url: 'https://www.tiktok.com/@aiautomationwithjd'
+    url: 'https://www.tiktok.com/@aicontentmachines'
   linkedin:
     handle: ''
     url: ''
@@ -53,6 +53,9 @@ canais:
     - 'https://www.linkedin.com/in/nick-saraev/'
 shorts:
   whisper_model: ''
+auto:
+  ligado: false
+  hora: '09:00'
 blotato:
   youtube: '20629'
   instagram: '23253'
@@ -60,8 +63,8 @@ blotato:
   linkedin: ''
   threads: ''
 zernio:
-  profile: ''
-  instagram: ''
+  profile: 6a87faca54926f3d0868f781
+  instagram: 6a88315d77555aae01f4d8a6
 modelos:
   llm_provider: ''
   anthropic_model: ''

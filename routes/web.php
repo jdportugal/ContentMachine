@@ -109,13 +109,18 @@ Route::middleware('auth')->group(function () {
     // never collides with the /sfx/{slug}/preview and /sfx/{slug}/audio asset routes.
     Route::livewire('/clips-animados/sfx/{key}', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx.detail');
 
-    // Serve uma imagem carregada (miniatura), pelo nome de ficheiro (aleatório).
+    // Serve uma imagem carregada OU gerada (miniatura), pelo nome de ficheiro.
+    // Generated images live in clips/generated — without that fallback the review
+    // page showed «AI image — ready» with an invisible (404) thumbnail.
     Route::get('/clips-animados/upload/{name}', function (string $name) {
-        abort_unless((bool) preg_match('/^[A-Za-z0-9]+\.[A-Za-z0-9]+$/', $name), 404);
+        abort_unless((bool) preg_match('/^[A-Za-z0-9-]+\.[A-Za-z0-9]+$/', $name), 404);
         $disk = Storage::disk(config('contentmachine.clips.disk'));
-        abort_unless($disk->exists("clips/uploads/{$name}"), 404);
-
-        return response()->file($disk->path("clips/uploads/{$name}"));
+        foreach (["clips/uploads/{$name}", "clips/generated/{$name}"] as $path) {
+            if ($disk->exists($path)) {
+                return response()->file($disk->path($path));
+            }
+        }
+        abort(404);
     })->name('clips-animados.upload');
 
     // Serve an image-library thumbnail (per-project vault), by id.

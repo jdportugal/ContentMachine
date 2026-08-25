@@ -100,6 +100,11 @@ class VfxLabTest extends TestCase
         // The render must use the requested canvas, not the project's 9:16 default.
         $this->assertSame(1920, $this->rendered['props']['width']);
         $this->assertSame(1080, $this->rendered['props']['height']);
+        // …and the FORMAT prop with it. SampleRoot defaults it to "portrait", so
+        // without this a 16:9 component was told "landscape" in the prompt and
+        // handed "portrait" at render time — it laid out a tall stack in a wide
+        // frame and never filled it.
+        $this->assertSame('landscape', $this->rendered['props']['format']);
         $this->assertSame(6.0, (float) $this->rendered['props']['duration']);
         $this->assertFalse($this->rendered['props']['transparent']);
         // Rendered through the ISOLATED candidate entry, never the production bundle.
@@ -285,9 +290,20 @@ class VfxLabTest extends TestCase
         $this->assertStringContainsString('NEVER PAINT A FULL-FRAME BACKGROUND', $landscape);
         $this->assertStringNotContainsString('PORTRAIT (tall)', $landscape);
 
+        // The `format` value it will actually be handed, so the prompt's shape word
+        // and the runtime prop cannot disagree.
+        $this->assertStringContainsString('`format` = "landscape"', $landscape);
+
         $portrait = $this->systemPromptFor(['width' => 1080, 'height' => 1920]);
         $this->assertStringContainsString('PORTRAIT', $portrait);
         $this->assertStringNotContainsString('LANDSCAPE', $portrait);
+        $this->assertStringContainsString('`format` = "portrait"', $portrait);
+
+        // A square canvas has no ClipFormat of its own — say which of the three it
+        // gets, or a component branching on `format` guesses and lays out wrong.
+        $square = $this->systemPromptFor(['width' => 1080, 'height' => 1080]);
+        $this->assertStringContainsString('SQUARE', $square);
+        $this->assertStringContainsString('`format` = "portrait"', $square);
 
         // The SFX studio (no canvas given) makes a SCENE effect, which has to work
         // in all three frames — so it gets the three-frame contract, not one canvas.

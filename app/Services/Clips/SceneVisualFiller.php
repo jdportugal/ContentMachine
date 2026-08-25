@@ -41,6 +41,92 @@ class SceneVisualFiller
     }
 
     /**
+     * Cap how many images ONE clip asks to have MADE, spread across its length.
+     *
+     * Two sources pile these up and neither counted: the planner is told to be
+     * "visual and dense", and requestImages() then adds one to every remaining
+     * bare scene. The only limit was clips.image_max, which caps GENERATION, not
+     * requests — and is a flat number, so a 25-second clip was allowed as many
+     * pictures as a three-minute one. The result was a short clip asking for
+     * seven images, each one a paid generation the user has to sit and approve.
+     *
+     * Only layers waiting on a `generate` count: an image the user supplied
+     * (`src`) is already theirs, and a `site` is a page to FILM, chosen
+     * deliberately by name. Over budget, the surplus layers are dropped whole —
+     * the scene falls back to the bare-scene passes, exactly as it would with
+     * image generation switched off.
+     *
+     * The keepers are spread evenly across the clip rather than taken from the
+     * front, so the pictures do not all land in the opening seconds.
+     */
+    public function limitImages(array $plan, int $max): array
+    {
+        $scenes = $plan['scenes'] ?? [];
+        if (! is_array($scenes) || $max < 0) {
+            return $plan;
+        }
+
+        // Every layer awaiting a generated image, in playing order.
+        $alvos = [];
+        foreach ($scenes as $si => $scene) {
+            foreach ($scene['layers'] ?? [] as $li => $layer) {
+                if (! is_array($layer)) {
+                    continue;
+                }
+                $p = $layer['params'] ?? [];
+                if (! empty($p['generate']) && empty($p['src']) && empty($p['site'])) {
+                    $alvos[] = [$si, $li];
+                }
+            }
+        }
+
+        if (count($alvos) <= $max) {
+            return $plan;
+        }
+
+        $total = count($alvos);
+        $manter = [];
+        for ($i = 0; $i < $max; $i++) {
+            $manter[$max === 1 ? 0 : (int) round($i * ($total - 1) / ($max - 1))] = true;
+        }
+
+        // Drop back-to-front so the earlier indices stay valid as we unset.
+        foreach (array_reverse($alvos, true) as $n => [$si, $li]) {
+            if (! isset($manter[$n])) {
+                unset($scenes[$si]['layers'][$li]);
+            }
+        }
+        foreach ($scenes as $si => $scene) {
+            if (isset($scene['layers']) && is_array($scene['layers'])) {
+                $scenes[$si]['layers'] = array_values($scene['layers']);
+            }
+        }
+
+        $plan['scenes'] = $scenes;
+
+        return $plan;
+    }
+
+    /**
+     * How many images a clip of this length should ask for: one per
+     * `clips.image_every_seconds`, never more than `clips.image_max`, never zero
+     * (a clip with no picture at all is worse than one with a single good one).
+     */
+    public function imageBudget(array $plan): int
+    {
+        $fim = 0.0;
+        foreach ($plan['scenes'] ?? [] as $scene) {
+            $fim = max($fim, (float) ($scene['end'] ?? 0));
+        }
+
+        $c = config('contentmachine.clips');
+        $cada = max(1, (int) ($c['image_every_seconds'] ?? 12));
+        $teto = max(1, (int) ($c['image_max'] ?? 8));
+
+        return max(1, min($teto, (int) round($fim / $cada)));
+    }
+
+    /**
      * Guarantee the video OPENS with an intro effect, kept as short as a normal
      * scene. The planner is only nudged to do this, so this makes it reliable:
      * if any effect is marked intro, the opening becomes a short intro scene
@@ -52,9 +138,14 @@ class SceneVisualFiller
      * is placed on its `params.src` so a branded/logo intro actually uses an
      * uploaded image instead of rendering empty.
      *
+     * Ids in `$videoIds` are VIDEOS. An image-only intro effect cannot render
+     * one, but the user put it on the opening scene on purpose — so the intro is
+     * promoted to the built-in `video-intro`, which plays it full-frame.
+     *
      * @param  string[]  $introSlugs
+     * @param  string[]  $videoIds
      */
-    public function enforceIntro(array $plan, array $introSlugs, ?string $introImageId = null): array
+    public function enforceIntro(array $plan, array $introSlugs, ?string $introImageId = null, array $videoIds = []): array
     {
         $scenes = $plan['scenes'] ?? [];
         if ($introSlugs === [] || ! is_array($scenes) || $scenes === []) {
@@ -64,11 +155,18 @@ class SceneVisualFiller
         $first = $scenes[0];
         $layers = is_array($first['layers'] ?? null) ? $first['layers'] : [];
 
-        // The intro must show the OPENING part's own image (the one the user chose /
-        // that was generated for it), not a generic logo — otherwise the opening
-        // shows the wrong picture. Fall back to the passed logo only if the opening
-        // scene has no image of its own.
-        $introImageId = $this->firstImageSrc($layers) ?? $introImageId;
+        // The intro must show the OPENING part's own visual (the one the user
+        // chose / that was generated for it), not a generic logo — otherwise the
+        // opening shows the wrong picture. Fall back to the passed logo only if
+        // the opening scene has none of its own. When that visual is a VIDEO,
+        // image intros can't play it — the built-in video-intro takes over.
+        $sceneSrc = $this->firstImageSrc($layers);
+        if ($sceneSrc !== null && in_array($sceneSrc, $videoIds, true)) {
+            $introSlugs = ['video-intro'];
+            $introImageId = $sceneSrc;
+        } else {
+            $introImageId = $sceneSrc ?? $introImageId;
+        }
 
         $opensWithIntro = false;
         foreach ($layers as $layer) {
@@ -139,8 +237,33 @@ class SceneVisualFiller
             // Single all-intro scene with nothing after → leave it (nothing to slide into).
         } else {
             // Keep the planner's original opening content in a remainder scene right
-            // after the intro, so nothing it made is lost.
-            array_splice($scenes, 0, 1, [$introScene, array_merge($first, ['start' => $introEnd, 'end' => $end])]);
+            // after the intro — MINUS the image the intro just TOOK from it.
+            //
+            // The intro shows the opening scene's own picture (see $sceneSrc above),
+            // but the remainder used to be that scene verbatim, layer for layer. So
+            // the instant the intro finished, the very same image played again
+            // full-frame for whatever was left of the scene — 0.1s and 0.4s in two
+            // real clips. That is the flash: not a render fault, the same picture
+            // shown twice back to back.
+            $resto = array_merge($first, [
+                'start' => $introEnd,
+                'end' => $end,
+                'layers' => $this->semImagem($layers, $introImageId),
+            ]);
+
+            if (($resto['layers'] ?? []) === []) {
+                // The image was all it had. Don't leave an empty sliver behind:
+                // hand the time to the next scene, exactly as the branch above
+                // does; with no next scene the intro keeps the whole opening span.
+                if (isset($scenes[1])) {
+                    $scenes[0] = $introScene;
+                    $scenes[1]['start'] = $introEnd;
+                } else {
+                    $scenes[0] = array_merge($introScene, ['end' => $end]);
+                }
+            } else {
+                array_splice($scenes, 0, 1, [$introScene, $resto]);
+            }
         }
 
         $plan['scenes'] = array_values($scenes);
@@ -157,6 +280,30 @@ class SceneVisualFiller
      * @param  string[]  $introSlugs
      * @return array<int,mixed>
      */
+    /**
+     * Layers minus any that shows `$id` — the picture the intro has already used.
+     *
+     * Matches on the src rather than on the layer type: a custom image effect
+     * would replay the image just as visibly as the built-in image-reveal. When
+     * the intro image did NOT come from this scene (the logo fallback), nothing
+     * matches and the layers are returned untouched, which is right — that image
+     * was never the scene's to begin with.
+     *
+     * @param  array<int,mixed>  $layers
+     * @return array<int,mixed>
+     */
+    private function semImagem(array $layers, ?string $id): array
+    {
+        if ($id === null || $id === '') {
+            return array_values($layers);
+        }
+
+        return array_values(array_filter(
+            $layers,
+            fn ($l) => ! (is_array($l) && ($l['params']['src'] ?? null) === $id),
+        ));
+    }
+
     /** The `src` of the first image-reveal layer in a set (the scene's own image), or null. */
     private function firstImageSrc(array $layers): ?string
     {

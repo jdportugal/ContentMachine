@@ -33,6 +33,11 @@ class AgregadorTest extends TestCase
         // ignorados com aviso (evita chamadas reais à API nos testes).
         config(['services.apify.token' => null]);
 
+        // Estes testes usam fixtures com datas FIXAS (2026-07-…), mais antigas
+        // que a janela de recolha recente. A janela em si tem bateria própria
+        // (AgregadorJanelaTest); aqui desliga-se para não filtrar as fixtures.
+        config(['contentmachine.aggregation.dias_recentes' => 0]);
+
         $meta = $this->itemFixture();
         $url = $meta['webpage_url'];
 
@@ -144,6 +149,10 @@ class AgregadorTest extends TestCase
     /** yt-dlp bloqueado pelo bot-check do YouTube → recolhe pelo Apify. */
     public function test_youtube_bloqueado_no_ytdlp_e_recolhido_via_apify(): void
     {
+        // Este teste é sobre o RECURSO do yt-dlp para o Apify: força o yt-dlp a
+        // ser o motor primário (por omissão o YouTube já vai direto ao Apify).
+        config(['contentmachine.aggregation.youtube_via_apify' => false]);
+
         $erro = 'ERROR: [youtube] ZFxh7sqbUZo: Sign in to confirm you’re not a bot.';
         $this->app->instance(YtDlpRunnerContract::class, new class($erro) extends FakeYtDlpRunner
         {
@@ -185,6 +194,59 @@ class AgregadorTest extends TestCase
         $this->assertSame('Nick Saraev', $nota->get('canal'));
         $this->assertStringContainsString('primeiro passo do fluxo', $nota->body);
         $this->assertStringNotContainsString('-->', $nota->body); // cues limpos
+    }
+
+    /**
+     * Por omissão o YouTube é recolhido pelo Apify, sem tocar no yt-dlp: uma
+     * chamada por canal em vez de um subprocesso por vídeo, para que dezenas de
+     * canais não levem uma hora nem fiquem presas num handle morto.
+     */
+    public function test_youtube_vai_direto_ao_apify_sem_usar_o_ytdlp(): void
+    {
+        $runner = new class extends FakeYtDlpRunner
+        {
+            public bool $usado = false;
+
+            public function listing(string $url, int $limite): array
+            {
+                $this->usado = true;
+
+                return parent::listing($url, $limite);
+            }
+        };
+        $this->app->instance(YtDlpRunnerContract::class, $runner);
+
+        config(['services.apify.token' => 'tok-de-teste']);
+        Http::fake(['*run-sync-get-dataset-items*' => Http::response([[
+            'id' => 'ZFxh7sqbUZo',
+            'title' => 'Como automatizar tudo',
+            'url' => 'https://www.youtube.com/watch?v=ZFxh7sqbUZo',
+            'channelName' => 'Nick Saraev',
+            'date' => '2026-07-20T10:00:00.000Z',
+            'text' => 'Descrição do vídeo',
+            'thumbnailUrl' => 'https://i.ytimg.com/vi/ZFxh7sqbUZo/hq.jpg',
+            'subtitles' => [['language' => 'pt', 'srt' => "1\n00:00:01,000 --> 00:00:03,000\nprimeiro passo do fluxo\n"]],
+        ]])]);
+
+        $resumo = app(NewsAggregator::class)->aggregate(['youtube']);
+
+        $this->assertFalse($runner->usado, 'o yt-dlp não devia ser chamado para o YouTube');
+        $this->assertSame(1, $resumo['por_plataforma']['youtube']);
+
+        // As legendas do actor continuam a dar transcrição real ao item.
+        $nota = app(VaultContract::class)->get('noticias/2026-07-20/youtube-zfxh7sqbuzo.md');
+        $this->assertNotNull($nota);
+        $this->assertStringContainsString('primeiro passo do fluxo', $nota->body);
+    }
+
+    /** Sem token/actor do Apify o YouTube continua a ser recolhido pelo yt-dlp. */
+    public function test_sem_apify_o_youtube_continua_a_usar_o_ytdlp(): void
+    {
+        config(['services.apify.token' => null]);
+
+        $resumo = app(NewsAggregator::class)->aggregate(['youtube']);
+
+        $this->assertGreaterThan(0, $resumo['por_plataforma']['youtube']);
     }
 
     public function test_pagina_noticias_responde_200(): void

@@ -25,7 +25,7 @@ class OpenAiAnimationPlanner implements AnimationPlanner
                 'response_format' => ['type' => 'json_object'],
                 'temperature' => 0.5,
                 'messages' => [
-                    ['role' => 'system', 'content' => $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? [], (bool) ($options['can_generate_images'] ?? true))],
+                    ['role' => 'system', 'content' => $this->systemPrompt($mode, (bool) ($options['overlay'] ?? false), $options['presents'] ?? [], (bool) ($options['can_generate_images'] ?? true), (string) ($options['instructions'] ?? ''))],
                     ['role' => 'user', 'content' => $this->userPrompt($transcript, $mode, (float) ($transcript['duration'] ?? 0.0), $options['facts'] ?? [], $options['images'] ?? [])],
                 ],
             ])

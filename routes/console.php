@@ -20,3 +20,10 @@ Schedule::command('monitoring:collect')
     ->dailyAt('00:00')
     ->withoutOverlapping()
     ->runInBackground();
+
+/*
+ * Per-project "auto" mode (Settings → General): every minute, fire the daily
+ * news→report→clip pipeline for any enabled project whose time has passed —
+ * the command itself guards the once-a-day part.
+ */
+Schedule::command('auto:tick')->everyMinute();

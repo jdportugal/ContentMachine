@@ -1,0 +1,1026 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Run Free Cloud Code with OX Alpha on OpenRouter",
+    "source_path": "clips/uploads/zsMn369uj54A6qZK8Df6zNKwWbeVs5TsNRg7svia.mp4",
+    "images": [
+        {
+            "id": "img_4bd6958f",
+            "path": "clips/uploads/ve7WIYA6AlJvsG5VtwOS47jzSiky1jwFgqoXdDMy.mp4",
+            "description": "",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        }
+    ],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "background": "auto",
+        "lead": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Free Cloud Code Execution via OX Alpha on OpenRouter",
+            "summary": "A new model called OX Alpha on OpenRouter allows for cloud code execution without cost by editing one file, with zero dollars per million tokens processed.",
+            "timeline": [
+                {
+                    "label": "Launch of OX Alpha on OpenRouter",
+                    "sublabel": "2023"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Cost per million tokens",
+                    "value": 0,
+                    "unit": "dollars"
+                },
+                {
+                    "label": "Tokens used in one day by a tester",
+                    "value": 61000000,
+                    "unit": "tokens"
+                },
+                {
+                    "label": "Cost for 61 million tokens",
+                    "value": 0.13,
+                    "unit": "dollars"
+                },
+                {
+                    "label": "Number of models listed on OpenRouter",
+                    "value": 500,
+                    "unit": "models"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Cost of Using Cloud Code Models",
+                    "left": {
+                        "title": "OX Alpha on OpenRouter",
+                        "points": [
+                            "0 dollars per million tokens"
+                        ]
+                    },
+                    "right": {
+                        "title": "Typical cloud models",
+                        "points": [
+                            "Varies, generally more costly"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "OX Alpha is a stealth model, implying limited transparency on provider details.",
+                "Users should review model terms before using sensitive information due to anonymity."
+            ],
+            "sources": [
+                "https://openrouter.com",
+                "https://cloudcomputingnews.com"
+            ]
+        },
+        "suggested": {
+            "title": "Run Free Cloud Code with OX Alpha on OpenRouter",
+            "description": "Discover how to leverage the OX Alpha model on OpenRouter without incurring costs. This free stealth model allows you to process millions of tokens for virtually no expense, but be mindful of its anonymous origins and usage terms.",
+            "tags": [
+                "cloud computing",
+                "OX Alpha",
+                "OpenRouter",
+                "cloud models",
+                "free usage",
+                "coding",
+                "Stealth provider"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "intro",
+                "prompt": "A vibrant blue sky filled with fluffy white clouds, a large, luminous cloud in the center with a flowing stream of glowing code snippets cascading out, symbolizing freedom and innovation in technology, bright and optimistic mood",
+                "label": "Opening image — A digital cloud with a glowing code snippet flowing freely through it",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "intro": "gen_7e67a572"
+        },
+        "site_collecting": [],
+        "site_errors": []
+    },
+    "id": "openroutermp4-zjdy5",
+    "created_at": "2026-08-22T21:49:11+00:00",
+    "updated_at": "2026-08-23T09:34:19+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/openroutermp4-zjdy5/audio.m4a",
+    "transcript": {
+        "duration": 43.16999816894531,
+        "text": "Cloud code without a code bill. Via one file edit, you can run cloud code right now without paying for cloud models. A stealth model called OX Alpha just appeared on OpenRouter at 0 dollars per million tokens, both input and output. And by pointing cloud code at OpenRouter API key, you can run the whole harness on it for free. One person burned through 61 million tokens in a single day of testing and paid about 13 cents. The catch? It's from an anonymous provider called Stealth. So check the model terms before feeding it any sensitive information. And it does not work in cloud code desktop apps since that forces cloud models. OpenRouter lists 500 plus models and plenty of others are free too. If you want to set up steps, just comment stealth and I'll send it to you.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Cloud",
+                "start": 0,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "code",
+                "start": 0.5799999833106995,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "without",
+                "start": 0.8600000143051147,
+                "end": 1.1799999475479126
+            },
+            {
+                "word": "a",
+                "start": 1.1799999475479126,
+                "end": 1.4800000190734863
+            },
+            {
+                "word": "code",
+                "start": 1.4800000190734863,
+                "end": 1.600000023841858
+            },
+            {
+                "word": "bill.",
+                "start": 1.600000023841858,
+                "end": 1.8799999952316284
+            },
+            {
+                "word": "Via",
+                "start": 2.4000000953674316,
+                "end": 2.5799999237060547
+            },
+            {
+                "word": "one",
+                "start": 2.5799999237060547,
+                "end": 2.819999933242798
+            },
+            {
+                "word": "file",
+                "start": 2.819999933242798,
+                "end": 3.0399999618530273
+            },
+            {
+                "word": "edit,",
+                "start": 3.0399999618530273,
+                "end": 3.380000114440918
+            },
+            {
+                "word": "you",
+                "start": 3.5999999046325684,
+                "end": 3.5999999046325684
+            },
+            {
+                "word": "can",
+                "start": 3.5999999046325684,
+                "end": 3.799999952316284
+            },
+            {
+                "word": "run",
+                "start": 3.799999952316284,
+                "end": 3.9600000381469727
+            },
+            {
+                "word": "cloud",
+                "start": 3.9600000381469727,
+                "end": 4.21999979019165
+            },
+            {
+                "word": "code",
+                "start": 4.21999979019165,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "right",
+                "start": 4.400000095367432,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "now",
+                "start": 4.679999828338623,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "without",
+                "start": 5.019999980926514,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "paying",
+                "start": 5.260000228881836,
+                "end": 5.539999961853027
+            },
+            {
+                "word": "for",
+                "start": 5.539999961853027,
+                "end": 5.820000171661377
+            },
+            {
+                "word": "cloud",
+                "start": 5.820000171661377,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "models.",
+                "start": 6.079999923706055,
+                "end": 6.5
+            },
+            {
+                "word": "A",
+                "start": 6.940000057220459,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "stealth",
+                "start": 7.380000114440918,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "model",
+                "start": 7.539999961853027,
+                "end": 7.820000171661377
+            },
+            {
+                "word": "called",
+                "start": 7.820000171661377,
+                "end": 8.279999732971191
+            },
+            {
+                "word": "OX",
+                "start": 8.28,
+                "end": 8.8
+            },
+            {
+                "word": "Alpha",
+                "start": 8.8,
+                "end": 9.32
+            },
+            {
+                "word": "just",
+                "start": 9.319999694824219,
+                "end": 9.619999885559082
+            },
+            {
+                "word": "appeared",
+                "start": 9.619999885559082,
+                "end": 9.960000038146973
+            },
+            {
+                "word": "on",
+                "start": 9.960000038146973,
+                "end": 10.300000190734863
+            },
+            {
+                "word": "OpenRouter",
+                "start": 10.300000190734863,
+                "end": 10.739999771118164
+            },
+            {
+                "word": "at",
+                "start": 10.739999771118164,
+                "end": 11.4399995803833
+            },
+            {
+                "word": "0",
+                "start": 11.4399995803833,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "dollars",
+                "start": 11.880000114440918,
+                "end": 12.199999809265137
+            },
+            {
+                "word": "per",
+                "start": 12.199999809265137,
+                "end": 12.399999618530273
+            },
+            {
+                "word": "million",
+                "start": 12.399999618530273,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "tokens,",
+                "start": 12.640000343322754,
+                "end": 13
+            },
+            {
+                "word": "both",
+                "start": 13.15999984741211,
+                "end": 13.479999542236328
+            },
+            {
+                "word": "input",
+                "start": 13.479999542236328,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "and",
+                "start": 13.800000190734863,
+                "end": 14.460000038146973
+            },
+            {
+                "word": "output.",
+                "start": 14.460000038146973,
+                "end": 14.460000038146973
+            },
+            {
+                "word": "And",
+                "start": 14.84000015258789,
+                "end": 15
+            },
+            {
+                "word": "by",
+                "start": 15,
+                "end": 15.140000343322754
+            },
+            {
+                "word": "pointing",
+                "start": 15.140000343322754,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "cloud",
+                "start": 15.359999656677246,
+                "end": 15.640000343322754
+            },
+            {
+                "word": "code",
+                "start": 15.640000343322754,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "at",
+                "start": 15.84000015258789,
+                "end": 16.100000381469727
+            },
+            {
+                "word": "OpenRouter",
+                "start": 16.100000381469727,
+                "end": 16.540000915527344
+            },
+            {
+                "word": "API",
+                "start": 16.540000915527344,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "key,",
+                "start": 16.979999542236328,
+                "end": 17.260000228881836
+            },
+            {
+                "word": "you",
+                "start": 17.440000534057617,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "can",
+                "start": 17.540000915527344,
+                "end": 17.739999771118164
+            },
+            {
+                "word": "run",
+                "start": 17.739999771118164,
+                "end": 17.940000534057617
+            },
+            {
+                "word": "the",
+                "start": 17.940000534057617,
+                "end": 18.239999771118164
+            },
+            {
+                "word": "whole",
+                "start": 18.239999771118164,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "harness",
+                "start": 18.34000015258789,
+                "end": 18.65999984741211
+            },
+            {
+                "word": "on",
+                "start": 18.65999984741211,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "it",
+                "start": 18.899999618530273,
+                "end": 19.059999465942383
+            },
+            {
+                "word": "for",
+                "start": 19.059999465942383,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "free.",
+                "start": 19.399999618530273,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "One",
+                "start": 19.899999618530273,
+                "end": 20.420000076293945
+            },
+            {
+                "word": "person",
+                "start": 20.420000076293945,
+                "end": 20.780000686645508
+            },
+            {
+                "word": "burned",
+                "start": 20.780000686645508,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "through",
+                "start": 21.020000457763672,
+                "end": 21.3799991607666
+            },
+            {
+                "word": "61",
+                "start": 21.3799991607666,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "million",
+                "start": 21.860000610351562,
+                "end": 22.200000762939453
+            },
+            {
+                "word": "tokens",
+                "start": 22.200000762939453,
+                "end": 22.5
+            },
+            {
+                "word": "in",
+                "start": 22.5,
+                "end": 22.719999313354492
+            },
+            {
+                "word": "a",
+                "start": 22.719999313354492,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "single",
+                "start": 22.860000610351562,
+                "end": 23.020000457763672
+            },
+            {
+                "word": "day",
+                "start": 23.020000457763672,
+                "end": 23.260000228881836
+            },
+            {
+                "word": "of",
+                "start": 23.260000228881836,
+                "end": 23.760000228881836
+            },
+            {
+                "word": "testing",
+                "start": 23.760000228881836,
+                "end": 23.760000228881836
+            },
+            {
+                "word": "and",
+                "start": 23.760000228881836,
+                "end": 24.020000457763672
+            },
+            {
+                "word": "paid",
+                "start": 24.020000457763672,
+                "end": 24.18000030517578
+            },
+            {
+                "word": "about",
+                "start": 24.18000030517578,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "13",
+                "start": 24.479999542236328,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "cents.",
+                "start": 24.860000610351562,
+                "end": 25.18000030517578
+            },
+            {
+                "word": "The",
+                "start": 25.18000030517578,
+                "end": 25.940000534057617
+            },
+            {
+                "word": "catch?",
+                "start": 25.940000534057617,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "It's",
+                "start": 26.899999618530273,
+                "end": 27.059999465942383
+            },
+            {
+                "word": "from",
+                "start": 27.059999465942383,
+                "end": 27.200000762939453
+            },
+            {
+                "word": "an",
+                "start": 27.200000762939453,
+                "end": 27.399999618530273
+            },
+            {
+                "word": "anonymous",
+                "start": 27.399999618530273,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "provider",
+                "start": 27.739999771118164,
+                "end": 28.239999771118164
+            },
+            {
+                "word": "called",
+                "start": 28.239999771118164,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "Stealth.",
+                "start": 28.540000915527344,
+                "end": 28.899999618530273
+            },
+            {
+                "word": "So",
+                "start": 29.5,
+                "end": 29.600000381469727
+            },
+            {
+                "word": "check",
+                "start": 29.600000381469727,
+                "end": 29.760000228881836
+            },
+            {
+                "word": "the",
+                "start": 29.760000228881836,
+                "end": 29.940000534057617
+            },
+            {
+                "word": "model",
+                "start": 29.940000534057617,
+                "end": 30.139999389648438
+            },
+            {
+                "word": "terms",
+                "start": 30.139999389648438,
+                "end": 30.399999618530273
+            },
+            {
+                "word": "before",
+                "start": 30.399999618530273,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "feeding",
+                "start": 30.700000762939453,
+                "end": 31.079999923706055
+            },
+            {
+                "word": "it",
+                "start": 31.079999923706055,
+                "end": 31.31999969482422
+            },
+            {
+                "word": "any",
+                "start": 31.31999969482422,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "sensitive",
+                "start": 31.6200008392334,
+                "end": 31.940000534057617
+            },
+            {
+                "word": "information.",
+                "start": 31.940000534057617,
+                "end": 32.52000045776367
+            },
+            {
+                "word": "And",
+                "start": 33.099998474121094,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "it",
+                "start": 33.15999984741211,
+                "end": 33.2599983215332
+            },
+            {
+                "word": "does",
+                "start": 33.2599983215332,
+                "end": 33.41999816894531
+            },
+            {
+                "word": "not",
+                "start": 33.41999816894531,
+                "end": 33.7400016784668
+            },
+            {
+                "word": "work",
+                "start": 33.7400016784668,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "in",
+                "start": 33.81999969482422,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "cloud",
+                "start": 34.060001373291016,
+                "end": 34.20000076293945
+            },
+            {
+                "word": "code",
+                "start": 34.20000076293945,
+                "end": 34.41999816894531
+            },
+            {
+                "word": "desktop",
+                "start": 34.41999816894531,
+                "end": 34.79999923706055
+            },
+            {
+                "word": "apps",
+                "start": 34.79999923706055,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "since",
+                "start": 35.060001373291016,
+                "end": 35.279998779296875
+            },
+            {
+                "word": "that",
+                "start": 35.279998779296875,
+                "end": 35.5
+            },
+            {
+                "word": "forces",
+                "start": 35.5,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "cloud",
+                "start": 35.7400016784668,
+                "end": 36.119998931884766
+            },
+            {
+                "word": "models.",
+                "start": 36.119998931884766,
+                "end": 36.459999084472656
+            },
+            {
+                "word": "OpenRouter",
+                "start": 36.97999954223633,
+                "end": 37.31999969482422
+            },
+            {
+                "word": "lists",
+                "start": 37.31999969482422,
+                "end": 37.619998931884766
+            },
+            {
+                "word": "500",
+                "start": 37.619998931884766,
+                "end": 38.060001373291016
+            },
+            {
+                "word": "plus",
+                "start": 38.060001373291016,
+                "end": 38.47999954223633
+            },
+            {
+                "word": "models",
+                "start": 38.47999954223633,
+                "end": 38.70000076293945
+            },
+            {
+                "word": "and",
+                "start": 38.70000076293945,
+                "end": 39.040000915527344
+            },
+            {
+                "word": "plenty",
+                "start": 39.040000915527344,
+                "end": 39.2599983215332
+            },
+            {
+                "word": "of",
+                "start": 39.2599983215332,
+                "end": 39.47999954223633
+            },
+            {
+                "word": "others",
+                "start": 39.47999954223633,
+                "end": 39.65999984741211
+            },
+            {
+                "word": "are",
+                "start": 39.65999984741211,
+                "end": 39.86000061035156
+            },
+            {
+                "word": "free",
+                "start": 39.86000061035156,
+                "end": 40.060001373291016
+            },
+            {
+                "word": "too.",
+                "start": 40.060001373291016,
+                "end": 40.29999923706055
+            },
+            {
+                "word": "If",
+                "start": 40.599998474121094,
+                "end": 40.70000076293945
+            },
+            {
+                "word": "you",
+                "start": 40.70000076293945,
+                "end": 40.81999969482422
+            },
+            {
+                "word": "want",
+                "start": 40.81999969482422,
+                "end": 40.939998626708984
+            },
+            {
+                "word": "to",
+                "start": 40.939998626708984,
+                "end": 41.099998474121094
+            },
+            {
+                "word": "set",
+                "start": 41.099998474121094,
+                "end": 41.18000030517578
+            },
+            {
+                "word": "up",
+                "start": 41.18000030517578,
+                "end": 41.459999084472656
+            },
+            {
+                "word": "steps,",
+                "start": 41.459999084472656,
+                "end": 41.619998931884766
+            },
+            {
+                "word": "just",
+                "start": 41.720001220703125,
+                "end": 42.02000045776367
+            },
+            {
+                "word": "comment",
+                "start": 42.02000045776367,
+                "end": 42.15999984741211
+            },
+            {
+                "word": "stealth",
+                "start": 42.15999984741211,
+                "end": 42.41999816894531
+            },
+            {
+                "word": "and",
+                "start": 42.41999816894531,
+                "end": 42.560001373291016
+            },
+            {
+                "word": "I'll",
+                "start": 42.560001373291016,
+                "end": 42.70000076293945
+            },
+            {
+                "word": "send",
+                "start": 42.70000076293945,
+                "end": 42.81999969482422
+            },
+            {
+                "word": "it",
+                "start": 42.81999969482422,
+                "end": 42.91999816894531
+            },
+            {
+                "word": "to",
+                "start": 42.91999816894531,
+                "end": 43.08000183105469
+            },
+            {
+                "word": "you.",
+                "start": 43.08000183105469,
+                "end": 43.13999938964844
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 43.16999816894531,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.3,
+                "background": "video",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "video-intro",
+                        "text": null,
+                        "params": {
+                            "src": "img_4bd6958f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.3,
+                "end": 13,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "OX Alpha",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": null,
+                        "params": {
+                            "left": {
+                                "title": "OX Alpha on OpenRouter",
+                                "points": [
+                                    "0 dollars per million tokens"
+                                ]
+                            },
+                            "right": {
+                                "title": "Typical cloud models",
+                                "points": [
+                                    "Varies, generally more costly"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13,
+                "end": 22,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "free",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "items": [
+                                "Point cloud code at OpenRouter API key",
+                                "Run whole harness for free"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22,
+                "end": 27,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "13 cents",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": null,
+                        "params": {
+                            "title": "Tokens Usage",
+                            "unit": "tokens",
+                            "bars": [
+                                {
+                                    "label": "Used in one day",
+                                    "value": 61000000,
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 36.5,
+                "background": "video",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Caution with Stealth Model",
+                            "lines": [
+                                "Anonymity implies limited transparency",
+                                "Check model terms for sensitive info"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.5,
+                "end": 40.3,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": null,
+                        "params": {
+                            "items": [
+                                {
+                                    "label": "Launch of OX Alpha on OpenRouter",
+                                    "sublabel": "2023",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 40.3,
+                "end": 43.14,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "stealth",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Set up steps",
+                            "lines": [
+                                "Comment 'stealth' to request"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/openroutermp4-zjdy5/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    }
+}

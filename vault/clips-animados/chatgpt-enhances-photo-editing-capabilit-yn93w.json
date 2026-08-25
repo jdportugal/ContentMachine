@@ -1,0 +1,884 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "ChatGPT Turns Your Photos Into Pro DSLR Shots",
+    "source_text": "ChatGPT Enhances Photo Editing Capabilities.\nChatGPT can now turn your photos into stunning, professional-quality images.\nWith a simple upload, you can create DSLR-style portraits, cinematic shots, and even magazine covers. The new features allow you to control lighting, composition, and overall image quality with just a few prompts. This means you can restore old images or place yourself in entirely new locations with ease. If you want the link, just comment photos.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "gen_3dc98bff",
+            "path": "clips/generated/wag9l1b7chcd.png",
+            "description": "Illustrate this moment: ChatGPT enhances photo editing capabilities ChatGPT",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_aacbc157",
+            "path": "clips/generated/9c7hmoudry2i.png",
+            "description": "A photographer in a stylish urban setting, focused on their camera, with a breathtaking sunset illuminating the city skyline in the background, vibrant colors reflecting off the buildings, capturing a...",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_00ee1ab6",
+            "path": "clips/generated/lhplgnzkli5n.png",
+            "description": "Illustrate this moment: This means you can restore old images or place yourself in entirely new locations with ease If",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_8afe8937",
+            "path": "clips/generated/0wdquuftcrwe.png",
+            "description": "A moody cinematic wide shot of a man in a long coat standing on a rain-slicked city street at night, teal and amber neon reflections on the wet asphalt, anamorphic lens flare, film grain, high contras...",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "ChatGPT photo editing: GPT Image 2 / ChatGPT Images 2.0",
+            "summary": "OpenAI launched ChatGPT Images 2.0, powered by GPT Image 2, on April 21, 2026 for every ChatGPT plan, adding reasoning-based generation, near-perfect text rendering and precise edits that preserve faces, lighting and composition. It took the #1 spot on every Image Arena leaderboard within hours, and in August 2026 Adobe put 70+ Photoshop-family tools directly inside ChatGPT.",
+            "timeline": [
+                {
+                    "label": "Native image generation replaces DALL·E 3 in ChatGPT",
+                    "sublabel": "March 25, 2025"
+                },
+                {
+                    "label": "700M images made in the first 9 days",
+                    "sublabel": "March 25 – April 3, 2025"
+                },
+                {
+                    "label": "GPT Image 1.5: precise editing, face likeness kept",
+                    "sublabel": "December 16, 2025"
+                },
+                {
+                    "label": "ChatGPT Images 2.0 (GPT Image 2) launches on all plans",
+                    "sublabel": "April 21, 2026"
+                },
+                {
+                    "label": "#1 across every Image Arena leaderboard",
+                    "sublabel": "April 2026"
+                },
+                {
+                    "label": "Adobe plugin brings Photoshop tools into ChatGPT",
+                    "sublabel": "August 6, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Images generated in first 9 days (2025)",
+                    "value": 700000000,
+                    "unit": "images"
+                },
+                {
+                    "label": "People who made images in that window (2025)",
+                    "value": 130000000,
+                    "unit": "users"
+                },
+                {
+                    "label": "Image Arena text-to-image score (Apr 2026)",
+                    "value": 1512,
+                    "unit": "Elo"
+                },
+                {
+                    "label": "Lead over #2 model, largest ever (Apr 2026)",
+                    "value": 242,
+                    "unit": "Elo points"
+                },
+                {
+                    "label": "Adobe pro tools inside ChatGPT (Aug 2026)",
+                    "value": 70,
+                    "unit": "tools"
+                },
+                {
+                    "label": "Max image edge via API (2026)",
+                    "value": 3840,
+                    "unit": "pixels"
+                },
+                {
+                    "label": "ChatGPT weekly users (Feb 2026)",
+                    "value": 900000000,
+                    "unit": "users"
+                },
+                {
+                    "label": "ChatGPT app monthly users (June 2026)",
+                    "value": 1000000000,
+                    "unit": "users"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Then vs Now",
+                    "left": {
+                        "title": "DALL·E 3 era (2023–24)",
+                        "points": [
+                            "Garbled text on signs and menus",
+                            "Whole image regenerated on edits",
+                            "Faces drifted between versions"
+                        ]
+                    },
+                    "right": {
+                        "title": "ChatGPT Images 2.0 (2026)",
+                        "points": [
+                            "Readable menus, posters, packaging",
+                            "Edits only what you ask for",
+                            "Keeps likeness, lighting, composition"
+                        ]
+                    }
+                },
+                {
+                    "title": "Instant vs Thinking mode",
+                    "left": {
+                        "title": "Instant",
+                        "points": [
+                            "Fast single output",
+                            "Available on all plans"
+                        ]
+                    },
+                    "right": {
+                        "title": "Thinking",
+                        "points": [
+                            "Plans the image before drawing",
+                            "Consistent characters across a batch",
+                            "Paid plans only"
+                        ]
+                    }
+                },
+                {
+                    "title": "Leaderboard, April 2026",
+                    "left": {
+                        "title": "GPT Image 2",
+                        "points": [
+                            "Score 1512",
+                            "#1 in every category"
+                        ]
+                    },
+                    "right": {
+                        "title": "Nano Banana 2 (Google)",
+                        "points": [
+                            "Score 1271",
+                            "242 points behind"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "ChatGPT Images 2.0 shipped April 21, 2026 on every plan, free included",
+                "It reasons before it draws — the first OpenAI image model with a Thinking mode",
+                "Edits are surgical: change the light, keep the face and the frame",
+                "Text finally works — menus, covers and packaging come out readable",
+                "Thinking mode holds one character consistent across a whole set of images",
+                "Adobe put 70+ Photoshop, Firefly and Express tools inside ChatGPT in August 2026",
+                "Every image carries C2PA credentials plus an invisible SynthID watermark",
+                "Restoration caveat: it regenerates pixels, so faces in old photos can shift slightly"
+            ],
+            "sources": [
+                "https://openai.com/index/introducing-chatgpt-images-2-0/",
+                "https://techcrunch.com/2026/04/21/chatgpts-new-images-2-0-model-is-surprisingly-good-at-generating-text/",
+                "https://thenewstack.io/chatgpt-images-20-openai/",
+                "https://www.datacamp.com/blog/chatgpt-images-2-0",
+                "https://en.wikipedia.org/wiki/GPT_Image",
+                "https://x.com/arena/status/2046670703311884548",
+                "https://kingy.ai/news/gpt-image-2-benchmark-results-openai-sweeps-the-arena-leaderboard-by-242-elo/",
+                "https://techcrunch.com/2025/12/16/openai-continues-on-its-code-red-warpath-with-new-image-generation-model/",
+                "https://datanorth.ai/news/openai-gpt-image-1-5-released",
+                "https://techcrunch.com/2025/04/03/chatgpt-users-have-generated-over-700m-images-since-last-week-openai-says/",
+                "https://www.lowyat.net/2025/347037/openai-over-700-million-images-generated-chatgpt/",
+                "https://blog.adobe.com/en/publish/2026/08/06/introducing-adobe-chatgpt-create-edit-get-work-done-all-in-chatgpt",
+                "https://9to5mac.com/2026/08/06/new-adobe-plugin-in-chatgpt-combines-photoshop-firefly-premiere-acrobat-and-more/",
+                "https://petapixel.com/2026/08/07/adobe-is-coming-for-canva-with-expanded-chatgpt-integration/",
+                "https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images",
+                "https://openai.com/index/advancing-content-provenance/",
+                "https://www.techspot.com/news/112743-chatgpt-becomes-fastest-app-reach-1-billion-monthly.html",
+                "https://thenextweb.com/news/chatgpt-1-billion-monthly-active-users",
+                "https://www.demandsage.com/chatgpt-statistics/",
+                "https://fal.ai/gpt-image-2",
+                "https://docs.apiyi.com/en/news/gpt-image-2-launch",
+                "https://www.flagapps.com/photo-restore/blog/ai-prompts-to-restore-old-photos"
+            ]
+        },
+        "suggested": {
+            "title": "ChatGPT Turns Your Photos Into Pro DSLR Shots",
+            "description": "ChatGPT can now transform ordinary photos into professional-quality images with a single upload. Create DSLR-style portraits, cinematic shots, and even magazine covers while controlling lighting, composition, and overall quality with just a few prompts. Restore old pictures or place yourself in brand new locations in seconds. Comment \"photos\" if you want the link.",
+            "tags": [
+                "chatgpt",
+                "ai photo editing",
+                "ai image generation",
+                "dslr portrait",
+                "photo restoration",
+                "ai tools",
+                "openai",
+                "photography tips"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "8190d849",
+                "prompt": "Illustrate this moment: ChatGPT enhances photo editing capabilities ChatGPT",
+                "label": "ChatGPT enhances photo editing capabilities ChatGPT",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "c9465c01",
+                "prompt": "https://openai.com/index/introducing-chatgpt-images-2-0/",
+                "label": "ChatGPT can now turn your photos into stunning professional quality images",
+                "site": "https://openai.com/index/introducing-chatgpt-images-2-0/",
+                "still": false
+            },
+            {
+                "key": "737984f0",
+                "prompt": "A studio DSLR portrait of a young woman against a deep navy backdrop, shallow depth of field, soft key light from the left with a warm rim light on her hair, skin texture crisp and natural, cinematic photographic quality, no text anywhere",
+                "label": "With a simple upload you can create DSLR style portraits",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "1c350fcc",
+                "prompt": "A moody cinematic wide shot of a man in a long coat standing on a rain-slicked city street at night, teal and amber neon reflections on the wet asphalt, anamorphic lens flare, film grain, high contrast, no text or letters anywhere",
+                "label": "cinematic shots and even magazine covers",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "f4131d33",
+                "prompt": "Illustrate this moment: This means you can restore old images or place yourself in entirely new locations with ease If",
+                "label": "This means you can restore old images or place yourself in entirely new locations with ease If",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "A photographer in a stylish urban setting, focused on their camera, with a breathtaking sunset illuminating the city skyline in the background, vibrant colors reflecting off the buildings, capturing a moment of creativity and inspiration.",
+                "label": "Opening image — A stunning, hyper-realistic photograph of a photographer adjusting their camera settings while capturing a vibrant sunset over a city skyline.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "8190d849": "gen_3dc98bff",
+            "intro": "gen_aacbc157",
+            "f4131d33": "gen_00ee1ab6",
+            "1c350fcc": "gen_8afe8937"
+        },
+        "site_collecting": [],
+        "site_errors": {
+            "c9465c01": "The page did not respond: https://openai.com/index/introducing-chatgpt-images-2-0/"
+        },
+        "image_text": {
+            "c9465c01": true,
+            "737984f0": true
+        }
+    },
+    "id": "chatgpt-enhances-photo-editing-capabilit-yn93w",
+    "created_at": "2026-08-25T15:52:26+00:00",
+    "updated_at": "2026-08-25T16:45:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/chatgpt-enhances-photo-editing-capabilit-yn93w/voz.mp3",
+    "transcript": {
+        "duration": 37.470001220703125,
+        "text": "ChatGPT enhances photo editing capabilities. ChatGPT can now turn your photos into stunning professional quality images. With a simple upload, you can create DSLR style portraits, cinematic shots and even magazine covers. The new features allow you to control lighting, composition and overall image quality with just a few prompts. This means you can restore old images or place yourself in entirely new locations with ease. If you want the link, just comment photos.",
+        "language": "english",
+        "words": [
+            {
+                "word": "ChatGPT",
+                "start": 0,
+                "end": 1.1200000047683716
+            },
+            {
+                "word": "enhances",
+                "start": 1.1200000047683716,
+                "end": 1.7200000286102295
+            },
+            {
+                "word": "photo",
+                "start": 1.7200000286102295,
+                "end": 3.059999942779541
+            },
+            {
+                "word": "editing",
+                "start": 3.059999942779541,
+                "end": 3.5
+            },
+            {
+                "word": "capabilities",
+                "start": 3.5,
+                "end": 4.380000114440918
+            },
+            {
+                "word": "ChatGPT",
+                "start": 5.559999942779541,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "can",
+                "start": 6.400000095367432,
+                "end": 6.619999885559082
+            },
+            {
+                "word": "now",
+                "start": 6.619999885559082,
+                "end": 6.920000076293945
+            },
+            {
+                "word": "turn",
+                "start": 6.920000076293945,
+                "end": 7.059999942779541
+            },
+            {
+                "word": "your",
+                "start": 7.059999942779541,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "photos",
+                "start": 7.619999885559082,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "into",
+                "start": 7.619999885559082,
+                "end": 7.920000076293945
+            },
+            {
+                "word": "stunning",
+                "start": 7.920000076293945,
+                "end": 8.34000015258789
+            },
+            {
+                "word": "professional",
+                "start": 8.34000015258789,
+                "end": 9.260000228881836
+            },
+            {
+                "word": "quality",
+                "start": 9.260000228881836,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "images",
+                "start": 9.779999732971191,
+                "end": 10.199999809265137
+            },
+            {
+                "word": "With",
+                "start": 11.0600004196167,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "a",
+                "start": 11.100000381469727,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "simple",
+                "start": 11.260000228881836,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "upload",
+                "start": 11.460000038146973,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "you",
+                "start": 12.479999542236328,
+                "end": 12.479999542236328
+            },
+            {
+                "word": "can",
+                "start": 12.479999542236328,
+                "end": 12.779999732971191
+            },
+            {
+                "word": "create",
+                "start": 12.779999732971191,
+                "end": 13.079999923706055
+            },
+            {
+                "word": "DSLR",
+                "start": 13.079999923706055,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "style",
+                "start": 13.920000076293945,
+                "end": 14.460000038146973
+            },
+            {
+                "word": "portraits",
+                "start": 14.460000038146973,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "cinematic",
+                "start": 15.920000076293945,
+                "end": 15.920000076293945
+            },
+            {
+                "word": "shots",
+                "start": 15.920000076293945,
+                "end": 16.31999969482422
+            },
+            {
+                "word": "and",
+                "start": 16.31999969482422,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "even",
+                "start": 16.81999969482422,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "magazine",
+                "start": 17.600000381469727,
+                "end": 17.6200008392334
+            },
+            {
+                "word": "covers",
+                "start": 17.6200008392334,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "The",
+                "start": 18.84000015258789,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "new",
+                "start": 18.899999618530273,
+                "end": 19.15999984741211
+            },
+            {
+                "word": "features",
+                "start": 19.15999984741211,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "allow",
+                "start": 19.399999618530273,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "you",
+                "start": 19.739999771118164,
+                "end": 19.899999618530273
+            },
+            {
+                "word": "to",
+                "start": 19.899999618530273,
+                "end": 20.559999465942383
+            },
+            {
+                "word": "control",
+                "start": 20.559999465942383,
+                "end": 20.559999465942383
+            },
+            {
+                "word": "lighting",
+                "start": 20.559999465942383,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "composition",
+                "start": 22.239999771118164,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "and",
+                "start": 22.239999771118164,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "overall",
+                "start": 22.979999542236328,
+                "end": 23.579999923706055
+            },
+            {
+                "word": "image",
+                "start": 23.579999923706055,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "quality",
+                "start": 24.100000381469727,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "with",
+                "start": 24.459999084472656,
+                "end": 24.799999237060547
+            },
+            {
+                "word": "just",
+                "start": 24.799999237060547,
+                "end": 25.040000915527344
+            },
+            {
+                "word": "a",
+                "start": 25.040000915527344,
+                "end": 25.639999389648438
+            },
+            {
+                "word": "few",
+                "start": 25.639999389648438,
+                "end": 25.639999389648438
+            },
+            {
+                "word": "prompts",
+                "start": 25.639999389648438,
+                "end": 25.979999542236328
+            },
+            {
+                "word": "This",
+                "start": 26.8799991607666,
+                "end": 27.219999313354492
+            },
+            {
+                "word": "means",
+                "start": 27.219999313354492,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "you",
+                "start": 27.520000457763672,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "can",
+                "start": 27.700000762939453,
+                "end": 28
+            },
+            {
+                "word": "restore",
+                "start": 28,
+                "end": 28.260000228881836
+            },
+            {
+                "word": "old",
+                "start": 28.260000228881836,
+                "end": 28.760000228881836
+            },
+            {
+                "word": "images",
+                "start": 28.760000228881836,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "or",
+                "start": 29.15999984741211,
+                "end": 29.8799991607666
+            },
+            {
+                "word": "place",
+                "start": 29.8799991607666,
+                "end": 30.15999984741211
+            },
+            {
+                "word": "yourself",
+                "start": 30.15999984741211,
+                "end": 30.5
+            },
+            {
+                "word": "in",
+                "start": 30.5,
+                "end": 30.739999771118164
+            },
+            {
+                "word": "entirely",
+                "start": 30.739999771118164,
+                "end": 31.239999771118164
+            },
+            {
+                "word": "new",
+                "start": 31.239999771118164,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "locations",
+                "start": 31.639999389648438,
+                "end": 32.2400016784668
+            },
+            {
+                "word": "with",
+                "start": 32.2400016784668,
+                "end": 32.63999938964844
+            },
+            {
+                "word": "ease",
+                "start": 32.63999938964844,
+                "end": 33.2599983215332
+            },
+            {
+                "word": "If",
+                "start": 33.79999923706055,
+                "end": 34.47999954223633
+            },
+            {
+                "word": "you",
+                "start": 34.47999954223633,
+                "end": 34.63999938964844
+            },
+            {
+                "word": "want",
+                "start": 34.63999938964844,
+                "end": 34.84000015258789
+            },
+            {
+                "word": "the",
+                "start": 34.84000015258789,
+                "end": 35.15999984741211
+            },
+            {
+                "word": "link",
+                "start": 35.15999984741211,
+                "end": 35.2599983215332
+            },
+            {
+                "word": "just",
+                "start": 35.599998474121094,
+                "end": 36.119998931884766
+            },
+            {
+                "word": "comment",
+                "start": 36.119998931884766,
+                "end": 36.439998626708984
+            },
+            {
+                "word": "photos",
+                "start": 36.439998626708984,
+                "end": 37.18000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.470001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.500000000000001,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "ChatGPT",
+                        "params": {
+                            "src": "gen_3dc98bff"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.500000000000001,
+                "end": 5.56,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "ChatGPT",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "variant": "fullscreen",
+                            "src": "gen_3dc98bff"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.56,
+                "end": 11.06,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "src": "gen_aacbc157",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.06,
+                "end": 15.92,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": null,
+                        "params": {
+                            "title": "Upload To Portrait",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Upload a photo"
+                                },
+                                {
+                                    "label": "ChatGPT processes it"
+                                },
+                                {
+                                    "label": "DSLR-style portrait"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.92,
+                "end": 18.84,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "caption": "Cinematic frame",
+                            "variant": "zoom",
+                            "src": "gen_4096e28d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.84,
+                "end": 26.88,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "lighting",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "Old image models",
+                                "points": [
+                                    "Whole image redrawn",
+                                    "Faces drifted each time",
+                                    "Garbled text on signs"
+                                ]
+                            },
+                            "right": {
+                                "title": "Images 2.0",
+                                "points": [
+                                    "Edits only what you ask",
+                                    "Keeps face and framing",
+                                    "Readable covers and menus"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.88,
+                "end": 33.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "restore",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "variant": "fullscreen",
+                            "src": "gen_00ee1ab6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.8,
+                "end": 37.47,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "comment",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "WANT THE LINK?",
+                            "lines": [
+                                "Comment the word below",
+                                "PHOTOS",
+                                "Free on every ChatGPT plan"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/chatgpt-enhances-photo-editing-capabilit-yn93w/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    },
+    "dm_automations": {
+        "instagram": "6a8dc295f8de29ab5c25b795"
+    },
+    "dm_link": "https://academy.techpresso.co/prompts/chatgpt-prompts-realistic",
+    "dm_keyword": "PHOTOS"
+}

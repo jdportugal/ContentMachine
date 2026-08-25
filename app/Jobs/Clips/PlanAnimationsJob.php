@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Aggregation\LlmClient;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
@@ -15,10 +16,14 @@ use App\Services\Clips\PlanValidator;
 use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Costs\CostLedger;
+use App\Services\Projects\ProjectLanguage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Str;
 
 class PlanAnimationsJob implements ShouldQueue
 {
@@ -35,7 +40,7 @@ class PlanAnimationsJob implements ShouldQueue
     public function handle(AnimationPlanner $planner, PlanValidator $validator, ResearchService $research, MetadataService $metadata, ClipStore $store): void
     {
         $this->activateProject();
-        app(\App\Services\Costs\CostLedger::class)->contexto('clip', $this->projectId);
+        app(CostLedger::class)->contexto('clip', $this->projectId);
         $p = $store->findOrFail($this->projectId);
 
         try {
@@ -73,6 +78,8 @@ class PlanAnimationsJob implements ShouldQueue
                 'overlay' => $isOverlay,
                 'presents' => $allowed,
                 'can_generate_images' => $imagesOn,
+                // Direction for THIS clip, on top of the project's style manual.
+                'instructions' => trim((string) ($p->meta['instructions'] ?? '')),
             ]);
             $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null, app(EffectLibrary::class)->allowedLayerTypes());
 
@@ -82,6 +89,10 @@ class PlanAnimationsJob implements ShouldQueue
             $filler = app(SceneVisualFiller::class);
             if (! $isOverlay && $imagesOn) {
                 $plan = $filler->requestImages($plan, $p->transcript ?? []);
+                // Both the planner and the filler above add image requests without
+                // counting them, so cap the total against the clip's LENGTH — the
+                // old flat ceiling let a short clip ask for seven paid generations.
+                $plan = $filler->limitImages($plan, $filler->imageBudget($plan));
             }
 
             // The full script/plan is ready — every image the planner wants exists as
@@ -100,7 +111,13 @@ class PlanAnimationsJob implements ShouldQueue
             // The intro effect is bolted on AFTER planning (FinalizeClipPlanJob →
             // enforceIntro), so an image-showing intro has no layer in the plan and
             // would never be asked about — it just rendered empty. Ask for it here.
+            $requests = ImageRequests::withIntroVideo($requests, app(EffectLibrary::class), $p->images ?? []);
             $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
+
+            // The animated intro needs a concept before anything else: the label is
+            // what the user reads AND what the library matcher uses to spot a
+            // reusable video asset (e.g. an existing mascot animation).
+            $requests = $this->conceberVideoDeIntro($requests, $p);
 
             $library = app(ImageLibrary::class);
             // A site suggestion's "prompt" is a URL — meaningless to the library matcher.
@@ -117,6 +134,12 @@ class PlanAnimationsJob implements ShouldQueue
             }
             $p->update(['images' => $images]);
 
+            // An animated-intro suggestion the library did NOT satisfy stays
+            // imageless: the REVIEW page has a «generate image» button, so the
+            // user triggers (and waits for) the start image and only then decides.
+            // Dropped when images cannot be generated at all.
+            $requests = $this->podarVideoDeIntro($requests, $uploads, $imagesOn);
+
             // Only the suggestions the library did NOT satisfy still need the user.
             $pending = array_filter($requests, fn (array $r) => ! isset($uploads[$r['key']]));
 
@@ -132,9 +155,150 @@ class PlanAnimationsJob implements ShouldQueue
                 'status' => ClipRecord::STATUS_COLLECTING,
                 'meta' => array_merge($p->meta ?? [], ['image_requests' => $requests, 'image_uploads' => $uploads]),
             ]);
+
+            // Now go and FETCH the real images — the actual person, logo, product
+            // or page — before anyone is asked to find them by hand. Pages the
+            // planner itself named are left to CollectSiteJob, and the animated
+            // intro is a concept, not a real thing. Whatever is not found stays
+            // pending and is generated at finalisation, exactly as before.
+            $fetch = config('contentmachine.clips.fetch_images', true)
+                ? array_values(array_map(
+                    fn (array $r) => $r['key'],
+                    array_filter($pending, fn (array $r) => empty($r['site']) && empty($r['animado'])),
+                ))
+                : [];
+
+            if ($fetch !== []) {
+                // Flagged before dispatch so the review screen shows the search
+                // running the moment it opens (it polls on this).
+                $p->update(['meta' => array_merge($p->meta ?? [], [
+                    // 'search' (not just true) so the review screen says what is
+                    // running: searching the web, not generating an image.
+                    'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], array_fill_keys($fetch, 'search')),
+                ])]);
+            }
+
+            // Auto clips have nobody to review the suggestions — go straight on
+            // (FinalizeClipPlanJob films the site suggestions and fills the rest),
+            // but let the fetch finish first so they get real images too.
+            if (! empty($p->meta['auto'])) {
+                $fetch !== []
+                    ? Bus::chain([new FetchWebImagesJob($p->id), new FinalizeClipPlanJob($p->id)])->dispatch()
+                    : FinalizeClipPlanJob::dispatch($p->id);
+
+                return;
+            }
+
+            if ($fetch !== []) {
+                FetchWebImagesJob::dispatch($p->id);
+            }
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
+    }
+
+    /**
+     * Writes the animated-intro concept: a short video description (project
+     * language, shown to the user and used to match reusable assets), a motion
+     * prompt and a start-frame prompt (English, for the models). Drops the
+     * suggestion when no LLM can write it.
+     *
+     * @param  array<int,array<string,mixed>>  $requests
+     * @return array<int,array<string,mixed>>
+     */
+    private function conceberVideoDeIntro(array $requests, $p): array
+    {
+        $titulo = (string) ($p->meta['suggested']['title'] ?? $p->title ?? '');
+        $resumo = (string) ($p->meta['research']['summary'] ?? Str::limit((string) ($p->transcript['text'] ?? ''), 400, ''));
+        $lingua = ProjectLanguage::name();
+
+        // No animated intro in play → the PLAIN opening image still deserves a
+        // real suggestion: an image about THIS clip's subject, not the brand logo.
+        $i = collect($requests)->search(fn ($r) => ($r['key'] ?? null) === ImageRequests::VIDEO_KEY);
+        if ($i === false) {
+            return $this->conceberImagemDeIntro($requests, $titulo, $resumo, $lingua);
+        }
+
+        $texto = app(LlmClient::class)->texto(
+            'A 9:16 short video opens with a 5-second generated INTRO ANIMATION. '
+            .'Design ONE simple, reusable animation concept for it — a single subject with one clear motion '
+            ."(a mascot waving, a logo assembling, an object morphing), on-brand, no text on screen.\n\n"
+            ."The short is about: {$titulo}\n{$resumo}\n\n"
+            .'Respond ONLY with JSON: {"descricao": "one sentence naming the animation, in '.$lingua.'", '
+            .'"video": "motion prompt for an image-to-video model, in English (subject + motion + camera, one sentence)", '
+            .'"imagem": "start-frame image prompt, in English (the first frame of that motion, no text)"}',
+            json: true,
+        );
+        $dados = json_decode((string) preg_replace('/^.*?(\{.*\}).*$/s', '$1', (string) $texto), true);
+
+        if (! is_array($dados) || trim((string) ($dados['video'] ?? '')) === '' || trim((string) ($dados['imagem'] ?? '')) === '') {
+            unset($requests[$i]);
+
+            return array_values($requests);
+        }
+
+        $requests[$i]['label'] = trim((string) ($dados['descricao'] ?? '')) ?: trim((string) $dados['video']);
+        $requests[$i]['prompt'] = 'An animated video: '.trim((string) $dados['video']);
+        $requests[$i]['video_prompt'] = trim((string) $dados['video']);
+        $requests[$i]['imagem_prompt'] = trim((string) $dados['imagem']);
+
+        return array_values($requests);
+    }
+
+    /**
+     * Rewrites the plain opening-image suggestion so it is about the CLIP —
+     * the label the user reads (project language) and the prompt «generate now»
+     * uses (English). The logo default only survives when no LLM can write it.
+     *
+     * @param  array<int,array<string,mixed>>  $requests
+     * @return array<int,array<string,mixed>>
+     */
+    private function conceberImagemDeIntro(array $requests, string $titulo, string $resumo, string $lingua): array
+    {
+        $i = collect($requests)->search(fn ($r) => ($r['key'] ?? null) === ImageRequests::INTRO_KEY);
+        if ($i === false) {
+            return $requests;
+        }
+
+        $texto = app(LlmClient::class)->texto(
+            'A 9:16 short video needs its OPENING IMAGE — the first frame the viewer sees. '
+            ."Suggest ONE striking image about the video's SUBJECT (a concrete scene, object or metaphor — "
+            ."never a logo, never text on screen).\n\n"
+            ."The short is about: {$titulo}\n{$resumo}\n\n"
+            .'Respond ONLY with JSON: {"descricao": "one sentence naming the image, in '.$lingua.'", '
+            .'"imagem": "image-generation prompt, in English (subject, composition, mood — no text)"}',
+            json: true,
+        );
+        $dados = json_decode((string) preg_replace('/^.*?(\{.*\}).*$/s', '$1', (string) $texto), true);
+        if (! is_array($dados) || trim((string) ($dados['imagem'] ?? '')) === '') {
+            return $requests; // keep the logo fallback
+        }
+
+        $requests[$i]['prompt'] = trim((string) $dados['imagem']);
+        $requests[$i]['label'] = 'Opening image — '.(trim((string) ($dados['descricao'] ?? '')) ?: trim((string) $dados['imagem']));
+
+        return $requests;
+    }
+
+    /**
+     * Drops the animated-intro suggestion when its start image could never be
+     * made: no image generation available and nothing matched in the library.
+     * Otherwise it stays — imageless — for the user to generate on review.
+     *
+     * @param  array<int,array<string,mixed>>  $requests
+     * @param  array<string,string>  $uploads
+     * @return array<int,array<string,mixed>>
+     */
+    private function podarVideoDeIntro(array $requests, array $uploads, bool $imagesOn): array
+    {
+        $key = ImageRequests::VIDEO_KEY;
+        $i = collect($requests)->search(fn ($r) => ($r['key'] ?? null) === $key);
+        if ($i === false || isset($uploads[$key]) || $imagesOn) {
+            return $requests;
+        }
+        unset($requests[$i]);
+
+        return array_values($requests);
     }
 }

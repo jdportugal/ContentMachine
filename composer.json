@@ -46,7 +46,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#a3e635,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --queue=default --tries=1 --timeout=0\" \"php artisan queue:listen --queue=media --tries=1 --timeout=0\" \"npm run dev\" --names=server,queue,media,vite --kill-others-on-fail"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#a3e635,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --queue=default --tries=1 --timeout=0\" \"php artisan queue:listen --queue=media --tries=1 --timeout=0\" \"php artisan schedule:work\" \"npm run dev\" --names=server,queue,media,schedule,vite --kill-others-on-fail"
         ],
         "test": [
             "@php artisan config:clear --ansi @no_additional_args",

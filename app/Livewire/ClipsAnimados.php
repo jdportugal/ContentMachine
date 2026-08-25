@@ -111,6 +111,9 @@ class ClipsAnimados extends Component
     /** News LEAD — optional line pinned on screen for the whole clip. */
     public string $lead = '';
 
+    /** Extra direction for THIS clip, on top of the project's style manual. */
+    public string $instructions = '';
+
     /** which presentation styles the AI may use for a video clip */
     public array $allowedPresents = ['video', 'over', 'split', 'animation'];
 
@@ -173,7 +176,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'lead', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'lead', 'instructions', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker', 'promptKey', 'promptEdits']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -568,7 +571,7 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead)]),
+            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions)]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -596,7 +599,7 @@ class ClipsAnimados extends Component
             'title' => $this->video->getClientOriginalName(),
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background, 'lead' => trim($this->lead)]),
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions)]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -629,16 +632,28 @@ class ClipsAnimados extends Component
         $siteErrors = $p->meta['site_errors'] ?? [];
         $byId = collect($p->images ?? [])->keyBy('id');
 
-        return array_map(function (array $r) use ($uploads, $asText, $collecting, $siteErrors, $byId) {
+        $videoMode = $p->meta['video_mode'] ?? 'video';
+
+        return array_map(function (array $r) use ($uploads, $asText, $collecting, $siteErrors, $byId, $videoMode) {
             $id = $uploads[$r['key']] ?? null;
             $img = $id ? ($byId[$id] ?? null) : null;
+            // The animated-intro suggestion shows its generated START IMAGE (the
+            // frame the video would move) until the user uploads/picks something.
+            if (! $img && ! empty($r['animado']) && ! empty($r['imagem'])) {
+                $img = $byId[$r['imagem']] ?? null;
+            }
 
             return $r + [
+                'videoMode' => $videoMode,
                 'uploadedId' => $id,
                 'path' => $img['path'] ?? null,
                 'fromLibrary' => (bool) ($img['library'] ?? false),
+                'gerado' => (bool) ($img['generated'] ?? false),
+                'fetched' => (bool) ($img['fetched'] ?? false),
+                'source' => $img['source'] ?? null,
                 'video' => (bool) ($img['video'] ?? false),
                 'collecting' => ! empty($collecting[$r['key']]),
+                'searching' => ($collecting[$r['key']] ?? null) === 'search',
                 'siteError' => $siteErrors[$r['key']] ?? null,
                 // upload = the user's own file/library pick · generate = AI image ·
                 // text = no image at all (the scene becomes a non-image visual).
@@ -647,12 +662,93 @@ class ClipsAnimados extends Component
         }, $p->meta['image_requests'] ?? []);
     }
 
+    /** Animated intro: render the approved suggestion as a VIDEO or keep the image only. */
+    public function modoVideoIntro(string $modo): void
+    {
+        $p = $this->clips()->findOrFail($this->reviewingId);
+        $p->update(['meta' => array_merge($p->meta ?? [], ['video_mode' => $modo === 'image' ? 'image' : 'video'])]);
+    }
+
+    /** Suggestion key whose generation prompt is open for editing, or null. */
+    public ?string $promptKey = null;
+
+    /** Edited generation prompts, per suggestion key. @var array<string,string> */
+    public array $promptEdits = [];
+
+    /** Open/close the prompt editor for a suggestion, prefilled with its current prompt. */
+    public function editarPrompt(string $key): void
+    {
+        if ($this->promptKey === $key) {
+            $this->promptKey = null;
+
+            return;
+        }
+        $p = $this->clips()->findOrFail($this->reviewingId);
+        $req = collect($p->meta['image_requests'] ?? [])->firstWhere('key', $key);
+        if (! is_array($req)) {
+            return;
+        }
+        $this->promptEdits[$key] ??= (string) (! empty($req['animado']) ? ($req['imagem_prompt'] ?? '') : ($req['prompt'] ?? ''));
+        $this->promptKey = $key;
+    }
+
+    /** Animated intro: (re)generate the start image (a new take on the same concept). */
+    public function recriarImagemIntro(): void
+    {
+        $this->gerarImagemAgora(\App\Services\Clips\ImageRequests::VIDEO_KEY);
+    }
+
+    /**
+     * "Generate now": make a suggestion's AI image DURING review, so the user sees
+     * the real picture — and only then decides — instead of approving a promise.
+     */
+    public function gerarImagemAgora(string $key): void
+    {
+        $p = $this->clips()->findOrFail($this->reviewingId);
+        $requests = $p->meta['image_requests'] ?? [];
+        $i = collect($requests)->search(fn ($r) => ($r['key'] ?? null) === $key);
+        if ($i === false) {
+            return;
+        }
+
+        // An edited prompt is persisted onto the suggestion, so the generation —
+        // and every later regeneration — uses the user's wording.
+        $editado = trim((string) ($this->promptEdits[$key] ?? ''));
+        if ($editado !== '') {
+            $campo = ! empty($requests[$i]['animado']) ? 'imagem_prompt' : 'prompt';
+            $requests[$i][$campo] = $editado;
+        }
+        $this->promptKey = null;
+
+        $p->update(['meta' => array_merge($p->meta ?? [], [
+            'image_requests' => $requests,
+            'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], [$key => true]),
+            'site_errors' => array_diff_key($p->meta['site_errors'] ?? [], [$key => true]),
+        ])]);
+        \App\Jobs\Clips\GenerateRequestImageJob::dispatch($p->id, $key);
+    }
+
     /** Is any website capture running for the clip under review? (drives polling) */
     public function getSiteCollectingProperty(): bool
     {
         $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
 
         return $p !== null && array_filter($p->meta['site_collecting'] ?? []) !== [];
+    }
+
+    /** "Find image": search the web for the real image behind a suggestion (or try again). */
+    public function procurarImagem(string $key): void
+    {
+        $p = $this->reviewingId ? $this->clips()->find($this->reviewingId) : null;
+        $req = $p ? collect($p->meta['image_requests'] ?? [])->firstWhere('key', $key) : null;
+        if (! $p || ! is_array($req)) {
+            return;
+        }
+        $p->update(['meta' => array_merge($p->meta ?? [], [
+            'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], [$key => 'search']),
+            'site_errors' => array_diff_key($p->meta['site_errors'] ?? [], [$key => true]),
+        ])]);
+        \App\Jobs\Clips\FetchWebImagesJob::dispatch($p->id, $key);
     }
 
     /** "Collect now": film the website behind a suggestion so it can be seen before approving. */

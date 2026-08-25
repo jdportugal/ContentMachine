@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\Monitoring\MonitoringAnalytics;
+use App\Services\Monitoring\MonitoringHistory;
 use App\Services\Monitoring\MonitoringManager;
 use App\Services\Monitoring\MonitoringRefresher;
 use App\Services\Monitoring\MonitoringStore;
@@ -118,17 +119,30 @@ class Monitorizacao extends Component
         $conteudos = $driver->conteudosRecentes(500);
         $subscribers = (int) ($store->canal($this->rede)['subscribers'] ?? 0);
 
+        // Cross-network breakdown: every platform with collected items, not just the focused tab.
+        $porRede = [];
+        foreach ($plataformas as $p) {
+            $porRede[$p] = ['itens' => $store->itens($p), 'canal' => $store->canal($p)];
+        }
+
         return view('livewire.monitorizacao', [
             'plataformas' => $plataformas,
             'meta' => config('contentmachine.plataformas_meta.'.$this->rede),
             'resumo' => $driver->resumo(),
             'ultimoPorTipo' => $driver->ultimoPorTipo(),
-            'melhores' => $driver->melhores(5),
+            'melhores' => $driver->melhores(8),
             'recentes' => $driver->conteudosRecentes(12),
             'serieDia' => $analytics->serie($conteudos, 'dia'),
+            'serieSemana' => $analytics->serie($conteudos, 'semana'),
             'serieMes' => $analytics->serie($conteudos, 'mes'),
+            'wow' => $analytics->semanaSobreSemana($conteudos),
             'mediasPorTipo' => $analytics->mediasPorTipo($conteudos, $subscribers),
             'subscribers' => $subscribers,
+            'engajamento' => $analytics->engajamento($conteudos),
+            'heatmap' => $analytics->melhoresHoras($conteudos),
+            'breakdown' => $analytics->porPlataforma($porRede),
+            'historico' => $historico = app(MonitoringHistory::class)->serie(30),
+            'previsao' => $analytics->previsaoSeguidores($historico, $this->rede, $subscribers, $conteudos),
             // Manual collection context (real-data mode).
             'recolheReal' => in_array(config('contentmachine.monitoring.driver'), ['ytdlp', 'real'], true),
             'fonte' => $refresher->fonte($this->rede),

@@ -49,10 +49,20 @@ class EffectRecord
         return ($this->attributes['status'] ?? null) === self::STATUS_ACTIVE;
     }
 
-    /** @param array<string,mixed> $attrs */
+    /**
+     * Write these fields, merged onto what is CURRENTLY on disk — same reason as
+     * ClipRecord::update(). The window is even wider here: GenerateEffectJob reads
+     * the effect, then spends MINUTES writing and test-rendering a component
+     * before it writes back. Merging onto its own snapshot meant an allow/disallow
+     * toggle, an intro flag or a sound attached during that wait was silently
+     * reverted the moment the generation landed.
+     *
+     * @param  array<string,mixed>  $attrs
+     */
     public function update(array $attrs): static
     {
-        $this->attributes = array_merge($this->attributes, $attrs);
+        $atual = $this->store->find($this->id())?->attributes ?? $this->attributes;
+        $this->attributes = array_merge($atual, $attrs);
         $this->store->save($this);
 
         return $this;

@@ -48,7 +48,7 @@ class ApifyMonitoringTest extends TestCase
         $this->assertSame(3400, $porId['p1']['views']);
         $this->assertSame(120, $porId['p1']['likes']);
         $this->assertSame('Legenda A', $porId['p1']['titulo']);  // 1.ª linha da legenda
-        $this->assertSame('2026-07-01', $porId['p1']['publicado_em']);
+        $this->assertSame('2026-07-01T10:00:00+00:00', $porId['p1']['publicado_em']);
 
         $canal = app(MonitoringStore::class)->canal('instagram');
         $this->assertSame(5000, $canal['subscribers']);
@@ -72,7 +72,7 @@ class ApifyMonitoringTest extends TestCase
         $this->assertSame(800, $i['likes']);
         $this->assertSame(120, $i['partilhas']);
         $this->assertSame(60, $i['guardados']);
-        $this->assertSame('2026-07-05', $i['publicado_em']);
+        $this->assertSame('2026-07-05T00:00:00+00:00', $i['publicado_em']);
         $this->assertArrayHasKey('score', $i);
 
         $this->assertSame(12000, app(MonitoringStore::class)->canal('tiktok')['subscribers']);
@@ -122,7 +122,7 @@ class ApifyMonitoringTest extends TestCase
         $this->assertCount(1, $itens);
         $this->assertSame(9000, $itens[0]['views']);
         $this->assertSame(250, $itens[0]['duracao_seg']);   // "00:04:10" → segundos
-        $this->assertSame('2026-07-02', $itens[0]['publicado_em']);
+        $this->assertSame('2026-07-02T10:00:00+00:00', $itens[0]['publicado_em']);
         $this->assertSame(12000, app(MonitoringStore::class)->canal('youtube')['subscribers']);
     }
 

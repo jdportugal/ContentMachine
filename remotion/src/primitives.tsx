@@ -1224,6 +1224,27 @@ const PieChart: React.FC<PrimitiveProps> = ({ anim, fps, dark }) => {
   );
 };
 
+// ── video-intro (full-frame video opening — an animated asset owns the frame) ─
+const VideoIntro: React.FC<PrimitiveProps> = ({ anim, fps }) => {
+  const frame = useCurrentFrame();
+  const dur = winFrames(anim, fps);
+  const rawSrc = asStr(anim.params?.src);
+  const src = rawSrc ? (/^https?:\/\//.test(rawSrc) ? rawSrc : staticFile(rawSrc)) : "";
+  if (!src) return <Center><Placeholder /></Center>;
+  const fadeLen = Math.min(8, Math.max(1, Math.floor(dur / 3)));
+  const opacity = interpolate(
+    frame,
+    [0, fadeLen, Math.max(fadeLen + 1, dur - fadeLen), dur],
+    [0, 1, 1, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+  );
+  return (
+    <AbsoluteFill style={{ opacity, background: COLORS.ink }}>
+      <OffthreadVideo src={src} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    </AbsoluteFill>
+  );
+};
+
 // ── diagram (nodes + arrows; flow / cycle; optional image nodes) ─────────────
 const Diagram: React.FC<PrimitiveProps> = ({ anim, fps, dark, frame: box }) => {
   const frame = useCurrentFrame();
@@ -1320,6 +1341,7 @@ export const PRIMITIVES: Record<string, React.FC<PrimitiveProps>> = {
   "underline-sweep": UnderlineSweep,
   "count-up": CountUp,
   "image-reveal": ImageReveal,
+  "video-intro": VideoIntro,
   ambient: Ambient,
   timeline: Timeline,
   "bar-chart": BarChart,

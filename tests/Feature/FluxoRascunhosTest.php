@@ -223,4 +223,65 @@ class FluxoRascunhosTest extends TestCase
             ->assertSet('brief', "Cinco erros comuns\n\nLista prática com o que evitar.");
         $this->assertNull(session('oficina_brief'));
     }
+
+    public function test_publicar_com_dm_guarda_o_link_para_ver_depois(): void
+    {
+        config(['services.blotato.key' => 'test-key', 'services.zernio.key' => 'zk']);
+        app(SettingsRepository::class)->save([
+            'blotato' => ['instagram' => 'acc-ig'],
+            'zernio' => ['profile' => 'pf1', 'instagram' => 'ac1'],
+        ]);
+        Http::fake([
+            '*/v2/posts' => Http::response(['id' => 'x']),
+            '*comment-automations*' => Http::response(['automation' => ['id' => 'auto1']]),
+        ]);
+
+        $store = app(ClipStore::class);
+        $p = $store->create([
+            'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim DM', 'status' => 'done', 'finished' => true,
+        ]);
+        $id = $this->idDe('animado', $p->id);
+
+        Livewire::test(Rascunhos::class)
+            ->set('plataformas.'.$id, ['instagram'])
+            ->set('quando.'.$id, 'time')
+            ->set('datas.'.$id, '2026-09-03T09:00')
+            ->set('dm.'.$id.'.ativo', true)
+            ->set('dm.'.$id.'.keyword', 'GUIDE')
+            ->set('dm.'.$id.'.link', 'https://ex.com/guia')
+            ->call('publicar', 'animado', $p->id)
+            ->assertHasNoErrors();
+
+        $p = $store->find($p->id);
+        $this->assertSame('https://ex.com/guia', $p->get('dm_link'));
+        $this->assertSame('GUIDE', $p->get('dm_keyword'));
+    }
+
+    /** The user can arm the DM automation on an ALREADY posted short and copy its link. */
+    public function test_ativar_dm_num_short_ja_publicado_guarda_e_mostra_o_link(): void
+    {
+        config(['services.zernio.key' => 'zk']);
+        app(SettingsRepository::class)->save(['zernio' => ['profile' => 'pf1', 'instagram' => 'ac1']]);
+        Http::fake(['*comment-automations*' => Http::response(['automation' => ['id' => 'auto1']])]);
+
+        $store = app(ClipStore::class);
+        $p = $store->create([
+            'type' => 'animation', 'input_kind' => 'text', 'title' => 'Anim publicada', 'status' => 'done', 'finished' => true,
+            'publish_state' => 'posted', 'plataformas' => ['instagram'],
+        ]);
+        $id = $this->idDe('animado', $p->id);
+
+        Livewire::test(Rascunhos::class)
+            ->set('aba', 'posted')
+            ->set('dm.'.$id.'.keyword', 'GUIDE')
+            ->set('dm.'.$id.'.link', 'https://ex.com/guia')
+            ->call('ativarDm', 'animado', $p->id)
+            ->assertHasNoErrors();
+
+        $p = $store->find($p->id);
+        $this->assertSame(['instagram' => 'auto1'], (array) $p->get('dm_automations'));
+        $this->assertSame('https://ex.com/guia', $p->get('dm_link'));
+
+        Livewire::test(Rascunhos::class)->set('aba', 'posted')->assertSee('https://ex.com/guia');
+    }
 }

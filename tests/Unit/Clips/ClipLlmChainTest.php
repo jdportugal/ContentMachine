@@ -120,4 +120,75 @@ class ClipLlmChainTest extends TestCase
             @unlink($bin);
         }
     }
+
+    // ── which Anthropic credential goes down which road ──────────────────
+
+    /**
+     * The two Anthropic credentials are not interchangeable, and getting it wrong
+     * is silent: an OAuth token sent as `x-api-key` is rejected 401, the chain
+     * counts that as a normal failure and quietly serves the whole pipeline from
+     * GPT instead — which is how a studio that reports itself as running on Claude
+     * ended up with a library of GPT-written components.
+     */
+    public function test_an_oauth_token_is_sent_as_a_bearer_token_not_an_api_key(): void
+    {
+        $headers = $this->headersFor('sk-ant-oat01-abc');
+
+        $this->assertSame('Bearer sk-ant-oat01-abc', $headers['Authorization']);
+        $this->assertSame('oauth-2025-04-20', $headers['anthropic-beta']);
+        $this->assertArrayNotHasKey('x-api-key', $headers);
+    }
+
+    public function test_a_real_api_key_still_goes_on_the_api_key_header(): void
+    {
+        $headers = $this->headersFor('sk-ant-api03-abc');
+
+        $this->assertSame('sk-ant-api03-abc', $headers['x-api-key']);
+        $this->assertArrayNotHasKey('Authorization', $headers);
+    }
+
+    /**
+     * An OAuth token authenticates against the Messages API but is rate-limited to
+     * a flat 429 there — it is the CLI's own credential, so with a CLI present the
+     * call belongs on the CLI. Without one (a container) it still tries the API, so
+     * the failure surfaces instead of being hidden.
+     */
+    public function test_an_oauth_token_routes_to_the_cli_only_when_one_is_installed(): void
+    {
+        $bin = sys_get_temp_dir().'/fake-claude-'.uniqid().'.sh';
+        file_put_contents($bin, "#!/bin/sh\nexit 0\n");
+        chmod($bin, 0755);
+
+        try {
+            config(['services.anthropic.key' => 'sk-ant-oat01-abc', 'contentmachine.clips.claude_binary' => $bin]);
+            $this->assertFalse($this->usesApi(), 'an OAuth token with a CLI present must use the CLI');
+
+            config(['contentmachine.clips.claude_binary' => '/nonexistent/claude']);
+            $this->assertTrue($this->usesApi(), 'with no CLI it must still try the API so the error is reported');
+
+            config(['services.anthropic.key' => 'sk-ant-api03-abc', 'contentmachine.clips.claude_binary' => $bin]);
+            $this->assertTrue($this->usesApi(), 'a real API key always uses the API');
+        } finally {
+            @unlink($bin);
+        }
+    }
+
+    /** @return array<string,string> */
+    private function headersFor(string $key): array
+    {
+        $r = $this->runner();
+        $m = new \ReflectionMethod($r, 'cabecalhosAnthropic');
+        $m->setAccessible(true);
+
+        return $m->invoke($r, $key);
+    }
+
+    private function usesApi(): bool
+    {
+        $r = $this->runner();
+        $m = new \ReflectionMethod($r, 'usaApiClaude');
+        $m->setAccessible(true);
+
+        return (bool) $m->invoke($r);
+    }
 }

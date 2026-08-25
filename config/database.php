@@ -38,9 +38,14 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
+            'busy_timeout' => env('DB_BUSY_TIMEOUT', 60000),
+            // WAL: readers and writers stop blocking each other. The default
+            // rollback journal takes an exclusive lock on the WHOLE database for
+            // every write, so the web app plus a queue worker or two is enough to
+            // produce "database is locked" — which is exactly how an aggregation
+            // died mid-run. Stored in the file itself, so it survives restarts.
+            'journal_mode' => env('DB_JOURNAL_MODE', 'WAL'),
+            'synchronous' => env('DB_SYNCHRONOUS', 'NORMAL'),
             'transaction_mode' => 'DEFERRED',
         ],
 

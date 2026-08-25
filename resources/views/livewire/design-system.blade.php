@@ -46,6 +46,21 @@
             <div class="mt-2 font-mono text-[0.62rem] text-ink-faint break-all">{{ $caminho }}</div>
         </x-panel>
 
+        {{-- Per-project direction appended to every animation prompt. --}}
+        <x-panel eyebrow="Applied to animations" title="Animation instructions" glyph="✦">
+            <p class="text-ink-soft -mt-2 mb-3">
+                Extra direction added to the end of the planner's prompt for <strong>every clip in this project</strong> —
+                the look, the pacing, what to avoid. This is how one project animates differently from another.
+                A single clip can override it from its own «instructions» box when you create it.
+            </p>
+            <textarea wire:model="estilo" rows="14" spellcheck="false"
+                      placeholder="e.g. Open on a dark frame. Prefer diagrams over charts. Never use the terminal layer. Keep captions to four words."
+                      class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-4 py-3
+                             text-ink font-mono text-sm leading-relaxed resize-y
+                             focus:border-teal focus:outline-none"></textarea>
+            <div class="mt-2 font-mono text-[0.62rem] text-ink-faint break-all">{{ $caminhoEstilo }}</div>
+        </x-panel>
+
         {{-- Extracted theme (what the animations will use) --}}
         @if ($tokens)
             <x-panel eyebrow="Applied to animations" title="Extracted theme" glyph="❖">

@@ -53,8 +53,7 @@ trait RunsClaudeCli
         foreach ($this->cadeiaLlm() as $fornecedor) {
             try {
                 return match ($fornecedor) {
-                    // API only when a key is set — otherwise the authenticated CLI.
-                    'claude' => filled($this->chaveLlm('claude'))
+                    'claude' => $this->usaApiClaude()
                         ? $this->runClaudeApi($user, $system, $opts)
                         : $this->runClaudeCli($user, $system, $opts),
                     'openai' => $this->runOpenAi($user, $system, $opts),
@@ -99,6 +98,32 @@ trait RunsClaudeCli
             'openai' => filled($this->chaveLlm('openai')),
             'tensorx' => filled($this->chaveLlm('tensorx')),
         }));
+    }
+
+    /**
+     * Reach Claude over the HTTP API, or over the CLI?
+     *
+     * There are two kinds of Anthropic credential and they are not
+     * interchangeable. An API key (`sk-ant-api…`) is an API credential — use the
+     * API. An OAuth token (`sk-ant-oat…`) is a SUBSCRIPTION credential: it
+     * authenticates against the Messages API but is rate-limited to uselessness
+     * there (a flat 429), and it is the very credential the authenticated `claude`
+     * CLI already holds. So when that CLI is installed, that is where it belongs.
+     *
+     * Without a CLI (a container) an OAuth token still tries the API, so the
+     * failure is reported rather than hidden.
+     *
+     * Routing OAuth installs to the CLI also means Remotion-writing callers
+     * finally get `useRemotionSkills` — the skills only exist on the CLI path.
+     */
+    private function usaApiClaude(): bool
+    {
+        $key = $this->chaveLlm('claude');
+        if ($key === '') {
+            return false;   // no key at all → the authenticated CLI, as before
+        }
+
+        return ! (str_starts_with($key, 'sk-ant-oat') && $this->claudeBinaryExists());
     }
 
     /** Whether the `claude` CLI is actually installed (a server usually has no session). */
@@ -153,6 +178,18 @@ trait RunsClaudeCli
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
         $lastError = 'no detail';
 
+        // Remotion-writing callers (SFX/background generators) set useRemotionSkills:
+        // when the official Remotion skills are installed locally (npx skills add
+        // remotion-dev/skills), run the CLI from the project root so it can load them,
+        // and tell the model to consult them before writing the component. API/chat
+        // providers can't use skills, so this lives only on the CLI path.
+        $remotionSkills = ($opts['useRemotionSkills'] ?? false)
+            && is_dir(base_path('.claude/skills/remotion-best-practices'));
+        if ($remotionSkills) {
+            $system = trim(($system ?? '')."\n\nThe official Remotion skills are installed in this project. BEFORE writing the component, load the relevant Remotion guidance with the Skill tool — start with 'remotion-best-practices' — and follow it.");
+            $opts['allowedTools'] = trim(($opts['allowedTools'] ?? '').',Skill,Read', ',');
+        }
+
         $args = [$binary, '-p', $user];
         if ($system !== null) {
             $args[] = '--append-system-prompt';
@@ -171,7 +208,7 @@ trait RunsClaudeCli
 
         for ($i = 1; $i <= $attempts; $i++) {
             $process = new Process($args);
-            $process->setWorkingDirectory(sys_get_temp_dir());
+            $process->setWorkingDirectory($remotionSkills ? base_path() : sys_get_temp_dir());
             $process->setTimeout($opts['timeout'] ?? 300);
 
             try {
@@ -236,6 +273,35 @@ trait RunsClaudeCli
         return $parts ? implode(' · ', $parts) : substr($out, 0, 400);
     }
 
+    /**
+     * Auth headers for the Anthropic Messages API.
+     *
+     * There are TWO kinds of Anthropic credential and they do not share a header.
+     * An API key (`sk-ant-api…`) goes on `x-api-key`. An OAuth access token
+     * (`sk-ant-oat…`, what an authenticated Claude subscription / `claude
+     * setup-token` hands you) goes on `Authorization: Bearer` with the oauth beta
+     * flag — sent as `x-api-key` it is rejected 401 "API key is invalid".
+     *
+     * That 401 is why this mattered: the provider chain treated it as a normal
+     * failure, retried three times and quietly moved on to GPT. Every SFX and
+     * background in the library was written by the fallback model, which is what
+     * the hardcoded colours, invented param names and non-JSON replies were.
+     *
+     * @return array<string,string>
+     */
+    private function cabecalhosAnthropic(string $key): array
+    {
+        if (str_starts_with($key, 'sk-ant-oat')) {
+            return [
+                'Authorization' => 'Bearer '.$key,
+                'anthropic-version' => '2023-06-01',
+                'anthropic-beta' => 'oauth-2025-04-20',
+            ];
+        }
+
+        return ['x-api-key' => $key, 'anthropic-version' => '2023-06-01'];
+    }
+
     private function claudeBackoff(int $attempt, int $attempts): void
     {
         if ($attempt < $attempts) {
@@ -257,8 +323,19 @@ trait RunsClaudeCli
         $usaWeb = str_contains((string) ($opts['allowedTools'] ?? ''), 'Web');
 
         $payload = [
-            'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8'),
+            // Clips get their own model key — these calls write code, the
+            // aggregator's summarise news. Set CLIPS_ANTHROPIC_MODEL empty to
+            // defer to the shared aggregation model instead.
+            'model' => (string) (config('contentmachine.clips.anthropic_model')
+                ?: config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8')),
             'max_tokens' => (int) config('contentmachine.clips.max_tokens', 16000),
+            // Adaptive thinking, explicitly. Omitting `thinking` means the model
+            // does NOT think — that is the default on the Opus 4.x family, and it
+            // was how every SFX/background component got written: one pass, no
+            // reasoning, on a task that has to satisfy a layout contract across
+            // three frames. (`budget_tokens` is gone on these models; adaptive
+            // replaces it, and the model decides the depth itself.)
+            'thinking' => ['type' => 'adaptive'],
             'messages' => [['role' => 'user', 'content' => $user]],
         ];
         if ($system !== null && $system !== '') {
@@ -273,16 +350,29 @@ trait RunsClaudeCli
         for ($i = 1; $i <= $attempts; $i++) {
             try {
                 $r = Http::timeout($opts['timeout'] ?? 300)
-                    ->withHeaders([
-                        'x-api-key' => $this->chaveLlm('claude'),
-                        'anthropic-version' => '2023-06-01',
-                    ])
+                    ->withHeaders($this->cabecalhosAnthropic($this->chaveLlm('claude')))
                     ->post('https://api.anthropic.com/v1/messages', $payload);
             } catch (\Throwable $e) {
                 $lastError = 'http: '.$e->getMessage();
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
+            }
+
+            // 401/403 is a CONFIGURATION error, never a transient one. Retrying it
+            // burns the attempts and the wait, and the chain then hands the job to
+            // GPT — the failure mode that filled the library with GPT-written
+            // effects while the studio reported itself as running on Claude. Fail
+            // straight through with a message that names the actual problem.
+            if (in_array($r->status(), [401, 403], true)) {
+                throw new RuntimeException(sprintf(
+                    'Claude API rejected the credential (HTTP %d). The stored key starts "%s…" — an OAuth '
+                    .'token (sk-ant-oat…) authenticates as a Bearer token, an API key (sk-ant-api…) on '
+                    .'x-api-key. Check the Anthropic key in Settings. Response: %s',
+                    $r->status(),
+                    substr($this->chaveLlm('claude'), 0, 11),
+                    substr((string) $r->body(), 0, 160),
+                ));
             }
 
             if (! $r->successful()) {

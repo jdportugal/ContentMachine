@@ -28,9 +28,10 @@ final class ImageRequests
      * the video's own language. Without one it falls back to the prompt.
      *
      * A suggestion with a `site` is not an image to make but a page to FILM — the
-     * planner named a real website and the studio scroll-captures it to a video.
+     * planner named a real website and the studio scroll-captures it to a video,
+     * or takes a single screenshot when it asked for a `still`.
      *
-     * @return array<int,array{key:string,prompt:string,label:string,site:?string}>
+     * @return array<int,array{key:string,prompt:string,label:string,site:?string,still:bool}>
      */
     public static function collect(array $plan, array $transcript = [], ?SceneVisualFiller $filler = null): array
     {
@@ -51,6 +52,7 @@ final class ImageRequests
                     'prompt' => $prompt,
                     'label' => $spoken !== '' ? $spoken : trim(Str::after($prompt, 'Illustrate this moment:')),
                     'site' => $site !== '' ? $site : null,
+                    'still' => $site !== '' && self::pendingStill($layer),
                 ];
             }
         }
@@ -60,6 +62,44 @@ final class ImageRequests
 
     /** The suggestion key for the intro effect's image — fixed, it has no prompt to hash. */
     public const INTRO_KEY = 'intro';
+
+    /** The suggestion key for the ANIMATED intro video (start image + concept). */
+    public const VIDEO_KEY = 'intro-video';
+
+    /**
+     * Adds the animated-intro-video suggestion when the `video-intro` effect is
+     * enabled and marked as intro: the clip may open with a short generated video
+     * (kie image→video from a start frame), or reuse one from the assets library
+     * (the matcher sees this request like any other). The concept text and start
+     * image are filled in by the plan job. No-op when the clip already carries a
+     * video (a site capture, an uploaded clip) — one video per short.
+     *
+     * @param  array<int,array<string,mixed>>  $requests
+     * @param  array<int,array<string,mixed>>  $images
+     * @return array<int,array<string,mixed>>
+     */
+    public static function withIntroVideo(array $requests, EffectLibrary $library, array $images = []): array
+    {
+        if (isset(array_column($requests, null, 'key')[self::VIDEO_KEY])) {
+            return $requests;
+        }
+        if (collect($images)->contains(fn ($i) => ! empty($i['video']))) {
+            return $requests;
+        }
+        if (! in_array('video-intro', $library->introSlugs(), true)) {
+            return $requests;
+        }
+
+        array_unshift($requests, [
+            'key' => self::VIDEO_KEY,
+            'prompt' => '',
+            'label' => '',
+            'site' => null,
+            'animado' => true,
+        ]);
+
+        return $requests;
+    }
 
     /**
      * Adds a suggestion for the intro effect's image when one is needed.
@@ -78,7 +118,8 @@ final class ImageRequests
      */
     public static function withIntro(array $requests, EffectLibrary $library, array $images = []): array
     {
-        if ($images !== [] || isset(array_column($requests, null, 'key')[self::INTRO_KEY])) {
+        $porKey = array_column($requests, null, 'key');
+        if ($images !== [] || isset($porKey[self::INTRO_KEY]) || isset($porKey[self::VIDEO_KEY])) {
             return $requests;
         }
 
@@ -148,12 +189,20 @@ final class ImageRequests
         return is_string($site) ? trim($site) : '';
     }
 
+    /** Does the layer want ONE screenshot of its site rather than a scroll video? */
+    public static function pendingStill(mixed $layer): bool
+    {
+        return is_array($layer) && ! empty($layer['params']['site_still']);
+    }
+
     /** The suggestion key an unfulfilled layer belongs to ('' if it needs nothing). Site wins over generate. */
     public static function layerKey(mixed $layer): string
     {
         $site = self::pendingSite($layer);
         if ($site !== '') {
-            return self::key('site:'.$site);
+            // A still and a scroll of the SAME page are different suggestions, so
+            // they cannot share one image. Plain sites keep their original hash.
+            return self::key('site:'.$site.(self::pendingStill($layer) ? '|still' : ''));
         }
         $prompt = self::pendingPrompt($layer);
 

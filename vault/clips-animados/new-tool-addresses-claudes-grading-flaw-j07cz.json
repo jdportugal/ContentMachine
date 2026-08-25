@@ -1,0 +1,914 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Claude Grades Its Own Work — This Fixes It",
+    "source_text": "New Tool Addresses Claude's Grading Flaw.\nClaudeX Loop solves Claude's biggest issue: grading its own work.\nThis innovative skill introduces a second AI, Codex, to review and critique Claude's plans and executions. By implementing a feedback loop, it ensures that Claude's outputs are evaluated before moving forward, enhancing reliability. The process includes reconnaissance, interrogation, and multiple review stages, allowing for comprehensive oversight. This could significantly improve the quality of AI-generated work. If you want the link, just comment loop.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "img_f78826ae",
+            "path": "clips/uploads/site-67e7eac7.mp4",
+            "description": "Website: https://github.com/chaseai-yt/claudex-loop",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "gen_6291cc8b",
+            "path": "clips/generated/1nqtgonhfah3.png",
+            "description": "A close-up shot of a cracked mirror, with the shards reflecting a distorted image of a computer screen filled with lines of code. The setting is dimly lit, creating a moody and introspective atmospher...",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_3244b27b",
+            "path": "clips/generated/efmcvvpe1uyl.png",
+            "description": "Illustrate this moment: new tool addresses Claude's grading floor",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Cross-model AI review loops: using Codex to grade Claude's work (and vice versa)",
+            "summary": "The 'claudex-loop' pattern is a Claude Code skill that hands Claude's plan and code to OpenAI's Codex for adversarial review, on the rule that whoever built it never grades it. Peer-reviewed research backs the premise: LLMs struggle to self-correct without external feedback and demonstrably favor their own outputs when acting as judge.",
+            "timeline": [
+                {
+                    "label": "Multiagent debate shown to improve factuality and reasoning",
+                    "sublabel": "ICML 2024 (Du et al.)"
+                },
+                {
+                    "label": "'LLMs Cannot Self-Correct Reasoning Yet' published",
+                    "sublabel": "ICLR 2024 (Huang et al.)"
+                },
+                {
+                    "label": "'LLM Evaluators Recognize and Favor Their Own Generations'",
+                    "sublabel": "NeurIPS 2024 (Panickssery et al.)"
+                },
+                {
+                    "label": "Anthropic launches Agent Skills for Claude",
+                    "sublabel": "Oct 16, 2025"
+                },
+                {
+                    "label": "Stack Overflow survey: developer trust in AI hits record low",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Agent Skills published as an open standard (agentskills.io)",
+                    "sublabel": "Dec 18, 2025"
+                },
+                {
+                    "label": "Community Claude × Codex cross-review skills spread",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Developers using AI at work (DORA 2025)",
+                    "value": 90,
+                    "unit": "%"
+                },
+                {
+                    "label": "Report little or no trust in AI-generated code (DORA 2025)",
+                    "value": 30,
+                    "unit": "%"
+                },
+                {
+                    "label": "Median daily time working with AI (DORA 2025)",
+                    "value": 2,
+                    "unit": "hours"
+                },
+                {
+                    "label": "Tech professionals surveyed (DORA 2025)",
+                    "value": 5000,
+                    "unit": "respondents"
+                },
+                {
+                    "label": "Distrust accuracy of AI output (Stack Overflow 2025)",
+                    "value": 46,
+                    "unit": "%"
+                },
+                {
+                    "label": "Same figure one year earlier (Stack Overflow 2024)",
+                    "value": 31,
+                    "unit": "%"
+                },
+                {
+                    "label": "Frustrated by AI answers that are 'almost right' (Stack Overflow 2025)",
+                    "value": 66,
+                    "unit": "%"
+                },
+                {
+                    "label": "Use or plan to use AI coding tools (Stack Overflow 2025)",
+                    "value": 84,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Self-review vs. cross-model review",
+                    "left": {
+                        "title": "Model grades itself",
+                        "points": [
+                            "Intrinsic self-correction can degrade accuracy (ICLR 2024)",
+                            "Judges rate their own outputs higher than humans do",
+                            "Self-recognition correlates with self-preference bias"
+                        ]
+                    },
+                    "right": {
+                        "title": "A second model grades it",
+                        "points": [
+                            "External feedback is what self-correction actually needs",
+                            "Multiagent debate improved factuality and reasoning (ICML 2024)",
+                            "Ensembles of judges reduce self-bias and track humans better"
+                        ]
+                    }
+                },
+                {
+                    "title": "Adoption vs. trust in AI code",
+                    "left": {
+                        "title": "Adoption is near-universal",
+                        "points": [
+                            "90% use AI at work (DORA 2025)",
+                            "84% use or plan to use AI tools (Stack Overflow 2025)",
+                            "Median 2 hours a day spent with AI"
+                        ]
+                    },
+                    "right": {
+                        "title": "Trust is falling",
+                        "points": [
+                            "46% distrust AI accuracy, up from 31% (Stack Overflow)",
+                            "30% have little or no trust in AI code (DORA)",
+                            "66% hit by 'almost right' answers"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "The core rule of the loop: whoever wrote it never grades it — Claude's plan goes to Codex, Codex's code comes back to Claude.",
+                "This is a real, documented failure mode: LLMs often can't fix their own reasoning without outside feedback, and sometimes get worse trying.",
+                "LLM judges recognize their own writing and score it higher than human raters do — measured at NeurIPS 2024.",
+                "Codex CLI is open source under Apache-2.0 and runs locally in the terminal, so a second-opinion loop needs no extra infrastructure.",
+                "Claude Code skills are just SKILL.md files; Anthropic made the Agent Skills format an open standard in December 2025.",
+                "Review happens at the plan stage, before code exists — the cheapest place to kill a design flaw.",
+                "Adoption is at 90% while trust keeps dropping — cross-model review targets exactly that gap."
+            ],
+            "sources": [
+                "https://dora.dev/dora-report-2025/",
+                "https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report",
+                "https://blog.google/innovation-and-ai/technology/developers-tools/dora-report-2025/",
+                "https://survey.stackoverflow.co/2025/ai",
+                "https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/",
+                "https://stackoverflow.blog/2025/12/29/developers-remain-willing-but-reluctant-to-use-ai-the-2025-developer-survey-results-are-here/",
+                "https://arxiv.org/abs/2310.01798",
+                "https://iclr.cc/virtual/2024/poster/18956",
+                "https://proceedings.neurips.cc/paper_files/paper/2024/file/7f1f0218e45f5414c79c0679633e47bc-Paper-Conference.pdf",
+                "https://neurips.cc/virtual/2024/poster/96672",
+                "https://arxiv.org/abs/2410.21819",
+                "https://proceedings.mlr.press/v235/du24e.html",
+                "https://icml.cc/virtual/2024/poster/32620",
+                "https://siliconangle.com/2025/10/16/anthropics-skills-claude-helps-ai-agents-perform-certain-tasks-better/",
+                "https://siliconangle.com/2025/12/18/anthropic-makes-agent-skills-open-standard/",
+                "https://github.com/chaseai-yt/claudex-loop",
+                "https://github.com/promptadvisers/claudex",
+                "https://www.augmentcode.com/learn/openai-codex-cli-terminal-agent"
+            ]
+        },
+        "suggested": {
+            "title": "Claude Grades Its Own Work — This Fixes It",
+            "description": "Claudex Loop tackles one of Claude's biggest weaknesses: grading its own output. The skill brings in a second AI, Codex, to review and critique Claude's plans and executions through a structured feedback loop with reconnaissance, interrogation, and multiple review stages. The result is real oversight before work moves forward, and noticeably more reliable AI output.",
+            "tags": [
+                "claude",
+                "codex",
+                "ai coding",
+                "ai agents",
+                "claude code",
+                "ai workflow",
+                "developer tools",
+                "ai review"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "c36f6fc8",
+                "prompt": "Illustrate this moment: new tool addresses Claude's grading floor",
+                "label": "new tool addresses Claude's grading floor",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "67e7eac7",
+                "prompt": "https://github.com/chaseai-yt/claudex-loop",
+                "label": "Claudex loop solves Claude's biggest issue grading its own work",
+                "site": "https://github.com/chaseai-yt/claudex-loop",
+                "still": false
+            },
+            {
+                "key": "0d0f9789",
+                "prompt": "Illustrate this moment: By implementing a feedback loop it ensures that Claude's outputs are evaluated before moving forward enhancing reliability",
+                "label": "By implementing a feedback loop it ensures that Claude's outputs are evaluated before moving forward enhancing reliability",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "00689246",
+                "prompt": "Illustrate this moment: allowing for comprehensive oversight",
+                "label": "allowing for comprehensive oversight",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "a69efba6",
+                "prompt": "https://github.com/chaseai-yt/claudex-loop",
+                "label": "If you want the link just comment loop",
+                "site": "https://github.com/chaseai-yt/claudex-loop",
+                "still": true
+            },
+            {
+                "key": "intro",
+                "prompt": "A close-up shot of a cracked mirror, with the shards reflecting a distorted image of a computer screen filled with lines of code. The setting is dimly lit, creating a moody and introspective atmosphere, emphasizing themes of self-reflection and distortion.",
+                "label": "Opening image — A close-up of a cracked mirror reflecting a distorted image of a computer screen displaying code.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "67e7eac7": "img_f78826ae",
+            "intro": "gen_6291cc8b",
+            "c36f6fc8": "gen_3244b27b"
+        },
+        "site_collecting": [],
+        "site_errors": [],
+        "image_text": {
+            "0d0f9789": true,
+            "00689246": true,
+            "a69efba6": true
+        }
+    },
+    "id": "new-tool-addresses-claudes-grading-flaw-j07cz",
+    "created_at": "2026-08-25T15:53:03+00:00",
+    "updated_at": "2026-08-25T16:36:58+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/new-tool-addresses-claudes-grading-flaw-j07cz/voz.mp3",
+    "transcript": {
+        "duration": 45.040000915527344,
+        "text": "new tool addresses, Claude's grading floor. Claudex loop solves Claude's biggest issue, grading its own work. This innovative skill introduces a second AI, Codex, to review and critique Claude's plans and executions. By implementing a feedback loop, it ensures that Claude's outputs are evaluated before moving forward, enhancing reliability. The process includes reconnaissance, interrogation, and multiple review stages, allowing for comprehensive oversight. This could significantly improve the quality of AI-generated work. If you want the link, just comment loop.",
+        "language": "english",
+        "words": [
+            {
+                "word": "new",
+                "start": 0,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "tool",
+                "start": 0.5400000214576721,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "addresses",
+                "start": 0.9200000166893005,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "Claude's",
+                "start": 2.740000009536743,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "grading",
+                "start": 3.259999990463257,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "floor",
+                "start": 3.259999990463257,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "Claudex",
+                "start": 5.380000114440918,
+                "end": 5.739999771118164
+            },
+            {
+                "word": "loop",
+                "start": 5.739999771118164,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "solves",
+                "start": 6.039999961853027,
+                "end": 6.699999809265137
+            },
+            {
+                "word": "Claude's",
+                "start": 6.699999809265137,
+                "end": 7.300000190734863
+            },
+            {
+                "word": "biggest",
+                "start": 7.300000190734863,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "issue",
+                "start": 7.619999885559082,
+                "end": 8.020000457763672
+            },
+            {
+                "word": "grading",
+                "start": 9,
+                "end": 9
+            },
+            {
+                "word": "its",
+                "start": 9,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "own",
+                "start": 9.279999732971191,
+                "end": 9.600000381469727
+            },
+            {
+                "word": "work",
+                "start": 9.600000381469727,
+                "end": 9.979999542236328
+            },
+            {
+                "word": "This",
+                "start": 10.680000305175781,
+                "end": 10.779999732971191
+            },
+            {
+                "word": "innovative",
+                "start": 10.779999732971191,
+                "end": 11.140000343322754
+            },
+            {
+                "word": "skill",
+                "start": 11.140000343322754,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "introduces",
+                "start": 11.600000381469727,
+                "end": 12.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 12.260000228881836,
+                "end": 12.720000267028809
+            },
+            {
+                "word": "second",
+                "start": 12.720000267028809,
+                "end": 12.880000114440918
+            },
+            {
+                "word": "AI",
+                "start": 12.880000114440918,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "Codex",
+                "start": 14,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "to",
+                "start": 14.65999984741211,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "review",
+                "start": 14.84000015258789,
+                "end": 15.140000343322754
+            },
+            {
+                "word": "and",
+                "start": 15.140000343322754,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "critique",
+                "start": 16.139999389648438,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "Claude's",
+                "start": 16.139999389648438,
+                "end": 16.799999237060547
+            },
+            {
+                "word": "plans",
+                "start": 16.799999237060547,
+                "end": 17.1200008392334
+            },
+            {
+                "word": "and",
+                "start": 17.1200008392334,
+                "end": 17.520000457763672
+            },
+            {
+                "word": "executions",
+                "start": 17.520000457763672,
+                "end": 18.020000457763672
+            },
+            {
+                "word": "By",
+                "start": 18.700000762939453,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "implementing",
+                "start": 19.31999969482422,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "a",
+                "start": 19.700000762939453,
+                "end": 20.020000457763672
+            },
+            {
+                "word": "feedback",
+                "start": 20.020000457763672,
+                "end": 20.440000534057617
+            },
+            {
+                "word": "loop",
+                "start": 20.440000534057617,
+                "end": 20.760000228881836
+            },
+            {
+                "word": "it",
+                "start": 21.3799991607666,
+                "end": 21.5
+            },
+            {
+                "word": "ensures",
+                "start": 21.5,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "that",
+                "start": 21.860000610351562,
+                "end": 22.5
+            },
+            {
+                "word": "Claude's",
+                "start": 22.5,
+                "end": 23
+            },
+            {
+                "word": "outputs",
+                "start": 23,
+                "end": 23
+            },
+            {
+                "word": "are",
+                "start": 23,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "evaluated",
+                "start": 23.299999237060547,
+                "end": 23.780000686645508
+            },
+            {
+                "word": "before",
+                "start": 23.780000686645508,
+                "end": 24.34000015258789
+            },
+            {
+                "word": "moving",
+                "start": 24.34000015258789,
+                "end": 24.760000228881836
+            },
+            {
+                "word": "forward",
+                "start": 24.760000228881836,
+                "end": 25.260000228881836
+            },
+            {
+                "word": "enhancing",
+                "start": 26.299999237060547,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "reliability",
+                "start": 26.299999237060547,
+                "end": 27.040000915527344
+            },
+            {
+                "word": "The",
+                "start": 27.040000915527344,
+                "end": 28.260000228881836
+            },
+            {
+                "word": "process",
+                "start": 28.260000228881836,
+                "end": 28.700000762939453
+            },
+            {
+                "word": "includes",
+                "start": 28.700000762939453,
+                "end": 29.200000762939453
+            },
+            {
+                "word": "reconnaissance",
+                "start": 29.200000762939453,
+                "end": 30.280000686645508
+            },
+            {
+                "word": "interrogation",
+                "start": 30.81999969482422,
+                "end": 31.479999542236328
+            },
+            {
+                "word": "and",
+                "start": 32,
+                "end": 32.29999923706055
+            },
+            {
+                "word": "multiple",
+                "start": 32.29999923706055,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "review",
+                "start": 32.65999984741211,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "stages",
+                "start": 33.18000030517578,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "allowing",
+                "start": 34.41999816894531,
+                "end": 34.599998474121094
+            },
+            {
+                "word": "for",
+                "start": 34.599998474121094,
+                "end": 35.7599983215332
+            },
+            {
+                "word": "comprehensive",
+                "start": 35.7599983215332,
+                "end": 35.7599983215332
+            },
+            {
+                "word": "oversight",
+                "start": 35.7599983215332,
+                "end": 36.47999954223633
+            },
+            {
+                "word": "This",
+                "start": 37.540000915527344,
+                "end": 37.65999984741211
+            },
+            {
+                "word": "could",
+                "start": 37.65999984741211,
+                "end": 37.97999954223633
+            },
+            {
+                "word": "significantly",
+                "start": 37.97999954223633,
+                "end": 38.7599983215332
+            },
+            {
+                "word": "improve",
+                "start": 38.7599983215332,
+                "end": 39.2599983215332
+            },
+            {
+                "word": "the",
+                "start": 39.2599983215332,
+                "end": 39.599998474121094
+            },
+            {
+                "word": "quality",
+                "start": 39.599998474121094,
+                "end": 39.86000061035156
+            },
+            {
+                "word": "of",
+                "start": 39.86000061035156,
+                "end": 40.13999938964844
+            },
+            {
+                "word": "AI",
+                "start": 40.13999938964844,
+                "end": 40.47999954223633
+            },
+            {
+                "word": "generated",
+                "start": 40.47999954223633,
+                "end": 41.08000183105469
+            },
+            {
+                "word": "work",
+                "start": 41.08000183105469,
+                "end": 41.540000915527344
+            },
+            {
+                "word": "If",
+                "start": 41.880001068115234,
+                "end": 42.41999816894531
+            },
+            {
+                "word": "you",
+                "start": 42.41999816894531,
+                "end": 42.560001373291016
+            },
+            {
+                "word": "want",
+                "start": 42.560001373291016,
+                "end": 42.7400016784668
+            },
+            {
+                "word": "the",
+                "start": 42.7400016784668,
+                "end": 43.08000183105469
+            },
+            {
+                "word": "link",
+                "start": 43.08000183105469,
+                "end": 43.13999938964844
+            },
+            {
+                "word": "just",
+                "start": 43.439998626708984,
+                "end": 43.97999954223633
+            },
+            {
+                "word": "comment",
+                "start": 43.97999954223633,
+                "end": 44.36000061035156
+            },
+            {
+                "word": "loop",
+                "start": 44.36000061035156,
+                "end": 44.779998779296875
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 45.040000915527344,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "grading floor",
+                        "params": {
+                            "src": "gen_3244b27b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.3,
+                "end": 5.38,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "grading floor",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "variant": "fullscreen",
+                            "src": "gen_3244b27b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.38,
+                "end": 10.68,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "site": "https://github.com/chaseai-yt/claudex-loop",
+                            "variant": "fullscreen",
+                            "caption": "The claudex-loop skill",
+                            "src": "img_f78826ae"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.68,
+                "end": 18.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "src": "gen_6291cc8b",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.7,
+                "end": 27.04,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "feedback loop",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": null,
+                        "params": {
+                            "title": "Feedback Loop",
+                            "layout": "cycle",
+                            "nodes": [
+                                {
+                                    "label": "Claude generates output"
+                                },
+                                {
+                                    "label": "Output evaluated"
+                                },
+                                {
+                                    "label": "Move forward"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.04,
+                "end": 33.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "reconnaissance",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Stages of the loop",
+                            "items": [
+                                "Reconnaissance of the codebase",
+                                "Interrogation of the plan",
+                                "Review before any code exists",
+                                "Second review after execution"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.9,
+                "end": 37.54,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "oversight",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Full Oversight",
+                            "lines": [
+                                "Every step stays visible",
+                                "Nothing passes unchecked"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.54,
+                "end": 41.88,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "quality",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "Model grades itself",
+                                "points": [
+                                    "Self-correction can hurt accuracy",
+                                    "Judges favour their own output",
+                                    "Blind spots stay hidden"
+                                ]
+                            },
+                            "right": {
+                                "title": "A second model grades it",
+                                "points": [
+                                    "External feedback actually works",
+                                    "Debate improved factuality (ICML 2024)",
+                                    "Bias cancels out"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.88,
+                "end": 45.04,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "terminal",
+                        "text": null,
+                        "params": {
+                            "lines": [
+                                "comment: loop",
+                                "→ link sent"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/new-tool-addresses-claudes-grading-flaw-j07cz/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    },
+    "dm_automations": {
+        "instagram": "6a8dc4aa4e9da1b31a34ccab"
+    },
+    "dm_link": "https://github.com/chaseai-yt/claudex-loop",
+    "dm_keyword": "loop"
+}

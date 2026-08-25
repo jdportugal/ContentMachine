@@ -131,4 +131,54 @@ class MonitorizacaoYtDlpTest extends TestCase
         @rmdir($tmp.'/definicoes');
         @rmdir($tmp);
     }
+
+    /**
+     * The /videos listing (up to 200 entries) used to fill every metadata slot,
+     * so the /shorts tab never made the cut — shorts were simply absent.
+     */
+    public function test_shorts_get_a_fair_share_of_the_metadata_slots(): void
+    {
+        $videos = $shorts = $metadados = [];
+        foreach (range(1, 6) as $i) {
+            $u = "https://youtube.com/watch?v=v{$i}";
+            $videos[] = ['id' => "v{$i}", 'webpage_url' => $u, 'title' => "V{$i}"];
+            $metadados[$u] = ['id' => "v{$i}", 'title' => "V{$i}", 'webpage_url' => $u, 'duration' => 600, 'view_count' => 10, 'upload_date' => '20260701'];
+        }
+        foreach (range(1, 6) as $i) {
+            $u = "https://youtube.com/shorts/s{$i}";
+            $shorts[] = ['id' => "s{$i}", 'webpage_url' => $u, 'title' => "S{$i}"];
+            $metadados[$u] = ['id' => "s{$i}", 'title' => "S{$i}", 'webpage_url' => $u, 'duration' => 30, 'view_count' => 10, 'upload_date' => '20260710'];
+        }
+
+        $runner = new FakeYtDlpRunner(metadados: $metadados, entradasPorNeedle: ['/shorts' => $shorts, '/videos' => $videos]);
+        $fetcher = new YtDlpMonitoringFetcher($runner, new EngagementScorer, app(MonitoringStore::class));
+
+        $itens = $fetcher->atualizar('youtube', 'https://youtube.com/channel/X', 4);
+
+        $tipos = array_count_values(array_column($itens, 'tipo'));
+        $this->assertSame(2, $tipos['vídeo'] ?? 0);
+        $this->assertSame(2, $tipos['short'] ?? 0);
+        // Ordered by real date after the tab-by-tab fetch: shorts (Jul 10) first.
+        $this->assertSame('short', $itens[0]['tipo']);
+    }
+
+    public function test_pagina_mostra_heatmap_breakdown_e_tabela_de_tops(): void
+    {
+        // Timestamped items (real hour) so the best-time heatmap has data.
+        app(MonitoringStore::class)->guardar('youtube', [
+            ['id' => 'a', 'plataforma' => 'youtube', 'tipo' => 'short', 'titulo' => 'Short Viral', 'url' => '#', 'publicado_em' => '2026-08-21T18:05:00Z', 'views' => 900, 'likes' => 45, 'comentarios' => 5, 'partilhas' => 0, 'guardados' => 0, 'score' => 80],
+            ['id' => 'b', 'plataforma' => 'youtube', 'tipo' => 'vídeo', 'titulo' => 'Vídeo Longo', 'url' => '#', 'publicado_em' => '2026-08-14T18:40:00Z', 'views' => 100, 'likes' => 10, 'comentarios' => 0, 'partilhas' => 0, 'guardados' => 0, 'score' => 40],
+            ['id' => 'c', 'plataforma' => 'youtube', 'tipo' => 'short', 'titulo' => 'Outro', 'url' => '#', 'publicado_em' => '2026-08-16T10:00:00Z', 'views' => 50, 'likes' => 2, 'comentarios' => 0, 'partilhas' => 0, 'guardados' => 0, 'score' => 20],
+        ], ['subscribers' => 1500]);
+
+        Livewire::test(Monitorizacao::class)
+            ->set('rede', 'youtube')
+            ->assertSee('Best time to post')
+            ->assertSee('Fri 18h')
+            ->assertSee('Platform breakdown')
+            ->assertSee('Top performing posts')
+            ->assertSee('Engagement rate')
+            ->assertSee('Best post')
+            ->assertSee('Road to');
+    }
 }

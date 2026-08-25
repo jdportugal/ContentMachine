@@ -1,0 +1,964 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Namespace Turns Real Macs Into Cloud Servers",
+    "source_text": "Namespace Turns Macs into Cloud Infrastructure.\nNamespace is transforming Macs into powerful cloud servers for developers.\nNamespace is buying Macs at scale and installing them in its data centers, repurposing Apple Silicon hardware for cloud infrastructure. This shift allows developers to utilize capacity for Xcode builds, iOS testing, and continuous integration. AI coding agents can now operate in their own remote macOS environments, autonomously building and testing Apple apps. This could redefine how cloud infrastructure looks in the future. If you want the link, just comment macs.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "img_50c27889",
+            "path": "clips/uploads/site-2a9d2ff3.png",
+            "description": "Website: https://namespace.so/blog/devin-outposts-devboxes",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "gen_c6a62c19",
+            "path": "clips/generated/sjvmhkvgyliu.png",
+            "description": "A modern data center featuring a prominent Apple Silicon Mac tower, surrounded by illuminated server racks, with a cool blue and silver color palette, conveying a sense of innovation and technology.",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "img_be5c357a",
+            "path": "clips/uploads/uUOllB7l6OWivDu2cQP75ji2ockaiAMhHvdqjTuF.png",
+            "description": "Namespace turns Macs into cloud infrastructure",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "gen_87389adc",
+            "path": "clips/generated/ckrmbjuywasm.png",
+            "description": "A vast dim data center aisle lined with metal racks holding hundreds of small silver aluminium desktop computers, cool blue LED glow, cables running neatly, wide photographic shot, moody lighting",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "img_f951594f",
+            "path": "clips/uploads/7nlXeIAlmGxR0cUbH2iS4qXsT633m0NYHopR91S3.png",
+            "description": "",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7fcd3246",
+            "path": "clips/uploads/Z6qv2Zn7TrjNTQBpiHxmxdHqr4E2fFJqqBEbusZm.png",
+            "description": "",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c9dd176b",
+            "path": "clips/uploads/C1yvg81XhNeru5HI47cN2ArpM4DoXuzzRxGqulz6.png",
+            "description": "",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Namespace: turning real Macs into cloud infrastructure for developers and AI coding agents",
+            "summary": "Namespace buys Apple Silicon Macs and racks them in its own data centers, renting them out as on-demand macOS compute for Xcode builds, iOS testing and CI. Because Apple's license forbids macOS on non-Apple hardware and caps VMs at two per Mac, cloud macOS can only scale by physically buying machines — and Namespace raised $23M in March 2026 to build exactly that layer for humans and coding agents.",
+            "timeline": [
+                {
+                    "label": "Apple license allows only 2 macOS VMs per Mac",
+                    "sublabel": "since OS X Lion, 2011"
+                },
+                {
+                    "label": "AWS launches EC2 Mac bare-metal instances",
+                    "sublabel": "2020"
+                },
+                {
+                    "label": "Namespace raises $23M led by NEA",
+                    "sublabel": "March 2026"
+                },
+                {
+                    "label": "Devin runs on Namespace macOS Devboxes (Apple M5)",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "Apple unveils M6 Mac mini and M5 Ultra Mac Studio",
+                    "sublabel": "August 25, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Namespace funding raised (seed + Series A, Mar 2026)",
+                    "value": 23,
+                    "unit": "million USD"
+                },
+                {
+                    "label": "macOS CI minute cost vs Linux on GitHub Actions (2026)",
+                    "value": 10,
+                    "unit": "x"
+                },
+                {
+                    "label": "macOS VMs Apple's license allows per Mac",
+                    "value": 2,
+                    "unit": "VMs"
+                },
+                {
+                    "label": "Minimum billing commitment per EC2 Mac dedicated host",
+                    "value": 24,
+                    "unit": "hours"
+                },
+                {
+                    "label": "CPU cores in an EC2 M4 Pro Mac instance (Mac mini hardware)",
+                    "value": 14,
+                    "unit": "cores"
+                },
+                {
+                    "label": "Memory in an EC2 M4 Pro Mac instance",
+                    "value": 48,
+                    "unit": "GB"
+                },
+                {
+                    "label": "New Mac mini M6 starting price (Aug 2026)",
+                    "value": 899,
+                    "unit": "USD"
+                },
+                {
+                    "label": "New Mac Studio M5 Ultra starting price (Aug 2026)",
+                    "value": 5499,
+                    "unit": "USD"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Why macOS clouds must buy hardware",
+                    "left": {
+                        "title": "Linux cloud",
+                        "points": [
+                            "Runs on commodity x86/ARM servers",
+                            "Hypervisor packs many VMs per host",
+                            "Cheapest GitHub Actions rate in 2026"
+                        ]
+                    },
+                    "right": {
+                        "title": "macOS cloud",
+                        "points": [
+                            "Apple license requires real Mac hardware",
+                            "Max 2 macOS VMs per physical Mac",
+                            "Billed at 10x the Linux rate on GitHub Actions"
+                        ]
+                    }
+                },
+                {
+                    "title": "Mac in the cloud: rental models",
+                    "left": {
+                        "title": "AWS EC2 Mac",
+                        "points": [
+                            "Bare-metal, single-tenant dedicated host",
+                            "24-hour minimum allocation per host",
+                            "M4 Pro option: 14 CPU / 20 GPU cores, 48 GB"
+                        ]
+                    },
+                    "right": {
+                        "title": "Namespace macOS",
+                        "points": [
+                            "Apple M4 Pro and M5 Max fleet",
+                            "On-demand Devboxes and CI runners via API",
+                            "Only Devin Outposts provider running macOS sessions"
+                        ]
+                    }
+                },
+                {
+                    "title": "iOS CI benchmark (vendor-reported by Namespace)",
+                    "left": {
+                        "title": "GitHub-hosted runners",
+                        "points": [
+                            "Wikipedia iOS E2E tests",
+                            "18m 38s mean run time"
+                        ]
+                    },
+                    "right": {
+                        "title": "Namespace with caching",
+                        "points": [
+                            "Same Wikipedia iOS E2E tests",
+                            "5m 26s mean run time"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "macOS legally cannot be virtualized off Apple hardware — so a macOS cloud is literally a warehouse of purchased Macs.",
+                "Namespace raised $23M led by NEA (with Susa Ventures and burst.vc) in March 2026 to build a compute layer for code.",
+                "Its macOS fleet runs Apple M4 Pro and M5 Max silicon, with Xcode, iOS simulators and Metal supported natively.",
+                "Cognition's Devin runs autonomous iOS builds on Namespace macOS Devboxes powered by Apple M5 — Namespace is the only Outposts provider offering macOS.",
+                "Customers include fal.ai, LiveKit, Zed, Framer, Vanta and Verkada; Buildkite Hosted Agents and Warp Background Agents build on it.",
+                "Apple's two-VM-per-Mac cap means scaling this cloud is a hardware purchasing problem, not a software one.",
+                "Apple refreshed the Mac mini (M6, from $899) and Mac Studio (M5 Ultra, from $5,499) on August 25, 2026 — the same boxes these fleets are built from."
+            ],
+            "sources": [
+                "https://namespace.so/blog/series-a",
+                "https://www.nea.com/blog/namespace-cicd-is-dead-agents-need-computers",
+                "https://news.ycombinator.com/item?id=47546998",
+                "https://namespace.so/docs/architecture/compute/macos",
+                "https://namespace.so/blog/devin-outposts-devboxes",
+                "https://devin.ai/blog/introducing-devin-outposts",
+                "https://namespace.so/blog/changelog-023",
+                "https://namespace.so/blog/how-to-reduce-github-actions-runtime-for-an-ios-project",
+                "https://docs.github.com/en/billing/reference/actions-runner-pricing",
+                "https://aws.amazon.com/ec2/instance-types/mac/",
+                "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html",
+                "https://aws.amazon.com/blogs/aws/announcing-amazon-ec2-m4-and-m4-pro-mac-instances/",
+                "https://eclecticlight.co/2022/08/04/virtualisation-on-apple-silicon-macs-8-how-apple-limits-vms/",
+                "https://khronokernel.com/macos/2023/08/08/AS-VM.html",
+                "https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/",
+                "https://www.engadget.com/2243379/apple-mac-mini-m6-mac-studio-m5-max/",
+                "https://x.com/namespacelabs/status/2091895197151952950"
+            ]
+        },
+        "suggested": {
+            "title": "Namespace Turns Real Macs Into Cloud Servers",
+            "description": "Namespace is buying Macs at scale and racking them in its own data centers, turning Apple Silicon into cloud infrastructure developers can rent. That means on-demand capacity for Xcode builds, iOS testing, and CI — plus remote macOS environments where AI coding agents can build and test Apple apps on their own. It's a glimpse at what cloud infrastructure might look like next.",
+            "tags": [
+                "namespace",
+                "apple silicon",
+                "cloud infrastructure",
+                "macos",
+                "ios development",
+                "xcode",
+                "ci cd",
+                "ai coding agents"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "df06d2c4",
+                "prompt": "Illustrate this moment: Namespace turns Macs into cloud infrastructure",
+                "label": "Namespace turns Macs into cloud infrastructure",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "7fa7fea5",
+                "prompt": "https://namespace.so",
+                "label": "Namespace is transforming Macs into powerful cloud servers for developers",
+                "site": "https://namespace.so",
+                "still": false
+            },
+            {
+                "key": "f1ed621a",
+                "prompt": "A vast dim data center aisle lined with metal racks holding hundreds of small silver aluminium desktop computers, cool blue LED glow, cables running neatly, wide photographic shot, moody lighting",
+                "label": "Namespace is buying Macs at scale and installing them in its data centers",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "2a9d2ff3",
+                "prompt": "https://namespace.so/blog/devin-outposts-devboxes",
+                "label": "AI coding agents can now operate in their own remote macOS environments",
+                "site": "https://namespace.so/blog/devin-outposts-devboxes",
+                "still": true
+            },
+            {
+                "key": "0d32816f",
+                "prompt": "A futuristic server hall at night seen from above, endless rows of compact silver machines under deep navy light with soft golden reflections, faint haze, cinematic wide photographic shot",
+                "label": "looks in the future If you want the link just comment Macs",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "A modern data center featuring a prominent Apple Silicon Mac tower, surrounded by illuminated server racks, with a cool blue and silver color palette, conveying a sense of innovation and technology.",
+                "label": "Opening image — A sleek Apple Silicon Mac tower surrounded by glowing server racks in a dimly lit data center.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "2a9d2ff3": "img_50c27889",
+            "intro": "gen_c6a62c19",
+            "df06d2c4": "img_be5c357a",
+            "f1ed621a": "gen_87389adc"
+        },
+        "site_collecting": [],
+        "site_errors": [],
+        "image_text": {
+            "7fa7fea5": true,
+            "0d32816f": true
+        }
+    },
+    "id": "namespace-turns-macs-into-cloud-infrastr-rpp8j",
+    "created_at": "2026-08-25T15:51:52+00:00",
+    "updated_at": "2026-08-25T16:32:21+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/namespace-turns-macs-into-cloud-infrastr-rpp8j/voz.mp3",
+    "transcript": {
+        "duration": 46.66999816894531,
+        "text": "Namespace turns Macs into cloud infrastructure. Namespace is transforming Macs into powerful cloud servers for developers. Namespace is buying Macs at scale and installing them in its data centers, repurposing Apple Silicon hardware for cloud infrastructure. This shift allows developers to utilize capacity for Xcode builds, iOS testing, and continuous integration. AI coding agents can now operate in their own remote macOS environments, autonomously building and testing Apple apps. This could redefine how cloud infrastructure looks in the future. If you want the link, just comment Macs.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Namespace",
+                "start": 0,
+                "end": 0.8199999928474426
+            },
+            {
+                "word": "turns",
+                "start": 0.8199999928474426,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "Macs",
+                "start": 1.9600000381469727,
+                "end": 3.0799999237060547
+            },
+            {
+                "word": "into",
+                "start": 3.0799999237060547,
+                "end": 3.359999895095825
+            },
+            {
+                "word": "cloud",
+                "start": 3.359999895095825,
+                "end": 3.700000047683716
+            },
+            {
+                "word": "infrastructure",
+                "start": 3.700000047683716,
+                "end": 4.420000076293945
+            },
+            {
+                "word": "Namespace",
+                "start": 5.460000038146973,
+                "end": 5.5
+            },
+            {
+                "word": "is",
+                "start": 5.5,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "transforming",
+                "start": 6.039999961853027,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "Macs",
+                "start": 6.539999961853027,
+                "end": 7.480000019073486
+            },
+            {
+                "word": "into",
+                "start": 7.480000019073486,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "powerful",
+                "start": 7.579999923706055,
+                "end": 8.079999923706055
+            },
+            {
+                "word": "cloud",
+                "start": 8.079999923706055,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "servers",
+                "start": 8.579999923706055,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "for",
+                "start": 8.899999618530273,
+                "end": 9.899999618530273
+            },
+            {
+                "word": "developers",
+                "start": 9.899999618530273,
+                "end": 9.899999618530273
+            },
+            {
+                "word": "Namespace",
+                "start": 11.0600004196167,
+                "end": 11.140000343322754
+            },
+            {
+                "word": "is",
+                "start": 11.140000343322754,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "buying",
+                "start": 11.600000381469727,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "Macs",
+                "start": 11.979999542236328,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "at",
+                "start": 12.420000076293945,
+                "end": 12.899999618530273
+            },
+            {
+                "word": "scale",
+                "start": 12.899999618530273,
+                "end": 12.899999618530273
+            },
+            {
+                "word": "and",
+                "start": 12.899999618530273,
+                "end": 13.539999961853027
+            },
+            {
+                "word": "installing",
+                "start": 13.539999961853027,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "them",
+                "start": 13.899999618530273,
+                "end": 14.199999809265137
+            },
+            {
+                "word": "in",
+                "start": 14.199999809265137,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "its",
+                "start": 14.34000015258789,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "data",
+                "start": 14.539999961853027,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "centers",
+                "start": 14.920000076293945,
+                "end": 15.300000190734863
+            },
+            {
+                "word": "repurposing",
+                "start": 16.100000381469727,
+                "end": 16.520000457763672
+            },
+            {
+                "word": "Apple",
+                "start": 16.520000457763672,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "Silicon",
+                "start": 16.979999542236328,
+                "end": 17.420000076293945
+            },
+            {
+                "word": "hardware",
+                "start": 17.420000076293945,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "for",
+                "start": 17.860000610351562,
+                "end": 18.520000457763672
+            },
+            {
+                "word": "cloud",
+                "start": 18.520000457763672,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "infrastructure",
+                "start": 18.860000610351562,
+                "end": 19.5
+            },
+            {
+                "word": "This",
+                "start": 20.93000030517578,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "shift",
+                "start": 21.399999618530273,
+                "end": 21.68000030517578
+            },
+            {
+                "word": "allows",
+                "start": 21.68000030517578,
+                "end": 22.020000457763672
+            },
+            {
+                "word": "developers",
+                "start": 22.020000457763672,
+                "end": 22.5
+            },
+            {
+                "word": "to",
+                "start": 22.5,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "utilize",
+                "start": 23.440000534057617,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "capacity",
+                "start": 23.440000534057617,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "for",
+                "start": 24.040000915527344,
+                "end": 24.440000534057617
+            },
+            {
+                "word": "Xcode",
+                "start": 24.440000534057617,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "builds",
+                "start": 24.860000610351562,
+                "end": 25.459999084472656
+            },
+            {
+                "word": "iOS",
+                "start": 25.459999084472656,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "testing",
+                "start": 26.31999969482422,
+                "end": 26.799999237060547
+            },
+            {
+                "word": "and",
+                "start": 27.360000610351562,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "continuous",
+                "start": 27.540000915527344,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "integration",
+                "start": 28.100000381469727,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "AI",
+                "start": 30.059999465942383,
+                "end": 30.459999084472656
+            },
+            {
+                "word": "coding",
+                "start": 30.459999084472656,
+                "end": 30.81999969482422
+            },
+            {
+                "word": "agents",
+                "start": 30.81999969482422,
+                "end": 31.3799991607666
+            },
+            {
+                "word": "can",
+                "start": 31.3799991607666,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "now",
+                "start": 31.6200008392334,
+                "end": 32.29999923706055
+            },
+            {
+                "word": "operate",
+                "start": 32.29999923706055,
+                "end": 32.29999923706055
+            },
+            {
+                "word": "in",
+                "start": 32.29999923706055,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "their",
+                "start": 32.47999954223633,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "own",
+                "start": 32.65999984741211,
+                "end": 32.959999084472656
+            },
+            {
+                "word": "remote",
+                "start": 32.959999084472656,
+                "end": 33.380001068115234
+            },
+            {
+                "word": "macOS",
+                "start": 33.380001068115234,
+                "end": 33.959999084472656
+            },
+            {
+                "word": "environments",
+                "start": 33.959999084472656,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "autonomously",
+                "start": 35.36000061035156,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "building",
+                "start": 35.86000061035156,
+                "end": 36.34000015258789
+            },
+            {
+                "word": "and",
+                "start": 36.34000015258789,
+                "end": 37.02000045776367
+            },
+            {
+                "word": "testing",
+                "start": 37.02000045776367,
+                "end": 37.380001068115234
+            },
+            {
+                "word": "Apple",
+                "start": 37.380001068115234,
+                "end": 37.91999816894531
+            },
+            {
+                "word": "apps",
+                "start": 37.91999816894531,
+                "end": 38.439998626708984
+            },
+            {
+                "word": "This",
+                "start": 38.84000015258789,
+                "end": 39.400001525878906
+            },
+            {
+                "word": "could",
+                "start": 39.400001525878906,
+                "end": 39.619998931884766
+            },
+            {
+                "word": "redefine",
+                "start": 39.619998931884766,
+                "end": 40.2599983215332
+            },
+            {
+                "word": "how",
+                "start": 40.2599983215332,
+                "end": 40.619998931884766
+            },
+            {
+                "word": "cloud",
+                "start": 40.619998931884766,
+                "end": 40.939998626708984
+            },
+            {
+                "word": "infrastructure",
+                "start": 40.939998626708984,
+                "end": 41.540000915527344
+            },
+            {
+                "word": "looks",
+                "start": 41.540000915527344,
+                "end": 42
+            },
+            {
+                "word": "in",
+                "start": 42,
+                "end": 42.15999984741211
+            },
+            {
+                "word": "the",
+                "start": 42.15999984741211,
+                "end": 42.880001068115234
+            },
+            {
+                "word": "future",
+                "start": 42.880001068115234,
+                "end": 43.13999938964844
+            },
+            {
+                "word": "If",
+                "start": 43.13999938964844,
+                "end": 43.7400016784668
+            },
+            {
+                "word": "you",
+                "start": 43.7400016784668,
+                "end": 43.86000061035156
+            },
+            {
+                "word": "want",
+                "start": 43.86000061035156,
+                "end": 44.02000045776367
+            },
+            {
+                "word": "the",
+                "start": 44.02000045776367,
+                "end": 44.31999969482422
+            },
+            {
+                "word": "link",
+                "start": 44.31999969482422,
+                "end": 44.47999954223633
+            },
+            {
+                "word": "just",
+                "start": 44.91999816894531,
+                "end": 45.5
+            },
+            {
+                "word": "comment",
+                "start": 45.5,
+                "end": 45.81999969482422
+            },
+            {
+                "word": "Macs",
+                "start": 45.81999969482422,
+                "end": 46.439998626708984
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 46.66999816894531,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 4.42,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "cloud infrastructure",
+                        "params": {
+                            "src": "img_c9dd176b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 4.42,
+                "end": 11,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "src": "gen_c6a62c19",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11,
+                "end": 16.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "caption": "Racks of real Macs",
+                            "variant": "pan",
+                            "direction": "right",
+                            "src": "gen_87389adc"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.1,
+                "end": 20.93,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "Apple Silicon",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": null,
+                        "params": {
+                            "left": {
+                                "title": "Linux cloud",
+                                "points": [
+                                    "Commodity servers",
+                                    "Many VMs per host",
+                                    "Cheapest CI rate"
+                                ]
+                            },
+                            "right": {
+                                "title": "macOS cloud",
+                                "points": [
+                                    "Real Apple hardware",
+                                    "Only 2 VMs per Mac",
+                                    "10x the Linux rate"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.93,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "continuous integration",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "What the capacity runs",
+                            "items": [
+                                "Xcode builds",
+                                "iOS testing",
+                                "Continuous integration"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 35.36,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "site": "https://namespace.so/blog/devin-outposts-devboxes",
+                            "site_still": true,
+                            "caption": "Agents get their own macOS box",
+                            "variant": "framed",
+                            "src": "img_50c27889"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.36,
+                "end": 46.669998,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "autonomously",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Agent loop on remote macOS",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "AI coding agent"
+                                },
+                                {
+                                    "label": "Remote macOS box"
+                                },
+                                {
+                                    "label": "Build the app"
+                                },
+                                {
+                                    "label": "Test on simulator",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                },
+                                {
+                                    "from": 2,
+                                    "to": 3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/namespace-turns-macs-into-cloud-infrastr-rpp8j/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    },
+    "dm_automations": {
+        "instagram": "6a8dc3956ae39743a04e62d2"
+    },
+    "dm_link": "https://namespace.so/",
+    "dm_keyword": "Macs"
+}

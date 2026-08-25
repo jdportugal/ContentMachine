@@ -64,10 +64,18 @@ class GenerateVfxJob implements ShouldQueue
         $transparent = (bool) $vfx->get('transparent', false);
         // ProRes with alpha must be a .mov — an .mp4 container would fail the render.
         $ext = $transparent ? 'mov' : 'mp4';
+        $w = (int) $vfx->get('width', 1920);
+        $h = (int) $vfx->get('height', 1080);
         $canvas = [
-            'width' => (int) $vfx->get('width', 1920),
-            'height' => (int) $vfx->get('height', 1080),
+            'width' => $w,
+            'height' => $h,
             'transparent' => $transparent,
+            // The component branches on `format`, and SampleRoot defaults it to
+            // "portrait" — so without this a 16:9 (or 1:1) VFX was TOLD it was
+            // landscape in the prompt and then handed format "portrait" at render
+            // time. It laid out a tall stack in a wide frame: the reported "doesn't
+            // fill the frame". Square/4:5 are taller-or-equal, so they read portrait.
+            'format' => $w > $h ? 'landscape' : 'portrait',
         ];
         $tmp = null;
 

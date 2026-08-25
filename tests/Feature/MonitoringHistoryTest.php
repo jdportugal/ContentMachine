@@ -30,6 +30,7 @@ class MonitoringHistoryTest extends TestCase
 
         $history->registar(
             ['subscritores' => 1180, 'publicacoes' => 42, 'visualizacoes' => 90000, 'interacoes' => 1200],
+            [],
             Carbon::parse('2026-08-19'),
         );
 
@@ -52,7 +53,7 @@ class MonitoringHistoryTest extends TestCase
     public function test_todays_own_record_is_not_offered_as_the_previous_day(): void
     {
         $history = $this->history();
-        $history->registar(['subscritores' => 9], Carbon::parse('2026-08-20'));
+        $history->registar(['subscritores' => 9], [], Carbon::parse('2026-08-20'));
 
         $this->assertNull($history->anterior(Carbon::parse('2026-08-20')));
     }
@@ -62,8 +63,8 @@ class MonitoringHistoryTest extends TestCase
     {
         $history = $this->history();
 
-        $history->registar(['subscritores' => 100], Carbon::parse('2026-08-19'));
-        $history->registar(['subscritores' => 175], Carbon::parse('2026-08-19'));
+        $history->registar(['subscritores' => 100], [], Carbon::parse('2026-08-19'));
+        $history->registar(['subscritores' => 175], [], Carbon::parse('2026-08-19'));
 
         $anterior = $history->anterior(Carbon::parse('2026-08-20'));
         $this->assertSame(175, $anterior['metricas']['subscritores']);
@@ -76,7 +77,7 @@ class MonitoringHistoryTest extends TestCase
     public function test_a_gap_falls_back_to_the_most_recent_recorded_day(): void
     {
         $history = $this->history();
-        $history->registar(['subscritores' => 500], Carbon::parse('2026-08-14'));
+        $history->registar(['subscritores' => 500], [], Carbon::parse('2026-08-14'));
 
         $anterior = $history->anterior(Carbon::parse('2026-08-20'));
 
@@ -90,6 +91,7 @@ class MonitoringHistoryTest extends TestCase
 
         $this->history()->registar(
             ['subscritores' => 1180, 'publicacoes' => 42, 'visualizacoes' => 90000, 'interacoes' => 1200],
+            [],
             Carbon::parse('2026-08-19'),
         );
 
@@ -108,7 +110,7 @@ class MonitoringHistoryTest extends TestCase
     {
         Carbon::setTestNow('2026-08-20 09:00:00');
 
-        $this->history()->registar(['subscritores' => 500], Carbon::parse('2026-08-14'));
+        $this->history()->registar(['subscritores' => 500], [], Carbon::parse('2026-08-14'));
 
         $this->comSessaoIniciada();
         Livewire::test(Painel::class)

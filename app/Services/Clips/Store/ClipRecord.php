@@ -53,10 +53,30 @@ class ClipRecord
         return (string) ($this->attributes['id'] ?? '');
     }
 
-    /** @param array<string,mixed> $attrs */
+    /**
+     * Write these fields, merged onto what is CURRENTLY on disk.
+     *
+     * save() persists the whole record, so merging onto this instance's own
+     * snapshot meant a writer also put back every field as it was when it read —
+     * silently undoing anything that happened in between. That is a real window,
+     * not a theoretical one: GenerateRequestImageJob reads the clip, spends up to
+     * a minute in the image generator, then writes. A user who pressed "continue"
+     * during that minute had their status:planning reverted to collecting by the
+     * finishing job and was bounced back onto the collect screen, images already
+     * populated; an edited prompt or another suggestion's upload went the same way.
+     *
+     * A caller only ever means to write the fields it passes, so those win and
+     * everything else keeps the current value.
+     *
+     * ponytail: last-writer-wins per FIELD — two jobs racing on the same key still
+     * settle arbitrarily. Needs file locking if that ever matters.
+     *
+     * @param  array<string,mixed>  $attrs
+     */
     public function update(array $attrs): static
     {
-        $this->attributes = array_merge($this->attributes, $attrs);
+        $atual = $this->store->find($this->id())?->attributes ?? $this->attributes;
+        $this->attributes = array_merge($atual, $attrs);
         $this->store->save($this);
 
         return $this;

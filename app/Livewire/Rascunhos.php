@@ -166,7 +166,12 @@ class Rascunhos extends Component
             $source, $ref, $vault,
             $posted ? 'posted' : 'scheduled',
             $scheduledFor, array_keys($ids), $ids,
-            $automacoes === [] ? [] : ['dm_automations' => $automacoes],
+            $automacoes === [] ? [] : [
+                'dm_automations' => $automacoes,
+                // Kept so the finished post can still show/copy what the DM sends.
+                'dm_link' => $this->dmCampo($id, 'link'),
+                'dm_keyword' => $this->dmCampo($id, 'keyword'),
+            ],
         );
 
         $this->aviso = ($posted ? 'Posted' : 'Scheduled').' to '.implode(', ', array_keys($ids)).'.';
@@ -266,6 +271,47 @@ class Rascunhos extends Component
 
             return [];
         }
+    }
+
+    /**
+     * Arms the Zernio DM automation on an ALREADY published item — automations
+     * are account-wide (keyword-matched), so registering after the post is out
+     * works the same as at publish time. The link/keyword are persisted so the
+     * posted card can show and copy them from then on.
+     */
+    public function ativarDm(string $source, string $ref, VaultContract $vault, SettingsRepository $settings): void
+    {
+        $id = $this->idDe($source, $ref);
+        if ($this->dmCampo($id, 'keyword') === '' || $this->dmCampo($id, 'link') === '') {
+            $this->dispatch('toast', message: 'The DM automation needs a keyword and a link.', type: 'erro');
+
+            return;
+        }
+        $item = $this->itens($vault)->firstWhere('id', $id);
+        if ($item === null) {
+            return;
+        }
+
+        $this->dm[$id]['ativo'] = true; // registarDm only fires with the switch on
+        $erros = [];
+        $automacoes = $this->registarDm($id, $item, array_values((array) $item['plataformas']), $settings, $erros);
+        if ($automacoes === []) {
+            $this->dispatch('toast', message: implode('; ', $erros) ?: 'DM automation failed.', type: 'erro');
+
+            return;
+        }
+
+        $extra = [
+            'dm_automations' => $automacoes,
+            'dm_link' => $this->dmCampo($id, 'link'),
+            'dm_keyword' => $this->dmCampo($id, 'keyword'),
+        ];
+        if ($source === 'animado') {
+            app(ClipStore::class)->find($ref)?->update($extra);
+        } else {
+            $vault->updateFrontmatter($ref, $extra);
+        }
+        $this->dispatch('toast', message: 'DM automation live for «'.$this->dmCampo($id, 'keyword').'».');
     }
 
     /**
@@ -439,6 +485,8 @@ class Rascunhos extends Component
             'excerpt' => Str::limit(strip_tags($n->html()), 160),
             'scheduled_for' => $scheduledFor,
             'plataformas' => array_values((array) $n->get('plataformas', [])),
+            'dm_link' => (string) $n->get('dm_link', ''),
+            'dm_keyword' => (string) $n->get('dm_keyword', ''),
             'state' => $this->estadoDe($publishState, $scheduledFor),
         ];
     }
@@ -475,6 +523,8 @@ class Rascunhos extends Component
                 'excerpt' => '',
                 'scheduled_for' => $p->get('scheduled_for') ?: null,
                 'plataformas' => array_values((array) $p->get('plataformas', [])),
+                'dm_link' => (string) ($p->get('dm_link') ?? ''),
+                'dm_keyword' => (string) ($p->get('dm_keyword') ?? ''),
                 'state' => $this->estadoDe($p->get('publish_state'), $p->get('scheduled_for') ?: null),
             ]);
 
@@ -508,6 +558,15 @@ class Rascunhos extends Component
 
         $agendados = ($porEstado->get('scheduled') ?? collect())->values();
         $porPublicar = ($porEstado->get('unpublished') ?? collect())->values();
+        $publicados = ($porEstado->get('posted') ?? collect())->values();
+
+        // Posted cards without a DM yet offer the retroactive keyword/link form,
+        // so their dm.<id> keys need seeding exactly like the unpublished ones.
+        foreach ($publicados as $item) {
+            if (! is_array($this->dm[$item['id']] ?? null)) {
+                $this->dm[$item['id']] = ['ativo' => false, 'keyword' => '', 'link' => '', 'cta' => '', 'mensagem' => '', 'resposta' => ''];
+            }
+        }
 
         // Seed each item's platform selection as an ARRAY before it's rendered.
         // The platform checkboxes bind to plataformas.<id>; if that key isn't an
@@ -529,7 +588,7 @@ class Rascunhos extends Component
             'aba' => $this->aba,
             'unpublished' => $porPublicar,
             'scheduled' => $agendados,
-            'posted' => ($porEstado->get('posted') ?? collect())->values(),
+            'posted' => $publicados,
             'calendario' => $this->calendario($agendados),
             'diasDoMes' => $this->diasDoMes(),
             'blotatoReady' => filled(config('services.blotato.key')),

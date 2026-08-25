@@ -89,6 +89,11 @@ class RenderJob implements ShouldQueue
 
             $out = $renderer->render($plan, "$dir/clip.mp4");
             $p->update(['output_path' => $out, 'status' => ClipRecord::STATUS_DONE]);
+
+            // Auto clips: schedule on Blotato's next free slot as soon as the render lands.
+            if (! empty($p->meta['auto']) && ! $p->get('publish_state')) {
+                AutoPublishClipJob::dispatch($p->id);
+            }
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
 
@@ -222,6 +227,19 @@ class RenderJob implements ShouldQueue
 
         // Replace any image-id string, anywhere in a layer's params (image-reveal.src,
         // bar.image, timeline item.image, comparison.image, …), with its file path.
+        //
+        // An id whose FILE is gone must be cleared, not mapped. The renderer only
+        // stages assets it can see on disk (is_file), so a dead path travelled all
+        // the way into the composition and blew up the whole render on
+        // `staticFile() does not support absolute paths` — one missing picture
+        // taking the entire clip with it. Leaving the bare id behind is no better:
+        // ImageReveal staticFile()s any non-http value, so that throws too.
+        //
+        // Emptied, ImageReveal skips staticFile() and renders an empty <Img>: that
+        // ONE layer is blank, and every other scene still renders. Blank rather
+        // than absent because dropping the layer here is after the bare-scene
+        // passes, so it could leave the scene with nothing at all.
+        // ponytail: no placeholder art — the honest fix is to re-supply the image.
         $map = static function (&$node) use (&$map, $byId, $disk) {
             if (is_array($node)) {
                 foreach ($node as &$v) {
@@ -229,7 +247,8 @@ class RenderJob implements ShouldQueue
                 }
                 unset($v);
             } elseif (is_string($node) && isset($byId[$node])) {
-                $node = $disk->path($byId[$node]);
+                $caminho = $disk->path($byId[$node]);
+                $node = is_file($caminho) ? $caminho : '';
             }
         };
 

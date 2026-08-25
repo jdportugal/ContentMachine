@@ -175,6 +175,15 @@ class Noticias extends Component
 
         $resumo = Cache::get(AgregarConteudoJob::key($this->agregacaoToken));
         if ($resumo === null) {
+            // No summary AND no run holding the slot: the worker died without
+            // reaching failed() (killed, or the machine went down). Say so
+            // instead of polling forever on a run that no longer exists.
+            if (AgregarConteudoJob::emCurso() !== $this->agregacaoToken) {
+                $this->aAgregar = false;
+                $this->avisoRelatorio = 'The collection stopped before finishing — the worker is no longer running it. '
+                    .'Start the worker («php artisan queue:work») and collect again.';
+            }
+
             return;
         }
 
@@ -183,7 +192,8 @@ class Noticias extends Component
         // watching the same run still needs to read it.
 
         if (! empty($resumo['erro'])) {
-            $this->avisoRelatorio = 'The collection failed. Check that the worker is running («php artisan queue:work»).';
+            $this->avisoRelatorio = $resumo['motivo']
+                ?? 'The collection failed. Check that the worker is running («php artisan queue:work»).';
 
             return;
         }
@@ -207,9 +217,11 @@ class Noticias extends Component
         $this->relatorioToken = (string) Str::uuid();
         $this->aGerar = true;
         $this->avisoRelatorio = null;
+        // No collecting happens here — the report is written from what is already
+        // in the vault. Saying otherwise made it look like it re-scanned channels.
         $this->dispatch('loader-show', message: $this->ehDicas()
             ? 'Mining the material for tips…'
-            : 'Collecting and writing the report…');
+            : 'Writing the report from what was collected…');
 
         GerarRelatorioJob::dispatch(
             $this->modoRelatorio,
@@ -239,7 +251,8 @@ class Noticias extends Component
         Cache::forget(GerarRelatorioJob::key($this->relatorioToken));
 
         if (! empty($r['erro'])) {
-            $this->avisoRelatorio = 'The generation failed. Check that the worker is running («php artisan queue:work») and try again.';
+            $this->avisoRelatorio = $r['motivo']
+                ?? 'The generation failed. Check that the worker is running («php artisan queue:work») and try again.';
 
             return;
         }

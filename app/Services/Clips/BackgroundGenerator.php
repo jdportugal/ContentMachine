@@ -31,7 +31,7 @@ class BackgroundGenerator
      */
     public function generate(string $description, ?string $keepSlug = null): array
     {
-        $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600)]);
+        $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true]);
         $data = $this->extractJson((string) ($envelope['result'] ?? ''));
 
         $slug = $keepSlug !== null ? $this->normalizeSlug($keepSlug) : $this->uniqueSlug((string) ($data['slug'] ?? ''));

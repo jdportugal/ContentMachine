@@ -71,4 +71,27 @@ class ImageRequestsTest extends TestCase
         $this->assertSame('img_capture', $out['scenes'][1]['layers'][0]['params']['src']); // dup site too
         $this->assertArrayNotHasKey('src', $out['scenes'][2]['layers'][0]['params']);       // generate untouched
     }
+
+    public function test_a_still_and_a_scroll_of_the_same_page_are_separate_suggestions(): void
+    {
+        $plan = ['scenes' => [
+            ['layers' => [['type' => 'image-reveal', 'params' => ['site' => 'https://example.com']]]],
+            ['layers' => [['type' => 'image-reveal', 'params' => ['site' => 'https://example.com', 'site_still' => true]]]],
+        ]];
+
+        $requests = ImageRequests::collect($plan);
+
+        $this->assertCount(2, $requests);
+        $this->assertFalse($requests[0]['still']);
+        $this->assertTrue($requests[1]['still']);
+        $this->assertNotSame($requests[0]['key'], $requests[1]['key']); // one image cannot serve both
+
+        // A plain site keeps the hash it has always had, so clips already waiting
+        // in review still match their suggestions after this change.
+        $this->assertSame(ImageRequests::key('site:https://example.com'), $requests[0]['key']);
+
+        $out = ImageRequests::applyUploads($plan, [$requests[1]['key'] => 'img_shot']);
+        $this->assertArrayNotHasKey('src', $out['scenes'][0]['layers'][0]['params']);
+        $this->assertSame('img_shot', $out['scenes'][1]['layers'][0]['params']['src']);
+    }
 }
