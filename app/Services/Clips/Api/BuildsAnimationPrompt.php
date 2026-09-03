@@ -25,7 +25,7 @@ trait BuildsAnimationPrompt
      * @param  string  $instructions  extra direction for THIS clip only (the
      *                                project's own manual is read from disk)
      */
-    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true, string $instructions = ''): string
+    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true, string $instructions = '', bool $landscape = false): string
     {
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
         $language = ProjectLanguage::name();
@@ -114,6 +114,15 @@ trait BuildsAnimationPrompt
             ? 'If a scene has no real visual, give it an image — never a lone big word, never a bare caption-only frame.'
             : 'If a scene has no chart/data visual, build a card or bullet-list from the spoken point — never a lone big word, and NEVER a bare caption-only frame.';
 
+        // Layout direction follows the actual composition. An overlay clip is now
+        // planned at the SOURCE video's aspect ratio, so a landscape upload must not
+        // be told to stack everything vertically (tall stacks in a wide frame).
+        $formatRule = $landscape
+            ? 'LANDSCAPE FORMAT (wide): prefer side-by-side, NOT tall stacks. Diagrams in '
+              .'"horizontal" layout (avoid "vertical"). Use the height sparingly — keep blocks short and wide.'
+            : 'VERTICAL FORMAT (9:16 portrait): prefer stacking top/bottom, NOT side by side. Diagrams in '
+              .'"vertical" or "cycle" layout (avoid "horizontal"). Use the width for LARGE TEXT.';
+
         // Direction for THIS clip alone. It goes LAST, after the project's style
         // manual, and is allowed to override it: asking for something different
         // on one video is the entire point of writing it.
@@ -186,8 +195,7 @@ a data point that the RESEARCH confirms) — it does not describe what is said.
   is being spoken, however interesting they may be.
 - RELIABLE DATA: use ONLY numbers/facts that come from the RESEARCH. NEVER invent values. If there is
   no reliable numeric data, use qualitative visualizations (bullet-list, comparison, diagram, card).
-- VERTICAL FORMAT (9:16 portrait): prefer stacking top/bottom, NOT side by side. Diagrams in
-  "vertical" or "cycle" layout (avoid "horizontal"). Use the width for LARGE TEXT.
+- {$formatRule}
 - SHORT text everywhere: labels ≤ 3 words, "comparison" points ≤ 6 words (at most 4 per side).
 - Use "punchWord" (1–3 words) for occasional emphasis. The word MUST be EXACTLY a
   word/expression from the SPOKEN TEXT (copied from the transcript), never invented or paraphrased.
@@ -248,7 +256,12 @@ PROMPT;
 
     protected function userPrompt(array $transcript, string $mode, float $duration, array $facts = [], array $images = []): string
     {
-        $words = json_encode($transcript['words'] ?? [], JSON_UNESCAPED_UNICODE);
+        // Compact [start, end, word] triples: the verbose per-word objects overflow
+        // the model's context on long videos (~40 min hit gpt-4o's 128k limit).
+        $words = json_encode(array_map(
+            fn ($w) => [round((float) ($w['start'] ?? 0), 2), round((float) ($w['end'] ?? 0), 2), (string) ($w['word'] ?? '')],
+            $transcript['words'] ?? [],
+        ), JSON_UNESCAPED_UNICODE);
         $language = ProjectLanguage::name();
         $text = $transcript['text'] ?? '';
         $research = ! empty($facts)
@@ -265,7 +278,7 @@ PROMPT;
         return "Project language: {$language}. Write ALL visible text in this language (punchWord excepted — copy it from the spoken text).\n"
             ."Total duration: {$duration}s. Mode: {$mode}.\n"
             ."Spoken text: {$text}\n"
-            ."Words with timestamps (for karaoke and rhythm): {$words}\n\n"
+            ."Words with timestamps as [start, end, word] triples (for karaoke and rhythm): {$words}\n\n"
             ."=== RESEARCH (use this real data in the visualizations) ===\n{$research}\n"
             .$imagesBlock
             ."\nReturn the SCENES plan in JSON. Classify the clip TYPE first and keep each "

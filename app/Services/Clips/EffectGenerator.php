@@ -5,6 +5,7 @@ namespace App\Services\Clips;
 use App\Services\Clips\Api\RunsClaudeCli;
 use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\Projects\ProjectLanguage;
 use RuntimeException;
 
 /**
@@ -48,7 +49,7 @@ class EffectGenerator
             $this->systemPrompt($canvas, $siteCapture),
             ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true]
         );
-        $data = $this->extractJson((string) ($envelope['result'] ?? ''));
+        $data = $this->extractJson((string) ($envelope['result'] ?? ''), $envelope);
 
         $slug = $keepSlug !== null
             ? $this->normalizeSlug($keepSlug, allowBuiltin: true)  // editing / built-in override — keep the given slug
@@ -150,7 +151,7 @@ class EffectGenerator
      * brand colours/fonts instead of reading the tokens, or that isn't a
      * default-exported primitive importing from style-tokens.
      */
-    private function guard(string $tsx): void
+    public function guard(string $tsx): void
     {
         $fail = fn (string $why) => throw new RuntimeException("Effect rejected: {$why}");
 
@@ -383,9 +384,7 @@ class EffectGenerator
     /** @param array{width?:int,height?:int,transparent?:bool,format?:string} $canvas */
     private function systemPrompt(array $canvas = [], ?string $siteCapture = null): string
     {
-        $tokens = @file_get_contents(base_path('remotion/src/style-tokens.ts')) ?: '';
-        $design = $this->design->readOrTemplate();
-        $canvasRules = $this->canvasRules($canvas).$this->imageRules().$this->siteRules($siteCapture);
+        $contract = $this->componentContract($canvas, $siteCapture);
 
         return <<<PROMPT
 You are a senior Remotion + React engineer for the Brand Machine studio. You write ONE new
@@ -402,6 +401,32 @@ Return a SINGLE JSON object (no markdown, no prose) with EXACTLY these keys:
   "sampleParams": an object with representative params for the preview (or {}),
   "tsx":         the FULL component source (a string)
 }
+
+{$contract}
+PROMPT;
+    }
+
+    /**
+     * Everything a writer of one of these components must obey: the PrimitiveProps
+     * contract, the frame rules and the design-system law, plus the live tokens and
+     * brand guide. Public and separate from systemPrompt() because Free SFX writes
+     * the SAME kind of component under a different JSON envelope — one copy of the
+     * contract, so the two can never drift apart.
+     *
+     * @param  array{width?:int,height?:int,transparent?:bool,format?:string}  $canvas
+     */
+    public function componentContract(array $canvas = [], ?string $siteCapture = null): string
+    {
+        $tokens = @file_get_contents(base_path('remotion/src/style-tokens.ts')) ?: '';
+        $design = $this->design->readOrTemplate();
+        $canvasRules = $this->canvasRules($canvas).$this->imageRules().$this->siteRules($siteCapture);
+        $language = ProjectLanguage::name();
+
+        return <<<PROMPT
+# LANGUAGE
+Every word a viewer or the studio reads — the sample/placeholder text baked into
+the component, the label, the description — is written in {$language}, the
+PROJECT's language, whatever language this request is written in.
 
 # THE COMPONENT CONTRACT (must match EXACTLY)
 - It is a file at remotion/src/effects/<slug>.tsx.
@@ -474,8 +499,17 @@ PROMPT;
             .'compiling component that uses ONLY the design-system tokens for colours and fonts.';
     }
 
-    /** Extract a JSON object from model output that may be fenced or prefixed. */
-    private function extractJson(string $content): array
+    /**
+     * Extract a JSON object from model output that may be fenced or prefixed.
+     *
+     * `$envelope` is the provider envelope the text came out of — passed only so a
+     * failure can name WHO answered and why they stopped. The chain falls through
+     * silently (a rate-limited Claude hands the job to GPT or DeepSeek), so without
+     * it every provider's bad answer read as the same sentence.
+     *
+     * @param  array<string,mixed>  $envelope
+     */
+    public function extractJson(string $content, array $envelope = []): array
     {
         $content = trim($content);
         if (preg_match('/```(?:json)?\s*(.*?)```/s', $content, $m)) {
@@ -492,13 +526,25 @@ PROMPT;
             // and a chatty preamble all read as this one sentence. The tail is the
             // tell — a cut-off response ends mid-token.
             throw new RuntimeException(sprintf(
-                'The model did not return valid JSON (%s, %d chars). It ended with: %s',
+                'The model did not return valid JSON (%s, %d chars)%s. It ended with: %s',
                 json_last_error_msg(),
                 strlen($content),
+                self::procedencia($envelope),
                 $content === '' ? '(nothing)' : '…'.substr($content, -180)
             ));
         }
 
         return $data;
+    }
+
+    /** " — from claude-cli, stop_reason=max_tokens", or '' when nothing is known. */
+    private static function procedencia(array $envelope): string
+    {
+        $bits = array_filter([
+            ($p = (string) ($envelope['_provider'] ?? '')) !== '' ? 'from '.$p : null,
+            ($s = (string) ($envelope['stop_reason'] ?? '')) !== '' ? 'stop_reason='.$s : null,
+        ]);
+
+        return $bits ? ' — '.implode(', ', $bits) : '';
     }
 }

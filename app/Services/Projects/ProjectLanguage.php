@@ -19,8 +19,17 @@ final class ProjectLanguage
     /** Prompt-friendly name of the active project's language. */
     public static function name(): string
     {
+        return self::NAMES[self::code()] ?? self::code();
+    }
+
+    /**
+     * Two-letter code of the active project's language — what tools that take a
+     * locale want (Whisper's language hint, a form's default).
+     */
+    public static function code(): string
+    {
         $code = strtolower(substr((string) app()->getLocale(), 0, 2));
 
-        return self::NAMES[$code] ?? ($code !== '' ? $code : 'English');
+        return $code !== '' ? $code : 'en';
     }
 }

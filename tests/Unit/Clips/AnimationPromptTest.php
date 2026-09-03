@@ -17,6 +17,11 @@ class AnimationPromptTest extends TestCase
             {
                 return $this->systemPrompt($mode, $overlay, $allowed, true, $instructions);
             }
+
+            public function user(array $transcript): string
+            {
+                return $this->userPrompt($transcript, 'dense', (float) ($transcript['duration'] ?? 0.0));
+            }
         };
     }
 
@@ -37,6 +42,25 @@ class AnimationPromptTest extends TestCase
             strpos($prompt, 'INSTRUCTIONS FOR THIS CLIP'),
             'the clip block must come after the project style manual',
         );
+    }
+
+    /**
+     * Word timings go in as compact [start, end, word] triples — the verbose
+     * per-word objects overflowed the model's context on long videos.
+     */
+    public function test_word_timestamps_are_compact_triples(): void
+    {
+        $prompt = $this->builder()->user([
+            'duration' => 1.0,
+            'text' => 'hello world',
+            'words' => [
+                ['word' => 'hello', 'start' => 0.101, 'end' => 0.5],
+                ['word' => 'world', 'start' => 0.5, 'end' => 1.0],
+            ],
+        ]);
+
+        $this->assertStringContainsString('[[0.1,0.5,"hello"],[0.5,1,"world"]]', $prompt);
+        $this->assertStringNotContainsString('"word":', $prompt);
     }
 
     public function test_no_instructions_means_no_block_at_all(): void

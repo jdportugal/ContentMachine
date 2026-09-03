@@ -191,4 +191,50 @@ class ClipLlmChainTest extends TestCase
 
         return (bool) $m->invoke($r);
     }
+
+    /**
+     * The fallback providers used to send no output ceiling at all, so they ran on
+     * THEIR default completion cap — a couple of thousand tokens, nowhere near a
+     * whole TSX component. Raising CLIPS_MAX_TOKENS, which is what the truncation
+     * error tells you to do, changed nothing for them.
+     */
+    public function test_the_fallback_providers_are_sent_the_configured_output_ceiling(): void
+    {
+        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000]);
+        Http::fake(['api.openai.com/*' => Http::response(['choices' => [['message' => ['content' => 'ok']]]])]);
+
+        $this->runner()->run();
+
+        Http::assertSent(fn ($r) => ($r->data()['max_tokens'] ?? null) === 24000);
+    }
+
+    /** A cut-off answer must fail as a truncation, naming the knob — not as bad JSON downstream. */
+    public function test_a_truncated_gpt_answer_names_the_ceiling(): void
+    {
+        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000]);
+        Http::fake(['api.openai.com/*' => Http::response([
+            'choices' => [['finish_reason' => 'length', 'message' => ['content' => '{"tsx":"half a comp']]],
+        ])]);
+
+        $this->expectExceptionMessageMatches('/truncated.*max_tokens=24000.*CLIPS_MAX_TOKENS/s');
+        $this->runner()->run();
+    }
+
+    /**
+     * Attribution: the chain falls through silently, so an unparseable answer has
+     * to say who actually wrote it.
+     */
+    public function test_the_envelope_records_which_provider_answered(): void
+    {
+        config(['services.anthropic.key' => 'sk-ant', 'services.openai.key' => 'sk-oai']);
+        Http::fake([
+            'api.anthropic.com/*' => Http::response([], 500),
+            'api.openai.com/*' => Http::response(['choices' => [['finish_reason' => 'stop', 'message' => ['content' => 'GPT']]]]),
+        ]);
+
+        $envelope = $this->runner()->run();
+
+        $this->assertSame('openai', $envelope['_provider']);
+        $this->assertSame('stop', $envelope['stop_reason']);
+    }
 }

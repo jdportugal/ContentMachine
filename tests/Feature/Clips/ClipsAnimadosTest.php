@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Clips;
 
+use App\Jobs\Clips\FillChosenVisualsJob;
 use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RenderJob;
 use App\Jobs\Clips\TranscribeJob;
@@ -12,6 +13,7 @@ use App\Services\Clips\Fake\FakeAnimationPlanner;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Shorts\LocalVideoEngine;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -268,6 +270,175 @@ class ClipsAnimadosTest extends TestCase
         $p->refresh();
         $this->assertSame('kinetic-text', $p->plan['scenes'][0]['layers'][0]['type']);
         $this->assertContains($p->plan['scenes'][0]['present'], ['split', 'animation'], 'the scene must present its new animation, not plain video');
+    }
+
+    /**
+     * Swapping an image animation for a text one must carry the scene's text to
+     * the key the NEW primitive reads. image-reveal keeps its text in
+     * params.caption; underline-sweep reads layer.text. Retyping the layer in
+     * place left textTarget on "caption", so the text was saved where the new
+     * effect never looked and it rendered empty — its underline alone, a dash in
+     * the middle of the frame.
+     */
+    public function test_swapping_an_image_animation_moves_its_text_to_the_new_primitive(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'layers' => [
+                    ['type' => 'image-reveal', 'text' => '', 'params' => ['src' => 'img_abc', 'caption' => 'The old caption', 'variant' => 'rise']],
+                ]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('mudarAnimacao', 0, 'underline-sweep')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $layer = $p->refresh()->plan['scenes'][0]['layers'][0];
+
+        $this->assertSame('underline-sweep', $layer['type']);
+        $this->assertSame('The old caption', $layer['text'], 'the text must follow the swap to the key the new primitive reads');
+        $this->assertArrayNotHasKey('src', $layer['params'] ?? [], 'a text primitive must not keep the image left by the old one');
+        $this->assertArrayNotHasKey('caption', $layer['params'] ?? [], 'the old primitive\'s params must not survive the swap');
+    }
+
+    /** Swapping between two image-showing primitives keeps the picture. */
+    public function test_swapping_to_image_reveal_keeps_the_attached_image(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_abc', 'path' => 'clips/uploads/a.png', 'description' => '']],
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'layers' => [
+                    ['type' => 'image-reveal', 'text' => '', 'params' => ['src' => 'img_abc', 'caption' => 'A caption', 'variant' => 'rise']],
+                ]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('mudarAnimacao', 0, 'image-reveal')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $layer = $p->refresh()->plan['scenes'][0]['layers'][0];
+
+        $this->assertSame('image-reveal', $layer['type']);
+        $this->assertSame('img_abc', $layer['params']['src'] ?? null);
+    }
+
+    /**
+     * The dash. Swapping a scene to a data primitive leaves it with the type but
+     * no items/bars/nodes — only the planner writes those, and the scene editor
+     * has no field for them, so the primitive drew its em-dash placeholder. The
+     * save must hand the scene off to be written from what is spoken in it.
+     */
+    public function test_swapping_to_a_data_animation_queues_it_to_be_written(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_abc', 'path' => 'clips/uploads/a.png', 'description' => '']],
+            'transcript' => ['duration' => 3.0, 'text' => 'Hundreds of jobs go and partner pay falls thirteen per cent.', 'words' => []],
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'layers' => [
+                    ['type' => 'image-reveal', 'text' => '', 'params' => ['src' => 'img_abc', 'caption' => 'A caption', 'variant' => 'rise']],
+                ]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('mudarAnimacao', 0, 'timeline')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $layer = $p->refresh()->plan['scenes'][0]['layers'][0];
+        $this->assertSame('timeline', $layer['type']);
+        // The old effect's params must not ride along — they are what made the
+        // primitive look "filled" while holding none of its own data.
+        $this->assertArrayNotHasKey('src', $layer['params'] ?? []);
+        $this->assertArrayNotHasKey('variant', $layer['params'] ?? []);
+
+        Queue::assertPushed(
+            FillChosenVisualsJob::class,
+            fn ($job) => $job->projectId === $p->id && ($job->typeByScene[0] ?? null) === 'timeline',
+        );
+        Queue::assertNotPushed(RenderJob::class); // the fill job renders once it has the data
+    }
+
+    /** A scene the editor CAN feed renders straight away — no planner round trip. */
+    public function test_swapping_to_a_text_animation_renders_without_replanning(): void
+    {
+        Queue::fake();
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_DONE,
+            'images' => [['id' => 'img_abc', 'path' => 'clips/uploads/a.png', 'description' => '']],
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'layers' => [
+                    ['type' => 'image-reveal', 'text' => '', 'params' => ['src' => 'img_abc', 'caption' => 'The old caption', 'variant' => 'rise']],
+                ]],
+            ]],
+        ]);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('editarClip', $p->id)
+            ->call('mudarAnimacao', 0, 'underline-sweep')
+            ->call('guardarPlano')
+            ->assertHasNoErrors();
+
+        $layer = $p->refresh()->plan['scenes'][0]['layers'][0];
+        $this->assertSame('underline-sweep', $layer['type']);
+        $this->assertSame('The old caption', $layer['text'], 'the text follows the swap to the key the new primitive reads');
+
+        Queue::assertPushed(RenderJob::class);
+        Queue::assertNotPushed(FillChosenVisualsJob::class);
+    }
+
+    /**
+     * With no LLM configured SceneTextVisuals writes nothing, so the chosen
+     * primitive stays empty. It must be dropped rather than rendered — an empty
+     * timeline IS the dash — and the clip must still go on to render.
+     */
+    public function test_the_fill_job_drops_what_it_could_not_write_and_still_renders(): void
+    {
+        Queue::fake();
+        config(['contentmachine.clips.driver' => 'fake']); // no LLM → no layers written
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_PLANNING,
+            'transcript' => ['duration' => 3.0, 'text' => 'Some spoken words.', 'words' => []],
+            'plan' => ['duration' => 3.0, 'mode' => 'dense', 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+                ['start' => 0, 'end' => 3, 'background' => 'ink', 'transitionIn' => 'cut', 'karaoke' => true, 'punchWord' => null, 'layers' => [
+                    ['type' => 'timeline', 'text' => '', 'params' => []],
+                ]],
+            ]],
+        ]);
+
+        app()->call([new FillChosenVisualsJob($p->id, [0 => 'timeline']), 'handle']);
+
+        $types = array_map(fn ($l) => $l['type'], $p->refresh()->plan['scenes'][0]['layers'] ?? []);
+        $this->assertNotContains('timeline', $types, 'an unwritten timeline renders the dash — it must be dropped');
+        Queue::assertPushed(RenderJob::class);
     }
 
     public function test_changing_a_scene_animation_swaps_the_layer_effect(): void
@@ -634,6 +805,152 @@ class ClipsAnimadosTest extends TestCase
         $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
 
         $this->assertSame('Dark and cinematic. No charts.', $planner->vistas['instructions'] ?? null);
+    }
+
+    /** "Reduce the number of images" is offered on BOTH create forms and rides on the clip. */
+    public function test_reduce_images_is_stored_from_both_create_forms(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('novoClip')
+            ->call('escolherTipo', 'animation')
+            ->set('text', 'Olá mundo Brand Machine')
+            ->set('poucasImagens', true)
+            ->call('submitAnimation')
+            ->assertHasNoErrors();
+
+        $this->assertTrue($this->store()->all()->firstWhere('type', 'animation')->meta['fewer_images']);
+
+        Livewire::test(ClipsAnimados::class)
+            ->call('novoClip')
+            ->call('escolherTipo', 'overlay')
+            ->set('video', UploadedFile::fake()->create('clip.mp4', 64, 'video/mp4'))
+            ->set('poucasImagens', true)
+            ->call('submitOverlay')
+            ->assertHasNoErrors();
+
+        $this->assertTrue($this->store()->all()->firstWhere('type', 'overlay')->meta['fewer_images']);
+    }
+
+    /** The flag halves the clip's image budget — and caps overlay clips, which are otherwise uncapped. */
+    public function test_reduce_images_halves_the_image_budget(): void
+    {
+        Queue::fake();
+        config(['contentmachine.clips.image_every_seconds' => 10, 'contentmachine.clips.image_max' => 8]);
+
+        $planner = new class extends FakeAnimationPlanner
+        {
+            public function plan(array $transcript, string $mode, array $options = []): array
+            {
+                $plan = parent::plan($transcript, $mode, $options);
+                $plan['duration'] = 60.0;
+                $plan['scenes'] = [];
+                for ($i = 0; $i < 6; $i++) {
+                    $plan['scenes'][] = [
+                        'start' => $i * 10.0, 'end' => ($i + 1) * 10.0, 'transitionIn' => 'cut',
+                        'layers' => [['type' => 'image-reveal', 'params' => ['generate' => 'a laptop on a desk '.$i]]],
+                    ];
+                }
+
+                return $plan;
+            }
+        };
+        $this->app->instance(AnimationPlanner::class, $planner);
+
+        $transcript = ['duration' => 60.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []];
+
+        $full = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'transcript' => $transcript,
+        ]);
+        $this->app->call([new PlanAnimationsJob($full->id), 'handle']);
+
+        $few = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio', 'transcript' => $transcript,
+            'meta' => ['fewer_images' => true],
+        ]);
+        $this->app->call([new PlanAnimationsJob($few->id), 'handle']);
+
+        $contar = fn (ClipRecord $p) => collect($p->refresh()->plan['scenes'] ?? [])
+            ->sum(fn (array $s) => collect($s['layers'] ?? [])
+                ->filter(fn (array $l) => ! empty($l['params']['generate']) && empty($l['params']['src']))
+                ->count());
+
+        $this->assertSame(6, $contar($full), '60s / 10s per image = 6');
+        $this->assertSame(3, $contar($few), 'halved');
+    }
+
+    /**
+     * An overlay clip is composed AROUND the uploaded video, so the composition must
+     * take the source's aspect ratio — a fixed 9:16 turned a landscape upload into a
+     * cropped portrait. Oversized sources are scaled down to the configured long edge.
+     */
+    public function test_an_overlay_clip_is_planned_at_the_source_videos_aspect_ratio(): void
+    {
+        Queue::fake();
+
+        $planner = new class extends FakeAnimationPlanner
+        {
+            public array $vistas = [];
+
+            public function plan(array $transcript, string $mode, array $options = []): array
+            {
+                $this->vistas = $options;
+
+                return parent::plan($transcript, $mode, $options);
+            }
+        };
+        $this->app->instance(AnimationPlanner::class, $planner);
+
+        $this->app->instance(LocalVideoEngine::class, new class extends LocalVideoEngine
+        {
+            public function probe(string $path): array
+            {
+                return ['duration' => 2.0, 'width' => 3840, 'height' => 2160, 'has_audio' => true];
+            }
+        });
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_OVERLAY, 'input_kind' => 'video',
+            'source_path' => 'clips/uploads/landscape.mp4',
+            'transcript' => ['duration' => 2.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []],
+        ]);
+
+        $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
+
+        // 3840x2160 capped at the configured long edge (1920) → 1920x1080, both even.
+        $this->assertSame(1920, $planner->vistas['width'] ?? null);
+        $this->assertSame(1080, $planner->vistas['height'] ?? null);
+        $this->assertSame(1920, $p->refresh()->plan['width'] ?? null);
+    }
+
+    /** No source video → the configured portrait frame, as before. */
+    public function test_an_animation_clip_keeps_the_configured_frame(): void
+    {
+        Queue::fake();
+
+        $planner = new class extends FakeAnimationPlanner
+        {
+            public array $vistas = [];
+
+            public function plan(array $transcript, string $mode, array $options = []): array
+            {
+                $this->vistas = $options;
+
+                return parent::plan($transcript, $mode, $options);
+            }
+        };
+        $this->app->instance(AnimationPlanner::class, $planner);
+
+        $p = $this->store()->create([
+            'type' => ClipRecord::TYPE_ANIMATION, 'input_kind' => 'audio',
+            'transcript' => ['duration' => 2.0, 'text' => 'A história da imprensa', 'words' => [], 'segments' => []],
+        ]);
+
+        $this->app->call([new PlanAnimationsJob($p->id), 'handle']);
+
+        $this->assertSame(config('contentmachine.clips.width'), $planner->vistas['width'] ?? null);
+        $this->assertSame(config('contentmachine.clips.height'), $planner->vistas['height'] ?? null);
     }
 
     /** Each image suggestion is upload / AI image / no image (a text scene instead). */

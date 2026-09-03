@@ -59,3 +59,6 @@ Thumbs.db
 
 # Local Whisper virtualenv (runtime artifact, platform-specific — never commit)
 /storage/whisper-venv
+
+# Fonts fetched for burning subtitles (cache, rebuilt on demand)
+/storage/app/shorts/fonts

@@ -7,16 +7,22 @@ use App\Services\Clips\Api\SceneTextVisuals;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Costs\CostLedger;
+use App\Services\Publicacoes\Rendering\KieClient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Second half of planning: the user has (optionally) uploaded images for the
@@ -38,7 +44,7 @@ class FinalizeClipPlanJob implements ShouldQueue
     public function handle(ClipStore $store): void
     {
         $this->activateProject();
-        app(\App\Services\Costs\CostLedger::class)->contexto('clip', $this->projectId);
+        app(CostLedger::class)->contexto('clip', $this->projectId);
         $p = $store->findOrFail($this->projectId);
 
         try {
@@ -163,7 +169,7 @@ class FinalizeClipPlanJob implements ShouldQueue
                     unset($l);
                 }
                 $p->update(['plan' => $plan]);
-                RenderJob::dispatch($p->id);
+                $this->renderizar($p);
 
                 return;
             }
@@ -198,7 +204,7 @@ class FinalizeClipPlanJob implements ShouldQueue
 
             $p->update(['plan' => $plan]);
 
-            RenderJob::dispatch($p->id);
+            $this->renderizar($p);
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
@@ -245,7 +251,7 @@ class FinalizeClipPlanJob implements ShouldQueue
                 return null;
             }
 
-            $kie = app(\App\Services\Publicacoes\Rendering\KieClient::class);
+            $kie = app(KieClient::class);
             $kie->passo = 'clips_imagens';
             $url = $kie->generateVideo(
                 (string) ($req['video_prompt'] ?? $req['label'] ?? ''),
@@ -253,7 +259,7 @@ class FinalizeClipPlanJob implements ShouldQueue
             );
 
             $rel = 'clips/uploads/intro-video-'.$p->id.'.mp4';
-            $disk->put($rel, \Illuminate\Support\Facades\Http::timeout(120)->get($url)->body());
+            $disk->put($rel, Http::timeout(120)->get($url)->body());
 
             $descricao = trim((string) ($req['label'] ?? 'Animated intro'));
             $entry = [
@@ -267,18 +273,35 @@ class FinalizeClipPlanJob implements ShouldQueue
             $p->update(['images' => array_merge($p->images ?? [], [$entry])]);
 
             // The reusable asset: the next short can match it by name + description.
-            app(\App\Services\Clips\ImageLibrary::class)->add(
+            app(ImageLibrary::class)->add(
                 $disk->path($rel),
-                \Illuminate\Support\Str::slug(\Illuminate\Support\Str::limit($descricao, 60, '')).'.mp4',
+                Str::slug(Str::limit($descricao, 60, '')).'.mp4',
                 'Animated video: '.$descricao
                     .(! empty($req['imagem_prompt']) ? ' — start frame: '.$req['imagem_prompt'] : ''),
             );
 
             return $entry['id'];
         } catch (\Throwable $e) {
-            \Illuminate\Support\Facades\Log::warning('Intro video generation failed: '.$e->getMessage());
+            Log::warning('Intro video generation failed: '.$e->getMessage());
 
             return null;
         }
+    }
+
+    /**
+     * Last step before pixels. A "Free SFX" clip detours through
+     * GenerateFreeSfxJob, which writes bespoke components for its scenes and
+     * dispatches the render itself — it does so even when generation fails, so
+     * this is never a dead end.
+     */
+    private function renderizar(ClipRecord $p): void
+    {
+        if (! empty($p->meta['free_sfx'])) {
+            GenerateFreeSfxJob::dispatch($p->id);
+
+            return;
+        }
+
+        RenderJob::dispatch($p->id);
     }
 }

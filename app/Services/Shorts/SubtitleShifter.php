@@ -105,19 +105,47 @@ class SubtitleShifter
                 continue;
             }
 
+            $span = max(0.0, $end - $start);
+
+            // Words OUTSIDE the window are dropped, not clamped. Clamping them was
+            // the bug behind "every caption on the first frame": a cut landing in
+            // the middle of a segment kept all the words spoken before the in-point
+            // and pulled each of them back to 0, so they all fired on frame one.
             $words = [];
+            $descartou = false;
             foreach (($seg['words'] ?? []) as $word) {
+                $wStart = self::parseTimeToSeconds($word['start'] ?? 0);
+                $wEnd = self::parseTimeToSeconds($word['end'] ?? 0);
+
+                if ($wEnd <= $start || $wStart >= $end) {
+                    $descartou = true;
+
+                    continue;
+                }
+
                 $words[] = [
                     'word' => $word['word'] ?? '',
-                    'start' => max(0.0, self::parseTimeToSeconds($word['start'] ?? 0) - $start),
-                    'end' => max(0.0, self::parseTimeToSeconds($word['end'] ?? 0) - $start),
+                    'start' => min($span, max(0.0, $wStart - $start)),
+                    'end' => min($span, max(0.0, $wEnd - $start)),
                 ];
             }
 
+            // The words that survived are the ones actually spoken in the clip, so
+            // the text has to say the same — alignWords keeps real timings only
+            // while text and words agree, and would otherwise re-space the whole
+            // line evenly and lose them.
+            $texto = trim((string) ($seg['text'] ?? ''));
+            if ($descartou && $words !== []) {
+                $texto = trim(implode(' ', array_map(fn ($w) => trim((string) $w['word']), $words)));
+            }
+            if ($texto === '') {
+                continue;
+            }
+
             $out[] = [
-                'start' => max(0.0, $segStart - $start),
-                'end' => max(0.0, $segEnd - $start),
-                'text' => trim((string) ($seg['text'] ?? '')),
+                'start' => min($span, max(0.0, $segStart - $start)),
+                'end' => min($span, max(0.0, $segEnd - $start)),
+                'text' => $texto,
                 'words' => $words,
             ];
         }

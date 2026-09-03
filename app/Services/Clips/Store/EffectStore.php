@@ -26,8 +26,14 @@ class EffectStore
         return $this->dir().'/'.$id.'.json';
     }
 
-    /** @return Collection<int,EffectRecord> */
-    public function all(): Collection
+    /**
+     * Every record on disk, INCLUDING the clip-scoped ones written by Free SFX.
+     * Only the registry (active()) and uniqueness checks want those — the SFX page
+     * and everything else wants all(), which leaves them out.
+     *
+     * @return Collection<int,EffectRecord>
+     */
+    public function records(): Collection
     {
         $dir = $this->dir();
         if (! is_dir($dir)) {
@@ -42,6 +48,27 @@ class EffectStore
             ->values();
     }
 
+    /**
+     * The SFX LIBRARY: the effects a human made and manages. A Free-SFX component
+     * belongs to one clip, not to the library, so it never shows up here — but it
+     * still has to reach the renderer, which is why active() reads records().
+     *
+     * @return Collection<int,EffectRecord>
+     */
+    public function all(): Collection
+    {
+        return $this->records()->reject(fn (EffectRecord $r) => (string) $r->get('clip_id', '') !== '')->values();
+    }
+
+    /** Free-SFX components belonging to ONE clip, in the order they were made. @return Collection<int,EffectRecord> */
+    public function forClip(string $clipId): Collection
+    {
+        return $this->records()
+            ->filter(fn (EffectRecord $r) => (string) $r->get('clip_id', '') === $clipId)
+            ->sortBy(fn (EffectRecord $r) => (string) $r->get('created_at', ''))
+            ->values();
+    }
+
     public function find(string $id): ?EffectRecord
     {
         $file = $this->path($id);
@@ -52,7 +79,7 @@ class EffectStore
     /** @return Collection<int,EffectRecord> status = active */
     public function active(): Collection
     {
-        return $this->all()->filter(fn (EffectRecord $r) => $r->status === EffectRecord::STATUS_ACTIVE)->values();
+        return $this->records()->filter(fn (EffectRecord $r) => $r->status === EffectRecord::STATUS_ACTIVE)->values();
     }
 
     /** @return Collection<int,EffectRecord> active AND allowed (enabled) */
@@ -63,7 +90,7 @@ class EffectStore
 
     public function slugExists(string $slug): bool
     {
-        return $this->all()->contains(fn (EffectRecord $r) => $r->slug === $slug);
+        return $this->records()->contains(fn (EffectRecord $r) => $r->slug === $slug);
     }
 
     /** @param array<string,mixed> $attrs */

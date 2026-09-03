@@ -72,6 +72,13 @@
                         @if (($d['kind'] === 'builtin') && $d['override'] === 'active')
                             <p class="font-mono text-[0.55rem] text-teal mt-2">● you have a custom version of this built-in</p>
                         @endif
+                        @if (!empty($d['prompt']))
+                            <div class="mt-3 flex items-start gap-2">
+                                <p class="text-ink-faint text-sm italic flex-1 min-w-0">“{{ $d['prompt'] }}”</p>
+                                <x-copy-btn :text="$d['prompt']" label="⧉ copy"
+                                            class="font-mono text-[0.6rem] px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition shrink-0" />
+                            </div>
+                        @endif
                     </div>
 
                     <div class="flex flex-wrap gap-2">
@@ -209,6 +216,10 @@
                             <span class="flex-1 min-w-0 text-sm text-ink truncate" title="{{ $v['prompt'] ?? '' }}">{{ \Illuminate\Support\Str::limit($v['prompt'] ?? '—', 90) }}</span>
                             @if (!empty($v['created_at']))
                                 <span class="font-mono text-[0.5rem] text-ink-faint shrink-0">{{ \Illuminate\Support\Carbon::parse($v['created_at'])->diffForHumans() }}</span>
+                            @endif
+                            @if (!empty($v['prompt']))
+                                <x-copy-btn :text="$v['prompt']" label="⧉ copy"
+                                            class="font-mono text-[0.6rem] px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition shrink-0" />
                             @endif
                             <button type="button" wire:click="reverterSfx('{{ $histEffect->id }}', {{ $i }})"
                                     wire:confirm="Restore this version? The current version is kept in history."

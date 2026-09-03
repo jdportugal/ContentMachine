@@ -4,6 +4,7 @@ namespace App\Services\Clips;
 
 use App\Services\Clips\Api\RunsClaudeCli;
 use App\Services\Clips\Store\BackgroundStore;
+use App\Services\Projects\ProjectLanguage;
 use RuntimeException;
 
 /**
@@ -32,7 +33,7 @@ class BackgroundGenerator
     public function generate(string $description, ?string $keepSlug = null): array
     {
         $envelope = $this->runClaude($this->userPrompt($description), $this->systemPrompt(), ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true]);
-        $data = $this->extractJson((string) ($envelope['result'] ?? ''));
+        $data = $this->extractJson((string) ($envelope['result'] ?? ''), $envelope);
 
         $slug = $keepSlug !== null ? $this->normalizeSlug($keepSlug) : $this->uniqueSlug((string) ($data['slug'] ?? ''));
         $tsx = trim((string) ($data['tsx'] ?? ''));
@@ -94,7 +95,11 @@ class BackgroundGenerator
 
     private function systemPrompt(): string
     {
-        return <<<'PROMPT'
+        // The prompt body is a NOWDOC (verbatim — it is full of TSX braces), so the
+        // one interpolated rule is prepended instead of inlined.
+        $language = ProjectLanguage::name();
+
+        return "Write displayName and description in {$language} — the project's language — whatever language the request is written in.\n\n".<<<'PROMPT'
 You are a senior Remotion + React engineer. You write ONE new full-screen BACKGROUND
 (a "backdrop") as a self-contained TSX component, from the user's description. It
 renders BEHIND every scene of a vertical clip, so it must be ambient and subtle — it
@@ -152,7 +157,8 @@ PROMPT;
     }
 
     /** Extract a JSON object from model output that may be fenced or prefixed. */
-    private function extractJson(string $content): array
+    /** @param array<string,mixed> $envelope the provider envelope, for attribution on failure */
+    private function extractJson(string $content, array $envelope = []): array
     {
         $content = trim($content);
         if (preg_match('/```(?:json)?\s*(.*?)```/s', $content, $m)) {
@@ -169,13 +175,25 @@ PROMPT;
             // and a chatty preamble all read as this one sentence. The tail is the
             // tell — a cut-off response ends mid-token.
             throw new RuntimeException(sprintf(
-                'The model did not return valid JSON (%s, %d chars). It ended with: %s',
+                'The model did not return valid JSON (%s, %d chars)%s. It ended with: %s',
                 json_last_error_msg(),
                 strlen($content),
+                self::procedencia($envelope),
                 $content === '' ? '(nothing)' : '…'.substr($content, -180)
             ));
         }
 
         return $data;
+    }
+
+    /** " — from claude-cli, stop_reason=max_tokens", or '' when nothing is known. */
+    private static function procedencia(array $envelope): string
+    {
+        $bits = array_filter([
+            ($p = (string) ($envelope['_provider'] ?? '')) !== '' ? 'from '.$p : null,
+            ($s = (string) ($envelope['stop_reason'] ?? '')) !== '' ? 'stop_reason='.$s : null,
+        ]);
+
+        return $bits ? ' — '.implode(', ', $bits) : '';
     }
 }

@@ -16,13 +16,16 @@ use App\Services\Clips\PlanValidator;
 use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\VfxStore;
 use App\Services\Costs\CostLedger;
 use App\Services\Projects\ProjectLanguage;
+use App\Services\Shorts\LocalVideoEngine;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PlanAnimationsJob implements ShouldQueue
@@ -69,9 +72,16 @@ class PlanAnimationsJob implements ShouldQueue
 
             // Both cover the full duration. Overlay clips intercut presentation modes
             // (video / over / split / animation) chosen by the planner per scene.
+            // An overlay clip renders AROUND the uploaded video, so the composition
+            // has to match the source: a fixed 9:16 frame turned a landscape upload
+            // into a cropped portrait. Animation-only clips keep the configured size.
+            // An explicit output format wins over both; 'auto' keeps the old rule.
+            [$planW, $planH] = $this->formatoEscolhido($p)
+                ?? ($isOverlay ? $this->sourceSize($p, $c) : [(int) $c['width'], (int) $c['height']]);
+
             $plan = $planner->plan($p->transcript, 'dense', [
-                'width' => $c['width'],
-                'height' => $c['height'],
+                'width' => $planW,
+                'height' => $planH,
                 'fps' => $c['fps'],
                 'facts' => $facts,
                 'images' => $p->images ?? [],
@@ -87,12 +97,18 @@ class PlanAnimationsJob implements ShouldQueue
             // `generate` from its spoken words. If not, we leave it for the non-image
             // fallback (the planner was already told to use other content).
             $filler = app(SceneVisualFiller::class);
+            // "Reduce the number of images": half the budget, and applied to overlay
+            // clips too — those are otherwise uncapped (the planner asks freely).
+            $fewer = (bool) ($p->meta['fewer_images'] ?? false);
             if (! $isOverlay && $imagesOn) {
                 $plan = $filler->requestImages($plan, $p->transcript ?? []);
+            }
+            if ($imagesOn && (! $isOverlay || $fewer)) {
                 // Both the planner and the filler above add image requests without
                 // counting them, so cap the total against the clip's LENGTH — the
                 // old flat ceiling let a short clip ask for seven paid generations.
-                $plan = $filler->limitImages($plan, $filler->imageBudget($plan));
+                $budget = $filler->imageBudget($plan);
+                $plan = $filler->limitImages($plan, $fewer ? max(1, intdiv($budget, 2)) : $budget);
             }
 
             // The full script/plan is ready — every image the planner wants exists as
@@ -196,6 +212,56 @@ class PlanAnimationsJob implements ShouldQueue
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
+    }
+
+    /**
+     * The frame the author picked when creating the clip, or null for 'auto'.
+     *
+     * @return array{0:int,1:int}|null
+     */
+    private function formatoEscolhido(ClipRecord $p): ?array
+    {
+        $aspecto = VfxStore::ASPECTS[(string) ($p->meta['formato'] ?? 'auto')] ?? null;
+
+        return $aspecto ? [(int) $aspecto['width'], (int) $aspecto['height']] : null;
+    }
+
+    /**
+     * The uploaded video's own frame size, so an overlay clip is composed at the
+     * source's aspect ratio instead of a fixed 9:16. Downscaled to the configured
+     * long edge (a 4K upload would otherwise quadruple every render) and kept even
+     * for h264. Falls back to the configured size if ffprobe can't tell us.
+     *
+     * ponytail: ignores rotation metadata — a phone clip tagged 90° probes as its
+     * coded (unrotated) size. Read side_data_list if that turns up.
+     *
+     * @param  array<string,mixed>  $c
+     * @return array{0:int,1:int}
+     */
+    private function sourceSize(ClipRecord $p, array $c): array
+    {
+        $fallback = [(int) $c['width'], (int) $c['height']];
+
+        try {
+            $probe = app(LocalVideoEngine::class)->probe(
+                Storage::disk($c['disk'])->path((string) $p->source_path)
+            );
+        } catch (\Throwable) {
+            return $fallback;
+        }
+
+        $w = (int) ($probe['width'] ?? 0);
+        $h = (int) ($probe['height'] ?? 0);
+        if ($w <= 0 || $h <= 0) {
+            return $fallback;
+        }
+
+        $scale = min(1.0, max($fallback) / max($w, $h));
+
+        return [
+            max(2, (int) round($w * $scale / 2) * 2),
+            max(2, (int) round($h * $scale / 2) * 2),
+        ];
     }
 
     /**

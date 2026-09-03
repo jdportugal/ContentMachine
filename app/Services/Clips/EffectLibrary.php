@@ -6,6 +6,7 @@ use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * The SFX library: bridges the custom-effect vault records with the Remotion
@@ -488,9 +489,12 @@ TSX;
             if ($this->isBuiltin($e->slug)) {
                 continue; // an override — already featured under its built-in slug
             }
+            if ((string) $e->get('clip_id', '') !== '') {
+                continue; // a Free-SFX component: it belongs to one clip, not the showreel
+            }
             $entries[] = [
                 'slug' => $e->slug,
-                'label' => $e->display_name ?: \Illuminate\Support\Str::title(str_replace('-', ' ', $e->slug)),
+                'label' => $e->display_name ?: Str::title(str_replace('-', ' ', $e->slug)),
                 'text' => $e->sample_text,
                 'params' => $e->sample_params ?? [],
             ];

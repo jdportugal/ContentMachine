@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Services\Aggregation\YtDlpRunner;
 use App\Services\Aggregation\YtDlpRunnerContract;
+use App\Services\Costs\CostLedger;
 use App\Services\Projects\ProjectContext;
 use App\Services\Publicacoes\Rendering\KieSlideRenderer;
 use App\Services\Publicacoes\Rendering\SlideRenderer;
 use App\Services\Publicacoes\Rendering\SvgSlideRenderer;
+use App\Services\Shorts\FontLibrary;
 use App\Services\Shorts\LocalVideoEngine;
 use App\Services\Shorts\MusicLibrary;
 use App\Services\Vault\VaultContract;
@@ -24,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         // The active project for this process (defaults to the first registered).
         $this->app->singleton(ProjectContext::class);
         // Singleton: the piece-context a job sets must be seen by every client.
-        $this->app->singleton(\App\Services\Costs\CostLedger::class);
+        $this->app->singleton(CostLedger::class);
 
         // The vault (brain/memory) points at the ACTIVE project's directory,
         // resolved per request from the ProjectContext (set by SetActiveProject).
@@ -50,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Motor local e independente (ffmpeg + Whisper) — sem API externa.
+        $this->app->singleton(FontLibrary::class, fn () => new FontLibrary(
+            bundledDir: config('services.shorts.fonts_path') ?: resource_path('fonts'),
+            cacheDir: storage_path('app/shorts/fonts'),
+        ));
+
         $this->app->singleton(LocalVideoEngine::class, function () {
             $c = config('services.shorts');
 

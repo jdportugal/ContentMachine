@@ -3,9 +3,12 @@
 namespace App\Livewire;
 
 use App\Services\Content\FinishedContent;
+use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Shorts\MusicLibrary;
 use App\Services\Shorts\ShortsPipeline;
 use App\Services\Vault\VaultContract;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
@@ -18,6 +21,7 @@ use Livewire\WithFileUploads;
 class Clips extends Component
 {
     use WithFileUploads;
+
     // Long video open (detail). Null → list of videos.
     public ?string $fonteAberta = null;
 
@@ -29,7 +33,8 @@ class Clips extends Component
 
     public string $novaFonteTitulo = '';
 
-    public string $novaFonteLingua = 'pt';
+    /** Whisper's language hint for a new source — the project's language, not a fixed 'pt'. */
+    public string $novaFonteLingua = '';
 
     // Long video uploaded via drag-and-drop (up to 2 GB — see config/livewire.php).
     public $novoVideo = null;
@@ -69,6 +74,9 @@ class Clips extends Component
     public string $musica = '';
 
     public float $musicaVolume = 0.1;
+
+    /** How the open clip is framed on the next cut: fill | blur | original. */
+    public string $enquadramento = 'original';
 
     // --- Sources (long videos) ---------------------------------------
 
@@ -233,6 +241,60 @@ class Clips extends Component
         }
     }
 
+    /**
+     * Send a cut clip into the animation pipeline as an overlay clip: the video
+     * with animated layers drawn over it.
+     *
+     * It is the RAW cut that travels — bare picture and original audio, no burnt
+     * captions and no music — because the animation pipeline writes its own
+     * captions and mixes its own track. The file is COPIED onto the clips disk
+     * (it lives under storage/app/shorts, outside that disk's root) so the Shorts
+     * Generator keeps its own, and the short's own state is left untouched.
+     *
+     * Nothing is generated here: the file is staged and Animated Clips opens on its
+     * usual form with that video already attached, so every option an uploaded
+     * video gets is on the table. Music starts at none/0 there — nothing is being
+     * carried over to clash with, and that form's picker owns the choice.
+     */
+    public function animar(string $path, VaultContract $vault, ShortsPipeline $pipeline): void
+    {
+        $this->executar(function () use ($path, $vault, $pipeline) {
+            $clip = $vault->get($path);
+            if (! $clip) {
+                throw new \RuntimeException('Clip not found.');
+            }
+
+            // The RAW cut, never the finished short: the animation pipeline draws
+            // its own captions, so handing it a video with captions already burnt
+            // in puts two sets on screen in two different styles. Cutting adds no
+            // captions and no music, which is exactly what the animator wants.
+            $origem = (string) $clip->get('clip_path');
+            if ($origem === '' || ! is_file($origem)) {
+                $clip = $pipeline->cortarClip($path);
+                $origem = (string) $clip->get('clip_path');
+            }
+            if ($origem === '' || ! is_file($origem)) {
+                throw new \RuntimeException('Could not cut the clip to animate.');
+            }
+
+            $destino = Storage::disk(config('contentmachine.clips.disk'))->putFileAs(
+                'clips/uploads',
+                new File($origem),
+                $clip->slug().'-'.Str::random(6).'.mp4',
+            );
+
+            // Hand the staged file to Animated Clips and let its own "Video with
+            // animations" form take it from here — styles, lead, instructions,
+            // backdrop and the rest are chosen there, exactly as for an upload.
+            session([
+                'animado_video' => $destino,
+                'animado_video_nome' => (string) $clip->title(),
+            ]);
+
+            $this->redirect(route('clips-animados'), navigate: true);
+        }, 'Clip ready to animate — choose the options and generate.');
+    }
+
     public function gerarDescricao(string $path, ShortsPipeline $pipeline): void
     {
         try {
@@ -250,6 +312,12 @@ class Clips extends Component
 
     public function cortar(string $path, ShortsPipeline $pipeline): void
     {
+        // The framing only takes effect on a cut, so save the open panel first —
+        // otherwise changing it and pressing Cut re-cuts the old way.
+        if ($this->clipAberto === $path) {
+            $this->persistirClipAberto($pipeline);
+        }
+
         $this->executar(fn () => $pipeline->cortarClip($path), 'Clip cut.');
     }
 
@@ -287,6 +355,8 @@ class Clips extends Component
         $this->modoPalavra = (string) $clip->get('modo_palavra', 'karaoke');
         $this->musica = (string) $clip->get('musica', '');
         $this->musicaVolume = (float) $clip->get('musica_volume', 0.1);
+        // No recorded choice → what cortarClip would do anyway.
+        $this->enquadramento = $pipeline->enquadramentoAtual($clip);
         $this->clipTituloEdit = (string) $clip->title();
         $this->clipDescricao = (string) $clip->get('descricao', '');
         $this->clipTagsEdit = implode(', ', (array) $clip->get('tags', []));
@@ -333,6 +403,7 @@ class Clips extends Component
         $pipeline->guardarDetalhes($this->clipAberto, trim($this->clipTituloEdit), trim($this->clipDescricao), $this->tagsParaArray());
         $pipeline->guardarLegendas($this->clipAberto, $this->segmentosParaDados(), $this->estilo, $this->modoPalavra);
         $pipeline->definirMusica($this->clipAberto, trim($this->musica), $this->musicaVolume);
+        $pipeline->definirEnquadramento($this->clipAberto, $this->enquadramento);
     }
 
     /** @return array<int,string> */
@@ -380,6 +451,8 @@ class Clips extends Component
             'fonteAtual' => $fonteAtual,
             'clipsDaFonte' => $fonteAtual ? ($clipsPorFonte[$fonteAtual->path] ?? collect()) : collect(),
             'temIA' => app(ShortsPipeline::class)->temIA(),
+            'linguaProjeto' => ProjectLanguage::code(),
+            'fonteDesign' => (string) (app(DesignSystemRepository::class)->readTokens()['fonts']['body'] ?? ''),
             'musicas' => $lib->all(),
             'motor' => 'ffmpeg local · '.config('services.shorts.whisper_model').' (Whisper)',
             'modosPalavra' => ['karaoke', 'popup', 'typewriter', 'off'],

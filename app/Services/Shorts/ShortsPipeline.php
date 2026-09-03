@@ -3,6 +3,8 @@
 namespace App\Services\Shorts;
 
 use App\Services\Aggregation\LlmClient;
+use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\Projects\ProjectLanguage;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultNote;
 
@@ -33,6 +35,9 @@ class ShortsPipeline
 
     public const CLIPES = 'clips';
 
+    /** Shortest clip the generator may produce — anything less doesn't hold a viewer. */
+    public const MIN_SEGUNDOS = 30.0;
+
     private readonly LlmClient $llm;
 
     public function __construct(
@@ -50,30 +55,48 @@ class ShortsPipeline
         return $this->llm->disponivel();
     }
 
-    /** Default style of the burned-in subtitles. */
+    /**
+     * Default style of the burned-in subtitles: the SAME captions the animated
+     * clips draw, so a short and an animated clip from one project read as one
+     * brand. Every value tracks KaraokeTrack in remotion/src/scenes.tsx — a panel
+     * in the alternate background colour, body text on it, the accent for the
+     * word being spoken, four words to a line, low on the frame.
+     *
+     * Colours and face come from the project's Design System; the fallbacks are
+     * the Nebula defaults baked into remotion/src/style-tokens.ts.
+     */
     public static function estiloPorDefeito(): array
     {
+        $tokens = app(DesignSystemRepository::class)->readTokens() ?? [];
+        $cores = (array) ($tokens['colors'] ?? []);
+        $fontes = (array) ($tokens['fonts'] ?? []);
+        $painel = (string) ($cores['bgAlt'] ?? '#0C1225');
+
         return [
-            'position' => 'center-center',
-            'font-size' => 90,
-            'font-family' => 'Luckiest Guy',
-            'outline-width' => 6,
-            'line-color' => '#2dbab4',
-            'highlight-color' => '#F5C542',
-            'outline-color' => '#000000',
+            'position' => 'bottom-center',
+            // KaraokeTrack renders at 58px on a 1080x1920 frame, which is what a
+            // portrait short is.
+            'font-size' => 58,
+            'font-family' => (string) ($fontes['body'] ?? 'Space Grotesk'),
+            'line-color' => (string) ($cores['textOnBg'] ?? '#EAF0FF'),
+            'highlight-color' => (string) ($cores['accent'] ?? '#FFB347'),
+            'box-color' => $painel,
+            'outline-color' => $painel,
+            'outline-width' => 10, // padding around the text inside the panel
+            'max-words-per-line' => 4,
         ];
     }
 
     // --- 1. Source ----------------------------------------------------
 
     /** Registers a source video (absolute local path or http URL). */
-    public function criarFonte(string $ref, string $titulo = '', string $lingua = 'pt'): VaultNote
+    public function criarFonte(string $ref, string $titulo = '', string $lingua = ''): VaultNote
     {
         return $this->vault->create(self::FONTES, [
             'titulo' => $titulo !== '' ? $titulo : 'Source '.now()->format('d/m H:i'),
             'tipo' => 'clip-fonte',
             'fonte' => $ref,
-            'lingua' => $lingua,
+            'lingua' => $lingua !== '' ? $lingua : ProjectLanguage::code(),
             'estado' => 'nova',
             'transcricao' => '',
         ], 'Source video for shorts generation.');
@@ -90,7 +113,8 @@ class ShortsPipeline
         $fonte = $this->exigirNota($fontePath);
         $origem = $this->engine->resolveSource((string) $fonte->get('fonte'), $this->tempDir());
 
-        $transcricao = $this->engine->transcribe($origem, (string) $fonte->get('lingua', 'pt'));
+        $lingua = (string) $fonte->get('lingua', '');
+        $transcricao = $this->engine->transcribe($origem, $lingua !== '' ? $lingua : ProjectLanguage::code());
 
         return $this->vault->updateFrontmatter($fonte->path, [
             'estado' => 'transcrita',
@@ -131,13 +155,22 @@ class ShortsPipeline
             ->map(fn ($s) => sprintf('[%s-%s] %s', $s['start'] ?? 0, $s['end'] ?? 0, $s['text'] ?? ''))
             ->implode("\n");
 
-        $prompt = "You are an expert editor of social media content. From this transcript with "
-            ."timestamps (in seconds), do TWO things:\n"
-            ."1) Pick {$quantidade} self-contained and captivating segments for YouTube Shorts, each about "
-            .'60 seconds long, that work well watched in isolation. For each one give a title, a description, '
-            ."relevant tags and the start/end marks using the given times.\n"
+        $minimo = (int) self::MIN_SEGUNDOS;
+        $idioma = ProjectLanguage::name();
+
+        $prompt = 'You are an expert editor of social media content. From this transcript with '
+            ."timestamps (in seconds), do TWO things:\n\n"
+            ."LANGUAGE — read this first. Write EVERY word you produce in {$idioma}: segment titles, "
+            .'descriptions and tags, and the post titles and angles. This is the PROJECT\'s language and it '
+            .'OVERRIDES the transcript — the video below may be spoken in a different language, and you '
+            ."still write your output in {$idioma}. Do NOT mirror the transcript's language.\n\n"
+            ."1) Pick {$quantidade} self-contained and captivating segments for YouTube Shorts that work "
+            ."well watched in isolation. HARD RULE: every segment MUST last AT LEAST {$minimo} seconds "
+            ."(end_time - start_time >= {$minimo}); aim for 45 to 60 seconds. A shorter segment is invalid — "
+            .'widen it until it reaches the minimum, or pick a different part of the video. For each one '
+            ."give a title, a description, relevant tags and the start/end marks using the given times.\n"
             ."2) Propose {$publicacoes} social media post ideas inspired by the video. For each one "
-            .'give a title and an angle (1 to 2 sentences to guide the writing of the post, in European Portuguese). '
+            .'give a title and an angle (1 to 2 sentences to guide the writing of the post). '
             ."Respond ONLY with valid JSON, with no surrounding text, in the format:\n"
             .'{"segments":[{"title":"","description":"","start_time":seconds,"end_time":seconds,"tags":["",""]}],'
             .'"publications":[{"titulo":"","angulo":""}]}'
@@ -152,7 +185,13 @@ class ShortsPipeline
         $dados = $this->extrairJson($resposta);
 
         return [
-            'segments' => $dados['segments'] ?? [],
+            // The transcript's last mark is the timeline the model was given, so it
+            // bounds the widening. Probing the file instead would make suggesting
+            // fail whenever the source cannot be resolved right now.
+            'segments' => self::aplicarDuracaoMinima(
+                array_values((array) ($dados['segments'] ?? [])),
+                (float) collect($transcricao)->max(fn ($seg) => (float) ($seg['end'] ?? 0)),
+            ),
             'publications' => collect($dados['publications'] ?? [])
                 ->map(fn ($p) => [
                     'titulo' => trim((string) ($p['titulo'] ?? $p['title'] ?? '')),
@@ -187,9 +226,13 @@ class ShortsPipeline
 
         $tags = implode(', ', (array) $clip->get('tags', []));
 
-        $prompt = "Write a short and captivating description (2 to 3 sentences, in European Portuguese) for a YouTube Short, "
-            ."ready to publish. Respond ONLY with the description — no quotes, no labels, no hashtags.\n\n"
-            ."Title: ".$clip->title()."\n"
+        $idioma = ProjectLanguage::name();
+
+        $prompt = 'Write a short and captivating description (2 to 3 sentences) for a YouTube Short, '
+            ."ready to publish. Write it in {$idioma} — the PROJECT's language — even when the clip is "
+            .'spoken in another language; do NOT mirror the spoken language. '
+            ."Respond ONLY with the description — no quotes, no labels, no hashtags.\n\n"
+            .'Title: '.$clip->title()."\n"
             .($tags !== '' ? "Tags: {$tags}\n" : '')
             ."\nSpoken content in the clip:\n".$texto;
 
@@ -219,6 +262,49 @@ class ShortsPipeline
         $dados = json_decode($resposta, true);
 
         return is_array($dados) ? $dados : [];
+    }
+
+    /**
+     * Grow any segment shorter than MIN_SEGUNDOS around its midpoint until it
+     * reaches the floor, clamped to the video. The prompt already demands the
+     * floor — this is the guard for when the model ignores it, which is what
+     * produced the too-short clips. A source shorter than the floor is left
+     * alone: there is nothing to grow into.
+     *
+     * @param  array<int,array<string,mixed>>  $segmentos
+     * @return array<int,array<string,mixed>>
+     */
+    public static function aplicarDuracaoMinima(array $segmentos, float $duracaoFonte): array
+    {
+        $limite = $duracaoFonte > 0 ? min($duracaoFonte, self::MIN_SEGUNDOS) : self::MIN_SEGUNDOS;
+
+        return array_map(function (array $s) use ($limite, $duracaoFonte): array {
+            $inicio = (float) ($s['start_time'] ?? 0);
+            $fim = (float) ($s['end_time'] ?? 0);
+            if ($fim <= $inicio || $fim - $inicio >= $limite) {
+                return $s;
+            }
+
+            $falta = $limite - ($fim - $inicio);
+            $inicio -= $falta / 2;
+            $fim += $falta / 2;
+
+            // Slid off an edge — push the whole window back inside instead of
+            // truncating it, or the segment stays under the floor.
+            if ($inicio < 0.0) {
+                $fim -= $inicio;
+                $inicio = 0.0;
+            }
+            if ($duracaoFonte > 0 && $fim > $duracaoFonte) {
+                $inicio = max(0.0, $inicio - ($fim - $duracaoFonte));
+                $fim = $duracaoFonte;
+            }
+
+            $s['start_time'] = round($inicio, 3);
+            $s['end_time'] = round($fim, 3);
+
+            return $s;
+        }, $segmentos);
     }
 
     // --- 4. Create clip -----------------------------------------------
@@ -288,12 +374,77 @@ class ShortsPipeline
         $origem = $this->engine->resolveSource((string) $clip->get('fonte'), $this->tempDir());
 
         $destino = $this->clipDir($clip).'/raw.mp4';
-        $this->engine->split($origem, (float) $clip->get('inicio'), (float) $clip->get('fim'), $destino);
+        $this->engine->split(
+            $origem,
+            (float) $clip->get('inicio'),
+            (float) $clip->get('fim'),
+            $destino,
+            $this->enquadramentoDe($clip, $origem),
+        );
 
         return $this->vault->updateFrontmatter($clip->path, [
             'clip_path' => $destino,
             'estado' => 'cortado',
         ]);
+    }
+
+    /**
+     * How this clip is framed when cut. The clip's own choice wins; clips recorded
+     * before there was a choice carry the old `vertical` boolean, which maps onto
+     * the two modes it used to mean. With neither, a landscape source fills the
+     * 9:16 frame (a short is watched vertically) and a portrait one is left alone.
+     */
+    private function enquadramentoDe(VaultNote $clip, string $origem): string
+    {
+        $escolha = (string) $clip->get('enquadramento', '');
+        if (in_array($escolha, LocalVideoEngine::FRAMING, true)) {
+            return $escolha;
+        }
+
+        $antigo = $clip->get('vertical');
+        if ($antigo !== null && $antigo !== '') {
+            return filter_var($antigo, FILTER_VALIDATE_BOOL) ? 'fill' : 'original';
+        }
+
+        return $this->fonteEhHorizontal($clip, $origem) ? 'fill' : 'original';
+    }
+
+    /** Record how this clip is framed (takes effect on the next cut). */
+    public function definirEnquadramento(string $clipPath, string $enquadramento): VaultNote
+    {
+        $this->exigirNota($clipPath);
+
+        return $this->vault->updateFrontmatter($clipPath, [
+            'enquadramento' => in_array($enquadramento, LocalVideoEngine::FRAMING, true) ? $enquadramento : 'original',
+        ]);
+    }
+
+    /** The framing the editor shows for a clip that has not chosen one. */
+    public function enquadramentoAtual(VaultNote $clip): string
+    {
+        $escolha = (string) $clip->get('enquadramento', '');
+        if (in_array($escolha, LocalVideoEngine::FRAMING, true)) {
+            return $escolha;
+        }
+
+        $antigo = $clip->get('vertical');
+        if ($antigo !== null && $antigo !== '') {
+            return filter_var($antigo, FILTER_VALIDATE_BOOL) ? 'fill' : 'original';
+        }
+
+        return $this->fonteEhHorizontal($clip) ? 'fill' : 'original';
+    }
+
+    /** Is this clip's source a landscape video? (What the framing defaults from.) */
+    public function fonteEhHorizontal(VaultNote $clip, ?string $origem = null): bool
+    {
+        try {
+            $meta = $this->engine->probe($origem ?? $this->engine->resolveSource((string) $clip->get('fonte'), $this->tempDir()));
+        } catch (\Throwable) {
+            return false; // source unreachable — don't claim a shape we couldn't read
+        }
+
+        return $meta['width'] > 0 && $meta['height'] > 0 && $meta['width'] > $meta['height'];
     }
 
     // --- 6. Burn subtitles / Regenerate ------------------------------

@@ -7,6 +7,7 @@ use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderShowreelJob;
 use App\Services\Clips\Api\ElevenLabsSfxService;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\EffectPortability;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
 use App\Services\Projects\ProjectContext;
@@ -63,7 +64,7 @@ class ClipsAnimadosSfx extends Component
     }
 
     /** Import effects from an uploaded Brand Machine SFX export file. */
-    public function importarSfx(\App\Services\Clips\EffectPortability $port): void
+    public function importarSfx(EffectPortability $port): void
     {
         $this->validate(
             ['importFile' => 'required|file|max:51200'],
@@ -113,6 +114,7 @@ class ClipsAnimadosSfx extends Component
                 'kind' => 'custom', 'id' => $rec->id(), 'slug' => $rec->slug, 'label' => $rec->display_name,
                 'status' => $rec->status, 'enabled' => (bool) $rec->enabled, 'intro' => (bool) $rec->get('intro', false),
                 'description' => (string) $rec->description, 'error' => $rec->error,
+                'prompt' => (string) $rec->prompt,
                 'versions' => count($rec->get('versions', [])), 'record' => $rec,
                 'formatos' => $this->formatosProntos($library, $rec->slug),
             ];
@@ -125,6 +127,7 @@ class ClipsAnimadosSfx extends Component
                 'label' => EffectLibrary::BUILTIN_SAMPLES[$this->detailKey]['label'] ?? $this->detailKey,
                 'allowed' => $library->builtinAllowed($this->detailKey), 'intro' => $library->builtinIsIntro($this->detailKey),
                 'override' => $override?->status, 'overrideId' => $override?->id(),
+                'prompt' => (string) ($override?->prompt ?? ''),
                 'versions' => $override ? count($override->get('versions', [])) : 0, 'record' => $override,
                 'formatos' => $this->formatosProntos($library, $this->detailKey),
             ];
@@ -485,7 +488,10 @@ class ClipsAnimadosSfx extends Component
                 }
             }
         }
-        foreach ($library->active() as $effect) {
+        foreach ($this->effects()->all() as $effect) {
+            if (! $effect->isActive()) {
+                continue;
+            }
             foreach ($formatos as $formato) {
                 if (! $library->previewExists($effect->slug, $formato)) {
                     RenderEffectSampleJob::dispatch($effect->slug, $effect->sample_text, $effect->sample_params ?? [], $formato);

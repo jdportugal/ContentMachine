@@ -685,8 +685,15 @@ class SceneVisualFiller
         return $plan;
     }
 
-    /** True unless the layer would render its empty-state placeholder. @param string[] $imageSlugs */
-    private function layerHasContent(array $layer, array $imageSlugs = []): bool
+    /**
+     * True unless the layer would render its empty-state placeholder (the big
+     * grey em-dash). Public so the plan editor can apply the same rule when the
+     * user swaps a scene's animation — a data primitive handed none of its data
+     * renders that dash, and the editor has no field to type bars/items/nodes in.
+     *
+     * @param  string[]  $imageSlugs
+     */
+    public function layerHasContent(array $layer, array $imageSlugs = []): bool
     {
         $p = is_array($layer['params'] ?? null) ? $layer['params'] : [];
         $text = $layer['text'] ?? null;

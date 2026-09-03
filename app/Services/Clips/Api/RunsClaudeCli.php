@@ -52,13 +52,22 @@ trait RunsClaudeCli
 
         foreach ($this->cadeiaLlm() as $fornecedor) {
             try {
-                return match ($fornecedor) {
+                $envelope = match ($fornecedor) {
                     'claude' => $this->usaApiClaude()
                         ? $this->runClaudeApi($user, $system, $opts)
                         : $this->runClaudeCli($user, $system, $opts),
                     'openai' => $this->runOpenAi($user, $system, $opts),
                     'tensorx' => $this->runTensorx($user, $system, $opts),
                 };
+
+                // Who actually answered. The chain falls through silently — a
+                // rate-limited Claude hands the job to GPT or DeepSeek — so an
+                // unparseable answer downstream was impossible to attribute.
+                $envelope['_provider'] = $fornecedor === 'claude' && ! $this->usaApiClaude()
+                    ? 'claude-cli'
+                    : $fornecedor;
+
+                return $envelope;
             } catch (\Throwable $e) {
                 $erro = $e;
                 Log::warning("Clip LLM '{$fornecedor}' failed — trying the next: ".$e->getMessage());
@@ -234,6 +243,22 @@ trait RunsClaudeCli
                 $this->claudeBackoff($i, $attempts);
 
                 continue;
+            }
+
+            // The same truncation trap the two HTTP paths already guard. The CLI
+            // reports a clean finish as stop_reason=end_turn and a cut one as
+            // max_tokens, on a SUCCESSFUL envelope — so this was the one path that
+            // handed a half-written component downstream, where it surfaced as
+            // "the model did not return valid JSON". Retrying hits the same
+            // ceiling, so fail through to the next provider.
+            if (($envelope['stop_reason'] ?? null) === 'max_tokens') {
+                $ceiling = $envelope['modelUsage'][array_key_first($envelope['modelUsage'] ?? []) ?? ''] ?? [];
+                throw new RuntimeException(
+                    'The Claude CLI truncated the response at its output ceiling'
+                    .(isset($ceiling['maxOutputTokens']) ? ' ('.$ceiling['maxOutputTokens'].' tokens)' : '')
+                    .'. CLIPS_MAX_TOKENS does not apply to the CLI — set CLAUDE_CODE_MAX_OUTPUT_TOKENS '
+                    .'in the worker environment, or ask for a smaller component.'
+                );
             }
 
             return $envelope;
@@ -451,6 +476,13 @@ trait RunsClaudeCli
                 ($system !== null && $system !== '') ? ['role' => 'system', 'content' => $system] : null,
                 ['role' => 'user', 'content' => $user],
             ])),
+            // Without this the fallback providers run on THEIR default completion
+            // cap — commonly a couple of thousand tokens, nowhere near enough for a
+            // whole TSX component, and a reasoning model spends it on thinking
+            // first. The Anthropic path has always sent this; these two did not, so
+            // raising CLIPS_MAX_TOKENS (which the error message tells you to do)
+            // changed nothing for them.
+            'max_tokens' => (int) config('contentmachine.clips.max_tokens', 16000),
         ];
 
         $lastError = 'no detail';
@@ -476,12 +508,15 @@ trait RunsClaudeCli
 
             // Same truncation trap as the Anthropic path, under the OpenAI name.
             if ($r->json('choices.0.finish_reason') === 'length') {
-                throw new RuntimeException("{$nome} truncated the response (finish_reason=length) — its output ceiling is too low for this prompt.");
+                throw new RuntimeException("{$nome} truncated the response (finish_reason=length) at max_tokens="
+                    .$payload['max_tokens'].' — raise CLIPS_MAX_TOKENS.');
             }
 
             $texto = (string) $r->json('choices.0.message.content', '');
             if (trim($texto) !== '') {
-                return ['result' => $texto];
+                // Carried so an unparseable answer downstream can say who wrote it
+                // and why they stopped, instead of the same sentence for all three.
+                return ['result' => $texto, 'stop_reason' => (string) $r->json('choices.0.finish_reason', '')];
             }
 
             $lastError = 'empty response';

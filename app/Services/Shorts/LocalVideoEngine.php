@@ -95,11 +95,36 @@ class LocalVideoEngine
         return ['duration' => $duration, 'width' => $width, 'height' => $height, 'has_audio' => $hasAudio];
     }
 
+    /** How a cut is framed. `original` leaves the source frame exactly as it is. */
+    public const FRAMING = ['fill', 'blur', 'original'];
+
+    /**
+     * fill — scale until BOTH dimensions cover 1080x1920 (`increase` keeps the
+     * aspect, so one side overflows), then take the centre out of it. A landscape
+     * source loses its left and right edges.
+     *
+     * blur — keep the WHOLE frame (`decrease` fits it inside, nothing cropped),
+     * centred over a blurred copy of itself that covers the 9:16 canvas. The blur
+     * is done at 270x480 and scaled back up: blurring 2 megapixels a frame is slow
+     * and looks the same once it is this soft.
+     *
+     * The canvas is 1080x1920, which is even, so libx264's yuv420p is satisfied
+     * however odd the fitted layer's own dimensions come out.
+     */
+    private const FILTERS = [
+        'fill' => 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920',
+        'blur' => 'split[cmbg][cmfg];'
+            .'[cmbg]scale=270:480:force_original_aspect_ratio=increase,crop=270:480,gblur=sigma=12,scale=1080:1920[cmbgb];'
+            .'[cmfg]scale=1080:1920:force_original_aspect_ratio=decrease[cmfgs];'
+            .'[cmbgb][cmfgs]overlay=(W-w)/2:(H-h)/2',
+    ];
+
     /**
      * Cuts [startSec, endSec] from the original video, re-encoding (libx264 +
-     * aac 320k), like the original's split_video.
+     * aac 320k), like the original's split_video. $framing says whether the cut
+     * is reframed to 9:16 and how — see FILTERS; anything else leaves it alone.
      */
-    public function split(string $source, float $startSec, float $endSec, string $dest): string
+    public function split(string $source, float $startSec, float $endSec, string $dest, string $framing = 'original'): string
     {
         $meta = $this->probe($source);
         $start = max(0.0, $startSec);
@@ -111,16 +136,22 @@ class LocalVideoEngine
 
         @mkdir(dirname($dest), 0775, true);
 
-        $this->run([
+        $args = [
             $this->ffmpeg, '-y',
             '-ss', $this->num($start),
             '-i', $source,
             '-t', $this->num($end - $start),
+        ];
+        if ($filter = self::FILTERS[$framing] ?? null) {
+            $args[] = '-vf';
+            $args[] = $filter;
+        }
+        $this->run(array_merge($args, [
             '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-pix_fmt', 'yuv420p',
             '-c:a', 'aac', '-b:a', '320k',
             '-movflags', '+faststart',
             $dest,
-        ]);
+        ]));
 
         return $dest;
     }
@@ -144,9 +175,14 @@ class LocalVideoEngine
         $assPath = dirname($dest).'/subtitles.ass';
         file_put_contents($assPath, $ass);
 
+        // The caption face follows the Design System, so it may not be one of the
+        // bundled ones — FontLibrary fetches and caches it, and hands back the
+        // single directory libass should read (the bundled one if it couldn't).
+        $fontsDir = app(FontLibrary::class)->dirFor($settings['font-family'] ?? null);
+
         $filter = 'ass='.$this->filterArg($assPath);
-        if ($this->fontsDir !== '') {
-            $filter .= ':fontsdir='.$this->filterArg($this->fontsDir);
+        if ($fontsDir !== '') {
+            $filter .= ':fontsdir='.$this->filterArg($fontsDir);
         }
 
         $this->run([

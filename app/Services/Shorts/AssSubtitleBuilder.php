@@ -21,6 +21,9 @@ namespace App\Services\Shorts;
  */
 class AssSubtitleBuilder
 {
+    /** How far the captions sit above the bottom edge, as a share of the height. */
+    public const MARGIN_V_PCT = 0.13;
+
     /** Position grid → ASS Alignment (numeric keypad: 1=bottom-left … 9=top-right). */
     private const ALIGN = [
         'bottom-left' => 1, 'bottom-center' => 2, 'bottom-right' => 3,
@@ -58,7 +61,9 @@ class AssSubtitleBuilder
         $primary = $this->toAssColor($primaryHex);
         $outlineColor = $this->toAssColor($settings['outline-color'] ?? '#000000');
         $outlineWidth = max(0.0, (float) ($settings['outline-width'] ?? 3));
-        $marginV = (int) round((float) ($settings['margin-v'] ?? max(60, $videoH * 0.06)));
+        // 13% up from the bottom — where KaraokeTrack sits in the animated clips
+        // (remotion/src/scenes.tsx, paddingBottom: "13%").
+        $marginV = (int) round((float) ($settings['margin-v'] ?? max(60, $videoH * self::MARGIN_V_PCT)));
         $marginH = (int) round((float) ($settings['margin-h'] ?? max(40, $videoW * 0.05)));
         $bold = ! empty($settings['bold']) ? -1 : 0;
         $upper = ($settings['text-transform'] ?? '') === 'uppercase';
@@ -68,10 +73,18 @@ class AssSubtitleBuilder
         $corBase = $this->inlineColor($primaryHex);
         $corDestaque = $this->inlineColor($highlightHex);
 
+        // A `box-color` paints the caption on an opaque panel (ASS BorderStyle 3,
+        // where Outline becomes the panel's padding) instead of outlining the
+        // glyphs — the animated clips draw their captions on a panel, not with a
+        // stroke. Without it, the old outlined style is kept exactly.
+        $boxHex = $settings['box-color'] ?? null;
+        $borderStyle = $boxHex ? 3 : 1;
+        $backColor = $this->toAssColor($boxHex ?? '#000000');
+
         $styleDefault = sprintf(
-            'Style: Default,%s,%d,%s,%s,%s,&H00000000,%d,0,0,0,100,100,0,0,1,%s,0,%d,%d,%d,%d,1',
-            $fontName, $fontSize, $primary, $primary, $outlineColor,
-            $bold, $this->num($outlineWidth), $align, $marginH, $marginH, $marginV,
+            'Style: Default,%s,%d,%s,%s,%s,%s,%d,0,0,0,100,100,0,0,%d,%s,0,%d,%d,%d,%d,1',
+            $fontName, $fontSize, $primary, $primary, $outlineColor, $backColor,
+            $bold, $borderStyle, $this->num($outlineWidth), $align, $marginH, $marginH, $marginV,
         );
 
         $events = [];

@@ -1,3 +1,16 @@
+@php
+    // The vault stores these states in Portuguese (and the folder names depend on
+    // them, so they are not renamed) — the screen shows them in English.
+    $estadoLabels = [
+        'nova' => 'new',
+        'transcrita' => 'transcribed',
+        'rascunho' => 'draft',
+        'cortado' => 'cut',
+        'pronto' => 'ready',
+        'publicado' => 'posted',
+        'agendado' => 'scheduled',
+    ];
+@endphp
 <div>
     <x-page-header
         eyebrow="Tomus · III"
@@ -57,7 +70,7 @@
                         </div>
                         <div>
                             <label class="eyebrow block mb-1.5">Language</label>
-                            <input type="text" wire:model="novaFonteLingua" placeholder="pt"
+                            <input type="text" wire:model="novaFonteLingua" placeholder="{{ $linguaProjeto }}"
                                    class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
                         </div>
                     </div>
@@ -108,7 +121,7 @@
 
         <x-panel :eyebrow="'Video · '.$fonteAtual->get('lingua', 'pt')" :title="$fonteAtual->title()" glyph="❦" class="mb-6">
             <div class="flex flex-wrap items-center gap-2 -mt-2 mb-4">
-                <x-badge :tone="$temTranscricao ? 'good' : 'neutral'">{{ $temTranscricao ? 'transcribed' : $fonteAtual->get('estado', 'nova') }}</x-badge>
+                <x-badge :tone="$temTranscricao ? 'good' : 'neutral'">{{ $temTranscricao ? 'transcribed' : ($estadoLabels[$fonteAtual->get('estado', 'nova')] ?? $fonteAtual->get('estado', 'nova')) }}</x-badge>
                 <span class="font-mono text-xs text-ink-faint truncate max-w-md">{{ $fonteAtual->get('fonte') }}</span>
                 <div class="ml-auto flex items-center gap-2">
                     <button wire:click="transcrever('{{ $fonteAtual->path }}')" wire:loading.attr="disabled"
@@ -213,7 +226,7 @@
                                     </span>
                                 </span>
                             </button>
-                            <x-badge :tone="$tone">{{ $estado }}</x-badge>
+                            <x-badge :tone="$tone">{{ $estadoLabels[$estado] ?? $estado }}</x-badge>
                             <div class="ml-auto flex items-center gap-2">
                                 <button wire:click="cortar('{{ $clip->path }}')" wire:loading.attr="disabled"
                                         x-on:click="window.CMLoader.busy('Cutting the clip (ffmpeg)…')"
@@ -221,6 +234,12 @@
                                 <button wire:click="regenerar('{{ $clip->path }}')" wire:loading.attr="disabled"
                                         x-on:click="window.CMLoader.busy('Rendering the short with subtitles…')"
                                         class="bg-teal text-papyrus font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-teal-deep transition shadow-engraved">Regenerate</button>
+                                @if ($temVideo)
+                                    <button wire:click="animar('{{ $clip->path }}')" wire:loading.attr="disabled"
+                                            x-on:click="window.CMLoader.busy('Preparing the clip to animate…')"
+                                            title="Open this clip in Animated Clips as a video overlay — animations drawn over it. Sends the raw cut (no burnt-in captions, no music), so the animation writes the only captions on screen."
+                                            class="border border-gold/40 text-gold font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-gold/10 transition">✦ Animate</button>
+                                @endif
                                 <button wire:click="removerClip('{{ $clip->path }}')" wire:confirm="Remove this clip?"
                                         class="border border-bad/30 text-bad font-mono text-xs uppercase tracking-wider px-3 py-1.5 rounded-sm hover:bg-bad/10 transition">✕</button>
                             </div>
@@ -297,6 +316,30 @@
                                     <button wire:click="adicionarSegmento" class="mt-2 font-mono text-xs text-teal hover:text-teal-deep">+ add line</button>
                                 </div>
 
+                                {{-- Frame --}}
+                                <div>
+                                    <div class="eyebrow mb-2">Frame</div>
+                                    @php
+                                        $enquadramentos = [
+                                            'fill' => ['t' => 'Scale to fill', 'd' => 'Fills a 1080×1920 portrait frame and crops the sides — a landscape source loses its left and right edges.'],
+                                            'blur' => ['t' => 'Same size, blurred background', 'd' => 'Keeps the whole frame, centred in 1080×1920, over a blurred copy of itself. Nothing is cropped.'],
+                                            'original' => ['t' => 'Leave as it is', 'd' => 'The cut keeps the source\'s own size and shape.'],
+                                        ];
+                                    @endphp
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                        @foreach ($enquadramentos as $key => $op)
+                                            <label class="cursor-pointer flex items-start gap-2 rounded-sm border p-3 transition {{ $enquadramento === $key ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
+                                                <input type="radio" wire:model.live="enquadramento" value="{{ $key }}" class="accent-teal mt-1">
+                                                <span>
+                                                    <span class="block font-body text-sm text-ink leading-tight">{{ $op['t'] }}</span>
+                                                    <span class="block font-mono text-[0.62rem] text-ink-faint mt-0.5">{{ $op['d'] }}</span>
+                                                </span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">Applies on the next <em>Cut</em>.</p>
+                                </div>
+
                                 {{-- Style --}}
                                 <div>
                                     <div class="eyebrow mb-2">Subtitle style</div>
@@ -310,7 +353,8 @@
                                         <div>
                                             <label class="font-mono text-xs text-ink-faint block mb-1">Font</label>
                                             <select wire:model="estilo.font-family" class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1.5 text-ink font-mono text-xs focus:border-teal focus:outline-none">
-                                                @foreach (['Luckiest Guy','Anton','Impact','Times Bold Italic','Pixelify Sans','DejaVu-Sans-Bold'] as $f) <option value="{{ $f }}">{{ $f }}</option> @endforeach
+                                                {{-- The design system's body face first: it is what the animated clips caption with. --}}
+                                                @foreach (array_unique(array_filter([$fonteDesign, 'Luckiest Guy','Anton','Impact','Times Bold Italic','Pixelify Sans','DejaVu-Sans-Bold'])) as $f) <option value="{{ $f }}">{{ $f }}</option> @endforeach
                                             </select>
                                         </div>
                                         <div>

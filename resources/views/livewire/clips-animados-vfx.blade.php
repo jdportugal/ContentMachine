@@ -107,6 +107,7 @@
                                 <a href="{{ route('clips-animados.vfx-media', $v->id()) }}?download=1"
                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">⤓ Download .{{ $v->get('ext', 'mp4') }}</a>
                             @endif
+                            <x-copy-btn :text="$v->prompt" />
                             <button type="button" wire:click="apagarVfx('{{ $v->id() }}')"
                                     wire:confirm="Delete this VFX and its video?"
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕ Delete</button>

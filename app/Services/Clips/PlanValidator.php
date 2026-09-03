@@ -13,9 +13,9 @@ class PlanValidator
      */
     /**
      * @param  string[]|null  $allowedLayers  Layer types the clip may contain (from
-     *   EffectLibrary::allowedLayerTypes()). Layers of any other type are stripped
-     *   and disabled fillers (e.g. a toggled-off `ambient`) are never injected.
-     *   null = no restriction (all types allowed), used by the pure unit tests.
+     *                                        EffectLibrary::allowedLayerTypes()). Layers of any other type are stripped
+     *                                        and disabled fillers (e.g. a toggled-off `ambient`) are never injected.
+     *                                        null = no restriction (all types allowed), used by the pure unit tests.
      */
     public function validate(array $plan, string $transcriptText = '', bool $overlay = false, ?array $allowed = null, ?array $allowedLayers = null): array
     {
@@ -63,13 +63,26 @@ class PlanValidator
         $i = 0;
 
         foreach ($scenes as &$s) {
-            if (in_array($s['present'] ?? null, $allowed, true)) {
-                continue; // planner's choice, and it's allowed
-            }
             $hasForeground = ! empty(array_filter(
                 $s['layers'] ?? [],
                 fn ($l) => ($l['type'] ?? '') !== 'ambient'
             ));
+
+            // `animation` covers the video with the graphic, so a scene carrying no
+            // graphic renders as bare backdrop — the faint em-dash and a punch word,
+            // with the video hidden behind nothing. Over/split keep the video on
+            // screen, so they stay honest when empty; only this one has to give.
+            // Checked BEFORE the planner's choice is honoured, because the planner
+            // is exactly who sets `animation` on a scene it then gives no layers.
+            if (! $hasForeground && ($s['present'] ?? null) === 'animation') {
+                $s['present'] = $fallback;
+
+                continue;
+            }
+
+            if (in_array($s['present'] ?? null, $allowed, true)) {
+                continue; // planner's choice, and it's allowed
+            }
             if (! $hasForeground) {
                 $s['present'] = $fallback;
             } elseif (! empty($graphicModes)) {

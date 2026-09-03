@@ -394,6 +394,10 @@
 
                     @include('livewire.partials.instructions-field')
 
+                    @include('livewire.partials.fewer-images')
+
+                    @include('livewire.partials.free-sfx')
+
                     @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
@@ -411,13 +415,29 @@
             {{-- step 2B: video+animations form --}}
             <x-panel eyebrow="Step · II — Video + Animations" title="Video with animations" glyph="❖">
                 <form wire:submit="submitOverlay" x-on:submit="window.CMLoader.busy('Preparing the clip…')" class="space-y-5">
-                    <div>
-                        <label class="eyebrow block mb-2">Upload video (mp4 / mov)</label>
-                        <input type="file" wire:model="video" accept="video/mp4,video/quicktime"
-                               class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
-                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
-                        @error('video') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
-                    </div>
+                    @if ($videoPronto)
+                        {{-- Came from the Shorts Generator: the cut is already staged. --}}
+                        <div>
+                            <label class="eyebrow block mb-2">Video</label>
+                            <div class="flex flex-wrap items-center gap-3 rounded-sm border border-teal/40 bg-teal/5 px-3 py-2">
+                                <span class="text-teal">✂</span>
+                                <span class="min-w-0">
+                                    <span class="block font-display text-lg text-ink leading-tight truncate">{{ $videoProntoNome }}</span>
+                                    <span class="block font-mono text-[0.6rem] text-ink-faint">cut in the Shorts Generator — no burnt-in captions, no music</span>
+                                </span>
+                                <button type="button" wire:click="$set('videoPronto', null)"
+                                        class="ml-auto font-mono text-[0.62rem] text-ink-soft hover:text-ink shrink-0">use another video</button>
+                            </div>
+                        </div>
+                    @else
+                        <div>
+                            <label class="eyebrow block mb-2">Upload video (mp4 / mov)</label>
+                            <input type="file" wire:model="video" accept="video/mp4,video/quicktime"
+                                   class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                            <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                            @error('video') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                        </div>
+                    @endif
 
                     <div>
                         <label class="eyebrow block mb-2">Allowed styles</label>
@@ -443,9 +463,15 @@
                         @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
                     </div>
 
+                    @include('livewire.partials.format-picker')
+
                     @include('livewire.partials.lead-field')
 
                     @include('livewire.partials.instructions-field')
+
+                    @include('livewire.partials.fewer-images')
+
+                    @include('livewire.partials.free-sfx')
 
                     @include('livewire.partials.backdrop-picker')
 
@@ -504,6 +530,7 @@
             <x-panel eyebrow="Edit clip" title="Remotion plan (JSON)" glyph="⌘">
                 <form wire:submit="guardarJson" class="space-y-4">
                     <p class="text-ink-soft text-sm">Edit directly the plan that goes to Remotion (scenes, layers, params). Audio, karaoke and images are added at render.</p>
+                    @include('livewire.partials.musica-picker')
                     <textarea wire:model="editPlanJson" rows="22" spellcheck="false"
                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink font-mono text-xs leading-relaxed focus:border-teal/50 focus:outline-none" style="tab-size:2"></textarea>
                     @error('editPlanJson') <p class="text-bad text-sm">{{ $message }}</p> @enderror
@@ -544,6 +571,11 @@
                                     <div class="font-mono text-[0.55rem] text-ink-faint">animation</div>
                                     <div class="font-display text-ink truncate">{{ $scene['animacao'] ?? '—' }}</div>
                                 </div>
+                                @if (in_array($scene['animacao'] ?? null, $freeSfxSlugs, true))
+                                    {{-- Written by Free SFX for this clip only: offer to keep it. --}}
+                                    <button type="button" wire:click="guardarFreeSfx('{{ $scene['animacao'] }}')"
+                                            class="font-mono text-[0.62rem] px-3 py-1.5 rounded-sm border border-gold/40 text-gold hover:bg-gold/10 transition shrink-0">✦ Add to SFX library</button>
+                                @endif
                                 <button type="button" wire:click="escolherAnimacao({{ $i }})"
                                         class="font-mono text-[0.62rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition shrink-0">⇆ Change</button>
                             </div>
@@ -552,6 +584,7 @@
                                 <div class="mb-3 border border-teal/30 rounded-sm p-2 bg-vellum/40" @if (count($animacoes) > count($sfxReady)) wire:poll.4s @endif>
                                     <div class="flex items-center justify-between mb-2">
                                         <span class="eyebrow">Choose an animation</span>
+                                        <span class="font-mono text-[0.55rem] text-ink-faint">charts &amp; timelines are written from this scene's words on save</span>
                                         <button type="button" wire:click="fecharAnimacoes" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">close</button>
                                     </div>
                                     <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 max-h-96 overflow-y-auto">
@@ -665,6 +698,24 @@
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">element text</label>
                                     <input type="text" wire:model="editScenes.{{ $i }}.layerText" placeholder="—" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
                                 </div>
+                                <div class="col-span-12">
+                                    <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">subtitles spoken in this block</label>
+                                    <textarea wire:model="editScenes.{{ $i }}.subtitles" rows="2" placeholder="—"
+                                              class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm leading-relaxed focus:border-teal/50 focus:outline-none"></textarea>
+                                    <p class="font-mono text-[0.5rem] text-ink-faint mt-0.5">Captions only — the voice still says the old words until you regenerate the voiceover.</p>
+                                </div>
+                                @if ($editOverlay)
+                                    <div class="col-span-12">
+                                        <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">how this block shows against the video</label>
+                                        <select wire:model="editScenes.{{ $i }}.present" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none">
+                                            <option value="">auto (planner's choice)</option>
+                                            <option value="video">raw video only — no graphics</option>
+                                            <option value="over">graphics over the video</option>
+                                            <option value="split">split screen</option>
+                                            <option value="animation">animation only</option>
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="col-span-7">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">punch word</label>
                                     <input type="text" wire:model="editScenes.{{ $i }}.punchWord" placeholder="—" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
@@ -683,6 +734,11 @@
 
                 <div class="flex items-center gap-3 pt-2 border-t border-ink-soft/15">
                     <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition mt-4">Save and re-render</button>
+                    @if ($editSpeakable)
+                        <button type="button" wire:click="guardarPlanoComVoz" wire:loading.attr="disabled"
+                                class="font-display text-lg px-6 py-2 rounded-sm border border-gold/50 text-gold hover:bg-gold/10 transition mt-4"
+                                title="Speaks the subtitles above again and re-renders. Your scenes are kept and their timings scaled to the new audio.">♺ Save and regenerate voiceover</button>
+                    @endif
                     <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink mt-4">cancel</button>
                 </div>
                 <p class="font-mono text-[0.6rem] text-ink-faint">Edit the pacing of the scenes (timings, background, transition, emphasis, karaoke). Each scene's layers are preserved. Gaps in dense mode are filled with «ambient».</p>

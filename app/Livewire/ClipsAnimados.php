@@ -3,9 +3,13 @@
 namespace App\Livewire;
 
 use App\Jobs\Clips\CollectSiteJob;
+use App\Jobs\Clips\FetchWebImagesJob;
+use App\Jobs\Clips\FillChosenVisualsJob;
 use App\Jobs\Clips\FinalizeClipPlanJob;
 use App\Jobs\Clips\GenerateBackgroundJob;
+use App\Jobs\Clips\GenerateRequestImageJob;
 use App\Jobs\Clips\PlanAnimationsJob;
+use App\Jobs\Clips\RegenerateVoiceoverJob;
 use App\Jobs\Clips\RenderBackgroundReelJob;
 use App\Jobs\Clips\RenderBackgroundSampleJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
@@ -16,13 +20,18 @@ use App\Services\Clips\BackgroundPortability;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageProbe;
+use App\Services\Clips\ImageRequests;
 use App\Services\Clips\Media;
 use App\Services\Clips\PlanValidator;
+use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
+use App\Services\Clips\Store\VfxStore;
 use App\Services\Clips\TranscriptRebuilder;
+use App\Services\Costs\CostLedger;
 use App\Services\Projects\ProjectContext;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
@@ -73,6 +82,19 @@ class ClipsAnimados extends Component
             $this->createType = 'animation';
             $this->view = 'create';
         }
+
+        // A clip cut in the Shorts Generator, staged on the clips disk. Open the
+        // normal "video + animations" form with that file already attached.
+        if (($video = session('animado_video')) !== null) {
+            $this->videoPronto = (string) $video;
+            $this->videoProntoNome = (string) session('animado_video_nome', 'Cut clip');
+            session()->forget(['animado_video', 'animado_video_nome']);
+            // The cut carries no music of its own; the picker below owns the choice.
+            $this->musica = 'nenhuma';
+            $this->musicaVolume = 0.0;
+            $this->createType = 'overlay';
+            $this->view = 'create';
+        }
     }
 
     // ---- Backgrounds studio ----
@@ -114,6 +136,12 @@ class ClipsAnimados extends Component
     /** Extra direction for THIS clip, on top of the project's style manual. */
     public string $instructions = '';
 
+    /** Halve this clip's image budget — fewer generated pictures, more text/chart scenes. */
+    public bool $poucasImagens = false;
+
+    /** Let the AI write a bespoke animation per scene instead of using the SFX vocabulary. */
+    public bool $freeSfx = false;
+
     /** which presentation styles the AI may use for a video clip */
     public array $allowedPresents = ['video', 'over', 'split', 'animation'];
 
@@ -151,6 +179,27 @@ class ClipsAnimados extends Component
 
     public string $editTranscriptText = '';
 
+    /** Overlay clip? Then a scene may be switched to the raw source video. */
+    /**
+     * Output frame for the clip: an aspect key from VfxStore::ASPECTS, or 'auto'
+     * — match the uploaded video, which is what an overlay clip did before there
+     * was a choice.
+     */
+    public string $formato = 'auto';
+
+    /** A video already on disk (staged by the Shorts Generator) instead of an upload. */
+    public ?string $videoPronto = null;
+
+    public string $videoProntoNome = '';
+
+    public bool $editOverlay = false;
+
+    /** Text-input clip? Then its voiceover is TTS and can be spoken again. */
+    public bool $editSpeakable = false;
+
+    /** Set by guardarPlanoComVoz: save the edits, then re-speak instead of re-rendering. */
+    private bool $regenerarVoz = false;
+
     // =====================================================================
     // Navigation
     // =====================================================================
@@ -176,7 +225,7 @@ class ClipsAnimados extends Component
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'lead', 'instructions', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker', 'promptKey', 'promptEdits']);
+        $this->reset(['createType', 'text', 'audio', 'video', 'videoPronto', 'videoProntoNome', 'formato', 'lead', 'instructions', 'poucasImagens', 'freeSfx', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editOverlay', 'editSpeakable', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker', 'promptKey', 'promptEdits']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -571,7 +620,7 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions)]),
+            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions), 'fewer_images' => $this->poucasImagens, 'free_sfx' => $this->freeSfx]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -581,9 +630,11 @@ class ClipsAnimados extends Component
     public function submitOverlay(): void
     {
         $this->validate([
-            'video' => 'required|file|mimetypes:video/mp4,video/quicktime|max:512000',
+            // A staged cut is already on the disk — only an upload needs checking.
+            'video' => ($this->videoPronto ? 'nullable' : 'required').'|file|mimetypes:video/mp4,video/quicktime|max:512000',
             'allowedPresents' => 'array|min:1',
             'allowedPresents.*' => 'in:video,over,split,animation',
+            'formato' => 'required|in:auto,'.implode(',', array_keys(VfxStore::ASPECTS)),
         ], [
             'video.required' => 'Upload a video (mp4 or mov).',
             'video.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
@@ -591,15 +642,16 @@ class ClipsAnimados extends Component
             'allowedPresents.min' => 'Choose at least one style.',
         ], ['video' => 'video']);
 
-        $path = $this->video->store('clips/uploads');
+        $path = $this->video ? $this->video->store('clips/uploads') : $this->videoPronto;
+        $titulo = $this->video ? $this->video->getClientOriginalName() : $this->videoProntoNome;
 
         $project = $this->clips()->create([
             'type' => ClipRecord::TYPE_OVERLAY,
             'input_kind' => 'video',
-            'title' => $this->video->getClientOriginalName(),
+            'title' => $titulo,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions)]),
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'formato' => $this->formato, 'background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions), 'fewer_images' => $this->poucasImagens, 'free_sfx' => $this->freeSfx]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -695,7 +747,7 @@ class ClipsAnimados extends Component
     /** Animated intro: (re)generate the start image (a new take on the same concept). */
     public function recriarImagemIntro(): void
     {
-        $this->gerarImagemAgora(\App\Services\Clips\ImageRequests::VIDEO_KEY);
+        $this->gerarImagemAgora(ImageRequests::VIDEO_KEY);
     }
 
     /**
@@ -725,7 +777,7 @@ class ClipsAnimados extends Component
             'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], [$key => true]),
             'site_errors' => array_diff_key($p->meta['site_errors'] ?? [], [$key => true]),
         ])]);
-        \App\Jobs\Clips\GenerateRequestImageJob::dispatch($p->id, $key);
+        GenerateRequestImageJob::dispatch($p->id, $key);
     }
 
     /** Is any website capture running for the clip under review? (drives polling) */
@@ -748,7 +800,7 @@ class ClipsAnimados extends Component
             'site_collecting' => array_merge($p->meta['site_collecting'] ?? [], [$key => 'search']),
             'site_errors' => array_diff_key($p->meta['site_errors'] ?? [], [$key => true]),
         ])]);
-        \App\Jobs\Clips\FetchWebImagesJob::dispatch($p->id, $key);
+        FetchWebImagesJob::dispatch($p->id, $key);
     }
 
     /** "Collect now": film the website behind a suggestion so it can be seen before approving. */
@@ -926,10 +978,19 @@ class ClipsAnimados extends Component
         $this->musicaVolume = (float) ($p->meta['musica_volume'] ?? 0.1);
         $this->images = array_values($p->images ?? []);
         $this->imageReplace = [];
-        $this->editScenes = array_map(function ($s) {
+        $this->editOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
+        $this->editSpeakable = $p->input_kind === 'text';
+        [, $legendas] = self::dividirPalavras($p->transcript['words'] ?? [], $p->plan['scenes'] ?? []);
+        $this->editScenes = array_map(function ($s, $i) use ($legendas) {
             [$target, $text] = $this->extractLayerText($s['layers'] ?? []);
 
             return [
+                // Which scene of the STORED plan this row came from. Adding or
+                // removing scenes reindexes $editScenes, so the saved subtitles
+                // are matched back by this and not by position.
+                'origIndex' => $i,
+                'subtitles' => $legendas[$i] ?? '',
+                'present' => $s['present'] ?? null,
                 'start' => $s['start'] ?? 0,
                 'end' => $s['end'] ?? 0,
                 'background' => $s['background'] ?? 'papyrus',
@@ -948,11 +1009,116 @@ class ClipsAnimados extends Component
                 // scene into a plain video beat).
                 'original' => $s,
             ];
-        }, $p->plan['scenes'] ?? []);
+        }, $p->plan['scenes'] ?? [], array_keys($p->plan['scenes'] ?? []));
         $this->editPlanJson = json_encode($p->plan ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $this->editMode = 'cenas';
         $this->resetValidation();
         $this->view = 'editPlan';
+    }
+
+    /**
+     * Split the transcript words across the plan's scenes: a word belongs to the
+     * first scene whose [start, end) contains it; words in no scene (gaps) stay
+     * on their own. Returns the ordered runs — each ['scene' => ?int, 'text' =>
+     * string] — plus the words of each scene joined, which is what the editor
+     * shows as that block's subtitles.
+     *
+     * Load and save both go through here so a run maps to exactly one textarea.
+     *
+     * @param  array<int,array<string,mixed>>  $words
+     * @param  array<int,array<string,mixed>>  $scenes
+     * @return array{0:array<int,array{scene:?int,text:string}>,1:array<int,string>}
+     */
+    private static function dividirPalavras(array $words, array $scenes): array
+    {
+        $runs = [];
+        $porCena = [];
+
+        foreach ($words as $w) {
+            $t = (float) ($w['start'] ?? 0);
+            $cena = null;
+            foreach ($scenes as $i => $s) {
+                if ($t >= (float) ($s['start'] ?? 0) && $t < (float) ($s['end'] ?? 0)) {
+                    $cena = $i;
+                    break;
+                }
+            }
+            $palavra = trim((string) ($w['word'] ?? ''));
+            if ($palavra === '') {
+                continue;
+            }
+            if ($runs === [] || $runs[count($runs) - 1]['scene'] !== $cena) {
+                $runs[] = ['scene' => $cena, 'text' => $palavra];
+            } else {
+                $runs[count($runs) - 1]['text'] .= ' '.$palavra;
+            }
+            if ($cena !== null) {
+                $porCena[$cena] = trim(($porCena[$cena] ?? '').' '.$palavra);
+            }
+        }
+
+        return [$runs, $porCena];
+    }
+
+    /**
+     * Rebuild the whole transcript from the per-scene subtitle edits, keeping the
+     * timings: the edited text is spliced back where those words were, and
+     * TranscriptRebuilder re-times only the spans that actually changed.
+     *
+     * @param  array<string,mixed>  $transcript
+     * @param  array<int,array<string,mixed>>  $storedScenes  scenes as they were on disk (what the editor split on)
+     * @return array<string,mixed>
+     */
+    private function aplicarLegendas(array $transcript, array $storedScenes): array
+    {
+        [$runs, $porCena] = self::dividirPalavras($transcript['words'] ?? [], $storedScenes);
+        if ($runs === []) {
+            return $transcript;
+        }
+
+        // origIndex → the text now in that scene's textarea.
+        $editado = [];
+        foreach ($this->editScenes as $row) {
+            if (($row['origIndex'] ?? null) !== null) {
+                $editado[(int) $row['origIndex']] = trim((string) ($row['subtitles'] ?? ''));
+            }
+        }
+
+        $partes = [];
+        $feitas = [];
+        foreach ($runs as $run) {
+            $i = $run['scene'];
+            if ($i === null) {
+                $partes[] = $run['text'];
+
+                continue;
+            }
+            // A scene's whole textarea goes in at its first run; any later run of
+            // the same scene (only possible with overlapping scenes) is already
+            // included there, so it is not emitted twice.
+            if (isset($feitas[$i])) {
+                continue;
+            }
+            $feitas[$i] = true;
+            $texto = $editado[$i] ?? ($porCena[$i] ?? $run['text']);
+            if ($texto !== '') {
+                $partes[] = $texto;
+            }
+        }
+
+        $texto = trim(implode(' ', $partes));
+        if ($texto === '' || $texto === trim((string) ($transcript['text'] ?? ''))) {
+            return $transcript;
+        }
+
+        $transcript['text'] = $texto;
+        $transcript['words'] = TranscriptRebuilder::rebuild(
+            $texto,
+            $transcript['words'] ?? [],
+            (float) ($transcript['duration'] ?? 0.0),
+        );
+
+        return $transcript;
     }
 
     /** Find a scene's primary editable text (element text, title, or caption). @return array{0:string,1:string} */
@@ -975,6 +1141,7 @@ class ClipsAnimados extends Component
     public function adicionarCena(): void
     {
         $this->editScenes[] = [
+            'origIndex' => null, 'subtitles' => '', 'present' => null,
             'start' => 0, 'end' => 1, 'background' => 'papyrus',
             'transitionIn' => 'crossfade', 'transitionOut' => 'cut',
             'karaoke' => false, 'punchWord' => '', 'layers' => [], 'layersSummary' => '—',
@@ -1012,29 +1179,128 @@ class ClipsAnimados extends Component
         $this->animacaoPickerCena = null;
     }
 
-    /** Swap a scene's animation to $slug — sets the first layer's effect type. */
-    public function mudarAnimacao(int $i, string $slug): void
+    /**
+     * Swap a scene's animation to $slug — rebuilds the first layer for the new
+     * primitive.
+     *
+     * Retyping the layer in place left the OLD primitive's params and a stale
+     * `textTarget` behind, which broke the swap two ways. An image-reveal keeps
+     * its text in `params.caption` while a text primitive reads `layer.text`, so
+     * the scene's text was saved where the new effect never looked and it
+     * rendered empty — underline-sweep became a bare underline. And a data
+     * primitive (timeline, diagram, a chart) inherited `src`/`caption` instead of
+     * the items/nodes/bars it needs, so it drew its empty-state placeholder: the
+     * big grey em-dash in the middle of the frame.
+     *
+     * The pick is always applied. A data primitive is left without its data here
+     * on purpose: guardarPlano hands those scenes to FillChosenVisualsJob, which
+     * has the planner write items/bars/nodes from what is spoken in the scene.
+     * Seeding the showcase sample instead was tried and reverted — "Market share
+     * A/B/C" in a real clip is confidently wrong content.
+     */
+    public function mudarAnimacao(int $i, string $slug, EffectLibrary $library): void
     {
         if (! isset($this->editScenes[$i])) {
             return;
         }
         $layers = $this->editScenes[$i]['layers'] ?? [];
-        if (empty($layers)) {
-            $layers = [['type' => $slug, 'params' => []]];
-        } else {
-            $layers[0]['type'] = $slug;
+        $old = is_array($layers[0] ?? null) ? $layers[0] : [];
+
+        // Carry the image only into a primitive that shows one — image-reveal, or
+        // a custom effect (those take theirs as params.src). Same roster
+        // FinalizeClipPlanJob feeds dropDeadLayers.
+        $src = $old['params']['src'] ?? null;
+        $novo = ['type' => $slug, 'text' => '', 'params' => []];
+        if (in_array($slug, $this->slugsComImagem($library), true) && is_string($src) && $src !== '') {
+            $novo['params']['src'] = $src;
         }
+
+        $layers[0] = $novo;
+
+        // Point the editor's text field at the key this primitive reads, keeping
+        // whatever the user had typed, and write it there.
+        $texto = trim((string) ($this->editScenes[$i]['layerText'] ?? ''));
+        [$target] = $this->extractLayerText($layers);
+        $layers = $this->applyLayerText($layers, $target, $texto);
+        $this->editScenes[$i]['textTarget'] = $target;
+        $this->editScenes[$i]['layerText'] = $texto;
 
         $this->editScenes[$i]['layers'] = $layers;
         $this->editScenes[$i]['animacao'] = $slug;
-        if (($this->editScenes[$i]['original']['present'] ?? null) === 'video') {
+        if (($this->editScenes[$i]['original']['present'] ?? null) === 'video' || ($this->editScenes[$i]['present'] ?? null) === 'video') {
+            // Both the stored mode and the picker's value, or the new animation
+            // would be saved onto a scene that still presents as plain video.
             unset($this->editScenes[$i]['original']['present']); // validator assigns a graphic mode
+            $this->editScenes[$i]['present'] = null;
         }
         $this->editScenes[$i]['layersSummary'] = implode(', ', array_map(fn ($l) => $l['type'] ?? '?', $layers)) ?: '—';
         $this->animacaoPickerCena = null;
     }
 
-    /** Built-in + enabled custom effects the picker offers, deduped by slug. @return array<int,array{slug:string,label:string,kind:string}> */
+    /** Effect slugs that display a picture — image-reveal plus the custom ones. @return string[] */
+    private function slugsComImagem(EffectLibrary $library): array
+    {
+        return array_merge(
+            ['image-reveal'],
+            array_values(array_filter($library->activeSlugs(), fn ($s) => $library->usesImage($s))),
+        );
+    }
+
+    /**
+     * True for an effect the SCENE EDITOR can never fill: the data primitives
+     * (timeline, diagram, the charts), whose items/bars/nodes only the planner
+     * writes. Handed none, they draw their empty-state placeholder — the big grey
+     * em-dash — and there is no field in this editor to type the data into.
+     *
+     * An empty image slot is deliberately NOT one of these: it renders the same
+     * placeholder, but the editor offers upload/library controls to fill it, and
+     * removing a used image is documented to leave the slot behind on purpose.
+     * Text primitives are fillable too — the scene's text field feeds them.
+     */
+    private function precisaDeDadosDoPlanner(string $slug, EffectLibrary $library, SceneVisualFiller $filler): bool
+    {
+        if (in_array($slug, $this->slugsComImagem($library), true)) {
+            return false;
+        }
+        $imageSlugs = array_values(array_filter($library->activeSlugs(), fn ($s) => $library->usesImage($s)));
+
+        // Probe the primitive with everything the editor CAN give it — a text.
+        return ! $filler->layerHasContent(['type' => $slug, 'text' => 'x', 'params' => []], $imageSlugs);
+    }
+
+    /**
+     * Scene index => layer type, for every scene holding a data primitive with no
+     * data. These are the ones FillChosenVisualsJob has the planner write.
+     *
+     * @return array<int,string>
+     */
+    private function cenasSemDados(array $plan, SceneVisualFiller $filler, EffectLibrary $library): array
+    {
+        $imageSlugs = array_values(array_filter($library->activeSlugs(), fn ($s) => $library->usesImage($s)));
+        $out = [];
+        foreach ($plan['scenes'] ?? [] as $i => $scene) {
+            $layer = $scene['layers'][0] ?? null;
+            if (! is_array($layer) || $filler->layerHasContent($layer, $imageSlugs)) {
+                continue;
+            }
+            $type = (string) ($layer['type'] ?? '');
+            if ($this->precisaDeDadosDoPlanner($type, $library, $filler)) {
+                $out[$i] = $type;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * Built-in + enabled custom effects the picker offers, deduped by slug, plus
+     * the clip's own Free-SFX components. Those are `enabled = false` so the
+     * planner never sees them — but the scene the model wrote them FOR is pointing
+     * at one, and without them here the editor showed a bare slug with no label and
+     * no way back after switching away.
+     *
+     * @return array<int,array{slug:string,label:string,kind:string}>
+     */
     private function animacoesDisponiveis(EffectLibrary $library): array
     {
         $lista = [];
@@ -1044,8 +1310,39 @@ class ClipsAnimados extends Component
         foreach ($library->enabled() as $e) {
             $lista[$e->slug] = ['slug' => $e->slug, 'label' => $e->display_name ?: $e->slug, 'kind' => 'custom'];
         }
+        foreach ($this->freeSfxDoClipe() as $e) {
+            $lista[$e->slug] = ['slug' => $e->slug, 'label' => $e->display_name ?: $e->slug, 'kind' => 'free'];
+        }
 
         return array_values($lista);
+    }
+
+    /** The Free-SFX components written for the clip being edited. @return Collection<int,EffectRecord> */
+    private function freeSfxDoClipe(): Collection
+    {
+        return $this->editingId === null || $this->editingId === ''
+            ? collect()
+            : app(EffectStore::class)->forClip($this->editingId);
+    }
+
+    /**
+     * Keep a Free-SFX component: hand it to the SFX library, where it becomes an
+     * ordinary reusable effect (visible, previewable, offered to the planner).
+     * Clearing `clip_id` also means re-planning this clip no longer deletes it.
+     */
+    public function guardarFreeSfx(string $slug): void
+    {
+        $effect = $this->freeSfxDoClipe()->firstWhere('slug', $slug);
+        if (! $effect) {
+            return;
+        }
+
+        $effect->update(['clip_id' => null, 'enabled' => true]);
+        foreach (array_keys(EffectLibrary::FORMATS) as $formato) {
+            RenderEffectSampleJob::dispatch($slug, (string) $effect->sample_text, $effect->sample_params ?? [], $formato);
+        }
+
+        $this->dispatch('toast', type: 'ok', message: '«'.($effect->display_name ?: $slug).'» added to the SFX library.');
     }
 
     // ---- per-scene image (see & replace in the scene editor) ----
@@ -1232,7 +1529,7 @@ class ClipsAnimados extends Component
         return $layers;
     }
 
-    public function guardarPlano(PlanValidator $validator): void
+    public function guardarPlano(PlanValidator $validator, SceneVisualFiller $filler, EffectLibrary $library): void
     {
         $this->validate([
             'editTitle' => 'nullable|string|max:120',
@@ -1243,6 +1540,8 @@ class ClipsAnimados extends Component
             'editScenes.*.transitionIn' => 'required|in:'.implode(',', self::TRANSITIONS),
             'editScenes.*.punchWord' => 'nullable|string|max:60',
             'editScenes.*.layerText' => 'nullable|string|max:280',
+            'editScenes.*.subtitles' => 'nullable|string|max:2000',
+            'editScenes.*.present' => 'nullable|in:video,over,split,animation',
         ], [
             'editScenes.min' => 'The clip needs at least one scene.',
             'editScenes.*.end.gt' => 'The end must be greater than the start.',
@@ -1260,29 +1559,61 @@ class ClipsAnimados extends Component
             'karaoke' => (bool) $s['karaoke'],
             'punchWord' => ($s['punchWord'] ?? '') === '' ? null : $s['punchWord'],
             'layers' => $this->applyLayerText($s['layers'] ?? [], $s['textTarget'] ?? 'text', $s['layerText'] ?? ''),
-        ]), $this->editScenes);
+        ], ($s['present'] ?? null) ? ['present' => $s['present']] : []), $this->editScenes);
         $plan = $this->stripMissingImageRefs($plan);
+
+        // Scenes the user swapped to a data primitive (timeline, diagram, a chart)
+        // have the type but none of the items/bars/nodes it draws — only the
+        // planner writes those. Collect them; FillChosenVisualsJob asks for the
+        // data from what is spoken there before the render, so the effect is
+        // actually generated instead of drawing its em-dash placeholder.
+        $porGerar = $this->cenasSemDados($plan, $filler, $library);
         // Overlay context matters: without it the validator can't keep/assign the
         // per-scene `present` modes (an overlay scene with none shows only video).
+        // A mode picked by hand here ("just the raw video for this block") is not
+        // necessarily among the styles chosen at creation, and assignPresentModes
+        // overwrites any present outside that list — so the picks join the list.
+        $allowed = $p->meta['allowed_present'] ?? null;
+        if ($allowed !== null) {
+            $escolhidos = array_filter(array_column($this->editScenes, 'present'));
+            $allowed = array_values(array_unique(array_merge($allowed, $escolhidos)));
+        }
         $plan = $validator->validate(
             $plan,
             '', // no transcript check — edited punch words are the user's call
             $p->type === ClipRecord::TYPE_OVERLAY,
-            $p->meta['allowed_present'] ?? null,
+            $allowed,
         );
 
         $p->update([
             'title' => $this->editTitle ?: $p->title,
             'plan' => $plan,
             'images' => $this->images ?: null,
+            'transcript' => $this->aplicarLegendas($p->transcript ?? [], $p->plan['scenes'] ?? []),
             'meta' => $this->musicaMeta($p->meta ?? []),
             'status' => ClipRecord::STATUS_RENDERING,
             'error' => null,
         ]);
         $this->pruneImageFiles($oldImages);
 
-        RenderJob::dispatch($p->id);
+        if ($this->regenerarVoz) {
+            // Speaks the subtitles just saved, then re-renders on the new audio.
+            $p->update(['status' => ClipRecord::STATUS_TRANSCRIBING]);
+            RegenerateVoiceoverJob::dispatch($p->id);
+        } elseif ($porGerar !== []) {
+            $p->update(['status' => ClipRecord::STATUS_PLANNING]);
+            FillChosenVisualsJob::dispatch($p->id, $porGerar);
+        } else {
+            RenderJob::dispatch($p->id);
+        }
         $this->voltar();
+    }
+
+    /** Save the edits exactly like guardarPlano, then re-speak instead of re-rendering. */
+    public function guardarPlanoComVoz(PlanValidator $validator, SceneVisualFiller $filler, EffectLibrary $library): void
+    {
+        $this->regenerarVoz = true;
+        $this->guardarPlano($validator, $filler, $library);
     }
 
     /** Merge the current music choice into a meta array (base preserved). */
@@ -1350,6 +1681,13 @@ class ClipsAnimados extends Component
             Storage::disk(config('contentmachine.clips.disk'))->delete($p->source_path);
         }
 
+        // Free-SFX components belong to this clip alone — anything the user chose
+        // to keep was moved into the library and no longer answers to its id.
+        $library = app(EffectLibrary::class);
+        foreach (app(EffectStore::class)->forClip($id) as $effect) {
+            $library->remove($effect);
+        }
+
         $p->delete();
     }
 
@@ -1394,9 +1732,12 @@ class ClipsAnimados extends Component
 
         $animacoes = [];
         $sfxReady = [];
+        $freeSfxSlugs = [];
         if ($this->view === 'editPlan') {
             $library = app(EffectLibrary::class);
             $animacoes = $this->animacoesDisponiveis($library);
+            // Slugs the "Add to SFX library" button applies to (this clip's own).
+            $freeSfxSlugs = $this->freeSfxDoClipe()->pluck('slug')->all();
             $sfxReady = array_values(array_filter(
                 array_column($animacoes, 'slug'),
                 fn ($slug) => $library->previewExists($slug),
@@ -1405,7 +1746,7 @@ class ClipsAnimados extends Component
 
         return view('livewire.clips-animados', [
             'custos' => $this->view === 'dashboard'
-                ? app(\App\Services\Costs\CostLedger::class)->totaisPorPeca('clip')
+                ? app(CostLedger::class)->totaisPorPeca('clip')
                 : [],
             'backgrounds' => self::BACKGROUNDS,
             'transitions' => self::TRANSITIONS,
@@ -1413,6 +1754,7 @@ class ClipsAnimados extends Component
             'bgReady' => $bgReady,
             'animacoes' => $animacoes,
             'sfxReady' => $sfxReady,
+            'freeSfxSlugs' => $freeSfxSlugs,
         ]);
     }
 }
