@@ -7,17 +7,17 @@
     "source_path": null,
     "images": [
         {
-            "id": "gen_053910a2",
-            "path": "clips/generated/fol5ugdtz1uv.png",
-            "description": "A modern office building with shattered glass windows, reflecting a gloomy, overcast sky, symbolizing corporate turmoil and instability, with a focus on the broken glass to convey a sense of crisis.",
-            "tone": "dark",
-            "transparent": true,
-            "generated": true
+            "id": "img_b48fc554",
+            "path": "clips/uploads/site-4412bf4b.png",
+            "description": "Website: https://kpmg.com/au/en/home.html",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
         },
         {
-            "id": "gen_5aa3640c",
-            "path": "clips/generated/xekopx7savmv.png",
-            "description": "Illustrate this moment: KPMG to cut jobs and partner pay amid audit scandal",
+            "id": "gen_1c3ff616",
+            "path": "clips/generated/nofuihlw8yxx.png",
+            "description": "Illustrate this moment: KPMG to cut jobs and partner pay amid audit scandal.",
             "tone": "dark",
             "transparent": true,
             "generated": true
@@ -30,81 +30,80 @@
         "musica": "documentary-song.mp3",
         "musica_volume": 0.1,
         "research": {
-            "topic": "KPMG Australia: job cuts and partner pay cuts after the client-data leaks scandal",
-            "summary": "KPMG Australia is cutting 387 roles (360 staff and 27 partners, about 5% of headcount) after FY26 revenue slipped 1% to A$2.257bn and consulting collapsed 17%. Average equity partner pay fell 13% to A$645,000 as the firm deals with a scandal over misuse of confidential client documents, an ASIC probe and a freeze on new federal contracts.",
+            "topic": "KPMG Australia: 387 job cuts and 13% partner pay drop after audit leaks scandal",
+            "summary": "KPMG Australia is cutting 27 partners and about 360 staff (~5% of its workforce) and slashing average equity partner pay 13% to A$645,000, after a whistleblower scandal over misused Lendlease board papers wiped out consulting work and cost it its CEO, its federal contract pipeline and major audit clients. FY26 revenue slipped 1% to A$2.26bn while consulting fell 17% to A$632m.",
             "timeline": [
                 {
-                    "label": "Whistleblower raises internal complaint over misuse of Lendlease board papers",
-                    "sublabel": "2024"
-                },
-                {
-                    "label": "Senator Deborah O'Neill airs allegations in Parliament under privilege",
+                    "label": "Senator O'Neill airs whistleblower claims in parliament",
                     "sublabel": "24 March 2026"
                 },
                 {
-                    "label": "CEO Andrew Yates and audit head Julian McPherson resign",
-                    "sublabel": "29 May 2026"
-                },
-                {
-                    "label": "ASIC opens formal investigation into KPMG partners",
+                    "label": "ASIC opens formal probe into KPMG and 3 auditors",
                     "sublabel": "June 2026"
                 },
                 {
-                    "label": "Firm agrees to freeze on new Commonwealth contracts to 30 Sept",
-                    "sublabel": "16 June 2026"
+                    "label": "CEO Andrew Yates resigns",
+                    "sublabel": "29 May 2026"
                 },
                 {
-                    "label": "John Sams appointed CEO",
+                    "label": "Federal government pauses new KPMG contracts",
+                    "sublabel": "16 June – 30 September 2026"
+                },
+                {
+                    "label": "Treasury floats splitting Big Four audit and consulting",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "John Sams named CEO",
                     "sublabel": "21 July 2026"
                 },
                 {
-                    "label": "Parliamentary joint committee hearings with KPMG clients",
-                    "sublabel": "August 2026"
+                    "label": "Westpac, Macquarie, Dexus, Optus question KPMG at inquiry",
+                    "sublabel": "14 August 2026"
                 },
                 {
-                    "label": "387 roles cut; partner pay cut announced with FY26 results",
+                    "label": "387 roles cut, partner pay down 13%",
                     "sublabel": "24 August 2026"
+                },
+                {
+                    "label": "Macquarie drops KPMG, keeps PwC as auditor",
+                    "sublabel": "26 August 2026"
                 }
             ],
             "stats": [
                 {
-                    "label": "Staff roles cut",
-                    "value": 360,
-                    "unit": "jobs"
-                },
-                {
-                    "label": "Partners exiting",
+                    "label": "Partners cut",
                     "value": 27,
                     "unit": "partners"
                 },
                 {
-                    "label": "Total roles cut",
-                    "value": 387,
-                    "unit": "roles"
+                    "label": "Staff cut",
+                    "value": 360,
+                    "unit": "employees"
                 },
                 {
-                    "label": "Headcount reduction",
+                    "label": "Workforce cut (FY26 restructure)",
                     "value": 5,
                     "unit": "%"
                 },
                 {
-                    "label": "Average equity partner pay (FY26)",
+                    "label": "Average equity partner pay cut",
+                    "value": 13,
+                    "unit": "%"
+                },
+                {
+                    "label": "New average equity partner pay (FY26)",
                     "value": 645000,
                     "unit": "AUD"
                 },
                 {
-                    "label": "Partner pay change (FY26 vs FY25)",
-                    "value": -13,
-                    "unit": "%"
-                },
-                {
-                    "label": "Partner pay drop per partner",
+                    "label": "Pay lost per partner (FY26)",
                     "value": 72000,
                     "unit": "AUD"
                 },
                 {
-                    "label": "Total revenue (year to 30 June 2026)",
-                    "value": 2.257,
+                    "label": "Total revenue (FY26)",
+                    "value": 2.26,
                     "unit": "AUD billion"
                 },
                 {
@@ -119,7 +118,7 @@
                 },
                 {
                     "label": "Consulting revenue change (FY26)",
-                    "value": -16.9,
+                    "value": -17,
                     "unit": "%"
                 },
                 {
@@ -128,112 +127,127 @@
                     "unit": "AUD million"
                 },
                 {
-                    "label": "Audit & assurance change (FY26)",
+                    "label": "Audit & assurance growth (FY26)",
                     "value": 11,
                     "unit": "%"
+                },
+                {
+                    "label": "Tax & legal revenue (FY26)",
+                    "value": 268,
+                    "unit": "AUD million"
+                },
+                {
+                    "label": "Proposed cap on partnership size (Treasury)",
+                    "value": 400,
+                    "unit": "partners"
                 }
             ],
             "comparisons": [
                 {
-                    "title": "Where the money moved in FY26",
+                    "title": "What shrank vs what grew (FY26)",
                     "left": {
-                        "title": "Consulting",
+                        "title": "Consulting collapsed",
                         "points": [
-                            "A$632m revenue",
-                            "Down 16.9% year on year",
-                            "Most job cuts land here"
+                            "Revenue A$632m",
+                            "Down 17% year on year",
+                            "Most job cuts land here",
+                            "Government work dried up"
                         ]
                     },
                     "right": {
-                        "title": "Audit & Assurance",
+                        "title": "Audit and tax grew",
                         "points": [
-                            "A$405m revenue",
-                            "Up 11% year on year",
-                            "Growing despite the scandal"
+                            "Audit & assurance A$405m, +11%",
+                            "Tax & legal A$268m, +10.9%",
+                            "4 of 5 other divisions grew",
+                            "Total revenue only -1%"
+                        ]
+                    }
+                },
+                {
+                    "title": "Before the leak vs after",
+                    "left": {
+                        "title": "Before March 2026",
+                        "points": [
+                            "Andrew Yates CEO",
+                            "Bidding for federal contracts",
+                            "Set to win Macquarie audit",
+                            "Partner pay ~A$717k average"
+                        ]
+                    },
+                    "right": {
+                        "title": "After the leak",
+                        "points": [
+                            "Yates and COO gone, John Sams CEO",
+                            "New federal bids paused to 30 Sep 2026",
+                            "Macquarie sticks with PwC",
+                            "Partner pay A$645k average"
                         ]
                     }
                 }
             ],
             "keyPoints": [
-                "387 roles go: 360 employees plus 27 partners, about 5% of the firm",
-                "Average equity partner pay falls 13% to A$645,000",
-                "FY26 revenue A$2.257bn, down 1% for the year to 30 June 2026",
-                "Consulting revenue down 16.9% to A$632m; audit up 11% to A$405m",
-                "Allegations: confidential Lendlease board papers used in bids for Westpac and Dexus audit tenders",
-                "CEO Andrew Yates and audit head Julian McPherson resigned on 29 May 2026",
-                "John Sams took over as CEO on 21 July 2026",
-                "ASIC opened a formal investigation into KPMG partners in June 2026",
-                "KPMG agreed to stop bidding for new Commonwealth contracts from 16 June to 30 September 2026",
-                "CEO warns the restructure could extend into the 2026-27 financial year"
+                "The trigger: a whistleblower alleged confidential Lendlease board papers were used to chase Westpac and Dexus audit tenders.",
+                "Labor senator Deborah O'Neill read the allegations into parliament under privilege in March 2026.",
+                "KPMG's first internal investigation found nothing; law firm Allens was later brought in externally.",
+                "CEO Andrew Yates resigned 29 May 2026; the COO and other senior partners also left.",
+                "ASIC escalated from preliminary inquiries to a formal investigation of KPMG and three registered auditors.",
+                "Canberra paused new KPMG contracts for procurements closing 16 June–30 September 2026, pending a governance review.",
+                "Consulting revenue is now A$632m, down from more than A$1bn three years earlier.",
+                "Macquarie reversed its plan to appoint KPMG and kept PwC as auditor on 26 August 2026.",
+                "Treasury is consulting on splitting Big Four audit and consulting arms and capping partnerships at 400 partners.",
+                "KPMG expects subdued economic conditions to persist to at least 2028."
             ],
             "sources": [
-                "https://kpmg.com/au/en/media/media-releases/2026/08/fy26-result-streamlines-business.html",
                 "https://www.abc.net.au/news/2026-08-24/kpmg-restructure-job-cuts-after-whistleblower-audit-leak-scandal/107070260",
-                "https://www.accountantsdaily.com.au/business/22812-kpmg-australia-s-rebuild-starts-with-5-headcount-reduction",
+                "https://kpmg.com/au/en/media/media-releases/2026/08/fy26-result-streamlines-business.html",
+                "https://www.capitalbrief.com/briefing/kpmg-australia-revenue-falls-axes-27-partners-and-360-employees-21173de4-3f5b-48ed-8823-9abc90ba120f/",
+                "https://www.hcamag.com/au/specialisation/recruitment/kpmg-australia-to-cut-almost-400-jobs-following-scandal/587095",
                 "https://www.insurancebusinessmag.com/au/news/breaking-news/kpmg-australia-cuts-387-jobs-as-scandal-collapses-consulting-revenue--and-insurance-is-watching-587215.aspx",
-                "https://www.insurancejournal.com/news/international/2026/08/24/882579.htm",
                 "https://news.bloombergtax.com/financial-accounting/consulting-losses-hit-kpmg-australia-fees-as-audit-tax-grow",
                 "https://www.abc.net.au/news/2026-05-29/kpmg-boss-resigns-over-mishandled-whistleblower-allegations/106737180",
-                "https://www.abc.net.au/news/2026-06-16/kpmg-freeze-on-government-contracts-amid-corruption-referral/106802576",
-                "https://www.finance.gov.au/government/procurement/procurement-policy-notes/procurement-goods-and-services-kpmg",
-                "https://kpmg.com/au/en/media/media-releases/2026/07/kpmg-australia-appoints-john-sams-as-ceo.html",
                 "https://www.abc.net.au/news/2026-08-14/macquarie-westpac-dexus-optus-grilled-kpmg-audit-leaks-inquiry/107034656",
-                "https://www.sharecafe.com.au/2026/06/05/asic-launches-formal-probe-into-kpmg-partners/"
+                "https://www.abc.net.au/news/2026-08-26/kpmg-responds-after-being-dropped-macquarie-group/107082306",
+                "https://kpmg.com/au/en/media/media-releases/2026/07/kpmg-australia-appoints-john-sams-as-ceo.html",
+                "https://www.capitalbrief.com/briefing/asic-commences-formal-investigation-into-kpmg-95300dc0-6579-4dc5-98df-54c101d186e4/",
+                "https://www.hcamag.com/au/specialisation/leadership/federal-government-halts-new-contracts-with-kpmg-until-september/578978",
+                "https://www.theaccountant-online.com/news/australia-considers-break-up-of-big-four-firms/",
+                "https://www.goingconcern.com/after-consulting-takes-a-double-digit-revenue-hit-kpmg-australia-cuts-workforce-by-5-percent/"
             ]
         },
         "suggested": {
             "title": "KPMG Cuts Jobs and Partner Pay After Audit Scandal",
-            "description": "KPMG Australia is cutting hundreds of jobs and slashing partner pay by 13% as growth slows and fallout from an audit scandal deepens. Allegations of misconduct among senior audit partners have already triggered executive departures and a political crisis. It's a stark look at what happens when a major firm's ethical standards come under fire.",
+            "description": "KPMG Australia is cutting hundreds of jobs and slashing partner pay by 13% as growth slows and an audit misconduct scandal deepens. Allegations against senior audit partners have triggered executive departures and a political crisis. It's a hard look at what happens when a major firm's ethical standards come under fire.",
             "tags": [
                 "KPMG",
                 "audit scandal",
                 "layoffs",
-                "Big Four",
-                "corporate governance",
-                "Australia business",
+                "business news",
                 "accounting",
-                "business news"
+                "corporate governance",
+                "Australia",
+                "finance"
             ]
         },
         "image_requests": [
             {
-                "key": "317b0ed7",
-                "prompt": "Illustrate this moment: KPMG to cut jobs and partner pay amid audit scandal",
-                "label": "KPMG to cut jobs and partner pay amid audit scandal",
+                "key": "54a7d357",
+                "prompt": "Illustrate this moment: KPMG to cut jobs and partner pay amid audit scandal.",
+                "label": "KPMG to cut jobs and partner pay amid audit scandal.",
                 "site": null,
                 "still": false
             },
             {
-                "key": "51259a1e",
+                "key": "4412bf4b",
                 "prompt": "https://kpmg.com/au/en/home.html",
-                "label": "KPMG Australia faces significant layoffs and pay cuts following a scandal",
+                "label": "If you want the link, just comment KPMG.",
                 "site": "https://kpmg.com/au/en/home.html",
-                "still": false
-            },
-            {
-                "key": "af494555",
-                "prompt": "An empty corporate boardroom at dusk, long polished table, a stack of confidential printed documents left behind on it, one chair pushed back, cold blue window light and warm lamp glow, tense documentary photograph, shallow depth of field",
-                "label": "This turmoil follows allegations of misconduct among senior audit partners",
-                "site": null,
-                "still": false
-            },
-            {
-                "key": "7eaab5c0",
-                "prompt": "https://www.abc.net.au/news/2026-08-24/kpmg-restructure-job-cuts-after-whistleblower-audit-leak-scandal/107070260",
-                "label": "If you want the link just comment KPMG",
-                "site": "https://www.abc.net.au/news/2026-08-24/kpmg-restructure-job-cuts-after-whistleblower-audit-leak-scandal/107070260",
-                "still": false
-            },
-            {
-                "key": "intro",
-                "prompt": "A modern office building with shattered glass windows, reflecting a gloomy, overcast sky, symbolizing corporate turmoil and instability, with a focus on the broken glass to convey a sense of crisis.",
-                "label": "Opening image — A shattered glass office building reflecting a cloudy sky.",
-                "site": null
+                "still": true
             }
         ],
         "image_uploads": {
-            "intro": "gen_053910a2",
-            "317b0ed7": "gen_5aa3640c"
+            "4412bf4b": "img_b48fc554",
+            "54a7d357": "gen_1c3ff616"
         },
         "site_collecting": [],
         "site_errors": [],
@@ -245,7 +259,7 @@
     },
     "id": "kpmg-to-cut-jobs-and-partner-pay-amid-au-uqrg7",
     "created_at": "2026-08-25T13:40:26+00:00",
-    "updated_at": "2026-08-25T14:00:29+00:00",
+    "updated_at": "2026-09-01T13:02:57+00:00",
     "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/kpmg-to-cut-jobs-and-partner-pay-amid-au-uqrg7/voz.mp3",
     "transcript": {
         "duration": 42.119998931884766,
@@ -298,7 +312,7 @@
                 "end": 5.039999961853027
             },
             {
-                "word": "scandal",
+                "word": "scandal.",
                 "start": 5.039999961853027,
                 "end": 5.559999942779541
             },
@@ -353,7 +367,7 @@
                 "end": 11.199999809265137
             },
             {
-                "word": "scandal",
+                "word": "scandal.",
                 "start": 11.199999809265137,
                 "end": 11.199999809265137
             },
@@ -433,14 +447,9 @@
                 "end": 16.81999969482422
             },
             {
-                "word": "13",
+                "word": "13%",
                 "start": 16.81999969482422,
                 "end": 17.34000015258789
-            },
-            {
-                "word": "",
-                "start": 17.34000015258789,
-                "end": 17.739999771118164
             },
             {
                 "word": "due",
@@ -463,7 +472,7 @@
                 "end": 19.299999237060547
             },
             {
-                "word": "expectations",
+                "word": "expectations.",
                 "start": 19.299999237060547,
                 "end": 19.979999542236328
             },
@@ -513,7 +522,7 @@
                 "end": 25.420000076293945
             },
             {
-                "word": "partners",
+                "word": "partners,",
                 "start": 25.420000076293945,
                 "end": 26.100000381469727
             },
@@ -553,7 +562,7 @@
                 "end": 29.5
             },
             {
-                "word": "departures",
+                "word": "departures.",
                 "start": 29.5,
                 "end": 30.260000228881836
             },
@@ -613,7 +622,7 @@
                 "end": 36.63999938964844
             },
             {
-                "word": "standards",
+                "word": "standards.",
                 "start": 36.63999938964844,
                 "end": 37.2599983215332
             },
@@ -638,7 +647,7 @@
                 "end": 39.02000045776367
             },
             {
-                "word": "link",
+                "word": "link,",
                 "start": 39.02000045776367,
                 "end": 39.2400016784668
             },
@@ -653,7 +662,7 @@
                 "end": 40.5
             },
             {
-                "word": "KPMG",
+                "word": "KPMG.",
                 "start": 40.5,
                 "end": 41.84000015258789
             }
@@ -670,8 +679,8 @@
         "scenes": [
             {
                 "start": 0,
-                "end": 5.119999999999997,
-                "background": "ink",
+                "end": 5.18,
+                "background": "papyrus",
                 "transitionIn": "cut",
                 "transitionOut": "whip",
                 "karaoke": true,
@@ -680,78 +689,74 @@
                 "layers": [
                     {
                         "type": "paper-shard-assembly",
-                        "text": "scandal",
+                        "text": "audit scandal",
                         "params": {
-                            "src": "gen_5aa3640c"
+                            "src": "gen_1c3ff616"
                         }
                     }
                 ]
             },
             {
-                "start": 5.119999999999997,
-                "end": 5.56,
-                "background": "ink",
-                "transitionIn": "cut",
-                "transitionOut": "whip",
-                "karaoke": true,
-                "punchWord": "scandal",
-                "present": null,
-                "layers": [
-                    {
-                        "type": "image-reveal",
-                        "text": null,
-                        "params": {
-                            "variant": "fullscreen",
-                            "src": "gen_5aa3640c"
-                        }
-                    }
-                ]
-            },
-            {
-                "start": 5.56,
-                "end": 12.02,
-                "background": "papyrus",
-                "transitionIn": "whip",
-                "transitionOut": "slide",
+                "start": 5.18,
+                "end": 11.2,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
                 "karaoke": true,
                 "punchWord": null,
                 "present": null,
                 "layers": [
                     {
-                        "type": "image-reveal",
+                        "type": "timeline",
                         "text": null,
                         "params": {
-                            "src": "gen_053910a2",
-                            "variant": "fullscreen"
+                            "items": [
+                                {
+                                    "label": "Scandal surfaces",
+                                    "sublabel": "KPMG Australia"
+                                },
+                                {
+                                    "label": "Fallout begins"
+                                },
+                                {
+                                    "label": "Layoffs announced",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Pay cuts follow",
+                                    "highlight": true
+                                }
+                            ],
+                            "caption": "Scandal to cuts"
                         }
                     }
                 ]
             },
             {
-                "start": 12.02,
-                "end": 16.32,
-                "background": "vellum",
-                "transitionIn": "slide",
-                "transitionOut": "cut",
+                "start": 11.2,
+                "end": 17.74,
+                "background": "papyrus",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
                 "karaoke": true,
-                "punchWord": "hundreds",
+                "punchWord": null,
                 "present": null,
                 "layers": [
                     {
-                        "type": "bar-chart",
-                        "text": "",
+                        "type": "diagram",
+                        "text": null,
                         "params": {
-                            "title": "Roles cut, August 2026",
-                            "unit": "roles",
-                            "bars": [
+                            "title": "Scandal Fallout",
+                            "layout": "vertical",
+                            "nodes": [
                                 {
-                                    "label": "Staff",
-                                    "value": 360,
-                                    "highlight": true
+                                    "label": "Scandal at KPMG Australia"
                                 },
                                 {
-                                    "label": "Partners",
-                                    "value": 27
+                                    "label": "Hundreds of jobs cut"
+                                },
+                                {
+                                    "label": "Partner pay down 13%"
                                 }
                             ]
                         }
@@ -759,24 +764,24 @@
                 ]
             },
             {
-                "start": 16.32,
+                "start": 17.74,
                 "end": 20.92,
                 "background": "ink",
                 "transitionIn": "cut",
-                "transitionOut": "crossfade",
+                "transitionOut": "slide",
                 "karaoke": true,
-                "punchWord": "13",
+                "punchWord": null,
                 "present": null,
                 "layers": [
                     {
                         "type": "card",
                         "text": "",
                         "params": {
-                            "title": "Average equity partner pay",
+                            "title": "FY26 REVENUE",
                             "lines": [
-                                "A$645,000 in FY26",
-                                "Down 13% on last year",
-                                "= A$72,000 less per partner"
+                                "Total A$2.26bn — down 1%",
+                                "Consulting A$632m — down 17%",
+                                "Average partner pay A$645,000"
                             ]
                         }
                     }
@@ -787,19 +792,45 @@
                 "end": 26.1,
                 "background": "papyrus",
                 "transitionIn": "crossfade",
-                "transitionOut": "zoom",
+                "transitionOut": "whip",
                 "karaoke": true,
-                "punchWord": null,
+                "punchWord": "misconduct",
                 "present": null,
                 "layers": [
                     {
-                        "type": "card",
-                        "text": null,
+                        "type": "diagram",
+                        "text": "",
                         "params": {
-                            "title": "Root Of The Scandal",
-                            "lines": [
-                                "Misconduct allegations",
-                                "Senior audit partners"
+                            "title": "WHAT WAS ALLEGED",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Lendlease board papers"
+                                },
+                                {
+                                    "label": "Used to chase audit tenders"
+                                },
+                                {
+                                    "label": "Whistleblower comes forward"
+                                },
+                                {
+                                    "label": "Read into parliament",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                },
+                                {
+                                    "from": 2,
+                                    "to": 3
+                                }
                             ]
                         }
                     }
@@ -809,8 +840,8 @@
                 "start": 26.1,
                 "end": 31.22,
                 "background": "vellum",
-                "transitionIn": "zoom",
-                "transitionOut": "slide",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
                 "karaoke": true,
                 "punchWord": "departures",
                 "present": null,
@@ -819,26 +850,26 @@
                         "type": "timeline",
                         "text": "",
                         "params": {
-                            "caption": "How the crisis escalated",
                             "items": [
                                 {
-                                    "label": "Allegations aired in Parliament",
-                                    "sublabel": "24 Mar 2026"
-                                },
-                                {
-                                    "label": "CEO and audit head resign",
-                                    "sublabel": "29 May 2026"
+                                    "label": "CEO Andrew Yates resigns",
+                                    "sublabel": "29 MAY 2026"
                                 },
                                 {
                                     "label": "ASIC opens formal probe",
-                                    "sublabel": "Jun 2026"
+                                    "sublabel": "JUNE 2026"
                                 },
                                 {
-                                    "label": "New CEO appointed",
-                                    "sublabel": "21 Jul 2026",
+                                    "label": "Federal contracts paused",
+                                    "sublabel": "16 JUN – 30 SEP 2026"
+                                },
+                                {
+                                    "label": "John Sams named CEO",
+                                    "sublabel": "21 JULY 2026",
                                     "highlight": true
                                 }
-                            ]
+                            ],
+                            "caption": "SOURCE: ABC NEWS, ASIC, KPMG"
                         }
                     }
                 ]
@@ -846,9 +877,9 @@
             {
                 "start": 31.22,
                 "end": 37.36,
-                "background": "papyrus",
-                "transitionIn": "slide",
-                "transitionOut": "crossfade",
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
                 "karaoke": true,
                 "punchWord": "ethical standards",
                 "present": null,
@@ -857,12 +888,12 @@
                         "type": "bullet-list",
                         "text": "",
                         "params": {
-                            "title": "What the firm is facing",
+                            "title": "WHAT REGULATORS PROPOSE",
                             "items": [
-                                "ASIC investigation into partners",
-                                "Freeze on new federal contracts",
-                                "Parliamentary committee hearings",
-                                "Consulting revenue down 16.9%"
+                                "Split audit from consulting arms",
+                                "Cap partnerships at 400 partners",
+                                "ASIC probing three registered auditors",
+                                "Macquarie kept PwC as auditor"
                             ]
                         }
                     }
@@ -879,13 +910,14 @@
                 "present": null,
                 "layers": [
                     {
-                        "type": "terminal",
-                        "text": null,
+                        "type": "image-reveal",
+                        "text": "",
                         "params": {
-                            "lines": [
-                                "> comment: KPMG",
-                                "> link sent"
-                            ]
+                            "site": "https://kpmg.com/au/en/home.html",
+                            "site_still": true,
+                            "variant": "framed",
+                            "caption": "FY26 RESULT — KPMG AUSTRALIA",
+                            "src": "img_b48fc554"
                         }
                     }
                 ]

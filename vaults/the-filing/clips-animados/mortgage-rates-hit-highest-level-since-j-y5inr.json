@@ -1,0 +1,821 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Mortgage Rates Hit 6.87% — Highest Since June 2025",
+    "source_text": "Mortgage Rates Hit Highest Level Since June 2025.\n\nMortgage rates just jumped to 6.87%, the highest level since June 2025. This increase of 6 basis points comes amid rising oil prices due to renewed hostilities in the Iran war. The rate has surged by over 30 basis points in just two months, making home buying more expensive for many. If you're considering a mortgage, now might be the time to act. If you want the link, just comment mortgage.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "gen_4da68150",
+            "path": "clips/generated/ysqg8scma76l.png",
+            "description": "Illustrate this moment: Mortgage rates hit highest level since June 2025",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "gen_c003010f",
+            "path": "clips/generated/e2dp0edfpuuw.png",
+            "description": "A close-up shot of a broken piggy bank with coins spilling out, set on a wooden table, with a blurred background of a house silhouette, conveying a sense of financial distress and uncertainty.",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "background": "orange-dot-grid",
+        "lead": "",
+        "instructions": "",
+        "musica": "documentary-song.mp3",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "US mortgage rates hit highest level since June 2025 as Iran war lifts oil prices",
+            "summary": "The average 30-year fixed mortgage rate jumped 6 basis points to 6.87% on Aug 31, 2026 — the highest since June 2025 — after renewed US–Iran hostilities near the Strait of Hormuz pushed Brent crude above $90 and the 10-year Treasury yield past 4.75%. Rates are now roughly 88 basis points above the 5.99% low hit the day before the war began in February 2026.",
+            "timeline": [
+                {
+                    "label": "30-year fixed falls to 5.99%, first time under 6% in years",
+                    "sublabel": "Feb 27, 2026"
+                },
+                {
+                    "label": "US–Iran war begins",
+                    "sublabel": "Feb 28, 2026"
+                },
+                {
+                    "label": "Mortgage rate back up to 6.19% within two weeks",
+                    "sublabel": "Mar 11, 2026"
+                },
+                {
+                    "label": "Fed holds rates at 3.50%–3.75% for 5th straight meeting",
+                    "sublabel": "Jul 29, 2026"
+                },
+                {
+                    "label": "US strikes Iranian rocket launchers on Larak Island, inside Strait of Hormuz",
+                    "sublabel": "Aug 30, 2026"
+                },
+                {
+                    "label": "Brent tops $90; 10-year Treasury tops 4.75%; 30-year fixed hits 6.87%",
+                    "sublabel": "Aug 31, 2026"
+                },
+                {
+                    "label": "Next FOMC meeting",
+                    "sublabel": "Sep 15–16, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "30-year fixed mortgage rate (daily index, Aug 31, 2026)",
+                    "value": 6.87,
+                    "unit": "%"
+                },
+                {
+                    "label": "One-day move (Aug 31, 2026)",
+                    "value": 6,
+                    "unit": "basis points"
+                },
+                {
+                    "label": "Move since Thursday Aug 27, 2026",
+                    "value": 12,
+                    "unit": "basis points"
+                },
+                {
+                    "label": "Rise from pre-war low of 5.99% (Feb 27 to Aug 31, 2026)",
+                    "value": 88,
+                    "unit": "basis points"
+                },
+                {
+                    "label": "Freddie Mac weekly 30-year average (week of Aug 27, 2026)",
+                    "value": 6.66,
+                    "unit": "%"
+                },
+                {
+                    "label": "Freddie Mac weekly 15-year average (week of Aug 27, 2026)",
+                    "value": 5.98,
+                    "unit": "%"
+                },
+                {
+                    "label": "10-year Treasury yield, highest since Jan 2025 (Aug 31, 2026)",
+                    "value": 4.75,
+                    "unit": "%"
+                },
+                {
+                    "label": "Brent crude crosses (Aug 31, 2026)",
+                    "value": 90,
+                    "unit": "USD per barrel"
+                },
+                {
+                    "label": "Fed funds target range upper bound (held since 2026)",
+                    "value": 3.75,
+                    "unit": "%"
+                },
+                {
+                    "label": "Median existing-home price (July 2026)",
+                    "value": 434100,
+                    "unit": "USD"
+                },
+                {
+                    "label": "Existing-home sales pace (July 2026, annualized)",
+                    "value": 4060000,
+                    "unit": "homes"
+                },
+                {
+                    "label": "Refinance applications vs. one year ago (week of Aug 21, 2026)",
+                    "value": -17,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Before the war vs. now",
+                    "left": {
+                        "title": "Feb 27, 2026",
+                        "points": [
+                            "30-year fixed: 5.99%",
+                            "First sub-6% rate in years",
+                            "10-year Treasury at a 2026 low",
+                            "Spring buying season set to rebound"
+                        ]
+                    },
+                    "right": {
+                        "title": "Aug 31, 2026",
+                        "points": [
+                            "30-year fixed: 6.87%",
+                            "Highest since June 2025",
+                            "10-year Treasury above 4.75%",
+                            "Brent crude above $90 a barrel"
+                        ]
+                    }
+                },
+                {
+                    "title": "Daily index vs. weekly survey",
+                    "left": {
+                        "title": "Mortgage News Daily (Aug 31, 2026)",
+                        "points": [
+                            "6.87%",
+                            "Updated daily",
+                            "Reflects Monday's oil-driven jump"
+                        ]
+                    },
+                    "right": {
+                        "title": "Freddie Mac PMMS (week of Aug 27, 2026)",
+                        "points": [
+                            "6.66%",
+                            "Weekly survey, published Thursdays",
+                            "Up from 6.65% prior week; 6.56% a year ago"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Mortgage rates don't track the Fed directly — they follow the 10-year Treasury yield, which oil-driven inflation fears pushed to 4.75%.",
+                "The trigger was geopolitical: a US strike on Larak Island inside the Strait of Hormuz, the route for about a fifth of global oil.",
+                "MND's Matthew Graham called it a 'slow grind' rather than a shock — inflation expectations, heavy bond issuance, and economic resilience.",
+                "The Fed has made no cuts in 2026, holding at 3.50%–3.75% for five straight meetings; markets have shifted from pricing cuts to pricing hikes.",
+                "Demand is already soft: refinance applications ran 17% below year-ago levels in the week ending Aug 21, 2026.",
+                "Home prices are still rising despite the rate pressure — median existing-home price $434,100 in July 2026, up 2.0% year over year."
+            ],
+            "sources": [
+                "https://www.cnbc.com/2026/08/31/mortgage-rates-surge-middle-east-attacks-oil.html",
+                "https://www.mortgagenewsdaily.com/markets/mortgage-rates-08312026",
+                "https://freddiemac.gcs-web.com/news-releases/news-release-details/mortgage-rates-hold-steady-9",
+                "https://www.globenewswire.com/news-release/2026/08/27/3352283/0/en/mortgage-rates-hold-steady.html",
+                "https://www.freddiemac.com/pmms",
+                "https://www.cnbc.com/2026/08/31/oil-prices-hormuz-iran-larak-island-centcom.html",
+                "https://qz.com/brent-oil-90-us-iran-larak-island-strike-083126",
+                "https://oilprice.com/Energy/Oil-Prices/Oil-Prices-Surge-as-US-and-Iran-Exchange-Strikes.html",
+                "https://www.bloomberg.com/news/articles/2026-08-31/treasury-10-year-yield-tops-4-75-highest-since-january-2025",
+                "https://www.forbes.com/advisor/investing/treasury-rates/",
+                "https://www.housingwire.com/articles/iran-war-mortgage-rates/",
+                "https://www.usbank.com/investing/financial-perspectives/market-news/federal-reserve-interest-rate.html",
+                "https://www.advisorperspectives.com/dshort/updates/2026/07/29/feds-interest-rate-decision-july-29-2026",
+                "https://www.nar.realtor/newsroom/nar-existing-home-sales-report-shows-1-7-decrease-in-july",
+                "https://realtywire.com/existing-home-sales-july-2026/",
+                "https://www.mortgagenewsdaily.com/news/08282026-mortgage-applications-mba",
+                "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-and-refinance-interest-rates-today-tuesday-september-1-2026-fixed-rates-move-higher-following-us-airstrikes-near-hormuz-100000288.html"
+            ]
+        },
+        "suggested": {
+            "title": "Mortgage Rates Hit 6.87% — Highest Since June 2025",
+            "description": "Mortgage rates just climbed 6 basis points to 6.87%, the highest level since June 2025, driven in part by rising oil prices amid renewed hostilities in the Iran war. Rates are up more than 30 basis points in just two months, pushing monthly payments higher for buyers. If you're shopping for a mortgage, waiting could cost you.",
+            "tags": [
+                "mortgage rates",
+                "housing market",
+                "home buying",
+                "interest rates",
+                "real estate",
+                "personal finance",
+                "economy"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "8c66851c",
+                "prompt": "Illustrate this moment: Mortgage rates hit highest level since June 2025",
+                "label": "Mortgage rates hit highest level since June 2025",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "5bda0198",
+                "prompt": "A suburban American house with a for-sale sign on the front lawn at late afternoon, warm low sunlight, empty driveway, quiet street, documentary photograph, shallow depth of field",
+                "label": "If you're considering a mortgage now might be the time to act",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "bcd143fd",
+                "prompt": "https://www.freddiemac.com/pmms",
+                "label": "If you want the link just comment mortgage",
+                "site": "https://www.freddiemac.com/pmms",
+                "still": true
+            },
+            {
+                "key": "intro",
+                "prompt": "A close-up shot of a broken piggy bank with coins spilling out, set on a wooden table, with a blurred background of a house silhouette, conveying a sense of financial distress and uncertainty.",
+                "label": "Opening image — A close-up of a shattered piggy bank with coins scattered around, symbolizing financial strain and rising mortgage rates.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "8c66851c": "gen_4da68150",
+            "intro": "gen_c003010f"
+        },
+        "site_collecting": [],
+        "image_text": {
+            "5bda0198": true,
+            "bcd143fd": true
+        },
+        "site_errors": []
+    },
+    "id": "mortgage-rates-hit-highest-level-since-j-y5inr",
+    "created_at": "2026-09-01T12:13:12+00:00",
+    "updated_at": "2026-09-01T12:28:54+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/mortgage-rates-hit-highest-level-since-j-y5inr/voz.mp3",
+    "transcript": {
+        "duration": 35.150001525878906,
+        "text": "Mortgage rates hit highest level since June 2025. Mortgage rates just jumped to 6.87%, the highest level since June 2025. This increase of 6 basis points comes amid rising oil prices due to renewed hostilities in the Iran war. The rate has surged by over 30 basis points in just two months, making home buying more expensive for many. If you're considering a mortgage, now might be the time to act. If you want the link, just comment mortgage.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Mortgage",
+                "start": 0,
+                "end": 0.46000000834465027
+            },
+            {
+                "word": "rates",
+                "start": 0.46000000834465027,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "hit",
+                "start": 0.7599999904632568,
+                "end": 1.2799999713897705
+            },
+            {
+                "word": "highest",
+                "start": 1.2799999713897705,
+                "end": 1.659999966621399
+            },
+            {
+                "word": "level",
+                "start": 1.659999966621399,
+                "end": 2
+            },
+            {
+                "word": "since",
+                "start": 2,
+                "end": 2.5799999237060547
+            },
+            {
+                "word": "June",
+                "start": 2.5799999237060547,
+                "end": 3
+            },
+            {
+                "word": "2025",
+                "start": 3,
+                "end": 4.179999828338623
+            },
+            {
+                "word": "Mortgage",
+                "start": 5.360000133514404,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "rates",
+                "start": 5.360000133514404,
+                "end": 5.619999885559082
+            },
+            {
+                "word": "just",
+                "start": 5.619999885559082,
+                "end": 5.960000038146973
+            },
+            {
+                "word": "jumped",
+                "start": 5.960000038146973,
+                "end": 6.159999847412109
+            },
+            {
+                "word": "to",
+                "start": 6.159999847412109,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "6",
+                "start": 6.679999828338623,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "87",
+                "start": 7.039999961853027,
+                "end": 8.460000038146973
+            },
+            {
+                "word": "the",
+                "start": 8.460000038146973,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "highest",
+                "start": 8.880000114440918,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "level",
+                "start": 9.079999923706055,
+                "end": 9.420000076293945
+            },
+            {
+                "word": "since",
+                "start": 9.420000076293945,
+                "end": 9.859999656677246
+            },
+            {
+                "word": "June",
+                "start": 9.859999656677246,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "2025",
+                "start": 10.260000228881836,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "This",
+                "start": 12.579999923706055,
+                "end": 12.9399995803833
+            },
+            {
+                "word": "increase",
+                "start": 12.9399995803833,
+                "end": 13.279999732971191
+            },
+            {
+                "word": "of",
+                "start": 13.279999732971191,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "6",
+                "start": 13.460000038146973,
+                "end": 13.84000015258789
+            },
+            {
+                "word": "basis",
+                "start": 13.84000015258789,
+                "end": 14.199999809265137
+            },
+            {
+                "word": "points",
+                "start": 14.199999809265137,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "comes",
+                "start": 14.479999542236328,
+                "end": 14.779999732971191
+            },
+            {
+                "word": "amid",
+                "start": 14.779999732971191,
+                "end": 15.020000457763672
+            },
+            {
+                "word": "rising",
+                "start": 15.020000457763672,
+                "end": 15.420000076293945
+            },
+            {
+                "word": "oil",
+                "start": 15.420000076293945,
+                "end": 15.760000228881836
+            },
+            {
+                "word": "prices",
+                "start": 15.760000228881836,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "due",
+                "start": 16.139999389648438,
+                "end": 16.68000030517578
+            },
+            {
+                "word": "to",
+                "start": 16.68000030517578,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "renewed",
+                "start": 17.239999771118164,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "hostilities",
+                "start": 17.239999771118164,
+                "end": 17.84000015258789
+            },
+            {
+                "word": "in",
+                "start": 17.84000015258789,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "the",
+                "start": 18.34000015258789,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "Iran",
+                "start": 18.579999923706055,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "war",
+                "start": 18.860000610351562,
+                "end": 19.280000686645508
+            },
+            {
+                "word": "The",
+                "start": 19.920000076293945,
+                "end": 20.1200008392334
+            },
+            {
+                "word": "rate",
+                "start": 20.1200008392334,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "has",
+                "start": 20.15999984741211,
+                "end": 20.760000228881836
+            },
+            {
+                "word": "surged",
+                "start": 20.760000228881836,
+                "end": 20.760000228881836
+            },
+            {
+                "word": "by",
+                "start": 20.760000228881836,
+                "end": 21.079999923706055
+            },
+            {
+                "word": "over",
+                "start": 21.079999923706055,
+                "end": 21.31999969482422
+            },
+            {
+                "word": "30",
+                "start": 21.31999969482422,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "basis",
+                "start": 21.780000686645508,
+                "end": 22.139999389648438
+            },
+            {
+                "word": "points",
+                "start": 22.139999389648438,
+                "end": 22.399999618530273
+            },
+            {
+                "word": "in",
+                "start": 22.399999618530273,
+                "end": 22.639999389648438
+            },
+            {
+                "word": "just",
+                "start": 22.639999389648438,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "two",
+                "start": 22.959999084472656,
+                "end": 23.219999313354492
+            },
+            {
+                "word": "months",
+                "start": 23.219999313354492,
+                "end": 23.5
+            },
+            {
+                "word": "making",
+                "start": 24.139999389648438,
+                "end": 24.200000762939453
+            },
+            {
+                "word": "home",
+                "start": 24.200000762939453,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "buying",
+                "start": 24.6200008392334,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "more",
+                "start": 24.860000610351562,
+                "end": 25.280000686645508
+            },
+            {
+                "word": "expensive",
+                "start": 25.280000686645508,
+                "end": 25.639999389648438
+            },
+            {
+                "word": "for",
+                "start": 25.639999389648438,
+                "end": 26.059999465942383
+            },
+            {
+                "word": "many",
+                "start": 26.059999465942383,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "If",
+                "start": 26.81999969482422,
+                "end": 27.260000228881836
+            },
+            {
+                "word": "you're",
+                "start": 27.260000228881836,
+                "end": 27.5
+            },
+            {
+                "word": "considering",
+                "start": 27.5,
+                "end": 28.059999465942383
+            },
+            {
+                "word": "a",
+                "start": 28.059999465942383,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "mortgage",
+                "start": 28.68000030517578,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "now",
+                "start": 29.559999465942383,
+                "end": 29.6200008392334
+            },
+            {
+                "word": "might",
+                "start": 29.6200008392334,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "be",
+                "start": 29.979999542236328,
+                "end": 30.1200008392334
+            },
+            {
+                "word": "the",
+                "start": 30.1200008392334,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "time",
+                "start": 30.299999237060547,
+                "end": 30.600000381469727
+            },
+            {
+                "word": "to",
+                "start": 30.600000381469727,
+                "end": 31.100000381469727
+            },
+            {
+                "word": "act",
+                "start": 31.100000381469727,
+                "end": 31.100000381469727
+            },
+            {
+                "word": "If",
+                "start": 31.84000015258789,
+                "end": 31.8799991607666
+            },
+            {
+                "word": "you",
+                "start": 31.8799991607666,
+                "end": 32.02000045776367
+            },
+            {
+                "word": "want",
+                "start": 32.02000045776367,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "the",
+                "start": 32.220001220703125,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "link",
+                "start": 32.65999984741211,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "just",
+                "start": 33.119998931884766,
+                "end": 33.65999984741211
+            },
+            {
+                "word": "comment",
+                "start": 33.65999984741211,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "mortgage",
+                "start": 33.939998626708984,
+                "end": 34.459999084472656
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.150001525878906,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 4.6,
+                "background": "papyrus",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "paper-shard-assembly",
+                        "text": "highest level",
+                        "params": {
+                            "src": "gen_4da68150"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 4.6,
+                "end": 11.9,
+                "background": "vellum",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "6",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "6.87%",
+                            "lines": [
+                                "30-YEAR FIXED — AUG 31, 2026",
+                                "Highest since June 2025",
+                                "Up 6 basis points in one day"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.9,
+                "end": 19.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "Iran",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "HOW OIL REACHES YOUR MORTGAGE",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Strait of Hormuz strike"
+                                },
+                                {
+                                    "label": "Brent above $90"
+                                },
+                                {
+                                    "label": "10-year Treasury 4.75%"
+                                },
+                                {
+                                    "label": "Mortgage 6.87%",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                },
+                                {
+                                    "from": 2,
+                                    "to": 3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.9,
+                "end": 26.5,
+                "background": "papyrus",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "surged",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": "",
+                        "params": {
+                            "left": {
+                                "title": "FEB 27, 2026",
+                                "points": [
+                                    "30-year fixed: 5.99%",
+                                    "First sub-6% in years",
+                                    "Treasury at 2026 low"
+                                ]
+                            },
+                            "right": {
+                                "title": "AUG 31, 2026",
+                                "points": [
+                                    "30-year fixed: 6.87%",
+                                    "Highest since June 2025",
+                                    "Treasury above 4.75%"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.5,
+                "end": 35.15,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "src": "gen_c003010f",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "orange-dot-grid"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/mortgage-rates-hit-highest-level-since-j-y5inr/clip.mp4"
+}

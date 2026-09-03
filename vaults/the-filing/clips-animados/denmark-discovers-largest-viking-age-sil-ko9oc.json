@@ -1,0 +1,757 @@
+{
+    "status": "collecting",
+    "type": "animation",
+    "input_kind": "text",
+    "title": "Gardener Digs Up Largest Viking Silver Hoard Ever Found",
+    "source_text": "Denmark Discovers Largest Viking Age Silver Treasure.\n\nA gardener in Denmark just unearthed the biggest Viking Age silver treasure ever found in the Nordic region. This remarkable discovery adds a significant piece to the historical puzzle of the Viking era. The treasure's size and the artifacts involved could provide new insights into Viking culture and trade. Such finds often attract archaeologists and history enthusiasts alike. If you want the link, just comment viking.",
+    "source_path": null,
+    "images": [
+        {
+            "id": "gen_77d4b3df",
+            "path": "clips/generated/hal39y1kwgvi.png",
+            "description": "A detailed close-up shot of a Viking silver coin, half-exposed from the soil, with intricate designs visible, surrounded by earthy tones of dark soil and green grass, illuminated by warm sunlight, evo...",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Denmark's largest Viking Age silver hoard, found in a Rebild garden",
+            "summary": "A homeowner digging for a new patio in Rebild, North Jutland, uncovered about 18.5 kg of Viking Age silver — roughly 700 objects — making it the largest Viking silver hoard ever found in Denmark, announced 31 August 2026. It is a Danish record, not a Nordic one: Sweden's Spillings Hoard on Gotland weighed about 67 kg.",
+            "timeline": [
+                {
+                    "label": "Silver buried in a clay pot",
+                    "sublabel": "10th century AD"
+                },
+                {
+                    "label": "Spillings Hoard found on Gotland, Sweden — 67 kg, still the world's largest",
+                    "sublabel": "1999"
+                },
+                {
+                    "label": "Rebild homeowner hits silver while clearing ground for a terrace",
+                    "sublabel": "2026"
+                },
+                {
+                    "label": "Nordjyske Museer announces Denmark's largest Viking silver hoard",
+                    "sublabel": "31 August 2026"
+                },
+                {
+                    "label": "Assessed as danefæ at the National Museum, then planned display at Fyrkat Viking Museum",
+                    "sublabel": "2026 onward"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Total silver recovered at Rebild",
+                    "value": 18.5,
+                    "unit": "kg"
+                },
+                {
+                    "label": "Objects and fragments in the Rebild hoard",
+                    "value": 700,
+                    "unit": "pieces (approx.)"
+                },
+                {
+                    "label": "Objects still inside the original clay pot",
+                    "value": 320,
+                    "unit": "pieces"
+                },
+                {
+                    "label": "Weight of the silver still inside the pot",
+                    "value": 6.4,
+                    "unit": "kg"
+                },
+                {
+                    "label": "Whole coins and coin fragments",
+                    "value": 47,
+                    "unit": "coins"
+                },
+                {
+                    "label": "Terslev hoard — previous Danish record",
+                    "value": 6.5,
+                    "unit": "kg"
+                },
+                {
+                    "label": "Spillings Hoard, Sweden — world's largest Viking silver hoard",
+                    "value": 67,
+                    "unit": "kg"
+                },
+                {
+                    "label": "Coins in the Spillings Hoard",
+                    "value": 14295,
+                    "unit": "coins"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Rebild 2026 vs Terslev (previous Danish record)",
+                    "left": {
+                        "title": "Rebild, North Jutland",
+                        "points": [
+                            "18.5 kg of silver",
+                            "About 700 objects",
+                            "47 coins and fragments",
+                            "Found in a private garden"
+                        ]
+                    },
+                    "right": {
+                        "title": "Terslev, Zealand",
+                        "points": [
+                            "About 6.5 kg of silver",
+                            "Roughly one third the weight",
+                            "Over 1,700 coins, mostly Arab",
+                            "Held Denmark's record until 2026"
+                        ]
+                    }
+                },
+                {
+                    "title": "Danish record vs Nordic record",
+                    "left": {
+                        "title": "Rebild, Denmark (2026)",
+                        "points": [
+                            "18.5 kg",
+                            "Largest in Denmark",
+                            "10th century"
+                        ]
+                    },
+                    "right": {
+                        "title": "Spillings, Gotland, Sweden (1999)",
+                        "points": [
+                            "About 67 kg before conservation",
+                            "Largest Viking silver hoard in the world",
+                            "14,295 coins, mostly Islamic"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Denmark's largest Viking silver hoard — not the Nordic region's; Sweden's Spillings Hoard is far bigger",
+                "About 18.5 kg of silver, roughly 700 objects, found in Rebild, North Jutland",
+                "320 pieces weighing 6.4 kg were still inside the original clay pot; the rest lay in the surrounding soil",
+                "Contents include silver ingots, arm-rings, hacksilver, 47 coins and fragments, and a small Thor's hammer",
+                "Coins include Arab dirhams from the Islamic east and English coins from the 900s — evidence of long-distance Viking trade",
+                "Buried in the 10th century, three times heavier than the previous Danish record, the 6.5 kg Terslev hoard",
+                "The finder stayed anonymous; under Danish danefæ law precious-metal finds become state property and the finder gets a reward",
+                "Being assessed by the National Museum of Denmark, with planned display at the Fyrkat Viking Museum"
+            ],
+            "sources": [
+                "https://www.thelocal.dk/20260831/gardener-discovers-denmarks-largest-viking-hoard-while-digging-patio",
+                "https://cphpost.dk/2026-08-31/art-culture/patio-digging-leads-to-largest-viking-silver-find/",
+                "https://www.bloomberg.com/news/articles/2026-08-31/viking-silver-treasure-unearthed-in-danish-garden-sets-record",
+                "https://unn.ua/en/news/denmark-has-found-the-largest-viking-age-silver-hoard-in-the-countrys-history",
+                "https://en.natmus.dk/historical-knowledge/denmark/prehistoric-period-until-1050-ad/the-viking-age/the-silver-hoards-of-the-vikings/the-silver-hoard-from-terslev/",
+                "https://en.wikipedia.org/wiki/Spillings_Hoard",
+                "https://nordjyskemuseer.dk/en/u/vikingemuseet-fyrkat-en/",
+                "https://en.natmus.dk/sales-and-services/museum-services/treasure-trove/payment-of-the-treasure-trove-reward/"
+            ]
+        },
+        "suggested": {
+            "title": "Gardener Digs Up Largest Viking Silver Hoard Ever Found",
+            "description": "A gardener in Denmark has uncovered the largest Viking Age silver treasure ever found in the Nordic region. The size of the hoard and the artifacts inside it could reshape what we know about Viking culture and trade routes. Comment \"Viking\" if you want the link to the full story.",
+            "tags": [
+                "viking",
+                "denmark",
+                "archaeology",
+                "silver hoard",
+                "treasure found",
+                "history",
+                "viking age",
+                "nordic history"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "70530b1d",
+                "prompt": "Illustrate this moment: Denmark discovers largest Viking Age silver treasure",
+                "label": "Denmark discovers largest Viking Age silver treasure",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "af2c35c0",
+                "prompt": "Archaeologists in gloves laying out tarnished silver fragments and coin pieces on a white museum table under cool lab lighting, brushes and scale bars beside the finds, careful hands, documentary photograph",
+                "label": "Such finds often attract archaeologists and history enthusiasts alike If",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "366260da",
+                "prompt": "Close-up of a tiny tarnished silver Thor's hammer pendant resting on dark cloth, sharp raking light picking out the hammered surface, museum studio photograph",
+                "label": "If you want the link just comment Viking",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "A detailed close-up shot of a Viking silver coin, half-exposed from the soil, with intricate designs visible, surrounded by earthy tones of dark soil and green grass, illuminated by warm sunlight, evoking a sense of discovery and history.",
+                "label": "Opening image — A close-up of a weathered Viking silver coin partially buried in rich, dark soil, glinting in the sunlight.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "intro": "gen_77d4b3df"
+        },
+        "site_collecting": [],
+        "site_errors": {
+            "af2c35c0": "Could not generate the image — try again."
+        },
+        "image_text": {
+            "366260da": true,
+            "af2c35c0": true,
+            "70530b1d": true
+        }
+    },
+    "id": "denmark-discovers-largest-viking-age-sil-ko9oc",
+    "created_at": "2026-09-01T14:14:31+00:00",
+    "updated_at": "2026-09-01T14:44:59+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/denmark-discovers-largest-viking-age-sil-ko9oc/voz.mp3",
+    "transcript": {
+        "duration": 34.220001220703125,
+        "text": "Denmark discovers largest Viking Age silver treasure. A gardener in Denmark just unearthed the biggest Viking Age silver treasure ever found in the Nordic region. This remarkable discovery adds a significant piece to the historical puzzle of the Viking era. The treasure's size and the artifacts involved could provide new insights into Viking culture and trade. Such finds often attract archaeologists and history enthusiasts alike. If you want the link, just comment Viking.",
+        "language": "english",
+        "words": [
+            {
+                "word": "Denmark",
+                "start": 0,
+                "end": 0.6800000071525574
+            },
+            {
+                "word": "discovers",
+                "start": 0.6800000071525574,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "largest",
+                "start": 1.399999976158142,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "Viking",
+                "start": 2.0799999237060547,
+                "end": 2.4800000190734863
+            },
+            {
+                "word": "Age",
+                "start": 2.4800000190734863,
+                "end": 2.9000000953674316
+            },
+            {
+                "word": "silver",
+                "start": 2.9000000953674316,
+                "end": 3.2200000286102295
+            },
+            {
+                "word": "treasure",
+                "start": 3.2200000286102295,
+                "end": 3.5799999237060547
+            },
+            {
+                "word": "A",
+                "start": 5.039999961853027,
+                "end": 5.139999866485596
+            },
+            {
+                "word": "gardener",
+                "start": 5.139999866485596,
+                "end": 5.619999885559082
+            },
+            {
+                "word": "in",
+                "start": 5.619999885559082,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "Denmark",
+                "start": 6.300000190734863,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "just",
+                "start": 6.300000190734863,
+                "end": 6.800000190734863
+            },
+            {
+                "word": "unearthed",
+                "start": 6.800000190734863,
+                "end": 7.139999866485596
+            },
+            {
+                "word": "the",
+                "start": 7.139999866485596,
+                "end": 7.320000171661377
+            },
+            {
+                "word": "biggest",
+                "start": 7.320000171661377,
+                "end": 7.699999809265137
+            },
+            {
+                "word": "Viking",
+                "start": 7.699999809265137,
+                "end": 8.100000381469727
+            },
+            {
+                "word": "Age",
+                "start": 8.100000381469727,
+                "end": 8.5
+            },
+            {
+                "word": "silver",
+                "start": 8.5,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "treasure",
+                "start": 8.819999694824219,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "ever",
+                "start": 9.079999923706055,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "found",
+                "start": 9.640000343322754,
+                "end": 9.9399995803833
+            },
+            {
+                "word": "in",
+                "start": 9.9399995803833,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "the",
+                "start": 10.100000381469727,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "Nordic",
+                "start": 10.380000114440918,
+                "end": 10.619999885559082
+            },
+            {
+                "word": "region",
+                "start": 10.619999885559082,
+                "end": 10.920000076293945
+            },
+            {
+                "word": "This",
+                "start": 11.9399995803833,
+                "end": 12.279999732971191
+            },
+            {
+                "word": "remarkable",
+                "start": 12.279999732971191,
+                "end": 13
+            },
+            {
+                "word": "discovery",
+                "start": 13,
+                "end": 13.479999542236328
+            },
+            {
+                "word": "adds",
+                "start": 13.479999542236328,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "a",
+                "start": 13.859999656677246,
+                "end": 14.199999809265137
+            },
+            {
+                "word": "significant",
+                "start": 14.199999809265137,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "piece",
+                "start": 14.640000343322754,
+                "end": 15
+            },
+            {
+                "word": "to",
+                "start": 15,
+                "end": 15.15999984741211
+            },
+            {
+                "word": "the",
+                "start": 15.15999984741211,
+                "end": 15.479999542236328
+            },
+            {
+                "word": "historical",
+                "start": 15.479999542236328,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "puzzle",
+                "start": 15.960000038146973,
+                "end": 16.260000228881836
+            },
+            {
+                "word": "of",
+                "start": 16.260000228881836,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "the",
+                "start": 16.559999465942383,
+                "end": 17.020000457763672
+            },
+            {
+                "word": "Viking",
+                "start": 17.020000457763672,
+                "end": 17.020000457763672
+            },
+            {
+                "word": "era",
+                "start": 17.020000457763672,
+                "end": 17.520000457763672
+            },
+            {
+                "word": "The",
+                "start": 18.360000610351562,
+                "end": 18.5
+            },
+            {
+                "word": "treasure's",
+                "start": 18.5,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "size",
+                "start": 19.540000915527344,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "and",
+                "start": 19.540000915527344,
+                "end": 20.059999465942383
+            },
+            {
+                "word": "the",
+                "start": 20.059999465942383,
+                "end": 20.799999237060547
+            },
+            {
+                "word": "artifacts",
+                "start": 20.799999237060547,
+                "end": 20.799999237060547
+            },
+            {
+                "word": "involved",
+                "start": 20.799999237060547,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "could",
+                "start": 21.399999618530273,
+                "end": 22.040000915527344
+            },
+            {
+                "word": "provide",
+                "start": 22.040000915527344,
+                "end": 22.3799991607666
+            },
+            {
+                "word": "new",
+                "start": 22.3799991607666,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "insights",
+                "start": 22.959999084472656,
+                "end": 23.200000762939453
+            },
+            {
+                "word": "into",
+                "start": 23.200000762939453,
+                "end": 23.579999923706055
+            },
+            {
+                "word": "Viking",
+                "start": 23.579999923706055,
+                "end": 24
+            },
+            {
+                "word": "culture",
+                "start": 24,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "and",
+                "start": 24.479999542236328,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "trade",
+                "start": 25.299999237060547,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "Such",
+                "start": 26.219999313354492,
+                "end": 26.3799991607666
+            },
+            {
+                "word": "finds",
+                "start": 26.3799991607666,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "often",
+                "start": 26.700000762939453,
+                "end": 27.1200008392334
+            },
+            {
+                "word": "attract",
+                "start": 27.1200008392334,
+                "end": 27.5
+            },
+            {
+                "word": "archaeologists",
+                "start": 27.5,
+                "end": 28.34000015258789
+            },
+            {
+                "word": "and",
+                "start": 28.34000015258789,
+                "end": 28.65999984741211
+            },
+            {
+                "word": "history",
+                "start": 28.65999984741211,
+                "end": 29.079999923706055
+            },
+            {
+                "word": "enthusiasts",
+                "start": 29.079999923706055,
+                "end": 29.860000610351562
+            },
+            {
+                "word": "alike",
+                "start": 29.860000610351562,
+                "end": 30.420000076293945
+            },
+            {
+                "word": "If",
+                "start": 31.219999313354492,
+                "end": 31.260000228881836
+            },
+            {
+                "word": "you",
+                "start": 31.260000228881836,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "want",
+                "start": 31.420000076293945,
+                "end": 31.600000381469727
+            },
+            {
+                "word": "the",
+                "start": 31.600000381469727,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "link",
+                "start": 31.81999969482422,
+                "end": 32.040000915527344
+            },
+            {
+                "word": "just",
+                "start": 32.540000915527344,
+                "end": 33
+            },
+            {
+                "word": "comment",
+                "start": 33,
+                "end": 33.2400016784668
+            },
+            {
+                "word": "Viking",
+                "start": 33.2400016784668,
+                "end": 33.68000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.220001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.8,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "silver",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "generate": "Illustrate this moment: Denmark discovers largest Viking Age silver treasure",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.8,
+                "end": 11,
+                "background": "papyrus",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 11,
+                "end": 18.36,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "puzzle",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "THE REBILD HOARD",
+                            "lines": [
+                                "18.5 kg of silver",
+                                "About 700 objects",
+                                "320 pieces still in the clay pot",
+                                "Buried in the 10th century"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.36,
+                "end": 22.6,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "size",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": null,
+                        "params": {
+                            "title": "VIKING SILVER HOARDS",
+                            "unit": "kg",
+                            "bars": [
+                                {
+                                    "label": "Rebild 2026",
+                                    "value": 18.5,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Terslev",
+                                    "value": 6.5
+                                },
+                                {
+                                    "label": "Spillings, Sweden",
+                                    "value": 67
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.6,
+                "end": 26.22,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "trade",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "title": "WHAT WAS IN THE POT",
+                            "items": [
+                                "Ingots, arm-rings, hacksilver",
+                                "47 coins and fragments",
+                                "Arab dirhams from the east",
+                                "English coins from the 900s",
+                                "A small Thor's hammer"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.22,
+                "end": 31.22,
+                "background": "vellum",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "generate": "Archaeologists in gloves laying out tarnished silver fragments and coin pieces on a white museum table under cool lab lighting, brushes and scale bars beside the finds, careful hands, documentary photograph",
+                            "variant": "pan",
+                            "direction": "right",
+                            "caption": "Assessed as danefae at the National Museum"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.22,
+                "end": 34.22,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "generate": "Close-up of a tiny tarnished silver Thor's hammer pendant resting on dark cloth, sharp raking light picking out the hammered surface, museum studio photograph",
+                            "variant": "zoom"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background_pick": "orange-dot-grid"
+    }
+}

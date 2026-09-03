@@ -3,28 +3,21 @@ titulo: 'Tópicos — 2026-08-25'
 tipo: topicos
 data: '2026-08-25'
 metodo: llm
-total: 7
+total: 3
 ---
 
 # Tópicos cobertos — 2026-08-25
 
-> 7 item(s) agregado(s) · método: llm · 2026-08-25T15:49:38+00:00
+> 3 item(s) agregado(s) · método: llm · 2026-08-31T11:04:59+00:00
 
-## AI in Business and Agency Operations
+## AI Memory Systems
 
-- **[youtube]** [The 3 AI Agency Mistakes Keeping You From $20K/Mo Retainers](https://www.youtube.com/watch?v=DoHPZf7jEQ4)
+- **[youtube]** [Anthropic Just Dropped Claude Memory 2.0 (Full Breakdown)](https://www.youtube.com/watch?v=Fys9ua-x0A0)
 
-## AI Development and Tools
+## ChatGPT Features
 
-- **[youtube]** [This Open Source Repo Solve Claude's #1 Problem](https://www.youtube.com/watch?v=rZQDZWayzNo)
-- **[instagram]** [Comment "PLUGIN" to get these 3 AI scrapers.](https://www.instagram.com/p/Dcd4ag1PHIx/)
+- **[youtube]** [ChatGPT Work Is More Powerful Than You Think](https://www.youtube.com/watch?v=18Ih4w16UP0)
 
-## AI in Creative Industries
+## Challenges in AI Adoption
 
-- **[instagram]** [👀🎬 The film industry is officially split, though not in the way most people as...](https://www.instagram.com/p/DcdyHLmgGEK/)
-- **[instagram]** [📸🔥 ChatGPT can now turn ordinary photos into shots that look professionally ph...](https://www.instagram.com/p/DcdhYWjAGva/)
-- **[instagram]** [What happens when Chinese mythology meets a Norse world-ending dragon on the sam...](https://www.instagram.com/p/DcdnWnbgAsp/)
-
-## AI Infrastructure and Development
-
-- **[instagram]** [👀 Namespace is buying Macs at scale and installing them in its data centers, tu...](https://www.instagram.com/p/DcdRjoaAmkP/)
+- **[youtube]** [The #1 AI Problem No "AI Guru" Will Tell You](https://www.youtube.com/watch?v=sKJvjUPW4zQ)

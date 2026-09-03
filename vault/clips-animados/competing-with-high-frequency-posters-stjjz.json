@@ -1,0 +1,1524 @@
+{
+    "status": "collecting",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Stop Competing on Effort — Build Content Machines",
+    "source_path": "clips/uploads/competing-with-high-frequency-posters-tyz9-oDiC9P.mp4",
+    "images": [],
+    "meta": {
+        "allowed_present": [
+            "video",
+            "split",
+            "animation"
+        ],
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "fewer_images": true,
+        "free_sfx": true,
+        "musica": "nenhuma",
+        "musica_volume": 0,
+        "research": {
+            "topic": "AI content machines: how solo creators out-produce bigger teams",
+            "summary": "Creator surveys in 2025-2026 show AI has shifted from novelty to production infrastructure: most creators now use generative AI daily, and a majority say it makes them faster and more competitive against larger teams. But output still needs human editing, and audiences are getting better at spotting generic AI content, so systems win on quality, not volume.",
+            "timeline": [
+                {
+                    "label": "YouTube Shorts passes 200B daily views",
+                    "sublabel": "June 2025"
+                },
+                {
+                    "label": "Study: 52% of creators hit burnout",
+                    "sublabel": "July 2025"
+                },
+                {
+                    "label": "Adobe: 86% of creators use generative AI",
+                    "sublabel": "Oct 2025"
+                },
+                {
+                    "label": "Sora video app: 1M downloads in under 5 days",
+                    "sublabel": "Oct 2025"
+                },
+                {
+                    "label": "McKinsey: 88% of orgs use AI in a function",
+                    "sublabel": "Nov 2025"
+                },
+                {
+                    "label": "Adobe: 87% say AI grew their business",
+                    "sublabel": "June 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Creators: AI helps produce content faster",
+                    "value": 93,
+                    "unit": "% (Adobe, 2026)"
+                },
+                {
+                    "label": "Creators feel more competitive vs. bigger teams",
+                    "value": 58,
+                    "unit": "% (Adobe, 2026)"
+                },
+                {
+                    "label": "AI output needs moderate/extensive editing",
+                    "value": 57,
+                    "unit": "% (Adobe, 2026)"
+                },
+                {
+                    "label": "Say creative AI accelerated their growth",
+                    "value": 87,
+                    "unit": "% (Adobe, 2026)"
+                },
+                {
+                    "label": "Call AI integrated or essential to their work",
+                    "value": 75,
+                    "unit": "% (Adobe, 2026)"
+                },
+                {
+                    "label": "Creators who experienced burnout",
+                    "value": 52,
+                    "unit": "% (Billion Dollar Boy, 2025)"
+                },
+                {
+                    "label": "Creators who considered quitting",
+                    "value": 37,
+                    "unit": "% (Billion Dollar Boy, 2025)"
+                },
+                {
+                    "label": "Name AI/scheduling tools as the burnout fix",
+                    "value": 32,
+                    "unit": "% (Billion Dollar Boy, 2025)"
+                },
+                {
+                    "label": "Organizations using AI in 1+ function",
+                    "value": 88,
+                    "unit": "% (McKinsey, Nov 2025)"
+                },
+                {
+                    "label": "Marketers: internet flooded with AI content",
+                    "value": 56,
+                    "unit": "% (HubSpot, 2026)"
+                },
+                {
+                    "label": "Marketers: audiences now spot and skip AI content",
+                    "value": 65,
+                    "unit": "% (HubSpot, 2026)"
+                },
+                {
+                    "label": "YouTube Shorts daily views",
+                    "value": 200,
+                    "unit": "billion/day (June 2025)"
+                },
+                {
+                    "label": "Avg. brand posts per day",
+                    "value": 9.5,
+                    "unit": "posts/day (Sprout, 2024 data)"
+                },
+                {
+                    "label": "Engagement rise while brands posted less",
+                    "value": 20,
+                    "unit": "% (Sprout, 2023→2024)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Manual grind vs. content machine",
+                    "left": {
+                        "title": "Manual",
+                        "points": [
+                            "52% of creators report burnout",
+                            "37% considered leaving entirely",
+                            "Output capped by your own hours"
+                        ]
+                    },
+                    "right": {
+                        "title": "AI system",
+                        "points": [
+                            "93% say AI produces content faster",
+                            "58% feel competitive with larger teams",
+                            "32% name AI tools as their burnout fix"
+                        ]
+                    }
+                },
+                {
+                    "title": "More posts vs. better posts",
+                    "left": {
+                        "title": "Volume",
+                        "points": [
+                            "Brands averaged 9.5 posts/day in 2024",
+                            "56% of marketers: internet flooded with AI content",
+                            "65%: audiences spot and ignore it"
+                        ]
+                    },
+                    "right": {
+                        "title": "Quality",
+                        "points": [
+                            "Brands posted less, engagement rose ~20%",
+                            "57% of AI output still needs real editing",
+                            "Human judgment is the last mile"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Adobe surveyed 16,000+ creators: 87% say creative AI accelerated their business or audience growth (2026).",
+                "58% of creators say AI makes them feel competitive against larger teams — the exact gap you're trying to close.",
+                "AI is not one-click: 57% say outputs need moderate to extensive editing before publishing.",
+                "Burnout is the real competitor: 52% of creators have burned out, 37% considered quitting (1,000 US/UK creators).",
+                "Volume alone stopped working — brands posted fewer times in 2024 and engagement still rose about 20%.",
+                "The bar is rising: 65% of marketers say audiences now identify and ignore AI-generated content.",
+                "Distribution is enormous: YouTube Shorts alone serves 200 billion views a day."
+            ],
+            "sources": [
+                "https://news.adobe.com/news/2026/06/creators-toolkit-report-2026",
+                "https://9to5mac.com/2026/06/16/adobe-survey-ai-is-helping-creators-grow-but-not-without-tradeoffs/",
+                "https://news.adobe.com/news/downloads/pdfs/2025/10/10282025-inauguraladobecreatorstoolkitreport.pdf",
+                "https://www.billiondollarboy.com/news/over-half-of-creators-face-burnout",
+                "https://www.netinfluencer.com/creator-burnout-crisis-research-shows-52-percent-experiencing-burnout-37-percent-consider-leaving-the-industry/",
+                "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+                "https://ppc.land/most-companies-still-pilot-ai-programs-despite-widespread-adoption/",
+                "https://blog.youtube/news-and-events/neal-mohan-cannes-2025/",
+                "https://www.socialmediatoday.com/news/youtube-announces-changes-to-creator-monetization/827515/",
+                "https://sproutsocial.com/insights/data/content-benchmarks/",
+                "https://www.netinfluencer.com/sprout-social-report-shows-brands-posting-less-engaging-more-as-quality-trumps-quantity/",
+                "https://blog.hubspot.com/marketing/hubspot-blog-marketing-industry-trends-report",
+                "https://www.cnbc.com/2025/10/09/openais-sora-downloads.html",
+                "https://www.macrumors.com/2025/10/09/openai-sora-app-1-million-downloads/"
+            ]
+        },
+        "suggested": {
+            "title": "Stop Competing on Effort — Build Content Machines",
+            "description": "Trying to out-post bigger creators by working harder is a losing game — you either stall or burn out. The real edge is building content machines: systems that take one input and output a finished, high-quality post, complete with captions, animations, VFX, and overlays. It's not about asking ChatGPT for captions; it's about replacing an entire content team with a repeatable pipeline.",
+            "tags": [
+                "ai content creation",
+                "content machines",
+                "social media growth",
+                "ai automation",
+                "content strategy",
+                "creator tips",
+                "video editing automation"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "166ad0ab",
+                "prompt": "Exhausted solo content creator slumped at a cluttered desk past midnight, ring light off, phone and camera around, cold blue screen glow on tired face, photographic, moody",
+                "label": "you're just going to end up either not growing very fast, or",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "beb1c13e",
+                "prompt": "https://chatgpt.com",
+                "label": "And I don't mean AI as going to GPT and getting some tests for",
+                "site": "https://chatgpt.com",
+                "still": true
+            },
+            {
+                "key": "5f628c76",
+                "prompt": "A playful surreal AI-generated style picture of a cat in a tiny astronaut suit floating in a pastel nebula, glossy render, bright and funny",
+                "label": "tests for a post or even generate a funny image. That",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "81ed4e14",
+                "prompt": "https://www.instagram.com",
+                "label": "It can be Instagram posts,",
+                "site": "https://www.instagram.com",
+                "still": true
+            },
+            {
+                "key": "intro",
+                "prompt": "A dynamic creative workspace with diverse individuals engaged in collaboration, surrounded by large screens displaying colorful and intricate AI-generated visuals, warm lighting, and an atmosphere of innovation and teamwork.",
+                "label": "Opening image — A bustling creative studio filled with diverse creators collaborating around screens showcasing vibrant AI-generated content.",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "site_collecting": [],
+        "image_text": {
+            "intro": true
+        }
+    },
+    "id": "competing-with-high-frequency-posters-stjjz",
+    "created_at": "2026-09-03T09:27:08+00:00",
+    "updated_at": "2026-09-03T09:48:09+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/competing-with-high-frequency-posters-stjjz/audio.m4a",
+    "transcript": {
+        "duration": 55.0099983215332,
+        "text": "But how can you actually compete with them? If you keep doing what you're already doing, you're just going to end up either not growing very fast, or you can try to match them and they will completely burn out because you can't produce at the same level. So what can you do? Well, this is where AI comes in. And I don't mean AI as going to GPT and getting some tests for a post or even generate a funny image. That helps, but that's not really using AI. That's not what you need to do in order to grow your social media. You need what I call content machines. You need a machine that you give it an input and it generates a fully-fledged, really high-quality post. It can be a video where it generates the captions, the animations and VFX, overlays them on your image. It can be Instagram posts, but the key is to get as little work as possible, but still get the highest possible quality of posts. So content machines are not just faster systems. Content machines are full teams that will do.",
+        "language": "english",
+        "words": [
+            {
+                "word": "But",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "how",
+                "start": 0.2199999988079071,
+                "end": 0.3400000035762787
+            },
+            {
+                "word": "can",
+                "start": 0.3400000035762787,
+                "end": 0.47999998927116394
+            },
+            {
+                "word": "you",
+                "start": 0.47999998927116394,
+                "end": 0.6399999856948853
+            },
+            {
+                "word": "actually",
+                "start": 0.6399999856948853,
+                "end": 1.2599999904632568
+            },
+            {
+                "word": "compete",
+                "start": 1.2599999904632568,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "with",
+                "start": 1.6799999475479126,
+                "end": 1.8799999952316284
+            },
+            {
+                "word": "them?",
+                "start": 1.8799999952316284,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "If",
+                "start": 2.3399999141693115,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "you",
+                "start": 2.440000057220459,
+                "end": 2.5799999237060547
+            },
+            {
+                "word": "keep",
+                "start": 2.5799999237060547,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "doing",
+                "start": 2.740000009536743,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "what",
+                "start": 2.9200000762939453,
+                "end": 3.140000104904175
+            },
+            {
+                "word": "you're",
+                "start": 3.140000104904175,
+                "end": 3.319999933242798
+            },
+            {
+                "word": "already",
+                "start": 3.319999933242798,
+                "end": 3.700000047683716
+            },
+            {
+                "word": "doing,",
+                "start": 3.700000047683716,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "you're",
+                "start": 4.300000190734863,
+                "end": 4.739999771118164
+            },
+            {
+                "word": "just",
+                "start": 4.739999771118164,
+                "end": 4.920000076293945
+            },
+            {
+                "word": "going",
+                "start": 4.920000076293945,
+                "end": 5.119999885559082
+            },
+            {
+                "word": "to",
+                "start": 5.119999885559082,
+                "end": 5.320000171661377
+            },
+            {
+                "word": "end",
+                "start": 5.320000171661377,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "up",
+                "start": 5.519999980926514,
+                "end": 5.820000171661377
+            },
+            {
+                "word": "either",
+                "start": 5.820000171661377,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "not",
+                "start": 6.21999979019165,
+                "end": 6.519999980926514
+            },
+            {
+                "word": "growing",
+                "start": 6.519999980926514,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "very",
+                "start": 6.860000133514404,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "fast,",
+                "start": 7.619999885559082,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "or",
+                "start": 7.679999828338623,
+                "end": 7.920000076293945
+            },
+            {
+                "word": "you",
+                "start": 7.920000076293945,
+                "end": 8.039999961853027
+            },
+            {
+                "word": "can",
+                "start": 8.039999961853027,
+                "end": 8.279999732971191
+            },
+            {
+                "word": "try",
+                "start": 8.279999732971191,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "to",
+                "start": 8.619999885559082,
+                "end": 8.960000038146973
+            },
+            {
+                "word": "match",
+                "start": 8.960000038146973,
+                "end": 9
+            },
+            {
+                "word": "them",
+                "start": 9,
+                "end": 9.220000267028809
+            },
+            {
+                "word": "and",
+                "start": 9.220000267028809,
+                "end": 9.460000038146973
+            },
+            {
+                "word": "they",
+                "start": 9.460000038146973,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "will",
+                "start": 9.739999771118164,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "completely",
+                "start": 9.739999771118164,
+                "end": 10.140000343322754
+            },
+            {
+                "word": "burn",
+                "start": 10.140000343322754,
+                "end": 10.359999656677246
+            },
+            {
+                "word": "out",
+                "start": 10.359999656677246,
+                "end": 10.619999885559082
+            },
+            {
+                "word": "because",
+                "start": 10.619999885559082,
+                "end": 10.84000015258789
+            },
+            {
+                "word": "you",
+                "start": 10.84000015258789,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "can't",
+                "start": 11.039999961853027,
+                "end": 11.319999694824219
+            },
+            {
+                "word": "produce",
+                "start": 11.319999694824219,
+                "end": 11.5
+            },
+            {
+                "word": "at",
+                "start": 11.5,
+                "end": 11.699999809265137
+            },
+            {
+                "word": "the",
+                "start": 11.699999809265137,
+                "end": 11.84000015258789
+            },
+            {
+                "word": "same",
+                "start": 11.84000015258789,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "level.",
+                "start": 12.079999923706055,
+                "end": 12.239999771118164
+            },
+            {
+                "word": "So",
+                "start": 12.279999732971191,
+                "end": 12.619999885559082
+            },
+            {
+                "word": "what",
+                "start": 12.619999885559082,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "can",
+                "start": 12.800000190734863,
+                "end": 12.920000076293945
+            },
+            {
+                "word": "you",
+                "start": 12.920000076293945,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "do?",
+                "start": 13.0600004196167,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "Well,",
+                "start": 13.5600004196167,
+                "end": 13.779999732971191
+            },
+            {
+                "word": "this",
+                "start": 13.779999732971191,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "is",
+                "start": 13.920000076293945,
+                "end": 14.119999885559082
+            },
+            {
+                "word": "where",
+                "start": 14.119999885559082,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "AI",
+                "start": 14.34000015258789,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "comes",
+                "start": 14.619999885559082,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "in.",
+                "start": 14.920000076293945,
+                "end": 15.5
+            },
+            {
+                "word": "And",
+                "start": 15.600000381469727,
+                "end": 15.800000190734863
+            },
+            {
+                "word": "I",
+                "start": 15.800000190734863,
+                "end": 15.920000076293945
+            },
+            {
+                "word": "don't",
+                "start": 15.920000076293945,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "mean",
+                "start": 15.960000038146973,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "AI",
+                "start": 16.079999923706055,
+                "end": 16.440000534057617
+            },
+            {
+                "word": "as",
+                "start": 16.440000534057617,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "going",
+                "start": 16.940000534057617,
+                "end": 17.260000228881836
+            },
+            {
+                "word": "to",
+                "start": 17.260000228881836,
+                "end": 17.6200008392334
+            },
+            {
+                "word": "GPT",
+                "start": 17.6200008392334,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "and",
+                "start": 18.040000915527344,
+                "end": 18.5
+            },
+            {
+                "word": "getting",
+                "start": 18.5,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "some",
+                "start": 18.899999618530273,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "tests",
+                "start": 19.239999771118164,
+                "end": 19.459999084472656
+            },
+            {
+                "word": "for",
+                "start": 19.459999084472656,
+                "end": 19.65999984741211
+            },
+            {
+                "word": "a",
+                "start": 19.65999984741211,
+                "end": 19.860000610351562
+            },
+            {
+                "word": "post",
+                "start": 19.860000610351562,
+                "end": 20.079999923706055
+            },
+            {
+                "word": "or",
+                "start": 20.079999923706055,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "even",
+                "start": 20.239999771118164,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "generate",
+                "start": 20.479999542236328,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "a",
+                "start": 20.920000076293945,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "funny",
+                "start": 21.260000228881836,
+                "end": 21.459999084472656
+            },
+            {
+                "word": "image.",
+                "start": 21.459999084472656,
+                "end": 21.84000015258789
+            },
+            {
+                "word": "That",
+                "start": 22.139999389648438,
+                "end": 22.579999923706055
+            },
+            {
+                "word": "helps,",
+                "start": 22.579999923706055,
+                "end": 22.8799991607666
+            },
+            {
+                "word": "but",
+                "start": 23,
+                "end": 23.1200008392334
+            },
+            {
+                "word": "that's",
+                "start": 23.1200008392334,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "not",
+                "start": 23.440000534057617,
+                "end": 23.6200008392334
+            },
+            {
+                "word": "really",
+                "start": 23.6200008392334,
+                "end": 24
+            },
+            {
+                "word": "using",
+                "start": 24,
+                "end": 24.420000076293945
+            },
+            {
+                "word": "AI.",
+                "start": 24.420000076293945,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "That's",
+                "start": 24.860000610351562,
+                "end": 25.18000030517578
+            },
+            {
+                "word": "not",
+                "start": 25.18000030517578,
+                "end": 25.3799991607666
+            },
+            {
+                "word": "what",
+                "start": 25.3799991607666,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "you",
+                "start": 25.81999969482422,
+                "end": 26.15999984741211
+            },
+            {
+                "word": "need",
+                "start": 26.15999984741211,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "to",
+                "start": 26.31999969482422,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "do",
+                "start": 26.459999084472656,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "in",
+                "start": 26.700000762939453,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "order",
+                "start": 26.959999084472656,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "to",
+                "start": 26.959999084472656,
+                "end": 27.15999984741211
+            },
+            {
+                "word": "grow",
+                "start": 27.15999984741211,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "your",
+                "start": 27.299999237060547,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "social",
+                "start": 27.540000915527344,
+                "end": 27.760000228881836
+            },
+            {
+                "word": "media.",
+                "start": 27.760000228881836,
+                "end": 27.979999542236328
+            },
+            {
+                "word": "You",
+                "start": 27.979999542236328,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "need",
+                "start": 28.540000915527344,
+                "end": 28.8799991607666
+            },
+            {
+                "word": "what",
+                "start": 28.8799991607666,
+                "end": 29.1200008392334
+            },
+            {
+                "word": "I",
+                "start": 29.1200008392334,
+                "end": 29.31999969482422
+            },
+            {
+                "word": "call",
+                "start": 29.31999969482422,
+                "end": 29.600000381469727
+            },
+            {
+                "word": "content",
+                "start": 29.600000381469727,
+                "end": 30.059999465942383
+            },
+            {
+                "word": "machines.",
+                "start": 30.059999465942383,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "You",
+                "start": 30.940000534057617,
+                "end": 30.940000534057617
+            },
+            {
+                "word": "need",
+                "start": 30.940000534057617,
+                "end": 31.059999465942383
+            },
+            {
+                "word": "a",
+                "start": 31.059999465942383,
+                "end": 31.399999618530273
+            },
+            {
+                "word": "machine",
+                "start": 31.399999618530273,
+                "end": 31.399999618530273
+            },
+            {
+                "word": "that",
+                "start": 31.399999618530273,
+                "end": 31.65999984741211
+            },
+            {
+                "word": "you",
+                "start": 31.65999984741211,
+                "end": 31.84000015258789
+            },
+            {
+                "word": "give",
+                "start": 31.84000015258789,
+                "end": 31.959999084472656
+            },
+            {
+                "word": "it",
+                "start": 31.959999084472656,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "an",
+                "start": 32.220001220703125,
+                "end": 32.439998626708984
+            },
+            {
+                "word": "input",
+                "start": 32.439998626708984,
+                "end": 32.58000183105469
+            },
+            {
+                "word": "and",
+                "start": 32.58000183105469,
+                "end": 32.939998626708984
+            },
+            {
+                "word": "it",
+                "start": 32.939998626708984,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "generates",
+                "start": 33.52000045776367,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "a",
+                "start": 33.52000045776367,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "fully-fledged,",
+                "start": 33.94,
+                "end": 34.553
+            },
+            {
+                "word": "really",
+                "start": 34.553,
+                "end": 35.167
+            },
+            {
+                "word": "high-quality",
+                "start": 35.167,
+                "end": 35.78
+            },
+            {
+                "word": "post.",
+                "start": 35.779998779296875,
+                "end": 36.36000061035156
+            },
+            {
+                "word": "It",
+                "start": 36.63999938964844,
+                "end": 36.7400016784668
+            },
+            {
+                "word": "can",
+                "start": 36.7400016784668,
+                "end": 36.880001068115234
+            },
+            {
+                "word": "be",
+                "start": 36.880001068115234,
+                "end": 37
+            },
+            {
+                "word": "a",
+                "start": 37,
+                "end": 37.20000076293945
+            },
+            {
+                "word": "video",
+                "start": 37.20000076293945,
+                "end": 37.47999954223633
+            },
+            {
+                "word": "where",
+                "start": 37.47999954223633,
+                "end": 37.779998779296875
+            },
+            {
+                "word": "it",
+                "start": 37.779998779296875,
+                "end": 38.29999923706055
+            },
+            {
+                "word": "generates",
+                "start": 38.29999923706055,
+                "end": 38.29999923706055
+            },
+            {
+                "word": "the",
+                "start": 38.29999923706055,
+                "end": 38.86000061035156
+            },
+            {
+                "word": "captions,",
+                "start": 38.86000061035156,
+                "end": 39.060001373291016
+            },
+            {
+                "word": "the",
+                "start": 39.540000915527344,
+                "end": 39.79999923706055
+            },
+            {
+                "word": "animations",
+                "start": 39.79999923706055,
+                "end": 40.15999984741211
+            },
+            {
+                "word": "and",
+                "start": 40.15999984741211,
+                "end": 40.459999084472656
+            },
+            {
+                "word": "VFX,",
+                "start": 40.459999084472656,
+                "end": 41.060001373291016
+            },
+            {
+                "word": "overlays",
+                "start": 41.779998779296875,
+                "end": 41.779998779296875
+            },
+            {
+                "word": "them",
+                "start": 41.779998779296875,
+                "end": 42.060001373291016
+            },
+            {
+                "word": "on",
+                "start": 42.060001373291016,
+                "end": 42.18000030517578
+            },
+            {
+                "word": "your",
+                "start": 42.18000030517578,
+                "end": 42.41999816894531
+            },
+            {
+                "word": "image.",
+                "start": 42.41999816894531,
+                "end": 42.720001220703125
+            },
+            {
+                "word": "It",
+                "start": 43.02000045776367,
+                "end": 43.13999938964844
+            },
+            {
+                "word": "can",
+                "start": 43.13999938964844,
+                "end": 43.279998779296875
+            },
+            {
+                "word": "be",
+                "start": 43.279998779296875,
+                "end": 43.599998474121094
+            },
+            {
+                "word": "Instagram",
+                "start": 43.599998474121094,
+                "end": 43.91999816894531
+            },
+            {
+                "word": "posts,",
+                "start": 43.91999816894531,
+                "end": 44.41999816894531
+            },
+            {
+                "word": "but",
+                "start": 45.02000045776367,
+                "end": 45.220001220703125
+            },
+            {
+                "word": "the",
+                "start": 45.220001220703125,
+                "end": 45.47999954223633
+            },
+            {
+                "word": "key",
+                "start": 45.47999954223633,
+                "end": 45.47999954223633
+            },
+            {
+                "word": "is",
+                "start": 45.47999954223633,
+                "end": 45.65999984741211
+            },
+            {
+                "word": "to",
+                "start": 45.65999984741211,
+                "end": 45.79999923706055
+            },
+            {
+                "word": "get",
+                "start": 45.79999923706055,
+                "end": 45.91999816894531
+            },
+            {
+                "word": "as",
+                "start": 45.91999816894531,
+                "end": 46.099998474121094
+            },
+            {
+                "word": "little",
+                "start": 46.099998474121094,
+                "end": 46.29999923706055
+            },
+            {
+                "word": "work",
+                "start": 46.29999923706055,
+                "end": 46.560001373291016
+            },
+            {
+                "word": "as",
+                "start": 46.560001373291016,
+                "end": 46.84000015258789
+            },
+            {
+                "word": "possible,",
+                "start": 46.84000015258789,
+                "end": 47.08000183105469
+            },
+            {
+                "word": "but",
+                "start": 47.47999954223633,
+                "end": 47.619998931884766
+            },
+            {
+                "word": "still",
+                "start": 47.619998931884766,
+                "end": 47.79999923706055
+            },
+            {
+                "word": "get",
+                "start": 47.79999923706055,
+                "end": 47.97999954223633
+            },
+            {
+                "word": "the",
+                "start": 47.97999954223633,
+                "end": 48.20000076293945
+            },
+            {
+                "word": "highest",
+                "start": 48.20000076293945,
+                "end": 48.380001068115234
+            },
+            {
+                "word": "possible",
+                "start": 48.380001068115234,
+                "end": 48.84000015258789
+            },
+            {
+                "word": "quality",
+                "start": 48.84000015258789,
+                "end": 49.31999969482422
+            },
+            {
+                "word": "of",
+                "start": 49.31999969482422,
+                "end": 50.02000045776367
+            },
+            {
+                "word": "posts.",
+                "start": 50.02000045776367,
+                "end": 50.02000045776367
+            },
+            {
+                "word": "So",
+                "start": 50.47999954223633,
+                "end": 50.70000076293945
+            },
+            {
+                "word": "content",
+                "start": 50.70000076293945,
+                "end": 50.959999084472656
+            },
+            {
+                "word": "machines",
+                "start": 50.959999084472656,
+                "end": 51.36000061035156
+            },
+            {
+                "word": "are",
+                "start": 51.36000061035156,
+                "end": 51.779998779296875
+            },
+            {
+                "word": "not",
+                "start": 51.779998779296875,
+                "end": 52
+            },
+            {
+                "word": "just",
+                "start": 52,
+                "end": 52.220001220703125
+            },
+            {
+                "word": "faster",
+                "start": 52.220001220703125,
+                "end": 52.70000076293945
+            },
+            {
+                "word": "systems.",
+                "start": 52.70000076293945,
+                "end": 53.060001373291016
+            },
+            {
+                "word": "Content",
+                "start": 53.31999969482422,
+                "end": 53.439998626708984
+            },
+            {
+                "word": "machines",
+                "start": 53.439998626708984,
+                "end": 53.7400016784668
+            },
+            {
+                "word": "are",
+                "start": 53.7400016784668,
+                "end": 54.040000915527344
+            },
+            {
+                "word": "full",
+                "start": 54.040000915527344,
+                "end": 54.36000061035156
+            },
+            {
+                "word": "teams",
+                "start": 54.36000061035156,
+                "end": 54.58000183105469
+            },
+            {
+                "word": "that",
+                "start": 54.58000183105469,
+                "end": 54.7400016784668
+            },
+            {
+                "word": "will",
+                "start": 54.7400016784668,
+                "end": 54.86000061035156
+            },
+            {
+                "word": "do.",
+                "start": 54.86000061035156,
+                "end": 54.97999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 55.0099983215332,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 4.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "compete",
+                "present": "animation",
+                "layers": []
+            },
+            {
+                "start": 4.3,
+                "end": 7.92,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "generate": "Exhausted solo content creator slumped at a cluttered desk past midnight, ring light off, phone and camera around, cold blue screen glow on tired face, photographic, moody",
+                            "variant": "framed",
+                            "caption": "The grind has a ceiling"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.92,
+                "end": 12.28,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "burn out",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": null,
+                        "params": {
+                            "title": "The real competitor",
+                            "unit": "% of creators",
+                            "bars": [
+                                {
+                                    "label": "Burned out",
+                                    "value": 52,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Considered quitting",
+                                    "value": 37
+                                },
+                                {
+                                    "label": "Fix it with AI tools",
+                                    "value": 32
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.28,
+                "end": 15.6,
+                "background": "video",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "AI",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 15.6,
+                "end": 19.46,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "site": "https://chatgpt.com",
+                            "site_still": true,
+                            "variant": "framed",
+                            "caption": "The starting point, not the system"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.46,
+                "end": 22.14,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "generate": "A playful surreal AI-generated style picture of a cat in a tiny astronaut suit floating in a pastel nebula, glossy render, bright and funny",
+                            "variant": "drop-float"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.14,
+                "end": 27.98,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "really using AI",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": null,
+                        "params": {
+                            "left": {
+                                "title": "Volume",
+                                "points": [
+                                    "9.5 brand posts per day",
+                                    "56%: internet flooded with AI",
+                                    "65%: audiences skip it"
+                                ]
+                            },
+                            "right": {
+                                "title": "Quality",
+                                "points": [
+                                    "Posted less, engagement +20%",
+                                    "57% of AI output needs editing",
+                                    "Human judgment is the edge"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.98,
+                "end": 30.94,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "content machines",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Content Machine",
+                            "lines": [
+                                "A repeatable production system",
+                                "Not a one-off prompt"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.94,
+                "end": 36.64,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "high-quality",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": null,
+                        "params": {
+                            "title": "One input, finished output",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Your input"
+                                },
+                                {
+                                    "label": "The machine"
+                                },
+                                {
+                                    "label": "Ready-to-post asset",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.64,
+                "end": 43.02,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "VFX",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "title": "What the machine assembles",
+                            "items": [
+                                "Synced captions",
+                                "Motion and animation",
+                                "VFX overlays",
+                                "Composited on your footage"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 43.02,
+                "end": 45.02,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "site": "https://www.instagram.com",
+                            "site_still": true,
+                            "variant": "rise"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 45.02,
+                "end": 50.48,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "highest possible quality",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": null,
+                        "params": {
+                            "title": "What systems buy you",
+                            "unit": "% of creators",
+                            "bars": [
+                                {
+                                    "label": "Produce faster",
+                                    "value": 93,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Growth accelerated",
+                                    "value": 87
+                                },
+                                {
+                                    "label": "Match bigger teams",
+                                    "value": 58
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 50.48,
+                "end": 55.0099983215332,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "full teams",
+                "present": "animation",
+                "layers": []
+            }
+        ],
+        "background_pick": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/competing-with-high-frequency-posters-stjjz/clip.mp4"
+}
