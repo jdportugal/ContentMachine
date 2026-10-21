@@ -1,0 +1,1063 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta de 1937 em Perre com quase um hectare, Viana do Castelo",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/quinta-herdade-venda-4-quartos-perre-313m2/r995862",
+            "agent": "Daniel Meixedo",
+            "phone": "+351936197773",
+            "agency": "iad Portugal",
+            "hook": "Uma quinta de 1937 em Perre, com quase um hectare.",
+            "voiceover": "Uma quinta de 1937 em Perre, com quase um hectare. Uma propriedade rural no concelho de Viana do Castelo. A casa, de traça tradicional, tem cento e noventa e seis metros úteis. Quatro quartos, sala de estar, sala de jantar e uma casa de banho. Lá fora, mais de nove mil metros de terreno. Espaço para projetos agrícolas, paisagísticos ou de lazer. Precisa de obras de reabilitação, para recuperar ao seu gosto. Duzentos e noventa mil euros. Para visitar, fale com o Daniel Meixedo, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada principal da quinta",
+                    "vo": "Uma quinta de 1937 em Perre, com quase um hectare.",
+                    "caption": "Perre · 1937"
+                },
+                {
+                    "photo": "vista geral da propriedade e do terreno",
+                    "vo": "Uma propriedade rural no concelho de Viana do Castelo.",
+                    "caption": "Viana do Castelo"
+                },
+                {
+                    "photo": "detalhe da fachada / construção tradicional",
+                    "vo": "A casa, de traça tradicional, tem cento e noventa e seis metros úteis.",
+                    "caption": "196 m² úteis"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Quatro quartos, sala de estar,",
+                    "caption": "Sala de estar"
+                },
+                {
+                    "photo": "sala de jantar",
+                    "vo": "sala de jantar",
+                    "caption": "Sala de jantar"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "e uma casa de banho.",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "terreno amplo",
+                    "vo": "Lá fora, mais de nove mil metros de terreno.",
+                    "caption": "9.237 m² de terreno"
+                },
+                {
+                    "photo": "terreno / zona agrícola",
+                    "vo": "Espaço para projetos agrícolas, paisagísticos ou de lazer.",
+                    "caption": "Agricultura ou lazer"
+                },
+                {
+                    "photo": "interior por recuperar",
+                    "vo": "Precisa de obras de reabilitação, para recuperar ao seu gosto.",
+                    "caption": "Para reabilitar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e noventa mil euros. Para visitar, fale com o Daniel Meixedo, da iad Portugal.",
+                    "caption": "290.000 € · Daniel Meixedo · iad Portugal"
+                }
+            ],
+            "flags": [
+                "O texto diz que as oito assoalhadas estão 'num único piso', mas nos detalhes aparece 'Cave'. Ficaram de fora tanto o 'piso único' como a cave. Confirmar com o consultor.",
+                "'Concelho de Viana do Castelo' foi deduzido de Perre e do código postal 4925. O anúncio não o diz. Confirmar ou retirar.",
+                "O anúncio diz que os usos do terreno (agrícola, paisagístico, lazer) estão 'sujeitos às condicionantes urbanísticas aplicáveis'. O guião fala só em 'espaço para projetos'. Confirmar se o consultor quer acrescentar esta ressalva."
+            ],
+            "message": "Boa tarde Sr. Daniel,\nO meu nome é João Ferreira.\n\nVi a quinta em Perre que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Quinta 4 quartos de 313 m² em Perre",
+            "price": 290000,
+            "details": {
+                "Preço": "290 000 €",
+                "Localização": "Perre, 4925-583",
+                "Referência": "995862",
+                "Área Bruta m²": "313",
+                "Área Total do Lote m²": "9237",
+                "Quartos": 4,
+                "Ano de Construção": 1937,
+                "Certificado Energético": "F",
+                "Características": "313 m² área bruta, 196 m² úteis, 1 casa de banho, Cave, Sala de estar, Sala de jantar, Construído em 1937"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Daniel Meixedo - and phone number - +351936197773. Agency: iad Portugal.\nThe agent's photo is Daniel Meixedo.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma quinta de 1937 em Perre, com quase um hectare.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada principal da quinta → «Perre · 1937»\n- vista geral da propriedade e do terreno → «Viana do Castelo»\n- detalhe da fachada / construção tradicional → «196 m² úteis»\n- sala de estar → «Sala de estar»\n- sala de jantar → «Sala de jantar»\n- quarto → «Quatro quartos»\n- terreno amplo → «9.237 m² de terreno»\n- terreno / zona agrícola → «Agricultura ou lazer»\n- interior por recuperar → «Para reabilitar»\n- end card → «290.000 € · Daniel Meixedo · iad Portugal»\n\nHere are the house details:\n\nQuinta 4 quartos de 313 m² em Perre\nPreço\n290 000 €\nLocalização\nPerre, 4925-583\nReferência\n995862\nÁrea Bruta m²\n313\nÁrea Total do Lote m²\n9237\nQuartos\n4\nAno de Construção\n1937\nCertificado Energético\nF\nCaracterísticas\n313 m² área bruta, 196 m² úteis, 1 casa de banho, Cave, Sala de estar, Sala de jantar, Construído em 1937\n\nDescrição\nPERRE - RURAL-ESTATE - 8 ASSOALHADAS 196M²\n\nImplantada em Perre, esta quinta de traça tradicional, construída em 1937, oferece um conjunto de 8 assoalhadas distribuídas num único piso, com uma área habitável de 196 m² e um terreno de 9 237 m² — uma oportunidade rara para quem procura uma propriedade rural com dimensão e carácter.\n\nConstruída em 1937, a quinta preserva a autenticidade da arquitetura rural portuguesa, com volumes sólidos e uma implantação que tira partido da extensão do terreno. O vasto terreno de 9 237 m² oferece uma ampla margem de desenvolvimento, seja para projetos agrícolas, paisagísticos ou de lazer, sujeitos às condicionantes urbanísticas aplicáveis.\n\nO imóvel necessita de obras de reabilitação, o que representa uma oportunidade para personalizar cada espaço de acordo com o gosto e as necessidades do futuro proprietário, preservando o espírito original da construção.\n\nPara agendar uma visita e conhecer pessoalmente esta propriedade, entre em contacto connosco.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Quinta de 1937 em Perre, Viana do Castelo",
+            "summary": "Quinta rural de 1937 na freguesia de Perre, no concelho de Viana do Castelo, à venda e a precisar de reabilitação. O concelho tem 27 freguesias e cerca de 319 km² de área.",
+            "timeline": [
+                {
+                    "label": "Construção da casa (segundo o anúncio)",
+                    "sublabel": "1937"
+                },
+                {
+                    "label": "Censos que contaram as 27 freguesias do concelho",
+                    "sublabel": "2021"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área do concelho de Viana do Castelo",
+                    "value": 319.02,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Freguesias do concelho de Viana do Castelo",
+                    "value": 27,
+                    "unit": "freguesias"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Perre é uma das 27 freguesias do concelho de Viana do Castelo",
+                "O concelho de Viana do Castelo tem 319,02 km² de área"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/69988",
+                "https://www.infopedia.pt/artigos/$viana-do-castelo"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta de 1937 em Perre com quase um hectare, Viana do Castelo",
+            "description": "Quinta de 1937 em Perre, Viana do Castelo, com casa de traça tradicional de 196 m² úteis, quatro quartos, sala de estar, sala de jantar e casa de banho. Mais de 9 mil m² de terreno, com espaço para projetos agrícolas, paisagísticos ou de lazer, a precisar de obras de reabilitação para recuperar ao seu gosto. Para agendar uma visita, contacte o Daniel Meixedo, da IAD Portugal.",
+            "tags": [
+                "quinta",
+                "Viana do Castelo",
+                "Perre",
+                "imobiliário",
+                "casa para recuperar",
+                "propriedade rural",
+                "IAD Portugal",
+                "imóveis à venda"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r995862-hm0fb",
+    "created_at": "2026-10-15T13:14:48+00:00",
+    "updated_at": "2026-10-15T13:25:47+00:00",
+    "source_path": "clips/uploads/KkE6QfFVE3qD24Wcw9meEAh2IrKYaT5CAhiYU8up.mp3",
+    "images": [
+        {
+            "id": "img_aeb249b7",
+            "path": "clips/uploads/NBK8G7dhlGNfvxhUVWtdsazmZjMEUs8QxrG23sZt.jpg",
+            "description": "Fachada lateral da casa de pedra em granito, telhado de telha, quatro janelas e portão de ferro caído.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aba12c44",
+            "path": "clips/uploads/5aUFRjMktkwwIbWXbotM2avSoh8qHcPqdWldoqVf.jpg",
+            "description": "Fachada lateral da casa de pedra, plano mais afastado, caminho de terra, anexos e eucaliptos atrás.",
+            "name": "01a034fcdf0df67bea16f226a014947e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b0fe012",
+            "path": "clips/uploads/7kP5B7NyJzaTIZfvT65OgJyoR7BwQEtKklnjCmnL.jpg",
+            "description": "Traseira da casa em pedra, portas de madeira antigas, tanque de granito e sol forte.",
+            "name": "01a034fcde7b9b98d13dd75202fd9502.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5237aad6",
+            "path": "clips/uploads/3Oz1U12bt1SgzcDfzmH1ejmBTJI9IzeyLDt9iFaM.jpg",
+            "description": "Terreno de terra seca junto à casa, muros de pedra, árvores e vizinhança ao fundo.",
+            "name": "01a034fcdf654b3b3d381ff4c69bd310.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9c599407",
+            "path": "clips/uploads/91KRoA8DDyvolFwTHg65seoW15bJ4MXtulVXU9KG.jpg",
+            "description": "Pátio em lajes de pedra, casa com chaminé e varanda, anexo rústico de pedra à direita.",
+            "name": "01a034fce223d6a398fc57ac86ab04d4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ebdec2d9",
+            "path": "clips/uploads/5Ee0Vd1b7fAbDDTBBS3vGVUOdFndqKQ61FhG5SrI.jpg",
+            "description": "Terreno amplo ao lado da casa de pedra, muro de pedra, árvores e vista para o vale.",
+            "name": "01a034fcdc5fb21046d8e7a55e97001d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_561a36e7",
+            "path": "clips/uploads/TAnyFWOEvpbElEQt4rHj7IafR98VOEs9Yd0cM4zm.jpg",
+            "description": "Terreno sob oliveira com a casa de pedra de dois pisos ao fundo, céu azul.",
+            "name": "01a034fce24e74afe652cb7dbc1af2f9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_726f0eab",
+            "path": "clips/uploads/ChwH0H1MaQRCspUxotuLo9ja2RWfmoijni3vkPbx.jpg",
+            "description": "Entrada da propriedade vista da rua calcetada, muro de pedra, portões metálicos e casa ao fundo.",
+            "name": "01a034fcde707c64cf122e21cc45bea7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2a3511d3",
+            "path": "clips/uploads/lM0osxq8CtqHvfctdpsAfzVFDaTUQ6Af1ArbJwZ6.jpg",
+            "description": "Terreno com grandes oliveiras, muro de pedra e moradias vizinhas, céu azul.",
+            "name": "01a034fce16146dcf382382ed3790e79.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b7ccd8db",
+            "path": "clips/uploads/VzhjJKgtG0TfjUCDvK6oGdaZIEs8GwvnFOEDawGH.jpg",
+            "description": "Caminho de terra junto à casa de pedra, anexos, eucaliptos e portão de ferro enferrujado.",
+            "name": "01a034fcdf5f1856dd8046b1fbd57475.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ff927c9",
+            "path": "clips/uploads/ljqJqvJIDfPAiTOBWNNFqjILzLCKGate4J6GYxav.jpg",
+            "description": "Terreno exterior com alpendre de telha, pilha de lenha, espigueiro em tijolo e eucaliptos ao fundo, dia de sol.",
+            "name": "01a034fce1780bed9b951f9487e286fa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cd1659f2",
+            "path": "clips/uploads/PFliFCzntOkKgVYP8eA8BS6tU5IuRi51UPK4PwOP.jpg",
+            "description": "Mata de eucaliptos com mato e caruma no chão, rochas cobertas de musgo; zona arborizada do terreno.",
+            "name": "01a034fce2d631771d33a7debc187062.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_483f1144",
+            "path": "clips/uploads/fmYWYYmddVEfNOBkqNr8VMary37GJARUe6KGCXMe.jpg",
+            "description": "Fachada lateral da casa de pedra de granito com persianas, terreno amplo e muro de pedra.",
+            "name": "01a034fce1b9769574327cd05ea28ed4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5cd9139f",
+            "path": "clips/uploads/pYiEGzlcKLzKC3wu2NPrvmhcHL5On2Zw93PESAQD.jpg",
+            "description": "Anexo antigo de pedra com telhado de telha, caminho de terra, casa principal com chaminé atrás.",
+            "name": "01a034fce09146b471d638176bbbbd69.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_38375cd7",
+            "path": "clips/uploads/yYaQlvXYQBpKFiQFUtyoMOwrgE7AgsR0eVJTSTCO.jpg",
+            "description": "Vista elevada do logradouro: anexo de pedra, eira, espigueiro, alpendre e eucaliptos ao fundo.",
+            "name": "01a034fce220b6abff8f020200766001.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ff6b231",
+            "path": "clips/uploads/F2HfbokHF3Ejc5dYpKqJGYPWfGCAw4ygAFodjPpu.jpg",
+            "description": "Terreno de cultivo com vegetação seca, pequenos anexos ao fundo e eucaliptos altos; espaço agrícola.",
+            "name": "01a034fce1b0a9e0cd9df0ab90c1f8d1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3de39e80",
+            "path": "clips/uploads/PliaIcReloIt971ztWhbzM1ZMMrcEp4eBaDORJ0K.jpg",
+            "description": "Eira de granito com anexo de pedra e porta de madeira, espigueiro com escada, lenha.",
+            "name": "01a034fce21ed266baa068c9357c5534.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a7ec8db6",
+            "path": "clips/uploads/OQxaRPHEeUc72MD9mJRIjiGq0gbxNotGk1XOwDEe.jpg",
+            "description": "Casa de pedra de traça tradicional vista de lado, terreno com fetos e moradia vizinha branca.",
+            "name": "01a034fce1c2b59246ad11264ad156ff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8ed7d9fd",
+            "path": "clips/uploads/HgCREQnEhjX7qMSIqd3IYSxVN8DpBBUcY9gqI5mp.jpg",
+            "description": "Pátio de terra e rocha com hortênsias, anexo de pedra com telhado e garagem ao fundo.",
+            "name": "01a034fce1640f9024d067af6388f7a9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e430aa44",
+            "path": "clips/uploads/xtloHajADN72GcQkjzOKMjqhDpJSWwcpdYrOnOvN.jpg",
+            "description": "Vista de cima do logradouro: anexo de pedra, eira, espigueiro com escada e mata de eucaliptos.",
+            "name": "01a034fce1cbf923a62a45c6a7cfeb6c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_549fc896",
+            "path": "clips/uploads/oPcUppkAIm8J10CSZceVV6YzkvdDSMbWbZjwo3UD.jpg",
+            "description": "Vista da rua em calçada: muro de pedra, oliveiras e casa de granito ao fundo, entre as árvores.",
+            "name": "01a034fce107b5524bda170af19c1623.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_23999f0d",
+            "path": "clips/uploads/fuH8sZObkhbztnxSD1beruGYqJVwyYBOT7vX9vej.jpg",
+            "description": "Terreno com eucaliptos e mato seco, telhados da aldeia e colinas arborizadas ao fundo.",
+            "name": "01a034fce23d7ca8b10f997b701a329a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_45a70390",
+            "path": "clips/uploads/W6keNJvEidhJd2SdlAZ3sVbkYqIRVr4OdOynyk9V.jpg",
+            "description": "Fachada lateral da casa de pedra com quatro janelas, telhado de telha e terreno com fetos à frente.",
+            "name": "01a034fce229d357f8902bd5fae9c76e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fa9712da",
+            "path": "clips/uploads/MR7WNLQIJ76ErJReMhFGSu8siNFRtOQMQm1Od23z.jpg",
+            "description": "Casa de granito com chaminé, portas de madeira antigas, anexo de pedra e portão de ferro caído no pátio.",
+            "name": "01a034fce0451da66a75525edd9fb431.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fcec4665",
+            "path": "clips/uploads/r8qr4X0ColfaRdhQRyndQ8RbvNIIpc8uqB0b2Y6O.jpg",
+            "description": "Quintal com laranjeiras e vegetação densa junto à casa de pedra, com toldo verde e anexo.",
+            "name": "01a034fce1eb091e49173712739a7f66.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_318b7b2d",
+            "path": "clips/uploads/OgCee3CUcTTGtiTFkfdu46SGODYqwjNeqHHbyu02.png",
+            "description": "Retrato do consultor Daniel Meixedo, da iad Portugal.",
+            "name": "Daniel Meixedo.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_32672af5",
+            "path": "clips/uploads/wkybSuL6nOF9RZmBmD8vKRSjC4d1kjFVSxRelbp0.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/KkE6QfFVE3qD24Wcw9meEAh2IrKYaT5CAhiYU8up.mp3",
+    "transcript": {
+        "duration": 34.31999969482422,
+        "text": "Uma quinta de 1937 em Perre, com quase um hectare. Uma propriedade rural no concelho de Viena do Castelo. A casa, de traça tradicional, tem 196 metros úteis. Quatro quartos, sala de estar, sala de jantar e uma casa de banho. Lá fora, mais de 9 mil metros de terreno. Espaço para projetos agrícolas, paisagísticos ou de lazer. Precisa de obras de reabilitação para recuperar ao seu gosto. Para visitar, fale com o Daniel Meixedo, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.3199999928474426
+            },
+            {
+                "word": "quinta",
+                "start": 0.3199999928474426,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "de",
+                "start": 0.5400000214576721,
+                "end": 0.8199999928474426
+            },
+            {
+                "word": "1937",
+                "start": 0.8199999928474426,
+                "end": 2.2799999713897705
+            },
+            {
+                "word": "em",
+                "start": 2.2799999713897705,
+                "end": 2.9000000953674316
+            },
+            {
+                "word": "Perre",
+                "start": 2.9000000953674316,
+                "end": 3.0799999237060547
+            },
+            {
+                "word": "com",
+                "start": 3.2799999713897705,
+                "end": 3.5
+            },
+            {
+                "word": "quase",
+                "start": 3.5,
+                "end": 3.819999933242798
+            },
+            {
+                "word": "um",
+                "start": 3.819999933242798,
+                "end": 4.21999979019165
+            },
+            {
+                "word": "hectare",
+                "start": 4.21999979019165,
+                "end": 4.639999866485596
+            },
+            {
+                "word": "Uma",
+                "start": 5.179999828338623,
+                "end": 5.400000095367432
+            },
+            {
+                "word": "propriedade",
+                "start": 5.400000095367432,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "rural",
+                "start": 5.920000076293945,
+                "end": 6.320000171661377
+            },
+            {
+                "word": "no",
+                "start": 6.320000171661377,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "concelho",
+                "start": 6.539999961853027,
+                "end": 6.940000057220459
+            },
+            {
+                "word": "de",
+                "start": 6.940000057220459,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "Viena",
+                "start": 7.239999771118164,
+                "end": 7.420000076293945
+            },
+            {
+                "word": "do",
+                "start": 7.420000076293945,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "Castelo",
+                "start": 7.579999923706055,
+                "end": 8.399999618530273
+            },
+            {
+                "word": "A",
+                "start": 8.5,
+                "end": 8.640000343322754
+            },
+            {
+                "word": "casa",
+                "start": 8.640000343322754,
+                "end": 8.9399995803833
+            },
+            {
+                "word": "de",
+                "start": 9.100000381469727,
+                "end": 9.34000015258789
+            },
+            {
+                "word": "traça",
+                "start": 9.34000015258789,
+                "end": 9.579999923706055
+            },
+            {
+                "word": "tradicional",
+                "start": 9.579999923706055,
+                "end": 10.319999694824219
+            },
+            {
+                "word": "tem",
+                "start": 10.720000267028809,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "196",
+                "start": 10.819999694824219,
+                "end": 11.859999656677246
+            },
+            {
+                "word": "metros",
+                "start": 11.859999656677246,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "úteis",
+                "start": 12.220000267028809,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "Quatro",
+                "start": 13.420000076293945,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "quartos",
+                "start": 13.420000076293945,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "sala",
+                "start": 14.34000015258789,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "de",
+                "start": 14.34000015258789,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "estar",
+                "start": 14.619999885559082,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "sala",
+                "start": 15.319999694824219,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "de",
+                "start": 15.319999694824219,
+                "end": 15.800000190734863
+            },
+            {
+                "word": "jantar",
+                "start": 15.800000190734863,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "e",
+                "start": 15.84000015258789,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "uma",
+                "start": 16.18000030517578,
+                "end": 16.459999084472656
+            },
+            {
+                "word": "casa",
+                "start": 16.459999084472656,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "de",
+                "start": 16.559999465942383,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "banho",
+                "start": 16.920000076293945,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "Lá",
+                "start": 17.579999923706055,
+                "end": 17.719999313354492
+            },
+            {
+                "word": "fora",
+                "start": 17.719999313354492,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "mais",
+                "start": 18.479999542236328,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "de",
+                "start": 18.559999465942383,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "9",
+                "start": 18.8799991607666,
+                "end": 19.299999237060547
+            },
+            {
+                "word": "mil",
+                "start": 19.299999237060547,
+                "end": 19.459999084472656
+            },
+            {
+                "word": "metros",
+                "start": 19.459999084472656,
+                "end": 19.799999237060547
+            },
+            {
+                "word": "de",
+                "start": 19.799999237060547,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "terreno",
+                "start": 20.399999618530273,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "Espaço",
+                "start": 21.139999389648438,
+                "end": 21.18000030517578
+            },
+            {
+                "word": "para",
+                "start": 21.18000030517578,
+                "end": 21.420000076293945
+            },
+            {
+                "word": "projetos",
+                "start": 21.420000076293945,
+                "end": 21.799999237060547
+            },
+            {
+                "word": "agrícolas",
+                "start": 21.799999237060547,
+                "end": 22.459999084472656
+            },
+            {
+                "word": "paisagísticos",
+                "start": 22.739999771118164,
+                "end": 23.479999542236328
+            },
+            {
+                "word": "ou",
+                "start": 23.479999542236328,
+                "end": 23.719999313354492
+            },
+            {
+                "word": "de",
+                "start": 23.719999313354492,
+                "end": 24.020000457763672
+            },
+            {
+                "word": "lazer",
+                "start": 24.020000457763672,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "Precisa",
+                "start": 24.959999084472656,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "de",
+                "start": 25.020000457763672,
+                "end": 25.420000076293945
+            },
+            {
+                "word": "obras",
+                "start": 25.420000076293945,
+                "end": 25.420000076293945
+            },
+            {
+                "word": "de",
+                "start": 25.420000076293945,
+                "end": 25.739999771118164
+            },
+            {
+                "word": "reabilitação",
+                "start": 25.739999771118164,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "para",
+                "start": 26.31999969482422,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "recuperar",
+                "start": 26.639999389648438,
+                "end": 27.1200008392334
+            },
+            {
+                "word": "ao",
+                "start": 27.1200008392334,
+                "end": 27.280000686645508
+            },
+            {
+                "word": "seu",
+                "start": 27.280000686645508,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "gosto",
+                "start": 27.520000457763672,
+                "end": 27.799999237060547
+            },
+            {
+                "word": "Para",
+                "start": 30.079999923706055,
+                "end": 30.639999389648438
+            },
+            {
+                "word": "visitar",
+                "start": 30.639999389648438,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "fale",
+                "start": 31.739999771118164,
+                "end": 31.739999771118164
+            },
+            {
+                "word": "com",
+                "start": 31.739999771118164,
+                "end": 31.860000610351562
+            },
+            {
+                "word": "o",
+                "start": 31.860000610351562,
+                "end": 32.040000915527344
+            },
+            {
+                "word": "Daniel",
+                "start": 32.040000915527344,
+                "end": 32.29999923706055
+            },
+            {
+                "word": "Meixedo",
+                "start": 32.29999923706055,
+                "end": 32.86000061035156
+            },
+            {
+                "word": "da",
+                "start": 33.08000183105469,
+                "end": 33.2400016784668
+            },
+            {
+                "word": "IAD",
+                "start": 33.2400016784668,
+                "end": 33.540000915527344
+            },
+            {
+                "word": "Portugal",
+                "start": 33.540000915527344,
+                "end": 34.08000183105469
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.950000000000001,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "QUINTA DE 1937 EM PERRE",
+                        "params": {
+                            "src": "img_aeb249b7",
+                            "avatar": "img_318b7b2d",
+                            "logo": "img_32672af5",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "290.000 €",
+                            "location": "VIANA DO CASTELO · PERRE",
+                            "title": "QUINTA DE 1937",
+                            "facts": "196 m² úteis · 4 quartos · 1 WC · 9.237 m² de terreno",
+                            "cta": "Ligue já +351 936 197 773",
+                            "name": "Daniel Meixedo",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.950000000000001,
+                "end": 8.45,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Viana do Castelo",
+                        "params": {
+                            "src": "img_549fc896",
+                            "src2": "img_726f0eab",
+                            "src3": "img_aba12c44",
+                            "src4": "img_b7ccd8db",
+                            "src5": "img_23999f0d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.45,
+                "end": 10.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_45a70390",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.6,
+                "end": 12.95,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "196 M² ÚTEIS",
+                        "params": {
+                            "src": "img_a7ec8db6",
+                            "blur": 10,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.95,
+                "end": 15.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_483f1144",
+                            "title": "A CASA",
+                            "items": [
+                                "Quatro quartos",
+                                "Sala de estar",
+                                "Sala de jantar",
+                                "1 casa de banho"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.9,
+                "end": 18.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_9c599407",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.2,
+                "end": 20.95,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "9.237 m² de terreno",
+                        "params": {
+                            "src": "img_ebdec2d9",
+                            "src2": "img_5237aad6",
+                            "src3": "img_561a36e7",
+                            "src4": "img_2a3511d3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.95,
+                "end": 24.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Agricultura ou lazer",
+                        "params": {
+                            "src": "img_3ff6b231",
+                            "src2": "img_3ff927c9",
+                            "src3": "img_38375cd7",
+                            "src4": "img_3de39e80"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.6,
+                "end": 27,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "PARA REABILITAR",
+                        "params": {
+                            "src": "img_3b0fe012",
+                            "src2": "img_fa9712da"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 30,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Anexos, eira e espigueiro",
+                        "params": {
+                            "src": "img_e430aa44",
+                            "src2": "img_5cd9139f",
+                            "src3": "img_8ed7d9fd",
+                            "src4": "img_fcec4665",
+                            "src5": "img_cd1659f2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30,
+                "end": 34.31999969482422,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Daniel Meixedo",
+                        "params": {
+                            "src": "img_318b7b2d",
+                            "name": "Daniel Meixedo",
+                            "phone": "+351 936 197 773",
+                            "email": "290.000 € · Marque visita"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r995862-hm0fb/clip.mp4",
+    "error": null
+}

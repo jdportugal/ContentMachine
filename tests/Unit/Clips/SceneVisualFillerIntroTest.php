@@ -166,6 +166,31 @@ class SceneVisualFillerIntroTest extends TestCase
      * mp4, failing the whole render. The intro must instead become the built-in
      * `video-intro`, which plays that video full-frame.
      */
+    /**
+     * The reported 404: the user uploaded a VIDEO for the intro slot itself, so it
+     * arrives as $introImageId (not as an image-reveal on the opening scene). The
+     * image-only intro effect got the mp4 in params.src and rendered it with <Img>.
+     * A video handed to the intro must promote it to `video-intro` no matter which
+     * way it arrives.
+     */
+    public function test_a_video_uploaded_for_the_intro_slot_promotes_the_intro_to_video_intro(): void
+    {
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 5.4, 'present' => 'animation', 'layers' => [['type' => 'particle-image-assemble', 'text' => 'rockets', 'params' => []]]],
+            ['start' => 5.4, 'end' => 9, 'present' => 'split', 'layers' => [['type' => 'card', 'params' => ['title' => 'x']]]],
+        ]];
+
+        $out = (new SceneVisualFiller)->enforceIntro($plan, ['particle-image-assemble'], 'vid', ['vid']);
+
+        $intro = $out['scenes'][0]['layers'][0];
+        $this->assertSame('video-intro', $intro['type']);
+        $this->assertSame('vid', $intro['params']['src']);
+        $this->assertFalse(
+            collect($out['scenes'])->pluck('layers')->flatten(1)->contains(fn ($l) => ($l['type'] ?? '') === 'particle-image-assemble' && ($l['params']['src'] ?? '') === 'vid'),
+            'the image-only intro effect must never carry the video',
+        );
+    }
+
     public function test_a_video_on_the_opening_scene_promotes_the_intro_to_video_intro(): void
     {
         $plan = ['scenes' => [

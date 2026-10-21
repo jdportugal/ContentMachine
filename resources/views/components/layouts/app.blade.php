@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -69,25 +69,25 @@
                     // unfold in the shelf while their parent is the active section.
                     $grupos = [
                         ['titulo' => null, 'itens' => [
-                            ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#FFB347', 'glyph' => '◆'],
+                            ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#A06E1C', 'glyph' => '◆'],
                         ]],
                         ['titulo' => 'Source', 'itens' => [
-                            ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#FFD98A', 'glyph' => '✷'],
-                            ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#C77DFF', 'glyph' => '◈'],
+                            ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#8C7330', 'glyph' => '✷'],
+                            ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#7A4A8C', 'glyph' => '◈'],
                         ]],
                         ['titulo' => 'Create', 'itens' => [
-                            ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#5A7BFF', 'glyph' => '▲', 'match' => ['clips', 'clips.*'], 'subs' => [
+                            ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#2F5A85', 'glyph' => '▲', 'match' => ['clips', 'clips.*'], 'subs' => [
                                 ['route' => 'clips',           'label' => 'Shorts Generator',  'match' => 'clips'],
                                 ['route' => 'clips.posts',     'label' => 'Posts Generator'],
                                 ['route' => 'clips.repurpose', 'label' => 'Content Repurpose'],
                             ]],
-                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#4DE0E0', 'glyph' => '✦', 'match' => ['clips-animados']],
-                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#6FE0D0', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
+                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#2C6E6E', 'glyph' => '✦', 'match' => ['clips-animados']],
+                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#3A7A68', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
                                 ['route' => 'clips-animados.sfx',         'label' => 'SFX Studio',  'match' => 'clips-animados.sfx*'],
                                 ['route' => 'clips-animados.vfx',         'label' => 'VFX Lab',     'match' => 'clips-animados.vfx*'],
                                 ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'match' => 'clips-animados.backgrounds'],
                             ]],
-                            ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#9C7DFF', 'glyph' => '◇', 'match' => ['publicacoes', 'publicacoes.*'],
+                            ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#5E5590', 'glyph' => '◇', 'match' => ['publicacoes', 'publicacoes.*'],
                                 // The workshop is one page per publication type — the types
                                 // live in config, so the shelf can't hardcode them.
                                 'subs' => collect(config('contentmachine.publicacoes.tipos', []))
@@ -99,14 +99,14 @@
                             ],
                         ]],
                         ['titulo' => 'Library', 'itens' => [
-                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#4DE08A', 'glyph' => '♫'],
-                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#FF5C7A', 'glyph' => '❖'],
+                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#3D7A4C', 'glyph' => '♫'],
+                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#A93A48', 'glyph' => '❖'],
                         ]],
                         ['titulo' => 'Publish', 'itens' => [
-                            ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Scheduling · Posted', 'color' => '#FF8A4D', 'glyph' => '⬡'],
+                            ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Scheduling · Posted', 'color' => '#A8552B', 'glyph' => '⬡'],
                         ]],
                         ['titulo' => null, 'itens' => [
-                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#8AE0FF', 'glyph' => '⚙'],
+                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#3D6A85', 'glyph' => '⚙'],
                         ]],
                     ];
                     $n = 0; // running number across the whole shelf
@@ -228,8 +228,8 @@
             <div x-transition.opacity
                  style="pointer-events:auto;"
                  :style="t.type === 'erro'
-                    ? 'border:1px solid rgba(255,92,122,.6); color:#FF8FA6;'
-                    : 'border:1px solid rgba(18,183,106,.6); color:#4DE08A;'"
+                    ? 'border:1px solid rgba(169,58,72,.5); color:#A93A48;'
+                    : 'border:1px solid rgba(61,122,76,.5); color:#3D7A4C;'"
                  class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
                 <span x-text="t.type === 'erro' ? '✕' : '✓'"></span>
                 <span x-text="t.message" class="flex-1 break-words"></span>

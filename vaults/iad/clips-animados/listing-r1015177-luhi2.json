@@ -1,0 +1,1409 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 em Arcozelo, a minutos da Praia de Miramar",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-arcozelo-420m2/r1015177",
+            "agent": "André Rodrigo Paiva",
+            "phone": "+351912455436",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Moradia isolada em Arcozelo, a minutos da Praia de Miramar.",
+            "voiceover": "Uma moradia isolada em Arcozelo, a poucos minutos da Praia de Miramar. Fica em Vila Nova de Gaia, perto do Senhor da Pedra. Com comércio, serviços e acessos ao Porto por perto. Três pisos, quatro quartos, três deles em suite, e cinco casas de banho. Sala de estar, sala de jantar, lareira e ar condicionado. Lá fora, setecentos e dez metros de terreno, com jardim e garagem fechada. E um espaço gourmet fechado, para usar todo o ano. Está arrendada até setembro de 2027, por dois mil euros por mês. Seiscentos e noventa mil euros. Para visitar, fale com o André Paiva, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia isolada",
+                    "vo": "Uma moradia isolada em Arcozelo, a poucos minutos da Praia de Miramar.",
+                    "caption": "Moradia isolada em Arcozelo, a minutos da Praia de Miramar"
+                },
+                {
+                    "photo": "Praia de Miramar com a capela do Senhor da Pedra",
+                    "vo": "Fica em Vila Nova de Gaia, perto do Senhor da Pedra.",
+                    "caption": "Perto do Senhor da Pedra"
+                },
+                {
+                    "photo": "rua e envolvente residencial",
+                    "vo": "Com comércio, serviços e acessos ao Porto por perto.",
+                    "caption": "Acessos ao Porto"
+                },
+                {
+                    "photo": "hall de entrada / escadas entre pisos",
+                    "vo": "Três pisos, quatro quartos,",
+                    "caption": "Três pisos, quatro quartos"
+                },
+                {
+                    "photo": "suite principal",
+                    "vo": "três deles em suite, e cinco casas de banho.",
+                    "caption": "Três suites"
+                },
+                {
+                    "photo": "sala de estar com lareira",
+                    "vo": "Sala de estar, sala de jantar, lareira e ar condicionado.",
+                    "caption": "Lareira e ar condicionado"
+                },
+                {
+                    "photo": "jardim / logradouro",
+                    "vo": "Lá fora, setecentos e dez metros de terreno, com jardim e garagem fechada.",
+                    "caption": "710 m² de terreno"
+                },
+                {
+                    "photo": "espaço gourmet exterior fechado",
+                    "vo": "E um espaço gourmet fechado, para usar todo o ano.",
+                    "caption": "Espaço gourmet fechado"
+                },
+                {
+                    "photo": "fachada com garagem",
+                    "vo": "Está arrendada até setembro de 2027, por dois mil euros por mês.",
+                    "caption": "Arrendada até setembro de 2027"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e noventa mil euros. Para visitar, fale com o André Paiva, da IAD Portugal.",
+                    "caption": "690.000 € · André Paiva · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O anúncio indica um contrato de arrendamento de 2.000,00 por mês, sem moeda. Assumi que são euros. Confirmar o valor e se o consultor quer o arrendamento referido no vídeo, já que as visitas dependem da disponibilidade do inquilino.",
+                "A área bruta aparece como 419 m² no texto e como 420 m² nos detalhes. Deixei a área de construção fora do vídeo e usei só o terreno (710 m², igual nas duas partes).",
+                "A licença de utilização é de 16/09/2005, mas o ano de construção indicado é 2007. Deixei o ano fora do vídeo.",
+                "Não mencionei a possibilidade de construir uma piscina, porque depende de licenças e não existe hoje.",
+                "O aquecimento aparece só como 'property.feature.heating', um erro do modelo do anúncio. Ficou de fora.",
+                "Varanda, ar condicionado e lareira só aparecem na lista de características, não no texto. Usei o ar condicionado e a lareira sem dizer em que divisão está a lareira. Confirmar nas fotos."
+            ],
+            "message": "Bom dia Sr. André, fiz este vídeo da sua moradia T4 em Arcozelo para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia 4 quartos de 420 m² em Arcozelo",
+            "price": 690000,
+            "details": {
+                "Preço": "690 000 €",
+                "Localização": "Arcozelo, 4410-432",
+                "Referência": "1015177",
+                "Área Bruta m²": "420",
+                "Área Total do Lote m²": "710",
+                "Quartos": 4,
+                "Ano de Construção": 2007,
+                "Certificado Energético": "C",
+                "Características": "420 m² área bruta, 241 m² úteis, 5 casas de banho, Jardim, Garagem, Estacionamento, Varanda, Ar condicionado, Lareira, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2007, Porta blindada, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - André Rodrigo Paiva - and phone number - +351912455436. Agency: IAD Portugal.\nThe agent's photo is André Rodrigo Paiva.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Moradia isolada em Arcozelo, a minutos da Praia de Miramar.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia isolada → «Moradia isolada em Arcozelo, a minutos da Praia de Miramar»\n- Praia de Miramar com a capela do Senhor da Pedra → «Perto do Senhor da Pedra»\n- rua e envolvente residencial → «Acessos ao Porto»\n- hall de entrada / escadas entre pisos → «Três pisos, quatro quartos»\n- suite principal → «Três suites»\n- sala de estar com lareira → «Lareira e ar condicionado»\n- jardim / logradouro → «710 m² de terreno»\n- espaço gourmet exterior fechado → «Espaço gourmet fechado»\n- fachada com garagem → «Arrendada até setembro de 2027»\n- end card → «690.000 € · André Paiva · IAD Portugal»\n\nHere are the house details:\n\nMoradia 4 quartos de 420 m² em Arcozelo\nPreço\n690 000 €\nLocalização\nArcozelo, 4410-432\nReferência\n1015177\nÁrea Bruta m²\n420\nÁrea Total do Lote m²\n710\nQuartos\n4\nAno de Construção\n2007\nCertificado Energético\nC\nCaracterísticas\n420 m² área bruta, 241 m² úteis, 5 casas de banho, Jardim, Garagem, Estacionamento, Varanda, Ar condicionado, Lareira, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2007, Porta blindada, Intercomunicador\n\nDescrição\nMORADIA T4 ISOLADA E ESPAÇOSA EM ARCOZELO — PRÓXIMA DA PRAIA DE MIRAMAR\n\nMoradia T4 isolada, com 419 m² de área bruta de construção, implantada num amplo terreno de 710 m², numa localização privilegiada em Arcozelo, Vila Nova de Gaia, a poucos minutos da Praia de Miramar.\n\nUma propriedade ideal para quem procura espaço, privacidade, conforto e proximidade do mar, seja para habitação própria ou como investimento.\n\nNota: Contrato de arrendamento de 2.000,00 por mês, vigente até setembro de 2027.\nAs visitas serão condicionadas de acordo com a disponibilidade do inqulino.\n\nPRINCIPAIS CARACTERÍSTICAS\n\n- Tipologia: T4\n- Área total do terreno: 710 m²\n- Área bruta de construção: 419 m²\n- 3 suítes\n- 3 pisos: cave, piso térreo e piso superior\n- Garagem fechada\n- Amplo logradouro\n- Espaço gourmet exterior fechado\n- Moradia isolada, garantindo maior privacidade\n- Licença de Utilização n.º 677/05, de 16/09/2005\n\n ESPAÇO, CONFORTO E PRIVACIDADE\n\nDistribuída por três pisos, esta moradia oferece uma excelente organização entre as áreas sociais e privadas, proporcionando conforto e funcionalidade para toda a família.\n\nOs três quartos em suíte garantem privacidade e comodidade, enquanto as restantes áreas permitem criar diferentes ambientes de convívio, trabalho ou lazer.\n\nNo exterior, o amplo terreno de 710 m² oferece inúmeras possibilidades de utilização. O logradouro permite criar uma agradável zona de jardim, espaço de lazer ou até uma piscina, mediante as condições e licenças aplicáveis.\n\nO espaço gourmet fechado é outro dos destaques da propriedade, ideal para refeições e momentos de convívio durante todo o ano, independentemente das condições meteorológicas.\n\nA garagem fechada acrescenta segurança e comodidade no dia a dia.\n\n LOCALIZAÇÃO PRIVILEGIADA\n\nSituada em Arcozelo, Vila Nova de Gaia, a moradia beneficia da proximidade de uma das zonas costeiras mais procuradas do concelho.\n\nA Praia de Miramar, com o seu extenso areal e o emblemático Senhor da Pedra, encontra-se a poucos minutos, permitindo desfrutar facilmente de caminhadas junto ao mar, praia e de toda a envolvente costeira.\n\nA localização combina a tranquilidade de uma zona residencial com a proximidade dos principais serviços, comércio, acessos rodoviários e ligações ao Porto e a Vila Nova de Gaia.\n\n UMA MORADIA COM GRANDE POTENCIAL\n\nPelas suas dimensões, características e localização, esta propriedade apresenta-se como uma excelente oportunidade para quem procura uma moradia familiar de grandes dimensões junto ao mar, mas também para quem valoriza um imóvel com potencial de valorização e diferentes possibilidades de utilização.\n\nAgende a sua visita e venha conhecer pessoalmente esta moradia em Arcozelo.\n\nSOBRE A iad\n\nA iadnasceu em França, em 2008, com um modelo inovador de mediação imobiliária, baseado na proximidade entre o consultor e o cliente e numa forte componente digital.\n\nEnquanto consultor imobiliário independente iad, acompanho cada cliente de forma personalizada ao longo de todo o processo, contando com o apoio de uma rede de profissionais especializados.\n\nO objetivo é proporcionar um acompanhamento profissional, transparente e próximo, desde o primeiro contacto até à concretização do negócio.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia isolada em Arcozelo, perto da praia de Miramar, em Vila Nova de Gaia",
+            "summary": "Moradia T4 com três pisos, 710 m² de terreno e espaço gourmet, à venda por 690 mil euros e arrendada até setembro de 2027 por 2.000 €/mês. Fica junto à costa de Gaia, que tem 19 praias com Bandeira Azul em 2026, numa altura em que os preços das casas em Portugal continuam a subir.",
+            "timeline": [
+                {
+                    "label": "Bandeira Azul em Miramar e Senhor da Pedra",
+                    "sublabel": "15 jun – 13 set 2026"
+                },
+                {
+                    "label": "Preços das casas sobem 17,8% (INE)",
+                    "sublabel": "1.º trim. 2026"
+                },
+                {
+                    "label": "Preços das casas sobem 16,5% (INE)",
+                    "sublabel": "2.º trim. 2026"
+                },
+                {
+                    "label": "Fim do arrendamento atual",
+                    "sublabel": "set. 2027"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 690000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Renda atual",
+                    "value": 2000,
+                    "unit": "€/mês"
+                },
+                {
+                    "label": "Rendibilidade bruta da renda (calculada)",
+                    "value": 3.5,
+                    "unit": "%/ano"
+                },
+                {
+                    "label": "Terreno",
+                    "value": 710,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Praias de Gaia com Bandeira Azul (2026)",
+                    "value": 19,
+                    "unit": "praias"
+                },
+                {
+                    "label": "Subida dos preços das casas em Portugal (2.º trim. 2026, homóloga)",
+                    "value": 16.5,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Rendimento vs. habitação própria",
+                    "left": {
+                        "title": "Investimento",
+                        "points": [
+                            "Arrendada até set. 2027",
+                            "2.000 €/mês = 24.000 €/ano",
+                            "Cerca de 3,5% de rendibilidade bruta"
+                        ]
+                    },
+                    "right": {
+                        "title": "Habitação própria",
+                        "points": [
+                            "Disponível após set. 2027",
+                            "4 quartos, 3 em suite",
+                            "Jardim, garagem e espaço gourmet"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Miramar e Senhor da Pedra têm Bandeira Azul em 2026",
+                "Gaia tem 19 praias com Bandeira Azul em 2026",
+                "A Capela do Senhor da Pedra está num rochedo sobre a praia",
+                "Preços das casas em Portugal: +16,5% no 2.º trim. 2026",
+                "T4 com 3 suites e 5 casas de banho"
+            ],
+            "sources": [
+                "https://bandeiraazul.abaae.pt/wp-content/uploads/sites/2/2026/04/BA_listas-regioes_2026.pdf",
+                "https://bandeiraazul.abaae.pt/municipio/vila-nova-de-gaia/",
+                "https://bandeiraazul.abaae.pt/local-galardoado/senhor-da-pedra/",
+                "https://guiadepraias.pt/praia/praia-de-miramar",
+                "https://averdade.com/4265502279/gaia-com-19-praias-distinguidas-com-bandeira-azul-para-esta-epoca-balnear/",
+                "https://www.comparaja.pt/credito-habitacao/noticias/indice-de-precos-da-habitacao-sobe-16-5-no-2o-trimestre-2026",
+                "https://ind.millenniumbcp.pt/pt/Particulares/Investimentos/Documents/NotasConjuntura/2026/Mercado_Imobiliario_2T26_24092026.pdf",
+                "https://eco.sapo.pt/2026/06/23/precos-da-habitacao-disparam-178-no-inicio-do-ano/",
+                "https://www.futura-sciences.com/planete/actualites/exploration-miramar-chapelle-senhor-da-pedra-eglise-posee-ocean-fascine-portugal-123517/",
+                "https://postal.pt/cultura/conheca-a-capela-que-cresce-sobre-um-rochedo-e-fica-numa-das-melhores-praias-de-portugal/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 em Arcozelo, a minutos da Praia de Miramar",
+            "description": "Já rende 2.000 € por mês: está arrendada até setembro de 2027.\n\nMoradia isolada em Arcozelo, Vila Nova de Gaia, perto do Senhor da Pedra, com comércio, serviços e acessos ao Porto por perto.\nSão três pisos, com quatro quartos (três em suite), cinco casas de banho, sala de estar e sala de jantar. Tem lareira e ar condicionado.\nO lote tem 710 m², com jardim, garagem fechada e um espaço gourmet fechado que se usa todo o ano.\n\nT4 · 420 m² brutos · 241 m² úteis · 2007 · Certificado C · Ref. 1015177\n690.000 €\n\nMarque a visita com o André Paiva, da IAD Portugal: +351 912 455 436",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "moradiat4",
+                "arcozelo",
+                "vilanovadegaia",
+                "praiademiramar",
+                "gaia",
+                "investimentoimobiliario",
+                "casasparavender",
+                "imoveisportugal",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1015177-luhi2",
+    "created_at": "2026-10-20T15:53:13+00:00",
+    "updated_at": "2026-10-20T19:27:58+00:00",
+    "source_path": "clips/uploads/2eDsFSKK4eOByPAtno7kwLsSgHhUvSPigygwNEcn.mp3",
+    "images": [
+        {
+            "id": "img_26a4ddea",
+            "path": "clips/uploads/8isci8K6L5pdWTZCWHA4lFUrTAR497cowDQzGTQm.jpg",
+            "description": "Vista aérea frontal da moradia isolada, telhado de telha vermelha, painéis solares, muro branco e entrada para carros.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_cbef936f",
+            "path": "clips/uploads/Mw89m7xmx395MPF1kDaAFwuNjCYCH0ylofiqxrMb.jpg",
+            "description": "Vista aérea em diagonal da moradia de três pisos, com varanda, jardim lateral e anexos nas traseiras.",
+            "name": "01a0e90337563de1382a88711074d523.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_50038984",
+            "path": "clips/uploads/85fAq2Kj5vw3BPKS27LVTljjBJTwwNEtx7WFuKN4.jpg",
+            "description": "Vista aérea da moradia na rua curva do bairro, com terreno verde e casas vizinhas à volta.",
+            "name": "01a0e90336fff2016d1c890cd84777a4.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_57a6971d",
+            "path": "clips/uploads/yrvbYCxovZDxaA0MEvrMzMlPjsvaKmotzLGOgcGu.jpg",
+            "description": "Vista aérea traseira com o jardim, um baloiço, o anexo do espaço gourmet e a garagem.",
+            "name": "01a0e903373377382d65bf051dd2b5e2.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_6f97f5be",
+            "path": "clips/uploads/dDqrQSlcyRjQE1Cs1Dh7DjcTsTlGLaNYJPvDYWY0.jpg",
+            "description": "Sala de estar ampla e vazia, chão de madeira, janelas de vidro do chão ao teto viradas para o jardim e móvel de TV.",
+            "name": "01a0e90223db40480778f6a551c20595.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_187b133a",
+            "path": "clips/uploads/xXizmHG1RrUgbN6PjtIOEiYllgtg9ng0GZ7MwrO3.jpg",
+            "description": "Sala comprida com chão de madeira brilhante, janelas grandes à esquerda e portas envidraçadas à direita.",
+            "name": "01a0e902236d45f26616417d50e54830.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fe5642ac",
+            "path": "clips/uploads/mRsSxs8mXVKjqOKuLRLsuyAm6jecpOklwBEpb2bc.jpg",
+            "description": "Sala com lareira de canto, chão de madeira e portas duplas abertas para a escada interior.",
+            "name": "01a0e9022385adcb5dd41a9ff4d04bfd.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_47029f15",
+            "path": "clips/uploads/Cfuk5Vq7IidWet1wAqEWlR0wZCihviLia1lv9Qf6.jpg",
+            "description": "Jardim traseiro com relvado e baloiço, ao lado do espaço gourmet fechado em vidro com churrasqueira.",
+            "name": "01a0e90224fc597750b623f6571f6caa.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5556d86a",
+            "path": "clips/uploads/4Y8o9dht1RvHd2oowqyUV8kbiFYfwk7vaYwFF4Qv.jpg",
+            "description": "Fachada traseira virada para o jardim, com varanda no primeiro andar, portas de vidro e arco de sebe.",
+            "name": "01a0e9022715c9858e3ecd7088275b9a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_998fc4bf",
+            "path": "clips/uploads/eVF1YQO2Zt9alFIDdQPPj1joMh5vQeLWdLUSmeiy.jpg",
+            "description": "Sala de estar com chão de madeira e janelas de vidro abertas para o jardim com baloiço.",
+            "name": "01a0e902259cce4829516738103d777f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e64f5581",
+            "path": "clips/uploads/T1Dmr9Rj0c1CzHDQok8GiGCe2nTnMCsRtT9OmXoH.jpg",
+            "description": "Hall de entrada com porta de madeira maciça aberta para o jardim, soalho em madeira e corredor iluminado.",
+            "name": "01a0e902266d9dd4843186ea5944b6d4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c136050f",
+            "path": "clips/uploads/5Z9hNPJ16U0mO5tbOybbTL1raxD8PE3Pp6zxhMge.jpg",
+            "description": "Casa de banho de serviço com mosaico bege, lavatório suspenso, sanita e espelho com iluminação.",
+            "name": "01a0e90225f795f5552d528e48426733.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_76975d79",
+            "path": "clips/uploads/5Qr3Ayq6qMdsvGTuWGUlRh2PVS75IYbEXZTYPRfG.jpg",
+            "description": "Cozinha equipada em madeira com bancada de granito, placa a gás, exaustor inox e máquina de lavar loiça.",
+            "name": "01a0e90224e10a12c7fe9ca9a2a77276.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_406a6bd6",
+            "path": "clips/uploads/NSXG5oFJkFo217dBUJnC8DAB5I5eJWUTaUOdOO8R.jpg",
+            "description": "Cozinha com forno e micro-ondas Siemens encastrados, lava-loiça sob janela e muitos armários em madeira.",
+            "name": "01a0e9022517120c28f239f293d408d4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_098446be",
+            "path": "clips/uploads/U5B7hhMDiPMlDTrkytM8F3rQ8tXZgBgEufBlsEhL.jpg",
+            "description": "Entrada de quarto amplo com soalho em madeira, duas camas, tapete, janela e ar-condicionado.",
+            "name": "01a0e902251385ed67b507f7b2d9e54f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_198ce471",
+            "path": "clips/uploads/BHYw7rhumdPguEgkYDJJAunA65ArXCHrDu0NO9od.jpg",
+            "description": "Quarto espaçoso com duas camas individuais, roupeiro embutido, janela com estore e ar-condicionado.",
+            "name": "01a0e90223b5c210e0b2970683b52d84.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2fb228f0",
+            "path": "clips/uploads/nQah6AhCzxADrAJbUZg0dYfaoiKMCGA1Qdseug1Y.jpg",
+            "description": "Casa de banho suite em pedra clara com dois lavatórios, cabine de duche hidromassagem e janela.",
+            "name": "01a0e9022498eea81fc158a94eee2e43.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0ff6de93",
+            "path": "clips/uploads/sYWYeU0GhoRjgJamPnEaWdk4cnePBVuAOasxWEPj.jpg",
+            "description": "Suite ampla com duas camas, vários roupeiros embutidos em madeira e acesso à casa de banho privativa.",
+            "name": "01a0e902253cde9ef0f9cb7ebe81b281.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_29094198",
+            "path": "clips/uploads/gCQwTkt77DKy2tjEdg3Tn1f5D5Z1UIJXsqhn8DRC.jpg",
+            "description": "Zona de closet com roupeiros embutidos em madeira clara e soalho, junto ao corredor do quarto.",
+            "name": "01a0e90223ed6df76b729ae0c63c3d19.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_72c75810",
+            "path": "clips/uploads/gmFexrO40HS3TTmbI7cQrH81w1T0vhw8FueVSujI.jpg",
+            "description": "Quarto com duas camas individuais, roupeiro embutido de grandes dimensões, ar-condicionado e soalho em madeira.",
+            "name": "01a0e90224ae2d8b1b58715dc22b258c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2c6e91c6",
+            "path": "clips/uploads/W6R8f2tAMx6HMFB258RKXe2r3WDurfEOqYpjmcQd.jpg",
+            "description": "Quarto em suite com duas camas de solteiro, casa de banho com duche e porta para varanda com vista verde.",
+            "name": "01a0e90225910b85bef71bf341a9fbeb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e14c2e62",
+            "path": "clips/uploads/IWdCXFCxj3nnS1ahTDq5bYGFx8Z9jc6eqPLlYjMH.jpg",
+            "description": "Casa de banho com cabine de duche curva em vidro, lavatório suspenso em vidro e toalheiro aquecido.",
+            "name": "01a0e902238fbbbe28ce990756838e9c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_99d76a84",
+            "path": "clips/uploads/8IGsJpPaqpRheJgGNczHzpim8V2qxnJeaxg1fqQi.jpg",
+            "description": "Quarto com duas camas de solteiro, chão de madeira e porta envidraçada para varanda com árvores.",
+            "name": "01a0e902254cdf3afd0ed3e7267c0d86.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_345e2bb3",
+            "path": "clips/uploads/93cIXAXDJNc02m36RbzjstMoSfYQiDQLvIsGSc25.jpg",
+            "description": "Quarto vazio e luminoso com chão de madeira, focos no teto e porta para varanda.",
+            "name": "01a0e90223aa7131e12a0dc25da0fbc8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3cae37d0",
+            "path": "clips/uploads/4ezOTa514gx1CLICgIOmbym7n0FWRPIaVGCV3xhi.jpg",
+            "description": "Casa de banho em mármore claro com dois lavatórios em vidro, estrutura em inox e espelhos.",
+            "name": "01a0e9022411c67a60d420077f426092.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1f8c35b1",
+            "path": "clips/uploads/HRwdZPeGj7U2gdUGzdjooT9DMiDFFZBN2txvlvE4.jpg",
+            "description": "Vista da varanda para o jardim com relvado, sebes altas, baloiço e telhado da garagem.",
+            "name": "01a0e902251a7caa6b433b3a82c71573.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f2dba5ad",
+            "path": "clips/uploads/ogD4qJq9FZaHYjydpZOBY0FtsjE7rThz0vSrAcCw.jpg",
+            "description": "Escadaria interior em madeira com corrimão em inox, ligando os pisos, casa de banho ao fundo.",
+            "name": "01a0e90223e0f2f45bfc42402d18c261.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_be65e48e",
+            "path": "clips/uploads/Ne00zcuvqe4cWkDbc0afWs3YauejbLvX8SoZQHav.jpg",
+            "description": "Divisão vazia no piso inferior com chão em mosaico claro, janelas altas estreitas e prateleiras.",
+            "name": "01a0e90222f73d8b12f95a3957b3a5fd.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3ad67b08",
+            "path": "clips/uploads/mIp9jsUE4IMFn4TOpLuqyyvHftNz287MNdieBGCz.jpg",
+            "description": "Quarto vazio com roupeiro embutido em madeira, chão em mosaico claro e janela alta horizontal.",
+            "name": "01a0e9022575268be6eb47277e34af96.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5874cf59",
+            "path": "clips/uploads/2z4ES8lYdQDLcleol2gkKNaULKYUClls1VSFB5a6.jpg",
+            "description": "Hall de entrada com escadas em madeira, chão em mosaico claro e portas para várias divisões.",
+            "name": "01a0e90223fd7054157f541fc43577bf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ae23471f",
+            "path": "clips/uploads/IleZZvJ0ivQKbJMMdoTeBcwc4afSEcaxmTLAzlpI.jpg",
+            "description": "Casa de banho com mosaico bege, base de duche semicircular, lavatório suspenso, toalheiro aquecido e espelho iluminado.",
+            "name": "01a0e90226d23b856846964242b3bed2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a885c069",
+            "path": "clips/uploads/dikR6dTCLWSh6tLhAeivV3IOOVvylEK5REM3X0HE.jpg",
+            "description": "Quarto amplo e vazio com roupeiro embutido em madeira, janela alta horizontal e chão claro.",
+            "name": "01a0e902230c0cde2dfdaedd5bf45550.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_46c57f6b",
+            "path": "clips/uploads/o0TjiOt5x0mqzkylIw3yEhckgYNEKlvbj8xAVkAs.jpg",
+            "description": "Sala ampla e vazia com armário vermelho, porta envidraçada com grade e radiador; possível espaço polivalente.",
+            "name": "01a0e902229498719c80178113c06ad7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bc1d4913",
+            "path": "clips/uploads/EVYrtR3tGF2MyA1KJAoVEuYKjWaKUgCDraNptaYD.jpg",
+            "description": "Sala ampla no piso inferior com portas envidraçadas, escada interior, estante e saída para pátio exterior.",
+            "name": "01a0e9022255c9c6d139b6ce50c22585.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7a9d414f",
+            "path": "clips/uploads/aZ6dTxmwU8cp2Ju8jJnC8ZVeb0JfCK9WsAM5V8G2.jpg",
+            "description": "Pátio exterior com escadaria de pedra, porta de correr aberta para sala com armário vermelho.",
+            "name": "01a0e90224f854afed216ee965d3516e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d377bfec",
+            "path": "clips/uploads/1PvRzhzOSVfopUO7rsnAc5U3ZYaBxNOo81601h54.jpg",
+            "description": "Jardim traseiro com relvado, baloiço, sebes e moradia de dois pisos com varanda; anexo branco ao lado.",
+            "name": "01a0e90224b479c1a2831e2a768ee53f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8bc09944",
+            "path": "clips/uploads/aMNOn9FGpkhXvfGmzRl8kIrjZl7EOADEmtpMgJTx.jpg",
+            "description": "Garagem fechada ampla com chão em tijoleira, portão seccionado, prateleiras e arrumação de ferramentas.",
+            "name": "01a0e90226392cbe2172692680a72a7a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fb678c5a",
+            "path": "clips/uploads/rdkM81XfM9FKoBENEtSiQLM1FJxRmFFGhd1g8rhX.png",
+            "description": "Retrato do consultor André Rodrigo Paiva, da IAD Portugal.",
+            "name": "André Rodrigo Paiva.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_0306cef1",
+            "path": "clips/uploads/oevPfnEb0p1yJdTrsOhYnAtksgp045CGcGnkTAuE.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/2eDsFSKK4eOByPAtno7kwLsSgHhUvSPigygwNEcn.mp3",
+    "transcript": {
+        "duration": 40,
+        "text": "Uma moradia isolada em Arcozelo, a poucos minutos da praia de Miramar. Fica em Vila Nova de Gaia, perto do Senhor da Pedra, com comércio, serviços e acessos ao porto por perto. Três pisos, quatro quartos, três deles em suite e cinco casas de banho, sala de estar, sala de jantar, lareira e ar-condicionado. Lá fora, 710 metros de terreno com jardim e garagem fechada e um espaço gourmet fechado para usar todo o ano. Está arrendada até setembro de 2027 por 2 mil euros por mês. 690 mil euros. Para visitar, fale com o André Paiva, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "moradia",
+                "start": 0.18000000715255737,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "isolada",
+                "start": 0.5600000023841858,
+                "end": 1.0800000429153442
+            },
+            {
+                "word": "em",
+                "start": 1.0800000429153442,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "Arcozelo",
+                "start": 1.2200000286102295,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "a",
+                "start": 2.059999942779541,
+                "end": 2.4000000953674316
+            },
+            {
+                "word": "poucos",
+                "start": 2.4000000953674316,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "minutos",
+                "start": 2.559999942779541,
+                "end": 3
+            },
+            {
+                "word": "da",
+                "start": 3,
+                "end": 3.2200000286102295
+            },
+            {
+                "word": "praia",
+                "start": 3.2200000286102295,
+                "end": 3.4200000762939453
+            },
+            {
+                "word": "de",
+                "start": 3.4200000762939453,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "Miramar",
+                "start": 3.6600000858306885,
+                "end": 4.019999980926514
+            },
+            {
+                "word": "Fica",
+                "start": 4.619999885559082,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "em",
+                "start": 4.900000095367432,
+                "end": 5.21999979019165
+            },
+            {
+                "word": "Vila",
+                "start": 5.21999979019165,
+                "end": 5.480000019073486
+            },
+            {
+                "word": "Nova",
+                "start": 5.480000019073486,
+                "end": 5.699999809265137
+            },
+            {
+                "word": "de",
+                "start": 5.699999809265137,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "Gaia",
+                "start": 5.920000076293945,
+                "end": 6.179999828338623
+            },
+            {
+                "word": "perto",
+                "start": 6.480000019073486,
+                "end": 6.659999847412109
+            },
+            {
+                "word": "do",
+                "start": 6.659999847412109,
+                "end": 6.940000057220459
+            },
+            {
+                "word": "Senhor",
+                "start": 6.940000057220459,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "da",
+                "start": 7.159999847412109,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "Pedra",
+                "start": 7.400000095367432,
+                "end": 7.699999809265137
+            },
+            {
+                "word": "com",
+                "start": 8.220000267028809,
+                "end": 8.319999694824219
+            },
+            {
+                "word": "comércio",
+                "start": 8.319999694824219,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "serviços",
+                "start": 9.34000015258789,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 9.739999771118164,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "acessos",
+                "start": 10.100000381469727,
+                "end": 10.479999542236328
+            },
+            {
+                "word": "ao",
+                "start": 10.479999542236328,
+                "end": 10.779999732971191
+            },
+            {
+                "word": "porto",
+                "start": 10.779999732971191,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "por",
+                "start": 11.039999961853027,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "perto",
+                "start": 11.600000381469727,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "Três",
+                "start": 12.180000305175781,
+                "end": 12.260000228881836
+            },
+            {
+                "word": "pisos",
+                "start": 12.260000228881836,
+                "end": 12.779999732971191
+            },
+            {
+                "word": "quatro",
+                "start": 13.199999809265137,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "quartos",
+                "start": 13.399999618530273,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "três",
+                "start": 14.260000228881836,
+                "end": 14.359999656677246
+            },
+            {
+                "word": "deles",
+                "start": 14.359999656677246,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "em",
+                "start": 14.640000343322754,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "suite",
+                "start": 14.920000076293945,
+                "end": 15.180000305175781
+            },
+            {
+                "word": "e",
+                "start": 15.180000305175781,
+                "end": 15.5600004196167
+            },
+            {
+                "word": "cinco",
+                "start": 15.5600004196167,
+                "end": 15.9399995803833
+            },
+            {
+                "word": "casas",
+                "start": 15.9399995803833,
+                "end": 16.280000686645508
+            },
+            {
+                "word": "de",
+                "start": 16.280000686645508,
+                "end": 16.68000030517578
+            },
+            {
+                "word": "banho",
+                "start": 16.68000030517578,
+                "end": 16.68000030517578
+            },
+            {
+                "word": "sala",
+                "start": 17.399999618530273,
+                "end": 17.399999618530273
+            },
+            {
+                "word": "de",
+                "start": 17.399999618530273,
+                "end": 17.68000030517578
+            },
+            {
+                "word": "estar",
+                "start": 17.68000030517578,
+                "end": 17.899999618530273
+            },
+            {
+                "word": "sala",
+                "start": 18.31999969482422,
+                "end": 18.31999969482422
+            },
+            {
+                "word": "de",
+                "start": 18.31999969482422,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "jantar",
+                "start": 18.860000610351562,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "lareira",
+                "start": 19.360000610351562,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "e",
+                "start": 19.639999389648438,
+                "end": 19.979999542236328
+            },
+            {
+                "word": "ar",
+                "start": 19.979999542236328,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "condicionado",
+                "start": 20.100000381469727,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "Lá",
+                "start": 21.399999618530273,
+                "end": 21.459999084472656
+            },
+            {
+                "word": "fora",
+                "start": 21.459999084472656,
+                "end": 21.719999313354492
+            },
+            {
+                "word": "710",
+                "start": 22.440000534057617,
+                "end": 23
+            },
+            {
+                "word": "metros",
+                "start": 23,
+                "end": 23.280000686645508
+            },
+            {
+                "word": "de",
+                "start": 23.280000686645508,
+                "end": 23.639999389648438
+            },
+            {
+                "word": "terreno",
+                "start": 23.639999389648438,
+                "end": 23.860000610351562
+            },
+            {
+                "word": "com",
+                "start": 23.860000610351562,
+                "end": 24.200000762939453
+            },
+            {
+                "word": "jardim",
+                "start": 24.200000762939453,
+                "end": 24.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 24.600000381469727,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "garagem",
+                "start": 24.959999084472656,
+                "end": 25.31999969482422
+            },
+            {
+                "word": "fechada",
+                "start": 25.31999969482422,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "e",
+                "start": 25.799999237060547,
+                "end": 26.360000610351562
+            },
+            {
+                "word": "um",
+                "start": 26.360000610351562,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "espaço",
+                "start": 26.780000686645508,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "gourmet",
+                "start": 26.780000686645508,
+                "end": 27.079999923706055
+            },
+            {
+                "word": "fechado",
+                "start": 27.079999923706055,
+                "end": 27.600000381469727
+            },
+            {
+                "word": "para",
+                "start": 27.600000381469727,
+                "end": 27.84000015258789
+            },
+            {
+                "word": "usar",
+                "start": 27.84000015258789,
+                "end": 28.139999389648438
+            },
+            {
+                "word": "todo",
+                "start": 28.139999389648438,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "o",
+                "start": 28.559999465942383,
+                "end": 28.84000015258789
+            },
+            {
+                "word": "ano",
+                "start": 28.84000015258789,
+                "end": 28.84000015258789
+            },
+            {
+                "word": "Está",
+                "start": 28.84000015258789,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "arrendada",
+                "start": 29.639999389648438,
+                "end": 30.200000762939453
+            },
+            {
+                "word": "até",
+                "start": 30.200000762939453,
+                "end": 30.5
+            },
+            {
+                "word": "setembro",
+                "start": 30.5,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "de",
+                "start": 30.979999542236328,
+                "end": 31.15999984741211
+            },
+            {
+                "word": "2027",
+                "start": 31.15999984741211,
+                "end": 32.099998474121094
+            },
+            {
+                "word": "por",
+                "start": 32.099998474121094,
+                "end": 32.41999816894531
+            },
+            {
+                "word": "2",
+                "start": 32.41999816894531,
+                "end": 32.7599983215332
+            },
+            {
+                "word": "mil",
+                "start": 32.7599983215332,
+                "end": 33
+            },
+            {
+                "word": "euros",
+                "start": 33,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "por",
+                "start": 33.18000030517578,
+                "end": 33.619998931884766
+            },
+            {
+                "word": "mês",
+                "start": 33.619998931884766,
+                "end": 33.70000076293945
+            },
+            {
+                "word": "690",
+                "start": 34.5,
+                "end": 35.18000030517578
+            },
+            {
+                "word": "mil",
+                "start": 35.18000030517578,
+                "end": 35.52000045776367
+            },
+            {
+                "word": "euros",
+                "start": 35.52000045776367,
+                "end": 35.939998626708984
+            },
+            {
+                "word": "Para",
+                "start": 36.439998626708984,
+                "end": 36.540000915527344
+            },
+            {
+                "word": "visitar",
+                "start": 36.540000915527344,
+                "end": 37.13999938964844
+            },
+            {
+                "word": "fale",
+                "start": 37.58000183105469,
+                "end": 37.58000183105469
+            },
+            {
+                "word": "com",
+                "start": 37.58000183105469,
+                "end": 37.7599983215332
+            },
+            {
+                "word": "o",
+                "start": 37.7599983215332,
+                "end": 37.91999816894531
+            },
+            {
+                "word": "André",
+                "start": 37.91999816894531,
+                "end": 38.119998931884766
+            },
+            {
+                "word": "Paiva",
+                "start": 38.119998931884766,
+                "end": 38.5
+            },
+            {
+                "word": "da",
+                "start": 38.720001220703125,
+                "end": 38.91999816894531
+            },
+            {
+                "word": "IAD",
+                "start": 38.91999816894531,
+                "end": 39.279998779296875
+            },
+            {
+                "word": "Portugal",
+                "start": 39.279998779296875,
+                "end": 39.779998779296875
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 40,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6000000000000014,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "MORADIA ISOLADA EM ARCOZELO",
+                        "params": {
+                            "src": "img_26a4ddea",
+                            "avatar": "img_fb678c5a",
+                            "logo": "img_0306cef1",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "690.000 €",
+                            "location": "VILA NOVA DE GAIA · ARCOZELO",
+                            "title": "MORADIA T4 ISOLADA",
+                            "facts": "420 m² · 4 quartos · 3 suites · 710 m² terreno",
+                            "cta": "Ligue já +351 912 455 436",
+                            "name": "André Rodrigo Paiva",
+                            "logoText": "IAD",
+                            "logoSub": "PORTUGAL",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6000000000000014,
+                "end": 7.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Perto do Senhor da Pedra",
+                        "params": {
+                            "src": "img_cbef936f",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.9,
+                "end": 12,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Comércio|Serviços|Acessos ao Porto",
+                        "params": {
+                            "src": "img_50038984",
+                            "title": "ACESSOS AO PORTO",
+                            "items": [
+                                "Comércio perto",
+                                "Serviços perto",
+                                "Ligação ao Porto"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12,
+                "end": 14.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TRÊS PISOS · QUATRO QUARTOS",
+                        "params": {
+                            "src": "img_5874cf59",
+                            "src2": "img_f2dba5ad",
+                            "src3": "img_098446be",
+                            "src4": "img_198ce471"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.1,
+                "end": 17.1,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "TRÊS SUITES · 5 WC",
+                        "params": {
+                            "src": "img_0ff6de93",
+                            "src2": "img_2c6e91c6",
+                            "src3": "img_2fb228f0",
+                            "src4": "img_e14c2e62",
+                            "src5": "img_ae23471f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.1,
+                "end": 19.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA DE ESTAR E JANTAR",
+                        "params": {
+                            "src": "img_6f97f5be",
+                            "src2": "img_187b133a",
+                            "src3": "img_998fc4bf",
+                            "src4": "img_46c57f6b",
+                            "src5": "img_bc1d4913"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.2,
+                "end": 21.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "LAREIRA E AR CONDICIONADO",
+                        "params": {
+                            "src": "img_fe5642ac",
+                            "blur": 8,
+                            "charsPerSecond": 18
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.3,
+                "end": 24.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Jardim|Garagem fechada|Logradouro amplo",
+                        "params": {
+                            "src": "img_d377bfec",
+                            "title": "710 M² DE TERRENO",
+                            "items": [
+                                "Jardim",
+                                "Garagem fechada",
+                                "Logradouro amplo"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.4,
+                "end": 26.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "GARAGEM FECHADA",
+                        "params": {
+                            "src": "img_8bc09944",
+                            "src2": "img_1f8c35b1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.4,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "ESPAÇO GOURMET FECHADO",
+                        "params": {
+                            "src": "img_47029f15",
+                            "src2": "img_57a6971d",
+                            "src3": "img_7a9d414f",
+                            "src4": "img_5556d86a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 31.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "ARRENDADA ATÉ SET. 2027",
+                        "params": {
+                            "src": "img_72c75810",
+                            "src2": "img_99d76a84",
+                            "src3": "img_345e2bb3",
+                            "src4": "img_3cae37d0",
+                            "src5": "img_29094198"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.6,
+                "end": 36.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "2.000 € / MÊS",
+                        "params": {
+                            "src": "img_76975d79",
+                            "src2": "img_406a6bd6",
+                            "src3": "img_c136050f",
+                            "src4": "img_e64f5581"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.4,
+                "end": 40,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "André Rodrigo Paiva",
+                        "params": {
+                            "src": "img_fb678c5a",
+                            "name": "André Rodrigo Paiva",
+                            "phone": "+351 912 455 436",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1015177-luhi2/clip.mp4",
+    "error": null
+}

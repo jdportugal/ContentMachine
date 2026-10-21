@@ -18,6 +18,9 @@ class RenderArgsTest extends TestCase
         $this->assertContains('ClipComposition', $args);
         $this->assertContains('--props=/tmp/p.json', $args);
         $this->assertNotContains('--codec=prores', $args);
+        // JPEG frames: PNG ones filled the disk mid-render on long clips.
+        $this->assertContains('--image-format=jpeg', $args);
+        $this->assertNotContains('--image-format=png', $args);
     }
 
     /**

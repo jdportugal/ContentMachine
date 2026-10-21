@@ -44,11 +44,6 @@ class RenderEffectSampleJob implements ShouldQueue
             return; // already cached for this design system
         }
 
-        // A custom effect must be present in remotion/src/effects for this project.
-        if (! $library->isBuiltin($this->slug)) {
-            $library->syncFilesystem();
-        }
-
         @mkdir(dirname($out), 0777, true);
         $renderer->render($library->samplePlan($this->slug, $this->text, $this->params, $this->format), $out);
     }

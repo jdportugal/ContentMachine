@@ -26,7 +26,7 @@
                 </button>
                 <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">receiving…</span>
             </div>
-            @error('ficheiro') <p class="mt-2 text-sm" style="color:#FF8FA6">{{ $message }}</p> @enderror
+            @error('ficheiro') <p class="mt-2 text-sm" style="color:#A93A48">{{ $message }}</p> @enderror
         </x-panel>
 
         {{-- Editor --}}
@@ -105,4 +105,9 @@
             @endif
         </div>
     </form>
+
+    {{-- Its own component: uploads save on pick, so it lives outside the design-system form. --}}
+    <div class="mt-6">
+        <livewire:project-resources-panel />
+    </div>
 </div>

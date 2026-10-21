@@ -69,21 +69,48 @@ class GenerateEffectJob implements ShouldQueue
             $c = config('contentmachine.clips');
             $site = $footage->forPrompt((string) $effect->prompt, (int) $c['width'], (int) $c['height'], 2.5);
 
-            $data = $generator->generate($effect->prompt, $keepSlug, siteCapture: $site['path']);
+            // One repair round: a component the guard rejects or that crashes in the
+            // test render goes back to the model WITH the error and its own code.
+            // Most failures are one-line mistakes (a string in interpolate()'s
+            // outputRange, a wrong param name) that the model fixes when shown them.
+            // Provider failures aren't retried here — the LLM chain already did.
+            $prompt = (string) $effect->prompt;
+            for ($intento = 1; ; $intento++) {
+                $data = null;
+                try {
+                    $data = $generator->generate($prompt, $keepSlug, siteCapture: $site['path'],
+                        reference: $store->referencePath($effect->id()));
 
-            // Isolated test-render (src/sample.ts → SampleEffect) to a TEMP file, so
-            // an edit that fails never overwrites the live version or its preview.
-            $library->writeCandidate($data['tsx']);
-            $tmp = tempnam(sys_get_temp_dir(), 'sfx_preview_').'.mp4';
-            $renderer->render(
-                $library->candidateSampleProps($data['sample_text'], $data['sample_params']),
-                $tmp,
-                'src/sample.ts',
-                'SampleEffect'
-            );
+                    // Isolated test-render (src/sample.ts → SampleEffect) to a TEMP file, so
+                    // an edit that fails never overwrites the live version or its preview.
+                    $library->writeCandidate($data['tsx']);
+                    $tmp = tempnam(sys_get_temp_dir(), 'sfx_preview_').'.mp4';
+                    $renderer->render(
+                        $library->candidateSampleProps($data['sample_text'], $data['sample_params']),
+                        $tmp,
+                        'src/sample.ts',
+                        'SampleEffect'
+                    );
+                    break;
+                } catch (\Throwable $e) {
+                    $reparavel = str_starts_with($e->getMessage(), 'Remotion failed')
+                        || str_starts_with($e->getMessage(), 'Effect rejected');
+                    if ($intento >= 2 || ! $reparavel) {
+                        throw $e;
+                    }
+                    if ($tmp) {
+                        @unlink($tmp);
+                        $tmp = null;
+                    }
+                    $prompt = $effect->prompt."\n\n# YOUR PREVIOUS ATTEMPT FAILED — FIX IT\n"
+                        .Str::limit($e->getMessage(), 1500)
+                        .(isset($data['tsx']) ? "\n\nThe component that failed:\n".$data['tsx'] : '')
+                        ."\n\nWrite the component again with that error fixed, keeping everything else.";
+                }
+            }
 
             // Passed — commit the new version and publish its preview.
-            $preview = $library->previewPath($data['slug']);
+            $preview = $library->previewPath($data['slug'], tsx: $data['tsx']);
             @mkdir(dirname($preview), 0777, true);
             if (! @rename($tmp, $preview)) {
                 @copy($tmp, $preview);

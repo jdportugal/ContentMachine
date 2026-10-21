@@ -43,9 +43,6 @@ class RenderBackgroundReelJob implements ShouldQueue
                 return; // already cached for this design system + background set
             }
 
-            // Code backgrounds must be present in remotion/src/backgrounds for this project.
-            $library->syncFilesystem();
-
             @mkdir(dirname($out), 0777, true);
             $renderer->render($library->reelProps(), $out, 'src/index.ts', 'BackgroundReel');
         } finally {

@@ -1,0 +1,1177 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia com piscina e 3 mil m² em Santa Maria de Lamas",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-santa-maria-de-lamas-267m2/r1030985",
+            "agent": "Marcia Ferreira",
+            "phone": "+351911816638",
+            "agency": "iad Portugal",
+            "hook": "Moradia com piscina e quase três mil metros de terreno.",
+            "voiceover": "Moradia com piscina e quase três mil metros de terreno. Fica em Santa Maria de Lamas, num ambiente verde e tranquilo. Dois pisos, com mais de duzentos e sessenta metros de área habitável. Luz natural ao longo de todo o dia. Duas salas, cozinha equipada e uma segunda cozinha, mais lavandaria. Quatro quartos, um deles em suite, e três casas de banho completas. Lá fora, jardim privativo, piscina e garagem. Para viver em família. Quatrocentos e noventa e cinco mil euros. Para visitar, fale com a Marcia Ferreira, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada com piscina",
+                    "vo": "Moradia com piscina e quase três mil metros de terreno.",
+                    "caption": "Quase 3.000 m² de terreno"
+                },
+                {
+                    "photo": "vista geral do terreno e envolvente verde",
+                    "vo": "Fica em Santa Maria de Lamas, num ambiente verde e tranquilo.",
+                    "caption": "Santa Maria de Lamas"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "Dois pisos, com mais de duzentos e sessenta metros de área habitável.",
+                    "caption": "267 m² habitáveis"
+                },
+                {
+                    "photo": "sala luminosa",
+                    "vo": "Luz natural ao longo de todo o dia.",
+                    "caption": "Luz todo o dia"
+                },
+                {
+                    "photo": "segunda sala",
+                    "vo": "Duas salas,",
+                    "caption": "Duas salas"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "cozinha equipada e uma segunda cozinha, mais lavandaria.",
+                    "caption": "Duas cozinhas"
+                },
+                {
+                    "photo": "quarto da suite",
+                    "vo": "Quatro quartos, um deles em suite,",
+                    "caption": "Quatro quartos e suite"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e três casas de banho completas.",
+                    "caption": "Três casas de banho"
+                },
+                {
+                    "photo": "jardim",
+                    "vo": "Lá fora, jardim privativo, piscina e garagem.",
+                    "caption": "Jardim privativo"
+                },
+                {
+                    "photo": "piscina",
+                    "vo": "Para viver em família.",
+                    "caption": "Piscina e garagem"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e noventa e cinco mil euros. Para visitar, fale com a Marcia Ferreira, da iad Portugal.",
+                    "caption": "495.000 € · Marcia Ferreira · iad Portugal"
+                }
+            ],
+            "flags": [
+                "O título do anúncio diz '4 assoalhadas', mas a descrição tem 4 quartos e 2 salas, o que daria 6 assoalhadas. O guião diz só 'quatro quartos' e 'duas salas'.",
+                "O título diz 'Renovado', mas a descrição não indica que obras foram feitas nem quando (construção de 1982). Ficou de fora do guião.",
+                "A área bruta e a área útil aparecem ambas como 267 m². É pouco provável que sejam iguais. O guião diz 'mais de duzentos e sessenta metros de área habitável', e o texto no ecrã mostra 267 m². Confirmar.",
+                "O nome da consultora aparece sem acento ('Marcia'). Confirmar se o correto é 'Márcia', para o texto no ecrã e para a pronúncia da voz."
+            ],
+            "message": "Boa tarde Sra. Marcia,\nO meu nome é João Ferreira.\n\nVi a moradia T4 em Santa Maria de Lamas que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia 4 quartos de 267 m² em Santa Maria de Lamas",
+            "price": 495000,
+            "details": {
+                "Preço": "495 000 €",
+                "Localização": "Santa Maria de Lamas, 4535-361",
+                "Referência": "1030985",
+                "Área Bruta m²": "267",
+                "Área Total do Lote m²": "2860",
+                "Quartos": 4,
+                "Ano de Construção": 1982,
+                "Certificado Energético": "E",
+                "Características": "267 m² área bruta, 267 m² úteis, 3 casas de banho, Jardim, Garagem, Varanda, Piscina, Ligação TV, property.feature.heating, Construído em 1982"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Marcia Ferreira - and phone number - +351911816638. Agency: iad Portugal.\nThe agent's photo is Marcia Ferreira.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Moradia com piscina e quase três mil metros de terreno.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada com piscina → «Quase 3.000 m² de terreno»\n- vista geral do terreno e envolvente verde → «Santa Maria de Lamas»\n- hall de entrada → «267 m² habitáveis»\n- sala luminosa → «Luz todo o dia»\n- segunda sala → «Duas salas»\n- cozinha equipada → «Duas cozinhas»\n- quarto da suite → «Quatro quartos e suite»\n- casa de banho → «Três casas de banho»\n- jardim → «Jardim privativo»\n- piscina → «Piscina e garagem»\n- end card → «495.000 € · Marcia Ferreira · iad Portugal»\n\nHere are the house details:\n\nMoradia 4 quartos de 267 m² em Santa Maria de Lamas\nPreço\n495 000 €\nLocalização\nSanta Maria de Lamas, 4535-361\nReferência\n1030985\nÁrea Bruta m²\n267\nÁrea Total do Lote m²\n2860\nQuartos\n4\nAno de Construção\n1982\nCertificado Energético\nE\nCaracterísticas\n267 m² área bruta, 267 m² úteis, 3 casas de banho, Jardim, Garagem, Varanda, Piscina, Ligação TV, property.feature.heating, Construído em 1982\n\nDescrição\nMoradia independente em Santa Maria de Lamas - 4 ASSOALHADAS 267M² - GARAGEM - PISCINA - Renovado - LUMINOSO\n\nCom terreno de 2860m² Implantada em Santa Maria de Lamas, esta moradia de 2 pisos,  oferece uma área habitável de 267 m² distribuída com generosidade e inteligência. Com exposição a norte, sul, este e oeste, o imóvel beneficia de luminosidade natural ao longo de todo o dia, criando ambientes claros e acolhedores em cada divisão.\n\nNo interior, a moradia organiza-se em 4 quartos espaçosos e 3 casas de banho completas, sendo uma suite respondendo com conforto às necessidades de uma habitação familiar. O piso de entrada acolhe um hall amplo que distribui para as principais áreas de estar: 2 salas de estar distintas, funcionais e bem dimensionadas, ideais para diferentes momentos do quotidiano. A cozinha equipada e separada, complementada por uma segunda cozinha — um trunfo raro e muito prático —, confere uma versatilidade pouco comum neste tipo de imóvel. Uma lavandaria completa a organização interior, mantendo os espaços de serviço bem delimitados. O balcão, com vista sobre o exterior, acrescenta um toque de charme ao conjunto.\n\nNo exterior, o jardim privativo enquadra a moradia numa envolvente verde e tranquila, enquanto a piscina convida ao descanso e ao lazer nos meses mais quentes. A garagem assegura estacionamento coberto e protegido. Espaço exterior de grande amplitude, com potencial para múltiplos usos. \n\nPara agendar uma visita a esta moradia e descobrir pessoalmente todo o seu potencial, entre em contacto connosco.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia T4 com piscina em Santa Maria de Lamas (Santa Maria da Feira)",
+            "summary": "Santa Maria de Lamas é uma vila do concelho de Santa Maria da Feira, na Área Metropolitana do Porto, e é conhecida pela indústria da cortiça. Segundo o INE, o preço mediano da habitação no concelho tem ficado abaixo do valor nacional.",
+            "timeline": [
+                {
+                    "label": "Henrique Amorim funda o Museu de Santa Maria de Lamas",
+                    "sublabel": "Década de 1950"
+                },
+                {
+                    "label": "Santa Maria de Lamas é elevada a vila",
+                    "sublabel": "25 set. 1985"
+                },
+                {
+                    "label": "Censos: 5073 habitantes",
+                    "sublabel": "2011"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "População de Santa Maria de Lamas (Censos 2011)",
+                    "value": 5073,
+                    "unit": "habitantes"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Freguesia de Santa Maria da Feira, distrito de Aveiro, na Área Metropolitana do Porto",
+                "Vila desde 25 de setembro de 1985",
+                "É um dos principais centros de produção de rolhas de cortiça do país",
+                "O Museu de Santa Maria de Lamas também é conhecido como «Museu da Cortiça» e tem uma grande coleção de arte sacra",
+                "O preço mediano da habitação em Santa Maria da Feira ficou abaixo do valor nacional (INE, 2024 a 2026)"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Santa_Maria_de_Lamas",
+                "https://cdn.fotw.info/flags/pt-smfsl.html",
+                "https://www.geocaching.com/geocache/GC1K6HK",
+                "https://www.visitportugal.com/pt-pt/node/137520",
+                "https://iporto.amp.pt/en/equipamentos/santa-maria-de-lamas-museum/",
+                "https://www.rtp.pt/noticias/economia/dados-ine-madeira-e-guimaraes-com-precos-das-casas-mais-elevados_n1754046",
+                "https://rr.pt/noticia/economia/2026/02/02/precos-das-casas-aceleram-em-metade-dos-municipios-populosos/457739/",
+                "https://www.barlavento.pt/?p=371151"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia com piscina e 3 mil m² em Santa Maria de Lamas",
+            "description": "Moradia T4 de dois pisos com mais de 260 m² de área habitável, rodeada de verde e muita luz natural, num terreno com quase 3 mil m². Tem duas salas, cozinha equipada, segunda cozinha com lavandaria, suite e três casas de banho completas, e lá fora jardim privativo, piscina e garagem. Por 495 mil euros. Para visitar, fale com a Márcia Ferreira, da IAD Portugal.",
+            "tags": [
+                "moradia com piscina",
+                "Santa Maria de Lamas",
+                "imobiliário",
+                "casa para família",
+                "moradia T4",
+                "IAD Portugal",
+                "Santa Maria da Feira",
+                "casas à venda"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1030985-y5rf7",
+    "created_at": "2026-10-15T12:41:16+00:00",
+    "updated_at": "2026-10-15T13:14:54+00:00",
+    "source_path": "clips/uploads/zsqg3xBoJHvLTZJLOuM64PEXoo2IwlmWnQLKe2cM.mp3",
+    "images": [
+        {
+            "id": "img_3747c06e",
+            "path": "clips/uploads/PE0WJk4nkmxjKfPQsg1KXFLltL1ibWV4aGwMNpiW.jpg",
+            "description": "Fachada da moradia amarela de dois pisos, com escadaria exterior, varandas brancas, jardim e portão, sob céu azul.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bc163c49",
+            "path": "clips/uploads/zcvZHH0MjoFFdZjTToeCrUjJX9r5m8y49f3JSESR.jpg",
+            "description": "Lateral da moradia com relvado, caminho em pedra, varanda superior e muro amarelo com gradeamento branco.",
+            "name": "01a0d42d02f0e2ef85f6a4d8ea8419cc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_10e8147f",
+            "path": "clips/uploads/Ck72D6iUq3LRUr8afXocXIqxuFwq2pNTibocz9bD.jpg",
+            "description": "Varanda coberta no piso superior, com chão em mosaico, vista para árvores, jardim e escadaria exterior.",
+            "name": "01a0d42d01e00c54650dbe57771f65bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_98a325d8",
+            "path": "clips/uploads/rAeG3nGJouyyeBpzVHymUs46JJIW5KNyA7053DZh.jpg",
+            "description": "Sala ampla e vazia com chão flutuante cinzento, tetos rebaixados e corredor até porta para a varanda.",
+            "name": "01a0d42d01c8e21c435b653c49ddd9d3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c7717fee",
+            "path": "clips/uploads/GhIJTjpjc25cYnt8VjZQE0RIDz3jxFSKP7ZdsIm6.jpg",
+            "description": "Espaço aberto entre cozinha e sala, com máquina de lavar, parede efeito cimento e porta-janela iluminada.",
+            "name": "01a0d42d0206d5b10d15154ef02fabd7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_727d4c32",
+            "path": "clips/uploads/Ldcu5385qTCBP9VONbOSksMrTK8UTQpafqtxxM8k.jpg",
+            "description": "Cozinha equipada com armários brancos, forno e micro-ondas encastrados, paredes cinzentas e porta para a varanda.",
+            "name": "01a0d42d01f72024d18814f682c49bf0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9710bdbe",
+            "path": "clips/uploads/yz60448s3dOEjwebflO2AeCralMrGgCIItORlGIQ.jpg",
+            "description": "Quarto vazio e luminoso, paredes claras, chão cinzento e janela com sol a entrar e vista verde.",
+            "name": "01a0d42d0180ce6b21aded2fa6977351.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9d055a76",
+            "path": "clips/uploads/uFcC5tGasT0BcRALibcBw9DIvI4MutSTArh5MHAr.jpg",
+            "description": "Casa de banho completa em mármore branco, com duche duplo envidraçado, lavatório de pousar e sanita suspensa.",
+            "name": "01a0d42d0193b232be6ad334db27bff3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2b0b9884",
+            "path": "clips/uploads/G14yg7V356jSGGVzQh0DLXQDXjJI1dsoS2o1E8k8.jpg",
+            "description": "Corredor dos quartos com luzes embutidas, chão cinzento e porta aberta para casa de banho em mármore.",
+            "name": "01a0d42d01f2b205915a4469b0497ef8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0bb2bafe",
+            "path": "clips/uploads/95gCMtejkQm6s86TkHGHn1i4P39DDFrroBeZuqG1.jpg",
+            "description": "Segundo quarto vazio e claro, com janela para vegetação, teto rebaixado e luz natural no chão.",
+            "name": "01a0d42d019d6a5ad760a4f3b8ee8a8a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_72202716",
+            "path": "clips/uploads/KUrJZXgUo6HFjPmiioGSJVcf7i3D74ZPTrpQmN89.jpg",
+            "description": "Sala ampla e luminosa, porta de vidro para varanda com vista verde, teto rebaixado e piso flutuante cinza.",
+            "name": "01a0d42d01bd8715cabc0032a31da11a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9d97830a",
+            "path": "clips/uploads/WxO6VgXTEqWxxuhTAjB5tydGnCfjhVRxLvYiTJtL.jpg",
+            "description": "Quarto vazio e espaçoso, paredes claras, teto rebaixado com sanca, porta aberta para o corredor.",
+            "name": "01a0d42d014d2dbc2dede3c918f246ac.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8a9a4f24",
+            "path": "clips/uploads/FT03rSeqtWGKYpW3IKSqDFn0Cidtgx58BBNuRO2l.jpg",
+            "description": "Quarto luminoso com janela para jardim verde, teto rebaixado com foco de luz, piso flutuante cinza.",
+            "name": "01a0d42d01cb03b2aef25d65dd1aadef.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_943034dc",
+            "path": "clips/uploads/fkvYCwEYjJ7GFTAq0zEAegkDh0xpWDOyvwqQEYqe.jpg",
+            "description": "Corredor do piso dos quartos, branco, com focos de luz no teto e várias portas.",
+            "name": "01a0d42d0187abbcd5d46cd610f61e71.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7abccd44",
+            "path": "clips/uploads/86TSKwk0NJuWfRp43sLfPO3Sf00rHPJJlha1bCLN.jpg",
+            "description": "Garagem ampla convertida em espaço amplo, portão seccionado automático, coluna central e janelas com luz natural.",
+            "name": "01a0d42d01d8f36162b0efdbab3bc580.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_839b3924",
+            "path": "clips/uploads/rKP7kLEgXIUBWqvMgVre5gvX8xXfEgGgzz9miDK4.jpg",
+            "description": "Garagem ampla com portão aberto para o exterior, termoacumulador na parede e piso flutuante.",
+            "name": "01a0d42d019499431dcdb8575b467dd6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eabaac45",
+            "path": "clips/uploads/P0XgrXtTyNKUB3xps3aWRpk9gcIp3AaN7JprrAOq.jpg",
+            "description": "Quarto vazio com candeeiro de teto, sanca e porta aberta para o corredor.",
+            "name": "01a0d42d016ef342ef7be35caf1ceb72.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4921241c",
+            "path": "clips/uploads/QJlWM3mgoKS7I84FbF7QXp1sw42HU1ceu05l6Yyi.jpg",
+            "description": "Quarto com janela virada para terreno verde e árvores, candeeiro redondo de teto, piso cinza.",
+            "name": "01a0d42d0241ba19551c1065f3df96c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_595d129a",
+            "path": "clips/uploads/H7XoVaZ5II9gtmzJ5v6pHpjiSGFa8hrHJ3XGgtv7.jpg",
+            "description": "Casa de banho completa em mármore branco, base de duche com vidro, espelho LED e lavatório.",
+            "name": "01a0d42d025563002a4000a4a7113dea.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a705c6e6",
+            "path": "clips/uploads/oaAjTWrp8KatdoXTSbEeqy9ZiRXJjIUfVhOSF8XW.jpg",
+            "description": "Cozinha equipada branca com forno e micro-ondas encastrados, ao lado da escada para o piso superior.",
+            "name": "01a0d42d01bc4758c2c584fc310e5034.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c9bfcac1",
+            "path": "clips/uploads/PSsOognEUexGEp2HvcJhQ96T1KA2sMDG8dhv3U0j.jpg",
+            "description": "Cozinha moderna em open space com armários brancos, parede cinzenta e escadas para o piso superior.",
+            "name": "01a0d42d016f2a89fbca0760e4898aa0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_21d2af43",
+            "path": "clips/uploads/TmMKn7b2LjSctsXbkM31oRLKphsIuoCD7n2QKaOW.jpg",
+            "description": "Segunda cozinha com lavandaria, máquina de lavar roupa e loiça, janela e escada ao lado.",
+            "name": "01a0d42d020472935b5ef4b4170e9e27.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0672ace7",
+            "path": "clips/uploads/u6YINJNxI3rmNUMugNboZXxttIKg8kAzXrdz0J9r.jpg",
+            "description": "Segunda cozinha e lavandaria, vista frontal, armários brancos, forno, máquinas e porta para o exterior.",
+            "name": "01a0d42d01c7ba26123b86a85a4a1436.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9e23216e",
+            "path": "clips/uploads/4jZtPLN1ecO56Fb2ji5uIrv36HkJrKQU0SRli9pP.jpg",
+            "description": "Alpendre exterior com calçada em pedra, parede amarela e escada exterior com gradeamento branco.",
+            "name": "01a0d42d01ceb4c56cc54f12f92074fc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0f69d34f",
+            "path": "clips/uploads/YdMpJM2XB863qSfWfNop4PBfCI0LYTfCEAldOBYd.jpg",
+            "description": "Fachada traseira da moradia amarela de dois pisos, com escada exterior, céu azul e terreno amplo.",
+            "name": "01a0d42d023010c61aebf948ab3bfb99.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0a7f5c9c",
+            "path": "clips/uploads/sS4ubXU2xVqH0fqRjUUPXkZVIxSrNzjbItgpbEDu.jpg",
+            "description": "Lateral da moradia amarela com terreno relvado, árvores verdes ao fundo e muro com hera.",
+            "name": "01a0d42d01f27f4a3aa3737e70afb0f6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3fe79aff",
+            "path": "clips/uploads/jLCe3eHhi1AB6FVbu1WSe1U1SBcGVGIvrKTRC3Wu.jpg",
+            "description": "Fachada lateral amarela com varanda, entrada da garagem aberta e caminho em pedra.",
+            "name": "01a0d42d0224055c7d6f3e1e003a7a36.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dadb01ed",
+            "path": "clips/uploads/rfXPoTklf82kkOSHM7IIxMXcAn00i9uucJpzphfK.jpg",
+            "description": "Tanque exterior cinzento junto à parede amarela, com relvado e muro coberto de hera.",
+            "name": "01a0d42d02fe5639cde76646cec901fb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b0317c2d",
+            "path": "clips/uploads/4eNbgKIboAezN2XpUwXnHIbRKisU718vZkIASNCg.jpg",
+            "description": "Terreno amplo em terra e relva, rodeado de árvores altas e muro, céu azul.",
+            "name": "01a0d42d029223d2dfb867e302d9e54f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf13fa6a",
+            "path": "clips/uploads/pgIou9z0IkjLCM6fl6ixTGBnBEY0IUvSqbnh9Pkt.png",
+            "description": "Retrato da consultora Marcia Ferreira, da iad Portugal.",
+            "name": "Marcia Ferreira.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9982a598",
+            "path": "clips/uploads/uB3HKLnsJutZPF00Si8Xrcnf0dvIrMgQvBsOIFPv.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/zsqg3xBoJHvLTZJLOuM64PEXoo2IwlmWnQLKe2cM.mp3",
+    "transcript": {
+        "duration": 32.31999969482422,
+        "text": "Moradia com piscina e quase 3 mil metros de terreno. Fica em Santa Maria de Lamas, num ambiente verde e tranquilo. Dois pisos, com mais de 260 metros de área habitável. Luz natural ao longo de todo o dia. Duas salas, cozinha equipada e uma segunda cozinha mais lavandaria. Quatro quartos, um deles em suite e três casas de banho completas. Lá fora, jardim privativo, piscina e garagem. Para viver em família, 495 mil euros. Para visitar, fale com a Márcia Ferreira, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Moradia",
+                "start": 0,
+                "end": 0.41999998688697815
+            },
+            {
+                "word": "com",
+                "start": 0.41999998688697815,
+                "end": 0.6800000071525574
+            },
+            {
+                "word": "piscina",
+                "start": 0.6800000071525574,
+                "end": 1.0399999618530273
+            },
+            {
+                "word": "e",
+                "start": 1.0399999618530273,
+                "end": 1.3200000524520874
+            },
+            {
+                "word": "quase",
+                "start": 1.3200000524520874,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "3",
+                "start": 1.5800000429153442,
+                "end": 2.119999885559082
+            },
+            {
+                "word": "mil",
+                "start": 2.119999885559082,
+                "end": 2.319999933242798
+            },
+            {
+                "word": "metros",
+                "start": 2.319999933242798,
+                "end": 2.640000104904175
+            },
+            {
+                "word": "de",
+                "start": 2.640000104904175,
+                "end": 2.9000000953674316
+            },
+            {
+                "word": "terreno",
+                "start": 2.9000000953674316,
+                "end": 3.380000114440918
+            },
+            {
+                "word": "Fica",
+                "start": 3.6600000858306885,
+                "end": 3.7200000286102295
+            },
+            {
+                "word": "em",
+                "start": 3.7200000286102295,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "Santa",
+                "start": 3.9000000953674316,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "Maria",
+                "start": 4.239999771118164,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "de",
+                "start": 4.360000133514404,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "Lamas",
+                "start": 4.699999809265137,
+                "end": 4.940000057220459
+            },
+            {
+                "word": "num",
+                "start": 5.099999904632568,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "ambiente",
+                "start": 5.260000228881836,
+                "end": 5.619999885559082
+            },
+            {
+                "word": "verde",
+                "start": 5.619999885559082,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "e",
+                "start": 6.079999923706055,
+                "end": 6.420000076293945
+            },
+            {
+                "word": "tranquilo",
+                "start": 6.420000076293945,
+                "end": 6.800000190734863
+            },
+            {
+                "word": "Dois",
+                "start": 7.260000228881836,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "pisos",
+                "start": 7.400000095367432,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "com",
+                "start": 7.960000038146973,
+                "end": 8.140000343322754
+            },
+            {
+                "word": "mais",
+                "start": 8.140000343322754,
+                "end": 8.300000190734863
+            },
+            {
+                "word": "de",
+                "start": 8.300000190734863,
+                "end": 8.460000038146973
+            },
+            {
+                "word": "260",
+                "start": 8.460000038146973,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "metros",
+                "start": 9.279999732971191,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "de",
+                "start": 9.720000267028809,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "área",
+                "start": 10.100000381469727,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "habitável",
+                "start": 10.100000381469727,
+                "end": 10.699999809265137
+            },
+            {
+                "word": "Luz",
+                "start": 11.180000305175781,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "natural",
+                "start": 11.180000305175781,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "ao",
+                "start": 11.680000305175781,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "longo",
+                "start": 12.100000381469727,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 12.100000381469727,
+                "end": 12.5600004196167
+            },
+            {
+                "word": "todo",
+                "start": 12.5600004196167,
+                "end": 12.619999885559082
+            },
+            {
+                "word": "o",
+                "start": 12.619999885559082,
+                "end": 12.960000038146973
+            },
+            {
+                "word": "dia",
+                "start": 12.960000038146973,
+                "end": 12.960000038146973
+            },
+            {
+                "word": "Duas",
+                "start": 13.460000038146973,
+                "end": 13.5600004196167
+            },
+            {
+                "word": "salas",
+                "start": 13.5600004196167,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "cozinha",
+                "start": 14.539999961853027,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "equipada",
+                "start": 14.5600004196167,
+                "end": 15.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 15.15999984741211,
+                "end": 15.399999618530273
+            },
+            {
+                "word": "uma",
+                "start": 15.399999618530273,
+                "end": 15.65999984741211
+            },
+            {
+                "word": "segunda",
+                "start": 15.65999984741211,
+                "end": 15.9399995803833
+            },
+            {
+                "word": "cozinha",
+                "start": 15.9399995803833,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "mais",
+                "start": 16.420000076293945,
+                "end": 16.8799991607666
+            },
+            {
+                "word": "lavandaria",
+                "start": 16.8799991607666,
+                "end": 17.3799991607666
+            },
+            {
+                "word": "Quatro",
+                "start": 18,
+                "end": 18
+            },
+            {
+                "word": "quartos",
+                "start": 18,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "um",
+                "start": 18.799999237060547,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "deles",
+                "start": 18.84000015258789,
+                "end": 19.020000457763672
+            },
+            {
+                "word": "em",
+                "start": 19.020000457763672,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "suite",
+                "start": 19.31999969482422,
+                "end": 19.559999465942383
+            },
+            {
+                "word": "e",
+                "start": 19.559999465942383,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "três",
+                "start": 19.8799991607666,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "casas",
+                "start": 20.260000228881836,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 20.540000915527344,
+                "end": 20.899999618530273
+            },
+            {
+                "word": "banho",
+                "start": 20.899999618530273,
+                "end": 20.899999618530273
+            },
+            {
+                "word": "completas",
+                "start": 20.899999618530273,
+                "end": 21.6200008392334
+            },
+            {
+                "word": "Lá",
+                "start": 22,
+                "end": 22.1200008392334
+            },
+            {
+                "word": "fora",
+                "start": 22.1200008392334,
+                "end": 22.420000076293945
+            },
+            {
+                "word": "jardim",
+                "start": 22.780000686645508,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "privativo",
+                "start": 22.899999618530273,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "piscina",
+                "start": 23.920000076293945,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 24.15999984741211,
+                "end": 24.5
+            },
+            {
+                "word": "garagem",
+                "start": 24.5,
+                "end": 25
+            },
+            {
+                "word": "Para",
+                "start": 25.239999771118164,
+                "end": 25.360000610351562
+            },
+            {
+                "word": "viver",
+                "start": 25.360000610351562,
+                "end": 25.600000381469727
+            },
+            {
+                "word": "em",
+                "start": 25.600000381469727,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "família",
+                "start": 25.799999237060547,
+                "end": 26.200000762939453
+            },
+            {
+                "word": "495",
+                "start": 26.6200008392334,
+                "end": 27.799999237060547
+            },
+            {
+                "word": "mil",
+                "start": 27.799999237060547,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "euros",
+                "start": 28.1200008392334,
+                "end": 28.459999084472656
+            },
+            {
+                "word": "Para",
+                "start": 28.459999084472656,
+                "end": 28.920000076293945
+            },
+            {
+                "word": "visitar",
+                "start": 28.920000076293945,
+                "end": 29.5
+            },
+            {
+                "word": "fale",
+                "start": 29.700000762939453,
+                "end": 29.84000015258789
+            },
+            {
+                "word": "com",
+                "start": 29.84000015258789,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "a",
+                "start": 29.979999542236328,
+                "end": 30.139999389648438
+            },
+            {
+                "word": "Márcia",
+                "start": 30.139999389648438,
+                "end": 30.420000076293945
+            },
+            {
+                "word": "Ferreira",
+                "start": 30.420000076293945,
+                "end": 30.899999618530273
+            },
+            {
+                "word": "da",
+                "start": 31.059999465942383,
+                "end": 31.239999771118164
+            },
+            {
+                "word": "IAD",
+                "start": 31.239999771118164,
+                "end": 31.579999923706055
+            },
+            {
+                "word": "Portugal",
+                "start": 31.579999923706055,
+                "end": 32.119998931884766
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 32.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.2600000000000016,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "MORADIA COM PISCINA",
+                        "params": {
+                            "src": "img_3747c06e",
+                            "avatar": "img_bf13fa6a",
+                            "logo": "img_9982a598",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "495.000 €",
+                            "location": "SANTA MARIA DE LAMAS · SANTA MARIA DA FEIRA",
+                            "title": "MORADIA COM PISCINA E QUASE 3.000 M² DE TERRENO",
+                            "facts": "267 m² · 4 quartos · 3 WC · piscina",
+                            "cta": "Ligue já +351 911 816 638",
+                            "name": "Marcia Ferreira",
+                            "logoText": "iad",
+                            "logoSub": "Portugal",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.2600000000000016,
+                "end": 7.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "SANTA MARIA DE LAMAS",
+                        "params": {
+                            "src": "img_b0317c2d",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.1,
+                "end": 11,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "267 M² HABITÁVEIS",
+                        "params": {
+                            "src": "img_9e23216e",
+                            "src2": "img_10e8147f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11,
+                "end": 13.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "LUZ TODO O DIA",
+                        "params": {
+                            "src": "img_72202716",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.3,
+                "end": 15.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "DUAS SALAS",
+                        "params": {
+                            "src": "img_98a325d8",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.5,
+                "end": 17.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "DUAS COZINHAS",
+                        "params": {
+                            "src": "img_a705c6e6",
+                            "src2": "img_c9bfcac1",
+                            "src3": "img_21d2af43",
+                            "src4": "img_0672ace7",
+                            "srcs": [
+                                "img_a705c6e6",
+                                "img_c9bfcac1",
+                                "img_21d2af43",
+                                "img_0672ace7",
+                                "img_727d4c32",
+                                "img_c7717fee"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.8,
+                "end": 19.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "QUATRO QUARTOS E SUITE",
+                        "params": {
+                            "src": "img_9710bdbe",
+                            "src2": "img_0bb2bafe",
+                            "src3": "img_9d97830a",
+                            "src4": "img_8a9a4f24",
+                            "srcs": [
+                                "img_9710bdbe",
+                                "img_0bb2bafe",
+                                "img_9d97830a",
+                                "img_8a9a4f24",
+                                "img_eabaac45",
+                                "img_4921241c",
+                                "img_943034dc",
+                                "img_2b0b9884",
+                                "img_595d129a"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.8,
+                "end": 21.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": null,
+                        "params": {
+                            "src": "img_9d055a76",
+                            "title": "TRÊS CASAS DE BANHO",
+                            "items": [
+                                "Uma em suite",
+                                "Duche envidraçado",
+                                "Acabamento em mármore"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.9,
+                "end": 25.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "JARDIM, PISCINA E GARAGEM",
+                        "params": {
+                            "src": "img_0a7f5c9c",
+                            "src2": "img_bc163c49",
+                            "src3": "img_dadb01ed",
+                            "src4": "img_3fe79aff",
+                            "src5": "img_839b3924",
+                            "srcs": [
+                                "img_0a7f5c9c",
+                                "img_bc163c49",
+                                "img_dadb01ed",
+                                "img_3fe79aff",
+                                "img_839b3924",
+                                "img_7abccd44"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.2,
+                "end": 28.46,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": null,
+                        "params": {
+                            "src": "img_0f69d34f",
+                            "title": "495.000 €",
+                            "items": [
+                                "Moradia T4 familiar",
+                                "Lote de 2.860 m²",
+                                "Piscina e garagem"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.46,
+                "end": 32.31999969482422,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marcia Ferreira",
+                        "params": {
+                            "src": "img_bf13fa6a",
+                            "name": "Marcia Ferreira · iad Portugal",
+                            "phone": "+351 911 816 638",
+                            "email": "Marque visita · 495.000 €"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1030985-y5rf7/clip.mp4",
+    "error": null,
+    "finished": true
+}

@@ -1,0 +1,1482 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T6 em Antas com piscina comum, perto da praia",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-6-quartos-antas-310m2/r1017731",
+            "agent": "Rui Viana",
+            "phone": "+351939029353",
+            "agency": "IAD Portugal",
+            "hook": "Seis quartos em Antas, perto da praia.",
+            "voiceover": "Seis quartos em Antas, perto da praia. Uma moradia em banda de 2008, a dois quilómetros da A vinte e oito. O Rio Neiva fica a quinhentos metros, e a praia a cerca de mil e trezentos metros. Três pisos e mais de duzentos metros de área útil. No rés-do-chão, salas de estar e de jantar, cozinha separada e um pequeno terraço. Em cima, seis quartos, dois deles suites, um escritório e uma lavandaria. Quatro casas de banho, recuperador de calor a pellets e garagem. O empreendimento tem piscina comum. Para uma família numerosa. Quatrocentos e noventa mil euros. Para visitar, fale com o Rui Viana, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Seis quartos em Antas, perto da praia.",
+                    "caption": "Antas · Seis quartos"
+                },
+                {
+                    "photo": "fachada lateral / conjunto das moradias em banda",
+                    "vo": "Uma moradia em banda de 2008, a dois quilómetros da A vinte e oito.",
+                    "caption": "Construção de 2008"
+                },
+                {
+                    "photo": "Rio Neiva ou praia próxima",
+                    "vo": "O Rio Neiva fica a quinhentos metros, e a praia a cerca de mil e trezentos metros.",
+                    "caption": "Praia a 1,3 km"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "Três pisos e mais de duzentos metros de área útil.",
+                    "caption": "220 m² úteis"
+                },
+                {
+                    "photo": "sala de estar e de jantar",
+                    "vo": "No rés-do-chão, salas de estar e de jantar,",
+                    "caption": "Salas comunicantes"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "cozinha separada e um pequeno terraço.",
+                    "caption": "Cozinha separada"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "Em cima, seis quartos, dois deles suites, um escritório e uma lavandaria.",
+                    "caption": "Seis quartos, duas suites"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "Quatro casas de banho, recuperador de calor a pellets e garagem.",
+                    "caption": "Quatro casas de banho"
+                },
+                {
+                    "photo": "piscina comum do empreendimento",
+                    "vo": "O empreendimento tem piscina comum. Para uma família numerosa.",
+                    "caption": "Piscina comum"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e noventa mil euros. Para visitar, fale com o Rui Viana, da IAD Portugal.",
+                    "caption": "490.000 € · Rui Viana · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "A garagem e a arrecadação só aparecem no texto, não na lista de características. Confirmar a garagem antes de publicar (está no voiceover).",
+                "A piscina é comum ao empreendimento, não privada. Na edição, não usar imagens que a façam parecer privada.",
+                "O anúncio diz 'terreno com boa dimensão', mas o lote tem 367 m² (incluindo a casa). Ficou de fora.",
+                "O anúncio não diz o concelho (pelo código postal 4740 será Esposende). Usei só 'Antas'."
+            ],
+            "message": "Bom dia Sr. Rui Viana,\nO meu nome é João Ferreira.\n\nVi a moradia T6 em Antas que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia em banda 6 quartos de 310 m² em Antas",
+            "price": 490000,
+            "details": {
+                "Preço": "490 000 €",
+                "Localização": "Antas, 4740-013",
+                "Referência": "1017731",
+                "Área Bruta m²": "310",
+                "Área Total do Lote m²": "367",
+                "Quartos": 6,
+                "Ano de Construção": 2008,
+                "Certificado Energético": "D",
+                "Características": "310 m² área bruta, 220 m² úteis, 4 casas de banho, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2008, Porta blindada, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Rui Viana - and phone number - +351939029353. Agency: IAD Portugal.\nThe agent's photo is Rui Viana.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Seis quartos em Antas, perto da praia.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Antas · Seis quartos»\n- fachada lateral / conjunto das moradias em banda → «Construção de 2008»\n- Rio Neiva ou praia próxima → «Praia a 1,3 km»\n- hall de entrada → «220 m² úteis»\n- sala de estar e de jantar → «Salas comunicantes»\n- cozinha → «Cozinha separada»\n- quarto suite → «Seis quartos, duas suites»\n- casa de banho → «Quatro casas de banho»\n- piscina comum do empreendimento → «Piscina comum»\n- end card → «490.000 € · Rui Viana · IAD Portugal»\n\nHere are the house details:\n\nMoradia em banda 6 quartos de 310 m² em Antas\nPreço\n490 000 €\nLocalização\nAntas, 4740-013\nReferência\n1017731\nÁrea Bruta m²\n310\nÁrea Total do Lote m²\n367\nQuartos\n6\nAno de Construção\n2008\nCertificado Energético\nD\nCaracterísticas\n310 m² área bruta, 220 m² úteis, 4 casas de banho, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2008, Porta blindada, Intercomunicador\n\nDescrição\nMORADIA em ANTAS, 220M²!\n\nImplantada em Antas, esta moradia em banda de 2008, distribui-se por 3 pisos e oferece uma exposição nascente e poente que garante luminosidade ao longo de todo o dia.\nCom 220 m² de área habitável, a casa apresenta uma organização funcional e bem dimensionada, pensada para responder às necessidades de uma família numerosa. \nNo Rés-do-Chão o hall de entrada acolhe os visitantes e dá acesso às diferentes zonas da habitação. A sala de estar e a sala de jantar, distintas e comunicantes, formam um espaço de convívio amplo e confortável. Possui um pequeno terraço e um WC de serviço. A cozinha, separada, completa o piso social. \nAo longo dos pisos superiores distribuem-se 6 quartos espaçosos, incluindo dois suites, bem como um escritório funcional e uma lavandaria prática. As 4 casas de banho distribuídas pelos três pisos, asseguram o conforto do quotidiano de toda a família.\nA moradia beneficia de aquecimento individual com radiadores e recuperador de calor a pllets, proporcionando um ambiente aconchegante nos meses mais frios. Em termos de equipamentos, destaca-se a porta blindada, o intercomunicador, a fibra ótica, a televisão por cabo e uma arrecadação para arrumação, além da garagem espaçosa e de fácil acesso.\nEsta moradia faz parte de um empreendimento de casas em banda com piscina comum, onde cada lote enquadra a habitação num terreno com boa dimensão. \nA sua localização é um ponto forte: o acesso à A28 dista a 2 km, e alguns serviços úteis encontram-se nas proximidades, como supermercados, restaurantes, ginásio a apenas 500 metros, o Rio Neiva igualmente a 500 metros, e a Foz do Rio Neiva e a praia estão acessíveis a cerca de 1300 metros — uma proximidade ao mar e à natureza que valoriza o dia a dia.\nPara agendar uma visita e conhecer esta moradia pessoalmente, entre em contacto connosco.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia T6 em Antas, Esposende, perto da praia e do Rio Neiva",
+            "summary": "Antas é uma freguesia costeira de Esposende, com cerca de 9,1 km², situada na margem sul da foz do Rio Neiva. Em 2025, o preço mediano das casas em Portugal subiu 16,8%, para 2.076 €/m².",
+            "timeline": [
+                {
+                    "label": "Construção da moradia (dado do anúncio)",
+                    "sublabel": "2008"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m²",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.198 €/m²",
+                    "sublabel": "4.º trimestre 2025"
+                },
+                {
+                    "label": "396 praias com Bandeira Azul em Portugal",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área da freguesia de Antas",
+                    "value": 9.1,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano (2025 vs 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano em Portugal (4.º trim. 2025)",
+                    "value": 2198,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Praias com Bandeira Azul em Portugal (2026)",
+                    "value": 396,
+                    "unit": "praias"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Preço do anúncio vs mercado nacional",
+                    "left": {
+                        "title": "Moradia em Antas",
+                        "points": [
+                            "490 mil euros",
+                            "Mais de 200 m² de área útil",
+                            "Seis quartos, quatro casas de banho"
+                        ]
+                    },
+                    "right": {
+                        "title": "Média de Portugal (2025)",
+                        "points": [
+                            "Preço mediano de 2.076 €/m²",
+                            "Subida de 16,8% num ano",
+                            "4.º trimestre de 2025: 2.198 €/m²"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Rio Neiva desagua no Atlântico entre Castelo do Neiva e Antas",
+                "A praia de Antas fica na margem sul da foz do Rio Neiva",
+                "Antas pertence ao concelho de Esposende, no distrito de Braga",
+                "Em 2025, as casas em Portugal subiram 16,8%, segundo o INE"
+            ],
+            "sources": [
+                "https://fogos.icnf.pt/pmdfci/03_BRAGA/0306/3G/Caderno_I/PMDFCI_0306_Esposende_Caderno%20I_Diagnostico.pdf",
+                "https://cdn.fotw.info/flags/pt-epsan.html",
+                "https://www.infopedia.pt/artigos/$rio-neiva",
+                "https://www.playocean.net/en/portugal/esposende/praias/praia-de-antas-beach",
+                "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=706274558&DESTAQUESmodo=2&xlang=pt",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://www.idealista.pt/en/news/node/75156",
+                "https://business.turismodeportugal.pt/pt/Gerir/reconhecimento-externo/premios-distincoes/Paginas/bandeira-azul.aspx",
+                "https://echoboomer.pt/portugal-396-praias-bandeira-azul-2026/",
+                "https://www.idealista.pt/news/node/76443"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T6 em Antas com piscina comum, perto da praia",
+            "description": "Seis quartos, piscina comum e a praia a 1300 m, em Antas 🌊\n\nMoradia em banda de 2008, com o Rio Neiva a 500 metros e a A28 a dois quilómetros.\nSão três pisos e mais de 200 m² úteis.\nRés-do-chão: sala de estar, sala de jantar, cozinha separada e um pequeno terraço.\nEm cima: seis quartos (dois deles suítes), escritório e lavandaria.\nTem ainda quatro casas de banho, recuperador de calor a pellets, garagem, porta blindada e fibra ótica. Dá para uma família numerosa.\n\n490.000 € | 310 m² brutos, 220 m² úteis | Lote de 367 m² | Certificado energético D | Ref. 1017731\n\nFale com o Rui Viana, da IAD Portugal, pelo +351 939 029 353",
+            "tags": [
+                "moradia",
+                "casaavenda",
+                "imobiliaria",
+                "antas",
+                "rioneiva",
+                "moradiat6",
+                "moradiaembanda",
+                "casaperto​dapraia",
+                "casaparafamilia",
+                "imoveisportugal",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1017731-prn0c",
+    "created_at": "2026-10-19T09:08:01+00:00",
+    "updated_at": "2026-10-19T09:54:05+00:00",
+    "source_path": "clips/uploads/I26BS2DRtDRgJQzvERiOQNC3qszbGlenNwBQwClF.mp3",
+    "images": [
+        {
+            "id": "img_e09440ee",
+            "path": "clips/uploads/AgIrzzrEEE8zdwLm51mnCkvyfvBQUHwl87MDgjj1.jpg",
+            "description": "Piscina comum do empreendimento, rodeada de relvado e sebes, com pérgola, baloiços e vista sobre Antas e o mar.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9a1f8ec7",
+            "path": "clips/uploads/it6hXnbB57V1woFkNN4rEAbx5xTAgLIYuQbFKdBf.jpg",
+            "description": "Sala de estar com recuperador de calor, televisão, escadas em madeira e zona de jantar ao fundo.",
+            "name": "01a09625108246a2636cf00274915657.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0cd1570b",
+            "path": "clips/uploads/9ITAoO9iP8HaxECACJzPGPITXM7NbyssFzYo9zrH.jpg",
+            "description": "Cozinha separada, estreita e comprida, com eletrodomésticos encastrados e porta de vidro para o pequeno terraço.",
+            "name": "01a096268b4c1974732f44be29bf0784.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ddaddb00",
+            "path": "clips/uploads/gAe8kWyUmnSrHGqvDpUdW9gInADguKnrUjgS6kdT.jpg",
+            "description": "Cozinha com azulejos verdes, móveis em madeira clara, tapete às riscas e porta para a sala.",
+            "name": "01a096268bfe731f82972e1d30d65863.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b1428e2",
+            "path": "clips/uploads/JF9FqHKTPiqCCm4NWNHBzED2EX3kd15C9hcKwRdp.jpg",
+            "description": "Casa de banho com mosaico branco, sanita suspensa, toalha cor-de-rosa em escada de bambu e macramé.",
+            "name": "01a096268c56cc5c912b027fe43d57f2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3ab13465",
+            "path": "clips/uploads/lYP1Rp8RXg3VjBocwjiaVNeuFOB3ELrtkxvepFeq.jpg",
+            "description": "Casa de banho com móvel de lavatório em madeira, espelho redondo, escada de bambu e macramé na parede.",
+            "name": "01a096268c83de2c3055b6aff893fce1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3de0decd",
+            "path": "clips/uploads/hOC0h6mZ9gjIsENQB6VAOyJXlxiEucsMSXGypVMy.jpg",
+            "description": "Escadas em madeira com corrimão de inox, entre a sala e um canto com cadeira de vime.",
+            "name": "01a096268bb4c033086fc0e91f57bc28.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ed034b66",
+            "path": "clips/uploads/U9ZSQicO2P055UX3npryhRrpbS0wwbgobwpDDh33.jpg",
+            "description": "Sala de estar ampla com sofás, quadro de praia, candeeiros de vime e escadas, vista da mesa de jantar.",
+            "name": "01a096268b296144a7f744980ba3a690.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dc2c827d",
+            "path": "clips/uploads/adLIWb6qezciVNr3oDqYNq5pvI6aMa9ypVPfeQH4.jpg",
+            "description": "Sala de estar e de jantar com recuperador de calor a pellets, sofás, mesa de centro e escadas ao fundo.",
+            "name": "01a096268b1971a3d5b6bb720810acf5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_08d66ffa",
+            "path": "clips/uploads/IVjXre07pKjQ2DYgXqTkwij3EROwKr5gDXNHeLS4.jpg",
+            "description": "Patamar do piso superior com escadas em madeira e portas abertas para dois quartos.",
+            "name": "01a09625bc805af4bf5a218c1fa92836.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8d258609",
+            "path": "clips/uploads/3FGV23z9czQvymwe95VtlmX8yH25w62P9c0qctzg.jpg",
+            "description": "Quarto com cama de casal floral e manta rosa, toucador branco, roupeiro de madeira e fotografias na parede.",
+            "name": "01a09625bc732c07f95bb622b5bf816e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbcb1806",
+            "path": "clips/uploads/YJ2FwSfr7jJjHrTMCum1zP8vcXtiM3LJUmibxsIc.jpg",
+            "description": "Quarto amplo com cabeceira branca acolchoada, secretária junto à janela, chão de madeira e radiador.",
+            "name": "01a09625bc5bed1a4e6d5fefa0a22396.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3d11df3e",
+            "path": "clips/uploads/MvoKVH75TLQzuuZIZfzvXcPg59p6eokw1fudKL5K.jpg",
+            "description": "Quarto de casal com cabeceira branca acolchoada, roupeiro de madeira embutido e porta aberta para o corredor.",
+            "name": "01a09625bc631523fe753fc3b26619fd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_95fd9745",
+            "path": "clips/uploads/KfcY5H54RUma8s8kW0I90KOGEVJk7kTVCcLglYSg.jpg",
+            "description": "Quarto de casal com roupa de cama clara, mesas de cabeceira brancas, roupeiro de madeira e vista do corredor.",
+            "name": "01a09625bc332849e2c73f541a3b9fbd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dc6fffc7",
+            "path": "clips/uploads/QI1kGJew2uvmxaVWDM3f7y3mFyv2bipU5OtiZrYy.jpg",
+            "description": "Quarto de casal com edredão azul e branco, roupeiro de madeira com espelho e chão de madeira.",
+            "name": "01a09625bc2a86ecdd7b54b6c548cb79.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_00195b12",
+            "path": "clips/uploads/ZrmfAkLTqrQFGxHCmoB3Ho7OCLEaVuafrB4LyCpO.jpg",
+            "description": "Quarto de casal luminoso com cadeira de baloiço, tapete cinzento e porta de vidro para varanda.",
+            "name": "01a09625bc35509f95f94ff4285d2030.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e0ffb638",
+            "path": "clips/uploads/5ruVNCV1E09fHOIFX2ERE6ZLBApDLXVWNMrVHyzs.jpg",
+            "description": "Quarto de casal com porta-janela para varanda com vista verde e roupeiro de madeira embutido.",
+            "name": "01a09625bc0e9ec7e35db738e51f756f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_91818a14",
+            "path": "clips/uploads/AvbIOrRbQaehE5b3GseUoiFWqWLZIfZKObTD5TKs.jpg",
+            "description": "Casa de banho com mosaico verde-acinzentado, sanita suspensa, móvel de lavatório em madeira e estante de bambu.",
+            "name": "01a096268c8fcaff2e100c3d32ad3a5e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_01740c54",
+            "path": "clips/uploads/86ju1Zwd0goAsEFXCH67RaxSeMaXNwJDcnF9FQFa.jpg",
+            "description": "Casa de banho com banheira branca, paredes em mosaico verde-acinzentado e escada de bambu com toalha azul.",
+            "name": "01a096268cbe2bdb80fc94799fcfde69.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_18a9ee1e",
+            "path": "clips/uploads/sO7kFk1x4xbRktSk1xc2h2N6bLbXgd0CnNXCxM7e.jpg",
+            "description": "Casa de banho com lavatório sobre móvel de madeira, espelho, estante com toalhas e cesto de roupa.",
+            "name": "01a096268cecf4e2de2eabf26e78997c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bfc91728",
+            "path": "clips/uploads/vQigEHb1dGyj5Ccd0xIDWNCK6YU9rvgXw4Ln0tPG.jpg",
+            "description": "Closet no sótão, teto inclinado, estantes com roupa, banco branco sobre tapete geométrico colorido e espelho grande.",
+            "name": "01a09625bc640e36930e662efe86a3c6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f52c3862",
+            "path": "clips/uploads/yinnicIYTUFByQxnjlLusrS4NsnfrhixPMU42PC1.jpg",
+            "description": "Casa de banho com mosaico azul, cabine de duche em vidro, móvel de lavatório em madeira e estante de bambu.",
+            "name": "01a09625bca1b4e5398689b370492912.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_baa3f7d3",
+            "path": "clips/uploads/PZtwT2iF9OrKDY4dYUh2vohROkd5RIH65bLI25y8.jpg",
+            "description": "Closet amplo no sótão, estantes em L com roupa, chapéus e peluches, tapete colorido e banco branco ao centro.",
+            "name": "01a096268bdfbaf2d0077be71eb57e95.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_082ef5ed",
+            "path": "clips/uploads/Ze6Xc2Ac9RFNr5V4cOaFYhdsQ2bn6iTKwRkAuuJe.jpg",
+            "description": "Closet no sótão, corredor de roupeiros abertos, espelho de pé, porta aberta para o quarto e soalho claro.",
+            "name": "01a096268d0ef254682033d912d26e07.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5211753c",
+            "path": "clips/uploads/Hspyyr7vQP77fdIQN4RslJM4jegrWeffYftql5H2.jpg",
+            "description": "Casa de banho com mosaico cinzento-escuro, cabine de duche em vidro, bidé e estante de madeira com planta.",
+            "name": "01a096268cfa2f6cd89b7b32fd41e9f3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_892c3130",
+            "path": "clips/uploads/PvzG0IJzlbbT1zx7ot1bEb7rJKEThHr5AJOt6MTf.jpg",
+            "description": "Casa de banho com mosaico escuro, lavatório com móvel em madeira, sanita suspensa, bidé, duche e planta grande.",
+            "name": "01a096268c4eb7de01510890f42c1b8d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3997f6c5",
+            "path": "clips/uploads/xQNQNttnn8IJxCvKKyIgQXoRsxI8JNCxZwEH4RWd.jpg",
+            "description": "Quarto de casal com cama clara, televisão na parede, cómoda branca, soalho de madeira e porta para a varanda.",
+            "name": "01a096268bd169fa415680c933b237f1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_523b071e",
+            "path": "clips/uploads/MJ1jicB6Nzlw8wtggqeCCuB1wnsvKgwOLHWyh12Q.jpg",
+            "description": "Lavandaria no sótão com máquina de lavar, máquina de secar, lava-loiça, tábua de engomar e estendal.",
+            "name": "01a096268c7572d4d905dedcaa840dc2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_423563d8",
+            "path": "clips/uploads/F4KyHK875gD8dh9u6spJnhtSonQUzTCP2AZFNsUm.jpg",
+            "description": "Escritório com sofá cinzento em L, almofadas mostarda, estante, secretária junto à janela e radiador.",
+            "name": "01a096268c1b01c4d1fd4b7092ec3c0f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_90a5c0ea",
+            "path": "clips/uploads/6m9EPbGamPy54EPsr5FATNQtOC2kw8N2ev1TrS1a.jpg",
+            "description": "Quarto com roupeiro embutido em madeira, soalho escuro, radiador e porta aberta para o corredor iluminado.",
+            "name": "01a09625bc67ff28f5c750cec3d5dcee.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7cd09550",
+            "path": "clips/uploads/wVDaHpAo4nIjb9DlIBmKCl1Zl1rrc2UxVrXxAEzO.jpg",
+            "description": "Terraço superior com relva sintética, espreguiçadeiras, sofás e cadeira suspensa; vista ao fundo para o mar.",
+            "name": "01a096268c566a80fa09b692e696631d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_da32a2a5",
+            "path": "clips/uploads/RZXPfa7Wcu7fgQv35MxXAk3Idq5YdGqeu6YjAHNH.jpg",
+            "description": "Piscina comum do empreendimento rodeada de relvado, com vista sobre Antas e o mar ao fundo.",
+            "name": "01a096268c6e4f5341c35dfabc0ae301.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3f5bda88",
+            "path": "clips/uploads/yG3Tm0p1aqLv6RQeW2jvQf3DU14rSnLNcCezDjKT.jpg",
+            "description": "Terraço superior com relva sintética, sofás com almofadas às riscas, cadeira suspensa e porta envidraçada.",
+            "name": "01a096268c806ace7d71206e0596d82d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8b0a6451",
+            "path": "clips/uploads/Ct0VfjRebpfsV2JukgPAJkljxE6APHcoPMPWqqiS.jpg",
+            "description": "Terraço do rés-do-chão com mesa de jantar exterior, sofá de vime e sebe verde; colinas ao fundo.",
+            "name": "01a096268c69d791a3e5c9270d1408b6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e64c9d81",
+            "path": "clips/uploads/FSTIVYuBOgEi1BPQAixMQNKA6qpujWB1fXfvRzAw.jpg",
+            "description": "Terraço do rés-do-chão com sofá de vime, almofadas coloridas, guarda-sol e sebe alta.",
+            "name": "01a096268c7ed7c584c4c0db92144ee2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_49cc3b42",
+            "path": "clips/uploads/1lixSEWWGWrevRkpJEjS1obklr2tSUrVa90FfYY6.jpg",
+            "description": "Piscina comum vista por cima da sebe, com relvado amplo e céu azul limpo.",
+            "name": "01a096268bd5538557ee3f2af38ccec4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_450cf361",
+            "path": "clips/uploads/gDbgqVwFUO3xpFT30do00zqsc3GSPf4TkKe48xPN.jpg",
+            "description": "Varanda estreita do piso superior com plantas em vaso e vista para árvores e telhados.",
+            "name": "01a09625bc54e0c5ad6a2e6376f239fa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e581e502",
+            "path": "clips/uploads/bB9g24f3D897u5YHKvSzkm8r3VCLsyjRz6ZpLDDW.jpg",
+            "description": "Terraço do rés-do-chão com mesa para oito pessoas, churrasqueira e piscina comum ao fundo.",
+            "name": "01a096268b5ff4ee50945e4ad81c9fc1.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_b698cf95",
+            "path": "clips/uploads/oqXxvIFoPdMRFBLcZaKeMRNKqsNZkKUCyKvuVl9v.jpg",
+            "description": "Garagem interior ampla com estantes cheias, bicicletas, frigorífico e escada para a casa.",
+            "name": "01a096268cb1ca5bb9eb021dcf99a21f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_402fd8a6",
+            "path": "clips/uploads/GN08JwwZra78YLruyhqVyxmxKsMjM3hkvHixiry4.jpg",
+            "description": "Entrada da garagem com portão branco seccionado, chão em calçada e escadas para a porta.",
+            "name": "01a096268ca5e4b3622df5c38c635abb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7933978e",
+            "path": "clips/uploads/tkpoA3yNoHjY4hlcgYHAHt1NUZJo0nIvKj7gNV0t.png",
+            "description": "Retrato do consultor Rui Viana, da IAD Portugal.",
+            "name": "Rui Viana.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_62b0c7b2",
+            "path": "clips/uploads/FeHHhoNJiYrbKjK5LYCrKqIonpYJLGgq1eQLvvt1.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/I26BS2DRtDRgJQzvERiOQNC3qszbGlenNwBQwClF.mp3",
+    "transcript": {
+        "duration": 41.68000030517578,
+        "text": "Seis quartos em Antas, perto da praia. Uma moradia em banda de 2008, a dois quilómetros da A28. O Rio Neiva fica a 500 metros e a praia a cerca de 1300 metros. Três pisos e mais de 200 metros de área útil. No resto do chão, salas de estar e de jantar, cozinha separada e um pequeno terraço. Em cima, seis quartos, dois deles suítes, um escritório e uma lavandaria. Quatro casas de banho, recuperador de calor a pellets e garagem. O empreendimento tem piscina comum, para uma família numerosa. 490 mil euros. Para visitar, fale com o Rui Viana, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Seis",
+                "start": 0,
+                "end": 0.46000000834465027
+            },
+            {
+                "word": "quartos",
+                "start": 0.46000000834465027,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "em",
+                "start": 0.8600000143051147,
+                "end": 1.0399999618530273
+            },
+            {
+                "word": "Antas",
+                "start": 1.0399999618530273,
+                "end": 1.5
+            },
+            {
+                "word": "perto",
+                "start": 1.7999999523162842,
+                "end": 1.940000057220459
+            },
+            {
+                "word": "da",
+                "start": 1.940000057220459,
+                "end": 2.180000066757202
+            },
+            {
+                "word": "praia",
+                "start": 2.180000066757202,
+                "end": 2.5
+            },
+            {
+                "word": "Uma",
+                "start": 2.940000057220459,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "moradia",
+                "start": 3.2799999713897705,
+                "end": 3.640000104904175
+            },
+            {
+                "word": "em",
+                "start": 3.640000104904175,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "banda",
+                "start": 4.059999942779541,
+                "end": 4.159999847412109
+            },
+            {
+                "word": "de",
+                "start": 4.159999847412109,
+                "end": 4.420000076293945
+            },
+            {
+                "word": "2008",
+                "start": 4.420000076293945,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 5.559999942779541,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "dois",
+                "start": 5.760000228881836,
+                "end": 5.940000057220459
+            },
+            {
+                "word": "quilómetros",
+                "start": 5.940000057220459,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "da",
+                "start": 6.400000095367432,
+                "end": 6.619999885559082
+            },
+            {
+                "word": "A28",
+                "start": 6.619999885559082,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "O",
+                "start": 7.800000190734863,
+                "end": 7.940000057220459
+            },
+            {
+                "word": "Rio",
+                "start": 7.940000057220459,
+                "end": 8.15999984741211
+            },
+            {
+                "word": "Neiva",
+                "start": 8.15999984741211,
+                "end": 8.4399995803833
+            },
+            {
+                "word": "fica",
+                "start": 8.4399995803833,
+                "end": 8.760000228881836
+            },
+            {
+                "word": "a",
+                "start": 8.760000228881836,
+                "end": 8.859999656677246
+            },
+            {
+                "word": "500",
+                "start": 8.859999656677246,
+                "end": 9.319999694824219
+            },
+            {
+                "word": "metros",
+                "start": 9.319999694824219,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 9.739999771118164,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "a",
+                "start": 10.100000381469727,
+                "end": 10.5
+            },
+            {
+                "word": "praia",
+                "start": 10.5,
+                "end": 10.539999961853027
+            },
+            {
+                "word": "a",
+                "start": 10.539999961853027,
+                "end": 10.859999656677246
+            },
+            {
+                "word": "cerca",
+                "start": 10.859999656677246,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "de",
+                "start": 11.039999961853027,
+                "end": 11.5
+            },
+            {
+                "word": "1300",
+                "start": 11.5,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "metros",
+                "start": 11.880000114440918,
+                "end": 12.380000114440918
+            },
+            {
+                "word": "Três",
+                "start": 13.140000343322754,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "pisos",
+                "start": 13.199999809265137,
+                "end": 13.680000305175781
+            },
+            {
+                "word": "e",
+                "start": 13.680000305175781,
+                "end": 13.9399995803833
+            },
+            {
+                "word": "mais",
+                "start": 13.9399995803833,
+                "end": 14.119999885559082
+            },
+            {
+                "word": "de",
+                "start": 14.119999885559082,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "200",
+                "start": 14.34000015258789,
+                "end": 14.859999656677246
+            },
+            {
+                "word": "metros",
+                "start": 14.859999656677246,
+                "end": 15.199999809265137
+            },
+            {
+                "word": "de",
+                "start": 15.199999809265137,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "área",
+                "start": 15.539999961853027,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "útil",
+                "start": 15.539999961853027,
+                "end": 15.9399995803833
+            },
+            {
+                "word": "No",
+                "start": 16.520000457763672,
+                "end": 16.600000381469727
+            },
+            {
+                "word": "resto",
+                "start": 16.600000381469727,
+                "end": 16.780000686645508
+            },
+            {
+                "word": "do",
+                "start": 16.780000686645508,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "chão",
+                "start": 17.139999389648438,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "salas",
+                "start": 17.719999313354492,
+                "end": 17.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 17.760000228881836,
+                "end": 18
+            },
+            {
+                "word": "estar",
+                "start": 18,
+                "end": 18.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 18.239999771118164,
+                "end": 18.3799991607666
+            },
+            {
+                "word": "de",
+                "start": 18.3799991607666,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "jantar",
+                "start": 18.84000015258789,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "cozinha",
+                "start": 19.520000457763672,
+                "end": 19.559999465942383
+            },
+            {
+                "word": "separada",
+                "start": 19.559999465942383,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 20.15999984741211,
+                "end": 20.3799991607666
+            },
+            {
+                "word": "um",
+                "start": 20.3799991607666,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "pequeno",
+                "start": 20.579999923706055,
+                "end": 20.860000610351562
+            },
+            {
+                "word": "terraço",
+                "start": 20.860000610351562,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "Em",
+                "start": 22,
+                "end": 22.100000381469727
+            },
+            {
+                "word": "cima",
+                "start": 22.100000381469727,
+                "end": 22.34000015258789
+            },
+            {
+                "word": "seis",
+                "start": 22.81999969482422,
+                "end": 23.020000457763672
+            },
+            {
+                "word": "quartos",
+                "start": 23.020000457763672,
+                "end": 23.5
+            },
+            {
+                "word": "dois",
+                "start": 23.920000076293945,
+                "end": 23.979999542236328
+            },
+            {
+                "word": "deles",
+                "start": 23.979999542236328,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "suítes",
+                "start": 24.280000686645508,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "um",
+                "start": 25.239999771118164,
+                "end": 25.399999618530273
+            },
+            {
+                "word": "escritório",
+                "start": 25.399999618530273,
+                "end": 25.899999618530273
+            },
+            {
+                "word": "e",
+                "start": 25.899999618530273,
+                "end": 26.18000030517578
+            },
+            {
+                "word": "uma",
+                "start": 26.18000030517578,
+                "end": 26.399999618530273
+            },
+            {
+                "word": "lavandaria",
+                "start": 26.399999618530273,
+                "end": 26.899999618530273
+            },
+            {
+                "word": "Quatro",
+                "start": 26.899999618530273,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "casas",
+                "start": 27.739999771118164,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 28.100000381469727,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "banho",
+                "start": 28.399999618530273,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "recuperador",
+                "start": 28.920000076293945,
+                "end": 29.299999237060547
+            },
+            {
+                "word": "de",
+                "start": 29.299999237060547,
+                "end": 29.479999542236328
+            },
+            {
+                "word": "calor",
+                "start": 29.479999542236328,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "a",
+                "start": 29.639999389648438,
+                "end": 29.81999969482422
+            },
+            {
+                "word": "pellets",
+                "start": 29.81999969482422,
+                "end": 30.200000762939453
+            },
+            {
+                "word": "e",
+                "start": 30.200000762939453,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "garagem",
+                "start": 30.440000534057617,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "O",
+                "start": 31.420000076293945,
+                "end": 31.559999465942383
+            },
+            {
+                "word": "empreendimento",
+                "start": 31.559999465942383,
+                "end": 32.2400016784668
+            },
+            {
+                "word": "tem",
+                "start": 32.2400016784668,
+                "end": 32.5
+            },
+            {
+                "word": "piscina",
+                "start": 32.5,
+                "end": 32.86000061035156
+            },
+            {
+                "word": "comum",
+                "start": 32.86000061035156,
+                "end": 33.279998779296875
+            },
+            {
+                "word": "para",
+                "start": 33.779998779296875,
+                "end": 33.880001068115234
+            },
+            {
+                "word": "uma",
+                "start": 33.880001068115234,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "família",
+                "start": 34.060001373291016,
+                "end": 34.41999816894531
+            },
+            {
+                "word": "numerosa",
+                "start": 34.41999816894531,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "490",
+                "start": 35.939998626708984,
+                "end": 36.619998931884766
+            },
+            {
+                "word": "mil",
+                "start": 36.619998931884766,
+                "end": 36.880001068115234
+            },
+            {
+                "word": "euros",
+                "start": 36.880001068115234,
+                "end": 37.279998779296875
+            },
+            {
+                "word": "Para",
+                "start": 37.880001068115234,
+                "end": 37.939998626708984
+            },
+            {
+                "word": "visitar",
+                "start": 37.939998626708984,
+                "end": 38.560001373291016
+            },
+            {
+                "word": "fale",
+                "start": 38.939998626708984,
+                "end": 39.02000045776367
+            },
+            {
+                "word": "com",
+                "start": 39.02000045776367,
+                "end": 39.2400016784668
+            },
+            {
+                "word": "o",
+                "start": 39.2400016784668,
+                "end": 39.380001068115234
+            },
+            {
+                "word": "Rui",
+                "start": 39.380001068115234,
+                "end": 39.599998474121094
+            },
+            {
+                "word": "Viana",
+                "start": 39.599998474121094,
+                "end": 40
+            },
+            {
+                "word": "da",
+                "start": 40.20000076293945,
+                "end": 40.439998626708984
+            },
+            {
+                "word": "IAD",
+                "start": 40.439998626708984,
+                "end": 40.84000015258789
+            },
+            {
+                "word": "de",
+                "start": 40.84000015258789,
+                "end": 41.13999938964844
+            },
+            {
+                "word": "Portugal",
+                "start": 41.13999938964844,
+                "end": 41.47999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 41.68000030517578,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.5999999999999996,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "SEIS QUARTOS EM ANTAS",
+                        "params": {
+                            "src": "img_e09440ee",
+                            "avatar": "img_7933978e",
+                            "logo": "img_62b0c7b2",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "490.000 €",
+                            "location": "ESPOSENDE · ANTAS",
+                            "title": "Seis quartos em Antas, perto da praia.",
+                            "facts": "220 m² úteis · 6 quartos · 4 WC · garagem",
+                            "cta": "Ligue já +351 939 029 353",
+                            "name": "Rui Viana",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultor imobiliário",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.5999999999999996,
+                "end": 7.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "CONSTRUÇÃO DE 2008",
+                        "params": {
+                            "src": "img_3f5bda88",
+                            "src2": "img_402fd8a6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.7,
+                "end": 10.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_7cd09550",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.4,
+                "end": 13,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "PRAIA A 1,3 KM",
+                        "params": {
+                            "src": "img_da32a2a5",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13,
+                "end": 16.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Três pisos|310 m² de área bruta|Lote de 367 m²",
+                        "params": {
+                            "src": "img_08d66ffa",
+                            "title": "220 m² ÚTEIS",
+                            "items": [
+                                "Três pisos",
+                                "310 m² de área bruta",
+                                "Lote de 367 m²"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 19.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SALAS COMUNICANTES",
+                        "params": {
+                            "src": "img_ed034b66",
+                            "src2": "img_9a1f8ec7",
+                            "src3": "img_3de0decd",
+                            "src4": "img_8b0a6451"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.4,
+                "end": 21.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "COZINHA SEPARADA",
+                        "params": {
+                            "src": "img_0cd1570b",
+                            "src2": "img_ddaddb00",
+                            "src3": "img_e64c9d81",
+                            "src4": "img_e581e502",
+                            "src5": "img_450cf361"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.9,
+                "end": 24.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SEIS QUARTOS, DUAS SUITES",
+                        "params": {
+                            "src": "img_dc6fffc7",
+                            "src2": "img_00195b12",
+                            "src3": "img_e0ffb638",
+                            "src4": "img_3997f6c5",
+                            "src5": "img_95fd9745"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.9,
+                "end": 26.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "ESCRITÓRIO E LAVANDARIA",
+                        "params": {
+                            "src": "img_423563d8",
+                            "src2": "img_523b071e",
+                            "src3": "img_bfc91728",
+                            "src4": "img_baa3f7d3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.9,
+                "end": 28.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "QUATRO CASAS DE BANHO",
+                        "params": {
+                            "src": "img_3b1428e2",
+                            "src2": "img_3ab13465",
+                            "src3": "img_91818a14",
+                            "src4": "img_01740c54",
+                            "src5": "img_18a9ee1e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.9,
+                "end": 31.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "PELLETS E GARAGEM",
+                        "params": {
+                            "src": "img_dc2c827d",
+                            "src2": "img_b698cf95"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.4,
+                "end": 33.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_49cc3b42",
+                            "zoomFrom": 1.5
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.4,
+                "end": 35.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "PARA UMA FAMÍLIA NUMEROSA",
+                        "params": {
+                            "src": "img_8d258609",
+                            "src2": "img_dbcb1806",
+                            "src3": "img_3d11df3e",
+                            "src4": "img_90a5c0ea"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.5,
+                "end": 37.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "490.000 €",
+                        "params": {
+                            "src": "img_f52c3862",
+                            "src2": "img_5211753c",
+                            "src3": "img_892c3130",
+                            "src4": "img_082ef5ed"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.8,
+                "end": 41.68,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Rui Viana",
+                        "params": {
+                            "src": "img_7933978e",
+                            "name": "Rui Viana",
+                            "phone": "+351 939 029 353",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1017731-prn0c/clip.mp4",
+    "error": null
+}

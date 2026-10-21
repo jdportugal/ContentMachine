@@ -1,0 +1,922 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Negócio de catering à venda em Anadia, pronto a faturar",
+    "source_text": null,
+    "source_path": "clips/uploads/E5TuTaTGaEwhVrfizsAjJAGAJDqOmN6Tn6L3g2a9.mp3",
+    "images": [
+        {
+            "id": "img_5ad5d5fc",
+            "path": "clips/uploads/cftq7ZeXvsQHy3LcZNWq5CGQzUudbNMjjMc4iFIf.jpg",
+            "description": "Armazém com teto abobadado: portão metálico, prateleiras laranja com caixas, grades azuis de bebidas e mesas dobráveis.",
+            "name": "d7feb6c4-ab24-4540-a707-9bd3127d4eff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fc287005",
+            "path": "clips/uploads/6sBtSvoUMa0gakZlOCsUKwHOGyYMGQNnZKcrWUsw.jpg",
+            "description": "Armazém amplo com teto curvo: mesas dobráveis, grades de água, estantes e cadeiras empilhadas ao fundo para eventos.",
+            "name": "de56933a-c971-41cb-a4a5-68ce008d48e2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_16cd3dd6",
+            "path": "clips/uploads/FN26Sf2gitRDzSN6sKzwtrXVTjg4L6Hrgmd70kqB.jpg",
+            "description": "Corredor do armazém abobadado: estantes carregadas, cadeiras empilhadas, mesas redondas dobráveis encostadas e grades Luso.",
+            "name": "d3290034-2ad0-47fe-b251-cd4e6788175f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d53310c6",
+            "path": "clips/uploads/iyeSSVkMZbSpkB9dtxAJj9ssgAqbw8hVMYQZan7v.jpg",
+            "description": "Arrumos de loiça e material: estantes com caixas azuis, tabuleiros, cuvetes metálicas e passagem para o armazém.",
+            "name": "ab6ec0ec-1006-44b8-bd3d-a312b1858e0d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fea5cc03",
+            "path": "clips/uploads/d9Y9bXQUrZZq7bHB6P6CLgLZB4Qz0BJOsMirzRAn.jpg",
+            "description": "Sala de lavagem e preparação em azulejo branco: caixas azuis empilhadas, mesas inox e grades de copos.",
+            "name": "bc8af722-3a86-4ee7-b4d1-f8ab0b08d25a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f5fa272d",
+            "path": "clips/uploads/hAzAQEryX1c84GJk2GKxytyePQpJUwJcE6QzeF6S.jpg",
+            "description": "Refeitório dos colaboradores: mesa de madeira com cadeiras, armário com copos, televisão e quadro de avisos.",
+            "name": "9d5e8b77-dc08-48f7-8151-9e891ffe0cbf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2aefc4ca",
+            "path": "clips/uploads/1sOxduusTC1iGe32bNKbDvxYjFo9ssVMwQYjbasi.jpg",
+            "description": "Corredor de armazenamento: caixas térmicas azuis empilhadas, arca congeladora e frigoríficos industriais em inox ao fundo.",
+            "name": "647de88c-a8de-4223-9a55-f1172c248de8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_79fe9fdb",
+            "path": "clips/uploads/BhT2KE8cLKbX8LoE5XeIxANTTkKeXdcn88xjqudq.jpg",
+            "description": "Entrada exterior coberta com telhado de madeira e placa da marca Categ​osto na parede; jardim ao fundo.",
+            "name": "046364b2-c1ff-48ff-9598-e20001d7ddd1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a3a2f3f4",
+            "path": "clips/uploads/AMUlSsontBE7HaPk2sjjLJx8pe7nc9bJqWSwH3D5.jpg",
+            "description": "Cozinha industrial: bancada inox ao centro, exaustor com prateleira de especiarias, fogão, grelhador e fornos combinados.",
+            "name": "4156e97e-b72a-4791-b22d-169eef8dc16b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8836928f",
+            "path": "clips/uploads/QqG0eMyvIjRF6qcr0vwZyC7Z2BisfgGr9trZqBbD.jpg",
+            "description": "Cozinha industrial ampla em inox: bancadas com panelas, fornos, fogões, frigoríficos e caixas de transporte.",
+            "name": "1c44c4f5-736d-47a6-bebd-ea5925ba39c6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f50d8aa2",
+            "path": "clips/uploads/3SkPKRI0CX6UyG6pNvGy6RKZ2diL6QVw7n1ugJw2.jpg",
+            "description": "Cozinha industrial com bancada central em inox, contentores térmicos azuis e cinzentos para transporte de refeições.",
+            "name": "059401ce-0f14-41c4-847a-035ab175df1c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_62f59553",
+            "path": "clips/uploads/c3doUoMtsaBHbOQzd6suUEqOXb4FEdyjqfXufBr0.jpg",
+            "description": "Casa de banho simples com sanita, lavatório de coluna, espelho e porta de madeira.",
+            "name": "97318317-c1db-4064-97e6-e01a1a868e59.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d940d713",
+            "path": "clips/uploads/JPbPeIvl4UoyNnuZWiYmjw9ZWLx1c5HgdvbywCEr.jpg",
+            "description": "Zona de armazenamento com arcas congeladoras, frigoríficos industriais em inox e corredor amplo de azulejo.",
+            "name": "5a2d363e-603e-4ecc-9b5e-e487b7e5fedb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_87a32679",
+            "path": "clips/uploads/Rtsbf6exUuAr7qSCRsIZqt87mLbBZYgvcVrWoF9d.jpg",
+            "description": "Corredor de armazém com frigoríficos industriais em inox, arcas congeladoras e tabuleiros azuis empilhados.",
+            "name": "55f384b0-2252-4aa7-8dbe-275c7797d947.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8c04fa76",
+            "path": "clips/uploads/VBHiOCFlz1A0TeCZf7m6Edup40J7yKjXes7WkEqU.jpg",
+            "description": "Mesa de evento decorada na praia, com velas, flores, conchas e vista para o mar.",
+            "name": "5157666e-6835-400a-ac73-8991302f6aa9.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_f2a8c4bd",
+            "path": "clips/uploads/xZDgBCIiMfn7iVeTbB6F4CKezHtN3yZeSIANpZT3.jpg",
+            "description": "Buffet de catering ao ar livre com mexilhões, camarões, queijo, salgados e arranjos florais.",
+            "name": "eb70acd0-1941-4711-922d-d5dbc2531c96.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_17f3ea34",
+            "path": "clips/uploads/T4doPWTe0mnDpBecd3SMT6ygHgekOD0aJFy8bk2J.jpg",
+            "description": "Evento noturno em tenda iluminada com luzes, várias mesas postas para casamento ou grande festa.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_4419d0af",
+            "path": "clips/uploads/OICQQTqrSglYnKkw836DzqXZgPoOgIuFFdTb7Wbs.jpg",
+            "description": "Cozinha profissional com fogão industrial, forno, exaustor em inox, bancada central e facas na parede.",
+            "name": "d85fc4ff-49c1-4363-aa0d-29e0a85deea6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f337e6cd",
+            "path": "clips/uploads/gZgGJqZ9rBR9TGI8DdaVwSdkpyGFUzRuSSFvbByz.jpg",
+            "description": "Logótipo circular da RE/MAX Fénix Grupo Visão, Av. Quinta da Nora, Mealhada.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a210b870",
+            "path": "clips/uploads/U6uZIBQk4eiCYsfrIlDrSXlE164Fb0jyjPLyrwXe.png",
+            "description": "Retrato da agente Sofia Ferreira, RE/MAX Grupo Visão, sorridente, de óculos e fato cinzento.",
+            "name": "sofia.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details:\n700 000 €\nVenda\nid. 124961064-45\n685 m²\n\n- -\n\n2 WC\n\nNC\n\nDescrição\nDetalhes\nMapa\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nUnidade de Produção Alimentar & Catering | Negócio Chave-na-Mão\n\nApresentamos uma empresa de produção alimentar vocacionada para serviços de catering, sólida, estruturada e com vários anos de presença no mercado — uma oportunidade rara para quem procura investir num negócio pronto a operar desde o primeiro dia.\n\nO negócio é vendido sem ónus nem encargos, com uma estrutura otimizada e flexível, sem colaboradores fixos, recorrendo a equipas contratadas conforme os serviços, o que permite um controlo eficiente de custos e elevada margem de adaptação à procura.\n\n🔹 Inclui no negócio:\n\n• Armazém totalmente equipado\n\n• Duas viaturas afetas à atividade\n\n• Todo o material necessário para serviço de catering até 500 pessoas\n\n• Marca consolidada e reconhecida no mercado\n\n• Website profissional e ativo\n\n🔹 Instalações:\n\n• Armazém com obras realizadas em 2020\n\n• Totalmente preparado para confeção e armazenamento alimentar\n\n• Cumpre integralmente todas as normas de higiene, segurança alimentar e segurança no trabalho\n\n• Layout funcional, pensado para eficiência operacional\n\n🔹 Capacidade operacional:\n\n• Preparação, logística e serviço completo para eventos até quinhentas pessoas, com equipamento próprio, permitindo atuar de forma autónoma e eficiente em eventos de média e grande dimensão\n\n🔹 Localização estratégica:\n\n• Situado no centro do país\n\n• Excelente acessibilidade\n\n• Prestação de serviços em vários pontos do território nacional\n\n🔹 Destaques do negócio:\n\n✔️ Estrutura organizada e escalável\n\n✔️ Operação flexível e eficiente\n\n✔️ Reputação já implantada no mercado\n\n✔️ Ideal para expansão, franchising ou integração num grupo empresarial\n\n✔️ Transição facilitada para o novo proprietário\n\nValor de venda: 700.000 €\n\n(Sim, “só” — para quem sabe reconhecer um negócio sólido, funcional e com histórico.)\n\nUma oportunidade única para investidores ou operadores do setor que procuram crescimento imediato sem período de arranque.\n\n Para mais informações ou reunião confidencial, entre em contacto.   \n\nDetalhes\nÁrea Bruta Privativa m²\n685\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n977\nÁrea Útil m²\n685\nQuartos\n- -\nAno de Construção\n- -\nPiso\n- -\nWC/Casas de banho\n2\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão\nDetalhes energéticos",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Venda de negócio de catering em Anadia (RE/MAX)",
+            "summary": "Está à venda por 700 000 € uma unidade de produção alimentar de catering em Vila Nova de Monsarros, Anadia, no centro do país. A venda inclui armazém equipado, duas viaturas, material para eventos até 500 pessoas e marca já estabelecida.",
+            "timeline": [
+                {
+                    "label": "Armazém renovado",
+                    "sublabel": "2020"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 700000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área do armazém",
+                    "value": 685,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Capacidade por evento",
+                    "value": 500,
+                    "unit": "pessoas"
+                },
+                {
+                    "label": "Viaturas incluídas",
+                    "value": 2,
+                    "unit": "viaturas"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Fica em Vila Nova de Monsarros, Anadia, no distrito de Aveiro",
+                "Negócio chave na mão, com marca reconhecida e site profissional",
+                "Armazém preparado para confeção e armazenamento de alimentos",
+                "Presta serviços em vários pontos do país",
+                "Sem colaboradores fixos: as equipas são contratadas para cada serviço",
+                "Vendido livre de ónus e encargos",
+                "Correção à transcrição: onde se ouve '100 colaboradores fixos e 100 ónus' deve ler-se 'sem colaboradores fixos e sem ónus'"
+            ],
+            "sources": [
+                "https://remax.pt/en/imoveis/venda-outros---comercial-tanadia-vila-nova-de-monsarros/124961064-45",
+                "https://www.imovirtual.com/pt/anuncio/loja-para-venda-ID1ihf2"
+            ]
+        },
+        "suggested": {
+            "title": "Negócio de catering à venda em Anadia, pronto a faturar",
+            "description": "Unidade de produção alimentar em Anadia, com marca reconhecida e anos de mercado, à venda por 700 mil euros. Armazém renovado com mais de 680 m², equipado e certificado, duas viaturas e todo o material para eventos até 500 pessoas. Para uma reunião confidencial, contacte a Sofia Ferreira, da RE/MAX Fénix.",
+            "tags": [
+                "catering",
+                "trespasse",
+                "negócio à venda",
+                "Anadia",
+                "investimento",
+                "RE/MAX Fénix",
+                "eventos",
+                "restauração"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-fch6a",
+    "created_at": "2026-10-08T11:11:51+00:00",
+    "updated_at": "2026-10-08T11:16:15+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/E5TuTaTGaEwhVrfizsAjJAGAJDqOmN6Tn6L3g2a9.mp3",
+    "transcript": {
+        "duration": 33.06999969482422,
+        "text": "Um negócio de catering pronto a faturar desde o primeiro dia. Uma unidade de produção alimentar em Anadia, no centro do país, com marca reconhecida e anos de mercado. Armazém com mais de 680 metros, renovado em 2020, equipado e certificado para confeção e armazenamento. Duas viaturas e todo o material para eventos até 500 pessoas. 100 colaboradores fixos e 100 ônus. Pronto para crescer, franquear ou integrar num grupo. 700 mil euros. Para uma reunião confidencial, fale com a Sofia Ferreira, da Remax Fénix.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.10000000149011612
+            },
+            {
+                "word": "negócio",
+                "start": 0.10000000149011612,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "de",
+                "start": 0.5199999809265137,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "catering",
+                "start": 0.7400000095367432,
+                "end": 1.1399999856948853
+            },
+            {
+                "word": "pronto",
+                "start": 1.1399999856948853,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "a",
+                "start": 1.4600000381469727,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "faturar",
+                "start": 1.7400000095367432,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "desde",
+                "start": 2.0199999809265137,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "o",
+                "start": 2.440000057220459,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "primeiro",
+                "start": 2.7200000286102295,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "dia",
+                "start": 2.859999895095825,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "Uma",
+                "start": 3.680000066757202,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "unidade",
+                "start": 3.759999990463257,
+                "end": 4.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 4.079999923706055,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "produção",
+                "start": 4.539999961853027,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "alimentar",
+                "start": 4.539999961853027,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "em",
+                "start": 5.199999809265137,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "Anadia",
+                "start": 5.340000152587891,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "no",
+                "start": 6,
+                "end": 6.179999828338623
+            },
+            {
+                "word": "centro",
+                "start": 6.179999828338623,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "do",
+                "start": 6.400000095367432,
+                "end": 6.659999847412109
+            },
+            {
+                "word": "país",
+                "start": 6.659999847412109,
+                "end": 6.940000057220459
+            },
+            {
+                "word": "com",
+                "start": 7.119999885559082,
+                "end": 7.320000171661377
+            },
+            {
+                "word": "marca",
+                "start": 7.320000171661377,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "reconhecida",
+                "start": 7.539999961853027,
+                "end": 8.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 8.260000228881836,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "anos",
+                "start": 8.619999885559082,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "de",
+                "start": 8.819999694824219,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "mercado",
+                "start": 9.4399995803833,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "Armazém",
+                "start": 9.9399995803833,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "com",
+                "start": 10.260000228881836,
+                "end": 10.5
+            },
+            {
+                "word": "mais",
+                "start": 10.5,
+                "end": 10.65999984741211
+            },
+            {
+                "word": "de",
+                "start": 10.65999984741211,
+                "end": 10.9399995803833
+            },
+            {
+                "word": "680",
+                "start": 10.9399995803833,
+                "end": 11.800000190734863
+            },
+            {
+                "word": "metros",
+                "start": 11.800000190734863,
+                "end": 12.279999732971191
+            },
+            {
+                "word": "renovado",
+                "start": 12.579999923706055,
+                "end": 12.920000076293945
+            },
+            {
+                "word": "em",
+                "start": 12.920000076293945,
+                "end": 13.079999923706055
+            },
+            {
+                "word": "2020",
+                "start": 13.079999923706055,
+                "end": 13.84000015258789
+            },
+            {
+                "word": "equipado",
+                "start": 14.279999732971191,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "e",
+                "start": 14.539999961853027,
+                "end": 14.779999732971191
+            },
+            {
+                "word": "certificado",
+                "start": 14.779999732971191,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "para",
+                "start": 15.359999656677246,
+                "end": 15.579999923706055
+            },
+            {
+                "word": "confeção",
+                "start": 15.579999923706055,
+                "end": 16.1200008392334
+            },
+            {
+                "word": "e",
+                "start": 16.1200008392334,
+                "end": 16.5
+            },
+            {
+                "word": "armazenamento",
+                "start": 16.5,
+                "end": 17.1200008392334
+            },
+            {
+                "word": "Duas",
+                "start": 17.65999984741211,
+                "end": 17.799999237060547
+            },
+            {
+                "word": "viaturas",
+                "start": 17.799999237060547,
+                "end": 18.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 18.31999969482422,
+                "end": 18.700000762939453
+            },
+            {
+                "word": "todo",
+                "start": 18.700000762939453,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "o",
+                "start": 18.8799991607666,
+                "end": 19.34000015258789
+            },
+            {
+                "word": "material",
+                "start": 19.34000015258789,
+                "end": 19.34000015258789
+            },
+            {
+                "word": "para",
+                "start": 19.34000015258789,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "eventos",
+                "start": 19.600000381469727,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "até",
+                "start": 19.940000534057617,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "500",
+                "start": 20.15999984741211,
+                "end": 20.68000030517578
+            },
+            {
+                "word": "pessoas",
+                "start": 20.68000030517578,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "100",
+                "start": 21.760000228881836,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "colaboradores",
+                "start": 21.860000610351562,
+                "end": 22.360000610351562
+            },
+            {
+                "word": "fixos",
+                "start": 22.360000610351562,
+                "end": 22.84000015258789
+            },
+            {
+                "word": "e",
+                "start": 22.84000015258789,
+                "end": 23.059999465942383
+            },
+            {
+                "word": "100",
+                "start": 23.059999465942383,
+                "end": 23.420000076293945
+            },
+            {
+                "word": "ônus",
+                "start": 23.420000076293945,
+                "end": 23.760000228881836
+            },
+            {
+                "word": "Pronto",
+                "start": 24.139999389648438,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "para",
+                "start": 24.280000686645508,
+                "end": 24.540000915527344
+            },
+            {
+                "word": "crescer",
+                "start": 24.540000915527344,
+                "end": 24.899999618530273
+            },
+            {
+                "word": "franquear",
+                "start": 25.420000076293945,
+                "end": 25.6200008392334
+            },
+            {
+                "word": "ou",
+                "start": 25.6200008392334,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "integrar",
+                "start": 25.860000610351562,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "num",
+                "start": 26.280000686645508,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "grupo",
+                "start": 26.459999084472656,
+                "end": 26.739999771118164
+            },
+            {
+                "word": "700",
+                "start": 27.1200008392334,
+                "end": 27.65999984741211
+            },
+            {
+                "word": "mil",
+                "start": 27.65999984741211,
+                "end": 27.940000534057617
+            },
+            {
+                "word": "euros",
+                "start": 27.940000534057617,
+                "end": 28.219999313354492
+            },
+            {
+                "word": "Para",
+                "start": 28.219999313354492,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "uma",
+                "start": 28.81999969482422,
+                "end": 29.020000457763672
+            },
+            {
+                "word": "reunião",
+                "start": 29.020000457763672,
+                "end": 29.399999618530273
+            },
+            {
+                "word": "confidencial",
+                "start": 29.399999618530273,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "fale",
+                "start": 30.479999542236328,
+                "end": 30.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 30.579999923706055,
+                "end": 30.760000228881836
+            },
+            {
+                "word": "a",
+                "start": 30.760000228881836,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "Sofia",
+                "start": 30.920000076293945,
+                "end": 31.139999389648438
+            },
+            {
+                "word": "Ferreira",
+                "start": 31.139999389648438,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "da",
+                "start": 31.860000610351562,
+                "end": 32
+            },
+            {
+                "word": "Remax",
+                "start": 32,
+                "end": 32.380001068115234
+            },
+            {
+                "word": "Fénix",
+                "start": 32.380001068115234,
+                "end": 32.880001068115234
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 33.06999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3000000000000003,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Pronto a faturar desde o 1.º dia",
+                        "params": {
+                            "src": "img_17f3ea34",
+                            "avatar": "img_a210b870",
+                            "logo": "img_f337e6cd",
+                            "price": "700.000 €",
+                            "eyebrow": "NEGÓCIO À VENDA",
+                            "title": "Negócio de catering chave na mão",
+                            "location": "Anadia · 685 m² · Eventos até 500 pessoas",
+                            "agentName": "Sofia Ferreira",
+                            "phone": "+351 925 589 477",
+                            "legal": "RE/MAX Fénix"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3000000000000003,
+                "end": 6.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_79fe9fdb",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.9,
+                "end": 9.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Marca com história",
+                        "params": {
+                            "src": "img_8c04fa76",
+                            "title": "Marca com história",
+                            "items": [
+                                "Marca reconhecida",
+                                "Anos de mercado",
+                                "Serviço em todo o país"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.9,
+                "end": 14.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Armazém de 685 m²",
+                        "params": {
+                            "src": "img_5ad5d5fc",
+                            "src2": "img_fc287005",
+                            "src3": "img_16cd3dd6",
+                            "src4": "img_d53310c6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.2,
+                "end": 17.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_a3a2f3f4",
+                            "src2": "img_8836928f",
+                            "src3": "img_f50d8aa2",
+                            "src4": "img_4419d0af"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 21.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Eventos até 500 pessoas",
+                        "params": {
+                            "src": "img_f2a8c4bd",
+                            "src2": "img_fea5cc03",
+                            "src3": "img_2aefc4ca",
+                            "src4": "img_d940d713",
+                            "src5": "img_87a32679"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.6,
+                "end": 24.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Sem ónus, sem encargos",
+                        "params": {
+                            "src": "img_f5fa272d",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.1,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_62f59553",
+                            "src2": "img_16cd3dd6",
+                            "angle": 8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 33.06999969482422,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sofia Ferreira",
+                        "params": {
+                            "src": "img_a210b870",
+                            "logo": "img_f337e6cd",
+                            "name": "Sofia Ferreira",
+                            "role": "Consultora imobiliária · RE/MAX Fénix",
+                            "buttons": "+351 925 589 477 | Reunião confidencial",
+                            "phone": "+351 925 589 477"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-fch6a/clip.mp4",
+    "error": null
+}

@@ -102,6 +102,70 @@ class ShortsFramingTest extends TestCase
         $this->assertSame(30.0, $segmentos[0]['end_time'] - $segmentos[0]['start_time']);
     }
 
+    public function test_a_window_snaps_out_to_the_sentence_boundaries(): void
+    {
+        // The model cut 3s into a sentence and 2s before the end of another one.
+        $transcricao = [
+            ['start' => 0.0, 'end' => 10.0], ['start' => 10.0, 'end' => 25.0],
+            ['start' => 25.0, 'end' => 44.0], ['start' => 44.0, 'end' => 60.0],
+        ];
+
+        $out = ShortsPipeline::aplicarDuracaoMinima(
+            [['start_time' => 13.0, 'end_time' => 42.0]], // 29s, mid-sentence at both ends
+            60.0,
+            $transcricao,
+        );
+
+        $this->assertSame(10.0, $out[0]['start_time']);
+        $this->assertSame(44.0, $out[0]['end_time']);
+    }
+
+    public function test_growing_a_short_pick_still_lands_on_boundaries(): void
+    {
+        $transcricao = [
+            ['start' => 0.0, 'end' => 20.0], ['start' => 20.0, 'end' => 26.0],
+            ['start' => 26.0, 'end' => 31.0], ['start' => 31.0, 'end' => 55.0],
+        ];
+
+        $out = ShortsPipeline::aplicarDuracaoMinima(
+            [['start_time' => 21.0, 'end_time' => 27.0]], // 6s, well under the floor
+            55.0,
+            $transcricao,
+        );
+
+        $this->assertContains($out[0]['start_time'], [0.0, 20.0, 26.0, 31.0]);
+        $this->assertContains($out[0]['end_time'], [20.0, 26.0, 31.0, 55.0]);
+        $this->assertGreaterThanOrEqual(30.0, $out[0]['end_time'] - $out[0]['start_time']);
+    }
+
+    /** One long block has no nearby marks: snapping it would hand back the whole video. */
+    public function test_a_snap_that_would_break_the_minute_ceiling_is_refused(): void
+    {
+        $out = ShortsPipeline::aplicarDuracaoMinima(
+            [['start_time' => 100.0, 'end_time' => 140.0]],
+            300.0,
+            [['start' => 0.0, 'end' => 300.0]],
+        );
+
+        $this->assertSame(100.0, $out[0]['start_time']);
+        $this->assertSame(140.0, $out[0]['end_time']);
+    }
+
+    public function test_the_prompt_forbids_cutting_mid_sentence(): void
+    {
+        $vault = app(VaultContract::class);
+        $fonte = $vault->create('clips/fontes', [
+            'titulo' => 'Talk', 'tipo' => 'clip-fonte', 'estado' => 'transcrita',
+            'transcricao' => json_encode([['text' => 'hello', 'start' => 0, 'end' => 300]]),
+        ], 'Source.');
+
+        $prompt = $this->promptDe($fonte->path);
+
+        $this->assertStringContainsString('NEVER CUT A SENTENCE', $prompt);
+        $this->assertStringContainsString('at most 60', $prompt);
+        $this->assertStringContainsString('STANDS ALONE', $prompt);
+    }
+
     public function test_the_prompt_demands_the_minimum(): void
     {
         $capturado = '';
@@ -278,6 +342,46 @@ class ShortsFramingTest extends TestCase
         $this->assertGreaterThan($b, $r, 'the backdrop should carry the source colour');
 
         File::deleteDirectory($dir);
+    }
+
+    /** Changing the frame has to throw away the cut — the old size is baked into it. */
+    public function test_changing_the_framing_invalidates_the_cut(): void
+    {
+        $vault = app(VaultContract::class);
+        $clip = $vault->create(ShortsPipeline::CLIPES, [
+            'titulo' => 'A cut', 'tipo' => 'clip', 'inicio' => 0, 'fim' => 40,
+            'estado' => 'pronto', 'enquadramento' => 'fill', 'clip_path' => '/tmp/raw.mp4',
+        ], 'A clip.');
+
+        $pipeline = app(ShortsPipeline::class);
+
+        $this->assertTrue($pipeline->definirEnquadramento($clip->path, 'original'));
+        $depois = $vault->get($clip->path);
+        $this->assertSame('original', $depois->get('enquadramento'));
+        $this->assertSame('', $depois->get('clip_path'), 'the stale cut must be dropped so the next render re-cuts');
+
+        // Saving the same choice again must not throw a matching cut away.
+        $vault->updateFrontmatter($clip->path, ['clip_path' => '/tmp/raw.mp4', 'enquadramento_cortado' => 'original']);
+        $this->assertFalse($pipeline->definirEnquadramento($clip->path, 'original'));
+        $this->assertSame('/tmp/raw.mp4', $vault->get($clip->path)->get('clip_path'));
+    }
+
+    /**
+     * The choice saved on the note is intent; the cut on disk is truth. A clip whose
+     * note already says "original" over a cut that was filled must still be re-cut —
+     * comparing intent to intent called it up to date and left it scaled forever.
+     */
+    public function test_a_choice_recorded_without_a_recut_is_not_trusted(): void
+    {
+        $vault = app(VaultContract::class);
+        $clip = $vault->create(ShortsPipeline::CLIPES, [
+            'titulo' => 'A cut', 'tipo' => 'clip', 'inicio' => 0, 'fim' => 40,
+            'estado' => 'pronto', 'enquadramento' => 'original', 'clip_path' => '/tmp/raw.mp4',
+            // no enquadramento_cortado: nobody recorded how this file was framed
+        ], 'A clip.');
+
+        $this->assertTrue(app(ShortsPipeline::class)->definirEnquadramento($clip->path, 'original'));
+        $this->assertSame('', $vault->get($clip->path)->get('clip_path'));
     }
 
     /**

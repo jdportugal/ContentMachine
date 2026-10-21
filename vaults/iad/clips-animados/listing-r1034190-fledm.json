@@ -1,0 +1,969 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa de pedra de 1948 com quase 900 m² de terreno por 240 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-3-quartos-paredes-de-viadores-186m2/r1034190",
+            "agent": "Maria Conceição Costa",
+            "phone": "+351933262553",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa de pedra de 1948, em Paredes de Viadores.",
+            "voiceover": "Uma casa de pedra de 1948, em Paredes de Viadores. Fica num ambiente tranquilo, com privacidade e boa exposição solar. Tem três quartos, sala de estar, duas casas de banho e varanda. Precisa de obras de remodelação, para ficar ao gosto de quem a comprar. Lá fora, quase novecentos metros de terreno, com jardim e anexos. Tem ainda garagem, lavandaria, arrumos, água própria e portão automático. Para quem quer uma casa com terreno, para renovar. Duzentos e quarenta mil euros. Para visitar, fale com a Maria Conceição Costa, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada em pedra",
+                    "vo": "Uma casa de pedra de 1948, em Paredes de Viadores.",
+                    "caption": "Paredes de Viadores"
+                },
+                {
+                    "photo": "portão de entrada automático",
+                    "vo": "Fica num ambiente tranquilo, com privacidade e boa exposição solar.",
+                    "caption": "Ambiente tranquilo"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Tem três quartos, sala de estar,",
+                    "caption": "Sala de estar"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "duas casas de banho",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "e varanda.",
+                    "caption": "Com varanda"
+                },
+                {
+                    "photo": "interior a remodelar",
+                    "vo": "Precisa de obras de remodelação, para ficar ao gosto de quem a comprar.",
+                    "caption": "Para remodelar"
+                },
+                {
+                    "photo": "terreno com jardim",
+                    "vo": "Lá fora, quase novecentos metros de terreno, com jardim e anexos.",
+                    "caption": "893 m² de terreno"
+                },
+                {
+                    "photo": "garagem e anexos",
+                    "vo": "Tem ainda garagem, lavandaria, arrumos, água própria e portão automático.",
+                    "caption": "Garagem e anexos"
+                },
+                {
+                    "photo": "vista geral da casa e terreno",
+                    "vo": "Para quem quer uma casa com terreno, para renovar.",
+                    "caption": "Casa de pedra com terreno"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e quarenta mil euros. Para visitar, fale com a Maria Conceição Costa, da IAD Portugal.",
+                    "caption": "240.000 € · Maria Conceição Costa · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "A área bruta e a área útil aparecem iguais (186 m²), o que é invulgar. Não usei nenhuma das duas no texto. Confirmar.",
+                "Jardim, varanda e duas casas de banho só aparecem no bloco de detalhes, não na descrição. Confirmar nas fotos antes de publicar.",
+                "Certificado energético F e casa a precisar de obras: não destaquei a eficiência, mas a necessidade de obras está dita no texto."
+            ],
+            "message": "Bom dia Sra. Maria Conceição,\nO meu nome é João Ferreira.\n\nVi a moradia em pedra T3 em Paredes de Viadores que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 3 quartos de 186 m² em Paredes de Viadores",
+            "price": 240000,
+            "details": {
+                "Preço": "240 000 €",
+                "Localização": "Paredes de Viadores, 4630-574",
+                "Referência": "1034190",
+                "Área Bruta m²": "186",
+                "Área Total do Lote m²": "893",
+                "Quartos": 3,
+                "Ano de Construção": 1948,
+                "Certificado Energético": "F",
+                "Características": "186 m² área bruta, 186 m² úteis, 2 casas de banho, Jardim, Garagem, Varanda, Sala de estar, Construído em 1948"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Maria Conceição Costa - and phone number - +351933262553. Agency: IAD Portugal.\nThe agent's photo is Maria Conceição Costa.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa de pedra de 1948, em Paredes de Viadores.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada em pedra → «Paredes de Viadores»\n- portão de entrada automático → «Ambiente tranquilo»\n- sala de estar → «Sala de estar»\n- quarto → «Três quartos»\n- varanda → «Com varanda»\n- interior a remodelar → «Para remodelar»\n- terreno com jardim → «893 m² de terreno»\n- garagem e anexos → «Garagem e anexos»\n- vista geral da casa e terreno → «Casa de pedra com terreno»\n- end card → «240.000 € · Maria Conceição Costa · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 3 quartos de 186 m² em Paredes de Viadores\nPreço\n240 000 €\nLocalização\nParedes de Viadores, 4630-574\nReferência\n1034190\nÁrea Bruta m²\n186\nÁrea Total do Lote m²\n893\nQuartos\n3\nAno de Construção\n1948\nCertificado Energético\nF\nCaracterísticas\n186 m² área bruta, 186 m² úteis, 2 casas de banho, Jardim, Garagem, Varanda, Sala de estar, Construído em 1948\n\nDescrição\n🏡 Moradia em Pedra T3 com Terreno \n\nMoradia em pedra, com o charme e a robustez da construção tradicional, inserida num excelente  terreno que oferece privacidade, espaço exterior e boa exposição solar.\n\nA necessitar de algumas obras de remodelação, permitindo adaptar os espaços às necessidades e gosto do futuro proprietário.\n\nA moradia é composta por 3 quartos, oferecendo uma boa base para uma renovação funcional e moderna, e dispõe ainda de:\n\nGaragem\nLavandaria\nArrumos\nAnexos\nÁgua própria\nSaneamento\nPortão de entrada automático\nTerreno envolvente\nBoa exposição solar\n\nA construção em pedra confere ao imóvel uma identidade única e características que podem ser valorizadas numa futura intervenção.\n\nUma oportunidade para quem procura uma moradia com terreno, estrutura tradicional em pedra e potencial de valorização, num ambiente tranquilo e com boas condições para criar uma casa ao seu gosto.\n\n📞 Contacte-nos para mais informações ou para agendar uma visita.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Casa de pedra de 1948 para remodelar, com quase 900 m² de terreno, à venda por 240 mil euros",
+            "summary": "Moradia T3 de pedra, construída em 1948, com terreno, jardim e anexos, à venda por 240 000 €. Os preços da habitação em Portugal continuam a subir a dois dígitos, e a avaliação bancária atingiu em agosto de 2026 o valor mais alto de sempre.",
+            "timeline": [
+                {
+                    "label": "Construção da casa de pedra",
+                    "sublabel": "1948"
+                },
+                {
+                    "label": "Preços da habitação sobem 17,8% (recorde)",
+                    "sublabel": "1.º trimestre de 2026"
+                },
+                {
+                    "label": "Preços da habitação abrandam para +16,5%",
+                    "sublabel": "2.º trimestre de 2026"
+                },
+                {
+                    "label": "Avaliação bancária bate recorde: 2254 €/m²",
+                    "sublabel": "agosto de 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido pela casa",
+                    "value": 240000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Subida homóloga dos preços da habitação (INE, 2.º trim. 2026)",
+                    "value": 16.5,
+                    "unit": "%"
+                },
+                {
+                    "label": "Subida homóloga dos preços da habitação (INE, 1.º trim. 2026)",
+                    "value": 17.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Valor mediano da avaliação bancária (agosto de 2026)",
+                    "value": 2254,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga da avaliação bancária (agosto de 2026)",
+                    "value": 14.7,
+                    "unit": "%"
+                },
+                {
+                    "label": "Moradias avaliadas pela banca (agosto de 2026)",
+                    "value": 12452,
+                    "unit": "avaliações"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Esta casa vs. o mercado nacional",
+                    "left": {
+                        "title": "Esta casa",
+                        "points": [
+                            "Pedra, construída em 1948",
+                            "T3, 2 casas de banho e varanda",
+                            "Quase 900 m² de terreno",
+                            "Precisa de obras de remodelação",
+                            "240 000 €"
+                        ]
+                    },
+                    "right": {
+                        "title": "Mercado em 2026",
+                        "points": [
+                            "Preços +16,5% no 2.º trim. (INE)",
+                            "Avaliação bancária: 2254 €/m² (ago.)",
+                            "Apartamentos: 2655 €/m² (ago.)",
+                            "Recorde histórico de avaliação"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em agosto de 2026, a avaliação bancária da habitação atingiu o valor mais alto de sempre: 2254 €/m².",
+                "Os preços das casas subiram 16,5% num ano no 2.º trimestre de 2026, depois do recorde de 17,8% no 1.º trimestre.",
+                "Em agosto de 2026, a avaliação bancária dos apartamentos chegou a 2655 €/m², mais 17% do que um ano antes.",
+                "Moradia de pedra com terreno, garagem, água própria e portão automático, para remodelar ao gosto de quem a comprar."
+            ],
+            "sources": [
+                "https://www.comparaja.pt/credito-habitacao/noticias/indice-de-precos-da-habitacao-sobe-16-5-no-2o-trimestre-2026",
+                "https://www.sabado.pt/sabermais/ine",
+                "https://eco.sapo.pt/2026/06/23/precos-da-habitacao-disparam-178-no-inicio-do-ano/",
+                "https://ind.millenniumbcp.pt/pt/Particulares/Investimentos/Documents/NotasConjuntura/2026/Mercado_Imobiliario_1T26_29062026.pdf",
+                "https://www.rtp.pt/noticias/economia/avaliacao-bancaria-da-habitacao-bate-recorde-de-2254-eurosm2-em-agosto_n1767443",
+                "https://www.forbespt.com/?p=195818"
+            ]
+        },
+        "suggested": {
+            "title": "Casa de pedra de 1948 com quase 900 m² de terreno por 240 mil €",
+            "description": "Moradia de pedra de 1948 com três quartos, sala, duas casas de banho e varanda, num local tranquilo, com privacidade e boa exposição solar. Precisa de obras de remodelação e tem quase 900 m² de terreno com jardim, anexos, garagem, lavandaria, arrumos, água própria e portão automático. Para visitar, fale com a Maria Conceição Costa, da IAD Portugal.",
+            "tags": [
+                "casa de pedra",
+                "moradia para remodelar",
+                "imóveis Portugal",
+                "casa com terreno",
+                "imobiliário",
+                "casa à venda",
+                "IAD Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1034190-fledm",
+    "created_at": "2026-10-16T05:41:36+00:00",
+    "updated_at": "2026-10-16T05:45:41+00:00",
+    "source_path": "clips/uploads/pZCYLWbrVgh7xdYeBECydQE5LNw7MI7PFfWAZKJB.mp3",
+    "images": [
+        {
+            "id": "img_af78f511",
+            "path": "clips/uploads/Ef4OKSQ78Gyz8zaoGo57Lyump9v8JlsiD3hSkJZi.png",
+            "description": "Entrada da propriedade: portão automático vermelho sob telhado, muro de pedra coberto de vegetação, rua empedrada.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b4c91954",
+            "path": "clips/uploads/ph8XX5NTWQsZ0f5wycSMlqydWAmVyCIEXXk6oh4Y.png",
+            "description": "Fachada principal da casa de pedra: varanda com balaústre, escadas de entrada e portão de garagem vermelho.",
+            "name": "01a0ecc42057bd95bdcc20d21ae2cd4f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_24a8d9ab",
+            "path": "clips/uploads/G6sI4Yg1l4QYN7FbA8Ic9m0hvBEfcuvO7t6bqhG7.jpg",
+            "description": "Lateral da casa em granito com varanda, árvore no pátio e caminho para o terreno nas traseiras.",
+            "name": "01a0e8c7918eaef3235b3112a68569f5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5caa16bc",
+            "path": "clips/uploads/WArlQAW5qBCh1eUynlJ6R1PWlgmY6uwIeMpi9tsi.jpg",
+            "description": "Terreno com horta e caminho até à casa de pedra; laranjeira, anexo de madeira e churrasqueira à direita.",
+            "name": "01a0e8cb632ae8c7fdfc3e1a9b63c11b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9eaa4285",
+            "path": "clips/uploads/aTAjWjckkyINnO2TYsTV3H9tLhJMWLSPjWJxkSAy.jpg",
+            "description": "Traseiras da casa de pedra com escada exterior, horta em primeiro plano, anexo de madeira e montes ao fundo.",
+            "name": "01a0e8cb63695e0d00268188a0aa6bf5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f48984a2",
+            "path": "clips/uploads/IkiB2tslWgZWnXrupWetDB6b4EmJaNRNU7WA9MAx.jpg",
+            "description": "Rua empedrada junto ao muro de pedra da propriedade, laranjeira e telhado da casa ao fundo; ambiente rural tranquilo.",
+            "name": "01a0e8c81cb4eb7f1a22d48c048435b6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6d2b6126",
+            "path": "clips/uploads/fD8KwxzyUqjyXDLMCh8Rc22b4t2mSdqoZNiFDdED.jpg",
+            "description": "Casa de banho com banheira, azulejos azuis e janela de madeira; estilo antigo, precisa de remodelação.",
+            "name": "01a0f12de6a9f180063e6d4769301ea5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7e672286",
+            "path": "clips/uploads/5MzLF1pdQGMA4J64sZsYJcmS8DujIN69H71LDqzA.jpg",
+            "description": "Quarto vazio em obras, soalho de madeira e paredes em pladur, porta aberta para a varanda.",
+            "name": "01a0f12de693f8e2ecf5ac4141c0cc32.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eeca83c2",
+            "path": "clips/uploads/x7lgc9d2HrXHcQdaM0KqbBGCIwQfiotXP641n0dd.jpg",
+            "description": "Quarto em obras com soalho de madeira, porta envidraçada aberta para a varanda com vista para o jardim.",
+            "name": "01a0f12de6b846c5db1ddd454c5be354.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_370b7064",
+            "path": "clips/uploads/MIUYTNjdDjtrpJ5aTo2siJyYqOlO0Tfth5vgx7yG.png",
+            "description": "Retrato da consultora Maria Conceição Costa, da IAD Portugal.",
+            "name": "Maria Conceição Costa.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_079a8d59",
+            "path": "clips/uploads/D4aBlbs88z88GtJoCHkcyvFn3oL6IslMn8elqFy3.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/pZCYLWbrVgh7xdYeBECydQE5LNw7MI7PFfWAZKJB.mp3",
+    "transcript": {
+        "duration": 34.560001373291016,
+        "text": "Uma casa de pedra de 1948, em paredes de viadores. Fica num ambiente tranquilo, com privacidade e boa exposição solar. Tem três quartos, sala de estar, duas casas de banho e varanda. Precisa de obras de remodelação para ficar ao gosto de quem a comprar. Lá fora, quase 900 metros de terreno com jardim e anexos. Tem ainda garagem, lavandaria, arrumos, água própria e portão automático. Para quem quer uma casa com terreno para renovar, 240 mil euros. Para visitar, fale com a Maria Conceição Costa, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.20000000298023224
+            },
+            {
+                "word": "casa",
+                "start": 0.20000000298023224,
+                "end": 0.46000000834465027
+            },
+            {
+                "word": "de",
+                "start": 0.46000000834465027,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "pedra",
+                "start": 0.7400000095367432,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "de",
+                "start": 0.9200000166893005,
+                "end": 1.1799999475479126
+            },
+            {
+                "word": "1948",
+                "start": 1.1799999475479126,
+                "end": 2.5
+            },
+            {
+                "word": "em",
+                "start": 2.799999952316284,
+                "end": 3.0199999809265137
+            },
+            {
+                "word": "paredes",
+                "start": 3.0199999809265137,
+                "end": 3.299999952316284
+            },
+            {
+                "word": "de",
+                "start": 3.299999952316284,
+                "end": 3.559999942779541
+            },
+            {
+                "word": "viadores",
+                "start": 3.559999942779541,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "Fica",
+                "start": 4.539999961853027,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "num",
+                "start": 4.579999923706055,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "ambiente",
+                "start": 4.760000228881836,
+                "end": 5.059999942779541
+            },
+            {
+                "word": "tranquilo",
+                "start": 5.059999942779541,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "com",
+                "start": 5.960000038146973,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "privacidade",
+                "start": 6.119999885559082,
+                "end": 6.78000020980835
+            },
+            {
+                "word": "e",
+                "start": 6.78000020980835,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "boa",
+                "start": 7.079999923706055,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "exposição",
+                "start": 7.380000114440918,
+                "end": 7.760000228881836
+            },
+            {
+                "word": "solar",
+                "start": 7.760000228881836,
+                "end": 8.199999809265137
+            },
+            {
+                "word": "Tem",
+                "start": 8.699999809265137,
+                "end": 8.739999771118164
+            },
+            {
+                "word": "três",
+                "start": 8.739999771118164,
+                "end": 9.119999885559082
+            },
+            {
+                "word": "quartos",
+                "start": 9.119999885559082,
+                "end": 9.539999961853027
+            },
+            {
+                "word": "sala",
+                "start": 9.9399995803833,
+                "end": 9.9399995803833
+            },
+            {
+                "word": "de",
+                "start": 9.9399995803833,
+                "end": 10.420000076293945
+            },
+            {
+                "word": "estar",
+                "start": 10.420000076293945,
+                "end": 10.5
+            },
+            {
+                "word": "duas",
+                "start": 10.859999656677246,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "casas",
+                "start": 11.039999961853027,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "de",
+                "start": 11.300000190734863,
+                "end": 11.699999809265137
+            },
+            {
+                "word": "banho",
+                "start": 11.699999809265137,
+                "end": 11.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 11.739999771118164,
+                "end": 12
+            },
+            {
+                "word": "varanda",
+                "start": 12,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "Precisa",
+                "start": 12.960000038146973,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "de",
+                "start": 13.039999961853027,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "obras",
+                "start": 13.420000076293945,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "de",
+                "start": 13.420000076293945,
+                "end": 13.680000305175781
+            },
+            {
+                "word": "remodelação",
+                "start": 13.680000305175781,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "para",
+                "start": 14.220000267028809,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "ficar",
+                "start": 14.539999961853027,
+                "end": 14.800000190734863
+            },
+            {
+                "word": "ao",
+                "start": 14.800000190734863,
+                "end": 15
+            },
+            {
+                "word": "gosto",
+                "start": 15,
+                "end": 15.199999809265137
+            },
+            {
+                "word": "de",
+                "start": 15.199999809265137,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "quem",
+                "start": 15.460000038146973,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "a",
+                "start": 15.460000038146973,
+                "end": 16.020000457763672
+            },
+            {
+                "word": "comprar",
+                "start": 16.020000457763672,
+                "end": 16.020000457763672
+            },
+            {
+                "word": "Lá",
+                "start": 16.520000457763672,
+                "end": 16.68000030517578
+            },
+            {
+                "word": "fora",
+                "start": 16.68000030517578,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "quase",
+                "start": 17.260000228881836,
+                "end": 17.420000076293945
+            },
+            {
+                "word": "900",
+                "start": 17.420000076293945,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "metros",
+                "start": 18.100000381469727,
+                "end": 18.3799991607666
+            },
+            {
+                "word": "de",
+                "start": 18.3799991607666,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "terreno",
+                "start": 18.979999542236328,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "com",
+                "start": 18.979999542236328,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "jardim",
+                "start": 19.260000228881836,
+                "end": 19.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 19.6200008392334,
+                "end": 20
+            },
+            {
+                "word": "anexos",
+                "start": 20,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "Tem",
+                "start": 20.959999084472656,
+                "end": 20.959999084472656
+            },
+            {
+                "word": "ainda",
+                "start": 20.959999084472656,
+                "end": 21.299999237060547
+            },
+            {
+                "word": "garagem",
+                "start": 21.299999237060547,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "lavandaria",
+                "start": 22.139999389648438,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "arrumos",
+                "start": 23.059999465942383,
+                "end": 23.5
+            },
+            {
+                "word": "água",
+                "start": 23.899999618530273,
+                "end": 23.899999618530273
+            },
+            {
+                "word": "própria",
+                "start": 23.899999618530273,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "e",
+                "start": 24.3799991607666,
+                "end": 24.65999984741211
+            },
+            {
+                "word": "portão",
+                "start": 24.65999984741211,
+                "end": 24.920000076293945
+            },
+            {
+                "word": "automático",
+                "start": 24.920000076293945,
+                "end": 25.600000381469727
+            },
+            {
+                "word": "Para",
+                "start": 25.600000381469727,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "quem",
+                "start": 26.1200008392334,
+                "end": 26.260000228881836
+            },
+            {
+                "word": "quer",
+                "start": 26.260000228881836,
+                "end": 26.420000076293945
+            },
+            {
+                "word": "uma",
+                "start": 26.420000076293945,
+                "end": 26.6200008392334
+            },
+            {
+                "word": "casa",
+                "start": 26.6200008392334,
+                "end": 26.860000610351562
+            },
+            {
+                "word": "com",
+                "start": 26.860000610351562,
+                "end": 27.15999984741211
+            },
+            {
+                "word": "terreno",
+                "start": 27.15999984741211,
+                "end": 27.420000076293945
+            },
+            {
+                "word": "para",
+                "start": 27.420000076293945,
+                "end": 27.68000030517578
+            },
+            {
+                "word": "renovar",
+                "start": 27.68000030517578,
+                "end": 28.18000030517578
+            },
+            {
+                "word": "240",
+                "start": 28.6200008392334,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "mil",
+                "start": 29.15999984741211,
+                "end": 29.65999984741211
+            },
+            {
+                "word": "euros",
+                "start": 29.65999984741211,
+                "end": 30.020000457763672
+            },
+            {
+                "word": "Para",
+                "start": 30.540000915527344,
+                "end": 30.600000381469727
+            },
+            {
+                "word": "visitar",
+                "start": 30.600000381469727,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "fale",
+                "start": 31.5,
+                "end": 31.5
+            },
+            {
+                "word": "com",
+                "start": 31.5,
+                "end": 31.700000762939453
+            },
+            {
+                "word": "a",
+                "start": 31.700000762939453,
+                "end": 31.8799991607666
+            },
+            {
+                "word": "Maria",
+                "start": 31.8799991607666,
+                "end": 32.040000915527344
+            },
+            {
+                "word": "Conceição",
+                "start": 32.040000915527344,
+                "end": 32.459999084472656
+            },
+            {
+                "word": "Costa",
+                "start": 32.459999084472656,
+                "end": 32.900001525878906
+            },
+            {
+                "word": "da",
+                "start": 33.15999984741211,
+                "end": 33.34000015258789
+            },
+            {
+                "word": "IAD",
+                "start": 33.34000015258789,
+                "end": 33.70000076293945
+            },
+            {
+                "word": "de",
+                "start": 33.70000076293945,
+                "end": 34
+            },
+            {
+                "word": "Portugal",
+                "start": 34,
+                "end": 34.29999923706055
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.560001373291016,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.599999999999998,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "CASA DE PEDRA DE 1948",
+                        "params": {
+                            "src": "img_b4c91954",
+                            "avatar": "img_370b7064",
+                            "logo": "img_079a8d59",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "240.000 €",
+                            "location": "PAREDES DE VIADORES",
+                            "title": "CASA DE PEDRA T3",
+                            "facts": "186 m² · 3 quartos · 2 WC · 893 m² de terreno",
+                            "cta": "Ligue já +351 933 262 553",
+                            "name": "Maria Conceição Costa",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.599999999999998,
+                "end": 8.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "AMBIENTE TRANQUILO",
+                        "params": {
+                            "src": "img_af78f511",
+                            "src2": "img_f48984a2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.5,
+                "end": 12.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "A CASA",
+                        "params": {
+                            "src": "img_eeca83c2",
+                            "title": "A CASA",
+                            "items": [
+                                "Três quartos",
+                                "Sala de estar",
+                                "Duas casas de banho",
+                                "Com varanda"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.8,
+                "end": 16.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "PARA REMODELAR",
+                        "params": {
+                            "src": "img_6d2b6126",
+                            "src2": "img_7e672286",
+                            "src3": "img_eeca83c2",
+                            "src4": "img_24a8d9ab"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 18.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "893 m² de terreno",
+                        "params": {
+                            "src": "img_5caa16bc",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.9,
+                "end": 25.6,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Jardim e anexos",
+                        "params": {
+                            "src": "img_9eaa4285",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.6,
+                "end": 30.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "CASA DE PEDRA COM TERRENO",
+                        "params": {
+                            "src": "img_24a8d9ab",
+                            "src2": "img_b4c91954",
+                            "src3": "img_5caa16bc",
+                            "src4": "img_9eaa4285",
+                            "src5": "img_f48984a2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.4,
+                "end": 34.56,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Maria Conceição Costa",
+                        "params": {
+                            "src": "img_370b7064",
+                            "name": "Maria Conceição Costa",
+                            "phone": "+351 933 262 553",
+                            "email": "maria.costa@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1034190-fledm/clip.mp4",
+    "error": null
+}

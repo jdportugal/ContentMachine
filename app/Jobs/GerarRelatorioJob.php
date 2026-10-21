@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 /**
  * Generates the news report OUTSIDE the web request cycle.
@@ -31,8 +32,9 @@ class GerarRelatorioJob implements ShouldQueue
     public int $timeout = 900;
 
     /**
+     * @param  string  $data  Reference date (YYYY-MM-DD) — or, for TIPO_TOPICO, the typed topic.
      * @param  string  $idioma  Output language; '' follows the project's own.
-     * @param  string  $tipo  RelatorioBuilder::TIPO_NOTICIAS | TIPO_DICAS
+     * @param  string  $tipo  RelatorioBuilder::TIPO_NOTICIAS | TIPO_DICAS | TIPO_TOPICO
      */
     public function __construct(
         public string $modo,
@@ -51,34 +53,37 @@ class GerarRelatorioJob implements ShouldQueue
         $this->activateProject();
         $idioma = $this->idioma !== '' ? $this->idioma : ProjectLanguage::name();
 
-        // Report is built only from already-scraped items (no channel scan here).
-        $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
+        if ($this->tipo === RelatorioBuilder::TIPO_TOPICO) {
+            $relatorio = $builder->gerarTopico($this->data, $idioma);
+            $slug = 'topico-'.(Str::slug(Str::limit(trim($this->data), 60, '')) ?: substr(md5($this->data), 0, 8));
+        } else {
+            // Report is built only from already-scraped items (no channel scan here).
+            $ref = Carbon::parse($this->data !== '' ? $this->data : now()->toDateString());
 
-        // 'semana' = window of the last 7 days up to the chosen date.
-        [$inicio, $fim] = $this->modo === 'semana'
-            ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
-            : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
+            // 'semana' = window of the last 7 days up to the chosen date.
+            [$inicio, $fim] = $this->modo === 'semana'
+                ? [$ref->copy()->subDays(6)->startOfDay(), $ref->copy()->endOfDay()]
+                : [$ref->copy()->startOfDay(), $ref->copy()->startOfDay()];
 
-        $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma, $this->tipo);
+            $relatorio = $builder->gerar($inicio, $fim, $this->modo, $idioma, $this->tipo);
 
-        $dicas = $this->tipo === RelatorioBuilder::TIPO_DICAS;
-
-        // Tips are archived alongside the reports but under their own slug prefix
-        // and note type, so regenerating one never overwrites the other.
-        $slug = ($dicas ? 'dicas-' : '').($this->modo === 'semana'
-            ? 'semana-'.$inicio->toDateString()
-            : 'dia-'.$inicio->toDateString());
+            // Tips are archived alongside the reports but under their own slug prefix
+            // and note type, so regenerating one never overwrites the other.
+            $slug = ($this->tipo === RelatorioBuilder::TIPO_DICAS ? 'dicas-' : '').($this->modo === 'semana'
+                ? 'semana-'.$inicio->toDateString()
+                : 'dia-'.$inicio->toDateString());
+        }
 
         $nota = $vault->put("noticias/relatorios/{$slug}.md", [
             'titulo' => $relatorio['titulo'],
-            'tipo' => $dicas ? 'relatorio_dicas' : 'relatorio',
+            'tipo' => RelatorioBuilder::tipoNota($this->tipo),
             'modo' => $relatorio['modo'],
             'inicio' => $relatorio['inicio'],
             'fim' => $relatorio['fim'],
             'total' => $relatorio['total'],
             'gerado_em' => $relatorio['gerado_em'],
             'estado' => 'arquivado',
-            'tags' => ['noticias', $dicas ? 'dicas' : 'relatorio', $relatorio['modo']],
+            'tags' => ['noticias', $this->tipo === RelatorioBuilder::TIPO_NOTICIAS ? 'relatorio' : $this->tipo, $relatorio['modo']],
             'dados' => json_encode($relatorio, JSON_UNESCAPED_UNICODE),
         ], $builder->corpoMarkdown($relatorio));
 

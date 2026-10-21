@@ -1,0 +1,1363 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia com alojamento já a funcionar perto de Pedrógão Grande",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-7-quartos-pedrogao-grande-518m2/r1040827",
+            "agent": "Mandy Walker",
+            "phone": "+351927627395",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa com negócio de alojamento, perto de Pedrógão Grande.",
+            "voiceover": "Uma casa com negócio de alojamento, perto de Pedrógão Grande. No centro de Portugal, num terreno com mais de três mil metros. A casa principal tem dois quartos, ambos com casa de banho privativa. Ao lado, um apartamento independente com um quarto. E dois apartamentos para hóspedes, com dois quartos cada, cozinha, sala e exterior privado. O alojamento já funciona, mobilado e equipado. Lá fora, piscina, jardins com rega automática e estacionamento coberto. Para viver, receber hóspedes, ou juntar várias gerações da família. Seiscentos e noventa e cinco mil euros. Para visitar, fale com a Mandy Walker, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "vista geral da propriedade com piscina",
+                    "vo": "Uma casa com negócio de alojamento, perto de Pedrógão Grande.",
+                    "caption": "Perto de Pedrógão Grande"
+                },
+                {
+                    "photo": "vista aérea do terreno",
+                    "vo": "No centro de Portugal, num terreno com mais de três mil metros.",
+                    "caption": "Mais de 3.000 m² de terreno"
+                },
+                {
+                    "photo": "sala da casa principal",
+                    "vo": "A casa principal tem dois quartos,",
+                    "caption": "Casa principal"
+                },
+                {
+                    "photo": "quarto em suite da casa principal",
+                    "vo": "ambos com casa de banho privativa.",
+                    "caption": "Dois quartos em suite"
+                },
+                {
+                    "photo": "apartamento de um quarto",
+                    "vo": "Ao lado, um apartamento independente com um quarto.",
+                    "caption": "Apartamento independente"
+                },
+                {
+                    "photo": "cozinha de um apartamento de hóspedes",
+                    "vo": "E dois apartamentos para hóspedes, com dois quartos cada, cozinha, sala e exterior privado.",
+                    "caption": "Dois apartamentos T2"
+                },
+                {
+                    "photo": "terraço privado de um apartamento de hóspedes",
+                    "vo": "O alojamento já funciona, mobilado e equipado.",
+                    "caption": "Alojamento em funcionamento"
+                },
+                {
+                    "photo": "piscina",
+                    "vo": "Lá fora, piscina,",
+                    "caption": "Piscina"
+                },
+                {
+                    "photo": "jardins e estacionamento coberto",
+                    "vo": "jardins com rega automática e estacionamento coberto.",
+                    "caption": "Jardins com rega automática"
+                },
+                {
+                    "photo": "zona de refeições ao ar livre junto à piscina",
+                    "vo": "Para viver, receber hóspedes, ou juntar várias gerações da família.",
+                    "caption": "Para várias gerações"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e noventa e cinco mil euros. Para visitar, fale com a Mandy Walker, da IAD Portugal.",
+                    "caption": "695.000 € · Mandy Walker · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O anúncio diz que o negócio de alojamento está 'consolidado', mas não indica o número de registo AL nem dá números de faturação (só 'mediante pedido'). O guião diz apenas 'o alojamento já funciona'. Confirmar que o registo AL está ativo antes de publicar.",
+                "A área bruta e a área útil aparecem iguais (518 m²), o que provavelmente é um erro. Deixei a área construída fora do guião.",
+                "A propriedade fica 'perto de' Pedrógão Grande, mas o anúncio não indica a aldeia nem a distância à vila. Por isso o guião diz 'perto de' e não 'em'.",
+                "A consultora tem nome inglês e o anúncio parece traduzido do inglês. Pode valer a pena enviar a mensagem também em inglês e oferecer legendas em inglês no vídeo."
+            ],
+            "message": "Boa tarde Sra. Mandy, fiz este vídeo da sua moradia com alojamento turístico perto de Pedrógão Grande para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 7 quartos de 518 m² em Pedrogao Grande",
+            "price": 695000,
+            "details": {
+                "Preço": "695 000 €",
+                "Localização": "Pedrogao Grande, 3270-078",
+                "Referência": "1040827",
+                "Área Bruta m²": "518",
+                "Área Total do Lote m²": "3037",
+                "Quartos": 7,
+                "Certificado Energético": "D",
+                "Características": "518 m² área bruta, 518 m² úteis, 5 casas de banho, Jardim, 2 estacionamentos, Terraço, Piscina, Sala de estar"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Mandy Walker - and phone number - +351927627395. Agency: IAD Portugal.\nThe agent's photo is Mandy Walker.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa com negócio de alojamento, perto de Pedrógão Grande.».\n\nSuggested scenes (photo → on-screen caption):\n- vista geral da propriedade com piscina → «Perto de Pedrógão Grande»\n- vista aérea do terreno → «Mais de 3.000 m² de terreno»\n- sala da casa principal → «Casa principal»\n- quarto em suite da casa principal → «Dois quartos em suite»\n- apartamento de um quarto → «Apartamento independente»\n- cozinha de um apartamento de hóspedes → «Dois apartamentos T2»\n- terraço privado de um apartamento de hóspedes → «Alojamento em funcionamento»\n- piscina → «Piscina»\n- jardins e estacionamento coberto → «Jardins com rega automática»\n- zona de refeições ao ar livre junto à piscina → «Para várias gerações»\n- end card → «695.000 € · Mandy Walker · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 7 quartos de 518 m² em Pedrogao Grande\nPreço\n695 000 €\nLocalização\nPedrogao Grande, 3270-078\nReferência\n1040827\nÁrea Bruta m²\n518\nÁrea Total do Lote m²\n3037\nQuartos\n7\nCertificado Energético\nD\nCaracterísticas\n518 m² área bruta, 518 m² úteis, 5 casas de banho, Jardim, 2 estacionamentos, Terraço, Piscina, Sala de estar\n\nDescrição\nUma casa, um estilo de vida e um negócio de alojamento consolidado no centro de Portugal\n\nSituada num terreno privado com pouco mais de 3 000 m², perto de Pedrógão Grande, esta propriedade de 518 m² combina uma bela casa particular com três espaços independentes de alojamento para hóspedes, uma piscina, jardins paisagísticos e um negócio de alojamento turístico consolidado.\n\nPara quem sonha em mudar-se para Portugal, mas ainda não está pronto para se reformar, procura uma fonte de rendimento a par de um novo estilo de vida, ou talvez esteja à procura de uma propriedade onde várias gerações da família possam viver de forma independente, mas em conjunto, esta é uma propriedade que vale a pena analisar com atenção.\n\nUma propriedade. Quatro espaços habitacionais separados.\n\nNo coração da propriedade encontra-se a residência privada dos proprietários... uma habitação espaçosa e confortável com dois quartos com casa de banho privativa, concebida para ser habitada durante todo o ano.\n\nAo lado, encontra-se um apartamento independente com um quarto, que proporciona alojamento totalmente independente, se necessário.\n\nExistem ainda dois apartamentos independentes para hóspedes, com dois quartos cada, cada um com a sua própria cozinha, sala de estar, casa de banho e área exterior privada.\n\nÉ esta configuração que torna a propriedade tão interessante.\n\nOs hóspedes podem desfrutar do seu próprio espaço e independência, enquanto os proprietários mantêm a sua privacidade. Isto é algo que nem sempre é fácil de conseguir num negócio de alojamento em casa.\n\nUm negócio consolidado, não apenas \"potencial\"\n\nO alojamento para hóspedes já está mobilado e equipado para arrendamentos de férias, com cozinhas, eletrodomésticos, televisões, equipamento Wi-Fi, roupa de cama, toalhas, mobiliário de exterior e o equipamento prático necessário para gerir o alojamento.\n\nOs atuais proprietários têm gerido o negócio eles próprios, mantendo os custos operacionais baixos e optando por um nível de atividade que se adapta ao seu estilo de vida.\n\nIsto é importante.\n\nNão está simplesmente a comprar uma casa grande onde alguém sugere que possa vir a criar um negócio de turismo um dia. Aqui existe já uma operação de alojamento em funcionamento, com a infraestrutura e o equipamento já instalados.\n\nMais informações sobre o negócio podem ser disponibilizadas a compradores genuinamente interessados.\n\nA vida ao ar livre é uma parte importante da vida aqui\n\nA propriedade situa-se num terreno consolidado com cerca de 3 000 m², proporcionando muito espaço sem a responsabilidade de manter uma propriedade de grandes dimensões.\n\nNo seu centro encontra-se a piscina, rodeada por áreas para relaxar, fazer refeições ao ar livre e desfrutar dos longos verões portugueses.\n\nOs jardins estão consolidados e dispõem de um sistema de rega automático, enquanto as diferentes áreas de alojamento foram organizadas de forma a que os hóspedes possam desfrutar dos seus próprios terraços e espaços exteriores.\n\nExiste também estacionamento coberto e um espaço de arrumação útil.\n\nMais do que uma propriedade para arrendamento de férias\n\nEmbora o negócio de alojamento existente seja uma atração óbvia, não é a única forma como esta propriedade poderia funcionar.\n\nPoderia tornar-se uma excecional casa multigeracional.\n\nPais, filhos adultos ou família alargada poderiam viver de forma independente, mantendo-se na mesma propriedade.\n\nPoderia ser ideal para quem deseja acolher pequenos grupos, workshops ou retiros, sujeito a quaisquer licenças ou autorizações necessárias.\n\nOu talvez pretenda simplesmente uma casa espaçosa em Portugal, onde amigos e familiares em visita possam ter um local genuinamente independente para ficar.\n\nA flexibilidade é um dos seus maiores pontos fortes.\n\nUma mudança diferente para Portugal\n\nPara muitas pessoas, mudar-se para Portugal não significa deixar de trabalhar por completo.\n\nTrata-se de fazer as coisas de forma diferente.\n\nViver num local bonito, ter mais tempo, trabalhar por conta própria e gerar um rendimento que se adapte ao estilo de vida que deseja levar.\n\nEsta propriedade já oferece as bases exatamente para isso.\n\nPode viver aqui, receber hóspedes, dar continuidade ao negócio de alojamento existente e decidir por si mesmo até que ponto — ou em que medida — pretende desenvolvê-lo.\n\nE quando os hóspedes regressarem a casa?\n\nA piscina, os jardins e o estilo de vida do Centro de Portugal voltam a ser seus.\n\nInformações sobre o negócio e mais pormenores estão disponíveis mediante pedido para potenciais compradores sérios.\n\nCaracterísticas principais\nÁrea construída de aproximadamente 518 m²\nTerreno com aproximadamente 3 000 m²\nResidência privada + três espaços independentes de alojamento para hóspedes\nPiscina | jardins | estacionamento coberto | negócio de alojamento já estabelecido",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia com negócio de alojamento perto de Pedrógão Grande, à venda por 695 mil euros",
+            "summary": "Propriedade com casa principal, apartamento independente e dois apartamentos para hóspedes, num terreno com mais de 3 mil m² no concelho de Pedrógão Grande. É um concelho do interior do distrito de Leiria, junto à albufeira do Cabril, no rio Zêzere.",
+            "timeline": [
+                {
+                    "label": "Censos: 3390 habitantes no concelho",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Preço mediano da habitação sobe 16,8% em Portugal",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Moradia anunciada por 695 mil euros",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 695000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área do imóvel anunciado",
+                    "value": 518,
+                    "unit": "m²"
+                },
+                {
+                    "label": "População do concelho (Censos 2021)",
+                    "value": 3390,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho",
+                    "value": 129,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano em Portugal (2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Pedrógão Grande vs. média nacional",
+                    "left": {
+                        "title": "Pedrógão Grande",
+                        "points": [
+                            "3390 habitantes (2021)",
+                            "Cerca de 129 km²",
+                            "Interior do distrito de Leiria"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal (2025)",
+                        "points": [
+                            "Preço mediano de 2076 €/m²",
+                            "Subida de 16,8% num ano",
+                            "Lisboa é o concelho mais caro: 4875 €/m²"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O alojamento já está a funcionar, mobilado e equipado",
+                "Uma casa principal, um apartamento independente e dois apartamentos para hóspedes",
+                "Piscina, jardins com rega automática e estacionamento coberto",
+                "Perto da albufeira do Cabril, com praia fluvial e desportos náuticos",
+                "Em 2025, o preço mediano da habitação em Portugal subiu 16,8%"
+            ],
+            "sources": [
+                "https://www.custojusto.pt/leiria/imobiliario/moradias/casa-villa-t7-em-pedrogao-gr-44168225",
+                "https://www.imovirtual.com/pt/resultados/comprar/moradia/leiria/pedrogao-grande",
+                "https://www.idealista.pt/news/node/68287",
+                "https://aldeiasportuguesas.pt/leiria/pedrogao-grande/",
+                "https://www.pordata.pt/en/municipalities/summary+table/pedrogao+grande-828151",
+                "https://en.wikipedia.org/wiki/Pedr%C3%B3g%C3%A3o_Grande",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://debug.flagra.pt/en/pedrogao-grande/praia-fluvial-do-cabril"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia com alojamento já a funcionar perto de Pedrógão Grande",
+            "description": "Quatro casas num só terreno de 3.037 m², perto de Pedrógão Grande\n\nA casa principal tem dois quartos, ambos com casa de banho privativa. Ao lado fica um apartamento independente com um quarto.\nHá ainda dois apartamentos para hóspedes, cada um com dois quartos, cozinha, sala e exterior privado. O alojamento já está a funcionar e vem mobilado e equipado.\nNo exterior há piscina, jardins com rega automática e estacionamento coberto. Serve para viver, receber hóspedes ou juntar várias gerações da família.\n\nMoradia · 7 quartos · 5 casas de banho · 518 m² · Certificado D · 695.000 € · Ref. 1040827\n\nPara agendar uma visita, contacte a Mandy Walker, da IAD Portugal: +351 927 627 395",
+            "tags": [
+                "imobiliario",
+                "moradiaavenda",
+                "pedrogaogrande",
+                "centrodeportugal",
+                "alojamentolocal",
+                "casacompiscina",
+                "investimentoimobiliario",
+                "casasdecampo",
+                "negocioturistico",
+                "iadportugal",
+                "casasportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1040827-a6ddp",
+    "created_at": "2026-10-19T13:57:48+00:00",
+    "updated_at": "2026-10-19T14:41:08+00:00",
+    "source_path": "clips/uploads/nrVagOfj6RNmYCHfW38dsPPd0bqsr7G2MggPsRZT.mp3",
+    "images": [
+        {
+            "id": "img_69f269e7",
+            "path": "clips/uploads/qRQrDn0GAetPKPxaoIJEskCTLSLT6NphHVjpEwxs.jpg",
+            "description": "Vista aérea da propriedade: casas de telhado laranja, piscina com relvado, acesso em gravilha e estacionamento coberto.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_be62bf2e",
+            "path": "clips/uploads/eFV8XRQvUOwxvxi1nc9OmFEHjnLIEcMFTcZFIBXq.jpg",
+            "description": "Vista aérea panorâmica: aldeia entre florestas, a propriedade com piscina em primeiro plano e albufeira ao fundo.",
+            "name": "01a116c51f5b0f31f5d6d7be16f16e5d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eec041fb",
+            "path": "clips/uploads/QK00isqFt8yP2Hcm9crR7BHI34TpHOX2k6mHHmsC.jpg",
+            "description": "Jardim e piscina em frente às casas brancas, com chapéus de sol, espreguiçadeiras e relvado sob uma árvore.",
+            "name": "01a116c5fe065b22e3dce46394211d40.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8a7da4e4",
+            "path": "clips/uploads/cA40kI9oSkntZkvdxc8lq6Ga7NBhoUX6ibQl67XQ.jpg",
+            "description": "Piscina rodeada de relvado e muro branco, com espreguiçadeiras, chapéus de sol e canteiros floridos.",
+            "name": "01a116c62fbf0576450891657328269e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_46939862",
+            "path": "clips/uploads/ZWq8dlpYNyRZV2fEzNz1Y1oASHXwfCJ3gcUaapfe.jpg",
+            "description": "Piscina em primeiro plano refletindo árvores; jardim com relvado, cadeiras de madeira e caminho em gravilha.",
+            "name": "01a116c653918fa369caac0eb2bfa600.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f75743f6",
+            "path": "clips/uploads/280MxLOYZHY16L3xJPlv86n1U4gLIkke5sokL92e.jpg",
+            "description": "Piscina vista de cima, entre árvores, com espreguiçadeiras azuis, relvado e muro branco ao fundo.",
+            "name": "01a116c673d7116df356ec20bf9af1bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_73f9f128",
+            "path": "clips/uploads/0rIFJHi8wzOoafERD2DpbDJZVJcaVQeQk7quELyg.jpg",
+            "description": "Alpendre coberto com mesa de jantar, virado para relvado, sobreiros e oliveiras do terreno.",
+            "name": "01a116c6f340561285d19257a6e9bf42.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_38132a78",
+            "path": "clips/uploads/oA6cfqamMy7fVNxpzMwLShm3t2OeMbLNKqVqVmL0.jpg",
+            "description": "Terreno arborizado com relva, sobreiros e árvores de fruto jovens, numa zona tranquila da propriedade.",
+            "name": "01a1171899db7d5945e7b1b2366f642c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1eb87b27",
+            "path": "clips/uploads/dhcWMduq92OcgCmNL4r1RNJLUW6GV4HeCdqUraG8.jpg",
+            "description": "Piscina iluminada à noite, com lua laranja no céu, espreguiçadeiras e apartamento envidraçado ao lado.",
+            "name": "01a116c78eb1cba1d5cc5bd7322f0c39.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_1aea2639",
+            "path": "clips/uploads/bmpCWcCXxcyi39LnzklT1fZgUA7mJSN3Lr51TtaH.jpg",
+            "description": "Alpendre iluminado à noite com sofás de vime, mesa de jantar e lareira exterior acesa.",
+            "name": "01a116c72b76930f4f86f619e70bb261.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_a30c6072",
+            "path": "clips/uploads/78hwaSjY46FM3xqamU48hQ34GNI6nzZzVStoZ080.jpg",
+            "description": "Terraço coberto com sofás de vime e almofadas vermelhas, mesa de refeições e relvado ao sol.",
+            "name": "01a116c6cd0e5007d3bc5eaf722ea85b.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_027c35df",
+            "path": "clips/uploads/8BQu7ny3mwoEdQMFF9jqDE2eG19mYZ4MjZfHBVz9.jpg",
+            "description": "Alpendre coberto com cadeirões de vime vermelhos, churrasqueira e vista para jardim arborizado.",
+            "name": "01a116c6a494880146fb337859b0fd16.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_02df0559",
+            "path": "clips/uploads/H0IPFt5LEtH43GLqRFcNT0ch1w0GH75D4dJexosC.jpg",
+            "description": "Cozinha equipada com armários brancos, mosaico vermelho, micro-ondas, forno e vitrine com louça; mesa em primeiro plano.",
+            "name": "01a116cc4123719f9dbdcd6c836e6f40.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6ebad43b",
+            "path": "clips/uploads/Rvj2V8iOiQOmjEQRUaPJThY7dLxHOL3o8XVcuZNr.jpg",
+            "description": "Cozinha com bancada de granito e lava-loiça, porta de vidro aberta para terraço e jardim.",
+            "name": "01a116cc9a7bbc7e369582369da10ed5.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_44ca62db",
+            "path": "clips/uploads/xJE3HqHEzbT6WaMv2KEAEJLADLAfEEnBMt7PRtPV.jpg",
+            "description": "Hall de entrada com cadeirão antigo, cómoda de madeira, quadros e escadas ao fundo.",
+            "name": "01a116c912d469bd4cef3d8536e19b75.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1734af52",
+            "path": "clips/uploads/Avh8zCTlCBQq6V0xiDvHaGXX0ME5bHW9gron3HwS.jpg",
+            "description": "Sala de estar com sofá de pele, parede de pedra, tapete colorido, televisão e móvel de madeira.",
+            "name": "01a116cbdba16b6fb7a79152cc9db5a4.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_a96dc523",
+            "path": "clips/uploads/GGRSKivnpWNb36JTMsgtjbLMztCGsjeXvCIEJlAM.jpg",
+            "description": "Sala de estar com televisão grande, móvel de madeira, quadro floral colorido e tapete vermelho.",
+            "name": "01a116c99b7182d022674604ce3fd61a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8f3a174c",
+            "path": "clips/uploads/4iDZ8TggbW5LS4HqvoEEx2dlUw8UonnBJwNfoD5n.jpg",
+            "description": "Sala acolhedora à noite com lareira acesa, parede amarela, quadro de vacas e sofá de pele.",
+            "name": "01a116c8c052936141250625b6215169.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_e5fb938d",
+            "path": "clips/uploads/mqgJLluBM5a1Vd4imRPAkLEPEtkt8GVClA3oHlVa.jpg",
+            "description": "Sala de estar com sofá de pele castanho, parede de pedra, candeeiro clássico e estátua de bronze.",
+            "name": "01a11a7ff776b8dd7b4c3d1a17ecd099.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_833b3af3",
+            "path": "clips/uploads/KUCc6LltjmeUZkROaLxA5BWOyN58FfaHauNs6BWP.jpg",
+            "description": "Casa de banho com lavatório branco, sanita, espelho de madeira trabalhada e planta com flor laranja.",
+            "name": "01a1171a92d0f012ed40e9367ccfa959.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ebc49da8",
+            "path": "clips/uploads/pEjFr5nYO4N8tXn5CIKESeeLuxsqyrj7R9vB9euQ.jpg",
+            "description": "Quarto de casal com teto em madeira, duas janelas, ar condicionado, cama de madeira e soalho de madeira.",
+            "name": "01a116cd5151aa01647937781406eb26.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a8f8271a",
+            "path": "clips/uploads/4ky9gpuBEcpvHEW0rulT2sJbAMCxvd7ZRKSIalob.jpg",
+            "description": "Quarto de casal com cama de madeira, dois candeeiros de mesa, tapete colorido e porta para o corredor.",
+            "name": "01a116cde8446d1ad982722068c4e4c6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_013c5032",
+            "path": "clips/uploads/Ih2QpuGY42ugXKPCYUe3N7byPQLL3BYEXZTgjZbl.jpg",
+            "description": "Casa de banho com base de duche ampla em vidro, sanita, móvel lavatório branco e janela.",
+            "name": "01a11716dd138b5f68718c0fe3065532.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f583e932",
+            "path": "clips/uploads/4XqOnqV4O5InLmBMhjVFFD5otFvCD4kUm7olaQir.jpg",
+            "description": "Quarto de casal com cabeceira branca, mesas de cabeceira com candeeiros amarelos, roupeiro branco e tapetes.",
+            "name": "01a116ce649c2b38c1e8a0e926e4838c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_597acee9",
+            "path": "clips/uploads/srWFP1FnHi20D8cV27yCcymHTIcr6XIxcjJPOPLU.jpg",
+            "description": "Casa de banho com lavatório branco, espelho e parede de pastilha em mosaico, teto em madeira.",
+            "name": "01a11a81e13b848f96590f4e07db3e9f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_88f66267",
+            "path": "clips/uploads/9AjK4k5tDYYl9rrLtVvPSMKvNxvovOkzxSXOiyAz.jpg",
+            "description": "Casa de banho com banheira e resguardo, azulejos claros com faixa em mosaico e chão de madeira.",
+            "name": "01a11a82f9ac942030fc23160849c331.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1da814ba",
+            "path": "clips/uploads/sTxJ8jrWppAhu07APQE2L4aOFt45z6sCP9X36PYO.jpg",
+            "description": "Alpendre coberto com cadeiras de madeira e mesa, com vista para a piscina e o relvado.",
+            "name": "01a11717269f632927acfda8262bdac7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_801563fe",
+            "path": "clips/uploads/uuOAPmjQrZ19JjrCBZtPkVYzCnLHJxRkW8wkkz3E.jpg",
+            "description": "Jardim com flores cor-de-rosa, relvado, piscina, caminho de gravilha e anexo branco ao fundo.",
+            "name": "01a11a85277e406e0ffea46062d9bbfb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f3b8a46",
+            "path": "clips/uploads/KylIwskm1IPn70EL59BiZdIPqlOHAYiCjhqAZR0z.jpg",
+            "description": "Terreno amplo com relva e árvores, a casa branca de telhado vermelho ao fundo.",
+            "name": "01a11717cd892dfe757c25693855549b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58b4cbe2",
+            "path": "clips/uploads/rcUQfULWGOs0bGcKp9D5UBEjpOkIqkcO2rDgLTfD.jpg",
+            "description": "Estacionamento coberto com dois carros, pavimento em pedra e piscina com guarda-sóis ao lado.",
+            "name": "01a1171858a210996f352de5ac58cb42.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_05dad9ae",
+            "path": "clips/uploads/13jpOEpyC6RfzjX8m4VDRXQEJBI9xJQ5wrKDnFEH.jpg",
+            "description": "Fachada de casa branca de dois pisos com varanda coberta, esplanada com guarda-sol e jardim com gravilha.",
+            "name": "01a11a87d9ac4a513640b28a343e3af7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74bfb81f",
+            "path": "clips/uploads/Omng0k2lO7aO9vkcsPqUqlo7IAjV6Rd8K9ZubI9Q.jpg",
+            "description": "Pátio exterior com escadas, canteiro florido, varanda de tijolo rendilhado, telhados vermelhos, relvado e oliveira.",
+            "name": "01a11a8761800de776c523f9d5a689de.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_561b1841",
+            "path": "clips/uploads/38BwyA7G1UHhAChmJLu76mitBqyLb2eMmcxujom5.png",
+            "description": "Colagem do apartamento do rés-do-chão: sala com sofás de pele, cozinha, dois quartos, casa de banho e esplanada com vista para a piscina.",
+            "name": "01a11700a1aa083274d317a79da59f1a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_735e8dd7",
+            "path": "clips/uploads/X4y52vJCICdVkKKbVKPYFv63fIYWvBguyElmoyY9.png",
+            "description": "Colagem do apartamento do piso superior: sala, varanda com churrasqueira e vista, cozinha e dois quartos com paredes de pedra.",
+            "name": "01a1170f31a7087d51d04fa83cb4ab0a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bbfc5695",
+            "path": "clips/uploads/ZnH7NGe0rZIlYZ409mc0h2AvPWAYal1KhlK0zC2b.png",
+            "description": "Colagem do apartamento de um quarto: sala com cozinha aberta, quarto de casal, casa de banho com duche e pátio com guarda-sol.",
+            "name": "01a1170f83745af626082a4ef098366b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f79de4bd",
+            "path": "clips/uploads/RcdrGc3zyYjwpEFU7FCBEekBeWVlMFXlNS8jdAD6.png",
+            "description": "Retrato da consultora Mandy Walker, da IAD Portugal.",
+            "name": "Mandy Walker.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6091014b",
+            "path": "clips/uploads/qrr7643atpnIqwCqg5PWM2wFdAYlQV8wSJgTmsiK.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/nrVagOfj6RNmYCHfW38dsPPd0bqsr7G2MggPsRZT.mp3",
+    "transcript": {
+        "duration": 37.91999816894531,
+        "text": "Uma casa com negócio de alojamento, perto de Pedrógão Grande, no centro de Portugal, num terreno com mais de 3 mil metros. A casa principal tem dois quartos, ambos com casa de banho privativa. Ao lado, um apartamento independente com um quarto. E dois apartamentos para hóspedes, com dois quartos cada, cozinha, sala e exterior privado. O alojamento já funciona, mobilado e equipado. Lá fora, piscina, jardins com rega automática e estacionamento coberto. Para viver, receber hóspedes ou juntar várias gerações da família, 695 mil euros. Para visitar, fale com a Mandy Walker, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.20000000298023224
+            },
+            {
+                "word": "casa",
+                "start": 0.20000000298023224,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "com",
+                "start": 0.5600000023841858,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "negócio",
+                "start": 0.7400000095367432,
+                "end": 1.1200000047683716
+            },
+            {
+                "word": "de",
+                "start": 1.1200000047683716,
+                "end": 1.340000033378601
+            },
+            {
+                "word": "alojamento",
+                "start": 1.340000033378601,
+                "end": 1.840000033378601
+            },
+            {
+                "word": "perto",
+                "start": 2.1600000858306885,
+                "end": 2.299999952316284
+            },
+            {
+                "word": "de",
+                "start": 2.299999952316284,
+                "end": 2.5199999809265137
+            },
+            {
+                "word": "Pedrógão",
+                "start": 2.5199999809265137,
+                "end": 2.880000114440918
+            },
+            {
+                "word": "Grande",
+                "start": 2.880000114440918,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "no",
+                "start": 3.619999885559082,
+                "end": 3.7799999713897705
+            },
+            {
+                "word": "centro",
+                "start": 3.7799999713897705,
+                "end": 4
+            },
+            {
+                "word": "de",
+                "start": 4,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "Portugal",
+                "start": 4.239999771118164,
+                "end": 4.559999942779541
+            },
+            {
+                "word": "num",
+                "start": 4.820000171661377,
+                "end": 4.960000038146973
+            },
+            {
+                "word": "terreno",
+                "start": 4.960000038146973,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "com",
+                "start": 5.239999771118164,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "mais",
+                "start": 5.519999980926514,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 5.760000228881836,
+                "end": 6
+            },
+            {
+                "word": "3",
+                "start": 6,
+                "end": 6.340000152587891
+            },
+            {
+                "word": "mil",
+                "start": 6.340000152587891,
+                "end": 6.480000019073486
+            },
+            {
+                "word": "metros",
+                "start": 6.480000019073486,
+                "end": 6.940000057220459
+            },
+            {
+                "word": "A",
+                "start": 7.420000076293945,
+                "end": 7.440000057220459
+            },
+            {
+                "word": "casa",
+                "start": 7.440000057220459,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "principal",
+                "start": 7.619999885559082,
+                "end": 8.140000343322754
+            },
+            {
+                "word": "tem",
+                "start": 8.140000343322754,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "dois",
+                "start": 8.380000114440918,
+                "end": 8.739999771118164
+            },
+            {
+                "word": "quartos",
+                "start": 8.739999771118164,
+                "end": 9.140000343322754
+            },
+            {
+                "word": "ambos",
+                "start": 9.600000381469727,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "com",
+                "start": 9.640000343322754,
+                "end": 9.979999542236328
+            },
+            {
+                "word": "casa",
+                "start": 9.979999542236328,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "de",
+                "start": 10.119999885559082,
+                "end": 10.4399995803833
+            },
+            {
+                "word": "banho",
+                "start": 10.4399995803833,
+                "end": 10.4399995803833
+            },
+            {
+                "word": "privativa",
+                "start": 10.4399995803833,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "Ao",
+                "start": 11.479999542236328,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "lado",
+                "start": 11.600000381469727,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "um",
+                "start": 12.079999923706055,
+                "end": 12.239999771118164
+            },
+            {
+                "word": "apartamento",
+                "start": 12.239999771118164,
+                "end": 12.579999923706055
+            },
+            {
+                "word": "independente",
+                "start": 12.579999923706055,
+                "end": 13.279999732971191
+            },
+            {
+                "word": "com",
+                "start": 13.279999732971191,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "um",
+                "start": 13.520000457763672,
+                "end": 14.0600004196167
+            },
+            {
+                "word": "quarto",
+                "start": 14.0600004196167,
+                "end": 14.0600004196167
+            },
+            {
+                "word": "E",
+                "start": 14.420000076293945,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "dois",
+                "start": 14.640000343322754,
+                "end": 14.800000190734863
+            },
+            {
+                "word": "apartamentos",
+                "start": 14.800000190734863,
+                "end": 15.220000267028809
+            },
+            {
+                "word": "para",
+                "start": 15.220000267028809,
+                "end": 15.640000343322754
+            },
+            {
+                "word": "hóspedes",
+                "start": 15.640000343322754,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "com",
+                "start": 16.18000030517578,
+                "end": 16.34000015258789
+            },
+            {
+                "word": "dois",
+                "start": 16.34000015258789,
+                "end": 16.600000381469727
+            },
+            {
+                "word": "quartos",
+                "start": 16.600000381469727,
+                "end": 16.860000610351562
+            },
+            {
+                "word": "cada",
+                "start": 16.860000610351562,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "cozinha",
+                "start": 17.780000686645508,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "sala",
+                "start": 18.459999084472656,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "e",
+                "start": 18.459999084472656,
+                "end": 18.81999969482422
+            },
+            {
+                "word": "exterior",
+                "start": 18.81999969482422,
+                "end": 19.1200008392334
+            },
+            {
+                "word": "privado",
+                "start": 19.1200008392334,
+                "end": 19.719999313354492
+            },
+            {
+                "word": "O",
+                "start": 20.040000915527344,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "alojamento",
+                "start": 20.18000030517578,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "já",
+                "start": 20.579999923706055,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "funciona",
+                "start": 20.920000076293945,
+                "end": 21.420000076293945
+            },
+            {
+                "word": "mobilado",
+                "start": 21.739999771118164,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 22.239999771118164,
+                "end": 22.5
+            },
+            {
+                "word": "equipado",
+                "start": 22.5,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "Lá",
+                "start": 23.5,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "fora",
+                "start": 23.540000915527344,
+                "end": 23.81999969482422
+            },
+            {
+                "word": "piscina",
+                "start": 24.34000015258789,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "jardins",
+                "start": 24.899999618530273,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "com",
+                "start": 25.059999465942383,
+                "end": 25.479999542236328
+            },
+            {
+                "word": "rega",
+                "start": 25.479999542236328,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "automática",
+                "start": 25.520000457763672,
+                "end": 26.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 26.100000381469727,
+                "end": 26.440000534057617
+            },
+            {
+                "word": "estacionamento",
+                "start": 26.440000534057617,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "coberto",
+                "start": 26.959999084472656,
+                "end": 27.760000228881836
+            },
+            {
+                "word": "Para",
+                "start": 27.760000228881836,
+                "end": 28.040000915527344
+            },
+            {
+                "word": "viver",
+                "start": 28.040000915527344,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "receber",
+                "start": 29.020000457763672,
+                "end": 29.020000457763672
+            },
+            {
+                "word": "hóspedes",
+                "start": 29.020000457763672,
+                "end": 29.579999923706055
+            },
+            {
+                "word": "ou",
+                "start": 29.579999923706055,
+                "end": 29.719999313354492
+            },
+            {
+                "word": "juntar",
+                "start": 29.719999313354492,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "várias",
+                "start": 30.079999923706055,
+                "end": 30.459999084472656
+            },
+            {
+                "word": "gerações",
+                "start": 30.459999084472656,
+                "end": 30.84000015258789
+            },
+            {
+                "word": "da",
+                "start": 30.84000015258789,
+                "end": 31.059999465942383
+            },
+            {
+                "word": "família",
+                "start": 31.059999465942383,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "695",
+                "start": 31.940000534057617,
+                "end": 33.13999938964844
+            },
+            {
+                "word": "mil",
+                "start": 33.13999938964844,
+                "end": 33.47999954223633
+            },
+            {
+                "word": "euros",
+                "start": 33.47999954223633,
+                "end": 33.880001068115234
+            },
+            {
+                "word": "Para",
+                "start": 34.36000061035156,
+                "end": 34.459999084472656
+            },
+            {
+                "word": "visitar",
+                "start": 34.459999084472656,
+                "end": 35.040000915527344
+            },
+            {
+                "word": "fale",
+                "start": 35.34000015258789,
+                "end": 35.34000015258789
+            },
+            {
+                "word": "com",
+                "start": 35.34000015258789,
+                "end": 35.52000045776367
+            },
+            {
+                "word": "a",
+                "start": 35.52000045776367,
+                "end": 35.63999938964844
+            },
+            {
+                "word": "Mandy",
+                "start": 35.63999938964844,
+                "end": 35.900001525878906
+            },
+            {
+                "word": "Walker",
+                "start": 35.900001525878906,
+                "end": 36.2599983215332
+            },
+            {
+                "word": "da",
+                "start": 36.5,
+                "end": 36.70000076293945
+            },
+            {
+                "word": "IAD",
+                "start": 36.70000076293945,
+                "end": 37.060001373291016
+            },
+            {
+                "word": "de",
+                "start": 37.060001373291016,
+                "end": 37.380001068115234
+            },
+            {
+                "word": "Portugal",
+                "start": 37.380001068115234,
+                "end": 37.68000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.91999816894531,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.9000000000000004,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "ALOJAMENTO EM PEDRÓGÃO GRANDE",
+                        "params": {
+                            "src": "img_69f269e7",
+                            "avatar": "img_f79de4bd",
+                            "logo": "img_6091014b",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "695.000 €",
+                            "location": "LEIRIA · PEDRÓGÃO GRANDE",
+                            "title": "CASA COM NEGÓCIO DE ALOJAMENTO",
+                            "facts": "518 m² · 7 quartos · 5 WC · piscina",
+                            "cta": "Ligue já +351 927 627 395",
+                            "name": "Mandy Walker",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.9000000000000004,
+                "end": 7.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "MAIS DE 3.000 m² DE TERRENO",
+                        "params": {
+                            "src": "img_be62bf2e",
+                            "src2": "img_2f3b8a46"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.3,
+                "end": 9.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "CASA PRINCIPAL",
+                        "params": {
+                            "src": "img_1734af52",
+                            "src2": "img_a96dc523",
+                            "src3": "img_8f3a174c",
+                            "src4": "img_e5fb938d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.4,
+                "end": 11.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "DOIS QUARTOS EM SUITE",
+                        "params": {
+                            "src": "img_ebc49da8",
+                            "src2": "img_a8f8271a",
+                            "src3": "img_013c5032",
+                            "src4": "img_88f66267",
+                            "src5": "img_833b3af3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.5,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "APARTAMENTO INDEPENDENTE",
+                        "params": {
+                            "src": "img_bbfc5695",
+                            "src2": "img_597acee9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 17.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DOIS APARTAMENTOS T2",
+                        "params": {
+                            "src": "img_561b1841",
+                            "src2": "img_735e8dd7",
+                            "src3": "img_02df0559",
+                            "src4": "img_f583e932"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.5,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Cozinha|Sala|Exterior privado",
+                        "params": {
+                            "src": "img_6ebad43b",
+                            "title": "EM CADA APARTAMENTO",
+                            "items": [
+                                "Cozinha",
+                                "Sala",
+                                "Exterior privado"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 23.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "ALOJAMENTO EM FUNCIONAMENTO",
+                        "params": {
+                            "src": "img_a30c6072",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.4,
+                "end": 25.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "PISCINA",
+                        "params": {
+                            "src": "img_eec041fb",
+                            "src2": "img_8a7da4e4",
+                            "src3": "img_46939862",
+                            "src4": "img_f75743f6",
+                            "src5": "img_1eb87b27"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.8,
+                "end": 27.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "JARDINS COM REGA AUTOMÁTICA",
+                        "params": {
+                            "src": "img_801563fe",
+                            "src2": "img_38132a78",
+                            "src3": "img_74bfb81f",
+                            "src4": "img_58b4cbe2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.9,
+                "end": 31.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "PARA VÁRIAS GERAÇÕES",
+                        "params": {
+                            "src": "img_73f9f128",
+                            "src2": "img_1da814ba",
+                            "src3": "img_027c35df",
+                            "src4": "img_1aea2639",
+                            "src5": "img_44ca62db"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.8,
+                "end": 34.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "695.000 €",
+                        "params": {
+                            "src": "img_05dad9ae",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.3,
+                "end": 37.91999816894531,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Mandy Walker",
+                        "params": {
+                            "src": "img_f79de4bd",
+                            "name": "Mandy Walker",
+                            "phone": "+351 927 627 395",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1040827-a6ddp/clip.mp4",
+    "error": null
+}

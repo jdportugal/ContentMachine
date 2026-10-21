@@ -1,0 +1,1379 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T3 com 3 terraços e vista panorâmica em Santa Iria de Azoia",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t3-loures-santa-iria-de-azoia-sao-joao-da-talha-e-bobadela/120612855-40",
+            "agent": "Ricardo Estêvão",
+            "phone": "+351 966 235 727",
+            "agency": "RE/MAX Expo",
+            "hook": "Três terraços e vista desafogada, em Santa Iria de Azóia.",
+            "voiceover": "Três terraços e vista desafogada, em Santa Iria de Azóia. Uma zona tranquila em Loures, com acesso rápido a Lisboa pela A1 e pelo IC2. Uma moradia de 2023, com mais de cento e cinquenta metros de área útil. Três quartos e quatro casas de banho, distribuídos por vários pisos. No rés-do-chão, um quarto que pode servir de escritório, e um terraço. No piso superior, dois terraços com vista panorâmica. Tem ainda uma box fechada, para estacionar e arrumar. Para viver em família, perto de Lisboa. Setecentos e dez mil euros. Para visitar, fale com o Ricardo Estêvão, da RE/MAX Expo.",
+            "scenes": [
+                {
+                    "photo": "terraço superior com vista panorâmica (plano aberto)",
+                    "vo": "Três terraços e vista desafogada, em Santa Iria de Azóia.",
+                    "caption": "Santa Iria de Azóia"
+                },
+                {
+                    "photo": "vista da envolvente / rua tranquila",
+                    "vo": "Uma zona tranquila em Loures, com acesso rápido a Lisboa pela A1 e pelo IC2.",
+                    "caption": "A1 e IC2 perto"
+                },
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Uma moradia de 2023, com mais de cento e cinquenta metros de área útil.",
+                    "caption": "Construção de 2023"
+                },
+                {
+                    "photo": "sala com luz natural",
+                    "vo": "Três quartos e quatro casas de banho, distribuídos por vários pisos.",
+                    "caption": "Três quartos, quatro WC"
+                },
+                {
+                    "photo": "quarto do rés-do-chão",
+                    "vo": "No rés-do-chão, um quarto que pode servir de escritório,",
+                    "caption": "Quarto ou escritório"
+                },
+                {
+                    "photo": "terraço do rés-do-chão",
+                    "vo": "e um terraço.",
+                    "caption": "Terraço no rés-do-chão"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "No piso superior,",
+                    "caption": "Quatro casas de banho"
+                },
+                {
+                    "photo": "terraço do piso superior com vista",
+                    "vo": "dois terraços com vista panorâmica.",
+                    "caption": "Vista panorâmica"
+                },
+                {
+                    "photo": "box fechada",
+                    "vo": "Tem ainda uma box fechada, para estacionar e arrumar.",
+                    "caption": "Box fechada"
+                },
+                {
+                    "photo": "segundo terraço superior / vista ao fim do dia",
+                    "vo": "Para viver em família, perto de Lisboa.",
+                    "caption": "Perto de Lisboa"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Setecentos e dez mil euros. Para visitar, fale com o Ricardo Estêvão, da RE/MAX Expo.",
+                    "caption": "710.000 € · Ricardo Estêvão · RE/MAX Expo"
+                }
+            ],
+            "flags": [
+                "Estacionamento: os detalhes indicam 'Estacionamento: Não', mas 'Garagem: Sim' e o texto refere uma box fechada. Usei 'box fechada', porque o texto e o campo da garagem coincidem. Confirmar com o consultor.",
+                "Pisos: o texto diz 'vários pisos', mas só descreve o rés-do-chão e o piso superior. Não diz onde ficam os outros dois quartos nem as quatro casas de banho, por isso o vídeo não detalha a distribuição.",
+                "Preço: 710.000 € por 154 m² dá cerca de 4.600 €/m². É alto para Santa Iria de Azóia, mas plausível numa construção de 2023 com vista. Confirmar o preço. O hook não usa o preço.",
+                "Não há fotos da sala nem da cozinha descritas no anúncio. As cenas 4 e 7 usam sala e casa de banho só como imagem de apoio; o VO não descreve essas divisões."
+            ],
+            "message": "Boa tarde Sr. Ricardo,\nO meu nome é João Ferreira.\n\nVi a moradia em Santa Iria de Azóia que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Ricardo Estêvão - and phone number - +351 966 235 727. Agency: RE/MAX Expo.\nThe agent's photo is Ricardo Estêvão.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Três terraços e vista desafogada, em Santa Iria de Azóia.».\n\nSuggested scenes (photo → on-screen caption):\n- terraço superior com vista panorâmica (plano aberto) → «Santa Iria de Azóia»\n- vista da envolvente / rua tranquila → «A1 e IC2 perto»\n- fachada da moradia → «Construção de 2023»\n- sala com luz natural → «Três quartos, quatro WC»\n- quarto do rés-do-chão → «Quarto ou escritório»\n- terraço do rés-do-chão → «Terraço no rés-do-chão»\n- casa de banho → «Quatro casas de banho»\n- terraço do piso superior com vista → «Vista panorâmica»\n- box fechada → «Box fechada»\n- segundo terraço superior / vista ao fim do dia → «Perto de Lisboa»\n- end card → «710.000 € · Ricardo Estêvão · RE/MAX Expo»\n\nHere are the house details:\n\nMoradia T3 à venda em Santa Iria de Azoia, São João da Talha e Bobadela, Loures\nPreço\n710 000 €\nLocalização\nSanta Iria de Azoia, São João da Talha e Bobadela, Loures, Lisboa\nReferência\n120612855-40\nÁrea Útil m²\n154\nQuartos\n3\nWC/Casas de banho\n4\nAno de Construção\n2023\nEstacionamento\nNão\nGaragem\nSim\nElevador\nNão\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p>Moradia T3 situada em Santa Iria de Azóia, destacando-se pelas suas excelentes áreas, luminosidade e localização privilegiada numa zona tranquila, onde a vista desafogada assume um papel de destaque.</p>\n<br/>\n<p>Distribuída por vários pisos, esta moradia oferece uma excelente funcionalidade e conforto para toda a família. Ao nível do rés do chão encontra-se um quarto, ideal para receber visitas, criar um escritório ou proporcionar maior comodidade no dia a dia, bem como um agradável terraço que convida a momentos de lazer ao ar livre.</p>\n<br/>\n<p>A propriedade dispõe ainda de uma box fechada, garantindo segurança e praticidade para estacionamento e arrumação.</p>\n<br/>\n<p>No piso superior, dois magníficos terraços proporcionam uma vista única e panorâmica sobre a envolvente, criando o cenário perfeito para desfrutar de momentos de descontração, convívio ou simplesmente apreciar a paisagem.</p>\n<br/>\n<p>A localização combina tranquilidade e conveniência, beneficiando de excelentes acessos ao centro de Lisboa e às principais zonas envolventes, através da A1 e do IC2, permitindo deslocações rápidas e eficientes.</p>\n<br/>\n<p>Uma oportunidade única para quem procura qualidade de vida, espaço e uma vista verdadeiramente diferenciadora.</p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T3 em Santa Iria de Azoia, Loures",
+            "summary": "A moradia fica na União das Freguesias de Santa Iria de Azoia, São João da Talha e Bobadela, no concelho de Loures, junto a Lisboa. Em 2025, o preço mediano das casas vendidas em Portugal subiu 16,8%, segundo o INE.",
+            "timeline": [
+                {
+                    "label": "Criação da União das Freguesias",
+                    "sublabel": "2013"
+                },
+                {
+                    "label": "Censos: 44.453 residentes na freguesia",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Construção da moradia",
+                    "sublabel": "2023"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m²",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Residentes na freguesia (Censos 2021)",
+                    "value": 44453,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Preço mediano das casas em Portugal (2025, INE)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano em Portugal (2025, INE)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Fica na União das Freguesias de Santa Iria de Azoia, São João da Talha e Bobadela, no concelho de Loures",
+                "A freguesia tinha 44.453 residentes nos Censos 2021",
+                "Em 2025, as casas vendidas em Portugal custaram em média 2.076 €/m² (valor mediano), mais 16,8% do que em 2024 (INE)",
+                "Moradia de 2023 com 3 quartos, 4 casas de banho, 3 terraços e box fechada, por 710.000 €"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Santa_Iria_de_Azoia,_S%C3%A3o_Jo%C3%A3o_da_Talha_e_Bobadela",
+                "https://www.cm-loures.pt/media/pdf/PDF20250530094733122.pdf",
+                "https://www.idealista.pt/news/imobiliario/habitacao/2026/04/24/75156-precos-das-casas-sobem-16-8-em-2025-para-2-076-euros-por-m2",
+                "https://www.jn.pt/economia/artigo/precos-das-casas-sobem-168-em-2025-para-2076-eurosm2/18076607",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T3 com 3 terraços e vista panorâmica em Santa Iria de Azoia",
+            "description": "Moradia de 2023 com mais de 150 m² de área útil, três quartos e quatro casas de banho, numa zona tranquila de Loures com acesso rápido a Lisboa pela A1 e pelo IC2. Tem três terraços, dois deles com vista panorâmica, e uma box fechada para estacionar e arrumar. Por 710 mil euros. Para visitar, fale com o Ricardo Estevam da RE/MAX Expo.",
+            "tags": [
+                "moradia",
+                "Santa Iria de Azoia",
+                "Loures",
+                "imobiliário",
+                "casa à venda",
+                "terraço",
+                "RE/MAX",
+                "Lisboa"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-120612855-40-lscbp",
+    "created_at": "2026-10-12T12:22:32+00:00",
+    "updated_at": "2026-10-12T12:49:01+00:00",
+    "source_path": "clips/uploads/2Wyo9pgbonHbUKMgH8vHeEC0polJCJw3dpCxWvvH.mp3",
+    "images": [
+        {
+            "id": "img_3c187b24",
+            "path": "clips/uploads/PzPVQv3xr48mEweuzeOx1poweHz69XaJkRH7tvIN.jpg",
+            "description": "Fachada da moradia moderna em banda, três pisos com varandas de vidro, portão e box na rua.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0c13a871",
+            "path": "clips/uploads/MFpGebQ9aWp614Busn4tt1VzyRNJulJKqfByKIiD.jpg",
+            "description": "Sala de estar ampla com sofá bege, almofadas amarelas, chão em mármore e cortinados claros.",
+            "name": "e177251a-5def-42e9-94f3-be90482ee4e0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2250c3dc",
+            "path": "clips/uploads/TfbmUTtveqSRzJJdk2hqvyt3APG6jXyNEy2iE4Z9.jpg",
+            "description": "Sala de estar com sofá chaise longue, poltrona amarela, escada com guarda de vidro e mesa dourada.",
+            "name": "abfa7e1a-8920-4e83-b431-a507154742b4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b0af075e",
+            "path": "clips/uploads/v2XhWXIbzGd7VqB7TKFnJHmrpnJB8I9z9Ig61JhO.jpg",
+            "description": "Cozinha moderna branca com ilha, frigorífico americano inox, exaustor suspenso e zona de refeições ao fundo.",
+            "name": "644456c1-a307-4081-8aaf-e8d6c96c1329.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c1889063",
+            "path": "clips/uploads/z3GgaUkalJuOQqGiVuuC2tdOzWkPogJRgD9zR4cd.jpg",
+            "description": "Cozinha aberta com sala de jantar, mesa branca, portas de vidro para o jardim com relva.",
+            "name": "b5f69c30-a91d-46e5-80c5-ac015eedb47a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_449b98f0",
+            "path": "clips/uploads/BMsOxfD2MtO9quB00XxStK0coZJvL6vT6svNwxEp.jpg",
+            "description": "Zona de jantar e cozinha com ilha, garrafeira, janelas amplas para quintal com trampolim.",
+            "name": "9e646ac5-1798-41e7-b468-83c4196d587e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_716e9f64",
+            "path": "clips/uploads/8Y2KyFPFVew0hZflpoGnMlbCsc1kjBxRQKQVr4q8.jpg",
+            "description": "Terraço/quintal com relva sintética, mesa de madeira, churrasqueira em tijolo e parede verde vertical.",
+            "name": "aa878ad0-8c72-481f-ad69-31fa7b7140ad.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_72f4cd4f",
+            "path": "clips/uploads/yaEuObi1SmSSGg0Xj1OQdqb38i6Z3l5pBQLBsmwp.jpg",
+            "description": "Terraço com churrasqueira em tijolo, bancada com lava-loiça, deck de madeira e mesa no relvado.",
+            "name": "c7fafb6f-5270-46a0-bc63-df19a9f43cd8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9d36b4a2",
+            "path": "clips/uploads/E9CdaKg0BwCY4HWI8do8zQrVG3nLxQu8cI5veSQ2.jpg",
+            "description": "Terraço do rés-do-chão com relvado, mesa de madeira, casinha infantil e acesso direto à cozinha.",
+            "name": "39471e0b-49f2-41dd-948b-a66901f90b03.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4cd9a23e",
+            "path": "clips/uploads/iE2HF3FeMJUJvhpxtX93isqTLS5XkNjrAkKQBZ8F.jpg",
+            "description": "Casa de banho com duplo lavatório de taça, bancada em madeira, espelho e revestimento tipo mármore.",
+            "name": "ff2779dd-a72c-4367-bbcb-17c35aa87d84.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f6de08bf",
+            "path": "clips/uploads/57lEBAYvIeRRl3UDC8wBG9ctgNMwCPOqnqB0xHX2.jpg",
+            "description": "Casa de banho em mármore claro, duas cubas sobre bancada de madeira, espelho largo e duche envidraçado.",
+            "name": "6213cdff-d041-43bb-9106-16c404714de1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_02e574e8",
+            "path": "clips/uploads/4DWOKD4f7o6p6qclfYuviyIxQ66Somu1koWy76bY.jpg",
+            "description": "Casa de banho: duche com coluna de hidromassagem em primeiro plano, móvel com duas cubas e porta envidraçada.",
+            "name": "6c3ee552-3463-4abd-88f2-6e1482455354.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_43561f06",
+            "path": "clips/uploads/W6zORYDBGwcgIwtr3EUfm1Se47dzoinY7n6Lm4Jk.jpg",
+            "description": "Sala de estar ampla com chão de mármore, sofá, cortinas claras e escada de mármore com vidro.",
+            "name": "aa102bce-f1da-40a1-b2f4-d9a428d8f729.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b623bc68",
+            "path": "clips/uploads/cLZqDVd0K6OIfGc6hOC4FoxZStuRePoQhWfiPcg5.jpg",
+            "description": "Quarto de casal com tapete laranja, cama de cabeceira rosa e acesso a casa de banho privativa.",
+            "name": "1a6db1d2-fe4c-4590-9aa9-0b9cc7801954.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c86fd6dc",
+            "path": "clips/uploads/xpwtEVh8kHciY2fZ5TnYHYAHel4oEbFLrqL8aWu0.jpg",
+            "description": "Quarto de casal, outro ângulo: cama com manta cinzenta, roupeiro embutido branco e ar condicionado.",
+            "name": "5a937e50-9d68-4a71-a5bf-d4aab206716e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6d7d3ac0",
+            "path": "clips/uploads/yL7u8ImM3oQaA4EbP0Ua6JP7m9DsHmqYBZmlEVmE.jpg",
+            "description": "Quarto de casal com janelas de chão ao teto, cortinas claras, tapete laranja e televisão.",
+            "name": "e397fdbc-8f0a-43b4-8669-c8cdda5a0c22.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4138b899",
+            "path": "clips/uploads/JAfekmE2XM9gSyr49g0F9LeGdw0UIc8oEH8suP4u.jpg",
+            "description": "Casa de banho com banheira, mármore cinzento-escuro, móvel branco com duas cubas e espelho grande.",
+            "name": "d550f41e-7f42-4608-9354-70d9c2bcedbb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a1c78e20",
+            "path": "clips/uploads/89dQnErv6UeOd19KwiTlXySFMdqL5fx4iLmrOIk2.jpg",
+            "description": "Casa de banho em mármore bege com sanita e bidé suspensos, duas cubas e porta aberta.",
+            "name": "c55ee9e4-db65-4db8-8534-66067bf23717.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9d795357",
+            "path": "clips/uploads/oKvGdg5FUOeZgxosGW7SnVoclvpOTXQgYKo52umg.jpg",
+            "description": "Quarto de criança com parede rosa, cama individual, peluches, secretária e roupeiro embutido.",
+            "name": "613e5d6c-f701-432f-bfc2-145fc0862762.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4af2866b",
+            "path": "clips/uploads/xtDuE8Cf9PywRzf86HCvpW3qyUA9O3hTgGYYGpax.jpg",
+            "description": "Quarto de criança, outro ângulo: parede rosa, cama com peluches e janela grande com cortinas.",
+            "name": "a60f8dbe-ca43-4cf5-bf7b-d11db2f3f5b9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6bb881c1",
+            "path": "clips/uploads/BBlvSgmhVNRLBhVt0nGW7vUUU6oMeCBfNOmhZI50.jpg",
+            "description": "Quarto infantil com parede azul-clara, cama em forma de casinha, roupeiro embutido branco e tapete de estradas.",
+            "name": "0c7ff2fa-e88d-43cf-a42b-4ec1e953b210.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_205981c8",
+            "path": "clips/uploads/kkt5gtTmBYXyLrZ181bja1qD435urCopRqS8SG1c.jpg",
+            "description": "Quarto infantil visto de outro ângulo, janela ampla com cortinados, cama-casinha branca e brinquedos no chão.",
+            "name": "ea72fa9e-652e-4438-b7fd-2f1437eedf70.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_daafc7cd",
+            "path": "clips/uploads/W25ssJmYtOg11ZYfqsyvgvBTK3rU1tQ5lzGFxWlW.jpg",
+            "description": "Casa de banho em mármore branco, base de duche com coluna de hidromassagem, lavatório de pousar e sanita suspensa.",
+            "name": "c410664c-067f-4b1f-bc21-8c9551c5da1d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0aa9409c",
+            "path": "clips/uploads/jwW65jFEhb1aqJiIk91mry9Rer6Y1TeoFyVPw1ny.jpg",
+            "description": "Casa de banho em mármore branco vista do duche, coluna de hidromassagem cromada e porta de vidro.",
+            "name": "fbfe00b2-807e-4f3f-be48-3a8b601141a1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c7065e3b",
+            "path": "clips/uploads/DAo6UHHBxQui6To3kAz3s3GN3qIb5eNTjXLneWYp.jpg",
+            "description": "Hall com escada em pedra cinzenta e guarda de vidro, chão claro e porta aberta para quarto.",
+            "name": "cbbd12a4-a3a5-430d-bcbb-a839b7f128bb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8f52ff71",
+            "path": "clips/uploads/SNAbIWCr8npMQ3gpvZyCH5WxB1BqVSHMLOOZ85qQ.jpg",
+            "description": "Piso superior com ginásio em casa, secretária e portas de vidro para terraço, escada com guarda de vidro.",
+            "name": "eca980b1-47fe-4307-a65d-43cd115609e9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b961c513",
+            "path": "clips/uploads/pG8uk7Et4VZg2Vo6pgkHJEy3r6ATQYZgPO2C4TOH.jpg",
+            "description": "Terraço amplo no piso superior com deck de madeira, portas envidraçadas escuras e céu azul desafogado.",
+            "name": "1c430fc6-ee63-4ea5-8e17-faea39ab8705.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dc4cccf1",
+            "path": "clips/uploads/4HrMNc50y9k5WDurMiCIMYxNWs1XeaVcMgcQ92BL.jpg",
+            "description": "Quarto pequeno usado como escritório, secretária com monitor junto à janela com vista para telhados.",
+            "name": "0608747a-2f61-4583-a239-1434e177e96a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_078b92dd",
+            "path": "clips/uploads/cCsftSLY336vs8et54OsBsEo8Z3pUQb5vAgOW64Q.jpg",
+            "description": "Escritório com secretária preta, monitor e cadeira, chão de madeira clara e porta aberta para o hall.",
+            "name": "df288b13-158c-450b-bd61-cef301052687.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3e4bf2e5",
+            "path": "clips/uploads/b3iXQCjaCtUw07gAlDuLxyWrkrTdetoPbD0Fa6mS.jpg",
+            "description": "Casa de banho de serviço em tons bege, lavatório de pousar sobre móvel branco, sanita suspensa e janela.",
+            "name": "a24777a3-31c9-4297-870d-c9532ffb54e6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d6fe4fa6",
+            "path": "clips/uploads/VVVJ3Hi92A4euiaFyrNDvWbKhzWHAUc9Py8wfhmR.jpg",
+            "description": "Terraço superior com piscina elevada, guarda-sol, sofás de vime, relva sintética e vista panorâmica sobre colinas.",
+            "name": "b4a00b92-0361-4011-815d-79ff3ee324a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0d9dd912",
+            "path": "clips/uploads/2MkUnOAevWaZC0bMJUbBnJkZl3EjOaBmxQLwDiof.jpg",
+            "description": "Terraço superior com piscina elevada, sofás de vime, guarda-sol, relva sintética e duche exterior junto à fachada.",
+            "name": "e3c4577c-6457-4a97-8d53-a4dd2fd88c21.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_706a57ba",
+            "path": "clips/uploads/Ne4RAbYQQw6FBcQfP4olW8YOZGpK36SMFz6jH3dW.jpg",
+            "description": "Terraço com piscina elevada em primeiro plano, zona de estar com guarda-sol e vista sobre casas e colinas.",
+            "name": "13491aa0-17a4-4117-a9ad-0fa8caa3fae8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f872629",
+            "path": "clips/uploads/t5URwEipyqnPh0h8P8euqqDtNhYNN9fXfqs8gnJq.jpg",
+            "description": "Vista aérea desafogada sobre vale verde, campos e serras, com terraço e piscina da moradia em baixo.",
+            "name": "bc5ccc63-33a5-4ff5-bd8c-bdb1c43c7648.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de5ab21a",
+            "path": "clips/uploads/R4DxIB3wbJdfbnVSVPgUIqqN1Y8oR92o25w4xw27.jpg",
+            "description": "Hall de entrada com escadaria em mármore e guarda de vidro, roupeiro embutido e porta aberta para o exterior.",
+            "name": "6831ab90-0ed7-486b-a8d8-6f61a899126c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c2533a60",
+            "path": "clips/uploads/Evl6KJnF1CvsXu452kQpJBv5P0kuzGhnyUOaApx5.jpg",
+            "description": "Casa de banho em mármore claro com lavatório de pousar, móvel suspenso branco e porta aberta para o corredor.",
+            "name": "36e5a398-be06-4f4d-ae5a-e1a8c367a1c5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cd2b6be8",
+            "path": "clips/uploads/DTRLEmU3ixghjD6VwyuYoiCNPLrScXtwnEIYZORO.jpg",
+            "description": "Casa de banho social em mármore com sanita suspensa, lavatório de pousar, móvel suspenso e grande espelho.",
+            "name": "56728a31-0370-4d8c-9581-5e3f2e501015.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_96e3df10",
+            "path": "clips/uploads/YKfF2xnzSh0N1tPhtoeqxRpvQvLY1hXJfOlPMZ9S.jpg",
+            "description": "Divisão vazia e branca com chão de mármore e luzes embutidas, possível quarto ou escritório no rés-do-chão.",
+            "name": "ff39fe7a-4f8a-4b28-9d0b-c1feeca1dbc2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_eda93194",
+            "path": "clips/uploads/HBclxvOL0ZUv7RNL5OeTELQ7GvdDnEfU24wQuO6r.jpg",
+            "description": "Quarto vazio no rés-do-chão com chão de mármore brilhante, porta aberta para o hall de entrada.",
+            "name": "9d5f146f-2cc8-4d11-8662-3f5fda97d149.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_94d040b1",
+            "path": "clips/uploads/066CPBsdDZv3Z9rj0JAyZZuZyOZbBCdQvtTjtYmp.jpg",
+            "description": "Hall de entrada com consola branca e dourada, espelho oval e porta blindada aberta para o pátio exterior.",
+            "name": "44e5873a-4474-4e2d-9817-42f5d9f90b4f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_59508579",
+            "path": "clips/uploads/8qW3YryxQk5XAKksNGasyQMOmUQre5xMi3GdCcwy.jpg",
+            "description": "Box fechada ampla, chão em mosaico claro, portão aberto com vista para árvores e céu azul.",
+            "name": "facb9a07-813c-47b1-b42f-94cd25b3361a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_48895abe",
+            "path": "clips/uploads/jQxDBIF3VUHhJA6d9B1JZBYVHa9qXlYpWDDrahdX.jpg",
+            "description": "Interior da box fechada com portão seccionado, roupeiros embutidos para arrumação e porta de acesso à moradia.",
+            "name": "01e49549-9b47-47f7-9e73-d6bdd09baca1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9a24d8f2",
+            "path": "clips/uploads/STYUFTSfaWnOV9gIqca1byUlEuMkgeac34QbZS37.jpg",
+            "description": "Vista aérea da fachada: banda de moradias modernas brancas e cinzentas, com terraços em vários pisos.",
+            "name": "d6160447-7cc2-4054-87b2-62f9d2393e93.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de335fee",
+            "path": "clips/uploads/xFkrsrzdw3iQCB8POJyycKxFrKYyZEXFdVkdjYaI.png",
+            "description": "Retrato do consultor Ricardo Estêvão, da RE/MAX Expo.",
+            "name": "Ricardo Estêvão.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dbc20441",
+            "path": "clips/uploads/9tCmdf0JTwvV0dpnvAcG2dReTDLNhk41PqIAdIf2.png",
+            "description": "Logótipo da RE/MAX Expo.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/2Wyo9pgbonHbUKMgH8vHeEC0polJCJw3dpCxWvvH.mp3",
+    "transcript": {
+        "duration": 37.599998474121094,
+        "text": "Três terraços e vista desafogada em Santa Iria de Azoia. Uma zona tranquila em Loures com acesso rápido a Lisboa pelo A1 e pelo IC2. Uma moradia de 2023 com mais de 150 metros de área útil. Três quartos e quatro casas de banho distribuídos por vários pisos. No resto de chão, um quarto que pode servir de escritório e um terraço. No piso superior, dois terraços com vista panorâmica. Tem ainda uma box fechada para estacionar e arrumar. Para viver em família perto de Lisboa, 710 mil euros. Para visitar, fale com o Ricardo Estevam da Remax Expo.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Três",
+                "start": 0,
+                "end": 0.3400000035762787
+            },
+            {
+                "word": "terraços",
+                "start": 0.3400000035762787,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "e",
+                "start": 0.7599999904632568,
+                "end": 1.159999966621399
+            },
+            {
+                "word": "vista",
+                "start": 1.159999966621399,
+                "end": 1.3600000143051147
+            },
+            {
+                "word": "desafogada",
+                "start": 1.3600000143051147,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "em",
+                "start": 2.059999942779541,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "Santa",
+                "start": 2.359999895095825,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "Iria",
+                "start": 2.6600000858306885,
+                "end": 2.7799999713897705
+            },
+            {
+                "word": "de",
+                "start": 2.7799999713897705,
+                "end": 3.119999885559082
+            },
+            {
+                "word": "Azoia",
+                "start": 3.119999885559082,
+                "end": 3.380000114440918
+            },
+            {
+                "word": "Uma",
+                "start": 4.179999828338623,
+                "end": 4.340000152587891
+            },
+            {
+                "word": "zona",
+                "start": 4.340000152587891,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "tranquila",
+                "start": 4.539999961853027,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "em",
+                "start": 5.019999980926514,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "Loures",
+                "start": 5.199999809265137,
+                "end": 5.5
+            },
+            {
+                "word": "com",
+                "start": 5.5,
+                "end": 5.820000171661377
+            },
+            {
+                "word": "acesso",
+                "start": 5.820000171661377,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "rápido",
+                "start": 6.039999961853027,
+                "end": 6.380000114440918
+            },
+            {
+                "word": "a",
+                "start": 6.380000114440918,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "Lisboa",
+                "start": 6.579999923706055,
+                "end": 7.019999980926514
+            },
+            {
+                "word": "pelo",
+                "start": 7.019999980926514,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "A1",
+                "start": 7.260000228881836,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "e",
+                "start": 7.619999885559082,
+                "end": 7.980000019073486
+            },
+            {
+                "word": "pelo",
+                "start": 7.980000019073486,
+                "end": 8.300000190734863
+            },
+            {
+                "word": "IC2",
+                "start": 8.300000190734863,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "Uma",
+                "start": 9.699999809265137,
+                "end": 9.800000190734863
+            },
+            {
+                "word": "moradia",
+                "start": 9.800000190734863,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 10.100000381469727,
+                "end": 10.34000015258789
+            },
+            {
+                "word": "2023",
+                "start": 10.34000015258789,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "com",
+                "start": 11.180000305175781,
+                "end": 11.5
+            },
+            {
+                "word": "mais",
+                "start": 11.5,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "de",
+                "start": 11.680000305175781,
+                "end": 11.9399995803833
+            },
+            {
+                "word": "150",
+                "start": 11.9399995803833,
+                "end": 12.5
+            },
+            {
+                "word": "metros",
+                "start": 12.5,
+                "end": 12.819999694824219
+            },
+            {
+                "word": "de",
+                "start": 12.819999694824219,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "área",
+                "start": 13.199999809265137,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "útil",
+                "start": 13.199999809265137,
+                "end": 13.539999961853027
+            },
+            {
+                "word": "Três",
+                "start": 14.479999542236328,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "quartos",
+                "start": 14.479999542236328,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "e",
+                "start": 14.899999618530273,
+                "end": 15.239999771118164
+            },
+            {
+                "word": "quatro",
+                "start": 15.239999771118164,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "casas",
+                "start": 15.539999961853027,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "de",
+                "start": 15.819999694824219,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "banho",
+                "start": 16.18000030517578,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "distribuídos",
+                "start": 16.18000030517578,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "por",
+                "start": 16.81999969482422,
+                "end": 17.059999465942383
+            },
+            {
+                "word": "vários",
+                "start": 17.059999465942383,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "pisos",
+                "start": 17.34000015258789,
+                "end": 17.739999771118164
+            },
+            {
+                "word": "No",
+                "start": 18.600000381469727,
+                "end": 18.700000762939453
+            },
+            {
+                "word": "resto",
+                "start": 18.700000762939453,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 18.920000076293945,
+                "end": 19.200000762939453
+            },
+            {
+                "word": "chão",
+                "start": 19.200000762939453,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "um",
+                "start": 19.540000915527344,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "quarto",
+                "start": 19.780000686645508,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "que",
+                "start": 19.940000534057617,
+                "end": 20.139999389648438
+            },
+            {
+                "word": "pode",
+                "start": 20.139999389648438,
+                "end": 20.299999237060547
+            },
+            {
+                "word": "servir",
+                "start": 20.299999237060547,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 20.540000915527344,
+                "end": 21.1200008392334
+            },
+            {
+                "word": "escritório",
+                "start": 21.1200008392334,
+                "end": 21.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 21.18000030517578,
+                "end": 21.479999542236328
+            },
+            {
+                "word": "um",
+                "start": 21.479999542236328,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "terraço",
+                "start": 21.959999084472656,
+                "end": 22
+            },
+            {
+                "word": "No",
+                "start": 22.899999618530273,
+                "end": 23.020000457763672
+            },
+            {
+                "word": "piso",
+                "start": 23.020000457763672,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "superior",
+                "start": 23.15999984741211,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "dois",
+                "start": 24.020000457763672,
+                "end": 24.18000030517578
+            },
+            {
+                "word": "terraços",
+                "start": 24.18000030517578,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "com",
+                "start": 24.6200008392334,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "vista",
+                "start": 24.959999084472656,
+                "end": 25.100000381469727
+            },
+            {
+                "word": "panorâmica",
+                "start": 25.100000381469727,
+                "end": 25.780000686645508
+            },
+            {
+                "word": "Tem",
+                "start": 25.780000686645508,
+                "end": 26.65999984741211
+            },
+            {
+                "word": "ainda",
+                "start": 26.65999984741211,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "uma",
+                "start": 26.959999084472656,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "box",
+                "start": 27.139999389648438,
+                "end": 27.3799991607666
+            },
+            {
+                "word": "fechada",
+                "start": 27.3799991607666,
+                "end": 27.799999237060547
+            },
+            {
+                "word": "para",
+                "start": 27.799999237060547,
+                "end": 28.139999389648438
+            },
+            {
+                "word": "estacionar",
+                "start": 28.139999389648438,
+                "end": 28.760000228881836
+            },
+            {
+                "word": "e",
+                "start": 28.760000228881836,
+                "end": 29.079999923706055
+            },
+            {
+                "word": "arrumar",
+                "start": 29.079999923706055,
+                "end": 29.760000228881836
+            },
+            {
+                "word": "Para",
+                "start": 30.360000610351562,
+                "end": 30.459999084472656
+            },
+            {
+                "word": "viver",
+                "start": 30.459999084472656,
+                "end": 30.68000030517578
+            },
+            {
+                "word": "em",
+                "start": 30.68000030517578,
+                "end": 30.799999237060547
+            },
+            {
+                "word": "família",
+                "start": 30.799999237060547,
+                "end": 31.239999771118164
+            },
+            {
+                "word": "perto",
+                "start": 31.239999771118164,
+                "end": 31.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 31.579999923706055,
+                "end": 31.799999237060547
+            },
+            {
+                "word": "Lisboa",
+                "start": 31.799999237060547,
+                "end": 32.15999984741211
+            },
+            {
+                "word": "710",
+                "start": 32.63999938964844,
+                "end": 33.400001525878906
+            },
+            {
+                "word": "mil",
+                "start": 33.400001525878906,
+                "end": 33.619998931884766
+            },
+            {
+                "word": "euros",
+                "start": 33.619998931884766,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "Para",
+                "start": 34.619998931884766,
+                "end": 34.70000076293945
+            },
+            {
+                "word": "visitar",
+                "start": 34.70000076293945,
+                "end": 35.29999923706055
+            },
+            {
+                "word": "fale",
+                "start": 35.560001373291016,
+                "end": 35.560001373291016
+            },
+            {
+                "word": "com",
+                "start": 35.560001373291016,
+                "end": 35.7599983215332
+            },
+            {
+                "word": "o",
+                "start": 35.7599983215332,
+                "end": 35.81999969482422
+            },
+            {
+                "word": "Ricardo",
+                "start": 35.81999969482422,
+                "end": 36.099998474121094
+            },
+            {
+                "word": "Estevam",
+                "start": 36.099998474121094,
+                "end": 36.560001373291016
+            },
+            {
+                "word": "da",
+                "start": 36.560001373291016,
+                "end": 36.939998626708984
+            },
+            {
+                "word": "Remax",
+                "start": 36.939998626708984,
+                "end": 37.2400016784668
+            },
+            {
+                "word": "Expo",
+                "start": 37.2400016784668,
+                "end": 37.58000183105469
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.599998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.1000000000000014,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Três terraços e vista desafogada",
+                        "params": {
+                            "src": "img_3c187b24",
+                            "avatar": "img_de335fee",
+                            "logo": "img_dbc20441",
+                            "price": "710.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Três terraços e vista desafogada, em Santa Iria de Azóia.",
+                            "location": "Santa Iria de Azóia, Loures · 154 m² · 3 quartos",
+                            "agentName": "Ricardo Estêvão",
+                            "phone": "+351 966 235 727",
+                            "legal": "RE/MAX Expo"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.1000000000000014,
+                "end": 9.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Santa Iria de Azóia",
+                        "params": {
+                            "src": "img_2f872629",
+                            "title": "Santa Iria de Azóia",
+                            "items": [
+                                "Zona tranquila em Loures",
+                                "A1 e IC2 perto",
+                                "Acesso rápido a Lisboa"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.5,
+                "end": 14.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Construção de 2023 · 154 m²",
+                        "params": {
+                            "src": "img_9a24d8f2",
+                            "src2": "img_0c13a871",
+                            "src3": "img_2250c3dc",
+                            "src4": "img_43561f06",
+                            "src5": "img_b0af075e",
+                            "srcs": [
+                                "img_9a24d8f2",
+                                "img_0c13a871",
+                                "img_2250c3dc",
+                                "img_43561f06",
+                                "img_b0af075e",
+                                "img_c1889063",
+                                "img_449b98f0",
+                                "img_de5ab21a",
+                                "img_94d040b1",
+                                "img_c7065e3b"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.3,
+                "end": 16.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_b623bc68",
+                            "src2": "img_c86fd6dc",
+                            "src3": "img_9d795357",
+                            "src4": "img_6bb881c1",
+                            "srcs": [
+                                "img_b623bc68",
+                                "img_c86fd6dc",
+                                "img_9d795357",
+                                "img_6bb881c1",
+                                "img_6d7d3ac0",
+                                "img_4af2866b",
+                                "img_205981c8"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 18.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Três quartos, quatro WC",
+                        "params": {
+                            "src": "img_4cd9a23e",
+                            "src2": "img_f6de08bf",
+                            "src3": "img_4138b899",
+                            "src4": "img_a1c78e20",
+                            "srcs": [
+                                "img_4cd9a23e",
+                                "img_f6de08bf",
+                                "img_4138b899",
+                                "img_a1c78e20",
+                                "img_02e574e8",
+                                "img_daafc7cd",
+                                "img_0aa9409c",
+                                "img_3e4bf2e5",
+                                "img_c2533a60",
+                                "img_cd2b6be8"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.5,
+                "end": 22.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_eda93194",
+                            "src2": "img_9d36b4a2",
+                            "srcs": [
+                                "img_eda93194",
+                                "img_9d36b4a2",
+                                "img_96e3df10",
+                                "img_dc4cccf1",
+                                "img_078b92dd",
+                                "img_716e9f64",
+                                "img_72f4cd4f"
+                            ],
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.7,
+                "end": 25.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_d6fe4fa6",
+                            "src2": "img_0d9dd912",
+                            "src3": "img_b961c513",
+                            "src4": "img_8f52ff71"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.8,
+                "end": 28,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_48895abe",
+                            "zoom": "1.6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28,
+                "end": 30.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Box fechada",
+                        "params": {
+                            "src": "img_59508579",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.3,
+                "end": 34.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_706a57ba",
+                            "revealSeconds": "0.4",
+                            "zoom": "1.15"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.5,
+                "end": 37.599998474121094,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Ricardo Estêvão",
+                        "params": {
+                            "src": "img_de335fee",
+                            "logo": "img_dbc20441",
+                            "name": "Ricardo Estêvão",
+                            "role": "Consultor imobiliário · RE/MAX Expo",
+                            "buttons": "+351 966 235 727 | Marque a sua visita",
+                            "phone": "+351 966 235 727"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-120612855-40-lscbp/clip.mp4",
+    "error": null
+}

@@ -35,9 +35,22 @@
                         <button type="button" wire:click="$set('creating', false)" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">cancel</button>
                     </div>
                 </form>
+            @elseif ($cloning)
+                <form wire:submit="clonar" @click.stop class="p-3 space-y-2">
+                    <p class="font-mono text-[0.55rem] text-ink-faint">Copies «{{ $current->name }}»'s design system, effects, backgrounds, image library and settings — not its clips or news.</p>
+                    <input type="text" wire:model="cloneName" placeholder="Name of the copy" autofocus
+                           class="w-full bg-surface/50 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-sm text-ink focus:border-teal/50 focus:outline-none">
+                    @error('cloneName') <p class="text-bad text-[0.6rem]">{{ $message }}</p> @enderror
+                    <div class="flex items-center gap-2">
+                        <button type="submit" wire:loading.attr="disabled" wire:target="clonar" class="font-display text-sm px-3 py-1 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Clone</button>
+                        <button type="button" wire:click="$set('cloning', false)" class="font-mono text-[0.6rem] text-ink-soft hover:text-ink">cancel</button>
+                    </div>
+                </form>
             @else
                 <button type="button" wire:click="$set('creating', true)" @click.stop
                         class="w-full px-3 py-2 text-left font-mono text-[0.62rem] text-teal hover:bg-surface/40 transition">＋ New project</button>
+                <button type="button" wire:click="abrirClone" @click.stop
+                        class="w-full px-3 py-2 text-left font-mono text-[0.62rem] text-teal hover:bg-surface/40 transition border-t border-ink-soft/10">⧉ Clone «{{ $current->name }}»</button>
             @endif
         </div>
     </div>

@@ -2,18 +2,24 @@
 
 namespace App\Livewire;
 
+use App\Jobs\Clips\AnalyzePropertyJob;
+use App\Jobs\Clips\AnimatePropertyJob;
 use App\Jobs\Clips\CollectSiteJob;
 use App\Jobs\Clips\FetchWebImagesJob;
 use App\Jobs\Clips\FillChosenVisualsJob;
 use App\Jobs\Clips\FinalizeClipPlanJob;
 use App\Jobs\Clips\GenerateBackgroundJob;
 use App\Jobs\Clips\GenerateRequestImageJob;
+use App\Jobs\Clips\ImportListingJob;
+use App\Jobs\Clips\ImproveClipJob;
+use App\Jobs\Clips\NarratePropertyJob;
 use App\Jobs\Clips\PlanAnimationsJob;
 use App\Jobs\Clips\RegenerateVoiceoverJob;
 use App\Jobs\Clips\RenderBackgroundReelJob;
 use App\Jobs\Clips\RenderBackgroundSampleJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
 use App\Jobs\Clips\RenderJob;
+use App\Jobs\Clips\RestagePropertyRoomJob;
 use App\Jobs\Clips\TranscribeJob;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\BackgroundPortability;
@@ -33,12 +39,19 @@ use App\Services\Clips\Store\VfxStore;
 use App\Services\Clips\TranscriptRebuilder;
 use App\Services\Costs\CostLedger;
 use App\Services\Projects\ProjectContext;
+use App\Services\Projects\ProjectResources;
+use App\Services\RealEstate\ListingScraper;
+use App\Services\RealEstate\ListingScriptWriter;
+use App\Services\RealEstate\PropertyVideoAnalyzer;
+use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -64,6 +77,7 @@ class ClipsAnimados extends Component
      */
     public function mount(string $view = 'dashboard'): void
     {
+        $this->listingAfterIntroLine = app(EffectStore::class)->afterIntroLine();
         // Route default (see clips-animados.backgrounds) — opening the backgrounds
         // studio by URL must do what the in-page button does, previews included.
         if ($view === 'backgrounds') {
@@ -121,6 +135,12 @@ class ClipsAnimados extends Component
     /** Per-suggestion upload files, keyed by the suggestion's key. */
     public array $reviewUploads = [];
 
+    /** Own voiceover uploads on the "pick the voice" card, keyed by clip id. */
+    public array $takeUploads = [];
+
+    /** The agent's photo uploaded on a property card, keyed by clip id. */
+    public array $agentPhotos = [];
+
     /** null | animation | overlay */
     public ?string $createType = null;
 
@@ -139,6 +159,18 @@ class ClipsAnimados extends Component
     /** Halve this clip's image budget — fewer generated pictures, more text/chart scenes. */
     public bool $poucasImagens = false;
 
+    /** Plan this clip with no image layer at all — nothing generated, filmed or asked for. */
+    public bool $semImagens = false;
+
+    /** Build the clip only from the uploaded images — every one shown, nothing generated or fetched. */
+    public bool $soReferencias = false;
+
+    /** Where the karaoke captions sit: bottom | middle | top | none. */
+    public string $legendas = 'bottom';
+
+    /** Land the clip in the Finished hub as soon as it renders, with no promote click. */
+    public bool $paraFinalizados = false;
+
     /** Let the AI write a bespoke animation per scene instead of using the SFX vocabulary. */
     public bool $freeSfx = false;
 
@@ -149,6 +181,9 @@ class ClipsAnimados extends Component
     public $newImage = null;
 
     public string $newImageDesc = '';
+
+    /** Bulk upload: many files at once, described automatically at planning. */
+    public array $newImages = [];
 
     /** @var array<int,array{id:string,path:string,description:string}> */
     public array $images = [];
@@ -219,13 +254,15 @@ class ClipsAnimados extends Component
 
     public function escolherTipo(string $type): void
     {
-        $this->createType = in_array($type, ['animation', 'overlay'], true) ? $type : null;
+        $this->createType = in_array($type, ['animation', 'overlay', 'property'], true) ? $type : null;
+        $this->afterIntroLine = app(EffectStore::class)->afterIntroLine();
+        $this->licence = app(ProjectResources::class)->agent()['licence'];
         $this->resetValidation();
     }
 
     public function voltar(): void
     {
-        $this->reset(['createType', 'text', 'audio', 'video', 'videoPronto', 'videoProntoNome', 'formato', 'lead', 'instructions', 'poucasImagens', 'freeSfx', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editOverlay', 'editSpeakable', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker', 'promptKey', 'promptEdits']);
+        $this->reset(['createType', 'propertySource', 'propertyPhotos', 'propertyListingUrl', 'propertyVoice', 'propertyAspect', 'propertyAgent', 'propertyPhone', 'propertyAgency', 'propertyGender', 'propertyFacts', 'propertyPhoto', 'licence', 'afterIntro', 'afterIntroLine', 'text', 'audio', 'video', 'videoPronto', 'videoProntoNome', 'formato', 'lead', 'instructions', 'poucasImagens', 'semImagens', 'soReferencias', 'legendas', 'newImages', 'paraFinalizados', 'freeSfx', 'allowedPresents', 'newImage', 'newImageDesc', 'images', 'imageReplace', 'musica', 'musicaVolume', 'background', 'editingId', 'editTitle', 'editScenes', 'editMode', 'editOverlay', 'editSpeakable', 'editPlanJson', 'editTranscriptText', 'bgPrompt', 'bgVideo', 'bgVideoName', 'editingBgId', 'bgEditPrompt', 'reviewingId', 'reviewUploads', 'libraryPickerKey', 'sceneImageUploads', 'sceneLibraryPicker', 'promptKey', 'promptEdits']);
         $this->resetValidation();
         $this->view = 'dashboard';
     }
@@ -234,22 +271,45 @@ class ClipsAnimados extends Component
     {
         $this->validate([
             'newImage' => 'required|file|'.Media::mimesRule().'|max:102400',
-            'newImageDesc' => 'required|string|max:200',
+            'newImageDesc' => 'nullable|string|max:200',
         ], [
             'newImage.required' => 'Choose an image or video.',
             'newImage.mimes' => 'The file must be an image or a video.',
             'newImage.max' => 'The file is too large (maximum 100 MB).',
-            'newImageDesc.required' => 'Describe what it shows.',
         ], ['newImage' => 'file', 'newImageDesc' => 'description']);
 
         $path = $this->newImage->store('clips/uploads');
         $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
         $this->images[] = array_merge(
-            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => trim($this->newImageDesc)],
+            ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => trim($this->newImageDesc), 'name' => $this->newImage->getClientOriginalName()],
             $this->probeImage($abs),
         );
         $this->guardarNaBiblioteca($this->newImage, trim($this->newImageDesc));
         $this->reset(['newImage', 'newImageDesc']);
+    }
+
+    /**
+     * Add every selected file at once, with no description: the planning job
+     * describes them by looking at them (ImageDescriber). Kept out of the project
+     * library — a listing's twenty room photos would only be noise for the library
+     * matcher in later clips.
+     */
+    public function updatedNewImages(): void
+    {
+        $this->validate(
+            ['newImages.*' => 'file|'.Media::mimesRule().'|max:102400'],
+            ['newImages.*.mimes' => 'Every file must be an image or a video.', 'newImages.*.max' => 'A file is too large (maximum 100 MB).'],
+        );
+
+        foreach ($this->newImages as $file) {
+            $path = $file->store('clips/uploads');
+            $abs = Storage::disk(config('contentmachine.clips.disk'))->path($path);
+            $this->images[] = array_merge(
+                ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'description' => '', 'name' => $file->getClientOriginalName()],
+                $this->probeImage($abs),
+            );
+        }
+        $this->reset('newImages');
     }
 
     /** Replace an already-uploaded image's file, keeping its id so the plan (which
@@ -288,6 +348,31 @@ class ClipsAnimados extends Component
         }
         unset($this->images[$i]);
         $this->images = array_values($this->images);
+    }
+
+    /**
+     * "Only reference images" with no image attached plans a clip that may show
+     * nothing — and the planner then invents image names from the instructions
+     * ("main.webp"), which crashed the render. Say so before anything is queued.
+     */
+    private function exigirImagensSeSoReferencias(): void
+    {
+        // Every submit path passes here, so the instructions' ceiling is checked
+        // once for all of them (the form caps it too; this is the trusted check).
+        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'The instructions are too long (maximum 10,000 characters).']);
+
+        $temImagem = collect($this->images)->contains(fn ($i) => empty($i['video']));
+        if ($this->soReferencias && ! $this->semImagens && ! $temImagem) {
+            throw ValidationException::withMessages([
+                'newImages.*' => 'Only reference images is on but no image is attached — add the images (or untick the option).',
+            ]);
+        }
+    }
+
+    /** The caption placement to store — anything unexpected falls back to bottom. */
+    private function legendasValidas(): string
+    {
+        return in_array($this->legendas, ClipRecord::CAPTIONS, true) ? $this->legendas : 'bottom';
     }
 
     /** Keep any user upload in the project's Assets library for reuse. Best-effort. */
@@ -599,6 +684,498 @@ class ClipsAnimados extends Component
         return app(ClipStore::class);
     }
 
+    /** A property listing URL to turn into a clip in one go. */
+    public string $listingUrl = '';
+
+    /** Optional agent photo for the listing import: used instead of the one on the listing. */
+    public $listingAgentPhoto = null;
+
+    /** Optional listing video: cut into one clip per room, used instead of the photos. */
+    public $listingVideo = null;
+
+    /** Optional video played full-screen right after the intro. */
+    public $listingAfterIntro = null;
+
+    /** What the voiceover says over the after-intro video, right after the intro (starts as the project's line). */
+    public string $listingAfterIntroLine = '';
+
+    /** With a property video: also use the listing's photos (off: the reel is all footage). */
+    public bool $listingMixPhotos = false;
+
+    /** Notes for the script writer: they override what the listing page says. */
+    public string $listingNotes = '';
+
+    /** With a property video: open on the best clips, music only, cut on the beat, before the voice. */
+    public bool $listingBeatOpening = false;
+
+    /** The listing's music ('' = the project's). */
+    public string $listingMusic = '';
+
+    /** Queue the listing importer: it scrapes, scripts, narrates and collects the images, then plans. */
+    public function importarAnuncio(): void
+    {
+        $this->listingUrl = trim($this->listingUrl);
+        $this->validate(
+            ['listingUrl' => ['required', 'url:https,http', fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::UNSUPPORTED)],
+                'listingAgentPhoto' => 'nullable|image|max:10240',
+                'listingVideo' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm,video/x-m4v|max:1048576',
+                'listingAfterIntro' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm,video/x-m4v|max:1048576',
+                'listingAfterIntroLine' => 'nullable|string|max:200',
+                'listingNotes' => 'nullable|string|max:3000',
+                'listingMusic' => 'nullable|string|max:200',
+                'listingBeatOpening' => [fn ($a, $v, $fail) => $v && ! $this->listingVideo && ! $this->listingAfterIntro ? $fail('The beat-synced opening is cut from the property video — add one.') : null]],
+            ['listingUrl.required' => 'Paste the listing URL.', 'listingUrl.url' => 'That is not a valid URL.'],
+        );
+
+        $ref = basename((string) parse_url($this->listingUrl, PHP_URL_PATH)) ?: 'listing';
+        // The two videos in each other's field (the walkthrough as the after-intro): put them right.
+        [$property, $afterIntro] = [$this->listingVideo, $this->listingAfterIntro];
+        $swapped = self::videosTrocados($property, $afterIntro);
+        if ($swapped) {
+            [$property, $afterIntro] = [$afterIntro, $property];
+        }
+        $clip = $this->clips()->create([
+            'type' => ClipRecord::TYPE_ANIMATION,
+            'input_kind' => 'audio',
+            'status' => ClipRecord::STATUS_IMPORTING,
+            'title' => 'Listing '.$ref,
+            'meta' => ['listing' => ['url' => $this->listingUrl], 'agent_photo' => $this->listingAgentPhoto?->store('clips/uploads'),
+                'listing_video' => $property?->store('clips/uploads'),
+                'after_intro' => $afterIntro?->store('clips/uploads'),
+                'videos_swapped' => $swapped,
+                'mix_photos' => $property !== null && $this->listingMixPhotos,
+                'beat_opening' => $property !== null && $this->listingBeatOpening ? ['clips' => []] : null,
+                'after_intro_line' => trim($this->listingAfterIntroLine),
+                'script_notes' => trim($this->listingNotes)]
+                + ($this->listingMusic !== '' ? ['musica' => $this->listingMusic] : []),
+        ]);
+
+        ImportListingJob::dispatch($clip->id, $this->listingUrl);
+        $this->reset('listingUrl', 'listingAgentPhoto', 'listingVideo', 'listingAfterIntro', 'listingNotes', 'listingMixPhotos', 'listingBeatOpening', 'listingMusic');
+        $this->listingAfterIntroLine = app(EffectStore::class)->afterIntroLine();
+    }
+
+    /**
+     * The walkthrough uploaded as the after-intro (and the short brand clip, or
+     * nothing, as the property video): an after-intro is a few seconds, a
+     * property video is the tour. Over 20 s and longer than the property video
+     * means the two are in each other's field.
+     */
+    private static function videosTrocados(mixed $property, mixed $afterIntro): bool
+    {
+        $len = function ($upload) {
+            try {
+                return $upload ? PropertyVideoAnalyzer::probe($upload->getRealPath())['duration'] : 0.0;
+            } catch (\RuntimeException) {
+                return 0.0;
+            }
+        };
+        $a = $len($afterIntro);
+
+        return $a > 20 && $a > $len($property);
+    }
+
+    /** Keep voiceover take $n, drop the others, and let the clip carry on to planning. */
+    public function escolherTake(string $id, int $n): void
+    {
+        $p = $this->clips()->find($id);
+        $takes = $p?->meta['voice_takes'] ?? [];
+        if (! $p || $p->status !== ClipRecord::STATUS_CHOOSING_VOICE || ! isset($takes[$n])) {
+            return;
+        }
+        Storage::disk(config('contentmachine.clips.disk'))->delete(array_values(array_diff($takes, [$takes[$n]])));
+        if (! empty($p->meta['property']['proxy'])) {
+            // A voiceover for a reel already cut: cut it again with the voice (animations reused).
+            $old = $p->meta['property']['voice'] ?? null;
+            if ($old && $old !== $takes[$n]) {
+                Storage::disk(config('contentmachine.clips.disk'))->delete($old);
+            }
+            $p->update([
+                'status' => ClipRecord::STATUS_ANIMATING,
+                'meta' => array_merge($p->meta, ['voice_takes' => null, 'property' => array_merge($p->meta['property'], ['voice' => $takes[$n]])]),
+            ]);
+            AnimatePropertyJob::dispatch($p->id);
+
+            return;
+        }
+        if (! empty($p->meta['property'])) {
+            // A walkthrough: the voice is only the narration; the footage gets analysed next.
+            $p->update([
+                'status' => ClipRecord::STATUS_ANALYZING,
+                'meta' => array_merge($p->meta, ['voice_takes' => null, 'property' => array_merge($p->meta['property'], ['voice' => $takes[$n]])]),
+            ]);
+            AnalyzePropertyJob::dispatch($p->id);
+
+            return;
+        }
+        $p->update([
+            'source_path' => $takes[$n],
+            'status' => ClipRecord::STATUS_TRANSCRIBING,
+            'meta' => array_merge($p->meta, ['voice_takes' => null]),
+        ]);
+        TranscribeJob::dispatch($p->id);
+    }
+
+    // ---- property walkthrough (footage + listing → staged-room reel) ----
+
+    /** The listing the walkthrough belongs to (voiceover, agent card). */
+    public string $propertyListingUrl = '';
+
+    /** none | listing (written and narrated from the listing) | upload (the user's own audio, in $audio) */
+    public string $propertyVoice = 'none';
+
+    // Without a listing URL: the agent for the outro card, and the house facts.
+    public string $propertyAgent = '';
+
+    public string $propertyPhone = '';
+
+    public string $propertyAgency = 'RE/MAX';
+
+    public string $propertyGender = 'm';
+
+    public string $propertyFacts = '';
+
+    public $propertyPhoto = null;
+
+    /** Made by hand: the licence (AMI) for the agent's card. Starts as the project's; empty → none shown. */
+    public string $licence = '';
+
+    /** Made by hand (animation / property): this clip's after-intro video, and the line said over it. */
+    public $afterIntro = null;
+
+    public string $afterIntroLine = '';
+
+    /** The reel's final format (PropertyVideoEditor::ASPECTS). */
+    public string $propertyAspect = 'source';
+
+    /** Photos instead of a walkthrough video: each one is a room the camera moves through. */
+    public string $propertySource = 'video';
+
+    public $propertyPhotos = [];
+
+    public function submitProperty(): void
+    {
+        $this->propertyListingUrl = trim($this->propertyListingUrl);
+        $photos = $this->propertySource === 'photos';
+        $this->validate($photos
+            ? ['propertyPhotos' => 'required|array|min:1|max:15', 'propertyPhotos.*' => 'image|max:20480']
+            : [], [
+                'propertyPhotos.required' => 'Add the photos to animate (up to 15).',
+                'propertyPhotos.max' => 'Up to 15 photos.',
+                'propertyPhotos.*.image' => 'Only photos (jpg, png, webp).',
+            ]);
+        $this->validate([
+            'video' => ($photos ? 'nullable' : 'required').'|file|mimetypes:video/mp4,video/quicktime|max:1024000',
+            'propertyListingUrl' => [$this->propertyVoice === 'listing' ? 'required' : 'nullable', 'url:https,http', fn ($a, $v, $fail) => $v === '' || ListingScraper::supports($v) ? null : $fail(ListingScraper::UNSUPPORTED)],
+            'propertyVoice' => 'required|in:none,listing,upload',
+            'audio' => ($this->propertyVoice === 'upload' ? 'required' : 'nullable').'|file|mimetypes:audio/*,video/webm,video/mp4|max:51200',
+        ], [
+            'video.required' => 'Upload the walkthrough video (mp4 or mov).',
+            'video.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
+            'video.max' => 'The video is too large (maximum 1 GB).',
+            'propertyListingUrl.required' => 'Paste the listing URL — the voiceover is written from it.',
+            'audio.required' => 'Upload your voiceover (mp3, wav or m4a).',
+        ]);
+        $this->validate([
+            'propertyAgent' => 'nullable|string|max:80',
+            'propertyPhone' => 'nullable|string|max:40',
+            'propertyAgency' => 'nullable|string|max:80',
+            'propertyGender' => 'in:m,f',
+            'propertyFacts' => 'nullable|string|max:1500',
+            'propertyPhoto' => 'nullable|image|max:10240',
+            'licence' => 'nullable|string|max:60',
+            ...$this->afterIntroRules(),
+            'propertyAspect' => 'in:'.implode(',', array_keys(PropertyVideoEditor::ASPECTS)),
+        ]);
+
+        $property = ($photos
+            ? ['photos' => array_map(fn ($f) => $f->store('clips/uploads'), array_values($this->propertyPhotos))]
+            : ['video' => $this->video->store('clips/uploads')]) + ['narrate' => $this->propertyVoice === 'listing', 'aspect' => $this->propertyAspect];
+        if ($this->propertyVoice === 'upload' && $this->audio) {
+            $property['voice'] = $this->audio->store('clips/uploads');
+        }
+        $listing = $this->propertyListingUrl !== '';
+        // No listing: the agent and facts typed in the form stand in for it.
+        $manual = ['url' => $this->propertyListingUrl];
+        $images = [];
+        // Fields left empty fall back to the project's agent (Design System → Project resources).
+        $resources = app(ProjectResources::class);
+        $profile = $resources->agent();
+        $agentName = trim($this->propertyAgent) ?: $profile['name'];
+        if (! $listing && $agentName !== '') {
+            $manual += ['agent' => $agentName, 'phone' => trim($this->propertyPhone) ?: $profile['phone'], 'email' => $profile['email'], 'licence' => trim($this->licence),
+                'agency' => trim($this->propertyAgency) ?: 'RE/MAX', 'gender' => $this->propertyGender];
+            $path = $this->propertyPhoto?->store('clips/uploads');
+            if (! $path && ($own = $resources->agentPhotoPath())) {
+                $path = 'clips/uploads/'.Str::random(40).'.'.pathinfo($own, PATHINFO_EXTENSION);
+                Storage::disk(config('contentmachine.clips.disk'))->put($path, (string) file_get_contents($own));
+            }
+            if ($path) {
+                $images[] = ['id' => 'img_'.substr(md5($path), 0, 8), 'path' => $path, 'name' => $manual['agent'].'.'.pathinfo($path, PATHINFO_EXTENSION),
+                    'description' => 'Retrato '.($this->propertyGender === 'f' ? 'da consultora' : 'do consultor')." {$manual['agent']}, da {$manual['agency']}."];
+            }
+        }
+        if (! $listing) {
+            // "Label: value" per line (a bare line is kept as is).
+            $manual['details'] = collect(preg_split('/\R/', $this->propertyFacts))->map(fn ($l) => trim($l))->filter()
+                ->mapWithKeys(fn ($l, $i) => str_contains($l, ':') ? [trim(strstr($l, ':', true)) => trim(substr(strstr($l, ':'), 1))] : ["Facto {$i}" => $l])->all();
+        }
+        $clip = $this->clips()->create([
+            'type' => ClipRecord::TYPE_OVERLAY,
+            'input_kind' => 'video',
+            'status' => $listing ? ClipRecord::STATUS_IMPORTING : ClipRecord::STATUS_ANALYZING,
+            'title' => $photos ? 'Fotografias — '.count($property['photos']).' divisões' : $this->video->getClientOriginalName(),
+            'images' => $images ?: null,
+            'meta' => $this->musicaMeta([
+                'listing' => $manual,
+                'property' => $property,
+                'allowed_present' => ['video', 'over'],
+                'formato' => 'auto',
+                'licence' => trim($this->licence),
+            ] + $this->afterIntroMeta()),
+        ]);
+
+        // A listing gives the agent's outro, the house facts and,
+        // if asked, the narration; the importer then hands over to the footage.
+        $listing ? ImportListingJob::dispatch($clip->id, $this->propertyListingUrl) : AnalyzePropertyJob::dispatch($clip->id);
+        $this->voltar();
+    }
+
+    /**
+     * The sections the user marked on the walkthrough's timeline become the
+     * rooms to modernise: save them and make each one's checked modern still.
+     *
+     * @param  list<array{start:float|int|string,end:float|int|string,note?:string}>  $sections
+     */
+    public function stageSections(string $id, array $sections): void
+    {
+        $p = $this->clips()->find($id);
+        $duration = (float) ($p?->meta['property']['duration'] ?? 0);
+        if (! $p || $p->status !== ClipRecord::STATUS_CHOOSING_SECTIONS || $duration <= 0) {
+            return;
+        }
+
+        $clean = collect($sections)
+            ->map(fn ($s) => [
+                'start' => round(max(0.0, min((float) ($s['start'] ?? 0), $duration)), 2),
+                'end' => round(max(0.0, min((float) ($s['end'] ?? 0), $duration)), 2),
+                'note' => Str::limit(trim((string) ($s['note'] ?? '')), 300, ''),
+            ])
+            // The picker caps a section at exactly 10 s, which rounding can push to 10.01: trim, never drop.
+            ->map(fn ($s) => ['end' => round(min($s['end'], $s['start'] + 10.0), 2)] + $s)
+            ->sortBy('start')->values();
+        $short = $clean->contains(fn ($s) => $s['end'] - $s['start'] < 1.0);
+        $overlap = $clean->contains(fn ($s, $i) => $i > 0 && $s['start'] < $clean[$i - 1]['end'] - 0.01);
+        if ($clean->isEmpty() || $clean->count() > 10 || $overlap || $short) {
+            $this->addError('sections.'.$id, 'Mark 1 to 10 sections of 1–10 s each, without overlaps.');
+
+            return;
+        }
+
+        $p->update([
+            'status' => ClipRecord::STATUS_ANALYZING,
+            'meta' => array_merge($p->meta, ['property' => array_merge($p->meta['property'], ['sections' => $clean->all()])]),
+        ]);
+        AnalyzePropertyJob::dispatch($id, true);
+    }
+
+    /**
+     * Back to the section picker from the approval step or a finished reel: the
+     * sections stay marked, and the ones left untouched keep their stills and
+     * animations when they're saved again.
+     */
+    public function reselectSections(string $id): void
+    {
+        $p = $this->clips()->find($id);
+        $ok = [ClipRecord::STATUS_REVIEWING_ROOMS, ClipRecord::STATUS_DONE, ClipRecord::STATUS_FAILED];
+        if (! $p || empty($p->meta['property']['proxy']) || ! in_array($p->status, $ok, true)
+            || collect($p->meta['property']['rooms'] ?? [])->contains(fn ($r) => ! empty($r['anim']['staging']))) {
+            return;
+        }
+        $p->update(['status' => ClipRecord::STATUS_CHOOSING_SECTIONS, 'error' => null]);
+    }
+
+    /** Write and narrate a voiceover for a finished property reel from its listing link and/or the house details typed. */
+    public function narrateProperty(string $id, string $info, string $url = ''): void
+    {
+        $p = $this->clips()->find($id);
+        if (! $p || empty($p->meta['property']['proxy']) || $p->status !== ClipRecord::STATUS_DONE) {
+            return;
+        }
+        $info = trim(mb_substr($info, 0, 4000));
+        $url = trim($url);
+        if ($url !== '' && ! filter_var($url, FILTER_VALIDATE_URL)) {
+            $this->addError('narrate.'.$id, 'That listing link is not a valid URL.');
+
+            return;
+        }
+        if ($info === '' && $url === '') {
+            $this->addError('narrate.'.$id, 'Paste the listing link or write the house details first.');
+
+            return;
+        }
+        $p->update(['status' => ClipRecord::STATUS_IMPORTING, 'meta' => array_merge($p->meta, ['step' => 'Writing and narrating the voiceover'])]);
+        NarratePropertyJob::dispatch($id, $info, $url);
+    }
+
+    /** Remove a finished property reel's voiceover and cut it again without one. */
+    public function removePropertyVoice(string $id): void
+    {
+        $p = $this->clips()->find($id);
+        if (! $p || empty($p->meta['property']['voice']) || $p->status !== ClipRecord::STATUS_DONE) {
+            return;
+        }
+        Storage::disk(config('contentmachine.clips.disk'))->delete($p->meta['property']['voice']);
+        $prop = $p->meta['property'];
+        unset($prop['voice']);
+        $p->update(['status' => ClipRecord::STATUS_ANIMATING, 'meta' => array_merge($p->meta, ['property' => $prop])]);
+        AnimatePropertyJob::dispatch($id);
+    }
+
+    /** Change a property reel's final format before it's cut (a new cut is needed for it to show). */
+    public function setPropertyAspect(string $id, string $aspect): void
+    {
+        $p = $this->clips()->find($id);
+        $ok = [ClipRecord::STATUS_CHOOSING_SECTIONS, ClipRecord::STATUS_REVIEWING_ROOMS];
+        if (! $p || empty($p->meta['property']) || ! in_array($p->status, $ok, true) || ! array_key_exists($aspect, PropertyVideoEditor::ASPECTS)) {
+            return;
+        }
+        $prop = $p->meta['property'];
+        $prop['aspect'] = $aspect;
+        $p->update(['meta' => array_merge($p->meta, ['property' => $prop])]);
+    }
+
+    /** Another take of a room's staged still, with the (possibly edited) prompt. */
+    public function restageRoom(string $id, int $i, string $prompt = ''): void
+    {
+        $p = $this->clips()->find($id);
+        $prop = $p?->meta['property'] ?? null;
+        if (! $p || $p->status !== ClipRecord::STATUS_REVIEWING_ROOMS || empty($prop['rooms'][$i]['anim'])) {
+            return;
+        }
+        $prop['rooms'][$i]['anim'] = array_merge($prop['rooms'][$i]['anim'], array_filter(['prompt' => trim($prompt)]), ['staging' => true, 'enabled' => true]);
+        $p->update(['meta' => array_merge($p->meta, ['property' => $prop])]);
+        RestagePropertyRoomJob::dispatch($id, $i);
+    }
+
+    /** Use another of the room's modernised images (its animation is made again). */
+    public function chooseStill(string $id, int $i, int $n): void
+    {
+        $p = $this->clips()->find($id);
+        $prop = $p?->meta['property'] ?? null;
+        $pick = $prop['rooms'][$i]['anim']['candidates'][$n] ?? null;
+        if (! $p || $p->status !== ClipRecord::STATUS_REVIEWING_ROOMS || ! $pick || ! empty($prop['rooms'][$i]['anim']['staging'])) {
+            return;
+        }
+        $anim = &$prop['rooms'][$i]['anim'];
+        if (($anim['staged'] ?? null) === $pick['path']) {
+            return;
+        }
+        if (! empty($anim['video'])) {
+            Storage::disk(config('contentmachine.clips.disk'))->delete($anim['video']);
+        }
+        unset($anim['video'], $anim['clip_problems'], $anim['onset']);
+        $anim = array_merge($anim, ['staged' => $pick['path'], 'alignment' => $pick['score'], 'problems' => $pick['problems'], 'error' => null]);
+        unset($anim);
+        $p->update(['meta' => array_merge($p->meta, ['property' => $prop])]);
+    }
+
+    /** Animate this room, or keep it as plain footage. */
+    public function toggleRoom(string $id, int $i): void
+    {
+        $p = $this->clips()->find($id);
+        $prop = $p?->meta['property'] ?? null;
+        if (! $p || $p->status !== ClipRecord::STATUS_REVIEWING_ROOMS || empty($prop['rooms'][$i]['anim'])) {
+            return;
+        }
+        $prop['rooms'][$i]['anim']['enabled'] = empty($prop['rooms'][$i]['anim']['enabled']);
+        $p->update(['meta' => array_merge($p->meta, ['property' => $prop])]);
+    }
+
+    /** A photo's camera: into the room or back out of it (its animation is made again). */
+    public function flipRoomMotion(string $id, int $i): void
+    {
+        $p = $this->clips()->find($id);
+        $prop = $p?->meta['property'] ?? null;
+        if (! $p || $p->status !== ClipRecord::STATUS_REVIEWING_ROOMS || empty($prop['photos']) || empty($prop['rooms'][$i]['anim'])) {
+            return;
+        }
+        $anim = &$prop['rooms'][$i]['anim'];
+        $anim['motion'] = $anim['motion'] === 'backward' ? 'forward' : 'backward';
+        if (! empty($anim['video'])) {
+            Storage::disk(config('contentmachine.clips.disk'))->delete($anim['video']);
+        }
+        unset($anim['video'], $anim['clip_problems'], $anim['onset']);
+        unset($anim);
+        $p->update(['meta' => array_merge($p->meta, ['property' => $prop])]);
+    }
+
+    /** Stills approved: animate the enabled rooms and cut the reel. */
+    public function animateProperty(string $id): void
+    {
+        $p = $this->clips()->find($id);
+        $rooms = $p?->meta['property']['rooms'] ?? [];
+        if (! $p || $p->status !== ClipRecord::STATUS_REVIEWING_ROOMS || collect($rooms)->contains(fn ($r) => ! empty($r['anim']['staging']))) {
+            return;
+        }
+        $p->update(['status' => ClipRecord::STATUS_ANIMATING]);
+        AnimatePropertyJob::dispatch($id);
+    }
+
+    /** A voiceover the user recorded/generated elsewhere, uploaded instead of any take. */
+    public function updatedTakeUploads(mixed $value, string $id): void
+    {
+        $this->validate(
+            ["takeUploads.$id" => 'required|file|mimetypes:audio/*,video/webm,video/mp4|max:51200'],
+            ["takeUploads.$id.mimetypes" => 'Unsupported audio format. Upload mp3/wav/m4a.'],
+        );
+        $p = $this->clips()->find($id);
+        if ($p && $p->status === ClipRecord::STATUS_CHOOSING_VOICE) {
+            $takes = $p->meta['voice_takes'] ?? [];
+            $takes[] = $value->store('clips/uploads');
+            $p->update(['meta' => array_merge($p->meta, ['voice_takes' => $takes])]);
+            $this->escolherTake($id, count($takes) - 1);
+        }
+        unset($this->takeUploads[$id]);
+    }
+
+    /** The agent's photo for a property reel's outro card: replaces the one it had. */
+    public function updatedAgentPhotos(mixed $value, string $id): void
+    {
+        $this->validate(["agentPhotos.$id" => 'required|image|max:10240']);
+        $p = $this->clips()->find($id);
+        if ($p && ! empty($p->meta['property'])) {
+            $this->trocarRetrato($p, $value->store('clips/uploads'), $value->extension() ?: $value->getClientOriginalExtension());
+        }
+        unset($this->agentPhotos[$id]);
+    }
+
+    /** The agent's portrait on a clip, replaced by the one at $path (the old file goes). */
+    private function trocarRetrato(ClipRecord $p, string $path, string $ext): void
+    {
+        $listing = $p->meta['listing'] ?? [];
+        $agent = (string) ($listing['agent'] ?? 'agente');
+        $isPhoto = fn ($img) => str_starts_with((string) ($img['description'] ?? ''), 'Retrato');
+        foreach (array_filter($p->images ?? [], $isPhoto) as $old) {
+            Storage::disk(config('contentmachine.clips.disk'))->delete($old['path']);
+        }
+        $images = array_values(array_filter($p->images ?? [], fn ($img) => ! $isPhoto($img)));
+        // The id changes with the file: scenes that showed the old portrait are pointed at the new one.
+        $old = collect($p->images ?? [])->first($isPhoto)['id'] ?? null;
+        $new = 'img_'.substr(md5($path), 0, 8);
+        $images[] = ['id' => $new, 'path' => $path, 'name' => $agent.'.'.$ext,
+            'description' => 'Retrato '.(($listing['gender'] ?? 'm') === 'f' ? 'da consultora' : 'do consultor')." {$agent}, da ".($listing['agency'] ?? 'RE/MAX').'.'];
+        $plan = $p->plan;
+        if ($old && is_array($plan)) {
+            array_walk_recursive($plan, function (&$v) use ($old, $new) {
+                if ($v === $old) {
+                    $v = $new;
+                }
+            });
+        }
+        $p->update(['images' => $images, 'meta' => array_merge($p->meta ?? [], ['agent_photo' => $path]), 'plan' => $plan]);
+    }
+
     public function submitAnimation(): void
     {
         $this->validate([
@@ -610,8 +1187,16 @@ class ClipsAnimados extends Component
             'audio.max' => 'The voiceover is too large (maximum 50 MB).',
         ], ['text' => 'text', 'audio' => 'voiceover']);
 
+        $this->validate($this->afterIntroRules());
+        $this->exigirImagensSeSoReferencias();
+
         $kind = $this->audio ? 'audio' : 'text';
         $path = $this->audio ? $this->audio->store('clips/uploads') : null;
+        $afterIntro = $this->afterIntroMeta();
+        // A typed script says the after-intro line right after its first sentence (a recording can't).
+        if ($kind === 'text' && ($afterIntro['after_intro'] || app(EffectStore::class)->afterIntroPath())) {
+            $this->text = ListingScriptWriter::withAfterIntroLine($this->text, $afterIntro['after_intro_line']);
+        }
 
         $project = $this->clips()->create([
             'type' => ClipRecord::TYPE_ANIMATION,
@@ -620,11 +1205,27 @@ class ClipsAnimados extends Component
             'source_text' => $kind === 'text' ? $this->text : null,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions), 'fewer_images' => $this->poucasImagens, 'free_sfx' => $this->freeSfx]),
+            'meta' => $this->musicaMeta(['background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim(trim($this->instructions).(trim($this->licence) !== '' ? "\nAgent's licence (AMI): ".trim($this->licence).' — show it small on the outro card.' : '')), 'fewer_images' => $this->poucasImagens, 'no_images' => $this->semImagens, 'only_reference_images' => $this->soReferencias, 'auto_finish' => $this->paraFinalizados, 'free_sfx' => $this->freeSfx] + $afterIntro),
         ]);
 
         TranscribeJob::dispatch($project->id);
         $this->voltar();
+    }
+
+    /** @return array<string,string> */
+    private function afterIntroRules(): array
+    {
+        return [
+            'afterIntro' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm,video/x-m4v|max:1048576',
+            'afterIntroLine' => 'nullable|string|max:200',
+            'licence' => 'nullable|string|max:60',
+        ];
+    }
+
+    /** This clip's after-intro (null → the project's) and its line (empty → nothing said over it). */
+    private function afterIntroMeta(): array
+    {
+        return ['after_intro' => $this->afterIntro?->store('clips/uploads'), 'after_intro_line' => trim($this->afterIntroLine)];
     }
 
     public function submitOverlay(): void
@@ -642,6 +1243,7 @@ class ClipsAnimados extends Component
             'allowedPresents.min' => 'Choose at least one style.',
         ], ['video' => 'video']);
 
+        $this->exigirImagensSeSoReferencias();
         $path = $this->video ? $this->video->store('clips/uploads') : $this->videoPronto;
         $titulo = $this->video ? $this->video->getClientOriginalName() : $this->videoProntoNome;
 
@@ -651,7 +1253,7 @@ class ClipsAnimados extends Component
             'title' => $titulo,
             'source_path' => $path,
             'images' => $this->images ?: null,
-            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'formato' => $this->formato, 'background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions), 'fewer_images' => $this->poucasImagens, 'free_sfx' => $this->freeSfx]),
+            'meta' => $this->musicaMeta(['allowed_present' => array_values($this->allowedPresents), 'formato' => $this->formato, 'background' => $this->background, 'lead' => trim($this->lead), 'instructions' => trim($this->instructions), 'fewer_images' => $this->poucasImagens, 'no_images' => $this->semImagens, 'only_reference_images' => $this->soReferencias, 'auto_finish' => $this->paraFinalizados, 'free_sfx' => $this->freeSfx]),
         ]);
 
         TranscribeJob::dispatch($project->id);
@@ -976,6 +1578,7 @@ class ClipsAnimados extends Component
         $this->editTitle = (string) $p->title;
         $this->musica = (string) ($p->meta['musica'] ?? '');
         $this->musicaVolume = (float) ($p->meta['musica_volume'] ?? 0.1);
+        $this->legendas = (string) ($p->meta['captions'] ?? 'bottom');
         $this->images = array_values($p->images ?? []);
         $this->imageReplace = [];
         $this->editOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
@@ -1012,6 +1615,8 @@ class ClipsAnimados extends Component
         }, $p->plan['scenes'] ?? [], array_keys($p->plan['scenes'] ?? []));
         $this->editPlanJson = json_encode($p->plan ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $this->editMode = 'cenas';
+        $this->listingVideoLength = $this->medirVideoDoImovel($p);
+        $this->momentPicker = null;
         $this->resetValidation();
         $this->view = 'editPlan';
     }
@@ -1353,6 +1958,9 @@ class ClipsAnimados extends Component
     /** Scene index whose "pick from library" panel is open, or null. */
     public ?int $sceneLibraryPicker = null;
 
+    /** The block whose footage is being picked from the property video, or null. */
+    public ?int $momentPicker = null;
+
     /**
      * The layer in a scene that shows an image — the one already carrying a src,
      * otherwise the first image-reveal (an image slot waiting to be filled).
@@ -1447,6 +2055,162 @@ class ClipsAnimados extends Component
             $this->aplicarImagemCena($i, $entry);
         }
         $this->sceneLibraryPicker = null;
+    }
+
+    /** The clip being edited was given a property video (a listing): its length, for the moment picker. */
+    #[Locked]
+    public ?float $listingVideoLength = null;
+
+    /** The clip open in an editor, for its view. */
+    public function getEditingClipProperty(): ?ClipRecord
+    {
+        return $this->editingId ? $this->clips()->find($this->editingId) : null;
+    }
+
+    /** The property video's length of a clip, for the transcript editor (null: none). */
+    public function listingVideoLengthFor(?ClipRecord $p): ?float
+    {
+        return $this->medirVideoDoImovel($p);
+    }
+
+    private function medirVideoDoImovel(?ClipRecord $p): ?float
+    {
+        $path = $p?->meta['listing_video'] ?? null;
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        if (! is_string($path) || ! $disk->exists($path)) {
+            return null;
+        }
+        try {
+            return PropertyVideoAnalyzer::probe($disk->path($path))['duration'];
+        } catch (\RuntimeException) {
+            return null;
+        }
+    }
+
+    /**
+     * A block's footage slots: the keys of its image layer that show video
+     * (src, src2… — a fan shows five), with the moment of the property video
+     * each one plays when known. A block showing no video yet has the one slot.
+     *
+     * @return list<array{key:string,start:?float,end:?float}>
+     */
+    public function videoSlots(int $i): array
+    {
+        $li = $this->camadaDeImagem($i);
+        $params = $li === null ? [] : ($this->editScenes[$i]['layers'][$li]['params'] ?? []);
+        $byId = collect($this->images)->keyBy('id');
+        $slots = [];
+        foreach (['src', 'src2', 'src3', 'src4', 'src5'] as $key) {
+            $img = is_string($params[$key] ?? null) ? $byId->get($params[$key]) : null;
+            if ($img && ! empty($img['video'])) {
+                $slots[] = ['key' => $key, 'start' => $img['source'][0] ?? null, 'end' => $img['source'][1] ?? null];
+            }
+        }
+
+        return $slots ?: ($li === null ? [] : [['key' => 'src', 'start' => null, 'end' => null]]);
+    }
+
+    /** "Improve with AI" on a clip's card: whose prompt is open, and the prompt. */
+    public ?string $improveCardId = null;
+
+    public string $improveCardPrompt = '';
+
+    /**
+     * Re-render only the ending (the closing card changed — say, the agent card
+     * gained the Licença AMI): its inputs the clip doesn't have yet are taken from
+     * the effect's sample (never the agent's own name, phone, e-mail or photo),
+     * and only its frames are rendered again, joined onto the clip as it is.
+     */
+    public function rerenderFinal(string $id): void
+    {
+        $p = $this->clips()->find($id);
+        $scenes = $p?->plan['scenes'] ?? [];
+        if (! $p || ! $p->output_path || count($scenes) < 2) {
+            return;
+        }
+        $last = count($scenes) - 1;
+        $plan = $p->plan;
+        foreach ($plan['scenes'][$last]['layers'] ?? [] as $li => $layer) {
+            $sample = (array) (app(EffectStore::class)->all()->firstWhere('slug', $layer['type'] ?? '')?->sample_params ?? []);
+            $own = ['name', 'phone', 'email', 'src', 'logo', 'avatar', 'text'];
+            foreach (array_diff_key($sample, array_flip($own), (array) ($layer['params'] ?? [])) as $k => $v) {
+                $plan['scenes'][$last]['layers'][$li]['params'][$k] = $v;
+            }
+        }
+        $p->update(['plan' => $plan, 'status' => ClipRecord::STATUS_RENDERING, 'error' => null]);
+        RenderJob::dispatch($p->id, (float) $scenes[$last]['start']);
+    }
+
+    public function abrirMelhoriaClip(string $id): void
+    {
+        [$this->improveCardId, $this->improveCardPrompt] = [$this->improveCardId === $id ? null : $id, ''];
+        $this->resetValidation('improveCardPrompt');
+    }
+
+    /**
+     * "Improve with AI": the clip reworked as the prompt asks — its script
+     * rewritten (when the voice is generated), and its photos, footage, timing
+     * and effects planned again with the request as direction; its caption
+     * follows. No picture is generated or edited (ImproveClipJob).
+     */
+    public function melhorarClip(): void
+    {
+        $this->validate(['improveCardPrompt' => 'required|string|min:3|max:2000'], ['improveCardPrompt.required' => 'Say what to change.']);
+        $p = $this->clips()->find((string) $this->improveCardId);
+        if (! $p) {
+            return;
+        }
+        $p->update(['meta' => array_merge($p->meta ?? [], ['improve_request' => trim($this->improveCardPrompt)]), 'status' => ClipRecord::STATUS_IMPROVING, 'error' => null]);
+        ImproveClipJob::dispatch($p->id);
+        [$this->improveCardId, $this->improveCardPrompt] = [null, ''];
+    }
+
+    public function abrirMomentos(int $i): void
+    {
+        $this->momentPicker = $this->momentPicker === $i ? null : $i;
+    }
+
+    /**
+     * The moments the user marked on the property video for block $i, one per
+     * footage slot in order: each is cut into a clip (stretched to the block's
+     * length when shorter, so it never freezes) and put in its slot. Saving the
+     * edit re-renders with them.
+     *
+     * @param  list<array{start:float,end:float}>  $moments
+     */
+    public function usarMomentos(int $i, array $moments): void
+    {
+        $length = $this->listingVideoLength;
+        $slots = $this->videoSlots($i);
+        $li = $this->camadaDeImagem($i);
+        if ($length === null || $slots === [] || $li === null || ! isset($this->editScenes[$i])) {
+            return;
+        }
+        $moments = array_slice(array_values(array_filter($moments, fn ($m) => is_numeric($m['start'] ?? null) && is_numeric($m['end'] ?? null)
+            && $m['end'] > $m['start'] && $m['start'] >= 0 && $m['start'] < $length)), 0, count($slots));
+        if ($moments === []) {
+            $this->addError("moments.$i", 'Mark at least one moment on the strip.');
+
+            return;
+        }
+        $p = $this->clips()->findOrFail($this->editingId);
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        $source = $disk->path($p->meta['listing_video']);
+        $block = max(0.5, (float) $this->editScenes[$i]['end'] - (float) $this->editScenes[$i]['start']);
+        $layers = $this->editScenes[$i]['layers'];
+        foreach ($moments as $k => $m) {
+            $start = (float) $m['start'];
+            // Shorter than the block: run on to its length (as far as the video goes) — a clip that ends early freezes.
+            $end = min($length, max((float) $m['end'], $start + $block));
+            $path = 'clips/uploads/'.Str::random(40).'.mp4';
+            PropertyVideoAnalyzer::cut($source, $start, $end - $start, $disk->path($path));
+            $label = sprintf('%d:%04.1f–%d:%04.1f', intdiv((int) $start, 60), fmod($start, 60), intdiv((int) $end, 60), fmod($end, 60));
+            $this->images[] = ['id' => 'vid_'.substr(md5($path), 0, 8), 'path' => $path, 'name' => "momento-{$i}-".($k + 1).'.mp4',
+                'description' => "Momento escolhido do vídeo do imóvel ({$label}).", 'transparent' => false, 'tone' => 'mixed', 'video' => true, 'source' => [$start, $end]];
+            $layers[$li]['params'][$slots[$k]['key']] = end($this->images)['id'];
+        }
+        $this->editScenes[$i]['layers'] = $layers;
+        $this->momentPicker = null;
     }
 
     /** Point a scene's image layer at a new image (added to the clip's images). */
@@ -1616,12 +2380,13 @@ class ClipsAnimados extends Component
         $this->guardarPlano($validator, $filler, $library);
     }
 
-    /** Merge the current music choice into a meta array (base preserved). */
+    /** Merge the current music and caption choices into a meta array (base preserved). */
     private function musicaMeta(array $base = []): array
     {
         return array_merge($base, [
             'musica' => trim($this->musica),
             'musica_volume' => $this->musicaVolume,
+            'captions' => $this->legendasValidas(),
         ]);
     }
 
@@ -1629,24 +2394,154 @@ class ClipsAnimados extends Component
     // Edit transcript (→ replans + re-render)
     // =====================================================================
 
+    /** Editing a listing clip: the listing options, prefilled with what it was made with (uploads replace). */
+    public bool $editListing = false;
+
+    public string $editListingUrl = '';
+
+    public $editAgentPhoto = null;
+
+    public $editListingVideo = null;
+
+    public $editAfterIntro = null;
+
+    public string $editAfterIntroLine = '';
+
+    public string $editListingNotes = '';
+
+    public bool $editMixPhotos = false;
+
     public function editarTranscricao(string $id): void
     {
         $p = $this->clips()->findOrFail($id);
         $this->editingId = $p->id;
         $this->editTranscriptText = (string) ($p->transcript['text'] ?? '');
+        // The same options the create form offers, prefilled with what this clip
+        // was made with — a re-plan is the moment to change them.
+        $m = $p->meta ?? [];
+        $this->editOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
+        $this->allowedPresents = array_values((array) ($m['allowed_present'] ?? $this->allowedPresents));
+        $this->formato = (string) ($m['formato'] ?? 'auto');
+        $this->background = (string) ($m['background'] ?? 'auto');
+        $this->lead = (string) ($m['lead'] ?? '');
+        $this->instructions = (string) ($m['instructions'] ?? '');
+        $this->poucasImagens = (bool) ($m['fewer_images'] ?? false);
+        $this->semImagens = (bool) ($m['no_images'] ?? false);
+        $this->soReferencias = (bool) ($m['only_reference_images'] ?? false);
+        $this->legendas = (string) ($m['captions'] ?? 'bottom');
+        $this->paraFinalizados = (bool) ($m['auto_finish'] ?? false);
+        $this->freeSfx = (bool) ($m['free_sfx'] ?? false);
+        $this->musica = (string) ($m['musica'] ?? '');
+        $this->musicaVolume = (float) ($m['musica_volume'] ?? 0.1);
+        // A listing: the options of the "From a listing" form, as this clip was made.
+        // (A property walkthrough reel is rebuilt from its own footage — not from this form.)
+        $this->editListing = isset($m['listing']) && empty($m['property']);
+        $this->editListingUrl = (string) ($m['listing']['url'] ?? '');
+        $this->editAfterIntroLine = (string) (($m['after_intro_line'] ?? '') ?: app(EffectStore::class)->afterIntroLine());
+        $this->editListingNotes = (string) ($m['script_notes'] ?? '');
+        $this->editMixPhotos = (bool) ($m['mix_photos'] ?? false);
+        $this->reset('editAgentPhoto', 'editListingVideo', 'editAfterIntro');
         $this->resetValidation();
         $this->view = 'editTranscript';
+    }
+
+    /**
+     * The listing options changed in the transcript editor. What the listing is
+     * read into (the link, the notes, the property video, mixing in its photos)
+     * rebuilds the clip from the listing — a fresh import, true is returned. The
+     * rest is applied here and the usual regenerate carries on: a new agent photo
+     * or after-intro video is swapped in, a new after-intro line replaces the old
+     * one in the transcript (so it is spoken).
+     */
+    private function aplicarOpcoesDoAnuncio(ClipRecord $p): bool
+    {
+        $video = 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm,video/x-m4v|max:1048576';
+        $this->validate([
+            // Required only of a clip made from a link (one made from typed-in details has none to rebuild from).
+            'editListingUrl' => [($p->meta['listing']['url'] ?? '') !== '' ? 'required' : 'nullable', 'url:https,http', fn ($a, $v, $fail) => $v === '' || ListingScraper::supports($v) ? null : $fail(ListingScraper::UNSUPPORTED)],
+            'editAgentPhoto' => 'nullable|image|max:10240', 'editListingVideo' => $video, 'editAfterIntro' => $video,
+            'editAfterIntroLine' => 'nullable|string|max:200', 'editListingNotes' => 'nullable|string|max:3000',
+        ]);
+        $m = $p->meta ?? [];
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        [$property, $afterIntro] = [$this->editListingVideo, $this->editAfterIntro];
+        if (self::videosTrocados($property, $afterIntro)) {
+            [$property, $afterIntro] = [$afterIntro, $property];
+        }
+        $url = trim($this->editListingUrl);
+        $rebuild = $url !== '' && ($url !== ($m['listing']['url'] ?? '') || trim($this->editListingNotes) !== trim((string) ($m['script_notes'] ?? ''))
+            || $this->editMixPhotos !== (bool) ($m['mix_photos'] ?? false) || $property !== null);
+
+        $oldLine = trim((string) (($m['after_intro_line'] ?? '') ?: app(EffectStore::class)->afterIntroLine()));
+        $line = trim($this->editAfterIntroLine);
+        if ($property) {
+            $disk->delete(array_filter([$m['listing_video'] ?? null, "clips/listing-preview/{$p->id}.mp4", "clips/listing-preview/{$p->id}-strip.jpg"]));
+            $m['listing_video'] = $property->store('clips/uploads');
+        }
+        if ($afterIntro) {
+            $m['after_intro'] = $afterIntro->store('clips/uploads');
+        }
+        $m = array_merge($m, ['script_notes' => trim($this->editListingNotes), 'mix_photos' => ! empty($m['listing_video']) && $this->editMixPhotos, 'after_intro_line' => $line]);
+        $m['listing']['url'] = $url;
+        $p->update(['meta' => $m]);
+        if ($this->editAgentPhoto) {
+            $rebuild
+                ? $p->update(['meta' => array_merge($p->meta, ['agent_photo' => $this->editAgentPhoto->store('clips/uploads')])])
+                : $this->trocarRetrato($p, $this->editAgentPhoto->store('clips/uploads'), $this->editAgentPhoto->extension() ?: 'jpg');
+        }
+
+        if ($rebuild) {
+            $p->update(['status' => ClipRecord::STATUS_IMPORTING, 'error' => null]);
+            ImportListingJob::dispatch($p->id, $url);
+            $this->voltar();
+
+            return true;
+        }
+        // A new after-intro line is what the voiceover says over the video: in the transcript, in place of the old one.
+        if ($line !== $oldLine && $line !== '') {
+            $text = trim($this->editTranscriptText);
+            $sem = rtrim($oldLine, '.!?');
+            $this->editTranscriptText = $sem !== '' && mb_stripos($text, $sem) !== false
+                ? (string) preg_replace('/'.preg_quote($sem, '/').'[.!?]?/iu', rtrim($line, '.!?').'.', $text, 1)
+                : ListingScriptWriter::withAfterIntroLine($text, $line);
+        }
+
+        return false;
+    }
+
+    /** The clip being edited has a generated voice: an edited transcript is spoken again. */
+    public function getEditingSpokenAgainProperty(): bool
+    {
+        $p = $this->editingId ? $this->clips()->find($this->editingId) : null;
+
+        return $p !== null && (isset($p->meta['listing']) || $p->input_kind === 'text');
     }
 
     public function regenerar(): void
     {
         $this->validate(
-            ['editTranscriptText' => 'required|string|max:5000'],
-            ['editTranscriptText.required' => 'The transcript cannot be empty.'],
+            [
+                'editTranscriptText' => 'required|string|max:5000',
+                'allowedPresents' => $this->editOverlay ? 'array|min:1' : 'array',
+                'allowedPresents.*' => 'in:video,over,split,animation',
+                'formato' => 'required|in:auto,'.implode(',', array_keys(VfxStore::ASPECTS)),
+            ],
+            ['editTranscriptText.required' => 'The transcript cannot be empty.', 'allowedPresents.min' => 'Choose at least one style.'],
         );
 
+        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'The instructions are too long (maximum 10,000 characters).']);
+
+        $p = $this->clips()->findOrFail($this->editingId);
+        if ($this->editListing && $this->aplicarOpcoesDoAnuncio($p)) {
+            return;   // rebuilt from the listing: a fresh import is on its way
+        }
         $p = $this->clips()->findOrFail($this->editingId);
         $transcript = $p->transcript ?? [];
+        // A generated voice (a listing, a clip written as text) says the edit: it is
+        // spoken again, then planned on the new audio. A recorded voice can't change —
+        // there the edit only fixes the words on screen.
+        $falar = (isset($p->meta['listing']) || $p->input_kind === 'text')
+            && trim($this->editTranscriptText) !== trim((string) ($transcript['text'] ?? ''));
         $transcript['text'] = trim($this->editTranscriptText);
         $transcript['words'] = TranscriptRebuilder::rebuild(
             $this->editTranscriptText,
@@ -1656,11 +2551,24 @@ class ClipsAnimados extends Component
 
         $p->update([
             'transcript' => $transcript,
-            'status' => ClipRecord::STATUS_PLANNING,
+            'meta' => $this->musicaMeta(array_merge($p->meta ?? [], [
+                'allowed_present' => array_values($this->allowedPresents),
+                'formato' => $this->formato,
+                'background' => $this->background,
+                'lead' => trim($this->lead),
+                'instructions' => trim($this->instructions),
+                'fewer_images' => $this->poucasImagens,
+                'no_images' => $this->semImagens,
+                'only_reference_images' => $this->soReferencias,
+
+                'auto_finish' => $this->paraFinalizados,
+                'free_sfx' => $this->freeSfx,
+            ])),
+            'status' => $falar ? ClipRecord::STATUS_TRANSCRIBING : ClipRecord::STATUS_PLANNING,
             'error' => null,
         ]);
 
-        PlanAnimationsJob::dispatch($p->id);
+        $falar ? RegenerateVoiceoverJob::dispatch($p->id, $transcript['text'], replan: true) : PlanAnimationsJob::dispatch($p->id);
         $this->voltar();
     }
 
@@ -1680,6 +2588,21 @@ class ClipsAnimados extends Component
         if ($p->source_path) {
             Storage::disk(config('contentmachine.clips.disk'))->delete($p->source_path);
         }
+        // Voiceover takes still waiting to be picked.
+        Storage::disk(config('contentmachine.clips.disk'))->delete(array_values($p->meta['voice_takes'] ?? []));
+        // A property walkthrough: the footage, the narration, and each room's frames, still and AI clip.
+        $prop = $p->meta['property'] ?? [];
+        Storage::disk(config('contentmachine.clips.disk'))->delete(array_values(array_filter([
+            $prop['video'] ?? null, $prop['proxy'] ?? null, $prop['preview'] ?? null, $prop['strip'] ?? null, $prop['voice'] ?? null,
+            ...($prop['photos'] ?? []),
+            ...collect($prop['rooms'] ?? [])->flatMap(fn ($r) => array_values(array_intersect_key($r['anim'] ?? [], array_flip(['start_frame', 'end_frame', 'staged', 'video']))))->all(),
+            ...collect($prop['rooms'] ?? [])->flatMap(fn ($r) => array_column($r['anim']['candidates'] ?? [], 'path'))->all(),
+        ])));
+
+        // A listing video, and the preview + filmstrip the editor's moment picker made of it.
+        Storage::disk(config('contentmachine.clips.disk'))->delete(array_values(array_filter([
+            $p->meta['listing_video'] ?? null, "clips/listing-preview/{$id}.mp4", "clips/listing-preview/{$id}-strip.jpg",
+        ])));
 
         // Free-SFX components belong to this clip alone — anything the user chose
         // to keep was moved into the library and no longer answers to its id.

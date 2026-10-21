@@ -1,0 +1,907 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T3 em São Mamede de Infesta por 240 mil € com sol todo o dia",
+    "source_text": null,
+    "source_path": "clips/uploads/9YYbEsWDbpPhieEFUHAkCyC24921GDnlvXeRT22e.mp3",
+    "images": [
+        {
+            "id": "img_184dd7f8",
+            "path": "clips/uploads/5cwmvfASe8owgQqUTPuFoOYiHppYP7MbLSF9W99Q.png",
+            "description": "Logótipo RE/MAX Inova: balão de ar quente vermelho, branco e azul sobre fundo branco.",
+            "name": "remax.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8ec8dcc6",
+            "path": "clips/uploads/8ZkyrTJdenscBMZEF7dWwj0WuecZVDBkugDHXjef.jpg",
+            "description": "Casa de banho de serviço vista da porta: base de duche com resguardo de vidro, sanita e lavatório.",
+            "name": "1377ccbd-1f60-4a16-8506-84d75cbaa586.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_85213947",
+            "path": "clips/uploads/Nx8icIksoIWQej9UuqltaJuFnOHADHz0tp6uRBhC.jpg",
+            "description": "Casa de banho principal com banheira, lavatório de coluna azul, espelho redondo e azulejos bege.",
+            "name": "e0c7a3e4-d67f-4875-be01-d75c9af26410.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a380e767",
+            "path": "clips/uploads/u6288QKcE0NMv6P00A8MPJON8R6Ma67geHcbVnyR.jpg",
+            "description": "Quarto pequeno com cama de solteiro, cómoda branca, chão de madeira e janela com vista urbana.",
+            "name": "b94423c1-7dda-447d-9fbb-ce3b01b3155c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_741962f7",
+            "path": "clips/uploads/hH20iKwx1f1gkoPlPTMjfTgcmff5d5RW1PTcjBfw.jpg",
+            "description": "Quarto com cama de solteiro, cómoda branca, chão de madeira, visto em direção à porta.",
+            "name": "f6fa081f-69a0-4091-9b76-bf1b0512af78.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_62ff2e39",
+            "path": "clips/uploads/o6lGNzKhM5IG5ipchXNtGyZy5UktHlwUGkXS3cz5.jpg",
+            "description": "Quarto de casal com cama de madeira, duas secretárias brancas junto à janela, luz natural.",
+            "name": "16d8b400-e8b0-4208-a328-f95666bf51dc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e1a32211",
+            "path": "clips/uploads/WWYfRCb6mzNFRuyd7xSoxOyxBDu4D1jJOx7f0orH.jpg",
+            "description": "Corredor com chão de madeira, portas abertas para dois quartos e casa de banho à direita.",
+            "name": "b7a5b5c1-d484-44c9-a3f1-49e1bb2ed263.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9283f488",
+            "path": "clips/uploads/Fg8Czv5OeMDnRY5RkdSRs57nP3CmVqbd3KQonkwc.jpg",
+            "description": "Quarto com cama de casal, secretária com computador, roupeiro embutido e candeeiro amarelo.",
+            "name": "ab7b7dc7-ef96-43ba-8637-f615dcc0b461.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_489e2643",
+            "path": "clips/uploads/i8tBef6hv8pV3TZRFLUTfsY6KsNOWUU7yTwZOBWo.jpg",
+            "description": "Quarto de casal luminoso com janela ampla, vista para árvores verdes e céu azul.",
+            "name": "10bae865-94d8-4453-bcd0-ab72ee27f6b3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b373c61f",
+            "path": "clips/uploads/PuQmBQN7TI3OuqFmb3E20LoxkiyINQSlcSSAcS4s.jpg",
+            "description": "Cozinha equipada com fogão, armários brancos, chão azul escuro e porta para varanda fechada.",
+            "name": "286b9b42-7bff-490a-95a5-769364cc08fc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_352dd469",
+            "path": "clips/uploads/tbR7a5iWvzW6zId43Z2vZfrQ3OGPyVT6nLQkTvh3.jpg",
+            "description": "Vista da varanda: árvores em flor, casas de telhado vermelho e céu azul limpo, com guarda metálica em primeiro plano.",
+            "name": "62efb44d-62fc-418d-bb59-04f8a6a6afc0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50822979",
+            "path": "clips/uploads/aTAPjh0QzF7jrwPitgG0Y9fwU0VSdDHUAy8O32Gw.jpg",
+            "description": "Sala comprida com chão de tijoleira, sofá cinzento em L, televisão e porta envidraçada aberta para a varanda.",
+            "name": "b9f49f9b-6c07-459b-b1c7-bb7096956d61.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_059d6960",
+            "path": "clips/uploads/Tu3wQnuDe86u4S4GIiDMJaH27tazh00oZBi8c8j8.jpg",
+            "description": "Fachada do prédio branco de quatro pisos, com várias varandas, carros estacionados à frente e céu azul.",
+            "name": "b38cc312-acbb-4b01-bc16-c8b14429d08a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6fe852bf",
+            "path": "clips/uploads/2iVw31bmHpZsAl9uePj607vLurbaXSirMQj9XhmW.jpg",
+            "description": "Sala vista do outro lado: sofá cinzento, mesa de jantar ao fundo e corredor com acesso aos quartos.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7a8dd161",
+            "path": "clips/uploads/ljlK67GbuMfXTJt0FMJG11sqbm7GvQsKZwQLHki0.jpg",
+            "description": "Retrato do agente imobiliário, provavelmente Marcelo Baltazar: homem sorridente, de fato escuro e gravata azul, braços cruzados.",
+            "name": "Marcelo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n240 000 €\nVenda\nid. 127131039-121\n105 m²\n\n3 Quartos\n\n2 WC\n\nD\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\n Apartamento T3 em São Mamede de Infesta\n\nCom uma distribuição equilibrada e acolhedora, o imóvel conta com três quartos, duas casas de banho — uma completa e outra de serviço —, além de uma prática despensa que acrescenta organização ao dia a dia. As duas varandas, sendo uma delas marquizada, oferecem espaços versáteis ideais para momentos de lazer ou até para criar uma zona de trabalho luminosa e resguardada.\n\nA exposição solar (Norte/Sul) garante uma luminosidade natural constante, tornando o ambiente ainda mais agradável e acolhedor ao longo de todo o dia.\n\nSituado a apenas 7 minutos a pé da estação de comboios de São Mamede de Infesta, este apartamento beneficia de uma localização privilegiada, com excelentes acessos e proximidade a todo o tipo de comércio, serviços, escolas e zonas de apoio essenciais.\n\nSe procura um imóvel com potencial para habitação própria ou investimento seguro, esta é uma oportunidade que merece a sua atenção.\n\nDetalhes\nÁrea Bruta Privativa m²\n105\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n101\nQuartos\n3\nAno de Construção\n1987\nPiso\n3o Andar\nWC/Casas de banho\n2\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "real-estate-2.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "T3 em São Mamede de Infesta (Matosinhos) e Linha de Leixões",
+            "summary": "T3 com 105 m² à venda por 240 mil euros em São Mamede de Infesta, perto da estação da Linha de Leixões. A linha voltou a ter comboios de passageiros em fevereiro de 2025.",
+            "timeline": [
+                {
+                    "label": "Linha de Leixões reabre a passageiros",
+                    "sublabel": "9 fev 2025"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.337 €/m² (+19,8%)",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço/m² deste T3 (240 mil € ÷ 105 m²)",
+                    "value": 2286,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano das casas vendidas em Portugal (INE)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga do preço mediano (INE, 1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Comboios por dia útil na Linha de Leixões",
+                    "value": 60,
+                    "unit": "comboios"
+                },
+                {
+                    "label": "Comboios por hora e sentido nas horas de ponta",
+                    "value": 2,
+                    "unit": "comboios/h"
+                },
+                {
+                    "label": "Comboios ao fim de semana e feriados",
+                    "value": 34,
+                    "unit": "comboios/dia"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Este T3 vs. média nacional",
+                    "left": {
+                        "title": "T3 São Mamede de Infesta",
+                        "points": [
+                            "240.000 €",
+                            "105 m²",
+                            "≈2.286 €/m²"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal (INE, 1.º trim. 2026)",
+                        "points": [
+                            "Mediana de 2.337 €/m²",
+                            "+19,8% num ano"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Comboio direto de São Mamede de Infesta para Campanhã e Hospital de São João",
+                "Há comboios diretos entre Leça do Balio e Ovar, sem trocar em Campanhã",
+                "Paragens: Contumil, São Gemil, Hospital de São João, São Mamede de Infesta, Arroteia e Leça do Balio",
+                "Este T3 custa por m² um pouco menos do que a mediana nacional"
+            ],
+            "sources": [
+                "https://eco.sapo.pt/2025/01/24/comboio-de-passageiros-regressa-a-9-de-fevereiro-a-linha-de-leixoes/",
+                "https://www.infraestruturasdeportugal.pt/pt-pt/servico-de-passageiros-regressou-linha-de-leixoes-9-de-fevereiro",
+                "https://www.cp.pt/passageiros/pt/como-viajar/informacao-util/faqs-leixoes",
+                "https://pt.wikipedia.org/wiki/Esta%C3%A7%C3%A3o_Ferrovi%C3%A1ria_de_S%C3%A3o_Mamede_de_Infesta",
+                "https://www.rtp.pt/noticias/economia/dados-ine-preco-medio-da-venda-de-casas-foi-de-2-mil-337-euros-por-metro-quadrado_n1754046",
+                "https://cnnportugal.iol.pt/m2/cnn-tv/atualidade/precos-das-casas-sobem-198-no-arranque-de-2026/",
+                "https://cdn-images.rtp.pt/icm/noticias/docs/66/66271ea88bd95fa8a18c8997b0a2d4ec_1feb20f6a7da18976f65e84c4b8d9c63.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "T3 em São Mamede de Infesta por 240 mil € com sol todo o dia",
+            "description": "T3 com 105 m², três quartos, duas casas de banho, despensa e duas varandas, uma delas fechada e ideal para uma zona de trabalho cheia de luz. Tem exposição norte/sul e fica a sete minutos a pé da estação de comboios, perto de escolas, comércio e serviços. Fale com o Marcelo Baltazar, da RE/MAX Innova, para viver ou investir.",
+            "tags": [
+                "T3",
+                "São Mamede de Infesta",
+                "Matosinhos",
+                "imóveis",
+                "casa à venda",
+                "investimento imobiliário",
+                "RE/MAX Innova",
+                "Marcelo Baltazar"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-rac6z",
+    "created_at": "2026-10-02T10:11:35+00:00",
+    "updated_at": "2026-10-02T10:15:14+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/9YYbEsWDbpPhieEFUHAkCyC24921GDnlvXeRT22e.mp3",
+    "transcript": {
+        "duration": 29.229999542236328,
+        "text": "T3 em São Mamede de Infesta, por 240 mil euros. 105 metros, com três quartos, duas casas de banho e dispensa. Duas varandas, uma delas fechada, perfeita para uma zona de trabalho cheia de luz. Exposição norte e sul, com sol durante todo o dia. A sete minutos a pé da estação de comboios, perto de escolas, comércio e serviços. Para viver ou para investir? O Baltazar tem um imóvel para si. Fale com o Marcelo Baltazar, da Remax Innova.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "T3",
+                "start": 0,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "em",
+                "start": 0.5799999833106995,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "São",
+                "start": 0.9200000166893005,
+                "end": 1.159999966621399
+            },
+            {
+                "word": "Mamede",
+                "start": 1.159999966621399,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "de",
+                "start": 1.6200000047683716,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "Infesta",
+                "start": 1.6200000047683716,
+                "end": 2
+            },
+            {
+                "word": "por",
+                "start": 2.259999990463257,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "240",
+                "start": 2.440000057220459,
+                "end": 3.180000066757202
+            },
+            {
+                "word": "mil",
+                "start": 3.180000066757202,
+                "end": 3.619999885559082
+            },
+            {
+                "word": "euros",
+                "start": 3.619999885559082,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "105",
+                "start": 4.639999866485596,
+                "end": 5
+            },
+            {
+                "word": "metros",
+                "start": 5,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 5.559999942779541,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "três",
+                "start": 5.760000228881836,
+                "end": 6
+            },
+            {
+                "word": "quartos",
+                "start": 6,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "duas",
+                "start": 6.679999828338623,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "casas",
+                "start": 6.860000133514404,
+                "end": 7.139999866485596
+            },
+            {
+                "word": "de",
+                "start": 7.139999866485596,
+                "end": 7.480000019073486
+            },
+            {
+                "word": "banho",
+                "start": 7.480000019073486,
+                "end": 7.519999980926514
+            },
+            {
+                "word": "e",
+                "start": 7.519999980926514,
+                "end": 7.739999771118164
+            },
+            {
+                "word": "dispensa",
+                "start": 7.739999771118164,
+                "end": 8.220000267028809
+            },
+            {
+                "word": "Duas",
+                "start": 8.84000015258789,
+                "end": 9
+            },
+            {
+                "word": "varandas",
+                "start": 9,
+                "end": 9.5
+            },
+            {
+                "word": "uma",
+                "start": 9.680000305175781,
+                "end": 9.800000190734863
+            },
+            {
+                "word": "delas",
+                "start": 9.800000190734863,
+                "end": 10.079999923706055
+            },
+            {
+                "word": "fechada",
+                "start": 10.079999923706055,
+                "end": 10.520000457763672
+            },
+            {
+                "word": "perfeita",
+                "start": 11.079999923706055,
+                "end": 11.4399995803833
+            },
+            {
+                "word": "para",
+                "start": 11.4399995803833,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "uma",
+                "start": 11.600000381469727,
+                "end": 11.960000038146973
+            },
+            {
+                "word": "zona",
+                "start": 11.960000038146973,
+                "end": 11.960000038146973
+            },
+            {
+                "word": "de",
+                "start": 11.960000038146973,
+                "end": 12.579999923706055
+            },
+            {
+                "word": "trabalho",
+                "start": 12.579999923706055,
+                "end": 12.579999923706055
+            },
+            {
+                "word": "cheia",
+                "start": 12.579999923706055,
+                "end": 12.899999618530273
+            },
+            {
+                "word": "de",
+                "start": 12.899999618530273,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "luz",
+                "start": 13.399999618530273,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "Exposição",
+                "start": 13.880000114440918,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "norte",
+                "start": 14.239999771118164,
+                "end": 14.680000305175781
+            },
+            {
+                "word": "e",
+                "start": 14.680000305175781,
+                "end": 14.979999542236328
+            },
+            {
+                "word": "sul",
+                "start": 14.979999542236328,
+                "end": 15.199999809265137
+            },
+            {
+                "word": "com",
+                "start": 15.319999694824219,
+                "end": 15.779999732971191
+            },
+            {
+                "word": "sol",
+                "start": 15.779999732971191,
+                "end": 15.779999732971191
+            },
+            {
+                "word": "durante",
+                "start": 15.779999732971191,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "todo",
+                "start": 16.079999923706055,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "o",
+                "start": 16.479999542236328,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "dia",
+                "start": 16.81999969482422,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "A",
+                "start": 17.34000015258789,
+                "end": 17.5
+            },
+            {
+                "word": "sete",
+                "start": 17.5,
+                "end": 17.760000228881836
+            },
+            {
+                "word": "minutos",
+                "start": 17.760000228881836,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "a",
+                "start": 17.959999084472656,
+                "end": 18.280000686645508
+            },
+            {
+                "word": "pé",
+                "start": 18.280000686645508,
+                "end": 18.280000686645508
+            },
+            {
+                "word": "da",
+                "start": 18.280000686645508,
+                "end": 18.420000076293945
+            },
+            {
+                "word": "estação",
+                "start": 18.420000076293945,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "de",
+                "start": 18.639999389648438,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "comboios",
+                "start": 18.940000534057617,
+                "end": 19.280000686645508
+            },
+            {
+                "word": "perto",
+                "start": 19.6200008392334,
+                "end": 19.6200008392334
+            },
+            {
+                "word": "de",
+                "start": 19.6200008392334,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "escolas",
+                "start": 20.239999771118164,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "comércio",
+                "start": 20.520000457763672,
+                "end": 20.860000610351562
+            },
+            {
+                "word": "e",
+                "start": 20.860000610351562,
+                "end": 21.15999984741211
+            },
+            {
+                "word": "serviços",
+                "start": 21.15999984741211,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "Para",
+                "start": 22.18000030517578,
+                "end": 22.280000686645508
+            },
+            {
+                "word": "viver",
+                "start": 22.280000686645508,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "ou",
+                "start": 22.65999984741211,
+                "end": 23.040000915527344
+            },
+            {
+                "word": "para",
+                "start": 23.040000915527344,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "investir",
+                "start": 23.299999237060547,
+                "end": 23.600000381469727
+            },
+            {
+                "word": "O",
+                "start": 24.100000381469727,
+                "end": 24.260000228881836
+            },
+            {
+                "word": "Baltazar",
+                "start": 24.260000228881836,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "tem",
+                "start": 24.68000030517578,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "um",
+                "start": 24.959999084472656,
+                "end": 25.219999313354492
+            },
+            {
+                "word": "imóvel",
+                "start": 25.219999313354492,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "para",
+                "start": 25.520000457763672,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "si",
+                "start": 25.799999237060547,
+                "end": 26
+            },
+            {
+                "word": "Fale",
+                "start": 26,
+                "end": 26.760000228881836
+            },
+            {
+                "word": "com",
+                "start": 26.760000228881836,
+                "end": 26.8799991607666
+            },
+            {
+                "word": "o",
+                "start": 26.8799991607666,
+                "end": 27.079999923706055
+            },
+            {
+                "word": "Marcelo",
+                "start": 27.079999923706055,
+                "end": 27.440000534057617
+            },
+            {
+                "word": "Baltazar",
+                "start": 27.440000534057617,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "da",
+                "start": 28.100000381469727,
+                "end": 28.219999313354492
+            },
+            {
+                "word": "Remax",
+                "start": 28.219999313354492,
+                "end": 28.579999923706055
+            },
+            {
+                "word": "Innova",
+                "start": 28.579999923706055,
+                "end": 28.959999084472656
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 29.229999542236328,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.4000000000000004,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "T3 em São Mamede de Infesta",
+                        "params": {
+                            "src": "img_6fe852bf",
+                            "avatar": "img_7a8dd161",
+                            "logo": "img_184dd7f8",
+                            "price": "240.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Apartamento T3 em São Mamede de Infesta",
+                            "location": "São Mamede de Infesta · 105 m² · 3 quartos",
+                            "agentName": "Marcelo Baltazar",
+                            "phone": "+351 928 371 531",
+                            "legal": "RE/MAX Innova"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.4000000000000004,
+                "end": 6.55,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "105 m² e três quartos",
+                        "params": {
+                            "src": "img_62ff2e39",
+                            "src2": "img_9283f488",
+                            "src3": "img_a380e767",
+                            "src4": "img_741962f7",
+                            "src5": "img_e1a32211"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.55,
+                "end": 8.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_85213947",
+                            "src2": "img_8ec8dcc6",
+                            "entrySeconds": 0.6,
+                            "angle": "6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.6,
+                "end": 11,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_352dd469",
+                            "zoom": 1.35
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11,
+                "end": 13.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Varanda marquizada",
+                        "params": {
+                            "src": "img_b373c61f",
+                            "blur": 10,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.7,
+                "end": 17.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_489e2643",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.2,
+                "end": 21.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Tudo perto de casa",
+                        "params": {
+                            "src": "img_059d6960",
+                            "title": "Tudo perto de casa",
+                            "items": [
+                                "Estação a 7 min a pé",
+                                "Escolas",
+                                "Comércio e serviços"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.9,
+                "end": 24,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_50822979",
+                            "src2": "img_059d6960",
+                            "src3": "img_6fe852bf",
+                            "src4": "img_62ff2e39"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24,
+                "end": 26,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Um imóvel para si",
+                        "params": {
+                            "src": "img_9283f488",
+                            "src2": "img_741962f7",
+                            "src3": "img_b373c61f",
+                            "src4": "img_352dd469"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26,
+                "end": 29.229999542236328,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marcelo Baltazar",
+                        "params": {
+                            "src": "img_7a8dd161",
+                            "logo": "img_184dd7f8",
+                            "name": "Marcelo Baltazar",
+                            "role": "Consultor imobiliário · RE/MAX Innova",
+                            "buttons": "+351 928 371 531 | Marque a sua visita",
+                            "phone": "+351 928 371 531"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-rac6z/clip.mp4",
+    "error": null
+}

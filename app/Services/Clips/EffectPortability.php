@@ -71,7 +71,7 @@ class EffectPortability
     /** A built-in worth exporting inside "all" — it has a sound or is an intro. */
     private function builtinHasCustomization(string $slug): bool
     {
-        return $this->store->audioPath($slug) !== null || $this->library->builtinIsIntro($slug);
+        return $this->store->audioPath($slug) !== null || $this->library->builtinIsIntro($slug) || $this->library->builtinIsOutro($slug);
     }
 
     /** @return array<string,mixed> a self-contained reference to a built-in effect */
@@ -85,6 +85,7 @@ class EffectPortability
             'sample_text' => $meta['text'] ?? '',
             'sample_params' => $meta['params'] ?? [],
             'intro' => $this->library->builtinIsIntro($slug),
+            'outro' => $this->library->builtinIsOutro($slug),
         ];
 
         $this->attachAudio($out, $slug);
@@ -104,6 +105,7 @@ class EffectPortability
             'sample_text' => $e->sample_text,
             'sample_params' => is_array($e->sample_params) ? $e->sample_params : [],
             'intro' => (bool) $e->intro,
+            'outro' => (bool) $e->outro,
         ];
 
         $this->attachAudio($out, (string) $e->slug);
@@ -166,6 +168,7 @@ class EffectPortability
                 'sample_text' => $entry['sample_text'] ?? null,
                 'sample_params' => $params,
                 'intro' => (bool) ($entry['intro'] ?? false),
+                'outro' => (bool) ($entry['outro'] ?? false),
                 'enabled' => true,
                 'status' => EffectRecord::STATUS_ACTIVE,
             ]);
@@ -208,6 +211,10 @@ class EffectPortability
 
         if (! empty($entry['intro']) && ! $this->library->builtinIsIntro($slug)) {
             $this->library->toggleIntroBuiltin($slug);
+            $applied = true;
+        }
+        if (! empty($entry['outro']) && ! $this->library->builtinIsOutro($slug)) {
+            $this->library->toggleOutroBuiltin($slug);
             $applied = true;
         }
 

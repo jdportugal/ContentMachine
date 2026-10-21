@@ -62,7 +62,7 @@ class GenerateBackgroundJob implements ShouldQueue
             $tmp = tempnam(sys_get_temp_dir(), 'bg_preview_').'.mp4';
             $renderer->render($effects->candidateSampleProps('', []), $tmp, 'src/sample.ts', 'SampleEffect');
 
-            $preview = $library->previewPath($data['slug']);
+            $preview = $library->previewPath($data['slug'], $data['tsx']);
             @mkdir(dirname($preview), 0777, true);
             if (! @rename($tmp, $preview)) {
                 @copy($tmp, $preview);

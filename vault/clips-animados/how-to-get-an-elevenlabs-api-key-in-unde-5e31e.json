@@ -1,0 +1,1443 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "How to Get Your ElevenLabs API Key and Voice ID",
+    "source_path": "clips/uploads/how-to-get-an-elevenlabs-api-key-in-under-a-minute-t9q5-kWI5sj.mp4",
+    "images": [],
+    "meta": {
+        "allowed_present": [
+            "video",
+            "animation"
+        ],
+        "formato": "9:16",
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "fewer_images": true,
+        "free_sfx": false,
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "ElevenLabs: getting an API key and picking a voice (2026)",
+            "summary": "ElevenLabs' dashboard flow is Developers → API Keys → create key (shown in full only once), then Voices/Voice Library where you filter by language, accent and use case such as narration. As of 2026 the library holds 10,000+ community and ElevenLabs voices, the free plan gives 10,000 credits per month with no commercial license, and the company raised $500M at an $11B valuation in February 2026.",
+            "timeline": [
+                {
+                    "label": "ElevenLabs founded by Piotr Dąbkowski and Mati Staniszewski",
+                    "sublabel": "2022"
+                },
+                {
+                    "label": "Series C: $180M at $3.3B valuation",
+                    "sublabel": "January 2025"
+                },
+                {
+                    "label": "Employee tender at $6.6B valuation",
+                    "sublabel": "September 2025"
+                },
+                {
+                    "label": "Closed 2025 with over $330M ARR",
+                    "sublabel": "End of 2025"
+                },
+                {
+                    "label": "Series D: $500M led by Sequoia, $11B valuation",
+                    "sublabel": "4 February 2026"
+                },
+                {
+                    "label": "Legacy Default voices stop working (use Voice Library instead)",
+                    "sublabel": "31 December 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Voices in the Voice Library",
+                    "value": 10000,
+                    "unit": "voices (10,000+, 2026)"
+                },
+                {
+                    "label": "Free plan credits per month",
+                    "value": 10000,
+                    "unit": "credits/month (2026)"
+                },
+                {
+                    "label": "Starter plan (first tier with commercial rights)",
+                    "value": 6,
+                    "unit": "USD/month (2026)"
+                },
+                {
+                    "label": "Creator plan (adds pro voice cloning)",
+                    "value": 22,
+                    "unit": "USD/month (2026)"
+                },
+                {
+                    "label": "Pro plan",
+                    "value": 99,
+                    "unit": "USD/month (2026)"
+                },
+                {
+                    "label": "Flash v2.5 latency to first audio",
+                    "value": 75,
+                    "unit": "ms (approx.)"
+                },
+                {
+                    "label": "Languages supported by Eleven v3",
+                    "value": 70,
+                    "unit": "languages (70+)"
+                },
+                {
+                    "label": "Languages supported by Multilingual v2",
+                    "value": 29,
+                    "unit": "languages"
+                },
+                {
+                    "label": "Languages supported by Flash v2.5",
+                    "value": 32,
+                    "unit": "languages"
+                },
+                {
+                    "label": "Series D round size",
+                    "value": 500,
+                    "unit": "million USD (Feb 2026)"
+                },
+                {
+                    "label": "Company valuation",
+                    "value": 11,
+                    "unit": "billion USD (Feb 2026)"
+                },
+                {
+                    "label": "Total funding raised since 2022",
+                    "value": 781,
+                    "unit": "million USD (Feb 2026)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Free vs Starter plan",
+                    "left": {
+                        "title": "Free ($0)",
+                        "points": [
+                            "10,000 credits/month",
+                            "~10 min of TTS",
+                            "No commercial license",
+                            "API access included"
+                        ]
+                    },
+                    "right": {
+                        "title": "Starter ($6/mo)",
+                        "points": [
+                            "30,000 credits/month",
+                            "Commercial rights unlocked",
+                            "Instant voice cloning",
+                            "Creator ($22) adds pro cloning"
+                        ]
+                    }
+                },
+                {
+                    "title": "Which model for your voice",
+                    "left": {
+                        "title": "Flash v2.5 (speed)",
+                        "points": [
+                            "~75 ms latency",
+                            "32 languages",
+                            "Best for real-time agents",
+                            "Cheaper per character"
+                        ]
+                    },
+                    "right": {
+                        "title": "Eleven v3 (expression)",
+                        "points": [
+                            "70+ languages",
+                            "Audio tags like [laughs], [whispers]",
+                            "Best for narration and video",
+                            "Not for real-time use"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Path: log in → Developers in the left sidebar → API Keys tab → create key",
+                "The full key is shown only once; afterwards you see just the name and last 4 characters",
+                "Keys are restricted by default: pick scopes, set a credit limit, optionally allowlist IPs",
+                "Send the key in the xi-api-key header; never expose it in browser or app code",
+                "In the Voice Library, pick a language first — the Accent filter then appears",
+                "Use-case tags include narration, conversational, characters, news and meditation",
+                "Stack only 2–3 filters: too many at once can return zero voices",
+                "Legacy Default voices expire 31 December 2026, so test replacements early",
+                "Free plan output has no commercial license — Starter is the minimum for monetized content"
+            ],
+            "sources": [
+                "https://help.elevenlabs.io/hc/en-us/articles/14599447207697-How-do-I-authorize-myself-using-an-API-key",
+                "https://elevenlabs.io/docs/overview/administration/workspaces/api-keys",
+                "https://elevenlabs.io/docs/api-reference/authentication",
+                "https://elevenlabs.io/docs/overview/capabilities/voices",
+                "https://elevenlabs.io/docs/eleven-creative/voices/voice-library",
+                "https://elevenlabs.io/docs/help-center/product/voice-customization/my-voices/what-are-default-voices",
+                "https://elevenlabs.io/docs/overview/models",
+                "https://elevenlabs.io/text-to-speech-api",
+                "https://elevenlabs.io/blog/series-d",
+                "https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/",
+                "https://www.cnbc.com/2026/02/04/nvidia-backed-ai-startup-elevenlabs-11-billion-valuation.html",
+                "https://flexprice.io/blog/elevenlabs-pricing-breakdown",
+                "https://costbench.com/software/ai-voice-tools/elevenlabs/",
+                "https://bigvu.tv/blog/elevenlabs-pricing-2026-plans-credits-commercial-rights-api-costs/",
+                "https://aiproductivity.ai/guides/elevenlabs-voice-library-guide/",
+                "https://en.wikipedia.org/wiki/ElevenLabs"
+            ]
+        },
+        "suggested": {
+            "title": "How to Get Your ElevenLabs API Key and Voice ID",
+            "description": "A quick walkthrough of grabbing your ElevenLabs API key from the developer dashboard and picking the right voice for your project. Learn how to filter the voice library by language, accent, and use case so you can find the perfect narration voice in seconds.",
+            "tags": [
+                "elevenlabs",
+                "api key",
+                "text to speech",
+                "ai voice",
+                "voice cloning",
+                "ai tools",
+                "tutorial",
+                "voiceover"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "dadd5a4d",
+                "prompt": "https://elevenlabs.io",
+                "label": "You go to 11Labs",
+                "site": "https://elevenlabs.io",
+                "still": true
+            },
+            {
+                "key": "41e720ba",
+                "prompt": "A slim laptop on a dark desk showing a futuristic dark-navy web dashboard with glowing blue and gold panels and sound-wave shapes, no text or logos, moody studio lighting, shallow depth of field",
+                "label": "You log in and you'll be on something like this You'll",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "2fae3ba8",
+                "prompt": "https://elevenlabs.io/voice-library",
+                "label": "so for the actual voice you need to go to the voices and",
+                "site": "https://elevenlabs.io/voice-library",
+                "still": false
+            },
+            {
+                "key": "c8480883",
+                "prompt": "A glowing golden sound wave rippling across a deep navy starlit space, fine luminous particles trailing along the curve, cinematic dark background, no text or logos",
+                "label": "that sadness and joy can coexist so compatibly with one another",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "Extreme close-up macro shot, vertical 9:16 composition: a small metallic key lying on a dark matte desk surface, its teeth dissolving into thin luminous cyan-violet sound waveform ribbons that drift upward and out of frame; behind it, softly out of focus, the glow of a laptop screen casting cold blue light across the desk; shallow depth of field, dramatic low-key studio lighting, fine dust motes catching the light, moody tech-noir atmosphere, hyperrealistic product photography, high contrast, no text, no logos",
+                "label": "Opening image — A single glowing key resting on a dark desk beside a laptop showing a blurred voice waveform, the key half-dissolving into sound waves.",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "site_collecting": [],
+        "image_text": {
+            "dadd5a4d": true,
+            "41e720ba": true,
+            "2fae3ba8": true,
+            "c8480883": true,
+            "intro": true
+        }
+    },
+    "id": "how-to-get-an-elevenlabs-api-key-in-unde-5e31e",
+    "created_at": "2026-09-07T11:14:21+00:00",
+    "updated_at": "2026-09-07T12:51:11+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/how-to-get-an-elevenlabs-api-key-in-unde-5e31e/audio.m4a",
+    "transcript": {
+        "duration": 62.20000076293945,
+        "text": "How do you get the actual key and voice? You go to 11Labs. If you don't have an account, you need to register. I'll leave a link in the description. You log in and you'll be on something like this. You'll need to go to the developers, click here where it says API keys, create a new API key, and then you need to click this one, at least, and you create a key, and then you just copy the result you get in this first step. Then you need an actual voice, so for the actual voice you need to go to the voices, and then you can filter whatever you want. For example, if I select English, let's say English, let's say the accent we want is American, and let's say we want narration. So we have a bunch of voices which you can play. that sadness and joy can coexist so compatibly with one another",
+        "language": "english",
+        "words": [
+            {
+                "word": "How",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "do",
+                "start": 0.4000000059604645,
+                "end": 0.47999998927116394
+            },
+            {
+                "word": "you",
+                "start": 0.47999998927116394,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "get",
+                "start": 0.5799999833106995,
+                "end": 0.8399999737739563
+            },
+            {
+                "word": "the",
+                "start": 0.8399999737739563,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "actual",
+                "start": 1.0199999809265137,
+                "end": 1.3600000143051147
+            },
+            {
+                "word": "key",
+                "start": 1.3600000143051147,
+                "end": 1.5199999809265137
+            },
+            {
+                "word": "and",
+                "start": 1.5199999809265137,
+                "end": 1.7799999713897705
+            },
+            {
+                "word": "voice",
+                "start": 1.7799999713897705,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "You",
+                "start": 2.619999885559082,
+                "end": 3.059999942779541
+            },
+            {
+                "word": "go",
+                "start": 3.059999942779541,
+                "end": 3.240000009536743
+            },
+            {
+                "word": "to",
+                "start": 3.240000009536743,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "11Labs",
+                "start": 3.5199999809265137,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "If",
+                "start": 5,
+                "end": 5.480000019073486
+            },
+            {
+                "word": "you",
+                "start": 5.480000019073486,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "don't",
+                "start": 5.559999942779541,
+                "end": 5.679999828338623
+            },
+            {
+                "word": "have",
+                "start": 5.679999828338623,
+                "end": 5.800000190734863
+            },
+            {
+                "word": "an",
+                "start": 5.800000190734863,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "account",
+                "start": 6.239999771118164,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "you",
+                "start": 6.28000020980835,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "need",
+                "start": 6.460000038146973,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "to",
+                "start": 6.539999961853027,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "register",
+                "start": 7.079999923706055,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "I'll",
+                "start": 7.199999809265137,
+                "end": 7.360000133514404
+            },
+            {
+                "word": "leave",
+                "start": 7.360000133514404,
+                "end": 7.460000038146973
+            },
+            {
+                "word": "a",
+                "start": 7.460000038146973,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "link",
+                "start": 7.71999979019165,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "in",
+                "start": 7.71999979019165,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "the",
+                "start": 7.900000095367432,
+                "end": 8.079999923706055
+            },
+            {
+                "word": "description",
+                "start": 8.079999923706055,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "You",
+                "start": 9.0600004196167,
+                "end": 9.539999961853027
+            },
+            {
+                "word": "log",
+                "start": 9.539999961853027,
+                "end": 9.5600004196167
+            },
+            {
+                "word": "in",
+                "start": 9.5600004196167,
+                "end": 9.800000190734863
+            },
+            {
+                "word": "and",
+                "start": 9.800000190734863,
+                "end": 10.15999984741211
+            },
+            {
+                "word": "you'll",
+                "start": 10.15999984741211,
+                "end": 10.319999694824219
+            },
+            {
+                "word": "be",
+                "start": 10.319999694824219,
+                "end": 10.520000457763672
+            },
+            {
+                "word": "on",
+                "start": 10.520000457763672,
+                "end": 10.800000190734863
+            },
+            {
+                "word": "something",
+                "start": 10.800000190734863,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "like",
+                "start": 11.0600004196167,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "this",
+                "start": 11.300000190734863,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "You'll",
+                "start": 12.9399995803833,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "need",
+                "start": 13.420000076293945,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "to",
+                "start": 13.420000076293945,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "go",
+                "start": 13.579999923706055,
+                "end": 13.699999809265137
+            },
+            {
+                "word": "to",
+                "start": 13.699999809265137,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "the",
+                "start": 13.899999618530273,
+                "end": 14.119999885559082
+            },
+            {
+                "word": "developers",
+                "start": 14.119999885559082,
+                "end": 14.720000267028809
+            },
+            {
+                "word": "click",
+                "start": 15.640000343322754,
+                "end": 15.920000076293945
+            },
+            {
+                "word": "here",
+                "start": 15.920000076293945,
+                "end": 16.1200008392334
+            },
+            {
+                "word": "where",
+                "start": 16.1200008392334,
+                "end": 16.31999969482422
+            },
+            {
+                "word": "it",
+                "start": 16.31999969482422,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "says",
+                "start": 16.719999313354492,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "API",
+                "start": 16.719999313354492,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "keys",
+                "start": 17.139999389648438,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "create",
+                "start": 19.280000686645508,
+                "end": 19.5
+            },
+            {
+                "word": "a",
+                "start": 19.5,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "new",
+                "start": 19.700000762939453,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "API",
+                "start": 19.940000534057617,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "key",
+                "start": 20.260000228881836,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "and",
+                "start": 21.079999923706055,
+                "end": 21.299999237060547
+            },
+            {
+                "word": "then",
+                "start": 21.299999237060547,
+                "end": 21.520000457763672
+            },
+            {
+                "word": "you",
+                "start": 21.520000457763672,
+                "end": 21.719999313354492
+            },
+            {
+                "word": "need",
+                "start": 21.719999313354492,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "to",
+                "start": 21.860000610351562,
+                "end": 22.200000762939453
+            },
+            {
+                "word": "click",
+                "start": 22.200000762939453,
+                "end": 22.200000762939453
+            },
+            {
+                "word": "this",
+                "start": 22.200000762939453,
+                "end": 22.739999771118164
+            },
+            {
+                "word": "one",
+                "start": 22.739999771118164,
+                "end": 23.020000457763672
+            },
+            {
+                "word": "at",
+                "start": 23.239999771118164,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "least",
+                "start": 23.440000534057617,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "and",
+                "start": 23.899999618530273,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "you",
+                "start": 24.100000381469727,
+                "end": 24.239999771118164
+            },
+            {
+                "word": "create",
+                "start": 24.239999771118164,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "a",
+                "start": 24.459999084472656,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "key",
+                "start": 24.719999313354492,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "and",
+                "start": 24.81999969482422,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "then",
+                "start": 25.68000030517578,
+                "end": 25.8799991607666
+            },
+            {
+                "word": "you",
+                "start": 25.8799991607666,
+                "end": 26.079999923706055
+            },
+            {
+                "word": "just",
+                "start": 26.079999923706055,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "copy",
+                "start": 26.31999969482422,
+                "end": 26.760000228881836
+            },
+            {
+                "word": "the",
+                "start": 26.760000228881836,
+                "end": 27.3799991607666
+            },
+            {
+                "word": "result",
+                "start": 27.3799991607666,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "you",
+                "start": 27.700000762939453,
+                "end": 27.959999084472656
+            },
+            {
+                "word": "get",
+                "start": 27.959999084472656,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "in",
+                "start": 28.100000381469727,
+                "end": 28.639999389648438
+            },
+            {
+                "word": "this",
+                "start": 28.639999389648438,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "first",
+                "start": 28.799999237060547,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "step",
+                "start": 29.100000381469727,
+                "end": 29.540000915527344
+            },
+            {
+                "word": "Then",
+                "start": 29.959999084472656,
+                "end": 30.31999969482422
+            },
+            {
+                "word": "you",
+                "start": 30.31999969482422,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "need",
+                "start": 30.520000457763672,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "an",
+                "start": 30.700000762939453,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "actual",
+                "start": 30.979999542236328,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "voice",
+                "start": 31.200000762939453,
+                "end": 31.579999923706055
+            },
+            {
+                "word": "so",
+                "start": 32.13999938964844,
+                "end": 32.279998779296875
+            },
+            {
+                "word": "for",
+                "start": 32.279998779296875,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "the",
+                "start": 32.47999954223633,
+                "end": 32.599998474121094
+            },
+            {
+                "word": "actual",
+                "start": 32.599998474121094,
+                "end": 32.86000061035156
+            },
+            {
+                "word": "voice",
+                "start": 32.86000061035156,
+                "end": 33.20000076293945
+            },
+            {
+                "word": "you",
+                "start": 33.20000076293945,
+                "end": 33.599998474121094
+            },
+            {
+                "word": "need",
+                "start": 33.599998474121094,
+                "end": 33.65999984741211
+            },
+            {
+                "word": "to",
+                "start": 33.65999984741211,
+                "end": 33.7400016784668
+            },
+            {
+                "word": "go",
+                "start": 33.7400016784668,
+                "end": 33.97999954223633
+            },
+            {
+                "word": "to",
+                "start": 33.97999954223633,
+                "end": 34.15999984741211
+            },
+            {
+                "word": "the",
+                "start": 34.15999984741211,
+                "end": 34.41999816894531
+            },
+            {
+                "word": "voices",
+                "start": 34.41999816894531,
+                "end": 34.91999816894531
+            },
+            {
+                "word": "and",
+                "start": 36.13999938964844,
+                "end": 37.060001373291016
+            },
+            {
+                "word": "then",
+                "start": 37.060001373291016,
+                "end": 37.439998626708984
+            },
+            {
+                "word": "you",
+                "start": 37.439998626708984,
+                "end": 37.58000183105469
+            },
+            {
+                "word": "can",
+                "start": 37.58000183105469,
+                "end": 37.959999084472656
+            },
+            {
+                "word": "filter",
+                "start": 37.959999084472656,
+                "end": 38.13999938964844
+            },
+            {
+                "word": "whatever",
+                "start": 38.13999938964844,
+                "end": 38.70000076293945
+            },
+            {
+                "word": "you",
+                "start": 38.70000076293945,
+                "end": 39.099998474121094
+            },
+            {
+                "word": "want",
+                "start": 39.099998474121094,
+                "end": 39.099998474121094
+            },
+            {
+                "word": "For",
+                "start": 39.13999938964844,
+                "end": 39.34000015258789
+            },
+            {
+                "word": "example",
+                "start": 39.34000015258789,
+                "end": 39.58000183105469
+            },
+            {
+                "word": "if",
+                "start": 39.619998931884766,
+                "end": 39.7599983215332
+            },
+            {
+                "word": "I",
+                "start": 39.7599983215332,
+                "end": 39.97999954223633
+            },
+            {
+                "word": "select",
+                "start": 39.97999954223633,
+                "end": 40.220001220703125
+            },
+            {
+                "word": "English",
+                "start": 40.220001220703125,
+                "end": 41.5
+            },
+            {
+                "word": "let's",
+                "start": 41.52000045776367,
+                "end": 41.7599983215332
+            },
+            {
+                "word": "say",
+                "start": 41.7599983215332,
+                "end": 41.91999816894531
+            },
+            {
+                "word": "English",
+                "start": 41.91999816894531,
+                "end": 42.70000076293945
+            },
+            {
+                "word": "let's",
+                "start": 42.97999954223633,
+                "end": 43.279998779296875
+            },
+            {
+                "word": "say",
+                "start": 43.279998779296875,
+                "end": 43.36000061035156
+            },
+            {
+                "word": "the",
+                "start": 43.36000061035156,
+                "end": 43.70000076293945
+            },
+            {
+                "word": "accent",
+                "start": 43.70000076293945,
+                "end": 43.81999969482422
+            },
+            {
+                "word": "we",
+                "start": 43.81999969482422,
+                "end": 44.65999984741211
+            },
+            {
+                "word": "want",
+                "start": 44.65999984741211,
+                "end": 45.08000183105469
+            },
+            {
+                "word": "is",
+                "start": 45.08000183105469,
+                "end": 46.02000045776367
+            },
+            {
+                "word": "American",
+                "start": 46.02000045776367,
+                "end": 46.599998474121094
+            },
+            {
+                "word": "and",
+                "start": 47.20000076293945,
+                "end": 47.439998626708984
+            },
+            {
+                "word": "let's",
+                "start": 47.439998626708984,
+                "end": 47.560001373291016
+            },
+            {
+                "word": "say",
+                "start": 47.560001373291016,
+                "end": 47.7400016784668
+            },
+            {
+                "word": "we",
+                "start": 47.7400016784668,
+                "end": 47.880001068115234
+            },
+            {
+                "word": "want",
+                "start": 47.880001068115234,
+                "end": 48.13999938964844
+            },
+            {
+                "word": "narration",
+                "start": 48.13999938964844,
+                "end": 48.720001220703125
+            },
+            {
+                "word": "So",
+                "start": 49.959999084472656,
+                "end": 50.47999954223633
+            },
+            {
+                "word": "we",
+                "start": 50.47999954223633,
+                "end": 50.63999938964844
+            },
+            {
+                "word": "have",
+                "start": 50.63999938964844,
+                "end": 50.7599983215332
+            },
+            {
+                "word": "a",
+                "start": 50.7599983215332,
+                "end": 51.08000183105469
+            },
+            {
+                "word": "bunch",
+                "start": 51.08000183105469,
+                "end": 51.08000183105469
+            },
+            {
+                "word": "of",
+                "start": 51.08000183105469,
+                "end": 51.619998931884766
+            },
+            {
+                "word": "voices",
+                "start": 51.619998931884766,
+                "end": 51.619998931884766
+            },
+            {
+                "word": "which",
+                "start": 51.619998931884766,
+                "end": 52.279998779296875
+            },
+            {
+                "word": "you",
+                "start": 52.279998779296875,
+                "end": 52.400001525878906
+            },
+            {
+                "word": "can",
+                "start": 52.400001525878906,
+                "end": 52.58000183105469
+            },
+            {
+                "word": "play",
+                "start": 52.58000183105469,
+                "end": 52.84000015258789
+            },
+            {
+                "word": "that",
+                "start": 56.41999816894531,
+                "end": 57.439998626708984
+            },
+            {
+                "word": "sadness",
+                "start": 57.439998626708984,
+                "end": 57.91999816894531
+            },
+            {
+                "word": "and",
+                "start": 57.91999816894531,
+                "end": 58.959999084472656
+            },
+            {
+                "word": "joy",
+                "start": 58.959999084472656,
+                "end": 58.959999084472656
+            },
+            {
+                "word": "can",
+                "start": 58.959999084472656,
+                "end": 59.540000915527344
+            },
+            {
+                "word": "coexist",
+                "start": 59.540000915527344,
+                "end": 60.08000183105469
+            },
+            {
+                "word": "so",
+                "start": 60.08000183105469,
+                "end": 60.70000076293945
+            },
+            {
+                "word": "compatibly",
+                "start": 60.70000076293945,
+                "end": 61.099998474121094
+            },
+            {
+                "word": "with",
+                "start": 61.099998474121094,
+                "end": 61.459999084472656
+            },
+            {
+                "word": "one",
+                "start": 61.459999084472656,
+                "end": 61.599998474121094
+            },
+            {
+                "word": "another",
+                "start": 61.599998474121094,
+                "end": 61.91999816894531
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 62.20000076293945,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.62,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 2.62,
+                "end": 5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Open ElevenLabs",
+                            "lines": [
+                                "Head to the website",
+                                "Start here"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5,
+                "end": 9.06,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Free account",
+                            "lines": [
+                                "10,000 credits / month",
+                                "API access included",
+                                "No commercial license"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.06,
+                "end": 12.94,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "title": "After Logging In",
+                            "items": [
+                                "Sign in to your account",
+                                "Land on the dashboard",
+                                "Main workspace appears"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.94,
+                "end": 19.28,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "API keys",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Where the key lives",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Log in"
+                                },
+                                {
+                                    "label": "Developers"
+                                },
+                                {
+                                    "label": "API Keys"
+                                },
+                                {
+                                    "label": "Create key",
+                                    "highlight": true
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                },
+                                {
+                                    "from": 2,
+                                    "to": 3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.28,
+                "end": 24.82,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Creating the key",
+                            "items": [
+                                "Name the key",
+                                "Pick the scopes",
+                                "Set a credit limit"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.82,
+                "end": 29.96,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "copy",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "terminal",
+                        "text": "",
+                        "params": {
+                            "lines": [
+                                "# copy it now",
+                                "xi-api-key: sk_**********",
+                                "# shown in full only once"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.96,
+                "end": 32.14,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "actual voice",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 32.14,
+                "end": 36.14,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Voices Section",
+                            "lines": [
+                                "Open the Voices tab",
+                                "Choose the actual voice"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.14,
+                "end": 39.14,
+                "background": "video",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "filter",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 39.14,
+                "end": 43,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "Filter in this order",
+                            "layout": "vertical",
+                            "nodes": [
+                                {
+                                    "label": "Language first",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Accent unlocks"
+                                },
+                                {
+                                    "label": "Use case tag"
+                                }
+                            ],
+                            "edges": [
+                                {
+                                    "from": 0,
+                                    "to": 1
+                                },
+                                {
+                                    "from": 1,
+                                    "to": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 43,
+                "end": 46.6,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "American",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 46.6,
+                "end": 50.48,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "narration",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Use case tags",
+                            "items": [
+                                "Narration",
+                                "Conversational",
+                                "Characters",
+                                "News",
+                                "Meditation"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 50.48,
+                "end": 53.5,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "play",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 53.5,
+                "end": 56.42,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "10,000+ voices",
+                            "lines": [
+                                "Community + ElevenLabs",
+                                "Preview before you pick",
+                                "Stack only 2-3 filters"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 56.42,
+                "end": 62.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "comparison",
+                        "text": null,
+                        "params": {
+                            "left": {
+                                "title": "Sadness",
+                                "points": [
+                                    "Present at the same time",
+                                    "Not cancelled out"
+                                ]
+                            },
+                            "right": {
+                                "title": "Joy",
+                                "points": [
+                                    "Present at the same time",
+                                    "Fully compatible"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/how-to-get-an-elevenlabs-api-key-in-unde-5e31e/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    }
+}

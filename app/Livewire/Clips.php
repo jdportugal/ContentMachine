@@ -387,23 +387,35 @@ class Clips extends Component
             return;
         }
 
-        $this->persistirClipAberto($pipeline);
+        if ($this->persistirClipAberto($pipeline)) {
+            // The frame only exists in the cut file, so a new one has to be cut and
+            // re-rendered — saving the choice alone would leave the old size on disk.
+            $this->executar(fn () => $pipeline->gravarLegendas($this->clipAberto), 'Changes saved — clip re-framed.');
+
+            return;
+        }
+
         $this->notificar('Changes saved.');
     }
 
     // --- Helpers ---------------------------------------------------
 
-    /** Persists everything the open clip's editor can change. */
-    private function persistirClipAberto(ShortsPipeline $pipeline): void
+    /**
+     * Persists everything the open clip's editor can change.
+     *
+     * @return bool whether the framing change threw away an existing cut.
+     */
+    private function persistirClipAberto(ShortsPipeline $pipeline): bool
     {
         if ($this->clipAberto === null) {
-            return;
+            return false;
         }
 
         $pipeline->guardarDetalhes($this->clipAberto, trim($this->clipTituloEdit), trim($this->clipDescricao), $this->tagsParaArray());
         $pipeline->guardarLegendas($this->clipAberto, $this->segmentosParaDados(), $this->estilo, $this->modoPalavra);
         $pipeline->definirMusica($this->clipAberto, trim($this->musica), $this->musicaVolume);
-        $pipeline->definirEnquadramento($this->clipAberto, $this->enquadramento);
+
+        return $pipeline->definirEnquadramento($this->clipAberto, $this->enquadramento);
     }
 
     /** @return array<int,string> */

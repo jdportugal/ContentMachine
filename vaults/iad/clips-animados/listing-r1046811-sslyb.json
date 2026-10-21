@@ -1,0 +1,1236 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 com garagem no centro de Valongo | 275.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-valongo-103m2/r1046811",
+            "agent": "Ascenção Pereira",
+            "phone": "+351912075828",
+            "agency": "iad Portugal",
+            "hook": "Um T2 no centro de Valongo, com garagem privativa.",
+            "voiceover": "Um T2 no centro de Valongo, com garagem privativa. Fica num rés-do-chão elevado, num prédio de 2002 com elevador. São cento e três metros quadrados, com um hall de entrada espaçoso e porta blindada. Sala de estar e dois quartos, ambos com roupeiros embutidos. Uma casa de banho completa e outra de serviço. A cozinha está equipada com placa, forno, frigorífico combinado e máquina de lavar louça. Tem ainda lavandaria independente. O lugar de garagem tem acesso direto pelo elevador. Duzentos e setenta e cinco mil euros. Para visitar, fale com a Ascenção Pereira, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Um T2 no centro de Valongo, com garagem privativa.",
+                    "caption": "Centro de Valongo"
+                },
+                {
+                    "photo": "entrada do prédio / elevador",
+                    "vo": "Fica num rés-do-chão elevado, num prédio de 2002 com elevador.",
+                    "caption": "Prédio com elevador"
+                },
+                {
+                    "photo": "hall de entrada com porta blindada",
+                    "vo": "São cento e três metros quadrados, com um hall de entrada espaçoso e porta blindada.",
+                    "caption": "103 m² · Porta blindada"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Sala de estar e dois quartos,",
+                    "caption": "Sala de estar"
+                },
+                {
+                    "photo": "quarto com roupeiro embutido",
+                    "vo": "ambos com roupeiros embutidos.",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "casa de banho completa",
+                    "vo": "Uma casa de banho completa e outra de serviço.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "A cozinha está equipada com placa, forno, frigorífico combinado e máquina de lavar louça.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "lavandaria",
+                    "vo": "Tem ainda lavandaria independente.",
+                    "caption": "Lavandaria"
+                },
+                {
+                    "photo": "lugar de garagem",
+                    "vo": "O lugar de garagem tem acesso direto pelo elevador.",
+                    "caption": "Garagem privativa"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e setenta e cinco mil euros. Para visitar, fale com a Ascenção Pereira, da iad Portugal.",
+                    "caption": "275.000 € · Ascenção Pereira · iad Portugal"
+                }
+            ],
+            "flags": [
+                "Varanda: aparece nas características, mas o texto da secção 'Momentos ao Ar Livre' descreve só a sala, sem mencionar uma varanda ou um espaço exterior. Ficou de fora; confirmar se existe.",
+                "Aquecimento: as características indicam 'property.feature.heating' (campo não preenchido), por isso o tipo não é conhecido. Ficou de fora.",
+                "Nome da consultora: o anúncio escreve 'Ascenção'; a grafia mais comum é 'Ascensão'. Confirmar no perfil antes de usar no ecrã e na mensagem.",
+                "Marca do esquentador (Bosch) omitida, conforme a regra das marcas."
+            ],
+            "message": "Boa tarde Sra. Ascenção Pereira,\nO meu nome é João Ferreira.\n\nVi o apartamento T2 em Valongo que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 2 quartos de 103 m² em Valongo",
+            "price": 275000,
+            "details": {
+                "Preço": "275 000 €",
+                "Localização": "Valongo, 4440-751",
+                "Referência": "1046811",
+                "Área Bruta m²": "103",
+                "Quartos": 2,
+                "Ano de Construção": 2002,
+                "Certificado Energético": "E",
+                "Características": "103 m² área bruta, 93 m² úteis, 2 casas de banho, Estacionamento, Varanda, Elevador, Sala de estar, Ligação TV, property.feature.heating, Construído em 2002, Rés-do-chão, Porta blindada, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Ascenção Pereira - and phone number - +351912075828. Agency: iad Portugal.\nThe agent's photo is Ascenção Pereira.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T2 no centro de Valongo, com garagem privativa.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «Centro de Valongo»\n- entrada do prédio / elevador → «Prédio com elevador»\n- hall de entrada com porta blindada → «103 m² · Porta blindada»\n- sala de estar → «Sala de estar»\n- quarto com roupeiro embutido → «Dois quartos»\n- casa de banho completa → «Duas casas de banho»\n- cozinha equipada → «Cozinha equipada»\n- lavandaria → «Lavandaria»\n- lugar de garagem → «Garagem privativa»\n- end card → «275.000 € · Ascenção Pereira · iad Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 103 m² em Valongo\nPreço\n275 000 €\nLocalização\nValongo, 4440-751\nReferência\n1046811\nÁrea Bruta m²\n103\nQuartos\n2\nAno de Construção\n2002\nCertificado Energético\nE\nCaracterísticas\n103 m² área bruta, 93 m² úteis, 2 casas de banho, Estacionamento, Varanda, Elevador, Sala de estar, Ligação TV, property.feature.heating, Construído em 2002, Rés-do-chão, Porta blindada, Intercomunicador\n\nDescrição\nT2 em Valongo: O Equilíbrio Perfeito Entre Elegância, Conforto e Qualidade de Vida\n\nImagine acordar todos os dias num espaço pensado para lhe proporcionar o máximo bem-estar. Este magnífico T2 com 103 m² de área total combina a serenidade de um lar acolhedor com a praticidade da vida moderna, no coração de Valongo.\n\nSituado num rés-do-chão elevado, este imóvel oferece o equilíbrio ideal: a comodidade de um acesso fácil com a privacidade, segurança e tranquilidade de um andar superior. O edifício conta ainda com elevador, garantindo total conforto no seu dia a dia.\n\nAo cruzar a entrada, é acolhido por um hall de entrada espaçoso e elegante, protegido por uma porta blindada de alta segurança que garante a si e à sua família total tranquilidade.\n\nO Que Torna Este Apartamento Especial?\n✨ Espaços Confortáveis e Funcionais:\nOs dois quartos são verdadeiros refúgios de descanso, ambos equipados com roupeiros embutidos espaçosos que otimizam o espaço e mantêm a sua casa sempre organizada.\nConta ainda com o apoio de 1 wc de serviço para as visitas e outro wc completo para a higiene do dia a dia\n\n✨ Cozinha Pronta a Inspirar o Seu Dia:\nA cozinha encontra-se totalmente equipada com placa, forno, combinado e máquina de lavar louça — tudo o que precisa para preparar as suas refeições com total comodidade. Dispõe ainda de uma lavandaria independente, equipada com um eficiente esquentador Bosch, sinónimo de segurança e qualidade superior.\n\n✨ Momentos ao Ar Livre:\nA sala reflete o local perfeito para desfrutar de uma chávena de café pela manhã, ler um bom livro ao fim da tarde ou simplesmente respirar ar puro sem sair de casa.\n\n✨ Comodidade Sem Complicações:\nInclui lugar de garagem privativo com acesso direto pelo elevador, para que o regresso a casa seja sempre prático e seguro, independentemente do tempo.\n\nO Lar Onde a Sua Nova História Começa\nMais do que um simples apartamento, este T2 é um convite a viver com qualidade, centralidade e todo o conforto que a sua família merece.\n\n📲 Não perca esta oportunidade. Agende hoje mesmo a sua visita e venha apaixonar-se por cada detalhe!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Apartamento T2 à venda no centro de Valongo (distrito do Porto)",
+            "summary": "T2 com 103 m² e garagem no centro de Valongo, à venda por 275 mil euros. O concelho faz parte da Área Metropolitana do Porto, e o preço mediano das casas vendidas em Portugal atingiu um máximo histórico no 1.º trimestre de 2026.",
+            "timeline": [
+                {
+                    "label": "Construção do prédio",
+                    "sublabel": "2002"
+                },
+                {
+                    "label": "Censos: Valongo com 94 672 habitantes",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Preço mediano nacional atinge máximo de 2 337 €/m²",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "População do concelho de Valongo (Censos 2021)",
+                    "value": 94672,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho de Valongo",
+                    "value": 75.12,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (1.º trim. 2026, INE)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga do preço mediano nacional (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Casas transacionadas em Portugal (1.º trim. 2026)",
+                    "value": 35953,
+                    "unit": "alojamentos"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Valongo faz parte da Área Metropolitana do Porto",
+                "Segundo o INE, no 1.º trim. 2026 o preço mediano subiu nas 26 sub-regiões NUTS III",
+                "No 1.º trim. 2026, o número de casas vendidas caiu 10,5% face ao ano anterior (INE)",
+                "O T2 anunciado custa cerca de 2 670 €/m² (275 000 € ÷ 103 m²)"
+            ],
+            "sources": [
+                "https://cdn-images.rtp.pt/icm/noticias/docs/66/66271ea88bd95fa8a18c8997b0a2d4ec_1feb20f6a7da18976f65e84c4b8d9c63.pdf",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.rtp.pt/noticias/economia/dados-ine-madeira-e-guimaraes-com-precos-das-casas-mais-elevados_n1754046",
+                "https://en.wikipedia.org/wiki/Valongo",
+                "https://aldeiasportuguesas.pt/porto/valongo/",
+                "https://cesop-local.ucp.pt/fr/node/60",
+                "https://www.cm-valongo.pt/cmvalongo/uploads/writer_file/document/6515/relatorio_de_avaliacao_pmind.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "T2 com garagem no centro de Valongo | 275.000 €",
+            "description": "T2 com 103 m² em rés-do-chão elevado, num prédio de 2002 com elevador, no centro de Valongo. Tem dois quartos com roupeiros embutidos, duas casas de banho, cozinha equipada, lavandaria independente e garagem privativa com acesso direto pelo elevador. Marque a sua visita com Ascensão Pereira, da iad Portugal.",
+            "tags": [
+                "Valongo",
+                "T2",
+                "imobiliário",
+                "casa à venda",
+                "apartamento com garagem",
+                "comprar casa",
+                "iad Portugal",
+                "Porto"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1046811-sslyb",
+    "created_at": "2026-10-15T13:14:34+00:00",
+    "updated_at": "2026-10-15T13:24:17+00:00",
+    "source_path": "clips/uploads/1ihbL0ieiltUfNHbSpZEfUCrfwHZJt8rxpnAtUoD.mp3",
+    "images": [
+        {
+            "id": "img_bb5618c3",
+            "path": "clips/uploads/oacOXKrjxJz9KsDYYezPHgI4T9LqDLq2dMlveDSj.jpg",
+            "description": "Cozinha branca vista do fogão: placa a gás, forno inox, bancada de granito e balcão com bancos altos.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d504207c",
+            "path": "clips/uploads/FRINzZBbJpDxMhKpw7i2m7DPmhdj7grOyy9UpNGu.jpg",
+            "description": "Cozinha vista da porta: frigorífico combinado cheio de ímanes, máquina de lavar loiça e porta para a lavandaria ao fundo.",
+            "name": "01a126d335d17fe9eb911d238ca3bee2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fe550a0c",
+            "path": "clips/uploads/5DwfiOr2bQAqL6J7n8TcxU4CpT59hT6xvBjeMIzG.jpg",
+            "description": "Cozinha em corredor: armários brancos, lava-loiça inox, balcão de refeições com bancos e lavandaria envidraçada ao fundo.",
+            "name": "01a126d3792185c0d2b49fc319e7415e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ba5274b5",
+            "path": "clips/uploads/xQXWRZLJ6dAAPmYMewsBQmdctMqFvGACGIlkJnir.jpg",
+            "description": "Bancada da cozinha em plano frontal: placa a gás, forno Hotpoint, lava-loiça, micro-ondas e máquina de lavar loiça.",
+            "name": "01a126d3b1c6da07dd9d82d30268dcdd.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ea64a0ea",
+            "path": "clips/uploads/bRZJVzBR3sYCraNyJeWfTDO3HtBdpzTyFMh2uz4J.jpg",
+            "description": "Lavandaria independente: máquina de secar, estendal e janela com grade, com vista para colinas verdes.",
+            "name": "01a126d3d7d52e8272a193c9186dc457.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1b0205e2",
+            "path": "clips/uploads/QBKb9R18at3QC97do3dvQLGpD47J4V66GitSBQ7G.jpg",
+            "description": "Esquentador Bosch a gás na lavandaria, montado na parede ao lado da máquina de secar.",
+            "name": "01a126d465991717769e971b170970ec.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b236b63b",
+            "path": "clips/uploads/wUMYOwnYe78u9BNGVbsv3CJIFUeV4E9VHtNGpXYI.jpg",
+            "description": "Hall de entrada espaçoso: grande espelho de moldura preta, prateleiras com plantas, cabides e roupeiro branco.",
+            "name": "01a126d3f7b6aa4e6abb02bb7dcfd2ea.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_469b95d1",
+            "path": "clips/uploads/SRDOqNS0Ckl2BP4PR5RbvjSj7iZba6iTXA8N0q77.jpg",
+            "description": "Corredor de distribuição com candeeiros de vime, tapete, várias portas para os quartos e casas de banho.",
+            "name": "01a126d51488082f4991d3ab4e603124.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cb5ee976",
+            "path": "clips/uploads/40wKiZk3PhK9SBYKKDKcwNNNmsYDe01P0auJYw95.jpg",
+            "description": "Hall de entrada com porta blindada em madeira, cabides pretos, roupeiro branco e prateleiras com plantas.",
+            "name": "01a126d53c881e17ed7ef2fa46ed5980.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_39285eee",
+            "path": "clips/uploads/nDBYk0JtRKYLUz9W9LG1qSVgE1o67c2uMJwdG13l.jpg",
+            "description": "Cozinha vista da entrada: frigorífico com ímanes de viagem, bancos altos, máquina de café e lavandaria ao fundo.",
+            "name": "01a126d56d91b5f071e7f832756f2891.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a32f90b0",
+            "path": "clips/uploads/fH0673yWRhoFHIIb6UfXJpTueSy7exiCkNgmoUou.jpg",
+            "description": "Casa de banho com móvel de lavatório branco com gavetas, espelho retangular, sanita e paredes em azulejo cinza claro.",
+            "name": "01a126d5e44de26f8c1f9e3c4a042e2c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6c3e8883",
+            "path": "clips/uploads/6TjMkdEh0P3rMKJyIxGmOVOm7n8qeEW8mzcV79TT.jpg",
+            "description": "Sala de estar e jantar com sofá chaise longue cinzento, tapete escuro, mesa de jantar e mapa-mundo na parede.",
+            "name": "01a126d69daa7b88de2038c7c931d492.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_282c65fc",
+            "path": "clips/uploads/jUSH6ZJ6XultLeh9hbept1FAFkFPKqKOUpwvNRag.jpg",
+            "description": "Sala de estar e jantar luminosa com sofá cinzento, televisão e janela ampla com vista para a serra.",
+            "name": "01a126d69d9f33ace9e6e1412ad65a99.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aaceb06b",
+            "path": "clips/uploads/j5BK3X82ydiolasRqS0SBig9gDEuhkPhEVkS3Mij.jpg",
+            "description": "Quarto com roupeiro embutido branco, cama de solteiro, secretária com computador e chão em madeira.",
+            "name": "01a126d85ad2803e0f29f87f089ccd7e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_569b4173",
+            "path": "clips/uploads/B6H7cvoDThLYF8fWjaYd5mOJ3ECBmgz4xNNxGdaF.jpg",
+            "description": "Quarto com cama de solteiro com gavetas, secretária com monitor, guitarra e chão flutuante em madeira.",
+            "name": "01a126d8a36b1001c3301f3db28b30a1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_195b6528",
+            "path": "clips/uploads/KvJMKFodxTkrWp40X2fBz7vGZbaAO1sKI6miFiZp.jpg",
+            "description": "Quarto usado como escritório: secretária com dois monitores, janela com vista para a serra, porta para o corredor.",
+            "name": "01a126d8a371e807b59048e6b53a8771.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5e745afd",
+            "path": "clips/uploads/p9TNZBEUKck1OP8556jq4WY1t6pWSkWsgj7fSK1M.jpg",
+            "description": "Quarto com cama de solteiro com gavetas, armário alto branco, prateleira de fotografias e secretária junto à janela.",
+            "name": "01a126d8a371777b086e5a4f801bf302.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a3c258bd",
+            "path": "clips/uploads/71GA1MyBXS4wgHiweNG6K9qUpUQ4oR1GM2cpBa4A.jpg",
+            "description": "Quarto com roupeiro embutido de três portas, cama com peluches, porta aberta para o corredor e chão em madeira.",
+            "name": "01a126dc0551ac858f230ef49a866723.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c5b51228",
+            "path": "clips/uploads/xsJudk78J9D0Tahb1Bolh6Qy2lMqHpzSTT4VJYX2.jpg",
+            "description": "Varanda com mesa e cadeiras de madeira, vasos com plantas e vista para a rua e montes verdes.",
+            "name": "01a126ddf44821b455080d6bd925cb85.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f297936e",
+            "path": "clips/uploads/CoWpZDyNRIO0r7Vz4Mn0RN4eJKGDTNzO1Yv9PBz9.jpg",
+            "description": "Varanda vista de cima com mesa de madeira, vista para a estrada, casas de Valongo e serra ao fundo.",
+            "name": "01a126ddf477ea32ad4945971ecf0b56.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5caac40e",
+            "path": "clips/uploads/hL1PLGqP9SiQDLeOi9TlCVDTBQBbskd60rl9a8Ox.jpg",
+            "description": "Quarto de casal com cama, cabeceira cinzenta e porta para varanda com vista para a serra.",
+            "name": "01a126de39c2085f1f83dfaf6fb89cf7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bcf40f45",
+            "path": "clips/uploads/WQ2Ct2xA4r261u3bL4YzDMcFArcNcmSSrUWsYykb.jpg",
+            "description": "Quarto com roupeiro embutido branco, cama com colcha cinzenta, espelho de pé e chão de madeira.",
+            "name": "01a126de39c1251ebbdd235b789e315f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1f8f5b51",
+            "path": "clips/uploads/Ht1cfKFPCo3WmJeoNe3Vke0RXrUX2gTHPawTDL8m.jpg",
+            "description": "Quarto de casal com roupeiro embutido de três portas, cabeceira estofada cinzenta e quadros de fotografias.",
+            "name": "01a126de819d1039b893b9607eaa8114.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b094f135",
+            "path": "clips/uploads/QtYdGWRoiO5fWXocLwt3OcaF4JoEFpHIv5rMqLYm.jpg",
+            "description": "Quarto de casal luminoso com cortinados brancos, cabeceira cinzenta, mesas de cabeceira brancas e tapete preto.",
+            "name": "01a126de819a5dd8d3852e26ff219917.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e9a15f06",
+            "path": "clips/uploads/SertxBuAWiFjkDRHlNpgzhQydqLESd6BVoy7SWYF.jpg",
+            "description": "Varanda com mesa e cadeiras de madeira, vista para a rua, carros estacionados e monte verde.",
+            "name": "01a126deea3962ad47a4a060c6f03363.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b3904c29",
+            "path": "clips/uploads/7YxnsiEsZbsWl3VPrtwFJzmSV8LTBrC3ThuLHnZP.jpg",
+            "description": "Garagem coletiva subterrânea com pilares numerados e lugar de estacionamento vazio ao centro.",
+            "name": "01a126df2e2a0d54a3ce5d7dadf72d10.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_94e7d8ca",
+            "path": "clips/uploads/4N4Y2LOAqjm2QQZISzXNglj00xxNNsQvs5Ge4mFc.jpg",
+            "description": "Garagem subterrânea ampla com lugares marcados a amarelo, carros e carrinha estacionados.",
+            "name": "01a126df2e1bb676945c760ec5b91434.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_4b90314c",
+            "path": "clips/uploads/gG5XnSYAxwnEmCrmtHQjRE5j7l8RlUQtq5265XKh.jpg",
+            "description": "Garagem subterrânea com acesso direto ao elevador à esquerda e portão de garagem ao fundo.",
+            "name": "01a126df77bc4d1f1e81259ef7d82012.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ae395c93",
+            "path": "clips/uploads/lW5BAoFfLFmku0OBNp3bgchePJETjhxF9Wu75lal.jpg",
+            "description": "Patamar do prédio com porta do elevador, extintor, chão em mosaico e porta blindada de madeira.",
+            "name": "01a126e0ec254ee1b7981e36711d8f62.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_892d26f5",
+            "path": "clips/uploads/5Cu2FRQDaydXMjfzkqTciLZ6OxbinZm3wzHXWlRd.jpg",
+            "description": "Hall de entrada do prédio, chão em mosaico brilhante, porta blindada e porta de vidro com vista verde.",
+            "name": "01a126e114be7d883f82ad953854db83.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_c7a21646",
+            "path": "clips/uploads/GDDnhOdM8mUjTMTOhNNl8SXcwR55mfnXPFDknYIG.png",
+            "description": "Retrato da consultora Ascenção Pereira, da iad Portugal.",
+            "name": "Ascenção Pereira.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_561549e1",
+            "path": "clips/uploads/Y1dZgFriSUgTPSfYnp7w5CglluavKk8LMHWhFets.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/1ihbL0ieiltUfNHbSpZEfUCrfwHZJt8rxpnAtUoD.mp3",
+    "transcript": {
+        "duration": 34.720001220703125,
+        "text": "Um T2, no centro de Valongo, com garagem privativa. Fica num resto de chão elevado, num prédio de 2002 com elevador. São 103 metros quadrados, com um hall de entrada espaçoso e porta blindada. Sala de estar e dois quartos, ambos com roupeiros embutidos. Uma casa de banho completa e outra de serviço. A cozinha está equipada com placa, forno, frigorífico combinado e máquina de lavar loiça. Tem ainda lavandaria independente. O lugar de garagem tem acesso direto pelo elevador. 275 mil euros. Para visitar, fale com a Ascensão Pereira, da IA de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.1599999964237213
+            },
+            {
+                "word": "T2",
+                "start": 0.1599999964237213,
+                "end": 0.6600000262260437
+            },
+            {
+                "word": "no",
+                "start": 0.7599999904632568,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "centro",
+                "start": 0.9200000166893005,
+                "end": 1.159999966621399
+            },
+            {
+                "word": "de",
+                "start": 1.159999966621399,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "Valongo",
+                "start": 1.3799999952316284,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "com",
+                "start": 1.840000033378601,
+                "end": 2.140000104904175
+            },
+            {
+                "word": "garagem",
+                "start": 2.140000104904175,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "privativa",
+                "start": 2.359999895095825,
+                "end": 3.059999942779541
+            },
+            {
+                "word": "Fica",
+                "start": 3.4600000381469727,
+                "end": 3.559999942779541
+            },
+            {
+                "word": "num",
+                "start": 3.559999942779541,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "resto",
+                "start": 3.759999990463257,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "de",
+                "start": 3.9800000190734863,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "chão",
+                "start": 4.239999771118164,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "elevado",
+                "start": 4.239999771118164,
+                "end": 4.78000020980835
+            },
+            {
+                "word": "num",
+                "start": 4.960000038146973,
+                "end": 5.119999885559082
+            },
+            {
+                "word": "prédio",
+                "start": 5.119999885559082,
+                "end": 5.400000095367432
+            },
+            {
+                "word": "de",
+                "start": 5.400000095367432,
+                "end": 5.860000133514404
+            },
+            {
+                "word": "2002",
+                "start": 5.860000133514404,
+                "end": 6.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 6.380000114440918,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "elevador",
+                "start": 6.639999866485596,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "São",
+                "start": 7.460000038146973,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "103",
+                "start": 7.579999923706055,
+                "end": 8.220000267028809
+            },
+            {
+                "word": "metros",
+                "start": 8.220000267028809,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "quadrados",
+                "start": 8.579999923706055,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "com",
+                "start": 9.260000228881836,
+                "end": 9.420000076293945
+            },
+            {
+                "word": "um",
+                "start": 9.420000076293945,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "hall",
+                "start": 9.720000267028809,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "de",
+                "start": 9.720000267028809,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "entrada",
+                "start": 10.119999885559082,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "espaçoso",
+                "start": 10.119999885559082,
+                "end": 10.779999732971191
+            },
+            {
+                "word": "e",
+                "start": 10.779999732971191,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "porta",
+                "start": 11.0600004196167,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "blindada",
+                "start": 11.279999732971191,
+                "end": 11.899999618530273
+            },
+            {
+                "word": "Sala",
+                "start": 12.380000114440918,
+                "end": 12.380000114440918
+            },
+            {
+                "word": "de",
+                "start": 12.380000114440918,
+                "end": 12.84000015258789
+            },
+            {
+                "word": "estar",
+                "start": 12.84000015258789,
+                "end": 12.859999656677246
+            },
+            {
+                "word": "e",
+                "start": 12.859999656677246,
+                "end": 13.119999885559082
+            },
+            {
+                "word": "dois",
+                "start": 13.119999885559082,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "quartos",
+                "start": 13.420000076293945,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "ambos",
+                "start": 14.239999771118164,
+                "end": 14.319999694824219
+            },
+            {
+                "word": "com",
+                "start": 14.319999694824219,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "roupeiros",
+                "start": 14.5600004196167,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "embutidos",
+                "start": 14.899999618530273,
+                "end": 15.5600004196167
+            },
+            {
+                "word": "Uma",
+                "start": 15.880000114440918,
+                "end": 16.040000915527344
+            },
+            {
+                "word": "casa",
+                "start": 16.040000915527344,
+                "end": 16.219999313354492
+            },
+            {
+                "word": "de",
+                "start": 16.219999313354492,
+                "end": 16.540000915527344
+            },
+            {
+                "word": "banho",
+                "start": 16.540000915527344,
+                "end": 16.540000915527344
+            },
+            {
+                "word": "completa",
+                "start": 16.540000915527344,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "e",
+                "start": 17.139999389648438,
+                "end": 17.520000457763672
+            },
+            {
+                "word": "outra",
+                "start": 17.520000457763672,
+                "end": 17.68000030517578
+            },
+            {
+                "word": "de",
+                "start": 17.68000030517578,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "serviço",
+                "start": 17.860000610351562,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "A",
+                "start": 18.639999389648438,
+                "end": 18.780000686645508
+            },
+            {
+                "word": "cozinha",
+                "start": 18.780000686645508,
+                "end": 19.040000915527344
+            },
+            {
+                "word": "está",
+                "start": 19.040000915527344,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "equipada",
+                "start": 19.260000228881836,
+                "end": 19.68000030517578
+            },
+            {
+                "word": "com",
+                "start": 19.68000030517578,
+                "end": 20.020000457763672
+            },
+            {
+                "word": "placa",
+                "start": 20.020000457763672,
+                "end": 20.31999969482422
+            },
+            {
+                "word": "forno",
+                "start": 20.920000076293945,
+                "end": 21.040000915527344
+            },
+            {
+                "word": "frigorífico",
+                "start": 21.360000610351562,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "combinado",
+                "start": 21.860000610351562,
+                "end": 22.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 22.420000076293945,
+                "end": 22.68000030517578
+            },
+            {
+                "word": "máquina",
+                "start": 22.68000030517578,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "de",
+                "start": 22.959999084472656,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "lavar",
+                "start": 23.360000610351562,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "loiça",
+                "start": 23.360000610351562,
+                "end": 23.739999771118164
+            },
+            {
+                "word": "Tem",
+                "start": 24.139999389648438,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "ainda",
+                "start": 24.15999984741211,
+                "end": 24.520000457763672
+            },
+            {
+                "word": "lavandaria",
+                "start": 24.520000457763672,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "independente",
+                "start": 25.020000457763672,
+                "end": 25.719999313354492
+            },
+            {
+                "word": "O",
+                "start": 26.040000915527344,
+                "end": 26.200000762939453
+            },
+            {
+                "word": "lugar",
+                "start": 26.200000762939453,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "de",
+                "start": 26.31999969482422,
+                "end": 26.760000228881836
+            },
+            {
+                "word": "garagem",
+                "start": 26.760000228881836,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "tem",
+                "start": 26.959999084472656,
+                "end": 27.059999465942383
+            },
+            {
+                "word": "acesso",
+                "start": 27.059999465942383,
+                "end": 27.3799991607666
+            },
+            {
+                "word": "direto",
+                "start": 27.3799991607666,
+                "end": 27.899999618530273
+            },
+            {
+                "word": "pelo",
+                "start": 27.899999618530273,
+                "end": 28.15999984741211
+            },
+            {
+                "word": "elevador",
+                "start": 28.15999984741211,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "275",
+                "start": 29.860000610351562,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "mil",
+                "start": 30.299999237060547,
+                "end": 30.479999542236328
+            },
+            {
+                "word": "euros",
+                "start": 30.479999542236328,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "Para",
+                "start": 31.219999313354492,
+                "end": 31.360000610351562
+            },
+            {
+                "word": "visitar",
+                "start": 31.360000610351562,
+                "end": 31.979999542236328
+            },
+            {
+                "word": "fale",
+                "start": 32.279998779296875,
+                "end": 32.279998779296875
+            },
+            {
+                "word": "com",
+                "start": 32.279998779296875,
+                "end": 32.439998626708984
+            },
+            {
+                "word": "a",
+                "start": 32.439998626708984,
+                "end": 32.58000183105469
+            },
+            {
+                "word": "Ascensão",
+                "start": 32.58000183105469,
+                "end": 32.97999954223633
+            },
+            {
+                "word": "Pereira",
+                "start": 32.97999954223633,
+                "end": 33.400001525878906
+            },
+            {
+                "word": "da",
+                "start": 33.619998931884766,
+                "end": 33.720001220703125
+            },
+            {
+                "word": "IA",
+                "start": 33.720001220703125,
+                "end": 33.900001525878906
+            },
+            {
+                "word": "de",
+                "start": 33.900001525878906,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "Portugal",
+                "start": 34.060001373291016,
+                "end": 34.47999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.720001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.799999999999999,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 COM GARAGEM",
+                        "params": {
+                            "src": "img_f297936e",
+                            "avatar": "img_c7a21646",
+                            "logo": "img_561549e1",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "275.000 €",
+                            "location": "VALONGO · CENTRO",
+                            "title": "T2 COM GARAGEM",
+                            "facts": "103 m² · 2 quartos · 2 WC · garagem",
+                            "cta": "Ligue já +351 912 075 828",
+                            "name": "Ascenção Pereira",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.799999999999999,
+                "end": 7.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "PRÉDIO COM ELEVADOR",
+                        "params": {
+                            "src": "img_892d26f5",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.2,
+                "end": 9.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "103 m² · 93 m² úteis",
+                        "params": {
+                            "src": "img_469b95d1",
+                            "src2": "img_b236b63b",
+                            "src3": "img_c5b51228",
+                            "src4": "img_e9a15f06",
+                            "src5": "img_b094f135"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.3,
+                "end": 12.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Hall de entrada",
+                        "params": {
+                            "src": "img_cb5ee976",
+                            "title": "Hall de entrada",
+                            "items": [
+                                "Espaçoso e elegante",
+                                "Porta blindada"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.1,
+                "end": 15.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Sala e dois quartos",
+                        "params": {
+                            "src": "img_282c65fc",
+                            "src2": "img_6c3e8883",
+                            "src3": "img_aaceb06b",
+                            "src4": "img_a3c258bd",
+                            "src5": "img_bcf40f45"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.7,
+                "end": 18.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Duas casas de banho",
+                        "params": {
+                            "src": "img_a32f90b0",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.5,
+                "end": 21.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Cozinha equipada",
+                        "params": {
+                            "src": "img_ba5274b5",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.2,
+                "end": 23.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Cozinha equipada",
+                        "params": {
+                            "src": "img_d504207c",
+                            "src2": "img_39285eee",
+                            "src3": "img_bb5618c3",
+                            "src4": "img_fe550a0c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.9,
+                "end": 25.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Lavandaria",
+                        "params": {
+                            "src": "img_ea64a0ea",
+                            "src2": "img_1b0205e2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.9,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Garagem privativa",
+                        "params": {
+                            "src": "img_4b90314c",
+                            "src2": "img_b3904c29",
+                            "src3": "img_94e7d8ca",
+                            "src4": "img_ae395c93"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 31.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "275.000 €",
+                        "params": {
+                            "src": "img_1f8f5b51",
+                            "src2": "img_569b4173",
+                            "src3": "img_195b6528",
+                            "src4": "img_5e745afd",
+                            "src5": "img_5caac40e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.1,
+                "end": 34.72,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Ascenção Pereira",
+                        "params": {
+                            "src": "img_c7a21646",
+                            "name": "Ascenção Pereira",
+                            "phone": "+351 912 075 828",
+                            "email": "ascencao.pereira@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1046811-sslyb/clip.mp4",
+    "error": null
+}

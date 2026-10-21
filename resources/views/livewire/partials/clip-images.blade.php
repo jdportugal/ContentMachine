@@ -12,7 +12,9 @@
                          onerror="this.style.visibility='hidden'"
                          class="w-12 h-12 object-cover rounded-sm border border-ink-soft/20 bg-vellum/40" alt="" />
                 @endif
-                <span class="flex-1 min-w-0 text-sm text-ink truncate">{{ $img['description'] ?? '' }}</span>
+                {{-- Editable: left empty, the AI describes it from the pixels at planning. --}}
+                <input type="text" wire:model.blur="images.{{ $i }}.description" placeholder="auto — described by AI"
+                       class="flex-1 min-w-0 bg-transparent border-b border-transparent hover:border-ink-soft/20 focus:border-teal/50 text-sm text-ink placeholder:text-ink-faint focus:outline-none" />
                 <label class="font-mono text-[0.6rem] text-teal hover:opacity-70 cursor-pointer whitespace-nowrap" title="Replace this image (keeps its place in the video)">
                     <span wire:loading.remove wire:target="imageReplace.{{ $i }}">↻ replace</span>
                     <span wire:loading wire:target="imageReplace.{{ $i }}">uploading…</span>
@@ -25,6 +27,21 @@
     </div>
 @endif
 
+{{-- Bulk: pick or drop many at once; descriptions are written by the AI at planning.
+     A drop goes through the same upload as the picker (updatedNewImages). --}}
+<label x-data="{ over: false, busy: false }"
+       @dragover.prevent="over = true" @dragleave.prevent="over = false"
+       @drop.prevent="over = false; if ($event.dataTransfer.files.length) { busy = true; $wire.uploadMultiple('newImages', $event.dataTransfer.files, () => busy = false, () => busy = false) }"
+       :class="over ? 'bg-teal/10 border-teal' : ''"
+       class="flex items-center justify-center gap-2 mb-3 rounded-sm border border-dashed border-teal/40 p-5 cursor-pointer hover:bg-teal/5 transition">
+    <span class="font-mono text-[0.65rem] text-teal" x-show="!busy" wire:loading.remove wire:target="newImages">⊕ Drop images here, or click to add many at once</span>
+    <span class="font-mono text-[0.65rem] text-ink-faint" x-show="busy" x-cloak>uploading…</span>
+    <span class="font-mono text-[0.65rem] text-ink-faint" wire:loading wire:target="newImages">uploading…</span>
+    <span class="font-mono text-[0.55rem] text-ink-faint">— the AI describes them</span>
+    <input type="file" multiple wire:model="newImages" accept="image/*,video/mp4,video/quicktime,video/webm" class="hidden" />
+</label>
+@error('newImages.*') <p class="-mt-2 mb-2 text-bad text-sm">{{ $message }}</p> @enderror
+
 <div class="grid grid-cols-12 gap-2 items-end">
     <div class="col-span-5">
         <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">file</label>
@@ -33,8 +50,8 @@
         <div wire:loading wire:target="newImage" class="mt-1 font-mono text-[0.55rem] text-ink-faint">uploading…</div>
     </div>
     <div class="col-span-5">
-        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">description</label>
-        <input type="text" wire:model="newImageDesc" placeholder="e.g.: company logo"
+        <label class="block font-mono text-[0.55rem] text-ink-faint mb-1">description (optional)</label>
+        <input type="text" wire:model="newImageDesc" placeholder="e.g.: the agent — or leave for AI"
                class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-sm focus:border-teal/50 focus:outline-none" />
     </div>
     <div class="col-span-2">

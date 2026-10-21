@@ -1,0 +1,1283 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta em Felgueiras com piscina e licença AL: 2,35 M€",
+    "source_text": null,
+    "source_path": "clips/uploads/M4bfC7zEqBim5VcXubIT2njoaZxxOkX50lPT0wfm.mp3",
+    "images": [
+        {
+            "id": "img_2ed815ea",
+            "path": "clips/uploads/UzBrpIlYGhxTu083JPIOfNsnejMtVWRWiZHWCzyv.jpg",
+            "description": "Casa de banho branca com base de duche em vidro, sanita, lavatório e teto em madeira.",
+            "name": "cb1956d5-fb47-4713-a6f2-a98cf63c71f2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_91416288",
+            "path": "clips/uploads/9IhEXexzHmjXlWp0yQM9achaVEjlasDp4szMx6eu.jpg",
+            "description": "Quarto com duas camas de solteiro, colchas azuis, teto em madeira e chão de soalho.",
+            "name": "ed5ebadf-a41a-43c4-be32-e2646db549ff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f7ee1fd",
+            "path": "clips/uploads/0dRtZVP2p5Iyw7WYKcK9pGGhO5sKbbNou408XfDS.jpg",
+            "description": "Corredor comprido com soalho de madeira, teto em madeira e várias portas de quartos.",
+            "name": "194f9fab-ced5-4d7b-901c-c011d42d9b5d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a071a912",
+            "path": "clips/uploads/sXjLb9YwloZkPSCV4C5MNqHY6V3ymI0h9zgqmCAW.jpg",
+            "description": "Patamar no topo da escada em madeira, com teto em madeira e janela ao fundo.",
+            "name": "56730dae-259a-4215-b879-642a23d37103.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e44aabb4",
+            "path": "clips/uploads/VEIK8ibP8d9kyIH2Gzxwp0kQE3gKaqVJ1y6DHjNp.jpg",
+            "description": "Sala ampla em open space com escada em madeira, sofás, mesa de jantar e chão em tijoleira.",
+            "name": "dcd868e3-f95a-49a8-bf2a-761ed5339f31.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_78401fd3",
+            "path": "clips/uploads/2058ZeLIDi3uoIaZdxfICEsGk3nRCSmqCrQYiCvN.jpg",
+            "description": "Sala de lazer com mesa de bilhar vermelha, sofás cinzentos, TV e chão em tijoleira.",
+            "name": "721bd2b0-8e3c-4095-9938-3684cae9cac5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b4059476",
+            "path": "clips/uploads/pvmAmB5wbHVHvoIRqqhTubL8XBsFFIbq5ISEDliJ.jpg",
+            "description": "Sala de estar ampla com sofás rosados, poltronas, lareira em pedra e escada ao fundo.",
+            "name": "ff082b7d-a586-4f70-b2dd-57be4086a5b6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_46b719f7",
+            "path": "clips/uploads/RIlbra6VZOJKGsiqq5AkSWEhmwRsgr3VJj40i7b4.jpg",
+            "description": "Sala de estar com vários sofás virados para a TV, candeeiro de pé e parede em pedra.",
+            "name": "ee38ca69-91f2-4f70-a4e3-9e2749b8db86.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_84bcb49e",
+            "path": "clips/uploads/4INC54I8kAhb3JwoeBjhIZh0grYuXFa8fEtFVnhm.jpg",
+            "description": "Sala ampla com mesa de jogo verde, zona de sofás e cozinha aberta ao fundo.",
+            "name": "248348e7-6f8f-4411-aeb6-cbfbfb8db9ea.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f4a150a4",
+            "path": "clips/uploads/e5kr1uIgo7ma2EDGYno7sVOs8NeNVBxs2rgDn2rc.jpg",
+            "description": "Sala de estar com sofás rosa e castanho, tapete persa, lareira e escada em madeira.",
+            "name": "4ff456c1-33e6-468f-bce2-5c44fd0af659.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cfb44903",
+            "path": "clips/uploads/bliBM6tBxuuMPKxWxfL6eYM0jnprinNVjAuSG3gF.jpg",
+            "description": "Sala de jantar com teto em madeira, mesa comprida com cadeiras de couro e móveis antigos entalhados.",
+            "name": "4ab1008e-1b9d-46a5-9539-b1d6962b8cae.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_20cbf949",
+            "path": "clips/uploads/XhFs8OFIIdUDqPEgJ6cnyA46RTffdjGLdNppDrx2.jpg",
+            "description": "Sala de jantar aberta para a cozinha, candeeiro amarelo sobre a mesa e vitrine antiga entalhada.",
+            "name": "382d89e1-7f9c-4c73-a7d2-f5b5a24e309c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3326ca90",
+            "path": "clips/uploads/2H0OAqHPAXb5jF0xQGABVU46UA9EqhhznZ5IKuIS.jpg",
+            "description": "Cozinha aberta com móveis em madeira clara, ligada à sala de jantar com mesa comprida e portas envidraçadas.",
+            "name": "2424f1ac-8528-4fb0-a260-074901d91ca4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63cff9a5",
+            "path": "clips/uploads/Zs1TjipzLxvVHc5NSgbVSMvezmcnbevbEO5vJrmL.jpg",
+            "description": "Cozinha moderna com armários em madeira clara, frigorífico e forno em inox, porta aberta para o exterior.",
+            "name": "1410f531-a761-4eb5-b589-af1ca5f3e5c0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_01c3cee1",
+            "path": "clips/uploads/TMdhX4mPxndVbmJlOkP6vSrukOvixQvDSwcuhv8y.jpg",
+            "description": "Pátio da quinta com relvado, fonte central, casas brancas com telhado vermelho e caminho de terra.",
+            "name": "88c08ba7-096a-43ed-9175-d9bf95c665ab.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_645b02f7",
+            "path": "clips/uploads/BotSizK6uFMVJwCjghsC26Npb8Tj3s243R7lIcWB.jpg",
+            "description": "Vista aérea da quinta: portão de pedra com estátuas, muro, relvado com fontes e casas brancas.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2908fec4",
+            "path": "clips/uploads/sjB30pkn0hbVdZ2gtZLoXhihrWoIwBFWMqReNhCU.jpg",
+            "description": "Logótipo da RE/MAX Rubeas: balão vermelho, branco e azul sobre fundo azul-escuro.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5ee90dc8",
+            "path": "clips/uploads/XjmtlMnWF76vk7Rr4fQpPpcApa5zx9ssn78ME14G.jpg",
+            "description": "Retrato do agente imobiliário, provavelmente Rogério Costa, de fato escuro e gravata vermelha, fundo branco.",
+            "name": "Rogerio.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cc4511f7",
+            "path": "clips/uploads/iBcLUy99xNDBQFKEqQsxYGvcnByqxzlzBg0TKPVP.jpg",
+            "description": "Vista aérea das casas brancas com telhados vermelhos, piscina retangular no relvado e jardim murado.",
+            "name": "84bb0d38-a322-4218-8223-06e710e950d3.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_28dd13eb",
+            "path": "clips/uploads/9Af5goEaYsD5GI3dn12UTWCFu93INrFrPIm9I5vT.jpg",
+            "description": "Vista aérea da piscina no relvado junto à casa, com esplanada, churrasqueira e anexo em pedra.",
+            "name": "34c11336-452d-4783-8321-6bb55cd300aa.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_76a435ba",
+            "path": "clips/uploads/9W6nVqAabS51eYIae1KPKpJr9BtvpGJtCSNwWtcr.jpg",
+            "description": "Pátio exterior com relvado, mesa e cadeiras de jardim, casa branca e anexo em pedra com telhado vermelho.",
+            "name": "60ab77e2-1712-480f-8f2e-d00802e94d6c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de3ec98a",
+            "path": "clips/uploads/f6WHzozswXNucxgi0IOSsThP5TOlgnr0TRb1dqqf.jpg",
+            "description": "Casa de banho branca com teto em madeira, lavatório com espelho e nicho de janela em granito.",
+            "name": "def67d5a-8759-4020-aca0-09efba51e676.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d009d6fb",
+            "path": "clips/uploads/z5rbc3lv9jvUD7Ag3xyFWta44xKISIFgAL2syODv.jpg",
+            "description": "Quarto em dois níveis com cama de casal, escada de madeira para mezanino e teto com vigas escuras.",
+            "name": "b8248759-0859-415b-b25b-73de990af81a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a50d70e3",
+            "path": "clips/uploads/ehyVaCdpCkcxynlGVa9EFCmcpViGL4MHAVxMXYpK.jpg",
+            "description": "Quarto de casal com cama antiga de madeira esculpida, soalho e teto em madeira, janela luminosa.",
+            "name": "873ecf9d-9492-41b1-8b55-8f57ec07a092.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e336a5ce",
+            "path": "clips/uploads/pzv4m62jJvxIykoGyqmXrdSZHDUMWaAlSqYXrNYk.jpg",
+            "description": "Sala privada com sofá de veludo vermelho, armário antigo esculpido e soalho de madeira com sol.",
+            "name": "762a33fa-7e5a-4263-8132-14c5a921030b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4420c945",
+            "path": "clips/uploads/RjjXdXZou41ZARXSbEPINqRk2BniPgsDbqOod4jh.jpg",
+            "description": "Sala privada com sofá vermelho, mesa redonda antiga, cortinas compridas e sol a entrar pela janela.",
+            "name": "ed5a0091-073f-412e-ac64-e24c4fbef96b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_71dde538",
+            "path": "clips/uploads/7g6Wl1ImnAdJC9lG7EKeT2H68DPsgWQKAkyDXWha.jpg",
+            "description": "Casa de banho branca moderna com base de duche envidraçada, lavatório, sanita e teto em madeira.",
+            "name": "69731250-5bc2-4a33-ad5a-da981c15e617.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8b1ad8f3",
+            "path": "clips/uploads/vGDY0qhhgWtsogtV5o4aTprcaydbldyFRGBfWfOI.jpg",
+            "description": "Quarto com duas camas individuais, colchas azuis, teto em madeira e janela com parede de granito.",
+            "name": "9c59f453-dfcb-4423-85ee-c422b67ad359.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0a48cfd8",
+            "path": "clips/uploads/k0R09w4tZpN1Iw9ObDqydzhJpDy0fc1ZtuUQ1sa8.jpg",
+            "description": "Casa de banho branca com duche envidraçado, lavatório, sanita e teto inclinado em madeira.",
+            "name": "dfd0ebcf-e2f8-4902-92dc-f241a58ba76d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2a373c73",
+            "path": "clips/uploads/zj5foYcdS3W1VQuSt7iBcLaQGc45ESrSEUT0mSZA.jpg",
+            "description": "Quarto com duas camas juntas, colchas florais, almofadas amarelas, teto em madeira e janela ampla.",
+            "name": "4876b55e-3735-48a1-a008-2f701eb4918e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_59413202",
+            "path": "clips/uploads/haFfsuCS5Fyb3CLhr8arZmo3lMxGdjRhUUgEOiuR.jpg",
+            "description": "Casa de banho branca com duche de vidro, teto em madeira, sanita e lavatório com orquídeas.",
+            "name": "cba9f94c-9893-4c78-a301-ff8bdea8e4ba.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bbc16c60",
+            "path": "clips/uploads/YEAevjH9mJfVzHnA1ns5H9Al7TaDSNvs2TrnKujY.jpg",
+            "description": "Quarto com cama de casal, teto e chão em madeira, janela em granito com cortinas.",
+            "name": "83ce1abc-87d9-4504-b2dc-d2e4b3e24a22.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3e96e2d7",
+            "path": "clips/uploads/44004CLMTycR3mmcgfGUTJh7t9Cvdnbi44OIHyHN.jpg",
+            "description": "Vista aérea da quinta: portão barroco em pedra, muro, relvado com fonte e casas brancas.",
+            "name": "2b17d783-0829-4c25-9f92-ac6809a8b867.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_e6bb8aff",
+            "path": "clips/uploads/CwmTf03ypLOkvheU5omaLS8WZdMYG1Uiyb9ltRDL.jpg",
+            "description": "Vista aérea da casa principal branca, telhado vermelho, escadaria de pedra, caminho de terra e carros.",
+            "name": "0141ac38-1f70-4633-bf95-9dbf2222f77a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5d1e87c9",
+            "path": "clips/uploads/QMJsG4vm7F1Aik9B5RFyhOCv83lPYyatmMZjZxYV.jpg",
+            "description": "Fachada de casa branca de dois pisos com janelas em granito e relvado à frente.",
+            "name": "de3a9b2e-2403-4961-ac0c-08379b154a6a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f62abbcf",
+            "path": "clips/uploads/rkLofo1AZwcjlA1LOzw6h02yk0Ok6JeZ1jMkLDyN.jpg",
+            "description": "Vista aérea do pátio: relvado com fonte, muro ornamentado e casas brancas de telhado vermelho.",
+            "name": "ae038090-6487-4926-b3b0-f136e0540a68.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_42d25bae",
+            "path": "clips/uploads/uDo4lOsd7sB3s4OuLBJlz6v85x7Xh0Jth4MGrXlI.jpg",
+            "description": "Vista aérea alta da quinta inteira, rodeada de bosque, vinhas, hortas e tanque de água.",
+            "name": "e9496c63-d7c1-4367-a7fa-1bb4b1ee9e03.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_28dd8ec4",
+            "path": "clips/uploads/F1m4osTWPAai40TJmGa5ZQUTKcgHSqYCiL0ePkTe.jpg",
+            "description": "Vista aérea do relvado com fonte, muro barroco de pedra e casa principal com escadaria.",
+            "name": "c5cf8ce8-168f-49ec-aa94-b56338d67a5f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f65783dc",
+            "path": "clips/uploads/KopttAo84A2YPp6ZvNSA50vABreOIvZmB6EBPoOD.jpg",
+            "description": "Jardim ao nível do solo: relvado com fonte, muro de pedra ornamentado e casas ao fundo, sol.",
+            "name": "87ffb3db-0840-46da-8f55-7f4f9d5e81f2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_850c768e",
+            "path": "clips/uploads/C2J6cLNtw8EWQwkRDgSJYq0ie5IHqrsCozNknN2e.jpg",
+            "description": "Jardim relvado com árvores, fonte barroca em pedra com estátuas e vista sobre o vale.",
+            "name": "e52422a5-17be-435c-868d-ffff8df82723.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6199803d",
+            "path": "clips/uploads/tcvEunZZbU8EElzX3KShHcUmFa55h2EKmHIIa0iE.jpg",
+            "description": "Entrada da quinta: caminho de terra entre relvados, casa senhorial branca à direita, muro de pedra ornamentado e sol.",
+            "name": "b217a349-5fa3-4cc0-b8be-b5879b42e9d2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5f5d6092",
+            "path": "clips/uploads/ESm7B1E4ZPhwcV3MK7LaHTkAaJ54p84krNT2661V.jpg",
+            "description": "Vista aérea: casas brancas com telhados de telha, piscina retangular, relvado amplo, pátio com mesas e churrasqueira em pedra.",
+            "name": "11d866de-7028-46a9-8d64-dc6676313f8f.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n2 350 000 €\nVenda\nid. 124111001-3999\n1 071 m²\n\n- -\n\n- -\n\nC\n\nDescrição\nDetalhes\nMapa\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nUma Quinta de Charme e Tranquilidade ✨🌿\n\nUma propriedade única, totalmente murada, que respira tranquilidade e exclusividade. Nesta quinta encontra uma das casas com quatro quartos em suíte, um quarto com casa de banho e sala privada, além de um quarto em dois níveis também com casa de banho privativa. A ampla sala de estar liga-se de forma harmoniosa à cozinha e à sala de jantar, enquanto outra sala, equipada com mesa de bilhar e sofás, oferece o espaço perfeito para momentos de lazer.\n\nNo exterior, os jardins são um convite ao descanso, repletos de recantos encantadores, várias fontes de água e uma piscina que se torna o ponto alto nos dias de sol. Para além de todas estas características, a quinta conta ainda com licenciamento de Alojamento Local, o que a torna ideal tanto para desfrutar em família como para investimento.\n\nDetalhes\nÁrea Bruta Privativa m²\n1 071\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n30 000\nÁrea Útil m²\n1 016\nQuartos\n- -\nAno de Construção\n- -\nPiso\n- -\nWC/Casas de banho\n- -\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta com alojamento local em Felgueiras e o mercado de habitação",
+            "summary": "Felgueiras é um concelho do distrito do Porto, na sub-região do Tâmega e Sousa, com 20 freguesias. Perdeu 3,8% da população entre 2011 e 2021, numa altura em que as rendas em Portugal continuam a subir.",
+            "timeline": [
+                {
+                    "label": "Felgueiras com 58 065 habitantes",
+                    "sublabel": "Censos 2011"
+                },
+                {
+                    "label": "População desce 3,8% numa década",
+                    "sublabel": "Censos 2021"
+                },
+                {
+                    "label": "Renda mediana nacional sobe 10,2%",
+                    "sublabel": "2.º trimestre 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Freguesias de Felgueiras",
+                    "value": 20,
+                    "unit": "freguesias"
+                },
+                {
+                    "label": "Variação da população de Felgueiras (2011-2021)",
+                    "value": -3.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Renda mediana de novos contratos em Portugal (2.º trim. 2026)",
+                    "value": 10.17,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga das rendas em Portugal (2.º trim. 2026)",
+                    "value": 10.2,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Felgueiras fica no distrito do Porto, na sub-região do Tâmega e Sousa",
+                "O concelho tem 20 freguesias",
+                "Entre 2011 e 2021, a população caiu 3,8%",
+                "Em Portugal, a renda mediana de novos contratos chegou a 10,17 €/m² no 2.º trimestre de 2026, mais 10,2% num ano (INE)"
+            ],
+            "sources": [
+                "https://www.expressofelgueiras.com/censos-2021-populacao-de-felgueiras-decresceu-38-por-cento-em-10-anos/",
+                "https://www.felgueirasmagazine.pt/felgueiras-perde-2182-pessoas-em-10-anos/",
+                "https://aldeiasportuguesas.pt/porto/felgueiras/",
+                "https://observador.pt/2026/09/29/rendas-medianas-em-portugal-aceleram-para-subida-de-102-em-termos-homologos-diz-ine/",
+                "https://www.diarioaveiro.pt/2026/09/29/renda-mediana-de-novos-contratos-sobe-102-para-1017-euros-m2-no-2-o-trimestre-ine/",
+                "https://www.noticiasaominuto.com/pais/3058875/renda-mediana-de-novos-contratos-sobe-10-2-para-10-17-eurosm2-no-2-trimestre-ine"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta em Felgueiras com piscina e licença AL: 2,35 M€",
+            "description": "Quinta murada com três hectares em Felgueiras, já licenciada para alojamento local, com mais de mil metros quadrados de construção, quartos em suite, sala de bilhar, jardins com fontes e piscina. Ideal para viver em família ou para investir, por 2.350.000 €. Para marcar uma visita, fale com Rogério Costa, da RE/MAX.",
+            "tags": [
+                "quinta",
+                "Felgueiras",
+                "imobiliário",
+                "alojamento local",
+                "moradia com piscina",
+                "investimento imobiliário",
+                "imóveis de luxo",
+                "RE/MAX"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-6ad6b",
+    "created_at": "2026-10-06T14:47:22+00:00",
+    "updated_at": "2026-10-06T14:52:23+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/M4bfC7zEqBim5VcXubIT2njoaZxxOkX50lPT0wfm.mp3",
+    "transcript": {
+        "duration": 34.349998474121094,
+        "text": "Uma quinta em Felgueiras, já licenciada para alojamento local. Três hectares totalmente morados, com mais de mil metros de construção. Numa das casas, quatro quartos em suite, mais um quarto com sala privada e outra em dois níveis, todos com casa de banho. Sala de estar aberta para a cozinha e jantar, e uma sala de lazer com bilhar. Lá fora, jardins com recantos e fontes e uma piscina para os dias de sol. Para viver em família ou para investir, 2 milhões e 350 mil euros. Para visitar, fale com Rogério Costa, da Remax Rúbias.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.36000001430511475
+            },
+            {
+                "word": "quinta",
+                "start": 0.36000001430511475,
+                "end": 0.6600000262260437
+            },
+            {
+                "word": "em",
+                "start": 0.6600000262260437,
+                "end": 0.8399999737739563
+            },
+            {
+                "word": "Felgueiras",
+                "start": 0.8399999737739563,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "já",
+                "start": 1.659999966621399,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "licenciada",
+                "start": 1.8200000524520874,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "para",
+                "start": 2.440000057220459,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "alojamento",
+                "start": 2.680000066757202,
+                "end": 3.0799999237060547
+            },
+            {
+                "word": "local",
+                "start": 3.0799999237060547,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "Três",
+                "start": 4.28000020980835,
+                "end": 4.460000038146973
+            },
+            {
+                "word": "hectares",
+                "start": 4.460000038146973,
+                "end": 4.820000171661377
+            },
+            {
+                "word": "totalmente",
+                "start": 4.820000171661377,
+                "end": 5.420000076293945
+            },
+            {
+                "word": "morados",
+                "start": 5.420000076293945,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "com",
+                "start": 5.980000019073486,
+                "end": 6.159999847412109
+            },
+            {
+                "word": "mais",
+                "start": 6.159999847412109,
+                "end": 6.340000152587891
+            },
+            {
+                "word": "de",
+                "start": 6.340000152587891,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "mil",
+                "start": 6.639999866485596,
+                "end": 6.78000020980835
+            },
+            {
+                "word": "metros",
+                "start": 6.78000020980835,
+                "end": 7.059999942779541
+            },
+            {
+                "word": "de",
+                "start": 7.059999942779541,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "construção",
+                "start": 7.380000114440918,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "Numa",
+                "start": 8.5600004196167,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "das",
+                "start": 8.619999885559082,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "casas",
+                "start": 8.899999618530273,
+                "end": 9.199999809265137
+            },
+            {
+                "word": "quatro",
+                "start": 9.5600004196167,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "quartos",
+                "start": 9.779999732971191,
+                "end": 10.0600004196167
+            },
+            {
+                "word": "em",
+                "start": 10.0600004196167,
+                "end": 10.359999656677246
+            },
+            {
+                "word": "suite",
+                "start": 10.359999656677246,
+                "end": 10.619999885559082
+            },
+            {
+                "word": "mais",
+                "start": 10.819999694824219,
+                "end": 11
+            },
+            {
+                "word": "um",
+                "start": 11,
+                "end": 11.220000267028809
+            },
+            {
+                "word": "quarto",
+                "start": 11.220000267028809,
+                "end": 11.4399995803833
+            },
+            {
+                "word": "com",
+                "start": 11.4399995803833,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "sala",
+                "start": 11.880000114440918,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "privada",
+                "start": 11.880000114440918,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "e",
+                "start": 12.479999542236328,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "outra",
+                "start": 13.039999961853027,
+                "end": 13.300000190734863
+            },
+            {
+                "word": "em",
+                "start": 13.300000190734863,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "dois",
+                "start": 13.4399995803833,
+                "end": 13.619999885559082
+            },
+            {
+                "word": "níveis",
+                "start": 13.619999885559082,
+                "end": 13.960000038146973
+            },
+            {
+                "word": "todos",
+                "start": 14.399999618530273,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "com",
+                "start": 14.479999542236328,
+                "end": 14.739999771118164
+            },
+            {
+                "word": "casa",
+                "start": 14.739999771118164,
+                "end": 14.9399995803833
+            },
+            {
+                "word": "de",
+                "start": 14.9399995803833,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "banho",
+                "start": 15.319999694824219,
+                "end": 15.479999542236328
+            },
+            {
+                "word": "Sala",
+                "start": 16.15999984741211,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "de",
+                "start": 16.15999984741211,
+                "end": 16.459999084472656
+            },
+            {
+                "word": "estar",
+                "start": 16.459999084472656,
+                "end": 16.600000381469727
+            },
+            {
+                "word": "aberta",
+                "start": 16.600000381469727,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "para",
+                "start": 16.940000534057617,
+                "end": 17.15999984741211
+            },
+            {
+                "word": "a",
+                "start": 17.15999984741211,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "cozinha",
+                "start": 17.459999084472656,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "e",
+                "start": 17.540000915527344,
+                "end": 17.799999237060547
+            },
+            {
+                "word": "jantar",
+                "start": 17.799999237060547,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 18.520000457763672,
+                "end": 18.68000030517578
+            },
+            {
+                "word": "uma",
+                "start": 18.68000030517578,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "sala",
+                "start": 18.8799991607666,
+                "end": 19.020000457763672
+            },
+            {
+                "word": "de",
+                "start": 19.020000457763672,
+                "end": 19.3799991607666
+            },
+            {
+                "word": "lazer",
+                "start": 19.3799991607666,
+                "end": 19.440000534057617
+            },
+            {
+                "word": "com",
+                "start": 19.440000534057617,
+                "end": 19.920000076293945
+            },
+            {
+                "word": "bilhar",
+                "start": 19.920000076293945,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "Lá",
+                "start": 20.579999923706055,
+                "end": 20.719999313354492
+            },
+            {
+                "word": "fora",
+                "start": 20.719999313354492,
+                "end": 21.040000915527344
+            },
+            {
+                "word": "jardins",
+                "start": 21.440000534057617,
+                "end": 21.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 21.579999923706055,
+                "end": 21.8799991607666
+            },
+            {
+                "word": "recantos",
+                "start": 21.8799991607666,
+                "end": 22.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 22.31999969482422,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "fontes",
+                "start": 22.559999465942383,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "e",
+                "start": 22.979999542236328,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "uma",
+                "start": 23.520000457763672,
+                "end": 23.780000686645508
+            },
+            {
+                "word": "piscina",
+                "start": 23.780000686645508,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "para",
+                "start": 24.040000915527344,
+                "end": 24.260000228881836
+            },
+            {
+                "word": "os",
+                "start": 24.260000228881836,
+                "end": 24.540000915527344
+            },
+            {
+                "word": "dias",
+                "start": 24.540000915527344,
+                "end": 24.559999465942383
+            },
+            {
+                "word": "de",
+                "start": 24.559999465942383,
+                "end": 24.899999618530273
+            },
+            {
+                "word": "sol",
+                "start": 24.899999618530273,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "Para",
+                "start": 25.450000762939453,
+                "end": 25.760000228881836
+            },
+            {
+                "word": "viver",
+                "start": 25.760000228881836,
+                "end": 26.059999465942383
+            },
+            {
+                "word": "em",
+                "start": 26.059999465942383,
+                "end": 26.200000762939453
+            },
+            {
+                "word": "família",
+                "start": 26.200000762939453,
+                "end": 26.579999923706055
+            },
+            {
+                "word": "ou",
+                "start": 26.579999923706055,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "para",
+                "start": 26.780000686645508,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "investir",
+                "start": 26.920000076293945,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "2",
+                "start": 27.979999542236328,
+                "end": 28.15999984741211
+            },
+            {
+                "word": "milhões",
+                "start": 28.15999984741211,
+                "end": 28.639999389648438
+            },
+            {
+                "word": "e",
+                "start": 28.639999389648438,
+                "end": 28.940000534057617
+            },
+            {
+                "word": "350",
+                "start": 28.940000534057617,
+                "end": 29.760000228881836
+            },
+            {
+                "word": "mil",
+                "start": 29.760000228881836,
+                "end": 30.280000686645508
+            },
+            {
+                "word": "euros",
+                "start": 30.280000686645508,
+                "end": 30.600000381469727
+            },
+            {
+                "word": "Para",
+                "start": 31.260000228881836,
+                "end": 31.34000015258789
+            },
+            {
+                "word": "visitar",
+                "start": 31.34000015258789,
+                "end": 31.979999542236328
+            },
+            {
+                "word": "fale",
+                "start": 32.2400016784668,
+                "end": 32.2400016784668
+            },
+            {
+                "word": "com",
+                "start": 32.2400016784668,
+                "end": 32.400001525878906
+            },
+            {
+                "word": "Rogério",
+                "start": 32.400001525878906,
+                "end": 32.68000030517578
+            },
+            {
+                "word": "Costa",
+                "start": 32.68000030517578,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "da",
+                "start": 33.31999969482422,
+                "end": 33.47999954223633
+            },
+            {
+                "word": "Remax",
+                "start": 33.47999954223633,
+                "end": 33.79999923706055
+            },
+            {
+                "word": "Rúbias",
+                "start": 33.79999923706055,
+                "end": 34.2400016784668
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.349998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6000000000000014,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Quinta licenciada para AL",
+                        "params": {
+                            "src": "img_645b02f7",
+                            "avatar": "img_5ee90dc8",
+                            "logo": "img_2908fec4",
+                            "price": "2.350.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Quinta com alojamento local",
+                            "location": "Felgueiras · 1.071 m² · 6 quartos",
+                            "agentName": "Rogério Costa",
+                            "phone": "+351 961 561 066",
+                            "legal": "RE/MAX Rubeas"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6000000000000014,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "A propriedade",
+                        "params": {
+                            "src": "img_42d25bae",
+                            "title": "A propriedade",
+                            "items": [
+                                "30 000 m² de terreno",
+                                "Totalmente murada",
+                                "1 071 m² de construção"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 11,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_a50d70e3",
+                            "src2": "img_bbc16c60",
+                            "src3": "img_2a373c73",
+                            "src4": "img_91416288",
+                            "srcs": [
+                                "img_a50d70e3",
+                                "img_bbc16c60",
+                                "img_2a373c73",
+                                "img_91416288",
+                                "img_8b1ad8f3"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11,
+                "end": 14.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_e336a5ce",
+                            "src2": "img_d009d6fb",
+                            "srcs": [
+                                "img_e336a5ce",
+                                "img_d009d6fb",
+                                "img_4420c945",
+                                "img_2f7ee1fd",
+                                "img_a071a912"
+                            ],
+                            "angle": 11,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.1,
+                "end": 16.1,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Todos com casa de banho",
+                        "params": {
+                            "src": "img_2ed815ea",
+                            "src2": "img_de3ec98a",
+                            "src3": "img_71dde538",
+                            "src4": "img_0a48cfd8",
+                            "src5": "img_59413202"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.1,
+                "end": 18.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Sala, cozinha e jantar",
+                        "params": {
+                            "src": "img_b4059476",
+                            "src2": "img_3326ca90",
+                            "src3": "img_20cbf949",
+                            "src4": "img_cfb44903",
+                            "srcs": [
+                                "img_b4059476",
+                                "img_3326ca90",
+                                "img_20cbf949",
+                                "img_cfb44903",
+                                "img_f4a150a4",
+                                "img_63cff9a5",
+                                "img_e44aabb4",
+                                "img_46b719f7",
+                                "img_84bcb49e"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.4,
+                "end": 20.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_78401fd3",
+                            "zoom": 1.35
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.5,
+                "end": 23.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_01c3cee1",
+                            "src2": "img_f65783dc",
+                            "src3": "img_850c768e",
+                            "src4": "img_28dd8ec4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.1,
+                "end": 25.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_28dd13eb",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 27.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Família ou investimento",
+                        "params": {
+                            "src": "img_76a435ba",
+                            "blur": 10,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.9,
+                "end": 31.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "2.350.000 €",
+                        "params": {
+                            "src": "img_3e96e2d7",
+                            "src2": "img_e6bb8aff",
+                            "src3": "img_cc4511f7",
+                            "src4": "img_5f5d6092",
+                            "src5": "img_f62abbcf",
+                            "srcs": [
+                                "img_3e96e2d7",
+                                "img_e6bb8aff",
+                                "img_cc4511f7",
+                                "img_5f5d6092",
+                                "img_f62abbcf",
+                                "img_5d1e87c9",
+                                "img_6199803d"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.1,
+                "end": 34.349998474121094,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Rogério Costa",
+                        "params": {
+                            "src": "img_5ee90dc8",
+                            "logo": "img_2908fec4",
+                            "name": "Rogério Costa",
+                            "role": "Consultor imobiliário · RE/MAX Rubeas",
+                            "buttons": "+351 961 561 066 | Marque a sua visita",
+                            "phone": "+351 961 561 066"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-6ad6b/clip.mp4",
+    "error": null
+}

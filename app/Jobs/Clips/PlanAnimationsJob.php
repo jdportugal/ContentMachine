@@ -9,6 +9,7 @@ use App\Services\Clips\Contracts\AnimationPlanner;
 use App\Services\Clips\Contracts\MetadataService;
 use App\Services\Clips\Contracts\ResearchService;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\ImageDescriber;
 use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageLibraryMatcher;
 use App\Services\Clips\ImageRequests;
@@ -54,8 +55,20 @@ class PlanAnimationsJob implements ShouldQueue
 
             // Can we actually make AI images? (config on AND kie has credits). If not,
             // the planner is told to use provided images / non-image content only.
-            $imagesOn = (bool) ($c['generate_images'] ?? true)
+            // "No images" for this clip turns it off the same way, per clip.
+            $semImagens = $p->semImagens();
+            // "Only reference images": the clip is built from the user's own
+            // pictures — nothing generated, fetched, filmed or asked for.
+            $soReferencias = ! $semImagens && $p->soReferencias();
+            $imagesOn = ! $semImagens && ! $soReferencias
+                && (bool) ($c['generate_images'] ?? true)
                 && app(ClipImageGenerator::class)->available();
+
+            // With images off for this clip, image-reveal leaves the planner's whole
+            // vocabulary: the existing allowlist is what the prompt, the validator and
+            // the fillers all read, so dropping it here is enough to keep every image
+            // layer — generated, provided or filmed — out of the plan.
+            $camadas = self::camadasPermitidas($semImagens);
 
             // Deep-research the topic so visuals carry real context (not just the speech).
             $facts = ($c['research'] ?? false) ? $research->research($p->transcript) : [];
@@ -64,7 +77,7 @@ class PlanAnimationsJob implements ShouldQueue
             }
 
             // Suggested publishing metadata (title/description/tags) from the transcript.
-            $suggested = $metadata->suggest($p->transcript);
+            $suggested = $metadata->suggest($p->transcript, $this->captionContext($p, $store));
             $p->update([
                 'title' => $suggested['title'] !== '' ? $suggested['title'] : $p->title,
                 'meta' => array_merge($p->meta ?? [], ['suggested' => $suggested]),
@@ -79,19 +92,35 @@ class PlanAnimationsJob implements ShouldQueue
             [$planW, $planH] = $this->formatoEscolhido($p)
                 ?? ($isOverlay ? $this->sourceSize($p, $c) : [(int) $c['width'], (int) $c['height']]);
 
+            // Images added without a description (bulk upload) are described by
+            // LOOKING at them — the planner only ever reads images as text.
+            if (! $semImagens && collect($p->images ?? [])->contains(fn ($i) => trim((string) ($i['description'] ?? '')) === '' && empty($i['video']))) {
+                $p->update(['images' => app(ImageDescriber::class)->describe($p->images ?? [], (string) ($p->transcript['text'] ?? ''))]);
+            }
+
+            $instrucoes = trim((string) ($p->meta['instructions'] ?? ''));
+            if ($soReferencias && ! empty($p->images)) {
+                // A listing brings ~30 photos for ~10 scenes: "show them all" forced a
+                // 3-photo effect into every scene, the same two on repeat. It picks instead.
+                $instrucoes = trim($instrucoes."\n\n".(isset($p->meta['listing'])
+                    ? str_replace(self::TODAS_AS_IMAGENS, self::MELHORES_IMAGENS, self::REGRAS_SO_REFERENCIAS)
+                    : self::REGRAS_SO_REFERENCIAS));
+            }
+
             $plan = $planner->plan($p->transcript, 'dense', [
                 'width' => $planW,
                 'height' => $planH,
                 'fps' => $c['fps'],
+                'layers' => $camadas,
                 'facts' => $facts,
-                'images' => $p->images ?? [],
+                'images' => $semImagens ? [] : ($p->images ?? []),
                 'overlay' => $isOverlay,
                 'presents' => $allowed,
                 'can_generate_images' => $imagesOn,
                 // Direction for THIS clip, on top of the project's style manual.
-                'instructions' => trim((string) ($p->meta['instructions'] ?? '')),
+                'instructions' => $instrucoes,
             ]);
-            $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null, app(EffectLibrary::class)->allowedLayerTypes());
+            $plan = $validator->validate($plan, $p->transcript['text'] ?? '', $isOverlay, $allowed ?: null, $camadas);
 
             // If we can make images, give every empty animation scene an image-reveal
             // `generate` from its spoken words. If not, we leave it for the non-image
@@ -119,21 +148,26 @@ class PlanAnimationsJob implements ShouldQueue
             $p->update(['plan' => $plan]);
             // Site suggestions (pages the planner wants FILMED) don't need the image
             // generator, so they are collected even when AI images are off.
-            $requests = ImageRequests::collect($plan, $p->transcript ?? [], $filler);
-            if (! $imagesOn) {
-                $requests = array_values(array_filter($requests, fn (array $r) => ! empty($r['site'])));
+            // "No images" asks for nothing at all — not a generation, not a page to
+            // film, not an intro still. The review step is skipped entirely below.
+            $requests = [];
+            if (! $semImagens && ! $soReferencias) {
+                $requests = ImageRequests::collect($plan, $p->transcript ?? [], $filler);
+                if (! $imagesOn) {
+                    $requests = array_values(array_filter($requests, fn (array $r) => ! empty($r['site'])));
+                }
+
+                // The intro effect is bolted on AFTER planning (FinalizeClipPlanJob →
+                // enforceIntro), so an image-showing intro has no layer in the plan and
+                // would never be asked about — it just rendered empty. Ask for it here.
+                $requests = ImageRequests::withIntroVideo($requests, app(EffectLibrary::class), $p->images ?? []);
+                $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
+
+                // The animated intro needs a concept before anything else: the label is
+                // what the user reads AND what the library matcher uses to spot a
+                // reusable video asset (e.g. an existing mascot animation).
+                $requests = $this->conceberVideoDeIntro($requests, $p);
             }
-
-            // The intro effect is bolted on AFTER planning (FinalizeClipPlanJob →
-            // enforceIntro), so an image-showing intro has no layer in the plan and
-            // would never be asked about — it just rendered empty. Ask for it here.
-            $requests = ImageRequests::withIntroVideo($requests, app(EffectLibrary::class), $p->images ?? []);
-            $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
-
-            // The animated intro needs a concept before anything else: the label is
-            // what the user reads AND what the library matcher uses to spot a
-            // reusable video asset (e.g. an existing mascot animation).
-            $requests = $this->conceberVideoDeIntro($requests, $p);
 
             $library = app(ImageLibrary::class);
             // A site suggestion's "prompt" is a URL — meaningless to the library matcher.
@@ -215,6 +249,51 @@ class PlanAnimationsJob implements ShouldQueue
     }
 
     /**
+     * Direction added to the planner when the clip may ONLY use the user's images.
+     * The planner still decides the order and the effect per image; the finalize
+     * pass (ensureProvidedImages) is the backstop that lands any it skipped.
+     */
+    /** The REGRAS_SO_REFERENCIAS line a listing swaps out — keep it verbatim in sync. */
+    public const TODAS_AS_IMAGENS = '- EVERY provided image appears on screen at least once.';
+
+    public const MELHORES_IMAGENS = '- There are MORE provided images than the video has time for: do NOT try to show them all. Pick the strongest, most varied ones (skip near-duplicates and weak shots) and give each room time.';
+
+    public const REGRAS_SO_REFERENCIAS = <<<'TXT'
+ONLY REFERENCE IMAGES — this clip is built from the PROVIDED IMAGES and nothing else:
+- EVERY provided image appears on screen at least once. Plan the scenes around them: the video is
+  mainly a sequence of image effects, with the narration's facts as captions, tags and short overlays.
+  An effect that takes SEVERAL image ids (a fan, a gallery) shows a group of related photos in one
+  beat (several aerials, several rooms) — that counts for each of them.
+- Match each image to the moment whose words fit its description (the facade/exterior opens,
+  rooms follow the order the script mentions them, the floor plan with the areas, the view with
+  the location). Images the script never mentions fill the gaps in a sensible tour order.
+- A person's portrait (the agent/presenter) is NEVER a scene of its own: it goes only into an
+  effect's avatar/person image param, or the closing contact effect (see CLOSING). The places
+  and rooms fill the scenes.
+- Use image effects (custom effects whose params take a src/image) and ROTATE THROUGH ALL OF THEM —
+  each at least once when it fits. A feature list (rooms, areas, amenities) goes in an effect with a
+  title and items, over the photo it describes.
+- NEVER ask for a generated image ("generate") and NEVER film a site ("site"). Use only ids from
+  the PROVIDED IMAGES list.
+TXT;
+
+    /**
+     * The layer types this clip may use. "No images" drops image-reveal from the
+     * project's allowlist — the one list the prompt, the validator and the scene
+     * fillers all consult.
+     *
+     * @return string[]
+     */
+    public static function camadasPermitidas(bool $semImagens): array
+    {
+        $camadas = app(EffectLibrary::class)->allowedLayerTypes();
+
+        return $semImagens
+            ? array_values(array_diff($camadas, ['image-reveal']))
+            : $camadas;
+    }
+
+    /**
      * The frame the author picked when creating the clip, or null for 'auto'.
      *
      * @return array{0:int,1:int}|null
@@ -224,6 +303,38 @@ class PlanAnimationsJob implements ShouldQueue
         $aspecto = VfxStore::ASPECTS[(string) ($p->meta['formato'] ?? 'auto')] ?? null;
 
         return $aspecto ? [(int) $aspecto['width'], (int) $aspecto['height']] : null;
+    }
+
+    /**
+     * What the caption writer gets besides the transcript: a listing's facts (so
+     * the caption says more than the voiceover) and the project's last captions
+     * (so it doesn't read like them).
+     */
+    private function captionContext(ClipRecord $p, ClipStore $store): string
+    {
+        $l = (array) ($p->meta['listing'] ?? []);
+        $details = (array) ($l['details'] ?? []);
+        if (! isset($details['Preço']) && is_numeric($l['price'] ?? null)) {
+            $details['Preço'] = number_format((float) $l['price'], 0, ',', '.').' €';
+        }
+        $facts = array_filter(['Imóvel' => $l['title'] ?? null] + $details + ['Consultor' => $l['agent'] ?? null, 'Telefone' => $l['phone'] ?? null, 'Email' => $l['email'] ?? null, 'Licença' => $l['licence'] ?? null, 'Agência' => $l['agency'] ?? null],
+            fn ($v) => is_scalar($v) && trim((string) $v) !== '');
+        $recent = $store->all()
+            ->filter(fn (ClipRecord $c) => $c->id !== $p->id && trim((string) ($c->meta['suggested']['description'] ?? '')) !== '')
+            ->sortByDesc(fn (ClipRecord $c) => (string) $c->created_at)
+            ->take(3)
+            ->map(fn (ClipRecord $c) => "---\n".trim($c->meta['suggested']['description']));
+
+        if (($notes = trim((string) ($p->meta['script_notes'] ?? ''))) !== '') {
+            $facts['Notas (corrigem os dados acima)'] = $notes;
+        }
+        // "Improve with AI": what the user asked for this version belongs in its description too (a dam nearby, the river beaches).
+        if (($asked = trim((string) ($p->meta['improve_request'] ?? ''))) !== '') {
+            $facts['Pedido do utilizador para esta versão (inclui o que acrescenta)'] = $asked;
+        }
+
+        return trim(($facts ? "FACTS:\n".collect($facts)->map(fn ($v, $k) => "- {$k}: {$v}")->implode("\n") : '')
+            ."\n\n".($recent->isNotEmpty() ? "RECENT CAPTIONS (don't repeat them):\n".$recent->implode("\n") : ''));
     }
 
     /**

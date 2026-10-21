@@ -4,7 +4,10 @@ namespace Tests\Feature\Clips;
 
 use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
+use App\Jobs\Clips\RenderEffectUseJob;
+use App\Jobs\Clips\RenderJob;
 use App\Livewire\ClipsAnimadosSfx;
+use App\Services\Capture\SiteFootage;
 use App\Services\Clips\Api\BuildsAnimationPrompt;
 use App\Services\Clips\CliRemotionRenderer;
 use App\Services\Clips\Contracts\RemotionRenderer;
@@ -15,6 +18,7 @@ use App\Services\Clips\Fake\FakeRemotionRenderer;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
@@ -54,6 +58,62 @@ class SfxTest extends TestCase
     private function makeEffect(array $attrs): EffectRecord
     {
         return $this->effects()->create($attrs);
+    }
+
+    public function test_reference_image_is_kept_and_a_template_renders_with_uploaded_inputs(): void
+    {
+        Queue::fake();
+
+        Livewire::test(ClipsAnimadosSfx::class)
+            ->set('sfxPrompt', 'a property listing card that builds itself up')
+            ->set('sfxReference', UploadedFile::fake()->image('mockup.png', 360, 640))
+            ->call('gerarSfx')
+            ->assertHasNoErrors();
+
+        $effect = $this->effects()->all()->sole();
+        $this->assertNotNull($this->effects()->referencePath($effect->id()));
+
+        $effect->update([
+            'slug' => 'listing-card', 'status' => EffectRecord::STATUS_ACTIVE, 'tsx' => 'export default () => null;',
+            'param_schema' => '{ "src"?: image, "avatar"?: image, "title"?: string }',
+            'sample_text' => '', 'sample_params' => ['title' => 'T3 COM VARANDA'],
+        ]);
+
+        $c = Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->call('abrirUso')
+            ->assertSet('usoCampos', ['title' => 'T3 COM VARANDA']);
+        $this->assertSame(['src', 'avatar'], $c->get('usoInputs')['imagens']);
+
+        $c->set('usoCampos.title', 'T2 NO CENTRO')
+            ->set('usoImagens.avatar', UploadedFile::fake()->image('me.jpg'))
+            ->call('renderizarUso')
+            ->assertHasNoErrors()
+            ->assertSet('usoEstado', 'rendering');
+
+        Queue::assertPushed(RenderEffectUseJob::class, fn (RenderEffectUseJob $j) => $j->slug === 'listing-card'
+            && $j->params['title'] === 'T2 NO CENTRO'
+            && is_file($j->params['avatar'])
+            && ! isset($j->params['src']));
+    }
+
+    public function test_try_again_retries_a_failed_effect(): void
+    {
+        Queue::fake();
+        $effect = $this->makeEffect([
+            'prompt' => 'a listing card', 'slug' => 'pending-abc', 'display_name' => 'x',
+            'description' => '', 'param_schema' => '{}', 'tsx' => '',
+            'status' => EffectRecord::STATUS_FAILED, 'error' => 'OpenAI API failed',
+        ]);
+
+        Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
+            ->call('editarSfx', $effect->id())
+            ->assertSet('editingSfxId', $effect->id())
+            ->assertSet('sfxEditPrompt', 'a listing card')
+            ->call('guardarSfxEdicao')
+            ->assertHasNoErrors();
+
+        $this->assertSame(EffectRecord::STATUS_PENDING, $effect->refresh()->status);
+        Queue::assertPushed(GenerateEffectJob::class, fn ($j) => $j->effectId === $effect->id() && ! $j->isEdit);
     }
 
     public function test_gerar_sfx_creates_pending_effect_and_dispatches_generation(): void
@@ -196,6 +256,33 @@ class SfxTest extends TestCase
         $this->assertSame($tsx, app(EffectGenerator::class)->generate('a soft shadow')['tsx']);
     }
 
+    /** A rejected component goes back to the model once, with the error and its own code. */
+    public function test_a_rejected_component_is_repaired_with_the_error(): void
+    {
+        $effect = $this->makeEffect([
+            'prompt' => 'a soft wipe', 'slug' => 'pending-rep', 'display_name' => 'x',
+            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_PENDING,
+        ]);
+        $answer = fn (string $tsx) => Http::response(['content' => [['type' => 'text', 'text' => json_encode([
+            'slug' => 'soft-wipe', 'displayName' => 'Soft wipe', 'description' => 'x', 'paramSchema' => '{}',
+            'sampleText' => '', 'sampleParams' => [], 'tsx' => $tsx,
+        ])]]]);
+        config(['services.anthropic.key' => 'test-key']);
+        Http::fakeSequence('api.anthropic.com/*')
+            ->pushResponse($answer('import { COLORS } from "../style-tokens";'."\nexport default () => ({ color: \"#ff0000\" });"))
+            ->pushResponse($answer('import { COLORS } from "../style-tokens";'."\nexport default () => null;"));
+
+        (new GenerateEffectJob($effect->id()))->handle(
+            app(EffectGenerator::class), app(EffectLibrary::class), $this->effects(),
+            app(RemotionRenderer::class), app(SiteFootage::class),
+        );
+
+        $this->assertSame(EffectRecord::STATUS_ACTIVE, $this->effects()->find($effect->id())->status);
+        Http::assertSentCount(2);
+        Http::assertSent(fn ($r) => str_contains(json_encode($r->data()), 'PREVIOUS ATTEMPT FAILED')
+            && str_contains(json_encode($r->data()), 'hardcoded hex'));
+    }
+
     /**
      * A refine that the model gets wrong must leave the working effect alone.
      *
@@ -221,7 +308,7 @@ class SfxTest extends TestCase
 
         (new GenerateEffectJob($effect->id(), isEdit: true))->handle(
             app(EffectGenerator::class), app(EffectLibrary::class), $this->effects(),
-            app(RemotionRenderer::class), app(\App\Services\Capture\SiteFootage::class),
+            app(RemotionRenderer::class), app(SiteFootage::class),
         );
 
         $depois = $this->effects()->find($effect->id());
@@ -335,6 +422,37 @@ class SfxTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessageMatches('/params\.src/');
         app(EffectGenerator::class)->generate('letters fall away to reveal an image');
+    }
+
+    /** Templates read their image slots through aliases and helpers — all must pass; a wrong key must not. */
+    public function test_guard_accepts_src_read_through_an_alias_or_helper(): void
+    {
+        $gen = app(EffectGenerator::class);
+        $wrap = fn (string $body) => 'import { Img } from "remotion";'."\nexport default ({ anim }) => {\n{$body}\n};";
+
+        foreach ([
+            'const p = anim.params ?? {};'."\n".'const hero = String(p.src ?? "");'."\n".'return <Img src={hero} />;',
+            'const img = (k) => String(anim.params?.[k] ?? "");'."\n".'return <Img src={img("src")} />;',
+            'const p = anim.params ?? {};'."\n".'return <Img src={String(p["src"] ?? "")} />;',
+            'const { src = "", avatar = "" } = (anim.params ?? {}) as any;'."\n".'return <Img src={src} />;',
+        ] as $body) {
+            $gen->guard($wrap($body)); // must not throw
+        }
+
+        $this->expectException(RuntimeException::class);
+        $gen->guard($wrap('const p = anim.params ?? {};'."\n".'const imageSrc = String(p.imageSrc ?? "");'."\n".'return <Img src={imageSrc} />;'));
+    }
+
+    /** A template copies its mockup's colours, so hex is allowed there — and only there. */
+    public function test_a_template_may_hardcode_the_mockups_colours(): void
+    {
+        $gen = app(EffectGenerator::class);
+        $tsx = 'import { Img } from "remotion";'."\nexport default ({ anim }) => <div style={{ backgroundColor: \"#16B4E4\" }}><Img src={String(anim.params?.src ?? \"\")} /></div>;";
+
+        $gen->guard($tsx, template: true); // must not throw
+
+        $this->expectException(RuntimeException::class);
+        $gen->guard($tsx);
     }
 
     /** And the contract that prevents it is stated in the prompt, always. */
@@ -742,15 +860,15 @@ class SfxTest extends TestCase
         $this->assertSame([], $library->disabledBuiltins());
     }
 
-    public function test_only_active_effects_can_be_edited(): void
+    public function test_an_effect_still_generating_cannot_be_edited(): void
     {
-        $failed = $this->makeEffect([
-            'prompt' => 'x', 'slug' => 'pending-abcd1234', 'display_name' => 'Broken',
-            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_FAILED,
+        $generating = $this->makeEffect([
+            'prompt' => 'x', 'slug' => 'pending-abcd1234', 'display_name' => 'Busy',
+            'description' => '', 'param_schema' => '{}', 'tsx' => '', 'status' => EffectRecord::STATUS_PENDING,
         ]);
 
         Livewire::test(ClipsAnimadosSfx::class)
-            ->call('editarSfx', $failed->id())
+            ->call('editarSfx', $generating->id())
             ->assertSet('editingSfxId', null);
     }
 
@@ -893,7 +1011,7 @@ class SfxTest extends TestCase
         Livewire::test(ClipsAnimadosSfx::class)
             ->call('abrirAudio', 'slide')
             ->assertSet('audioEditingSlug', 'slide')
-            ->set('audioUpload', \Illuminate\Http\UploadedFile::fake()->create('whoosh.mp3', 8, 'audio/mpeg'))
+            ->set('audioUpload', UploadedFile::fake()->create('whoosh.mp3', 8, 'audio/mpeg'))
             ->call('uploadAudio')
             ->assertHasNoErrors()
             ->assertSet('audioEditingSlug', null);
@@ -928,9 +1046,9 @@ class SfxTest extends TestCase
         $scenes = [
             ['layers' => [['type' => 'kinetic-text', 'text' => 'Hi'], ['type' => 'fade', 'text' => 'x']]],
         ];
-        $method = new \ReflectionMethod(\App\Jobs\Clips\RenderJob::class, 'attachEffectAudio');
+        $method = new \ReflectionMethod(RenderJob::class, 'attachEffectAudio');
         $method->setAccessible(true);
-        $out = $method->invoke(new \App\Jobs\Clips\RenderJob('p1'), $scenes, $this->effects());
+        $out = $method->invoke(new RenderJob('p1'), $scenes, $this->effects());
 
         $this->assertSame($this->effects()->audioPath('kinetic-text'), $out[0]['layers'][0]['audioSrc']);
         $this->assertArrayNotHasKey('audioSrc', $out[0]['layers'][1]); // fade has no sound
@@ -1291,7 +1409,7 @@ class SfxTest extends TestCase
 
     public function test_import_rejects_a_file_that_is_not_an_sfx_export(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         app(EffectPortability::class)->import(['type' => 'something-else', 'effects' => []]);
     }
 

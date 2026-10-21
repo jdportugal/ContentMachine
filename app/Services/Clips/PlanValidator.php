@@ -123,8 +123,11 @@ class PlanValidator
             }
             $s['layers'] = $this->capLayers($s);
 
-            // A full-frame image already carries the point → avoid punch-word overlap.
-            if (in_array('image-reveal', array_column($s['layers'], 'type'), true)) {
+            // A full-frame image (or a custom effect, which draws its own text) already
+            // carries the point → avoid punch-word overlap.
+            $tipos = array_column($s['layers'], 'type');
+            if (in_array('image-reveal', $tipos, true)
+                || array_diff($tipos, ['ambient'], array_keys(EffectLibrary::BUILTIN_SAMPLES)) !== []) {
                 $s['punchWord'] = null;
             }
 
@@ -169,8 +172,8 @@ class PlanValidator
         $ambient = array_values(array_filter($layers, fn ($l) => ($l['type'] ?? null) === 'ambient'));
         $foreground = array_values(array_filter($layers, fn ($l) => ($l['type'] ?? null) !== 'ambient'));
 
-        $visual = array_values(array_filter($foreground, fn ($l) => in_array($l['type'] ?? null, self::VISUAL_LAYERS, true)));
-        $text = array_values(array_filter($foreground, fn ($l) => ! in_array($l['type'] ?? null, self::VISUAL_LAYERS, true)));
+        $visual = array_values(array_filter($foreground, fn ($l) => $this->isVisual($l['type'] ?? null)));
+        $text = array_values(array_filter($foreground, fn ($l) => ! $this->isVisual($l['type'] ?? null)));
 
         $hasPunch = ! empty($scene['punchWord']);
         $chosen = $visual[0] ?? ($hasPunch ? null : ($text[0] ?? null));
@@ -184,6 +187,18 @@ class PlanValidator
         }
 
         return $out;
+    }
+
+    /**
+     * A visual layer, as opposed to a text one. Every CUSTOM effect is a visual —
+     * a photo effect, a listing card. Counting them as text got them dropped from
+     * any scene with a punch word (nearly all of them), so a planner that used the
+     * project's own effects handed over a plan with no layers left at all.
+     */
+    private function isVisual(?string $type): bool
+    {
+        return in_array($type, self::VISUAL_LAYERS, true)
+            || ($type !== null && ! array_key_exists($type, EffectLibrary::BUILTIN_SAMPLES));
     }
 
     /** Lowercase + strip punctuation + collapse spaces, for verbatim matching. */

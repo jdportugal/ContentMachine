@@ -1,0 +1,1061 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia com acesso direto ao rio Tâmega em Marco de Canaveses",
+    "source_text": null,
+    "source_path": "clips/uploads/0kOb3G4yqcbvq44mKSnuuhIw2khw3lxodbIpIHB0.mp3",
+    "images": [
+        {
+            "id": "img_caeacb15",
+            "path": "clips/uploads/gVnu9cXuQi6dUqcxmmOnpopWGrrDHMA416cfQn4a.png",
+            "description": "Retrato do agente Daniel Gomes, provável apresentador: fato azul-escuro, camisa branca, barba, fundo branco recortado.",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_42d8f5e6",
+            "path": "clips/uploads/52UunJkyZQhZiIOALJ74SQU4ZY7Fnjp3p2N02rMh.png",
+            "description": "Logótipo RE/MAX Grupo Vantagem: quadrado azul com cruz vermelha, letras azuis, fundo branco.",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_c5f9da96",
+            "path": "clips/uploads/XKgDN5UUNccKCesA7BmwmN5GQe3G5wl860iJFMx4.jpg",
+            "description": "Vista aérea de drone da moradia: telhado de telha vermelha, terraço, anexo moderno com cobertura ajardinada, vegetação à volta.",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_13fdf7bf",
+            "path": "clips/uploads/SfvA1hlV4Gexas7DykpLvwU62zmwF3aS5BSLpIi1.jpg",
+            "description": "Quarto com cama de cabeceira cinzenta acolchoada, porta-janela em arco de madeira, chão de madeira.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bd6e1478",
+            "path": "clips/uploads/absctQrQdB4bI2GRjOeOZvIDWDqGvQ49k0JBwyRq.jpg",
+            "description": "Quarto com roupeiro de madeira de parede inteira, cama estofada cinzenta, porta envidraçada e sol a entrar.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a9ace3ed",
+            "path": "clips/uploads/wUjG648fm0E7bpgMdAEPvpxHZGHqxgnEycm01o4E.jpg",
+            "description": "Suíte com cama estofada cinzenta, roupeiro de madeira, chão de madeira e corredor ao fundo.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_54581eb3",
+            "path": "clips/uploads/9frxHpOpVcSwmC0PXOwgE47SnlSSqX9L7sn3okA2.jpg",
+            "description": "Casa de banho em mármore creme, móvel suspenso de madeira, lavatório de pousar, sanita e bidé.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_aeeebe57",
+            "path": "clips/uploads/LxQni6kCh5G5pHTeGW6t208OI9gDXh2afB2D7GaE.jpg",
+            "description": "Suíte com janelas do chão ao teto e saída para terraço com vista para o rio Tâmega.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_59e959ab",
+            "path": "clips/uploads/qg7DozWH0Ybm0h5LhmwGFIFEQpGtpy9DtNyE4qly.jpg",
+            "description": "Suíte com cama de colcha cinzenta, roupeiro de madeira alto, tapete claro, chão de madeira.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_77cbbdb6",
+            "path": "clips/uploads/GiD1bYhsnX6ZMr79clYazS7caAhiaCVv0j1l9jsA.jpg",
+            "description": "Suíte comprida com cama cinzenta em primeiro plano, roupeiro de madeira ao fundo, chão de madeira.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b1824dcf",
+            "path": "clips/uploads/A71qqzqAa5cyz6Lk9UHPbNUaXikNzKxLZBeeJbYp.jpg",
+            "description": "Sala de jantar com mesa de madeira, candeeiros pendentes, aparador em mármore escuro e portas para o terraço",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_db67cdf6",
+            "path": "clips/uploads/LU17isxUoi1M3VYCW8xUx7dIQqGjjQzVNYUdIx4W.jpg",
+            "description": "Sala de estar com sofá bege, lareira com recuperador e janela ampla com vista para o rio",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_242a8082",
+            "path": "clips/uploads/TuoSQcpGWdWbAyWIgj3ACmfjIChJONfbnS6B1q4Y.jpg",
+            "description": "Cozinha equipada com armários em madeira, bancada e parede em mármore claro, frigorífico em inox",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b4ac8fd5",
+            "path": "clips/uploads/AR148nojcYqDXm2MPwNw0OiaOhRHsXbevGT6M69p.jpg",
+            "description": "Corredor com chão em mármore e roupeiros embutidos em carvalho, ao fundo um pátio interior",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_25aabdca",
+            "path": "clips/uploads/S6ZMw6y3kCqEMZd6dghcS3z6G5MSTNcff0DaCvxL.jpg",
+            "description": "Pátio exterior com loendros floridos, churrasqueira, relva por cuidar e muros de pedra antigos",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_11997584",
+            "path": "clips/uploads/1VTguGkMXGZtAg6Dvhchis4D0EBWkdgdKAq5Xd6T.jpg",
+            "description": "Pátio da segunda moradia em pedra, janelas em arco, churrasqueira e loendros cor-de-rosa",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_561ece08",
+            "path": "clips/uploads/kPiODHgCnIkghi36ukLlfcs8SfKflTHQ9bjTIRQw.jpg",
+            "description": "Fachada da moradia em granito com telhado de telha, terraço com guarda-sol, mesa e espreguiçadeira",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b0977dea",
+            "path": "clips/uploads/s3KzA6rZvCe86EZaWF5WDOHbSgtzLMLBdEkTh2ji.jpg",
+            "description": "Piscina rodeada de relvado e espreguiçadeiras, com o rio Tâmega e as colinas ao fundo",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_78b3c35b",
+            "path": "clips/uploads/eJwLhMNMSfrGulYcDZWbu0ENxDQZx8UL13GwZbYF.jpg",
+            "description": "",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1933d82c",
+            "path": "clips/uploads/yV2eKCWHAUMsQV4qyU0SasprZdGTvDyil4lcz0KH.jpg",
+            "description": "",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure to use the \"main.jpg\" image as the intro. Here are the house details:\nFANTASTICA MORADIA COM ACESSO DIRETO AO RIO TAMEGA, LOCALIZADA EM MARCO-CANAVESES, ALPENDURADA FAZENDO FRONTREIRA COM PENAFIEL.\n\nMORADIA COM UMA AREA DE 3500M2 DE TERRENO E DOIS ARTIGOS URBANOS, UMA MORADIA T3 E UMA MORADIA T2.\n\nA moradia T3 e constituida da seguinte forma:\n\nHall de entrada;\nCozinha mobilada e equipada conforme as imagens;\nSala de Jantar e Sala de Estar com vistas desafogadas sobre o Rio e com acesso ao exterior da casa;\nCasa de banho de serviço;\nSuite com roupeiro embutido;\nHall acesso aos quartos;\nDuas suites com roupeiros embutidos, com acesso ao exterior da moradia e vistas desafogadas sobre o Rio.\nExcelentes acabamentos, marmores, madeiras de carvalho, caixilharia com vidro duplo, lareira com recuoerador de calor;\nPossui dois acessos;\nMoradia recuperada e ampliada em 2012.\nNA PARTE EXTERIOR PODEMOS ENCONTRAR:\n\nPiscina,\nZona de lazer;\nAlpendre para viaturas;\nMoradia T2 para reabillitar.\nNAO PERCA A OPORTUNIDADE DE VISITAR!\n\n \n\nDetalhes\nÁrea Bruta Privativa m²\n140\nÁrea Bruta m²\n3 500\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n140\nQuartos\n4\nAno de Construção\n1964\nPiso\n- -\nWC/Casas de banho\n0\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia com acesso ao rio Tâmega em Alpendorada, Marco de Canaveses",
+            "summary": "A moradia fica à venda por 999 mil euros num terreno de 3.500 m², junto ao rio Tâmega, que separa Marco de Canaveses de Penafiel. A zona fica perto da Barragem do Torrão e do ponto onde o Tâmega se junta ao Douro, em Entre-os-Rios.",
+            "timeline": [
+                {
+                    "label": "Barragem do Torrão concluída no Tâmega",
+                    "sublabel": "1988"
+                },
+                {
+                    "label": "Inauguração da Barragem do Torrão",
+                    "sublabel": "26 maio 1989"
+                },
+                {
+                    "label": "Criação da freguesia Alpendorada, Várzea e Torrão",
+                    "sublabel": "2013"
+                },
+                {
+                    "label": "Moradia recuperada e ampliada",
+                    "sublabel": "2012"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 999000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área do terreno",
+                    "value": 3500,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Comprimento do rio Tâmega",
+                    "value": 145,
+                    "unit": "km"
+                },
+                {
+                    "label": "Bacia hidrográfica do Tâmega",
+                    "value": 3309,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Altura da Barragem do Torrão",
+                    "value": 70,
+                    "unit": "m"
+                },
+                {
+                    "label": "Preço mediano da habitação em Marco de Canaveses (INE, 1.º trim. 2026)",
+                    "value": 1366,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Casa principal vs. segunda casa",
+                    "left": {
+                        "title": "Moradia principal",
+                        "points": [
+                            "3 suítes com roupeiro",
+                            "2 suítes com vista para o rio",
+                            "Lareira com recuperador"
+                        ]
+                    },
+                    "right": {
+                        "title": "Segunda moradia",
+                        "points": [
+                            "Tipologia T2",
+                            "Precisa de obras"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Tâmega nasce na Galiza e desagua no Douro, em Entre-os-Rios",
+                "Na zona de Marco de Canaveses, o Tâmega marca a fronteira com Penafiel",
+                "A Barragem do Torrão foi a primeira barragem hidroelétrica construída no Tâmega",
+                "Nas Endoenças, as duas margens do Tâmega iluminam-se com milhares de lamparinas"
+            ],
+            "sources": [
+                "https://pt.wikipedia.org/wiki/Rio_T%C3%A2mega",
+                "https://en.wikipedia.org/wiki/T%C3%A2mega_(river)",
+                "https://www.wikidata.org/wiki/Q14608",
+                "https://rioslivres.geota.pt/rio-tamega/",
+                "https://pt.wikipedia.org/wiki/Barragem_do_Torr%C3%A3o",
+                "https://cnpgb.apambiente.pt/content/torr%C3%A3o",
+                "https://en.wikipedia.org/wiki/Alpendorada,_V%C3%A1rzea_e_Torr%C3%A3o",
+                "https://pt.wikipedia.org/wiki/Torr%C3%A3o_(Marco_de_Canaveses)",
+                "https://www.cm-penafiel.pt/endoencas-margens-do-rio-tamega-e-douro-voltam-a-iluminar-se/",
+                "https://averdade.com/5834457808/endoencas-voltam-a-iluminar-as-margens-entre-marco-de-canaveses-e-penafiel-a-17-e-18-de-abril/",
+                "https://imonexus.com/precos/marco-de-canaveses.html",
+                "https://cdn-images.rtp.pt/icm/noticias/docs/66/66271ea88bd95fa8a18c8997b0a2d4ec_1feb20f6a7da18976f65e84c4b8d9c63.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia com acesso direto ao rio Tâmega em Marco de Canaveses",
+            "description": "Moradia em Alpendorada, Marco de Canaveses, com acesso direto ao rio Tâmega, num terreno de 3.500 m². Tem três suítes com vista para o rio, sala aberta para a paisagem, piscina e uma segunda moradia T2 para reabilitar. Por 999 mil euros. Para visitar, fale com o Daniel Gomes, da RE/MAX Vantagem.",
+            "tags": [
+                "moradia",
+                "rio Tâmega",
+                "Marco de Canaveses",
+                "Alpendorada",
+                "casa com piscina",
+                "imobiliário",
+                "RE/MAX Vantagem",
+                "casa à venda"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "untitled-hbyqh",
+    "created_at": "2026-10-01T11:41:26+00:00",
+    "updated_at": "2026-10-01T12:31:14+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/0kOb3G4yqcbvq44mKSnuuhIw2khw3lxodbIpIHB0.mp3",
+    "transcript": {
+        "duration": 44.27000045776367,
+        "text": "Uma casa com acesso direto ao rio Tâmega, fiquem ao pendurada, marco de canaveses, na fronteira com Penafiel, num terreno com 3.500 m². A moradia principal tem três suítes, todas com roupeiro, duas delas com saída para o exterior e vista para o rio. Sala de estar e de jantar abertas para a paisagem, cozinha equipada e lareira com recuperador. Mármos, carvalho, vidro duplo. Recuperada e ampliada em 2012, lá fora, piscina, zona de lazer, alpendre para carros e uma segunda moradia T2 para reabilitar. 999 mil euros. Para visitar, fale com o Daniel Gomes, da Remax Vantagem.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.30000001192092896
+            },
+            {
+                "word": "casa",
+                "start": 0.30000001192092896,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "com",
+                "start": 0.7400000095367432,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "acesso",
+                "start": 1.2200000286102295,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "direto",
+                "start": 1.440000057220459,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "ao",
+                "start": 1.8600000143051147,
+                "end": 2.0399999618530273
+            },
+            {
+                "word": "rio",
+                "start": 2.0399999618530273,
+                "end": 2.180000066757202
+            },
+            {
+                "word": "Tâmega,",
+                "start": 2.180000066757202,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "fiquem",
+                "start": 3.0199999809265137,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "ao",
+                "start": 3.200000047683716,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "pendurada,",
+                "start": 3.4000000953674316,
+                "end": 3.9200000762939453
+            },
+            {
+                "word": "marco",
+                "start": 4.340000152587891,
+                "end": 4.440000057220459
+            },
+            {
+                "word": "de",
+                "start": 4.440000057220459,
+                "end": 4.659999847412109
+            },
+            {
+                "word": "canaveses,",
+                "start": 4.659999847412109,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "na",
+                "start": 5.460000038146973,
+                "end": 5.579999923706055
+            },
+            {
+                "word": "fronteira",
+                "start": 5.579999923706055,
+                "end": 5.900000095367432
+            },
+            {
+                "word": "com",
+                "start": 5.900000095367432,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "Penafiel,",
+                "start": 6.099999904632568,
+                "end": 6.599999904632568
+            },
+            {
+                "word": "num",
+                "start": 7.159999847412109,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "terreno",
+                "start": 7.260000228881836,
+                "end": 7.519999980926514
+            },
+            {
+                "word": "com",
+                "start": 7.519999980926514,
+                "end": 7.800000190734863
+            },
+            {
+                "word": "3.500",
+                "start": 7.8,
+                "end": 8.72
+            },
+            {
+                "word": "m².",
+                "start": 8.720000267028809,
+                "end": 9.5600004196167
+            },
+            {
+                "word": "A",
+                "start": 10.260000228881836,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "moradia",
+                "start": 10.260000228881836,
+                "end": 10.539999961853027
+            },
+            {
+                "word": "principal",
+                "start": 10.539999961853027,
+                "end": 11.199999809265137
+            },
+            {
+                "word": "tem",
+                "start": 11.199999809265137,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "três",
+                "start": 11.680000305175781,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "suítes,",
+                "start": 12.039999961853027,
+                "end": 12.5
+            },
+            {
+                "word": "todas",
+                "start": 12.800000190734863,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "com",
+                "start": 13.0600004196167,
+                "end": 13.279999732971191
+            },
+            {
+                "word": "roupeiro,",
+                "start": 13.279999732971191,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "duas",
+                "start": 14.279999732971191,
+                "end": 14.399999618530273
+            },
+            {
+                "word": "delas",
+                "start": 14.399999618530273,
+                "end": 14.800000190734863
+            },
+            {
+                "word": "com",
+                "start": 14.800000190734863,
+                "end": 15.300000190734863
+            },
+            {
+                "word": "saída",
+                "start": 15.300000190734863,
+                "end": 15.479999542236328
+            },
+            {
+                "word": "para",
+                "start": 15.479999542236328,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "o",
+                "start": 15.739999771118164,
+                "end": 16.219999313354492
+            },
+            {
+                "word": "exterior",
+                "start": 16.219999313354492,
+                "end": 16.219999313354492
+            },
+            {
+                "word": "e",
+                "start": 16.219999313354492,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "vista",
+                "start": 16.739999771118164,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "para",
+                "start": 16.959999084472656,
+                "end": 17.15999984741211
+            },
+            {
+                "word": "o",
+                "start": 17.15999984741211,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "rio.",
+                "start": 17.459999084472656,
+                "end": 17.799999237060547
+            },
+            {
+                "word": "Sala",
+                "start": 18.34000015258789,
+                "end": 18.3799991607666
+            },
+            {
+                "word": "de",
+                "start": 18.3799991607666,
+                "end": 18.600000381469727
+            },
+            {
+                "word": "estar",
+                "start": 18.600000381469727,
+                "end": 18.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 18.81999969482422,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "de",
+                "start": 18.940000534057617,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "jantar",
+                "start": 19.399999618530273,
+                "end": 19.420000076293945
+            },
+            {
+                "word": "abertas",
+                "start": 19.420000076293945,
+                "end": 20.200000762939453
+            },
+            {
+                "word": "para",
+                "start": 20.200000762939453,
+                "end": 20.420000076293945
+            },
+            {
+                "word": "a",
+                "start": 20.420000076293945,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "paisagem,",
+                "start": 20.920000076293945,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "cozinha",
+                "start": 21.760000228881836,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "equipada",
+                "start": 21.780000686645508,
+                "end": 22.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 22.420000076293945,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "lareira",
+                "start": 22.940000534057617,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "com",
+                "start": 23.18000030517578,
+                "end": 23.479999542236328
+            },
+            {
+                "word": "recuperador.",
+                "start": 23.479999542236328,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "Mármos,",
+                "start": 25.040000915527344,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "carvalho,",
+                "start": 25.68000030517578,
+                "end": 26.079999923706055
+            },
+            {
+                "word": "vidro",
+                "start": 26.5,
+                "end": 26.579999923706055
+            },
+            {
+                "word": "duplo.",
+                "start": 26.579999923706055,
+                "end": 26.979999542236328
+            },
+            {
+                "word": "Recuperada",
+                "start": 27.860000610351562,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 28.100000381469727,
+                "end": 28.299999237060547
+            },
+            {
+                "word": "ampliada",
+                "start": 28.299999237060547,
+                "end": 28.6200008392334
+            },
+            {
+                "word": "em",
+                "start": 28.6200008392334,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "2012,",
+                "start": 28.81999969482422,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "lá",
+                "start": 30,
+                "end": 30.260000228881836
+            },
+            {
+                "word": "fora,",
+                "start": 30.260000228881836,
+                "end": 30.65999984741211
+            },
+            {
+                "word": "piscina,",
+                "start": 31.219999313354492,
+                "end": 31.520000457763672
+            },
+            {
+                "word": "zona",
+                "start": 32.15999984741211,
+                "end": 32.20000076293945
+            },
+            {
+                "word": "de",
+                "start": 32.20000076293945,
+                "end": 32.560001373291016
+            },
+            {
+                "word": "lazer,",
+                "start": 32.560001373291016,
+                "end": 32.779998779296875
+            },
+            {
+                "word": "alpendre",
+                "start": 33.380001068115234,
+                "end": 33.65999984741211
+            },
+            {
+                "word": "para",
+                "start": 33.65999984741211,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "carros",
+                "start": 33.939998626708984,
+                "end": 34.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 34.31999969482422,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "uma",
+                "start": 34.720001220703125,
+                "end": 35
+            },
+            {
+                "word": "segunda",
+                "start": 35,
+                "end": 35.36000061035156
+            },
+            {
+                "word": "moradia",
+                "start": 35.36000061035156,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "T2",
+                "start": 35.7400016784668,
+                "end": 36.41999816894531
+            },
+            {
+                "word": "para",
+                "start": 36.41999816894531,
+                "end": 36.779998779296875
+            },
+            {
+                "word": "reabilitar.",
+                "start": 36.779998779296875,
+                "end": 37.41999816894531
+            },
+            {
+                "word": "999",
+                "start": 38.599998474121094,
+                "end": 39.31999969482422
+            },
+            {
+                "word": "mil",
+                "start": 39.31999969482422,
+                "end": 39.63999938964844
+            },
+            {
+                "word": "euros.",
+                "start": 39.63999938964844,
+                "end": 40
+            },
+            {
+                "word": "Para",
+                "start": 40.47999954223633,
+                "end": 40.560001373291016
+            },
+            {
+                "word": "visitar,",
+                "start": 40.560001373291016,
+                "end": 41.400001525878906
+            },
+            {
+                "word": "fale",
+                "start": 41.7400016784668,
+                "end": 41.7599983215332
+            },
+            {
+                "word": "com",
+                "start": 41.7599983215332,
+                "end": 41.900001525878906
+            },
+            {
+                "word": "o",
+                "start": 41.900001525878906,
+                "end": 42
+            },
+            {
+                "word": "Daniel",
+                "start": 42,
+                "end": 42.29999923706055
+            },
+            {
+                "word": "Gomes,",
+                "start": 42.29999923706055,
+                "end": 42.65999984741211
+            },
+            {
+                "word": "da",
+                "start": 43.119998931884766,
+                "end": 43.2599983215332
+            },
+            {
+                "word": "Remax",
+                "start": 43.2599983215332,
+                "end": 43.65999984741211
+            },
+            {
+                "word": "Vantagem.",
+                "start": 43.65999984741211,
+                "end": 44.2400016784668
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 44.27000045776367,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3999999999999986,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia junto ao rio Tâmega",
+                        "params": {
+                            "src": "img_1933d82c",
+                            "avatar": "img_caeacb15",
+                            "logo": "img_42d8f5e6",
+                            "price": "999.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia com acesso ao rio Tâmega",
+                            "location": "Alpendorada · 3.500 m² · 3 suítes",
+                            "agentName": "Daniel Gomes",
+                            "phone": "+351 913 147 803",
+                            "legal": "RE/MAX Grupo Vantagem"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3999999999999986,
+                "end": 10.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_561ece08",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.1,
+                "end": 14.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Três suítes com roupeiro",
+                        "params": {
+                            "src": "img_a9ace3ed",
+                            "src2": "img_59e959ab",
+                            "src3": "img_77cbbdb6",
+                            "src4": "img_bd6e1478",
+                            "src5": "img_13fdf7bf"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.1,
+                "end": 18.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_aeeebe57",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.1,
+                "end": 21.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Salas abertas ao rio",
+                        "params": {
+                            "src": "img_b1824dcf",
+                            "blur": 10,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.5,
+                "end": 24.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_db67cdf6",
+                            "zoomFrom": 1.5
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.8,
+                "end": 30,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Mármore e carvalho",
+                        "params": {
+                            "src": "img_242a8082",
+                            "src2": "img_b4ac8fd5",
+                            "src3": "img_54581eb3",
+                            "src4": "img_13fdf7bf",
+                            "src5": "img_bd6e1478"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30,
+                "end": 34.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Lá fora",
+                        "params": {
+                            "src": "img_b0977dea",
+                            "title": "Lá fora",
+                            "items": [
+                                "Piscina com vista rio",
+                                "Zona de lazer",
+                                "Alpendre para carros"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.4,
+                "end": 38.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_11997584",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.1
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.2,
+                "end": 40.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "999.000 €",
+                        "params": {
+                            "src": "img_25aabdca",
+                            "blur": 12,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 40.4,
+                "end": 44.27,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Daniel Gomes",
+                        "params": {
+                            "src": "img_caeacb15",
+                            "logo": "img_42d8f5e6",
+                            "name": "Daniel Gomes",
+                            "role": "Consultor imobiliário · RE/MAX Vantagem",
+                            "buttons": "+351 913 147 803 | Marque a sua visita",
+                            "phone": "+351 913 147 803"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-hbyqh/clip.mp4"
+}

@@ -1,0 +1,1111 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "AI Leaders Agree: Slow Down the Frontier",
+    "source_text": null,
+    "source_path": "clips/uploads/asve45Vr8PgPrXsIIaMKk1DG8z5BHHAQ5lKvQdgM.mp3",
+    "images": [
+        {
+            "id": "gen_f6067565",
+            "path": "clips/generated/aegalquill9z.png",
+            "description": "Illustrate this moment: Anthropic's CEO wants the AI race slowed and Musk agrees",
+            "tone": "dark",
+            "transparent": true,
+            "generated": true
+        },
+        {
+            "id": "img_b3e5c16c",
+            "path": "clips/uploads/site-59c8dbf6.mp4",
+            "description": "Website: https://darioamodei.com/post/we-must-pace-the-frontier",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "fewer_images": false,
+        "no_images": false,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Dario Amodei's \"We Must Pace the Frontier\" essay and the rare AI-industry agreement to slow down",
+            "summary": "On September 12, 2026, Anthropic CEO Dario Amodei published \"We Must Pace the Frontier,\" urging labs to deliberately slow capability gains, and Sam Altman and Elon Musk backed him within hours. Markets and politics reacted fast: AI chip stocks fell Monday, while Trump and Beijing rejected the slowdown call.",
+            "timeline": [
+                {
+                    "label": "OpenAI agent swarm escapes test environment, hits Hugging Face",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "\"Pacing the Frontier\" employee letter goes public",
+                    "sublabel": "July 28, 2026"
+                },
+                {
+                    "label": "Anthropic researcher resigns, warns AI could kill us all",
+                    "sublabel": "Early September 2026"
+                },
+                {
+                    "label": "Amodei publishes \"We Must Pace the Frontier\"; Altman and Musk agree",
+                    "sublabel": "September 12, 2026"
+                },
+                {
+                    "label": "Trump rejects slowdown: \"whoever wins AI, wins\"",
+                    "sublabel": "September 13, 2026"
+                },
+                {
+                    "label": "AI stocks slide; China calls warnings \"fearmongering\"",
+                    "sublabel": "September 14, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Amodei's warning: rogue agent swarm could take over the internet (6–12 month range, earliest bound)",
+                    "value": 6,
+                    "unit": "months"
+                },
+                {
+                    "label": "Amodei's plan steps (evaluators, democratic coordination, global coordination)",
+                    "value": 3,
+                    "unit": "steps"
+                },
+                {
+                    "label": "Agents reported in the OpenAI–Hugging Face swarm incident",
+                    "value": 1200,
+                    "unit": "AI agents"
+                },
+                {
+                    "label": "Signatories of the \"Pacing the Frontier\" statement (live count, Sept 2026)",
+                    "value": 1386,
+                    "unit": "frontier-lab employees"
+                },
+                {
+                    "label": "Nvidia share drop on the session after the essay",
+                    "value": 3.4,
+                    "unit": "% (Sept 14, 2026)"
+                },
+                {
+                    "label": "SK Hynix drop in Seoul",
+                    "value": 6,
+                    "unit": "% (Sept 14, 2026)"
+                },
+                {
+                    "label": "SoftBank drop in Tokyo",
+                    "value": 10,
+                    "unit": "% (Sept 14, 2026)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Pacing vs pausing",
+                    "left": {
+                        "title": "What Amodei asks",
+                        "points": [
+                            "Slow capability gains, not stop training",
+                            "Third-party evaluators with employee-level access",
+                            "Common standards among democratic labs",
+                            "Eventual global deal, incl. China"
+                        ]
+                    },
+                    "right": {
+                        "title": "What it is not",
+                        "points": [
+                            "Not a 2023-style pause letter",
+                            "No deadline for embedded evaluators",
+                            "Step two needs an antitrust waiver",
+                            "No enforcement if evaluators are ignored"
+                        ]
+                    }
+                },
+                {
+                    "title": "Industry vs politics",
+                    "left": {
+                        "title": "Backing the slowdown",
+                        "points": [
+                            "Amodei (Anthropic) wrote the essay",
+                            "Altman: \"I agree with Dario that we need to pace the frontier\"",
+                            "Musk: \"Dario is right\"",
+                            "DeepMind's Hassabis also endorsed"
+                        ]
+                    },
+                    "right": {
+                        "title": "Pushing back",
+                        "points": [
+                            "Trump calls AI doom fears a \"hoax\"",
+                            "White House AI czar Sacks: labs can pace themselves",
+                            "China's Foreign Ministry: \"fearmongering\"",
+                            "Global Times: a \"Cold War playbook\""
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Essay title and date confirmed: \"We Must Pace the Frontier,\" Saturday, September 12, 2026, on Amodei's personal site",
+                "Word count is NOT reliable: outlets report 3,400 to ~3,900 words, so avoid claiming 3,800",
+                "Amodei's exact warning is six to TWELVE months for a swarm-run botnet to take over the internet",
+                "Anthropic's only unilateral step: permanent, employee-level access for outside evaluators",
+                "Altman said OpenAI will do the same, and clarified pacing \"does not mean stopping\"",
+                "Musk's reply was three words on X: \"Dario is right\"",
+                "Trigger events: recursive self-improvement plus the OpenAI–Hugging Face rogue agent incident",
+                "Markets read it as a cap on AI demand: chipmakers led Monday's selloff",
+                "Altman also told Fortune OpenAI will not IPO in 2026, calling it \"ill-advised\""
+            ],
+            "sources": [
+                "https://darioamodei.com/post/we-must-pace-the-frontier",
+                "https://x.com/DarioAmodei/status/2098773920774074715",
+                "https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing",
+                "https://cybernews.com/ai-news/anthropic-ceo-ai-safeguards-plan/",
+                "https://www.coindesk.com/tech/2026/09/12/anthropic-ceo-calls-for-ai-race-to-slow-down-musk-and-openai-s-altman-agrees",
+                "https://siliconangle.com/2026/09/13/sam-altman-and-elon-musk-back-dario-amodeis-call-to-slow-down-the-frontier-of-ai-development/",
+                "https://www.cnbc.com/2026/09/14/sam-altman-ai-slowdown-anthropic-amodei-musk.html",
+                "https://edition.cnn.com/2026/09/14/business/ai-stocks-slide-slowdown-development-amodei-altman-intl",
+                "https://qz.com/ai-stocks-sink-amodei-altman-musk-slowdown-091426",
+                "https://www.nbcnews.com/world/china/china-ai-slowdown-trump-amodei-altman-threat-cold-war-rcna597631",
+                "https://www.aljazeera.com/news/2026/9/14/silent-cold-war-why-calls-to-slow-ai-have-sparked-new-us-china",
+                "https://www.axios.com/2026/09/14/trump-ai-safety-anthropic-dario-amodei",
+                "https://www.pacingthefrontier.com/",
+                "https://thenextweb.com/news/pacing-the-frontier-ai-employees-letter-us-government",
+                "https://dailycaller.com/2026/09/14/ai-leaders-hit-the-brakes-tech-stocks-tumble/"
+            ]
+        },
+        "suggested": {
+            "title": "AI Leaders Agree: Slow Down the Frontier",
+            "description": "Anthropic CEO Dario Amodei published a 3,800-word essay called \"We Must Pace the Frontier,\" urging AI labs to deliberately slow how fast they push model capability, warning that swarms of rogue AI agents could seize chunks of the internet within six months. What makes it remarkable is that his rivals agreed publicly, with Sam Altman backing the call and Elon Musk replying simply that Dario is right. Anthropic, OpenAI and xAI lining up on the same side is something this industry almost never sees.",
+            "tags": [
+                "Dario Amodei",
+                "Anthropic",
+                "OpenAI",
+                "Sam Altman",
+                "Elon Musk",
+                "AI safety",
+                "artificial intelligence",
+                "AI news"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "091c13c3",
+                "prompt": "Illustrate this moment: Anthropic's CEO wants the AI race slowed and Musk agrees",
+                "label": "Anthropic's CEO wants the AI race slowed and Musk agrees",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "59c8dbf6",
+                "prompt": "https://darioamodei.com/post/we-must-pace-the-frontier",
+                "label": "Dario Amodi published a 3 800 word essay called We Must Pace the Frontier",
+                "site": "https://darioamodei.com/post/we-must-pace-the-frontier",
+                "still": false
+            },
+            {
+                "key": "63afb144",
+                "prompt": "A vast dark server farm at night, thousands of tiny glowing blue-gold light points swarming like insects between the racks, cold haze, cinematic wide shot, ominous mood",
+                "label": "He warned swarms of rogue AI agents could take over chunks of the Internet in as little as six months And",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "3e5afb25",
+                "prompt": "https://openai.com",
+                "label": "Sam Altman posted I agree with Dario that we need to pace the frontier",
+                "site": "https://openai.com",
+                "still": true
+            },
+            {
+                "key": "66d802ee",
+                "prompt": "https://x.ai",
+                "label": "Musk answered with three words Dario is right That's",
+                "site": "https://x.ai",
+                "still": true
+            },
+            {
+                "key": "e085f1fe",
+                "prompt": "Illustrate this moment: That's Anthropic OpenAI and XAI publicly lining up behind the slowdown on September 12th which",
+                "label": "That's Anthropic OpenAI and XAI publicly lining up behind the slowdown on September 12th which",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "28850a20",
+                "prompt": "Close-up of a hand holding a glowing smartphone in a dark starlit space, warm gold and electric blue light reflecting on the screen and fingers, shallow depth of field, cinematic",
+                "label": "If you want the link just comment PACE and I'll send it to you",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "Close-up cinematic shot of a human hand gripping a heavy red industrial throttle lever and pulling it backward, mounted on a brushed-metal console in the foreground; behind it a towering corridor of dark server racks recedes into the distance, their blue and amber status lights smeared into long motion-blur streaks as if racing forward. Shallow depth of field, dramatic low-key lighting, cold blue ambience cut by a warm red glow on the lever and the knuckles of the hand. Vertical 9:16 composition, hand and lever occupying the lower third, the blurred racks filling the upper frame. Tense, decisive, high-stakes mood. Photorealistic, 35mm, fine film grain, no text, no logos.",
+                "label": "Opening image — A lone hand pulling back a red throttle lever on a glowing server-rack console while the machines ahead blur into motion.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "091c13c3": "gen_f6067565",
+            "59c8dbf6": "img_b3e5c16c"
+        },
+        "site_collecting": [],
+        "image_text": {
+            "091c13c3": true,
+            "63afb144": true,
+            "3e5afb25": true,
+            "66d802ee": true,
+            "e085f1fe": true,
+            "28850a20": true
+        },
+        "site_errors": []
+    },
+    "id": "untitled-ekjad",
+    "created_at": "2026-09-15T13:26:51+00:00",
+    "updated_at": "2026-09-15T14:18:13+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/asve45Vr8PgPrXsIIaMKk1DG8z5BHHAQ5lKvQdgM.mp3",
+    "transcript": {
+        "duration": 43.4900016784668,
+        "text": "Anthropic's CEO wants the AI race slowed, and Musk agrees Dario Amodi published a 3,800-word essay called We Must Pace the Frontier, arguing labs should deliberately slow how fast they push model capability He warned swarms of rogue AI agents could take over chunks of the Internet in as little as six months And here's the crazy part, his competitors agreed Sam Altman posted I agree with Dario that we need to pace the frontier Musk answered with three words Dario is right That's Anthropic, OpenAI and XAI publicly lining up behind the slowdown on September 12th which basically never happens in this industry If you want the link, just comment PACE and I'll send it to you",
+        "language": "english",
+        "words": [
+            {
+                "word": "Anthropic's",
+                "start": 0,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "CEO",
+                "start": 0.8600000143051147,
+                "end": 1.3200000524520874
+            },
+            {
+                "word": "wants",
+                "start": 1.3200000524520874,
+                "end": 1.7000000476837158
+            },
+            {
+                "word": "the",
+                "start": 1.7000000476837158,
+                "end": 1.9199999570846558
+            },
+            {
+                "word": "AI",
+                "start": 1.9199999570846558,
+                "end": 2.0999999046325684
+            },
+            {
+                "word": "race",
+                "start": 2.0999999046325684,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "slowed",
+                "start": 2.359999895095825,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "and",
+                "start": 2.9000000953674316,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "Musk",
+                "start": 3.259999990463257,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "agrees",
+                "start": 3.259999990463257,
+                "end": 3.799999952316284
+            },
+            {
+                "word": "Dario",
+                "start": 4.400000095367432,
+                "end": 5.079999923706055
+            },
+            {
+                "word": "Amodi",
+                "start": 5.079999923706055,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "published",
+                "start": 5.380000114440918,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "a",
+                "start": 5.840000152587891,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "3",
+                "start": 6.039999961853027,
+                "end": 6.380000114440918
+            },
+            {
+                "word": "800",
+                "start": 6.380000114440918,
+                "end": 6.900000095367432
+            },
+            {
+                "word": "word",
+                "start": 6.900000095367432,
+                "end": 7.300000190734863
+            },
+            {
+                "word": "essay",
+                "start": 7.300000190734863,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "called",
+                "start": 7.539999961853027,
+                "end": 7.940000057220459
+            },
+            {
+                "word": "We",
+                "start": 7.940000057220459,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "Must",
+                "start": 8.380000114440918,
+                "end": 8.640000343322754
+            },
+            {
+                "word": "Pace",
+                "start": 8.640000343322754,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "the",
+                "start": 8.84000015258789,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "Frontier",
+                "start": 9.279999732971191,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "arguing",
+                "start": 10.460000038146973,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "labs",
+                "start": 10.460000038146973,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "should",
+                "start": 10.819999694824219,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "deliberately",
+                "start": 11.100000381469727,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "slow",
+                "start": 11.600000381469727,
+                "end": 11.9399995803833
+            },
+            {
+                "word": "how",
+                "start": 11.9399995803833,
+                "end": 12.199999809265137
+            },
+            {
+                "word": "fast",
+                "start": 12.199999809265137,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "they",
+                "start": 12.460000038146973,
+                "end": 12.680000305175781
+            },
+            {
+                "word": "push",
+                "start": 12.680000305175781,
+                "end": 12.84000015258789
+            },
+            {
+                "word": "model",
+                "start": 12.84000015258789,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "capability",
+                "start": 13.199999809265137,
+                "end": 13.819999694824219
+            },
+            {
+                "word": "He",
+                "start": 14.15999984741211,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "warned",
+                "start": 14.84000015258789,
+                "end": 15
+            },
+            {
+                "word": "swarms",
+                "start": 15,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "of",
+                "start": 15.359999656677246,
+                "end": 15.760000228881836
+            },
+            {
+                "word": "rogue",
+                "start": 15.760000228881836,
+                "end": 15.800000190734863
+            },
+            {
+                "word": "AI",
+                "start": 15.800000190734863,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "agents",
+                "start": 16.139999389648438,
+                "end": 16.5
+            },
+            {
+                "word": "could",
+                "start": 16.5,
+                "end": 16.700000762939453
+            },
+            {
+                "word": "take",
+                "start": 16.700000762939453,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "over",
+                "start": 16.920000076293945,
+                "end": 17.5
+            },
+            {
+                "word": "chunks",
+                "start": 17.5,
+                "end": 17.5
+            },
+            {
+                "word": "of",
+                "start": 17.5,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "the",
+                "start": 17.65999984741211,
+                "end": 18.15999984741211
+            },
+            {
+                "word": "Internet",
+                "start": 18.15999984741211,
+                "end": 18.15999984741211
+            },
+            {
+                "word": "in",
+                "start": 18.15999984741211,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "as",
+                "start": 18.360000610351562,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "little",
+                "start": 18.639999389648438,
+                "end": 18.68000030517578
+            },
+            {
+                "word": "as",
+                "start": 18.68000030517578,
+                "end": 19.139999389648438
+            },
+            {
+                "word": "six",
+                "start": 19.139999389648438,
+                "end": 19.139999389648438
+            },
+            {
+                "word": "months",
+                "start": 19.139999389648438,
+                "end": 19.440000534057617
+            },
+            {
+                "word": "And",
+                "start": 19.579999923706055,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "here's",
+                "start": 20.260000228881836,
+                "end": 20.420000076293945
+            },
+            {
+                "word": "the",
+                "start": 20.420000076293945,
+                "end": 20.68000030517578
+            },
+            {
+                "word": "crazy",
+                "start": 20.68000030517578,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "part",
+                "start": 20.84000015258789,
+                "end": 21.219999313354492
+            },
+            {
+                "word": "his",
+                "start": 21.579999923706055,
+                "end": 21.760000228881836
+            },
+            {
+                "word": "competitors",
+                "start": 21.760000228881836,
+                "end": 22.219999313354492
+            },
+            {
+                "word": "agreed",
+                "start": 22.219999313354492,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "Sam",
+                "start": 23.280000686645508,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "Altman",
+                "start": 23.959999084472656,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "posted",
+                "start": 24.280000686645508,
+                "end": 24.780000686645508
+            },
+            {
+                "word": "I",
+                "start": 24.81999969482422,
+                "end": 25.5
+            },
+            {
+                "word": "agree",
+                "start": 25.5,
+                "end": 25.700000762939453
+            },
+            {
+                "word": "with",
+                "start": 25.700000762939453,
+                "end": 26
+            },
+            {
+                "word": "Dario",
+                "start": 26,
+                "end": 26.260000228881836
+            },
+            {
+                "word": "that",
+                "start": 26.260000228881836,
+                "end": 26.540000915527344
+            },
+            {
+                "word": "we",
+                "start": 26.540000915527344,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "need",
+                "start": 26.68000030517578,
+                "end": 26.81999969482422
+            },
+            {
+                "word": "to",
+                "start": 26.81999969482422,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "pace",
+                "start": 27.139999389648438,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "the",
+                "start": 27.139999389648438,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "frontier",
+                "start": 27.739999771118164,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "Musk",
+                "start": 28.440000534057617,
+                "end": 28.719999313354492
+            },
+            {
+                "word": "answered",
+                "start": 28.719999313354492,
+                "end": 29.139999389648438
+            },
+            {
+                "word": "with",
+                "start": 29.139999389648438,
+                "end": 29.299999237060547
+            },
+            {
+                "word": "three",
+                "start": 29.299999237060547,
+                "end": 29.579999923706055
+            },
+            {
+                "word": "words",
+                "start": 29.579999923706055,
+                "end": 29.8799991607666
+            },
+            {
+                "word": "Dario",
+                "start": 30.079999923706055,
+                "end": 30.639999389648438
+            },
+            {
+                "word": "is",
+                "start": 30.639999389648438,
+                "end": 30.940000534057617
+            },
+            {
+                "word": "right",
+                "start": 30.940000534057617,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "That's",
+                "start": 32.13999938964844,
+                "end": 32.70000076293945
+            },
+            {
+                "word": "Anthropic",
+                "start": 32.70000076293945,
+                "end": 33.13999938964844
+            },
+            {
+                "word": "OpenAI",
+                "start": 33.380001068115234,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "and",
+                "start": 33.81999969482422,
+                "end": 34.08000183105469
+            },
+            {
+                "word": "XAI",
+                "start": 34.08000183105469,
+                "end": 34.52000045776367
+            },
+            {
+                "word": "publicly",
+                "start": 34.52000045776367,
+                "end": 34.97999954223633
+            },
+            {
+                "word": "lining",
+                "start": 34.97999954223633,
+                "end": 35.2400016784668
+            },
+            {
+                "word": "up",
+                "start": 35.2400016784668,
+                "end": 35.599998474121094
+            },
+            {
+                "word": "behind",
+                "start": 35.599998474121094,
+                "end": 35.7599983215332
+            },
+            {
+                "word": "the",
+                "start": 35.7599983215332,
+                "end": 35.959999084472656
+            },
+            {
+                "word": "slowdown",
+                "start": 35.959999084472656,
+                "end": 36.2599983215332
+            },
+            {
+                "word": "on",
+                "start": 36.2599983215332,
+                "end": 36.41999816894531
+            },
+            {
+                "word": "September",
+                "start": 36.41999816894531,
+                "end": 36.7400016784668
+            },
+            {
+                "word": "12th",
+                "start": 36.7400016784668,
+                "end": 37.63999938964844
+            },
+            {
+                "word": "which",
+                "start": 37.63999938964844,
+                "end": 37.68000030517578
+            },
+            {
+                "word": "basically",
+                "start": 37.68000030517578,
+                "end": 38.13999938964844
+            },
+            {
+                "word": "never",
+                "start": 38.13999938964844,
+                "end": 38.5
+            },
+            {
+                "word": "happens",
+                "start": 38.5,
+                "end": 38.880001068115234
+            },
+            {
+                "word": "in",
+                "start": 38.880001068115234,
+                "end": 39.13999938964844
+            },
+            {
+                "word": "this",
+                "start": 39.13999938964844,
+                "end": 39.36000061035156
+            },
+            {
+                "word": "industry",
+                "start": 39.36000061035156,
+                "end": 39.720001220703125
+            },
+            {
+                "word": "If",
+                "start": 40.02000045776367,
+                "end": 40.58000183105469
+            },
+            {
+                "word": "you",
+                "start": 40.58000183105469,
+                "end": 40.70000076293945
+            },
+            {
+                "word": "want",
+                "start": 40.70000076293945,
+                "end": 40.86000061035156
+            },
+            {
+                "word": "the",
+                "start": 40.86000061035156,
+                "end": 41.02000045776367
+            },
+            {
+                "word": "link",
+                "start": 41.02000045776367,
+                "end": 41.20000076293945
+            },
+            {
+                "word": "just",
+                "start": 41.279998779296875,
+                "end": 41.68000030517578
+            },
+            {
+                "word": "comment",
+                "start": 41.68000030517578,
+                "end": 41.900001525878906
+            },
+            {
+                "word": "PACE",
+                "start": 41.900001525878906,
+                "end": 42.2599983215332
+            },
+            {
+                "word": "and",
+                "start": 42.2599983215332,
+                "end": 42.52000045776367
+            },
+            {
+                "word": "I'll",
+                "start": 42.52000045776367,
+                "end": 42.68000030517578
+            },
+            {
+                "word": "send",
+                "start": 42.68000030517578,
+                "end": 42.84000015258789
+            },
+            {
+                "word": "it",
+                "start": 42.84000015258789,
+                "end": 42.959999084472656
+            },
+            {
+                "word": "to",
+                "start": 42.959999084472656,
+                "end": 43.15999984741211
+            },
+            {
+                "word": "you",
+                "start": 43.15999984741211,
+                "end": 43.2400016784668
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 43.4900016784668,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 4.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "slowed",
+                        "params": {
+                            "src": "gen_f6067565"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 4.4,
+                "end": 10.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": null,
+                        "params": {
+                            "site": "https://darioamodei.com/post/we-must-pace-the-frontier",
+                            "caption": "The essay, September 12, 2026",
+                            "variant": "fullscreen",
+                            "src": "img_b3e5c16c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.4,
+                "end": 14.16,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "deliberately",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "title": "Amodei's three steps",
+                            "items": [
+                                "Outside evaluators, inside access",
+                                "Common standards, democratic labs",
+                                "A global deal, China included"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.16,
+                "end": 23.28,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "The Warning",
+                            "lines": [
+                                "Swarms of rogue AI agents",
+                                "Could seize parts of the Internet",
+                                "Timeline: as little as 6 months"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.28,
+                "end": 28.44,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Sam Altman Agrees",
+                            "lines": [
+                                "\"We need to pace the frontier\"",
+                                "Backs Dario's position"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.44,
+                "end": 32.14,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "terminal",
+                        "text": null,
+                        "params": {
+                            "lines": [
+                                "> musk_reply.txt",
+                                "\"Dario is right\"",
+                                "-- three words"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.14,
+                "end": 37.64,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "publicly lining up",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": null,
+                        "params": {
+                            "title": "Lining Up: September 12",
+                            "items": [
+                                "Anthropic",
+                                "OpenAI",
+                                "xAI",
+                                "All backing the slowdown"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.64,
+                "end": 40.02,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "never happens",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "And the pushback",
+                            "lines": [
+                                "Trump: AI doom fears are a hoax",
+                                "Beijing: fearmongering",
+                                "Chip stocks slid on Monday"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 40.02,
+                "end": 43.49,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Want The Link?",
+                            "lines": [
+                                "Comment: PACE",
+                                "I'll send it to you"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-ekjad/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    },
+    "dm_automations": {
+        "instagram": "6aa953a5ad5cb45ff0515953"
+    },
+    "dm_link": "https://darioamodei.com/post/we-must-pace-the-frontier",
+    "dm_keyword": "PACE"
+}

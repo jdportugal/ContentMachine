@@ -2,9 +2,13 @@
 
 namespace App\Services\Aggregation;
 
+use App\Services\Costs\CostLedger;
 use App\Services\Settings\StepKey;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Str;
 
 /**
  * Text generation client via LLM, with a CHAIN of providers: it tries each
@@ -46,6 +50,8 @@ class LlmClient
     /** Last provider that produced text (to label the output). */
     private ?string $ultimoFornecedor = null;
 
+    private bool $apenasComWeb = false;
+
     /**
      * Pipeline step this client writes for (config contentmachine.passos), so the
      * user can pin it to one specific key in Settings → Steps.
@@ -58,6 +64,18 @@ class LlmClient
      * one already holds its own — and a clone would silently detach any test
      * double the container was handed.
      */
+    /**
+     * Only providers that can actually search the web may answer. For a write-up
+     * that has NO material of its own (a typed topic), a provider without search
+     * does not degrade gracefully — it invents. Mutates, like paraPasso().
+     */
+    public function apenasComWeb(): static
+    {
+        $this->apenasComWeb = true;
+
+        return $this;
+    }
+
     public function paraPasso(string $passo): static
     {
         $this->passo = $passo;
@@ -90,21 +108,31 @@ class LlmClient
      */
     public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
     {
-        foreach ($this->fornecedores() as $fornecedor) {
+        $cadeia = $this->fornecedores();
+
+        foreach ($cadeia as $fornecedor) {
             try {
                 $texto = match ($fornecedor) {
                     'claude-cli' => $this->claudeCli($prompt, $comFerramentas),
-                    'anthropic' => $this->anthropic($this->chave('anthropic'), $prompt),
-                    'openai' => $this->openai($this->chave('openai'), $prompt, $json),
+                    'anthropic' => $this->anthropic($this->chave('anthropic'), $prompt, $comFerramentas),
+                    'openai' => $this->openai($this->chave('openai'), $prompt, $json, $comFerramentas),
                     'gemini' => $this->gemini($this->chave('gemini'), $prompt, $json),
                     'tensorx' => $this->tensorx($this->chave('tensorx'), $prompt),
                     default => null,
                 };
-            } catch (\Throwable) {
+            } catch (\Throwable $e) {
+                Log::warning("Aggregation LLM '{$fornecedor}' threw — trying the next: ".$e->getMessage());
                 $texto = null;
             }
 
             if ($texto !== null && $texto !== '') {
+                // A silent fallback is how a dead primary provider goes unnoticed for
+                // weeks: the text still gets written, just by the cheaper model down
+                // the chain. Say so.
+                if ($fornecedor !== ($cadeia[0] ?? null)) {
+                    Log::warning("Aggregation LLM fell back to '{$fornecedor}' — '{$cadeia[0]}' produced nothing. Check its key and model id.");
+                }
+
                 $this->ultimoFornecedor = $fornecedor;
 
                 return $texto;
@@ -146,6 +174,12 @@ class LlmClient
         // the API (the CLI needs an interactive session, absent on a server).
         if (filled($this->chave('anthropic')) && $escolha !== 'claude-cli') {
             $ordem = array_values(array_diff($ordem, ['claude-cli']));
+        }
+
+        // Which providers can search the web: the CLI (WebSearch/WebFetch), the
+        // Claude API (server-side web_search) and OpenAI (Responses web_search).
+        if ($this->apenasComWeb) {
+            $ordem = array_values(array_intersect($ordem, ['claude-cli', 'anthropic', 'openai']));
         }
 
         return array_values(array_filter($ordem, fn (string $f) => match ($f) {
@@ -199,46 +233,78 @@ class LlmClient
             ->input($prompt)
             ->run($args);
 
-        return $r->successful() ? (trim($r->output()) ?: null) : null;
+        if (! $r->successful()) {
+            Log::warning('Aggregation LLM \'claude-cli\' failed: '.trim($r->errorOutput() ?: $r->output()));
+
+            return null;
+        }
+
+        return trim($r->output()) ?: null;
     }
 
     /** Anthropic API (Messages). Returns the text or null. */
-    private function anthropic(string $chave, string $prompt): ?string
+    /**
+     * @param  bool  $comFerramentas  Declares Anthropic's server-side web_search tool: the
+     *                                model searches on their side and the results come back as
+     *                                blocks in this same response — no tool loop to run here.
+     */
+    private function anthropic(string $chave, string $prompt, bool $comFerramentas = false): ?string
     {
         if (blank($chave)) {
             return null;
         }
 
-        $r = Http::timeout(120)
+        $r = Http::timeout($comFerramentas ? 600 : 120)
             ->withHeaders(['x-api-key' => $chave, 'anthropic-version' => '2023-06-01'])
-            ->post('https://api.anthropic.com/v1/messages', [
-                'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8'),
+            ->post('https://api.anthropic.com/v1/messages', array_filter([
+                'model' => (string) config('contentmachine.aggregation.anthropic_model', 'claude-opus-5'),
                 'max_tokens' => (int) config('contentmachine.aggregation.anthropic_max_tokens', 8000),
                 'messages' => [['role' => 'user', 'content' => $prompt]],
-            ]);
+                'tools' => $comFerramentas ? [['type' => 'web_search_20260209', 'name' => 'web_search', 'max_uses' => 8]] : null,
+            ]));
 
-        if ($r->successful()) {
-            $this->registarTokens('anthropic', (int) $r->json('usage.input_tokens'), (int) $r->json('usage.output_tokens'));
+        if (! $r->successful()) {
+            return $this->recusa('anthropic', $r);
         }
 
-        return $r->successful() ? (trim((string) $r->json('content.0.text')) ?: null) : null;
+        $this->registarTokens('anthropic', (int) $r->json('usage.input_tokens'), (int) $r->json('usage.output_tokens'));
+
+        // With search on, the text is split across blocks with tool-use/result blocks in between.
+        $texto = collect($r->json('content', []))->where('type', 'text')->pluck('text')->implode('');
+
+        return trim($texto) ?: null;
+    }
+
+    /**
+     * An API provider refused. Log the status and what it said, then return null so
+     * the chain moves on — the caller's contract is «never throws».
+     */
+    private function recusa(string $fornecedor, Response $r): ?string
+    {
+        Log::warning("Aggregation LLM '{$fornecedor}' refused (HTTP {$r->status()}): ".Str::limit(trim($r->body()), 300));
+
+        return null;
     }
 
     /** Record an API call's token spend in the cost ledger (CLI calls cost 0 — not recorded). */
     private function registarTokens(string $fornecedor, int $entrada, int $saida): void
     {
         [$pIn, $pOut] = (array) config("contentmachine.custos.llm_mtok.{$fornecedor}", [0, 0]);
-        app(\App\Services\Costs\CostLedger::class)->registar(
+        app(CostLedger::class)->registar(
             $fornecedor,
             ($entrada * (float) $pIn + $saida * (float) $pOut) / 1_000_000,
             "{$entrada}+{$saida} tokens",
         );
     }
 
-    private function openai(string $chave, string $prompt, bool $json = false): ?string
+    private function openai(string $chave, string $prompt, bool $json = false, bool $comFerramentas = false): ?string
     {
         if (blank($chave)) {
             return null;
+        }
+
+        if ($comFerramentas) {
+            return $this->openaiComPesquisa($chave, $prompt);
         }
 
         $r = Http::timeout(120)->withToken($chave)
@@ -253,7 +319,33 @@ class LlmClient
             $this->registarTokens('openai', (int) $r->json('usage.prompt_tokens'), (int) $r->json('usage.completion_tokens'));
         }
 
-        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
+        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : $this->recusa('openai', $r);
+    }
+
+    /** OpenAI's hosted web search only exists on the Responses API, so tools-on goes there. */
+    private function openaiComPesquisa(string $chave, string $prompt): ?string
+    {
+        $r = Http::timeout(600)->withToken($chave)
+            ->post('https://api.openai.com/v1/responses', [
+                'model' => (string) config('contentmachine.aggregation.openai_model', 'gpt-4o-mini'),
+                'input' => $prompt,
+                'tools' => [['type' => 'web_search']],
+            ]);
+
+        if (! $r->successful()) {
+            return $this->recusa('openai', $r);
+        }
+
+        $this->registarTokens('openai', (int) $r->json('usage.input_tokens'), (int) $r->json('usage.output_tokens'));
+
+        $texto = collect($r->json('output', []))
+            ->where('type', 'message')
+            ->flatMap(fn (array $m) => $m['content'] ?? [])
+            ->where('type', 'output_text')
+            ->pluck('text')
+            ->implode("\n");
+
+        return trim($texto) ?: null;
     }
 
     /**
@@ -279,7 +371,7 @@ class LlmClient
             $this->registarTokens('tensorx', (int) $r->json('usage.prompt_tokens'), (int) $r->json('usage.completion_tokens'));
         }
 
-        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : null;
+        return $r->successful() ? (trim((string) $r->json('choices.0.message.content')) ?: null) : $this->recusa('tensorx', $r);
     }
 
     private function gemini(string $chave, string $prompt, bool $json = false): ?string
@@ -299,7 +391,7 @@ class LlmClient
             $this->registarTokens('gemini', (int) $r->json('usageMetadata.promptTokenCount'), (int) $r->json('usageMetadata.candidatesTokenCount'));
         }
 
-        return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : null;
+        return $r->successful() ? (trim((string) $r->json('candidates.0.content.parts.0.text')) ?: null) : $this->recusa('gemini', $r);
     }
 
     /**

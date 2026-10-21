@@ -1,0 +1,1227 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia térrea de 2013 com quase 900 m² de terreno",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-3-quartos-carregal-do-sal-150m2/r1048196",
+            "agent": "Tânia Sá",
+            "phone": "+351965159826",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Moradia térrea em Cabanas de Viriato, terra do Carnaval.",
+            "voiceover": "Uma moradia térrea em Cabanas de Viriato, terra do Carnaval. Fica às portas do IC12, com ligações rápidas a outras localidades. Construída em 2013, tem cento e cinquenta metros de área bruta. À entrada, um hall e uma sala ampla de estar e refeições, com lareira. Há ainda cozinha, três quartos e duas casas de banho. Tem garagem, e radiadores elétricos para os meses mais frios. Lá fora, quase novecentos metros de terreno para desfrutar em família. Para quem procura tranquilidade numa vila com identidade. Duzentos e sessenta mil euros. Para visitar, fale com a Tânia Sá, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia térrea",
+                    "vo": "Uma moradia térrea em Cabanas de Viriato, terra do Carnaval.",
+                    "caption": "Cabanas de Viriato"
+                },
+                {
+                    "photo": "exterior com acesso / rua",
+                    "vo": "Fica às portas do IC12, com ligações rápidas a outras localidades.",
+                    "caption": "Junto ao IC12"
+                },
+                {
+                    "photo": "fachada lateral ou vista geral da casa",
+                    "vo": "Construída em 2013, tem cento e cinquenta metros de área bruta.",
+                    "caption": "Construída em 2013"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "À entrada, um hall…",
+                    "caption": "Hall de entrada"
+                },
+                {
+                    "photo": "sala de estar e refeições com lareira",
+                    "vo": "…e uma sala ampla de estar e refeições, com lareira.",
+                    "caption": "Sala com lareira"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Há ainda cozinha…",
+                    "caption": "Cozinha"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "…três quartos…",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "…e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "garagem",
+                    "vo": "Tem garagem, e radiadores elétricos para os meses mais frios.",
+                    "caption": "Garagem"
+                },
+                {
+                    "photo": "terreno / quintal",
+                    "vo": "Lá fora, quase novecentos metros de terreno para desfrutar em família. Para quem procura tranquilidade numa vila com identidade.",
+                    "caption": "879 m² de terreno"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e sessenta mil euros. Para visitar, fale com a Tânia Sá, da IAD Portugal.",
+                    "caption": "260.000 € · Tânia Sá · IAD Portugal"
+                }
+            ],
+            "flags": [],
+            "message": "Bom dia Sra. Tânia, fiz este vídeo da sua moradia T3 em Cabanas de Viriato para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia térrea 3 quartos de 150 m² em Carregal do Sal",
+            "price": 260000,
+            "details": {
+                "Preço": "260 000 €",
+                "Localização": "Carregal do Sal, 3430-600",
+                "Referência": "1048196",
+                "Área Bruta m²": "150",
+                "Área Total do Lote m²": "879",
+                "Quartos": 3,
+                "Ano de Construção": 2013,
+                "Características": "2 casas de banho, Construído em 2013"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Tânia Sá - and phone number - +351965159826. Agency: IAD Portugal.\nThe agent's photo is Tânia Sá.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Moradia térrea em Cabanas de Viriato, terra do Carnaval.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia térrea → «Cabanas de Viriato»\n- exterior com acesso / rua → «Junto ao IC12»\n- fachada lateral ou vista geral da casa → «Construída em 2013»\n- hall de entrada → «Hall de entrada»\n- sala de estar e refeições com lareira → «Sala com lareira»\n- cozinha → «Cozinha»\n- quarto → «Três quartos»\n- casa de banho → «Duas casas de banho»\n- garagem → «Garagem»\n- terreno / quintal → «879 m² de terreno»\n- end card → «260.000 € · Tânia Sá · IAD Portugal»\n\nHere are the house details:\n\nMoradia térrea 3 quartos de 150 m² em Carregal do Sal\nPreço\n260 000 €\nLocalização\nCarregal do Sal, 3430-600\nReferência\n1048196\nÁrea Bruta m²\n150\nÁrea Total do Lote m²\n879\nQuartos\n3\nAno de Construção\n2013\nCaracterísticas\n2 casas de banho, Construído em 2013\n\nDescrição\nMoradia Térrea em Cabanas de Viriato – Conforto, Espaço e Excelente Localização\n\nApresentamos esta moradia térrea situada em Cabanas de Viriato, uma vila cheia de história, tradição e identidade, conhecida pelo seu emblemático Carnaval, uma das mais singulares manifestações culturais da região.\n\nImplantada num lote de terreno com 879 m², esta moradia oferece um ambiente acolhedor, funcional e com espaço exterior para desfrutar em família, ideal para quem procura tranquilidade, privacidade e qualidade de vida.\n\nNo seu interior, a moradia é composta por um hall de entrada, uma ampla sala de estar e de refeições com lareira, perfeita para criar momentos de conforto e convívio, uma cozinha, três quartos e duas casas de banho. Dispõe ainda de garagem, proporcionando comodidade e espaço adicional para estacionamento ou arrumação.\n\nPara maior conforto nos meses mais frios, a habitação está equipada com radiadores elétricos, complementando o ambiente acolhedor proporcionado pela lareira.\n\nUm dos seus grandes pontos fortes é a localização privilegiada, às portas do IC12, permitindo excelentes acessibilidades e ligações rápidas a outras localidades, conciliando a serenidade de uma vila com a facilidade de deslocação.\n\nCabanas de Viriato distingue-se pelo seu património, pela riqueza das suas tradições e pelo espírito comunitário, sendo especialmente reconhecida pelo seu Carnaval, que atrai visitantes e mantém viva uma tradição cultural muito própria.\n\nUma oportunidade para quem procura uma moradia térrea, com terreno generoso, boas acessibilidades e o encanto de viver numa vila com identidade e tradição.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia térrea T3 em Cabanas de Viriato (Carregal do Sal, Viseu)",
+            "summary": "Cabanas de Viriato é uma vila do concelho de Carregal do Sal, no distrito de Viseu, conhecida pelo Carnaval da \"dança dos cus\", que vem do século XIX. É também a terra natal de Aristides de Sousa Mendes, que hoje tem ali um museu na Casa do Passal.",
+            "timeline": [
+                {
+                    "label": "Nasce o Carnaval da \"dança grande\", mais tarde chamada \"dança dos cus\"",
+                    "sublabel": "Século XIX"
+                },
+                {
+                    "label": "Aristides de Sousa Mendes nasce em Cabanas de Viriato",
+                    "sublabel": "1885"
+                },
+                {
+                    "label": "Como cônsul em Bordéus, passa milhares de vistos a refugiados",
+                    "sublabel": "junho de 1940"
+                },
+                {
+                    "label": "Casa do Passal classificada como Monumento Nacional",
+                    "sublabel": "2011"
+                },
+                {
+                    "label": "Abre o Museu Aristides de Sousa Mendes na Casa do Passal",
+                    "sublabel": "19 julho 2024"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Habitantes da freguesia (Censos 2021)",
+                    "value": 1457,
+                    "unit": "hab."
+                },
+                {
+                    "label": "Habitantes da freguesia (Censos 2011)",
+                    "value": 1533,
+                    "unit": "hab."
+                },
+                {
+                    "label": "Habitantes da freguesia (Censos 2001)",
+                    "value": 1698,
+                    "unit": "hab."
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025, INE)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano nacional (2025 face a 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Esta moradia vs. média nacional",
+                    "left": {
+                        "title": "Moradia em Cabanas de Viriato",
+                        "points": [
+                            "260 000 € por 150 m² de área bruta",
+                            "Cerca de 1 733 €/m²",
+                            "Quase 900 m² de terreno"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal (mediana 2025, INE)",
+                        "points": [
+                            "2 076 €/m²",
+                            "Subida de 16,8% num ano",
+                            "Valores mais altos em Lisboa: 4 875 €/m²"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Na \"dança dos cus\", os pares desfilam em duas filas e, ao som da valsa, chocam os traseiros",
+                "A Associação de Carnaval de Cabanas de Viriato organiza a festa todos os anos",
+                "Aristides de Sousa Mendes, o cônsul de Bordéus, nasceu nesta vila",
+                "O museu da Casa do Passal abriu no dia em que o cônsul faria anos (19 de julho)"
+            ],
+            "sources": [
+                "https://echoboomer.pt/algumas-tradicoes-emblematicas-entrudo-centro-de-portugal/",
+                "https://www.dn.pt/vida-e-futuro/guia-de-carnaval-do-tradicional-ao-alternativo-10635660.html",
+                "https://www.e-konomista.pt/melhor-carnaval-pais/",
+                "https://aldeiasportuguesas.pt/viseu/carregal-do-sal/cabanas-de-viriato/",
+                "https://en.wikipedia.org/wiki/Cabanas_de_Viriato",
+                "https://en.wikipedia.org/wiki/Carregal_do_Sal",
+                "https://observador.pt/2024/07/20/melhor-homenagem-e-criar-condicoes-para-a-mais-objetiva-historia-do-consul-de-bordeus/",
+                "https://www.centerofportugal.com/poi/aristides-de-sousa-mendes-museum",
+                "https://www.portugal.com/location/casa-do-passal-the-aristides-de-sousa-mendes-museum/",
+                "https://www.dn.pt/arquivo/diario-de-noticias/aristides-de-sousa-mendes-dever-de-desobediencia-12438954.html",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://econews.pt/2026/04/24/greater-lisbon-home-prices-hit-portugals-highest-level/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia térrea de 2013 com quase 900 m² de terreno",
+            "description": "Em Cabanas de Viriato, a terra do carnaval, há uma moradia térrea com quase 900 m² de terreno à volta.\n\nFica às portas do IC12, com ligações rápidas às localidades vizinhas.\nTem entrada, hall e uma sala ampla de estar e refeições, com lareira 🔥. Tem também cozinha, três quartos e duas casas de banho.\nTem garagem e radiadores elétricos para os meses mais frios. O terreno lá fora dá espaço para aproveitar em família, numa vila tranquila e com identidade.\n\nMoradia T3 · 150 m² brutos · lote de 879 m² · 2013 · 260.000 € · Ref. 1048196\n\nQuer conhecê-la? Fale com a Tânia Sá, da IAD Portugal: +351 965 159 826",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "moradiaterrea",
+                "casaavenda",
+                "moradiat3",
+                "carregaldosal",
+                "cabanasdeviriato",
+                "viseu",
+                "dao",
+                "casascomterreno",
+                "iadportugal",
+                "portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1048196-zsa62",
+    "created_at": "2026-10-20T06:45:41+00:00",
+    "updated_at": "2026-10-20T07:14:20+00:00",
+    "source_path": "clips/uploads/ehk5yy7AGFUWHNbLIUbsIL4lRtNgbwUgVwpTkpeD.mp3",
+    "images": [
+        {
+            "id": "img_5f7fc658",
+            "path": "clips/uploads/y76fGi3Q4bcx0UD4KXdcgC5HGwmtkPKGpZksLvm5.jpg",
+            "description": "Fachada da moradia térrea branca, telhado de telha vermelha, alpendre com colunas, portadas escuras e jardim com plumas.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b4de8ef9",
+            "path": "clips/uploads/7U51ObRk2L4JWQZY3b53evpATcml6DVStOAN93qP.jpg",
+            "description": "Vista aérea de drone com o terreno delimitado a amarelo, moradia em lote de esquina junto à estrada.",
+            "name": "01a14025fcb83b54a12d1f4eaf261f09.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63b7af9e",
+            "path": "clips/uploads/yt5sDNfLVcdTQntFKiN4xIFXxNzBU20I7WnF81M7.jpg",
+            "description": "Sala de refeições ampla com mesa oval de madeira, lareira branca, lustres e porta aberta para a cozinha.",
+            "name": "01a140141e6dc47b6e2b8bfeff6c288c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0a2389fe",
+            "path": "clips/uploads/NzKE73nQpQwCHFmxMquz7ljbtV2DnpF2HSKuv3ev.jpg",
+            "description": "Sala de estar com sofás de pele clara, grande móvel de madeira com TV e zona de refeições ao fundo.",
+            "name": "01a1401415710b91ec69137ba9ee02a0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5abf285f",
+            "path": "clips/uploads/cOD2UWvJOVtZ0hrg5vIRBA8zZp69WMdnsLueovOZ.jpg",
+            "description": "Cozinha com armários de madeira, bancada de granito, lava-loiça duplo e canto de refeições com banco corrido.",
+            "name": "01a140140f58937b1326eed77fa6c283.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d9c4cf61",
+            "path": "clips/uploads/hX2G4WPfhstO8gHVePNnki1HMMMhhqvXZ6tKbKnL.jpg",
+            "description": "Hall de entrada com porta de madeira almofadada, cabide de pé e acesso à sala.",
+            "name": "01a140141d83de204f8c9f8f5498ef8f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc4aa3d2",
+            "path": "clips/uploads/5ox0Oi8euB26xHiAChe2mTFqtdINkmM1OrLcWUj3.jpg",
+            "description": "Casa de banho moderna com azulejo bege e castanho, móvel de lavatório, espelho e teto em madeira.",
+            "name": "01a140141af2dac83c6247b3a4bb8192.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b9319567",
+            "path": "clips/uploads/qwow56PpjSQcN9gl7m9ehqA6rSOsTdWFkyCLun4e.jpg",
+            "description": "Quarto de casal com cama de madeira torneada, colcha cor-de-rosa, papel de parede floral e janela.",
+            "name": "01a140140d09ffa989cc39e8321d0505.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5477d4bc",
+            "path": "clips/uploads/tcUCzh8F96XiO1ev8rtSlU0taGbod0AXmg15dI1d.jpg",
+            "description": "Casa de banho com azulejos azuis decorados com motivos marinhos, banheira, lavatório e cortina floral azul.",
+            "name": "01a1401414f0c859af84852fbb0bfaf3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_25dfb66c",
+            "path": "clips/uploads/uLaN2BsDLXiJrfHeCCPGVSFH2muHzhCcFcLn4kdu.jpg",
+            "description": "Quarto com cama de madeira, colcha azul clara, porta-janela com cortinas e chão flutuante claro.",
+            "name": "01a14014159d3a5a04935c5f99840dd6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d33e9715",
+            "path": "clips/uploads/yyGvAYxPTF4NZ7L8UacZimHmC6OFAluUcibL8Yqv.jpg",
+            "description": "Quarto de casal com cama de madeira entalhada, candeeiro de cristal, papel de parede floral e janela com cortinados.",
+            "name": "01a140141578c69a971726ee99f5c664.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9df91e5d",
+            "path": "clips/uploads/ry6gIdvyiwoL4s3tcLO5pTX3aIvbtJX6JjfgpEiH.jpg",
+            "description": "Hall/corredor com chão de tijoleira, máquina de costura antiga e porta aberta para quarto com colcha vermelha.",
+            "name": "01a1401416bb2eb85612fb4aab84a78a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c6fccdd3",
+            "path": "clips/uploads/fIAPgM2Iy7vI5wrFseDbSsEroi9gwYUiC8oRTd0t.jpg",
+            "description": "Interior da garagem com portão basculante preto, chão de tijoleira, corta-relva e arrumos.",
+            "name": "01a14014170645b14cbb09aad57cf81f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d043ec66",
+            "path": "clips/uploads/91xmCXy3erVL2jiDRMkl9XGk6kKrud2TmvW9oGUy.jpg",
+            "description": "Fachada da moradia térrea branca com telhado de telha, portadas castanhas, garagem e calçada portuguesa.",
+            "name": "01a140141c52263f1839e48219c4297e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ed0cdd28",
+            "path": "clips/uploads/oV3ByI21wugkcPru6iPqs6LzF0ucqt5I6Bsc60yo.jpg",
+            "description": "Fachada lateral da moradia térrea branca, telhado laranja com chaminé, arbustos e calçada em leque.",
+            "name": "01a140141eb8bcf82b846a31374013c5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_41f81c16",
+            "path": "clips/uploads/mMPunJO0bZq66HZ0Y5ju9NsXNzhpkNWolRex9qHB.jpg",
+            "description": "Exterior da moradia com alpendre, jardim com agave e plantas ornamentais, calçada em leque, céu azul.",
+            "name": "01a1401416375b5380c1161f739c87c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0549c1dd",
+            "path": "clips/uploads/SEnFrzz8eCP56AuWFDA1CSSk16AsMfT9lU1e7lFp.jpg",
+            "description": "Exterior da moradia térrea com alpendre de colunas, jardim florido e acesso em calçada, dia soalheiro.",
+            "name": "01a14013f7a44035e104d658cdc83cc5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7988c6cc",
+            "path": "clips/uploads/KB1HP9AjsDCaN6fueGMSQYN4HXqjNxlMJ0Rh8bs6.jpg",
+            "description": "Vista aérea de drone: moradia térrea, jardim murado, acesso em calçada, estrada com passadeira e pinhal.",
+            "name": "01a1401418a6c041ec691d79f85a1346.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_753e61a9",
+            "path": "clips/uploads/hTCO7si1DwS8scesYSeGNEDIKx2zsJaLtA5EzeqS.jpg",
+            "description": "Vista aérea de drone: telhado laranja, garagem, acesso curvo em calçada, estrada e vasta zona arborizada.",
+            "name": "01a14014187ce4eab04d32c02720e9aa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0509c7e4",
+            "path": "clips/uploads/z1xJFdudV3iujdbwDGYweNk0wblnRrIyHszsD9z4.jpg",
+            "description": "Vista aérea de drone: moradia no terreno, estrada e rotunda próximas, ligações rápidas, vegetação envolvente.",
+            "name": "01a140141a6ad3be05eb5fba6b74ed49.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c1965667",
+            "path": "clips/uploads/HBI2ErTcYMUGgdvKMGV4mp2c9HIEK8Ln8PmBd12X.jpg",
+            "description": "Vista aérea de drone da moradia térrea com telhado de telha vermelha, jardim, calçada portuguesa e estrada ao lado.",
+            "name": "01a140141a494a63c5c68405ee04d50d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a015b1d6",
+            "path": "clips/uploads/ZYSwbbfKTHKB6SMU4jXWOoVnudz0tYQqoal7ygon.jpg",
+            "description": "Vista aérea zenital do terreno: moradia, logradouro em calçada, jardim e cruzamento com passadeira junto à propriedade.",
+            "name": "01a140141d414f98f2e920b2a89cd087.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_662cc8de",
+            "path": "clips/uploads/8rsesVg35eVTCLfrNYFPRqKPpY7D64QAxbnfKfLx.jpg",
+            "description": "Vista aérea da moradia com portão de entrada, acesso em calçada, jardim amplo e envolvente verde arborizada.",
+            "name": "01a1401419a77dbf0e2d51dbe8b0fdc1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a933e94e",
+            "path": "clips/uploads/Gqi3RTh2Ubi9LzwPY3FVHvnzkNh9ebpz45ckSBel.jpg",
+            "description": "Fachada da moradia térrea branca com alpendre, portadas escuras, telhado vermelho e jardim com plumas decorativas.",
+            "name": "01a140141325b5909aa238f48fe563bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6685e52f",
+            "path": "clips/uploads/n1u1Vtxgqd6z9TU6j9QfjwUg55xfvXKkvShoKDxf.jpg",
+            "description": "Fachada frontal vista do drone: moradia branca, jardim com escadas, muro com gradeamento e portão pedonal.",
+            "name": "01a14013f7beea0d83a69036abbae491.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d9fa749e",
+            "path": "clips/uploads/EcO1NDbmFCDA4J6wdXmzlI96PoOpifB9TWhUtlOl.png",
+            "description": "Retrato da consultora Tânia Sá, da IAD Portugal.",
+            "name": "Tânia Sá.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_23170574",
+            "path": "clips/uploads/zSuda6afB0FZabfRmM8eN5ECuMyAnA1ysHcn70ri.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/ehk5yy7AGFUWHNbLIUbsIL4lRtNgbwUgVwpTkpeD.mp3",
+    "transcript": {
+        "duration": 36.79999923706055,
+        "text": "Uma moradia térrea em Cabanas de Viriato, terra do carnaval. Fica às portas do IC12, com ligações rápidas a outras localidades. Construída em 2013, tem 150 metros de área bruta. Há entrada, um hall e uma sala ampla de estar e refeições, com lareira. Há ainda cozinha, três quartos e duas casas de banho. Tem garagem e radiadores elétricos para os meses mais frios. Lá fora, quase 900 metros de terreno para desfrutar em família. Para quem procura tranquilidade numa vila com identidade, 260 mil euros. Para visitar, fale com a Tânia Sá, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "moradia",
+                "start": 0.18000000715255737,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "térrea",
+                "start": 0.5400000214576721,
+                "end": 1.0800000429153442
+            },
+            {
+                "word": "em",
+                "start": 1.0800000429153442,
+                "end": 1.3600000143051147
+            },
+            {
+                "word": "Cabanas",
+                "start": 1.3600000143051147,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "de",
+                "start": 1.6799999475479126,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "Viriato",
+                "start": 1.899999976158142,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "terra",
+                "start": 2.759999990463257,
+                "end": 2.819999933242798
+            },
+            {
+                "word": "do",
+                "start": 2.819999933242798,
+                "end": 3.0799999237060547
+            },
+            {
+                "word": "carnaval",
+                "start": 3.0799999237060547,
+                "end": 3.4800000190734863
+            },
+            {
+                "word": "Fica",
+                "start": 4.099999904632568,
+                "end": 4.119999885559082
+            },
+            {
+                "word": "às",
+                "start": 4.119999885559082,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "portas",
+                "start": 4.320000171661377,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "do",
+                "start": 4.619999885559082,
+                "end": 4.78000020980835
+            },
+            {
+                "word": "IC12",
+                "start": 4.78000020980835,
+                "end": 5.460000038146973
+            },
+            {
+                "word": "com",
+                "start": 5.619999885559082,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "ligações",
+                "start": 5.760000228881836,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "rápidas",
+                "start": 6.079999923706055,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "a",
+                "start": 6.679999828338623,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "outras",
+                "start": 7.039999961853027,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "localidades",
+                "start": 7.21999979019165,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "Construída",
+                "start": 8.380000114440918,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "em",
+                "start": 8.84000015258789,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "2013",
+                "start": 8.979999542236328,
+                "end": 9.819999694824219
+            },
+            {
+                "word": "tem",
+                "start": 10.039999961853027,
+                "end": 10.079999923706055
+            },
+            {
+                "word": "150",
+                "start": 10.079999923706055,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "metros",
+                "start": 10.899999618530273,
+                "end": 11.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 11.239999771118164,
+                "end": 11.619999885559082
+            },
+            {
+                "word": "área",
+                "start": 11.619999885559082,
+                "end": 11.619999885559082
+            },
+            {
+                "word": "bruta",
+                "start": 11.619999885559082,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "Há",
+                "start": 12.460000038146973,
+                "end": 12.479999542236328
+            },
+            {
+                "word": "entrada",
+                "start": 12.479999542236328,
+                "end": 12.899999618530273
+            },
+            {
+                "word": "um",
+                "start": 13.180000305175781,
+                "end": 13.600000381469727
+            },
+            {
+                "word": "hall",
+                "start": 13.600000381469727,
+                "end": 13.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 13.600000381469727,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "uma",
+                "start": 13.800000190734863,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "sala",
+                "start": 14.180000305175781,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "ampla",
+                "start": 14.220000267028809,
+                "end": 14.680000305175781
+            },
+            {
+                "word": "de",
+                "start": 14.680000305175781,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "estar",
+                "start": 14.880000114440918,
+                "end": 15.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 15.100000381469727,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "refeições",
+                "start": 15.359999656677246,
+                "end": 15.899999618530273
+            },
+            {
+                "word": "com",
+                "start": 16.100000381469727,
+                "end": 16.239999771118164
+            },
+            {
+                "word": "lareira",
+                "start": 16.239999771118164,
+                "end": 16.860000610351562
+            },
+            {
+                "word": "Há",
+                "start": 17,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "ainda",
+                "start": 17.139999389648438,
+                "end": 17.420000076293945
+            },
+            {
+                "word": "cozinha",
+                "start": 17.420000076293945,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "três",
+                "start": 18.219999313354492,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "quartos",
+                "start": 18.440000534057617,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "e",
+                "start": 18.860000610351562,
+                "end": 19.100000381469727
+            },
+            {
+                "word": "duas",
+                "start": 19.100000381469727,
+                "end": 19.420000076293945
+            },
+            {
+                "word": "casas",
+                "start": 19.420000076293945,
+                "end": 19.68000030517578
+            },
+            {
+                "word": "de",
+                "start": 19.68000030517578,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "banho",
+                "start": 20.040000915527344,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "Tem",
+                "start": 20.540000915527344,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "garagem",
+                "start": 20.540000915527344,
+                "end": 21.079999923706055
+            },
+            {
+                "word": "e",
+                "start": 21.079999923706055,
+                "end": 21.299999237060547
+            },
+            {
+                "word": "radiadores",
+                "start": 21.299999237060547,
+                "end": 21.700000762939453
+            },
+            {
+                "word": "elétricos",
+                "start": 21.700000762939453,
+                "end": 22.260000228881836
+            },
+            {
+                "word": "para",
+                "start": 22.260000228881836,
+                "end": 22.440000534057617
+            },
+            {
+                "word": "os",
+                "start": 22.440000534057617,
+                "end": 22.719999313354492
+            },
+            {
+                "word": "meses",
+                "start": 22.719999313354492,
+                "end": 22.739999771118164
+            },
+            {
+                "word": "mais",
+                "start": 22.739999771118164,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "frios",
+                "start": 23.15999984741211,
+                "end": 23.479999542236328
+            },
+            {
+                "word": "Lá",
+                "start": 23.959999084472656,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "fora",
+                "start": 24.1200008392334,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "quase",
+                "start": 24.780000686645508,
+                "end": 24.81999969482422
+            },
+            {
+                "word": "900",
+                "start": 24.81999969482422,
+                "end": 25.399999618530273
+            },
+            {
+                "word": "metros",
+                "start": 25.399999618530273,
+                "end": 25.739999771118164
+            },
+            {
+                "word": "de",
+                "start": 25.739999771118164,
+                "end": 26.040000915527344
+            },
+            {
+                "word": "terreno",
+                "start": 26.040000915527344,
+                "end": 26.239999771118164
+            },
+            {
+                "word": "para",
+                "start": 26.239999771118164,
+                "end": 26.479999542236328
+            },
+            {
+                "word": "desfrutar",
+                "start": 26.479999542236328,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "em",
+                "start": 26.920000076293945,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "família",
+                "start": 27.139999389648438,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "Para",
+                "start": 27.520000457763672,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "quem",
+                "start": 28.020000457763672,
+                "end": 28.18000030517578
+            },
+            {
+                "word": "procura",
+                "start": 28.18000030517578,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "tranquilidade",
+                "start": 28.559999465942383,
+                "end": 29.420000076293945
+            },
+            {
+                "word": "numa",
+                "start": 29.420000076293945,
+                "end": 29.68000030517578
+            },
+            {
+                "word": "vila",
+                "start": 29.68000030517578,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "com",
+                "start": 29.979999542236328,
+                "end": 30.239999771118164
+            },
+            {
+                "word": "identidade",
+                "start": 30.239999771118164,
+                "end": 30.860000610351562
+            },
+            {
+                "word": "260",
+                "start": 31.579999923706055,
+                "end": 31.979999542236328
+            },
+            {
+                "word": "mil",
+                "start": 31.979999542236328,
+                "end": 32.560001373291016
+            },
+            {
+                "word": "euros",
+                "start": 32.560001373291016,
+                "end": 32.97999954223633
+            },
+            {
+                "word": "Para",
+                "start": 33.459999084472656,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "visitar",
+                "start": 33.52000045776367,
+                "end": 34.099998474121094
+            },
+            {
+                "word": "fale",
+                "start": 34.36000061035156,
+                "end": 34.380001068115234
+            },
+            {
+                "word": "com",
+                "start": 34.380001068115234,
+                "end": 34.560001373291016
+            },
+            {
+                "word": "a",
+                "start": 34.560001373291016,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "Tânia",
+                "start": 34.68000030517578,
+                "end": 34.91999816894531
+            },
+            {
+                "word": "Sá",
+                "start": 34.91999816894531,
+                "end": 35.2400016784668
+            },
+            {
+                "word": "da",
+                "start": 35.459999084472656,
+                "end": 35.599998474121094
+            },
+            {
+                "word": "IAD",
+                "start": 35.599998474121094,
+                "end": 35.959999084472656
+            },
+            {
+                "word": "de",
+                "start": 35.959999084472656,
+                "end": 36.2599983215332
+            },
+            {
+                "word": "Portugal",
+                "start": 36.2599983215332,
+                "end": 36.560001373291016
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.79999923706055,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.5,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "TERRA DO CARNAVAL",
+                        "params": {
+                            "src": "img_5f7fc658",
+                            "avatar": "img_d9fa749e",
+                            "logo": "img_23170574",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "260.000 €",
+                            "location": "CABANAS DE VIRIATO · CARREGAL DO SAL",
+                            "title": "MORADIA TÉRREA",
+                            "facts": "150 m² · 3 quartos · 2 WC · garagem",
+                            "cta": "Ligue já +351 965 159 826",
+                            "name": "Tânia Sá",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.5,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "JUNTO AO IC12",
+                        "params": {
+                            "src": "img_0509c7e4",
+                            "src2": "img_7988c6cc",
+                            "src3": "img_753e61a9",
+                            "src4": "img_662cc8de"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 12.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "CONSTRUÍDA EM 2013",
+                        "params": {
+                            "src": "img_ed0cdd28",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.3,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_d9c4cf61",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 16.95,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SALA COM LAREIRA",
+                        "params": {
+                            "src": "img_63b7af9e",
+                            "src2": "img_0a2389fe",
+                            "src3": "img_9df91e5d",
+                            "src4": "img_5abf285f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.95,
+                "end": 20.45,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "3 QUARTOS · 2 WC",
+                        "params": {
+                            "src": "img_b9319567",
+                            "src2": "img_25dfb66c",
+                            "src3": "img_d33e9715",
+                            "src4": "img_cc4aa3d2",
+                            "src5": "img_5477d4bc"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.45,
+                "end": 23.85,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "GARAGEM",
+                        "params": {
+                            "src": "img_d043ec66",
+                            "src2": "img_c6fccdd3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.85,
+                "end": 27.55,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "879 M² DE TERRENO",
+                        "params": {
+                            "src": "img_b4de8ef9",
+                            "src2": "img_a015b1d6",
+                            "src3": "img_41f81c16",
+                            "src4": "img_0549c1dd",
+                            "src5": "img_753e61a9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.55,
+                "end": 31.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "VILA COM IDENTIDADE",
+                        "params": {
+                            "src": "img_c1965667",
+                            "src2": "img_6685e52f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.3,
+                "end": 33.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_a933e94e",
+                            "title": "260.000 €",
+                            "items": [
+                                "150 m² · 3 quartos",
+                                "879 m² de terreno"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.4,
+                "end": 36.79999923706055,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Tânia Sá",
+                        "params": {
+                            "src": "img_d9fa749e",
+                            "name": "Tânia Sá",
+                            "phone": "+351 965 159 826",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1048196-zsa62/clip.mp4",
+    "error": null
+}

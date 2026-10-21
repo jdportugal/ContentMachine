@@ -1,0 +1,1238 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 em Ponte de Lima com vista para o rio Lima",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-ponte-de-lima-235m2/r1054177?modal=property_media",
+            "agent": "Susana Cerqueira",
+            "phone": "+351968571773",
+            "email": "",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia classe energética A em Ponte de Lima.",
+            "voiceover": "Uma moradia classe energética A em Ponte de Lima. Fica na Ribeira, a poucos minutos do centro histórico. A autoestrada A3 fica a cerca de quinhentos metros. São três pisos, com luz natural. No rés do chão, cozinha equipada e sala ampla com recuperador de calor. Há ainda um quarto, hoje usado como escritório. Em cima, três quartos, um deles suite. Das varandas, avista-se o rio Lima ao longe. Na cave, garagem para três carros, lavandaria e arrumos. Lá fora, jardim com árvores de fruto, terraço e solário. Quinhentos e vinte e seis mil euros. Para visitar, fale com a Susana Cerqueira, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada",
+                    "vo": "Uma moradia classe energética A em Ponte de Lima.",
+                    "caption": "Ponte de Lima · Classe A"
+                },
+                {
+                    "photo": "rua / zona envolvente",
+                    "vo": "Fica na Ribeira, a poucos minutos do centro histórico.",
+                    "caption": "Ribeira, Ponte de Lima"
+                },
+                {
+                    "photo": "exterior com acesso / portão",
+                    "vo": "A autoestrada A3 fica a cerca de quinhentos metros.",
+                    "caption": "A 500 m da A3"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "São três pisos, com luz natural.",
+                    "caption": "Três pisos"
+                },
+                {
+                    "photo": "sala com recuperador de calor",
+                    "vo": "No rés do chão, cozinha equipada e sala ampla com recuperador de calor.",
+                    "caption": "Sala com recuperador"
+                },
+                {
+                    "photo": "escritório",
+                    "vo": "Há ainda um quarto, hoje usado como escritório.",
+                    "caption": "Quarto ou escritório"
+                },
+                {
+                    "photo": "suite",
+                    "vo": "Em cima, três quartos, um deles suite.",
+                    "caption": "Quatro quartos, uma suite"
+                },
+                {
+                    "photo": "varanda com vista",
+                    "vo": "Das varandas, avista-se o rio Lima ao longe.",
+                    "caption": "Rio Lima ao longe"
+                },
+                {
+                    "photo": "garagem",
+                    "vo": "Na cave, garagem para três carros, lavandaria e arrumos.",
+                    "caption": "Garagem para três carros"
+                },
+                {
+                    "photo": "jardim / terraço",
+                    "vo": "Lá fora, jardim com árvores de fruto, terraço e solário.",
+                    "caption": "Jardim, terraço e solário"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quinhentos e vinte e seis mil euros. Para visitar, fale com a Susana Cerqueira, da IAD Portugal.",
+                    "caption": "526.000 € · Susana Cerqueira · iad Portugal · AMI 11220"
+                }
+            ],
+            "flags": [
+                "Casas de banho: os detalhes dizem 4, mas o texto só descreve 3 (suite, casa de banho completa no primeiro andar e a da cave). O número ficou de fora.",
+                "O título do anúncio diz 'geminada', mas o texto não refere isso. O guião não diz se a casa é isolada ou geminada.",
+                "Nome da agência: a assinatura usa 'iad Portugal' e os dados usam 'IAD Portugal'. Confirmar a grafia no ecrã e se o TTS lê 'IAD' como palavra ou letra a letra.",
+                "Os detalhes referem 'Ar condicionado'; o texto fala em ventiloconvectores. Nenhum dos dois entrou no guião."
+            ],
+            "message": "Bom dia Sra. Susana, fiz este vídeo do seu T4 em Ponte de Lima para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia geminada 4 quartos de 235 m² em Ponte de Lima",
+            "price": 526000,
+            "details": {
+                "Preço": "526 000 €",
+                "Localização": "Ponte de Lima, 4990-389",
+                "Referência": "1054177",
+                "Área Bruta m²": "235",
+                "Área Total do Lote m²": "292",
+                "Quartos": 4,
+                "Ano de Construção": 2008,
+                "Certificado Energético": "A",
+                "Características": "235 m² área bruta, 200 m² úteis, 4 casas de banho, Jardim, Garagem, Estacionamento, Terraço, Ar condicionado, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2008, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Susana Cerqueira - and phone number - +351968571773. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Susana Cerqueira.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Uma moradia classe energética A em Ponte de Lima.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada → «Ponte de Lima · Classe A»\n- rua / zona envolvente → «Ribeira, Ponte de Lima»\n- exterior com acesso / portão → «A 500 m da A3»\n- hall de entrada → «Três pisos»\n- sala com recuperador de calor → «Sala com recuperador»\n- escritório → «Quarto ou escritório»\n- suite → «Quatro quartos, uma suite»\n- varanda com vista → «Rio Lima ao longe»\n- garagem → «Garagem para três carros»\n- jardim / terraço → «Jardim, terraço e solário»\n- end card → «526.000 € · Susana Cerqueira · iad Portugal · AMI 11220»\n\nHere are the house details:\n\nMoradia geminada 4 quartos de 235 m² em Ponte de Lima\nPreço\n526 000 €\nLocalização\nPonte de Lima, 4990-389\nReferência\n1054177\nÁrea Bruta m²\n235\nÁrea Total do Lote m²\n292\nQuartos\n4\nAno de Construção\n2008\nCertificado Energético\nA\nCaracterísticas\n235 m² área bruta, 200 m² úteis, 4 casas de banho, Jardim, Garagem, Estacionamento, Terraço, Ar condicionado, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2008, Intercomunicador\n\nDescrição\nMORADIA T4 DE ARQUITETURA CONTEMPORÂNEA, CLASSE A e JARDIM \\PONTE DE LIMA\n\nElegância, conforto e privacidade em Ponte de Lima.\n\nDescubra esta distinta moradia T4 em Ribeira, Ponte de Lima, onde a arquitetura contemporânea, as áreas generosas e a qualidade dos acabamentos se conjugam para proporcionar uma experiência residencial de excelência.\n\nDistribuída por três pisos, destaca-se pela luminosidade natural, funcionalidade e atenção ao conforto.\n\nRés do chão: hall de entrada, cozinha equipada, ampla sala de estar e jantar com recuperador de calor, quarto atualmente utilizado como escritório e acesso ao terraço/solário.\n\nPrimeiro andar: três quartos, incluindo uma suite, casa de banho completa e varandas com vistas desafogadas sobre a paisagem envolvente, sendo possível avistar o rio Lima ao longe.\n\nCave: garagem para três viaturas, lavandaria, casa de banho e arrumos.\n\nEquipamentos e acabamentos:\n\n* Classe energética A\n* Aquecimento e arrefecimento por ventiloconvectores\n* Bomba de calor para águas quentes sanitárias\n* Isolamento térmico exterior (capoto)\n* Caixilharia com corte térmico e vidros duplos\n* Estores elétricos e dois portões automáticos\n\nNo exterior, o jardim com árvores ornamentais e de fruto, o terraço e o solário criam um ambiente de tranquilidade e privacidade.\n\nA poucos minutos do centro histórico de Ponte de Lima e a cerca de 500 metros da A3, oferece excelentes acessibilidades.\n\nUma propriedade para quem valoriza espaço, conforto e qualidade de vida.\n\nAgende a sua visita!\n\nSusana Cerqueira | iad Portugal",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia à venda em Ponte de Lima: contexto do mercado e da vila",
+            "summary": "Ponte de Lima recebeu foral em 1125 e é atravessada pelo Rio Lima. Em 2025, o preço mediano das casas em Portugal subiu 16,8%, para 2.076 €/m².",
+            "timeline": [
+                {
+                    "label": "Foral de Ponte de Lima, concedido por D. Teresa",
+                    "sublabel": "4 de março de 1125"
+                },
+                {
+                    "label": "Preço mediano nacional atinge 2.076 €/m²",
+                    "sublabel": "2025 (INE)"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano face a 2024",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Validade do certificado energético de uma habitação",
+                    "value": 10,
+                    "unit": "anos"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "A escala energética para habitação vai de A+ (mais eficiente) a F (menos eficiente)",
+                "O certificado energético é obrigatório para vender ou arrendar uma casa e é emitido por um perito qualificado reconhecido pela ADENE",
+                "Ponte de Lima é muitas vezes apresentada como a vila mais antiga de Portugal, mas essa ideia é contestada",
+                "A ponte sobre o Rio Lima tem origem romana e foi ampliada na Idade Média"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Ponte_de_Lima",
+                "https://postal.pt/cultura/esta-e-a-vila-mais-antiga-de-portugal-e-e-digna-de-visita-pelo-seu-patrimonio-cultural-e-riqueza-paisagistica/",
+                "https://postal.pt/cultura/nesa-vila-pre-historica-portuguesa-pode-contemplar-uma-ponte-iconica-e-gastronomia-de-excelencia/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://www.idealista.pt/news/node/45207",
+                "https://goldenergy.pt/glossario/certificado-energetico/",
+                "https://www.santander.pt/salto/classes-energeticas"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 em Ponte de Lima com vista para o rio Lima",
+            "description": "Em Ponte de Lima, um quarto no rés-do-chão que hoje é escritório.\n\nMoradia geminada T4 · 235 m² · Lote de 292 m² · 526.000 €\nFica em Ribeira, a poucos minutos do centro histórico e a cerca de 500 m da A3.\nSão três pisos com luz natural. Em baixo ficam a cozinha equipada, a sala ampla com recuperador de calor e esse quarto extra. Em cima há mais três quartos, um deles suite, e varandas com o rio Lima ao longe. Na cave há garagem para três carros, lavandaria e arrumos.\nLá fora tem jardim com árvores de fruto, terraço e solário.\nConstruída em 2008 · Certificado energético A · 4 casas de banho · Ar condicionado · Fibra ótica · Ref. 1054177\n\nPara visitar, ligue à Susana Cerqueira, da IAD Portugal: +351 968 571 773",
+            "tags": [
+                "moradia",
+                "imobiliario",
+                "casasavenda",
+                "pontedelima",
+                "altominho",
+                "minho",
+                "moradiat4",
+                "moradiageminada",
+                "riolima",
+                "casasemportugal",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1054177-15wnp",
+    "created_at": "2026-10-21T09:36:19+00:00",
+    "updated_at": "2026-10-21T10:13:37+00:00",
+    "source_path": "clips/uploads/cs2zVMtOO4bbj4IuGHVDXlM9ArldfvnqaY3KZ2S7.mp3",
+    "images": [
+        {
+            "id": "img_eee42741",
+            "path": "clips/uploads/E0OXOKSU9oIP6utUisX1wZmsnJfGrEZ8W2v1ZNFY.jpg",
+            "description": "Fachada moderna cinzenta vista da rua, varanda envidraçada entre palmeiras e muro de pedra clara.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8012bf23",
+            "path": "clips/uploads/33DEsHpB6lzQS6smMvvoWjo3DHCqHD5u3aSOiNg1.jpg",
+            "description": "Casa de banho com lavatório branco de pousar, bancada escura, mosaico branco e plantas decorativas.",
+            "name": "01a153b4ae92a354d1066bab4dcf8a60.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_d81b73f5",
+            "path": "clips/uploads/dyslxDBTo7XGFlBS5ESX2G6vusblfRR6GPsFvteA.jpg",
+            "description": "Fachada em ângulo com portão da garagem, varanda ampla, escadas exteriores e palmeira alta.",
+            "name": "01a1539cd83b108921e2ea4edf93d8bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_41c473e3",
+            "path": "clips/uploads/KhzxSIaCgN8qlOIwDbk80s7sGpAx81f7OCSk4y21.jpg",
+            "description": "Fachada frontal com portão de garagem largo, entrada pavimentada e varanda com plantas por cima.",
+            "name": "01a1539cd8273919d49b7f5689d50260.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6848b070",
+            "path": "clips/uploads/DJ0WyvsFkhtEoPtrljIRtDGVP7zmrFTH1uMfAcIy.jpg",
+            "description": "Vista da varanda sobre cobertura de seixos com claraboia, palmeiras e colinas verdes ao fundo.",
+            "name": "01a153b675145a7459d74ee91386cd38.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7608df88",
+            "path": "clips/uploads/8vxla9XHHgm6KeMXo8849uWlfWItxXGQSmtuAGr2.jpg",
+            "description": "Vista panorâmica da varanda para o vale e montanhas, com sol forte e palmeira à esquerda.",
+            "name": "01a153b4aed6d0eacd354070b49b247c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_07a11346",
+            "path": "clips/uploads/bnfUW4GlPEqbDGw2NG36FULhjUlUSz9VE6j31lQc.jpg",
+            "description": "Jardim em socalcos com muro de pedra, palmeiras, oliveira, escorrega infantil e terraço de tijoleira.",
+            "name": "01a153a2ef135785abe5652fb15fbdf4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c77d9217",
+            "path": "clips/uploads/u6vTVKIqef1mx6PYwqB0SMsfHroiJuc1skahKFGt.jpg",
+            "description": "Varanda comprida junto a janelões, cheia de plantas tropicais, com vista para o jardim e palmeiras.",
+            "name": "01a153a2eee1c9a544552f11d640bf3f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_16f58ddb",
+            "path": "clips/uploads/eHqNp82uab8A7W8gzXZFBNUfpDu9TweGGmdSf0pi.jpg",
+            "description": "Solário com duas espreguiçadeiras em tijoleira, plantas em vasos e sombras de palmeiras ao pôr do sol.",
+            "name": "01a1539cd7b67ce877ab2cedb727978a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b06a304",
+            "path": "clips/uploads/mYDbcIHa6DKtUQemmNiW8tTL8U3J6nBJkECcYtWa.jpg",
+            "description": "Hall de entrada com móvel suspenso preto, espelho de moldura escura, arranjo de flores e porta de madeira.",
+            "name": "01a1539cd82ce3c8d9b4be5b6ca5e7b1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_751f6800",
+            "path": "clips/uploads/Fi2b3L9AjIYOEmkRI2MPeriumIzX3o3LI6RcOfeo.jpg",
+            "description": "Hall de entrada com escada em madeira iluminada, consola escura e arranjo de flores brancas.",
+            "name": "01a1539cd7fe49129261f198a09f2961.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a04b3a05",
+            "path": "clips/uploads/Fa723TTDZzC0CV35LAL84edxdfyFcgkI168VMNRt.jpg",
+            "description": "Cozinha equipada com ilha, eletrodomésticos em inox e mesa redonda com cadeiras vermelhas.",
+            "name": "01a1539cd7c3a911473a09ca7bbe0e4e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e5ad8b8a",
+            "path": "clips/uploads/Ng6uRrsEcJji4cYtZ7x7wEiTaKnMX9CxSqb13UHi.jpg",
+            "description": "Cozinha, ilha com bancada clara, lava-loiça duplo, placa e televisão na parede.",
+            "name": "01a1539cd821d1a67765b96074bf2613.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a2be1d93",
+            "path": "clips/uploads/CplQHQaoe1dtA1UfsdIeJbHM6hUtn9QQiPBUtnwz.jpg",
+            "description": "Zona de refeições da cozinha com cadeiras vermelhas, junto a porta envidraçada para o terraço.",
+            "name": "01a1539cd7edebd4279427af1f71448f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d7e45a90",
+            "path": "clips/uploads/HrsxGG95XwIL7hHPB2Zl7OJhdykDyjDdbNIrpnu5.jpg",
+            "description": "Sala de jantar com recuperador de calor aceso, mesa escura, tapete vermelho e janela ampla.",
+            "name": "01a1539cd80fa7d753cb936d27ef988d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5bfbc36e",
+            "path": "clips/uploads/CgpYh9Dybo9IojfstzRpCobCxIHhSGwAbIsxq5aG.jpg",
+            "description": "Sala de estar ampla com sofás de pele pretos, janelões e varanda com palmeiras.",
+            "name": "01a1539cd80cf0b6997a51944b75aca3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbae8526",
+            "path": "clips/uploads/hQMzwujgQ6OsiHhqh41JtfCG9SNr0D1OyCjZC9ZG.jpg",
+            "description": "Escritório com secretária de vidro escuro, estantes com livros e porta para jardim.",
+            "name": "01a1539cd7c631695a0eaa20f62f4376.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4dad681f",
+            "path": "clips/uploads/RDdaCmxbz5bX46ConymKgghGQTWZg1dGSzLjOkUv.jpg",
+            "description": "Quarto com cama de casal, roupeiro escuro e corredor para casa de banho privativa.",
+            "name": "01a1539cd83afff91d136c90f85748f9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_13134622",
+            "path": "clips/uploads/7XANiJn1SoELXCQ3hLICmjFbw0DctDyJEBQmqSri.jpg",
+            "description": "Casa de banho com dois lavatórios, espelho grande e duche envidraçado.",
+            "name": "01a1539cd7bf1d1a09c3edeeb392078a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b8ff9672",
+            "path": "clips/uploads/O8vDIGT4P5FIfeXN3PufYGBC8zd1r0FYjgXnejzj.jpg",
+            "description": "Quarto suite luminoso com cama branca, quadros na parede e varanda com vista para o rio.",
+            "name": "01a1539cd85a028d359666782c244049.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cac4149b",
+            "path": "clips/uploads/Amtewmfxtakr7zLGRcU26CNEdN3I3TiwkDixuifE.jpg",
+            "description": "Casa de banho ampla da suite, porta aberta, móvel de lavatório escuro, cómoda com flores e candeeiros esféricos.",
+            "name": "01a153b436b57de9cce575bf661ce906.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bda04a0c",
+            "path": "clips/uploads/E8ZNuNyw9e8Qz4yJLhsfIswbZB5LCEk67sLwYzoS.jpg",
+            "description": "Quarto com parede azul, cama de casal e janelas de vidro do chão ao teto com vista para o vale.",
+            "name": "01a1539cd7b9e86e2c79ad2cb596792a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7fa3da46",
+            "path": "clips/uploads/ZEUDKbxAJmacBqzr4ScK3Kss34KWOfqDVvy0ru0a.jpg",
+            "description": "Casa de banho de serviço escura e elegante, bancada preta, lavatório branco, mosaico e iluminação suspensa quente.",
+            "name": "01a1539cd7fe352c845f49d11de7c589.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_6b10e058",
+            "path": "clips/uploads/aA7rtlNhJcQkryiCd9AFwg0nBkRiCF1MlDtsiUII.jpg",
+            "description": "Garagem ampla na cave, chão de mosaico, passadeira, cortina vermelha, porta automática e acesso à lavandaria.",
+            "name": "01a1539cd7b36f1bbc3988e14d50296e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0966e50d",
+            "path": "clips/uploads/jlpaB0kD70PLCLSP5968bE6Ho0kF47Qd0TqaeJmh.jpg",
+            "description": "Lavandaria na cave com três máquinas, armários de madeira, bancada de granito, lava-loiça e aspiração central.",
+            "name": "01a1539cd7bdc33557a5a5956e0667be.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_76eae491",
+            "path": "clips/uploads/Go5eh1YbCPVZtZY8gFsJsLMETO3nItxd88wvF7S8.jpg",
+            "description": "Casa de banho sob a escada com base de duche, sanita, lavatório com móvel escuro e carrinho.",
+            "name": "01a1539cd8124c351ee147111d4a31f2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2c16faea",
+            "path": "clips/uploads/wFNdVfhIzJ8JznJA67TJ5KCjbtMPoSpTTbvEFDhl.jpg",
+            "description": "Casa de banho sob a escada, imagem repetida da anterior: duche, sanita, lavatório escuro e carrinho branco.",
+            "name": "01a1539cd7bfadba7476b51897e8c2aa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dc9cba44",
+            "path": "clips/uploads/HmYv54YIFNEjJbndbjcnNVafRrVYSCG3otN9gN4c.png",
+            "description": "Retrato da consultora Susana Cerqueira, da IAD Portugal.",
+            "name": "Susana Cerqueira.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b0397b5c",
+            "path": "clips/uploads/svMYZT1OTK0DhRzrjlQ5H5a99AoRSpc5PNdtK5cP.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/cs2zVMtOO4bbj4IuGHVDXlM9ArldfvnqaY3KZ2S7.mp3",
+    "transcript": {
+        "duration": 38.47999954223633,
+        "text": "Uma moradia classe energética H, em Ponte de Lima. Fica na Ribeira, a poucos minutos do centro histórico. A autostrada A3 fica a cerca de 500 metros. São três pisos, com luz natural. No resto do chão, cozinha equipada e sala ampla com recuperador de calor. Há ainda um quarto, hoje usado como escritório. Em cima, três quartos, um deles suite. Das varandas, avista-se o Rio Lima ao longe. Na cave, garagem para três carros, lavandaria e arrumos. Lá fora, jardim com árvores de fruto, terraço e solário. 526 mil euros. Para visitar, fale com a Susana Cerqueira, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.1599999964237213
+            },
+            {
+                "word": "moradia",
+                "start": 0.1599999964237213,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "classe",
+                "start": 0.6200000047683716,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "energética",
+                "start": 1.0199999809265137,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "H",
+                "start": 1.6200000047683716,
+                "end": 1.9199999570846558
+            },
+            {
+                "word": "em",
+                "start": 2.140000104904175,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "Ponte",
+                "start": 2.380000114440918,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "de",
+                "start": 2.559999942779541,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "Lima",
+                "start": 2.8399999141693115,
+                "end": 2.9800000190734863
+            },
+            {
+                "word": "Fica",
+                "start": 3.3399999141693115,
+                "end": 3.5399999618530273
+            },
+            {
+                "word": "na",
+                "start": 3.5399999618530273,
+                "end": 3.7200000286102295
+            },
+            {
+                "word": "Ribeira",
+                "start": 3.7200000286102295,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "a",
+                "start": 4.300000190734863,
+                "end": 4.559999942779541
+            },
+            {
+                "word": "poucos",
+                "start": 4.559999942779541,
+                "end": 4.71999979019165
+            },
+            {
+                "word": "minutos",
+                "start": 4.71999979019165,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "do",
+                "start": 5.099999904632568,
+                "end": 5.28000020980835
+            },
+            {
+                "word": "centro",
+                "start": 5.28000020980835,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "histórico",
+                "start": 5.519999980926514,
+                "end": 6
+            },
+            {
+                "word": "A",
+                "start": 6.480000019073486,
+                "end": 6.519999980926514
+            },
+            {
+                "word": "autostrada",
+                "start": 6.519999980926514,
+                "end": 6.980000019073486
+            },
+            {
+                "word": "A3",
+                "start": 6.980000019073486,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "fica",
+                "start": 7.619999885559082,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "a",
+                "start": 7.880000114440918,
+                "end": 8.039999961853027
+            },
+            {
+                "word": "cerca",
+                "start": 8.039999961853027,
+                "end": 8.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 8.239999771118164,
+                "end": 8.420000076293945
+            },
+            {
+                "word": "500",
+                "start": 8.420000076293945,
+                "end": 8.779999732971191
+            },
+            {
+                "word": "metros",
+                "start": 8.779999732971191,
+                "end": 9.260000228881836
+            },
+            {
+                "word": "São",
+                "start": 9.819999694824219,
+                "end": 9.880000114440918
+            },
+            {
+                "word": "três",
+                "start": 9.880000114440918,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "pisos",
+                "start": 10.239999771118164,
+                "end": 10.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 10.779999732971191,
+                "end": 10.9399995803833
+            },
+            {
+                "word": "luz",
+                "start": 10.9399995803833,
+                "end": 11.079999923706055
+            },
+            {
+                "word": "natural",
+                "start": 11.079999923706055,
+                "end": 11.5
+            },
+            {
+                "word": "No",
+                "start": 11.9399995803833,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "resto",
+                "start": 12.039999961853027,
+                "end": 12.199999809265137
+            },
+            {
+                "word": "do",
+                "start": 12.199999809265137,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "chão",
+                "start": 12.640000343322754,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "cozinha",
+                "start": 12.920000076293945,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "equipada",
+                "start": 13.0600004196167,
+                "end": 13.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 13.600000381469727,
+                "end": 13.880000114440918
+            },
+            {
+                "word": "sala",
+                "start": 13.880000114440918,
+                "end": 14.079999923706055
+            },
+            {
+                "word": "ampla",
+                "start": 14.079999923706055,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "com",
+                "start": 14.5600004196167,
+                "end": 14.760000228881836
+            },
+            {
+                "word": "recuperador",
+                "start": 14.760000228881836,
+                "end": 15.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 15.239999771118164,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "calor",
+                "start": 15.739999771118164,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "Há",
+                "start": 16.15999984741211,
+                "end": 16.299999237060547
+            },
+            {
+                "word": "ainda",
+                "start": 16.299999237060547,
+                "end": 16.459999084472656
+            },
+            {
+                "word": "um",
+                "start": 16.459999084472656,
+                "end": 17
+            },
+            {
+                "word": "quarto",
+                "start": 17,
+                "end": 17
+            },
+            {
+                "word": "hoje",
+                "start": 17.440000534057617,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "usado",
+                "start": 17.540000915527344,
+                "end": 17.8799991607666
+            },
+            {
+                "word": "como",
+                "start": 17.8799991607666,
+                "end": 18.079999923706055
+            },
+            {
+                "word": "escritório",
+                "start": 18.079999923706055,
+                "end": 18.81999969482422
+            },
+            {
+                "word": "Em",
+                "start": 19.139999389648438,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "cima",
+                "start": 19.239999771118164,
+                "end": 19.479999542236328
+            },
+            {
+                "word": "três",
+                "start": 19.799999237060547,
+                "end": 20
+            },
+            {
+                "word": "quartos",
+                "start": 20,
+                "end": 20.420000076293945
+            },
+            {
+                "word": "um",
+                "start": 20.700000762939453,
+                "end": 20.81999969482422
+            },
+            {
+                "word": "deles",
+                "start": 20.81999969482422,
+                "end": 21.139999389648438
+            },
+            {
+                "word": "suite",
+                "start": 21.139999389648438,
+                "end": 21.68000030517578
+            },
+            {
+                "word": "Das",
+                "start": 22.18000030517578,
+                "end": 22.280000686645508
+            },
+            {
+                "word": "varandas",
+                "start": 22.280000686645508,
+                "end": 22.780000686645508
+            },
+            {
+                "word": "avista",
+                "start": 22.940000534057617,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "se",
+                "start": 23.18000030517578,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "o",
+                "start": 23.440000534057617,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "Rio",
+                "start": 23.68000030517578,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "Lima",
+                "start": 23.68000030517578,
+                "end": 23.940000534057617
+            },
+            {
+                "word": "ao",
+                "start": 23.940000534057617,
+                "end": 24.34000015258789
+            },
+            {
+                "word": "longe",
+                "start": 24.34000015258789,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "Na",
+                "start": 25.059999465942383,
+                "end": 25.200000762939453
+            },
+            {
+                "word": "cave",
+                "start": 25.200000762939453,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "garagem",
+                "start": 25.940000534057617,
+                "end": 26.200000762939453
+            },
+            {
+                "word": "para",
+                "start": 26.200000762939453,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "três",
+                "start": 26.31999969482422,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "carros",
+                "start": 26.700000762939453,
+                "end": 27.100000381469727
+            },
+            {
+                "word": "lavandaria",
+                "start": 27.3799991607666,
+                "end": 27.780000686645508
+            },
+            {
+                "word": "e",
+                "start": 27.780000686645508,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "arrumos",
+                "start": 28.100000381469727,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "Lá",
+                "start": 28.559999465942383,
+                "end": 29.139999389648438
+            },
+            {
+                "word": "fora",
+                "start": 29.139999389648438,
+                "end": 29.459999084472656
+            },
+            {
+                "word": "jardim",
+                "start": 29.81999969482422,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "com",
+                "start": 29.959999084472656,
+                "end": 30.200000762939453
+            },
+            {
+                "word": "árvores",
+                "start": 30.200000762939453,
+                "end": 30.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 30.479999542236328,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "fruto",
+                "start": 30.979999542236328,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "terraço",
+                "start": 31.280000686645508,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 31.6200008392334,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "solário",
+                "start": 31.899999618530273,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "526",
+                "start": 33.119998931884766,
+                "end": 33.720001220703125
+            },
+            {
+                "word": "mil",
+                "start": 33.720001220703125,
+                "end": 34.02000045776367
+            },
+            {
+                "word": "euros",
+                "start": 34.02000045776367,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "Para",
+                "start": 34.880001068115234,
+                "end": 34.959999084472656
+            },
+            {
+                "word": "visitar",
+                "start": 34.959999084472656,
+                "end": 35.540000915527344
+            },
+            {
+                "word": "fale",
+                "start": 35.81999969482422,
+                "end": 35.81999969482422
+            },
+            {
+                "word": "com",
+                "start": 35.81999969482422,
+                "end": 36.02000045776367
+            },
+            {
+                "word": "a",
+                "start": 36.02000045776367,
+                "end": 36.18000030517578
+            },
+            {
+                "word": "Susana",
+                "start": 36.18000030517578,
+                "end": 36.400001525878906
+            },
+            {
+                "word": "Cerqueira",
+                "start": 36.400001525878906,
+                "end": 36.939998626708984
+            },
+            {
+                "word": "da",
+                "start": 37.15999984741211,
+                "end": 37.34000015258789
+            },
+            {
+                "word": "IAD",
+                "start": 37.34000015258789,
+                "end": 37.70000076293945
+            },
+            {
+                "word": "Portugal",
+                "start": 37.70000076293945,
+                "end": 38.2400016784668
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38.47999954223633,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.1000000000000005,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Ponte de Lima · Classe A",
+                        "params": {
+                            "src": "img_eee42741",
+                            "location": "Ponte de Lima · Ribeira",
+                            "title": "Uma moradia classe energética A em Ponte de Lima",
+                            "facts": "T4 · 235 m² · Classe A",
+                            "name": "Susana Cerqueira",
+                            "cta": "+351 968 571 773",
+                            "tag": "Novo imóvel",
+                            "logoText": "iad Portugal",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.1000000000000005,
+                "end": 6.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Ribeira, Ponte de Lima",
+                        "params": {
+                            "src": "img_7608df88",
+                            "eyebrow": "A minutos do centro histórico"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.4,
+                "end": 9.7,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "A 500 m da A3",
+                        "params": {
+                            "src": "img_d81b73f5",
+                            "eyebrow": "Acessos",
+                            "move": "in"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.7,
+                "end": 12.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Três pisos",
+                        "params": {
+                            "src": "img_751f6800",
+                            "eyebrow": "Luz natural"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.6,
+                "end": 16.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "duo-sobreposto",
+                        "text": "Sala com recuperador",
+                        "params": {
+                            "src": "img_d7e45a90",
+                            "src2": "img_a04b3a05",
+                            "label": "Rés do chão"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.1,
+                "end": 19,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "Quarto ou escritório",
+                        "params": {
+                            "src": "img_dbae8526",
+                            "eyebrow": "Rés do chão"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19,
+                "end": 22.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "janela-arco",
+                        "text": "Quatro quartos, uma suite",
+                        "params": {
+                            "src": "img_b8ff9672",
+                            "eyebrow": "Primeiro andar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.1,
+                "end": 24.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "luz-acender",
+                        "text": "Rio Lima ao longe",
+                        "params": {
+                            "src": "img_6848b070",
+                            "eyebrow": "Das varandas"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.9,
+                "end": 28.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Garagem para três carros",
+                        "params": {
+                            "src": "img_6b10e058",
+                            "src2": "img_0966e50d",
+                            "label": "Cave"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.4,
+                "end": 32.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "faixa-filme",
+                        "text": "Jardim, terraço e solário",
+                        "params": {
+                            "src": "img_07a11346",
+                            "src2": "img_16f58ddb",
+                            "src3": "img_c77d9217",
+                            "label": "Exterior"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.9,
+                "end": 35.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "526.000 €",
+                        "params": {
+                            "src": "img_5bfbc36e",
+                            "label": "Moradia T4",
+                            "sub": "Ponte de Lima"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.4,
+                "end": 38.47999954223633,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Susana Cerqueira · iad Portugal",
+                        "params": {
+                            "src": "img_dc9cba44",
+                            "name": "Susana Cerqueira",
+                            "phone": "+351 968 571 773",
+                            "ami": "iad Portugal · AMI 11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1054177-15wnp/clip.mp4",
+    "error": null
+}

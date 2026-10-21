@@ -25,8 +25,13 @@ trait BuildsAnimationPrompt
      * @param  string  $instructions  extra direction for THIS clip only (the
      *                                project's own manual is read from disk)
      */
-    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true, string $instructions = '', bool $landscape = false): string
+    /**
+     * @param  string[]  $allowedLayers  the layer types this clip may use; empty
+     *                                   falls back to the project's whole allowlist
+     */
+    protected function systemPrompt(string $mode, bool $overlay = false, array $allowedPresents = [], bool $canGenerateImages = true, string $instructions = '', bool $landscape = false, array $allowedLayers = []): string
     {
+        $allowedLayers = $allowedLayers ?: $this->allLayerTypes();
         $style = @file_get_contents(config('contentmachine.clips.style_md')) ?: '';
         $language = ProjectLanguage::name();
         $designRepo = app(DesignSystemRepository::class);
@@ -43,11 +48,12 @@ trait BuildsAnimationPrompt
             : '';
         $customBlock = app(EffectLibrary::class)->promptBlock();
         $backgroundBlock = app(BackgroundLibrary::class)->promptBlock();
-        $layers = implode(', ', $this->allLayerTypes());
+        $layers = implode(', ', $allowedLayers);
         // Site filming and image generation both ride on the image-reveal layer —
         // when it is toggled off in the SFX showcase, the whole image block must
         // go too, or the prompt contradicts the type list and the sanitizer.
-        if (! in_array('image-reveal', $this->allLayerTypes(), true)) {
+        $imagesAllowed = in_array('image-reveal', $allowedLayers, true);
+        if (! $imagesAllowed) {
             $canGenerateImages = false;
         }
         // Intro effects: the FIRST scene should open with one of these (if any are marked).
@@ -56,6 +62,12 @@ trait BuildsAnimationPrompt
             .'The FIRST scene MUST open the video with one of these INTRO effects as its main layer '
             .'(type = one of them), chosen to fit the topic: ['.implode(', ', $introSlugs).']. '
             ."Give it a short hook title, keep it brief, then move on to the content.\n";
+        // Outro effects: the LAST scene should close with one of these.
+        $outroSlugs = app(EffectLibrary::class)->outroSlugs();
+        $outroBlock = empty($outroSlugs) ? '' : "\n# CLOSING (OUTRO)\n"
+            .'The LAST scene MUST close the video with one of these OUTRO effects as its main layer '
+            .'(type = one of them), chosen to fit: ['.implode(', ', $outroSlugs).']. '
+            ."Place it over the closing words (the call to action, the contact, the sign-off) and fill its params from what is said.\n";
         $allowed = ! empty($allowedPresents) ? array_values(array_intersect($this->presents, $allowedPresents)) : $this->presents;
         $allowedLine = 'USE ONLY these "present" values: ['.implode(', ', $allowed).'] — never others.';
         $rule = $overlay
@@ -101,16 +113,47 @@ trait BuildsAnimationPrompt
                 - ONE SCREENSHOT INSTEAD OF A SCROLL — add "site_still": true alongside "site" when the point is the page's TOP: a logo, a headline, an app's main screen, a short scene. The studio then takes a single clean screenshot instead of six seconds of scrolling, which on a brief scene reads as restless.
                 G;
 
+        // With image-reveal off, custom effects that take a `src` can still show
+        // the provided pictures (a project that swapped the built-ins for its own
+        // image effects). Telling the planner "NO IMAGES" there made it drop every
+        // photo — the clip rendered one intro and eleven empty scenes.
+        $library = app(EffectLibrary::class);
+        $efeitosImagem = array_values(array_filter($allowedLayers, fn (string $t) => $t !== 'image-reveal' && $library->usesImage($t)));
+
+        if (! $imagesAllowed && $efeitosImagem !== []) {
+            $imageGuidance = '- There is no "image-reveal" type. PROVIDED IMAGES are shown with these image effects: ['
+                .implode(', ', $efeitosImagem).'] — set params.src to the image id (see CUSTOM BRAND EFFECTS for each one\'s params).'."\n"
+                .'- IF IMAGES are provided, you MUST use each one in at least one scene with one of those effects.'."\n"
+                .'- USE THE WHOLE SET: rotate through ALL of those image effects across the video (each at least once when it fits) '
+                .'— an effect with a title/list suits a scene that lists features, one taking several image ids suits a group of related photos.'."\n"
+                .'- You CANNOT create images or film websites. A scene with no fitting image gets a non-image visual from the allowed types, '
+                .'built from what is said. NEVER leave a scene bare.';
+        } elseif (! $imagesAllowed) {
+            // No image layer exists for this clip at all: neither generated, nor
+            // provided, nor a filmed page. Saying it once, plainly, beats leaving
+            // the "use the provided images" rules in a prompt that has no way to.
+            $imageGuidance = '- NO IMAGES: this clip carries no image layer of any kind — there is no "image-reveal" type, '
+                ."so you can neither show a supplied picture nor film a website. Build EVERY scene's visual out of the "
+                .'spoken point instead: chart, diagram, timeline, comparison, bullet-list, card or terminal. '
+                .'EVERY scene MUST carry a visual layer — when no chart or data fits, distil the point into a card '
+                .'(short title + 1–2 supporting lines) or a bullet-list. NEVER leave a scene as bare karaoke.';
+        }
+
         $imageRevealSchema = $canGenerateImages
             ? '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "generate"?: "<describe an image to CREATE when none provided fits>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "site_still"?: bool, "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
                 .'  - Use EXACTLY ONE of "src" (a provided image id), "generate" (a description → AI image) or "site" (a real page → filmed, or screenshotted with "site_still"). variant controls the motion; prefer "fullscreen"/"pan" and VARY it across scenes.'
             : '- image-reveal:{ "src"?: "<id of a PROVIDED image>", "site"?: "<https URL of a REAL page to scroll-capture on video>", "site_still"?: bool, "caption"?: str, "variant"?: "fullscreen"|"drop-float"|"rise"|"zoom"|"slide"|"pan"|"framed", "direction"?: "left"|"right" }'."\n"
                 .'  - Use EITHER "src" (a provided image id) OR "site" (a real page → filmed, or screenshotted with "site_still") — image generation is OFF, there is no "generate". VARY the variant across scenes.';
+        if (! $imagesAllowed) {
+            $imageRevealSchema = $efeitosImagem !== []
+                ? '- (there is no "image-reveal" type for this clip — show images with the image effects named above)'
+                : '- (there is no "image-reveal" type for this clip — see NO IMAGES above)';
+        }
 
         // What to do with a scene that has no natural chart/data visual. A lone big
         // word is never a whole scene; with images off the fallback is a card/list
         // (never bare), with images on it is a generated image.
-        $bareRule = $canGenerateImages
+        $bareRule = $canGenerateImages && $imagesAllowed
             ? 'If a scene has no real visual, give it an image — never a lone big word, never a bare caption-only frame.'
             : 'If a scene has no chart/data visual, build a card or bullet-list from the spoken point — never a lone big word, and NEVER a bare caption-only frame.';
 
@@ -152,7 +195,7 @@ Times in seconds (float). No markdown or explanations — JSON only.
 # LANGUAGE
 Write ALL visible text (text and labels in params) in {$language} — the PROJECT's language — even when the transcript is in another language.
 ONLY exception: "punchWord", which is copied EXACTLY from the spoken text, so it stays as spoken.
-{$introBlock}
+{$introBlock}{$outroBlock}
 
 # CLIP TYPE — CLASSIFY FIRST (like a professional editor)
 Before planning, infer the TYPE of clip from the transcript and adapt the visual vocabulary.
@@ -268,9 +311,13 @@ PROMPT;
             ? json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
             : '(no research — use what you know, with short labels)';
 
-        $imgList = array_map(fn ($i) => ['id' => $i['id'] ?? '', 'description' => $i['description'] ?? '', 'tone' => $i['tone'] ?? 'mixed'], $images);
+        // The original file name too: instructions name images by it ("main.webp on
+        // the intro"), and the planner must answer with the id, not the name.
+        $imgList = array_map(fn ($i) => array_filter([
+            'id' => $i['id'] ?? '', 'file' => $i['name'] ?? null, 'description' => $i['description'] ?? '', 'tone' => $i['tone'] ?? 'mixed',
+        ], fn ($v) => $v !== null), $images);
         $imagesBlock = ! empty($imgList)
-            ? "\n=== PROVIDED IMAGES (use in 'image-reveal' with params.src = id, where the description fits) ===\n"
+            ? "\n=== PROVIDED IMAGES (show with an image layer — image-reveal or an image effect — params.src = id, where the description fits) ===\n"
                 .json_encode($imgList, JSON_UNESCAPED_UNICODE)."\n"
                 ."CONTRAST: image with 'light' tone → 'ink' (dark) background; 'dark' tone → 'papyrus'/'vellum' (light) background. Never put a light image on a light background nor a dark one on a dark background.\n"
             : '';

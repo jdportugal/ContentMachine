@@ -1,0 +1,1312 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia em pedra com piscina em Valpaços | 495 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.remax.pt/pt/imoveis/123691006-371",
+            "agent": "Cristina Jorge",
+            "phone": "+351 912 224 299",
+            "agency": "RE/MAX Alanorte",
+            "hook": "Uma moradia em Valpaços, com pedra por dentro e por fora.",
+            "voiceover": "Uma moradia em Valpaços, com pedra por dentro e por fora. Fica em Valpaços e Sanfins, no distrito de Vila Real. Lá dentro, sala de estar e sala de jantar. Cozinha com despensa, seis quartos, um deles em suite, e três casas de banho. Na sala, uma lareira com recuperador de calor. Há aquecimento central e portões automáticos. Lá fora, uma piscina e mais pedra à vista. Para viver em família. Quatrocentos e noventa e cinco mil euros. Para visitar, fale com a Cristina Jorge, da RE/MAX Alanorte.",
+            "scenes": [
+                {
+                    "photo": "fachada com pedra",
+                    "vo": "Uma moradia em Valpaços, com pedra por dentro e por fora.",
+                    "caption": "Valpaços, Vila Real"
+                },
+                {
+                    "photo": "exterior com portões automáticos",
+                    "vo": "Fica em Valpaços e Sanfins, no distrito de Vila Real.",
+                    "caption": "Valpaços e Sanfins"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Lá dentro, sala de estar e sala de jantar.",
+                    "caption": "Duas salas"
+                },
+                {
+                    "photo": "sala de jantar",
+                    "vo": "",
+                    "caption": "Sala de jantar"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Cozinha com despensa, seis quartos, um deles em suite, e três casas de banho.",
+                    "caption": "Cozinha com despensa"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "",
+                    "caption": "Seis quartos, uma suite"
+                },
+                {
+                    "photo": "lareira na sala",
+                    "vo": "Na sala, uma lareira com recuperador de calor.",
+                    "caption": "Lareira com recuperador"
+                },
+                {
+                    "photo": "interior com pedra ou radiador",
+                    "vo": "Há aquecimento central e portões automáticos.",
+                    "caption": "Aquecimento central"
+                },
+                {
+                    "photo": "piscina",
+                    "vo": "Lá fora, uma piscina e mais pedra à vista.",
+                    "caption": "Piscina"
+                },
+                {
+                    "photo": "vista geral da moradia",
+                    "vo": "Para viver em família.",
+                    "caption": "Para viver em família"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e noventa e cinco mil euros. Para visitar, fale com a Cristina Jorge, da RE/MAX Alanorte.",
+                    "caption": "495.000 € · Cristina Jorge · RE/MAX Alanorte"
+                }
+            ],
+            "flags": [
+                "Garagem: o texto diz 'Garagem', mas nos detalhes aparece 'Garagem: Não' (e 'Estacionamento: Sim'). Deixei de fora.",
+                "Área do lote: o texto diz 725 m², mas nos detalhes aparece 'Área Total do Lote: 7 500 m²'. Os 725 m² coincidem com a área bruta. Deixei de fora as áreas do lote e da casa (área útil de 700 m²) até confirmar.",
+                "Logo for RE/MAX Alanorte not found — add it by hand."
+            ],
+            "message": "Bom dia Sra. Cristina,\nO meu nome é João Ferreira.\n\nVi a moradia em Valpaços que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Cristina Jorge - and phone number - +351 912 224 299. Agency: RE/MAX Alanorte.\nThe agent's photo is Cristina Jorge.png.\nOn-screen hook for the first frame: «Uma moradia em Valpaços, com pedra por dentro e por fora.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada com pedra → «Valpaços, Vila Real»\n- exterior com portões automáticos → «Valpaços e Sanfins»\n- sala de estar → «Duas salas»\n- sala de jantar → «Sala de jantar»\n- cozinha → «Cozinha com despensa»\n- quarto suite → «Seis quartos, uma suite»\n- lareira na sala → «Lareira com recuperador»\n- interior com pedra ou radiador → «Aquecimento central»\n- piscina → «Piscina»\n- vista geral da moradia → «Para viver em família»\n- end card → «495.000 € · Cristina Jorge · RE/MAX Alanorte»\n\nHere are the house details:\n\nMoradia T6 à venda em Valpaços e Sanfins, Valpaços\nPreço\n495 000 €\nLocalização\nValpaços e Sanfins, Valpaços, Vila Real\nReferência\n123691006-371\nÁrea Bruta m²\n725\nÁrea Útil m²\n700\nÁrea Total do Lote m²\n7 500\nQuartos\n6\nWC/Casas de banho\n3\nAno de Construção\n1991\nEstacionamento\nSim\nGaragem\nNão\nCarregamento de Carros Elétricos\nNão\n\nDescrição\nMoradia implantada em lote c/ 725 m2 c/ muitas aplicações em pedra quer no exterior quer no seu interior;\nPossui excelentes áreas úteis;\nSala de Jantar; Sala de Estar; 6 Quartos (1 suíte); 3 I.S.; Cozinha e despensa;\nLareira na sala com recuperador de calor;\nAquecimento central;\nPortões automáticos;\nGaragem;\nPiscina.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia em pedra à venda em Valpaços e Sanfins, distrito de Vila Real",
+            "summary": "Valpaços é um concelho do interior de Trás-os-Montes, no distrito de Vila Real, onde a agricultura é o principal setor e o azeite e o vinho estão entre os produtos mais importantes. A moradia anunciada fica na freguesia de Valpaços e Sanfins, a sede do concelho.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Área do concelho de Valpaços",
+                    "value": 548.7,
+                    "unit": "km²"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Valpaços pertence ao distrito de Vila Real, no Alto Trás-os-Montes",
+                "A agricultura é o principal setor do concelho, com destaque para a castanha, o azeite, o vinho e a amêndoa",
+                "A região tem cerca de 120 lagares escavados na rocha, alguns da época romana",
+                "Valpaços e Sanfins é a freguesia sede do concelho"
+            ],
+            "sources": [
+                "https://www.valpacos.pt/cmvalpacos/uploads/document/file/3733/atualizacao_diagnostico_social.pdf",
+                "https://aldeiasportuguesas.pt/vila-real/valpacos/",
+                "https://www.gee.gov.pt/pt/docs/doc-o-gee-2/estatisticas-regionais/distritos-concelhos/vila-real/valpacos/3083-valpacos/file",
+                "https://www.infopedia.pt/$valpacos",
+                "https://www.idealista.pt/news/node/74626",
+                "https://www.wikipedia.com/wiki/Valpa%C3%A7os"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia em pedra com piscina em Valpaços | 495 mil €",
+            "description": "Moradia em Sanfins, Valpaços, no distrito de Vila Real, com pedra à vista por dentro e por fora. Tem sala de estar e de jantar, cozinha com despensa, seis quartos (um em suíte), três casas de banho, lareira com recuperador de calor, aquecimento central e piscina. Por 495 mil euros. Para visitar, contacte a Cristina Jorge, da RE/MAX Alenorte.",
+            "tags": [
+                "moradia",
+                "Valpaços",
+                "Vila Real",
+                "casa de pedra",
+                "imobiliário",
+                "moradia com piscina",
+                "RE/MAX",
+                "casa à venda"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-123691006-371-j5nlz",
+    "created_at": "2026-10-12T10:42:33+00:00",
+    "updated_at": "2026-10-12T10:48:33+00:00",
+    "source_path": "clips/uploads/Zw9wDvpFaE8IZ1kl480uD1aU7yhKAzqEGIFKzsOm.mp3",
+    "images": [
+        {
+            "id": "img_8b3fed31",
+            "path": "clips/uploads/60SNVP4IUXmIbvghCfOeKuU8zQ4ydRmEevQNibig.jpg",
+            "description": "Fachada principal em pedra, dois pisos com arcadas e varandas, muro de pedra e escadaria à frente.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc2e045c",
+            "path": "clips/uploads/pu0Tbr360POsSPqBHXp0QeZieNx879uMndC7bBQE.jpg",
+            "description": "Fachada lateral em pedra com varandas, escadaria exterior e pátio calcetado com árvore despida.",
+            "name": "L_c6e6adb3af51417a9d06e0e9e67fd559.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_86197d36",
+            "path": "clips/uploads/L5ANDTJuvcsRUlRyAWoDFeXCUR7UJAskOc9fQlWE.jpg",
+            "description": "Fachada em pedra vista de baixo, escadaria larga, arcos, varandas e torre de pedra ao fundo.",
+            "name": "L_7f1545f3ff4f4672bc3b66da76d328d8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e17dab5c",
+            "path": "clips/uploads/B4zIgj8ge67gtWuLANe7RabITQWFYoT78DA13CkQ.jpg",
+            "description": "Entrada em arco de pedra com portão de ferro, alpendre com lenha e jardim com arbustos.",
+            "name": "L_a17dd22ace594281ba550c5aabca6b39.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_211e2144",
+            "path": "clips/uploads/s8Vgm2ERlzDXGfynRZghfcxSAdpW6o9VAwezarQC.jpg",
+            "description": "Pormenor das paredes exteriores em pedra, com torre, janelas gradeadas, portadas de madeira e arcos.",
+            "name": "L_ace7c74baa3c4c2fae4292dbd14a9904.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f204b0b6",
+            "path": "clips/uploads/kG1lbjulr4ZmRj1l8kq5zP6j4vnhiIKswwbuu43t.jpg",
+            "description": "Alpendre coberto com colunas de pedra, chão de tijoleira, teto de madeira e candeeiro suspenso.",
+            "name": "L_039dae1b28d248a786064611591a8bb4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3edcc99f",
+            "path": "clips/uploads/oNnlKYpjVbf3Qu1b2puwRAleAn5haktmusWk083Z.jpg",
+            "description": "Cozinha com armários de madeira, exaustor inox, placa a gás, máquina de lavar loiça e bancada clara.",
+            "name": "L_5bcd7e843aff4e70a90b01c76bcaafc7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_42e72bf9",
+            "path": "clips/uploads/zWMNcKqCe0X0Q6HtoSv1VJjWQQiWVvJpx0Lzb2mS.jpg",
+            "description": "Casa de banho com louças pretas, banheira, lavatório de coluna e azulejos bege com flores.",
+            "name": "L_a5b4f39d55b544a1b785ec10ee63e47b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9cd4de90",
+            "path": "clips/uploads/GpDZcjTpC0fMoTsgqXvpFwmqh4TxmyI9Erf6qMry.jpg",
+            "description": "Sala com parede de pedra à vista, poltronas estampadas, lustre clássico e mesa de madeira.",
+            "name": "L_06cb3cac81734696a1dce02e9c178efb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c0fc4c43",
+            "path": "clips/uploads/62pIiGXgl8sHVWQtXxjvZcADhgZFMzXT5gDOJxew.jpg",
+            "description": "Sala de estar com parede de pedra, lustre, mesa de madeira, poltronas e cortinas de renda.",
+            "name": "L_848706463e054acc83204e68c7691c96.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c5a3fff0",
+            "path": "clips/uploads/SAi9X2d8hu93HvjekCiS5oS97VgiqhtxhCaBOifn.jpg",
+            "description": "Escritório ou sala com sofá estampado, secretária de madeira, candeeiro de cristal e cortina rendada.",
+            "name": "L_4e828bc2a3e341909e9e99f63f5770b6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3e1756a9",
+            "path": "clips/uploads/7XaXeiFm5wT7NcKR9FMVMe0ZYublMShuXUfwM6nd.jpg",
+            "description": "Sala ampla com paredes de pedra à vista, escada de madeira, janelas em arco e mesa redonda com toalha.",
+            "name": "L_b970633fa83e4ebfa5a02bbd5f113058.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_9674f736",
+            "path": "clips/uploads/0xHxFgBYRvnXdwsgp9aQszjWo0OTrEkZlUpPfeug.jpg",
+            "description": "Hall de entrada com parede de pedra, azulejos azuis, relógio de pé, tapete e chão de tijoleira.",
+            "name": "L_045c3db304da4a5a9a808f6068f75632.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a66db33c",
+            "path": "clips/uploads/pc9px2pPcHSi3ZhvwXo0tGKGMRnXiKauzTF9OlX2.jpg",
+            "description": "Corredor ou hall com azulejos azuis, aparador escuro, espelho, potes de barro e tapete sobre tijoleira.",
+            "name": "L_d0579964ed6a423a80cfaeed40bf35e9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8c490ff2",
+            "path": "clips/uploads/428EMBfCP3XusSGfS2JD0Z7NvivqcboBnA3MLK6M.jpg",
+            "description": "Recanto com paredes de pedra, duas janelas em arco, cadeirão de vime, radiador e chão de tijoleira.",
+            "name": "L_429f08411c7a485199d6c27d5a05a526.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_3f19d02a",
+            "path": "clips/uploads/IqbEPvEWcl8eVrmq4C86BQNGl7pDIgJ57SbJuUIH.jpg",
+            "description": "Sala de pedra com escada de madeira, janelas em arco luminosas, mesa redonda e tapete; ideal para mostrar pedra interior.",
+            "name": "L_2e5d32d49fcc4ca29088e4812d4c9c1b.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_6439481a",
+            "path": "clips/uploads/TZ4GcVSxfzFOMQ9iP5JEGFjew1AC8Z109SiAadFx.jpg",
+            "description": "Quarto com duas camas de solteiro em madeira, colchas coloridas e janela em arco de madeira.",
+            "name": "L_8efe8501922440518fd28fbc2485f581.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3c359c05",
+            "path": "clips/uploads/AZM3L5y6nFVb8dF9Ns1xRPzezxPiVNQBPopfUcHZ.jpg",
+            "description": "Quarto com camas de solteiro, roupeiro grande de madeira, candeeiro de teto e janela em arco.",
+            "name": "L_af2a66daadab4f398f596d79d7c42a79.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8527de61",
+            "path": "clips/uploads/9hYpzMEL24DjLRyLB29O2cWBHzcekYS3IL2pl335.jpg",
+            "description": "Quarto de casal com cama de ferro e latão, cómoda com espelho, radiador e cortina rendada.",
+            "name": "L_bca7dbfd3a5c47c9940597b100cdce0e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_448c9780",
+            "path": "clips/uploads/tYWkgmMEBXYferaqi65tcdYdypOfT51hCXauTTSc.jpg",
+            "description": "Quarto de casal com cama de ferro clássica, colcha azul floral, mesa de cabeceira e chão de madeira.",
+            "name": "L_9880c11cac4c4ae08347a2af46dc1619.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_41b8a347",
+            "path": "clips/uploads/8VN3pwyGP7axfHiEyH5tkK240qEiGBZIwLDoDTWL.jpg",
+            "description": "Quarto ou sala com roupeiro antigo de madeira, cadeirões de madeira estofados, cortina de renda e radiador.",
+            "name": "L_c2ca6eb796b44ce09ebe0b7d87d75903.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3631e6c0",
+            "path": "clips/uploads/JhjZ6bKCZ71eMP69WddgmAPDCB8IgkEeYIXoKVxv.jpg",
+            "description": "Quarto com cama de casal de madeira escura, crucifixo na parede, mesa de cabeceira e cortinas de renda.",
+            "name": "L_207065252f674ac09bcc8b017d381aac.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9df82fe3",
+            "path": "clips/uploads/D2ivyRRA0zmsRuMgyOR8mwoOHOx8fSqYLAoPbHz7.jpg",
+            "description": "Quarto com cama de ferro branca trabalhada, colcha estampada, espelho antigo e secretária com cadeira.",
+            "name": "L_709221630d06463bbd6006b4a5c85975.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_18147e7b",
+            "path": "clips/uploads/qlf6kpqdmsc9lvTMfJR3EvtIXL39fBNx8deDAEVP.jpg",
+            "description": "Quarto infantil com cama de ferro branca, roupeiro embutido de madeira, cortina de renda e brinquedos no chão.",
+            "name": "L_8f9a28a66f2543699651d825eae60e2e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fe175125",
+            "path": "clips/uploads/MciNhqTBSnISX40U0VkqNrBlFgOKzyReeK1bZQOZ.jpg",
+            "description": "Quarto com duas camas individuais de madeira, colchas aos quadrados, cortina de renda e peluches.",
+            "name": "L_1072e2f788dd49bbb0e4e2e50c70b38c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_948bba42",
+            "path": "clips/uploads/xRjAu08jjqMzGJGoGi8bxNbp34KyvGheaYiiajvN.jpg",
+            "description": "Quarto com cama de madeira, roupeiro embutido de madeira e lavatório antigo com jarro e bacia.",
+            "name": "L_1b454fc5d98542ed838c297c03bc1761.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_51e216ef",
+            "path": "clips/uploads/Drjay5sD81IZjYh3iqtx5EHsgKTYsnC1wByxnDTL.jpg",
+            "description": "Sala de jantar com mesa comprida de madeira, cristaleira grande com louça, lustre e azulejos azuis.",
+            "name": "L_7a3d31b95af94884a0769498e869cf18.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6a58902f",
+            "path": "clips/uploads/SLINfZyokxq2OUCD7U855vpfWYNzqSVbnQzN11Zm.jpg",
+            "description": "Sala de estar com lareira e recuperador de calor, parede de pedra à vista, tecto de madeira, sofás claros.",
+            "name": "L_7a54156776ae421ca2c56ae08f9084a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_86607038",
+            "path": "clips/uploads/16IU7beLj3rQmas520n0fiB7idzaS9WkPwuDtlfP.jpg",
+            "description": "Sala pequena com mesa redonda de toalha vermelha, cadeiras de espaldar alto, aparador de madeira e televisão.",
+            "name": "L_00da138ac49d413dbf2992a505ef78cc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5df08e67",
+            "path": "clips/uploads/eGZGQF04NR5n2diQnAhQLDLcCQjziJqhky1Ukw6U.jpg",
+            "description": "Sala com parede de pedra à vista, mesa redonda de toalha vermelha, sofá estampado e candeeiro suspenso.",
+            "name": "L_0685946f375a41dcbac026a5fe406fdb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fa0039f8",
+            "path": "clips/uploads/9quC62ENKwDyCLow6VxCjWeGlz2JRaz2ox2rg1W8.jpg",
+            "description": "Casa de banho com bancada de dois lavatórios amarelos, espelho grande e azulejos com motivos de folhas.",
+            "name": "L_a912873c603b424d97e4b062ea181f02.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1539fb5d",
+            "path": "clips/uploads/8sdJJH4uNfiv25WYS8e0EIn7LIxyIJoqA4oX1BDz.jpg",
+            "description": "Casa de banho com banheira amarela, janela em arco de madeira, radiador e azulejos decorados.",
+            "name": "L_5af60f8132e74fbbb9064b5d1b3b8452.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2e791d4e",
+            "path": "clips/uploads/32FZSWghxAoh6hUj3wuhgpxa3hBdmD1BLnyumTVu.jpg",
+            "description": "Casa de banho azul, com banheira, bidé e sanita azuis e azulejos brancos com padrão azul.",
+            "name": "L_35628cbb0bf946ec8f309902d56d7f18.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e731d77d",
+            "path": "clips/uploads/T5sE1DWxG3tMz3bq2r5l4oGjsThvSbugDHpR3Ojt.jpg",
+            "description": "Arrecadação de pedra à vista com lenha empilhada, provavelmente para a lareira.",
+            "name": "L_6f46b602c17f4f249644f92312b76f20.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1dc23e47",
+            "path": "clips/uploads/skFtp4Qw8ylILwXmiS0MNHSXK8KfuIWGIMTHnPPa.jpg",
+            "description": "Exterior: moradia de pedra vista da rua, atrás de sebe alta e portão verde.",
+            "name": "L_c27fd39a662d4653b0c4a8e76da8798f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c1faed38",
+            "path": "clips/uploads/opEwhNlxXXPynC07VBTudA7uFvNtqm7n9WGoQJ13.jpg",
+            "description": "Fachada lateral da moradia em pedra e paredes brancas, telhado de telha, rodeada de árvores.",
+            "name": "L_7818e28ae9bc4556a721e668309473af.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8de8a8d5",
+            "path": "clips/uploads/UNdmcJnWtq7BHJ2aJFflX6mPQjG5P54FCNgF9iPB.jpg",
+            "description": "Piscina vazia no exterior, com pavimento de pedra e sebe alta de ciprestes ao fundo.",
+            "name": "L_5f835f99e59945debe9921d5a7edeacf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_57da4680",
+            "path": "clips/uploads/sISHWmVHJSoEbP7hqYwO58gtmwT3cEfY4fAUbgPN.jpg",
+            "description": "Piscina vazia vista de lado, muro de pedra, gravilha e sebe de ciprestes.",
+            "name": "L_bb4d2bd50ff247e982e37a78b7a66221.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5a9ee905",
+            "path": "clips/uploads/XbBBxJyNNmkHGaiZZvLNGv5Amu0tPx0HOHsrtEqN.jpg",
+            "description": "Vista elevada da piscina e do jardim, com a vila de Valpaços ao fundo.",
+            "name": "L_c9e177c03a264912a9fdf1d05c1c8067.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ffd80d9f",
+            "path": "clips/uploads/g3kbTU8CtIJpFvxwUQQBpLPrHMPnG1riLjREccLs.jpg",
+            "description": "Jardim com árvores, arbustos, relva e canteiros de gravilha e casca.",
+            "name": "L_a184258bf1054b1aa710f5d517797008.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3a4f1c47",
+            "path": "clips/uploads/qYrsbznRkelyv5SVzoRdpRxyGZ0XiYxf9i7bomwz.jpg",
+            "description": "Terreno arborizado com relvado coberto de folhas secas, árvores despidas e muro de pedra à esquerda.",
+            "name": "L_d59316b357d943578275b8cec7f2f911.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbf06ca2",
+            "path": "clips/uploads/lX8mUrhr4ROexXSoVgpcZwlxDvov7iwPCCBWfuJB.jpg",
+            "description": "Jardim em declive com relva e folhas outonais, tronco de árvore em primeiro plano e montes ao fundo.",
+            "name": "L_c4d6ac7031e94b1ea15d32f7c5b886db.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_26bc8487",
+            "path": "clips/uploads/PiAljYdkEBJ43h4FILzPBAILnGWsRLpWY40fmbZ0.jpg",
+            "description": "Terreno em encosta com oliveiras, cipreste e relvado coberto de folhas, ambiente rural verdejante.",
+            "name": "L_7f9bccc676d2444b87a3fd48435f887e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c3458ab5",
+            "path": "clips/uploads/biUMTJANYx84wuZtAwGYo91ai8iuIpOiGbVDJIEV.jpg",
+            "description": "Relvado do terreno com grande rochedo de granito natural e árvores despidas ao lado.",
+            "name": "L_4e53e9f76627414c90f7eb9d873a6f24.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3e0d98d2",
+            "path": "clips/uploads/522NK6yTGv1O6nkMgVMwZWnhaCPaFI0tcP5rcYUS.jpg",
+            "description": "Fachada de pedra da moradia com telhado de telha, parcialmente escondida por árvores no jardim.",
+            "name": "L_3f1d4b48a24e4993bd0b46716926ffbd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8c6c99ba",
+            "path": "clips/uploads/pNnE0Vyv4gpOWgMfO8KVAZzs7299cH469BnRnsnB.jpg",
+            "description": "Vista elevada do jardim murado em pedra, com relvado, árvores de fruto e casas da vila ao fundo.",
+            "name": "L_1f12a642f5c74324838a5ccf2cb2e3db.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_4495f5d7",
+            "path": "clips/uploads/Y4mb4BoUEsOxsUhm49Ooz9ayMLAf5m2xyxZVCeYi.jpg",
+            "description": "Jardim visto entre árvores, com tronco em primeiro plano, folhagem avermelhada e relvado ao fundo.",
+            "name": "L_786f6f599a4940aba075ec9211fa1f4d.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_c391a944",
+            "path": "clips/uploads/zufacrjJltINWkOY7N6zuKEx6HCmcxnc6Asu5ptj.jpg",
+            "description": "Pátio exterior em calçada de granito, ladeado por sebe alta de ciprestes e árvores.",
+            "name": "L_cc74ae72b5e141aca1ef7fcae7ec9c0a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3abdc4f4",
+            "path": "clips/uploads/EKZidLZgQRE0hbViDBMIiIbOZ0TXSc4VaPtvopVy.jpg",
+            "description": "Vista de janela sobre pátio em calçada portuguesa com árvore, jardim e casas vizinhas ao fundo.",
+            "name": "L_7f5f7d6228264082b288053189c057f1.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_0af6d8f8",
+            "path": "clips/uploads/IRU87ZmWQ1bUF035GWGYGwov8wnj8O1lPrWGTSM7.jpg",
+            "description": "Caminho em calçada de pedra junto a relvado, árvore despida e grande rochedo de granito ao fundo.",
+            "name": "L_1f15db0b0bf94f10bf88b4350116b2f6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_71c01672",
+            "path": "clips/uploads/XxMHkLwnMsmqg35xHiuB0EfcR8MYlOF6fDsj0r69.png",
+            "description": "Retrato do consultor Cristina Jorge, da RE/MAX Alanorte.",
+            "name": "Cristina Jorge.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/Zw9wDvpFaE8IZ1kl480uD1aU7yhKAzqEGIFKzsOm.mp3",
+    "transcript": {
+        "duration": 30.799999237060547,
+        "text": "Uma moradia em Valpaços, com pedra por dentro e por fora. Fica em Valpaços e Sanfins, no distrito de Vila Real. Lá dentro, sala de estar e sala de jantar. Cozinha com dispensa, seis quartos, um deles em suíte, e três casas de banho. Na sala, uma lareira com recuperador de calor. Há aquecimento central e portões automáticos. Lá fora, uma piscina e mais pedra à vista. Para viver em família, 495 mil euros. Para visitar, fale com a Cristina Jorge, da Remax Alenorte.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "moradia",
+                "start": 0.18000000715255737,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "em",
+                "start": 0.5799999833106995,
+                "end": 0.7799999713897705
+            },
+            {
+                "word": "Valpaços",
+                "start": 0.7799999713897705,
+                "end": 1.340000033378601
+            },
+            {
+                "word": "com",
+                "start": 1.5399999618530273,
+                "end": 1.7999999523162842
+            },
+            {
+                "word": "pedra",
+                "start": 1.7999999523162842,
+                "end": 2.0399999618530273
+            },
+            {
+                "word": "por",
+                "start": 2.0399999618530273,
+                "end": 2.3399999141693115
+            },
+            {
+                "word": "dentro",
+                "start": 2.3399999141693115,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "e",
+                "start": 2.6600000858306885,
+                "end": 2.940000057220459
+            },
+            {
+                "word": "por",
+                "start": 2.940000057220459,
+                "end": 3.3399999141693115
+            },
+            {
+                "word": "fora",
+                "start": 3.3399999141693115,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "Fica",
+                "start": 3.859999895095825,
+                "end": 3.9600000381469727
+            },
+            {
+                "word": "em",
+                "start": 3.9600000381469727,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "Valpaços",
+                "start": 4.099999904632568,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "e",
+                "start": 4.619999885559082,
+                "end": 4.860000133514404
+            },
+            {
+                "word": "Sanfins",
+                "start": 4.860000133514404,
+                "end": 5.400000095367432
+            },
+            {
+                "word": "no",
+                "start": 5.599999904632568,
+                "end": 5.71999979019165
+            },
+            {
+                "word": "distrito",
+                "start": 5.71999979019165,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "de",
+                "start": 6.039999961853027,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "Vila",
+                "start": 6.300000190734863,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "Real",
+                "start": 6.460000038146973,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "Lá",
+                "start": 7.199999809265137,
+                "end": 7.320000171661377
+            },
+            {
+                "word": "dentro",
+                "start": 7.320000171661377,
+                "end": 7.679999828338623
+            },
+            {
+                "word": "sala",
+                "start": 8.180000305175781,
+                "end": 8.180000305175781
+            },
+            {
+                "word": "de",
+                "start": 8.180000305175781,
+                "end": 8.479999542236328
+            },
+            {
+                "word": "estar",
+                "start": 8.479999542236328,
+                "end": 8.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 8.65999984741211,
+                "end": 9.020000457763672
+            },
+            {
+                "word": "sala",
+                "start": 9.020000457763672,
+                "end": 9.15999984741211
+            },
+            {
+                "word": "de",
+                "start": 9.15999984741211,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "jantar",
+                "start": 9.640000343322754,
+                "end": 9.699999809265137
+            },
+            {
+                "word": "Cozinha",
+                "start": 10.220000267028809,
+                "end": 10.34000015258789
+            },
+            {
+                "word": "com",
+                "start": 10.34000015258789,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "dispensa",
+                "start": 10.600000381469727,
+                "end": 11.079999923706055
+            },
+            {
+                "word": "seis",
+                "start": 11.539999961853027,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "quartos",
+                "start": 11.680000305175781,
+                "end": 12.140000343322754
+            },
+            {
+                "word": "um",
+                "start": 12.399999618530273,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "deles",
+                "start": 12.460000038146973,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "em",
+                "start": 12.640000343322754,
+                "end": 12.920000076293945
+            },
+            {
+                "word": "suíte",
+                "start": 12.920000076293945,
+                "end": 13.180000305175781
+            },
+            {
+                "word": "e",
+                "start": 13.359999656677246,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "três",
+                "start": 13.579999923706055,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "casas",
+                "start": 13.800000190734863,
+                "end": 14.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 14.079999923706055,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "banho",
+                "start": 14.420000076293945,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "Na",
+                "start": 14.84000015258789,
+                "end": 15.020000457763672
+            },
+            {
+                "word": "sala",
+                "start": 15.020000457763672,
+                "end": 15.279999732971191
+            },
+            {
+                "word": "uma",
+                "start": 15.520000457763672,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "lareira",
+                "start": 15.680000305175781,
+                "end": 15.9399995803833
+            },
+            {
+                "word": "com",
+                "start": 15.9399995803833,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "recuperador",
+                "start": 16.18000030517578,
+                "end": 16.65999984741211
+            },
+            {
+                "word": "de",
+                "start": 16.65999984741211,
+                "end": 17.18000030517578
+            },
+            {
+                "word": "calor",
+                "start": 17.18000030517578,
+                "end": 17.18000030517578
+            },
+            {
+                "word": "Há",
+                "start": 17.559999465942383,
+                "end": 17.739999771118164
+            },
+            {
+                "word": "aquecimento",
+                "start": 17.739999771118164,
+                "end": 18.079999923706055
+            },
+            {
+                "word": "central",
+                "start": 18.079999923706055,
+                "end": 18.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 18.6200008392334,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "portões",
+                "start": 18.8799991607666,
+                "end": 19.15999984741211
+            },
+            {
+                "word": "automáticos",
+                "start": 19.15999984741211,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "Lá",
+                "start": 20.360000610351562,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "fora",
+                "start": 20.540000915527344,
+                "end": 20.760000228881836
+            },
+            {
+                "word": "uma",
+                "start": 21.020000457763672,
+                "end": 21.200000762939453
+            },
+            {
+                "word": "piscina",
+                "start": 21.200000762939453,
+                "end": 21.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 21.600000381469727,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "mais",
+                "start": 21.959999084472656,
+                "end": 22.260000228881836
+            },
+            {
+                "word": "pedra",
+                "start": 22.260000228881836,
+                "end": 22.540000915527344
+            },
+            {
+                "word": "à",
+                "start": 22.540000915527344,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "vista",
+                "start": 22.959999084472656,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "Para",
+                "start": 23.34000015258789,
+                "end": 23.459999084472656
+            },
+            {
+                "word": "viver",
+                "start": 23.459999084472656,
+                "end": 23.739999771118164
+            },
+            {
+                "word": "em",
+                "start": 23.739999771118164,
+                "end": 23.920000076293945
+            },
+            {
+                "word": "família",
+                "start": 23.920000076293945,
+                "end": 24.299999237060547
+            },
+            {
+                "word": "495",
+                "start": 24.799999237060547,
+                "end": 25.940000534057617
+            },
+            {
+                "word": "mil",
+                "start": 25.940000534057617,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "euros",
+                "start": 26.280000686645508,
+                "end": 26.65999984741211
+            },
+            {
+                "word": "Para",
+                "start": 26.65999984741211,
+                "end": 27.219999313354492
+            },
+            {
+                "word": "visitar",
+                "start": 27.219999313354492,
+                "end": 27.84000015258789
+            },
+            {
+                "word": "fale",
+                "start": 28.18000030517578,
+                "end": 28.18000030517578
+            },
+            {
+                "word": "com",
+                "start": 28.18000030517578,
+                "end": 28.280000686645508
+            },
+            {
+                "word": "a",
+                "start": 28.280000686645508,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "Cristina",
+                "start": 28.399999618530273,
+                "end": 28.700000762939453
+            },
+            {
+                "word": "Jorge",
+                "start": 28.700000762939453,
+                "end": 29.139999389648438
+            },
+            {
+                "word": "da",
+                "start": 29.31999969482422,
+                "end": 29.479999542236328
+            },
+            {
+                "word": "Remax",
+                "start": 29.479999542236328,
+                "end": 29.940000534057617
+            },
+            {
+                "word": "Alenorte",
+                "start": 29.940000534057617,
+                "end": 30.559999465942383
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 30.799999237060547,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8000000000000007,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia T6 em pedra",
+                        "params": {
+                            "src": "img_8b3fed31",
+                            "avatar": "img_71c01672",
+                            "eyebrow": "MORADIA T6",
+                            "title": "Uma moradia em Valpaços, com pedra por dentro e por fora.",
+                            "price": "495.000 €",
+                            "location": "Valpaços · 700 m² · 6 quartos",
+                            "agentName": "Cristina Jorge",
+                            "phone": "+351 912 224 299",
+                            "legal": "RE/MAX Alanorte"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8000000000000007,
+                "end": 7.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Valpaços e Sanfins, Vila Real",
+                        "params": {
+                            "src": "img_1dc23e47",
+                            "src2": "img_cc2e045c",
+                            "srcs": [
+                                "img_1dc23e47",
+                                "img_cc2e045c",
+                                "img_c1faed38",
+                                "img_86197d36",
+                                "img_211e2144",
+                                "img_3e0d98d2",
+                                "img_f204b0b6",
+                                "img_c391a944",
+                                "img_3abdc4f4",
+                                "img_ffd80d9f",
+                                "img_3a4f1c47",
+                                "img_dbf06ca2",
+                                "img_26bc8487",
+                                "img_c3458ab5",
+                                "img_8c6c99ba",
+                                "img_4495f5d7",
+                                "img_0af6d8f8",
+                                "img_57da4680"
+                            ],
+                            "angle": 11,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.1,
+                "end": 9.85,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Duas salas e sala de jantar",
+                        "params": {
+                            "src": "img_c0fc4c43",
+                            "src2": "img_51e216ef",
+                            "src3": "img_9cd4de90",
+                            "src4": "img_5df08e67",
+                            "srcs": [
+                                "img_c0fc4c43",
+                                "img_51e216ef",
+                                "img_9cd4de90",
+                                "img_5df08e67",
+                                "img_c5a3fff0",
+                                "img_86607038",
+                                "img_3e1756a9",
+                                "img_9674f736",
+                                "img_a66db33c"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.85,
+                "end": 12.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Cozinha com despensa",
+                        "params": {
+                            "src": "img_3edcc99f",
+                            "title": "Cozinha com despensa",
+                            "items": [
+                                "Cozinha equipada",
+                                "Despensa",
+                                "6 quartos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.3,
+                "end": 14.75,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Seis quartos, uma suite",
+                        "params": {
+                            "src": "img_448c9780",
+                            "src2": "img_8527de61",
+                            "src3": "img_6439481a",
+                            "src4": "img_3c359c05",
+                            "src5": "img_3631e6c0",
+                            "srcs": [
+                                "img_448c9780",
+                                "img_8527de61",
+                                "img_6439481a",
+                                "img_3c359c05",
+                                "img_3631e6c0",
+                                "img_9df82fe3",
+                                "img_18147e7b",
+                                "img_fe175125",
+                                "img_948bba42",
+                                "img_41b8a347",
+                                "img_42e72bf9",
+                                "img_fa0039f8",
+                                "img_1539fb5d",
+                                "img_2e791d4e"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.75,
+                "end": 17.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Lareira com recuperador",
+                        "params": {
+                            "src": "img_6a58902f",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.4,
+                "end": 20.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Aquecimento central · Portões automáticos",
+                        "params": {
+                            "src": "img_8c490ff2",
+                            "src2": "img_3f19d02a",
+                            "src3": "img_e17dab5c",
+                            "src4": "img_e731d77d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.2,
+                "end": 23.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Piscina",
+                        "params": {
+                            "src": "img_8de8a8d5",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.2,
+                "end": 26.66,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Para viver em família",
+                        "params": {
+                            "src": "img_5a9ee905",
+                            "zoom": 1.35
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.66,
+                "end": 30.799999237060547,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Cristina Jorge",
+                        "params": {
+                            "src": "img_71c01672",
+                            "name": "Cristina Jorge",
+                            "role": "Consultora imobiliária · RE/MAX Alanorte",
+                            "buttons": "+351 912 224 299 | Marque a sua visita",
+                            "phone": "+351 912 224 299"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-123691006-371-j5nlz/clip.mp4",
+    "error": null
+}

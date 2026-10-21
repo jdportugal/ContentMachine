@@ -1,0 +1,1128 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T6 com dois pisos independentes em Viana do Castelo",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-6-quartos-viana-do-castelo-215m2/r1024832",
+            "agent": "Virginia Abadesso",
+            "phone": "+351930580698",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia em Vila Franca com dois pisos independentes.",
+            "voiceover": "Uma moradia em Vila Franca com dois pisos independentes. Fica numa zona sossegada e residencial, perto de Viana do Castelo. Tem bons acessos às principais vias. Cada piso tem três quartos com roupeiros, cozinha equipada e casa de banho com duche. Ao todo, seis quartos e quase duzentos metros úteis. Janelas de vidro duplo com rutura térmica e acústica. Estores elétricos e pré-instalação de ar condicionado. Cada piso tem o seu anexo para arrumação e o seu logradouro. O lote tem seiscentos metros quadrados. Boa exposição solar e muita luz natural. Para viver em família, ou para investir. Quinhentos e oitenta mil euros. Para visitar, fale com a Virginia Abadesso, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Uma moradia em Vila Franca com dois pisos independentes.",
+                    "caption": "Vila Franca, Viana do Castelo"
+                },
+                {
+                    "photo": "rua / envolvente da casa",
+                    "vo": "Fica numa zona sossegada e residencial, perto de Viana do Castelo. Tem bons acessos às principais vias.",
+                    "caption": "Zona sossegada"
+                },
+                {
+                    "photo": "quarto com roupeiro embutido",
+                    "vo": "Cada piso tem três quartos com roupeiros,",
+                    "caption": "Três quartos por piso"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "cozinha equipada",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "casa de banho com base de duche",
+                    "vo": "e casa de banho com duche.",
+                    "caption": "Casa de banho com duche"
+                },
+                {
+                    "photo": "vista geral de um piso / zona ampla",
+                    "vo": "Ao todo, seis quartos e quase duzentos metros úteis.",
+                    "caption": "Seis quartos"
+                },
+                {
+                    "photo": "janela com estore elétrico",
+                    "vo": "Janelas de vidro duplo com rutura térmica e acústica. Estores elétricos e pré-instalação de ar condicionado.",
+                    "caption": "Vidro duplo e estores elétricos"
+                },
+                {
+                    "photo": "logradouro com anexo",
+                    "vo": "Cada piso tem o seu anexo para arrumação e o seu logradouro.",
+                    "caption": "Anexo e logradouro"
+                },
+                {
+                    "photo": "exterior / lote com luz de dia",
+                    "vo": "O lote tem seiscentos metros quadrados. Boa exposição solar e muita luz natural.",
+                    "caption": "Lote de 600 m²"
+                },
+                {
+                    "photo": "fachada (plano final)",
+                    "vo": "Para viver em família, ou para investir.",
+                    "caption": "Para viver ou investir"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quinhentos e oitenta mil euros. Para visitar, fale com a Virginia Abadesso, da IAD Portugal.",
+                    "caption": "580.000 € · Virginia Abadesso · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Detalhes indicam 'property.feature.heating' (campo por traduzir): não se sabe que tipo de aquecimento existe. Ficou de fora.",
+                "'Varanda', '2 estacionamentos' e 'Sala de estar' só aparecem nos detalhes, não na descrição (que descreve cada piso sem sala). Ficaram de fora; confirmar com a consultora.",
+                "Preço de 580.000 € para uma moradia de 1987, certificado energético E, 215 m² em Vila Franca parece alto para a zona. Confirmar. O hook não usa o preço.",
+                "Ano de construção (1987) e certificado energético E não foram mencionados de propósito."
+            ],
+            "message": "Bom dia Sra. Virginia,\nO meu nome é João Ferreira.\n\nVi a moradia T6 em Vila Franca, Viana do Castelo, que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 6 quartos de 215 m² em viana do castelo",
+            "price": 580000,
+            "details": {
+                "Preço": "580 000 €",
+                "Localização": "viana do castelo, 4935-620",
+                "Referência": "1024832",
+                "Área Bruta m²": "215",
+                "Área Total do Lote m²": "600",
+                "Quartos": 6,
+                "Ano de Construção": 1987,
+                "Certificado Energético": "E",
+                "Características": "215 m² área bruta, 196 m² úteis, 2 casas de banho, 2 estacionamentos, Varanda, Sala de estar, property.feature.heating, Construído em 1987"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Virginia Abadesso - and phone number - +351930580698. Agency: IAD Portugal.\nThe agent's photo is Virginia Abadesso.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma moradia em Vila Franca com dois pisos independentes.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Vila Franca, Viana do Castelo»\n- rua / envolvente da casa → «Zona sossegada»\n- quarto com roupeiro embutido → «Três quartos por piso»\n- cozinha equipada → «Cozinha equipada»\n- casa de banho com base de duche → «Casa de banho com duche»\n- vista geral de um piso / zona ampla → «Seis quartos»\n- janela com estore elétrico → «Vidro duplo e estores elétricos»\n- logradouro com anexo → «Anexo e logradouro»\n- exterior / lote com luz de dia → «Lote de 600 m²»\n- fachada (plano final) → «Para viver ou investir»\n- end card → «580.000 € · Virginia Abadesso · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 6 quartos de 215 m² em viana do castelo\nPreço\n580 000 €\nLocalização\nviana do castelo, 4935-620\nReferência\n1024832\nÁrea Bruta m²\n215\nÁrea Total do Lote m²\n600\nQuartos\n6\nAno de Construção\n1987\nCertificado Energético\nE\nCaracterísticas\n215 m² área bruta, 196 m² úteis, 2 casas de banho, 2 estacionamentos, Varanda, Sala de estar, property.feature.heating, Construído em 1987\n\nDescrição\nUma moradia espetacularmente bem pensada para o conforto e a qualidade de vida!\n\nApresentamos esta fantástica moradia, ideal para quem valoriza espaços amplos, funcionalidade e privacidade. \nCom dois pisos independentes, cada andar dispõe de 3 quartos com roupeiros embutidos, cozinha equipada com micro-ondas, forno, placa e exaustor, WC com base de duche e áreas generosas, pensadas para proporcionar o máximo conforto.\n\nA moradia conta ainda com janelas de vidro duplo com rutura térmica e acústica, estores elétricos e pré-instalação de ar condicionado.\n\nAmbos os pisos possuem o seu próprio anexo para arrumação e logradouro, oferecendo espaços exteriores para desfrutar em família ou simplesmente relaxar.\n\nLocalizada numa zona sossegada, com excelente exposição solar e muita luminosidade, esta é uma moradia que alia conforto, funcionalidade e versatilidade, perfeita para habitar ou investir.\n\n✨ Uma casa pensada ao detalhe para que se sinta bem todos os dias.\n\n📞 Contacte-me para mais informações ou agende já a sua visita!\n\nCONHECE VILA FRANCA, EM VIANA DO CASTELO \n\nÉ uma zona sossegada e predominantemente residencial, com ambiente de freguesia, boa exposição solar e acessos relativamente fáceis a Viana do Castelo e às principais vias rodoviárias. É procurada por quem quer tranquilidade e espaço, sem ficar demasiado afastado da cidade.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia de dois pisos independentes em Vila Franca, Viana do Castelo",
+            "summary": "Moradia com 6 quartos, cerca de 200 m² úteis e lote de 600 m² em Vila Franca, freguesia do concelho de Viana do Castelo. Está à venda por 580 mil euros. Em 2026, o preço médio pedido no concelho ronda os 2.330 €/m².",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Preço médio pedido no concelho de Viana do Castelo (ago 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço do imóvel",
+                    "value": 580000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Quartos no total (2 pisos)",
+                    "value": 6,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Área do lote",
+                    "value": 600,
+                    "unit": "m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Imóvel vs. mercado local",
+                    "left": {
+                        "title": "Esta moradia",
+                        "points": [
+                            "580.000 € por cerca de 200 m² úteis",
+                            "Cerca de 2.900 €/m² (estimativa)",
+                            "2 pisos independentes com 3 quartos cada"
+                        ]
+                    },
+                    "right": {
+                        "title": "Concelho de Viana do Castelo (2026)",
+                        "points": [
+                            "Cerca de 2.330 €/m² de preço médio pedido",
+                            "Valores de anúncios, não de escritura"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Vila Franca é uma freguesia do concelho de Viana do Castelo",
+                "2 pisos independentes: dá para viver em família ou arrendar",
+                "Vidros duplos com corte térmico e acústico e pré-instalação de AC",
+                "Cada piso tem o seu anexo e o seu logradouro"
+            ],
+            "sources": [
+                "https://www.idealista.pt/media/relatorios-preco-habitacao/venda/viana-do-castelo/",
+                "https://imotrack.pt/mercado/viana-do-castelo/viana-do-castelo",
+                "https://vocabs.rossio.fcsh.unl.pt/pub/lugares/pt/page/c_1a56f4c2?clang=en"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T6 com dois pisos independentes em Viana do Castelo",
+            "description": "Seis quartos em dois pisos independentes, em Vila Franca, Viana do Castelo\n\n580.000 € · Moradia T6 · 196 m² úteis · Lote de 600 m²\n\nFica numa zona residencial e sossegada, com bons acessos às principais vias.\nCada piso funciona como uma casa: três quartos com roupeiros, cozinha equipada e casa de banho com duche. Cada um tem também o seu anexo para arrumação e o seu logradouro.\nAs janelas têm vidro duplo com rotura térmica e acústica. Há estores elétricos e pré-instalação de ar condicionado. O lote tem boa exposição solar e muita luz natural.\nServe para viver em família ou para investir.\n\nConstruída em 1987 · 215 m² brutos · Varanda · 2 lugares de estacionamento · Certificado energético E · Ref. 1024832\n\nPara visitar, ligue à Virginia Abadesso, IAD Portugal: +351 930 580 698",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "casasavenda",
+                "vianadocastelo",
+                "vilafranca",
+                "altominho",
+                "moradiat6",
+                "doispisos",
+                "investimentoimobiliario",
+                "casaparafamilia",
+                "iadportugal",
+                "portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1024832-k99rf",
+    "created_at": "2026-10-19T09:09:26+00:00",
+    "updated_at": "2026-10-19T09:58:41+00:00",
+    "source_path": "clips/uploads/aYYJZUMTFobcWek5tf4yTw6PtT15MhNEB5BbinId.mp3",
+    "images": [
+        {
+            "id": "img_2f7fff55",
+            "path": "clips/uploads/weChwqLIYtgx7WCklAR91BekcbxUVKYY6KqmSOiT.jpg",
+            "description": "Fachada da moradia branca de dois pisos, com escadaria exterior, varanda corrida, telhado de telha e céu azul.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6e96f757",
+            "path": "clips/uploads/N7MuL5cEm5j0rUVXZruaoOlHWD9ntmWU1Xy7bN7x.jpg",
+            "description": "Varanda coberta do piso superior com guarda em ferro, porta de entrada e vista para montanhas.",
+            "name": "01a0c2fd320ddd98aef7ee71b5f6ee1e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_79b31efb",
+            "path": "clips/uploads/hf1WarqsGIgJ2cMQDwBn9Nr9L6Mt4CdbjSSISVwp.jpg",
+            "description": "Varanda do piso superior, com janela de caixilharia preta, estores e vista para a encosta verde.",
+            "name": "01a0c2fd51b809f936b5d631d74b5b8c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_91b77a0e",
+            "path": "clips/uploads/8ZdzaRWlwq6w7103e6xGlBi7dGaZCd74bHRbm6Gi.jpg",
+            "description": "Sala ampla e vazia, com chão flutuante cinza, janelas pretas, porta para a varanda e muita luz.",
+            "name": "01a0c2fd9396c792924780e261efc05f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9bc91137",
+            "path": "clips/uploads/OZrouUmxv92cKNc3MzJh4jpkZwQYHXFctkqZZnlE.jpg",
+            "description": "Quarto vazio com janela tripla para os telhados vizinhos, chão flutuante cinza e paredes brancas.",
+            "name": "01a0c2fdf985dddaf96d759fcc0cb3ea.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bfac1405",
+            "path": "clips/uploads/fPZK6CxubXA4toNPIKLqABAL3XYwT3Blwz0HuOf2.jpg",
+            "description": "Quarto com roupeiro embutido de portas de correr brancas, janela preta e chão flutuante cinza.",
+            "name": "01a0c2fdf96f4386e24e1e88fa9eaabe.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e278cc3d",
+            "path": "clips/uploads/plVKnhagf1zv6J1LwGxGouqQoEZEFdNFnIrq6uXm.jpg",
+            "description": "Quarto luminoso com roupeiro embutido de portas de correr, janela grande e sol a entrar no chão.",
+            "name": "01a0c2fe218fd25ab154dba64ec8d4e9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_22ef249e",
+            "path": "clips/uploads/0FrQoyrPNGAojLUtON8vpV86AARKOuRTXXV38q3N.jpg",
+            "description": "Casa de banho em mármore cinza, com espelho redondo, móvel de lavatório branco, torneira preta e sanita.",
+            "name": "01a0c2fe61d6a9ed0df93af5f2d5082c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9eb0264f",
+            "path": "clips/uploads/ukbMgJfN8EHciuxmP22f9Mx0Mobuom8A8aaUKTm2.jpg",
+            "description": "Casa de banho em mármore cinza, com espelho redondo iluminado, lavatório branco e pequena janela.",
+            "name": "01a0c2fe61d68ada65410ac713067844.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_32a431e1",
+            "path": "clips/uploads/NxfOZOMfTLRcvNXqkpeNB4ecr7EgqYqHhpDxL3cd.jpg",
+            "description": "Casa de banho com duche amplo, base preta, resguardo de vidro e coluna de duche preta.",
+            "name": "01a0c2fe844e8b1865f472e3c8e918a6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_13af927e",
+            "path": "clips/uploads/GXtU7e81x4U2KQ5hyLei540v5nIRxp6sE9nxtRd9.jpg",
+            "description": "Fachada frontal da moradia branca de dois pisos com varanda, telhado de telha e portão com pontas douradas.",
+            "name": "01a0c2fd138300a7857c8f33a6892095.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7613f554",
+            "path": "clips/uploads/TSbCeVkow5bZPkGuPGTCCwgYzkO5zwiZGgHKEXEL.jpg",
+            "description": "Fachada lateral da moradia com jardim relvado, varanda no primeiro piso, terraço e muito sol.",
+            "name": "01a0d7802ddf012ad682de85c471f204.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e464c729",
+            "path": "clips/uploads/NrHae1D2vhNQY61OxadkQ9nD7hE61D88aiCTVFvM.png",
+            "description": "Certificado energético da moradia com escala A+ a F, classe E (210%) destacada a laranja.",
+            "name": "01a0c2fedd8c16a6064716e05e8cd29c.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_69a8cc66",
+            "path": "clips/uploads/EeCLXBu0SF6cH0kuXsrtplseDW6inOW3SEdtMcyK.png",
+            "description": "Retrato da consultora Virginia Abadesso, da IAD Portugal.",
+            "name": "Virginia Abadesso.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ac727de7",
+            "path": "clips/uploads/N1qDgwhR5QHXhUENvs9avzXIyj9tuO7herPfOWVq.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/aYYJZUMTFobcWek5tf4yTw6PtT15MhNEB5BbinId.mp3",
+    "transcript": {
+        "duration": 41.599998474121094,
+        "text": "Uma moradia em Vila Franca com dois pisos independentes. Fica numa zona sossegada e residencial, perto de Viena do Castelo. Tem bons acessos às principais vias. Cada piso tem 3 quartos com roupeiros, cozinha equipada e casa de banho com duches. Ao todo, 6 quartos e quase 200 metros úteis. Janelas de vidro duplo com rotura térmica e acústica. Extors elétricos e pré-instalação de ar-condicionado. Cada piso tem o seu anexo para arrumação e o seu lugrado. O lote tem 600 metros quadrados, boa exposição solar e muita luz natural. Para viver em família ou para investir, 580 mil euros. Para visitar, fale com a Virgínia Abadeço, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.20000000298023224
+            },
+            {
+                "word": "moradia",
+                "start": 0.20000000298023224,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "em",
+                "start": 0.6200000047683716,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "Vila",
+                "start": 0.800000011920929,
+                "end": 1.1200000047683716
+            },
+            {
+                "word": "Franca",
+                "start": 1.1200000047683716,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "com",
+                "start": 1.440000057220459,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "dois",
+                "start": 1.6799999475479126,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "pisos",
+                "start": 2.059999942779541,
+                "end": 2.3399999141693115
+            },
+            {
+                "word": "independentes",
+                "start": 2.3399999141693115,
+                "end": 3.2200000286102295
+            },
+            {
+                "word": "Fica",
+                "start": 3.5399999618530273,
+                "end": 3.619999885559082
+            },
+            {
+                "word": "numa",
+                "start": 3.619999885559082,
+                "end": 3.859999895095825
+            },
+            {
+                "word": "zona",
+                "start": 3.859999895095825,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "sossegada",
+                "start": 4.059999942779541,
+                "end": 4.71999979019165
+            },
+            {
+                "word": "e",
+                "start": 4.71999979019165,
+                "end": 5
+            },
+            {
+                "word": "residencial",
+                "start": 5,
+                "end": 5.639999866485596
+            },
+            {
+                "word": "perto",
+                "start": 5.960000038146973,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "de",
+                "start": 6.099999904632568,
+                "end": 6.360000133514404
+            },
+            {
+                "word": "Viena",
+                "start": 6.360000133514404,
+                "end": 6.519999980926514
+            },
+            {
+                "word": "do",
+                "start": 6.519999980926514,
+                "end": 6.699999809265137
+            },
+            {
+                "word": "Castelo",
+                "start": 6.699999809265137,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "Tem",
+                "start": 7.420000076293945,
+                "end": 7.480000019073486
+            },
+            {
+                "word": "bons",
+                "start": 7.480000019073486,
+                "end": 7.78000020980835
+            },
+            {
+                "word": "acessos",
+                "start": 7.78000020980835,
+                "end": 8.220000267028809
+            },
+            {
+                "word": "às",
+                "start": 8.220000267028809,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "principais",
+                "start": 8.359999656677246,
+                "end": 8.859999656677246
+            },
+            {
+                "word": "vias",
+                "start": 8.859999656677246,
+                "end": 9.319999694824219
+            },
+            {
+                "word": "Cada",
+                "start": 9.800000190734863,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "piso",
+                "start": 9.84000015258789,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "tem",
+                "start": 10.119999885559082,
+                "end": 10.34000015258789
+            },
+            {
+                "word": "3",
+                "start": 10.34000015258789,
+                "end": 10.760000228881836
+            },
+            {
+                "word": "quartos",
+                "start": 10.760000228881836,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 11.020000457763672,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "roupeiros",
+                "start": 11.260000228881836,
+                "end": 11.800000190734863
+            },
+            {
+                "word": "cozinha",
+                "start": 12.300000190734863,
+                "end": 12.319999694824219
+            },
+            {
+                "word": "equipada",
+                "start": 12.319999694824219,
+                "end": 12.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 12.920000076293945,
+                "end": 13.239999771118164
+            },
+            {
+                "word": "casa",
+                "start": 13.239999771118164,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "de",
+                "start": 13.4399995803833,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "banho",
+                "start": 13.739999771118164,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "com",
+                "start": 13.739999771118164,
+                "end": 14.319999694824219
+            },
+            {
+                "word": "duches",
+                "start": 14.319999694824219,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "Ao",
+                "start": 14.760000228881836,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "todo",
+                "start": 14.899999618530273,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "6",
+                "start": 15.520000457763672,
+                "end": 15.720000267028809
+            },
+            {
+                "word": "quartos",
+                "start": 15.720000267028809,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "e",
+                "start": 16.139999389648438,
+                "end": 16.399999618530273
+            },
+            {
+                "word": "quase",
+                "start": 16.399999618530273,
+                "end": 16.6200008392334
+            },
+            {
+                "word": "200",
+                "start": 16.6200008392334,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "metros",
+                "start": 17.239999771118164,
+                "end": 17.579999923706055
+            },
+            {
+                "word": "úteis",
+                "start": 17.579999923706055,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "Janelas",
+                "start": 18.68000030517578,
+                "end": 18.81999969482422
+            },
+            {
+                "word": "de",
+                "start": 18.81999969482422,
+                "end": 19.15999984741211
+            },
+            {
+                "word": "vidro",
+                "start": 19.15999984741211,
+                "end": 19.219999313354492
+            },
+            {
+                "word": "duplo",
+                "start": 19.219999313354492,
+                "end": 19.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 19.579999923706055,
+                "end": 19.81999969482422
+            },
+            {
+                "word": "rotura",
+                "start": 19.81999969482422,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "térmica",
+                "start": 20.15999984741211,
+                "end": 20.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 20.700000762939453,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "acústica",
+                "start": 21.020000457763672,
+                "end": 21.479999542236328
+            },
+            {
+                "word": "Extors",
+                "start": 21.940000534057617,
+                "end": 22.100000381469727
+            },
+            {
+                "word": "elétricos",
+                "start": 22.100000381469727,
+                "end": 22.719999313354492
+            },
+            {
+                "word": "e",
+                "start": 22.719999313354492,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "pré",
+                "start": 22.979999542236328,
+                "end": 23.280000686645508
+            },
+            {
+                "word": "instalação",
+                "start": 23.280000686645508,
+                "end": 23.65999984741211
+            },
+            {
+                "word": "de",
+                "start": 23.65999984741211,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "ar",
+                "start": 23.959999084472656,
+                "end": 24
+            },
+            {
+                "word": "condicionado",
+                "start": 24,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "Cada",
+                "start": 25.100000381469727,
+                "end": 25.200000762939453
+            },
+            {
+                "word": "piso",
+                "start": 25.200000762939453,
+                "end": 25.5
+            },
+            {
+                "word": "tem",
+                "start": 25.5,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "o",
+                "start": 25.68000030517578,
+                "end": 25.8799991607666
+            },
+            {
+                "word": "seu",
+                "start": 25.8799991607666,
+                "end": 26
+            },
+            {
+                "word": "anexo",
+                "start": 26,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "para",
+                "start": 26.34000015258789,
+                "end": 26.5
+            },
+            {
+                "word": "arrumação",
+                "start": 26.5,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "e",
+                "start": 27.020000457763672,
+                "end": 27.280000686645508
+            },
+            {
+                "word": "o",
+                "start": 27.280000686645508,
+                "end": 27.459999084472656
+            },
+            {
+                "word": "seu",
+                "start": 27.459999084472656,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "lugrado",
+                "start": 27.520000457763672,
+                "end": 27.940000534057617
+            },
+            {
+                "word": "O",
+                "start": 27.940000534057617,
+                "end": 28.3799991607666
+            },
+            {
+                "word": "lote",
+                "start": 28.3799991607666,
+                "end": 28.719999313354492
+            },
+            {
+                "word": "tem",
+                "start": 28.719999313354492,
+                "end": 28.899999618530273
+            },
+            {
+                "word": "600",
+                "start": 28.899999618530273,
+                "end": 29.540000915527344
+            },
+            {
+                "word": "metros",
+                "start": 29.540000915527344,
+                "end": 29.899999618530273
+            },
+            {
+                "word": "quadrados",
+                "start": 29.899999618530273,
+                "end": 30.420000076293945
+            },
+            {
+                "word": "boa",
+                "start": 30.84000015258789,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "exposição",
+                "start": 30.959999084472656,
+                "end": 31.3799991607666
+            },
+            {
+                "word": "solar",
+                "start": 31.3799991607666,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 31.81999969482422,
+                "end": 32.20000076293945
+            },
+            {
+                "word": "muita",
+                "start": 32.20000076293945,
+                "end": 32.58000183105469
+            },
+            {
+                "word": "luz",
+                "start": 32.58000183105469,
+                "end": 32.720001220703125
+            },
+            {
+                "word": "natural",
+                "start": 32.720001220703125,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "Para",
+                "start": 33.599998474121094,
+                "end": 33.68000030517578
+            },
+            {
+                "word": "viver",
+                "start": 33.68000030517578,
+                "end": 33.91999816894531
+            },
+            {
+                "word": "em",
+                "start": 33.91999816894531,
+                "end": 34.099998474121094
+            },
+            {
+                "word": "família",
+                "start": 34.099998474121094,
+                "end": 34.540000915527344
+            },
+            {
+                "word": "ou",
+                "start": 34.540000915527344,
+                "end": 34.880001068115234
+            },
+            {
+                "word": "para",
+                "start": 34.880001068115234,
+                "end": 35.099998474121094
+            },
+            {
+                "word": "investir",
+                "start": 35.099998474121094,
+                "end": 35.41999816894531
+            },
+            {
+                "word": "580",
+                "start": 36.099998474121094,
+                "end": 36.599998474121094
+            },
+            {
+                "word": "mil",
+                "start": 36.599998474121094,
+                "end": 36.880001068115234
+            },
+            {
+                "word": "euros",
+                "start": 36.880001068115234,
+                "end": 37.2599983215332
+            },
+            {
+                "word": "Para",
+                "start": 37.7400016784668,
+                "end": 37.779998779296875
+            },
+            {
+                "word": "visitar",
+                "start": 37.779998779296875,
+                "end": 38.47999954223633
+            },
+            {
+                "word": "fale",
+                "start": 38.779998779296875,
+                "end": 38.779998779296875
+            },
+            {
+                "word": "com",
+                "start": 38.779998779296875,
+                "end": 38.91999816894531
+            },
+            {
+                "word": "a",
+                "start": 38.91999816894531,
+                "end": 39.040000915527344
+            },
+            {
+                "word": "Virgínia",
+                "start": 39.040000915527344,
+                "end": 39.41999816894531
+            },
+            {
+                "word": "Abadeço",
+                "start": 39.41999816894531,
+                "end": 39.97999954223633
+            },
+            {
+                "word": "da",
+                "start": 40.220001220703125,
+                "end": 40.380001068115234
+            },
+            {
+                "word": "IAD",
+                "start": 40.380001068115234,
+                "end": 40.7400016784668
+            },
+            {
+                "word": "de",
+                "start": 40.7400016784668,
+                "end": 41.040000915527344
+            },
+            {
+                "word": "Portugal",
+                "start": 41.040000915527344,
+                "end": 41.29999923706055
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 41.599998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.5,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "MORADIA COM 2 PISOS",
+                        "params": {
+                            "src": "img_2f7fff55",
+                            "avatar": "img_69a8cc66",
+                            "logo": "img_ac727de7",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "580.000 €",
+                            "location": "VIANA DO CASTELO · VILA FRANCA",
+                            "title": "MORADIA T6 · 2 PISOS",
+                            "facts": "196 m² · 6 quartos · 2 WC · 2 estacionamentos",
+                            "cta": "Ligue já +351 930 580 698",
+                            "name": "Virginia Abadesso",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.5,
+                "end": 9.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Vila Franca, Viana do Castelo",
+                        "params": {
+                            "src": "img_13af927e",
+                            "src2": "img_7613f554"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.7,
+                "end": 14.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Três quartos por piso",
+                        "params": {
+                            "src": "img_bfac1405",
+                            "src2": "img_e278cc3d",
+                            "src3": "img_32a431e1",
+                            "src4": "img_22ef249e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.6,
+                "end": 18.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Seis quartos",
+                        "params": {
+                            "src": "img_91b77a0e",
+                            "title": "SEIS QUARTOS",
+                            "items": [
+                                "3 quartos por piso",
+                                "196 m² úteis",
+                                "2 casas de banho"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.5,
+                "end": 21.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Vidro duplo",
+                        "params": {
+                            "src": "img_79b31efb",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.8,
+                "end": 25,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Vidro duplo e estores elétricos",
+                        "params": {
+                            "src": "img_9bc91137",
+                            "src2": "img_e278cc3d",
+                            "src3": "img_91b77a0e",
+                            "src4": "img_9eb0264f",
+                            "src5": "img_e464c729"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25,
+                "end": 33.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Anexo e logradouro",
+                        "params": {
+                            "src": "img_6e96f757",
+                            "title": "ANEXO E LOGRADOURO",
+                            "items": [
+                                "Um anexo por piso",
+                                "Arrumação própria",
+                                "Logradouro em cada piso"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.5,
+                "end": 37.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Para viver ou investir · 580.000 €",
+                        "params": {
+                            "src": "img_13af927e",
+                            "src2": "img_7613f554"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.6,
+                "end": 41.599998474121094,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Virginia Abadesso",
+                        "params": {
+                            "src": "img_69a8cc66",
+                            "name": "Virginia Abadesso",
+                            "phone": "+351 930 580 698",
+                            "email": "virginia.abadesso@iad.pt",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1024832-k99rf/clip.mp4",
+    "error": null
+}

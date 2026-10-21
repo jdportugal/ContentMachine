@@ -1,0 +1,706 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa com ateliê de artista em Vouzela | Câmara Art House",
+    "source_text": null,
+    "source_path": "clips/uploads/wSWEoteLww0CQbuV0QiC9JxbZsTZ44ihC5JWpxk3.mp3",
+    "images": [],
+    "meta": {
+        "background": "blue-static-drift",
+        "lead": "",
+        "instructions": "Use the \"main.webp\" as the image on the intro. Don't use the same sfx twice in a row. Here are the house details:\nCambra Art House\nVouzela\n\nA simbiose perfeita entre arquitetura, paisagem e criação artística.\n\nHá lugares que desafiam a métrica tradicional do imobiliário.\nA Cambra Art House nasce da busca por uma identidade singular, onde a arquitetura de traço contemporâneo, o ecossistema natural e arte dialogam em perfeita simbiose.\n\nConcebida sob o princípio de que o espaço e a criação artística são indissociáveis, a residência desdobra-se por 372 m² de pura amplitude, num terreno de 3.512 m².\n\nO salão de 100 m², o atelier de 75 m² e os jardins interiores foram desenhados não apenas para habitar, mas para inspirar.\n\nO projeto culmina num exterior onde a água, a luz e o paisagismo prolongam a experiência expositiva.\n\nDotada de eficiência energética de excelência, a Cambra Art House não é apenas uma propriedade excecional — é um ativo patrimonial impossível de replicar.\n\nA distribuição interior da Cambra Art House traduz uma visão onde a mestria funcional e a contemplação estética coexistem sem concessões:\n• Salão de Estar e Jantar: O coração social da residência, um volume imponente pensado para articular a luz natural, e as vistas sobre a paisagem, criando a atmosfera ideal para momentos de convívio ou contemplação.\n• As 5 Suítes: Concebidas como santuários privados de recolhimento. Cada suíte oferece um equilíbrio perfeito entre conforto absoluto, privacidade e enquadramentos visuais exclusivos para os pátios e jardins.\n• Escritório: Um espaço de trabalho e reflexão de traço sóbrio, desenhado para proporcionar foco, inspiração e uma relação serena com o ecossistema envolvente.\n• Cozinha, Lavandaria e Arrumos: A vertente operacional da casa reflete o mesmo rigor arquitetónico. Espaços técnicos de linhas puras, onde a funcionalidade de alto rendimento e a arrumação invisível mantêm a fluidez e a ordem visual da propriedade.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "real-estate-2.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Cambra Art House: moradia com ateliê em Vouzela",
+            "summary": "Moradia T5 contemporânea com ateliê de artista em Cambra e Carvalhal de Vermilhas, Vouzela, à venda por 880.000 € através da IAD Portugal. Fica no concelho de Vouzela, distrito de Viseu, que tinha 9.580 habitantes nos Censos 2021.",
+            "timeline": [
+                {
+                    "label": "Censos: Vouzela com 9.580 habitantes",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Moradia à venda na IAD Portugal",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 880000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área bruta da casa",
+                    "value": 372,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Terreno",
+                    "value": 3512,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Sala de estar",
+                    "value": 100,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Ateliê",
+                    "value": 75,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Quartos",
+                    "value": 5,
+                    "unit": "suítes"
+                },
+                {
+                    "label": "Preço por m² (calculado)",
+                    "value": 2366,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "População de Vouzela (Censos 2021)",
+                    "value": 9580,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho",
+                    "value": 193.7,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Freguesias do concelho",
+                    "value": 9,
+                    "unit": "freguesias"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Casa vs. terreno",
+                    "left": {
+                        "title": "Casa",
+                        "points": [
+                            "372 m² de área bruta",
+                            "Sala de 100 m²",
+                            "Ateliê de 75 m²"
+                        ]
+                    },
+                    "right": {
+                        "title": "Terreno",
+                        "points": [
+                            "3.512 m²",
+                            "Jardins interiores e pátios",
+                            "Piscina e espelhos de água"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Fica na União de Freguesias de Cambra e Carvalhal de Vermilhas, em Vouzela",
+                "Pensada como casa e ateliê, com arquitetura, natureza e arte em diálogo",
+                "5 quartos e 5 casas de banho",
+                "Terreno de 3.512 m² (no vídeo diz-se 3.500)",
+                "Vouzela: 31,5% de idosos e 10,0% de jovens (Censos 2021)"
+            ],
+            "sources": [
+                "https://www.iadportugal.pt/anuncios/vouzela-1824/venda/casa-moradia",
+                "https://www.cm-vouzela.pt/municipio/sobre-vouzela/",
+                "https://www.vivernocentrodeportugal.com/pt/municipio/vouzela",
+                "https://observador.pt/inovacao/eleicoes/autarquicas/viseu/concelho-vouzela/"
+            ]
+        },
+        "suggested": {
+            "title": "Casa com ateliê de artista em Vouzela | Câmara Art House",
+            "description": "A Câmara Art House, em Vouzela, junta arquitetura contemporânea, natureza e arte: 372 m² num terreno de 3.500 m², com um salão de 100 m² aberto para a paisagem, um ateliê de 75 m², cinco suítes e piscina. Tem aerotermia e painéis fotovoltaicos e está à venda por 880.000 €. Para marcar uma visita, fale com Manuel Reis, da IAD Portugal.",
+            "tags": [
+                "Vouzela",
+                "casa à venda",
+                "imobiliário Portugal",
+                "arquitetura contemporânea",
+                "ateliê de artista",
+                "moradia com piscina",
+                "IAD Portugal",
+                "casa de campo"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "untitled-qgetj",
+    "created_at": "2026-10-02T08:46:22+00:00",
+    "updated_at": "2026-10-02T08:59:16+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/wSWEoteLww0CQbuV0QiC9JxbZsTZ44ihC5JWpxk3.mp3",
+    "transcript": {
+        "duration": 39.38999938964844,
+        "text": "Uma casa em Vouzela com ateliê de artista. A Câmara Art House junta arquitetura contemporânea, natureza e arte, em 372 metros num terreno de 3.500. Um salão de 100 metros aberto para a paisagem. Um ateliê de 75. Jardins interiores pensados para inspirar. São cinco suítes, cada uma com vista para os pátios e jardins e um escritório para trabalhar em silêncio. Lá fora, piscina, água e luz a prolongar a casa. Aerotermia e painéis fotovoltaicos. 880.000 euros. Para visitar, fale com o Manuel Reis, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.23999999463558197
+            },
+            {
+                "word": "casa",
+                "start": 0.23999999463558197,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "em",
+                "start": 0.5400000214576721,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "Vouzela",
+                "start": 0.7200000286102295,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "com",
+                "start": 1.2000000476837158,
+                "end": 1.5199999809265137
+            },
+            {
+                "word": "ateliê",
+                "start": 1.5199999809265137,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "de",
+                "start": 1.899999976158142,
+                "end": 2.1600000858306885
+            },
+            {
+                "word": "artista.",
+                "start": 2.1600000858306885,
+                "end": 3.0399999618530273
+            },
+            {
+                "word": "A",
+                "start": 3.140000104904175,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "Câmara",
+                "start": 3.2799999713897705,
+                "end": 3.5999999046325684
+            },
+            {
+                "word": "Art",
+                "start": 3.5999999046325684,
+                "end": 4.079999923706055
+            },
+            {
+                "word": "House",
+                "start": 4.079999923706055,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "junta",
+                "start": 4.360000133514404,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "arquitetura",
+                "start": 4.900000095367432,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "contemporânea,",
+                "start": 5.559999942779541,
+                "end": 6.360000133514404
+            },
+            {
+                "word": "natureza",
+                "start": 6.800000190734863,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 7.260000228881836,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "arte,",
+                "start": 7.619999885559082,
+                "end": 7.860000133514404
+            },
+            {
+                "word": "em",
+                "start": 8.399999618530273,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "372",
+                "start": 9.039999961853027,
+                "end": 9.680000305175781
+            },
+            {
+                "word": "metros",
+                "start": 9.680000305175781,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "num",
+                "start": 10.039999961853027,
+                "end": 10.34000015258789
+            },
+            {
+                "word": "terreno",
+                "start": 10.34000015258789,
+                "end": 10.640000343322754
+            },
+            {
+                "word": "de",
+                "start": 10.640000343322754,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "3.500.",
+                "start": 10.96,
+                "end": 11.415
+            },
+            {
+                "word": "Um",
+                "start": 11.415,
+                "end": 11.869
+            },
+            {
+                "word": "salão",
+                "start": 11.869,
+                "end": 12.324
+            },
+            {
+                "word": "de",
+                "start": 12.324,
+                "end": 12.779
+            },
+            {
+                "word": "100",
+                "start": 12.779,
+                "end": 13.234
+            },
+            {
+                "word": "metros",
+                "start": 13.234,
+                "end": 13.688
+            },
+            {
+                "word": "aberto",
+                "start": 13.688,
+                "end": 14.143
+            },
+            {
+                "word": "para",
+                "start": 14.143,
+                "end": 14.598
+            },
+            {
+                "word": "a",
+                "start": 14.598,
+                "end": 15.052
+            },
+            {
+                "word": "paisagem.",
+                "start": 15.052,
+                "end": 15.507
+            },
+            {
+                "word": "Um",
+                "start": 15.507,
+                "end": 15.962
+            },
+            {
+                "word": "ateliê",
+                "start": 15.962,
+                "end": 16.417
+            },
+            {
+                "word": "de",
+                "start": 16.417,
+                "end": 16.871
+            },
+            {
+                "word": "75.",
+                "start": 16.871,
+                "end": 17.326
+            },
+            {
+                "word": "Jardins",
+                "start": 17.326,
+                "end": 17.781
+            },
+            {
+                "word": "interiores",
+                "start": 17.781,
+                "end": 18.235
+            },
+            {
+                "word": "pensados",
+                "start": 18.235,
+                "end": 18.69
+            },
+            {
+                "word": "para",
+                "start": 18.69,
+                "end": 19.145
+            },
+            {
+                "word": "inspirar.",
+                "start": 19.145,
+                "end": 19.6
+            },
+            {
+                "word": "São",
+                "start": 19.6,
+                "end": 20.054
+            },
+            {
+                "word": "cinco",
+                "start": 20.054,
+                "end": 20.509
+            },
+            {
+                "word": "suítes,",
+                "start": 20.509,
+                "end": 20.964
+            },
+            {
+                "word": "cada",
+                "start": 20.964,
+                "end": 21.418
+            },
+            {
+                "word": "uma",
+                "start": 21.418,
+                "end": 21.873
+            },
+            {
+                "word": "com",
+                "start": 21.873,
+                "end": 22.328
+            },
+            {
+                "word": "vista",
+                "start": 22.328,
+                "end": 22.783
+            },
+            {
+                "word": "para",
+                "start": 22.783,
+                "end": 23.237
+            },
+            {
+                "word": "os",
+                "start": 23.237,
+                "end": 23.692
+            },
+            {
+                "word": "pátios",
+                "start": 23.692,
+                "end": 24.147
+            },
+            {
+                "word": "e",
+                "start": 24.147,
+                "end": 24.602
+            },
+            {
+                "word": "jardins",
+                "start": 24.602,
+                "end": 25.056
+            },
+            {
+                "word": "e",
+                "start": 25.056,
+                "end": 25.511
+            },
+            {
+                "word": "um",
+                "start": 25.511,
+                "end": 25.966
+            },
+            {
+                "word": "escritório",
+                "start": 25.966,
+                "end": 26.42
+            },
+            {
+                "word": "para",
+                "start": 26.42,
+                "end": 26.875
+            },
+            {
+                "word": "trabalhar",
+                "start": 26.875,
+                "end": 27.33
+            },
+            {
+                "word": "em",
+                "start": 27.33,
+                "end": 27.785
+            },
+            {
+                "word": "silêncio.",
+                "start": 27.785,
+                "end": 28.239
+            },
+            {
+                "word": "Lá",
+                "start": 28.239,
+                "end": 28.694
+            },
+            {
+                "word": "fora,",
+                "start": 28.694,
+                "end": 29.149
+            },
+            {
+                "word": "piscina,",
+                "start": 29.149,
+                "end": 29.603
+            },
+            {
+                "word": "água",
+                "start": 29.603,
+                "end": 30.058
+            },
+            {
+                "word": "e",
+                "start": 30.058,
+                "end": 30.513
+            },
+            {
+                "word": "luz",
+                "start": 30.513,
+                "end": 30.968
+            },
+            {
+                "word": "a",
+                "start": 30.968,
+                "end": 31.422
+            },
+            {
+                "word": "prolongar",
+                "start": 31.422,
+                "end": 31.877
+            },
+            {
+                "word": "a",
+                "start": 31.877,
+                "end": 32.332
+            },
+            {
+                "word": "casa.",
+                "start": 32.332,
+                "end": 32.786
+            },
+            {
+                "word": "Aerotermia",
+                "start": 32.786,
+                "end": 33.241
+            },
+            {
+                "word": "e",
+                "start": 33.241,
+                "end": 33.696
+            },
+            {
+                "word": "painéis",
+                "start": 33.696,
+                "end": 34.151
+            },
+            {
+                "word": "fotovoltaicos.",
+                "start": 34.151,
+                "end": 34.605
+            },
+            {
+                "word": "880.000",
+                "start": 34.605,
+                "end": 35.06
+            },
+            {
+                "word": "euros.",
+                "start": 35.060001373291016,
+                "end": 35.47999954223633
+            },
+            {
+                "word": "Para",
+                "start": 35.959999084472656,
+                "end": 36.02000045776367
+            },
+            {
+                "word": "visitar,",
+                "start": 36.02000045776367,
+                "end": 36.619998931884766
+            },
+            {
+                "word": "fale",
+                "start": 36.959999084472656,
+                "end": 36.959999084472656
+            },
+            {
+                "word": "com",
+                "start": 36.959999084472656,
+                "end": 37.15999984741211
+            },
+            {
+                "word": "o",
+                "start": 37.15999984741211,
+                "end": 37.279998779296875
+            },
+            {
+                "word": "Manuel",
+                "start": 37.279998779296875,
+                "end": 37.540000915527344
+            },
+            {
+                "word": "Reis,",
+                "start": 37.540000915527344,
+                "end": 37.97999954223633
+            },
+            {
+                "word": "da",
+                "start": 38.15999984741211,
+                "end": 38.31999969482422
+            },
+            {
+                "word": "IAD",
+                "start": 38.31999969482422,
+                "end": 38.65999984741211
+            },
+            {
+                "word": "Portugal.",
+                "start": 38.65999984741211,
+                "end": 39.15999984741211
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 39.38999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.14,
+                "background": "papyrus",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 3.14,
+                "end": 8.4,
+                "background": "vellum",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 8.4,
+                "end": 11.42,
+                "background": "papyrus",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 11.42,
+                "end": 19.6,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 19.6,
+                "end": 28.24,
+                "background": "papyrus",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 28.24,
+                "end": 32.79,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 32.79,
+                "end": 35.96,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": []
+            },
+            {
+                "start": 35.96,
+                "end": 39.38999938964844,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Manuel Reis",
+                        "params": {
+                            "name": "Manuel Reis",
+                            "email": "manuel.reis@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-qgetj/clip.mp4"
+}

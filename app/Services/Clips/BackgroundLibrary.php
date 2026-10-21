@@ -6,6 +6,7 @@ use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\DesignSystem\DesignSystemRepository;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * The BACKGROUNDS library: the full-frame backdrop a clip renders behind its
@@ -196,9 +197,13 @@ class BackgroundLibrary
     }
 
     /** Cache path for a code background's preview render (design-system aware). */
-    public function previewPath(string $slug): string
+    public function previewPath(string $slug, ?string $tsx = null): string
     {
-        return $this->previewDir().'/'.$slug.'-'.$this->designHash().'.mp4';
+        // Shared folder, per-project records: the code hash keeps a cloned
+        // project's edited background from overwriting the original's preview.
+        $tsx ??= (string) $this->store->all()->firstWhere('slug', $slug)?->tsx;
+
+        return $this->previewDir().'/'.$slug.'-'.$this->designHash().($tsx !== '' ? '-'.substr(md5($tsx), 0, 6) : '').'.mp4';
     }
 
     /**
@@ -234,7 +239,7 @@ class BackgroundLibrary
     {
         return $this->active()->map(fn (EffectRecord $b) => [
             'slug' => $b->slug,
-            'label' => $b->display_name ?: \Illuminate\Support\Str::title(str_replace('-', ' ', $b->slug)),
+            'label' => $b->display_name ?: Str::title(str_replace('-', ' ', $b->slug)),
             'kind' => $b->kind === BackgroundStore::KIND_VIDEO ? 'video' : 'code',
             'src' => $b->kind === BackgroundStore::KIND_VIDEO ? $this->store->videoPath($b->id()) : null,
         ])->values()->all();

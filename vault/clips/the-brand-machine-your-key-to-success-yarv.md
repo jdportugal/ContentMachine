@@ -1,6 +1,6 @@
 ---
 data: '2026-09-03'
-atualizado_em: '2026-09-03T10:57:24+00:00'
+atualizado_em: '2026-09-07T12:47:43+00:00'
 titulo: 'The Brand Machine: Your Key to Success'
 descricao: 'Uncover the features of the brand machine that can streamline your content creation and help you build a successful online presence.'
 tipo: clip
@@ -12,7 +12,7 @@ tags:
   - branding
   - 'content strategy'
   - 'social media tools'
-estado: pronto
+estado: agendado
 modo_palavra: karaoke
 estilo:
   position: bottom-center
@@ -31,6 +31,15 @@ musica: ''
 musica_volume: 0.1
 enquadramento: original
 output_bytes: 18524789
+agendado_para: null
+plataformas:
+  - instagram
+  - tiktok
+  - youtube
+blotato_ids:
+  instagram: true
+  tiktok: true
+  youtube: true
 ---
 
 Short generated from vsl_3.

@@ -45,8 +45,13 @@ return [
             // produce "database is locked" — which is exactly how an aggregation
             // died mid-run. Stored in the file itself, so it survives restarts.
             'journal_mode' => env('DB_JOURNAL_MODE', 'WAL'),
+            // IMMEDIATE: take the write lock when a transaction starts. A DEFERRED
+            // one reads first and upgrades later, and SQLite answers a failed
+            // upgrade with "database is locked" at once, ignoring busy_timeout —
+            // that is how two queue workers popping together dropped a
+            // FinalizeClipPlanJob and left a clip stuck on "planning".
+            'transaction_mode' => env('DB_TRANSACTION_MODE', 'IMMEDIATE'),
             'synchronous' => env('DB_SYNCHRONOUS', 'NORMAL'),
-            'transaction_mode' => 'DEFERRED',
         ],
 
         'mysql' => [

@@ -19,6 +19,11 @@ class ProjectSwitcher extends Component
 
     public string $newLanguage = 'en';
 
+    /** Cloning the current project: the name of the copy. */
+    public bool $cloning = false;
+
+    public string $cloneName = '';
+
     public function trocar(string $slug, ProjectRepository $projects)
     {
         if ($projects->exists($slug)) {
@@ -39,6 +44,26 @@ class ProjectSwitcher extends Component
         ]);
 
         $project = $projects->create($this->newName, $this->newLanguage);
+        session(['project_slug' => $project->slug]);
+
+        return $this->redirect(route('painel'));
+    }
+
+    public function abrirClone(ProjectContext $context): void
+    {
+        $this->cloneName = $context->current()->name.' (copy)';
+        $this->cloning = true;
+    }
+
+    /** Clone the current project's setup into a new project and switch to it. */
+    public function clonar(ProjectRepository $projects, ProjectContext $context)
+    {
+        $this->validate(
+            ['cloneName' => 'required|string|min:2|max:60'],
+            ['cloneName.required' => 'Name the copy.', 'cloneName.min' => 'Give it a longer name.'],
+        );
+
+        $project = $projects->duplicate($context->current()->slug, $this->cloneName);
         session(['project_slug' => $project->slug]);
 
         return $this->redirect(route('painel'));

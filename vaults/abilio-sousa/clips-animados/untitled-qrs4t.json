@@ -1,0 +1,1297 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta com alojamento local perto da Serra da Estrela",
+    "source_text": null,
+    "source_path": "clips/uploads/oTIFqufDSOrDb9gfEQvUyqdQfsH43SMtrNLso8tb.mp3",
+    "images": [
+        {
+            "id": "img_3bf28936",
+            "path": "clips/uploads/TOAE3BIj0ItDOI3hQCc2Cpgaa8UKSwoDTI7na91n.jpg",
+            "description": "Quarto com cama de casal, paredes amarelas, cadeiras de madeira e janela ampla com vista para o campo verde.",
+            "name": "48dff501-0651-43c6-bc40-6877fa4e78cd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b928b9eb",
+            "path": "clips/uploads/HlLUGNqkrAvLkulj0riqa2pPWDrzbC6o4gNYDZSL.jpg",
+            "description": "Mezanino com corrimão de inox e teto em madeira, com vista sobre a sala de pé-direito duplo.",
+            "name": "22e59095-3f7c-4a88-bde9-09a71f762a72.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6787d670",
+            "path": "clips/uploads/YikRkLuhDkbxcIu6L6feV2wVwFJUpFnToQlDcomO.jpg",
+            "description": "Mezanino com teto inclinado em madeira, parede amarela com quadros e vista sobre a sala em baixo.",
+            "name": "9cfbafb1-7358-429b-8980-28515defd190.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_46317f2b",
+            "path": "clips/uploads/cY4XyzTyN94d0jLk4jifbisfpmRQuOcAZaWiqtSf.jpg",
+            "description": "Cozinha com armários de madeira, bancada de granito, painel laranja e porta para o exterior.",
+            "name": "007d296f-ef3a-4acd-ab42-849ad6b78b77.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e4bd0961",
+            "path": "clips/uploads/yqRVJKIuGLITvdJV0VKSEHExexHxglm6shJNDPet.jpg",
+            "description": "Cozinha ampla com ilha em madeira e granito, lava-loiça e painel laranja ao fundo.",
+            "name": "3bb320ea-4949-4cf0-8fca-2c8acfd82a4f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1ac462b7",
+            "path": "clips/uploads/rkeQfXhQJJgmIZgkHoNSkWeFz5FUcX0jps9CbMry.jpg",
+            "description": "Sala de estar com recuperador de calor, poltrona, móvel de TV em madeira e portas de vidro.",
+            "name": "6dde327c-421c-4913-9cec-8f73a3dc268c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_73351962",
+            "path": "clips/uploads/ZA2LQN6mHcXN7UhdiJNW4EzgttunG8Xd1BHDzU7v.jpg",
+            "description": "Sala de estar com sofás, parede amarela, relógio de pé e janelas amplas com muita luz.",
+            "name": "e0ae0d75-eea5-4ac4-8723-e0974ff1ff90.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_753859aa",
+            "path": "clips/uploads/4rSf8FDfnGIhXCB1n9BeGwMqHk0T3L61XrOZ9phV.jpg",
+            "description": "Sala de jantar open space com mesa redonda, mezanino por cima e portas de vidro para o terraço.",
+            "name": "d60b6302-987f-422a-9a2a-80d59a34ddb0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a9acaa58",
+            "path": "clips/uploads/sFo6E2wkUpADq0FU7oPXotryhZIGj3xbcrcKSuZd.jpg",
+            "description": "Exterior da quinta: lago com água, chorão, grandes blocos de granito e a casa ao fundo.",
+            "name": "1e938e34-f03a-4c51-b178-3f100994a99c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3560862f",
+            "path": "clips/uploads/M1j2fKnRdrAiMnF5WRSGLPOkqbXol9XHCaybyne8.jpg",
+            "description": "Terreno da quinta com relvado amplo, sebes, árvores e céu azul, mostrando a natureza e privacidade.",
+            "name": "e344931c-209c-40d2-a649-9ee5fe6cd9e9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dd0d2ae4",
+            "path": "clips/uploads/y5s7GObf3Ln32Uwtkuo5Ta48qqi11cV2t3fZU3f8.jpg",
+            "description": "Vista aérea da quinta: piscina coberta em arco, moradia amarela, jardins, palmeiras e blocos de granito entre árvores.",
+            "name": "3c7cbf28-1e6f-4b85-9246-055499a9dd86.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e5fc458a",
+            "path": "clips/uploads/OG01hVmCkw9FSbxdctM25NXQRrtlKqGhZZxgZFKi.jpg",
+            "description": "Colagem com cozinha, piscina coberta, sala, sala de jantar e fachada; texto 'Lagares da Beira'.",
+            "name": "912aa64b-f515-4276-8809-e6244827c00e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c560997c",
+            "path": "clips/uploads/NYoFMTm0zEF0g15Xwu7zqH8nu85W37QowVMMd0yh.jpg",
+            "description": "Interior da piscina coberta de 20 metros, com cobertura transparente em arco, água verde-turquesa e espreguiçadeiras.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c8f6ce34",
+            "path": "clips/uploads/FeekTv197onAe75vbDr09zQLa7fcCnEMSDb9bn7m.jpg",
+            "description": "Logótipo do Grupo RE/MAX Magistral, com o balão vermelho, branco e azul.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_439d2992",
+            "path": "clips/uploads/0Ee7s36Xz8FUGnrhyUSRFichXd9aoKa2zxHRDE2b.jpg",
+            "description": "Retrato da agente Manuela Jorge, de casaco vermelho e braços cruzados, com logótipo RE/MAX e 'Consultora Imobiliária'.",
+            "name": "Manuela.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_86be15c2",
+            "path": "clips/uploads/lDwcnCD59H5Ko8zuZauTivOngXR99xqsofv183hD.jpg",
+            "description": "Quarto em mezanino num estúdio, com cama de casal, teto inclinado, ar condicionado, roupeiro e escada metálica.",
+            "name": "420b0c43-7c2d-4a43-bf0d-5f324c075859.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d88bb979",
+            "path": "clips/uploads/tjbxnnBITIiaTbwCAyimYlFg9QYsLirZKwLCs2bo.jpg",
+            "description": "Sala de estúdio com sofás vermelhos, tapete, lustre, televisão e porta envidraçada para varanda com vista verde.",
+            "name": "631a4f3a-b856-47cd-98f0-d583c4b795e7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a1e341b9",
+            "path": "clips/uploads/WX62ThkuZBWhryb8OSb4dCaOfHFS6aDu868GPk81.jpg",
+            "description": "Estúdio em open space com mesa de jantar redonda, sofás vermelhos, pé-direito alto e janelas com vista para árvores.",
+            "name": "79f83747-c92f-4776-8652-177905808cfa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_08c8a41e",
+            "path": "clips/uploads/03TMcvLOhbToqokDWVZjifBFQ04V6KthqeSHO3hd.jpg",
+            "description": "Cozinha de estúdio com azulejos vermelhos, frigorífico, micro-ondas, mesa redonda, escada e porta para varanda.",
+            "name": "67953fd8-b5e2-4714-8c2a-2165d5f2ee1a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9a572ee1",
+            "path": "clips/uploads/IrK0WG1WShWXeJBLHERGi0C5wB24G36pGvkD1glg.jpg",
+            "description": "Casa de banho moderna com base de duche envidraçada, sanita suspensa, lavatório com espelho iluminado e armário de madeira.",
+            "name": "913e278e-e3d7-4a6b-a960-d37d7bedfb7c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cbfef04a",
+            "path": "clips/uploads/vnSBfWC7EcsTbT6Oj5hg9BKotaPCYc4MnWKW0phf.jpg",
+            "description": "Cozinha de estúdio com azulejos vermelhos, móveis brancos, frigorífico, micro-ondas e porta envidraçada para o exterior.",
+            "name": "45de8ee9-3d62-4dec-97d1-b56c67d4d6f8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4eb5a409",
+            "path": "clips/uploads/ELa2jg19MLLEVO7vMBqySSvlcSuRTHNroFFPv4bO.jpg",
+            "description": "Casa de banho moderna com lavatório duplo em móvel de madeira, dois espelhos e base de duche envidraçada.",
+            "name": "ae2f01f6-434c-43e0-9558-13272bcb0559.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f3d4788",
+            "path": "clips/uploads/XXjpDqZMWPWsaP7RxHcffAnPqo7MelRdc1YKr142.jpg",
+            "description": "Estúdio de alojamento local em open space: cama de casal, sofá, kitchenette e porta envidraçada para o jardim.",
+            "name": "510be13c-ba0c-47a6-bd04-a23ad55a3527.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_28039a58",
+            "path": "clips/uploads/6yTBPG3aUMtYlElhY09b5dzBptTFI8OcGzk2H0UK.jpg",
+            "description": "Kitchenette de estúdio com azulejos verdes, armários creme, frigorífico e janela envidraçada para o exterior.",
+            "name": "6ea4dd22-dead-4828-97ba-5a247c5dc3e6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_38534d53",
+            "path": "clips/uploads/fTzNvE1rt7aOz7CmxdMcDpn2zecvlse4xsIxg5kY.jpg",
+            "description": "Hall de entrada com escadaria em granito, corrimão de inox, móvel antigo preto e porta branca.",
+            "name": "650280b8-1ac9-4d18-b5c9-d6a41d8477c3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9d3dd661",
+            "path": "clips/uploads/EGsav7K0vGXbTaJHFDtzpzmwkrf8Q9Kl1h4PPeeu.jpg",
+            "description": "Casa de banho com banheira branca, teto inclinado, lavatório duplo com móvel de madeira e janela.",
+            "name": "543cd4aa-ca6c-4107-ab9e-4f6ce47e379d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4b2c95cd",
+            "path": "clips/uploads/IptPQ0XrZzkQXESHuH745kSVefX5IY6fJrDIvnp8.jpg",
+            "description": "Quarto com cama de casal, chão de madeira, paredes verdes e janela larga com vista para vegetação.",
+            "name": "a7c8a6c6-c50c-427a-bdce-2d4b3229be45.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aa06b60e",
+            "path": "clips/uploads/pwUMRmvCVhC9d3AOmqR1jUgrIBxXoZ0SO6EcPXUr.jpg",
+            "description": "Vista aérea da moradia amarela de dois pisos, garagem, jardins relvados e bar exterior com deck, entre arvoredo.",
+            "name": "ddc2eac1-658b-47e0-abaf-37150c16c32c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de70a740",
+            "path": "clips/uploads/HH3WURSJYUX3UJf3Yt0GjGlTraesw0b3m5TRgHnV.jpg",
+            "description": "Bar exterior com deck de madeira, pérgola branca e mesas, rodeado de árvores e sebes no jardim.",
+            "name": "606df3bc-7441-4c88-9f6b-da28411dd05e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5d97a476",
+            "path": "clips/uploads/wZP7agAVYvRD9qmiOUmXfpkkhi5foYTY0ZM52ALw.jpg",
+            "description": "Balcão do bar exterior do pequeno restaurante, com cozinha equipada, toldo amarelo e deck de madeira.",
+            "name": "8d928e9c-b51e-4ed1-9b3d-e763395aa89d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b84f3d90",
+            "path": "clips/uploads/wyqV1cyoMXFEuPOSwUiFZlcgw7eL8gzNckbi0g9h.jpg",
+            "description": "Jardim com lago, salgueiro-chorão e grande bloco de granito em primeiro plano, colinas ao fundo.",
+            "name": "556661fe-7b70-4ab4-abef-860a1dfb4c41.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c320459b",
+            "path": "clips/uploads/uTFx2XO1VCDslp4heZOzymQEXwZoiHT9ufIGpfN1.jpg",
+            "description": "Casa de banho de serviço com lavatório branco, sanita suspensa e porta vermelha.",
+            "name": "f0836606-97e2-44fd-9fe7-f8ec9335e858.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8f6c8fd1",
+            "path": "clips/uploads/TVsZae6ILL5zrfVT7Kn7jOcmHyLKnNXwx93DXqeF.jpg",
+            "description": "Sala do restaurante com balcão de bar em madeira, mesas laranja, piano e portas de vidro para o jardim.",
+            "name": "d26ec2f5-8677-428d-941f-dff07f42826a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_92e77a98",
+            "path": "clips/uploads/4huE2TOnLA0d8po7q3VtjtgkL7Ikt4uNyV7kvsFS.jpg",
+            "description": "Sala do restaurante com mesas laranja e portas de vidro abertas para um pátio exterior em granito.",
+            "name": "b6bac189-975a-4dce-8c54-3a34ed9f1332.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_19ad4c92",
+            "path": "clips/uploads/ooBarx2pVZpG0mDUjmwMxaAj1BusMhKpYHwQZ9fb.jpg",
+            "description": "Sala do restaurante com mesas laranja, salamandra vermelha e balcão de bar com bancos ao fundo.",
+            "name": "322a40ab-608f-4fe2-9bce-31bd5bc480f5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7e198b1d",
+            "path": "clips/uploads/Fpf9RjeTSTVS5oRD9MylJAKe4mEX72C5neExanHT.jpg",
+            "description": "Cozinha profissional do restaurante em inox, com fogão a gás, exaustor grande e lava-loiça duplo.",
+            "name": "eaf4ee00-86c9-4d71-ad7f-1891469630dd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c747a1d2",
+            "path": "clips/uploads/6gnDal2p4Sd0KTeC7utC5EDZRNitfcLPu50j7iqQ.jpg",
+            "description": "Cozinha profissional em inox com placa de grelhar, máquina de lavar loiça, abrindo para a sala.",
+            "name": "685560bd-4d4a-4e22-a8f1-29fb9a6d3fe8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aac4715c",
+            "path": "clips/uploads/fTLu3zrAOzexhfCxFP5xMQMmD4L5zHu1Fa6trEBw.jpg",
+            "description": "Quarto com cama de casal, ar condicionado e porta de vidro para varanda com vista verde.",
+            "name": "39a12c31-99f8-44e4-9252-eada21795856.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_49158029",
+            "path": "clips/uploads/zd1n9kkEfXWLsGraFjf8ETmllKSZaF4wQMuHsl4r.jpg",
+            "description": "Quarto de estúdio com cama de casal, papel de parede claro, ar condicionado e porta envidraçada para o jardim.",
+            "name": "9b9bd7d5-09bd-455c-8582-6815b78c9cba.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2688a659",
+            "path": "clips/uploads/0NUM0dGwQBG78XygACFXcBLGMpxsJGZeOUhsFIOI.jpg",
+            "description": "Casa de banho pequena com sanita suspensa, janela e lavatório com móvel laranja.",
+            "name": "c7c4b4f8-b992-4d5f-863e-c2a087a31c33.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f342a320",
+            "path": "clips/uploads/oezszkcSHMFhcmzqxZG8dCPlq3AvpiClTl8eeLjs.jpg",
+            "description": "Casa de banho com duche de vidro, móvel de madeira com lavatório, janela e cesto de verga.",
+            "name": "8aced1eb-1061-48e8-9345-10fdacd98a47.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_93177eb1",
+            "path": "clips/uploads/63otcklqznJmK7yZDAvy5r8j8sC9T1rQxluUucqP.jpg",
+            "description": "Estúdio de alojamento local em open space com cama de casal, kitchenette, sofá e casa de banho privativa.",
+            "name": "7760a253-c08e-4444-93e8-67ee473ee121.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_25eab4f2",
+            "path": "clips/uploads/9XnVM9bHNPhsiJ1kGrtjnbpLNmX8r0JaU3nmaG5a.jpg",
+            "description": "Quarto em mezanino com teto inclinado, cama de casal, cama extra, estantes, ar condicionado e varandim em inox.",
+            "name": "13204c72-c95b-40e6-b120-d2c12b52c3ba.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n850 000 €\nVenda\nid. 124891035-242\n404 m²\n\n7 Quartos\n\n6 WC\n\nB\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\n🏡✨ QUINTA DA LAGARÇA – TURISMO, PRIVACIDADE E NATUREZA EM OLIVEIRA DO HOSPITAL\n\nEm pleno coração da natureza, na tranquila localidade de Lagares da Beira, encontra-se a magnífica Quinta da Lagarça, uma propriedade única com forte vocação para habitação, turismo rural ou investimento no setor do alojamento local.\n\nCom uma área total de terreno de 37.449 m², esta quinta destaca-se pela sua privacidade absoluta, enquadramento natural e excelentes infraestruturas já preparadas para exploração turística.\n\nA propriedade é composta por:\n\n🏠 Moradia principal T3, com 3 quartos, sala e cozinha em openspace e ainda 2 WC\n\n\n🏡 Segunda habitação destinada a Alojamento Local, composta por 4 estúdios independentes, totalmente equipados com kitchenette e ar condicionado\n\n🍷 Pequeno restaurante com bar exterior, ideal para receber hóspedes e eventos\n\nA moradia principal oferece conforto e eficiência energética, dispondo de:\n\n✔️ Aquecimento central a gás\n\n✔️ Bomba de calor\n\n✔️ Salamandra\n\n✔️ 3 painéis solares para aquecimento das águas sanitárias\n\n✔️ Certificação energética B\n\nNo exterior, a quinta oferece um ambiente verdadeiramente exclusivo:\n\n🌿 Piscina coberta com estrutura de aproximadamente 20x10m\n\n💧 Piscina com cerca de 160.000 litros de capacidade e sistema de tratamento de água a cobre\n\n🚗 2 garagens XXL\n\n💦 Furo com 100 metros de profundidade\n\n⚡ Sistema elétrico trifásico\n\n🌱 Sistema de rega automática\n\n💧 3 lagos/minas com água abundante durante todo o ano\n\nA envolvência natural, os jardins cuidados, os enormes blocos graníticos típicos da região e a total tranquilidade fazem desta propriedade um refúgio raro no centro de Portugal.\n\n📍 Localização privilegiada:\n\nOliveira do Hospital – 8 km\nPraias fluviais – cerca de 15 km\nSerra da Estrela – aproximadamente 40 km\n📐 Áreas:\n\nÁrea total do terreno: 37.449 m²\nÁrea bruta de construção: 870,80 m²\nÁrea bruta privativa: 404,40 m²\nÁrea bruta dependente: 466,40 m²\nÁrea de implantação: 345,90 m²\nDurante muitos anos, a Quinta da Lagarça recebeu hóspedes de várias partes do mundo, sendo hoje uma excelente oportunidade para quem procura uma propriedade pronta a habitar e simultaneamente preparada para exploração turística.\n\n🌳 Um imóvel raro, onde conforto, natureza e potencial de rentabilidade se encontram no mesmo lugar.\n\n📞 Para mais informações, contacte-me. \n\nDetalhes\nÁrea Bruta Privativa m²\n404\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n37 449\nÁrea Útil m²\n870\nQuartos\n7\nAno de Construção\n2013\nPiso\n- -\nWC/Casas de banho\n6\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nSim",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta da Lagarça em Lagares da Beira, Oliveira do Hospital, perto da Serra da Estrela",
+            "summary": "A quinta fica em Lagares da Beira, no concelho de Oliveira do Hospital. O concelho faz parte do Estrela Geopark, classificado pela UNESCO, junto à serra mais alta de Portugal continental.",
+            "timeline": [
+                {
+                    "label": "Criação do Parque Natural da Serra da Estrela",
+                    "sublabel": "1976"
+                },
+                {
+                    "label": "Candidatura da Estrela a Geoparque Mundial",
+                    "sublabel": "2017"
+                },
+                {
+                    "label": "Estrela classificada como Geoparque Mundial da UNESCO",
+                    "sublabel": "2020"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Altitude da Torre, o ponto mais alto de Portugal continental",
+                    "value": 1993,
+                    "unit": "m"
+                },
+                {
+                    "label": "Concelhos que integram o Estrela Geopark",
+                    "value": 9,
+                    "unit": "concelhos"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "A Torre, na Serra da Estrela, tem 1993 m e é o ponto mais alto de Portugal continental",
+                "Oliveira do Hospital é um dos 9 concelhos do Estrela Geopark da UNESCO",
+                "O Parque Natural da Serra da Estrela foi o primeiro parque natural português (1976)",
+                "Quinta Lagarça: código postal 3405-159, Lagares da Beira"
+            ],
+            "sources": [
+                "https://www.infopedia.pt/artigos/$serra-da-estrela",
+                "https://www.summitpost.org/mountain/rock/485871/torre.html",
+                "https://www.forbespt.com/unesco-revalida-classificacao-da-serra-da-estrela-como-geopark-mundial",
+                "https://24noticias.sapo.pt/atualidade/artigos/serra-da-estrela-confirmada-como-geopark-mundial-da-unesco",
+                "https://diariodarepublica.pt/dr/detalhe/decreto-lei/557-1976-430620",
+                "https://en.wikipedia.org/wiki/Serra_da_Estrela_Natural_Park",
+                "https://www.codigo-postal.pt/oliveira-do-hospital/quinta-lagarca/"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta com alojamento local perto da Serra da Estrela",
+            "description": "Quase 4 hectares de natureza e privacidade em Lagares da Beira, Oliveira do Hospital, com moradia T3, quatro estúdios equipados para alojamento local, restaurante com bar exterior e piscina coberta de 20 metros. Jardins, lagos com água todo o ano e os blocos de granito típicos da região completam esta quinta, que já recebeu hóspedes de todo o mundo. Por 850 mil euros; para visitar, contacte Manuela Jorge, da RE/MAX Magistral 2.",
+            "tags": [
+                "quinta à venda",
+                "Serra da Estrela",
+                "Oliveira do Hospital",
+                "alojamento local",
+                "imobiliário Portugal",
+                "RE/MAX",
+                "turismo rural",
+                "investimento imobiliário"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-qrs4t",
+    "created_at": "2026-10-07T10:27:38+00:00",
+    "updated_at": "2026-10-07T10:32:57+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/oTIFqufDSOrDb9gfEQvUyqdQfsH43SMtrNLso8tb.mp3",
+    "transcript": {
+        "duration": 37.63999938964844,
+        "text": "Uma quinta pronta a receber hóspedes, perto da Serra da Estrela. A quinta da La Garça fica em Lagares da Beira, Oliveira do Hospital, com quase 4 hectares de natureza e privacidade. Uma moradia T3 com sala e cozinha em open space. Uma segunda casa com 4 estúdios equipados para alojamento local. E um pequeno restaurante com bar exterior. Piscina coberta com 20 metros, jardins, lagos com água todo o ano e os grandes blocos de granito típicos da região. Recebeu hóspedes de todo o mundo e está pronta para continuar. 850 mil euros. Para visitar, fale com a Manuela Jorge, da Remax Magistral 2.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.23999999463558197
+            },
+            {
+                "word": "quinta",
+                "start": 0.23999999463558197,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "pronta",
+                "start": 0.5600000023841858,
+                "end": 1
+            },
+            {
+                "word": "a",
+                "start": 1,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "receber",
+                "start": 1.4600000381469727,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "hóspedes",
+                "start": 1.4600000381469727,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "perto",
+                "start": 2.259999990463257,
+                "end": 2.4000000953674316
+            },
+            {
+                "word": "da",
+                "start": 2.4000000953674316,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "Serra",
+                "start": 2.680000066757202,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "da",
+                "start": 2.9200000762939453,
+                "end": 3.180000066757202
+            },
+            {
+                "word": "Estrela",
+                "start": 3.180000066757202,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "A",
+                "start": 3.9800000190734863,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "quinta",
+                "start": 4.039999961853027,
+                "end": 4.21999979019165
+            },
+            {
+                "word": "da",
+                "start": 4.21999979019165,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "La",
+                "start": 4.400000095367432,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "Garça",
+                "start": 4.579999923706055,
+                "end": 4.820000171661377
+            },
+            {
+                "word": "fica",
+                "start": 4.820000171661377,
+                "end": 5.079999923706055
+            },
+            {
+                "word": "em",
+                "start": 5.079999923706055,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "Lagares",
+                "start": 5.239999771118164,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "da",
+                "start": 5.559999942779541,
+                "end": 5.800000190734863
+            },
+            {
+                "word": "Beira",
+                "start": 5.800000190734863,
+                "end": 6
+            },
+            {
+                "word": "Oliveira",
+                "start": 6.300000190734863,
+                "end": 6.619999885559082
+            },
+            {
+                "word": "do",
+                "start": 6.619999885559082,
+                "end": 6.820000171661377
+            },
+            {
+                "word": "Hospital",
+                "start": 6.820000171661377,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "com",
+                "start": 7.480000019073486,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "quase",
+                "start": 7.619999885559082,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "4",
+                "start": 7.880000114440918,
+                "end": 8.319999694824219
+            },
+            {
+                "word": "hectares",
+                "start": 8.319999694824219,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "de",
+                "start": 8.619999885559082,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "natureza",
+                "start": 8.84000015258789,
+                "end": 9.359999656677246
+            },
+            {
+                "word": "e",
+                "start": 9.359999656677246,
+                "end": 9.600000381469727
+            },
+            {
+                "word": "privacidade",
+                "start": 9.600000381469727,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "Uma",
+                "start": 10.739999771118164,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "moradia",
+                "start": 10.819999694824219,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "T3",
+                "start": 11.180000305175781,
+                "end": 11.859999656677246
+            },
+            {
+                "word": "com",
+                "start": 11.859999656677246,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "sala",
+                "start": 12.220000267028809,
+                "end": 12.520000457763672
+            },
+            {
+                "word": "e",
+                "start": 12.520000457763672,
+                "end": 12.880000114440918
+            },
+            {
+                "word": "cozinha",
+                "start": 12.880000114440918,
+                "end": 13.119999885559082
+            },
+            {
+                "word": "em",
+                "start": 13.119999885559082,
+                "end": 13.479999542236328
+            },
+            {
+                "word": "open",
+                "start": 13.479999542236328,
+                "end": 13.819999694824219
+            },
+            {
+                "word": "space",
+                "start": 13.819999694824219,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "Uma",
+                "start": 14.640000343322754,
+                "end": 14.760000228881836
+            },
+            {
+                "word": "segunda",
+                "start": 14.760000228881836,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "casa",
+                "start": 15.079999923706055,
+                "end": 15.420000076293945
+            },
+            {
+                "word": "com",
+                "start": 15.420000076293945,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "4",
+                "start": 15.680000305175781,
+                "end": 16.020000457763672
+            },
+            {
+                "word": "estúdios",
+                "start": 16.020000457763672,
+                "end": 16.440000534057617
+            },
+            {
+                "word": "equipados",
+                "start": 16.440000534057617,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "para",
+                "start": 16.940000534057617,
+                "end": 17.200000762939453
+            },
+            {
+                "word": "alojamento",
+                "start": 17.200000762939453,
+                "end": 17.600000381469727
+            },
+            {
+                "word": "local",
+                "start": 17.600000381469727,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "E",
+                "start": 18.280000686645508,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "um",
+                "start": 18.459999084472656,
+                "end": 18.600000381469727
+            },
+            {
+                "word": "pequeno",
+                "start": 18.600000381469727,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "restaurante",
+                "start": 18.799999237060547,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "com",
+                "start": 19.31999969482422,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "bar",
+                "start": 19.600000381469727,
+                "end": 19.760000228881836
+            },
+            {
+                "word": "exterior",
+                "start": 19.760000228881836,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "Piscina",
+                "start": 20.760000228881836,
+                "end": 20.860000610351562
+            },
+            {
+                "word": "coberta",
+                "start": 20.860000610351562,
+                "end": 21.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 21.299999237060547,
+                "end": 21.479999542236328
+            },
+            {
+                "word": "20",
+                "start": 21.479999542236328,
+                "end": 21.81999969482422
+            },
+            {
+                "word": "metros",
+                "start": 21.81999969482422,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "jardins",
+                "start": 22.739999771118164,
+                "end": 23.139999389648438
+            },
+            {
+                "word": "lagos",
+                "start": 23.719999313354492,
+                "end": 23.799999237060547
+            },
+            {
+                "word": "com",
+                "start": 23.799999237060547,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "água",
+                "start": 24.040000915527344,
+                "end": 24.239999771118164
+            },
+            {
+                "word": "todo",
+                "start": 24.239999771118164,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "o",
+                "start": 24.6200008392334,
+                "end": 24.920000076293945
+            },
+            {
+                "word": "ano",
+                "start": 24.920000076293945,
+                "end": 24.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 24.920000076293945,
+                "end": 25.260000228881836
+            },
+            {
+                "word": "os",
+                "start": 25.260000228881836,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "grandes",
+                "start": 25.520000457763672,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "blocos",
+                "start": 25.81999969482422,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "de",
+                "start": 26.1200008392334,
+                "end": 26.399999618530273
+            },
+            {
+                "word": "granito",
+                "start": 26.399999618530273,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "típicos",
+                "start": 26.68000030517578,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "da",
+                "start": 27.18000030517578,
+                "end": 27.3799991607666
+            },
+            {
+                "word": "região",
+                "start": 27.3799991607666,
+                "end": 27.65999984741211
+            },
+            {
+                "word": "Recebeu",
+                "start": 27.65999984741211,
+                "end": 28.459999084472656
+            },
+            {
+                "word": "hóspedes",
+                "start": 28.459999084472656,
+                "end": 28.8799991607666
+            },
+            {
+                "word": "de",
+                "start": 28.8799991607666,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "todo",
+                "start": 29.100000381469727,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "o",
+                "start": 29.34000015258789,
+                "end": 29.719999313354492
+            },
+            {
+                "word": "mundo",
+                "start": 29.719999313354492,
+                "end": 29.719999313354492
+            },
+            {
+                "word": "e",
+                "start": 29.719999313354492,
+                "end": 30.020000457763672
+            },
+            {
+                "word": "está",
+                "start": 30.020000457763672,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "pronta",
+                "start": 30.18000030517578,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "para",
+                "start": 30.520000457763672,
+                "end": 30.780000686645508
+            },
+            {
+                "word": "continuar",
+                "start": 30.780000686645508,
+                "end": 31.239999771118164
+            },
+            {
+                "word": "850",
+                "start": 32,
+                "end": 32.63999938964844
+            },
+            {
+                "word": "mil",
+                "start": 32.63999938964844,
+                "end": 32.900001525878906
+            },
+            {
+                "word": "euros",
+                "start": 32.900001525878906,
+                "end": 33.29999923706055
+            },
+            {
+                "word": "Para",
+                "start": 33.7400016784668,
+                "end": 33.79999923706055
+            },
+            {
+                "word": "visitar",
+                "start": 33.79999923706055,
+                "end": 34.459999084472656
+            },
+            {
+                "word": "fale",
+                "start": 34.720001220703125,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "com",
+                "start": 34.720001220703125,
+                "end": 34.91999816894531
+            },
+            {
+                "word": "a",
+                "start": 34.91999816894531,
+                "end": 34.97999954223633
+            },
+            {
+                "word": "Manuela",
+                "start": 34.97999954223633,
+                "end": 35.2599983215332
+            },
+            {
+                "word": "Jorge",
+                "start": 35.2599983215332,
+                "end": 35.70000076293945
+            },
+            {
+                "word": "da",
+                "start": 35.900001525878906,
+                "end": 36.060001373291016
+            },
+            {
+                "word": "Remax",
+                "start": 36.060001373291016,
+                "end": 36.439998626708984
+            },
+            {
+                "word": "Magistral",
+                "start": 36.439998626708984,
+                "end": 37
+            },
+            {
+                "word": "2",
+                "start": 37,
+                "end": 37.400001525878906
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.63999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.6999999999999993,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Quinta perto da Serra da Estrela",
+                        "params": {
+                            "src": "img_c560997c",
+                            "avatar": "img_439d2992",
+                            "logo": "img_c8f6ce34",
+                            "price": "850.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Quinta pronta para turismo",
+                            "location": "Lagares da Beira · 404 m² · 7 quartos",
+                            "agentName": "Manuela Jorge",
+                            "phone": "+351 925 189 914",
+                            "legal": "Grupo RE/MAX Magistral"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.6999999999999993,
+                "end": 7.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_dd0d2ae4",
+                            "src2": "img_aa06b60e",
+                            "srcs": [
+                                "img_dd0d2ae4",
+                                "img_aa06b60e",
+                                "img_a9acaa58"
+                            ],
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.4,
+                "end": 10.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Natureza e privacidade",
+                        "params": {
+                            "src": "img_3560862f",
+                            "title": "Natureza e privacidade",
+                            "items": [
+                                "37.449 m² de terreno",
+                                "Oliveira do Hospital a 8 km",
+                                "Serra da Estrela a 40 km"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.6,
+                "end": 14.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Moradia T3 em open space",
+                        "params": {
+                            "src": "img_753859aa",
+                            "src2": "img_e4bd0961",
+                            "src3": "img_73351962",
+                            "src4": "img_1ac462b7",
+                            "srcs": [
+                                "img_753859aa",
+                                "img_e4bd0961",
+                                "img_73351962",
+                                "img_1ac462b7",
+                                "img_46317f2b",
+                                "img_b928b9eb",
+                                "img_6787d670",
+                                "img_38534d53"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.5,
+                "end": 18.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "4 estúdios equipados",
+                        "params": {
+                            "src": "img_2f3d4788",
+                            "src2": "img_93177eb1",
+                            "src3": "img_a1e341b9",
+                            "src4": "img_d88bb979",
+                            "src5": "img_08c8a41e",
+                            "srcs": [
+                                "img_2f3d4788",
+                                "img_93177eb1",
+                                "img_a1e341b9",
+                                "img_d88bb979",
+                                "img_08c8a41e",
+                                "img_cbfef04a",
+                                "img_28039a58",
+                                "img_86be15c2",
+                                "img_49158029",
+                                "img_25eab4f2"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.2,
+                "end": 23.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_8f6c8fd1",
+                            "src2": "img_5d97a476",
+                            "src3": "img_de70a740",
+                            "src4": "img_92e77a98",
+                            "srcs": [
+                                "img_8f6c8fd1",
+                                "img_5d97a476",
+                                "img_de70a740",
+                                "img_92e77a98",
+                                "img_19ad4c92",
+                                "img_7e198b1d",
+                                "img_c747a1d2"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.6,
+                "end": 27.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Lagos e granito",
+                        "params": {
+                            "src": "img_b84f3d90",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.7,
+                "end": 31.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Pronta para receber",
+                        "params": {
+                            "src": "img_3bf28936",
+                            "src2": "img_4b2c95cd",
+                            "src3": "img_aac4715c",
+                            "src4": "img_9a572ee1",
+                            "srcs": [
+                                "img_3bf28936",
+                                "img_4b2c95cd",
+                                "img_aac4715c",
+                                "img_9a572ee1",
+                                "img_4eb5a409",
+                                "img_9d3dd661",
+                                "img_f342a320",
+                                "img_2688a659",
+                                "img_c320459b"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.6,
+                "end": 33.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_e5fc458a",
+                            "zoom": 1.3
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.6,
+                "end": 37.63999938964844,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Manuela Jorge",
+                        "params": {
+                            "src": "img_439d2992",
+                            "logo": "img_c8f6ce34",
+                            "name": "Manuela Jorge",
+                            "role": "Consultora imobiliária · RE/MAX Magistral 2",
+                            "buttons": "+351 925 189 914 | Marcar visita",
+                            "phone": "+351 925 189 914"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-qrs4t/clip.mp4",
+    "error": null
+}

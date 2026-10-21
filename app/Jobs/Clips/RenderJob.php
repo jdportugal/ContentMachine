@@ -4,6 +4,7 @@ namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
 use App\Services\Clips\BackgroundLibrary;
+use App\Services\Clips\BeatOpening;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\Store\BackgroundStore;
@@ -11,6 +12,7 @@ use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectStore;
 use App\Services\DesignSystem\DesignSystemRepository;
+use App\Services\RealEstate\PropertyVideoAnalyzer;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,12 +20,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
+use Symfony\Component\Process\Process;
 
 class RenderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public function __construct(public string $projectId)
+    /** @param  ?float  $from  re-render only from this second (the ending), joined onto the clip already rendered */
+    public function __construct(public string $projectId, public ?float $from = null)
     {
         $this->captureProject();
     }
@@ -36,14 +40,14 @@ class RenderJob implements ShouldQueue
         try {
             $p->update(['status' => ClipRecord::STATUS_RENDERING]);
 
-            // The remotion effects + backgrounds folders are global — sync the active
-            // project's custom SFX and code backgrounds before rendering.
-            $effects->syncFilesystem();
-            $backgrounds->syncFilesystem();
+            // (The shared remotion effects/backgrounds folders are filled with this project's by the renderer, under its lock.)
 
             $dir = $store->storageDir($p->id);
             @mkdir($dir, 0777, true);
             $plan = $p->plan;
+            // Resolved once: a random pick must be the same track the opening was cut to.
+            $track = $this->resolveMusic($p, $music);
+            [$plan, $opening] = $this->prependOpening($plan, $p, $track);
 
             // Karaoke captions read absolute word timestamps from the transcript.
             $plan['words'] = $p->transcript['words'] ?? [];
@@ -63,15 +67,41 @@ class RenderJob implements ShouldQueue
 
             $plan['audioSrc'] = $p->audio_path;
 
+            // An "after intro" video (SceneVisualFiller::insertAfterIntro): its scene names it by clips-disk
+            // path, and the voiceover waits for it where the plan says.
+            foreach ($plan['scenes'] as &$scene) {
+                if (! empty($scene['plain']) && is_string($src = $scene['layers'][0]['params']['src'] ?? null) && Storage::disk(config('contentmachine.clips.disk'))->exists($src)) {
+                    $scene['layers'][0]['params']['src'] = Storage::disk(config('contentmachine.clips.disk'))->path($src);
+                }
+            }
+            unset($scene);
+            if (($gap = $plan['voice_gap'] ?? null) && $gap['seconds'] > 0) {
+                $plan['audioSrc'] = $p->audio_path ? $this->openVoiceGap($p->audio_path, (float) $gap['at'], (float) $gap['seconds'], "$dir/voice-gap.m4a") : null;
+                $plan['words'] = array_map(fn ($w) => (float) $w['start'] >= $gap['at']
+                    ? array_merge($w, ['start' => $w['start'] + $gap['seconds'], 'end' => $w['end'] + $gap['seconds']]) : $w, $plan['words']);
+            }
+            // The voice starts when the music-only opening ends.
+            if ($opening > 0) {
+                $plan['audioSrc'] = $plan['audioSrc'] ? $this->delayVoice($plan['audioSrc'], $opening, "$dir/voice-opening.m4a") : null;
+                $plan['words'] = array_map(fn ($w) => array_merge($w, ['start' => $w['start'] + $opening, 'end' => $w['end'] + $opening]), $plan['words']);
+            }
+
+            // Where the karaoke captions sit — or none at all. Bottom is the default.
+            $captions = (string) ($p->meta['captions'] ?? 'bottom');
+            $plan['captions'] = in_array($captions, ClipRecord::CAPTIONS, true) ? $captions : 'bottom';
+
             // The news LEAD, pinned on screen for the whole clip (opt-in per clip).
             if (($lead = trim((string) ($p->meta['lead'] ?? ''))) !== '') {
                 $plan['banner'] = $lead;
             }
 
             // Background music (mixed as a looping <Audio> track by Remotion).
-            if ($track = $this->resolveMusic($p, $music)) {
+            if ($track) {
                 $plan['musicSrc'] = $track;
                 $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
+                if ($opening > 0) {
+                    $plan['musicIntro'] = ['seconds' => $opening, 'volume' => (float) config('contentmachine.real_estate.opening_music_volume', 0.7)];
+                }
             }
 
             // Design System theme (colors/fonts/texture) — makes the animation
@@ -87,8 +117,18 @@ class RenderJob implements ShouldQueue
                 $plan['videoSrc'] = Storage::disk(config('contentmachine.clips.disk'))->path($p->source_path);
             }
 
-            $out = $renderer->render($plan, "$dir/clip.mp4");
-            $p->update(['output_path' => $out, 'status' => ClipRecord::STATUS_DONE]);
+            $out = $this->from !== null && is_file("$dir/clip.mp4")
+                ? $this->renderTail($renderer, $plan, $dir, $this->from + $opening)
+                : $renderer->render($plan, "$dir/clip.mp4");
+            // Clear the previous failure: a clip that renders after a failed attempt
+            // kept the old message and showed as done WITH an error next to it.
+            $atributos = ['output_path' => $out, 'status' => ClipRecord::STATUS_DONE, 'error' => null];
+            // "Send straight to Finished": the same flag the promote button sets, set
+            // here instead, so the clip lands in the hub without the extra click.
+            if (! empty($p->meta['auto_finish'])) {
+                $atributos['finished'] = true;
+            }
+            $p->update($atributos);
 
             // Auto clips: schedule on Blotato's next free slot as soon as the render lands.
             if (! empty($p->meta['auto']) && ! $p->get('publish_state')) {
@@ -155,6 +195,106 @@ class RenderJob implements ShouldQueue
         return $rec->kind === BackgroundStore::KIND_VIDEO
             ? ['kind' => 'video', 'src' => $store->videoPath($rec->id())]
             : ['kind' => 'code', 'slug' => $rec->slug];
+    }
+
+    /**
+     * Only the ending again (an outro card changed): the frames from $from on are
+     * rendered and joined onto the clip already rendered, cut on that frame —
+     * everything before it stays exactly as it was.
+     */
+    private function renderTail(RemotionRenderer $renderer, array $plan, string $dir, float $from): string
+    {
+        $fps = (int) ($plan['fps'] ?? config('contentmachine.clips.fps', 30));
+        $first = (int) round($from * $fps);
+        $plan['frameRange'] = [$first, max($first, (int) ceil((float) $plan['duration'] * $fps) - 1)];
+        $renderer->render($plan, "$dir/tail.mp4");
+        $cut = $first / $fps;
+        (new Process(['ffmpeg', '-y', '-v', 'error', '-i', "$dir/clip.mp4", '-i', "$dir/tail.mp4", '-filter_complex',
+            "[0:v]trim=end={$cut},setpts=PTS-STARTPTS[v0];[0:a]atrim=end={$cut},asetpts=PTS-STARTPTS[a0];[v0][a0][1:v][1:a]concat=n=2:v=1:a=1[v][a]",
+            '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-crf', '17', '-preset', 'veryfast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
+            '-movflags', '+faststart', "$dir/clip-joined.mp4"]))->setTimeout(600)->mustRun();
+        rename("$dir/clip-joined.mp4", "$dir/clip.mp4");
+        @unlink("$dir/tail.mp4");
+
+        return "$dir/clip.mp4";
+    }
+
+    /**
+     * A beat-synced opening (meta.beat_opening, set by the listing import): the
+     * property's three best clips, music only, changing on the track's bars,
+     * put before the reel — every scene moves back by its length. Done at render
+     * time so re-planning, improving or re-voicing the clip never has to keep it.
+     *
+     * @return array{0:array,1:float} [plan, the opening's length in seconds (0: none)]
+     */
+    private function prependOpening(array $plan, ClipRecord $p, ?string $track): array
+    {
+        $want = $p->meta['beat_opening'] ?? null;
+        if (! is_array($want) || ! $track || empty($plan['scenes'])) {
+            return [$plan, 0.0];
+        }
+        $videos = collect($p->images ?? [])->filter(fn ($i) => ! empty($i['video']) && str_starts_with((string) ($i['id'] ?? ''), 'vid_'))->pluck('id');
+        // The clips ranked at import, else the first videos.
+        $ranked = collect($want['clips'] ?? [])->intersect($videos)->values()->concat($videos)->unique()->values();
+        if ($ranked->isEmpty()) {
+            return [$plan, 0.0];
+        }
+        $cuts = BeatOpening::cuts($track, min(3, $ranked->count()));
+        // Each clip plays its turn plus the dissolves around it (MontageScene: 0.15 s each side, 0.5 s into the reel).
+        $turns = [];
+        foreach (array_slice($cuts, 1) as $i => $cut) {
+            $turns[] = $cut - $cuts[$i] + ($i > 0 ? 0.15 : 0) + ($i < count($cuts) - 2 ? 0.15 : 0.5);
+        }
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        $paths = collect($p->images)->pluck('path', 'id');
+        $length = $ranked->mapWithKeys(fn ($id) => [$id => rescue(fn () => PropertyVideoAnalyzer::probe($disk->path($paths[$id]))['duration'], 0.0, false)]);
+        // Strongest first, skipping one that would have to slow down visibly (below 85%) for its turn.
+        $clips = [];
+        foreach ($turns as $turn) {
+            $pick = $ranked->diff($clips)->first(fn ($id) => $length[$id] >= 0.85 * $turn) ?? $ranked->diff($clips)->first();
+            if ($pick === null) {
+                break;
+            }
+            $clips[] = $pick;
+        }
+        $cuts = array_slice($cuts, 0, count($clips) + 1);
+        $rates = array_map(fn ($id, $turn) => $length[$id] > 0 ? round(min(1.0, $length[$id] / $turn), 3) : 1.0, $clips, array_slice($turns, 0, count($clips)));
+        $seconds = (float) end($cuts);
+        foreach ($plan['scenes'] as &$scene) {
+            $scene['start'] = (float) $scene['start'] + $seconds;
+            $scene['end'] = (float) $scene['end'] + $seconds;
+        }
+        unset($scene);
+        $plan['scenes'][0]['transitionIn'] = 'cut';
+        array_unshift($plan['scenes'], [
+            'start' => 0.0, 'end' => $seconds, 'present' => 'animation', 'background' => 'ink', 'punchWord' => null, 'karaoke' => false,
+            'transitionIn' => 'cut', 'transitionOut' => 'cut', 'montage' => true,
+            'layers' => [['type' => 'montage', 'text' => '', 'params' => ['clips' => $clips, 'cuts' => $cuts, 'rates' => $rates]]],
+        ]);
+        $plan['duration'] = (float) ($plan['duration'] ?? 0) + $seconds;
+
+        return [$plan, $seconds];
+    }
+
+    /** The voiceover $seconds later (silence before it). */
+    private function delayVoice(string $audio, float $seconds, string $out): string
+    {
+        $src = is_file($audio) ? $audio : Storage::disk(config('contentmachine.clips.disk'))->path($audio);
+        $ms = (int) round($seconds * 1000);
+        (new Process(['ffmpeg', '-y', '-v', 'error', '-i', $src, '-af', "adelay={$ms}:all=1", '-c:a', 'aac', '-b:a', '192k', $out]))->setTimeout(120)->mustRun();
+
+        return $out;
+    }
+
+    /** The voiceover with $seconds of silence opened at $at. */
+    private function openVoiceGap(string $audio, float $at, float $seconds, string $out): string
+    {
+        $ms = (int) round($seconds * 1000);
+        (new Process(['ffmpeg', '-y', '-v', 'error', '-i', $audio, '-filter_complex',
+            "[0:a]atrim=end={$at},asetpts=PTS-STARTPTS[a];[0:a]atrim=start={$at},asetpts=PTS-STARTPTS,adelay={$ms}:all=1[b];[a][b]concat=n=2:v=0:a=1",
+            '-c:a', 'aac', '-b:a', '192k', $out]))->setTimeout(120)->mustRun();
+
+        return $out;
     }
 
     /** Set layer.audioSrc to the effect's sound file (by slug), for layers that have one. */

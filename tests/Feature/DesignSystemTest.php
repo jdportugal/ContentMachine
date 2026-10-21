@@ -85,6 +85,38 @@ class DesignSystemTest extends TestCase
         $this->assertSame("# Estilo\nSempre claro, sem gráficos.", file_get_contents($caminho));
     }
 
+    /** Changing only the animation instructions must not touch the design system (or its preview hash). */
+    public function test_so_instrucoes_de_animacao_nao_reescrevem_o_design(): void
+    {
+        $caminho = $this->tmp.'/estilo-animacao.md';
+        config(['contentmachine.clips.style_md' => $caminho]);
+        $repo = app(DesignSystemRepository::class);
+        $repo->write("# Marca\nAzul.");
+        $repo->writeTokens(DesignTheme::defaults());
+        $antes = filemtime($repo->path());
+        $chamadas = 0;
+        $this->app->bind(DesignThemeExtractor::class, fn () => new class($chamadas) extends DesignThemeExtractor
+        {
+            public function __construct(private int &$n) {}
+
+            public function extract(string $markdown): array
+            {
+                $this->n++;
+
+                return DesignTheme::defaults();
+            }
+        });
+        sleep(1);
+
+        Livewire::test(DesignSystem::class)
+            ->set('estilo', "# Estilo\nMais rápido.")
+            ->call('guardar');
+
+        $this->assertSame(0, $chamadas, 'no theme extraction');
+        $this->assertSame($antes, filemtime($repo->path()), 'design system file untouched');
+        $this->assertSame("# Estilo\nMais rápido.", file_get_contents($caminho));
+    }
+
     public function test_sanitize_preenche_defaults_e_valida(): void
     {
         $t = DesignTheme::sanitize([
@@ -126,5 +158,36 @@ class DesignSystemTest extends TestCase
     public function test_read_devolve_vazio_quando_inexistente(): void
     {
         $this->assertSame('', app(DesignSystemRepository::class)->read());
+    }
+
+    /** Project resources: agent details save, photo and extra images upload, and the page shows them. */
+    public function test_project_resources_are_saved_from_the_panel(): void
+    {
+        $png = UploadedFile::fake()->image('photo.png', 8, 8);
+
+        Livewire::test(\App\Livewire\ProjectResourcesPanel::class)
+            ->set('agent.name', 'Nuno Narciso')
+            ->set('agent.licence', 'AMI 1234')
+            ->set('music', 'nenhuma')
+            ->call('guardar')
+            ->assertHasNoErrors()
+            ->set('agentPhoto', $png)
+            ->set('newImage', UploadedFile::fake()->image('keys.png', 8, 8))
+            ->call('adicionarImagem')
+            ->assertHasErrors('newImageDesc')
+            ->set('newImageDesc', 'Nuno com as chaves')
+            ->call('adicionarImagem')
+            ->assertHasNoErrors()
+            ->assertSet('extras.0.description', 'Nuno com as chaves');
+
+        $r = app(\App\Services\Projects\ProjectResources::class);
+        $this->assertSame('Nuno Narciso', $r->agent()['name']);
+        $this->assertSame('nenhuma', $r->music());
+        $this->assertNotNull($r->agentPhotoPath());
+        $this->assertCount(1, $r->images());
+        $this->comSessaoIniciada()->get(route('project-resources.image', $r->images()[0]['file']))->assertOk();
+
+        Livewire::test(\App\Livewire\ProjectResourcesPanel::class)->call('removerImagem', $r->images()[0]['file']);
+        $this->assertSame([], $r->images());
     }
 }

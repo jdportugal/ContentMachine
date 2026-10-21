@@ -3,6 +3,7 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\CliRemotionRenderer;
 use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\FreeSfxGenerator;
 use App\Services\Clips\SceneVisualFiller;
@@ -162,14 +163,17 @@ class GenerateFreeSfxJob implements ShouldQueue
             return $plan;
         }
 
-        $library->syncFilesystem();
-        foreach ($this->naoCompilam(array_keys($criados)) as $slug) {
-            if ($rec = $effects->records()->firstWhere('slug', $slug)) {
-                $library->remove($rec);   // drops the record AND its .tsx
+        // The compile check reads the shared effects folder: not while a render is bundling it.
+        CliRemotionRenderer::exclusively(function () use ($library, $effects, &$criados) {
+            $library->syncFilesystem();
+            foreach ($this->naoCompilam(array_keys($criados)) as $slug) {
+                if ($rec = $effects->records()->firstWhere('slug', $slug)) {
+                    $library->remove($rec);   // drops the record AND its .tsx
+                }
+                unset($criados[$slug]);
             }
-            unset($criados[$slug]);
-        }
-        $library->syncFilesystem();
+            $library->syncFilesystem();
+        });
 
         foreach ($criados as $slug => $c) {
             $si = $c['alvo']['scene'];

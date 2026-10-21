@@ -64,6 +64,7 @@ class SettingsRepository
                 'reddit_client_id' => '',
                 'reddit_client_secret' => '',
                 'kie' => '',
+                'fal' => '',
                 'blotato' => '',
                 'zernio' => '',
                 'tensorx' => '',

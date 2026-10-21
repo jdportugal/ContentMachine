@@ -1,0 +1,988 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa com vista para a Lagoa das Furnas à venda nos Açores",
+    "source_text": null,
+    "source_path": "clips/uploads/NXKY7NxJEXmFBbKUcQcn4oG9Hs0zov7zMDRKjiTJ.mp3",
+    "images": [
+        {
+            "id": "img_42355bb1",
+            "path": "clips/uploads/7rGZNFyMFrvYM9ENji1fgs53APyYgrcBK2Go23IS.jpg",
+            "description": "Quarto principal visto da porta, cama branca e porta envidraçada aberta para a lagoa; cadeira de baloiço.",
+            "name": "a6aaa3cc-5536-4b4b-9820-85e377bce29e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_934d85c9",
+            "path": "clips/uploads/lslUsYQv2Gk4JBZs5D5OIhNTImTqcUEsG5eREVAa.jpg",
+            "description": "Casa de banho em mármore com claraboia, banheira independente, banco de madeira e duche em vidro.",
+            "name": "27e4a758-4ffc-41b1-9786-ec7e137f8973.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7ed6356d",
+            "path": "clips/uploads/wfW9RbO8ztHF3kJDfszj9sHKTv1Ep1NUwykLtl4X.jpg",
+            "description": "Casa de banho com claraboia, banheira branca em primeiro plano, móvel suspenso escuro e chão de mármore.",
+            "name": "c74f6fbd-5420-4ef4-adca-588eaeb7fdb1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ae372106",
+            "path": "clips/uploads/uRswLjgJBmp9NpK7eJJSeIC6LzMQJltNJrs2HdwY.jpg",
+            "description": "Pormenor do lavatório: torneira cromada, sabonete e escovas de bambu em caixa de madeira, refletidos no espelho.",
+            "name": "7cd04df1-2f16-4c61-8006-06492ddd8a28.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_65f08479",
+            "path": "clips/uploads/KrviTknixgYeeeyEVVpKBCuLGV7psYEqXiOu3Ptm.jpg",
+            "description": "Quarto de sótão rosa com duas camas individuais, vigas de madeira, tapete claro e barco decorativo.",
+            "name": "0386e794-7fd9-419e-98ce-9a007afe1b7b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d65630dc",
+            "path": "clips/uploads/LarwoypQO0yzl6rrPugt3EPh1Ye8P11oHxoyJLkV.jpg",
+            "description": "Pormenor do quarto principal: cabeceira estofada cinzenta e papel de parede de selva tropical.",
+            "name": "e0b1308a-bc58-4223-a3ab-468f2b69167a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_0dc6a804",
+            "path": "clips/uploads/UG5YtM8xumVS6XKqX9WkI9GE2pDdnPnyZeYShSHu.jpg",
+            "description": "Quarto principal com mural tropical, cama de casal, cadeira de baloiço e porta arqueada aberta para a lagoa.",
+            "name": "f09a07a3-acc0-4163-a69a-7af2e1855ac9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aa5d7ccb",
+            "path": "clips/uploads/yOBH4JLO5Sgmm2AUZg7zpsmwPUVq5m1C9rcq3xba.jpg",
+            "description": "Cozinha moderna branca com bancada clara, lava-loiça preto, forno embutido e porta para o jardim.",
+            "name": "af3b0993-001d-4297-a82b-2f884e7d506a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d3227d5a",
+            "path": "clips/uploads/HBFvfBJ1uG5V0fMvaAdSb0kPboiraMSSayGMUTiM.jpg",
+            "description": "Corredor com vista para a cozinha à esquerda e sala ampla com teto alto e vigas à direita.",
+            "name": "f52b30f8-f4e0-4f8a-bb0a-58388df2e75a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_d3d6fae0",
+            "path": "clips/uploads/dp6eHUEKpjb5zqRTyeu0bNbNxCLbyn2I2hvLUnwK.jpg",
+            "description": "Sala de estar com teto em vigas, lareira de pedra, madeira maciça, sofá e porta aberta ao jardim.",
+            "name": "c3cedd8a-bb0b-4f7d-85eb-511078493454.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8ed77561",
+            "path": "clips/uploads/Rp5tf3nV7wpguPvfzTLGIkBskugARKwgCILSaK8t.jpg",
+            "description": "Sala de estar com teto alto e vigas de madeira, portas abertas para o terraço com espreguiçadeiras e vista para a lagoa.",
+            "name": "946a96f1-2a74-4e30-9c7b-da74e4644275.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7535189c",
+            "path": "clips/uploads/NOWq3mTTSghcQf4DggNNaC0WueTjXPqOpE1DXIfy.jpg",
+            "description": "Sala de estar com sofá bege e lareira, apainelado em madeira e janela aberta para as árvores e a lagoa.",
+            "name": "82adaeb1-a376-44b4-a70e-d7ebd07094e8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1a558168",
+            "path": "clips/uploads/C5YezuSON1Gv9YV28ZsKCkF6aQnZAXL7Sh53amME.jpg",
+            "description": "Terraço de madeira com espreguiçadeiras e mesa de piquenique, um relvado com flores e a lagoa ao fundo.",
+            "name": "e1691c12-1bad-4da8-b858-533b3511dd52.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5c7f6465",
+            "path": "clips/uploads/VTogb6cItN8kZ7wLqAoyLfq6NApbgvBOs3whJxIG.jpg",
+            "description": "Vista de cima sobre o telhado da casa entre árvores e fetos, com a Lagoa das Furnas e as montanhas.",
+            "name": "dd310ee2-9b99-4f5a-90d1-a0c53735a406.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_88c3cae4",
+            "path": "clips/uploads/kLL37ZS6Y2nkTUDfDPBsHFUiz3nsnUmFTMxGcFiV.jpg",
+            "description": "Vista aérea da Lagoa das Furnas com a margem arborizada e um marcador RE/MAX a assinalar a casa.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9e17a655",
+            "path": "clips/uploads/ASHqyMeT7gj4J5LMq35re8lPTNI7jqaqMjK0xJNL.jpg",
+            "description": "Logótipo RE/MAX 4YOU, com o balão vermelho e azul sobre fundo branco.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_23272ba6",
+            "path": "clips/uploads/P2lNwwRdNHLTnowVFLUmamTOlADKSyDlQLT1g23W.png",
+            "description": "Retrato do agente, provavelmente Sérgio Mestre, de fato azul, com o logótipo RE/MAX Grupo 4 You.",
+            "name": "Sergio.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details\nUma propriedade única num local mágico!\n\nSe alguma vez imaginou acordar com o cantar dos pássaros na margem de uma magnífica lagoa rodeada(o) de luxuriante vegetação então é porque sonhou com esta propriedade. A Lagoa das Furnas, escolhida por José do Canto para em 1886 edificar a Igreja da Nossa Senhora das Vitórias numa das suas margens, possui o encanto de um conto de fadas quando integra nas suas escarpadas encostas, repletas de variados tons de verde de variada vegetação, as caldeiras e fumarolas na expressão máxima do vulcanismo da ilha com a beleza natural de um extenso lençol de água.\n\nNuma rara oportunidade de aquisição, esta exclusiva moradia totalmente renovada e equipada em 2019 com materiais da mais elevada qualidade como pavimentos em madeira maciça de Sucupira, lambril de madeira de Cambala, sanitários da Willeroy & Boch, cozinha Bosh e multimédia Bangs & Olufsen é, sem qualquer dúvida, a casa de férias de sonho.\n\nA propriedade com 5.000m2 embora possua acesso direto pela estrada que ladea a Lagoa, encontra-se sobre-elevada em relação à mesma o que permite uma vista de cortar a respiração sem nunca perder a total privacidade dos residentes. A entrada principal é também o ponto de distribuição para todos os compartimentos. A sala comum, com acesso direto ao exterior por duas portas francesas onde irá poder desfrutar de relaxante e memorável fim de tarde com a constante presença da lagoa aos seus pés. O quarto principal, com a mesma vista, irá proporcionar-lhe um amanhecer com total tranquilidade e paz.\n\nAinda no piso térreo, uma Cozinha totalmente equipada com zona informal de refeições e uma Instalação Sanitária revestida a mármore.\n\nNo piso superior, um quarto duplo com pavimento acabado em Sucupira e com janela com vista para a Lagoa e uma Instalação Sanitária completa com banheira e duche também esta revestida a mármore e com pavimento radiante.\n\nA moradia possui ar condicionado central, alarme e sistema de video-vigilância.\n\nO aprazível espaço exterior, onde arvores maduras proporcionam a sombra natural para os dias quentes de verão, conta com uma zona de lazer em direta comunicação com a Sala Comum munida de mobiliário em Teka. Uma zona de estacionamento com posto de alimentação para viaturas eléctricas e um belo jardim recheado de plantas decorativas e flores.\n\nA venda inclui todo o mobiliário e equipamentos.\n\n \n\nDetalhes\nÁrea Bruta Privativa m²\n138\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n5 000\nÁrea Útil m²\n138\nQuartos\n2\nAno de Construção\n2019\nPiso\n- -\nWC/Casas de banho\n2\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nSim",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia à venda junto à Lagoa das Furnas, São Miguel, Açores",
+            "summary": "A Lagoa das Furnas ocupa uma caldeira vulcânica ativa em São Miguel, com fumarolas nas margens onde se coze o famoso cozido. Em 2025, os Açores tiveram a maior subida anual de preços de casas do país, segundo o índice idealista.",
+            "timeline": [
+                {
+                    "label": "Última erupção do vulcão das Furnas",
+                    "sublabel": "1630"
+                },
+                {
+                    "label": "Açores lideram subida de preços das casas",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Subida anual dos preços das casas nos Açores (idealista)",
+                    "value": 20.1,
+                    "unit": "% (2025)"
+                },
+                {
+                    "label": "Ano da última erupção do vulcão das Furnas",
+                    "value": 1630,
+                    "unit": "ano"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "A lagoa fica numa caldeira vulcânica, na Paisagem Protegida das Furnas",
+                "Nas margens há fumarolas ativas",
+                "O cozido das Furnas é feito em panelas enterradas no solo vulcânico e cozinhado pelo calor geotérmico durante várias horas",
+                "Em 2025, os Açores tiveram a maior valorização regional das casas em Portugal"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Furnas",
+                "https://volcano.oregonstate.edu/furnas",
+                "https://volcanolive.com/furnas.html",
+                "https://www.ivar.azores.gov.pt/publicacoes/Paginas/pei-pacheco-IAVCEI-Commission-on-Volcanic-Lakes-11th-Workshop-2023.aspx",
+                "https://itrails.visitazores.com/trails/EN/SAOMIGUEL/PRC22SMI/trilhoMobile.pdf",
+                "https://www.ncl.com/shore-excursions/PDL_56/Furnas-Valley-With-Cozido-Das-Caldeiras",
+                "https://www.dnoticias.pt/2026/1/2/475767-precos-das-casas-valorizou-146-na-madeira-em-2025/",
+                "https://www.idealista.pt/news/node/73196"
+            ]
+        },
+        "suggested": {
+            "title": "Casa com vista para a Lagoa das Furnas à venda nos Açores",
+            "description": "Em São Miguel, nos Açores, esta casa fica num terreno de 5 mil metros elevado sobre a Lagoa das Furnas, com vista total e privacidade absoluta. Foi renovada em 2019 com madeira maciça, mármore e equipamentos de referência, e tem jardim com árvores maduras e zona de estar exterior. Vende-se mobilada e equipada por 1.700.000 €. Para marcar visita, contacte Sérgio Mestre, da RE/MAX 4U.",
+            "tags": [
+                "Lagoa das Furnas",
+                "São Miguel",
+                "Açores",
+                "casa à venda",
+                "imobiliário de luxo",
+                "moradia com vista",
+                "RE/MAX 4U",
+                "imobiliário Açores"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-jgeu2",
+    "created_at": "2026-10-08T11:02:11+00:00",
+    "updated_at": "2026-10-08T11:06:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/NXKY7NxJEXmFBbKUcQcn4oG9Hs0zov7zMDRKjiTJ.mp3",
+    "transcript": {
+        "duration": 37.63999938964844,
+        "text": "Uma casa com a Lagoa das Furnas aos pés. Em São Miguel, nos Açores, num terreno com 5 mil metros elevado sobre a lagoa, com vista total e privacidade absoluta. Renovada em 2019, com materiais de topo, madeira maciça, mármore e equipamentos de referência. A sala abre-se para o exterior, com a lagoa à frente. O quarto principal tem a mesma vista, para acordar em silêncio. Lá fora, árvores maduras, um jardim cheio de flores e zona de estar ao ar livre. Vende-se mobilada e equipada, 1 milhão e 700 mil euros. Para visitar, fale com o Sérgio Mestre, da Remax 4U.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.30000001192092896
+            },
+            {
+                "word": "casa",
+                "start": 0.30000001192092896,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "com",
+                "start": 0.6200000047683716,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "a",
+                "start": 0.8600000143051147,
+                "end": 1.1200000047683716
+            },
+            {
+                "word": "Lagoa",
+                "start": 1.1200000047683716,
+                "end": 1.1399999856948853
+            },
+            {
+                "word": "das",
+                "start": 1.1399999856948853,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "Furnas",
+                "start": 1.4199999570846558,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "aos",
+                "start": 1.8200000524520874,
+                "end": 2.0999999046325684
+            },
+            {
+                "word": "pés",
+                "start": 2.0999999046325684,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "Em",
+                "start": 3.180000066757202,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "São",
+                "start": 3.259999990463257,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "Miguel",
+                "start": 3.4600000381469727,
+                "end": 3.7200000286102295
+            },
+            {
+                "word": "nos",
+                "start": 3.799999952316284,
+                "end": 4
+            },
+            {
+                "word": "Açores",
+                "start": 4,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "num",
+                "start": 4.519999980926514,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "terreno",
+                "start": 4.699999809265137,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "com",
+                "start": 4.900000095367432,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "5",
+                "start": 5.199999809265137,
+                "end": 5.579999923706055
+            },
+            {
+                "word": "mil",
+                "start": 5.579999923706055,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "metros",
+                "start": 5.760000228881836,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "elevado",
+                "start": 6.119999885559082,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "sobre",
+                "start": 6.639999866485596,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "a",
+                "start": 6.860000133514404,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "lagoa",
+                "start": 7.239999771118164,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 7.800000190734863,
+                "end": 7.960000038146973
+            },
+            {
+                "word": "vista",
+                "start": 7.960000038146973,
+                "end": 8.140000343322754
+            },
+            {
+                "word": "total",
+                "start": 8.140000343322754,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 8.600000381469727,
+                "end": 8.779999732971191
+            },
+            {
+                "word": "privacidade",
+                "start": 8.779999732971191,
+                "end": 9.180000305175781
+            },
+            {
+                "word": "absoluta",
+                "start": 9.180000305175781,
+                "end": 9.920000076293945
+            },
+            {
+                "word": "Renovada",
+                "start": 10.819999694824219,
+                "end": 11
+            },
+            {
+                "word": "em",
+                "start": 11,
+                "end": 11.119999885559082
+            },
+            {
+                "word": "2019",
+                "start": 11.119999885559082,
+                "end": 11.920000076293945
+            },
+            {
+                "word": "com",
+                "start": 12.020000457763672,
+                "end": 12.140000343322754
+            },
+            {
+                "word": "materiais",
+                "start": 12.140000343322754,
+                "end": 12.5
+            },
+            {
+                "word": "de",
+                "start": 12.5,
+                "end": 13.020000457763672
+            },
+            {
+                "word": "topo",
+                "start": 13.020000457763672,
+                "end": 13.119999885559082
+            },
+            {
+                "word": "madeira",
+                "start": 13.859999656677246,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "maciça",
+                "start": 13.859999656677246,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "mármore",
+                "start": 14.739999771118164,
+                "end": 14.859999656677246
+            },
+            {
+                "word": "e",
+                "start": 14.859999656677246,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "equipamentos",
+                "start": 15.119999885559082,
+                "end": 15.380000114440918
+            },
+            {
+                "word": "de",
+                "start": 15.380000114440918,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "referência",
+                "start": 15.739999771118164,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "A",
+                "start": 16.940000534057617,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "sala",
+                "start": 17.219999313354492,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "abre",
+                "start": 17.459999084472656,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "se",
+                "start": 17.860000610351562,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "para",
+                "start": 18.059999465942383,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "o",
+                "start": 18.1200008392334,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "exterior",
+                "start": 18.579999923706055,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 18.719999313354492,
+                "end": 18.8799991607666
+            },
+            {
+                "word": "a",
+                "start": 18.8799991607666,
+                "end": 19.040000915527344
+            },
+            {
+                "word": "lagoa",
+                "start": 19.040000915527344,
+                "end": 19.100000381469727
+            },
+            {
+                "word": "à",
+                "start": 19.100000381469727,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "frente",
+                "start": 19.639999389648438,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "O",
+                "start": 20.280000686645508,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "quarto",
+                "start": 20.479999542236328,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "principal",
+                "start": 20.639999389648438,
+                "end": 21.18000030517578
+            },
+            {
+                "word": "tem",
+                "start": 21.18000030517578,
+                "end": 21.360000610351562
+            },
+            {
+                "word": "a",
+                "start": 21.360000610351562,
+                "end": 21.739999771118164
+            },
+            {
+                "word": "mesma",
+                "start": 21.739999771118164,
+                "end": 21.739999771118164
+            },
+            {
+                "word": "vista",
+                "start": 21.739999771118164,
+                "end": 22.059999465942383
+            },
+            {
+                "word": "para",
+                "start": 22.440000534057617,
+                "end": 22.520000457763672
+            },
+            {
+                "word": "acordar",
+                "start": 22.520000457763672,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "em",
+                "start": 22.899999618530273,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "silêncio",
+                "start": 23.079999923706055,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "Lá",
+                "start": 24.299999237060547,
+                "end": 24.420000076293945
+            },
+            {
+                "word": "fora",
+                "start": 24.420000076293945,
+                "end": 24.760000228881836
+            },
+            {
+                "word": "árvores",
+                "start": 25.280000686645508,
+                "end": 25.399999618530273
+            },
+            {
+                "word": "maduras",
+                "start": 25.399999618530273,
+                "end": 25.920000076293945
+            },
+            {
+                "word": "um",
+                "start": 26.100000381469727,
+                "end": 26.360000610351562
+            },
+            {
+                "word": "jardim",
+                "start": 26.360000610351562,
+                "end": 26.5
+            },
+            {
+                "word": "cheio",
+                "start": 26.5,
+                "end": 26.81999969482422
+            },
+            {
+                "word": "de",
+                "start": 26.81999969482422,
+                "end": 27.420000076293945
+            },
+            {
+                "word": "flores",
+                "start": 27.420000076293945,
+                "end": 27.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 27.420000076293945,
+                "end": 27.959999084472656
+            },
+            {
+                "word": "zona",
+                "start": 27.959999084472656,
+                "end": 28.15999984741211
+            },
+            {
+                "word": "de",
+                "start": 28.15999984741211,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "estar",
+                "start": 28.440000534057617,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "ao",
+                "start": 28.540000915527344,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "ar",
+                "start": 28.799999237060547,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "livre",
+                "start": 28.799999237060547,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "Vende",
+                "start": 29.65999984741211,
+                "end": 30.059999465942383
+            },
+            {
+                "word": "se",
+                "start": 30.059999465942383,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "mobilada",
+                "start": 30.299999237060547,
+                "end": 30.760000228881836
+            },
+            {
+                "word": "e",
+                "start": 30.760000228881836,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "equipada",
+                "start": 30.920000076293945,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "1",
+                "start": 32,
+                "end": 32.119998931884766
+            },
+            {
+                "word": "milhão",
+                "start": 32.119998931884766,
+                "end": 32.36000061035156
+            },
+            {
+                "word": "e",
+                "start": 32.36000061035156,
+                "end": 32.52000045776367
+            },
+            {
+                "word": "700",
+                "start": 32.52000045776367,
+                "end": 32.900001525878906
+            },
+            {
+                "word": "mil",
+                "start": 32.900001525878906,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "euros",
+                "start": 33.18000030517578,
+                "end": 33.5
+            },
+            {
+                "word": "Para",
+                "start": 34.15999984741211,
+                "end": 34.2400016784668
+            },
+            {
+                "word": "visitar",
+                "start": 34.2400016784668,
+                "end": 34.939998626708984
+            },
+            {
+                "word": "fale",
+                "start": 35.380001068115234,
+                "end": 35.380001068115234
+            },
+            {
+                "word": "com",
+                "start": 35.380001068115234,
+                "end": 35.560001373291016
+            },
+            {
+                "word": "o",
+                "start": 35.560001373291016,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "Sérgio",
+                "start": 35.7400016784668,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "Mestre",
+                "start": 35.86000061035156,
+                "end": 36.29999923706055
+            },
+            {
+                "word": "da",
+                "start": 36.5,
+                "end": 36.65999984741211
+            },
+            {
+                "word": "Remax",
+                "start": 36.65999984741211,
+                "end": 37.02000045776367
+            },
+            {
+                "word": "4U",
+                "start": 37.02000045776367,
+                "end": 37.619998931884766
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.63999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 6.6,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Aos pés da Lagoa das Furnas",
+                        "params": {
+                            "src": "img_88c3cae4",
+                            "avatar": "img_23272ba6",
+                            "logo": "img_9e17a655",
+                            "price": "1.700.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T2 na Lagoa das Furnas",
+                            "location": "Furnas, Açores · 138 m² · 2 quartos",
+                            "agentName": "Sérgio Mestre",
+                            "phone": "+351 962 812 678",
+                            "legal": "RE/MAX 4YOU"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.6,
+                "end": 10.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Sobre a Lagoa das Furnas",
+                        "params": {
+                            "src": "img_5c7f6465",
+                            "title": "Sobre a Lagoa das Furnas",
+                            "items": [
+                                "Terreno de 5.000 m²",
+                                "Elevado sobre a lagoa",
+                                "Vista total",
+                                "Privacidade absoluta"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.4,
+                "end": 13.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_d3227d5a",
+                            "src2": "img_d3d6fae0",
+                            "src3": "img_aa5d7ccb",
+                            "src4": "img_7535189c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.6,
+                "end": 16.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Madeira maciça e mármore",
+                        "params": {
+                            "src": "img_934d85c9",
+                            "src2": "img_7ed6356d",
+                            "src3": "img_ae372106",
+                            "src4": "img_d65630dc"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.6,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_8ed77561",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 24,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_0dc6a804",
+                            "src2": "img_42355bb1",
+                            "angle": 8,
+                            "entrySeconds": 0.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Jardim com vista lagoa",
+                        "params": {
+                            "src": "img_1a558168",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 33.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Vende-se mobilada · 1.700.000 €",
+                        "params": {
+                            "src": "img_d3d6fae0",
+                            "src2": "img_65f08479",
+                            "src3": "img_aa5d7ccb",
+                            "src4": "img_0dc6a804",
+                            "src5": "img_8ed77561"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.8,
+                "end": 37.63999938964844,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sérgio Mestre",
+                        "params": {
+                            "src": "img_23272ba6",
+                            "logo": "img_9e17a655",
+                            "name": "Sérgio Mestre",
+                            "role": "Consultor imobiliário · RE/MAX 4YOU",
+                            "buttons": "+351 962 812 678 | Marque a sua visita",
+                            "phone": "+351 962 812 678"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-jgeu2/clip.mp4",
+    "error": null
+}

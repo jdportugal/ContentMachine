@@ -11,6 +11,13 @@ class ImageProbe
     /** Average luminance of the opaque pixels → 'light' | 'dark' | 'mixed'. */
     public static function tone(string $path): string
     {
+        // GD decodes the whole bitmap (~5 bytes/px): a 7479×5283 logo needed 158 MB and the
+        // fatal left its import job reserved, the clip stuck on "importing".
+        // ponytail: huge images just skip the tone; downscale first if their tone ever matters.
+        $size = @getimagesize($path);
+        if ($size && $size[0] * $size[1] > 16_000_000) {
+            return 'mixed';
+        }
         $data = @file_get_contents($path);
         $im = $data ? @imagecreatefromstring($data) : false;
         if (! $im) {

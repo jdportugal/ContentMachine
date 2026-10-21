@@ -1,0 +1,1283 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa de 1938 em Colares com adega tradicional | 950 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-3-quartos-colares-396m2/r981986",
+            "agent": "Sandrine Abreu",
+            "phone": "+351963452857",
+            "agency": "iad Portugal",
+            "hook": "Uma casa de 1938 em Colares, com adega tradicional.",
+            "voiceover": "Uma casa de 1938 em Colares, com adega tradicional. Na Eugaria, na Serra de Sintra, perto da Praia Grande e da Adraga. Duas reabilitações que respeitaram a traça original. Sala com lareira e aquecimento central. Três quartos, um deles suite, e um espaço extra para escritório ou biblioteca. A adega mantém o carácter da construção original. Lá fora, jardim e churrasqueira. Estacionamento coberto para dois carros, com carregador elétrico. Novecentos e cinquenta mil euros. Para visitar, fale com a Sandrine Abreu, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Uma casa de 1938 em Colares, com adega tradicional.",
+                    "caption": "Colares · 1938"
+                },
+                {
+                    "photo": "paisagem da Serra de Sintra ou praia próxima",
+                    "vo": "Na Eugaria, na Serra de Sintra, perto da Praia Grande e da Adraga.",
+                    "caption": "Serra de Sintra"
+                },
+                {
+                    "photo": "detalhe de arquitetura original (portas, janelas, cantaria)",
+                    "vo": "Duas reabilitações que respeitaram a traça original.",
+                    "caption": "Traça original preservada"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "Sala com lareira e aquecimento central.",
+                    "caption": "Sala com lareira"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "Três quartos, um deles suite,",
+                    "caption": "Três quartos · suite"
+                },
+                {
+                    "photo": "espaço extra / escritório",
+                    "vo": "e um espaço extra para escritório ou biblioteca.",
+                    "caption": "Escritório ou biblioteca"
+                },
+                {
+                    "photo": "adega",
+                    "vo": "A adega mantém o carácter da construção original.",
+                    "caption": "Adega tradicional"
+                },
+                {
+                    "photo": "jardim com churrasqueira",
+                    "vo": "Lá fora, jardim e churrasqueira.",
+                    "caption": "Jardim e churrasqueira"
+                },
+                {
+                    "photo": "telheiro / estacionamento coberto",
+                    "vo": "Estacionamento coberto para dois carros, com carregador elétrico.",
+                    "caption": "Carregador elétrico"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Novecentos e cinquenta mil euros. Para visitar, fale com a Sandrine Abreu, da iad Portugal.",
+                    "caption": "950.000 € · Sandrine Abreu · iad Portugal"
+                }
+            ],
+            "flags": [
+                "Os detalhes dizem 'Garagem', mas o texto descreve 'estacionamento coberto com telheiro para duas viaturas'. O guião usa 'estacionamento coberto'. Confirmar se é garagem fechada.",
+                "A wallbox para carros elétricos só aparece no texto, não nos detalhes. Confirmar com a consultora antes de publicar."
+            ],
+            "message": "Boa tarde Sra. Sandrine,\nO meu nome é João Ferreira.\n\nVi a moradia T3+1 em Colares que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 3 quartos de 396 m² em Colares",
+            "price": 950000,
+            "details": {
+                "Preço": "950 000 €",
+                "Localização": "Colares, 2705-207",
+                "Referência": "981986",
+                "Área Bruta m²": "396",
+                "Área Total do Lote m²": "437",
+                "Quartos": 3,
+                "Ano de Construção": 1938,
+                "Certificado Energético": "E",
+                "Características": "396 m² área bruta, 274 m² úteis, 4 casas de banho, Jardim, Garagem, Alarme, Lareira, Sala de jantar, Fibra ótica, property.feature.heating, Construído em 1938, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Sandrine Abreu - and phone number - +351963452857. Agency: iad Portugal.\nThe agent's photo is Sandrine Abreu.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa de 1938 em Colares, com adega tradicional.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Colares · 1938»\n- paisagem da Serra de Sintra ou praia próxima → «Serra de Sintra»\n- detalhe de arquitetura original (portas, janelas, cantaria) → «Traça original preservada»\n- sala com lareira → «Sala com lareira»\n- quarto suite → «Três quartos · suite»\n- espaço extra / escritório → «Escritório ou biblioteca»\n- adega → «Adega tradicional»\n- jardim com churrasqueira → «Jardim e churrasqueira»\n- telheiro / estacionamento coberto → «Carregador elétrico»\n- end card → «950.000 € · Sandrine Abreu · iad Portugal»\n\nHere are the house details:\n\nCasa/Moradia 3 quartos de 396 m² em Colares\nPreço\n950 000 €\nLocalização\nColares, 2705-207\nReferência\n981986\nÁrea Bruta m²\n396\nÁrea Total do Lote m²\n437\nQuartos\n3\nAno de Construção\n1938\nCertificado Energético\nE\nCaracterísticas\n396 m² área bruta, 274 m² úteis, 4 casas de banho, Jardim, Garagem, Alarme, Lareira, Sala de jantar, Fibra ótica, property.feature.heating, Construído em 1938, Intercomunicador\n\nDescrição\nMoradia T3+1 de 396 m2 área bruta, em Colares\n\nHá casas que se compram e há casas que se vivem. Esta distinta moradia isolada T3+1, localizada na tranquila localidade de Eugaria, em Colares, é um verdadeiro convite a desfrutar de um estilo de vida onde o charme da arquitetura tradicional se encontra com o conforto contemporâneo. Datada de 1938, esta propriedade preserva cuidadosamente a sua identidade original, tendo sido alvo de duas fases de reabilitação e melhoramento que respeitaram a sua traça clássica, valorizando cada detalhe e conferindo-lhe um ambiente de elegância intemporal. Com uma área bruta de construção de 396 m², oferece espaços generosos, luminosos e harmoniosamente distribuídos. Dispõe de três quartos, incluindo uma confortável suite, um espaço adicional que poderá ser adaptado como escritório, biblioteca, quarto de hóspedes ou sala de lazer, quatro casas de banho e uma cozinha totalmente mobilada e equipada, concebida para responder às exigências da vida moderna. A sala, ampla e acolhedora, é enriquecida por uma elegante lareira que cria um ambiente de conforto e sofisticação nos dias mais frios, sendo complementada por um sistema de aquecimento central que assegura bem-estar durante todo o ano. A moradia conta ainda com uma adega tradicional, um espaço cheio de carácter que preserva a autenticidade da construção original, ideal para os apreciadores de vinho, para momentos de convívio ou simplesmente como um elemento diferenciador que reforça a identidade desta propriedade. No exterior, o jardim convida a momentos de tranquilidade e convívio, enquanto a churrasqueira proporciona o cenário perfeito para refeições ao ar livre com família e amigos. A propriedade dispõe ainda de estacionamento coberto com telheiro para duas viaturas, equipado com wallbox para carregamento de veículos elétricos, sistema de alarme e uma excelente exposição solar, permitindo que a luz natural acompanhe o dia em praticamente todas as divisões. Cada espaço desta moradia foi pensado para proporcionar uma experiência de habitação distinta, onde a autenticidade, o conforto e a funcionalidade coexistem em perfeita sintonia.\n\nViver em Colares é desfrutar de uma localização privilegiada, onde a natureza, a história e o património se unem de forma singular. Inserida na deslumbrante paisagem da Serra de Sintra, classificada como Património Mundial pela UNESCO, esta propriedade encontra-se a poucos minutos de algumas das mais emblemáticas atrações da região, como a Quinta da Regaleira, o Centro Histórico de Sintra, o majestoso Palácio da Pena e o romântico Parque e Palácio de Monserrate. As reconhecidas praias da costa de Sintra, entre as quais a Praia Grande, a Praia das Maçãs e a Praia da Adraga, oferecem um estilo de vida único, marcado pela proximidade ao mar e pela beleza das paisagens naturais. A envolvente proporciona ainda acesso a comércio, serviços, escolas, restaurantes de referência e excelentes ligações rodoviárias, permitindo usufruir da tranquilidade característica da região sem abdicar da proximidade a Lisboa e Cascais. Uma localização onde qualidade de vida, privacidade e exclusividade caminham lado a lado.\n\nA iad Portugal integra uma das mais inovadoras redes imobiliárias da Europa, presente em vários países e assente num modelo de consultoria de proximidade. Combinando tecnologia de vanguarda, um profundo conhecimento do mercado e um acompanhamento totalmente personalizado, a iad oferece aos seus clientes um serviço transparente, profissional e orientado para resultados. Seja para comprar ou vender, cada projeto é tratado com dedicação, rigor e compromisso, garantindo um processo seguro e uma experiência imobiliária de excelência.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia de 1938 em Colares (Eugaria), Sintra",
+            "summary": "Moradia T3+1 construída em 1938 na Eugaria, em Colares, à venda por 950 mil euros. Fica numa zona de vinho histórico e junto à Paisagem Cultural de Sintra, classificada pela UNESCO.",
+            "timeline": [
+                {
+                    "label": "Colares torna-se região demarcada de vinho",
+                    "sublabel": "1908"
+                },
+                {
+                    "label": "Construção da moradia",
+                    "sublabel": "1938"
+                },
+                {
+                    "label": "Sintra classificada Paisagem Cultural pela UNESCO",
+                    "sublabel": "1995"
+                },
+                {
+                    "label": "Criação da Parques de Sintra – Monte da Lua",
+                    "sublabel": "2000"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 950000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área bruta de construção",
+                    "value": 396,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Quartos (T3+1)",
+                    "value": 3,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Preço mediano das casas em Portugal (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano das casas em Portugal (INE, 2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Colares é região demarcada de vinho desde 1908",
+                "As vinhas de Colares crescem em chão de areia e resistiram à filoxera",
+                "Sintra foi o primeiro sítio europeu classificado pela UNESCO como Paisagem Cultural, em 1995",
+                "A casa foi reabilitada em duas fases que mantiveram a traça original"
+            ],
+            "sources": [
+                "https://remax.pt/en/imoveis/venda-moradia-t4-sintra-colares/125871125-24",
+                "https://www.youroverseashome.com/portugal/property-for-sale/details/house-in-colares-1264878",
+                "https://supercasa.pt/ru-ru/zona/comprar-casas/eugaria/www.google-analytics.com",
+                "https://visitsintra.travel/en/eat-drink/colares-wine",
+                "https://www.winewithseth.com/winewiki/colares-doc/",
+                "https://www.timeout.pt/lisboa/pt/noticias/mais-de-200-eventos-fazem-a-festa-dos-25-anos-de-sintra-como-patrimonio-mundial-012020",
+                "https://es.hispanopedia.com/wiki/Palacio_Nacional_de_Sintra",
+                "https://www.parquesdesintra.pt/media/iugbtwuw/brochura_pt_en_2017_light.pdf",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/"
+            ]
+        },
+        "suggested": {
+            "title": "Casa de 1938 em Colares com adega tradicional | 950 mil €",
+            "description": "Moradia de 1938 na Serra de Sintra, perto da Praia Grande e da Adraga, reabilitada sem perder a traça original. Tem sala com lareira, três quartos (um em suite), escritório, adega, jardim com churrasqueira e garagem coberta para dois carros com carregador elétrico. Para marcar visita, fale com a Sandrina Abreu, da iad Portugal.",
+            "tags": [
+                "Colares",
+                "Sintra",
+                "moradia à venda",
+                "imobiliário Portugal",
+                "casa antiga",
+                "Praia Grande",
+                "adega",
+                "iad Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r981986-pbkss",
+    "created_at": "2026-10-15T13:15:56+00:00",
+    "updated_at": "2026-10-15T13:28:31+00:00",
+    "source_path": "clips/uploads/NNrxvYjnVxVKtDA0sUFubSor3lYcrN5rwdaD44nt.mp3",
+    "images": [
+        {
+            "id": "img_3cae3abf",
+            "path": "clips/uploads/eHHQADsozNBb3ACtigzJc8oq9VaYN5S52GPWsaKc.jpg",
+            "description": "Fachada branca da casa de 1938 com portadas verdes, varanda com porta em arco e jardim relvado ao sol.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bebed456",
+            "path": "clips/uploads/7siRNHRSNORLZ1UkWVeaWaDK2sW6FVCYqRB0X16K.jpg",
+            "description": "Entrada coberta com porta de madeira antiga em moldura de pedra, degraus de pedra e chão de tijoleira.",
+            "name": "019f915387d0822b67fc249d3deef0a2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_948957f9",
+            "path": "clips/uploads/EFQw25GL8snnXOHW5ssaWVm8c3oF8o64IcaTPH6N.jpg",
+            "description": "Quarto de casal com cama de madeira escura, soalho de pinho, janela em arco e radiador do aquecimento central.",
+            "name": "019f9155a01cb0810f8a4c1e11cb2c96.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8e5c12f9",
+            "path": "clips/uploads/oBcPKIOgK4rXMXYBim7KCnBalhXp3jiPr2XnHGQe.jpg",
+            "description": "Quarto com cama individual de manta rosa, cadeirão xadrez vermelho, janela em arco e porta para outra divisão.",
+            "name": "019f91559feade8bc3e8b753606a4beb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2d3e6116",
+            "path": "clips/uploads/EnwqxEa12ZhuhGWuzY0yRQ5wJQkDjyTHrJy4V3yW.jpg",
+            "description": "O mesmo quarto noutro ângulo: estantes com livros, roupeiro branco, cadeirão xadrez vermelho e janela em arco.",
+            "name": "019f9155a00f35d6547245e2766d1d81.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_65c7b3c2",
+            "path": "clips/uploads/zjNqYUJkwC6KHhn4D7hsyaijYT35cgKQIE84yfTs.jpg",
+            "description": "Quarto ou escritório com secretária, computador, sofá-cama verde, fotografias antigas emolduradas e estante embutida.",
+            "name": "019f9155a0190b49885bd7e49cf18712.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c95c7361",
+            "path": "clips/uploads/JVGD0eDNt8e9N8wIYCwRK3NuW8ukyTprgfPA21MN.jpg",
+            "description": "Escritório ou quarto extra com cortinas floridas, secretária com computador, tapete verde e janela em arco.",
+            "name": "019f91559fdaadbd33b80e6f296855ab.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6cf0e65f",
+            "path": "clips/uploads/ZF0x4vL387vKW306DB9i6sSpKBMLTeri4ERjjnFS.jpg",
+            "description": "Cozinha com vigas de madeira antigas no teto, chão azul, mesa de refeição e passagem para sala com estantes.",
+            "name": "019f915123bb141af0294ada68eca0fe.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_876961e0",
+            "path": "clips/uploads/eN6JrZxPr9sNmKQlZZlsTCtMX8cSW8d8iLBUoeMO.jpg",
+            "description": "Cozinha vista do balcão de granito, com vigas de madeira rústicas, pote de azeitonas e porta para o jardim.",
+            "name": "019f915123ea14f21ec23aa429b1a759.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf3cd164",
+            "path": "clips/uploads/ubZRL57vbJx0yu3Hc6BDo9btkuDSmixQD631lMc7.jpg",
+            "description": "Cozinha em U com armários de madeira, chão de mosaico azul, mesa com cadeiras e frigorífico cheio de ímanes.",
+            "name": "019f915123bd26de7af6ecae0e349f33.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9cf99982",
+            "path": "clips/uploads/JLYUVqfB14FfJt5tK0c5upWxB5h3tVay5GEacEX9.jpg",
+            "description": "Sala de estar com lareira de canto, sofás de pele, baú de madeira e portas envidraçadas em arco para o jardim.",
+            "name": "019f9155d501d758a58b0ad1e903c682.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bb236398",
+            "path": "clips/uploads/bpPmNFu2x3C3b4QHmHHMSw8VLtLo6WpBYaznF4Wd.jpg",
+            "description": "Sala de estar ampla com sofás de pele, chão em tijoleira e escada em caracol; ao fundo, estantes de biblioteca.",
+            "name": "019f9155d4e142f78b506f4f98be8f09.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c83bb5bb",
+            "path": "clips/uploads/wy13i47mTElFMxKeVUzvNTPL9ox6KMXumW9TSRJW.jpg",
+            "description": "Zona de biblioteca com estantes de madeira e escada em caracol, aberta para a sala com lareira.",
+            "name": "019f9155d4f973e0c3bcd766f566f365.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2e7cff21",
+            "path": "clips/uploads/ypYPnbhZyF1siUTH9AaSeKChpFzOcxUOZsyrqjGa.jpg",
+            "description": "Biblioteca ou escritório com grande estante de madeira cheia de livros; ao lado, divisão com secretária.",
+            "name": "019f9155d520871e09bd552921d489de.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ac54fa4",
+            "path": "clips/uploads/CXWyi2nFbIrujV8Plxe1FeUVzdAv5rxedFwW66hx.jpg",
+            "description": "Sala de jantar com teto de vigas de madeira antigas, mesa para seis e janela para o jardim.",
+            "name": "019f915616c96e47713fbdec8d8b4ca2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f94e00f4",
+            "path": "clips/uploads/fLtsWPZF86nYJ5ajyYVeKlFHOg1pIAptJGkwlGiE.jpg",
+            "description": "Sala de jantar com vigas de madeira à vista, aparador com candeeiros e poltrona junto à porta.",
+            "name": "019f915616c682274ce8c64bf15d26f3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_acab2062",
+            "path": "clips/uploads/u7Wt84BhmeWfG5KuamWij9Eyi0vTOrzvwT19P3ob.jpg",
+            "description": "Sala ampla com vigas de madeira, duas poltronas vintage e mesa de jantar ao fundo; chão de madeira.",
+            "name": "019f915616f01f036728b60621ce886e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a6886b32",
+            "path": "clips/uploads/IYKTov4Iq0SA1lAlW7kmZENrbDUuYob9ol1t7rqv.jpg",
+            "description": "Sala de jantar com teto de vigas, aparador, quadro colorido e acesso a outra divisão rústica.",
+            "name": "019f915616b70b7b0923756fec67b1e1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f77e3055",
+            "path": "clips/uploads/1EWxmdifJ8fqMjpL8ZOm5wcCU66ZutG8PMN7unMG.jpg",
+            "description": "Casa de banho com banheira, cortina azul-turquesa, azulejos brancos com frisos azuis e janela.",
+            "name": "019f91568ab93f6799c496ec9c7dd78b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ac6256c6",
+            "path": "clips/uploads/dGaMk7wpBbrN1W0EZTTgAUsyMRayU6rAQu2cBw6v.jpg",
+            "description": "Casa de banho moderna, provavelmente da suite, com duche de vidro, mosaico cinzento e móvel lavatório cinzento.",
+            "name": "019f91568abc0d7333001fee49097e47.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6fba6c59",
+            "path": "clips/uploads/m5fft6atMhPAuo9hBQmnI8lpaOiQRLOdsXFUdVCx.jpg",
+            "description": "Casa de banho moderna, azulejo verde, base de duche com resguardo de vidro, móvel de madeira com lavatório.",
+            "name": "019f91568aabecca90c0ede23ca4d91d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f2ad3e1a",
+            "path": "clips/uploads/KS3hUszsUdepUQ3BP3SQO6zObbZf4iB7wzPsqbOW.jpg",
+            "description": "Casa de banho de sótão, azulejo azul, janela de telhado com céu azul, duche e lavatório de coluna.",
+            "name": "019f91568ade38fe1eacbbd7df3f47dd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_496f90e0",
+            "path": "clips/uploads/peaUUgJ1ANxQEcd6QdO9P1zE9VQIaIvJuPWtnp7f.jpg",
+            "description": "Quarto no sótão com teto inclinado, roupeiro de madeira, espelho, chão em tijoleira e cama de casal.",
+            "name": "019f915657ab7a153edb2a690901b95d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_70bde017",
+            "path": "clips/uploads/1fdQ2euy8SBJTG95qWrCLKn5Yp4WECm5dih4ideQ.jpg",
+            "description": "Quarto no sótão com teto inclinado, cama de casal com colcha estampada e candeeiros de leitura.",
+            "name": "019f9156579327d880b09e77ccb8f2a5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_caed36c2",
+            "path": "clips/uploads/XfEIBY9KdmRr5JApMQflJW6WFN0NsQuhpsyhJDEv.jpg",
+            "description": "Escritório/biblioteca com vigas de madeira escura no teto, estantes com livros, banco corrido e quadros.",
+            "name": "019f914fd8a31cfb154102722d54e164.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_42fd1f2d",
+            "path": "clips/uploads/lOU7hojEjY6etKsKlDjARxwV8qNueNlp3wCcIT9P.jpg",
+            "description": "Adega tradicional com vigas de madeira, paredes antigas, chão em tijoleira, balcão vintage com balança e ânforas.",
+            "name": "019f914fd8b53d1f11a0c3f33e26a5ae.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fcd6e52d",
+            "path": "clips/uploads/f7q9tNtTqS5Zpyic8UY3JW47agQmkfa6dT693q7o.jpg",
+            "description": "Closet de quarto com prateleiras de madeira cheias de roupa, chão de madeira, ligação à casa de banho da suite.",
+            "name": "019f914fd8bf5b73944455373b1040ac.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_fa031c9f",
+            "path": "clips/uploads/viAS48uf3H49mj7buq2yxYLywb5YHDH0JXBFwhuT.jpg",
+            "description": "Jardim visto de cima, relvado sintético, calçada em redor e alpendre coberto com mesa de refeições exterior.",
+            "name": "019f91553343c02c5bbb16f98342d108.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7288f4c8",
+            "path": "clips/uploads/UJ2Xj1XpJBPt9BEnBZcbmj1KmXYRAdrTmDMLGWFs.jpg",
+            "description": "Churrasqueira em tijolo sob alpendre com mesa de madeira, jardim relvado e fachada branca da casa ao fundo.",
+            "name": "019f915532d2949cb6b42c5aa9d9298c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0f4dc6f9",
+            "path": "clips/uploads/Qg3JbpUFFrQ2l8M9bOFpaJ5lUAtdeKQOywMs63ts.jpg",
+            "description": "Pormenor da fachada: janela de sacada com moldura de pedra, caixilho verde e grade de ferro, beirado tradicional.",
+            "name": "019f9155677d4705a21b33751c055db6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2722a6ad",
+            "path": "clips/uploads/YP9sr5ePREu1p76ejyKlHwUWF5Dx3Vlb4eFBZPUW.jpg",
+            "description": "Pormenor da fachada branca: janela de pedra em forma de quadrifólio com grade de ferro forjado e candeeiro exterior.",
+            "name": "019f915567c99ec00d8a41f42a9a8657.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6722c24d",
+            "path": "clips/uploads/rfZbf4wN9NfaDMzc5ireQVZDprZIeXnW5KA7elQM.jpg",
+            "description": "Pormenor interior: vão de janela com bancos de pedra dos dois lados, as tradicionais conversadeiras, sob janela de caixilho verde.",
+            "name": "019f915567d28207b16fa08c0609c677.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_21992da5",
+            "path": "clips/uploads/pjixIyiBL0Joixybl2ZaamqNzK8tbxUPdY2pCaHV.jpg",
+            "description": "Pátio calcetado com árvore de folhas vermelhas, entrada da casa branca com degraus de pedra e vegetação junto ao muro.",
+            "name": "019f9154343ea6edaf89761b1344cc0d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d503c571",
+            "path": "clips/uploads/4f4Sj0ypcnQcyRNlk1exQxCSnF2sbmy0T3UUjqF7.jpg",
+            "description": "Sala com tetos de vigas de madeira, aparador com quadros africanos, banquinhos, armário-vitrine e radiador do aquecimento central.",
+            "name": "019f915503986abb77aad6a6c8bd32fa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7ee63606",
+            "path": "clips/uploads/XO0Uz5TWlizTFdbGSCKIBPyI8OZrG09n0rbdjKZC.jpg",
+            "description": "Recanto de escritório ou biblioteca: estante cheia de livros, cadeirão de vime e porta envidraçada aberta para o jardim.",
+            "name": "019f915567b55a7c84e0946317cdef78.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8c0c8726",
+            "path": "clips/uploads/NlmWOKbXUlFnbOzxIVPeHqE19xUPwNnx53uQhsxE.jpg",
+            "description": "Entrada da propriedade: pátio calcetado, portão automático de correr e canteiro de estrelícias junto ao muro de pedra.",
+            "name": "019f9153886def230bc070e2cfbc4fca.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9edaf373",
+            "path": "clips/uploads/FcOD39iD0w7NK9r6c2L1dgNZmGgngwGTuizz4iDS.jpg",
+            "description": "Fachada da casa de 1938: varanda em ferro, janelas com cantarias de pedra, portadas verdes e floreiras.",
+            "name": "019f915488386e06da27997c34173148.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0b609b0e",
+            "path": "clips/uploads/JN16KYxbOPzKM4xWfT6XQCvOEGDkkHHOJtQrVGpN.jpg",
+            "description": "Pátio calcetado com telheiro de estacionamento coberto, carro com carregador elétrico na parede e anexo branco ao lado.",
+            "name": "019f9154c48c0d4340439c3790ebe1a1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_78bedd84",
+            "path": "clips/uploads/2P7UsMNXeLl1tgT5lyDtrIutMBUT76uJbSnIlFkq.jpg",
+            "description": "Fachada lateral com relvado do jardim, flores amarelas, ânfora de barro e muro com vasos, sob céu azul.",
+            "name": "019f9154881a3f2cea6ea95612ee6a7e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5c86092c",
+            "path": "clips/uploads/iwvDE7UnNiaIWxqyTfqTzMZ3ADSOCiAL6Zv3xuFC.jpg",
+            "description": "Vista geral da casa a partir do jardim: relvado, árvore antiga, chaminé, varanda em ferro e portas verdes.",
+            "name": "019f915532dda6c61e0860c69b6ee953.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_02e44f24",
+            "path": "clips/uploads/S0eTU4Pdfk4Q7IhQqt8l8yRFse9bXXVTOByBNXt4.png",
+            "description": "Retrato da consultora Sandrine Abreu, da iad Portugal.",
+            "name": "Sandrine Abreu.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3dd3e81b",
+            "path": "clips/uploads/My6vpMeuiMHgfKIspQsk5I5q3nibWXqenfsAK0hq.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/NNrxvYjnVxVKtDA0sUFubSor3lYcrN5rwdaD44nt.mp3",
+    "transcript": {
+        "duration": 33.52000045776367,
+        "text": "Uma casa de 1938 em Culares, com adega tradicional. Na Iogaria, na Serra de Sintra, perto da Praia Grande e da Adraga. Duas reabilitações que respeitaram a traça original. Sala com lareira e aquecimento central. Três quartos, um deles suite, e um espaço extra para escritório ou biblioteca. A adega mantém o caráter da construção original. Lá fora, jardim e churrasqueira. Estacionamento coberto para dois carros com carregador elétrico. 950 mil euros. Para visitar, fale com a Sandrina Abreu, da IA de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "casa",
+                "start": 0.2199999988079071,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "de",
+                "start": 0.5400000214576721,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "1938",
+                "start": 0.800000011920929,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "em",
+                "start": 2.0799999237060547,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "Culares",
+                "start": 2.4200000762939453,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "com",
+                "start": 3.0999999046325684,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "adega",
+                "start": 3.259999990463257,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "tradicional",
+                "start": 3.5199999809265137,
+                "end": 4.260000228881836
+            },
+            {
+                "word": "Na",
+                "start": 4.860000133514404,
+                "end": 4.880000114440918
+            },
+            {
+                "word": "Iogaria",
+                "start": 4.880000114440918,
+                "end": 5.320000171661377
+            },
+            {
+                "word": "na",
+                "start": 5.579999923706055,
+                "end": 5.880000114440918
+            },
+            {
+                "word": "Serra",
+                "start": 5.880000114440918,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 5.920000076293945,
+                "end": 6.260000228881836
+            },
+            {
+                "word": "Sintra",
+                "start": 6.260000228881836,
+                "end": 6.440000057220459
+            },
+            {
+                "word": "perto",
+                "start": 6.78000020980835,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "da",
+                "start": 6.860000133514404,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "Praia",
+                "start": 7.079999923706055,
+                "end": 7.300000190734863
+            },
+            {
+                "word": "Grande",
+                "start": 7.300000190734863,
+                "end": 7.639999866485596
+            },
+            {
+                "word": "e",
+                "start": 7.639999866485596,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "da",
+                "start": 7.840000152587891,
+                "end": 8
+            },
+            {
+                "word": "Adraga",
+                "start": 8,
+                "end": 8.420000076293945
+            },
+            {
+                "word": "Duas",
+                "start": 8.920000076293945,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "reabilitações",
+                "start": 9.100000381469727,
+                "end": 9.880000114440918
+            },
+            {
+                "word": "que",
+                "start": 9.880000114440918,
+                "end": 10.100000381469727
+            },
+            {
+                "word": "respeitaram",
+                "start": 10.100000381469727,
+                "end": 10.680000305175781
+            },
+            {
+                "word": "a",
+                "start": 10.680000305175781,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "traça",
+                "start": 10.880000114440918,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "original",
+                "start": 11.020000457763672,
+                "end": 11.5600004196167
+            },
+            {
+                "word": "Sala",
+                "start": 12.15999984741211,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "com",
+                "start": 12.220000267028809,
+                "end": 12.5
+            },
+            {
+                "word": "lareira",
+                "start": 12.5,
+                "end": 12.819999694824219
+            },
+            {
+                "word": "e",
+                "start": 12.819999694824219,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "aquecimento",
+                "start": 13.100000381469727,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "central",
+                "start": 13.460000038146973,
+                "end": 13.960000038146973
+            },
+            {
+                "word": "Três",
+                "start": 14.520000457763672,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "quartos",
+                "start": 14.640000343322754,
+                "end": 15.100000381469727
+            },
+            {
+                "word": "um",
+                "start": 15.359999656677246,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "deles",
+                "start": 15.460000038146973,
+                "end": 15.699999809265137
+            },
+            {
+                "word": "suite",
+                "start": 15.699999809265137,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 16.34000015258789,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "um",
+                "start": 16.479999542236328,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "espaço",
+                "start": 16.81999969482422,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "extra",
+                "start": 16.81999969482422,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "para",
+                "start": 17.239999771118164,
+                "end": 17.5
+            },
+            {
+                "word": "escritório",
+                "start": 17.5,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "ou",
+                "start": 18.040000915527344,
+                "end": 18.299999237060547
+            },
+            {
+                "word": "biblioteca",
+                "start": 18.299999237060547,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "A",
+                "start": 19.280000686645508,
+                "end": 19.3799991607666
+            },
+            {
+                "word": "adega",
+                "start": 19.3799991607666,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "mantém",
+                "start": 19.700000762939453,
+                "end": 20
+            },
+            {
+                "word": "o",
+                "start": 20,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "caráter",
+                "start": 20.260000228881836,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "da",
+                "start": 20.479999542236328,
+                "end": 20.719999313354492
+            },
+            {
+                "word": "construção",
+                "start": 20.719999313354492,
+                "end": 21.1200008392334
+            },
+            {
+                "word": "original",
+                "start": 21.1200008392334,
+                "end": 21.68000030517578
+            },
+            {
+                "word": "Lá",
+                "start": 22.200000762939453,
+                "end": 22.299999237060547
+            },
+            {
+                "word": "fora",
+                "start": 22.299999237060547,
+                "end": 22.579999923706055
+            },
+            {
+                "word": "jardim",
+                "start": 23.020000457763672,
+                "end": 23.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 23.239999771118164,
+                "end": 23.5
+            },
+            {
+                "word": "churrasqueira",
+                "start": 23.5,
+                "end": 24.079999923706055
+            },
+            {
+                "word": "Estacionamento",
+                "start": 24.600000381469727,
+                "end": 25.040000915527344
+            },
+            {
+                "word": "coberto",
+                "start": 25.040000915527344,
+                "end": 25.479999542236328
+            },
+            {
+                "word": "para",
+                "start": 25.479999542236328,
+                "end": 25.719999313354492
+            },
+            {
+                "word": "dois",
+                "start": 25.719999313354492,
+                "end": 26.059999465942383
+            },
+            {
+                "word": "carros",
+                "start": 26.059999465942383,
+                "end": 26.399999618530273
+            },
+            {
+                "word": "com",
+                "start": 26.399999618530273,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "carregador",
+                "start": 26.639999389648438,
+                "end": 27.059999465942383
+            },
+            {
+                "word": "elétrico",
+                "start": 27.059999465942383,
+                "end": 27.579999923706055
+            },
+            {
+                "word": "950",
+                "start": 28.360000610351562,
+                "end": 29
+            },
+            {
+                "word": "mil",
+                "start": 29,
+                "end": 29.31999969482422
+            },
+            {
+                "word": "euros",
+                "start": 29.31999969482422,
+                "end": 29.700000762939453
+            },
+            {
+                "word": "Para",
+                "start": 30,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "visitar",
+                "start": 30.299999237060547,
+                "end": 30.860000610351562
+            },
+            {
+                "word": "fale",
+                "start": 31.200000762939453,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "com",
+                "start": 31.200000762939453,
+                "end": 31.360000610351562
+            },
+            {
+                "word": "a",
+                "start": 31.360000610351562,
+                "end": 31.5
+            },
+            {
+                "word": "Sandrina",
+                "start": 31.5,
+                "end": 31.84000015258789
+            },
+            {
+                "word": "Abreu",
+                "start": 31.84000015258789,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "da",
+                "start": 32.41999816894531,
+                "end": 32.540000915527344
+            },
+            {
+                "word": "IA",
+                "start": 32.540000915527344,
+                "end": 32.7400016784668
+            },
+            {
+                "word": "de",
+                "start": 32.7400016784668,
+                "end": 32.91999816894531
+            },
+            {
+                "word": "Portugal",
+                "start": 32.91999816894531,
+                "end": 33.279998779296875
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 33.52000045776367,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.5,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "CASA DE 1938 EM COLARES",
+                        "params": {
+                            "src": "img_3cae3abf",
+                            "avatar": "img_02e44f24",
+                            "logo": "img_3dd3e81b",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "950.000 €",
+                            "location": "SINTRA · COLARES",
+                            "title": "MORADIA DE 1938",
+                            "facts": "396 m² · 3 quartos · 4 WC · adega",
+                            "cta": "Ligue já +351 963 452 857",
+                            "name": "Sandrine Abreu",
+                            "logoText": "iad Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.5,
+                "end": 6.7,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Colares · Serra de Sintra",
+                        "params": {
+                            "srcs": [
+                                "img_5c86092c",
+                                "img_78bedd84",
+                                "img_21992da5",
+                                "img_8c0c8726",
+                                "img_fa031c9f"
+                            ],
+                            "src": "img_42fd1f2d",
+                            "src2": "img_bebed456",
+                            "src3": "img_8e5c12f9",
+                            "src4": "img_2d3e6116",
+                            "src5": "img_65c7b3c2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.7,
+                "end": 8.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_9edaf373",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.8,
+                "end": 11.9,
+                "background": "papyrus",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Traça original preservada",
+                        "params": {
+                            "srcs": [
+                                "img_0f4dc6f9",
+                                "img_2722a6ad",
+                                "img_6722c24d",
+                                "img_bebed456"
+                            ],
+                            "src": "img_9edaf373",
+                            "src2": "img_c95c7361",
+                            "src3": "img_6cf0e65f",
+                            "src4": "img_876961e0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.9,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_9cf99982",
+                            "title": "Sala com lareira",
+                            "items": [
+                                "Lareira de canto",
+                                "Aquecimento central"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 16.4,
+                "background": "vellum",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Três quartos · suite",
+                        "params": {
+                            "srcs": [
+                                "img_948957f9",
+                                "img_fcd6e52d",
+                                "img_ac6256c6",
+                                "img_496f90e0",
+                                "img_8e5c12f9",
+                                "img_2d3e6116",
+                                "img_70bde017",
+                                "img_f77e3055",
+                                "img_6fba6c59",
+                                "img_f2ad3e1a"
+                            ],
+                            "src": "img_948957f9",
+                            "src2": "img_bf3cd164",
+                            "src3": "img_9cf99982",
+                            "src4": "img_bb236398"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 19.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Escritório ou biblioteca",
+                        "params": {
+                            "src": "img_caed36c2",
+                            "src2": "img_2e7cff21"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.2,
+                "end": 22,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_42fd1f2d",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22,
+                "end": 24.4,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Jardim e churrasqueira",
+                        "params": {
+                            "srcs": [
+                                "img_7288f4c8",
+                                "img_fa031c9f",
+                                "img_7ee63606",
+                                "img_5c86092c"
+                            ],
+                            "src": "img_7288f4c8",
+                            "src2": "img_c83bb5bb",
+                            "src3": "img_2e7cff21",
+                            "src4": "img_3ac54fa4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.4,
+                "end": 30,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "CARREGADOR ELÉTRICO",
+                        "params": {
+                            "src": "img_0b609b0e",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30,
+                "end": 33.52,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sandrine Abreu",
+                        "params": {
+                            "src": "img_02e44f24",
+                            "name": "Sandrine Abreu",
+                            "phone": "+351 963 452 857",
+                            "email": "Marque visita"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r981986-pbkss/clip.mp4",
+    "error": null
+}

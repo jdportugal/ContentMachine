@@ -1,0 +1,999 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "How to Add Free Background Music to Your Videos",
+    "source_path": "clips/uploads/free-background-music-that-wont-get-you-copyright-struck-hpqz-Yg2Vlw.mp4",
+    "images": null,
+    "meta": {
+        "allowed_present": [
+            "video",
+            "animation"
+        ],
+        "formato": "9:16",
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "fewer_images": true,
+        "free_sfx": true,
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Free background music for short vertical video (Pexels, Pixabay & licensing)",
+            "summary": "Pexels no longer hosts audio — its videos are published without sound and its own help center points creators to Pixabay's free music and sound effects, both platforms being Canva-owned. Choosing a properly licensed track matters: sound drives engagement on short-form video, while YouTube's Content ID processed about 2.5 billion claims in 2025.",
+            "timeline": [
+                {
+                    "label": "Pexels founded in Germany",
+                    "sublabel": "2014"
+                },
+                {
+                    "label": "Canva acquires Pexels + Pixabay",
+                    "sublabel": "May 2019"
+                },
+                {
+                    "label": "Kantar/TikTok sound study published",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Content ID payouts pass $12B",
+                    "sublabel": "as of Dec 2024"
+                },
+                {
+                    "label": "Record 2.5B Content ID claims",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Pexels: videos published without audio, music via Pixabay",
+                    "sublabel": "help center, 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "TikTok users saying sound is essential (Kantar)",
+                    "value": 88,
+                    "unit": "%"
+                },
+                {
+                    "label": "Would 'stop and look' at ads with audio (Kantar)",
+                    "value": 73,
+                    "unit": "%"
+                },
+                {
+                    "label": "YouTube Content ID claims processed (2025)",
+                    "value": 2502941368,
+                    "unit": "claims"
+                },
+                {
+                    "label": "YouTube Content ID claims processed (2024)",
+                    "value": 2.2,
+                    "unit": "billion"
+                },
+                {
+                    "label": "Ad revenue paid via Content ID (to Dec 2024)",
+                    "value": 12,
+                    "unit": "billion USD"
+                },
+                {
+                    "label": "Content ID claims monetized instead of blocked (2024)",
+                    "value": 90,
+                    "unit": "%"
+                },
+                {
+                    "label": "TikTok Commercial Music Library size (2026)",
+                    "value": 1000000,
+                    "unit": "songs"
+                },
+                {
+                    "label": "Royalty-free music market (2025)",
+                    "value": 1.52,
+                    "unit": "billion USD"
+                },
+                {
+                    "label": "Royalty-free music market CAGR (2025-2030)",
+                    "value": 5.91,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Where the music actually comes from",
+                    "left": {
+                        "title": "Pexels (video/photos)",
+                        "points": [
+                            "All Pexels videos are published without audio",
+                            "Help center sends users to Pixabay for music & SFX",
+                            "Owned by Canva since May 2019"
+                        ]
+                    },
+                    "right": {
+                        "title": "Pixabay (music/SFX)",
+                        "points": [
+                            "Pixabay Content License: commercial use, no attribution",
+                            "Cannot sell/distribute a track standalone",
+                            "Some tracks may still trigger Content ID claims"
+                        ]
+                    }
+                },
+                {
+                    "title": "Platform library vs royalty-free library",
+                    "left": {
+                        "title": "TikTok Commercial Music Library",
+                        "points": [
+                            "1M+ pre-cleared songs, free for business accounts",
+                            "License covers TikTok placements only",
+                            "Reposting elsewhere is not covered"
+                        ]
+                    },
+                    "right": {
+                        "title": "Royalty-free libraries (Pixabay, YouTube Audio Library)",
+                        "points": [
+                            "Usable across YouTube, Reels, TikTok",
+                            "YouTube Audio Library tracks are free; some require attribution",
+                            "Check each track's license before publishing"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Pexels videos come with no audio — music is sourced from Pixabay",
+                "Pixabay license: free commercial use, credit optional, no standalone resale",
+                "88% of TikTok users say sound is essential to the experience",
+                "YouTube ran ~2.5 billion Content ID claims in 2025, +14% vs 2024",
+                "Over 90% of 2024 claims were monetized, not blocked",
+                "TikTok's 1M-song commercial library only clears TikTok, not cross-posting",
+                "Royalty-free music is a $1.52B market growing ~5.9% a year"
+            ],
+            "sources": [
+                "https://help.pexels.com/hc/en-us/articles/43126081204505-Why-is-there-no-audio-on-my-video",
+                "https://www.canva.com/newsroom/news/canva-acquires-pexels-pixabay/",
+                "https://en.wikipedia.org/wiki/Pexels",
+                "https://pixabay.com/service/terms/",
+                "https://pixabay.com/service/faq/",
+                "https://pixabay.com/blog/posts/intellectual-property-explained-441/",
+                "https://en.wikipedia.org/wiki/Pixabay",
+                "https://torrentfreak.com/youtube-processed-2-5-billion-content-id-copyright-claims-in-2025/",
+                "https://musically.com/2025/05/23/youtubes-content-id-payouts-to-rightsholders-have-passed-12bn/",
+                "https://www.digitalmusicnews.com/2025/05/23/youtube-content-id-payouts/",
+                "https://routenote.com/blog/youtube-content-id-has-now-paid-12-billion-to-rightsholders/",
+                "https://www.tiktok.com/business/en/blog/kantar-report-how-brands-are-making-noise-and-driving-impact-with-sound-on-tiktok",
+                "https://www.socialmediatoday.com/news/tiktok-shares-new-insights-into-the-importance-of-sound-for-marketing-promo/601569/",
+                "https://ads.tiktok.com/help/article/how-to-use-the-commercial-music-library",
+                "https://www.soundstripe.com/blogs/tiktok-music-library-explained",
+                "https://www.globenewswire.com/news-release/2025/03/14/3042948/28124/en/Opportunities-in-the-Royalty-Free-Music-Market-2025-2030-Leveraging-AI-and-Strategic-Partnerships-is-Key-to-Driving-Growth-in-the-Evolving-Digital-Music-Industry.html",
+                "https://www.researchandmarkets.com/reports/6055185/royalty-free-music-market-global-forecast",
+                "https://vidiq.com/blog/post/royalty-free-music-youtube-audio-library/"
+            ]
+        },
+        "suggested": {
+            "title": "How to Add Free Background Music to Your Videos",
+            "description": "Learn the quick way to find royalty-free background music using Pexels Music and drop it straight into your edit. Picking the right track takes a bit of time, but the right mood can transform your video instantly. Follow along to see how a playful soundtrack ties the whole story together.",
+            "tags": [
+                "background music",
+                "pexels music",
+                "royalty free music",
+                "video editing",
+                "content creation",
+                "editing tips",
+                "free music",
+                "video tutorial"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "0decee24",
+                "prompt": "https://www.pexels.com/",
+                "label": "So for that I search Pexels Music",
+                "site": "https://www.pexels.com/",
+                "still": false
+            },
+            {
+                "key": "d4dfa5d5",
+                "prompt": "https://pixabay.com/music/",
+                "label": "And when you search this you get musics you can actually use So I",
+                "site": "https://pixabay.com/music/",
+                "still": false
+            },
+            {
+                "key": "3f89e052",
+                "prompt": "A young video editor wearing large headphones, eyes closed, listening carefully to music tracks in a dim home studio lit by cool blue screen glow, warm desk lamp behind, cinematic photographic close-up",
+                "label": "And get one of these ones",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "5ea65caf",
+                "prompt": "A person smiling and nodding to music in a sunlit room, colorful bokeh lights floating around, light and playful mood, soft warm photographic lighting, shallow depth of field",
+                "label": "It kind of fits the mood we're going for which is sort of playful And",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "Vertical 9:16 close-up product shot: black over-ear studio headphones resting on top of a smartphone lying flat on a warm wooden desk, faint luminous cyan sound waves rising from the phone's dark screen and curving up into the earcups, shallow depth of field, soft cinematic side lighting with deep shadows, moody dark background, subtle teal and amber color grading, photorealistic, high detail, no text, no logos",
+                "label": "Opening image — A pair of studio headphones resting on a smartphone that lies flat on a desk, glowing sound waves rising from the phone screen into the earcups.",
+                "site": null
+            }
+        ],
+        "image_uploads": [],
+        "site_collecting": [],
+        "image_text": {
+            "0decee24": true,
+            "d4dfa5d5": true,
+            "3f89e052": true,
+            "5ea65caf": true,
+            "intro": true
+        }
+    },
+    "id": "free-background-music-that-wont-get-you-vcjhr",
+    "created_at": "2026-09-07T11:32:47+00:00",
+    "updated_at": "2026-09-07T12:53:11+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/free-background-music-that-wont-get-you-vcjhr/audio.m4a",
+    "transcript": {
+        "duration": 43.38999938964844,
+        "text": "And the next thing you're going to need is an actual background sound So for that I search Pexels Music And when you search this you get musics you can actually use So I would go something like Equipit Story And get one of these ones You need to actually spend some time trying to find one that makes sense And after you get it you just drag and drop it here again And you can see I have one right here It kind of fits the mood we're going for which is sort of playful And with this we have almost anything The last thing is to actually get the stories",
+        "language": "english",
+        "words": [
+            {
+                "word": "And",
+                "start": 0,
+                "end": 0
+            },
+            {
+                "word": "the",
+                "start": 0,
+                "end": 0.11999999731779099
+            },
+            {
+                "word": "next",
+                "start": 0.11999999731779099,
+                "end": 0.30000001192092896
+            },
+            {
+                "word": "thing",
+                "start": 0.30000001192092896,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "you're",
+                "start": 0.5199999809265137,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "going",
+                "start": 0.7599999904632568,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "to",
+                "start": 0.8600000143051147,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "need",
+                "start": 1.2000000476837158,
+                "end": 1.3200000524520874
+            },
+            {
+                "word": "is",
+                "start": 1.3200000524520874,
+                "end": 1.7599999904632568
+            },
+            {
+                "word": "an",
+                "start": 1.7599999904632568,
+                "end": 2.2200000286102295
+            },
+            {
+                "word": "actual",
+                "start": 2.2200000286102295,
+                "end": 2.5399999618530273
+            },
+            {
+                "word": "background",
+                "start": 2.5399999618530273,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "sound",
+                "start": 2.859999895095825,
+                "end": 3.180000066757202
+            },
+            {
+                "word": "So",
+                "start": 3.380000114440918,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "for",
+                "start": 3.4000000953674316,
+                "end": 3.5999999046325684
+            },
+            {
+                "word": "that",
+                "start": 3.5999999046325684,
+                "end": 3.7799999713897705
+            },
+            {
+                "word": "I",
+                "start": 3.7799999713897705,
+                "end": 4.079999923706055
+            },
+            {
+                "word": "search",
+                "start": 4.079999923706055,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "Pexels",
+                "start": 4.400000095367432,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "Music",
+                "start": 5.340000152587891,
+                "end": 6.480000019073486
+            },
+            {
+                "word": "And",
+                "start": 7.28000020980835,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "when",
+                "start": 7.539999961853027,
+                "end": 7.760000228881836
+            },
+            {
+                "word": "you",
+                "start": 7.760000228881836,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "search",
+                "start": 7.900000095367432,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "this",
+                "start": 8.0600004196167,
+                "end": 8.319999694824219
+            },
+            {
+                "word": "you",
+                "start": 8.420000076293945,
+                "end": 8.4399995803833
+            },
+            {
+                "word": "get",
+                "start": 8.4399995803833,
+                "end": 8.720000267028809
+            },
+            {
+                "word": "musics",
+                "start": 8.720000267028809,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "you",
+                "start": 9.079999923706055,
+                "end": 9.300000190734863
+            },
+            {
+                "word": "can",
+                "start": 9.300000190734863,
+                "end": 9.460000038146973
+            },
+            {
+                "word": "actually",
+                "start": 9.460000038146973,
+                "end": 9.800000190734863
+            },
+            {
+                "word": "use",
+                "start": 9.800000190734863,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "So",
+                "start": 10.239999771118164,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "I",
+                "start": 10.239999771118164,
+                "end": 10.34000015258789
+            },
+            {
+                "word": "would",
+                "start": 10.34000015258789,
+                "end": 10.5
+            },
+            {
+                "word": "go",
+                "start": 10.5,
+                "end": 10.680000305175781
+            },
+            {
+                "word": "something",
+                "start": 10.680000305175781,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "like",
+                "start": 11.020000457763672,
+                "end": 11.5
+            },
+            {
+                "word": "Equipit",
+                "start": 11.5,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "Story",
+                "start": 13.100000381469727,
+                "end": 13.779999732971191
+            },
+            {
+                "word": "And",
+                "start": 15.979999542236328,
+                "end": 16.3799991607666
+            },
+            {
+                "word": "get",
+                "start": 16.3799991607666,
+                "end": 16.600000381469727
+            },
+            {
+                "word": "one",
+                "start": 16.600000381469727,
+                "end": 16.799999237060547
+            },
+            {
+                "word": "of",
+                "start": 16.799999237060547,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "these",
+                "start": 16.920000076293945,
+                "end": 17.100000381469727
+            },
+            {
+                "word": "ones",
+                "start": 17.100000381469727,
+                "end": 17.600000381469727
+            },
+            {
+                "word": "You",
+                "start": 20.920000076293945,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "need",
+                "start": 21.399999618530273,
+                "end": 21.540000915527344
+            },
+            {
+                "word": "to",
+                "start": 21.540000915527344,
+                "end": 21.760000228881836
+            },
+            {
+                "word": "actually",
+                "start": 21.760000228881836,
+                "end": 22.100000381469727
+            },
+            {
+                "word": "spend",
+                "start": 22.100000381469727,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "some",
+                "start": 22.239999771118164,
+                "end": 22.5
+            },
+            {
+                "word": "time",
+                "start": 22.5,
+                "end": 22.81999969482422
+            },
+            {
+                "word": "trying",
+                "start": 22.81999969482422,
+                "end": 23.559999465942383
+            },
+            {
+                "word": "to",
+                "start": 23.559999465942383,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "find",
+                "start": 23.8799991607666,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "one",
+                "start": 23.8799991607666,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "that",
+                "start": 24.100000381469727,
+                "end": 24.200000762939453
+            },
+            {
+                "word": "makes",
+                "start": 24.200000762939453,
+                "end": 24.440000534057617
+            },
+            {
+                "word": "sense",
+                "start": 24.440000534057617,
+                "end": 24.739999771118164
+            },
+            {
+                "word": "And",
+                "start": 24.8799991607666,
+                "end": 25.139999389648438
+            },
+            {
+                "word": "after",
+                "start": 25.139999389648438,
+                "end": 25.280000686645508
+            },
+            {
+                "word": "you",
+                "start": 25.280000686645508,
+                "end": 25.559999465942383
+            },
+            {
+                "word": "get",
+                "start": 25.559999465942383,
+                "end": 25.760000228881836
+            },
+            {
+                "word": "it",
+                "start": 25.760000228881836,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "you",
+                "start": 26.299999237060547,
+                "end": 26.540000915527344
+            },
+            {
+                "word": "just",
+                "start": 26.540000915527344,
+                "end": 26.8799991607666
+            },
+            {
+                "word": "drag",
+                "start": 26.8799991607666,
+                "end": 27.059999465942383
+            },
+            {
+                "word": "and",
+                "start": 27.059999465942383,
+                "end": 27.31999969482422
+            },
+            {
+                "word": "drop",
+                "start": 27.31999969482422,
+                "end": 27.31999969482422
+            },
+            {
+                "word": "it",
+                "start": 27.31999969482422,
+                "end": 27.600000381469727
+            },
+            {
+                "word": "here",
+                "start": 27.600000381469727,
+                "end": 27.760000228881836
+            },
+            {
+                "word": "again",
+                "start": 27.760000228881836,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "And",
+                "start": 28.100000381469727,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "you",
+                "start": 28.440000534057617,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "can",
+                "start": 28.520000457763672,
+                "end": 28.739999771118164
+            },
+            {
+                "word": "see",
+                "start": 28.739999771118164,
+                "end": 28.84000015258789
+            },
+            {
+                "word": "I",
+                "start": 28.84000015258789,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "have",
+                "start": 28.979999542236328,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "one",
+                "start": 29.100000381469727,
+                "end": 29.360000610351562
+            },
+            {
+                "word": "right",
+                "start": 29.360000610351562,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "here",
+                "start": 29.979999542236328,
+                "end": 30.739999771118164
+            },
+            {
+                "word": "It",
+                "start": 34.599998474121094,
+                "end": 35.040000915527344
+            },
+            {
+                "word": "kind",
+                "start": 35.040000915527344,
+                "end": 35.2400016784668
+            },
+            {
+                "word": "of",
+                "start": 35.2400016784668,
+                "end": 35.63999938964844
+            },
+            {
+                "word": "fits",
+                "start": 35.63999938964844,
+                "end": 35.63999938964844
+            },
+            {
+                "word": "the",
+                "start": 35.63999938964844,
+                "end": 35.91999816894531
+            },
+            {
+                "word": "mood",
+                "start": 35.91999816894531,
+                "end": 36.02000045776367
+            },
+            {
+                "word": "we're",
+                "start": 36.02000045776367,
+                "end": 36.220001220703125
+            },
+            {
+                "word": "going",
+                "start": 36.220001220703125,
+                "end": 36.400001525878906
+            },
+            {
+                "word": "for",
+                "start": 36.400001525878906,
+                "end": 36.63999938964844
+            },
+            {
+                "word": "which",
+                "start": 36.70000076293945,
+                "end": 36.79999923706055
+            },
+            {
+                "word": "is",
+                "start": 36.79999923706055,
+                "end": 37.400001525878906
+            },
+            {
+                "word": "sort",
+                "start": 37.400001525878906,
+                "end": 37.880001068115234
+            },
+            {
+                "word": "of",
+                "start": 37.880001068115234,
+                "end": 38.119998931884766
+            },
+            {
+                "word": "playful",
+                "start": 38.119998931884766,
+                "end": 38.47999954223633
+            },
+            {
+                "word": "And",
+                "start": 39.459999084472656,
+                "end": 39.900001525878906
+            },
+            {
+                "word": "with",
+                "start": 39.900001525878906,
+                "end": 40.060001373291016
+            },
+            {
+                "word": "this",
+                "start": 40.060001373291016,
+                "end": 40.18000030517578
+            },
+            {
+                "word": "we",
+                "start": 40.18000030517578,
+                "end": 40.34000015258789
+            },
+            {
+                "word": "have",
+                "start": 40.34000015258789,
+                "end": 40.52000045776367
+            },
+            {
+                "word": "almost",
+                "start": 40.52000045776367,
+                "end": 40.900001525878906
+            },
+            {
+                "word": "anything",
+                "start": 40.900001525878906,
+                "end": 41.2599983215332
+            },
+            {
+                "word": "The",
+                "start": 41.41999816894531,
+                "end": 41.560001373291016
+            },
+            {
+                "word": "last",
+                "start": 41.560001373291016,
+                "end": 41.70000076293945
+            },
+            {
+                "word": "thing",
+                "start": 41.70000076293945,
+                "end": 41.84000015258789
+            },
+            {
+                "word": "is",
+                "start": 41.84000015258789,
+                "end": 41.959999084472656
+            },
+            {
+                "word": "to",
+                "start": 41.959999084472656,
+                "end": 42.13999938964844
+            },
+            {
+                "word": "actually",
+                "start": 42.13999938964844,
+                "end": 42.459999084472656
+            },
+            {
+                "word": "get",
+                "start": 42.459999084472656,
+                "end": 42.720001220703125
+            },
+            {
+                "word": "the",
+                "start": 42.720001220703125,
+                "end": 42.97999954223633
+            },
+            {
+                "word": "stories",
+                "start": 42.97999954223633,
+                "end": 43.29999923706055
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 43.38999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "background sound",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 3.4,
+                "end": 7.28,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "fx-7b8081-1",
+                        "text": null,
+                        "params": {
+                            "query": "Pexels Music",
+                            "eyebrow": "STEP 01 — THE SEARCH",
+                            "hint": "type it in, hit enter"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.28,
+                "end": 10.24,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "fx-7b8081-2",
+                        "text": null,
+                        "params": {
+                            "heading": "Music you can actually use",
+                            "tracks": [
+                                "TRACK 01",
+                                "TRACK 02",
+                                "TRACK 03"
+                            ],
+                            "tag": "FREE TO USE"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.24,
+                "end": 15.98,
+                "background": "papyrus",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "Equipit Story",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 15.98,
+                "end": 20.92,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "fx-7b8081-3",
+                        "text": null,
+                        "params": {
+                            "heading": "Get one of these ones",
+                            "tracks": [
+                                "TRACK 01",
+                                "TRACK 02",
+                                "TRACK 03"
+                            ],
+                            "picked": 1,
+                            "pickLabel": "PICKED"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.92,
+                "end": 25,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "makes sense",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 25,
+                "end": 30.74,
+                "background": "papyrus",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "drag and drop",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 30.74,
+                "end": 34.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": false,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "fx-7b8081-5",
+                        "text": null,
+                        "params": {
+                            "nodes": [
+                                {
+                                    "title": "PEXELS",
+                                    "sub": "videos — published without audio"
+                                },
+                                {
+                                    "title": "PIXABAY",
+                                    "sub": "free music & sound effects"
+                                },
+                                {
+                                    "title": "YOUR VIDEO",
+                                    "sub": "sound on"
+                                }
+                            ],
+                            "note": "Pexels' help center points you to Pixabay for music"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 39.46,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "fx-7b8081-6",
+                        "text": null,
+                        "params": {
+                            "match": "Playful",
+                            "moods": [
+                                "Cinematic",
+                                "Dramatic",
+                                "Playful",
+                                "Calm"
+                            ],
+                            "eyebrow": "Track mood",
+                            "note": "Pixabay · free for commercial use"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 39.46,
+                "end": 43.38999938964844,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "the stories",
+                "present": "video",
+                "layers": []
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/free-background-music-that-wont-get-you-vcjhr/clip.mp4"
+}

@@ -1,0 +1,1502 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 em Rio Meão, junto ao Europarque – 435 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t4-santa-maria-da-feira-rio-meao/124321105-230",
+            "agent": "Fernanda Morais",
+            "phone": "+351 916 824 263",
+            "agency": "RE/MAX Rapid",
+            "hook": "Moradia de quatro quartos em Rio Meão, junto ao Europarque.",
+            "voiceover": "Moradia de quatro quartos em Rio Meão, junto ao Europarque. Numa zona calma de Santa Maria da Feira, com acessos rápidos, comércio e escolas perto. Com três frentes e sol todo o dia. No piso térreo, sala ampla com lareira e cozinha equipada com despensa. Em cima, três quartos com closet e uma suite com varanda. Lá fora, uma zona de lazer com churrasqueira. Um anexo com casa de banho pode ser escritório ou atelier. Estacionamento para três carros, ar condicionado e painéis de aquecimento de água. Pronta a habitar. Quatrocentos e trinta e cinco mil euros. Para visitar, fale com a Fernanda Morais, da RE/MAX Rapid.",
+            "scenes": [
+                {
+                    "photo": "fachada",
+                    "vo": "Moradia de quatro quartos em Rio Meão, junto ao Europarque.",
+                    "caption": "Rio Meão, Santa Maria da Feira"
+                },
+                {
+                    "photo": "fachada lateral / exterior com as três frentes",
+                    "vo": "Numa zona calma de Santa Maria da Feira, com acessos rápidos, comércio e escolas perto.",
+                    "caption": "Junto ao Europarque"
+                },
+                {
+                    "photo": "sala com luz natural",
+                    "vo": "Com três frentes e sol todo o dia.",
+                    "caption": "Sol todo o dia"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "No piso térreo, sala ampla com lareira…",
+                    "caption": "Sala com lareira"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "…e cozinha equipada com despensa.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "quarto com closet",
+                    "vo": "Em cima, três quartos com closet…",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "suite com varanda",
+                    "vo": "…e uma suite com varanda.",
+                    "caption": "Suite com varanda"
+                },
+                {
+                    "photo": "zona de lazer com churrasqueira",
+                    "vo": "Lá fora, uma zona de lazer com churrasqueira.",
+                    "caption": "Churrasqueira"
+                },
+                {
+                    "photo": "anexo multifuncional",
+                    "vo": "Um anexo com casa de banho pode ser escritório ou atelier.",
+                    "caption": "Anexo multifuncional"
+                },
+                {
+                    "photo": "corredor lateral de estacionamento",
+                    "vo": "Estacionamento para três carros, ar condicionado e painéis de aquecimento de água. Pronta a habitar.",
+                    "caption": "Estacionamento para três carros"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e trinta e cinco mil euros. Para visitar, fale com a Fernanda Morais, da RE/MAX Rapid.",
+                    "caption": "435.000 € · Fernanda Morais · RE/MAX Rapid"
+                }
+            ],
+            "flags": [
+                "A área total do lote (306 m²) é igual à área bruta (306 m²), o que não bate certo com uma moradia de dois pisos com zona de lazer, anexo e corredor lateral. A área do lote ficou de fora.",
+                "Número de casas de banho: os detalhes dizem 3, mas o texto descreve uma completa em cima, uma de apoio no piso térreo e uma completa no anexo, e não diz se a suite tem casa de banho própria. O número ficou de fora.",
+                "'Painéis de aquecimento de águas sanitárias': o anúncio não diz que são solares, por isso o texto diz apenas 'painéis de aquecimento de água'."
+            ],
+            "message": "Boa tarde Sra. Fernanda,\nO meu nome é João Ferreira.\n\nVi a moradia em Rio Meão que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Fernanda Morais - and phone number - +351 916 824 263. Agency: RE/MAX Rapid.\nThe agent's photo is Fernanda Morais.jpg; the agency logo is logo.png.\nOn-screen hook for the first frame: «Moradia de quatro quartos em Rio Meão, junto ao Europarque.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada → «Rio Meão, Santa Maria da Feira»\n- fachada lateral / exterior com as três frentes → «Junto ao Europarque»\n- sala com luz natural → «Sol todo o dia»\n- sala com lareira → «Sala com lareira»\n- cozinha → «Cozinha equipada»\n- quarto com closet → «Quatro quartos»\n- suite com varanda → «Suite com varanda»\n- zona de lazer com churrasqueira → «Churrasqueira»\n- anexo multifuncional → «Anexo multifuncional»\n- corredor lateral de estacionamento → «Estacionamento para três carros»\n- end card → «435.000 € · Fernanda Morais · RE/MAX Rapid»\n\nHere are the house details:\n\nMoradia T4 à venda em Rio Meão, Santa Maria da Feira\nPreço\n435 000 €\nLocalização\nRio Meão, Santa Maria da Feira, Aveiro\nReferência\n124321105-230\nÁrea Bruta m²\n306\nÁrea Útil m²\n207\nÁrea Total do Lote m²\n306\nQuartos\n4\nWC/Casas de banho\n3\nAno de Construção\n2003\nEstacionamento\nSim\nGaragem\nNão\nElevador\nNão\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p><strong>Moradia T4 pronta a habitar com Àrea de lazer + churrasqueira</strong></p>\n<p>Apresento-lhe a moradia onde cada detalhe foi pensado para proporcionar conforto, funcionalidade e qualidade de vida.</p>\n<p>Situada numa zona tranquila da freguesia de Rio Meão, em Santa Maria da Feira, nas imediações do Europarque, esta propriedade combina o melhor de dois mundos: a serenidade de uma zona residencial com a proximidade de acessos, serviços e comércio.</p>\n<p>Com três frentes, esta moradia beneficia de excelente exposição solar ao longo de todo o dia, criando ambientes luminosos e acolhedores em todos os espaços.</p>\n<p><strong>Uma casa pensada para viver bem!</strong></p>\n<p>Distribuida por dois pisos, esta moradia destaca-se pelas áreas generosas e pela organização inteligente dos espaços.</p>\n<p>No piso superior, encontra-se a zona mais privada da casa, composta por:</p>\n<ul>\n<li>Três quartos, todos com clouset, proporcionando organização e conforto.</li>\n<li>Uma suíte de excelentes dimensões, com clouset amplo e varanda, um verdadeiro refugio de tranquilidade.</li>\n<li>Uma casa de banho completa de apoio aos restantes quartos.</li>\n</ul>\n<p><strong>No piso térreo desenvolve-se a zona social da moradia:</strong></p>\n<ul>\n<li>Sala ampla com lareira, perfeita para momentos de convívio em família e amigos.</li>\n<li>Cozinha totalmente equipada, com áreas muito generosas e despensa, oferecendo funcionalidade para o dia a dia.</li>\n<li>Casa de banho de apoio.</li>\n</ul>\n<p>O espaço exterior é um verdadeiro convite ao convívio.</p>\n<p style=\"text-align:left;\"><strong>Aqui encontra:</strong></p>\n<ul>\n<li>Uma ampla zona de lazer com churrasqueira, ideal para refeições ao ao livre.</li>\n<li>Anexo com divisão multifuncional, que poderá ser utilizado como escritório, espaço de arrumação ou atelier, complementado por casa de banho completa.</li>\n<li>Corredor lateral com capacidade para estacionamento até três viaturas.</li>\n</ul>\n<p>Um espaço perfeito para receber familia e amigos e criar memórias inesquecíveis.</p>\n<p><strong>Conforto e eficiência</strong></p>\n<p>Esta moradia encontra-se pronta a habitar, sem necessidade de qualquer obra, e está equipada com:</p>\n<ul>\n<li>Ar condicionado</li>\n<li>Paineis de aquecimento de águas sanitárias</li>\n<li>Àgua de poço além da água da companhia</li>\n</ul>\n<p>Detalhes que garantem maior conforto e eficiência no dia a dia.</p>\n<p><strong>Localização estratégica</strong></p>\n<p>Nas imediações do Europarque, com rápidos acessos às principais vias e próxima de comércio, serviços e escolas, esta moradia oferece a tranquilidade de viver numa zona calma sem abdicar da próximidade à cidade.</p>\n<p>Se procura uma moradia pronta a habitar, com excelentes áreas, espaço exterior e uma localização tranquila, esta poderá ser a casa de que estava à espera!!!<br><br><br><br></p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T4 em Rio Meão, Santa Maria da Feira, junto ao Europarque",
+            "summary": "Moradia T4 pronta a habitar em Rio Meão, freguesia de Santa Maria da Feira, perto do Europarque. Segundo o INE, no 1.º trimestre de 2026 o preço médio das casas no concelho ficou abaixo da média nacional.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Preço mediano nacional da habitação (INE, 1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Área da freguesia de Rio Meão",
+                    "value": 6.7,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 435000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Santa Maria da Feira vs. média nacional (INE, 1.º trim. 2026)",
+                    "left": {
+                        "title": "Santa Maria da Feira",
+                        "points": [
+                            "Preço médio abaixo da média nacional",
+                            "Com Gondomar, um dos dois únicos concelhos com mais de 100 mil habitantes de Lisboa, Setúbal e AMP abaixo da média"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "Preço mediano de 2.337 €/m²"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Rio Meão é uma freguesia do concelho de Santa Maria da Feira",
+                "O Europarque, com centro de congressos e o centro de ciência Visionarium, fica em Santa Maria da Feira",
+                "O Europarque fica muito perto da saída da A1",
+                "No 1.º trimestre de 2026, Santa Maria da Feira ficou abaixo da média nacional de preços da habitação (INE)"
+            ],
+            "sources": [
+                "https://rr.pt/noticia/economia/2026/02/02/precos-das-casas-aceleram-em-metade-dos-municipios-populosos/457739/",
+                "https://www.rtp.pt/noticias/economia/dados-ine-madeira-e-guimaraes-com-precos-das-casas-mais-elevados_n1754046",
+                "https://www.idealista.pt/news/node/76623",
+                "https://en.wikipedia.org/wiki/Rio_Me%C3%A3o",
+                "https://aldeiasportuguesas.pt/aveiro/santa-maria-da-feira/rio-meao/",
+                "https://en.wikipedia.org/wiki/Espargo",
+                "https://cm-feira.pt/europarque-congress-centre",
+                "https://birdingplaces.eu/nl/birdingplaces/portugal/europarque"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 em Rio Meão, junto ao Europarque – 435 mil €",
+            "description": "Moradia T4 numa zona calma de Rio Meão, Santa Maria da Feira, com três frentes, sol todo o dia e acessos rápidos, com comércio e escolas por perto. Tem sala ampla com lareira, cozinha equipada com despensa, três quartos com closet, uma suite com varanda, zona de lazer com churrasqueira, um anexo com casa de banho e estacionamento para três carros. Está pronta a habitar por 435 mil euros. Para agendar uma visita, contacte a Fernanda Moraes, da RE/MAX Rápido.",
+            "tags": [
+                "moradia T4",
+                "Rio Meão",
+                "Santa Maria da Feira",
+                "Europarque",
+                "imobiliário",
+                "casa à venda",
+                "RE/MAX Rápido",
+                "pronta a habitar"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-124321105-230-xwrtv",
+    "created_at": "2026-10-12T12:06:36+00:00",
+    "updated_at": "2026-10-12T12:21:24+00:00",
+    "source_path": "clips/uploads/n3tmwl0FcJldGRy7u19aAnv0oLeEllYwJXILpFEq.mp3",
+    "images": [
+        {
+            "id": "img_fc698665",
+            "path": "clips/uploads/ZsmLgpKdPoGClzQUnevLsFYO8J5H6UwCZ2Mk6f4l.jpg",
+            "description": "Entrada da moradia com alpendre coberto, porta aberta, calçada em cubos e vasos de plantas alinhados.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_91828945",
+            "path": "clips/uploads/KuM3boeidlYjRBmKZwlTY0dbkqKQsAI9nua6Wv9K.jpg",
+            "description": "Vista aérea frontal da moradia de telhado laranja, com rua, zona residencial calma e campos verdes atrás.",
+            "name": "0cace9dd-03d8-4d3c-a685-e9f88371e1d8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a3eb0d10",
+            "path": "clips/uploads/xgwGbvBouAfUKg01dUasGePQfxZTihNWBSpRPJMm.jpg",
+            "description": "Vista aérea da zona envolvente: casas, campos verdes, eucaliptais e pavilhões industriais ao fundo.",
+            "name": "3a90fb59-a6dd-47c7-914f-37442ad5db9e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58a2b28a",
+            "path": "clips/uploads/3Zzp13MBYFuB8Y8nmAglh3UuhHkPUQAesljJZNSj.jpg",
+            "description": "Vista aérea do bairro residencial com ruas, moradias, campos verdes e floresta de eucaliptos.",
+            "name": "a1cf923d-d3ec-4198-b8c0-adf797031da0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f54acef",
+            "path": "clips/uploads/21lZZVogfIyBSTVfkXknD25C6IWfzRgxLHYvJr5V.jpg",
+            "description": "Vista aérea inclinada da moradia e vizinhança, com estacionamento lateral e rua em frente.",
+            "name": "41f5c2d0-55a4-4d71-9137-ef1da49334d8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b5a7c82f",
+            "path": "clips/uploads/IioFMqgVqNgktKRMxKWJuiaE05X6YnyFPvO7V7J3.jpg",
+            "description": "Vista aérea próxima dos telhados da moradia, com painel solar, ar-condicionado e carro no pátio.",
+            "name": "1ef245dc-1383-4eed-a9ee-488f42dfda4c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_16ed4832",
+            "path": "clips/uploads/vIqY5t3sdFvBRZM4St7aioPeNdzge57Rkvsv3vpz.jpg",
+            "description": "Vista aérea da moradia de esquina com três frentes, jardim frontal com vasos e carro estacionado.",
+            "name": "44f11ab0-398f-4e21-b793-d1785da37cee.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be395c7c",
+            "path": "clips/uploads/FhWEdVlPBrDpPFPPoXsMMYVrVEnXWWuziDTxjbpg.jpg",
+            "description": "Vista aérea zenital do telhado da moradia e anexo, com pátio, painel solar e estacionamento.",
+            "name": "8905c50c-437d-4cf2-9be3-d3c74bd1b747.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0893b25a",
+            "path": "clips/uploads/wtuYvuCjs2KpIHbde6udrOnnLGbyDROzZhP3NaZh.jpg",
+            "description": "Quarto amplo com cama de solteiro, tapete persa, ar-condicionado, porta para varanda e closet visível.",
+            "name": "3a146712-5e86-4b05-939e-6605405ab804.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_09c075c2",
+            "path": "clips/uploads/OFUFY1wkHLPkEihx2O1D9COoiQBfLzAmFShd5qQy.jpg",
+            "description": "Closet com roupeiro aberto e parede de tijolo de vidro, levando a casa de banho com duche.",
+            "name": "0a4a112b-7406-4a60-b988-e4a9f13216f7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9fdee258",
+            "path": "clips/uploads/rTUGdghO2WcRRsbTuva3CLdA8Ky46AwDtzzt8QBo.jpg",
+            "description": "Casa de banho ampla com duche de vidro, móvel de madeira com dois lavatórios e espelho grande.",
+            "name": "820ebc7c-a404-43eb-abb2-0a246dc43631.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0f42766c",
+            "path": "clips/uploads/Dl4KESMlQ4TKsvLaUKpV6AvxB2w8SuTkyxji1zMV.jpg",
+            "description": "Corredor do piso superior com aparador de madeira, tapete vermelho e porta aberta para casa de banho.",
+            "name": "7b841ca2-59bd-428c-b3de-6639858436bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d1df587f",
+            "path": "clips/uploads/Fsze7CsL8K69h1O39YAm2CXCTN9vGZ3qJQqC1I5u.jpg",
+            "description": "Quarto de casal com cama de madeira, ar-condicionado e closet aberto com roupa ao fundo.",
+            "name": "be2f9a55-55fb-4c75-b621-25621055eb79.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0f6e4232",
+            "path": "clips/uploads/UROtwIzgIrYOf3ea7GYLPGAp1zDwRyrMC5FaAWXW.jpg",
+            "description": "Closet com roupeiro aberto, roupa pendurada, prateleiras e cómodas de madeira.",
+            "name": "91e369d8-b302-492c-b871-fe41969f3898.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_38e565a3",
+            "path": "clips/uploads/FHYYrdXu0QqrivAf1dqhCRMFYb89naiCLFiLKa4W.jpg",
+            "description": "Patamar do piso superior com claraboia, escadas com corrimão em inox e quadros na parede.",
+            "name": "6673aa17-4789-4268-8523-f02edf4e1ce2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4426aa7f",
+            "path": "clips/uploads/XvcsMZ98WDpwcOhDASaGlUyPD917jBI3KVfHmSzD.jpg",
+            "description": "Quarto luminoso com cama de casal, janela com cortina, cómoda, cadeiras e ar-condicionado.",
+            "name": "1e4e7b5b-0ffa-4593-b6d6-43d757970946.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a18b9808",
+            "path": "clips/uploads/pQTduM24e0T2XDErmGrlC4YhkvmXooAmYKJ7OiPZ.jpg",
+            "description": "Casa de banho com banheira, dois lavatórios em mármore, azulejo cinzento e janela.",
+            "name": "c1e1f59a-c91f-4505-a64d-963c1a1f9eeb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_52dc286e",
+            "path": "clips/uploads/3Nw1bEbIuN8k6kHhMff7cwN6tj7EuaWkvur15uaz.jpg",
+            "description": "Quarto de casal com cabeceira de madeira, espelho, quadro e porta de correr para closet.",
+            "name": "dd65ca25-e172-4d94-ada3-51d80c6c3d2b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cb3d9bbe",
+            "path": "clips/uploads/cPLaxiNzBx7tCoTMhnxZaXpACKDUleXGIRRib6uw.jpg",
+            "description": "Hall de entrada com escadaria em mármore e vista para a sala de jantar e estar.",
+            "name": "266a0586-1836-4e04-9d3a-7200ae8c814b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b2e5593d",
+            "path": "clips/uploads/fDgChVyXZlx8DwA6YDh5UhwwCsEDBMaCCqWIVN8p.jpg",
+            "description": "Corredor do piso térreo sob as escadas, com aparador espelhado, molduras e passadeira até quarto.",
+            "name": "7c096afc-7310-4de0-911c-a220a6b6e8a9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_35ff4094",
+            "path": "clips/uploads/7R8NOJV4RTdmm1pzvNEi3DTdGn9NeFK6E6f2rJ9f.jpg",
+            "description": "Hall de entrada com corredor, escada com corrimão inox, porta de madeira ao fundo e casa de banho com duche.",
+            "name": "83a3250d-55e4-4382-a662-def0802ff7d2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0700db40",
+            "path": "clips/uploads/z7tTfIsj5AYxdMAdJegPnUAJQU2iJOmbZXEFNn3j.jpg",
+            "description": "Quarto de casal com cama de madeira, colcha floral azul, tapete persa e janela ampla com cortinados.",
+            "name": "534dbb3f-a5a3-4cbe-9bf8-10b60d07e923.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_10529cc7",
+            "path": "clips/uploads/VFWV7JwpqDF147hckLdMiV9VvsHbcDS1RlCxgunw.jpg",
+            "description": "Quarto de casal com colcha floral azul e porta de vidro para o pátio exterior.",
+            "name": "994ce028-9ece-44b8-a400-37348feb75f6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c10d0a54",
+            "path": "clips/uploads/IeEGayw6q3ij0W5SOL4IPylfEWd1BUM3HPEQ7V3H.jpg",
+            "description": "Quarto de casal visto da cama para a porta, mesas de cabeceira em madeira e cómoda.",
+            "name": "9dea08ae-642a-401c-b339-be58a08f00bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbd47aa6",
+            "path": "clips/uploads/qUJEv29N5ECnop2uHLkmkouhbm4An3amdW8TPfyZ.jpg",
+            "description": "Casa de banho com móvel lavatório branco, espelho iluminado e azulejos bege.",
+            "name": "518e845c-fefb-4c4b-9617-e48a3e681e53.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7c9d4ebb",
+            "path": "clips/uploads/5pXE4N4caOG55OYCeQZKyXDIVukCewHLSI7MOzkL.jpg",
+            "description": "Casa de banho de serviço pequena com sanita, azulejos bege e porta de madeira.",
+            "name": "47a3fe4a-d09a-4314-a0e8-6611de534596.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5401b4db",
+            "path": "clips/uploads/nPhBN5iHAEX6a9gNTnFc7VAS45Jn13cMDApxPsF4.jpg",
+            "description": "Sala de estar com lareira, estantes com livros, sofás laranja às riscas e janela grande.",
+            "name": "0d1e86ba-4af4-4555-9950-a48a11f8ac54.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_34c4cea1",
+            "path": "clips/uploads/jRKbDsVIWgYHdxNwlQBySVYJf816HmLUI89MQ3v4.jpg",
+            "description": "Sala de estar ampla com sofás às riscas, parede de tijolo de vidro, ar-condicionado e escada.",
+            "name": "9c67286e-56c2-4be1-bbc6-7fb2886b3822.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7bcb2938",
+            "path": "clips/uploads/D3wcUaMlbjAYFXDsJAUiuIuX1rvKBK6Q5q2TlzGd.jpg",
+            "description": "Sala ampla em open space com zona de estar, mesa de jantar redonda e louceiro de madeira.",
+            "name": "adb43314-cbd4-433a-86bb-76a7519e2905.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d3cf6357",
+            "path": "clips/uploads/ZRrtxVMXqOBOh1VntGFOYdxFnboCmRYJ7CUz0Z2c.jpg",
+            "description": "Sala de estar frontal com sofás às riscas, ar-condicionado, tijolo de vidro e escada ao fundo.",
+            "name": "99dd830b-7939-435a-b11f-524183f06abc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ec5ecc7",
+            "path": "clips/uploads/5ywZRvpeJaEGLWCDWXc8U7VuvEQlwzwG3IAFd97b.jpg",
+            "description": "Sala de estar e jantar ampla, sofás laranja, estantes com livros, lareira e janelas grandes com cortinas.",
+            "name": "ec8f07c7-86d7-43f4-a483-e97a5082457a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9bb1438a",
+            "path": "clips/uploads/SWUKtS0SodpZ3C8G38LRpyPVLZ02AMpqHNHdbbeP.jpg",
+            "description": "Sala de estar com lareira embutida, estantes com livros, sofás às riscas e zona de jantar ao fundo.",
+            "name": "c6d9e0a9-8ff8-4244-9b0f-5f868400ac4f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_75e9144f",
+            "path": "clips/uploads/0f9aqZyuWD4jdRn7Moe1kl4SUSVPoz2nY35Chr6R.jpg",
+            "description": "Sala ampla com sofás às riscas, parede de tijolo de vidro e escadas para o piso superior.",
+            "name": "a12c4d0a-a9ab-4ccb-9ec3-daaea4289247.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6ba27222",
+            "path": "clips/uploads/LFcemVYakccoUGTYW73bFkq1QLhQ6NKhtYu3A7Gx.jpg",
+            "description": "Fachada da moradia, alpendre com vasos de plantas, pavimento em calçada e carro estacionado ao lado.",
+            "name": "a4484e1f-f078-4c4c-b6a3-888304d78b85.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4d53576a",
+            "path": "clips/uploads/lY4zSZO0cQeDUyHYSrIyCC5Bk9uEDIbImUQTrYap.jpg",
+            "description": "Corredor lateral exterior em calçada, muro com vidro fosco, carro estacionado e portadas brancas.",
+            "name": "7096b715-6dc1-423a-b2bb-14a78bcca8a0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3d50b40c",
+            "path": "clips/uploads/4FV88dqespdxYBaMKLu4fu5EUNulbJoll2sSX7gD.jpg",
+            "description": "Zona de lazer exterior coberta, telheiro translúcido, pátio em calçada e mesa com cadeiras brancas.",
+            "name": "4b8e3d2a-11df-4f96-bd3e-a8ba66cc2b81.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a8b239f2",
+            "path": "clips/uploads/qfl5lqNiS9ypCEjtUn9djQ7FybevQmDw9GABtLGn.jpg",
+            "description": "Espaço com churrasqueira em pedra, lava-loiça, teto de vigas de madeira, lustre e mesa de refeições.",
+            "name": "bcab0d46-888c-4b92-a61d-bb70fd1580c7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bab5b8e6",
+            "path": "clips/uploads/capRlCwuXXMTbM3G5UtrLXieLrHwmSsrSe4PESXR.jpg",
+            "description": "Anexo com paredes em aglomerado de madeira, estante antiga envidraçada com livros e tapete persa.",
+            "name": "ac07cca2-4dd3-45bd-b35f-a09726457ae3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1a7a6ee3",
+            "path": "clips/uploads/k6tGGNkWC7PojNmAnWKQXnDwARFq8E5n83yUEKI0.jpg",
+            "description": "Anexo amplo com claraboia, roupeiro, aparelhagem, cómoda e tapete persa; possível escritório ou ateliê.",
+            "name": "cacaea75-2e77-4ffe-9466-e4ae509147a0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bb6bf067",
+            "path": "clips/uploads/qQQmlLssxQK60Cqr72DXeVFZcKZiGgbV292y5ken.jpg",
+            "description": "Casa de banho com base de duche envidraçada, termoacumulador, máquina de lavar e máquina de secar roupa.",
+            "name": "b88aed76-f985-417e-ba0a-9f30be925ad7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_018bdcb2",
+            "path": "clips/uploads/JF6eZpKbMUx7mcl4yvrz7NPXfNb1nj3OW6kVg7gf.jpg",
+            "description": "Despensa com azulejos brancos, frigorífico branco, cesto de vime e escadote encostado à parede.",
+            "name": "864d3345-94ef-4a5a-bfa6-fb2f07a261d3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_215e3da6",
+            "path": "clips/uploads/c6XbQjKnPUijnvXqyzvvz9ulOIZvaRIljiv16yC0.jpg",
+            "description": "Pátio exterior coberto com teto translúcido, chão em calçada de granito, armários de madeira e plantas.",
+            "name": "6c1e77ad-95f4-4204-b376-d80046ef4817.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_306f6605",
+            "path": "clips/uploads/j5nIJA6Rj4Q1SE53QNqRPbntj3ORn0kWa2YIWAtb.jpg",
+            "description": "Cozinha equipada com móveis em madeira, forno, exaustor inox, máquina de loiça e porta para o pátio.",
+            "name": "7e85eb35-e828-4052-a176-22d09cb72c3d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_54f4cada",
+            "path": "clips/uploads/oXVXuX1ooab1iyq1YGSQXDQVn1cIYv9fMnTUAoR4.jpg",
+            "description": "Cozinha equipada vista de frente, armários em madeira, bancada branca, forno, micro-ondas e porta para o exterior.",
+            "name": "fe23a0bb-f93b-477b-9323-b04fc6563d2a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_07d6542a",
+            "path": "clips/uploads/DJRZYchVDL9FPEm15Sr7Lk0zBi7WrDEmvva2pw1Y.jpg",
+            "description": "Cozinha aberta com frigorífico inox, ar-condicionado, porta envidraçada para o pátio e mesa de refeições.",
+            "name": "6a9735bd-3444-44e5-b367-e52873d799d2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b90943da",
+            "path": "clips/uploads/3C3V3TYhk5xBS4gdNemg0M5XIGZUOUB1937Ttyjr.jpg",
+            "description": "Zona de refeições com mesa grande, aparador envidraçado, ligada à cozinha; portas para despensa e casa de banho.",
+            "name": "54fbef4e-1a76-43f6-83c0-6a0baf89d00e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e09d918b",
+            "path": "clips/uploads/LazeSPHzr2VgU8XHac4VVZ4LkyQySu8y7zdhPUJT.jpg",
+            "description": "Cozinha com zona de refeições, mesa sobre tapete azul, ar-condicionado e passagem para a sala.",
+            "name": "ab1c3825-d96f-4965-b2ea-a070a339790d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_48f9bed7",
+            "path": "clips/uploads/mq8SjjBS5edqSOtLRQtrHHK914Mt8McoV3YLWNcM.jpg",
+            "description": "Zona de refeições com mesa e cadeiras de madeira, cozinha ao fundo, porta envidraçada e ar-condicionado.",
+            "name": "0219d616-caf2-4983-856c-247154245e63.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6fdf5645",
+            "path": "clips/uploads/LiyEL9v5l4hbPO3FuKYHszQUNvDFJZuxdpZNcWYn.jpg",
+            "description": "Vista aérea de drone da moradia delimitada, telhado vermelho, painel solar e estacionamento com carro.",
+            "name": "fe4d4304-eee8-4a02-bc7b-c7909238bf13.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_22377d84",
+            "path": "clips/uploads/erd3Uy61gjtfZ65QEhYWSceTVAp0vJQXATJlEhho.jpg",
+            "description": "Sala de estar ampla com sofás clássicos, escada para o piso superior, cristaleira e passagem para a cozinha.",
+            "name": "eb1a8d31-68a6-4361-a3a5-80bc08869227.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4bb43d6d",
+            "path": "clips/uploads/10iu6uNVJ5dwq4gbdBgWW6ZzVWzLpkce1VbQ95pm.jpg",
+            "description": "Retrato da consultora Fernanda Morais, da RE/MAX Rapid.",
+            "name": "Fernanda Morais.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a145ffc2",
+            "path": "clips/uploads/1zOtCdm5YCY0jiRAoCQ9BabAWIgbjbVofW3N02gr.png",
+            "description": "Logótipo da RE/MAX Rapid.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/n3tmwl0FcJldGRy7u19aAnv0oLeEllYwJXILpFEq.mp3",
+    "transcript": {
+        "duration": 37.599998474121094,
+        "text": "Moradia de 4 quartos em Rio Meão, junto ao Europarque. Numa zona calma de Santa Maria da Feira, com acessos rápidos, comércio e escolas perto. Com 3 frentes e sol todo o dia. No piso térreo, sala ampla com lareira e cozinha equipada com dispensa. Em cima, 3 quartos com closet e uma suite com varanda. Lá fora, uma zona de lazer com churrasqueira. Um anexo com casa de banho pode ser escritório ou ateliê. Estacionamento para 3 carros, ar-condicionado e painéis de aquecimento de água. Pronta a habitar. 435 mil euros. Para visitar, fale com a Fernanda Moraes, da Remax Rápido.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Moradia",
+                "start": 0,
+                "end": 0.47999998927116394
+            },
+            {
+                "word": "de",
+                "start": 0.47999998927116394,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "4",
+                "start": 0.7200000286102295,
+                "end": 1
+            },
+            {
+                "word": "quartos",
+                "start": 1,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "em",
+                "start": 1.4199999570846558,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "Rio",
+                "start": 1.5800000429153442,
+                "end": 1.9199999570846558
+            },
+            {
+                "word": "Meão",
+                "start": 1.9199999570846558,
+                "end": 2.140000104904175
+            },
+            {
+                "word": "junto",
+                "start": 2.4600000381469727,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "ao",
+                "start": 2.680000066757202,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "Europarque",
+                "start": 2.8399999141693115,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "Numa",
+                "start": 4.019999980926514,
+                "end": 4.019999980926514
+            },
+            {
+                "word": "zona",
+                "start": 4.019999980926514,
+                "end": 4.239999771118164
+            },
+            {
+                "word": "calma",
+                "start": 4.239999771118164,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "de",
+                "start": 4.619999885559082,
+                "end": 4.880000114440918
+            },
+            {
+                "word": "Santa",
+                "start": 4.880000114440918,
+                "end": 5.139999866485596
+            },
+            {
+                "word": "Maria",
+                "start": 5.139999866485596,
+                "end": 5.28000020980835
+            },
+            {
+                "word": "da",
+                "start": 5.28000020980835,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "Feira",
+                "start": 5.559999942779541,
+                "end": 5.800000190734863
+            },
+            {
+                "word": "com",
+                "start": 6.019999980926514,
+                "end": 6.159999847412109
+            },
+            {
+                "word": "acessos",
+                "start": 6.159999847412109,
+                "end": 6.519999980926514
+            },
+            {
+                "word": "rápidos",
+                "start": 6.519999980926514,
+                "end": 7.019999980926514
+            },
+            {
+                "word": "comércio",
+                "start": 7.320000171661377,
+                "end": 7.659999847412109
+            },
+            {
+                "word": "e",
+                "start": 7.659999847412109,
+                "end": 7.980000019073486
+            },
+            {
+                "word": "escolas",
+                "start": 7.980000019073486,
+                "end": 8.260000228881836
+            },
+            {
+                "word": "perto",
+                "start": 8.260000228881836,
+                "end": 8.680000305175781
+            },
+            {
+                "word": "Com",
+                "start": 9.119999885559082,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "3",
+                "start": 9.279999732971191,
+                "end": 9.579999923706055
+            },
+            {
+                "word": "frentes",
+                "start": 9.579999923706055,
+                "end": 10
+            },
+            {
+                "word": "e",
+                "start": 10,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "sol",
+                "start": 10.460000038146973,
+                "end": 10.520000457763672
+            },
+            {
+                "word": "todo",
+                "start": 10.520000457763672,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "o",
+                "start": 10.960000038146973,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "dia",
+                "start": 11.279999732971191,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "No",
+                "start": 11.800000190734863,
+                "end": 11.84000015258789
+            },
+            {
+                "word": "piso",
+                "start": 11.84000015258789,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "térreo",
+                "start": 12.039999961853027,
+                "end": 12.5
+            },
+            {
+                "word": "sala",
+                "start": 12.880000114440918,
+                "end": 12.880000114440918
+            },
+            {
+                "word": "ampla",
+                "start": 12.880000114440918,
+                "end": 13.34000015258789
+            },
+            {
+                "word": "com",
+                "start": 13.34000015258789,
+                "end": 13.600000381469727
+            },
+            {
+                "word": "lareira",
+                "start": 13.600000381469727,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "e",
+                "start": 13.899999618530273,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "cozinha",
+                "start": 14.220000267028809,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "equipada",
+                "start": 14.420000076293945,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "com",
+                "start": 14.880000114440918,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "dispensa",
+                "start": 15.119999885559082,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "Em",
+                "start": 16.100000381469727,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "cima",
+                "start": 16.15999984741211,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "3",
+                "start": 16.719999313354492,
+                "end": 17
+            },
+            {
+                "word": "quartos",
+                "start": 17,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 17.299999237060547,
+                "end": 17.559999465942383
+            },
+            {
+                "word": "closet",
+                "start": 17.559999465942383,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 17.959999084472656,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "uma",
+                "start": 18.18000030517578,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "suite",
+                "start": 18.459999084472656,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "com",
+                "start": 18.639999389648438,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "varanda",
+                "start": 18.920000076293945,
+                "end": 19.219999313354492
+            },
+            {
+                "word": "Lá",
+                "start": 19.719999313354492,
+                "end": 19.84000015258789
+            },
+            {
+                "word": "fora",
+                "start": 19.84000015258789,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "uma",
+                "start": 20.360000610351562,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "zona",
+                "start": 20.579999923706055,
+                "end": 20.65999984741211
+            },
+            {
+                "word": "de",
+                "start": 20.65999984741211,
+                "end": 21.1200008392334
+            },
+            {
+                "word": "lazer",
+                "start": 21.1200008392334,
+                "end": 21.1200008392334
+            },
+            {
+                "word": "com",
+                "start": 21.1200008392334,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "churrasqueira",
+                "start": 21.399999618530273,
+                "end": 22
+            },
+            {
+                "word": "Um",
+                "start": 22.399999618530273,
+                "end": 22.520000457763672
+            },
+            {
+                "word": "anexo",
+                "start": 22.520000457763672,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "com",
+                "start": 22.899999618530273,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "casa",
+                "start": 23.079999923706055,
+                "end": 23.280000686645508
+            },
+            {
+                "word": "de",
+                "start": 23.280000686645508,
+                "end": 23.639999389648438
+            },
+            {
+                "word": "banho",
+                "start": 23.639999389648438,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "pode",
+                "start": 23.700000762939453,
+                "end": 24
+            },
+            {
+                "word": "ser",
+                "start": 24,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "escritório",
+                "start": 24.15999984741211,
+                "end": 24.700000762939453
+            },
+            {
+                "word": "ou",
+                "start": 24.700000762939453,
+                "end": 25
+            },
+            {
+                "word": "ateliê",
+                "start": 25,
+                "end": 25.459999084472656
+            },
+            {
+                "word": "Estacionamento",
+                "start": 25.459999084472656,
+                "end": 26.479999542236328
+            },
+            {
+                "word": "para",
+                "start": 26.479999542236328,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "3",
+                "start": 26.700000762939453,
+                "end": 27.040000915527344
+            },
+            {
+                "word": "carros",
+                "start": 27.040000915527344,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "ar",
+                "start": 27.780000686645508,
+                "end": 27.860000610351562
+            },
+            {
+                "word": "condicionado",
+                "start": 27.860000610351562,
+                "end": 28.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 28.600000381469727,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "painéis",
+                "start": 28.81999969482422,
+                "end": 29.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 29.18000030517578,
+                "end": 29.3799991607666
+            },
+            {
+                "word": "aquecimento",
+                "start": 29.3799991607666,
+                "end": 29.799999237060547
+            },
+            {
+                "word": "de",
+                "start": 29.799999237060547,
+                "end": 30.100000381469727
+            },
+            {
+                "word": "água",
+                "start": 30.100000381469727,
+                "end": 30.280000686645508
+            },
+            {
+                "word": "Pronta",
+                "start": 30.739999771118164,
+                "end": 30.940000534057617
+            },
+            {
+                "word": "a",
+                "start": 30.940000534057617,
+                "end": 31.1200008392334
+            },
+            {
+                "word": "habitar",
+                "start": 31.1200008392334,
+                "end": 31.5
+            },
+            {
+                "word": "435",
+                "start": 32.52000045776367,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "mil",
+                "start": 33.119998931884766,
+                "end": 33.400001525878906
+            },
+            {
+                "word": "euros",
+                "start": 33.400001525878906,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "Para",
+                "start": 34.31999969482422,
+                "end": 34.380001068115234
+            },
+            {
+                "word": "visitar",
+                "start": 34.380001068115234,
+                "end": 34.97999954223633
+            },
+            {
+                "word": "fale",
+                "start": 35.279998779296875,
+                "end": 35.279998779296875
+            },
+            {
+                "word": "com",
+                "start": 35.279998779296875,
+                "end": 35.439998626708984
+            },
+            {
+                "word": "a",
+                "start": 35.439998626708984,
+                "end": 35.560001373291016
+            },
+            {
+                "word": "Fernanda",
+                "start": 35.560001373291016,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "Moraes",
+                "start": 35.86000061035156,
+                "end": 36.31999969482422
+            },
+            {
+                "word": "da",
+                "start": 36.459999084472656,
+                "end": 36.619998931884766
+            },
+            {
+                "word": "Remax",
+                "start": 36.619998931884766,
+                "end": 37
+            },
+            {
+                "word": "Rápido",
+                "start": 37,
+                "end": 37.47999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.599998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.900000000000002,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia T4 junto ao Europarque",
+                        "params": {
+                            "src": "img_fc698665",
+                            "avatar": "img_4bb43d6d",
+                            "logo": "img_a145ffc2",
+                            "price": "435.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia de quatro quartos em Rio Meão, junto ao Europarque.",
+                            "location": "Rio Meão · 207 m² · 4 quartos",
+                            "agentName": "Fernanda Morais",
+                            "phone": "+351 916 824 263",
+                            "legal": "RE/MAX Rapid"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.900000000000002,
+                "end": 9.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Rio Meão, Santa Maria da Feira",
+                        "params": {
+                            "src": "img_58a2b28a",
+                            "title": "Rio Meão, Santa Maria da Feira",
+                            "items": [
+                                "Junto ao Europarque",
+                                "Zona calma",
+                                "Acessos rápidos",
+                                "Comércio e escolas perto"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.1,
+                "end": 11.8,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Três frentes, sol todo o dia",
+                        "params": {
+                            "srcs": [
+                                "img_16ed4832",
+                                "img_6ba27222",
+                                "img_be395c7c",
+                                "img_6fdf5645",
+                                "img_2f54acef",
+                                "img_91828945",
+                                "img_a3eb0d10"
+                            ],
+                            "src": "img_16ed4832",
+                            "src2": "img_91828945",
+                            "src3": "img_a3eb0d10",
+                            "src4": "img_58a2b28a",
+                            "src5": "img_2f54acef"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.8,
+                "end": 14.1,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Sala com lareira",
+                        "params": {
+                            "srcs": [
+                                "img_5401b4db",
+                                "img_3ec5ecc7",
+                                "img_9bb1438a",
+                                "img_22377d84",
+                                "img_34c4cea1",
+                                "img_d3cf6357",
+                                "img_75e9144f"
+                            ],
+                            "src": "img_5401b4db",
+                            "src2": "img_b5a7c82f",
+                            "src3": "img_be395c7c",
+                            "src4": "img_0893b25a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.1,
+                "end": 16.1,
+                "background": "papyrus",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Cozinha equipada",
+                        "params": {
+                            "srcs": [
+                                "img_306f6605",
+                                "img_54f4cada",
+                                "img_07d6542a",
+                                "img_018bdcb2",
+                                "img_b90943da",
+                                "img_e09d918b",
+                                "img_48f9bed7"
+                            ],
+                            "src": "img_306f6605",
+                            "src2": "img_09c075c2",
+                            "src3": "img_9fdee258",
+                            "src4": "img_0f42766c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.1,
+                "end": 19.7,
+                "background": "vellum",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Quatro quartos",
+                        "params": {
+                            "srcs": [
+                                "img_d1df587f",
+                                "img_0f6e4232",
+                                "img_0893b25a",
+                                "img_09c075c2",
+                                "img_4426aa7f",
+                                "img_52dc286e",
+                                "img_0700db40",
+                                "img_10529cc7",
+                                "img_c10d0a54",
+                                "img_9fdee258",
+                                "img_a18b9808",
+                                "img_dbd47aa6",
+                                "img_0f42766c"
+                            ],
+                            "angle": 11,
+                            "entrySeconds": 0.6,
+                            "src": "img_d1df587f",
+                            "src2": "img_0f6e4232"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.7,
+                "end": 22.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Churrasqueira",
+                        "params": {
+                            "src": "img_a8b239f2",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.3,
+                "end": 25.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Anexo multifuncional",
+                        "params": {
+                            "src": "img_1a7a6ee3",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 27.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Estacionamento para três carros",
+                        "params": {
+                            "src": "img_4d53576a",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.7,
+                "end": 30.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Conforto e eficiência",
+                        "params": {
+                            "src": "img_b5a7c82f",
+                            "title": "Conforto e eficiência",
+                            "items": [
+                                "Ar condicionado",
+                                "Aquecimento solar de água",
+                                "Três lugares de estacionamento"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.6,
+                "end": 34.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Pronta a habitar · 435.000 €",
+                        "params": {
+                            "srcs": [
+                                "img_7bcb2938",
+                                "img_cb3d9bbe",
+                                "img_38e565a3",
+                                "img_35ff4094",
+                                "img_b2e5593d",
+                                "img_3d50b40c",
+                                "img_215e3da6",
+                                "img_bab5b8e6",
+                                "img_bb6bf067",
+                                "img_7c9d4ebb"
+                            ],
+                            "src": "img_7bcb2938",
+                            "src2": "img_38e565a3",
+                            "src3": "img_4426aa7f",
+                            "src4": "img_a18b9808"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.2,
+                "end": 37.599998474121094,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Fernanda Morais",
+                        "params": {
+                            "src": "img_4bb43d6d",
+                            "logo": "img_a145ffc2",
+                            "name": "Fernanda Morais",
+                            "role": "Consultora imobiliária · RE/MAX Rapid",
+                            "buttons": "+351 916 824 263 | Marque a sua visita",
+                            "phone": "+351 916 824 263"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-124321105-230-xwrtv/clip.mp4",
+    "error": null
+}

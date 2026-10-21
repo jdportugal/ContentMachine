@@ -30,7 +30,7 @@
                 </select>
                 <span class="eyebrow shrink-0 ml-3">Collect from:</span>
                 @foreach ($plataformasDisponiveis as $p)
-                    @php $pm = config('contentmachine.plataformas_meta.'.$p, ['label' => ucfirst($p), 'glifo' => '•', 'cor' => '#8AE0FF']); @endphp
+                    @php $pm = config('contentmachine.plataformas_meta.'.$p, ['label' => ucfirst($p), 'glifo' => '•', 'cor' => '#3D6A85']); @endphp
                     <button type="button" wire:click="alternarPlataforma('{{ $p }}')" @disabled($aAgregar)
                             class="font-mono text-xs px-3 py-1 rounded-sm border transition disabled:opacity-50
                                    {{ in_array($p, $plataformasSelecionadas, true) ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
@@ -58,9 +58,9 @@
 
         @if ($resumoAgregacao)
             <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <x-metric-card label="Items collected" :value="$resumoAgregacao['total']" accent="#5A7BFF" />
+                <x-metric-card label="Items collected" :value="$resumoAgregacao['total']" accent="#2F5A85" />
                 @foreach ($resumoAgregacao['por_plataforma'] as $plat => $n)
-                    <x-metric-card :label="$plat" :value="$n" :accent="config('contentmachine.plataformas_meta.'.$plat.'.cor', '#8AE0FF')" />
+                    <x-metric-card :label="$plat" :value="$n" :accent="config('contentmachine.plataformas_meta.'.$plat.'.cor', '#3D6A85')" />
                 @endforeach
             </div>
             @if (!empty($resumoAgregacao['avisos']))
@@ -103,7 +103,7 @@
                 <div class="lg:col-span-2 space-y-3 min-w-0">
                     <div class="eyebrow mb-1">Items from {{ \Illuminate\Support\Carbon::parse($diaAtivo)->translatedFormat('d M Y') }}</div>
                     @forelse ($itensDoDia as $nota)
-                        @php $m = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'), ['cor' => '#8AE0FF', 'glifo' => '•']); @endphp
+                        @php $m = config('contentmachine.plataformas_meta.'.$nota->get('plataforma'), ['cor' => '#3D6A85', 'glifo' => '•']); @endphp
                         <div class="flex gap-4 py-3 border-b border-ink-soft/10 last:border-0">
                             @if ($nota->get('thumbnail'))
                                 <img src="{{ $nota->get('thumbnail') }}" alt="" loading="lazy"
@@ -163,15 +163,26 @@
     </x-panel>
 
     {{-- ============ Report by period ============ --}}
-    @php($ehDicas = $tipoRelatorio === 'dicas')
+    @php
+    $ehDicas = $tipoRelatorio === 'dicas';
+    $ehTopico = $tipoRelatorio === 'topico';
+    $genero = [
+        'noticias' => ['eyebrow' => 'Report', 'title' => 'Create report', 'glyph' => '☙', 'selo' => 'NEWS', 'botao' => 'Create news report', 'aGerar' => 'Collecting and writing…', 'passados' => 'Previous reports'],
+        'dicas' => ['eyebrow' => 'Tool tips', 'title' => 'Create tip scripts', 'glyph' => '✦', 'selo' => 'TIPS', 'botao' => 'Create tip scripts', 'aGerar' => 'Mining for tips…', 'passados' => 'Previous tip scripts'],
+        'topico' => ['eyebrow' => 'Topic', 'title' => 'Script a topic', 'glyph' => '❖', 'selo' => 'TOPIC', 'botao' => 'Research and write', 'aGerar' => 'Researching and writing…', 'passados' => 'Previous topics'],
+    ][$tipoRelatorio];
+    @endphp
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {{-- Generator --}}
         <div class="lg:col-span-1 min-w-0">
-            <x-panel eyebrow="{{ $ehDicas ? 'Tool tips' : 'Report' }}"
-                     title="{{ $ehDicas ? 'Create tip scripts' : 'Create report' }}"
-                     glyph="{{ $ehDicas ? '✦' : '☙' }}">
+            <x-panel eyebrow="{{ $genero['eyebrow'] }}"
+                     title="{{ $genero['title'] }}"
+                     glyph="{{ $genero['glyph'] }}">
                 <p class="text-ink-soft text-sm -mt-2 mb-4">
-                    @if ($ehDicas)
+                    @if ($ehTopico)
+                        Type a topic. The AI searches the web for it, reads the best sources and writes
+                        short-form scripts from what it found — nothing aggregated is needed.
+                    @elseif ($ehDicas)
                         Mines the aggregated items for the practical tricks buried in them — a setting, a flag, a workflow —
                         and writes each as its own short-form script.
                     @else
@@ -181,7 +192,7 @@
 
                 <label class="eyebrow block mb-1.5">Write</label>
                 <div class="flex gap-2 mb-4">
-                    @foreach (['noticias' => 'News', 'dicas' => 'Tool tips'] as $tipo => $rotulo)
+                    @foreach (['noticias' => 'News', 'dicas' => 'Tool tips', 'topico' => 'Topic'] as $tipo => $rotulo)
                         <button type="button" wire:click="$set('tipoRelatorio', '{{ $tipo }}')"
                                 class="flex-1 px-3 py-1.5 rounded-sm border font-mono text-xs transition
                                        {{ $tipoRelatorio === $tipo ? 'border-teal text-teal bg-teal/10' : 'border-ink-soft/25 text-ink-soft hover:text-ink' }}">
@@ -190,6 +201,15 @@
                     @endforeach
                 </div>
 
+                @if ($ehTopico)
+                <label for="topico" class="eyebrow block mb-1.5">Topic</label>
+                <input id="topico" type="text" wire:model="topico" maxlength="200" placeholder="e.g. Claude Code hooks"
+                       wire:keydown.enter="criarRelatorio"
+                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                @error('topico')
+                    <div class="mt-1 font-mono text-xs text-bad">{{ $message }}</div>
+                @enderror
+                @else
                 <label class="eyebrow block mb-1.5">Period</label>
                 <div class="flex gap-2 mb-4">
                     @foreach (['dia' => 'Day', 'semana' => 'Week'] as $modo => $rotulo)
@@ -204,6 +224,7 @@
                 <label class="eyebrow block mb-1.5">{{ $modoRelatorio === 'semana' ? '7 days up to' : 'Day' }}</label>
                 <input type="date" wire:model="dataRelatorio"
                        class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5 text-ink font-mono text-sm focus:border-teal focus:outline-none">
+                @endif
 
                 <label class="eyebrow block mb-1.5 mt-3">Language</label>
                 <select wire:model="idiomaRelatorio"
@@ -215,11 +236,7 @@
 
                 <button wire:click="criarRelatorio" @disabled($aGerar)
                         class="mt-4 w-full bg-teal text-papyrus font-display text-base px-4 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved disabled:opacity-50">
-                    @if ($aGerar)
-                        {{ $ehDicas ? 'Mining for tips…' : 'Collecting and writing…' }}
-                    @else
-                        {{ $ehDicas ? 'Create tip scripts' : 'Create news report' }}
-                    @endif
+                    {{ $aGerar ? $genero['aGerar'] : $genero['botao'] }}
                 </button>
 
                 @if ($aGerar)
@@ -248,7 +265,7 @@
             <x-panel>
                 @if (!empty($relatoriosPassados))
                     <div class="flex flex-wrap items-center gap-3 mb-4 pb-4 border-b border-ink-soft/15">
-                        <label for="relatorioSelecionado" class="eyebrow shrink-0">{{ $ehDicas ? 'Previous tip scripts' : 'Previous reports' }}</label>
+                        <label for="relatorioSelecionado" class="eyebrow shrink-0">{{ $genero['passados'] }}</label>
                         <select id="relatorioSelecionado" wire:model.live="relatorioSelecionado"
                                 class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-1.5
                                        text-ink font-mono text-sm focus:border-teal focus:outline-none">
@@ -263,10 +280,10 @@
                 @if ($relatorio)
                     <div class="flex items-start justify-between gap-4 mb-2">
                         <div>
-                            <div class="eyebrow mb-1">{{ $ehDicas ? 'Tool tips' : 'Report' }} · {{ $relatorio['modo'] }} · {{ $relatorio['total'] }} item(s)</div>
+                            <div class="eyebrow mb-1">{{ $genero['eyebrow'] }}{{ $ehTopico ? ' · web research' : ' · '.$relatorio['modo'].' · '.$relatorio['total'].' item(s)' }}</div>
                             <h2 class="font-display text-3xl text-ink leading-tight">{{ $relatorio['titulo'] }}</h2>
                         </div>
-                        <x-selo label="Brand Machine" sub="{{ $ehDicas ? 'TIPS' : 'NEWS' }}" date="MMXXVI" color="#FFB347" />
+                        <x-selo label="Brand Machine" sub="{{ $genero['selo'] }}" date="MMXXVI" color="#A06E1C" />
                     </div>
 
                     @if (!empty($relatorio['redacao']))
@@ -341,10 +358,14 @@
                     @endif
                 @else
                     <div class="py-16 text-center">
-                        <div class="text-5xl text-gold/60 mb-3 select-none">{{ $ehDicas ? '✦' : '☙' }}</div>
-                        <p class="text-ink-soft italic">Choose a period and click «{{ $ehDicas ? 'Create tip scripts' : 'Create news report' }}».</p>
+                        <div class="text-5xl text-gold/60 mb-3 select-none">{{ $genero['glyph'] }}</div>
+                        <p class="text-ink-soft italic">{{ $ehTopico ? 'Type a topic' : 'Choose a period' }} and click «{{ $genero['botao'] }}».</p>
                         <p class="text-ink-faint text-sm mt-2">
-                            {{ $ehDicas ? 'The tips are mined from' : 'The report uses' }} the items already collected with «Aggregate now».
+                            @if ($ehTopico)
+                                The scripts are written from live web research on the topic.
+                            @else
+                                {{ $ehDicas ? 'The tips are mined from' : 'The report uses' }} the items already collected with «Aggregate now».
+                            @endif
                         </p>
                     </div>
                 @endif

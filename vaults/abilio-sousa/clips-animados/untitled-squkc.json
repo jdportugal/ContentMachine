@@ -1,0 +1,1032 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T3 na Marisol, Seixal, perto da Caparica | 670 mil €",
+    "source_text": null,
+    "source_path": "clips/uploads/XdIY1jiVGQBhllQ8E1HgxLmOYo7wYkChqP5SCbd0.mp3",
+    "images": [
+        {
+            "id": "img_667dd849",
+            "path": "clips/uploads/NmH2Eelabt7gZsZwmDaM6JuRrIiIZcaVuIzZV4C8.jpg",
+            "description": "Cozinha com zona de refeições: mesa de madeira com quatro cadeiras, máquina de lavar roupa e loiça, chão em tijoleira.",
+            "name": "a7f16018-fb55-4254-83e3-85d315ecdbf9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_66ada062",
+            "path": "clips/uploads/ujNHf6Hb0fx7D2cbubaTQsHubhwsq9FrPVSUhqx8.jpg",
+            "description": "Cozinha ampla com armários de madeira maciça, placa a gás, forno, bancada em granito e duas janelas.",
+            "name": "3267be04-617c-482a-bd07-7e86b021d4bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_25c74f4a",
+            "path": "clips/uploads/mcWu1vAZMCziRhdYm5y19hdGbukjLBoSuZ6cLya3.jpg",
+            "description": "Casa de banho de serviço com lavatório em móvel branco, espelho grande e sanita separada atrás de porta.",
+            "name": "d3a6f02d-2366-4371-a518-a72d53404492.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3f3c8064",
+            "path": "clips/uploads/XWlIMmO5DsmlT0n122dIGC3jz02eCsQ9NvN9lVCB.jpg",
+            "description": "Hall de entrada com escada em madeira, arco para divisão com parede de pedra e casa de banho à direita.",
+            "name": "0f697509-f08e-4728-b725-5a4d36b34265.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cce8ea40",
+            "path": "clips/uploads/hHeNyR2uEOLxWceO4EPQSrp59HUlqDtmrEhMy9k8.jpg",
+            "description": "Sala de jantar com mesa comprida de madeira, candeeiro de cristal e vista para a sala de estar ao fundo.",
+            "name": "952f0d53-b289-4e3d-af41-ed4fa1cc6e31.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a01a32b4",
+            "path": "clips/uploads/hTWNyKfR32ye5dXTA8YpwuMPNsTrFlS66P2RWJ4H.jpg",
+            "description": "Sala de estar com sofá bege, porta aberta para a cozinha e zona de jantar com parede de pedra ao fundo.",
+            "name": "9239fa0a-594a-44a1-adb3-e42a78f3f788.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_482dc0dd",
+            "path": "clips/uploads/95mBbhbMH83STnyDvUeqKPxWHApWcFzmEwD4L8zb.jpg",
+            "description": "Sala de estar com lareira em pedra, sofás bege com almofadas amarelas, candeeiro de cristal e janelas para o jardim.",
+            "name": "95067f90-3b8e-48f6-b060-465442799835.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_48550a10",
+            "path": "clips/uploads/F0hDRRdx4ijhMscDNI4VcsOKbbFo96YVQnxNsDXN.jpg",
+            "description": "Sala de estar de frente para a lareira, dois sofás, tapete floral, quadros e muita luz natural.",
+            "name": "dc6ae93e-5b61-4dc4-a0c6-ee94c1ad5e7c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5effa9c1",
+            "path": "clips/uploads/gRUhm6gefgfInDBoWtcgyj3engcTg2Yl8yieGtDe.jpg",
+            "description": "Sala comum em open space: mesa de jantar com seis cadeiras em primeiro plano, sala de estar e lareira ao fundo.",
+            "name": "85133326-3887-4ab4-b31a-a82e0561a23f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4df60bad",
+            "path": "clips/uploads/B1BdMXCuK8xTops0aS8BCxZc0632VHEz1A8tnEGO.jpg",
+            "description": "Alpendre de entrada com parede de pedra, porta de madeira, duas cadeiras de exterior, coluna e jardim com palmeiras.",
+            "name": "625200d7-a67b-4206-b1f2-3472f3327c4b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_74936b8f",
+            "path": "clips/uploads/lfzZxnMPA7bcia1Ig4udrhPizMmwyADcrkS08AwF.jpg",
+            "description": "Alpendre coberto com parede em pedra, duas cadeiras de vime escuras, portada vermelha e vaso com planta.",
+            "name": "f55b4dbc-fd56-42c9-aee8-d58442b7d306.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f094b887",
+            "path": "clips/uploads/Ebmo1PudHxGQr4rtPMxuV0QXXriR98OxJZe6eI8F.jpg",
+            "description": "Fachada da moradia vista da rua, portões vermelhos em ferro, muros de pedra e calçada portuguesa.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_08fb452a",
+            "path": "clips/uploads/g57Q92KlAEzEOqzfa7WBoAImeyXaFfPWxH2scx13.png",
+            "description": "Logótipo RE/MAX Prestige com balão branco sobre fundo azul e o slogan «Sinta-se em casa».",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8a84edc9",
+            "path": "clips/uploads/dSxaYYuGbWsHcauDjYQ3M2X1rquhh9NegaDenUo6.png",
+            "description": "Retrato do agente Mário Maia, de fato e gravata, sobre fundo azul RE/MAX Prestige.",
+            "name": "Mario.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2891caef",
+            "path": "clips/uploads/M9Exxk6c8sGZkfvuLGGdDtdvJYO2SQuvlXE60kFX.jpg",
+            "description": "Sala de estar com paredes amarelas, sofá verde, vigas de madeira e porta envidraçada para o exterior.",
+            "name": "3cef0a73-513c-46ad-ad77-e441456b6502.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_aff0455a",
+            "path": "clips/uploads/8fUqWaPf2Lm2dZedsCdhkgT3NqKPsn933pdnKmHS.jpg",
+            "description": "Sala de convívio ampla, paredes amarelas, sofás verdes, carrinho de bar, alvo de dardos e vigas.",
+            "name": "f9f97a68-d5af-4395-ba0a-e8be74f29f9b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6f3c8d73",
+            "path": "clips/uploads/UwWDV7hcl3SSmBHQ58LTT7a4w6GwNUXqVcyGEjYp.jpg",
+            "description": "Cozinha de apoio exterior com teto de madeira e telha, mesa branca grande, fogão e frigorífico.",
+            "name": "6357a953-045a-4a88-8781-e756c0a3c944.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_12d9df5b",
+            "path": "clips/uploads/GfURcTLn7RRmAV1utrekR7qFb7ddNoTS2Axf6SCg.jpg",
+            "description": "Jardim traseiro com relva cuidada, terraço em mosaico, sebe alta e anexo com cadeiras ao fundo.",
+            "name": "d7be13f5-976c-4802-ae85-fc162e4fb4d3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2c62b27e",
+            "path": "clips/uploads/KeGewLsGfwzPHA1FnGmga5MRik4iw9WOQ3Q8hD77.jpg",
+            "description": "Moradia de dois pisos com portadas vermelhas, varandas, acesso em calçada à garagem e relvado ao entardecer.",
+            "name": "d6dd40a7-7470-400f-bd8f-2e5d861886c5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3d1a58c0",
+            "path": "clips/uploads/XVsuunp1s93yc4mw2rTfUIyhanDJro5ZSpNxp3uc.jpg",
+            "description": "Casa de banho com base de duche com resguardo de vidro, sanita, lavatório com móvel de madeira e espelho.",
+            "name": "0ed0292e-4714-4912-8777-8d528b7f3383.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_412de60e",
+            "path": "clips/uploads/q9CeF88pSgsoi9ZCekdSzfuqjy72bC1CHPSKT7w8.jpg",
+            "description": "Quarto com colcha rosa, janela grande com cortinas bordô, raquetes de ténis na parede e zona de estar anexa.",
+            "name": "8f08ddd9-362b-4d47-820f-b24ef8264349.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ab2cc44a",
+            "path": "clips/uploads/njZ8KjUI9urqjnnIh39XleKw0Eux5Ps5qahGThPe.jpg",
+            "description": "Quarto suite com cama de casal, colcha vermelha e azul, roupeiro espelhado e casa de banho privativa.",
+            "name": "1808be40-d112-40c7-b679-323e4dae7e9f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c9781e17",
+            "path": "clips/uploads/LLb2oFPai09eq5rGWxM8poKyBYrgwdNkthrobXnN.jpg",
+            "description": "Casa de banho branca com móvel lavatório, espelho, bidé, banheira e chão em mosaico verde.",
+            "name": "d9fce9ad-ef0a-4436-b1b9-2dffd0710643.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_54136317",
+            "path": "clips/uploads/NQd2qeFr96d229zfE6HCQpEploQ1zdUpfz0weImf.jpg",
+            "description": "Quarto luminoso com cama de ferro branca, cortinas claras, cómoda branca e espelho dourado.",
+            "name": "055a7b59-d2b6-4601-848d-065d5c8ddc31.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9fb3c789",
+            "path": "clips/uploads/OXn4GOXZlUZLuGVRubr8reJEfwzCwVM2dLfvLo8e.jpg",
+            "description": "Mesmo quarto noutro ângulo: cama de ferro branca, almofadas lilás, quadro dourado e candeeiro de mesa.",
+            "name": "cdf88f9b-5285-4e41-8874-89a878d9e18c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f150a026",
+            "path": "clips/uploads/c3EMJnChUJip1bXKXFe93RlZvUwaoXHFgUzAEqRA.jpg",
+            "description": "Casa de banho com base de duche em vidro, mosaico bege, janela e lavatório rosa claro.",
+            "name": "dbc9c1f4-bcd0-45ca-a3bc-ac29407303bb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c6959e86",
+            "path": "clips/uploads/S30qbYo9hbcX5czxfNMGplTYofQabax239TDckSF.jpg",
+            "description": "Quarto suite com cama escura de madeira, colcha azul, roupeiro espelhado e casa de banho ao lado.",
+            "name": "ae352501-a0d2-4b9f-9398-33086017ebdf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6135c786",
+            "path": "clips/uploads/B4hAsoOAQ6XAricpYCBdNoJIhMEgGZy6FgmxdUDz.jpg",
+            "description": "Corredor com chão em madeira, quadro emoldurado, aparador clássico e porta aberta para um quarto.",
+            "name": "eab34653-60e0-4b11-aa59-c332aa75c2b8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_76678942",
+            "path": "clips/uploads/WVN7VHrITDB4dDytnS223PCjkROYiawqZWofcZib.jpg",
+            "description": "Escadaria interior em madeira com corrimão, janela alta envidraçada e quadro de rua pintado.",
+            "name": "e3a66f49-a537-468e-af1b-f41b1e98f860.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n670 000 €\nVenda\nid. 123751051-300\n145 m²\n\n3 Quartos\n\n4 WC\n\nC\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nMoradia T3 | Marisol – Lote 412 m² | Localização de Excelência\n\nExcelente moradia T3, inserida num lote de 412 m², situada na prestigiada zona da Marisol, conhecida pela sua envolvência residencial premium e ambiente muito tranquilo.\n\nUma oportunidade única para viver com conforto, com privacidade e com qualidade de vida. Localizada perto das praias da Costa da Caparica e da Fonte da Telha, junto ao Pinhal da Aroeira e da Mata dos Medos (passadiços), próximo dos campos de golfe da Herdade da Aroeira, a 15 Km da cidade de Lisboa e a 5 m do acesso à A33.\nAo seu redor existem as superfícies comerciais do LIDL, Continente, Pingo Doce e ALDI e colégios de ensino privado, como o Colégio do Vale, o Colégio Guadalupe e o Colégio Campo de Flores.\nNão perca mais tempo e venha visitar esta moradia premium.\n\nDetalhes\nÁrea Bruta Privativa m²\n145\nÁrea Bruta m²\n186\nÁrea Total do Lote m²\n500\nÁrea Útil m²\n130\nQuartos\n3\nAno de Construção\n1995\nPiso\n- -\nWC/Casas de banho\n4\nElevador\nNão\nEstacionamento\n1 Lugar\nCarregamento de Carros Elétricos\nNão\nDetalhes energéticos\n\nEficiência energética",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T3 na Marisol, Corroios (Seixal), junto à Mata dos Medos e à Fonte da Telha",
+            "summary": "A Marisol é uma zona residencial de moradias em Corroios, no Seixal. Fica perto da Mata Nacional dos Medos, reserva botânica desde 1971 que se integra na Paisagem Protegida da Arriba Fóssil da Costa da Caparica.",
+            "timeline": [
+                {
+                    "label": "Mata dos Medos plantada para travar as dunas",
+                    "sublabel": "Reinado de D. João V (1706-1750)"
+                },
+                {
+                    "label": "Mata dos Medos classificada como Reserva Botânica",
+                    "sublabel": "1971"
+                },
+                {
+                    "label": "Criada a Paisagem Protegida da Arriba Fóssil",
+                    "sublabel": "1984"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área da Mata Nacional dos Medos",
+                    "value": 340,
+                    "unit": "hectares"
+                },
+                {
+                    "label": "Extensão da Mata dos Medos até à Fonte da Telha",
+                    "value": 5,
+                    "unit": "km"
+                },
+                {
+                    "label": "Preço mediano das casas na Península de Setúbal (2025, INE)",
+                    "value": 2596,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano das casas em Portugal (2025, INE)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano em Portugal (2025, INE)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Preço mediano da habitação em 2025 (INE)",
+                    "left": {
+                        "title": "Península de Setúbal",
+                        "points": [
+                            "2.596 €/m²",
+                            "Os 9 municípios estão acima da média nacional"
+                        ]
+                    },
+                    "right": {
+                        "title": "Média nacional",
+                        "points": [
+                            "2.076 €/m²",
+                            "+16,8% face a 2024"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A Mata dos Medos, também chamada Pinhal do Rei, é sobretudo pinheiro-manso",
+                "É reserva botânica pelo Decreto n.º 444/71",
+                "Integra a Paisagem Protegida da Arriba Fóssil da Costa da Caparica (Decreto-Lei 168/84)",
+                "Tem trilhos com areais, bosques e passadiços de madeira",
+                "Na Marisol há moradias à venda entre cerca de 630 mil e 1,39 milhões de euros"
+            ],
+            "sources": [
+                "https://lisboasecreta.co/mata-dos-medos-lisboa/",
+                "https://diariodarepublica.pt/dr/detalhe/decreto/444-1971-633898",
+                "https://resources.natural.pt/uploads/additional-information/2021/05/21/13/MqPMDlHz3FV22Fpa.pdf",
+                "https://www.ccdr-lvt.pt/wp-content/uploads/2022/03/EER_arriba-fossil-costa-caparica-norte.pdf",
+                "https://www.infopedia.pt/artigos/$area-de-paisagem-protegida-da-arriba-fossil",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://www.imovirtual.com/pt/resultados/comprar/moradia/setubal/seixal/corroios/marisol",
+                "https://casa.trovit.pt/casa-corroios/23"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T3 na Marisol, Seixal, perto da Caparica | 670 mil €",
+            "description": "Moradia T3 com quatro casas de banho, num lote com mais de 400 m², numa das zonas residenciais mais tranquilas de Corroios. Fica junto ao Pinhal da Aroeira e à Mata dos Medos, perto das praias da Caparica, da Fonte da Telha e dos campos de golfe, a 15 km de Lisboa e com acesso rápido à A33. Para marcar uma visita, fale com o Mário Maia, da RE/MAX Prestige.",
+            "tags": [
+                "moradia T3",
+                "Seixal",
+                "Corroios",
+                "Marisol",
+                "Costa da Caparica",
+                "imobiliário",
+                "casa à venda",
+                "RE/MAX Prestige"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-squkc",
+    "created_at": "2026-10-07T09:58:02+00:00",
+    "updated_at": "2026-10-07T10:03:53+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/XdIY1jiVGQBhllQ8E1HgxLmOYo7wYkChqP5SCbd0.mp3",
+    "transcript": {
+        "duration": 31.549999237060547,
+        "text": "Uma moradia na Marissol, no Seixal, a minutos das praias da Caparica. T3 com quatro casas de banho, num lote com mais de 400 metros, numa das zonas residenciais mais tranquilas de Correios. Junto ao Pinhal da Aroeira e aos passadiços da Mata dos Medos, perto dos campos de golfe e da Fonte da Telha. A 15 quilómetros de Lisboa, com acesso rápido à A33, colégios e comércio à volta. 670 mil euros. Para visitar, fale com o Mário Maia, da Remax Prestige.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2800000011920929
+            },
+            {
+                "word": "moradia",
+                "start": 0.2800000011920929,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "na",
+                "start": 0.699999988079071,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "Marissol",
+                "start": 0.9200000166893005,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "no",
+                "start": 1.559999942779541,
+                "end": 1.7599999904632568
+            },
+            {
+                "word": "Seixal",
+                "start": 1.7599999904632568,
+                "end": 2.180000066757202
+            },
+            {
+                "word": "a",
+                "start": 2.640000104904175,
+                "end": 2.819999933242798
+            },
+            {
+                "word": "minutos",
+                "start": 2.819999933242798,
+                "end": 3.0999999046325684
+            },
+            {
+                "word": "das",
+                "start": 3.0999999046325684,
+                "end": 3.359999895095825
+            },
+            {
+                "word": "praias",
+                "start": 3.359999895095825,
+                "end": 3.5999999046325684
+            },
+            {
+                "word": "da",
+                "start": 3.5999999046325684,
+                "end": 3.799999952316284
+            },
+            {
+                "word": "Caparica",
+                "start": 3.799999952316284,
+                "end": 4.260000228881836
+            },
+            {
+                "word": "T3",
+                "start": 4.980000019073486,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "com",
+                "start": 5.340000152587891,
+                "end": 5.599999904632568
+            },
+            {
+                "word": "quatro",
+                "start": 5.599999904632568,
+                "end": 5.980000019073486
+            },
+            {
+                "word": "casas",
+                "start": 5.980000019073486,
+                "end": 6.28000020980835
+            },
+            {
+                "word": "de",
+                "start": 6.28000020980835,
+                "end": 6.599999904632568
+            },
+            {
+                "word": "banho",
+                "start": 6.599999904632568,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "num",
+                "start": 6.820000171661377,
+                "end": 7.019999980926514
+            },
+            {
+                "word": "lote",
+                "start": 7.019999980926514,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 7.380000114440918,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "mais",
+                "start": 7.539999961853027,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "de",
+                "start": 7.71999979019165,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "400",
+                "start": 7.900000095367432,
+                "end": 8.260000228881836
+            },
+            {
+                "word": "metros",
+                "start": 8.260000228881836,
+                "end": 8.739999771118164
+            },
+            {
+                "word": "numa",
+                "start": 9.279999732971191,
+                "end": 9.399999618530273
+            },
+            {
+                "word": "das",
+                "start": 9.399999618530273,
+                "end": 9.619999885559082
+            },
+            {
+                "word": "zonas",
+                "start": 9.619999885559082,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "residenciais",
+                "start": 9.779999732971191,
+                "end": 10.619999885559082
+            },
+            {
+                "word": "mais",
+                "start": 10.619999885559082,
+                "end": 11.140000343322754
+            },
+            {
+                "word": "tranquilas",
+                "start": 11.140000343322754,
+                "end": 11.640000343322754
+            },
+            {
+                "word": "de",
+                "start": 11.640000343322754,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "Correios",
+                "start": 11.819999694824219,
+                "end": 12.15999984741211
+            },
+            {
+                "word": "Junto",
+                "start": 13.180000305175781,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "ao",
+                "start": 13.199999809265137,
+                "end": 13.34000015258789
+            },
+            {
+                "word": "Pinhal",
+                "start": 13.34000015258789,
+                "end": 13.539999961853027
+            },
+            {
+                "word": "da",
+                "start": 13.539999961853027,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "Aroeira",
+                "start": 13.800000190734863,
+                "end": 14.140000343322754
+            },
+            {
+                "word": "e",
+                "start": 14.140000343322754,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "aos",
+                "start": 14.420000076293945,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "passadiços",
+                "start": 14.5600004196167,
+                "end": 15.100000381469727
+            },
+            {
+                "word": "da",
+                "start": 15.100000381469727,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "Mata",
+                "start": 15.34000015258789,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "dos",
+                "start": 15.460000038146973,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "Medos",
+                "start": 15.680000305175781,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "perto",
+                "start": 16.780000686645508,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "dos",
+                "start": 16.81999969482422,
+                "end": 17
+            },
+            {
+                "word": "campos",
+                "start": 17,
+                "end": 17.200000762939453
+            },
+            {
+                "word": "de",
+                "start": 17.200000762939453,
+                "end": 17.639999389648438
+            },
+            {
+                "word": "golfe",
+                "start": 17.639999389648438,
+                "end": 17.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 17.700000762939453,
+                "end": 17.899999618530273
+            },
+            {
+                "word": "da",
+                "start": 17.899999618530273,
+                "end": 18.200000762939453
+            },
+            {
+                "word": "Fonte",
+                "start": 18.200000762939453,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "da",
+                "start": 18.360000610351562,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "Telha",
+                "start": 18.559999465942383,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "A",
+                "start": 19.540000915527344,
+                "end": 19.65999984741211
+            },
+            {
+                "word": "15",
+                "start": 19.65999984741211,
+                "end": 19.979999542236328
+            },
+            {
+                "word": "quilómetros",
+                "start": 19.979999542236328,
+                "end": 20.34000015258789
+            },
+            {
+                "word": "de",
+                "start": 20.34000015258789,
+                "end": 20.559999465942383
+            },
+            {
+                "word": "Lisboa",
+                "start": 20.559999465942383,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 21.100000381469727,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "acesso",
+                "start": 21.260000228881836,
+                "end": 21.5
+            },
+            {
+                "word": "rápido",
+                "start": 21.5,
+                "end": 22
+            },
+            {
+                "word": "à",
+                "start": 22,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "A33",
+                "start": 22.15999984741211,
+                "end": 22.719999313354492
+            },
+            {
+                "word": "colégios",
+                "start": 23.559999465942383,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 23.959999084472656,
+                "end": 24.239999771118164
+            },
+            {
+                "word": "comércio",
+                "start": 24.239999771118164,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "à",
+                "start": 24.6200008392334,
+                "end": 24.979999542236328
+            },
+            {
+                "word": "volta",
+                "start": 24.979999542236328,
+                "end": 25.15999984741211
+            },
+            {
+                "word": "670",
+                "start": 26.31999969482422,
+                "end": 26.8799991607666
+            },
+            {
+                "word": "mil",
+                "start": 26.8799991607666,
+                "end": 27.100000381469727
+            },
+            {
+                "word": "euros",
+                "start": 27.100000381469727,
+                "end": 27.420000076293945
+            },
+            {
+                "word": "Para",
+                "start": 27.420000076293945,
+                "end": 28.040000915527344
+            },
+            {
+                "word": "visitar",
+                "start": 28.040000915527344,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "fale",
+                "start": 29.280000686645508,
+                "end": 29.280000686645508
+            },
+            {
+                "word": "com",
+                "start": 29.280000686645508,
+                "end": 29.440000534057617
+            },
+            {
+                "word": "o",
+                "start": 29.440000534057617,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "Mário",
+                "start": 29.639999389648438,
+                "end": 29.700000762939453
+            },
+            {
+                "word": "Maia",
+                "start": 29.700000762939453,
+                "end": 30.100000381469727
+            },
+            {
+                "word": "da",
+                "start": 30.360000610351562,
+                "end": 30.479999542236328
+            },
+            {
+                "word": "Remax",
+                "start": 30.479999542236328,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "Prestige",
+                "start": 30.920000076293945,
+                "end": 31.520000457763672
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 31.549999237060547,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.4999999999999982,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia T3 perto da Caparica",
+                        "params": {
+                            "src": "img_f094b887",
+                            "avatar": "img_8a84edc9",
+                            "logo": "img_08fb452a",
+                            "price": "670.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T3 na Marisol",
+                            "location": "Marisol, Seixal · 145 m² · 3 quartos",
+                            "agentName": "Mário Maia",
+                            "phone": "+351 966 827 427",
+                            "legal": "RE/MAX Prestige"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.4999999999999982,
+                "end": 9.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_25c74f4a",
+                            "src2": "img_3d1a58c0",
+                            "src3": "img_c9781e17",
+                            "src4": "img_f150a026"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.1,
+                "end": 12.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Zona residencial tranquila",
+                        "params": {
+                            "src": "img_2c62b27e",
+                            "src2": "img_4df60bad",
+                            "src3": "img_74936b8f",
+                            "src4": "img_12d9df5b",
+                            "src5": "img_6f3c8d73"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.9,
+                "end": 16.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Junto à Mata dos Medos",
+                        "params": {
+                            "src": "img_482dc0dd",
+                            "src2": "img_48550a10",
+                            "src3": "img_a01a32b4",
+                            "src4": "img_5effa9c1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 19.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_cce8ea40",
+                            "src2": "img_66ada062",
+                            "src3": "img_3f3c8064",
+                            "src4": "img_6135c786"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.4,
+                "end": 22.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "A 15 km de Lisboa",
+                        "params": {
+                            "src": "img_667dd849",
+                            "src2": "img_aff0455a",
+                            "src3": "img_2891caef",
+                            "src4": "img_76678942"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.9,
+                "end": 25.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Colégios e comércio",
+                        "params": {
+                            "src": "img_12d9df5b",
+                            "title": "Colégios e comércio",
+                            "items": [
+                                "Colégio do Vale",
+                                "Colégio Guadalupe",
+                                "LIDL · Continente · Aldi"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.9,
+                "end": 28.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "670.000 €",
+                        "params": {
+                            "src": "img_412de60e",
+                            "src2": "img_54136317",
+                            "src3": "img_9fb3c789",
+                            "src4": "img_c6959e86",
+                            "src5": "img_ab2cc44a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.9,
+                "end": 31.549999237060547,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Mário Maia",
+                        "params": {
+                            "src": "img_8a84edc9",
+                            "logo": "img_08fb452a",
+                            "name": "Mário Maia",
+                            "role": "Consultor imobiliário · RE/MAX Prestige",
+                            "buttons": "+351 966 827 427 | Marque a sua visita",
+                            "phone": "+351 966 827 427"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-squkc/clip.mp4",
+    "error": null
+}

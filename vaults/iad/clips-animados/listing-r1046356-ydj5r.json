@@ -1,0 +1,1323 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T3 em Montedor, Carreço, a dois minutos do mar",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-3-quartos-carreco-167m2/r1046356",
+            "agent": "Ilídia Barbosa",
+            "phone": "+351913612313",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia em Montedor, a dois minutos do mar.",
+            "voiceover": "Uma moradia em Montedor, a dois minutos do mar. Fica em Carreço, Viana do Castelo, numa zona sossegada. É uma moradia geminada, em dois pisos. No rés-do-chão, hall de entrada e uma sala de estar e jantar ampla. Há ainda cozinha, casa de banho completa e arrumos. No primeiro andar, três quartos amplos. A suite tem uma varanda de grandes dimensões. No total, há três casas de banho completas e vidros duplos. Lá fora, um jardim e garagem para um carro, com portão automático. Trezentos e setenta e cinco mil euros. Para visitar, fale com a Ilídia Barbosa, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada principal",
+                    "vo": "Uma moradia em Montedor, a dois minutos do mar.",
+                    "caption": "Montedor, Carreço"
+                },
+                {
+                    "photo": "rua e zona envolvente",
+                    "vo": "Fica em Carreço, Viana do Castelo, numa zona sossegada.",
+                    "caption": "Zona sossegada"
+                },
+                {
+                    "photo": "fachada lateral / vista geral da casa",
+                    "vo": "É uma moradia geminada, em dois pisos.",
+                    "caption": "Moradia T3 geminada"
+                },
+                {
+                    "photo": "hall de entrada e sala de estar e jantar",
+                    "vo": "No rés-do-chão, hall de entrada e uma sala de estar e jantar ampla.",
+                    "caption": "Sala ampla"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Há ainda cozinha, casa de banho completa e arrumos.",
+                    "caption": "Cozinha e arrumos"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "No primeiro andar, três quartos amplos.",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "suite com varanda",
+                    "vo": "A suite tem uma varanda de grandes dimensões.",
+                    "caption": "Suite com varanda"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "No total, há três casas de banho completas e vidros duplos.",
+                    "caption": "Três casas de banho"
+                },
+                {
+                    "photo": "jardim",
+                    "vo": "Lá fora, um jardim",
+                    "caption": "Jardim"
+                },
+                {
+                    "photo": "garagem e portão automático",
+                    "vo": "e garagem para um carro, com portão automático.",
+                    "caption": "Garagem e portão automático"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e setenta e cinco mil euros. Para visitar, fale com a Ilídia Barbosa, da IAD Portugal.",
+                    "caption": "375.000 € · Ilídia Barbosa · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "'Terraço' e 'Alarme' aparecem na lista de características, mas o texto do anúncio não os descreve. Ficaram de fora; confirmar se existem.",
+                "O aquecimento aparece só como etiqueta não traduzida ('property.feature.heating') e o tipo não é indicado. Ficou de fora.",
+                "'A dois minutos do mar' foi usado como está no anúncio, que não diz se é a pé ou de carro. Confirmar antes de publicar."
+            ],
+            "message": "Boa tarde Sra. Ilídia, fiz este vídeo da sua moradia T3 em Carreço para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia geminada 3 quartos de 167 m² em Carreço",
+            "price": 375000,
+            "details": {
+                "Preço": "375 000 €",
+                "Localização": "Carreço, 4900-279",
+                "Referência": "1046356",
+                "Área Bruta m²": "166.5",
+                "Quartos": 3,
+                "Ano de Construção": 1991,
+                "Certificado Energético": "D",
+                "Características": "3 casas de banho, Jardim, Garagem, Terraço, Varanda, Alarme, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1991"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Ilídia Barbosa - and phone number - +351913612313. Agency: IAD Portugal.\nThe agent's photo is Ilídia Barbosa.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma moradia em Montedor, a dois minutos do mar.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada principal → «Montedor, Carreço»\n- rua e zona envolvente → «Zona sossegada»\n- fachada lateral / vista geral da casa → «Moradia T3 geminada»\n- hall de entrada e sala de estar e jantar → «Sala ampla»\n- cozinha → «Cozinha e arrumos»\n- quarto → «Três quartos»\n- suite com varanda → «Suite com varanda»\n- casa de banho → «Três casas de banho»\n- jardim → «Jardim»\n- garagem e portão automático → «Garagem e portão automático»\n- end card → «375.000 € · Ilídia Barbosa · IAD Portugal»\n\nHere are the house details:\n\nMoradia geminada 3 quartos de 167 m² em Carreço\nPreço\n375 000 €\nLocalização\nCarreço, 4900-279\nReferência\n1046356\nÁrea Bruta m²\n166.5\nQuartos\n3\nAno de Construção\n1991\nCertificado Energético\nD\nCaracterísticas\n3 casas de banho, Jardim, Garagem, Terraço, Varanda, Alarme, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1991\n\nDescrição\nMoradia T3 com Suíte, Jardim e Garagem — A 2 Minutos do Mar!\nO conforto de uma casa espaçosa, o prazer de ter um jardim e a proximidade do mar. Tudo num só lugar!\nDescubra esta fantástica moradia T3 GEMINADA, ideal para quem procura qualidade de vida, tranquilidade e conforto, numa localização privilegiada, em zona sossegada e a apenas 2 minutos do mar.\nDistribuída por dois pisos, esta moradia distingue-se pelas suas divisões amplas, excelente funcionalidade e espaço exterior, proporcionando o ambiente perfeito para viver em família e desfrutar de momentos únicos.\n\n🏡 Rés do chão — Espaço e funcionalidade\nAo entrar, encontra um acolhedor hall de entrada que conduz a uma ampla sala de estar e jantar, ideal para convívios em família ou para receber amigos.\nEste piso dispõe ainda de uma cozinha funcional, uma casa de banho completa e um prático espaço de arrumos, pensado para facilitar a organização do dia a dia.\n\n🛏️ Primeiro andar — Conforto e privacidade\nNo primeiro andar, encontra três quartos amplos, um deles suite, que oferece um toque especial de conforto e privacidade.\nA suíte destaca-se pela sua magnífica varanda de grandes dimensões, perfeita para relaxar, aproveitar a luz natural e desfrutar de momentos de tranquilidade.\nEste piso conta ainda com uma casa de banho completa de apoio aos restantes quartos.\n\n🌿 Exterior — O prazer de viver ao ar livre\nNo exterior, a moradia oferece um agradável e funcional jardim, ideal para criar uma zona de lazer, desfrutar de refeições ao ar livre ou simplesmente relaxar no final do dia.\n\nDispõe ainda de garagem para um carro e portão automático, garantindo maior comodidade, segurança e facilidade de acesso.\n✨ Principais características:\n•\tMoradia T3 com suíte;\n•\tTrês quartos amplos;\n•\tSuíte com varanda de grandes dimensões;\n•\tTrês casas de banho completas;\n•\tSala de estar e jantar ampla;\n•\tCozinha funcional;\n•\tHall de entrada e espaço de arrumos;\n•\tVidros duplos;\n•\tJardim exterior funcional;\n•\tGaragem para um carro;\n•\tPortão automático;\n•\tLocalização em zona sossegada;\n•\tA apenas 2 minutos do mar.\n\n🌊 Viva com tranquilidade, perto da natureza e com o mar mesmo ali ao lado!\nUma excelente oportunidade para quem procura uma moradia que combina espaço, conforto e funcionalidade, num ambiente tranquilo e perto da costa.\nVenha conhecer e apaixone-se pelo seu próximo lar!\n\nCONHECE MONTEDOR , CARREÇO VIANA DO CASTELO?\n\nUma localização privilegiada junto ao mar\nSituada em Montedor, Carreço, Viana do Castelo, esta moradia beneficia de uma localização tranquila, ideal para quem procura fugir à agitação do dia a dia e desfrutar da serenidade da vida junto à costa.\nA apenas 2 minutos do mar, oferece a oportunidade de aproveitar passeios à beira-mar, a beleza natural da região e momentos de puro relaxamento.\nUm local onde a tranquilidade, a natureza e a proximidade do oceano se unem para proporcionar uma excelente qualidade de vida.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia geminada em Montedor, Carreço (Viana do Castelo)",
+            "summary": "Moradia T3 geminada de dois pisos à venda por 375 mil euros em Montedor, Carreço, a dois minutos do mar. A zona fica junto ao Farol de Montedor, o farol mais a norte de Portugal continental.",
+            "timeline": [
+                {
+                    "label": "Farol de Montedor entra em funcionamento",
+                    "sublabel": "20 de março de 1910"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido da moradia",
+                    "value": 375000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Quartos",
+                    "value": 3,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Casas de banho completas",
+                    "value": 3,
+                    "unit": "WC"
+                },
+                {
+                    "label": "Altitude da luz do Farol de Montedor",
+                    "value": 103,
+                    "unit": "m"
+                },
+                {
+                    "label": "Altura da torre do farol",
+                    "value": 28,
+                    "unit": "m"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Distribuição da moradia",
+                    "left": {
+                        "title": "Rés-do-chão",
+                        "points": [
+                            "Hall de entrada",
+                            "Sala de estar e jantar ampla",
+                            "Cozinha",
+                            "Casa de banho completa",
+                            "Arrumos"
+                        ]
+                    },
+                    "right": {
+                        "title": "1.º andar",
+                        "points": [
+                            "3 quartos amplos",
+                            "Suite com varanda grande",
+                            "Vidros duplos"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Farol de Montedor, em Carreço, é o farol mais a norte de Portugal",
+                "Perto ficam os Moinhos de Montedor, moinhos de vento com velas trapezoidais de madeira, típicos do litoral norte",
+                "Os trilhos municipais PR6 e PR7 passam pelo farol e pelos moinhos",
+                "Exterior com jardim e garagem para um carro com portão automático"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Montedor_Lighthouse",
+                "https://lifecooler.com/artigo/atividades/farol-de-montedor/356828/",
+                "https://www.komoot.com/highlight/665875",
+                "https://www.cm-viana-castelo.pt/wp-content/uploads/2023/01/Trilhos-de-Carreco-PR6-e-PR7.pdf",
+                "https://www.cm-viana-castelo.pt/wp-content/uploads/2023/04/Brochura-Moinhos-Abertos-2023.pdf",
+                "https://moinhosdeportugal.org/ws/pdf/Brochura_Moinhos_Abertos 2025.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T3 em Montedor, Carreço, a dois minutos do mar",
+            "description": "A dois minutos do mar em Montedor: moradia de 3 quartos com suite e uma varanda de grandes dimensões 🌊\n\nFica em Carreço, Viana do Castelo, numa zona sossegada. É uma moradia geminada de dois pisos, construída em 1991.\nNo rés-do-chão há hall de entrada, sala de estar e jantar ampla, cozinha, casa de banho completa e arrumos. No primeiro andar ficam os três quartos, todos amplos.\nTem três casas de banho completas, vidros duplos, aquecimento, alarme e fibra ótica. Lá fora há jardim, terraço e garagem para um carro com portão automático.\n\nMoradia geminada · 3 quartos · 166,5 m² · Certificado D · Ref. 1046356 · 375.000 €\n\nPara marcar visita, fale com a Ilídia Barbosa, da IAD Portugal: +351 913 612 313",
+            "tags": [
+                "moradia",
+                "imobiliario",
+                "casasavenda",
+                "vianadocastelo",
+                "carreco",
+                "montedor",
+                "altominho",
+                "casapertodomar",
+                "moradiat3",
+                "iadportugal",
+                "moradiageminada"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1046356-ydj5r",
+    "created_at": "2026-10-20T13:09:21+00:00",
+    "updated_at": "2026-10-20T13:40:39+00:00",
+    "source_path": "clips/uploads/2XnF1eWAq4vjRPNw7YUuMLoRHh4pkMvlHz3i6iTD.mp3",
+    "images": [
+        {
+            "id": "img_30de8c14",
+            "path": "clips/uploads/prkRgEbGi87wxdBaHERwvc741qEqwy2Fl40X1r0K.png",
+            "description": "Sala de estar e jantar ampla, sofá bege em L, mesa de jantar, candeeiros de lustre e chão em tijoleira vermelha.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_876f3007",
+            "path": "clips/uploads/AuZDV2WFBlptueiqqGmsFXXd8WRpehWY9QSmWnAp.png",
+            "description": "Hall de entrada com escadaria em madeira para o primeiro andar, tapete vermelho e corredor com portas.",
+            "name": "01a122b98d55e8310d22f622397657e0.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0c1ff682",
+            "path": "clips/uploads/qRJGlv0MGfUSS12x9TVFGshpU4onr3rk1vCIpSVJ.png",
+            "description": "Hall de entrada com escadas de madeira e corrimão torneado, consola com tulipas vermelhas e janela ampla.",
+            "name": "01a122b9af59027357cff12283f0b18f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_96c56e31",
+            "path": "clips/uploads/liMXR2A2WTJEFPzo2HaH0QEIej5AJ9viZsEZHHP1.png",
+            "description": "Zona de jantar com mesa escura e cadeiras bege, sala de estar com televisão ao fundo.",
+            "name": "01a122b525bef6a316303bddeccf88d3.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2100eb54",
+            "path": "clips/uploads/uIbBJuXABepeX5xjZmNM6PCQoXQ3bfcQcE3aLUpD.png",
+            "description": "Sala de estar ampla com televisão, sofá em L e mesa de jantar à direita; chão em tijoleira.",
+            "name": "01a122b537c3e2eed283bb5821973362.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0605e8ed",
+            "path": "clips/uploads/6ttBdKN69n8cLe2uB920LCpDAhwLfbRf93OTodti.png",
+            "description": "Sala de jantar com mesa para seis, aparador escuro, lustre dourado e janela com cortinas listradas.",
+            "name": "01a122b50ef784bd237925f0fd61a07d.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_73efcad6",
+            "path": "clips/uploads/Ri00fcAUOZWUWtHpshMCXpAdIfHMVTKIsEd5uo0g.png",
+            "description": "Sala de jantar com mesa e seis cadeiras bege, janela grande com vista para verdura e lustre.",
+            "name": "01a122b4fb60516c3eeee259a7fc1b97.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fe5cac11",
+            "path": "clips/uploads/6CN4NzIXNEJvirvzWe3lWmw1uMa4xUQZcSEg4hnv.png",
+            "description": "Sala de estar vista do sofá, televisão em estante preta, manta rosa e portas envidraçadas em madeira.",
+            "name": "01a122b4e6584085e6456a451c4d7a00.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_037702f0",
+            "path": "clips/uploads/sehMqVdroPvQXmyYma5DFook6U6gOef1WJQtylvS.png",
+            "description": "Sala de estar com sofá em L, candeeiro de pé aceso, mesa de centro e porta para hall.",
+            "name": "01a122aed4b557f61c36a4b2c6ad90d3.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5dc3415e",
+            "path": "clips/uploads/0HpbbwM6DI2Tn2tUlqSvITdN1QleoJPC7oJC38b6.png",
+            "description": "Cozinha equipada com armários de madeira, bancada em granito, lava-loiça duplo e mesa branca com cadeiras.",
+            "name": "01a122b7a537c7b672409b525cfa33c9.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e781ccf2",
+            "path": "clips/uploads/j1ni2qR7T9uoBipnkrex8eQaawv2FTQjsJ7xoOmR.png",
+            "description": "Cozinha com armários em madeira, mesa branca ao centro, janela com cortinas e eletrodomésticos brancos.",
+            "name": "01a122b8a926f514665f4f2cab4f4ab2.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ef3fe62f",
+            "path": "clips/uploads/XH9EuSQV1F6xSM2UYG7uXEr2aXYVtjykLmE3LmjN.png",
+            "description": "Cozinha ampla com mesa e cadeiras brancas, porta envidraçada aberta para o jardim relvado.",
+            "name": "01a122b78d3cacb533017d2c51c04c8f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c5d11acf",
+            "path": "clips/uploads/eDtkc6f16TOoooeEqK7kdkuAe4uDWk9G9IT7PlXm.png",
+            "description": "Cozinha em pormenor: bancada em granito, placa a gás, azulejos decorados e porta para o jardim.",
+            "name": "01a122b8ca33c997677e3a6e8214fc57.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_47a77412",
+            "path": "clips/uploads/iLGGbrOWWqatZtU7GIWLiyusolj8eBT8QPPqz7fq.png",
+            "description": "Casa de banho completa em azulejo branco, com sanita, bidé, base de duche e pequena janela.",
+            "name": "01a122b8fbf6b9ecfba1678f6600102e.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d530613f",
+            "path": "clips/uploads/AW1lWToNeeBhqMoQ2OVZIUN1I0DDuBce5HG56R34.png",
+            "description": "Casa de banho completa com base de duche junto à janela, lavatório com móvel e espelho.",
+            "name": "01a122b915e42b314e981c41049f81fe.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f7623f4d",
+            "path": "clips/uploads/2ECHlfObjtPbvAyx8DOji97Zk3UBWPzWGXWN3e0O.png",
+            "description": "Casa de banho em pormenor: base de duche, janela de madeira e móvel de lavatório branco.",
+            "name": "01a122b92d5cc7b2b3b8a2b42065c3c0.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7ea44027",
+            "path": "clips/uploads/btJ2f9iBO74QWU2cZhmI9Awl4vDNWXXeAis47WxF.png",
+            "description": "Quarto amplo com cama de casal, televisão na parede e porta envidraçada para a varanda.",
+            "name": "01a122ba3a7239d2f50363718f6cc36a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_06d9c7d3",
+            "path": "clips/uploads/0108CUDFvnT8yu6bDEu9zTaAnhpYvgLt2kTUuTi9.png",
+            "description": "Quarto de casal espaçoso com roupeiro embutido, portas em madeira escura e chão em parquet.",
+            "name": "01a122ba7fd24facc19bf956c9d0eac2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_14623e83",
+            "path": "clips/uploads/iM3Xy0bwoMmYZoycGWmchmsawGXlIL3OjSW6O4Us.png",
+            "description": "Quarto de casal luminoso com cama, mesas de cabeceira, cómoda e janela com cortinas.",
+            "name": "01a122ba9f7714b8d6d8efc6e88f67c0.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8494c7fe",
+            "path": "clips/uploads/uJS8kIrMvQyn5SH4Y0vUml8a1jJsho2O49hTZUum.png",
+            "description": "Casa de banho moderna em tons bege, com duche de vidro, móvel cinzento e sanita.",
+            "name": "01a122bb7b1db65cee5acd7c967e1843.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d80363ff",
+            "path": "clips/uploads/agEgWvwhNOlT1MgVO1oau4U5RvWs1LgnqMuhIRBM.png",
+            "description": "Quarto com cama de solteiro rosa, roupeiro embutido de portas brancas, secretária, cadeira preta e janela luminosa.",
+            "name": "01a122bbb516f407097bea9155dda76e.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d9bc9def",
+            "path": "clips/uploads/TvI24JhsPfsZhIHHwjfBn13DfnOjHWcFwKLOvK1g.png",
+            "description": "Quarto infantil com cama de solteiro rosa, secretária com computador, tapete colorido de puzzle e chão de madeira.",
+            "name": "01a122bbd373fd37f3968cf6cef54f32.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0d089531",
+            "path": "clips/uploads/ayhTWjUtSSlSzJpbctjsSPRkNEr2bdXZW3dv2rcI.png",
+            "description": "Quarto juvenil com cama de gavetas rosa-choque, tapete verde, cortinas rosa, televisão na parede e janela luminosa.",
+            "name": "01a122be572a8de4c3b340739e22cbd5.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_83050a7e",
+            "path": "clips/uploads/Fh0f5OX7EtKJZd8pS9dmO6VRslaqsA1ui8HTRlIn.png",
+            "description": "Quarto juvenil, outro ângulo: toucador branco com espelho, televisão, cama com gavetas rosa e tapete verde.",
+            "name": "01a122be746058921004928ca27d30ae.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e5676be9",
+            "path": "clips/uploads/e24Z2Um695OwywxiyircZIf02iEjv8hGiVRUM1eL.png",
+            "description": "Quarto juvenil com cama rosa, poster Katseye, móveis brancos e rosa, baú e porta de madeira.",
+            "name": "01a122be940fe884514220c926b928fd.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8782e5eb",
+            "path": "clips/uploads/eqjpmhFhEtL4W4LDrhQcOCiAUf8ovQiKvmBwR8AR.png",
+            "description": "Casa de banho completa com banheira, coluna de duche, móvel lavatório creme, sanita, bidé e janela.",
+            "name": "01a122bf4c7bd4a35ca0346424add092.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b9af585a",
+            "path": "clips/uploads/KwGi68AiBptX3yFFb08rHLPFglTywvW35U9Sb45I.png",
+            "description": "Fachada traseira da moradia geminada de dois pisos, com varanda de madeira, telhado de telha e relvado amplo.",
+            "name": "01a122bfbf7f7cb2b5e8a5744de348de.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8e22e41a",
+            "path": "clips/uploads/PxVd99MuwwjsUxHcGWpdWZ6UUQ5V9jMAeFTIlWS2.png",
+            "description": "Jardim relvado com baloiço, trampolim e árvores, vista para a serra e casas vizinhas, céu azul.",
+            "name": "01a122c430bd6c7d44719a877412c873.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5c72249b",
+            "path": "clips/uploads/UyY78tljiOgXC2ovg9RvV6xiy2Gu0k1hxhNIYVmY.png",
+            "description": "Jardim amplo e comprido com baloiço e trampolim, muro lateral, serra arborizada ao fundo, dia de sol.",
+            "name": "01a122c4704761459a8e19a2c1e957c4.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74778f6e",
+            "path": "clips/uploads/FtQzgT86oXnEYCbUqvetwl8sBoAr8mRdmEKCYJ4Y.png",
+            "description": "Vista geral do terreno: relvado extenso com trampolim e baloiço, moradia branca ao fundo, céu azul.",
+            "name": "01a122c4ee29873e8599c8e6d5d32b7b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_13a488f1",
+            "path": "clips/uploads/HrB1kX9CgPGKBWxzblN3wJshX6nohQigUAi0ETYO.png",
+            "description": "Fachada lateral com alpendre em arcos, sofás de exterior, garagem de portão castanho e logradouro em cimento.",
+            "name": "01a122c5302dcbfea3e1da774f97d071.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_34ab5229",
+            "path": "clips/uploads/k3GfojdULBSNJHtNwmnyex2ccgI3FtU0Bj2ZEjoQ.png",
+            "description": "Fachada frontal da moradia geminada de dois pisos, telhado de telha, muro de pedra e rua empedrada.",
+            "name": "01a122c562651b6b19dda0e95f33bdcd.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e9e35353",
+            "path": "clips/uploads/LaXjksXJzRecqzg8MZ060XnChLxeEdTOwcmuEDJD.png",
+            "description": "Fachada exterior vista da rua, com portão automático cinzento, muro, garagem e montanha ao fundo.",
+            "name": "01a122c59f804ecf4c3221c8e8be6f3a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6a0e77f7",
+            "path": "clips/uploads/L5cXDg7yiG9RnjsKk0Uh7zvM40oaNHH33yHlGn9j.png",
+            "description": "Jardim relvado amplo nas traseiras, com árvore de folhagem vermelha e varanda da suite no primeiro andar.",
+            "name": "01a122c66497a3f31c5528b698e95e18.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4a03b873",
+            "path": "clips/uploads/6FmuMv9bXrZiO3viIA2eF0O1s3085J7gPQf8LQ1E.png",
+            "description": "Retrato da consultora Ilídia Barbosa, da IAD Portugal.",
+            "name": "Ilídia Barbosa.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b5830bc8",
+            "path": "clips/uploads/KwsuIDBu1T4eyamWtNJydY9asQ8QAcLzwHYxnroZ.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/2XnF1eWAq4vjRPNw7YUuMLoRHh4pkMvlHz3i6iTD.mp3",
+    "transcript": {
+        "duration": 35.36000061035156,
+        "text": "Uma moradia em Montedor, a dois minutos do mar, fica em Carreço, Viana do Castelo, numa zona sossegada. É uma moradia geminada, em dois pisos. No resto do chão, hall de entrada e uma sala de estar e jantar ampla. Há ainda cozinha, casa de banho completa e arrumos. No primeiro andar, três quartos amplos. A suite tem uma varanda de grandes dimensões. No total, há três casas de banho completas e vidros duplos. Lá fora, um jardim e garagem para um carro, com portão automático. 375 mil euros. Para visitar, fale com a Elidia Barbosa, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "moradia",
+                "start": 0.18000000715255737,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "em",
+                "start": 0.6200000047683716,
+                "end": 0.8999999761581421
+            },
+            {
+                "word": "Montedor",
+                "start": 0.8999999761581421,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "a",
+                "start": 1.5800000429153442,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "dois",
+                "start": 1.899999976158142,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "minutos",
+                "start": 2.0799999237060547,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "do",
+                "start": 2.4200000762939453,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "mar",
+                "start": 2.6600000858306885,
+                "end": 2.880000114440918
+            },
+            {
+                "word": "fica",
+                "start": 3.259999990463257,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "em",
+                "start": 3.4000000953674316,
+                "end": 3.559999942779541
+            },
+            {
+                "word": "Carreço",
+                "start": 3.559999942779541,
+                "end": 4
+            },
+            {
+                "word": "Viana",
+                "start": 4.340000152587891,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "do",
+                "start": 4.400000095367432,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "Castelo",
+                "start": 4.579999923706055,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "numa",
+                "start": 5.239999771118164,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "zona",
+                "start": 5.360000133514404,
+                "end": 5.599999904632568
+            },
+            {
+                "word": "sossegada",
+                "start": 5.599999904632568,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "É",
+                "start": 6.659999847412109,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "uma",
+                "start": 6.679999828338623,
+                "end": 6.840000152587891
+            },
+            {
+                "word": "moradia",
+                "start": 6.840000152587891,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "geminada",
+                "start": 7.159999847412109,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "em",
+                "start": 8.020000457763672,
+                "end": 8.199999809265137
+            },
+            {
+                "word": "dois",
+                "start": 8.199999809265137,
+                "end": 8.4399995803833
+            },
+            {
+                "word": "pisos",
+                "start": 8.4399995803833,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "No",
+                "start": 9.239999771118164,
+                "end": 9.300000190734863
+            },
+            {
+                "word": "resto",
+                "start": 9.300000190734863,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "do",
+                "start": 9.520000457763672,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "chão",
+                "start": 9.84000015258789,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "hall",
+                "start": 10.220000267028809,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 10.239999771118164,
+                "end": 10.4399995803833
+            },
+            {
+                "word": "entrada",
+                "start": 10.4399995803833,
+                "end": 10.699999809265137
+            },
+            {
+                "word": "e",
+                "start": 10.699999809265137,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "uma",
+                "start": 10.960000038146973,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "sala",
+                "start": 11.279999732971191,
+                "end": 11.34000015258789
+            },
+            {
+                "word": "de",
+                "start": 11.34000015258789,
+                "end": 11.800000190734863
+            },
+            {
+                "word": "estar",
+                "start": 11.800000190734863,
+                "end": 11.800000190734863
+            },
+            {
+                "word": "e",
+                "start": 11.800000190734863,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "jantar",
+                "start": 12.420000076293945,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "ampla",
+                "start": 12.420000076293945,
+                "end": 12.859999656677246
+            },
+            {
+                "word": "Há",
+                "start": 13.220000267028809,
+                "end": 13.319999694824219
+            },
+            {
+                "word": "ainda",
+                "start": 13.319999694824219,
+                "end": 13.5600004196167
+            },
+            {
+                "word": "cozinha",
+                "start": 13.5600004196167,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "casa",
+                "start": 14.4399995803833,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "de",
+                "start": 14.4399995803833,
+                "end": 14.739999771118164
+            },
+            {
+                "word": "banho",
+                "start": 14.739999771118164,
+                "end": 14.739999771118164
+            },
+            {
+                "word": "completa",
+                "start": 14.739999771118164,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "e",
+                "start": 15.319999694824219,
+                "end": 15.619999885559082
+            },
+            {
+                "word": "arrumos",
+                "start": 15.619999885559082,
+                "end": 16.139999389648438
+            },
+            {
+                "word": "No",
+                "start": 16.540000915527344,
+                "end": 16.6200008392334
+            },
+            {
+                "word": "primeiro",
+                "start": 16.6200008392334,
+                "end": 16.899999618530273
+            },
+            {
+                "word": "andar",
+                "start": 16.899999618530273,
+                "end": 17.260000228881836
+            },
+            {
+                "word": "três",
+                "start": 17.579999923706055,
+                "end": 17.81999969482422
+            },
+            {
+                "word": "quartos",
+                "start": 17.81999969482422,
+                "end": 18.200000762939453
+            },
+            {
+                "word": "amplos",
+                "start": 18.200000762939453,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "A",
+                "start": 19.020000457763672,
+                "end": 19.200000762939453
+            },
+            {
+                "word": "suite",
+                "start": 19.200000762939453,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "tem",
+                "start": 19.399999618530273,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "uma",
+                "start": 19.600000381469727,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "varanda",
+                "start": 19.8799991607666,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 20.100000381469727,
+                "end": 20.65999984741211
+            },
+            {
+                "word": "grandes",
+                "start": 20.65999984741211,
+                "end": 20.65999984741211
+            },
+            {
+                "word": "dimensões",
+                "start": 20.65999984741211,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "No",
+                "start": 21.799999237060547,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "total",
+                "start": 21.860000610351562,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "há",
+                "start": 22.459999084472656,
+                "end": 22.639999389648438
+            },
+            {
+                "word": "três",
+                "start": 22.639999389648438,
+                "end": 22.920000076293945
+            },
+            {
+                "word": "casas",
+                "start": 22.920000076293945,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 23.18000030517578,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "banho",
+                "start": 23.520000457763672,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "completas",
+                "start": 23.520000457763672,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 24.15999984741211,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "vidros",
+                "start": 24.479999542236328,
+                "end": 24.65999984741211
+            },
+            {
+                "word": "duplos",
+                "start": 24.65999984741211,
+                "end": 25.219999313354492
+            },
+            {
+                "word": "Lá",
+                "start": 25.68000030517578,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "fora",
+                "start": 25.81999969482422,
+                "end": 26.079999923706055
+            },
+            {
+                "word": "um",
+                "start": 26.280000686645508,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "jardim",
+                "start": 26.459999084472656,
+                "end": 26.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 26.739999771118164,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "garagem",
+                "start": 27.020000457763672,
+                "end": 27.3799991607666
+            },
+            {
+                "word": "para",
+                "start": 27.3799991607666,
+                "end": 27.479999542236328
+            },
+            {
+                "word": "um",
+                "start": 27.479999542236328,
+                "end": 27.940000534057617
+            },
+            {
+                "word": "carro",
+                "start": 27.940000534057617,
+                "end": 27.940000534057617
+            },
+            {
+                "word": "com",
+                "start": 28.059999465942383,
+                "end": 28.260000228881836
+            },
+            {
+                "word": "portão",
+                "start": 28.260000228881836,
+                "end": 28.420000076293945
+            },
+            {
+                "word": "automático",
+                "start": 28.420000076293945,
+                "end": 29.040000915527344
+            },
+            {
+                "word": "375",
+                "start": 30.139999389648438,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "mil",
+                "start": 30.700000762939453,
+                "end": 30.940000534057617
+            },
+            {
+                "word": "euros",
+                "start": 30.940000534057617,
+                "end": 31.3799991607666
+            },
+            {
+                "word": "Para",
+                "start": 31.780000686645508,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "visitar",
+                "start": 31.899999618530273,
+                "end": 32.5
+            },
+            {
+                "word": "fale",
+                "start": 32.79999923706055,
+                "end": 32.79999923706055
+            },
+            {
+                "word": "com",
+                "start": 32.79999923706055,
+                "end": 32.939998626708984
+            },
+            {
+                "word": "a",
+                "start": 32.939998626708984,
+                "end": 33.060001373291016
+            },
+            {
+                "word": "Elidia",
+                "start": 33.060001373291016,
+                "end": 33.31999969482422
+            },
+            {
+                "word": "Barbosa",
+                "start": 33.31999969482422,
+                "end": 33.84000015258789
+            },
+            {
+                "word": "da",
+                "start": 34.02000045776367,
+                "end": 34.2400016784668
+            },
+            {
+                "word": "IAD",
+                "start": 34.2400016784668,
+                "end": 34.599998474121094
+            },
+            {
+                "word": "Portugal",
+                "start": 34.599998474121094,
+                "end": 35.13999938964844
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.36000061035156,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6000000000000014,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "A 2 MINUTOS DO MAR",
+                        "params": {
+                            "src": "img_34ab5229",
+                            "avatar": "img_4a03b873",
+                            "logo": "img_b5830bc8",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "375.000 €",
+                            "location": "VIANA DO CASTELO · MONTEDOR",
+                            "title": "MORADIA T3 GEMINADA",
+                            "facts": "166,5 m² · 3 quartos · 3 WC · garagem",
+                            "cta": "Ligue já +351 913 612 313",
+                            "name": "Ilídia Barbosa",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6000000000000014,
+                "end": 6.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "MONTEDOR, CARREÇO",
+                        "params": {
+                            "src": "img_74778f6e",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.5,
+                "end": 9.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "MORADIA T3 GEMINADA",
+                        "params": {
+                            "src": "img_b9af585a",
+                            "src2": "img_13a488f1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.2,
+                "end": 11.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "HALL DE ENTRADA",
+                        "params": {
+                            "src": "img_876f3007",
+                            "src2": "img_0c1ff682",
+                            "src3": "img_0605e8ed",
+                            "src4": "img_73efcad6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.2,
+                "end": 13.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA AMPLA",
+                        "params": {
+                            "src": "img_30de8c14",
+                            "src2": "img_2100eb54",
+                            "src3": "img_037702f0",
+                            "src4": "img_fe5cac11",
+                            "src5": "img_96c56e31"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.2,
+                "end": 16.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "COZINHA E ARRUMOS",
+                        "params": {
+                            "src": "img_5dc3415e",
+                            "src2": "img_e781ccf2",
+                            "src3": "img_ef3fe62f",
+                            "src4": "img_c5d11acf",
+                            "src5": "img_47a77412"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.4,
+                "end": 19,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "TRÊS QUARTOS",
+                        "params": {
+                            "src": "img_d80363ff",
+                            "src2": "img_d9bc9def",
+                            "src3": "img_0d089531",
+                            "src4": "img_83050a7e",
+                            "src5": "img_e5676be9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19,
+                "end": 21.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SUITE COM VARANDA",
+                        "params": {
+                            "src": "img_7ea44027",
+                            "src2": "img_6a0e77f7",
+                            "src3": "img_06d9c7d3",
+                            "src4": "img_14623e83"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.6,
+                "end": 25.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TRÊS CASAS DE BANHO",
+                        "params": {
+                            "src": "img_d530613f",
+                            "src2": "img_f7623f4d",
+                            "src3": "img_8494c7fe",
+                            "src4": "img_8782e5eb"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 27.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "JARDIM",
+                        "params": {
+                            "src": "img_8e22e41a",
+                            "src2": "img_5c72249b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.4,
+                "end": 31.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_e9e35353",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.7,
+                "end": 35.36,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_4a03b873",
+                            "name": "Ilídia Barbosa",
+                            "phone": "+351 913 612 313",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1046356-ydj5r/clip.mp4",
+    "error": null
+}

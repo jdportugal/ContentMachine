@@ -5,9 +5,9 @@
      Styled like the platform tabs in monitorizacao.blade.php. --}}
 @php
     $studioTabs = [
-        ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio', 'glyph' => '✶', 'color' => '#6FE0D0', 'match' => 'clips-animados.sfx*'],
-        ['route' => 'clips-animados.vfx', 'label' => 'VFX Lab', 'glyph' => '✧', 'color' => '#8FE0B0', 'match' => 'clips-animados.vfx*'],
-        ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'glyph' => '◆', 'color' => '#C9A227', 'match' => 'clips-animados.backgrounds'],
+        ['route' => 'clips-animados.sfx', 'label' => 'SFX Studio', 'glyph' => '✶', 'color' => '#3A7A68', 'match' => 'clips-animados.sfx*'],
+        ['route' => 'clips-animados.vfx', 'label' => 'VFX Lab', 'glyph' => '✧', 'color' => '#4F8259', 'match' => 'clips-animados.vfx*'],
+        ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'glyph' => '◆', 'color' => '#8E6F1E', 'match' => 'clips-animados.backgrounds'],
     ];
 @endphp
 <div class="flex flex-wrap gap-2 mb-6">

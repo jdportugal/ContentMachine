@@ -1,0 +1,145 @@
+{
+    "status": "reviewing_rooms",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Fotografias — 2 divisões",
+    "images": [
+        {
+            "id": "img_c157f5e9",
+            "path": "clips/uploads/SOWxnXmWdqXR7CrbPaIqJohkHKf9OGaZx6MoE5t3.jpg",
+            "name": "logo.jpg",
+            "description": "Logótipo da RE/MAX."
+        }
+    ],
+    "meta": {
+        "listing": {
+            "url": "",
+            "agent": "Gonçalo Luís",
+            "phone": "+351 965 076 863",
+            "agency": "RE/MAX",
+            "gender": "m",
+            "details": [],
+            "flags": []
+        },
+        "property": {
+            "photos": [
+                "clips/uploads/TnYLhOJBMI87DO3e4btNMD3nMvs6quIT8dYYIVCN.jpg",
+                "clips/uploads/1rran4NToy5cCovixX9d0pBYzWPXNF0M0AJSTkPE.jpg"
+            ],
+            "narrate": false,
+            "aspect": "source",
+            "proxy": "clips/uploads/PC0XE37zenQqNXQ9HMuoNwpsUMWqjG3ZmNubvNUI.mp4",
+            "width": 1916,
+            "height": 1080,
+            "duration": 10,
+            "sections": [
+                {
+                    "start": 0.2,
+                    "end": 4.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 5.2,
+                    "end": 9.8,
+                    "note": "",
+                    "motion": "backward"
+                }
+            ],
+            "rooms": [
+                {
+                    "room": "Sala de Jantar",
+                    "start": 0.2,
+                    "end": 4.8,
+                    "note": "",
+                    "anim": {
+                        "start": 0.2,
+                        "end": 4.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/UXZ2k18z0wUCxTHScPt517d7yUNRhjbmd7o6kqF0.jpg",
+                        "end_frame": "clips/uploads/zhJDM8uuI4niu5Y79ZmzY0f3i8L0mlIV0QDrLqtX.jpg",
+                        "prompt": "Furnish the dining area with modern furniture, including a rectangular solid light-oak dining table, six upholstered dining chairs in warm oatmeal fabric, a round woven jute rug under the table, a low walnut sideboard against the back wall and a large linen drum pendant light hung above the table. Add a ceramic vase with fresh eucalyptus on the table. Replace the floor with modern wide-plank laminate in a warm light oak tone. Make the table centred in the corner between the back wall and the window, with the sideboard against the plain back wall below the wall sconce. Keep the staircase with its railing on the far left, the tall built-in wooden door and cupboard unit on the left wall, and the large window with its roller blind on the right wall clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/oCDZtuM6IrVrAHK4w1SQNBaqpxo1miMinqPoMxXI.png",
+                        "alignment": 0.657,
+                        "keep": [
+                            "the staircase with a metal balustrade rising along the wall on the left edge of the frame, near to mid-ground",
+                            "the closed door under the staircase on the left, left wall",
+                            "the built-in wooden cabinet wall (recessed shelving and cupboards) left of centre, back wall",
+                            "the large window with a roller blind on the right wall, right side of the frame, near to mid-ground"
+                        ],
+                        "problems": [],
+                        "staging": false,
+                        "candidates": [
+                            {
+                                "path": "clips/uploads/oCDZtuM6IrVrAHK4w1SQNBaqpxo1miMinqPoMxXI.png",
+                                "score": 0.657,
+                                "problems": []
+                            },
+                            {
+                                "path": "clips/uploads/PTcOkPChvAWZqUWDNqyQY6Ke62JT0CDwdSuxNx5z.png",
+                                "score": 0.651,
+                                "problems": []
+                            },
+                            {
+                                "path": "clips/uploads/XVI2Q2iahf501Wy8NEf06Bf6qj0FPo1rsjLVR3cp.png",
+                                "score": 0.638,
+                                "problems": []
+                            },
+                            {
+                                "path": "clips/uploads/rcnOJ4Ia5GtmOJNf2zcLu9MpPYmPd3Ix3effGLpW.png",
+                                "score": 0.676,
+                                "problems": []
+                            }
+                        ],
+                        "error": null
+                    }
+                },
+                {
+                    "room": "Cozinha",
+                    "start": 5.2,
+                    "end": 9.8,
+                    "note": "",
+                    "anim": {
+                        "start": 5.2,
+                        "end": 9.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/zyv1w4GKMGBmgUh8zpaeGHkOGycI6r9hx2tspAeD.jpg",
+                        "end_frame": "clips/uploads/992VgI7cBATrAbfuAiaNleAIEXCPYJV7iDDWYWdY.jpg",
+                        "prompt": "Renovate the kitchen to be modern and minimal. Keep the exact same proportions of the room and keep every appliance and fixture in the same location and size, replaced with new modern versions: the cooker with oven and hob in the centre of the run, the slim extractor hood above it, and the tall fridge-freezer at the right end. Change the upper and lower cabinets to handleless warm-white matte cabinets, make the countertop a light warm-beige quartz, and replace the black tiles on the backsplash and the tiled column on the left with light stone-look panels. Make the cooker, hood and fridge-freezer brushed stainless steel. Replace the floor with modern wide-plank laminate in a warm light oak tone. Keep the open doorway on the left wall that leads to the bright adjoining room, and the open door in the left foreground, exactly as they are.",
+                        "staged": "clips/uploads/0ge7gsGuhQ7QGzA2foB84FYDooNLrk7ZnAQUTHi0.png",
+                        "alignment": 0.763,
+                        "keep": [
+                            "the open door on the left edge, near (dark wood door with lever handle, swung open into the room)",
+                            "the open doorway to another room on the left, back wall (leads to an empty room with light blue walls)",
+                            "the protruding wall pier clad in black tiles in the centre-left, back wall, between the open doorway and the kitchen units",
+                            "the built-in kitchen run of base cabinets, worktop and wall cabinets with a cooker hood along the back wall, centre to right",
+                            "the built-in oven and hob unit in the centre of the kitchen run, back wall"
+                        ],
+                        "problems": [],
+                        "video": "clips/uploads/xyNbQhZhbXWChSSjbvdpaL92qc0rmLx1ArGYRa43.mp4",
+                        "clip_problems": [],
+                        "onset": 0
+                    }
+                }
+            ]
+        },
+        "allowed_present": [
+            "video",
+            "over"
+        ],
+        "formato": "auto",
+        "musica": "",
+        "musica_volume": 0.1,
+        "captions": "bottom",
+        "step": null
+    },
+    "id": "fotografias-2-divisoes-kfudu",
+    "created_at": "2026-10-14T09:27:25+00:00",
+    "updated_at": "2026-10-14T10:40:18+00:00",
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/fotografias-2-divisoes-kfudu/clip.mp4",
+    "error": null
+}

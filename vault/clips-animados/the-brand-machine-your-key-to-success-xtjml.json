@@ -1,5 +1,5 @@
 {
-    "status": "collecting",
+    "status": "done",
     "type": "overlay",
     "input_kind": "video",
     "title": "The Brand Machine: Build a Brand Solo, One Click at a Time",
@@ -253,11 +253,15 @@
             }
         ],
         "image_uploads": [],
-        "site_collecting": []
+        "site_collecting": [],
+        "image_text": {
+            "00dd96b4": true,
+            "intro": true
+        }
     },
     "id": "the-brand-machine-your-key-to-success-xtjml",
     "created_at": "2026-09-03T10:58:54+00:00",
-    "updated_at": "2026-09-03T11:03:46+00:00",
+    "updated_at": "2026-09-03T11:17:03+00:00",
     "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/the-brand-machine-your-key-to-success-xtjml/audio.m4a",
     "transcript": {
         "duration": 40,
@@ -989,15 +993,7 @@
                 "karaoke": true,
                 "punchWord": null,
                 "present": "over",
-                "layers": [
-                    {
-                        "type": "particle-image-assemble",
-                        "text": "THE BRAND MACHINE",
-                        "params": {
-                            "count": 2000
-                        }
-                    }
-                ]
+                "layers": []
             },
             {
                 "start": 4.4,
@@ -1110,12 +1106,14 @@
                 "present": "over",
                 "layers": [
                     {
-                        "type": "image-reveal",
-                        "text": "",
+                        "type": "card",
+                        "text": null,
                         "params": {
-                            "generate": "Close-up of a thumb pressing a single glowing amber button on a dark futuristic control panel, deep navy surroundings, warm rim light, shallow depth of field, cinematic photographic look",
-                            "variant": "framed",
-                            "caption": "One press, one finished short"
+                            "title": "One Click, One Short",
+                            "lines": [
+                                "Single button click",
+                                "High quality short generated"
+                            ]
                         }
                     }
                 ]
@@ -1189,6 +1187,8 @@
                 ]
             }
         ],
-        "background_pick": "particle-drift"
-    }
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/the-brand-machine-your-key-to-success-xtjml/clip.mp4"
 }

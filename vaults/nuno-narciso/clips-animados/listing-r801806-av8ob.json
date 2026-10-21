@@ -1,0 +1,1043 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta com 7 quartos e piscina em Montargil por 690 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/quinta-herdade-venda-7-quartos-montargil-457m2/r801806",
+            "agent": "Nuno Narciso",
+            "phone": "+351933197327",
+            "agency": "IAD Portugal",
+            "hook": "Uma quinta em Montargil com mais de seis mil metros.",
+            "voiceover": "Uma quinta em Montargil com mais de seis mil metros. Se queres vender ou comprar casa, fala com o Nuno Narciso. Fica a poucos minutos de supermercados, escolas e centro médico. A casa tem dois pisos, com sala de estar e sala de jantar. A cozinha está por equipar, pronta a ser feita à sua medida. Tem vários quartos e duas casas de banho. Ar condicionado, lareira, alarme e fibra ótica. Lá fora, jardim, terraço, piscina e garagem. Para viver em família, perto da natureza. Seiscentos e noventa mil euros. Para visitar, fale com o Nuno Narciso, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada / vista geral da quinta com o terreno",
+                    "vo": "Uma quinta em Montargil com mais de seis mil metros.",
+                    "caption": "Quinta em Montargil"
+                },
+                {
+                    "photo": "entrada / acesso à propriedade",
+                    "vo": "Fica a poucos minutos de supermercados, escolas e centro médico.",
+                    "caption": "Serviços a minutos"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "A casa tem dois pisos, com sala de estar e sala de jantar.",
+                    "caption": "Dois pisos"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "A cozinha está por equipar, pronta a ser feita à sua medida.",
+                    "caption": "Cozinha à sua medida"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Tem vários quartos e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "Ar condicionado, lareira, alarme e fibra ótica.",
+                    "caption": "Lareira e fibra ótica"
+                },
+                {
+                    "photo": "jardim e terraço",
+                    "vo": "Lá fora, jardim, terraço, piscina e garagem.",
+                    "caption": "Jardim e terraço"
+                },
+                {
+                    "photo": "piscina",
+                    "vo": "Para viver em família, perto da natureza.",
+                    "caption": "Piscina"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e noventa mil euros. Para visitar, fale com o Nuno Narciso, da IAD Portugal.",
+                    "caption": "690.000 € · Nuno Narciso · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Número de quartos contraditório: os detalhes dizem 7 quartos, o texto diz 6 quartos, e diz também '7 divisões, incluindo 6 quartos, 2 casas de banho, sala de estar e sala de jantar', o que não bate certo. O número ficou de fora (usei 'vários quartos'). Confirmar com o consultor.",
+                "O texto diz 'a 1 minuto a pé da Casa da Música e a 2 minutos da Rotunda da Boavista'. Isto é no Porto, não em Montargil, e parece ter sido copiado de outro anúncio. Ficou de fora.",
+                "Estado descrito como 'antigo, com potencial para renovação' e com 'caráter histórico', mas o ano de construção é 2000. Ficou de fora.",
+                "O aquecimento não é claro: 'elétrico, aerotérmico e fotovoltaico', 'aquecimento central a lenha' e 'aquecimento individual'. Só mencionei o ar condicionado e a lareira, que aparecem nos detalhes.",
+                "Áreas: 457,16 m² de área bruta e 214,5 m² úteis (o texto chama-lhe 'área de construção'). A área da casa ficou de fora. Só usei o terreno (6.413 m²)."
+            ],
+            "message": "Bom dia Sr. Nuno,\nO meu nome é João Ferreira.\n\nVi a quinta em Montargil que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Quinta 7 quartos de 457 m² em Montargil",
+            "price": 690000,
+            "details": {
+                "Preço": "690 000 €",
+                "Localização": "Montargil, 7425-143",
+                "Referência": "801806",
+                "Área Bruta m²": "457.16",
+                "Área Total do Lote m²": "6413",
+                "Quartos": 7,
+                "Ano de Construção": 2000,
+                "Certificado Energético": "D",
+                "Características": "457,16 m² área bruta, 214,5 m² úteis, 2 casas de banho, Jardim, Garagem, Estacionamento, Terraço, Piscina, Cave, Ar condicionado, Alarme, Lareira, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000"
+            },
+            "ami": "11220"
+        },
+        "agent_photo": "clips/uploads/lQ3gVatQk5vFOV6tqZfVPeqEmXX8BZkkN21SrDrB.jpg",
+        "listing_video": null,
+        "after_intro": "clips/uploads/J5YP0gyCKlFb5gjJ7dNib8lkBMfE6syAPuKeby6s.mp4",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Nuno Narciso - and phone number - +351933197327. Agency: IAD Portugal.\nThe agent's photo is Nuno Narciso.jpg; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma quinta em Montargil com mais de seis mil metros.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada / vista geral da quinta com o terreno → «Quinta em Montargil»\n- entrada / acesso à propriedade → «Serviços a minutos»\n- sala de estar → «Dois pisos»\n- cozinha → «Cozinha à sua medida»\n- quarto → «Duas casas de banho»\n- sala com lareira → «Lareira e fibra ótica»\n- jardim e terraço → «Jardim e terraço»\n- piscina → «Piscina»\n- end card → «690.000 € · Nuno Narciso · IAD Portugal»\n\nHere are the house details:\n\nQuinta 7 quartos de 457 m² em Montargil\nPreço\n690 000 €\nLocalização\nMontargil, 7425-143\nReferência\n801806\nÁrea Bruta m²\n457.16\nÁrea Total do Lote m²\n6413\nQuartos\n7\nAno de Construção\n2000\nCertificado Energético\nD\nCaracterísticas\n457,16 m² área bruta, 214,5 m² úteis, 2 casas de banho, Jardim, Garagem, Estacionamento, Terraço, Piscina, Cave, Ar condicionado, Alarme, Lareira, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000\n\nDescrição\nMansão Rústica em Montargil - Espaço e Natureza à Sua Disposição!\n\n Descubra esta quinta rural deslumbrante em Montargil, que oferece uma verdadeira experiência de vida no campo, com espaço generoso e uma atmosfera natural envolvente.\n\n Características do Imóvel:\n - Área do terreno: 6413 m², oferecendo liberdade e privacidade em meio à natureza.\n - Área de construção: 214,5 m² em dois pisos, proporcionando um amplo espaço para desfrutar em família.\n - 7 divisões, incluindo 6 quartos, 2 casas de banho, sala de estar e sala de jantar.\n - Cozinha não equipada, perfeita para personalizar de acordo com os seus gostos.\n - Terraço para aproveitar momentos ao ar livre em total tranquilidade.\n - Garagem para estacionamento seguro de veículos e arrumação.\n\n Detalhes Adicionais:\n - Ano de construção: 2000, conferindo um caráter histórico e encantador à propriedade.\n - Estado geral: antigo, com potencial para renovação e personalização conforme desejado.\n - Condições de Conforto: Equipado com TV a cabo, fibra ótica, ar condicionado e aquecimento individual.\n - Aquecimento: Sistema de aquecimento elétrico, aerotérmico e fotovoltaico, garantindo eficiência energética.\n - Jardim espaçoso e piscina para momentos de lazer e relaxamento ao ar livre.\n\n Amenidades e Serviços:\n - Conexão de telefone e fibra ótica para manter-se conectado.\n - Estação de tratamento autônoma e esgoto para comodidade.\n - Aquecimento central a lenha para ambientes acolhedores.\n - Estacionamento, garagem, e piscina para conveniência e entretenimento.\n\n Localização e Proximidade:\n - Exposição solar a sul e a norte, permitindo desfrutar do sol durante todo o dia.\n - Apenas minutos de distância de supermercados, escolas e centro médico.\n - Fácil acesso à natureza circundante e atividades ao ar livre.\n - Apenas 1 minuto a pé da Casa da Música e 2 minutos da Rotunda da Boavista.\n - Acurada atenção aos detalhes, com etiquetas para identificar cada espaço.\n\n Esta quinta é um refúgio ideal para quem procura harmonia entre a vida rural e o conforto moderno. Aproveite esta oportunidade única e agende já a sua visita para experienciar este paraíso rural em Montargil.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Quinta em Montargil, Ponte de Sor (Alentejo)",
+            "summary": "Quinta T6 à venda em Montargil por 690 000 €, com piscina, jardim e garagem, comercializada pela IAD Portugal. Montargil fica junto à albufeira da Barragem de Montargil, conhecida pelos desportos náuticos e pela pesca.",
+            "timeline": [
+                {
+                    "label": "Conclusão da Barragem de Montargil",
+                    "sublabel": "1958"
+                },
+                {
+                    "label": "Albufeira aproveitada para turismo e desportos náuticos",
+                    "sublabel": "desde os anos 80"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço da quinta (anúncio 2026)",
+                    "value": 690000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área da moradia",
+                    "value": 214.5,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Capacidade da albufeira de Montargil",
+                    "value": 164,
+                    "unit": "hm³"
+                },
+                {
+                    "label": "Área da albufeira de Montargil",
+                    "value": 1646,
+                    "unit": "ha"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Quinta T6 em Montargil, concelho de Ponte de Sor, distrito de Portalegre",
+                "Piscina, terraço, jardim e garagem",
+                "A barragem fica no rio Sor, um afluente do Sorraia, na bacia do Tejo",
+                "A albufeira é procurada para desportos náuticos e pesca desportiva"
+            ],
+            "sources": [
+                "https://www.imovirtual.com/pt/anuncio/quinta-t6-em-montargil-de-214-5-m2-ID1hODB",
+                "https://www.custojusto.pt/portalegre/imobiliario/terrenos-quintas/quinta-t6-em-montargil-de-214--44749209",
+                "https://www.infopedia.pt/artigos/$barragem-de-montargil",
+                "https://structurae.net/de/bauwerke/talsperre-montargil",
+                "https://wanderlog.com/tp/11532/portalegre-trip-planner",
+                "https://www.idealista.pt/en/geo/comprar-predios/rua-do-comercio-montargil-ponte-de-sor/"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta com 7 quartos e piscina em Montargil por 690 mil €",
+            "description": "Piscina, lareira e 6.413 m² de terreno à volta, em Montargil.\n\nQuinta T7 · 457 m² de área bruta · 214,5 m² úteis · 690.000 €\nCasa de dois pisos, construída em 2000, com sala de estar, sala de jantar, duas casas de banho e cave.\nA cozinha está por equipar, pronta a ser feita à sua medida.\nAr condicionado, alarme e fibra ótica. Lá fora: jardim, terraço, piscina, garagem e estacionamento.\nA poucos minutos de supermercados, escolas e centro médico. Certificado energético D · Ref. 801806\n\n📞 Visitas com Nuno Narciso, IAD Portugal: +351 933 197 327",
+            "tags": [
+                "montargil",
+                "quinta",
+                "quintaavenda",
+                "imobiliario",
+                "casacompiscina",
+                "alentejo",
+                "ponteseor",
+                "casaavenda",
+                "vidanocampo",
+                "moradiat7",
+                "iadportugal",
+                "imoveisportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r801806-av8ob",
+    "created_at": "2026-10-16T11:59:18+00:00",
+    "updated_at": "2026-10-16T16:05:12+00:00",
+    "source_path": "clips/uploads/J4BPlNgVhZppU0mnm9GCrD2j3mCUZXYRGkUywF2P.mp3",
+    "images": [
+        {
+            "id": "img_59e18e59",
+            "path": "clips/uploads/wdPOG9O7PB8DLcUYKYOcvqqZZRlEYRzOzdEEscQ9.jpg",
+            "description": "Vista aérea da quinta: moradia com telhado de painéis solares, piscina oval, terreno amplo e albufeira ao fundo.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbe25fa2",
+            "path": "clips/uploads/EFZNNgMFdC9BwbIWlApstug60t3FqijS9sz3fPCM.jpg",
+            "description": "Fachada alentejana branca com barras azuis, alpendre com churrasqueira, painéis solares no telhado e pátio de terra.",
+            "name": "019bfc1ab3e6cd12d6f887ca42b3b730.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ac8a51fe",
+            "path": "clips/uploads/n70tGYOtQQXMlLvdN4xmCFATYr9LDmQbzp8nYMVN.jpg",
+            "description": "Logradouro de terra batida junto ao portão branco de entrada, com pinheiros e muro, sob céu nublado.",
+            "name": "019bffb35926788446a0f6c147d9b2d4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d1300508",
+            "path": "clips/uploads/zOsmzDNsODABirRbwondGeP6IhmyhCuji2vSUwPV.jpg",
+            "description": "Piscina oval com deck em pedra, pinheiro alto e vista para a albufeira de Montargil sob céu azul.",
+            "name": "019bfc1a7b0787e3f5a8bd99090b8c7a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_46dde712",
+            "path": "clips/uploads/s6TSPnbzlVEe627fJKGQKJuTF6OAGS0LO6TLJWpj.jpg",
+            "description": "Hall de entrada com paredes amarelas, chão de tijoleira e porta branca aberta para o pátio exterior.",
+            "name": "019bfc19e960b1744eae3ebcfb259b12.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f9390569",
+            "path": "clips/uploads/302JqGvRsc5mjibV7g5OIg8a6rhPsWlfJeMR0eMc.jpg",
+            "description": "Sala de jantar com mesa de madeira e cadeiras de vime, estantes embutidas com prateleiras de vidro decoradas.",
+            "name": "019bffb4c8dd1be658c1aea626f9b3d5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4f8fd720",
+            "path": "clips/uploads/N5ZbEK9FKmrjjEwbYG4FmsYeLfOPP0qMCdR77UZP.jpg",
+            "description": "Sala de estar ampla com sofás claros, mesa de centro, ventoinha de teto e zona de jantar ao fundo.",
+            "name": "019bfc1989eaa14a321d1c7a7df426e0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7fb6298d",
+            "path": "clips/uploads/onHzsoSFWsRYPEyeULR68eE6HeW1bDAFwUHnrkzc.jpg",
+            "description": "Sala de estar com sofá de canto, mesa de madeira e vidro, estante embutida e portas azuis envidraçadas.",
+            "name": "019dde205bf7ca08f131c5afa68d94e6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e274d248",
+            "path": "clips/uploads/VDdStetWnmjwbCoAv7XH1OjQwNkhdc1M65UqZb59.jpg",
+            "description": "Quarto com cama de casal e colcha turquesa, cortinas azuis, candeeiro e quadro floral na parede.",
+            "name": "019bffb23cca2cfee973a514178d8798.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0d7f7188",
+            "path": "clips/uploads/1NYSqtfclYwffybKaVS8wEPySK4PIpS6tvUziPk4.jpg",
+            "description": "Quarto de casal com cabeceira escura, colcha branca, cortinas amarelas e janela com portadas para o pátio.",
+            "name": "019bffb29c58585a222e3f2987d7e830.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_73df065e",
+            "path": "clips/uploads/8pCXZOb3ZVpqcgPabmx92qE3PO6MUXbkL2jXI5hj.jpg",
+            "description": "Quarto com duas camas e cortinas turquesa; porta aberta para terraço com vista para pinhal.",
+            "name": "019bfc194b5189ac4774fb89e7c95a8c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9497aa66",
+            "path": "clips/uploads/2sRUxcLjZXB1vOfhoXO3BN1kbM3H7OgZov1xSqO5.jpg",
+            "description": "Casa de banho com lavatório e espelho emoldurados em azulejo tradicional com flores cor-de-rosa.",
+            "name": "019bffb2efe1f1d30c9d3762edc98b78.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2bb6143d",
+            "path": "clips/uploads/cYnZ9zXfEpiVFws3HL8BullMG5fmDho8BZdVm44F.jpg",
+            "description": "Quarto de casal com colcha turquesa, toalhas dobradas, quadro floral e janela com portadas brancas.",
+            "name": "019bfc19bca41a8e065fbdc7456cec78.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d107de51",
+            "path": "clips/uploads/rslFu2PQ91oEhH6eJEu1mEM67bwmCl739TgUv6nN.jpg",
+            "description": "Terraço coberto com rede de descanso e chão de tijoleira, vista para arvoredo e piscina.",
+            "name": "019bfc18e5a10da6aafab5ef935339ab.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c81dba53",
+            "path": "clips/uploads/9zix42jRXzUt1QgiW0ERi2HKV9Ye42giZ94TogHh.jpg",
+            "description": "Retrato do consultor Nuno Narciso, da IAD Portugal.",
+            "name": "Nuno Narciso.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_37d518fb",
+            "path": "clips/uploads/Qx6v9TKOpUEvKXhAaxJExJNaNo94O1bMa4KPQ29Q.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r801806-av8ob/voz.mp3",
+    "transcript": {
+        "duration": 38.560001373291016,
+        "text": "Uma quinta em Montargil com mais de 6 mil metros. Se queres vender ou comprar casa, fala com o Nuno Narciso. Fica a poucos minutos de supermercados, escolas e centro médico. A casa tem dois pisos, com sala de estar e sala de jantar. A cozinha está por equipar, pronta a ser feita à sua medida. Tem vários quartos e duas casas de banho. Ar-condicionado, lareira, alarme e fibra óptica. Lá fora, jardim, terraço, piscina e garagem. Para viver em família, perto da natureza, 690 mil euros. Para visitar, fale com o Nuno Narciso, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.25999999046325684
+            },
+            {
+                "word": "quinta",
+                "start": 0.25999999046325684,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "em",
+                "start": 0.5799999833106995,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "Montargil",
+                "start": 0.7400000095367432,
+                "end": 1.2599999904632568
+            },
+            {
+                "word": "com",
+                "start": 1.2599999904632568,
+                "end": 1.5399999618530273
+            },
+            {
+                "word": "mais",
+                "start": 1.5399999618530273,
+                "end": 1.8799999952316284
+            },
+            {
+                "word": "de",
+                "start": 1.8799999952316284,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "6",
+                "start": 2.259999990463257,
+                "end": 2.5999999046325684
+            },
+            {
+                "word": "mil",
+                "start": 2.5999999046325684,
+                "end": 2.799999952316284
+            },
+            {
+                "word": "metros",
+                "start": 2.799999952316284,
+                "end": 3.359999895095825
+            },
+            {
+                "word": "Se",
+                "start": 3.9600000381469727,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "queres",
+                "start": 3.9800000190734863,
+                "end": 4.480000019073486
+            },
+            {
+                "word": "vender",
+                "start": 4.480000019073486,
+                "end": 4.480000019073486
+            },
+            {
+                "word": "ou",
+                "start": 4.480000019073486,
+                "end": 4.659999847412109
+            },
+            {
+                "word": "comprar",
+                "start": 4.659999847412109,
+                "end": 4.920000076293945
+            },
+            {
+                "word": "casa",
+                "start": 4.920000076293945,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "fala",
+                "start": 5.840000152587891,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "com",
+                "start": 5.840000152587891,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "o",
+                "start": 6.099999904632568,
+                "end": 6.340000152587891
+            },
+            {
+                "word": "Nuno",
+                "start": 6.340000152587891,
+                "end": 6.480000019073486
+            },
+            {
+                "word": "Narciso",
+                "start": 6.480000019073486,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "Fica",
+                "start": 7.659999847412109,
+                "end": 7.699999809265137
+            },
+            {
+                "word": "a",
+                "start": 7.699999809265137,
+                "end": 8.079999923706055
+            },
+            {
+                "word": "poucos",
+                "start": 8.079999923706055,
+                "end": 8.079999923706055
+            },
+            {
+                "word": "minutos",
+                "start": 8.079999923706055,
+                "end": 8.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 8.479999542236328,
+                "end": 8.699999809265137
+            },
+            {
+                "word": "supermercados",
+                "start": 8.699999809265137,
+                "end": 9.479999542236328
+            },
+            {
+                "word": "escolas",
+                "start": 10,
+                "end": 10.140000343322754
+            },
+            {
+                "word": "e",
+                "start": 10.140000343322754,
+                "end": 10.5
+            },
+            {
+                "word": "centro",
+                "start": 10.5,
+                "end": 10.760000228881836
+            },
+            {
+                "word": "médico",
+                "start": 10.760000228881836,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "A",
+                "start": 11.760000228881836,
+                "end": 11.859999656677246
+            },
+            {
+                "word": "casa",
+                "start": 11.859999656677246,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "tem",
+                "start": 12.079999923706055,
+                "end": 12.319999694824219
+            },
+            {
+                "word": "dois",
+                "start": 12.319999694824219,
+                "end": 12.699999809265137
+            },
+            {
+                "word": "pisos",
+                "start": 12.699999809265137,
+                "end": 13.119999885559082
+            },
+            {
+                "word": "com",
+                "start": 13.180000305175781,
+                "end": 13.640000343322754
+            },
+            {
+                "word": "sala",
+                "start": 13.640000343322754,
+                "end": 13.640000343322754
+            },
+            {
+                "word": "de",
+                "start": 13.640000343322754,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "estar",
+                "start": 13.920000076293945,
+                "end": 14.079999923706055
+            },
+            {
+                "word": "e",
+                "start": 14.079999923706055,
+                "end": 14.399999618530273
+            },
+            {
+                "word": "sala",
+                "start": 14.399999618530273,
+                "end": 14.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 14.579999923706055,
+                "end": 15.039999961853027
+            },
+            {
+                "word": "jantar",
+                "start": 15.039999961853027,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "A",
+                "start": 15.600000381469727,
+                "end": 15.779999732971191
+            },
+            {
+                "word": "cozinha",
+                "start": 15.779999732971191,
+                "end": 16.059999465942383
+            },
+            {
+                "word": "está",
+                "start": 16.059999465942383,
+                "end": 16.280000686645508
+            },
+            {
+                "word": "por",
+                "start": 16.280000686645508,
+                "end": 16.540000915527344
+            },
+            {
+                "word": "equipar",
+                "start": 16.540000915527344,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "pronta",
+                "start": 17.280000686645508,
+                "end": 17.399999618530273
+            },
+            {
+                "word": "a",
+                "start": 17.399999618530273,
+                "end": 17.639999389648438
+            },
+            {
+                "word": "ser",
+                "start": 17.639999389648438,
+                "end": 17.739999771118164
+            },
+            {
+                "word": "feita",
+                "start": 17.739999771118164,
+                "end": 17.979999542236328
+            },
+            {
+                "word": "à",
+                "start": 17.979999542236328,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "sua",
+                "start": 18.1200008392334,
+                "end": 18.399999618530273
+            },
+            {
+                "word": "medida",
+                "start": 18.399999618530273,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "Tem",
+                "start": 19.31999969482422,
+                "end": 19.3799991607666
+            },
+            {
+                "word": "vários",
+                "start": 19.3799991607666,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "quartos",
+                "start": 19.739999771118164,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 20.18000030517578,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "duas",
+                "start": 20.540000915527344,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "casas",
+                "start": 20.84000015258789,
+                "end": 21.139999389648438
+            },
+            {
+                "word": "de",
+                "start": 21.139999389648438,
+                "end": 21.520000457763672
+            },
+            {
+                "word": "banho",
+                "start": 21.520000457763672,
+                "end": 21.559999465942383
+            },
+            {
+                "word": "Ar",
+                "start": 22.18000030517578,
+                "end": 22.18000030517578
+            },
+            {
+                "word": "condicionado",
+                "start": 22.18000030517578,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "lareira",
+                "start": 23.239999771118164,
+                "end": 23.559999465942383
+            },
+            {
+                "word": "alarme",
+                "start": 24.18000030517578,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "e",
+                "start": 24.280000686645508,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "fibra",
+                "start": 24.6200008392334,
+                "end": 24.899999618530273
+            },
+            {
+                "word": "óptica",
+                "start": 24.899999618530273,
+                "end": 25.31999969482422
+            },
+            {
+                "word": "Lá",
+                "start": 25.920000076293945,
+                "end": 26.020000457763672
+            },
+            {
+                "word": "fora",
+                "start": 26.020000457763672,
+                "end": 26.280000686645508
+            },
+            {
+                "word": "jardim",
+                "start": 26.719999313354492,
+                "end": 26.979999542236328
+            },
+            {
+                "word": "terraço",
+                "start": 27.700000762939453,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "piscina",
+                "start": 28.059999465942383,
+                "end": 28.34000015258789
+            },
+            {
+                "word": "e",
+                "start": 28.34000015258789,
+                "end": 28.700000762939453
+            },
+            {
+                "word": "garagem",
+                "start": 28.700000762939453,
+                "end": 29.200000762939453
+            },
+            {
+                "word": "Para",
+                "start": 29.200000762939453,
+                "end": 29.81999969482422
+            },
+            {
+                "word": "viver",
+                "start": 29.81999969482422,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "em",
+                "start": 30.079999923706055,
+                "end": 30.239999771118164
+            },
+            {
+                "word": "família",
+                "start": 30.239999771118164,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "perto",
+                "start": 31.079999923706055,
+                "end": 31.219999313354492
+            },
+            {
+                "word": "da",
+                "start": 31.219999313354492,
+                "end": 31.479999542236328
+            },
+            {
+                "word": "natureza",
+                "start": 31.479999542236328,
+                "end": 32
+            },
+            {
+                "word": "690",
+                "start": 32.7599983215332,
+                "end": 33.459999084472656
+            },
+            {
+                "word": "mil",
+                "start": 33.459999084472656,
+                "end": 33.720001220703125
+            },
+            {
+                "word": "euros",
+                "start": 33.720001220703125,
+                "end": 34.099998474121094
+            },
+            {
+                "word": "Para",
+                "start": 34.65999984741211,
+                "end": 34.7400016784668
+            },
+            {
+                "word": "visitar",
+                "start": 34.7400016784668,
+                "end": 35.5
+            },
+            {
+                "word": "fale",
+                "start": 35.81999969482422,
+                "end": 35.81999969482422
+            },
+            {
+                "word": "com",
+                "start": 35.81999969482422,
+                "end": 35.97999954223633
+            },
+            {
+                "word": "o",
+                "start": 35.97999954223633,
+                "end": 36.220001220703125
+            },
+            {
+                "word": "Nuno",
+                "start": 36.220001220703125,
+                "end": 36.31999969482422
+            },
+            {
+                "word": "Narciso",
+                "start": 36.31999969482422,
+                "end": 36.91999816894531
+            },
+            {
+                "word": "da",
+                "start": 37.18000030517578,
+                "end": 37.31999969482422
+            },
+            {
+                "word": "IAD",
+                "start": 37.31999969482422,
+                "end": 37.720001220703125
+            },
+            {
+                "word": "de",
+                "start": 37.720001220703125,
+                "end": 38
+            },
+            {
+                "word": "Portugal",
+                "start": 38,
+                "end": 38.31999969482422
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 40.45300148773193,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.9600000381469727,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Uma quinta em Montargil com mais de seis mil metros.",
+                        "params": {
+                            "src": "img_59e18e59",
+                            "avatar": "img_c81dba53",
+                            "logo": "img_37d518fb",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "690.000 €",
+                            "location": "MONTARGIL · PONTE DE SOR",
+                            "title": "QUINTA EM MONTARGIL",
+                            "specs": "6413 m² · 7 quartos · 2 WC · piscina",
+                            "cta": "Ligue já +351 933 197 327",
+                            "name": "Nuno Narciso · +351 933 197 327",
+                            "footer": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.9600000381469727,
+                "end": 8.973000038146973,
+                "present": "animation",
+                "background": "ink",
+                "punchWord": null,
+                "karaoke": false,
+                "plain": true,
+                "layers": [
+                    {
+                        "type": "video-intro",
+                        "text": "",
+                        "params": {
+                            "src": "clips/uploads/J5YP0gyCKlFb5gjJ7dNib8lkBMfE6syAPuKeby6s.mp4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.973000038146973,
+                "end": 13.330000114440917,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "SERVIÇOS A MINUTOS",
+                        "params": {
+                            "src": "img_ac8a51fe",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.330000114440917,
+                "end": 20.887000114440916,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Dois pisos",
+                        "params": {
+                            "src": "img_4f8fd720",
+                            "src2": "img_7fb6298d",
+                            "src3": "img_f9390569",
+                            "src4": "img_46dde712"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.887000114440916,
+                "end": 23.746000114440918,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Duas casas de banho",
+                        "params": {
+                            "src": "img_e274d248",
+                            "src2": "img_0d7f7188",
+                            "src3": "img_2bb6143d",
+                            "src4": "img_9497aa66"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.746000114440918,
+                "end": 27.52500011444092,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Lareira e fibra ótica",
+                        "params": {
+                            "src": "img_73df065e",
+                            "src2": "img_dbe25fa2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.52500011444092,
+                "end": 30.997000114440915,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Jardim e terraço",
+                        "params": {
+                            "src": "img_d107de51",
+                            "src2": "img_d1300508",
+                            "src3": "img_dbe25fa2",
+                            "src4": "img_59e18e59",
+                            "src5": "img_ac8a51fe"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.997000114440915,
+                "end": 36.409000114440914,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Piscina",
+                        "params": {
+                            "src": "img_d1300508",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.409000114440914,
+                "end": 40.45300011444092,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_c81dba53",
+                            "name": "Nuno Narciso",
+                            "phone": "+351 933 197 327",
+                            "email": "nuno.narciso@iadportugal.pt",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift",
+        "voice_gap": {
+            "at": 7.08,
+            "seconds": 1.893
+        }
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r801806-av8ob/clip.mp4",
+    "error": null,
+    "source_text": "Uma quinta em Montargil com mais de seis mil metros. Se queres vender ou comprar casa, fala com o Nuno Narciso. Fica a poucos minutos de supermercados, escolas e centro médico. A casa tem dois pisos, com sala de estar e sala de jantar. A cozinha está por equipar, pronta a ser feita à sua medida. Tem vários quartos e duas casas de banho. Ar condicionado, lareira, alarme e fibra ótica. Lá fora, jardim, terraço, piscina e garagem. Para viver em família, perto da natureza. Seiscentos e noventa mil euros. Para visitar, fale com o Nuno Narciso, da IAD de Portugal."
+}

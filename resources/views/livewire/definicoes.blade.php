@@ -113,7 +113,7 @@
                     @foreach ($canais as $plataforma => $lista)
                         @php
                             $rc = $rotulosCanais[$plataforma] ?? [ucfirst($plataforma), 'https://…'];
-                            $m = $plataformasMeta[$plataforma] ?? ['cor' => '#5A7BFF', 'glifo' => '•'];
+                            $m = $plataformasMeta[$plataforma] ?? ['cor' => '#2F5A85', 'glifo' => '•'];
                         @endphp
                         <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
                             <label class="eyebrow block mb-2">
@@ -145,7 +145,7 @@
                 <p class="text-ink-soft -mt-2 mb-4">Handle (@handle) and link for each profile we monitor.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     @foreach ($perfis as $rede => $dados)
-                        @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#5A7BFF', 'glifo' => '•']; @endphp
+                        @php $m = $plataformasMeta[$rede] ?? ['label' => ucfirst($rede), 'cor' => '#2F5A85', 'glifo' => '•']; @endphp
                         <div class="border border-ink-soft/15 rounded-sm p-4 bg-surface/30">
                             <div class="flex items-center gap-2 mb-3">
                                 <span class="text-xl" style="color: {{ $m['cor'] }}">{{ $m['glifo'] }}</span>
@@ -313,6 +313,7 @@
                         'gemini' => 'Gemini',
                         'apify' => 'Apify token',
                         'kie' => 'kie.ai',
+                        'fal' => 'fal.ai (avatar lip-sync)',
                         'elevenlabs' => 'ElevenLabs',
                         'youtube' => 'YouTube Data',
                         'tubelab' => 'TubeLab',

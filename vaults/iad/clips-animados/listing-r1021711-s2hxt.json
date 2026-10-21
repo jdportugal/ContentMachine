@@ -1,0 +1,1449 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa com piscina e alojamento local em Penela por 259 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-penela-322m2/r1021711",
+            "agent": "Miguel Canedo",
+            "phone": "+351914437198",
+            "agency": "iad Portugal",
+            "hook": "Uma casa em Penela com quatro espaços independentes e piscina.",
+            "voiceover": "Uma casa em Penela com quatro espaços independentes e piscina. Fica numa aldeia tranquila, entre Penela e Miranda do Corvo. No primeiro andar, uma sala com a lareira original e o antigo forno de pão. E ainda a cozinha e uma suite. No rés-do-chão, uma suite e um estúdio, com terraço coberto virado para o jardim. E um anexo independente, com sala, kitchenette e suite. Lá fora, jardim e piscina de água salgada, com cobertura para o inverno. Tem licença de Alojamento Local. Para viver, para férias, ou para receber hóspedes. Duzentos e cinquenta e nove mil euros. Para visitar, fale com o Miguel Canedo, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada / vista geral da propriedade",
+                    "vo": "Uma casa em Penela com quatro espaços independentes e piscina.",
+                    "caption": "Penela, Coimbra"
+                },
+                {
+                    "photo": "pátio com portão / envolvente da aldeia",
+                    "vo": "Fica numa aldeia tranquila, entre Penela e Miranda do Corvo.",
+                    "caption": "Entre Penela e Miranda do Corvo"
+                },
+                {
+                    "photo": "sala com lareira e forno de pão",
+                    "vo": "No primeiro andar, uma sala com a lareira original e o antigo forno de pão.",
+                    "caption": "Lareira e forno de pão"
+                },
+                {
+                    "photo": "cozinha com zona de bar",
+                    "vo": "E ainda a cozinha…",
+                    "caption": "Cozinha com bar"
+                },
+                {
+                    "photo": "suite do primeiro andar",
+                    "vo": "…e uma suite.",
+                    "caption": "Suite no primeiro andar"
+                },
+                {
+                    "photo": "suite do rés-do-chão",
+                    "vo": "No rés-do-chão, uma suite e um estúdio…",
+                    "caption": "Suite e estúdio"
+                },
+                {
+                    "photo": "terraço coberto com vista para o jardim",
+                    "vo": "…com terraço coberto virado para o jardim.",
+                    "caption": "Terraço coberto"
+                },
+                {
+                    "photo": "anexo independente (sala com kitchenette)",
+                    "vo": "E um anexo independente, com sala, kitchenette e suite.",
+                    "caption": "Anexo independente"
+                },
+                {
+                    "photo": "piscina e jardim",
+                    "vo": "Lá fora, jardim e piscina de água salgada, com cobertura para o inverno.",
+                    "caption": "Piscina de água salgada"
+                },
+                {
+                    "photo": "jardim / espaços exteriores",
+                    "vo": "Tem licença de Alojamento Local. Para viver, para férias, ou para receber hóspedes.",
+                    "caption": "Licença de AL"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e cinquenta e nove mil euros. Para visitar, fale com o Miguel Canedo, da iad Portugal.",
+                    "caption": "259.000 € · Miguel Canedo · iad Portugal"
+                }
+            ],
+            "flags": [
+                "Os detalhes incluem 'Varanda', mas o texto só descreve um terraço coberto e pátios. A varanda ficou de fora.",
+                "O anúncio diz que a propriedade tem licença de Alojamento Local. Confirmar com o consultor se a licença está ativa e se passa para o comprador, antes de a destacar no vídeo.",
+                "O anúncio conta quatro quartos, mas um dos espaços é um estúdio com kitchenette. O guião fala em suites e estúdio em vez de dizer 'quatro quartos'."
+            ],
+            "message": "Boa tarde Sr. Miguel,\nO meu nome é João Ferreira.\n\nVi a moradia com anexo e piscina perto de Penela que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia 4 quartos de 322 m² em PENELA",
+            "price": 259000,
+            "details": {
+                "Preço": "259 000 €",
+                "Localização": "PENELA, 3230-338",
+                "Referência": "1021711",
+                "Área Bruta m²": "322",
+                "Quartos": 4,
+                "Certificado Energético": "C",
+                "Características": "4 casas de banho, Jardim, Terraço, Varanda, Piscina, Sala de estar, Sala de jantar"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Miguel Canedo - and phone number - +351914437198. Agency: iad Portugal.\nThe agent's photo is Miguel Canedo.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa em Penela com quatro espaços independentes e piscina.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada / vista geral da propriedade → «Penela, Coimbra»\n- pátio com portão / envolvente da aldeia → «Entre Penela e Miranda do Corvo»\n- sala com lareira e forno de pão → «Lareira e forno de pão»\n- cozinha com zona de bar → «Cozinha com bar»\n- suite do primeiro andar → «Suite no primeiro andar»\n- suite do rés-do-chão → «Suite e estúdio»\n- terraço coberto com vista para o jardim → «Terraço coberto»\n- anexo independente (sala com kitchenette) → «Anexo independente»\n- piscina e jardim → «Piscina de água salgada»\n- jardim / espaços exteriores → «Licença de AL»\n- end card → «259.000 € · Miguel Canedo · iad Portugal»\n\nHere are the house details:\n\nMoradia 4 quartos de 322 m² em PENELA\nPreço\n259 000 €\nLocalização\nPENELA, 3230-338\nReferência\n1021711\nÁrea Bruta m²\n322\nQuartos\n4\nCertificado Energético\nC\nCaracterísticas\n4 casas de banho, Jardim, Terraço, Varanda, Piscina, Sala de estar, Sala de jantar\n\nDescrição\nMoradia de Charme com 4 Quartos, Anexo Independente e Piscina\n\nInserida num lote com cerca de 1000 m², esta propriedade de carácter singular combina habitação própria com um excelente potencial de exploração turística, dispondo de licença de Alojamento Local (AL) e quatro áreas de utilização/ acesso independente.\n\nLocalizada numa tranquila aldeia entre Penela e Miranda do Corvo, no distrito de Coimbra, oferece privacidade, contacto com a natureza e uma envolvente ideal para quem procura qualidade de vida ou um investimento com vertente turística.\n\nA propriedade é composta por uma casa principal, um anexo independente, vários espaços exteriores e uma piscina com tratamento de sal.\n\nCasa principal - composta por três áreas com acessos independentes, facilitando a sua rentabilização\n\nNo rés-do-chão, com acesso a partir do pátio, encontra-se:\n- um amplo quarto em suite, equipado com casa de banho privativa;\n- um estúdio, equipado com kitchenette e casa de banho privativa;\n- ambos os espaços beneficiam de acesso direto a um terraço coberto com vista para o jardim, proporcionando maior conforto aos seus ocupantes.\n\nNo primeiro andar:\n- uma cozinha, com pavimento cerâmico de qualidade e uma zona de bar;\n-  uma ampla sala de estar e jantar, onde se destacam elementos tradicionais, nomeadamente a lareira original e o antigo forno de pão, que conferem autenticidade e personalidade ao espaço. \n- uma espaçosa suite;\n- acesso a pátio privativo a partir da sala e do quarto.\n\nAnexo independente\n\nJunto ao pátio lateral encontra-se um anexo totalmente independente, composto por sala com kitchenette e uma suite.\nEsta área constitui uma excelente solução para receber familiares e convidados ou para utilização no âmbito da atividade de Alojamento Local, beneficiando igualmente de agradáveis vistas sobre o jardim.\n\nEspaço exterior\nA propriedade dispõe de dois acessos fechados por portão ao pátio principal.\n\nUm caminho conduz à zona ajardinada e à área de lazer, onde se encontra uma piscina de água salgada com aproximadamente 9 x 4 metros, equipada com cobertura para utilização e proteção durante os meses mais frios.\n\nOs amplos espaços exteriores permitem desfrutar plenamente da tranquilidade e privacidade que a propriedade proporciona.\n\nHabitação própria e potencial turístico\nA configuração do imóvel permite uma interessante separação entre a área de residência dos proprietários e os espaços destinados a hóspedes, tornando esta propriedade particularmente adequada para quem pretende conciliar habitação própria com uma atividade de alojamento turístico.\n\nA propriedade oferece capacidade para acolher 8 ou mais hóspedes, permitindo-lhes usufruir da piscina, dos jardins e dos diversos espaços exteriores.\n\nA região envolvente apresenta igualmente uma ampla oferta de lazer e turismo, destacando-se o Castelo de Penela, praias fluviais, percursos pedestres e de bicicleta, atividades equestres e diversas zonas naturais.\n\nUma propriedade com identidade, versatilidade e elevado potencial, ideal para residência permanente, casa de férias ou investimento turístico na região de Coimbra.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia com alojamento local em Penela (distrito de Coimbra)",
+            "summary": "Penela é um concelho do distrito de Coimbra, perto da Serra da Lousã, com um castelo do século XI. Em 2025, o preço mediano das casas vendidas em Portugal subiu 16,8%, segundo o INE.",
+            "timeline": [
+                {
+                    "label": "Castelo de Penela mandado construir por D. Sesnando Davides",
+                    "sublabel": "Século XI"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal sobe 16,8%",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área do concelho de Penela",
+                    "value": 134.8,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano em Portugal (2025 vs 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Casas vendidas em Portugal (2025)",
+                    "value": 164677,
+                    "unit": "vendas"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Penela fica no distrito de Coimbra, perto da Serra da Lousã",
+                "O Castelo de Penela defendia Coimbra durante a Reconquista",
+                "Em 2025, o preço mediano das casas em Portugal foi de 2.076 €/m², segundo o INE"
+            ],
+            "sources": [
+                "https://www.infopedia.pt/artigos/$penela",
+                "https://wikipedia.jakami.de/content/wikipedia_de_all_mini_2024-06/A/Penela",
+                "https://en.wikipedia.org/wiki/Castle_of_Penela",
+                "https://projetos.dhlab.fcsh.unl.pt/files/original/1843f2d51308be3ebc6687165c4957d072465f1e.pdf",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2"
+            ]
+        },
+        "suggested": {
+            "title": "Casa com piscina e alojamento local em Penela por 259 mil €",
+            "description": "Casa numa aldeia tranquila entre Penela e Miranda do Corvo, com quatro espaços independentes, lareira original, antigo forno de pão e piscina de água salgada com cobertura para o inverno. Tem licença de alojamento local e serve para viver, passar férias ou receber hóspedes. Para visitar, fale com o Miguel Canedo, da IAD Portugal.",
+            "tags": [
+                "casa à venda",
+                "Penela",
+                "Miranda do Corvo",
+                "alojamento local",
+                "piscina",
+                "imobiliário Portugal",
+                "IAD Portugal",
+                "casa de campo"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1021711-s2hxt",
+    "created_at": "2026-10-15T15:27:57+00:00",
+    "updated_at": "2026-10-15T17:00:47+00:00",
+    "source_path": "clips/uploads/7e7b4TMkQkCU49MXEOl7qnUmMEwtekNmEJIDIiF7.mp3",
+    "images": [
+        {
+            "id": "img_af20d4d6",
+            "path": "clips/uploads/hQdv7AoG8h4RnaesSqipCKfYcH1PkQNxbn26Kerj.jpg",
+            "description": "Vista aérea por drone: casa branca com janelas verdes, jardim, piscina descoberta, anexo e zona de bar exterior.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_57638ebd",
+            "path": "clips/uploads/mg8eyRBGv1EHHZfeIX4xLD87x6tL3a9hJgVWyLzy.jpg",
+            "description": "Vista aérea por drone: mesma casa, com a piscina tapada pela cobertura de inverno transparente, jardim e anexo.",
+            "name": "01a0a61fbeceed6ad7c66ef9dc186fa3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_66d6bd3c",
+            "path": "clips/uploads/KnqkY7Gu5F326L25jGCGHHfa6mfLE24vaiRcQ4Ld.jpg",
+            "description": "Vista aérea vertical: telhados da casa, pátio calcetado, piscina ao fundo, rodeada de oliveiras e aldeia.",
+            "name": "01a0a634a6707428cee2fbc0eae55943.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c36de883",
+            "path": "clips/uploads/D8hYIXEaLeZ27BMcPdrTUp3V6j7TiKqElkz0zX2A.jpg",
+            "description": "Vista aérea da fachada: casa branca térrea com portadas verdes, alpendre de telha, relvado e espreguiçadeira.",
+            "name": "01a0a61fb8b6ce70c13de6f09bc9a64f.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_59d3f550",
+            "path": "clips/uploads/uWLj1ScK8fmwjLTvsJA9IZKUyfTkSn2fIk3MQjRo.jpg",
+            "description": "Cozinha: armários brancos com azulejos decorativos, teto de madeira inclinado, forno, máquinas e janela para palmeira.",
+            "name": "01a0a620372c9e17bf2acaa54d7f9321.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_078b0dc9",
+            "path": "clips/uploads/SXggYRwhAT84P6D1UKyiaFgYq4JtwmyVLeiNUbFO.jpg",
+            "description": "Copa/bar: balcão com mapa-mundo, candeeiros de lâmpadas suspensas, parede verde e porta aberta para a cozinha.",
+            "name": "01a0a6200b53d3631c7632ef338d7afd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4b5afb2d",
+            "path": "clips/uploads/iXza8keybnVxKkkLW67tto9lVRxUt72gkucHmCW5.jpg",
+            "description": "Sala ampla: vigas de madeira escura no teto, lareira antiga com recuperador, chão em espinha.",
+            "name": "01a0a61fe79cb5c90c4db9c43cdf41e7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_445ff477",
+            "path": "clips/uploads/Ovr2PEtl9qXF7cnxr0y895sHX7jD0GY4nf0lE8Rf.jpg",
+            "description": "Sala com vigas antigas, lareira original e boca do antigo forno de pão; portas abertas para o pátio.",
+            "name": "01a0a61ff002e6aa115ef35944f0ad59.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0d6a36ce",
+            "path": "clips/uploads/EpSxTFT277GGwn3oxUJgQJ8TfULqALGsdBOM65AL.jpg",
+            "description": "Sala grande com vigas de madeira, estantes brancas envidraçadas, lareira e duas portas para o exterior.",
+            "name": "01a0a61fea13432ee1c9e8233381c495.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_795088a7",
+            "path": "clips/uploads/iyq7yI6x1jw8etE5QhiZZR86lvbuZBYk28QYvXc4.jpg",
+            "description": "Fachada exterior: casa térrea branca com barra e portadas verdes, chaminé e pátio em calçada sob céu azul.",
+            "name": "01a0a6206d8e60462a3a762943dee5f4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_919dc2d4",
+            "path": "clips/uploads/8YHPYahWmBfqd9ja1WozH1AcDy95reC87J4v0FbN.jpg",
+            "description": "Pátio exterior em calçada portuguesa entre casas brancas com barras verdes, garagem aberta e alpendre ao fundo.",
+            "name": "01a0a6207f91a82766357c4fa8976063.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_28f4578b",
+            "path": "clips/uploads/eurwlaibeDeSskQZzeRGj5qmIGe9fetGhrMRxgKj.jpg",
+            "description": "Alpendre coberto com teto de madeira e portadas verdes, com vista para o pátio, muros de pedra e telheiro.",
+            "name": "01a0a620701ee6a53331fbbb86135982.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_812f794b",
+            "path": "clips/uploads/cNO7qIKp2kJK2W9LRta5stTVqb4981nj5ZkspoW6.jpg",
+            "description": "Fachada lateral branca com barra verde, chaminé de inox e porta aberta, pátio em calçada e grandes iucas.",
+            "name": "01a0a62074519379214e2fbed1f7852e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f2df45ab",
+            "path": "clips/uploads/m63vyHBfBflAPuze02RopZFoGLvquENhB3cJRvAt.jpg",
+            "description": "Jardim junto à casa, com caminho em calçada, iucas grandes, relvado com espreguiçadeira às riscas e vegetação.",
+            "name": "01a0a620fe1190cf384e3a3a75cfd050.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_55af7330",
+            "path": "clips/uploads/JaFydxf5RPlw0KbmNVYIKTdiz37Zqg2YUKFmMwT6.jpg",
+            "description": "Fachada branca com portadas verdes vista do jardim, com relvado, espreguiçadeira colorida, oliveiras e telheiro.",
+            "name": "01a0a62100138aa5fd21234dfccfc65a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b1eff0d2",
+            "path": "clips/uploads/Wd7FAIKmuwzjYXzRW7vRUOgwcn5QMGcf2Buam72U.jpg",
+            "description": "Terraço coberto com azulejos hidráulicos coloridos e telhado de telha, virado para o jardim com relvado.",
+            "name": "01a0a620b1a3f9c49452f6e6ed0f4568.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_88a5b36a",
+            "path": "clips/uploads/zr7GxDuWEiJ061b4oHZsOgjiYI8lulwJnFx9UbwQ.jpg",
+            "description": "Estúdio amplo no rés-do-chão com chão de tijoleira, radiador e casa de banho com duche à esquerda.",
+            "name": "01a0a620585c029f712d3ce7ee726bb6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a76a651b",
+            "path": "clips/uploads/QYqBH9ow38ZtpdWPJk7lfkf6sYrAaQa0BrJqBUqJ.jpg",
+            "description": "Sala ampla em L com chão de tijoleira, paredes brancas, coluna central e saída para o terraço ao fundo.",
+            "name": "01a0a6205bd4d12d8a579dfbd693fd33.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c3009a38",
+            "path": "clips/uploads/bt7vGWeDDTrGKJVArMh0zFxXODFNKOh97ZAcfaiJ.jpg",
+            "description": "Quarto com papel de parede tropical verde, parede de pedra rústica, radiador e porta para o terraço.",
+            "name": "01a0a620561ca7eb3e254555cfd5ab48.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f06e5eb3",
+            "path": "clips/uploads/8BtDGXmQxNHARhM7JEk4gzNMeGPs81dHwacprwa5.jpg",
+            "description": "Casa de banho branca com duche de vidro, sanita, lavatório e armário com espelho.",
+            "name": "01a0a62031ff8c2da0f415aa39701085.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2578c4dd",
+            "path": "clips/uploads/hhka8bU3CHTBN6VWEO6VWdMA52wCUCEuvIrWYnYu.jpg",
+            "description": "Jardim relvado com espreguiçadeira às riscas coloridas, muro branco e vista para colinas arborizadas.",
+            "name": "01a0a620ff8299e5f5725659794ec696.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c06811b1",
+            "path": "clips/uploads/vniAqkMWQ1cy3p0ixCY8qC9zqeRGJOadpMtUHOtT.jpg",
+            "description": "Estúdio com chão de tijoleira, viga de madeira antiga e parede roxa; casa de banho com duche ao lado.",
+            "name": "01a0a620525d48a00f0bba4abba70dba.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7c22a573",
+            "path": "clips/uploads/K9yaDDSK2pPo43Mx7NVk6jWVvUmqh6S9t6a3Bxje.jpg",
+            "description": "Estúdio amplo com kitchenette de azulejos padronizados, viga de madeira e porta aberta para o terraço.",
+            "name": "01a0a62029045834f848ea1ca3b36426.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6b5a7ca6",
+            "path": "clips/uploads/WyRlHgCPlpY7a97cdsaokkLRcu0VW8SSd6b1RDT4.jpg",
+            "description": "Kitchenette com azulejos padronizados, viga de madeira rústica, espelho e porta aberta para o terraço coberto.",
+            "name": "01a0a620831a1db602ffa4ea1f6f45ff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2ec81415",
+            "path": "clips/uploads/T3VSELBcxTtvt90mqLVrJBUMC2XL6MiJhE0vNNSa.jpg",
+            "description": "Kitchenette com forno, armários em madeira clara, azulejos padronizados e parede roxa em espaço amplo.",
+            "name": "01a0a6205a8ad7bdc0aa7ef5064e4982.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_27d3f26c",
+            "path": "clips/uploads/T1UMfk8ghRVckq7Ipl2kDYgv44xQC6n0RdC2Ha8i.jpg",
+            "description": "Casa de banho com azulejos azuis, base de duche com resguardo em vidro, lavatório e sanita.",
+            "name": "01a0a62058f91b14f19b6ff1175e51a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_37bfe3ff",
+            "path": "clips/uploads/CG7eCUMpK7FOyu3id7XXGfTID1lHJeIMQyjxO3qE.jpg",
+            "description": "Jardim relvado com espreguiçadeira, limoeiro em primeiro plano, muro branco e vista para a aldeia e colinas.",
+            "name": "01a0a620e76ca259611c48cc924571c7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_281a493d",
+            "path": "clips/uploads/X32walD9xqRNjNl6FMm8gE6y9XrlBiO5qOHFFsKV.jpg",
+            "description": "Fachada lateral da casa, branca com barra e portadas verdes, telhado de telha e caminho de gravilha.",
+            "name": "01a0a620e6a37a6f3dc4a85fd655ab97.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2e4b14b9",
+            "path": "clips/uploads/4PFIh9sGlPj7qYQNSiFhyHz3ct0q3DkizOCEmcEu.jpg",
+            "description": "Escadas exteriores em pedra entre oliveiras e canteiros de gravilha, com vista para a aldeia e colinas.",
+            "name": "01a0a620ecc25a36e77e0bb36cf225d0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d9ff57ee",
+            "path": "clips/uploads/Th7d9ZAqtLcZQ7Ev7li9fNG62S9w9PgJwqNtDhkx.jpg",
+            "description": "Piscina com cobertura telescópica para o inverno, deck com cadeiras de madeira e zona de gravilha.",
+            "name": "01a0a621046c2a99674ca8f63ef8cba7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ba4c680c",
+            "path": "clips/uploads/hb9aJRghWYdMeLRNGpZjVufLPWXX5GEAEU4a3nAl.jpg",
+            "description": "Jardim com piscina descoberta, chão de seixo, esplanada com cadeiras de madeira e muro de pedra; céu azul.",
+            "name": "01a0a63a4956134527a654ea9e6bf5ba.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc452ca1",
+            "path": "clips/uploads/MUkV4h4EIaL2w4qSjRfxChq4QIq5bI0uz7qrJiPl.jpg",
+            "description": "Jardim com piscina tapada pela cobertura de inverno em policarbonato, esplanada com cadeiras e muros de pedra.",
+            "name": "01a0a620fc0be98267f26a163dcf1118.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eee098e3",
+            "path": "clips/uploads/dtjaj9P4NsWGTkP7HFYuCYcOzyk4ltsV9LARkhLf.jpg",
+            "description": "Piscina de água salgada vista por dentro da cobertura telescópica aberta, água azul e boia.",
+            "name": "01a0a620a74e271ec24566da0dffaed2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2215c366",
+            "path": "clips/uploads/OmByYaKRb42gCB62N7dgI5VYnTYvPUDe7LdIOe2Z.jpg",
+            "description": "Zona de churrasco exterior com grelhador de tijolo, bancada de azulejo azul e muro de pedra.",
+            "name": "01a0a620f38112e80587249d26055002.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c4614fe7",
+            "path": "clips/uploads/k5t9UYrIssypUQk2kApbC5LnpGLGrziNSOZGZIv8.jpg",
+            "description": "Bar exterior com azulejo azul e bancos altos junto ao churrasco; jardim e oliveiras ao fundo.",
+            "name": "01a0a620e948cf0d89c211aa70a5e536.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3689bd8c",
+            "path": "clips/uploads/AUEUT8ZxDjn6h9FvVc1xCLecltJ3MR8812xzYxBT.jpg",
+            "description": "Exterior do anexo independente, parede branca com barra verde e grande porta de vidro de correr.",
+            "name": "01a0a62094f81e1cd0e9ce7db175ff7f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fb4b2a98",
+            "path": "clips/uploads/MYr2PejhuidTFDMQa1oLvMNnxs28zLGpd2VwZG5x.jpg",
+            "description": "Sala do anexo com vigas de madeira, sofá, kitchenette com azulejos e porta aberta para o quarto.",
+            "name": "01a0a6206cab3813ddefd8269375b184.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1418e4eb",
+            "path": "clips/uploads/blYyRv5k5zqfprSk9qorW7Z6oer2NjEeaeUhWmKt.jpg",
+            "description": "Casa de banho da suite com base de duche envidraçada, sanita e janela pequena.",
+            "name": "01a0a6201c2eafb5ce00f4e009a4bb2f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_00bf369d",
+            "path": "clips/uploads/taHLglrSRJREwswPeqjWlGiOBGxBSM6SKvvYKUm7.jpg",
+            "description": "Sala do anexo com vigas de madeira antigas, sofá, televisão e kitchenette com azulejos decorativos.",
+            "name": "01a0a6208c9e3bb844c6dd03e8ac4f15.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_97c238df",
+            "path": "clips/uploads/VYU1urmd9VTig9u9pxoMZgLMKK0Kg4xHG9mYrnXK.jpg",
+            "description": "Quarto da suite com vigas de madeira, cama de casal e porta aberta para a casa de banho.",
+            "name": "01a0a62060eac206090da68e8ff748f4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dbdb353d",
+            "path": "clips/uploads/Lu07sGAKsz66j2g2o0Eww4xr7b5LzJNpkBZ6LdnF.png",
+            "description": "Retrato do consultor Miguel Canedo, da iad Portugal.",
+            "name": "Miguel Canedo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_79a338f6",
+            "path": "clips/uploads/CltiK0ihaP6TbdtrqbfVlf0TjQiulUwWGxCtF9Gt.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1021711-s2hxt/voz.mp3",
+    "transcript": {
+        "duration": 41.84000015258789,
+        "text": "Uma casa em Penela com quatro espaços independentes e piscina. Fica numa aldeia tranquila, entre Penela e Miranda do Corvo. No primeiro andar, uma sala com a lareira original e o antigo forno de pão. E ainda, a cozinha e uma suite. No resto do chão, uma suite e um estúdio, com terraço coberto virado para o jardim. E um anexo independente, com sala, kitchenette e suite. Lá fora, jardim e piscina de água salgada com cobertura para o inverno. Tem licença de alojamento local. Para viver, para férias ou para receber hóspedes. 259 mil euros. Para visitar, fale com o Miguel Canedo, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "casa",
+                "start": 0.2199999988079071,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "em",
+                "start": 0.5199999809265137,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "Penela",
+                "start": 0.7200000286102295,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "com",
+                "start": 1.0199999809265137,
+                "end": 1.2799999713897705
+            },
+            {
+                "word": "quatro",
+                "start": 1.2799999713897705,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "espaços",
+                "start": 1.7400000095367432,
+                "end": 2.140000104904175
+            },
+            {
+                "word": "independentes",
+                "start": 2.140000104904175,
+                "end": 2.9600000381469727
+            },
+            {
+                "word": "e",
+                "start": 2.9600000381469727,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "piscina",
+                "start": 3.200000047683716,
+                "end": 3.5799999237060547
+            },
+            {
+                "word": "Fica",
+                "start": 4.059999942779541,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "numa",
+                "start": 4.320000171661377,
+                "end": 4.519999980926514
+            },
+            {
+                "word": "aldeia",
+                "start": 4.519999980926514,
+                "end": 4.840000152587891
+            },
+            {
+                "word": "tranquila",
+                "start": 4.840000152587891,
+                "end": 5.480000019073486
+            },
+            {
+                "word": "entre",
+                "start": 5.699999809265137,
+                "end": 6
+            },
+            {
+                "word": "Penela",
+                "start": 6,
+                "end": 6.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 6.420000076293945,
+                "end": 6.71999979019165
+            },
+            {
+                "word": "Miranda",
+                "start": 6.71999979019165,
+                "end": 7.019999980926514
+            },
+            {
+                "word": "do",
+                "start": 7.019999980926514,
+                "end": 7.320000171661377
+            },
+            {
+                "word": "Corvo",
+                "start": 7.320000171661377,
+                "end": 7.599999904632568
+            },
+            {
+                "word": "No",
+                "start": 8.199999809265137,
+                "end": 8.279999732971191
+            },
+            {
+                "word": "primeiro",
+                "start": 8.279999732971191,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "andar",
+                "start": 8.5600004196167,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "uma",
+                "start": 9.180000305175781,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "sala",
+                "start": 9.4399995803833,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "com",
+                "start": 9.640000343322754,
+                "end": 9.880000114440918
+            },
+            {
+                "word": "a",
+                "start": 9.880000114440918,
+                "end": 10.140000343322754
+            },
+            {
+                "word": "lareira",
+                "start": 10.140000343322754,
+                "end": 10.279999732971191
+            },
+            {
+                "word": "original",
+                "start": 10.279999732971191,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "e",
+                "start": 10.880000114440918,
+                "end": 11.119999885559082
+            },
+            {
+                "word": "o",
+                "start": 11.119999885559082,
+                "end": 11.699999809265137
+            },
+            {
+                "word": "antigo",
+                "start": 11.699999809265137,
+                "end": 11.699999809265137
+            },
+            {
+                "word": "forno",
+                "start": 11.699999809265137,
+                "end": 11.960000038146973
+            },
+            {
+                "word": "de",
+                "start": 11.960000038146973,
+                "end": 12.380000114440918
+            },
+            {
+                "word": "pão",
+                "start": 12.380000114440918,
+                "end": 12.380000114440918
+            },
+            {
+                "word": "E",
+                "start": 12.880000114440918,
+                "end": 13.020000457763672
+            },
+            {
+                "word": "ainda",
+                "start": 13.020000457763672,
+                "end": 13.300000190734863
+            },
+            {
+                "word": "a",
+                "start": 13.640000343322754,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "cozinha",
+                "start": 13.920000076293945,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "e",
+                "start": 14.180000305175781,
+                "end": 14.520000457763672
+            },
+            {
+                "word": "uma",
+                "start": 14.520000457763672,
+                "end": 14.779999732971191
+            },
+            {
+                "word": "suite",
+                "start": 14.779999732971191,
+                "end": 15.039999961853027
+            },
+            {
+                "word": "No",
+                "start": 15.720000267028809,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "resto",
+                "start": 15.819999694824219,
+                "end": 16.040000915527344
+            },
+            {
+                "word": "do",
+                "start": 16.040000915527344,
+                "end": 16.34000015258789
+            },
+            {
+                "word": "chão",
+                "start": 16.34000015258789,
+                "end": 16.34000015258789
+            },
+            {
+                "word": "uma",
+                "start": 16.700000762939453,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "suite",
+                "start": 16.940000534057617,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 17.239999771118164,
+                "end": 17.479999542236328
+            },
+            {
+                "word": "um",
+                "start": 17.479999542236328,
+                "end": 18.020000457763672
+            },
+            {
+                "word": "estúdio",
+                "start": 18.020000457763672,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "com",
+                "start": 18.260000228881836,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "terraço",
+                "start": 18.440000534057617,
+                "end": 18.719999313354492
+            },
+            {
+                "word": "coberto",
+                "start": 18.719999313354492,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "virado",
+                "start": 19.239999771118164,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "para",
+                "start": 19.639999389648438,
+                "end": 19.799999237060547
+            },
+            {
+                "word": "o",
+                "start": 19.799999237060547,
+                "end": 20.219999313354492
+            },
+            {
+                "word": "jardim",
+                "start": 20.219999313354492,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "E",
+                "start": 20.739999771118164,
+                "end": 20.979999542236328
+            },
+            {
+                "word": "um",
+                "start": 20.979999542236328,
+                "end": 21.1200008392334
+            },
+            {
+                "word": "anexo",
+                "start": 21.1200008392334,
+                "end": 21.420000076293945
+            },
+            {
+                "word": "independente",
+                "start": 21.420000076293945,
+                "end": 22.040000915527344
+            },
+            {
+                "word": "com",
+                "start": 22.260000228881836,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "sala",
+                "start": 22.860000610351562,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "kitchenette",
+                "start": 23.18000030517578,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 23.68000030517578,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "suite",
+                "start": 24.040000915527344,
+                "end": 24.34000015258789
+            },
+            {
+                "word": "Lá",
+                "start": 25.040000915527344,
+                "end": 25.15999984741211
+            },
+            {
+                "word": "fora",
+                "start": 25.15999984741211,
+                "end": 25.420000076293945
+            },
+            {
+                "word": "jardim",
+                "start": 26.020000457763672,
+                "end": 26.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 26.260000228881836,
+                "end": 26.600000381469727
+            },
+            {
+                "word": "piscina",
+                "start": 26.600000381469727,
+                "end": 26.860000610351562
+            },
+            {
+                "word": "de",
+                "start": 26.860000610351562,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "água",
+                "start": 27.139999389648438,
+                "end": 27.260000228881836
+            },
+            {
+                "word": "salgada",
+                "start": 27.260000228881836,
+                "end": 27.81999969482422
+            },
+            {
+                "word": "com",
+                "start": 27.81999969482422,
+                "end": 28.059999465942383
+            },
+            {
+                "word": "cobertura",
+                "start": 28.059999465942383,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "para",
+                "start": 28.540000915527344,
+                "end": 28.780000686645508
+            },
+            {
+                "word": "o",
+                "start": 28.780000686645508,
+                "end": 29.280000686645508
+            },
+            {
+                "word": "inverno",
+                "start": 29.280000686645508,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "Tem",
+                "start": 29.34000015258789,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "licença",
+                "start": 29.959999084472656,
+                "end": 30.420000076293945
+            },
+            {
+                "word": "de",
+                "start": 30.420000076293945,
+                "end": 30.65999984741211
+            },
+            {
+                "word": "alojamento",
+                "start": 30.65999984741211,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "local",
+                "start": 30.979999542236328,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "Para",
+                "start": 32.040000915527344,
+                "end": 32.13999938964844
+            },
+            {
+                "word": "viver",
+                "start": 32.13999938964844,
+                "end": 32.560001373291016
+            },
+            {
+                "word": "para",
+                "start": 32.939998626708984,
+                "end": 33.31999969482422
+            },
+            {
+                "word": "férias",
+                "start": 33.31999969482422,
+                "end": 33.63999938964844
+            },
+            {
+                "word": "ou",
+                "start": 33.63999938964844,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "para",
+                "start": 33.939998626708984,
+                "end": 34.20000076293945
+            },
+            {
+                "word": "receber",
+                "start": 34.20000076293945,
+                "end": 34.439998626708984
+            },
+            {
+                "word": "hóspedes",
+                "start": 34.439998626708984,
+                "end": 35.08000183105469
+            },
+            {
+                "word": "259",
+                "start": 36.040000915527344,
+                "end": 36.68000030517578
+            },
+            {
+                "word": "mil",
+                "start": 36.68000030517578,
+                "end": 36.880001068115234
+            },
+            {
+                "word": "euros",
+                "start": 36.880001068115234,
+                "end": 37.279998779296875
+            },
+            {
+                "word": "Para",
+                "start": 37.900001525878906,
+                "end": 37.959999084472656
+            },
+            {
+                "word": "visitar",
+                "start": 37.959999084472656,
+                "end": 38.58000183105469
+            },
+            {
+                "word": "fale",
+                "start": 39.060001373291016,
+                "end": 39.060001373291016
+            },
+            {
+                "word": "com",
+                "start": 39.060001373291016,
+                "end": 39.279998779296875
+            },
+            {
+                "word": "o",
+                "start": 39.279998779296875,
+                "end": 39.459999084472656
+            },
+            {
+                "word": "Miguel",
+                "start": 39.459999084472656,
+                "end": 39.68000030517578
+            },
+            {
+                "word": "Canedo",
+                "start": 39.68000030517578,
+                "end": 40.13999938964844
+            },
+            {
+                "word": "da",
+                "start": 40.41999816894531,
+                "end": 40.58000183105469
+            },
+            {
+                "word": "IAD",
+                "start": 40.58000183105469,
+                "end": 40.97999954223633
+            },
+            {
+                "word": "de",
+                "start": 40.97999954223633,
+                "end": 41.279998779296875
+            },
+            {
+                "word": "Portugal",
+                "start": 41.279998779296875,
+                "end": 41.58000183105469
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 41.84000015258789,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.631,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "4 ESPAÇOS INDEPENDENTES",
+                        "params": {
+                            "src": "img_af20d4d6",
+                            "avatar": "img_dbdb353d",
+                            "logo": "img_79a338f6",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "259.000 €",
+                            "location": "PENELA · COIMBRA",
+                            "title": "MORADIA T4 COM PISCINA",
+                            "facts": "322 m² · 4 quartos · 4 WC · piscina",
+                            "cta": "Ligue já +351 914 437 198",
+                            "name": "Miguel Canedo",
+                            "logoText": "iad Portugal",
+                            "logoSub": "Consultor imobiliário",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.631,
+                "end": 6.214,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_66d6bd3c",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.214,
+                "end": 8.368,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Entre Penela e Miranda do Corvo",
+                        "params": {
+                            "src": "img_2e4b14b9",
+                            "src2": "img_37bfe3ff"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.368,
+                "end": 13.256,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Lareira e forno de pão",
+                        "params": {
+                            "src": "img_445ff477",
+                            "src2": "img_4b5afb2d",
+                            "src3": "img_0d6a36ce",
+                            "src4": "img_812f794b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.256,
+                "end": 16.011,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Cozinha com bar e suite",
+                        "params": {
+                            "src": "img_59d3f550",
+                            "src2": "img_078b0dc9",
+                            "src3": "img_97c238df",
+                            "src4": "img_1418e4eb"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.011,
+                "end": 18.642,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Suite e estúdio",
+                        "params": {
+                            "src": "img_c3009a38",
+                            "src2": "img_88a5b36a",
+                            "src3": "img_c06811b1",
+                            "src4": "img_f06e5eb3",
+                            "src5": "img_27d3f26c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.642,
+                "end": 21.044,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "TERRAÇO COBERTO",
+                        "params": {
+                            "src": "img_b1eff0d2",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.044,
+                "end": 23.302,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_3689bd8c",
+                            "title": "Anexo independente",
+                            "items": [
+                                "Entrada própria",
+                                "Vista para o jardim",
+                                "Ideal para hóspedes"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.302,
+                "end": 25.353,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Sala com kitchenette",
+                        "params": {
+                            "src": "img_fb4b2a98",
+                            "src2": "img_00bf369d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.353,
+                "end": 27.507,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_ba4c680c",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.507,
+                "end": 29.619,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Piscina de água salgada",
+                        "params": {
+                            "src": "img_eee098e3",
+                            "src2": "img_d9ff57ee",
+                            "src3": "img_cc452ca1",
+                            "src4": "img_57638ebd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.619,
+                "end": 32.271,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Licença de AL",
+                        "params": {
+                            "src": "img_f2df45ab",
+                            "src2": "img_2578c4dd",
+                            "src3": "img_2215c366",
+                            "src4": "img_c4614fe7",
+                            "src5": "img_55af7330"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.271,
+                "end": 35.481,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "Viver, férias ou hóspedes",
+                        "params": {
+                            "src": "img_7c22a573",
+                            "src2": "img_6b5a7ca6",
+                            "src3": "img_2ec81415",
+                            "src4": "img_a76a651b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.481,
+                "end": 38.215,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "259.000 €",
+                        "params": {
+                            "src": "img_c36de883",
+                            "src2": "img_795088a7",
+                            "src3": "img_919dc2d4",
+                            "src4": "img_281a493d",
+                            "src5": "img_28f4578b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.215,
+                "end": 41.84,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Miguel Canedo",
+                        "params": {
+                            "src": "img_dbdb353d",
+                            "name": "Miguel Canedo",
+                            "phone": "+351 914 437 198",
+                            "email": "miguel.canedo@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1021711-s2hxt/clip.mp4",
+    "source_text": "Uma casa em Penela com quatro espaços independentes e piscina. Fica numa aldeia tranquila, entre Penela e Miranda do Corvo. No primeiro andar, uma sala com a lareira original e o antigo forno de pão. E ainda a cozinha e uma suite. No rés-do-chão, uma suite e um estúdio, com terraço coberto virado para o jardim. E um anexo independente, com sala, kitchenette e suite. Lá fora, jardim e piscina de água salgada, com cobertura para o inverno. Tem licença de Alojamento Local. Para viver, para férias, ou para receber hóspedes. Duzentos e cinquenta e nove mil euros. Para visitar, fale com o Miguel Canedo, da IAD de Portugal."
+}

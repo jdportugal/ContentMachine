@@ -1,0 +1,1322 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta de turismo rural em Tarouca pronta a funcionar | 990 mil €",
+    "source_text": null,
+    "source_path": "clips/uploads/HJGI6F9QfGMQhC0OuRzcPGgxuSC08hWisqcwjv1W.mp3",
+    "images": [
+        {
+            "id": "img_7b1f13e8",
+            "path": "clips/uploads/GoddiiHfboCxBds0UJEtaSyaQMkbAXWjANflKOwS.jpg",
+            "description": "Corredor interior com chão em tijoleira, cómoda antiga com candeeiro a óleo e portas para quartos.",
+            "name": "70a6aaf8-bbce-427c-a3e5-51a8998a316b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c4c1f94e",
+            "path": "clips/uploads/dtO5mYvd6kfzw1IXYpyJkyxwHqWqoNtjlfUDNCSn.jpg",
+            "description": "Antecâmara de suíte com roupeiros embutidos em madeira, tapete e casa de banho ao fundo.",
+            "name": "45c218f3-a0a7-4f1e-8101-3d7890628cd1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_181e7058",
+            "path": "clips/uploads/TBh7LKlNbUGudxX8uT3VIi8299PWjBVDW0mwQGeT.jpg",
+            "description": "Quarto de casal com cama de ferro forjado verde, paredes lilás, cómodas de madeira e televisor.",
+            "name": "c4e7c1de-c85d-4091-9633-1e715c6d8058.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_7840b5d1",
+            "path": "clips/uploads/8Mov8ATYDG12pFCLcwoa487Ji4krQY9eXXt4iYIi.jpg",
+            "description": "Sala de refeições ampla para grupos, várias mesas de madeira, lustre, aparador e cozinha ao fundo.",
+            "name": "c086e80a-d7e7-444e-8cb1-89d0a1364aad.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5fbe6975",
+            "path": "clips/uploads/qDB5qfoj1H18x2XchMexRjTIry4OcZ03ZWQhW6mj.jpg",
+            "description": "Quarto duplo com duas camas de solteiro em madeira, parede amarela vibrante e roupeiro grande.",
+            "name": "355363e0-d7e6-4087-85b1-6b397e3ff9b1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b34de4cd",
+            "path": "clips/uploads/0iYp3PiOEoQBPG4yAD4TCAGW6KfVmHYRnvEwnOG9.jpg",
+            "description": "Sala rústica em pedra com lareira, cadeirões de madeira, pipa de vinho e iluminação quente.",
+            "name": "7fd7ba3f-1c9d-4d6b-9d04-aaf8b688995a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_7332174a",
+            "path": "clips/uploads/A2eZ7kUc9u78HtAq6fvq2VSRewH5irw9ynZUDjnB.jpg",
+            "description": "Casa de banho em granito escuro com banheira, sanita, bidé, lavatório de coluna e janela portadas.",
+            "name": "7415d410-0f15-4f61-abaa-80caaf816ed3.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_b602a60d",
+            "path": "clips/uploads/N8ub2bY3rC5x8uDswzwJ0Wm7cQBCibHAGo82P9on.jpg",
+            "description": "Suíte espaçosa com duas camas, parede azul-petróleo, cadeirões, secretária e tapete grande.",
+            "name": "5ffae49f-cad3-4ec5-b668-1639ff52064b.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_69900d36",
+            "path": "clips/uploads/fd17ujJ21vcS3NKctSysqPBrvXyCvDOmCsz9EDwy.jpg",
+            "description": "Hall de entrada e receção com mesa de madeira, jarros de barro, plumas decorativas e chão tijoleira.",
+            "name": "611dc3a7-b841-466e-9da1-1decc57c5592.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_70b9050e",
+            "path": "clips/uploads/4QNiNdUit1Iptt8yDLIe8HqW1XtZ2WvOPtwcNURy.jpg",
+            "description": "Exterior: anexo em pedra com alpendre, espreguiçadeiras, relvado, calçada, piscina coberta e céu azul.",
+            "name": "49e3abb2-7fc1-48b6-bda9-ef536a0f40bc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_84747a0e",
+            "path": "clips/uploads/DTFJvikhEuyZQa2WgTnIvCIPfZXzJv9xdYafq88C.jpg",
+            "description": "Vista da varanda sobre o jardim: relvado, piscina, pérgola com trepadeiras e campo de ténis ao fundo, sol forte.",
+            "name": "d4830b7f-d00e-4a79-b3e9-ab95758afc0a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f3907a4",
+            "path": "clips/uploads/rNs5PkFZlpRlHKg73TScX26nzdhgbM63H9kgoGHC.jpg",
+            "description": "Anexo em pedra com escadaria de granito, palmeiras e talhas, ao lado do campo de ténis vedado.",
+            "name": "f806f526-dcde-4ca2-9c7d-2cc60bb4d123.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bd107455",
+            "path": "clips/uploads/LAnhCGstvxD8HpQvN7yYfSriDCcePbxH3Ou7O4bC.jpg",
+            "description": "Fachada da casa principal em pedra e amarelo, pátio empedrado, oliveira e janelas verdes, céu azul.",
+            "name": "9a8b1084-6708-4868-af42-72b83ae122f8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_32f339e0",
+            "path": "clips/uploads/dLsUA3IuyGYzayhGIhmVbvyBTrlFEU7Po3Xush7f.jpg",
+            "description": "Sala rústica com paredes de pedra, chão em tijoleira e grande pipa de vinho antiga; adega/enoturismo.",
+            "name": "784fbc4b-8d49-4ed0-8b6d-379b62c92601.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_92c22f47",
+            "path": "clips/uploads/3HpfkAZ4meuceiFyJTMtMKytxAeto9IbdbO6WIDR.jpg",
+            "description": "Entrada da casa: portas de madeira maciça, parede de granito, lanterna, vasos e palmeira ao sol.",
+            "name": "5fcbfb2c-5060-443c-9223-23597c400b8b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_383c6f68",
+            "path": "clips/uploads/p05yYMZklWyOzQSBUhlvHCQ2BclWCArJ6QnEGM6r.jpg",
+            "description": "Cozinha tradicional ampla com armários de madeira, bancada de granito, forno, micro-ondas e janela.",
+            "name": "74d70fee-25c6-414c-9508-eb636d8ad97c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b00ca74e",
+            "path": "clips/uploads/cQPlUvQDI8zdLBqZAe27Taqjyb4METC2ppoFSzQr.jpg",
+            "description": "Sala de estar com mesa de jantar, tapetes, cadeirões de madeira e porta envidraçada para varanda com vista.",
+            "name": "8cee9db9-0102-4fa0-8a8f-d82c673a52a3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d177b4d1",
+            "path": "clips/uploads/Okpzxt4irf8B9oEFTmgEpu9zSkCevt0gso5qBj69.jpg",
+            "description": "Piscina coberta em relvado amplo, com a casa principal em pedra e o vale ao fundo.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c72ba888",
+            "path": "clips/uploads/pAWQPBKjY1mjAAkZA7XibZgqKsvDb8yUPWwcm5WZ.jpg",
+            "description": "Logótipo RE/MAX Maia, comemorativo dos 20 anos (2002–2022), em fundo branco.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6c7dd04e",
+            "path": "clips/uploads/SSLblurO2Tfeg2ae1B8XZU90IEJZYAAoysiU4aNW.png",
+            "description": "Retrato da agente imobiliária, provavelmente Violeta Rocha: mulher loira, blazer azul, com logótipo RE/MAX Maia.",
+            "name": "wioletta.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0957f1d9",
+            "path": "clips/uploads/tUiKBJRm5zLekqOSqgVa6ybuysHnOlCaPtORyPnV.jpg",
+            "description": "Fachada da casa principal em pedra e reboco amarelo, pátio empedrado com folhas de outono e oliveira ao centro.",
+            "name": "e3413ec1-399c-4adb-9065-82c24701e140.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e63568ac",
+            "path": "clips/uploads/BoW0MeojnXPXCvw2mHSpVoRZX4TOe3edcSCCFNpb.jpg",
+            "description": "Exterior da casa em pedra com tanque de água em primeiro plano, reflexo da fachada e folhagem outonal.",
+            "name": "83154b7d-0e89-4312-b286-9e43431d764a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_c63c90b2",
+            "path": "clips/uploads/k3Yojz4e2DNEHECWe6KlDzH0bEzRYhGd5XTY1kSE.jpg",
+            "description": "Grande tenda branca envidraçada para eventos e casamentos, no meio do jardim, com palmeiras e céu azul.",
+            "name": "e32d53aa-11b3-486a-a2a4-b48e81705402.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9785b669",
+            "path": "clips/uploads/2ronDyemO5E7r2Z8VaGPDPyM9kYedZMGUqlAcdgJ.jpg",
+            "description": "Quarto de suíte com cama de casal, chão de madeira, radiador e casa de banho privativa com banheira.",
+            "name": "49069791-cf23-4b59-8493-987de7a91770.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_cae3fa81",
+            "path": "clips/uploads/521JCB8j0wXr4yqoTp20estDioGTV04hx1KKPoX2.jpg",
+            "description": "Interior da tenda de eventos: salão amplo e vazio com lustres, cortinas brancas e vista para a quinta.",
+            "name": "c2048c7a-5419-4797-b65f-f2339db706f3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fad87ca6",
+            "path": "clips/uploads/xNhVh5M3HJXtfnrl4SgRaLdwktSGjN48cCfW9FZC.jpg",
+            "description": "Caminho de acesso empedrado entre muro de pedra e sebe de hera, com a casa ao fundo.",
+            "name": "75ebe95e-21af-4c53-b24c-3a126e1d8087.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5f02d862",
+            "path": "clips/uploads/clEbCU4UrrAw0aygwzJdZZELkC29Q1FpjpYYDHsA.jpg",
+            "description": "Jardim relvado com piscina ao fundo, anexo térreo em pedra, caminhos empedrados e montanhas sob sol forte.",
+            "name": "90da2a16-c753-43c1-a279-7f073cf0b871.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_440d59ce",
+            "path": "clips/uploads/x7iPQuwHBy3gYE3LCDMkwFlXJLtE3a3xZ4mBudx7.jpg",
+            "description": "Vista do pátio interior entre alas da casa, com relvado, piscina, latada de videira e tenda de eventos.",
+            "name": "2a0f347f-e402-4569-81f4-5db7a5393a0c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_36883118",
+            "path": "clips/uploads/ADfV4NMJsXISjGlWfV5BEDXgFmoNJWuy3jOQTZ1W.jpg",
+            "description": "Sala de jantar e estar rústica com mesa de madeira, vaso vermelho, cristaleira, sofá e chão de tijoleira.",
+            "name": "ddefcd7b-f36a-45b8-aff6-0243828ed5cf.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_3ea2c422",
+            "path": "clips/uploads/nHoksHZNK08aP1eNGgXnSfCzknnj94bIqdq0k2qS.jpg",
+            "description": "Fachada lateral da casa em pedra com palmeira, terreiro empedrado e carro escuro estacionado à frente.",
+            "name": "67da10a7-a9b4-4b04-b91e-cfeb19ea5150.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f31cddc9",
+            "path": "clips/uploads/Cc6f3h7LGbwIEUTjD8BZ0fFVSyuCWIoMV0UPJowF.jpg",
+            "description": "Quarto de casal com parede azul, cama de madeira, portadas de madeira na janela e chão flutuante.",
+            "name": "a012f705-3ad6-4a49-9c93-5c82afb5df0c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_51b0c509",
+            "path": "clips/uploads/RRJ3OCmYQsfVxdrpTw3uLc0PBHclO63YB3p0Kfkd.jpg",
+            "description": "Fachada da casa em pedra e reboco creme, com pátio empedrado e carrinho de mão decorativo.",
+            "name": "c85bbf93-f1e5-4d63-bbe5-59d908aebba6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58488835",
+            "path": "clips/uploads/9uGDq9o98LO74ZVZr225YVBFhPuubnSquFUqgBjU.jpg",
+            "description": "Jardim com relvado amplo, piscina coberta e casa principal ao fundo, sob céu azul.",
+            "name": "ea3c6a3a-0d0a-4911-92ef-c7c6825c5412.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b8fcac39",
+            "path": "clips/uploads/3AIKHvK54NBAcmpVwRjuqAiT1oPnoqZBYfkhYZiQ.jpg",
+            "description": "Corredor interior com chão de tijoleira, móveis antigos de madeira e portas envidraçadas para os quartos.",
+            "name": "b2bff69f-835c-4cc5-831f-f4bc25d3a7dd.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2727f0d9",
+            "path": "clips/uploads/HfKifGC6klnnCMnVf2juaVbG0KZsCCerJ4vy7Wa4.jpg",
+            "description": "Quarto de casal com parede vermelha, cama de madeira, mesas de cabeceira e tapetes claros.",
+            "name": "4581c281-ec57-41cb-989e-c3d076948a02.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_56fb099b",
+            "path": "clips/uploads/xJCOHDrPcsXG9D4TpuFFTDDiTFF3Rwow1zM4qkcQ.jpg",
+            "description": "Casa de banho com lavatório, sanita, bidé e banheira com resguardo de vidro, revestimento bege.",
+            "name": "2d26caf4-853f-4f4f-b134-ff236d6f58e3.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_6676ce24",
+            "path": "clips/uploads/ic0JjuFJSXrXiloHACwwJoJRWpv5BrN14tu3CbzE.jpg",
+            "description": "Quarto com duas camas individuais, parede amarela, duas janelas com portadas de madeira e radiador.",
+            "name": "0b443948-28ae-41d7-9e46-b93e3bf90663.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_da02c783",
+            "path": "clips/uploads/XxP8Zm92jmDJozvgmqS82QbkBCmEBdf1osTcMiD1.jpg",
+            "description": "Sala de jogos com mesa de bilhar verde, lambrim de madeira e candeeiro clássico pendente.",
+            "name": "3afdfff2-0ca8-45b8-989b-a8d202c28e9e.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_15a63a48",
+            "path": "clips/uploads/ZoJ4DycnGi4cz293WvHQdRMnShwkRSuTxpbzfErN.jpg",
+            "description": "Vista geral da quinta: casa de telhado laranja, relvado, piscina coberta e colinas do vale ao fundo.",
+            "name": "2807ee91-b6af-49fc-896b-812b53a83ea9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e4e08992",
+            "path": "clips/uploads/k1xgGZsM3OBo7868FhMEWpQ0pE7pw5wPdYRAqCkF.jpg",
+            "description": "Casa de banho com revestimento cinzento, banheira com resguardo de vidro, lavatório de coluna e sanita.",
+            "name": "8bdeddae-4022-48e6-afe2-04bcdcea1269.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e69d0ef9",
+            "path": "clips/uploads/wMawCA6hARgq1023lPY9X4AoHasOUtsWeT1my9WH.jpg",
+            "description": "Casa de banho de suíte com banheira e resguardo de vidro, mármore claro, lavatório de coluna e espelho de madeira.",
+            "name": "b207e48d-727b-4042-aa94-a7e3af5fdde0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be751339",
+            "path": "clips/uploads/sGjlO6ZmIIuhjooOGcl8ZtPDYZDQyfNoPrvi4vPG.jpg",
+            "description": "Sala ampla com paredes de pedra à vista, chão de tijoleira, lareira ao fundo e bancos rústicos de madeira.",
+            "name": "11ed785a-9e02-4180-95ea-a2f7b0664796.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details:\n990 000 €\nVenda\nid. 120781613-392\n270 m²\n\n- -\n\n- -\n\nD\n\nDescrição\nDetalhes\nMapa\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nQuinta da Vinha Morta – Um ativo raro num cenário de excelência\nHá propriedades interessantes e depois há aquelas que se destacam de forma natural. Esta quinta enquadrase claramente na segunda categoria.\nInserida no Vale Encantado, beneficia de um enquadramento paisagístico que hoje é um verdadeiro fator de\ndiferenciação. São 11.843 m² de terreno que garantem privacidade, tranquilidade e uma ligação direta à\nnatureza — um atributo cada vez mais valorizado por clientes nacionais e internacionais.\nA casa principal, em pedra, foi recuperada com critério, preservando autenticidade e integrando conforto:\n• 7 suítes com boas áreas e excelente luminosidade\n• 11 casas de banho, permitindo uma operação fluida\n• Sala ampla com capacidade para receber grupos\n• Cozinha equipada e cozinha tradicional, que acrescenta identidade\n• Lareira e aquecimento central, assegurando utilização durante todo o ano\nNo exterior, a propriedade responde plenamente às exigências do segmento:\n• Piscina com ótima exposição solar\n• Campo de ténis\n• Áreas de lazer bem distribuídas\n• Estrutura preparada para eventos, como casamentos, retiros e experiências corporativas\n• Jardins cuidados, com forte componente estética\n\nA quinta encontra-se já em funcionamento como Turismo Rural, com boas avaliações e operação estabilizada, permitindo continuidade imediata de exploração.\nO terreno, com árvores de fruto e cultura tradicional, reforça a autenticidade e abre espaço a experiências ligadas ao enoturismo.\nA cerca de uma hora do aeroporto, combina acessibilidade com privacidade — um equilíbrio essencial para o mercado internacional.\nUma solução consistente para quem procura um investimento com identidade, procura comprovada e margem de valorização.  \n\nDetalhes\nÁrea Bruta Privativa m²\n270\nÁrea Bruta m²\n11 843\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n- -\nQuartos\n- -\nAno de Construção\n- -\nPiso\n- -\nWC/Casas de banho\n- -\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão\nDetalhes energéticos",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta da Vinha Morta: turismo rural à venda em Tarouca, no Vale do Varosa",
+            "summary": "Quinta de turismo rural já em funcionamento em Gouviães, Tarouca, com 7 quartos, piscina e campo de ténis, à venda por 990 mil euros. Fica no Vale do Varosa, terra de mosteiros cistercienses e da Távora-Varosa, a primeira região demarcada de espumante em Portugal.",
+            "timeline": [
+                {
+                    "label": "Cister chega a Portugal por São João de Tarouca",
+                    "sublabel": "Século XII"
+                },
+                {
+                    "label": "Távora-Varosa: primeira região demarcada de espumante",
+                    "sublabel": "1989"
+                },
+                {
+                    "label": "Quinta da Vinha Morta à venda",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 990000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Quartos para alojamento",
+                    "value": 7,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Área de construção",
+                    "value": 773,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Ano em que a Távora-Varosa foi demarcada",
+                    "value": 1989,
+                    "unit": "ano"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "A quinta e a região",
+                    "left": {
+                        "title": "Quinta da Vinha Morta",
+                        "points": [
+                            "7 quartos",
+                            "Piscina e campo de ténis",
+                            "Tenda para eventos",
+                            "Gouviães, Tarouca"
+                        ]
+                    },
+                    "right": {
+                        "title": "Távora-Varosa",
+                        "points": [
+                            "1.ª região demarcada de espumante (1989)",
+                            "A DOC mais pequena do país",
+                            "Solos graníticos, bons para espumante",
+                            "Mosteiros de Tarouca e Salzedas"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Fica em Gouviães, no concelho de Tarouca",
+                "Tem 7 quartos, piscina, campo de ténis e espaço para eventos",
+                "Preço pedido: 990 mil euros",
+                "Fica na Távora-Varosa, a primeira região demarcada de espumante em Portugal (1989)",
+                "O Mosteiro de São João de Tarouca é apontado como o primeiro mosteiro cisterciense de Portugal"
+            ],
+            "sources": [
+                "https://www.idealista.pt/en/comprar-casas/tarouca/gouviaes/",
+                "https://casa.trovit.pt/municipio-tarouca",
+                "https://supercasa.pt/nl-nl/comprar-casas/tarouca/com-bom-estado",
+                "https://www.luxuryestate.com/p132421590-farm-for-sale-gouviaes",
+                "https://en.wikipedia.org/wiki/T%C3%A1vora-Varosa_DOC",
+                "https://www.portugal.com/food-drink/tavora-varosa-wines/",
+                "https://cloud.theportugalnews.com/news/2023-07-09/heres-to-the-first-demarcated-sparkling-wine-region-in-portugal-tavora-varosa/79320",
+                "https://www.agroportal.pt/?p=731820",
+                "https://www.infopedia.pt/$tarouca",
+                "https://ler.letras.up.pt/uploads/ficheiros/12824.pdf",
+                "https://rdpc.uevora.pt/bitstream/10174/25742/1/SEPARATA%20%20P12_PAtrim%c3%b3nio%20Intang%c3%advel.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta de turismo rural em Tarouca pronta a funcionar | 990 mil €",
+            "description": "A Quinta da Vinha Morta, no Vale Encantado, em Tarouca, tem mais de um hectare, casa em pedra recuperada, sete suítes, piscina, campo de ténis e espaço para casamentos e eventos. Já está em funcionamento, tem boas avaliações e árvores de fruto ideais para o enoturismo. Para marcar visita, contacte a Violeta Rocha, da RE/MAX Maia.",
+            "tags": [
+                "turismo rural",
+                "quinta à venda",
+                "Tarouca",
+                "enoturismo",
+                "imobiliário Portugal",
+                "casa de pedra",
+                "RE/MAX Maia",
+                "investimento turístico"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-wjhif",
+    "created_at": "2026-10-09T06:09:19+00:00",
+    "updated_at": "2026-10-09T06:15:54+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/HJGI6F9QfGMQhC0OuRzcPGgxuSC08hWisqcwjv1W.mp3",
+    "transcript": {
+        "duration": 39,
+        "text": "Uma quinta de turismo rural já a funcionar, no Vale Encantado. A quinta da Vinha Morta fica em Tarouca, com mais de um hectare de terreno, privacidade total e natureza à volta. A casa principal, em pedra, foi recuperada com cuidado. Sete suítes, sala ampla para grupos, cozinha tradicional, lareira e aquecimento central. Lá fora, piscina, campo de ténis, jardins e espaço para casamentos, retiros e eventos. Árvores de fruto e cultura tradicional, perfeitas para o enoturismo. Boas avaliações e operação gestável, pronta a continuar. 990 mil euros. Para visitar, fale com a Violeta Rocha, da Remax Maia.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "quinta",
+                "start": 0.2199999988079071,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "de",
+                "start": 0.5600000023841858,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "turismo",
+                "start": 0.7599999904632568,
+                "end": 1.059999942779541
+            },
+            {
+                "word": "rural",
+                "start": 1.059999942779541,
+                "end": 1.4800000190734863
+            },
+            {
+                "word": "já",
+                "start": 1.4800000190734863,
+                "end": 1.840000033378601
+            },
+            {
+                "word": "a",
+                "start": 1.840000033378601,
+                "end": 2.1600000858306885
+            },
+            {
+                "word": "funcionar",
+                "start": 2.1600000858306885,
+                "end": 2.640000104904175
+            },
+            {
+                "word": "no",
+                "start": 2.859999895095825,
+                "end": 2.9600000381469727
+            },
+            {
+                "word": "Vale",
+                "start": 2.9600000381469727,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "Encantado",
+                "start": 3.200000047683716,
+                "end": 3.8399999141693115
+            },
+            {
+                "word": "A",
+                "start": 4.320000171661377,
+                "end": 4.420000076293945
+            },
+            {
+                "word": "quinta",
+                "start": 4.420000076293945,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "da",
+                "start": 4.619999885559082,
+                "end": 4.820000171661377
+            },
+            {
+                "word": "Vinha",
+                "start": 4.820000171661377,
+                "end": 5
+            },
+            {
+                "word": "Morta",
+                "start": 5,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "fica",
+                "start": 5.380000114440918,
+                "end": 5.599999904632568
+            },
+            {
+                "word": "em",
+                "start": 5.599999904632568,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "Tarouca",
+                "start": 5.760000228881836,
+                "end": 6.179999828338623
+            },
+            {
+                "word": "com",
+                "start": 6.400000095367432,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "mais",
+                "start": 6.539999961853027,
+                "end": 6.739999771118164
+            },
+            {
+                "word": "de",
+                "start": 6.739999771118164,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "um",
+                "start": 6.960000038146973,
+                "end": 7.179999828338623
+            },
+            {
+                "word": "hectare",
+                "start": 7.179999828338623,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "de",
+                "start": 7.380000114440918,
+                "end": 7.960000038146973
+            },
+            {
+                "word": "terreno",
+                "start": 7.960000038146973,
+                "end": 7.960000038146973
+            },
+            {
+                "word": "privacidade",
+                "start": 8.239999771118164,
+                "end": 8.65999984741211
+            },
+            {
+                "word": "total",
+                "start": 8.65999984741211,
+                "end": 9.220000267028809
+            },
+            {
+                "word": "e",
+                "start": 9.220000267028809,
+                "end": 9.479999542236328
+            },
+            {
+                "word": "natureza",
+                "start": 9.479999542236328,
+                "end": 9.899999618530273
+            },
+            {
+                "word": "à",
+                "start": 9.899999618530273,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "volta",
+                "start": 10.380000114440918,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "A",
+                "start": 10.800000190734863,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "casa",
+                "start": 10.899999618530273,
+                "end": 11.079999923706055
+            },
+            {
+                "word": "principal",
+                "start": 11.079999923706055,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "em",
+                "start": 11.84000015258789,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "pedra",
+                "start": 12.0600004196167,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "foi",
+                "start": 12.5600004196167,
+                "end": 12.619999885559082
+            },
+            {
+                "word": "recuperada",
+                "start": 12.619999885559082,
+                "end": 13.15999984741211
+            },
+            {
+                "word": "com",
+                "start": 13.15999984741211,
+                "end": 13.380000114440918
+            },
+            {
+                "word": "cuidado",
+                "start": 13.380000114440918,
+                "end": 13.779999732971191
+            },
+            {
+                "word": "Sete",
+                "start": 14.399999618530273,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "suítes",
+                "start": 14.4399995803833,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "sala",
+                "start": 15.399999618530273,
+                "end": 15.399999618530273
+            },
+            {
+                "word": "ampla",
+                "start": 15.399999618530273,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "para",
+                "start": 15.819999694824219,
+                "end": 16.059999465942383
+            },
+            {
+                "word": "grupos",
+                "start": 16.059999465942383,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "cozinha",
+                "start": 16.8799991607666,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "tradicional",
+                "start": 16.920000076293945,
+                "end": 17.639999389648438
+            },
+            {
+                "word": "lareira",
+                "start": 18.020000457763672,
+                "end": 18.299999237060547
+            },
+            {
+                "word": "e",
+                "start": 18.299999237060547,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "aquecimento",
+                "start": 18.559999465942383,
+                "end": 19.020000457763672
+            },
+            {
+                "word": "central",
+                "start": 19.020000457763672,
+                "end": 19.559999465942383
+            },
+            {
+                "word": "Lá",
+                "start": 20.059999465942383,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "fora",
+                "start": 20.18000030517578,
+                "end": 20.440000534057617
+            },
+            {
+                "word": "piscina",
+                "start": 20.959999084472656,
+                "end": 21.079999923706055
+            },
+            {
+                "word": "campo",
+                "start": 21.479999542236328,
+                "end": 21.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 21.479999542236328,
+                "end": 22.040000915527344
+            },
+            {
+                "word": "ténis",
+                "start": 22.040000915527344,
+                "end": 22.079999923706055
+            },
+            {
+                "word": "jardins",
+                "start": 22.459999084472656,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 22.700000762939453,
+                "end": 23.100000381469727
+            },
+            {
+                "word": "espaço",
+                "start": 23.100000381469727,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "para",
+                "start": 23.299999237060547,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "casamentos",
+                "start": 23.520000457763672,
+                "end": 24.020000457763672
+            },
+            {
+                "word": "retiros",
+                "start": 24.479999542236328,
+                "end": 24.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 24.739999771118164,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "eventos",
+                "start": 25.059999465942383,
+                "end": 25.579999923706055
+            },
+            {
+                "word": "Árvores",
+                "start": 26.059999465942383,
+                "end": 26.15999984741211
+            },
+            {
+                "word": "de",
+                "start": 26.15999984741211,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "fruto",
+                "start": 26.639999389648438,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "e",
+                "start": 26.639999389648438,
+                "end": 26.8799991607666
+            },
+            {
+                "word": "cultura",
+                "start": 26.8799991607666,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "tradicional",
+                "start": 27.139999389648438,
+                "end": 27.81999969482422
+            },
+            {
+                "word": "perfeitas",
+                "start": 28.100000381469727,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "para",
+                "start": 28.559999465942383,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "o",
+                "start": 28.799999237060547,
+                "end": 28.8799991607666
+            },
+            {
+                "word": "enoturismo",
+                "start": 28.8799991607666,
+                "end": 29.3799991607666
+            },
+            {
+                "word": "Boas",
+                "start": 29.3799991607666,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "avaliações",
+                "start": 30.079999923706055,
+                "end": 30.780000686645508
+            },
+            {
+                "word": "e",
+                "start": 30.780000686645508,
+                "end": 31.020000457763672
+            },
+            {
+                "word": "operação",
+                "start": 31.020000457763672,
+                "end": 31.3799991607666
+            },
+            {
+                "word": "gestável",
+                "start": 31.3799991607666,
+                "end": 31.920000076293945
+            },
+            {
+                "word": "pronta",
+                "start": 32.20000076293945,
+                "end": 32.34000015258789
+            },
+            {
+                "word": "a",
+                "start": 32.34000015258789,
+                "end": 32.599998474121094
+            },
+            {
+                "word": "continuar",
+                "start": 32.599998474121094,
+                "end": 32.97999954223633
+            },
+            {
+                "word": "990",
+                "start": 33.79999923706055,
+                "end": 34.47999954223633
+            },
+            {
+                "word": "mil",
+                "start": 34.47999954223633,
+                "end": 34.779998779296875
+            },
+            {
+                "word": "euros",
+                "start": 34.779998779296875,
+                "end": 35.20000076293945
+            },
+            {
+                "word": "Para",
+                "start": 35.70000076293945,
+                "end": 35.7599983215332
+            },
+            {
+                "word": "visitar",
+                "start": 35.7599983215332,
+                "end": 36.34000015258789
+            },
+            {
+                "word": "fale",
+                "start": 36.65999984741211,
+                "end": 36.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 36.65999984741211,
+                "end": 36.79999923706055
+            },
+            {
+                "word": "a",
+                "start": 36.79999923706055,
+                "end": 36.959999084472656
+            },
+            {
+                "word": "Violeta",
+                "start": 36.959999084472656,
+                "end": 37.31999969482422
+            },
+            {
+                "word": "Rocha",
+                "start": 37.31999969482422,
+                "end": 37.70000076293945
+            },
+            {
+                "word": "da",
+                "start": 37.900001525878906,
+                "end": 38.08000183105469
+            },
+            {
+                "word": "Remax",
+                "start": 38.08000183105469,
+                "end": 38.459999084472656
+            },
+            {
+                "word": "Maia",
+                "start": 38.459999084472656,
+                "end": 38.779998779296875
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 39,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.1999999999999993,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Quinta no Vale Encantado",
+                        "params": {
+                            "src": "img_d177b4d1",
+                            "avatar": "img_6c7dd04e",
+                            "logo": "img_c72ba888",
+                            "price": "990.000 €",
+                            "eyebrow": "TURISMO RURAL",
+                            "title": "Quinta de turismo rural",
+                            "location": "Vale Encantado · Tarouca · 7 suítes",
+                            "agentName": "Wioletta Rocha",
+                            "phone": "+351 964 911 726",
+                            "legal": "RE/MAX Maia"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.1999999999999993,
+                "end": 8.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Quinta da Vinha Morta",
+                        "params": {
+                            "src": "img_15a63a48",
+                            "src2": "img_5f02d862",
+                            "src3": "img_58488835",
+                            "src4": "img_fad87ca6",
+                            "src5": "img_3ea2c422"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.2,
+                "end": 10.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_e63568ac",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.8,
+                "end": 14.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_bd107455",
+                            "src2": "img_0957f1d9",
+                            "srcs": [
+                                "img_bd107455",
+                                "img_0957f1d9",
+                                "img_51b0c509",
+                                "img_92c22f47",
+                                "img_69900d36",
+                                "img_7b1f13e8",
+                                "img_b8fcac39"
+                            ],
+                            "angle": 8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.2,
+                "end": 16.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "7 suítes",
+                        "params": {
+                            "src": "img_b602a60d",
+                            "src2": "img_9785b669",
+                            "src3": "img_181e7058",
+                            "src4": "img_2727f0d9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.8,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_383c6f68",
+                            "src2": "img_7840b5d1",
+                            "src3": "img_b34de4cd",
+                            "src4": "img_be751339",
+                            "srcs": [
+                                "img_383c6f68",
+                                "img_7840b5d1",
+                                "img_b34de4cd",
+                                "img_be751339",
+                                "img_b00ca74e",
+                                "img_36883118",
+                                "img_da02c783"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 23,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "No exterior",
+                        "params": {
+                            "src": "img_84747a0e",
+                            "title": "No exterior",
+                            "items": [
+                                "Piscina",
+                                "Campo de ténis",
+                                "Jardins cuidados",
+                                "Áreas de lazer"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23,
+                "end": 26,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_c63c90b2",
+                            "src2": "img_cae3fa81",
+                            "srcs": [
+                                "img_c63c90b2",
+                                "img_cae3fa81",
+                                "img_440d59ce",
+                                "img_2f3907a4"
+                            ],
+                            "angle": 8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_32f339e0",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 33.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Turismo rural em funcionamento",
+                        "params": {
+                            "src": "img_5fbe6975",
+                            "src2": "img_f31cddc9",
+                            "src3": "img_6676ce24",
+                            "src4": "img_c4c1f94e",
+                            "src5": "img_e69d0ef9",
+                            "srcs": [
+                                "img_5fbe6975",
+                                "img_f31cddc9",
+                                "img_6676ce24",
+                                "img_c4c1f94e",
+                                "img_e69d0ef9",
+                                "img_7332174a",
+                                "img_56fb099b",
+                                "img_e4e08992"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.3,
+                "end": 35.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "990.000 €",
+                        "params": {
+                            "src": "img_70b9050e",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.6,
+                "end": 39,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Wioletta Rocha",
+                        "params": {
+                            "src": "img_6c7dd04e",
+                            "logo": "img_c72ba888",
+                            "name": "Wioletta Rocha",
+                            "role": "Consultora imobiliária · RE/MAX Maia",
+                            "buttons": "+351 964 911 726 | Marque a sua visita",
+                            "phone": "+351 964 911 726"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-wjhif/clip.mp4",
+    "error": null
+}

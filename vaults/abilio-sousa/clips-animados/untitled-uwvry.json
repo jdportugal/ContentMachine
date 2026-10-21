@@ -1,0 +1,1029 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta no Douro com projeto aprovado para hotel de 4 estrelas",
+    "source_text": null,
+    "source_path": "clips/uploads/adNEuUB0zDFp84SsUHRe76ilkMgM5piZZdAwe2N5.mp3",
+    "images": [
+        {
+            "id": "img_ec73a073",
+            "path": "clips/uploads/QFc6fvC6QQex40v8vgEpypVkM6k7rvKlwBykHJFc.jpg",
+            "description": "Vista de satélite com limite amarelo da propriedade, floresta rodeada por socalcos de vinha e rio Douro.",
+            "name": "32995f1e-d0cb-4f48-8da0-96832a0ef44c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ea056bd6",
+            "path": "clips/uploads/KPipRPhm5nbYLC1qdY6Mx9kgiFHhwDXxJPhh8Vsk.jpg",
+            "description": "Vista aérea do vale do Douro com rio sinuoso, vinhas em socalcos e casa de telhado laranja.",
+            "name": "ef4fe379-5420-4a62-b84d-dd404543750f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0c3a78e9",
+            "path": "clips/uploads/IRiE8HkTiGFXquJApxxgsbuseQVCjvOHSAetkUjh.jpg",
+            "description": "Vista aérea da casa principal com telhados laranja, anexos brancos e mata densa; aldeia e socalcos ao fundo.",
+            "name": "daf34f5f-2190-48d4-bcbc-d8a9eb0f962b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_191ff329",
+            "path": "clips/uploads/DylBjPZk5f1iDON0UjCN3ioXJStYyXj09Pr9XUCc.jpg",
+            "description": "Vista aérea panorâmica com vinhas em socalcos, aldeia no topo e casa de telhado laranja em primeiro plano.",
+            "name": "c3232e89-d351-4e08-b44f-4899c2759606.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf9bf717",
+            "path": "clips/uploads/N9VJycQI0X9ZKVlM74c9SgSNndqOvJ37Y3d0UYXa.jpg",
+            "description": "Interior de antigo armazém/adega com lagares de pedra, cestos de vime e telhado de madeira à vista.",
+            "name": "9df99f9d-793e-48af-b518-c3600a74b48e.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_331bf44c",
+            "path": "clips/uploads/4NihOMOTNbjQCkEuq5tkWz6f3nMrqufgJVBAfBHp.jpg",
+            "description": "Fachada lateral da casa senhorial branca, muro de pedra, estrada sinuosa e vinhas em socalcos ao fundo.",
+            "name": "ca845f91-570c-47cc-9499-dce8db8f0747.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_80e35d20",
+            "path": "clips/uploads/ycao0qqGSe0haMULFrp9QjMVMeW68jnnXmlqXsqK.jpg",
+            "description": "Vista aérea da casa principal e anexos com telhados laranja, envoltos em floresta na encosta.",
+            "name": "c6ad82d0-e3b8-4869-9bb2-48198beade41.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_d40ec816",
+            "path": "clips/uploads/wr9AvI39RY56mVmWOa6mBD1jtoxg6uBpgrmqMayE.jpg",
+            "description": "Fachada da casa principal com alpendre envidraçado, telhados laranja e aldeia do Douro ao fundo.",
+            "name": "97d68825-9e24-4f9f-bba1-e98519606880.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be0656e1",
+            "path": "clips/uploads/bvgp9ykBc44p9uR73K0FB1H0ece1s5h5NBhlkMwX.jpg",
+            "description": "Edifício anexo comprido de paredes brancas e telhado de telha, com vista para vale e socalcos.",
+            "name": "b2885e3d-38df-4e05-8619-039e3db9c0b2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6cf00050",
+            "path": "clips/uploads/A7UhpDDOXSWpejrwe9u7WG1V4asbQhulzwCW9PuD.jpg",
+            "description": "Fachada da casa senhorial com hera, janelas coloridas, varanda e muro de pedra, encosta arborizada atrás.",
+            "name": "3182b17d-e42c-460c-9a49-8be467326a79.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_aaa30dcb",
+            "path": "clips/uploads/vDt24kBBoT8WlTQar0lw6ntQcoLxoHBLnAoP1Zfg.jpg",
+            "description": "Fachada dos edifícios antigos da quinta, telhados de telha vermelha, encosta de floresta densa por trás.",
+            "name": "355d4fc7-6250-437b-b08b-cf517b374a1c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1a0932cf",
+            "path": "clips/uploads/1FbNesYtAoq8ZRei98IFT3mogyJGvWla9l5zPwaV.jpg",
+            "description": "Vista aérea da quinta rodeada de floresta, com vales e socalcos de vinha do Douro ao fundo.",
+            "name": "7f934eed-b0c1-4775-8ebd-2c935a493687.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_69630a86",
+            "path": "clips/uploads/APF1Rt8YcqHE9CS7KMQyvpZmRetolEWQ1XpD6ugm.jpg",
+            "description": "Render do projeto: pátio empedrado com passadiço de pedra, edifício branco e carro clássico vermelho.",
+            "name": "9264037c-d640-4557-a905-75267bc0e58d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_77b7b4b1",
+            "path": "clips/uploads/fWtKrvMK7jo7Py9DQr9YykXseszk8yDNQFRtiAdJ.jpg",
+            "description": "Render do projeto: piscina panorâmica entre telhados vermelhos, com vista para socalcos de vinha do Douro.",
+            "name": "bcaa313d-587f-49f9-a500-81186bbf1489.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_70eaa5b9",
+            "path": "clips/uploads/lcZFjn6Fq6HaMmxdcR2oBeuW1yyHbQ1bk4tc9dHZ.jpg",
+            "description": "Render aéreo do hotel: dois edifícios brancos simétricos, piscina e esplanada ao centro, vinhas em redor.",
+            "name": "b38bea26-a553-481b-8712-a5ca36f71362.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9565d55a",
+            "path": "clips/uploads/8GhGepP9YBNuRSItKKkqBudO4RowQhdjFgm1ou0X.jpg",
+            "description": "Render da fachada lateral do hotel: edifícios brancos com muros de pedra, encostas de vinha atrás.",
+            "name": "fa30a386-f544-406b-a21f-d9792415f7ef.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5cd6b46b",
+            "path": "clips/uploads/wieWF8eJHVmQGa4BJ5BTcuOCI41WbfmJAEa4Yq3g.jpg",
+            "description": "Render frontal do hotel: fachada branca simétrica com arcos, piscina no terraço e vinhas ao fundo.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_47cf5a83",
+            "path": "clips/uploads/OF5Xiwu5ox291wJQX3kHFqHSup1f51kttrLUTqeI.png",
+            "description": "Retrato do agente Carlos Pinto, de fato escuro e braços cruzados, logótipo Grupo Top RE/MAX 20 anos.",
+            "name": "carlos.png",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_89978d81",
+            "path": "clips/uploads/esy9U4284TBuzmLp0FGt7drJIEM4CtuMRdSXHiab.jpg",
+            "description": "Logótipo RE/MAX Top com balão de ar quente sobre fundo azul.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details:\n1 600 000 €\nVenda\nid. 122211341-111\n894 m²\n\n- -\n\n- -\n\nF\n\nDescrição\nDetalhes\nMapa\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nQuinta do Carvalhal - Oliveira, Mesão Frio\n\n \n\nLocalizada em plena Região Demarcada do Douro, no coração do Douro Vinhateiro, com envolvência e paisagens magníficas, na freguesia de Oliveira, no concelho de Mesão Frio. \n\n \n\nA Quinta do Carvalhal é composta por um prédio rústico com a área de cerca de 21 hectares e quatro prédios urbanos com a área total de implantação de cerca de 950 m2 e área bruta de construçãode cerca de 1.604 m2. \n\n \n\nCom projecto criado pelo prestigiado Arquitecto Carlos Castanheira, projecto esse integralmente aprovado, para o desenvolvimento de uma unidade hoteleira, de 4 Estrelas, direccionada para o agro e enoturismo, com área bruta privativa de cerca de 4.000 m2 e capacidade para 50 unidades de alojamento, sendo 25 dessas unidades autónomas, inseridas dentro da área florestal da propriedade, está contemplada, também, a criação de Restaurante, Bar, Salão Polivalente, Ginásio, Sala de Yoga,\nBalneário, Piscina panorâmica, áreas técnicas e de apoio.  \n\n \n\nNa antiga casa principal, irá ser integrado um Salão de eventos com a Adega, o Restaurante e a Lounge com Bar no andar superior. \n\n \n\nO empreendimento, que prima pelos detalhes das construções das casas senhoriais da Região do Douro, proporcionará experiências em torno do vinho e da exploração agrícola, através de um projecto que procura valorizar a elegância intemporal e a autenticidade da região. \n\n \n\nO concelho de Mesão Frio fica situado na margem direita do rio Douro, conhecido, actualmente, como a “Porta do Douro”, em virtude de ter sido no concelho que foram colocados os primeiros Marcos Pombalinos, aquando da criação da região vinícola mais antiga do mundo, a Região Demarcada do Douro, no ano de 1756, pelo Marquês de Pombal, secretário de Estado do Reino durante o reinado de D. José I. Classificada pela UNESCO, em 14 de Dezembro de 2001, como Património da Humanidade, sendo rasgada por um rio de rara beleza, que foi teimoso, rodeado por montanhas pançudas que lhe dão características mesológicas e climáticas particulares. \n\n \n\nComo afirmou Miguel Torga,\n“O Reino Maravilhoso” \n\n \n\n \n\nÓptima oportunidade de investimento na Região Demarcada do Douro.  \n\nDetalhes\nÁrea Bruta Privativa m²\n894\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n209 473\nÁrea Útil m²\n894\nQuartos\n- -\nAno de Construção\n- -\nPiso\n- -\nWC/Casas de banho\n- -\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta do Carvalhal, Mesão Frio: projeto de hotel de enoturismo no Alto Douro Vinhateiro",
+            "summary": "Mesão Frio fica no Baixo Corgo, dentro da Região Demarcada do Douro, cuja paisagem do Alto Douro Vinhateiro é Património Mundial da UNESCO desde 2001. O turismo no rio Douro voltou a crescer em 2024 e chegou a cerca de 1,38 milhões de passageiros.",
+            "timeline": [
+                {
+                    "label": "Marquês de Pombal cria a Região Demarcada do Douro",
+                    "sublabel": "10 set. 1756"
+                },
+                {
+                    "label": "Alto Douro Vinhateiro é Património Mundial da UNESCO",
+                    "sublabel": "dez. 2001"
+                },
+                {
+                    "label": "Via Navegável do Douro tem cerca de 1,38 milhões de passageiros",
+                    "sublabel": "2024"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área do Alto Douro Vinhateiro classificada pela UNESCO",
+                    "value": 24600,
+                    "unit": "ha"
+                },
+                {
+                    "label": "Área classificada com a zona tampão",
+                    "value": 250000,
+                    "unit": "ha"
+                },
+                {
+                    "label": "Passageiros na Via Navegável do Douro (2024)",
+                    "value": 1377858,
+                    "unit": "passageiros"
+                },
+                {
+                    "label": "Crescimento de passageiros no Douro (2024 face a 2023)",
+                    "value": 10.64,
+                    "unit": "%"
+                },
+                {
+                    "label": "Passageiros em navios-hotel no Douro (2024)",
+                    "value": 120150,
+                    "unit": "passageiros"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Passageiros no rio Douro",
+                    "left": {
+                        "title": "2023",
+                        "points": [
+                            "1.245.314 passageiros"
+                        ]
+                    },
+                    "right": {
+                        "title": "2024",
+                        "points": [
+                            "1.377.858 passageiros",
+                            "+10,64%"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Mesão Frio pertence à Região Demarcada do Douro, na sub-região do Baixo Corgo",
+                "O município apresenta-se como «Porta do Douro»",
+                "A demarcação de 1756 regulou a produção e o comércio do vinho do Douro",
+                "A UNESCO classificou o Alto Douro Vinhateiro como paisagem cultural viva e evolutiva",
+                "A UNESCO reconhece cerca de 2000 anos de produção de vinho na região"
+            ],
+            "sources": [
+                "https://whc.unesco.org/document/164327",
+                "https://whc.unesco.org/en/decisions/2304",
+                "https://www.infopedia.pt/artigos/$vinho-do-porto",
+                "https://observador.pt/?p=915541",
+                "https://www.cm-mesaofrio.pt/cmmesaofrio/uploads/writer_file/document/1929/ano_2024.pdf",
+                "https://repositorio-aberto.up.pt/handle/10216/80302?mode=full",
+                "https://eco.sapo.pt/2025/01/14/turistas-no-rio-douro-aumentaram-quase-11-para-13-milhoes-de-passageiros-em-2024/",
+                "https://rr.pt/noticia/pais/2025/01/14/turistas-no-rio-douro-aumentaram-1065-para-13-milhoes-de-passageiros-em-2024/409536/",
+                "https://macaubusiness.com/portugal-river-douro-tourist-numbers-up-over-10pct-in-2024-port-authority/"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta no Douro com projeto aprovado para hotel de 4 estrelas",
+            "description": "A Quinta do Carvalhal tem 21 hectares e fica em Mesão Frio, à porta do Douro, em plena região vinhateira classificada pela UNESCO. O projeto aprovado, do arquiteto Carlos Castanheira, prevê 50 unidades de alojamento, restaurante, adega, salão de eventos, ginásio e piscina panorâmica. Por 1,6 milhões de euros, é uma oportunidade de investimento em enoturismo. Fale com o Carlos Pinto, da RE/MAX Top.",
+            "tags": [
+                "Douro",
+                "Mesão Frio",
+                "enoturismo",
+                "quinta à venda",
+                "investimento imobiliário",
+                "hotel",
+                "RE/MAX Top",
+                "imobiliário Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-uwvry",
+    "created_at": "2026-10-09T06:33:34+00:00",
+    "updated_at": "2026-10-09T06:37:15+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/adNEuUB0zDFp84SsUHRe76ilkMgM5piZZdAwe2N5.mp3",
+    "transcript": {
+        "duration": 39.150001525878906,
+        "text": "21 hectares no Douro, com projeto aprovado para um hotel de 4 estrelas. A Quinta do Carvalhal fica em Mesão Frio, a porta do Douro, em plena região vinheteira classificada pela Unesco. Tem 4 edifícios com mais de 1600 metros de construção. O projeto, do arquiteto Carlos Castanheira, prevê 50 unidades de alojamento, 25 delas no meio da floresta, restaurante, adega, salão de eventos, ginásio e piscina panorâmica. Um investimento pensado para o enoturismo, numa das paisagens mais bonitas do país. 1 milhão e 600 mil euros. Para saber mais, fale com o Carlos Pinto, da Remaxtop.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "21",
+                "start": 0,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "hectares",
+                "start": 0.5199999809265137,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "no",
+                "start": 0.9800000190734863,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "Douro",
+                "start": 1.3799999952316284,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "com",
+                "start": 1.7599999904632568,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "projeto",
+                "start": 2.0199999809265137,
+                "end": 2.200000047683716
+            },
+            {
+                "word": "aprovado",
+                "start": 2.200000047683716,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "para",
+                "start": 2.680000066757202,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "um",
+                "start": 2.8399999141693115,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "hotel",
+                "start": 3.2799999713897705,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "de",
+                "start": 3.2799999713897705,
+                "end": 3.5399999618530273
+            },
+            {
+                "word": "4",
+                "start": 3.5399999618530273,
+                "end": 3.7799999713897705
+            },
+            {
+                "word": "estrelas",
+                "start": 3.7799999713897705,
+                "end": 4.300000190734863
+            },
+            {
+                "word": "A",
+                "start": 4.440000057220459,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "Quinta",
+                "start": 5.099999904632568,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "do",
+                "start": 5.260000228881836,
+                "end": 5.440000057220459
+            },
+            {
+                "word": "Carvalhal",
+                "start": 5.440000057220459,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "fica",
+                "start": 5.840000152587891,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "em",
+                "start": 6.099999904632568,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "Mesão",
+                "start": 6.239999771118164,
+                "end": 6.5
+            },
+            {
+                "word": "Frio",
+                "start": 6.5,
+                "end": 6.739999771118164
+            },
+            {
+                "word": "a",
+                "start": 6.900000095367432,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "porta",
+                "start": 7.260000228881836,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "do",
+                "start": 7.260000228881836,
+                "end": 7.460000038146973
+            },
+            {
+                "word": "Douro",
+                "start": 7.460000038146973,
+                "end": 7.679999828338623
+            },
+            {
+                "word": "em",
+                "start": 8.15999984741211,
+                "end": 8.319999694824219
+            },
+            {
+                "word": "plena",
+                "start": 8.319999694824219,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "região",
+                "start": 8.579999923706055,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "vinheteira",
+                "start": 8.880000114440918,
+                "end": 9.319999694824219
+            },
+            {
+                "word": "classificada",
+                "start": 9.319999694824219,
+                "end": 9.920000076293945
+            },
+            {
+                "word": "pela",
+                "start": 9.920000076293945,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "Unesco",
+                "start": 10.119999885559082,
+                "end": 10.739999771118164
+            },
+            {
+                "word": "Tem",
+                "start": 11.300000190734863,
+                "end": 11.319999694824219
+            },
+            {
+                "word": "4",
+                "start": 11.319999694824219,
+                "end": 11.680000305175781
+            },
+            {
+                "word": "edifícios",
+                "start": 11.680000305175781,
+                "end": 12.260000228881836
+            },
+            {
+                "word": "com",
+                "start": 12.260000228881836,
+                "end": 12.520000457763672
+            },
+            {
+                "word": "mais",
+                "start": 12.520000457763672,
+                "end": 12.699999809265137
+            },
+            {
+                "word": "de",
+                "start": 12.699999809265137,
+                "end": 13.15999984741211
+            },
+            {
+                "word": "1600",
+                "start": 13.15999984741211,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "metros",
+                "start": 13.520000457763672,
+                "end": 13.84000015258789
+            },
+            {
+                "word": "de",
+                "start": 13.84000015258789,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "construção",
+                "start": 14.220000267028809,
+                "end": 14.579999923706055
+            },
+            {
+                "word": "O",
+                "start": 15.260000228881836,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "projeto",
+                "start": 15.34000015258789,
+                "end": 15.739999771118164
+            },
+            {
+                "word": "do",
+                "start": 15.880000114440918,
+                "end": 16
+            },
+            {
+                "word": "arquiteto",
+                "start": 16,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "Carlos",
+                "start": 16.420000076293945,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "Castanheira",
+                "start": 16.739999771118164,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "prevê",
+                "start": 17.760000228881836,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "50",
+                "start": 17.959999084472656,
+                "end": 18.540000915527344
+            },
+            {
+                "word": "unidades",
+                "start": 18.540000915527344,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 18.920000076293945,
+                "end": 19.420000076293945
+            },
+            {
+                "word": "alojamento",
+                "start": 19.420000076293945,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "25",
+                "start": 20.280000686645508,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "delas",
+                "start": 20.639999389648438,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "no",
+                "start": 21.020000457763672,
+                "end": 21.239999771118164
+            },
+            {
+                "word": "meio",
+                "start": 21.239999771118164,
+                "end": 21.31999969482422
+            },
+            {
+                "word": "da",
+                "start": 21.31999969482422,
+                "end": 21.540000915527344
+            },
+            {
+                "word": "floresta",
+                "start": 21.540000915527344,
+                "end": 21.920000076293945
+            },
+            {
+                "word": "restaurante",
+                "start": 22.719999313354492,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "adega",
+                "start": 23.280000686645508,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "salão",
+                "start": 24.139999389648438,
+                "end": 24.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 24.18000030517578,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "eventos",
+                "start": 24.68000030517578,
+                "end": 24.760000228881836
+            },
+            {
+                "word": "ginásio",
+                "start": 25.280000686645508,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 25.68000030517578,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "piscina",
+                "start": 26.1200008392334,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "panorâmica",
+                "start": 26.459999084472656,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "Um",
+                "start": 27.520000457763672,
+                "end": 27.860000610351562
+            },
+            {
+                "word": "investimento",
+                "start": 27.860000610351562,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "pensado",
+                "start": 28.440000534057617,
+                "end": 28.899999618530273
+            },
+            {
+                "word": "para",
+                "start": 28.899999618530273,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "o",
+                "start": 29.100000381469727,
+                "end": 29.31999969482422
+            },
+            {
+                "word": "enoturismo",
+                "start": 29.31999969482422,
+                "end": 29.81999969482422
+            },
+            {
+                "word": "numa",
+                "start": 30.280000686645508,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "das",
+                "start": 30.440000534057617,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "paisagens",
+                "start": 30.700000762939453,
+                "end": 31.100000381469727
+            },
+            {
+                "word": "mais",
+                "start": 31.100000381469727,
+                "end": 31.540000915527344
+            },
+            {
+                "word": "bonitas",
+                "start": 31.540000915527344,
+                "end": 31.860000610351562
+            },
+            {
+                "word": "do",
+                "start": 31.860000610351562,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "país",
+                "start": 32.060001373291016,
+                "end": 32.41999816894531
+            },
+            {
+                "word": "1",
+                "start": 33.279998779296875,
+                "end": 33.41999816894531
+            },
+            {
+                "word": "milhão",
+                "start": 33.41999816894531,
+                "end": 33.7599983215332
+            },
+            {
+                "word": "e",
+                "start": 33.7599983215332,
+                "end": 34.119998931884766
+            },
+            {
+                "word": "600",
+                "start": 34.119998931884766,
+                "end": 34.58000183105469
+            },
+            {
+                "word": "mil",
+                "start": 34.58000183105469,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "euros",
+                "start": 34.900001525878906,
+                "end": 35.29999923706055
+            },
+            {
+                "word": "Para",
+                "start": 36,
+                "end": 36.099998474121094
+            },
+            {
+                "word": "saber",
+                "start": 36.099998474121094,
+                "end": 36.36000061035156
+            },
+            {
+                "word": "mais",
+                "start": 36.36000061035156,
+                "end": 36.79999923706055
+            },
+            {
+                "word": "fale",
+                "start": 37.13999938964844,
+                "end": 37.220001220703125
+            },
+            {
+                "word": "com",
+                "start": 37.220001220703125,
+                "end": 37.400001525878906
+            },
+            {
+                "word": "o",
+                "start": 37.400001525878906,
+                "end": 37.540000915527344
+            },
+            {
+                "word": "Carlos",
+                "start": 37.540000915527344,
+                "end": 37.720001220703125
+            },
+            {
+                "word": "Pinto",
+                "start": 37.720001220703125,
+                "end": 38.08000183105469
+            },
+            {
+                "word": "da",
+                "start": 38.31999969482422,
+                "end": 38.439998626708984
+            },
+            {
+                "word": "Remaxtop",
+                "start": 38.439998626708984,
+                "end": 39.119998931884766
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 39.150001525878906,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.46,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "21 ha com hotel aprovado",
+                        "params": {
+                            "src": "img_5cd6b46b",
+                            "avatar": "img_47cf5a83",
+                            "logo": "img_89978d81",
+                            "price": "1.600.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Quinta com hotel aprovado",
+                            "location": "Mesão Frio · Douro · 21 ha",
+                            "agentName": "Carlos Pinto",
+                            "phone": "+351 915 710 027",
+                            "legal": "RE/MAX Top · Mediação imobiliária"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.46,
+                "end": 7.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_ec73a073",
+                            "zoom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.9,
+                "end": 11.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Património Mundial",
+                        "params": {
+                            "src": "img_ea056bd6",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.2,
+                "end": 15.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_0c3a78e9",
+                            "src2": "img_80e35d20",
+                            "src3": "img_d40ec816",
+                            "src4": "img_be0656e1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.2,
+                "end": 17.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_9565d55a",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.7,
+                "end": 22.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_70eaa5b9",
+                            "src2": "img_1a0932cf",
+                            "angle": 8,
+                            "entrySeconds": 0.7
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.4,
+                "end": 27.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "O que o projeto prevê",
+                        "params": {
+                            "src": "img_77b7b4b1",
+                            "title": "O que o projeto prevê",
+                            "items": [
+                                "Restaurante e adega",
+                                "Salão de eventos",
+                                "Ginásio",
+                                "Piscina panorâmica"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.4,
+                "end": 32.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Enoturismo no Douro",
+                        "params": {
+                            "src": "img_191ff329",
+                            "src2": "img_bf9bf717",
+                            "src3": "img_331bf44c",
+                            "src4": "img_6cf00050",
+                            "src5": "img_aaa30dcb"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.7,
+                "end": 35.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "1.600.000 €",
+                        "params": {
+                            "src": "img_69630a86",
+                            "src2": "img_5cd6b46b",
+                            "src3": "img_77b7b4b1",
+                            "src4": "img_70eaa5b9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.8,
+                "end": 39.15,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Fale com o Carlos Pinto",
+                        "params": {
+                            "src": "img_47cf5a83",
+                            "logo": "img_89978d81",
+                            "name": "Carlos Pinto",
+                            "role": "Consultor imobiliário · RE/MAX Top",
+                            "buttons": "+351 915 710 027 | Marque a sua visita",
+                            "phone": "+351 915 710 027"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-uwvry/clip.mp4",
+    "error": null
+}

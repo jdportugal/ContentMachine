@@ -1,0 +1,901 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T2 nova em Mangualde por 215 mil euros",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-mangualde-130m2/r1032651",
+            "agent": "Belmiro Gomes",
+            "phone": "+351928056197",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia T2 nova em Mangualde, quase concluída.",
+            "voiceover": "Uma moradia T2 nova em Mangualde, quase concluída. Fica numa zona tranquila de Mangualde, com boas vistas. É independente, com dois pisos e cerca de cento e trinta metros quadrados. Tem dois quartos, três casas de banho e roupeiros embutidos. A cozinha é equipada e a casa tem ar condicionado. Está em fase final de obra e é entregue conforme o projeto. Para viver, ou para investir. Duzentos e quinze mil euros. Para visitar, fale com o Belmiro Gomes, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia, plano geral",
+                    "vo": "Uma moradia T2 nova em Mangualde, quase concluída.",
+                    "caption": "Mangualde"
+                },
+                {
+                    "photo": "vista a partir da casa ou da envolvente",
+                    "vo": "Fica numa zona tranquila de Mangualde, com boas vistas.",
+                    "caption": "Zona tranquila"
+                },
+                {
+                    "photo": "exterior lateral, com os dois pisos visíveis",
+                    "vo": "É independente, com dois pisos e cerca de cento e trinta metros quadrados.",
+                    "caption": "Moradia independente"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "(continuação da frase anterior)",
+                    "caption": "Dois pisos"
+                },
+                {
+                    "photo": "quarto com roupeiro embutido",
+                    "vo": "Tem dois quartos, três casas de banho e roupeiros embutidos.",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "(continuação da frase anterior)",
+                    "caption": "Três casas de banho"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "A cozinha é equipada e a casa tem ar condicionado.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "fachada ou obra na fase atual",
+                    "vo": "Está em fase final de obra e é entregue conforme o projeto.",
+                    "caption": "Em fase final de obra"
+                },
+                {
+                    "photo": "vista ou fachada ao fim do dia",
+                    "vo": "Para viver, ou para investir.",
+                    "caption": "Para viver ou investir"
+                },
+                {
+                    "photo": "cartão final",
+                    "vo": "Duzentos e quinze mil euros. Para visitar, fale com o Belmiro Gomes, da IAD Portugal.",
+                    "caption": "215.000 € · Belmiro Gomes · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "A casa ainda está em obra, e o anúncio diz que será 'entregue conforme apresentado nas fotografias, com o resultado final a corresponder ao projeto previsto'. As fotos podem ser renders ou imagens do resultado final. Confirmar: qualquer imagem 3D/render tem de levar a legenda 'Imagem 3D do projeto'.",
+                "A área não bate certo entre si: 130 m² no título, 129 m² no texto e 129,6 m² de área bruta. Usei 'cerca de cento e trinta metros quadrados'.",
+                "O certificado energético é F, o que é estranho para uma construção nova quase concluída. Confirmar com o consultor. Deixei fora do vídeo.",
+                "O anúncio fala em 'excelentes vistas' e 'ótima localização' sem dizer o quê nem onde. Mantive só 'zona tranquila' e 'boas vistas', sem acrescentar nenhum ponto de referência."
+            ],
+            "message": "Boa tarde Sr. Belmiro,\nO meu nome é João Ferreira.\n\nVi a moradia T2 em Mangualde que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Casa/Moradia de 130 m² em Mangualde",
+            "price": 215000,
+            "details": {
+                "Preço": "215 000 €",
+                "Localização": "Mangualde, 3530-100",
+                "Referência": "1032651",
+                "Área Bruta m²": "129.6",
+                "Certificado Energético": "F"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Belmiro Gomes - and phone number - +351928056197. Agency: IAD Portugal.\nThe agent's photo is Belmiro Gomes.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma moradia T2 nova em Mangualde, quase concluída.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia, plano geral → «Mangualde»\n- vista a partir da casa ou da envolvente → «Zona tranquila»\n- exterior lateral, com os dois pisos visíveis → «Moradia independente»\n- sala → «Dois pisos»\n- quarto com roupeiro embutido → «Dois quartos»\n- casa de banho → «Três casas de banho»\n- cozinha equipada → «Cozinha equipada»\n- fachada ou obra na fase atual → «Em fase final de obra»\n- vista ou fachada ao fim do dia → «Para viver ou investir»\n- cartão final → «215.000 € · Belmiro Gomes · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia de 130 m² em Mangualde\nPreço\n215 000 €\nLocalização\nMangualde, 3530-100\nReferência\n1032651\nÁrea Bruta m²\n129.6\nCertificado Energético\nF\n\nDescrição\nA sua próxima casa pode estar aqui!\n\nApresentamos esta fantástica moradia independente de 2 andares, com 129 m², localizada numa zona tranquila e privilegiada, com ótimas vistas.\n\nCom uma excelente distribuição e características que proporcionam conforto e qualidade de vida, esta moradia é uma excelente opção tanto para habitação própria como para investimento.\n\n🔑 Principais características:\n\n🏡 Moradia independente\n\n🏠 2 andares\n\n📐 129 m²\n\n🛏️ T2\n\n🚿 3 casas de banho\n\n👗 Roupeiros embutidos\n\n❄️ Ar condicionado\n\n🍽️ Cozinha equipada\n\n🌄 Excelentes vistas\n\n📍 Ótima localização e envolvente\n\n✨ Casa em fase final de conclusão, sendo entregue conforme apresentado nas fotografias, com o resultado final a corresponder ao projeto previsto.\n\nSe procura uma moradia moderna, independente, confortável e com excelentes vistas, seja para viver ou para investir, esta é uma oportunidade que merece a sua atenção!\n\n📞 Entre em contacto para mais informações ou para agendar uma visita.\n\n🔑 Não perca a oportunidade de conhecer esta moradia e acompanhar a transformação até ao resultado final!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia T2 nova em Mangualde e o mercado da habitação em Portugal",
+            "summary": "Moradia T2 independente de cerca de 130 m² em Mangualde, à venda por 215 mil euros, o que dá cerca de 1654 €/m². A mediana nacional do INE foi de 2337 €/m² no 1.º trimestre de 2026.",
+            "timeline": [
+                {
+                    "label": "Mediana nacional: 2076 €/m² (+16,8%)",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Mediana nacional: 2337 €/m² (+19,8%)",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço/m² deste imóvel (215 000 € ÷ 130 m²)",
+                    "value": 1654,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Mediana nacional da habitação (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga nacional (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Mediana nacional da habitação (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida nacional face a 2024 (2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Esta moradia vs. mediana nacional",
+                    "left": {
+                        "title": "Moradia T2 Mangualde",
+                        "points": [
+                            "≈1654 €/m²",
+                            "130 m², 2 pisos",
+                            "Obra nova, fase final"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal (INE, 1.º trim. 2026)",
+                        "points": [
+                            "2337 €/m²",
+                            "+19,8% num ano",
+                            "Mediana das casas vendidas"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em Portugal, o preço mediano das casas subiu 19,8% num ano (1.º trim. 2026)",
+                "Esta moradia custa cerca de 1654 €/m², menos do que a mediana nacional de 2337 €/m²",
+                "Em 2025, a mediana nacional subiu 16,8%, para 2076 €/m²"
+            ],
+            "sources": [
+                "https://cdn-images.rtp.pt/icm/noticias/docs/66/66271ea88bd95fa8a18c8997b0a2d4ec_1feb20f6a7da18976f65e84c4b8d9c63.pdf",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.financialoptions.pt/blog/mapa-precos-habitacao-municipios-ine-2026/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T2 nova em Mangualde por 215 mil euros",
+            "description": "Moradia T2 independente e nova, quase concluída, numa zona tranquila de Mangualde e com boas vistas. Tem dois pisos, cerca de 130 m², dois quartos, três casas de banho, roupeiros embutidos, cozinha equipada e ar-condicionado. Para visitar, contacte Belmiro Gomes, da IAD Portugal.",
+            "tags": [
+                "moradia T2",
+                "Mangualde",
+                "imobiliário",
+                "casa nova",
+                "moradia à venda",
+                "investimento imobiliário",
+                "IAD Portugal",
+                "Viseu"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1032651-opcog",
+    "created_at": "2026-10-15T19:16:51+00:00",
+    "updated_at": "2026-10-15T19:23:08+00:00",
+    "source_path": "clips/uploads/zrJ1LJnUBssNYvVgBwtH93Lk0oYbvMQD5e5AKueO.mp3",
+    "images": [
+        {
+            "id": "img_9c5c27df",
+            "path": "clips/uploads/qQb20vHbs3UbsaXmpbuAExRdyn99JaQVs5QhRYQq.jpg",
+            "description": "Cozinha e sala de jantar (render): móveis brancos, forno e micro-ondas embutidos, frigorífico inox, mesa de madeira.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c88c7a2c",
+            "path": "clips/uploads/ZH2rATDk5tFzBojWKZ2DeJdWCvafibp8OqmOT7wT.jpg",
+            "description": "Sala em obra: tetos de pladur por acabar, carrinho de mão, gerador e materiais de construção no chão.",
+            "name": "01a0e2b7df3e656b6207ee47e0fed4e1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_943ccad5",
+            "path": "clips/uploads/XKunL2SN2Lf9OgBM7qgTGi63KQ0pWXi9DcGDblgR.jpg",
+            "description": "Sala de estar (render): sofá bege em L, TV na parede, luz LED no teto, duas portas envidraçadas.",
+            "name": "01a0e2b9f5a3153da85182a17740a4d7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c7ee0912",
+            "path": "clips/uploads/FTFwR4JVUKBfp5FUgdjLsQIH0EM1DyeuWABJCdNk.jpg",
+            "description": "Sala em obra: paredes de pladur, aberturas de janelas tapadas com OSB, caixas e andaime.",
+            "name": "01a0e2ba09e773df8d521da5482c67e7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1fa01503",
+            "path": "clips/uploads/zel2bIbey7wpFUdxJUxpIOqu7Jggzo1u2bcmIMgX.jpg",
+            "description": "Casa de banho (render): sanita, móvel lavatório branco, espelho iluminado, janela com vista para colinas.",
+            "name": "01a0e2bc356d54c4c84c9551a7131c24.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2924444c",
+            "path": "clips/uploads/eUcZ4msIpvin7e9Bxs9zYpZJ84y4oD9c5IpH6Yf3.jpg",
+            "description": "Casa de banho em obra: pladur verde hidrófugo, janela com vista para casas e colinas.",
+            "name": "01a0e2bc5ab37d45a8c4eff78c5e63f6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_696602c5",
+            "path": "clips/uploads/XYjjNFqoDWKJek62nYMn5ca73wMRf2NjA0eIRXKc.jpg",
+            "description": "Casa de banho (render): duche com resguardo de vidro, torneiras pretas, azulejo claro vertical, luz embutida.",
+            "name": "01a0e2be31b01a13320f1684c7078fbb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_44c789fc",
+            "path": "clips/uploads/atN8eiGrgsab1TUqF7bPwNdOVwiX8DX3HbLlwZJU.jpg",
+            "description": "Casa de banho em obra: paredes de pladur verde, chão em OSB, canalização à vista, porta de correr.",
+            "name": "01a0e2be4dc1d95ffd0c79fa463a28c0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6780ff83",
+            "path": "clips/uploads/7ctYfMWKdBHSPaZafqHKPO52DzaVmNvyqUBFnX4f.jpg",
+            "description": "Quarto ou sala acabada: paredes brancas, chão de madeira clara, TV na parede, corredor ao fundo.",
+            "name": "01a0e2c04c6f1d35abb14813aa19a73e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_36fd6c5b",
+            "path": "clips/uploads/G6Za1MEcxUxiQGPaRrlzXpUnfiNBoiQbtDWjxhQQ.jpg",
+            "description": "Interior em obra: pladur por pintar, chão em OSB, corredor para outras divisões, focos no teto.",
+            "name": "01a0e2c118691f337af8ce734d884481.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c74674d0",
+            "path": "clips/uploads/9yj3jNbTCdZPWrI2gTOejCbY7mBkLNZS3so5k3Bi.png",
+            "description": "Retrato do consultor Belmiro Gomes, da IAD Portugal.",
+            "name": "Belmiro Gomes.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5deb141b",
+            "path": "clips/uploads/XcPUmuInwo2WjG2bbzIGknDgiTZZf0BxnnrTJAQG.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/zrJ1LJnUBssNYvVgBwtH93Lk0oYbvMQD5e5AKueO.mp3",
+    "transcript": {
+        "duration": 32,
+        "text": "Uma moradia T2 nova em Mangualde, quase concluída. Fica numa zona tranquila de Mangualde, com boas vistas. É independente, com dois pisos e cerca de 130 metros quadrados. Tem dois quartos, três casas de banho e roupeiros embutidos. A cozinha é equipada e a casa tem ar-condicionado. Está em fase final de obra e é entregue conforme o projeto. Para viver ou para investir? 215 mil euros. Para visitar, fale com o Belmiro Gomes, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.20000000298023224
+            },
+            {
+                "word": "moradia",
+                "start": 0.20000000298023224,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "T2",
+                "start": 0.6000000238418579,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "nova",
+                "start": 1.2000000476837158,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "em",
+                "start": 1.6799999475479126,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "Mangualde",
+                "start": 1.9600000381469727,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "quase",
+                "start": 2.859999895095825,
+                "end": 3.140000104904175
+            },
+            {
+                "word": "concluída",
+                "start": 3.140000104904175,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "Fica",
+                "start": 4.420000076293945,
+                "end": 4.519999980926514
+            },
+            {
+                "word": "numa",
+                "start": 4.519999980926514,
+                "end": 4.739999771118164
+            },
+            {
+                "word": "zona",
+                "start": 4.739999771118164,
+                "end": 5
+            },
+            {
+                "word": "tranquila",
+                "start": 5,
+                "end": 5.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 5.579999923706055,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "Mangualde",
+                "start": 5.760000228881836,
+                "end": 6.320000171661377
+            },
+            {
+                "word": "com",
+                "start": 6.480000019073486,
+                "end": 6.699999809265137
+            },
+            {
+                "word": "boas",
+                "start": 6.699999809265137,
+                "end": 6.980000019073486
+            },
+            {
+                "word": "vistas",
+                "start": 6.980000019073486,
+                "end": 7.440000057220459
+            },
+            {
+                "word": "É",
+                "start": 8,
+                "end": 8.100000381469727
+            },
+            {
+                "word": "independente",
+                "start": 8.100000381469727,
+                "end": 8.760000228881836
+            },
+            {
+                "word": "com",
+                "start": 8.880000114440918,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "dois",
+                "start": 9.079999923706055,
+                "end": 9.399999618530273
+            },
+            {
+                "word": "pisos",
+                "start": 9.399999618530273,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "e",
+                "start": 9.779999732971191,
+                "end": 10.020000457763672
+            },
+            {
+                "word": "cerca",
+                "start": 10.020000457763672,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "de",
+                "start": 10.260000228881836,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "130",
+                "start": 10.5600004196167,
+                "end": 11.119999885559082
+            },
+            {
+                "word": "metros",
+                "start": 11.119999885559082,
+                "end": 11.520000457763672
+            },
+            {
+                "word": "quadrados",
+                "start": 11.520000457763672,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "Tem",
+                "start": 12.739999771118164,
+                "end": 12.739999771118164
+            },
+            {
+                "word": "dois",
+                "start": 12.739999771118164,
+                "end": 13.079999923706055
+            },
+            {
+                "word": "quartos",
+                "start": 13.079999923706055,
+                "end": 13.479999542236328
+            },
+            {
+                "word": "três",
+                "start": 13.84000015258789,
+                "end": 14
+            },
+            {
+                "word": "casas",
+                "start": 14,
+                "end": 14.279999732971191
+            },
+            {
+                "word": "de",
+                "start": 14.279999732971191,
+                "end": 14.699999809265137
+            },
+            {
+                "word": "banho",
+                "start": 14.699999809265137,
+                "end": 14.720000267028809
+            },
+            {
+                "word": "e",
+                "start": 14.720000267028809,
+                "end": 15
+            },
+            {
+                "word": "roupeiros",
+                "start": 15,
+                "end": 15.420000076293945
+            },
+            {
+                "word": "embutidos",
+                "start": 15.420000076293945,
+                "end": 16.059999465942383
+            },
+            {
+                "word": "A",
+                "start": 16.559999465942383,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "cozinha",
+                "start": 16.739999771118164,
+                "end": 17.040000915527344
+            },
+            {
+                "word": "é",
+                "start": 17.040000915527344,
+                "end": 17.3799991607666
+            },
+            {
+                "word": "equipada",
+                "start": 17.3799991607666,
+                "end": 17.899999618530273
+            },
+            {
+                "word": "e",
+                "start": 17.899999618530273,
+                "end": 18.15999984741211
+            },
+            {
+                "word": "a",
+                "start": 18.15999984741211,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "casa",
+                "start": 18.559999465942383,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "tem",
+                "start": 18.559999465942383,
+                "end": 18.81999969482422
+            },
+            {
+                "word": "ar",
+                "start": 18.81999969482422,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "condicionado",
+                "start": 18.979999542236328,
+                "end": 19.68000030517578
+            },
+            {
+                "word": "Está",
+                "start": 20.299999237060547,
+                "end": 20.34000015258789
+            },
+            {
+                "word": "em",
+                "start": 20.34000015258789,
+                "end": 20.559999465942383
+            },
+            {
+                "word": "fase",
+                "start": 20.559999465942383,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "final",
+                "start": 20.739999771118164,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "de",
+                "start": 21.020000457763672,
+                "end": 21.5
+            },
+            {
+                "word": "obra",
+                "start": 21.5,
+                "end": 21.5
+            },
+            {
+                "word": "e",
+                "start": 21.5,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "é",
+                "start": 21.780000686645508,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "entregue",
+                "start": 21.959999084472656,
+                "end": 22.34000015258789
+            },
+            {
+                "word": "conforme",
+                "start": 22.34000015258789,
+                "end": 22.84000015258789
+            },
+            {
+                "word": "o",
+                "start": 22.84000015258789,
+                "end": 23.420000076293945
+            },
+            {
+                "word": "projeto",
+                "start": 23.420000076293945,
+                "end": 23.420000076293945
+            },
+            {
+                "word": "Para",
+                "start": 23.899999618530273,
+                "end": 24.059999465942383
+            },
+            {
+                "word": "viver",
+                "start": 24.059999465942383,
+                "end": 24.420000076293945
+            },
+            {
+                "word": "ou",
+                "start": 24.420000076293945,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "para",
+                "start": 24.860000610351562,
+                "end": 25.440000534057617
+            },
+            {
+                "word": "investir",
+                "start": 25.440000534057617,
+                "end": 25.440000534057617
+            },
+            {
+                "word": "215",
+                "start": 26.200000762939453,
+                "end": 26.8799991607666
+            },
+            {
+                "word": "mil",
+                "start": 26.8799991607666,
+                "end": 27.100000381469727
+            },
+            {
+                "word": "euros",
+                "start": 27.100000381469727,
+                "end": 27.440000534057617
+            },
+            {
+                "word": "Para",
+                "start": 27.440000534057617,
+                "end": 28.139999389648438
+            },
+            {
+                "word": "visitar",
+                "start": 28.139999389648438,
+                "end": 28.719999313354492
+            },
+            {
+                "word": "fale",
+                "start": 29.299999237060547,
+                "end": 29.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 29.299999237060547,
+                "end": 29.459999084472656
+            },
+            {
+                "word": "o",
+                "start": 29.459999084472656,
+                "end": 29.600000381469727
+            },
+            {
+                "word": "Belmiro",
+                "start": 29.600000381469727,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "Gomes",
+                "start": 29.979999542236328,
+                "end": 30.3799991607666
+            },
+            {
+                "word": "da",
+                "start": 30.520000457763672,
+                "end": 30.760000228881836
+            },
+            {
+                "word": "IAD",
+                "start": 30.760000228881836,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "de",
+                "start": 31.200000762939453,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "Portugal",
+                "start": 31.420000076293945,
+                "end": 31.799999237060547
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 32,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.6999999999999993,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "MORADIA T2 NOVA",
+                        "params": {
+                            "src": "img_943ccad5",
+                            "avatar": "img_c74674d0",
+                            "logo": "img_5deb141b",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "215.000 €",
+                            "location": "MANGUALDE · 3530-100",
+                            "title": "MORADIA T2 NOVA",
+                            "facts": "130 m² · 2 quartos · 3 WC · 2 pisos",
+                            "cta": "Ligue já +351 928 056 197",
+                            "name": "Belmiro Gomes",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.6999999999999993,
+                "end": 7.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "ZONA TRANQUILA",
+                        "params": {
+                            "src": "img_1fa01503",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.8,
+                "end": 12.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_6780ff83",
+                            "title": "MORADIA INDEPENDENTE",
+                            "items": [
+                                "Dois pisos",
+                                "Cerca de 130 m²",
+                                "Excelentes vistas"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.4,
+                "end": 16.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "DOIS QUARTOS · TRÊS WC",
+                        "params": {
+                            "src": "img_696602c5",
+                            "src2": "img_1fa01503",
+                            "src3": "img_2924444c",
+                            "src4": "img_44c789fc",
+                            "src5": "img_36fd6c5b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.3,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_9c5c27df",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 26,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "EM FASE FINAL DE OBRA",
+                        "params": {
+                            "src": "img_c88c7a2c",
+                            "src2": "img_c7ee0912",
+                            "src3": "img_36fd6c5b",
+                            "src4": "img_44c789fc"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26,
+                "end": 28.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "215.000 €",
+                        "params": {
+                            "src": "img_9c5c27df",
+                            "src2": "img_6780ff83"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.9,
+                "end": 32,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Belmiro Gomes",
+                        "params": {
+                            "src": "img_c74674d0",
+                            "name": "Belmiro Gomes",
+                            "phone": "+351 928 056 197"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1032651-opcog/clip.mp4",
+    "error": null
+}

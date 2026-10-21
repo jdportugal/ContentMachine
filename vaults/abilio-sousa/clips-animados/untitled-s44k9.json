@@ -1,0 +1,996 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2+1 a passos do Mosteiro de Alcobaça | 423.500 €",
+    "source_text": null,
+    "source_path": "clips/uploads/hAkrsNvSDcRq5CCo57aJfuOFkNY1koj2qbZQe63j.mp3",
+    "images": [
+        {
+            "id": "img_467886e8",
+            "path": "clips/uploads/Mf2rDMJJjaAYxSYgXLetYYstjJRhGfG6QnZweGTj.jpg",
+            "description": "Fachada do prédio com azulejos verdes e janelas cor-de-rosa, rua com carros estacionados no centro da cidade.",
+            "name": "044471f2-c26b-4495-b5a9-a41ee178b3cd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fab6dd06",
+            "path": "clips/uploads/W1JALGZrbTODTBceRMSTYy56oKd3JR8J8x9A5K2C.jpg",
+            "description": "Porta de vidro que dá para um terraço com chão xadrez preto e branco, roupeiros brancos ao lado.",
+            "name": "4b6cc984-9a61-434e-97c4-28b0728cab07.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e07d68e0",
+            "path": "clips/uploads/DySrgwk9oNNfwwExBN5rCI30Sefw0n8eHLYMN7At.jpg",
+            "description": "Quarto ou escritório vazio, soalho em espinha, janela alta com luz LED embutida; caixas e sacos no chão.",
+            "name": "95adea44-2633-4bd1-bd14-00775d9363a4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_03524dab",
+            "path": "clips/uploads/icGe5uUcgKXjzKR9toFDSgMdIOMnxAJCBthciUxd.jpg",
+            "description": "Corredor com soalho em espinha, parede texturizada, molduras clássicas e porta decorada ao fundo.",
+            "name": "7fba3050-e338-4533-b221-44d7a61a6091.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9741f4eb",
+            "path": "clips/uploads/JVl6YMsxONxcPJSwdzyeelysqwWsmLHk1Mby1r4k.jpg",
+            "description": "Pequeno quarto ou escritório luminoso, janela com vista para árvores, prateleira iluminada e grelha de ar condicionado.",
+            "name": "3575fbf9-1d83-415f-92f7-98c4aaf22578.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_70b9de34",
+            "path": "clips/uploads/vpqUsJFkFZveJw6kA7UllZtqzgu73nkntwujE4KN.jpg",
+            "description": "Quarto (suíte) vazio com soalho em espinha, acesso a casa de banho com duche em mármore escuro.",
+            "name": "f4b907e5-0afb-4647-80e7-43e04d975701.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_885b4e17",
+            "path": "clips/uploads/RmpLaxsXh0GsbhOyDTaCvoINW7kPE4DYOy1iGiMA.jpg",
+            "description": "Duche de suíte em mármore escuro com iluminação LED, portas brancas clássicas e corredor ao fundo.",
+            "name": "7b254465-102e-45c5-9d51-97823d3f21b2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_37dfd0ab",
+            "path": "clips/uploads/wUMLJ0lnSTwwLPDLrw4L5hL48Rex5z2R4QKNVtQb.jpg",
+            "description": "Casa de banho da suíte: duche de vidro, lavatório preto, espelho redondo, abrindo para quarto luminoso.",
+            "name": "a1aa95d5-cf47-43fc-937d-8e223663fce0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c94418c7",
+            "path": "clips/uploads/g4uZqZ6nAnkLIX1zZ0UZuboeItX9w9QUkgOhVWq2.jpg",
+            "description": "Corredor com casa de banho de apoio à esquerda, porta branca aberta para quarto com soalho em espinha.",
+            "name": "49d0011d-f137-44aa-8fb0-aa3d8c8d8187.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f06edb57",
+            "path": "clips/uploads/GxHnFNLmO4mbn8zsL4h8G3xrG3rLJMQwbNdob72q.jpg",
+            "description": "Casa de banho de apoio com mármore branco, lavatório de pousar, espelho com moldura dourada, toalha às riscas.",
+            "name": "45b5056d-c239-483f-acd0-5e5c4408a328.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e7b4a73f",
+            "path": "clips/uploads/K8lFgdTutYLvioO89Wt8sqazn9pksGZhC8WJQlUE.jpg",
+            "description": "Quarto vazio ou escritório com pavimento de madeira em espinha, janela alta com luz LED embutida e varanda.",
+            "name": "42f957b9-8629-41a6-a5c7-dd91375cb9ec.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c40da8b6",
+            "path": "clips/uploads/Z5MhcOdkc7KXnVzvcfEi5HgP6egtMwU9IZFtRGF0.jpg",
+            "description": "Cozinha branca equipada com placa, forno, lava-loiça cerâmico, janela com planta e chão preto e branco em ziguezague.",
+            "name": "c3cd3e0d-7941-44a8-a5ff-434333218503.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1d6521cc",
+            "path": "clips/uploads/BSLhqWL5Bt9IckVHL3lSrQLfgszefwHxkaDMRCe1.jpg",
+            "description": "Cozinha moderna com armários brancos e forno, aberta para a sala de jantar iluminada com apliques de parede.",
+            "name": "d8d3b0c0-8ffc-4850-a555-037758a0ff9c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7126194b",
+            "path": "clips/uploads/1slvKPSLDGhseP9Xg0uICYchtfGZwKcPArJdOXaO.jpg",
+            "description": "Hall de entrada e corredor com pavimento em espinha, papel de parede verde floral e aparador em madeira.",
+            "name": "9f245740-61bd-4583-aafd-5eef720ee685.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d385bed7",
+            "path": "clips/uploads/Aqa0UCVGb7elCjqQKjodbuRM1ctiNCzogdB6YQsi.jpg",
+            "description": "Sala de jantar com mesa preta, orquídeas brancas, painéis texturizados com apliques e luz LED no teto rebaixado.",
+            "name": "a432cc95-12da-48e4-958f-a44aebc27a34.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_08cfc009",
+            "path": "clips/uploads/Qbm8WInJxizNwPJV2FSfFaMTuN1XHiBEEgZ0F269.jpg",
+            "description": "Sala de jantar com papel de parede verde floral, mesa preta e vista para a cozinha ao fundo.",
+            "name": "930137c7-0a56-4d93-8bda-3891c8067c0f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc95f45c",
+            "path": "clips/uploads/eHGoIiE2WaNoCcOW5UtoR0J7rgj1C7eCQXID1way.jpg",
+            "description": "Sala de estar com sofá cinza, mesa de mármore, aparador em madeira e vista para a sala de jantar.",
+            "name": "8d68a985-0bc4-4875-b0a7-def35b0a7c2e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_54fe4a14",
+            "path": "clips/uploads/6FpWRNvBDwBRmftRpcoBNXM0S2PYcQvTizdm8pZs.jpg",
+            "description": "Sala de estar luminosa com duas portas-janela e varandas, sofá cinza, espelho redondo e papel de parede verde.",
+            "name": "d5d59228-28e2-4bf6-bd1c-748e9a226c44.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cfb10f70",
+            "path": "clips/uploads/TuQX5pXpWux0g0jEOcvIoXQfTCrd3MQg2ZwCOW5H.jpg",
+            "description": "Fachada frontal do prédio com azulejos verdes tradicionais, janelas cor-de-rosa, varanda em ferro e carros estacionados.",
+            "name": "b85543b5-0e3e-4edd-8ae9-e12eb88f21bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_44d1be0f",
+            "path": "clips/uploads/kCGITABW9hCzDZoAXe83sE9Y504HN3B1gawLcPhX.jpg",
+            "description": "Fachada em perspetiva lateral do prédio azulejado na rua do centro de Alcobaça, com céu azul.",
+            "name": "e39aba43-e5d4-47cd-b698-c9a3233cf9cf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_31333984",
+            "path": "clips/uploads/vBcNd02IR55jENA9yAzwFOJOEGo7bsLbnmd0mCCF.jpg",
+            "description": "Sala de estar luminosa com sofá cinzento, aparador em madeira, espelho redondo e janelas altas com varanda.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5bbb5d33",
+            "path": "clips/uploads/yagtNiYGgK73WooEAN5Q9xAMCuRqTfCGFoQUu2io.jpg",
+            "description": "Logótipo RE/MAX Grupo Inn com o balão vermelho, branco e azul, em fundo branco.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3452ea08",
+            "path": "clips/uploads/h3AIVFBdXtQ8sanfrmcj6jaPOxD0NtiYYRh6UiiH.jpg",
+            "description": "Retrato do agente, provavelmente Pedro Monteiro, de blazer azul, com o logótipo RE/MAX Grupo Inn por cima.",
+            "name": "pedro.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details:\n423 500 €\nVenda\nid. 123532009-112\n111 m²\n\n2 Quartos\n\n3 WC\n\nD\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nE se pudesse viver no coração de Alcobaça, a poucos passos de um dos monumentos mais emblemáticos de Portugal?\n\nImagine sair de casa e, em poucos passos, estar junto ao Mosteiro de Alcobaça. \n\nTer comércio, serviços, restauração e tudo o que precisa no seu dia a dia praticamente à porta. \n\nE depois regressar a casa e encontrar um apartamento onde qualidade, conforto e funcionalidade foram pensados ao detalhe. \n\nÉ isso que este fantástico T2+1 em Alcobaça tem para lhe oferecer. \n\nUma localização que não precisa de apresentações. \n\nEstar a poucos passos do Mosteiro de Alcobaça não é apenas uma questão de localização. \n\nÉ poder viver no centro de tudo, com a história, a cultura, o comércio e a vida da cidade à sua volta, sem depender constantemente do carro para as pequenas coisas do dia a dia. \n\nMas a verdadeira surpresa está dentro de casa. \n\nUm apartamento pensado para quem não quer abdicar de qualidade. \n\nCom boas áreas e uma distribuição muito equilibrada, este T2+1 foi concebido para proporcionar conforto tanto no dia a dia como nos momentos em que recebe família e amigos. \n\nA luz natural invade os espaços e cria uma atmosfera leve e acolhedora. \n\nOs tetos rebaixados acrescentam um toque moderno e elegante ao apartamento, enquanto a caixilharia de topo de gama reforça a qualidade construtiva e o conforto. \n\nE aqui está um daqueles detalhes que fazem diferença: \n\nO apartamento é vendido completamente equipado. \n\nNão precisa de começar do zero. \n\nÉ entrar, instalar-se e começar a desfrutar. \n\nE o conforto?\nEstá pensado para todas as estações. \n\nO apartamento dispõe de ar condicionado e bomba de calor, proporcionando maior conforto térmico e eficiência ao longo do ano. \n\nNa zona privada encontra dois quartos em suíte, ambos com roupeiros embutidos, garantindo privacidade, arrumação e conforto. \n\nExiste ainda um WC de apoio, pensado para maior funcionalidade no quotidiano e para quando recebe visitas. \n\nE aquele “+1”? \n\nUm espaço extra que pode adaptar às suas necessidades: escritório, quarto de apoio, espaço de trabalho, sala de estudo ou aquilo que fizer mais sentido para a sua vida. \n\nAgora imagine viver aqui. \n\nSair de casa e estar no centro de Alcobaça. \n\nTer tudo por perto. \n\nVoltar para um apartamento moderno, luminoso e confortável. \n\nTer duas suítes. \n\nTer espaço para trabalhar ou receber. \n\nTer ar condicionado e bomba de calor. \n\nTer acabamentos e equipamentos de qualidade. \n\nE, acima de tudo, não ter de escolher entre uma localização central e o conforto de uma casa moderna. \n\nPorque este apartamento permite-lhe ter os dois. \n\nNão estamos apenas perante um T2+1. \n\nEstamos perante uma casa pensada para quem valoriza localização, qualidade de construção, conforto e uma vida prática, sem abdicar da elegância. \n\nHá apartamentos que se visitam. \n\nE há apartamentos onde, durante a visita, começamos imediatamente a imaginar a nossa vida. \n\nEste pode muito bem ser um deles. \n\nMarque a sua visita e venha descobri-lo. \n\nDetalhes\nÁrea Bruta Privativa m²\n111\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n111\nQuartos\n2\nAno de Construção\n2024\nPiso\n1o Andar\nWC/Casas de banho\n3\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Mosteiro de Alcobaça e o mercado da habitação em Portugal",
+            "summary": "Alcobaça cresceu à volta de um mosteiro cisterciense fundado em 1153 e classificado como Património Mundial da UNESCO. Em 2025, o preço mediano das casas em Portugal subiu 16,8%.",
+            "timeline": [
+                {
+                    "label": "Fundação do Mosteiro por D. Afonso Henriques",
+                    "sublabel": "1153"
+                },
+                {
+                    "label": "Início das obras do Mosteiro",
+                    "sublabel": "1178"
+                },
+                {
+                    "label": "Inscrição na lista do Património Mundial da UNESCO",
+                    "sublabel": "1989"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Visitantes do Mosteiro de Alcobaça (2023)",
+                    "value": 200531,
+                    "unit": "visitantes"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano da habitação em Portugal (2025 face a 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "O Mosteiro de Alcobaça é Património Mundial da UNESCO desde 1989",
+                "Guarda os túmulos de D. Pedro I e de Inês de Castro",
+                "Fundado em 1153 por D. Afonso Henriques, o primeiro rei de Portugal",
+                "Em 2023, o Mosteiro recebeu mais de 200 mil visitantes"
+            ],
+            "sources": [
+                "https://mosteiroalcobaca.gov.pt/en",
+                "https://www.infopedia.pt/$abadia-de-alcobaca",
+                "https://whc.unesco.org/document/163156",
+                "https://ctt.pt/contentAsset/raw-data/199e75a9c0e3285c82882dc225f42a58/ficheiro/c3d3d321-a6a1-476b-9bd8-6aaabba8e6b2/export/Pagela_triptica_mosteiro_alcobaca_WEB.pdf",
+                "https://www.timeout.pt/lisboa/pt/atraccoes/mosteiro-de-alcobaca",
+                "https://rr.pt/noticia/vida/2024/08/12/museus-e-monumentos-nacionais-somam-mais-de-cinco-milhoes-de-visitantes-em-2023/389767/",
+                "https://www.macaubusiness.com/portugal-museums-monuments-received-more-than-5m-visitors-in-2023/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2"
+            ]
+        },
+        "suggested": {
+            "title": "T2+1 a passos do Mosteiro de Alcobaça | 423.500 €",
+            "description": "Apartamento T2+1 de construção recente no centro de Alcobaça, com duas suítes, escritório e muita luz natural, perto de comércio, serviços e restaurantes. Vende-se totalmente equipado, com ar condicionado, bomba de calor e caixilharia de alta qualidade, pronto a habitar. Para marcar uma visita, contacte Pedro Monteiro, da RE/MAX.",
+            "tags": [
+                "Alcobaça",
+                "T2+1",
+                "apartamento à venda",
+                "imobiliário",
+                "Mosteiro de Alcobaça",
+                "casa equipada",
+                "RE/MAX",
+                "Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-s44k9",
+    "created_at": "2026-10-09T06:17:54+00:00",
+    "updated_at": "2026-10-09T06:23:07+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/hAkrsNvSDcRq5CCo57aJfuOFkNY1koj2qbZQe63j.mp3",
+    "transcript": {
+        "duration": 35.38999938964844,
+        "text": "Viver a poucos passos do Mosteiro de Alcobaça. Um T2 mais um, de construção recente, no centro da cidade, com comércio, serviços e restaurantes à porta. Duas suítes com roupeiros, uma casa de banho de apoio e um espaço extra para escritório ou quarto de visitas. Muita luz natural, tetos rebaixados, caixilharia de topo, ar-condicionado e bomba de calor. E é vendido totalmente equipado. É só entrar e começar a viver. 423.500 euros. Para visitar, fale com o Pedro Monteiro, da Remaxin.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Viver",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "a",
+                "start": 0.4000000059604645,
+                "end": 0.6399999856948853
+            },
+            {
+                "word": "poucos",
+                "start": 0.6399999856948853,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "passos",
+                "start": 0.800000011920929,
+                "end": 1.2599999904632568
+            },
+            {
+                "word": "do",
+                "start": 1.2599999904632568,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "Mosteiro",
+                "start": 1.399999976158142,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "de",
+                "start": 1.7400000095367432,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "Alcobaça",
+                "start": 1.9600000381469727,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "Um",
+                "start": 3.200000047683716,
+                "end": 3.299999952316284
+            },
+            {
+                "word": "T2",
+                "start": 3.299999952316284,
+                "end": 3.619999885559082
+            },
+            {
+                "word": "mais",
+                "start": 3.619999885559082,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "um",
+                "start": 3.9000000953674316,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "de",
+                "start": 4.519999980926514,
+                "end": 4.639999866485596
+            },
+            {
+                "word": "construção",
+                "start": 4.639999866485596,
+                "end": 5
+            },
+            {
+                "word": "recente",
+                "start": 5,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "no",
+                "start": 5.679999828338623,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "centro",
+                "start": 5.840000152587891,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "da",
+                "start": 6.079999923706055,
+                "end": 6.659999847412109
+            },
+            {
+                "word": "cidade",
+                "start": 6.659999847412109,
+                "end": 6.659999847412109
+            },
+            {
+                "word": "com",
+                "start": 7.159999847412109,
+                "end": 7.28000020980835
+            },
+            {
+                "word": "comércio",
+                "start": 7.28000020980835,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "serviços",
+                "start": 8.319999694824219,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "e",
+                "start": 8.359999656677246,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "restaurantes",
+                "start": 8.600000381469727,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "à",
+                "start": 9.079999923706055,
+                "end": 9.199999809265137
+            },
+            {
+                "word": "porta",
+                "start": 9.199999809265137,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "Duas",
+                "start": 10.420000076293945,
+                "end": 10.520000457763672
+            },
+            {
+                "word": "suítes",
+                "start": 10.520000457763672,
+                "end": 10.84000015258789
+            },
+            {
+                "word": "com",
+                "start": 10.84000015258789,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "roupeiros",
+                "start": 11.0600004196167,
+                "end": 11.539999961853027
+            },
+            {
+                "word": "uma",
+                "start": 11.84000015258789,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "casa",
+                "start": 12.0600004196167,
+                "end": 12.180000305175781
+            },
+            {
+                "word": "de",
+                "start": 12.180000305175781,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "banho",
+                "start": 12.460000038146973,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "de",
+                "start": 12.460000038146973,
+                "end": 12.9399995803833
+            },
+            {
+                "word": "apoio",
+                "start": 12.9399995803833,
+                "end": 12.960000038146973
+            },
+            {
+                "word": "e",
+                "start": 12.960000038146973,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "um",
+                "start": 13.420000076293945,
+                "end": 13.84000015258789
+            },
+            {
+                "word": "espaço",
+                "start": 13.84000015258789,
+                "end": 13.84000015258789
+            },
+            {
+                "word": "extra",
+                "start": 13.84000015258789,
+                "end": 14.300000190734863
+            },
+            {
+                "word": "para",
+                "start": 14.300000190734863,
+                "end": 14.579999923706055
+            },
+            {
+                "word": "escritório",
+                "start": 14.579999923706055,
+                "end": 15.140000343322754
+            },
+            {
+                "word": "ou",
+                "start": 15.140000343322754,
+                "end": 15.520000457763672
+            },
+            {
+                "word": "quarto",
+                "start": 15.520000457763672,
+                "end": 15.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 15.760000228881836,
+                "end": 16.059999465942383
+            },
+            {
+                "word": "visitas",
+                "start": 16.059999465942383,
+                "end": 16.440000534057617
+            },
+            {
+                "word": "Muita",
+                "start": 17.34000015258789,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "luz",
+                "start": 17.540000915527344,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "natural",
+                "start": 17.65999984741211,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "tetos",
+                "start": 18.780000686645508,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "rebaixados",
+                "start": 18.799999237060547,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "caixilharia",
+                "start": 19.979999542236328,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "de",
+                "start": 20.399999618530273,
+                "end": 21
+            },
+            {
+                "word": "topo",
+                "start": 21,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "ar",
+                "start": 21.559999465942383,
+                "end": 21.600000381469727
+            },
+            {
+                "word": "condicionado",
+                "start": 21.600000381469727,
+                "end": 22.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 22.31999969482422,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "bomba",
+                "start": 22.65999984741211,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "de",
+                "start": 22.860000610351562,
+                "end": 23.31999969482422
+            },
+            {
+                "word": "calor",
+                "start": 23.31999969482422,
+                "end": 23.31999969482422
+            },
+            {
+                "word": "E",
+                "start": 23.68000030517578,
+                "end": 24.079999923706055
+            },
+            {
+                "word": "é",
+                "start": 24.079999923706055,
+                "end": 24.219999313354492
+            },
+            {
+                "word": "vendido",
+                "start": 24.219999313354492,
+                "end": 24.5
+            },
+            {
+                "word": "totalmente",
+                "start": 24.5,
+                "end": 25.1200008392334
+            },
+            {
+                "word": "equipado",
+                "start": 25.1200008392334,
+                "end": 25.639999389648438
+            },
+            {
+                "word": "É",
+                "start": 26.18000030517578,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "só",
+                "start": 26.31999969482422,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "entrar",
+                "start": 26.459999084472656,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 26.920000076293945,
+                "end": 27.280000686645508
+            },
+            {
+                "word": "começar",
+                "start": 27.280000686645508,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "a",
+                "start": 27.540000915527344,
+                "end": 27.979999542236328
+            },
+            {
+                "word": "viver",
+                "start": 27.979999542236328,
+                "end": 27.979999542236328
+            },
+            {
+                "word": "423",
+                "start": 29.459999084472656,
+                "end": 30.239999771118164
+            },
+            {
+                "word": "500",
+                "start": 30.239999771118164,
+                "end": 31.020000457763672
+            },
+            {
+                "word": "euros",
+                "start": 31.020000457763672,
+                "end": 31.540000915527344
+            },
+            {
+                "word": "Para",
+                "start": 32.119998931884766,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "visitar",
+                "start": 32.220001220703125,
+                "end": 33.040000915527344
+            },
+            {
+                "word": "fale",
+                "start": 33.34000015258789,
+                "end": 33.34000015258789
+            },
+            {
+                "word": "com",
+                "start": 33.34000015258789,
+                "end": 33.439998626708984
+            },
+            {
+                "word": "o",
+                "start": 33.439998626708984,
+                "end": 33.619998931884766
+            },
+            {
+                "word": "Pedro",
+                "start": 33.619998931884766,
+                "end": 33.779998779296875
+            },
+            {
+                "word": "Monteiro",
+                "start": 33.779998779296875,
+                "end": 34.2599983215332
+            },
+            {
+                "word": "da",
+                "start": 34.5,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "Remaxin",
+                "start": 34.68000030517578,
+                "end": 35.36000061035156
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.38999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Junto ao Mosteiro de Alcobaça",
+                        "params": {
+                            "src": "img_31333984",
+                            "avatar": "img_3452ea08",
+                            "logo": "img_5bbb5d33",
+                            "price": "423.500 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Apartamento T2+1 à venda em Alcobaça",
+                            "location": "Alcobaça · 111 m² · 2 suítes",
+                            "agentName": "Pedro Monteiro",
+                            "phone": "+351 933 365 604",
+                            "legal": "RE/MAX Grupo Inn"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.1,
+                "end": 5.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_cfb10f70",
+                            "src2": "img_467886e8",
+                            "angle": 8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.6,
+                "end": 10.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "No centro de Alcobaça",
+                        "params": {
+                            "src": "img_44d1be0f",
+                            "title": "No centro de Alcobaça",
+                            "items": [
+                                "Comércio à porta",
+                                "Serviços próximos",
+                                "Restaurantes ao lado"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 12.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_70b9de34",
+                            "src2": "img_37dfd0ab",
+                            "src3": "img_885b4e17",
+                            "src4": "img_fab6dd06"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.9,
+                "end": 16.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "WC de apoio e espaço extra",
+                        "params": {
+                            "src": "img_c94418c7",
+                            "src2": "img_f06edb57",
+                            "src3": "img_e07d68e0",
+                            "src4": "img_e7b4a73f",
+                            "src5": "img_03524dab"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.9,
+                "end": 21.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Luz e acabamentos de topo",
+                        "params": {
+                            "src": "img_54fe4a14",
+                            "src2": "img_d385bed7",
+                            "src3": "img_7126194b",
+                            "src4": "img_08cfc009"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.4,
+                "end": 23.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_9741f4eb",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.6,
+                "end": 26.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_c40da8b6",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.1,
+                "end": 29.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "É só entrar",
+                        "params": {
+                            "src": "img_cc95f45c",
+                            "blur": 10,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.2,
+                "end": 32,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "423.500 €",
+                        "params": {
+                            "src": "img_1d6521cc",
+                            "title": "423.500 €",
+                            "items": [
+                                "T2+1 · 111 m²",
+                                "2 suítes · 3 WC",
+                                "Construção de 2024"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32,
+                "end": 35.38999938964844,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Pedro Monteiro",
+                        "params": {
+                            "src": "img_3452ea08",
+                            "logo": "img_5bbb5d33",
+                            "name": "Pedro Monteiro",
+                            "role": "Consultor imobiliário · RE/MAX Grupo Inn",
+                            "buttons": "+351 933 365 604 | Marque a sua visita",
+                            "phone": "+351 933 365 604"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-s44k9/clip.mp4",
+    "error": null
+}

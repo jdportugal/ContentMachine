@@ -1,0 +1,1225 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 em Margem para acabar ao seu gosto · 183.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-margem-158m2/r920026",
+            "agent": "Tiago Martins",
+            "phone": "+351925870013",
+            "email": "",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia em Margem para acabar ao seu gosto.",
+            "voiceover": "Uma moradia em Margem para acabar ao seu gosto. Numa zona tranquila do Alto Alentejo, com boa exposição solar. A remodelação está numa fase muito avançada. Falta escolher os acabamentos finais. São quatro quartos e duas casas de banho, em cento e cinquenta e oito metros. Tem ainda um sótão com cinquenta metros e pré-instalação de ar condicionado. Lá fora, um lote com mais de oitocentos metros. Há um projeto aprovado para piscina. E um anexo de vinte e cinco metros, preparado para casa de banho de apoio. Cento e oitenta e três mil euros. Para visitar, fale com o Tiago Martins, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada",
+                    "vo": "Uma moradia em Margem para acabar ao seu gosto.",
+                    "caption": "Margem, Alto Alentejo"
+                },
+                {
+                    "photo": "exterior com envolvente e luz do dia",
+                    "vo": "Numa zona tranquila do Alto Alentejo, com boa exposição solar.",
+                    "caption": "Boa exposição solar"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "A remodelação está numa fase muito avançada.",
+                    "caption": "Remodelação avançada"
+                },
+                {
+                    "photo": "divisão por acabar / pormenor de obra",
+                    "vo": "Falta escolher os acabamentos finais.",
+                    "caption": "Acabamentos ao seu gosto"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "São quatro quartos e duas casas de banho, em cento e cinquenta e oito metros.",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "(continuação)",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "sótão",
+                    "vo": "Tem ainda um sótão com cinquenta metros e pré-instalação de ar condicionado.",
+                    "caption": "Sótão de 50 m²"
+                },
+                {
+                    "photo": "terreno",
+                    "vo": "Lá fora, um lote com mais de oitocentos metros.",
+                    "caption": "Lote de 840 m²"
+                },
+                {
+                    "photo": "zona prevista para a piscina (se for render: Imagem 3D do projeto)",
+                    "vo": "Há um projeto aprovado para piscina.",
+                    "caption": "Piscina: projeto aprovado"
+                },
+                {
+                    "photo": "anexo",
+                    "vo": "E um anexo de vinte e cinco metros, preparado para casa de banho de apoio.",
+                    "caption": "Anexo de 25 m²"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Cento e oitenta e três mil euros. Para visitar, fale com o Tiago Martins, da IAD Portugal.",
+                    "caption": "183.000 € · Tiago Martins · IAD Portugal · AMI 11220"
+                }
+            ],
+            "flags": [
+                "Piscina: nos detalhes aparece 'Piscina', mas o texto diz que só existe projeto aprovado para construção. O vídeo trata-a como projeto. Se houver imagem da piscina, deve ser render e levar a legenda 'Imagem 3D do projeto'.",
+                "Ar condicionado: nos detalhes aparece 'Ar condicionado', mas o texto diz 'pré-instalação'. Usei só a pré-instalação.",
+                "Aquecimento: os detalhes trazem 'property.feature.heating' (campo por traduzir, sem descrição). Ficou de fora.",
+                "A remodelação não está concluída. O script diz 'fase muito avançada' e 'falta escolher os acabamentos', sem descrever a casa como pronta. As fotos devem mostrar o estado real.",
+                "Localização: o anúncio diz 'Margem, em Portalegre'. Margem pertence ao concelho de Gavião, no distrito de Portalegre, longe da cidade. Por isso o script diz 'Alto Alentejo' e não 'perto de Portalegre'.",
+                "Certificado energético E: deixado de fora de propósito.",
+                "Mercado assumido: interior."
+            ],
+            "message": "Bom dia Sr. Tiago, fiz este vídeo da sua moradia em Margem para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Casa/Moradia 4 quartos de 158 m² em Margem",
+            "price": 183000,
+            "details": {
+                "Preço": "183 000 €",
+                "Localização": "Margem, 6040-074",
+                "Referência": "920026",
+                "Área Bruta m²": "158",
+                "Área Total do Lote m²": "840",
+                "Quartos": 4,
+                "Certificado Energético": "E",
+                "Características": "158 m² área bruta, 158 m² úteis, 2 casas de banho, Piscina, Ar condicionado, property.feature.heating"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Tiago Martins - and phone number - +351925870013. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Tiago Martins.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Uma moradia em Margem para acabar ao seu gosto.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada → «Margem, Alto Alentejo»\n- exterior com envolvente e luz do dia → «Boa exposição solar»\n- sala → «Remodelação avançada»\n- divisão por acabar / pormenor de obra → «Acabamentos ao seu gosto»\n- quarto → «Quatro quartos»\n- casa de banho → «Duas casas de banho»\n- sótão → «Sótão de 50 m²»\n- terreno → «Lote de 840 m²»\n- zona prevista para a piscina (se for render: Imagem 3D do projeto) → «Piscina: projeto aprovado»\n- anexo → «Anexo de 25 m²»\n- end card → «183.000 € · Tiago Martins · IAD Portugal · AMI 11220»\n\nHere are the house details:\n\nCasa/Moradia 4 quartos de 158 m² em Margem\nPreço\n183 000 €\nLocalização\nMargem, 6040-074\nReferência\n920026\nÁrea Bruta m²\n158\nÁrea Total do Lote m²\n840\nQuartos\n4\nCertificado Energético\nE\nCaracterísticas\n158 m² área bruta, 158 m² úteis, 2 casas de banho, Piscina, Ar condicionado, property.feature.heating\n\nDescrição\nHá casas que se compram. E há casas que se imaginam, se sonham e se transformam no refúgio perfeito para uma vida inteira. Esta magnífica moradia T4, situada na tranquila freguesia de Margem, em Portalegre, é exatamente esse tipo de oportunidade rara.\n\nInserida num impressionante lote de 840m², esta propriedade oferece o equilíbrio perfeito entre privacidade, espaço e potencial. Com 158m² de área útil, complementados por um sótão de 50m², cada divisão foi pensada para proporcionar conforto, amplitude e liberdade para criar ambientes únicos e personalizados.\n\nA moradia encontra-se numa fase muito avançada de remodelação, permitindo-lhe concluir os acabamentos finais totalmente ao seu gosto — uma oportunidade exclusiva para dar vida à casa que sempre idealizou, sem partir do zero. Aqui, poderá escolher os detalhes, os ambientes e os acabamentos que irão refletir verdadeiramente o seu estilo de vida.\n\nNo exterior, o cenário torna-se ainda mais especial. O amplo terreno convida a momentos inesquecíveis em família, tardes de verão ao ar livre e à criação de uma verdadeira zona de lazer privada. O projeto já aprovado para construção de piscina acrescenta um nível extra de conforto, exclusividade e valorização ao imóvel. Para complementar, o anexo com 25m² já preparado para WC de apoio à piscina oferece funcionalidade e versatilidade ao espaço exterior.\n\nA pré-instalação de ar condicionado garante ainda mais comodidade e preparação para um conforto absoluto durante todo o ano.\n\nLocalizada numa zona serena, com excelente exposição solar e uma envolvência acolhedora, esta moradia é perfeita para quem procura qualidade de vida, tranquilidade e um investimento seguro com enorme potencial de valorização.\n\nMais do que uma casa, esta é a oportunidade de criar um lar único, à sua medida, num dos ambientes mais tranquilos e genuínos do Alto Alentejo.\n\nNão deixe escapar o potencial desta propriedade extraordinária. O próximo capítulo da sua vida pode começar aqui.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia por acabar no Alto Alentejo: preço e mercado da habitação em 2026",
+            "summary": "Moradia T4 com 158 m², para acabar, à venda por 183 mil euros no Alto Alentejo. Em 2026 os preços da habitação em Portugal continuam a subir a dois dígitos, embora a um ritmo mais lento.",
+            "timeline": [
+                {
+                    "label": "Preços sobem 17,8% em termos homólogos (INE)",
+                    "sublabel": "1.º trim. 2026"
+                },
+                {
+                    "label": "Subida abranda para 16,5% (INE)",
+                    "sublabel": "2.º trim. 2026"
+                },
+                {
+                    "label": "Avaliação bancária em máximo histórico: 2.228 €/m²",
+                    "sublabel": "junho 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço do anúncio por m² de área útil (183.000 € ÷ 158 m²)",
+                    "value": 1158,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida dos preços da habitação em Portugal, 2.º trim. 2026",
+                    "value": 16.5,
+                    "unit": "%"
+                },
+                {
+                    "label": "Subida dos preços da habitação em Portugal, 1.º trim. 2026",
+                    "value": 17.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Avaliação bancária mediana em Portugal, jun. 2026",
+                    "value": 2228,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação bancária de apartamentos no Alentejo, jun. 2026",
+                    "value": 1711,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação bancária de apartamentos na Grande Lisboa, jun. 2026",
+                    "value": 3411,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Avaliação bancária de apartamentos (jun. 2026)",
+                    "left": {
+                        "title": "Alentejo",
+                        "points": [
+                            "1.711 €/m²",
+                            "Entre os valores mais baixos do país"
+                        ]
+                    },
+                    "right": {
+                        "title": "Grande Lisboa",
+                        "points": [
+                            "3.411 €/m²",
+                            "O valor mais alto do país"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em 2026 os preços da habitação continuam a subir a dois dígitos, embora mais devagar: 17,8% no 1.º trimestre e 16,5% no 2.º",
+                "O Alentejo tem das avaliações bancárias mais baixas do país, cerca de metade das de Lisboa",
+                "Em junho de 2026, a avaliação bancária da habitação atingiu o máximo histórico de 2.228 €/m²",
+                "Os 183 mil euros desta moradia correspondem a cerca de 1.158 €/m² de área útil, sem contar o sótão nem o lote"
+            ],
+            "sources": [
+                "https://www.comparaja.pt/credito-habitacao/noticias/indice-de-precos-da-habitacao-sobe-16-5-no-2o-trimestre-2026",
+                "https://ind.millenniumbcp.pt/pt/Particulares/Investimentos/Documents/NotasConjuntura/2026/Mercado_Imobiliario_2T26_24092026.pdf",
+                "https://eco.sapo.pt/2026/06/23/precos-da-habitacao-disparam-178-no-inicio-do-ano/",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-disparam-178-num-ano-procura-diminui-at-maro",
+                "https://dinheirovivo.dn.pt/economia/avaliao-bancria-da-habitao-bate-recorde-e-alcana-2228-eurosm2-em-junho",
+                "https://www.idealista.pt/news/node/76748",
+                "https://www.barlavento.pt/?p=405602"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 em Margem para acabar ao seu gosto · 183.000 €",
+            "description": "Em Margem, a remodelação está quase feita: só faltam os acabamentos, e escolhe-os você.\n\nUma moradia numa zona tranquila do Alto Alentejo, com boa exposição solar. Tem quatro quartos, duas casas de banho e ainda um sótão com 50 m². A pré-instalação de ar condicionado já está feita.\nO lote tem 840 m², com projeto aprovado para piscina e um anexo de 25 m² preparado para receber uma casa de banho de apoio.\n\nT4 · 158 m² · Lote de 840 m² · 183.000 €\nCertificado energético E · Ref. 920026\n\nVisitas com o Tiago Martins, da IAD Portugal 📞 +351 925 870 013",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "casaparaconstruir",
+                "moradiat4",
+                "altoalentejo",
+                "margem",
+                "alentejo",
+                "casascomterreno",
+                "remodelacao",
+                "iadportugal",
+                "casasemportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r920026-qq64o",
+    "created_at": "2026-10-21T09:37:14+00:00",
+    "updated_at": "2026-10-21T10:17:48+00:00",
+    "source_path": "clips/uploads/WpK7wvAedUc3R8qcCHGC4M7mx5E71KatvYsqgwG8.mp3",
+    "images": [
+        {
+            "id": "img_2d8cb154",
+            "path": "clips/uploads/K4A4G4Xa9GdYbn4tdIW48uExH27sBQtDZrYMUIHb.jpg",
+            "description": "Fachada principal da moradia, paredes brancas com barra amarela, telhado de telha e muro rendilhado à frente.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5199d90f",
+            "path": "clips/uploads/KmB3SiBBTMj9jFzIIQO9ZsVPfK85u1SjVghT9Piu.jpg",
+            "description": "Fachada lateral vista da rua, com portão de ferro enferrujado que dá acesso ao terreno.",
+            "name": "019e278fb92da007a847b8f801afceaa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ca817a37",
+            "path": "clips/uploads/jhxolVB8kA6llvj156O8XYtERvjLoTQmkGNrDpqi.jpg",
+            "description": "Empena lateral da casa com janela do sótão, anexo novo com telhado e terreno com vegetação.",
+            "name": "019e278fb8c9f722e6026b12802549e8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5b43afe2",
+            "path": "clips/uploads/Rd8lDwFy2c99tqaHpv0SrTQgRTLexgQAOfjpQEUE.jpg",
+            "description": "Traseiras da casa, ampliação em reboco cinzento com grandes vãos abertos e quintal com erva alta.",
+            "name": "019e278fb8e6c26133d21042fb47b61e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_701908e7",
+            "path": "clips/uploads/SpcIWU9EJ16Rb6jPvzPD49T51heAnEsEJj78H64G.jpg",
+            "description": "Ampliação nas traseiras, alpendre coberto com telha nova e grandes aberturas, obra ainda por acabar.",
+            "name": "019e278fb8e90a211ac98cb1503cf391.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3fe353bc",
+            "path": "clips/uploads/vXyU8QEtgf0aa9hylSZi6StI0pNKn4U0l2Z1hcgi.jpg",
+            "description": "Alpendre amplo com pilares e pátio em cimento, mostra a fase avançada da remodelação.",
+            "name": "019e278fb89da539a660502945d64afe.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a9101127",
+            "path": "clips/uploads/1c8wAi8NIt99Vo1XmKQIN5LETxpym2bv7NCG6QHT.jpg",
+            "description": "Vista aérea de drone, lote delimitado a laranja numa aldeia rodeada de montado e colinas verdes.",
+            "name": "019e278ca495b62e53462f53258f2ae0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_39282046",
+            "path": "clips/uploads/Fderonpv4aUuLOyhsaIAz9cy2nXSYsfVWkE39ork.jpg",
+            "description": "Vista aérea de cima, telhados da casa e terreno de mais de 800 m² marcados a laranja.",
+            "name": "019e278cc2db4656ebfe2fd1f6da3a30.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3044d31c",
+            "path": "clips/uploads/2K97S2VqwlO0l1YRng0hFtKdmwOnpcEQkmMwtu2U.jpg",
+            "description": "Vista aérea lateral do lote marcado a laranja, casa com ampliação e quintal grande junto à rua.",
+            "name": "019e278cdc434efbc74b679fdbcd38a8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ced598de",
+            "path": "clips/uploads/BmU5GzmaurmHlfd9ODukVAmlyK3fBOUDuXZeZ3DP.jpg",
+            "description": "Interior em obra, divisão rebocada com piso em cimento e pré-instalações elétricas, pronta para acabamentos.",
+            "name": "019e278fb891179e649d84112409b357.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a008dec5",
+            "path": "clips/uploads/iB5OdcCR5Y4HnBIG9JOvEimPzvwSCZZcsXZYhRt8.jpg",
+            "description": "Exterior da moradia em obra: alpendre com telhado de telha e grande vão aberto para sala interior.",
+            "name": "019e278fb8c2dde131c2ccc467bba59d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_44ffecc5",
+            "path": "clips/uploads/x7k3K7FeXVRmFpkSwTl9PVMyB0bA3dcXREhtaWiv.jpg",
+            "description": "Sala ampla em bruto com lareira, chão de tijoleira e paredes com manchas de humidade.",
+            "name": "019e278fb9336ad51e60083da9127372.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_621ae60f",
+            "path": "clips/uploads/qfKUy8GGrAC1I8FP4wNg5jDgmGjvmmuraNg8UhC5.jpg",
+            "description": "Divisão estreita, possivelmente cozinha ou lavandaria, com pontos de água, janela ao fundo e tijoleira.",
+            "name": "019e278fb96521e149833722a1d5e88e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_61109932",
+            "path": "clips/uploads/WTfDharMhjft2K4zJpgXK9Ufe1dPmmDkiNcZ3gd6.jpg",
+            "description": "Sala interior em remodelação com várias portas para outras divisões, cadeira e móvel antigo.",
+            "name": "019e278fb89cb29255a168c71a5eb122.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_17098bc9",
+            "path": "clips/uploads/UB1sGENbXDv1kbZxpZXcAbtLBCIQHyQHpcguSgNQ.jpg",
+            "description": "Divisão em bruto com tijoleira, aberta para alpendre exterior com vista sobre vegetação e casas.",
+            "name": "019e278fb967cb0fa057b802cbb388b6.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_692b1cb6",
+            "path": "clips/uploads/CZdfBSlOgBrvQKTZyZbuiuG38ocVVYMeZEaiKBX4.jpg",
+            "description": "Casa de banho em obra, vista pela porta: azulejos brancos e sanita instalada, por acabar.",
+            "name": "019e278fb8d888783287a5a00759d18c.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_9a6e1b7b",
+            "path": "clips/uploads/CQaDYePNiP20gA8Rk3Chz8s9z5kNH5lOo4be8wUP.jpg",
+            "description": "Sala com corredor de tijoleira até porta de entrada em madeira escura; tomadas e pré-instalações visíveis.",
+            "name": "019e278fb91b25b5d2c5e32d10512009.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_3b41ed6b",
+            "path": "clips/uploads/N7s9Z5aMP8TUm6ES2k4vmIpZOPxqttPhXVIuhJ9I.jpg",
+            "description": "Quarto pintado de branco com janela de caixilharia escura e chão de tijoleira, quase pronto.",
+            "name": "019e278fb8f7c4fe4e0c1adb16342d63.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_17c9d5dd",
+            "path": "clips/uploads/fLv7Bk3SVRuvLn6LxwFCwZ8KWrTvE9kZveqvwLDp.jpg",
+            "description": "Divisão branca com tijoleira nova e passagem aberta para corredor; pré-instalação de ar-condicionado na parede.",
+            "name": "019e278fb9688eb102036386ce9e9370.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6d62ff13",
+            "path": "clips/uploads/PCmSYYIxh5vZmH0FXZHnCzSdzqbhtpeEaseXUfCd.jpg",
+            "description": "Quarto espaçoso e luminoso, paredes brancas, janela de caixilharia escura e chão de tijoleira.",
+            "name": "019e278fb8ef0f77acfeb582b817c01e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fcaceaa2",
+            "path": "clips/uploads/19h5GNiDye7qF0bvNwmcrEzmvvBmXUqVfgYt8XCa.jpg",
+            "description": "Casa de banho em obra sob a escada, paredes azulejadas, chão por acabar e saída de esgoto à vista.",
+            "name": "019e278fb8d6e46d0cff8ad3839ac00f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0817efde",
+            "path": "clips/uploads/jHnSJtrfrZTn39Onb9TeQ3DyVOrWW5opnw76f2RD.jpg",
+            "description": "Quarto vazio com paredes brancas, chão de tijoleira cor de tijolo e janela de caixilharia escura.",
+            "name": "019e278fb94794e646256c75cb965c8a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc1d90e0",
+            "path": "clips/uploads/MBJ6ce8oAUxNacIYDjWAaNSltnDAf4vAlMVo05kB.jpg",
+            "description": "Corredor com chão de tijoleira cor de tijolo, portas sem aros com reboco à vista e divisões em obra.",
+            "name": "019e2790ea90862c202d3315562af671.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_30442395",
+            "path": "clips/uploads/YqhgWSDFkrioAOFXbVpS3amohOeB8o1egWxACpat.jpg",
+            "description": "Escada interior em betão, por acabar, com paredes manchadas, que sobe para o sótão.",
+            "name": "019e2790ea985f6ecfe6824fad53ad50.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f3cdcfa6",
+            "path": "clips/uploads/WT2qk1vDoGT7MqJjKMSuo4IaQOdrXQ5IFd8GneJ2.jpg",
+            "description": "Sótão amplo com teto inclinado forrado a branco, vigas de madeira, pilares brancos e pequena janela.",
+            "name": "019e2790eac1af3bd8f5f8fefa52ed6d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f88e61cb",
+            "path": "clips/uploads/tO8YvBUBWO4sRTjdvspSRhbGK72LOaVUTe9LHlfy.jpg",
+            "description": "Sótão espaçoso em obra, teto em madeira branca com vigas, pilares, arca de madeira e janela.",
+            "name": "019e2790ea970b67845ad77635f216c1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc8aa561",
+            "path": "clips/uploads/MGcmbSaF608NspBW9rqF4nXEQGbwtnRonnPAWeiH.jpg",
+            "description": "Sótão amplo com pilares brancos, vigas de madeira escura, roços elétricos nas paredes e vassoura no chão.",
+            "name": "019e2790ea9a9614436b1a5e2f877b60.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2d33e174",
+            "path": "clips/uploads/Tp3BOI3QiR4o7gshINguCzTrUdVvxq6qU3m4RdcE.png",
+            "description": "Retrato do consultor Tiago Martins, da IAD Portugal.",
+            "name": "Tiago Martins.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_18aa4a9f",
+            "path": "clips/uploads/NEwDtP1dzwCoqe4aJBWpHpPqumvORhDoghw1iFK1.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/WpK7wvAedUc3R8qcCHGC4M7mx5E71KatvYsqgwG8.mp3",
+    "transcript": {
+        "duration": 38,
+        "text": "Uma moradia em margem para acabar ao seu gosto, numa zona tranquila do Alto Alentejo com boa exposição solar. A remodelação está numa fase muito avançada. Falta escolher os acabamentos finais. São quatro quartos e duas casas de banho em 158 metros. Tem ainda um sótão com 50 metros e pré-instalação de ar-condicionado. Lá fora, um lote com mais de 800 metros. Há um projeto aprovado para piscina e um anexo de 25 metros preparado para casa de banho de apoio. 183 mil euros. Para visitar, fale com o Tiago Martins, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.23999999463558197
+            },
+            {
+                "word": "moradia",
+                "start": 0.23999999463558197,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "em",
+                "start": 0.6200000047683716,
+                "end": 1.0399999618530273
+            },
+            {
+                "word": "margem",
+                "start": 1.0399999618530273,
+                "end": 1.2400000095367432
+            },
+            {
+                "word": "para",
+                "start": 1.2400000095367432,
+                "end": 1.5199999809265137
+            },
+            {
+                "word": "acabar",
+                "start": 1.5199999809265137,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "ao",
+                "start": 1.8600000143051147,
+                "end": 1.9800000190734863
+            },
+            {
+                "word": "seu",
+                "start": 1.9800000190734863,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "gosto",
+                "start": 2.380000114440918,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "numa",
+                "start": 3.3399999141693115,
+                "end": 3.5
+            },
+            {
+                "word": "zona",
+                "start": 3.5,
+                "end": 3.740000009536743
+            },
+            {
+                "word": "tranquila",
+                "start": 3.740000009536743,
+                "end": 4.28000020980835
+            },
+            {
+                "word": "do",
+                "start": 4.28000020980835,
+                "end": 4.559999942779541
+            },
+            {
+                "word": "Alto",
+                "start": 4.559999942779541,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "Alentejo",
+                "start": 4.760000228881836,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "com",
+                "start": 5.340000152587891,
+                "end": 5.699999809265137
+            },
+            {
+                "word": "boa",
+                "start": 5.699999809265137,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "exposição",
+                "start": 6.039999961853027,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "solar",
+                "start": 6.460000038146973,
+                "end": 6.920000076293945
+            },
+            {
+                "word": "A",
+                "start": 7.440000057220459,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "remodelação",
+                "start": 7.579999923706055,
+                "end": 8.15999984741211
+            },
+            {
+                "word": "está",
+                "start": 8.15999984741211,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "numa",
+                "start": 8.359999656677246,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "fase",
+                "start": 8.600000381469727,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "muito",
+                "start": 8.899999618530273,
+                "end": 9.460000038146973
+            },
+            {
+                "word": "avançada",
+                "start": 9.460000038146973,
+                "end": 9.920000076293945
+            },
+            {
+                "word": "Falta",
+                "start": 10.5,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "escolher",
+                "start": 10.5600004196167,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "os",
+                "start": 10.899999618530273,
+                "end": 11.199999809265137
+            },
+            {
+                "word": "acabamentos",
+                "start": 11.199999809265137,
+                "end": 11.539999961853027
+            },
+            {
+                "word": "finais",
+                "start": 11.539999961853027,
+                "end": 12.119999885559082
+            },
+            {
+                "word": "São",
+                "start": 12.779999732971191,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "quatro",
+                "start": 12.800000190734863,
+                "end": 13.300000190734863
+            },
+            {
+                "word": "quartos",
+                "start": 13.300000190734863,
+                "end": 13.699999809265137
+            },
+            {
+                "word": "e",
+                "start": 13.699999809265137,
+                "end": 14.0600004196167
+            },
+            {
+                "word": "duas",
+                "start": 14.0600004196167,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "casas",
+                "start": 14.34000015258789,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "de",
+                "start": 14.619999885559082,
+                "end": 15.020000457763672
+            },
+            {
+                "word": "banho",
+                "start": 15.020000457763672,
+                "end": 15.020000457763672
+            },
+            {
+                "word": "em",
+                "start": 15.020000457763672,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "158",
+                "start": 15.34000015258789,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "metros",
+                "start": 16.420000076293945,
+                "end": 16.760000228881836
+            },
+            {
+                "word": "Tem",
+                "start": 17.479999542236328,
+                "end": 17.520000457763672
+            },
+            {
+                "word": "ainda",
+                "start": 17.520000457763672,
+                "end": 17.739999771118164
+            },
+            {
+                "word": "um",
+                "start": 17.739999771118164,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "sótão",
+                "start": 18.1200008392334,
+                "end": 18.280000686645508
+            },
+            {
+                "word": "com",
+                "start": 18.280000686645508,
+                "end": 18.5
+            },
+            {
+                "word": "50",
+                "start": 18.5,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "metros",
+                "start": 18.979999542236328,
+                "end": 19.299999237060547
+            },
+            {
+                "word": "e",
+                "start": 19.299999237060547,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "pré",
+                "start": 19.700000762939453,
+                "end": 19.979999542236328
+            },
+            {
+                "word": "instalação",
+                "start": 19.979999542236328,
+                "end": 20.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 20.360000610351562,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "ar",
+                "start": 20.739999771118164,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "condicionado",
+                "start": 20.739999771118164,
+                "end": 21.459999084472656
+            },
+            {
+                "word": "Lá",
+                "start": 22.059999465942383,
+                "end": 22.200000762939453
+            },
+            {
+                "word": "fora",
+                "start": 22.200000762939453,
+                "end": 22.459999084472656
+            },
+            {
+                "word": "um",
+                "start": 22.860000610351562,
+                "end": 23.059999465942383
+            },
+            {
+                "word": "lote",
+                "start": 23.059999465942383,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 23.299999237060547,
+                "end": 23.5
+            },
+            {
+                "word": "mais",
+                "start": 23.5,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "de",
+                "start": 23.700000762939453,
+                "end": 24.079999923706055
+            },
+            {
+                "word": "800",
+                "start": 24.079999923706055,
+                "end": 24.579999923706055
+            },
+            {
+                "word": "metros",
+                "start": 24.579999923706055,
+                "end": 25.100000381469727
+            },
+            {
+                "word": "Há",
+                "start": 25.100000381469727,
+                "end": 25.65999984741211
+            },
+            {
+                "word": "um",
+                "start": 25.65999984741211,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "projeto",
+                "start": 25.860000610351562,
+                "end": 26.139999389648438
+            },
+            {
+                "word": "aprovado",
+                "start": 26.139999389648438,
+                "end": 26.6200008392334
+            },
+            {
+                "word": "para",
+                "start": 26.6200008392334,
+                "end": 26.799999237060547
+            },
+            {
+                "word": "piscina",
+                "start": 26.799999237060547,
+                "end": 27.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 27.239999771118164,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "um",
+                "start": 27.8799991607666,
+                "end": 28.260000228881836
+            },
+            {
+                "word": "anexo",
+                "start": 28.260000228881836,
+                "end": 28.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 28.360000610351562,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "25",
+                "start": 28.520000457763672,
+                "end": 29.020000457763672
+            },
+            {
+                "word": "metros",
+                "start": 29.020000457763672,
+                "end": 29.420000076293945
+            },
+            {
+                "word": "preparado",
+                "start": 29.420000076293945,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "para",
+                "start": 29.979999542236328,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "casa",
+                "start": 30.18000030517578,
+                "end": 30.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 30.479999542236328,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "banho",
+                "start": 30.700000762939453,
+                "end": 30.799999237060547
+            },
+            {
+                "word": "de",
+                "start": 30.799999237060547,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "apoio",
+                "start": 30.959999084472656,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "183",
+                "start": 32.34000015258789,
+                "end": 33.02000045776367
+            },
+            {
+                "word": "mil",
+                "start": 33.02000045776367,
+                "end": 33.220001220703125
+            },
+            {
+                "word": "euros",
+                "start": 33.220001220703125,
+                "end": 33.65999984741211
+            },
+            {
+                "word": "Para",
+                "start": 34.20000076293945,
+                "end": 34.2400016784668
+            },
+            {
+                "word": "visitar",
+                "start": 34.2400016784668,
+                "end": 34.939998626708984
+            },
+            {
+                "word": "fale",
+                "start": 35.31999969482422,
+                "end": 35.31999969482422
+            },
+            {
+                "word": "com",
+                "start": 35.31999969482422,
+                "end": 35.47999954223633
+            },
+            {
+                "word": "o",
+                "start": 35.47999954223633,
+                "end": 35.70000076293945
+            },
+            {
+                "word": "Tiago",
+                "start": 35.70000076293945,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "Martins",
+                "start": 35.86000061035156,
+                "end": 36.400001525878906
+            },
+            {
+                "word": "da",
+                "start": 36.599998474121094,
+                "end": 36.81999969482422
+            },
+            {
+                "word": "IAD",
+                "start": 36.81999969482422,
+                "end": 37.20000076293945
+            },
+            {
+                "word": "Portugal",
+                "start": 37.20000076293945,
+                "end": 37.7599983215332
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Uma moradia em Margem para acabar ao seu gosto",
+                        "params": {
+                            "src": "img_2d8cb154",
+                            "location": "Margem · Alto Alentejo",
+                            "title": "Uma moradia em Margem para acabar ao seu gosto",
+                            "facts": "T4 · 158 m² · lote de 840 m²",
+                            "name": "Tiago Martins",
+                            "cta": "+351 925 870 013",
+                            "tag": "Novo imóvel",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD Portugal | AMI 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3,
+                "end": 7.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Boa exposição solar",
+                        "params": {
+                            "src": "img_a9101127",
+                            "eyebrow": "Margem, Alto Alentejo"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.2,
+                "end": 10.2,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Remodelação avançada",
+                        "params": {
+                            "src": "img_3fe353bc",
+                            "eyebrow": "Fase final de obra"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 12.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "luz-acender",
+                        "text": "Acabamentos ao seu gosto",
+                        "params": {
+                            "src": "img_ced598de",
+                            "eyebrow": "Pronta a personalizar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.7,
+                "end": 17.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "faixa-filme",
+                        "text": "Quatro quartos e duas casas de banho",
+                        "params": {
+                            "src": "img_6d62ff13",
+                            "src2": "img_3b41ed6b",
+                            "src3": "img_692b1cb6",
+                            "label": "158 m² úteis"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.3,
+                "end": 21.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "duo-sobreposto",
+                        "text": "Sótão de 50 m²",
+                        "params": {
+                            "src": "img_f3cdcfa6",
+                            "src2": "img_17c9d5dd",
+                            "label": "Pré-instalação de ar condicionado"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.8,
+                "end": 25.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "numero-destaque",
+                        "text": "840 m²",
+                        "params": {
+                            "src": "img_39282046",
+                            "label": "Lote de 840 m²",
+                            "sub": "Terreno amplo e privado"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.1,
+                "end": 27.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Piscina: projeto aprovado",
+                        "params": {
+                            "src": "img_5b43afe2",
+                            "eyebrow": "Zona de lazer",
+                            "move": "up"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.8,
+                "end": 31.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "janela-arco",
+                        "text": "Anexo de 25 m²",
+                        "params": {
+                            "src": "img_ca817a37",
+                            "eyebrow": "Preparado para WC de apoio"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.9,
+                "end": 34.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "183.000 €",
+                        "params": {
+                            "src": "img_3044d31c",
+                            "label": "Moradia T4 em Margem",
+                            "sub": "Referência 920026"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 38,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_2d33e174",
+                            "name": "Tiago Martins",
+                            "phone": "+351 925 870 013",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r920026-qq64o/clip.mp4",
+    "error": null
+}

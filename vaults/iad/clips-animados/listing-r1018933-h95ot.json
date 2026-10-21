@@ -1,0 +1,1072 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T3 remodelado em Almada, junto ao Hospital Garcia de Horta",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-3-quartos-almada-99m2/r1018933",
+            "agent": "Sara Cruz",
+            "phone": "+351937093116",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Um T3 totalmente remodelado em Almada, pronto a habitar.",
+            "voiceover": "Um T3 totalmente remodelado em Almada, pronto a habitar. Fica na Praceta do Magriço, perto do Hospital Garcia de Orta. Comércio, supermercados e farmácias na zona. Para Lisboa, tem o Metro Sul do Tejo e a Fertagus no Pragal. Uma sala ampla e luminosa, com zona de estar e zona de refeições. Três quartos, para a família, um escritório ou hóspedes. Cozinha e casa de banho totalmente remodeladas. E uma varanda fechada, com muita luz, para ler ou trabalhar. Tem ainda arrecadação. Duzentos e noventa e cinco mil euros. Para visitar, fale com a Sara Cruz, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Um T3 totalmente remodelado em Almada, pronto a habitar.",
+                    "caption": "T3 remodelado em Almada"
+                },
+                {
+                    "photo": "rua / envolvente da Praceta do Magriço",
+                    "vo": "Fica na Praceta do Magriço, perto do Hospital Garcia de Orta.",
+                    "caption": "Praceta do Magriço"
+                },
+                {
+                    "photo": "comércio ou rua com serviços próxima",
+                    "vo": "Comércio, supermercados e farmácias na zona. Para Lisboa, tem o Metro Sul do Tejo e a Fertagus no Pragal.",
+                    "caption": "Metro Sul do Tejo e Fertagus"
+                },
+                {
+                    "photo": "sala, zona de estar",
+                    "vo": "Uma sala ampla e luminosa,",
+                    "caption": "Sala ampla e luminosa"
+                },
+                {
+                    "photo": "sala, zona de refeições",
+                    "vo": "com zona de estar e zona de refeições.",
+                    "caption": "Dois ambientes"
+                },
+                {
+                    "photo": "quarto principal",
+                    "vo": "Três quartos,",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "segundo quarto ou escritório",
+                    "vo": "para a família, um escritório ou hóspedes.",
+                    "caption": "Escritório ou hóspedes"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Cozinha",
+                    "caption": "Cozinha remodelada"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e casa de banho totalmente remodeladas.",
+                    "caption": "Casa de banho remodelada"
+                },
+                {
+                    "photo": "varanda fechada com luz natural",
+                    "vo": "E uma varanda fechada, com muita luz, para ler ou trabalhar. Tem ainda arrecadação.",
+                    "caption": "Varanda fechada"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e noventa e cinco mil euros. Para visitar, fale com a Sara Cruz, da IAD Portugal.",
+                    "caption": "295.000 € · Sara Cruz · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "As áreas não batem certo: o texto diz 88,30 m² de área privativa, mas os detalhes indicam 99 m² de área bruta e também 99 m² úteis (a área útil não pode ser maior do que a privativa). A área ficou fora da locução.",
+                "Algumas fotos do anúncio são home staging virtual (\"Imagem ilustrada\"). Use de preferência fotos reais. Se usar alguma das virtuais, legende-a \"Imagem ilustrada\" no ecrã, tal como no anúncio.",
+                "Ficaram de fora da locução, por opção: valor negociável, possibilidade de permuta, terceiro andar, construção de 1998 e certificado energético E. Pode juntar o valor negociável ou a permuta se a consultora quiser destacá-los."
+            ],
+            "message": "Bom dia Sra. Sara, fiz este vídeo do seu apartamento T3 em Almada para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 3 quartos de 99 m² em Almada",
+            "price": 295000,
+            "details": {
+                "Preço": "295 000 €",
+                "Localização": "Almada, 2805-028",
+                "Referência": "1018933",
+                "Área Bruta m²": "99",
+                "Quartos": 3,
+                "Ano de Construção": 1998,
+                "Certificado Energético": "E",
+                "Características": "99 m² área bruta, 99 m² úteis, 1 casa de banho, Sala de estar, Construído em 1998, Andar: 3"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Sara Cruz - and phone number - +351937093116. Agency: IAD Portugal.\nThe agent's photo is Sara Cruz.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T3 totalmente remodelado em Almada, pronto a habitar.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «T3 remodelado em Almada»\n- rua / envolvente da Praceta do Magriço → «Praceta do Magriço»\n- comércio ou rua com serviços próxima → «Metro Sul do Tejo e Fertagus»\n- sala, zona de estar → «Sala ampla e luminosa»\n- sala, zona de refeições → «Dois ambientes»\n- quarto principal → «Três quartos»\n- segundo quarto ou escritório → «Escritório ou hóspedes»\n- cozinha → «Cozinha remodelada»\n- casa de banho → «Casa de banho remodelada»\n- varanda fechada com luz natural → «Varanda fechada»\n- end card → «295.000 € · Sara Cruz · IAD Portugal»\n\nHere are the house details:\n\nApartamento 3 quartos de 99 m² em Almada\nPreço\n295 000 €\nLocalização\nAlmada, 2805-028\nReferência\n1018933\nÁrea Bruta m²\n99\nQuartos\n3\nAno de Construção\n1998\nCertificado Energético\nE\nCaracterísticas\n99 m² área bruta, 99 m² úteis, 1 casa de banho, Sala de estar, Construído em 1998, Andar: 3\n\nDescrição\nT3 APARTAMENTO TOTALMENTE REMODELADO EM ALMADA | LUMINOSO E PRONTO A HABITAR | VALOR NEGOCIÁVEL\n\nNa Praceta do Magriço, em Almada, encontra este T3 totalmente remodelado, com 88,30 m² de área privativa, varanda fechada e arrecadação. O proprietário admite possibilidade de permuta, mediante análise da proposta.\n\nUm apartamento pensado para quem procura uma casa atual, luminosa e funcional, onde poderá simplesmente entrar, decorar ao seu gosto e começar a viver, sem necessidade de obras.\n\nA sala ampla e luminosa permite criar confortavelmente dois ambientes distintos, com zona de estar e zona de refeições.\n\nOs três quartos oferecem a versatilidade necessária para uma família ou para quem pretende criar um escritório em casa ou dispor de um quarto adicional para hóspedes.\n\nA varanda fechada, com excelente entrada de luz natural, acrescenta um espaço extra que poderá ser aproveitado como zona de leitura, trabalho ou simplesmente como uma extensão agradável da habitação.\n\nA cozinha e a casa de banho foram totalmente remodeladas, acompanhando a imagem contemporânea e cuidada de todo o apartamento.\n\nCaracterísticas principais:\nT3 totalmente remodelado\n88,30 m² de área privativa\n3 quartos\nCozinha totalmente remodelada\nVaranda fechada\nExcelente luminosidade natural\nEspaços modernos, funcionais e versáteis\nPronto a habitar\nValor negociável\nPossibilidade de permuta, mediante análise da proposta\n\nUma localização prática para o dia a dia\n\nInserido numa zona residencial consolidada de Almada, beneficia da proximidade de comércio, supermercados, cafés, restauração, farmácias e outros serviços essenciais.\n\nEncontra-se também próximo do Hospital Garcia de Orta e dispõe de transportes públicos na envolvente, facilitando as deslocações para diferentes zonas de Almada, Pragal, Cacilhas e Lisboa.\n\nPara quem trabalha ou estuda em Lisboa, a localização permite ainda beneficiar dos principais acessos rodoviários, bem como das alternativas de transporte existentes no concelho, incluindo o Metro Sul do Tejo e a Fertagus no Pragal.\n\nAs fotografias identificadas como “Imagem ilustrada” correspondem a propostas de home staging virtual e destinam-se exclusivamente a mostrar algumas possibilidades de decoração e aproveitamento dos espaços.\n\nSe procura um T3 totalmente remodelado, com boas áreas, muita luz e uma localização prática para o quotidiano, este pode ser o imóvel que procura.\n\nMarque a sua visita e venha conhecê-lo. Se tem um imóvel e pretende apresentar uma proposta que envolva permuta, contacte-me para analisarmos essa possibilidade.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T3 remodelado em Almada (Pragal) e o mercado da habitação",
+            "summary": "T3 remodelado na Praceta do Magriço, em Almada, perto do Hospital Garcia de Orta e do interface do Pragal (Fertagus e Metro Sul do Tejo). Em 2025, Almada estava entre os concelhos com a habitação mais cara do país.",
+            "timeline": [
+                {
+                    "label": "Abertura do Hospital Garcia de Orta",
+                    "sublabel": "1991"
+                },
+                {
+                    "label": "Almada a 3.101 €/m² (6.º concelho mais caro)",
+                    "sublabel": "2.º trim. 2025"
+                },
+                {
+                    "label": "Média nacional a 2.076 €/m² (+16,8%)",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Média nacional a 2.337 €/m² (+19,8%)",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço do T3",
+                    "value": 295000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Preço mediano em Almada (2.º trim. 2025)",
+                    "value": 3101,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga em Portugal (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Almada vs. média nacional (2.º trim. 2025)",
+                    "left": {
+                        "title": "Almada",
+                        "points": [
+                            "3.101 €/m²",
+                            "6.º concelho mais caro",
+                            "Atrás de Lisboa, Cascais, Oeiras, Porto e Odivelas"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2.065 €/m²",
+                            "+19% em 1 ano"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Pragal é um interface onde se cruzam a Fertagus, o Metro Sul do Tejo e os autocarros da Carris Metropolitana",
+                "A estação do Pragal fica junto ao Hospital Garcia de Orta e perto do Almada Fórum",
+                "No Pragal, a Fertagus é a primeira paragem depois da Ponte 25 de Abril",
+                "Os preços das casas em Portugal continuam a subir: +19,8% no 1.º trim. de 2026"
+            ],
+            "sources": [
+                "https://www.aman-alliance.org/Home/ContentDetail/96276",
+                "https://www.doutorfinancas.pt/vida-e-familia/preco-das-casas-nunca-subiu-tanto-como-no-2-o-trimestre-de-2025/",
+                "https://eco.sapo.pt/2025/10/22/preco-das-casas-sobe-19-e-supera-pela-1-a-vez-os-2-000-euros-por-metro-quadrado/",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://cdn-images.rtp.pt/icm/noticias/docs/66/66271ea88bd95fa8a18c8997b0a2d4ec_1feb20f6a7da18976f65e84c4b8d9c63.pdf",
+                "https://www.idealista.pt/news/node/75156",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://fertagus.pt/Fertagus-En/Stations/Pragal",
+                "https://glupor14.events.chemistry.pt/directions-to-fct-nova-campus",
+                "https://siaia.apambiente.pt/AIADOC/AIA895/rnt-mst20181120153015.pdf",
+                "https://www.chks.co.uk/userfiles/files/Events/Portugal%20conference%20Nov2018/CHKS_2018_ATR_201811008%2C%20Ana%20T.pdf",
+                "https://www.e-konomista.pt/emprego-hospital-garcia-de-orta/"
+            ]
+        },
+        "suggested": {
+            "title": "T3 remodelado em Almada, junto ao Hospital Garcia de Horta",
+            "description": "T3 remodelado na Praceta do Magriço, a poucos passos do Hospital Garcia de Horta, em Almada.\n\nT3 · 99 m² · 3.º andar · 295.000 €\n\nEstá pronto a habitar. A cozinha e a casa de banho foram totalmente remodeladas.\nA sala é ampla e luminosa, com zona de estar e zona de refeições. Os três quartos servem para a família, para um escritório ou para receber hóspedes. A varanda fechada tem muita luz e dá para ler ou trabalhar. Tem ainda arrecadação.\n\nNa zona há comércio, supermercados e farmácias. Para ir a Lisboa, tem o Metro Sul do Tejo e a Fertagus no Pragal 🚆\nPrédio de 1998 · Certificado energético E · Ref. 1018933\n\nFale com a Sara Cruz, da IAD Portugal, e marque a sua visita: +351 937 093 116",
+            "tags": [
+                "almada",
+                "t3",
+                "apartamentot3",
+                "casasemalmada",
+                "imobiliario",
+                "casaparacomprar",
+                "margemsul",
+                "pragal",
+                "garciadehorta",
+                "remodelado",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1018933-h95ot",
+    "created_at": "2026-10-20T07:26:41+00:00",
+    "updated_at": "2026-10-20T07:53:26+00:00",
+    "source_path": "clips/uploads/VL7FZEXaco3t2YcBfZ6OLK5MvImF6Z0Vk7cVxv1y.mp3",
+    "images": [
+        {
+            "id": "img_dfab4757",
+            "path": "clips/uploads/e1YKPwetFxD0pyhIWO8oFD8VSIk2bUVEWyFZ4atm.png",
+            "description": "Quarto decorado (imagem ilustrada): cama de casal em tons neutros, roupeiro embutido, chão em madeira clara.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d38d7efb",
+            "path": "clips/uploads/cR1YDsZtCUptbYkW0tTl746ewlTwqz3F85yfU3T9.png",
+            "description": "Quarto vazio remodelado: paredes brancas, chão vinílico em madeira, nicho para roupeiro, porta branca aberta.",
+            "name": "01a0b21ebbbae3b2ffef1616f65017f7.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e80894b0",
+            "path": "clips/uploads/4jssh0h4JAclx3cGCOUGR1apg1E7H3irTkrFrJH9.png",
+            "description": "Sala de estar decorada (imagem ilustrada): sofá de canto bege, mesa redonda de madeira, quadros, porta para corredor.",
+            "name": "01a0b21ebcc558b165c7cb716c2220f1.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1b7a437e",
+            "path": "clips/uploads/0qIhkgtBeB2kVwQVZ4TuBbkuQzqRckTiKQLBJo0y.png",
+            "description": "Quarto vazio remodelado: paredes brancas, chão em madeira, porta aberta para o corredor, luz natural.",
+            "name": "01a0b21ebc003db126c1706599adf40e.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_36c163c4",
+            "path": "clips/uploads/UZ7702utJIbOQJn9ju3gYYcWQ2apUxYFI5SqcvrO.png",
+            "description": "Casa de banho remodelada: base de duche preta, coluna de duche preta, móvel suspenso em madeira, janela.",
+            "name": "01a0b21ebc4f6eed1607933c41252304.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_870342e1",
+            "path": "clips/uploads/FozXWMBrJKciS7SsZ5IE2DLCPrPDX72Xl0GMgHCM.png",
+            "description": "Casa de banho remodelada vista da entrada: sanita suspensa, móvel lavatório em madeira, espelho com LED.",
+            "name": "01a0b21ebca0912ede6c909d3dcf23f7.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5f77775b",
+            "path": "clips/uploads/tkccDIEcJ5gBDs97yIq3tDDreYOGEuylE7Q69oxK.png",
+            "description": "Escritório decorado (imagem ilustrada): secretária com portátil, estante, poltrona, porta envidraçada para varanda fechada luminosa.",
+            "name": "01a0b21ebd4353fc3bfc2652900e86f2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c1bc6a99",
+            "path": "clips/uploads/8W8eGQvErGb4gTZL4TE3IMWeXo3xGGNe960FNUtw.png",
+            "description": "Quarto vazio remodelado, comprido e luminoso, com porta envidraçada que dá para a varanda fechada.",
+            "name": "01a0b21ebbb4e2fb7b9287058f4e0999.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6e33f519",
+            "path": "clips/uploads/SQUGaE3CKhKhi6fkW6RR7PyaEjhkZ8St5r9Q9g6j.png",
+            "description": "Cozinha remodelada: armários brancos lacados, bancada de madeira, placa vitrocerâmica, forno, exaustor e esquentador.",
+            "name": "01a0b21ebbb6cd1e7b25c4294e8214f6.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0ecd7567",
+            "path": "clips/uploads/8lRAoaws68gXlrfZebb5qPGaZmjCKcQIKKbJBk2J.png",
+            "description": "Cozinha remodelada com janela ampla: lava-loiça inox, bancada de madeira, armários brancos brilhantes, muita luz.",
+            "name": "01a0b21ebbe2ed151c71eb908fbde300.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_306a8f39",
+            "path": "clips/uploads/Ck1AJzahlUorgM6Q0zc1wHSNCy99Qa4kdLGDlnHK.png",
+            "description": "Arrecadação ou pequena divisão interior, vazia, paredes brancas, chão em madeira clara, porta branca com chave.",
+            "name": "01a0b21ebac32e53786e176c2264a973.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a0977841",
+            "path": "clips/uploads/aafP4D3Oe8LqtXLtvdnNQQeR3MJv62m8YHov3qGG.png",
+            "description": "Quarto vazio e remodelado, paredes brancas, chão flutuante em madeira, janela ao fundo com vista para árvores.",
+            "name": "01a0b21ebb457d832309d4d47c090327.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_692965cd",
+            "path": "clips/uploads/oWf7YLFur9spMNAACPwxQmwU6znU0g0EVKtSjihZ.png",
+            "description": "Quarto amplo e vazio, chão em madeira, paredes brancas, porta aberta à esquerda e nicho para roupeiro.",
+            "name": "01a0b21ebb3958989fa70b9744820ac3.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6a2e4d42",
+            "path": "clips/uploads/u0F2uhFnhtAx8Ixyy5iXUpbjQ0r8TjyLnnie1bMj.png",
+            "description": "Varanda fechada com janelas de alumínio, muita luz natural, vista para árvores e céu azul, chão em madeira.",
+            "name": "01a0b21ebced7ceb7fa9576d64def4c2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4e123ea9",
+            "path": "clips/uploads/nQazpnosltbsgY3UOomsdTeIeQ0AdNWc7EMFxhJE.png",
+            "description": "Varanda fechada comprida e luminosa, janelas de um lado, vista para árvores verdes, chão em madeira.",
+            "name": "01a0b21ebd312be541ba8adae059f510.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9621f7cf",
+            "path": "clips/uploads/RgTgvjqoiTqKkptQIar7JKJWmscX4Txsa6NxVBat.png",
+            "description": "Fachada do prédio de quatro andares, cor salmão, marquises envidraçadas, entrada principal, carros estacionados, árvores à frente.",
+            "name": "01a0b21ebd42b60302065639aa558268.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b203834f",
+            "path": "clips/uploads/nv44450c0ckCOQmhOdhk5xS4A8LB5zT9UuEnKx3A.png",
+            "description": "Retrato da consultora Sara Cruz, da IAD Portugal.",
+            "name": "Sara Cruz.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8d4c9d9e",
+            "path": "clips/uploads/Rim5ZtuAW5YrbOVgRvb2jE0Et6cvi1AJhNUGG1W1.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/VL7FZEXaco3t2YcBfZ6OLK5MvImF6Z0Vk7cVxv1y.mp3",
+    "transcript": {
+        "duration": 35.599998474121094,
+        "text": "Um T3 totalmente remodelado em almada, pronto a habitar. Fica na Praceta do Magriço, perto do Hospital Garcia de Horta. Comércio, supermercados e farmácias na zona. Para Lisboa, tem um metro sul do Tejo e a Fertagos no Pragal. Uma sala ampla e luminosa, com zona de estar e zona de refeições. Três quartos, para a família, um escritório ou hóspedes. Cozinha e casa de banho totalmente remodeladas. E uma varanda fechada, com muita luz, para ler ou trabalhar. Tem ainda arrecadação, 295 mil euros. Para visitar, fale com a Sara Cruz, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.10000000149011612
+            },
+            {
+                "word": "T3",
+                "start": 0.10000000149011612,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "totalmente",
+                "start": 0.7200000286102295,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "remodelado",
+                "start": 1.4199999570846558,
+                "end": 1.940000057220459
+            },
+            {
+                "word": "em",
+                "start": 1.940000057220459,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "almada",
+                "start": 2.0799999237060547,
+                "end": 2.5
+            },
+            {
+                "word": "pronto",
+                "start": 2.8399999141693115,
+                "end": 3
+            },
+            {
+                "word": "a",
+                "start": 3,
+                "end": 3.3399999141693115
+            },
+            {
+                "word": "habitar",
+                "start": 3.3399999141693115,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "Fica",
+                "start": 4.039999961853027,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "na",
+                "start": 4.099999904632568,
+                "end": 4.260000228881836
+            },
+            {
+                "word": "Praceta",
+                "start": 4.260000228881836,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "do",
+                "start": 4.579999923706055,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "Magriço",
+                "start": 4.760000228881836,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "perto",
+                "start": 5.420000076293945,
+                "end": 5.539999961853027
+            },
+            {
+                "word": "do",
+                "start": 5.539999961853027,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "Hospital",
+                "start": 5.760000228881836,
+                "end": 6.139999866485596
+            },
+            {
+                "word": "Garcia",
+                "start": 6.139999866485596,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 6.579999923706055,
+                "end": 7.059999942779541
+            },
+            {
+                "word": "Horta",
+                "start": 7.059999942779541,
+                "end": 7.059999942779541
+            },
+            {
+                "word": "Comércio",
+                "start": 7.820000171661377,
+                "end": 8.34000015258789
+            },
+            {
+                "word": "supermercados",
+                "start": 8.34000015258789,
+                "end": 8.859999656677246
+            },
+            {
+                "word": "e",
+                "start": 8.859999656677246,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "farmácias",
+                "start": 9.100000381469727,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "na",
+                "start": 9.520000457763672,
+                "end": 10
+            },
+            {
+                "word": "zona",
+                "start": 10,
+                "end": 10
+            },
+            {
+                "word": "Para",
+                "start": 10.460000038146973,
+                "end": 10.5
+            },
+            {
+                "word": "Lisboa",
+                "start": 10.5,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "tem",
+                "start": 11.100000381469727,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "um",
+                "start": 11.260000228881836,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "metro",
+                "start": 11.460000038146973,
+                "end": 11.619999885559082
+            },
+            {
+                "word": "sul",
+                "start": 11.619999885559082,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "do",
+                "start": 11.880000114440918,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "Tejo",
+                "start": 12.079999923706055,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "e",
+                "start": 12.359999656677246,
+                "end": 12.5600004196167
+            },
+            {
+                "word": "a",
+                "start": 12.5600004196167,
+                "end": 12.739999771118164
+            },
+            {
+                "word": "Fertagos",
+                "start": 12.739999771118164,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "no",
+                "start": 13.100000381469727,
+                "end": 13.260000228881836
+            },
+            {
+                "word": "Pragal",
+                "start": 13.260000228881836,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "Uma",
+                "start": 14.039999961853027,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "sala",
+                "start": 14.180000305175781,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "ampla",
+                "start": 14.380000114440918,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 14.920000076293945,
+                "end": 15.180000305175781
+            },
+            {
+                "word": "luminosa",
+                "start": 15.180000305175781,
+                "end": 15.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 15.880000114440918,
+                "end": 16.059999465942383
+            },
+            {
+                "word": "zona",
+                "start": 16.059999465942383,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "de",
+                "start": 16.200000762939453,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "estar",
+                "start": 16.479999542236328,
+                "end": 16.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 16.700000762939453,
+                "end": 16.979999542236328
+            },
+            {
+                "word": "zona",
+                "start": 16.979999542236328,
+                "end": 17.1200008392334
+            },
+            {
+                "word": "de",
+                "start": 17.1200008392334,
+                "end": 17.360000610351562
+            },
+            {
+                "word": "refeições",
+                "start": 17.360000610351562,
+                "end": 17.860000610351562
+            },
+            {
+                "word": "Três",
+                "start": 18.299999237060547,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "quartos",
+                "start": 18.479999542236328,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "para",
+                "start": 19.1200008392334,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 19.260000228881836,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "família",
+                "start": 19.780000686645508,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "um",
+                "start": 19.940000534057617,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "escritório",
+                "start": 20.18000030517578,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "ou",
+                "start": 20.639999389648438,
+                "end": 20.940000534057617
+            },
+            {
+                "word": "hóspedes",
+                "start": 20.940000534057617,
+                "end": 21.5
+            },
+            {
+                "word": "Cozinha",
+                "start": 21.920000076293945,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 22.15999984741211,
+                "end": 22.420000076293945
+            },
+            {
+                "word": "casa",
+                "start": 22.420000076293945,
+                "end": 22.600000381469727
+            },
+            {
+                "word": "de",
+                "start": 22.600000381469727,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "banho",
+                "start": 22.959999084472656,
+                "end": 23
+            },
+            {
+                "word": "totalmente",
+                "start": 23,
+                "end": 23.639999389648438
+            },
+            {
+                "word": "remodeladas",
+                "start": 23.639999389648438,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "E",
+                "start": 24.700000762939453,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "uma",
+                "start": 24.860000610351562,
+                "end": 24.959999084472656
+            },
+            {
+                "word": "varanda",
+                "start": 24.959999084472656,
+                "end": 25.200000762939453
+            },
+            {
+                "word": "fechada",
+                "start": 25.200000762939453,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "com",
+                "start": 25.860000610351562,
+                "end": 26.040000915527344
+            },
+            {
+                "word": "muita",
+                "start": 26.040000915527344,
+                "end": 26.3799991607666
+            },
+            {
+                "word": "luz",
+                "start": 26.3799991607666,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "para",
+                "start": 26.860000610351562,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "ler",
+                "start": 27.020000457763672,
+                "end": 27.239999771118164
+            },
+            {
+                "word": "ou",
+                "start": 27.239999771118164,
+                "end": 27.5
+            },
+            {
+                "word": "trabalhar",
+                "start": 27.5,
+                "end": 27.899999618530273
+            },
+            {
+                "word": "Tem",
+                "start": 27.899999618530273,
+                "end": 28.3799991607666
+            },
+            {
+                "word": "ainda",
+                "start": 28.3799991607666,
+                "end": 28.760000228881836
+            },
+            {
+                "word": "arrecadação",
+                "start": 28.760000228881836,
+                "end": 29.520000457763672
+            },
+            {
+                "word": "295",
+                "start": 30.020000457763672,
+                "end": 31.139999389648438
+            },
+            {
+                "word": "mil",
+                "start": 31.139999389648438,
+                "end": 31.399999618530273
+            },
+            {
+                "word": "euros",
+                "start": 31.399999618530273,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "Para",
+                "start": 32.20000076293945,
+                "end": 32.31999969482422
+            },
+            {
+                "word": "visitar",
+                "start": 32.31999969482422,
+                "end": 32.91999816894531
+            },
+            {
+                "word": "fale",
+                "start": 33.15999984741211,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "com",
+                "start": 33.15999984741211,
+                "end": 33.36000061035156
+            },
+            {
+                "word": "a",
+                "start": 33.36000061035156,
+                "end": 33.47999954223633
+            },
+            {
+                "word": "Sara",
+                "start": 33.47999954223633,
+                "end": 33.720001220703125
+            },
+            {
+                "word": "Cruz",
+                "start": 33.720001220703125,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "da",
+                "start": 34.18000030517578,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "IAD",
+                "start": 34.400001525878906,
+                "end": 34.7599983215332
+            },
+            {
+                "word": "de",
+                "start": 34.7599983215332,
+                "end": 35.040000915527344
+            },
+            {
+                "word": "Portugal",
+                "start": 35.040000915527344,
+                "end": 35.36000061035156
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.599998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 13.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T3 PRONTO A HABITAR",
+                        "params": {
+                            "src": "img_9621f7cf",
+                            "avatar": "img_b203834f",
+                            "logo": "img_8d4c9d9e",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "295.000 €",
+                            "location": "ALMADA · PRAGAL",
+                            "title": "T3 REMODELADO EM ALMADA",
+                            "facts": "88,30 m² · 3 quartos · 1 WC · varanda fechada",
+                            "cta": "Ligue já +351 937 093 116",
+                            "name": "Sara Cruz",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.9,
+                "end": 18.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Sala ampla e luminosa",
+                        "params": {
+                            "src": "img_e80894b0",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.1,
+                "end": 21.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "TRÊS QUARTOS",
+                        "params": {
+                            "src": "img_dfab4757",
+                            "src2": "img_d38d7efb",
+                            "src3": "img_1b7a437e",
+                            "src4": "img_a0977841",
+                            "src5": "img_692965cd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.8,
+                "end": 24.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA E WC REMODELADOS",
+                        "params": {
+                            "src": "img_6e33f519",
+                            "src2": "img_0ecd7567",
+                            "src3": "img_36c163c4",
+                            "src4": "img_870342e1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.6,
+                "end": 27,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "VARANDA FECHADA",
+                        "params": {
+                            "src": "img_6a2e4d42",
+                            "src2": "img_4e123ea9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 29.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "ESCRITÓRIO E ARRECADAÇÃO",
+                        "params": {
+                            "src": "img_5f77775b",
+                            "src2": "img_c1bc6a99",
+                            "src3": "img_306a8f39",
+                            "src4": "img_4e123ea9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.9,
+                "end": 32.1,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "295.000 €",
+                        "params": {
+                            "src": "img_e80894b0",
+                            "blur": 8,
+                            "charsPerSecond": 8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.1,
+                "end": 35.599998474121094,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sara Cruz",
+                        "params": {
+                            "src": "img_b203834f",
+                            "name": "Sara Cruz",
+                            "phone": "+351 937 093 116",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1018933-h95ot/clip.mp4",
+    "error": null
+}

@@ -8,6 +8,7 @@ use App\Services\Clips\EffectLibrary;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\SceneVisualFiller;
+use App\Services\Clips\Store\EffectStore;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
@@ -513,6 +514,58 @@ class ClipImagesTest extends TestCase
         $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a']], ['kinetic-text', 'ambient']);
 
         $this->assertSame($plan['scenes'], $out['scenes']);
+    }
+
+    /** A project that swapped image-reveal for its own image effects still gets every picture placed. */
+    public function test_custom_image_effects_stand_in_when_image_reveal_is_disabled(): void
+    {
+        $filler = new SceneVisualFiller;
+        $plan = ['scenes' => [
+            ['start' => 0, 'end' => 2, 'layers' => []],
+            ['start' => 2, 'end' => 4, 'layers' => []],
+        ]];
+
+        $out = $filler->ensureProvidedImages($plan, [['id' => 'img_a'], ['id' => 'img_b']], ['kinetic-text', 'zoom-fx', 'blur-fx'], ['zoom-fx', 'blur-fx']);
+
+        $this->assertEqualsCanonicalizing(
+            ['zoom-fx:img_a', 'blur-fx:img_b'],
+            array_map(fn ($s) => $s['layers'][0]['type'].':'.$s['layers'][0]['params']['src'], $out['scenes']),
+        );
+    }
+
+    /** Every image slot of an effect is named to the planner — not just `src`. */
+    public function test_the_planner_sees_every_image_slot_of_a_multi_image_effect(): void
+    {
+        $fan = app(EffectStore::class)->create([
+            'slug' => 'fan', 'status' => 'active', 'enabled' => true, 'prompt' => 'x', 'display_name' => 'Fan', 'description' => 'a fan of photos',
+            'param_schema' => '{ "src"?: string, "src2"?: string, "srcs"?: string[], "title"?: string, "zoom"?: number }', 'tsx' => 'export default () => null;',
+        ]);
+
+        $this->assertSame(['src', 'src2', 'srcs'], EffectLibrary::imageKeys($fan));
+        $this->assertStringContainsString('takes SEVERAL provided image ids: src, src2, srcs', app(EffectLibrary::class)->promptBlock());
+    }
+
+    /** With image-reveal off, the planner is pointed at the image effects instead of told "no images". */
+    public function test_the_planner_is_told_to_use_image_effects_when_image_reveal_is_off(): void
+    {
+        app(EffectStore::class)->create([
+            'slug' => 'zoom-fx', 'status' => 'active', 'enabled' => true, 'prompt' => 'x', 'display_name' => 'Zoom',
+            'description' => 'zooms a photo', 'param_schema' => '{ "src"?: string, "zoom"?: number }', 'tsx' => 'export default () => null;',
+        ]);
+        $planner = new class
+        {
+            use BuildsAnimationPrompt;
+
+            public function sys(array $layers): string
+            {
+                return $this->systemPrompt('dense', false, [], false, '', false, $layers);
+            }
+        };
+
+        $prompt = $planner->sys(['kinetic-text', 'zoom-fx']);
+
+        $this->assertStringContainsString('shown with these image effects: [zoom-fx]', $prompt);
+        $this->assertStringNotContainsString('NO IMAGES:', $prompt);
     }
 
     public function test_text_heavy_scene_borrows_time_from_a_following_low_value_scene(): void

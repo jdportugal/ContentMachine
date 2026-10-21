@@ -1,0 +1,1280 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T3 remodelado com 2 suítes no centro de Leiria | 445 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-3-quartos-leiria-169m2/r1039241",
+            "agent": "Juliana Coelho",
+            "phone": "+351912667135",
+            "agency": "iad Portugal",
+            "hook": "Um T3 remodelado no centro de Leiria, com duas suites.",
+            "voiceover": "Um T3 remodelado no centro de Leiria, com duas suites. Perto da Praça Rodrigues Lobo, do Mercado de Sant'Ana e do Rio Lis. Aqui, a vida do dia a dia faz-se a pé. A sala e a cozinha estão em open space, com uma ilha ao centro. Há ainda uma marquise e uma varanda. São três quartos, dois em suite. Uma das suites tem closet. Três casas de banho, ar condicionado e bomba de calor. Fica num segundo andar, com cento e quarenta metros úteis. Para viver no centro, sem depender do carro. Quatrocentos e quarenta e cinco mil euros. Para visitar, fale com a Juliana Coelho, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Um T3 remodelado no centro de Leiria, com duas suites.",
+                    "caption": "Centro de Leiria"
+                },
+                {
+                    "photo": "rua ou praça do centro histórico",
+                    "vo": "Perto da Praça Rodrigues Lobo, do Mercado de Sant'Ana e do Rio Lis.",
+                    "caption": "Junto ao centro histórico"
+                },
+                {
+                    "photo": "zona ribeirinha do Rio Lis",
+                    "vo": "Aqui, a vida do dia a dia faz-se a pé.",
+                    "caption": "Tudo a pé"
+                },
+                {
+                    "photo": "sala em open space",
+                    "vo": "A sala e a cozinha estão em open space,",
+                    "caption": "Sala e cozinha em open space"
+                },
+                {
+                    "photo": "cozinha com ilha",
+                    "vo": "com uma ilha ao centro.",
+                    "caption": "Cozinha com ilha"
+                },
+                {
+                    "photo": "marquise",
+                    "vo": "Há ainda uma marquise e uma varanda.",
+                    "caption": "Marquise e varanda"
+                },
+                {
+                    "photo": "quarto suite principal",
+                    "vo": "São três quartos, dois em suite.",
+                    "caption": "Duas suites"
+                },
+                {
+                    "photo": "closet",
+                    "vo": "Uma das suites tem closet.",
+                    "caption": "Closet"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "Três casas de banho, ar condicionado e bomba de calor.",
+                    "caption": "Três casas de banho"
+                },
+                {
+                    "photo": "sala com luz natural",
+                    "vo": "Fica num segundo andar, com cento e quarenta metros úteis. Para viver no centro, sem depender do carro.",
+                    "caption": "140 m² úteis · 2.º andar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e quarenta e cinco mil euros. Para visitar, fale com a Juliana Coelho, da iad Portugal.",
+                    "caption": "445.000 € · Juliana Coelho · iad Portugal"
+                }
+            ],
+            "flags": [
+                "'Bomba de calor' aparece na lista de equipamentos da cozinha. Não é claro se serve para águas quentes ou para climatização. O guião diz só 'bomba de calor', confirmar.",
+                "O tipo de aquecimento não é claro (os detalhes têm a etiqueta em bruto 'property.feature.heating'). Ficou de fora.",
+                "A varanda só aparece nos detalhes. O texto fala apenas da marquise. Confirmar que existem as duas."
+            ],
+            "message": "Boa tarde Sra. Juliana,\nO meu nome é João Ferreira.\n\nVi o apartamento T3 no centro de Leiria que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 3 quartos de 169 m² em Leiria",
+            "price": 445000,
+            "details": {
+                "Preço": "445 000 €",
+                "Localização": "Leiria, 2400-130",
+                "Referência": "1039241",
+                "Área Bruta m²": "169",
+                "Quartos": 3,
+                "Ano de Construção": 2000,
+                "Certificado Energético": "C",
+                "Características": "169 m² área bruta, 140 m² úteis, 3 casas de banho, Varanda, Ar condicionado, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000, Andar: 2, Porta blindada, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Juliana Coelho - and phone number - +351912667135. Agency: iad Portugal.\nThe agent's photo is Juliana Coelho.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T3 remodelado no centro de Leiria, com duas suites.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «Centro de Leiria»\n- rua ou praça do centro histórico → «Junto ao centro histórico»\n- zona ribeirinha do Rio Lis → «Tudo a pé»\n- sala em open space → «Sala e cozinha em open space»\n- cozinha com ilha → «Cozinha com ilha»\n- marquise → «Marquise e varanda»\n- quarto suite principal → «Duas suites»\n- closet → «Closet»\n- casa de banho → «Três casas de banho»\n- sala com luz natural → «140 m² úteis · 2.º andar»\n- end card → «445.000 € · Juliana Coelho · iad Portugal»\n\nHere are the house details:\n\nApartamento 3 quartos de 169 m² em Leiria\nPreço\n445 000 €\nLocalização\nLeiria, 2400-130\nReferência\n1039241\nÁrea Bruta m²\n169\nQuartos\n3\nAno de Construção\n2000\nCertificado Energético\nC\nCaracterísticas\n169 m² área bruta, 140 m² úteis, 3 casas de banho, Varanda, Ar condicionado, Sala de estar, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000, Andar: 2, Porta blindada, Intercomunicador\n\nDescrição\n✨ APARTAMENTO T3 TOTALMENTE REMODELADO NO CENTRO DE LEIRIA — DUAS SUITES E UM EXTRAORDINÁRIO CLOSET\n\nViver no centro de Leiria, com tudo à porta, num apartamento totalmente remodelado onde a qualidade, o conforto e o bom gosto se encontram em perfeita harmonia.\n\nÉ esta a proposta deste elegante apartamento T3, situado no coração da cidade de Leiria, numa localização verdadeiramente privilegiada, onde a comodidade de poder fazer a vida quotidiana a pé se alia ao conforto de uma habitação cuidadosamente renovada.\n\nO apartamento foi totalmente remodelado, com uma intervenção pensada ao detalhe, privilegiando materiais, acabamentos e soluções contemporâneas, criando um ambiente moderno, acolhedor e simultaneamente sofisticado.\n\n🏡 Um interior pensado para viver\n\nA zona social é um dos grandes destaques da casa.\n\nA sala e a cozinha encontram-se integradas em open space, criando um espaço amplo, luminoso e extremamente agradável para o dia a dia ou para receber família e amigos.\n\nA cozinha, de linhas modernas e funcionais, dispõe de uma generosa ilha, que assume um papel central no espaço e proporciona uma excelente área de apoio e convívio.\n\nEstá equipada com:\n\nPlaca\nExaustor\nBomba de calor\nAr condicionado\n\nA esta zona junta-se uma agradável marquise, acrescentando uma área versátil e funcional ao apartamento.\n\n🛏️ Três quartos, duas suites e um closet extraordinário\n\nNa zona privada encontramos três quartos, numa configuração especialmente interessante para quem valoriza conforto e privacidade.\n\nDois dos quartos são em suite, oferecendo uma comodidade pouco comum e particularmente valorizada.\n\nUma das suites distingue-se ainda pelo seu maravilhoso closet, criado para proporcionar organização, funcionalidade e aquele toque especial que transforma um quarto numa verdadeira experiência de conforto.\n\nÉ uma solução pensada para quem não procura apenas um apartamento remodelado, mas uma casa onde cada espaço foi pensado para ser vivido com qualidade.\n\n✨ Uma remodelação feita com qualidade e bom gosto\n\nToda a intervenção foi realizada com uma preocupação evidente com a estética, a funcionalidade e o conforto.\n\nO resultado é um apartamento de imagem contemporânea, equilibrado e elegante, onde os espaços foram valorizados e onde a escolha dos materiais e acabamentos contribui para uma atmosfera sofisticada e acolhedora.\n\n📍 Viver no centro de Leiria\n\nA localização é, sem dúvida, outro dos grandes atributos deste imóvel.\n\nAqui, a cidade acontece à porta de casa.\n\nComércio, restauração, serviços, espaços culturais e zonas de lazer encontram-se na envolvente, permitindo usufruir verdadeiramente do estilo de vida citadino sem depender constantemente do automóvel. O centro histórico de Leiria concentra comércio tradicional, cafés, restauração e diversos pontos de interesse, enquanto as zonas junto ao Rio Lis proporcionam espaços para passeios e lazer.\n\nA proximidade à Praça Rodrigues Lobo, centro histórico, Mercado de Sant'Ana e zona ribeirinha reforça ainda mais a centralidade desta localização.\n\nUM T3 COM UMA CONFIGURAÇÃO RARA, UMA REMODELAÇÃO DE EXCELÊNCIA E UMA LOCALIZAÇÃO PRIVILEGIADA.\n\n3 quartos | 2 suites | Closet | Sala e cozinha em open space | Ilha | Marquise | Bomba de calor | Ar condicionado | Placa | Exaustor | Remodelação integral\n\nUm apartamento para quem procura qualidade, conforto e centralidade, sem abdicar de uma casa bonita, contemporânea e pensada ao detalhe.\n\nNo centro de Leiria. Perto de tudo. Pronto para viver.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T3 remodelado no centro histórico de Leiria",
+            "summary": "Este T3 com 140 m² custa 445 mil euros, cerca de 3.179 €/m². No 1.º trimestre de 2026, o valor mediano das casas vendidas em Portugal foi de 2.337 €/m², segundo o INE. O imóvel fica perto do Mercado de Sant'Ana, um edifício de Ernesto Korrodi, e da praça com o nome do poeta Rodrigues Lobo.",
+            "timeline": [
+                {
+                    "label": "Projeto do Mercado de Sant'Ana, de Ernesto Korrodi",
+                    "sublabel": "1919"
+                },
+                {
+                    "label": "Construção do Mercado de Sant'Ana",
+                    "sublabel": "1924–1931"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Valor mediano das casas vendidas em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida face ao 1.º trim. 2025",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Casas vendidas em Portugal (1.º trim. 2026)",
+                    "value": 35953,
+                    "unit": "casas"
+                },
+                {
+                    "label": "Preço por m² deste T3 (445 mil € ÷ 140 m²)",
+                    "value": 3179,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Este T3 e a mediana nacional",
+                    "left": {
+                        "title": "T3 no centro de Leiria",
+                        "points": [
+                            "445.000 €",
+                            "140 m² úteis",
+                            "≈3.179 €/m²"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal (INE, 1.º trim. 2026)",
+                        "points": [
+                            "Mediana de 2.337 €/m²",
+                            "+19,8% num ano",
+                            "35.953 casas vendidas"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Mercado de Sant'Ana: projeto de Ernesto Korrodi, no lugar de um antigo convento",
+                "Hoje funciona como centro cultural",
+                "Praça Rodrigues Lobo: o nome homenageia o poeta nascido em Leiria",
+                "A estátua do poeta está num dos cantos da praça",
+                "Os preços das casas subiram 19,8% num ano em Portugal (1.º trim. 2026)"
+            ],
+            "sources": [
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://www.idealista.pt/news/imobiliario/habitacao/2026/07/17/76623-casas-vendidas-em-portugal-atingem-preco-historico-apos-subir-19-8",
+                "https://diariodarepublica.pt/dr/detalhe/portaria/581-2011-1194255",
+                "https://livros.fcsh.unl.pt/cham/catalog/download/96/377/1384?inline=1",
+                "https://www.visitportugal.com/en/content/visit-to-leiria",
+                "https://www.visitportugal.com/pt-pt/node/139299",
+                "https://en.wikipedia.org/wiki/Francisco_Rodrigues_Lobo",
+                "https://www.britannica.com/print/article/506676"
+            ]
+        },
+        "suggested": {
+            "title": "T3 remodelado com 2 suítes no centro de Leiria | 445 mil €",
+            "description": "T3 remodelado no centro de Leiria, num segundo andar com 140 m² úteis, perto da Praça Rodrigues Lobo, do Mercado de Santana e do Rio Lis. Tem sala e cozinha em open space com ilha, três quartos (dois em suíte, um deles com closet), três casas de banho, marquise, varanda, ar condicionado e bomba de calor. Por 445 mil euros, para visitar fale com a Juliana Coelho, da IAD Portugal.",
+            "tags": [
+                "Leiria",
+                "imobiliário",
+                "T3",
+                "apartamento à venda",
+                "centro de Leiria",
+                "casa remodelada",
+                "IAD Portugal",
+                "Juliana Coelho"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1039241-5h66k",
+    "created_at": "2026-10-15T13:15:12+00:00",
+    "updated_at": "2026-10-15T13:27:59+00:00",
+    "source_path": "clips/uploads/CaxOo7k6O4EQ3v80bk0ePDbPY4g7FRIa9fy7NFLa.mp3",
+    "images": [
+        {
+            "id": "img_bb76d93a",
+            "path": "clips/uploads/or4ak2pm4dTR12i1b3phk94J9VVAqIP5N19YlGD7.jpg",
+            "description": "Sala de estar com móvel de TV em madeira e ripado, iluminação LED por baixo, vitrine e ar-condicionado.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e3a5164c",
+            "path": "clips/uploads/UFc5MUX59qjVhzHdOZb3qcq2BWG4tAjRw1eZdYxH.jpg",
+            "description": "Sala de estar com roupeiro de madeira aberto e iluminado, móvel de TV ripado e janela.",
+            "name": "01a0fd50b97461fd60a3a3abcf0c412c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bf79586b",
+            "path": "clips/uploads/Bspg5z5kdQQmTwdGOtbPPVNqp51Me8jvsV6L9rLv.jpg",
+            "description": "Sala open space com teto rebaixado iluminado, mesa-ilha oval de madeira e porta para varanda.",
+            "name": "01a0fd50b9c1d22061563cc10f204f4b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cb6c5335",
+            "path": "clips/uploads/gFQon4cazHHJAOj1n8BSIpU0KX2GszWBXwOY43M3.jpg",
+            "description": "Sala de estar vista de frente, com porta de entrada, ar-condicionado e móvel de TV em madeira.",
+            "name": "01a0fd50b9cf6c275314148d3a424d15.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c194d125",
+            "path": "clips/uploads/K1LCR9FLwPFos3jKjO4whg99o7vXHKYmvhju87x0.jpg",
+            "description": "Zona de jantar com mesa-ilha oval e porta envidraçada aberta para varanda com vista urbana.",
+            "name": "01a0fd50b921cd12b96fec975a973332.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_670a1c0b",
+            "path": "clips/uploads/S5qqQnGloGm0bdXmaWKnIzDIfwhdE25ZSCO2XZfU.jpg",
+            "description": "Open space com mesa-ilha oval, balcão ripado da cozinha, porta de entrada e teto iluminado.",
+            "name": "01a0fd50b95785957b3870004f95a7b0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_592a2642",
+            "path": "clips/uploads/SzDnMDxycSQftIiqwo4AhiiK5j44wW6dpk84fg2k.jpg",
+            "description": "Corredor branco com vista para a sala, com roupeiro iluminado e mesa-ilha ao fundo.",
+            "name": "01a0fd50b4fae17d81bf981e50e05d7c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f9337dec",
+            "path": "clips/uploads/3ZEFIi6mZQ8VKSUHovBXYuAv2aeNheEYTy4jWZP0.jpg",
+            "description": "Open space com mesa-ilha oval, teto com luz indireta, cozinha ripada e porta de entrada.",
+            "name": "01a0fd50b975bd8768295030949a64a1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9fe6a173",
+            "path": "clips/uploads/y3Bq8zHumSNphyMesFQkB6FIE3GZB1duY8zGbC3k.jpg",
+            "description": "Varanda com azulejos verdes, porta de caixilharia cinzenta e vista para prédios do centro.",
+            "name": "01a0fd50baa385f260f6cf15d3198907.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4a9f53c4",
+            "path": "clips/uploads/SWa7UoXpkq39ToXRJLvi9lw6Hx96P1bEZd0JZqjx.jpg",
+            "description": "Cozinha remodelada em L, armários brancos e madeira, bancada e parede em mármore, LED.",
+            "name": "01a0fd50b961627340d22cc0f7906e2d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cfab4e24",
+            "path": "clips/uploads/ax70VGmcs8GbWAuuujbawMKNojbI4ATsTdIuHCaK.jpg",
+            "description": "Marquise envidraçada vista da cozinha, entre móveis brancos e madeira, com vista sobre telhados de Leiria",
+            "name": "01a0fd50ba3fa1f70877886559d5224f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aa5a3201",
+            "path": "clips/uploads/jCzFoW4ezCFLcBJKaX3GD25qIGgBtsY9ZSPaqsth.jpg",
+            "description": "Cozinha com móveis brancos e madeira, iluminação LED e painel ripado em madeira junto à janela",
+            "name": "01a0fd50ba88b71ffc8e6e63a9789d4b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0329623d",
+            "path": "clips/uploads/v0BFxXqCkWFXZ0sdeU3Yum9stAksxcsAMH2Mo956.jpg",
+            "description": "Cozinha com bancada e painel em mármore branco, LED, abrindo para sala com mesa ripada ao fundo",
+            "name": "01a0fd50b97047f62da3a8e630d5c5f5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_29a030b8",
+            "path": "clips/uploads/YUAdqGX7e3t5gW3nz5bpukaoA6SKstoFrwwIlK0h.jpg",
+            "description": "Quarto amplo vazio com chão flutuante e duas janelas com vista para a cidade e árvores",
+            "name": "01a0fd50ba638755e52d68aa3a229288.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_88df63fb",
+            "path": "clips/uploads/JnPPtkPBkCPUSir4EmbrLXAI4TapCNCHuIg7S700.jpg",
+            "description": "Quarto com roupeiro branco embutido de três portas, chão flutuante e janela à direita",
+            "name": "01a0fd50b93b68895a8452b041a9d7b5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_adb88077",
+            "path": "clips/uploads/1ldaAhLo9gDD5SY4xQewLkydVeMWwhSfvTB3CFtk.jpg",
+            "description": "Casa de banho em mármore branco com duche envidraçado, nicho iluminado e espelho redondo LED",
+            "name": "01a0fd50ba81a7c58b6413500548a61f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f4a2b7a0",
+            "path": "clips/uploads/Gq0rrXrjhw86qUd792tFrmQAVRmBIxwkuslxiUrY.jpg",
+            "description": "Quarto vazio e luminoso com chão flutuante e janela com vista para vegetação",
+            "name": "01a0fd50b870335f9c210a3ad93cec2b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0f9373be",
+            "path": "clips/uploads/nEdYVm8qRi3RnAX16l06OFwIthxsvOO9k9aW9F3k.jpg",
+            "description": "Quarto suíte com roupeiro aberto, ar condicionado e porta para casa de banho com espelho LED",
+            "name": "01a0fd50b8625b1cc4048c4b16027e87.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_affcab8e",
+            "path": "clips/uploads/91KGDYYdyMZIsdqjGeVgd8XMpHCbfvJinPXe2Vag.jpg",
+            "description": "Quarto pequeno visto da porta, chão de madeira clara e janela para muro de pedra",
+            "name": "01a0fd50b9172dab7c124f43dbd9c5b2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fe849a33",
+            "path": "clips/uploads/MXVLF5WRL1qKzSfFmVRY98Na9L3r4TdR5UFEB2PN.jpg",
+            "description": "Casa de banho em tons bege com duche envidraçado, nicho iluminado, sanita suspensa e móvel branco",
+            "name": "01a0fd50ba327f133b1cf59009fa991c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2418d5dc",
+            "path": "clips/uploads/tpnexcN1kuTrOPex7JBtxAbimxOdaxbirvjcCg50.jpg",
+            "description": "Quarto vazio e remodelado, paredes brancas, chão de madeira clara, janela com vista para árvores.",
+            "name": "01a0fd50b950d0a518e69c19ab02560a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1bc04069",
+            "path": "clips/uploads/rSG6FAbmNNOv3td9SX8ToR3NVY49zAcrIb19VFxR.jpg",
+            "description": "Quarto com roupeiro branco embutido, corredor ao lado com ar-condicionado e portas abertas.",
+            "name": "01a0fd50b5b21514349b61f910a0fc1b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_60dd9f7b",
+            "path": "clips/uploads/CHrnOlvkBimcqD8T9Z078EudI3XhrqL6RZG5N5rg.jpg",
+            "description": "Quarto vazio e luminoso, janela com vidro fosco, chão laminado claro e acesso lateral ao closet.",
+            "name": "01a0fd50b891bab3d9914a6c5ae12b37.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_08044241",
+            "path": "clips/uploads/JbyaLSsuTljAXOuucB3MkPHbhFXInQouOT11EAoJ.jpg",
+            "description": "Closet da suíte com armários de madeira, portas de vidro com caixilho preto e iluminação LED.",
+            "name": "01a0fd50bba15d4eb042723a08ff4464.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b654e27b",
+            "path": "clips/uploads/Tqe2IKWhcKKiTRMZTUAVVDAlduGPFpKAXdaaE8Cg.jpg",
+            "description": "Suíte com closet de madeira e vidro, porta de correr aberta para a casa de banho privativa.",
+            "name": "01a0fd50b92e1e5858c2c6ccb7582053.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_41d2d3c5",
+            "path": "clips/uploads/aJltsU4TH3DC9b8gx20O9cHqL96Jn2KbBI8dMN3K.jpg",
+            "description": "Casa de banho remodelada, base de duche com vidro, móvel branco suspenso, revestimento bege tipo mármore.",
+            "name": "01a0fd50ba153e43d7d299c1ba1f8f9f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cf7535ae",
+            "path": "clips/uploads/XsdRoCxmmHP6pTLu2VB6NtQQAg4rcTfbqewnKFOb.jpg",
+            "description": "Sótão ou arrecadação ampla, teto inclinado com claraboia, paredes brancas e chão de mosaico cinzento.",
+            "name": "01a0fd50b5d090445eef6b76f6741451.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d53124f3",
+            "path": "clips/uploads/v25O92MMMNJHDuAulxmdzZNHb7VKwuGnrGh9q82L.png",
+            "description": "Retrato da consultora Juliana Coelho, da iad Portugal.",
+            "name": "Juliana Coelho.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_71ef1218",
+            "path": "clips/uploads/4V7uvCdZJI7AOtZE8MBN8EkhooIwc0UaNGzEf4E3.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/CaxOo7k6O4EQ3v80bk0ePDbPY4g7FRIa9fy7NFLa.mp3",
+    "transcript": {
+        "duration": 35.439998626708984,
+        "text": "Um T3 remodelado no centro de Leiria, com duas suítes, perto da Praça Rodrigues Lobo, do Mercado de Santana e do Rio Lix. Aqui, a vida do dia-a-dia faz-se a pé. A sala e a cozinha estão em open space, com uma ilha ao centro. Há ainda uma marquise e uma varanda. São três quartos, dois em suíte. Uma das suítes tem closet, três casas de banho, ar-condicionado e bomba de calor. Fica num segundo andar, com 140 metros úteis, para viver no centro, sem depender do carro. 445 mil euros. Para visitar, fale com a Juliana Coelho, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.10000000149011612
+            },
+            {
+                "word": "T3",
+                "start": 0.10000000149011612,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "remodelado",
+                "start": 0.7599999904632568,
+                "end": 1.4800000190734863
+            },
+            {
+                "word": "no",
+                "start": 1.4800000190734863,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "centro",
+                "start": 1.7400000095367432,
+                "end": 1.9800000190734863
+            },
+            {
+                "word": "de",
+                "start": 1.9800000190734863,
+                "end": 2.200000047683716
+            },
+            {
+                "word": "Leiria",
+                "start": 2.200000047683716,
+                "end": 2.5199999809265137
+            },
+            {
+                "word": "com",
+                "start": 2.700000047683716,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "duas",
+                "start": 2.859999895095825,
+                "end": 3.240000009536743
+            },
+            {
+                "word": "suítes",
+                "start": 3.240000009536743,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "perto",
+                "start": 4,
+                "end": 4.21999979019165
+            },
+            {
+                "word": "da",
+                "start": 4.21999979019165,
+                "end": 4.460000038146973
+            },
+            {
+                "word": "Praça",
+                "start": 4.460000038146973,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "Rodrigues",
+                "start": 4.679999828338623,
+                "end": 5.159999847412109
+            },
+            {
+                "word": "Lobo",
+                "start": 5.159999847412109,
+                "end": 5.5
+            },
+            {
+                "word": "do",
+                "start": 5.659999847412109,
+                "end": 5.860000133514404
+            },
+            {
+                "word": "Mercado",
+                "start": 5.860000133514404,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "de",
+                "start": 6.039999961853027,
+                "end": 6.320000171661377
+            },
+            {
+                "word": "Santana",
+                "start": 6.320000171661377,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "e",
+                "start": 6.639999866485596,
+                "end": 6.880000114440918
+            },
+            {
+                "word": "do",
+                "start": 6.880000114440918,
+                "end": 7.099999904632568
+            },
+            {
+                "word": "Rio",
+                "start": 7.099999904632568,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "Lix",
+                "start": 7.260000228881836,
+                "end": 7.559999942779541
+            },
+            {
+                "word": "Aqui",
+                "start": 7.960000038146973,
+                "end": 8.239999771118164
+            },
+            {
+                "word": "a",
+                "start": 8.539999961853027,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "vida",
+                "start": 8.84000015258789,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "do",
+                "start": 8.84000015258789,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "dia",
+                "start": 9.039999961853027,
+                "end": 9.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 9.260000228881836,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "dia",
+                "start": 9.279999732971191,
+                "end": 9.479999542236328
+            },
+            {
+                "word": "faz",
+                "start": 9.479999542236328,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "se",
+                "start": 9.779999732971191,
+                "end": 10.020000457763672
+            },
+            {
+                "word": "a",
+                "start": 10.020000457763672,
+                "end": 10.140000343322754
+            },
+            {
+                "word": "pé",
+                "start": 10.140000343322754,
+                "end": 10.199999809265137
+            },
+            {
+                "word": "A",
+                "start": 10.640000343322754,
+                "end": 10.779999732971191
+            },
+            {
+                "word": "sala",
+                "start": 10.779999732971191,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "e",
+                "start": 10.979999542236328,
+                "end": 11.119999885559082
+            },
+            {
+                "word": "a",
+                "start": 11.119999885559082,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "cozinha",
+                "start": 11.460000038146973,
+                "end": 11.479999542236328
+            },
+            {
+                "word": "estão",
+                "start": 11.479999542236328,
+                "end": 11.739999771118164
+            },
+            {
+                "word": "em",
+                "start": 11.739999771118164,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "open",
+                "start": 11.979999542236328,
+                "end": 12.300000190734863
+            },
+            {
+                "word": "space",
+                "start": 12.300000190734863,
+                "end": 12.680000305175781
+            },
+            {
+                "word": "com",
+                "start": 12.84000015258789,
+                "end": 12.960000038146973
+            },
+            {
+                "word": "uma",
+                "start": 12.960000038146973,
+                "end": 13.180000305175781
+            },
+            {
+                "word": "ilha",
+                "start": 13.180000305175781,
+                "end": 13.34000015258789
+            },
+            {
+                "word": "ao",
+                "start": 13.34000015258789,
+                "end": 13.600000381469727
+            },
+            {
+                "word": "centro",
+                "start": 13.600000381469727,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "Há",
+                "start": 14.319999694824219,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "ainda",
+                "start": 14.420000076293945,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "uma",
+                "start": 14.640000343322754,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "marquise",
+                "start": 14.84000015258789,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "e",
+                "start": 15.359999656677246,
+                "end": 15.579999923706055
+            },
+            {
+                "word": "uma",
+                "start": 15.579999923706055,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "varanda",
+                "start": 15.84000015258789,
+                "end": 16.1200008392334
+            },
+            {
+                "word": "São",
+                "start": 16.65999984741211,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "três",
+                "start": 16.719999313354492,
+                "end": 17.1200008392334
+            },
+            {
+                "word": "quartos",
+                "start": 17.1200008392334,
+                "end": 17.559999465942383
+            },
+            {
+                "word": "dois",
+                "start": 17.920000076293945,
+                "end": 18.020000457763672
+            },
+            {
+                "word": "em",
+                "start": 18.020000457763672,
+                "end": 18.260000228881836
+            },
+            {
+                "word": "suíte",
+                "start": 18.260000228881836,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "Uma",
+                "start": 19,
+                "end": 19.100000381469727
+            },
+            {
+                "word": "das",
+                "start": 19.100000381469727,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "suítes",
+                "start": 19.31999969482422,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "tem",
+                "start": 19.600000381469727,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "closet",
+                "start": 19.780000686645508,
+                "end": 20.299999237060547
+            },
+            {
+                "word": "três",
+                "start": 20.780000686645508,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "casas",
+                "start": 20.920000076293945,
+                "end": 21.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 21.18000030517578,
+                "end": 21.559999465942383
+            },
+            {
+                "word": "banho",
+                "start": 21.559999465942383,
+                "end": 21.579999923706055
+            },
+            {
+                "word": "ar",
+                "start": 21.959999084472656,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "condicionado",
+                "start": 21.959999084472656,
+                "end": 22.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 22.68000030517578,
+                "end": 22.920000076293945
+            },
+            {
+                "word": "bomba",
+                "start": 22.920000076293945,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 23.18000030517578,
+                "end": 23.579999923706055
+            },
+            {
+                "word": "calor",
+                "start": 23.579999923706055,
+                "end": 23.579999923706055
+            },
+            {
+                "word": "Fica",
+                "start": 24.15999984741211,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "num",
+                "start": 24.15999984741211,
+                "end": 24.360000610351562
+            },
+            {
+                "word": "segundo",
+                "start": 24.360000610351562,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "andar",
+                "start": 24.68000030517578,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 25.139999389648438,
+                "end": 25.34000015258789
+            },
+            {
+                "word": "140",
+                "start": 25.34000015258789,
+                "end": 25.899999618530273
+            },
+            {
+                "word": "metros",
+                "start": 25.899999618530273,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "úteis",
+                "start": 26.31999969482422,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "para",
+                "start": 27.15999984741211,
+                "end": 27.280000686645508
+            },
+            {
+                "word": "viver",
+                "start": 27.280000686645508,
+                "end": 27.5
+            },
+            {
+                "word": "no",
+                "start": 27.5,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "centro",
+                "start": 28.1200008392334,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "sem",
+                "start": 28.420000076293945,
+                "end": 28.5
+            },
+            {
+                "word": "depender",
+                "start": 28.5,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "do",
+                "start": 28.81999969482422,
+                "end": 29.079999923706055
+            },
+            {
+                "word": "carro",
+                "start": 29.079999923706055,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "445",
+                "start": 30.3799991607666,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "mil",
+                "start": 30.959999084472656,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "euros",
+                "start": 31.200000762939453,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "Para",
+                "start": 32,
+                "end": 32.099998474121094
+            },
+            {
+                "word": "visitar",
+                "start": 32.099998474121094,
+                "end": 32.720001220703125
+            },
+            {
+                "word": "fale",
+                "start": 33.02000045776367,
+                "end": 33.02000045776367
+            },
+            {
+                "word": "com",
+                "start": 33.02000045776367,
+                "end": 33.18000030517578
+            },
+            {
+                "word": "a",
+                "start": 33.18000030517578,
+                "end": 33.36000061035156
+            },
+            {
+                "word": "Juliana",
+                "start": 33.36000061035156,
+                "end": 33.65999984741211
+            },
+            {
+                "word": "Coelho",
+                "start": 33.65999984741211,
+                "end": 34.13999938964844
+            },
+            {
+                "word": "da",
+                "start": 34.2599983215332,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "IAD",
+                "start": 34.400001525878906,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "Portugal",
+                "start": 34.68000030517578,
+                "end": 35.20000076293945
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.439998626708984,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8999999999999986,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T3 REMODELADO COM 2 SUITES",
+                        "params": {
+                            "src": "img_bb76d93a",
+                            "avatar": "img_d53124f3",
+                            "logo": "img_71ef1218",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "445.000 €",
+                            "location": "LEIRIA · CENTRO",
+                            "title": "T3 REMODELADO",
+                            "facts": "140 m² · 3 quartos · 2 suites · 3 WC",
+                            "cta": "Ligue já +351 912 667 135",
+                            "name": "Juliana Coelho",
+                            "logoText": "iad",
+                            "logoSub": "Portugal",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8999999999999986,
+                "end": 7.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_c194d125",
+                            "title": "JUNTO AO CENTRO HISTÓRICO",
+                            "items": [
+                                "Praça Rodrigues Lobo",
+                                "Mercado de Sant'Ana",
+                                "Rio Lis"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.9,
+                "end": 10.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_29a030b8",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.5,
+                "end": 14.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA E COZINHA EM OPEN SPACE",
+                        "params": {
+                            "src": "img_bf79586b",
+                            "src2": "img_670a1c0b",
+                            "src3": "img_f9337dec",
+                            "src4": "img_4a9f53c4",
+                            "src5": "img_0329623d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.2,
+                "end": 16.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "MARQUISE E VARANDA",
+                        "params": {
+                            "src": "img_cfab4e24",
+                            "src2": "img_9fe6a173"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.5,
+                "end": 18.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "TRÊS QUARTOS · DUAS SUITES",
+                        "params": {
+                            "src": "img_0f9373be",
+                            "src2": "img_88df63fb",
+                            "src3": "img_f4a2b7a0",
+                            "src4": "img_2418d5dc"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.8,
+                "end": 20.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_08044241",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.8,
+                "end": 23.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TRÊS CASAS DE BANHO",
+                        "params": {
+                            "src": "img_adb88077",
+                            "src2": "img_fe849a33",
+                            "src3": "img_41d2d3c5",
+                            "src4": "img_b654e27b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.9,
+                "end": 27,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "140 m² ÚTEIS · 2.º ANDAR",
+                        "params": {
+                            "src": "img_e3a5164c",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 29.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "VIVER NO CENTRO",
+                        "params": {
+                            "src": "img_cb6c5335",
+                            "src2": "img_592a2642",
+                            "src3": "img_aa5a3201",
+                            "src4": "img_1bc04069"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.9,
+                "end": 32,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "445.000 €",
+                        "params": {
+                            "src": "img_affcab8e",
+                            "src2": "img_60dd9f7b",
+                            "src3": "img_cf7535ae",
+                            "src4": "img_bb76d93a",
+                            "src5": "img_c194d125"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32,
+                "end": 35.439998626708984,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Juliana Coelho",
+                        "params": {
+                            "src": "img_d53124f3",
+                            "name": "Juliana Coelho",
+                            "phone": "+351 912 667 135",
+                            "email": "juliana.coelho@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1039241-5h66k/clip.mp4",
+    "error": null
+}

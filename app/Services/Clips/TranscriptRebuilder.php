@@ -7,13 +7,15 @@ class TranscriptRebuilder
     /**
      * Rebuild the word/timestamp list from an edited transcript text.
      *
-     * Real ASR timings are non-uniform (short words, pauses), so we preserve
-     * them as far as possible:
-     *  - same word count → keep timings per index (the common case: spelling).
-     *  - otherwise → keep the real timings of the unchanged run of words at the
-     *    start and end, and distribute only the edited span evenly across the
-     *    gap between those anchors. A full rewrite (no shared prefix/suffix)
-     *    falls back to an even distribution across the whole duration.
+     * Real ASR timings are non-uniform (short words, pauses) and everything
+     * downstream is cut on them (scenes, the after-intro split, footage on the
+     * voiceover's topics), so they are kept wherever the edit allows: the edited
+     * words are aligned to the heard ones (longest common subsequence, ignoring
+     * case and punctuation). Matched words keep their real timings; between two
+     * matches, the edited run takes the heard run's timings one-for-one when
+     * they are the same length (a spelling fix, "6.000" for "seis mil" is
+     * not), else shares that run's real span evenly. Only a full rewrite ends up
+     * evenly spread across the whole duration.
      *
      * @return array<int,array{word:string,start:float,end:float}>
      */
@@ -23,69 +25,56 @@ class TranscriptRebuilder
         if ($tokens === []) {
             return [];
         }
-        $originalWords = array_values($originalWords);
-
-        if ($duration <= 0 && $originalWords !== []) {
-            $duration = (float) (end($originalWords)['end'] ?? 0.0);
+        $orig = array_values($originalWords);
+        if ($duration <= 0 && $orig !== []) {
+            $duration = (float) (end($orig)['end'] ?? 0.0);
         }
+        [$n, $m] = [count($tokens), count($orig)];
+        $a = array_map(self::norm(...), $tokens);
+        $b = array_map(fn ($w) => self::norm((string) ($w['word'] ?? '')), $orig);
 
-        $n = count($tokens);
-        $m = count($originalWords);
-
-        // Same word count → keep original timings, just swap the text.
-        if ($n === $m) {
-            $out = [];
-            foreach ($tokens as $i => $word) {
-                $out[] = [
-                    'word' => $word,
-                    'start' => (float) $originalWords[$i]['start'],
-                    'end' => (float) $originalWords[$i]['end'],
-                ];
+        // LCS table, then the matched pairs (token i ↔ heard word j), in order.
+        $dp = array_fill(0, $n + 1, array_fill(0, $m + 1, 0));
+        for ($i = $n - 1; $i >= 0; $i--) {
+            for ($j = $m - 1; $j >= 0; $j--) {
+                $dp[$i][$j] = $a[$i] !== '' && $a[$i] === $b[$j] ? $dp[$i + 1][$j + 1] + 1 : max($dp[$i + 1][$j], $dp[$i][$j + 1]);
             }
-
-            return $out;
         }
-
-        // Anchor the unchanged run of words at each end to their real timings.
-        $prefix = 0;
-        while ($prefix < $n && $prefix < $m
-            && self::norm($tokens[$prefix]) === self::norm($originalWords[$prefix]['word'])) {
-            $prefix++;
+        $pairs = [];
+        for ($i = 0, $j = 0; $i < $n && $j < $m;) {
+            if ($a[$i] !== '' && $a[$i] === $b[$j]) {
+                $pairs[] = [$i++, $j++];
+            } elseif ($dp[$i + 1][$j] >= $dp[$i][$j + 1]) {
+                $i++;
+            } else {
+                $j++;
+            }
         }
-        $suffix = 0;
-        while ($suffix < $n - $prefix && $suffix < $m - $prefix
-            && self::norm($tokens[$n - 1 - $suffix]) === self::norm($originalWords[$m - 1 - $suffix]['word'])) {
-            $suffix++;
-        }
+        $pairs[] = [$n, $m];   // sentinel: the end
 
         $out = [];
-        // Prefix: keep real timings.
-        for ($i = 0; $i < $prefix; $i++) {
-            $out[] = ['word' => $tokens[$i], 'start' => (float) $originalWords[$i]['start'], 'end' => (float) $originalWords[$i]['end']];
-        }
-
-        // Middle (edited) span: distribute evenly across the gap between anchors.
-        $midCount = $n - $prefix - $suffix;
-        if ($midCount > 0) {
-            $windowStart = $prefix > 0 ? (float) $originalWords[$prefix - 1]['end'] : 0.0;
-            $windowEnd = $suffix > 0 ? (float) $originalWords[$m - $suffix]['start'] : $duration;
-            if ($windowEnd < $windowStart) {
-                $windowEnd = $windowStart;
+        [$ti, $oj] = [0, 0];   // the next token / heard word not yet placed
+        foreach ($pairs as [$pi, $pj]) {
+            // The edited run tokens[$ti..$pi) stands where the heard run orig[$oj..$pj) was.
+            $run = $pi - $ti;
+            $heard = $pj - $oj;
+            if ($run > 0 && $run === $heard) {
+                for ($k = 0; $k < $run; $k++) {
+                    $out[] = ['word' => $tokens[$ti + $k], 'start' => (float) $orig[$oj + $k]['start'], 'end' => (float) $orig[$oj + $k]['end']];
+                }
+            } elseif ($run > 0) {
+                $from = $heard > 0 ? (float) $orig[$oj]['start'] : ($oj > 0 ? (float) $orig[$oj - 1]['end'] : 0.0);
+                $to = $heard > 0 ? (float) $orig[$pj - 1]['end'] : ($pj < $m ? (float) $orig[$pj]['start'] : $duration);
+                $to = max($to, $from);
+                $slice = ($to - $from) / $run;
+                for ($k = 0; $k < $run; $k++) {
+                    $out[] = ['word' => $tokens[$ti + $k], 'start' => round($from + $k * $slice, 3), 'end' => round($from + ($k + 1) * $slice, 3)];
+                }
             }
-            $slice = ($windowEnd - $windowStart) / $midCount;
-            for ($k = 0; $k < $midCount; $k++) {
-                $out[] = [
-                    'word' => $tokens[$prefix + $k],
-                    'start' => round($windowStart + $k * $slice, 3),
-                    'end' => round($windowStart + ($k + 1) * $slice, 3),
-                ];
+            if ($pi < $n) {
+                $out[] = ['word' => $tokens[$pi], 'start' => (float) $orig[$pj]['start'], 'end' => (float) $orig[$pj]['end']];
             }
-        }
-
-        // Suffix: keep real timings.
-        for ($k = $suffix; $k > 0; $k--) {
-            $oi = $m - $k;
-            $out[] = ['word' => $tokens[$n - $k], 'start' => (float) $originalWords[$oi]['start'], 'end' => (float) $originalWords[$oi]['end']];
+            [$ti, $oj] = [$pi + 1, $pj + 1];
         }
 
         return $out;

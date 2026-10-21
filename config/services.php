@@ -109,6 +109,19 @@ return [
         'file_base_url' => env('KIE_FILE_BASE_URL', 'https://kieai.redpandaai.co'),
     ],
 
+    // fal.ai — Avatar Gen (Sync Lipsync 2 Pro: video + audio → lip-synced video).
+    // Optional: with no key the Avatar Gen page refuses to generate.
+    'fal' => [
+        'key' => env('FAL_KEY'),
+        'queue_url' => env('FAL_QUEUE_URL', 'https://queue.fal.run'),
+        'rest_url' => env('FAL_REST_URL', 'https://rest.fal.ai'),
+        'lipsync_model' => env('FAL_LIPSYNC_MODEL', 'fal-ai/sync-lipsync/v2/pro'),
+        // Status-poll cadence, and how many CONSECUTIVE network failures to ride
+        // out before giving up on a request fal is still running (and billing).
+        'poll_every' => (int) env('FAL_POLL_EVERY', 5),
+        'poll_failures' => (int) env('FAL_POLL_FAILURES', 6),
+    ],
+
     // Blotato — social publishing/scheduling. Optional: with no key the
     // Finished hub's publish actions are disabled.
     'blotato' => [

@@ -40,7 +40,6 @@ class RenderBackgroundSampleJob implements ShouldQueue
             return; // already cached for this design system
         }
 
-        $library->syncFilesystem(); // the code background must be present in remotion/src/backgrounds
         @mkdir(dirname($out), 0777, true);
         $renderer->render($library->samplePlan($this->slug), $out);
     }

@@ -1,0 +1,992 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Escritório remodelado no centro das Caldas da Rainha por 167.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/imovel-comercial-venda-caldas-da-rainha-nossa-senhora-do-populo-coto-e-sao-gregorio-50m2/r171469",
+            "agent": "Rui Francisco",
+            "phone": "+351965659539",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Um escritório remodelado no centro das Caldas da Rainha.",
+            "voiceover": "Um escritório remodelado no centro das Caldas da Rainha. Fica no centro da cidade, com paragem do autocarro TOMA à porta e estacionamento fácil. São cinquenta metros quadrados, com uma sala ampla e uma zona de arrumos e arquivo. Com uma divisória, a sala pode dar dois espaços independentes. A casa de banho e a lavandaria também foram remodeladas. Caixilharia nova com vidro duplo, ar condicionado e certificado energético B menos. Prédio com elevador. Pronto a utilizar. Cento e sessenta e sete mil euros. Para visitar, fale com o Rui Francisco, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio / rua no centro",
+                    "vo": "Um escritório remodelado no centro das Caldas da Rainha.",
+                    "caption": "Centro, Caldas da Rainha"
+                },
+                {
+                    "photo": "rua com paragem de autocarro à porta",
+                    "vo": "Fica no centro da cidade, com paragem do autocarro TOMA à porta e estacionamento fácil.",
+                    "caption": "Autocarro à porta"
+                },
+                {
+                    "photo": "sala ampla, vista geral",
+                    "vo": "São cinquenta metros quadrados, com uma sala ampla…",
+                    "caption": "50 m² remodelados"
+                },
+                {
+                    "photo": "zona de arrumos / arquivo",
+                    "vo": "…e uma zona de arrumos e arquivo.",
+                    "caption": "Arrumos e arquivo"
+                },
+                {
+                    "photo": "sala ampla, outro ângulo",
+                    "vo": "Com uma divisória, a sala pode dar dois espaços independentes.",
+                    "caption": "Divisível em dois espaços"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "A casa de banho…",
+                    "caption": "Casa de banho remodelada"
+                },
+                {
+                    "photo": "lavandaria",
+                    "vo": "…e a lavandaria também foram remodeladas.",
+                    "caption": "Lavandaria"
+                },
+                {
+                    "photo": "janela com caixilharia nova",
+                    "vo": "Caixilharia nova com vidro duplo…",
+                    "caption": "Vidro duplo"
+                },
+                {
+                    "photo": "ar condicionado na sala",
+                    "vo": "…ar condicionado e certificado energético B menos.",
+                    "caption": "Certificado energético B-"
+                },
+                {
+                    "photo": "entrada do prédio / elevador",
+                    "vo": "Prédio com elevador. Pronto a utilizar.",
+                    "caption": "Prédio com elevador"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Cento e sessenta e sete mil euros. Para visitar, fale com o Rui Francisco, da IAD Portugal.",
+                    "caption": "167.000 € · Rui Francisco · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O preço dá cerca de 3.340 €/m² (167.000 € por 50 m² de área bruta), o que parece alto para escritórios nas Caldas da Rainha. Confirmar o preço e a área antes de publicar. O hook não depende do preço."
+            ],
+            "message": "Boa tarde Sr. Rui, fiz este vídeo do seu escritório no centro das Caldas da Rainha para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Escritório de 50 m² em Caldas da Rainha - Nossa Senhora do Pópulo, Coto e São Gregório",
+            "price": 167000,
+            "details": {
+                "Preço": "167 000 €",
+                "Localização": "Caldas da Rainha - Nossa Senhora do Pópulo, Coto e São Gregório, 2500-136",
+                "Referência": "171469",
+                "Área Bruta m²": "50",
+                "Ano de Construção": 1982,
+                "Certificado Energético": "B-",
+                "Características": "1 casa de banho, Construído em 1982"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Rui Francisco - and phone number - +351965659539. Agency: IAD Portugal.\nThe agent's photo is Rui Francisco.jpg; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um escritório remodelado no centro das Caldas da Rainha.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio / rua no centro → «Centro, Caldas da Rainha»\n- rua com paragem de autocarro à porta → «Autocarro à porta»\n- sala ampla, vista geral → «50 m² remodelados»\n- zona de arrumos / arquivo → «Arrumos e arquivo»\n- sala ampla, outro ângulo → «Divisível em dois espaços»\n- casa de banho → «Casa de banho remodelada»\n- lavandaria → «Lavandaria»\n- janela com caixilharia nova → «Vidro duplo»\n- ar condicionado na sala → «Certificado energético B-»\n- entrada do prédio / elevador → «Prédio com elevador»\n- end card → «167.000 € · Rui Francisco · IAD Portugal»\n\nHere are the house details:\n\nEscritório de 50 m² em Caldas da Rainha - Nossa Senhora do Pópulo, Coto e São Gregório\nPreço\n167 000 €\nLocalização\nCaldas da Rainha - Nossa Senhora do Pópulo, Coto e São Gregório, 2500-136\nReferência\n171469\nÁrea Bruta m²\n50\nAno de Construção\n1982\nCertificado Energético\nB-\nCaracterísticas\n1 casa de banho, Construído em 1982\n\nDescrição\nEscritório situado no centro da cidade. \nRemodelado e pronto a ser utilizado. Caixilharia nova (vidro duplo) e ar condicionado.\nPossui 1 sala ampla com a possibilidade de colocar uma divisória e criar 2 espaços distintos e independentes, Zona de arrumos/arquivo.\n\nTem casa de banho e lavandaria remodeladas.\n\nPrédio com elevador. Muita facilidade de estacionamento. Possui paragem autocarro TOMA à porta.\n\nTHE USER ASKED FOR THIS VERSION: «to much time stop with one image at 05 seconds»\nDo it this way: Fix the long hold on a single image around the 5-second mark. No still should stay on screen for more than about 2 to 2.5 seconds. If one photo has to cover a longer voiceover line (the location and bus stop line around 0:04–0:08), split that line across two or three different shots instead, e.g. the building exterior and then the room or the storage area. Keep the cut rhythm brisk and even all the way through. Give every still visible motion, such as a push-in, pan or parallax, so it never looks frozen. Reuse photos with a different crop or move rather than holding one frame.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Escritório remodelado à venda no centro das Caldas da Rainha",
+            "summary": "Escritório de 50 m² no centro das Caldas da Rainha, remodelado e com certificado energético B-, à venda por 167 mil euros. Tem acesso à rede de autocarros urbanos TOMA.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Área do escritório",
+                    "value": 50,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Preço pedido",
+                    "value": 167000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Preço por m² (calculado a partir do anúncio)",
+                    "value": 3340,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Classes na escala energética (A+ a F)",
+                    "value": 8,
+                    "unit": "classes"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Classe energética B- vs média nacional",
+                    "left": {
+                        "title": "Este escritório: B-",
+                        "points": [
+                            "4.ª classe numa escala de 8",
+                            "Classe mínima exigida a edifícios novos"
+                        ]
+                    },
+                    "right": {
+                        "title": "Média dos imóveis: C",
+                        "points": [
+                            "Abaixo do mínimo atual para construção nova",
+                            "A classe mais comum em Portugal (dados ADENE)"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A escala energética vai de A+ (mais eficiente) a F (menos eficiente)",
+                "B- é a classe mínima exigida a edifícios novos",
+                "TOMA é a rede municipal de autocarros urbanos das Caldas da Rainha",
+                "A sala pode ser dividida em dois espaços independentes"
+            ],
+            "sources": [
+                "https://www.santander.pt/salto/classes-energeticas",
+                "https://goldenergy.pt/glossario/classe-eficiencia-energetica/",
+                "https://www.idealista.pt/news/node/22407",
+                "https://en.wikipedia.org/wiki/TOMA_(Caldas_da_Rainha)",
+                "https://transparencia.gov.pt/en/fundos-europeus/pt2020/beneficiarios-projetos/projeto/CENTRO-09-1406-FEDER-000039/"
+            ]
+        },
+        "suggested": {
+            "title": "Escritório remodelado no centro das Caldas da Rainha por 167.000 €",
+            "description": "50 m² remodelados no centro das Caldas da Rainha, com a paragem do autocarro Toma à porta.\n\nO escritório tem uma sala ampla e uma zona de arrumos e arquivo. Com uma divisória, a sala pode dar dois espaços independentes.\nA casa de banho e a lavandaria também foram remodeladas. A caixilharia é nova, com vidro duplo, e há ar condicionado.\nO prédio tem elevador e o estacionamento na zona é fácil. Está pronto a utilizar.\n\nEscritório · 50 m² brutos · Construído em 1982 · Certificado B- · 167.000 € · Ref. 171469\n\n📞 Fale com o Rui Francisco, da IAD Portugal, para visitar: +351 965 659 539",
+            "tags": [
+                "escritorio",
+                "escritorioavenda",
+                "caldasdarainha",
+                "caldas",
+                "oeste",
+                "imobiliario",
+                "imoveisportugal",
+                "espacocomercial",
+                "investimentoimobiliario",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": [],
+        "improve_request": "to much time stop with one image at 05 seconds"
+    },
+    "id": "listing-r171469-premium",
+    "created_at": "2026-10-19T13:57:46+00:00",
+    "updated_at": "2026-10-19T16:46:56+00:00",
+    "source_path": "clips/uploads/0csdBVXO9NT2DszU50JOrpZRF2kQMKuFlA9Th4tB.mp3",
+    "images": [
+        {
+            "id": "img_f1001251",
+            "path": "clips/uploads/pRjZ4Jb7ZvCKgjphq4XVwKtqD54tmhbUcjBKB0BN.jpg",
+            "description": "Sala de escritório ampla com mesa de reuniões em madeira, cadeiras brancas, ar-condicionado e parede azul com armários.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d5764060",
+            "path": "clips/uploads/fysZ7zjVLUcOJNaiE7aKJKh8q4BGHsW4uifiNkUA.jpg",
+            "description": "Sala de escritório com janelas novas de vidro duplo, ar-condicionado, mesa de reuniões e vista para a rua.",
+            "name": "2410c8df761da3ca240595c350e8632fca9ff8f9f4ca72eb35075ff2af1aef33.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_79871f3d",
+            "path": "clips/uploads/qx2dB5QtZVyR72zS96oC9WXQR59L0LtANPOY2dhW.jpg",
+            "description": "Sala de escritório com mesa de reuniões, balcão divisório escuro, zona de secretária com parede azul e portas de madeira.",
+            "name": "f876b71776212097e4f143a25ca6633fb8b54af089a1107b770a89c0d1f21d1c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ca5133d0",
+            "path": "clips/uploads/nrK85Whlnd8JwGB333uRRR3dUBXFhwSTHilpOTpx.jpg",
+            "description": "Zona de arrumos e arquivo da sala, com roupeiro branco de parede inteira, mesa de reuniões e quadros.",
+            "name": "e7457b6d92610b5636aeef980b3d8863d74daa41cd759c55a9313d95c648004f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7a97e4e0",
+            "path": "clips/uploads/9vxoTdX0MpsbcaBHdggJYHNzHsDWMM3UNsulLlAn.jpg",
+            "description": "Casa de banho remodelada com mármore claro, base de duche com resguardo de vidro, sanita e lavatório.",
+            "name": "70b05e864a98d6640f00e7edab414e67abe61b8a1c9c47cd934cae18708895b3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ff64607a",
+            "path": "clips/uploads/qZhj7iIzElA8cxi5MBFounby9I2eSIZ8nWAZ2m51.jpg",
+            "description": "Hall de entrada com portas para Sala A e outra sala, e cofre antigo decorado em destaque.",
+            "name": "f0e4ebaf7975221cc3bbef2c5a6271bad08ed9b6ed68ba02cd7258e1d12a9355.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f2c280d3",
+            "path": "clips/uploads/R68FqvyHpRmmwKS39Ahuoa92TMpcXCFl1Qm5ThFM.jpg",
+            "description": "Corredor com armários embutidos brancos e porta branca moderna, provavelmente para casa de banho ou lavandaria.",
+            "name": "8e1e53fc461f9ff70251a55d8f415bf52a1a72cd185f904b8dcc3824ff713fa0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_22368484",
+            "path": "clips/uploads/BO2eVjpifFb2JNEgLehODUrzichtHlu21Gs5b0Ty.jpg",
+            "description": "Hall de entrada com porta principal de madeira com fechadura de segurança, intercomunicador e cofre antigo.",
+            "name": "e43b1a52ae6688941181524402bbc1a3f0cb0180155aca21e116a59610d13138.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_97cc0550",
+            "path": "clips/uploads/VfhEDcFBZrZ9zYtSTty3WhPwpKSFfdsOdTK020M6.jpg",
+            "description": "Retrato do consultor Rui Francisco, da IAD Portugal.",
+            "name": "Rui Francisco.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_16d3ab00",
+            "path": "clips/uploads/rlwmXtfiSAInFYjnYGbxFvEgSNQYmpglVX3krcSw.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/0csdBVXO9NT2DszU50JOrpZRF2kQMKuFlA9Th4tB.mp3",
+    "transcript": {
+        "duration": 35.84000015258789,
+        "text": "Um escritório remodelado no centro das Caldas da Rainha. Fica no centro da cidade, com paragem do autocarro Toma à Porta e estacionamento fácil. São 50 metros quadrados, com uma sala ampla e uma zona de arrumos e arquivo. Com uma divisória, a sala pode dar dois espaços independentes. A casa de banho e a lavandaria também foram remodeladas. Caixilharia nova com vidro duplo, ar-condicionado e certificado energético B-, prédio com elevador, pronto a utilizar. 167 mil euros. Para visitar, fale com o Rui Francisco, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "escritório",
+                "start": 0.18000000715255737,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "remodelado",
+                "start": 0.7400000095367432,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "no",
+                "start": 1.4199999570846558,
+                "end": 1.7000000476837158
+            },
+            {
+                "word": "centro",
+                "start": 1.7000000476837158,
+                "end": 2
+            },
+            {
+                "word": "das",
+                "start": 2,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "Caldas",
+                "start": 2.259999990463257,
+                "end": 2.5399999618530273
+            },
+            {
+                "word": "da",
+                "start": 2.5399999618530273,
+                "end": 2.7799999713897705
+            },
+            {
+                "word": "Rainha",
+                "start": 2.7799999713897705,
+                "end": 3.440000057220459
+            },
+            {
+                "word": "Fica",
+                "start": 3.5399999618530273,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "no",
+                "start": 3.759999990463257,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "centro",
+                "start": 4.039999961853027,
+                "end": 4.260000228881836
+            },
+            {
+                "word": "da",
+                "start": 4.260000228881836,
+                "end": 4.840000152587891
+            },
+            {
+                "word": "cidade",
+                "start": 4.840000152587891,
+                "end": 4.840000152587891
+            },
+            {
+                "word": "com",
+                "start": 5.079999923706055,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "paragem",
+                "start": 5.260000228881836,
+                "end": 5.5
+            },
+            {
+                "word": "do",
+                "start": 5.5,
+                "end": 5.699999809265137
+            },
+            {
+                "word": "autocarro",
+                "start": 5.699999809265137,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "Toma",
+                "start": 6.119999885559082,
+                "end": 6.480000019073486
+            },
+            {
+                "word": "à",
+                "start": 6.480000019073486,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "Porta",
+                "start": 6.679999828338623,
+                "end": 6.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 6.920000076293945,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "estacionamento",
+                "start": 7.239999771118164,
+                "end": 7.760000228881836
+            },
+            {
+                "word": "fácil",
+                "start": 7.760000228881836,
+                "end": 8.199999809265137
+            },
+            {
+                "word": "São",
+                "start": 8.819999694824219,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "50",
+                "start": 8.880000114440918,
+                "end": 9.539999961853027
+            },
+            {
+                "word": "metros",
+                "start": 9.539999961853027,
+                "end": 9.859999656677246
+            },
+            {
+                "word": "quadrados",
+                "start": 9.859999656677246,
+                "end": 10.300000190734863
+            },
+            {
+                "word": "com",
+                "start": 10.420000076293945,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "uma",
+                "start": 10.600000381469727,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "sala",
+                "start": 10.960000038146973,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "ampla",
+                "start": 10.960000038146973,
+                "end": 11.5
+            },
+            {
+                "word": "e",
+                "start": 11.5,
+                "end": 11.720000267028809
+            },
+            {
+                "word": "uma",
+                "start": 11.720000267028809,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "zona",
+                "start": 12.0600004196167,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "de",
+                "start": 12.0600004196167,
+                "end": 12.34000015258789
+            },
+            {
+                "word": "arrumos",
+                "start": 12.34000015258789,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 12.65999984741211,
+                "end": 12.899999618530273
+            },
+            {
+                "word": "arquivo",
+                "start": 12.899999618530273,
+                "end": 13.260000228881836
+            },
+            {
+                "word": "Com",
+                "start": 13.800000190734863,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "uma",
+                "start": 13.899999618530273,
+                "end": 14.079999923706055
+            },
+            {
+                "word": "divisória",
+                "start": 14.079999923706055,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "a",
+                "start": 14.739999771118164,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "sala",
+                "start": 15.079999923706055,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "pode",
+                "start": 15.079999923706055,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "dar",
+                "start": 15.359999656677246,
+                "end": 15.5600004196167
+            },
+            {
+                "word": "dois",
+                "start": 15.5600004196167,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "espaços",
+                "start": 15.960000038146973,
+                "end": 16.31999969482422
+            },
+            {
+                "word": "independentes",
+                "start": 16.31999969482422,
+                "end": 17.1200008392334
+            },
+            {
+                "word": "A",
+                "start": 17.65999984741211,
+                "end": 17.81999969482422
+            },
+            {
+                "word": "casa",
+                "start": 17.81999969482422,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "de",
+                "start": 17.959999084472656,
+                "end": 18.31999969482422
+            },
+            {
+                "word": "banho",
+                "start": 18.31999969482422,
+                "end": 18.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 18.31999969482422,
+                "end": 18.5
+            },
+            {
+                "word": "a",
+                "start": 18.5,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "lavandaria",
+                "start": 18.639999389648438,
+                "end": 19
+            },
+            {
+                "word": "também",
+                "start": 19,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "foram",
+                "start": 19.540000915527344,
+                "end": 19.81999969482422
+            },
+            {
+                "word": "remodeladas",
+                "start": 19.81999969482422,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "Caixilharia",
+                "start": 21.15999984741211,
+                "end": 21.600000381469727
+            },
+            {
+                "word": "nova",
+                "start": 21.600000381469727,
+                "end": 22
+            },
+            {
+                "word": "com",
+                "start": 22,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "vidro",
+                "start": 22.239999771118164,
+                "end": 22.459999084472656
+            },
+            {
+                "word": "duplo",
+                "start": 22.459999084472656,
+                "end": 22.84000015258789
+            },
+            {
+                "word": "ar",
+                "start": 23.31999969482422,
+                "end": 23.399999618530273
+            },
+            {
+                "word": "condicionado",
+                "start": 23.399999618530273,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 24.100000381469727,
+                "end": 24.360000610351562
+            },
+            {
+                "word": "certificado",
+                "start": 24.360000610351562,
+                "end": 24.899999618530273
+            },
+            {
+                "word": "energético",
+                "start": 24.899999618530273,
+                "end": 25.5
+            },
+            {
+                "word": "B",
+                "start": 25.5,
+                "end": 25.940000534057617
+            },
+            {
+                "word": "",
+                "start": 25.940000534057617,
+                "end": 26.020000457763672
+            },
+            {
+                "word": "prédio",
+                "start": 26.65999984741211,
+                "end": 27.059999465942383
+            },
+            {
+                "word": "com",
+                "start": 27.059999465942383,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "elevador",
+                "start": 27.299999237060547,
+                "end": 27.719999313354492
+            },
+            {
+                "word": "pronto",
+                "start": 28.219999313354492,
+                "end": 28.420000076293945
+            },
+            {
+                "word": "a",
+                "start": 28.420000076293945,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "utilizar",
+                "start": 28.979999542236328,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "167",
+                "start": 30.139999389648438,
+                "end": 30.739999771118164
+            },
+            {
+                "word": "mil",
+                "start": 30.739999771118164,
+                "end": 30.899999618530273
+            },
+            {
+                "word": "euros",
+                "start": 30.899999618530273,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "Para",
+                "start": 31.440000534057617,
+                "end": 32.040000915527344
+            },
+            {
+                "word": "visitar",
+                "start": 32.040000915527344,
+                "end": 32.63999938964844
+            },
+            {
+                "word": "fale",
+                "start": 32.97999954223633,
+                "end": 32.97999954223633
+            },
+            {
+                "word": "com",
+                "start": 32.97999954223633,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "o",
+                "start": 33.15999984741211,
+                "end": 33.34000015258789
+            },
+            {
+                "word": "Rui",
+                "start": 33.34000015258789,
+                "end": 33.459999084472656
+            },
+            {
+                "word": "Francisco",
+                "start": 33.459999084472656,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "da",
+                "start": 34.220001220703125,
+                "end": 34.47999954223633
+            },
+            {
+                "word": "IAD",
+                "start": 34.47999954223633,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "de",
+                "start": 34.900001525878906,
+                "end": 35.13999938964844
+            },
+            {
+                "word": "Portugal",
+                "start": 35.13999938964844,
+                "end": 35.560001373291016
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 35.84000015258789,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "",
+                        "params": {
+                            "src": "img_f1001251",
+                            "location": "Caldas da Rainha · Centro",
+                            "title": "Escritório remodelado no centro",
+                            "facts": "50 m² · 1 WC · Certificado B-",
+                            "name": "Rui Francisco",
+                            "cta": "+351 965 659 539",
+                            "tag": "Novo imóvel",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD Portugal S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3,
+                "end": 5.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Autocarro à porta",
+                        "params": {
+                            "src": "img_ff64607a",
+                            "eyebrow": "Centro"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.9,
+                "end": 8.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "",
+                        "params": {
+                            "src": "img_d5764060"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.8,
+                "end": 11.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "50 m² remodelados",
+                        "params": {
+                            "src": "img_79871f3d",
+                            "eyebrow": "Sala"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.6,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Arrumos e arquivo",
+                        "params": {
+                            "src": "img_ca5133d0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 17.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Divisível em dois espaços",
+                        "params": {
+                            "src": "img_f1001251"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 21.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Casa de banho e lavandaria",
+                        "params": {
+                            "src": "img_7a97e4e0",
+                            "src2": "img_f2c280d3",
+                            "label": "Remodelados"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.9,
+                "end": 26.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_d5764060",
+                            "title": "O essencial",
+                            "items": [
+                                "Área: 50 m²",
+                                "Janelas: vidro duplo",
+                                "Clima: ar condicionado",
+                                "Certificado: B-"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.3,
+                "end": 30.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Prédio com elevador",
+                        "params": {
+                            "src": "img_22368484"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.4,
+                "end": 33.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "167.000 €",
+                        "params": {
+                            "src": "img_f1001251",
+                            "sub": "Pronto a utilizar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.2,
+                "end": 35.84,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "",
+                        "params": {
+                            "src": "img_97cc0550",
+                            "name": "Rui Francisco",
+                            "phone": "+351 965 659 539"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "azul-iad-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r171469-premium/clip.mp4",
+    "error": null
+}

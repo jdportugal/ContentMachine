@@ -1,0 +1,19 @@
+{
+    "status": "active",
+    "video_path": "avatars/uploads/zFtAz6LtufwfE8CfShxtJSAvqQinvZd0FMmumhos.mp4",
+    "audio_path": "avatars/uploads/l70hzV5hXXVtWyxUQrf38iBmCu36Eu6RtSARVgZI.mp3",
+    "display_name": "trimmed_2.mp4",
+    "audio_name": "DavinciResolve.mp3",
+    "id": "avatar-fqyrewdl",
+    "created_at": "2026-09-16T17:50:06+00:00",
+    "updated_at": "2026-09-17T10:28:15+00:00",
+    "error": null,
+    "duration": 9.26,
+    "cost": 0.83333,
+    "cost_estimated": false,
+    "fal_request": {
+        "request_id": "01a0ab57-3261-7273-8ce5-183cc988a387",
+        "status_url": "https://queue.fal.run/fal-ai/sync-lipsync/requests/01a0ab57-3261-7273-8ce5-183cc988a387/status",
+        "response_url": "https://queue.fal.run/fal-ai/sync-lipsync/requests/01a0ab57-3261-7273-8ce5-183cc988a387"
+    }
+}

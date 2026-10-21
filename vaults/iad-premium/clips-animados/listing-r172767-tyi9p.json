@@ -1,0 +1,965 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia nova com piscina interior aquecida em Ponte de Lima",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-rebordoes-souto-272m2/r172767",
+            "agent": "Susana Cerqueira",
+            "phone": "+351968571773",
+            "email": "",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Piscina interior aquecida, numa moradia nova em Ponte de Lima.",
+            "voiceover": "Piscina interior aquecida, numa moradia nova em Ponte de Lima. Fica em Rebordões Souto, a poucos minutos do centro. Está em fase final de construção e tem dois pisos. Quatro suites, todas com acesso a varanda, e cinco casas de banho. Ar condicionado por condutas e roupeiros embutidos. Lá fora, jardim e terraços, num terreno de quase mil metros. Boa exposição solar e certificação energética A. Para viver com conforto, todo o ano. Seiscentos e quarenta mil euros. Para visitar, fale com a Susana Cerqueira, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Piscina interior aquecida, numa moradia nova em Ponte de Lima.",
+                    "caption": "Ponte de Lima"
+                },
+                {
+                    "photo": "piscina interior",
+                    "vo": "(continuação do hook, imagem da piscina)",
+                    "caption": "Piscina interior aquecida"
+                },
+                {
+                    "photo": "vista exterior / envolvente",
+                    "vo": "Fica em Rebordões Souto, a poucos minutos do centro.",
+                    "caption": "Rebordões Souto"
+                },
+                {
+                    "photo": "fachada lateral, dois pisos",
+                    "vo": "Está em fase final de construção e tem dois pisos.",
+                    "caption": "Em fase final de obra"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "Quatro suites, todas com acesso a varanda,",
+                    "caption": "Quatro suites"
+                },
+                {
+                    "photo": "suite com varanda",
+                    "vo": "e cinco casas de banho.",
+                    "caption": "Todas com varanda"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "Ar condicionado por condutas e roupeiros embutidos.",
+                    "caption": "Cinco casas de banho"
+                },
+                {
+                    "photo": "jardim",
+                    "vo": "Lá fora, jardim e terraços, num terreno de quase mil metros.",
+                    "caption": "Terreno de 960 m²"
+                },
+                {
+                    "photo": "terraço com sol",
+                    "vo": "Boa exposição solar e certificação energética A.",
+                    "caption": "Certificação energética A"
+                },
+                {
+                    "photo": "fachada ao fim do dia",
+                    "vo": "Para viver com conforto, todo o ano.",
+                    "caption": "Conforto todo o ano"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e quarenta mil euros. Para visitar, fale com a Susana Cerqueira, da IAD Portugal.",
+                    "caption": "640.000 € · Susana Cerqueira · IAD Portugal · AMI 11220"
+                }
+            ],
+            "flags": [
+                "Áreas contraditórias: o texto indica 350 m² de área construída e cerca de 272 m² de área útil, mas nos detalhes a 'Área Bruta' é 272 m². A área da casa ficou de fora do guião.",
+                "Estado da obra: o texto diz 'em fase final de construção' e os detalhes dizem 'Construído em 2026'. O guião usa 'em fase final de construção'. Confirmar se alguma foto é um render: se for, a legenda tem de ser 'Imagem 3D do projeto'.",
+                "'Excelente exposição solar' e 'moradia premium' foram suavizados ou retirados (linguagem promocional)."
+            ],
+            "message": "Bom dia Sra. Susana, fiz este vídeo da sua moradia em Ponte de Lima para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 4 quartos de 272 m² em Rebordões (Souto)",
+            "price": 640000,
+            "details": {
+                "Preço": "640 000 €",
+                "Localização": "Rebordões (Souto), 4990-775",
+                "Referência": "172767",
+                "Área Bruta m²": "272",
+                "Área Total do Lote m²": "960",
+                "Quartos": 4,
+                "Ano de Construção": 2026,
+                "Características": "5 casas de banho, Construído em 2026"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Susana Cerqueira - and phone number - +351968571773. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Susana Cerqueira.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Piscina interior aquecida, numa moradia nova em Ponte de Lima.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Ponte de Lima»\n- piscina interior → «Piscina interior aquecida»\n- vista exterior / envolvente → «Rebordões Souto»\n- fachada lateral, dois pisos → «Em fase final de obra»\n- sala → «Quatro suites»\n- suite com varanda → «Todas com varanda»\n- casa de banho → «Cinco casas de banho»\n- jardim → «Terreno de 960 m²»\n- terraço com sol → «Certificação energética A»\n- fachada ao fim do dia → «Conforto todo o ano»\n- end card → «640.000 € · Susana Cerqueira · IAD Portugal · AMI 11220»\n\nHere are the house details:\n\nCasa/Moradia 4 quartos de 272 m² em Rebordões (Souto)\nPreço\n640 000 €\nLocalização\nRebordões (Souto), 4990-775\nReferência\n172767\nÁrea Bruta m²\n272\nÁrea Total do Lote m²\n960\nQuartos\n4\nAno de Construção\n2026\nCaracterísticas\n5 casas de banho, Construído em 2026\n\nDescrição\nT4 | 4 SUÍTES | PISCINA INTERIOR AQUECIDA | JARDIM | 960 m² DE TERRENO\n\nMoradia premium em fase final de construção, situada em Rebordões de Souto, Ponte de Lima, a poucos minutos do centro.\n\nCom 350 m² de área construída e cerca de 272 m² de área útil, esta moradia distribui-se por dois pisos e destaca-se pela dimensão, conforto e qualidade de construção.\n\nDispõe de:\n\n* 4 suítes, todas com acesso a varanda\n* 5 casas de banho\n* Piscina interior aquecida\n* Jardim e terraços\n* Ar condicionado por condutas\n* Roupeiros embutidos\n* Excelente exposição solar\n* Certificação energética A\n\nImplantada num terreno de 960 m², é uma excelente opção para quem procura uma casa moderna, espaçosa e diferenciada, com conforto para todo o ano.\n\nMais informações ligue:\nSusana Cerqueira | iad Portugal",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia nova com piscina interior aquecida em Rebordões Souto, Ponte de Lima",
+            "summary": "Moradia T4 em fase final de construção em Ponte de Lima, com certificação energética A, à venda por 640 mil euros. Fica num concelho histórico que celebrou em 2025 os 900 anos do seu foral, numa altura em que os preços da habitação continuam a subir no país.",
+            "timeline": [
+                {
+                    "label": "Foral concedido por D. Teresa",
+                    "sublabel": "4 março 1125"
+                },
+                {
+                    "label": "Celebração dos 900 anos do foral",
+                    "sublabel": "4 março 2025"
+                },
+                {
+                    "label": "Preço mediano nacional sobe 16,8% (INE)",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE)",
+                    "value": 2076,
+                    "unit": "€/m² (2025)"
+                },
+                {
+                    "label": "Subida anual do preço mediano (INE)",
+                    "value": 16.8,
+                    "unit": "% (2025 vs 2024)"
+                },
+                {
+                    "label": "Anos do foral de Ponte de Lima",
+                    "value": 900,
+                    "unit": "anos (1125–2025)"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Ponte de Lima recebeu o foral a 4 de março de 1125, dado por D. Teresa",
+                "O concelho celebrou os 900 anos do foral em 2025",
+                "Segundo o INE, o preço mediano da habitação em Portugal chegou aos 2.076 €/m² em 2025, mais 16,8% do que em 2024",
+                "A vila tem o nome da ponte sobre o rio Lima"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Ponte_de_Lima",
+                "https://www.visitportugal.com/pt-pt/node/132952",
+                "https://arquivo.cm-pontedelima.pt/cmpontedelima/uploads/writer_file/document/7453/boletimmunicipal_maio2025.pdf",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://www.idealista.pt/news/taxonomy/term/23396"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia nova com piscina interior aquecida em Ponte de Lima",
+            "description": "Uma piscina interior aquecida, dentro de casa, em Rebordões (Souto).\n\nEsta moradia nova fica a poucos minutos do centro de Ponte de Lima e está em fase final de construção.\nTem dois pisos e quatro suites, todas com acesso a varanda. Ao todo são cinco casas de banho. Tem ar condicionado por condutas e roupeiros embutidos.\nO terreno tem 960 m², com jardim e terraços. A casa tem boa exposição solar e certificado energético A, para viver com conforto o ano inteiro.\n\nT4 · 272 m² brutos · Lote de 960 m² · Construção de 2026 · 640.000 € · Ref. 172767\n\nPara agendar uma visita, contacte a Susana Cerqueira, da IAD Portugal: +351 968 571 773",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "casasportugal",
+                "piscinainterior",
+                "moradianova",
+                "pontedelima",
+                "rebordoes",
+                "altominho",
+                "vianadocastelo",
+                "t4",
+                "casadesonho",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r172767-tyi9p",
+    "created_at": "2026-10-21T09:36:16+00:00",
+    "updated_at": "2026-10-21T10:12:17+00:00",
+    "source_path": "clips/uploads/ALIro6zkIi5IJCutNCoUzVjmxmtGE0A8rE79cYTw.mp3",
+    "images": [
+        {
+            "id": "img_d23fb3cd",
+            "path": "clips/uploads/6E7zHrufRuurMqC7A45JdWKd0lDDNfULga4H7CEb.jpg",
+            "description": "Suíte com cama de casal, janela de vidro do chão ao teto para a varanda, vista para colinas, roupeiro embutido.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aff33b61",
+            "path": "clips/uploads/SCFxi3SF4akgsiaj2RJ7YcjIL1YYX51AeiO8UnYm.jpg",
+            "description": "Sala ampla em open space com cozinha, ilha em mármore, sala de jantar, sofá de canto e escada.",
+            "name": "cf9911c0f4b5f4a47b225c510b9ebb17f94011ae1d92ed54ff027c2e9b7cb8a8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b0852747",
+            "path": "clips/uploads/iBHwViSBCVlrJygAL4ODeHaay3PBQVFhvy5GoF3y.jpg",
+            "description": "Vista aérea da moradia moderna branca com jardim, pérgula e sebe junto à estrada, com casas e campos à volta.",
+            "name": "c03b91db0acc8a812b73e8dec6243fd942deec8d258ce32a278ea1ff28800d8d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8752e3c1",
+            "path": "clips/uploads/M6sF2WUL8eP8fxVRj1s66nIK6enMpJKpdNjzSaF2.jpg",
+            "description": "Vista aérea de fim de tarde: moradia com terraços, relvado com oliveira, pérgula e jardim iluminado.",
+            "name": "3f7a421d9dd6979ce0bd88be51e480b4bdffbf7f33107761815850304a63693b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_575a3603",
+            "path": "clips/uploads/mMJvigxNafcNSU0Jyb4nCaEuRHrUSSuqqX8q3EE9.jpg",
+            "description": "Piscina interior aquecida com azulejo azul, degraus iluminados e zona de estar com sofá ao lado.",
+            "name": "bffeec1b2e37a9a679409d352f1044be9ba61de58e19cf53376638163eea4b6f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ddef3e6",
+            "path": "clips/uploads/30blePkNwMFodh2KYW7NBSxGl2mAsYRJJOg38CBe.jpg",
+            "description": "Terraço exterior soalheiro com sofás, oliveiras em vasos, muro de pedra e vista para a serra.",
+            "name": "b267d81befcb05a31cc683dff109415b21456c3581d866122919236ff7006b14.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a0085e39",
+            "path": "clips/uploads/pUSKrodLt416Fhi17ISQlvZuiOQanUNmULOT5gcX.jpg",
+            "description": "Sala em open space com cozinha e ilha em mármore, zona de jantar, sofá e grandes janelas envidraçadas.",
+            "name": "9f8459ebf0ffc6e7c122202947b8627eff6ddd3130bd518a80f2de06306ea99e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_857ce657",
+            "path": "clips/uploads/zwyxsLIcTL5kAn3LCNLHwNedd1hVyGkKLpQFszqi.jpg",
+            "description": "Render 3D aéreo das moradias geminadas modernas, com terraço relvado no piso superior e jardim amplo.",
+            "name": "e39bd7df084d22b40c677f2a391f25968ae3af840d614a33b2de9744161c9e18.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b0f0460c",
+            "path": "clips/uploads/bYuvH103NeueviQJeTEtu5TvJ0XJhjaKINa2VcgO.jpg",
+            "description": "Planta vista de cima (render 3D) do terreno: duas moradias, jardins relvados, terraços e estacionamento.",
+            "name": "5f0bfd9f3aeffd265f8f01e292c931935a5b3abe059a2351601fc2bf3b8e7cff.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5a937ada",
+            "path": "clips/uploads/qmYnRMgo1BxcfTTEPNWUzlmJgt76fmjEiETGYXdU.jpg",
+            "description": "Render 3D da fachada traseira: dois pisos, varanda envidraçada, relvado com guarda-sol e cão.",
+            "name": "8bae605f37cbdc5fac623f38cea766a3d67624de3b87d21986450df5a5f0b31d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4b168357",
+            "path": "clips/uploads/mbTkduwPQpfgy4nudAvRlhmsn6DvagTv0dz1zNVM.jpg",
+            "description": "Fachada (render 3D) de moradia moderna de dois pisos, preto e branco, com varanda, jardim relvado e zona de estar exterior.",
+            "name": "2c56b33609803ba68e6bf7b5df4c7223f8ac9f3d576ba4a4d8e7feea71187848.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_54a33fc6",
+            "path": "clips/uploads/gOVZOfaq9rovxrGD3w0AK29V2NSppGTb3V2CuIJn.jpg",
+            "description": "Vista aérea por drone da moradia em construção, com terreno de terra batida, muros, alpendre de telha e estrada em frente.",
+            "name": "2aeae8bcee3443392489545ce52480d81eff535075b868a68c09519e6734f1ce.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a4f1c7d6",
+            "path": "clips/uploads/YTjVvxP2G7ca3AQe7Lar5I7Q9C4WbOOYXWrM78wp.png",
+            "description": "Retrato da consultora Susana Cerqueira, da IAD Portugal.",
+            "name": "Susana Cerqueira.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2a6f38ef",
+            "path": "clips/uploads/SkyLWH8CsA7Q7dN1eVi3dSSbTNTP4hvlH1CGQgNe.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/ALIro6zkIi5IJCutNCoUzVjmxmtGE0A8rE79cYTw.mp3",
+    "transcript": {
+        "duration": 32.08000183105469,
+        "text": "Piscina interior aquecida, numa moradia nova em Ponte de Lima. Fica em Rebordões Souto, a poucos minutos do centro. Está em fase final de construção e tem dois pisos, quatro suítes, todas com acesso à varanda e cinco casas de banho. Ar-condicionado por condutas e roupeiros embutidos. Lá fora, jardim e terraços num terreno de quase mil metros. Boa exposição solar e certificação energética A, para viver com conforto todo o ano. 640 mil euros. Para visitar, fale com a Suzana Cerqueira, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Piscina",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "interior",
+                "start": 0.4000000059604645,
+                "end": 0.8199999928474426
+            },
+            {
+                "word": "aquecida",
+                "start": 0.8199999928474426,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "numa",
+                "start": 1.6200000047683716,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "moradia",
+                "start": 1.8600000143051147,
+                "end": 2.200000047683716
+            },
+            {
+                "word": "nova",
+                "start": 2.200000047683716,
+                "end": 2.700000047683716
+            },
+            {
+                "word": "em",
+                "start": 2.700000047683716,
+                "end": 2.9800000190734863
+            },
+            {
+                "word": "Ponte",
+                "start": 2.9800000190734863,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "de",
+                "start": 3.200000047683716,
+                "end": 3.440000057220459
+            },
+            {
+                "word": "Lima",
+                "start": 3.440000057220459,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "Fica",
+                "start": 4.179999828338623,
+                "end": 4.300000190734863
+            },
+            {
+                "word": "em",
+                "start": 4.300000190734863,
+                "end": 4.440000057220459
+            },
+            {
+                "word": "Rebordões",
+                "start": 4.440000057220459,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "Souto",
+                "start": 4.900000095367432,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "a",
+                "start": 5.480000019073486,
+                "end": 5.739999771118164
+            },
+            {
+                "word": "poucos",
+                "start": 5.739999771118164,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "minutos",
+                "start": 5.840000152587891,
+                "end": 6.179999828338623
+            },
+            {
+                "word": "do",
+                "start": 6.179999828338623,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "centro",
+                "start": 6.400000095367432,
+                "end": 6.71999979019165
+            },
+            {
+                "word": "Está",
+                "start": 7.179999828338623,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "em",
+                "start": 7.239999771118164,
+                "end": 7.460000038146973
+            },
+            {
+                "word": "fase",
+                "start": 7.460000038146973,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "final",
+                "start": 7.619999885559082,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "de",
+                "start": 7.880000114440918,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "construção",
+                "start": 8.0600004196167,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "e",
+                "start": 8.579999923706055,
+                "end": 8.859999656677246
+            },
+            {
+                "word": "tem",
+                "start": 8.859999656677246,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "dois",
+                "start": 8.979999542236328,
+                "end": 9.380000114440918
+            },
+            {
+                "word": "pisos",
+                "start": 9.380000114440918,
+                "end": 9.819999694824219
+            },
+            {
+                "word": "quatro",
+                "start": 10.34000015258789,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "suítes",
+                "start": 10.460000038146973,
+                "end": 10.920000076293945
+            },
+            {
+                "word": "todas",
+                "start": 11.15999984741211,
+                "end": 11.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 11.380000114440918,
+                "end": 11.619999885559082
+            },
+            {
+                "word": "acesso",
+                "start": 11.619999885559082,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "à",
+                "start": 11.819999694824219,
+                "end": 12.020000457763672
+            },
+            {
+                "word": "varanda",
+                "start": 12.020000457763672,
+                "end": 12.319999694824219
+            },
+            {
+                "word": "e",
+                "start": 12.319999694824219,
+                "end": 12.720000267028809
+            },
+            {
+                "word": "cinco",
+                "start": 12.720000267028809,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "casas",
+                "start": 13.0600004196167,
+                "end": 13.359999656677246
+            },
+            {
+                "word": "de",
+                "start": 13.359999656677246,
+                "end": 13.699999809265137
+            },
+            {
+                "word": "banho",
+                "start": 13.699999809265137,
+                "end": 13.9399995803833
+            },
+            {
+                "word": "Ar",
+                "start": 14.15999984741211,
+                "end": 14.220000267028809
+            },
+            {
+                "word": "condicionado",
+                "start": 14.220000267028809,
+                "end": 14.779999732971191
+            },
+            {
+                "word": "por",
+                "start": 14.779999732971191,
+                "end": 15
+            },
+            {
+                "word": "condutas",
+                "start": 15,
+                "end": 15.520000457763672
+            },
+            {
+                "word": "e",
+                "start": 15.520000457763672,
+                "end": 15.760000228881836
+            },
+            {
+                "word": "roupeiros",
+                "start": 15.760000228881836,
+                "end": 16.1200008392334
+            },
+            {
+                "word": "embutidos",
+                "start": 16.1200008392334,
+                "end": 16.780000686645508
+            },
+            {
+                "word": "Lá",
+                "start": 17.200000762939453,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "fora",
+                "start": 17.34000015258789,
+                "end": 17.6200008392334
+            },
+            {
+                "word": "jardim",
+                "start": 18.020000457763672,
+                "end": 18.200000762939453
+            },
+            {
+                "word": "e",
+                "start": 18.200000762939453,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "terraços",
+                "start": 18.459999084472656,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "num",
+                "start": 18.84000015258789,
+                "end": 19.1200008392334
+            },
+            {
+                "word": "terreno",
+                "start": 19.1200008392334,
+                "end": 19.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 19.360000610351562,
+                "end": 19.68000030517578
+            },
+            {
+                "word": "quase",
+                "start": 19.68000030517578,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "mil",
+                "start": 19.8799991607666,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "metros",
+                "start": 20.239999771118164,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "Boa",
+                "start": 21.15999984741211,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "exposição",
+                "start": 21.260000228881836,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "solar",
+                "start": 21.65999984741211,
+                "end": 22.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 22.100000381469727,
+                "end": 22.360000610351562
+            },
+            {
+                "word": "certificação",
+                "start": 22.360000610351562,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "energética",
+                "start": 22.940000534057617,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "A",
+                "start": 23.540000915527344,
+                "end": 24.059999465942383
+            },
+            {
+                "word": "para",
+                "start": 24.299999237060547,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "viver",
+                "start": 24.399999618530273,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "com",
+                "start": 24.6200008392334,
+                "end": 24.860000610351562
+            },
+            {
+                "word": "conforto",
+                "start": 24.860000610351562,
+                "end": 25.440000534057617
+            },
+            {
+                "word": "todo",
+                "start": 25.440000534057617,
+                "end": 25.84000015258789
+            },
+            {
+                "word": "o",
+                "start": 25.84000015258789,
+                "end": 26.18000030517578
+            },
+            {
+                "word": "ano",
+                "start": 26.18000030517578,
+                "end": 26.18000030517578
+            },
+            {
+                "word": "640",
+                "start": 26.8799991607666,
+                "end": 27.459999084472656
+            },
+            {
+                "word": "mil",
+                "start": 27.459999084472656,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "euros",
+                "start": 27.739999771118164,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "Para",
+                "start": 28.100000381469727,
+                "end": 28.600000381469727
+            },
+            {
+                "word": "visitar",
+                "start": 28.600000381469727,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "fale",
+                "start": 29.459999084472656,
+                "end": 29.5
+            },
+            {
+                "word": "com",
+                "start": 29.5,
+                "end": 29.68000030517578
+            },
+            {
+                "word": "a",
+                "start": 29.68000030517578,
+                "end": 29.84000015258789
+            },
+            {
+                "word": "Suzana",
+                "start": 29.84000015258789,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "Cerqueira",
+                "start": 30.079999923706055,
+                "end": 30.6200008392334
+            },
+            {
+                "word": "da",
+                "start": 30.81999969482422,
+                "end": 31
+            },
+            {
+                "word": "IAD",
+                "start": 31,
+                "end": 31.34000015258789
+            },
+            {
+                "word": "Portugal",
+                "start": 31.34000015258789,
+                "end": 31.860000610351562
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 32.08000183105469,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.1000000000000014,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Piscina interior aquecida, numa moradia nova em Ponte de Lima",
+                        "params": {
+                            "src": "img_575a3603",
+                            "location": "Ponte de Lima · Rebordões Souto",
+                            "title": "Piscina interior aquecida, numa moradia nova em Ponte de Lima",
+                            "facts": "T4 · 4 suites · 5 WC · 960 m²",
+                            "name": "Susana Cerqueira",
+                            "cta": "+351 968 571 773",
+                            "tag": "Novo imóvel",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.1000000000000014,
+                "end": 7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Rebordões Souto",
+                        "params": {
+                            "src": "img_b0852747",
+                            "eyebrow": "Ponte de Lima"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7,
+                "end": 10.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Em fase final de obra",
+                        "params": {
+                            "src": "img_5a937ada",
+                            "eyebrow": "Dois pisos"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.1,
+                "end": 14,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "janela-arco",
+                        "text": "Quatro suites, todas com varanda",
+                        "params": {
+                            "src": "img_d23fb3cd",
+                            "eyebrow": "Cinco casas de banho"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14,
+                "end": 17.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Conforto interior",
+                        "params": {
+                            "src": "img_aff33b61",
+                            "title": "Conforto interior",
+                            "items": [
+                                "Climatização: ar condicionado por condutas",
+                                "Roupeiros: embutidos",
+                                "Suites: 4",
+                                "Casas de banho: 5"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.1,
+                "end": 21,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "numero-destaque",
+                        "text": "960 m²",
+                        "params": {
+                            "src": "img_8752e3c1",
+                            "label": "Terreno",
+                            "sub": "Jardim e terraços"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21,
+                "end": 24,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "luz-acender",
+                        "text": "Certificação energética A",
+                        "params": {
+                            "src": "img_3ddef3e6",
+                            "eyebrow": "Boa exposição solar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "Conforto todo o ano",
+                        "params": {
+                            "src": "img_a0085e39",
+                            "eyebrow": "Sala em open space"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 32.08,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "img_a4f1c7d6",
+                        "params": {
+                            "src": "img_a4f1c7d6",
+                            "name": "Susana Cerqueira",
+                            "phone": "+351 968 571 773",
+                            "ami": "IAD Portugal · AMI 11220",
+                            "banner": "img_2a6f38ef"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r172767-tyi9p/clip.mp4",
+    "error": null
+}

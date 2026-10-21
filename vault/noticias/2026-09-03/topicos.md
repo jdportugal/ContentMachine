@@ -8,8 +8,8 @@ total: 1
 
 # Tópicos cobertos — 2026-09-03
 
-> 1 item(s) agregado(s) · método: llm · 2026-09-03T08:27:44+00:00
+> 1 item(s) agregado(s) · método: llm · 2026-09-03T11:22:54+00:00
 
-## AI Development and Competition
+## AI in Education
 
-- **[youtube]** [GOOGLE IS BACK! (Gemini 3.8 Flash)](https://www.youtube.com/watch?v=2uVH2WUYb5E)
+- **[instagram]** [🤖🚫 New York City is taking a much harder line on AI in schools.](https://www.instagram.com/p/Dc0rmd-AAht/)

@@ -124,15 +124,14 @@ trait RunsClaudeCli
      *
      * Routing OAuth installs to the CLI also means Remotion-writing callers
      * finally get `useRemotionSkills` — the skills only exist on the CLI path.
+     *
+     * An installed CLI wins over an API key too: the CLI is the subscription,
+     * and a stored pay-as-you-go key running out of credit used to send every
+     * SFX past Claude to GPT. The key is only used where there is no CLI.
      */
     private function usaApiClaude(): bool
     {
-        $key = $this->chaveLlm('claude');
-        if ($key === '') {
-            return false;   // no key at all → the authenticated CLI, as before
-        }
-
-        return ! (str_starts_with($key, 'sk-ant-oat') && $this->claudeBinaryExists());
+        return $this->chaveLlm('claude') !== '' && ! $this->claudeBinaryExists();
     }
 
     /** Whether the `claude` CLI is actually installed (a server usually has no session). */
@@ -171,7 +170,27 @@ trait RunsClaudeCli
             $user,
             $system,
             $opts,
+            vision: true,
+            maxTokens: (int) config('contentmachine.clips.openai_max_tokens', 16384),
         );
+    }
+
+    /**
+     * Reference images from $opts['images'] (absolute paths), base64-encoded for
+     * the HTTP providers. Unreadable files are skipped.
+     *
+     * @return array<int,array{mime:string,data:string}>
+     */
+    private function imagens(array $opts): array
+    {
+        $out = [];
+        foreach ((array) ($opts['images'] ?? []) as $path) {
+            if (is_string($path) && is_file($path) && ($bytes = @file_get_contents($path)) !== false) {
+                $out[] = ['mime' => mime_content_type($path) ?: 'image/png', 'data' => base64_encode($bytes)];
+            }
+        }
+
+        return $out;
     }
 
     /**
@@ -199,7 +218,22 @@ trait RunsClaudeCli
             $opts['allowedTools'] = trim(($opts['allowedTools'] ?? '').',Skill,Read', ',');
         }
 
-        $args = [$binary, '-p', $user];
+        // Reference images: the CLI can't take image bytes on argv, but its Read
+        // tool views images — hand it the paths and let it look.
+        $imgs = array_values(array_filter((array) ($opts['images'] ?? []), 'is_file'));
+        if ($imgs) {
+            $user = "Reference image(s) — open each with the Read tool BEFORE answering:\n- ".implode("\n- ", $imgs)."\n\n".$user;
+            $opts['allowedTools'] = trim(($opts['allowedTools'] ?? '').',Read', ',');
+        }
+
+        // The prompt goes in on stdin: as an argv value, one starting with "-" was
+        // parsed as an option ("unknown option '- Structure…'") and the call fell
+        // through to the next provider.
+        $args = [$binary, '-p'];
+        foreach (array_unique(array_map('dirname', $imgs)) as $dir) {
+            $args[] = '--add-dir';
+            $args[] = $dir;
+        }
         if ($system !== null) {
             $args[] = '--append-system-prompt';
             $args[] = $system;
@@ -216,7 +250,10 @@ trait RunsClaudeCli
         }
 
         for ($i = 1; $i <= $attempts; $i++) {
-            $process = new Process($args);
+            // Unset ANTHROPIC_API_KEY: with it in the environment the CLI bills that
+            // key instead of the logged-in subscription.
+            $process = new Process($args, null, ['ANTHROPIC_API_KEY' => false]);
+            $process->setInput($user);
             $process->setWorkingDirectory($remotionSkills ? base_path() : sys_get_temp_dir());
             $process->setTimeout($opts['timeout'] ?? 300);
 
@@ -361,7 +398,10 @@ trait RunsClaudeCli
             // three frames. (`budget_tokens` is gone on these models; adaptive
             // replaces it, and the model decides the depth itself.)
             'thinking' => ['type' => 'adaptive'],
-            'messages' => [['role' => 'user', 'content' => $user]],
+            'messages' => [['role' => 'user', 'content' => $this->imagens($opts) ? [
+                ...array_map(fn (array $i) => ['type' => 'image', 'source' => ['type' => 'base64', 'media_type' => $i['mime'], 'data' => $i['data']]], $this->imagens($opts)),
+                ['type' => 'text', 'text' => $user],
+            ] : $user]],
         ];
         if ($system !== null && $system !== '') {
             $payload['system'] = $system;
@@ -465,8 +505,10 @@ trait RunsClaudeCli
      * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
      * @return array{result:string}
      */
-    private function runChatCompletions(string $nome, string $baseUrl, string $key, string $model, string $user, ?string $system, array $opts): array
+    private function runChatCompletions(string $nome, string $baseUrl, string $key, string $model, string $user, ?string $system, array $opts, bool $vision = false, ?int $maxTokens = null): array
     {
+        // Only GPT sees images; DeepSeek is text-only, so it works from the description alone.
+        $imgs = $vision ? $this->imagens($opts) : [];
         $attempts = max(1, (int) config('contentmachine.clips.claude_attempts', 3));
         $base = rtrim($baseUrl, '/');
 
@@ -474,7 +516,10 @@ trait RunsClaudeCli
             'model' => $model,
             'messages' => array_values(array_filter([
                 ($system !== null && $system !== '') ? ['role' => 'system', 'content' => $system] : null,
-                ['role' => 'user', 'content' => $user],
+                ['role' => 'user', 'content' => $imgs ? [
+                    ['type' => 'text', 'text' => $user],
+                    ...array_map(fn (array $i) => ['type' => 'image_url', 'image_url' => ['url' => 'data:'.$i['mime'].';base64,'.$i['data']]], $imgs),
+                ] : $user],
             ])),
             // Without this the fallback providers run on THEIR default completion
             // cap — commonly a couple of thousand tokens, nowhere near enough for a
@@ -482,7 +527,8 @@ trait RunsClaudeCli
             // first. The Anthropic path has always sent this; these two did not, so
             // raising CLIPS_MAX_TOKENS (which the error message tells you to do)
             // changed nothing for them.
-            'max_tokens' => (int) config('contentmachine.clips.max_tokens', 16000),
+            // Capped per provider: gpt-4o rejects anything over 16384 outright.
+            'max_tokens' => min((int) config('contentmachine.clips.max_tokens', 16000), $maxTokens ?? PHP_INT_MAX),
         ];
 
         $lastError = 'no detail';

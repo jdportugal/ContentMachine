@@ -64,19 +64,30 @@ class DesignSystem extends Component
 
     public function guardar(DesignSystemRepository $design, DesignThemeExtractor $extractor): void
     {
-        $design->write($this->conteudo);
+        // Only a CHANGED design system is rewritten and re-extracted. Rewriting it
+        // changes the design hash every effect/background preview is keyed on, so
+        // saving just the animation instructions used to throw away and re-render
+        // every preview — and wait on the theme extraction call — for nothing.
+        $designMudou = $this->conteudo !== $design->read() || $design->readTokens() === null;
+        if ($designMudou) {
+            $design->write($this->conteudo);
+            // Extract the theme tokens (colors/fonts/texture) from the Markdown, so that
+            // the animations MATCH the design. On failure → keep/use defaults.
+            $design->writeTokens($extractor->extract($this->conteudo));
+        }
 
-        // Extract the theme tokens (colors/fonts/texture) from the Markdown, so that
-        // the animations MATCH the design. On failure → keep/use defaults.
-        $design->writeTokens($extractor->extract($this->conteudo));
-
+        // The animation instructions are read at planning time only — nothing to rebuild.
         $caminho = $this->caminhoEstilo();
-        @mkdir(dirname($caminho), 0775, true);
-        file_put_contents($caminho, $this->estilo);
+        if ($this->estilo !== (string) (@file_get_contents($caminho) ?: '')) {
+            @mkdir(dirname($caminho), 0775, true);
+            file_put_contents($caminho, $this->estilo);
+        }
 
         $this->guardado = now()->timezone(config('app.timezone'))->translatedFormat('H:i');
         $this->atualizado = $design->updatedAt();
-        $this->dispatch('toast', message: 'Design system saved and theme extracted.', type: 'ok');
+        $this->dispatch('toast', type: 'ok', message: $designMudou
+            ? 'Design system saved and theme extracted.'
+            : 'Animation instructions saved.');
     }
 
     public function render()

@@ -1,0 +1,1369 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia em Alvarães com duas cozinhas, dois bares e piscina",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-alvaraes-497m2/r1034283",
+            "agent": "Gorete Ribeiro",
+            "phone": "+351935428015",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia em Alvarães com duas cozinhas e dois bares.",
+            "voiceover": "Uma moradia em Alvarães com duas cozinhas e dois bares. Fica no concelho de Viana do Castelo, num lote com mais de mil metros. No rés do chão, cozinha equipada com forno a lenha, e um quarto. A sala de estar tem lareira, e há um bar com mesa de bilhar. No primeiro andar, segunda cozinha e sala, e três quartos, um deles suite. No sótão, um espaço de convívio com o segundo bar. Lá fora, jardim com árvores, piscina e churrasqueira. E ainda duas garagens. Quatrocentos e vinte e cinco mil euros. Para visitar, fale com a Gorete Ribeiro, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada com piscina",
+                    "vo": "Uma moradia em Alvarães com duas cozinhas e dois bares.",
+                    "caption": "Alvarães, Viana do Castelo"
+                },
+                {
+                    "photo": "vista geral do exterior e jardim",
+                    "vo": "Fica no concelho de Viana do Castelo, num lote com mais de mil metros.",
+                    "caption": "Lote com 1.176 m²"
+                },
+                {
+                    "photo": "cozinha do rés do chão com forno a lenha",
+                    "vo": "No rés do chão, cozinha equipada com forno a lenha, e um quarto.",
+                    "caption": "Forno a lenha"
+                },
+                {
+                    "photo": "sala de estar com lareira",
+                    "vo": "A sala de estar tem lareira,",
+                    "caption": "Sala com lareira"
+                },
+                {
+                    "photo": "bar com mesa de bilhar",
+                    "vo": "e há um bar com mesa de bilhar.",
+                    "caption": "Bar e bilhar"
+                },
+                {
+                    "photo": "cozinha e sala do primeiro andar",
+                    "vo": "No primeiro andar, segunda cozinha e sala,",
+                    "caption": "Segunda cozinha"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "e três quartos, um deles suite.",
+                    "caption": "Quatro quartos, uma suite"
+                },
+                {
+                    "photo": "sótão com bar",
+                    "vo": "No sótão, um espaço de convívio com o segundo bar.",
+                    "caption": "Segundo bar no sótão"
+                },
+                {
+                    "photo": "piscina e churrasqueira no jardim",
+                    "vo": "Lá fora, jardim com árvores, piscina e churrasqueira.",
+                    "caption": "Piscina e churrasqueira"
+                },
+                {
+                    "photo": "garagem",
+                    "vo": "E ainda duas garagens.",
+                    "caption": "Duas garagens"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e vinte e cinco mil euros. Para visitar, fale com a Gorete Ribeiro, da IAD Portugal.",
+                    "caption": "425.000 € · Gorete Ribeiro · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O ano de construção diz 2023 (aparece duas vezes), mas o certificado energético é E. As casas novas costumam ter B- ou melhor, e o texto fala de 'vegetação já consolidada'. Pode ser 2023 o ano de uma remodelação. Deixei o ano de fora e não usei a casa nova como gancho.",
+                "Os detalhes dizem 4 casas de banho, mas o texto só descreve 3 (rés do chão, suite e a de mármore). Não disse o número de casas de banho.",
+                "Deixei de fora a casa de banho em mármore e a varanda (que só aparece nos detalhes) para ficar dentro das 110 palavras.",
+                "Área: 497 m² brutos contra 321 m² úteis. Não usei nenhuma área da casa, só o lote."
+            ],
+            "message": "Boa tarde Sra. Gorete, fiz este vídeo da sua moradia T4 em Alvarães para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 4 quartos de 497 m² em Alvarães",
+            "price": 425000,
+            "details": {
+                "Preço": "425 000 €",
+                "Localização": "Alvarães, 4905-205",
+                "Referência": "1034283",
+                "Área Bruta m²": "497",
+                "Área Total do Lote m²": "1176",
+                "Quartos": 4,
+                "Ano de Construção": 2023,
+                "Certificado Energético": "E",
+                "Características": "497 m² área bruta, 321 m² úteis, 4 casas de banho, Jardim, Garagem, Varanda, Piscina, Sala de estar, Sala de jantar, Aquecimento individual, Construído em 2023"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Gorete Ribeiro - and phone number - +351935428015. Agency: IAD Portugal.\nThe agent's photo is Gorete Ribeiro.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma moradia em Alvarães com duas cozinhas e dois bares.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada com piscina → «Alvarães, Viana do Castelo»\n- vista geral do exterior e jardim → «Lote com 1.176 m²»\n- cozinha do rés do chão com forno a lenha → «Forno a lenha»\n- sala de estar com lareira → «Sala com lareira»\n- bar com mesa de bilhar → «Bar e bilhar»\n- cozinha e sala do primeiro andar → «Segunda cozinha»\n- quarto suite → «Quatro quartos, uma suite»\n- sótão com bar → «Segundo bar no sótão»\n- piscina e churrasqueira no jardim → «Piscina e churrasqueira»\n- garagem → «Duas garagens»\n- end card → «425.000 € · Gorete Ribeiro · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 4 quartos de 497 m² em Alvarães\nPreço\n425 000 €\nLocalização\nAlvarães, 4905-205\nReferência\n1034283\nÁrea Bruta m²\n497\nÁrea Total do Lote m²\n1176\nQuartos\n4\nAno de Construção\n2023\nCertificado Energético\nE\nCaracterísticas\n497 m² área bruta, 321 m² úteis, 4 casas de banho, Jardim, Garagem, Varanda, Piscina, Sala de estar, Sala de jantar, Aquecimento individual, Construído em 2023\n\nDescrição\nMoradia T4 com piscina em Alvarães — Viana do Castelo\n\nUma moradia de charme, espaço e conforto\n\nHá casas que se destacam logo à primeira vista, e esta moradia é uma delas. Com divisões espaçosas, materiais nobres e detalhes arquitetônicos distintos, apresenta características que lhe conferem um charme muito próprio.\n\nRés do chão — Conforto e convívio\n\nNeste piso, encontramos uma cozinha completamente equipada, que combina funcionalidade com elementos tradicionais, proporcionando um espaço acolhedor e convidativo. Como particularidade, conta com um forno tradicional a lenha, que lhe confere um detalhe único e um charme muito especial.\n\nA sala de jantar oferece um ambiente agradável para as refeições em família, num espaço onde os momentos à mesa ganham especial importância.\n\nA sala de estar convida ao descanso e ao conforto, com uma lareira que torna o ambiente especialmente acolhedor nos dias mais frios. A área social conta ainda com espaços dedicados ao lazer e convívio, onde encontramos um bar e uma mesa de bilhar, perfeitos para momentos de descontração e entretenimento.\n\nNeste piso, encontramos ainda um quarto e uma casa de banho, que complementam a distribuição dos espaços.\n\nPrimeiro andar — Conforto e privacidade\n\nNo primeiro andar, encontramos uma segunda cozinha equipada, assim como uma segunda sala de estar e de jantar, criando um ambiente mais íntimo e reservado, onde a privacidade ganha especial destaque.\n\nA área de descanso é composta por três quartos espaçosos, um dos quais suite, garantindo maior privacidade aos seus ocupantes.\n\nDestaca-se também uma casa de banho inteiramente revestida a mármore, que reflete a atenção dada aos materiais nobres e aos acabamentos da moradia.\n\nSótão — Um espaço adicional\n\nNo último piso encontramos um espaço de convívio, equipado com um segundo bar. Dispõe ainda de áreas destinadas a arrumação.\n\nExterior — Jardim, piscina e espaços de convívio\n\nNo exterior, a moradia é rodeada por um jardim cuidado, com árvores e vegetação já consolidada, que proporciona privacidade e uma agradável ligação à natureza.\n\nO grande destaque deste exterior é, sem dúvida, a piscina, que convida a desfrutar dos dias de sol e da tranquilidade da zona, proporcionando momentos de descanso e diversão.\n\nA completar este cenário, encontramos um espaço de churrasqueira, ideal para preparar refeições nos dias de verão e prolongar os momentos de convívio ao ar livre.\n\nA propriedade dispõe ainda de duas garagens, uma integrada no rés do chão da moradia e outra situada no exterior.\n\nUma moradia única, com todas as condições para acolher uma nova história e proporcionar uma excelente qualidade de vida.\n\nVenha conhecê-la e descubra tudo o que tem para oferecer..",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia à venda em Alvarães, concelho de Viana do Castelo",
+            "summary": "Alvarães é uma das 27 freguesias do concelho de Viana do Castelo e tem uma longa tradição de fabrico de telha. Hoje, um percurso de turismo industrial dá a conhecer essa história.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Freguesias do concelho de Viana do Castelo",
+                    "value": 27,
+                    "unit": "freguesias"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Alvarães pertence ao concelho de Viana do Castelo, no Alto Minho",
+                "A freguesia tem uma tradição antiga de extrair argila para fazer telha e tijolo",
+                "Os fornos de telheiro de Alvarães são património do município",
+                "A Rota da Cerâmica de Alvarães faz parte da rede nacional de Turismo Industrial"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/57515",
+                "https://www.geoparquelitoralviana.pt/en/explore/telheiras-ovens/",
+                "https://www.idealista.pt/news/node/69988",
+                "https://crwflags.com/fotw/Flags/pt-vctav.html"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia em Alvarães com duas cozinhas, dois bares e piscina",
+            "description": "Duas cozinhas, dois bares e uma mesa de bilhar: esta moradia em Alvarães foi feita para receber.\n\nFica no concelho de Viana do Castelo, num lote de 1176 m², e foi construída em 2023.\nNo rés-do-chão há uma cozinha equipada com forno a lenha e um quarto. A sala de estar tem lareira, e ao lado fica um bar com mesa de bilhar. Há também sala de jantar.\nNo primeiro andar fica a segunda cozinha, com sala, e mais três quartos, um deles em suite. No sótão há um espaço de convívio com o segundo bar.\nLá fora tem jardim com árvores, piscina e churrasqueira, além de duas garagens e varanda. O aquecimento é individual.\n\nMoradia · 4 quartos · 4 casas de banho · 321 m² úteis · 497 m² de área bruta · Certificado E · Ref. 1034283 · 425.000 €\n\nAgende a sua visita com a Gorete Ribeiro, da IAD Portugal: +351 935 428 015 🏡",
+            "tags": [
+                "moradia",
+                "imobiliario",
+                "casaavenda",
+                "moradiacompiscina",
+                "alvaraes",
+                "vianadocastelo",
+                "altominho",
+                "casasnominho",
+                "moradiat4",
+                "construcaonova",
+                "iadportugal",
+                "imoveisportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1034283-dez08",
+    "created_at": "2026-10-20T13:09:36+00:00",
+    "updated_at": "2026-10-20T13:42:13+00:00",
+    "source_path": "clips/uploads/UtIxZpoKdrJMASkllQxTLDgOwgw76oDnKhqQBxAz.mp3",
+    "images": [
+        {
+            "id": "img_bef0de62",
+            "path": "clips/uploads/US1mo5ugI8ztbCm6VezfzPRQyKgSM2cSjkKWi8gI.png",
+            "description": "Piscina em primeiro plano com mosaico de ondas; moradia ao fundo, com sebes e árvores ao sol.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f90d3f5b",
+            "path": "clips/uploads/iqGK9OYefHcC6iJ7SOxVRp16EcgjoZKrVkXAcILw.png",
+            "description": "Piscina curva com azulejos de ondas; fachada da moradia ao fundo e zona de estar com gradeamento à esquerda.",
+            "name": "01a134b24233fcfd566a22c128528390.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ce81ea3c",
+            "path": "clips/uploads/qfMTV2pX3AUVE64adUlX2mLLr4x27JtZqUWJkka4.png",
+            "description": "Piscina com escadas e corrimão de inox; moradia ao fundo, rodeada de sebes altas.",
+            "name": "01a134b27649aa9f2bb7aaa3bb95b892.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5e511460",
+            "path": "clips/uploads/u77tVabRS9HiwsemiSe3EcXNzSHiQMEWEgTyiaNS.png",
+            "description": "Vista elevada do jardim com piscina em forma de rim, sebes aparadas e a moradia ao fundo.",
+            "name": "01a134b279b203c80ea2dbeba4864679.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a2a40435",
+            "path": "clips/uploads/9oiQTnkOfwVfeH3OtjDPqPaCA1WMXCVzK0PrwjqA.png",
+            "description": "Vista aérea de drone: moradia com chaminé de pedra, pátio, piscina, jardim, vinhas ao lado e estrada.",
+            "name": "01a134b27b1c12e8d4ada28c538e729c.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e464e1ab",
+            "path": "clips/uploads/CX9bEpw0V8DS8HejlQGOQ7KLmMzKzQgnZ3DnEVJ5.png",
+            "description": "Vista aérea do lote inteiro: piscina, jardim, moradia e vinhas ao lado, numa zona rural.",
+            "name": "01a134b27b380ddeb03ca7dd25348b3a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_82801439",
+            "path": "clips/uploads/YnWaLlzCm0zxskYgSbUOePGkVAVuGguCU4s13tNL.png",
+            "description": "Fachada traseira com pátio grande em pedra, portas de madeira das garagens e varandas com gradeamento.",
+            "name": "01a134b278a9cbce9c86cda86749d2fc.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8f5c565b",
+            "path": "clips/uploads/UR4XxkWl2ikT8o5bxFYmHDpu3wNiqEyaIzuzwdSt.png",
+            "description": "Cozinha rústica com teto de madeira, azulejos azuis e brancos, mesa grande e forno a lenha.",
+            "name": "01a134b2793712dc34ed8d6935c579a0.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_527d192c",
+            "path": "clips/uploads/3ibxoLWwVMLdbOcsLZBMhFNSGao8oUKySMZM5GwB.png",
+            "description": "Cozinha rústica vista da bancada de granito com lava-loiça duplo, armários de madeira e mesa de refeições.",
+            "name": "01a134b279b3e1f1de820dfb9859b877.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_423690a3",
+            "path": "clips/uploads/keHRYygV16bllGBkuaQhD25Go3icSeub0a7PsLlY.png",
+            "description": "Cozinha com lareira de tijolo, forno a lenha, fogão, mesa de madeira com cadeiras e chão de tijoleira.",
+            "name": "01a134b2777a89a24a185946a31d5439.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_633bc4dc",
+            "path": "clips/uploads/jo5P5woiNStThmqFAgMv7AkgVtH3P4R1DZgOOoLD.png",
+            "description": "Cozinha rústica com forno a lenha em tijolo, azulejos azuis e brancos, mesa de madeira e teto em madeira",
+            "name": "01a134b275b83d4c4999fbb231f3beec.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_beb7e99e",
+            "path": "clips/uploads/yYRnf0K4TymWq9BBcsi049AM3CstaVEkYVl1jJOT.png",
+            "description": "Cozinha ampla com armários de madeira, azulejos azuis, mesa comprida com cadeiras e bancada em granito",
+            "name": "01a134b2779722ab0bb3100eb4b7dbb2.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_e04f8b72",
+            "path": "clips/uploads/wYiSVvzj0FZzUU04ta5XfdvtJH1PINqaAKWod4V6.png",
+            "description": "Sala de estar com lareira em tijolo, sofás de couro castanho, tapete persa vermelho e lustre clássico",
+            "name": "01a134b2779b5cb3a08403813eb072e1.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3119f477",
+            "path": "clips/uploads/ErJ4r8qDs8YwXBmQIVrNAG9UtggUsuoAiXzQDtID.png",
+            "description": "Sala de estar com sofás Chesterfield de couro, tapete persa, lareira e teto com sancas trabalhadas",
+            "name": "01a134b277255fd1bb10dd107787bb79.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e7b07bb1",
+            "path": "clips/uploads/mnoLVxOp8Js8Ie9068mdu5KQPzp1uiMFnks58quw.png",
+            "description": "Sala de estar ampla com sofás de couro, tapete vermelho, lustre e portas para a sala de jantar",
+            "name": "01a134b27646edf3eae2bce29d88b41b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6518a3c8",
+            "path": "clips/uploads/I7gwz4IHRoQ0RhAji4fuH52gYFeR7wJXH635o1jI.png",
+            "description": "Sala de jantar com mesa de madeira maciça, aparador clássico, lustre e chão em mosaico branco e preto",
+            "name": "01a134b274371f0373d86706a2710f41.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dad8911d",
+            "path": "clips/uploads/KIPS0VfGoAliSljfb9OoPiLZaf2JiBtpQWCqouCj.png",
+            "description": "Sala de jantar com mesa para oito, aparador escuro e portas envidraçadas abertas para a sala",
+            "name": "01a134b2760fdcacce1f44129e02056b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0fdb6598",
+            "path": "clips/uploads/Rcp3xChbq2lyCJgVvhjhIUN1E10gejmM6UWWiiN7.png",
+            "description": "Sala de jogos com mesa de bilhar coberta, portas de vidro forjado e sala de jantar ao fundo",
+            "name": "01a134b276eb3d5e0fbbaf05d9d70687.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7f757dc5",
+            "path": "clips/uploads/19fhdmBb3yEf7BuXWmGEHjUOISGf1dMroPhwcQEk.png",
+            "description": "Sala de bilhar com mesa coberta, suporte de tacos, quadro da Última Ceia e portas de varanda",
+            "name": "01a134b275e964b15ca03639037d2348.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_06e8fc84",
+            "path": "clips/uploads/ETNuvzp4ZYlVWEjzTBcVwT1iMwgLCCubOYNfvY8R.png",
+            "description": "Bar em madeira escura com três bancos de couro, lustre dourado e portas para a sala de estar",
+            "name": "01a134b271d6ad933c11f38744096a5b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_48d0bd8c",
+            "path": "clips/uploads/IwEsms6yn5aWDgZSlCZ1eWTLMtCR4SnC72sEiaIh.jpg",
+            "description": "Casa de banho em mármore branco, base de duche ampla, móvel lavatório branco e madeira, janela em arco.",
+            "name": "01a134b24607c3fb910ed9ed1cbe0cdf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d4820f37",
+            "path": "clips/uploads/sxHkfCVQKQemaw7tvRjxqh8C24yTP3MmZeFXFysv.jpg",
+            "description": "Casa de banho em mármore branco com porta de madeira trabalhada, lavatório suspenso, espelho e radiador.",
+            "name": "01a134b27bec0f45f6ccc93f393be806.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6340a314",
+            "path": "clips/uploads/wrvHWLuWwM6c5mvgUswPu7kaHEJTxjCglTcA75pm.jpg",
+            "description": "Quarto com cama de casal em madeira trabalhada, colcha florida, cómoda e janela em arco com cortinas.",
+            "name": "01a134b27bc6630182c76377d019044a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_173bc1e8",
+            "path": "clips/uploads/EcTJppvZxJcbFsCIxTmLe3cXCcqRpE0y99tC4M98.jpg",
+            "description": "Quarto de casal visto de frente, cama em madeira trabalhada, teto com sancas e janela em arco.",
+            "name": "01a134b27bd51e03edaa18fe95e9b441.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_00800955",
+            "path": "clips/uploads/0J2dQhfegFxV2BjrsqIZsq6JgoMH8ndi4O0MNSQO.png",
+            "description": "Cozinha ampla com móveis de madeira escura, península em granito, mesa redonda e porta em arco.",
+            "name": "01a134b27053caf71d6165bdc5ec5d0f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4d2d8837",
+            "path": "clips/uploads/N8hZcqqX5KwBNNZYkwlaylyt6nEbvp5JfKmG5CP5.png",
+            "description": "Cozinha equipada com bancada de granito, placa, lava-loiça castanho e mesa de vidro com cadeiras.",
+            "name": "01a134b27482e5ddefd7cbfb5f935086.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e98b0d49",
+            "path": "clips/uploads/G3YG07HJQ257bOxQLGxzlDD5zoPSlXXvVulOakfc.png",
+            "description": "Cozinha com armários de madeira, forno encastrado, bancada de granito em L e mesa de vidro octogonal.",
+            "name": "01a134b274c03eb60b70e199b1739499.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8309ccb9",
+            "path": "clips/uploads/fZdJAHDsCJb4p19XQi72hANQq0vfHKvP0SwdNFjL.png",
+            "description": "Sala de jantar e estar com lustre dourado, mesa redonda, cadeirões de couro e portadas envidraçadas.",
+            "name": "01a134b276ea2b6157d0c2d490458e23.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_786ee900",
+            "path": "clips/uploads/5lwQntIKCV5KzMv2PTqR08AuMSgeAcwF7CclzjvO.png",
+            "description": "Sala de estar com quatro cadeirões de couro capitonê, mesa octogonal, chão de mármore e lareira.",
+            "name": "01a134b276d2caff738d15742a2da3e7.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_06bc715b",
+            "path": "clips/uploads/znt065K68utA9EqRADIdxbtQzXoDKMdNh84gAAjA.png",
+            "description": "Sala de estar com dois cadeirões de couro, mesa octogonal, sala de jantar ao fundo com cristaleira.",
+            "name": "01a134b2783a25e1db2bbd941aee1e5c.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_155607ab",
+            "path": "clips/uploads/JQpx7GjCVAGpefo9GZkVFmHJ5DjShYEW7QN3hKN2.jpg",
+            "description": "Casa de banho em mármore rosa e cinza, banheira elevada com degraus, armário de madeira e plantas.",
+            "name": "01a134b27dd060be7b493b1613f9f017.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2fd99407",
+            "path": "clips/uploads/HwukfSfsfiSXpsR4h3jNRHYohR9Su27LGwbaIcH1.jpg",
+            "description": "Casa de banho ampla em mármore, banheira, bancada com dois lavatórios, espelhos dourados e armário de madeira.",
+            "name": "01a134b27d40b1e040f92ca26beb787c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_abffb99e",
+            "path": "clips/uploads/En8ZMfMdyX73kCWFes9DxF6ID83FFDaOa0DXUV32.jpg",
+            "description": "Casa de banho em mármore, bancada dupla com lavatórios, espelhos de moldura dourada e zona de duche com janela.",
+            "name": "01a134b27d91278c135c1d1f990c078a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_05af93e2",
+            "path": "clips/uploads/JQjW2hKfBNSOsshSMndvygjIBDAxaR3PMA0dywwy.png",
+            "description": "Quarto clássico com cama de madeira escura entalhada, teto trabalhado com candeeiro e porta para varanda.",
+            "name": "01a134b273ac0d8c032ed02399a8a0ae.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b0ae7fdb",
+            "path": "clips/uploads/MEuasWSntAC4lzQfz6z7lC1Dh9tYLkpROrO08moE.png",
+            "description": "Quarto clássico com roupeiro de madeira de quatro portas, cama com colcha branca e teto decorado.",
+            "name": "01a134b2746af4f610fd05de4e695d4f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d58003bd",
+            "path": "clips/uploads/HD1GujGZVDE6BZ5FLJa3NZDWLoT7xy20wQDwySEX.png",
+            "description": "Casa de banho azul com lavatório, bidé e sanita azuis, espelhos dourados e janela com cortinas.",
+            "name": "01a134b279843a88f1e88f198b37d938.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_110e62bd",
+            "path": "clips/uploads/WA1ogpp9127ORbjfeR2sV52N0XNcnuXnrDZy7Uiu.png",
+            "description": "Casa de banho azul com cabine de duche em vidro, lavatório azul de coluna e espelho tríptico dourado.",
+            "name": "01a134b276b408ccfcdfae289751c6e1.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_186db573",
+            "path": "clips/uploads/adXtyikfF2HTxtE600FtQTzhbCdwM1gi0reO7ess.jpg",
+            "description": "Quarto luminoso com roupeiro entalhado em madeira, cama de dossel baixo, mesas de cabeceira e janelas altas.",
+            "name": "01a134b27d4c4e951c583913fc64b724.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2ee13328",
+            "path": "clips/uploads/jGfkgPolF7cC7lDpfHhrbxj5mew7Mk7XMK4w3FFt.jpg",
+            "description": "Quarto com roupeiro de madeira entalhada, cama ao centro, candeeiro de vidro e portas envidraçadas soalheiras.",
+            "name": "01a134b27d10e8be93295910792670a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1b57caec",
+            "path": "clips/uploads/EE7PgTdvogB8L5Kgq8hPrNuEG2ylfkajO6fQp7xS.png",
+            "description": "Fachada da moradia branca de dois pisos, caminho em pedra, jardim relvado, arco metálico e árvores.",
+            "name": "01a134b278f315e8bb714152dc2c0fad.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e8a0224f",
+            "path": "clips/uploads/hbkttREgPIHsZO6vS7OKrsjhHNj7N4q0hpBtt80y.png",
+            "description": "Retrato da consultora Gorete Ribeiro, da IAD Portugal.",
+            "name": "Gorete Ribeiro.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a0e5fc23",
+            "path": "clips/uploads/LgJm4xskusCoKICD74iifhWFewIzkTfVQ1vpBvn4.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/UtIxZpoKdrJMASkllQxTLDgOwgw76oDnKhqQBxAz.mp3",
+    "transcript": {
+        "duration": 34.31999969482422,
+        "text": "Uma moradia em Alvarães com duas cozinhas e dois bares. Fica no Conselho de Viena do Castelo, num lote com mais de mil metros. No resto do chão, cozinha equipada com forno a lenha e um quarto. A sala de estar tem lareira e há um bar com mesa de bilhar. No primeiro andar, segunda cozinha e sala e três quartos, um deles suite. No sótão, um espaço de convívio com o segundo bar. Lá fora, jardim com árvores, piscina e churrasqueira. E ainda duas garagens. 425 mil euros. Para visitar, fale com a Gorete Ribeiro, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.14000000059604645
+            },
+            {
+                "word": "moradia",
+                "start": 0.14000000059604645,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "em",
+                "start": 0.6000000238418579,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "Alvarães",
+                "start": 0.800000011920929,
+                "end": 1.2999999523162842
+            },
+            {
+                "word": "com",
+                "start": 1.2999999523162842,
+                "end": 1.5199999809265137
+            },
+            {
+                "word": "duas",
+                "start": 1.5199999809265137,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "cozinhas",
+                "start": 1.8600000143051147,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "e",
+                "start": 2.259999990463257,
+                "end": 2.640000104904175
+            },
+            {
+                "word": "dois",
+                "start": 2.640000104904175,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "bares",
+                "start": 2.9200000762939453,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "Fica",
+                "start": 3.640000104904175,
+                "end": 3.819999933242798
+            },
+            {
+                "word": "no",
+                "start": 3.819999933242798,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "Conselho",
+                "start": 3.9800000190734863,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "de",
+                "start": 4.320000171661377,
+                "end": 4.559999942779541
+            },
+            {
+                "word": "Viena",
+                "start": 4.559999942779541,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "do",
+                "start": 4.679999828338623,
+                "end": 4.860000133514404
+            },
+            {
+                "word": "Castelo",
+                "start": 4.860000133514404,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "num",
+                "start": 5.460000038146973,
+                "end": 5.599999904632568
+            },
+            {
+                "word": "lote",
+                "start": 5.599999904632568,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "com",
+                "start": 5.920000076293945,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "mais",
+                "start": 6.079999923706055,
+                "end": 6.28000020980835
+            },
+            {
+                "word": "de",
+                "start": 6.28000020980835,
+                "end": 6.559999942779541
+            },
+            {
+                "word": "mil",
+                "start": 6.559999942779541,
+                "end": 6.760000228881836
+            },
+            {
+                "word": "metros",
+                "start": 6.760000228881836,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "No",
+                "start": 7.619999885559082,
+                "end": 7.699999809265137
+            },
+            {
+                "word": "resto",
+                "start": 7.699999809265137,
+                "end": 7.900000095367432
+            },
+            {
+                "word": "do",
+                "start": 7.900000095367432,
+                "end": 8.34000015258789
+            },
+            {
+                "word": "chão",
+                "start": 8.34000015258789,
+                "end": 8.479999542236328
+            },
+            {
+                "word": "cozinha",
+                "start": 8.619999885559082,
+                "end": 8.800000190734863
+            },
+            {
+                "word": "equipada",
+                "start": 8.800000190734863,
+                "end": 9.300000190734863
+            },
+            {
+                "word": "com",
+                "start": 9.300000190734863,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "forno",
+                "start": 9.640000343322754,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "a",
+                "start": 9.84000015258789,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "lenha",
+                "start": 10.039999961853027,
+                "end": 10.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 10.260000228881836,
+                "end": 10.619999885559082
+            },
+            {
+                "word": "um",
+                "start": 10.619999885559082,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "quarto",
+                "start": 11.100000381469727,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "A",
+                "start": 11.479999542236328,
+                "end": 11.640000343322754
+            },
+            {
+                "word": "sala",
+                "start": 11.640000343322754,
+                "end": 11.739999771118164
+            },
+            {
+                "word": "de",
+                "start": 11.739999771118164,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "estar",
+                "start": 12.0600004196167,
+                "end": 12.15999984741211
+            },
+            {
+                "word": "tem",
+                "start": 12.15999984741211,
+                "end": 12.380000114440918
+            },
+            {
+                "word": "lareira",
+                "start": 12.380000114440918,
+                "end": 12.779999732971191
+            },
+            {
+                "word": "e",
+                "start": 12.779999732971191,
+                "end": 13.079999923706055
+            },
+            {
+                "word": "há",
+                "start": 13.079999923706055,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "um",
+                "start": 13.199999809265137,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "bar",
+                "start": 13.520000457763672,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "com",
+                "start": 13.520000457763672,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "mesa",
+                "start": 13.800000190734863,
+                "end": 13.960000038146973
+            },
+            {
+                "word": "de",
+                "start": 13.960000038146973,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "bilhar",
+                "start": 14.420000076293945,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "No",
+                "start": 14.859999656677246,
+                "end": 14.979999542236328
+            },
+            {
+                "word": "primeiro",
+                "start": 14.979999542236328,
+                "end": 15.239999771118164
+            },
+            {
+                "word": "andar",
+                "start": 15.239999771118164,
+                "end": 15.600000381469727
+            },
+            {
+                "word": "segunda",
+                "start": 16,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "cozinha",
+                "start": 16.200000762939453,
+                "end": 16.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 16.6200008392334,
+                "end": 17.020000457763672
+            },
+            {
+                "word": "sala",
+                "start": 17.020000457763672,
+                "end": 17.280000686645508
+            },
+            {
+                "word": "e",
+                "start": 17.280000686645508,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "três",
+                "start": 17.65999984741211,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "quartos",
+                "start": 17.959999084472656,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "um",
+                "start": 18.65999984741211,
+                "end": 18.739999771118164
+            },
+            {
+                "word": "deles",
+                "start": 18.739999771118164,
+                "end": 19.059999465942383
+            },
+            {
+                "word": "suite",
+                "start": 19.059999465942383,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "No",
+                "start": 20.079999923706055,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "sótão",
+                "start": 20.18000030517578,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "um",
+                "start": 20.719999313354492,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "espaço",
+                "start": 21.059999465942383,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "de",
+                "start": 21.059999465942383,
+                "end": 21.420000076293945
+            },
+            {
+                "word": "convívio",
+                "start": 21.420000076293945,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 21.65999984741211,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "o",
+                "start": 21.860000610351562,
+                "end": 22.280000686645508
+            },
+            {
+                "word": "segundo",
+                "start": 22.280000686645508,
+                "end": 22.280000686645508
+            },
+            {
+                "word": "bar",
+                "start": 22.280000686645508,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "Lá",
+                "start": 23.040000915527344,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "fora",
+                "start": 23.15999984741211,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "jardim",
+                "start": 23.860000610351562,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "com",
+                "start": 23.959999084472656,
+                "end": 24.299999237060547
+            },
+            {
+                "word": "árvores",
+                "start": 24.299999237060547,
+                "end": 24.700000762939453
+            },
+            {
+                "word": "piscina",
+                "start": 25.200000762939453,
+                "end": 25.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 25.260000228881836,
+                "end": 25.579999923706055
+            },
+            {
+                "word": "churrasqueira",
+                "start": 25.579999923706055,
+                "end": 26.139999389648438
+            },
+            {
+                "word": "E",
+                "start": 26.479999542236328,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "ainda",
+                "start": 26.700000762939453,
+                "end": 26.940000534057617
+            },
+            {
+                "word": "duas",
+                "start": 26.940000534057617,
+                "end": 27.440000534057617
+            },
+            {
+                "word": "garagens",
+                "start": 27.440000534057617,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "425",
+                "start": 29.020000457763672,
+                "end": 29.639999389648438
+            },
+            {
+                "word": "mil",
+                "start": 29.639999389648438,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "euros",
+                "start": 29.959999084472656,
+                "end": 30.459999084472656
+            },
+            {
+                "word": "Para",
+                "start": 30.799999237060547,
+                "end": 30.940000534057617
+            },
+            {
+                "word": "visitar",
+                "start": 30.940000534057617,
+                "end": 31.559999465942383
+            },
+            {
+                "word": "fale",
+                "start": 31.84000015258789,
+                "end": 31.84000015258789
+            },
+            {
+                "word": "com",
+                "start": 31.84000015258789,
+                "end": 31.979999542236328
+            },
+            {
+                "word": "a",
+                "start": 31.979999542236328,
+                "end": 32.13999938964844
+            },
+            {
+                "word": "Gorete",
+                "start": 32.13999938964844,
+                "end": 32.439998626708984
+            },
+            {
+                "word": "Ribeiro",
+                "start": 32.439998626708984,
+                "end": 32.86000061035156
+            },
+            {
+                "word": "da",
+                "start": 33.060001373291016,
+                "end": 33.279998779296875
+            },
+            {
+                "word": "IAD",
+                "start": 33.279998779296875,
+                "end": 33.599998474121094
+            },
+            {
+                "word": "Portugal",
+                "start": 33.599998474121094,
+                "end": 34.099998474121094
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8000000000000007,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Uma moradia em Alvarães com duas cozinhas e dois bares.",
+                        "params": {
+                            "src": "img_bef0de62",
+                            "avatar": "img_e8a0224f",
+                            "logo": "img_a0e5fc23",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "425.000 €",
+                            "location": "VIANA DO CASTELO · ALVARÃES",
+                            "title": "MORADIA T4 COM PISCINA",
+                            "facts": "497 m² · 4 quartos · 4 WC · piscina",
+                            "cta": "Ligue já +351 935 428 015",
+                            "name": "Gorete Ribeiro",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8000000000000007,
+                "end": 5.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Alvarães, Viana do Castelo",
+                        "params": {
+                            "src": "img_a2a40435",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.6,
+                "end": 7.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "LOTE COM 1.176 M²",
+                        "params": {
+                            "src": "img_e464e1ab",
+                            "title": "LOTE COM 1.176 M²",
+                            "items": [
+                                "497 m² de área bruta",
+                                "Construída em 2023"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.6,
+                "end": 11.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "FORNO A LENHA",
+                        "params": {
+                            "src": "img_8f5c565b",
+                            "src2": "img_633bc4dc",
+                            "src3": "img_423690a3",
+                            "src4": "img_527d192c",
+                            "src5": "img_beb7e99e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.4,
+                "end": 14.8,
+                "background": "vellum",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "LAREIRA, BAR E BILHAR",
+                        "params": {
+                            "srcs": [
+                                "img_e04f8b72",
+                                "img_3119f477",
+                                "img_0fdb6598",
+                                "img_7f757dc5",
+                                "img_e7b07bb1",
+                                "img_6518a3c8",
+                                "img_dad8911d"
+                            ],
+                            "src": "img_e04f8b72",
+                            "src2": "img_f90d3f5b",
+                            "src3": "img_ce81ea3c",
+                            "src4": "img_5e511460",
+                            "src5": "img_a2a40435"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.8,
+                "end": 17.6,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SEGUNDA COZINHA E SALA",
+                        "params": {
+                            "srcs": [
+                                "img_00800955",
+                                "img_e98b0d49",
+                                "img_8309ccb9",
+                                "img_786ee900",
+                                "img_4d2d8837",
+                                "img_06bc715b"
+                            ],
+                            "src": "img_00800955",
+                            "src2": "img_e464e1ab",
+                            "src3": "img_82801439",
+                            "src4": "img_8f5c565b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "QUATRO QUARTOS, UMA SUITE",
+                        "params": {
+                            "srcs": [
+                                "img_05af93e2",
+                                "img_186db573",
+                                "img_2ee13328",
+                                "img_6340a314",
+                                "img_173bc1e8",
+                                "img_b0ae7fdb"
+                            ],
+                            "src": "img_05af93e2",
+                            "src2": "img_527d192c",
+                            "src3": "img_423690a3",
+                            "src4": "img_633bc4dc",
+                            "src5": "img_beb7e99e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 23,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "SEGUNDO BAR NO SÓTÃO",
+                        "params": {
+                            "src": "img_06e8fc84",
+                            "blur": 10,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23,
+                "end": 26.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "PISCINA E CHURRASQUEIRA",
+                        "params": {
+                            "src": "img_5e511460",
+                            "src2": "img_f90d3f5b",
+                            "src3": "img_ce81ea3c",
+                            "src4": "img_bef0de62"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.4,
+                "end": 28.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "DUAS GARAGENS",
+                        "params": {
+                            "src": "img_82801439",
+                            "src2": "img_1b57caec"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.7,
+                "end": 30.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "425.000 €",
+                        "params": {
+                            "srcs": [
+                                "img_2fd99407",
+                                "img_abffb99e",
+                                "img_155607ab",
+                                "img_48d0bd8c",
+                                "img_d4820f37",
+                                "img_d58003bd",
+                                "img_110e62bd"
+                            ],
+                            "src": "img_2fd99407",
+                            "src2": "img_3119f477",
+                            "src3": "img_e7b07bb1",
+                            "src4": "img_6518a3c8",
+                            "src5": "img_dad8911d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.8,
+                "end": 34.31999969482422,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Gorete Ribeiro",
+                        "params": {
+                            "src": "img_e8a0224f",
+                            "name": "Gorete Ribeiro",
+                            "phone": "+351 935 428 015"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1034283-dez08/clip.mp4",
+    "error": null
+}

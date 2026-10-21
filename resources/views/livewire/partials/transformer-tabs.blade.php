@@ -6,9 +6,9 @@
      siblings, and the other 'clips.…' names are asset endpoints, never a page. --}}
 @php
     $transformerTabs = [
-        ['route' => 'clips',           'label' => 'Shorts Generator',  'glyph' => '✂', 'color' => '#5A7BFF'],
-        ['route' => 'clips.posts',     'label' => 'Posts Generator',   'glyph' => '◇', 'color' => '#9C7DFF'],
-        ['route' => 'clips.repurpose', 'label' => 'Content Repurpose', 'glyph' => '⇄', 'color' => '#4DE08A'],
+        ['route' => 'clips',           'label' => 'Shorts Generator',  'glyph' => '✂', 'color' => '#2F5A85'],
+        ['route' => 'clips.posts',     'label' => 'Posts Generator',   'glyph' => '◇', 'color' => '#5E5590'],
+        ['route' => 'clips.repurpose', 'label' => 'Content Repurpose', 'glyph' => '⇄', 'color' => '#3D7A4C'],
     ];
 @endphp
 <div class="flex flex-wrap gap-2 mb-6">

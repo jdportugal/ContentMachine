@@ -180,6 +180,42 @@ TSX;
         $this->effects->setIntroBuiltins($intro);
     }
 
+    // ── outro effects: ones the planner may close the video with ─────────
+
+    public function builtinIsOutro(string $slug): bool
+    {
+        return in_array($slug, $this->effects->outroBuiltins(), true);
+    }
+
+    /** Mark/unmark a built-in as usable at the end (no-op for non-built-in slugs). */
+    public function toggleOutroBuiltin(string $slug): void
+    {
+        if (! $this->isBuiltin($slug)) {
+            return;
+        }
+        $outro = $this->effects->outroBuiltins();
+        $this->effects->setOutroBuiltins(in_array($slug, $outro, true)
+            ? array_values(array_diff($outro, [$slug]))
+            : [...$outro, $slug]);
+    }
+
+    /**
+     * Slugs flagged as outro AND usable — enabled custom effects with outro=true
+     * plus allowed built-ins marked outro. The planner closes with one.
+     *
+     * @return string[]
+     */
+    public function outroSlugs(): array
+    {
+        $custom = $this->enabled()->filter(fn (EffectRecord $e) => (bool) $e->get('outro', false))->pluck('slug')->all();
+        $builtins = array_values(array_intersect(
+            $this->effects->outroBuiltins(),
+            array_diff(array_keys(self::BUILTIN_SAMPLES), $this->disabledBuiltins()),
+        ));
+
+        return array_values(array_unique(array_merge($builtins, $custom)));
+    }
+
     /**
      * Does this effect display an image? Image effects read `params.src` (an image
      * id) and render an <Img>. True for the built-in image-reveal and any custom
@@ -224,6 +260,32 @@ TSX;
         return array_values(array_unique(array_merge($builtins, $custom)));
     }
 
+    /**
+     * Enabled custom effects that show ONE picture from `params.src` and need
+     * nothing else to look right — what can stand in for image-reveal when a
+     * project has switched it off. Intros and templates (which also want texts,
+     * an avatar, a logo…) are left out: dropped in with only a src they'd render
+     * half empty.
+     *
+     * @return string[]
+     */
+    public function simpleImageEffects(): array
+    {
+        return $this->enabled()
+            ->reject(fn (EffectRecord $e) => (bool) $e->get('intro', false) || (bool) $e->get('outro', false))
+            ->filter(function (EffectRecord $e) {
+                $schema = (string) $e->param_schema;
+                if (! preg_match('/["\']?\bsrc\b["\']?\??\s*:/', $schema) || preg_match('/\[\s*\]|Array</', $schema)) {
+                    return false; // no src, or wants a list of images
+                }
+                // Any text input (name, phone, price…) or second image slot makes it a template.
+                preg_match_all('/["\']?(\w+)["\']?\??\s*:\s*(string|image)\b/', $schema, $m);
+
+                return array_diff($m[1], ['src']) === [];
+            })
+            ->pluck('slug')->values()->all();
+    }
+
     /** Prompt block describing the allowed custom effects (name + schema), or '' if none. */
     public function promptBlock(): string
     {
@@ -231,10 +293,60 @@ TSX;
         if ($effects->isEmpty()) {
             return '';
         }
-        $lines = $effects->map(fn (EffectRecord $e) => "- {$e->slug}: {$e->description} — params: {$e->param_schema}")->implode("\n");
+        // An effect previewed with a sample text reads a headline from the layer's
+        // own "text" — say so, or the planner leaves it out and the effect renders
+        // with no title (it only ever saw the params).
+        $lines = $effects->map(function (EffectRecord $e) {
+            $imgs = self::imageKeys($e);
+
+            return "- {$e->slug}: {$e->description} — params: {$e->param_schema}"
+                // Name every image slot: a fan taking src..src5 was used with only
+                // `src` (or not at all) because only `src` was ever explained.
+                .(count($imgs) > 1 ? ' — takes SEVERAL provided image ids: '.implode(', ', $imgs).' (use it for a group of related photos, and give the scene about 1.5 s per photo — a 3-photo effect stays 4.5–5.5 s on screen, never a quick cut)' : '')
+                .(trim((string) $e->sample_text) !== '' ? ' — ALSO needs the layer "text" (its on-screen title, e.g. "'.trim((string) $e->sample_text).'")' : '');
+        })->implode("\n");
 
         return "\n\n=== CUSTOM BRAND EFFECTS (generated, follow the design system — use like any other layer type) ===\n".$lines
-            ."\nIf an effect's params include \"src\" (or image) it DISPLAYS AN IMAGE: set \"src\" to a PROVIDED image id when you use it — without one it renders empty.";
+            ."\nIf an effect's params include \"src\" (or image) it DISPLAYS AN IMAGE: set \"src\" to a PROVIDED image id when you use it — without one it renders empty."
+            ."\nEvery OTHER param typed `image` (e.g. \"avatar\", \"logo\") also takes a PROVIDED image id — the one whose description fits "
+            .'(an avatar → the portrait of the person); omit it when none fits. Text params are filled from what is said.';
+    }
+
+    /**
+     * Enabled custom effects that show SEVERAL photos through numbered slots
+     * (src, src2, src3…) — a fan, a gallery — with those slots in order.
+     *
+     * @return array<string,list<string>> slug => slot keys
+     */
+    public function galleryEffects(): array
+    {
+        $out = [];
+        foreach ($this->enabled() as $e) {
+            $slots = array_values(array_filter(self::imageKeys($e), fn (string $k) => (bool) preg_match('/^src\d*$/', $k)));
+            usort($slots, fn ($a, $b) => (int) substr($a, 3) <=> (int) substr($b, 3));
+            if (count($slots) >= 2) {
+                $out[$e->slug] = $slots;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * The params of an effect that take a provided image id: keys typed `image`,
+     * plus the conventional names (src, src2…, srcs, image(s), photo(s), avatar,
+     * logo) whatever type the schema gave them.
+     *
+     * @return string[]
+     */
+    public static function imageKeys(EffectRecord $e): array
+    {
+        $schema = (string) $e->param_schema;
+        preg_match_all('/["\']?(\w+)["\']?\??\s*:/', $schema, $m);
+        preg_match_all('/["\']?(\w+)["\']?\??\s*:\s*image\b/', $schema, $typed);
+
+        return array_values(array_unique(array_filter($m[1], fn (string $k) => in_array($k, $typed[1], true)
+            || preg_match('/^(src\d*|srcs|images?\d*|photos?\d*|avatar|logo)$/i', $k))));
     }
 
     // ── filesystem sync ──────────────────────────────────────────────────
@@ -280,8 +392,29 @@ TSX;
         if ($effect->preview_path) {
             @unlink($effect->preview_path);
         }
+        if ($ref = $this->effects->referencePath($effect->id())) {
+            @unlink($ref);
+        }
         $effect->delete();
         $this->syncFilesystem();
+    }
+
+    /**
+     * Effects show pictures with Remotion's <Img>, which cannot play a video. Their
+     * Img import is swapped for MediaImg (remotion/src/media.tsx): the same <Img>
+     * for a photo, a muted video for a provided clip.
+     */
+    public static function videoAware(string $tsx): string
+    {
+        return preg_replace_callback('/import\s*\{([^}]*)\}\s*from\s*([\'"])remotion\2;?/', function ($m) {
+            $names = array_map('trim', explode(',', $m[1]));
+            if (! in_array('Img', $names, true)) {
+                return $m[0];
+            }
+            $rest = array_filter($names, fn ($n) => $n !== '' && $n !== 'Img');
+
+            return ($rest ? 'import { '.implode(', ', $rest).' } from "remotion";'."\n" : '').'import { MediaImg as Img } from "../media";';
+        }, $tsx, 1);
     }
 
     /**
@@ -300,8 +433,9 @@ TSX;
         foreach ($active as $effect) {
             $keep[] = $effect->slug;
             $file = $this->effectFile($effect->slug);
-            if (! is_file($file) || file_get_contents($file) !== $effect->tsx) {
-                file_put_contents($file, $effect->tsx);
+            $tsx = self::videoAware($effect->tsx);
+            if (! is_file($file) || file_get_contents($file) !== $tsx) {
+                file_put_contents($file, $tsx);
             }
         }
 
@@ -357,10 +491,9 @@ TSX;
     // ── sample plans (for previews / test-renders) ───────────────────────
 
     /** Flat ClipComposition plan rendering a single known effect (built-in or active). */
-    public function samplePlan(string $slug, ?string $text, array $params, string $format = self::FORMAT_PORTRAIT): array
+    public function samplePlan(string $slug, ?string $text, array $params, string $format = self::FORMAT_PORTRAIT, float $dur = 2.5): array
     {
         $c = config('contentmachine.clips');
-        $dur = 2.5;
         [$w, $h] = self::formatSize($format, (int) $c['width'], (int) $c['height']);
         $plan = [
             'duration' => $dur,
@@ -424,12 +557,22 @@ TSX;
         return (string) config('contentmachine.clips.effects_previews', storage_path('app/clips/effects'));
     }
 
-    public function previewPath(string $slug, string $format = self::FORMAT_PORTRAIT): string
+    /**
+     * The cached preview of an effect, for the active design system.
+     *
+     * The folder is shared by every project, so a custom effect's file also
+     * carries a hash of its CODE: a cloned project starts with the same slugs,
+     * and refining an effect there would otherwise overwrite the original
+     * project's preview of a different component. Pass $tsx when the record
+     * isn't updated yet (the generation job writes the file first).
+     */
+    public function previewPath(string $slug, string $format = self::FORMAT_PORTRAIT, ?string $tsx = null): string
     {
-        // Portrait keeps the historic filename, so existing previews stay valid.
         $sufixo = $format === self::FORMAT_PORTRAIT ? '' : '-'.$format;
+        $tsx ??= (string) $this->effects->all()->firstWhere('slug', $slug)?->tsx;
+        $codigo = $tsx !== '' ? '-'.substr(md5($tsx), 0, 6) : '';
 
-        return $this->previewDir().'/'.$slug.$sufixo.'-'.$this->designHash().'.mp4';
+        return $this->previewDir().'/'.$slug.$sufixo.'-'.$this->designHash().$codigo.'.mp4';
     }
 
     public function previewExists(string $slug, string $format = self::FORMAT_PORTRAIT): bool

@@ -1372,7 +1372,8 @@ class EffectBoundary extends React.Component<{ children: React.ReactNode }, { fa
 // staticFile themselves; custom (generated) effects use <Img src={params.src}>
 // raw, so we resolve every local image path in their params to a staticFile URL
 // here. https/absolute paths pass through untouched.
-const LOCAL_IMG = /\.(png|jpe?g|webp|gif|bmp|avif)$/i;
+// Room clips too: a video in an image slot plays through MediaImg (media.tsx).
+const LOCAL_IMG = /\.(png|jpe?g|webp|gif|bmp|avif|mp4|mov|webm|m4v)$/i;
 const resolveAssetUrls = (value: unknown): unknown => {
   if (typeof value === "string") {
     return LOCAL_IMG.test(value) && !/^https?:\/\//.test(value) && !value.startsWith("/") ? staticFile(value) : value;

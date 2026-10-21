@@ -337,7 +337,7 @@
                                             </label>
                                         @endforeach
                                     </div>
-                                    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">Applies on the next <em>Cut</em>.</p>
+                                    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">Changing this re-cuts and re-renders the clip when you save.</p>
                                 </div>
 
                                 {{-- Style --}}
@@ -400,13 +400,15 @@
 
                                 {{-- Editor actions --}}
                                 <div class="flex items-center gap-3 pt-1">
-                                    <button wire:click="guardarLegendas" class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-sm hover:bg-teal/10 transition">Save</button>
+                                    <button wire:click="guardarLegendas" wire:loading.attr="disabled"
+                                            x-on:click="window.CMLoader.busy('Saving…')"
+                                            class="border border-teal/40 text-teal font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-sm hover:bg-teal/10 transition">Save</button>
                                     <button wire:click="regenerar('{{ $clip->path }}')" wire:loading.attr="disabled"
                                             x-on:click="window.CMLoader.busy('Rendering the short with subtitles…')"
                                             class="bg-teal text-papyrus font-display text-base px-5 py-2 rounded-sm hover:bg-teal-deep transition shadow-engraved">
                                         Save and regenerate short
                                     </button>
-                                    <span class="font-mono text-xs text-ink-faint">Regenerate re-renders the subtitles onto the already-cut clip — without re-transcribing or re-cutting.</span>
+                                    <span class="font-mono text-xs text-ink-faint">Regenerate re-renders the subtitles onto the already-cut clip — without re-transcribing. It only re-cuts if you changed the frame.</span>
                                 </div>
                             </div>
                         @endif

@@ -1,0 +1,1256 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa de 1940 em Coruche com poço, tanque e árvores de fruto",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t3-coruche-coruche-fajarda-e-erra/124861009-293",
+            "agent": "Cidália Felizardo",
+            "phone": "+351 933 713 437",
+            "agency": "RE/MAX Vision II",
+            "hook": "Uma casa de 1940 em Coruche, com poço e tanque.",
+            "voiceover": "Uma casa de 1940 em Coruche, com poço e tanque. Fica em Montinhos dos Pegos, na tranquilidade das terras ribatejanas. Lá dentro, uma cozinha com lareira, sala de estar e despensa. Três quartos e duas casas de banho. O sótão está aproveitado, pronto para a função que quiser. Lá fora, um lote com mais de quatrocentos metros e árvores de fruto. Sombra, colheitas e espaço para viver ao ar livre. Duzentos e quinze mil euros. Para visitar, fale com a Cidália Felizardo, da REMAX Vision II.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Uma casa de 1940 em Coruche, com poço e tanque.",
+                    "caption": "Coruche · Casa de 1940"
+                },
+                {
+                    "photo": "rua ou envolvente da aldeia",
+                    "vo": "Fica em Montinhos dos Pegos, na tranquilidade das terras ribatejanas.",
+                    "caption": "Montinhos dos Pegos"
+                },
+                {
+                    "photo": "cozinha com lareira",
+                    "vo": "Lá dentro, uma cozinha com lareira,",
+                    "caption": "Cozinha com lareira"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "sala de estar e despensa.",
+                    "caption": "Sala de estar"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Três quartos",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "sótão",
+                    "vo": "O sótão está aproveitado, pronto para a função que quiser.",
+                    "caption": "Sótão aproveitado"
+                },
+                {
+                    "photo": "logradouro com poço e tanque",
+                    "vo": "Lá fora, um lote com mais de quatrocentos metros",
+                    "caption": "Poço e tanque"
+                },
+                {
+                    "photo": "terreno com árvores de fruto",
+                    "vo": "e árvores de fruto. Sombra, colheitas e espaço para viver ao ar livre.",
+                    "caption": "Árvores de fruto"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e quinze mil euros. Para visitar, fale com a Cidália Felizardo, da RE/MAX Vision II.",
+                    "caption": "215.000 € · Cidália Felizardo · RE/MAX Vision II"
+                }
+            ],
+            "flags": [
+                "Garagem e estacionamento não batem certo: os detalhes dizem 'Estacionamento: Não' e 'Garagem: Sim'. Deixei a garagem de fora. Confirmar com a consultora."
+            ],
+            "message": "Boa tarde Sra. Cidália,\nO meu nome é João Ferreira.\n\nVi a moradia em Montinhos dos Pegos que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?",
+            "gender": "f",
+            "title": "Moradia T3 à venda em Coruche, Fajarda e Erra, Coruche",
+            "price": 215000,
+            "details": {
+                "Preço": "215 000 €",
+                "Localização": "Coruche, Fajarda e Erra, Coruche, Santarém",
+                "Referência": "124861009-293",
+                "Área Bruta m²": "177",
+                "Área Útil m²": "99",
+                "Área Total do Lote m²": "455",
+                "Quartos": 3,
+                "WC/Casas de banho": 2,
+                "Ano de Construção": 1940,
+                "Estacionamento": "Não",
+                "Garagem": "Sim",
+                "Carregamento de Carros Elétricos": "Não"
+            }
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Cidália Felizardo - and phone number - +351 933 713 437. Agency: RE/MAX Vision II.\nThe agent's photo is Cidália Felizardo.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa de 1940 em Coruche, com poço e tanque.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Coruche · Casa de 1940»\n- rua ou envolvente da aldeia → «Montinhos dos Pegos»\n- cozinha com lareira → «Cozinha com lareira»\n- sala de estar → «Sala de estar»\n- quarto → «Três quartos»\n- casa de banho → «Duas casas de banho»\n- sótão → «Sótão aproveitado»\n- logradouro com poço e tanque → «Poço e tanque»\n- terreno com árvores de fruto → «Árvores de fruto»\n- end card → «215.000 € · Cidália Felizardo · RE/MAX Vision II»\n\nHere are the house details:\n\nMoradia T3 à venda em Coruche, Fajarda e Erra, Coruche\nPreço\n215 000 €\nLocalização\nCoruche, Fajarda e Erra, Coruche, Santarém\nReferência\n124861009-293\nÁrea Bruta m²\n177\nÁrea Útil m²\n99\nÁrea Total do Lote m²\n455\nQuartos\n3\nWC/Casas de banho\n2\nAno de Construção\n1940\nEstacionamento\nNão\nGaragem\nSim\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p><strong>Moradia T3 | Montinhos dos Pegos - Coruche</strong></p>\n<p>Em Montinhos dos Pegos, encontra esta moradia T3 com o espaço que faz falta no dia a dia: cozinha com lareira, sala de estar, despensa, três quartos, duas casas de banho e sótão aproveitado, pronto para ganhar a função que lhe quiser dar.</p>\n<p>No exterior, o logradouro mantém o poço e o tanque, enquanto o terreno, com árvores de fruto, oferece sombra, colheitas e espaço para viver ao ar livre.</p>\n<p>Uma casa para quem procura tranquilidade, sem perder o carácter genuíno das terras ribatejanas.&nbsp;</p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia de 1940 em Montinhos dos Pegos, Coruche (Ribatejo), à venda por 215 000 €",
+            "summary": "Moradia T3 de 1940, com poço, tanque, sótão aproveitado e um lote com mais de 400 m² com árvores de fruto, em Montinhos dos Pegos, no concelho de Coruche. Coruche é um concelho ribatejano do distrito de Santarém, conhecido pelo montado de sobro e pela cortiça.",
+            "timeline": [
+                {
+                    "label": "Construção da moradia",
+                    "sublabel": "1940"
+                },
+                {
+                    "label": "Tiragem da cortiça de Coruche entra no Inventário Nacional do Património Cultural Imaterial",
+                    "sublabel": "novembro de 2021"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal: 2 076 €/m² (INE)",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 215000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área do lote (mínimo)",
+                    "value": 400,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Quartos",
+                    "value": 3,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Casas de banho",
+                    "value": 2,
+                    "unit": "casas de banho"
+                },
+                {
+                    "label": "Área do concelho de Coruche (aprox.)",
+                    "value": 1116,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal, 2025 (INE)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano em Portugal, 2025 face a 2024 (INE)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Casa de 1940 com poço e tanque",
+                "Cozinha com lareira, sala de estar e despensa",
+                "3 quartos, 2 casas de banho e sótão aproveitado",
+                "Lote com mais de 400 m² e árvores de fruto",
+                "Coruche fica no Ribatejo, no distrito de Santarém, e é terra de montado de sobro",
+                "A tiragem da cortiça de Coruche é Património Cultural Imaterial nacional desde 2021"
+            ],
+            "sources": [
+                "https://rr.pt/noticia/vida/2021/11/29/tiragem-da-cortica-inscrita-como-patrimonio-cultural-imaterial/262577/",
+                "https://bo.agroportal.pt/coruche-recebe-com-orgulho-inscricao-da-tiragem-da-cortica-como-patrimonio-imaterial",
+                "https://www.idealista.pt/en/news/node/75156",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://www.gee.gov.pt/pt/docs/doc-o-gee-2/estatisticas-regionais/distritos-concelhos/santarem/coruche/3176-coruche/file",
+                "https://aldeiasportuguesas.pt/santarem/coruche/"
+            ]
+        },
+        "suggested": {
+            "title": "Casa de 1940 em Coruche com poço, tanque e árvores de fruto",
+            "description": "Moradia de 1940 em Montinhos dos Pegos, na tranquilidade do Ribatejo, com cozinha com lareira, sala, despensa, três quartos, duas casas de banho e sótão aproveitado. No exterior, um lote com mais de 400 m², poço, tanque e árvores de fruto para viver ao ar livre. Por 215 mil euros. Para visitar, contacte a Cidália Felizardo, da RE/MAX Vision 2.",
+            "tags": [
+                "casa à venda",
+                "Coruche",
+                "Ribatejo",
+                "imobiliário",
+                "moradia antiga",
+                "casa com terreno",
+                "vida no campo",
+                "RE/MAX"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "listing-124861009-293-hmlk7",
+    "created_at": "2026-10-14T13:03:31+00:00",
+    "updated_at": "2026-10-14T14:10:24+00:00",
+    "source_path": "clips/uploads/U8WnqBVhQ83fvNdRLjE1g7C4mrSEZZMe4twsb62F.mp3",
+    "images": [
+        {
+            "id": "img_a97fba5a",
+            "path": "clips/uploads/mncIFlFdtchz0VMRp5lQY6bu2dk0GDDMFDiZsX6j.jpg",
+            "description": "Fachada térrea branca com barras azuis, telhado de telha, duas chaminés e terreiro de terra em frente.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b7d1aa74",
+            "path": "clips/uploads/z2zsnLP3soD8NVvtYV5JUDkccTmPyrRattYHBZKL.jpg",
+            "description": "Fachada lateral branca e azul com escada exterior de ferro até ao sótão, chaminés e números 61/61A.",
+            "name": "bc22d1dd-3d4f-4d5b-91c5-0941272f0dd2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8606d6cc",
+            "path": "clips/uploads/CtjrCfHnlyJ4mOHlshDGYn7O1nq8B6IgqQNgpeYO.jpg",
+            "description": "Cozinha com mesa de madeira, cesto de fruta e frigorífico; porta aberta para a despensa.",
+            "name": "54724f9f-825b-4259-b8a3-5e8573a1b157.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b0fd87f6",
+            "path": "clips/uploads/9YUSgRrQjfwpiOBb4sMCt3OUJ7IeAkmsNuN4PrE3.jpg",
+            "description": "Cozinha com armários de madeira clara, lava-loiça duplo inox, bancada de granito e esquentador.",
+            "name": "76964a3e-7491-4bec-a3dc-e3f548c48bbf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_66912b25",
+            "path": "clips/uploads/O5Sw5ndN7shCyvO1vJjnbbiG41kfNCmAHfG0vKzv.jpg",
+            "description": "Cozinha com fogão inox, galo de cerâmica, armário baixo com granito e frigorífico branco.",
+            "name": "46d32387-972a-499f-942b-ab49809eea5b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_91c5ac55",
+            "path": "clips/uploads/GSfbS4xRKDVnnVAGo1uqdIn6UCm1uUEsKTYhBDoi.jpg",
+            "description": "Cozinha ampla com fogão, frigorífico e quadro de cavalo; passagem aberta para a zona do lava-loiça.",
+            "name": "ab0901b2-fa7b-40f8-a931-00d69bbf3e81.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_26352f62",
+            "path": "clips/uploads/yD97m5hIKYR07GJKDsxGMtkkr9x0Z9mbdeFEGnfK.jpg",
+            "description": "Lareira antiga tapada com cortina floral, azulejos rosados e mesa redonda; vista para a sala de jantar.",
+            "name": "b1de8684-2272-4ac0-9f4c-4eb799ddcecd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a6fe9b1c",
+            "path": "clips/uploads/E3Yyg6dC8jfE9ESPk761UPtd4GnINtAPRSUdKd6W.jpg",
+            "description": "Sala de refeições com janela de portadas abertas, cortinas florais, máquina de costura antiga e mesa com cesto.",
+            "name": "35aad162-ddbc-4de7-a297-a483adf8fec4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c834a104",
+            "path": "clips/uploads/KwMWSOJPyeaeG4GYgm0uAUoSMCDPnBedtT1CoxX2.jpg",
+            "description": "Sala de refeições com mesa de madeira, quadros rústicos, janela com cortinas e porta aberta para a despensa.",
+            "name": "a167be7d-e1cd-41a3-971b-f3c8e90cd677.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_031af167",
+            "path": "clips/uploads/O2UikRplLaA8QiyJMwrelzRoyT4ag07xFqsKqeIj.jpg",
+            "description": "Sala de jantar clássica com mesa e cadeiras trabalhadas, aparador com vitrine e janela com cortinados.",
+            "name": "97b428a6-014e-40b2-8bd7-46a636caa7fb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a0b72716",
+            "path": "clips/uploads/GNB9qMEip1HP9TsE53WIdTbqcE1Q2RDeJgmUMqW9.jpg",
+            "description": "Sala de jantar: mesa de madeira com terrina de estanho, janela com cortinados amarelos e brancos.",
+            "name": "b18cb67f-60b1-4257-b23f-dccdf7b25ec1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_344959c6",
+            "path": "clips/uploads/S4hClK5hXwItxVJy3DvB91ypf6cpAlzw1TRjI7jX.jpg",
+            "description": "Sala de jantar: aparador de madeira trabalhada com garrafa e copos, mesa com terrina, porta aberta.",
+            "name": "6c90a869-aa6e-416f-ba58-1a1e728567d6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74568826",
+            "path": "clips/uploads/tfBHnbU6wUBAFZ81vs3xqcgM3VRFhdxXIywqsTsL.jpg",
+            "description": "Sala de jantar: mesa com terrina, arca de madeira, pratos decorativos na parede, porta para a sala de estar.",
+            "name": "5330ea46-51ef-46c5-a6b8-0dba699b7ca3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_68b9e65d",
+            "path": "clips/uploads/MdlMCb421eg0E7UWkRBRQ4kH9LryOD0K8Q8beE5r.jpg",
+            "description": "Sala de estar: sofá azul estampado com almofadas amarelas, móvel branco com televisão antiga, janela com cortinados.",
+            "name": "5a485c73-bf17-4a12-bb5b-0859219101eb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a136b346",
+            "path": "clips/uploads/MAHd9ihcBNhFi2Y7rPLSDmE0Yc8xMML9Duax0Yit.jpg",
+            "description": "Sala de estar: sofá azul estampado com almofadas amarelas em frente a janela com cortinados brancos.",
+            "name": "0fed227e-8e55-42ab-9782-8f4d1813aed9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d1b36a77",
+            "path": "clips/uploads/w1Frx6vGXzX21Sf0DYJvpmfnc1UhrouztdIGd5eS.jpg",
+            "description": "Divisão com baú vermelho antigo, mesinhas brancas, porta aberta para quarto com roupeiro de madeira.",
+            "name": "86bfcb5f-ae3b-400f-8f33-2d8cce5462df.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_81c63903",
+            "path": "clips/uploads/b0CFxvHo6enAVZOrMl3U8V1v7UFnJXl5W35dHefx.jpg",
+            "description": "Quarto: estante-secretária branca com fotografia emoldurada, janela com cortinado branco, chão de mosaico claro.",
+            "name": "33220bf1-3cbc-4a8b-b80f-95186c61e63c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b200d2f3",
+            "path": "clips/uploads/wghDe6i1gXbgSaGSvH9aRBpxVWGT82ZXOrs6XtEO.jpg",
+            "description": "Quarto: roupeiro branco, estante-secretária com fotografia, ventoinha, cortinado branco e chão claro.",
+            "name": "6ee7af40-ddbf-4068-8060-68a2710e33e8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_28e0f6b0",
+            "path": "clips/uploads/TxdzgVp0LUAIknN0ozY3WHdQxKMLwvyXfk2DrEdZ.jpg",
+            "description": "Quarto de casal: cama com colcha floral, cabeceira de madeira com prateleiras, janela e cómoda com espelho.",
+            "name": "3a7b5210-941a-4b91-8d93-c47207834362.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_09284e1b",
+            "path": "clips/uploads/9haF09K2Bx1RPI06nPjsU6VTcpvgMiv3ako1h9ES.jpg",
+            "description": "Quarto de casal: cama com colcha floral, janela com cortinados, cómoda de madeira com espelho e imagens religiosas.",
+            "name": "5ee691f4-cabe-490d-bf30-9dcd822a366d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_95cbadeb",
+            "path": "clips/uploads/G1dK6pOoHSn5q7TS3AZRc0cLQYLNX7f7WJpBAwW2.jpg",
+            "description": "Casa de banho: lavatório branco de coluna, espelho redondo, azulejos claros com friso azul decorativo.",
+            "name": "b8d74783-85cf-494a-a487-643d4364c1ba.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_737a865d",
+            "path": "clips/uploads/bOoMloi24c7la3duKfJrsUeD5CKtLpG3r1onhkR4.jpg",
+            "description": "Casa de banho: sanita branca junto a parede de azulejos claros com friso azul, toalha pendurada.",
+            "name": "bda5c640-327c-449d-9eb9-3a392e12d6c3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_89395935",
+            "path": "clips/uploads/VWnWJDTErurLXRP53fSeQL0HCdNd16tCBDCRY5zz.jpg",
+            "description": "Quarto: cama de casal com colcha floral, cabeceira com mesas de cabeceira integradas, mobília retro.",
+            "name": "9666b80f-a4ea-4c65-9335-f26c76cfbae1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a7547205",
+            "path": "clips/uploads/rZL0o9eZNag518gwsGmkDjcloOa9Nhp3fxNlhxoC.jpg",
+            "description": "Quarto: roupeiro de três portas creme, janela com cortinas cor-de-rosa e luz do sol a entrar.",
+            "name": "1d0717af-b813-438e-8fb3-74ab411db0bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5be187ae",
+            "path": "clips/uploads/f7IdgU4trCt0NNmWmpMFGK5LVM1qrxS9icoDcG45.jpg",
+            "description": "Despensa ou zona de lavandaria: bancada de azulejo branco, prateleira com garrafas e esquentador na parede.",
+            "name": "2d6c5862-6c05-43db-ae7f-5a25be0457e6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5aa84809",
+            "path": "clips/uploads/BQ5ufQT8l4IjYrjgLOXdGBTAPcGg7FlEzW4TbEGy.jpg",
+            "description": "Despensa: bancada de azulejo com armários castanhos, esquentador, porta aberta para casa de banho ao lado.",
+            "name": "980c2b7e-b2ad-4e36-98da-c97863cf01ad.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_021f1e1b",
+            "path": "clips/uploads/QdNZZNmXidbDg95TjbjrYMGrEBP4H02DjKqNX3Ic.jpg",
+            "description": "Casa de banho: lavatório branco, paredes de azulejo branco, cortina de duche bege, chão de tijoleira.",
+            "name": "52d4e2c1-60ff-44a4-8584-88a0be909478.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c0cf7a18",
+            "path": "clips/uploads/E0NKQNwo0WXWxSeyVhmfGyFl9uWZAY8m1rLdN1q5.jpg",
+            "description": "Casa de banho: sanita e bidé brancos, azulejos brancos, chão de tijoleira terracota, cortina de duche.",
+            "name": "1182c281-ea00-4172-9d7a-7eebff55346b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_638a6218",
+            "path": "clips/uploads/XIzEZW5naaAUuV0nGrN2uOUp9wHNzLOLEx5EVPVo.jpg",
+            "description": "Garagem ou anexo: portão largo de madeira escura com vidros, teto de madeira, arca congeladora.",
+            "name": "5207e9ef-d8c0-405e-af0a-7e97aa480a3e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc9f2edb",
+            "path": "clips/uploads/hr3lYTCRySFWUpKn4qy7b1sAvaTFCWRVtHyBEoms.jpg",
+            "description": "Anexo ou sala de apoio: louceiro de madeira, máquina de lavar roupa, teto em madeira, chão de tijoleira.",
+            "name": "4d5b0c94-e84f-4b38-9b0e-541b7250d460.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bab065d1",
+            "path": "clips/uploads/JM9P2RG1LloGeF27a4aKGjRQA7TIBHtE29UH6wff.jpg",
+            "description": "Quarto pequeno com janela de cortina amarela, esquentador a gás na parede e colchão encostado.",
+            "name": "27c18968-451c-44b5-9687-67c8663f333e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ddfb7ab9",
+            "path": "clips/uploads/8U23rzSvgKeKG6xuWpNGxsztQOOUOL3i33FQKmu0.jpg",
+            "description": "Exterior: poço com grade e tanque branco caiado, fachada branca com barras azuis e telhado de telha.",
+            "name": "80e547df-d557-46c3-bc81-4abc32a09202.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_02f44b3a",
+            "path": "clips/uploads/QkNWu6VFqhLSpKVEKgBkHCRdX8BDvzJodht6MSEW.jpg",
+            "description": "Exterior: poço redondo em primeiro plano, alpendre com telheiro e casa branca e azul, céu limpo.",
+            "name": "07afa61b-ce93-4d78-b134-9aec8059e24c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5cde1da6",
+            "path": "clips/uploads/DLRVdnYkukUtlQTYy5Z4gKTwHe2TCelwQD30kVuX.jpg",
+            "description": "Exterior: alpendre coberto com tanque de lavar branco, piso em mosaico de pedra e ripado de madeira.",
+            "name": "f184136c-517a-433f-9909-e477214abe98.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e4a25e6d",
+            "path": "clips/uploads/xBSg6mzkLhp1kMV1aGQMR40KOq4ta9ekTTdvVaVy.jpg",
+            "description": "Quintal: latada de videira a dar sombra a anexo antigo em pedra, com laranjeira à direita.",
+            "name": "1da69839-32aa-44df-aa96-fb9a98ccfb8d.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5b9ad798",
+            "path": "clips/uploads/VKQ4QEAjGTbXMVMTWs1FQh7Oz1Qg4WcnJLrUkXSx.jpg",
+            "description": "Terreno com árvores de fruto carregadas, laranjeiras e pinheiro manso, caminho de terra sob céu azul.",
+            "name": "58ac95e7-8030-4b92-9b9d-9d5069e92780.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f41c4768",
+            "path": "clips/uploads/PZKm9REWu3BYjK3AUwTqxxj06XU9ZLKcimrdCXDi.jpg",
+            "description": "Quintal: grande parreira verde a cobrir anexo de pedra, sombra fresca e chão de terra.",
+            "name": "c4804232-ae16-40fb-9c0f-5084d5a58d23.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_60b3127e",
+            "path": "clips/uploads/LB24j1wD83TwbTBSPG2WMR1tFwapxCH5Iv1CcFr2.png",
+            "description": "Retrato da consultora Cidália Felizardo, da RE/MAX Vision II.",
+            "name": "Cidália Felizardo.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_559d45bf",
+            "path": "clips/uploads/uqRxHWGPqMEC1fjOSrEpBlEI5FF5GUesRQdsEMpE.jpg",
+            "description": "Logótipo da RE/MAX Vision II.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/U8WnqBVhQ83fvNdRLjE1g7C4mrSEZZMe4twsb62F.mp3",
+    "transcript": {
+        "duration": 30.719999313354492,
+        "text": "Uma casa de 1940 em Coruj, com poço e tanque. Fica em Montinhos dos Pegos, na tranquilidade das terras ribatejanas. Lá dentro, uma cozinha com lareira, sala de estar e despensa. Três quartos e duas casas de banho. O sótão está aproveitado, pronto para a função que quiser. Lá fora, um lote com mais de 400 metros e árvores de fruto. Sombra, colheitas e espaço para viver ao ar livre. 215 mil euros. Para visitar, fale com a Cidália Felizardo, da Remax Vision 2.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "casa",
+                "start": 0.18000000715255737,
+                "end": 0.5
+            },
+            {
+                "word": "de",
+                "start": 0.5,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "1940",
+                "start": 0.7200000286102295,
+                "end": 1.840000033378601
+            },
+            {
+                "word": "em",
+                "start": 1.840000033378601,
+                "end": 2.140000104904175
+            },
+            {
+                "word": "Coruj,",
+                "start": 2.140000104904175,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "com",
+                "start": 2.6600000858306885,
+                "end": 3.0999999046325684
+            },
+            {
+                "word": "poço",
+                "start": 3.0999999046325684,
+                "end": 3.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 3.380000114440918,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "tanque.",
+                "start": 3.759999990463257,
+                "end": 4.119999885559082
+            },
+            {
+                "word": "Fica",
+                "start": 4.420000076293945,
+                "end": 4.599999904632568
+            },
+            {
+                "word": "em",
+                "start": 4.599999904632568,
+                "end": 4.71999979019165
+            },
+            {
+                "word": "Montinhos",
+                "start": 4.71999979019165,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "dos",
+                "start": 5.099999904632568,
+                "end": 5.340000152587891
+            },
+            {
+                "word": "Pegos,",
+                "start": 5.340000152587891,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "na",
+                "start": 5.900000095367432,
+                "end": 6.059999942779541
+            },
+            {
+                "word": "tranquilidade",
+                "start": 6.059999942779541,
+                "end": 6.699999809265137
+            },
+            {
+                "word": "das",
+                "start": 6.699999809265137,
+                "end": 6.980000019073486
+            },
+            {
+                "word": "terras",
+                "start": 6.980000019073486,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "ribatejanas.",
+                "start": 7.21999979019165,
+                "end": 8.100000381469727
+            },
+            {
+                "word": "Lá",
+                "start": 8.380000114440918,
+                "end": 8.5
+            },
+            {
+                "word": "dentro,",
+                "start": 8.5,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "uma",
+                "start": 9.0600004196167,
+                "end": 9.220000267028809
+            },
+            {
+                "word": "cozinha",
+                "start": 9.220000267028809,
+                "end": 9.5
+            },
+            {
+                "word": "com",
+                "start": 9.5,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "lareira,",
+                "start": 9.779999732971191,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "sala",
+                "start": 10.579999923706055,
+                "end": 10.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 10.579999923706055,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "estar",
+                "start": 10.899999618530273,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 11.100000381469727,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "despensa.",
+                "start": 11.359999656677246,
+                "end": 11.859999656677246
+            },
+            {
+                "word": "Três",
+                "start": 12.4399995803833,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "quartos",
+                "start": 12.4399995803833,
+                "end": 12.9399995803833
+            },
+            {
+                "word": "e",
+                "start": 12.9399995803833,
+                "end": 13.260000228881836
+            },
+            {
+                "word": "duas",
+                "start": 13.260000228881836,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "casas",
+                "start": 13.520000457763672,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "de",
+                "start": 13.800000190734863,
+                "end": 14.15999984741211
+            },
+            {
+                "word": "banho.",
+                "start": 14.15999984741211,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "O",
+                "start": 14.520000457763672,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "sótão",
+                "start": 14.619999885559082,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "está",
+                "start": 14.880000114440918,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "aproveitado,",
+                "start": 15.079999923706055,
+                "end": 15.800000190734863
+            },
+            {
+                "word": "pronto",
+                "start": 16.1200008392334,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "para",
+                "start": 16.200000762939453,
+                "end": 16.3799991607666
+            },
+            {
+                "word": "a",
+                "start": 16.3799991607666,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "função",
+                "start": 16.739999771118164,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "que",
+                "start": 16.739999771118164,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "quiser.",
+                "start": 16.920000076293945,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "Lá",
+                "start": 17.700000762939453,
+                "end": 17.84000015258789
+            },
+            {
+                "word": "fora,",
+                "start": 17.84000015258789,
+                "end": 18.079999923706055
+            },
+            {
+                "word": "um",
+                "start": 18.31999969482422,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "lote",
+                "start": 18.479999542236328,
+                "end": 18.739999771118164
+            },
+            {
+                "word": "com",
+                "start": 18.739999771118164,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "mais",
+                "start": 18.899999618530273,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 19.079999923706055,
+                "end": 19.299999237060547
+            },
+            {
+                "word": "400",
+                "start": 19.299999237060547,
+                "end": 19.860000610351562
+            },
+            {
+                "word": "metros",
+                "start": 19.860000610351562,
+                "end": 20.280000686645508
+            },
+            {
+                "word": "e",
+                "start": 20.280000686645508,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "árvores",
+                "start": 20.639999389648438,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "de",
+                "start": 20.84000015258789,
+                "end": 21.360000610351562
+            },
+            {
+                "word": "fruto.",
+                "start": 21.360000610351562,
+                "end": 21.360000610351562
+            },
+            {
+                "word": "Sombra,",
+                "start": 22,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "colheitas",
+                "start": 22.5,
+                "end": 22.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 22.959999084472656,
+                "end": 23.280000686645508
+            },
+            {
+                "word": "espaço",
+                "start": 23.280000686645508,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "para",
+                "start": 23.540000915527344,
+                "end": 23.780000686645508
+            },
+            {
+                "word": "viver",
+                "start": 23.780000686645508,
+                "end": 24
+            },
+            {
+                "word": "ao",
+                "start": 24,
+                "end": 24.219999313354492
+            },
+            {
+                "word": "ar",
+                "start": 24.219999313354492,
+                "end": 24.31999969482422
+            },
+            {
+                "word": "livre.",
+                "start": 24.31999969482422,
+                "end": 24.600000381469727
+            },
+            {
+                "word": "215",
+                "start": 25.299999237060547,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "mil",
+                "start": 25.860000610351562,
+                "end": 26.100000381469727
+            },
+            {
+                "word": "euros.",
+                "start": 26.100000381469727,
+                "end": 26.479999542236328
+            },
+            {
+                "word": "Para",
+                "start": 26.479999542236328,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "visitar,",
+                "start": 26.920000076293945,
+                "end": 27.479999542236328
+            },
+            {
+                "word": "fale",
+                "start": 27.8799991607666,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "com",
+                "start": 27.8799991607666,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "a",
+                "start": 28.020000457763672,
+                "end": 28.15999984741211
+            },
+            {
+                "word": "Cidália",
+                "start": 28.15999984741211,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "Felizardo,",
+                "start": 28.520000457763672,
+                "end": 29.1200008392334
+            },
+            {
+                "word": "da",
+                "start": 29.34000015258789,
+                "end": 29.420000076293945
+            },
+            {
+                "word": "Remax",
+                "start": 29.420000076293945,
+                "end": 29.799999237060547
+            },
+            {
+                "word": "Vision",
+                "start": 29.799999237060547,
+                "end": 30.100000381469727
+            },
+            {
+                "word": "2.",
+                "start": 30.100000381469727,
+                "end": 30.540000915527344
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 30.719999313354492,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.0500000000000007,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Casa de 1940 em Coruche",
+                        "params": {
+                            "src": "img_a97fba5a",
+                            "avatar": "img_60b3127e",
+                            "logo": "img_559d45bf",
+                            "price": "215.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Uma casa de 1940 em Coruche, com poço e tanque.",
+                            "location": "Montinhos dos Pegos · Coruche",
+                            "agentName": "Cidália Felizardo",
+                            "phone": "+351 933 713 437",
+                            "legal": "RE/MAX Vision II"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.0500000000000007,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Montinhos dos Pegos",
+                        "params": {
+                            "src": "img_ddfb7ab9",
+                            "src2": "img_b7d1aa74",
+                            "srcs": [
+                                "img_ddfb7ab9",
+                                "img_b7d1aa74",
+                                "img_02f44b3a",
+                                "img_5cde1da6",
+                                "img_638a6218",
+                                "img_cc9f2edb"
+                            ],
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 10.45,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Cozinha com lareira",
+                        "params": {
+                            "src": "img_26352f62",
+                            "src2": "img_8606d6cc",
+                            "src3": "img_b0fd87f6",
+                            "src4": "img_66912b25",
+                            "src5": "img_91c5ac55"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.45,
+                "end": 12.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Sala de estar e despensa",
+                        "params": {
+                            "src": "img_68b9e65d",
+                            "src2": "img_a136b346",
+                            "src3": "img_a6fe9b1c",
+                            "src4": "img_5aa84809",
+                            "srcs": [
+                                "img_68b9e65d",
+                                "img_a136b346",
+                                "img_a6fe9b1c",
+                                "img_5aa84809",
+                                "img_c834a104",
+                                "img_031af167",
+                                "img_a0b72716",
+                                "img_344959c6",
+                                "img_74568826",
+                                "img_5be187ae"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.4,
+                "end": 14.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Três quartos · Duas casas de banho",
+                        "params": {
+                            "src": "img_28e0f6b0",
+                            "src2": "img_81c63903",
+                            "src3": "img_95cbadeb",
+                            "src4": "img_021f1e1b",
+                            "srcs": [
+                                "img_28e0f6b0",
+                                "img_81c63903",
+                                "img_95cbadeb",
+                                "img_021f1e1b",
+                                "img_09284e1b",
+                                "img_b200d2f3",
+                                "img_89395935",
+                                "img_a7547205",
+                                "img_d1b36a77",
+                                "img_737a865d",
+                                "img_c0cf7a18"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.5,
+                "end": 17.55,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Sótão aproveitado",
+                        "params": {
+                            "src": "img_bab065d1",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.55,
+                "end": 21.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Lá fora",
+                        "params": {
+                            "src": "img_5b9ad798",
+                            "title": "Lá fora",
+                            "items": [
+                                "Lote com 455 m²",
+                                "Árvores de fruto",
+                                "Poço e tanque"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.8,
+                "end": 25.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Sombra e colheitas",
+                        "params": {
+                            "src": "img_f41c4768",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.1,
+                "end": 27.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "215.000 €",
+                        "params": {
+                            "src": "img_e4a25e6d",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.4,
+                "end": 30.719999313354492,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Cidália Felizardo",
+                        "params": {
+                            "src": "img_60b3127e",
+                            "logo": "img_559d45bf",
+                            "name": "Cidália Felizardo",
+                            "role": "Consultora imobiliária · RE/MAX Vision II",
+                            "buttons": "+351 933 713 437 | Marque a sua visita",
+                            "phone": "+351 933 713 437"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-124861009-293-hmlk7/clip.mp4",
+    "error": null
+}

@@ -1,6 +1,6 @@
 @props([
     'points' => [],      // array<int|float> values, oldest→newest
-    'color' => '#4DE0E0',
+    'color' => '#2C6E6E',
     'height' => 56,      // rendered px height
 ])
 @php

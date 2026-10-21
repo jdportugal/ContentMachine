@@ -1,0 +1,1356 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Era um T3, agora é um T2 com jardim em São Brás de Alportel",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-sao-bras-de-alportel-129m2/r1045199",
+            "agent": "Eleutéria Pires",
+            "phone": "+351912576456",
+            "email": "",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Um apartamento com jardim em São Brás de Alportel.",
+            "voiceover": "Um apartamento com jardim em São Brás de Alportel. Numa zona calma, quase campo, a dez minutos de Loulé e a vinte de Faro. Rés-do-chão com entrada independente, remodelado em 2024. Era um T3, hoje é um T2 mais amplo, com cento e quinze metros úteis. Sala, cozinha ampla em open-space e despensa. Dois quartos, um deles em suite, e duas casas de banho. Atrás, um pátio com barbecue abre para um jardim bem cuidado. Tem ainda arrecadação. Para viver, ou para investir. Trezentos e setenta e nove mil euros. Para visitar, fale com a Eleutéria Pires, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "jardim nas traseiras, plano geral",
+                    "vo": "Um apartamento com jardim em São Brás de Alportel.",
+                    "caption": "São Brás de Alportel"
+                },
+                {
+                    "photo": "zona envolvente / rua tranquila",
+                    "vo": "Numa zona calma, quase campo, a dez minutos de Loulé e a vinte de Faro.",
+                    "caption": "Zona calma, quase campo"
+                },
+                {
+                    "photo": "fachada com entrada independente",
+                    "vo": "Rés-do-chão com entrada independente, remodelado em 2024.",
+                    "caption": "Remodelado em 2024"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Era um T3, hoje é um T2 mais amplo, com cento e quinze metros úteis.",
+                    "caption": "115 m² úteis"
+                },
+                {
+                    "photo": "cozinha em open-space",
+                    "vo": "Sala, cozinha ampla em open-space e despensa.",
+                    "caption": "Cozinha ampla"
+                },
+                {
+                    "photo": "quarto principal em suite",
+                    "vo": "Dois quartos, um deles em suite,",
+                    "caption": "Dois quartos, uma suite"
+                },
+                {
+                    "photo": "casa de banho com base de duche",
+                    "vo": "e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "pátio com barbecue",
+                    "vo": "Atrás, um pátio com barbecue",
+                    "caption": "Pátio com barbecue"
+                },
+                {
+                    "photo": "jardim, detalhe",
+                    "vo": "abre para um jardim bem cuidado. Tem ainda arrecadação.",
+                    "caption": "Jardim e arrecadação"
+                },
+                {
+                    "photo": "jardim / exterior ao fim do dia",
+                    "vo": "Para viver, ou para investir.",
+                    "caption": "Viver ou investir"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e setenta e nove mil euros. Para visitar, fale com a Eleutéria Pires, da IAD Portugal.",
+                    "caption": "379.000 € · Eleutéria Pires · IAD Portugal · AMI 11220"
+                }
+            ],
+            "flags": [
+                "Os detalhes indicam 'Terraço', mas o texto só descreve um pátio com barbecue. Usei 'pátio' e deixei o terraço de fora.",
+                "O texto diz 'um quase jardim' e depois 'jardim bonito e bem cuidado'. Usei 'jardim'. Confirmar nas fotos.",
+                "O campo de aquecimento aparece como 'property.feature.heating', sem tipo definido. Ficou de fora.",
+                "O acesso para cadeira de rodas só aparece nos detalhes. Ficou de fora. Confirmar antes de o mencionar.",
+                "'Materiais topo de gama' ficou de fora porque não é verificável. O script diz apenas 'remodelado em 2024'.",
+                "Mercado algarve: pode oferecer legendas em inglês, porque o comprador pode ser estrangeiro."
+            ],
+            "message": "Bom dia Sra. Eleutéria, fiz este vídeo do seu apartamento em São Brás de Alportel para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 2 quartos de 129 m² em São Brás de Alportel",
+            "price": 379000,
+            "details": {
+                "Preço": "379 000 €",
+                "Localização": "São Brás de Alportel, 8150-164",
+                "Referência": "1045199",
+                "Área Bruta m²": "128.66",
+                "Quartos": 2,
+                "Ano de Construção": 1998,
+                "Certificado Energético": "C",
+                "Características": "128,66 m² área bruta, 115 m² úteis, 2 casas de banho, Jardim, Terraço, Sala de estar, Ligação TV, property.feature.heating, Construído em 1998, Acesso para cadeira de rodas, Rés-do-chão"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Eleutéria Pires - and phone number - +351912576456. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Eleutéria Pires.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Um apartamento com jardim em São Brás de Alportel.».\n\nSuggested scenes (photo → on-screen caption):\n- jardim nas traseiras, plano geral → «São Brás de Alportel»\n- zona envolvente / rua tranquila → «Zona calma, quase campo»\n- fachada com entrada independente → «Remodelado em 2024»\n- sala de estar → «115 m² úteis»\n- cozinha em open-space → «Cozinha ampla»\n- quarto principal em suite → «Dois quartos, uma suite»\n- casa de banho com base de duche → «Duas casas de banho»\n- pátio com barbecue → «Pátio com barbecue»\n- jardim, detalhe → «Jardim e arrecadação»\n- jardim / exterior ao fim do dia → «Viver ou investir»\n- end card → «379.000 € · Eleutéria Pires · IAD Portugal · AMI 11220»\n\nHere are the house details:\n\nApartamento 2 quartos de 129 m² em São Brás de Alportel\nPreço\n379 000 €\nLocalização\nSão Brás de Alportel, 8150-164\nReferência\n1045199\nÁrea Bruta m²\n128.66\nQuartos\n2\nAno de Construção\n1998\nCertificado Energético\nC\nCaracterísticas\n128,66 m² área bruta, 115 m² úteis, 2 casas de banho, Jardim, Terraço, Sala de estar, Ligação TV, property.feature.heating, Construído em 1998, Acesso para cadeira de rodas, Rés-do-chão\n\nDescrição\nSituado em São Brás de Alportel, numa zona residencial calma e tranquila, mas próximo de todos os serviços, encontra este apartamento de tipologia T3, atualmente transformado em T2, com 115 m2 de área útil, organização funcional e versatilidade. Com um pátio e um quase jardim na parte de trás este apartamento localizado no rés do chão é quase uma vivenda. \n\nA localização constitui uma das mais-valias do imóvel, porque é quase campo, mas tem a proximidade da bonita vila de São Brás de Alportel. \n\nA distribuição interior é um dos seus principais pontos fortes. Este apartamento foi todo remodelado com muito bom gosto e materiais topo de gama em 2024, Tem uma entrada independente. Composto por um hall de entrada anexo a uma sala de estar, uma despensa. O corredor leva a uma cozinha ampla em open-space. tem 2 quartos, um deles en-suite com casa de banho de base de duche. Tem outra casa de banho também com base de duche. Atrás tem um pátio com barbecue que dá acesso a um jardim bonito e bem cuidado. \n\nOriginalmente concebido como T3, encontra-se atualmente transformado em T2, beneficiando um espaço mais amplo.  \n\nO imóvel conta ainda com arrecadação, proporcionando um importante espaço complementar de arrumação.\n\nSe procura espaço, funcionalidade e uma localização calma e tranquila aliado ao bom gosto da remodelação, este apartamento merece a sua visita.\n\nA 20 minutos de Tavira, de Olhão e de Faro, a 10 minutos de Loulé e 30 minutos do Aeroporto internacional do Algarve!\n\nNão perca esta visita! Excelente investimento quer para habitar ou rentabilizar!\n\nA sua consultora fluente em português, inglês e francês irá ajudá-lo em todo o processo, incluindo o crédito à habitação se necessário!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Mercado imobiliário em São Brás de Alportel e no Algarve",
+            "summary": "Em 2025, o Algarve teve o segundo preço mediano da habitação mais alto do país, com 3.139 €/m². Só a Grande Lisboa ficou acima. Loulé, a 10 minutos de São Brás de Alportel, chegou aos 3.993 €/m².",
+            "timeline": [
+                {
+                    "label": "Censos: São Brás de Alportel com 11.266 habitantes (+5,7%)",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Remodelação do apartamento",
+                    "sublabel": "2024"
+                },
+                {
+                    "label": "Preço mediano nacional sobe 16,8%",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano da habitação no Algarve (2025)",
+                    "value": 3139,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano nacional (2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano da habitação em Loulé (2025)",
+                    "value": 3993,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano na Grande Lisboa (2025)",
+                    "value": 3439,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "População de São Brás de Alportel (Censos 2021)",
+                    "value": 11266,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho",
+                    "value": 153,
+                    "unit": "km²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Preço mediano da habitação em 2025",
+                    "left": {
+                        "title": "Algarve",
+                        "points": [
+                            "3.139 €/m²",
+                            "2.º mais caro do país",
+                            "14 dos 16 concelhos acima da média nacional"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2.076 €/m²",
+                            "+16,8% face a 2024",
+                            "164.677 vendas"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Algarve teve o 2.º preço mediano da habitação mais alto do país em 2025, logo atrás da Grande Lisboa",
+                "Loulé, a 10 minutos, está entre os concelhos mais caros de Portugal, com 3.993 €/m²",
+                "14 dos 16 concelhos do Algarve ficaram acima da mediana nacional",
+                "A população de São Brás de Alportel cresceu 5,7% entre 2011 e 2021"
+            ],
+            "sources": [
+                "https://postal.pt/algarve/algarve-teve-o-segundo-preco-mais-elevado-da-habitacao-em-2025/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://postal.pt/nacional/censos-revelam-crescimento-de-57-da-populacao-de-sao-bras-de-alportel/",
+                "https://www.infopedia.pt/artigos/$sao-bras-de-alportel",
+                "https://www.pordata.pt/en/municipalities/summary+table/sao+bras+de+alportel-828319",
+                "https://en.wikipedia.org/wiki/S%C3%A3o_Br%C3%A1s_de_Alportel"
+            ]
+        },
+        "suggested": {
+            "title": "Era um T3, agora é um T2 com jardim em São Brás de Alportel",
+            "description": "Era um T3 e passou a T2 mais amplo, com jardim próprio, em São Brás de Alportel.\n\nT2 · 115 m² úteis · 379.000 €\n\nÉ um rés-do-chão com entrada independente, numa zona calma, quase campo. Loulé fica a 10 minutos e Faro a 20.\nFoi remodelado em 2024. A sala tem cozinha ampla em open space e despensa. Dos dois quartos, um é suite, e há duas casas de banho.\nNas traseiras, um pátio com barbecue dá para um jardim bem cuidado. Tem ainda arrecadação e acesso para cadeira de rodas.\nServe para viver ou para investir.\n\nConstrução de 1998 · 128,66 m² de área bruta · Certificado energético C · Ref. 1045199\n\nMarque a visita com a Eleutéria Pires, da IAD Portugal: +351 912 576 456",
+            "tags": [
+                "saobrasdealportel",
+                "algarve",
+                "apartamentot2",
+                "casasnoalgarve",
+                "imoveisalgarve",
+                "comjardim",
+                "loule",
+                "faro",
+                "iadportugal",
+                "casaavenda",
+                "investimentoimobiliario",
+                "imobiliaria"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1045199-eecez",
+    "created_at": "2026-10-21T11:41:23+00:00",
+    "updated_at": "2026-10-21T12:09:22+00:00",
+    "source_path": "clips/uploads/r6uRU5VEkPieWJe8L0W5HNDb8Uav0rdNYG8WKDIf.mp3",
+    "images": [
+        {
+            "id": "img_c820931f",
+            "path": "clips/uploads/1kdm7W3dLIR5fga2ktExSb99ad10Y9gqsut51kFo.png",
+            "description": "Sala de estar com sofá de canto cinzento, mesa de centro em madeira, televisão e cortinas bege.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bd48babf",
+            "path": "clips/uploads/RuDR5lyyCg0EPhIc0SzdqgXyaAf7VOvbCq4dP5xY.png",
+            "description": "Fachada do prédio amarelo de quatro pisos com varandas, ao pôr do sol, com carros estacionados.",
+            "name": "01a11d4f4ef2f4a1c9346dfb4dbf734a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b7217b04",
+            "path": "clips/uploads/CBZ7UU5orGmczE2MDk2Un5AxS1W4LKa0rBJKTBLL.png",
+            "description": "Sala de estar vista do sofá, com televisão e cadeira de baloiço; ao fundo, a zona de entrada.",
+            "name": "01a11d4f4f7093dd5b2023c76ab42b26.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f67303cd",
+            "path": "clips/uploads/7KCkF71N8G3IsW4rEkuduZBCC1bJLRBbA3KCa5ah.png",
+            "description": "Sala de estar ampla e luminosa com sofá de canto, cadeira de baloiço bege, painéis de madeira e cortinas.",
+            "name": "01a11d4f4d8bb2a22639958358ca409f.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1f17eb08",
+            "path": "clips/uploads/rc5tP5IIE87PKhNNBU6WWexB547QsyZbH45QGXJ2.png",
+            "description": "Cozinha branca remodelada com frigorífico americano, bancada em mármore, lava-loiça duplo e iluminação LED.",
+            "name": "01a11d4f4a8121c2a7c5906ee5592976.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b82c06c3",
+            "path": "clips/uploads/HPb5bRV9446LFbkPyODRiDWqDXXEAeY6Tp8sK2wB.png",
+            "description": "Zona de refeições com mesa de madeira maciça, aparador, espelho redondo e porta envidraçada para o exterior.",
+            "name": "01a11d4f4cbd153a454e9fffaafcead7.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d6b5f2df",
+            "path": "clips/uploads/37rp6SCB0FkZLaM2orDkdTTEWcPjPnN7ErpsqWMz.png",
+            "description": "Hall de entrada com recuperador de calor, banco estofado, painel ripado de madeira e espelho em arco.",
+            "name": "01a11d4f4ff36190f1e9510b7fc179a3.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_53438f6a",
+            "path": "clips/uploads/411fxHzEIacC7YwqDKPb8GfUcPBR1q6tYOt8tjG7.png",
+            "description": "Cozinha em L com placa a gás e máquina de loiça; porta aberta para o pátio e jardim.",
+            "name": "01a11d4f4d604192cde861d173c2dae8.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_28177c46",
+            "path": "clips/uploads/hPnAMa6PPJVbUljdXKBekWPQ0B3oxQk3g835k1es.png",
+            "description": "Cozinha moderna em U, armários brancos até ao teto, frigorífico americano, forno e janela ampla.",
+            "name": "01a11d4f49c1ffc0a679102c76e0c028.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63e4d465",
+            "path": "clips/uploads/F6QUXnJK8A8o0fK88q7BY9Ew8tV9cJrNYBnl8gpb.png",
+            "description": "Sala de jantar open space com mesa grande para oito, candeeiro suspenso, divisória ripada e corredor.",
+            "name": "01a11d4f4c575002ad6bd3941268d240.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3c66d02c",
+            "path": "clips/uploads/U8bLFbZWc80gCRPwiNBceRQaqIfuAThfcB0hFmLc.png",
+            "description": "Cozinha branca moderna em U, com coluna de garrafeira e estantes de madeira, janela para o jardim.",
+            "name": "01a11d4f4c75fe3fdbfaa648c3baa227.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0509570c",
+            "path": "clips/uploads/fqy5IZlX5FNocpIrd881KcN1yuH8KRXSqaXTJ82m.png",
+            "description": "Corredor com portas em madeira que leva aos quartos e à casa de banho, vitrine branca à esquerda.",
+            "name": "01a11d4f4a6a151517fe43093846fbe6.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_26622d9e",
+            "path": "clips/uploads/tFN1AEYGvFxvN8Av91WIs9uzWlNcMGz1WrXtFdjz.png",
+            "description": "Cozinha ampla em open space, frigorífico americano, bancada iluminada e mesa de madeira, divisória de ripas.",
+            "name": "01a11d4f4c963b14018887fbb409eaa3.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_afec5928",
+            "path": "clips/uploads/WJE8NwUMDrFxjMWlVXl0aqwjwY8gUx1Bp2a57Isy.png",
+            "description": "Hall de entrada com porta branca independente, banco estofado, painel de ripas e vista para a sala.",
+            "name": "01a11d4f4cb7c3d172efa7c4ce0d4210.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7d68cfef",
+            "path": "clips/uploads/Re8gy8iMP1vo2n1XuGqdnfByRx90p1scd9ykZdyB.png",
+            "description": "Pátio traseiro coberto com toldo às riscas, mesa exterior e cadeiras azuis, árvores do jardim ao fundo.",
+            "name": "01a11d4f4fe26f6ba3fa9608ef3ec605.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1dacaac1",
+            "path": "clips/uploads/xgNAc4iZQBLxKO6xVG9JgC4w6MOgkTWEac5qZoNY.png",
+            "description": "Casa de banho remodelada com base de duche envidraçada, sanita suspensa e móvel de madeira com lavatório.",
+            "name": "01a11d4f4f7bda2390cbd6ba9263a796.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c7e00f2d",
+            "path": "clips/uploads/dgltrRPRxpthu0bFMjrHqMjkwyINimLoWXDC3orf.png",
+            "description": "Segunda casa de banho com porta e armário em madeira, paredes em microcimento e lavatório escuro.",
+            "name": "01a11d4f4f179bc34a05d64d3fe3e4ee.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3de69065",
+            "path": "clips/uploads/5TG5u0zmCDIIb9MP05ZJ9URKUdmbIpHVC9Ryltjz.png",
+            "description": "Quarto principal com cama de casal de padrão xadrez, roupeiro embutido em madeira e poltrona cinzenta.",
+            "name": "01a11d4f4f5b0075d190f4ca11f45032.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4221ce38",
+            "path": "clips/uploads/8BydEhVCKJqro56KwGkB9EfgOcWS6HzG8qMB9jlw.png",
+            "description": "Quarto de casal com porta de vidro para o exterior, cortinados claros, cómoda de madeira e espelho.",
+            "name": "01a11d4f4d1b82790f7b3311b8da6b63.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_00f643c3",
+            "path": "clips/uploads/ZhtVn3micTtXfihafqKndM7X9OdftUBLRFQIIOrq.png",
+            "description": "Zona de refeições com balcão alto em madeira, banco branco, vitrine e quadro colorido, portas para os quartos.",
+            "name": "01a11d4f4d019d5db72ce309ec3f4c8b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ab097d4a",
+            "path": "clips/uploads/CRdh2BxUucYCVU4pWkoaJYPPf3HBimJrpOr0SxZh.png",
+            "description": "Casa de banho com duche de vidro, lavatório preto de pousar, móvel em madeira e espelho retroiluminado.",
+            "name": "01a11d4f4ec35e636d21088e12ae28b1.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_85cffd7c",
+            "path": "clips/uploads/ZaAlAPGorzez3zyF86vxVJF4HReJq2YcnqqEB40A.png",
+            "description": "Casa de banho da suite com lavatório cinzento sobre móvel de madeira, espelho grande e duche.",
+            "name": "01a11d4f4fd46e77a1062679eba25133.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_71e634a9",
+            "path": "clips/uploads/1W8F7AjwlkiFo0vJxC0ImRVCcXcNZBYpSjpADqlr.png",
+            "description": "Casa de banho com sanita branca, porta e armário alto em madeira, paredes em microcimento cinzento.",
+            "name": "01a11d4f4fedba674b2ef2e69fcc7c11.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_903e36e8",
+            "path": "clips/uploads/UDqcLMPchpYY0cb0TvKRKcDRICCqp0UB9JgQWqiU.png",
+            "description": "Open space com balcão de refeições em madeira, mesa de jantar branca e cozinha branca ao fundo.",
+            "name": "01a11d4f49e0e2f0c1a211f7bdb9dcf2.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bf2e4d2d",
+            "path": "clips/uploads/c8iisDHAdVzaaOgkQxRxIMibZXohCbGKsmOrD9KL.png",
+            "description": "Hall de entrada com banco bege, espelho meia-lua, bonsai e corredor ao fundo.",
+            "name": "01a11d4f4cd0753d57cbbacf5966c829.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a9153284",
+            "path": "clips/uploads/5Ra1ps60XwIphutO8ij9F0WMnD99cXeS44jGH1u1.png",
+            "description": "Pátio exterior com mesa e cadeiras azuis, toldo, barbecue e relvado amplo ao lado.",
+            "name": "01a11d4f4f744a85ccff0b250783f671.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1ce95e29",
+            "path": "clips/uploads/VrFXgH1zF0GnrjeRiXq9248E0vxlk5FdfkBiJSIj.png",
+            "description": "Sala de estar com sofá de canto cinzento, televisão na parede, cadeira de baloiço e cortinados.",
+            "name": "01a11d4f4e3b3c44cad985375918baf5.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_69cc7a23",
+            "path": "clips/uploads/EfEb2NaWrTYVlJvouWQXKFn2WOz6p47YOOPgcMMS.png",
+            "description": "Sala de jantar ampla com mesa de madeira, cadeiras brancas, candeeiro suspenso e frigorífico inox.",
+            "name": "01a11d4f4ca88962bde840aa6d8b7fd2.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_37a69e30",
+            "path": "clips/uploads/sDiikNSkNcJaLgHZF4JH7ijDXZTDtr3noVHQcd84.png",
+            "description": "Corredor branco com chão de madeira, quadro azul na parede e consola de madeira.",
+            "name": "01a11d4f498c97add16241e08d66b440.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_199a0b02",
+            "path": "clips/uploads/6CaP57iIaN7iLJQhKfC0uHFLTlbvivXuWLDjRq5Y.png",
+            "description": "Pátio com mesa de madeira e cadeiras azuis junto ao jardim com árvores e relva.",
+            "name": "01a11d4f50813faf824ef5ebdbf5f07a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_910ce4ae",
+            "path": "clips/uploads/0Nr37oHlT1z0pOe1KCPXcM3KWAIL1k9NW9pAUPO1.png",
+            "description": "Casa de banho remodelada com duche de vidro, lavatório cinzento sobre móvel de madeira e janela pequena.",
+            "name": "01a11d4f506b95e91190af729a120019.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_41ef57ca",
+            "path": "clips/uploads/ATViL9rrSWVYCdRlEdCFFklqNQbOQ8I0eGr5WAdA.png",
+            "description": "Pátio exterior com lava-loiça em tijolo e armário verde; pela janela vê-se a cozinha moderna.",
+            "name": "01a11d4f509986a006e353f6efd3ea5d.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6c9934b5",
+            "path": "clips/uploads/ETXrJUuETnPCyzOqz9eG69w4oXwg9lz3rFYg7blc.png",
+            "description": "Pátio coberto nas traseiras com toldo às riscas, mesa com cadeiras azuis e relvado à frente.",
+            "name": "01a11d4f505fa61ab4290b922552d34a.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ab6466c9",
+            "path": "clips/uploads/Si2JU7q8bAlNgZcSPk8QKVIPHwlzsCE7rD384rZb.png",
+            "description": "Quarto usado como escritório, com secretária, dois monitores, cadeira gaming, cortinado bege e cómoda.",
+            "name": "01a11d4f4a5cc95732c1e36f1b13a75d.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_85215794",
+            "path": "clips/uploads/zO0UgLZD2yfkGRBmh4D73J3JzQr53zBBkFrR5s5m.png",
+            "description": "Quarto de casal claro com cama branca, espelho de moldura azul, mesas de cabeceira e roupeiro de madeira.",
+            "name": "01a11d4f4c2ce5244601c1e0b4baf6a2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc731fc9",
+            "path": "clips/uploads/C2vNFActHkeLwpccu0HVsL0JCy7fVU0Vj8DWNTSt.png",
+            "description": "Quarto de casal com colcha xadrez, aparador de madeira comprido, espelho dourado e roupeiro embutido.",
+            "name": "01a11d4f4d7073cabde2870ad3e2c0d2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d5857829",
+            "path": "clips/uploads/rftCG1moNQbykmROHa9lstRc0HDrIAckxF3ydr64.png",
+            "description": "Quarto de casal com cama branca, roupeiro embutido de madeira com prateleiras abertas e radiador.",
+            "name": "01a11d4f4918901b7b4fa1e1a6d12405.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b0b62a05",
+            "path": "clips/uploads/iEhuGwzEA19JX2QkhHoARx2Ljp8JFuU3vrsSnhch.png",
+            "description": "Arrecadação com estantes metálicas cinzentas sob teto inclinado de escada, chão de cimento e lâmpada.",
+            "name": "01a11d4f4e64042cbc38a4123a055615.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8d9772da",
+            "path": "clips/uploads/WdeStntgMzt45QgcfdMs6bZngXE9heqGSOus1XhM.png",
+            "description": "Hall de entrada amplo com porta branca, salamandra, banco bege, painel ripado de madeira e consola.",
+            "name": "01a11d4f4ec4d02bd2003b1941074e1f.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_af4023d6",
+            "path": "clips/uploads/3VrMo7aLtFjZAJyGgiqfzeIcA2UMHRMzSk9jdvP0.png",
+            "description": "Corredor com divisória ripada de madeira, vista para zona de refeições e casa de banho ao fundo.",
+            "name": "01a11d4f4ad5ec31d0335df832996270.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ff035523",
+            "path": "clips/uploads/PrTM1Ru6UOYXOlEa0kPFEoD80ML6GQjG3M4Zxxd6.png",
+            "description": "Retrato da consultora Eleutéria Pires, da IAD Portugal.",
+            "name": "Eleutéria Pires.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_04d84af5",
+            "path": "clips/uploads/QZ8ABpJ2DIQ0EL365qLeDq2KzcQ6GzUvIpoh4ENX.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/r6uRU5VEkPieWJe8L0W5HNDb8Uav0rdNYG8WKDIf.mp3",
+    "transcript": {
+        "duration": 36.63999938964844,
+        "text": "Um apartamento com jardim em São Brás de Alportel, numa zona calma, quase campo, a 10 minutos de loulé e a 20 de faro. Rés do chão com entrada independente remodelado em 2024. Era um T3, hoje é um T2 mais amplo, com 115 metros úteis. Sala, cozinha ampla em open space e dispensa, dois quartos, um deles em suite e duas casas de banho. Atrás, um pátio com barbecue abre para um jardim bem cuidado. Tem ainda arrecadação, para viver ou para investir, 379 mil euros. Para visitar, fale com Eleutéria Pires, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.11999999731779099
+            },
+            {
+                "word": "apartamento",
+                "start": 0.11999999731779099,
+                "end": 0.6800000071525574
+            },
+            {
+                "word": "com",
+                "start": 0.6800000071525574,
+                "end": 0.9399999976158142
+            },
+            {
+                "word": "jardim",
+                "start": 0.9399999976158142,
+                "end": 1.3200000524520874
+            },
+            {
+                "word": "em",
+                "start": 1.3200000524520874,
+                "end": 1.6399999856948853
+            },
+            {
+                "word": "São",
+                "start": 1.6399999856948853,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "Brás",
+                "start": 1.8600000143051147,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "de",
+                "start": 2.059999942779541,
+                "end": 2.200000047683716
+            },
+            {
+                "word": "Alportel",
+                "start": 2.200000047683716,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "numa",
+                "start": 3,
+                "end": 3.180000066757202
+            },
+            {
+                "word": "zona",
+                "start": 3.180000066757202,
+                "end": 3.4200000762939453
+            },
+            {
+                "word": "calma",
+                "start": 3.4200000762939453,
+                "end": 3.8399999141693115
+            },
+            {
+                "word": "quase",
+                "start": 4.139999866485596,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "campo",
+                "start": 4.320000171661377,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "a",
+                "start": 5.039999961853027,
+                "end": 5.139999866485596
+            },
+            {
+                "word": "10",
+                "start": 5.139999866485596,
+                "end": 5.320000171661377
+            },
+            {
+                "word": "minutos",
+                "start": 5.320000171661377,
+                "end": 5.599999904632568
+            },
+            {
+                "word": "de",
+                "start": 5.599999904632568,
+                "end": 5.800000190734863
+            },
+            {
+                "word": "loulé",
+                "start": 5.800000190734863,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "e",
+                "start": 6.039999961853027,
+                "end": 6.28000020980835
+            },
+            {
+                "word": "a",
+                "start": 6.28000020980835,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "20",
+                "start": 6.539999961853027,
+                "end": 6.679999828338623
+            },
+            {
+                "word": "de",
+                "start": 6.679999828338623,
+                "end": 6.900000095367432
+            },
+            {
+                "word": "faro",
+                "start": 6.900000095367432,
+                "end": 7.199999809265137
+            },
+            {
+                "word": "Rés",
+                "start": 7.699999809265137,
+                "end": 7.760000228881836
+            },
+            {
+                "word": "do",
+                "start": 7.760000228881836,
+                "end": 8
+            },
+            {
+                "word": "chão",
+                "start": 8,
+                "end": 8.119999885559082
+            },
+            {
+                "word": "com",
+                "start": 8.119999885559082,
+                "end": 8.34000015258789
+            },
+            {
+                "word": "entrada",
+                "start": 8.34000015258789,
+                "end": 8.65999984741211
+            },
+            {
+                "word": "independente",
+                "start": 8.65999984741211,
+                "end": 9.359999656677246
+            },
+            {
+                "word": "remodelado",
+                "start": 9.359999656677246,
+                "end": 10.079999923706055
+            },
+            {
+                "word": "em",
+                "start": 10.079999923706055,
+                "end": 10.300000190734863
+            },
+            {
+                "word": "2024",
+                "start": 10.300000190734863,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "Era",
+                "start": 11.739999771118164,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "um",
+                "start": 11.880000114440918,
+                "end": 12.020000457763672
+            },
+            {
+                "word": "T3",
+                "start": 12.020000457763672,
+                "end": 12.5
+            },
+            {
+                "word": "hoje",
+                "start": 13.039999961853027,
+                "end": 13.119999885559082
+            },
+            {
+                "word": "é",
+                "start": 13.119999885559082,
+                "end": 13.300000190734863
+            },
+            {
+                "word": "um",
+                "start": 13.300000190734863,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "T2",
+                "start": 13.4399995803833,
+                "end": 13.880000114440918
+            },
+            {
+                "word": "mais",
+                "start": 13.880000114440918,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "amplo",
+                "start": 14.420000076293945,
+                "end": 14.600000381469727
+            },
+            {
+                "word": "com",
+                "start": 14.760000228881836,
+                "end": 14.9399995803833
+            },
+            {
+                "word": "115",
+                "start": 14.9399995803833,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "metros",
+                "start": 15.539999961853027,
+                "end": 15.880000114440918
+            },
+            {
+                "word": "úteis",
+                "start": 15.880000114440918,
+                "end": 16.360000610351562
+            },
+            {
+                "word": "Sala",
+                "start": 17.079999923706055,
+                "end": 17.15999984741211
+            },
+            {
+                "word": "cozinha",
+                "start": 17.540000915527344,
+                "end": 17.700000762939453
+            },
+            {
+                "word": "ampla",
+                "start": 17.700000762939453,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "em",
+                "start": 18.059999465942383,
+                "end": 18.280000686645508
+            },
+            {
+                "word": "open",
+                "start": 18.280000686645508,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "space",
+                "start": 18.559999465942383,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "e",
+                "start": 18.940000534057617,
+                "end": 19.15999984741211
+            },
+            {
+                "word": "dispensa",
+                "start": 19.15999984741211,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "dois",
+                "start": 20.15999984741211,
+                "end": 20.280000686645508
+            },
+            {
+                "word": "quartos",
+                "start": 20.280000686645508,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "um",
+                "start": 21,
+                "end": 21.079999923706055
+            },
+            {
+                "word": "deles",
+                "start": 21.079999923706055,
+                "end": 21.260000228881836
+            },
+            {
+                "word": "em",
+                "start": 21.260000228881836,
+                "end": 21.579999923706055
+            },
+            {
+                "word": "suite",
+                "start": 21.579999923706055,
+                "end": 21.799999237060547
+            },
+            {
+                "word": "e",
+                "start": 21.799999237060547,
+                "end": 22.139999389648438
+            },
+            {
+                "word": "duas",
+                "start": 22.139999389648438,
+                "end": 22.399999618530273
+            },
+            {
+                "word": "casas",
+                "start": 22.399999618530273,
+                "end": 22.68000030517578
+            },
+            {
+                "word": "de",
+                "start": 22.68000030517578,
+                "end": 23
+            },
+            {
+                "word": "banho",
+                "start": 23,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "Atrás",
+                "start": 23.540000915527344,
+                "end": 23.860000610351562
+            },
+            {
+                "word": "um",
+                "start": 24.059999465942383,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "pátio",
+                "start": 24.399999618530273,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "com",
+                "start": 24.479999542236328,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "barbecue",
+                "start": 24.719999313354492,
+                "end": 25.18000030517578
+            },
+            {
+                "word": "abre",
+                "start": 25.18000030517578,
+                "end": 25.579999923706055
+            },
+            {
+                "word": "para",
+                "start": 25.579999923706055,
+                "end": 25.760000228881836
+            },
+            {
+                "word": "um",
+                "start": 25.760000228881836,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "jardim",
+                "start": 26.1200008392334,
+                "end": 26.15999984741211
+            },
+            {
+                "word": "bem",
+                "start": 26.15999984741211,
+                "end": 26.520000457763672
+            },
+            {
+                "word": "cuidado",
+                "start": 26.520000457763672,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "Tem",
+                "start": 26.920000076293945,
+                "end": 27.459999084472656
+            },
+            {
+                "word": "ainda",
+                "start": 27.459999084472656,
+                "end": 27.780000686645508
+            },
+            {
+                "word": "arrecadação",
+                "start": 27.780000686645508,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "para",
+                "start": 28.979999542236328,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "viver",
+                "start": 28.979999542236328,
+                "end": 29.399999618530273
+            },
+            {
+                "word": "ou",
+                "start": 29.399999618530273,
+                "end": 29.739999771118164
+            },
+            {
+                "word": "para",
+                "start": 29.739999771118164,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "investir",
+                "start": 29.959999084472656,
+                "end": 30.31999969482422
+            },
+            {
+                "word": "379",
+                "start": 30.700000762939453,
+                "end": 31.860000610351562
+            },
+            {
+                "word": "mil",
+                "start": 31.860000610351562,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "euros",
+                "start": 32.060001373291016,
+                "end": 32.7599983215332
+            },
+            {
+                "word": "Para",
+                "start": 32.959999084472656,
+                "end": 33.040000915527344
+            },
+            {
+                "word": "visitar",
+                "start": 33.040000915527344,
+                "end": 33.70000076293945
+            },
+            {
+                "word": "fale",
+                "start": 34,
+                "end": 34
+            },
+            {
+                "word": "com",
+                "start": 34,
+                "end": 34.220001220703125
+            },
+            {
+                "word": "Eleutéria",
+                "start": 34.220001220703125,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "Pires",
+                "start": 34.720001220703125,
+                "end": 35.119998931884766
+            },
+            {
+                "word": "da",
+                "start": 35.34000015258789,
+                "end": 35.52000045776367
+            },
+            {
+                "word": "IAD",
+                "start": 35.52000045776367,
+                "end": 35.880001068115234
+            },
+            {
+                "word": "Portugal",
+                "start": 35.880001068115234,
+                "end": 36.41999816894531
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.63999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Um apartamento com jardim em São Brás de Alportel.",
+                        "params": {
+                            "src": "img_199a0b02",
+                            "location": "São Brás de Alportel",
+                            "title": "Um apartamento com jardim em São Brás de Alportel.",
+                            "facts": "115 m² · 2 quartos · 2 WC",
+                            "name": "Eleutéria Pires",
+                            "cta": "+351 912 576 456",
+                            "tag": "Novo imóvel",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD Portugal | AMI 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3,
+                "end": 7,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Zona calma, quase campo",
+                        "params": {
+                            "src": "img_bd48babf",
+                            "eyebrow": "10 min de Loulé · 20 de Faro"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7,
+                "end": 11,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Remodelado em 2024",
+                        "params": {
+                            "src": "img_afec5928",
+                            "eyebrow": "Entrada independente"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11,
+                "end": 14,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "De T3 a T2 mais amplo",
+                        "params": {
+                            "src": "img_c820931f",
+                            "eyebrow": "Sala de estar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14,
+                "end": 17,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "numero-destaque",
+                        "text": "115 m²",
+                        "params": {
+                            "src": "img_f67303cd",
+                            "label": "115 m² úteis",
+                            "sub": "Rés-do-chão"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17,
+                "end": 20.2,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "luz-acender",
+                        "text": "Cozinha ampla",
+                        "params": {
+                            "src": "img_26622d9e",
+                            "eyebrow": "Open space e despensa"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.2,
+                "end": 23.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Dois quartos, uma suite",
+                        "params": {
+                            "src": "img_3de69065",
+                            "src2": "img_85cffd7c",
+                            "label": "Duas casas de banho"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.5,
+                "end": 27,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "duo-sobreposto",
+                        "text": "Pátio com barbecue",
+                        "params": {
+                            "src": "img_a9153284",
+                            "src2": "img_6c9934b5",
+                            "label": "Jardim bem cuidado"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 30.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Viver ou investir",
+                        "params": {
+                            "src": "img_b0b62a05",
+                            "title": "Jardim e arrecadação",
+                            "items": [
+                                "Arrecadação: sim",
+                                "Jardim: bem cuidado",
+                                "Área bruta: 128,66 m²",
+                                "Certificado: C"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.6,
+                "end": 32.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "379.000 €",
+                        "params": {
+                            "src": "img_7d68cfef",
+                            "label": "São Brás de Alportel",
+                            "sub": "T2 com jardim"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.9,
+                "end": 36.63999938964844,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "img_ff035523",
+                        "params": {
+                            "src": "img_ff035523",
+                            "name": "Eleutéria Pires",
+                            "phone": "+351 912 576 456",
+                            "ami": "11220",
+                            "banner": "img_04d84af5"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1045199-eecez/clip.mp4",
+    "error": null
+}

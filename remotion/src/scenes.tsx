@@ -13,7 +13,7 @@ import {
 } from "remotion";
 import { COLORS, ENGRAVE_SHADOW, FONTS, PANEL_SHADOW, panelBorder, STYLE, textForBg } from "./style-tokens";
 import { frameProps, renderPrimitive } from "./primitives";
-import type { KaraokeWord, Present, Scene } from "./types";
+import type { Captions, KaraokeWord, Present, Scene } from "./types";
 
 const EASE = Easing.inOut(Easing.cubic);
 
@@ -97,7 +97,98 @@ const LiveBackground: React.FC<{ color: string; solid: boolean }> = ({ color, so
   );
 };
 
-const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = ({ scene, fps, durSec, videoSrc, transparent }) => {
+const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = (props) =>
+  props.scene.plain ? <PlainScene scene={props.scene} /> : props.scene.montage ? <MontageScene scene={props.scene} fps={props.fps} /> : props.scene.footage ? <FootageScene scene={props.scene} fps={props.fps} /> : <AnimatedSceneBody {...props} />;
+
+// A listing's room footage, full-frame and muted: a straight cut in, no motion added.
+// Its caption (the planner's on-screen line, e.g. "DOIS QUARTOS") eases up in the lower third.
+const FootageScene: React.FC<{ scene: Scene; fps: number }> = ({ scene, fps }) => {
+  const frame = useCurrentFrame();
+  const layer = scene.layers?.[0];
+  const src = String(layer?.params?.src ?? "");
+  const caption = String(layer?.text ?? "").trim();
+  const t = interpolate(frame, [4, 4 + fps * 0.35], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
+  return (
+    <AbsoluteFill style={{ background: "#000" }}>
+      {src ? <OffthreadVideo src={resolveSrc(src)} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : null}
+      {caption ? (
+        <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: "22%" }}>
+          <div
+            style={{
+              opacity: t,
+              transform: `translateY(${(1 - t) * 24}px)`,
+              fontFamily: FONTS.display,
+              fontWeight: 800,
+              fontStyle: "italic",
+              textTransform: "uppercase",
+              fontSize: 64,
+              lineHeight: 1.05,
+              color: "#FFFFFF",
+              textAlign: "center",
+              maxWidth: "86%",
+              textShadow: "0 3px 18px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.6)",
+            }}
+          >
+            {caption}
+          </div>
+        </AbsoluteFill>
+      ) : null}
+    </AbsoluteFill>
+  );
+};
+
+// A music-only opening: the property's best clips full-frame, changing on each
+// beat (params.cuts: [0, cut…, end] in s from the scene start) with a short
+// dissolve centred on it, each one pushing in slowly the whole time — nothing
+// stops. params.rates slows a clip a little when it is shorter than its turn
+// (a frozen last frame reads as a pause). The last clip runs on for
+// MONTAGE_TAIL s over the next scene and dissolves into it (SceneTrack).
+const MONTAGE_TAIL = 0.5;
+const MONTAGE_BLEND = 0.15;
+const MontageScene: React.FC<{ scene: Scene; fps: number }> = ({ scene, fps }) => {
+  const frame = useCurrentFrame();
+  const params = scene.layers?.[0]?.params ?? {};
+  const clips = (Array.isArray(params.clips) ? params.clips : []).map(String).filter(Boolean);
+  const cuts = (Array.isArray(params.cuts) ? params.cuts : []).map(Number);
+  const rates = (Array.isArray(params.rates) ? params.rates : []).map(Number);
+  const h = Math.round(MONTAGE_BLEND * fps);
+  const end = Math.round((scene.end - scene.start) * fps);
+  const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+  const out = interpolate(frame, [end, end + Math.round(MONTAGE_TAIL * fps)], [1, 0], { ...clamp, easing: Easing.inOut(Easing.sin) });
+  return (
+    <AbsoluteFill style={{ overflow: "hidden", opacity: out }}>
+      {clips.map((src, i) => {
+        const cut = Math.round((cuts[i] ?? 0) * fps);
+        const from = i === 0 ? 0 : cut - h;
+        const last = i === clips.length - 1;
+        const until = last ? end + Math.round(MONTAGE_TAIL * fps) : Math.round((cuts[i + 1] ?? 0) * fps) + h;
+        const len = Math.max(1, until - from);
+        const fade = i === 0 ? 1 : interpolate(frame, [cut - h, cut + h], [0, 1], { ...clamp, easing: Easing.inOut(Easing.sin) });
+        const push = interpolate(frame, [from, until], [1.0, 1.07], clamp);
+        const rate = rates[i] > 0 && rates[i] < 1 ? rates[i] : 1;
+        return (
+          <Sequence key={i} from={from} durationInFrames={len}>
+            <AbsoluteFill style={{ opacity: fade }}>
+              <OffthreadVideo src={resolveSrc(src)} muted playbackRate={rate} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${push})` }} />
+            </AbsoluteFill>
+          </Sequence>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+// The user's own footage (the "after intro" video): shown as uploaded, with its own sound, nothing added.
+const PlainScene: React.FC<{ scene: Scene }> = ({ scene }) => {
+  const src = String(scene.layers?.[0]?.params?.src ?? "");
+  return (
+    <AbsoluteFill style={{ background: "#000" }}>
+      {src ? <OffthreadVideo src={resolveSrc(src)} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : null}
+    </AbsoluteFill>
+  );
+};
+
+const AnimatedSceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc: string | null; transparent: boolean }> = ({ scene, fps, durSec, videoSrc, transparent }) => {
   const frame = useCurrentFrame();
   const { width: compWidth, height: compHeight } = useVideoConfig();
   const tin = scene.transitionIn ?? "cut";
@@ -204,10 +295,18 @@ const SceneBody: React.FC<{ scene: Scene; fps: number; durSec: number; videoSrc:
 // if it now reads early.
 const CAPTION_LEAD = 0.1; // seconds
 
-const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: number }> = ({ words, scenes, fps }) => {
+// Where the captions sit. "top" leaves room for the lead banner above it.
+const CAPTION_PLACE: Record<Exclude<Captions, "none">, React.CSSProperties> = {
+  bottom: { justifyContent: "flex-end", paddingBottom: "13%" },
+  middle: { justifyContent: "center" },
+  top: { justifyContent: "flex-start", paddingTop: "16%" },
+};
+
+const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: number; captions: Captions }> = ({ words, scenes, fps, captions }) => {
   const frame = useCurrentFrame();
   const t = frame / fps + CAPTION_LEAD;
 
+  if (captions === "none") return null;
   const active = scenes.some((s) => s.karaoke && t >= s.start && t < s.end);
   if (!active || words.length === 0) return null;
 
@@ -225,7 +324,7 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
   const group = words.slice(line * LINE, line * LINE + LINE);
 
   return (
-    <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: "13%" }}>
+    <AbsoluteFill style={{ alignItems: "center", ...(CAPTION_PLACE[captions] ?? CAPTION_PLACE.bottom) }}>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 22px", maxWidth: "86%", background: COLORS.vellum, border: panelBorder(), borderRadius: STYLE.sharp ? 0 : 14, padding: "20px 34px", boxShadow: PANEL_SHADOW }}>
         {group.map((w, i) => {
           const globalIdx = line * LINE + i;
@@ -254,20 +353,24 @@ const KaraokeTrack: React.FC<{ words: KaraokeWord[]; scenes: Scene[]; fps: numbe
 };
 
 // ── the scene track ──────────────────────────────────────────────────────────
-export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null; transparent: boolean }> = ({ scenes, words, fps, videoSrc, transparent }) => {
+export const SceneTrack: React.FC<{ scenes: Scene[]; words: KaraokeWord[]; fps: number; videoSrc: string | null; transparent: boolean; captions?: Captions }> = ({ scenes, words, fps, videoSrc, transparent, captions = "bottom" }) => {
   return (
     <>
       {scenes.map((scene, i) => {
         const from = Math.round((scene.start ?? 0) * fps);
         const durSec = Math.max(0.1, (scene.end ?? 0) - (scene.start ?? 0));
-        const durFrames = Math.max(1, Math.round(durSec * fps));
+        // End on the frame the next scene starts on: rounding start and length apart left
+        // one-frame holes (the bare background flashing between two clips).
+        // A montage runs on over the next scene and dissolves into it, drawn on top.
+        const tail = scene.montage ? Math.round(MONTAGE_TAIL * fps) : 0;
+        const durFrames = Math.max(1, Math.round((scene.end ?? 0) * fps) - from) + tail;
         return (
-          <Sequence key={i} from={from} durationInFrames={durFrames} name={`scene-${i}`}>
+          <Sequence key={i} from={from} durationInFrames={durFrames} name={`scene-${i}`} style={scene.montage ? { zIndex: 1 } : undefined}>
             <SceneBody scene={scene} fps={fps} durSec={durSec} videoSrc={videoSrc} transparent={transparent} />
           </Sequence>
         );
       })}
-      <KaraokeTrack words={words} scenes={scenes} fps={fps} />
+      <KaraokeTrack words={words} scenes={scenes} fps={fps} captions={captions} />
     </>
   );
 };

@@ -12,12 +12,33 @@ class ClipRecord
 {
     public const STATUS_DRAFT = 'draft';
 
+    // A listing URL being scraped, scripted and narrated (ImportListingJob).
+    public const STATUS_IMPORTING = 'importing';
+
+    // Several voiceover takes are ready; waiting for the user to pick one by ear.
+    public const STATUS_CHOOSING_VOICE = 'choosing_voice';
+
+    // Property walkthrough: rooms being found in the footage and staged (AnalyzePropertyJob).
+    public const STATUS_ANALYZING = 'analyzing';
+
+    // The walkthrough is cleaned up; waiting for the user to mark the sections to animate.
+    public const STATUS_CHOOSING_SECTIONS = 'choosing_sections';
+
+    // Staged room stills are ready; waiting for the user to approve, restage or skip each.
+    public const STATUS_REVIEWING_ROOMS = 'reviewing_rooms';
+
+    // Kling is animating the approved rooms; then the walkthrough is cut and narrated.
+    public const STATUS_ANIMATING = 'animating';
+
     public const STATUS_TRANSCRIBING = 'transcribing';
 
     public const STATUS_PLANNING = 'planning';
 
     // Plan is ready; waiting for the user to upload/keep-generated the suggested images.
     public const STATUS_COLLECTING = 'collecting';
+
+    // "Improve with AI": the marked videos are being edited (Wan 2.7 Video Edit), then rendered.
+    public const STATUS_IMPROVING = 'improving';
 
     public const STATUS_RENDERING = 'rendering';
 
@@ -98,6 +119,27 @@ class ClipRecord
     public function isActive(): bool
     {
         return ! in_array($this->attributes['status'] ?? null, [self::STATUS_DONE, self::STATUS_FAILED], true);
+    }
+
+    /** Where a clip's karaoke captions can sit, or 'none' to hide them. */
+    public const CAPTIONS = ['bottom', 'middle', 'top', 'none'];
+
+    /**
+     * "No images": the clip is planned without any image layer at all — nothing is
+     * generated, nothing is filmed, and the user is never asked to supply a picture.
+     */
+    public function semImagens(): bool
+    {
+        return (bool) ($this->attributes['meta']['no_images'] ?? false);
+    }
+
+    /**
+     * "Only reference images": the clip is built from the user's own images —
+     * every one of them shown, and nothing generated, fetched or filmed.
+     */
+    public function soReferencias(): bool
+    {
+        return (bool) ($this->attributes['meta']['only_reference_images'] ?? false);
     }
 
     /** @return array<string,mixed> */

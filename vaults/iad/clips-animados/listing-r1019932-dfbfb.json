@@ -1,0 +1,1161 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 em Olhão com anexo e logradouro por 265.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-olhao-74m2/r1019932",
+            "agent": "Marcos Quitério",
+            "phone": "+351965376696",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Um T2 em Olhão com logradouro e anexo.",
+            "voiceover": "Um T2 em Olhão com logradouro e anexo. Zona tranquila, a cerca de cinco minutos a pé de escolas, Finanças e transportes. Fica no rés-do-chão, com dois quartos com vidros duplos. A casa de banho foi renovada recentemente e tem base de duche. A cozinha é ampla e precisa de alguma renovação. Com obras, pode unir-se à sala num open space. O anexo pode ser quarto extra, escritório ou sala de estudo. Há ainda uma despensa e um logradouro. Pronto a habitar, para viver ou para investir. Duzentos e sessenta e cinco mil euros. Para visitar, fale com o Marcos Quitério, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio / entrada no rés-do-chão",
+                    "vo": "Um T2 em Olhão com logradouro e anexo.",
+                    "caption": "T2 em Olhão"
+                },
+                {
+                    "photo": "rua / zona envolvente",
+                    "vo": "Zona tranquila, a cerca de cinco minutos a pé de escolas, Finanças e transportes.",
+                    "caption": "Escolas a 5 min a pé"
+                },
+                {
+                    "photo": "quarto principal com janela",
+                    "vo": "Fica no rés-do-chão, com dois quartos com vidros duplos.",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "segundo quarto",
+                    "vo": "(continuação)",
+                    "caption": "Vidros duplos"
+                },
+                {
+                    "photo": "casa de banho com base de duche",
+                    "vo": "A casa de banho foi renovada recentemente e tem base de duche.",
+                    "caption": "Casa de banho renovada"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "A cozinha é ampla e precisa de alguma renovação.",
+                    "caption": "Cozinha ampla"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "Com obras, pode unir-se à sala num open space.",
+                    "caption": "Possível open space"
+                },
+                {
+                    "photo": "anexo",
+                    "vo": "O anexo pode ser quarto extra, escritório ou sala de estudo.",
+                    "caption": "Anexo polivalente"
+                },
+                {
+                    "photo": "despensa",
+                    "vo": "Há ainda uma despensa",
+                    "caption": "Despensa"
+                },
+                {
+                    "photo": "logradouro",
+                    "vo": "e um logradouro.",
+                    "caption": "Logradouro privado"
+                },
+                {
+                    "photo": "logradouro / vista geral do exterior",
+                    "vo": "Pronto a habitar, para viver ou para investir.",
+                    "caption": "Pronto a habitar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e sessenta e cinco mil euros. Para visitar, fale com o Marcos Quitério, da IAD Portugal.",
+                    "caption": "265.000 € · Marcos Quitério · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O texto fala em 'logradouro' e os detalhes indicam 'Terraço'. Usei apenas 'logradouro'. Confirmar se é a mesma área.",
+                "O anúncio diz T2+1 mas os detalhes indicam 2 quartos. Tratei o '+1' como o anexo e não o apresentei como terceiro quarto.",
+                "O aquecimento aparece só como 'property.feature.heating' (campo por traduzir). Não foi mencionado.",
+                "O título diz 'zona central' sem dizer central em relação a quê. Usei só 'zona tranquila' e as distâncias a pé.",
+                "O ano de construção (1973) e o certificado energético E ficaram de fora de propósito, não por contradição."
+            ],
+            "message": "Boa tarde Sr. Marcos, fiz este vídeo do seu apartamento T2+1 em Olhão para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Apartamento 2 quartos de 74 m² em Olhão",
+            "price": 265000,
+            "details": {
+                "Preço": "265 000 €",
+                "Localização": "Olhão, 8700-484",
+                "Referência": "1019932",
+                "Área Bruta m²": "74.15",
+                "Quartos": 2,
+                "Ano de Construção": 1973,
+                "Certificado Energético": "E",
+                "Características": "74,15 m² área bruta, 65,45 m² úteis, 1 casa de banho, Terraço, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1973, Rés-do-chão"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Marcos Quitério - and phone number - +351965376696. Agency: IAD Portugal.\nThe agent's photo is Marcos Quitério.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T2 em Olhão com logradouro e anexo.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio / entrada no rés-do-chão → «T2 em Olhão»\n- rua / zona envolvente → «Escolas a 5 min a pé»\n- quarto principal com janela → «Dois quartos»\n- segundo quarto → «Vidros duplos»\n- casa de banho com base de duche → «Casa de banho renovada»\n- cozinha → «Cozinha ampla»\n- sala de estar → «Possível open space»\n- anexo → «Anexo polivalente»\n- despensa → «Despensa»\n- logradouro → «Logradouro privado»\n- logradouro / vista geral do exterior → «Pronto a habitar»\n- end card → «265.000 € · Marcos Quitério · IAD Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 74 m² em Olhão\nPreço\n265 000 €\nLocalização\nOlhão, 8700-484\nReferência\n1019932\nÁrea Bruta m²\n74.15\nQuartos\n2\nAno de Construção\n1973\nCertificado Energético\nE\nCaracterísticas\n74,15 m² área bruta, 65,45 m² úteis, 1 casa de banho, Terraço, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1973, Rés-do-chão\n\nDescrição\nApartamento T2+1 com Logradouro em Zona Tranquila e Central\n\nApresentamos este apartamento T2+1, situado no rés do chão, uma excelente oportunidade para quem procura uma habitação funcional, perfeitamente habitável de imediato e com potencial para personalizar ao seu gosto.\n\nO imóvel dispõe de dois quartos, ambos com vidros duplos, proporcionando maior conforto térmico e acústico, e uma casa de banho recentemente renovada, equipada com base de duche.\n\nConta ainda com um anexo, uma mais-valia que poderá ser utilizado como quarto extra, escritório, sala de estudo ou espaço de apoio, adaptando-se facilmente às necessidades da sua família.\n\nA despensa oferece espaço adicional de arrumação, enquanto o logradouro permite usufruir de uma agradável área exterior, ideal para momentos de lazer ou para criar um pequeno espaço de convívio.\n\nA cozinha é ampla e funcional, embora necessite de alguma renovação estética. Pela sua dimensão e configuração, existe também a possibilidade de, mediante intervenção, unir a cozinha à sala e criar um moderno espaço em open space, valorizando ainda mais a área social do apartamento.\n\nLocalização privilegiada\n\nA localização é outro dos pontos fortes deste imóvel. Encontra-se a cerca de 5 minutos a pé da Escola Primária da Cavalinha, Jardim de Infância, Repartição das Finanças, Escola Secundária, transportes públicos e diversos serviços e comércio.\n\nInserido numa zona tranquila e segura, este apartamento reúne as condições para ser uma excelente solução tanto para habitação própria como para investimento.\n\nUma oportunidade para adquirir um apartamento T2+1 com espaço exterior, numa localização muito conveniente, habitável desde o primeiro dia e com potencial para ser valorizado através de algumas melhorias.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T2 com anexo e logradouro à venda em Olhão, Algarve, por 265 000 €",
+            "summary": "Um T2 no rés-do-chão em Olhão, com anexo, despensa e logradouro, à venda por 265 000 €. Segundo o INE, o Algarve tem a segunda habitação mais cara do país e os preços continuam a subir.",
+            "timeline": [
+                {
+                    "label": "Mediana nacional: 2076 €/m² (+16,8%)",
+                    "sublabel": "Ano 2025"
+                },
+                {
+                    "label": "Algarve: 2.ª região mais cara (3139 €/m²)",
+                    "sublabel": "Ano 2025"
+                },
+                {
+                    "label": "Mediana nacional: 2337 €/m², valor recorde",
+                    "sublabel": "1.º trimestre 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço do T2 em Olhão",
+                    "value": 265000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Preço mediano no Algarve (2025, INE)",
+                    "value": 3139,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano em Portugal (2025, INE)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida dos preços em Portugal (2025 vs 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Algarve vs. média nacional (2025, INE)",
+                    "left": {
+                        "title": "Algarve",
+                        "points": [
+                            "3139 €/m²",
+                            "2.ª região mais cara do país"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2076 €/m²",
+                            "+16,8% face a 2024"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "T2 no rés-do-chão com anexo, despensa e logradouro",
+                "Anexo pode ser quarto extra, escritório ou sala de estudo",
+                "Escolas, finanças e transportes a cerca de 5 minutos a pé",
+                "Casa de banho renovada; a cozinha pode juntar-se à sala em open space",
+                "Algarve só fica atrás da Grande Lisboa no preço da habitação (INE, 2025)",
+                "Preço mediano nacional bateu recorde no 1.º trimestre de 2026"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/75156",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://postal.pt/algarve/algarve-teve-o-segundo-preco-mais-elevado-da-habitacao-em-2025/",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.portugalhomes.com/pt/blog/investing-portugal-real-estate"
+            ]
+        },
+        "suggested": {
+            "title": "T2 em Olhão com anexo e logradouro por 265.000 €",
+            "description": "Um anexo que pode ser quarto extra, escritório ou sala de estudo, num rés-do-chão em Olhão.\n\nZona tranquila, a cerca de 5 minutos a pé de escolas, finanças e transportes.\nOs dois quartos têm vidros duplos. A casa de banho foi renovada recentemente e tem base de duche.\nA cozinha é ampla mas precisa de alguma renovação. Com obras, pode ficar ligada à sala em open space.\nTem ainda despensa, logradouro e terraço, com fibra ótica e aquecimento. Está pronto a habitar e serve para viver ou para investir.\n\nT2 · 65,45 m² úteis · 74,15 m² brutos · 1973 · Certificado E · 265.000 € · Ref. 1019932\n\nMarcos Quitério, IAD Portugal, para marcar visita: +351 965 376 696",
+            "tags": [
+                "imobiliario",
+                "casasavenda",
+                "apartamentot2",
+                "olhao",
+                "algarve",
+                "casasnoalgarve",
+                "imoveisolhao",
+                "resdochao",
+                "investimentoimobiliario",
+                "iadportugal",
+                "comprarcasa"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1019932-dfbfb",
+    "created_at": "2026-10-19T13:58:14+00:00",
+    "updated_at": "2026-10-19T14:39:01+00:00",
+    "source_path": "clips/uploads/6aX8n3f5KS2qsxuhBcOhWg7fLuFyfu9f1JaJaScS.mp3",
+    "images": [
+        {
+            "id": "img_c553ed59",
+            "path": "clips/uploads/HOP4tnioI8HSdM7yPf8ehV94xdlXAWhiYjsrPrkk.jpg",
+            "description": "Cozinha comprida com armários de madeira clara e frigorífico branco; porta aberta para o corredor; precisa de renovação.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74879712",
+            "path": "clips/uploads/quI1InNHN1XnPcrcH26C7cSrpegDpqBft2zwbEVD.jpg",
+            "description": "Cozinha ampla com bancada, frigorífico e arco que dá para a lavandaria, com máquina de lavar e porta.",
+            "name": "01a0a49561f795b15f4cdc4bf86dbe7b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_649b0b90",
+            "path": "clips/uploads/rhsx5CPI1ZzDeX4PLYslLfvUEnV8dL88i2IT5tJY.jpg",
+            "description": "Divisão vazia com azulejos brancos e janela com estore, provavelmente o anexo; precisa de obras.",
+            "name": "01a0a49561b87b98485ab33b59a6aedd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63864986",
+            "path": "clips/uploads/3cDQNGKo3JAHqN8pqmeTMN0idLxuetaLVAPyMW9L.jpg",
+            "description": "Casa de banho renovada com base de duche, resguardo de vidro, espelho redondo e azulejo efeito madeira.",
+            "name": "01a0a49561f95bd55c70f92d5997f03a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_23b0a577",
+            "path": "clips/uploads/QGmlhSDxRHJkYyBfFQQIZfa3UKlXRfT8OOmcFipd.jpg",
+            "description": "Casa de banho renovada: base de duche, resguardo de vidro, móvel de lavatório em madeira e espelho redondo.",
+            "name": "01a0a49561a20dd2a9ba47fb239e56a9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1230f663",
+            "path": "clips/uploads/zpH5Qu7tbHa95uc6mwr0XrA8jrqz8tvoymiUMKFW.jpg",
+            "description": "Corredor com casa de banho renovada à esquerda e portas abertas para dois quartos.",
+            "name": "01a0a49561e601dc9865720ad72e5a87.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c8c2826b",
+            "path": "clips/uploads/PBf8tRhpYQAj6PytM7Z2aN32FqhCRYX0c0yNvBxw.jpg",
+            "description": "Quarto vazio com lambril branco, chão em mosaico e janela com vidros duplos virada para a rua.",
+            "name": "01a0a4956262191bcebf8eb27fda91de.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e1f64007",
+            "path": "clips/uploads/czVwTsxKg1Gcfl5Cubc6wK5VkE17rggj2ok5Sg9k.jpg",
+            "description": "Sala com sofá bege, candeeiro de teto clássico, móvel de TV e porta de vidro para as traseiras.",
+            "name": "01a0a4956235c7072706b540c453f9fb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a55d0a6b",
+            "path": "clips/uploads/ML1MfudmxtwWGuEDgwdrzgjEAKMjXwmgCzEnfTdj.jpg",
+            "description": "Hall com azulejo decorado, porta aberta para a casa de banho renovada e outra porta para um quarto.",
+            "name": "01a0a49562485785ba7e21a35e4b81ca.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3ab5acd4",
+            "path": "clips/uploads/GfidISG4qtpt4vgHcRpN64XPUh8gyXMit3nutNuM.jpg",
+            "description": "Marquise/área de serviço com máquina de lavar, fogão, exaustor e porta para o logradouro; teto precisa de obras.",
+            "name": "01a0a495624ac7bdd7b6a00260cef158.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_077178b1",
+            "path": "clips/uploads/5PJYE4nR8Hte37VMDdCJBiDcVEfLDVl5lXCUh68z.jpg",
+            "description": "Quarto vazio com lambrim rosa, chão em mosaico bege e janela de vidro duplo para a rua.",
+            "name": "01a0a4956236cf0144c3bd18f67fedf5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a0942cc8",
+            "path": "clips/uploads/Bd5WyfoUTiPU0CV11WaUbhj8DkDoCMp7AU1mF5dw.jpg",
+            "description": "Segundo quarto com lambrim branco, janela de vidro duplo, chão em mosaico e duas mesas de cabeceira.",
+            "name": "01a0a495620f98248e492079a033ea27.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_af11d1ad",
+            "path": "clips/uploads/GoTQxnRUDHxARmVBMQtmv5QPPpXyGfOxLh93IMos.jpg",
+            "description": "Logradouro azulejado com bancada e tanque, plantas, bicicleta amarela e janelas envidraçadas do anexo.",
+            "name": "01a0e946a92a6017cdd630d212757315.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_75cf5b49",
+            "path": "clips/uploads/Ub9NGMglBr2B8OPnF0VmH6WltgkBP9t7oxAiYkdx.jpg",
+            "description": "Logradouro amplo e soalheiro com paredes azulejadas, tanque de lavar e marquise envidraçada ao fundo.",
+            "name": "01a0e946a90df80e393a5e308d62e980.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_994920c6",
+            "path": "clips/uploads/pZ77CCJQzQiDwceq7tppN16z4dHSd7Grf43NymVS.jpg",
+            "description": "Logradouro visto de outro ângulo: bancada com vasos, bicicleta amarela, tanque de lavar e céu azul.",
+            "name": "01a0e946a8f569ffad9ede0dd88630ba.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9cbf2e0f",
+            "path": "clips/uploads/JxZfSEauC4GjghlpVo869n3DfnDOu6lHJ6S1Gx1j.png",
+            "description": "Retrato do consultor Marcos Quitério, da IAD Portugal.",
+            "name": "Marcos Quitério.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_583ff8ca",
+            "path": "clips/uploads/cYLexsHzhhhaycYEtn3X5lHWFUk3RmsqyAlxCan9.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/6aX8n3f5KS2qsxuhBcOhWg7fLuFyfu9f1JaJaScS.mp3",
+    "transcript": {
+        "duration": 38.63999938964844,
+        "text": "Um T2 em Olhão, com logradouro e anexo. Zona tranquila, a cerca de 5 minutos a pé de escolas, finanças e transportes. Fica no resto do chão, com dois quartos com vidros duplos. A casa de banho foi renovada recentemente e tem base de duches. A cozinha é ampla e precisa de alguma renovação. Com obras, pode unir-se à sala num open space. O anexo pode ser quarto extra, escritório ou sala de estudo. Há ainda uma despensa e um logradouro. Pronto a habitar, para viver ou para investir? 265 mil euros. Para visitar, fale com o Marcos Quitério, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.1599999964237213
+            },
+            {
+                "word": "T2",
+                "start": 0.1599999964237213,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "em",
+                "start": 0.6000000238418579,
+                "end": 0.8799999952316284
+            },
+            {
+                "word": "Olhão",
+                "start": 0.8799999952316284,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "com",
+                "start": 1.3799999952316284,
+                "end": 1.5399999618530273
+            },
+            {
+                "word": "logradouro",
+                "start": 1.5399999618530273,
+                "end": 2.2200000286102295
+            },
+            {
+                "word": "e",
+                "start": 2.2200000286102295,
+                "end": 2.4600000381469727
+            },
+            {
+                "word": "anexo",
+                "start": 2.4600000381469727,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "Zona",
+                "start": 3.299999952316284,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "tranquila",
+                "start": 3.5199999809265137,
+                "end": 4.119999885559082
+            },
+            {
+                "word": "a",
+                "start": 4.420000076293945,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "cerca",
+                "start": 4.539999961853027,
+                "end": 4.71999979019165
+            },
+            {
+                "word": "de",
+                "start": 4.71999979019165,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "5",
+                "start": 5.019999980926514,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "minutos",
+                "start": 5.199999809265137,
+                "end": 5.539999961853027
+            },
+            {
+                "word": "a",
+                "start": 5.539999961853027,
+                "end": 5.860000133514404
+            },
+            {
+                "word": "pé",
+                "start": 5.860000133514404,
+                "end": 5.860000133514404
+            },
+            {
+                "word": "de",
+                "start": 5.860000133514404,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "escolas",
+                "start": 6.079999923706055,
+                "end": 6.440000057220459
+            },
+            {
+                "word": "finanças",
+                "start": 6.820000171661377,
+                "end": 7.199999809265137
+            },
+            {
+                "word": "e",
+                "start": 7.199999809265137,
+                "end": 7.480000019073486
+            },
+            {
+                "word": "transportes",
+                "start": 7.480000019073486,
+                "end": 8.199999809265137
+            },
+            {
+                "word": "Fica",
+                "start": 8.800000190734863,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "no",
+                "start": 8.84000015258789,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "resto",
+                "start": 9.039999961853027,
+                "end": 9.239999771118164
+            },
+            {
+                "word": "do",
+                "start": 9.239999771118164,
+                "end": 9.619999885559082
+            },
+            {
+                "word": "chão",
+                "start": 9.619999885559082,
+                "end": 9.619999885559082
+            },
+            {
+                "word": "com",
+                "start": 9.739999771118164,
+                "end": 10.0600004196167
+            },
+            {
+                "word": "dois",
+                "start": 10.0600004196167,
+                "end": 10.359999656677246
+            },
+            {
+                "word": "quartos",
+                "start": 10.359999656677246,
+                "end": 10.699999809265137
+            },
+            {
+                "word": "com",
+                "start": 10.699999809265137,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "vidros",
+                "start": 10.979999542236328,
+                "end": 11.15999984741211
+            },
+            {
+                "word": "duplos",
+                "start": 11.15999984741211,
+                "end": 11.720000267028809
+            },
+            {
+                "word": "A",
+                "start": 12.239999771118164,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "casa",
+                "start": 12.359999656677246,
+                "end": 12.520000457763672
+            },
+            {
+                "word": "de",
+                "start": 12.520000457763672,
+                "end": 12.819999694824219
+            },
+            {
+                "word": "banho",
+                "start": 12.819999694824219,
+                "end": 12.859999656677246
+            },
+            {
+                "word": "foi",
+                "start": 12.859999656677246,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "renovada",
+                "start": 13.100000381469727,
+                "end": 13.520000457763672
+            },
+            {
+                "word": "recentemente",
+                "start": 13.520000457763672,
+                "end": 14.199999809265137
+            },
+            {
+                "word": "e",
+                "start": 14.199999809265137,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "tem",
+                "start": 14.539999961853027,
+                "end": 14.65999984741211
+            },
+            {
+                "word": "base",
+                "start": 14.65999984741211,
+                "end": 14.9399995803833
+            },
+            {
+                "word": "de",
+                "start": 14.9399995803833,
+                "end": 15.380000114440918
+            },
+            {
+                "word": "duches",
+                "start": 15.380000114440918,
+                "end": 15.979999542236328
+            },
+            {
+                "word": "A",
+                "start": 16.059999465942383,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "cozinha",
+                "start": 16.18000030517578,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "é",
+                "start": 16.479999542236328,
+                "end": 16.860000610351562
+            },
+            {
+                "word": "ampla",
+                "start": 16.860000610351562,
+                "end": 17.200000762939453
+            },
+            {
+                "word": "e",
+                "start": 17.200000762939453,
+                "end": 17.459999084472656
+            },
+            {
+                "word": "precisa",
+                "start": 17.459999084472656,
+                "end": 17.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 17.760000228881836,
+                "end": 18
+            },
+            {
+                "word": "alguma",
+                "start": 18,
+                "end": 18.299999237060547
+            },
+            {
+                "word": "renovação",
+                "start": 18.299999237060547,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "Com",
+                "start": 19.459999084472656,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "obras",
+                "start": 19.540000915527344,
+                "end": 19.899999618530273
+            },
+            {
+                "word": "pode",
+                "start": 20.260000228881836,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "unir",
+                "start": 20.399999618530273,
+                "end": 20.639999389648438
+            },
+            {
+                "word": "se",
+                "start": 20.639999389648438,
+                "end": 20.719999313354492
+            },
+            {
+                "word": "à",
+                "start": 20.719999313354492,
+                "end": 20.979999542236328
+            },
+            {
+                "word": "sala",
+                "start": 20.979999542236328,
+                "end": 21.15999984741211
+            },
+            {
+                "word": "num",
+                "start": 21.15999984741211,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "open",
+                "start": 21.399999618530273,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "space",
+                "start": 21.780000686645508,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "O",
+                "start": 22.780000686645508,
+                "end": 22.8799991607666
+            },
+            {
+                "word": "anexo",
+                "start": 22.8799991607666,
+                "end": 23.260000228881836
+            },
+            {
+                "word": "pode",
+                "start": 23.260000228881836,
+                "end": 23.459999084472656
+            },
+            {
+                "word": "ser",
+                "start": 23.459999084472656,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "quarto",
+                "start": 23.700000762939453,
+                "end": 23.940000534057617
+            },
+            {
+                "word": "extra",
+                "start": 23.940000534057617,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "escritório",
+                "start": 24.84000015258789,
+                "end": 25.139999389648438
+            },
+            {
+                "word": "ou",
+                "start": 25.139999389648438,
+                "end": 25.5
+            },
+            {
+                "word": "sala",
+                "start": 25.5,
+                "end": 25.719999313354492
+            },
+            {
+                "word": "de",
+                "start": 25.719999313354492,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "estudo",
+                "start": 26.1200008392334,
+                "end": 26.200000762939453
+            },
+            {
+                "word": "Há",
+                "start": 26.799999237060547,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "ainda",
+                "start": 26.920000076293945,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "uma",
+                "start": 27.18000030517578,
+                "end": 27.420000076293945
+            },
+            {
+                "word": "despensa",
+                "start": 27.420000076293945,
+                "end": 27.860000610351562
+            },
+            {
+                "word": "e",
+                "start": 27.860000610351562,
+                "end": 28.139999389648438
+            },
+            {
+                "word": "um",
+                "start": 28.139999389648438,
+                "end": 28.360000610351562
+            },
+            {
+                "word": "logradouro",
+                "start": 28.360000610351562,
+                "end": 29.18000030517578
+            },
+            {
+                "word": "Pronto",
+                "start": 29.18000030517578,
+                "end": 29.559999465942383
+            },
+            {
+                "word": "a",
+                "start": 29.559999465942383,
+                "end": 29.65999984741211
+            },
+            {
+                "word": "habitar",
+                "start": 29.65999984741211,
+                "end": 30.059999465942383
+            },
+            {
+                "word": "para",
+                "start": 30.420000076293945,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "viver",
+                "start": 30.520000457763672,
+                "end": 30.899999618530273
+            },
+            {
+                "word": "ou",
+                "start": 30.899999618530273,
+                "end": 31.280000686645508
+            },
+            {
+                "word": "para",
+                "start": 31.280000686645508,
+                "end": 31.479999542236328
+            },
+            {
+                "word": "investir",
+                "start": 31.479999542236328,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "265",
+                "start": 33,
+                "end": 33.63999938964844
+            },
+            {
+                "word": "mil",
+                "start": 33.63999938964844,
+                "end": 33.84000015258789
+            },
+            {
+                "word": "euros",
+                "start": 33.84000015258789,
+                "end": 34.52000045776367
+            },
+            {
+                "word": "Para",
+                "start": 34.84000015258789,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "visitar",
+                "start": 34.900001525878906,
+                "end": 35.619998931884766
+            },
+            {
+                "word": "fale",
+                "start": 35.959999084472656,
+                "end": 35.959999084472656
+            },
+            {
+                "word": "com",
+                "start": 35.959999084472656,
+                "end": 36.119998931884766
+            },
+            {
+                "word": "o",
+                "start": 36.119998931884766,
+                "end": 36.31999969482422
+            },
+            {
+                "word": "Marcos",
+                "start": 36.31999969482422,
+                "end": 36.52000045776367
+            },
+            {
+                "word": "Quitério",
+                "start": 36.52000045776367,
+                "end": 37.040000915527344
+            },
+            {
+                "word": "da",
+                "start": 37.2599983215332,
+                "end": 37.439998626708984
+            },
+            {
+                "word": "IAD",
+                "start": 37.439998626708984,
+                "end": 37.79999923706055
+            },
+            {
+                "word": "de",
+                "start": 37.79999923706055,
+                "end": 38.099998474121094
+            },
+            {
+                "word": "Portugal",
+                "start": 38.099998474121094,
+                "end": 38.400001525878906
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38.63999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 COM LOGRADOURO E ANEXO",
+                        "params": {
+                            "src": "img_75cf5b49",
+                            "avatar": "img_9cbf2e0f",
+                            "logo": "img_583ff8ca",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "265.000 €",
+                            "location": "OLHÃO · ALGARVE",
+                            "title": "T2 COM LOGRADOURO E ANEXO",
+                            "facts": "74 m² · 2 quartos · 1 WC · anexo",
+                            "cta": "Ligue já +351 965 376 696",
+                            "name": "Marcos Quitério",
+                            "logoText": "IAD PORTUGAL",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3,
+                "end": 8.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Escolas|Finanças|Transportes",
+                        "params": {
+                            "src": "img_a55d0a6b",
+                            "title": "ESCOLAS A 5 MIN A PÉ",
+                            "items": [
+                                "Escolas",
+                                "Finanças",
+                                "Transportes"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.6,
+                "end": 12.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DOIS QUARTOS",
+                        "params": {
+                            "src": "img_c8c2826b",
+                            "src2": "img_077178b1",
+                            "src3": "img_a0942cc8",
+                            "src4": "img_1230f663"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.1,
+                "end": 16,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "CASA DE BANHO RENOVADA",
+                        "params": {
+                            "src": "img_63864986",
+                            "src2": "img_23b0a577"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16,
+                "end": 19.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "COZINHA AMPLA",
+                        "params": {
+                            "src": "img_c553ed59",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.3,
+                "end": 22.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "POSSÍVEL OPEN SPACE",
+                        "params": {
+                            "src": "img_e1f64007",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.6,
+                "end": 26.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Quarto extra|Escritório|Sala de estudo",
+                        "params": {
+                            "src": "img_649b0b90",
+                            "title": "ANEXO POLIVALENTE",
+                            "items": [
+                                "Quarto extra",
+                                "Escritório",
+                                "Sala de estudo"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.6,
+                "end": 29.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "DESPENSA E LOGRADOURO",
+                        "params": {
+                            "src": "img_3ab5acd4",
+                            "src2": "img_74879712",
+                            "src3": "img_af11d1ad",
+                            "src4": "img_75cf5b49",
+                            "src5": "img_994920c6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.1,
+                "end": 32.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Para viver|Para investir",
+                        "params": {
+                            "src": "img_994920c6",
+                            "title": "PRONTO A HABITAR",
+                            "items": [
+                                "Para viver",
+                                "Para investir"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.9,
+                "end": 38.63999938964844,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marcos Quitério",
+                        "params": {
+                            "src": "img_9cbf2e0f",
+                            "name": "Marcos Quitério",
+                            "phone": "+351 965 376 696",
+                            "email": "IAD Portugal",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1019932-dfbfb/clip.mp4",
+    "error": null
+}

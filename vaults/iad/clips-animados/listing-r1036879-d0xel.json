@@ -1,0 +1,1235 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T3 novo com vista para o Tejo em Santarém, por 335.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-3-quartos-santarem-113m2/r1036879",
+            "agent": "Sandra Ribeiro",
+            "phone": "+351919665012",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Um T3 novo com vista para o Tejo, em Santarém.",
+            "voiceover": "Um T3 novo com vista para o Tejo, em Santarém. Perto de escolas, comércio, serviços e transportes públicos. Está em fase final de obra, num primeiro andar com elevador. A sala é ampla e luminosa, com boa exposição solar. Cozinha equipada, três quartos e duas casas de banho. As varandas abrem-se da sala e dos quartos, com vista desafogada sobre a Lezíria. Ar condicionado, bomba de calor e certificado energético A. Para viver perto de tudo, com tranquilidade. Trezentos e trinta e cinco mil euros. Para visitar, fale com a Sandra Ribeiro, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do edifício",
+                    "vo": "Um T3 novo com vista para o Tejo, em Santarém.",
+                    "caption": "T3 novo · Santarém"
+                },
+                {
+                    "photo": "rua / envolvente do edifício",
+                    "vo": "Perto de escolas, comércio, serviços e transportes públicos.",
+                    "caption": "Escolas e comércio perto"
+                },
+                {
+                    "photo": "entrada do prédio / elevador",
+                    "vo": "Está em fase final de obra, num primeiro andar com elevador.",
+                    "caption": "Primeiro andar com elevador"
+                },
+                {
+                    "photo": "sala com luz natural",
+                    "vo": "A sala é ampla e luminosa, com boa exposição solar.",
+                    "caption": "Sala ampla e luminosa"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Cozinha equipada,",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "três quartos",
+                    "caption": "Três quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "As varandas abrem-se da sala e dos quartos, com vista desafogada sobre a Lezíria.",
+                    "caption": "Varandas com vista"
+                },
+                {
+                    "photo": "detalhe do ar condicionado / sala",
+                    "vo": "Ar condicionado, bomba de calor e certificado energético A.",
+                    "caption": "Certificado energético A"
+                },
+                {
+                    "photo": "vista sobre a Lezíria e o Tejo",
+                    "vo": "Para viver perto de tudo, com tranquilidade.",
+                    "caption": "Lezíria e Tejo"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e trinta e cinco mil euros. Para visitar, fale com a Sandra Ribeiro, da IAD Portugal.",
+                    "caption": "335.000 € · Sandra Ribeiro · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O imóvel está em fase de conclusão de obra (construção de 2026). Se alguma fotografia for um render, tem de ter a legenda 'Imagem 3D do projeto' e a locução deve falar em 'projeto'.",
+                "O apartamento fica no primeiro andar. Confirmar que a vista sobre a Lezíria e o Tejo existe mesmo a partir deste andar antes de a usar como gancho.",
+                "As características incluem 'property.feature.heating', que parece um erro do modelo do anúncio. Ficou de fora: o aquecimento já está coberto pela bomba de calor.",
+                "Ficaram de fora as alegações sem suporte nos dados: 'uma das zonas mais exclusivas', 'eletrodomésticos de última geração' e 'acabamentos de elevada qualidade'."
+            ],
+            "message": "Boa tarde Sra. Sandra, fiz este vídeo do seu apartamento T3 em Santarém para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 3 quartos de 113 m² em Santarém",
+            "price": 335000,
+            "details": {
+                "Preço": "335 000 €",
+                "Localização": "Santarém, 2005-198",
+                "Referência": "1036879",
+                "Área Bruta m²": "112.95",
+                "Quartos": 3,
+                "Ano de Construção": 2026,
+                "Certificado Energético": "A",
+                "Características": "112,95 m² área bruta, 92,21 m² úteis, 2 casas de banho, Varanda, Elevador, Ar condicionado, Sala de estar, Fibra ótica, property.feature.heating, Construído em 2026, Acesso para cadeira de rodas, Andar: 1, Porta blindada, Porteiro digital, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Sandra Ribeiro - and phone number - +351919665012. Agency: IAD Portugal.\nThe agent's photo is Sandra Ribeiro.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T3 novo com vista para o Tejo, em Santarém.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do edifício → «T3 novo · Santarém»\n- rua / envolvente do edifício → «Escolas e comércio perto»\n- entrada do prédio / elevador → «Primeiro andar com elevador»\n- sala com luz natural → «Sala ampla e luminosa»\n- cozinha → «Cozinha equipada»\n- quarto → «Três quartos»\n- casa de banho → «Duas casas de banho»\n- varanda → «Varandas com vista»\n- detalhe do ar condicionado / sala → «Certificado energético A»\n- vista sobre a Lezíria e o Tejo → «Lezíria e Tejo»\n- end card → «335.000 € · Sandra Ribeiro · IAD Portugal»\n\nHere are the house details:\n\nApartamento 3 quartos de 113 m² em Santarém\nPreço\n335 000 €\nLocalização\nSantarém, 2005-198\nReferência\n1036879\nÁrea Bruta m²\n112.95\nQuartos\n3\nAno de Construção\n2026\nCertificado Energético\nA\nCaracterísticas\n112,95 m² área bruta, 92,21 m² úteis, 2 casas de banho, Varanda, Elevador, Ar condicionado, Sala de estar, Fibra ótica, property.feature.heating, Construído em 2026, Acesso para cadeira de rodas, Andar: 1, Porta blindada, Porteiro digital, Intercomunicador\n\nDescrição\nExcelente Apartamento T3 no Coração de Santarém – Modernidade, Conforto e Qualidade de Vida\n\nConheça este magnífico apartamento T3, em fase de conclusão de obra, situado numa das zonas mais exclusivas e desejadas de Santarém, com uma excelente exposição solar e vistas desafogadas e privilegiadas sobre a Lezíria e o rio Tejo.\n\nAo entrar neste apartamento, será imediatamente cativado pela amplitude dos espaços e pela abundante luz natural que o inunda, fruto de uma excelente exposição solar. A sala de estar, ampla e acolhedora, oferece um ambiente elegante e convidativo, perfeito para momentos de convívio e lazer com a família e amigos.\n\nA cozinha está totalmente equipada com eletrodomésticos de última geração, incluindo placa, forno, exaustor, micro-ondas, máquina de lavar loiça e máquina de lavar roupa. O conforto térmico é garantido durante todo o ano, graças à instalação de ar condicionado e de uma eficiente bomba de calor, que também assegura a produção de águas quentes sanitárias.\n\nOs três quartos deste apartamento são generosos em espaço e oferecem o máximo conforto. Com acabamentos de elevada qualidade, foram concebidos para proporcionar privacidade e bem-estar. As varandas, acessíveis a partir dos quartos e da sala, acrescentam valor ao imóvel, oferecendo espaços exteriores agradáveis para relaxar, desfrutar de um café ou simplesmente contemplar a envolvente.\n\nA localização deste apartamento é, sem dúvida, um dos seus grandes trunfos. Situado próximo de escolas de renome, comércio variado, serviços essenciais e transportes públicos, permite-lhe gerir a sua rotina diária com total facilidade e conveniência, sem abdicar da tranquilidade.\n\nAgende já a sua visita e deixe-se encantar por este magnífico apartamento T3!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T3 novo com vista para o Tejo em Santarém: mercado de habitação e eficiência energética",
+            "summary": "Em março de 2026, Santarém foi a capital de distrito onde os preços das casas à venda mais subiram num ano. Em Portugal, o preço mediano da habitação subiu 16,8% em 2025, segundo o INE.",
+            "timeline": [
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m² (INE)",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Santarém lidera subidas entre as capitais de distrito (+26,5%)",
+                    "sublabel": "março 2026"
+                },
+                {
+                    "label": "Preço mediano de oferta em Portugal: 3.107 €/m²",
+                    "sublabel": "março 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Subida anual do preço pedido em Santarém (março 2026)",
+                    "value": 26.5,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano em Portugal (INE, 2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Casas vendidas em Portugal (INE, 2025)",
+                    "value": 164677,
+                    "unit": "casas"
+                },
+                {
+                    "label": "Preço do T3 anunciado",
+                    "value": 335000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Escala do certificado energético",
+                    "left": {
+                        "title": "Classe A",
+                        "points": [
+                            "Logo abaixo da A+, a melhor classe",
+                            "Gasto de energia mais baixo",
+                            "Inclui consumos estimados"
+                        ]
+                    },
+                    "right": {
+                        "title": "Classe F",
+                        "points": [
+                            "A pior classe da escala",
+                            "Gasto de energia mais alto",
+                            "Inclui recomendações de melhoria"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em março de 2026, Santarém liderou a subida anual dos preços pedidos entre as capitais de distrito, à frente da Guarda (26%) e de Viseu (24,2%)",
+                "Em 2025, Portugal teve o preço mediano da habitação mais alto de sempre: 2.076 €/m², mais 16,8% (INE)",
+                "O certificado energético vai de A+ a F e é emitido por peritos credenciados pela ADENE",
+                "A lezíria do Tejo é uma planície de solos aluviais férteis, junto ao rio"
+            ],
+            "sources": [
+                "https://rr.pt/noticia/economia/2026/04/01/preco-das-casas-sobe-12-em-marco-e-atinge-maximo-historico-pelo-quinto-mes-consecutivo/465235/",
+                "https://www.idealista.pt/news/node/74692",
+                "https://www.essential-business.pt/2026/04/01/house-prices-in-portugal-increase-12-in-march-hitting-another-new-record/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://www.idealista.pt/news/node/45207",
+                "https://goldenergy.pt/glossario/certificado-energetico/",
+                "https://caminhosdefatima.org/_cf/wp-content/uploads/2026/06/Roteiro_CaminhodoTejo_2024_Jornada4.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "T3 novo com vista para o Tejo em Santarém, por 335.000 €",
+            "description": "Das varandas da sala e dos quartos vê-se a lezíria do Tejo, a partir de um 1.º andar novo em Santarém.\n\nÉ um T3 de construção nova, em fase final de obra, com 112,95 m² de área bruta e 92,21 m² úteis. O prédio tem elevador, porta blindada e acesso para cadeira de rodas. Fica perto de escolas, comércio, serviços e transportes públicos.\nA sala é ampla, luminosa e tem boa exposição solar. A cozinha é equipada e há duas casas de banho.\nTem ar condicionado, bomba de calor e fibra ótica.\nCertificado energético A · Ref. 1036879 · 335.000 €\n\nPara visitar, ligue à Sandra Ribeiro, da IAD Portugal: +351 919 665 012",
+            "tags": [
+                "santarem",
+                "imoveissantarem",
+                "apartamento",
+                "t3",
+                "construcaonova",
+                "vistatejo",
+                "leziria",
+                "ribatejo",
+                "certificadoenergeticoa",
+                "casaportugal",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1036879-d0xel",
+    "created_at": "2026-10-20T13:09:00+00:00",
+    "updated_at": "2026-10-20T13:35:53+00:00",
+    "source_path": "clips/uploads/qhtBfBwb6crvcP6Nad174Wk19qHS0Tslthc33V8n.mp3",
+    "images": [
+        {
+            "id": "img_00312f1d",
+            "path": "clips/uploads/Csz992vFJzclfgNPxYIBanLagRMlm8TjH3uBH7Fk.jpg",
+            "description": "Cozinha equipada vista de frente, armários brancos e madeira, placa de indução, forno e micro-ondas encastrados.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a1af91e6",
+            "path": "clips/uploads/rPtRQM9kPCoDqwE3PwyYdKltoJ0rnnRJnquGYm1L.jpg",
+            "description": "Cozinha em perspetiva lateral, bancada branca com lava-loiça, forno encastrado, portas duplas brancas ao fundo, chão em madeira.",
+            "name": "01a0f32a28bc34fce1098c4a310f13ee.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d914e564",
+            "path": "clips/uploads/zhazfO8XPXJXZ8hsd6u8TDVswJ9wudPeNDZmzMEI.jpg",
+            "description": "Cozinha ampla em ângulo, armários brancos e madeira, coluna de forno, portas de correr brancas ao fundo.",
+            "name": "01a0f32a2a086f9c8285b833727ce5a1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_92a5684d",
+            "path": "clips/uploads/UpgyPCjJ33jI5pK7I7X3p82Ex8RUtTgsJ9sV72ic.jpg",
+            "description": "Sala ampla com painel ripado em madeira ao centro, ar-condicionado, portas abertas para quartos luminosos.",
+            "name": "01a0f32a3153592727cef682cfe4c421.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_264a816a",
+            "path": "clips/uploads/d6VMaJ2yby2hln0sSvkfvMkpSt1nekI7fZ0EDOuk.jpg",
+            "description": "Hall de entrada com porta blindada branca, roupeiro embutido à esquerda, chão em madeira; obra em fase final.",
+            "name": "01a0f32a328c95b01d4114e9a183629b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1e02c166",
+            "path": "clips/uploads/LViaCFAfcgFy2AHeQaVGTGMezB7shfQPWAzot96T.jpg",
+            "description": "Hall de entrada com roupeiro de portas de correr brancas fechadas e porta blindada à direita.",
+            "name": "01a0f32a33bd4d4d3e75b8c40e3ed119.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_66d89d78",
+            "path": "clips/uploads/E1SzGfQUmhrSe5jIlDRYFy9xQgPmt9aPk9fPQZlt.jpg",
+            "description": "Hall de entrada com roupeiro aberto, prateleiras e varão, porta blindada à direita; fita de obra visível.",
+            "name": "01a0f32a32ed7534d9aa6d17a661ff8a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_25d3f4d7",
+            "path": "clips/uploads/aAt6WBjLJu7Ge6MvjRltJQcwJbozF6ieTCUHWFkH.jpg",
+            "description": "Quarto suite vazio, roupeiro embutido, ar-condicionado, casa de banho privativa em mármore entreaberta, chão em madeira.",
+            "name": "01a0f32a28490f24f6778500d3084cf5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9d784194",
+            "path": "clips/uploads/NPwH3T4CblF7BDLRgOLOKDAHvSyqmN4mlgjpNkrE.jpg",
+            "description": "Quarto suite em ângulo, roupeiro branco embutido, ar-condicionado, porta aberta para casa de banho em mármore.",
+            "name": "01a0f32a28a454a113b950f029362a73.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_76332a57",
+            "path": "clips/uploads/MQKqYuPagasHWaYvGSuHaMKDov2UcJFAmz3LeiBl.jpg",
+            "description": "Quarto luminoso com porta para varanda e janela dupla, vista desafogada sobre árvores e céu azul.",
+            "name": "01a0f329f441558a24fea16cf9e67acf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dc6c5f23",
+            "path": "clips/uploads/DBlR9tNBYPlHUZr3s0Vd8XMT3y3iYhFqR983QBTZ.jpg",
+            "description": "Quarto com roupeiro embutido branco de portas de correr, chão em madeira e ar condicionado no corredor.",
+            "name": "01a0f32a28ccca9c085a09c1f9a64479.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f1550705",
+            "path": "clips/uploads/Jg1NgLjHZhJBtxigHBHHppCCSVPb5wXZ1dQkZkAA.jpg",
+            "description": "Quarto luminoso com porta aberta para a varanda e vista para árvores e a cidade ao fundo.",
+            "name": "01a0f329f68498c9c85e76c53c38987a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cfee4be5",
+            "path": "clips/uploads/ed92gkKWRWg6HpjnPIzKSvV6mfywDnqXedLSEWzO.jpg",
+            "description": "Divisão ampla, possivelmente a sala, com ar condicionado, chão em madeira e porta de vidro para a varanda.",
+            "name": "01a0f32a31c09c3d3157631a89d63176.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bc19be68",
+            "path": "clips/uploads/NsIvokK5fiLh4jJYbGqW6sdOkN8el8HxJ3Qfs18b.jpg",
+            "description": "Quarto com porta aberta para a varanda e janela dupla com vista para árvores e céu azul.",
+            "name": "01a0f32a08702b5ed1285252d2505c13.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_10975a03",
+            "path": "clips/uploads/VInBbRMcmnHc7y929zu86Wa6x14gwQPUFKIFc7Xl.jpg",
+            "description": "Casa de banho em mármore branco com chuveiro de teto, lavatório suspenso, sanita suspensa e janela pequena.",
+            "name": "01a0f329f981c4f284ac01f6e5c8e1e2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_17182a7e",
+            "path": "clips/uploads/3AYTybRJ79zqBBehvQz1tcbdDOZQPwxsMf4FJ2EQ.jpg",
+            "description": "Segunda casa de banho em mármore branco com cabine de duche em vidro, sanita suspensa e móvel lavatório.",
+            "name": "01a0f32a2b31893f1c58b77c69559d95.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4e8fe649",
+            "path": "clips/uploads/nnXkJgU1pqEi2Y3ZuGliNBOyyKcKkuzNpnI4PK20.jpg",
+            "description": "Casa de banho em mármore com cabine de duche em vidro, chuveiro de teto e móvel lavatório branco.",
+            "name": "01a0f75cc758c5a007be22551adccce2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5ba434bc",
+            "path": "clips/uploads/Y0HTqDzpcr5Kk1l0PlazDQIjAooBPcIKXRlaeN61.jpg",
+            "description": "Vista panorâmica desafogada sobre a lezíria e o rio Tejo, com céu azul e estrada em primeiro plano.",
+            "name": "01a0f32a365a2f1e6a8801ab33fde063.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_510fb011",
+            "path": "clips/uploads/u8nbx6bCz51HUJo6nBpHbD2vlzoAbucWwxHM3F7H.jpg",
+            "description": "Vista sobre a lezíria com o rio Tejo à direita, árvores e candeeiro de rua em primeiro plano.",
+            "name": "01a0f32a2baaea63a00df98bbe865f67.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8bdd013e",
+            "path": "clips/uploads/2HsOs0hv3mlWAlMgcMjFeLbhhHeV7foRqJQwuxQR.jpg",
+            "description": "Escadaria do prédio com janelas altas e verticais que deixam ver a estrada e a paisagem.",
+            "name": "01a0f32998219b5a22e082bc3382bcec.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d96668de",
+            "path": "clips/uploads/uWR96nIsbwEn94WuRFpwINdxl1FhuEnscVizN9Q4.jpg",
+            "description": "Fachada do prédio novo de quatro pisos, com varandas de vidro, céu azul e carros estacionados à frente.",
+            "name": "01a0f329981e02fcb8441f1469e1e47d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3fda3684",
+            "path": "clips/uploads/8M7Z3NR1ovj7gbOZe1je1sge6tbBir8rPkvGdnRQ.jpg",
+            "description": "Logradouro do prédio com pavimento novo, parede lateral clara e pinheiros altos sob céu azul.",
+            "name": "01a0f3299caff8970b99caa65311ddac.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e810c42d",
+            "path": "clips/uploads/kVJVixuxEUe2lPQTsyprAxPf6mN7CGFlPVFr8kCD.jpg",
+            "description": "Varanda de serviço com duas unidades exteriores de ar-condicionado, janela cinzenta e guarda de vidro.",
+            "name": "01a0f32a04f3e636b38d1fdfaaa3ebd5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_12d11ce0",
+            "path": "clips/uploads/XrLB15Y8D4ArLK8q7o5ETjPsM1rjBvULSTsgVwTT.jpg",
+            "description": "Varanda técnica com a bomba de calor para águas quentes e uma unidade de ar-condicionado.",
+            "name": "01a0f32a18b10786d6d22bb0834c9d47.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74eeed92",
+            "path": "clips/uploads/tLlbpk4DDOWXcoM7CdhaJ9MIknl7GphjpWBBBnQw.jpg",
+            "description": "Vista desafogada da varanda sobre árvores e a cidade, com a planície ao fundo e céu com nuvens.",
+            "name": "01a0f329ab3bf96577c3d7d6d39bc7aa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5e9321e5",
+            "path": "clips/uploads/kj1UfteLCSGSRZT3PAIoyY7W3ob9SuGxJB1IshgV.jpg",
+            "description": "Monumento de Santarém: Sé barroca branca com estátua e candeeiros na praça, céu azul.",
+            "name": "01a0f32997e8e92aa98b9d9a9ccf3e49.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a246256e",
+            "path": "clips/uploads/mJ0AiEm8r3oAxTSW2tnTcenVU5rlCixcd3A36fV6.jpg",
+            "description": "Monumento de Santarém: igreja gótica em pedra com rosácea, sobre relvado verde e céu azul.",
+            "name": "01a0f329948ce80a6bf9118dbdc7a55a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50a38205",
+            "path": "clips/uploads/CSh5qEFR7NR25HsMNZ97pY6I3T59RhKPvNdX4Y5W.jpg",
+            "description": "Rua histórica de Santarém com casas brancas e flores, terminando numa igreja gótica com rosácea.",
+            "name": "01a0f329a2286fb9590fa2487c88ed0c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be4880d0",
+            "path": "clips/uploads/GH1F9vpebJm4p4rOq618sIcwsowKy1pCgsWXjjgU.jpg",
+            "description": "Vista aérea do rio Tejo com ponte metálica comprida, areais e campos verdes da lezíria.",
+            "name": "01a0f329a2b4db3e658696d9484b395c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3cafac49",
+            "path": "clips/uploads/4wugUgASlC7zmy1swfuHkiQuyfcCSU5CuE1DggWL.png",
+            "description": "Retrato da consultora Sandra Ribeiro, da IAD Portugal.",
+            "name": "Sandra Ribeiro.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b678b86d",
+            "path": "clips/uploads/8dDJq0onDGoweq7qVSeF4LWaRGJyNO8yqhFF8Yep.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/qhtBfBwb6crvcP6Nad174Wk19qHS0Tslthc33V8n.mp3",
+    "transcript": {
+        "duration": 34.400001525878906,
+        "text": "Um T3 novo com vista para o Tejo, em Santarém, perto de escolas, comércio, serviços e transportes públicos. Está em fase final de obra, num primeiro andar com elevador. A sala é ampla e luminosa, com boa exposição solar. Cozinha equipada, três quartos e duas casas de banho. As varandas abrem-se da sala e dos quartos, com vista desafogada sobre a lesíria. Ar-condicionado, bomba de calor e certificado energético A, para viver perto de tudo com tranquilidade. 335 mil euros. Para visitar, fale com a Sandra Ribeiro, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.10000000149011612
+            },
+            {
+                "word": "T3",
+                "start": 0.10000000149011612,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "novo",
+                "start": 0.6000000238418579,
+                "end": 0.9599999785423279
+            },
+            {
+                "word": "com",
+                "start": 0.9599999785423279,
+                "end": 1.2799999713897705
+            },
+            {
+                "word": "vista",
+                "start": 1.2799999713897705,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "para",
+                "start": 1.440000057220459,
+                "end": 1.7200000286102295
+            },
+            {
+                "word": "o",
+                "start": 1.7200000286102295,
+                "end": 2.0399999618530273
+            },
+            {
+                "word": "Tejo",
+                "start": 2.0399999618530273,
+                "end": 2.1600000858306885
+            },
+            {
+                "word": "em",
+                "start": 2.299999952316284,
+                "end": 2.4600000381469727
+            },
+            {
+                "word": "Santarém",
+                "start": 2.4600000381469727,
+                "end": 2.9000000953674316
+            },
+            {
+                "word": "perto",
+                "start": 3.299999952316284,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "de",
+                "start": 3.4600000381469727,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "escolas",
+                "start": 4.139999866485596,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "comércio",
+                "start": 4.400000095367432,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "serviços",
+                "start": 5.179999828338623,
+                "end": 5.5
+            },
+            {
+                "word": "e",
+                "start": 5.5,
+                "end": 5.71999979019165
+            },
+            {
+                "word": "transportes",
+                "start": 5.71999979019165,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "públicos",
+                "start": 6.21999979019165,
+                "end": 6.840000152587891
+            },
+            {
+                "word": "Está",
+                "start": 7.199999809265137,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "em",
+                "start": 7.239999771118164,
+                "end": 7.420000076293945
+            },
+            {
+                "word": "fase",
+                "start": 7.420000076293945,
+                "end": 7.619999885559082
+            },
+            {
+                "word": "final",
+                "start": 7.619999885559082,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "de",
+                "start": 7.880000114440918,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "obra",
+                "start": 8.359999656677246,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "num",
+                "start": 8.539999961853027,
+                "end": 8.680000305175781
+            },
+            {
+                "word": "primeiro",
+                "start": 8.680000305175781,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "andar",
+                "start": 8.979999542236328,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "com",
+                "start": 9.279999732971191,
+                "end": 9.5
+            },
+            {
+                "word": "elevador",
+                "start": 9.5,
+                "end": 9.960000038146973
+            },
+            {
+                "word": "A",
+                "start": 10.380000114440918,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "sala",
+                "start": 10.5600004196167,
+                "end": 10.699999809265137
+            },
+            {
+                "word": "é",
+                "start": 10.699999809265137,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "ampla",
+                "start": 10.979999542236328,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "e",
+                "start": 11.300000190734863,
+                "end": 11.5600004196167
+            },
+            {
+                "word": "luminosa",
+                "start": 11.5600004196167,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "com",
+                "start": 12.239999771118164,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "boa",
+                "start": 12.420000076293945,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "exposição",
+                "start": 12.640000343322754,
+                "end": 13.020000457763672
+            },
+            {
+                "word": "solar",
+                "start": 13.020000457763672,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "Cozinha",
+                "start": 14.0600004196167,
+                "end": 14.119999885559082
+            },
+            {
+                "word": "equipada",
+                "start": 14.119999885559082,
+                "end": 14.699999809265137
+            },
+            {
+                "word": "três",
+                "start": 15.020000457763672,
+                "end": 15.239999771118164
+            },
+            {
+                "word": "quartos",
+                "start": 15.239999771118164,
+                "end": 15.640000343322754
+            },
+            {
+                "word": "e",
+                "start": 15.640000343322754,
+                "end": 15.899999618530273
+            },
+            {
+                "word": "duas",
+                "start": 15.899999618530273,
+                "end": 16.200000762939453
+            },
+            {
+                "word": "casas",
+                "start": 16.200000762939453,
+                "end": 16.459999084472656
+            },
+            {
+                "word": "de",
+                "start": 16.459999084472656,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "banho",
+                "start": 16.81999969482422,
+                "end": 16.860000610351562
+            },
+            {
+                "word": "As",
+                "start": 17.280000686645508,
+                "end": 17.420000076293945
+            },
+            {
+                "word": "varandas",
+                "start": 17.420000076293945,
+                "end": 17.780000686645508
+            },
+            {
+                "word": "abrem",
+                "start": 17.780000686645508,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "se",
+                "start": 18.040000915527344,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "da",
+                "start": 18.219999313354492,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "sala",
+                "start": 18.440000534057617,
+                "end": 18.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 18.700000762939453,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "dos",
+                "start": 18.920000076293945,
+                "end": 19.139999389648438
+            },
+            {
+                "word": "quartos",
+                "start": 19.139999389648438,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "com",
+                "start": 19.68000030517578,
+                "end": 19.8799991607666
+            },
+            {
+                "word": "vista",
+                "start": 19.8799991607666,
+                "end": 20.079999923706055
+            },
+            {
+                "word": "desafogada",
+                "start": 20.079999923706055,
+                "end": 20.81999969482422
+            },
+            {
+                "word": "sobre",
+                "start": 20.81999969482422,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "a",
+                "start": 21.059999465942383,
+                "end": 21.459999084472656
+            },
+            {
+                "word": "lesíria",
+                "start": 21.459999084472656,
+                "end": 21.559999465942383
+            },
+            {
+                "word": "Ar",
+                "start": 22.059999465942383,
+                "end": 22.1200008392334
+            },
+            {
+                "word": "condicionado",
+                "start": 22.1200008392334,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "bomba",
+                "start": 23.15999984741211,
+                "end": 23.260000228881836
+            },
+            {
+                "word": "de",
+                "start": 23.260000228881836,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "calor",
+                "start": 23.700000762939453,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 23.700000762939453,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "certificado",
+                "start": 23.959999084472656,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "energético",
+                "start": 24.459999084472656,
+                "end": 25.079999923706055
+            },
+            {
+                "word": "A",
+                "start": 25.079999923706055,
+                "end": 25.479999542236328
+            },
+            {
+                "word": "para",
+                "start": 25.860000610351562,
+                "end": 25.979999542236328
+            },
+            {
+                "word": "viver",
+                "start": 25.979999542236328,
+                "end": 26.260000228881836
+            },
+            {
+                "word": "perto",
+                "start": 26.260000228881836,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "de",
+                "start": 26.639999389648438,
+                "end": 27.200000762939453
+            },
+            {
+                "word": "tudo",
+                "start": 27.200000762939453,
+                "end": 27.200000762939453
+            },
+            {
+                "word": "com",
+                "start": 27.200000762939453,
+                "end": 27.559999465942383
+            },
+            {
+                "word": "tranquilidade",
+                "start": 27.559999465942383,
+                "end": 28.280000686645508
+            },
+            {
+                "word": "335",
+                "start": 29.200000762939453,
+                "end": 29.739999771118164
+            },
+            {
+                "word": "mil",
+                "start": 29.739999771118164,
+                "end": 29.979999542236328
+            },
+            {
+                "word": "euros",
+                "start": 29.979999542236328,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "Para",
+                "start": 30.860000610351562,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "visitar",
+                "start": 30.979999542236328,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "fale",
+                "start": 31.920000076293945,
+                "end": 31.920000076293945
+            },
+            {
+                "word": "com",
+                "start": 31.920000076293945,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "a",
+                "start": 32.060001373291016,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "Sandra",
+                "start": 32.220001220703125,
+                "end": 32.41999816894531
+            },
+            {
+                "word": "Ribeiro",
+                "start": 32.41999816894531,
+                "end": 32.900001525878906
+            },
+            {
+                "word": "da",
+                "start": 33.060001373291016,
+                "end": 33.2599983215332
+            },
+            {
+                "word": "IAD",
+                "start": 33.2599983215332,
+                "end": 33.619998931884766
+            },
+            {
+                "word": "Portugal",
+                "start": 33.619998931884766,
+                "end": 34.15999984741211
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.400001525878906,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T3 COM VISTA PARA O TEJO",
+                        "params": {
+                            "src": "img_d96668de",
+                            "avatar": "img_3cafac49",
+                            "logo": "img_b678b86d",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "335.000 €",
+                            "location": "SANTARÉM · LEZÍRIA",
+                            "title": "T3 NOVO COM VISTA PARA O TEJO",
+                            "facts": "112,95 m² · 3 quartos · 2 WC · elevador",
+                            "cta": "Ligue já +351 919 665 012",
+                            "name": "Sandra Ribeiro",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3,
+                "end": 7.1,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Escolas e comércio perto",
+                        "params": {
+                            "src": "img_5e9321e5",
+                            "src2": "img_a246256e",
+                            "src3": "img_50a38205",
+                            "src4": "img_3fda3684",
+                            "src5": "img_be4880d0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.1,
+                "end": 10.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Primeiro andar com elevador",
+                        "params": {
+                            "src": "img_8bdd013e",
+                            "src2": "img_264a816a",
+                            "src3": "img_1e02c166",
+                            "src4": "img_66d89d78"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 13.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "SALA AMPLA E LUMINOSA",
+                        "params": {
+                            "src": "img_92a5684d",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.8,
+                "end": 17.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Cozinha · 3 quartos · 2 WC",
+                        "params": {
+                            "src": "img_00312f1d",
+                            "src2": "img_25d3f4d7",
+                            "src3": "img_dc6c5f23",
+                            "src4": "img_10975a03",
+                            "src5": "img_17182a7e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.1,
+                "end": 19.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "VARANDAS COM VISTA",
+                        "params": {
+                            "src": "img_76332a57",
+                            "title": "VARANDAS COM VISTA",
+                            "items": [
+                                "Acesso pela sala",
+                                "Acesso pelos quartos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.7,
+                "end": 22,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Lezíria e Tejo",
+                        "params": {
+                            "src": "img_5ba434bc",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22,
+                "end": 25.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Certificado energético A",
+                        "params": {
+                            "src": "img_e810c42d",
+                            "src2": "img_12d11ce0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.7,
+                "end": 28.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Viver com tranquilidade",
+                        "params": {
+                            "src": "img_510fb011",
+                            "src2": "img_74eeed92",
+                            "src3": "img_bc19be68",
+                            "src4": "img_cfee4be5",
+                            "src5": "img_9d784194"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.6,
+                "end": 30.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "335.000 €",
+                        "params": {
+                            "src": "img_a1af91e6",
+                            "src2": "img_d914e564",
+                            "src3": "img_4e8fe649",
+                            "src4": "img_f1550705"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.8,
+                "end": 34.400001525878906,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sandra Ribeiro",
+                        "params": {
+                            "src": "img_3cafac49",
+                            "name": "Sandra Ribeiro",
+                            "phone": "+351 919 665 012",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1036879-d0xel/clip.mp4",
+    "error": null
+}

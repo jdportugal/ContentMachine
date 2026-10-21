@@ -1,0 +1,1563 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "23 quartos na Póvoa de Varzim, junto à praia e ao casino",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-23-quartos-povoa-de-varzim-247m2/r1025109?fbclid=IwZnRzaAU-9eZleHRuA2FlbQIxMQBwZG9mBWZkaWQWUQbKsnvqOcRqzGQyvksh9OSoEParFXNydGMGYXBwX2lkCjY2Mjg1NjgzNzkAAR6F9TSDNjW4s0wzzbIokapYhowYJJ8nIJETT0_bVFGtOeuenWv8OvRG2gQJNQ_aem__zZ_trfaw_7pwQqt35b81w",
+            "agent": "Rute Gois",
+            "phone": "+351912001969",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa para duas famílias, na Póvoa de Varzim.",
+            "voiceover": "Na Póvoa de Varzim, na segunda linha do mar, um projeto para investidores. uma casa com 23 quartos e anexos, pronta a transformar-se em hostel ou residencial. A dois passos da praia, do Casino e do hospital. São três pisos e quase 250 metros quadrados, com duas entradas independentes. Duas cozinhas, sala de estar, sala de jantar e três casas de banho. Virada a Nascente e a Poente, recebe luz natural ao longo do dia. Lá fora, duas varandas a Poente e dois terraços, um deles com espaço para refeições, ao estilo de refeitório. Construída em 1962, é uma casa para reabilitar, com uma localização e uma dimensão difíceis de encontrar. 2 milhões e 100 mil euros. Para visitar, fale com a Rute Góis, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada principal",
+                    "vo": "Uma casa para duas famílias, na Póvoa de Varzim.",
+                    "caption": "Póvoa de Varzim"
+                },
+                {
+                    "photo": "sala de estar com luz natural pela janela",
+                    "vo": "Virada a nascente e a poente, recebe luz natural ao longo do dia.",
+                    "caption": "Luz nascente e poente"
+                },
+                {
+                    "photo": "corredor ou vista geral do interior",
+                    "vo": "São quase duzentos e cinquenta metros quadrados habitáveis.",
+                    "caption": "247 m² habitáveis"
+                },
+                {
+                    "photo": "primeira cozinha",
+                    "vo": "Duas cozinhas independentes,",
+                    "caption": "Duas cozinhas"
+                },
+                {
+                    "photo": "segunda cozinha",
+                    "vo": "sala de estar, sala de jantar",
+                    "caption": "Duas frações possíveis"
+                },
+                {
+                    "photo": "sala de jantar",
+                    "vo": "e três casas de banho.",
+                    "caption": "Sala de jantar"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "",
+                    "caption": "Três casas de banho"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "Lá fora, duas varandas e dois terraços,",
+                    "caption": "Duas varandas"
+                },
+                {
+                    "photo": "terraço",
+                    "vo": "com sol de manhã e à tarde.",
+                    "caption": "Dois terraços"
+                },
+                {
+                    "photo": "fachada ou pormenor da construção original",
+                    "vo": "Construída em 1962, é uma casa para reabilitar. Para uma família alargada, ou para explorar em duas frações.",
+                    "caption": "Para reabilitar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Dois milhões e cem mil euros. Para visitar, fale com a Rute Gois, da IAD Portugal.",
+                    "caption": "2.100.000 € · Rute Gois · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Número de quartos contraditório e pouco plausível: o título diz '23 assoalhadas', os detalhes dizem 'Quartos: 23', e tudo isto em 247 m². Pode ser um erro de introdução (ex.: 2+3, ou T3+T2). Ficou fora do guião. Confirmar com a consultora.",
+                "O preço parece errado: 2.100.000 € por uma casa de 247 m², de 1962, que precisa de reabilitação, na Póvoa de Varzim. Pode ser 210.000 €. O gancho não usa o preço, mas o fecho, o título e o cartão final usam. Confirmar antes de gerar o vídeo.",
+                "'Implantação de grande dimensão' não tem área de terreno que a sustente (área bruta = área útil = 247 m²). Ficou fora.",
+                "No anúncio, o aquecimento aparece como 'property.feature.heating', um texto em falta; só a descrição diz 'elétrico'. Ficou fora do guião.",
+                "O anúncio não refere praia, centro nem transportes, por isso a frase 'Onde' fala da exposição solar e não da localização."
+            ],
+            "message": "Boa tarde Sra. Rute,\nO meu nome é João Ferreira.\n\nVi a casa bifamiliar na Póvoa de Varzim que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia bi-familiar 23 quartos de 247 m² em Póvoa de Varzim",
+            "price": 2100000,
+            "details": {
+                "Preço": "2 100 000 €",
+                "Localização": "Póvoa de Varzim, 4490-650",
+                "Referência": "1025109",
+                "Área Bruta m²": "247",
+                "Quartos": 23,
+                "Ano de Construção": 1962,
+                "Certificado Energético": "D",
+                "Características": "247 m² área bruta, 247 m² úteis, 3 casas de banho, Terraço, Varanda, Sala de jantar, property.feature.heating, Construído em 1962"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Rute Gois - and phone number - +351912001969. Agency: IAD Portugal.\nThe agent's photo is Rute Gois.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa para duas famílias, na Póvoa de Varzim.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada principal → «Póvoa de Varzim»\n- sala de estar com luz natural pela janela → «Luz nascente e poente»\n- corredor ou vista geral do interior → «247 m² habitáveis»\n- primeira cozinha → «Duas cozinhas»\n- segunda cozinha → «Duas frações possíveis»\n- sala de jantar → «Sala de jantar»\n- casa de banho → «Três casas de banho»\n- varanda → «Duas varandas»\n- terraço → «Dois terraços»\n- fachada ou pormenor da construção original → «Para reabilitar»\n- end card → «2.100.000 € · Rute Gois · IAD Portugal»\n\nHere are the house details:\n\nMoradia bi-familiar 23 quartos de 247 m² em Póvoa de Varzim\nPreço\n2 100 000 €\nLocalização\nPóvoa de Varzim, 4490-650\nReferência\n1025109\nÁrea Bruta m²\n247\nQuartos\n23\nAno de Construção\n1962\nCertificado Energético\nD\nCaracterísticas\n247 m² área bruta, 247 m² úteis, 3 casas de banho, Terraço, Varanda, Sala de jantar, property.feature.heating, Construído em 1962\n\nDescrição\nPÓVOA DE VARZIM - CASA - 23 ASSOALHADAS 247M² - LUMINOSO\n\nSituada em Póvoa de Varzim, esta casa bifamiliar com 247 m² de área habitável beneficia de uma exposição este-oeste que garante boa luminosidade ao longo do dia, com luz natural a percorrer os diferentes espaços da habitação.\n\nCom 23 assoalhadas distribuídas por um imóvel de carácter, a casa apresenta uma organização funcional que inclui 2 cozinhas independentes, 1 sala de jantar, uma sala de estar e 3 casas de banho. O número elevado de quartos confere a este imóvel uma grande versatilidade de utilização, adequando-se tanto a uma ocupação familiar alargada como a uma exploração em duas frações distintas, característica própria de uma casa bifamiliar. O aquecimento é assegurado por sistema elétrico.\n\nO imóvel dispõe ainda de 2 varandas e 2 terraços, espaços exteriores que complementam a área habitável e permitem usufruir do exterior em diferentes momentos do dia, beneficiando da dupla orientação solar.\n\nConstruída em 1962 e com um estado de conservação que reflete a sua época, esta casa representa uma oportunidade para quem procura um imóvel com potencial de reabilitação e uma implantação de grande dimensão em Póvoa de Varzim.\n\nPara agendar uma visita e conhecer todas as potencialidades deste imóvel, entre em contacto connosco.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Investimento imobiliário na Póvoa de Varzim: casa de 1962 com 23 quartos para reabilitar",
+            "summary": "Os preços da habitação em Portugal atingiram um máximo histórico no 1.º trimestre de 2026. Ao lado do imóvel, o Casino da Póvoa, aberto em 1934, passou a ter um novo concessionário francês em maio de 2026.",
+            "timeline": [
+                {
+                    "label": "Abertura do Casino da Póvoa de Varzim",
+                    "sublabel": "1934"
+                },
+                {
+                    "label": "Construção da casa",
+                    "sublabel": "1962"
+                },
+                {
+                    "label": "Estoril-Sol termina a concessão do casino",
+                    "sublabel": "30 abr 2026"
+                },
+                {
+                    "label": "Grupo Barrière assume o Casino da Póvoa",
+                    "sublabel": "1 mai 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano da habitação em Portugal (1.º trim. 2026, INE)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga do preço das casas (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Lugares de jogo no Casino da Póvoa (2026)",
+                    "value": 500,
+                    "unit": "lugares"
+                },
+                {
+                    "label": "Trabalhadores do Casino da Póvoa (2026)",
+                    "value": 220,
+                    "unit": "pessoas"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Preço das casas em Portugal em máximo histórico: 2.337 €/m² no 1.º trimestre de 2026",
+                "Casino da Póvoa, aberto em 1934, está sob gestão do grupo francês Barrière desde maio de 2026",
+                "O Barrière tem planos para renovar o edifício do casino",
+                "Casa de 1962 com cerca de 250 m², para reabilitar e usar como hostel ou residencial"
+            ],
+            "sources": [
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.rtp.pt/noticias/economia/dados-ine-madeira-e-guimaraes-com-precos-das-casas-mais-elevados_n1754046",
+                "https://eco.sapo.pt/2026/04/29/troca-de-concessionario-fecha-casino-da-povoa-para-entrada-francesa-a-1-de-maio/",
+                "https://www.groupebarriere.com/en/our-news/press-releases/barriere-annonce-la-reprise-du-casino-de-povoa-de-varzim-au-portugal-barriere-poursuit-l-exploitation-du-casino-de-cassis-pour-une-nouvelle-periode-de-15-ans-casino-barriere-saint-malo-une-nouvelle-delegation-de-service-public-pour-dix-ans-barriere-lance-une-semaine-du-jeu-responsable-dans-l-ensemble-de-ses-casinos-Death-of-Mr-Isidore-Partouche",
+                "https://cdcgaming.com/brief/barriere-enters-portuguese-market-with-purchase-of-povoa-de-varzim-casino/",
+                "https://observador.pt/2026/07/20/estoril-sol-precisa-de-reforcar-capitais-em-35-milhoes-para-nao-perder-concessao-de-casinos/",
+                "https://viajecaminodesantiago.com/pt/caminho-portugues-costa/povoa-varzim/",
+                "https://econews.pt/2026/08/03/barriere-plans-overhaul-of-povoa-casino-lisbon-hotel/"
+            ]
+        },
+        "suggested": {
+            "title": "23 quartos na Póvoa de Varzim, junto à praia e ao casino",
+            "description": "23 quartos na segunda linha do mar, a dois passos da praia e do casino da Póvoa de Varzim\n\nÉ um projeto para investidores: uma moradia bi-familiar com anexos, com espaço para um hostel ou uma residencial.\nTem três pisos e duas entradas independentes. Lá dentro há duas cozinhas, sala de estar, sala de jantar e três casas de banho.\nEstá virada a nascente e a poente, por isso tem luz natural ao longo do dia. Tem duas varandas a poente e dois terraços, e num deles cabem refeições ao estilo de refeitório.\nFoi construída em 1962 e precisa de reabilitação. O hospital também fica perto.\n\n247 m² · 23 quartos · 3 casas de banho · Certificado energético D · Ref. 1025109 · 2.100.000 €\n\nMarque a sua visita com a Rute Gois, da IAD Portugal: +351 912 001 969",
+            "tags": [
+                "imobiliario",
+                "investimentoimobiliario",
+                "povoadevarzim",
+                "casasnapovoa",
+                "hostel",
+                "alojamentolocal",
+                "moradiaparareabilitar",
+                "imoveisportugal",
+                "nortedeportugal",
+                "casaperto​domar",
+                "iadportugal",
+                "reabilitacaourbana"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "listing-r1025109-murzj",
+    "created_at": "2026-10-16T12:21:57+00:00",
+    "updated_at": "2026-10-16T14:08:20+00:00",
+    "source_path": "clips/uploads/trTmoGRz6e8sos4HsBrLWobN7edxbgwUO9rPdPhf.mp3",
+    "images": [
+        {
+            "id": "img_f1c5bfc2",
+            "path": "clips/uploads/Df0JgVve9jMv5SksHRVvPqX0jHRlCkjckAIXNuSL.png",
+            "description": "Plantas 3D de três pisos, 'Moradia T23' em Viana do Castelo; parece ser outro imóvel, confirmar.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f6c1e25b",
+            "path": "clips/uploads/3361hG68W38n45N7z4PqMk9gwioybm3jhv5Imtns.jpg",
+            "description": "Vista da varanda para rua estreita e empedrada, com fachadas de azulejo azul e céu limpo.",
+            "name": "01a0b4e8fd5fb013c18f7aef5836b49d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0904d147",
+            "path": "clips/uploads/jUs9Y7ncnqtymNI6YC9ybLwBk7CC5Fh9ZXxodEd7.jpg",
+            "description": "Sala de estar luminosa, com cortinados brancos, sofás de pele castanha, tapete bege e porta aberta.",
+            "name": "01a0b4e8fd338ae2d787456552a71c5d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6f17c417",
+            "path": "clips/uploads/KcuecgLukPKlc6hOIcOl2xR8KxH9l8qsXB7erWMy.jpg",
+            "description": "Quarto com duas camas de colcha creme, roupeiro de madeira escura, lustre e portas antigas cinzentas.",
+            "name": "01a0b4e8fb7fa586cd9030155c478566.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9952fbbe",
+            "path": "clips/uploads/MYiK2VixcaWz47jr3WT6q12VFlLchQexjaTT1UbH.jpg",
+            "description": "Quarto pequeno com cama de solteiro, mesa de cabeceira de madeira e paredes brancas a precisar de obras.",
+            "name": "01a0b4e8fa62247791d8d2741f1e61f5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0ea97115",
+            "path": "clips/uploads/3ChRlXpugKiyAkqrZBh9EUrIyckFExot90ebOEPi.jpg",
+            "description": "Casa de banho antiga com duche, sanita, espelho redondo e paredes com humidade; precisa de reabilitação.",
+            "name": "01a0b4e8fc3bd87c07070cf889a20ea1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a792a341",
+            "path": "clips/uploads/LH7YLM0zBrgi1SfqjRQFZir6Cax1GHcBBFQTP5KD.jpg",
+            "description": "Quarto de casal com colcha aos quadrados, chão de mosaico, porta envidraçada para o exterior e janela pequena.",
+            "name": "01a0b4e8fbec51cf3e70ac5a2d9fe9a3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2e782798",
+            "path": "clips/uploads/5pFlNOB8hT6v18iqRVybqNd6MKhXA6OPeAGg6tdn.jpg",
+            "description": "Quarto de casal com cama de cabeceira entalhada, roupeiro grande de madeira e chão de mosaico laranja.",
+            "name": "01a0b4e8fea9cbea54c4112fe723a48f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c33d99c6",
+            "path": "clips/uploads/Zqqmp2D7CPSoIysIn4xSia7i3pHaKvMePEkF8qEV.jpg",
+            "description": "Terraço comprido com cobertura ondulada, chão de mosaico, roupa estendida e arrumos; espaço a reabilitar.",
+            "name": "01a0b4e8fdea15c5e00b8b5ff48c4e93.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9b171281",
+            "path": "clips/uploads/k7UoJfKJn2cTLuX5TXWhY8jTaPs4i8JyOXYXZDiy.png",
+            "description": "Certificado energético com escala de A+ a F; o imóvel tem classe D (184%).",
+            "name": "01a0b4e8f840f4d81705e17c0c402fae.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_38565c79",
+            "path": "clips/uploads/qqRfozHfJAJbmekpGB60ye9yuVj1y1ZwHvoYFN9z.jpg",
+            "description": "Hall de entrada com azulejos tradicionais, chão em mosaico laranja, espelho antigo em madeira e escada ao fundo.",
+            "name": "01a0b4e8fd651ba40a5be6c357bb22e9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1e2f083a",
+            "path": "clips/uploads/WlOGQtM9rLJP7GBv5zgAgkXCR37ltTw5k766hX1z.jpg",
+            "description": "Hall de entrada junto à porta principal gradeada, com espelho de madeira, orquídeas brancas e cadeira antiga.",
+            "name": "01a0b4e8faebd52a26fbf80c08f037c9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4a626736",
+            "path": "clips/uploads/1APK2QxeokEAAAvTvMLKbvFbo67EibskUZyjLNzU.jpg",
+            "description": "Pátio coberto com claraboias, mesas redondas com toalhas verdes e prateadas e quadros nas paredes.",
+            "name": "01a0b4e8fb5073af53d6645f8fa93212.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_323be9a4",
+            "path": "clips/uploads/zoiXdhalvoejrQ6iujUlDxkmWkvmbeIlbH6AbAIW.jpg",
+            "description": "Varanda/terraço traseiro com pavimento cerâmico, fachada cinzenta com janelas brancas e prédios vizinhos ao sol.",
+            "name": "01a0b4e8fbf968b64a8100aee753ecd6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5e5c2bcd",
+            "path": "clips/uploads/F5tuMatQ3KchGWRvAgMnNNe23kP3Cz0ZHyOVbOHM.jpg",
+            "description": "Quarto com duas camas de solteiro juntas, cabeceira estofada, lustre de cristal e cortinados até ao chão.",
+            "name": "01a0b4e8f8394939c0e264eb3887a135.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dda0c74b",
+            "path": "clips/uploads/eJu0KqntczZnDl9cs0E898Pi58gB3GOqiuzk32Wy.jpg",
+            "description": "Sala de estar com sofá de pele castanho, tapete, mesa redonda de madeira ao fundo e janela luminosa.",
+            "name": "01a0b4e8fc1f10e932518ecd54039422.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6e02f0c0",
+            "path": "clips/uploads/IZhpQ2u3lwvcMU30lnQQ62fc11gHcOsHvZHp7yVX.jpg",
+            "description": "Casa de banho com azulejos brancos, base de duche com resguardo, lavatório com móvel e espelho redondo.",
+            "name": "01a0b4e8f917b4d3bedf4aa30d702c2f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c0096ed8",
+            "path": "clips/uploads/cpzZyVKDLBhcwz0oqPsIaPrzDoSkFwYj2Bz2i1uU.jpg",
+            "description": "Quarto com tetos em estuque trabalhado, duas camas antigas em madeira entalhada e colchas brancas.",
+            "name": "01a0b4e8fd3d48193e472f4a18f23d76.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_26d060a0",
+            "path": "clips/uploads/KgmsLAi4aRngr9KKLQaRk2IZk81TfPj6X4FOxJEx.jpg",
+            "description": "Quarto com duas camas antigas entalhadas, almofadas 'Mamã' e 'Papá', tetos em estuque e janelas com cortinados.",
+            "name": "01a0b4e8fb10bdf3c1e56bd157da8409.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0b580328",
+            "path": "clips/uploads/1qczN7a0JP2LXsyFrXqKUZZQSxbHMQLxe7aK8sMD.jpg",
+            "description": "Quarto pequeno com cama de casal em madeira, cadeira vermelha e beliche vermelho metálico.",
+            "name": "01a0b4e8fa11d612bccd47d90da9e7e2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c24835b2",
+            "path": "clips/uploads/vt9ftZ9ZpFrLUqZB362809JiAxaolQakBU1RbG3U.jpg",
+            "description": "Quarto com cama de casal de colcha branca rendada e beliche metálico cinzento; chão em mosaico.",
+            "name": "01a0b4e8f99a1100afcaf39a118525df.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_155e39ba",
+            "path": "clips/uploads/wpgOxL5I7fFIve75aF1FQAblMNRE1j9kokNr1ELz.jpg",
+            "description": "Quarto com duas camas de colchas azuis padronizadas, roupeiro antigo de madeira e cadeira entalhada.",
+            "name": "01a0b4e8fd198fa002e3779f74f2f43c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_304f3431",
+            "path": "clips/uploads/rb8Aj99SfivkZ73nyBk8k0jp7JUdvDdCkAFQCa36.jpg",
+            "description": "Cozinha rústica com mesa de granito, bancos de madeira e chaminé forrada a madeira; porta para marquise.",
+            "name": "01a0b4e8fb58c274ae6516569cf43898.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_656ad25d",
+            "path": "clips/uploads/MNFNw1uZVThD132qcSFIgJYhg7ddziXRigrr6Nr7.jpg",
+            "description": "Quarto com cama antiga de cabeceira entalhada, espelho oval, mesas de cabeceira e roupeiro escuro trabalhado.",
+            "name": "01a0b4e8fb0f5501cbe4af05f45551bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0e13ae54",
+            "path": "clips/uploads/c26lDhQz7u0tgUB07ax9yDt77Wl7qmarTYT6D4Og.jpg",
+            "description": "Escadaria interior com azulejos verdes tradicionais, degraus em madeira e espelho dourado no patamar.",
+            "name": "01a0b4e8fd7b2b65e911da0188dc9b3f.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_fd9b765b",
+            "path": "clips/uploads/RuNZw6Z9M1vllfZorPzUQ86JnhM0kyIVBBAeJBrH.jpg",
+            "description": "Escadaria vista de cima, corrimão curvo cinzento, paredes de azulejo padronizado e quadro na parede.",
+            "name": "01a0b4e8fcdf36cba2352bd231649b1c.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2e08322a",
+            "path": "clips/uploads/GsLzjC7N8yuzUopZX5ksFHjYbLKUtybyFVtOPT5f.jpg",
+            "description": "Quarto estreito com cama de solteiro, roupeiro de madeira e janela com cortinas ao fundo.",
+            "name": "01a0b4e8fb763a7551ace33f67fde28f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8f51f0c7",
+            "path": "clips/uploads/yzJPS1GDqKCiBYszrikA5qtjjcd5c1ZPcztx8FQb.jpg",
+            "description": "Segunda cozinha, simples, com azulejo branco, chaminé branca, placa elétrica e lava-loiça em pedra.",
+            "name": "01a0b4e8fb20d5a9c7ecbc7eb27a5b9e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_91fc99e3",
+            "path": "clips/uploads/A0ws8L8nKb7V5nctUhoWZ4tyiymLGAtfAZeQ70o1.jpg",
+            "description": "Cozinha com mesa de granito e madeira, frigorífico branco, chaminé e louceiro antigo ao fundo.",
+            "name": "01a0b4e8ff3decf93a57a22151ebe573.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cdb09169",
+            "path": "clips/uploads/KPIo4ubscuX8CWvFLrrDs7HY4UhgYapOr9FdJTM9.jpg",
+            "description": "Janela de quarto com vista para prédios vizinhos e céu azul; cómoda com espelho e crucifixo.",
+            "name": "01a0b4e8fb6527d068f9412329cb19f8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b4c6113",
+            "path": "clips/uploads/Er0q43mBTqxeqXdkmN47eXcR8ID9JY8IOAdqhGTp.jpg",
+            "description": "Quarto de solteiro com cama de madeira, colcha de crochê azul e branca, espelho antigo e cortina.",
+            "name": "01a0b4e8f8c7012946e65d3779e54d38.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be5dd6ff",
+            "path": "clips/uploads/TiDhhdjmMQbPw5LisnyDxA42fXeF9kDEZP3uCOTR.jpg",
+            "description": "Quarto com cama de casal de madeira, peluches de Winnie the Pooh e panda, janelas altas basculantes.",
+            "name": "01a0b4e8f94aa760fe585bc916ebfcb3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_32509bb1",
+            "path": "clips/uploads/BhCZ8Xs5vr1qq387PMPZ49AdFSswc1vBETz9LlVn.jpg",
+            "description": "Casa de banho com base de duche e cabine de vidro, lavatório branco com móvel e espelho grande.",
+            "name": "01a0b4e8fd1d19b04b1780994689e212.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cf932da4",
+            "path": "clips/uploads/iEbiRYXFqssbT1NFM3jkvnmIkJWIf9pZafaC76Br.jpg",
+            "description": "Quarto pequeno com cama de solteiro, peluches dos Estrumpfes, mesa de cabeceira e chão em mosaico.",
+            "name": "01a0b4e8f9653e9030e1f267aad68989.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cb5834d8",
+            "path": "clips/uploads/qU8Y7J8vE1K2CErm24IeuO0Ls7jtFAlIMhH0r4ou.jpg",
+            "description": "Quarto estreito com cama antiga de madeira escura, roupeiro grande entalhado e candeeiro suspenso.",
+            "name": "01a0b4e8fa2855f82c4c5fd13278d0ca.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c2cda941",
+            "path": "clips/uploads/WAUgBOuCozfurQBWHiahvTo2wDAm2dxNmR6uja3f.jpg",
+            "description": "Quarto amplo com duas camas antigas entalhadas, tetos com relevos decorativos e janelas com cortinas rendadas.",
+            "name": "01a0b4e8fd9a2ca093a12d37129ab36d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf78b1f3",
+            "path": "clips/uploads/uZsIQmAsZMFBZl2kpGfPtsPs9y4zgbu4OgwnnCa6.jpg",
+            "description": "Quarto com cama de casal de madeira, espelho emoldurado, mesa de cabeceira e poltrona bege.",
+            "name": "01a0b4e8f9c892b5322343ca62ff8307.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9af4b2d6",
+            "path": "clips/uploads/741mvFWAsUxKEUm9VmjDXQgkHDTc43HgSEFogRfc.jpg",
+            "description": "Quarto com cama de casal e beliche vermelho metálico, ideal para família alargada.",
+            "name": "01a0b4e8f9b5d982b0555d69f28d5e98.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_79a545f3",
+            "path": "clips/uploads/sLErMok66ZY1O1mHLJn6pTp103O8bneJ7YjJ5Kb2.jpg",
+            "description": "Quarto com cama de casal branca e beliche cinzento metálico, chão em mosaico de madeira.",
+            "name": "01a0b4e8fc4bc30ab643a4e826acdeb3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_68d6cf2f",
+            "path": "clips/uploads/nwpzs7fNP1rTla73NWr3HC56Y77ajnDkAn238zDR.png",
+            "description": "Retrato da consultora Rute Gois, da IAD Portugal.",
+            "name": "Rute Gois.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_297bfeec",
+            "path": "clips/uploads/GunYg9MJqKz8XRRSCDPQCD4BraIjQgVJTkE7TSqM.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1025109-murzj/voz.mp3",
+    "transcript": {
+        "duration": 46.47999954223633,
+        "text": "Na Póvoa de Varzim, na segunda linha do mar, um projeto para investidores. Uma casa com 23 quartos e anexos, pronta a transformar-se em hostel ou residencial. A dois passos da praia, do casino e do hospital. São três pisos e quase 250 metros quadrados, com duas entradas independentes. Duas cozinhas, sala de estar, sala de jantar e três casas de banho. Virada à nascente e a poente, recebe luz natural ao longo do dia. Lá fora, duas varandas a poente e dois terraços, um deles com espaço para refeições, ao estilo de refeitório. Construída em 1962, é uma casa para reabilitar, com uma localização e uma dimensão difíceis de encontrar. Para visitar, fale com a Rutgois, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Na",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "Póvoa",
+                "start": 0.2199999988079071,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "de",
+                "start": 0.5199999809265137,
+                "end": 0.6399999856948853
+            },
+            {
+                "word": "Varzim",
+                "start": 0.6399999856948853,
+                "end": 1
+            },
+            {
+                "word": "na",
+                "start": 1.2599999904632568,
+                "end": 1.4800000190734863
+            },
+            {
+                "word": "segunda",
+                "start": 1.4800000190734863,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "linha",
+                "start": 1.7400000095367432,
+                "end": 1.940000057220459
+            },
+            {
+                "word": "do",
+                "start": 1.940000057220459,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "mar",
+                "start": 2.380000114440918,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "um",
+                "start": 2.5399999618530273,
+                "end": 2.7799999713897705
+            },
+            {
+                "word": "projeto",
+                "start": 2.7799999713897705,
+                "end": 3.180000066757202
+            },
+            {
+                "word": "para",
+                "start": 3.180000066757202,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "investidores",
+                "start": 3.4600000381469727,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "Uma",
+                "start": 4.679999828338623,
+                "end": 4.739999771118164
+            },
+            {
+                "word": "casa",
+                "start": 4.739999771118164,
+                "end": 5
+            },
+            {
+                "word": "com",
+                "start": 5,
+                "end": 5.260000228881836
+            },
+            {
+                "word": "23",
+                "start": 5.260000228881836,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "quartos",
+                "start": 5.840000152587891,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 6.239999771118164,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "anexos",
+                "start": 6.460000038146973,
+                "end": 6.840000152587891
+            },
+            {
+                "word": "pronta",
+                "start": 7.139999866485596,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "a",
+                "start": 7.21999979019165,
+                "end": 7.460000038146973
+            },
+            {
+                "word": "transformar",
+                "start": 7.460000038146973,
+                "end": 7.920000076293945
+            },
+            {
+                "word": "se",
+                "start": 7.920000076293945,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "em",
+                "start": 8.0600004196167,
+                "end": 8.180000305175781
+            },
+            {
+                "word": "hostel",
+                "start": 8.180000305175781,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "ou",
+                "start": 8.600000381469727,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "residencial",
+                "start": 8.880000114440918,
+                "end": 9.5
+            },
+            {
+                "word": "A",
+                "start": 10.020000457763672,
+                "end": 10.020000457763672
+            },
+            {
+                "word": "dois",
+                "start": 10.020000457763672,
+                "end": 10.220000267028809
+            },
+            {
+                "word": "passos",
+                "start": 10.220000267028809,
+                "end": 10.479999542236328
+            },
+            {
+                "word": "da",
+                "start": 10.479999542236328,
+                "end": 10.739999771118164
+            },
+            {
+                "word": "praia",
+                "start": 10.739999771118164,
+                "end": 11
+            },
+            {
+                "word": "do",
+                "start": 11.239999771118164,
+                "end": 11.380000114440918
+            },
+            {
+                "word": "casino",
+                "start": 11.380000114440918,
+                "end": 11.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 11.739999771118164,
+                "end": 12
+            },
+            {
+                "word": "do",
+                "start": 12,
+                "end": 12.279999732971191
+            },
+            {
+                "word": "hospital",
+                "start": 12.279999732971191,
+                "end": 12.539999961853027
+            },
+            {
+                "word": "São",
+                "start": 13.0600004196167,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "três",
+                "start": 13.199999809265137,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "pisos",
+                "start": 13.579999923706055,
+                "end": 13.9399995803833
+            },
+            {
+                "word": "e",
+                "start": 13.9399995803833,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "quase",
+                "start": 14.180000305175781,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "250",
+                "start": 14.380000114440918,
+                "end": 15.359999656677246
+            },
+            {
+                "word": "metros",
+                "start": 15.359999656677246,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "quadrados",
+                "start": 15.680000305175781,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "com",
+                "start": 16.3799991607666,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "duas",
+                "start": 16.559999465942383,
+                "end": 16.84000015258789
+            },
+            {
+                "word": "entradas",
+                "start": 16.84000015258789,
+                "end": 17.15999984741211
+            },
+            {
+                "word": "independentes",
+                "start": 17.15999984741211,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "Duas",
+                "start": 18.559999465942383,
+                "end": 18.639999389648438
+            },
+            {
+                "word": "cozinhas",
+                "start": 18.639999389648438,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "sala",
+                "start": 19.600000381469727,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "de",
+                "start": 19.600000381469727,
+                "end": 19.899999618530273
+            },
+            {
+                "word": "estar",
+                "start": 19.899999618530273,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "sala",
+                "start": 20.559999465942383,
+                "end": 20.559999465942383
+            },
+            {
+                "word": "de",
+                "start": 20.559999465942383,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "jantar",
+                "start": 21.059999465942383,
+                "end": 21.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 21.100000381469727,
+                "end": 21.459999084472656
+            },
+            {
+                "word": "três",
+                "start": 21.459999084472656,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "casas",
+                "start": 21.780000686645508,
+                "end": 22.059999465942383
+            },
+            {
+                "word": "de",
+                "start": 22.059999465942383,
+                "end": 22.399999618530273
+            },
+            {
+                "word": "banho",
+                "start": 22.399999618530273,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "Virada",
+                "start": 22.940000534057617,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "à",
+                "start": 23.15999984741211,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "nascente",
+                "start": 23.360000610351562,
+                "end": 23.719999313354492
+            },
+            {
+                "word": "e",
+                "start": 23.719999313354492,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "a",
+                "start": 23.959999084472656,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "poente",
+                "start": 24.1200008392334,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "recebe",
+                "start": 24.760000228881836,
+                "end": 24.940000534057617
+            },
+            {
+                "word": "luz",
+                "start": 24.940000534057617,
+                "end": 25.139999389648438
+            },
+            {
+                "word": "natural",
+                "start": 25.139999389648438,
+                "end": 25.579999923706055
+            },
+            {
+                "word": "ao",
+                "start": 25.579999923706055,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "longo",
+                "start": 25.81999969482422,
+                "end": 25.899999618530273
+            },
+            {
+                "word": "do",
+                "start": 25.899999618530273,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "dia",
+                "start": 26.299999237060547,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "Lá",
+                "start": 26.299999237060547,
+                "end": 26.959999084472656
+            },
+            {
+                "word": "fora",
+                "start": 26.959999084472656,
+                "end": 27.219999313354492
+            },
+            {
+                "word": "duas",
+                "start": 27.540000915527344,
+                "end": 27.719999313354492
+            },
+            {
+                "word": "varandas",
+                "start": 27.719999313354492,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "a",
+                "start": 28.1200008392334,
+                "end": 28.3799991607666
+            },
+            {
+                "word": "poente",
+                "start": 28.3799991607666,
+                "end": 28.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 28.600000381469727,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "dois",
+                "start": 28.860000610351562,
+                "end": 29.1200008392334
+            },
+            {
+                "word": "terraços",
+                "start": 29.1200008392334,
+                "end": 29.600000381469727
+            },
+            {
+                "word": "um",
+                "start": 29.84000015258789,
+                "end": 29.920000076293945
+            },
+            {
+                "word": "deles",
+                "start": 29.920000076293945,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "com",
+                "start": 30.18000030517578,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "espaço",
+                "start": 30.440000534057617,
+                "end": 30.68000030517578
+            },
+            {
+                "word": "para",
+                "start": 30.68000030517578,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "refeições",
+                "start": 30.920000076293945,
+                "end": 31.5
+            },
+            {
+                "word": "ao",
+                "start": 31.65999984741211,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "estilo",
+                "start": 31.81999969482422,
+                "end": 31.979999542236328
+            },
+            {
+                "word": "de",
+                "start": 31.979999542236328,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "refeitório",
+                "start": 32.220001220703125,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "Construída",
+                "start": 33.119998931884766,
+                "end": 33.540000915527344
+            },
+            {
+                "word": "em",
+                "start": 33.540000915527344,
+                "end": 33.7599983215332
+            },
+            {
+                "word": "1962",
+                "start": 33.7599983215332,
+                "end": 35.13999938964844
+            },
+            {
+                "word": "é",
+                "start": 35.380001068115234,
+                "end": 35.459999084472656
+            },
+            {
+                "word": "uma",
+                "start": 35.459999084472656,
+                "end": 35.65999984741211
+            },
+            {
+                "word": "casa",
+                "start": 35.65999984741211,
+                "end": 35.880001068115234
+            },
+            {
+                "word": "para",
+                "start": 35.880001068115234,
+                "end": 36.119998931884766
+            },
+            {
+                "word": "reabilitar",
+                "start": 36.119998931884766,
+                "end": 36.7599983215332
+            },
+            {
+                "word": "com",
+                "start": 37.02000045776367,
+                "end": 37.099998474121094
+            },
+            {
+                "word": "uma",
+                "start": 37.099998474121094,
+                "end": 37.34000015258789
+            },
+            {
+                "word": "localização",
+                "start": 37.34000015258789,
+                "end": 37.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 37.959999084472656,
+                "end": 38.2400016784668
+            },
+            {
+                "word": "uma",
+                "start": 38.2400016784668,
+                "end": 38.459999084472656
+            },
+            {
+                "word": "dimensão",
+                "start": 38.459999084472656,
+                "end": 38.79999923706055
+            },
+            {
+                "word": "difíceis",
+                "start": 38.79999923706055,
+                "end": 39.52000045776367
+            },
+            {
+                "word": "de",
+                "start": 39.52000045776367,
+                "end": 39.7400016784668
+            },
+            {
+                "word": "encontrar",
+                "start": 39.7400016784668,
+                "end": 40.119998931884766
+            },
+            {
+                "word": "Para",
+                "start": 42.560001373291016,
+                "end": 43.08000183105469
+            },
+            {
+                "word": "visitar",
+                "start": 43.08000183105469,
+                "end": 43.599998474121094
+            },
+            {
+                "word": "fale",
+                "start": 43.97999954223633,
+                "end": 43.97999954223633
+            },
+            {
+                "word": "com",
+                "start": 43.97999954223633,
+                "end": 44.119998931884766
+            },
+            {
+                "word": "a",
+                "start": 44.119998931884766,
+                "end": 44.2400016784668
+            },
+            {
+                "word": "Rutgois",
+                "start": 44.2400016784668,
+                "end": 44.81999969482422
+            },
+            {
+                "word": "da",
+                "start": 45.040000915527344,
+                "end": 45.2400016784668
+            },
+            {
+                "word": "IAD",
+                "start": 45.2400016784668,
+                "end": 45.599998474121094
+            },
+            {
+                "word": "de",
+                "start": 45.599998474121094,
+                "end": 45.91999816894531
+            },
+            {
+                "word": "Portugal",
+                "start": 45.91999816894531,
+                "end": 46.2400016784668
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 46.47999954223633,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8000000000000043,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "PROJETO PARA INVESTIDORES",
+                        "params": {
+                            "src": "img_f6c1e25b",
+                            "avatar": "img_68d6cf2f",
+                            "logo": "img_297bfeec",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "2.100.000 €",
+                            "location": "PÓVOA DE VARZIM · 2.ª LINHA DE MAR",
+                            "title": "MORADIA BIFAMILIAR",
+                            "facts": "247 m² · 23 quartos · 3 WC · 2 terraços",
+                            "cta": "Ligue já +351 912 001 969",
+                            "name": "Rute Gois",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8000000000000043,
+                "end": 7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "23 QUARTOS",
+                        "params": {
+                            "src": "img_6f17c417",
+                            "src2": "img_9952fbbe",
+                            "src3": "img_a792a341",
+                            "src4": "img_2e782798"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7,
+                "end": 10,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "HOSTEL OU RESIDENCIAL",
+                        "params": {
+                            "src": "img_5e5c2bcd",
+                            "src2": "img_c0096ed8",
+                            "src3": "img_26d060a0",
+                            "src4": "img_0b580328",
+                            "src5": "img_c24835b2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10,
+                "end": 12.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "PRAIA · CASINO · HOSPITAL",
+                        "params": {
+                            "src": "img_cdb09169",
+                            "src2": "img_155e39ba"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.9,
+                "end": 16.3,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_f1c5bfc2",
+                            "title": "TRÊS PISOS",
+                            "items": [
+                                "247 m² habitáveis",
+                                "Moradia bifamiliar",
+                                "Duas frações possíveis"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.3,
+                "end": 18.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "DUAS ENTRADAS",
+                        "params": {
+                            "src": "img_38565c79",
+                            "src2": "img_1e2f083a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.5,
+                "end": 20.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DUAS COZINHAS",
+                        "params": {
+                            "src": "img_304f3431",
+                            "src2": "img_8f51f0c7",
+                            "src3": "img_91fc99e3",
+                            "src4": "img_dda0c74b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.5,
+                "end": 22.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TRÊS CASAS DE BANHO",
+                        "params": {
+                            "src": "img_0ea97115",
+                            "src2": "img_6e02f0c0",
+                            "src3": "img_32509bb1",
+                            "src4": "img_656ad25d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.9,
+                "end": 26.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "LUZ NASCENTE E POENTE",
+                        "params": {
+                            "src": "img_0904d147",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.4,
+                "end": 29.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "2 VARANDAS · 2 TERRAÇOS",
+                        "params": {
+                            "src": "img_323be9a4",
+                            "src2": "img_c33d99c6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.8,
+                "end": 33,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_4a626736",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33,
+                "end": 35.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_9b171281",
+                            "title": "CONSTRUÍDA EM 1962",
+                            "items": [
+                                "Certificado energético D",
+                                "Aquecimento elétrico"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.3,
+                "end": 37.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "PARA REABILITAR",
+                        "params": {
+                            "src": "img_0e13ae54",
+                            "src2": "img_fd9b765b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.4,
+                "end": 40.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "DIMENSÃO RARA",
+                        "params": {
+                            "src": "img_2e08322a",
+                            "src2": "img_3b4c6113",
+                            "src3": "img_be5dd6ff",
+                            "src4": "img_cf932da4",
+                            "src5": "img_cb5834d8"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 40.2,
+                "end": 42.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "2.100.000 €",
+                        "params": {
+                            "src": "img_c2cda941",
+                            "src2": "img_bf78b1f3",
+                            "src3": "img_9af4b2d6",
+                            "src4": "img_79a545f3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 42.5,
+                "end": 46.47999954223633,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Rute Gois",
+                        "params": {
+                            "src": "img_68d6cf2f",
+                            "name": "Rute Gois",
+                            "phone": "+351 912 001 969",
+                            "email": "rute.gois@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1025109-murzj/clip.mp4",
+    "error": null,
+    "source_text": "Na Póvoa de Varzim, na segunda linha do mar, um projeto para investidores. uma casa com 23 quartos e anexos, pronta a transformar-se em hostel ou residencial. A dois passos da praia, do Casino e do hospital. São três pisos e quase 250 metros quadrados, com duas entradas independentes. Duas cozinhas, sala de estar, sala de jantar e três casas de banho. Virada a Nascente e a Poente, recebe luz natural ao longo do dia. Lá fora, duas varandas a Poente e dois terraços, um deles com espaço para refeições, ao estilo de refeitório. Construída em 1962, é uma casa para reabilitar, com uma localização e uma dimensão difíceis de encontrar. 2 milhões e 100 mil euros. Para visitar, fale com a Rute Góis, da IAD de Portugal."
+}

@@ -1,0 +1,1029 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Férias em Albufeira todos os anos: semana 35 por 15 mil euros",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-apartamento-t1-albufeira-albufeira-e-olhos-de-agua/122261294-168",
+            "agent": "Nadiya Babets",
+            "phone": "+351 969 152 276",
+            "agency": "RE/MAX Albufeira Smart",
+            "hook": "A última semana de agosto em Albufeira, todos os anos.",
+            "voiceover": "A última semana de agosto em Albufeira, todos os anos. Fica no Ourabay, a poucos minutos da Praia da Oura. A Rua da Oura está a cerca de dez minutos a pé. Vende-se a semana trinta e cinco, em timesharing perpétuo. Um T1 mobilado e equipado, com quarto, sala com sofá-cama e kitchenette. Casa de banho completa, ar condicionado e varanda com vista cidade. No empreendimento, piscina exterior, zonas de lazer e receção. Para férias em família, ou para rentabilizar na época alta. Quinze mil euros. Para visitar, fale com a Nadiya Babets, da RE/MAX Albufeira Smart.",
+            "scenes": [
+                {
+                    "photo": "fachada do Ourabay Hotel & Apartments",
+                    "vo": "A última semana de agosto em Albufeira, todos os anos.",
+                    "caption": "Semana 35 · Albufeira"
+                },
+                {
+                    "photo": "Praia da Oura ou vista da zona",
+                    "vo": "Fica no Ourabay, a poucos minutos da Praia da Oura.",
+                    "caption": "Perto da Praia da Oura"
+                },
+                {
+                    "photo": "rua / zona envolvente",
+                    "vo": "A Rua da Oura está a cerca de dez minutos a pé.",
+                    "caption": "Rua da Oura a pé"
+                },
+                {
+                    "photo": "entrada do apartamento ou receção",
+                    "vo": "Vende-se a semana trinta e cinco, em timesharing perpétuo.",
+                    "caption": "Timesharing perpétuo"
+                },
+                {
+                    "photo": "sala com sofá-cama",
+                    "vo": "Um T1 mobilado e equipado, com quarto, sala com sofá-cama…",
+                    "caption": "T1 mobilado"
+                },
+                {
+                    "photo": "kitchenette",
+                    "vo": "…e kitchenette.",
+                    "caption": "Kitchenette equipada"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Casa de banho completa, ar condicionado…",
+                    "caption": "Ar condicionado"
+                },
+                {
+                    "photo": "varanda com vista cidade",
+                    "vo": "…e varanda com vista cidade.",
+                    "caption": "Varanda com vista"
+                },
+                {
+                    "photo": "piscina exterior do empreendimento",
+                    "vo": "No empreendimento, piscina exterior, zonas de lazer e receção.",
+                    "caption": "Piscina exterior"
+                },
+                {
+                    "photo": "zona de lazer / piscina com espreguiçadeiras",
+                    "vo": "Para férias em família, ou para rentabilizar na época alta.",
+                    "caption": "Férias ou rendimento"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quinze mil euros. Para visitar, fale com a Nadiya Babets, da RE/MAX Albufeira Smart.",
+                    "caption": "15.000 € · Nadiya Babets · RE/MAX Albufeira Smart"
+                }
+            ],
+            "flags": [
+                "Estacionamento: o texto refere estacionamento no Ourabay, mas os detalhes dizem 'Estacionamento: Não'. Ficou de fora.",
+                "Rentabilidade estimada de 7,25% ao ano: é um valor de investimento sem fonte. Ficou de fora; o guião diz apenas 'rentabilizar na época alta'.",
+                "Capacidade para 6 pessoas num T1 de 40 m² com um quarto e sofá-cama: confirmar antes de usar. Ficou de fora.",
+                "O preço de 15.000 € corresponde a uma semana por ano em timesharing, não ao apartamento. O anúncio está classificado como 'Apartamento T1 à venda'. O título e o guião dizem 'semana' e 'timesharing'; confirmar que o vídeo não pode ser lido como venda do imóvel.",
+                "'Perpétua' e 'transmissível aos descendentes': confirmar o enquadramento legal do direito com a consultora. O guião diz 'timesharing perpétuo'.",
+                "Custos anuais de manutenção ou condomínio do timesharing não são referidos no anúncio. Vale a pena confirmar."
+            ],
+            "message": "Boa tarde Sra. Nadiya,\nO meu nome é João Ferreira.\n\nVi a semana em timesharing no Ourabay, em Albufeira, que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Nadiya Babets - and phone number - +351 969 152 276. Agency: RE/MAX Albufeira Smart.\nThe agent's photo is Nadiya Babets.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «A última semana de agosto em Albufeira, todos os anos.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do Ourabay Hotel & Apartments → «Semana 35 · Albufeira»\n- Praia da Oura ou vista da zona → «Perto da Praia da Oura»\n- rua / zona envolvente → «Rua da Oura a pé»\n- entrada do apartamento ou receção → «Timesharing perpétuo»\n- sala com sofá-cama → «T1 mobilado»\n- kitchenette → «Kitchenette equipada»\n- quarto → «Ar condicionado»\n- varanda com vista cidade → «Varanda com vista»\n- piscina exterior do empreendimento → «Piscina exterior»\n- zona de lazer / piscina com espreguiçadeiras → «Férias ou rendimento»\n- end card → «15.000 € · Nadiya Babets · RE/MAX Albufeira Smart»\n\nHere are the house details:\n\nApartamento T1 à venda em Albufeira e Olhos de Água, Albufeira\nPreço\n15 000 €\nLocalização\nAlbufeira e Olhos de Água, Albufeira, Faro\nReferência\n122261294-168\nÁrea Útil m²\n40\nQuartos\n1\nWC/Casas de banho\n1\nAno de Construção\n1985\nEstacionamento\nNão\nGaragem\nNão\nElevador\nSim\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p>REGIME DE TIME SHARING — Semana 35, Última semana de agosto (garantida todos os anos)</p>\n<p>Excelente oportunidade de investimento e lazer:&nbsp;</p>\n<p><strong><ins>Vende-se uma semana de Agosto (semana 35) em apartamento T1 em regime de timesharing, PERPÉTUA, no Ourabay Hotel &amp; Apartments, um dos empreendimentos mais bem localizados de Albufeira.</ins></strong></p>\n<p>O Ourabay oferece piscina exterior, zonas de lazer, receção, estacionamento, áreas comuns amplas e fácil acesso a supermercados, restaurantes, comércio, serviços e à famosa Rua da Oura, a cerca de 10 minutos a pé. A Praia da Ouraencontra-se igualmente a poucos minutos, tornando este local ideal para férias descontraídas.</p>\n<p>O apartamento está totalmente mobilado e equipado, composto por um quarto espaçoso, sala com sofá-cama, kitchenette equipada, casa de banho completa e varanda com vista cidade. Pode acomodar até 6 pessoas, sendo perfeito para famílias ou grupos. Inclui ainda ar condicionado, TV LCD, wi-fi, cofre, ferro, secador de cabelo e outras comodidades essenciais.</p>\n<p>Além do usufruto pessoal, existe a possibilidade de rentabilizar a semana através de exploração turística, permitindo gerar rendimento adicional durante a época alta. A yield estimada é de cerca de 7,25% ao ano.</p>\n<p>Uma solução prática, confortável e vitalícia, transmissível aos seus descendentes — garantindo férias asseguradas todos os anos numa das zonas mais procuradas do Algarve.</p>\n<p>ID: 122261294-168</p>\n<p>***********</p>\n<p>&nbsp;ING:&nbsp;</p>\n<p><strong><ins>TIME SHARING  — Week 35, Last week of August (guaranteed every year)</ins></strong></p>\n<p>Excellent investment and leisure opportunity:</p>\n<p><strong><ins>For sale: one week in August (week 35) in a perpetual one-bedroom apartment on a timeshare basis at the Ourabay Hotel &amp; Apartments, one of the best-located developments in Albufeira.</ins></strong></p>\n<p>The Ourabay offers an outdoor pool, leisure areas, reception, parking, spacious common areas, and easy access to supermarkets, restaurants, shops, services, and the famous Rua da Oura, about a 10-minute walk away. Praia da Oura beach is also just a few minutes away, making this an ideal location for relaxing holidays.</p>\n<p>The apartment is fully furnished and equipped, comprising a spacious bedroom, living room with sofa bed, equipped kitchenette, full bathroom, and balcony with city views. It can accommodate up to 6 people, making it perfect for families or groups. It also includes air conditioning, LCD TV, Wi-Fi, safe, iron, hairdryer, and other essential amenities.</p>\n<p>In addition to personal enjoyment, there is the possibility of monetizing the week through tourism, allowing for additional income during the high season. The estimated return is approximately 7.25% per year.</p>\n<p>A practical, comfortable, and lifelong solution, passable on to your descendants — guaranteeing secure holidays every year in one of the most sought-after areas of the Algarve.</p>\n<p>ID: 122261294-168<br></p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Timesharing na semana 35 em Albufeira (Ouro Bay, Praia da Oura)",
+            "summary": "O timesharing, ou direito real de habitação periódica, dá direito a usar um alojamento durante um período fixo em cada ano. Em Portugal, este direito é perpétuo se o contrato não disser o contrário. Albufeira é o segundo concelho do país com mais dormidas turísticas, logo a seguir a Lisboa.",
+            "timeline": [
+                {
+                    "label": "Lei cria o regime da habitação periódica",
+                    "sublabel": "1993 (DL 275/93)"
+                },
+                {
+                    "label": "Regime revisto, mantém-se perpétuo por defeito",
+                    "sublabel": "2011 (DL 37/2011)"
+                },
+                {
+                    "label": "Albufeira é o 2.º concelho com mais dormidas",
+                    "sublabel": "2024 (INE)"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Dormidas em Albufeira",
+                    "value": 7.7,
+                    "unit": "milhões (2024)"
+                },
+                {
+                    "label": "Peso no total nacional de dormidas",
+                    "value": 9.6,
+                    "unit": "% (2024)"
+                },
+                {
+                    "label": "Preço da semana 35",
+                    "value": 15000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Timesharing vs. comprar casa",
+                    "left": {
+                        "title": "Timesharing (semana 35)",
+                        "points": [
+                            "Uso de uma semana fixa por ano",
+                            "Direito perpétuo",
+                            "Pode ser arrendado na época alta"
+                        ]
+                    },
+                    "right": {
+                        "title": "Comprar casa",
+                        "points": [
+                            "Uso durante o ano inteiro",
+                            "Investimento inicial muito mais alto",
+                            "Todas as despesas a cargo do dono"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em Portugal, o timesharing é um direito real e é perpétuo, salvo se o contrato disser o contrário",
+                "O direito aplica-se a um período fixo ou determinável em cada ano",
+                "Albufeira foi o 2.º concelho do país em dormidas em 2024, atrás de Lisboa",
+                "A semana 35 é a última de agosto, em plena época alta"
+            ],
+            "sources": [
+                "https://diariodarepublica.pt/dr/detalhe/decreto-lei/37-2011-279446",
+                "https://vlex.pt/vid/decreto-lei-n-275-1041705159",
+                "https://diariodarepublica.pt/dr/detalhe/decreto-lei/275-1993-357148",
+                "https://postal.pt/economia/albufeira-e-portimao-impulsionam-turismo-no-algarve-mas-albufeira-ainda-abaixo-dos-niveis-pre-pandemia/",
+                "https://eco.sapo.pt/entrevista/taxa-turistica-em-albufeira-devera-atingir-oito-milhoes-de-euros-em-2025/"
+            ]
+        },
+        "suggested": {
+            "title": "Férias em Albufeira todos os anos: semana 35 por 15 mil euros",
+            "description": "Vende-se a semana 35 em timesharing perpétuo no Ouro Bai, a poucos minutos da Praia da Oura e a cerca de 10 minutos a pé da Rua da Oura. T1 mobilado e equipado, com sofá-cama, kitchenette, ar-condicionado e varanda com vista-cidade, num empreendimento com piscina exterior e receção. Para visitar, fale com a Nádia Babetz, da Remax Albufeira Smart.",
+            "tags": [
+                "Albufeira",
+                "timesharing",
+                "Praia da Oura",
+                "Algarve",
+                "imobiliário",
+                "férias em família",
+                "Remax",
+                "T1"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-122261294-168-khxwo",
+    "created_at": "2026-10-12T12:11:17+00:00",
+    "updated_at": "2026-10-12T12:29:53+00:00",
+    "source_path": "clips/uploads/5lQo0XVpoq0lns2NoMekzemGyogZE4KIM5xAl2PW.mp3",
+    "images": [
+        {
+            "id": "img_dc8b2f58",
+            "path": "clips/uploads/6rFgohYTKiHWZDv4TOxdubU9ROORs1ZtWOuj1ua3.jpg",
+            "description": "Fachada do empreendimento Ourabay com piscina exterior, espreguiçadeiras, palmeiras e copo de gin em primeiro plano.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a3c0ded2",
+            "path": "clips/uploads/e0CqrOz1s4EizS8zQeWbg9D9wY3UW9dDIzaR6SV7.jpg",
+            "description": "Piscina exterior do empreendimento vista de cima, com piscina infantil, zona de lazer e prédios amarelos ao fundo.",
+            "name": "a872d0a2-436b-4c2f-9444-4dfd13dd5034.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cc7217c9",
+            "path": "clips/uploads/RO7laRyLCWKbuHQvJ6K2MRGXXaNHRBhpWciL4l12.jpg",
+            "description": "Sala com sofá-cama bege, mesa de centro, TV, ar-condicionado e porta aberta para a varanda com vegetação.",
+            "name": "1fc9ef0b-30fe-44be-8ce1-c097a04108d0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ff7246b7",
+            "path": "clips/uploads/tP9W4PISjnCvL1KbLDzTHaXbb5Qy1PNcILbZobcm.jpg",
+            "description": "Sala vista da mesa de jantar, com sofá, mesa de centro com vinho, TV e varanda iluminada.",
+            "name": "b9f066ff-6d8a-4ed7-851e-9ec84b203e18.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d4dad17d",
+            "path": "clips/uploads/I0wqIWwH5rnaOm18jpVCZaRG8aEWDuqPIC7mRK1v.jpg",
+            "description": "Quarto com cama de casal branca, cabeceira de madeira, mesas de cabeceira, candeeiros de parede e quadro colorido.",
+            "name": "f389a6d2-5ae5-47fa-a539-3a4e8fac355c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_08e96d81",
+            "path": "clips/uploads/75VJAVJTUrEMBp2TYoaWCTKfvkzpOmmah9Yl2Q35.jpg",
+            "description": "Kitchenette equipada com armários de madeira, placa, exaustor, micro-ondas, chaleira, torradeira e frigorífico pequeno.",
+            "name": "03a54f98-e6e3-4c8c-9adf-2631aee7714c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bc535856",
+            "path": "clips/uploads/7TwNn3EdBpghYBfjZ3nKdgIEpzuwlRGoGtvsX4AF.jpg",
+            "description": "Zona de refeições com mesa redonda e quatro cadeiras, kitchenette em balcão ao fundo e porta de entrada.",
+            "name": "0f17bdbe-f20c-427d-960c-b5e923aa415e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f203947",
+            "path": "clips/uploads/KMeImkrOamsEp1ODczPWsk20GzHyRjsQZjaYcIB9.jpg",
+            "description": "Casa de banho completa com banheira, lavatório em mármore, espelho grande, azulejos verdes e toalhas brancas.",
+            "name": "b63a1282-f2ac-4e14-ba03-e003ff37af4b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b195af55",
+            "path": "clips/uploads/Bi8bl1XTh89RAdiuCv4xNkb1p25QoU6mttopXIOw.jpg",
+            "description": "Planta do piso com o apartamento T1 número 255 destacado a vermelho entre os apartamentos vizinhos.",
+            "name": "1707f53b-0da4-4319-beb9-f48472e512b1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6800e070",
+            "path": "clips/uploads/jby5wGg335b6gxQrJP5DPCVz1pubGwZzbpmDIOuz.jpg",
+            "description": "Esplanada coberta com cadeiras de vime e vista para a piscina exterior, palmeiras e espreguiçadeiras.",
+            "name": "620b513e-2eb3-4d69-9712-761aace475f9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a5762f39",
+            "path": "clips/uploads/cgGY43gnoQllUIO0vVAxCcpPsTKwM86FgGTDIsWl.jpg",
+            "description": "Praia ao nível da água, com areia dourada, rochas, banhistas e edifícios brancos no topo da arriba, céu limpo.",
+            "name": "f3471bab-ff70-4aa0-8cb4-f8ab04fc52e6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_337a3c44",
+            "path": "clips/uploads/MtGK8RxaZBBG28nGeGt8VOlGchtEcRnUBPtCKvmO.jpg",
+            "description": "Jardim com palmeiras e caminho pedonal com vista para a praia, chapéus de sol e mar azul ao fundo.",
+            "name": "af4564d1-6918-493c-8159-464f3c22f9fd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_19bee9ea",
+            "path": "clips/uploads/gqkMA39aB3zw9nGeAQYCEoRkPRxtGjMegHuWMmiY.png",
+            "description": "Retrato da consultora Nadiya Babets, da RE/MAX Albufeira Smart.",
+            "name": "Nadiya Babets.png",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_02834cc2",
+            "path": "clips/uploads/wtbI60kH6s9Q2GNjSv8dddTwr77pVoircuP9Heal.jpg",
+            "description": "Logótipo da RE/MAX Albufeira Smart.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/5lQo0XVpoq0lns2NoMekzemGyogZE4KIM5xAl2PW.mp3",
+    "transcript": {
+        "duration": 34.15999984741211,
+        "text": "A última semana de Agosto em Albufeira, todos os anos. Fica no Ouro Bai, a poucos minutos da Praia da Oura. A Rua da Oura está a cerca de 10 minutos a pé. Vende-se a semana 35, em timesharing perpétuo. Um T1 mobilado e equipado, com quarto, sala com sofá-cama e kitchenette. Casa de banho completa, ar-condicionado e varanda com vista-cidade. No empreendimento, piscina exterior, zonas de lazer e receção. Para férias em família ou para rentabilizar na época alta. 15 mil euros. Para visitar, fale com a Nádia Babetz, da Remax Albufeira Smart.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "A",
+                "start": 0,
+                "end": 0.14000000059604645
+            },
+            {
+                "word": "última",
+                "start": 0.14000000059604645,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "semana",
+                "start": 0.4000000059604645,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "de",
+                "start": 0.7599999904632568,
+                "end": 0.9599999785423279
+            },
+            {
+                "word": "Agosto",
+                "start": 0.9599999785423279,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "em",
+                "start": 1.2000000476837158,
+                "end": 1.3600000143051147
+            },
+            {
+                "word": "Albufeira",
+                "start": 1.3600000143051147,
+                "end": 1.8600000143051147
+            },
+            {
+                "word": "todos",
+                "start": 2.2799999713897705,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "os",
+                "start": 2.440000057220459,
+                "end": 2.700000047683716
+            },
+            {
+                "word": "anos",
+                "start": 2.700000047683716,
+                "end": 2.9600000381469727
+            },
+            {
+                "word": "Fica",
+                "start": 3.5199999809265137,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "no",
+                "start": 3.5199999809265137,
+                "end": 3.700000047683716
+            },
+            {
+                "word": "Ouro",
+                "start": 3.700000047683716,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "Bai",
+                "start": 3.9000000953674316,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "a",
+                "start": 4.400000095367432,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "poucos",
+                "start": 4.579999923706055,
+                "end": 4.739999771118164
+            },
+            {
+                "word": "minutos",
+                "start": 4.739999771118164,
+                "end": 5.119999885559082
+            },
+            {
+                "word": "da",
+                "start": 5.119999885559082,
+                "end": 5.320000171661377
+            },
+            {
+                "word": "Praia",
+                "start": 5.320000171661377,
+                "end": 5.5
+            },
+            {
+                "word": "da",
+                "start": 5.5,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "Oura",
+                "start": 5.920000076293945,
+                "end": 5.940000057220459
+            },
+            {
+                "word": "A",
+                "start": 6.320000171661377,
+                "end": 6.440000057220459
+            },
+            {
+                "word": "Rua",
+                "start": 6.440000057220459,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "da",
+                "start": 6.579999923706055,
+                "end": 6.78000020980835
+            },
+            {
+                "word": "Oura",
+                "start": 6.78000020980835,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "está",
+                "start": 6.960000038146973,
+                "end": 7.179999828338623
+            },
+            {
+                "word": "a",
+                "start": 7.179999828338623,
+                "end": 7.380000114440918
+            },
+            {
+                "word": "cerca",
+                "start": 7.380000114440918,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 7.579999923706055,
+                "end": 7.860000133514404
+            },
+            {
+                "word": "10",
+                "start": 7.860000133514404,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "minutos",
+                "start": 8.0600004196167,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "a",
+                "start": 8.380000114440918,
+                "end": 8.699999809265137
+            },
+            {
+                "word": "pé",
+                "start": 8.699999809265137,
+                "end": 8.699999809265137
+            },
+            {
+                "word": "Vende",
+                "start": 9.279999732971191,
+                "end": 9.300000190734863
+            },
+            {
+                "word": "se",
+                "start": 9.300000190734863,
+                "end": 9.460000038146973
+            },
+            {
+                "word": "a",
+                "start": 9.460000038146973,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "semana",
+                "start": 9.739999771118164,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "35",
+                "start": 9.739999771118164,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "em",
+                "start": 10.760000228881836,
+                "end": 10.920000076293945
+            },
+            {
+                "word": "timesharing",
+                "start": 10.920000076293945,
+                "end": 11.4399995803833
+            },
+            {
+                "word": "perpétuo",
+                "start": 11.4399995803833,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "Um",
+                "start": 12.479999542236328,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "T1",
+                "start": 12.640000343322754,
+                "end": 12.979999542236328
+            },
+            {
+                "word": "mobilado",
+                "start": 12.979999542236328,
+                "end": 13.699999809265137
+            },
+            {
+                "word": "e",
+                "start": 13.699999809265137,
+                "end": 13.960000038146973
+            },
+            {
+                "word": "equipado",
+                "start": 13.960000038146973,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "com",
+                "start": 14.640000343322754,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "quarto",
+                "start": 14.84000015258789,
+                "end": 15.15999984741211
+            },
+            {
+                "word": "sala",
+                "start": 15.65999984741211,
+                "end": 15.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 15.65999984741211,
+                "end": 15.920000076293945
+            },
+            {
+                "word": "sofá",
+                "start": 15.920000076293945,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "cama",
+                "start": 16.15999984741211,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 16.420000076293945,
+                "end": 16.65999984741211
+            },
+            {
+                "word": "kitchenette",
+                "start": 16.65999984741211,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "Casa",
+                "start": 17.68000030517578,
+                "end": 17.719999313354492
+            },
+            {
+                "word": "de",
+                "start": 17.719999313354492,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "banho",
+                "start": 18.040000915527344,
+                "end": 18.040000915527344
+            },
+            {
+                "word": "completa",
+                "start": 18.040000915527344,
+                "end": 18.600000381469727
+            },
+            {
+                "word": "ar",
+                "start": 18.920000076293945,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "condicionado",
+                "start": 18.979999542236328,
+                "end": 19.719999313354492
+            },
+            {
+                "word": "e",
+                "start": 19.719999313354492,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "varanda",
+                "start": 19.940000534057617,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "com",
+                "start": 20.260000228881836,
+                "end": 20.600000381469727
+            },
+            {
+                "word": "vista",
+                "start": 20.600000381469727,
+                "end": 20.799999237060547
+            },
+            {
+                "word": "cidade",
+                "start": 20.799999237060547,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "No",
+                "start": 21.719999313354492,
+                "end": 21.84000015258789
+            },
+            {
+                "word": "empreendimento",
+                "start": 21.84000015258789,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "piscina",
+                "start": 22.940000534057617,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "exterior",
+                "start": 22.979999542236328,
+                "end": 23.479999542236328
+            },
+            {
+                "word": "zonas",
+                "start": 24,
+                "end": 24
+            },
+            {
+                "word": "de",
+                "start": 24,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "lazer",
+                "start": 24.479999542236328,
+                "end": 24.479999542236328
+            },
+            {
+                "word": "e",
+                "start": 24.479999542236328,
+                "end": 24.739999771118164
+            },
+            {
+                "word": "receção",
+                "start": 24.739999771118164,
+                "end": 25.200000762939453
+            },
+            {
+                "word": "Para",
+                "start": 25.700000762939453,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "férias",
+                "start": 25.81999969482422,
+                "end": 26.100000381469727
+            },
+            {
+                "word": "em",
+                "start": 26.100000381469727,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "família",
+                "start": 26.299999237060547,
+                "end": 26.65999984741211
+            },
+            {
+                "word": "ou",
+                "start": 26.65999984741211,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "para",
+                "start": 27.020000457763672,
+                "end": 27.219999313354492
+            },
+            {
+                "word": "rentabilizar",
+                "start": 27.219999313354492,
+                "end": 27.84000015258789
+            },
+            {
+                "word": "na",
+                "start": 27.84000015258789,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "época",
+                "start": 28.020000457763672,
+                "end": 28.280000686645508
+            },
+            {
+                "word": "alta",
+                "start": 28.280000686645508,
+                "end": 28.6200008392334
+            },
+            {
+                "word": "15",
+                "start": 28.6200008392334,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "mil",
+                "start": 29.34000015258789,
+                "end": 29.540000915527344
+            },
+            {
+                "word": "euros",
+                "start": 29.540000915527344,
+                "end": 30.040000915527344
+            },
+            {
+                "word": "Para",
+                "start": 30.3799991607666,
+                "end": 30.5
+            },
+            {
+                "word": "visitar",
+                "start": 30.5,
+                "end": 31.059999465942383
+            },
+            {
+                "word": "fale",
+                "start": 31.3799991607666,
+                "end": 31.3799991607666
+            },
+            {
+                "word": "com",
+                "start": 31.3799991607666,
+                "end": 31.5
+            },
+            {
+                "word": "a",
+                "start": 31.5,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "Nádia",
+                "start": 31.639999389648438,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "Babetz",
+                "start": 31.899999618530273,
+                "end": 32.36000061035156
+            },
+            {
+                "word": "da",
+                "start": 32.540000915527344,
+                "end": 32.68000030517578
+            },
+            {
+                "word": "Remax",
+                "start": 32.68000030517578,
+                "end": 33.060001373291016
+            },
+            {
+                "word": "Albufeira",
+                "start": 33.060001373291016,
+                "end": 33.5
+            },
+            {
+                "word": "Smart",
+                "start": 33.5,
+                "end": 33.959999084472656
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.15999984741211,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3000000000000007,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "A última semana de agosto em Albufeira, todos os anos.",
+                        "params": {
+                            "src": "img_dc8b2f58",
+                            "avatar": "img_19bee9ea",
+                            "logo": "img_02834cc2",
+                            "price": "15.000 €",
+                            "eyebrow": "SEMANA 35 · ALBUFEIRA",
+                            "title": "T1 em timesharing perpétuo",
+                            "location": "Ourabay · Albufeira · 40 m² · 1 quarto",
+                            "agentName": "Nadiya Babets",
+                            "phone": "+351 969 152 276",
+                            "legal": "RE/MAX Albufeira Smart"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3000000000000007,
+                "end": 6.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Perto da Praia da Oura",
+                        "params": {
+                            "src": "img_a5762f39",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.2,
+                "end": 9.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Rua da Oura a pé",
+                        "params": {
+                            "src": "img_337a3c44",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.1,
+                "end": 12.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Timesharing perpétuo",
+                        "params": {
+                            "src": "img_b195af55",
+                            "title": "Timesharing perpétuo",
+                            "items": [
+                                "Semana 35",
+                                "Última semana de agosto",
+                                "Garantida todos os anos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.4,
+                "end": 17.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "T1 mobilado",
+                        "params": {
+                            "src": "img_cc7217c9",
+                            "src2": "img_ff7246b7",
+                            "src3": "img_d4dad17d",
+                            "src4": "img_08e96d81"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.5,
+                "end": 21.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Ar condicionado e varanda",
+                        "params": {
+                            "src": "img_7f203947",
+                            "src2": "img_cc7217c9",
+                            "src3": "img_bc535856",
+                            "src4": "img_ff7246b7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.6,
+                "end": 25.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Piscina exterior",
+                        "params": {
+                            "src": "img_a3c0ded2",
+                            "src2": "img_6800e070",
+                            "src3": "img_dc8b2f58",
+                            "src4": "img_337a3c44",
+                            "src5": "img_a5762f39"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.5,
+                "end": 30.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Férias ou rendimento",
+                        "params": {
+                            "src": "img_6800e070",
+                            "src2": "img_a3c0ded2",
+                            "angle": 11,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.4,
+                "end": 34.15999984741211,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Nadiya Babets",
+                        "params": {
+                            "src": "img_19bee9ea",
+                            "logo": "img_02834cc2",
+                            "name": "Nadiya Babets",
+                            "role": "Consultora imobiliária · RE/MAX Albufeira Smart",
+                            "buttons": "+351 969 152 276 | Marque a sua visita",
+                            "phone": "+351 969 152 276"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-122261294-168-khxwo/clip.mp4",
+    "error": null
+}

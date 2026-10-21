@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\Clips\GenerateEffectJob;
 use App\Jobs\Clips\RenderEffectSampleJob;
+use App\Jobs\Clips\RenderEffectUseJob;
 use App\Jobs\Clips\RenderShowreelJob;
 use App\Services\Clips\Api\ElevenLabsSfxService;
 use App\Services\Clips\EffectLibrary;
@@ -39,6 +40,25 @@ class ClipsAnimadosSfx extends Component
     public ?string $detailKey = null;
 
     public string $sfxPrompt = '';
+
+    /** Optional mockup of the final frame — makes the new effect a template of it. */
+    public $sfxReference = null;
+
+    // "Use this effect": render it with your own inputs.
+    public bool $usoAberto = false;
+
+    /** @var array<string,string> text/JSON value per param key */
+    public array $usoCampos = [];
+
+    /** @var array<string,mixed> uploaded file per image param key */
+    public array $usoImagens = [];
+
+    public string $usoTexto = '';
+
+    public float $usoDuracao = 5;
+
+    /** Filename of the last render asked for (under uses/), or null. */
+    public ?string $usoSaida = null;
 
     public ?string $editingSfxId = null;
 
@@ -112,7 +132,7 @@ class ClipsAnimadosSfx extends Component
         if ($rec && ! $library->isBuiltin($rec->slug)) {
             return [
                 'kind' => 'custom', 'id' => $rec->id(), 'slug' => $rec->slug, 'label' => $rec->display_name,
-                'status' => $rec->status, 'enabled' => (bool) $rec->enabled, 'intro' => (bool) $rec->get('intro', false),
+                'status' => $rec->status, 'enabled' => (bool) $rec->enabled, 'intro' => (bool) $rec->get('intro', false), 'outro' => (bool) $rec->get('outro', false),
                 'description' => (string) $rec->description, 'error' => $rec->error,
                 'prompt' => (string) $rec->prompt,
                 'versions' => count($rec->get('versions', [])), 'record' => $rec,
@@ -125,7 +145,7 @@ class ClipsAnimadosSfx extends Component
             return [
                 'kind' => 'builtin', 'slug' => $this->detailKey,
                 'label' => EffectLibrary::BUILTIN_SAMPLES[$this->detailKey]['label'] ?? $this->detailKey,
-                'allowed' => $library->builtinAllowed($this->detailKey), 'intro' => $library->builtinIsIntro($this->detailKey),
+                'allowed' => $library->builtinAllowed($this->detailKey), 'intro' => $library->builtinIsIntro($this->detailKey), 'outro' => $library->builtinIsOutro($this->detailKey),
                 'override' => $override?->status, 'overrideId' => $override?->id(),
                 'prompt' => (string) ($override?->prompt ?? ''),
                 'versions' => $override ? count($override->get('versions', [])) : 0, 'record' => $override,
@@ -246,8 +266,10 @@ class ClipsAnimadosSfx extends Component
     public function editarSfx(string $id): void
     {
         $effect = $this->effects()->find($id);
-        if (! $effect || ! $effect->isActive()) {
-            return; // only live effects can be refined
+        // Live effects are refined; failed ones retried ("Try again"). Only one
+        // still generating is refused, since that job would overwrite the edit.
+        if (! $effect || ! in_array($effect->status, [EffectRecord::STATUS_ACTIVE, EffectRecord::STATUS_FAILED], true)) {
+            return;
         }
         $this->editingSfxId = $effect->id();
         $this->sfxEditPrompt = (string) $effect->prompt;
@@ -301,14 +323,18 @@ class ClipsAnimadosSfx extends Component
             // Refine an existing effect (custom or a built-in override). Snapshot the
             // current committed version first so it can be restored ("go back").
             $effect = $this->effects()->find($this->editingSfxId);
-            if ($effect && $effect->isActive()) {
+            if ($effect && in_array($effect->status, [EffectRecord::STATUS_ACTIVE, EffectRecord::STATUS_FAILED], true)) {
+                // A failed CREATE has no component to fall back on: retry it as a
+                // create, so a second failure marks it failed again instead of
+                // "active" with nothing to render.
+                $live = trim((string) $effect->tsx) !== '';
                 $effect->update([
-                    'versions' => $this->pushVersion($effect->get('versions', []), $this->snapshotVersion($effect)),
+                    'versions' => $live ? $this->pushVersion($effect->get('versions', []), $this->snapshotVersion($effect)) : $effect->get('versions', []),
                     'prompt' => trim($this->sfxEditPrompt),
-                    'status' => EffectRecord::STATUS_UPDATING,
+                    'status' => $live ? EffectRecord::STATUS_UPDATING : EffectRecord::STATUS_PENDING,
                     'error' => null,
                 ]);
-                GenerateEffectJob::dispatch($effect->id(), isEdit: true);
+                GenerateEffectJob::dispatch($effect->id(), isEdit: $live);
             }
         } elseif ($this->sfxOverrideSlug && app(EffectLibrary::class)->isBuiltin($this->sfxOverrideSlug)) {
             // Create an override of a built-in: same slug replaces it in the registry.
@@ -542,6 +568,10 @@ class ClipsAnimadosSfx extends Component
                 'sfxPrompt.min' => 'Give a bit more detail (at least 8 characters).',
             ],
         );
+        $this->validate(
+            ['sfxReference' => 'nullable|image|max:10240'],
+            ['sfxReference.image' => 'The reference must be an image.', 'sfxReference.max' => 'Image too large (max 10 MB).'],
+        );
 
         $effect = $this->effects()->create([
             'prompt' => trim($this->sfxPrompt),
@@ -553,8 +583,121 @@ class ClipsAnimadosSfx extends Component
             'status' => EffectRecord::STATUS_PENDING,
         ]);
 
+        if ($this->sfxReference) {
+            // Before dispatch: the job reads it to build the template.
+            $this->effects()->putReference($effect->id(), $this->sfxReference->getRealPath(),
+                $this->sfxReference->getClientOriginalExtension() ?: 'png');
+        }
+
         GenerateEffectJob::dispatch($effect->id());
-        $this->sfxPrompt = '';
+        $this->reset(['sfxPrompt', 'sfxReference']);
+    }
+
+    // ── use: render the effect with your own inputs ─────────────────────
+
+    /**
+     * The inputs the open effect takes: image slots (typed `image` in its
+     * paramSchema, plus `src` wherever it is declared) and every other param its
+     * sample carries, with the sample value as the default.
+     *
+     * @return array{imagens:array<int,string>,campos:array<string,string>,texto:string}
+     */
+    public function getUsoInputsProperty(): array
+    {
+        $d = $this->detail;
+        if ($d === null) {
+            return ['imagens' => [], 'campos' => [], 'texto' => ''];
+        }
+        [$texto, $params] = $this->amostraDe($d);
+        $rec = $d['record'] ?? null;
+        $schema = $rec instanceof EffectRecord ? (string) $rec->param_schema : '';
+
+        preg_match_all('/["\']?(\w+)["\']?\??\s*:\s*image\b/', $schema, $m);
+        $imagens = array_values(array_unique(array_merge(
+            preg_match('/["\']?\bsrc\b["\']?\??\s*:/', $schema) || array_key_exists('src', $params) ? ['src'] : [],
+            $m[1],
+        )));
+
+        $campos = [];
+        foreach ($params as $k => $v) {
+            if (! in_array($k, $imagens, true)) {
+                $campos[$k] = is_scalar($v) ? (string) $v : (string) json_encode($v, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            }
+        }
+
+        return ['imagens' => $imagens, 'campos' => $campos, 'texto' => (string) $texto];
+    }
+
+    public function abrirUso(): void
+    {
+        $inputs = $this->usoInputs;
+        $this->usoCampos = $inputs['campos'];
+        $this->usoTexto = $inputs['texto'];
+        $this->usoImagens = [];
+        $this->usoAberto = true;
+        $this->resetValidation();
+    }
+
+    public function fecharUso(): void
+    {
+        $this->reset(['usoAberto', 'usoCampos', 'usoImagens', 'usoTexto']);
+    }
+
+    public function renderizarUso(EffectLibrary $library): void
+    {
+        $d = $this->detail;
+        if ($d === null) {
+            return;
+        }
+        $this->validate([
+            'usoImagens.*' => 'nullable|image|max:20480',
+            'usoDuracao' => 'required|numeric|min:1|max:30',
+        ], [
+            'usoImagens.*.image' => 'That is not an image.',
+            'usoImagens.*.max' => 'Image too large (max 20 MB).',
+        ]);
+
+        $dir = $library->previewDir().'/uses';
+        @mkdir($dir.'/inputs', 0777, true);
+
+        // Complex params (lists, objects) are edited as JSON; anything that doesn't
+        // parse goes through as the plain string it is.
+        $params = [];
+        foreach ($this->usoCampos as $k => $v) {
+            $json = json_decode((string) $v, true);
+            $params[$k] = is_array($json) ? $json : (string) $v;
+        }
+        // Copied out of Livewire's temp dir: the render runs later, on a worker.
+        foreach ($this->usoImagens as $k => $file) {
+            if ($file && in_array($k, $this->usoInputs['imagens'], true)) {
+                $path = $dir.'/inputs/'.Str::uuid().'.'.strtolower($file->getClientOriginalExtension() ?: 'png');
+                copy($file->getRealPath(), $path);
+                $params[$k] = $path;
+            }
+        }
+
+        $this->usoSaida = $d['slug'].'-'.Str::lower(Str::random(10)).'.mp4';
+        RenderEffectUseJob::dispatch($d['slug'], $this->usoTexto, $params, $this->formato, (float) $this->usoDuracao, $dir.'/'.$this->usoSaida);
+    }
+
+    /** 'none' | 'rendering' | 'ready' | 'failed' for the last "use" render. */
+    public function getUsoEstadoProperty(EffectLibrary $library): string
+    {
+        if ($this->usoSaida === null) {
+            return 'none';
+        }
+        $out = $library->previewDir().'/uses/'.$this->usoSaida;
+
+        return match (true) {
+            is_file($out) => 'ready',
+            is_file($out.'.err') => 'failed',
+            default => 'rendering',
+        };
+    }
+
+    public function getUsoErroProperty(EffectLibrary $library): string
+    {
+        return $this->usoSaida ? (string) @file_get_contents($library->previewDir().'/uses/'.$this->usoSaida.'.err') : '';
     }
 
     /** Allow/disallow a live custom effect for use by the planner in generated videos. */
@@ -579,6 +722,21 @@ class ClipsAnimadosSfx extends Component
         if ($effect && $effect->isActive()) {
             $effect->update(['intro' => ! (bool) $effect->get('intro', false)]);
         }
+    }
+
+    /** Mark/unmark a custom effect as usable at the end of a video. */
+    public function alternarOutro(string $id): void
+    {
+        $effect = $this->effects()->find($id);
+        if ($effect && $effect->isActive()) {
+            $effect->update(['outro' => ! (bool) $effect->get('outro', false)]);
+        }
+    }
+
+    /** Mark/unmark a built-in effect as usable at the end of a video. */
+    public function alternarOutroBuiltin(string $slug, EffectLibrary $library): void
+    {
+        $library->toggleOutroBuiltin($slug);
     }
 
     /** Mark/unmark a built-in effect as usable at the start of a video. */
@@ -680,6 +838,9 @@ class ClipsAnimadosSfx extends Component
         // only ever missing one at a time, never on the pending/updating list — so
         // the render landed and the panel sat on "Rendering the half portrait
         // preview…" until the page was reloaded by hand.
+        if ($this->usoEstado === 'rendering') {
+            return true;
+        }
         $aberto = $this->detail['slug'] ?? null;
         if ($aberto !== null && ! app(EffectLibrary::class)->previewExists($aberto, $this->formato)) {
             return true;
@@ -707,6 +868,7 @@ class ClipsAnimadosSfx extends Component
                 'label' => $sample['label'],
                 'allowed' => ! in_array($slug, $disabledBuiltins, true),
                 'intro' => $library->builtinIsIntro($slug),
+                'outro' => $library->builtinIsOutro($slug),
                 'override' => $override?->status,   // null | pending | updating | active | failed
             ];
             if ($library->previewExists($slug)) {

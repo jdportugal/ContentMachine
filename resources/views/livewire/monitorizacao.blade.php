@@ -47,10 +47,10 @@
                 @endif
             </div>
             @if (trim($perfilUrl) === '')
-                <span class="font-mono text-xs" style="color:#FF8FA6">⚠ set the profile URL in
+                <span class="font-mono text-xs" style="color:#A93A48">⚠ set the profile URL in
                     <a href="{{ route('definicoes') }}" class="underline">Settings</a></span>
             @elseif (! $fonteDisponivel)
-                <span class="font-mono text-xs" style="color:#FF8FA6">⚠ Apify collection not configured (set APIFY_TOKEN in .env)</span>
+                <span class="font-mono text-xs" style="color:#A93A48">⚠ Apify collection not configured (set APIFY_TOKEN in .env)</span>
             @else
                 <span class="font-mono text-[0.62rem] text-ink-faint truncate max-w-full">{{ $perfilUrl }}</span>
             @endif
@@ -76,13 +76,13 @@
             <x-metric-card label="Followers" :value="\App\Services\Monitoring\MonitoringStats::numero($subscribers)" unit="channel" :accent="$meta['cor']" />
         @endif
         @if ($engajamento !== null && ! $semMetricas)
-            <x-metric-card label="Engagement rate" :value="number_format($engajamento, 1).'%'" unit="interactions / views" accent="#4DE08A" />
+            <x-metric-card label="Engagement rate" :value="number_format($engajamento, 1).'%'" unit="interactions / views" accent="#3D7A4C" />
         @endif
         @if (! empty($melhores))
             @php $topo = $melhores[0]; $topoThumb = trim((string) ($topo['thumbnail'] ?? '')); @endphp
             <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm px-5 py-4 shadow-engraved min-w-0">
                 <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full" style="background: #E8B44C; box-shadow: 0 0 6px #E8B44C"></span>
+                    <span class="w-2 h-2 rounded-full" style="background: #A8701A; box-shadow: 0 0 6px #A8701A"></span>
                     <span class="eyebrow">Best post</span>
                 </div>
                 <div class="mt-2 flex items-center gap-3 min-w-0">
@@ -112,15 +112,15 @@
 
     {{-- ═══════════ Stats over time — a curve per metric (day / month) ═══════════ --}}
     @php
-        $corBase = $meta['cor'] ?? '#4DE0E0';
+        $corBase = $meta['cor'] ?? '#2C6E6E';
         // One curve per stat. Kept only when there's something to show.
         $metricas = [
             ['key' => 'views',       'label' => 'Views',    'cor' => $corBase],
-            ['key' => 'likes',       'label' => 'Likes',    'cor' => '#FF5C7A'],
-            ['key' => 'comentarios', 'label' => 'Comments', 'cor' => '#9C7DFF'],
-            ['key' => 'partilhas',   'label' => 'Shares',   'cor' => '#4DE0E0'],
-            ['key' => 'guardados',   'label' => 'Saves',    'cor' => '#FFB347'],
-            ['key' => 'posts',       'label' => 'Posts',    'cor' => '#4DE08A'],
+            ['key' => 'likes',       'label' => 'Likes',    'cor' => '#A93A48'],
+            ['key' => 'comentarios', 'label' => 'Comments', 'cor' => '#5E5590'],
+            ['key' => 'partilhas',   'label' => 'Shares',   'cor' => '#2C6E6E'],
+            ['key' => 'guardados',   'label' => 'Saves',    'cor' => '#A06E1C'],
+            ['key' => 'posts',       'label' => 'Posts',    'cor' => '#3D7A4C'],
         ];
         $somaAmbos = fn (string $k) => collect($serieDia)->sum($k) + collect($serieSemana)->sum($k) + collect($serieMes)->sum($k);
         $metricas = array_values(array_filter($metricas, fn ($m) => $somaAmbos($m['key']) > 0));
@@ -305,7 +305,7 @@
                             @php $bm = config('contentmachine.plataformas_meta.'.$linha['plataforma']); @endphp
                             <tr class="border-t border-ink-soft/10">
                                 <td class="py-2 pr-3 font-body text-ink">
-                                    <span style="color: {{ $bm['cor'] ?? '#4DE0E0' }}">{{ $bm['glifo'] ?? '◦' }}</span>
+                                    <span style="color: {{ $bm['cor'] ?? '#2C6E6E' }}">{{ $bm['glifo'] ?? '◦' }}</span>
                                     {{ $bm['label'] ?? $linha['plataforma'] }}
                                 </td>
                                 <td class="py-2 px-3 text-right font-mono text-ink-soft">{{ $linha['seguidores'] > 0 ? \App\Services\Monitoring\MonitoringStats::numero($linha['seguidores']) : '—' }}</td>

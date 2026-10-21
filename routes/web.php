@@ -1,18 +1,35 @@
 <?php
 
 use App\Livewire\Ativos;
+use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
+use App\Livewire\AvatarGen;
 use App\Livewire\Clips;
 use App\Livewire\ClipsAnimados;
+use App\Livewire\ClipsAnimadosSfx;
+use App\Livewire\ClipsAnimadosVfx;
+use App\Livewire\ContentRepurpose;
 use App\Livewire\Definicoes;
 use App\Livewire\DesignSystem;
 use App\Livewire\Monitorizacao;
 use App\Livewire\Noticias;
 use App\Livewire\Painel;
+use App\Livewire\PostsGenerator;
 use App\Livewire\Publicacoes\Oficina;
 use App\Livewire\Publicacoes\Publicacoes;
 use App\Livewire\Rascunhos;
+use App\Services\Avatars\AvatarStore;
+use App\Services\Clips\BackgroundLibrary;
+use App\Services\Clips\BackgroundPortability;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\EffectPortability;
+use App\Services\Clips\ImageLibrary;
+use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectStore;
+use App\Services\Clips\Store\VfxStore;
+use App\Services\Projects\ProjectResources;
+use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +38,11 @@ use Illuminate\Support\Facades\Storage;
 
 // ── Authentication ───────────────────────────────────────────────────────────
 // The way in and out. Everything else lives in the `auth` group below.
-Route::livewire('/login', \App\Livewire\Auth\Login::class)
+Route::livewire('/login', Login::class)
     ->name('login')
     ->middleware('guest');
 
-Route::livewire('/register', \App\Livewire\Auth\Register::class)
+Route::livewire('/register', Register::class)
     ->name('register')
     ->middleware('guest');
 
@@ -51,8 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/clips', Clips::class)->name('clips');
     // Content Transformer subtabs. Registered before '/clips/{slug}/video' so the
     // literal segments are never swallowed by that wildcard.
-    Route::livewire('/clips/posts', \App\Livewire\PostsGenerator::class)->name('clips.posts');
-    Route::livewire('/clips/repurpose', \App\Livewire\ContentRepurpose::class)->name('clips.repurpose');
+    Route::livewire('/clips/posts', PostsGenerator::class)->name('clips.posts');
+    Route::livewire('/clips/repurpose', ContentRepurpose::class)->name('clips.repurpose');
 
     // Serve o vídeo do clip para pré-visualização. Devolve o melhor disponível:
     // short final (com música > legendado) ou, se ainda só foi cortado, o corte cru.
@@ -83,8 +100,8 @@ Route::middleware('auth')->group(function () {
         return response()->file($path);
     })->name('clips.musica');
     Route::livewire('/clips-animados', ClipsAnimados::class)->name('clips-animados');
-    Route::livewire('/clips-animados/sfx', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx');
-    Route::livewire('/clips-animados/vfx', \App\Livewire\ClipsAnimadosVfx::class)->name('clips-animados.vfx');
+    Route::livewire('/clips-animados/sfx', ClipsAnimadosSfx::class)->name('clips-animados.sfx');
+    Route::livewire('/clips-animados/vfx', ClipsAnimadosVfx::class)->name('clips-animados.vfx');
     // Backgrounds live inside the Animated Clips component, but they belong to the
     // Effects Studio's tab strip — which links, so the view needs a URL of its own.
     Route::livewire('/clips-animados/backgrounds', ClipsAnimados::class)
@@ -95,7 +112,7 @@ Route::middleware('auth')->group(function () {
     // 404 until the render finishes (or forever, if it failed).
     Route::get('/clips-animados/vfx/{id}/media', function (string $id) {
         abort_unless((bool) preg_match('/^[a-z0-9-]+$/', $id), 404);
-        $store = app(\App\Services\Clips\Store\VfxStore::class);
+        $store = app(VfxStore::class);
         $vfx = $store->find($id);
         abort_unless($vfx !== null, 404);
         $path = $store->videoFor($vfx);
@@ -107,7 +124,7 @@ Route::middleware('auth')->group(function () {
     })->name('clips-animados.vfx-media');
     // Per-effect detail page (custom effect id or built-in slug). One segment, so it
     // never collides with the /sfx/{slug}/preview and /sfx/{slug}/audio asset routes.
-    Route::livewire('/clips-animados/sfx/{key}', \App\Livewire\ClipsAnimadosSfx::class)->name('clips-animados.sfx.detail');
+    Route::livewire('/clips-animados/sfx/{key}', ClipsAnimadosSfx::class)->name('clips-animados.sfx.detail');
 
     // Serve uma imagem carregada OU gerada (miniatura), pelo nome de ficheiro.
     // Generated images live in clips/generated — without that fallback the review
@@ -125,11 +142,24 @@ Route::middleware('auth')->group(function () {
 
     // Serve an image-library thumbnail (per-project vault), by id.
     Route::get('/clips-animados/library-image/{id}', function (string $id) {
-        $img = app(\App\Services\Clips\ImageLibrary::class)->find($id);
+        $img = app(ImageLibrary::class)->find($id);
         abort_unless($img && is_file($img['path']), 404);
 
         return response()->file($img['path']);
     })->name('clips-animados.library-image');
+
+    // Serve a project resource image (Design System → Project resources): agent-photo, logo or an extra image's file name.
+    Route::get('/project-resources/{name}', function (string $name) {
+        $r = app(ProjectResources::class);
+        $path = match ($name) {
+            'agent-photo' => $r->agentPhotoPath(),
+            'logo' => $r->logoPath(),
+            default => collect($r->images())->firstWhere('file', $name)['path'] ?? null,
+        };
+        abort_unless($path && is_file($path), 404);
+
+        return response()->file($path);
+    })->name('project-resources.image');
 
     // Serve any image belonging to a clip (uploads or generated), by clip id + image id.
     Route::get('/clips-animados/{id}/image/{imageId}', function (string $id, string $imageId) {
@@ -141,6 +171,51 @@ Route::middleware('auth')->group(function () {
 
         return response()->file($disk->path($img['path']));
     })->name('clips-animados.clip-image');
+
+    // One of a clip's voiceover takes, for the "pick the voice" player.
+    Route::get('/clips-animados/{id}/take/{n}', function (string $id, int $n) {
+        $path = app(ClipStore::class)->find($id)?->meta['voice_takes'][$n] ?? null;
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        abort_unless(is_string($path) && $disk->exists($path), 404);
+
+        return response()->file($disk->path($path));
+    })->whereNumber('n')->name('clips-animados.take');
+
+    // A property walkthrough's cleaned-up footage or its filmstrip, for the section picker.
+    Route::get('/clips-animados/{id}/property/{what}', function (string $id, string $what) {
+        $path = app(ClipStore::class)->find($id)?->meta['property'][$what === 'strip' ? 'strip' : 'preview'] ?? null;
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        abort_unless(is_string($path) && $disk->exists($path), 404);
+
+        return response()->file($disk->path($path));
+    })->whereIn('what', ['footage', 'strip'])->name('clips-animados.property');
+
+    // A listing clip's property video (a light preview) or its filmstrip, for the editor's moment picker.
+    // Made on first use and kept beside the clip's uploads.
+    Route::get('/clips-animados/{id}/listing-video/{what}', function (string $id, string $what) {
+        $source = app(ClipStore::class)->find($id)?->meta['listing_video'] ?? null;
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        abort_unless(is_string($source) && $disk->exists($source), 404);
+        $out = 'clips/listing-preview/'.$id.($what === 'strip' ? '-strip.jpg' : '.mp4');
+        if (! $disk->exists($out)) {
+            $editor = app(PropertyVideoEditor::class);
+            $what === 'strip' ? $editor->filmstrip($disk->path($source), $disk->path($out)) : $editor->preview($disk->path($source), $disk->path($out));
+        }
+
+        return response()->file($disk->path($out));
+    })->whereIn('what', ['footage', 'strip'])->name('clips-animados.listing-video');
+
+    // A property room's real start frame or its staged still, for the review card.
+    Route::get('/clips-animados/{id}/room/{i}/{which}', function (string $id, int $i, string $which) {
+        $anim = app(ClipStore::class)->find($id)?->meta['property']['rooms'][$i]['anim'] ?? [];
+        $path = str_starts_with($which, 'c')
+            ? ($anim['candidates'][(int) substr($which, 1)]['path'] ?? null)   // one of the modernised images to choose from
+            : ($anim[['start' => 'start_frame', 'end' => 'end_frame', 'staged' => 'staged'][$which] ?? ''] ?? null);
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        abort_unless(is_string($path) && $disk->exists($path), 404);
+
+        return response()->file($disk->path($path));
+    })->whereNumber('i')->where('which', 'start|end|staged|c\d+')->name('clips-animados.room');
 
     // Serve/download a clip's final file (vault-backed, resolved for the active project).
     Route::get('/clips-animados/{id}/media', function (string $id) {
@@ -156,13 +231,13 @@ Route::middleware('auth')->group(function () {
     // — component source, metadata and its sound — for backup or moving between installs.
     Route::get('/clips-animados/sfx/{id}/export', function (string $id) {
         abort_unless((bool) preg_match('/^[a-z0-9-]+$/i', $id), 404);
-        $payload = app(\App\Services\Clips\EffectPortability::class)->export($id);
+        $payload = app(EffectPortability::class)->export($id);
         abort_if($payload === null, 404);
 
         $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $name = $id === 'all' ? 'brand-machine-sfx.json' : 'sfx-'.$id.'.json';
 
-        return response()->streamDownload(fn () => print($json), $name, [
+        return response()->streamDownload(fn () => print ($json), $name, [
             'Content-Type' => 'application/json',
         ]);
     })->name('clips-animados.sfx-export');
@@ -171,13 +246,13 @@ Route::middleware('auth')->group(function () {
     // component source or mp4, plus metadata — for backup or moving between installs.
     Route::get('/clips-animados/background/{id}/export', function (string $id) {
         abort_unless((bool) preg_match('/^[a-z0-9-]+$/i', $id), 404);
-        $payload = app(\App\Services\Clips\BackgroundPortability::class)->export($id);
+        $payload = app(BackgroundPortability::class)->export($id);
         abort_if($payload === null, 404);
 
         $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $name = $id === 'all' ? 'brand-machine-backgrounds.json' : 'background-'.$id.'.json';
 
-        return response()->streamDownload(fn () => print($json), $name, [
+        return response()->streamDownload(fn () => print ($json), $name, [
             'Content-Type' => 'application/json',
         ]);
     })->name('clips-animados.background-export');
@@ -199,18 +274,27 @@ Route::middleware('auth')->group(function () {
     // SFX studio. 404 when the effect has no sound.
     Route::get('/clips-animados/sfx/{slug}/audio', function (string $slug) {
         abort_unless((bool) preg_match('/^[a-z][a-z0-9-]*$/', $slug), 404);
-        $path = app(\App\Services\Clips\Store\EffectStore::class)->audioPath($slug);
+        $path = app(EffectStore::class)->audioPath($slug);
         abort_unless($path !== null && is_file($path), 404);
 
         return response()->file($path);
     })->name('clips-animados.sfx-audio');
 
+    // Serve an effect rendered with the user's own inputs ("use this effect").
+    Route::get('/clips-animados/sfx-use/{file}', function (string $file) {
+        abort_unless((bool) preg_match('/^[a-z][a-z0-9-]*\.mp4$/', $file), 404);
+        $path = app(EffectLibrary::class)->previewDir().'/uses/'.$file;
+        abort_unless(is_file($path), 404);
+
+        return response()->download($path, $file, [], request()->boolean('dl') ? 'attachment' : 'inline');
+    })->name('clips-animados.sfx-use');
+
     // Serve a custom background's preview: a code background's cached render (design
     // aware) or a video background's mp4 file. 404 until ready. Keyed by record id.
     Route::get('/clips-animados/background/{id}/preview', function (string $id) {
-        $bg = app(\App\Services\Clips\Store\BackgroundStore::class)->find($id);
+        $bg = app(BackgroundStore::class)->find($id);
         abort_unless($bg !== null, 404);
-        $path = app(\App\Services\Clips\BackgroundLibrary::class)->previewFileFor($bg);
+        $path = app(BackgroundLibrary::class)->previewFileFor($bg);
         abort_unless($path !== null && is_file($path), 404);
 
         return response()->file($path);
@@ -219,7 +303,7 @@ Route::middleware('auth')->group(function () {
     // Serve the cached backgrounds reel (one video cycling through every background)
     // for the current design system + background set. 404 until it has been rendered.
     Route::get('/clips-animados/background-reel', function () {
-        $path = app(\App\Services\Clips\BackgroundLibrary::class)->reelPath();
+        $path = app(BackgroundLibrary::class)->reelPath();
         abort_unless(is_file($path), 404);
 
         return response()->file($path);
@@ -233,6 +317,24 @@ Route::middleware('auth')->group(function () {
 
         return response()->file($path);
     })->name('clips-animados.showreel');
+
+    // Avatar Gen — fal.ai lip-sync. Deliberately not in the side menu yet.
+    Route::livewire('/avatar-gen', AvatarGen::class)->name('avatar-gen');
+
+    // Serve an Avatar Gen result: inline for the preview player, ?download=1 to save it.
+    // 404 until the lip-sync finishes (or forever, if it failed).
+    Route::get('/avatar-gen/{id}/media', function (string $id) {
+        abort_unless((bool) preg_match('/^[a-z0-9-]+$/', $id), 404);
+        $store = app(AvatarStore::class);
+        $avatar = $store->find($id);
+        abort_unless($avatar !== null, 404);
+        $path = $store->videoFor($avatar);
+        abort_unless($path !== null, 404);
+
+        return request()->boolean('download')
+            ? response()->download($path)
+            : response()->file($path);
+    })->name('avatar-gen.media');
 
     Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');
     Route::livewire('/publicacoes/{tipo}', Oficina::class)->name('publicacoes.oficina');

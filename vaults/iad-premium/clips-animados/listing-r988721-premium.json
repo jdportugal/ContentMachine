@@ -1,0 +1,1239 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 remodelado na Nazaré com vista para o mar",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-nazare-51m2/r988721",
+            "agent": "Nuno Narciso",
+            "phone": "+351933197327",
+            "agency": "IAD Portugal",
+            "hook": "Vista sobre o mar e a Praia da Nazaré.",
+            "voiceover": "Vista sobre o mar e a Praia da Nazaré. Se queres vender ou comprar casa, fala com o Nuno Narciso da IAD. A Nazaré é conhecida pelas praias, pela gastronomia e pelas ondas gigantes. Um apartamento de dois quartos, num primeiro andar, totalmente remodelado e pronto a habitar. Hall com roupeiro, dois quartos com roupeiros embutidos e uma cozinha equipada. Pavimento radiante em todas as divisões, ar condicionado e janelas com vidros duplos. Eletricidade, canalização e esgotos renovados. Uma varanda com vista panorâmica sobre o Atlântico, e boa exposição solar. Para viver, para férias, ou para investir. Duzentos e oitenta mil euros. Para visitar, fale com o Nuno Narciso, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "vista da varanda sobre o mar e a praia",
+                    "vo": "Vista sobre o mar e a Praia da Nazaré.",
+                    "caption": "Nazaré, vista mar"
+                },
+                {
+                    "photo": "vista geral da praia / vila da Nazaré",
+                    "vo": "A Nazaré é conhecida pelas praias, pela gastronomia e pelas ondas gigantes.",
+                    "caption": "Praia da Nazaré"
+                },
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Um apartamento de dois quartos, num primeiro andar, totalmente remodelado e pronto a habitar.",
+                    "caption": "T2 remodelado"
+                },
+                {
+                    "photo": "hall de entrada com roupeiro",
+                    "vo": "Hall com roupeiro,",
+                    "caption": "Pronto a habitar"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "(continuação da frase anterior, sobre a sala)",
+                    "caption": "Sala luminosa"
+                },
+                {
+                    "photo": "quarto principal com roupeiro embutido",
+                    "vo": "dois quartos com roupeiros embutidos",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "e uma cozinha equipada.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "segundo quarto / pormenor do pavimento e janelas",
+                    "vo": "Pavimento radiante em todas as divisões, ar condicionado e janelas com vidros duplos.",
+                    "caption": "Pavimento radiante"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "Eletricidade, canalização e esgotos renovados.",
+                    "caption": "Tudo renovado"
+                },
+                {
+                    "photo": "varanda com vista para o Atlântico",
+                    "vo": "Uma varanda com vista panorâmica sobre o Atlântico, e boa exposição solar. Para viver, para férias, ou para investir.",
+                    "caption": "Varanda sobre o Atlântico"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e oitenta mil euros. Para visitar, fale com o Nuno Narciso, da IAD Portugal.",
+                    "caption": "280.000 € · Nuno Narciso · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O texto fala em 'casas de banho' (plural), mas os detalhes indicam 1 casa de banho. Ficou de fora da narração; confirmar antes de mostrar mais de uma casa de banho.",
+                "O anúncio não indica a distância à praia. A narração fala só da vista e não diz 'a poucos passos' nem dá minutos até à praia."
+            ],
+            "message": "Boa tarde Sr. Nuno, fiz este vídeo do seu apartamento T2 na Nazaré para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Apartamento 2 quartos de 51 m² em Nazaré",
+            "price": 280000,
+            "details": {
+                "Preço": "280 000 €",
+                "Localização": "Nazaré, 2450-175",
+                "Referência": "988721",
+                "Área Bruta m²": "51",
+                "Quartos": 2,
+                "Ano de Construção": 1977,
+                "Certificado Energético": "E",
+                "Características": "51 m² área bruta, 50 m² úteis, 1 casa de banho, Varanda, Ar condicionado, Sala de estar, Fibra ótica, property.feature.heating, Construído em 1977, Andar: 1, Porta blindada"
+            },
+            "ami": "11220",
+            "licence": "11220"
+        },
+        "agent_photo": "clips/uploads/R5hxvYIKvalzWcgtEEme5m3J7igiiX7RAs1sPYp8.jpg",
+        "listing_video": "clips/uploads/iiDJf8tvrBdz00Sp9ZOCEMwE2quxZ2pWLBKPHZJe.mp4",
+        "after_intro": "clips/uploads/W8tgMst17824dVuLtBnVLSn7SO5y8sSLYegBU930.mp4",
+        "after_intro_line": "Se queres vender ou comprar casa, fala com o Nuno Narciso da IAD",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Nuno Narciso - and phone number - +351933197327. Agency: IAD Portugal.\nThe agent's photo is Nuno Narciso.jpg; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Vista sobre o mar e a Praia da Nazaré.».\n\nSuggested scenes (photo → on-screen caption):\n- vista da varanda sobre o mar e a praia → «Nazaré, vista mar»\n- vista geral da praia / vila da Nazaré → «Praia da Nazaré»\n- fachada do prédio → «T2 remodelado»\n- hall de entrada com roupeiro → «Pronto a habitar»\n- sala de estar → «Sala luminosa»\n- quarto principal com roupeiro embutido → «Dois quartos»\n- cozinha equipada → «Cozinha equipada»\n- segundo quarto / pormenor do pavimento e janelas → «Pavimento radiante»\n- casa de banho → «Tudo renovado»\n- varanda com vista para o Atlântico → «Varanda sobre o Atlântico»\n- end card → «280.000 € · Nuno Narciso · IAD Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 51 m² em Nazaré\nPreço\n280 000 €\nLocalização\nNazaré, 2450-175\nReferência\n988721\nÁrea Bruta m²\n51\nQuartos\n2\nAno de Construção\n1977\nCertificado Energético\nE\nCaracterísticas\n51 m² área bruta, 50 m² úteis, 1 casa de banho, Varanda, Ar condicionado, Sala de estar, Fibra ótica, property.feature.heating, Construído em 1977, Andar: 1, Porta blindada\n\nDescrição\nEXCLUSIVO | UMA OPORTUNIDADE RARA NA NAZARÉ!\n VIVER COM O MAR AOS SEUS PÉS É UM LUXO… E AGORA PODE SER O SEU DIA A DIA! \nSe procura um apartamento moderno, elegante e totalmente remodelado, com uma vista absolutamente deslumbrante sobre o mar e a Praia da Nazaré, acabou de encontrar.\n Apartamento T2 | Totalmente Remodelado | Pronto a Habitar\nEste imóvel foi renovado ao detalhe para oferecer o máximo conforto, qualidade e funcionalidade.\n\n Principais características:\n\n✅ Cozinha moderna equipada com placa, forno e exaustor;\n✅ Apartamento totalmente elétrico;\n✅ Pavimento radiante em todas as divisões;\n✅ Janelas em PVC oscilo-batentes com vidros duplos;\n✅ Dois quartos com roupeiros embutidos;\n✅ Hall de entrada com roupeiro embutido;\n✅ Casas de banho modernas com base de duche (poliban), espelho com iluminação e aquecimento;\n✅ Eletricidade, canalização e esgotos totalmente renovados;\n✅ Excelente exposição solar;\n✅ Prédio com condomínio organizado;\n✅ Varanda com uma vista panorâmica incrível sobre o Oceano Atlântico.\n\n Imagine-se a tomar o pequeno-almoço com o som das ondas ou a terminar o dia a apreciar um pôr do sol único sobre o mar.\n Ideal para:\n✔️ Habitação própria;\n✔️ Casa de férias;\n✔️ Investimento com elevado potencial de rentabilidade.\n A Nazaré é um dos destinos mais procurados de Portugal, conhecida pelas suas praias, gastronomia, qualidade de vida e pelas famosas ondas gigantes.\n\n📞 Não perca esta oportunidade! Agende já a sua visita antes que seja tarde.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "real-estate-3.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Nazaré: ondas gigantes e mercado imobiliário",
+            "summary": "A Nazaré tornou-se mundialmente famosa pelas ondas gigantes da Praia do Norte, alimentadas pelo Canhão da Nazaré, onde foram batidos vários recordes do Guinness. Em Portugal, o preço mediano da habitação atingiu um máximo histórico em 2025, segundo o INE.",
+            "timeline": [
+                {
+                    "label": "McNamara surfa onda de 23,77 m",
+                    "sublabel": "novembro de 2011"
+                },
+                {
+                    "label": "Koxa bate o recorde com 24,38 m",
+                    "sublabel": "8 de novembro de 2017"
+                },
+                {
+                    "label": "Steudtner surfa onda de 26,21 m",
+                    "sublabel": "29 de outubro de 2020"
+                },
+                {
+                    "label": "Guinness homologa recorde de Steudtner",
+                    "sublabel": "maio de 2022"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Recorde de onda surfada na Nazaré (Guinness)",
+                    "value": 26.21,
+                    "unit": "m"
+                },
+                {
+                    "label": "Profundidade máxima do Canhão da Nazaré (aprox.)",
+                    "value": 5000,
+                    "unit": "m"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano da habitação (2025 vs 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Recordes na Praia do Norte",
+                    "left": {
+                        "title": "2011 – Garrett McNamara",
+                        "points": [
+                            "23,77 m",
+                            "1.º recorde Guinness na Nazaré"
+                        ]
+                    },
+                    "right": {
+                        "title": "2020 – Sebastian Steudtner",
+                        "points": [
+                            "26,21 m",
+                            "Recorde mundial atual homologado"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "As ondas gigantes formam-se na Praia do Norte, graças ao Canhão da Nazaré",
+                "O canhão submarino chega a quase 5000 m de profundidade",
+                "A Nazaré tem três recordes mundiais de surf de ondas grandes",
+                "Em Portugal, o preço mediano da habitação foi de 2076 €/m² em 2025, um máximo histórico"
+            ],
+            "sources": [
+                "https://rfm.pt/atualidade/13035/surfou-uma-onda-de-2621-metros-na-nazare-e-teve-entrada-no-guinness-world-records",
+                "https://www.dnoticias.pt/2022/5/24/312452-sebastian-steudtner-novo-recordista-da-maior-onda-do-mundo-surfada-na-nazare/",
+                "https://lisboasecreta.co/sebastian-steudtner-recorde-guiness-maior-onda-nazare/",
+                "https://www.guinnessworldrecords.com/news/2013/1/video-has-he-done-it-again-watch-garrett-mcnamara-surf-100-foot-wave-in-portugal-46815",
+                "https://www.surfertoday.com/surfing/14291-rodrigo-koxa-breaks-the-world-record-for-the-biggest-wave-ever-surfed",
+                "https://en.wikipedia.org/wiki/Rodrigo_Koxa",
+                "https://www.redbull.com/br-pt/surf-por-que-nazare-maior-onda-mundo",
+                "https://olhardigital.com.br/2024/07/24/ciencia-e-espaco/como-se-formam-as-ondas-gigantes-de-nazare-em-portugal/",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/"
+            ]
+        },
+        "suggested": {
+            "title": "T2 remodelado na Nazaré com vista para o mar",
+            "description": "Da varanda deste T2 vê-se a praia da Nazaré e o Atlântico 🌊\n\nFica num primeiro andar na terra das ondas gigantes. Foi totalmente remodelado e está pronto a habitar.\nTem hall com roupeiro, dois quartos com roupeiros embutidos, sala e cozinha equipada.\nTodas as divisões têm pavimento radiante. Há também ar condicionado, vidros duplos e porta blindada.\nA eletricidade, a canalização e os esgotos foram renovados. Tem fibra ótica e boa exposição solar.\nServe para viver, para passar férias ou para investir.\nT2 · 51 m² brutos · 50 m² úteis · 1 casa de banho · Construído em 1977 · Certificado energético E · Ref. 988721 · 280.000 €\n\nPara visitar, fale com o Nuno Narciso, da IAD Portugal: +351 933 197 327",
+            "tags": [
+                "imobiliario",
+                "apartamento",
+                "t2",
+                "nazare",
+                "casasnanazare",
+                "vistamar",
+                "praiadanazare",
+                "oeste",
+                "leiria",
+                "investimentoimobiliario",
+                "casadeferias",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": [],
+        "beat_opening": {
+            "clips": [
+                "vid_24770ef9",
+                "vid_412df815",
+                "vid_c8c8e142",
+                "vid_3709007c",
+                "vid_91dc8059"
+            ]
+        }
+    },
+    "id": "listing-r988721-premium",
+    "created_at": "2026-10-16T12:38:20+00:00",
+    "updated_at": "2026-10-20T09:37:06+00:00",
+    "source_path": "clips/uploads/hlnTktT3vFDMxXQIwk83AjrBhc0KEoFAWmLdnhpv.mp3",
+    "images": [
+        {
+            "id": "img_dbd17032",
+            "path": "clips/uploads/C5qfEDVhDE2RcIAtYuAUPZucb4Nb0oBxkYS7sh7t.jpg",
+            "description": "Retrato do consultor Nuno Narciso, da IAD Portugal.",
+            "name": "Nuno Narciso.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_23bad64d",
+            "path": "clips/uploads/R5E6uMNxb7rtQAKxpagMz95LFH6mpULoUTr72q9S.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "vid_68fbda24",
+            "path": "clips/uploads/yPjooNwHDuH1POiFwWZxK98t7Z4pEtSlBgMO55Dw.mp4",
+            "description": "Quarto: Quarto de paredes claras com cama de solteiro branca com gavetões, cadeira estofada branca e pavimento em madeira clara. (vídeo, 3,9 s)",
+            "name": "quarto.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_8a2f3693",
+            "path": "clips/uploads/51LzDLT3zaVDnuJiH1p9rNFeubY8D3pBxfBBoUnL.mp4",
+            "description": "Casa de banho: Duche com resguardo em vidro, coluna de duche cromada com chuveiro de teto e revestimento cerâmico bege às riscas, refletido depois no espelho retroiluminado. (vídeo, 3,5 s)",
+            "name": "casa-de-banho.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_b9053d52",
+            "path": "clips/uploads/qhP6Wes6wKxBvFXDiKeKffNLpoCXFRnOvRbNdIqi.mp4",
+            "description": "Casa de banho 2: Espelho retroiluminado que reflete o duche, sobre um lavatório branco com torneira cromada e paredes em cerâmica bege às riscas. (vídeo, 3,4 s)",
+            "name": "casa-de-banho-2.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_37502ed3",
+            "path": "clips/uploads/vDxhocjgWWtHJnMWfGuVRnHcJ0Hu8Pzg3589iT2M.mp4",
+            "description": "Hall: Roupeiro embutido de portas brancas lisas com puxadores metálicos. (vídeo, 2,8 s)",
+            "name": "hall.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_412df815",
+            "path": "clips/uploads/32S3zFDzLdrpFo7t7YX9i6VPn9Wv3CnDdQsZzsvm.mp4",
+            "description": "Sala: Sala ampla com sofá de canto em pele preta, janela e portas de vidro abertas para a varanda, pavimento laminado claro e muita luz natural. (vídeo, 5,0 s)",
+            "name": "sala.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_3709007c",
+            "path": "clips/uploads/MkWxFjXYrnF1TehrztKdfWmybckDZrvltOYiXDIC.mp4",
+            "description": "Cozinha: Cozinha em L com armários brancos lacados, bancada em madeira, forno e placa encastrados e lava-loiça em inox. (vídeo, 4,0 s)",
+            "name": "cozinha.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_62e955e8",
+            "path": "clips/uploads/7dbjZYq9evOhQ774H58lkTecs3HfjsU28oduReMW.mp4",
+            "description": "Cozinha 2: Placa vitrocerâmica e forno preto encastrado, bancada em madeira e lava-loiça em inox sob azulejos claros. (vídeo, 3,9 s)",
+            "name": "cozinha-2.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_91dc8059",
+            "path": "clips/uploads/qUlZhjqRnUypXpSS5Fgh9AG7ZNDRlf4ogrhXzD8u.mp4",
+            "description": "Quarto principal: Cama de casal com cabeceira estofada bege, almofadas e roupa de cama às riscas, junto a paredes claras. (vídeo, 2,1 s)",
+            "name": "quarto-principal.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_24770ef9",
+            "path": "clips/uploads/8o8stjCqlfi3M9dI9RZxEyVFtMdNhUwO1Epfml97.mp4",
+            "description": "Vista mar: Vista sobre a rua e os telhados da Nazaré até à baía e ao mar, com a costa e as colinas ao fundo sob céu nublado. (vídeo, 2,4 s)",
+            "name": "vista-mar.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_c8c8e142",
+            "path": "clips/uploads/Kw0JlI13D8tCIQm6FGlImPW78kPnDCWpY9PWsalU.mp4",
+            "description": "Vista cidade: Vista sobre telhados e prédios brancos da vila, com árvores e céu azul com nuvens. (vídeo, 2,6 s)",
+            "name": "vista-cidade.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_9154fe97",
+            "path": "clips/uploads/9DORTRaN61qe7zmUpc1BkezCQjvbkvU4ZK7TCBqW.mp4",
+            "description": "Sala 2: Zona de refeições com mesa de vidro e cadeiras brancas, cozinha aberta ao fundo e porta de entrada em madeira, sobre pavimento laminado. (vídeo, 2,0 s)",
+            "name": "sala-2.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "vid_bd2ef877",
+            "path": "clips/uploads/1hOkbDYH72MK7m56pCbgM8moHCMO7YnP9hKvqpdG.mp4",
+            "description": "Sala 3: Sala em open space com móvel de TV branco, mesa de vidro com cadeiras brancas e cozinha ao fundo, com luz natural. (vídeo, 2,0 s)",
+            "name": "sala-3.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        },
+        {
+            "id": "img_b2180761",
+            "path": "clips/uploads/vMDRk3WEIfIl9eOuhHGkSzy3gaCk1hq1U3vUtc0Y.mp4",
+            "description": "",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/hlnTktT3vFDMxXQIwk83AjrBhc0KEoFAWmLdnhpv.mp3",
+    "transcript": {
+        "duration": 45.439998626708984,
+        "text": "Vista sobre o mar e a praia da Nazaré Se queres vender ou comprar casa fala com o Nuno Narciso da IAD A Nazaré é conhecida pelas praias pela gastronomia e pelas ondas gigantes Um apartamento de dois quartos num primeiro andar totalmente remodelado e pronto a habitar Hall com roupeiro dois quartos com roupeiros embutidos e uma cozinha equipada Pavimento radiante em todas as divisões ar condicionado e janelas com vidros duplos Eletricidade canalização e esgotos renovados Uma varanda com vista panorâmica sobre o Atlântico e boa exposição solar Para viver para férias ou para investir 280 mil euros Para visitar fale com o Nuno Narciso da IAD de Portugal",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Vista",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "sobre",
+                "start": 0.4000000059604645,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "o",
+                "start": 0.699999988079071,
+                "end": 1.0800000429153442
+            },
+            {
+                "word": "mar",
+                "start": 1.0800000429153442,
+                "end": 1.0800000429153442
+            },
+            {
+                "word": "e",
+                "start": 1.0800000429153442,
+                "end": 1.4199999570846558
+            },
+            {
+                "word": "a",
+                "start": 1.4199999570846558,
+                "end": 1.7999999523162842
+            },
+            {
+                "word": "praia",
+                "start": 1.7999999523162842,
+                "end": 1.840000033378601
+            },
+            {
+                "word": "da",
+                "start": 1.840000033378601,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "Nazaré",
+                "start": 2.0799999237060547,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "Se",
+                "start": 2.9000000953674316,
+                "end": 3.140000104904175
+            },
+            {
+                "word": "queres",
+                "start": 3.140000104904175,
+                "end": 3.680000066757202
+            },
+            {
+                "word": "vender",
+                "start": 3.680000066757202,
+                "end": 3.680000066757202
+            },
+            {
+                "word": "ou",
+                "start": 3.680000066757202,
+                "end": 4.159999847412109
+            },
+            {
+                "word": "comprar",
+                "start": 4.159999847412109,
+                "end": 4.159999847412109
+            },
+            {
+                "word": "casa",
+                "start": 4.159999847412109,
+                "end": 4.559999942779541
+            },
+            {
+                "word": "fala",
+                "start": 5.019999980926514,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "com",
+                "start": 5.019999980926514,
+                "end": 5.28000020980835
+            },
+            {
+                "word": "o",
+                "start": 5.28000020980835,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "Nuno",
+                "start": 5.519999980926514,
+                "end": 5.639999866485596
+            },
+            {
+                "word": "Narciso",
+                "start": 5.639999866485596,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "da",
+                "start": 6.380000114440918,
+                "end": 6.559999942779541
+            },
+            {
+                "word": "IAD",
+                "start": 6.559999942779541,
+                "end": 7
+            },
+            {
+                "word": "A",
+                "start": 7.71999979019165,
+                "end": 7.739999771118164
+            },
+            {
+                "word": "Nazaré",
+                "start": 7.739999771118164,
+                "end": 8.119999885559082
+            },
+            {
+                "word": "é",
+                "start": 8.119999885559082,
+                "end": 8.399999618530273
+            },
+            {
+                "word": "conhecida",
+                "start": 8.399999618530273,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "pelas",
+                "start": 8.819999694824219,
+                "end": 9.199999809265137
+            },
+            {
+                "word": "praias",
+                "start": 9.199999809265137,
+                "end": 9.65999984741211
+            },
+            {
+                "word": "pela",
+                "start": 9.960000038146973,
+                "end": 10.180000305175781
+            },
+            {
+                "word": "gastronomia",
+                "start": 10.180000305175781,
+                "end": 10.859999656677246
+            },
+            {
+                "word": "e",
+                "start": 10.859999656677246,
+                "end": 11.100000381469727
+            },
+            {
+                "word": "pelas",
+                "start": 11.100000381469727,
+                "end": 11.479999542236328
+            },
+            {
+                "word": "ondas",
+                "start": 11.479999542236328,
+                "end": 11.779999732971191
+            },
+            {
+                "word": "gigantes",
+                "start": 11.779999732971191,
+                "end": 12.399999618530273
+            },
+            {
+                "word": "Um",
+                "start": 12.899999618530273,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "apartamento",
+                "start": 13.039999961853027,
+                "end": 13.5
+            },
+            {
+                "word": "de",
+                "start": 13.5,
+                "end": 13.819999694824219
+            },
+            {
+                "word": "dois",
+                "start": 13.819999694824219,
+                "end": 14.100000381469727
+            },
+            {
+                "word": "quartos",
+                "start": 14.100000381469727,
+                "end": 14.420000076293945
+            },
+            {
+                "word": "num",
+                "start": 14.420000076293945,
+                "end": 14.65999984741211
+            },
+            {
+                "word": "primeiro",
+                "start": 14.65999984741211,
+                "end": 15
+            },
+            {
+                "word": "andar",
+                "start": 15,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "totalmente",
+                "start": 15.640000343322754,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "remodelado",
+                "start": 16.15999984741211,
+                "end": 16.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 16.81999969482422,
+                "end": 17.15999984741211
+            },
+            {
+                "word": "pronto",
+                "start": 17.15999984741211,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "a",
+                "start": 17.34000015258789,
+                "end": 17.5
+            },
+            {
+                "word": "habitar",
+                "start": 17.5,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "Hall",
+                "start": 18.579999923706055,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 18.579999923706055,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "roupeiro",
+                "start": 18.799999237060547,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "dois",
+                "start": 19.799999237060547,
+                "end": 19.959999084472656
+            },
+            {
+                "word": "quartos",
+                "start": 19.959999084472656,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "com",
+                "start": 20.260000228881836,
+                "end": 20.520000457763672
+            },
+            {
+                "word": "roupeiros",
+                "start": 20.520000457763672,
+                "end": 20.81999969482422
+            },
+            {
+                "word": "embutidos",
+                "start": 20.81999969482422,
+                "end": 21.440000534057617
+            },
+            {
+                "word": "e",
+                "start": 21.440000534057617,
+                "end": 21.68000030517578
+            },
+            {
+                "word": "uma",
+                "start": 21.68000030517578,
+                "end": 21.920000076293945
+            },
+            {
+                "word": "cozinha",
+                "start": 21.920000076293945,
+                "end": 22.139999389648438
+            },
+            {
+                "word": "equipada",
+                "start": 22.139999389648438,
+                "end": 22.760000228881836
+            },
+            {
+                "word": "Pavimento",
+                "start": 23.139999389648438,
+                "end": 23.479999542236328
+            },
+            {
+                "word": "radiante",
+                "start": 23.479999542236328,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "em",
+                "start": 24.100000381469727,
+                "end": 24.360000610351562
+            },
+            {
+                "word": "todas",
+                "start": 24.360000610351562,
+                "end": 24.639999389648438
+            },
+            {
+                "word": "as",
+                "start": 24.639999389648438,
+                "end": 24.8799991607666
+            },
+            {
+                "word": "divisões",
+                "start": 24.8799991607666,
+                "end": 25.360000610351562
+            },
+            {
+                "word": "ar",
+                "start": 25.860000610351562,
+                "end": 25.920000076293945
+            },
+            {
+                "word": "condicionado",
+                "start": 25.920000076293945,
+                "end": 26.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 26.6200008392334,
+                "end": 26.899999618530273
+            },
+            {
+                "word": "janelas",
+                "start": 26.899999618530273,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "com",
+                "start": 27.18000030517578,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "vidros",
+                "start": 27.540000915527344,
+                "end": 27.719999313354492
+            },
+            {
+                "word": "duplos",
+                "start": 27.719999313354492,
+                "end": 28.219999313354492
+            },
+            {
+                "word": "Eletricidade",
+                "start": 28.219999313354492,
+                "end": 29.520000457763672
+            },
+            {
+                "word": "canalização",
+                "start": 29.700000762939453,
+                "end": 30.219999313354492
+            },
+            {
+                "word": "e",
+                "start": 30.219999313354492,
+                "end": 30.6200008392334
+            },
+            {
+                "word": "esgotos",
+                "start": 30.6200008392334,
+                "end": 31.040000915527344
+            },
+            {
+                "word": "renovados",
+                "start": 31.040000915527344,
+                "end": 31.8799991607666
+            },
+            {
+                "word": "Uma",
+                "start": 32,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "varanda",
+                "start": 32.220001220703125,
+                "end": 32.560001373291016
+            },
+            {
+                "word": "com",
+                "start": 32.560001373291016,
+                "end": 32.84000015258789
+            },
+            {
+                "word": "vista",
+                "start": 32.84000015258789,
+                "end": 33.040000915527344
+            },
+            {
+                "word": "panorâmica",
+                "start": 33.040000915527344,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "sobre",
+                "start": 33.81999969482422,
+                "end": 34.060001373291016
+            },
+            {
+                "word": "o",
+                "start": 34.060001373291016,
+                "end": 34.5
+            },
+            {
+                "word": "Atlântico",
+                "start": 34.5,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "e",
+                "start": 34.720001220703125,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "boa",
+                "start": 35.060001373291016,
+                "end": 35.29999923706055
+            },
+            {
+                "word": "exposição",
+                "start": 35.29999923706055,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "solar",
+                "start": 35.7400016784668,
+                "end": 36.18000030517578
+            },
+            {
+                "word": "Para",
+                "start": 36.63999938964844,
+                "end": 36.720001220703125
+            },
+            {
+                "word": "viver",
+                "start": 36.720001220703125,
+                "end": 37.15999984741211
+            },
+            {
+                "word": "para",
+                "start": 37.47999954223633,
+                "end": 37.939998626708984
+            },
+            {
+                "word": "férias",
+                "start": 37.939998626708984,
+                "end": 38.20000076293945
+            },
+            {
+                "word": "ou",
+                "start": 38.20000076293945,
+                "end": 38.380001068115234
+            },
+            {
+                "word": "para",
+                "start": 38.380001068115234,
+                "end": 38.599998474121094
+            },
+            {
+                "word": "investir",
+                "start": 38.599998474121094,
+                "end": 38.939998626708984
+            },
+            {
+                "word": "280",
+                "start": 39.65999984741211,
+                "end": 40.29999923706055
+            },
+            {
+                "word": "mil",
+                "start": 40.29999923706055,
+                "end": 40.70000076293945
+            },
+            {
+                "word": "euros",
+                "start": 40.70000076293945,
+                "end": 41.099998474121094
+            },
+            {
+                "word": "Para",
+                "start": 41.540000915527344,
+                "end": 41.63999938964844
+            },
+            {
+                "word": "visitar",
+                "start": 41.63999938964844,
+                "end": 42.29999923706055
+            },
+            {
+                "word": "fale",
+                "start": 42.65999984741211,
+                "end": 42.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 42.65999984741211,
+                "end": 42.86000061035156
+            },
+            {
+                "word": "o",
+                "start": 42.86000061035156,
+                "end": 43.060001373291016
+            },
+            {
+                "word": "Nuno",
+                "start": 43.060001373291016,
+                "end": 43.20000076293945
+            },
+            {
+                "word": "Narciso",
+                "start": 43.20000076293945,
+                "end": 43.79999923706055
+            },
+            {
+                "word": "da",
+                "start": 44,
+                "end": 44.18000030517578
+            },
+            {
+                "word": "IAD",
+                "start": 44.18000030517578,
+                "end": 44.560001373291016
+            },
+            {
+                "word": "de",
+                "start": 44.560001373291016,
+                "end": 44.84000015258789
+            },
+            {
+                "word": "Portugal",
+                "start": 44.84000015258789,
+                "end": 45.15999984741211
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 46.352998722076414,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.9,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "",
+                        "params": {
+                            "src": "img_b2180761",
+                            "location": "Nazaré · Vista mar",
+                            "title": "T2 remodelado com vista mar",
+                            "facts": "51 m² · 2 quartos · varanda",
+                            "name": "Nuno Narciso",
+                            "cta": "+351 933 197 327",
+                            "tag": "Exclusivo",
+                            "logoText": "IAD Portugal",
+                            "legal": "Ref. 988721"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.9000000953674316,
+                "end": 7.9130000953674315,
+                "present": "animation",
+                "background": "ink",
+                "punchWord": null,
+                "karaoke": false,
+                "plain": true,
+                "layers": [
+                    {
+                        "type": "video-intro",
+                        "text": null,
+                        "params": {
+                            "src": "clips/uploads/W8tgMst17824dVuLtBnVLSn7SO5y8sSLYegBU930.mp4"
+                        }
+                    }
+                ],
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade"
+            },
+            {
+                "start": 7.913,
+                "end": 10,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Praia da Nazaré",
+                        "params": {
+                            "src": "vid_24770ef9",
+                            "eyebrow": "Vista mar",
+                            "move": "in"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10,
+                "end": 12.85,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "Praias e ondas gigantes",
+                        "params": {
+                            "src": "vid_c8c8e142",
+                            "eyebrow": "Nazaré"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.85,
+                "end": 15.55,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "T2 remodelado",
+                        "params": {
+                            "src": "vid_412df815",
+                            "eyebrow": "1.º andar",
+                            "move": "right"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.55,
+                "end": 18.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Pronto a habitar",
+                        "params": {
+                            "src": "vid_bd2ef877",
+                            "eyebrow": "Sala"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.5,
+                "end": 21.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Dois quartos",
+                        "params": {
+                            "src": "vid_91dc8059",
+                            "src2": "vid_68fbda24",
+                            "label": "Roupeiros"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.6,
+                "end": 24,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Cozinha equipada",
+                        "params": {
+                            "src": "vid_3709007c",
+                            "move": "left"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24,
+                "end": 28.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "vid_9154fe97",
+                            "title": "Conforto",
+                            "items": [
+                                "Piso: radiante",
+                                "Clima: ar condicionado",
+                                "Janelas: vidro duplo"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.2,
+                "end": 32,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "triptico",
+                        "text": "Tudo renovado",
+                        "params": {
+                            "src": "vid_8a2f3693",
+                            "src2": "vid_b9053d52",
+                            "src3": "vid_62e955e8"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32,
+                "end": 36.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Vista sobre o Atlântico",
+                        "params": {
+                            "src": "img_b2180761",
+                            "eyebrow": "Varanda"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.5,
+                "end": 39.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "citacao-editorial",
+                        "text": "Para viver, férias ou investir",
+                        "params": {
+                            "src": "vid_9154fe97",
+                            "sub": "Nazaré"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 39.5,
+                "end": 41.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "280.000 €",
+                        "params": {
+                            "src": "vid_412df815",
+                            "sub": "T2 · 51 m²"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.4,
+                "end": 46.352998722076414,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "",
+                        "params": {
+                            "src": "img_dbd17032",
+                            "name": "Nuno Narciso",
+                            "phone": "+351 933 197 327",
+                            "email": "nuno.narciso@iadportugal.pt",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso",
+        "voice_gap": {
+            "at": 7,
+            "seconds": 0.913
+        }
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r988721-premium/clip.mp4",
+    "error": null
+}

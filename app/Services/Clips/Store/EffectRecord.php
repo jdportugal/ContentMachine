@@ -2,6 +2,8 @@
 
 namespace App\Services\Clips\Store;
 
+use App\Services\Avatars\AvatarStore;
+
 /**
  * A custom SFX, stored as a JSON file in the active project's vault
  * (sfx/<id>.json). Keyed by a stable id; `slug` is the layer type. Replaces the
@@ -9,7 +11,7 @@ namespace App\Services\Clips\Store;
  *
  * Also reused verbatim for custom BACKGROUNDS (BackgroundStore) and VFX Lab
  * renders (VfxStore): identical shape, different vault dir — hence the store
- * union below.
+ * union below — and for Avatar Gen lip-syncs (AvatarStore).
  */
 class EffectRecord
 {
@@ -22,7 +24,7 @@ class EffectRecord
     public const STATUS_UPDATING = 'updating';
 
     /** @param array<string,mixed> $attributes */
-    public function __construct(private EffectStore|BackgroundStore|VfxStore $store, public array $attributes) {}
+    public function __construct(private EffectStore|BackgroundStore|VfxStore|AvatarStore $store, public array $attributes) {}
 
     public function __get(string $key): mixed
     {

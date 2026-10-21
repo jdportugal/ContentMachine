@@ -1,0 +1,1286 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 com piscina entre a Praia dos Salgados e o golfe",
+    "source_text": null,
+    "source_path": "clips/uploads/b7roGNMe8xSFPxligZVglfYM17qb424zGy7PYQCQ.mp3",
+    "images": [
+        {
+            "id": "img_f8f21487",
+            "path": "clips/uploads/eXxl3y1sxMrP5w3eegnJIPgpR1oerAltydAdToza.jpg",
+            "description": "Quarto com cama de casal e cabeceira em ripas de madeira, roupeiro e casa de banho privativa visível ao fundo.",
+            "name": "f41d0cf6-3e32-4893-ab13-9ff7bee1a50d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_440f6f70",
+            "path": "clips/uploads/WHKSOFZeq38GFhbVkTkrLtQLF4hbONBaAYAeDnky.jpg",
+            "description": "Quarto de casal luminoso com cabeceira em ripas de madeira, cortinas bege e janela com vista para palmeiras.",
+            "name": "2da6304f-eabc-476a-8fcc-31c3b54d4104.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_24c182b1",
+            "path": "clips/uploads/7xjeFRlI0dcWKcIb4lvVg8VgtHmb0N8Dj3AqH1hS.jpg",
+            "description": "Hall de entrada com escada em madeira e guarda em vidro, pé direito alto e porta aberta.",
+            "name": "b75a8fa5-09d9-4e16-863f-ff3b21c2f88f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc76eb87",
+            "path": "clips/uploads/86pmh62Jht2V7rk0CM0H7WsEebvvez4R4ctVGAHH.jpg",
+            "description": "Varanda coberta com portada envidraçada e painéis de ripas de madeira que filtram a luz, chão em mosaico claro.",
+            "name": "bfdcebc7-e8c9-4058-9b71-3726f0c5e976.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bee7c278",
+            "path": "clips/uploads/bSuvJwGjtMzMuQsv5oCFY3atyLnJaY9gvGgFPwnP.jpg",
+            "description": "Cozinha moderna com península em inox, armários em madeira escura, forno e micro-ondas encastrados.",
+            "name": "cd722e1b-b40b-47be-a1f1-cb2bafa8b77c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_433a3abc",
+            "path": "clips/uploads/FdRxQfKkbaEldj8AIJvsuFd2POf2kk2rp57g71vB.jpg",
+            "description": "Cozinha equipada em U com bancadas em inox, armários de madeira, forno Beko e micro-ondas encastrados.",
+            "name": "8c4c1e42-c18a-4eea-b24c-a39351dd831a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0d30d962",
+            "path": "clips/uploads/zLw9fRzVYZBIg9IjeAONtiw5YNvyfa6YVEnQvxdJ.jpg",
+            "description": "Terraço coberto em deck de madeira com espreguiçadeiras verdes, mesa de refeições e piscina privada ao lado.",
+            "name": "24daaa4e-d9b1-43c2-8e84-ae7ac4e123c6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e32edfa2",
+            "path": "clips/uploads/QaDVRJauOqgkRnNNWkMKiLLtkVWGK52TI41hpSVr.jpg",
+            "description": "Sala de estar ampla com sofá, mesa de centro em ripas e portadas envidraçadas abertas para o jardim.",
+            "name": "4def54c7-0579-4748-b389-1966c373348d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_571001f3",
+            "path": "clips/uploads/m5qywValLeCIXxoRofJJowrbWvmPFixWLD1Pg8OL.jpg",
+            "description": "Sala de estar e jantar em open space, sofá cinzento, poltronas e escada ao fundo, muita luz.",
+            "name": "2a28106e-dcc2-4909-9b3b-623a6ce2620e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4c8147c7",
+            "path": "clips/uploads/Nq40rAMAZA7MAk0dyYwKrTOP99ZY10XCQTAj9i5s.jpg",
+            "description": "Sala de jantar com pé direito alto, grandes janelas para jardim com oliveiras, mesa de madeira e candeeiro.",
+            "name": "ccce8b0d-4fc4-48b4-b81d-70ae544d97e7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bb5e7d0c",
+            "path": "clips/uploads/wyshqnmYmLdeLgLSUfiZJ4fJylexU0iZ3L15xHAN.jpg",
+            "description": "Hall do piso superior com roupeiro embutido em madeira, escada em madeira com guarda de vidro e chão claro.",
+            "name": "fffd94b9-5174-4db6-914e-b0b10b73ee24.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf09ab72",
+            "path": "clips/uploads/buZ4aarEprDyNaMBiaFmgeXKQRUEZBLwjbPBkWm4.jpg",
+            "description": "Jardim com relvado e oliveiras, fachada traseira contemporânea com terraço coberto, espreguiçadeiras e piscina privada.",
+            "name": "a088770b-d909-40c4-abba-9c998fe64c46.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f29da299",
+            "path": "clips/uploads/WYFjqlfTZc5IgdIiBKjjVCjBP2bLl7zddvY3oqq6.jpg",
+            "description": "Fachada lateral de moradias em banda, cor terracota, portadas de madeira, caminho em calçada e oliveiras alinhadas.",
+            "name": "a6a40202-1504-4e04-b9ea-3a83b1b27031.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eea2f17f",
+            "path": "clips/uploads/JbvwJS7QUo4NlIYCMK3IDn2X50p54W9jYm9662ST.jpg",
+            "description": "Piscina privada em primeiro plano, deck de madeira com espreguiçadeiras, fachada contemporânea com varanda envidraçada e jardim.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f89ac25",
+            "path": "clips/uploads/dz5ynnYiQ1OxHclDGaZNoaREb2jhTPY4HLohH33A.jpg",
+            "description": "Logótipo da RE/MAX Grupo Smart, Algarve e Lisboa, com balão vermelho, branco e azul.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5d2f042b",
+            "path": "clips/uploads/1bcZPj0L7FeiJEyANYF0XaMolR3EBgOQ7SRanhtA.png",
+            "description": "Retrato da agente imobiliária Diana Simões, de casaco vermelho, com logótipo RE/MAX Grupo Smart em fundo azul.",
+            "name": "diana.png",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_0277beee",
+            "path": "clips/uploads/7RtlhH4stUbO1XrZKHkFnSyz4ynV8a0vAWo4gBIK.jpg",
+            "description": "Vista aérea vertical do condomínio: moradias em banda, cada uma com piscina privada, rodeadas de relvado e oliveiras.",
+            "name": "2f72117a-8829-4c04-a98a-191e0a148571.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_649c8df4",
+            "path": "clips/uploads/GoUfbESJpL0qr86ec7WIpkb2b7bzcJz2LnNyV75f.jpg",
+            "description": "Vista aérea do campo de golfe dos Salgados, com lagos, bunkers, palmeiras e empreendimentos ao fundo.",
+            "name": "dfa0bd39-34e3-4df1-999a-e49bfd195a22.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_edf6b4dd",
+            "path": "clips/uploads/ppcHMHkbPWdX6WLhhGa00h9xpElDnMgIPKXKRji1.jpg",
+            "description": "Vista aérea do campo de golfe e empreendimentos, com o mar e a Praia dos Salgados ao fundo.",
+            "name": "944f420a-4382-48cd-8b39-2a31c17df14e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b64f76df",
+            "path": "clips/uploads/b5YVzp1HK95k5ZEXBVWzCGXugEhOPne0ZEMRr5y8.jpg",
+            "description": "Vista aérea do campo de golfe, lagoa e reserva natural, com a Praia dos Salgados e o oceano ao fundo.",
+            "name": "041898e1-a7ae-4850-be83-edbf9fb3147c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4d36c9c4",
+            "path": "clips/uploads/dYpQN6DWatpVyEh78DRsHV8y6Adp3MfqmT0kwM91.jpg",
+            "description": "Vista aérea do empreendimento: filas de moradias em banda com piscinas, junto ao campo de golfe e hotel.",
+            "name": "6989fb3e-8626-40d8-a5e8-4fad78e67ff7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_68fb7f5d",
+            "path": "clips/uploads/kwQUS8ShRRzvtKiWu5jqdmaS7yZlpLUltYKupGUR.jpg",
+            "description": "Vista aérea com moradias em primeiro plano, campo de golfe com lagos, reserva natural e Praia dos Salgados ao fundo.",
+            "name": "3a2d3fdd-a8ed-4107-9d16-b63ce68a97a7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_57645cf6",
+            "path": "clips/uploads/WAvnfFrLvOuqy3uadTAbY90euyjMAmeCOPcHXBCV.jpg",
+            "description": "Vista aérea ao pôr do sol: mar, Praia dos Salgados, lagoa, campo de golfe e hotel com piscina.",
+            "name": "7cab02d7-15b6-42fe-ba2d-6e0a7aa10765.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f1265951",
+            "path": "clips/uploads/4ksoldc5Ly6qP0a4oZ1MyeaEsf7FYP5mf3lhZcEI.jpg",
+            "description": "Vista aérea do campo de golfe com palmeiras, lagos e zona húmida da reserva natural; mar ao longe.",
+            "name": "90edba59-8c71-4159-a4b5-6baa9fcf20ff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_628a9108",
+            "path": "clips/uploads/TQpM4HCbyffCXY0ipsAvuPord5UhmNINTFH2lIpZ.jpg",
+            "description": "Casa de banho com bancada de dois lavatórios, base de duche, sanita e bidé em tons bege.",
+            "name": "37c4a781-2997-4902-90cc-d13b51c9ef28.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4d9c304f",
+            "path": "clips/uploads/NuE4QGeYUcClU2ACDxTJhPZYGtcVXhuKMASsAI3W.jpg",
+            "description": "Casa de banho com dois lavatórios sobre bancada, espelho grande iluminado e duche ao lado.",
+            "name": "126bd446-6070-4ca2-9133-cb5b2bc36aad.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1f37f54c",
+            "path": "clips/uploads/kZOQBOPCG36Eph6dhQuqDvwaCJxxDu9fRt8v1oUO.jpg",
+            "description": "Casa de banho compacta com lavatório circular, espelho e duche de parede com chuveiro de mão.",
+            "name": "21334670-e910-4f48-b01a-88dc452e7ff7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c2e1753c",
+            "path": "clips/uploads/BBXp5xb2kddbvIiHpCzGaoMRZFSe6rJZgkVnuGlU.jpg",
+            "description": "Casa de banho com lavatório oval sobre bancada, espelho e sanita suspensa em nicho.",
+            "name": "ff657737-00ea-4e03-8904-0f4f78d6c65d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1c44b9e3",
+            "path": "clips/uploads/RE8KMX7YKoGYvtb1IJXstM4zGLvrpFa4LWvgOkiY.jpg",
+            "description": "Quarto com duas camas individuais, painel de madeira ripada, televisão e ar condicionado.",
+            "name": "e699d3f1-ce41-44c9-87f3-0fc24b716bd4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_def06ab1",
+            "path": "clips/uploads/kzWeaaSRg9dq0yq6B2GfxSamt2NiUgmbjVe7QzGl.jpg",
+            "description": "Quarto com duas camas individuais, cortinados bege e porta envidraçada para terraço soalheiro.",
+            "name": "f168bbbe-5f12-4a3f-9d58-4b9c69099fe1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e6c59e86",
+            "path": "clips/uploads/XDpLfgG9bITgvtF4tUFWMPJN2FfPRDzr72TXhUZi.jpg",
+            "description": "Quarto de casal com cabeceira de ripas de madeira, candeeiros cromados, mesas de cabeceira e cortinados bege.",
+            "name": "42bc6301-e38d-4612-8adc-c967b34d43bc.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_768585e6",
+            "path": "clips/uploads/MB3D9G8rPQS7u75DBkVzavc5HPchB4uaceKYD7cu.jpg",
+            "description": "Quarto com cama de casal, televisão e janelas amplas com acesso a terraço com vista para palmeiras.",
+            "name": "ac8429dd-de02-442b-b838-0800dfffd608.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2980fa99",
+            "path": "clips/uploads/ZKyPqtGfCtfrV1umjHGfx5autX5Plxcjer5z0NeH.jpg",
+            "description": "Terraço superior com vista para piscina privada, jardim relvado, palmeiras e campo de golfe ao fundo.",
+            "name": "bc5d45e1-9457-45f6-9e51-cbb3b4327995.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_890a13e2",
+            "path": "clips/uploads/TWHs6WjshEbMic7lUa2munrKVOThuXS7ZTBRE0il.jpg",
+            "description": "Terraço comprido do piso superior com grandes portas de vidro, guarda de vidro e vegetação ao lado.",
+            "name": "7e39b0d2-85e7-41ca-95e8-42e2699b7c40.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9822876a",
+            "path": "clips/uploads/zNjhg1qPVAaNv2u3Bkq4N7luLDPTORDmGhbr91cr.jpg",
+            "description": "Quarto com janelas amplas viradas para palmeiras e campo de golfe, porta de acesso a terraço.",
+            "name": "65741354-2a85-461a-bcb4-d3b21bb1284b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_22707e2a",
+            "path": "clips/uploads/3l7CKFwXmlNscQU8OkWov4UeV3ZeMdbkLQqLgrSu.jpg",
+            "description": "Quarto com duas camas individuais, cabeceiras de ripas de madeira, televisão e janela com vista verde.",
+            "name": "4a6ad9cb-46ff-4f3b-9dd3-98665cdcfb8e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details 2 100 000 €\nVenda\nid. 122261399-122\n278 m²\n\n4 Quartos\n\n5 WC\n\nC\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nEsta moradia oferece um refúgio luxuoso e privado, ideal para quem busca uma residência permanente ou uma casa de férias encantadora. Aproximidade com a Praia dos Salgados, o prestigiado Campo de Golfe dos Salgados e uma reserva natural, oferece um leque variado de atividades ao ar livre, desde relaxantes passeios na praia, até emocionantes partidas de golfe ou tranquilas caminhadas pela natureza.\n\nEsta propriedade é, sem dúvida, um convite ao prazer e ao descanso em um dos destinos mais procurados de Portugal. A moradia, com designcontemporâneo, destaca-se não apenas pela sua localização privilegiada mas também pela qualidade das suas instalações e acabamentos.\n\nCom uma área de lazer ao ar livre que inclui terraço, jardim, e uma piscina privativa, é perfeita para desfrutar dos dias ensolarados do Algarve com privacidade e conforto. Além disso, a presença de estacionamento subterrâneo com acesso individual a cada fração, adiciona uma camada extra de comodidade e segurança para os residentes e seus convidados.\n\nA disposição interna da moradia é pensada para maximizar o conforto e a funcionalidade. O rés-do-chão abriga um generoso espaço de estar e jantar com pé direito alto (Possibilidade de criar quarto extra ), inundado de luz natural graças às amplas janelas, além de uma cozinha moderna e totalmenten equipada e uma casa de banho de serviço. O piso superior reserva a privacidade dos quartos, todos com casa de banho privativa, e acesso a terraços espaçosos,ideais para desfrutar da vista e do clima agradável.\n\nA combinação de privacidade, luxo e localização faz desta moradia uma opção excepcional para quem deseja viver ou investir no Algarve.  \n\nDetalhes\nÁrea Bruta Privativa m²\n278\nÁrea Bruta m²\n400\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n225\nQuartos\n4\nAno de Construção\n2009\nPiso\n- -\nWC/Casas de banho\n5\nElevador\nNão\nEstacionamento\n2 Lugares\nCarregamento de Carros Elétricos\nNão\nDetalhes energéticos",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia de luxo na Guia (Albufeira), entre a Praia dos Salgados e o Salgados Golf",
+            "summary": "A Guia, em Albufeira, fica junto à Lagoa dos Salgados, uma zona húmida para a qual foi proposta uma reserva natural de cerca de 400 hectares, ainda não criada formalmente. Ao lado fica o Salgados Golf, aberto em 1994, num dos concelhos com mais dormidas turísticas do país.",
+            "timeline": [
+                {
+                    "label": "Abertura do Salgados Golf (18 buracos)",
+                    "sublabel": "1994"
+                },
+                {
+                    "label": "Reserva Natural dos Salgados em consulta pública",
+                    "sublabel": "dez. 2021 – jan. 2022"
+                },
+                {
+                    "label": "Albufeira é o 2.º município com mais dormidas",
+                    "sublabel": "2024"
+                },
+                {
+                    "label": "Ambientalistas pedem a criação urgente da reserva",
+                    "sublabel": "set. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área proposta para a Reserva Natural dos Salgados",
+                    "value": 400,
+                    "unit": "hectares"
+                },
+                {
+                    "label": "Contributos na consulta pública da reserva",
+                    "value": 800,
+                    "unit": "+ participações"
+                },
+                {
+                    "label": "Buracos do Salgados Golf",
+                    "value": 18,
+                    "unit": "buracos (par 72)"
+                },
+                {
+                    "label": "Dormidas em Albufeira (2024)",
+                    "value": 7.7,
+                    "unit": "milhões"
+                },
+                {
+                    "label": "Peso de Albufeira nas dormidas nacionais (2024)",
+                    "value": 9.6,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço da moradia",
+                    "value": 2100000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "A Lagoa dos Salgados é uma zona húmida conhecida pela observação de aves, incluindo flamingos",
+                "A reserva natural foi proposta pelo ICNF em 2021, mas em set. 2026 ainda não estava criada",
+                "O Salgados Golf fica na freguesia da Guia e foi aberto em 1994",
+                "Em 2024, Albufeira foi o 2.º concelho do país em dormidas, logo a seguir a Lisboa"
+            ],
+            "sources": [
+                "https://www.sulinformacao.pt/en/2021/12/reserva-natural-inclui-lagoa-dos-salgados-mas-tambem-sapal-de-alcantarilha/",
+                "https://www.barlavento.pt/mais-de-800-apoiam-criacao-da-reserva-natural-da-lagoa-dos-salgados/",
+                "https://postal.pt/edicaopapel/ambientalistas-pedem-reserva-natural-dos-salgados-apos-mortes-de-animais-em-silves/",
+                "https://postal.pt/nacional/acordao-do-supremo-pode-ameacar-futura-reserva-natural-na-lagoa-dos-salgados/",
+                "https://golftattoo.com/pt/campos/salgados-golf",
+                "https://www.1golf.eu/es/club/salgados-golf",
+                "https://postal.pt/economia/albufeira-e-portimao-impulsionam-turismo-no-algarve-mas-albufeira-ainda-abaixo-dos-niveis-pre-pandemia/",
+                "https://eco.sapo.pt/entrevista/taxa-turistica-em-albufeira-devera-atingir-oito-milhoes-de-euros-em-2025/",
+                "https://www.birdingplaces.eu/it/birdingplaces/portugal/lagoa-dos-salgados"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 com piscina entre a Praia dos Salgados e o golfe",
+            "description": "Moradia contemporânea na Guia, em Albufeira, junto a uma reserva natural e entre a Praia dos Salgados e o campo de golfe. Tem sala com pé-direito alto, cozinha equipada, quatro suites com acesso a terraços, jardim, piscina privada e estacionamento subterrâneo para dois carros. Por 2.100.000 €; para visitar, contacte a Diana Simões, da RE/MAX Albufeira Smart.",
+            "tags": [
+                "moradia",
+                "Albufeira",
+                "Algarve",
+                "Praia dos Salgados",
+                "imobiliário",
+                "piscina privada",
+                "casa de luxo",
+                "RE/MAX"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-flk4x",
+    "created_at": "2026-10-09T05:59:22+00:00",
+    "updated_at": "2026-10-09T06:06:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/b7roGNMe8xSFPxligZVglfYM17qb424zGy7PYQCQ.mp3",
+    "transcript": {
+        "duration": 37.790000915527344,
+        "text": "Uma moradia entre a Praia dos Salgados e o Campo de Golf. Fica na Guia, em Albufeira, junto a uma reserva natural, com design contemporâneo e acabamentos de qualidade. No resto do chão, uma sala de estar e jantar com pé direito alto e muita luz. E uma cozinha moderna totalmente equipada. Em cima, quatro quartos, todos com casa de banho e acesso a terraços. Lá fora, jardim, terraço e piscina privada. Estacionamento subterrâneo para dois carros. Para viver ou para férias, num dos destinos mais procurados do país. 2 milhões e 100 mil euros. Para visitar, fale com a Diana Simões, da Remax Albufeira Smart.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "moradia",
+                "start": 0.2199999988079071,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "entre",
+                "start": 0.699999988079071,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "a",
+                "start": 1.0199999809265137,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "Praia",
+                "start": 1.3799999952316284,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "dos",
+                "start": 1.3799999952316284,
+                "end": 1.559999942779541
+            },
+            {
+                "word": "Salgados",
+                "start": 1.559999942779541,
+                "end": 2.0799999237060547
+            },
+            {
+                "word": "e",
+                "start": 2.0799999237060547,
+                "end": 2.2799999713897705
+            },
+            {
+                "word": "o",
+                "start": 2.2799999713897705,
+                "end": 2.5399999618530273
+            },
+            {
+                "word": "Campo",
+                "start": 2.5399999618530273,
+                "end": 2.640000104904175
+            },
+            {
+                "word": "de",
+                "start": 2.640000104904175,
+                "end": 2.819999933242798
+            },
+            {
+                "word": "Golf",
+                "start": 2.819999933242798,
+                "end": 3.059999942779541
+            },
+            {
+                "word": "Fica",
+                "start": 3.619999885559082,
+                "end": 3.680000066757202
+            },
+            {
+                "word": "na",
+                "start": 3.680000066757202,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "Guia",
+                "start": 3.9000000953674316,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "em",
+                "start": 4.340000152587891,
+                "end": 4.440000057220459
+            },
+            {
+                "word": "Albufeira",
+                "start": 4.440000057220459,
+                "end": 4.960000038146973
+            },
+            {
+                "word": "junto",
+                "start": 5.360000133514404,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "a",
+                "start": 5.519999980926514,
+                "end": 5.619999885559082
+            },
+            {
+                "word": "uma",
+                "start": 5.619999885559082,
+                "end": 5.78000020980835
+            },
+            {
+                "word": "reserva",
+                "start": 5.78000020980835,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "natural",
+                "start": 6.079999923706055,
+                "end": 6.519999980926514
+            },
+            {
+                "word": "com",
+                "start": 6.71999979019165,
+                "end": 6.860000133514404
+            },
+            {
+                "word": "design",
+                "start": 6.860000133514404,
+                "end": 7.179999828338623
+            },
+            {
+                "word": "contemporâneo",
+                "start": 7.179999828338623,
+                "end": 7.940000057220459
+            },
+            {
+                "word": "e",
+                "start": 7.940000057220459,
+                "end": 8.15999984741211
+            },
+            {
+                "word": "acabamentos",
+                "start": 8.15999984741211,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "de",
+                "start": 8.600000381469727,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "qualidade",
+                "start": 8.880000114440918,
+                "end": 9.279999732971191
+            },
+            {
+                "word": "No",
+                "start": 9.779999732971191,
+                "end": 9.819999694824219
+            },
+            {
+                "word": "resto",
+                "start": 9.819999694824219,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "do",
+                "start": 10.039999961853027,
+                "end": 10.4399995803833
+            },
+            {
+                "word": "chão",
+                "start": 10.4399995803833,
+                "end": 10.4399995803833
+            },
+            {
+                "word": "uma",
+                "start": 10.65999984741211,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "sala",
+                "start": 10.880000114440918,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "de",
+                "start": 11.020000457763672,
+                "end": 11.319999694824219
+            },
+            {
+                "word": "estar",
+                "start": 11.319999694824219,
+                "end": 11.420000076293945
+            },
+            {
+                "word": "e",
+                "start": 11.420000076293945,
+                "end": 11.579999923706055
+            },
+            {
+                "word": "jantar",
+                "start": 11.579999923706055,
+                "end": 11.899999618530273
+            },
+            {
+                "word": "com",
+                "start": 11.899999618530273,
+                "end": 12.199999809265137
+            },
+            {
+                "word": "pé",
+                "start": 12.199999809265137,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "direito",
+                "start": 12.359999656677246,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "alto",
+                "start": 12.65999984741211,
+                "end": 12.979999542236328
+            },
+            {
+                "word": "e",
+                "start": 12.979999542236328,
+                "end": 13.319999694824219
+            },
+            {
+                "word": "muita",
+                "start": 13.319999694824219,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "luz",
+                "start": 13.739999771118164,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "E",
+                "start": 14.319999694824219,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "uma",
+                "start": 14.4399995803833,
+                "end": 14.600000381469727
+            },
+            {
+                "word": "cozinha",
+                "start": 14.600000381469727,
+                "end": 14.819999694824219
+            },
+            {
+                "word": "moderna",
+                "start": 14.819999694824219,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "totalmente",
+                "start": 15.34000015258789,
+                "end": 16
+            },
+            {
+                "word": "equipada",
+                "start": 16,
+                "end": 16.520000457763672
+            },
+            {
+                "word": "Em",
+                "start": 17.059999465942383,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "cima",
+                "start": 17.139999389648438,
+                "end": 17.3799991607666
+            },
+            {
+                "word": "quatro",
+                "start": 17.739999771118164,
+                "end": 18
+            },
+            {
+                "word": "quartos",
+                "start": 18,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "todos",
+                "start": 18.780000686645508,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "com",
+                "start": 18.860000610351562,
+                "end": 19.059999465942383
+            },
+            {
+                "word": "casa",
+                "start": 19.059999465942383,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "de",
+                "start": 19.260000228881836,
+                "end": 19.65999984741211
+            },
+            {
+                "word": "banho",
+                "start": 19.65999984741211,
+                "end": 19.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 19.65999984741211,
+                "end": 19.920000076293945
+            },
+            {
+                "word": "acesso",
+                "start": 19.920000076293945,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "a",
+                "start": 20.15999984741211,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "terraços",
+                "start": 20.399999618530273,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "Lá",
+                "start": 21.260000228881836,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "fora",
+                "start": 21.34000015258789,
+                "end": 21.600000381469727
+            },
+            {
+                "word": "jardim",
+                "start": 22.059999465942383,
+                "end": 22.299999237060547
+            },
+            {
+                "word": "terraço",
+                "start": 22.959999084472656,
+                "end": 23.040000915527344
+            },
+            {
+                "word": "e",
+                "start": 23.040000915527344,
+                "end": 23.299999237060547
+            },
+            {
+                "word": "piscina",
+                "start": 23.299999237060547,
+                "end": 23.559999465942383
+            },
+            {
+                "word": "privada",
+                "start": 23.559999465942383,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "Estacionamento",
+                "start": 24.65999984741211,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "subterrâneo",
+                "start": 25.059999465942383,
+                "end": 25.700000762939453
+            },
+            {
+                "word": "para",
+                "start": 25.700000762939453,
+                "end": 25.940000534057617
+            },
+            {
+                "word": "dois",
+                "start": 25.940000534057617,
+                "end": 26.31999969482422
+            },
+            {
+                "word": "carros",
+                "start": 26.31999969482422,
+                "end": 26.760000228881836
+            },
+            {
+                "word": "Para",
+                "start": 26.760000228881836,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "viver",
+                "start": 27.299999237060547,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "ou",
+                "start": 27.700000762939453,
+                "end": 27.959999084472656
+            },
+            {
+                "word": "para",
+                "start": 27.959999084472656,
+                "end": 28.31999969482422
+            },
+            {
+                "word": "férias",
+                "start": 28.31999969482422,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "num",
+                "start": 28.860000610351562,
+                "end": 28.959999084472656
+            },
+            {
+                "word": "dos",
+                "start": 28.959999084472656,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "destinos",
+                "start": 29.15999984741211,
+                "end": 29.5
+            },
+            {
+                "word": "mais",
+                "start": 29.5,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "procurados",
+                "start": 29.959999084472656,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "do",
+                "start": 30.440000534057617,
+                "end": 30.6200008392334
+            },
+            {
+                "word": "país",
+                "start": 30.6200008392334,
+                "end": 31.020000457763672
+            },
+            {
+                "word": "2",
+                "start": 31.559999465942383,
+                "end": 31.719999313354492
+            },
+            {
+                "word": "milhões",
+                "start": 31.719999313354492,
+                "end": 32.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 32.18000030517578,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "100",
+                "start": 32.47999954223633,
+                "end": 32.70000076293945
+            },
+            {
+                "word": "mil",
+                "start": 32.70000076293945,
+                "end": 32.86000061035156
+            },
+            {
+                "word": "euros",
+                "start": 32.86000061035156,
+                "end": 33.220001220703125
+            },
+            {
+                "word": "Para",
+                "start": 33.779998779296875,
+                "end": 33.84000015258789
+            },
+            {
+                "word": "visitar",
+                "start": 33.84000015258789,
+                "end": 34.5
+            },
+            {
+                "word": "fale",
+                "start": 34.779998779296875,
+                "end": 34.779998779296875
+            },
+            {
+                "word": "com",
+                "start": 34.779998779296875,
+                "end": 34.959999084472656
+            },
+            {
+                "word": "a",
+                "start": 34.959999084472656,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "Diana",
+                "start": 35.060001373291016,
+                "end": 35.279998779296875
+            },
+            {
+                "word": "Simões",
+                "start": 35.279998779296875,
+                "end": 35.779998779296875
+            },
+            {
+                "word": "da",
+                "start": 36,
+                "end": 36.13999938964844
+            },
+            {
+                "word": "Remax",
+                "start": 36.13999938964844,
+                "end": 36.540000915527344
+            },
+            {
+                "word": "Albufeira",
+                "start": 36.540000915527344,
+                "end": 37.13999938964844
+            },
+            {
+                "word": "Smart",
+                "start": 37.13999938964844,
+                "end": 37.58000183105469
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.790000915527344,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6999999999999993,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Entre a praia e o golfe",
+                        "params": {
+                            "src": "img_eea2f17f",
+                            "avatar": "img_5d2f042b",
+                            "logo": "img_7f89ac25",
+                            "price": "2.100.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T4 com piscina",
+                            "location": "Guia, Albufeira · 278 m² · 4 quartos",
+                            "agentName": "Diana Simões",
+                            "phone": "+351 968 709 991",
+                            "legal": "RE/MAX Albufeira Smart"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6999999999999993,
+                "end": 6.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Guia, Albufeira",
+                        "params": {
+                            "src": "img_649c8df4",
+                            "src2": "img_edf6b4dd",
+                            "src3": "img_b64f76df",
+                            "src4": "img_68fb7f5d",
+                            "src5": "img_f1265951"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.6,
+                "end": 9.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Design contemporâneo",
+                        "params": {
+                            "src": "img_f29da299",
+                            "src2": "img_bf09ab72",
+                            "src3": "img_24c182b1",
+                            "src4": "img_bb5e7d0c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.6,
+                "end": 14.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_4c8147c7",
+                            "src2": "img_571001f3",
+                            "src3": "img_e32edfa2",
+                            "src4": "img_cc76eb87"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.2,
+                "end": 16.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_bee7c278",
+                            "src2": "img_433a3abc",
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.9,
+                "end": 19,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Quatro quartos",
+                        "params": {
+                            "src": "img_f8f21487",
+                            "src2": "img_440f6f70",
+                            "src3": "img_e6c59e86",
+                            "src4": "img_1c44b9e3",
+                            "src5": "img_def06ab1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19,
+                "end": 21.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_628a9108",
+                            "src2": "img_4d9c304f",
+                            "src3": "img_1f37f54c",
+                            "src4": "img_c2e1753c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.2,
+                "end": 24.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Lá fora",
+                        "params": {
+                            "src": "img_0d30d962",
+                            "title": "Lá fora",
+                            "items": [
+                                "Jardim",
+                                "Terraço",
+                                "Piscina privada"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.5,
+                "end": 26.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "2 lugares de garagem",
+                        "params": {
+                            "src": "img_0277beee",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.8,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_2980fa99",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 31.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Um destino procurado",
+                        "params": {
+                            "src": "img_57645cf6",
+                            "src2": "img_4d36c9c4",
+                            "src3": "img_890a13e2",
+                            "src4": "img_768585e6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.4,
+                "end": 33.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_9822876a",
+                            "src2": "img_22707e2a",
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.7,
+                "end": 37.79,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Diana Simões",
+                        "params": {
+                            "src": "img_5d2f042b",
+                            "logo": "img_7f89ac25",
+                            "name": "Diana Simões",
+                            "role": "Consultora imobiliária · RE/MAX Albufeira Smart",
+                            "buttons": "+351 968 709 991 | Marque a sua visita",
+                            "phone": "+351 968 709 991"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-flk4x/clip.mp4",
+    "error": null
+}

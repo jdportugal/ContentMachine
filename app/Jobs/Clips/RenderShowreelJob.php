@@ -42,9 +42,6 @@ class RenderShowreelJob implements ShouldQueue
                 return; // already cached for this design system + effect set
             }
 
-            // Custom effects must be present in remotion/src/effects for this project.
-            $library->syncFilesystem();
-
             @mkdir(dirname($out), 0777, true);
             $renderer->render($library->showreelPlan(), $out);
         } finally {

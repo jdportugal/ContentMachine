@@ -1,0 +1,1387 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia em pedra com piscina e T1 no Marco de Canaveses",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t3-marco-de-canaveses-marco/122441084-66",
+            "agent": "Susana Pereira",
+            "phone": "+351 918 077 006",
+            "agency": "RE/MAX Acção",
+            "hook": "Moradia em pedra com apartamento T1, no Marco",
+            "voiceover": "Uma moradia em pedra no Marco de Canaveses, com um apartamento tê um. Fica numa zona tranquila, perto de todos os serviços. No primeiro piso, três quartos com roupeiros e varandas, um deles em suite. Uma sala ampla, com muita luz natural. Cozinha equipada, com uma área exterior para as refeições. Este piso tem aquecimento e ar condicionado em todas as divisões. No segundo piso, um tê um equipado, com quarto em suite. Lá fora, jardim, piscina, jacuzzi e garagem para dois carros. A casa tem três entradas individuais. Quatrocentos e sessenta mil euros. Para visitar, fale com a Susana Pereira, da RE/MAX Acção.",
+            "scenes": [
+                {
+                    "photo": "fachada em pedra",
+                    "vo": "Uma moradia em pedra no Marco de Canaveses, com um apartamento tê um.",
+                    "caption": "Moradia em pedra com T1"
+                },
+                {
+                    "photo": "exterior / rua envolvente",
+                    "vo": "Fica numa zona tranquila, perto de todos os serviços.",
+                    "caption": "Marco de Canaveses"
+                },
+                {
+                    "photo": "quarto suite com varanda",
+                    "vo": "No primeiro piso, três quartos com roupeiros e varandas, um deles em suite.",
+                    "caption": "Três quartos, um em suite"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "Uma sala ampla, com muita luz natural.",
+                    "caption": "Sala com luz natural"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Cozinha equipada,",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "área exterior de refeições",
+                    "vo": "com uma área exterior para as refeições.",
+                    "caption": "Refeições lá fora"
+                },
+                {
+                    "photo": "quarto com roupeiro",
+                    "vo": "Este piso tem aquecimento e ar condicionado em todas as divisões.",
+                    "caption": "Aquecimento e ar condicionado"
+                },
+                {
+                    "photo": "sala ou quarto do apartamento T1",
+                    "vo": "No segundo piso, um tê um equipado, com quarto em suite.",
+                    "caption": "Apartamento T1 equipado"
+                },
+                {
+                    "photo": "jardim com piscina e jacuzzi",
+                    "vo": "Lá fora, jardim, piscina, jacuzzi",
+                    "caption": "Piscina e jacuzzi"
+                },
+                {
+                    "photo": "garagem",
+                    "vo": "e garagem para dois carros.",
+                    "caption": "Garagem para 2 carros"
+                },
+                {
+                    "photo": "entradas da casa",
+                    "vo": "A casa tem três entradas individuais.",
+                    "caption": "Três entradas individuais"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e sessenta mil euros. Para visitar, fale com a Susana Pereira, da RE/MAX Acção.",
+                    "caption": "460.000 € · Susana Pereira · RE/MAX Acção"
+                }
+            ],
+            "flags": [
+                "Bathrooms: the details say 3, but the text describes 4 (the suite and a full bathroom with a hydromassage bath on the 1st floor, plus the T1's suite and a guest bathroom). The video gives no bathroom count.",
+                "Bedrooms: the details say 'Quartos: 3' (T3), but the T1 on the 2nd floor adds a fourth bedroom. The video says 'três quartos' only for the 1st floor and never gives a total.",
+                "The listing doesn't say whether the T1 has its own entrance or is a separate unit. The '3 entradas individuais' aren't linked to it, so the video doesn't call it 'independente'.",
+                "Details say 'Estacionamento: Não' but 'Garagem: Sim', and the text describes a 2-car garage. The video uses the garage. Worth confirming.",
+                "Floor naming: the listing uses '1º piso' and '2º piso'. Check whether the '1º piso' is actually the rés-do-chão before publishing.",
+                "Logo for RE/MAX Acção not found — add it by hand."
+            ],
+            "message": "Bom dia Sra. Susana,\nO meu nome é João Ferreira.\n\nVi a moradia no Marco de Canaveses que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Susana Pereira - and phone number - +351 918 077 006. Agency: RE/MAX Acção.\nThe agent's photo is Susana Pereira.jpg.\nOn-screen hook for the first frame: «Moradia em pedra com apartamento T1, no Marco».\n\nSuggested scenes (photo → on-screen caption):\n- fachada em pedra → «Moradia em pedra com T1»\n- exterior / rua envolvente → «Marco de Canaveses»\n- quarto suite com varanda → «Três quartos, um em suite»\n- sala → «Sala com luz natural»\n- cozinha → «Cozinha equipada»\n- área exterior de refeições → «Refeições lá fora»\n- quarto com roupeiro → «Aquecimento e ar condicionado»\n- sala ou quarto do apartamento T1 → «Apartamento T1 equipado»\n- jardim com piscina e jacuzzi → «Piscina e jacuzzi»\n- garagem → «Garagem para 2 carros»\n- entradas da casa → «Três entradas individuais»\n- end card → «460.000 € · Susana Pereira · RE/MAX Acção»\n\nHere are the house details:\n\nMoradia T3 à venda em Marco, Marco de Canaveses\nPreço\n460 000 €\nLocalização\nMarco, Marco de Canaveses, Porto\nReferência\n122441084-66\nÁrea Útil m²\n280\nÁrea Total do Lote m²\n480\nQuartos\n3\nWC/Casas de banho\n3\nAno de Construção\n2000\nEstacionamento\nNão\nGaragem\nSim\nElevador\nNão\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p>Moradia T3 de dois pisos</p>\n<p>No 1º piso encontra uma excelente moradia familiar, em pedra. Com 3 quartos com roupeiros embutidos, boas áreas e varandas, sendo um deles suite. Possui outra casa de banho completa com banheira de hidromassagem. Conta ainda com uma sala ampla com ótima luz natural. A cozinha está totalmente equipada e tem ainda uma área exterior para aproveitar as refeições nos dias mais quentes. Todas as divisões com aquecimento e ar condicionado.&nbsp;</p>\n<p>O 2º piso é composto por um apartamento T1, todo equipado, quarto em suite e com roupeiro, possui casa de banho de apoio à cozinha e á sala. Com aquecimento.&nbsp;</p>\n<p>No exterior é onde se localiza a garagem com capacidade para 2 carros. Com 3 entradas individuais, jardim, piscina e jacuzi. Conta ainda com uma área de máquinas.&nbsp;</p>\n<p>Perto de todos os serviços necessários, em zona tranquila!&nbsp;</p>\n<p>Marque visita.</p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia em pedra com T1 independente em Marco de Canaveses",
+            "summary": "Moradia em pedra em Marco de Canaveses, no distrito do Porto, à venda por 460 mil euros. Tem três quartos, um T1 independente, piscina, jacuzzi e três entradas separadas.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Preço pedido",
+                    "value": 460000,
+                    "unit": "€"
+                },
+                {
+                    "label": "População do concelho (Censos 2021)",
+                    "value": 49546,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho",
+                    "value": 201.9,
+                    "unit": "km²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Dois espaços numa só casa",
+                    "left": {
+                        "title": "1.º piso",
+                        "points": [
+                            "3 quartos com roupeiros e varandas",
+                            "1 suite",
+                            "Sala ampla e luminosa",
+                            "Aquecimento e ar condicionado em todas as divisões"
+                        ]
+                    },
+                    "right": {
+                        "title": "2.º piso",
+                        "points": [
+                            "T1 equipado",
+                            "Quarto em suite",
+                            "Pode ser usado de forma independente"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Construção em pedra numa zona tranquila",
+                "Jardim, piscina e jacuzzi",
+                "Garagem para dois carros",
+                "Três entradas independentes",
+                "Marco de Canaveses pertence ao distrito do Porto e tem ligação ferroviária pela Linha do Douro"
+            ],
+            "sources": [
+                "https://transparencia.gov.pt/pt/municipios/bi-municipios/municipios/municipio/1307/",
+                "https://www.camara-municipal.pt/municipio-marco-de-canaveses.html",
+                "https://observador.pt/inovacao/eleicoes/autarquicas/porto/concelho-marco-de-canaveses/",
+                "https://www.infopedia.pt/artigos/$marco-de-canaveses",
+                "https://rotadoromanico.com/documents/1102/Linha-Douro-FR.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia em pedra com piscina e T1 no Marco de Canaveses",
+            "description": "Moradia em pedra no Marco de Canaveses, numa zona tranquila e perto de todos os serviços, com três quartos, sala ampla e um T1 independente no segundo piso. Lá fora tem jardim, piscina, jacuzzi e garagem para dois carros, e a casa tem três entradas individuais. Por 460 mil euros, marque a sua visita com a Susana Pereira, da RE/MAX Acção.",
+            "tags": [
+                "moradia",
+                "marcodecanaveses",
+                "casaempedra",
+                "imobiliario",
+                "piscina",
+                "casaavenda",
+                "remax",
+                "portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-122441084-66-vl95h",
+    "created_at": "2026-10-12T11:36:16+00:00",
+    "updated_at": "2026-10-12T11:43:49+00:00",
+    "source_path": "clips/uploads/3k5tI9rTMmETmf1b4jB44mknZ5pyXtuqiNUzPicX.mp3",
+    "images": [
+        {
+            "id": "img_ba691609",
+            "path": "clips/uploads/R2i86MQwTle8J2sytaF1DgmN6G7BkrlwgBXPbiPq.jpg",
+            "description": "Fachada da moradia em pedra com telhado de telha, rua empedrada, portões brancos e jardim com palmeira.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_35617865",
+            "path": "clips/uploads/A1oPz8TXFm915bTFAJUNw0N8X05iym2ZJtO1UYqr.jpg",
+            "description": "Piscina no exterior, com espreguiçadeiras, jacuzzi, carro no telheiro e moradia de dois pisos com varandas.",
+            "name": "1385c029-6b20-4177-8ffb-0a9b4d8fc117.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a3e1003c",
+            "path": "clips/uploads/3szE70TF1JBKbvUdySaszj7v5An7cI1uQyl8Jg2r.jpg",
+            "description": "Sala de estar com sofá vermelho em pele, chaise longue branca, tapete preto e vermelho e ar-condicionado.",
+            "name": "eb0acf4f-689d-4795-b6ab-68b7707c676c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ecca0c1",
+            "path": "clips/uploads/HaLdrDGpUTmt0sR4xUiylKwHtD3wROGCoLKMEiOp.jpg",
+            "description": "Sala ampla com sofá de canto vermelho, parede em pedra decorativa e janela grande com cortinados claros.",
+            "name": "03314276-a0ef-497c-93cb-f4a62115f2df.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6d59a225",
+            "path": "clips/uploads/FvRfVXA20U4ZRQgN1MMAITx55syzkdFajW8QwNCu.jpg",
+            "description": "Sala de estar com móvel de TV preto, parede em pedra, chão de mosaico brilhante e vaso vermelho.",
+            "name": "9e42e9e8-6a18-4bde-b610-05b0cd6797fd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_776b6213",
+            "path": "clips/uploads/eHpqcQNKtPTsEHbdXT7Gwjvxhx9bR6os9lW5mWsL.jpg",
+            "description": "Quarto com cama de casal, colcha vermelha e preta, roupeiro escuro de portas de correr e radiador.",
+            "name": "2dd4e73d-4446-467e-a32a-b535df5fb78f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_caa49bc6",
+            "path": "clips/uploads/3cgi8AMpM09eO5XGXxnd4KMvkW6ey9VfubZLg4XY.jpg",
+            "description": "Quarto com cama de casal vermelha e preta, ar-condicionado e porta envidraçada para a varanda.",
+            "name": "f2f38483-4f8b-4a8f-953f-8bc639e29bdd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0693c9af",
+            "path": "clips/uploads/vhRUkOE1yMUrCGPhZkEpQP5iJVYEtvZG3MKkLmxI.jpg",
+            "description": "Quarto visto da porta, com roupeiro embutido em madeira, cama, chão de madeira e janela para varanda.",
+            "name": "9fe03c40-a371-452c-9a4d-4e3c31d14882.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d2dc9b98",
+            "path": "clips/uploads/GqVQXovFtBGM2z2G0gh3B8I0bm3jiy6Y5uXPOmvG.jpg",
+            "description": "Quarto clássico com cama de madeira, mesas de cabeceira, tapetes azuis e porta grande para a varanda.",
+            "name": "1bcfd904-c0bb-495b-9902-c3ee84955c49.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_65b7bcc7",
+            "path": "clips/uploads/Bg0SqeOJiecNuBJrgtp3s2qZSVvmr17FakUf03ah.jpg",
+            "description": "Quarto suite com cama de madeira, cómoda com espelho e corredor de acesso à casa de banho.",
+            "name": "5a2d5c21-fca5-4d47-834b-b263821c1eb3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cc89eb8e",
+            "path": "clips/uploads/y2aVfIidrSQ5ptHd0NBNXdqQou0d303klHipvY1H.jpg",
+            "description": "Quarto de casal com roupeiro embutido em madeira, cama com colcha cinzenta e chão de madeira.",
+            "name": "b52de385-3e2f-41b3-a51b-7d8ba80df15a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d90dd4f3",
+            "path": "clips/uploads/HqLEZIdtZ4qcBFycGiRl9RQWpaTLPQ1XCO6Agmgr.jpg",
+            "description": "Varanda com guarda branca e parede em pedra, com vista para garagem, telhados e montanhas.",
+            "name": "d1fe153a-d384-4487-8ca2-0ae8fb220755.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d74cbc70",
+            "path": "clips/uploads/uE1915v7tpIenJfPIhv1HxeNZhZHNjZtyXkqaGh2.jpg",
+            "description": "Quarto de casal com ar-condicionado, janela ampla com cortinas, televisão e mesas de cabeceira brancas.",
+            "name": "f6a88a00-4ae5-4c30-a6e7-55571f48f865.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ecc9418b",
+            "path": "clips/uploads/Hv4kuAEt2Lr7OCs7SSsGDy1agcPxjFmBeaWQQu4o.jpg",
+            "description": "Varanda comprida com espreguiçadeira e vista para a piscina, espreguiçadeiras e jardim.",
+            "name": "3fde79e8-f57b-4720-87dd-f483ee285aa8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8896b61e",
+            "path": "clips/uploads/3Vicb0iVCtQVUAnz0K946X80utovEsfhSV9SmAHB.jpg",
+            "description": "Hall de entrada com parede em pedra decorativa, consola vermelha, espelho e corredor para os quartos.",
+            "name": "5fcdba22-9fdf-4f67-8946-5aa28f53bdc7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9badfaf4",
+            "path": "clips/uploads/ly3KK2yjDKAPsBqvcByccPiy8N7HOZv0v3cscCZj.jpg",
+            "description": "Corredor com parede em pedra, consola vermelha e porta envidraçada aberta para a sala.",
+            "name": "2de89eb4-fa99-4515-a40b-75eaadfcbb83.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58294e1c",
+            "path": "clips/uploads/6gF2cyP1Apx6Uuz2AInwgIDRHhHvGnYtscS8bRfJ.jpg",
+            "description": "Cozinha equipada com móveis em madeira, bancada em granito, banquetas e chão em tijoleira.",
+            "name": "0bc525e3-e454-4fd6-b204-a8c7da3e60c8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cd12cd48",
+            "path": "clips/uploads/9HwAhkJlu8qBjIxBqEGJI7MfLt7xr2ZUIntEM36i.jpg",
+            "description": "Cozinha e zona de refeições com lareira em pedra, teto em madeira, mesa em granito e televisão.",
+            "name": "a362fdeb-a3bf-47b6-854e-2bb39d6b2799.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c2d3506e",
+            "path": "clips/uploads/tkJ4eB1GObFrDHD2lfiNyijGjIhgWIw18oHMh3BY.jpg",
+            "description": "Zona de refeições com mesa em granito, paredes em pedra, lareira e porta para o exterior.",
+            "name": "1216088a-1b7f-4f21-867a-ff78a2e8aa1a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9b670f8e",
+            "path": "clips/uploads/820xz0BWwz8DmdVuKsnkmOu2I3EBvHQ0f7ZtiHUj.jpg",
+            "description": "Área exterior coberta com mesa e cadeiras para refeições, paredes em pedra e guarda branca.",
+            "name": "ddac191f-fe83-4742-abfe-bbe6b5311ecc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9fcf9d58",
+            "path": "clips/uploads/bUU0L2IfvUmpaNozAzNqF1pvDRSWawFjzT249TRq.jpg",
+            "description": "Alpendre exterior coberto com paredes de pedra, mesa de refeições cinzenta com quatro cadeiras e porta branca de entrada.",
+            "name": "5bdb953b-e99f-4802-995e-0a2e2598343d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_adfcb00e",
+            "path": "clips/uploads/AUEHiGL3BevdISXhJ389VdSkWabVDToOY8DsdjY7.jpg",
+            "description": "Casa de banho com lavatório branco com móvel, espelho iluminado, azulejos azuis e porta de madeira.",
+            "name": "f6c0b5bf-f17e-478b-ae77-f1e17cbe5e31.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1ffd1886",
+            "path": "clips/uploads/BowyicH42k9v4kb4kvphyIyQN0Tn4cCbg3NqNW0v.jpg",
+            "description": "Casa de banho com azulejos azuis, sanita, bidé, lavatório com espelho e pequena janela.",
+            "name": "aac6c21b-c477-4673-a731-61bd98fd41dd.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cc517e39",
+            "path": "clips/uploads/gWr23VhOFQphiBm9pjFYEXZb3TtVFb2lyspTwF5u.jpg",
+            "description": "Casa de banho ampla com azulejos verdes, banheira com cortina, bidé e lavatório com perfumes.",
+            "name": "0ab92866-e458-41b5-b2cf-7f7099c3b692.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c529e7eb",
+            "path": "clips/uploads/LwdSs4p20fdhp3i2q4pDvWu9QUJ5WD4WNdry9kiS.jpg",
+            "description": "Casa de banho verde e branca com banheira, toalheiro, lavatório com móvel e armário espelhado.",
+            "name": "32ecec78-e264-4bc4-a13b-174cec445739.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_48724cb5",
+            "path": "clips/uploads/8KETvuoDcFPkpNUH4KKF9PYY2hFoCC140K1fXYql.jpg",
+            "description": "Sala ampla em open space com sofá de canto preto, zona de jantar e cozinha equipada ao fundo.",
+            "name": "d526619f-8779-4168-bb52-0a9be54d600b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be51b0e5",
+            "path": "clips/uploads/UdR5WfTBcT6NZyOsIwu6BYKGzQ2pJgbD799XS7sm.jpg",
+            "description": "Open space com mesa de jantar branca em primeiro plano, cozinha com ilha e sala de estar ao fundo.",
+            "name": "77a2cb80-cc11-4f5a-ae6e-27dbd0e5719f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b3823232",
+            "path": "clips/uploads/bcXMZyOcbkFP6FUJQey9HhQbMiLJ7n5e7kwylCbK.jpg",
+            "description": "Sala de estar com sofá de pele preto, móvel de TV branco, parede amarela e porta para o exterior.",
+            "name": "61135249-5c8d-42d3-8e1a-a3625364f39b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c547d6fb",
+            "path": "clips/uploads/0hDfrA4MrcbQxXvWyW8J8xKL3O5ZvxCll0QCVtpj.jpg",
+            "description": "Zona de jantar com mesa branca, cadeiras pretas, candeeiro suspenso e parede em pedra decorativa.",
+            "name": "587550b4-1ab3-409e-84af-f4fe4e182532.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8f476524",
+            "path": "clips/uploads/8vzqBNXgozwLgZRIF4vViuSrthnxh9vu80PMIymV.jpg",
+            "description": "Sala de estar luminosa com sofá de canto preto e porta aberta para o pátio com jacuzzi.",
+            "name": "b4ed9578-c802-4993-a740-637c5e1612d4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fdaa28c1",
+            "path": "clips/uploads/dIQfFeEVf2PboBZtPC3msU0n7znJgRHUpVaPWfGW.jpg",
+            "description": "Cozinha equipada branca com ilha em granito preto, bancos altos, frigorífico inox e porta de entrada.",
+            "name": "fb329520-952e-4a4f-bd87-a09b833beb6b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_13c11278",
+            "path": "clips/uploads/P5v9dIQIUn2WcUWH1xDmJ8u765eX174NRQvN6IVM.jpg",
+            "description": "Casa de banho com paredes castanhas, lavatório suspenso, sanita e máquina de lavar roupa Samsung.",
+            "name": "6fce531d-a5ed-40fc-934c-17ebbcc62a61.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9203665d",
+            "path": "clips/uploads/wWjz9yWs8jAKwbeKFge6RexExYFoQJdJpNWUOA84.jpg",
+            "description": "Quarto de casal amplo com cama, cómoda, roupeiro embutido e porta para a suite.",
+            "name": "b2aa4758-e0dd-4386-97cb-0ef1a61fdbf1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6afcc9a0",
+            "path": "clips/uploads/O0NJcBvHEDGFEjft4CbIKs74rAgWKMr2WB8kNmnP.jpg",
+            "description": "Casa de banho da suite em vermelho e preto, com banheira de canto e lavatório duplo.",
+            "name": "fb526037-d7e3-43ec-9a58-526866d1e3d5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b147cead",
+            "path": "clips/uploads/fbg75MsrrkB4xgIUz8meuwuod13A7knZ9s5kAg10.jpg",
+            "description": "Piscina com mosaico azul junto a muro de pedra, guarda-sol verde e moradia com varandas.",
+            "name": "d5c6f408-ee9f-40b1-b2f2-5df686d82f07.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e4d7e2be",
+            "path": "clips/uploads/uzfP4FeIYzM2xEDwRhbUZmHqP3bqlTrIpgob2xhc.jpg",
+            "description": "Área exterior de refeições com mesa, cadeiras, sofás em vime e guarda-sol verde junto à piscina.",
+            "name": "32354561-b951-4e4c-8ef9-41dd37e37ee3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b8f57037",
+            "path": "clips/uploads/BVuosi8CZ9M1tcxWGwPKGIG3HRPo9CvshVDQSm1B.jpg",
+            "description": "Fachada traseira da moradia em pedra, dois pisos, varanda corrida, rede de descanso e pátio.",
+            "name": "ce275ed9-0559-46db-9cb8-85a091a07d1e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4417f618",
+            "path": "clips/uploads/CDMcx4vribDauOTnoRRp9sCTq5nu4t8DIhSkY4Wt.jpg",
+            "description": "Fachada principal da moradia em pedra, com jardim relvado, palmeira, portões brancos e rua empedrada.",
+            "name": "11d22a21-43ef-4289-8092-33e5e15076d4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ad385e2b",
+            "path": "clips/uploads/4uSPwBz2xL21MLFvXbOywsznnCjL5kLG9hFATVhn.jpg",
+            "description": "Alpendre coberto em pedra com portas brancas, vasos e jardim com vista para os montes.",
+            "name": "bab0dd52-e36b-48b8-a17c-0cd39bf984d7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_625dbc0d",
+            "path": "clips/uploads/sojZpj9uDZglzL2zcQt36QTAlz4LyEzeP6Z5klhf.jpg",
+            "description": "Garagem com alpendre de telha, carro estacionado, portão castanho e pátio empedrado amplo.",
+            "name": "ff2bb24b-50a9-41c2-98cc-f76945ec08d7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_31b99756",
+            "path": "clips/uploads/eps9ycUTKRV3S2233D1GzuN8Apz5D6yll1C2JsXP.jpg",
+            "description": "Exterior da moradia em pedra: alpendre coberto com mesa de refeições ao ar livre, ao lado de uma trepadeira verde.",
+            "name": "2a1be368-ad63-4d0a-9fee-42f27a8302d1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_56c907f9",
+            "path": "clips/uploads/V8QQWBkVnfbVfcLwKCaUg2FTezqjG34SDlYr3VeS.jpg",
+            "description": "Entrada da moradia em pedra: degraus de granito que levam a um alpendre coberto, com porta branca e vasos de flores.",
+            "name": "7b4ea7c5-38e7-44b4-961b-dc938b749bd6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1ae7316c",
+            "path": "clips/uploads/DQDfsemzeoU98BfgFPwey7TuoKgrgcQ00NEX5DWB.jpg",
+            "description": "Retrato do consultor Susana Pereira, da RE/MAX Acção.",
+            "name": "Susana Pereira.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/3k5tI9rTMmETmf1b4jB44mknZ5pyXtuqiNUzPicX.mp3",
+    "transcript": {
+        "duration": 37.20000076293945,
+        "text": "Uma moradia em pedra no Marco de Canaveses, com um apartamento T1. Fica numa zona tranquila, perto de todos os serviços. No primeiro piso, três quartos com roupeiros e varandas, um deles em suite. Uma sala ampla, com muita luz natural. Cozinha equipada, com uma área exterior para as refeições. Este piso tem aquecimento e ar-condicionado em todas as divisões. No segundo piso, um T1 equipado, com quarto em suite. Lá fora, jardim, piscina, jacuzzi e garagem para dois carros. A casa tem três entradas individuais, 460 mil euros. Para visitar, fale com a Susana Pereira, da Remax Acção.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.18000000715255737
+            },
+            {
+                "word": "moradia",
+                "start": 0.18000000715255737,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "em",
+                "start": 0.5600000023841858,
+                "end": 0.8399999737739563
+            },
+            {
+                "word": "pedra",
+                "start": 0.8399999737739563,
+                "end": 1.100000023841858
+            },
+            {
+                "word": "no",
+                "start": 1.100000023841858,
+                "end": 1.2999999523162842
+            },
+            {
+                "word": "Marco",
+                "start": 1.2999999523162842,
+                "end": 1.5399999618530273
+            },
+            {
+                "word": "de",
+                "start": 1.5399999618530273,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "Canaveses",
+                "start": 1.6799999475479126,
+                "end": 2.3399999141693115
+            },
+            {
+                "word": "com",
+                "start": 2.440000057220459,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "um",
+                "start": 2.559999942779541,
+                "end": 2.759999990463257
+            },
+            {
+                "word": "apartamento",
+                "start": 2.759999990463257,
+                "end": 3.200000047683716
+            },
+            {
+                "word": "T1",
+                "start": 3.200000047683716,
+                "end": 3.759999990463257
+            },
+            {
+                "word": "Fica",
+                "start": 4.239999771118164,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "numa",
+                "start": 4.320000171661377,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "zona",
+                "start": 4.539999961853027,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "tranquila",
+                "start": 4.760000228881836,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "perto",
+                "start": 5.639999866485596,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 5.760000228881836,
+                "end": 6.139999866485596
+            },
+            {
+                "word": "todos",
+                "start": 6.139999866485596,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "os",
+                "start": 6.300000190734863,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "serviços",
+                "start": 6.460000038146973,
+                "end": 6.980000019073486
+            },
+            {
+                "word": "No",
+                "start": 7.380000114440918,
+                "end": 7.420000076293945
+            },
+            {
+                "word": "primeiro",
+                "start": 7.420000076293945,
+                "end": 7.739999771118164
+            },
+            {
+                "word": "piso",
+                "start": 7.739999771118164,
+                "end": 8.039999961853027
+            },
+            {
+                "word": "três",
+                "start": 8.319999694824219,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "quartos",
+                "start": 8.5600004196167,
+                "end": 8.880000114440918
+            },
+            {
+                "word": "com",
+                "start": 8.880000114440918,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "roupeiros",
+                "start": 9.100000381469727,
+                "end": 9.5
+            },
+            {
+                "word": "e",
+                "start": 9.5,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "varandas",
+                "start": 9.720000267028809,
+                "end": 10.15999984741211
+            },
+            {
+                "word": "um",
+                "start": 10.460000038146973,
+                "end": 10.539999961853027
+            },
+            {
+                "word": "deles",
+                "start": 10.539999961853027,
+                "end": 10.859999656677246
+            },
+            {
+                "word": "em",
+                "start": 10.859999656677246,
+                "end": 11.199999809265137
+            },
+            {
+                "word": "suite",
+                "start": 11.199999809265137,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "Uma",
+                "start": 11.859999656677246,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "sala",
+                "start": 12.0600004196167,
+                "end": 12.260000228881836
+            },
+            {
+                "word": "ampla",
+                "start": 12.260000228881836,
+                "end": 12.84000015258789
+            },
+            {
+                "word": "com",
+                "start": 12.920000076293945,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "muita",
+                "start": 13.100000381469727,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "luz",
+                "start": 13.460000038146973,
+                "end": 13.619999885559082
+            },
+            {
+                "word": "natural",
+                "start": 13.619999885559082,
+                "end": 14.0600004196167
+            },
+            {
+                "word": "Cozinha",
+                "start": 14.5,
+                "end": 14.65999984741211
+            },
+            {
+                "word": "equipada",
+                "start": 14.65999984741211,
+                "end": 15.199999809265137
+            },
+            {
+                "word": "com",
+                "start": 15.359999656677246,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "uma",
+                "start": 15.460000038146973,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "área",
+                "start": 15.819999694824219,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "exterior",
+                "start": 15.819999694824219,
+                "end": 16.299999237060547
+            },
+            {
+                "word": "para",
+                "start": 16.299999237060547,
+                "end": 16.5
+            },
+            {
+                "word": "as",
+                "start": 16.5,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "refeições",
+                "start": 16.739999771118164,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "Este",
+                "start": 17.700000762939453,
+                "end": 17.780000686645508
+            },
+            {
+                "word": "piso",
+                "start": 17.780000686645508,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "tem",
+                "start": 18.059999465942383,
+                "end": 18.280000686645508
+            },
+            {
+                "word": "aquecimento",
+                "start": 18.280000686645508,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "e",
+                "start": 18.899999618530273,
+                "end": 19.200000762939453
+            },
+            {
+                "word": "ar",
+                "start": 19.200000762939453,
+                "end": 19.299999237060547
+            },
+            {
+                "word": "condicionado",
+                "start": 19.299999237060547,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "em",
+                "start": 19.940000534057617,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "todas",
+                "start": 20.15999984741211,
+                "end": 20.459999084472656
+            },
+            {
+                "word": "as",
+                "start": 20.459999084472656,
+                "end": 20.700000762939453
+            },
+            {
+                "word": "divisões",
+                "start": 20.700000762939453,
+                "end": 21.15999984741211
+            },
+            {
+                "word": "No",
+                "start": 21.639999389648438,
+                "end": 21.739999771118164
+            },
+            {
+                "word": "segundo",
+                "start": 21.739999771118164,
+                "end": 22
+            },
+            {
+                "word": "piso",
+                "start": 22,
+                "end": 22.360000610351562
+            },
+            {
+                "word": "um",
+                "start": 22.559999465942383,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "T1",
+                "start": 22.700000762939453,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "equipado",
+                "start": 22.979999542236328,
+                "end": 23.559999465942383
+            },
+            {
+                "word": "com",
+                "start": 23.700000762939453,
+                "end": 23.920000076293945
+            },
+            {
+                "word": "quarto",
+                "start": 23.920000076293945,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "em",
+                "start": 24.15999984741211,
+                "end": 24.440000534057617
+            },
+            {
+                "word": "suite",
+                "start": 24.440000534057617,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "Lá",
+                "start": 25.1200008392334,
+                "end": 25.239999771118164
+            },
+            {
+                "word": "fora",
+                "start": 25.239999771118164,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "jardim",
+                "start": 25.940000534057617,
+                "end": 26.15999984741211
+            },
+            {
+                "word": "piscina",
+                "start": 26.760000228881836,
+                "end": 26.84000015258789
+            },
+            {
+                "word": "jacuzzi",
+                "start": 27.239999771118164,
+                "end": 27.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 27.65999984741211,
+                "end": 27.860000610351562
+            },
+            {
+                "word": "garagem",
+                "start": 27.860000610351562,
+                "end": 28.31999969482422
+            },
+            {
+                "word": "para",
+                "start": 28.31999969482422,
+                "end": 28.459999084472656
+            },
+            {
+                "word": "dois",
+                "start": 28.459999084472656,
+                "end": 28.760000228881836
+            },
+            {
+                "word": "carros",
+                "start": 28.760000228881836,
+                "end": 29.139999389648438
+            },
+            {
+                "word": "A",
+                "start": 29.139999389648438,
+                "end": 29.520000457763672
+            },
+            {
+                "word": "casa",
+                "start": 29.520000457763672,
+                "end": 29.81999969482422
+            },
+            {
+                "word": "tem",
+                "start": 29.81999969482422,
+                "end": 30.020000457763672
+            },
+            {
+                "word": "três",
+                "start": 30.020000457763672,
+                "end": 30.399999618530273
+            },
+            {
+                "word": "entradas",
+                "start": 30.399999618530273,
+                "end": 30.780000686645508
+            },
+            {
+                "word": "individuais",
+                "start": 30.780000686645508,
+                "end": 31.520000457763672
+            },
+            {
+                "word": "460",
+                "start": 32.02000045776367,
+                "end": 32.939998626708984
+            },
+            {
+                "word": "mil",
+                "start": 32.939998626708984,
+                "end": 33.20000076293945
+            },
+            {
+                "word": "euros",
+                "start": 33.20000076293945,
+                "end": 33.599998474121094
+            },
+            {
+                "word": "Para",
+                "start": 33.91999816894531,
+                "end": 34.02000045776367
+            },
+            {
+                "word": "visitar",
+                "start": 34.02000045776367,
+                "end": 34.65999984741211
+            },
+            {
+                "word": "fale",
+                "start": 34.91999816894531,
+                "end": 34.91999816894531
+            },
+            {
+                "word": "com",
+                "start": 34.91999816894531,
+                "end": 35.099998474121094
+            },
+            {
+                "word": "a",
+                "start": 35.099998474121094,
+                "end": 35.220001220703125
+            },
+            {
+                "word": "Susana",
+                "start": 35.220001220703125,
+                "end": 35.439998626708984
+            },
+            {
+                "word": "Pereira",
+                "start": 35.439998626708984,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "da",
+                "start": 36.060001373291016,
+                "end": 36.18000030517578
+            },
+            {
+                "word": "Remax",
+                "start": 36.18000030517578,
+                "end": 36.58000183105469
+            },
+            {
+                "word": "Acção",
+                "start": 36.58000183105469,
+                "end": 36.959999084472656
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.20000076293945,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.2,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia em pedra com T1",
+                        "params": {
+                            "src": "img_ba691609",
+                            "avatar": "img_1ae7316c",
+                            "price": "460.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia em pedra com apartamento T1, no Marco",
+                            "location": "Marco de Canaveses · 280 m² · 3 quartos",
+                            "agentName": "Susana Pereira",
+                            "phone": "+351 918 077 006",
+                            "legal": "RE/MAX Acção · Ref. 122441084-66"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.2,
+                "end": 7.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Marco de Canaveses",
+                        "params": {
+                            "src": "img_4417f618",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.3,
+                "end": 11.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Três quartos, um em suite",
+                        "params": {
+                            "src": "img_776b6213",
+                            "src2": "img_0693c9af",
+                            "src3": "img_d2dc9b98",
+                            "src4": "img_65b7bcc7",
+                            "srcs": [
+                                "img_776b6213",
+                                "img_0693c9af",
+                                "img_d2dc9b98",
+                                "img_65b7bcc7",
+                                "img_cc89eb8e",
+                                "img_d74cbc70",
+                                "img_cc517e39",
+                                "img_c529e7eb",
+                                "img_adfcb00e",
+                                "img_1ffd1886"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.7,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Sala com luz natural",
+                        "params": {
+                            "src": "img_3ecca0c1",
+                            "src2": "img_a3e1003c",
+                            "src3": "img_6d59a225",
+                            "src4": "img_8896b61e",
+                            "src5": "img_9badfaf4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 17.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Cozinha equipada",
+                        "params": {
+                            "src": "img_58294e1c",
+                            "src2": "img_cd12cd48",
+                            "src3": "img_c2d3506e",
+                            "src4": "img_9b670f8e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 21.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Aquecimento e ar condicionado",
+                        "params": {
+                            "src": "img_caa49bc6",
+                            "title": "Aquecimento e ar condicionado",
+                            "items": [
+                                "Aquecimento",
+                                "Ar condicionado",
+                                "Todas as divisões"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.5,
+                "end": 25,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Apartamento T1 equipado",
+                        "params": {
+                            "src": "img_48724cb5",
+                            "src2": "img_be51b0e5",
+                            "src3": "img_fdaa28c1",
+                            "src4": "img_9203665d",
+                            "src5": "img_6afcc9a0",
+                            "srcs": [
+                                "img_48724cb5",
+                                "img_be51b0e5",
+                                "img_fdaa28c1",
+                                "img_9203665d",
+                                "img_6afcc9a0",
+                                "img_b3823232",
+                                "img_c547d6fb",
+                                "img_13c11278"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25,
+                "end": 27.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Piscina e jacuzzi",
+                        "params": {
+                            "src": "img_35617865",
+                            "src2": "img_b147cead",
+                            "src3": "img_ecc9418b",
+                            "src4": "img_8f476524"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.6,
+                "end": 29.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Garagem para 2 carros",
+                        "params": {
+                            "src": "img_625dbc0d",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.6,
+                "end": 31.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Três entradas individuais",
+                        "params": {
+                            "src": "img_56c907f9",
+                            "src2": "img_9fcf9d58",
+                            "srcs": [
+                                "img_56c907f9",
+                                "img_9fcf9d58",
+                                "img_31b99756",
+                                "img_ad385e2b",
+                                "img_b8f57037",
+                                "img_d90dd4f3"
+                            ],
+                            "angle": 11,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.9,
+                "end": 33.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "460.000 €",
+                        "params": {
+                            "src": "img_e4d7e2be",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.9,
+                "end": 37.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Susana Pereira",
+                        "params": {
+                            "src": "img_1ae7316c",
+                            "name": "Susana Pereira",
+                            "role": "Consultora imobiliária · RE/MAX Acção",
+                            "buttons": "+351 918 077 006 | Marque a sua visita",
+                            "phone": "+351 918 077 006"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-122441084-66-vl95h/clip.mp4",
+    "error": null
+}

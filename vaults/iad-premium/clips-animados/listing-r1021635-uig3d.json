@@ -1,0 +1,1353 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 em Pinhel com adega e vinha por 141.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-pinhel-449m2/r1021635",
+            "agent": "Nuno Ramalho",
+            "phone": "+351962425095",
+            "email": "",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa em Pinhel com vista para a Ribeira das Cabras.",
+            "voiceover": "Uma casa em Pinhel com vista para a Ribeira das Cabras. No centro de uma aldeia tranquila do concelho de Pinhel. No rés-do-chão, cozinha aberta para a sala, com recuperador de calor. Um quarto e uma casa de banho. No primeiro andar, outra cozinha, lareira e salas amplas. Três quartos, um deles com varanda. O sótão abre para um terraço tipo miradouro, com vista sobre a aldeia. Lá fora, pátio para dois carros, adega em pedra e garagem independente. E um terreno rústico de mais de três mil metros, com oliveiras e vinha. Cento e quarenta e um mil euros. Para visitar, fale com o Nuno Ramalho, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "vista do terraço sobre a ribeira e a natureza",
+                    "vo": "Uma casa em Pinhel com vista para a Ribeira das Cabras.",
+                    "caption": "Vista para a ribeira"
+                },
+                {
+                    "photo": "fachada da moradia na aldeia",
+                    "vo": "No centro de uma aldeia tranquila do concelho de Pinhel.",
+                    "caption": "Pinhel"
+                },
+                {
+                    "photo": "cozinha e sala do rés-do-chão com recuperador de calor",
+                    "vo": "No rés-do-chão, cozinha aberta para a sala, com recuperador de calor.",
+                    "caption": "Recuperador de calor"
+                },
+                {
+                    "photo": "quarto do rés-do-chão com roupeiro",
+                    "vo": "Um quarto e uma casa de banho.",
+                    "caption": "Quarto no rés-do-chão"
+                },
+                {
+                    "photo": "sala do primeiro andar com lareira",
+                    "vo": "No primeiro andar, outra cozinha, lareira e salas amplas.",
+                    "caption": "Lareira e salas amplas"
+                },
+                {
+                    "photo": "quarto grande com acesso à varanda",
+                    "vo": "Três quartos, um deles com varanda.",
+                    "caption": "Quarto com varanda"
+                },
+                {
+                    "photo": "terraço do sótão",
+                    "vo": "O sótão abre para um terraço tipo miradouro, com vista sobre a aldeia.",
+                    "caption": "Terraço tipo miradouro"
+                },
+                {
+                    "photo": "pátio exterior e adega em pedra",
+                    "vo": "Lá fora, pátio para dois carros, adega em pedra e garagem independente.",
+                    "caption": "Adega em pedra"
+                },
+                {
+                    "photo": "terreno rústico com oliveiras e vinha",
+                    "vo": "E um terreno rústico de mais de três mil metros, com oliveiras e vinha.",
+                    "caption": "Terreno com oliveiras e vinha"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Cento e quarenta e um mil euros. Para visitar, fale com o Nuno Ramalho, da IAD Portugal.",
+                    "caption": "141.000 € · Nuno Ramalho · IAD Portugal · AMI 11220"
+                }
+            ],
+            "flags": [
+                "Localização: o título diz 'Pinhel (Alto do Palurdo)' e o texto diz 'aldeia de Gamelas'. Usei só 'Pinhel'. Confirmar o nome da aldeia.",
+                "Lote de 197,5 m² nos detalhes vs terreno rústico de cerca de 3.200 m² e garagem independente de 40 m² descritos como 'incluídos no negócio'. Parecem ser parcelas separadas. Confirmar que estão incluídos no preço de 141.000 €.",
+                "Área bruta de 448,7 m² vs área útil de 145,6 m²: a diferença é grande. Deixei as áreas de fora.",
+                "Ficaram de fora: certificado energético F, ano de construção 1983, 'remodelação recente' da casa de banho e 'pronta a habitar'.",
+                "Hype do anúncio retirado ('fantástica', 'deslumbrante', 'oportunidade única', 'não perca')."
+            ],
+            "message": "Bom dia Sr. Nuno, fiz este vídeo da sua moradia em Pinhel para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Casa/Moradia 4 quartos de 449 m² em PINHEL",
+            "price": 141000,
+            "details": {
+                "Preço": "141 000 €",
+                "Localização": "PINHEL, 6400-271",
+                "Referência": "1021635",
+                "Área Bruta m²": "448.7",
+                "Área Total do Lote m²": "197.5",
+                "Quartos": 4,
+                "Ano de Construção": 1983,
+                "Certificado Energético": "F",
+                "Características": "448,7 m² área bruta, 145,6 m² úteis, 3 casas de banho, 2 estacionamentos, Terraço, Varanda, Sala de estar, Sala de jantar, Construído em 1983"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Nuno Ramalho - and phone number - +351962425095. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Nuno Ramalho.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Uma casa em Pinhel com vista para a Ribeira das Cabras.».\n\nSuggested scenes (photo → on-screen caption):\n- vista do terraço sobre a ribeira e a natureza → «Vista para a ribeira»\n- fachada da moradia na aldeia → «Pinhel»\n- cozinha e sala do rés-do-chão com recuperador de calor → «Recuperador de calor»\n- quarto do rés-do-chão com roupeiro → «Quarto no rés-do-chão»\n- sala do primeiro andar com lareira → «Lareira e salas amplas»\n- quarto grande com acesso à varanda → «Quarto com varanda»\n- terraço do sótão → «Terraço tipo miradouro»\n- pátio exterior e adega em pedra → «Adega em pedra»\n- terreno rústico com oliveiras e vinha → «Terreno com oliveiras e vinha»\n- end card → «141.000 € · Nuno Ramalho · IAD Portugal · AMI 11220»\n\nHere are the house details:\n\nCasa/Moradia 4 quartos de 449 m² em PINHEL\nPreço\n141 000 €\nLocalização\nPINHEL, 6400-271\nReferência\n1021635\nÁrea Bruta m²\n448.7\nÁrea Total do Lote m²\n197.5\nQuartos\n4\nAno de Construção\n1983\nCertificado Energético\nF\nCaracterísticas\n448,7 m² área bruta, 145,6 m² úteis, 3 casas de banho, 2 estacionamentos, Terraço, Varanda, Sala de estar, Sala de jantar, Construído em 1983\n\nDescrição\nFantástica Moradia T1+3 em Pinhel (Alto do Palurdo) – Pronta a Habitar com Terreno e Garagem!\n\nExcelente oportunidade de investimento ou habitação própria no centro da tranquila aldeia de Gamelas. Esta fantástica moradia T1+3 destaca-se pela sua versatilidade, divisões espaçosas e uma excelente exposição solar. O imóvel está distribuído por rés-do-chão, primeiro andar e sótão, oferecendo todo o conforto que a sua família precisa.\n\nDistribuição do Imóvel:\n* Rés-do-Chão (R/C):\n    * Pátio exterior de grandes dimensões com capacidade de estacionamento para pelo menos duas viaturas.\n    * Cozinha equipada e sala de estar em open space, equipada com um acolhedor recuperador de calor a lenha.\n    * 1 Quarto generoso com roupeiro embutido.\n    * 1 Casa de banho completa com base de duche (com remodelação e upgrade recente).\n    * Adega em pedra tradicional e dois anexos independentes, ideais para arrumações.\n\n* Primeiro Andar:\n    * Cozinha equipada, lareira tradicional e despensa funcional.\n    * Salas de estar e de jantar em open space, criando um ambiente amplo e luminoso.\n    * 3 Quartos confortáveis, sendo um deles de grandes dimensões e com acesso direto a uma varanda.\n    * 2 Casas de banho (uma delas completa).\n\n* Piso Superior (Sótão):\n    * Espaço amplo com grande potencial para transformação em quartos extra, escritório ou zona de lazer.\n    * Acesso direto a um magnífico terraço tipo miradouro, com vistas totalmente desafogadas sobre a aldeia, a natureza envolvente e a deslumbrante Ribeira das Cabras.\n\nDuas Mais-Valias Exclusivas Incluídas no Negócio:\n* Garagem fechada independente com cerca de 40 m².\n* Terreno rústico com cerca de 3.200 m². Terreno de cultura com poço, oliveiras, pereiras, pastagem e vinha.\n\nEsta é a oportunidade perfeita para quem procura a paz do meio rural sem abdicar do conforto e do espaço. \n\nPronta a entrar e habitar!\n\nNão perca esta oportunidade única. Entre em contacto connosco hoje mesmo e agende a sua visita!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia com terreno numa aldeia do concelho de Pinhel, junto à Ribeira das Cabras",
+            "summary": "Moradia com dois pisos, sótão com terraço, adega em pedra e mais de 3 mil m² de terreno com oliveiras e vinha, numa aldeia do concelho de Pinhel, distrito da Guarda. A Ribeira das Cabras, que se vê da casa, é um dos afluentes do rio Côa.",
+            "timeline": [
+                {
+                    "label": "D. Sancho I dá foral a Pinhel",
+                    "sublabel": "1209"
+                },
+                {
+                    "label": "Pinhel é elevada a cidade por D. José I",
+                    "sublabel": "1770"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Freguesias do concelho de Pinhel",
+                    "value": 18,
+                    "unit": "freguesias"
+                },
+                {
+                    "label": "Área do concelho de Pinhel",
+                    "value": 484.5,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Terreno rústico da propriedade (segundo o anúncio)",
+                    "value": 3000,
+                    "unit": "m² (mais de)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Interior da casa",
+                    "left": {
+                        "title": "Rés-do-chão",
+                        "points": [
+                            "Cozinha aberta para a sala",
+                            "Recuperador de calor",
+                            "1 quarto",
+                            "1 casa de banho"
+                        ]
+                    },
+                    "right": {
+                        "title": "1.º andar e sótão",
+                        "points": [
+                            "Segunda cozinha e lareira",
+                            "Salas amplas",
+                            "3 quartos, um com varanda",
+                            "Sótão com terraço tipo miradouro"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A Ribeira das Cabras é um dos afluentes que mais água levam ao rio Côa",
+                "Pinhel fica no distrito da Guarda e é conhecida como 'Cidade Falcão'",
+                "Lá fora: pátio para 2 carros, adega em pedra e garagem independente",
+                "Terreno com oliveiras e vinha",
+                "Visitas com Nuno Ramalho, da IAD Portugal"
+            ],
+            "sources": [
+                "https://www.infopedia.pt/artigos/$pinhel",
+                "https://www.cm-pinhel.pt/wp-content/uploads/2025/05/Plano-de-Desenvolvimento-Social-2024-2028.pdf",
+                "https://www.cm-pinhel.pt/doc/investir-pinhel/guia-investidor/guia-investidor_fr.pdf",
+                "https://aldeiasportuguesas.pt/guarda/pinhel/",
+                "https://codigopostal.ciberforma.pt/cidades/pinhel/",
+                "https://en.wikipedia.org/wiki/Pinhel",
+                "https://comum.rcaap.pt/bitstreams/f1991817-2d9a-4c50-a010-0af1f9a49db7/download",
+                "https://www.vivernocentrodeportugal.com/en/municipality/pinhel",
+                "https://www.forbespt.com/?p=131737",
+                "https://accessibleportugal.com/wp-content/uploads/2022/03/brochura-pinhel_web.pdf"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 em Pinhel com adega e vinha por 141.000 €",
+            "description": "Mais de 3.000 m² de terreno com oliveiras e vinha, numa aldeia do concelho de Pinhel 🫒\n\nT4 · 145,6 m² úteis · 141.000 €\n\nA casa fica no centro de uma aldeia tranquila e tem vista para a Ribeira das Cabras.\nNo rés-do-chão, a cozinha abre para a sala, que tem recuperador de calor. Há também um quarto e uma casa de banho.\nNo primeiro andar há uma segunda cozinha, uma lareira e salas amplas. Ficam aqui mais três quartos, um deles com varanda.\nO sótão dá acesso a um terraço que funciona como miradouro sobre a aldeia.\nLá fora, o pátio leva dois carros. Há ainda uma adega em pedra e uma garagem independente.\n\nConstrução de 1983 · 448,7 m² de área bruta · 3 casas de banho\nCertificado energético F · Ref. 1021635\n\nPara visitar, fale com o Nuno Ramalho, da IAD Portugal: +351 962 425 095",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "casasemportugal",
+                "pinhel",
+                "guarda",
+                "beirainterior",
+                "casacomterreno",
+                "vinha",
+                "oliveiras",
+                "vidanocampo",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1021635-uig3d",
+    "created_at": "2026-10-21T11:41:33+00:00",
+    "updated_at": "2026-10-21T12:10:52+00:00",
+    "source_path": "clips/uploads/KdQ6WyoR06IigsHTIzV01Y9wRN31BeFkhvnq6yQI.mp3",
+    "images": [
+        {
+            "id": "img_e0bb4111",
+            "path": "clips/uploads/XjAY7cHZXWGkzjQSEZSWCA2Qjo7MkpQOn0Y7HyTt.jpg",
+            "description": "Vista aérea de drone da moradia branca com telhado laranja, contornada a azul, entre casas de pedra da aldeia.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_430c3af1",
+            "path": "clips/uploads/OsdpsdtkXlVxODex6WRYd0wUgq9HLuKtRRxjBI9M.jpg",
+            "description": "Fachada principal da moradia branca com varanda em ferro forjado, portão preto, calçada e vista para o vale.",
+            "name": "01a10dafb044546825841cdc8b1a7e93.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bffec5ae",
+            "path": "clips/uploads/UAxZVkBxjIGMN1B7GXlIqZ4sZm7m1FWYvKLMD1f7.jpg",
+            "description": "Pátio coberto à entrada, com escadaria de mármore até ao primeiro andar, varanda em ferro e carro estacionado.",
+            "name": "01a0e866b838f2d09ff2afd6742482b1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_777917ef",
+            "path": "clips/uploads/svb4I9oYBacjhATeemlM9JKGEZ5SVcSP0PSnDtKC.jpg",
+            "description": "Pátio/garagem coberta com pilares brancos, escadas exteriores com corrimão em ferro e carro verde estacionado.",
+            "name": "01a0e866b8ae702fc1322cce8183f04d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0aa85a7f",
+            "path": "clips/uploads/hsblXl3sszKg8W0elcLnhHX9Tfj15hjPIKsPLgFd.jpg",
+            "description": "Terraço do sótão com porta e janelas do sótão, cata-vento de galo no telhado e céu azul.",
+            "name": "01a0e866b4ba98c35f66899aacfaac8b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f4832043",
+            "path": "clips/uploads/z43HpEi9g6QRmx7BJyKefymMHFZJc76Mq4EGSYsX.jpg",
+            "description": "Terraço amplo tipo miradouro no topo da casa, muros brancos, chaminé e céu azul intenso.",
+            "name": "01a0e866b4bafd4bf4ebe7ce76f07085.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ca0b54b0",
+            "path": "clips/uploads/8SnJsjRSsnMUE2NrruemsDxgJzyX5SPgsa1qyZ2Q.jpg",
+            "description": "Terraço com gradeamento em ferro e vista panorâmica sobre a aldeia, telhados laranja e encosta arborizada.",
+            "name": "01a0e866b57bc1e9894f36ba965b94f1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d76a6f5a",
+            "path": "clips/uploads/2SAalkNohqQaWswou8hec35wdbKJ2Kf7ptz6ppEM.jpg",
+            "description": "Vista panorâmica do telhado com cata-vento de galo sobre vale verde e colinas, céu com nuvens.",
+            "name": "01a10e19f15a98a6544a80172e6c373d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a7fd0b7d",
+            "path": "clips/uploads/3eW4U4haPY0fSnzgqPOmDpSVUS68A591vVA9MQUg.jpg",
+            "description": "Cozinha do rés-do-chão com armários de madeira, bancada em granito, mesa de jantar com seis cadeiras.",
+            "name": "01a0e866b7320f31ca07f00ba7c7662d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_10de92a7",
+            "path": "clips/uploads/SAfObPVnzfdM0TDza1Z0FozojEE04IEMoO3K53BW.jpg",
+            "description": "Cozinha aberta para sala no rés-do-chão, com recuperador de calor, sofá cinzento e mesa de granito.",
+            "name": "01a0e866b73c67a71011a2c5ba0f808c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2ef335e4",
+            "path": "clips/uploads/llJ3d8BPZoh7rDiNclfyrA0EXTCmwSIUUL8jKn37.jpg",
+            "description": "Cozinha aberta para a sala no rés-do-chão, com mesa de granito, armários de madeira, sofá e recuperador de calor.",
+            "name": "01a0e866b715ac103f676f72aa46b68b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_677467ec",
+            "path": "clips/uploads/ik36tVAxIdNvlTFPDPBPzPDiO0XuhyI9JZ31DFG8.jpg",
+            "description": "Casa de banho com base de duche, sanita, bidé, lavatório e máquina de lavar roupa.",
+            "name": "01a0e866b6eeaa6501a59b684b702a06.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_45445b71",
+            "path": "clips/uploads/KHrwqhOLEBvULjtrPMcUFVGB2fQq8NKJPwHXDSOC.jpg",
+            "description": "Casa de banho em azulejo bege, vista para a porta, com máquina de lavar, sanita e bidé.",
+            "name": "01a10e2e6331fb20ede15a5e3fb62351.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_576d91de",
+            "path": "clips/uploads/ps8zn3rGG5xEZgzcDFDKQ5OwyBu47k51NCaIKICP.jpg",
+            "description": "Corredor de ladrilho bege com cadeira antiga de veludo vermelho e porta para a casa de banho.",
+            "name": "01a0e866b4ecfb6577caf1f14ca7eb73.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f6ccd52",
+            "path": "clips/uploads/aMFGbeIw7bWDC8BXdJQrq1kIViOqJZVZMUeCJDXc.jpg",
+            "description": "Quarto com cama de colcha de renda, roupeiro com portas espelhadas e cómoda de madeira.",
+            "name": "01a0e866b7e696962c8d2bea111947c1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a4d487a3",
+            "path": "clips/uploads/LUqZFhbr8I3BahzyCKyptneA5KWwRYpOMJcnCRNa.jpg",
+            "description": "Quarto amplo com cama de casal em madeira, mesas de cabeceira, roupeiro embutido e cómoda com espelho.",
+            "name": "01a0e866b659d91cc7c291f42b3e8ec8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_38905c13",
+            "path": "clips/uploads/MAHG9zHl0dDCvUTtth1JAlMtXLk0zAPoBHYhD8NU.jpg",
+            "description": "Adega/arrecadação em pedra e betão, com termoacumulador, ferramentas agrícolas e chão de cimento.",
+            "name": "01a0e866b7b82ef171fd2d0db6f3c6f4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ac384ba8",
+            "path": "clips/uploads/ydqcY7Dv0F74DgtzmPR8C76CjtqZdVXrzpWXk3YK.jpg",
+            "description": "Arrecadação/garagem ampla em betão, com teto de vigas, materiais de obra e objetos tapados com plástico.",
+            "name": "01a0e866b7cf9c5a658072a30ae3ddaf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b166359f",
+            "path": "clips/uploads/IWULAugfooOUbDRljGEuqvhP9tEG0myrOIZObrZC.jpg",
+            "description": "Cozinha do primeiro andar, rústica, com mesa e bancos de madeira, azulejos vintage e porta para o exterior.",
+            "name": "01a0e866b73f297195667353a3543ab7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_927ac5da",
+            "path": "clips/uploads/145dJnMr9hQcGuky9E3AyYtbFIeZncpNp6WLKEhh.jpg",
+            "description": "Cozinha do primeiro andar com lareira de granito, relógio de parede, mesa comprida de madeira e azulejos amarelos.",
+            "name": "01a0e866b904d28d35f9366672c74118.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_378e8ca4",
+            "path": "clips/uploads/dPHEomkq4QhDhRsShwWp3UHrXRoPBZ8ORbfyv72c.jpg",
+            "description": "Casa de banho antiga com azulejos florais cor de laranja, sanita, lavatório de coluna e tapetes verdes.",
+            "name": "01a0e86f6b2db0668c5fe281baa53ca5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_70ad7827",
+            "path": "clips/uploads/NciTJxqLOOXaHxwo4eWInOlwcEwDz3V7xGXwm3Oh.jpg",
+            "description": "Despensa ou arrumos pequenos com prateleiras metálicas brancas e vermelhas cheias de caixas e utensílios.",
+            "name": "01a0e866b7805aec53fb234c32d899be.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_593c6dea",
+            "path": "clips/uploads/VeHaUm1Tf6z4Bf1GqWbTodbHLeJplX8V8deeoGZL.jpg",
+            "description": "Cozinha ampla com armários de madeira, lareira branca, mesa rústica com bancos e chão de mosaico.",
+            "name": "01a0e866b855b07a1abdb6421b7feb9a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6ce1a304",
+            "path": "clips/uploads/T8ujdloW7DHmX6526YBIS83lGJmHWIvS2Rzg2jja.jpg",
+            "description": "Corredor de entrada com chão de mosaico floral, candeeiro pendente, quadros e porta exterior ao fundo.",
+            "name": "01a0e866b7a4143b74a727ac0cd430c0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_309a3d2e",
+            "path": "clips/uploads/niPBbjKgLzxWFZVDa5nhXVWoRYSvHpmHee7vy6Hj.jpg",
+            "description": "Sala de estar com cadeirões capitonê em pele, mesa de centro, parquet e zona de jantar ao fundo.",
+            "name": "01a0e866b86ea7602cd643e7e1596947.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e49b9a6f",
+            "path": "clips/uploads/XDY8463CYGs0OkXhVhfSEiKrQsrknUS7C8Zpr0ma.jpg",
+            "description": "Sala de jantar com mesa oval, cadeiras em pele, cristaleira de madeira, lustre e chão em parquet.",
+            "name": "01a0e866b8d8aa638e0e8ce3d29a6ec1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7bc9095e",
+            "path": "clips/uploads/nKrtyreuNg6TsIn6qNMBd60PfxqmB7PeMaHm1SaG.jpg",
+            "description": "Quarto principal amplo com cama de casal, colcha xadrez azul, cómoda, televisão e janela com cortinado.",
+            "name": "01a0e866b76615183218ec80db9776d7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_31151401",
+            "path": "clips/uploads/hOLy1pJfvdIi2A0QRZoEKtkerbGBr9EojhdcVdF7.jpg",
+            "description": "Quarto principal visto de outro ângulo, com roupeiro de madeira, arca, televisão e porta para o corredor.",
+            "name": "01a0e866b6c3ed4c2d84fbdf6bfb34ab.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2d01cd78",
+            "path": "clips/uploads/PAbv2ROIlSKd7dEh38hBWhKohwS7f41yPLwVecX1.jpg",
+            "description": "Mesmo quarto principal com arca de madeira junto à janela, roupeiro e cama de casal xadrez azul.",
+            "name": "01a0e866b887bb953394429099ad2f19.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2ebb704a",
+            "path": "clips/uploads/mXbHHPSc6RwxvaFqusTwRoU33EwFM5zniXJPA55H.jpg",
+            "description": "Quarto de casal com colcha amarela, mesas de cabeceira antigas, quadros religiosos e porta-janela com luz natural.",
+            "name": "01a0e866b74131551ab3eb40647534b9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ad88ceaa",
+            "path": "clips/uploads/bRSACpiToL387WxqiYwAkZ4ojMge4wQutpNp9wYq.jpg",
+            "description": "Quarto de casal com mobília antiga em madeira envernizada, colcha amarela, roupeiro grande e quadros religiosos.",
+            "name": "01a0e866b8846ede959f5d7eac92d700.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f730393d",
+            "path": "clips/uploads/kQXySMkRaJqDWVcxvgRFdqAZyfEu2S0S9mGmfbEd.jpg",
+            "description": "Corredor comprido com chão em mosaico florido, portas de madeira e candeeiro pendente branco.",
+            "name": "01a0e866b6f1333c95bae9ab32bfdd5d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3f571467",
+            "path": "clips/uploads/N3GfnREKyCMaRcxSq0VjMHqf8vNGPRFVZf6nNan9.jpg",
+            "description": "Casa de banho vista de cima, louças cor-de-rosa, banheira, bidé, azulejos florais alaranjados e cortina com espigas.",
+            "name": "01a0e866b79eefe97a3755936a0faad5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5786a917",
+            "path": "clips/uploads/TQdDfDv8i8RDhZYdrDEDZJhRePHETUPp9Vljf5JB.jpg",
+            "description": "Casa de banho com lavatório, banheira e bidé cor-de-rosa, azulejos padronizados laranja e cortina de duche.",
+            "name": "01a0e866b9963ff27be1b7a075df6065.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_97ee40dd",
+            "path": "clips/uploads/56dltxtuIu8sK20ftJs3Be1ZNFaf15cC9psTZSIm.jpg",
+            "description": "Quarto de casal amplo com mobília clássica escura, roupeiro com espelhos, candeeiro de globos e cadeirão estofado.",
+            "name": "01a0e866b5ca1eaa759794f1cff5534a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ea10fea8",
+            "path": "clips/uploads/rcflnJZSJkYEePrnaUGDGWnL44QKVCVEArZvEIlb.jpg",
+            "description": "Quarto de casal com cama de madeira entalhada, cómoda com espelho, cadeirão e porta para a varanda.",
+            "name": "01a0e866b6aa1ca4968b3ef46fd188cb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9eacade1",
+            "path": "clips/uploads/JOM2Wxnb62qHn1siX4wPQasO7UTOUjz8qLCLd68b.jpg",
+            "description": "Garagem independente vista de fora, portões verdes metálicos abertos, rua em calçada e muros de pedra.",
+            "name": "01a0e866b7ff0f451bfb5f3551e093ca.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2c58ec60",
+            "path": "clips/uploads/ivxfFaIb1sQwqOzJYvG4RGFRcVVOf6vPfh5iPoT1.jpg",
+            "description": "Interior da garagem independente, vazia, chão em cimento, paredes rebocadas e teto inclinado em tijolo.",
+            "name": "01a0e866b8c53eefe5473b424cd9bdbb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c6fd6849",
+            "path": "clips/uploads/WKJGYbDDs9egD3PwjcjWAuPf4eAgV6htzIvwUMmk.png",
+            "description": "Retrato do consultor Nuno Ramalho, da IAD Portugal.",
+            "name": "Nuno Ramalho.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1d13cb93",
+            "path": "clips/uploads/gLClIdijavHTRL4ybQX3v127HBGOulJkU3nnqvrR.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/KdQ6WyoR06IigsHTIzV01Y9wRN31BeFkhvnq6yQI.mp3",
+    "transcript": {
+        "duration": 40.959999084472656,
+        "text": "Uma casa em pinhel com vista para a Ribeira das Cabras, no centro de uma aldeia tranquila do Conselho de Pinhel. No resto do chão, cozinha aberta para a sala, com recuperador de calor. Um quarto e uma casa de banho. No primeiro andar, outra cozinha, lareira e salas amplas. Três quartos, um deles com varanda. O sótão abre para um terraço tipo miradouro, com vista sobre a aldeia. Lá fora, pátio para dois carros, adega em pedra e garagem independente. E um terreno rústico de mais de 3 mil metros, com oliveiras e vinha. Para visitar, fale com o Nuno Ramalho, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.25999999046325684
+            },
+            {
+                "word": "casa",
+                "start": 0.25999999046325684,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "em",
+                "start": 0.5199999809265137,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "pinhel",
+                "start": 0.699999988079071,
+                "end": 1.0399999618530273
+            },
+            {
+                "word": "com",
+                "start": 1.0399999618530273,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "vista",
+                "start": 1.399999976158142,
+                "end": 1.7000000476837158
+            },
+            {
+                "word": "para",
+                "start": 1.7000000476837158,
+                "end": 1.9800000190734863
+            },
+            {
+                "word": "a",
+                "start": 1.9800000190734863,
+                "end": 2.2200000286102295
+            },
+            {
+                "word": "Ribeira",
+                "start": 2.2200000286102295,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "das",
+                "start": 2.4200000762939453,
+                "end": 2.700000047683716
+            },
+            {
+                "word": "Cabras",
+                "start": 2.700000047683716,
+                "end": 3.119999885559082
+            },
+            {
+                "word": "no",
+                "start": 3.700000047683716,
+                "end": 3.859999895095825
+            },
+            {
+                "word": "centro",
+                "start": 3.859999895095825,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "de",
+                "start": 4.139999866485596,
+                "end": 4.340000152587891
+            },
+            {
+                "word": "uma",
+                "start": 4.340000152587891,
+                "end": 4.539999961853027
+            },
+            {
+                "word": "aldeia",
+                "start": 4.539999961853027,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "tranquila",
+                "start": 4.699999809265137,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "do",
+                "start": 5.360000133514404,
+                "end": 5.579999923706055
+            },
+            {
+                "word": "Conselho",
+                "start": 5.579999923706055,
+                "end": 5.960000038146973
+            },
+            {
+                "word": "de",
+                "start": 5.960000038146973,
+                "end": 6.260000228881836
+            },
+            {
+                "word": "Pinhel",
+                "start": 6.260000228881836,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "No",
+                "start": 7.059999942779541,
+                "end": 7.179999828338623
+            },
+            {
+                "word": "resto",
+                "start": 7.179999828338623,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "do",
+                "start": 7.400000095367432,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "chão",
+                "start": 7.840000152587891,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "cozinha",
+                "start": 8.260000228881836,
+                "end": 8.4399995803833
+            },
+            {
+                "word": "aberta",
+                "start": 8.4399995803833,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "para",
+                "start": 8.819999694824219,
+                "end": 9.079999923706055
+            },
+            {
+                "word": "a",
+                "start": 9.079999923706055,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "sala",
+                "start": 9.520000457763672,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "com",
+                "start": 9.739999771118164,
+                "end": 9.920000076293945
+            },
+            {
+                "word": "recuperador",
+                "start": 9.920000076293945,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "de",
+                "start": 10.460000038146973,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "calor",
+                "start": 10.979999542236328,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "Um",
+                "start": 11.640000343322754,
+                "end": 11.779999732971191
+            },
+            {
+                "word": "quarto",
+                "start": 11.779999732971191,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "e",
+                "start": 12.100000381469727,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "uma",
+                "start": 12.4399995803833,
+                "end": 12.760000228881836
+            },
+            {
+                "word": "casa",
+                "start": 12.760000228881836,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "de",
+                "start": 12.800000190734863,
+                "end": 13.15999984741211
+            },
+            {
+                "word": "banho",
+                "start": 13.15999984741211,
+                "end": 13.619999885559082
+            },
+            {
+                "word": "No",
+                "start": 13.800000190734863,
+                "end": 13.880000114440918
+            },
+            {
+                "word": "primeiro",
+                "start": 13.880000114440918,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "andar",
+                "start": 14.180000305175781,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "outra",
+                "start": 15.020000457763672,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "cozinha",
+                "start": 15.119999885559082,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "lareira",
+                "start": 16.020000457763672,
+                "end": 16.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 16.31999969482422,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "salas",
+                "start": 16.719999313354492,
+                "end": 17.059999465942383
+            },
+            {
+                "word": "amplas",
+                "start": 17.059999465942383,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "Três",
+                "start": 18.260000228881836,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "quartos",
+                "start": 18.360000610351562,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "um",
+                "start": 19.15999984741211,
+                "end": 19.280000686645508
+            },
+            {
+                "word": "deles",
+                "start": 19.280000686645508,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "com",
+                "start": 19.540000915527344,
+                "end": 19.81999969482422
+            },
+            {
+                "word": "varanda",
+                "start": 19.81999969482422,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "O",
+                "start": 20.65999984741211,
+                "end": 20.81999969482422
+            },
+            {
+                "word": "sótão",
+                "start": 20.81999969482422,
+                "end": 21.18000030517578
+            },
+            {
+                "word": "abre",
+                "start": 21.18000030517578,
+                "end": 21.540000915527344
+            },
+            {
+                "word": "para",
+                "start": 21.540000915527344,
+                "end": 21.739999771118164
+            },
+            {
+                "word": "um",
+                "start": 21.739999771118164,
+                "end": 22.260000228881836
+            },
+            {
+                "word": "terraço",
+                "start": 22.260000228881836,
+                "end": 22.299999237060547
+            },
+            {
+                "word": "tipo",
+                "start": 22.299999237060547,
+                "end": 22.760000228881836
+            },
+            {
+                "word": "miradouro",
+                "start": 22.760000228881836,
+                "end": 23.3799991607666
+            },
+            {
+                "word": "com",
+                "start": 23.479999542236328,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "vista",
+                "start": 23.700000762939453,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "sobre",
+                "start": 23.959999084472656,
+                "end": 24.260000228881836
+            },
+            {
+                "word": "a",
+                "start": 24.260000228881836,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "aldeia",
+                "start": 24.6200008392334,
+                "end": 24.700000762939453
+            },
+            {
+                "word": "Lá",
+                "start": 24.700000762939453,
+                "end": 25.3799991607666
+            },
+            {
+                "word": "fora",
+                "start": 25.3799991607666,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "pátio",
+                "start": 26.31999969482422,
+                "end": 26.399999618530273
+            },
+            {
+                "word": "para",
+                "start": 26.399999618530273,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "dois",
+                "start": 26.68000030517578,
+                "end": 26.940000534057617
+            },
+            {
+                "word": "carros",
+                "start": 26.940000534057617,
+                "end": 27.399999618530273
+            },
+            {
+                "word": "adega",
+                "start": 27.940000534057617,
+                "end": 27.979999542236328
+            },
+            {
+                "word": "em",
+                "start": 27.979999542236328,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "pedra",
+                "start": 28.399999618530273,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "e",
+                "start": 28.520000457763672,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "garagem",
+                "start": 28.860000610351562,
+                "end": 29.31999969482422
+            },
+            {
+                "word": "independente",
+                "start": 29.31999969482422,
+                "end": 30.31999969482422
+            },
+            {
+                "word": "E",
+                "start": 30.440000534057617,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "um",
+                "start": 30.520000457763672,
+                "end": 30.739999771118164
+            },
+            {
+                "word": "terreno",
+                "start": 30.739999771118164,
+                "end": 30.899999618530273
+            },
+            {
+                "word": "rústico",
+                "start": 30.899999618530273,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "de",
+                "start": 31.420000076293945,
+                "end": 31.65999984741211
+            },
+            {
+                "word": "mais",
+                "start": 31.65999984741211,
+                "end": 31.860000610351562
+            },
+            {
+                "word": "de",
+                "start": 31.860000610351562,
+                "end": 32.15999984741211
+            },
+            {
+                "word": "3",
+                "start": 32.15999984741211,
+                "end": 32.459999084472656
+            },
+            {
+                "word": "mil",
+                "start": 32.459999084472656,
+                "end": 32.63999938964844
+            },
+            {
+                "word": "metros",
+                "start": 32.63999938964844,
+                "end": 33.040000915527344
+            },
+            {
+                "word": "com",
+                "start": 33.2400016784668,
+                "end": 33.34000015258789
+            },
+            {
+                "word": "oliveiras",
+                "start": 33.34000015258789,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "e",
+                "start": 33.939998626708984,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "vinha",
+                "start": 34.400001525878906,
+                "end": 34.540000915527344
+            },
+            {
+                "word": "Para",
+                "start": 36.97999954223633,
+                "end": 37.279998779296875
+            },
+            {
+                "word": "visitar",
+                "start": 37.279998779296875,
+                "end": 37.880001068115234
+            },
+            {
+                "word": "fale",
+                "start": 38.29999923706055,
+                "end": 38.29999923706055
+            },
+            {
+                "word": "com",
+                "start": 38.29999923706055,
+                "end": 38.439998626708984
+            },
+            {
+                "word": "o",
+                "start": 38.439998626708984,
+                "end": 38.65999984741211
+            },
+            {
+                "word": "Nuno",
+                "start": 38.65999984741211,
+                "end": 38.79999923706055
+            },
+            {
+                "word": "Ramalho",
+                "start": 38.79999923706055,
+                "end": 39.29999923706055
+            },
+            {
+                "word": "da",
+                "start": 39.459999084472656,
+                "end": 39.720001220703125
+            },
+            {
+                "word": "IAD",
+                "start": 39.720001220703125,
+                "end": 40.099998474121094
+            },
+            {
+                "word": "Portugal",
+                "start": 40.099998474121094,
+                "end": 40.68000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 40.959999084472656,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.6,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Uma casa em Pinhel com vista para a Ribeira das Cabras",
+                        "params": {
+                            "src": "img_d76a6f5a",
+                            "location": "PINHEL · GUARDA",
+                            "title": "Uma casa em Pinhel com vista para a Ribeira das Cabras",
+                            "facts": "4 quartos · 3 WC · terreno 3.200 m²",
+                            "name": "Nuno Ramalho",
+                            "cta": "+351 962 425 095",
+                            "tag": "Novo imóvel",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD Portugal S.A. · AMI 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.6,
+                "end": 7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Pinhel",
+                        "params": {
+                            "src": "img_430c3af1",
+                            "eyebrow": "Aldeia tranquila"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7,
+                "end": 11.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "duo-sobreposto",
+                        "text": "Recuperador de calor",
+                        "params": {
+                            "src": "img_10de92a7",
+                            "src2": "img_2ef335e4",
+                            "label": "Rés-do-chão"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.4,
+                "end": 13.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "Quarto no rés-do-chão",
+                        "params": {
+                            "src": "img_a4d487a3",
+                            "eyebrow": "Com roupeiro embutido"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.9,
+                "end": 18.1,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Lareira e salas amplas",
+                        "params": {
+                            "src": "img_927ac5da",
+                            "src2": "img_309a3d2e",
+                            "label": "Primeiro andar"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.1,
+                "end": 20.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "janela-arco",
+                        "text": "Quarto com varanda",
+                        "params": {
+                            "src": "img_ea10fea8",
+                            "eyebrow": "Três quartos"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.6,
+                "end": 24.7,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Terraço tipo miradouro",
+                        "params": {
+                            "src": "img_ca0b54b0",
+                            "eyebrow": "Sótão"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.7,
+                "end": 30.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "faixa-filme",
+                        "text": "Adega em pedra",
+                        "params": {
+                            "src": "img_777917ef",
+                            "src2": "img_38905c13",
+                            "src3": "img_9eacade1",
+                            "label": "Pátio, adega e garagem"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.2,
+                "end": 34.6,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "numero-destaque",
+                        "text": "3.200 m²",
+                        "params": {
+                            "src": "img_e0bb4111",
+                            "label": "Terreno rústico",
+                            "sub": "Terreno com oliveiras e vinha"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 37.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "141.000 €",
+                        "params": {
+                            "src": "img_bffec5ae",
+                            "label": "Moradia T1+3",
+                            "sub": "Pinhel"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.2,
+                "end": 40.959999084472656,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "img_c6fd6849",
+                        "params": {
+                            "src": "img_c6fd6849",
+                            "name": "Nuno Ramalho",
+                            "phone": "+351 962 425 095",
+                            "ami": "11220",
+                            "banner": "img_1d13cb93"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1021635-uig3d/clip.mp4",
+    "error": null
+}

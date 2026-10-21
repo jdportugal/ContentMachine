@@ -1,0 +1,1289 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 com 2.000 m² de terreno perto de Bragança",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-vale-de-lamas-156m2/r1034264",
+            "agent": "António Varandas",
+            "phone": "+351938483182",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma moradia em Vale de Lamas com vistas panorâmicas.",
+            "voiceover": "Uma moradia em Vale de Lamas com vistas panorâmicas. Fica na freguesia de Baçal, a curta distância da cidade de Bragança. São dois pisos e quatro quartos. No rés-do-chão, hall de entrada, cozinha, sala, sala de estar, despensa e arrumos. No primeiro andar, os quartos, uma segunda cozinha e uma casa de banho com banheira. Tem aquecimento central a gasóleo e furo de água. Lá fora, um terraço virado para a paisagem e cerca de dois mil metros de terreno. Espaço para jardim, cultivo ou lazer. Duzentos e dez mil euros. Para visitar, fale com o António Varandas, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada e terreno, plano geral",
+                    "vo": "Uma moradia em Vale de Lamas com vistas panorâmicas.",
+                    "caption": "Vale de Lamas, Bragança"
+                },
+                {
+                    "photo": "paisagem envolvente / vista da zona",
+                    "vo": "Fica na freguesia de Baçal, a curta distância da cidade de Bragança.",
+                    "caption": "Perto de Bragança"
+                },
+                {
+                    "photo": "fachada lateral mostrando os dois pisos",
+                    "vo": "São dois pisos e quatro quartos.",
+                    "caption": "Dois pisos · Quatro quartos"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "No rés-do-chão, hall de entrada,",
+                    "caption": "Hall de entrada"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "cozinha, sala, sala de estar, despensa e arrumos.",
+                    "caption": "Sala e sala de estar"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "No primeiro andar, os quartos, uma segunda cozinha",
+                    "caption": "Duas cozinhas"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "e uma casa de banho com banheira.",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "casa de banho com banheira",
+                    "vo": "Tem aquecimento central a gasóleo e furo de água.",
+                    "caption": "Aquecimento central · Furo"
+                },
+                {
+                    "photo": "terraço com vista",
+                    "vo": "Lá fora, um terraço virado para a paisagem",
+                    "caption": "Terraço panorâmico"
+                },
+                {
+                    "photo": "terreno, plano aberto",
+                    "vo": "e cerca de dois mil metros de terreno. Espaço para jardim, cultivo ou lazer.",
+                    "caption": "Cerca de 2.000 m²"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e dez mil euros. Para visitar, fale com o António Varandas, da IAD Portugal.",
+                    "caption": "210.000 € · António Varandas · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Casas de banho: o texto diz 2 (serviço no rés-do-chão + completa no 1.º andar), mas os detalhes dizem '1 casa de banho'. O guião não indica o número, só refere a casa de banho com banheira.",
+                "A área bruta e a área útil aparecem as duas como 156 m². Ficou de fora do guião.",
+                "Lareira, varanda, estacionamento e sala de jantar só aparecem na lista de características, não na descrição. Ficaram de fora; confirmar antes de os acrescentar.",
+                "A distância a Bragança não vem indicada ('curta distância'). Não se disse nenhum número de minutos."
+            ],
+            "message": "Bom dia Sr. António, fiz este vídeo da sua moradia T4 em Vale de Lamas para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia 4 quartos de 156 m² em Vale de Lamas",
+            "price": 210000,
+            "details": {
+                "Preço": "210 000 €",
+                "Localização": "Vale de Lamas, 5300-340",
+                "Referência": "1034264",
+                "Área Bruta m²": "156",
+                "Área Total do Lote m²": "2000",
+                "Quartos": 4,
+                "Ano de Construção": 1981,
+                "Certificado Energético": "F",
+                "Características": "156 m² área bruta, 156 m² úteis, 1 casa de banho, Jardim, Estacionamento, Terraço, Varanda, Lareira, Sala de jantar, property.feature.heating, Construído em 1981"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - António Varandas - and phone number - +351938483182. Agency: IAD Portugal.\nThe agent's photo is António Varandas.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma moradia em Vale de Lamas com vistas panorâmicas.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada e terreno, plano geral → «Vale de Lamas, Bragança»\n- paisagem envolvente / vista da zona → «Perto de Bragança»\n- fachada lateral mostrando os dois pisos → «Dois pisos · Quatro quartos»\n- hall de entrada → «Hall de entrada»\n- sala de estar → «Sala e sala de estar»\n- cozinha → «Duas cozinhas»\n- quarto → «Quatro quartos»\n- casa de banho com banheira → «Aquecimento central · Furo»\n- terraço com vista → «Terraço panorâmico»\n- terreno, plano aberto → «Cerca de 2.000 m²»\n- end card → «210.000 € · António Varandas · IAD Portugal»\n\nHere are the house details:\n\nMoradia 4 quartos de 156 m² em Vale de Lamas\nPreço\n210 000 €\nLocalização\nVale de Lamas, 5300-340\nReferência\n1034264\nÁrea Bruta m²\n156\nÁrea Total do Lote m²\n2000\nQuartos\n4\nAno de Construção\n1981\nCertificado Energético\nF\nCaracterísticas\n156 m² área bruta, 156 m² úteis, 1 casa de banho, Jardim, Estacionamento, Terraço, Varanda, Lareira, Sala de jantar, property.feature.heating, Construído em 1981\n\nDescrição\nMoradia T4 de dois pisos, com amplo terreno e excelentes vistas panorâmicas, situada em Vale de Lamas, na freguesia de Baçal, concelho de Bragança.\n\nEsta propriedade destaca-se pela sua tranquilidade, privacidade e pelo generoso espaço exterior, contando com cerca de 2.000 m² de terreno, ideal para quem procura uma casa com espaço para jardim, cultivo, lazer ou outros projetos.\n\nA moradia distribui-se por dois pisos:\n\nRés do chão\nHall de entrada\n\nCozinha\n\nSala\n\nSala de estar\n\nCasa de banho de serviço\n\nDespensa\n\nArrumos\n\n1.º andar\n4 quartos\n\nCozinha\n\nCasa de banho completa com banheira\n\nA casa dispõe ainda de aquecimento central a gasóleo, proporcionando maior conforto durante os meses mais frios, e de furo de água, uma mais-valia para a propriedade.\n\nNo exterior, o terraço com vistas panorâmicas oferece um espaço privilegiado para desfrutar da paisagem e da tranquilidade característica da região.\n\nPrincipais características\nMoradia de 2 pisos\n\n4 quartos\n\n2 cozinhas\n\n2 casas de banho\n\nSala e sala de estar\n\nDespensa e arrumos\n\nAquecimento central a gasóleo\n\nFuro de água\n\nTerraço com vistas panorâmicas\n\nTerreno com aproximadamente 2.000 m²\n\nLocalização tranquila em Vale de Lamas – Baçal, Bragança\n\nUma oportunidade para quem procura uma moradia espaçosa, com terreno e contacto com a natureza, numa zona tranquila e a curta distância da cidade de Bragança.\n\nPara mais informações ou para agendar uma visita, entre em contacto.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia T4 em Vale de Lamas, freguesia de Baçal, Bragança",
+            "summary": "Moradia de dois pisos e quatro quartos em Vale de Lamas, na freguesia de Baçal (concelho de Bragança), com terraço panorâmico e cerca de 2.000 m² de terreno, à venda por 210.000 €. Baçal é uma freguesia rural com 460 residentes, segundo os Censos 2021.",
+            "timeline": [
+                {
+                    "label": "Baçal com 484 residentes",
+                    "sublabel": "Censos 2011"
+                },
+                {
+                    "label": "Baçal com 460 residentes",
+                    "sublabel": "Censos 2021"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço da moradia",
+                    "value": 210000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Quartos",
+                    "value": 4,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Pisos",
+                    "value": 2,
+                    "unit": "pisos"
+                },
+                {
+                    "label": "Terreno (aprox.)",
+                    "value": 2000,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Residentes em Baçal (Censos 2021)",
+                    "value": 460,
+                    "unit": "habitantes"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Distribuição da casa",
+                    "left": {
+                        "title": "Rés-do-chão",
+                        "points": [
+                            "Hall de entrada",
+                            "Cozinha",
+                            "Sala e sala de estar",
+                            "Despensa e arrumos"
+                        ]
+                    },
+                    "right": {
+                        "title": "1.º andar",
+                        "points": [
+                            "4 quartos",
+                            "Segunda cozinha",
+                            "Casa de banho com banheira"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Fica em Vale de Lamas, freguesia de Baçal, concelho de Bragança",
+                "Tem aquecimento central a gasóleo e furo de água",
+                "Tem terraço com vista panorâmica",
+                "O terreno de cerca de 2.000 m² dá para jardim, cultivo ou lazer",
+                "Para visitar, contactar António Varandas (IAD Portugal)"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Ba%C3%A7al",
+                "https://aldeiasportuguesas.pt/braganca/braganca/bacal/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 com 2.000 m² de terreno perto de Bragança",
+            "description": "Uma moradia com duas cozinhas e vistas panorâmicas, a poucos minutos de Bragança.\n\nFica em Vale de Lamas, na freguesia de Baçal. Tem dois pisos. No rés-do-chão há hall de entrada, cozinha, sala, sala de estar, despensa e arrumos. No primeiro andar ficam os quatro quartos, uma segunda cozinha e a casa de banho, com banheira.\nTem aquecimento central a gasóleo e furo de água. O terraço está virado para a paisagem e há cerca de 2.000 m² de terreno, com espaço para jardim, horta ou lazer. Tem também varanda, lareira e estacionamento.\n\n210.000 € · 156 m² · Construída em 1981 · Certificado F · Ref. 1034264\n\nContacte o António Varandas, da IAD Portugal: +351 938 483 182",
+            "tags": [
+                "moradia",
+                "imobiliario",
+                "casasavenda",
+                "moradiat4",
+                "braganca",
+                "baçal",
+                "valedelamas",
+                "tras-os-montes",
+                "casacomterreno",
+                "vidanocampo",
+                "iadportugal",
+                "casasemportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1034264-nkf4j",
+    "created_at": "2026-10-20T15:53:18+00:00",
+    "updated_at": "2026-10-20T19:29:11+00:00",
+    "source_path": "clips/uploads/psxk9j8YkRLfJ6fhPbaKZ0hGv2ziFfvmt2neCm2E.mp3",
+    "images": [
+        {
+            "id": "img_50793aa5",
+            "path": "clips/uploads/9i1k1jRvunbIZ22Zb8a2da3iyQJZhcqXjs4r0vvE.jpg",
+            "description": "Fachada principal da moradia amarela de dois pisos, com varanda, portão de ferro e placa VENDE-SE de António Varandas.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b55f26db",
+            "path": "clips/uploads/vTXTPJwdDF7aqNmBfaO0KVZO2UnMSyMRLS7tylTP.jpg",
+            "description": "Fachada traseira amarela com varanda e janelas de estore, à frente uma latada de videira e horta.",
+            "name": "01a0e8fc3cc10034aecb53af6d5a528d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2f6d416f",
+            "path": "clips/uploads/fwWoT33x5ottXhLTFdy2GSHiUTeDmGCTkHpKLrIB.jpg",
+            "description": "Lateral da moradia com quintal de árvores de fruto, peras em primeiro plano e montes ao fundo.",
+            "name": "01a0e8fc3b0c359944cda9473288283c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_29462322",
+            "path": "clips/uploads/QU8EttmuGqLFENAHP4yTR8sIE655xOiiykoLisH5.jpg",
+            "description": "Pátio de entrada em cimento com mesa redonda de granito, pinheiro grande, escadas e portão.",
+            "name": "01a0e8fc2d26499a6463c176d8c6e8d9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3a2b81e2",
+            "path": "clips/uploads/e45YtYPtDW8z2zpb2sZBl0p6Wo8W9eZMZilb0tg0.jpg",
+            "description": "Caminho lateral junto à casa, com latada de videira em ferro, arbustos e mangueira de rega.",
+            "name": "01a0e8fc3254ee37cbda0ffb9fcbb8fc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_23075c49",
+            "path": "clips/uploads/dfzeOxumfqimyNYVELeBP2KVoXuifZhOWnDqTIdi.jpg",
+            "description": "Terraço amplo de mosaico cinzento no primeiro andar, com alpendre de colunas e vista para os montes.",
+            "name": "01a0e8fc1d8ff34dd2ba66d8cb3fff67.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3ef55d07",
+            "path": "clips/uploads/orxqS0PeIqFFZdgW1XEKV0v2okTWqiJKfiKL1bwj.jpg",
+            "description": "Terraço com grade de ferro sob céu azul, vista panorâmica para montes, olival e caminho de terra.",
+            "name": "01a0e8fc373c5d157a2edb72a8672e29.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9b3417f6",
+            "path": "clips/uploads/un70BT01qIX2yGp1p1bR0uch329zjsy0SwvkyrIs.jpg",
+            "description": "Terreno com árvores de fruto, pessegueiro carregado, loureiro e escada de madeira; espaço para cultivo.",
+            "name": "01a0e8fc335dc567538f826b3b84eecc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b78810ce",
+            "path": "clips/uploads/RbnZKaDS7anVUzncepK8EqSbOvVjvUAKeCsm924T.jpg",
+            "description": "Terreno com vinha baixa e árvores de fruto ao sol, casas vizinhas e serra ao fundo.",
+            "name": "01a0e8fc3ca47d75e3599aa13d9e324c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7b9edc73",
+            "path": "clips/uploads/cxZ5gk7G1p7gw3jk3dGikWBxOzazUUIhovQGHkLN.jpg",
+            "description": "Quintal com oliveiras, árvores de fruto e videira sob céu nublado, montes no horizonte.",
+            "name": "01a0e8fc321e6e2db850edb4f3b0e8bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_938649fb",
+            "path": "clips/uploads/TBGD7sdnE9veo32U3GWsWOFKXIPpl2JocL8RCPpx.jpg",
+            "description": "Sala com sofá de canto às riscas, lustre de madeira, relógio de parede e porta para o exterior.",
+            "name": "01a0e8fc2533974ee60536a3c707f8f7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5b4205bf",
+            "path": "clips/uploads/eE8OwPenxInK23CN3NJ88cu6lx1U6A9haoEL890T.jpg",
+            "description": "Sala com aparador de madeira e grande espelho, lustre, quadro de paisagem e corredor ao fundo.",
+            "name": "01a0e8fc25217700b6106a52de890311.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_681631db",
+            "path": "clips/uploads/co6Dqh7HQEV9CSBphpQU8b4YpFPg0Zjpdd7dzNAX.jpg",
+            "description": "Sala com sofá de canto às riscas e almofadas brancas; ao fundo, corredor com casa de banho.",
+            "name": "01a0e8fc270e7428441db37396a2a37e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f846e031",
+            "path": "clips/uploads/yPYewDzWswi4Vnhfgc59q83uC3cHYeKBBsY70ev0.jpg",
+            "description": "Cozinha com armários vintage, mesa com cadeiras, lareira branca e janela para a vegetação.",
+            "name": "01a0e8fc27bc94c060d9eea814183519.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_85a9adb9",
+            "path": "clips/uploads/vZeV1pFJd4M85DvQswXxYOhvN7wHb37xIt8wVECa.jpg",
+            "description": "Cozinha vista da porta: fogão, máquina de lavar loiça, mesa ao centro e janela com verde.",
+            "name": "01a0e8fc2c95f07838c41aa6982d65fa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_89d4e866",
+            "path": "clips/uploads/qldNO9EtjL9RlhqiY6YYK6r6nzofEAW34qNjDsZy.jpg",
+            "description": "Cozinha com grande lareira branca, mesa e cadeiras, frigorífico, arca e acesso à despensa.",
+            "name": "01a0e8fc2862d14ded4d983f74519ddf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_18e153ea",
+            "path": "clips/uploads/E65oIR1okUOhgDSlI2gWKSbCFUk8xL8DkOmIeZQ6.jpg",
+            "description": "Sala de estar com sofá capitoné rosa, tapete redondo, estante de madeira; arco para sala de jantar.",
+            "name": "01a0e8fc272be9885fae3e15348bc52b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_453292d8",
+            "path": "clips/uploads/ilqCBIV6SmsDTMUXDJWU3NOy1ySL59GDPWmei5xg.jpg",
+            "description": "Sala de estar vista do arco: sofás capitoné rosa, estante de madeira, lustre de cristal e janela.",
+            "name": "01a0e8fc2c93ea1314853a6b861095e3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_faa71354",
+            "path": "clips/uploads/7lX6us6vtwN04dIZYxwLGyRz858fcFJJ9gNhDKMW.jpg",
+            "description": "Sala de jantar com mesa comprida, cadeiras de madeira, lustre de cristal; arco para a sala de estar.",
+            "name": "01a0e8fc23a58b89cceef33e3cea6f94.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_334d81d2",
+            "path": "clips/uploads/byuUP9lPsan1jAYwtzmooJjNRoam1kVCfolbqkui.jpg",
+            "description": "Corredor do primeiro andar com portas para os quartos e casa de banho ao fundo, com louças cor-de-rosa.",
+            "name": "01a0e8fc2ec731ead5c4095e5c75de3f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d26f4937",
+            "path": "clips/uploads/41ul8PxwpBFeBOohVUHGSNMPxTDRSEcPG5eVmOoY.jpg",
+            "description": "Corredor do primeiro andar com portas de madeira escura, chão de mosaico e porta aberta para o exterior.",
+            "name": "01a0e8fc29ec6306eb28f6d863fc1191.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dd06fba4",
+            "path": "clips/uploads/lLZLfwAuiCo9B5nwitrp2G3BCIrhNLzUgWg9WM7L.jpg",
+            "description": "Quarto de casal com cama de madeira, colcha de retalhos e janela com vista panorâmica sobre o vale.",
+            "name": "01a0e8fc2c8fbd93ba327df5cdc46553.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_580536cf",
+            "path": "clips/uploads/NMg6ooTIebpKHuWaEUYQHlmkGzfjVZUxA2en9ZvN.jpg",
+            "description": "Quarto amplo com cama antiga de madeira esculpida, lustre de cristal e duas janelas com cortinados.",
+            "name": "01a0e8fc1f4e7cf027677dc4e788a10e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_93395a24",
+            "path": "clips/uploads/xAdhd61R8pXRIRQqljN9f0EQC9d2FvPgytjouqi1.jpg",
+            "description": "Quarto de casal com alcatifa vermelha, berço de madeira, radiador e janela virada para os campos.",
+            "name": "01a0e8fcafefa4014c13408b6287f1f7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f3d154d6",
+            "path": "clips/uploads/PcTOcMmutMrOHQJmJKLBxdNdVNCsOc3PPrI7vm7l.jpg",
+            "description": "Casa de banho com banheira, lavatório e bidé cor de rosa, azulejo claro e janela.",
+            "name": "01a0e8fcb11a0cebaeadab8803533529.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0663cd0e",
+            "path": "clips/uploads/PnLqndEV81UQ6p1GoXjOjsbYxiu8x6mrylaO3CD4.jpg",
+            "description": "Arrumos ou garagem com chão de cimento, ferramentas, prateleiras e objetos guardados.",
+            "name": "01a0e8fcb0c9b2ef444eeeb701fdaab7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0409d74a",
+            "path": "clips/uploads/vHgHeukBPDwOkXLpbDZeO7EOsf7Gza5e7sQ3V6pi.jpg",
+            "description": "Terraço amplo com mosaico cinzento e gradeamento, junto à fachada amarela, com vista para a paisagem.",
+            "name": "01a0e8fcb0d689914c2977f8f673936f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8b600d6c",
+            "path": "clips/uploads/NzWjNSqEIG1C56TuqCWdouR3XiPJso1KNamfgUIJ.png",
+            "description": "Retrato do consultor António Varandas, da IAD Portugal.",
+            "name": "António Varandas.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b77dda48",
+            "path": "clips/uploads/76T7GOHQOvFfnoxHKf2s6m2SplZIrgYlTrmxmIcz.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/psxk9j8YkRLfJ6fhPbaKZ0hGv2ziFfvmt2neCm2E.mp3",
+    "transcript": {
+        "duration": 40.720001220703125,
+        "text": "Uma moradia em Val de Lamas com vistas panorâmicas. Fica na freguesia de Bassal, a curta distância da cidade de Bragança. São dois pisos e quatro quartos. No resto do chão, hall de entrada, cozinha, sala, sala de estar, dispensa e arrumos. No primeiro andar, os quartos, uma segunda cozinha e uma casa de banho com banheira. Tem aquecimento central a gás óleo e furo de água. Lá fora, um terraço virado para a paisagem e cerca de dois mil metros de terreno. Espaço para jardim, cultivo ou lazer. Duzentos e dez mil euros. Para visitar, fale com o António Varandas, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "moradia",
+                "start": 0.2199999988079071,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "em",
+                "start": 0.699999988079071,
+                "end": 1.0800000429153442
+            },
+            {
+                "word": "Val",
+                "start": 1.0800000429153442,
+                "end": 1.2999999523162842
+            },
+            {
+                "word": "de",
+                "start": 1.2999999523162842,
+                "end": 1.559999942779541
+            },
+            {
+                "word": "Lamas",
+                "start": 1.559999942779541,
+                "end": 1.7799999713897705
+            },
+            {
+                "word": "com",
+                "start": 1.7799999713897705,
+                "end": 2.0999999046325684
+            },
+            {
+                "word": "vistas",
+                "start": 2.0999999046325684,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "panorâmicas",
+                "start": 2.4200000762939453,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "Fica",
+                "start": 3.9000000953674316,
+                "end": 4.179999828338623
+            },
+            {
+                "word": "na",
+                "start": 4.179999828338623,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "freguesia",
+                "start": 4.360000133514404,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 4.760000228881836,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "Bassal",
+                "start": 5.019999980926514,
+                "end": 5.440000057220459
+            },
+            {
+                "word": "a",
+                "start": 5.699999809265137,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "curta",
+                "start": 5.920000076293945,
+                "end": 6.139999866485596
+            },
+            {
+                "word": "distância",
+                "start": 6.139999866485596,
+                "end": 6.559999942779541
+            },
+            {
+                "word": "da",
+                "start": 6.559999942779541,
+                "end": 6.820000171661377
+            },
+            {
+                "word": "cidade",
+                "start": 6.820000171661377,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 7.079999923706055,
+                "end": 7.300000190734863
+            },
+            {
+                "word": "Bragança",
+                "start": 7.300000190734863,
+                "end": 7.739999771118164
+            },
+            {
+                "word": "São",
+                "start": 8.399999618530273,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "dois",
+                "start": 8.5600004196167,
+                "end": 8.920000076293945
+            },
+            {
+                "word": "pisos",
+                "start": 8.920000076293945,
+                "end": 9.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 9.380000114440918,
+                "end": 9.699999809265137
+            },
+            {
+                "word": "quatro",
+                "start": 9.699999809265137,
+                "end": 10.0600004196167
+            },
+            {
+                "word": "quartos",
+                "start": 10.0600004196167,
+                "end": 10.460000038146973
+            },
+            {
+                "word": "No",
+                "start": 11.020000457763672,
+                "end": 11.079999923706055
+            },
+            {
+                "word": "resto",
+                "start": 11.079999923706055,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "do",
+                "start": 11.300000190734863,
+                "end": 11.640000343322754
+            },
+            {
+                "word": "chão",
+                "start": 11.640000343322754,
+                "end": 11.640000343322754
+            },
+            {
+                "word": "hall",
+                "start": 12.039999961853027,
+                "end": 12.119999885559082
+            },
+            {
+                "word": "de",
+                "start": 12.119999885559082,
+                "end": 12.680000305175781
+            },
+            {
+                "word": "entrada",
+                "start": 12.680000305175781,
+                "end": 12.680000305175781
+            },
+            {
+                "word": "cozinha",
+                "start": 13.420000076293945,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "sala",
+                "start": 14.039999961853027,
+                "end": 14.039999961853027
+            },
+            {
+                "word": "sala",
+                "start": 14.720000267028809,
+                "end": 14.720000267028809
+            },
+            {
+                "word": "de",
+                "start": 14.720000267028809,
+                "end": 14.960000038146973
+            },
+            {
+                "word": "estar",
+                "start": 14.960000038146973,
+                "end": 15.199999809265137
+            },
+            {
+                "word": "dispensa",
+                "start": 15.84000015258789,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "e",
+                "start": 15.960000038146973,
+                "end": 16.299999237060547
+            },
+            {
+                "word": "arrumos",
+                "start": 16.299999237060547,
+                "end": 16.799999237060547
+            },
+            {
+                "word": "No",
+                "start": 17.31999969482422,
+                "end": 17.399999618530273
+            },
+            {
+                "word": "primeiro",
+                "start": 17.399999618530273,
+                "end": 17.68000030517578
+            },
+            {
+                "word": "andar",
+                "start": 17.68000030517578,
+                "end": 18.020000457763672
+            },
+            {
+                "word": "os",
+                "start": 18.459999084472656,
+                "end": 18.68000030517578
+            },
+            {
+                "word": "quartos",
+                "start": 18.68000030517578,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "uma",
+                "start": 19.299999237060547,
+                "end": 19.5
+            },
+            {
+                "word": "segunda",
+                "start": 19.5,
+                "end": 19.84000015258789
+            },
+            {
+                "word": "cozinha",
+                "start": 19.84000015258789,
+                "end": 20.299999237060547
+            },
+            {
+                "word": "e",
+                "start": 20.299999237060547,
+                "end": 20.739999771118164
+            },
+            {
+                "word": "uma",
+                "start": 20.739999771118164,
+                "end": 21
+            },
+            {
+                "word": "casa",
+                "start": 21,
+                "end": 21.139999389648438
+            },
+            {
+                "word": "de",
+                "start": 21.139999389648438,
+                "end": 21.5
+            },
+            {
+                "word": "banho",
+                "start": 21.5,
+                "end": 21.5
+            },
+            {
+                "word": "com",
+                "start": 21.5,
+                "end": 21.81999969482422
+            },
+            {
+                "word": "banheira",
+                "start": 21.81999969482422,
+                "end": 22.18000030517578
+            },
+            {
+                "word": "Tem",
+                "start": 22.959999084472656,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "aquecimento",
+                "start": 22.979999542236328,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "central",
+                "start": 23.440000534057617,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "a",
+                "start": 23.8799991607666,
+                "end": 24.059999465942383
+            },
+            {
+                "word": "gás",
+                "start": 24.059999465942383,
+                "end": 24.239999771118164
+            },
+            {
+                "word": "óleo",
+                "start": 24.239999771118164,
+                "end": 24.559999465942383
+            },
+            {
+                "word": "e",
+                "start": 24.559999465942383,
+                "end": 24.8799991607666
+            },
+            {
+                "word": "furo",
+                "start": 24.8799991607666,
+                "end": 25.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 25.079999923706055,
+                "end": 25.559999465942383
+            },
+            {
+                "word": "água",
+                "start": 25.559999465942383,
+                "end": 25.559999465942383
+            },
+            {
+                "word": "Lá",
+                "start": 26.020000457763672,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "fora",
+                "start": 26.34000015258789,
+                "end": 26.6200008392334
+            },
+            {
+                "word": "um",
+                "start": 27.079999923706055,
+                "end": 27.15999984741211
+            },
+            {
+                "word": "terraço",
+                "start": 27.15999984741211,
+                "end": 27.520000457763672
+            },
+            {
+                "word": "virado",
+                "start": 27.520000457763672,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "para",
+                "start": 27.8799991607666,
+                "end": 28.079999923706055
+            },
+            {
+                "word": "a",
+                "start": 28.079999923706055,
+                "end": 28.360000610351562
+            },
+            {
+                "word": "paisagem",
+                "start": 28.360000610351562,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 28.68000030517578,
+                "end": 29
+            },
+            {
+                "word": "cerca",
+                "start": 29,
+                "end": 29.219999313354492
+            },
+            {
+                "word": "de",
+                "start": 29.219999313354492,
+                "end": 29.65999984741211
+            },
+            {
+                "word": "dois",
+                "start": 29.65999984741211,
+                "end": 29.84000015258789
+            },
+            {
+                "word": "mil",
+                "start": 29.84000015258789,
+                "end": 30.020000457763672
+            },
+            {
+                "word": "metros",
+                "start": 30.020000457763672,
+                "end": 30.34000015258789
+            },
+            {
+                "word": "de",
+                "start": 30.34000015258789,
+                "end": 30.639999389648438
+            },
+            {
+                "word": "terreno",
+                "start": 30.639999389648438,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "Espaço",
+                "start": 31.719999313354492,
+                "end": 31.760000228881836
+            },
+            {
+                "word": "para",
+                "start": 31.760000228881836,
+                "end": 32
+            },
+            {
+                "word": "jardim",
+                "start": 32,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "cultivo",
+                "start": 32.900001525878906,
+                "end": 33.2599983215332
+            },
+            {
+                "word": "ou",
+                "start": 33.2599983215332,
+                "end": 33.58000183105469
+            },
+            {
+                "word": "lazer",
+                "start": 33.58000183105469,
+                "end": 33.939998626708984
+            },
+            {
+                "word": "Duzentos",
+                "start": 34.720001220703125,
+                "end": 35.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 35.18000030517578,
+                "end": 35.31999969482422
+            },
+            {
+                "word": "dez",
+                "start": 35.31999969482422,
+                "end": 35.459999084472656
+            },
+            {
+                "word": "mil",
+                "start": 35.459999084472656,
+                "end": 35.70000076293945
+            },
+            {
+                "word": "euros",
+                "start": 35.70000076293945,
+                "end": 36.060001373291016
+            },
+            {
+                "word": "Para",
+                "start": 36.720001220703125,
+                "end": 36.79999923706055
+            },
+            {
+                "word": "visitar",
+                "start": 36.79999923706055,
+                "end": 37.52000045776367
+            },
+            {
+                "word": "fale",
+                "start": 37.880001068115234,
+                "end": 37.880001068115234
+            },
+            {
+                "word": "com",
+                "start": 37.880001068115234,
+                "end": 38.02000045776367
+            },
+            {
+                "word": "o",
+                "start": 38.02000045776367,
+                "end": 38.2400016784668
+            },
+            {
+                "word": "António",
+                "start": 38.2400016784668,
+                "end": 38.560001373291016
+            },
+            {
+                "word": "Varandas",
+                "start": 38.560001373291016,
+                "end": 39.099998474121094
+            },
+            {
+                "word": "da",
+                "start": 39.279998779296875,
+                "end": 39.5
+            },
+            {
+                "word": "IAD",
+                "start": 39.5,
+                "end": 39.91999816894531
+            },
+            {
+                "word": "Portugal",
+                "start": 39.91999816894531,
+                "end": 40.47999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 40.720001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "MORADIA T4 COM VISTAS",
+                        "params": {
+                            "src": "img_50793aa5",
+                            "avatar": "img_8b600d6c",
+                            "logo": "img_b77dda48",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "210.000 €",
+                            "location": "BRAGANÇA · VALE DE LAMAS",
+                            "title": "MORADIA T4 COM VISTAS",
+                            "facts": "156 m² · 4 quartos · 2 pisos · 2.000 m² de terreno",
+                            "cta": "Ligue já +351 938 483 182",
+                            "name": "António Varandas",
+                            "logoText": "iAD",
+                            "legal": "IAD PORTUGAL S.A.",
+                            "logoSub": "REAL ESTATE"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3,
+                "end": 8.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "PERTO DE BRAGANÇA",
+                        "params": {
+                            "src": "img_b78810ce",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.2,
+                "end": 10.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "DOIS PISOS · QUATRO QUARTOS",
+                        "params": {
+                            "src": "img_b55f26db",
+                            "src2": "img_2f6d416f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.9,
+                "end": 14,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "RÉS-DO-CHÃO",
+                        "params": {
+                            "src": "img_85a9adb9",
+                            "title": "RÉS-DO-CHÃO",
+                            "items": [
+                                "Hall de entrada",
+                                "Cozinha",
+                                "Sala e sala de estar",
+                                "Despensa e arrumos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14,
+                "end": 16.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALAS E ARRUMOS",
+                        "params": {
+                            "src": "img_938649fb",
+                            "src2": "img_681631db",
+                            "src3": "img_18e153ea",
+                            "src4": "img_faa71354",
+                            "src5": "img_0663cd0e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.9,
+                "end": 19.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "1.º ANDAR · 4 QUARTOS",
+                        "params": {
+                            "src": "img_dd06fba4",
+                            "src2": "img_580536cf",
+                            "src3": "img_93395a24",
+                            "src4": "img_334d81d2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.3,
+                "end": 22.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "2.ª COZINHA · BANHEIRA",
+                        "params": {
+                            "src": "img_f846e031",
+                            "src2": "img_f3d154d6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.7,
+                "end": 25.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "CONFORTO",
+                        "params": {
+                            "src": "img_89d4e866",
+                            "title": "CONFORTO",
+                            "items": [
+                                "Aquecimento central a gasóleo",
+                                "Furo de água"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.9,
+                "end": 28.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "TERRAÇO PANORÂMICO",
+                        "params": {
+                            "src": "img_23075c49",
+                            "src2": "img_0409d74a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.9,
+                "end": 31.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "CERCA DE 2.000 m²",
+                        "params": {
+                            "src": "img_9b3417f6",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.5,
+                "end": 36.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "JARDIM · CULTIVO · LAZER",
+                        "params": {
+                            "src": "img_7b9edc73",
+                            "src2": "img_3a2b81e2",
+                            "src3": "img_3ef55d07",
+                            "src4": "img_29462322"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.6,
+                "end": 40.72,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "António Varandas",
+                        "params": {
+                            "src": "img_8b600d6c",
+                            "name": "António Varandas",
+                            "phone": "+351 938 483 182"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1034264-nkf4j/clip.mp4",
+    "error": null
+}

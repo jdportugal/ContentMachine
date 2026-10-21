@@ -1,0 +1,1215 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 com garagem no centro de Santa Comba Dão por 159.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-santa-comba-dao-93m2/r1048280",
+            "agent": "Daniel Paixão",
+            "phone": "+351965119065",
+            "agency": "IAD Portugal",
+            "hook": "Dois quartos, garagem fechada, no centro de Santa Comba Dão.",
+            "voiceover": "Dois quartos, garagem fechada, no centro de Santa Comba Dão. Escolas, farmácias, centro de saúde, supermercados e transportes ficam por perto. Um segundo andar, num prédio com elevador. A sala é ampla e luminosa, com varanda. A cozinha está equipada e tem despensa. Os dois quartos têm roupeiros embutidos e varanda. Casa de banho completa, com base de duche. Boa exposição solar, aquecimento central e certificado energético B menos. A garagem tem eletricidade. Para viver, ou para investir. Cento e cinquenta e nove mil euros. Para visitar, fale com o Daniel Paixão, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Dois quartos, garagem fechada, no centro de Santa Comba Dão.",
+                    "caption": "Centro de Santa Comba Dão"
+                },
+                {
+                    "photo": "rua / envolvente do prédio",
+                    "vo": "Escolas, farmácias, centro de saúde, supermercados e transportes ficam por perto.",
+                    "caption": "Tudo por perto"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "Um segundo andar, num prédio com elevador.",
+                    "caption": "2.º andar com elevador"
+                },
+                {
+                    "photo": "sala com acesso à varanda",
+                    "vo": "A sala é ampla e luminosa, com varanda.",
+                    "caption": "Sala ampla e luminosa"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "A cozinha está equipada e tem despensa.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "quarto com roupeiro embutido",
+                    "vo": "Os dois quartos têm roupeiros embutidos e varanda.",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "Casa de banho completa, com base de duche.",
+                    "caption": "Casa de banho completa"
+                },
+                {
+                    "photo": "varanda com luz natural",
+                    "vo": "Boa exposição solar, aquecimento central e certificado energético B menos.",
+                    "caption": "Certificado energético B-"
+                },
+                {
+                    "photo": "garagem fechada",
+                    "vo": "A garagem tem eletricidade.",
+                    "caption": "Garagem fechada"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Para viver, ou para investir. Cento e cinquenta e nove mil euros. Para visitar, fale com o Daniel Paixão, da IAD Portugal.",
+                    "caption": "159.000 € · Daniel Paixão · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Isolamento exterior (capoto) só está 'previsto' para esta fração, por isso ficou de fora. Confirmar com o consultor antes de o referir.",
+                "'Acesso para cadeira de rodas' só aparece no bloco de detalhes, não no texto, por isso ficou de fora. Confirmar antes de usar."
+            ],
+            "message": "Bom dia Sr. Daniel,\nO meu nome é João Ferreira.\n\nVi o apartamento T2 no centro de Santa Comba Dão que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Apartamento 2 quartos de 93 m² em Santa Comba Dão",
+            "price": 159000,
+            "details": {
+                "Preço": "159 000 €",
+                "Localização": "Santa Comba Dão, 3440-411",
+                "Referência": "1048280",
+                "Área Bruta m²": "93",
+                "Quartos": 2,
+                "Certificado Energético": "B-",
+                "Características": "93 m² área bruta, 71 m² úteis, 1 casa de banho, Garagem, Varanda, Elevador, Ligação TV, Fibra ótica, property.feature.heating, Acesso para cadeira de rodas, Porta blindada"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Daniel Paixão - and phone number - +351965119065. Agency: IAD Portugal.\nThe agent's photo is Daniel Paixão.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Dois quartos, garagem fechada, no centro de Santa Comba Dão.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «Centro de Santa Comba Dão»\n- rua / envolvente do prédio → «Tudo por perto»\n- hall de entrada → «2.º andar com elevador»\n- sala com acesso à varanda → «Sala ampla e luminosa»\n- cozinha → «Cozinha equipada»\n- quarto com roupeiro embutido → «Dois quartos»\n- casa de banho → «Casa de banho completa»\n- varanda com luz natural → «Certificado energético B-»\n- garagem fechada → «Garagem fechada»\n- end card → «159.000 € · Daniel Paixão · IAD Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 93 m² em Santa Comba Dão\nPreço\n159 000 €\nLocalização\nSanta Comba Dão, 3440-411\nReferência\n1048280\nÁrea Bruta m²\n93\nQuartos\n2\nCertificado Energético\nB-\nCaracterísticas\n93 m² área bruta, 71 m² úteis, 1 casa de banho, Garagem, Varanda, Elevador, Ligação TV, Fibra ótica, property.feature.heating, Acesso para cadeira de rodas, Porta blindada\n\nDescrição\n🏡 T2 COM GARAGEM FECHADA, ELEVADOR E EXCELENTE EXPOSIÇÃO SOLAR | CENTRO DE SANTA COMBA DÃO\n\nO conforto que procura, a localização que merece e a oportunidade que não vai querer perder!\n\nImagine viver no coração de Santa Comba Dão, com tudo o que precisa a poucos passos de casa, sem abdicar do espaço, da luminosidade e da comodidade de uma garagem privativa.\n\nApresento-lhe este fantástico apartamento T2, situado no 2.º andar de um edifício com elevador, que reúne características cada vez mais valorizadas por quem procura qualidade de vida, conforto e uma localização central.\n\n✨ ESPAÇOS PENSADOS PARA O SEU CONFORTO\n\nLogo à entrada, um hall acolhedor dá as boas-vindas e distribui o acesso às diferentes divisões da habitação.\n\nA cozinha equipada, complementada por uma prática despensa, oferece funcionalidade e arrumação para facilitar o dia a dia.\n\nA casa de banho completa, equipada com base de duche, alia conforto e praticidade.\n\nNa zona mais reservada da habitação, encontramos dois quartos com roupeiros embutidos e varandas, onde a luz natural assume um papel de destaque.\n\nA sala de estar, ampla e luminosa, é um dos grandes atrativos deste apartamento. Com acesso direto a uma varanda, oferece o ambiente perfeito para reunir a família, receber amigos ou simplesmente desfrutar de momentos de tranquilidade.\n\n☀️ CONFORTO EM TODAS AS ESTAÇÕES\n\nA excelente exposição solar proporciona uma agradável luminosidade ao longo do dia, tornando os espaços mais acolhedores.\n\nO apartamento conta ainda com:\n\n- Aquecimento central\n- Gás canalizado\n- Cozinha equipada com despensa\n- Dois quartos com roupeiros embutidos\n- Três varandas, distribuídas pelos quartos e sala\n- Casa de banho completa com base de duche\n- Elevador\n- Garagem fechada com eletricidade, uma mais-valia para estacionamento seguro e arrumação adicional\n\n🏢 UM EDIFÍCIO COM MELHORIAS\n\nO prédio foi alvo de intervenções recentes, estando também prevista a aplicação de isolamento térmico exterior (capoto) na zona correspondente a esta fração.\n\n📍 UMA LOCALIZAÇÃO QUE FAZ A DIFERENÇA!\n\nViver no centro de Santa Comba Dão é ter a comodidade de encontrar praticamente tudo à sua porta!\n\nEscolas, farmácias, centro de saúde, supermercados, ginásios, transportes públicos, comércio e serviços encontram-se nas proximidades.\n\nUma localização ideal para quem valoriza o tempo, a facilidade de deslocação e a conveniência de viver numa zona central.\n\n🔑 A SUA PRÓXIMA CASA PODE ESTAR AQUI!\n\nSe procura um apartamento com boas áreas, muita luz natural, varandas, elevador e garagem fechada, numa localização privilegiada, esta poderá ser a oportunidade que esperava.\n\nSeja para viver ou investir, este imóvel reúne características que merecem a sua atenção.\n\nNão deixe escapar esta oportunidade!\n\n📞 Entre em contacto comigo para mais informações e agende já a sua visita.\n\niad Portugal — A sua casa, o nosso compromisso!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Apartamento T2 com garagem no centro de Santa Comba Dão (Viseu) por 159 000 €",
+            "summary": "Apartamento T2 num segundo andar com elevador, garagem fechada e certificado energético B-, no centro de Santa Comba Dão. Em Portugal, o preço mediano das casas subiu 16,8% em 2025 e chegou aos 2 076 €/m².",
+            "timeline": [
+                {
+                    "label": "Censos: concelho com cerca de 10,6 mil habitantes",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Preço mediano nacional: 2 076 €/m², o mais alto registado pelo INE",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional sobe para 2 198 €/m²",
+                    "sublabel": "4.º trimestre de 2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido pelo T2",
+                    "value": 159000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano face a 2024",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano em Portugal (4.º trim. 2025)",
+                    "value": 2198,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "População do concelho (Censos 2021)",
+                    "value": 10.6,
+                    "unit": "mil habitantes"
+                },
+                {
+                    "label": "Classes do certificado energético (A+ a F)",
+                    "value": 8,
+                    "unit": "classes"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "T2 num 2.º andar com elevador, no centro de Santa Comba Dão",
+                "Garagem fechada com eletricidade",
+                "Sala ampla e luminosa com varanda; os dois quartos também têm varanda",
+                "Cozinha equipada com despensa e roupeiros embutidos",
+                "Aquecimento central e certificado energético B-",
+                "A classe B- é a 4.ª de 8 na escala, que vai de A+ a F",
+                "Em Portugal, o certificado energético é obrigatório para vender ou arrendar casa",
+                "Em 2025, as casas em Portugal ficaram 16,8% mais caras (INE)"
+            ],
+            "sources": [
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://www.theportugalnews.com/pt/noticias/2026-04-24/os-precos-da-habitacao-em-portugal-continuam-a-aumentar/1012579",
+                "https://www.rtp.pt/noticias/economia/precos-da-habitacao-aceleram-em-13-dos-24-municipios-mais-populosos-no-quarto-trimestre-de-2025_n1736589",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=789055201&att_display=n&att_download=y",
+                "https://aldeiasportuguesas.pt/viseu/santa-comba-dao/",
+                "https://www.infopedia.pt/$santa-comba-dao",
+                "https://goldenergy.pt/glossario/certificacao-energetica-dos-edificios/",
+                "https://www.idealista.pt/news/node/40089",
+                "https://www.doutorfinancas.pt/energia-e-telecomunicacoes/certificado-energetico-como-obter-e-como-afeta-a-compra-de-casa/"
+            ]
+        },
+        "suggested": {
+            "title": "T2 com garagem no centro de Santa Comba Dão por 159.000 €",
+            "description": "Garagem fechada e elevador, no centro de Santa Comba Dão\n\nSegundo andar com escolas, farmácias, centro de saúde, supermercados e transportes por perto.\nA sala é ampla e luminosa, com varanda. A cozinha vem equipada e tem despensa.\nOs dois quartos têm roupeiros embutidos e varanda própria.\nCasa de banho completa com base de duche, boa exposição solar e aquecimento central.\nA garagem tem eletricidade. Tem ainda porta blindada, fibra ótica e acesso para cadeira de rodas.\nServe para viver ou para investir.\n\n159.000 € · 93 m² brutos, 71 m² úteis · Certificado energético B- · Ref. 1048280\n\nVisitas com o Daniel Paixão, IAD Portugal: +351 965 119 065",
+            "tags": [
+                "imobiliario",
+                "apartamento",
+                "t2",
+                "santacombadao",
+                "casasemsantacombadao",
+                "viseu",
+                "imoveisviseu",
+                "apartamentoavenda",
+                "garagem",
+                "iadportugal",
+                "casasportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1048280-srqpz",
+    "created_at": "2026-10-19T09:09:04+00:00",
+    "updated_at": "2026-10-19T09:52:51+00:00",
+    "source_path": "clips/uploads/g7V8YHTv3B1zIdRWn1K61Tgukzp1l9BHlymrUOCV.mp3",
+    "images": [
+        {
+            "id": "img_c5a63934",
+            "path": "clips/uploads/9bgZDtf2H7jF2qBMPOlMjZ6YL4QIHUryM4AGdFnV.jpg",
+            "description": "Fachada do prédio amarelo de quatro pisos; o segundo andar com varandas aparece destacado a vermelho.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_43ecb4f7",
+            "path": "clips/uploads/vT0oJhjdA1ifgHUFk12yYTpXsJyghcNhSz2GqQmn.jpg",
+            "description": "Hall de entrada com chão claro brilhante, corredor comprido para os quartos e porta aberta para a cozinha.",
+            "name": "01a13ab1a055834c68ed3c60d43318db.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_237e6bff",
+            "path": "clips/uploads/P7QvrOE6WnLWZEpNCmLa04YVC7UqIpJ1X7kRE0fF.jpg",
+            "description": "Cozinha equipada com armários de madeira, bancada de granito, placa, forno, frigorífico e janela grande e luminosa.",
+            "name": "01a13ab1a0fe91f15f4493f48cd27dd0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c8ff97f5",
+            "path": "clips/uploads/JvrLeC46XmnGaABZ0q3wjwPN03z9PAY054ia1NZh.jpg",
+            "description": "Cozinha vista de frente: armários de madeira, bancada de granito, forno embutido e espaço livre para eletrodomésticos.",
+            "name": "01a13ab1a0c76b60632654e66eacd2c1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eb7852f1",
+            "path": "clips/uploads/18nFZaN96RprdTwqPQxdgMunRXdtjJhOxo9zZNT1.jpg",
+            "description": "Hall com porta aberta para a cozinha e para a casa de banho com duche; videoporteiro na parede.",
+            "name": "01a13ab1a097935d0dcd0e60937974ad.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cd1d25e3",
+            "path": "clips/uploads/fPDozloDkgRjIPCOqBGrrrdDlIYqS2CIkmVhB1Zv.jpg",
+            "description": "Despensa pequena de paredes brancas, com porta de madeira aberta e uma tomada.",
+            "name": "01a13ab1a0f421e9863c85ff7b071058.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_24618599",
+            "path": "clips/uploads/yh1mgs1gvROJStlIQec1ty0bUl0MIBwawzwRcsJS.jpg",
+            "description": "Hall com vista para a cozinha luminosa e para a casa de banho com sanita, bidé e duche.",
+            "name": "01a13ab1a0911fbc8049730c74ae0de2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f4139d40",
+            "path": "clips/uploads/HUJu2P7ksvOvNlgsBPAs8ixmLdimxNrDqNSHAv87.jpg",
+            "description": "Casa de banho completa com base de duche e portas de vidro, lavatório de bancada preta e sanita.",
+            "name": "01a13ab1a09cc3a85938fba931cda265.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2795b41d",
+            "path": "clips/uploads/MlZ1iib8EP4pCNvQVUV7LyB80nm0ao41zuX12H4s.jpg",
+            "description": "Casa de banho com toalheiro branco, bidé, móvel de lavatório em madeira e chão preto.",
+            "name": "01a13ab1a103d76e65372dd248ea6ecc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bb6456bd",
+            "path": "clips/uploads/HZVmwHcpM1fFXnYvSzv7MB5lyX9siZbKMSTe9aOW.jpg",
+            "description": "Casa de banho com bidé, toalheiro e lavatório; a porta aberta deixa ver o corredor.",
+            "name": "01a13ab1a184b849748d17c134348c2e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a0affdfd",
+            "path": "clips/uploads/yaBD0RRN3gUqDYu1SbsaW264O21rMA9uS8E8EmVm.jpg",
+            "description": "Corredor com chão em mosaico brilhante e portas de madeira, ao fundo uma divisão com radiador e janela.",
+            "name": "01a13ab1a0c2641d5476854153d9acfe.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_61e85f01",
+            "path": "clips/uploads/x2ERnnhVxNul6BQwcEx1pVYGaYxBBHXmU7yA5RUa.jpg",
+            "description": "Quarto vazio com roupeiro embutido de madeira, chão flutuante e porta envidraçada de acesso à varanda.",
+            "name": "01a13ab1a0d854af287363d3d039149c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_47055ee2",
+            "path": "clips/uploads/D2ms3P1eJeYNwxxX645Z52EE0gxnooMd6hR6wo29.jpg",
+            "description": "Quarto com grande roupeiro embutido de portas de correr em madeira, radiador e candeeiro suspenso.",
+            "name": "01a13ab1a106e72af0ef6238ce4f64e5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_48b19c0d",
+            "path": "clips/uploads/gS2710PRnJjkQLFh9TwwmkVvZi2nEkvtziopUHN7.jpg",
+            "description": "Cozinha equipada com bancada de granito, armários de madeira, frigorífico, janela ampla e porta da despensa.",
+            "name": "01a13ab1a0eff385d1c81e9a6aec6779.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d1a358f4",
+            "path": "clips/uploads/w9SNm5xyQdBRjeRXA2nYaV9KATzK3jF2fbbvxZcE.jpg",
+            "description": "Quarto luminoso com roupeiro embutido de madeira, chão flutuante e porta envidraçada para a varanda.",
+            "name": "01a13ab1a1d9decce387017ac149d233.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_74a131de",
+            "path": "clips/uploads/ddCDhUvXCtzrcpGUUmYWcizElc8qc2Egm9t1bX2N.jpg",
+            "description": "Quarto com roupeiro embutido de madeira, radiador e candeeiro de arame, vista para a porta aberta.",
+            "name": "01a13ab1a1be7610bd279d03a6f03c5d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8958d940",
+            "path": "clips/uploads/NFJiHW3Lb4cg2cNJAfVSFlUowJxDEcRnMnWWxHQ6.jpg",
+            "description": "Divisão com chão em mosaico brilhante, janela, radiador e candeeiro geométrico preto suspenso.",
+            "name": "01a13ab1a0b443b4cfbd108d04ca6065.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_496a657d",
+            "path": "clips/uploads/eTTsLKfZlzNt2d5bXOtdI9doIZ9B4ROSGXEk5qJP.jpg",
+            "description": "Sala ampla e vazia com chão em mosaico claro, dois candeeiros geométricos pretos e radiador.",
+            "name": "01a13ab1a0f35b5a227f246ced1e21c6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_24b75b9f",
+            "path": "clips/uploads/lOrceV56JiytHWNmZ1pYJhjTEqVsHN5BLU1VbVs8.jpg",
+            "description": "Varanda com guarda inox e chão de granito, vista sobre vegetação verde e árvores.",
+            "name": "01a13ab1a103d8b30a38bf2227c7eaf2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_089f4787",
+            "path": "clips/uploads/PmBVF589ONqIFbnBMMQuEH82zK15q4OjTv5baePp.jpg",
+            "description": "Vista da varanda sobre o bairro com moradias de telhado laranja, rua e placa de venda.",
+            "name": "01a13ab1a1bf8dbce6e845be976c6790.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_44b75123",
+            "path": "clips/uploads/q36DOKTVHM0iHKKImSsi7nXovluQEZrw0cfB55Nr.jpg",
+            "description": "Quarto vazio com roupeiro embutido de madeira, chão flutuante, candeeiro suspenso e porta de vidro para a varanda.",
+            "name": "01a13ab1a1740a0e8bb99320cf5d643e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2d309ab0",
+            "path": "clips/uploads/FfwWkqRMkHVK2S5SwMOj88n3DmzK1UJCw810VMsk.jpg",
+            "description": "Interior do elevador do prédio, com paredes em madeira, espelho, corrimão metálico e teto com luzes circulares.",
+            "name": "01a13ab1a1cf5e72b92f0c4b3f1586cb.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_9f1505d9",
+            "path": "clips/uploads/uzQSnzuGIXVP5nvwMayFoO58H17nSkMsy9D3BRNu.jpg",
+            "description": "Painel de botões do elevador, com pisos -1 a 2, paredes em madeira e espelho.",
+            "name": "01a13ab1a0e183fd8e86db74f0f3c957.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_db9657a2",
+            "path": "clips/uploads/PhWuheMU2pDVtVlImBKcDcJEGGRS5IVOJ2LjJ1OV.jpg",
+            "description": "Garagem fechada vazia, com paredes brancas, chão de cimento, quadro elétrico e caixas de cartão ao fundo.",
+            "name": "01a13ab1a0b8aa5414562ed3f1b61133.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3097dcba",
+            "path": "clips/uploads/Q1lTDhYqpLlZsyyG4ZqvcEVPDvQUQXTrkfePlvAt.jpg",
+            "description": "Garagem fechada, vista mais aberta: espaço amplo, chão de cimento, tubo escuro na parede e quadro elétrico.",
+            "name": "01a13ab1a0cbc86507bc8657c12d09f4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3ced8176",
+            "path": "clips/uploads/gBC4zumO03xtGn4izCQydAkTltheEGGmeJrBpQXD.jpg",
+            "description": "Patamar do prédio com porta do elevador cinzenta, porta de entrada em madeira e chão de granito.",
+            "name": "01a13ab1a1b339e49b530e854349c4a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_412a38c6",
+            "path": "clips/uploads/o3mZ8RWgmp01OabMWhLpRdsmcrJdmZuhgbfYEGvy.jpg",
+            "description": "Fachada amarela do prédio sob céu azul, com o segundo andar e as suas varandas assinalados a vermelho.",
+            "name": "01a13ab1a0e966a0ba788fe041784e5d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1c3eece3",
+            "path": "clips/uploads/ZpSo7MmsO3DgT6rrucGMI4uanBUgikDue2DrQlX7.png",
+            "description": "Retrato do consultor Daniel Paixão, da IAD Portugal.",
+            "name": "Daniel Paixão.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c461aa7c",
+            "path": "clips/uploads/vxWOpZSTyLFqONjVBkgNbuHIGRQK1UcdJFQ7uyi1.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/g7V8YHTv3B1zIdRWn1K61Tgukzp1l9BHlymrUOCV.mp3",
+    "transcript": {
+        "duration": 39.599998474121094,
+        "text": "Dois quartos, garagem fechada, no centro de Santa Combadão. Escolas, farmácias, centro de saúde, supermercados e transportes ficam por perto. Um segundo andar num prédio com elevador. A sala é ampla e luminosa, com varanda. A cozinha está equipada e tem dispensa. Os dois quartos têm roupeiros embutidos e varanda. Casa de banho completa, com base de duches. Boa exposição solar, aquecimento central e certificado energético B-. A garagem tem eletricidade. Para viver ou para investir, 159 mil euros. Para visitar, fale com o Daniel Paixão, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Dois",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "quartos",
+                "start": 0.4000000059604645,
+                "end": 0.8199999928474426
+            },
+            {
+                "word": "garagem",
+                "start": 0.9399999976158142,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "fechada",
+                "start": 1.6200000047683716,
+                "end": 1.9800000190734863
+            },
+            {
+                "word": "no",
+                "start": 2.0799999237060547,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "centro",
+                "start": 2.4200000762939453,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "de",
+                "start": 2.7200000286102295,
+                "end": 3
+            },
+            {
+                "word": "Santa",
+                "start": 3,
+                "end": 3.2200000286102295
+            },
+            {
+                "word": "Combadão",
+                "start": 3.2200000286102295,
+                "end": 3.700000047683716
+            },
+            {
+                "word": "Escolas",
+                "start": 4.119999885559082,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "farmácias",
+                "start": 5,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "centro",
+                "start": 5.860000133514404,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 5.920000076293945,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "saúde",
+                "start": 6.21999979019165,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "supermercados",
+                "start": 6.78000020980835,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "e",
+                "start": 7.400000095367432,
+                "end": 7.539999961853027
+            },
+            {
+                "word": "transportes",
+                "start": 7.539999961853027,
+                "end": 8.199999809265137
+            },
+            {
+                "word": "ficam",
+                "start": 8.199999809265137,
+                "end": 8.4399995803833
+            },
+            {
+                "word": "por",
+                "start": 8.4399995803833,
+                "end": 8.760000228881836
+            },
+            {
+                "word": "perto",
+                "start": 8.760000228881836,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "Um",
+                "start": 9.600000381469727,
+                "end": 9.760000228881836
+            },
+            {
+                "word": "segundo",
+                "start": 9.760000228881836,
+                "end": 10.020000457763672
+            },
+            {
+                "word": "andar",
+                "start": 10.020000457763672,
+                "end": 10.399999618530273
+            },
+            {
+                "word": "num",
+                "start": 10.399999618530273,
+                "end": 10.720000267028809
+            },
+            {
+                "word": "prédio",
+                "start": 10.720000267028809,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 11.020000457763672,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "elevador",
+                "start": 11.260000228881836,
+                "end": 11.720000267028809
+            },
+            {
+                "word": "A",
+                "start": 12.279999732971191,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "sala",
+                "start": 12.460000038146973,
+                "end": 12.680000305175781
+            },
+            {
+                "word": "é",
+                "start": 12.680000305175781,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "ampla",
+                "start": 13.039999961853027,
+                "end": 13.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 13.380000114440918,
+                "end": 13.65999984741211
+            },
+            {
+                "word": "luminosa",
+                "start": 13.65999984741211,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "com",
+                "start": 14.34000015258789,
+                "end": 14.520000457763672
+            },
+            {
+                "word": "varanda",
+                "start": 14.520000457763672,
+                "end": 14.859999656677246
+            },
+            {
+                "word": "A",
+                "start": 15.420000076293945,
+                "end": 15.619999885559082
+            },
+            {
+                "word": "cozinha",
+                "start": 15.619999885559082,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "está",
+                "start": 15.84000015258789,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "equipada",
+                "start": 16.079999923706055,
+                "end": 16.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 16.65999984741211,
+                "end": 16.920000076293945
+            },
+            {
+                "word": "tem",
+                "start": 16.920000076293945,
+                "end": 17.040000915527344
+            },
+            {
+                "word": "dispensa",
+                "start": 17.040000915527344,
+                "end": 17.559999465942383
+            },
+            {
+                "word": "Os",
+                "start": 18.139999389648438,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "dois",
+                "start": 18.219999313354492,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "quartos",
+                "start": 18.479999542236328,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "têm",
+                "start": 18.799999237060547,
+                "end": 19.040000915527344
+            },
+            {
+                "word": "roupeiros",
+                "start": 19.040000915527344,
+                "end": 19.5
+            },
+            {
+                "word": "embutidos",
+                "start": 19.5,
+                "end": 20.15999984741211
+            },
+            {
+                "word": "e",
+                "start": 20.15999984741211,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "varanda",
+                "start": 20.479999542236328,
+                "end": 20.860000610351562
+            },
+            {
+                "word": "Casa",
+                "start": 21.600000381469727,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "de",
+                "start": 21.65999984741211,
+                "end": 22
+            },
+            {
+                "word": "banho",
+                "start": 22,
+                "end": 22
+            },
+            {
+                "word": "completa",
+                "start": 22,
+                "end": 22.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 22.739999771118164,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "base",
+                "start": 22.940000534057617,
+                "end": 23.1200008392334
+            },
+            {
+                "word": "de",
+                "start": 23.1200008392334,
+                "end": 23.520000457763672
+            },
+            {
+                "word": "duches",
+                "start": 23.520000457763672,
+                "end": 23.719999313354492
+            },
+            {
+                "word": "Boa",
+                "start": 24.3799991607666,
+                "end": 24.520000457763672
+            },
+            {
+                "word": "exposição",
+                "start": 24.520000457763672,
+                "end": 24.940000534057617
+            },
+            {
+                "word": "solar",
+                "start": 24.940000534057617,
+                "end": 25.420000076293945
+            },
+            {
+                "word": "aquecimento",
+                "start": 25.899999618530273,
+                "end": 26.219999313354492
+            },
+            {
+                "word": "central",
+                "start": 26.219999313354492,
+                "end": 26.799999237060547
+            },
+            {
+                "word": "e",
+                "start": 26.799999237060547,
+                "end": 27.040000915527344
+            },
+            {
+                "word": "certificado",
+                "start": 27.040000915527344,
+                "end": 27.579999923706055
+            },
+            {
+                "word": "energético",
+                "start": 27.579999923706055,
+                "end": 28.18000030517578
+            },
+            {
+                "word": "B",
+                "start": 28.18000030517578,
+                "end": 28.579999923706055
+            },
+            {
+                "word": "",
+                "start": 28.579999923706055,
+                "end": 28.579999923706055
+            },
+            {
+                "word": "A",
+                "start": 29.100000381469727,
+                "end": 29.440000534057617
+            },
+            {
+                "word": "garagem",
+                "start": 29.440000534057617,
+                "end": 30.15999984741211
+            },
+            {
+                "word": "tem",
+                "start": 30.15999984741211,
+                "end": 30.15999984741211
+            },
+            {
+                "word": "eletricidade",
+                "start": 30.15999984741211,
+                "end": 31.200000762939453
+            },
+            {
+                "word": "Para",
+                "start": 31.520000457763672,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "viver",
+                "start": 31.639999389648438,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "ou",
+                "start": 32.060001373291016,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "para",
+                "start": 32.47999954223633,
+                "end": 32.720001220703125
+            },
+            {
+                "word": "investir",
+                "start": 32.720001220703125,
+                "end": 33.060001373291016
+            },
+            {
+                "word": "159",
+                "start": 33.65999984741211,
+                "end": 34.58000183105469
+            },
+            {
+                "word": "mil",
+                "start": 34.58000183105469,
+                "end": 34.779998779296875
+            },
+            {
+                "word": "euros",
+                "start": 34.779998779296875,
+                "end": 35.13999938964844
+            },
+            {
+                "word": "Para",
+                "start": 35.70000076293945,
+                "end": 35.79999923706055
+            },
+            {
+                "word": "visitar",
+                "start": 35.79999923706055,
+                "end": 36.540000915527344
+            },
+            {
+                "word": "fale",
+                "start": 36.900001525878906,
+                "end": 36.900001525878906
+            },
+            {
+                "word": "com",
+                "start": 36.900001525878906,
+                "end": 37.060001373291016
+            },
+            {
+                "word": "o",
+                "start": 37.060001373291016,
+                "end": 37.220001220703125
+            },
+            {
+                "word": "Daniel",
+                "start": 37.220001220703125,
+                "end": 37.47999954223633
+            },
+            {
+                "word": "Paixão",
+                "start": 37.47999954223633,
+                "end": 37.959999084472656
+            },
+            {
+                "word": "da",
+                "start": 38.18000030517578,
+                "end": 38.36000061035156
+            },
+            {
+                "word": "IAD",
+                "start": 38.36000061035156,
+                "end": 38.7599983215332
+            },
+            {
+                "word": "de",
+                "start": 38.7599983215332,
+                "end": 39.060001373291016
+            },
+            {
+                "word": "Portugal",
+                "start": 39.060001373291016,
+                "end": 39.380001068115234
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 39.599998474121094,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8999999999999986,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 COM GARAGEM FECHADA",
+                        "params": {
+                            "src": "img_c5a63934",
+                            "avatar": "img_1c3eece3",
+                            "logo": "img_c461aa7c",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "159.000 €",
+                            "location": "SANTA COMBA DÃO · CENTRO",
+                            "title": "T2 COM GARAGEM",
+                            "facts": "93 m² · 2 quartos · 1 WC · garagem",
+                            "cta": "Ligue já +351 965 119 065",
+                            "name": "Daniel Paixão",
+                            "logoText": "IAD",
+                            "logoSub": "Portugal",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8999999999999986,
+                "end": 6.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_412a38c6",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.7,
+                "end": 9.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_089f4787",
+                            "title": "TUDO POR PERTO",
+                            "items": [
+                                "Escolas e farmácias",
+                                "Centro de saúde",
+                                "Supermercados",
+                                "Transportes"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.4,
+                "end": 12.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "2.º ANDAR COM ELEVADOR",
+                        "params": {
+                            "src": "img_3ced8176",
+                            "src2": "img_2d309ab0",
+                            "src3": "img_9f1505d9",
+                            "src4": "img_a0affdfd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.1,
+                "end": 15.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "SALA AMPLA E LUMINOSA",
+                        "params": {
+                            "src": "img_496a657d",
+                            "src2": "img_8958d940"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.2,
+                "end": 17.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "COZINHA EQUIPADA",
+                        "params": {
+                            "src": "img_237e6bff",
+                            "src2": "img_c8ff97f5",
+                            "src3": "img_48b19c0d",
+                            "src4": "img_cd1d25e3",
+                            "src5": "img_43ecb4f7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.9,
+                "end": 21.3,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DOIS QUARTOS",
+                        "params": {
+                            "src": "img_61e85f01",
+                            "src2": "img_47055ee2",
+                            "src3": "img_d1a358f4",
+                            "src4": "img_74a131de"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.3,
+                "end": 24.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "CASA DE BANHO COMPLETA",
+                        "params": {
+                            "src": "img_f4139d40",
+                            "src2": "img_2795b41d",
+                            "src3": "img_bb6456bd",
+                            "src4": "img_24618599",
+                            "src5": "img_eb7852f1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.2,
+                "end": 28.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_44b75123",
+                            "title": "CERTIFICADO ENERGÉTICO B-",
+                            "items": [
+                                "Boa exposição solar",
+                                "Aquecimento central",
+                                "Classe B-: 4.ª de 8"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.9,
+                "end": 31.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "GARAGEM FECHADA",
+                        "params": {
+                            "src": "img_db9657a2",
+                            "src2": "img_3097dcba"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.4,
+                "end": 35.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "159.000 €",
+                        "params": {
+                            "src": "img_24b75b9f",
+                            "blur": 8,
+                            "charsPerSecond": 6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.5,
+                "end": 39.599998474121094,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Daniel Paixão",
+                        "params": {
+                            "src": "img_1c3eece3",
+                            "name": "Daniel Paixão",
+                            "phone": "+351 965 119 065",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1048280-srqpz/clip.mp4",
+    "error": null
+}

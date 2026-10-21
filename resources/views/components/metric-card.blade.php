@@ -5,7 +5,7 @@
     'previous' => null,   // the same figure a day earlier, already formatted
     'previousLabel' => 'yesterday',
     'unit' => null,
-    'accent' => '#5A7BFF',
+    'accent' => '#2F5A85',
 ])
 @php
     $deltaNum = is_numeric($delta) ? (float) $delta : null;

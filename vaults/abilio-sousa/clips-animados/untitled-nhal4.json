@@ -1,0 +1,1302 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia remodelada no Estoril com piscina e vista vale | 5,5M€",
+    "source_text": null,
+    "source_path": "clips/uploads/mWN8Ol3trkOGHWoGjV5OiUcfkRtxvlDK4AOYoRgE.mp3",
+    "images": [
+        {
+            "id": "img_9ecc5f9d",
+            "path": "clips/uploads/OytS6HrLZ76v0jZzWXjEXPkz5lN9eA3QttI3zoqb.jpg",
+            "description": "Logótipo RE/MAX Convictus Baía, com balão de ar quente vermelho, branco e azul sobre fundo branco.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c41d2c44",
+            "path": "clips/uploads/0qm6TfiJluqXQH1KCM1P2DmYDSNc9VPcUfUgPrP3.png",
+            "description": "Retrato da agente Ana Chitas, sorridente, de cabelo comprido e blazer azul, com logótipos Convictus e RE/MAX.",
+            "name": "ana.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_11b92482",
+            "path": "clips/uploads/7gfd01zrBbyofeCArQOwiKvdqhFuKhMtuKzXW5ut.jpg",
+            "description": "Quarto amplo vazio, chão de madeira clara, roupeiros embutidos brancos e porta de vidro para varanda com árvores.",
+            "name": "6851a909-658f-4c2d-b24d-796dfacec002.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2a1e97fb",
+            "path": "clips/uploads/YOG6M2yqFHA4Zv50ZyvYQHivEjI6ehi66yghGLfa.jpg",
+            "description": "Master suite ampla e luminosa, janelas de vidro do chão ao teto, roupeiros embutidos e varanda com vista verde.",
+            "name": "4559503c-7c27-48da-9477-ead36f64e7f0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6f4a7a49",
+            "path": "clips/uploads/LUoEq7pkvsZshCWO106FNPNTBT7kv62HSuxbd5My.jpg",
+            "description": "Pormenor de casa de banho: lavatório em mármore branco esculpido com torneira cromada minimalista.",
+            "name": "7a6188c9-b1d5-495c-b6eb-6c815641fce3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6909a1f8",
+            "path": "clips/uploads/4PKpfCJFrZvJFJQ4yA8LWkaLg1aebHW9Z5sV1v0p.jpg",
+            "description": "Cozinha de design toda branca, ilha com placa de indução preta e gavetas sem puxadores.",
+            "name": "2375ad30-6014-41c0-acc4-c3a140f0d19f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d6db84fa",
+            "path": "clips/uploads/iVbwEeyAQdCnkGfGF6xMMfpSlWBD8rw8N31S7hc3.jpg",
+            "description": "Casa de banho branca com móvel suspenso, sanita suspensa, grande espelho e duche em mármore com vidro.",
+            "name": "015a6711-1410-4d7d-bf62-bfd600ad634c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_78d74450",
+            "path": "clips/uploads/87YokDTNXE3orI4sy9dSNfgqttXXCIrBYfoR238J.jpg",
+            "description": "Casa de banho em mármore branco com banheira, resguardo de vidro e toalheiro cromado.",
+            "name": "fcf7ace5-905e-49bd-b565-7600a4b72977.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a9f119e4",
+            "path": "clips/uploads/4LwwH2UMKEKVEHmLtzncWVy1mkod5hvFkj5C9xUl.jpg",
+            "description": "Casa de banho com bancada dupla em mármore, torneiras de parede cromadas, grande espelho e duche em mármore.",
+            "name": "fe74827d-1554-4558-8321-0001baa77cf9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a53f09b9",
+            "path": "clips/uploads/Dx3OhozUrGLhd5BERAZawPFod3En5s3X7rgnonwM.jpg",
+            "description": "Sala de estar ampla e luminosa, chão de madeira clara, janelas de vidro do chão ao teto com muito sol.",
+            "name": "fbfa0ce5-4af1-42f8-99e9-913c4283755e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_72ff3403",
+            "path": "clips/uploads/ePcDaT8rwdi5lWdgw2EQFgHFAWlRrAv2N7hVg7S6.jpg",
+            "description": "Sala de estar ampla e vazia, janelas do chão ao teto com estores de lâminas e luz em riscas no chão.",
+            "name": "6a062875-1fc9-4716-9cef-3b8fcf0b1c16.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_829e5933",
+            "path": "clips/uploads/xMkQpCc6OgHaXVihptvKVjKKCENgg5vZBUwpvTDG.jpg",
+            "description": "Sala de estar e jantar em open space, chão de madeira clara, janelas grandes abertas para a varanda.",
+            "name": "8060c67a-8764-4ab5-aee0-cdb2a9d1745b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dffbaa5a",
+            "path": "clips/uploads/BiffczKtEzqu3AixnUgj793CMWIb1A72S8NQPIEd.jpg",
+            "description": "Fachada branca contemporânea em vários pisos, guardas de vidro, estores de madeira, jardim com relva e pinheiros.",
+            "name": "7b43d74a-949b-4fd3-bf29-aaeaf6af48cd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c7fdfbb3",
+            "path": "clips/uploads/WNflZujEXoAcqW2WECTe7WYa0kwPEbcYvyNewvaH.jpg",
+            "description": "Fachada vista de baixo, volumes brancos escalonados com guardas de vidro e céu azul intenso.",
+            "name": "694608d2-1c14-453a-afcf-7a0cb360ed97.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_1f08a244",
+            "path": "clips/uploads/7C7Dy9FNp0pEp2L3r4IbIXM1VCboTWwPsNS0b6K3.jpg",
+            "description": "Pormenor de coluna em betão aparente, com o interior branco e luminoso desfocado ao fundo.",
+            "name": "15f4f32c-b051-4648-9e73-ac4f77bd55d7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e0cf766c",
+            "path": "clips/uploads/XW3pC1oxVlWUOCFJb0O7140FxNUByynD4MtHqQSM.jpg",
+            "description": "Terraço com deck, espreguiçadeiras e guarda de vidro, vista para árvores e céu azul.",
+            "name": "da89473d-1a18-4268-8f5e-730e03e58ff2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d627040f",
+            "path": "clips/uploads/YFmJVNEg8CQRLMSS93anpRfqpwlPrhHAErLGfepN.jpg",
+            "description": "Pormenor de casa de banho: torneira cromada de design sobre bancada em mármore branco.",
+            "name": "5b8ef6e8-c891-4663-b78f-dd120341ac78.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f0cf35e",
+            "path": "clips/uploads/wGGtLMb7Sud4kd79cgXLVS47jLSq25O8pu8jzq5w.jpg",
+            "description": "Sala vazia com coluna de betão, janelas altas com estores e muita luz no chão claro.",
+            "name": "c2057da7-4968-4dd3-bcf6-569c92375f80.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e530c41c",
+            "path": "clips/uploads/DIzVuSZjWXyLP45MzayVdue1qXXtJ4Prefr7F1yQ.jpg",
+            "description": "Pormenor das lâminas de madeira dos estores exteriores sobre o vidro, em perspetiva diagonal.",
+            "name": "65241fd4-a13b-4c16-bb0c-7b3985f42b86.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c39caa91",
+            "path": "clips/uploads/5DPHogrBN5Dcl1QWl0xlK0Wwx88Bo6mg71HenFRf.jpg",
+            "description": "Quarto vazio com roupeiro branco embutido do chão ao teto e chão de madeira clara.",
+            "name": "bd9022c1-2278-47ec-9672-6b126ee3bb0d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_41b87292",
+            "path": "clips/uploads/Sis8bMU6Q9tQpomJrtWJVBvXqpTxOcuepkQLjfxZ.jpg",
+            "description": "Fachada noturna da moradia iluminada, três pisos contemporâneos com janelas de luz colorida e pessoas no interior.",
+            "name": "05684b2f-db02-4676-ba2e-b7da3583cb20.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_25476f1b",
+            "path": "clips/uploads/QX23H0JEyHlQvDMhwmkJwdulUJ0iQp8Yc3CIa2HR.jpg",
+            "description": "Terraço com piscina e espreguiçadeiras brancas, fachada moderna com portadas de madeira e deck cinzento.",
+            "name": "4705fb87-1f49-42e5-9655-afb59c3d4b62.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e52c409e",
+            "path": "clips/uploads/sRGhpV1B0oIrNE9vqNLjkb3kpKRoZR6gqzvrvzOk.jpg",
+            "description": "Piscina retangular com vedação de vidro, deck cinzento e vista sobre telhados e pinheiros do vale.",
+            "name": "48fad13e-68f5-4f87-88a8-13b12d2c74e8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5470a86e",
+            "path": "clips/uploads/z6MTCC3lRErrnv7fe07lVbw44tezGZH1r9iyDQcD.jpg",
+            "description": "Jardim com escadas, flores laranja e estrutura em ripado de madeira, provável cozinha de verão ou lounge.",
+            "name": "b8bf68e1-a9e8-4bed-ba4c-8d22c8c49bb8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_941f2830",
+            "path": "clips/uploads/BR3NmI7xYtN6Ojo5qlzcWFOnki9SHMEeimvGVvC4.jpg",
+            "description": "Festa ao entardecer junto à piscina, com bar exterior sob a varanda e fachada branca contemporânea.",
+            "name": "7e8a4462-2230-4aea-a112-a4f43436c7b4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b226016d",
+            "path": "clips/uploads/omsxcvFB52ttuoPTgaGyu7YjPsCafrvT08FVzLI7.jpg",
+            "description": "Estrutura exterior em ripado de madeira sobre muro branco, jardim florido, provável zona lounge ou cozinha de verão.",
+            "name": "74258654-946c-4a88-9cd6-303b6f6ea77c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5ae99279",
+            "path": "clips/uploads/JVk1WYhshsbQesO05sKJJoX7XYedGEbg9LlTe1Yl.jpg",
+            "description": "Vista aérea do terraço com piscina, sofás exteriores, relvado e escadas, sobre o vale e casas vizinhas.",
+            "name": "dff69ca3-1c71-4682-9e55-cd24e53e44bb.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5174f1d7",
+            "path": "clips/uploads/tiDoKBNeLyrGhIEV9HaHP70b1J2qdSVybymo3XGf.jpg",
+            "description": "Fachada lateral branca minimalista com plantas ornamentais em primeiro plano e vista sobre telhados vizinhos.",
+            "name": "241962a6-dd82-4274-94e5-f68accae4ef7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0773ff05",
+            "path": "clips/uploads/lSlSfZ8uwgPTL7yKpcPavR7XbXhaxZeliSrmyn5v.jpg",
+            "description": "Vista do terraço superior sobre piscina, deck e jardim, com o vale arborizado e casas tradicionais.",
+            "name": "dea0e900-888f-4a82-a007-5c0fabbf86d2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_56a7138a",
+            "path": "clips/uploads/ALM9sGtpJmnlwT73fo5np3e3YfuBgub6mKjwjI5j.jpg",
+            "description": "Fachada vertical moderna com varandas envidraçadas, portadas de madeira, deck e piscina com espreguiçadeiras.",
+            "name": "d2dd93d6-f1a7-4d4e-9a93-d9ce83da93c7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7aa023c6",
+            "path": "clips/uploads/V7U2ZCy7oT4CzDXLIExoSZwPe1x2H3rnkc7sBT0X.jpg",
+            "description": "Fachada lateral da moradia branca contemporânea, varandas com vidro, estores de madeira, relvado e pinheiros mansos.",
+            "name": "a570f536-8ab0-44b3-9da0-80867bd2f60a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c2ef462a",
+            "path": "clips/uploads/oTMzHUkhn4gvUwo1C3ZuHnzAl1RvmDVvfIeWwa04.jpg",
+            "description": "Fachada traseira com três pisos, estores de madeira e deck exterior com espreguiçadeiras brancas junto à piscina.",
+            "name": "2920a74b-1500-463e-83bb-8c94dc774a63.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_345806f2",
+            "path": "clips/uploads/NXkAXLxfAJfHL1RFfmC5ZWaDqpDl2wQV12Vi6zjE.jpg",
+            "description": "Deck exterior em madeira cinzenta junto à piscina, com a fachada branca moderna e vasos de palmeiras.",
+            "name": "6eea2500-30cf-454c-a51c-dcdc6768c74c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e0c1b6b4",
+            "path": "clips/uploads/AvQmsU7iWH1OzutKzty80Du4wpiMqyLEQP7r4bId.jpg",
+            "description": "Fachada principal da moradia vista de baixo, três pisos brancos com estores de madeira e muro em tijolo.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Here are the house details:\n5 500 000 €\nVenda\nid. 124031323-24\n442 m²\n\n7 Quartos\n\n4 WC\n\nB\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nMoradia T4, totalmente remodelada em 2018, situada na prestigiada Avenida da Holanda, no Estoril, uma das zonas residenciais mais exclusivas e valorizadas da Linha de Cascais.\n\n\nDistribuída por 3 pisos, esta distinta residência destaca-se pela arquitetura contemporânea, qualidade dos materiais, luminosidade natural e excelente organização dos espaços, concebidos para proporcionar conforto, privacidade e funcionalidade.\n\n\nO piso principal é composto por uma generosa sala de estar e jantar, com amplos vãos envidraçados que prolongam naturalmente os espaços para uma varanda com vista sobre o vale e a piscina. A cozinha, totalmente equipada e de design contemporâneo, é complementada por uma elegante casa de banho social.\n\n\nNo piso inferior encontram-se duas confortáveis suites, ambas com acesso direto ao jardim e à piscina, criando uma agradável atmosfera de resort. Este piso dispõe ainda de um quarto para staff com entrada independente, lavandaria, adega e amplas áreas de arrumação.\n\n\nO piso superior é dedicado à privacidade, destacando-se a elegante master suite, complementada por uma acolhedora sala de televisão e um escritório independente, ideal para trabalho remoto ou como biblioteca/espaço criativo.\n\n\nNo exterior, o jardim paisagístico envolve uma magnífica piscina e uma cozinha de verão totalmente equipada, com forno, grelhador, frigorífico e bancada de apoio. A zona lounge aquecida permite usufruir deste espaço durante todo o ano, sendo ainda complementada por uma casa de banho junto à piscina.\n\n\nA moradia dispõe de piso radiante nas casas de banho, ar condicionado, sistema solar, caixilharia de elevado desempenho com vidros duplos, estores elétricos, vídeo-porteiro e sistema de segurança.\n\n\nA garagem fechada tem capacidade para 2 automóveis, existindo ainda estacionamento coberto para mais 2 viaturas.\n\n\nA localização é um dos seus principais atributos. O Estoril oferece uma combinação única entre tranquilidade, privacidade e proximidade às praias da Linha de Cascais, campos de golfe, clubes de ténis, escolas internacionais e restaurantes de referência. Encontra-se a poucos minutos do Casino Estoril, da Marina e do centro histórico de Cascais, com rápidos acessos à Avenida Marginal e à A5.\n\n\nUma moradia de excelência, totalmente remodelada, que combina conforto contemporâneo, espaços exteriores de lazer e uma localização privilegiada, a cerca de 30 minutos de Lisboa e do Aeroporto Internacional.\n\nDetalhes\nÁrea Bruta Privativa m²\n442\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n737\nQuartos\n7\nAno de Construção\n2018\nPiso\n- -\nWC/Casas de banho\n4\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia contemporânea na Avenida da Holanda, Estoril (Cascais)",
+            "summary": "Moradia remodelada de três pisos no Estoril, à venda por 5,5 milhões de euros. Fica em Cascais, o segundo concelho mais caro do país, com uma mediana de 5.000 €/m² no 1.º trimestre de 2026 (INE).",
+            "timeline": [
+                {
+                    "label": "Golf do Estoril abre com 9 buracos",
+                    "sublabel": "1929"
+                },
+                {
+                    "label": "Mediana em Cascais: 4.550 €/m²",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Mediana em Cascais: 4.654 €/m²",
+                    "sublabel": "4.º trim. 2025"
+                },
+                {
+                    "label": "Mediana em Cascais: 5.000 €/m²",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 5500000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Mediana em Cascais (1.º trim. 2026)",
+                    "value": 5000,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Mediana nacional (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida nacional em 1 ano (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Concelhos mais caros (1.º trim. 2026, INE)",
+                    "left": {
+                        "title": "Cascais",
+                        "points": [
+                            "5.000 €/m²",
+                            "2.º mais caro do país"
+                        ]
+                    },
+                    "right": {
+                        "title": "Lisboa",
+                        "points": [
+                            "5.292 €/m²",
+                            "1.º mais caro do país"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Cascais é o 2.º concelho mais caro de Portugal, só atrás de Lisboa (INE, 1.º trim. 2026)",
+                "Em Cascais, o metro quadrado custa mais do dobro da mediana nacional",
+                "Os preços das casas em Portugal subiram 19,8% num ano (1.º trim. 2026)",
+                "O Golf do Estoril, perto da moradia, existe desde 1929"
+            ],
+            "sources": [
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.idealista.pt/news/node/75156",
+                "https://eco.sapo.pt/2026/07/17/preco-das-casas-volta-a-bater-recorde-com-subida-de-20-num-ano/",
+                "https://timeout.com/cascais/sport-and-fitness/estoril-golf-course",
+                "https://www.visitlisboa.com/pt-pt/locais/golf-do-estoril"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia remodelada no Estoril com piscina e vista vale | 5,5M€",
+            "description": "Moradia contemporânea totalmente remodelada na Avenida da Holanda, no Estoril, com três pisos, muita luz, três suites e varanda com vista sobre o vale e a piscina. No exterior tem cozinha de verão, zona lounge aquecida e garagem para dois carros, a poucos minutos das praias, do golfe e de Cascais. Para agendar uma visita, contacte a Ana Chitas, da RE/MAX Convictus Bahia.",
+            "tags": [
+                "moradia Estoril",
+                "imobiliário de luxo",
+                "Cascais",
+                "casa com piscina",
+                "moradia à venda",
+                "RE/MAX",
+                "imobiliário Portugal",
+                "arquitetura contemporânea"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-nhal4",
+    "created_at": "2026-10-08T10:42:12+00:00",
+    "updated_at": "2026-10-08T10:54:13+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/mWN8Ol3trkOGHWoGjV5OiUcfkRtxvlDK4AOYoRgE.mp3",
+    "transcript": {
+        "duration": 36.20000076293945,
+        "text": "Uma moradia na Avenida da Holanda, no Estoril. Totalmente remodelada, com arquitetura contemporânea, muita luz e três pisos pensados para a privacidade. Sala de estar e jantar aberta para uma varanda com vista sobre o vale e a piscina. E cozinha de design. Uma master suite com sala de televisão e escritório. E mais duas suites com acesso direto ao jardim. Lá fora, piscina, cozinha de verão e zona lounge aquecida para usar todo o ano. Garagem para dois carros, a minutos das praias, do golf e de cascais. 5 milhões e 500 mil euros. Para visitar, fale com a Ana Chitas, da Remax Convictus Bahia.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "moradia",
+                "start": 0.2199999988079071,
+                "end": 0.6600000262260437
+            },
+            {
+                "word": "na",
+                "start": 0.6600000262260437,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "Avenida",
+                "start": 0.9200000166893005,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "da",
+                "start": 1.2200000286102295,
+                "end": 1.7200000286102295
+            },
+            {
+                "word": "Holanda",
+                "start": 1.7200000286102295,
+                "end": 1.7999999523162842
+            },
+            {
+                "word": "no",
+                "start": 2.0199999809265137,
+                "end": 2.1600000858306885
+            },
+            {
+                "word": "Estoril",
+                "start": 2.1600000858306885,
+                "end": 2.5199999809265137
+            },
+            {
+                "word": "Totalmente",
+                "start": 2.9200000762939453,
+                "end": 3.4800000190734863
+            },
+            {
+                "word": "remodelada",
+                "start": 3.4800000190734863,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "com",
+                "start": 4.239999771118164,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "arquitetura",
+                "start": 4.360000133514404,
+                "end": 4.840000152587891
+            },
+            {
+                "word": "contemporânea",
+                "start": 4.840000152587891,
+                "end": 5.679999828338623
+            },
+            {
+                "word": "muita",
+                "start": 6.039999961853027,
+                "end": 6.300000190734863
+            },
+            {
+                "word": "luz",
+                "start": 6.300000190734863,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "e",
+                "start": 6.579999923706055,
+                "end": 6.840000152587891
+            },
+            {
+                "word": "três",
+                "start": 6.840000152587891,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "pisos",
+                "start": 7.21999979019165,
+                "end": 7.5
+            },
+            {
+                "word": "pensados",
+                "start": 7.5,
+                "end": 7.980000019073486
+            },
+            {
+                "word": "para",
+                "start": 7.980000019073486,
+                "end": 8.180000305175781
+            },
+            {
+                "word": "a",
+                "start": 8.180000305175781,
+                "end": 8.5
+            },
+            {
+                "word": "privacidade",
+                "start": 8.5,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "Sala",
+                "start": 9.420000076293945,
+                "end": 9.539999961853027
+            },
+            {
+                "word": "de",
+                "start": 9.539999961853027,
+                "end": 9.819999694824219
+            },
+            {
+                "word": "estar",
+                "start": 9.819999694824219,
+                "end": 9.9399995803833
+            },
+            {
+                "word": "e",
+                "start": 9.9399995803833,
+                "end": 10.079999923706055
+            },
+            {
+                "word": "jantar",
+                "start": 10.079999923706055,
+                "end": 10.420000076293945
+            },
+            {
+                "word": "aberta",
+                "start": 10.420000076293945,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "para",
+                "start": 10.819999694824219,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "uma",
+                "start": 11.0600004196167,
+                "end": 11.319999694824219
+            },
+            {
+                "word": "varanda",
+                "start": 11.319999694824219,
+                "end": 11.5600004196167
+            },
+            {
+                "word": "com",
+                "start": 11.5600004196167,
+                "end": 11.920000076293945
+            },
+            {
+                "word": "vista",
+                "start": 11.920000076293945,
+                "end": 12.15999984741211
+            },
+            {
+                "word": "sobre",
+                "start": 12.15999984741211,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "o",
+                "start": 12.4399995803833,
+                "end": 12.819999694824219
+            },
+            {
+                "word": "vale",
+                "start": 12.819999694824219,
+                "end": 12.819999694824219
+            },
+            {
+                "word": "e",
+                "start": 12.819999694824219,
+                "end": 12.979999542236328
+            },
+            {
+                "word": "a",
+                "start": 12.979999542236328,
+                "end": 13.34000015258789
+            },
+            {
+                "word": "piscina",
+                "start": 13.34000015258789,
+                "end": 13.380000114440918
+            },
+            {
+                "word": "E",
+                "start": 13.65999984741211,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "cozinha",
+                "start": 13.899999618530273,
+                "end": 14.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 14.079999923706055,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "design",
+                "start": 14.380000114440918,
+                "end": 14.680000305175781
+            },
+            {
+                "word": "Uma",
+                "start": 15.100000381469727,
+                "end": 15.220000267028809
+            },
+            {
+                "word": "master",
+                "start": 15.220000267028809,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "suite",
+                "start": 15.680000305175781,
+                "end": 15.899999618530273
+            },
+            {
+                "word": "com",
+                "start": 15.899999618530273,
+                "end": 16.219999313354492
+            },
+            {
+                "word": "sala",
+                "start": 16.219999313354492,
+                "end": 16.3799991607666
+            },
+            {
+                "word": "de",
+                "start": 16.3799991607666,
+                "end": 16.639999389648438
+            },
+            {
+                "word": "televisão",
+                "start": 16.639999389648438,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 16.959999084472656,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "escritório",
+                "start": 17.219999313354492,
+                "end": 17.639999389648438
+            },
+            {
+                "word": "E",
+                "start": 17.920000076293945,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "mais",
+                "start": 18.059999465942383,
+                "end": 18.260000228881836
+            },
+            {
+                "word": "duas",
+                "start": 18.260000228881836,
+                "end": 18.520000457763672
+            },
+            {
+                "word": "suites",
+                "start": 18.520000457763672,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "com",
+                "start": 18.799999237060547,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "acesso",
+                "start": 19.079999923706055,
+                "end": 19.360000610351562
+            },
+            {
+                "word": "direto",
+                "start": 19.360000610351562,
+                "end": 19.799999237060547
+            },
+            {
+                "word": "ao",
+                "start": 19.799999237060547,
+                "end": 19.959999084472656
+            },
+            {
+                "word": "jardim",
+                "start": 19.959999084472656,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "Lá",
+                "start": 20.799999237060547,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "fora",
+                "start": 20.920000076293945,
+                "end": 21.139999389648438
+            },
+            {
+                "word": "piscina",
+                "start": 21.559999465942383,
+                "end": 21.81999969482422
+            },
+            {
+                "word": "cozinha",
+                "start": 22.219999313354492,
+                "end": 22.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 22.360000610351562,
+                "end": 22.780000686645508
+            },
+            {
+                "word": "verão",
+                "start": 22.780000686645508,
+                "end": 22.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 22.81999969482422,
+                "end": 23.139999389648438
+            },
+            {
+                "word": "zona",
+                "start": 23.139999389648438,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "lounge",
+                "start": 23.360000610351562,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "aquecida",
+                "start": 23.68000030517578,
+                "end": 24.18000030517578
+            },
+            {
+                "word": "para",
+                "start": 24.18000030517578,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "usar",
+                "start": 24.399999618530273,
+                "end": 24.639999389648438
+            },
+            {
+                "word": "todo",
+                "start": 24.639999389648438,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "o",
+                "start": 25.059999465942383,
+                "end": 25.399999618530273
+            },
+            {
+                "word": "ano",
+                "start": 25.399999618530273,
+                "end": 25.399999618530273
+            },
+            {
+                "word": "Garagem",
+                "start": 25.399999618530273,
+                "end": 26.139999389648438
+            },
+            {
+                "word": "para",
+                "start": 26.139999389648438,
+                "end": 26.3799991607666
+            },
+            {
+                "word": "dois",
+                "start": 26.3799991607666,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "carros",
+                "start": 26.68000030517578,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "a",
+                "start": 27.260000228881836,
+                "end": 27.399999618530273
+            },
+            {
+                "word": "minutos",
+                "start": 27.399999618530273,
+                "end": 27.65999984741211
+            },
+            {
+                "word": "das",
+                "start": 27.65999984741211,
+                "end": 27.920000076293945
+            },
+            {
+                "word": "praias",
+                "start": 27.920000076293945,
+                "end": 28.360000610351562
+            },
+            {
+                "word": "do",
+                "start": 28.559999465942383,
+                "end": 28.700000762939453
+            },
+            {
+                "word": "golf",
+                "start": 28.700000762939453,
+                "end": 28.959999084472656
+            },
+            {
+                "word": "e",
+                "start": 28.959999084472656,
+                "end": 29.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 29.18000030517578,
+                "end": 29.3799991607666
+            },
+            {
+                "word": "cascais",
+                "start": 29.3799991607666,
+                "end": 29.860000610351562
+            },
+            {
+                "word": "5",
+                "start": 30.440000534057617,
+                "end": 30.520000457763672
+            },
+            {
+                "word": "milhões",
+                "start": 30.520000457763672,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 30.920000076293945,
+                "end": 31.079999923706055
+            },
+            {
+                "word": "500",
+                "start": 31.079999923706055,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "mil",
+                "start": 31.440000534057617,
+                "end": 31.700000762939453
+            },
+            {
+                "word": "euros",
+                "start": 31.700000762939453,
+                "end": 32.099998474121094
+            },
+            {
+                "word": "Para",
+                "start": 32.560001373291016,
+                "end": 32.599998474121094
+            },
+            {
+                "word": "visitar",
+                "start": 32.599998474121094,
+                "end": 33.220001220703125
+            },
+            {
+                "word": "fale",
+                "start": 33.52000045776367,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "com",
+                "start": 33.52000045776367,
+                "end": 33.720001220703125
+            },
+            {
+                "word": "a",
+                "start": 33.720001220703125,
+                "end": 33.86000061035156
+            },
+            {
+                "word": "Ana",
+                "start": 33.86000061035156,
+                "end": 33.97999954223633
+            },
+            {
+                "word": "Chitas",
+                "start": 33.97999954223633,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "da",
+                "start": 34.58000183105469,
+                "end": 34.70000076293945
+            },
+            {
+                "word": "Remax",
+                "start": 34.70000076293945,
+                "end": 35.040000915527344
+            },
+            {
+                "word": "Convictus",
+                "start": 35.040000915527344,
+                "end": 35.619998931884766
+            },
+            {
+                "word": "Bahia",
+                "start": 35.619998931884766,
+                "end": 35.97999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.20000076293945,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.799999999999997,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia no Estoril",
+                        "params": {
+                            "src": "img_e0c1b6b4",
+                            "avatar": "img_c41d2c44",
+                            "logo": "img_9ecc5f9d",
+                            "price": "5.500.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia contemporânea no Estoril",
+                            "location": "Av. da Holanda, Estoril · 442 m² · T4",
+                            "agentName": "Ana Chitas",
+                            "phone": "+351 915 782 337",
+                            "legal": "RE/MAX Convictus Baía"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.799999999999997,
+                "end": 5.9,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Remodelada em 2018",
+                        "params": {
+                            "srcs": [
+                                "img_dffbaa5a",
+                                "img_c7fdfbb3",
+                                "img_7aa023c6",
+                                "img_56a7138a",
+                                "img_c2ef462a"
+                            ],
+                            "src": "img_11b92482",
+                            "src2": "img_2a1e97fb",
+                            "src3": "img_6f4a7a49",
+                            "src4": "img_6909a1f8",
+                            "src5": "img_d6db84fa"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.9,
+                "end": 9.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_e530c41c",
+                            "src2": "img_1f08a244",
+                            "srcs": [
+                                "img_7f0cf35e",
+                                "img_5174f1d7",
+                                "img_6f4a7a49",
+                                "img_d627040f",
+                                "img_d6db84fa"
+                            ],
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.3,
+                "end": 13.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Sala aberta para a varanda",
+                        "params": {
+                            "srcs": [
+                                "img_829e5933",
+                                "img_a53f09b9",
+                                "img_72ff3403",
+                                "img_e0cf766c"
+                            ],
+                            "src": "img_78d74450",
+                            "src2": "img_a9f119e4",
+                            "src3": "img_a53f09b9",
+                            "src4": "img_72ff3403"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.5,
+                "end": 15.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_6909a1f8",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.6,
+                "end": 17.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Piso superior",
+                        "params": {
+                            "src": "img_2a1e97fb",
+                            "title": "Piso superior",
+                            "items": [
+                                "Master suite",
+                                "Sala de televisão",
+                                "Escritório"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.9,
+                "end": 20.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "srcs": [
+                                "img_11b92482",
+                                "img_c39caa91",
+                                "img_78d74450",
+                                "img_a9f119e4"
+                            ],
+                            "src": "img_829e5933",
+                            "src2": "img_dffbaa5a",
+                            "src3": "img_c7fdfbb3",
+                            "src4": "img_1f08a244"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.7,
+                "end": 23,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_e52c409e",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.1
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23,
+                "end": 25.4,
+                "background": "papyrus",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Cozinha de verão e lounge",
+                        "params": {
+                            "srcs": [
+                                "img_b226016d",
+                                "img_5470a86e",
+                                "img_941f2830",
+                                "img_25476f1b",
+                                "img_345806f2"
+                            ],
+                            "src": "img_e0cf766c",
+                            "src2": "img_d627040f",
+                            "src3": "img_7f0cf35e",
+                            "src4": "img_e530c41c",
+                            "src5": "img_c39caa91"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 27.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_41b87292",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.6,
+                "end": 30.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Praias, golfe e Cascais",
+                        "params": {
+                            "src": "img_5ae99279",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.4,
+                "end": 32.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_0773ff05",
+                            "zoom": 1.3
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.5,
+                "end": 36.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Ana Chitas",
+                        "params": {
+                            "src": "img_c41d2c44",
+                            "logo": "img_9ecc5f9d",
+                            "name": "Ana Chitas",
+                            "role": "Consultora imobiliária · RE/MAX Convictus Baía",
+                            "buttons": "+351 915 782 337 | Marcar visita",
+                            "phone": "+351 915 782 337"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-nhal4/clip.mp4",
+    "error": null
+}

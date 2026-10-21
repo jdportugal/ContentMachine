@@ -2,6 +2,7 @@
 
 namespace App\Services\Projects;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 /**
@@ -13,6 +14,17 @@ class ProjectRepository
 {
     /** Vault subfolders seeded for a brand-new project. */
     private const FOLDERS = ['noticias', 'clips', 'clips/fontes', 'clips-animados', 'rascunhos', 'publicacoes', 'monitorizacao', 'definicoes'];
+
+    /**
+     * What a clone takes: the project's SETUP — brand, effects, libraries,
+     * settings. Not its content (clips, news, drafts, publications): a clone is
+     * a new workspace built the same way, and clip records point at shared upload
+     * files that two projects must not both own.
+     */
+    private const CLONE_ITEMS = [
+        'design-system.md', 'design-system.tokens.json', 'estilo-animacao.md', 'definicoes',
+        'sfx', 'sfx-audio', 'sfx-refs', 'backgrounds', 'vfx', 'image-library', 'avatars',
+    ];
 
     private function registryPath(): string
     {
@@ -93,6 +105,53 @@ class ProjectRepository
         $this->save($rows);
 
         return $project;
+    }
+
+    /**
+     * A new project that starts as a copy of $slug's setup (see CLONE_ITEMS).
+     *
+     * Everything is COPIED into the clone's own vault, so from here on the two are
+     * independent: the clone's effects are its own records, and since effects
+     * paint with the design-system tokens, changing the clone's design system
+     * re-themes the clone's effects only.
+     */
+    public function duplicate(string $slug, string $name): Project
+    {
+        $source = $this->find($slug) ?? throw new \RuntimeException("Project [{$slug}] not found.");
+        $clone = $this->create($name, $source->language);
+        $from = rtrim($source->path, '/');
+        $to = rtrim($clone->path, '/');
+
+        foreach (self::CLONE_ITEMS as $item) {
+            if (is_dir($from.'/'.$item)) {
+                File::copyDirectory($from.'/'.$item, $to.'/'.$item);
+            } elseif (is_file($from.'/'.$item)) {
+                copy($from.'/'.$item, $to.'/'.$item);
+            }
+        }
+
+        // Records that name a file inside the source vault (image-library
+        // sidecars…) must name the clone's copy. A cached preview path points into
+        // the shared preview folder — dropped, or deleting the clone's effect would
+        // delete the original's preview with it; the clone renders its own.
+        foreach (File::allFiles($to) as $file) {
+            if ($file->getExtension() !== 'json') {
+                continue;
+            }
+            $data = json_decode((string) file_get_contents($file->getPathname()), true);
+            if (! is_array($data)) {
+                continue;
+            }
+            unset($data['preview_path']);
+            array_walk_recursive($data, function (&$v) use ($from, $to) {
+                if (is_string($v) && str_starts_with($v, $from.'/')) {
+                    $v = $to.substr($v, strlen($from));
+                }
+            });
+            file_put_contents($file->getPathname(), json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        }
+
+        return $clone;
     }
 
     private function makeDefault(): Project

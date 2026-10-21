@@ -21,16 +21,16 @@
             : MonitoringStats::numero((int) ($ontem['metricas'][$m] ?? 0));
     @endphp
     <div class="grid grid-cols-2 {{ $engajamento !== null ? 'lg:grid-cols-5' : 'lg:grid-cols-4' }} gap-4">
-        <x-metric-card label="Subscribers" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#5A7BFF"
+        <x-metric-card label="Subscribers" :value="MonitoringStats::numero($estatisticas['subscritores'])" unit="total" accent="#2F5A85"
                        :previous="$antes('subscritores')" :previous-label="$ontemRotulo" />
-        <x-metric-card label="Posts" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="published" accent="#FFB347"
+        <x-metric-card label="Posts" :value="MonitoringStats::numero($estatisticas['publicacoes'])" unit="published" accent="#A06E1C"
                        :previous="$antes('publicacoes')" :previous-label="$ontemRotulo" :delta="$wowPosts" />
-        <x-metric-card label="Views" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recent" accent="#FF7A3D"
+        <x-metric-card label="Views" :value="MonitoringStats::numero($estatisticas['visualizacoes'])" unit="recent" accent="#8A4A2B"
                        :previous="$antes('visualizacoes')" :previous-label="$ontemRotulo" :delta="$wowViews" />
-        <x-metric-card label="Interactions" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recent" accent="#C77DFF"
+        <x-metric-card label="Interactions" :value="MonitoringStats::numero($estatisticas['interacoes'])" unit="recent" accent="#7A4A8C"
                        :previous="$antes('interacoes')" :previous-label="$ontemRotulo" :delta="$wowInteracoes" />
         @if ($engajamento !== null)
-            <x-metric-card label="Engagement" :value="number_format($engajamento, 1).'%'" unit="interactions / views" accent="#4DE08A" />
+            <x-metric-card label="Engagement" :value="number_format($engajamento, 1).'%'" unit="interactions / views" accent="#3D7A4C" />
         @endif
     </div>
 
@@ -38,7 +38,7 @@
     @if (count($historico) >= 2)
         @php $ultimoDia = end($historico); @endphp
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-            @foreach ([['subscritores', 'Subscribers', '#5A7BFF'], ['visualizacoes', 'Views', '#FF7A3D'], ['interacoes', 'Interactions', '#C77DFF']] as [$k, $rotulo, $cor])
+            @foreach ([['subscritores', 'Subscribers', '#2F5A85'], ['visualizacoes', 'Views', '#8A4A2B'], ['interacoes', 'Interactions', '#7A4A8C']] as [$k, $rotulo, $cor])
                 <div class="rounded-sm border border-ink-soft/15 bg-surface/20 p-3 min-w-0">
                     <div class="flex items-baseline justify-between gap-2 mb-2">
                         <span class="font-mono text-[0.62rem] uppercase tracking-wide" style="color: {{ $cor }}">{{ $rotulo }}</span>

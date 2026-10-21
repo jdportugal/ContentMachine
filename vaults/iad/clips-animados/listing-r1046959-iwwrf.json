@@ -1,0 +1,1380 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia térrea T4 com mais de 2.000 m² de terreno na Marinha Grande",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-marinha-grande-342m2/r1046959",
+            "agent": "António Alves",
+            "phone": "+351919307877",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Moradia térrea com mais de dois mil metros de terreno.",
+            "voiceover": "Moradia térrea com mais de dois mil metros de terreno. Fica numa zona tranquila de Pilado, na Marinha Grande. A Praia da Vieira está a onze quilómetros. Tudo num só piso. Cozinha aberta para a sala de jantar, sala de estar e sala de jogos. Quatro quartos com roupeiros, um deles em suíte com closet. Lá fora, jardim, pátio com árvores e uma cozinha rústica com churrasqueira. Garagem fechada para três carros. Aquecimento central a pellets, painéis fotovoltaicos e certificado energético A. Para viver em família. Quatrocentos e cinco mil euros. Para visitar, fale com o António Alves, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada com jardim na frente",
+                    "vo": "Moradia térrea com mais de dois mil metros de terreno.",
+                    "caption": "Mais de 2.000 m² de terreno"
+                },
+                {
+                    "photo": "exterior geral / vista aérea da propriedade",
+                    "vo": "Fica numa zona tranquila de Pilado, na Marinha Grande.",
+                    "caption": "Pilado, Marinha Grande"
+                },
+                {
+                    "photo": "estacionamento / envolvente da moradia",
+                    "vo": "A Praia da Vieira está a onze quilómetros.",
+                    "caption": "Praia da Vieira a 11 km"
+                },
+                {
+                    "photo": "hall de entrada / corredor",
+                    "vo": "Tudo num só piso.",
+                    "caption": "Tudo num só piso"
+                },
+                {
+                    "photo": "cozinha em open space com sala de jantar",
+                    "vo": "Cozinha aberta para a sala de jantar, sala de estar e sala de jogos.",
+                    "caption": "Cozinha em open space"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "(continuação)",
+                    "caption": "Três salas"
+                },
+                {
+                    "photo": "quarto suíte com closet",
+                    "vo": "Quatro quartos com roupeiros, um deles em suíte com closet.",
+                    "caption": "Quatro quartos · suíte"
+                },
+                {
+                    "photo": "pátio nas traseiras com árvores",
+                    "vo": "Lá fora, jardim, pátio com árvores e uma cozinha rústica com churrasqueira.",
+                    "caption": "Pátio com árvores"
+                },
+                {
+                    "photo": "cozinha rústica com churrasqueira",
+                    "vo": "(continuação)",
+                    "caption": "Cozinha rústica"
+                },
+                {
+                    "photo": "garagem fechada",
+                    "vo": "Garagem fechada para três carros.",
+                    "caption": "Garagem para 3 carros"
+                },
+                {
+                    "photo": "painéis fotovoltaicos / telhado",
+                    "vo": "Aquecimento central a pellets, painéis fotovoltaicos e certificado energético A. Para viver em família.",
+                    "caption": "Certificado energético A"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Quatrocentos e cinco mil euros. Para visitar, fale com o António Alves, da IAD Portugal.",
+                    "caption": "405.000 € · António Alves · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Os detalhes indicam 'Terraço', mas a descrição não fala de nenhum terraço. Ficou de fora.",
+                "O sótão só pode ser usado 'mediante viabilidade técnica e legal'. Ficou de fora para não sugerir que é área habitável.",
+                "Certificado energético A numa casa de 2000: plausível com os painéis e o aquecimento a pellets, mas confirmar antes de publicar.",
+                "O nome da agência aparece como 'iad Portugal' no anúncio e como 'IAD Portugal' nos dados. Confirmar como deve aparecer no cartão final."
+            ],
+            "message": "Bom dia Sr. António, fiz este vídeo da sua moradia T4 em Pilado para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Casa/Moradia 4 quartos de 342 m² em Marinha Grande",
+            "price": 405000,
+            "details": {
+                "Preço": "405 000 €",
+                "Localização": "Marinha Grande, 2430-322",
+                "Referência": "1046959",
+                "Área Bruta m²": "342",
+                "Quartos": 4,
+                "Ano de Construção": 2000,
+                "Certificado Energético": "A",
+                "Características": "3 casas de banho, Garagem, Estacionamento, Terraço, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "beat_opening": null,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - António Alves - and phone number - +351919307877. Agency: IAD Portugal.\nThe agent's photo is António Alves.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Moradia térrea com mais de dois mil metros de terreno.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada com jardim na frente → «Mais de 2.000 m² de terreno»\n- exterior geral / vista aérea da propriedade → «Pilado, Marinha Grande»\n- estacionamento / envolvente da moradia → «Praia da Vieira a 11 km»\n- hall de entrada / corredor → «Tudo num só piso»\n- cozinha em open space com sala de jantar → «Cozinha em open space»\n- sala de estar → «Três salas»\n- quarto suíte com closet → «Quatro quartos · suíte»\n- pátio nas traseiras com árvores → «Pátio com árvores»\n- cozinha rústica com churrasqueira → «Cozinha rústica»\n- garagem fechada → «Garagem para 3 carros»\n- painéis fotovoltaicos / telhado → «Certificado energético A»\n- end card → «405.000 € · António Alves · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 4 quartos de 342 m² em Marinha Grande\nPreço\n405 000 €\nLocalização\nMarinha Grande, 2430-322\nReferência\n1046959\nÁrea Bruta m²\n342\nQuartos\n4\nAno de Construção\n2000\nCertificado Energético\nA\nCaracterísticas\n3 casas de banho, Garagem, Estacionamento, Terraço, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2000\n\nDescrição\nMoradia T4 Térrea com Garagem para 3 Carros e Terreno de 2.063 m² – Pilado, Marinha Grande\n\nEspaço, conforto e privacidade numa propriedade ideal para desfrutar da vida em família!\n\nApresentamos esta espaçosa moradia T4 unifamiliar, totalmente térrea, com 342 m² de área bruta, inserida num terreno de 2.063 m², em Pilado, Marinha Grande.\n\nCom divisões generosas, excelente luminosidade natural e uma distribuição funcional que separa a zona social da área privada, esta moradia reúne condições para proporcionar conforto, tranquilidade e qualidade de vida.\n\nInterior – Espaço e funcionalidade\n\nA zona social é composta por uma cozinha em open space com sala de jantar (28 m²), uma acolhedora sala de estar (23 m²) e uma terceira sala de jogos ou lazer (27 m²), que poderá também funcionar como escritório ou espaço de convívio.\n\nDispõe ainda de WC de serviço e lavandaria independente.\n\nA zona privada integra quatro quartos com roupeiros embutidos, incluindo uma suíte com casa de banho privativa e closet, além de uma casa de banho de apoio aos restantes quartos.\n\nO sótão, com acesso por escada interior no hall de entrada, apresenta uma área generosa e potencial para diferentes utilizações, mediante viabilidade técnica e legal.\n\nExterior – Espaço para viver e conviver\n\nO terreno de 2.063 m² oferece um agradável jardim na frente da moradia, amplo estacionamento e um espaçoso pátio nas traseiras, com árvores e zonas pavimentadas, ideal para momentos de lazer ao ar livre.\n\nDestaca-se ainda uma cozinha rústica em anexo, com churrasqueira tradicional, perfeita para convívios familiares.\n\nA propriedade dispõe também de garagem fechada para três automóveis, anexo técnico para equipamentos de aquecimento de águas e outros anexos de apoio.\n\nConforto e eficiência energética\n\nAquecimento central a pellets.\n\nPainéis fotovoltaicos com potência nominal de projeto de 2,00 kW e potência de pico de 3,05 kWp.\n\nBoa exposição solar, com orientação a nascente.\n\nLocalização – Tranquilidade e proximidade\n\nSituada numa zona tranquila de Pilado, beneficia de acessos a centros urbanos, praia e principais vias rodoviárias.\n\nDistâncias aproximadas:\n\n8 km da Marinha Grande\n\n16 km de Leiria\n\n11 km da Praia da Vieira\n\n10 km do acesso à A17\n\nUma moradia que combina a comodidade de viver num único piso com amplos espaços interiores, privacidade e um terreno generoso.\n\nNão perca esta oportunidade! Contacte-me para mais informações ou para agendar a sua visita.\n\nNão perca esta oportunidade!\nContacte-nos para mais informações ou para agendar a sua visita.\nO meu nome é António Alves e sou consultor imobiliário independente da iad Portugal. A minha principal zona de trabalho é Leiria, Pousos, Barreira E Cortes, área que conheço muito bem e na qual me sinto perfeitamente à vontade.\n\nQuer comprar ou arrendar um imóvel e ainda não encontrou o que procura? Nesta página encontra a minha carteira de imóveis. Terei todo o prazer em acompanhá-lo numa visita. Caso não encontre aqui o que pretende, estou totalmente disponível para o ajudar nesta fase tão importante da sua vida.\n\nSe tenciona vender a sua casa, posso igualmente ajudá-lo, dando-lhe uma estimativa de valor e divulgando o seu imóvel em mais de 200 portais imobiliários em todo o mundo de forma gratuita.\n\nA iad é uma sociedade de mediação imobiliária que não tem lojas físicas, o que me permite ir ao seu encontro e prestar-lhe o melhor serviço onde quer que esteja, com base no profissionalismo e na transparência. Enquanto consultor imobiliário independente, tenho autonomia para gerir os meus horários e para negociar consigo a minha comissão, garantindo-lhe um acompanhamento personalizado em todas as etapas do processo e um serviço de qualidade ao melhor preço.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia térrea T4 no Pilado, Marinha Grande, à venda por 405 mil euros",
+            "summary": "Moradia térrea T4 com mais de 2000 m² de terreno no Pilado, Marinha Grande, a 11 km da Praia da Vieira, com certificado energético A, à venda por 405 mil euros. Em 2025, segundo o INE, o preço mediano da habitação em Portugal subiu 16,8%.",
+            "timeline": [
+                {
+                    "label": "Incêndio queima 86% do Pinhal de Leiria",
+                    "sublabel": "15 out. 2017"
+                },
+                {
+                    "label": "Censos: Marinha Grande com cerca de 39 mil habitantes",
+                    "sublabel": "2021"
+                },
+                {
+                    "label": "Preço mediano nacional atinge 2076 €/m²",
+                    "sublabel": "2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 405000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE)",
+                    "value": 2076,
+                    "unit": "€/m² (2025)"
+                },
+                {
+                    "label": "Subida do preço mediano face a 2024 (INE)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano no 4.º trimestre (INE)",
+                    "value": 2198,
+                    "unit": "€/m² (T4 2025)"
+                },
+                {
+                    "label": "População do concelho da Marinha Grande",
+                    "value": 39,
+                    "unit": "mil hab. (Censos 2021)"
+                },
+                {
+                    "label": "Área ardida do Pinhal de Leiria",
+                    "value": 86,
+                    "unit": "% (2017)"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Tudo num só piso, com mais de 2000 m² de terreno",
+                "4 quartos com roupeiros, um deles em suite com closet",
+                "Aquecimento central a pellets, painéis fotovoltaicos e certificado energético A",
+                "Garagem fechada para 3 carros e cozinha rústica com churrasqueira",
+                "Praia da Vieira a 11 km",
+                "Concelho da Marinha Grande com 3 freguesias: Marinha Grande, Moita e Vieira de Leiria",
+                "Habitação em Portugal: +16,8% em 2025 (INE)"
+            ],
+            "sources": [
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://contaspoupanca.pt/bancos/2026-04-24-precos-das-casas-sobem-para-2076-euros-m2-em-2025-8bbcc901",
+                "https://mra-bio.me/noticias/precos-habitacao-4-trimestre-2025-dados-ine/",
+                "https://www.rtp.pt/noticias/pais/tres-dos-16-concelhos-do-distrito-de-leiria-ganharam-populacao_n1338680",
+                "https://aldeiasportuguesas.pt/leiria/marinha-grande/",
+                "https://www.infopedia.pt/artigos/$marinha-grande",
+                "https://www.sabado.pt/dinheiro/detalhe/hastas-publicas-de-madeira-ardida-ja-renderam-155-milhoes-de-euros",
+                "https://www.agroportal.pt/o-ministro-do-ambiente-e-da-acao-climatica-e-o-secretario-de-estado-da-conservacao-da-natureza-das-florestas-e-do-ordenamento-do-territorio-visitam-hoje-a-mata-nacional-de-leiria"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia térrea T4 com mais de 2.000 m² de terreno na Marinha Grande",
+            "description": "Tudo num só piso, com mais de 2.000 m² de terreno numa zona sossegada do Pilado.\n\nT4 · 342 m² de área bruta · Certificado energético A · 405.000 €\nA cozinha é aberta para a sala de jantar. Há também sala de estar e sala de jogos.\nOs quatro quartos têm roupeiros, e a suite tem closet. No total são 3 casas de banho.\nNo exterior há jardim, pátio com árvores, terraço e uma cozinha rústica com churrasqueira. A garagem fechada leva três carros.\nTem aquecimento central a pellets, painéis fotovoltaicos e fibra ótica. Foi construída em 2000 e fica a 11 km da Praia da Vieira. Ref. 1046959.\n\nPara visitar, fale com o António Alves, da IAD Portugal: +351 919 307 877",
+            "tags": [
+                "moradia",
+                "moradiaterrea",
+                "moradiat4",
+                "marinhagrande",
+                "pilado",
+                "praiadavieira",
+                "casaavenda",
+                "imobiliario",
+                "certificadoenergeticoa",
+                "paineisfotovoltaicos",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1046959-iwwrf",
+    "created_at": "2026-10-20T15:53:10+00:00",
+    "updated_at": "2026-10-20T19:26:47+00:00",
+    "source_path": "clips/uploads/IU3YBg8oUc4WNeA00DIajZODlmYViJS83mCJnonM.mp3",
+    "images": [
+        {
+            "id": "img_4b9159af",
+            "path": "clips/uploads/J8PxkIeO1dEbdxq3aNcl51fzegu134QMD5cjPh8T.jpg",
+            "description": "Fachada da moradia térrea branca com telhado de telha, relvado amplo e trepadeira frondosa sob céu azul.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2d4dd98d",
+            "path": "clips/uploads/dEXIRS4shpFswr1jnBZgHP4DLOuOOHSqZLtDPgD2.jpg",
+            "description": "Sala de estar com sofás de pele azuis, televisão, porta envidraçada para o jardim e chão com mosaico decorativo.",
+            "name": "01a136246ad36c9d325ab9234ab8d05e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2ebc06db",
+            "path": "clips/uploads/AXPjk4i82EaWAfu3OjpsLjImflAkmED80L5gU5sx.jpg",
+            "description": "Sala de estar com sofás azuis, aberta para a zona de jantar ao fundo, janelas para o jardim.",
+            "name": "01a136246ab70b6d4e79b88466b684d0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_71b3158d",
+            "path": "clips/uploads/eI5qpdnqmYkHpCFPL03eMqznAHjttDbyShGUlxPY.jpg",
+            "description": "Sala de jantar com mesa de madeira, cadeiras, aparador com loiça e poltrona junto à janela.",
+            "name": "01a136246ad6afabb09d3bfcb73b4a7d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2f4cfb4d",
+            "path": "clips/uploads/HZ5Au8jrlmBRmNdXEH3J9WOFP5CKTtU2OPgrVMhe.jpg",
+            "description": "Cozinha aberta com zona de refeições, mesa com toalha bordada, armários brancos, bancada preta e exaustor inox.",
+            "name": "01a136254228e241702db8dc8d2370ab.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a2364b15",
+            "path": "clips/uploads/TLAanwPP3n7WHpaOi1rB8Qq1lAr3PBw2TGLoOJKk.jpg",
+            "description": "Cozinha com península de bancada em granito preto e armários brancos, aberta para a zona de refeições.",
+            "name": "01a136254151d3304c94e43524f55d6f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_71119a34",
+            "path": "clips/uploads/AoYf3xL4wTSj6syDFBVfr7J4tStPw139UdXcuOno.jpg",
+            "description": "Cozinha em U com armários brancos, bancada em granito preto, forno, exaustor inox e janela.",
+            "name": "01a13625421c3ae3e854f4704c1563d3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ae9adc75",
+            "path": "clips/uploads/ZKhGTy1ux02PPpvF21fZ3GnghnT7DbysbJG89b9G.jpg",
+            "description": "Sala de jogos ampla com sofá, secretária com computador e portas envidraçadas abertas para o relvado.",
+            "name": "01a13625dd48674b41df43d58aa5bd44.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dc489cb1",
+            "path": "clips/uploads/y0Jt1ozTL3yZ12G94R9XTBDka4Ek59LLSm5gOZ5j.jpg",
+            "description": "Sala de jogos/escritório ampla com sofá, porta dupla envidraçada para o pátio e chão em mosaico decorativo.",
+            "name": "01a13625dd32554196168c75843b9eab.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_049d44e9",
+            "path": "clips/uploads/5ddXrhDvqx2R00sJImCCfXLBpcvtYb5weLZLreN7.jpg",
+            "description": "Casa de banho com azulejo branco e friso azul, banheira com resguardo, lavatório de coluna, sanita e bidé.",
+            "name": "01a13626a46486642c81f8024b0efd25.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0121cb53",
+            "path": "clips/uploads/EcEq5Wr2Fj4yGDi7J9g631iUgdz8c6JS05c58Mns.jpg",
+            "description": "Lavandaria envidraçada com máquinas de lavar e secar; janelão com vista para o pátio e o terreno.",
+            "name": "01a13626cf7e84c4a26ef9c5a5177d67.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_339e2b58",
+            "path": "clips/uploads/J4h0pWDLZNrJ5QRuwx2wdAUK1FAkjkLDxIK6hvCj.jpg",
+            "description": "Hall de entrada com escada de madeira e arrumação por baixo; porta envidraçada para a sala de jantar.",
+            "name": "01a13626f99ed1b4911c85a5b319eb02.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b8a0bc0c",
+            "path": "clips/uploads/5x1gMmvSbyp2XOtExZfDU05HrE3s5FmAnTPuimUo.jpg",
+            "description": "Quarto com cama de casal, colcha rosa, chão de madeira, radiador e janela com estores.",
+            "name": "01a13627dcd5ea0df6c3d7737b21b0ad.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d3ce6272",
+            "path": "clips/uploads/XlpdgUiJclOsXjoKvdSvaiV5bfdEHjScGCn2Cswx.jpg",
+            "description": "Quarto amplo com cama de casal e colcha rosa, mesas de cabeceira, chão de madeira escura.",
+            "name": "01a13627dcd376d207de0a6d3d40b813.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_490029e0",
+            "path": "clips/uploads/mzaGOIlsNZH8xY4AojzuD99LwMM3G0wo8CTBlpNM.jpg",
+            "description": "Casa de banho branca com azulejos decorados, sanita, bidé e banheira; janela de vidro fosco.",
+            "name": "01a13628267b2956a1b2703d1e262bcf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0bdd92f5",
+            "path": "clips/uploads/zWCTRze5Tyk7ttvPIbob7CprlmS7NfJnvNRO87UH.jpg",
+            "description": "Casa de banho com móvel lavatório branco e espelho; porta de madeira aberta para o quarto.",
+            "name": "01a1362826a48800ddc5b484ac27131a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f36f3e82",
+            "path": "clips/uploads/MxToHvBkqSAIAFyLcpY2yGRjflNLVLVRS08yuxne.jpg",
+            "description": "Quarto luminoso com cama de casal, berço, roupeiro embutido de madeira e janela para o jardim.",
+            "name": "01a13628bedef925cbc858c3f3a82e5e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e1b86f83",
+            "path": "clips/uploads/qSdjhkUBFafTlgujqbvQuGRZPBr61ozCn6jaP2Ev.jpg",
+            "description": "Mesmo quarto visto ao contrário: roupeiro embutido de madeira, guitarra, cómoda branca e televisão.",
+            "name": "01a13628beded6a5f8e58215e3e732b2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_06937338",
+            "path": "clips/uploads/1dGh6tN9jN3J2xOKQXgmNEYmijDabM9u4uC7W6U4.jpg",
+            "description": "Quarto ou escritório com porta envidraçada para o pátio, roupeiro embutido, secretária e chão de madeira.",
+            "name": "01a1362906802ff6709e0ef46d1a79e5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3610a40f",
+            "path": "clips/uploads/mEBzcd1TL1RCWq8Gh9c2XmE4rHtM0Y2VglmA0fMU.jpg",
+            "description": "Mesmo quarto noutro ângulo: roupeiro embutido de madeira, secretária, cadeira, alcofa de bebé, chão de madeira.",
+            "name": "01a1362906f1103e1df39bfd06821223.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_869bd2d1",
+            "path": "clips/uploads/HFjV0560UjZSywqyHYItT5K7KYWG0c0dmhNDqxeg.jpg",
+            "description": "Quarto com chão de madeira e roupeiro embutido, janela para o jardim, radiador e araras com roupa.",
+            "name": "01a136290659e70d45f141637d69cd35.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9ca6a5b3",
+            "path": "clips/uploads/8lvI63YkP7ZVJk8zvOIWtkp1vMOcs6u3DmmzM4tm.jpg",
+            "description": "Quarto com roupeiro embutido de portas de madeira, chão de madeira, janela e radiador.",
+            "name": "01a136290672ae56c59e4af92f47fa1e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a60cb1ee",
+            "path": "clips/uploads/lS4yKSjHFb4uuXy7rGUFJ2C5mJgbsuBiVrXm8qNB.jpg",
+            "description": "Casa de banho em azulejo branco com base de duche em vidro e lavatório de coluna.",
+            "name": "01a136295830112ac9ab2245e0cb4a45.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d2c57fc9",
+            "path": "clips/uploads/qGlrEKyvpSk1Zvxsc7KP73fc7JZY2ce5LF1SNESV.jpg",
+            "description": "Cozinha rústica ampla com churrasqueira em tijolo, mesa comprida de madeira com bancos e armários escuros.",
+            "name": "01a1362a5ca910a7b5db5cdf3cb8f0af.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3e446b7b",
+            "path": "clips/uploads/Ip67mUEeS0eq39K46WOwJnzBMK6hyd5ZxsO6rmHy.jpg",
+            "description": "Cozinha rústica com mesa de madeira e bancos, armários escuros e janela grande sobre o lava-loiça.",
+            "name": "01a1362a5caa53058a689960240f13c2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_eb1cb66f",
+            "path": "clips/uploads/8c8J69JiJD3jDEuB4JQy70dJfMivgNuudpvX5Tn3.jpg",
+            "description": "Fachada da moradia térrea vista da rua, com muro, garagem de três portas e painéis solares.",
+            "name": "01a1362c774947a77638930d2b3c19f3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d7c4fc3f",
+            "path": "clips/uploads/wjbCHlL21z79Fj1dYsjtMrkPZcyd1AfAlllE5vgb.jpg",
+            "description": "Churrasqueira em tijolo na cozinha rústica, com viga de madeira, tachos de cobre e lenha.",
+            "name": "01a1362a5cafe8ae4ee5f4d74b3dd4c1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_22d551a6",
+            "path": "clips/uploads/ThroY2QsJChMSS5ZUr6vscNNIgUVAQxKbWwqmajF.jpg",
+            "description": "Lateral da moradia com relvado, acesso em cimento e garagem com painéis fotovoltaicos ao fundo.",
+            "name": "01a1362b501c0bc9d5e938fd6356f183.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c5191712",
+            "path": "clips/uploads/S4ENaUrozwQzVHlEpSw54GsO4wpNNjxIvS4C8GW5.jpg",
+            "description": "Pátio em calçada portuguesa com alpendre, cadeiras e trepadeiras verdes; carros estacionados ao fundo.",
+            "name": "01a1362b4f815b8395d0c1aae0968a11.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dc8784e3",
+            "path": "clips/uploads/5sVQf80DVmxkwQw54pGtF8vJ93Jfn87nOvNElNHn.jpg",
+            "description": "Entrada da moradia com alpendre, portadas verdes e pátio em calçada com cadeiras de exterior.",
+            "name": "01a1362b5815d67e6282dcabc8cece8e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6ad898dc",
+            "path": "clips/uploads/zlRQMFpVR0rqfX8bXKbMuEhriJOXUSV5QaoCoQDd.jpg",
+            "description": "Fachada da moradia térrea branca com relvado, painéis solares no telhado e garagem com três portões",
+            "name": "01a1362b5a97640233f4eafd262bde36.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1a07fbfa",
+            "path": "clips/uploads/AaYH2K4agj52vxlpwmsAlfQ1byT00eXsLecfTwPw.jpg",
+            "description": "Exterior com entrada, relvado e sebe verde, moradia térrea ao fundo e garagem de três carros à direita",
+            "name": "01a1362b52ed1b2934aab1d9858d40c7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_98163bdf",
+            "path": "clips/uploads/3hxvobqQ74bWEUtn9v5yAjREdlJgoIEOjt17lZtu.jpg",
+            "description": "Traseiras da moradia térrea com marquise envidraçada, janelas de portadas verdes e amplo pátio cimentado ao sol",
+            "name": "01a1362b530a7fc0f3da577eb2b9b0af.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9131fba6",
+            "path": "clips/uploads/DC8YBLbsuN5PIqeRfJELfmKPLcFZN6Zbf62YaKEl.jpg",
+            "description": "Pátio cimentado com alpendre coberto, anexo, casota de madeira e árvores ao fundo",
+            "name": "01a1362bdbb0af4a9d8130e63b5dc012.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b781066b",
+            "path": "clips/uploads/zbLyo8U7UZ0nlpvYX8Kx5TaOeIwcl3xkx80W9yhk.jpg",
+            "description": "Pátio com fila de árvores frondosas que dão sombra sobre o chão cimentado, moradia branca à direita",
+            "name": "01a1362bdcdd5909eba54b0cf7f5f39d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aad5e02e",
+            "path": "clips/uploads/u11aeu9Sy7z77Sm13GmwKh4lwwRWmyZIsEjWdPcZ.jpg",
+            "description": "Terreno amplo com árvores de fruto, horta vedada e galinhas, moradia térrea branca ao fundo",
+            "name": "01a1362d09c1b225a3b8b93d1cb01a93.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_183b4e37",
+            "path": "clips/uploads/f72yu6K4FgrvyWaAIz2IjQ4vmefqkVrKjSCw7Ckg.jpg",
+            "description": "Terreno com pinheiro, árvores de fruto, capoeiras de madeira e galinhas junto à lateral da casa",
+            "name": "01a1362d09d8eceb5a3a325872f63c47.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9033ed54",
+            "path": "clips/uploads/JFnRbXsBe1PSPZA5SSAIRZkxYiZwtzMamCLsYLll.png",
+            "description": "Retrato do consultor António Alves, da IAD Portugal.",
+            "name": "António Alves.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_508ec106",
+            "path": "clips/uploads/6UOeAZ6a1MEio5INTlhub9naPiaabnIKCEzkRe9H.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/IU3YBg8oUc4WNeA00DIajZODlmYViJS83mCJnonM.mp3",
+    "transcript": {
+        "duration": 41.84000015258789,
+        "text": "Moradia térrea com mais de dois mil metros de terreno. Fica numa zona tranquila de Pilado, na Marinha Grande. A Praia da Vieira está a onze quilómetros. Tudo num só piso. Cozinha aberta para a sala de jantar, sala de estar e sala de jogos. Quatro quartos com roupeiros, um deles em suite com closet. Lá fora, jardim, pátio com árvores e uma cozinha rústica com churrasqueira. Garagem fechada para três carros. Aquecimento central a pellets, painéis fotovoltaicos e certificado energético A. Para viver em família. 405 mil euros. Para visitar, fale com o António Alves, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Moradia",
+                "start": 0,
+                "end": 0.46000000834465027
+            },
+            {
+                "word": "térrea",
+                "start": 0.46000000834465027,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "com",
+                "start": 0.9800000190734863,
+                "end": 1.2999999523162842
+            },
+            {
+                "word": "mais",
+                "start": 1.2999999523162842,
+                "end": 1.5
+            },
+            {
+                "word": "de",
+                "start": 1.5,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "dois",
+                "start": 1.8200000524520874,
+                "end": 2.180000066757202
+            },
+            {
+                "word": "mil",
+                "start": 2.180000066757202,
+                "end": 2.4200000762939453
+            },
+            {
+                "word": "metros",
+                "start": 2.4200000762939453,
+                "end": 2.759999990463257
+            },
+            {
+                "word": "de",
+                "start": 2.759999990463257,
+                "end": 3.059999942779541
+            },
+            {
+                "word": "terreno",
+                "start": 3.059999942779541,
+                "end": 3.380000114440918
+            },
+            {
+                "word": "Fica",
+                "start": 3.9000000953674316,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "numa",
+                "start": 4.099999904632568,
+                "end": 4.360000133514404
+            },
+            {
+                "word": "zona",
+                "start": 4.360000133514404,
+                "end": 4.599999904632568
+            },
+            {
+                "word": "tranquila",
+                "start": 4.599999904632568,
+                "end": 5.179999828338623
+            },
+            {
+                "word": "de",
+                "start": 5.179999828338623,
+                "end": 5.420000076293945
+            },
+            {
+                "word": "Pilado",
+                "start": 5.420000076293945,
+                "end": 5.880000114440918
+            },
+            {
+                "word": "na",
+                "start": 6,
+                "end": 6.139999866485596
+            },
+            {
+                "word": "Marinha",
+                "start": 6.139999866485596,
+                "end": 6.340000152587891
+            },
+            {
+                "word": "Grande",
+                "start": 6.340000152587891,
+                "end": 6.739999771118164
+            },
+            {
+                "word": "A",
+                "start": 7.300000190734863,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "Praia",
+                "start": 7.400000095367432,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "da",
+                "start": 7.579999923706055,
+                "end": 7.800000190734863
+            },
+            {
+                "word": "Vieira",
+                "start": 7.800000190734863,
+                "end": 8.079999923706055
+            },
+            {
+                "word": "está",
+                "start": 8.079999923706055,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "a",
+                "start": 8.380000114440918,
+                "end": 8.739999771118164
+            },
+            {
+                "word": "onze",
+                "start": 8.739999771118164,
+                "end": 8.9399995803833
+            },
+            {
+                "word": "quilómetros",
+                "start": 8.9399995803833,
+                "end": 9.5
+            },
+            {
+                "word": "Tudo",
+                "start": 10.380000114440918,
+                "end": 10.399999618530273
+            },
+            {
+                "word": "num",
+                "start": 10.399999618530273,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "só",
+                "start": 10.880000114440918,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "piso",
+                "start": 11.180000305175781,
+                "end": 11.460000038146973
+            },
+            {
+                "word": "Cozinha",
+                "start": 12.34000015258789,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "aberta",
+                "start": 12.359999656677246,
+                "end": 12.739999771118164
+            },
+            {
+                "word": "para",
+                "start": 12.739999771118164,
+                "end": 13.020000457763672
+            },
+            {
+                "word": "a",
+                "start": 13.020000457763672,
+                "end": 13.239999771118164
+            },
+            {
+                "word": "sala",
+                "start": 13.239999771118164,
+                "end": 13.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 13.239999771118164,
+                "end": 13.760000228881836
+            },
+            {
+                "word": "jantar",
+                "start": 13.760000228881836,
+                "end": 13.800000190734863
+            },
+            {
+                "word": "sala",
+                "start": 14.359999656677246,
+                "end": 14.399999618530273
+            },
+            {
+                "word": "de",
+                "start": 14.399999618530273,
+                "end": 14.819999694824219
+            },
+            {
+                "word": "estar",
+                "start": 14.819999694824219,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "e",
+                "start": 14.880000114440918,
+                "end": 15.220000267028809
+            },
+            {
+                "word": "sala",
+                "start": 15.220000267028809,
+                "end": 15.399999618530273
+            },
+            {
+                "word": "de",
+                "start": 15.399999618530273,
+                "end": 15.979999542236328
+            },
+            {
+                "word": "jogos",
+                "start": 15.979999542236328,
+                "end": 15.979999542236328
+            },
+            {
+                "word": "Quatro",
+                "start": 16.81999969482422,
+                "end": 16.8799991607666
+            },
+            {
+                "word": "quartos",
+                "start": 16.8799991607666,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 17.299999237060547,
+                "end": 17.520000457763672
+            },
+            {
+                "word": "roupeiros",
+                "start": 17.520000457763672,
+                "end": 18.020000457763672
+            },
+            {
+                "word": "um",
+                "start": 18.479999542236328,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "deles",
+                "start": 18.559999465942383,
+                "end": 18.860000610351562
+            },
+            {
+                "word": "em",
+                "start": 18.860000610351562,
+                "end": 19.260000228881836
+            },
+            {
+                "word": "suite",
+                "start": 19.260000228881836,
+                "end": 19.520000457763672
+            },
+            {
+                "word": "com",
+                "start": 19.520000457763672,
+                "end": 19.780000686645508
+            },
+            {
+                "word": "closet",
+                "start": 19.780000686645508,
+                "end": 20.219999313354492
+            },
+            {
+                "word": "Lá",
+                "start": 20.899999618530273,
+                "end": 21
+            },
+            {
+                "word": "fora",
+                "start": 21,
+                "end": 21.280000686645508
+            },
+            {
+                "word": "jardim",
+                "start": 21.84000015258789,
+                "end": 22.1200008392334
+            },
+            {
+                "word": "pátio",
+                "start": 22.68000030517578,
+                "end": 22.760000228881836
+            },
+            {
+                "word": "com",
+                "start": 22.760000228881836,
+                "end": 23.100000381469727
+            },
+            {
+                "word": "árvores",
+                "start": 23.100000381469727,
+                "end": 23.440000534057617
+            },
+            {
+                "word": "e",
+                "start": 23.440000534057617,
+                "end": 23.799999237060547
+            },
+            {
+                "word": "uma",
+                "start": 23.799999237060547,
+                "end": 24.040000915527344
+            },
+            {
+                "word": "cozinha",
+                "start": 24.040000915527344,
+                "end": 24.239999771118164
+            },
+            {
+                "word": "rústica",
+                "start": 24.239999771118164,
+                "end": 24.81999969482422
+            },
+            {
+                "word": "com",
+                "start": 24.81999969482422,
+                "end": 25.100000381469727
+            },
+            {
+                "word": "churrasqueira",
+                "start": 25.100000381469727,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "Garagem",
+                "start": 26.420000076293945,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "fechada",
+                "start": 26.700000762939453,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "para",
+                "start": 27.020000457763672,
+                "end": 27.31999969482422
+            },
+            {
+                "word": "três",
+                "start": 27.31999969482422,
+                "end": 27.700000762939453
+            },
+            {
+                "word": "carros",
+                "start": 27.700000762939453,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "Aquecimento",
+                "start": 28.540000915527344,
+                "end": 29.15999984741211
+            },
+            {
+                "word": "central",
+                "start": 29.15999984741211,
+                "end": 29.520000457763672
+            },
+            {
+                "word": "a",
+                "start": 29.520000457763672,
+                "end": 29.739999771118164
+            },
+            {
+                "word": "pellets",
+                "start": 29.739999771118164,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "painéis",
+                "start": 30.579999923706055,
+                "end": 30.81999969482422
+            },
+            {
+                "word": "fotovoltaicos",
+                "start": 30.81999969482422,
+                "end": 31.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 31.700000762939453,
+                "end": 31.940000534057617
+            },
+            {
+                "word": "certificado",
+                "start": 31.940000534057617,
+                "end": 32.5
+            },
+            {
+                "word": "energético",
+                "start": 32.5,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "A",
+                "start": 33.15999984741211,
+                "end": 33.63999938964844
+            },
+            {
+                "word": "Para",
+                "start": 34.2599983215332,
+                "end": 34.279998779296875
+            },
+            {
+                "word": "viver",
+                "start": 34.279998779296875,
+                "end": 34.63999938964844
+            },
+            {
+                "word": "em",
+                "start": 34.63999938964844,
+                "end": 34.81999969482422
+            },
+            {
+                "word": "família",
+                "start": 34.81999969482422,
+                "end": 35.279998779296875
+            },
+            {
+                "word": "405",
+                "start": 36.040000915527344,
+                "end": 36.84000015258789
+            },
+            {
+                "word": "mil",
+                "start": 36.84000015258789,
+                "end": 37.040000915527344
+            },
+            {
+                "word": "euros",
+                "start": 37.040000915527344,
+                "end": 37.41999816894531
+            },
+            {
+                "word": "Para",
+                "start": 38.040000915527344,
+                "end": 38.119998931884766
+            },
+            {
+                "word": "visitar",
+                "start": 38.119998931884766,
+                "end": 38.7400016784668
+            },
+            {
+                "word": "fale",
+                "start": 39.18000030517578,
+                "end": 39.18000030517578
+            },
+            {
+                "word": "com",
+                "start": 39.18000030517578,
+                "end": 39.380001068115234
+            },
+            {
+                "word": "o",
+                "start": 39.380001068115234,
+                "end": 39.58000183105469
+            },
+            {
+                "word": "António",
+                "start": 39.58000183105469,
+                "end": 39.86000061035156
+            },
+            {
+                "word": "Alves",
+                "start": 39.86000061035156,
+                "end": 40.279998779296875
+            },
+            {
+                "word": "da",
+                "start": 40.459999084472656,
+                "end": 40.70000076293945
+            },
+            {
+                "word": "IAD",
+                "start": 40.70000076293945,
+                "end": 41.099998474121094
+            },
+            {
+                "word": "Portugal",
+                "start": 41.099998474121094,
+                "end": 41.63999938964844
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 41.84000015258789,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6999999999999993,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "TÉRREA COM +2.000 m²",
+                        "params": {
+                            "src": "img_4b9159af",
+                            "avatar": "img_9033ed54",
+                            "logo": "img_508ec106",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "405.000 €",
+                            "location": "MARINHA GRANDE · PILADO",
+                            "title": "MORADIA T4 TÉRREA",
+                            "facts": "342 m² · 4 quartos · 3 WC · garagem",
+                            "cta": "Ligue já +351 919 307 877",
+                            "name": "António Alves",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6999999999999993,
+                "end": 7.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "PILADO, MARINHA GRANDE",
+                        "params": {
+                            "src": "img_1a07fbfa",
+                            "src2": "img_aad5e02e",
+                            "src3": "img_183b4e37",
+                            "src4": "img_22d551a6",
+                            "src5": "img_98163bdf"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.1,
+                "end": 10.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "PRAIA DA VIEIRA A 11 KM",
+                        "params": {
+                            "src": "img_c5191712",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 12.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "TUDO NUM SÓ PISO",
+                        "params": {
+                            "src": "img_339e2b58",
+                            "src2": "img_0121cb53",
+                            "src3": "img_049d44e9",
+                            "src4": "img_490029e0",
+                            "src5": "img_a60cb1ee"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.3,
+                "end": 14.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA EM OPEN SPACE",
+                        "params": {
+                            "src": "img_2f4cfb4d",
+                            "src2": "img_a2364b15",
+                            "src3": "img_71119a34",
+                            "src4": "img_71b3158d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.3,
+                "end": 16.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "TRÊS SALAS",
+                        "params": {
+                            "src": "img_2d4dd98d",
+                            "src2": "img_2ebc06db",
+                            "src3": "img_ae9adc75",
+                            "src4": "img_dc489cb1",
+                            "src5": "img_71b3158d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.6,
+                "end": 18.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "QUATRO QUARTOS",
+                        "params": {
+                            "src": "img_b8a0bc0c",
+                            "src2": "img_d3ce6272",
+                            "src3": "img_f36f3e82",
+                            "src4": "img_e1b86f83"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.6,
+                "end": 20.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SUITE COM CLOSET",
+                        "params": {
+                            "src": "img_06937338",
+                            "src2": "img_3610a40f",
+                            "src3": "img_869bd2d1",
+                            "src4": "img_9ca6a5b3",
+                            "src5": "img_0bdd92f5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.8,
+                "end": 23.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "PÁTIO COM ÁRVORES",
+                        "params": {
+                            "src": "img_b781066b",
+                            "src2": "img_dc8784e3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.6,
+                "end": 26.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA RÚSTICA",
+                        "params": {
+                            "src": "img_d2c57fc9",
+                            "src2": "img_3e446b7b",
+                            "src3": "img_d7c4fc3f",
+                            "src4": "img_9131fba6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.3,
+                "end": 28.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "GARAGEM PARA 3 CARROS",
+                        "params": {
+                            "src": "img_eb1cb66f",
+                            "blur": 8,
+                            "charsPerSecond": 16
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.5,
+                "end": 37.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "CERTIFICADO ENERGÉTICO A",
+                        "params": {
+                            "src": "img_6ad898dc",
+                            "title": "CERTIFICADO ENERGÉTICO A",
+                            "items": [
+                                "Aquecimento central a pellets",
+                                "Painéis fotovoltaicos · 3,05 kWp",
+                                "Exposição a nascente"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 37.9,
+                "end": 41.84,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "António Alves",
+                        "params": {
+                            "src": "img_9033ed54",
+                            "name": "António Alves",
+                            "phone": "+351 919 307 877"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1046959-iwwrf/clip.mp4",
+    "error": null
+}

@@ -2,9 +2,12 @@
 
 namespace App\Services\Publicacoes\Rendering;
 
+use App\Services\Costs\CostLedger;
 use App\Services\Settings\StepKey;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 /**
  * HTTP adapter for the kie.ai API (Nano Banana models), like AdsMaker's
@@ -64,7 +67,7 @@ class KieClient
             ->post($this->base().'/api/v1/jobs/createTask', [
                 'model' => (string) config('services.kie.video_model', 'kling-2.6/image-to-video'),
                 'input' => [
-                    'prompt' => \Illuminate\Support\Str::limit($prompt, 990, ''),
+                    'prompt' => Str::limit($prompt, 990, ''),
                     'image_urls' => [$imageUrl],
                     'sound' => false,
                     'duration' => '5',
@@ -77,6 +80,49 @@ class KieClient
             custo: (float) config('contentmachine.custos.kie_video', 0.40),
             tentativas: 300,
         );
+    }
+
+    /**
+     * Start frame → end frame VIDEO: the camera move between two stills, with
+     * whatever changes between them animated in. Kling 3.0 (default) takes both
+     * frames as image_urls and 3–15 s; Kling 2.x takes image_url + tail_image_url
+     * and 5/10 s. Returns the taskId so several rooms can be submitted before any
+     * is polled (see pollVideo()). Both URLs must be kie file URLs (see upload()).
+     */
+    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5): string
+    {
+        $model = (string) config('contentmachine.real_estate.property.video_model', 'kling-3.0/video');
+        $prompt = Str::limit($prompt, 2400, '');
+        $input = str_starts_with($model, 'kling-3')
+            ? ['prompt' => $prompt, 'image_urls' => [$startUrl, $endUrl], 'sound' => (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
+            : array_filter(['prompt' => $prompt, 'image_url' => $startUrl, 'tail_image_url' => $endUrl, 'duration' => $seconds > 7 ? '10' : '5', 'negative_prompt' => $negative]);
+
+        $r = Http::timeout(60)->withToken($this->chave())
+            ->post($this->base().'/api/v1/jobs/createTask', ['model' => $model, 'input' => $input]);
+
+        return $this->taskIdDe($r);
+    }
+
+    /**
+     * Image → image EDIT that keeps the photo's framing (Google's Nano Banana
+     * Edit): measured on a real room it moves the frame <1% where Nano Banana Pro,
+     * Seedream and Qwen re-compose it by 20%+. Returns the taskId (poll()).
+     */
+    public function submitExactEdit(string $prompt, string $imageUrl, string $aspect): string
+    {
+        $r = Http::timeout(60)->withToken($this->chave())
+            ->post($this->base().'/api/v1/jobs/createTask', [
+                'model' => (string) config('services.kie.exact_edit_model', 'google/nano-banana-edit'),
+                'input' => ['prompt' => $prompt, 'image_urls' => [$imageUrl], 'output_format' => 'png', 'image_size' => $aspect],
+            ]);
+
+        return $this->taskIdDe($r);
+    }
+
+    /** Poll a submitted video task until it finishes; returns the video URL. */
+    public function pollVideo(string $taskId): string
+    {
+        return $this->sondar($taskId, custo: (float) config('contentmachine.custos.kie_video', 0.40), tentativas: 450);
     }
 
     /**
@@ -131,7 +177,7 @@ class KieClient
 
     /** The submitted task's id — or a readable failure (kie returns 200 with the
      * business error in `msg`, e.g. 402 out of credits). */
-    private function taskIdDe(\Illuminate\Http\Client\Response $r): string
+    private function taskIdDe(Response $r): string
     {
         $taskId = (string) $r->json('data.taskId');
         if (! $r->successful() || $taskId === '') {
@@ -162,7 +208,7 @@ class KieClient
                     if ($url === '') {
                         throw new \RuntimeException('kie.ai: success without a URL.');
                     }
-                    app(\App\Services\Costs\CostLedger::class)->registar(
+                    app(CostLedger::class)->registar(
                         'kie.ai',
                         $custo ?? (float) config('contentmachine.custos.kie_imagem', 0.04),
                         $custo !== null ? 'video' : 'image',
@@ -171,7 +217,8 @@ class KieClient
                     return $url;
                 }
                 if ($estado === 'fail') {
-                    throw new \RuntimeException('kie.ai: generation failed.');
+                    $why = trim((string) ($r->json('data.failMsg') ?? ''));
+                    throw new \RuntimeException('kie.ai: generation failed'.($why !== '' ? " ({$why})" : '').'.');
                 }
             } catch (ConnectionException) {
                 // Transient network blip (DNS/timeout) — kie is still generating the
@@ -194,7 +241,10 @@ class KieClient
             ->post($base.'/api/file-base64-upload', [
                 'base64Data' => 'data:image/png;base64,'.base64_encode($bytes),
                 'uploadPath' => 'publicacoes/refs',
-                'fileName' => $nome,
+                // Unique per upload: kie stores by path + name, so two jobs uploading
+                // "end.png" at once got each other's image (rooms morphing into the
+                // wrong room).
+                'fileName' => Str::random(12).'-'.$nome,
             ]);
 
         $url = (string) ($r->json('data.downloadUrl') ?? $r->json('data.url') ?? '');

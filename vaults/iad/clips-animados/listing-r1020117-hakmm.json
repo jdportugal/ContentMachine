@@ -1,0 +1,1364 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Duas casas numa só em Vila Nova de Cerveira: T3 + T1 por 352.500 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-vila-nova-de-cerveira-219m2/r1020117",
+            "agent": "Paula Antonieta Santos",
+            "phone": "+351966857360",
+            "agency": "IAD Portugal",
+            "hook": "Duas casas numa só, em Vila Nova de Cerveira.",
+            "voiceover": "Duas casas numa só, em Vila Nova de Cerveira. A cerca de quinhentos metros do centro, numa zona residencial e tranquila. No primeiro andar, um T3 com sala, varanda e cozinha renovada. No rés do chão, um T1 independente, com sala e cozinha em open space. Este piso tem caixilharia nova com vidro duplo e ventilação mecânica. Lá fora, logradouro, anexo e espaço para estacionamento, com possibilidade de construir garagem. Para viver, para duas famílias, ou para arrendar. Trezentos e cinquenta e dois mil e quinhentos euros. Para visitar, fale com a Paula Santos, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Duas casas numa só, em Vila Nova de Cerveira.",
+                    "caption": "Vila Nova de Cerveira"
+                },
+                {
+                    "photo": "rua / envolvente residencial",
+                    "vo": "A cerca de quinhentos metros do centro, numa zona residencial e tranquila.",
+                    "caption": "A 500 m do centro"
+                },
+                {
+                    "photo": "sala do 1.º andar com acesso à varanda",
+                    "vo": "No primeiro andar, um T3 com sala, varanda",
+                    "caption": "T3 no 1.º andar"
+                },
+                {
+                    "photo": "cozinha renovada do 1.º andar",
+                    "vo": "e cozinha renovada.",
+                    "caption": "Cozinha renovada"
+                },
+                {
+                    "photo": "sala e cozinha open space do rés do chão",
+                    "vo": "No rés do chão, um T1 independente, com sala e cozinha em open space.",
+                    "caption": "T1 independente"
+                },
+                {
+                    "photo": "quarto do rés do chão com janela nova",
+                    "vo": "Este piso tem caixilharia nova com vidro duplo e ventilação mecânica.",
+                    "caption": "Vidro duplo e VMC"
+                },
+                {
+                    "photo": "logradouro e anexo",
+                    "vo": "Lá fora, logradouro, anexo",
+                    "caption": "Logradouro e anexo"
+                },
+                {
+                    "photo": "espaço de estacionamento",
+                    "vo": "e espaço para estacionamento, com possibilidade de construir garagem.",
+                    "caption": "Estacionamento"
+                },
+                {
+                    "photo": "fachada com varanda",
+                    "vo": "Para viver, para duas famílias, ou para arrendar.",
+                    "caption": "T3 + T1"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e cinquenta e dois mil e quinhentos euros. Para visitar, fale com a Paula Santos, da IAD Portugal.",
+                    "caption": "352.500 € · Paula Santos · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Área do lote (219 m²) é igual à área bruta (219,15 m²), apesar de haver logradouro, anexo e estacionamento. Não usei nenhuma área. Confirmar.",
+                "As características dizem 'Jardim', mas o texto só fala em 'logradouro'. Usei 'logradouro'.",
+                "As características dizem 'Acesso para cadeira de rodas', mas o texto não o descreve e o T3 fica no 1.º andar. Ficou de fora.",
+                "As características dizem 'property.feature.heating', um campo por preencher. O aquecimento não está especificado e ficou de fora.",
+                "A vista para o Rio Minho só é referida como potencial de uma garagem que ainda não existe. Ficou de fora.",
+                "O anúncio mostra 'Paula Antonieta Santos'. No fecho usei 'Paula Santos'. Confirmar como a consultora se apresenta."
+            ],
+            "message": "Bom dia Sra. Paula,\nO meu nome é João Ferreira.\n\nVi a moradia T3 + T1 em Vila Nova de Cerveira que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia 4 quartos de 219 m² em Vila Nova de Cerveira",
+            "price": 352500,
+            "details": {
+                "Preço": "352 500 €",
+                "Localização": "Vila Nova de Cerveira, 4920-304",
+                "Referência": "1020117",
+                "Área Bruta m²": "219.15",
+                "Área Total do Lote m²": "219",
+                "Quartos": 4,
+                "Ano de Construção": 1987,
+                "Certificado Energético": "D",
+                "Características": "219,15 m² área bruta, 130 m² úteis, 2 casas de banho, Jardim, Estacionamento, Varanda, Sala de estar, Fibra ótica, property.feature.heating, Construído em 1987, Acesso para cadeira de rodas"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Paula Antonieta Santos - and phone number - +351966857360. Agency: IAD Portugal.\nThe agent's photo is Paula Antonieta Santos.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Duas casas numa só, em Vila Nova de Cerveira.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia → «Vila Nova de Cerveira»\n- rua / envolvente residencial → «A 500 m do centro»\n- sala do 1.º andar com acesso à varanda → «T3 no 1.º andar»\n- cozinha renovada do 1.º andar → «Cozinha renovada»\n- sala e cozinha open space do rés do chão → «T1 independente»\n- quarto do rés do chão com janela nova → «Vidro duplo e VMC»\n- logradouro e anexo → «Logradouro e anexo»\n- espaço de estacionamento → «Estacionamento»\n- fachada com varanda → «T3 + T1»\n- end card → «352.500 € · Paula Santos · IAD Portugal»\n\nHere are the house details:\n\nMoradia 4 quartos de 219 m² em Vila Nova de Cerveira\nPreço\n352 500 €\nLocalização\nVila Nova de Cerveira, 4920-304\nReferência\n1020117\nÁrea Bruta m²\n219.15\nÁrea Total do Lote m²\n219\nQuartos\n4\nAno de Construção\n1987\nCertificado Energético\nD\nCaracterísticas\n219,15 m² área bruta, 130 m² úteis, 2 casas de banho, Jardim, Estacionamento, Varanda, Sala de estar, Fibra ótica, property.feature.heating, Construído em 1987, Acesso para cadeira de rodas\n\nDescrição\nMoradia independente T3 + T1 com Anexo e Logradouro | Vila Nova de Cerveira\n\nA apenas cerca de 500 metros do centro de Vila Nova de Cerveira, esta moradia independente em pedra e tijolo oferece uma excelente oportunidade para habitação própria, investimento ou utilização como duas unidades independentes.\n\nConstruída em 1987 e em muito bom estado de conservação e renovada, a propriedade distribui-se por dois pisos, com um T3 no 1.º andar e um T1 no rés do chão, além de anexo e logradouro.\n\n1.º Andar – T3\n\nO primeiro piso é composto por:\n\nSala com 22,35 m², com acesso à varanda;\nTrês quartos com áreas de 10,60 m², 10,87 m² e 6,35 m²;\nCozinha renovada com 10,10 m², equipada com placa de indução Jocel e forno Candy;\nCasa de banho com banheira; 3,95 m²\nMarquise fechada em alumínio branco, com 4,05 m²;\nVaranda na fachada; 5 m²\nPavimento flutuante nos quartos;\nPavimento cerâmico na cozinha e restantes zonas indicadas.\n\nEste piso dispõe de instalação elétrica totalmente renovada, com quadros elétricos independentes.\n\nAs janelas são em alumínio cinzento com vidro simples, complementadas por estores manuais.\n\nUm dos quartos dispõe ainda de portada com acesso à varanda, proporcionando uma boa entrada de luz natural.\n\nRés do chão – T1\n\nO rés do chão encontra-se organizado como uma habitação independente e é composto por:\n\nQuarto com  7,60 m²;\nSala e cozinha em conceito open space, com 22 m²;\nZona de circulação;\nLavandaria com 1,75 m²;\nCasa de banho com cabine de duche; 2 m²\nCozinha equipada com frigorífico Prima, campânula Cecotec, forno Candy e máquina de lavar loiça Indesit;\nMáquina de lavar roupa Indesit.\n\nEste piso beneficia de instalação de VMC, caixilharia nova em alumínio cinzento escuro com corte térmico e vidro duplo, pavimento vinílico na sala, pavimento cerâmico na cozinha e pavimento flutuante no quarto.\n\nExterior e potencial\n\nNo exterior, a propriedade dispõe de logradouro, anexo e espaço para estacionamento.\n\nExiste ainda possibilidade de construção de garagem, com potencial para beneficiar de vistas para o Rio Minho.\n\nA cobertura é composta por painel sandwich e vigas de cimento.\n\nUma propriedade com várias possibilidades\n\nA configuração T3 + T1 permite diferentes utilizações, nomeadamente:\n\nHabitação própria com espaço independente para familiares;\nHabitação para duas famílias;\nInvestimento para arrendamento;\nHabitação própria e rentabilização de uma das unidades.\n\nA localização é um dos grandes destaques desta propriedade: a aproximadamente 500 metros do centro de Vila Nova de Cerveira, próxima de comércio, serviços e equipamentos, mas inserida numa zona residencial e tranquila.\n\nUma moradia versátil, com duas unidades habitacionais, espaço exterior e possibilidade de valorização através da construção de garagem.\n\nAgende a sua visita e venha conhecer esta propriedade em Vila Nova de Cerveira.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia com duas habitações (T3 + T1) em Vila Nova de Cerveira",
+            "summary": "Imóvel com um T3 e um T1 independente, a cerca de 500 m do centro de Vila Nova de Cerveira, a Vila das Artes junto ao rio Minho. Em Portugal, a avaliação bancária das casas atingiu um recorde em agosto de 2026.",
+            "timeline": [
+                {
+                    "label": "1.ª Bienal de Cerveira, a mais antiga do país",
+                    "sublabel": "1978"
+                },
+                {
+                    "label": "Inaugurada a Ponte da Amizade Cerveira–Goián",
+                    "sublabel": "junho 2004"
+                },
+                {
+                    "label": "Avaliação bancária: 2.081 €/m² (+19,1%)",
+                    "sublabel": "dezembro 2025"
+                },
+                {
+                    "label": "Novo recorde: 2.254 €/m²",
+                    "sublabel": "agosto 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Avaliação bancária mediana em Portugal (ago. 2026)",
+                    "value": 2254,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação mediana das moradias (ago. 2026)",
+                    "value": 1610,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga da avaliação (ago. 2026)",
+                    "value": 14.7,
+                    "unit": "%"
+                },
+                {
+                    "label": "Subida homóloga das moradias (ago. 2026)",
+                    "value": 12.6,
+                    "unit": "%"
+                },
+                {
+                    "label": "Avaliação mediana anual em Portugal (2025)",
+                    "value": 1949,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Duas casas numa só",
+                    "left": {
+                        "title": "1.º andar: T3",
+                        "points": [
+                            "Sala com varanda",
+                            "Cozinha renovada",
+                            "Para a família"
+                        ]
+                    },
+                    "right": {
+                        "title": "R/C: T1 independente",
+                        "points": [
+                            "Sala e cozinha em open space",
+                            "Caixilharia nova com vidro duplo",
+                            "Ventilação mecânica"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Cerca de 500 m do centro, em zona residencial tranquila",
+                "Logradouro, anexo e estacionamento, com possibilidade de garagem",
+                "Para viver, para duas famílias ou para arrendar",
+                "Cerveira é a 'Vila das Artes', com bienal desde 1978",
+                "Ligação direta à Galiza pela Ponte da Amizade (2004)"
+            ],
+            "sources": [
+                "https://observador.pt/2026/09/24/ine-avaliacao-bancaria-da-habitacao-bate-recorde-de-2-254-euros-m2-em-agosto/",
+                "https://www.tsf.pt/economia/artigo/avaliacao-bancaria-da-habitacao-bate-recorde-de-2254-eurosm2-em-agosto/18129976",
+                "https://www.forbespt.com/avaliacao-bancaria-da-habitacao-bate-recorde-de-2-254-euros-por-metro-quadrado-em-agosto/",
+                "https://www.noticiasaominuto.com/economia/2926846/avaliacao-bancaria",
+                "https://www.idealista.pt/news/node/73615",
+                "https://executivedigest.sapo.pt/?p=709677",
+                "https://observador.pt/2018/08/10/bienal-de-cerveira-assinala-40-anos-com-homenagem-a-cruzeiro-seixas-e-mais-de-600-obras/",
+                "https://bienaldecerveira.pt/about-the-foundation/1427-2/",
+                "https://es.hispanopedia.com/wiki/Puente_de_la_Amistad_(Espa%C3%B1a-Portugal)",
+                "https://www.geocaching.com/geocache/GC3XVHX"
+            ]
+        },
+        "suggested": {
+            "title": "Duas casas numa só em Vila Nova de Cerveira: T3 + T1 por 352.500 €",
+            "description": "T3 + T1 independente na mesma moradia, a 500 m do centro de Cerveira\n\nNuma zona residencial e tranquila de Vila Nova de Cerveira.\nNo primeiro andar fica um T3 com sala, varanda e cozinha renovada.\nNo rés-do-chão há um T1 independente, com sala e cozinha em open space, caixilharia nova com vidro duplo e ventilação mecânica.\nLá fora tem logradouro, anexo e espaço para estacionamento, com possibilidade de construir garagem.\nServe para viver, para duas famílias ou para arrendar.\n\n4 quartos · 219,15 m² brutos · 130 m² úteis · 2 WC · Jardim · Fibra ótica · Acesso para cadeira de rodas · Construída em 1987 · Certificado energético D · Ref. 1020117 · 352.500 €\n\nContacte a Paula Santos (IAD Portugal) para marcar visita: +351 966 857 360",
+            "tags": [
+                "moradia",
+                "casaavenda",
+                "imobiliario",
+                "vilanovadecerveira",
+                "cerveira",
+                "altominho",
+                "vianadocastelo",
+                "moradiat4",
+                "duascasas",
+                "investimentoimobiliario",
+                "arrendamento",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1020117-hakmm",
+    "created_at": "2026-10-19T09:06:14+00:00",
+    "updated_at": "2026-10-19T09:20:48+00:00",
+    "source_path": "clips/uploads/Pt9BaBYxw8InJqB2UtAi6jWB4JQEg1vW7Rvp3g9N.mp3",
+    "images": [
+        {
+            "id": "img_658222b1",
+            "path": "clips/uploads/mGUlcJS4DB8Nb8hmCWBrfdVGVyurPHjyiFc6TDzl.jpg",
+            "description": "Fachada da moradia rosa de dois pisos, com varanda, muro branco e rua calcetada em zona residencial.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_067324be",
+            "path": "clips/uploads/XRyHxeB3puWjKSHBNdJx1nGILL6eWvalzUSsyiCO.jpg",
+            "description": "Sala ampla com chão em mosaico, móvel antigo de madeira escura, janela e porta envidraçada.",
+            "name": "01a0fe99c0ec14050a8ecc8aa6e1f922.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6ee10f9f",
+            "path": "clips/uploads/9SIN9hIQ09SjOlpo97rtTxF0y5PNlW5dWyDleWvf.jpg",
+            "description": "Sala vazia e luminosa, com consola branca decorativa e porta aberta para a cozinha.",
+            "name": "01a0fe99bf92c070101e881e2d6c9bc5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_84866d45",
+            "path": "clips/uploads/Kvnh9tKV8mDMrcd8lbKYL0VqTH87W0bewDgmIAxt.jpg",
+            "description": "Sala espaçosa com chão em mosaico, janela, porta de acesso à varanda e móvel de TV branco.",
+            "name": "01a0fe99be7543dd067a6b0a2d7cb988.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a8a927df",
+            "path": "clips/uploads/Dx0Mbdax1LTbO93IczIzHW9TKeOB7LdWLaGP00gq.jpg",
+            "description": "Sala com grande móvel antigo de madeira escura e porta aberta para quarto luminoso.",
+            "name": "01a0fe99bff39720d43f99d1d8e28319.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f9077559",
+            "path": "clips/uploads/pgbBSVvdh1CwnbuJmygfsf9IB42R72QmISdsyzje.jpg",
+            "description": "Cozinha renovada com móveis em madeira clara, bancada branca, placa vitrocerâmica e forno encastrado.",
+            "name": "01a0fe99bec7ff278c0977006587a607.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4d07dd9d",
+            "path": "clips/uploads/CPUxA58B5rD1eetPPpVKhMg8A61KBD5bJkUfPfCp.jpg",
+            "description": "Cozinha renovada em L, móveis de madeira, bancada mármore branco, porta para a marquise.",
+            "name": "01a0fe99c08945f40a534990efe46a1f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0637bbfa",
+            "path": "clips/uploads/34yjhziwkUI8uBspgcuok3Xbv563Klyu1Fb9fCqx.jpg",
+            "description": "Cozinha com paredes em azulejo branco, porta de alumínio com grade e passagem para a sala.",
+            "name": "01a0fe99c0ce25f334fffadd58a19063.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b9ba7ceb",
+            "path": "clips/uploads/a6TxqmvIjJL34BmIzWky9yhHasJA8kmGmzKB5WTu.jpg",
+            "description": "Casa de banho com azulejo azul e branco, banheira com resguardo de vidro e janela.",
+            "name": "01a0fe99c226afec947294e267a9426a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cbec65e9",
+            "path": "clips/uploads/QbivZc4bDWuMUhxDtaxhU46vPjZYI5VvQwAvDmQz.jpg",
+            "description": "Casa de banho completa em azulejo azul, banheira com resguardo, sanita e lavatório.",
+            "name": "01a0fe99c19f216ee2a7bc538bd871a2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ee41db86",
+            "path": "clips/uploads/E1jbWA8O5oRq7Q8abdKyho1LeaQcg8cpv7IHAhy0.jpg",
+            "description": "Quarto vazio com chão flutuante e porta dupla aberta para varanda com vista para casas e vegetação.",
+            "name": "01a0fe99bf9de2d8924e2e2780ae0a4e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7ed67625",
+            "path": "clips/uploads/IeHeSCkYIWR4jjCyPuFuRYC3M1TH6mblMdcxQ0cb.jpg",
+            "description": "Quarto amplo com chão flutuante, porta dupla aberta para varanda e vista para encosta verde.",
+            "name": "01a0fe99bf76400b7b398cae3796057d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0fd76f47",
+            "path": "clips/uploads/nFR27oAYWbmPQK6xPnZQ6fOSdD2eRNuPE5H7ubs3.jpg",
+            "description": "Quarto vazio com paredes brancas e chão flutuante; porta aberta mostra a sala ao fundo.",
+            "name": "01a0fe99ba5e6ba19134382dc87aabd5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bf52fec6",
+            "path": "clips/uploads/55tyLIoRYMB46r0j2NbEzHi7EdtNNAd7kOYYFJT8.jpg",
+            "description": "Quarto soalheiro com duas janelas; uma com vista para o rio Minho e montanhas.",
+            "name": "01a0fe99aa5b56819776bd80ce875ce4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f81ed535",
+            "path": "clips/uploads/XY9Dh5djbDhpZr6ETwtUqhshA96OoA8fGcsVXI56.jpg",
+            "description": "Quarto luminoso com chão flutuante e janela aberta com vista para casas e vegetação.",
+            "name": "01a0fe99aa70842e5ff9d7a49144e2bf.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bbbc4592",
+            "path": "clips/uploads/PAJM72cyf3v0FTPb1IsVul3ZvcNdeLIihOabLVd9.jpg",
+            "description": "Quarto com roupeiro de correr, janela de vidro duplo e porta aberta para outra divisão.",
+            "name": "01a0fe99aa403dc61c6206949f8e0969.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a976b271",
+            "path": "clips/uploads/UIZyUDeAybedwGlcladMdOWUUXALWNuz6lOoTuwY.jpg",
+            "description": "Marquise envidraçada com porta de alumínio, vidro fosco e armário branco com gavetas.",
+            "name": "01a0fe99c031026610e2be2ed4bfa16a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a4f43fcb",
+            "path": "clips/uploads/yF1LFNWXFapTNCsbcjUTS0J1sdzEfWJXUupqvZNg.jpg",
+            "description": "Marquise de entrada com armário alto branco e porta aberta para corredor interior.",
+            "name": "01a0fe99c03c8a8cef5d6fc85c588438.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b7f417db",
+            "path": "clips/uploads/vvl4aDBBraeooB01P658qGQ3LOVUyKwOUYfhVldQ.jpg",
+            "description": "Varanda estreita com piso cerâmico e gradeamento, acesso direto a quarto com chão flutuante.",
+            "name": "01a0fe99c2dde22b196fadfb1161f9b1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_27910bf9",
+            "path": "clips/uploads/8nej1G7iezz6ZIi9E1b7BLIRLua7H4gj8Wilwmzu.jpg",
+            "description": "Varanda ampla com muro branco e vista sobre telhados, quintais e rio com montanhas.",
+            "name": "01a0fe99c5d0f9321bfaa1892af5b0bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a7ee541c",
+            "path": "clips/uploads/swezPw2peocY824yiZDavbX2ISwh9ZCGS8s6xmgy.jpg",
+            "description": "Escadas exteriores vistas de cima, patamar com mosaico castanho, rua residencial com carros estacionados ao fundo.",
+            "name": "01a0fe99c395ecacb61574809b254d31.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_62a40709",
+            "path": "clips/uploads/fiPKMZ4dKCaMNGM6V6uAWziagRTTOnT2pgombYPX.jpg",
+            "description": "Sala de jantar com mesa e cadeiras brancas, porta envidraçada para varanda, relógio dourado e corredor para casa de banho.",
+            "name": "01a0fe9d643b7c11a68ace8947877665.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_86367949",
+            "path": "clips/uploads/iIrwUHC8uVuKlFRn1CZKCQkU5c5t6m2ME3Yp1oMA.jpg",
+            "description": "Sala do T1 com sofá bege, pavimento flutuante, porta e janela novas com caixilharia preta e vista verde.",
+            "name": "01a0fe9d640552bd2a67dcb4ecad77d0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_44858e02",
+            "path": "clips/uploads/OKXCQzpVrEEvvilnS4AkU5bAPDcUQnT4FIZ8lFxp.jpg",
+            "description": "Open space do T1: kitchenette branca com forno, mesa de jantar e sofá bege, janela de caixilharia nova.",
+            "name": "01a0fe9d63942d58051c0a4a329597fa.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8ea0986c",
+            "path": "clips/uploads/KYNLZFhHNkQppjFTPMCbWPalhQFSrGZfyag5h6Bs.jpg",
+            "description": "Cozinha renovada em open space, armários brancos, bancada em madeira, frigorífico inox, mesa de jantar e quarto ao lado.",
+            "name": "01a0fe9d63749675d0a50b897f0dfa8c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_684315b1",
+            "path": "clips/uploads/rayrSQI6j3H2kCrxWlG1Ix2K5zV9kMjIhcEDbFal.jpg",
+            "description": "Cozinha renovada vista de frente: armários brancos, bancada de madeira, forno, máquina de loiça, zona de refeições e quarto.",
+            "name": "01a0fe9d63c5781e0365ba86cec62688.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8f06ad3f",
+            "path": "clips/uploads/dfhnm88iXq87amavE6elp5E9UYu8BJVTvQjUgwm3.jpg",
+            "description": "Sala ampla com sofá bege, mesa de jantar, porta para varanda e corredor com casa de banho ao fundo.",
+            "name": "01a0fe9d63efc5e23c30f37d8af650a1.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f6723311",
+            "path": "clips/uploads/KpJadD7tUSSdzVUc6OtwFlG5xrCLLuZkCdBqvI9p.jpg",
+            "description": "Corredor com lavandaria e máquina de lavar à esquerda, levando à cozinha com porta aberta para o exterior.",
+            "name": "01a0fe9f3a84d36387289c01f21dd116.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_30ee943c",
+            "path": "clips/uploads/auP8eMc8LSa1Z8wJ9zWBXwmXn95W5Pm8XzRsYqG6.jpg",
+            "description": "Alpendre coberto com pilares brancos, anexo de pedra ao fundo, terreno livre e casas vizinhas na encosta.",
+            "name": "01a0fe9f404cbd68325bb4217f15f9c6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_42369372",
+            "path": "clips/uploads/DWhgFe8txKHa8LSscnWjy15Y9J4h4jwuYs7SWvwl.jpg",
+            "description": "Logradouro coberto com vista para o terreno, vale e montanhas, portão e escadas de acesso, espaço para estacionamento.",
+            "name": "01a0fe9f40e567af8f87beb27eea1a77.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f943d71b",
+            "path": "clips/uploads/D4u9WgD5JjAKKXuWt6TJ9xoqN1oWMk5Omo6Mvbgg.jpg",
+            "description": "Alpendre exterior com portão de ferro preto, muros brancos e calçada em cubos de granito no acesso.",
+            "name": "01a0fe9f4181b87b435e204bd41312c9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e5cc5b05",
+            "path": "clips/uploads/Zfv73bZzt9CpvrEdSHY0z9PT8ymPYffypxBi3QbQ.jpg",
+            "description": "Lavandaria com máquina de lavar roupa, termoacumulador elétrico e prateleiras de madeira em paredes brancas.",
+            "name": "01a0fe9f3b9057ca8a3d1d5f0e6f4398.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b32d462f",
+            "path": "clips/uploads/KLDyQQ71ESpoQwOP8XOYXWSC8GG4Qh5zdsBvJIW2.jpg",
+            "description": "Casa de banho com móvel lavatório branco, bidé e sanita, azulejos bege e castanhos.",
+            "name": "01a0fe9f3e68999bbc2d663127746b50.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f3a32340",
+            "path": "clips/uploads/TLLM3ggNeuklEXQZsZ2kBpnMlEDP2ASQdm8b026D.jpg",
+            "description": "Casa de banho com base de duche e resguardo; porta aberta para corredor com piso claro.",
+            "name": "01a0fe9f3f613f3eac100540eb241278.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d2450234",
+            "path": "clips/uploads/qPDBRRKuw4j4YQmj8PGKnEdWFMNwaSsPu2VzEyug.jpg",
+            "description": "Casa de banho com lavatório, bidé, sanita, cabine de duche e janela basculante alta.",
+            "name": "01a0fe9f3e8ef5c615d4b58b94211991.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f19bd2d9",
+            "path": "clips/uploads/FJBFvC25OlqLItn6coHoDTuO0xLaNqSYvBbn0Whb.jpg",
+            "description": "Quarto com cama de casal em madeira, mesa de cabeceira e janela de caixilharia escura nova.",
+            "name": "01a0fe99c0b912aac4eb3e06b581809e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_48f0aba7",
+            "path": "clips/uploads/RCTrrlGnG578hG3DDfacMGq6s9wz9UD6CyZgGoAP.jpg",
+            "description": "Quarto de casal com roupeiro e cómoda com espelho em madeira maciça, piso laminado.",
+            "name": "01a0fe99c25c94effbf55b7fc5e51480.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_107d056b",
+            "path": "clips/uploads/d7DdeWVVVSH909EDXBhEOh85aSpxHIjC5gct25XI.jpg",
+            "description": "Quarto com roupeiro de portas de correr e cómoda; porta aberta para sala renovada e luminosa.",
+            "name": "01a0fe99c0adbb33e1af6025346034bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_be517b50",
+            "path": "clips/uploads/OVxmyzUJbC8Da4x6bMqkTFG5xURH8vHEaCKuyRMc.jpg",
+            "description": "Cozinha antiga do anexo por recuperar, com bancada de azulejo, lava-loiça e fogão a lenha.",
+            "name": "01a0fe9f406af42d0b20fe60b7126e12.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_170e0e4a",
+            "path": "clips/uploads/iXOFtldZZsBVTXHhvxvPR23TATWwZroZs17mqTvD.png",
+            "description": "Retrato da consultora Paula Antonieta Santos, da IAD Portugal.",
+            "name": "Paula Antonieta Santos.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_db3aeee7",
+            "path": "clips/uploads/zPjhAYe7m5lDEkQ9BALvSHaiyGMc1bA7iIiZNeJc.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/Pt9BaBYxw8InJqB2UtAi6jWB4JQEg1vW7Rvp3g9N.mp3",
+    "transcript": {
+        "duration": 36.2400016784668,
+        "text": "Duas casas numa só, em Vila Nova de Cerveira, a cerca de 500 metros do centro, numa zona residencial e tranquila. No primeiro andar, um T3 com sala, varanda e cozinha renovada. No resto do chão, um T1 independente, com sala e cozinha em open space. Este piso tem caixilharia nova com vidro duplo e ventilação mecânica. Lá fora, lugado, anexo e espaço para estacionamento, com possibilidade de construir garagem. Para viver, para duas famílias ou para arrendar. 352.500€ Para visitar, fale com a Paula Santos, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Duas",
+                "start": 0,
+                "end": 0.3799999952316284
+            },
+            {
+                "word": "casas",
+                "start": 0.3799999952316284,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "numa",
+                "start": 0.7200000286102295,
+                "end": 0.9399999976158142
+            },
+            {
+                "word": "só",
+                "start": 0.9399999976158142,
+                "end": 1.4600000381469727
+            },
+            {
+                "word": "em",
+                "start": 1.5199999809265137,
+                "end": 1.7000000476837158
+            },
+            {
+                "word": "Vila",
+                "start": 1.7000000476837158,
+                "end": 1.940000057220459
+            },
+            {
+                "word": "Nova",
+                "start": 1.940000057220459,
+                "end": 2.1600000858306885
+            },
+            {
+                "word": "de",
+                "start": 2.1600000858306885,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "Cerveira",
+                "start": 2.440000057220459,
+                "end": 2.940000057220459
+            },
+            {
+                "word": "a",
+                "start": 3.259999990463257,
+                "end": 3.319999933242798
+            },
+            {
+                "word": "cerca",
+                "start": 3.319999933242798,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "de",
+                "start": 3.4600000381469727,
+                "end": 3.7200000286102295
+            },
+            {
+                "word": "500",
+                "start": 3.7200000286102295,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "metros",
+                "start": 4.039999961853027,
+                "end": 4.340000152587891
+            },
+            {
+                "word": "do",
+                "start": 4.340000152587891,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "centro",
+                "start": 4.619999885559082,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "numa",
+                "start": 5.139999866485596,
+                "end": 5.300000190734863
+            },
+            {
+                "word": "zona",
+                "start": 5.300000190734863,
+                "end": 5.539999961853027
+            },
+            {
+                "word": "residencial",
+                "start": 5.679999828338623,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 6.239999771118164,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "tranquila",
+                "start": 6.579999923706055,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "No",
+                "start": 7.539999961853027,
+                "end": 7.579999923706055
+            },
+            {
+                "word": "primeiro",
+                "start": 7.579999923706055,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "andar",
+                "start": 7.880000114440918,
+                "end": 8.239999771118164
+            },
+            {
+                "word": "um",
+                "start": 8.479999542236328,
+                "end": 8.640000343322754
+            },
+            {
+                "word": "T3",
+                "start": 8.640000343322754,
+                "end": 9.100000381469727
+            },
+            {
+                "word": "com",
+                "start": 9.100000381469727,
+                "end": 9.479999542236328
+            },
+            {
+                "word": "sala",
+                "start": 9.479999542236328,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "varanda",
+                "start": 10.34000015258789,
+                "end": 10.359999656677246
+            },
+            {
+                "word": "e",
+                "start": 10.359999656677246,
+                "end": 10.680000305175781
+            },
+            {
+                "word": "cozinha",
+                "start": 10.680000305175781,
+                "end": 10.9399995803833
+            },
+            {
+                "word": "renovada",
+                "start": 10.9399995803833,
+                "end": 11.579999923706055
+            },
+            {
+                "word": "No",
+                "start": 12.020000457763672,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "resto",
+                "start": 12.100000381469727,
+                "end": 12.279999732971191
+            },
+            {
+                "word": "do",
+                "start": 12.279999732971191,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "chão",
+                "start": 12.65999984741211,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "um",
+                "start": 12.859999656677246,
+                "end": 13.020000457763672
+            },
+            {
+                "word": "T1",
+                "start": 13.020000457763672,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "independente",
+                "start": 13.4399995803833,
+                "end": 14.140000343322754
+            },
+            {
+                "word": "com",
+                "start": 14.300000190734863,
+                "end": 14.739999771118164
+            },
+            {
+                "word": "sala",
+                "start": 14.739999771118164,
+                "end": 14.800000190734863
+            },
+            {
+                "word": "e",
+                "start": 14.800000190734863,
+                "end": 15.140000343322754
+            },
+            {
+                "word": "cozinha",
+                "start": 15.140000343322754,
+                "end": 15.380000114440918
+            },
+            {
+                "word": "em",
+                "start": 15.380000114440918,
+                "end": 15.699999809265137
+            },
+            {
+                "word": "open",
+                "start": 15.699999809265137,
+                "end": 16.020000457763672
+            },
+            {
+                "word": "space",
+                "start": 16.020000457763672,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "Este",
+                "start": 17,
+                "end": 17.040000915527344
+            },
+            {
+                "word": "piso",
+                "start": 17.040000915527344,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "tem",
+                "start": 17.34000015258789,
+                "end": 17.579999923706055
+            },
+            {
+                "word": "caixilharia",
+                "start": 17.579999923706055,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "nova",
+                "start": 18.1200008392334,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "com",
+                "start": 18.440000534057617,
+                "end": 18.719999313354492
+            },
+            {
+                "word": "vidro",
+                "start": 18.719999313354492,
+                "end": 18.959999084472656
+            },
+            {
+                "word": "duplo",
+                "start": 18.959999084472656,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 19.31999969482422,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "ventilação",
+                "start": 19.600000381469727,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "mecânica",
+                "start": 20.100000381469727,
+                "end": 21.059999465942383
+            },
+            {
+                "word": "Lá",
+                "start": 21.200000762939453,
+                "end": 21.280000686645508
+            },
+            {
+                "word": "fora",
+                "start": 21.280000686645508,
+                "end": 21.540000915527344
+            },
+            {
+                "word": "lugado",
+                "start": 21.899999618530273,
+                "end": 22.280000686645508
+            },
+            {
+                "word": "anexo",
+                "start": 22.799999237060547,
+                "end": 22.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 22.920000076293945,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "espaço",
+                "start": 23.15999984741211,
+                "end": 23.399999618530273
+            },
+            {
+                "word": "para",
+                "start": 23.399999618530273,
+                "end": 23.65999984741211
+            },
+            {
+                "word": "estacionamento",
+                "start": 23.65999984741211,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "com",
+                "start": 24.440000534057617,
+                "end": 24.600000381469727
+            },
+            {
+                "word": "possibilidade",
+                "start": 24.600000381469727,
+                "end": 25.18000030517578
+            },
+            {
+                "word": "de",
+                "start": 25.18000030517578,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "construir",
+                "start": 25.799999237060547,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "garagem",
+                "start": 25.799999237060547,
+                "end": 26.639999389648438
+            },
+            {
+                "word": "Para",
+                "start": 26.739999771118164,
+                "end": 26.81999969482422
+            },
+            {
+                "word": "viver",
+                "start": 26.81999969482422,
+                "end": 27.260000228881836
+            },
+            {
+                "word": "para",
+                "start": 27.420000076293945,
+                "end": 27.65999984741211
+            },
+            {
+                "word": "duas",
+                "start": 27.65999984741211,
+                "end": 27.899999618530273
+            },
+            {
+                "word": "famílias",
+                "start": 27.899999618530273,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "ou",
+                "start": 28.440000534057617,
+                "end": 28.700000762939453
+            },
+            {
+                "word": "para",
+                "start": 28.700000762939453,
+                "end": 28.920000076293945
+            },
+            {
+                "word": "arrendar",
+                "start": 28.920000076293945,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "352",
+                "start": 30.979999542236328,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "500€",
+                "start": 31.6200008392334,
+                "end": 32.2599983215332
+            },
+            {
+                "word": "Para",
+                "start": 32.2599983215332,
+                "end": 32.779998779296875
+            },
+            {
+                "word": "visitar",
+                "start": 32.779998779296875,
+                "end": 33.380001068115234
+            },
+            {
+                "word": "fale",
+                "start": 33.70000076293945,
+                "end": 33.70000076293945
+            },
+            {
+                "word": "com",
+                "start": 33.70000076293945,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "a",
+                "start": 33.81999969482422,
+                "end": 33.97999954223633
+            },
+            {
+                "word": "Paula",
+                "start": 33.97999954223633,
+                "end": 34.20000076293945
+            },
+            {
+                "word": "Santos",
+                "start": 34.20000076293945,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "da",
+                "start": 34.79999923706055,
+                "end": 35.02000045776367
+            },
+            {
+                "word": "IAD",
+                "start": 35.02000045776367,
+                "end": 35.400001525878906
+            },
+            {
+                "word": "de",
+                "start": 35.400001525878906,
+                "end": 35.68000030517578
+            },
+            {
+                "word": "Portugal",
+                "start": 35.68000030517578,
+                "end": 36
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.2400016784668,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.4999999999999982,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "DUAS CASAS NUMA SÓ",
+                        "params": {
+                            "src": "img_658222b1",
+                            "avatar": "img_170e0e4a",
+                            "logo": "img_db3aeee7",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "352.500 €",
+                            "location": "VILA NOVA DE CERVEIRA",
+                            "title": "T3 + T1",
+                            "facts": "219 m² · 4 quartos · 2 WC · logradouro",
+                            "cta": "Ligue já +351 966 857 360",
+                            "name": "Paula Antonieta Santos",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.4999999999999982,
+                "end": 7.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "A 500 m do centro",
+                        "params": {
+                            "src": "img_a7ee541c",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.5,
+                "end": 9.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "T3 NO 1.º ANDAR",
+                        "params": {
+                            "src": "img_84866d45",
+                            "src2": "img_067324be"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.9,
+                "end": 12.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "COZINHA RENOVADA",
+                        "params": {
+                            "src": "img_f9077559",
+                            "src2": "img_4d07dd9d",
+                            "src3": "img_0637bbfa",
+                            "src4": "img_b7f417db",
+                            "src5": "img_a976b271"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.2,
+                "end": 14.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "T1 INDEPENDENTE",
+                        "params": {
+                            "src": "img_44858e02",
+                            "src2": "img_86367949",
+                            "src3": "img_8ea0986c",
+                            "src4": "img_684315b1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.4,
+                "end": 16.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA E COZINHA",
+                        "params": {
+                            "src": "img_8f06ad3f",
+                            "src2": "img_62a40709",
+                            "src3": "img_f6723311",
+                            "src4": "img_e5cc5b05",
+                            "src5": "img_d2450234"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.9,
+                "end": 21.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Caixilharia com corte térmico|Vidro duplo|Ventilação mecânica (VMC)",
+                        "params": {
+                            "src": "img_f19bd2d9",
+                            "title": "VIDRO DUPLO E VMC",
+                            "items": [
+                                "Caixilharia com corte térmico",
+                                "Vidro duplo",
+                                "Ventilação mecânica (VMC)"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.2,
+                "end": 23.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "LOGRADOURO E ANEXO",
+                        "params": {
+                            "src": "img_30ee943c",
+                            "src2": "img_be517b50",
+                            "src3": "img_f943d71b",
+                            "src4": "img_27910bf9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.8,
+                "end": 26.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "ESTACIONAMENTO",
+                        "params": {
+                            "src": "img_42369372",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.7,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "VIVER OU ARRENDAR",
+                        "params": {
+                            "src": "img_ee41db86",
+                            "src2": "img_7ed67625",
+                            "src3": "img_bf52fec6",
+                            "src4": "img_f81ed535",
+                            "src5": "img_0fd76f47",
+                            "srcs": [
+                                "img_ee41db86",
+                                "img_7ed67625",
+                                "img_bf52fec6",
+                                "img_f81ed535",
+                                "img_0fd76f47",
+                                "img_a8a927df",
+                                "img_6ee10f9f",
+                                "img_a4f43fcb"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 31.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "T3 + T1",
+                        "params": {
+                            "src": "img_48f0aba7",
+                            "src2": "img_107d056b",
+                            "src3": "img_b9ba7ceb",
+                            "src4": "img_f3a32340",
+                            "srcs": [
+                                "img_48f0aba7",
+                                "img_107d056b",
+                                "img_b9ba7ceb",
+                                "img_f3a32340",
+                                "img_cbec65e9",
+                                "img_b32d462f",
+                                "img_bbbc4592"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.4,
+                "end": 36.2400016784668,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Paula Antonieta Santos",
+                        "params": {
+                            "src": "img_170e0e4a",
+                            "name": "Paula Antonieta Santos",
+                            "phone": "+351 966 857 360",
+                            "ami": "11220"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1020117-hakmm/clip.mp4",
+    "error": null
+}

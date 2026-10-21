@@ -24,6 +24,9 @@ class RelatorioBuilder
 
     public const TIPO_DICAS = 'dicas';
 
+    /** A script on a topic the user typed, researched on the web — no aggregated items involved. */
+    public const TIPO_TOPICO = 'topico';
+
     public function __construct(
         private readonly VaultContract $vault,
         private readonly TopicsBuilder $topicos,
@@ -71,11 +74,108 @@ class RelatorioBuilder
         ];
     }
 
+    /** Vault note type of a report kind — what the archive selector filters on. */
+    public static function tipoNota(string $tipo): string
+    {
+        return match ($tipo) {
+            self::TIPO_DICAS => 'relatorio_dicas',
+            self::TIPO_TOPICO => 'relatorio_topico',
+            default => 'relatorio',
+        };
+    }
+
+    /**
+     * Scripts on a typed topic. Nothing aggregated is read: the LLM researches
+     * the topic on the web (tools on) and writes in the tool-tips register.
+     * Same array shape as gerar() so the viewer and the Markdown body need no
+     * special case.
+     *
+     * @return array<string,mixed>
+     */
+    public function gerarTopico(string $topico, string $idioma = 'English'): array
+    {
+        $topico = Str::limit(trim($topico), 200, '');
+        // No material of our own here, so a provider that cannot search would
+        // simply make the topic up. Only the ones with web search may answer.
+        $this->llm->paraPasso('noticias_topico')->apenasComWeb();
+
+        $texto = $this->llm->disponivel() ? $this->topicoViaLlm($topico, $idioma) : null;
+        [$redacao, $metodo] = $texto !== null && $texto !== ''
+            ? [$texto, $this->llm->fornecedorAtivo() ?? 'llm']
+            : ['Topic scripts need a provider with web search — the Claude CLI, a Claude API key or an OpenAI key. Set one in Settings (or pin it to the topic-script step) and generate again.', 'sem-llm'];
+
+        return [
+            'titulo' => $topico,
+            'tipo' => self::TIPO_TOPICO,
+            'modo' => 'web',
+            'inicio' => now()->toDateString(),
+            'fim' => now()->toDateString(),
+            'gerado_em' => now()->toIso8601String(),
+            'total' => 0,
+            'por_plataforma' => [],
+            'metodo' => 'web',
+            'resumo' => "Researched on the web and written for «{$topico}».",
+            'redacao' => $redacao,
+            'redacao_metodo' => $metodo,
+            'topicos' => [],
+            'destaques' => [],
+            'ideias_guiao' => [],
+            'fontes' => [],
+        ];
+    }
+
+    private function topicoViaLlm(string $topico, string $idioma): ?string
+    {
+        return $this->llm->texto(
+            'You write SHORT-FORM VIDEO SCRIPTS about AI tools and tech. '
+            .'FIRST research the TOPIC below: use web search and read the best sources you find '
+            .'(official docs, changelogs, release notes, credible recent articles). '
+            ."THEN write the scripts from what you actually found.\n\n"
+            ."OUTPUT LANGUAGE: write EVERYTHING in {$idioma}.\n\n"
+            ."TOPIC: «{$topico}»\n\n"
+            ."IF THE TOPIC IS A CLAIM OR A HEADLINE (a viral post, a news line, a number someone is passing around):\n"
+            .'- The claim IS the hook. Open with it exactly as the viewer heard it, as a real thing '
+            .'(«You can now host a data center at home and get your power and internet paid», «NVIDIA is paying people $22k a year») — '
+            ."NEVER open with a correction, a debunk or «that number is wrong».\n"
+            .'- Then tell them what is actually going on: who is really behind it, how it really works, what you really get. '
+            ."The truth is the TWIST that comes after the hook, not the opening line.\n"
+            .'- One script should be the straight «here is the deal and how to get it» version; another can be the '
+            ."«what the viral posts leave out» version — both still open with the claim.\n\n"
+            ."STRUCTURE — 2 to 4 scripts, one per distinct angle (a feature, a how-to, a gotcha, a real number):\n"
+            .'- Start with a bold one-line HOOK (`**Hook**`) written as the problem the viewer already has, '
+            ."or as the thing they don't know exists.\n"
+            .'- Then 3–6 short sentences: the problem → the point → HOW to do it, concretely '
+            ."(name the command, the setting, the menu, the exact wording).\n"
+            ."- Add a PROOF BEAT when a source has one — a real number, a date, a before/after.\n"
+            ."- End with the payoff plus ONE CTA sentence: «comment WORD and I'll send you the link», "
+            ."where WORD is one lowercase keyword tied to the topic.\n"
+            ."- Register: spoken and casual — «you», contractions, short sentences. A creator talking, not documentation.\n"
+            ."- Separate consecutive scripts with a line containing only `---`.\n"
+            .'- Each script MUST stand alone: NO overall intro or outro, NO «in this video», '
+            ."NO references to the other scripts.\n\n"
+            ."RULES:\n"
+            .'- Output ONLY the scripts. NO preamble, NO notes about your research, NO «here are the scripts» — '
+            ."the first line of your answer is the first `**Hook**`.\n"
+            ."- Speak DIRECTLY to the viewer («you») — this gets read out loud.\n"
+            .'- Name the tool, the model, the command and the numbers exactly. '
+            ."A vague script is worthless.\n"
+            .'- Do NOT invent. Only state what a source you read confirms; if the web turns up too little '
+            ."on the topic, say so in one line instead of padding.\n"
+            .'- After the last script add a final `---` and a short `**Sources**` list with the URLs you actually used.',
+            comFerramentas: true,
+        );
+    }
+
     /** Markdown body of the report (readable in Obsidian). */
     public function corpoMarkdown(array $rel): string
     {
-        $dicas = ($rel['tipo'] ?? self::TIPO_NOTICIAS) === self::TIPO_DICAS;
-        $sintese = $dicas ? '## Guiões de dicas' : '## Síntese';
+        $tipo = $rel['tipo'] ?? self::TIPO_NOTICIAS;
+        $dicas = $tipo === self::TIPO_DICAS;
+        $sintese = match ($tipo) {
+            self::TIPO_DICAS => '## Guiões de dicas',
+            self::TIPO_TOPICO => '## Guiões',
+            default => '## Síntese',
+        };
 
         $l = ["# {$rel['titulo']}", '', "> {$rel['total']} item(s) · método: {$rel['metodo']} · {$rel['gerado_em']}", '', $sintese, '', $rel['redacao'] ?? '', '', '## Resumo', '', $rel['resumo'], ''];
 
@@ -387,7 +487,7 @@ class RelatorioBuilder
             ."Substance over padding: every sentence adds a fact or a consequence.\n\n"
             ."TONE:\n"
             .'- Spoken, direct and casual — talk TO the viewer («you», «you guys»), short sentences, contractions, '
-            ."the occasional rhetorical tap («right?», «and here is the crazy part»). This gets read out loud by a "
+            .'the occasional rhetorical tap («right?», «and here is the crazy part»). This gets read out loud by a '
             ."creator, not by a news anchor — no editorial phrases like «this matters because».\n\n"
             ."CONTENT:\n"
             .'- Cover ONLY relevant news: releases, new models/products, major updates, acquisitions, '

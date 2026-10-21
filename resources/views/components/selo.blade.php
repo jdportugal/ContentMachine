@@ -1,4 +1,4 @@
-@props(['label' => 'Brand Machine', 'sub' => 'EX · LIBRIS', 'date' => 'MMXXVI', 'color' => '#5A7BFF'])
+@props(['label' => 'Brand Machine', 'sub' => 'EX · LIBRIS', 'date' => 'MMXXVI', 'color' => '#2F5A85'])
 {{-- Circular seal styled as a library stamp --}}
 <div class="selo inline-flex flex-col items-center justify-center rounded-full w-28 h-28 text-center"
      style="color: {{ $color }}">

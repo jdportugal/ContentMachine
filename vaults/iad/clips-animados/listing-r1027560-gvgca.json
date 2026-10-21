@@ -1,0 +1,1422 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 remodelado no Cacém a 5 min do comboio | 267.500€",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-cacem-81m2/r1027560",
+            "agent": "Flávio Simões",
+            "phone": "+351968491066",
+            "agency": "IAD Portugal",
+            "hook": "Um T2 no Cacém, a cinco minutos a pé do comboio.",
+            "voiceover": "Um T2 no Cacém, a cinco minutos a pé do comboio. Fica na Rua de Angola, junto ao Mercado do Cacém. O IC dezanove está a dois minutos de carro. Tem cerca de oitenta metros, num primeiro andar. A sala ampla tem zona de refeições e zona de estar. A cozinha tem placa, forno e despensa. E uma varanda fechada para lavandaria. Dois quartos amplos com acesso a varanda, e uma casa de banho completa. Remodelado há cerca de dez anos, com nova instalação elétrica e canalização. Pronto a entrar. Duzentos e sessenta e sete mil e quinhentos euros. Para visitar, fale com o Flávio Simões, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio / rua",
+                    "vo": "Um T2 no Cacém, a cinco minutos a pé do comboio.",
+                    "caption": "T2 no Cacém"
+                },
+                {
+                    "photo": "rua ou envolvente (Mercado do Cacém)",
+                    "vo": "Fica na Rua de Angola, junto ao Mercado do Cacém.",
+                    "caption": "Junto ao Mercado"
+                },
+                {
+                    "photo": "vista exterior / acessos",
+                    "vo": "O IC dezanove está a dois minutos de carro.",
+                    "caption": "IC19 a 2 minutos"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "Tem cerca de oitenta metros, num primeiro andar.",
+                    "caption": "Cerca de 80 m²"
+                },
+                {
+                    "photo": "sala, zona de refeições",
+                    "vo": "A sala ampla tem zona de refeições e zona de estar.",
+                    "caption": "Sala ampla"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "A cozinha tem placa, forno e despensa.",
+                    "caption": "Cozinha com despensa"
+                },
+                {
+                    "photo": "varanda fechada da cozinha (lavandaria)",
+                    "vo": "E uma varanda fechada para lavandaria.",
+                    "caption": "Lavandaria fechada"
+                },
+                {
+                    "photo": "quarto com acesso a varanda",
+                    "vo": "Dois quartos amplos com acesso a varanda,",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e uma casa de banho completa.",
+                    "caption": "Casa de banho completa"
+                },
+                {
+                    "photo": "segundo quarto ou sala (plano geral)",
+                    "vo": "Remodelado há cerca de dez anos, com nova instalação elétrica e canalização. Pronto a entrar.",
+                    "caption": "Pronto a entrar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e sessenta e sete mil e quinhentos euros. Para visitar, fale com o Flávio Simões, da IAD Portugal.",
+                    "caption": "267.500 € · Flávio Simões · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "A lista de características diz 'property.feature.heating', um campo por preencher. Não se percebe se há aquecimento nem de que tipo, por isso ficou de fora.",
+                "O anúncio diz '1º andar sem elevador'. A locução diz 'primeiro andar' mas não refere a falta de elevador. Confirmar se o consultor prefere que seja dito.",
+                "O texto diz que a cozinha é 'semi-equipada', com placa e forno. A locução refere apenas a placa e o forno.",
+                "A 'vista desafogada' da varanda da cozinha ficou de fora para não passar das 110 palavras."
+            ],
+            "message": "Bom dia Sr. Flávio,\nO meu nome é João Ferreira.\n\nVi o apartamento T2 no Cacém que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Apartamento 2 quartos de 81 m² em Cacém",
+            "price": 267500,
+            "details": {
+                "Preço": "267 500 €",
+                "Localização": "Cacém, 2735-230",
+                "Referência": "1027560",
+                "Área Bruta m²": "80.8",
+                "Quartos": 2,
+                "Ano de Construção": 1972,
+                "Certificado Energético": "D",
+                "Características": "80,8 m² área bruta, 73 m² úteis, 1 casa de banho, Varanda, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1972, Andar: 1, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Flávio Simões - and phone number - +351968491066. Agency: IAD Portugal.\nThe agent's photo is Flávio Simões.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T2 no Cacém, a cinco minutos a pé do comboio.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio / rua → «T2 no Cacém»\n- rua ou envolvente (Mercado do Cacém) → «Junto ao Mercado»\n- vista exterior / acessos → «IC19 a 2 minutos»\n- hall de entrada → «Cerca de 80 m²»\n- sala, zona de refeições → «Sala ampla»\n- cozinha → «Cozinha com despensa»\n- varanda fechada da cozinha (lavandaria) → «Lavandaria fechada»\n- quarto com acesso a varanda → «Dois quartos»\n- casa de banho → «Casa de banho completa»\n- segundo quarto ou sala (plano geral) → «Pronto a entrar»\n- end card → «267.500 € · Flávio Simões · IAD Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 81 m² em Cacém\nPreço\n267 500 €\nLocalização\nCacém, 2735-230\nReferência\n1027560\nÁrea Bruta m²\n80.8\nQuartos\n2\nAno de Construção\n1972\nCertificado Energético\nD\nCaracterísticas\n80,8 m² área bruta, 73 m² úteis, 1 casa de banho, Varanda, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1972, Andar: 1, Intercomunicador\n\nDescrição\nVende-se Apartamento T2 em Bom Estado com 2 Varandas na Rua de Angola no Cacém.\n\nApartamento com boas áreas, pronto a entrar, foi remodelado há cerca de 10 anos, com substituição de toda a parte eléctrica e canalização. \n\nExcelentes acessibilidades, localizado a 5 min a pé da Estação de Comboios, a 2 min de carro do IC19 e zona de estacionamento gratuito a 200 m.\n\nComposto da seguinte forma:\n- Sala ampla junto à Cozinha com duas áreas bem definidas, de refeições e de lazer;\n- Cozinha semi-equipada com placa de fogão e forno, com zona de lavandaria em Varanda fechada com vista desafogada;\n- 1 Despensa na Cozinha;\n- 2 Quartos amplos com acesso a Varanda;\n- 1 Casa de Banho completa;\n- Hall com acesso a todas as divisões;\n- 1 Despensa no Hall;\n- 2 Varandas fechadas;\n- Área Bruta Privativa 80,8 m2\n- 1º andar sem elevador.\n\nApartamento bem localizado, junto ao Mercado do Cacém, perto de Comércio, Serviços, Escolas, Transportes e rápida acessibilidade ao IC19.\n\nVenha visitar e faça a sua proposta!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T2 no Cacém (Sintra) e preços da habitação",
+            "summary": "T2 com cerca de 80 m² em Agualva-Cacém, perto da estação da Linha de Sintra, à venda por 267.500 €. Segundo o INE, o preço mediano das casas em Portugal subiu 16,8% em 2025 e 19,8% em termos homólogos no 1.º trimestre de 2026.",
+            "timeline": [
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m² (+16,8%)",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.337 €/m² (+19,8%)",
+                    "sublabel": "1.º trim. 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga do preço mediano (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano na Grande Lisboa (2025)",
+                    "value": 3439,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Queda das casas vendidas (1.º trim. 2026, homóloga)",
+                    "value": 10.5,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço deste T2 por m² (aprox., com base em ~80 m²)",
+                    "value": 3344,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Este T2 vs. mercado",
+                    "left": {
+                        "title": "T2 Cacém",
+                        "points": [
+                            "267.500 €",
+                            "~80 m²",
+                            "~3.344 €/m²"
+                        ]
+                    },
+                    "right": {
+                        "title": "Grande Lisboa (INE 2025)",
+                        "points": [
+                            "Mediana de 3.439 €/m²",
+                            "Todos os 9 concelhos acima da média nacional"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Os preços das casas em Portugal subiram 16,8% em 2025 (INE)",
+                "No 1.º trimestre de 2026 o preço mediano chegou a 2.337 €/m², +19,8% num ano",
+                "Na Grande Lisboa, onde fica Sintra, a mediana foi de 3.439 €/m² em 2025",
+                "As vendas de casas caíram 10,5% no 1.º trimestre de 2026, enquanto os preços continuaram a subir"
+            ],
+            "sources": [
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://www.idealista.pt/news/node/76623",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-disparam-198-no-primeiro-trimestre-procura-recua-105",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y"
+            ]
+        },
+        "suggested": {
+            "title": "T2 remodelado no Cacém a 5 min do comboio | 267.500€",
+            "description": "T2 com cerca de 80 m² num primeiro andar na Rua de Angola, junto ao Mercado do Cacém, a 5 minutos a pé do comboio e a 2 minutos do IC19. Tem sala ampla, cozinha equipada com despensa, varanda fechada para lavandaria, dois quartos amplos com acesso à varanda e casa de banho completa. Foi remodelado há cerca de 10 anos com instalação elétrica e canalização novas, está pronto a habitar e custa 267.500 euros. Para visitar, contacte o Flávio Simões, da IAD Portugal.",
+            "tags": [
+                "T2 Cacém",
+                "casa à venda",
+                "imobiliário",
+                "Sintra",
+                "apartamento remodelado",
+                "IAD Portugal",
+                "comprar casa",
+                "Cacém"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1027560-gvgca",
+    "created_at": "2026-10-16T05:41:41+00:00",
+    "updated_at": "2026-10-16T05:48:05+00:00",
+    "source_path": "clips/uploads/egjhI3lOCcngSOGcwGFUCHJ5YITupUAT6bT0MW8W.mp3",
+    "images": [
+        {
+            "id": "img_a680ab74",
+            "path": "clips/uploads/aODXYMMMCSvqlUyA6nGKRV3ox35dmVI82GiPS6vm.jpg",
+            "description": "Sala ampla vazia com parquet em espinha, abertura para zona de refeições com janela e porta para cozinha.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_08e0614b",
+            "path": "clips/uploads/ZoEFGqnFa7jIA1CaRgOE7HrO1KP6DeqmEDWqlZ80.jpg",
+            "description": "Sala de estar vazia, paredes brancas, candeeiro castanho, parquet em espinha e passagem larga para zona de refeições iluminada.",
+            "name": "01a0c94e43bf747126ea6443c7a2f308.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_60d86b0f",
+            "path": "clips/uploads/7rTVc8wlhlP4Z4EH57UkwBRBKtM3dQppXgswGqjo.jpg",
+            "description": "Zona de refeições com candeeiro em globo branco, vista através da passagem larga para a sala de estar.",
+            "name": "01a0c94e42ffecd15616d98528e85ca5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9cb22293",
+            "path": "clips/uploads/gmPmes6qv62YjcnK9BRjbVKn8mEG4RPS63EKpeyI.jpg",
+            "description": "Sala com parquet, porta aberta à esquerda mostrando cozinha com forno e placa ao fundo.",
+            "name": "01a0c94e45c86172ee0a48d052e7e8fe.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_73c7f9f5",
+            "path": "clips/uploads/D6t52vZu6AKWZqTgEyavLtlKU85mIyYBY6o4ArPN.jpg",
+            "description": "Zona de refeições luminosa com janela larga sobre prédios, parquet em espinha e candeeiro em globo.",
+            "name": "01a0c94e44af0f187e9da7275186463e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0d164a5c",
+            "path": "clips/uploads/uPUywAsib0Y7gV28qcaw3IXhR4qVG4ojXJ5PNJFe.jpg",
+            "description": "Vista frontal da sala: passagem larga para zona de refeições com janela ao fundo, parquet decorado.",
+            "name": "01a0c94e44b5e81f9d081069ab246a14.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ff1dc502",
+            "path": "clips/uploads/RRHA82P42Cg5jrGB3I49LU4b58jXSLb8Lh8HGzNX.jpg",
+            "description": "Vista da janela sobre o bairro do Cacém: prédios, telhados vermelhos, quintais e céu azul limpo.",
+            "name": "01a0c94e45a51533d5b7ce8ac9962220.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_598eb646",
+            "path": "clips/uploads/0AZdXq7O7ytZ3OXkNpjmRFwwY1OFU1W216bTMrcH.jpg",
+            "description": "Corredor com parquet em espinha que leva à casa de banho; à esquerda, sala vazia com candeeiro castanho.",
+            "name": "01a0c94e4962109c8ee4543311eb1d06.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9ffe6157",
+            "path": "clips/uploads/bh23bYEZ4sfxJbQr2vLyslWSFO7GsF7elIZEaHx0.jpg",
+            "description": "Sala ampla dividida em zona de estar e zona de refeições, parquet em espinha, paredes brancas recém-pintadas.",
+            "name": "01a0c94e43e524fe6848043025342954.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0b86332d",
+            "path": "clips/uploads/J9PrId8aztiAzK4YbIL3kb1DOYhOhz6VwTwet1Ke.jpg",
+            "description": "Hall de entrada com porta blindada de trinco antigo, corredor de parquet até à casa de banho ao fundo.",
+            "name": "01a0c94e421694b00778ff6e031879b0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d81f779f",
+            "path": "clips/uploads/juHk6XPOFM0ZWaRzGwMASZSWqAkRNF0fjILqUvTZ.jpg",
+            "description": "Casa de banho completa com banheira, sanita, lavatório de coluna, azulejo cinzento e janela com luz natural.",
+            "name": "01a0c94e4633c61a0ddf30342fa14f40.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f842e5ed",
+            "path": "clips/uploads/CbCucPDIvKgEx8oPMpsvSXvOdLkx0eEiNRcCw2c7.jpg",
+            "description": "Hall de entrada com porta blindada e corredor em parquet de madeira espinhado, portas abertas para as divisões.",
+            "name": "01a0c94e43eafb9f68a4d959a7c67e46.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c2dd40a8",
+            "path": "clips/uploads/3M2rcGM8uxGKu63Wj3EH5ruWYBb67Rp6O05x0n2g.jpg",
+            "description": "Cozinha com móveis de madeira, bancada de granito, placa a gás, forno e acesso à varanda fechada.",
+            "name": "01a0c94e45c66172286b7b1b668c0fa3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6d9a4710",
+            "path": "clips/uploads/Y9q1p9qGnKWDfxnbJc258UXWjPFT876B0aufO4XA.jpg",
+            "description": "Cozinha vista de lado, com lava-loiça inox, placa, forno e portas brancas da despensa ao fundo.",
+            "name": "01a0c94e46993aa999b8243dd6da1128.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dbf07fea",
+            "path": "clips/uploads/EH5xmraLz4eX8mCFtgRkDwgAbLjZkE088wmVBDO4.jpg",
+            "description": "Varanda fechada da cozinha com grandes janelas de alumínio e vista para prédios do Cacém sob céu azul.",
+            "name": "01a0c94e46ccc6764f5a7b01e5e19b6f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ad2bb248",
+            "path": "clips/uploads/P8gOfLR1tYQWuzuOhAT5d6THfnKlpIQY0hdfCJV1.jpg",
+            "description": "Vista da janela da varanda fechada sobre telhados e prédios residenciais do Cacém, dia de céu limpo.",
+            "name": "01a0c94e461676d765ecd96997a94bbd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58ee9f14",
+            "path": "clips/uploads/nyPCWjes21aQZvrtJ49YXfQuP8Hl04XQB6qLP0BQ.jpg",
+            "description": "Varanda fechada para lavandaria, com ponto de água para máquina, ao lado da cozinha azulejada.",
+            "name": "01a0c94e45eb46ca13ac68ef715f6e4f.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_de866081",
+            "path": "clips/uploads/5hp6T7NCisV0OuHEfqhe1EMyALNKsoFDsDnhDN94.jpg",
+            "description": "Cozinha comprida com armários de madeira, bancada de granito, lava-loiça, forno e porta da despensa.",
+            "name": "01a0c94e48c7b6bf74900da76188a3a5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_68d41331",
+            "path": "clips/uploads/l2HzkJBrtjaCU3WUCxxzZGBFo7gZGc4Yrb0rHGFr.jpg",
+            "description": "Cozinha vista de frente, lava-loiça inox e bancada de granito, portas brancas da despensa e corredor ao fundo.",
+            "name": "01a0c94e49b869cbcad894f22a55eb72.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ff9723cb",
+            "path": "clips/uploads/CVIYX4pYKXB9M2CYHVFJrHkbi1HRegWRpiPUPS7Q.jpg",
+            "description": "Cozinha ampla e luminosa com placa a gás, forno preto, armários de madeira e varanda envidraçada.",
+            "name": "01a0c94e48251493a2084be69bdc610a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_60c1b538",
+            "path": "clips/uploads/AMwxZwwMLmNb87KRwklqh6Jke4nHuJ5ToWRrx2Pq.jpg",
+            "description": "Corredor com soalho de madeira em espinha, paredes brancas e portas abertas para os quartos.",
+            "name": "01a0c94e43e86ba48bc126df0df14bd3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1b843ae8",
+            "path": "clips/uploads/woVwooNHu7SxqyIV61Dx7lRb5dly30qxMAFEpfYu.jpg",
+            "description": "Quarto vazio e luminoso com soalho em espinha e portas envidraçadas para a varanda fechada.",
+            "name": "01a0c94e45216f5e653e640e4e5d72fe.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fe34ee2f",
+            "path": "clips/uploads/lYqlX88b0pwYIzeDARURhUlggMoqCm8nMsnda9JW.jpg",
+            "description": "Quarto amplo com soalho em espinha, candeeiro suspenso e portas duplas abertas para a varanda.",
+            "name": "01a0c94e45ddfcec183573e1cec599db.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_efe4e8ce",
+            "path": "clips/uploads/izhbsWVq0Syq2i0iGjkR9yOSAuYAUQPoNrXaKPY7.jpg",
+            "description": "Quarto vazio com sancas no teto, soalho em espinha e porta envidraçada da varanda em primeiro plano.",
+            "name": "01a0c94e43f8f3f3be72520bce154a2c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_63c36f33",
+            "path": "clips/uploads/Hxq0XA5ww6tFFMFVYGSsJ8zQ760HWescsNdXpW0p.jpg",
+            "description": "Quarto com soalho em espinha e porta aberta; ao fundo, vista do corredor até à casa de banho.",
+            "name": "01a0c94e4408df6545aa6f1cca5c5f07.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d06d3196",
+            "path": "clips/uploads/O3Ix9sOLfrsXyMVEf23YmSt513quKqtgaEiglCeN.jpg",
+            "description": "Quarto com acesso à varanda fechada à esquerda, soalho em espinha e porta aberta para o corredor.",
+            "name": "01a0c94e41e1885106eb81d568194b5c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cb576035",
+            "path": "clips/uploads/XHyCfPnAjdStiNasmq4BUtN8iDt0qXTKVuI2xiKg.jpg",
+            "description": "Varanda fechada com chão de mosaico e janelas de alumínio; vista para a rua, árvores e prédios.",
+            "name": "01a0c94e4579d8d8bf8bedb41a17ddd2.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_955fd358",
+            "path": "clips/uploads/Mnh1WaCuJu7LxH13b17QBWGFX04NPKYWrTB2IMx2.jpg",
+            "description": "Fachada do prédio de quatro andares, com marquises envidraçadas; rua com carros estacionados em dia de sol.",
+            "name": "01a0c94e4a2258ca10ae7a1e8d4024eb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_416f9bb1",
+            "path": "clips/uploads/30a7Dig5lnjcGbvRrG1xENCIbAGCxjODnKLKitHy.jpg",
+            "description": "Vista da rua: jardim com pinheiro, prédios residenciais e carros estacionados, junto ao edifício.",
+            "name": "01a0c94e46ead8c8078dbd456dfc02f7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6e213fcb",
+            "path": "clips/uploads/Qmzjv58DzNYHYBUmWaUyBFVMIsHAjxkN7boZZ25Q.jpg",
+            "description": "Sala ampla e vazia com soalho em espinha, porta de entrada à esquerda e portas para a varanda.",
+            "name": "01a0c94e468dd5eb77c02d823a5e2738.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b09c7c50",
+            "path": "clips/uploads/1Ud4AwqZ7AsQSCyQK7fgmopgiqSnOcSsyeAUnfwY.jpg",
+            "description": "Quarto vazio com soalho de madeira em espinha, paredes brancas e portas duplas abertas para a varanda fechada.",
+            "name": "01a0c94e464a0640b93ece28ec462d19.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7323fef1",
+            "path": "clips/uploads/DQalq4bjCuYlxHNr8S037MxfFGX8H3dranGepHli.jpg",
+            "description": "Quarto amplo e vazio, soalho de madeira em espinha com friso, paredes brancas e porta branca entreaberta.",
+            "name": "01a0c94e43622c01d73c1f54028da4b7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a26e2fd3",
+            "path": "clips/uploads/tMcTrD2SNZ953VcQLxFHJQD69iwIo7aAZGHj7OxI.jpg",
+            "description": "Divisão comprida e luminosa, soalho de madeira em espinha, portas envidraçadas abertas para a varanda fechada ao fundo.",
+            "name": "01a0c94e4901925eab9aaa32e16f55ac.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5da92060",
+            "path": "clips/uploads/S6vAs6AUeR433xDUK9l86UuDzsqxBBDENPGzipyl.jpg",
+            "description": "Escadaria do prédio com degraus de mármore, corrimão curvo e porta castanha de entrada do apartamento.",
+            "name": "01a0c94e426b38e3643119ebed70b450.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_74852509",
+            "path": "clips/uploads/WD49dCgy6ny8d0wxOoF3mj08PtxyCVjaVBT7tbLN.jpg",
+            "description": "Átrio de entrada do prédio com paredes de mármore rosa, caixas de correio e porta envidraçada para a rua.",
+            "name": "01a0c94e48148056904b9d73d28e8b66.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_41382f46",
+            "path": "clips/uploads/ktOhuuMFxmmjFxpU8fAJDVJutEK7VNb9EK2s41eK.jpg",
+            "description": "Fachada do prédio na Rua de Angola, nº 22, com varandas fechadas e placa 'Vende-se' no primeiro andar.",
+            "name": "01a0c94e4f4125c4f15c132185292ed2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b98eaa2",
+            "path": "clips/uploads/41jMPQVoYVaDKaIP6FkoO1XALy3cGxM055knc3Wu.jpg",
+            "description": "Vista da rua com prédios residenciais em fila, carros estacionados e céu azul limpo.",
+            "name": "01a0c94e48b068a026f62e92ecf63556.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4a319725",
+            "path": "clips/uploads/k6MKjW3m8uFoUZi18CEsOvwW5T1aYmB333rTm2wl.jpg",
+            "description": "Rua junto à entrada nº 22, com marcação de limite de 30 no asfalto e semáforo ao fundo.",
+            "name": "01a0c94e4fe6b079a8062dfa55816c5d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_22837ca8",
+            "path": "clips/uploads/iITSDJq1u1Lgz6IlDh8txi2QxsEt44gdip8OiNQp.png",
+            "description": "Retrato do consultor Flávio Simões, da IAD Portugal.",
+            "name": "Flávio Simões.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c0ce82db",
+            "path": "clips/uploads/0dylyLycmkZAhQCVF40lO8oPHBvyA7s8eviZJqaP.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/egjhI3lOCcngSOGcwGFUCHJ5YITupUAT6bT0MW8W.mp3",
+    "transcript": {
+        "duration": 40.31999969482422,
+        "text": "Um T2 no Cacém, a 5 minutos a pé do comboio. Fica na Rua de Angola, junto ao Mercado do Cacém. O IC19 está a 2 minutos de carro. Tem cerca de 80 metros num primeiro andar. A sala ampla tem zona de refeições e zona de estar. A cozinha tem placa, forno e dispensa. E uma varanda fechada para lavandaria. Dois quartos amplos com acesso à varanda e uma casa de banho completa. Remodelado há cerca de 10 anos, com nova instalação elétrica e canalização. Pronto a entrar. 267.500 euros. Para visitar, fale com o Flávio Simões, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.14000000059604645
+            },
+            {
+                "word": "T2",
+                "start": 0.14000000059604645,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "no",
+                "start": 0.7200000286102295,
+                "end": 0.9200000166893005
+            },
+            {
+                "word": "Cacém",
+                "start": 0.9200000166893005,
+                "end": 1.2799999713897705
+            },
+            {
+                "word": "a",
+                "start": 1.600000023841858,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "5",
+                "start": 1.8200000524520874,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "minutos",
+                "start": 2.0199999809265137,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "a",
+                "start": 2.359999895095825,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "pé",
+                "start": 2.680000066757202,
+                "end": 2.680000066757202
+            },
+            {
+                "word": "do",
+                "start": 2.680000066757202,
+                "end": 2.819999933242798
+            },
+            {
+                "word": "comboio",
+                "start": 2.819999933242798,
+                "end": 3.319999933242798
+            },
+            {
+                "word": "Fica",
+                "start": 3.940000057220459,
+                "end": 4.019999980926514
+            },
+            {
+                "word": "na",
+                "start": 4.019999980926514,
+                "end": 4.28000020980835
+            },
+            {
+                "word": "Rua",
+                "start": 4.28000020980835,
+                "end": 4.420000076293945
+            },
+            {
+                "word": "de",
+                "start": 4.420000076293945,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "Angola",
+                "start": 4.679999828338623,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "junto",
+                "start": 5.300000190734863,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "ao",
+                "start": 5.559999942779541,
+                "end": 5.71999979019165
+            },
+            {
+                "word": "Mercado",
+                "start": 5.71999979019165,
+                "end": 6.059999942779541
+            },
+            {
+                "word": "do",
+                "start": 6.059999942779541,
+                "end": 6.28000020980835
+            },
+            {
+                "word": "Cacém",
+                "start": 6.28000020980835,
+                "end": 6.599999904632568
+            },
+            {
+                "word": "O",
+                "start": 7.179999828338623,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "IC19",
+                "start": 7.260000228881836,
+                "end": 8.0600004196167
+            },
+            {
+                "word": "está",
+                "start": 8.0600004196167,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "a",
+                "start": 8.359999656677246,
+                "end": 8.600000381469727
+            },
+            {
+                "word": "2",
+                "start": 8.600000381469727,
+                "end": 8.819999694824219
+            },
+            {
+                "word": "minutos",
+                "start": 8.819999694824219,
+                "end": 9.140000343322754
+            },
+            {
+                "word": "de",
+                "start": 9.140000343322754,
+                "end": 9.65999984741211
+            },
+            {
+                "word": "carro",
+                "start": 9.65999984741211,
+                "end": 9.65999984741211
+            },
+            {
+                "word": "Tem",
+                "start": 10.239999771118164,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "cerca",
+                "start": 10.239999771118164,
+                "end": 10.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 10.579999923706055,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "80",
+                "start": 10.880000114440918,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "metros",
+                "start": 11.359999656677246,
+                "end": 11.760000228881836
+            },
+            {
+                "word": "num",
+                "start": 11.760000228881836,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "primeiro",
+                "start": 12.100000381469727,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "andar",
+                "start": 12.420000076293945,
+                "end": 12.760000228881836
+            },
+            {
+                "word": "A",
+                "start": 13.279999732971191,
+                "end": 13.34000015258789
+            },
+            {
+                "word": "sala",
+                "start": 13.34000015258789,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "ampla",
+                "start": 13.579999923706055,
+                "end": 14.100000381469727
+            },
+            {
+                "word": "tem",
+                "start": 14.100000381469727,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "zona",
+                "start": 14.34000015258789,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "de",
+                "start": 14.619999885559082,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "refeições",
+                "start": 14.880000114440918,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "e",
+                "start": 15.34000015258789,
+                "end": 15.699999809265137
+            },
+            {
+                "word": "zona",
+                "start": 15.699999809265137,
+                "end": 15.880000114440918
+            },
+            {
+                "word": "de",
+                "start": 15.880000114440918,
+                "end": 16.15999984741211
+            },
+            {
+                "word": "estar",
+                "start": 16.15999984741211,
+                "end": 16.360000610351562
+            },
+            {
+                "word": "A",
+                "start": 16.8799991607666,
+                "end": 17.040000915527344
+            },
+            {
+                "word": "cozinha",
+                "start": 17.040000915527344,
+                "end": 17.31999969482422
+            },
+            {
+                "word": "tem",
+                "start": 17.31999969482422,
+                "end": 17.65999984741211
+            },
+            {
+                "word": "placa",
+                "start": 17.65999984741211,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "forno",
+                "start": 18.719999313354492,
+                "end": 18.719999313354492
+            },
+            {
+                "word": "e",
+                "start": 18.719999313354492,
+                "end": 19
+            },
+            {
+                "word": "dispensa",
+                "start": 19,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "E",
+                "start": 19.8799991607666,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "uma",
+                "start": 20.100000381469727,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "varanda",
+                "start": 20.239999771118164,
+                "end": 20.479999542236328
+            },
+            {
+                "word": "fechada",
+                "start": 20.479999542236328,
+                "end": 20.940000534057617
+            },
+            {
+                "word": "para",
+                "start": 20.940000534057617,
+                "end": 21.239999771118164
+            },
+            {
+                "word": "lavandaria",
+                "start": 21.239999771118164,
+                "end": 21.799999237060547
+            },
+            {
+                "word": "Dois",
+                "start": 22.5,
+                "end": 22.6200008392334
+            },
+            {
+                "word": "quartos",
+                "start": 22.6200008392334,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "amplos",
+                "start": 23.079999923706055,
+                "end": 23.540000915527344
+            },
+            {
+                "word": "com",
+                "start": 23.540000915527344,
+                "end": 23.760000228881836
+            },
+            {
+                "word": "acesso",
+                "start": 23.760000228881836,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "à",
+                "start": 24.100000381469727,
+                "end": 24.280000686645508
+            },
+            {
+                "word": "varanda",
+                "start": 24.280000686645508,
+                "end": 24.6200008392334
+            },
+            {
+                "word": "e",
+                "start": 24.6200008392334,
+                "end": 25.079999923706055
+            },
+            {
+                "word": "uma",
+                "start": 25.079999923706055,
+                "end": 25.34000015258789
+            },
+            {
+                "word": "casa",
+                "start": 25.34000015258789,
+                "end": 25.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 25.479999542236328,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "banho",
+                "start": 25.860000610351562,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "completa",
+                "start": 25.860000610351562,
+                "end": 26.459999084472656
+            },
+            {
+                "word": "Remodelado",
+                "start": 26.459999084472656,
+                "end": 27.459999084472656
+            },
+            {
+                "word": "há",
+                "start": 27.459999084472656,
+                "end": 27.6200008392334
+            },
+            {
+                "word": "cerca",
+                "start": 27.6200008392334,
+                "end": 27.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 27.920000076293945,
+                "end": 28.280000686645508
+            },
+            {
+                "word": "10",
+                "start": 28.280000686645508,
+                "end": 28.440000534057617
+            },
+            {
+                "word": "anos",
+                "start": 28.440000534057617,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "com",
+                "start": 28.979999542236328,
+                "end": 29.1200008392334
+            },
+            {
+                "word": "nova",
+                "start": 29.1200008392334,
+                "end": 29.3799991607666
+            },
+            {
+                "word": "instalação",
+                "start": 29.3799991607666,
+                "end": 29.84000015258789
+            },
+            {
+                "word": "elétrica",
+                "start": 29.84000015258789,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "e",
+                "start": 30.440000534057617,
+                "end": 30.719999313354492
+            },
+            {
+                "word": "canalização",
+                "start": 30.719999313354492,
+                "end": 31.31999969482422
+            },
+            {
+                "word": "Pronto",
+                "start": 32.220001220703125,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "a",
+                "start": 32.220001220703125,
+                "end": 32.41999816894531
+            },
+            {
+                "word": "entrar",
+                "start": 32.41999816894531,
+                "end": 32.7400016784668
+            },
+            {
+                "word": "267",
+                "start": 34.060001373291016,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "500",
+                "start": 34.720001220703125,
+                "end": 35.380001068115234
+            },
+            {
+                "word": "euros",
+                "start": 35.380001068115234,
+                "end": 35.959999084472656
+            },
+            {
+                "word": "Para",
+                "start": 36.31999969482422,
+                "end": 36.41999816894531
+            },
+            {
+                "word": "visitar",
+                "start": 36.41999816894531,
+                "end": 37.02000045776367
+            },
+            {
+                "word": "fale",
+                "start": 37.400001525878906,
+                "end": 37.400001525878906
+            },
+            {
+                "word": "com",
+                "start": 37.400001525878906,
+                "end": 37.599998474121094
+            },
+            {
+                "word": "o",
+                "start": 37.599998474121094,
+                "end": 37.779998779296875
+            },
+            {
+                "word": "Flávio",
+                "start": 37.779998779296875,
+                "end": 38.040000915527344
+            },
+            {
+                "word": "Simões",
+                "start": 38.040000915527344,
+                "end": 38.63999938964844
+            },
+            {
+                "word": "da",
+                "start": 38.81999969482422,
+                "end": 39.02000045776367
+            },
+            {
+                "word": "IAD",
+                "start": 39.02000045776367,
+                "end": 39.439998626708984
+            },
+            {
+                "word": "de",
+                "start": 39.439998626708984,
+                "end": 39.779998779296875
+            },
+            {
+                "word": "Portugal",
+                "start": 39.779998779296875,
+                "end": 40.08000183105469
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 40.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.8000000000000007,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 A 5 MIN DO COMBOIO",
+                        "params": {
+                            "src": "img_41382f46",
+                            "avatar": "img_22837ca8",
+                            "logo": "img_c0ce82db",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "267.500 €",
+                            "location": "CACÉM · RUA DE ANGOLA",
+                            "title": "T2 NO CACÉM",
+                            "facts": "80,8 m² · 2 quartos · 1 WC · 2 varandas",
+                            "cta": "Ligue já +351 968 491 066",
+                            "name": "Flávio Simões",
+                            "logoText": "IAD",
+                            "logoSub": "PORTUGAL",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.8000000000000007,
+                "end": 7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "JUNTO AO MERCADO",
+                        "params": {
+                            "src": "img_955fd358",
+                            "src2": "img_416f9bb1",
+                            "src3": "img_3b98eaa2",
+                            "src4": "img_4a319725"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7,
+                "end": 10,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "IC19 A 2 MINUTOS",
+                        "params": {
+                            "src": "img_ff1dc502",
+                            "src2": "img_ad2bb248"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10,
+                "end": 13.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "CERCA DE 80 M²",
+                        "params": {
+                            "src": "img_74852509",
+                            "src2": "img_5da92060",
+                            "src3": "img_0b86332d",
+                            "src4": "img_f842e5ed"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.1,
+                "end": 16.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA AMPLA",
+                        "params": {
+                            "src": "img_a680ab74",
+                            "src2": "img_08e0614b",
+                            "src3": "img_9ffe6157",
+                            "src4": "img_0d164a5c",
+                            "src5": "img_6e213fcb"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.7,
+                "end": 19.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "COZINHA COM DESPENSA",
+                        "params": {
+                            "src": "img_c2dd40a8",
+                            "src2": "img_6d9a4710",
+                            "src3": "img_de866081",
+                            "src4": "img_68d41331"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.7,
+                "end": 22.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_58ee9f14",
+                            "title": "LAVANDARIA FECHADA",
+                            "items": [
+                                "Varanda fechada",
+                                "Ponto de água",
+                                "Vista desafogada"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.3,
+                "end": 25,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "DOIS QUARTOS",
+                        "params": {
+                            "src": "img_1b843ae8",
+                            "src2": "img_fe34ee2f",
+                            "src3": "img_efe4e8ce",
+                            "src4": "img_d06d3196",
+                            "src5": "img_b09c7c50"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25,
+                "end": 27,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "CASA DE BANHO COMPLETA",
+                        "params": {
+                            "src": "img_d81f779f",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27,
+                "end": 29,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "REMODELADO",
+                        "params": {
+                            "src": "img_a26e2fd3",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29,
+                "end": 31.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "INSTALAÇÕES NOVAS",
+                        "params": {
+                            "src": "img_60d86b0f",
+                            "src2": "img_73c7f9f5",
+                            "src3": "img_9cb22293",
+                            "src4": "img_598eb646"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.8,
+                "end": 33.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "PRONTO A ENTRAR",
+                        "params": {
+                            "src": "img_60c1b538",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.9,
+                "end": 36.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "267.500 €",
+                        "params": {
+                            "src": "img_ff9723cb",
+                            "src2": "img_dbf07fea",
+                            "src3": "img_cb576035",
+                            "src4": "img_63c36f33",
+                            "src5": "img_7323fef1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.2,
+                "end": 40.31999969482422,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Flávio Simões",
+                        "params": {
+                            "src": "img_22837ca8",
+                            "name": "Flávio Simões",
+                            "phone": "+351 968 491 066",
+                            "email": "flavio.simoes@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1027560-gvgca/clip.mp4",
+    "error": null
+}

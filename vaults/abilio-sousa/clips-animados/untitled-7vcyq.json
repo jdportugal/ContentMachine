@@ -1,0 +1,1126 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T5 em Valbom, a 6 minutos do Dragão",
+    "source_text": null,
+    "source_path": "clips/uploads/xxvKk0B8yHpHznml5Tnbs1mZekVdb1OixCIxXTxM.mp3",
+    "images": [
+        {
+            "id": "img_a2aaf7ef",
+            "path": "clips/uploads/GeBX7Vv7Qaj0vcNmDxSmqEr8T6BA51P2aXEj3BED.jpg",
+            "description": "Hall de entrada com porta dupla em madeira escura trabalhada e chão em tijoleira terracota.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_435e939d",
+            "path": "clips/uploads/RzJf3u9hvax36PoQHh8BULoKlTRiJaIiUADLxfYS.jpg",
+            "description": "Sótão amplo com estantes em madeira, claraboia, janela basculante e escada com corrimão torneado.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_da516722",
+            "path": "clips/uploads/tMwm5ypeWR4dqF0qhruiW9viCvIFaOoRpIJSIBp9.jpg",
+            "description": "Quarto com paredes amarelas, roupeiro embutido em madeira, soalho de parquet e janela grande com cortinados.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9484528f",
+            "path": "clips/uploads/Z34ezNLePIIIBO1k6Lb9P1LeAHRrq9CtmoHhydrm.jpg",
+            "description": "Sótão amplo e luminoso, chão em mosaico branco, claraboia, janela alongada e escada com corrimão.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_20b6d890",
+            "path": "clips/uploads/gzPWDBgA6mheHxKy08ji4EhiuzNKnJPFWAy2TK1A.jpg",
+            "description": "Vista aérea de drone do bairro residencial, com campos de futebol, estufas e rio Douro ao fundo.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2bd08248",
+            "path": "clips/uploads/wQ1w61pyw8xrPWjdoF6zJX4z0rofrNN9CVwGz2sV.jpg",
+            "description": "Cozinha com azulejos azuis tradicionais, armários em madeira, fogão inox e mesa de refeições.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1fec5b9d",
+            "path": "clips/uploads/fsKLnqhcrtYhm9FTLvJp1wrfwkiPIHUsyu5tIgKn.jpg",
+            "description": "Sala de estar e jantar ampla, mesa com toalha vermelha, cadeiras verdes, sofás e janelas grandes.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c30fb64a",
+            "path": "clips/uploads/45rjYf1BTW6jH5lUZBeGukoLBeDByzSBEHdxHuAW.jpg",
+            "description": "Pátio exterior em tijoleira junto à fachada rosa, portão da garagem, cesto de basquetebol e vegetação.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b8c3e8d3",
+            "path": "clips/uploads/yGio4hTvMjyhVWQYbHuqE1qZxw5SUMLRQ3dbV0CN.jpg",
+            "description": "Vista aérea da moradia rosa com painéis solares no telhado, jardim lateral e rua em curva.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_132f96ac",
+            "path": "clips/uploads/K1RrS4GJeCZ2SgWSqS11UMBMUcyyTtKSh74mJCBt.jpg",
+            "description": "Vista aérea com legendas: moradia, Ponte do Freixo e Estádio do Dragão, rio Douro e cidade.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_54453981",
+            "path": "clips/uploads/N1cOzFfUGhOIHdQMHEPxny7SGrgKsBDMBywLuiRG.jpg",
+            "description": "Vista aérea zenital da moradia de esquina: telhado laranja com painéis solares, jardim envolvente e ruas.",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8af34abf",
+            "path": "clips/uploads/f7BUT9OE94m4Mk7OWPZZ1oNrEuNPzMIquHITvt14.jpg",
+            "description": "Vista aérea da moradia rosa com três frentes, jardim, bairro residencial e estádio ao fundo.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0980e639",
+            "path": "clips/uploads/gcVFEOiueXvI5bOiBY2Tnnn5qjH1c9bBmT1Yma13.png",
+            "description": "Logótipo RE/MAX Collection Vintage: balão prateado e letras brancas sobre fundo azul-escuro.",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_d4feda50",
+            "path": "clips/uploads/mPw8wiLJU7C8BrHNTsAbsEZcT24uqGMr5Hq4PTZF.jpg",
+            "description": "Retrato da agente Elsa Silva, RE/MAX, cabelo loiro comprido, casaco escuro, fundo azul com ponte.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_00261a4c",
+            "path": "clips/uploads/81rmbC97Z1Y1MOmH4VN1kuqpGzmndAKoPlzJyc6G.jpg",
+            "description": "Hall interior com azulejos azuis tradicionais, chão de tijoleira, portas de madeira e escadaria.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_af80f269",
+            "path": "clips/uploads/edcIbLX3Q9OK9XJilbqs8OsHdjsx3lB4Geg12MXj.jpg",
+            "description": "Pátio traseiro com portão da garagem na cave, tabela de basquetebol e escadas exteriores.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_98877f3a",
+            "path": "clips/uploads/WP0swZyKwos6dNBTzPXzRuwkvmlkRKDef2L7yjft.jpg",
+            "description": "Exterior lateral: grande janela envidraçada, degraus em tijoleira e caminho sob romãzeira.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e21b69ce",
+            "path": "clips/uploads/TtW6HSp6MVjBoleSUbuEjnmfciJCB2v5NMdj9Mf7.jpg",
+            "description": "Jardim com árvores, pequeno lago com pedras e caminho ladrilhado junto à fachada envidraçada.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e768788a",
+            "path": "clips/uploads/7Js9KtOdKCWdWq4zmvni7XZVqMsmyFS5xSDFywon.jpg",
+            "description": "Entrada exterior com portão, caminho ladrilhado ladeado por hortênsias e flores coloridas, céu azul.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_09a1a329",
+            "path": "clips/uploads/BKbFfBx8v57oEeqJ6D9WAclduH8p0VaNyYuwftRw.jpg",
+            "description": "Varanda coberta rosa com vista para moradias vizinhas e vegetação, céu com nuvens.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d7d58fd7",
+            "path": "clips/uploads/pDimYWVkooUefiBWltNS9LyZnALXX2UVbRPcISTn.jpg",
+            "description": "Quarto com roupeiro embutido em madeira maciça, porta de varanda com cortinados e soalho de madeira brilhante.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ceefa2e0",
+            "path": "clips/uploads/vvmNSUzRYoW8UdWxpl3eTvSzig7IkNF6msdJOFDw.jpg",
+            "description": "Quarto vazio e luminoso, paredes claras, janela com cortinado rendado e soalho de madeira.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1c8cadad",
+            "path": "clips/uploads/qtWJ1vCqPFwjSmEaxk44aA8W9Nk2FpTB45lmW3AQ.jpg",
+            "description": "Patamar com escadaria em madeira torneada que sobe ao sótão, chão em tijoleira e acesso aos quartos.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b4f1f2e0",
+            "path": "clips/uploads/zOR5n7lJGPLh8C79zuYhxd0cN02QndDopHFjtfnT.jpg",
+            "description": "Casa de banho pequena com azulejo bege floral, lavatório, sanita e base de duche com vidro.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8a9a5bd1",
+            "path": "clips/uploads/5rcOMsPjXVg1iEEwGoPWSrjDmj8P1Cilnsbr8bZf.jpg",
+            "description": "Suite ampla e luminosa com ar condicionado, porta envidraçada para varanda com vegetação e soalho de madeira.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ef7a04a9",
+            "path": "clips/uploads/tSZ5jWnC72kKjV5aY49ZVnmXqGysGmqtjmeoFLwn.jpg",
+            "description": "Quarto ou sala ampla vazia, paredes creme, janela com cortinado e soalho de madeira brilhante.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cbd1f364",
+            "path": "clips/uploads/qn60DAd5QgQvGRCzqhMTarijnftsxC81TZYdcMRV.jpg",
+            "description": "Casa de banho completa com loiças azuis, banheira com resguardo, bidé e espelho arredondado.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8fca9464",
+            "path": "clips/uploads/Yqrag3QwOdPYU7Xvrm8FMYzB7eP28KgxgHz1i2v1.jpg",
+            "description": "Quarto com paredes amarelas, janela com cortinado, focos de parede e soalho de madeira.",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3ff6c1a5",
+            "path": "clips/uploads/ICwfQrg8HfKiju5sHgOmq62p2WeJ0dwaIee2ASuP.jpg",
+            "description": "Casa de banho de apoio com duche, banco rebatível, barras de apoio e móvel lavatório em madeira.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Use the \"main.jpg\" as the image in the intro animation. Here are the house details:\nMoradia T5 com 3 Frentes em Valbom, Gondomar – Espaço, Conforto e Localização Privilegiada \n\nDescubra esta fantástica moradia T5 em Valbom, Gondomar, com três frentes, excelente exposição solar e uma combinação perfeita entre espaço e localização. \n\nCaracterísticas Principais:  \n\n5 quartos, incluindo 1 suíte ampla e luminosa \n4 casas de banho distribuídas de forma funcional \nCave completa com:   \nLugar de garagem \nSalão espaçoso ideal para convívio, ginásio ou zona de lazer \nCasa de banho de apoio  \nSótão amplo, com múltiplas possibilidades de aproveitamento \nPainéis solares, garantindo maior eficiência energética \nJardim exterior, perfeito para momentos ao ar livre \nLocalização  \n\nZona residencial calma e bem servida de comércio e serviços \nA 6 minutos do Metro do Estádio do Dragão \nBons acessos às principais vias, facilitando deslocações rápidas para o Porto,\nGondomar e circundantes \nVenha conhecer esta oportunidade única e surpreenda-se com o espaço, a luz e o potencial desta moradia.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T5 em Valbom, Gondomar, e o mercado imobiliário local",
+            "summary": "Em 2025, Gondomar esteve entre os concelhos do país onde o preço das casas mais subiu: cerca de 31%, bem acima da média nacional. A futura linha de metro Dragão–Souto vai ter uma estação em Valbom.",
+            "timeline": [
+                {
+                    "label": "Preço das casas em Gondomar sobe 31,3%",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional chega aos 2.076 €/m² (INE)",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Linha de metro Dragão–Souto em consulta pública",
+                    "sublabel": "5 ago – 15 set 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Subida do preço das casas em Gondomar",
+                    "value": 31.3,
+                    "unit": "% (2025)"
+                },
+                {
+                    "label": "Subida média do preço das casas em Portugal",
+                    "value": 23.4,
+                    "unit": "% (2025)"
+                },
+                {
+                    "label": "Preço mediano das casas vendidas em Portugal (INE)",
+                    "value": 2076,
+                    "unit": "€/m² (2025)"
+                },
+                {
+                    "label": "Subida do preço mediano em Portugal (INE)",
+                    "value": 16.8,
+                    "unit": "% (2025)"
+                },
+                {
+                    "label": "Extensão da futura linha de metro Dragão–Souto",
+                    "value": 6.9,
+                    "unit": "km"
+                },
+                {
+                    "label": "Estações da linha Dragão–Souto",
+                    "value": 9,
+                    "unit": "estações"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Valorização em 2025",
+                    "left": {
+                        "title": "Gondomar",
+                        "points": [
+                            "+31,3%",
+                            "Entre os concelhos que mais subiram no país"
+                        ]
+                    },
+                    "right": {
+                        "title": "Média nacional",
+                        "points": [
+                            "+23,4%",
+                            "Maior subida anual desde 1988"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Gondomar registou uma das maiores valorizações da Área Metropolitana do Porto em 2025",
+                "A futura linha de metro Dragão–Souto prevê uma estação em Valbom",
+                "São 6 estações novas no concelho de Gondomar: Lagoa, Valbom, Hospital Fernando Pessoa, Cosme Ferreira Castro, Oliveira Martins e Souto",
+                "Segundo o INE, o preço mediano das casas vendidas em Portugal subiu 16,8% em 2025"
+            ],
+            "sources": [
+                "https://www.jornalnovoregional.pt/2026/01/santo-tirso-e-gondomar-lideram-subida-historica-no-preco-das-casas-em-2025/",
+                "https://executivedigest.sapo.pt/preco-das-casas-em-portugal-regista-aumento-recorde-de-quase-24-em-2025-quais-os-municipios-que-mais-subiram/",
+                "https://diarioimobiliario.pt/Precos-das-casas-registaram-subida-recorde-de-23-4-em-2025",
+                "https://www.construir.pt/2026/01/16/precos-das-casas-registaram-subida-recorde-de-234-em-2025",
+                "https://rr.pt/noticia/economia/2026/01/16/preco-das-casas-ja-nao-subia-tanto-desde-1988/455509/",
+                "https://www.idealista.pt/news/imobiliario/habitacao/2026/04/24/75156-precos-das-casas-sobem-16-8-em-2025-para-2-076-euros-por-m2",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://observador.pt/2026/08/05/estudo-da-nova-linha-do-metro-do-porto-para-gondomar-em-consulta-publica-ate-15-setembro/",
+                "https://www.cm-gondomar.pt/projeto-da-futura-linha-de-metro-dragao-souto-em-consulta-publica-ate-15-de-setembro/",
+                "https://averdade.com/8542543738/com-nove-estacoes-e-69-quilometros-futura-linha-dragaosouto-preve-tres-anos-de-obras-em-gondomar/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T5 em Valbom, a 6 minutos do Dragão",
+            "description": "Moradia com três frentes e muita luz em Valbom, Gondomar, numa zona residencial calma com comércio e serviços à porta. Tem cinco quartos, um deles suite, quatro casas de banho, cave com garagem e salão, sótão amplo, painéis solares e jardim. Por 450 mil euros. Para visitar, fale com a Elsa Silva, da RE/MAX Collection Vintage.",
+            "tags": [
+                "moradia",
+                "Valbom",
+                "Gondomar",
+                "imobiliário",
+                "casa à venda",
+                "Porto",
+                "T5",
+                "RE/MAX"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "untitled-7vcyq",
+    "created_at": "2026-10-01T13:40:16+00:00",
+    "updated_at": "2026-10-01T13:51:33+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/xxvKk0B8yHpHznml5Tnbs1mZekVdb1OixCIxXTxM.mp3",
+    "transcript": {
+        "duration": 37.720001220703125,
+        "text": "Cinco quartos a seis minutos do Dragão. Esta moradia em Valbon, Gondemar, tem três frentes, muita luz e uma zona residencial calma, com comércio e serviços à porta. São cinco quartos, um deles suite ampla e luminosa e quatro casas de banho. Na cave, garagem, um salão para convívio, ginásio ou lazer e casa de banho de apoio. Em cima, um sótão amplo, pronto para o que imaginar. Paineis solares, jardim e acessos rápidos ao porto e a Gondemar. 450 mil euros. Para visitar, fale com a Elsa Silva, da Remax Collection Vintage.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Cinco",
+                "start": 0,
+                "end": 0.4399999976158142
+            },
+            {
+                "word": "quartos",
+                "start": 0.4399999976158142,
+                "end": 0.8799999952316284
+            },
+            {
+                "word": "a",
+                "start": 0.8799999952316284,
+                "end": 1.159999966621399
+            },
+            {
+                "word": "seis",
+                "start": 1.159999966621399,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "minutos",
+                "start": 1.3799999952316284,
+                "end": 1.7200000286102295
+            },
+            {
+                "word": "do",
+                "start": 1.7200000286102295,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "Dragão.",
+                "start": 1.899999976158142,
+                "end": 2.559999942779541
+            },
+            {
+                "word": "Esta",
+                "start": 2.880000114440918,
+                "end": 3.0799999237060547
+            },
+            {
+                "word": "moradia",
+                "start": 3.0799999237060547,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "em",
+                "start": 3.4600000381469727,
+                "end": 3.640000104904175
+            },
+            {
+                "word": "Valbon,",
+                "start": 3.640000104904175,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "Gondemar,",
+                "start": 4.260000228881836,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "tem",
+                "start": 5.059999942779541,
+                "end": 5.119999885559082
+            },
+            {
+                "word": "três",
+                "start": 5.119999885559082,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "frentes,",
+                "start": 5.519999980926514,
+                "end": 6
+            },
+            {
+                "word": "muita",
+                "start": 6.460000038146973,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "luz",
+                "start": 6.639999866485596,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "e",
+                "start": 6.960000038146973,
+                "end": 7.199999809265137
+            },
+            {
+                "word": "uma",
+                "start": 7.199999809265137,
+                "end": 7.559999942779541
+            },
+            {
+                "word": "zona",
+                "start": 7.559999942779541,
+                "end": 7.559999942779541
+            },
+            {
+                "word": "residencial",
+                "start": 7.559999942779541,
+                "end": 8.119999885559082
+            },
+            {
+                "word": "calma,",
+                "start": 8.119999885559082,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "com",
+                "start": 8.899999618530273,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "comércio",
+                "start": 9.039999961853027,
+                "end": 9.5
+            },
+            {
+                "word": "e",
+                "start": 9.5,
+                "end": 9.760000228881836
+            },
+            {
+                "word": "serviços",
+                "start": 9.760000228881836,
+                "end": 10.119999885559082
+            },
+            {
+                "word": "à",
+                "start": 10.119999885559082,
+                "end": 10.65999984741211
+            },
+            {
+                "word": "porta.",
+                "start": 10.65999984741211,
+                "end": 10.65999984741211
+            },
+            {
+                "word": "São",
+                "start": 11.260000228881836,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "cinco",
+                "start": 11.359999656677246,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "quartos,",
+                "start": 11.819999694824219,
+                "end": 12.260000228881836
+            },
+            {
+                "word": "um",
+                "start": 12.600000381469727,
+                "end": 12.739999771118164
+            },
+            {
+                "word": "deles",
+                "start": 12.739999771118164,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "suite",
+                "start": 13.100000381469727,
+                "end": 13.579999923706055
+            },
+            {
+                "word": "ampla",
+                "start": 13.579999923706055,
+                "end": 14
+            },
+            {
+                "word": "e",
+                "start": 14,
+                "end": 14.34000015258789
+            },
+            {
+                "word": "luminosa",
+                "start": 14.34000015258789,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "e",
+                "start": 14.640000343322754,
+                "end": 15.079999923706055
+            },
+            {
+                "word": "quatro",
+                "start": 15.079999923706055,
+                "end": 15.399999618530273
+            },
+            {
+                "word": "casas",
+                "start": 15.399999618530273,
+                "end": 15.680000305175781
+            },
+            {
+                "word": "de",
+                "start": 15.680000305175781,
+                "end": 16.040000915527344
+            },
+            {
+                "word": "banho.",
+                "start": 16.040000915527344,
+                "end": 16.040000915527344
+            },
+            {
+                "word": "Na",
+                "start": 16.65999984741211,
+                "end": 16.8799991607666
+            },
+            {
+                "word": "cave,",
+                "start": 16.8799991607666,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "garagem,",
+                "start": 17.559999465942383,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "um",
+                "start": 18.34000015258789,
+                "end": 18.68000030517578
+            },
+            {
+                "word": "salão",
+                "start": 18.68000030517578,
+                "end": 18.68000030517578
+            },
+            {
+                "word": "para",
+                "start": 18.68000030517578,
+                "end": 18.940000534057617
+            },
+            {
+                "word": "convívio,",
+                "start": 18.940000534057617,
+                "end": 19.459999084472656
+            },
+            {
+                "word": "ginásio",
+                "start": 20.040000915527344,
+                "end": 20.239999771118164
+            },
+            {
+                "word": "ou",
+                "start": 20.239999771118164,
+                "end": 20.440000534057617
+            },
+            {
+                "word": "lazer",
+                "start": 20.440000534057617,
+                "end": 20.760000228881836
+            },
+            {
+                "word": "e",
+                "start": 20.760000228881836,
+                "end": 21.239999771118164
+            },
+            {
+                "word": "casa",
+                "start": 21.239999771118164,
+                "end": 21.440000534057617
+            },
+            {
+                "word": "de",
+                "start": 21.440000534057617,
+                "end": 21.719999313354492
+            },
+            {
+                "word": "banho",
+                "start": 21.719999313354492,
+                "end": 21.719999313354492
+            },
+            {
+                "word": "de",
+                "start": 21.719999313354492,
+                "end": 21.979999542236328
+            },
+            {
+                "word": "apoio.",
+                "start": 21.979999542236328,
+                "end": 22.299999237060547
+            },
+            {
+                "word": "Em",
+                "start": 22.8799991607666,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "cima,",
+                "start": 23.079999923706055,
+                "end": 23.31999969482422
+            },
+            {
+                "word": "um",
+                "start": 23.6200008392334,
+                "end": 23.84000015258789
+            },
+            {
+                "word": "sótão",
+                "start": 23.84000015258789,
+                "end": 24.18000030517578
+            },
+            {
+                "word": "amplo,",
+                "start": 24.18000030517578,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "pronto",
+                "start": 24.940000534057617,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "para",
+                "start": 25.020000457763672,
+                "end": 25.219999313354492
+            },
+            {
+                "word": "o",
+                "start": 25.219999313354492,
+                "end": 25.34000015258789
+            },
+            {
+                "word": "que",
+                "start": 25.34000015258789,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "imaginar.",
+                "start": 25.520000457763672,
+                "end": 25.920000076293945
+            },
+            {
+                "word": "Paineis",
+                "start": 25.920000076293945,
+                "end": 26.84000015258789
+            },
+            {
+                "word": "solares,",
+                "start": 26.84000015258789,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "jardim",
+                "start": 27.780000686645508,
+                "end": 28.079999923706055
+            },
+            {
+                "word": "e",
+                "start": 28.079999923706055,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "acessos",
+                "start": 28.520000457763672,
+                "end": 28.8799991607666
+            },
+            {
+                "word": "rápidos",
+                "start": 28.8799991607666,
+                "end": 29.280000686645508
+            },
+            {
+                "word": "ao",
+                "start": 29.280000686645508,
+                "end": 29.520000457763672
+            },
+            {
+                "word": "porto",
+                "start": 29.520000457763672,
+                "end": 29.8799991607666
+            },
+            {
+                "word": "e",
+                "start": 29.8799991607666,
+                "end": 30.040000915527344
+            },
+            {
+                "word": "a",
+                "start": 30.040000915527344,
+                "end": 30.219999313354492
+            },
+            {
+                "word": "Gondemar.",
+                "start": 30.219999313354492,
+                "end": 30.559999465942383
+            },
+            {
+                "word": "450",
+                "start": 31.280000686645508,
+                "end": 31.81999969482422
+            },
+            {
+                "word": "mil",
+                "start": 31.81999969482422,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "euros.",
+                "start": 32.47999954223633,
+                "end": 32.900001525878906
+            },
+            {
+                "word": "Para",
+                "start": 33.540000915527344,
+                "end": 33.540000915527344
+            },
+            {
+                "word": "visitar,",
+                "start": 33.540000915527344,
+                "end": 34.279998779296875
+            },
+            {
+                "word": "fale",
+                "start": 34.58000183105469,
+                "end": 34.58000183105469
+            },
+            {
+                "word": "com",
+                "start": 34.58000183105469,
+                "end": 34.7400016784668
+            },
+            {
+                "word": "a",
+                "start": 34.7400016784668,
+                "end": 34.880001068115234
+            },
+            {
+                "word": "Elsa",
+                "start": 34.880001068115234,
+                "end": 35.08000183105469
+            },
+            {
+                "word": "Silva,",
+                "start": 35.08000183105469,
+                "end": 35.58000183105469
+            },
+            {
+                "word": "da",
+                "start": 35.84000015258789,
+                "end": 36
+            },
+            {
+                "word": "Remax",
+                "start": 36,
+                "end": 36.400001525878906
+            },
+            {
+                "word": "Collection",
+                "start": 36.400001525878906,
+                "end": 36.91999816894531
+            },
+            {
+                "word": "Vintage.",
+                "start": 36.91999816894531,
+                "end": 37.439998626708984
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.720001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.6999999999999993,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia T5 a 6 min do Dragão",
+                        "params": {
+                            "src": "img_8af34abf",
+                            "avatar": "img_d4feda50",
+                            "logo": "img_0980e639",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T5 com 3 frentes",
+                            "location": "Valbom, Gondomar · 5 quartos · 4 WC",
+                            "price": "450.000 €",
+                            "agentName": "Elsa Silva",
+                            "phone": "+351 917 933 235",
+                            "legal": "RE/MAX Collection Vintage"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.6999999999999993,
+                "end": 8.7,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_54453981",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.7,
+                "end": 11.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_20b6d890",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.2,
+                "end": 14.64,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Cinco quartos e suite",
+                        "params": {
+                            "src": "img_8a9a5bd1",
+                            "src2": "img_da516722",
+                            "src3": "img_d7d58fd7",
+                            "src4": "img_ceefa2e0",
+                            "src5": "img_8fca9464"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.64,
+                "end": 16.66,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "4 casas de banho",
+                        "params": {
+                            "src": "img_cbd1f364",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.66,
+                "end": 20.76,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Cave completa",
+                        "params": {
+                            "src": "img_af80f269",
+                            "title": "Cave completa",
+                            "items": [
+                                "Lugar de garagem",
+                                "Salão de convívio",
+                                "Ginásio ou lazer"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.76,
+                "end": 22.88,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_3ff6c1a5",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.1
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.88,
+                "end": 25.92,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Sótão amplo",
+                        "params": {
+                            "src": "img_1c8cadad",
+                            "src2": "img_435e939d",
+                            "src3": "img_9484528f",
+                            "src4": "img_09a1a329",
+                            "src5": "img_ef7a04a9"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.92,
+                "end": 28.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Painéis solares e jardim",
+                        "params": {
+                            "src": "img_b8c3e8d3",
+                            "src2": "img_e21b69ce",
+                            "src3": "img_e768788a",
+                            "src4": "img_98877f3a",
+                            "src5": "img_c30fb64a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.5,
+                "end": 31.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_132f96ac",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.2,
+                "end": 33.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "450.000 €",
+                        "params": {
+                            "src": "img_1fec5b9d",
+                            "src2": "img_2bd08248",
+                            "src3": "img_00261a4c",
+                            "src4": "img_a2aaf7ef",
+                            "src5": "img_b4f1f2e0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.5,
+                "end": 37.72,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_d4feda50",
+                            "logo": "img_0980e639",
+                            "name": "Elsa Silva",
+                            "role": "Consultora imobiliária · RE/MAX Collection Vintage",
+                            "buttons": "+351 917 933 235 | Marque a sua visita",
+                            "phone": "+351 917 933 235"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-7vcyq/clip.mp4",
+    "error": null
+}

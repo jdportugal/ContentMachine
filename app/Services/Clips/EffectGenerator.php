@@ -33,21 +33,26 @@ class EffectGenerator
      *                                                                                  the component lays out for the wrong shape.
      * @param  string|null  $siteCapture  absolute path to a scroll-capture mp4 of a real website; when
      *                                    given the component must PLAY it rather than mock up a browser
+     * @param  string|null  $reference  absolute path to a mockup of the FINAL frame; when given the
+     *                                  effect is a TEMPLATE that rebuilds that layout from its params
      * @return array{slug:string,display_name:string,description:string,param_schema:string,sample_text:string,sample_params:array,tsx:string}
      *
      * @throws RuntimeException on malformed output or a design-system violation
      */
-    public function generate(string $description, ?string $keepSlug = null, array $canvas = [], ?string $siteCapture = null): array
+    public function generate(string $description, ?string $keepSlug = null, array $canvas = [], ?string $siteCapture = null, ?string $reference = null): array
     {
         // If this OVERRIDES a built-in, the component must read the SAME params
         // the planner sends that built-in — otherwise clips using it render blank.
         $builtin = $keepSlug !== null ? strtolower(trim($keepSlug)) : '';
         $overrideSlug = array_key_exists($builtin, EffectLibrary::BUILTIN_SAMPLES) ? $builtin : null;
 
+        $template = $reference !== null && is_file($reference);
+
         $envelope = $this->runClaude(
             $this->userPrompt($description, $overrideSlug),
-            $this->systemPrompt($canvas, $siteCapture),
-            ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true]
+            $this->systemPrompt($canvas, $siteCapture, $template).$this->templateRules($reference),
+            ['timeout' => (int) config('contentmachine.clips.llm_timeout', 600), 'useRemotionSkills' => true,
+                'images' => $reference !== null && is_file($reference) ? [$reference] : []]
         );
         $data = $this->extractJson((string) ($envelope['result'] ?? ''), $envelope);
 
@@ -58,7 +63,7 @@ class EffectGenerator
         if ($tsx === '') {
             throw new RuntimeException('The model returned no component code.');
         }
-        $this->guard($tsx);
+        $this->guard($tsx, $template);
 
         $params = is_array($data['sampleParams'] ?? null) ? $data['sampleParams'] : [];
 
@@ -151,7 +156,7 @@ class EffectGenerator
      * brand colours/fonts instead of reading the tokens, or that isn't a
      * default-exported primitive importing from style-tokens.
      */
-    public function guard(string $tsx): void
+    public function guard(string $tsx, bool $template = false): void
     {
         $fail = fn (string $why) => throw new RuntimeException("Effect rejected: {$why}");
 
@@ -162,13 +167,15 @@ class EffectGenerator
         // something branded. An effect that just moves an image around (a zoom, a
         // drop-and-bounce) has no colour or type of its own to take from the
         // system, and demanding the import of it only forces a dead line.
-        if ($this->usaMarca($tsx) && ! str_contains($tsx, 'style-tokens')) {
+        // A template copies its mockup's own colours, so the colour law is off for
+        // it. Everything that keeps it RENDERING (src, <Img>) still applies.
+        if (! $template && $this->usaMarca($tsx) && ! str_contains($tsx, 'style-tokens')) {
             $fail('it must import colours/fonts from "../style-tokens" (the design system).');
         }
-        if (preg_match('/#[0-9a-fA-F]{3,8}\b/', $tsx)) {
+        if (! $template && preg_match('/#[0-9a-fA-F]{3,8}\b/', $tsx)) {
             $fail('hardcoded hex colour found — use COLORS.* tokens so it follows the design system.');
         }
-        if ($cor = $this->corLiteral($tsx)) {
+        if (! $template && ($cor = $this->corLiteral($tsx))) {
             $fail("hardcoded colour literal «{$cor}» found — use COLORS.* tokens (neutral black/white "
                 .'rgba() is allowed for shadows and scrims).');
         }
@@ -206,7 +213,15 @@ class EffectGenerator
      */
     private function leParamSrc(string $tsx): bool
     {
-        return (bool) preg_match('/params[^;\n]{0,80}\bsrc\b|\bsrc\b[^;\n]{0,80}params/', $tsx);
+        // A template with several image slots reads them through an alias or a
+        // helper — `const p = anim.params ?? {}; p.src`, `img("src")` — never on
+        // the same line as `params`. So `src` as a property, a quoted key or a
+        // destructured name counts too. A JSX `src=` attribute does not, and
+        // `.imageSrc` / "imageSrc" still fail on the word boundary.
+        return (bool) preg_match(
+            '/params[^;\n]{0,80}\bsrc\b|\bsrc\b[^;\n]{0,80}params|\.src\b|\[\s*["\'`]src["\'`]\s*\]|\(\s*["\'`]src["\'`]\s*[,)]|(?:const|let|var)\s*\{[^}]*\bsrc\b[^}]*\}\s*=/',
+            $tsx
+        );
     }
 
     /** Does the component paint brand surface — a colour or a typeface of its own? */
@@ -256,7 +271,7 @@ class EffectGenerator
      *
      * @param  array{width?:int,height?:int,transparent?:bool,format?:string}  $canvas
      */
-    private function canvasRules(array $canvas): string
+    private function canvasRules(array $canvas, bool $template = false): string
     {
         $c = config('contentmachine.clips');
         // A scene effect must serve all three frames, so its sizes come from the
@@ -306,6 +321,13 @@ class EffectGenerator
                 ."timeline becoming horizontal, say) rather than trying to make one layout serve all three.\n";
         }
 
+        if ($template) {
+            // The mockup IS the whole frame — its backgrounds and panels are part of
+            // what has to be reproduced, so the layer rule doesn't apply.
+            return $rules.'- The mockup is the WHOLE frame: paint its backgrounds, panels and bands exactly as '
+                .'shown (the brand backdrop is covered by them, as the mockup is).';
+        }
+
         $rules .=
             '- NEVER PAINT A FULL-FRAME BACKGROUND — this is the single most common mistake. '
             .'You are a LAYER: the composition ALREADY draws the themed brand backdrop (with its '
@@ -350,10 +372,53 @@ class EffectGenerator
             ."box IN YOUR OWN MARKUP in that case — never a blank frame, and NEVER put an external URL\n"
             ."  (via.placeholder.com, unsplash, picsum…) in sampleParams. Nothing outside this project is\n"
             ."  reachable from the renderer, so such a preview is always broken.\n"
+            .'- TEXT OVER A PHOTO is always light — rgba(255,255,255,1) with a dark shadow or scrim behind it — '
+            ."whatever `dark` says: `dark` describes the scene background, which a full-frame photo hides.\n"
             .'- The IMAGE is the subject. Any letters, words or shapes you animate around it must come from '
             .'`anim.text` / `anim.params` — do NOT invent filler content to animate (a hardcoded '
             .'"ABCDEFGHIJKLMNOPQRSTUVWXYZ", lorem ipsum, placeholder captions). With no image and no text an '
             .'effect must render its placeholder, not a wall of invented letters.';
+    }
+
+    /**
+     * The contract for a TEMPLATE: the user attached a mockup of how the last
+     * frame should look, and the effect animates that layout into place from its
+     * inputs. Every slot that changes per use is a param; image slots are typed
+     * `image` in paramSchema, which is how the studio's "use" form knows to offer
+     * an upload for them.
+     */
+    private function templateRules(?string $reference): string
+    {
+        if ($reference === null || ! is_file($reference)) {
+            return '';
+        }
+
+        return "\n\n# REFERENCE IMAGE — THIS EFFECT IS A TEMPLATE\n"
+            ."The attached image is a mockup of the FINAL frame. Rebuild that layout — the same elements, in the\n"
+            ."same places, with the same hierarchy and proportions — as the portrait arrangement, and adapt it\n"
+            ."sensibly for half and landscape. The animation builds it up: every element enters (staggered —\n"
+            ."slides, pops, reveals), then the finished layout HOLDS for the rest of the layer. Time it off the\n"
+            ."layer's length: everything is in place by 60% of it (the studio preview is only 2.5s long, and\n"
+            ."must end on the complete layout).\n"
+            ."- FIDELITY IS THE JOB. The last frame must look like the mockup: same colours (hardcoded #hex read\n"
+            ."  off the image), same positions and sizes (as fractions of the frame), same shapes (pills, angled\n"
+            ."  bands, boxes, rounded corners), same text styling (weight, italics, case, spacing, alignment).\n"
+            ."- EVERY ELEMENT. First list every element you see in the mockup, top to bottom — each pill, box,\n"
+            ."  band, line of text, icon, logo, avatar, divider and small print — as a comment block at the top\n"
+            ."  of the TSX (`// ELEMENTS: 1. … 2. …`). Then build ALL of them. Nothing is dropped or merged\n"
+            ."  because it is small: a footer line or a logo is as required as the headline.\n"
+            ."- A logo or icon: an image param when it's a real brand mark (e.g. `logo`), otherwise rebuild it\n"
+            ."  with text/shapes. Decorative shapes are drawn in the component, never left out.\n"
+            ."- INPUTS: everything that would change from one use to the next (photos, avatars, names, titles,\n"
+            ."  prices, locations, phone numbers, tags…) is a PARAM, never baked in.\n"
+            ."  · The main / hero photo is `src` (the key the pipeline fills).\n"
+            ."  · Every OTHER photo slot (an avatar, a logo, a second photo) gets its own short key, e.g. `avatar`.\n"
+            ."  · In paramSchema, type every image param as `image`, e.g.\n"
+            ."    { \"src\"?: image, \"avatar\"?: image, \"title\"?: string, \"price\"?: string }\n"
+            ."  · Read each image param as String(anim.params?.<key> ?? \"\") and draw it with <Img>; when empty,\n"
+            ."    draw a neutral placeholder box in its slot.\n"
+            ."  · sampleParams: fill every TEXT param with the text shown in the mockup; leave image params OUT.\n"
+            .'- Keep the text fields flat (one string param per text), so each is a simple field to fill in.';
     }
 
     /**
@@ -382,9 +447,9 @@ class EffectGenerator
     }
 
     /** @param array{width?:int,height?:int,transparent?:bool,format?:string} $canvas */
-    private function systemPrompt(array $canvas = [], ?string $siteCapture = null): string
+    private function systemPrompt(array $canvas = [], ?string $siteCapture = null, bool $template = false): string
     {
-        $contract = $this->componentContract($canvas, $siteCapture);
+        $contract = $this->componentContract($canvas, $siteCapture, $template);
 
         return <<<PROMPT
 You are a senior Remotion + React engineer for the Brand Machine studio. You write ONE new
@@ -415,12 +480,44 @@ PROMPT;
      *
      * @param  array{width?:int,height?:int,transparent?:bool,format?:string}  $canvas
      */
-    public function componentContract(array $canvas = [], ?string $siteCapture = null): string
+    public function componentContract(array $canvas = [], ?string $siteCapture = null, bool $template = false): string
     {
         $tokens = @file_get_contents(base_path('remotion/src/style-tokens.ts')) ?: '';
         $design = $this->design->readOrTemplate();
-        $canvasRules = $this->canvasRules($canvas).$this->imageRules().$this->siteRules($siteCapture);
+        $canvasRules = $this->canvasRules($canvas, $template).$this->imageRules().$this->siteRules($siteCapture);
         $language = ProjectLanguage::name();
+        $law = $template ? <<<'LAW'
+# COLOURS & TYPE — THE MOCKUP WINS
+This effect is a TEMPLATE of the attached mockup, so it copies the MOCKUP's colours,
+not the brand tokens: read each colour off the image and hardcode it as #hex (the
+panel fills, the pills, the text colours, the price box…). Fonts still come from
+FONTS.* (only those are loaded) — match the mockup's weight, italics, letter-spacing
+and case with fontWeight / fontStyle / letterSpacing / textTransform.
+
+Below are the tokens (for FONTS) and the brand guide, for reference only.
+
+LAW
+            : <<<'LAW'
+# DESIGN SYSTEM — LAW (this is what "follow the design system" means)
+- NEVER hardcode a colour that carries HUE — no #hex at all, no rgb()/hsl() with a
+  tint — and NEVER hardcode a font family. Every generation is REJECTED over this,
+  so it is worth re-reading your own code for a stray #hex before you answer.
+  Use ONLY the tokens: COLORS.papyrus/vellum/ink (backgrounds), COLORS.textOnLight/textOnDark
+  (text — pick by `dark`), COLORS.mutedOnLight/mutedOnDark, COLORS.teal/tealBright/leather/gold (accents).
+  Fonts: FONTS.display (headlines, condensed/uppercase), FONTS.body, FONTS.mono. Headline gold
+  treatment: headlineGradient() clipped to text. Soft shadow: ENGRAVE_SHADOW.
+- Need a token colour at partial strength? Append an alpha suffix to the token
+  (`${{COLORS.teal}}66`) or set `opacity` — never retype the colour as rgba().
+  NEUTRAL black/white IS allowed for shadows, scrims and translucent wells:
+  rgba(0,0,0,.35) and rgba(255,255,255,.06) are fine, rgba(255,180,70,.4) is not.
+- An effect that paints no colour and sets no font (it only moves an image, say)
+  needs no tokens and no style-tokens import — leave them out rather than adding
+  an unused line.
+- These tokens are re-themed per render from the brand below, so using them = following the brand.
+
+Below are the exact tokens (contract) and the brand guide. Match their spirit.
+
+LAW;
 
         return <<<PROMPT
 # LANGUAGE
@@ -444,6 +541,9 @@ PROJECT's language, whatever language this request is written in.
   format: "portrait" | "half" | "landscape"; frame: {{ width: number; height: number }} }}.
   `frame` is the box you must fill, in px — it is NOT always the composition size.
   Animation = {{ start:number; end:number; primitive:string; text?:string; params?:Record<string,unknown> }}.
+- `interpolate()` takes NUMBERS ONLY in its outputRange — never colours, "50%", "10px" or
+  any string (it crashes the render). Interpolate a number and build the string from it
+  (`\${x}%`), and fade colours with `interpolateColors()` from "remotion".
 - `useCurrentFrame()` is LOCAL (starts at 0 when the layer begins). The layer's
   length in frames is `Math.round((anim.end - anim.start) * fps)`.
 - Read the text from `anim.text` and options from `anim.params` (coerce/guard — params may be missing).
@@ -453,26 +553,7 @@ PROJECT's language, whatever language this request is written in.
   mid-word is a rejected effect.
 {$canvasRules}
 
-# DESIGN SYSTEM — LAW (this is what "follow the design system" means)
-- NEVER hardcode a colour that carries HUE — no #hex at all, no rgb()/hsl() with a
-  tint — and NEVER hardcode a font family. Every generation is REJECTED over this,
-  so it is worth re-reading your own code for a stray #hex before you answer.
-  Use ONLY the tokens: COLORS.papyrus/vellum/ink (backgrounds), COLORS.textOnLight/textOnDark
-  (text — pick by `dark`), COLORS.mutedOnLight/mutedOnDark, COLORS.teal/tealBright/leather/gold (accents).
-  Fonts: FONTS.display (headlines, condensed/uppercase), FONTS.body, FONTS.mono. Headline gold
-  treatment: headlineGradient() clipped to text. Soft shadow: ENGRAVE_SHADOW.
-- Need a token colour at partial strength? Append an alpha suffix to the token
-  (`\${{COLORS.teal}}66`) or set `opacity` — never retype the colour as rgba().
-  NEUTRAL black/white IS allowed for shadows, scrims and translucent wells:
-  rgba(0,0,0,.35) and rgba(255,255,255,.06) are fine, rgba(255,180,70,.4) is not.
-- An effect that paints no colour and sets no font (it only moves an image, say)
-  needs no tokens and no style-tokens import — leave them out rather than adding
-  an unused line.
-- These tokens are re-themed per render from the brand below, so using them = following the brand.
-
-Below are the exact tokens (contract) and the brand guide. Match their spirit.
-
-=== style-tokens.ts (the tokens you must use) ===
+{$law}=== style-tokens.ts (the tokens you must use) ===
 {$tokens}
 
 === DESIGN SYSTEM (brand identity) ===

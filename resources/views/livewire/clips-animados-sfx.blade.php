@@ -88,8 +88,12 @@
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['enabled'] ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['enabled'] ? '● allowed' : '○ off' }}</button>
                                 <button type="button" wire:click="alternarIntro('{{ $d['id'] }}')"
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['intro'] ? 'border-gold/50 text-gold' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['intro'] ? '★ intro' : '☆ intro' }}</button>
+                                <button type="button" wire:click="alternarOutro('{{ $d['id'] }}')"
+                                        class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['outro'] ? 'border-gold/50 text-gold' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['outro'] ? '★ outro' : '☆ outro' }}</button>
                                 <button type="button" wire:click="editarSfx('{{ $d['id'] }}')"
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎ Refine with AI</button>
+                                <button type="button" wire:click="abrirUso"
+                                        class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/40 text-teal hover:bg-teal/10 transition">▶ Use with your inputs</button>
                                 <button type="button" wire:click="abrirAudio('{{ $d['slug'] }}')"
                                         class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ in_array($d['slug'], $sfxAudio, true) ? 'border-teal/40 text-teal' : 'border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40' }} transition">{{ in_array($d['slug'], $sfxAudio, true) ? '🔊 Sound' : '♪ Add sound' }}</button>
                                 @if ($d['versions'])
@@ -118,8 +122,12 @@
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['allowed'] ? 'border-teal/40 text-teal' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['allowed'] ? '● allowed' : '○ off' }}</button>
                             <button type="button" wire:click="alternarIntroBuiltin('{{ $d['slug'] }}')"
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['intro'] ? 'border-gold/50 text-gold' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['intro'] ? '★ intro' : '☆ intro' }}</button>
+                            <button type="button" wire:click="alternarOutroBuiltin('{{ $d['slug'] }}')"
+                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ $d['outro'] ? 'border-gold/50 text-gold' : 'border-ink-soft/25 text-ink-faint' }}">{{ $d['outro'] ? '★ outro' : '☆ outro' }}</button>
                             <button type="button" wire:click="editarBuiltin('{{ $d['slug'] }}')"
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">✎ {{ $d['override'] ? 'Edit custom version' : 'Customize with AI' }}</button>
+                            <button type="button" wire:click="abrirUso"
+                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/40 text-teal hover:bg-teal/10 transition">▶ Use with your inputs</button>
                             <button type="button" wire:click="abrirAudio('{{ $d['slug'] }}')"
                                     class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border {{ in_array($d['slug'], $sfxAudio, true) ? 'border-teal/40 text-teal' : 'border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40' }} transition">{{ in_array($d['slug'], $sfxAudio, true) ? '🔊 Sound' : '♪ Add sound' }}</button>
                             @if ($d['override'] && $d['versions'])
@@ -138,6 +146,71 @@
                 </div>
             </div>
         </x-panel>
+
+        {{-- Use: render this effect with your own photos and texts --}}
+        @if ($usoAberto)
+            @php($inputs = $this->usoInputs)
+            <div class="foxing bg-vellum/60 border border-teal/30 rounded-sm p-4 mt-6">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="eyebrow">Use this effect · {{ strtolower(\App\Services\Clips\EffectLibrary::FORMATS[$formato]) }}</label>
+                    <button type="button" wire:click="fecharUso" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">close</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form wire:submit="renderizarUso" class="space-y-3">
+                        @foreach ($inputs['imagens'] as $k)
+                            <div wire:key="uso-img-{{ $k }}">
+                                <label class="font-mono text-[0.62rem] text-ink-soft block mb-1">{{ $k === 'src' ? 'main image' : $k }}</label>
+                                <div class="flex items-center gap-3">
+                                    @if (($usoImagens[$k] ?? null) && ! $errors->has('usoImagens.'.$k))
+                                        <img src="{{ $usoImagens[$k]->temporaryUrl() }}" class="h-12 rounded-sm border border-ink-soft/20" alt="{{ $k }}">
+                                    @endif
+                                    <input type="file" wire:model="usoImagens.{{ $k }}" accept="image/*" class="text-xs text-ink-soft">
+                                </div>
+                                @error('usoImagens.'.$k) <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                            </div>
+                        @endforeach
+                        @if ($inputs['texto'] !== '')
+                            <div>
+                                <label class="font-mono text-[0.62rem] text-ink-soft block mb-1">text</label>
+                                <input type="text" wire:model="usoTexto" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none">
+                            </div>
+                        @endif
+                        @foreach ($inputs['campos'] as $k => $default)
+                            <div wire:key="uso-campo-{{ $k }}">
+                                <label class="font-mono text-[0.62rem] text-ink-soft block mb-1">{{ $k }}</label>
+                                @if (str_contains($default, "\n"))
+                                    <textarea wire:model="usoCampos.{{ $k }}" rows="4" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 font-mono text-xs text-ink focus:border-teal/50 focus:outline-none"></textarea>
+                                @else
+                                    <input type="text" wire:model="usoCampos.{{ $k }}" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none">
+                                @endif
+                            </div>
+                        @endforeach
+                        <div class="flex items-center gap-2">
+                            <label class="font-mono text-[0.62rem] text-ink-soft">length (s)</label>
+                            <input type="number" step="0.5" min="1" max="30" wire:model="usoDuracao" class="w-20 bg-surface/40 border border-ink-soft/20 rounded-sm px-2 py-1 text-ink focus:border-teal/50 focus:outline-none">
+                            @error('usoDuracao') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                        </div>
+                        <button type="submit" wire:loading.attr="disabled" wire:target="renderizarUso,usoImagens"
+                                class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">✦ Render video</button>
+                    </form>
+                    <div class="{{ ['portrait' => 'aspect-[9/16]', 'half' => 'aspect-[9/8]', 'landscape' => 'aspect-video'][$formato] ?? 'aspect-[9/16]' }} max-h-[60vh] w-full mx-auto rounded-sm overflow-hidden bg-black/60 flex items-center justify-center">
+                        @if ($this->usoEstado === 'ready')
+                            <div class="w-full h-full relative">
+                                <video class="w-full h-full object-contain" wire:key="uso-{{ $usoSaida }}" src="{{ route('clips-animados.sfx-use', $usoSaida) }}" autoplay loop muted playsinline controls></video>
+                                <a href="{{ route('clips-animados.sfx-use', ['file' => $usoSaida, 'dl' => 1]) }}"
+                                   class="absolute top-2 right-2 font-mono text-[0.62rem] px-2 py-1 rounded-sm bg-black/60 text-teal">⤓ Download</a>
+                            </div>
+                        @elseif ($this->usoEstado === 'rendering')
+                            <p class="font-mono text-xs text-teal animate-pulse">Rendering…</p>
+                        @elseif ($this->usoEstado === 'failed')
+                            <p class="font-mono text-[0.6rem] text-bad/90 p-3 text-center">{{ \Illuminate\Support\Str::limit($this->usoErro, 300) }}</p>
+                        @else
+                            <p class="font-mono text-[0.6rem] text-ink-faint p-3 text-center">Fill in the inputs and render.</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endif
 
         {{-- Refine / customize panel --}}
         @if ($editingSfxId || $sfxOverrideSlug)
@@ -237,17 +310,34 @@
             <p class="text-ink-soft text-sm mb-5">
                 The motion vocabulary the renderer can already produce — plus your own. Describe a new effect and
                 the AI writes a Remotion component that follows the design system. Click any effect to manage it —
-                refine, add a sound, mark it as an <span class="text-gold">★ intro</span>, or delete it.
+                refine, add a sound, mark it as an <span class="text-gold">★ intro</span> or <span class="text-gold">★ outro</span>, or delete it.
             </p>
+            <livewire:after-intro-setting />
             <form wire:submit="gerarSfx" class="space-y-3 mb-2">
                 <label class="eyebrow block">Describe a new effect</label>
                 <textarea wire:model="sfxPrompt" rows="3" placeholder="e.g. a glitch flicker that snaps the headline into place, with a quick chromatic-aberration split"
                           class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
                 @error('sfxPrompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
+                {{-- A mockup of the final frame turns the effect into a template: it rebuilds
+                     that layout from inputs (photos, texts) you give each time you use it. --}}
+                <div class="flex items-center gap-3">
+                    @if ($sfxReference && ! $errors->has('sfxReference'))
+                        <img src="{{ $sfxReference->temporaryUrl() }}" class="h-16 rounded-sm border border-ink-soft/20" alt="Reference">
+                        <button type="button" wire:click="$set('sfxReference', null)" class="font-mono text-[0.6rem] text-ink-soft hover:text-bad">✕ remove</button>
+                    @else
+                        <label class="font-mono text-xs px-3 py-1.5 rounded-sm border border-ink-soft/25 text-ink-soft hover:text-teal hover:border-teal/40 transition cursor-pointer">
+                            ⊕ Reference image (optional)
+                            <input type="file" wire:model="sfxReference" accept="image/*" class="hidden">
+                        </label>
+                        <span class="font-mono text-[0.6rem] text-ink-faint">A mockup of the final frame — the effect becomes a template that animates it into place.</span>
+                    @endif
+                    <span wire:loading wire:target="sfxReference" class="font-mono text-[0.6rem] text-ink-faint">uploading…</span>
+                </div>
+                @error('sfxReference') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                 <div class="flex items-center gap-3">
                     <button type="submit"
                             class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
-                            wire:loading.attr="disabled" wire:target="gerarSfx">
+                            wire:loading.attr="disabled" wire:target="gerarSfx,sfxReference">
                         ✦ Create effect
                     </button>
                     <span class="font-mono text-[0.6rem] text-ink-faint">Colours &amp; fonts are locked to the design system.</span>
@@ -326,7 +416,7 @@
             <div class="mt-8">
                 <div class="flex items-baseline justify-between mb-4 gap-3">
                     <div class="eyebrow">Your effects · {{ $this->effects->count() }}</div>
-                    <span class="font-mono text-[0.55rem] text-ink-faint">click to manage · ● on = allowed · ★ intro = may open a video</span>
+                    <span class="font-mono text-[0.55rem] text-ink-faint">click to manage · ● on = allowed · ★ intro / outro = may open / close a video</span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     @foreach ($this->effects as $effect)
@@ -346,8 +436,8 @@
                                         <p class="font-mono text-[0.52rem] text-ink-faint mt-2">{{ $effect->status === 'updating' ? 'Updating…' : 'Generating…' }}</p>
                                     </div>
                                 @endif
-                                @if ($effect->status === 'active' && $effect->intro)
-                                    <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-gold/20 text-gold border border-gold/30">★ intro</div>
+                                @if ($effect->status === 'active' && ($effect->intro || $effect->outro))
+                                    <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-gold/20 text-gold border border-gold/30">★ {{ implode(' · ', array_filter([$effect->intro ? 'intro' : null, $effect->outro ? 'outro' : null])) }}</div>
                                 @endif
                                 @if (in_array($effect->slug, $sfxAudio, true))
                                     <div class="absolute top-1 right-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">🔊</div>
@@ -394,8 +484,8 @@
                                     <p class="font-mono text-[0.52rem] text-ink-faint mt-2">Rendering…</p>
                                 </div>
                             @endif
-                            @if ($b['intro'])
-                                <div class="absolute top-1 right-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-gold/20 text-gold border border-gold/30">★</div>
+                            @if ($b['intro'] || $b['outro'])
+                                <div class="absolute top-1 right-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-gold/20 text-gold border border-gold/30" title="{{ implode(' · ', array_filter([$b['intro'] ? 'intro' : null, $b['outro'] ? 'outro' : null])) }}">★</div>
                             @endif
                             @if ($b['override'] === 'active')
                                 <div class="absolute top-1 left-1 font-mono text-[0.5rem] px-1 py-0.5 rounded-sm bg-teal/20 text-teal border border-teal/30">custom</div>

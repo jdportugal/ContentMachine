@@ -1,0 +1,1032 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T1 na Ericeira a poucos minutos da praia por 338 mil euros",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-1-quarto-ericeira-51m2/r994689",
+            "agent": "António Teixeira",
+            "phone": "+351963053373",
+            "agency": "iad Portugal",
+            "hook": "Um T1 na Ericeira, a poucos minutos da praia.",
+            "voiceover": "Um T1 na Ericeira, a poucos minutos da praia. Junto ao mar, com comércio, restauração e serviços a curta distância. Fica num terceiro andar, num prédio de 1999 com elevador. Quarenta e seis metros úteis, com cozinha em open space. O quarto é espaçoso, com boa capacidade de arrumação. A casa de banho tem janela, e há ainda uma despensa. A varanda tem sol nascente, para começar o dia com luz. Em bom estado de conservação, pronto a habitar. Para viver, para férias, ou para investir. Trezentos e trinta e oito mil euros. Para visitar, fale com o António Teixeira, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio / rua",
+                    "vo": "Um T1 na Ericeira, a poucos minutos da praia.",
+                    "caption": "T1 · Ericeira"
+                },
+                {
+                    "photo": "praia ou mar da Ericeira",
+                    "vo": "Junto ao mar, com comércio, restauração e serviços a curta distância.",
+                    "caption": "Junto ao mar"
+                },
+                {
+                    "photo": "entrada do prédio / elevador",
+                    "vo": "Fica num terceiro andar, num prédio de 1999 com elevador.",
+                    "caption": "3.º andar com elevador"
+                },
+                {
+                    "photo": "sala com cozinha em open space",
+                    "vo": "Quarenta e seis metros úteis, com cozinha em open space.",
+                    "caption": "Cozinha open space"
+                },
+                {
+                    "photo": "cozinha (detalhe)",
+                    "vo": "",
+                    "caption": "46 m² úteis"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "O quarto é espaçoso, com boa capacidade de arrumação.",
+                    "caption": "Quarto espaçoso"
+                },
+                {
+                    "photo": "casa de banho com janela",
+                    "vo": "A casa de banho tem janela, e há ainda uma despensa.",
+                    "caption": "Casa de banho com janela"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "A varanda tem sol nascente, para começar o dia com luz.",
+                    "caption": "Varanda a nascente"
+                },
+                {
+                    "photo": "sala ou vista geral do interior",
+                    "vo": "Em bom estado de conservação, pronto a habitar. Para viver, para férias, ou para investir.",
+                    "caption": "Pronto a habitar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e trinta e oito mil euros. Para visitar, fale com o António Teixeira, da iad Portugal.",
+                    "caption": "338.000 € · António Teixeira · iad Portugal"
+                }
+            ],
+            "flags": [
+                "Aquecimento: os detalhes mostram apenas 'property.feature.heating', sem tipo definido. Ficou de fora. Confirmar com o consultor.",
+                "Certificado energético E: não foi mencionado no vídeo de propósito."
+            ],
+            "message": "Boa tarde Sr. António,\nO meu nome é João Ferreira.\n\nVi o T1 na Ericeira que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Apartamento 1 quarto de 51 m² em Ericeira",
+            "price": 338000,
+            "details": {
+                "Preço": "338 000 €",
+                "Localização": "Ericeira, 2655-269",
+                "Referência": "994689",
+                "Área Bruta m²": "51",
+                "Quartos": 1,
+                "Ano de Construção": 1999,
+                "Certificado Energético": "E",
+                "Características": "51 m² área bruta, 46 m² úteis, 1 casa de banho, Varanda, Elevador, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1999, Andar: 3, Porta blindada, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - António Teixeira - and phone number - +351963053373. Agency: iad Portugal.\nThe agent's photo is António Teixeira.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T1 na Ericeira, a poucos minutos da praia.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio / rua → «T1 · Ericeira»\n- praia ou mar da Ericeira → «Junto ao mar»\n- entrada do prédio / elevador → «3.º andar com elevador»\n- sala com cozinha em open space → «Cozinha open space»\n- cozinha (detalhe) → «46 m² úteis»\n- quarto → «Quarto espaçoso»\n- casa de banho com janela → «Casa de banho com janela»\n- varanda → «Varanda a nascente»\n- sala ou vista geral do interior → «Pronto a habitar»\n- end card → «338.000 € · António Teixeira · iad Portugal»\n\nHere are the house details:\n\nApartamento 1 quarto de 51 m² em Ericeira\nPreço\n338 000 €\nLocalização\nEriceira, 2655-269\nReferência\n994689\nÁrea Bruta m²\n51\nQuartos\n1\nAno de Construção\n1999\nCertificado Energético\nE\nCaracterísticas\n51 m² área bruta, 46 m² úteis, 1 casa de banho, Varanda, Elevador, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1999, Andar: 3, Porta blindada, Intercomunicador\n\nDescrição\nT1 na Ericeira com Varanda e Excelente Localização\n\nApartamento T1 à venda na Ericeira, numa localização privilegiada.\n\nSe procura um apartamento confortável, bem localizado e pronto para habitar, esta pode ser uma excelente oportunidade, tanto para residência própria como para investimento.\n\nO imóvel encontra-se em bom estado de conservação e destaca-se pela sua excelente exposição solar e funcionalidade.\n\nPrincipais características:\nTipologia T1\nLocalização privilegiada na Ericeira\nA poucos minutos a pé da praia\nVaranda com sol nascente, ideal para desfrutar do pequeno-almoço e começar o dia com luz natural\nQuarto espaçoso, proporcionando conforto e boa capacidade de arrumação\nCozinha open space \nCasa de banho com janela, garantindo ventilação e luz natural\nDespensa\nPrédio com elevador\nApartamento em bom estado de conservação\n\nUma oportunidade para viver junto ao mar, numa das localidades mais procuradas da região, com praias, comércio, restauração e serviços a curta distância.\n\nExcelente opção para habitação permanente, casa de férias ou investimento.\n\n📍 Ericeira — junto ao mar, perto de tudo.\n\nPara mais informações ou marcação de visita, entre em contacto.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T1 à venda na Ericeira, Reserva Mundial de Surf",
+            "summary": "A Ericeira, no concelho de Mafra, fica a cerca de 35 km de Lisboa. Em 2011 tornou-se a primeira Reserva Mundial de Surf da Europa e a segunda do mundo.",
+            "timeline": [
+                {
+                    "label": "Ericeira declarada Reserva Mundial de Surf",
+                    "sublabel": "outubro de 2011"
+                },
+                {
+                    "label": "Construção do prédio do T1",
+                    "sublabel": "1999"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Distância a Lisboa (linha reta)",
+                    "value": 35,
+                    "unit": "km"
+                },
+                {
+                    "label": "Ondas de classe mundial na reserva",
+                    "value": 7,
+                    "unit": "ondas"
+                },
+                {
+                    "label": "Preço mediano nacional das casas vendidas (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço por m² deste T1 (338 000 € ÷ 46 m²)",
+                    "value": 7348,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Primeira Reserva Mundial de Surf da Europa, atribuída pela Save The Waves em 2011",
+                "Ondas protegidas incluem Ribeira d'Ilhas, Coxos, Pedra Branca e São Lourenço",
+                "A cerca de 35 km de Lisboa, no concelho de Mafra"
+            ],
+            "sources": [
+                "https://www.record.pt/modalidades/outras/detalhe/ericeira-e-a-primeira-reserva-mundial-de-surf-da-europa-685554",
+                "https://www.surfertoday.com/surfing/ericeira-is-a-world-surfing-reserve",
+                "https://vlex.pt/vid/regulamento-n-7-2017-760834009",
+                "https://www.distanciascidades.com/distancia-ericeira-sete_rios-33982.html",
+                "https://develop.travelcompositor.com/en_ie/destination/cos-40",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/"
+            ]
+        },
+        "suggested": {
+            "title": "T1 na Ericeira a poucos minutos da praia por 338 mil euros",
+            "description": "T1 com 46 m² úteis num terceiro andar com elevador, na Ericeira, junto ao mar e perto de comércio, restauração e serviços. Tem cozinha em open space, um quarto espaçoso com boa arrumação, casa de banho com janela, despensa e varanda com sol nascente. Está pronto a habitar e serve para viver, passar férias ou investir. Para marcar visita, contacte António Teixeira, da IAB Portugal.",
+            "tags": [
+                "Ericeira",
+                "T1",
+                "imobiliário",
+                "apartamento à venda",
+                "casa junto ao mar",
+                "investimento imobiliário",
+                "Mafra",
+                "IAB Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r994689-avpf8",
+    "created_at": "2026-10-15T12:40:45+00:00",
+    "updated_at": "2026-10-15T12:52:25+00:00",
+    "source_path": "clips/uploads/c5QT10iEwqA0otkTsidni5Otnldfr1RSvB4ubtKi.mp3",
+    "images": [
+        {
+            "id": "img_9c174c6c",
+            "path": "clips/uploads/a21aGPaXzwLXgD8m8g8IynQBRz81uUOJEWm5MDsW.jpg",
+            "description": "Sala de estar com papel de parede de pôr do sol sobre o mar e flores, candeeiro de pé e estante.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_10685359",
+            "path": "clips/uploads/BNyqOOCIMX0nUhXzKTHHHSCYosoFmmBuWLYKk6Ux.jpg",
+            "description": "Casa de banho com janela, banheira com cortina azul, lavatório em bancada de granito, sanita e bidé.",
+            "name": "019ff6d9f942a765c48b3f2b170722d6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_40133259",
+            "path": "clips/uploads/RaMLENFTkrGQ99edLKCjFkySJSbvDnJV69tpR957.jpg",
+            "description": "Quarto com cama de casal azul, roupeiro branco grande com espelhos e secretária junto à janela.",
+            "name": "019ff6da1b3bb09c35f44aac4f41dae0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_995cf6db",
+            "path": "clips/uploads/0G1T9C2qEA3Im3Ty6y2QK1oemZBLGgtjc5YAEnod.jpg",
+            "description": "Quarto com cama azul, televisão sobre móvel de arrumação e roupeiro espelhado; porta aberta para a sala.",
+            "name": "019ff6da309bc9a1a776f91cd58c4ad4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4582086e",
+            "path": "clips/uploads/l3LlTlVuHKbMujU6A8VlLMa2txb6aTmZP1a0or6Z.jpg",
+            "description": "Quarto visto da cama, janela com cortinas azuis, secretária, televisão e móvel com cestos de arrumação.",
+            "name": "019ff6da52d68f823dec5937f884ab34.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63550c43",
+            "path": "clips/uploads/dIN15NqHzegmGnnV2JFgxj6oGVT5rrw16koJw9X4.jpg",
+            "description": "Casa de banho de frente, cortina de banheira fechada, espelho com candeeiros, lavatório, sanita e bidé.",
+            "name": "019ff6da7b997fe066682e5ae1c1810d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6e318d90",
+            "path": "clips/uploads/EU0tSWaOajPzruSvN4pUh3eFTUGXbrembESJpvVF.jpg",
+            "description": "Sala e cozinha em open space com sofá chaise longue azul, frigorífico e porta envidraçada para a varanda.",
+            "name": "019ff6daab7e5192f9afa7361fa39498.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_822bc56c",
+            "path": "clips/uploads/xejnNMQuXC0PRtuCuJNJy7L5E62zoe7u8iTj6FlM.jpg",
+            "description": "Zona de refeições com mesa e rosas vermelhas, candeeiro laranja; ao fundo, cozinha em madeira e sala.",
+            "name": "019ff6dad5625ffa097669e1a52ad665.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_44f846cd",
+            "path": "clips/uploads/ON5thpLC2qL3oF0zPpJxKAf6TbsfwXCiNkKnEVIa.jpg",
+            "description": "Cozinha em open space com armários de madeira, forno e máquina de lavar; sofá azul e varanda ao fundo.",
+            "name": "019ff6db2500b63e4e746363021bd3c4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0985f4b3",
+            "path": "clips/uploads/MXVn7oBlZw6yJsLHV6IysD22ngjeUqXftZorW24x.jpg",
+            "description": "Sala de estar com papel de parede de pôr do sol, sofá azul, televisão e estante; mesa de jantar à esquerda.",
+            "name": "019ff6db58deb28f1b39effc31a56f52.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_155572c0",
+            "path": "clips/uploads/cXlZobwko1XJOQEkKZQX8JseCzSI5QM8zaT61fF8.jpg",
+            "description": "Varanda soalheira com mesa redonda, plantas e guarda azul; vista para prédios coloridos e jardim.",
+            "name": "019ff6dbc634711888b9a5ad48b2bc47.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eef92197",
+            "path": "clips/uploads/1WkCWqZmGO5IV6ICTHiW2oZYmdWZ6tpT4CFucnqO.jpg",
+            "description": "Sala com sofá de canto azul, puff grande e papel de parede com pôr do sol sobre o mar.",
+            "name": "019ff6db971609f6090ec9d5dff690c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d9cb2d0b",
+            "path": "clips/uploads/MYu59uWYaux6G4uz193A1yeVWu3dvH2GYHJokODH.png",
+            "description": "Retrato do consultor António Teixeira, da iad Portugal.",
+            "name": "António Teixeira.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_66d9072c",
+            "path": "clips/uploads/dvLB0pdlXMqK2vBJf4VvjfapXopJfvbu0pQEPJ8G.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/c5QT10iEwqA0otkTsidni5Otnldfr1RSvB4ubtKi.mp3",
+    "transcript": {
+        "duration": 38.31999969482422,
+        "text": "Um T1 na Ericeira, a poucos minutos da praia. Junto ao mar, com comércio, restauração e serviços a curta distância. Fica num terceiro andar, num prédio de 1999 com elevador. 46 metros úteis, com cozinha em open space. O quarto é espaçoso, com boa capacidade de arrumação. A casa de banho tem janela, e há ainda uma dispensa. A varanda tem sol nascente, para começar o dia com luz. Em bom estado de conservação, pronto a habitar. Para viver, para férias ou para investir, 338 mil euros. Para visitar, fale com o António Teixeira, da IAB Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.1599999964237213
+            },
+            {
+                "word": "T1",
+                "start": 0.1599999964237213,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "na",
+                "start": 0.6000000238418579,
+                "end": 0.8600000143051147
+            },
+            {
+                "word": "Ericeira",
+                "start": 0.8600000143051147,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "a",
+                "start": 1.600000023841858,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "poucos",
+                "start": 1.9600000381469727,
+                "end": 2.119999885559082
+            },
+            {
+                "word": "minutos",
+                "start": 2.119999885559082,
+                "end": 2.440000057220459
+            },
+            {
+                "word": "da",
+                "start": 2.440000057220459,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "praia",
+                "start": 2.6600000858306885,
+                "end": 2.9600000381469727
+            },
+            {
+                "word": "Junto",
+                "start": 3.4600000381469727,
+                "end": 3.680000066757202
+            },
+            {
+                "word": "ao",
+                "start": 3.680000066757202,
+                "end": 3.9200000762939453
+            },
+            {
+                "word": "mar",
+                "start": 3.9200000762939453,
+                "end": 4.099999904632568
+            },
+            {
+                "word": "com",
+                "start": 4.300000190734863,
+                "end": 4.480000019073486
+            },
+            {
+                "word": "comércio",
+                "start": 4.480000019073486,
+                "end": 5
+            },
+            {
+                "word": "restauração",
+                "start": 5.579999923706055,
+                "end": 5.840000152587891
+            },
+            {
+                "word": "e",
+                "start": 5.840000152587891,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "serviços",
+                "start": 6.099999904632568,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "a",
+                "start": 6.579999923706055,
+                "end": 6.900000095367432
+            },
+            {
+                "word": "curta",
+                "start": 6.900000095367432,
+                "end": 7.099999904632568
+            },
+            {
+                "word": "distância",
+                "start": 7.099999904632568,
+                "end": 7.559999942779541
+            },
+            {
+                "word": "Fica",
+                "start": 8.279999732971191,
+                "end": 8.34000015258789
+            },
+            {
+                "word": "num",
+                "start": 8.34000015258789,
+                "end": 8.520000457763672
+            },
+            {
+                "word": "terceiro",
+                "start": 8.520000457763672,
+                "end": 8.859999656677246
+            },
+            {
+                "word": "andar",
+                "start": 8.859999656677246,
+                "end": 9.220000267028809
+            },
+            {
+                "word": "num",
+                "start": 9.5,
+                "end": 9.680000305175781
+            },
+            {
+                "word": "prédio",
+                "start": 9.680000305175781,
+                "end": 9.979999542236328
+            },
+            {
+                "word": "de",
+                "start": 9.979999542236328,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "1999",
+                "start": 10.380000114440918,
+                "end": 11.619999885559082
+            },
+            {
+                "word": "com",
+                "start": 11.619999885559082,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "elevador",
+                "start": 11.979999542236328,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "46",
+                "start": 13.119999885559082,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "metros",
+                "start": 13.460000038146973,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "úteis",
+                "start": 13.859999656677246,
+                "end": 14.260000228881836
+            },
+            {
+                "word": "com",
+                "start": 14.380000114440918,
+                "end": 14.600000381469727
+            },
+            {
+                "word": "cozinha",
+                "start": 14.600000381469727,
+                "end": 14.979999542236328
+            },
+            {
+                "word": "em",
+                "start": 14.979999542236328,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "open",
+                "start": 15.319999694824219,
+                "end": 15.619999885559082
+            },
+            {
+                "word": "space",
+                "start": 15.619999885559082,
+                "end": 16.040000915527344
+            },
+            {
+                "word": "O",
+                "start": 16.420000076293945,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "quarto",
+                "start": 16.559999465942383,
+                "end": 16.84000015258789
+            },
+            {
+                "word": "é",
+                "start": 16.84000015258789,
+                "end": 17.139999389648438
+            },
+            {
+                "word": "espaçoso",
+                "start": 17.139999389648438,
+                "end": 17.719999313354492
+            },
+            {
+                "word": "com",
+                "start": 17.899999618530273,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "boa",
+                "start": 18.1200008392334,
+                "end": 18.34000015258789
+            },
+            {
+                "word": "capacidade",
+                "start": 18.34000015258789,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "de",
+                "start": 18.799999237060547,
+                "end": 19.100000381469727
+            },
+            {
+                "word": "arrumação",
+                "start": 19.100000381469727,
+                "end": 19.520000457763672
+            },
+            {
+                "word": "A",
+                "start": 19.979999542236328,
+                "end": 20.100000381469727
+            },
+            {
+                "word": "casa",
+                "start": 20.100000381469727,
+                "end": 20.260000228881836
+            },
+            {
+                "word": "de",
+                "start": 20.260000228881836,
+                "end": 20.600000381469727
+            },
+            {
+                "word": "banho",
+                "start": 20.600000381469727,
+                "end": 20.6200008392334
+            },
+            {
+                "word": "tem",
+                "start": 20.6200008392334,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "janela",
+                "start": 20.84000015258789,
+                "end": 21.280000686645508
+            },
+            {
+                "word": "e",
+                "start": 21.459999084472656,
+                "end": 21.68000030517578
+            },
+            {
+                "word": "há",
+                "start": 21.68000030517578,
+                "end": 21.780000686645508
+            },
+            {
+                "word": "ainda",
+                "start": 21.780000686645508,
+                "end": 22.059999465942383
+            },
+            {
+                "word": "uma",
+                "start": 22.059999465942383,
+                "end": 22.31999969482422
+            },
+            {
+                "word": "dispensa",
+                "start": 22.31999969482422,
+                "end": 22.799999237060547
+            },
+            {
+                "word": "A",
+                "start": 23.260000228881836,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "varanda",
+                "start": 23.360000610351562,
+                "end": 23.65999984741211
+            },
+            {
+                "word": "tem",
+                "start": 23.65999984741211,
+                "end": 23.940000534057617
+            },
+            {
+                "word": "sol",
+                "start": 23.940000534057617,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "nascente",
+                "start": 24.15999984741211,
+                "end": 24.719999313354492
+            },
+            {
+                "word": "para",
+                "start": 24.8799991607666,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "começar",
+                "start": 25.020000457763672,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "o",
+                "start": 25.299999237060547,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "dia",
+                "start": 25.68000030517578,
+                "end": 25.68000030517578
+            },
+            {
+                "word": "com",
+                "start": 25.68000030517578,
+                "end": 25.940000534057617
+            },
+            {
+                "word": "luz",
+                "start": 25.940000534057617,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "Em",
+                "start": 26.760000228881836,
+                "end": 26.899999618530273
+            },
+            {
+                "word": "bom",
+                "start": 26.899999618530273,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "estado",
+                "start": 27.18000030517578,
+                "end": 27.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 27.360000610351562,
+                "end": 27.6200008392334
+            },
+            {
+                "word": "conservação",
+                "start": 27.6200008392334,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "pronto",
+                "start": 28.540000915527344,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "a",
+                "start": 28.68000030517578,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "habitar",
+                "start": 28.860000610351562,
+                "end": 29.18000030517578
+            },
+            {
+                "word": "Para",
+                "start": 29.420000076293945,
+                "end": 29.719999313354492
+            },
+            {
+                "word": "viver",
+                "start": 29.719999313354492,
+                "end": 30.139999389648438
+            },
+            {
+                "word": "para",
+                "start": 30.540000915527344,
+                "end": 30.920000076293945
+            },
+            {
+                "word": "férias",
+                "start": 30.920000076293945,
+                "end": 31.219999313354492
+            },
+            {
+                "word": "ou",
+                "start": 31.219999313354492,
+                "end": 31.420000076293945
+            },
+            {
+                "word": "para",
+                "start": 31.420000076293945,
+                "end": 31.6200008392334
+            },
+            {
+                "word": "investir",
+                "start": 31.6200008392334,
+                "end": 32.02000045776367
+            },
+            {
+                "word": "338",
+                "start": 32.400001525878906,
+                "end": 33.619998931884766
+            },
+            {
+                "word": "mil",
+                "start": 33.619998931884766,
+                "end": 33.880001068115234
+            },
+            {
+                "word": "euros",
+                "start": 33.880001068115234,
+                "end": 34.560001373291016
+            },
+            {
+                "word": "Para",
+                "start": 34.720001220703125,
+                "end": 34.81999969482422
+            },
+            {
+                "word": "visitar",
+                "start": 34.81999969482422,
+                "end": 35.459999084472656
+            },
+            {
+                "word": "fale",
+                "start": 35.7400016784668,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "com",
+                "start": 35.7400016784668,
+                "end": 35.959999084472656
+            },
+            {
+                "word": "o",
+                "start": 35.959999084472656,
+                "end": 36.20000076293945
+            },
+            {
+                "word": "António",
+                "start": 36.20000076293945,
+                "end": 36.380001068115234
+            },
+            {
+                "word": "Teixeira",
+                "start": 36.380001068115234,
+                "end": 36.900001525878906
+            },
+            {
+                "word": "da",
+                "start": 37.13999938964844,
+                "end": 37.2400016784668
+            },
+            {
+                "word": "IAB",
+                "start": 37.2400016784668,
+                "end": 37.560001373291016
+            },
+            {
+                "word": "Portugal",
+                "start": 37.560001373291016,
+                "end": 38.119998931884766
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.4,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T1 PERTO DA PRAIA",
+                        "params": {
+                            "src": "img_9c174c6c",
+                            "avatar": "img_d9cb2d0b",
+                            "logo": "img_66d9072c",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "338.000 €",
+                            "location": "MAFRA · ERICEIRA",
+                            "title": "T1 NA ERICEIRA",
+                            "facts": "46 m² úteis · 1 quarto · varanda · elevador",
+                            "cta": "Ligue já +351 963 053 373",
+                            "name": "António Teixeira",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.4,
+                "end": 8.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "JUNTO AO MAR",
+                        "params": {
+                            "src": "img_eef92197",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.1,
+                "end": 12.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "O PRÉDIO",
+                        "params": {
+                            "src": "img_0985f4b3",
+                            "title": "O PRÉDIO",
+                            "items": [
+                                "3.º andar",
+                                "Construído em 1999",
+                                "Com elevador"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.9,
+                "end": 16.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "46 m² · OPEN SPACE",
+                        "params": {
+                            "src": "img_6e318d90",
+                            "src2": "img_44f846cd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.3,
+                "end": 19.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "QUARTO ESPAÇOSO",
+                        "params": {
+                            "src": "img_40133259",
+                            "src2": "img_995cf6db",
+                            "src3": "img_4582086e",
+                            "src4": "img_40133259"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.8,
+                "end": 23.1,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "CASA DE BANHO COM JANELA",
+                        "params": {
+                            "src": "img_10685359",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.1,
+                "end": 26.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "VARANDA A NASCENTE",
+                        "params": {
+                            "src": "img_155572c0",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.6,
+                "end": 29.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "PRONTO A HABITAR",
+                        "params": {
+                            "src": "img_822bc56c",
+                            "src2": "img_63550c43",
+                            "src3": "img_9c174c6c",
+                            "src4": "img_0985f4b3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.3,
+                "end": 34.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "338.000 €",
+                        "params": {
+                            "src": "img_eef92197",
+                            "src2": "img_6e318d90",
+                            "src3": "img_155572c0",
+                            "src4": "img_40133259",
+                            "src5": "img_44f846cd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 38.31999969482422,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_d9cb2d0b",
+                            "name": "António Teixeira",
+                            "phone": "+351 963 053 373",
+                            "email": "antonio.teixeira@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r994689-avpf8/clip.mp4",
+    "error": null
+}

@@ -1,0 +1,1344 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T5 na Quinta del Rey, em Beja, com cozinha de verão",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-5-quartos-beja-442m2/r1049502",
+            "agent": "Amélie Guerreiro",
+            "phone": "+351963462725",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Quintal, terraço e cozinha de verão na Quinta D'El Rey.",
+            "voiceover": "Quintal, terraço e cozinha de verão na Quinta D'El Rey. Uma urbanização tranquila em Beja, perto do centro, de escolas e de comércio. São dois pisos, com cinco quartos e quatro casas de banho. No rés do chão, dois quartos, duas salas e uma cozinha espaçosa. Em cima, três quartos, incluindo a suite com closet e acesso ao terraço. Lá fora, um quintal amplo, cozinha de verão com barbecue e alpendre para os carros. Tem ainda lareira, ar condicionado e alarme. Seiscentos e sessenta e nove mil euros. Para visitar, fale com a Amélie Guerreiro, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia com quintal",
+                    "vo": "Quintal, terraço e cozinha de verão na Quinta D'El Rey.",
+                    "caption": "Quinta D'El Rey, Beja"
+                },
+                {
+                    "photo": "rua / exterior da urbanização",
+                    "vo": "Uma urbanização tranquila em Beja, perto do centro, de escolas e de comércio.",
+                    "caption": "Perto do centro"
+                },
+                {
+                    "photo": "sala de estar",
+                    "vo": "São dois pisos, com cinco quartos e quatro casas de banho.",
+                    "caption": "Cinco quartos"
+                },
+                {
+                    "photo": "sala de jantar",
+                    "vo": "No rés do chão, dois quartos, duas salas",
+                    "caption": "Duas salas"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "e uma cozinha espaçosa.",
+                    "caption": "Cozinha espaçosa"
+                },
+                {
+                    "photo": "suite principal com closet",
+                    "vo": "Em cima, três quartos, incluindo a suite com closet",
+                    "caption": "Suite com closet"
+                },
+                {
+                    "photo": "terraço",
+                    "vo": "e acesso ao terraço.",
+                    "caption": "Terraço privado"
+                },
+                {
+                    "photo": "quintal",
+                    "vo": "Lá fora, um quintal amplo,",
+                    "caption": "Quintal amplo"
+                },
+                {
+                    "photo": "cozinha de verão com barbecue",
+                    "vo": "cozinha de verão com barbecue",
+                    "caption": "Cozinha de verão"
+                },
+                {
+                    "photo": "alpendre de estacionamento",
+                    "vo": "e alpendre para os carros.",
+                    "caption": "Estacionamento coberto"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "Tem ainda lareira, ar condicionado e alarme.",
+                    "caption": "Lareira e ar condicionado"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e sessenta e nove mil euros. Para visitar, fale com a Amélie Guerreiro, da IAD Portugal.",
+                    "caption": "669.000 € · Amélie Guerreiro · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Tipologia contraditória: o título do anúncio diz T7, mas os detalhes e a descrição dos pisos (2 + 3) dão 5 quartos. Usei cinco quartos.",
+                "A área total do lote (442 m²) é igual à área bruta (442 m²), o que não bate certo com um quintal amplo. Deixei as áreas de fora.",
+                "Nas características aparece 'property.feature.heating' (campo por preencher). Não mencionei aquecimento.",
+                "A 'sala de máquinas' e a varanda ficaram de fora para manter o texto curto."
+            ],
+            "message": "Bom dia Sra. Amélie, fiz este vídeo da sua moradia T5 na Quinta D'El Rey, em Beja, para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Casa/Moradia 5 quartos de 442 m² em Beja",
+            "price": 669000,
+            "details": {
+                "Preço": "669 000 €",
+                "Localização": "Beja, 7800-381",
+                "Referência": "1049502",
+                "Área Bruta m²": "442",
+                "Área Total do Lote m²": "442",
+                "Quartos": 5,
+                "Certificado Energético": "C",
+                "Características": "442 m² área bruta, 300 m² úteis, 4 casas de banho, Jardim, Estacionamento, Terraço, Varanda, Ar condicionado, Alarme, Lareira, Sala de estar, Sala de jantar, Ligação TV, property.feature.heating, Porta blindada, Porteiro digital, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Amélie Guerreiro - and phone number - +351963462725. Agency: IAD Portugal.\nThe agent's photo is Amélie Guerreiro.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Quintal, terraço e cozinha de verão na Quinta D'El Rey.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia com quintal → «Quinta D'El Rey, Beja»\n- rua / exterior da urbanização → «Perto do centro»\n- sala de estar → «Cinco quartos»\n- sala de jantar → «Duas salas»\n- cozinha → «Cozinha espaçosa»\n- suite principal com closet → «Suite com closet»\n- terraço → «Terraço privado»\n- quintal → «Quintal amplo»\n- cozinha de verão com barbecue → «Cozinha de verão»\n- alpendre de estacionamento → «Estacionamento coberto»\n- sala com lareira → «Lareira e ar condicionado»\n- end card → «669.000 € · Amélie Guerreiro · IAD Portugal»\n\nHere are the house details:\n\nCasa/Moradia 5 quartos de 442 m² em Beja\nPreço\n669 000 €\nLocalização\nBeja, 7800-381\nReferência\n1049502\nÁrea Bruta m²\n442\nÁrea Total do Lote m²\n442\nQuartos\n5\nCertificado Energético\nC\nCaracterísticas\n442 m² área bruta, 300 m² úteis, 4 casas de banho, Jardim, Estacionamento, Terraço, Varanda, Ar condicionado, Alarme, Lareira, Sala de estar, Sala de jantar, Ligação TV, property.feature.heating, Porta blindada, Porteiro digital, Intercomunicador\n\nDescrição\n✨ Exclusiva Moradia T7 de Prestígio com Amplo Quintal e Terraço | Quinta D’El Rey – Beja\n\nApresentamos esta magnífica moradia familiar T7, situada na prestigiada urbanização da Quinta D’El Rey, em Beja, uma localização privilegiada, reconhecida pela sua tranquilidade, qualidade residencial e proximidade a todos os serviços essenciais.\n\nCom uma arquitetura elegante, divisões generosas e uma excelente distribuição dos espaços, esta propriedade distingue-se pela sua amplitude, luminosidade e funcionalidade, proporcionando o equilíbrio perfeito entre conforto, privacidade e qualidade de vida.\n\nPensada para responder às exigências de uma vida familiar moderna, a moradia desenvolve-se em dois pisos, oferecendo espaços amplos e versáteis, tanto no interior como no exterior.\n\n✨ Rés do chão | Conforto e funcionalidade\n\nO piso térreo destaca-se pela sua distribuição harmoniosa, privilegiando a comodidade e a facilidade de circulação no dia a dia.\n\nNeste piso encontramos:\n\n* Dois quartos, ideais para proporcionar maior conforto e acessibilidade no quotidiano;\n* Duas casas de banho;\n* Ampla sala de estar, perfeita para momentos de convívio e descontração;\n* Sala de jantar, ideal para reunir família e amigos;\n* Cozinha espaçosa e funcional;\n* Sala de máquinas, garantindo maior organização e praticidade.\n\nA presença de dois quartos no rés do chão representa uma mais-valia, permitindo adaptar a habitação às diferentes necessidades e etapas da vida familiar.\n\n✨ Primeiro piso | Privacidade e elegância\n\nO piso superior foi concebido para proporcionar tranquilidade e privacidade, sendo composto por:\n\n* Três quartos espaçosos, incluindo uma magnífica suíte;\n* Suíte principal com closet, roupeiro e acesso direto ao terraço, criando um espaço exclusivo de conforto e intimidade;\n* Duas casas de banho, incluindo a da suíte;\n* Terraço, ideal para desfrutar de momentos de descanso ao ar livre;\n* Varanda, que acrescenta luminosidade e charme à habitação.\n\n🌿 Espaço exterior | Um verdadeiro privilégio\n\nUm dos grandes destaques desta propriedade é o seu generoso quintal, espaçoso e banhado por luz natural, que oferece inúmeras possibilidades para desfrutar plenamente da vida ao ar livre.\n\nO espaço exterior dispõe de:\n\n* Amplo quintal, ideal para momentos de lazer em família;\n* Alpendre para estacionamento de viaturas, proporcionando comodidade e proteção;\n* Cozinha de verão com zona de barbecue, perfeita para refeições e convívios ao ar livre;\n* Despensa e arrecadação, oferecendo soluções adicionais de arrumação.\n\nUm ambiente acolhedor e versátil, onde o espaço, a privacidade e a luminosidade se conjugam para proporcionar momentos únicos em família.\n\n📍 Localização de excelência | Quinta D’El Rey, Beja\n\nInserida numa das zonas residenciais mais valorizadas e procuradas de Beja, esta moradia beneficia de uma localização privilegiada, combinando a serenidade de um bairro residencial de prestígio com a proximidade ao centro da cidade, comércio, escolas e serviços.\n\nUma localização ideal para quem valoriza tranquilidade, acessibilidade e qualidade de vida, sem abdicar da conveniência urbana.\n\n✨ Uma propriedade distinta para uma vida de excelência\n\nMais do que uma casa, esta moradia representa uma oportunidade de viver com espaço, conforto e elegância, numa localização de referência em Beja.\n\nCom cinco quartos, quatro casas de banho, generosas áreas interiores e um magnífico espaço exterior, esta propriedade reúne todas as condições para se tornar o cenário perfeito de uma nova história familiar.\n\nUma oportunidade para quem procura uma moradia de prestígio, onde cada espaço foi pensado para valorizar o bem-estar e a qualidade de vida.\n\n📞 Agende a sua visita e venha descobrir pessoalmente todo o potencial desta magnífica propriedade.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia T5 na Quinta d'El Rey, em Beja, com contexto do mercado de habitação em Portugal",
+            "summary": "Moradia de dois pisos com 5 quartos e 4 casas de banho, à venda por 669 mil euros na Quinta d'El Rey, uma zona residencial perto do centro de Beja. Segundo o INE, em 2025 o preço mediano da habitação em Portugal subiu 16,8%, para 2076 €/m².",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 669000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Quartos",
+                    "value": 5,
+                    "unit": "quartos"
+                },
+                {
+                    "label": "Casas de banho",
+                    "value": 4,
+                    "unit": "WC"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço mediano (INE, 2025 face a 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Disposição da casa",
+                    "left": {
+                        "title": "Rés do chão",
+                        "points": [
+                            "2 quartos",
+                            "2 salas",
+                            "Cozinha espaçosa"
+                        ]
+                    },
+                    "right": {
+                        "title": "Piso superior",
+                        "points": [
+                            "3 quartos",
+                            "Suite com closet",
+                            "Acesso ao terraço"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A Quinta d'El Rey é uma zona residencial perto do centro de Beja",
+                "Exterior com quintal amplo, cozinha de verão com barbecue e alpendre para os carros",
+                "Tem lareira, ar condicionado e alarme",
+                "Em 2025, o preço mediano das casas em Portugal subiu 16,8% (INE)"
+            ],
+            "sources": [
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://www.jn.pt/economia/artigo/preco-mediano-da-habitacao-sobe-para-2076-eurosm2/18107084",
+                "https://rr.pt/noticia/amp/explicador-renascenca/2026/04/24/preco-medio-de-habitacao-em-portugal-dispara-168-em-2025-comprar-casa-e-um-sonho/468319/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T5 na Quinta del Rey, em Beja, com cozinha de verão",
+            "description": "Cinco quartos, terraço e churrasqueira na Quinta del Rey, em Beja.\n\nFica numa urbanização tranquila, perto do centro, de escolas e de comércio.\nRés-do-chão: dois quartos, duas salas e uma cozinha espaçosa.\nPiso de cima: três quartos, incluindo a suite com closet e acesso ao terraço.\nNo exterior há um quintal amplo, cozinha de verão com barbecue e alpendre para os carros. Lá dentro há lareira, ar condicionado, alarme e porta blindada.\n\nT5 · 300 m² úteis · 442 m² brutos · 4 WC · Certificado C · 669.000 € · Ref. 1049502\n\nVisitas com a Amélie Guerreiro, da IAD Portugal: +351 963 462 725",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "casaavenda",
+                "moradiat5",
+                "beja",
+                "casasembeja",
+                "alentejo",
+                "imoveisalentejo",
+                "cozinhadeverao",
+                "quintadelrey",
+                "iadportugal",
+                "casacomterraco"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1049502-0eki3",
+    "created_at": "2026-10-20T06:45:49+00:00",
+    "updated_at": "2026-10-20T07:15:21+00:00",
+    "source_path": "clips/uploads/6is9ZsIxctI51dtW9Z1qh4653MDKamETbBS6nQO5.mp3",
+    "images": [
+        {
+            "id": "img_8191f863",
+            "path": "clips/uploads/IVfHmoYRYFigyhu2dexwF5Oc3OzDjJHRYoERk9lR.png",
+            "description": "Fachada traseira da moradia branca de dois pisos, com amplo quintal pavimentado, alpendre com sofás e barbecue.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_535080c9",
+            "path": "clips/uploads/tJXcYVR82H2Je9463BUzPcKlDBnSWzBvAXbQAnvl.png",
+            "description": "Quintal amplo e soalheiro com canteiro de palmeiras e, ao fundo, cozinha de verão com barbecue de tijolo.",
+            "name": "01a1401653115f73333221590b90e0a0.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6597cc03",
+            "path": "clips/uploads/JyPRiBRYsOG8djnzVAnVZEpTyw2L66hVFRX7PpZ9.png",
+            "description": "Alpendre coberto com colunas brancas para os carros, corredor pavimentado até ao portão verde da entrada.",
+            "name": "01a140160cf28beb7b2533bffa61f11a.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7af84ac1",
+            "path": "clips/uploads/vNTdx2HSiELiZbfuUgUHJfyZ1rCr3k7fUmoGiySd.png",
+            "description": "Lateral da moradia com janelas de portadas brancas, pérgola coberta e caminho pavimentado com vasos.",
+            "name": "01a1402c9e100dceaccff01a872b4256.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4dbf721e",
+            "path": "clips/uploads/winIsmwX3mQ11Ssmykw56KRrcy0KXyp6Y8BdBnFJ.png",
+            "description": "Fachada exterior vista da rua: moradia branca de telha, muro com gradeamento e portão verde ornamentado.",
+            "name": "01a14016517c0d3cccd6a8d4c2160ace.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8ea1aa59",
+            "path": "clips/uploads/VLBjXFniajmEBNo8e1eMSaRg4RgDYFd7WhI4WlBN.png",
+            "description": "Entrada principal com porta de madeira, degraus em mármore, vasos de plantas e carregador elétrico.",
+            "name": "01a1402c9d3d489a5c80eb56aadc8a24.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_59f8f57e",
+            "path": "clips/uploads/PcfgHdao1zDNKPE0tczesXGBG8nXjyoyJg5ff1w1.jpg",
+            "description": "Pátio exterior pavimentado com nespereira frondosa, candeeiros de parede e sombra junto à vedação verde.",
+            "name": "01a1400d0ebe6afd1032f67bf4935a9c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_05c896dd",
+            "path": "clips/uploads/UTgNf6ML4PitmjLhUwG57rnLgVU7of9HgAbMmIqY.png",
+            "description": "Cozinha de verão com barbecue em tijolo burro, lava-loiça e armários brancos, sob telheiro.",
+            "name": "01a140160fb5b7065ced77c2549dfaa0.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dbdf68e7",
+            "path": "clips/uploads/rm7DvoHkUL9zeA9aLVT9UGjaigk7f3HTSVUC6bVU.jpg",
+            "description": "Alpendre exterior com sofá e cadeiras de verga, mesa redonda e cozinha de verão com barbecue ao lado.",
+            "name": "01a1400f88f45f9bbdebe7609528931c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7bcdc36c",
+            "path": "clips/uploads/u2uHRQDzCUdfgoEnBkGQQZOwmpHj1o1bI2DtGLxZ.png",
+            "description": "Cozinha espaçosa em forma de U com armários de madeira, bancada de granito, placa a gás e janela.",
+            "name": "01a140180f4457ca3d4b11ec2e02fd72.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9f8b0b1f",
+            "path": "clips/uploads/BR1keJxSzn6AG1WYnTpEKd76s8CIqvjdga4KdZmi.png",
+            "description": "Cozinha em L com armários de madeira, bancada de granito, máquina de lavar e secar roupa, chão escuro brilhante.",
+            "name": "01a1401dc4aef14a6697bb9f5f102ec8.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9a3498ed",
+            "path": "clips/uploads/8cMpmduxCZag23eTl1F4QicFxT06QtxPPfkslL1f.png",
+            "description": "Sala de jantar vista através de arco de madeira, mesa para seis, lustre e parede curva com padrão circular.",
+            "name": "01a1402c6598721d2fb3cb1d672c1079.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9dcc1007",
+            "path": "clips/uploads/Y5AVVz0NDTq4ipVEcT4O3qetZWvaPtgOKyDHwR6C.png",
+            "description": "Sala de jantar com mesa de madeira, cadeiras castanhas, cristaleira, cortinados e arco para a sala de estar.",
+            "name": "01a1402c6b789550a5121b5138fdb737.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b8ecc9d0",
+            "path": "clips/uploads/J1Z2t7gu1fGNHd68VdTp34qELYXwc1a2NbcALX5E.jpg",
+            "description": "Hall de entrada com consola decorativa, flores, painel dourado e porta envidraçada em arco para outra divisão.",
+            "name": "01a1402c35d52691ad3e7f550226e163.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8550d813",
+            "path": "clips/uploads/o6hxA8SZpBplhYfzT7LI8tHYodiOOShRcRkQA69A.png",
+            "description": "Sala de estar ampla com sofás de pele creme, lareira em pedra, ar-condicionado e luz natural intensa.",
+            "name": "01a1401dc3f3cc55511b3358cdc8d308.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ccd295bf",
+            "path": "clips/uploads/uEnaiW5emuoyiAJGGJLr4L0wlfYAASiq57RRKDOF.png",
+            "description": "Colagem de quatro fotos: sala de estar com sofás creme, lareira em pedra em destaque e escritório com secretária.",
+            "name": "01a1401dc428740270dcbfb04a40dbe2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5bffe7de",
+            "path": "clips/uploads/4stBfcJuQRI3g6DsTOXHnlG1dvEvgkQDT58T7Kg0.png",
+            "description": "Lareira em pedra clara com recuperador, prateleiras com máscaras decorativas e cortinado listado, pormenor da sala.",
+            "name": "01a1401d4f1e92d6c9f1a6c2ccdad92a.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e4b92e36",
+            "path": "clips/uploads/DUBiStgoG49mO4k8LdHO0kLcfM0Y6vLLK3OfSXDU.png",
+            "description": "Sala de estar com sofás creme, mesa de centro em madeira, lareira, televisão e ar-condicionado, chão brilhante.",
+            "name": "01a1401dc2e0d0dbb97a8c1cd8da2b3f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fc4b4009",
+            "path": "clips/uploads/OBGjIJadogxoRS3IBhF5SfqyLVoFP2r8qVDAkOOp.png",
+            "description": "Quarto usado como escritório, com secretária, impressora, estantes de madeira, televisão e janela com cortinados.",
+            "name": "01a1401dc2d8c5561ce8e1eac33ab71f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1db883ae",
+            "path": "clips/uploads/MLI67x6qtLpJ6FFmosp1pTNsafxdndAjP4aT12wE.png",
+            "description": "Divisão com soalho de madeira usada como ginásio, passadeira e bicicleta, arco para quarto infantil ao fundo.",
+            "name": "01a1402c9772a78da919d224d76b72f2.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_93cf195a",
+            "path": "clips/uploads/A3MaCw2upir8dyXqF0IhiJOVOl3nvTjNQPKn6HGz.png",
+            "description": "Casa de banho com base de duche, lavatório de coluna, bidé, chão cinzento brilhante e janela.",
+            "name": "01a1402c6124f991c8d44fbe655c7023.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f3cc14df",
+            "path": "clips/uploads/L7KaqnGhqvxZFKESjyTuPtp9RPXeAF05iwuuz0wo.jpg",
+            "description": "Hall de entrada com escadaria em madeira escura, chão cinzento brilhante, cadeirão branco e jarra amarela.",
+            "name": "01a1402c35bbff23e977a8f265b80803.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_662048f0",
+            "path": "clips/uploads/n66BIxtPkkjW0Nt8YRHolmQC9F6RqU4l3RYw9JMC.png",
+            "description": "Quarto com duas camas de madeira, colcha rosa-choque, roupeiro embutido em madeira e janela com cortinas.",
+            "name": "01a1401d675bab86b08842f3fd1373aa.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ccdec3e0",
+            "path": "clips/uploads/4vAPiQnESK2OxlDD3PNci8Kyecewdsc8HwO4dktk.png",
+            "description": "Quarto com duas camas, colcha rosa, ar-condicionado, roupeiro em madeira e porta aberta para a escada.",
+            "name": "01a14018134572963cbac8282d9b54f2.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b6d95262",
+            "path": "clips/uploads/T4GZpquktZtsNlxgwSXilm2JXduBMYkLhVFqewSk.png",
+            "description": "Colagem de duas vistas do mesmo quarto com duas camas, colchas rosa, roupeiros em madeira e ar-condicionado.",
+            "name": "01a140188ef0f1a43cef7817957ade2e.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9e124ba9",
+            "path": "clips/uploads/aeRultIsoeZhc5V6ZF4Nru5247akteFDCR3hfJPX.png",
+            "description": "Closet da suite com roupeiros de madeira, poltrona e porta envidraçada aberta para o terraço soalheiro.",
+            "name": "01a14018960cce87da59b81aef2e4095.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8fd61c86",
+            "path": "clips/uploads/a0NiOXNmex83Y1VZlamm0j5AASjPDOS3EmGGfvDr.png",
+            "description": "Closet com grande roupeiro de madeira e arco que dá acesso ao quarto da suite.",
+            "name": "01a1401894bc65f7614cc49ce9699c58.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5f0ffc24",
+            "path": "clips/uploads/HHIjo7XiQMMqc7L915CUIYoU9FD8tzchWs9ZTCPu.png",
+            "description": "Quarto da suite com cama de casal clara, cómoda com espelho, ar-condicionado e soalho de madeira.",
+            "name": "01a1401895bf096e62a24325d1d98d79.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d3eb78f7",
+            "path": "clips/uploads/22l6VI88xukb282MnHPyR3Te5QZlJkVfsDeFdkoy.png",
+            "description": "Casa de banho da suite com duplo lavatório, duche amplo com coluna de hidromassagem e azulejo terracota.",
+            "name": "01a140188873043c460a6c95ffce8206.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_11276d39",
+            "path": "clips/uploads/MO5erUISxBYmGmN7JB5coWZlSzxgD8rk6LjJ5sOR.png",
+            "description": "Átrio do piso superior com arcos em madeira, roupeiro embutido, soalho e acesso aos quartos.",
+            "name": "01a140180f1770a253552875b27cb173.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c6a01313",
+            "path": "clips/uploads/bfdAb4TJPSvY6Sg4bDeQIqPBYP9juvgEuH4s1FOA.png",
+            "description": "Quarto com cama individual e gavetão, roupeiro embutido em madeira, secretária e ar condicionado",
+            "name": "01a1401896b168a7af783cb75a43e6f8.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_06f3e257",
+            "path": "clips/uploads/IVXEQ9q7JNxoHZNEk6cJVVS6UcAHGO0VhxNQPFry.png",
+            "description": "Quarto/escritório com parede azul-turquesa, cama individual, sofá azul, secretária e estantes de madeira",
+            "name": "01a1401894746b943702f85fd52e98ea.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ba87864d",
+            "path": "clips/uploads/hjmlZDx6dop0LZcIhBFWVkQ6ZzocFKzfjEVUUyvh.png",
+            "description": "Casa de banho em mármore bege, banheira com resguardo, lavatório com espelho grande, sanita e bidé",
+            "name": "01a1401d5a8bee27dfc8957ba143e069.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5fd4c004",
+            "path": "clips/uploads/UD8wvE4IXdpFCb5tcHPDBwkg4y6RHZev4k9oWEW7.png",
+            "description": "Fachada de moradia branca de dois pisos com telhado vermelho, pátio amplo, alpendre com colunas e sofás",
+            "name": "01a140164e83b7b39da8ac0167e68f2f.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a6eb88e6",
+            "path": "clips/uploads/uSUE38K9vwg6K3EKFuP6T7cfYqcl2E4YgWyKYg6V.jpg",
+            "description": "Edifício branco com colunas amarelas, portadas brancas e terraço coberto; possivelmente cozinha de verão",
+            "name": "01a14020351c3c275827fc77c4063a7f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_34aeab2e",
+            "path": "clips/uploads/eCmsyRCs420D9x6ZTIERnrA3p9uTX8xHBq3KQsX5.jpg",
+            "description": "Terraço amplo no piso superior com chaminé algarvia, muro branco e vista para a urbanização",
+            "name": "01a140206878ca7ee2aa905ffc1ffbc8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_43866ddc",
+            "path": "clips/uploads/DBJCjK0mvfkI9f4xwRPgJO53zGcG5uu2prCj1nGM.png",
+            "description": "Retrato da consultora Amélie Guerreiro, da IAD Portugal.",
+            "name": "Amélie Guerreiro.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_90b9b329",
+            "path": "clips/uploads/972xEawpiOz4vbOMxkKfzUnPOkbsCd0MHDeGhsCI.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/6is9ZsIxctI51dtW9Z1qh4653MDKamETbBS6nQO5.mp3",
+    "transcript": {
+        "duration": 34.400001525878906,
+        "text": "Quintal, terraço e cozinha de verão na Quinta del Rey. Uma urbanização tranquila em Beja, perto do centro, de escolas e de comércio. São dois pisos com cinco quartos e quatro casas de banho. No resto do chão, dois quartos, duas salas e uma cozinha espaçosa. Em cima, três quartos, incluindo a suite com closet e acesso ao terraço. Lá fora, um quintal amplo, cozinha de verão com barbecue e alpendre para os carros. Tem ainda lareira, ar-condicionado e alarme. 669 mil euros. Para visitar, fale com a Amélie Guerreiro, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Quintal",
+                "start": 0,
+                "end": 0.5400000214576721
+            },
+            {
+                "word": "terraço",
+                "start": 0.7799999713897705,
+                "end": 1.2599999904632568
+            },
+            {
+                "word": "e",
+                "start": 1.2599999904632568,
+                "end": 1.5199999809265137
+            },
+            {
+                "word": "cozinha",
+                "start": 1.5199999809265137,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "de",
+                "start": 1.8200000524520874,
+                "end": 2.140000104904175
+            },
+            {
+                "word": "verão",
+                "start": 2.140000104904175,
+                "end": 2.240000009536743
+            },
+            {
+                "word": "na",
+                "start": 2.240000009536743,
+                "end": 2.4800000190734863
+            },
+            {
+                "word": "Quinta",
+                "start": 2.4800000190734863,
+                "end": 2.759999990463257
+            },
+            {
+                "word": "del",
+                "start": 2.759999990463257,
+                "end": 3.140000104904175
+            },
+            {
+                "word": "Rey",
+                "start": 3.140000104904175,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "Uma",
+                "start": 3.7200000286102295,
+                "end": 3.799999952316284
+            },
+            {
+                "word": "urbanização",
+                "start": 3.799999952316284,
+                "end": 4.340000152587891
+            },
+            {
+                "word": "tranquila",
+                "start": 4.340000152587891,
+                "end": 4.980000019073486
+            },
+            {
+                "word": "em",
+                "start": 4.980000019073486,
+                "end": 5.21999979019165
+            },
+            {
+                "word": "Beja",
+                "start": 5.21999979019165,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "perto",
+                "start": 5.820000171661377,
+                "end": 5.940000057220459
+            },
+            {
+                "word": "do",
+                "start": 5.940000057220459,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "centro",
+                "start": 6.21999979019165,
+                "end": 6.5
+            },
+            {
+                "word": "de",
+                "start": 6.71999979019165,
+                "end": 6.920000076293945
+            },
+            {
+                "word": "escolas",
+                "start": 6.920000076293945,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "e",
+                "start": 7.260000228881836,
+                "end": 7.440000057220459
+            },
+            {
+                "word": "de",
+                "start": 7.440000057220459,
+                "end": 7.679999828338623
+            },
+            {
+                "word": "comércio",
+                "start": 7.679999828338623,
+                "end": 8.020000457763672
+            },
+            {
+                "word": "São",
+                "start": 8.420000076293945,
+                "end": 8.520000457763672
+            },
+            {
+                "word": "dois",
+                "start": 8.520000457763672,
+                "end": 8.84000015258789
+            },
+            {
+                "word": "pisos",
+                "start": 8.84000015258789,
+                "end": 9.220000267028809
+            },
+            {
+                "word": "com",
+                "start": 9.220000267028809,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "cinco",
+                "start": 9.4399995803833,
+                "end": 9.859999656677246
+            },
+            {
+                "word": "quartos",
+                "start": 9.859999656677246,
+                "end": 10.220000267028809
+            },
+            {
+                "word": "e",
+                "start": 10.220000267028809,
+                "end": 10.520000457763672
+            },
+            {
+                "word": "quatro",
+                "start": 10.520000457763672,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "casas",
+                "start": 10.819999694824219,
+                "end": 11.119999885559082
+            },
+            {
+                "word": "de",
+                "start": 11.119999885559082,
+                "end": 11.420000076293945
+            },
+            {
+                "word": "banho",
+                "start": 11.420000076293945,
+                "end": 11.5
+            },
+            {
+                "word": "No",
+                "start": 11.819999694824219,
+                "end": 11.899999618530273
+            },
+            {
+                "word": "resto",
+                "start": 11.899999618530273,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "do",
+                "start": 12.079999923706055,
+                "end": 12.5
+            },
+            {
+                "word": "chão",
+                "start": 12.5,
+                "end": 12.5
+            },
+            {
+                "word": "dois",
+                "start": 12.800000190734863,
+                "end": 13
+            },
+            {
+                "word": "quartos",
+                "start": 13,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "duas",
+                "start": 13.760000228881836,
+                "end": 13.880000114440918
+            },
+            {
+                "word": "salas",
+                "start": 13.880000114440918,
+                "end": 14.279999732971191
+            },
+            {
+                "word": "e",
+                "start": 14.279999732971191,
+                "end": 14.5
+            },
+            {
+                "word": "uma",
+                "start": 14.5,
+                "end": 14.739999771118164
+            },
+            {
+                "word": "cozinha",
+                "start": 14.739999771118164,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "espaçosa",
+                "start": 14.920000076293945,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "Em",
+                "start": 16.020000457763672,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "cima",
+                "start": 16.18000030517578,
+                "end": 16.440000534057617
+            },
+            {
+                "word": "três",
+                "start": 16.739999771118164,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "quartos",
+                "start": 16.940000534057617,
+                "end": 17.3799991607666
+            },
+            {
+                "word": "incluindo",
+                "start": 17.579999923706055,
+                "end": 17.8799991607666
+            },
+            {
+                "word": "a",
+                "start": 17.8799991607666,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "suite",
+                "start": 18.219999313354492,
+                "end": 18.31999969482422
+            },
+            {
+                "word": "com",
+                "start": 18.31999969482422,
+                "end": 18.559999465942383
+            },
+            {
+                "word": "closet",
+                "start": 18.559999465942383,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "e",
+                "start": 18.979999542236328,
+                "end": 19.280000686645508
+            },
+            {
+                "word": "acesso",
+                "start": 19.280000686645508,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "ao",
+                "start": 19.540000915527344,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "terraço",
+                "start": 19.739999771118164,
+                "end": 20.139999389648438
+            },
+            {
+                "word": "Lá",
+                "start": 20.579999923706055,
+                "end": 20.700000762939453
+            },
+            {
+                "word": "fora",
+                "start": 20.700000762939453,
+                "end": 20.959999084472656
+            },
+            {
+                "word": "um",
+                "start": 21.15999984741211,
+                "end": 21.31999969482422
+            },
+            {
+                "word": "quintal",
+                "start": 21.31999969482422,
+                "end": 21.700000762939453
+            },
+            {
+                "word": "amplo",
+                "start": 21.700000762939453,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "cozinha",
+                "start": 22.559999465942383,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "de",
+                "start": 22.559999465942383,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "verão",
+                "start": 22.940000534057617,
+                "end": 22.940000534057617
+            },
+            {
+                "word": "com",
+                "start": 22.940000534057617,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "barbecue",
+                "start": 23.18000030517578,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 23.68000030517578,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "alpendre",
+                "start": 23.959999084472656,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "para",
+                "start": 24.399999618530273,
+                "end": 24.579999923706055
+            },
+            {
+                "word": "os",
+                "start": 24.579999923706055,
+                "end": 24.940000534057617
+            },
+            {
+                "word": "carros",
+                "start": 24.940000534057617,
+                "end": 25.1200008392334
+            },
+            {
+                "word": "Tem",
+                "start": 25.459999084472656,
+                "end": 25.520000457763672
+            },
+            {
+                "word": "ainda",
+                "start": 25.520000457763672,
+                "end": 25.81999969482422
+            },
+            {
+                "word": "lareira",
+                "start": 25.81999969482422,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "ar",
+                "start": 26.639999389648438,
+                "end": 26.68000030517578
+            },
+            {
+                "word": "condicionado",
+                "start": 26.68000030517578,
+                "end": 27.399999618530273
+            },
+            {
+                "word": "e",
+                "start": 27.399999618530273,
+                "end": 27.639999389648438
+            },
+            {
+                "word": "alarme",
+                "start": 27.639999389648438,
+                "end": 27.979999542236328
+            },
+            {
+                "word": "669",
+                "start": 29.200000762939453,
+                "end": 29.760000228881836
+            },
+            {
+                "word": "mil",
+                "start": 29.760000228881836,
+                "end": 29.899999618530273
+            },
+            {
+                "word": "euros",
+                "start": 29.899999618530273,
+                "end": 30.34000015258789
+            },
+            {
+                "word": "Para",
+                "start": 30.739999771118164,
+                "end": 30.860000610351562
+            },
+            {
+                "word": "visitar",
+                "start": 30.860000610351562,
+                "end": 31.479999542236328
+            },
+            {
+                "word": "fale",
+                "start": 31.760000228881836,
+                "end": 31.760000228881836
+            },
+            {
+                "word": "com",
+                "start": 31.760000228881836,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "a",
+                "start": 31.899999618530273,
+                "end": 32.040000915527344
+            },
+            {
+                "word": "Amélie",
+                "start": 32.040000915527344,
+                "end": 32.34000015258789
+            },
+            {
+                "word": "Guerreiro",
+                "start": 32.34000015258789,
+                "end": 32.79999923706055
+            },
+            {
+                "word": "da",
+                "start": 32.939998626708984,
+                "end": 33.13999938964844
+            },
+            {
+                "word": "IAD",
+                "start": 33.13999938964844,
+                "end": 33.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 33.540000915527344,
+                "end": 33.81999969482422
+            },
+            {
+                "word": "Portugal",
+                "start": 33.81999969482422,
+                "end": 34.13999938964844
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.400001525878906,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.3500000000000014,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "QUINTAL, TERRAÇO E COZINHA DE VERÃO",
+                        "params": {
+                            "src": "img_8191f863",
+                            "avatar": "img_43866ddc",
+                            "logo": "img_90b9b329",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "669.000 €",
+                            "location": "BEJA · QUINTA D'EL REY",
+                            "title": "QUINTAL, TERRAÇO E COZINHA DE VERÃO NA QUINTA D'EL REY.",
+                            "facts": "442 m² · 5 quartos · 4 WC · quintal",
+                            "cta": "Ligue já +351 963 462 725",
+                            "name": "Amélie Guerreiro",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.3500000000000014,
+                "end": 5.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "QUINTA D'EL REY, BEJA",
+                        "params": {
+                            "src": "img_4dbf721e",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.8,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Centro | Escolas | Comércio",
+                        "params": {
+                            "src": "img_5fd4c004",
+                            "title": "PERTO DO CENTRO",
+                            "items": [
+                                "Centro da cidade",
+                                "Escolas",
+                                "Comércio"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 11.75,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "2 PISOS · 5 QUARTOS · 4 WC",
+                        "params": {
+                            "src": "img_93cf195a",
+                            "src2": "img_ba87864d",
+                            "src3": "img_d3eb78f7",
+                            "src4": "img_1db883ae"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.75,
+                "end": 13.76,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "RÉS DO CHÃO",
+                        "params": {
+                            "src": "img_e4b92e36",
+                            "src2": "img_9a3498ed",
+                            "src3": "img_9dcc1007",
+                            "src4": "img_fc4b4009"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.76,
+                "end": 16,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "COZINHA ESPAÇOSA",
+                        "params": {
+                            "src": "img_7bcdc36c",
+                            "src2": "img_9f8b0b1f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16,
+                "end": 18.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "3 QUARTOS NO PISO SUPERIOR",
+                        "params": {
+                            "src": "img_662048f0",
+                            "src2": "img_ccdec3e0",
+                            "src3": "img_b6d95262",
+                            "src4": "img_c6a01313",
+                            "src5": "img_06f3e257"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.2,
+                "end": 20.55,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SUITE COM CLOSET E TERRAÇO",
+                        "params": {
+                            "src": "img_5f0ffc24",
+                            "src2": "img_8fd61c86",
+                            "src3": "img_9e124ba9",
+                            "src4": "img_34aeab2e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.55,
+                "end": 22.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "QUINTAL AMPLO",
+                        "params": {
+                            "src": "img_535080c9",
+                            "src2": "img_59f8f57e",
+                            "src3": "img_7af84ac1",
+                            "src4": "img_8ea1aa59"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.5,
+                "end": 25.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA DE VERÃO E ALPENDRE",
+                        "params": {
+                            "src": "img_05c896dd",
+                            "src2": "img_dbdf68e7",
+                            "src3": "img_a6eb88e6",
+                            "src4": "img_6597cc03"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 28.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "LAREIRA, AR CONDICIONADO E ALARME",
+                        "params": {
+                            "src": "img_8550d813",
+                            "src2": "img_5bffe7de",
+                            "src3": "img_ccd295bf",
+                            "src4": "img_11276d39",
+                            "src5": "img_f3cc14df"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.6,
+                "end": 30.7,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "669.000 €",
+                        "params": {
+                            "src": "img_b8ecc9d0",
+                            "blur": 12,
+                            "charsPerSecond": 8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.7,
+                "end": 34.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Amélie Guerreiro",
+                        "params": {
+                            "src": "img_43866ddc",
+                            "name": "Amélie Guerreiro",
+                            "phone": "+351 963 462 725",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1049502-0eki3/clip.mp4",
+    "error": null
+}

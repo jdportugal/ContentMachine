@@ -1,0 +1,31 @@
+{
+    "colors": {
+        "bg": "#F5F9FA",
+        "bgAlt": "#03406F",
+        "bgContrast": "#24313D",
+        "textOnBg": "#24313D",
+        "textOnContrast": "#F5F9FA",
+        "mutedOnBg": "#005998",
+        "mutedOnContrast": "#A08A5C",
+        "accent": "#A08A5C",
+        "accent2": "#C9AD76",
+        "accent3": "#4FA8E8"
+    },
+    "fonts": {
+        "display": "Montserrat",
+        "body": "Cormorant Garamond",
+        "mono": "Roboto Mono",
+        "displayWeight": 900,
+        "bodyWeight": 400
+    },
+    "texture": {
+        "kind": "solid"
+    },
+    "style": {
+        "headline": "flat",
+        "shadow": "soft",
+        "panelBorder": 0,
+        "sharp": false,
+        "uppercaseTitles": true
+    }
+}

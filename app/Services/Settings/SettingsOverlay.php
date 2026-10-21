@@ -28,6 +28,7 @@ class SettingsOverlay
         'chaves.reddit_client_id' => 'services.reddit.client_id',
         'chaves.reddit_client_secret' => 'services.reddit.client_secret',
         'chaves.kie' => 'services.kie.key',
+        'chaves.fal' => 'services.fal.key',
         'chaves.blotato' => 'services.blotato.key',
         'chaves.zernio' => 'services.zernio.key',
         'chaves.tensorx' => 'services.tensorx.key',

@@ -1,0 +1,1386 @@
+{
+    "status": "done",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Claude Misused for Missiles, Spy Ops & Fake Dating Bots",
+    "source_path": "clips/uploads/cBd0AMp1dpulyVHDQlTBPa4z4WJ2dBY5EdCWAWeK.mp4",
+    "images": [
+        {
+            "id": "img_d26e4e7a",
+            "path": "clips/uploads/uEKkeug40FRezaQBz7xizC4YwulP2A30h9lbTkNR.mp4",
+            "description": "Opening image — A cracked smartphone on a dark table displaying a glowing pink dating-app heart, its reflection on the screen glass revealing a missile silhouette and radar sweep lines instead of a face.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true
+        }
+    ],
+    "meta": {
+        "allowed_present": [
+            "split",
+            "animation"
+        ],
+        "formato": "9:16",
+        "background": "auto",
+        "lead": "",
+        "instructions": "",
+        "fewer_images": true,
+        "free_sfx": false,
+        "musica": "",
+        "musica_volume": 0.1,
+        "research": {
+            "topic": "Anthropic's September 2026 Threat Intelligence Report: how Claude was misused",
+            "summary": "On September 10, 2026, Anthropic published its fourth threat intelligence report, 'Detecting and countering misuse of AI: September 2026', covering operations it detected and disrupted between December 2025 and August 2026 across seven harm areas. Cases include a Yemen missile-guidance cell, a Mali phone-surveillance platform, Iranian domestic spying, Russian AI-rebuilt malware, AI dating-app fraud, and distillation campaigns by China-based labs.",
+            "timeline": [
+                {
+                    "label": "Anthropic's earlier threat reports",
+                    "sublabel": "March, August, November 2025"
+                },
+                {
+                    "label": "First distillation disclosure: DeepSeek, Moonshot, MiniMax",
+                    "sublabel": "Feb 23, 2026"
+                },
+                {
+                    "label": "Dating-app persona network measured",
+                    "sublabel": "April 2026 (2 weeks)"
+                },
+                {
+                    "label": "Largest distillation campaign (Alibaba-linked)",
+                    "sublabel": "May–July 2026"
+                },
+                {
+                    "label": "Microsoft documents 'CaptiveCrunch' hotel Wi-Fi technique",
+                    "sublabel": "July 2026"
+                },
+                {
+                    "label": "Report published: 154 pages, 7 harm areas",
+                    "sublabel": "Sept 10, 2026"
+                },
+                {
+                    "label": "Activity window covered by the report",
+                    "sublabel": "Dec 2025 – Aug 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Report length",
+                    "value": 154,
+                    "unit": "pages"
+                },
+                {
+                    "label": "Harm areas covered",
+                    "value": 7,
+                    "unit": "categories"
+                },
+                {
+                    "label": "SIM cards monitored by Mali's 'Lakana 360' system",
+                    "value": 25000000,
+                    "unit": "SIM cards"
+                },
+                {
+                    "label": "Yemen cell's stated ballistic missile range goal",
+                    "value": 2000,
+                    "unit": "km"
+                },
+                {
+                    "label": "Conventional weapons cases (China, Russia, Yemen)",
+                    "value": 6,
+                    "unit": "cases"
+                },
+                {
+                    "label": "Tweets analyzed by Iranian security unit",
+                    "value": 155216,
+                    "unit": "posts"
+                },
+                {
+                    "label": "Iranians the unit claimed to have profiled in one year",
+                    "value": 6388,
+                    "unit": "people"
+                },
+                {
+                    "label": "Iran-linked Claude accounts banned",
+                    "value": 16,
+                    "unit": "accounts"
+                },
+                {
+                    "label": "Influence operations disrupted (six continents)",
+                    "value": 9,
+                    "unit": "operations"
+                },
+                {
+                    "label": "Biological-misuse cases flagged",
+                    "value": 5,
+                    "unit": "cases"
+                },
+                {
+                    "label": "AI dating personas (April 2026, 2 weeks)",
+                    "value": 4700,
+                    "unit": "personas"
+                },
+                {
+                    "label": "Real people they talked to",
+                    "value": 25000,
+                    "unit": "users"
+                },
+                {
+                    "label": "Messages sent by the AI personas",
+                    "value": 2360000,
+                    "unit": "messages"
+                },
+                {
+                    "label": "Organizations targeted by Russia-linked GTG-20006",
+                    "value": 20,
+                    "unit": "organizations (min.)"
+                },
+                {
+                    "label": "National identity records stolen (North African authority)",
+                    "value": 300000,
+                    "unit": "records"
+                },
+                {
+                    "label": "China-based labs tied to distillation campaigns",
+                    "value": 7,
+                    "unit": "labs"
+                },
+                {
+                    "label": "Alibaba-linked Claude exchanges (May–July 2026)",
+                    "value": 151000000,
+                    "unit": "exchanges"
+                },
+                {
+                    "label": "Fraudulent accounts in that campaign",
+                    "value": 3500,
+                    "unit": "accounts"
+                },
+                {
+                    "label": "DeepSeek-attributed exchanges (14 days, July 2026)",
+                    "value": 12000000,
+                    "unit": "exchanges"
+                },
+                {
+                    "label": "Moonshot requests relayed to Claude in 10 days",
+                    "value": 300000,
+                    "unit": "requests"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "AI's role: assistant → orchestrator",
+                    "left": {
+                        "title": "Before (2025 reports)",
+                        "points": [
+                            "Model mostly advises humans",
+                            "Humans write and run the attack code",
+                            "Prompt-level assistance"
+                        ]
+                    },
+                    "right": {
+                        "title": "September 2026 report",
+                        "points": [
+                            "Multi-agent frameworks execute operations",
+                            "Agents rebuild malware until antivirus misses it",
+                            "Humans mainly pick targets and review output"
+                        ]
+                    }
+                },
+                {
+                    "title": "Distillation: February vs September 2026",
+                    "left": {
+                        "title": "Feb 23, 2026 disclosure",
+                        "points": [
+                            "3 labs named: DeepSeek, Moonshot, MiniMax",
+                            "Industrial-scale capability extraction"
+                        ]
+                    },
+                    "right": {
+                        "title": "Sept 10, 2026 report",
+                        "points": [
+                            "7 China-based labs identified",
+                            "Alibaba-linked: 151M+ exchanges, May–July 2026",
+                            "Moonshot and DeepSeek relayed their own users' requests to Claude"
+                        ]
+                    }
+                },
+                {
+                    "title": "Ban an account ≠ stop the operation",
+                    "left": {
+                        "title": "What Anthropic could stop",
+                        "points": [
+                            "Banned the Yemen cell's accounts",
+                            "Banned the Mali consultant's account",
+                            "Banned 16 Iran-linked accounts"
+                        ]
+                    },
+                    "right": {
+                        "title": "What survived",
+                        "points": [
+                            "Yemen cell had an offline simulation toolkit needing no Claude",
+                            "'Lakana 360' runs on local, on-premises models",
+                            "Anthropic could not disable the deployed surveillance platform"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Anthropic published its most detailed threat report on September 10, 2026, covering Dec 2025–Aug 2026.",
+                "A weapons cell in northern Yemen used Claude Code in place of human software engineers for missile guidance, navigation and control software.",
+                "Programs included a guided rocket, a multi-stage ballistic missile with a stated range goal above 2,000 km, and a hypersonic glide vehicle variant.",
+                "No operational weapon was fielded; a guided-rocket test appears to have failed — the operators came back to Claude hours later to debug it.",
+                "The correct country is Mali, not 'Tali Toumali': a Bamako consultant built 'Lakana 360' for state intelligence service ANSE, covering ~25 million SIM cards.",
+                "The system could capture calls, texts and voice traffic, re-identify people by voice after SIM swaps, and flag encryption or VPN users.",
+                "An Iranian security-linked unit ran analysis over 155,216 tweets and claimed to have profiled 6,388 Iranians in a single year; 16 accounts were banned.",
+                "A Russia-linked actor (GTG-20006, consistent with Midnight Blizzard) used agents that rebuilt malware whenever security products detected it.",
+                "A China-based studio ran 20+ dating apps where 4,700+ Claude personas messaged 25,000+ real users — roughly 3 AI personas per human gig worker.",
+                "Seven China-based labs were tied to distillation campaigns; the Alibaba-linked one, at 151M+ exchanges, is the largest Anthropic has ever measured.",
+                "Anthropic says it disrupted every operation in the report and that the cases are the most sophisticated it has seen, not typical misuse."
+            ],
+            "sources": [
+                "https://www.anthropic.com/threat-intelligence-report-september-2026",
+                "https://www.anthropic.com/threat-intelligence",
+                "https://www.axios.com/2026/09/12/anthropic-ai-threat-report-russia-iran-china",
+                "https://www.washingtonpost.com/technology/2026/09/11/rebels-used-anthropics-ai-bot-develop-guided-weapons-report-says/",
+                "https://www.nbcbayarea.com/news/national-international/anthropic-claude-users-houthis-yemen-tried-ai-weapons/4141611/",
+                "https://www.implicator.ai/yemen-missile-cell-used-claude-code-in-place-of-human-engineers/",
+                "https://www.bangkokpost.com/world/3318429/weapons-spyware-and-ai-scams-anthropic-exposes-claude-misuse",
+                "https://www.iranintl.com/en/202609131676",
+                "https://www.siasat.com/iran-used-claude-to-track-us-warships-plan-khameneis-funeral-3540342/",
+                "https://www.cnbc.com/2026/09/11/chinese-ai-labs-moonshot-deepseek-alibaba-anthropic.html",
+                "https://techcrunch.com/2026/09/10/anthropic-details-distillation-campaigns-from-alibaba-moonshot-ai-and-deepseek/",
+                "https://thehackernews.com/2026/09/russian-state-sponsored-hackers-use.html",
+                "https://www.business-standard.com/technology/tech-news/anthropic-report-ai-fake-newsrooms-dating-surveillance-scams-126091100730_1.html",
+                "https://www.cyberkendra.com/2026/09/anthropic-threat-report-says-ai-now.html",
+                "https://www.techtimes.com/articles/327308/20260911/anthropic-threat-report-ai-models-near-bioweapons-threshold-drone-kill-software-emerges.htm"
+            ]
+        },
+        "suggested": {
+            "title": "Claude Misused for Missiles, Spy Ops & Fake Dating Bots",
+            "description": "Anthropic's new Threat Intelligence report reveals how Claude was misused around the world, from a Yemeni weapons cell writing guidance code for guided rockets and ballistic missiles to intelligence services monitoring 25 million SIM cards and profiling citizens through scraped tweets. It also details Russian-linked hackers rebuilding malware with AI agents, dating app scams powered by bots, and Chinese labs attempting to distill Claude into their own models. Here's a breakdown of the seven abuse categories Anthropic says it disrupted.",
+            "tags": [
+                "anthropic",
+                "claude",
+                "ai safety",
+                "threat intelligence",
+                "ai misuse",
+                "cybersecurity",
+                "artificial intelligence",
+                "ai news"
+            ]
+        },
+        "image_requests": [
+            {
+                "key": "9c7a8bb5",
+                "prompt": "https://www.anthropic.com/threat-intelligence",
+                "label": "Antropic just dropped its new Threat Intelligence report and the misuse cases are wild",
+                "site": "https://www.anthropic.com/threat-intelligence",
+                "still": false
+            },
+            {
+                "key": "906a9166",
+                "prompt": "A dusty improvised workshop in an arid mountain region, unfinished rocket fuselage sections on metal stands, laptops and cables on a worn workbench, harsh daylight through a broken window, gritty documentary photography, no people visible",
+                "label": "A weapons cell in North Yemen used Claude Claude instead of higher software engineers to write guidance code for a guided rocket and",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "299c51a4",
+                "prompt": "Close-up of a hand holding a smartphone at night showing a blurred dating app card stack, faces softly out of focus and dissolving into glowing blue digital particles, moody cinematic lighting, no readable text",
+                "label": "and one scamming rig ran dating apps where most of the people you'd match were AI The",
+                "site": null,
+                "still": false
+            },
+            {
+                "key": "intro",
+                "prompt": "Cinematic vertical 9:16 close-up of a smartphone lying on a dark matte table in a dim room, screen glowing with a soft pink heart-shaped dating-app icon and a blurred profile photo, while the reflection in the screen glass and the light spilling onto the table reveal a shadowy missile silhouette and green radar sweep lines, thin fiber-optic cables snaking out from the phone into darkness, moody teal and magenta lighting, shallow depth of field, photorealistic, tense surveillance atmosphere, no text, no logos",
+                "label": "Opening image — A cracked smartphone on a dark table displaying a glowing pink dating-app heart, its reflection on the screen glass revealing a missile silhouette and radar sweep lines instead of a face.",
+                "site": null
+            }
+        ],
+        "image_uploads": {
+            "intro": "img_d26e4e7a"
+        },
+        "site_collecting": [],
+        "image_text": {
+            "906a9166": true,
+            "9c7a8bb5": true,
+            "299c51a4": true
+        }
+    },
+    "id": "anthropic-catches-claude-building-rocket-udzkv",
+    "created_at": "2026-09-13T09:28:46+00:00",
+    "updated_at": "2026-09-13T10:27:42+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/anthropic-catches-claude-building-rocket-udzkv/audio.m4a",
+    "transcript": {
+        "duration": 60.79999923706055,
+        "text": "Antropic just caught Claude building rockets in Yemen and spying on 25 million sims Antropic just dropped its new Threat Intelligence report and the misuse cases are wild A weapons cell in North Yemen used Claude Claude instead of higher software engineers to write guidance code for a guided rocket and a ballistic missile with a stated range goal above 2 000 km A consultant Tali Toumali's intelligence service used Claude to monitor 25 million sim cards and the Iranian security unit scraped over 155 000 tweets to profile their own citizens Russian linked hackers ran AI agents that kept rebuilding malware every time an antivirus caught it and one scamming rig ran dating apps where most of the people you'd match were AI The report covers everything Antropic disrupted between December 2025 and August 2026 across seven categories including Chinese AI labs trying to distill Claude into their own models",
+        "language": "english",
+        "words": [
+            {
+                "word": "Antropic",
+                "start": 0,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "just",
+                "start": 0.699999988079071,
+                "end": 0.9599999785423279
+            },
+            {
+                "word": "caught",
+                "start": 0.9599999785423279,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "Claude",
+                "start": 1.440000057220459,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "building",
+                "start": 1.5800000429153442,
+                "end": 2.0399999618530273
+            },
+            {
+                "word": "rockets",
+                "start": 2.0399999618530273,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "in",
+                "start": 2.380000114440918,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "Yemen",
+                "start": 2.859999895095825,
+                "end": 2.859999895095825
+            },
+            {
+                "word": "and",
+                "start": 2.859999895095825,
+                "end": 3.4600000381469727
+            },
+            {
+                "word": "spying",
+                "start": 3.4600000381469727,
+                "end": 3.619999885559082
+            },
+            {
+                "word": "on",
+                "start": 3.619999885559082,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "25",
+                "start": 3.9000000953674316,
+                "end": 4.460000038146973
+            },
+            {
+                "word": "million",
+                "start": 4.460000038146973,
+                "end": 4.840000152587891
+            },
+            {
+                "word": "sims",
+                "start": 4.840000152587891,
+                "end": 6.059999942779541
+            },
+            {
+                "word": "Antropic",
+                "start": 6.059999942779541,
+                "end": 6.599999904632568
+            },
+            {
+                "word": "just",
+                "start": 6.599999904632568,
+                "end": 6.900000095367432
+            },
+            {
+                "word": "dropped",
+                "start": 6.900000095367432,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "its",
+                "start": 7.039999961853027,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "new",
+                "start": 7.260000228881836,
+                "end": 7.559999942779541
+            },
+            {
+                "word": "Threat",
+                "start": 7.559999942779541,
+                "end": 7.659999847412109
+            },
+            {
+                "word": "Intelligence",
+                "start": 7.659999847412109,
+                "end": 8.15999984741211
+            },
+            {
+                "word": "report",
+                "start": 8.15999984741211,
+                "end": 8.640000343322754
+            },
+            {
+                "word": "and",
+                "start": 8.920000076293945,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "the",
+                "start": 8.979999542236328,
+                "end": 9.140000343322754
+            },
+            {
+                "word": "misuse",
+                "start": 9.140000343322754,
+                "end": 9.420000076293945
+            },
+            {
+                "word": "cases",
+                "start": 9.420000076293945,
+                "end": 9.819999694824219
+            },
+            {
+                "word": "are",
+                "start": 9.819999694824219,
+                "end": 10.180000305175781
+            },
+            {
+                "word": "wild",
+                "start": 10.180000305175781,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "A",
+                "start": 11.100000381469727,
+                "end": 11.199999809265137
+            },
+            {
+                "word": "weapons",
+                "start": 11.199999809265137,
+                "end": 11.539999961853027
+            },
+            {
+                "word": "cell",
+                "start": 11.539999961853027,
+                "end": 11.819999694824219
+            },
+            {
+                "word": "in",
+                "start": 11.819999694824219,
+                "end": 12.020000457763672
+            },
+            {
+                "word": "North",
+                "start": 12.020000457763672,
+                "end": 12.359999656677246
+            },
+            {
+                "word": "Yemen",
+                "start": 12.359999656677246,
+                "end": 12.520000457763672
+            },
+            {
+                "word": "used",
+                "start": 12.520000457763672,
+                "end": 13.0600004196167
+            },
+            {
+                "word": "Claude",
+                "start": 13.0600004196167,
+                "end": 13.319999694824219
+            },
+            {
+                "word": "Claude",
+                "start": 13.319999694824219,
+                "end": 13.5600004196167
+            },
+            {
+                "word": "instead",
+                "start": 13.5600004196167,
+                "end": 13.819999694824219
+            },
+            {
+                "word": "of",
+                "start": 13.819999694824219,
+                "end": 14.15999984741211
+            },
+            {
+                "word": "higher",
+                "start": 14.15999984741211,
+                "end": 14.359999656677246
+            },
+            {
+                "word": "software",
+                "start": 14.359999656677246,
+                "end": 14.699999809265137
+            },
+            {
+                "word": "engineers",
+                "start": 14.699999809265137,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "to",
+                "start": 15.119999885559082,
+                "end": 15.380000114440918
+            },
+            {
+                "word": "write",
+                "start": 15.380000114440918,
+                "end": 15.600000381469727
+            },
+            {
+                "word": "guidance",
+                "start": 15.600000381469727,
+                "end": 15.920000076293945
+            },
+            {
+                "word": "code",
+                "start": 15.920000076293945,
+                "end": 16.219999313354492
+            },
+            {
+                "word": "for",
+                "start": 16.219999313354492,
+                "end": 16.459999084472656
+            },
+            {
+                "word": "a",
+                "start": 16.459999084472656,
+                "end": 16.6200008392334
+            },
+            {
+                "word": "guided",
+                "start": 16.6200008392334,
+                "end": 16.8799991607666
+            },
+            {
+                "word": "rocket",
+                "start": 16.8799991607666,
+                "end": 17.280000686645508
+            },
+            {
+                "word": "and",
+                "start": 17.280000686645508,
+                "end": 17.719999313354492
+            },
+            {
+                "word": "a",
+                "start": 17.719999313354492,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "ballistic",
+                "start": 18.219999313354492,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "missile",
+                "start": 18.219999313354492,
+                "end": 18.6200008392334
+            },
+            {
+                "word": "with",
+                "start": 18.6200008392334,
+                "end": 19.139999389648438
+            },
+            {
+                "word": "a",
+                "start": 19.139999389648438,
+                "end": 19.34000015258789
+            },
+            {
+                "word": "stated",
+                "start": 19.34000015258789,
+                "end": 19.579999923706055
+            },
+            {
+                "word": "range",
+                "start": 19.579999923706055,
+                "end": 20.18000030517578
+            },
+            {
+                "word": "goal",
+                "start": 20.18000030517578,
+                "end": 20.579999923706055
+            },
+            {
+                "word": "above",
+                "start": 20.579999923706055,
+                "end": 20.899999618530273
+            },
+            {
+                "word": "2",
+                "start": 20.899999618530273,
+                "end": 21.219999313354492
+            },
+            {
+                "word": "000",
+                "start": 21.219999313354492,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "km",
+                "start": 21.65999984741211,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "A",
+                "start": 22.719999313354492,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "consultant",
+                "start": 22.899999618530273,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "Tali",
+                "start": 23.65999984741211,
+                "end": 23.799999237060547
+            },
+            {
+                "word": "Toumali's",
+                "start": 23.799999237060547,
+                "end": 24.31999969482422
+            },
+            {
+                "word": "intelligence",
+                "start": 24.31999969482422,
+                "end": 24.68000030517578
+            },
+            {
+                "word": "service",
+                "start": 24.68000030517578,
+                "end": 25.18000030517578
+            },
+            {
+                "word": "used",
+                "start": 25.239999771118164,
+                "end": 25.459999084472656
+            },
+            {
+                "word": "Claude",
+                "start": 25.459999084472656,
+                "end": 25.600000381469727
+            },
+            {
+                "word": "to",
+                "start": 25.600000381469727,
+                "end": 25.959999084472656
+            },
+            {
+                "word": "monitor",
+                "start": 25.959999084472656,
+                "end": 26.239999771118164
+            },
+            {
+                "word": "25",
+                "start": 26.239999771118164,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "million",
+                "start": 26.920000076293945,
+                "end": 27.200000762939453
+            },
+            {
+                "word": "sim",
+                "start": 27.200000762939453,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "cards",
+                "start": 27.540000915527344,
+                "end": 27.760000228881836
+            },
+            {
+                "word": "and",
+                "start": 28.260000228881836,
+                "end": 28.360000610351562
+            },
+            {
+                "word": "the",
+                "start": 28.360000610351562,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "Iranian",
+                "start": 28.520000457763672,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "security",
+                "start": 28.860000610351562,
+                "end": 29.360000610351562
+            },
+            {
+                "word": "unit",
+                "start": 29.360000610351562,
+                "end": 29.719999313354492
+            },
+            {
+                "word": "scraped",
+                "start": 29.719999313354492,
+                "end": 30.399999618530273
+            },
+            {
+                "word": "over",
+                "start": 30.399999618530273,
+                "end": 31.040000915527344
+            },
+            {
+                "word": "155",
+                "start": 31.040000915527344,
+                "end": 32.540000915527344
+            },
+            {
+                "word": "000",
+                "start": 32.540000915527344,
+                "end": 32.81999969482422
+            },
+            {
+                "word": "tweets",
+                "start": 32.81999969482422,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "to",
+                "start": 33.119998931884766,
+                "end": 33.380001068115234
+            },
+            {
+                "word": "profile",
+                "start": 33.380001068115234,
+                "end": 33.779998779296875
+            },
+            {
+                "word": "their",
+                "start": 33.779998779296875,
+                "end": 34.040000915527344
+            },
+            {
+                "word": "own",
+                "start": 34.220001220703125,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "citizens",
+                "start": 34.900001525878906,
+                "end": 34.900001525878906
+            },
+            {
+                "word": "Russian",
+                "start": 35.959999084472656,
+                "end": 36.31999969482422
+            },
+            {
+                "word": "linked",
+                "start": 36.31999969482422,
+                "end": 36.7400016784668
+            },
+            {
+                "word": "hackers",
+                "start": 36.7400016784668,
+                "end": 36.939998626708984
+            },
+            {
+                "word": "ran",
+                "start": 36.939998626708984,
+                "end": 37.20000076293945
+            },
+            {
+                "word": "AI",
+                "start": 37.20000076293945,
+                "end": 37.459999084472656
+            },
+            {
+                "word": "agents",
+                "start": 37.459999084472656,
+                "end": 37.779998779296875
+            },
+            {
+                "word": "that",
+                "start": 37.779998779296875,
+                "end": 38.060001373291016
+            },
+            {
+                "word": "kept",
+                "start": 38.060001373291016,
+                "end": 38.34000015258789
+            },
+            {
+                "word": "rebuilding",
+                "start": 38.34000015258789,
+                "end": 38.79999923706055
+            },
+            {
+                "word": "malware",
+                "start": 38.79999923706055,
+                "end": 39.20000076293945
+            },
+            {
+                "word": "every",
+                "start": 39.20000076293945,
+                "end": 39.63999938964844
+            },
+            {
+                "word": "time",
+                "start": 39.63999938964844,
+                "end": 39.7599983215332
+            },
+            {
+                "word": "an",
+                "start": 39.7599983215332,
+                "end": 40.02000045776367
+            },
+            {
+                "word": "antivirus",
+                "start": 40.02000045776367,
+                "end": 40.220001220703125
+            },
+            {
+                "word": "caught",
+                "start": 40.220001220703125,
+                "end": 40.58000183105469
+            },
+            {
+                "word": "it",
+                "start": 40.58000183105469,
+                "end": 40.939998626708984
+            },
+            {
+                "word": "and",
+                "start": 41.18000030517578,
+                "end": 41.47999954223633
+            },
+            {
+                "word": "one",
+                "start": 41.47999954223633,
+                "end": 41.720001220703125
+            },
+            {
+                "word": "scamming",
+                "start": 41.720001220703125,
+                "end": 42.220001220703125
+            },
+            {
+                "word": "rig",
+                "start": 42.220001220703125,
+                "end": 42.31999969482422
+            },
+            {
+                "word": "ran",
+                "start": 42.31999969482422,
+                "end": 42.58000183105469
+            },
+            {
+                "word": "dating",
+                "start": 42.58000183105469,
+                "end": 42.959999084472656
+            },
+            {
+                "word": "apps",
+                "start": 42.959999084472656,
+                "end": 43.20000076293945
+            },
+            {
+                "word": "where",
+                "start": 43.20000076293945,
+                "end": 43.459999084472656
+            },
+            {
+                "word": "most",
+                "start": 43.459999084472656,
+                "end": 43.720001220703125
+            },
+            {
+                "word": "of",
+                "start": 43.720001220703125,
+                "end": 43.900001525878906
+            },
+            {
+                "word": "the",
+                "start": 43.900001525878906,
+                "end": 44.099998474121094
+            },
+            {
+                "word": "people",
+                "start": 44.099998474121094,
+                "end": 44.58000183105469
+            },
+            {
+                "word": "you'd",
+                "start": 44.58000183105469,
+                "end": 45.060001373291016
+            },
+            {
+                "word": "match",
+                "start": 45.060001373291016,
+                "end": 45.119998931884766
+            },
+            {
+                "word": "were",
+                "start": 45.119998931884766,
+                "end": 45.540000915527344
+            },
+            {
+                "word": "AI",
+                "start": 45.540000915527344,
+                "end": 45.900001525878906
+            },
+            {
+                "word": "The",
+                "start": 46.279998779296875,
+                "end": 46.91999816894531
+            },
+            {
+                "word": "report",
+                "start": 46.91999816894531,
+                "end": 47.119998931884766
+            },
+            {
+                "word": "covers",
+                "start": 47.119998931884766,
+                "end": 47.380001068115234
+            },
+            {
+                "word": "everything",
+                "start": 47.380001068115234,
+                "end": 47.81999969482422
+            },
+            {
+                "word": "Antropic",
+                "start": 47.81999969482422,
+                "end": 48.20000076293945
+            },
+            {
+                "word": "disrupted",
+                "start": 48.20000076293945,
+                "end": 48.68000030517578
+            },
+            {
+                "word": "between",
+                "start": 48.68000030517578,
+                "end": 49.060001373291016
+            },
+            {
+                "word": "December",
+                "start": 49.060001373291016,
+                "end": 49.41999816894531
+            },
+            {
+                "word": "2025",
+                "start": 49.41999816894531,
+                "end": 50.540000915527344
+            },
+            {
+                "word": "and",
+                "start": 50.540000915527344,
+                "end": 50.84000015258789
+            },
+            {
+                "word": "August",
+                "start": 50.84000015258789,
+                "end": 51.099998474121094
+            },
+            {
+                "word": "2026",
+                "start": 51.099998474121094,
+                "end": 52.15999984741211
+            },
+            {
+                "word": "across",
+                "start": 52.15999984741211,
+                "end": 52.79999923706055
+            },
+            {
+                "word": "seven",
+                "start": 52.79999923706055,
+                "end": 53.15999984741211
+            },
+            {
+                "word": "categories",
+                "start": 53.15999984741211,
+                "end": 53.68000030517578
+            },
+            {
+                "word": "including",
+                "start": 53.81999969482422,
+                "end": 54.13999938964844
+            },
+            {
+                "word": "Chinese",
+                "start": 54.13999938964844,
+                "end": 54.560001373291016
+            },
+            {
+                "word": "AI",
+                "start": 54.560001373291016,
+                "end": 54.880001068115234
+            },
+            {
+                "word": "labs",
+                "start": 54.880001068115234,
+                "end": 55.119998931884766
+            },
+            {
+                "word": "trying",
+                "start": 55.119998931884766,
+                "end": 55.380001068115234
+            },
+            {
+                "word": "to",
+                "start": 55.380001068115234,
+                "end": 55.63999938964844
+            },
+            {
+                "word": "distill",
+                "start": 55.63999938964844,
+                "end": 55.880001068115234
+            },
+            {
+                "word": "Claude",
+                "start": 55.880001068115234,
+                "end": 56.13999938964844
+            },
+            {
+                "word": "into",
+                "start": 56.13999938964844,
+                "end": 56.41999816894531
+            },
+            {
+                "word": "their",
+                "start": 56.41999816894531,
+                "end": 56.63999938964844
+            },
+            {
+                "word": "own",
+                "start": 56.63999938964844,
+                "end": 56.900001525878906
+            },
+            {
+                "word": "models",
+                "start": 56.900001525878906,
+                "end": 57.20000076293945
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 60.79999923706055,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 5.219999999999999,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "video-intro",
+                        "text": "rockets",
+                        "params": {
+                            "src": "img_d26e4e7a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.219999999999999,
+                "end": 10.8,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "New Threat Report",
+                            "lines": [
+                                "Published by Anthropic",
+                                "Real misuse cases exposed",
+                                "Findings are striking"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.8,
+                "end": 17.5,
+                "background": "video",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Rocket Guidance Misuse",
+                            "lines": [
+                                "Weapons cell in North Yemen",
+                                "Claude replaced senior engineers",
+                                "Wrote guided rocket code"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.5,
+                "end": 22.7,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "2,000 km",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Stated Range Goal",
+                            "lines": [
+                                "Guided rocket program",
+                                "Multi-stage ballistic missile",
+                                "Above 2,000 km"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.7,
+                "end": 28.26,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "25 million",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "Phone Surveillance Platform",
+                            "lines": [
+                                "Built for a state intelligence service",
+                                "25 million SIM cards covered",
+                                "Calls, texts and voice traffic",
+                                "Flags VPN and encryption users"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.26,
+                "end": 35.96,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "their own citizens",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Iran-linked security unit",
+                            "items": [
+                                "155,216 tweets analyzed",
+                                "6,388 citizens profiled",
+                                "16 accounts banned"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.96,
+                "end": 41.18,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "rebuilding",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "diagram",
+                        "text": "",
+                        "params": {
+                            "title": "The rebuild loop",
+                            "layout": "cycle",
+                            "nodes": [
+                                {
+                                    "label": "Agent writes malware"
+                                },
+                                {
+                                    "label": "Antivirus detects it"
+                                },
+                                {
+                                    "label": "Agent mutates code",
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "Deployed again"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.18,
+                "end": 46.28,
+                "background": "video",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": null,
+                        "params": {
+                            "title": "Fake Dating Operation",
+                            "lines": [
+                                "Scam rig ran dating apps",
+                                "Most matches were AI"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 46.28,
+                "end": 52.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "disrupted",
+                "present": "animation",
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "caption": "What the report covers",
+                            "items": [
+                                {
+                                    "label": "Dec 2025 — activity window opens"
+                                },
+                                {
+                                    "label": "Feb 2026 — first distillation disclosure"
+                                },
+                                {
+                                    "label": "May–Jul 2026 — largest distillation campaign"
+                                },
+                                {
+                                    "label": "Aug 2026 — window closes"
+                                },
+                                {
+                                    "label": "Sept 2026 — report published",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 52.8,
+                "end": 57.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": "seven",
+                "present": "video",
+                "layers": []
+            },
+            {
+                "start": 57.3,
+                "end": 60.79999923706055,
+                "background": "video",
+                "transitionIn": "whip",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": "distill",
+                "present": "split",
+                "layers": [
+                    {
+                        "type": "bar-chart",
+                        "text": "",
+                        "params": {
+                            "title": "Distillation exchanges",
+                            "unit": "M exchanges",
+                            "bars": [
+                                {
+                                    "label": "Alibaba-linked",
+                                    "value": 151,
+                                    "highlight": true
+                                },
+                                {
+                                    "label": "DeepSeek",
+                                    "value": 12
+                                },
+                                {
+                                    "label": "Moonshot",
+                                    "value": 0.3
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/anthropic-catches-claude-building-rocket-udzkv/clip.mp4",
+    "finished": true,
+    "publish_state": "scheduled",
+    "scheduled_for": null,
+    "plataformas": [
+        "youtube",
+        "instagram",
+        "tiktok"
+    ],
+    "blotato_ids": {
+        "youtube": true,
+        "instagram": true,
+        "tiktok": true
+    },
+    "dm_automations": {
+        "instagram": "6aa67a9ea6a076d94c8d4d51"
+    },
+    "dm_link": "https://www.anthropic.com/threat-intelligence-report-september-2026",
+    "dm_keyword": "THREAT"
+}

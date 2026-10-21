@@ -1,0 +1,1253 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T5 contemporânea na Guia, Albufeira | 1.195.000 €",
+    "source_text": null,
+    "source_path": "clips/uploads/dAgExz1rrQzTsNoW6dnLD4gbWDb5qN59SuzkKrfy.mp3",
+    "images": [
+        {
+            "id": "img_e0fcb71b",
+            "path": "clips/uploads/uZQxCJYDn3MprgVx1v6o0lFGEDIUdDcoZvW5Bn5d.png",
+            "description": "Casa de banho com duche de canto, dois lavatórios sobre móvel de madeira e grande espelho.",
+            "name": "59f8ef5e-3272-40f4-8a16-56345e8d3310.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d954edba",
+            "path": "clips/uploads/6hggx4ZnLUxstF625p4nal56Qo6IDuGaw088U02H.png",
+            "description": "Casa de banho de serviço com lavatório, sanita e bidé suspensos e janela com grade.",
+            "name": "3baab5e7-a73e-4943-92bd-5423e9fa6bbf.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_18c75a3f",
+            "path": "clips/uploads/ll8nuXYuROcJchTt1GbsgY0U7E2u5T9ZtCRIuwId.png",
+            "description": "Quarto com teto abobadado de tijolo, cabeceira amarela capitonê e porta envidraçada para varanda com vista.",
+            "name": "3d57505f-a555-4cd8-b18f-649229c00057.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5a09a094",
+            "path": "clips/uploads/D6P48Lf2ygtO1Z8KD8RzW4eEIxxOUR27UY7f4jPu.png",
+            "description": "Quarto com teto abobadado de tijolo, cómoda com televisão e porta para varanda com pinheiros.",
+            "name": "51c5c389-6362-4dde-a039-c3251ae628f3.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bc00784a",
+            "path": "clips/uploads/HYw6anFmYjHsEqgyIfwy4YNLL9HwSIqNORlL0lfk.png",
+            "description": "Quarto principal com abóbada de tijolo, cabeceira amarela e corredor visível pela porta aberta.",
+            "name": "a747dd6a-51c4-4df3-bbe4-31152bca1b16.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_696b1ae3",
+            "path": "clips/uploads/htuODEA11QxC1xVYfpCbUQceQCenlvvEQtyugpXv.png",
+            "description": "Quarto com teto abobadado de tijolo, ventoinha, cama de casal e porta envidraçada para terraço soalheiro.",
+            "name": "5b7d68cc-fb00-4db9-9f94-93bb0d2a28a2.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_facdf54d",
+            "path": "clips/uploads/LRVEjK6PvsETXMBzqyH5WJmkX3uG7GwwJ7Sbd6Ye.png",
+            "description": "Casa de banho ampla com sanita e bidé suspensos, móvel de madeira e porta para terraço.",
+            "name": "d7ab5c79-4fae-43f9-8c7c-18c444485641.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a4c88989",
+            "path": "clips/uploads/HCIXfP2GLhIt24ACrXsUEAmrovQuSqbsLR8ICwHA.png",
+            "description": "Quarto de casal em tons bege com ar condicionado e casa de banho privativa visível.",
+            "name": "62b4753d-e426-4901-af92-73e7bbcb02cc.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f321e9d",
+            "path": "clips/uploads/q1pyyAaKIOl97eag2fkrwzuFyYxrDChLlwE6ZB0j.png",
+            "description": "Quarto de casal claro com cortinas leves, porta-janela alta, ar condicionado e cabeceira bege.",
+            "name": "04b714a7-6068-4103-8412-de3ad98fd4fe.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a7d9d4a1",
+            "path": "clips/uploads/rtZLJ3M4oGL4fDdbTLdwULjuMG5Tp5HQ5T6RVoSh.png",
+            "description": "Quarto de casal luminoso com três espelhos dourados, candeeiros acesos e porta-janela com cortinas.",
+            "name": "0502013c-12bb-49db-b6ea-e3b5b6e53724.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a4a62ed4",
+            "path": "clips/uploads/dW6X5xS3S0WTFwD9yB87yOiirTzOZAEmSEwbub4l.png",
+            "description": "Casa de banho com base de duche em vidro, parede de azulejo castanho, móvel de madeira e lavatório branco.",
+            "name": "29b028f1-3433-4f34-92a3-509f303e7b9a.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b4334400",
+            "path": "clips/uploads/OwyTl0G8Jz1QP40FVRZYSTZXXjsajRfjnsQN5nCQ.png",
+            "description": "Corredor com chão de madeira e portas de madeira, com vista para a casa de banho com duche.",
+            "name": "27c2e071-d6c6-414f-9f35-a74fafd9d352.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_85fe3b1f",
+            "path": "clips/uploads/eEM9kOvgq1do0THtyzDgNqaSh5SqPik11jgUdz8V.png",
+            "description": "Jardim com cadeirões de vime, mesa com vinho e petiscos, palmeiras e moradias amarelas ao fundo.",
+            "name": "0449695f-0ce5-4057-a06a-2e12f556ba17.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5ec944ad",
+            "path": "clips/uploads/NegzHGLZozlaLgjd1Li7XEu0AcRR4IPavWZNLKjr.png",
+            "description": "Exterior com churrasqueira de tijolo, caminho de calçada, arbustos vermelhos, palmeiras e pérgola ao fundo.",
+            "name": "da56eaf0-0db9-455b-9e43-0d3444ef3279.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7b706cf1",
+            "path": "clips/uploads/dprUsA0PWmLNVTT9T5dxiKQYXGDkGgFP1OSKrCGN.png",
+            "description": "Refeições ao ar livre sob pérgola, mesa posta com vista para piscina, relvado e espreguiçadeiras.",
+            "name": "412f2a1d-01d0-4582-9373-f1db71adbb45.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1f8229c0",
+            "path": "clips/uploads/OI5LtbPP0x2TYPz99WhFhP4y0SDUUYURIuyq5K0O.png",
+            "description": "Alpendre de fachada amarela com duas cadeiras suspensas de vime, deck de madeira e buganvílias.",
+            "name": "b6b39cf9-84ac-4c32-96b0-68215f398078.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_37894377",
+            "path": "clips/uploads/okDFkSNmQd4z8bKOSURHTYzUm5mbdnneBN460vKi.png",
+            "description": "Sala de estar com sofá de canto creme, estantes de madeira embutidas e mesa de vidro.",
+            "name": "e95b8896-0f55-47f9-be51-728c7cb0f92a.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b69b9834",
+            "path": "clips/uploads/baAyQoBrr2kl6Y6i9vWsHoAKnjGrGbu5HW3h4PdL.png",
+            "description": "Sala de estar luminosa com sofá creme e porta de vidro de correr aberta para a piscina.",
+            "name": "1ae9212f-38f6-492a-9d80-b41730c5ff30.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_05e4c89a",
+            "path": "clips/uploads/OSw0TUaKi5unttAjWrmYA6UmeQxrmsd86980DhIj.png",
+            "description": "Sala ampla com lareira, televisão, sofá creme e porta de vidro com vista para a piscina.",
+            "name": "2416391f-7808-4b22-80dc-bd15079f4c22.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_14ab9357",
+            "path": "clips/uploads/lOz1DdKnK66VdZDfWcHFXUiwF7KR7FwARaEybUIQ.png",
+            "description": "Casa de banho com azulejos amarelos e castanhos, duche em vidro, móvel de madeira e toalheiro.",
+            "name": "f52314cd-d1b1-497f-ae2d-cac1f7fcfa13.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_21cc961c",
+            "path": "clips/uploads/8eeBRfDhTQQsftWP0eOHvVEprcjtcLmKitFE22Q2.png",
+            "description": "Casa de banho espaçosa com azulejos ocre, base de duche em vidro, sanitas suspensas e quadro de Paris.",
+            "name": "691113eb-24c9-4860-a7f1-d9c6a84a61db.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ab9f4aae",
+            "path": "clips/uploads/5j5KHeDNBK3yHlgpetrYRPtPPeYivjDsvvA0njCT.png",
+            "description": "Quarto de casal com manta rosa, candeeiros dourados e porta envidraçada para varanda luminosa.",
+            "name": "5ef01464-fcaa-4613-ad36-2e9dea36326f.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f5e96774",
+            "path": "clips/uploads/oAIvk7Nh9syPjBtoXgYrUrgGUu16Tr9hB33mhVx2.png",
+            "description": "Quarto de casal claro com grande janela de cortinas brancas, prateleiras com bonsai e ar condicionado.",
+            "name": "ba550b5d-253d-43d8-a7c0-0acd917f6837.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ab454c19",
+            "path": "clips/uploads/PXeHhhAKE1i2RLBTSEzV1fxpJwsznYaWvYs9UbGq.png",
+            "description": "Mesmo quarto noutro ângulo: cama com almofadas cinzentas, roupeiro branco e prateleiras de madeira.",
+            "name": "0ec359ce-541b-4408-a8de-60900222c06e.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2bf51683",
+            "path": "clips/uploads/6ueBr3TQrP7Zhz9EIz91cZR8GI09BbmGsJOnNcQP.png",
+            "description": "Sala de jantar com mesa de madeira, cadeiras de veludo azul, vitrines iluminadas e cozinha ao fundo.",
+            "name": "ca754290-6d09-4070-aac5-31cd8a488990.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_989f0dc5",
+            "path": "clips/uploads/peFyNKCcfpYUaRB45yVweW1NSdi8Jnv3w2oUCpGi.png",
+            "description": "Sala de jantar luminosa com candeeiro circular LED, oito cadeiras de veludo e porta para o jardim.",
+            "name": "bfe7d92c-f6f6-444b-abb8-0af214146586.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3363fe2c",
+            "path": "clips/uploads/cuHbVaeCiuPb3DjrK5kNPn7bQt83ceCPt958PFH2.png",
+            "description": "Cozinha creme com bancadas de granito preto, península de refeições e quadro tropical colorido.",
+            "name": "fe9224f9-248e-47d5-8e8c-9006b1d46c3a.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ebf112a7",
+            "path": "clips/uploads/5B21DjLhgG4xm5UPLk0PERi2NqhCflrn1kxFrlD2.png",
+            "description": "Cozinha com janela gradeada para palmeiras, balcão de pequenas refeições com banco e corredor.",
+            "name": "a5503fc1-5f1a-4cc7-951b-d15d9156c605.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cf9e01a6",
+            "path": "clips/uploads/UFmzuNlpauiI0z1eKi82u4PCNQBRIbXLuk057gk4.png",
+            "description": "Cozinha equipada com forno e micro-ondas Bosch, portas de correr abertas para a sala de jantar.",
+            "name": "0b1d64e5-cda2-47e7-8580-f9d82d9be788.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fac9571a",
+            "path": "clips/uploads/80SEAogScytUUVlCmQF29FE2OraV7HRX4DkBKvgw.png",
+            "description": "Vista da sala de jantar e cozinha para corredor que termina na sala com piscina lá fora.",
+            "name": "4fd69cd3-1d8e-4f54-88c2-889b62944fe6.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9964e01e",
+            "path": "clips/uploads/2Ue3Z7vDX9zNtYgm3lhlzI2MjhY74KYZ7mdp0pcA.png",
+            "description": "Corredor interior com portas e roupeiros em madeira clara, chão cerâmico bege; ao fundo, sala com vista para a piscina.",
+            "name": "47559247-f0d9-42bf-87bb-6df9c088515f.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9a5e0add",
+            "path": "clips/uploads/v2TWf1MT1NIyTcHZLVI5JgoDWv7qsUT0hR85vqs4.png",
+            "description": "Jardim traseiro com relvado, piscina retangular, espreguiçadeiras, pérgola com mesa de jantar e moradia amarela ao fundo.",
+            "name": "67fb73f0-86b5-4a51-bcd9-2b89dd61c5e7.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f33d5f30",
+            "path": "clips/uploads/03EkeXS7OTPdxhxKR3vPRFjG5GNN6t2E1v843rca.png",
+            "description": "Vista aérea zenital da moradia: telhados, painéis solares, piscina, deck de madeira, relvado e pérgola de telha.",
+            "name": "20563709-7a59-40ab-94db-73e873813813.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_87169e59",
+            "path": "clips/uploads/y5UflDaPJ8CIg1Puq7JuKqjiXMDKs1Vf5WiBk99x.png",
+            "description": "Vista aérea em ângulo da moradia amarela com piscina, jardim, pérgola e bairro residencial com palmeiras.",
+            "name": "5eadf50a-b7be-4d53-a55c-19d478a547fd.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de992829",
+            "path": "clips/uploads/ZpD8VGLLIxqQYGeNSvLVcu02tG09oaK9xes8zcYC.png",
+            "description": "Vista aérea da rua e do muro de entrada, com palmeiras, piscina e jardim nas traseiras.",
+            "name": "5279e828-25b7-4e86-b0ae-6ceab3be8b20.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_44d45034",
+            "path": "clips/uploads/8Nwa6XBmAwS1nMCr8tO00iNz2PqsDVkmB7RICGiV.png",
+            "description": "Jardim com piscina, relvado, sebes floridas, espreguiçadeiras, pérgola e fachada traseira amarela sob céu azul.",
+            "name": "6b037e0e-d22d-464b-87f0-2cb6acdba3ad.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1d3cfbd7",
+            "path": "clips/uploads/ZXH4yTWRkdGMb6y92FxlMlWNvKPnf0IApwc32666.png",
+            "description": "Fachada principal amarela e branca com palmeiras, muro, portões cinzentos e entrada independente para carros.",
+            "name": "ad419f2d-774d-48b8-997d-2903e77867ab-1.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d237054a",
+            "path": "clips/uploads/6uNNZ35cJkKFRONcC39eML6hkZ8kPEeNBO5Tjcw6.png",
+            "description": "Fachada principal amarela e branca com palmeiras, muro e portões; imagem igual à anterior, duplicada.",
+            "name": "ad419f2d-774d-48b8-997d-2903e77867ab.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4ce68a7d",
+            "path": "clips/uploads/vgyL0o14IkBEFZMW5JzMQ37dUgBQ0kEVCstBZuZO.jpg",
+            "description": "Logótipo RE/MAX Grupo Praia Algarve em letras brancas sobre fundo vermelho.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_05a3e81d",
+            "path": "clips/uploads/5UmVDJfBrB1jXS7LhgU0HcImtdKxlERbKkCCbhFY.png",
+            "description": "Retrato do agente Sílvio La Versa, de fato escuro e braços cruzados, com o logótipo RE/MAX Grupo Praia.",
+            "name": "silvio.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information allways includes the name of the agent - Silvio La Versa - and his phone number - +351 933 576 807. Here are the house details:\n1 195 000 €\nVenda\nid. 121601222-50\n319 m²\n\n5 Quartos\n\n4 WC\n\nB\n\nDescrição\nDetalhes\nMapa\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nMoradia T5 com Jardim e Excelentes Espaços Exteriores- Guia, Albufeira\n\n\nApresentamos esta elegante moradia T5, uma propriedade que se destaca pela sua arquitetura contemporânea de inspiração mediterrânica, pelas áreas exteriores cuidadosamente tratadas e por um ambiente residencial marcado pela tranquilidade, privacidade e conforto.\n\nDistribuída por dois pisos, a moradia apresenta uma fachada harmoniosa e muito cuidada, onde os tons claros e quentes se combinam com amplas aberturas para o exterior, proporcionando uma excelente luminosidade natural.\n\nA propriedade dispõe de 5 quartos, oferecendo a versatilidade necessária para uma família numerosa, para receber convidados ou para criar espaços adicionais de escritório, lazer ou trabalho.\n\nNo exterior, encontramos um agradável jardim privado, com palmeiras, vegetação madura e zonas verdes que envolvem a propriedade e reforçam a sensação de privacidade.\n\nA entrada principal, protegida por um muro e portões, conduz a uma área exterior cuidada e acolhedora. A propriedade dispõe ainda de acesso independente para viaturas, proporcionando maior comodidade no dia a dia.\n\nAs amplas portas e janelas permitem uma excelente ligação entre os espaços interiores e exteriores, criando uma atmosfera luminosa e convidativa.\n\nUma moradia pensada para quem procura espaço, conforto e qualidade de vida, combinando a privacidade de uma casa independente com uma arquitetura elegante e agradáveis áreas exteriores.\n\nPelas suas características, esta propriedade apresenta-se como uma excelente opção tanto para residência permanente, como para segunda habitação ou investimento imobiliário no Algarve.\n\nUma moradia T5 com personalidade, excelentes espaços exteriores e todas as condições para desfrutar de um estilo de vida confortável e tranquilo.\n\nEntre em contacto para mais informações ou para agendar a sua visita. \n\nDetalhes\nÁrea Bruta Privativa m²\n319\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n443\nQuartos\n5\nAno de Construção\n2023\nPiso\n- -\nWC/Casas de banho\n4\nElevador\nNão\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nSim\nDetalhes energéticos",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T5 de 2023 na Guia, Albufeira, e o mercado de habitação no Algarve",
+            "summary": "Em 2025, o Algarve foi a segunda sub-região mais cara do país para comprar casa, com um preço mediano de 3.139 €/m² segundo o INE. Este valor fica bem acima da média nacional de 2.076 €/m².",
+            "timeline": [
+                {
+                    "label": "Construção da moradia",
+                    "sublabel": "2023"
+                },
+                {
+                    "label": "Preço mediano nacional sobe 16,8%",
+                    "sublabel": "2025 (INE)"
+                },
+                {
+                    "label": "INE divulga preços de 2025",
+                    "sublabel": "abril de 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano das casas no Algarve",
+                    "value": 3139,
+                    "unit": "€/m² (2025, INE)"
+                },
+                {
+                    "label": "Preço mediano das casas em Portugal",
+                    "value": 2076,
+                    "unit": "€/m² (2025, INE)"
+                },
+                {
+                    "label": "Subida anual do preço mediano nacional",
+                    "value": 16.8,
+                    "unit": "% (2025 vs 2024, INE)"
+                },
+                {
+                    "label": "Municípios algarvios acima da média nacional",
+                    "value": 14,
+                    "unit": "de 16 (2025, INE)"
+                },
+                {
+                    "label": "Preço pedido da moradia",
+                    "value": 1195000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Preço mediano da habitação em 2025 (INE)",
+                    "left": {
+                        "title": "Algarve",
+                        "points": [
+                            "3.139 €/m²",
+                            "2.ª sub-região mais cara do país"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2.076 €/m²",
+                            "+16,8% face a 2024"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Algarve só fica atrás da Grande Lisboa (3.439 €/m²) no preço mediano das casas em 2025",
+                "Em 2025, 14 dos 16 municípios do Algarve tinham preços acima da média nacional",
+                "A Guia é uma das quatro freguesias do concelho de Albufeira e tem quase 5.000 habitantes"
+            ],
+            "sources": [
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://postal.pt/nacional/guia-tem-nova-imagem-institucional-que-destaca-as-praias-o-sol-a-historia-e-a-gastronomia/",
+                "https://www.barlavento.pt/?p=252438"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T5 contemporânea na Guia, Albufeira | 1.195.000 €",
+            "description": "Moradia de 2023 com arquitetura contemporânea de inspiração mediterrânica, tons claros e grandes janelas que enchem a casa de luz. Cinco quartos em dois pisos, jardim privado com palmeiras, entrada murada com portões e acesso independente para carros. Para viver todo o ano, para férias ou para investir — marque a sua visita com Sílvio La Versa, da RE/MAX Praia.",
+            "tags": [
+                "moradia",
+                "Albufeira",
+                "Guia",
+                "Algarve",
+                "imobiliário",
+                "casa à venda",
+                "RE/MAX",
+                "investimento imobiliário"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-wo2xl",
+    "created_at": "2026-10-09T15:31:53+00:00",
+    "updated_at": "2026-10-09T15:39:19+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/dAgExz1rrQzTsNoW6dnLD4gbWDb5qN59SuzkKrfy.mp3",
+    "transcript": {
+        "duration": 37.060001373291016,
+        "text": "Uma moradia de 2023 na Guia, em Albufeira. Arquitetura contemporânea de inspiração mediterrânica, com tons claros e grandes janelas que enchem a casa de luz. Cinco quartos em dois pisos, com espaço para uma família grande, para receber ou para escritório. Lá fora, um jardim privado com palmeiras e vegetação madura, entrada protegida por muro e portões, e acesso independente para carros. Para viver todo o ano, para férias ou para investir. 1.195.000 euros. Para visitar, fale com o Sílvio La Versa, da Remax Praia.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.3400000035762787
+            },
+            {
+                "word": "moradia",
+                "start": 0.3400000035762787,
+                "end": 0.7400000095367432
+            },
+            {
+                "word": "de",
+                "start": 0.7400000095367432,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "2023",
+                "start": 1.0199999809265137,
+                "end": 1.9199999570846558
+            },
+            {
+                "word": "na",
+                "start": 1.9199999570846558,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "Guia",
+                "start": 2.259999990463257,
+                "end": 2.4800000190734863
+            },
+            {
+                "word": "em",
+                "start": 2.7799999713897705,
+                "end": 2.9800000190734863
+            },
+            {
+                "word": "Albufeira",
+                "start": 2.9800000190734863,
+                "end": 3.5799999237060547
+            },
+            {
+                "word": "Arquitetura",
+                "start": 4,
+                "end": 4.679999828338623
+            },
+            {
+                "word": "contemporânea",
+                "start": 4.679999828338623,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "de",
+                "start": 5.360000133514404,
+                "end": 5.619999885559082
+            },
+            {
+                "word": "inspiração",
+                "start": 5.619999885559082,
+                "end": 6.139999866485596
+            },
+            {
+                "word": "mediterrânica",
+                "start": 6.139999866485596,
+                "end": 6.880000114440918
+            },
+            {
+                "word": "com",
+                "start": 7.440000057220459,
+                "end": 7.659999847412109
+            },
+            {
+                "word": "tons",
+                "start": 7.659999847412109,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "claros",
+                "start": 7.840000152587891,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 8.380000114440918,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "grandes",
+                "start": 8.619999885559082,
+                "end": 8.920000076293945
+            },
+            {
+                "word": "janelas",
+                "start": 8.920000076293945,
+                "end": 9.359999656677246
+            },
+            {
+                "word": "que",
+                "start": 9.359999656677246,
+                "end": 9.699999809265137
+            },
+            {
+                "word": "enchem",
+                "start": 9.699999809265137,
+                "end": 9.779999732971191
+            },
+            {
+                "word": "a",
+                "start": 9.779999732971191,
+                "end": 10.140000343322754
+            },
+            {
+                "word": "casa",
+                "start": 10.140000343322754,
+                "end": 10.180000305175781
+            },
+            {
+                "word": "de",
+                "start": 10.180000305175781,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "luz",
+                "start": 10.600000381469727,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "Cinco",
+                "start": 11.65999984741211,
+                "end": 11.699999809265137
+            },
+            {
+                "word": "quartos",
+                "start": 11.699999809265137,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "em",
+                "start": 12.039999961853027,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "dois",
+                "start": 12.220000267028809,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "pisos",
+                "start": 12.4399995803833,
+                "end": 12.84000015258789
+            },
+            {
+                "word": "com",
+                "start": 13.239999771118164,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "espaço",
+                "start": 13.4399995803833,
+                "end": 13.699999809265137
+            },
+            {
+                "word": "para",
+                "start": 13.699999809265137,
+                "end": 13.899999618530273
+            },
+            {
+                "word": "uma",
+                "start": 13.899999618530273,
+                "end": 14.359999656677246
+            },
+            {
+                "word": "família",
+                "start": 14.359999656677246,
+                "end": 14.399999618530273
+            },
+            {
+                "word": "grande",
+                "start": 14.399999618530273,
+                "end": 14.819999694824219
+            },
+            {
+                "word": "para",
+                "start": 15.279999732971191,
+                "end": 15.420000076293945
+            },
+            {
+                "word": "receber",
+                "start": 15.420000076293945,
+                "end": 15.819999694824219
+            },
+            {
+                "word": "ou",
+                "start": 15.819999694824219,
+                "end": 16.299999237060547
+            },
+            {
+                "word": "para",
+                "start": 16.299999237060547,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "escritório",
+                "start": 16.559999465942383,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "Lá",
+                "start": 17.760000228881836,
+                "end": 17.920000076293945
+            },
+            {
+                "word": "fora",
+                "start": 17.920000076293945,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "um",
+                "start": 18.559999465942383,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "jardim",
+                "start": 18.84000015258789,
+                "end": 18.979999542236328
+            },
+            {
+                "word": "privado",
+                "start": 18.979999542236328,
+                "end": 19.479999542236328
+            },
+            {
+                "word": "com",
+                "start": 19.479999542236328,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "palmeiras",
+                "start": 19.739999771118164,
+                "end": 20.219999313354492
+            },
+            {
+                "word": "e",
+                "start": 20.219999313354492,
+                "end": 20.459999084472656
+            },
+            {
+                "word": "vegetação",
+                "start": 20.459999084472656,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "madura",
+                "start": 20.84000015258789,
+                "end": 21.239999771118164
+            },
+            {
+                "word": "entrada",
+                "start": 22,
+                "end": 22.219999313354492
+            },
+            {
+                "word": "protegida",
+                "start": 22.219999313354492,
+                "end": 22.780000686645508
+            },
+            {
+                "word": "por",
+                "start": 22.780000686645508,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "muro",
+                "start": 23.079999923706055,
+                "end": 23.31999969482422
+            },
+            {
+                "word": "e",
+                "start": 23.31999969482422,
+                "end": 23.65999984741211
+            },
+            {
+                "word": "portões",
+                "start": 23.65999984741211,
+                "end": 24.059999465942383
+            },
+            {
+                "word": "e",
+                "start": 24.559999465942383,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "acesso",
+                "start": 25.020000457763672,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "independente",
+                "start": 25.020000457763672,
+                "end": 25.540000915527344
+            },
+            {
+                "word": "para",
+                "start": 25.540000915527344,
+                "end": 25.799999237060547
+            },
+            {
+                "word": "carros",
+                "start": 25.799999237060547,
+                "end": 26.18000030517578
+            },
+            {
+                "word": "Para",
+                "start": 26.920000076293945,
+                "end": 27.040000915527344
+            },
+            {
+                "word": "viver",
+                "start": 27.040000915527344,
+                "end": 27.280000686645508
+            },
+            {
+                "word": "todo",
+                "start": 27.280000686645508,
+                "end": 27.559999465942383
+            },
+            {
+                "word": "o",
+                "start": 27.559999465942383,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "ano",
+                "start": 27.8799991607666,
+                "end": 28.1200008392334
+            },
+            {
+                "word": "para",
+                "start": 28.18000030517578,
+                "end": 28.540000915527344
+            },
+            {
+                "word": "férias",
+                "start": 28.540000915527344,
+                "end": 28.799999237060547
+            },
+            {
+                "word": "ou",
+                "start": 28.799999237060547,
+                "end": 29.139999389648438
+            },
+            {
+                "word": "para",
+                "start": 29.139999389648438,
+                "end": 29.360000610351562
+            },
+            {
+                "word": "investir",
+                "start": 29.360000610351562,
+                "end": 29.700000762939453
+            },
+            {
+                "word": "1",
+                "start": 30,
+                "end": 30.600000381469727
+            },
+            {
+                "word": "195",
+                "start": 30.600000381469727,
+                "end": 32.15999984741211
+            },
+            {
+                "word": "000",
+                "start": 32.15999984741211,
+                "end": 32.279998779296875
+            },
+            {
+                "word": "euros",
+                "start": 32.279998779296875,
+                "end": 32.7400016784668
+            },
+            {
+                "word": "Para",
+                "start": 33.41999816894531,
+                "end": 33.47999954223633
+            },
+            {
+                "word": "visitar",
+                "start": 33.47999954223633,
+                "end": 34.13999938964844
+            },
+            {
+                "word": "fale",
+                "start": 34.70000076293945,
+                "end": 34.70000076293945
+            },
+            {
+                "word": "com",
+                "start": 34.70000076293945,
+                "end": 34.91999816894531
+            },
+            {
+                "word": "o",
+                "start": 34.91999816894531,
+                "end": 35.13999938964844
+            },
+            {
+                "word": "Sílvio",
+                "start": 35.13999938964844,
+                "end": 35.31999969482422
+            },
+            {
+                "word": "La",
+                "start": 35.31999969482422,
+                "end": 35.52000045776367
+            },
+            {
+                "word": "Versa",
+                "start": 35.52000045776367,
+                "end": 35.900001525878906
+            },
+            {
+                "word": "da",
+                "start": 36.220001220703125,
+                "end": 36.31999969482422
+            },
+            {
+                "word": "Remax",
+                "start": 36.31999969482422,
+                "end": 36.68000030517578
+            },
+            {
+                "word": "Praia",
+                "start": 36.68000030517578,
+                "end": 37.040000915527344
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 37.060001373291016,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.0999999999999996,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Moradia T5 de 2023",
+                        "params": {
+                            "src": "img_1d3cfbd7",
+                            "avatar": "img_05a3e81d",
+                            "logo": "img_4ce68a7d",
+                            "price": "1.195.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T5 à venda na Guia",
+                            "location": "Guia, Albufeira · 319 m² · 5 quartos",
+                            "agentName": "Sílvio La Versa",
+                            "phone": "+351 933 576 807",
+                            "legal": "RE/MAX Grupo Praia Algarve"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.0999999999999996,
+                "end": 5.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_1f8229c0",
+                            "zoom": 1.3
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.6,
+                "end": 7.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_87169e59",
+                            "src2": "img_f33d5f30",
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.6,
+                "end": 9.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_b69b9834",
+                            "src2": "img_05e4c89a",
+                            "src3": "img_37894377",
+                            "src4": "img_989f0dc5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.6,
+                "end": 11.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Grandes janelas, muita luz",
+                        "params": {
+                            "src": "img_2bf51683",
+                            "src2": "img_3363fe2c",
+                            "src3": "img_ebf112a7",
+                            "src4": "img_cf9e01a6",
+                            "src5": "img_fac9571a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.6,
+                "end": 13.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Cinco quartos em dois pisos",
+                        "params": {
+                            "src": "img_a7d9d4a1",
+                            "src2": "img_ab9f4aae",
+                            "src3": "img_7f321e9d",
+                            "src4": "img_a4c88989"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.6,
+                "end": 15.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_f5e96774",
+                            "src2": "img_ab454c19",
+                            "src3": "img_18c75a3f",
+                            "src4": "img_5a09a094"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.6,
+                "end": 17.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "4 casas de banho",
+                        "params": {
+                            "src": "img_e0fcb71b",
+                            "src2": "img_facdf54d",
+                            "src3": "img_a4a62ed4",
+                            "src4": "img_21cc961c",
+                            "src5": "img_14ab9357"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.7,
+                "end": 21.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Jardim privado com palmeiras",
+                        "params": {
+                            "src": "img_85fe3b1f",
+                            "src2": "img_5ec944ad",
+                            "src3": "img_7b706cf1",
+                            "src4": "img_44d45034"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.6,
+                "end": 24.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Muro e portões",
+                        "params": {
+                            "src": "img_d237054a",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.3,
+                "end": 26.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_de992829",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.8,
+                "end": 29.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Uma casa, três usos",
+                        "params": {
+                            "src": "img_9a5e0add",
+                            "title": "Uma casa, três usos",
+                            "items": [
+                                "Habitação permanente",
+                                "Segunda habitação",
+                                "Investimento no Algarve"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.9,
+                "end": 33.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "1.195.000 €",
+                        "params": {
+                            "src": "img_bc00784a",
+                            "src2": "img_696b1ae3",
+                            "src3": "img_d954edba",
+                            "src4": "img_b4334400",
+                            "src5": "img_9964e01e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.4,
+                "end": 37.06,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Sílvio La Versa",
+                        "params": {
+                            "src": "img_05a3e81d",
+                            "logo": "img_4ce68a7d",
+                            "name": "Sílvio La Versa",
+                            "role": "Consultor imobiliário · RE/MAX Praia",
+                            "buttons": "+351 933 576 807 | Marque a sua visita",
+                            "phone": "+351 933 576 807"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-wo2xl/clip.mp4",
+    "error": null
+}

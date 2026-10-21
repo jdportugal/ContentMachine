@@ -41,9 +41,15 @@ abstract class TestCase extends BaseTestCase
         // from no keys; a test that needs one sets it.
         config([
             'services.anthropic.key' => '',
+            // An installed `claude` CLI now wins over an API key, so a test that
+            // fakes the Anthropic API would otherwise spawn the real CLI (slow,
+            // and billed to the developer's subscription). Tests that exercise
+            // the CLI path point this at their own stub.
+            'contentmachine.clips.claude_binary' => '/nonexistent/claude',
             'services.openai.key' => '',
             'services.gemini.key' => '',
             'services.tensorx.key' => '',
+            'services.fal.key' => '',
         ]);
 
         $this->app->singleton(VaultContract::class, fn () => new VaultRepository($this->vaultTemp));

@@ -1,0 +1,1 @@
+Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image.

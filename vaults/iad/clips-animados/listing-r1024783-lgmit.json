@@ -1,0 +1,1433 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia térrea T4 em Lousada, com 2 lotes para construir",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-4-quartos-lousada-348m2/r1024783",
+            "agent": "Natália Fonseca",
+            "phone": "+351916143691",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa térrea em Lousada, com sol de manhã à noite.",
+            "voiceover": "Uma casa térrea em Lousada, com sol de manhã à noite. De 2005, em muito bom estado. Tudo num só piso, com mais de trezentos metros de área. Sala ampla e luminosa, e cozinha equipada, ligada à lavandaria. Um escritório, quatro quartos e quatro casas de banho. Lá fora, terraço e jardim, num terreno com mais de mil e seiscentos metros. Garagem para três ou quatro carros. Ar condicionado, lareira e painéis fotovoltaicos. Fazem ainda parte do imóvel dois lotes com capacidade construtiva para duas habitações. Seiscentos e cinquenta e cinco mil euros. Para visitar, fale com a Natália Fonseca, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia ao sol",
+                    "vo": "Uma casa térrea em Lousada, com sol de manhã à noite.",
+                    "caption": "Lousada"
+                },
+                {
+                    "photo": "exterior, vista geral da casa",
+                    "vo": "De 2005, em muito bom estado.",
+                    "caption": "Construída em 2005"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "Tudo num só piso, com mais de trezentos metros de área.",
+                    "caption": "Tudo num só piso"
+                },
+                {
+                    "photo": "sala com muita luz natural",
+                    "vo": "Sala ampla e luminosa,",
+                    "caption": "Sala luminosa"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "e cozinha equipada, ligada à lavandaria.",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Um escritório, quatro quartos e quatro casas de banho.",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "(continuação)",
+                    "caption": "Quatro casas de banho"
+                },
+                {
+                    "photo": "jardim e terraço",
+                    "vo": "Lá fora, terraço e jardim, num terreno com mais de mil e seiscentos metros.",
+                    "caption": "Jardim e terraço"
+                },
+                {
+                    "photo": "garagem",
+                    "vo": "Garagem para três ou quatro carros.",
+                    "caption": "Garagem para 3–4 carros"
+                },
+                {
+                    "photo": "sala com lareira / painéis fotovoltaicos no telhado",
+                    "vo": "Ar condicionado, lareira e painéis fotovoltaicos.",
+                    "caption": "Painéis fotovoltaicos"
+                },
+                {
+                    "photo": "vista aérea do terreno",
+                    "vo": "Fazem ainda parte do imóvel dois lotes com capacidade construtiva para duas habitações.",
+                    "caption": "Dois lotes para construir"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Seiscentos e cinquenta e cinco mil euros. Para visitar, fale com a Natália Fonseca, da IAD Portugal.",
+                    "caption": "655.000 € · Natália Fonseca · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O anúncio não indica nenhuma vantagem de localização (distâncias, centro, acessos), por isso o 'onde' fica só com Lousada. Se a consultora der um dado, pode entrar.",
+                "Dois lotes com capacidade construtiva para duas habitações: confirmar com a consultora se estão incluídos nos 655.000 € e nos 1.690 m² de terreno, e se essa capacidade está aprovada, antes de publicar.",
+                "Área bruta e área útil aparecem ambas como 348,37 m², o que é provavelmente um erro nos dados. O guião diz 'mais de trezentos metros' para não dizer um número exato."
+            ],
+            "message": "Bom dia Sra. Natália, fiz este vídeo da sua moradia T4 em Lousada para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Moradia térrea 4 quartos de 348 m² em Lousada",
+            "price": 655000,
+            "details": {
+                "Preço": "655 000 €",
+                "Localização": "Lousada, 4620-107",
+                "Referência": "1024783",
+                "Área Bruta m²": "348.37",
+                "Área Total do Lote m²": "1690",
+                "Quartos": 4,
+                "Ano de Construção": 2005,
+                "Certificado Energético": "B-",
+                "Características": "348,37 m² área bruta, 348,37 m² úteis, 4 casas de banho, Jardim, Garagem, Terraço, Ar condicionado, Alarme, Lareira, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2005, Acesso para cadeira de rodas, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Natália Fonseca - and phone number - +351916143691. Agency: IAD Portugal.\nThe agent's photo is Natália Fonseca.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Uma casa térrea em Lousada, com sol de manhã à noite.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da moradia ao sol → «Lousada»\n- exterior, vista geral da casa → «Construída em 2005»\n- hall de entrada → «Tudo num só piso»\n- sala com muita luz natural → «Sala luminosa»\n- cozinha equipada → «Cozinha equipada»\n- quarto → «Quatro quartos»\n- casa de banho → «Quatro casas de banho»\n- jardim e terraço → «Jardim e terraço»\n- garagem → «Garagem para 3–4 carros»\n- sala com lareira / painéis fotovoltaicos no telhado → «Painéis fotovoltaicos»\n- vista aérea do terreno → «Dois lotes para construir»\n- end card → «655.000 € · Natália Fonseca · IAD Portugal»\n\nHere are the house details:\n\nMoradia térrea 4 quartos de 348 m² em Lousada\nPreço\n655 000 €\nLocalização\nLousada, 4620-107\nReferência\n1024783\nÁrea Bruta m²\n348.37\nÁrea Total do Lote m²\n1690\nQuartos\n4\nAno de Construção\n2005\nCertificado Energético\nB-\nCaracterísticas\n348,37 m² área bruta, 348,37 m² úteis, 4 casas de banho, Jardim, Garagem, Terraço, Ar condicionado, Alarme, Lareira, Sala de estar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2005, Acesso para cadeira de rodas, Intercomunicador\n\nDescrição\nLOUSADA - CASA - 348M² - GARAGEM - MUITO BOM ESTADO - LUMINOSO\n\nImplantada em Lousada, esta moradia térrea de 2005 destaca-se pela sua arquitetura de piso único, pela exposição solar privilegiada a sul, nascente e poente, e por um estado de conservação muito cuidado que dispensa qualquer intervenção imediata.\n\nCom 348 m² de área habitável, a casa organiza-se de forma fluida e funcional. O hall de entrada acolhe os visitantes e distribui naturalmente para os diferentes espaços. A sala é ampla e muito luminosa, beneficiando da orientação solar que inunda os interiores de luz ao longo de todo o dia. A cozinha, totalmente equipada, é independente e comunica com a lavandaria, garantindo uma organização prática do quotidiano. O escritório, bem dimensionado, oferece um espaço dedicado ao trabalho ou ao estudo. Os 4 quartos são confortáveis e bem proporcionados, enquanto as 4 casas de banho asseguram um conforto elevado para toda a família.\n\nA moradia dispõe de uma terraço e de um jardim privativo, inseridos num terreno de 1 690 m², criando um espaço exterior agradável e versátil. As garagens completam este conjunto com uma solução de estacionamento coberto para 3 ou 4 viaturas. De referir que do imóvel fazem parte 2 lotes com capacidade construtiva para duas habitações.\n\nDo ponto de vista dos equipamentos, o imóvel está dotado de ar condicionado, lareira, radiadores e painéis fotovoltaicos, assegurando conforto térmico em todas as estações e uma gestão energética eficiente. O sistema de aquecimento individual, a fibra ótica, a televisão por cabo, o intercomunicador e o sistema de alarme completam uma lista de equipamentos de alto nível. O imóvel é ainda acessível a pessoas com mobilidade reduzida e conta com espaços de arrumação integrados.\n\nPara visitar esta moradia, entre em contacto e agende a sua visita.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Moradia térrea T4 em Lousada, à venda por 655 mil euros",
+            "summary": "Moradia de 2005 num só piso, com mais de 300 m², terreno com mais de 1600 m² e 2 lotes para construir mais 2 casas. Fica em Lousada, um concelho do distrito do Porto com cerca de 47 mil habitantes, e está à venda num ano em que a avaliação bancária das casas bateu recordes.",
+            "timeline": [
+                {
+                    "label": "Construção da moradia",
+                    "sublabel": "2005"
+                },
+                {
+                    "label": "Lousada com 47 364 habitantes",
+                    "sublabel": "Censos 2021"
+                },
+                {
+                    "label": "Avaliação bancária em máximo histórico",
+                    "sublabel": "junho 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Habitantes em Lousada (Censos 2021)",
+                    "value": 47364,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Avaliação bancária mediana em Portugal (jun. 2026)",
+                    "value": 2228,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço do imóvel",
+                    "value": 655000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área da casa",
+                    "value": 300,
+                    "unit": "m² (mais de)"
+                },
+                {
+                    "label": "Área do terreno",
+                    "value": 1600,
+                    "unit": "m² (mais de)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "A casa e o potencial",
+                    "left": {
+                        "title": "Moradia",
+                        "points": [
+                            "Térrea, de 2005",
+                            "4 quartos e 4 casas de banho",
+                            "Escritório e lavandaria",
+                            "Painéis fotovoltaicos"
+                        ]
+                    },
+                    "right": {
+                        "title": "Extra",
+                        "points": [
+                            "2 lotes incluídos",
+                            "Capacidade para 2 habitações",
+                            "Garagem para 3 a 4 carros",
+                            "Jardim e terraço"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Lousada pertence ao distrito do Porto, na sub-região do Tâmega e Sousa",
+                "Em junho de 2026, a avaliação bancária da habitação atingiu um máximo histórico",
+                "Tudo num só piso, com sol de manhã à noite",
+                "Visitas: Natália Fonseca, IAD Portugal"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/69962",
+                "https://aldeiasportuguesas.pt/porto/lousada/",
+                "https://wikipedia.jakami.de/content/wikipedia_de_all_mini_2024-06/A/Lousada",
+                "https://en.wikipedia.org/wiki/Lousada",
+                "https://dinheirovivo.dn.pt/economia/avaliao-bancria-da-habitao-bate-recorde-e-alcana-2228-eurosm2-em-junho",
+                "https://www.rtp.pt/noticias/economia/avaliacao-bancaria-da-habitacao-bate-recorde-de-2240-eurosm2-em-julho_n1761591"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia térrea T4 em Lousada, com 2 lotes para construir",
+            "description": "Moradia térrea em Lousada, num terreno de 1.690 m², com mais dois lotes para construir ☀️\n\nMoradia térrea · 4 quartos · 4 casas de banho · 348 m² · 655.000 €\n\nFoi construída em 2005 e está em muito bom estado. Fica toda num só piso e tem sol de manhã à noite.\nA sala é ampla e luminosa. A cozinha está equipada e liga à lavandaria. Há ainda um escritório.\nLá fora tem terraço, jardim e garagem para 3 ou 4 carros.\nTem ar condicionado, lareira, painéis fotovoltaicos, alarme, fibra ótica e acesso para cadeira de rodas.\nO imóvel inclui ainda 2 lotes com capacidade construtiva para 2 habitações.\nCertificado energético B- · Ref. 1024783\n\nPara visitar, contacte a Natália Fonseca, da IAD Portugal: +351 916 143 691",
+            "tags": [
+                "imobiliario",
+                "moradia",
+                "moradiaterrea",
+                "casaparavender",
+                "lousada",
+                "lousadaportugal",
+                "valedosousa",
+                "portoregiao",
+                "moradiat4",
+                "terrenoparaconstruir",
+                "iadportugal",
+                "casasemportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1024783-lgmit",
+    "created_at": "2026-10-20T07:27:02+00:00",
+    "updated_at": "2026-10-20T07:55:55+00:00",
+    "source_path": "clips/uploads/V2LMlj78IotX8SGTOYs74cKpdO2qtgY7fH4t4WkM.mp3",
+    "images": [
+        {
+            "id": "img_33ad0639",
+            "path": "clips/uploads/LkPk6sqNxrhGhsvKTOvFrXr8MS02PsEyLsSJ00LT.jpg",
+            "description": "Terraço lateral em mosaico escuro junto a portas de vidro, parede de granito, relvado com palmeira e vista para monte arborizado.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cbba52bb",
+            "path": "clips/uploads/YdMde8PAm8mLBQZyk9dIz35nYTK5aC71WTasCecR.jpg",
+            "description": "Terraço coberto em mosaico ao longo da casa, parede de granito, relvado com palmeira e prédios vizinhos ao fundo.",
+            "name": "01a0d507572a3f55177d9a79a91f7c2b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8fadfa6e",
+            "path": "clips/uploads/KpRIw2wimASfcDRZo1m8l4fC4aHiXAeXTfBbD81C.jpg",
+            "description": "Passeio lateral em mosaico entre fachada de granito com janelas e relvado com laranjeiras junto ao muro.",
+            "name": "01a0d5079e779cca9c33abb60157b2c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a1edfa3a",
+            "path": "clips/uploads/f3sC3ZsJmnPlofK5q7lqFRATSeSL6F8Gg3iwwnQi.jpg",
+            "description": "Fachada da moradia térrea com pátio de calçada em granito, painel solar no telhado, marquise envidraçada e relvado.",
+            "name": "01a0d5045fe9c0b507ce02fce28bd758.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0c4d47aa",
+            "path": "clips/uploads/DLIkFlGC0vNAmQgYQd0xajcWNW1AMb1EJllnkb2m.jpg",
+            "description": "Jardim com relvado amplo em frente a marquise envidraçada, chaminés de granito, abeto e monte arborizado ao sol.",
+            "name": "01a0d504ba67395f622b92f3f42d72c0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bdb9b559",
+            "path": "clips/uploads/12QaPXBOgsZS46ZYOShGY7rILkbzQhlRFps7Z4yT.jpg",
+            "description": "Marquise envidraçada com deck exterior junto ao relvado, muro de granito e vista para encosta verde.",
+            "name": "01a0d50526f5da8965b1d1e0383cf897.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5a79b85c",
+            "path": "clips/uploads/vhhHsxfjNKrpLP9YEWN4rD0qQBY52CjiUcaPL9cu.jpg",
+            "description": "Vista aérea de drone do jardim relvado com árvores, entre telhados de telha e garagem anexa.",
+            "name": "01a0d506d1b01fc4e8c33144706c1e08.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8496ff28",
+            "path": "clips/uploads/IS4EsPbHtS2wsWKPHlPqB7mOhmKEH4m9bMBwjwkk.jpg",
+            "description": "Escadaria em granito e muro de pedra com canteiro ajardinado, junto ao pátio de calçada na entrada.",
+            "name": "01a0d506169a8c43ccb3643c8b84d823.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_edebc990",
+            "path": "clips/uploads/Q6yPbpfjZoCJOiEXruBpoivRkNIRjut69R51aqOC.jpg",
+            "description": "Vista aérea de drone do telhado, chaminés de granito, unidades de ar-condicionado, painéis solares e garagem com carro.",
+            "name": "01a0d525d01e5b9c254d8350d4ee3cbe.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_00ae64e8",
+            "path": "clips/uploads/FeMEXNpcWQSGBxbadhfvqCVE5xC8hKqrFW9ju5KA.jpg",
+            "description": "Hall interior com claraboia, coluna de granito, canteiro interior com plantas, chão em tijoleira e poltrona às riscas.",
+            "name": "01a0d508d70a553c1eba21f00786f794.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7a3b2b90",
+            "path": "clips/uploads/g9yypsgdOm37etoOtHBwoOqqVpvYK479eHi3Z7Jk.jpg",
+            "description": "Hall de entrada com claraboia e jardim interior, chão em tijoleira, portas de madeira e lavatório com espelho oval.",
+            "name": "01a0d50863c6104c8c151ec6b10786f1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_14246a39",
+            "path": "clips/uploads/vNiP6wjKs7HN5oLv4xAHdjygiTTO5BHBWkksDpOB.jpg",
+            "description": "Cozinha equipada com armários em madeira, bancada preta, janela para o jardim e mesa de refeições.",
+            "name": "01a0d50967e0ec991413f87dcf959ecf.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_17524cc1",
+            "path": "clips/uploads/xndRgqRzD0mZJmrYkywmZR6A8pPsBnO0dFQBUHnw.jpg",
+            "description": "Cozinha completa em L com frigorífico inox, forno e micro-ondas embutidos, mesa para seis pessoas.",
+            "name": "01a0d509d6b85f1c5625274e956d8ad1.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_8c9a2e34",
+            "path": "clips/uploads/4sfkpBVFFmx6sQJf5oRHL1hx5JIjY0rM594Uq1Vt.jpg",
+            "description": "Zona de refeições da cozinha com televisão na parede, mesa de madeira, cadeiras cinzentas e frigorífico inox.",
+            "name": "01a0d50a2f2786106cae1106bd46e6e3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_49ae1e78",
+            "path": "clips/uploads/7ETvBUyJIy81ULMqN3h2P7W0QDsdVX2pAFTwt73s.jpg",
+            "description": "Sala ampla com lareira, sofás de pele bege, mesa de jantar para dez e sol a entrar.",
+            "name": "01a0d50bbfaa84115c8068c0351b6997.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d17719ad",
+            "path": "clips/uploads/1UgRB5VjCiGobthFohAAuQALNw6CerrHRa0DkkMH.jpg",
+            "description": "Sala de estar e jantar luminosa, com grande porta envidraçada aberta para o terraço e o jardim.",
+            "name": "01a0d50c31d5a3ed5b853400485318ab.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_34c7c99b",
+            "path": "clips/uploads/lKKdU8Q2G0eya4kdb4LngDwnv5MKCw7SOlJRZaug.jpg",
+            "description": "Lavatório da entrada com espelho oval dourado, candeeiro rústico, bancada de mármore e cuba em inox.",
+            "name": "01a0d50cb756418a4601eae9863665ad.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7bac26aa",
+            "path": "clips/uploads/56A0dYnEoZblFOswg0y8gO59RqYfL6MLIYKMI8Og.jpg",
+            "description": "Corredor de acesso aos quartos, chão imitação madeira, aparador escuro, tapete tradicional e várias portas.",
+            "name": "01a0d50d29aee390d66e366d9d9d0aff.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_08946a9c",
+            "path": "clips/uploads/biX2KN6dSmvVbjRK7liOWameWZHlJyDMk1Y6encK.jpg",
+            "description": "Quarto de casal com cama de madeira, colcha bordô, roupeiro embutido e ar-condicionado.",
+            "name": "01a0d50db2b6f9942c6d3b22833a9ced.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3c8b4f5d",
+            "path": "clips/uploads/uTtUml8eapjkRQuA6NQGdnuBciUrng5hqCUQmCIa.jpg",
+            "description": "Quarto de casal com porta envidraçada para o terraço e jardim relvado, casa de banho privativa.",
+            "name": "01a0d5175c40335cb56fd1faa50b3921.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_ff09a9b0",
+            "path": "clips/uploads/fdcAiubiPKVskm4PsFO0SlELxOesmD40OWbuuLRI.jpg",
+            "description": "Casa de banho moderna em mármore branco, com duche de vidro, lavatório suspenso e espelho grande.",
+            "name": "01a0d5181c74133575ce2d39b07b47eb.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d085aab8",
+            "path": "clips/uploads/06057Tr6CGxru7LuvYCJK8t9sWNGx4eAzlAdsMvP.jpg",
+            "description": "Casa de banho em mármore branco, com sanita, bidé, radiador, janela e base de duche com portas de vidro.",
+            "name": "01a0d51860110a5371059491274eada3.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3881bca3",
+            "path": "clips/uploads/hLs145apF2hL4hbohe6Gzlu5WfFLkpKkJYqXgE0v.jpg",
+            "description": "Quarto com cama de casal, mesas de cabeceira, roupeiro embutido em madeira escura e uma janela pequena.",
+            "name": "01a0d518d113ff9a8b09dbeacaefa40e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ebb8a929",
+            "path": "clips/uploads/973Sk8steaoBBgZchOrnEvuPFqtcd7ryC4gFcsGl.jpg",
+            "description": "Quarto amplo e luminoso, com cama de casal e porta de correr com saída para o terraço e o jardim.",
+            "name": "01a0d51a49542d499e0f972382dc8598.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_10bfec1b",
+            "path": "clips/uploads/cW9RC6U9T89n4cSHI4M6A03onK62hhYoCHK2zsYZ.jpg",
+            "description": "Casa de banho com mosaico castanho e bege, duche com cortina e painel fosco, e lavatório.",
+            "name": "01a0d51a955d00aa6857f6031ab55446.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d5aa12ec",
+            "path": "clips/uploads/yoYdMJdBe3o5Cj3Ov7dvUsNzYcMXpHKFEPu8qFgV.jpg",
+            "description": "Quarto com cama de casal em madeira escura, candeeiros, poltrona preta e janela com cortinados dourados.",
+            "name": "01a0d51b1ac2dd44b2979f23fa59a390.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_9db98650",
+            "path": "clips/uploads/sm4gbmuZhfpASDj2cUZOrWRxg7yeq1jHIHjVnXAg.jpg",
+            "description": "Quarto vazio com chão de madeira escura, cortinados bege e janela com luz do sol a entrar.",
+            "name": "01a0d51bdda81c515d6a78aee3d19e87.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_a6cb1753",
+            "path": "clips/uploads/jjA7WpFY31hC9gG6aRXLtZyNsHieZRoIc0fvfJsi.jpg",
+            "description": "Quarto vazio com roupeiro embutido de portas de correr em madeira e porta aberta para o corredor.",
+            "name": "01a0d51b9ba95d4ba83e3fa396f95449.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_27e50ebf",
+            "path": "clips/uploads/w1u7d6jfMSq7egHawgsGOdJr3fw0CQuQT9bDyqfw.jpg",
+            "description": "Casa de banho com azulejo verde e mosaico bege, sanita, bidé, móvel lavatório e tijolos de vidro.",
+            "name": "01a0d51c8d741dc6c45f80a1c679b5d0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f2009395",
+            "path": "clips/uploads/NQ83lnI2bhcYOp7fYmLoGJITNYOzsRYOaT2pEESF.jpg",
+            "description": "Escritório com chão de tijoleira, passadeira, armário de madeira e janela com vista para o muro de pedra e o jardim.",
+            "name": "01a0d51d6eee3057208eefa6142e4526.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_6a11b545",
+            "path": "clips/uploads/OvhmJZq8bWGLho0d3XQ42dx4mzCHtNMrcTfRkU7y.jpg",
+            "description": "Marquise envidraçada com mesa e cadeiras de ferro, parede de granito e porta para o exterior soalheiro.",
+            "name": "01a0d51ea214cd1fd8e206ce2f8e6a7e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f56c2632",
+            "path": "clips/uploads/XA3uvXge7CpTodr4v4jzdAwnLVUI5V6zEOqLcahB.jpg",
+            "description": "Marquise ampla com janelas de correr do chão ao teto, banco de jardim e vista para relvado e terraço.",
+            "name": "01a0d51f34c06514c73738a074e9dc1e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b91a9bce",
+            "path": "clips/uploads/p1Srq8m9wg8MMKGkdaedp1BEiaLa1WRYExCmPdTQ.jpg",
+            "description": "Churrasqueira em tijolo com forno a lenha, grelhador e lava-loiça, numa zona coberta.",
+            "name": "01a0d51f8984ded3318f40376d73eaa1.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5c495f9b",
+            "path": "clips/uploads/x4a0bCfWHduzn5pnuSaHuIcEBrodwqE6xv3Z6YAl.jpg",
+            "description": "Vista aérea da garagem anexa, com telhado de telha, portão largo, pátio em calçada e relvado.",
+            "name": "01a0d524f978c2ad03343178db1fea91.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_2fdc4c2f",
+            "path": "clips/uploads/6niYVEL5nQA76p9HyJApCikEBdWI4jsJHtgB3cQf.jpg",
+            "description": "Exterior da garagem, com portão seccionado cinzento, porta lateral, calçada em granito e jardim com oliveira.",
+            "name": "01a0d524bcdf471a1eb4666ab97f5092.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e42619c0",
+            "path": "clips/uploads/8dPHKdO5IkyKQve3odFMWBIMrTjNFbaQHK4UH3aH.jpg",
+            "description": "Vista aérea vertical da moradia térrea com telhado laranja, pátio, relvado, garagem e terreno arborizado ao lado.",
+            "name": "01a0d52631d70bdc9628d4b2bdf269ff.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_048d67f0",
+            "path": "clips/uploads/63kBtFf9G9oCo4cz1qHPyaWp34uDI1EHqgncHtEA.jpg",
+            "description": "Vista aérea panorâmica da moradia de esquina, terreno murado e garagem, num bairro residencial com campos verdes.",
+            "name": "01a0d526dfa252e69e7ace7c3c04889a.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_5fd991d7",
+            "path": "clips/uploads/lZZb9IdiHqCyKAObkblu4Fw4D6keQsslBm16vm5s.jpg",
+            "description": "Vista aérea da moradia de esquina, terreno murado e garagem, igual à anterior; serve de imagem alternativa.",
+            "name": "01a0d5272dac1ac44017e1866772d3f8.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_0bc06f03",
+            "path": "clips/uploads/lM4oc59YZ0CCpmrb5y47TAHfGOJGw1Rvu0AqPhuG.jpg",
+            "description": "Vista aérea de cima da moradia com painel solar, marquise, relvado, garagem e terreno arborizado murado.",
+            "name": "01a0d526941cd75a42242adb3eba914e.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_64ee6607",
+            "path": "clips/uploads/OBwPGPzCxNMFWdfyyEzKVcykBSM043Lgk4OP5QaH.jpg",
+            "description": "Vista aérea lateral da moradia térrea em pedra e telha, junto à rua, com terreno arborizado e garagem.",
+            "name": "01a0d52807c59c2267ef2a9320b4be8c.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_a65201cd",
+            "path": "clips/uploads/364Gyshl2cTaffrO0xd8i8JsspTzbqlk0pg8MCSW.png",
+            "description": "Retrato da consultora Natália Fonseca, da IAD Portugal.",
+            "name": "Natália Fonseca.png",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_f4d0f68d",
+            "path": "clips/uploads/r2lfHY2BmXKi1q8u6z2RLhrHY0HdhUDeOc5lWkY2.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/V2LMlj78IotX8SGTOYs74cKpdO2qtgY7fH4t4WkM.mp3",
+    "transcript": {
+        "duration": 38.31999969482422,
+        "text": "Uma casa-terra em Lousada, com sol de manhã à noite. De 2005 em muito bom estado. Tudo num só piso, com mais de 300 metros de área. Sala ampla e luminosa e cozinha equipada, ligada à lavandaria. Um escritório, 4 quartos e 4 casas de banho. Lá fora, terraço e jardim num terreno com mais de 1600 metros. Garagem para 3 ou 4 carros. Ar-condicionado, lareira e painéis fotovoltaicos. Fazem ainda parte do imóvel 2 lotes com capacidade construtiva para 2 habitações. 655 mil euros. Para visitar, fale com a Natália Fonseca, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2199999988079071
+            },
+            {
+                "word": "casa",
+                "start": 0.2199999988079071,
+                "end": 0.5600000023841858
+            },
+            {
+                "word": "terra",
+                "start": 0.5600000023841858,
+                "end": 0.8399999737739563
+            },
+            {
+                "word": "em",
+                "start": 0.8399999737739563,
+                "end": 1.100000023841858
+            },
+            {
+                "word": "Lousada",
+                "start": 1.100000023841858,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "com",
+                "start": 1.7999999523162842,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "sol",
+                "start": 2.259999990463257,
+                "end": 2.299999952316284
+            },
+            {
+                "word": "de",
+                "start": 2.299999952316284,
+                "end": 2.799999952316284
+            },
+            {
+                "word": "manhã",
+                "start": 2.799999952316284,
+                "end": 2.799999952316284
+            },
+            {
+                "word": "à",
+                "start": 2.799999952316284,
+                "end": 3.119999885559082
+            },
+            {
+                "word": "noite",
+                "start": 3.119999885559082,
+                "end": 3.4000000953674316
+            },
+            {
+                "word": "De",
+                "start": 3.7799999713897705,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "2005",
+                "start": 3.880000114440918,
+                "end": 4.659999847412109
+            },
+            {
+                "word": "em",
+                "start": 4.659999847412109,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "muito",
+                "start": 5.019999980926514,
+                "end": 5.360000133514404
+            },
+            {
+                "word": "bom",
+                "start": 5.360000133514404,
+                "end": 5.579999923706055
+            },
+            {
+                "word": "estado",
+                "start": 5.579999923706055,
+                "end": 5.880000114440918
+            },
+            {
+                "word": "Tudo",
+                "start": 6.420000076293945,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "num",
+                "start": 6.460000038146973,
+                "end": 6.699999809265137
+            },
+            {
+                "word": "só",
+                "start": 6.699999809265137,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "piso",
+                "start": 6.960000038146973,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "com",
+                "start": 7.360000133514404,
+                "end": 7.519999980926514
+            },
+            {
+                "word": "mais",
+                "start": 7.519999980926514,
+                "end": 7.679999828338623
+            },
+            {
+                "word": "de",
+                "start": 7.679999828338623,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "300",
+                "start": 7.880000114440918,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "metros",
+                "start": 8.359999656677246,
+                "end": 8.680000305175781
+            },
+            {
+                "word": "de",
+                "start": 8.680000305175781,
+                "end": 9.119999885559082
+            },
+            {
+                "word": "área",
+                "start": 9.119999885559082,
+                "end": 9.119999885559082
+            },
+            {
+                "word": "Sala",
+                "start": 9.65999984741211,
+                "end": 9.739999771118164
+            },
+            {
+                "word": "ampla",
+                "start": 9.739999771118164,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 10.239999771118164,
+                "end": 10.479999542236328
+            },
+            {
+                "word": "luminosa",
+                "start": 10.479999542236328,
+                "end": 10.979999542236328
+            },
+            {
+                "word": "e",
+                "start": 10.979999542236328,
+                "end": 11.300000190734863
+            },
+            {
+                "word": "cozinha",
+                "start": 11.300000190734863,
+                "end": 11.539999961853027
+            },
+            {
+                "word": "equipada",
+                "start": 11.539999961853027,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "ligada",
+                "start": 12.399999618530273,
+                "end": 12.579999923706055
+            },
+            {
+                "word": "à",
+                "start": 12.579999923706055,
+                "end": 12.720000267028809
+            },
+            {
+                "word": "lavandaria",
+                "start": 12.720000267028809,
+                "end": 13.15999984741211
+            },
+            {
+                "word": "Um",
+                "start": 13.579999923706055,
+                "end": 13.739999771118164
+            },
+            {
+                "word": "escritório",
+                "start": 13.739999771118164,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "4",
+                "start": 14.65999984741211,
+                "end": 14.800000190734863
+            },
+            {
+                "word": "quartos",
+                "start": 14.800000190734863,
+                "end": 15.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 15.239999771118164,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "4",
+                "start": 15.460000038146973,
+                "end": 15.859999656677246
+            },
+            {
+                "word": "casas",
+                "start": 15.859999656677246,
+                "end": 16.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 16.100000381469727,
+                "end": 16.440000534057617
+            },
+            {
+                "word": "banho",
+                "start": 16.440000534057617,
+                "end": 16.639999389648438
+            },
+            {
+                "word": "Lá",
+                "start": 16.899999618530273,
+                "end": 17.020000457763672
+            },
+            {
+                "word": "fora",
+                "start": 17.020000457763672,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "terraço",
+                "start": 17.84000015258789,
+                "end": 17.940000534057617
+            },
+            {
+                "word": "e",
+                "start": 17.940000534057617,
+                "end": 18.15999984741211
+            },
+            {
+                "word": "jardim",
+                "start": 18.15999984741211,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "num",
+                "start": 18.479999542236328,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "terreno",
+                "start": 18.799999237060547,
+                "end": 19.059999465942383
+            },
+            {
+                "word": "com",
+                "start": 19.059999465942383,
+                "end": 19.31999969482422
+            },
+            {
+                "word": "mais",
+                "start": 19.31999969482422,
+                "end": 19.479999542236328
+            },
+            {
+                "word": "de",
+                "start": 19.479999542236328,
+                "end": 19.799999237060547
+            },
+            {
+                "word": "1600",
+                "start": 19.799999237060547,
+                "end": 20.3799991607666
+            },
+            {
+                "word": "metros",
+                "start": 20.3799991607666,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "Garagem",
+                "start": 21.34000015258789,
+                "end": 21.739999771118164
+            },
+            {
+                "word": "para",
+                "start": 21.739999771118164,
+                "end": 21.8799991607666
+            },
+            {
+                "word": "3",
+                "start": 21.8799991607666,
+                "end": 22.239999771118164
+            },
+            {
+                "word": "ou",
+                "start": 22.239999771118164,
+                "end": 22.440000534057617
+            },
+            {
+                "word": "4",
+                "start": 22.440000534057617,
+                "end": 22.860000610351562
+            },
+            {
+                "word": "carros",
+                "start": 22.860000610351562,
+                "end": 23.260000228881836
+            },
+            {
+                "word": "Ar",
+                "start": 23.65999984741211,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "condicionado",
+                "start": 23.700000762939453,
+                "end": 24.440000534057617
+            },
+            {
+                "word": "lareira",
+                "start": 24.760000228881836,
+                "end": 25.020000457763672
+            },
+            {
+                "word": "e",
+                "start": 25.020000457763672,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "painéis",
+                "start": 25.299999237060547,
+                "end": 25.600000381469727
+            },
+            {
+                "word": "fotovoltaicos",
+                "start": 25.600000381469727,
+                "end": 26.5
+            },
+            {
+                "word": "Fazem",
+                "start": 26.5,
+                "end": 27.15999984741211
+            },
+            {
+                "word": "ainda",
+                "start": 27.15999984741211,
+                "end": 27.360000610351562
+            },
+            {
+                "word": "parte",
+                "start": 27.360000610351562,
+                "end": 27.68000030517578
+            },
+            {
+                "word": "do",
+                "start": 27.68000030517578,
+                "end": 27.799999237060547
+            },
+            {
+                "word": "imóvel",
+                "start": 27.799999237060547,
+                "end": 28.260000228881836
+            },
+            {
+                "word": "2",
+                "start": 28.260000228881836,
+                "end": 28.6200008392334
+            },
+            {
+                "word": "lotes",
+                "start": 28.6200008392334,
+                "end": 29.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 29.020000457763672,
+                "end": 29.18000030517578
+            },
+            {
+                "word": "capacidade",
+                "start": 29.18000030517578,
+                "end": 29.65999984741211
+            },
+            {
+                "word": "construtiva",
+                "start": 29.65999984741211,
+                "end": 30.420000076293945
+            },
+            {
+                "word": "para",
+                "start": 30.420000076293945,
+                "end": 30.639999389648438
+            },
+            {
+                "word": "2",
+                "start": 30.639999389648438,
+                "end": 30.979999542236328
+            },
+            {
+                "word": "habitações",
+                "start": 30.979999542236328,
+                "end": 31.68000030517578
+            },
+            {
+                "word": "655",
+                "start": 32.880001068115234,
+                "end": 33.52000045776367
+            },
+            {
+                "word": "mil",
+                "start": 33.52000045776367,
+                "end": 33.7599983215332
+            },
+            {
+                "word": "euros",
+                "start": 33.7599983215332,
+                "end": 34.20000076293945
+            },
+            {
+                "word": "Para",
+                "start": 34.540000915527344,
+                "end": 34.63999938964844
+            },
+            {
+                "word": "visitar",
+                "start": 34.63999938964844,
+                "end": 35.279998779296875
+            },
+            {
+                "word": "fale",
+                "start": 35.5,
+                "end": 35.58000183105469
+            },
+            {
+                "word": "com",
+                "start": 35.58000183105469,
+                "end": 35.7400016784668
+            },
+            {
+                "word": "a",
+                "start": 35.7400016784668,
+                "end": 35.86000061035156
+            },
+            {
+                "word": "Natália",
+                "start": 35.86000061035156,
+                "end": 36.15999984741211
+            },
+            {
+                "word": "Fonseca",
+                "start": 36.15999984741211,
+                "end": 36.7400016784668
+            },
+            {
+                "word": "da",
+                "start": 36.939998626708984,
+                "end": 37.13999938964844
+            },
+            {
+                "word": "IAD",
+                "start": 37.13999938964844,
+                "end": 37.47999954223633
+            },
+            {
+                "word": "de",
+                "start": 37.47999954223633,
+                "end": 37.79999923706055
+            },
+            {
+                "word": "Portugal",
+                "start": 37.79999923706055,
+                "end": 38.060001373291016
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38.31999969482422,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.25,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "CASA TÉRREA EM LOUSADA",
+                        "params": {
+                            "src": "img_a1edfa3a",
+                            "avatar": "img_a65201cd",
+                            "logo": "img_f4d0f68d",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "655.000 €",
+                            "location": "LOUSADA · PORTO",
+                            "title": "Uma casa térrea em Lousada, com sol de manhã à noite.",
+                            "facts": "348 m² · 4 quartos · 4 WC · garagem",
+                            "cta": "Ligue já +351 916 143 691",
+                            "name": "Natália Fonseca",
+                            "logoText": "IAD",
+                            "logoSub": "PORTUGAL",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.25,
+                "end": 6.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "CONSTRUÍDA EM 2005",
+                        "params": {
+                            "src": "img_64ee6607",
+                            "src2": "img_7a3b2b90"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.3,
+                "end": 9.35,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TUDO NUM SÓ PISO",
+                        "params": {
+                            "src": "img_00ae64e8",
+                            "src2": "img_7bac26aa",
+                            "src3": "img_a6cb1753",
+                            "src4": "img_27e50ebf"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.35,
+                "end": 11.35,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "SALA LUMINOSA",
+                        "params": {
+                            "src": "img_d17719ad",
+                            "src2": "img_49ae1e78"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.35,
+                "end": 13.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA EQUIPADA",
+                        "params": {
+                            "src": "img_14246a39",
+                            "src2": "img_17524cc1",
+                            "src3": "img_8c9a2e34",
+                            "src4": "img_34c7c99b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.5,
+                "end": 16.85,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "ESCRITÓRIO · 4 QUARTOS · 4 WC",
+                        "params": {
+                            "src": "img_f2009395",
+                            "src2": "img_ebb8a929",
+                            "src3": "img_08946a9c",
+                            "src4": "img_3881bca3",
+                            "src5": "img_ff09a9b0"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.85,
+                "end": 19.1,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "JARDIM E TERRAÇO",
+                        "params": {
+                            "src": "img_33ad0639",
+                            "src2": "img_cbba52bb",
+                            "src3": "img_0c4d47aa",
+                            "src4": "img_bdb9b559",
+                            "src5": "img_8fadfa6e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.1,
+                "end": 21.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "TERRENO DE 1.690 m²",
+                        "params": {
+                            "src": "img_6a11b545",
+                            "src2": "img_f56c2632",
+                            "src3": "img_b91a9bce",
+                            "src4": "img_8496ff28"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.3,
+                "end": 23.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "GARAGEM PARA 3–4 CARROS",
+                        "params": {
+                            "src": "img_5c495f9b",
+                            "src2": "img_2fdc4c2f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.5,
+                "end": 26.45,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_edebc990",
+                            "title": "CONFORTO TODO O ANO",
+                            "items": [
+                                "Ar condicionado",
+                                "Lareira",
+                                "Painéis fotovoltaicos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.45,
+                "end": 28.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "DOIS LOTES PARA CONSTRUIR",
+                        "params": {
+                            "src": "img_048d67f0",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.6,
+                "end": 32.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "ESPAÇO PARA 2 HABITAÇÕES",
+                        "params": {
+                            "src": "img_e42619c0",
+                            "src2": "img_5fd991d7",
+                            "src3": "img_0bc06f03",
+                            "src4": "img_5a79b85c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.2,
+                "end": 34.45,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "655.000 €",
+                        "params": {
+                            "src": "img_d5aa12ec",
+                            "src2": "img_3c8b4f5d",
+                            "src3": "img_d085aab8",
+                            "src4": "img_10bfec1b",
+                            "src5": "img_9db98650"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.45,
+                "end": 38.31999969482422,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Natália Fonseca",
+                        "params": {
+                            "src": "img_a65201cd",
+                            "name": "Natália Fonseca",
+                            "phone": "+351 916 143 691",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1024783-lgmit/clip.mp4",
+    "error": null
+}

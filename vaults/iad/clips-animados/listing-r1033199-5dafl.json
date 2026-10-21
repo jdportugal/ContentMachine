@@ -1,0 +1,1151 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 na Meadela com lareira, garagem e sótão por 246.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-viana-do-castelo-124m2/r1033199",
+            "agent": "Diana Guerreiro",
+            "phone": "+351915133500",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Um T2 na Meadela com lareira, garagem e sótão.",
+            "voiceover": "Um T2 na Meadela com lareira, garagem e sótão. Numa zona residencial tranquila, com fácil acesso a Viana do Castelo. Mais de cem metros quadrados úteis, em muito bom estado. Virado a poente, com muita luz natural. A sala tem lareira e a cozinha tem boas dimensões. Dois quartos e uma casa de banho. Duas varandas, lugar de garagem e sótão para arrumação. Para viver com sossego, perto da cidade. Duzentos e quarenta e seis mil euros. Para visitar, fale com a Diana Guerreiro, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Um T2 na Meadela com lareira, garagem e sótão.",
+                    "caption": "Meadela, Viana do Castelo"
+                },
+                {
+                    "photo": "rua ou envolvente residencial",
+                    "vo": "Numa zona residencial tranquila, com fácil acesso a Viana do Castelo.",
+                    "caption": "Zona residencial tranquila"
+                },
+                {
+                    "photo": "sala ampla, plano geral",
+                    "vo": "Mais de cem metros quadrados úteis, em muito bom estado.",
+                    "caption": "102 m² úteis"
+                },
+                {
+                    "photo": "sala com luz da tarde pela janela",
+                    "vo": "Virado a poente, com muita luz natural.",
+                    "caption": "Exposição a poente"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "A sala tem lareira…",
+                    "caption": "Sala com lareira"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "…e a cozinha tem boas dimensões.",
+                    "caption": "Cozinha espaçosa"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Dois quartos…",
+                    "caption": "Dois quartos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "…e uma casa de banho.",
+                    "caption": "Uma casa de banho"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "Duas varandas…",
+                    "caption": "Duas varandas"
+                },
+                {
+                    "photo": "lugar de garagem ou sótão",
+                    "vo": "…lugar de garagem e sótão para arrumação. Para viver com sossego, perto da cidade.",
+                    "caption": "Garagem e sótão"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e quarenta e seis mil euros. Para visitar, fale com a Diana Guerreiro, da IAD Portugal.",
+                    "caption": "246.000 € · Diana Guerreiro · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Os detalhes dizem 'Rés-do-chão', mas o anúncio também refere elevador e sótão. O piso ficou fora do guião, por isso convém confirmar.",
+                "Os detalhes trazem 'property.feature.heating', que parece um campo por preencher. O aquecimento não foi mencionado.",
+                "O título do anúncio diz 124 m² (área bruta) e o texto diz 102 m² (área útil). O guião usa 'mais de cem metros quadrados úteis'."
+            ],
+            "message": "Boa tarde Sra. Diana, fiz este vídeo do seu apartamento T2 na Meadela para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 2 quartos de 124 m² em Viana do Castelo",
+            "price": 246000,
+            "details": {
+                "Preço": "246 000 €",
+                "Localização": "Viana do Castelo, 4900-676",
+                "Referência": "1033199",
+                "Área Bruta m²": "124",
+                "Quartos": 2,
+                "Ano de Construção": 1999,
+                "Certificado Energético": "C",
+                "Características": "124 m² área bruta, 102 m² úteis, 1 casa de banho, Garagem, Varanda, Elevador, Lareira, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1999, Rés-do-chão"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Diana Guerreiro - and phone number - +351915133500. Agency: IAD Portugal.\nThe agent's photo is Diana Guerreiro.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Um T2 na Meadela com lareira, garagem e sótão.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «Meadela, Viana do Castelo»\n- rua ou envolvente residencial → «Zona residencial tranquila»\n- sala ampla, plano geral → «102 m² úteis»\n- sala com luz da tarde pela janela → «Exposição a poente»\n- sala com lareira → «Sala com lareira»\n- cozinha → «Cozinha espaçosa»\n- quarto → «Dois quartos»\n- casa de banho → «Uma casa de banho»\n- varanda → «Duas varandas»\n- lugar de garagem ou sótão → «Garagem e sótão»\n- end card → «246.000 € · Diana Guerreiro · IAD Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 124 m² em Viana do Castelo\nPreço\n246 000 €\nLocalização\nViana do Castelo, 4900-676\nReferência\n1033199\nÁrea Bruta m²\n124\nQuartos\n2\nAno de Construção\n1999\nCertificado Energético\nC\nCaracterísticas\n124 m² área bruta, 102 m² úteis, 1 casa de banho, Garagem, Varanda, Elevador, Lareira, Ligação TV, Fibra ótica, property.feature.heating, Construído em 1999, Rés-do-chão\n\nDescrição\nAPARTAMENTO T2 NA MEADELA COM LUGAR DE GARAGEM E SÓTÃO\n\nProcura um apartamento que combine espaço, luminosidade, conforto e tranquilidade, sem abdicar da proximidade à cidade? Este T2 na Meadela, em Viana do Castelo, é a oportunidade que procura.\n\nCom 102 m² e em muito bom estado de conservação, este apartamento destaca-se pelas suas boas áreas, distribuição funcional e boa exposição solar a poente, proporcionando ambientes luminosos e acolhedores ao longo do dia.\n\nA sala, confortável e convidativa, dispõe de lareira, criando o cenário ideal para momentos de convívio em família ou para simplesmente desfrutar do conforto do seu lar. A cozinha apresenta boas dimensões e funcionalidade para o dia a dia, enquanto os dois quartos e uma casa de banho oferecem o espaço e a privacidade necessários para toda a sua família.\n\nAs duas varandas são mais uma das qualidades, permitindo desfrutar da luz natural e criar agradáveis momentos ao ar livre. Dispõe ainda de lugar de garagem e sótão, proporcionando maior comodidade e espaço adicional para arrumação.\n\nA localização, na Meadela, permite conciliar a tranquilidade de uma zona residencial com a proximidade e facilidade de acesso a Viana do Castelo e às comodidades essenciais do quotidiano.\n\nVenha conhecer e descubra pessoalmente tudo o que este apartamento tem para oferecer.  \nEntre em contacto connosco e marque já a sua visita.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "T2 na Meadela, Viana do Castelo: preço do imóvel e mercado da habitação",
+            "summary": "T2 com mais de 100 m², lareira, garagem e sótão na Meadela, à venda por 246 mil euros. Segundo o INE, o preço mediano das casas em Portugal subiu 16,8% em 2025 e continuou a subir em 2026.",
+            "timeline": [
+                {
+                    "label": "Meadela integrada na União de Freguesias de Viana do Castelo",
+                    "sublabel": "2013"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m²",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.337 €/m²",
+                    "sublabel": "1.º trimestre de 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Habitantes da União de Freguesias (Viana, Santa Maria Maior, Monserrate e Meadela), Censos 2021",
+                    "value": 25157,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Preço mediano nacional das casas vendidas (INE, 2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano nacional (2025 face a 2024)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano nacional das casas vendidas (INE, 1.º trimestre de 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga do preço mediano nacional (1.º trimestre de 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço do imóvel",
+                    "value": 246000,
+                    "unit": "€"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Meadela ou Grande Lisboa",
+                    "left": {
+                        "title": "Este T2 na Meadela",
+                        "points": [
+                            "Mais de 100 m² úteis",
+                            "Lareira, garagem e sótão",
+                            "246 mil €"
+                        ]
+                    },
+                    "right": {
+                        "title": "Grande Lisboa (INE, 1.º trimestre de 2026)",
+                        "points": [
+                            "Preço mediano de 3.836 €/m²",
+                            "A sub-região mais cara do país"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A Meadela pertence à maior união de freguesias de Viana do Castelo, com cerca de 25 mil habitantes",
+                "Os preços das casas em Portugal atingiram máximos históricos em 2025 e 2026",
+                "A casa está virada a poente e tem duas varandas, garagem e sótão",
+                "Fica numa zona tranquila, perto do centro de Viana do Castelo"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/69988",
+                "https://aldeiasportuguesas.pt/viana-do-castelo/",
+                "https://crwflags.com/FOTW/flags/pt-vctvc.html",
+                "https://casa.trovit.pt/casa-portugal-viana-castelo/53",
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://www.idealista.pt/news/node/76623",
+                "https://www.montepio.org/?p=256674"
+            ]
+        },
+        "suggested": {
+            "title": "T2 na Meadela com lareira, garagem e sótão por 246.000 €",
+            "description": "Quanto custa um T2 com lareira, garagem e sótão na Meadela? 246.000 €.\n\nFica numa zona residencial tranquila, com acesso fácil ao centro de Viana do Castelo. São 102 m² úteis (124 m² brutos), em muito bom estado e virados a poente, por isso entra muita luz natural ☀️ ao fim do dia.\n\nA sala tem lareira e a cozinha tem boas dimensões. Há dois quartos, uma casa de banho e duas varandas.\nNo prédio há elevador, um lugar de garagem e um sótão para arrumação. A casa tem fibra ótica e aquecimento.\nO prédio é de 1999 e o certificado energético é C. Ref. 1033199\n\nPara visitar, ligue à Diana Guerreiro, da IAD Portugal: +351 915 133 500",
+            "tags": [
+                "imobiliario",
+                "apartamentot2",
+                "vianadocastelo",
+                "meadela",
+                "casasavenda",
+                "altominho",
+                "casacomlareira",
+                "apartamentocomgaragem",
+                "comprarcasa",
+                "minho",
+                "iadportugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1033199-5dafl",
+    "created_at": "2026-10-19T13:58:02+00:00",
+    "updated_at": "2026-10-19T14:40:00+00:00",
+    "source_path": "clips/uploads/RkkjJCGYcv49I9KPvRqUfIxYYyG2lZskner9Rw97.mp3",
+    "images": [
+        {
+            "id": "img_e5f81aa3",
+            "path": "clips/uploads/69EMtC1UKATSaT2mvcm2Iq39JG0G4OTAVAM11T0v.png",
+            "description": "Fachada do prédio residencial de cinco andares com varandas, rua calcetada e céu ao pôr do sol.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ab768749",
+            "path": "clips/uploads/8WOarB6Xogj91Fd83BV9L9v8uFZgbFpUogbMipkH.png",
+            "description": "Sala de estar com lareira, sofá de canto bege e janela ampla com luz natural.",
+            "name": "01a0e48e3838d0ecd4bbff1a5f55d557.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_35cf8ef4",
+            "path": "clips/uploads/dm35RQDMWKURmQz6zlYd9FBNzLqUlzpTu475jAsz.png",
+            "description": "Sala de estar vista do sofá: lareira em pedra, televisão e parede de pedra decorativa.",
+            "name": "01a0e48e3918492281ed17e3bc0cb1d9.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ef577a9b",
+            "path": "clips/uploads/zzxSDXXoUXeFq6zvmLjJAPL8BcqkirjxlCCUEpSr.png",
+            "description": "Sala de estar de frente: parede de pedra com televisão, vitrine e lareira de canto.",
+            "name": "01a0e48e387bcb570c9eb6ec87ba3c86.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b37d538f",
+            "path": "clips/uploads/0WYyR8ClxaAGY3sBH6sQIRHiN2o9QlWP0oA7vbyd.png",
+            "description": "Sala de estar com lareira de canto, parede de pedra, televisão e sofá bege.",
+            "name": "01a0e48e372e0f3875b248410a5578a2.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_09396436",
+            "path": "clips/uploads/Las70Mwk61uk9eagPsse8ZNePOxxybGvH2f3m8z4.png",
+            "description": "Sala comum ampla: zona de jantar com mesa escura em primeiro plano e lareira ao fundo.",
+            "name": "01a0e48e37824c94ef6871743d18e9fb.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1934f559",
+            "path": "clips/uploads/V38akWqTUMaDpa6ggmWevStAIZbPT43mGpleSzxL.png",
+            "description": "Zona de jantar com mesa e cadeiras pretas, janela grande com cortinas e acesso à varanda.",
+            "name": "01a0e48e34b2fb53af8e3f0dcc89a71a.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4bdf90ef",
+            "path": "clips/uploads/Kvnjf9oyPJ2tAGS7CPAXOb9znwUjbWhaSYr1YFuL.png",
+            "description": "Mesa de jantar em perspetiva longa, mostrando a sala comum com lareira e parede de pedra ao fundo.",
+            "name": "01a0e48e373e08b78a7d8bb073c226ec.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_483d9052",
+            "path": "clips/uploads/DUyADDaIZhKBo4gHJTLcn1TjqVpmaG3FAMBdWn0x.png",
+            "description": "Zona de jantar junto a janela ampla com vista para prédios e colinas verdes.",
+            "name": "01a0e48e3791228e1918de726e1efcda.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7d668a29",
+            "path": "clips/uploads/3t2tgaUd54h6tviPNW6vR7F2gJ4NotlVT6epXZjn.png",
+            "description": "Varanda soalheira com plantas e mesa redonda, vista para rua residencial e colinas.",
+            "name": "01a0e48e394c23c99427c3ae916cfa58.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6c345219",
+            "path": "clips/uploads/a2KbNLqPtNmBrKcYJzoXwmvTmlDMoUnZK1ump6Zx.png",
+            "description": "Varanda com mesa redonda, banco de madeira e planta; grandes janelas de vidro com caixilharia verde-escura.",
+            "name": "01a0e48e38f7da3f0a4bcceecde65e46.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2452e763",
+            "path": "clips/uploads/XBytz1MlF1oP05EHNd64dEtsOdCemERAiLSL8Flu.png",
+            "description": "Cozinha comprida com armários brancos, bancada preta, mesa de vidro com fruteira e frigorífico ao fundo.",
+            "name": "01a0e48e37ea47f8868e2133e767a329.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_487745f9",
+            "path": "clips/uploads/CZbN0NC9GXIjiM2sEL8QX9eJqTfxa8jNjWOWybGj.png",
+            "description": "Cozinha espaçosa, armários creme com vitrines, lava-loiça duplo, máquina de lavar loiça e frigorífico com ímanes.",
+            "name": "01a0e48e3887a3109d21bd864f5cbcaa.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_130b7774",
+            "path": "clips/uploads/U19f5eX9PYPqoMbBD0xNp4Fctuhdl3MydN5Fzass.png",
+            "description": "Cozinha vista do outro lado: mesa de refeições em vidro, armários brancos, bancada preta e porta de madeira.",
+            "name": "01a0e48e3864292c5329481bd6a2fac5.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d41f0dcd",
+            "path": "clips/uploads/PM1xFxMAlMt98QxF2fGSzK3Srf0ztpbCp47ZEEGC.png",
+            "description": "Cozinha em pormenor: bancada preta comprida, lava-loiça, placa a gás, forno e máquina de lavar loiça.",
+            "name": "01a0e48e37fd1cbb64de40c2ba24aca3.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_aed47caf",
+            "path": "clips/uploads/DsMUrDH5N1TvWrpFRASStRwHkjoSZFglxuRxxXLL.png",
+            "description": "Quarto principal com cama de casal, mesas de cabeceira em madeira, roupeiro embutido e chão de madeira.",
+            "name": "01a0e48e37e4fd9b5801976ed01052f3.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d518bdf1",
+            "path": "clips/uploads/vlf5exokwWXoG7rRQGN5QXheMKQTizASB5hlutLS.png",
+            "description": "Quarto principal luminoso com cama de casal, janela e porta de acesso à varanda.",
+            "name": "01a0e48e379a2d41d0565777abd40fd8.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_02ff7173",
+            "path": "clips/uploads/0AwAViHvQZpy6RWJkdgJdxpssiF5t38BBw2zQNRV.png",
+            "description": "Quarto de casal com roupeiro embutido de madeira, cómoda com espelho, televisão e soalho.",
+            "name": "01a0e4a575abeba732f0a9f773135872.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_01069c43",
+            "path": "clips/uploads/dh3SHuNmZLGVpAHkhojBkSSEN8uQ8Tj3uyhhaQSn.png",
+            "description": "Quarto de casal visto da entrada: cama, roupeiro embutido amplo, televisão na parede e soalho.",
+            "name": "01a0e4a575a343b727267676a105c03d.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_930a1026",
+            "path": "clips/uploads/h7aXGmct2473o3o0HZhZq7uVZGrwo2LqwX5cnpeM.png",
+            "description": "Segundo quarto com cama de solteiro, secretária branca com cadeira gaming, cómoda branca e televisão.",
+            "name": "01a0e48e37dcdb5b4dcbd95e34a11814.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_c16cf5c5",
+            "path": "clips/uploads/kD4ag1hRR53kGdBaJKy6AM9cQ2zf9qRhyT1IOkMK.png",
+            "description": "Quarto com cama de solteiro, cabeceira de madeira, roupeiro branco de portas de correr, espelho e chão de madeira.",
+            "name": "01a0e48e36a8e713acff241c9e01a014.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_807a9884",
+            "path": "clips/uploads/kw7i6Ie5CjuiUV8RJekuM8E2CrpBPMIjmuNPno0Y.png",
+            "description": "Quarto visto de outro ângulo: cama com edredão branco, roupeiro branco, porta de madeira e soalho.",
+            "name": "01a0e48e3540dfd51a363b9d315f01ce.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1143832c",
+            "path": "clips/uploads/igCOmwlbaGKoMQzZI34Q7PDLX8xbxdX5BprOKuxj.png",
+            "description": "Quarto ou escritório com secretária branca, cadeira preta, cómoda, televisão na parede e cortinados brancos.",
+            "name": "01a0e48e358620c90fb29fbcf65af6be.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cf9c9a0f",
+            "path": "clips/uploads/XLhdqShlWDpwa5QbpvZeJsVX1DGOQrzvsQlDDMqt.png",
+            "description": "Casa de banho com azulejos azuis e beges, lavatório de coluna, sanita, bidé e banheira ao fundo.",
+            "name": "01a0e48e3922600c233da6b9d7b054a8.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cbe140f0",
+            "path": "clips/uploads/L80ABtrseecGKiKeY07xugLs1qZUpV2bOka0PIpC.png",
+            "description": "Casa de banho com banheira e resguardo de vidro, lavatório de coluna, espelho em arco e móvel coluna.",
+            "name": "01a0e48e38db723cd05ac1e6621e6a02.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cc8095a3",
+            "path": "clips/uploads/DixRZatPCn98WpPEOg3rwUED1eAfHRrMMouzNS63.png",
+            "description": "Casa de banho com banheira, chuveiro, bidé, porta de madeira e chão em xadrez azul e branco.",
+            "name": "01a0e48e39275504009d81a5f2e23a21.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_20557ae1",
+            "path": "clips/uploads/DUoCaiVF207okY5JHN4uGuyR4qGv2O6vTatploMp.png",
+            "description": "Certificado energético: gráfico de classes A+ a F, com o imóvel na classe C (142%).",
+            "name": "01a0e4aa36810b601fa0470cf7b8416a.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_945323d8",
+            "path": "clips/uploads/rclfhLED8y3qXWm0R90mo5AS9V5k4h8NpL6NTDwx.png",
+            "description": "Retrato da consultora Diana Guerreiro, da IAD Portugal.",
+            "name": "Diana Guerreiro.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_817091ec",
+            "path": "clips/uploads/a8xxke9d6ZWQP4DAcIlOhNUw2N29CUym9ZABfNQi.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/RkkjJCGYcv49I9KPvRqUfIxYYyG2lZskner9Rw97.mp3",
+    "transcript": {
+        "duration": 30.799999237060547,
+        "text": "Um T2 na Miadela com lareira, garagem e sótão. Numa zona residencial tranquila, com fácil acesso à Viena do Castelo. Mais de 100m² úteis, em muito bom estado. Virado a poente, com muita luz natural. A sala tem lareira e a cozinha tem boas dimensões. Dois quartos e uma casa de banho. Duas varandas, lugar de garagem e sótão para arrumação. Para viver com sossego, perto da cidade. 246 mil euros. Para visitar, fale com a Diana Guerreiro, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.10000000149011612
+            },
+            {
+                "word": "T2",
+                "start": 0.10000000149011612,
+                "end": 0.6399999856948853
+            },
+            {
+                "word": "na",
+                "start": 0.6399999856948853,
+                "end": 0.8399999737739563
+            },
+            {
+                "word": "Miadela",
+                "start": 0.8399999737739563,
+                "end": 1.2999999523162842
+            },
+            {
+                "word": "com",
+                "start": 1.2999999523162842,
+                "end": 1.559999942779541
+            },
+            {
+                "word": "lareira",
+                "start": 1.559999942779541,
+                "end": 1.940000057220459
+            },
+            {
+                "word": "garagem",
+                "start": 2.240000009536743,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "e",
+                "start": 2.7200000286102295,
+                "end": 2.940000057220459
+            },
+            {
+                "word": "sótão",
+                "start": 2.940000057220459,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "Numa",
+                "start": 3.7200000286102295,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "zona",
+                "start": 3.880000114440918,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "residencial",
+                "start": 4.139999866485596,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "tranquila",
+                "start": 4.699999809265137,
+                "end": 5.300000190734863
+            },
+            {
+                "word": "com",
+                "start": 5.5,
+                "end": 5.699999809265137
+            },
+            {
+                "word": "fácil",
+                "start": 5.699999809265137,
+                "end": 6.019999980926514
+            },
+            {
+                "word": "acesso",
+                "start": 6.019999980926514,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "à",
+                "start": 6.400000095367432,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "Viena",
+                "start": 6.579999923706055,
+                "end": 6.820000171661377
+            },
+            {
+                "word": "do",
+                "start": 6.820000171661377,
+                "end": 7
+            },
+            {
+                "word": "Castelo",
+                "start": 7,
+                "end": 7.400000095367432
+            },
+            {
+                "word": "Mais",
+                "start": 7.860000133514404,
+                "end": 7.960000038146973
+            },
+            {
+                "word": "de",
+                "start": 7.960000038146973,
+                "end": 8.220000267028809
+            },
+            {
+                "word": "100m²",
+                "start": 8.220000267028809,
+                "end": 9.140000343322754
+            },
+            {
+                "word": "úteis",
+                "start": 9.140000343322754,
+                "end": 9.680000305175781
+            },
+            {
+                "word": "em",
+                "start": 9.800000190734863,
+                "end": 9.979999542236328
+            },
+            {
+                "word": "muito",
+                "start": 9.979999542236328,
+                "end": 10.319999694824219
+            },
+            {
+                "word": "bom",
+                "start": 10.319999694824219,
+                "end": 10.5600004196167
+            },
+            {
+                "word": "estado",
+                "start": 10.5600004196167,
+                "end": 10.859999656677246
+            },
+            {
+                "word": "Virado",
+                "start": 11.34000015258789,
+                "end": 11.539999961853027
+            },
+            {
+                "word": "a",
+                "start": 11.539999961853027,
+                "end": 11.800000190734863
+            },
+            {
+                "word": "poente",
+                "start": 11.800000190734863,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "com",
+                "start": 12.220000267028809,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "muita",
+                "start": 12.420000076293945,
+                "end": 12.84000015258789
+            },
+            {
+                "word": "luz",
+                "start": 12.84000015258789,
+                "end": 12.979999542236328
+            },
+            {
+                "word": "natural",
+                "start": 12.979999542236328,
+                "end": 13.420000076293945
+            },
+            {
+                "word": "A",
+                "start": 13.84000015258789,
+                "end": 13.960000038146973
+            },
+            {
+                "word": "sala",
+                "start": 13.960000038146973,
+                "end": 14.140000343322754
+            },
+            {
+                "word": "tem",
+                "start": 14.140000343322754,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "lareira",
+                "start": 14.380000114440918,
+                "end": 14.760000228881836
+            },
+            {
+                "word": "e",
+                "start": 14.760000228881836,
+                "end": 15
+            },
+            {
+                "word": "a",
+                "start": 15,
+                "end": 15.319999694824219
+            },
+            {
+                "word": "cozinha",
+                "start": 15.319999694824219,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "tem",
+                "start": 15.34000015258789,
+                "end": 15.619999885559082
+            },
+            {
+                "word": "boas",
+                "start": 15.619999885559082,
+                "end": 15.899999618530273
+            },
+            {
+                "word": "dimensões",
+                "start": 15.899999618530273,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "Dois",
+                "start": 17.139999389648438,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "quartos",
+                "start": 17.239999771118164,
+                "end": 17.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 17.68000030517578,
+                "end": 17.8799991607666
+            },
+            {
+                "word": "uma",
+                "start": 17.8799991607666,
+                "end": 18.100000381469727
+            },
+            {
+                "word": "casa",
+                "start": 18.100000381469727,
+                "end": 18.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 18.239999771118164,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "banho",
+                "start": 18.579999923706055,
+                "end": 18.920000076293945
+            },
+            {
+                "word": "Duas",
+                "start": 19.1200008392334,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "varandas",
+                "start": 19.239999771118164,
+                "end": 19.760000228881836
+            },
+            {
+                "word": "lugar",
+                "start": 20.1200008392334,
+                "end": 20.200000762939453
+            },
+            {
+                "word": "de",
+                "start": 20.200000762939453,
+                "end": 20.420000076293945
+            },
+            {
+                "word": "garagem",
+                "start": 20.420000076293945,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 20.920000076293945,
+                "end": 21.100000381469727
+            },
+            {
+                "word": "sótão",
+                "start": 21.100000381469727,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "para",
+                "start": 21.34000015258789,
+                "end": 21.559999465942383
+            },
+            {
+                "word": "arrumação",
+                "start": 21.559999465942383,
+                "end": 22.079999923706055
+            },
+            {
+                "word": "Para",
+                "start": 22.420000076293945,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "viver",
+                "start": 22.559999465942383,
+                "end": 22.780000686645508
+            },
+            {
+                "word": "com",
+                "start": 22.780000686645508,
+                "end": 23.239999771118164
+            },
+            {
+                "word": "sossego",
+                "start": 23.239999771118164,
+                "end": 23.6200008392334
+            },
+            {
+                "word": "perto",
+                "start": 23.899999618530273,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "da",
+                "start": 23.959999084472656,
+                "end": 24.219999313354492
+            },
+            {
+                "word": "cidade",
+                "start": 24.219999313354492,
+                "end": 24.579999923706055
+            },
+            {
+                "word": "246",
+                "start": 25.639999389648438,
+                "end": 26.18000030517578
+            },
+            {
+                "word": "mil",
+                "start": 26.18000030517578,
+                "end": 26.420000076293945
+            },
+            {
+                "word": "euros",
+                "start": 26.420000076293945,
+                "end": 26.780000686645508
+            },
+            {
+                "word": "Para",
+                "start": 26.780000686645508,
+                "end": 27.34000015258789
+            },
+            {
+                "word": "visitar",
+                "start": 27.34000015258789,
+                "end": 27.899999618530273
+            },
+            {
+                "word": "fale",
+                "start": 28.239999771118164,
+                "end": 28.239999771118164
+            },
+            {
+                "word": "com",
+                "start": 28.239999771118164,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "a",
+                "start": 28.399999618530273,
+                "end": 28.520000457763672
+            },
+            {
+                "word": "Diana",
+                "start": 28.520000457763672,
+                "end": 28.760000228881836
+            },
+            {
+                "word": "Guerreiro",
+                "start": 28.760000228881836,
+                "end": 29.219999313354492
+            },
+            {
+                "word": "da",
+                "start": 29.360000610351562,
+                "end": 29.600000381469727
+            },
+            {
+                "word": "IAD",
+                "start": 29.600000381469727,
+                "end": 29.959999084472656
+            },
+            {
+                "word": "de",
+                "start": 29.959999084472656,
+                "end": 30.239999771118164
+            },
+            {
+                "word": "Portugal",
+                "start": 30.239999771118164,
+                "end": 30.579999923706055
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 30.799999237060547,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.3000000000000007,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 COM LAREIRA E GARAGEM",
+                        "params": {
+                            "src": "img_e5f81aa3",
+                            "avatar": "img_945323d8",
+                            "logo": "img_817091ec",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "246.000 €",
+                            "location": "VIANA DO CASTELO · MEADELA",
+                            "title": "T2 NA MEADELA",
+                            "facts": "102 m² · 2 quartos · 1 WC · garagem",
+                            "cta": "Ligue já +351 915 133 500",
+                            "name": "Diana Guerreiro",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.3000000000000007,
+                "end": 7.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "ZONA RESIDENCIAL TRANQUILA",
+                        "params": {
+                            "src": "img_7d668a29",
+                            "src2": "img_483d9052"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.6,
+                "end": 11.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "102 M² ÚTEIS · CLASSE C",
+                        "params": {
+                            "src": "img_09396436",
+                            "src2": "img_4bdf90ef",
+                            "src3": "img_20557ae1",
+                            "src4": "img_1143832c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.2,
+                "end": 13.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_1934f559",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.2,
+                "end": 15.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "SALA COM LAREIRA",
+                        "params": {
+                            "src": "img_ab768749",
+                            "src2": "img_35cf8ef4",
+                            "src3": "img_ef577a9b",
+                            "src4": "img_b37d538f",
+                            "src5": "img_09396436"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.2,
+                "end": 17.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA ESPAÇOSA",
+                        "params": {
+                            "src": "img_2452e763",
+                            "src2": "img_487745f9",
+                            "src3": "img_130b7774",
+                            "src4": "img_d41f0dcd"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.2,
+                "end": 19.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "2 QUARTOS · 1 WC",
+                        "params": {
+                            "src": "img_aed47caf",
+                            "src2": "img_d518bdf1",
+                            "src3": "img_cf9c9a0f",
+                            "src4": "img_cbe140f0",
+                            "src5": "img_cc8095a3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.2,
+                "end": 22.3,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_6c345219",
+                            "title": "E AINDA",
+                            "items": [
+                                "Duas varandas",
+                                "Lugar de garagem",
+                                "Sótão para arrumação"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.3,
+                "end": 26.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "VIVER COM SOSSEGO",
+                        "params": {
+                            "src": "img_02ff7173",
+                            "src2": "img_01069c43",
+                            "src3": "img_930a1026",
+                            "src4": "img_c16cf5c5",
+                            "src5": "img_807a9884"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.8,
+                "end": 30.799999237060547,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Diana Guerreiro",
+                        "params": {
+                            "src": "img_945323d8",
+                            "name": "Diana Guerreiro",
+                            "phone": "+351 915 133 500",
+                            "email": "diana.guerreiro@iad.pt",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1033199-5dafl/clip.mp4",
+    "error": null
+}

@@ -3,10 +3,14 @@
 namespace App\Jobs\Clips;
 
 use App\Jobs\Concerns\RunsInProject;
+use App\Services\Clips\Api\ElevenLabsVoiceoverService;
 use App\Services\Clips\Contracts\TranscriptionService;
 use App\Services\Clips\Contracts\VoiceoverService;
+use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectStore;
+use App\Services\RealEstate\ListingScriptWriter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -28,7 +32,11 @@ class RegenerateVoiceoverJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
-    public function __construct(public string $projectId)
+    /**
+     * @param  ?string  $text  what to say instead of the transcript (e.g. the listing's script)
+     * @param  bool  $replan  plan the clip anew on the new voice (an edited transcript), not just retime it
+     */
+    public function __construct(public string $projectId, public ?string $text = null, public bool $replan = false)
     {
         $this->captureProject();
     }
@@ -41,7 +49,8 @@ class RegenerateVoiceoverJob implements ShouldQueue
         try {
             $p->update(['status' => ClipRecord::STATUS_TRANSCRIBING, 'error' => null]);
 
-            $text = trim((string) ($p->transcript['text'] ?? ''));
+            // Spoken "IAD Portugal", never "iad" (voiced "IA de Portugal").
+            $text = ListingScriptWriter::iadFalado(trim((string) ($this->text ?? $p->transcript['text'] ?? '')));
             if ($text === '') {
                 throw new \RuntimeException('The clip has no transcript to speak.');
             }
@@ -50,17 +59,32 @@ class RegenerateVoiceoverJob implements ShouldQueue
             @mkdir($dir, 0777, true);
 
             $before = (float) ($p->plan['duration'] ?? 0.0);
-            $audio = $tts->synthesize($text, "$dir/voz.mp3");
+            // A listing clip keeps its narrator (picked by the agent's gender), not the default voice.
+            $voice = isset($p->meta['listing']['gender']) ? config('contentmachine.real_estate.voices.'.$p->meta['listing']['gender']) : null;
+            $audio = $voice
+                ? app(ElevenLabsVoiceoverService::class)->synthesizeWith($text, "$dir/voz.mp3", $voice['voice_id'], $voice['model'], $voice['stability'] ?? null)
+                : $tts->synthesize($text, "$dir/voz.mp3");
             $transcript = $stt->transcribe($audio);
             $after = (float) ($transcript['duration'] ?? 0.0);
 
-            $plan = $p->plan ?? [];
+            // An after-intro gap is taken out, the voice retimed, and the gap opened again at the new pause.
+            $filler = app(SceneVisualFiller::class);
+            $waited = (float) ($p->plan['voice_gap']['seconds'] ?? 0);
+            [$plan, $afterIntro, $videoLength] = $filler->removeAfterIntro($p->plan ?? []);
+            $before -= $waited;
             if ($before > 0.0 && $after > 0.0) {
                 $plan = self::retime($plan, $after / $before);
             }
             if ($after > 0.0) {
                 $plan['duration'] = $after;
             }
+            if ($afterIntro !== null) {
+                $effects = app(EffectStore::class);
+                $plan = $filler->insertAfterIntro($plan, ($p->meta['after_intro'] ?? null) ?: $effects->afterIntroPath() ?: $afterIntro, $videoLength, $transcript['words'] ?? [], $effects->afterIntroLineFor($p->meta ?? []));
+            }
+            // Clips follow the new timing of the words, and none outlasts its scene (no freeze).
+            $p->attributes['transcript'] = $transcript;   // the match reads the new words (saved below)
+            $plan = FinalizeClipPlanJob::showWhatIsSaid($p, $plan, $filler);
 
             $p->update([
                 'audio_path' => $audio,
@@ -69,10 +93,14 @@ class RegenerateVoiceoverJob implements ShouldQueue
                 // so a later re-transcribe doesn't resurrect the pre-edit wording.
                 'source_text' => $text,
                 'plan' => $plan,
-                'status' => ClipRecord::STATUS_RENDERING,
+                'status' => $this->replan ? ClipRecord::STATUS_PLANNING : ClipRecord::STATUS_RENDERING,
             ]);
+            // A listing's script follows what is now said (the "✎ Script" panel, a later re-voice).
+            if (isset($p->meta['listing'])) {
+                $p->update(['meta' => array_merge($p->meta, ['listing' => array_merge($p->meta['listing'], ['voiceover' => $text])])]);
+            }
 
-            RenderJob::dispatch($p->id);
+            $this->replan ? PlanAnimationsJob::dispatch($p->id) : RenderJob::dispatch($p->id);
         } catch (\Throwable $e) {
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;

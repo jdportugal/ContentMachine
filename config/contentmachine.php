@@ -82,10 +82,10 @@ return [
 
     // Presentation metadata per platform (label, accent color, glyph).
     'plataformas_meta' => [
-        'youtube' => ['label' => 'YouTube',   'cor' => '#FF5C7A', 'glifo' => '▶'],
-        'instagram' => ['label' => 'Instagram', 'cor' => '#C77DFF', 'glifo' => '◉'],
-        'tiktok' => ['label' => 'TikTok',    'cor' => '#4DE0E0', 'glifo' => '♪'],
-        'linkedin' => ['label' => 'LinkedIn',  'cor' => '#5A7BFF', 'glifo' => '▮'],
+        'youtube' => ['label' => 'YouTube',   'cor' => '#A93A48', 'glifo' => '▶'],
+        'instagram' => ['label' => 'Instagram', 'cor' => '#7A4A8C', 'glifo' => '◉'],
+        'tiktok' => ['label' => 'TikTok',    'cor' => '#2C6E6E', 'glifo' => '♪'],
+        'linkedin' => ['label' => 'LinkedIn',  'cor' => '#2F5A85', 'glifo' => '▮'],
     ],
 
     'news' => [
@@ -128,7 +128,7 @@ return [
         ],
         'openai_model' => env('AGGREGATION_OPENAI_MODEL', 'gpt-4o-mini'),
         'gemini_model' => env('AGGREGATION_GEMINI_MODEL', 'gemini-1.5-flash'),
-        'anthropic_model' => env('AGGREGATION_ANTHROPIC_MODEL', 'claude-opus-4-8'),
+        'anthropic_model' => env('AGGREGATION_ANTHROPIC_MODEL', 'claude-opus-5'),
         'anthropic_max_tokens' => (int) env('AGGREGATION_ANTHROPIC_MAX_TOKENS', 8000),
 
         // LLM provider for the copywriting/topics:
@@ -277,6 +277,15 @@ return [
         'kie_video' => env('CUSTO_KIE_VIDEO', 0.40),            // per generated video (5s)
         'elevenlabs_1k_chars' => env('CUSTO_TTS_1K', 0.30),     // per 1k synthesized chars
         'apify_busca' => env('CUSTO_APIFY_BUSCA', 0.01),        // per image-search run
+        // fal.ai Sync Lipsync 2 Pro, billed per MINUTE of the finished video
+        // (fal's own endpoint billing: unit "minutes", price 5). Assumed
+        // pro-rated by the second — correct this against a real invoice if fal
+        // turns out to round up to whole minutes.
+        'fal_lipsync_min' => env('CUSTO_FAL_LIPSYNC_MIN', 5.00),
+        // Refuse a lip-sync whose video is longer than this. At $5/minute an
+        // accidental five-minute upload is $25, so the ceiling is a money guard,
+        // not a model limit — v2/pro documents none.
+        'fal_lipsync_max_seconds' => (int) env('FAL_LIPSYNC_MAX_SECONDS', 120),
         // USD per 1M tokens [input, output], per LlmClient provider.
         'llm_mtok' => [
             'anthropic' => [3.0, 15.0],
@@ -332,6 +341,8 @@ return [
         'fps' => (int) env('CLIPS_FPS', 30),
         'voice_id' => env('ELEVENLABS_VOICE_ID', 'EXAVITQu4vr4xnSDxMaL'),
         'openai_model' => env('CLIPS_OPENAI_MODEL', 'gpt-4o'),
+        // gpt-4o's completion ceiling; CLIPS_MAX_TOKENS above it is a 400.
+        'openai_max_tokens' => (int) env('CLIPS_OPENAI_MAX_TOKENS', 16384),
         // Language hint for Whisper ('' = automatic detection, so the language
         // follows the speech; set e.g. 'pt' only if you want to force it).
         'transcribe_language' => env('CLIPS_TRANSCRIBE_LANGUAGE', ''),
@@ -362,7 +373,7 @@ return [
         'fetch_max_bytes' => (int) env('CLIPS_FETCH_MAX_BYTES', 10485760),
         // Fallback image search when the model's own web search names nothing.
         // Any Apify image-search actor; empty disables the fallback.
-        'image_search_actor' => env('APIFY_ACTOR_IMAGE_SEARCH', 'apify~google-images-scraper'),
+        'image_search_actor' => env('APIFY_ACTOR_IMAGE_SEARCH', 'hooli~google-images-scraper'),
         'image_style' => env('CLIPS_IMAGE_STYLE', 'cinematic, photographic, high detail, dramatic lighting, vertical composition, no text or watermarks'),
         // Transcription engine: 'auto' (OpenAI when a key is set, else local
         // Whisper), 'openai' or 'local'. The per-step binding in Settings wins.
@@ -387,6 +398,7 @@ return [
     'passos' => [
         'noticias_escrita' => ['label' => 'News · writing', 'kind' => 'llm'],
         'noticias_dicas' => ['label' => 'News · tool-tip scripts', 'kind' => 'llm'],
+        'noticias_topico' => ['label' => 'News · topic scripts', 'kind' => 'llm'],
         'publicacoes_plano' => ['label' => 'Posts · planning', 'kind' => 'llm'],
         'shorts_selecao' => ['label' => 'Shorts · clip selection', 'kind' => 'llm'],
         'clips_pesquisa' => ['label' => 'Clips · research', 'kind' => 'llm'],
@@ -461,6 +473,35 @@ return [
             'default' => 'Clips, plans, renders — the main pipeline',
             'previews' => 'SFX and background preview renders',
             'media' => 'Publicações card images (kie.ai)',
+        ],
+    ],
+
+    /*
+    | Listing → clip importer (Animated Clips · "From a listing"). Voices are
+    | European-Portuguese ElevenLabs voices, picked by the agent's gender.
+    | Stability is the Creative (0) / Natural (0.5) / Robust (1) setting.
+    | `takes` > 1 (was 3 on v3): Simão drifted between European and Brazilian accents
+    | take to take on v3 (same settings as the website, where takes were redone by
+    | hand), so the importer narrates several and the user picks one by ear.
+    */
+    'real_estate' => [
+        'voices' => [
+            // Simão on v4 sounds better than on v3 (which drifted Brazilian unless the text was in
+            // paragraphs, ElevenLabsVoiceoverService::paragraphs). LISTING_MODEL_MALE=eleven_v3 to go back.
+            'm' => ['voice_id' => env('LISTING_VOICE_MALE', 'SgbHvexvdPuvqzNjvbPM'), 'model' => env('LISTING_MODEL_MALE', 'eleven_v4'), 'stability' => 0.5, 'takes' => 1],
+            'f' => ['voice_id' => env('LISTING_VOICE_FEMALE', 'MTAejQCmgXMzsj4Dgq5O'), 'model' => env('LISTING_MODEL_FEMALE', 'eleven_v4')],
+        ],
+        'music' => env('LISTING_MUSIC', 'upbeat-corporate.mp3'),
+        'music_volume' => 0.1,
+        // The music alone over a beat-synced opening, before the voice (it eases down to music_volume).
+        'opening_music_volume' => 0.7,
+        // Walkthrough → reel: the Kling first+last-frame model that modernises
+        // each room, and how many rooms get one (each is a paid video).
+        'property' => [
+            'video_model' => env('PROPERTY_VIDEO_MODEL', 'kling-3.0/video'),
+            'max_rooms' => (int) env('PROPERTY_MAX_ROOMS', 5),
+            // Kling's own audio: the sounds of the new things arriving, mixed under the music.
+            'sound' => (bool) env('PROPERTY_KLING_SOUND', true),
         ],
     ],
 

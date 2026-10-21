@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Jobs\GerarRelatorioJob;
 use App\Livewire\Noticias;
+use App\Services\Aggregation\LlmClient;
 use App\Services\Aggregation\RelatorioBuilder;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
@@ -168,9 +169,11 @@ class RelatorioTest extends TestCase
     /** An LLM double that captures the prompt and answers with a fixed script. */
     private function llmEspiao(): object
     {
-        $llm = new class extends \App\Services\Aggregation\LlmClient
+        $llm = new class extends LlmClient
         {
             public ?string $capturado = null;
+
+            public bool $comWeb = false;
 
             public function disponivel(): bool
             {
@@ -185,11 +188,12 @@ class RelatorioTest extends TestCase
             public function texto(string $prompt, bool $comFerramentas = false, bool $json = false): ?string
             {
                 $this->capturado = $prompt;
+                $this->comWeb = $comFerramentas;
 
                 return "**Burning tokens?**\n\nUse /compact.";
             }
         };
-        $this->app->instance(\App\Services\Aggregation\LlmClient::class, $llm);
+        $this->app->instance(LlmClient::class, $llm);
 
         return $llm;
     }
@@ -245,6 +249,45 @@ class RelatorioTest extends TestCase
 
         $this->assertSame('relatorio', $noticias?->get('tipo'));
         $this->assertSame('relatorio_dicas', $dicas?->get('tipo'));
+    }
+
+    // ───────────────────────── Topic scripts (typed topic, researched on the web) ─────
+
+    public function test_topico_pesquisa_na_web_e_arquiva_guiao_proprio(): void
+    {
+        $llm = $this->llmEspiao();
+
+        Livewire::test(Noticias::class)
+            ->set('tipoRelatorio', RelatorioBuilder::TIPO_TOPICO)
+            ->set('topico', '  Claude Code hooks ')
+            ->call('criarRelatorio')
+            ->assertHasNoErrors()
+            ->assertSet('relatorioSelecionado', 'noticias/relatorios/topico-claude-code-hooks.md')
+            ->assertSee('Burning tokens?');
+
+        $nota = $this->vault->get('noticias/relatorios/topico-claude-code-hooks.md');
+        $this->assertSame('relatorio_topico', $nota?->get('tipo'));
+        $this->assertSame('Claude Code hooks', $nota?->get('titulo'));
+
+        // The prompt carries the topic, asks for web research and runs with tools on.
+        $this->assertStringContainsString('Claude Code hooks', (string) $llm->capturado);
+        $this->assertStringContainsString('web search', (string) $llm->capturado);
+        $this->assertStringContainsString('SHORT-FORM VIDEO SCRIPTS', (string) $llm->capturado);
+        $this->assertTrue($llm->comWeb);
+    }
+
+    public function test_topico_vazio_nao_dispara_nada(): void
+    {
+        Queue::fake();
+
+        Livewire::test(Noticias::class)
+            ->set('tipoRelatorio', RelatorioBuilder::TIPO_TOPICO)
+            ->set('topico', '   ')
+            ->call('criarRelatorio')
+            ->assertHasErrors('topico')
+            ->assertSet('aGerar', false);
+
+        Queue::assertNothingPushed();
     }
 
     public function test_o_seletor_de_arquivo_so_mostra_o_genero_escolhido(): void

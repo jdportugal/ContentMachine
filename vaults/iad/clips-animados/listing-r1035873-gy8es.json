@@ -1,0 +1,929 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T3 no Cadaval com duas varandas e vistas desafogadas",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-3-quartos-cadaval-128m2/r1035873",
+            "agent": "Marlene Ferreira",
+            "phone": "+351966345522",
+            "agency": "iad Portugal",
+            "hook": "T3 no Cadaval com duas varandas e vistas desafogadas",
+            "voiceover": "Um T três no Cadaval, com duas varandas e vistas desafogadas. No quinto piso de um prédio com elevador, com luz natural todo o dia. São mais de cento e vinte metros úteis. Três quartos, um deles em suite, e duas casas de banho. A sala tem lareira com recuperador de calor. Há ainda cozinha, despensa e roupeiro de parede num dos quartos. Janelas em alumínio com vidro duplo. As obras de pintura e telhado do prédio ficam a cargo do atual proprietário. Para visitar, fale com a Marlene Ferreira, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "vista a partir da varanda",
+                    "vo": "Um T três no Cadaval, com duas varandas e vistas desafogadas.",
+                    "caption": "T3 no Cadaval"
+                },
+                {
+                    "photo": "hall de entrada / elevador",
+                    "vo": "No quinto piso de um prédio com elevador, com luz natural todo o dia.",
+                    "caption": "Quinto piso com elevador"
+                },
+                {
+                    "photo": "sala luminosa",
+                    "vo": "São mais de cento e vinte metros úteis.",
+                    "caption": "123 m² úteis"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "Três quartos, um deles em suite,",
+                    "caption": "Três quartos, uma suite"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "sala com lareira",
+                    "vo": "A sala tem lareira com recuperador de calor.",
+                    "caption": "Lareira com recuperador"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "Há ainda cozinha, despensa e roupeiro de parede num dos quartos.",
+                    "caption": "Cozinha e despensa"
+                },
+                {
+                    "photo": "janela / detalhe da caixilharia",
+                    "vo": "Janelas em alumínio com vidro duplo.",
+                    "caption": "Vidro duplo"
+                },
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "As obras de pintura e telhado do prédio ficam a cargo do atual proprietário.",
+                    "caption": "Obras do prédio asseguradas"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Para visitar, fale com a Marlene Ferreira, da iad Portugal.",
+                    "caption": "Preço sob consulta · Marlene Ferreira · iad Portugal"
+                }
+            ],
+            "flags": [
+                "O preço não está publicado (\"Sob consulta\"). A narração termina só com \"Para visitar, fale com…\" e o end card diz \"Preço sob consulta\". Se a consultora der o preço, acrescentar por extenso antes do fecho.",
+                "O texto refere uma \"sala espaçosa\" e também \"uma sala de jantar/estar\". Não é claro se são uma ou duas divisões, por isso a narração fala apenas em \"a sala\". Confirmar.",
+                "O texto refere duas varandas e o bloco de detalhes diz apenas \"Varanda\". Ficaram as duas varandas, que é o que diz a descrição. Confirmar.",
+                "As obras de pintura e telhado pagas pelo atual proprietário são um compromisso contratual. Confirmar com a consultora se pode ser dito no vídeo; se não, cortar a cena 9."
+            ],
+            "message": "Boa tarde Sra. Marlene,\nO meu nome é João Ferreira.\n\nVi o apartamento T3 no Cadaval que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 3 quartos de 128 m² em Cadaval",
+            "price": null,
+            "details": {
+                "Preço": "Sob consulta",
+                "Localização": "Cadaval, 2550-148",
+                "Referência": "1035873",
+                "Área Bruta m²": "128",
+                "Quartos": 3,
+                "Ano de Construção": 1998,
+                "Certificado Energético": "C",
+                "Características": "128 m² área bruta, 123 m² úteis, 2 casas de banho, Varanda, Elevador, Sala de estar, Construído em 1998, Andar: 5"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Marlene Ferreira - and phone number - +351966345522. Agency: iad Portugal.\nThe agent's photo is Marlene Ferreira.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «T3 no Cadaval com duas varandas e vistas desafogadas».\n\nSuggested scenes (photo → on-screen caption):\n- vista a partir da varanda → «T3 no Cadaval»\n- hall de entrada / elevador → «Quinto piso com elevador»\n- sala luminosa → «123 m² úteis»\n- quarto suite → «Três quartos, uma suite»\n- casa de banho → «Duas casas de banho»\n- sala com lareira → «Lareira com recuperador»\n- cozinha → «Cozinha e despensa»\n- janela / detalhe da caixilharia → «Vidro duplo»\n- fachada do prédio → «Obras do prédio asseguradas»\n- end card → «Preço sob consulta · Marlene Ferreira · iad Portugal»\n\nHere are the house details:\n\nApartamento 3 quartos de 128 m² em Cadaval\nPreço\nSob consulta\nLocalização\nCadaval, 2550-148\nReferência\n1035873\nÁrea Bruta m²\n128\nQuartos\n3\nAno de Construção\n1998\nCertificado Energético\nC\nCaracterísticas\n128 m² área bruta, 123 m² úteis, 2 casas de banho, Varanda, Elevador, Sala de estar, Construído em 1998, Andar: 5\n\nDescrição\nApartamento T3 com 123 m2- Prédio com elevador\n\nLocalizado em Cadaval, no 5º piso de um edifício com elevador, este apartamento de três quartos oferece uma área habitável de 123 m² com uma exposição privilegiada e luminosidade natural ao longo do dia.\n\nO apartamento distribui-se de forma funcional: \n- O hall de entrada dá acesso a uma sala espaçosa.\n- 3 quartos (1 quarto suíte)\n- Cozinha\n- Despensa\n- 2 Casas de banho\n- Uma sala de jantar/estar\n\nUm dos pontos fortes deste imóvel são as duas varandas, que prolongam o espaço interior e permitem desfrutar de vistas desafogadas. \nUm dos quartos tem roupeiro de parede.\nLareira na sala com recuperador de calor.\nJanelas em alumínio (vidro duplo).\nO elevador no edifício garante um acesso fácil e cómodo a todos os pisos.\n\nInformação adicional: o prédio vai sofrer obras de pintura e telhado, esses encargos já estão assegurados pelo proprietário atual, sendo uma mais-valia para quem adquirir o imóvel.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Apartamento T3 à venda no Cadaval (Oeste, distrito de Lisboa)",
+            "summary": "T3 com mais de 120 m² úteis, num 5.º piso com elevador, no Cadaval. O concelho fica na sub-região Oeste do distrito de Lisboa.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Área do concelho do Cadaval",
+                    "value": 175,
+                    "unit": "km²"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Cadaval pertence ao distrito de Lisboa, na sub-região Oeste",
+                "T3 com mais de 120 m² úteis e duas varandas",
+                "5.º piso com elevador e luz natural todo o dia",
+                "Suite, duas casas de banho e sala com lareira e recuperador de calor",
+                "Janelas em alumínio com vidro duplo",
+                "Obras de pintura e telhado do prédio pagas pelo atual proprietário"
+            ],
+            "sources": [
+                "https://www.gee.gov.pt/pt/lista-publicacoes/estatisticas-regionais/distritos-concelhos/lisboa/cadaval/3192-cadaval/file",
+                "https://aldeiasportuguesas.pt/lisboa/cadaval/",
+                "https://es-academic.com/dic.nsf/eswiki/202167",
+                "https://en.wikipedia.org/wiki/Cadaval"
+            ]
+        },
+        "suggested": {
+            "title": "T3 no Cadaval com duas varandas e vistas desafogadas",
+            "description": "T3 com mais de 120 m² úteis, no quinto piso de um prédio com elevador e luz natural todo o dia. Tem três quartos, um deles em suite, duas casas de banho, sala com lareira e recuperador de calor, e duas varandas com vistas desafogadas. As obras de pintura e telhado do prédio ficam a cargo do atual proprietário. Para visitar, fale com a Marlene Ferreira, da IAD Portugal.",
+            "tags": [
+                "Cadaval",
+                "T3",
+                "imobiliario",
+                "casa a venda",
+                "apartamento",
+                "IAD Portugal",
+                "Oeste",
+                "Portugal"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1035873-gy8es",
+    "created_at": "2026-10-15T13:15:34+00:00",
+    "updated_at": "2026-10-15T13:26:36+00:00",
+    "source_path": "clips/uploads/35n5cLedwlmx7fcgm8ZvBgg1S7GsfPfRcY8oxEU4.mp3",
+    "images": [
+        {
+            "id": "img_3598c9d1",
+            "path": "clips/uploads/HORlpYZ7p1rRVdV7rzAnc0uCL183hkhaCayXhJOZ.jpg",
+            "description": "Sala de jantar com mesa e cadeiras de madeira, cortinados vermelhos, porta para a varanda, estante e televisão.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_21756f4e",
+            "path": "clips/uploads/efxx5IY3q2BJT85KvFvysNCkaca4jdz3Qhqu9b7O.jpg",
+            "description": "Vista da varanda sobre o Cadaval ao pôr do sol, com igreja branca, telhados vermelhos e campo ao fundo.",
+            "name": "01a0ef4ad42cef71d000b74dc14b4f76.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_32417cb8",
+            "path": "clips/uploads/9GAzgPRVuNYcReiM3suXKl2xAS2hxrVz6MiEqoNX.jpg",
+            "description": "Cozinha com armários de madeira, bancada de granito, micro-ondas, forno pequeno, máquina de lavar roupa e janela.",
+            "name": "01a0ef623d34aa6dc6d43c529facfbfc.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_784f3536",
+            "path": "clips/uploads/twaK8vIBTa4jxQRa1cNmlXZFxXANCGTdJylRnEdl.jpg",
+            "description": "Cozinha com bancada de granito, placa a gás, lava-loiça, armários de madeira com vitrine e janela iluminada.",
+            "name": "01a0ef6360c20077bc29c4c84e6f868d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4c7f2023",
+            "path": "clips/uploads/Kbhuvu52AS0PlRsVZKjCKYUWiXYUH3i1Vp7isHB0.jpg",
+            "description": "Sala com mesa de jantar, flores, porta envidraçada aberta para a varanda com vista verde, televisão.",
+            "name": "01a0ef64556d78a73ba3255ce077d5c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_198d53a7",
+            "path": "clips/uploads/5WMgRC2RoCsRvWkiNTbVxrAji32HuGrTq2zVk2VH.jpg",
+            "description": "Vista desafogada do quinto piso sobre prédios e telhados do Cadaval, céu azul e serra ao fundo.",
+            "name": "01a0ef64b13f33fbcf45e98bcbc5f3b0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8f96e673",
+            "path": "clips/uploads/uRCsPqEdBawXZhaWSNvo0OiDT6DZsUvSLui8OxKZ.jpg",
+            "description": "Vista da varanda sobre um terreno relvado, prédios residenciais brancos e montes ao fundo, céu limpo.",
+            "name": "01a0ef64b13df2d609cb19c34dbadaa8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d7cc09c3",
+            "path": "clips/uploads/hEXpAkuwRNIcVZ8xNGvy5YI9Y8SxyXbZTdScS37s.png",
+            "description": "Retrato da consultora Marlene Ferreira, da iad Portugal.",
+            "name": "Marlene Ferreira.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e588c890",
+            "path": "clips/uploads/U0AUE6TeEZVrOl7CruyRrKnmv59YjqNRZG0m2ffj.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/35n5cLedwlmx7fcgm8ZvBgg1S7GsfPfRcY8oxEU4.mp3",
+    "transcript": {
+        "duration": 29.920000076293945,
+        "text": "Um T3 no Cadaval, com duas varandas e vistas desafogadas. No quinto piso de um prédio com elevador, com luz natural todo o dia. São mais de 120 metros úteis. Três quartos, um deles em suite e duas casas de banho. A sala tem lareira com recuperador de calor. Há ainda cozinha, dispensa e roupeiro de parede num dos quartos. Janelas em alumínio com vidro duplo. As obras de pintura e telhado do prédio ficam a cargo do atual proprietário. Para visitar, fale com a Marlene Ferreira, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Um",
+                "start": 0,
+                "end": 0.23999999463558197
+            },
+            {
+                "word": "T3",
+                "start": 0.23999999463558197,
+                "end": 0.6000000238418579
+            },
+            {
+                "word": "no",
+                "start": 0.6000000238418579,
+                "end": 0.7799999713897705
+            },
+            {
+                "word": "Cadaval",
+                "start": 0.7799999713897705,
+                "end": 1.2200000286102295
+            },
+            {
+                "word": "com",
+                "start": 1.4800000190734863,
+                "end": 1.6799999475479126
+            },
+            {
+                "word": "duas",
+                "start": 1.6799999475479126,
+                "end": 1.899999976158142
+            },
+            {
+                "word": "varandas",
+                "start": 1.899999976158142,
+                "end": 2.4000000953674316
+            },
+            {
+                "word": "e",
+                "start": 2.4000000953674316,
+                "end": 2.759999990463257
+            },
+            {
+                "word": "vistas",
+                "start": 2.759999990463257,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "desafogadas",
+                "start": 2.9200000762939453,
+                "end": 3.8399999141693115
+            },
+            {
+                "word": "No",
+                "start": 4.300000190734863,
+                "end": 4.380000114440918
+            },
+            {
+                "word": "quinto",
+                "start": 4.380000114440918,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "piso",
+                "start": 4.619999885559082,
+                "end": 4.880000114440918
+            },
+            {
+                "word": "de",
+                "start": 4.880000114440918,
+                "end": 5.039999961853027
+            },
+            {
+                "word": "um",
+                "start": 5.039999961853027,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "prédio",
+                "start": 5.380000114440918,
+                "end": 5.380000114440918
+            },
+            {
+                "word": "com",
+                "start": 5.380000114440918,
+                "end": 5.679999828338623
+            },
+            {
+                "word": "elevador",
+                "start": 5.679999828338623,
+                "end": 6.079999923706055
+            },
+            {
+                "word": "com",
+                "start": 6.360000133514404,
+                "end": 6.539999961853027
+            },
+            {
+                "word": "luz",
+                "start": 6.539999961853027,
+                "end": 6.659999847412109
+            },
+            {
+                "word": "natural",
+                "start": 6.659999847412109,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "todo",
+                "start": 7.039999961853027,
+                "end": 7.519999980926514
+            },
+            {
+                "word": "o",
+                "start": 7.519999980926514,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "dia",
+                "start": 7.840000152587891,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "São",
+                "start": 8.300000190734863,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "mais",
+                "start": 8.380000114440918,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 8.579999923706055,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "120",
+                "start": 8.899999618530273,
+                "end": 9.359999656677246
+            },
+            {
+                "word": "metros",
+                "start": 9.359999656677246,
+                "end": 9.760000228881836
+            },
+            {
+                "word": "úteis",
+                "start": 9.760000228881836,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "Três",
+                "start": 10.819999694824219,
+                "end": 10.819999694824219
+            },
+            {
+                "word": "quartos",
+                "start": 10.819999694824219,
+                "end": 11.260000228881836
+            },
+            {
+                "word": "um",
+                "start": 11.539999961853027,
+                "end": 11.600000381469727
+            },
+            {
+                "word": "deles",
+                "start": 11.600000381469727,
+                "end": 11.779999732971191
+            },
+            {
+                "word": "em",
+                "start": 11.779999732971191,
+                "end": 12.079999923706055
+            },
+            {
+                "word": "suite",
+                "start": 12.079999923706055,
+                "end": 12.300000190734863
+            },
+            {
+                "word": "e",
+                "start": 12.300000190734863,
+                "end": 12.640000343322754
+            },
+            {
+                "word": "duas",
+                "start": 12.640000343322754,
+                "end": 12.960000038146973
+            },
+            {
+                "word": "casas",
+                "start": 12.960000038146973,
+                "end": 13.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 13.239999771118164,
+                "end": 13.5600004196167
+            },
+            {
+                "word": "banho",
+                "start": 13.5600004196167,
+                "end": 13.619999885559082
+            },
+            {
+                "word": "A",
+                "start": 13.9399995803833,
+                "end": 14.140000343322754
+            },
+            {
+                "word": "sala",
+                "start": 14.140000343322754,
+                "end": 14.319999694824219
+            },
+            {
+                "word": "tem",
+                "start": 14.319999694824219,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "lareira",
+                "start": 14.5600004196167,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "com",
+                "start": 14.899999618530273,
+                "end": 15.180000305175781
+            },
+            {
+                "word": "recuperador",
+                "start": 15.180000305175781,
+                "end": 15.640000343322754
+            },
+            {
+                "word": "de",
+                "start": 15.640000343322754,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "calor",
+                "start": 16.18000030517578,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "Há",
+                "start": 16.600000381469727,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "ainda",
+                "start": 16.719999313354492,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "cozinha",
+                "start": 16.959999084472656,
+                "end": 17.440000534057617
+            },
+            {
+                "word": "dispensa",
+                "start": 17.739999771118164,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "e",
+                "start": 18.1200008392334,
+                "end": 18.3799991607666
+            },
+            {
+                "word": "roupeiro",
+                "start": 18.3799991607666,
+                "end": 18.700000762939453
+            },
+            {
+                "word": "de",
+                "start": 18.700000762939453,
+                "end": 19.079999923706055
+            },
+            {
+                "word": "parede",
+                "start": 19.079999923706055,
+                "end": 19.15999984741211
+            },
+            {
+                "word": "num",
+                "start": 19.15999984741211,
+                "end": 19.3799991607666
+            },
+            {
+                "word": "dos",
+                "start": 19.3799991607666,
+                "end": 19.639999389648438
+            },
+            {
+                "word": "quartos",
+                "start": 19.639999389648438,
+                "end": 20.020000457763672
+            },
+            {
+                "word": "Janelas",
+                "start": 20.459999084472656,
+                "end": 20.719999313354492
+            },
+            {
+                "word": "em",
+                "start": 20.719999313354492,
+                "end": 20.940000534057617
+            },
+            {
+                "word": "alumínio",
+                "start": 20.940000534057617,
+                "end": 21.360000610351562
+            },
+            {
+                "word": "com",
+                "start": 21.360000610351562,
+                "end": 21.6200008392334
+            },
+            {
+                "word": "vidro",
+                "start": 21.6200008392334,
+                "end": 21.81999969482422
+            },
+            {
+                "word": "duplo",
+                "start": 21.81999969482422,
+                "end": 22.260000228881836
+            },
+            {
+                "word": "As",
+                "start": 22.68000030517578,
+                "end": 22.799999237060547
+            },
+            {
+                "word": "obras",
+                "start": 22.799999237060547,
+                "end": 22.979999542236328
+            },
+            {
+                "word": "de",
+                "start": 22.979999542236328,
+                "end": 23.459999084472656
+            },
+            {
+                "word": "pintura",
+                "start": 23.459999084472656,
+                "end": 23.459999084472656
+            },
+            {
+                "word": "e",
+                "start": 23.459999084472656,
+                "end": 23.68000030517578
+            },
+            {
+                "word": "telhado",
+                "start": 23.68000030517578,
+                "end": 23.920000076293945
+            },
+            {
+                "word": "do",
+                "start": 23.920000076293945,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "prédio",
+                "start": 24.459999084472656,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "ficam",
+                "start": 24.459999084472656,
+                "end": 24.739999771118164
+            },
+            {
+                "word": "a",
+                "start": 24.739999771118164,
+                "end": 25.1200008392334
+            },
+            {
+                "word": "cargo",
+                "start": 25.1200008392334,
+                "end": 25.1200008392334
+            },
+            {
+                "word": "do",
+                "start": 25.1200008392334,
+                "end": 25.280000686645508
+            },
+            {
+                "word": "atual",
+                "start": 25.280000686645508,
+                "end": 25.600000381469727
+            },
+            {
+                "word": "proprietário",
+                "start": 25.600000381469727,
+                "end": 26.260000228881836
+            },
+            {
+                "word": "Para",
+                "start": 26.639999389648438,
+                "end": 26.719999313354492
+            },
+            {
+                "word": "visitar",
+                "start": 26.719999313354492,
+                "end": 27.260000228881836
+            },
+            {
+                "word": "fale",
+                "start": 27.600000381469727,
+                "end": 27.600000381469727
+            },
+            {
+                "word": "com",
+                "start": 27.600000381469727,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "a",
+                "start": 27.739999771118164,
+                "end": 27.8799991607666
+            },
+            {
+                "word": "Marlene",
+                "start": 27.8799991607666,
+                "end": 28.15999984741211
+            },
+            {
+                "word": "Ferreira",
+                "start": 28.15999984741211,
+                "end": 28.639999389648438
+            },
+            {
+                "word": "da",
+                "start": 28.739999771118164,
+                "end": 28.979999542236328
+            },
+            {
+                "word": "IAD",
+                "start": 28.979999542236328,
+                "end": 29.219999313354492
+            },
+            {
+                "word": "Portugal",
+                "start": 29.219999313354492,
+                "end": 29.700000762939453
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 29.920000076293945,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.5999999999999996,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T3 COM DUAS VARANDAS",
+                        "params": {
+                            "src": "img_21756f4e",
+                            "avatar": "img_d7cc09c3",
+                            "logo": "img_e588c890",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "Sob consulta",
+                            "location": "CADAVAL · OESTE",
+                            "title": "T3 NO CADAVAL",
+                            "facts": "123 m² úteis · 3 quartos · 2 WC · 2 varandas",
+                            "cta": "Ligue já +351 966 345 522",
+                            "name": "Marlene Ferreira",
+                            "logoText": "iad Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.5999999999999996,
+                "end": 6.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "QUINTO PISO COM ELEVADOR",
+                        "params": {
+                            "src": "img_198d53a7",
+                            "blur": 8,
+                            "charsPerSecond": 18
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.3,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "LUZ NATURAL TODO O DIA",
+                        "params": {
+                            "src": "img_4c7f2023",
+                            "src2": "img_8f96e673",
+                            "src3": "img_198d53a7",
+                            "src4": "img_21756f4e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 10.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "123 m² ÚTEIS",
+                        "params": {
+                            "src": "img_4c7f2023",
+                            "src2": "img_3598c9d1"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.7,
+                "end": 13.9,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": null,
+                        "params": {
+                            "src": "img_8f96e673",
+                            "title": "TRÊS QUARTOS, UMA SUITE",
+                            "items": [
+                                "3 quartos",
+                                "1 suite",
+                                "2 casas de banho"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.9,
+                "end": 16.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_3598c9d1",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.5,
+                "end": 20.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA E DESPENSA",
+                        "params": {
+                            "src": "img_32417cb8",
+                            "src2": "img_784f3536",
+                            "src3": "img_3598c9d1",
+                            "src4": "img_4c7f2023"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.3,
+                "end": 22.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_784f3536",
+                            "zoomFrom": 1.8
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.5,
+                "end": 26.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "OBRAS DO PRÉDIO ASSEGURADAS",
+                        "params": {
+                            "src": "img_198d53a7",
+                            "src2": "img_21756f4e",
+                            "src3": "img_4c7f2023",
+                            "src4": "img_8f96e673",
+                            "src5": "img_32417cb8"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.5,
+                "end": 29.92,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marlene Ferreira",
+                        "params": {
+                            "src": "img_d7cc09c3",
+                            "name": "Marlene Ferreira",
+                            "phone": "+351 966 345 522",
+                            "email": "marlene.ferreira@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1035873-gy8es/clip.mp4",
+    "error": null
+}

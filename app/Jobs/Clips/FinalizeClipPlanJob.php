@@ -7,14 +7,18 @@ use App\Services\Clips\Api\SceneTextVisuals;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\ClipImageGenerator;
 use App\Services\Clips\EffectLibrary;
+use App\Services\Clips\EffectParamFiller;
 use App\Services\Clips\ImageLibrary;
 use App\Services\Clips\ImageRequests;
 use App\Services\Clips\PlanImageAugmentor;
 use App\Services\Clips\SceneVisualFiller;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\Costs\CostLedger;
 use App\Services\Publicacoes\Rendering\KieClient;
+use App\Services\RealEstate\PropertyVideoAnalyzer;
+use App\Services\RealEstate\VideoClipMatcher;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -53,7 +57,8 @@ class FinalizeClipPlanJob implements ShouldQueue
             $isOverlay = $p->type === ClipRecord::TYPE_OVERLAY;
             $plan = $p->plan ?? [];
 
-            $imagesOn = (bool) ($c['generate_images'] ?? true)
+            $imagesOn = ! $p->semImagens() && ! $p->soReferencias()
+                && (bool) ($c['generate_images'] ?? true)
                 && app(ClipImageGenerator::class)->available();
 
             // Film any website suggestion the user approved without collecting —
@@ -96,6 +101,7 @@ class FinalizeClipPlanJob implements ShouldQueue
             // placeholder block — clear it so the layer is dropped or falls back.
             $library = app(EffectLibrary::class);
             $validIds = array_values(array_filter(array_map(fn ($i) => $i['id'] ?? null, $p->images ?? [])));
+            $plan = $filler->resolveImageNames($plan, $p->images ?? []);
             $plan = $filler->stripUnknownImageIds($plan, $validIds);
 
             // Remove layers that would render an empty placeholder (image with no
@@ -122,7 +128,12 @@ class FinalizeClipPlanJob implements ShouldQueue
                 // MANDATORY: every image the user attached must land in some frame.
                 // Runs BEFORE the bare-scene passes so a provided image claims a bare
                 // scene (giving it a visual) instead of that scene being merged/filled.
-                $plan = $filler->ensureProvidedImages($plan, $p->images ?? [], app(EffectLibrary::class)->allowedLayerTypes());
+                // With images off, image-reveal is not in the list and this no-ops —
+                // an upload the author made before ticking the box stays out of the plan.
+                // A listing's photos are a pool the planner picks from, not a must-show list.
+                if (! isset($p->meta['listing'])) {
+                    $plan = $filler->ensureProvidedImages($plan, $p->images ?? [], PlanAnimationsJob::camadasPermitidas($p->semImagens()), $library->simpleImageEffects());
+                }
                 $plan = $filler->mergeBareScenes($plan);
                 $plan = $filler->fillBareScenes($plan);
                 // Text-dense scenes get enough time to be read, borrowing from adjacent
@@ -168,6 +179,15 @@ class FinalizeClipPlanJob implements ShouldQueue
                     }
                     unset($l);
                 }
+                $plan = $filler->enforceOutro($plan, $library->outroSlugs());
+                $plan = $filler->darkenPhotoScenes($plan, $imageSlugs);
+                $plan = app(EffectParamFiller::class)->fill($plan, $p->transcript ?? [], $p->images ?? [], $library, (string) ($p->meta['instructions'] ?? ''), array_merge($library->introSlugs(), $library->outroSlugs()));
+                // A fan/gallery with empty photo slots shows blank cards — top them up, now
+                // that the intro/outro cards have claimed the portrait and the logo.
+                $plan = $filler->fillGallerySlots($plan, $p->images ?? [], $library->galleryEffects(), array_merge($library->introSlugs(), $library->outroSlugs()));
+                $plan = $filler->dropSlotDuplicates($plan, array_merge($library->introSlugs(), $library->outroSlugs()));
+                $plan = $this->afterIntro($p, $plan, $filler);
+                $plan = self::showWhatIsSaid($p, $plan, $filler);
                 $p->update(['plan' => $plan]);
                 $this->renderizar($p);
 
@@ -201,6 +221,19 @@ class FinalizeClipPlanJob implements ShouldQueue
             // effect cannot render one — never let enforceIntro steal a video src.
             $videoIds = collect($p->images ?? [])->filter(fn ($i) => ! empty($i['video']))->pluck('id')->all();
             $plan = $filler->enforceIntro($plan, $intros, $introImageId, $videoIds);
+            // …and CLOSES with an outro (a contact card, a sign-off), if any are marked.
+            $plan = $filler->enforceOutro($plan, $library->outroSlugs());
+            $plan = $filler->darkenPhotoScenes($plan, $imageSlugs);
+
+            // Template effects need every input (price, title, the agent's photo…);
+            // fill what the planner and the intro pass left empty from the voiceover.
+            $plan = app(EffectParamFiller::class)->fill($plan, $p->transcript ?? [], $p->images ?? [], $library, (string) ($p->meta['instructions'] ?? ''), array_merge($library->introSlugs(), $library->outroSlugs()));
+            // A fan/gallery with empty photo slots shows blank cards — top them up, now
+            // that the intro/outro cards have claimed the portrait and the logo.
+            $plan = $filler->fillGallerySlots($plan, $p->images ?? [], $library->galleryEffects(), array_merge($library->introSlugs(), $library->outroSlugs()));
+            $plan = $filler->dropSlotDuplicates($plan, array_merge($library->introSlugs(), $library->outroSlugs()));
+            $plan = $this->afterIntro($p, $plan, $filler);
+            $plan = self::showWhatIsSaid($p, $plan, $filler);
 
             $p->update(['plan' => $plan]);
 
@@ -209,6 +242,82 @@ class FinalizeClipPlanJob implements ShouldQueue
             $p->update(['status' => ClipRecord::STATUS_FAILED, 'error' => $e->getMessage()]);
             throw $e;
         }
+    }
+
+    /**
+     * Video clips follow the voiceover: each scene gets the clip that shows what
+     * is said over it, then the scenes are fitted to their clips so none freezes.
+     * Runs after the after-intro video is placed (the intro may have grown to
+     * meet its line, and the phrases after it moved back).
+     */
+    public static function showWhatIsSaid(ClipRecord $p, array $plan, SceneVisualFiller $filler): array
+    {
+        $lengths = self::videoLengths($p);
+        if ($lengths === []) {
+            return $plan;
+        }
+        $phrases = [];
+        try {
+            $clips = collect($p->images ?? [])->filter(fn ($i) => isset($lengths[$i['id'] ?? '']))
+                ->map(fn ($i) => ['id' => $i['id'], 'description' => (string) ($i['description'] ?? '')])->values()->all();
+            $phrases = app(VideoClipMatcher::class)->segments($p->transcript['words'] ?? [], $clips, $plan['voice_gap'] ?? null);
+            $main = collect($p->images ?? [])->first(fn ($i) => empty($i['video']) && str_starts_with((string) ($i['name'] ?? ''), 'main.'));
+            $plan = $filler->syncVideoClips($plan, $phrases, $lengths, $main['id'] ?? null);
+            // A listing given as video: its middle is the footage itself, under the voiceover
+            // (mixed with the photos: the planner's scenes stay, with the clips that fit each).
+            if (! empty($p->meta['listing_video']) && empty($p->meta['mix_photos'])) {
+                $rooms = collect($p->images)->filter(fn ($i) => isset($lengths[$i['id'] ?? '']))
+                    ->mapWithKeys(fn ($i) => [$i['id'] => preg_replace('/(-\d+)?\.\w+$/', '', (string) ($i['name'] ?? $i['id']))])->all();
+                $plan = $filler->footageTimeline($plan, $phrases, $lengths, $rooms);
+            }
+        } catch (\RuntimeException $e) {
+            Log::warning('Clip/voiceover sync skipped: '.$e->getMessage());   // the planner's picks stay; still fitted below
+        }
+
+        $plan = $filler->fitVideoScenes($plan, $lengths, $phrases);
+
+        // Last: no effect shows one picture twice (a clip put in one slot may already sit in another).
+        $slotIds = collect($p->images ?? [])->reject(fn ($i) => str_starts_with((string) ($i['description'] ?? ''), 'Retrato')
+            || str_starts_with((string) ($i['description'] ?? ''), 'Logótipo') || str_starts_with((string) ($i['name'] ?? ''), 'logo.'))->pluck('id')->all();
+
+        return $filler->distinctSlots($plan, $slotIds);
+    }
+
+    /** @return array<string,float> each video clip's id => its length in seconds */
+    public static function videoLengths(ClipRecord $p): array
+    {
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+
+        return collect($p->images ?? [])
+            ->filter(fn ($i) => ! empty($i['video']) && $disk->exists($i['path'] ?? ''))
+            ->mapWithKeys(function ($i) use ($disk) {
+                try {
+                    return [$i['id'] => PropertyVideoAnalyzer::probe($disk->path($i['path']))['duration']];
+                } catch (\RuntimeException) {
+                    return [];
+                }
+            })->filter(fn ($d) => $d > 0)->all();
+    }
+
+    /**
+     * The "after intro" video, in its own scene after the intro, synced to its
+     * line in the voiceover. Referenced by path, never added to the clip's images:
+     * as an image the gallery and photo passes reused it, and it played twice.
+     */
+    private function afterIntro(ClipRecord $p, array $plan, SceneVisualFiller $filler): array
+    {
+        // The clip's own upload, else the project's (SFX studio → After intro).
+        $store = app(EffectStore::class);
+        $path = ($p->meta['after_intro'] ?? null) ?: $store->afterIntroPath();
+        $disk = Storage::disk(config('contentmachine.clips.disk'));
+        if (collect($p->images ?? [])->contains('name', 'apos-intro.mp4')) {   // the old way, as an image
+            $p->update(['images' => collect($p->images)->reject(fn ($i) => ($i['name'] ?? '') === 'apos-intro.mp4')->values()->all()]);
+        }
+        if (! $path || ! $disk->exists($path)) {
+            return $plan;
+        }
+
+        return $filler->insertAfterIntro($plan, $path, PropertyVideoAnalyzer::probe($disk->path($path))['duration'], $p->transcript['words'] ?? [], $store->afterIntroLineFor($p->meta ?? []));
     }
 
     /**

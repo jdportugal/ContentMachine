@@ -85,7 +85,7 @@ document.addEventListener('alpine:init', () => {
 
         seed() {
             const count = Math.max(28, Math.min(96, Math.round((this.w * this.h) / 22000)));
-            const palette = ['#FFB347', '#FFD98A', '#5A7BFF', '#7DA2FF', '#EAF0FF'];
+            const palette = ['#A06E1C', '#8C7330', '#2F5A85', '#5C6E8A', '#23201A'];
             this.particles = Array.from({ length: count }, () => {
                 const a = Math.random() * Math.PI * 2;
                 const r = 46 + Math.random() * Math.max(this.w, this.h) * 0.48;
@@ -146,7 +146,7 @@ document.addEventListener('alpine:init', () => {
                     const d2 = dx * dx + dy * dy;
                     if (d2 < 130 * 130) {
                         const o = (1 - Math.sqrt(d2) / 130) * 0.22;
-                        ctx.strokeStyle = `rgba(90,123,255,${o})`;
+                        ctx.strokeStyle = `rgba(44,95,99,${o})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
@@ -169,9 +169,9 @@ document.addEventListener('alpine:init', () => {
             // Molten-gold nucleus glow.
             const pulse = 1 + Math.sin(this.tick * 0.06) * 0.12;
             const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 96 * pulse);
-            g.addColorStop(0, 'rgba(255,213,138,0.55)');
-            g.addColorStop(0.4, 'rgba(255,138,61,0.20)');
-            g.addColorStop(1, 'rgba(255,138,61,0)');
+            g.addColorStop(0, 'rgba(160,110,28,0.35)');
+            g.addColorStop(0.4, 'rgba(138,74,43,0.12)');
+            g.addColorStop(1, 'rgba(138,74,43,0)');
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.arc(cx, cy, 96 * pulse, 0, Math.PI * 2);
@@ -182,7 +182,7 @@ document.addEventListener('alpine:init', () => {
             const R = 56 + Math.sin(this.tick * 0.06) * 4;
             for (let k = 0; k < 3; k++) {
                 ctx.globalAlpha = 0.5 - k * 0.14;
-                ctx.strokeStyle = 'rgba(125,162,255,0.9)';
+                ctx.strokeStyle = 'rgba(35,32,26,0.75)';
                 const s = this.tick * 0.02 + k * 2.1;
                 ctx.beginPath();
                 ctx.arc(cx, cy, R + k * 12, s, s + Math.PI * 1.1);
@@ -190,6 +190,87 @@ document.addEventListener('alpine:init', () => {
             }
             ctx.globalAlpha = 1;
             ctx.globalCompositeOperation = 'source-over';
+        },
+    }));
+
+    // Property walkthrough: click-drag on the filmstrip to mark the sections to
+    // animate (1–10 s each), drag a section's edges to adjust it; the player
+    // seeks along so the exact start and end frames are visible.
+    // Also the clip editor's moment picker (opts: max moments, min/max length).
+    window.Alpine.data('sectionPicker', (duration, initial, opts = {}) => ({
+        duration,
+        max: opts.max ?? 10,
+        minLen: opts.min ?? 1,
+        maxLen: opts.maxLen ?? 10,
+        sections: (initial || []).map((s) => ({ start: +s.start, end: +s.end, note: s.note || '', state: s.state || '' })),
+        cursor: 0,
+        drag: null,   // { from, to } while marking a new section
+        resize: null, // { i, edge } while dragging an edge
+        sending: false,
+
+        pct(t) { return (t / this.duration) * 100; },
+        label(t) {
+            const m = Math.floor(t / 60);
+            return `${m}:${(t - m * 60).toFixed(1).padStart(4, '0')}`;
+        },
+        timeAt(e) {
+            const r = this.$refs.strip.getBoundingClientRect();
+            return Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * this.duration;
+        },
+        seek(t) {
+            this.cursor = t;
+            const v = this.$refs.video;
+            if (v && Number.isFinite(t)) { v.pause(); v.currentTime = t; }
+        },
+        down(e) {
+            this.$refs.strip.setPointerCapture?.(e.pointerId);
+            const edge = e.target.dataset?.edge;
+            if (edge) {
+                this.resize = { i: +e.target.dataset.i, edge };
+                return;
+            }
+            const t = this.timeAt(e);
+            this.drag = { from: t, to: t };
+            this.seek(t);
+        },
+        move(e) {
+            const t = this.timeAt(e);
+            if (this.resize) {
+                const s = this.sections[this.resize.i];
+                const prev = this.sections[this.resize.i - 1];
+                const next = this.sections[this.resize.i + 1];
+                s.state = '';   // moved: it will be redone
+                if (this.resize.edge === 'start') {
+                    s.start = Math.max(prev ? prev.end : 0, s.end - this.maxLen, Math.min(t, s.end - this.minLen));
+                } else {
+                    s.end = Math.min(next ? next.start : this.duration, s.start + this.maxLen, Math.max(t, s.start + this.minLen));
+                }
+                this.seek(this.resize.edge === 'start' ? s.start : s.end);
+            } else if (this.drag) {
+                this.drag.to = t;
+                this.seek(t);
+            }
+        },
+        up() {
+            if (this.drag) {
+                let start = Math.min(this.drag.from, this.drag.to);
+                let end = Math.max(this.drag.from, this.drag.to);
+                end = Math.min(end, start + this.maxLen);
+                const clash = this.sections.some((s) => start < s.end && end > s.start);
+                if (end - start >= this.minLen && !clash && this.sections.length < this.max) {
+                    this.sections.push({ start, end, note: '', state: '' });
+                    this.sections.sort((a, b) => a.start - b.start);
+                }
+            }
+            this.drag = null;
+            this.resize = null;
+        },
+        preview(s) {
+            const v = this.$refs.video;
+            this.seek(s.start);
+            const stop = () => { if (v.currentTime >= s.end) { v.pause(); v.removeEventListener('timeupdate', stop); } };
+            v.addEventListener('timeupdate', stop);
+            v.play();
         },
     }));
 });

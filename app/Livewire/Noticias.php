@@ -41,6 +41,9 @@ class Noticias extends Component
     /** Reference date of the report (YYYY-MM-DD). */
     public string $dataRelatorio = '';
 
+    /** Typed topic for TIPO_TOPICO — researched on the web, no aggregated items involved. */
+    public string $topico = '';
+
     /** Output language for the report write-up (defaults to the project's own). */
     public string $idiomaRelatorio = '';
 
@@ -97,7 +100,7 @@ class Noticias extends Component
     {
         $nota = $this->relatorioSelecionado !== '' ? $vault->get($this->relatorioSelecionado) : null;
 
-        $this->relatorio = $nota && in_array($nota->get('tipo'), ['relatorio', 'relatorio_dicas'], true)
+        $this->relatorio = $nota && in_array($nota->get('tipo'), ['relatorio', 'relatorio_dicas', 'relatorio_topico'], true)
             ? $this->dadosDe($nota)
             : null;
     }
@@ -214,18 +217,25 @@ class Noticias extends Component
      */
     public function criarRelatorio(): void
     {
+        if ($this->ehTopico()) {
+            $this->topico = trim($this->topico);
+            $this->validate(['topico' => 'required|string|max:200']);
+        }
+
         $this->relatorioToken = (string) Str::uuid();
         $this->aGerar = true;
         $this->avisoRelatorio = null;
         // No collecting happens here — the report is written from what is already
         // in the vault. Saying otherwise made it look like it re-scanned channels.
-        $this->dispatch('loader-show', message: $this->ehDicas()
-            ? 'Mining the material for tips…'
-            : 'Writing the report from what was collected…');
+        $this->dispatch('loader-show', message: match (true) {
+            $this->ehTopico() => 'Researching the topic on the web and writing…',
+            $this->ehDicas() => 'Mining the material for tips…',
+            default => 'Writing the report from what was collected…',
+        });
 
         GerarRelatorioJob::dispatch(
             $this->modoRelatorio,
-            $this->dataRelatorio,
+            $this->ehTopico() ? $this->topico : $this->dataRelatorio,
             $this->relatorioToken,
             $this->idiomaRelatorio,
             $this->tipoRelatorio,
@@ -305,10 +315,16 @@ class Noticias extends Component
         return $this->tipoRelatorio === RelatorioBuilder::TIPO_DICAS;
     }
 
+    /** Whether the typed-topic kind is the one selected. */
+    public function ehTopico(): bool
+    {
+        return $this->tipoRelatorio === RelatorioBuilder::TIPO_TOPICO;
+    }
+
     /** Archived notes OF THE SELECTED KIND, from the most recent to the oldest. */
     private function notasRelatorios(Collection $notas): Collection
     {
-        $tipo = $this->ehDicas() ? 'relatorio_dicas' : 'relatorio';
+        $tipo = RelatorioBuilder::tipoNota($this->tipoRelatorio);
 
         return $notas
             ->filter(fn (VaultNote $n) => $n->get('tipo') === $tipo && filled($n->get('dados')))
@@ -336,6 +352,10 @@ class Noticias extends Component
     /** Short label for the selector, e.g. «Dia · 22 jul 2026 · 12 item(s)». */
     private function rotuloRelatorio(VaultNote $n): string
     {
+        if ($n->get('tipo') === 'relatorio_topico') {
+            return (string) $n->get('titulo');
+        }
+
         $modo = Str::ucfirst((string) $n->get('modo', 'dia'));
         $inicio = (string) $n->get('inicio', '');
         $data = $inicio !== '' ? Carbon::parse($inicio)->translatedFormat('d M Y') : '—';

@@ -1,0 +1,1141 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T4 no centro de Chaves com garagem fechada por 240.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-4-quartos-chaves-124m2/r1038771",
+            "agent": "Fátima Correia",
+            "phone": "+351911774323",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Viver no centro de Chaves, com garagem fechada.",
+            "voiceover": "Viver no centro de Chaves, com garagem fechada. Numa zona calma, perto de todos os serviços, com muito estacionamento na rua. São cento e vinte e quatro metros quadrados de área bruta. Sala com varanda, cozinha com despensa e um espaço fechado para lavar e secar roupa. Quartos amplos, um deles em suite, e duas casas de banho completas. Tem ar condicionado, aquecimento central, janelas com isolamento térmico e estores elétricos. O prédio tem dois elevadores e zonas comuns bem conservadas. Duzentos e quarenta mil euros. Para visitar, fale com a Fátima Correia, da IAD de Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do prédio",
+                    "vo": "Viver no centro de Chaves, com garagem fechada.",
+                    "caption": "Centro de Chaves"
+                },
+                {
+                    "photo": "rua / zona envolvente",
+                    "vo": "Numa zona calma, perto de todos os serviços, com muito estacionamento na rua.",
+                    "caption": "Zona calma"
+                },
+                {
+                    "photo": "garagem fechada",
+                    "vo": "São cento e vinte e quatro metros quadrados de área bruta.",
+                    "caption": "Garagem fechada"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "Sala com varanda,",
+                    "caption": "Sala com varanda"
+                },
+                {
+                    "photo": "cozinha",
+                    "vo": "cozinha com despensa e um espaço fechado para lavar e secar roupa.",
+                    "caption": "Cozinha com despensa"
+                },
+                {
+                    "photo": "quarto suite",
+                    "vo": "Quartos amplos, um deles em suite,",
+                    "caption": "Quartos amplos"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e duas casas de banho completas.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "quarto com janela e estores",
+                    "vo": "Tem ar condicionado, aquecimento central, janelas com isolamento térmico e estores elétricos.",
+                    "caption": "Aquecimento central"
+                },
+                {
+                    "photo": "hall do prédio / elevadores",
+                    "vo": "O prédio tem dois elevadores e zonas comuns bem conservadas.",
+                    "caption": "Dois elevadores"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e quarenta mil euros. Para visitar, fale com a Fátima Correia, da IAD Portugal.",
+                    "caption": "240.000 € · Fátima Correia · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "Número de quartos contraditório: o texto diz T3 com três quartos (um em suite), mas o título e os detalhes dizem 4 quartos. O número ficou de fora e o vídeo diz só \"quartos amplos, um deles em suite\". Confirmar com a consultora.",
+                "O anúncio tem a hashtag #EmBreve. Confirmar que o imóvel já está disponível para venda e visitas antes de enviar.",
+                "Os detalhes indicam \"Acesso para cadeira de rodas\", mas o texto não fala disso. Ficou de fora."
+            ],
+            "message": "Boa tarde Sra. Fátima, fiz este vídeo do seu apartamento com garagem no centro de Chaves para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nPor 50€/mês, cada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores. O preço normal é 100€/mês, mas ainda tenho 3 vagas no plano de fundador a 50€. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 4 quartos de 124 m² em Chaves",
+            "price": 240000,
+            "details": {
+                "Preço": "240 000 €",
+                "Localização": "Chaves, 5400-062",
+                "Referência": "1038771",
+                "Área Bruta m²": "124",
+                "Quartos": 4,
+                "Características": "2 casas de banho, Elevador, Ar condicionado, Ligação TV, Fibra ótica, property.feature.heating, Acesso para cadeira de rodas, Porteiro digital, Intercomunicador"
+            }
+        },
+        "agent_photo": null,
+        "listing_video": null,
+        "after_intro": null,
+        "videos_swapped": false,
+        "mix_photos": false,
+        "after_intro_line": "",
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Fátima Correia - and phone number - +351911774323. Agency: IAD Portugal.\nThe agent's photo is Fátima Correia.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Viver no centro de Chaves, com garagem fechada.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do prédio → «Centro de Chaves»\n- rua / zona envolvente → «Zona calma»\n- garagem fechada → «Garagem fechada»\n- sala → «Sala com varanda»\n- cozinha → «Cozinha com despensa»\n- quarto suite → «Quartos amplos»\n- casa de banho → «Duas casas de banho»\n- quarto com janela e estores → «Aquecimento central»\n- hall do prédio / elevadores → «Dois elevadores»\n- end card → «240.000 € · Fátima Correia · IAD Portugal»\n\nHere are the house details:\n\nApartamento 4 quartos de 124 m² em Chaves\nPreço\n240 000 €\nLocalização\nChaves, 5400-062\nReferência\n1038771\nÁrea Bruta m²\n124\nQuartos\n4\nCaracterísticas\n2 casas de banho, Elevador, Ar condicionado, Ligação TV, Fibra ótica, property.feature.heating, Acesso para cadeira de rodas, Porteiro digital, Intercomunicador\n\nDescrição\n🏡 APARTAMENTO T3  COM GARAGEM FECHADA – CHAVES (CENTRO) 🔑 \n\n📍 Excelente localização, zona calma e com muitos lugares de estacionamento no exterior. \n\n✨ Apartamento T3, espaçoso, confortável e muito bem localizado, ideal para quem procura viver no centro da cidade, perto de todos os serviços e comodidades.\n\n🏠 Características:\n\n✅ Cozinha com despensa\n✅ Espaço fechado para duas máquinas de lavar / Secar roupa\n✅ Sala com varanda\n✅ 3 quartos amplos (1 suíte)\n✅ 2 casas de banho completas\n✅ Garagem\n✅ Prédio com elevador ( 2 elevadores)\n\n🌟 Conforto e equipamentos:\n\n✔️ Ar condicionado\n✔️ Aquecimento central\n✔️ Janelas com isolamento térmico\n✔️ Estores elétricos\n\n‼️ Destaque para as zonas comuns do prédio, muito bem conservadas e com excelentes acabamentos, refletindo o cuidado e a qualidade do edifício.\n\n📍 Uma excelente oportunidade para viver numa localização privilegiada, no centro de Chaves!\n\n🏡 A sua próxima casa pode estar aqui!\n\n#Chaves #ApartamentoT3 #EmBreve #Imobiliário #iadPortugal #ApartamentoAVenda",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Apartamento no centro de Chaves (T3 com suíte, 124 m², garagem fechada)",
+            "summary": "Apartamento de 124 m² de área bruta no centro de Chaves, numa zona calma, com suíte, garagem fechada e prédio com dois elevadores. Chaves é sede de um concelho do Alto Tâmega com cerca de 37 mil habitantes, e a avaliação bancária da habitação em Portugal está em máximos históricos.",
+            "timeline": [
+                {
+                    "label": "Avaliação bancária nacional bate recorde: 2.240 €/m²",
+                    "sublabel": "julho 2026"
+                },
+                {
+                    "label": "Novo recorde: 2.254 €/m²",
+                    "sublabel": "agosto 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área bruta do imóvel",
+                    "value": 124,
+                    "unit": "m²"
+                },
+                {
+                    "label": "População do concelho de Chaves (INE, 2023)",
+                    "value": 37419,
+                    "unit": "habitantes"
+                },
+                {
+                    "label": "Área do concelho de Chaves",
+                    "value": 591,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Freguesias do concelho",
+                    "value": 39,
+                    "unit": "freguesias"
+                },
+                {
+                    "label": "Avaliação bancária mediana em Portugal (ago. 2026)",
+                    "value": 2254,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga da avaliação bancária (ago. 2026)",
+                    "value": 14.7,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "124 m² de área bruta no centro de Chaves",
+                "Garagem fechada e muito estacionamento na rua",
+                "Suíte e duas casas de banho completas",
+                "Ar condicionado, aquecimento central e janelas com isolamento térmico",
+                "Prédio com dois elevadores e zonas comuns bem conservadas",
+                "Avaliação bancária nacional em máximo histórico em agosto de 2026"
+            ],
+            "sources": [
+                "https://www.gee.gov.pt/pt/lista-publicacoes/estatisticas-regionais/distritos-concelhos/vila-real/chaves/3063-chaves/file",
+                "https://www.idealista.pt/news/node/70539",
+                "https://aldeiasportuguesas.pt/vila-real/chaves/",
+                "https://www.rtp.pt/noticias/economia/avaliacao-bancaria-da-habitacao-bate-recorde-de-2254-eurosm2-em-agosto_n1767443",
+                "https://www.forbespt.com/?p=195818",
+                "https://www.rtp.pt/noticias/economia/avaliacao-bancaria-da-habitacao-bate-recorde-de-2240-eurosm2-em-julho_n1761591",
+                "https://www.idealista.pt/news/node/76242"
+            ]
+        },
+        "suggested": {
+            "title": "T4 no centro de Chaves com garagem fechada por 240.000 €",
+            "description": "Garagem fechada e quatro quartos no centro de Chaves, numa zona calma\n\nEstá perto de todos os serviços e há muito estacionamento na rua.\nA sala tem varanda e a cozinha tem despensa, além de um espaço fechado para lavar e secar a roupa. Os quartos são amplos, um deles em suite, e há duas casas de banho completas.\nAr condicionado, aquecimento central, janelas com isolamento térmico e estores elétricos. Fibra ótica, porteiro digital e intercomunicador.\nO prédio tem dois elevadores, acesso para cadeira de rodas e zonas comuns bem conservadas.\n\nApartamento T4 · 124 m² brutos · 240.000 € · Ref. 1038771\n\nMarque a sua visita com a Fátima Correia, da IAD Portugal: +351 911 774 323",
+            "tags": [
+                "chaves",
+                "imobiliariachaves",
+                "casasemchaves",
+                "apartamentot4",
+                "tramosmontes",
+                "apartamentoavenda",
+                "imobiliaria",
+                "casasportugal",
+                "iadportugal",
+                "garagemfechada",
+                "centrodechaves"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1038771-k9y9o",
+    "created_at": "2026-10-19T13:57:18+00:00",
+    "updated_at": "2026-10-19T14:43:06+00:00",
+    "source_path": "clips/uploads/J0gp5WDn5zRLyYsTHFnWikiaMQOuihkEb8rFFuCw.mp3",
+    "images": [
+        {
+            "id": "img_425a81cf",
+            "path": "clips/uploads/qbGa82z6CRThYpf7ZAcOPRL6FVZfAvYJHP6NKJLe.png",
+            "description": "Hall de entrada com porta de madeira, chão claro, vitrine de madeira antiga e candeeiro de cristal; radiador visível.",
+            "name": "main.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1140f40b",
+            "path": "clips/uploads/joxZqABL6cJfef84FsgMdUILIDZEYwmhTsPK3GEd.png",
+            "description": "Corredor interior com roupeiros embutidos de madeira, chão claro e portas para os quartos e casa de banho.",
+            "name": "01a12562f8c276445a066befa19a9b31.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1180ba0d",
+            "path": "clips/uploads/bLrJLhek7FJSCbbmywUI0xyqPdjNaxVJ8xXltwLQ.png",
+            "description": "Quarto de casal com cabeceira estofada, roupeiro embutido amplo e acesso ao corredor; ambiente acolhedor.",
+            "name": "01a12562fa539b97560d4b363dbf78a8.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_78b7ea74",
+            "path": "clips/uploads/DOOt5mYdq2O5At3k6i1KPbYDZQgLO2749bkURh3P.png",
+            "description": "Quarto de casal com janela de vidro duplo, ar condicionado, radiador e roupeiro embutido; vista para prédios.",
+            "name": "01a12562f9f383097e33f45a26953696.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_519e5c99",
+            "path": "clips/uploads/4XFaMyeNfEsKKYXam50ULKTQEz7nhtBpTEzIuk3r.png",
+            "description": "Quarto amplo com cómoda e espelho antigo, ar condicionado, radiador e janela com vista para a rua.",
+            "name": "01a12562f90245f8f2be49a042a07f4f.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5a97abd7",
+            "path": "clips/uploads/5zT9HcVOJZp6gY8VojrvcYv4PbCxmgBM2apcJeMg.png",
+            "description": "Quarto de casal visto da cama, com roupeiro embutido de madeira grande, cómoda com espelho e quadro.",
+            "name": "01a12562f974f62d0ad1e921a21bf9a6.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4a49d14d",
+            "path": "clips/uploads/Lj2Lkrki5s9Tu4DtVVipNePaI3fKBAzsehHYxJ0I.png",
+            "description": "Quarto em suíte com porta aberta para casa de banho com duche; ar condicionado e radiador visíveis.",
+            "name": "01a12562f92402ba3c48bf4a4b155be6.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9845b38a",
+            "path": "clips/uploads/n3hUQBkiSZGQRMmpVcMPFeJ27q4cKzRS5uuQ2ts2.png",
+            "description": "Casa de banho completa renovada: duche com resguardo de vidro, azulejo ondulado bege, sanita e móvel lavatório.",
+            "name": "01a12562fac7a74fbee45adf82520ba1.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bebe7aec",
+            "path": "clips/uploads/FpfmKoBkAOz3XOqrEfEM3tVnXhDIzfVyfrWoV3WR.png",
+            "description": "Pormenor do duche moderno com chuveiro de teto, banco branco e azulejo ondulado bege; casa de banho renovada.",
+            "name": "01a12562f9b0935e4d2bd9e7d4f2255b.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9a519abd",
+            "path": "clips/uploads/JglVdAA9a9bRTdRXDrPvovxpeLE3ibnokQEAFSpr.png",
+            "description": "Quarto de casal com cama de madeira clássica, roupeiro espelhado, radiador e janela com vista arborizada.",
+            "name": "01a12562f9b9dc6cc1144adb9f3b9120.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f8f5c536",
+            "path": "clips/uploads/lU7KksBJSLSlL90gNvIXXfqi5AWacbrNNK3n2eRI.png",
+            "description": "Quarto com cama de casal e cabeceira de madeira, roupeiro de portas espelhadas e cómoda; acesso a corredor com armários.",
+            "name": "01a12562fa7990622cf658713ede396e.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4212bd04",
+            "path": "clips/uploads/nOO8U1t4MHoDS2joP624HKVS0ectkeZ5p4GldovD.png",
+            "description": "Quarto de casal luminoso com ar condicionado, janela com vista para a cidade e serra, radiador e poltrona.",
+            "name": "01a12562f9a2d48fb2e5827d39c7265b.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8abecbe7",
+            "path": "clips/uploads/rTtL5lrGKcjYKMyMa0s3hF9whtSN9voNWOEOG0RB.png",
+            "description": "Quarto com roupeiro embutido amplo em madeira, cómoda com espelho e colcha bordada com flores.",
+            "name": "01a12562f9e27ffcf246eee170cb6a35.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ca0dda76",
+            "path": "clips/uploads/JESEFEh3wXhjl3wrB80APIUdFdE0gkdzvHyoKRnh.png",
+            "description": "Quarto de casal com cabeceira estofada, mesas de cabeceira com candeeiros, colcha bordada e janela com cortina de renda.",
+            "name": "01a12562f967b03827004446b5003088.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a554434e",
+            "path": "clips/uploads/I0FvgWACX5B0t8qZKmOpldUHZg1khubOBYvoIxTg.png",
+            "description": "Casa de banho completa com banheira e chuveiro, sanita, móvel lavatório branco e espelho com iluminação.",
+            "name": "01a12562f978ff643377034ba1a6628d.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d4f272df",
+            "path": "clips/uploads/3sGNNOLxSKLsEVA63hVkxMyBYhdIXfA1jRh1d7zH.png",
+            "description": "Despensa com prateleiras ao lado da cozinha com armários de madeira, máquina de café e máquina de lavar loiça.",
+            "name": "01a12562f86f413a80312983e137837b.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4ffa7d95",
+            "path": "clips/uploads/ARn9KFHXgOMrvvlFSpz3U0JdtB1dPdoYzedzGsUb.png",
+            "description": "Cozinha comprida com mesa de refeições e cadeiras, armários de madeira, fogão a gás com forno e corredor ao fundo.",
+            "name": "01a12562f9299ce8c8c150f646bec6e9.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fa251d56",
+            "path": "clips/uploads/SkxdIOdH2tsyvnla6bL9AUUNJeAlCsQhJjFeFvpW.png",
+            "description": "Cozinha equipada com armários de madeira, máquina de lavar loiça, frigorífico, mesa de refeições e janela ao fundo.",
+            "name": "01a12562fb19bff32d01e84f9ec6c1be.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b9a98b0c",
+            "path": "clips/uploads/Er5VYJkKXPu3G0mDFQUBztYCyAQ6pTjpjq1fOf02.png",
+            "description": "Cozinha com fogão grande de cinco bicos e forno inox, armários com vitrines, mesa de refeições junto à parede.",
+            "name": "01a12562facf18c8b3d76bdb64e26fe5.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2af4d27c",
+            "path": "clips/uploads/IhwWCntkLWnwyewvp4ryTaJffgBBEJPmcbcRtKWC.png",
+            "description": "Sala de estar com sofá de canto cinzento, móvel bar em madeira, mesa de jantar e porta para a varanda.",
+            "name": "01a12562f9d5ef2589bf2608b17eaf3b.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_099b3ff6",
+            "path": "clips/uploads/4rgAiHIuPNod9Zg0zwE6U0qmEA0wW1Gi2SI90JK8.png",
+            "description": "Sala de estar com sofá de canto cinzento, ar-condicionado, radiador e porta aberta para a varanda ao fundo.",
+            "name": "01a12562fa762996fe98c5b23a6bfe2f.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_93a649e9",
+            "path": "clips/uploads/LVwDmnjOjGMfOvAKfRzmr5bZzfop0gnecOyJfpWd.png",
+            "description": "Sala ampla com mesa de jantar redonda, cristaleira de madeira, sofá cinzento, televisão e chão de madeira clara.",
+            "name": "01a1258905f7c3a55ef70186ec68e13f.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a984d7e6",
+            "path": "clips/uploads/lxS4fAIyqMeXQ9894vLLwRLFJVy6jZ4PgmTXINje.png",
+            "description": "Hall de entrada do prédio, paredes forradas a madeira e mosaico claro, espaço do elevador ao fundo.",
+            "name": "01a12562f9b70d5b5e37fdad4c1944d6.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6c3f0f43",
+            "path": "clips/uploads/biibk5vu85qfVdYYbvlh2CuQzcFRRCJsR2PdAp0H.png",
+            "description": "Zona comum do prédio com paredes de madeira, portas dos dois elevadores e escadas à esquerda, bem conservada.",
+            "name": "01a12562fac27822653124e985d937f9.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_11ec474d",
+            "path": "clips/uploads/ZNXnxE1XUtDqlRC2YaDgZGaV6XGd4Vw1ETSngNHc.png",
+            "description": "Retrato da consultora Fátima Correia, da IAD Portugal.",
+            "name": "Fátima Correia.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eecbffca",
+            "path": "clips/uploads/FS7iivcObzGivs52U3XBZLxlj8RBlSvgWLNPbEBD.jpg",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/J0gp5WDn5zRLyYsTHFnWikiaMQOuihkEb8rFFuCw.mp3",
+    "transcript": {
+        "duration": 34.880001068115234,
+        "text": "Viver no centro de Chaves, com garagem fechada, numa zona calma, perto de todos os serviços, com muito estacionamento na rua. São 124 metros quadrados de área bruta. Sala com varanda, cozinha com dispensa e um espaço fechado para lavar e secar roupa. Quartos amplos, um deles em suíte, e duas casas de banho completas. Tem ar-condicionado, aquecimento central, janelas com isolamento térmico e estores elétricos. O prédio tem dois elevadores e zonas comuns bem conservadas. Para visitar, fale com a Fátima Correia, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Viver",
+                "start": 0,
+                "end": 0.36000001430511475
+            },
+            {
+                "word": "no",
+                "start": 0.36000001430511475,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "centro",
+                "start": 0.5799999833106995,
+                "end": 0.8199999928474426
+            },
+            {
+                "word": "de",
+                "start": 0.8199999928474426,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "Chaves",
+                "start": 1.440000057220459,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "com",
+                "start": 1.6799999475479126,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "garagem",
+                "start": 1.8200000524520874,
+                "end": 2.299999952316284
+            },
+            {
+                "word": "fechada",
+                "start": 2.299999952316284,
+                "end": 2.7200000286102295
+            },
+            {
+                "word": "numa",
+                "start": 3.0999999046325684,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "zona",
+                "start": 3.259999990463257,
+                "end": 3.5
+            },
+            {
+                "word": "calma",
+                "start": 3.5,
+                "end": 3.9600000381469727
+            },
+            {
+                "word": "perto",
+                "start": 4.260000228881836,
+                "end": 4.380000114440918
+            },
+            {
+                "word": "de",
+                "start": 4.380000114440918,
+                "end": 4.699999809265137
+            },
+            {
+                "word": "todos",
+                "start": 4.699999809265137,
+                "end": 4.880000114440918
+            },
+            {
+                "word": "os",
+                "start": 4.880000114440918,
+                "end": 5.019999980926514
+            },
+            {
+                "word": "serviços",
+                "start": 5.019999980926514,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "com",
+                "start": 5.71999979019165,
+                "end": 5.960000038146973
+            },
+            {
+                "word": "muito",
+                "start": 5.960000038146973,
+                "end": 6.21999979019165
+            },
+            {
+                "word": "estacionamento",
+                "start": 6.21999979019165,
+                "end": 6.760000228881836
+            },
+            {
+                "word": "na",
+                "start": 6.760000228881836,
+                "end": 7.159999847412109
+            },
+            {
+                "word": "rua",
+                "start": 7.159999847412109,
+                "end": 7.199999809265137
+            },
+            {
+                "word": "São",
+                "start": 7.699999809265137,
+                "end": 7.760000228881836
+            },
+            {
+                "word": "124",
+                "start": 7.760000228881836,
+                "end": 8.739999771118164
+            },
+            {
+                "word": "metros",
+                "start": 8.739999771118164,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "quadrados",
+                "start": 9.039999961853027,
+                "end": 9.4399995803833
+            },
+            {
+                "word": "de",
+                "start": 9.4399995803833,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "área",
+                "start": 9.84000015258789,
+                "end": 9.84000015258789
+            },
+            {
+                "word": "bruta",
+                "start": 9.84000015258789,
+                "end": 10.239999771118164
+            },
+            {
+                "word": "Sala",
+                "start": 10.859999656677246,
+                "end": 10.880000114440918
+            },
+            {
+                "word": "com",
+                "start": 10.880000114440918,
+                "end": 11.15999984741211
+            },
+            {
+                "word": "varanda",
+                "start": 11.15999984741211,
+                "end": 11.5
+            },
+            {
+                "word": "cozinha",
+                "start": 11.899999618530273,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "com",
+                "start": 12.0600004196167,
+                "end": 12.34000015258789
+            },
+            {
+                "word": "dispensa",
+                "start": 12.34000015258789,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "e",
+                "start": 12.800000190734863,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "um",
+                "start": 13.039999961853027,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "espaço",
+                "start": 13.4399995803833,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "fechado",
+                "start": 13.4399995803833,
+                "end": 13.920000076293945
+            },
+            {
+                "word": "para",
+                "start": 13.920000076293945,
+                "end": 14.180000305175781
+            },
+            {
+                "word": "lavar",
+                "start": 14.180000305175781,
+                "end": 14.4399995803833
+            },
+            {
+                "word": "e",
+                "start": 14.4399995803833,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "secar",
+                "start": 14.84000015258789,
+                "end": 14.899999618530273
+            },
+            {
+                "word": "roupa",
+                "start": 14.899999618530273,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "Quartos",
+                "start": 15.800000190734863,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "amplos",
+                "start": 15.960000038146973,
+                "end": 16.420000076293945
+            },
+            {
+                "word": "um",
+                "start": 16.68000030517578,
+                "end": 16.739999771118164
+            },
+            {
+                "word": "deles",
+                "start": 16.739999771118164,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "em",
+                "start": 16.940000534057617,
+                "end": 17.219999313354492
+            },
+            {
+                "word": "suíte",
+                "start": 17.219999313354492,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "e",
+                "start": 17.719999313354492,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "duas",
+                "start": 18.059999465942383,
+                "end": 18.219999313354492
+            },
+            {
+                "word": "casas",
+                "start": 18.219999313354492,
+                "end": 18.520000457763672
+            },
+            {
+                "word": "de",
+                "start": 18.520000457763672,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "banho",
+                "start": 18.84000015258789,
+                "end": 18.84000015258789
+            },
+            {
+                "word": "completas",
+                "start": 18.84000015258789,
+                "end": 19.520000457763672
+            },
+            {
+                "word": "Tem",
+                "start": 19.920000076293945,
+                "end": 20
+            },
+            {
+                "word": "ar",
+                "start": 20,
+                "end": 20.139999389648438
+            },
+            {
+                "word": "condicionado",
+                "start": 20.139999389648438,
+                "end": 20.8799991607666
+            },
+            {
+                "word": "aquecimento",
+                "start": 21.200000762939453,
+                "end": 21.479999542236328
+            },
+            {
+                "word": "central",
+                "start": 21.479999542236328,
+                "end": 22.040000915527344
+            },
+            {
+                "word": "janelas",
+                "start": 22.520000457763672,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "com",
+                "start": 22.65999984741211,
+                "end": 22.899999618530273
+            },
+            {
+                "word": "isolamento",
+                "start": 22.899999618530273,
+                "end": 23.31999969482422
+            },
+            {
+                "word": "térmico",
+                "start": 23.31999969482422,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "e",
+                "start": 23.8799991607666,
+                "end": 24.1200008392334
+            },
+            {
+                "word": "estores",
+                "start": 24.1200008392334,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "elétricos",
+                "start": 24.479999542236328,
+                "end": 25.079999923706055
+            },
+            {
+                "word": "O",
+                "start": 25.3799991607666,
+                "end": 25.5
+            },
+            {
+                "word": "prédio",
+                "start": 25.5,
+                "end": 25.780000686645508
+            },
+            {
+                "word": "tem",
+                "start": 25.780000686645508,
+                "end": 26
+            },
+            {
+                "word": "dois",
+                "start": 26,
+                "end": 26.34000015258789
+            },
+            {
+                "word": "elevadores",
+                "start": 26.34000015258789,
+                "end": 26.84000015258789
+            },
+            {
+                "word": "e",
+                "start": 26.84000015258789,
+                "end": 27.18000030517578
+            },
+            {
+                "word": "zonas",
+                "start": 27.18000030517578,
+                "end": 27.34000015258789
+            },
+            {
+                "word": "comuns",
+                "start": 27.34000015258789,
+                "end": 27.81999969482422
+            },
+            {
+                "word": "bem",
+                "start": 27.81999969482422,
+                "end": 28.100000381469727
+            },
+            {
+                "word": "conservadas",
+                "start": 28.100000381469727,
+                "end": 28.780000686645508
+            },
+            {
+                "word": "Para",
+                "start": 30.780000686645508,
+                "end": 31.34000015258789
+            },
+            {
+                "word": "visitar",
+                "start": 31.34000015258789,
+                "end": 31.899999618530273
+            },
+            {
+                "word": "fale",
+                "start": 32.220001220703125,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "com",
+                "start": 32.220001220703125,
+                "end": 32.36000061035156
+            },
+            {
+                "word": "a",
+                "start": 32.36000061035156,
+                "end": 32.58000183105469
+            },
+            {
+                "word": "Fátima",
+                "start": 32.58000183105469,
+                "end": 32.84000015258789
+            },
+            {
+                "word": "Correia",
+                "start": 32.84000015258789,
+                "end": 33.279998779296875
+            },
+            {
+                "word": "da",
+                "start": 33.459999084472656,
+                "end": 33.68000030517578
+            },
+            {
+                "word": "IAD",
+                "start": 33.68000030517578,
+                "end": 34.040000915527344
+            },
+            {
+                "word": "de",
+                "start": 34.040000915527344,
+                "end": 34.31999969482422
+            },
+            {
+                "word": "Portugal",
+                "start": 34.31999969482422,
+                "end": 34.63999938964844
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.880001068115234,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.5999999999999996,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T3 COM GARAGEM FECHADA",
+                        "params": {
+                            "src": "img_4212bd04",
+                            "avatar": "img_11ec474d",
+                            "logo": "img_eecbffca",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "240.000 €",
+                            "location": "CHAVES · CENTRO",
+                            "title": "T3 COM GARAGEM FECHADA",
+                            "facts": "124 m² · 3 quartos · 2 WC · garagem",
+                            "cta": "Ligue já +351 911 774 323",
+                            "name": "Fátima Correia",
+                            "logoText": "IAD Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A."
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.5999999999999996,
+                "end": 7.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "ZONA CALMA",
+                        "params": {
+                            "src": "img_425a81cf",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.6,
+                "end": 10.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "124 M² DE ÁREA BRUTA",
+                        "params": {
+                            "src": "img_93a649e9",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.6,
+                "end": 13,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "SALA COM VARANDA",
+                        "params": {
+                            "src": "img_2af4d27c",
+                            "src2": "img_099b3ff6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13,
+                "end": 15.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "COZINHA COM DESPENSA",
+                        "params": {
+                            "src": "img_4ffa7d95",
+                            "src2": "img_fa251d56",
+                            "src3": "img_b9a98b0c",
+                            "src4": "img_d4f272df"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.6,
+                "end": 17.7,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "QUARTOS AMPLOS",
+                        "params": {
+                            "src": "img_1180ba0d",
+                            "src2": "img_f8f5c536",
+                            "src3": "img_9a519abd",
+                            "src4": "img_5a97abd7",
+                            "src5": "img_8abecbe7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.7,
+                "end": 20,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DUAS CASAS DE BANHO",
+                        "params": {
+                            "src": "img_4a49d14d",
+                            "src2": "img_9845b38a",
+                            "src3": "img_bebe7aec",
+                            "src4": "img_a554434e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20,
+                "end": 22.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "AQUECIMENTO CENTRAL",
+                        "params": {
+                            "src": "img_78b7ea74",
+                            "src2": "img_ca0dda76",
+                            "src3": "img_1140f40b",
+                            "src4": "img_425a81cf",
+                            "src5": "img_1180ba0d"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.4,
+                "end": 25.3,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "CONFORTO",
+                        "params": {
+                            "src": "img_519e5c99",
+                            "title": "CONFORTO",
+                            "items": [
+                                "Ar condicionado",
+                                "Aquecimento central",
+                                "Isolamento térmico",
+                                "Estores elétricos"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.3,
+                "end": 30.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "DOIS ELEVADORES",
+                        "params": {
+                            "src": "img_a984d7e6",
+                            "src2": "img_6c3f0f43"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.6,
+                "end": 34.88,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Marque a sua visita",
+                        "params": {
+                            "src": "img_11ec474d",
+                            "name": "Fátima Correia",
+                            "phone": "+351 911 774 323",
+                            "ami": ""
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1038771-k9y9o/clip.mp4",
+    "error": null
+}

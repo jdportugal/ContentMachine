@@ -1,0 +1,901 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T2 com terraço no Funchal por 360 mil euros",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-apartamento-t3-sintra-queluz-e-belas/120521000-2411",
+            "agent": "Pedro Pote",
+            "phone": "+351 968 045 004",
+            "agency": "RE/MAX Siimgroup",
+            "hook": "Um T3 no coração do Belas Clube de Campo.",
+            "voiceover": "Um T3 no coração do Belas Clube de Campo. O La Réserve é um projeto de 2028, em Belas. A poucos minutos de Lisboa, Cascais e Sintra. Cento e cinquenta e dois metros úteis. Três quartos e quatro casas de banho. Linhas contemporâneas, luz natural e ligação ao exterior. No condomínio, piscina exterior e amplos jardins. Ginásio, café e minimercado a pé. Elevador, estacionamento e carregamento para carros elétricos. Um milhão e sessenta mil euros. Para visitar, fale com o Pedro Pote, da REMAX Siimgroup.",
+            "scenes": [
+                {
+                    "photo": "fachada do empreendimento (render)",
+                    "vo": "Um T3 no coração do Belas Clube de Campo.",
+                    "caption": "Belas Clube de Campo · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "vista geral do conjunto residencial (render)",
+                    "vo": "O La Réserve é um projeto de 2028, em Belas.",
+                    "caption": "La Réserve · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "enquadramento na paisagem / zona envolvente",
+                    "vo": "A poucos minutos de Lisboa, Cascais e Sintra.",
+                    "caption": "Perto de Lisboa · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "sala (render)",
+                    "vo": "Cento e cinquenta e dois metros úteis.",
+                    "caption": "152 m² úteis · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "quarto principal (render)",
+                    "vo": "Três quartos e quatro casas de banho.",
+                    "caption": "Três quartos · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "sala com ligação ao exterior / grandes vãos (render)",
+                    "vo": "Linhas contemporâneas, luz natural e ligação ao exterior.",
+                    "caption": "Muita luz natural · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "piscina exterior do condomínio (render)",
+                    "vo": "No condomínio, piscina exterior e amplos jardins.",
+                    "caption": "Piscina e jardins · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "jardins comuns / caminhos pedonais (render)",
+                    "vo": "Ginásio, café e minimercado a pé.",
+                    "caption": "Serviços a pé · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "entrada do edifício / acesso ao estacionamento (render)",
+                    "vo": "Elevador, estacionamento e carregamento para carros elétricos.",
+                    "caption": "Carregamento elétrico · Imagem 3D do projeto"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Um milhão e sessenta mil euros. Para visitar, fale com o Pedro Pote, da RE/MAX Siimgroup.",
+                    "caption": "1.060.000 € · Pedro Pote · RE/MAX Siimgroup"
+                }
+            ],
+            "flags": [
+                "O ano de construção é 2028, por isso é um imóvel em projeto. Partiu-se do princípio de que as imagens são renders, e todas as cenas do imóvel têm a legenda 'Imagem 3D do projeto'. Confirmar se alguma é foto real (por exemplo, da zona do clube) e retirar a legenda nessa cena.",
+                "A descrição é do empreendimento todo (T1 a T4, de 60 a 190 m²), não desta fração. O jardim privativo, os terraços e as vistas sobre o lago e o golfe não estão confirmados para este T3, por isso ficaram de fora.",
+                "Os detalhes dizem 'Estacionamento: Sim' e 'Garagem: Não'. O tipo de estacionamento não é claro, por isso o texto diz apenas 'estacionamento'.",
+                "O fecho usa 'Para visitar', como manda o formato. Como é um imóvel em projeto, confirmar se faz sentido ou se é preferível 'Para saber mais'."
+            ],
+            "message": "Boa tarde Sr. Pedro,\nO meu nome é João Ferreira.\n\nVi o T3 do La Réserve, no Belas Clube de Campo, que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Pedro Pote - and phone number - +351 968 045 004. Agency: RE/MAX Siimgroup.\nThe agent's photo is Pedro Pote.jpg; the agency logo is logo.png.\nOn-screen hook for the first frame: «Um T3 no coração do Belas Clube de Campo.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do empreendimento (render) → «Belas Clube de Campo · Imagem 3D do projeto»\n- vista geral do conjunto residencial (render) → «La Réserve · Imagem 3D do projeto»\n- enquadramento na paisagem / zona envolvente → «Perto de Lisboa · Imagem 3D do projeto»\n- sala (render) → «152 m² úteis · Imagem 3D do projeto»\n- quarto principal (render) → «Três quartos · Imagem 3D do projeto»\n- sala com ligação ao exterior / grandes vãos (render) → «Muita luz natural · Imagem 3D do projeto»\n- piscina exterior do condomínio (render) → «Piscina e jardins · Imagem 3D do projeto»\n- jardins comuns / caminhos pedonais (render) → «Serviços a pé · Imagem 3D do projeto»\n- entrada do edifício / acesso ao estacionamento (render) → «Carregamento elétrico · Imagem 3D do projeto»\n- end card → «1.060.000 € · Pedro Pote · RE/MAX Siimgroup»\n\nHere are the house details:\n\nApartamento T3 de luxo à venda em Queluz e Belas, Sintra\nPreço\n1 060 000 €\nLocalização\nQueluz e Belas, Sintra, Lisboa\nReferência\n120521000-2411\nÁrea Bruta m²\n222\nÁrea Útil m²\n152\nQuartos\n3\nWC/Casas de banho\n4\nAno de Construção\n2028\nEstacionamento\nSim\nGaragem\nNão\nElevador\nSim\nCarregamento de Carros Elétricos\nSim\n\nDescrição\n<p>No endereço mais exclusivo do Belas Clube de Campo nasce o La Réserve, um projeto residencial distinto que combina arquitetura contemporânea, conforto e qualidade de vida, num enquadramento único a poucos minutos de Lisboa.</p>\n<br/>\n<p>Com apartamentos T1, T2, T3 e T4, entre os 60 e os 190 m², foi concebido para responder às diferentes necessidades de cada família. Das habitações com jardim privativo aos apartamentos com amplos terraços e vistas panorâmicas sobre o lago e o campo de golfe, cada espaço oferece uma experiência residencial singular.</p>\n<br/>\n<p>O projeto destaca-se pelas suas linhas elegantes e pela forte ligação entre interior e exterior. A luz natural, as vistas desafogadas e a integração com a paisagem envolvente fazem parte do quotidiano, transformando cada momento numa experiência de bem-estar.</p>\n<br/>\n<p>As áreas comuns foram pensadas para promover um estilo de vida equilibrado e saudável, incluindo piscina exterior, espaços multiusos e amplos jardins.</p>\n<br/>\n<p>Localizado no coração do Belas Clube de Campo, o La Réserve beneficia de uma localização privilegiada, com acesso pedonal a serviços essenciais como ginásio, café, minimercado, parafarmácia e equipamentos desportivos. Simultaneamente, encontra-se a poucos minutos de Lisboa, Cascais e Sintra, oferecendo a combinação ideal entre tranquilidade e mobilidade.</p>\n<br/>\n<p>Mais do que um conjunto residencial, o La Réserve é um convite a viver rodeado pela natureza, num ambiente exclusivo onde arquitetura e qualidade de vida coexistem em perfeita harmonia.</p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "step": "Rendering the agent outro",
+        "research": {
+            "topic": "Mercado de habitação no Funchal (moradia T2 em São Pedro, 360 mil €)",
+            "summary": "A avaliação bancária da habitação na Madeira estava em 2.609 €/m² em junho de 2026, acima da média nacional. O Funchal tinha o valor mais alto da Região.",
+            "timeline": [],
+            "stats": [
+                {
+                    "label": "Avaliação bancária na Madeira (junho de 2026)",
+                    "value": 2609,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação bancária de moradias na Madeira (junho de 2026)",
+                    "value": 2180,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação bancária no Funchal (junho de 2026)",
+                    "value": 2936,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Avaliação bancária em Portugal (julho de 2026, recorde)",
+                    "value": 2240,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Avaliação bancária da habitação (2026)",
+                    "left": {
+                        "title": "Funchal",
+                        "points": [
+                            "2.936 €/m² em junho",
+                            "O valor mais alto da Madeira"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2.240 €/m² em julho",
+                            "Recorde nacional, +15,2% num ano"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Funchal tem a avaliação bancária mais alta da Madeira",
+                "Na Madeira, as moradias são avaliadas abaixo dos apartamentos (2.180 contra 2.885 €/m², junho de 2026)",
+                "A avaliação bancária nacional bateu um recorde em julho de 2026"
+            ],
+            "sources": [
+                "https://estatistica.madeira.gov.pt/en/download-now-3/economic/const-hab-gb/bank-appraisals-on-housing-gb/aval-banc-hab-noticias-gb/5897-24-07-2026-in-june-2026-the-median-value-of-bank-appraisals-for-housing-in-the-autonomous-region-of-madeira-rose-to-2-609-euros-m2.html",
+                "https://www.dnoticias.pt/2026/7/24/500253-avaliacao-bancaria-da-habitacao-na-madeira-sobe-para-2609-euros-por-metro-quadrado/",
+                "https://www.rtp.pt/noticias/economia/avaliacao-bancaria-da-habitacao-bate-recorde-de-2240-eurosm2-em-julho_n1761591",
+                "https://postal.pt/economia/avaliacao-bancaria-na-habitacao-aumenta-187-em-julho/",
+                "https://www.dnoticias.pt/2026/8/26/503445-avaliacao-bancaria-de-habitacao-na-madeira-fixa-se-nos-2598-euros-por-metro-quadrado-em-julho/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T2 com terraço no Funchal por 360 mil euros",
+            "description": "Moradia de dois pisos na Calçada do Pico, em São Pedro, a poucos minutos do centro do Funchal. Tem sala e cozinha equipada no rés-do-chão, dois quartos no piso superior, terraço, varanda, logradouro e dois lugares de estacionamento. Para agendar uma visita, contacte o Gonçalo Luís, da RE/MAX.",
+            "tags": [
+                "moradia",
+                "funchal",
+                "madeira",
+                "imobiliario",
+                "casa a venda",
+                "t2",
+                "remax",
+                "sao pedro"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-120521000-2411-xrthc",
+    "created_at": "2026-10-12T14:06:42+00:00",
+    "updated_at": "2026-10-14T09:20:44+00:00",
+    "source_path": "clips/uploads/IBvzjlqTX99eTEGSFFGxEYjlkgFtAZhsJPpSC5kx.mp3",
+    "images": [
+        {
+            "id": "img_1a68679b",
+            "path": "clips/uploads/4K9cK1ziIIoDZAd6M2vrsEDVqLtFiAcerB7CvHQg.jpg",
+            "description": "Fachada de edifício de apartamentos ao anoitecer, ripado de madeira iluminado, jardim e passadiço com pessoas a passear.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_e02fdd42",
+            "path": "clips/uploads/zlNveUxLcZalBuvqFAjeUogpOq68QPXTgTiMoSk7.jpg",
+            "description": "Fachada de edifício residencial com varandas de madeira, jardim e piscina com espreguiçadeiras em primeiro plano, ao pôr do sol.",
+            "name": "a2bd5407-567c-40ac-8823-18bcb47abffa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0f4b3d8c",
+            "path": "clips/uploads/g6DR1RlFiA3id5kYuU61Pjg5nSFZqMqSQ4bALsRL.jpg",
+            "description": "Vista aérea de dois edifícios de apartamentos entre pinheiros, com piscina central, jardins e painéis solares.",
+            "name": "3a519927-914c-4ef5-8c1e-15a75809987f.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_f6674832",
+            "path": "clips/uploads/c9PPGFhSYpGGXscw5IxUv6c1kgzaVT8elSBJBKAK.jpg",
+            "description": "Sala em open space com sofá de pele castanho, mesa de jantar em madeira e cozinha equipada com ilha.",
+            "name": "2d822940-be02-421c-ac7b-5cf88b226988.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ee500eee",
+            "path": "clips/uploads/jpo6WLjs6WagdjO0o3JK6e7AsVUaMDKxVu6UMOxk.jpg",
+            "description": "Sala com sofá verde, mesa de jantar de vidro e cozinha equipada ao fundo com ilha e bancos.",
+            "name": "db7b1e70-97cf-41b6-8037-7f5a91a063bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3f708594",
+            "path": "clips/uploads/CNQzCj9XmziqIIXRgMmGySnsFchKx6kki3TSm2qI.jpg",
+            "description": "Cozinha equipada em madeira e branco, com forno e micro-ondas embutidos e mesa redonda de jantar.",
+            "name": "c929e1a1-4a1a-47b6-a28e-f809c7797b90.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_84e33865",
+            "path": "clips/uploads/kqt18expglyQdrwEzb4jinXaJLQvrY1XLQ4Ah7Yv.jpg",
+            "description": "Terraço amplo coberto com cadeirões e mesa de centro, vista sobre bairro residencial e colinas ao pôr do sol.",
+            "name": "cf012079-c13b-454d-a315-1f6e2809f397.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0683bbe2",
+            "path": "clips/uploads/plMeiLFXCKjLt91aB7cx1XXpxO2RR1glh9qchx14.jpg",
+            "description": "Sala de estar ampla com sofá de pele castanho, zona de jantar e cozinha equipada aberta ao fundo.",
+            "name": "6d86baca-bdfd-4949-9c01-48510dca472b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_12e495c6",
+            "path": "clips/uploads/NxYtkQ7x7TFaaCiyLwbZmgzK8tiyBvhUaLd6twxu.jpg",
+            "description": "Sala e zona de jantar com sofá de pele, cadeirão de madeira e janelas amplas para o jardim.",
+            "name": "bdf8cc4e-bf5b-4700-a69c-9f9d8ab90a95.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dbe5ecc7",
+            "path": "clips/uploads/rhja9iyiFhI5cFqEBWNDZjBoKgOeJ16a1Ri6f4c6.jpg",
+            "description": "Varanda com guarda de ripado de madeira, duas cadeiras de lazer e vista para árvores e casas.",
+            "name": "49d37cba-7507-436d-bd1e-555ad285baa5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3a5acb2e",
+            "path": "clips/uploads/jptW0eagovyKPzVSdvfetS97XTH4OKkdgqgnSOsy.jpg",
+            "description": "Sala de estar e jantar em open space com balcão de cozinha, sofá de pele e portadas para o jardim.",
+            "name": "271a0ce9-81f9-4a70-9edc-45953162e957.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1c8fda4e",
+            "path": "clips/uploads/bBZN8dRCLeQRO3K2kAutyK6ep9UcLrDGZv4Wd28q.jpg",
+            "description": "Sala de estar com sofá claro e pufes de pele, com vista para o quarto através de porta de correr.",
+            "name": "4ecf8c57-4ec8-4dc5-bea9-2e4416d0a155.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f3b923aa",
+            "path": "clips/uploads/sKUSD0Qy8owKFm6tlgWufJEdlXPsoq3pbeAWxUzZ.jpg",
+            "description": "Quarto com cama de casal, cabeceira em painel de madeira, candeeiros de parede e roupeiro embutido branco.",
+            "name": "31671bd0-7de4-42b8-890f-25960eb9f600.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bf5a4a15",
+            "path": "clips/uploads/3LeVC3CklDkKUB8fAGKuxV3589QmAGiwpb6MZu1w.jpg",
+            "description": "Casa de banho com banheira de pé, duche duplo envidraçado, lavatório duplo em madeira e janela.",
+            "name": "aa143aea-98ff-4ad7-8f7d-5d2f075d28a0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b2e29919",
+            "path": "clips/uploads/OxBxabzFIIL7looAjSzg120wWoQgCh6f66B8D2YF.jpg",
+            "description": "Quarto amplo e claro com roupeiros embutidos, cama de casal e janela grande com vista para árvores.",
+            "name": "3d160afa-51c2-4b61-ab65-3d8d79938d1e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dbfc6bd0",
+            "path": "clips/uploads/ME0Xv7I4frDBoKNUpKXt3L2TdG9tlGr9bWhmmPfd.jpg",
+            "description": "Casa de banho com móvel suspenso em madeira, lavatório duplo, espelho iluminado e duche envidraçado.",
+            "name": "d4b283f3-bb9e-43d9-9cf3-b2eb4b68d5ef.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_298bca7f",
+            "path": "clips/uploads/44pWYzuyMsET03AyaaIM6kFavNv5EU8tLxnnZnxu.jpg",
+            "description": "Quarto luminoso com cama de casal, quadro abstrato, roupeiro embutido e janela alta com vista ampla.",
+            "name": "f509a21f-d058-4f57-8ddb-721718ccf3c2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_285a0199",
+            "path": "clips/uploads/ZhGwLRyCNULHFBOHmAk1Cz6GGt5ErJ1ie2S7QEfa.jpg",
+            "description": "Casa de banho pequena e clara com duche envidraçado, sanita suspensa e móvel de madeira.",
+            "name": "99c6eda2-2fe2-476f-8edc-6f8479c8ee50.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8b2116f5",
+            "path": "clips/uploads/y5qhkQQUfrCNoJZetJ0fGYKLwhRTe0tglyReVgbR.jpg",
+            "description": "Quarto com cabeceira de madeira, banco aos pés da cama e porta envidraçada para a varanda.",
+            "name": "d14f0d35-d630-4577-8091-e6c1a1911fee.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a12a2a71",
+            "path": "clips/uploads/WJ2n03wVY6sJJUCYMTYXkS6fiZXa0231RUy1y6B4.jpg",
+            "description": "Quarto com cama de veludo rosado, cabeceira em madeira, candeeiros dourados e closet ao lado.",
+            "name": "1cf7d754-522c-45ec-a34c-f17b06cc833b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_2566d3c9",
+            "path": "clips/uploads/DxJ75XVN3I0vcJiaV0nwYG4JPgKnAC2ryazDZZ1B.jpg",
+            "description": "Fachada de prédio moderno com ripas de madeira; relvado com pufes em frente às janelas do quarto e da sala.",
+            "name": "7a258703-c30e-4242-9a52-73d529d95b87.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_462c7c17",
+            "path": "clips/uploads/0tF8nHZB0dmLOaN5Lp0BW48gRprJchEOoAlmJcYp.jpg",
+            "description": "Fachada lateral de prédio moderno de quatro pisos, com varandas de madeira e casal sentado no jardim.",
+            "name": "83453223-7435-48af-8ace-33603aba2195.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_aabd3131",
+            "path": "clips/uploads/JN1GXjKS5T3P7JOvSHESGdDsuRqU4mNQL9hsNkEt.jpg",
+            "description": "Piscina exterior comum com espreguiçadeiras e chapéus de sol, árvores grandes e prédio moderno ao fundo.",
+            "name": "b2c2a45b-bf93-436f-9aba-1c6365078f5e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50bdadb4",
+            "path": "clips/uploads/jtqhDpdl8Mj8SX6umU4OfeT70ful1YsoOU9GuJq6.jpg",
+            "description": "Zona exterior do jardim com lareira, bancos curvos à volta, lenha empilhada e pinheiros; edifício ao fundo.",
+            "name": "8b36d881-f8be-4bac-bcf0-b931405cc6f6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e1510d72",
+            "path": "clips/uploads/hxyh1yzqw01f645EGeLynS23Mrs6ZxECVtJ6kUk5.jpg",
+            "description": "Retrato do consultor Pedro Pote, da RE/MAX Siimgroup.",
+            "name": "Pedro Pote.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fe11a605",
+            "path": "clips/uploads/XBPoyktY2z12Hka0SlHQNdzesi6cZdy3whLUlFLz.png",
+            "description": "Logótipo da RE/MAX Siimgroup.",
+            "name": "logo.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/IBvzjlqTX99eTEGSFFGxEYjlkgFtAZhsJPpSC5kx.mp3",
+    "transcript": {
+        "duration": 22.59000015258789,
+        "text": "Uma moradia com terraço e dois lugares de estacionamento. Na calçada do Pico, em São Pedro, a minutos do centro do Funchal. Dois pisos, sala e cozinha equipada embaixo, dois quartos em cima. Lá fora, terraço, varanda e logradouro. 360 mil euros. Para visitar, fale com o Gonçalo Luís, da Remax.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.25999999046325684
+            },
+            {
+                "word": "moradia",
+                "start": 0.25999999046325684,
+                "end": 0.6600000262260437
+            },
+            {
+                "word": "com",
+                "start": 0.6600000262260437,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "terraço",
+                "start": 0.9800000190734863,
+                "end": 1.440000057220459
+            },
+            {
+                "word": "e",
+                "start": 1.440000057220459,
+                "end": 1.8200000524520874
+            },
+            {
+                "word": "dois",
+                "start": 1.8200000524520874,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "lugares",
+                "start": 2.059999942779541,
+                "end": 2.4000000953674316
+            },
+            {
+                "word": "de",
+                "start": 2.4000000953674316,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "estacionamento",
+                "start": 2.6600000858306885,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "Na",
+                "start": 4,
+                "end": 4.119999885559082
+            },
+            {
+                "word": "calçada",
+                "start": 4.119999885559082,
+                "end": 4.400000095367432
+            },
+            {
+                "word": "do",
+                "start": 4.400000095367432,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "Pico",
+                "start": 4.760000228881836,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "em",
+                "start": 5.059999942779541,
+                "end": 5.199999809265137
+            },
+            {
+                "word": "São",
+                "start": 5.199999809265137,
+                "end": 5.400000095367432
+            },
+            {
+                "word": "Pedro",
+                "start": 5.400000095367432,
+                "end": 5.639999866485596
+            },
+            {
+                "word": "a",
+                "start": 6.039999961853027,
+                "end": 6.260000228881836
+            },
+            {
+                "word": "minutos",
+                "start": 6.260000228881836,
+                "end": 6.5
+            },
+            {
+                "word": "do",
+                "start": 6.5,
+                "end": 6.800000190734863
+            },
+            {
+                "word": "centro",
+                "start": 6.800000190734863,
+                "end": 7.039999961853027
+            },
+            {
+                "word": "do",
+                "start": 7.039999961853027,
+                "end": 7.239999771118164
+            },
+            {
+                "word": "Funchal",
+                "start": 7.239999771118164,
+                "end": 7.679999828338623
+            },
+            {
+                "word": "Dois",
+                "start": 8.4399995803833,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "pisos",
+                "start": 8.579999923706055,
+                "end": 8.979999542236328
+            },
+            {
+                "word": "sala",
+                "start": 9.760000228881836,
+                "end": 9.760000228881836
+            },
+            {
+                "word": "e",
+                "start": 9.760000228881836,
+                "end": 9.979999542236328
+            },
+            {
+                "word": "cozinha",
+                "start": 9.979999542236328,
+                "end": 10.180000305175781
+            },
+            {
+                "word": "equipada",
+                "start": 10.180000305175781,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "embaixo",
+                "start": 10.600000381469727,
+                "end": 11.0600004196167
+            },
+            {
+                "word": "dois",
+                "start": 11.520000457763672,
+                "end": 11.739999771118164
+            },
+            {
+                "word": "quartos",
+                "start": 11.739999771118164,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "em",
+                "start": 11.979999542236328,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "cima",
+                "start": 12.220000267028809,
+                "end": 12.4399995803833
+            },
+            {
+                "word": "Lá",
+                "start": 13.279999732971191,
+                "end": 13.380000114440918
+            },
+            {
+                "word": "fora",
+                "start": 13.380000114440918,
+                "end": 13.65999984741211
+            },
+            {
+                "word": "terraço",
+                "start": 14.199999809265137,
+                "end": 14.539999961853027
+            },
+            {
+                "word": "varanda",
+                "start": 14.899999618530273,
+                "end": 15.119999885559082
+            },
+            {
+                "word": "e",
+                "start": 15.119999885559082,
+                "end": 15.4399995803833
+            },
+            {
+                "word": "logradouro",
+                "start": 15.4399995803833,
+                "end": 16.299999237060547
+            },
+            {
+                "word": "360",
+                "start": 17.239999771118164,
+                "end": 17.84000015258789
+            },
+            {
+                "word": "mil",
+                "start": 17.84000015258789,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "euros",
+                "start": 18.18000030517578,
+                "end": 18.540000915527344
+            },
+            {
+                "word": "Para",
+                "start": 19.34000015258789,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "visitar",
+                "start": 19.399999618530273,
+                "end": 20
+            },
+            {
+                "word": "fale",
+                "start": 20.5,
+                "end": 20.5
+            },
+            {
+                "word": "com",
+                "start": 20.5,
+                "end": 20.6200008392334
+            },
+            {
+                "word": "o",
+                "start": 20.6200008392334,
+                "end": 20.81999969482422
+            },
+            {
+                "word": "Gonçalo",
+                "start": 20.81999969482422,
+                "end": 21.100000381469727
+            },
+            {
+                "word": "Luís",
+                "start": 21.100000381469727,
+                "end": 21.540000915527344
+            },
+            {
+                "word": "da",
+                "start": 21.84000015258789,
+                "end": 22
+            },
+            {
+                "word": "Remax",
+                "start": 22,
+                "end": 22.479999542236328
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 22.59000015258789,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.2,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Um T3 no coração do Belas Clube de Campo.",
+                        "params": {
+                            "src": "img_1a68679b",
+                            "avatar": "img_e1510d72",
+                            "logo": "img_fe11a605",
+                            "price": "1.060.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Um T3 no coração do Belas Clube de Campo.",
+                            "location": "Queluz e Belas · 152 m² · 3 quartos",
+                            "agentName": "Pedro Pote",
+                            "phone": "+351 968 045 004",
+                            "legal": "RE/MAX Siimgroup · Imagem 3D do projeto"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.2,
+                "end": 5.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Perto de Lisboa · Imagem 3D do projeto",
+                        "params": {
+                            "src": "img_0f4b3d8c",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.9,
+                "end": 8.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "La Réserve · Imagem 3D do projeto",
+                        "params": {
+                            "src": "img_e02fdd42",
+                            "src2": "img_2566d3c9",
+                            "srcs": [
+                                "img_e02fdd42",
+                                "img_2566d3c9",
+                                "img_462c7c17",
+                                "img_aabd3131",
+                                "img_50bdadb4"
+                            ],
+                            "angle": 11,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.3,
+                "end": 10.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "152 m² úteis",
+                        "params": {
+                            "src": "img_f6674832",
+                            "src2": "img_ee500eee",
+                            "src3": "img_3f708594",
+                            "src4": "img_0683bbe2",
+                            "src5": "img_3a5acb2e"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.9,
+                "end": 13,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Três quartos · Imagem 3D do projeto",
+                        "params": {
+                            "src": "img_f3b923aa",
+                            "src2": "img_b2e29919",
+                            "src3": "img_298bca7f",
+                            "src4": "img_8b2116f5",
+                            "srcs": [
+                                "img_f3b923aa",
+                                "img_b2e29919",
+                                "img_298bca7f",
+                                "img_8b2116f5",
+                                "img_a12a2a71",
+                                "img_1c8fda4e"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13,
+                "end": 15.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Muita luz natural",
+                        "params": {
+                            "src": "img_84e33865",
+                            "title": "Muita luz natural",
+                            "items": [
+                                "Terraço amplo",
+                                "Varanda",
+                                "Piscina e jardins"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.2,
+                "end": 17.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Varanda e quatro WC",
+                        "params": {
+                            "src": "img_dbe5ecc7",
+                            "src2": "img_bf5a4a15",
+                            "src3": "img_dbfc6bd0",
+                            "src4": "img_285a0199"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.2,
+                "end": 19.3,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "1.060.000 €",
+                        "params": {
+                            "src": "img_12e495c6",
+                            "blur": 10,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.3,
+                "end": 22.59,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Pedro Pote",
+                        "params": {
+                            "src": "img_e1510d72",
+                            "logo": "img_fe11a605",
+                            "name": "Pedro Pote",
+                            "role": "Consultor imobiliário · RE/MAX Siimgroup",
+                            "buttons": "+351 968 045 004 | Marcar visita",
+                            "phone": "+351 968 045 004"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-120521000-2411-xrthc/clip.mp4",
+    "error": null
+}

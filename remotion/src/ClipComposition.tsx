@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig, Video } from "remotion";
+import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig, Video } from "remotion";
 import { applyTheme, COLORS, ENGRAVE_SHADOW, FONTS, isDark, STYLE, TEXTURE, textForBg, ThemeInput } from "./style-tokens";
 import { frameProps, renderPrimitive } from "./primitives";
 import type { ClipFormat } from "./primitives";
@@ -174,9 +174,11 @@ export const ClipComposition: React.FC<ClipProps> = ({
   audioSrc,
   musicSrc,
   musicVolume,
+  musicIntro,
   animations,
   scenes,
   words,
+  captions,
   background,
   banner,
   videoSrc,
@@ -209,10 +211,21 @@ export const ClipComposition: React.FC<ClipProps> = ({
       {!transparent && (background ? <ClipBackground background={background} fps={effectiveFps} /> : (!resolvedVideo && <BackgroundTexture />))}
 
       {resolvedAudio ? <Audio src={resolvedAudio} /> : null}
-      {resolvedMusic ? <Audio src={resolvedMusic} volume={musicVolume ?? 0.1} loop /> : null}
+      {resolvedMusic ? (
+        <Audio
+          src={resolvedMusic}
+          loop
+          volume={(f) => {
+            const base = musicVolume ?? 0.1;
+            if (!musicIntro || musicIntro.seconds <= 0) return base;
+            const end = musicIntro.seconds * effectiveFps;
+            return interpolate(f, [end - 0.4 * effectiveFps, end + 0.3 * effectiveFps], [musicIntro.volume, base], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          }}
+        />
+      ) : null}
 
       {useScenes ? (
-        <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} transparent={!!transparent} />
+        <SceneTrack scenes={scenes!} words={Array.isArray(words) ? words : []} fps={effectiveFps} videoSrc={resolvedVideo} transparent={!!transparent} captions={captions} />
       ) : (
         (animations ?? []).map((anim, i) => {
           const from = Math.round(anim.start * effectiveFps);

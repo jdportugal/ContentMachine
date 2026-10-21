@@ -153,7 +153,7 @@ class ClipLlmChainTest extends TestCase
      * call belongs on the CLI. Without one (a container) it still tries the API, so
      * the failure surfaces instead of being hidden.
      */
-    public function test_an_oauth_token_routes_to_the_cli_only_when_one_is_installed(): void
+    public function test_an_installed_cli_is_used_over_any_key(): void
     {
         $bin = sys_get_temp_dir().'/fake-claude-'.uniqid().'.sh';
         file_put_contents($bin, "#!/bin/sh\nexit 0\n");
@@ -167,7 +167,7 @@ class ClipLlmChainTest extends TestCase
             $this->assertTrue($this->usesApi(), 'with no CLI it must still try the API so the error is reported');
 
             config(['services.anthropic.key' => 'sk-ant-api03-abc', 'contentmachine.clips.claude_binary' => $bin]);
-            $this->assertTrue($this->usesApi(), 'a real API key always uses the API');
+            $this->assertFalse($this->usesApi(), 'an installed CLI (the subscription) wins over an API key too');
         } finally {
             @unlink($bin);
         }
@@ -200,7 +200,7 @@ class ClipLlmChainTest extends TestCase
      */
     public function test_the_fallback_providers_are_sent_the_configured_output_ceiling(): void
     {
-        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000]);
+        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000, 'contentmachine.clips.openai_max_tokens' => 128000]);
         Http::fake(['api.openai.com/*' => Http::response(['choices' => [['message' => ['content' => 'ok']]]])]);
 
         $this->runner()->run();
@@ -208,10 +208,21 @@ class ClipLlmChainTest extends TestCase
         Http::assertSent(fn ($r) => ($r->data()['max_tokens'] ?? null) === 24000);
     }
 
+    /** gpt-4o rejects a ceiling over 16384 with a 400 — which made the fallback useless. */
+    public function test_openai_is_capped_at_its_own_completion_ceiling(): void
+    {
+        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 32000]);
+        Http::fake(['api.openai.com/*' => Http::response(['choices' => [['message' => ['content' => 'ok']]]])]);
+
+        $this->runner()->run();
+
+        Http::assertSent(fn ($r) => ($r->data()['max_tokens'] ?? null) === 16384);
+    }
+
     /** A cut-off answer must fail as a truncation, naming the knob — not as bad JSON downstream. */
     public function test_a_truncated_gpt_answer_names_the_ceiling(): void
     {
-        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000]);
+        config(['services.openai.key' => 'sk-oai', 'contentmachine.clips.max_tokens' => 24000, 'contentmachine.clips.openai_max_tokens' => 128000]);
         Http::fake(['api.openai.com/*' => Http::response([
             'choices' => [['finish_reason' => 'length', 'message' => ['content' => '{"tsx":"half a comp']]],
         ])]);

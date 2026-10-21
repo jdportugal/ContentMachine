@@ -1,0 +1,1317 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T3 com piscina e vista para o Cabo Girão | 950 mil €",
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t3-camara-de-lobos-quinta-grande/123511213-131",
+            "agent": "Gonçalo Luís",
+            "phone": "+351 965 076 863",
+            "agency": "RE/MAX Elite",
+            "hook": "Vista do Cabo Girão até à Ponta do Sol.",
+            "voiceover": "Vista do Cabo Girão até à Ponta do Sol. Uma moradia na Quinta Grande, em Câmara de Lobos, na Madeira. Sala de estar, sala de jantar e cozinha num espaço aberto de sessenta metros quadrados. Três quartos e quatro casas de banho. A suite principal tem closet. Lá fora, piscina, churrasqueira fechada e relvado, num lote de seiscentos metros. Painéis solares, painéis fotovoltaicos e carregamento para carros elétricos. Novecentos e cinquenta mil euros. Para visitar, fale com o Gonçalo Luís, da RE/MAX Elite.",
+            "scenes": [
+                {
+                    "photo": "vista panorâmica sobre a costa (Cabo Girão / Ponta do Sol)",
+                    "vo": "Vista do Cabo Girão até à Ponta do Sol.",
+                    "caption": "Do Cabo Girão à Ponta do Sol"
+                },
+                {
+                    "photo": "fachada da moradia com piscina",
+                    "vo": "Uma moradia na Quinta Grande, em Câmara de Lobos, na Madeira.",
+                    "caption": "Quinta Grande, Madeira"
+                },
+                {
+                    "photo": "sala de estar e sala de jantar",
+                    "vo": "Sala de estar, sala de jantar e cozinha",
+                    "caption": "Sala e cozinha em open space"
+                },
+                {
+                    "photo": "cozinha integrada no espaço aberto",
+                    "vo": "num espaço aberto de sessenta metros quadrados.",
+                    "caption": "60 m² de espaço aberto"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Três quartos e quatro casas de banho.",
+                    "caption": "Três quartos · Quatro WC"
+                },
+                {
+                    "photo": "suite principal com closet",
+                    "vo": "A suite principal tem closet.",
+                    "caption": "Suite com closet"
+                },
+                {
+                    "photo": "piscina e relvado",
+                    "vo": "Lá fora, piscina, churrasqueira fechada e relvado,",
+                    "caption": "Piscina e relvado"
+                },
+                {
+                    "photo": "churrasqueira fechada / vista geral do lote",
+                    "vo": "num lote de seiscentos metros.",
+                    "caption": "Lote de 600 m²"
+                },
+                {
+                    "photo": "painéis solares no telhado",
+                    "vo": "Painéis solares, painéis fotovoltaicos e carregamento para carros elétricos.",
+                    "caption": "Energia solar"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Novecentos e cinquenta mil euros. Para visitar, fale com o Gonçalo Luís, da RE/MAX Elite.",
+                    "caption": "950.000 € · Gonçalo Luís · RE/MAX Elite"
+                }
+            ],
+            "flags": [
+                "Garagem: o texto refere 'garagem espaçosa para 4 carros', mas os detalhes dizem 'Garagem: Não' (e 'Estacionamento: Sim'). Deixei a garagem e o estacionamento de fora. Confirmar com o consultor.",
+                "Carregamento de carros elétricos: aparece só nos detalhes ('Sim'), não no texto. Incluí no guião. Confirmar antes de publicar."
+            ],
+            "message": "Boa tarde Sr. Gonçalo Luís,\nO meu nome é João Ferreira.\n\nVi a moradia na Quinta Grande que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?"
+        },
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Gonçalo Luís - and phone number - +351 965 076 863. Agency: RE/MAX Elite.\nThe agent's photo is Gonçalo Luís.png; the agency logo is logo.png.\nOn-screen hook for the first frame: «Vista do Cabo Girão até à Ponta do Sol.».\n\nSuggested scenes (photo → on-screen caption):\n- vista panorâmica sobre a costa (Cabo Girão / Ponta do Sol) → «Do Cabo Girão à Ponta do Sol»\n- fachada da moradia com piscina → «Quinta Grande, Madeira»\n- sala de estar e sala de jantar → «Sala e cozinha em open space»\n- cozinha integrada no espaço aberto → «60 m² de espaço aberto»\n- quarto → «Três quartos · Quatro WC»\n- suite principal com closet → «Suite com closet»\n- piscina e relvado → «Piscina e relvado»\n- churrasqueira fechada / vista geral do lote → «Lote de 600 m²»\n- painéis solares no telhado → «Energia solar»\n- end card → «950.000 € · Gonçalo Luís · RE/MAX Elite»\n\nHere are the house details:\n\nMoradia T3 à venda em Quinta Grande, Câmara de Lobos\nPreço\n950 000 €\nLocalização\nQuinta Grande, Câmara de Lobos, Ilha da Madeira\nReferência\n123511213-131\nÁrea Bruta m²\n205\nÁrea Útil m²\n199\nÁrea Total do Lote m²\n600\nQuartos\n3\nWC/Casas de banho\n4\nAno de Construção\n2010\nEstacionamento\nSim\nGaragem\nNão\nElevador\nNão\nCarregamento de Carros Elétricos\nSim\n\nDescrição\n<p><strong>Bem-vindo &agrave; sua moradia&nbsp;de sonho!</strong><br /><br />Esta magn&iacute;fica Moradia T3 de Luxo, na Quinta Grande, oferece uma experi&ecirc;ncia de vida excecional, com detalhes cuidadosamente pensados para proporcionar o m&aacute;ximo de conforto e sofistica&ccedil;&atilde;o.</p>\n<p>Localizada num lote espa&ccedil;oso de 600 m2, esta propriedade proporciona uma vista panor&acirc;mica espetacular que se estende desde o imponente Cabo Gir&atilde;o at&eacute; &agrave; encantadora Ponta do Sol. Imagine acordar todas as manh&atilde;s com uma paisagem deslumbrante &agrave; sua&nbsp;janela.</p>\n<p>O interior da moradia destaca-se pelo design contempor&acirc;neo, com uma sala de estar, sala de jantar e cozinha em \"open space\" com generosos 60 m2, proporcionando um ambiente acolhedor e luminoso. A su&iacute;te principal &eacute; um verdadeiro ref&uacute;gio, incluindo um closet espa&ccedil;oso, oferecendo privacidade e comodidade.</p>\n<p>A &aacute;rea exterior &eacute; um verdadeiro para&iacute;so, com uma piscina refrescante para momentos de lazer, uma churrasqueira fechada para refei&ccedil;&otilde;es ao ar livre memor&aacute;veis e &aacute;reas relvadas perfeitamente cuidadas para desfrutar do clima ameno da Madeira.</p>\n<p>Esta moradia foi concebida com os melhores materiais, proporcionando acabamentos de alta qualidade e durabilidade. A aten&ccedil;&atilde;o aos detalhes &eacute; evidente em cada canto, com materiais nobres que conferem um toque de eleg&acirc;ncia a cada espa&ccedil;o.</p>\n<p>A propriedade tamb&eacute;m inclui uma garagem espa&ccedil;osa para 4 carros, assegurando praticidade e seguran&ccedil;a para a sua fam&iacute;lia. Al&eacute;m disso, a moradia incorpora tecnologia sustent&aacute;vel, com pain&eacute;is solares para aquecimento de &aacute;gua e pain&eacute;is fotovoltaicos, refor&ccedil;ando o compromisso com a efici&ecirc;ncia energ&eacute;tica e o respeito pelo ambiente.</p>\n<p>Esta &eacute; a oportunidade de adquirir n&atilde;o apenas uma casa, mas um estilo de vida exclusivo. Agende a sua visita e deixe-se encantar por esta moradia de luxo deslumbrante. A sua casa de sonho espera por si!</p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia na Quinta Grande, Câmara de Lobos (Madeira), com vista do Cabo Girão à Ponta do Sol",
+            "summary": "O Cabo Girão, em Câmara de Lobos, tem cerca de 580 m de altura e é apontado como o promontório mais alto da Europa. Na Madeira, o preço mediano das casas vendidas manteve-se acima da média nacional no 4.º trimestre de 2025.",
+            "timeline": [
+                {
+                    "label": "Abre o skywalk de vidro do Cabo Girão",
+                    "sublabel": "2012"
+                },
+                {
+                    "label": "Preço mediano na Madeira cai 8,3% em termos homólogos",
+                    "sublabel": "4.º trim. 2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Altura do Cabo Girão",
+                    "value": 580,
+                    "unit": "m"
+                },
+                {
+                    "label": "Preço mediano da habitação na Madeira (INE)",
+                    "value": 2655,
+                    "unit": "€/m² (4.º trim. 2025)"
+                },
+                {
+                    "label": "Variação homóloga do preço na Madeira",
+                    "value": -8.3,
+                    "unit": "% (4.º trim. 2025)"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE)",
+                    "value": 2076,
+                    "unit": "€/m² (2025)"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (INE)",
+                    "value": 2337,
+                    "unit": "€/m² (1.º trim. 2026)"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Preço mediano por m² (INE)",
+                    "left": {
+                        "title": "Madeira",
+                        "points": [
+                            "2655 €/m² no 4.º trim. 2025",
+                            "-8,3% face ao ano anterior"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2076 €/m² em 2025",
+                            "2337 €/m² no 1.º trim. 2026"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "O Cabo Girão é considerado o promontório mais alto da Europa, com cerca de 580 m",
+                "O skywalk de vidro do Cabo Girão abriu em 2012 e a entrada é gratuita",
+                "A Quinta Grande pertence ao concelho de Câmara de Lobos, na costa sul da Madeira",
+                "As casas na Madeira vendem-se acima da média nacional por m²"
+            ],
+            "sources": [
+                "https://visitmadeira.com/pt/o-que-fazer/exploradores-da-natureza/miradouros/miradouro-do-cabo-girao/",
+                "https://dicadeportugal.com/?p=300",
+                "https://www.atlasobscura.com/places/cabo-girao-skywalk",
+                "https://generationvoyage.fr/attraction/miradouro-cabo-girao-madere/",
+                "https://www.dnoticias.pt/2026/4/24/489529-madeira-foi-uma-das-duas-em-26-regioes-onde-o-preco-da-habitacao-caiu/",
+                "https://www.timesofmadeira.com/madeira-housing-prices-fall-83-in-late-2025-despite-national-rise",
+                "https://www.idealista.pt/news/node/75156",
+                "https://executivedigest.sapo.pt/?p=753650",
+                "https://www.dnoticias.pt/2026/7/17/499437-numero-de-casas-vendidas-na-madeira-cai-24-no-1o-trimestre/",
+                "https://www.rtp.pt/noticias/economia/dados-ine-madeira-e-guimaraes-com-precos-das-casas-mais-elevados_n1754046"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T3 com piscina e vista para o Cabo Girão | 950 mil €",
+            "description": "Moradia T3 na Quinta Grande, Câmara de Lobos, com vista do Cabo Girão até à Ponta do Sol. Tem sala e cozinha em open space com 60 m², suíte com closet, quatro casas de banho e, no exterior, piscina, churrasqueira fechada e relvado num lote de 600 m². Inclui painéis solares e fotovoltaicos e carregamento para carros elétricos. Por 950 mil euros; para visitar, fale com o Gonçalo Luís da RE/MAX Elite.",
+            "tags": [
+                "Madeira",
+                "Câmara de Lobos",
+                "Quinta Grande",
+                "moradia à venda",
+                "imobiliário Madeira",
+                "casa com piscina",
+                "Cabo Girão",
+                "RE/MAX Elite"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-123511213-131-mjtrp",
+    "created_at": "2026-10-12T12:07:11+00:00",
+    "updated_at": "2026-10-12T12:22:48+00:00",
+    "source_path": "clips/uploads/Lc9ojuZgNbkvQAFHiQtnxrMVZ6EVqCzAWITvXuFR.mp3",
+    "images": [
+        {
+            "id": "img_1b2b1936",
+            "path": "clips/uploads/ToK9qVgGxD3zTkIhUM7qnOe2bmFgb3O3vHQqlU5F.jpg",
+            "description": "Piscina exterior com borda sobre o mar, deck em pedra clara e vista para a costa e vilas.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9e4fae9c",
+            "path": "clips/uploads/Pnmlr3HMB35KzO1YliBBnuMjSN9TtYc3XcCZmZZu.jpg",
+            "description": "Fachada frontal moderna branca e cinza, varanda no piso superior, terraço com sofás e garagem em pedra.",
+            "name": "81056bf2-40b4-441a-99ad-d71b7ef382dc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7a19d593",
+            "path": "clips/uploads/ZIDzapJRnwuVSxehiGIfRQJf5LfuxkP6mXgMWXua.jpg",
+            "description": "Fachada lateral moderna com muro de pedra basáltica, garagem, terraço com sofás e rampa de acesso.",
+            "name": "64bf33b5-0fe4-46a6-8d7b-84fead039bdd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f6e6ce69",
+            "path": "clips/uploads/jyXozOYX035Ve7IFDw7iijjGM3b22siKJkKkdYlG.jpg",
+            "description": "Exterior junto à entrada: porta de madeira, escadas, relvado, painéis solares no telhado e mar ao fundo.",
+            "name": "8db64260-503d-4ffe-baaf-57385f6a03d7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_93673b1e",
+            "path": "clips/uploads/adl26TGrIeqVv0iVzw6KbqJaTpIkyOuOF6VI5gzY.jpg",
+            "description": "Fachada traseira com painéis fotovoltaicos no telhado, jardim relvado com palmeira e mar à direita.",
+            "name": "a956bebb-5546-4db2-b0b2-cda9db07365b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2a2ed4b0",
+            "path": "clips/uploads/vRYHJ6JJPLJ7SDVpYpkCUAcrYKfUArcfUrBB1y27.jpg",
+            "description": "Vista aérea da moradia com painéis solares, piscina, ciprestes e costa com oceano azul ao fundo.",
+            "name": "c10f05fa-4625-456f-b4b3-454843375e33.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f174eb9d",
+            "path": "clips/uploads/UkPE01i6DuKGyRR0yMwpohMd5QIQAgST6XKTSydj.jpg",
+            "description": "Vista aérea da entrada com porta de madeira, painéis fotovoltaicos e solar térmico no telhado, oceano atrás.",
+            "name": "77be0aa0-d0b4-496f-8f93-c19633e25616.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_cd6d13a6",
+            "path": "clips/uploads/wv9mT0sixQMx9Hur2tkbAtEkuq0At7jQSMrwYPEq.jpg",
+            "description": "Fachada moderna com terraço amplo, sala visível pelas portas de vidro, escadas e pérgola de madeira.",
+            "name": "80415aad-803f-4915-b93b-43c1c8b66a32.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f52bb0c7",
+            "path": "clips/uploads/6WhjqOnGccWG3aDf9RXXkbSxHD7k5ErOR2PbP3yp.jpg",
+            "description": "Planta aérea do lote delimitado a vermelho: moradia, painéis solares, pérgola e piscina; balão RE/MAX.",
+            "name": "78070efb-36e4-4931-858d-9cb44d3552bf.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_17dec21b",
+            "path": "clips/uploads/o5kNarufU6LwwHK70glrXBvYyVbo48sRnIPH9eK3.jpg",
+            "description": "Vista aérea da encosta da Quinta Grande com a moradia assinalada pelo balão RE/MAX entre casas e terrenos agrícolas.",
+            "name": "a0487f83-3471-44c9-b786-89778c745c02.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_82493b2b",
+            "path": "clips/uploads/VQCdNdTuWh49fYobqBcLJnBdTQ8NKQeZxHRFfCRo.jpg",
+            "description": "Vista aérea de drone da moradia moderna com piscina, painéis solares e balão RE/MAX, rodeada de socalcos verdes.",
+            "name": "9e99b3be-a425-4870-9c26-9ca805b64c49.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_3c1d5d9f",
+            "path": "clips/uploads/1EI5LE6mlR9wp8G7zlQAW3sMhHW9zRB1CIgRwyHc.jpg",
+            "description": "Sala de estar com sofá de canto em pele, porta envidraçada aberta para varanda com vista mar.",
+            "name": "f0bfacbb-2456-4613-9b92-01d03eea7fed.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ac4d4b1b",
+            "path": "clips/uploads/l4AHRmyFMwkYniulow5t4IIkuNBzzHBwIgnhk5lo.jpg",
+            "description": "Sala de jantar com mesa escura para seis, espelho grande, aparador, flores e estojo de guitarra.",
+            "name": "e6570eae-df96-42ed-a75a-e8ad3065154c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_55bf4636",
+            "path": "clips/uploads/udXtpJiIhZYSjd7PUTmi93DbK1CsOGExLuraHZfB.jpg",
+            "description": "Cozinha com armários em madeira, ilha com bancos altos, exaustor em inox e frigorífico americano.",
+            "name": "e4afba86-2655-4662-bf75-b9636f66de23.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_61e61cff",
+            "path": "clips/uploads/TGrI0jqLcWuUvrfoYbA0AnN1WJOdSEzluyOU3fbF.jpg",
+            "description": "Cozinha em open space com ilha de quatro bancos altos, armários em madeira e chão preto brilhante.",
+            "name": "5e542501-ef69-4b5d-a2ef-5a5c65e5250e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6c4aa61d",
+            "path": "clips/uploads/CV0xeNizvOUW2gyZ8uCIfbpqBhWgsTPjEBbpEd1L.jpg",
+            "description": "Sala de estar e jantar em open space, cortinas abertas para varanda com vista ampla sobre o oceano.",
+            "name": "20512305-5c2f-46b8-b5e7-66f10e932e72.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_81240d85",
+            "path": "clips/uploads/DCpppAeleKP5ai7c3Pe4kUZVR3YlQrgpTGvsLvBX.jpg",
+            "description": "Sala de estar com lareira embutida, televisão na parede, sofá de canto cinzento e cortinas azuis.",
+            "name": "5f462928-f0ef-421a-ac00-626292a89ab9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_de553696",
+            "path": "clips/uploads/p8R7RbCXwEahmeDULfQOB33q7k05XDblA94eJWuk.jpg",
+            "description": "Open space visto da mesa de jantar: candeeiro ondulado, sofá, lareira, TV e portas envidraçadas para varanda.",
+            "name": "ccf67dfd-ac33-4ce1-8263-80c461c6d1a5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8921a5c7",
+            "path": "clips/uploads/pJOAYxwqBwNzPjpsrjTM5Gf9xbz6PRCFO4o7vx2R.jpg",
+            "description": "Bancada da cozinha com lava-loiça duplo em inox, fruteira cheia e sala de jantar ao fundo.",
+            "name": "eccf8522-4856-469b-ba5d-1f3a589f7b42.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ea78cbdc",
+            "path": "clips/uploads/dohdFXXECxPYeRjmtzz40jQPMpufjL4cK0Wids83.jpg",
+            "description": "Open space de 60 m² com sala de estar, sala de jantar e cozinha com ilha integradas.",
+            "name": "6869a935-3f7b-433d-bd23-d170b469f692.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bc2abd3c",
+            "path": "clips/uploads/FVqAYHllNYpySfXAChp3KdtdxpFi8PmTSDzU2lGn.jpg",
+            "description": "Casa de banho de serviço com sanita separada, lavatório branco sobre bancada escura e parede em azulejo efeito ferrugem.",
+            "name": "3620f671-0222-478a-a84f-f95311de7c37.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a504556d",
+            "path": "clips/uploads/tBJydLbxvu3b5MICkQu6dOYqwW9TBHBBRupv8OOR.jpg",
+            "description": "Escadaria interior em madeira com estrutura metálica preta e corrimão de madeira; estante com livros ao fundo.",
+            "name": "76763cb2-10cf-4feb-889b-ce7c27342bc5.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b6c3e2ff",
+            "path": "clips/uploads/cx0i4ytOuVrLeMLvCZUgLgzOGRdHWZWZop3lLffi.jpg",
+            "description": "Patamar do piso superior com soalho de madeira, estante de livros, porta de madeira e guarda metálica da escada.",
+            "name": "0f903565-7532-40d6-ab27-b9a4122378fc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_95694f84",
+            "path": "clips/uploads/dECi3gTiprZAc18nhFL1t0FsDPgDDl0XZ0163XGu.jpg",
+            "description": "Vista de quarto através de porta envidraçada para varanda, com vista para o mar e a encosta.",
+            "name": "11edb951-0305-45a5-83a6-4c0c3674c602.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d774cce7",
+            "path": "clips/uploads/BvHvBmg1cMt6nD7NQ1iFv4HeWYbKNuKp17V1QRHL.jpg",
+            "description": "Suíte principal com cama de casal, poltrona, porta de vidro para varanda; acesso visível à casa de banho e ao closet.",
+            "name": "8e5c2d79-4d7d-4c95-8520-3cd3bc17e342.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_79fba598",
+            "path": "clips/uploads/kXqj75f4LfVfp3z5YeJayRlVQ6YwQkyQPgORwdfO.jpg",
+            "description": "Suíte principal noutro ângulo: cama de casal, poltrona, soalho de madeira e janelas amplas para varanda com vista mar.",
+            "name": "4b8c8958-26c3-406e-91d3-fec0a307ccac.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_45c4366a",
+            "path": "clips/uploads/4jLtfOe2YMu2w2ReL4FatPIBlAr80M7k6DgfjNyI.jpg",
+            "description": "Varanda comprida com vista para o mar e a costa; piscina a transbordar e casas de telhado laranja abaixo.",
+            "name": "b26ec708-506d-4959-b71b-2e4a8eceadc9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ccec0e1b",
+            "path": "clips/uploads/6cXxAHgTBcZanCRiYNr8lKrfjelAc94GErvFv7LU.jpg",
+            "description": "Closet da suíte principal, em madeira, com roupa pendurada, prateleiras, gavetas e sapatos.",
+            "name": "88007584-36d3-4b95-b2f9-0c6ea1e3b939.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f1e490cd",
+            "path": "clips/uploads/XaRFawOuLEzdOWrwlu68UeCbGvVBhKsInzcq6Ap4.jpg",
+            "description": "Casa de banho com azulejo cinzento-escuro, sanita, lavatório branco, duche com vidro e janela fosca.",
+            "name": "5d3a436c-493c-44c2-a8cc-91bc0a35fcbd.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_27a05bba",
+            "path": "clips/uploads/bYQHz0el4IcDRGNTmTNO6v9FnxTstZ6BrESlVeaB.jpg",
+            "description": "Quarto de criança com cama de solteiro, roupeiro de madeira, peluches em prateleiras e cortinados bege.",
+            "name": "827e2421-9e5f-45e1-a6ce-fc1281873c53.jpg",
+            "transparent": false,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_283bb705",
+            "path": "clips/uploads/1JHP6UJc55bCtrdKlIhO3PdzmFo378Av2se1Oqz1.jpg",
+            "description": "Quarto infantil com cama, papel de parede às riscas, prateleiras com peluches e frase do Peter Pan na parede.",
+            "name": "90880e79-a598-42f8-bef9-938571a58f86.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_61478906",
+            "path": "clips/uploads/5ooJl5AaF7ii5WF8f2ctU0PXqL7oBo1PMtlHRnsS.jpg",
+            "description": "Quarto com cama rosa, secretária e cómoda em madeira, urso de peluche e porta para varanda.",
+            "name": "136c3afa-868b-4375-9669-184d8a70cd1e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6e1754b6",
+            "path": "clips/uploads/wllxjfgg4FlICcjwxM0dtjyJrQaUs8QTrgxsilpT.jpg",
+            "description": "Casa de banho com lavatório largo, espelho grande, sanita, bidé e banheira ao fundo junto à janela.",
+            "name": "1df6115f-b20e-417f-8f3e-6ebd8d35902f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b443d228",
+            "path": "clips/uploads/iXNXu4D9660iA30WmJF4tDKFY70rUnD5JJXZdc00.jpg",
+            "description": "Corredor com chão de madeira, portas de madeira para os quartos e porta de entrada ao fundo.",
+            "name": "7c64e654-701e-4727-b6c4-d01e044f0ee8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_da21909e",
+            "path": "clips/uploads/UcpFtY6OoecnKNbxecVNXLzVJscn30pK06Hszk10.jpg",
+            "description": "Churrasqueira fechada com grelhador em pedra, lenha arrumada por baixo, bancadas e janela de blocos de vidro.",
+            "name": "c4229be5-eef6-4039-a8a2-50f3725f8fe0.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3571a5f8",
+            "path": "clips/uploads/0UgodS4ZJgKMD4uIVnhpJ33bFYbdZYqdmW2ARGF0.jpg",
+            "description": "Zona de churrasqueira fechada com mesa de madeira, frigorífico, lava-loiça duplo e armários de madeira.",
+            "name": "62fc5469-bce9-4a76-bc41-a87199a992bf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_835d98db",
+            "path": "clips/uploads/mrK4zhrpGRqkHuYHqlx0ldsbOaYjto5ic19App1h.jpg",
+            "description": "Garagem ampla com portão seccionado, chão em mosaico cinzento, armário de madeira e zona de brincar.",
+            "name": "1a83b567-8640-4622-99ba-846dbead3ded.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_30854e0d",
+            "path": "clips/uploads/BD3o6q0nc9r1HsU7k5nEzKKl0RI3l93nVuxEeqet.png",
+            "description": "Retrato do consultor Gonçalo Luís, da RE/MAX Elite.",
+            "name": "Gonçalo Luís.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_a3cb49d1",
+            "path": "clips/uploads/moQYYDWHrOaCHhgBISodrjjsxmIwlzp0uNk9gjOM.png",
+            "description": "Logótipo da RE/MAX Elite.",
+            "name": "logo.png",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/Lc9ojuZgNbkvQAFHiQtnxrMVZ6EVqCzAWITvXuFR.mp3",
+    "transcript": {
+        "duration": 36.880001068115234,
+        "text": "Vista do Cabo Girão até à ponta do sol. Uma moradia na Quinta Grande, em Câmara de Lobos, na Madeira. Sala de estar, sala de jantar e cozinha num espaço aberto de 60 m². Três quartos e quatro casas de banho. A suíte principal tem closet. Lá fora, piscina, churrasqueira fechada e relevado num lote de 600 m. Painéis solares, painéis fotovoltaicos e carregamento para carros elétricos. 950 mil euros. Para visitar, fale com o Gonçalo Luís de Remax Elite.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Vista",
+                "start": 0,
+                "end": 0.4000000059604645
+            },
+            {
+                "word": "do",
+                "start": 0.4000000059604645,
+                "end": 0.6200000047683716
+            },
+            {
+                "word": "Cabo",
+                "start": 0.6200000047683716,
+                "end": 0.8999999761581421
+            },
+            {
+                "word": "Girão",
+                "start": 0.8999999761581421,
+                "end": 1.2599999904632568
+            },
+            {
+                "word": "até",
+                "start": 1.2599999904632568,
+                "end": 1.7599999904632568
+            },
+            {
+                "word": "à",
+                "start": 1.7599999904632568,
+                "end": 2.119999885559082
+            },
+            {
+                "word": "ponta",
+                "start": 2.119999885559082,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "do",
+                "start": 2.259999990463257,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "sol",
+                "start": 2.740000009536743,
+                "end": 2.740000009536743
+            },
+            {
+                "word": "Uma",
+                "start": 3.3399999141693115,
+                "end": 3.6600000858306885
+            },
+            {
+                "word": "moradia",
+                "start": 3.6600000858306885,
+                "end": 4.039999961853027
+            },
+            {
+                "word": "na",
+                "start": 4.039999961853027,
+                "end": 4.320000171661377
+            },
+            {
+                "word": "Quinta",
+                "start": 4.320000171661377,
+                "end": 4.579999923706055
+            },
+            {
+                "word": "Grande",
+                "start": 4.579999923706055,
+                "end": 4.940000057220459
+            },
+            {
+                "word": "em",
+                "start": 5.21999979019165,
+                "end": 5.400000095367432
+            },
+            {
+                "word": "Câmara",
+                "start": 5.400000095367432,
+                "end": 5.559999942779541
+            },
+            {
+                "word": "de",
+                "start": 5.559999942779541,
+                "end": 5.960000038146973
+            },
+            {
+                "word": "Lobos",
+                "start": 5.960000038146973,
+                "end": 6.039999961853027
+            },
+            {
+                "word": "na",
+                "start": 6.119999885559082,
+                "end": 6.380000114440918
+            },
+            {
+                "word": "Madeira",
+                "start": 6.380000114440918,
+                "end": 6.800000190734863
+            },
+            {
+                "word": "Sala",
+                "start": 7.639999866485596,
+                "end": 7.639999866485596
+            },
+            {
+                "word": "de",
+                "start": 7.639999866485596,
+                "end": 7.960000038146973
+            },
+            {
+                "word": "estar",
+                "start": 7.960000038146973,
+                "end": 8.15999984741211
+            },
+            {
+                "word": "sala",
+                "start": 8.760000228881836,
+                "end": 8.800000190734863
+            },
+            {
+                "word": "de",
+                "start": 8.800000190734863,
+                "end": 9.359999656677246
+            },
+            {
+                "word": "jantar",
+                "start": 9.359999656677246,
+                "end": 9.399999618530273
+            },
+            {
+                "word": "e",
+                "start": 9.399999618530273,
+                "end": 9.9399995803833
+            },
+            {
+                "word": "cozinha",
+                "start": 9.9399995803833,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "num",
+                "start": 10.380000114440918,
+                "end": 10.960000038146973
+            },
+            {
+                "word": "espaço",
+                "start": 10.960000038146973,
+                "end": 11.279999732971191
+            },
+            {
+                "word": "aberto",
+                "start": 11.279999732971191,
+                "end": 11.640000343322754
+            },
+            {
+                "word": "de",
+                "start": 11.640000343322754,
+                "end": 11.899999618530273
+            },
+            {
+                "word": "60",
+                "start": 11.899999618530273,
+                "end": 12.399999618530273
+            },
+            {
+                "word": "m²",
+                "start": 12.399999618530273,
+                "end": 13.199999809265137
+            },
+            {
+                "word": "Três",
+                "start": 14,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "quartos",
+                "start": 14.020000457763672,
+                "end": 14.479999542236328
+            },
+            {
+                "word": "e",
+                "start": 14.479999542236328,
+                "end": 14.859999656677246
+            },
+            {
+                "word": "quatro",
+                "start": 14.859999656677246,
+                "end": 15.15999984741211
+            },
+            {
+                "word": "casas",
+                "start": 15.15999984741211,
+                "end": 15.460000038146973
+            },
+            {
+                "word": "de",
+                "start": 15.460000038146973,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "banho",
+                "start": 15.84000015258789,
+                "end": 15.84000015258789
+            },
+            {
+                "word": "A",
+                "start": 16.3799991607666,
+                "end": 16.559999465942383
+            },
+            {
+                "word": "suíte",
+                "start": 16.559999465942383,
+                "end": 16.780000686645508
+            },
+            {
+                "word": "principal",
+                "start": 16.780000686645508,
+                "end": 17.420000076293945
+            },
+            {
+                "word": "tem",
+                "start": 17.420000076293945,
+                "end": 17.899999618530273
+            },
+            {
+                "word": "closet",
+                "start": 17.899999618530273,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "Lá",
+                "start": 19.15999984741211,
+                "end": 19.239999771118164
+            },
+            {
+                "word": "fora",
+                "start": 19.239999771118164,
+                "end": 19.579999923706055
+            },
+            {
+                "word": "piscina",
+                "start": 20.139999389648438,
+                "end": 20.399999618530273
+            },
+            {
+                "word": "churrasqueira",
+                "start": 20.959999084472656,
+                "end": 21.280000686645508
+            },
+            {
+                "word": "fechada",
+                "start": 21.280000686645508,
+                "end": 21.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 21.81999969482422,
+                "end": 22.200000762939453
+            },
+            {
+                "word": "relevado",
+                "start": 22.200000762939453,
+                "end": 22.739999771118164
+            },
+            {
+                "word": "num",
+                "start": 22.739999771118164,
+                "end": 23.420000076293945
+            },
+            {
+                "word": "lote",
+                "start": 23.420000076293945,
+                "end": 23.739999771118164
+            },
+            {
+                "word": "de",
+                "start": 23.739999771118164,
+                "end": 23.959999084472656
+            },
+            {
+                "word": "600",
+                "start": 23.959999084472656,
+                "end": 24.360000610351562
+            },
+            {
+                "word": "m",
+                "start": 24.360000610351562,
+                "end": 24.600000381469727
+            },
+            {
+                "word": "Painéis",
+                "start": 25.399999618530273,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "solares",
+                "start": 25.860000610351562,
+                "end": 26.399999618530273
+            },
+            {
+                "word": "painéis",
+                "start": 26.81999969482422,
+                "end": 27.1200008392334
+            },
+            {
+                "word": "fotovoltaicos",
+                "start": 27.1200008392334,
+                "end": 28.040000915527344
+            },
+            {
+                "word": "e",
+                "start": 28.040000915527344,
+                "end": 28.559999465942383
+            },
+            {
+                "word": "carregamento",
+                "start": 28.559999465942383,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "para",
+                "start": 29.100000381469727,
+                "end": 29.3799991607666
+            },
+            {
+                "word": "carros",
+                "start": 29.3799991607666,
+                "end": 29.6200008392334
+            },
+            {
+                "word": "elétricos",
+                "start": 29.6200008392334,
+                "end": 30.280000686645508
+            },
+            {
+                "word": "950",
+                "start": 30.979999542236328,
+                "end": 31.84000015258789
+            },
+            {
+                "word": "mil",
+                "start": 31.84000015258789,
+                "end": 32.119998931884766
+            },
+            {
+                "word": "euros",
+                "start": 32.119998931884766,
+                "end": 32.47999954223633
+            },
+            {
+                "word": "Para",
+                "start": 33.060001373291016,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "visitar",
+                "start": 33.119998931884766,
+                "end": 34.08000183105469
+            },
+            {
+                "word": "fale",
+                "start": 34.41999816894531,
+                "end": 34.41999816894531
+            },
+            {
+                "word": "com",
+                "start": 34.41999816894531,
+                "end": 34.599998474121094
+            },
+            {
+                "word": "o",
+                "start": 34.599998474121094,
+                "end": 34.68000030517578
+            },
+            {
+                "word": "Gonçalo",
+                "start": 34.68000030517578,
+                "end": 35.08000183105469
+            },
+            {
+                "word": "Luís",
+                "start": 35.08000183105469,
+                "end": 35.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 35.540000915527344,
+                "end": 35.97999954223633
+            },
+            {
+                "word": "Remax",
+                "start": 35.97999954223633,
+                "end": 36.439998626708984
+            },
+            {
+                "word": "Elite",
+                "start": 36.439998626708984,
+                "end": 36.79999923706055
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 36.880001068115234,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.3999999999999986,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Vista do Cabo Girão até à Ponta do Sol.",
+                        "params": {
+                            "src": "img_1b2b1936",
+                            "avatar": "img_30854e0d",
+                            "logo": "img_a3cb49d1",
+                            "price": "950.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Vista do Cabo Girão até à Ponta do Sol.",
+                            "location": "Quinta Grande · Câmara de Lobos",
+                            "agentName": "Gonçalo Luís",
+                            "phone": "+351 965 076 863",
+                            "legal": "RE/MAX Elite"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.3999999999999986,
+                "end": 5.35,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "Quinta Grande, Madeira",
+                        "params": {
+                            "src": "img_17dec21b",
+                            "src2": "img_9e4fae9c",
+                            "srcs": [
+                                "img_17dec21b",
+                                "img_9e4fae9c",
+                                "img_7a19d593",
+                                "img_cd6d13a6",
+                                "img_82493b2b"
+                            ],
+                            "angle": 8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.35,
+                "end": 7.4,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_79fba598",
+                            "revealSeconds": "0.4",
+                            "zoom": "1.15"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 7.4,
+                "end": 10.2,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Sala e cozinha em open space",
+                        "params": {
+                            "src": "img_6c4aa61d",
+                            "src2": "img_3c1d5d9f",
+                            "src3": "img_81240d85",
+                            "src4": "img_ac4d4b1b",
+                            "src5": "img_de553696"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.2,
+                "end": 12,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "60 m² de espaço aberto",
+                        "params": {
+                            "src": "img_ea78cbdc",
+                            "src2": "img_61e61cff",
+                            "src3": "img_55bf4636",
+                            "src4": "img_8921a5c7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12,
+                "end": 13.8,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_ccec0e1b",
+                            "zoom": "1.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.8,
+                "end": 16.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "Três quartos · Quatro WC",
+                        "params": {
+                            "src": "img_27a05bba",
+                            "src2": "img_283bb705",
+                            "src3": "img_61478906",
+                            "src4": "img_6e1754b6",
+                            "srcs": [
+                                "img_27a05bba",
+                                "img_283bb705",
+                                "img_61478906",
+                                "img_6e1754b6",
+                                "img_95694f84",
+                                "img_f1e490cd",
+                                "img_bc2abd3c",
+                                "img_b443d228"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 16.2,
+                "end": 18.9,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Suite com closet",
+                        "params": {
+                            "src": "img_d774cce7",
+                            "title": "Suite com closet",
+                            "items": [
+                                "Cama de casal",
+                                "Closet espaçoso",
+                                "Varanda com vista mar"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.9,
+                "end": 21,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "Piscina e relvado",
+                        "params": {
+                            "src": "img_45c4366a",
+                            "zoom": 1.35
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21,
+                "end": 23.2,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "Churrasqueira fechada",
+                        "params": {
+                            "src": "img_da21909e",
+                            "revealSeconds": 0.5,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.2,
+                "end": 25.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Lote de 600 m²",
+                        "params": {
+                            "src": "img_f52bb0c7",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.2,
+                "end": 28,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Energia solar",
+                        "params": {
+                            "src": "img_f174eb9d",
+                            "src2": "img_93673b1e",
+                            "src3": "img_f6e6ce69",
+                            "src4": "img_2a2ed4b0",
+                            "srcs": [
+                                "img_f174eb9d",
+                                "img_93673b1e",
+                                "img_f6e6ce69",
+                                "img_2a2ed4b0",
+                                "img_3571a5f8",
+                                "img_835d98db"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28,
+                "end": 30.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "CARREGAMENTO ELÉTRICO",
+                        "params": {
+                            "src": "img_b6c3e2ff",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.8,
+                "end": 33.84,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Gonçalo Luís",
+                        "params": {
+                            "src": "img_30854e0d",
+                            "logo": "img_a3cb49d1",
+                            "name": "Gonçalo Luís",
+                            "role": "Consultor imobiliário · RE/MAX Elite",
+                            "buttons": "+351 965 076 863 | Marque a sua visita",
+                            "phone": "+351 965 076 863"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.84,
+                "end": 36.88,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Gonçalo Luís",
+                        "params": {
+                            "src": "img_30854e0d",
+                            "name": "Gonçalo Luís",
+                            "role": "Consultor imobiliário · RE/MAX Elite",
+                            "logo": "img_a3cb49d1",
+                            "buttons": "+351 965 076 863 | Marque a sua visita",
+                            "phone": "+351 965 076 863"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-123511213-131-mjtrp/clip.mp4",
+    "error": null
+}

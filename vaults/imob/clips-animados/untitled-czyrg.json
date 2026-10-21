@@ -1,0 +1,998 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "9 hectares a 1 hora de Lisboa: quinta com 2 casas em Santarém",
+    "source_text": null,
+    "source_path": "clips/uploads/axezNFdau4HRPJcS1xTgi0dn6joNeW7l6N2GoQWK.mp3",
+    "images": [
+        {
+            "id": "img_5893557b",
+            "path": "clips/uploads/wMaYu4kMwa42QQmbcX2txTv45AROu4AFFhnIihl4.webp",
+            "description": "Vista aérea com drone: moradia amarela entre campos de feno ceifado, olival à esquerda e aldeia ao fundo.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1d9d7066",
+            "path": "clips/uploads/Ni8O9ghGv8JtpX5XHxc9GN3ARXZNTiZwSEBiRWEc.webp",
+            "description": "Jardim entre as duas casas amarelas: palmeira alta, relvado com caminho de pedras e alpendre com buganvília.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6ac07041",
+            "path": "clips/uploads/GABcRwWlFCMkMa7FMY2Dq48hBcAS7U1PXGrWqDuC.webp",
+            "description": "Vista aérea com drone da propriedade: casas amarelas, pátio em calçada, buganvílias vermelhas e campo dourado ao lado.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e17bfa28",
+            "path": "clips/uploads/QSjR4xUq2DePaVc4VslXRrz3TkWIxGB6pw3IKdAZ.webp",
+            "description": "Jardim entre as duas casas, igual à imagem anterior: palmeira, relvado, caminho de pedras e alpendre ao fundo.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4c50d3e4",
+            "path": "clips/uploads/Wjuv0fQUlA5YhC63wXPDsu7RGDq4ZDsiHzwb2mKc.webp",
+            "description": "Pátio em calçada portuguesa: segunda casa amarela com palmeira e alpendre da moradia principal com buganvília rosa.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50798371",
+            "path": "clips/uploads/w6v87kJkiWj2Wj8Hf871r3i5WBRarKq4UyAWJzU2.webp",
+            "description": "Edifício de apoio amarelo com portão verde, buganvília e caminho em calçada ladeado por árvores.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_317ef1de",
+            "path": "clips/uploads/x8cperYam1ix7oEE7ptZdSwdWyMMwhNKd3fvknSF.webp",
+            "description": "Casa de banho: móvel de madeira com espelho, sanita, bidé e banheira com resguardo de vidro.",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5ef8c617",
+            "path": "clips/uploads/ZedjATKueYjPhz8wa8HZYAZdEa1QTnhIdGNXXZ9s.webp",
+            "description": "Sala de estar e jantar rústica: sofá, mesa de madeira, relógio de parede antigo e pratos decorativos.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_21902a67",
+            "path": "clips/uploads/adGR0tWHymhOes4mtAVf7OzZzdqzfzl21YhS4ppf.webp",
+            "description": "Vista aérea de um monte branco com telhados de telha, isolado no meio de campos ceifados, sem outras construções à volta.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_25ba8738",
+            "path": "clips/uploads/XhCPIMsyL0DDNwP508QsmwkjfcqcmL6fJhwmO8NM.webp",
+            "description": "Quarto de casal: cama de madeira, mesas de cabeceira, candeeiros de parede acesos e teto de madeira.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_45ab3148",
+            "path": "clips/uploads/abOi7vLNToXAQMkGlQqsgYrFSLqd9TXQ2vSwoltk.webp",
+            "description": "Fachada lateral da moradia amarela com portadas verdes, jardim relvado, palmeira, laranjeira e aves-do-paraíso floridas.",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_40afe843",
+            "path": "clips/uploads/LiBnPDxpc4HtEhMsAmcHSTKZlKSJ2GRFdh9nhIWK.jpg",
+            "description": "Retrato do agente Manuel Reis, da iAD Portugal, de óculos, blazer azul-marinho e camisa branca, fundo claro.",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "This is the house information, use as you see fit:\nDescrição\nQUINTA DA CHIQUEDA\nSANTARÉM\n\nQuinta com localização privilegiada, a apenas 1 hora de Lisboa.\n\nCaracterísticas da propriedade:\n• Propriedade composta por 2 casas.\n• Terreno com 9,28 hectares, com potencial de aproveitamento urbanizável.\n• Edifício anteriormente destinado ao apoio das atividades agrícolas, hoje com potencial para diversos tipos de negócio.\n\nMoradia principal:\nA moradia principal oferece um ambiente acolhedor, onde os espaços interiores e exteriores se complementam, proporcionando tranquilidade e uma ligação privilegiada à natureza.\n• 3 quartos\n• 1 casa de banho\n• Amplo espaço em open space com cozinha, sala de estar e sala de jantar, com lareira a lenha.\n• Terraço/alpendre ideal para desfrutar de almoços e jantares em família ou com amigos, com churrasqueira.\n• Jardim amplo e cuidado\n\nSegunda casa:\nSituada no alinhamento da área residencial, a segunda casa é uma solução versátil, ideal para receber familiares e amigos com conforto e privacidade.\n• Uma suíte\n• Mais 2 divisões, com potencial de utilização como escritório, cozinha ou sala\n\nEdifício de apoio:\nNo interior da propriedade encontra-se um amplo edifício, anteriormente destinado ao apoio agrícola, que hoje apresenta um elevado potencial de adaptação a diferentes projetos.\n• Adequado para diferentes finalidades, desde a atividade agrícola até projetos de natureza turística\n• Área total de construção: 358 m²\n\nInfraestruturas e serviços:\nA propriedade dispõe de soluções autónomas e ligação às infraestruturas essenciais, assegurando funcionalidade e conforto no dia a dia.\n• Abastecimento de água própria através de poço\n• Ligação à rede municipal de água\n• Sistema de fossa séptica\n• Aquecimento de águas a gás\n\nLocalização:\nCom uma localização estratégica, a propriedade combina tranquilidade com proximidade a vários pontos de interesse e acessos principais.\n• 80 km de Lisboa\n• 10 km do acesso à autoestrada A1\n• 12 km de Santarém\n• 80 km de",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta da Chiqueda, Santarém: propriedade rural à venda a cerca de 1 hora de Lisboa",
+            "summary": "A Quinta da Chiqueda, em Santarém, tem 9,28 hectares e duas casas e está à venda por 740 mil euros através da IAD Portugal. Está na Lezíria do Tejo, a sub-região onde os preços da habitação mais subiram em Portugal no 1.º trimestre de 2026.",
+            "timeline": [
+                {
+                    "label": "Preço mediano nacional atinge 2.337 €/m²",
+                    "sublabel": "1.º trimestre 2026"
+                },
+                {
+                    "label": "Lezíria do Tejo lidera subida de preços (+30,4%)",
+                    "sublabel": "1.º trimestre 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Área do terreno",
+                    "value": 9.28,
+                    "unit": "hectares"
+                },
+                {
+                    "label": "Preço pedido",
+                    "value": 740000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Distância Lisboa–Santarém pela A1",
+                    "value": 82,
+                    "unit": "km"
+                },
+                {
+                    "label": "Subida homóloga dos preços na Lezíria do Tejo (1.º trim. 2026)",
+                    "value": 30.4,
+                    "unit": "%"
+                },
+                {
+                    "label": "Subida homóloga dos preços em Portugal (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano da habitação em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Subida dos preços da habitação (1.º trim. 2026, face ao ano anterior)",
+                    "left": {
+                        "title": "Lezíria do Tejo",
+                        "points": [
+                            "+30,4%",
+                            "A maior subida das 26 sub-regiões NUTS III"
+                        ]
+                    },
+                    "right": {
+                        "title": "Média nacional",
+                        "points": [
+                            "+19,8%",
+                            "2.337 €/m² de preço mediano"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "9,28 hectares, com potencial de construção segundo o anúncio",
+                "Santarém fica a cerca de 80–82 km de Lisboa, cerca de 1 hora de carro pela A1",
+                "Também há comboio regional a partir de Santa Apolónia, com viagem de pouco mais de 1 hora",
+                "No 1.º trimestre de 2026, os preços subiram em todas as 26 sub-regiões do país"
+            ],
+            "sources": [
+                "https://www.iadportugal.pt/anuncios/santarem-1416/venda/quinta-herdade",
+                "https://diarioimobiliario.pt/Preco-mediano-da-habitacao-sobe-19-8-no-primeiro-trimestre-para-2-337-euros-por-m2-INE",
+                "https://sapo.pt/artigo/preco-mediano-do-metro-quadrado-sobe-quase-20-no-1-trimestre-de-2026-6a5a2288c3fc30cdb0853138",
+                "https://www.idealista.pt/news/imobiliario/habitacao/2026/07/17/76623-casas-vendidas-em-portugal-atingem-preco-historico-apos-subir-19-8",
+                "https://waysur.com/pt/lisboa/santarem",
+                "https://www.nacionalidadeportuguesa.com.br/santarem-em-portugal/"
+            ]
+        },
+        "suggested": {
+            "title": "9 hectares a 1 hora de Lisboa: quinta com 2 casas em Santarém",
+            "description": "A Quinta da Chiqueda, em Santarém, tem 9 hectares, duas casas e um edifício de apoio, num total de 358 m². A moradia principal tem três quartos, open space com lareira a lenha e alpendre com churrasqueira virado para o jardim. A segunda casa serve para a família, para escritório ou para alojamento, e o edifício de apoio pode receber um projeto de agricultura ou turismo rural. Tem poço próprio e ligação à rede e custa 740 mil euros. Para visitar, fale com o Manuel Reis, da IAD Portugal.",
+            "tags": [
+                "quinta à venda",
+                "Santarém",
+                "imobiliário Portugal",
+                "turismo rural",
+                "casa de campo",
+                "moradia",
+                "investimento imobiliário",
+                "IAD Portugal"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "untitled-czyrg",
+    "created_at": "2026-09-30T11:30:33+00:00",
+    "updated_at": "2026-09-30T11:54:31+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/axezNFdau4HRPJcS1xTgi0dn6joNeW7l6N2GoQWK.mp3",
+    "transcript": {
+        "duration": 39.38999938964844,
+        "text": "9 hectares a uma hora de Lisboa? Por agora, sim. A 5ª da Chiqueda, em Santarém, tem duas casas e um edifício de apoio, com 358 m2. A moradia principal tem três quartos, um open space com lareira a lenha e um alpendre com churrasqueira virado para o jardim. A 2ª casa, com suíte e dois espaços extra, é ideal para família, escritório ou alojamento. O edifício de apoio está pronto para agricultura, turismo rural ou um novo projeto. Poço próprio, ligação à rede e a 10 minutos dá um, 740 mil euros. Para visitar, fala com o Manuel Reis, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "9",
+                "start": 0,
+                "end": 0.3400000035762787
+            },
+            {
+                "word": "hectares",
+                "start": 0.3400000035762787,
+                "end": 0.699999988079071
+            },
+            {
+                "word": "a",
+                "start": 0.699999988079071,
+                "end": 0.9800000190734863
+            },
+            {
+                "word": "uma",
+                "start": 0.9800000190734863,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "hora",
+                "start": 1.2000000476837158,
+                "end": 1.2000000476837158
+            },
+            {
+                "word": "de",
+                "start": 1.2000000476837158,
+                "end": 1.399999976158142
+            },
+            {
+                "word": "Lisboa?",
+                "start": 1.399999976158142,
+                "end": 2.0999999046325684
+            },
+            {
+                "word": "Por",
+                "start": 2.440000057220459,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "agora,",
+                "start": 2.6600000858306885,
+                "end": 2.940000057220459
+            },
+            {
+                "word": "sim.",
+                "start": 3.0399999618530273,
+                "end": 3.4200000762939453
+            },
+            {
+                "word": "A",
+                "start": 3.9800000190734863,
+                "end": 4.119999885559082
+            },
+            {
+                "word": "5ª",
+                "start": 4.119999885559082,
+                "end": 4.380000114440918
+            },
+            {
+                "word": "da",
+                "start": 4.380000114440918,
+                "end": 4.519999980926514
+            },
+            {
+                "word": "Chiqueda,",
+                "start": 4.519999980926514,
+                "end": 4.900000095367432
+            },
+            {
+                "word": "em",
+                "start": 4.980000019073486,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "Santarém,",
+                "start": 5.099999904632568,
+                "end": 5.5
+            },
+            {
+                "word": "tem",
+                "start": 5.699999809265137,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "duas",
+                "start": 5.760000228881836,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "casas",
+                "start": 6.119999885559082,
+                "end": 6.440000057220459
+            },
+            {
+                "word": "e",
+                "start": 6.440000057220459,
+                "end": 6.579999923706055
+            },
+            {
+                "word": "um",
+                "start": 6.579999923706055,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "edifício",
+                "start": 6.960000038146973,
+                "end": 7
+            },
+            {
+                "word": "de",
+                "start": 7,
+                "end": 7.480000019073486
+            },
+            {
+                "word": "apoio,",
+                "start": 7.480000019073486,
+                "end": 7.5
+            },
+            {
+                "word": "com",
+                "start": 7.940000057220459,
+                "end": 8.119999885559082
+            },
+            {
+                "word": "358",
+                "start": 8.119999885559082,
+                "end": 9.479999542236328
+            },
+            {
+                "word": "m2.",
+                "start": 9.479999542236328,
+                "end": 10.199999809265137
+            },
+            {
+                "word": "A",
+                "start": 10.800000190734863,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "moradia",
+                "start": 10.899999618530273,
+                "end": 11.199999809265137
+            },
+            {
+                "word": "principal",
+                "start": 11.199999809265137,
+                "end": 11.84000015258789
+            },
+            {
+                "word": "tem",
+                "start": 11.84000015258789,
+                "end": 12.0600004196167
+            },
+            {
+                "word": "três",
+                "start": 12.0600004196167,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "quartos,",
+                "start": 12.460000038146973,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "um",
+                "start": 13.199999809265137,
+                "end": 13.380000114440918
+            },
+            {
+                "word": "open",
+                "start": 13.380000114440918,
+                "end": 13.640000343322754
+            },
+            {
+                "word": "space",
+                "start": 13.640000343322754,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 14.020000457763672,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "lareira",
+                "start": 14.239999771118164,
+                "end": 14.5
+            },
+            {
+                "word": "a",
+                "start": 14.5,
+                "end": 14.880000114440918
+            },
+            {
+                "word": "lenha",
+                "start": 14.880000114440918,
+                "end": 14.920000076293945
+            },
+            {
+                "word": "e",
+                "start": 14.920000076293945,
+                "end": 15.4399995803833
+            },
+            {
+                "word": "um",
+                "start": 15.4399995803833,
+                "end": 15.65999984741211
+            },
+            {
+                "word": "alpendre",
+                "start": 15.65999984741211,
+                "end": 15.979999542236328
+            },
+            {
+                "word": "com",
+                "start": 15.979999542236328,
+                "end": 16.280000686645508
+            },
+            {
+                "word": "churrasqueira",
+                "start": 16.280000686645508,
+                "end": 16.719999313354492
+            },
+            {
+                "word": "virado",
+                "start": 16.719999313354492,
+                "end": 17.079999923706055
+            },
+            {
+                "word": "para",
+                "start": 17.079999923706055,
+                "end": 17.239999771118164
+            },
+            {
+                "word": "o",
+                "start": 17.239999771118164,
+                "end": 17.600000381469727
+            },
+            {
+                "word": "jardim.",
+                "start": 17.600000381469727,
+                "end": 17.84000015258789
+            },
+            {
+                "word": "A",
+                "start": 18.280000686645508,
+                "end": 18.459999084472656
+            },
+            {
+                "word": "2ª",
+                "start": 18.459999084472656,
+                "end": 18.760000228881836
+            },
+            {
+                "word": "casa,",
+                "start": 18.760000228881836,
+                "end": 19.059999465942383
+            },
+            {
+                "word": "com",
+                "start": 19.219999313354492,
+                "end": 19.5
+            },
+            {
+                "word": "suíte",
+                "start": 19.5,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 19.700000762939453,
+                "end": 19.860000610351562
+            },
+            {
+                "word": "dois",
+                "start": 19.860000610351562,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "espaços",
+                "start": 20.040000915527344,
+                "end": 20.360000610351562
+            },
+            {
+                "word": "extra,",
+                "start": 20.360000610351562,
+                "end": 20.920000076293945
+            },
+            {
+                "word": "é",
+                "start": 21.299999237060547,
+                "end": 21.440000534057617
+            },
+            {
+                "word": "ideal",
+                "start": 21.440000534057617,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "para",
+                "start": 21.65999984741211,
+                "end": 21.8799991607666
+            },
+            {
+                "word": "família,",
+                "start": 21.8799991607666,
+                "end": 22.399999618530273
+            },
+            {
+                "word": "escritório",
+                "start": 22.81999969482422,
+                "end": 23.079999923706055
+            },
+            {
+                "word": "ou",
+                "start": 23.079999923706055,
+                "end": 23.399999618530273
+            },
+            {
+                "word": "alojamento.",
+                "start": 23.399999618530273,
+                "end": 24.020000457763672
+            },
+            {
+                "word": "O",
+                "start": 24.639999389648438,
+                "end": 24.760000228881836
+            },
+            {
+                "word": "edifício",
+                "start": 24.760000228881836,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "de",
+                "start": 25.059999465942383,
+                "end": 25.3799991607666
+            },
+            {
+                "word": "apoio",
+                "start": 25.3799991607666,
+                "end": 25.6200008392334
+            },
+            {
+                "word": "está",
+                "start": 25.6200008392334,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "pronto",
+                "start": 25.860000610351562,
+                "end": 26.059999465942383
+            },
+            {
+                "word": "para",
+                "start": 26.059999465942383,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "agricultura,",
+                "start": 26.299999237060547,
+                "end": 26.920000076293945
+            },
+            {
+                "word": "turismo",
+                "start": 27.5,
+                "end": 27.68000030517578
+            },
+            {
+                "word": "rural",
+                "start": 27.68000030517578,
+                "end": 28.079999923706055
+            },
+            {
+                "word": "ou",
+                "start": 28.079999923706055,
+                "end": 28.600000381469727
+            },
+            {
+                "word": "um",
+                "start": 28.600000381469727,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "novo",
+                "start": 28.860000610351562,
+                "end": 28.940000534057617
+            },
+            {
+                "word": "projeto.",
+                "start": 28.940000534057617,
+                "end": 29.420000076293945
+            },
+            {
+                "word": "Poço",
+                "start": 29.420000076293945,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "próprio,",
+                "start": 30.299999237060547,
+                "end": 30.739999771118164
+            },
+            {
+                "word": "ligação",
+                "start": 31.020000457763672,
+                "end": 31.280000686645508
+            },
+            {
+                "word": "à",
+                "start": 31.280000686645508,
+                "end": 31.5
+            },
+            {
+                "word": "rede",
+                "start": 31.5,
+                "end": 31.780000686645508
+            },
+            {
+                "word": "e",
+                "start": 31.780000686645508,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "a",
+                "start": 32.220001220703125,
+                "end": 32.400001525878906
+            },
+            {
+                "word": "10",
+                "start": 32.400001525878906,
+                "end": 32.560001373291016
+            },
+            {
+                "word": "minutos",
+                "start": 32.560001373291016,
+                "end": 32.91999816894531
+            },
+            {
+                "word": "dá",
+                "start": 32.91999816894531,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "um,",
+                "start": 33.15999984741211,
+                "end": 33.400001525878906
+            },
+            {
+                "word": "740",
+                "start": 33.81999969482422,
+                "end": 34.7599983215332
+            },
+            {
+                "word": "mil",
+                "start": 34.7599983215332,
+                "end": 35
+            },
+            {
+                "word": "euros.",
+                "start": 35,
+                "end": 35.380001068115234
+            },
+            {
+                "word": "Para",
+                "start": 35.97999954223633,
+                "end": 36.040000915527344
+            },
+            {
+                "word": "visitar,",
+                "start": 36.040000915527344,
+                "end": 36.68000030517578
+            },
+            {
+                "word": "fala",
+                "start": 36.880001068115234,
+                "end": 36.939998626708984
+            },
+            {
+                "word": "com",
+                "start": 36.939998626708984,
+                "end": 37.20000076293945
+            },
+            {
+                "word": "o",
+                "start": 37.20000076293945,
+                "end": 37.279998779296875
+            },
+            {
+                "word": "Manuel",
+                "start": 37.279998779296875,
+                "end": 37.540000915527344
+            },
+            {
+                "word": "Reis,",
+                "start": 37.540000915527344,
+                "end": 37.959999084472656
+            },
+            {
+                "word": "da",
+                "start": 38.400001525878906,
+                "end": 38.52000045776367
+            },
+            {
+                "word": "IAD",
+                "start": 38.52000045776367,
+                "end": 38.81999969482422
+            },
+            {
+                "word": "Portugal.",
+                "start": 38.81999969482422,
+                "end": 39.36000061035156
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 39.38999938964844,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3000000000000007,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "QUINTA COM 9 HECTARES",
+                        "params": {
+                            "src": "img_5893557b",
+                            "avatar": "img_40afe843",
+                            "tag": "QUINTA À VENDA",
+                            "price": "740.000 €",
+                            "location": "SANTARÉM · CHIQUEDA",
+                            "title": "QUINTA COM 9 HECTARES",
+                            "facts": "358 m² · 2 casas · 3 quartos · poço",
+                            "cta": "Ligue já +351 963 050 290",
+                            "name": "Manuel Reis",
+                            "logoText": "iAD",
+                            "logoSub": "REAL ESTATE",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3000000000000007,
+                "end": 10.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "DUAS CASAS E APOIO",
+                        "params": {
+                            "src": "img_1d9d7066",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10.6,
+                "end": 13.1,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_6ac07041",
+                            "revealSeconds": "0.4",
+                            "zoom": "1.15"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.1,
+                "end": 15.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_e17bfa28",
+                            "zoomFrom": "1.6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.4,
+                "end": 18.2,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "ALPENDRE E CHURRASQUEIRA",
+                        "params": {
+                            "src": "img_4c50d3e4",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 18.2,
+                "end": 21.2,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_50798371",
+                            "revealSeconds": "0.4",
+                            "zoom": "1.15"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.2,
+                "end": 24.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_317ef1de",
+                            "zoomFrom": "1.6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.5,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "TURISMO OU AGRICULTURA",
+                        "params": {
+                            "src": "img_5ef8c617",
+                            "blur": "14",
+                            "charsPerSecond": "14"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 33.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": null,
+                        "params": {
+                            "src": "img_21902a67",
+                            "revealSeconds": "0.4",
+                            "zoom": "1.15"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.6,
+                "end": 35.9,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": null,
+                        "params": {
+                            "src": "img_25ba8738",
+                            "zoomFrom": "1.6"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 35.9,
+                "end": 39.38999938964844,
+                "background": "papyrus",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Manuel Reis",
+                        "params": {
+                            "src": "img_40afe843",
+                            "name": "Manuel Reis",
+                            "phone": "+351 963 050 290",
+                            "email": "manuel.reis@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-czyrg/clip.mp4",
+    "error": null
+}

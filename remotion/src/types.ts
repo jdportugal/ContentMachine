@@ -101,6 +101,9 @@ export interface Scene {
   punchWord?: string | null;
   present?: Present; // how it sits relative to the source video (overlay clips)
   layers?: Layer[];
+  plain?: boolean; // just its layer's video, full-frame: no motion, fade, background, sound or text
+  footage?: boolean; // a listing's room clip, full-frame and muted, with its caption (layer text)
+  montage?: boolean; // music-only opening: its layer's params.clips, a hard cut at each of params.cuts (s from the scene start)
 }
 
 export interface KaraokeWord {
@@ -139,10 +142,12 @@ export interface ClipProps {
   audioSrc?: string;
   musicSrc?: string; // background music, mixed as a looping track
   musicVolume?: number; // 0–1, defaults to 0.1
+  musicIntro?: { seconds: number; volume: number }; // music-only opening: louder until then, easing down to musicVolume
   theme?: ClipTheme; // design-system tokens (colours, fonts, texture)
   // v2 scene-based model (preferred). If absent, `animations` (v1) is rendered.
   scenes?: Scene[];
   words?: KaraokeWord[]; // drives karaoke captions
+  captions?: Captions; // where the karaoke captions sit, or "none" (default bottom)
   // Full-clip custom backdrop (behind all scenes), replacing the themed texture.
   // Resolved by RenderJob: code = a generated component (by slug); video = an mp4.
   background?: { kind: "code"; slug: string } | { kind: "video"; src: string };
@@ -157,3 +162,6 @@ export interface ClipProps {
   // `Record<string, unknown>` constraint on <Composition> props.
   [key: string]: unknown;
 }
+
+/** Where a clip's karaoke captions sit on screen — or "none" to hide them. */
+export type Captions = "bottom" | "middle" | "top" | "none";

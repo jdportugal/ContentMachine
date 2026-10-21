@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class FakeMetadataService implements MetadataService
 {
-    public function suggest(array $transcript): array
+    public function suggest(array $transcript, string $context = ''): array
     {
         $text = trim((string) ($transcript['text'] ?? ''));
 

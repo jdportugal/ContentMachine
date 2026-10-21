@@ -2,9 +2,16 @@
     @php
         $estados = [
             'draft'        => ['label' => 'Draft',         'tone' => 'neutral', 'glyph' => '·'],
+            'importing'    => ['label' => 'Importing listing', 'tone' => 'gold', 'glyph' => '⌂'],
+            'choosing_voice' => ['label' => 'Pick the voice', 'tone' => 'gold', 'glyph' => '♪'],
+            'analyzing'    => ['label' => 'Reading the walkthrough', 'tone' => 'gold', 'glyph' => '⌂'],
+            'choosing_sections' => ['label' => 'Mark the sections', 'tone' => 'gold', 'glyph' => '◆'],
+            'reviewing_rooms' => ['label' => 'Approve the rooms', 'tone' => 'gold', 'glyph' => '◆'],
+            'animating'    => ['label' => 'Animating rooms', 'tone' => 'gold', 'glyph' => '❧'],
             'transcribing' => ['label' => 'Transcribing',  'tone' => 'gold',    'glyph' => '❧'],
             'planning'     => ['label' => 'Planning',      'tone' => 'gold',    'glyph' => '❧'],
             'collecting'   => ['label' => 'Your images',   'tone' => 'gold',    'glyph' => '◆'],
+            'improving'    => ['label' => 'Improving with AI', 'tone' => 'gold', 'glyph' => '✨'],
             'rendering'    => ['label' => 'Rendering',     'tone' => 'gold',    'glyph' => '❧'],
             'done'         => ['label' => 'Ready',         'tone' => 'good',    'glyph' => '✔'],
             'failed'       => ['label' => 'Failed',        'tone' => 'bad',     'glyph' => '✕'],
@@ -43,6 +50,68 @@
             </div>
         </div>
 
+        {{-- One-step listing import: URL in, narrated clip out. --}}
+        <form wire:submit="importarAnuncio" class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-4 mb-6 shadow-engraved">
+            <label for="listingUrl" class="eyebrow block mb-2">⌂ From a listing</label>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <input id="listingUrl" type="url" wire:model="listingUrl" placeholder="https://www.remax.pt/pt/imoveis/…"
+                       class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink placeholder:text-ink-faint focus:outline-none focus:border-teal/60">
+                <button type="submit" wire:loading.attr="disabled" wire:target="importarAnuncio, listingAgentPhoto, listingVideo, listingAfterIntro"
+                        class="font-display text-lg px-5 py-2 rounded-sm bg-teal-deep text-papyrus hover:opacity-90 transition disabled:opacity-50">
+                    Make the video
+                </button>
+            </div>
+            <label class="mt-2 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                <span>Agent photo (optional — replaces the listing's):</span>
+                <input type="file" accept="image/*" wire:model="listingAgentPhoto" class="text-xs">
+                <span wire:loading wire:target="listingAgentPhoto" class="text-ink-faint">uploading…</span>
+            </label>
+            <label class="mt-2 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                <span>🏠 <strong>Property video</strong> (optional) — the walkthrough of the house, minutes long; it is cut into the reel's footage:</span>
+                <input type="file" accept="video/*" wire:model="listingVideo" class="text-xs">
+                <span wire:loading wire:target="listingVideo" class="text-ink-faint">uploading…</span>
+            </label>
+            <label class="mt-1 ml-4 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                <input type="checkbox" wire:model="listingMixPhotos" class="accent-teal">
+                <span>Mix the video with the listing photos (off: the reel is all video)</span>
+            </label>
+            <label class="mt-1 ml-4 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                <input type="checkbox" wire:model="listingBeatOpening" class="accent-teal">
+                <span>🎵 <strong>Beat-synced opening</strong>: the best clips first, music only, switching on the beat until the drop — then the reel</span>
+            </label>
+            <label class="mt-2 flex items-center gap-2 text-sm text-ink-soft">
+                <span class="shrink-0">Music:</span>
+                <select wire:model="listingMusic" class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink focus:outline-none focus:border-teal/60">
+                    <option value="">The project's</option>
+                    @foreach ($musicas as $m)
+                        <option value="{{ $m['name'] }}">{{ $m['name'] }}</option>
+                    @endforeach
+                </select>
+            </label>
+            <label class="mt-2 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                <span>🎬 <strong>After-intro video</strong> (optional) — your few-second brand clip, shown right after the intro:</span>
+                <input type="file" accept="video/*" wire:model="listingAfterIntro" class="text-xs">
+                <span wire:loading wire:target="listingAfterIntro" class="text-ink-faint">uploading…</span>
+            </label>
+            <label class="mt-2 flex items-center gap-2 text-sm text-ink-soft">
+                <span class="shrink-0">After-intro line (said right after the intro, over the after-intro video):</span>
+                <input type="text" wire:model="listingAfterIntroLine" placeholder="Se queres vender ou comprar casa, fala com…"
+                       class="flex-1 min-w-0 bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink placeholder:text-ink-faint focus:outline-none focus:border-teal/60">
+            </label>
+            @error('listingAfterIntroLine') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            <label class="mt-2 block text-sm text-ink-soft">
+                <span>Notes for the script (optional — they override the listing page: a new price, a wrong area, what to stress or leave out):</span>
+                <textarea wire:model="listingNotes" rows="2" placeholder="e.g. O preço baixou para 265.000 €. Não falar do sótão. Destacar a vista mar."
+                          class="mt-1 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink placeholder:text-ink-faint focus:outline-none focus:border-teal/60"></textarea>
+            </label>
+            @error('listingNotes') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            @error('listingUrl') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            @error('listingAfterIntro') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            @error('listingVideo') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            @error('listingAgentPhoto') <p class="mt-2 text-sm text-bad">{{ $message }}</p> @enderror
+            <p class="mt-2 font-mono text-[0.58rem] text-ink-faint">Scrapes the listing, writes and narrates the pt-PT voiceover, collects photos (first as main), the agent's photo and the agency logo, then plans with only those images, no subtitles and upbeat corporate music.</p>
+        </form>
+
         @if ($this->projects->isEmpty())
             <x-empty-state glyph="❈" title="No clips" note="You haven't generated any piece yet. Start with «New clip»." />
         @else
@@ -56,13 +125,280 @@
                     @endphp
                     <div class="foxing bg-vellum/50 border border-ink-soft/15 rounded-sm p-5 shadow-engraved" wire:key="clip-{{ $project->id }}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            {{-- LEFT: video --}}
-                            <div class="flex items-center justify-center">
+                            {{-- LEFT: video (the section picker takes the full width) --}}
+                            <div class="flex items-center justify-center {{ $project->status === 'choosing_sections' ? 'md:col-span-2' : '' }}">
                                 @if ($project->status === 'done' && $project->output_path)
-                                    <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
-                                           src="{{ route('clips-animados.media', $project->id) }}"></video>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <video class="rounded-sm border border-ink-soft/15 bg-black max-h-[60vh] w-auto max-w-full" controls preload="metadata"
+                                               src="{{ route('clips-animados.media', ['id' => $project->id, 'v' => @filemtime($project->output_path) ?: 0]) }}"></video>
+                                        @if (! empty($project->plan['scenes']))
+                                            {{-- Improve with AI: the clip reworked as asked — script, photos/footage, timing, effects, caption. No picture is generated. --}}
+                                            <div class="self-stretch">
+                                                <button type="button" wire:click="rerenderFinal('{{ $project->id }}')" title="Renders only the closing card again (e.g. after changing the agent card) — the rest of the clip stays as it is"
+                                                        class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:text-teal hover:border-teal/40 transition">↻ Re-render the ending</button>
+                                                <button type="button" wire:click="abrirMelhoriaClip('{{ $project->id }}')"
+                                                        class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:text-gold hover:border-gold/40 transition">✨ Improve with AI</button>
+                                                @if ($improveCardId === $project->id)
+                                                    <div class="mt-2 space-y-1">
+                                                        <textarea wire:model="improveCardPrompt" rows="2" maxlength="1000" placeholder="e.g. shorter; talk about the river beaches nearby; show more of the house and less of the land; faster cuts"
+                                                                  class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink text-xs focus:outline-none focus:border-gold/50"></textarea>
+                                                        @error('improveCardPrompt') <p class="text-bad text-xs">{{ $message }}</p> @enderror
+                                                        <div class="flex flex-wrap items-center gap-2">
+                                                            <button type="button" wire:click="melhorarClip" wire:loading.attr="disabled" wire:target="melhorarClip"
+                                                                    class="font-mono text-[0.65rem] px-3 py-1.5 rounded-sm border border-gold/40 text-gold hover:bg-gold/10 transition">Improve</button>
+                                                            <span class="font-mono text-[0.55rem] text-ink-faint">Rewrites the script as you ask (and records it again), picks the photos and footage, timing and effects anew, and updates the description — a few minutes. No image is generated.</span>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
+                                        @if (! empty($project->meta['property']['proxy']))
+                                            @if (empty($project->meta['property']['photos']))
+                                            <button type="button" wire:click="reselectSections('{{ $project->id }}')"
+                                                    class="self-start font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:bg-ink/5 transition">↺ Change the sections</button>
+                                            @endif
+                                            @php
+                                                $listing = $project->meta['listing'] ?? [];
+                                                $info = $listing['info'] ?? collect(array_filter([
+                                                    'Título' => $listing['title'] ?? null,
+                                                    'Preço' => ! empty($listing['price']) ? number_format((float) $listing['price'], 0, ',', '.').' €' : null,
+                                                ]) + (array) ($listing['details'] ?? []))->map(fn ($v, $k) => "{$k}: {$v}")->implode("\n");
+                                                $hasVoice = ! empty($project->meta['property']['voice']);
+                                            @endphp
+                                            {{-- The voiceover, written from the house details and narrated over the cut reel. wire:ignore: the dashboard polls. --}}
+                                            <div class="w-full mt-2 border-t border-ink-soft/15 pt-3" wire:ignore wire:key="narrate-{{ $project->id }}" x-data="{ info: @js($info), url: @js($listing['url'] ?? ''), sending: false }">
+                                                <p class="font-mono text-[0.62rem] text-ink-soft mb-1">Voiceover {{ $hasVoice ? '· this reel has one' : '· none yet' }}</p>
+                                                <input type="url" x-model="url" placeholder="Listing link (RE/MAX) — the details are read from it" aria-label="Listing link"
+                                                       class="w-full mb-2 bg-papyrus/60 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-xs focus:outline-none focus:border-teal/50">
+                                                <textarea x-model="info" rows="6" maxlength="4000" aria-label="House details for the voiceover"
+                                                          placeholder="…and/or the details, one per line (they win over the listing), e.g.&#10;Título: Moradia T3 em Braga&#10;Preço: 350 000 €&#10;Localização: Braga, perto do centro&#10;Área: 180 m²&#10;Quartos: 3&#10;…and anything else worth saying"
+                                                          class="w-full bg-papyrus/60 border border-ink-soft/20 rounded-sm px-2 py-1.5 text-ink text-xs font-mono focus:outline-none focus:border-teal/50"></textarea>
+                                                <div class="mt-2 flex flex-wrap items-center gap-3">
+                                                    <button type="button" :disabled="sending || (!info.trim() && !url.trim())" @click="sending = true; $wire.narrateProperty('{{ $project->id }}', info, url).finally(() => sending = false)"
+                                                            class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-40"
+                                                            x-text="sending ? 'Sending…' : '{{ $hasVoice ? '↻ Write a new voiceover' : '🎙 Write & narrate the voiceover' }}'"></button>
+                                                    @if ($hasVoice)
+                                                        <button type="button" @click="$wire.removePropertyVoice('{{ $project->id }}')" class="font-mono text-[0.62rem] text-bad hover:underline">remove the voiceover</button>
+                                                    @endif
+                                                    <span class="font-mono text-[0.58rem] text-ink-faint">Sized to the reel; you pick the take, then it's cut again (animations reused).</span>
+                                                </div>
+                                            </div>
+                                            @error('narrate.'.$project->id) <p class="text-xs text-bad mt-1 self-start">{{ $message }}</p> @enderror
+                                        @endif
+                                    </div>
                                 @elseif ($project->status === 'failed')
                                     <p class="text-sm text-bad/90 self-start">{{ \Illuminate\Support\Str::limit($project->error, 200) }}</p>
+                                @elseif ($project->status === 'choosing_voice')
+                                    {{-- wire:ignore: the dashboard polls; a re-render must not reset a player mid-listen. --}}
+                                    <div class="w-full self-start" wire:ignore wire:key="takes-{{ $project->id }}">
+                                        <p class="font-mono text-[0.6rem] text-ink-faint mb-2">Listen and pick the take with the European Portuguese accent.</p>
+                                        @foreach ($project->meta['voice_takes'] ?? [] as $n => $take)
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="font-mono text-[0.62rem] text-ink-soft w-12">Take {{ $n + 1 }}</span>
+                                                <audio controls preload="none" class="flex-1 min-w-0 h-9" src="{{ route('clips-animados.take', ['id' => $project->id, 'n' => $n, 'v' => md5($take)]) }}"></audio>
+                                                <button type="button" wire:click="escolherTake('{{ $project->id }}', {{ $n }})"
+                                                        class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Use this one</button>
+                                            </div>
+                                        @endforeach
+                                        @if (!empty($project->meta['listing']['voiceover']))
+                                            <details class="mt-3 border border-ink-soft/15 rounded-sm px-3 py-2 bg-papyrus/40">
+                                                <summary class="cursor-pointer font-mono text-[0.62rem] text-ink-soft">✎ Script — to record or generate your own</summary>
+                                                <p class="mt-2 text-sm text-ink-soft whitespace-pre-line">{{ $project->meta['listing']['voiceover'] }}</p>
+                                                <div class="mt-2"><x-copy-btn :text="$project->meta['listing']['voiceover']" label="⧉ copy script" /></div>
+                                            </details>
+                                        @endif
+                                        <label class="mt-3 flex items-center gap-2 font-mono text-[0.62rem] text-ink-soft">
+                                            <span class="w-12">None?</span>
+                                            <span class="px-3 py-1.5 rounded-sm border border-ink-soft/30 hover:bg-ink/5 transition cursor-pointer">⇪ Upload my own voiceover</span>
+                                            <input type="file" accept="audio/*" class="hidden" wire:model="takeUploads.{{ $project->id }}">
+                                            <span wire:loading wire:target="takeUploads.{{ $project->id }}" class="text-ink-faint">uploading…</span>
+                                        </label>
+                                    </div>
+                                    @error('takeUploads.'.$project->id) <p class="text-xs text-bad mt-1 self-start">{{ $message }}</p> @enderror
+                                @elseif ($project->status === 'choosing_sections')
+                                    @php
+                                        // Each saved section's state from its room, so the picker says what's kept and what needs re-marking.
+                                        $byKey = collect($project->meta['property']['rooms'] ?? [])->filter(fn ($r) => ! empty($r['anim']))
+                                            ->keyBy(fn ($r) => round($r['anim']['start'], 2).'|'.round($r['anim']['end'], 2));
+                                        $marked = collect($project->meta['property']['sections'] ?? [])->map(function ($s) use ($byKey) {
+                                            $a = $byKey[round($s['start'], 2).'|'.round($s['end'], 2)]['anim'] ?? null;
+                                            $s['state'] = match (true) {
+                                                ! $a => '',
+                                                ! empty($a['video']) && empty($a['clip_problems']) && ! empty($a['enabled']) => 'ok:✓ animated — kept as is',
+                                                ! empty($a['clip_problems']) => 'redo:Kling warped this one — usually a camera turn: mark a straight push instead',
+                                                ! empty($a['problems']) => 'redo:the modern still re-framed the room — end it on a wider view',
+                                                default => '',
+                                            };
+
+                                            return $s;
+                                        })->values()->all();
+                                    @endphp
+                                    {{-- Click and drag on the filmstrip to mark each section to animate; the player follows. --}}
+                                    <div class="w-full self-start" wire:ignore wire:key="sections-{{ $project->id }}"
+                                         x-data="sectionPicker(@js($project->meta['property']['duration'] ?? 0), @js($marked))">
+                                        <video x-ref="video" class="w-full rounded-sm border border-ink-soft/15 bg-black max-h-[50vh]" muted playsinline preload="auto"
+                                               src="{{ route('clips-animados.property', ['id' => $project->id, 'what' => 'footage']) }}"></video>
+                                        <div class="mt-2 flex items-center justify-between font-mono text-[0.6rem] text-ink-faint">
+                                            <span x-text="label(cursor)"></span>
+                                            <span>Drag on the strip to mark up to 10 sections (1–10 s each) · drag its edges to adjust</span>
+                                        </div>
+                                        <div x-ref="strip" class="relative mt-1 h-16 rounded-sm border border-ink-soft/25 overflow-hidden cursor-crosshair select-none touch-none"
+                                             style="background: url('{{ route('clips-animados.property', ['id' => $project->id, 'what' => 'strip']) }}') center/100% 100% no-repeat"
+                                             @pointerdown="down($event)" @pointermove="move($event)" @pointerup="up($event)" @pointerleave="up($event)">
+                                            <template x-for="(s, i) in sections" :key="i">
+                                                <div class="absolute inset-y-0" :style="`left:${pct(s.start)}%;width:${pct(s.end - s.start)}%;background:rgba(44,95,99,.45);border-left:2px solid #2C5F63;border-right:2px solid #2C5F63`">
+                                                    <span class="absolute top-0.5 left-1 font-mono text-[0.6rem] text-papyrus drop-shadow" x-text="i + 1"></span>
+                                                    <span class="absolute inset-y-0 -left-1.5 w-3 cursor-ew-resize" data-edge="start" :data-i="i"></span>
+                                                    <span class="absolute inset-y-0 -right-1.5 w-3 cursor-ew-resize" data-edge="end" :data-i="i"></span>
+                                                </div>
+                                            </template>
+                                            <div x-show="drag" class="absolute inset-y-0"
+                                                 :style="drag && `left:${pct(Math.min(drag.from, drag.to))}%;width:${pct(Math.abs(drag.to - drag.from))}%;background:rgba(184,134,52,.45);border-left:2px solid #B88634;border-right:2px solid #B88634`"></div>
+                                            <div class="absolute inset-y-0" :style="`left:${pct(cursor)}%;width:2px;background:#23201A`"></div>
+                                        </div>
+                                        <ol class="mt-3 space-y-2">
+                                            <template x-for="(s, i) in sections" :key="i">
+                                                <li class="flex flex-wrap items-center gap-2 font-mono text-[0.65rem] text-ink-soft">
+                                                    <span class="w-5 text-teal" x-text="(i + 1) + '.'"></span>
+                                                    <button type="button" class="hover:text-ink" @click="seek(s.start)" x-text="label(s.start)"></button>→
+                                                    <button type="button" class="hover:text-ink" @click="seek(s.end)" x-text="label(s.end)"></button>
+                                                    <span class="text-ink-faint" x-text="'(' + (s.end - s.start).toFixed(1) + ' s)'"></span>
+                                                    <button type="button" class="px-2 py-0.5 rounded-sm border border-ink-soft/30 hover:bg-ink/5" @click="preview(s)">▶ preview</button>
+                                                    <span x-show="s.state" class="basis-full pl-7 text-[0.6rem]" :class="s.state.startsWith('ok:') ? 'text-teal' : 'text-bad'" x-text="s.state.slice(s.state.indexOf(':') + 1)"></span>
+                                                    <input type="text" x-model="s.note" maxlength="300" placeholder="optional: what you'd like (e.g. Scandinavian kitchen)" aria-label="Wish for this section"
+                                                           class="flex-1 min-w-[12rem] bg-papyrus/60 border border-ink-soft/20 rounded-sm px-2 py-1 text-ink text-xs focus:outline-none focus:border-teal/50">
+                                                    <button type="button" class="text-bad hover:underline" @click="sections.splice(i, 1)" :aria-label="'Remove section ' + (i + 1)">remove</button>
+                                                </li>
+                                            </template>
+                                        </ol>
+                                        <div class="mt-3 flex flex-wrap items-center gap-3">
+                                            <button type="button" :disabled="!sections.length || sending" @click="sending = true; $wire.stageSections('{{ $project->id }}', sections).finally(() => sending = false)"
+                                                    class="font-display text-lg px-5 py-2 rounded-sm bg-teal-deep text-papyrus hover:opacity-90 transition disabled:opacity-40"
+                                                    x-text="sending ? 'Sending…' : 'Modernise these sections'">Modernise these sections</button>
+                                            <span class="font-mono text-[0.6rem] text-ink-faint">Each section's last frame becomes a modern still you approve before anything is animated.</span>
+                                            <label class="flex items-center gap-2 font-mono text-[0.62rem] text-ink-soft">Final format
+                                                <select @change="$wire.setPropertyAspect('{{ $project->id }}', $event.target.value)"
+                                                        class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink text-xs focus:outline-none focus:border-teal/60">
+                                                    @foreach (\App\Services\RealEstate\PropertyVideoEditor::ASPECTS as $value => $label)
+                                                        <option value="{{ $value }}" @selected(($project->meta['property']['aspect'] ?? 'source') === $value)>{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+                                            <label x-data="{ sent: false }" class="flex items-center gap-2 font-mono text-[0.62rem] text-ink-soft cursor-pointer hover:text-ink">
+                                                <span class="px-2 py-1 rounded-sm border border-ink-soft/25" x-show="sent">✓ Agent photo — replace</span>
+                                                    <span class="px-2 py-1 rounded-sm border border-ink-soft/25" x-show="!sent">{{ collect($project->images ?? [])->contains(fn ($img) => str_starts_with((string) ($img['description'] ?? ''), 'Retrato')) ? '✓ Agent photo — replace' : '+ Agent photo' }}</span>
+                                                <input type="file" accept="image/*" class="hidden" @change="sent = true" wire:model="agentPhotos.{{ $project->id }}">
+                                                <span wire:loading wire:target="agentPhotos.{{ $project->id }}" class="text-ink-faint">uploading…</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @error('agentPhotos.'.$project->id) <p class="text-sm text-bad mt-1 self-start">{{ $message }}</p> @enderror
+                                    @error('sections.'.$project->id) <p class="text-sm text-bad mt-1 self-start">{{ $message }}</p> @enderror
+                                @elseif ($project->status === 'reviewing_rooms')
+                                    @php
+                                        $rooms = $project->meta['property']['rooms'] ?? [];
+                                        $staging = collect($rooms)->contains(fn ($r) => ! empty($r['anim']['staging']));
+                                        $paid = collect($rooms)->filter(fn ($r) => ! empty($r['anim']['enabled']) && ! empty($r['anim']['staged']))->count();
+                                        $plain = collect($rooms)->filter(fn ($r) => empty($r['anim']))->map(fn ($r) => $r['room'].' ('.$r['start'].'–'.$r['end'].' s)')->implode(' · ');
+                                    @endphp
+                                    <div class="w-full self-start space-y-4">
+                                        @if (! empty($project->meta['property']['notice']))
+                                            <p class="text-sm text-bad border border-bad/40 rounded-sm px-3 py-2 bg-bad/5" role="alert">{{ $project->meta['property']['notice'] }}</p>
+                                        @endif
+                                        <p class="font-mono text-[0.6rem] text-ink-faint">Real frame → modernised still. Approve, ask for another take (edit the prompt if you like) or skip a room — nothing is paid for until you animate.</p>
+                                        @foreach ($rooms as $i => $room)
+                                            @continue(empty($room['anim']))
+                                            @php $anim = $room['anim']; $on = ! empty($anim['enabled']); @endphp
+                                            <div wire:key="room-{{ $project->id }}-{{ $i }}" class="border border-ink-soft/15 rounded-sm p-3 {{ $on ? '' : 'opacity-50' }}">
+                                                <div class="flex items-center justify-between gap-2 mb-2">
+                                                    <span class="font-display text-lg text-ink">{{ $room['room'] }}</span>
+                                                    <span class="font-mono text-[0.6rem] text-ink-soft">{{ ['unfurnish' => 'furniture out', 'furnish' => 'furniture in'][$anim['mode']] ?? 'modernise' }} · {{ $anim['start'] }}–{{ $anim['end'] }} s · {{ $anim['motion'] }}</span>
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-2">
+                                                    <img src="{{ route('clips-animados.room', ['id' => $project->id, 'i' => $i, 'which' => 'start', 'v' => md5($anim['start_frame'] ?? '')]) }}" alt="Real start frame of {{ $room['room'] }}" class="w-full rounded-sm border border-ink-soft/15 object-contain bg-black/5 max-h-72">
+                                                    @if (! empty($anim['staging']))
+                                                        <div class="flex items-center justify-center rounded-sm border border-dashed border-ink-soft/25 font-mono text-[0.62rem] text-ink-faint animate-pulse">staging…</div>
+                                                    @elseif (! empty($anim['staged']))
+                                                        <img src="{{ route('clips-animados.room', ['id' => $project->id, 'i' => $i, 'which' => 'staged', 'v' => md5($anim['staged'])]) }}" alt="Staged still of {{ $room['room'] }}" class="w-full rounded-sm border border-ink-soft/15 object-contain bg-black/5 max-h-72">
+                                                    @else
+                                                        <div class="flex items-center justify-center rounded-sm border border-dashed border-bad/40 p-2 text-center font-mono text-[0.62rem] text-bad">{{ $anim['error'] ?? 'No still yet' }}</div>
+                                                    @endif
+                                                </div>
+                                                @if (count($anim['candidates'] ?? []) > 1 && empty($anim['staging']))
+                                                    {{-- Every image the takes made: click one to use it. --}}
+                                                    <p class="mt-2 font-mono text-[0.6rem] text-ink-faint">All {{ count($anim['candidates']) }} images, newest take first — click one to use it:</p>
+                                                    <div class="mt-1 grid grid-cols-3 sm:grid-cols-4 gap-1.5">
+                                                        @foreach ($anim['candidates'] as $n => $cand)
+                                                            @php $chosen = ($anim['staged'] ?? null) === $cand['path']; @endphp
+                                                            <button type="button" wire:click="chooseStill('{{ $project->id }}', {{ $i }}, {{ $n }})" @disabled($chosen)
+                                                                    title="{{ $cand['problems'] ? implode(' · ', $cand['problems']) : 'Openings all kept' }}"
+                                                                    class="relative rounded-sm overflow-hidden border-2 transition {{ $chosen ? 'border-teal' : 'border-transparent hover:border-ink-soft/40' }}">
+                                                                <img src="{{ route('clips-animados.room', ['id' => $project->id, 'i' => $i, 'which' => 'c'.$n, 'v' => md5($cand['path'])]) }}" alt="Option {{ $n + 1 }} for {{ $room['room'] }}" loading="lazy" class="w-full aspect-video object-cover bg-black/5">
+                                                                <span class="absolute bottom-0 inset-x-0 px-1 py-0.5 font-mono text-[0.55rem] text-left {{ $chosen ? 'bg-teal text-papyrus' : 'bg-ink/60 text-papyrus' }}">
+                                                                    {{ $chosen ? '✓ in use' : ($cand['problems'] ? count($cand['problems']).' problem'.(count($cand['problems']) === 1 ? '' : 's') : 'clean') }}
+                                                                </span>
+                                                            </button>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                @if (isset($anim['alignment']) && empty($anim['staging']))
+                                                    <p class="mt-1 font-mono text-[0.6rem] {{ $anim['alignment'] < \App\Services\RealEstate\RoomStager::DRIFT ? 'text-bad' : 'text-ink-faint' }}">
+                                                        Lines up with the real frame: {{ round($anim['alignment'] * 100) }}%{{ $anim['alignment'] < \App\Services\RealEstate\RoomStager::DRIFT ? ' — the camera moved; Kling will morph the room. Take another or skip.' : '' }}
+                                                    </p>
+                                                @endif
+                                                @if (! empty($anim['problems']) && empty($anim['staging']))
+                                                    <ul class="mt-1 font-mono text-[0.6rem] text-bad list-disc pl-4">
+                                                        @foreach ($anim['problems'] as $problem)
+                                                            <li>{{ $problem }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @elseif (isset($anim['problems']) && empty($anim['staging']))
+                                                    <p class="mt-1 font-mono text-[0.6rem] text-teal">Doors, windows and openings checked: all kept.</p>
+                                                @endif
+                                                <div wire:ignore wire:key="prompt-{{ $project->id }}-{{ $i }}-{{ md5($anim['prompt']) }}" class="mt-2">
+                                                    <textarea id="rp-{{ $project->id }}-{{ $i }}" rows="2" aria-label="Staging prompt for {{ $room['room'] }}"
+                                                              class="w-full bg-papyrus/60 border border-ink-soft/20 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-teal/50">{{ $anim['prompt'] }}</textarea>
+                                                </div>
+                                                <div class="mt-2 flex flex-wrap gap-2">
+                                                    <button type="button" @disabled(! empty($anim['staging']))
+                                                            @click="$wire.restageRoom('{{ $project->id }}', {{ $i }}, document.getElementById('rp-{{ $project->id }}-{{ $i }}').value)"
+                                                            class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-40">↻ Another take</button>
+                                                    <button type="button" wire:click="toggleRoom('{{ $project->id }}', {{ $i }})"
+                                                            class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:bg-ink/5 transition">{{ $on ? 'Skip — keep as footage' : 'Animate this room' }}</button>
+                                                    @if (! empty($project->meta['property']['photos']))
+                                                        <button type="button" wire:click="flipRoomMotion('{{ $project->id }}', {{ $i }})" title="Flip the camera's direction (makes this room's animation again)"
+                                                                class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:bg-ink/5 transition">Camera: {{ ($anim['motion'] ?? 'forward') === 'backward' ? '← pulls back out' : '→ moves into the room' }} · flip</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if ($plain !== '')
+                                            <p class="font-mono text-[0.6rem] text-ink-faint">Kept as footage: {{ $plain }}</p>
+                                        @endif
+                                        <div class="flex flex-wrap items-center gap-3">
+                                            <button type="button" wire:click="animateProperty('{{ $project->id }}')" @disabled($staging)
+                                                    class="font-display text-lg px-5 py-2 rounded-sm bg-teal-deep text-papyrus hover:opacity-90 transition disabled:opacity-50">▶ Animate &amp; cut the reel</button>
+                                            @if (empty($project->meta['property']['photos']))
+                                            <button type="button" wire:click="reselectSections('{{ $project->id }}')" @disabled($staging)
+                                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/30 text-ink-soft hover:bg-ink/5 transition disabled:opacity-40">↺ Change the sections</button>
+                                            @endif
+                                            <label class="flex items-center gap-2 font-mono text-[0.62rem] text-ink-soft">Final format
+                                                <select wire:change="setPropertyAspect('{{ $project->id }}', $event.target.value)"
+                                                        class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink text-xs focus:outline-none focus:border-teal/60">
+                                                    @foreach (\App\Services\RealEstate\PropertyVideoEditor::ASPECTS as $value => $label)
+                                                        <option value="{{ $value }}" @selected(($project->meta['property']['aspect'] ?? 'source') === $value)>{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+                                            <label x-data="{ sent: false }" class="flex items-center gap-2 font-mono text-[0.62rem] text-ink-soft cursor-pointer hover:text-ink">
+                                                <span class="px-2 py-1 rounded-sm border border-ink-soft/25" x-show="sent">✓ Agent photo — replace</span>
+                                                    <span class="px-2 py-1 rounded-sm border border-ink-soft/25" x-show="!sent">{{ collect($project->images ?? [])->contains(fn ($img) => str_starts_with((string) ($img['description'] ?? ''), 'Retrato')) ? '✓ Agent photo — replace' : '+ Agent photo' }}</span>
+                                                <input type="file" accept="image/*" class="hidden" @change="sent = true" wire:model="agentPhotos.{{ $project->id }}">
+                                                <span wire:loading wire:target="agentPhotos.{{ $project->id }}" class="text-ink-faint">uploading…</span>
+                                            </label>
+                                            <span class="font-mono text-[0.6rem] text-ink-faint">{{ $paid }} room{{ $paid === 1 ? '' : 's' }} to animate (Kling 3.0, 4–7 s each) on kie.ai</span>
+                                        </div>
+                                    </div>
                                 @elseif ($project->status === 'collecting')
                                     <div class="w-full self-start text-center">
                                         <p class="font-mono text-[0.6rem] text-ink-faint mb-2">The plan is ready — upload your own images or let them be generated.</p>
@@ -73,9 +409,12 @@
                                     <div class="w-full self-start">
                                         <div class="h-1 w-full bg-surface/40 rounded-full overflow-hidden">
                                             <div class="h-full bg-teal/60 animate-pulse"
-                                                 style="width: {{ ['transcribing'=>33,'planning'=>60,'rendering'=>85][$project->status] ?? 12 }}%"></div>
+                                                 style="width: {{ ['importing'=>20,'analyzing'=>25,'animating'=>30,'transcribing'=>33,'planning'=>60,'rendering'=>85][$project->status] ?? 12 }}%"></div>
                                         </div>
                                         <p class="mt-2 font-mono text-[0.58rem] text-ink-faint">{{ $e['label'] }}…</p>
+                                        @if (! empty($project->meta['step']))
+                                            <p class="font-mono text-[0.58rem] text-ink-soft">{{ $project->meta['step'] }}…</p>
+                                        @endif
                                     </div>
                                 @endif
                             </div>
@@ -98,7 +437,9 @@
                                 <div class="font-mono text-[0.58rem] text-ink-faint">{{ $project->created_at ? \Illuminate\Support\Carbon::parse($project->created_at)->diffForHumans() : '' }}</div>
 
                                 @if (!empty($sug['description']))
-                                    <p class="mt-3 text-ink-soft text-sm leading-relaxed">{{ $sug['description'] }}</p>
+                                    <p class="mt-3 text-ink-soft text-sm leading-relaxed whitespace-pre-line">{{ $sug['description'] }}</p>
+                                    <x-copy-btn class="mt-2 font-mono text-[0.62rem] px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition"
+                                                :text="trim($sug['description']."\n\n".collect($sug['tags'] ?? [])->map(fn ($t) => '#'.preg_replace('/\s+/u', '', ltrim($t, '#')))->implode(' '))" label="⧉ copy caption + hashtags" />
                                 @endif
 
                                 @if (!empty($sug['tags']))
@@ -107,6 +448,31 @@
                                             <span class="font-mono text-[0.58rem] text-teal border border-teal/30 rounded-sm px-1.5 py-0.5">#{{ $tag }}</span>
                                         @endforeach
                                     </div>
+                                @endif
+
+                                @php $anuncio = $project->meta['listing'] ?? null; @endphp
+                                @if (!empty($anuncio['message']) || !empty($anuncio['flags']))
+                                    <details wire:ignore.self class="mt-3 border border-ink-soft/15 rounded-sm px-3 py-2 bg-papyrus/40">
+                                        <summary class="cursor-pointer font-mono text-[0.62rem] text-ink-soft">
+                                            ⌂ Listing · {{ $anuncio['agent'] ?? '' }} · {{ $anuncio['phone'] ?? '' }}
+                                            @if (!empty($anuncio['flags'])) <span class="text-warn">· {{ count($anuncio['flags']) }} to check</span> @endif
+                                        </summary>
+                                        @if (!empty($anuncio['flags']))
+                                            <ul class="mt-2 list-disc pl-5 text-sm text-warn">
+                                                @foreach ($anuncio['flags'] as $flag) <li>{{ $flag }}</li> @endforeach
+                                            </ul>
+                                        @endif
+                                        @if (!empty($anuncio['message']))
+                                            <p class="mt-2 text-sm text-ink-soft whitespace-pre-line">{{ $anuncio['message'] }}</p>
+                                            <div class="mt-2 flex gap-2">
+                                                <x-copy-btn :text="$anuncio['message']" label="⧉ copy message" />
+                                                @if (!empty($anuncio['phone']))
+                                                    <x-copy-btn :text="$anuncio['phone']" label="⧉ copy number" />
+                                                @endif
+                                                <a href="{{ $anuncio['url'] }}" target="_blank" rel="noopener" class="font-mono text-[0.7rem] px-3 py-1.5 text-teal hover:underline">↗ listing</a>
+                                            </div>
+                                        @endif
+                                    </details>
                                 @endif
 
                                 {{-- actions --}}
@@ -345,6 +711,19 @@
                         <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
                     </x-panel>
                 </button>
+                <button type="button" wire:click="escolherTipo('property')" class="text-left group">
+                    <x-panel class="h-full transition group-hover:border-teal/40">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="eyebrow mb-2">Type · C</div>
+                                <h2 class="font-display text-3xl text-ink">Property animation</h2>
+                                <p class="mt-2 text-ink-soft">From a walkthrough video and its listing — rooms cut together with zooms, furniture animated in or out, narrated with the agent's cards.</p>
+                            </div>
+                            <span class="text-4xl text-gold/70 select-none">⌂</span>
+                        </div>
+                        <div class="mt-6 font-mono text-[0.62rem] text-teal">choose →</div>
+                    </x-panel>
+                </button>
             </div>
         @elseif ($createType === 'animation')
             {{-- step 2A: animation form --}}
@@ -392,15 +771,23 @@
 
                     @include('livewire.partials.lead-field')
 
+                    @include('livewire.partials.agent-extras-field')
+
                     @include('livewire.partials.instructions-field')
 
-                    @include('livewire.partials.fewer-images')
+                    @include('livewire.partials.para-finalizados')
+
+                    @include('livewire.partials.no-images')
+
+                    @if (! $semImagens) @include('livewire.partials.only-reference-images') @endif
+                    @if (! $semImagens && ! $soReferencias) @include('livewire.partials.fewer-images') @endif
 
                     @include('livewire.partials.free-sfx')
 
                     @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
+                    @include('livewire.partials.captions-picker')
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
@@ -439,29 +826,7 @@
                         </div>
                     @endif
 
-                    <div>
-                        <label class="eyebrow block mb-2">Allowed styles</label>
-                        @php
-                            $styles = [
-                                'video'     => ['t' => 'Video only', 'd' => 'video + subtitles'],
-                                'over'      => ['t' => 'Animation on top', 'd' => 'graphic over the video'],
-                                'split'     => ['t' => 'Split screen', 'd' => 'animation on top, video below'],
-                                'animation' => ['t' => 'Full screen', 'd' => 'animation covers the video'],
-                            ];
-                        @endphp
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            @foreach ($styles as $key => $s)
-                                <label class="cursor-pointer flex items-start gap-2 rounded-sm border p-3 transition {{ in_array($key, $allowedPresents) ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
-                                    <input type="checkbox" wire:model="allowedPresents" value="{{ $key }}" class="accent-teal mt-1" />
-                                    <span>
-                                        <span class="block font-display text-lg text-ink leading-tight">{{ $s['t'] }}</span>
-                                        <span class="block text-ink-soft text-xs">{{ $s['d'] }}</span>
-                                    </span>
-                                </label>
-                            @endforeach
-                        </div>
-                        @error('allowedPresents') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
-                    </div>
+                    @include('livewire.partials.presents-picker')
 
                     @include('livewire.partials.format-picker')
 
@@ -469,13 +834,19 @@
 
                     @include('livewire.partials.instructions-field')
 
-                    @include('livewire.partials.fewer-images')
+                    @include('livewire.partials.para-finalizados')
+
+                    @include('livewire.partials.no-images')
+
+                    @if (! $semImagens) @include('livewire.partials.only-reference-images') @endif
+                    @if (! $semImagens && ! $soReferencias) @include('livewire.partials.fewer-images') @endif
 
                     @include('livewire.partials.free-sfx')
 
                     @include('livewire.partials.backdrop-picker')
 
                     @include('livewire.partials.musica-picker')
+                    @include('livewire.partials.captions-picker')
 
                     <div class="flex items-center gap-3 pt-2">
                         <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
@@ -486,10 +857,113 @@
                     <p class="font-mono text-[0.6rem] text-ink-faint">The AI automatically interleaves the chosen styles, according to the content.</p>
                 </form>
             </x-panel>
+        @elseif ($createType === 'property')
+            {{-- step 2C: property walkthrough form --}}
+            <x-panel eyebrow="Step · II — Property animation" title="Property walkthrough" glyph="⌂">
+                <form wire:submit="submitProperty" x-on:submit="window.CMLoader.busy('Uploading the walkthrough…')" class="space-y-5">
+                    <fieldset>
+                        <legend class="eyebrow mb-2">Animate from</legend>
+                        <div class="flex flex-wrap gap-4 text-sm text-ink">
+                            <label class="flex items-center gap-2"><input type="radio" wire:model.live="propertySource" value="video"> a walkthrough video (you mark the moments)</label>
+                            <label class="flex items-center gap-2"><input type="radio" wire:model.live="propertySource" value="photos"> photos (each one becomes a room)</label>
+                        </div>
+                    </fieldset>
+                    @if ($propertySource === 'photos')
+                    <div>
+                        <label for="propertyPhotos" class="eyebrow block mb-2">Room photos (up to 15, in the order they play)</label>
+                        <input id="propertyPhotos" type="file" wire:model="propertyPhotos" accept="image/*" multiple
+                               class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                        <div wire:loading wire:target="propertyPhotos" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                        @if (is_array($propertyPhotos) && count($propertyPhotos))
+                            <p class="mt-1 font-mono text-[0.6rem] text-ink-soft">{{ count($propertyPhotos) }} photo{{ count($propertyPhotos) === 1 ? '' : 's' }} ready.</p>
+                        @endif
+                        @error('propertyPhotos') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                        @error('propertyPhotos.*') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                        <p class="mt-1 font-mono text-[0.58rem] text-ink-faint">Each photo is modernised and the camera moves slowly into the room or back out of it (you can flip it per room). The reel takes the first photo's shape.</p>
+                    </div>
+                    @else
+                    <div>
+                        <label for="propertyVideo" class="eyebrow block mb-2">Walkthrough video (mp4 / mov)</label>
+                        <input id="propertyVideo" type="file" wire:model="video" accept="video/mp4,video/quicktime"
+                               class="block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                        <div wire:loading wire:target="video" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                        @error('video') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                        <p class="mt-1 font-mono text-[0.58rem] text-ink-faint">Slow, straight pushes into each room animate best.</p>
+                    </div>
+                    @endif
+                    <div>
+                        <label for="propertyAspect" class="eyebrow block mb-2">Final format</label>
+                        <select id="propertyAspect" wire:model="propertyAspect"
+                                class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60">
+                            @foreach (\App\Services\RealEstate\PropertyVideoEditor::ASPECTS as $value => $label)
+                                <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
+                        </select>
+                        <p class="mt-1 font-mono text-[0.58rem] text-ink-faint">The rooms are centre-cropped to it; the intro and outro cards are drawn at that size. Vertical from horizontal footage keeps the middle third of each frame — film in 4K for that.</p>
+                    </div>
+                    <div>
+                        <label for="propertyListingUrl" class="eyebrow block mb-2">Listing URL (optional)</label>
+                        <input id="propertyListingUrl" type="url" wire:model.blur="propertyListingUrl" placeholder="https://www.remax.pt/pt/imoveis/…"
+                               class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink placeholder:text-ink-faint focus:outline-none focus:border-teal/60">
+                        @error('propertyListingUrl') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                        <p class="mt-1 font-mono text-[0.58rem] text-ink-faint">Gives the agent's outro card and the house facts for the intro card.</p>
+                    </div>
+                    @if (trim($propertyListingUrl) === '')
+                        <fieldset class="border border-ink-soft/15 rounded-sm p-3 space-y-3">
+                            <legend class="eyebrow px-1">No listing URL? Type the agent and facts</legend>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <input type="text" wire:model="propertyAgent" placeholder="Agent's name" aria-label="Agent's name"
+                                       class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60">
+                                <input type="text" wire:model="propertyPhone" placeholder="Phone (+351 …)" aria-label="Agent's phone"
+                                       class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60">
+                                <input type="text" wire:model="propertyAgency" placeholder="Agency (e.g. RE/MAX Valor)" aria-label="Agency"
+                                       class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60">
+                                <select wire:model="propertyGender" aria-label="Title on the card"
+                                        class="bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60">
+                                    <option value="m">Consultor imobiliário</option>
+                                    <option value="f">Consultora imobiliária</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="propertyPhoto" class="font-mono text-[0.62rem] text-ink-soft">Agent's photo (for the outro card)</label>
+                                <input id="propertyPhoto" type="file" wire:model="propertyPhoto" accept="image/*"
+                                       class="mt-1 block w-full text-sm text-ink-soft file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                                @error('propertyPhoto') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                            </div>
+                            <textarea wire:model="propertyFacts" rows="4" aria-label="House facts"
+                                      placeholder="House facts, one per line — for the intro card&#10;Área útil: 152 m²&#10;Quartos: 3&#10;Preço: 350.000 €"
+                                      class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink text-sm focus:outline-none focus:border-teal/60"></textarea>
+                        </fieldset>
+                    @endif
+                    <fieldset>
+                        <legend class="eyebrow block mb-2">Voiceover</legend>
+                        <div class="flex flex-wrap gap-4 text-sm text-ink-soft">
+                            <label class="flex items-center gap-2"><input type="radio" wire:model.live="propertyVoice" value="none"> None — music only</label>
+                            <label class="flex items-center gap-2"><input type="radio" wire:model.live="propertyVoice" value="listing"> Written and narrated from the listing (pt-PT)</label>
+                            <label class="flex items-center gap-2"><input type="radio" wire:model.live="propertyVoice" value="upload"> Upload my own</label>
+                        </div>
+                        @if ($propertyVoice === 'upload')
+                            <input type="file" wire:model="audio" accept="audio/*" aria-label="Voiceover audio"
+                                   class="mt-2 block w-full text-sm text-ink-soft file:mr-3 file:py-2 file:px-4 file:rounded-sm file:border file:border-teal/40 file:bg-transparent file:text-teal file:font-mono file:text-xs file:cursor-pointer" />
+                            <div wire:loading wire:target="audio" class="mt-1 font-mono text-[0.6rem] text-ink-faint">uploading…</div>
+                        @endif
+                        @error('audio') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                    </fieldset>
+                    @include('livewire.partials.agent-extras-field')
+                    @include('livewire.partials.musica-picker')
+                    <div class="flex items-center gap-3 pt-2">
+                        <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition" wire:loading.attr="disabled">
+                            Make the property video
+                        </button>
+                        <span wire:loading wire:target="submitProperty" class="font-mono text-[0.6rem] text-ink-faint">preparing…</span>
+                    </div>
+                    <p class="font-mono text-[0.6rem] text-ink-faint">Stabilizes and colour-corrects the footage, then you mark the sections to modernise and approve each modern still before any video is paid for. Each section transforms on screen with its own sounds, joined by whip pans, with your music and voiceover and the agent's outro at the end — under a minute.</p>
+                </form>
+            </x-panel>
         @endif
 
-        {{-- Images (optional) — for both types --}}
-        @if ($createType !== null)
+        {{-- Images (optional) — for the animation and video types --}}
+        @if (in_array($createType, ['animation', 'overlay'], true))
             <x-panel class="mt-6" eyebrow="Optional" title="Images" glyph="▣">
                 <p class="text-ink-soft text-sm mb-4">Upload images and describe what they show. The AI uses them animated in the scenes where they fit.</p>
                 @include('livewire.partials.clip-images')
@@ -531,6 +1005,7 @@
                 <form wire:submit="guardarJson" class="space-y-4">
                     <p class="text-ink-soft text-sm">Edit directly the plan that goes to Remotion (scenes, layers, params). Audio, karaoke and images are added at render.</p>
                     @include('livewire.partials.musica-picker')
+                    @include('livewire.partials.captions-picker')
                     <textarea wire:model="editPlanJson" rows="22" spellcheck="false"
                               class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink font-mono text-xs leading-relaxed focus:border-teal/50 focus:outline-none" style="tab-size:2"></textarea>
                     @error('editPlanJson') <p class="text-bad text-sm">{{ $message }}</p> @enderror
@@ -549,6 +1024,7 @@
                 </div>
 
                 @include('livewire.partials.musica-picker')
+                @include('livewire.partials.captions-picker')
 
                 <div class="space-y-3">
                     @foreach ($editScenes as $i => $scene)
@@ -673,6 +1149,62 @@
                                 @endif
                             @endif
 
+                            {{-- A listing given as video: pick the exact moment(s) of the property video this block shows. --}}
+                            @if ($this->listingVideoLength && ($slots = $this->videoSlots($i)) !== [])
+                                <div class="mb-3">
+                                    <button type="button" wire:click="abrirMomentos({{ $i }})"
+                                            class="font-mono text-[0.62rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition">
+                                        🎞 Choose from the property video{{ count($slots) > 1 ? ' ('.count($slots).' moments)' : '' }}
+                                    </button>
+                                    @if ($momentPicker === $i)
+                                        @php $block = max(0.5, (float) $scene['end'] - (float) $scene['start']); @endphp
+                                        <div class="mt-2 border border-teal/30 rounded-sm p-2 bg-vellum/40" wire:ignore wire:key="moments-{{ $i }}"
+                                             x-data="sectionPicker(@js($this->listingVideoLength), @js(collect($slots)->filter(fn ($s) => $s['start'] !== null)->values()->all()), { max: {{ count($slots) }}, min: 0.5, maxLen: 10 })">
+                                            <video x-ref="video" class="w-full rounded-sm border border-ink-soft/15 bg-black max-h-[40vh]" muted playsinline preload="auto"
+                                                   src="{{ route('clips-animados.listing-video', ['id' => $editingId, 'what' => 'footage']) }}"></video>
+                                            <div class="mt-2 flex flex-wrap items-center justify-between gap-2 font-mono text-[0.6rem] text-ink-faint">
+                                                <span x-text="label(cursor)"></span>
+                                                <span>Drag on the strip to mark {{ count($slots) > 1 ? 'up to '.count($slots).' moments, one per picture of this effect' : 'the moment' }} · this block lasts {{ number_format($block, 1) }} s — a shorter moment runs on to fill it</span>
+                                            </div>
+                                            <div x-ref="strip" class="relative mt-1 h-14 rounded-sm border border-ink-soft/25 overflow-hidden cursor-crosshair select-none touch-none"
+                                                 style="background: url('{{ route('clips-animados.listing-video', ['id' => $editingId, 'what' => 'strip']) }}') center/100% 100% no-repeat"
+                                                 @pointerdown="down($event)" @pointermove="move($event)" @pointerup="up($event)" @pointerleave="up($event)">
+                                                <template x-for="(s, k) in sections" :key="k">
+                                                    <div class="absolute inset-y-0" :style="`left:${pct(s.start)}%;width:${pct(s.end - s.start)}%;background:rgba(44,95,99,.45);border-left:2px solid #2C5F63;border-right:2px solid #2C5F63`">
+                                                        <span class="absolute top-0.5 left-1 font-mono text-[0.6rem] text-papyrus drop-shadow" x-text="k + 1"></span>
+                                                        <span class="absolute inset-y-0 -left-1.5 w-3 cursor-ew-resize" data-edge="start" :data-i="k"></span>
+                                                        <span class="absolute inset-y-0 -right-1.5 w-3 cursor-ew-resize" data-edge="end" :data-i="k"></span>
+                                                    </div>
+                                                </template>
+                                                <div x-show="drag" class="absolute inset-y-0"
+                                                     :style="drag && `left:${pct(Math.min(drag.from, drag.to))}%;width:${pct(Math.abs(drag.to - drag.from))}%;background:rgba(184,134,52,.45);border-left:2px solid #B88634;border-right:2px solid #B88634`"></div>
+                                                <div class="absolute inset-y-0" :style="`left:${pct(cursor)}%;width:2px;background:#23201A`"></div>
+                                            </div>
+                                            <ol class="mt-2 space-y-1">
+                                                <template x-for="(s, k) in sections" :key="k">
+                                                    <li class="flex flex-wrap items-center gap-2 font-mono text-[0.62rem] text-ink-soft">
+                                                        <span class="w-5 text-teal" x-text="(k + 1) + '.'"></span>
+                                                        <button type="button" class="hover:text-ink" @click="seek(s.start)" x-text="label(s.start)"></button>→
+                                                        <button type="button" class="hover:text-ink" @click="seek(s.end)" x-text="label(s.end)"></button>
+                                                        <span class="text-ink-faint" x-text="'(' + (s.end - s.start).toFixed(1) + ' s)'"></span>
+                                                        <button type="button" class="px-2 py-0.5 rounded-sm border border-ink-soft/30 hover:bg-ink/5" @click="preview(s)">▶ preview</button>
+                                                        <button type="button" class="text-bad hover:underline" @click="sections.splice(k, 1)">remove</button>
+                                                    </li>
+                                                </template>
+                                            </ol>
+                                            <div class="mt-2 flex items-center gap-3">
+                                                <button type="button" :disabled="!sections.length || sending" @click="sending = true; $wire.usarMomentos({{ $i }}, sections).finally(() => sending = false)"
+                                                        class="font-mono text-[0.65rem] px-3 py-1.5 rounded-sm bg-teal-deep text-papyrus hover:opacity-90 transition disabled:opacity-40"
+                                                        x-text="sending ? 'Cutting…' : 'Use {{ count($slots) > 1 ? 'these moments' : 'this moment' }}'">Use</button>
+                                                <span class="font-mono text-[0.55rem] text-ink-faint">then Save below to re-render</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @error('moments.'.$i) <p class="text-bad text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                            @endif
+
+
                             <div class="grid grid-cols-12 gap-2 items-center">
                                 <div class="col-span-3">
                                     <label class="block font-mono text-[0.55rem] text-ink-faint mb-0.5">start</label>
@@ -758,9 +1290,83 @@
                     <label class="eyebrow block mb-2">Transcript (correct recognition errors)</label>
                     <textarea wire:model="editTranscriptText" rows="6" class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
                     @error('editTranscriptText') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
+                    @if ($this->editingSpokenAgain)
+                        <p class="mt-1 font-mono text-[0.58rem] text-ink-faint">A changed transcript is spoken again (new voiceover), then the clip is planned on it.</p>
+                    @endif
                 </div>
+
+                @if ($editListing)
+                    @php
+                        $editClip = $this->editingClip;
+                        $em = $editClip?->meta ?? [];
+                        $videoLen = $this->listingVideoLengthFor($editClip);
+                        $temRetrato = collect($editClip?->images ?? [])->contains(fn ($img) => str_starts_with((string) ($img['description'] ?? ''), 'Retrato'));
+                    @endphp
+                    {{-- The "From a listing" options, as this clip was made: what changes here is applied on Regenerate. --}}
+                    <div class="border border-ink-soft/15 rounded-sm p-3 bg-surface/20 space-y-2">
+                        <span class="eyebrow block">⌂ Listing</span>
+                        <label class="block text-sm text-ink-soft">Listing link
+                            <input type="url" wire:model="editListingUrl" class="mt-1 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink focus:outline-none focus:border-teal/60">
+                        </label>
+                        @error('editListingUrl') <p class="text-sm text-bad">{{ $message }}</p> @enderror
+                        <label class="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
+                            <span>Agent photo — {{ $temRetrato ? '✓ has one; upload to replace' : 'none yet' }}:</span>
+                            <input type="file" accept="image/*" wire:model="editAgentPhoto" class="text-xs">
+                            <span wire:loading wire:target="editAgentPhoto" class="text-ink-faint">uploading…</span>
+                        </label>
+                        @error('editAgentPhoto') <p class="text-sm text-bad">{{ $message }}</p> @enderror
+                        <label class="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
+                            <span>🏠 Property video — {{ $videoLen ? '✓ '.gmdate('i:s', (int) $videoLen).' long; upload to replace' : 'none (the reel uses the listing photos)' }}:</span>
+                            <input type="file" accept="video/*" wire:model="editListingVideo" class="text-xs">
+                            <span wire:loading wire:target="editListingVideo" class="text-ink-faint">uploading…</span>
+                        </label>
+                        @error('editListingVideo') <p class="text-sm text-bad">{{ $message }}</p> @enderror
+                        <label class="ml-4 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                            <input type="checkbox" wire:model="editMixPhotos" class="accent-teal">
+                            <span>Mix the video with the listing photos</span>
+                        </label>
+                        <label class="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
+                            <span>🎬 After-intro video — {{ ! empty($em['after_intro']) ? '✓ this clip has its own; upload to replace' : (app(\App\Services\Clips\Store\EffectStore::class)->afterIntroPath() ? 'the project\'s (SFX studio)' : 'none') }}:</span>
+                            <input type="file" accept="video/*" wire:model="editAfterIntro" class="text-xs">
+                            <span wire:loading wire:target="editAfterIntro" class="text-ink-faint">uploading…</span>
+                        </label>
+                        @error('editAfterIntro') <p class="text-sm text-bad">{{ $message }}</p> @enderror
+                        <label class="block text-sm text-ink-soft">After-intro line (said right after the intro, over the after-intro video)
+                            <input type="text" wire:model="editAfterIntroLine" class="mt-1 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink focus:outline-none focus:border-teal/60">
+                        </label>
+                        <label class="block text-sm text-ink-soft">Notes for the script (they override the listing page)
+                            <textarea wire:model="editListingNotes" rows="2" class="mt-1 w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-2 py-1 text-ink focus:outline-none focus:border-teal/60"></textarea>
+                        </label>
+                        <p class="font-mono text-[0.58rem] text-ink-faint">Changing the link, the notes, the property video or the photo mix writes the script again from the listing and rebuilds the clip (new voiceover). A new after-intro line replaces the old one in the transcript; a new photo or after-intro video is swapped in.</p>
+                    </div>
+                @endif
+
+                @if ($editOverlay)
+                    @include('livewire.partials.presents-picker')
+
+                    @include('livewire.partials.format-picker')
+                @endif
+
+                @include('livewire.partials.lead-field')
+
+                @include('livewire.partials.instructions-field')
+
+                @include('livewire.partials.para-finalizados')
+
+                    @include('livewire.partials.no-images')
+
+                    @if (! $semImagens) @include('livewire.partials.only-reference-images') @endif
+                    @if (! $semImagens && ! $soReferencias) @include('livewire.partials.fewer-images') @endif
+
+                @include('livewire.partials.free-sfx')
+
+                @include('livewire.partials.backdrop-picker')
+
+                @include('livewire.partials.musica-picker')
+                @include('livewire.partials.captions-picker')
+
                 <div class="flex items-center gap-3">
-                    <button type="submit" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">Regenerate animations</button>
+                    <button type="submit" wire:loading.attr="disabled" wire:target="editAgentPhoto, editListingVideo, editAfterIntro" class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition disabled:opacity-40">Regenerate animations</button>
                     <button type="button" wire:click="voltar" class="font-mono text-[0.62rem] text-ink-soft hover:text-ink">cancel</button>
                 </div>
                 <p class="font-mono text-[0.6rem] text-ink-faint">The AI re-plans the animations from the corrected text and renders again.</p>

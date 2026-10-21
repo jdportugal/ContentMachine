@@ -1,0 +1,1134 @@
+{
+    "status": "reviewing_rooms",
+    "type": "overlay",
+    "input_kind": "video",
+    "title": "Moradia T4 em Espinho para terminar ao seu gosto | 360 mil €",
+    "images": [
+        {
+            "id": "img_f61d8489",
+            "path": "clips/uploads/EV38oyNjMu45F5DzLySWevOcPSxb7QO1RE290MyM.jpg",
+            "description": "Retrato do consultor Eurico Azevedo, da RE/MAX Rapid.",
+            "name": "Eurico Azevedo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_dc586732",
+            "path": "clips/uploads/hNLMixPFnQDUukM4aMfRaPGsZHrZTuJnqZCNFuZQ.png",
+            "description": "Logótipo da RE/MAX Rapid.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "listing": {
+            "url": "https://remax.pt/pt/imoveis/venda-moradia-t4-aveiro-espinho/124321353-274/ANClIwdCDqK8lP9bCH8f-g0ho-J7jDbV",
+            "agent": "Eurico Azevedo",
+            "phone": "+351917203655",
+            "agency": "RE/MAX Rapid",
+            "hook": "Uma moradia em Espinho para terminar ao seu gosto.",
+            "voiceover": "Uma moradia em Anta, Espinho, para terminar ao seu gosto. A poucos minutos do centro e das praias de Espinho. Acessos rápidos à A29 e à A1, para o Porto e Gaia. Quatro quartos, quatro casas de banho e mais de duzentos metros de área privativa. A requalificação já começou, com aquecimento instalado e divisões alteradas. Os acabamentos ficam a cargo do comprador, e a casa é vendida no estado atual. Boa exposição solar, num lote de quinhentos e sessenta metros. Para habitação própria, ou para investir. Trezentos e sessenta mil euros. Para visitar, fale com o Eurico Azevedo, da REMAX Rapid.",
+            "scenes": [
+                {
+                    "photo": "fachada da moradia",
+                    "vo": "Uma moradia em Espinho para terminar ao seu gosto.",
+                    "caption": "Anta, Espinho"
+                },
+                {
+                    "photo": "rua / zona envolvente",
+                    "vo": "Fica em Anta, numa zona residencial tranquila, a poucos minutos do centro e das praias.",
+                    "caption": "Perto do centro e praias"
+                },
+                {
+                    "photo": "exterior / acesso à moradia",
+                    "vo": "Com acesso rápido à A29 e à A1.",
+                    "caption": "Junto à A29 e A1"
+                },
+                {
+                    "photo": "quarto",
+                    "vo": "Quatro quartos e quatro casas de banho.",
+                    "caption": "Quatro quartos"
+                },
+                {
+                    "photo": "sala / divisão ampla",
+                    "vo": "Mais de cento e oitenta metros de área útil.",
+                    "caption": "182 m² de área útil"
+                },
+                {
+                    "photo": "divisão em obra",
+                    "vo": "A requalificação já começou, com aquecimento instalado e divisões alteradas.",
+                    "caption": "Obras já iniciadas"
+                },
+                {
+                    "photo": "casa de banho em obra",
+                    "vo": "A obra está por concluir e é vendida no estado atual.",
+                    "caption": "Vendida no estado atual"
+                },
+                {
+                    "photo": "interior por acabar",
+                    "vo": "Os acabamentos ficam à sua escolha.",
+                    "caption": "Acabamentos à sua escolha"
+                },
+                {
+                    "photo": "terreno / fachada ao sol",
+                    "vo": "Boa exposição solar e um lote de quinhentos e sessenta metros.",
+                    "caption": "Lote de 560 m²"
+                },
+                {
+                    "photo": "fachada / vista geral do lote",
+                    "vo": "Para viver, ou para investir.",
+                    "caption": "Para viver ou investir"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Trezentos e sessenta mil euros. Para visitar, fale com o Eurico Azevedo, da RE/MAX Rapid.",
+                    "caption": "360.000 € · Eurico Azevedo · RE/MAX Rapid"
+                }
+            ],
+            "flags": [
+                "Jardim: the animation still has problems — Frame 2: the dark fence panel on top of the right boundary wall smears into a glossy, blurred surface with a pale patch in the middle. Its texture and the posts along its top edge lose definition, so the wall and fence look like they are morphing. A light grey smudge also appears on the deck beside it. Frame 3 still shows a faint pale patch near the right end of the fence.",
+                "Quarto: the animation still has problems — The open wooden door on the left changes between frame 1 and frame 2. In the first frame and frame 1 it sits swung back flat against the left wall, so you only see its narrow edge. From frame 2 on it shows as a full door face with its handle toward the camera, which means it has swung to a new position.; The built-in wooden wardrobe wall along the right edge disappears. It is clearly there in frames 1 and 2, mostly gone by frame 3, and completely gone in frames 4 and 5, where a plain white wall takes its place. Only the dark open door is left at the right edge.; The open wardrobe door on the right moves and changes shape. In frames 1 and 2 it is set into the wardrobe wall, but in frames 3 to 5 it becomes a separate dark door panel standing alone at the right edge of a white wall, and it gets thinner and slides toward the edge of the image."
+            ],
+            "message": "Bom dia Sr. Eurico,\nO meu nome é João Ferreira.\n\nVi a moradia em Anta, Espinho, que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum. Se gostar, pode publicá-lo à vontade.\n\nFaço vídeos destes para cada imóvel que os consultores têm à venda: basta reencaminhar-me as fotos, e em 24 horas recebe o vídeo pronto a publicar.\n\nQuer que faça também os dos seus outros imóveis?",
+            "gender": "m",
+            "title": "Moradia T4 à venda em Espinho, Espinho",
+            "price": 360000,
+            "details": {
+                "Preço": "360 000 €",
+                "Localização": "Espinho, Espinho, Aveiro",
+                "Referência": "124321353-274",
+                "Área Bruta m²": "289",
+                "Área Útil m²": "182",
+                "Área Total do Lote m²": "560",
+                "Quartos": "4",
+                "WC/Casas de banho": "4",
+                "Ano de Construção": "1994",
+                "Estacionamento": "Não",
+                "Garagem": "Sim",
+                "Carregamento de Carros Elétricos": "Não"
+            },
+            "info": "Título: Moradia T4 à venda em Espinho, Espinho\nPreço: 360.000 €\nLocalização: Espinho, Espinho, Aveiro\nReferência: 124321353-274\nÁrea Bruta m²: 289\nÁrea Útil m²: 182\nÁrea Total do Lote m²: 560\nQuartos: 4\nWC/Casas de banho: 4\nAno de Construção: 1994\nEstacionamento: Não\nGaragem: Sim\nCarregamento de Carros Elétricos: Não"
+        },
+        "property": {
+            "photos": [
+                "clips/uploads/I5RW9RL6SF52gnx4lEZipYzF86MoKxZz9hHCBUTy.jpg",
+                "clips/uploads/cbHOTgykffe55YDLUoEBGUwSX0oMI3ibRbZ4ocY5.jpg",
+                "clips/uploads/Usm22vji8HMzGeg9kCKOd5byuGAQwPZbSNXfPW22.jpg",
+                "clips/uploads/eu35M2MDBGX7AN2qK4pHOjozwd2p4C7EqKyR5d5z.jpg",
+                "clips/uploads/NhHoUOcE41afLMkol5bMrmNxToftQs7dCVrRzyso.jpg",
+                "clips/uploads/0ErxASOb7snx1qSJb6pilv1JzaExCD19nI9kPSPL.jpg",
+                "clips/uploads/T2Zw2bibbKusOCAZvQrfmt1F7Vu9dZk3gDm8rKra.jpg",
+                "clips/uploads/9hpDvppbyIW0y7Yhdp00iduCriyYkwM1CQqA4gRq.jpg",
+                "clips/uploads/OjTTCG6AfLv9g4ekSZYz1pQrucdHvoBMunDaTboW.jpg",
+                "clips/uploads/aGG7QgIredeI4H8M5umeDxMJhzwBPXWvNEjd7sTz.jpg",
+                "clips/uploads/ghTskJzVXUr5cVsltOT3ZTxcqjzuZ2aKNNy8WLzq.jpg",
+                "clips/uploads/1havIqfg1v0uvDHv5Ay4QdahsPWAHgsnRBEuhKRG.jpg"
+            ],
+            "narrate": true,
+            "aspect": "9:16",
+            "voice": "clips/uploads/eMVaL2imU6dvSVqGOBqXucmnQzP02u9DiTJYNMMc.mp3",
+            "proxy": "clips/uploads/YIkGfmuaEN4cHYFXPTh1FvkmAIRSvfBklpVAwhlc.mp4",
+            "width": 1620,
+            "height": 1080,
+            "duration": 60,
+            "sections": [
+                {
+                    "start": 0.2,
+                    "end": 4.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 5.2,
+                    "end": 9.8,
+                    "note": "",
+                    "motion": "backward"
+                },
+                {
+                    "start": 10.2,
+                    "end": 14.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 15.2,
+                    "end": 19.8,
+                    "note": "",
+                    "motion": "backward"
+                },
+                {
+                    "start": 20.2,
+                    "end": 24.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 25.2,
+                    "end": 29.8,
+                    "note": "",
+                    "motion": "backward"
+                },
+                {
+                    "start": 30.2,
+                    "end": 34.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 35.2,
+                    "end": 39.8,
+                    "note": "",
+                    "motion": "backward"
+                },
+                {
+                    "start": 40.2,
+                    "end": 44.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 45.2,
+                    "end": 49.8,
+                    "note": "",
+                    "motion": "backward"
+                },
+                {
+                    "start": 50.2,
+                    "end": 54.8,
+                    "note": "",
+                    "motion": "forward"
+                },
+                {
+                    "start": 55.2,
+                    "end": 59.8,
+                    "note": "",
+                    "motion": "backward"
+                }
+            ],
+            "rooms": [
+                {
+                    "room": "Jardim",
+                    "start": 0.2,
+                    "end": 4.8,
+                    "note": "",
+                    "anim": {
+                        "start": 0.2,
+                        "end": 4.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/P67KtY2IvkLgYXZVzfIJMpAelI5p3Ti7jcKF0aE1.jpg",
+                        "end_frame": "clips/uploads/d4hmjfcKvTfGD8OFK4q1k3Gjbra8m3C1imSF9GU9.jpg",
+                        "prompt": "Furnish the terrace and garden with modern outdoor furniture, including a low outdoor sofa with light beige cushions, two lounge chairs, a round coffee table in light wood, an outdoor rug and a large shade umbrella. Mow the overgrown grass into a neat, even green lawn and add a few planters with greenery along the dark fence on the right. Replace the paved floor with modern wide-plank composite decking in a warm light oak tone. Place the seating group in the centre of the paved area, facing the lawn, with the umbrella beside it. Keep the dark wooden front door on the left side of the house, the sliding glass door to its right, the window at the far left of the facade, the glass canopy above the front door and the glass balcony above clear and exactly as they are. Make everything proportional to the space. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/GkqRBT2uXFXEVL95NjNhDZe9BiNiwzN4BUSKPkWK.png",
+                        "alignment": 0.608,
+                        "keep": [
+                            "the closed window on the left edge of the frame, ground floor of the house facade (near)",
+                            "the closed wooden double front door, left of centre on the ground floor of the house facade",
+                            "the closed sliding glass doors, centre-left on the ground floor of the house facade, right of the front door",
+                            "the window at the top-left edge of the frame, upper floor of the house facade (partly cut off)",
+                            "the upper-floor balcony with a glass balustrade and the dark glazed opening behind it, upper centre-left, projecting over the sliding glass doors",
+                            "the glass canopy above the front door, upper left of centre",
+                            "the boundary wall with a dark fence panel on top, right side of the frame, running from the near right towards the back",
+                            "the low boundary wall at the far back of the garden, centre background"
+                        ],
+                        "problems": [],
+                        "video": "clips/uploads/aSF76cFpycT4RwLLOKpdwPU99RZXmZ8ZZaIiiBpl.mp4",
+                        "clip_problems": [
+                            "Frame 2: the dark fence panel on top of the right boundary wall smears into a glossy, blurred surface with a pale patch in the middle. Its texture and the posts along its top edge lose definition, so the wall and fence look like they are morphing. A light grey smudge also appears on the deck beside it. Frame 3 still shows a faint pale patch near the right end of the fence."
+                        ]
+                    }
+                },
+                {
+                    "room": "Varanda",
+                    "start": 5.2,
+                    "end": 9.8,
+                    "note": "",
+                    "anim": {
+                        "start": 5.2,
+                        "end": 9.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/aGSMrVmBTiAUjds4ffyyP8IPTgStEAwlAFx3g7Js.jpg",
+                        "end_frame": "clips/uploads/makk6PcQlrfC7cpd2ubdZEwGTwV4VqcrbItGTfDE.jpg",
+                        "prompt": "Furnish the balcony with modern outdoor furniture, including a low teak-and-rope two-seater sofa with off-white cushions, a matching lounge chair, a round light-stone coffee table, a cream-and-sand outdoor rug and a black metal floor lantern. Add large greenery in matte terracotta planters along the left wall. Replace the floor with modern wide-plank laminate in a warm light oak tone. Make the seating stand along the left wall and face out towards the trees. Keep the frameless glass railing with its black top rail along the front and right edges clear and exactly as it is, and keep the white wall on the left and the roof edge at the top exactly as they are. Make everything proportional to the balcony. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/4eC9tHPbwzkiHZg7KsMKP1n6tHHMm3jBcT6u4zKw.png",
+                        "alignment": 0.743,
+                        "keep": [
+                            "the textured rendered exterior wall of the house along the left edge of the frame, near",
+                            "the edge of a recessed opening (door or window reveal) in that wall at the far left edge, near, partly cut off by the frame",
+                            "the roof eave / overhang projecting into the top of the frame, top centre-left",
+                            "the frameless glass balustrade with a dark metal top rail running along the far edge of the balcony from left to centre, back",
+                            "the frameless glass balustrade with a dark metal top rail running along the right side of the balcony from centre to the right edge, near to back",
+                            "the open-air balcony/terrace deck itself, bounded by the house wall on the left and the glass balustrade on the other sides"
+                        ],
+                        "problems": [],
+                        "staging": false,
+                        "error": null,
+                        "video": "clips/uploads/TeuxlMNCOuDZHzSmpsZudbdHNPrs1qHcwRl85sEH.mp4",
+                        "clip_problems": [],
+                        "onset": 0.5
+                    }
+                },
+                {
+                    "room": "Quarto",
+                    "start": 10.2,
+                    "end": 14.8,
+                    "note": "",
+                    "anim": {
+                        "start": 10.2,
+                        "end": 14.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/B5bvyDJ5YVoKCn4A4UztMgRsk4218cQpMJwPUszK.jpg",
+                        "end_frame": "clips/uploads/f64Kv8EKPCsjI1a79sl8Ok950sgAYVkY7z8eOc1q.jpg",
+                        "prompt": "Furnish the bedroom with modern furniture, including a double bed with an upholstered headboard and soft neutral linen bedding, two bedside tables with matching table lamps, a large textured wool rug under the bed, a pendant light fixture and an upholstered accent chair. Add a tall potted plant beside the accent chair. Replace the floor with modern wide-plank laminate in a warm light oak tone. Place the bed with its headboard against the left wall, centred on it and facing the built-in wardrobes on the right. Put the accent chair in the back-left corner beside the balcony. Keep the large sliding glass balcony door in the centre-right of the back wall, the open wooden door at the front of the left wall, the open wooden door on the right wall and the built-in wardrobes along the right wall clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/MLkGohSq4KPPuYe4IAtb9TKHEF061cbNtRYD3LbL.png",
+                        "alignment": 0.621,
+                        "keep": [
+                            "the open wooden door on the left edge, near, swung back against the left wall",
+                            "the large sliding glass door to a balcony with a glass railing, centre-right of the back wall, closed",
+                            "the built-in wooden wardrobe wall running along the right edge, near to mid-room",
+                            "the open wooden wardrobe door on the right side, mid-room, swung out from the built-in wardrobe wall"
+                        ],
+                        "problems": [],
+                        "staging": false,
+                        "error": null,
+                        "video": "clips/uploads/MjzzTpNhsclB61xjQ5ZD3hUrkHDbpygb1wGTgK9s.mp4",
+                        "clip_problems": [
+                            "The open wooden door on the left changes between frame 1 and frame 2. In the first frame and frame 1 it sits swung back flat against the left wall, so you only see its narrow edge. From frame 2 on it shows as a full door face with its handle toward the camera, which means it has swung to a new position.",
+                            "The built-in wooden wardrobe wall along the right edge disappears. It is clearly there in frames 1 and 2, mostly gone by frame 3, and completely gone in frames 4 and 5, where a plain white wall takes its place. Only the dark open door is left at the right edge.",
+                            "The open wardrobe door on the right moves and changes shape. In frames 1 and 2 it is set into the wardrobe wall, but in frames 3 to 5 it becomes a separate dark door panel standing alone at the right edge of a white wall, and it gets thinner and slides toward the edge of the image."
+                        ]
+                    }
+                },
+                {
+                    "room": "Quarto",
+                    "start": 15.2,
+                    "end": 19.8,
+                    "note": "",
+                    "anim": {
+                        "start": 15.2,
+                        "end": 19.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/AKd1FnQuJgLeQY5FMAvnoneFPl41daHvmDcwVoTM.jpg",
+                        "end_frame": "clips/uploads/ltC2NQVp9j0rGcepw8rbLpEKkHxotpCj21MWKHPV.jpg",
+                        "prompt": "Furnish the bedroom with modern furniture, including a double bed with a light-oak upholstered headboard and white and sand-coloured linen bedding, two light-oak bedside tables with soft-glow lamps, a large textured cream wool rug, a modern linen drum pendant light replacing the old hanging lantern, and a slim light-oak dresser. Add a green plant in a ceramic pot and a framed neutral artwork above the bed. Replace the floor with modern wide-plank laminate in a warm light oak tone. Place the bed with its headboard against the long right-hand wall, centred on it, with a bedside table on each side and the dresser against the left wall. Keep the wide sliding window on the back wall, left of centre, and the doorway at the near right edge of the frame clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/KNN4dAQkD81NS2dhTrRPgtcuGT8fsD45VOhutDtw.png",
+                        "alignment": 0.421,
+                        "keep": [
+                            "the closed two-pane sliding window in the back wall, centre-left of frame",
+                            "the doorway with a wooden frame on the right edge of the frame, near wall, filled by a dark grey panel"
+                        ],
+                        "problems": [],
+                        "video": "clips/uploads/k6mxb3WsrXLyssqy8FeFQ2sM0SdYi46NxoLsvriV.mp4",
+                        "clip_problems": [],
+                        "onset": 0
+                    }
+                },
+                {
+                    "room": "Quarto",
+                    "start": 20.2,
+                    "end": 24.8,
+                    "note": "",
+                    "anim": {
+                        "start": 20.2,
+                        "end": 24.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/00tN8YgUCtmO9K1vvsrNRE8LwOZwpuLkQ0KEYFAI.jpg",
+                        "end_frame": "clips/uploads/Nq0tHOBh7rvXXuj32E3yZs1XasJsGzN5TNkXP3Hv.jpg",
+                        "prompt": "Furnish the bedroom with modern furniture, including a double bed with an upholstered headboard and soft neutral linen bedding, two bedside tables with warm table lamps, a large textured wool rug in warm beige under the bed, and a slim pendant light fixture replacing the ceiling track spotlights. Replace the doors of the built-in wardrobe along the left wall with flat handleless warm-white fronts, keeping the wardrobe the same size and in the same place. Add a tall potted plant in the corner between the back wall and the glass door. Smooth and repaint the walls in a soft warm white. Replace the floor with modern wide-plank laminate in a warm light oak tone. Place the bed centred against the back wall, facing into the room. Keep the full-height sliding glass door to the balcony on the right wall clear and exactly as it is. Make everything proportional to the room. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/OsXQtinnHB0RX9gGhYp7GLm5nYsmprh1RCybk3by.png",
+                        "alignment": 0.549,
+                        "keep": [
+                            "the full-height built-in wooden wardrobe wall along the left wall, running from the left edge of the frame to the back-left corner; its doors are closed except the one nearest the back wall, which is slightly ajar",
+                            "the floor-to-ceiling aluminium sliding glass door on the right wall, extending to the right edge of the frame, closed, leading to an outdoor balcony",
+                            "the outdoor balcony with a solid parapet wall, seen through the sliding glass door on the right"
+                        ],
+                        "problems": [
+                            "The wrong wardrobe door is open. A middle door (about x 168–240) swings wide open, showing its shelves, while the two doors nearest the back wall are closed. In the real photo only the door nearest the back wall is slightly ajar."
+                        ]
+                    }
+                },
+                {
+                    "room": "Casa de banho",
+                    "start": 25.2,
+                    "end": 29.8,
+                    "note": "",
+                    "anim": {
+                        "start": 25.2,
+                        "end": 29.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/ryRs0gAomUo9vg56DXJsIHyvaeshuOfE0lyym8HL.jpg",
+                        "end_frame": "clips/uploads/UwfOTTekAj5MP5tjM5fxeCWcAjTyin0Udrf9bFyv.jpg",
+                        "prompt": "no frosted wired-glass. Gut-renovate this bathroom into a brand-new modern minimal bathroom — nothing old may remain visible: every wall, the floor, the ceiling, every fixture and every fitting is new. The before-and-after must be obvious at a glance.\nWalls: tear out the old tiles and cover every wall, floor to ceiling, in large-format matte warm-white porcelain tiles with thin, barely visible grout lines.\nFloor: replace the whole floor, edge to edge, with large-format warm light-grey stone-look tiles.\nCeiling: smooth, freshly painted warm white, following the same slope; the exposed blue pipe is gone.\nShower: a frameless clear glass shower screen on the left, with a white marble-look wall behind it, a recessed niche and a matte-black rain shower head.\nBasin: a new white ceramic basin on a floating light-oak vanity, with a matte-black wall-mounted tap, in the same spot as the old basin.\nToilet: a new white wall-hung rimless toilet with a matte-black flush plate, in the same spot as the old toilet.\nMirror: a large frameless mirror with soft warm LED backlighting above the basin.\nWindow: the same small square window opening in the same place, now with a slim modern white frame and clear glass.\nKeep the room's shape, the sloped ceiling, the small wooden door on the left near the back and the open wooden entrance door in the right foreground exactly where they are. Bathroom doors fully invisible,",
+                        "staged": "clips/uploads/sr0CYS9okljsgAB6BOZf2qWcV7p4ETDTHeKgCjaL.png",
+                        "alignment": 0.574,
+                        "keep": [
+                            "the open wooden door in the near foreground on the right edge of frame",
+                            "the frosted wired-glass sliding doors in a dark metal frame along the left wall, near, left edge of frame, closed",
+                            "the wooden panelled door on the left wall partway back, left of centre, partly open",
+                            "the small square window high on the back wall, centre, closed"
+                        ],
+                        "problems": [
+                            "The frosted wired-glass sliding doors on the left wall are resized: only the nearest panel is left. The second, further panel has been replaced by a recessed marble shower alcove with a frameless glass screen.",
+                            "A shower enclosure has been built in the space of the sliding-door opening, so fixtures now sit where part of the doors should be."
+                        ],
+                        "staging": false,
+                        "error": null,
+                        "candidates": [
+                            {
+                                "path": "clips/uploads/jMwDcZTxbsJVYfwOcUxoE65b0roiZlXWH5DZ4HJD.png",
+                                "score": 0.715,
+                                "problems": [
+                                    "raw, patched, unpainted grey plaster still showing around and below the back-wall window, with drip stains running down the tiles under it",
+                                    "exposed blue pipe/conduit still running across the ceiling",
+                                    "small hole/fixing mark still on the back wall above the window",
+                                    "dirty marks and stains still on the right-wall tiles near the mirror and up near the ceiling"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/39o9E5riMPtrJU7lbHg2W3Qfa3TbbfJHYDLCeY87.png",
+                                "score": 0.685,
+                                "problems": [
+                                    "raw, patched, unpainted grey plaster still showing around and below the back-wall window, with drip stains running down the tiles under it",
+                                    "exposed blue pipe/conduit still running across the ceiling",
+                                    "small hole/fixing mark still on the back wall above the window",
+                                    "dirty marks and stains still on the right-wall tiles around the mirror and up near the ceiling"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/XfIhFasq5LQ6KiLheHbV3jdEnVF07yGUSy0JTtrp.png",
+                                "score": 0.635,
+                                "problems": [
+                                    "The rear panel of the sliding doors on the left wall has changed from frosted wired glass to clear glass, so it is no longer the same kind of door.",
+                                    "A new window with a white frame is visible through the left sliding-door glass, inside the shower area. There is no window there in the real photo.",
+                                    "Grey streaky stains remain on the back-wall tiles below the window.",
+                                    "Small exposed fixing or hole on the back wall above the window."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/AvEn8chsDarJ4SDksdIjhokgZYxz7ADMEqMhlKd2.png",
+                                "score": 0.685,
+                                "problems": [
+                                    "raw, patched, unpainted grey plaster still showing around and below the back-wall window, with drip stains running down the tiles under it",
+                                    "exposed blue pipe/conduit still running across the ceiling",
+                                    "small hole/fixing mark still on the back wall above the window",
+                                    "small loose white object left on the floor at the foot of the panelled door",
+                                    "dirty marks and stains still on the right-wall tiles near the mirror and up near the ceiling"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/SVCbo8bepZnxsrp2kAmSXjVyi7ucBzSP53yQtetG.png",
+                                "score": 0.704,
+                                "problems": [
+                                    "Exposed blue conduit pipe still runs across the ceiling.",
+                                    "Raw, patched, unpainted plaster is still showing around the small back-wall window, with dark staining on the surround.",
+                                    "Dirty streaks and stains on the back-wall tiles below the window.",
+                                    "Small hole or exposed fixing point on the back wall above the window.",
+                                    "Scuffs and marks on the upper right-wall tiles.",
+                                    "Small loose white object or debris on the floor at the foot of the panelled door.",
+                                    "Dirt marks on the floor tiles."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/91lOr5EG7wia5KfDc6VA4ifWvkemmEJvvC0hyO70.png",
+                                "score": 0.637,
+                                "problems": [
+                                    "Exposed blue conduit pipe still runs across the ceiling.",
+                                    "Raw, patched, unpainted plaster is still showing around the small back-wall window, with dark staining on the frame surround.",
+                                    "Dirty streaks and stains on the back-wall tiles below and beside the window.",
+                                    "Small hole or exposed fixing point on the back wall above the window.",
+                                    "Scuffs and stains on the upper right-wall tiles.",
+                                    "Dark stains and dirt spots on the floor tiles.",
+                                    "Small loose white object or debris on the floor at the foot of the panelled door."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/nLZ1Gyz9mgsZsw7dztsLlqT2I4XHA5WdGDzGWp81.png",
+                                "score": 0.698,
+                                "problems": [
+                                    "Raw, patched, unpainted plaster is still showing around the small back-wall window, with grey render exposed above it",
+                                    "Stains and patch marks are still showing on the back-wall tiles below and beside the window"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/N3lN11inDdlabjCXBSHJKBadXNPb1M4zCCAyVqTz.png",
+                                "score": 0.615,
+                                "problems": [
+                                    "The second (inner) panel of the frosted wired-glass sliding doors on the left wall has become clear glass, and a shower enclosure is visible through it, so the closed frosted door is now a different kind of thing",
+                                    "A new window, which is not in the real photo, appears inside the shower area behind the left sliding doors",
+                                    "The exposed blue pipe or conduit is still running across the ceiling"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/KI39hKQpBaE7iZ96ulm051L1PibBOV22IBEWeB1m.png",
+                                "score": 0.604,
+                                "problems": [
+                                    "The right-hand panel of the frosted wired-glass sliding doors on the left wall has become a clear glass shower screen with a shower inside, so it is no longer a closed frosted wired-glass door",
+                                    "A bare bulb hangs from the ceiling at top centre",
+                                    "Raw, patched, unpainted plaster around the top and sides of the back-wall window, with stain marks on the tiles below it"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/VOjeLX5Oxzl6QUcbGkmqzosYHJUoEAdHnxqXbOnx.png",
+                                "score": 0.564,
+                                "problems": [
+                                    "The wooden panelled door on the left wall partway back is gone; a shower wall with a niche now fills that spot",
+                                    "The right-hand panel of the frosted wired-glass sliding doors, with its dark metal frame and angled top, has been replaced by an open walk-in shower with a clear glass screen",
+                                    "A small bare fitting or cable hangs from the ceiling at top centre"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/fyLNcpfu43KpAVkS41CqdAHW3uHSFbL66ib7eDsh.png",
+                                "score": 0.721,
+                                "problems": [
+                                    "The right-hand panel of the frosted wired-glass sliding doors on the left wall has become a clear glass shower screen with a shower inside, so it is no longer a closed frosted wired-glass door",
+                                    "Raw, patched, unpainted plaster around the back-wall window, with grey stains and drips running down the tiles below it",
+                                    "Patch marks and stains on the right wall tiles around the mirror",
+                                    "Exposed blue pipes still run across the ceiling"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/Hh6kTGnzxV3aOOENrCNXOrC4R0NxtkNZjXZ65DWx.png",
+                                "score": 0.633,
+                                "problems": [
+                                    "The second (inner) panel of the frosted wired-glass sliding doors on the left wall has become clear glass, and a shower enclosure is visible through it, so the closed frosted door is now a different kind of thing",
+                                    "A new window, which is not in the real photo, appears inside the shower area behind the left sliding doors",
+                                    "Raw, patched, unpainted plaster is still showing around the small back-wall window, with stains running down the tiles below it",
+                                    "The exposed blue pipe or conduit is still running across the ceiling",
+                                    "Patch marks and stains are still showing on the right wall above the mirror"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/wbnsYmlWixskWA3sy8sXr4WxXTGYXNWxfNNu3PAk.png",
+                                "score": 0.727,
+                                "problems": []
+                            },
+                            {
+                                "path": "clips/uploads/XXFzskzayUHrzt1qjGsXMB99qdjia0OrfZ0ik1BL.png",
+                                "score": 0.685,
+                                "problems": []
+                            },
+                            {
+                                "path": "clips/uploads/qu2yiXBI2MdqFwIYMPuEugFZ3abSOZzkkJ2XvY2g.png",
+                                "score": 0.627,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall have been cut down. Only the nearest panel remains. The second, angled-top panel further back has been removed and replaced with an open walk-in shower that has a clear glass screen and marble walls.",
+                                    "Inside the new shower area on the left wall, a bright square opening that looks like a window appears where the real photo has the frosted sliding-door panel. The real room has no window there."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/JcsxHjiDVpLCNdlDdOwNnWT3rNtglhdY6imy8zIP.png",
+                                "score": 0.59,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall are resized: only the nearest panel is left (about 24% of frame width instead of about 38%). The second, further panel has been replaced by a walk-in shower with marble tiles and a frameless glass screen.",
+                                    "A shower enclosure has been built in the space of the sliding-door opening, so fixtures now sit where part of the doors should be."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/YhGpz0DptmUlmE5dhOmoeewzEpOWzbxY3Eq3kEAX.png",
+                                "score": 0.581,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall are resized: only the nearest panel is left. The second, further panel has been turned into a marble-tiled shower with black-framed clear-glass sliding doors.",
+                                    "A shower enclosure has been built in the space of the sliding-door opening, so fixtures now sit where part of the doors should be."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/sr0CYS9okljsgAB6BOZf2qWcV7p4ETDTHeKgCjaL.png",
+                                "score": 0.574,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall are resized: only the nearest panel is left. The second, further panel has been replaced by a recessed marble shower alcove with a frameless glass screen.",
+                                    "A shower enclosure has been built in the space of the sliding-door opening, so fixtures now sit where part of the doors should be."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/3gZrQ6lBO4z4UWwlJ0VKDpHRCpISbKEnqBuEmWUO.png",
+                                "score": 0.584,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall have been cut back from two panels to one. The original panels reached about 38% of the frame width; here they stop at about 26%.",
+                                    "The inner sliding-door panel has been replaced by a walk-in shower with a clear glass screen, marble walls and a rain head, so a fixture now sits where the sliding door was.",
+                                    "A bright framed rectangle in the shower area, behind the glass and level with the back window, looks like a new window on the left wall. That wall has no window in the real photo."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/PbTuBMm8X6U6pSsPb2w6QdEL1b7WyAKk1tDzziAf.png",
+                                "score": 0.482,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall have been cut back to a single panel ending at about 23% of the frame width. The original reached about 38%.",
+                                    "The inner sliding-door panel has been replaced by a walk-in shower with a clear glass screen, marble walls and a rain head, so a fixture now sits where the sliding door was.",
+                                    "A bright framed rectangle in the shower area, behind the glass, looks like a new window on the left wall. That wall has no window in the real photo."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/6x9qVj1zNUhmlAgMv7GLJLXiZYG4pZI8HFzMVfmz.png",
+                                "score": 0.427,
+                                "problems": [
+                                    "The frosted wired-glass sliding doors on the left wall have been cut back to a single panel ending at about 21% of the frame width. The original reached about 38%.",
+                                    "The inner sliding-door panel has been replaced by a walk-in shower with a clear glass screen on a black top rail, marble walls and a rain head, so a fixture now sits where the sliding door was.",
+                                    "A bright rectangle with a frame and sill in the shower area, behind the glass, looks like a new window on the left wall. That wall has no window in the real photo."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/zpkdE0ZY3oQhL6rdO4bNmQim5yAIrKeI8tZmw7zK.png",
+                                "score": 0.891,
+                                "problems": []
+                            }
+                        ]
+                    }
+                },
+                {
+                    "room": "Sala",
+                    "start": 30.2,
+                    "end": 34.8,
+                    "note": "",
+                    "anim": {
+                        "start": 30.2,
+                        "end": 34.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/Y9BfZTA3roFYgKYc7wO6m0lmHUu6eSIwizvDNytS.jpg",
+                        "end_frame": "clips/uploads/DVj6WhQ4EiajI5NTHlOiAGskepAnkAFJ6l6KvhAF.jpg",
+                        "prompt": "Furnish the living room with modern furniture, including a large light-beige fabric sectional sofa, a soft textured wool rug, a low oak coffee table, a slim media console, a pendant light fixture and two accent armchairs in warm caramel tones. Remove all construction debris, tools, the wheelbarrow and the ladder, finish the walls in smooth warm-white plaster and the ceiling in a flat white plaster finish, and add a tall potted olive tree and some greenery. Replace the floor with modern wide-plank laminate in a warm light oak tone. Make the seating area centred in the room on the rug, with the sofa facing the sliding glass door, the armchairs on the left side and the media console against the left wall. Keep the large dark-framed sliding glass door in the centre-right of the back wall and the wooden panelled door with glass panes on the right wall clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.",
+                        "staged": "clips/uploads/N1rs5UQs7oJFOYSfyWSy322E96DI9cdBpLmp0gqR.png",
+                        "alignment": 0.201,
+                        "keep": [
+                            "the closed wooden door with glazed panels on the right edge of the frame, near right side wall",
+                            "the closed two-panel sliding glass door to the garden, right of centre on the back wall"
+                        ],
+                        "problems": [
+                            "The sectional sofa and its chaise stand directly in front of the lower right part of the garden sliding glass door, blocking much of its bottom half."
+                        ]
+                    }
+                },
+                {
+                    "room": "Sala de Estar e Jantar",
+                    "start": 35.2,
+                    "end": 39.8,
+                    "note": "",
+                    "anim": {
+                        "start": 35.2,
+                        "end": 39.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/5wqRZPLIOhLHeVXCYirlcu7ak0huMF0yyuo9Na4l.jpg",
+                        "end_frame": "clips/uploads/5EvZWFD8m4my7P9hPq76qf9CpBl7jksEqBCHecsW.jpg",
+                        "prompt": "No visible cement.Furnish the open-plan living and dining room with modern furniture, including a light linen sectional sofa, a large textured wool rug, a low oak coffee table, a round oak dining table with six upholstered chairs, a pendant light fixture over the dining table and two accent chairs. Finish all walls and the ceiling in smooth, plain warm white with no exposed pipes or cables. Replace the floor with modern wide-plank laminate in a warm light oak tone. Place the sectional, rug, coffee table and accent chairs in the front half of the room, centred and facing the sliding glass door on the left wall, and place the dining table and chairs in the far half of the room under the ceiling rose, in front of but well away from the far sliding glass door. Keep the large sliding glass door on the left wall, the sliding glass door on the far end wall and the open doorway on the right wall in the foreground clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style. All holes and incomplet walls must be finished and panted white. no imcomplete gray cement walls anywhere, they must all be white. Walls on the right and back must be finished, no visible handing wires, and the dor frames on the back should be removed.",
+                        "staged": "clips/uploads/xNcb2HQ7y9kPf2Mp65TGmUld20UzBuWawC0gutzO.png",
+                        "alignment": 0.376,
+                        "keep": [
+                            "the closed sliding glass door to the garden on the back wall, left-centre",
+                            "the wide open opening (beam overhead) through to a second room section at the back, centre-right",
+                            "the closed sliding glass door to the garden on the far back wall of the second room section, centre-right",
+                            "the open doorway to an adjacent room on the right edge of frame, near, framed by an exposed concrete column"
+                        ],
+                        "problems": [
+                            "Two new windows have been added on the back wall between the left sliding door and the opening to the second room section. They are not in the real photo."
+                        ],
+                        "staging": false,
+                        "error": null,
+                        "candidates": [
+                            {
+                                "path": "clips/uploads/xNcb2HQ7y9kPf2Mp65TGmUld20UzBuWawC0gutzO.png",
+                                "score": 0.376,
+                                "problems": [
+                                    "Two new windows have been added on the back wall between the left sliding door and the opening to the second room section. They are not in the real photo."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/HlLfTfqR7iuNNORy24NT80gJi96azM0eGWyInsaF.png",
+                                "score": 0.382,
+                                "problems": [
+                                    "The beam over the wide opening to the second room section is gone. The ceiling and back wall run straight through, so the opening has become one continuous room.",
+                                    "The open doorway to the adjacent room at the near right edge, with its exposed concrete column, is gone. It has been replaced by a plain white wall with a narrow recessed opening further back."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/PAubCFspKxf4VUagLhf7MkCwZxmPn0XSrIky656f.png",
+                                "score": 0.386,
+                                "problems": [
+                                    "The beam over the wide opening to the second room section is gone. The ceiling runs straight through, so the two sections have been merged into one space and the opening no longer reads as an opening.",
+                                    "A new tall glass door/window has been added on the back wall, centre, between the left sliding door and the second room section. It is not in the real photo.",
+                                    "The open doorway to the adjacent room at the right edge, beside the exposed concrete column, has been closed off. A plain white wall now shows where the doorway and the room beyond should be."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/5n8cnF9qpEbFoIaygqVQtp4j2f0XxLNVkYwh3gPP.png",
+                                "score": 0.549,
+                                "problems": [
+                                    "The beam over the wide opening to the second room section is gone. The ceiling runs straight through, so the opening has become one continuous room.",
+                                    "Blue electrical conduits are exposed down the left wall, with broken and raw plaster around them.",
+                                    "Blue conduits are still exposed along the ceiling at the top right.",
+                                    "White cables and conduits hang exposed down the concrete column on the right, and a loose white cable runs down the right edge.",
+                                    "The concrete column by the right doorway is still raw, unfinished concrete.",
+                                    "Rubble and debris on raw old floor show at the bottom right next to the column. This old floor is not laminate."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/RPFLrw3S2B5lOsnKX7GciYTRgFlFIu6MWhC56Kv3.png",
+                                "score": 0.546,
+                                "problems": [
+                                    "A new narrow door/doorway has been added on the back wall just left of the second room section, where the real photo shows only wall with old door frames leaning against it.",
+                                    "Exposed blue electrical conduits are still running down the left wall in a raw chased channel, with patched and unpainted plaster around them.",
+                                    "Exposed blue conduits are still showing along the ceiling at the top right.",
+                                    "The handwritten '9' marking is still on the left wall.",
+                                    "Loose, dangling white cables and an open junction box/electrical box are still hanging on the concrete column at the right edge.",
+                                    "Rubble and an unfinished, unpainted area are still showing at the bottom right next to the column, by the doorway."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/3Cz2fdTunMM66NC8ggCfNpoo3CA2SEi1ttX9KQM2.png",
+                                "score": 0.404,
+                                "problems": [
+                                    "The wide opening to the second room section looks wider and further left than in the real photo. The stretch of back wall between the left sliding door and the opening is much shorter.",
+                                    "White cables and conduits hang exposed at the top of the concrete column, top right.",
+                                    "A loose white cable or pipe runs diagonally down the right edge of the frame.",
+                                    "The concrete column by the right doorway is still raw, unfinished concrete.",
+                                    "A blue bucket or box is left on the floor in the adjacent room, seen through the right doorway.",
+                                    "Old, rough floor is still visible through the right doorway past the column, not new light-oak laminate."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/e9bOYgIMct6tDMySzvWQNwM9D0AQzQ6q4RbalagT.png",
+                                "score": 0.412,
+                                "problems": [
+                                    "The doorway to the adjacent room on the right edge is gone. The space right of the exposed concrete column is now plain wall, with no opening into the next room.",
+                                    "The coffee table sits partly in front of the left-centre sliding glass door and overlaps its lower part.",
+                                    "The dining table and chairs are placed directly in front of the sliding glass door on the far wall of the second room section, blocking its lower half."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/PGMeyJkxQg7Va5oQid7eecBQjL0YPEu1EBhNFpg6.png",
+                                "score": 0.525,
+                                "problems": [
+                                    "The rough beam over the wide opening to the second room section is gone. The ceiling now runs straight through as one surface.",
+                                    "The sectional sofa's back and chaise sit in front of the lower part of the left-centre garden sliding door.",
+                                    "The dining table and chairs sit in front of the garden sliding door on the far back wall of the second room section and block it.",
+                                    "Old floor (tiles and rubble) still shows along the bottom-right edge, in front of and inside the right-edge doorway beside the concrete column."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/9bx8OGJPRNPSFCTfa2Oj0gxTjdhdJoZt6n1qHkv0.png",
+                                "score": 0.517,
+                                "problems": [
+                                    "The rough beam over the wide opening to the second room section is gone. The ceiling now runs straight through as one surface.",
+                                    "The sofa's chaise end sits in front of the lower part of the left-centre garden sliding door.",
+                                    "The dining table and chairs sit in front of the garden sliding door on the far back wall of the second room section and block it.",
+                                    "A small patch of old floor still shows at the bottom-right edge, in the right-edge doorway beside the concrete column."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/oFD8jOtnx4Of2MKHlSwCuaskJt2sJD7VxyTbcBFI.png",
+                                "score": 0.46,
+                                "problems": [
+                                    "The doorway to the adjacent room on the right edge is gone. The space right of the exposed concrete column is now plain wall, with no opening into the next room.",
+                                    "There is a new glazed sliding door on the back wall, just left of the opening into the second room section. The real photo has only bare wall there, with old door frames leaning against it.",
+                                    "An armchair stands in front of the left-centre sliding glass door, inside its frame, and the coffee table also overlaps the door.",
+                                    "The dining table and chairs are placed directly in front of the sliding glass door on the far wall of the second room section, blocking its lower half."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/N8jr6iEt7kla1apcqVHLYrKOXoHvyIbOFID7CUwF.png",
+                                "score": 0.544,
+                                "problems": [
+                                    "New doorway added on the side wall just left of the opening to the second room section (about x≈790–815). The real photo has no opening there; only door frames leaning against the wall.",
+                                    "The rough beam over the wide opening to the second room section is gone. The ceiling now runs straight through as one surface.",
+                                    "The sofa's chaise end sits in front of the lower part of the left-centre garden sliding door.",
+                                    "The dining table and chairs sit in front of the garden sliding door on the far back wall of the second room section and block it.",
+                                    "Old floor (grey tiles and rubble) still shows at the bottom-right corner, in and in front of the right-edge doorway beside the concrete column."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/TzQtkSmaEEVc2HcPdveVe3NPyDtKPpQZlqFm32aI.png",
+                                "score": 0.419,
+                                "problems": [
+                                    "The left-centre sliding glass door has been shortened into a window. Its bottom edge now sits high above the floor instead of reaching it.",
+                                    "The large sectional sofa is pushed against the left-centre glass opening and blocks it.",
+                                    "There is a new glazed sliding door on the back wall, just left of the opening into the second room section. The real photo has only bare wall there, with old door frames leaning against it.",
+                                    "The dining table and chairs are placed directly in front of the sliding glass door on the far wall of the second room section, with chairs right against the glass.",
+                                    "Old floor and rubble are still visible at the bottom right, along the base of the concrete column and the right-hand doorway, where the floor should be new laminate."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/aLXjk9OlhrS7zWre5tJSt0vekIU8xMXiQuMnBdC2.png",
+                                "score": 0.638,
+                                "problems": [
+                                    "A new arched doorway has been added on the back wall just left of the second room section (around x 790–820). It is not in the real photo.",
+                                    "The sectional sofa sits directly in front of the left sliding glass door and blocks the lower half of it. With the bottom of the door hidden, it reads as a window rather than a door.",
+                                    "The dining table and chairs sit in front of the far sliding glass door and cover the lower part of the glass."
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "room": "Cozinha",
+                    "start": 40.2,
+                    "end": 44.8,
+                    "note": "",
+                    "anim": {
+                        "start": 40.2,
+                        "end": 44.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/D6d6x3AdodvTJUF8QYWYvZCRDhHpp155n4kKTw3n.jpg",
+                        "end_frame": "clips/uploads/WXG2oRqChxZO8dMrzbBjkpByWt943S8Syz3IFbVQ.jpg",
+                        "prompt": "Renovate the kitchen to be modern and minimal. Keep the exact same proportions of the room and keep every appliance and fixture in the same location and size, replaced with new modern versions. Change the L-shaped cabinets along the back wall and the right wall to handleless warm-white cabinets with light oak accents, make the counter and backsplash light stone, put a brushed-steel sink and tap under the window, and replace the old ceiling light with slim modern recessed lighting. Make the walls and ceiling smooth matte warm white with no tile borders, exposed pipes or hanging cables. Replace the floor with modern wide-plank laminate in a warm light oak tone. Keep the wide open passage on the left leading to the adjoining room, the wooden-framed doorway beyond it on the far left, the dark wooden door in the back wall to the left of the cabinets, the window above the counter on the right wall and the large black-framed sliding glass door to the garden on the right wall exactly as it is.All holes and incomplete walls must be finished and panted white, no hanging wires.no incomplete grey cement walls anywhere, they must all be white. Make sure the wall around the window on the tight is also completely finished and painted white",
+                        "staged": "clips/uploads/SB8LpoOnPAbz9JnS0wgAWrNp0m9ZKqHxyMmQhe5z.png",
+                        "alignment": 0.48,
+                        "keep": [
+                            "the wide open wall opening on the left side, from the left edge to the centre-left, where a partition has been partly demolished, leading to an adjoining room",
+                            "the open doorway with a wooden frame and an open door, seen through the left opening on the far wall of the adjoining room, left of frame",
+                            "the dark open doorway with a wooden frame, centre-left on the back wall",
+                            "the built-in kitchen counter and base cabinet run along the back wall, centre, continuing round the corner onto the right wall",
+                            "the wooden range-hood shelf above the counter on the back wall, centre",
+                            "the closed window with a dark frame on the right wall, near the back corner",
+                            "the large closed sliding glass door with a dark frame on the right wall, near, running to the right edge of the frame and opening onto the garden"
+                        ],
+                        "problems": [
+                            "The wooden range-hood shelf above the counter on the back wall has been removed and replaced with a run of white wall cabinets.",
+                            "There is a gap in the base cabinet run under the counter, left of the sink, with the bare wall and an exposed socket or plumbing outlet showing. The kitchen looks unfinished there."
+                        ],
+                        "staging": false,
+                        "error": null,
+                        "candidates": [
+                            {
+                                "path": "clips/uploads/JJUhjrzmpe0wMgwEJxCjoffBFYJSgBvDhIA4jZod.png",
+                                "score": 0.491,
+                                "problems": [
+                                    "The wooden range-hood shelf above the counter on the back wall has been removed and replaced with white wall cabinets. A new tall cabinet has also been added at the left end of the counter run."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/SB8LpoOnPAbz9JnS0wgAWrNp0m9ZKqHxyMmQhe5z.png",
+                                "score": 0.48,
+                                "problems": [
+                                    "The wooden range-hood shelf above the counter on the back wall has been removed and replaced with a run of white wall cabinets.",
+                                    "There is a gap in the base cabinet run under the counter, left of the sink, with the bare wall and an exposed socket or plumbing outlet showing. The kitchen looks unfinished there."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/dYxrVuFjxNIQYQQz387I0i1bHwIiCECzl3FN1JaW.png",
+                                "score": 0.518,
+                                "problems": [
+                                    "Exposed waste/drain pipe left visible in the empty appliance gap under the back counter",
+                                    "Rough raw concrete/gravel sill strip along the bottom of the sliding door",
+                                    "Crack/unfinished plaster mark on the right-edge jamb beside the sliding door"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/5OM1eE7Cy31kyGmMtaEq1n7BX2lzeTVHmydb92TA.png",
+                                "score": 0.629,
+                                "problems": [
+                                    "The demolished partition remnant is still showing in the left opening, with exposed blue water pipes running down and across its tiled face.",
+                                    "Exposed blue pipes and conduit are still visible along the ceiling of the adjoining room, seen through the left opening.",
+                                    "The demolished beam across the top of the left opening still shows raw, broken concrete with exposed brick or rebar at both ends.",
+                                    "Raw, unfinished plaster edges are visible on the partition remnant and on the left wall pier at the left edge of the frame.",
+                                    "A dark object, possibly a loose board, is leaning against the wall at the far left edge, inside the opening.",
+                                    "Raw, unpainted concrete or plaster is visible in the reveal on the left jamb of the sliding glass door."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/mV4ZFYWj7wjlG1c74tanK6xPPPJsU1llYhOp4Pnj.png",
+                                "score": 0.578,
+                                "problems": [
+                                    "Unfinished ceiling in the adjoining room seen through the left opening: a raw, rough timber/concrete beam is still exposed",
+                                    "Exposed blue pipes/conduits fixed across the ceiling of the adjoining room",
+                                    "A loose orange fitting or junction-box piece is hanging from the ceiling beam in the adjoining room (around x≈85, y≈225)",
+                                    "Raw, unplastered grey concrete lintel above the sliding glass door",
+                                    "The right-hand jamb of the sliding door at the right edge is rough, unpainted concrete and plaster",
+                                    "Patched and stained raw plaster on the right wall between the window and the sliding door",
+                                    "Window reveal on the right wall has rough, damaged and unpainted edges",
+                                    "Chipped and damaged tile frieze along the top of the right wall above the sliding door",
+                                    "Rough raw concrete/rubble sill strip along the bottom of the sliding door"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/QEUEUM16JqSiF15bMYggRJF0wQtb85TnIZVBklxQ.png",
+                                "score": 0.733,
+                                "problems": [
+                                    "The demolished partition is still raw: a broken concrete/timber beam with chipped plaster runs across the top left",
+                                    "Exposed blue water pipes run across the ceiling and down the partition stub",
+                                    "Exposed orange/copper pipes run down the partition stub, with broken tile edges around them",
+                                    "A rusty open junction box or bracket is left exposed on the partition near the dark doorway (around x≈385, y≈280)",
+                                    "Broken and missing tiles on the partition stub",
+                                    "A loose orange fitting is hanging from the ceiling in the adjoining room",
+                                    "The left-edge pillar is raw, patched and stained plaster",
+                                    "Raw, unplastered grey concrete lintel above the sliding glass door",
+                                    "The right-hand jamb of the sliding door at the right edge is rough, unpainted concrete and plaster",
+                                    "Patched and stained raw plaster on the right wall around the window and next to the sliding door",
+                                    "Window reveal on the right wall has rough, damaged edges",
+                                    "Chipped tile frieze along the top of the right wall",
+                                    "Rough raw concrete/rubble sill strip along the bottom of the sliding door"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/seWB3ywKyvXMnJJuZsVkvWW41tO4HoDoLYC7I4r0.png",
+                                "score": 0.762,
+                                "problems": []
+                            }
+                        ]
+                    }
+                },
+                {
+                    "room": "Sala",
+                    "start": 45.2,
+                    "end": 49.8,
+                    "note": "",
+                    "anim": {
+                        "start": 45.2,
+                        "end": 49.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/AQKVRqQhBcPg2jzWpZ6TrTbS7KBcsNa4PgvUlKgr.jpg",
+                        "end_frame": "clips/uploads/uZOYzSsK3xwnknWjS7KGMEZDJnBsNJSQFNPSqxIh.jpg",
+                        "prompt": "Furnish the long living and dining room with modern furniture, including a light-beige sectional sofa, a large textured wool rug, a round oak coffee table, an oak dining table with six upholstered chairs, a low oak sideboard and a pendant light above the dining table. Finish the walls and ceiling in smooth warm white and add a tall plant in a ceramic pot. Replace the floor with modern wide-plank laminate in a warm light oak tone. Make the seating area in the foreground against the right wall, facing the room, with the dining table centred at the far end of the room under the ceiling light. Keep the wide opening and the column on the left wall leading to the kitchen, the opening in the far wall with the glass door behind it, and the glass sliding door on the far right wall clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.All holes and incomplete walls must be finished and panted white, no visible wires. no incomplete grey cement walls anywhere, they must all be white and finished. The left wall must be fully white, and no wires",
+                        "staged": "clips/uploads/u97E2Ixfu8sFgr5eJ6CLXHJl1df4Jqrx4kcFrZbd.png",
+                        "alignment": 0.49,
+                        "keep": [
+                            "the wide open doorway (no door) to an adjacent room in the left wall, centre-left, middle of the room",
+                            "the square structural column between the two left-wall openings, centre-left",
+                            "the second open doorway to the same adjacent room just right of that column, left wall towards the back",
+                            "the open doorway with a wooden frame (no door) in the far wall of the adjacent left room, seen through the left-wall opening",
+                            "the open doorway with a white frame in the adjacent left room, seen through the left-wall opening at its left side",
+                            "the rough, partly demolished open doorway in the back wall, centre, leading to a kitchen area",
+                            "the window in the back wall of the kitchen area, seen through the back-wall opening, centre-left back",
+                            "the glass door to the garden in the back wall of the kitchen area, seen through the back-wall opening, centre back",
+                            "the tall glass door (glazed sliding door) in the right wall near the back wall, centre-right"
+                        ],
+                        "problems": [
+                            "Extra large glazed door added in the right wall in the foreground; the real photo has no opening there",
+                            "Potted palm placed in front of the tall glass door in the right wall",
+                            "Dining chairs/table partly in front of the back-wall opening toward the kitchen glass door",
+                            "Column face is still raw, unfinished concrete/plaster",
+                            "Exposed brick/rough edge remains at the top of the demolished back-wall opening",
+                            "Exposed pipes on the walls of the adjacent left room, plus an open dark wall cavity",
+                            "Loose items/boxes on the kitchen floor seen through the back opening",
+                            "Old grey floor still visible in the kitchen area"
+                        ],
+                        "staging": false,
+                        "error": null,
+                        "candidates": [
+                            {
+                                "path": "clips/uploads/u97E2Ixfu8sFgr5eJ6CLXHJl1df4Jqrx4kcFrZbd.png",
+                                "score": 0.49,
+                                "problems": [
+                                    "Extra large glazed door added in the right wall in the foreground; the real photo has no opening there",
+                                    "Potted palm placed in front of the tall glass door in the right wall",
+                                    "Dining chairs/table partly in front of the back-wall opening toward the kitchen glass door",
+                                    "Column face is still raw, unfinished concrete/plaster",
+                                    "Exposed brick/rough edge remains at the top of the demolished back-wall opening",
+                                    "Exposed pipes on the walls of the adjacent left room, plus an open dark wall cavity",
+                                    "Loose items/boxes on the kitchen floor seen through the back opening",
+                                    "Old grey floor still visible in the kitchen area"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/kRFdjH1eYc1N1kWtJGDTr3H8v9O2J8Ig1hTa8QU6.png",
+                                "score": 0.573,
+                                "problems": [
+                                    "Second open doorway just right of the column has been turned into solid wall (a sideboard now stands against it)",
+                                    "Extra large glazed door added in the right wall in the foreground; the real photo has no opening there",
+                                    "Exposed blue conduits still run along the ceiling and left wall, and inside the adjacent left room",
+                                    "Bare wire/fitting hangs from the ceiling where the chandelier was",
+                                    "Column is still raw, exposed and unfinished",
+                                    "Demolished back-wall opening still has rough broken brick edges",
+                                    "Blue plastic tarp-covered object still sits behind the dining table",
+                                    "Open dark wall cavity with raw edges in the adjacent left room",
+                                    "Old grey floor still visible in the kitchen area through the back opening"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/nmLFvfL5vZhKg0cEGiEHxM0hpAzL5xhcCMi2CDSz.png",
+                                "score": 0.503,
+                                "problems": [
+                                    "The square column and the second open doorway just right of it are gone. The left wall runs as solid wall from the first opening to the back wall, so the second doorway has been closed off.",
+                                    "The white-framed doorway inside the adjacent left room can't be seen through the left-wall opening. A dark fireplace-like recess appears in its place.",
+                                    "The right side of the room has been re-composed. The long straight right wall now steps out at a corner into a new wall facing the camera, with a second wall beyond it, so the framing no longer matches the real photo.",
+                                    "The dining table and chairs stand directly in front of the back-wall doorway to the kitchen and partly block it.",
+                                    "The back-wall doorway still has rough, partly demolished edges with raw orange brick showing on its right side.",
+                                    "The jambs of the left-wall opening are still raw, unpainted plaster.",
+                                    "An exposed dark pipe or conduit runs along the ceiling and down the wall inside the adjacent left room.",
+                                    "A dark covered object, probably the tarp-covered item, is still in the kitchen area behind the dining table.",
+                                    "The old grey tile floor still shows in the kitchen area through the back-wall opening."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/LyFzHVt0PWJRKWDxmo1GdLBYVqPVacPYh2oJuYyO.png",
+                                "score": 0.684,
+                                "problems": [
+                                    "Second open doorway just right of the column has been turned into solid wall (a sideboard now stands against it)",
+                                    "Kitchen window in the back wall of the kitchen area, seen through the back-wall opening, is no longer visible",
+                                    "Large potted plant stands inside the back-wall opening, in front of the kitchen glass door to the garden",
+                                    "Exposed blue conduits/cables still run along the ceiling and the top of the left wall",
+                                    "Loose cables dangle inside the wide left-wall doorway",
+                                    "Rough, raw plaster edges remain around the left-wall opening and on the column",
+                                    "Large patched, unpainted plaster area on the right wall",
+                                    "Demolished back-wall opening still has rough broken edges",
+                                    "Blue plastic tarp-covered object still sits behind the dining table",
+                                    "Ceiling pendant is a bare fitting on a cable",
+                                    "Old grey tile floor still visible in the adjacent left room through the doorway",
+                                    "Debris/old floor specks visible in the bottom-right corner"
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/T4w9Bxe08MN7haasLvaoEvehsHYjbUReStGa8hcO.png",
+                                "score": 0.589,
+                                "problems": [
+                                    "The square column and the second open doorway just right of it are gone. The left wall runs as solid wall from the first opening to the back-wall opening, so the second doorway has been closed off.",
+                                    "The white-framed doorway inside the adjacent left room can't be seen through the left-wall opening.",
+                                    "A new glazed door or window with a green frame has appeared on the far right wall in the foreground. It is not in the real photo.",
+                                    "The right side of the room has been re-composed. The straight right wall now steps out at a corner and continues as a new wall section, so the framing no longer matches the real photo.",
+                                    "The dining table and chairs stand directly in front of the back-wall doorway to the kitchen and partly block it.",
+                                    "The exposed blue conduits and cables are still running across the ceiling and down the walls.",
+                                    "The back-wall doorway still has rough, partly demolished edges with raw orange brick showing.",
+                                    "The jambs of the left-wall opening are still raw, unpainted plaster.",
+                                    "An exposed dark pipe or conduit runs along the ceiling and down the wall inside the adjacent left room.",
+                                    "There is a raw, patched plaster area on the right wall next to the glass door.",
+                                    "There is a stained, patched plaster area on the kitchen back wall, seen through the back-wall opening.",
+                                    "Upholstered furniture is still sitting in the kitchen area behind the dining table.",
+                                    "The old grey tile floor still shows in the kitchen area through the back-wall opening."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/WteeSVoS8W7HlnCzos430DxnA1fwIZ6JBiDycWXs.png",
+                                "score": 0.731,
+                                "problems": [
+                                    "The square column and the second open doorway just right of it are gone. The left wall runs as solid wall from the first opening to the back-wall opening, so the second doorway has been closed off.",
+                                    "The white-framed doorway inside the adjacent left room can't be seen clearly through the left-wall opening.",
+                                    "The dining table and chairs stand directly in front of the back-wall doorway to the kitchen and partly block it.",
+                                    "The potted plant stands against the right-wall glass sliding door and partly blocks it.",
+                                    "A loose wooden door frame is still leaning against the right wall in the foreground.",
+                                    "A loose board or piece of door frame is still lying on the floor in the bottom-right corner.",
+                                    "The exposed blue conduits and cables are still running across the ceiling and down the walls.",
+                                    "The open junction box with wires is still on the upper left wall.",
+                                    "Pencil drawings and marks are still on the left wall, and the left wall is stained and dirty.",
+                                    "The jambs of the left-wall opening are still raw, unpainted plaster, both at the front edge and on the column.",
+                                    "The right wall is still raw, patched, unpainted plaster.",
+                                    "The plaster on the right wall near the door frame is still cracked and peeling.",
+                                    "The ceiling cornice on the right wall is still damaged.",
+                                    "The back-wall doorway still has rough, partly demolished edges with raw orange brick showing.",
+                                    "An exposed dark pipe or conduit runs along the ceiling and down the wall inside the adjacent left room.",
+                                    "The old tile floor still shows inside the adjacent left room through the left-wall opening.",
+                                    "The old grey tile floor still shows in the kitchen area through the back-wall opening."
+                                ]
+                            },
+                            {
+                                "path": "clips/uploads/mEMKSSC9G4dECiiRCkb76Shyn8wHhTDE6Ox8JwRo.png",
+                                "score": 0.64,
+                                "problems": [
+                                    "The wooden sideboard and the large potted plant stand in front of the lower part of the tall glass sliding door in the right wall.",
+                                    "The dining set sits right in front of the rough back-wall opening and partly covers the view of the kitchen and the garden glass door.",
+                                    "Old grey floor is still visible in the kitchen area through the back-wall opening and through the second left-wall doorway."
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "room": "Corredor",
+                    "start": 50.2,
+                    "end": 54.8,
+                    "note": "",
+                    "anim": {
+                        "start": 50.2,
+                        "end": 54.8,
+                        "motion": "forward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/4fSCv2CMEbp4cHykG1q5fvloo6tFVZ82DdTE5vrm.jpg",
+                        "end_frame": "clips/uploads/5xIWgfPseQkN0OOOeMYT19zmFNqmExuSOftbJUUz.jpg",
+                        "prompt": "Furnish the hallway with modern furniture, including a slim floating oak console table, a round mirror above it, a long neutral-toned runner rug, a pair of slim brass wall sconces and a large framed abstract artwork. Add a small potted plant on the console. Replace the floor with modern wide-plank laminate in a warm light oak tone. Make the walls smooth and warm white, and conceal the exposed blue pipes behind a clean flat ceiling with recessed lights. Place the console and mirror against the right-hand wall near the front, with the runner centred along the hallway, leaving the walkway fully open. Keep the wide doorway at the end of the hallway, the wooden staircase with its banister on the left beyond it, the corridor opening leading to the room at the far end, and the large glazed doors and window on the back wall clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style.All holes and incomplet walls must be finished and panted white. no visible wires",
+                        "staged": "clips/uploads/cU9b5ST8P1k8tcJPRjMl46xKveThTLDUvD3jX9kK.png",
+                        "alignment": 0.592,
+                        "keep": [
+                            "the narrow corridor in the foreground running from near the camera to the back wall, with walls on the left and right edges of the frame",
+                            "the open doorway (no door) in the centre of the back wall of the corridor, leading into a larger room",
+                            "the wooden staircase with turned balusters and a handrail, seen through the open doorway on the left side of the centre, going up to an upper landing",
+                            "the upper landing balustrade at the top of the staircase, seen through the doorway, left of centre",
+                            "the open passage along the right side of the room beyond the doorway, where a wall has been partly removed, centre-right",
+                            "the glass doors/windows on the far back wall of the room beyond, centre of the frame in the distance"
+                        ],
+                        "problems": [
+                            "The open passage on the right side of the room beyond (the partly removed wall, centre-right) has largely become a plain solid wall. Only a small ragged brick edge is left near the right jamb of the doorway.",
+                            "Old grey tile still seems to show on the floor of the far room along the base of the back wall, under the glass doors. It was not replaced with light-oak laminate."
+                        ],
+                        "staging": false,
+                        "error": null
+                    }
+                },
+                {
+                    "room": "Hall de entrada",
+                    "start": 55.2,
+                    "end": 59.8,
+                    "note": "",
+                    "anim": {
+                        "start": 55.2,
+                        "end": 59.8,
+                        "motion": "backward",
+                        "mode": "modernise",
+                        "enabled": true,
+                        "start_frame": "clips/uploads/Xam41Sgoib9nziolbZSGK5pce7z6ZBSt5reLI81k.jpg",
+                        "end_frame": "clips/uploads/t7HPN5pWxYauxwntMCvTJeVf22IuJSz5TIXK20ny.jpg",
+                        "prompt": "Furnish the entrance hall with modern furniture, including a slim oak console table, a round mirror with a thin black frame above it, a low upholstered bench in warm beige, a flat-woven runner rug in soft neutral tones and a modern globe pendant light. Add a tall potted olive tree and a small vase of greenery on the console. Replace the floor with modern wide-plank laminate in a warm light oak tone. Paint the walls a clean warm white and remove all debris, cables and boxes. Place the console, mirror and bench against the plain wall in the left foreground, and keep the walkway in the middle of the hall open from the front to the back doorway. Keep the wide doorway in the left wall, the doorway in the back wall at the centre, the door frame on the far right edge, the three tall narrow windows above the stairs and the staircase with its wooden banister on the right clear and exactly as they are. Make everything proportional to the room. All the furniture should be modern and cozy in style. All holes and incomplet walls must be finished and panted white. no visible wires. Remove teh carpet from the stairs and make sure the wood in the railings is clean and nice (no dust). All walls must be painted white",
+                        "staged": "clips/uploads/lz5RveDLNig1rPKdOa5YZhYvXLpiBTGHlepJEplt.png",
+                        "alignment": 0.675,
+                        "keep": [
+                            "the open doorway without a door to an adjoining room on the left-centre side wall, mid-ground",
+                            "the open doorway without a door to a back room in the centre of the back wall",
+                            "the wooden staircase with turned balusters and newel posts, centre-right, rising from near the front towards the back wall and turning up to the upper floor",
+                            "the wooden handrail and balustrade along the upper flight of the staircase, upper right",
+                            "the three tall narrow vertical windows high on the back wall above the staircase, upper centre-right",
+                            "the wooden door frame (doorway) on the right edge of the frame, near"
+                        ],
+                        "problems": [
+                            "Old grey tile/concrete floor is still visible through the left-centre doorway, in the adjoining room's floor area. It has not been replaced with light-oak laminate."
+                        ],
+                        "staging": false,
+                        "error": null
+                    }
+                }
+            ],
+            "notice": "8 rooms could not be animated (Quarto, Casa de banho, Sala, Sala de Estar e Jantar, Cozinha, Sala, Corredor, Hall de entrada) — kie.ai is out of credits: top up at kie.ai. The reel was not cut. The 4 clips already made are kept — press ▶ Animate & cut the reel again to make only the missing ones."
+        },
+        "allowed_present": [
+            "video",
+            "over"
+        ],
+        "formato": "auto",
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Eurico Azevedo - and phone number - +351917203655. Agency: RE/MAX Rapid.\nThe agent's photo is Eurico Azevedo.jpg; the agency logo is logo.png.\nOn-screen hook for the first frame: «Uma moradia em Espinho para terminar ao seu gosto.».\nThe base is the property walkthrough video: keep it full screen the whole time. Overlay an intro card (agent name, phone, agency logo) over the first seconds and an outro card with the agent's name, phone and the agency logo over the last seconds. Keep overlays small and away from the centre so the furniture animations stay visible.\n\nHere are the house details:\n\nMoradia T4 à venda em Espinho, Espinho\nPreço\n360 000 €\nLocalização\nEspinho, Espinho, Aveiro\nReferência\n124321353-274\nÁrea Bruta m²\n289\nÁrea Útil m²\n182\nÁrea Total do Lote m²\n560\nQuartos\n4\nWC/Casas de banho\n4\nAno de Construção\n1994\nEstacionamento\nNão\nGaragem\nSim\nCarregamento de Carros Elétricos\nNão\n\nDescrição\n<p><strong>Moradia T4 situada em Anta, Espinho, inserida num lote de 560 m², com excelente potencial de valorização.</strong><br></p>\n<p>O imóvel foi originalmente construído e licenciado em 1993, tendo sido intervencionado com obras de requalificação, instalação de aquecimento, alteração de divisões.&nbsp;</p>\n<p>A obra encontra-se atualmente inacabada, ficando a cargo do futuro comprador a conclusão dos trabalhos e acabamentos necessários, permitindo assim personalizar o imóvel de acordo com o seu gosto e necessidades.</p>\n<p style=\"margin-left:0px;\">A moradia dispõe de áreas generosas e boa exposição solar, constituindo uma excelente oportunidade para habitação própria ou investimento.</p>\n<p style=\"margin-left:0px;\">Características principais:</p>\n<ul>\n<li style=\"margin-left:0px;\">Moradia T4</li>\n<li style=\"margin-left:0px;\">Obras de requalificação iniciadas</li>\n<li style=\"margin-left:0px;\">Zona residencial tranquila</li>\n<li style=\"margin-left:0px;\">4 casas de banho</li>\n<li style=\"margin-left:0px;\">Área bruta privativa: 201,60 m²</li>\n<li style=\"margin-left:0px;\">Área bruta dependente: 88 m²</li>\n<li style=\"margin-left:0px;\">Terreno com 560 m²</li>\n<li style=\"margin-left:0px;\">Excelente potencial de valorização</li>\n<li>Bons acessos, comércio e e proximidades de serviços</li>\n</ul>\n<p style=\"margin-left:0px;\"><strong><em>Localizada a poucos minutos do centro de Espinho, praias, comércio, escolas e serviços, conta ainda com rápidos acessos à A29 e A1, facilitando a ligação ao Porto, Vila Nova de Gaia e restantes cidades da região.</em></strong></p>\n<p><br><strong><em>Imagine terminar esta moradia exatamente como sempre sonhou. Com áreas amplas, terreno generoso e remodelação já iniciada, este imóvel oferece a liberdade de criar um espaço moderno, confortável e totalmente personalizado.</em></strong></p>\n<p style=\"text-align:left;\">O imóvel é vendido no estado atual em que se encontra.<br></p>",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "voice_takes": null,
+        "step": null
+    },
+    "id": "fotografias-12-divisoes-xpuhr",
+    "created_at": "2026-10-14T09:53:34+00:00",
+    "updated_at": "2026-10-14T12:53:48+00:00",
+    "source_path": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/fotografias-12-divisoes-xpuhr/clip.mp4",
+    "error": null
+}

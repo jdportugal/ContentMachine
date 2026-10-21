@@ -1,0 +1,1285 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Guest house no Chiado à venda: 9 suítes e EBITDA de 180 mil €/ano",
+    "source_text": null,
+    "source_path": "clips/uploads/px5gaXVP4Ctk8dy2OtSlv4bO5JEseJ9nOqZuvyGl.mp3",
+    "images": [
+        {
+            "id": "img_4dd8e625",
+            "path": "clips/uploads/60F09Lr9eapEkIkFC86FhR8xMNYFdF0sVrwFgO3T.jpg",
+            "description": "Suíte: casa de banho cinzenta com lavatório suspenso ao lado de quarto branco com cabeceira de madeira.",
+            "name": "2c712c52-84c5-4fd3-9afd-e7b8c68343c4.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_94e4f2a5",
+            "path": "clips/uploads/igkM7H9XgZPM8PZH016jwUU9PRcOPss6tPSaEq7Z.jpg",
+            "description": "Vista da varanda com grade de ferro forjado para a rua, com fachada de edifício em frente.",
+            "name": "680b31dd-26d3-4b2b-bb20-35d43645b9bc.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c6c6987f",
+            "path": "clips/uploads/QcdiOyPGGi9k4deRaBdZElnvjiZqdXc8lZ2zehaq.jpg",
+            "description": "Quarto com cama de casal branca, cabeceira de tábuas de madeira, candeeiros de parede e manequim decorativo.",
+            "name": "3fbc2258-6587-4faa-932f-a7e5179b7c72.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_fd6389c1",
+            "path": "clips/uploads/tgn6qKsU2cyMlhaJO56ISDMEEbGOqXIhKu04xM8n.jpg",
+            "description": "Pormenor: placa de cartão 'Não incomodar' pendurada por corda no puxador de uma porta.",
+            "name": "e4570289-8a9e-4464-8a80-97d3649a4e21.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_8b4d9b22",
+            "path": "clips/uploads/hjeMGgU4eKv10x6Esk8pclSRT19p8hVa8fdxRbdB.jpg",
+            "description": "Pormenor decorativo: bastidor de bordado redondo preto pendurado na parede, com ponto cruz rosa.",
+            "name": "a159e1f6-ccb0-43c7-af52-2111fe79fd70.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ca9432b8",
+            "path": "clips/uploads/LqdJ9IiNUP4h4yg3mOlBhawQAxl5jkYIWmp4g8Rm.jpg",
+            "description": "Hall de entrada: chão em xadrez, porta dupla branca, candeeiro pendente cinzento e banco amarelo.",
+            "name": "56deb16e-b621-4946-8b00-b77356498f40.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_310af3e4",
+            "path": "clips/uploads/pLfE21tDJN0ZT1D4tmJ4LoMsrMzPq3sxjJGLDusZ.jpg",
+            "description": "Receção/átrio: arco de pedra para a escadaria original, chão em xadrez, mural de veado e poltrona verde.",
+            "name": "48cc1d37-43cc-482b-beee-3e59d516c676.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_cfb8a5b5",
+            "path": "clips/uploads/xfGoBuGOciLMNhhfhbRFHuZvmzp1f5OYdzhrBzi4.jpg",
+            "description": "Vista da varanda para a rua do Chiado em descida até ao rio Tejo, com candeeiros antigos.",
+            "name": "9bf315ce-9bbd-464a-8338-8df7468b5056.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e4b8cd47",
+            "path": "clips/uploads/MhVr0Cp7jExbmvuBlRppYOgAa2Ojatxm52jznedR.jpg",
+            "description": "Casa de banho: lavatório branco, parede de azulejo cinzento, prateleira de madeira e porta-janela com cortinas.",
+            "name": "002a2da5-fce3-42d1-ad16-59c369289e58.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_101a805e",
+            "path": "clips/uploads/1PVVMn05aklfCrQQo636wYRU4mwx1tUHTtIqQD37.jpg",
+            "description": "Quarto luminoso com cama de casal, cabeceira de madeira, manequim estampado e porta aberta para varanda.",
+            "name": "4456ed4b-d240-4be9-87cb-3393bb975593.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9b467fea",
+            "path": "clips/uploads/KBo9bnRHbtQWNS7eo8pBuHbBhTT9WEajH1RVdnVq.jpg",
+            "description": "Suíte com cama de casal e cabeceira em madeira; homem sentado na varanda aberta para a rua, manequim floral.",
+            "name": "a645648a-efa5-4532-bd6b-13d2ed257f97.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_ae2e69fb",
+            "path": "clips/uploads/eUBzXF2vKyxRtCw1Lhrv5xu0PSq1D8ePaMtoglO0.jpg",
+            "description": "Detalhe de quarto: cofre num móvel de madeira, cesto de vime com mantas cinzentas, chão de cortiça.",
+            "name": "13543f79-4c41-4d98-9d7c-cee437e996da.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5ea5dc72",
+            "path": "clips/uploads/UIdSNNUHryYAFdbneLM3GvJAAiLem9rBWuF8BZhK.jpg",
+            "description": "Suíte com azulejos antigos azuis e amarelos, cama com manta laranja e janela alta luminosa.",
+            "name": "87b1351d-421e-40ff-8181-40e839ac15a7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c7232548",
+            "path": "clips/uploads/QYZmgtq6EisdTDZscLJkQxFtvGy5AMpAZ8vYkpcW.jpg",
+            "description": "Quarto duplo com camas individuais e manta laranja; chapéu e máquina fotográfica; mulher junto à varanda.",
+            "name": "1e64fd8d-ad29-436c-8700-d2db78bb432d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d09a6285",
+            "path": "clips/uploads/RJX9QDGU69nowV97DnYGOkU1lwHMBXTSgfqI6qHt.jpg",
+            "description": "Suíte com cama branca e kitchenette embutida com micro-ondas, televisão na parede e janela grande.",
+            "name": "0922a27d-96e3-4810-a1c7-8dffef55c551.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3d033d98",
+            "path": "clips/uploads/PVk7798SSOgZ0rZxlWZHoKMV95SX0AqedyRsCPCa.jpg",
+            "description": "Suíte com kitchenette branca, ar condicionado e porta aberta para um quarto com beliche.",
+            "name": "8dc70a25-b869-4031-ad2f-171e5e5099f0.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4c964be9",
+            "path": "clips/uploads/aUrKkdRQ0A2R0wnL22KzCWLUHX9ARUWrnNuxd55O.jpg",
+            "description": "Fachada do edifício pombalino rosa, varandas de ferro assinaladas a azul, loja no rés-do-chão, carris de elétrico.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50c2b82a",
+            "path": "clips/uploads/TnNdvvOifbz4IvUTG1dydOITJWIHooQ3eK7Uzpld.png",
+            "description": "Retrato do agente António Almeida Santos, de fato escuro, com logótipo RE/MAX Grupo Latina.",
+            "name": "antonio.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_868d87b2",
+            "path": "clips/uploads/3rTVjWYxK5bixe9fin7iWxlmePADErpnJoNmLupH.jpg",
+            "description": "Interior da loja arrendada no rés-do-chão: armários pretos, calhas de luz, escada de madeira e copa.",
+            "name": "e2c8ebbe-22e0-4798-94c1-b70727918c19.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_50a0ceaa",
+            "path": "clips/uploads/VQDNp89LLRKSaPWfKnryuxjkx7dyZOzGtF0SqoUL.jpg",
+            "description": "Sala de trabalho da loja no rés-do-chão: bancada em pedra com lavatório, secretária com computador.",
+            "name": "216c1026-6f63-4ea4-9546-996fa76f4e37.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_63039174",
+            "path": "clips/uploads/WbrLndDbDvSWsn60EABYN8fk9oeKD0Gxbm9noCti.jpg",
+            "description": "Loja no rés-do-chão, galeria de arte com quadros de azulejo azul e amarelo; homem a trabalhar à secretária.",
+            "name": "17cc65e0-daaf-43e0-b346-5c5e5217e6f2.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e47238d7",
+            "path": "clips/uploads/iVJ0DzP75dklUVFUXUSrmiFbySslEpYFqRLIuccb.jpg",
+            "description": "Loja no rés-do-chão, galeria de arte com muitos quadros de azulejo, homem à secretária e escultura colorida.",
+            "name": "1a13fac2-2ff5-4b62-bb60-6a2fd7e27e5b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_32e86641",
+            "path": "clips/uploads/KSJiO7n2N27CH1HXRTNMviIbFwkaPHS6hMwSYO7i.jpg",
+            "description": "Interior da loja-galeria, com quadros de rostos em azulejo azul, escultura dourada e porta aberta para a rua.",
+            "name": "4542f9f0-05ac-4b86-bee4-f9f22ae5e595.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6bf7363d",
+            "path": "clips/uploads/3H6DKLbxVDnKN5P4uUHbMPddUzWj4Ixn4kOXFxuA.jpg",
+            "description": "Kitchenette com bancada de pedra lioz, micro-ondas, segundo lavatório e escada de madeira ao lado.",
+            "name": "c31234d5-d45c-4872-8f09-5004b6e5b47f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3842648e",
+            "path": "clips/uploads/YakXJC91Ozs3atH0mIC2RoVK3aazSQIIofUfrjD7.jpg",
+            "description": "Pormenor decorativo: cabides de madeira antigos pendurados sobre parede com triângulos geométricos em tons bege.",
+            "name": "cf474903-511e-4a55-93e6-562a3a4a93a8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_4ad8bd67",
+            "path": "clips/uploads/s9JyRQkhJ31UZmsNakBPgM5TtZkDWvSOz3veGv05.jpg",
+            "description": "Quarto de suíte com cama de casal, cabeceira de ripas de madeira, televisão e janela de portadas.",
+            "name": "fda6b4d1-ac70-4a5c-9b73-391bea4c66cd.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_18cf8e36",
+            "path": "clips/uploads/bAtxNLBBj39wAB2DZPNXWHnTWSUlNEDDLoRxA4pZ.jpg",
+            "description": "Quarto de suíte com camas juntas, ar condicionado, televisão e porta para quarto com beliche.",
+            "name": "6ed3093f-62c3-40de-8087-0304e86f304d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_99457cd0",
+            "path": "clips/uploads/P2ZYB2BIwDmPePikIftbdOvUl5CCqqlDyK6623zW.jpg",
+            "description": "Casa de banho de suíte com azulejo cinzento, lavatório branco, banco de madeira e duche envidraçado.",
+            "name": "76fa5e00-1f6b-4adb-9514-fd41140274d6.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_afdb496f",
+            "path": "clips/uploads/anTchgAPikMUMmC4KQln9o2lGEncM2QywTZHwPBc.jpg",
+            "description": "Quarto pequeno com beliche de madeira clara, cabide, bancos empilhados e chão de cortiça.",
+            "name": "afb3de44-fe56-4bab-bdc2-b934f28f464a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_1ba604f5",
+            "path": "clips/uploads/xmJt8yvLYp4w0tMMvOjv5h7ruXEydmtt2yM0cWSZ.jpg",
+            "description": "Quarto de suíte com duas camas juntas, cabeceira de madeira, manequim florido e janela alta.",
+            "name": "0eb9120b-8446-4165-b3bb-649211984d7c.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_afd17311",
+            "path": "clips/uploads/UUzf8lLPmhwJFiHTyZgSWVGuUNoq9gtac32ngsFN.jpg",
+            "description": "Kitchenette de suíte com bancada em pedra clara, micro-ondas e placa; ao fundo, cama e janela.",
+            "name": "a6548a9b-39aa-4bc8-aac8-7ab66e7d8c10.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_672af7b9",
+            "path": "clips/uploads/smcgIfIEmJd4xzD5Taja34ZwIdOtJCYBix31XMnA.jpg",
+            "description": "Quarto com cama de casal, cabeceira de tábuas de madeira, parede com azulejos geométricos e corredor.",
+            "name": "6597fdf7-f117-486a-a74f-e2a977692bb8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6b413bec",
+            "path": "clips/uploads/Y7LcMzxofZbof7HAUj2IgHJxzfAHqUJc3nXaTo2J.jpg",
+            "description": "Corredor da guest house com chão de cortiça, número 5 bordado na parede e equipamento de incêndio.",
+            "name": "44831e36-64b1-4c7d-a223-cd5609679411.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_415b6b10",
+            "path": "clips/uploads/3BXNnmQl3XP2YgHaeHLMcocRiUvK17MmSxV9UOsD.jpg",
+            "description": "Quarto luminoso com cama de casal, cabeceira de madeira e porta-janela alta com portadas interiores.",
+            "name": "9db1bb30-a470-425d-a762-1bb563eabe75.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2e3b3134",
+            "path": "clips/uploads/ZzOtkrUDlV7lpigXB8Gyj5nDd0Mg0X1K3VKEQvl5.png",
+            "description": "Logótipo da RE/MAX Grupo Latina, com balão e letras azuis e vermelhas; ideal para o fecho.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "estatica-azul-escuro",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n2 300 000 €\nVenda\nid. 120991437-186\n410 m²\n\n9 Quartos\n\n11 WC\n\nG\n\nDescrição\nDetalhes\nMapa\nCaracterísticas\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\nGuest House de charme situada junto ao largo de Camões no Chiado, num edificio histórico (Pombalino). A intervenção pensada por designers e arquitetos, preservou a beleza arquitetónica Pombalina do séc. XVII, com uma remodelação cuidada e atual, dando primazia a materiais nacionais e intemporais.\n\nExcelente investimento com conceito de funcionamento inteligente e com Sistema de Check-In e Check-Out automático, sem necessidade de receção. Podendo ser gerido remotamente.\n\nAlvará de funcionamento de unidade de Alojamento Local na modalidade de Estabelecimento de hospedagem, devidamente licenciado pelas entidades competentes e transmissível à entidade que adquirir a empresa.\n\nConstituído por 9 suites de muito charme e conforto, cinco das quais com varanda e virados para a Rua do Alecrim, duas suites com características superiores e duas suites familiares com kitchenette e um quarto comunicante. Tem ainda a particularidade de estar inserida num prédio com 2 entradas, sendo a principal de acesso exclusivo ao nobre hall de entrada. O acesso aos quartos é feito por este hall através de uma escadaria Pombalina revestida a azulejos da época.\n\nNo R/C do edificio está também incluído, um amplo espaço comercial com mais de 90m2, com um espaço central de 60m2, uma sala de reuniões com 10m2, casa de banho e uma zona de cozinha, atualmente arrendado até Fevereiro de 2031, por 45.000€/ano, proporcionando assim uma excelente rentabilidade.\n\nA Guest House entrou em funcionamento em setembro de 2012, tendo obtido nos últimos anos uma taxa de ocupação média anual superior a 80%.\n\nTem uma avaliação de 4,5 no Tripadvisor, 9,1 no Booking e 4,6 no Expedia (excelente) e é recomendado pela Louis Vuitton City Guide de Lisboa\n\nEstá presente nos mais importantes canais de distribuição hoteleira:\n\n– www.booking.com\n\n– www.expedia.com\n\n– www.venere.com\n\n– www.hotels.com\n\nA maioria dos clientes são provenientes de: FR 13%, ES 12%, UK 11%, USA 9%, DE 9% (num total 71 origens diferentes)\n\nO negócio encontra-se plenamente operacional e consolidado, gerando EBITDA medio anual superior a €180.000\n\nA oportunidade de investimento é particularmente relevante para operadores hoteleiros que procurem adicionar ativos premium ao portfolio com potencial de otimização operacional, ou para investidores estratégicos que apreciem a combinação de valor patrimonial, localização premium e modelo operacional robusto. \n\nA cessão de quotas é estruturada como transferência de 100% das quotas da empresa, sem ónus de dívida ou passivos, permitindo que o novo proprietário receba a totalidade do cash flow operacional a partir do primeiro mês.  \n\nSe valoriza o charme e modernidade numa localização premium, com a mais-valia da simplicidade da gestão do negócio pela forma como está estruturado, este é sem dúvida um excelente investimento.\n\nDetalhes\nÁrea Bruta Privativa m²\n410\nÁrea Bruta m²\n- -\nÁrea Total do Lote m²\n- -\nÁrea Útil m²\n- -\nQuartos\n9\nAno de Construção\n1890\nPiso\n1o Andar\nWC/Casas de banho\n11\nElevador\nNão\nEstacionamento\nNão\nCarregamento de Carros Elétricos\nNão",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Guest house à venda no Chiado, Rua do Alecrim, Lisboa",
+            "summary": "Está à venda por 2,3 milhões de euros uma guest house com 9 suítes num edifício pombalino da Rua do Alecrim, junto ao Largo de Camões. Desde novembro de 2024, as licenças de alojamento local voltaram a poder ser transmitidas e deixaram de caducar.",
+            "timeline": [
+                {
+                    "label": "Terramoto destrói Lisboa; o Chiado é reconstruído em estilo pombalino",
+                    "sublabel": "1755"
+                },
+                {
+                    "label": "Inaugurada a estátua de Camões, de Victor Bastos, no Largo de Camões",
+                    "sublabel": "9 out. 1867"
+                },
+                {
+                    "label": "Decreto-Lei 76/2024 torna as licenças de AL transmissíveis",
+                    "sublabel": "1 nov. 2024"
+                },
+                {
+                    "label": "Lisboa aprova um regime permanente de áreas de contenção de AL",
+                    "sublabel": "dez. 2025"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço pedido (anúncio Imovirtual)",
+                    "value": 2300000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Suítes no edifício",
+                    "value": 9,
+                    "unit": "suítes"
+                },
+                {
+                    "label": "Ocupação-cama na Grande Lisboa (INE, 2024)",
+                    "value": 57.2,
+                    "unit": "%"
+                },
+                {
+                    "label": "Altura da estátua de Camões em bronze",
+                    "value": 4,
+                    "unit": "m"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Licença de AL: antes e depois",
+                    "left": {
+                        "title": "Mais Habitação (2023)",
+                        "points": [
+                            "Licença pessoal e intransmissível",
+                            "Renovação a cada 5 anos",
+                            "Novos registos suspensos"
+                        ]
+                    },
+                    "right": {
+                        "title": "DL 76/2024 (desde nov. 2024)",
+                        "points": [
+                            "Licença transmissível",
+                            "Sem prazo de validade",
+                            "Não caduca com a venda"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "A Rua do Alecrim liga o Cais do Sodré ao Largo de Camões",
+                "Os edifícios pombalinos usam a 'gaiola', uma estrutura antissísmica",
+                "A licença de AL pode passar para o comprador",
+                "A Grande Lisboa está entre as regiões com maior ocupação turística do país"
+            ],
+            "sources": [
+                "https://www.imovirtual.com/en/resultados/comprar/imoveis-comerciais/lisboa/lisboa/misericordia/chiado--pc-de-camoes",
+                "https://www.deloitte.com/pt/pt/services/legal/blogs/al-06-11-2024.html",
+                "https://cms.law/pt/prt/publication/alteracoes-ao-regime-juridico-do-alojamento-local",
+                "https://www.idealista.pt/news/ferias/turismo/2024/10/25/66417-licencas-de-al-deixam-de-caducar-a-cada-5-anos-e-setor-aplaude",
+                "https://www.guestready.com/pt/blog/novas-areas-de-contencao-al-lisboa/",
+                "https://www.hostwise.pt/en/blog/short-term-rental-legislation-portugal",
+                "https://en.wikipedia.org/wiki/Cam%C3%B5es_Monument",
+                "https://pt.wikipedia.org/wiki/Pra%C3%A7a_de_Lu%C3%ADs_de_Cam%C3%B5es",
+                "https://autarcasmonarquicos.com/2022/10/09/9-de-outubro-de-1867-monumento-a-luis-de-camoes/",
+                "https://imoveisemportugal.com/rua-do-alecrim-lisboa/",
+                "https://en.wikipedia.org/wiki/Lisbon_Baixa",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=734945953&att_display=n&att_download=y"
+            ]
+        },
+        "suggested": {
+            "title": "Guest house no Chiado à venda: 9 suítes e EBITDA de 180 mil €/ano",
+            "description": "Guest house com nove suítes num edifício pombalino junto ao Largo de Camões, com check-in automático, ocupação média acima de 80% e nota 9,1 no Booking. Inclui licença de AL transmissível e uma loja no rés-do-chão arrendada até 2031 por 45 mil euros por ano. Preço: 2,3 milhões de euros. Fale com António Almeida Santos, da RE/MAX Latina.",
+            "tags": [
+                "Chiado",
+                "Lisboa",
+                "guest house",
+                "alojamento local",
+                "investimento imobiliário",
+                "imóveis à venda",
+                "RE/MAX Latina",
+                "edifício pombalino"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "untitled-oae2p",
+    "created_at": "2026-10-06T15:37:42+00:00",
+    "updated_at": "2026-10-06T15:49:34+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/px5gaXVP4Ctk8dy2OtSlv4bO5JEseJ9nOqZuvyGl.mp3",
+    "transcript": {
+        "duration": 49.630001068115234,
+        "text": "Uma guest house no Chiado, com mais de 180 mil euros de bita por ano. Nove suítes no edifício Pombalino, junto ao Lar de Camões, cinco delas com varanda para a Rua do Alcrim. Escadaria original, com zelejos de época e uma remodelação feita por arquitetos e designers. Cheque inautomático e gestão remota, sem recessão. Ocupação média acima de 80%. Nota 9,1 no booking e licença de alojamento local transmissível. No resto do chão, uma loja arrendada até 2031 por 45 mil euros por ano. 2 milhões e 300 mil euros. Para saber mais, fale com António Almeida Santos, da Remax Latina.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.2800000011920929
+            },
+            {
+                "word": "guest",
+                "start": 0.2800000011920929,
+                "end": 0.7200000286102295
+            },
+            {
+                "word": "house",
+                "start": 0.7200000286102295,
+                "end": 1
+            },
+            {
+                "word": "no",
+                "start": 1,
+                "end": 1.2400000095367432
+            },
+            {
+                "word": "Chiado,",
+                "start": 1.2400000095367432,
+                "end": 1.6399999856948853
+            },
+            {
+                "word": "com",
+                "start": 2.0199999809265137,
+                "end": 2.180000066757202
+            },
+            {
+                "word": "mais",
+                "start": 2.180000066757202,
+                "end": 2.4000000953674316
+            },
+            {
+                "word": "de",
+                "start": 2.4000000953674316,
+                "end": 2.880000114440918
+            },
+            {
+                "word": "180",
+                "start": 2.880000114440918,
+                "end": 3.2799999713897705
+            },
+            {
+                "word": "mil",
+                "start": 3.2799999713897705,
+                "end": 3.5799999237060547
+            },
+            {
+                "word": "euros",
+                "start": 3.5799999237060547,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "de",
+                "start": 3.880000114440918,
+                "end": 4.079999923706055
+            },
+            {
+                "word": "bita",
+                "start": 4.079999923706055,
+                "end": 4.5
+            },
+            {
+                "word": "por",
+                "start": 4.5,
+                "end": 4.800000190734863
+            },
+            {
+                "word": "ano.",
+                "start": 4.800000190734863,
+                "end": 5.170000076293945
+            },
+            {
+                "word": "Nove",
+                "start": 6.300000190734863,
+                "end": 6.639999866485596
+            },
+            {
+                "word": "suítes",
+                "start": 6.639999866485596,
+                "end": 7.059999942779541
+            },
+            {
+                "word": "no",
+                "start": 7.059999942779541,
+                "end": 7.260000228881836
+            },
+            {
+                "word": "edifício",
+                "start": 7.260000228881836,
+                "end": 7.659999847412109
+            },
+            {
+                "word": "Pombalino,",
+                "start": 7.659999847412109,
+                "end": 8.300000190734863
+            },
+            {
+                "word": "junto",
+                "start": 8.380000114440918,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "ao",
+                "start": 8.579999923706055,
+                "end": 8.760000228881836
+            },
+            {
+                "word": "Lar",
+                "start": 8.760000228881836,
+                "end": 8.899999618530273
+            },
+            {
+                "word": "de",
+                "start": 8.899999618530273,
+                "end": 9.039999961853027
+            },
+            {
+                "word": "Camões,",
+                "start": 9.039999961853027,
+                "end": 9.5
+            },
+            {
+                "word": "cinco",
+                "start": 10.300000190734863,
+                "end": 10.380000114440918
+            },
+            {
+                "word": "delas",
+                "start": 10.380000114440918,
+                "end": 10.720000267028809
+            },
+            {
+                "word": "com",
+                "start": 10.720000267028809,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "varanda",
+                "start": 11.020000457763672,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "para",
+                "start": 11.359999656677246,
+                "end": 11.979999542236328
+            },
+            {
+                "word": "a",
+                "start": 11.979999542236328,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "Rua",
+                "start": 12.220000267028809,
+                "end": 12.220000267028809
+            },
+            {
+                "word": "do",
+                "start": 12.220000267028809,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "Alcrim.",
+                "start": 12.460000038146973,
+                "end": 12.800000190734863
+            },
+            {
+                "word": "Escadaria",
+                "start": 13.640000343322754,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "original,",
+                "start": 14.020000457763672,
+                "end": 14.619999885559082
+            },
+            {
+                "word": "com",
+                "start": 14.979999542236328,
+                "end": 15.180000305175781
+            },
+            {
+                "word": "zelejos",
+                "start": 15.180000305175781,
+                "end": 15.539999961853027
+            },
+            {
+                "word": "de",
+                "start": 15.539999961853027,
+                "end": 15.960000038146973
+            },
+            {
+                "word": "época",
+                "start": 15.960000038146973,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 16.18000030517578,
+                "end": 16.799999237060547
+            },
+            {
+                "word": "uma",
+                "start": 16.799999237060547,
+                "end": 17.040000915527344
+            },
+            {
+                "word": "remodelação",
+                "start": 17.040000915527344,
+                "end": 17.600000381469727
+            },
+            {
+                "word": "feita",
+                "start": 17.600000381469727,
+                "end": 17.959999084472656
+            },
+            {
+                "word": "por",
+                "start": 17.959999084472656,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "arquitetos",
+                "start": 18.18000030517578,
+                "end": 18.799999237060547
+            },
+            {
+                "word": "e",
+                "start": 18.799999237060547,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "designers.",
+                "start": 19.399999618530273,
+                "end": 19.940000534057617
+            },
+            {
+                "word": "Cheque",
+                "start": 21.020000457763672,
+                "end": 21.040000915527344
+            },
+            {
+                "word": "inautomático",
+                "start": 21.040000915527344,
+                "end": 21.860000610351562
+            },
+            {
+                "word": "e",
+                "start": 21.860000610351562,
+                "end": 22.440000534057617
+            },
+            {
+                "word": "gestão",
+                "start": 22.440000534057617,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "remota,",
+                "start": 22.700000762939453,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "sem",
+                "start": 23.65999984741211,
+                "end": 23.760000228881836
+            },
+            {
+                "word": "recessão.",
+                "start": 23.760000228881836,
+                "end": 24.3799991607666
+            },
+            {
+                "word": "Ocupação",
+                "start": 25.299999237060547,
+                "end": 25.700000762939453
+            },
+            {
+                "word": "média",
+                "start": 25.700000762939453,
+                "end": 26.1200008392334
+            },
+            {
+                "word": "acima",
+                "start": 26.1200008392334,
+                "end": 26.6200008392334
+            },
+            {
+                "word": "de",
+                "start": 26.6200008392334,
+                "end": 26.84000015258789
+            },
+            {
+                "word": "80%.",
+                "start": 26.84000015258789,
+                "end": 28
+            },
+            {
+                "word": "Nota",
+                "start": 28,
+                "end": 28.8799991607666
+            },
+            {
+                "word": "9,1",
+                "start": 28.88,
+                "end": 29.74
+            },
+            {
+                "word": "no",
+                "start": 29.739999771118164,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "booking",
+                "start": 30.299999237060547,
+                "end": 30.299999237060547
+            },
+            {
+                "word": "e",
+                "start": 30.299999237060547,
+                "end": 30.84000015258789
+            },
+            {
+                "word": "licença",
+                "start": 30.84000015258789,
+                "end": 31.360000610351562
+            },
+            {
+                "word": "de",
+                "start": 31.360000610351562,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "alojamento",
+                "start": 31.639999389648438,
+                "end": 32.060001373291016
+            },
+            {
+                "word": "local",
+                "start": 32.060001373291016,
+                "end": 32.70000076293945
+            },
+            {
+                "word": "transmissível.",
+                "start": 32.70000076293945,
+                "end": 34.2400016784668
+            },
+            {
+                "word": "No",
+                "start": 34.880001068115234,
+                "end": 34.939998626708984
+            },
+            {
+                "word": "resto",
+                "start": 34.939998626708984,
+                "end": 35.2400016784668
+            },
+            {
+                "word": "do",
+                "start": 35.2400016784668,
+                "end": 35.68000030517578
+            },
+            {
+                "word": "chão,",
+                "start": 35.68000030517578,
+                "end": 35.68000030517578
+            },
+            {
+                "word": "uma",
+                "start": 36.099998474121094,
+                "end": 36.34000015258789
+            },
+            {
+                "word": "loja",
+                "start": 36.34000015258789,
+                "end": 36.540000915527344
+            },
+            {
+                "word": "arrendada",
+                "start": 36.540000915527344,
+                "end": 37
+            },
+            {
+                "word": "até",
+                "start": 37,
+                "end": 37.2599983215332
+            },
+            {
+                "word": "2031",
+                "start": 37.2599983215332,
+                "end": 38.47999954223633
+            },
+            {
+                "word": "por",
+                "start": 38.47999954223633,
+                "end": 39.13999938964844
+            },
+            {
+                "word": "45",
+                "start": 39.13999938964844,
+                "end": 39.79999923706055
+            },
+            {
+                "word": "mil",
+                "start": 39.79999923706055,
+                "end": 40.08000183105469
+            },
+            {
+                "word": "euros",
+                "start": 40.08000183105469,
+                "end": 40.380001068115234
+            },
+            {
+                "word": "por",
+                "start": 40.380001068115234,
+                "end": 40.81999969482422
+            },
+            {
+                "word": "ano.",
+                "start": 40.81999969482422,
+                "end": 40.91999816894531
+            },
+            {
+                "word": "2",
+                "start": 42.099998474121094,
+                "end": 42.15999984741211
+            },
+            {
+                "word": "milhões",
+                "start": 42.15999984741211,
+                "end": 42.68000030517578
+            },
+            {
+                "word": "e",
+                "start": 42.68000030517578,
+                "end": 43.040000915527344
+            },
+            {
+                "word": "300",
+                "start": 43.040000915527344,
+                "end": 43.5
+            },
+            {
+                "word": "mil",
+                "start": 43.5,
+                "end": 43.880001068115234
+            },
+            {
+                "word": "euros.",
+                "start": 43.880001068115234,
+                "end": 44.29999923706055
+            },
+            {
+                "word": "Para",
+                "start": 45.040000915527344,
+                "end": 45.13999938964844
+            },
+            {
+                "word": "saber",
+                "start": 45.13999938964844,
+                "end": 45.439998626708984
+            },
+            {
+                "word": "mais,",
+                "start": 45.439998626708984,
+                "end": 46.02000045776367
+            },
+            {
+                "word": "fale",
+                "start": 46.52000045776367,
+                "end": 46.70000076293945
+            },
+            {
+                "word": "com",
+                "start": 46.70000076293945,
+                "end": 46.959999084472656
+            },
+            {
+                "word": "António",
+                "start": 46.959999084472656,
+                "end": 47.279998779296875
+            },
+            {
+                "word": "Almeida",
+                "start": 47.279998779296875,
+                "end": 47.68000030517578
+            },
+            {
+                "word": "Santos,",
+                "start": 47.68000030517578,
+                "end": 48.119998931884766
+            },
+            {
+                "word": "da",
+                "start": 48.599998474121094,
+                "end": 48.7400016784668
+            },
+            {
+                "word": "Remax",
+                "start": 48.7400016784668,
+                "end": 49.13999938964844
+            },
+            {
+                "word": "Latina.",
+                "start": 49.13999938964844,
+                "end": 49.599998474121094
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 49.630001068115234,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.6999999999999957,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Guest house no Chiado",
+                        "params": {
+                            "src": "img_4c964be9",
+                            "avatar": "img_50c2b82a",
+                            "logo": "img_2e3b3134",
+                            "price": "2.300.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Guest house no Chiado",
+                            "location": "Chiado, Lisboa · 410 m² · 9 suítes",
+                            "agentName": "António Almeida Santos",
+                            "phone": "+351 963 897 702",
+                            "legal": "RE/MAX Grupo Latina"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.6999999999999957,
+                "end": 9.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "9 suítes em edifício pombalino",
+                        "params": {
+                            "src": "img_4dd8e625",
+                            "src2": "img_c6c6987f",
+                            "src3": "img_4ad8bd67",
+                            "src4": "img_415b6b10"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.8,
+                "end": 13.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_cfb8a5b5",
+                            "src2": "img_94e4f2a5",
+                            "srcs": [
+                                "img_cfb8a5b5",
+                                "img_94e4f2a5",
+                                "img_101a805e",
+                                "img_9b467fea",
+                                "img_c7232548"
+                            ],
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.3,
+                "end": 17,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_310af3e4",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17,
+                "end": 20.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Remodelação de autor",
+                        "params": {
+                            "src": "img_5ea5dc72",
+                            "src2": "img_672af7b9",
+                            "src3": "img_1ba604f5",
+                            "src4": "img_3842648e",
+                            "src5": "img_8b4d9b22"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 20.6,
+                "end": 24.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Gestão inteligente",
+                        "params": {
+                            "src": "img_ca9432b8",
+                            "title": "Gestão inteligente",
+                            "items": [
+                                "Check-in automático",
+                                "Gestão remota",
+                                "Sem receção"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.8,
+                "end": 28,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "Ocupação acima de 80%",
+                        "params": {
+                            "src": "img_fd6389c1",
+                            "blur": 10,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28,
+                "end": 30.8,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_6b413bec",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.8,
+                "end": 34.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_d09a6285",
+                            "src2": "img_3d033d98",
+                            "src3": "img_18cf8e36",
+                            "src4": "img_afdb496f"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.6,
+                "end": 38.3,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Loja no rés-do-chão",
+                        "params": {
+                            "src": "img_868d87b2",
+                            "src2": "img_50a0ceaa",
+                            "src3": "img_63039174",
+                            "src4": "img_e47238d7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.3,
+                "end": 41.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Rendimento garantido",
+                        "params": {
+                            "src": "img_32e86641",
+                            "title": "Rendimento garantido",
+                            "items": [
+                                "Arrendada até 2031",
+                                "45.000 € por ano",
+                                "Mais de 90 m²"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.6,
+                "end": 44.8,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "2.300.000 €",
+                        "params": {
+                            "src": "img_e4b8cd47",
+                            "src2": "img_99457cd0",
+                            "src3": "img_afd17311",
+                            "src4": "img_6bf7363d",
+                            "src5": "img_ae2e69fb"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 44.8,
+                "end": 49.63,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "António Almeida Santos",
+                        "params": {
+                            "src": "img_50c2b82a",
+                            "logo": "img_2e3b3134",
+                            "name": "António Almeida Santos",
+                            "role": "Consultor imobiliário · RE/MAX Grupo Latina",
+                            "buttons": "+351 963 897 702 | Marque a sua visita",
+                            "phone": "+351 963 897 702"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "estatica-azul-escuro"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-oae2p/clip.mp4",
+    "error": null
+}

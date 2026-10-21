@@ -1,0 +1,1382 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "T2 com varanda virada ao parque no Cadaval | 299.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/apartamento-venda-2-quartos-cadaval-126m2/r1047988",
+            "agent": "Paula Neves",
+            "phone": "+351917791557",
+            "agency": "iad Portugal",
+            "hook": "Dois quartos no Cadaval, com varanda virada ao parque.",
+            "voiceover": "Dois quartos no Cadaval, com varanda virada ao parque. Um segundo andar num edifício de 2010, com elevador e acesso para mobilidade reduzida. São mais de cento e vinte metros quadrados. Sala de estar e jantar ampla, com porta de vidro para a cozinha equipada. Dois quartos generosos, um com casa de banho e closet. E uma casa de banho social ampla. A varanda liga a sala, a cozinha e os dois quartos. Ar condicionado, fibra ótica, porta blindada e música ambiente. Inclui garagem com ponto de carregamento elétrico e arrecadação. Duzentos e noventa e nove mil euros. Para visitar, fale com a Paula Neves, da iad Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada do edifício",
+                    "vo": "Dois quartos no Cadaval, com varanda virada ao parque.",
+                    "caption": "T2 no Cadaval"
+                },
+                {
+                    "photo": "entrada do edifício / elevador",
+                    "vo": "Um segundo andar num edifício de 2010, com elevador e acesso para mobilidade reduzida.",
+                    "caption": "2.º andar com elevador"
+                },
+                {
+                    "photo": "hall de entrada",
+                    "vo": "São mais de cento e vinte metros quadrados.",
+                    "caption": "Mais de 120 m²"
+                },
+                {
+                    "photo": "sala de estar e jantar",
+                    "vo": "Sala de estar e jantar ampla, com porta de vidro para a cozinha equipada.",
+                    "caption": "Sala ampla"
+                },
+                {
+                    "photo": "cozinha equipada",
+                    "vo": "(continuação da frase anterior)",
+                    "caption": "Cozinha equipada"
+                },
+                {
+                    "photo": "quarto principal com closet",
+                    "vo": "Dois quartos generosos, um com casa de banho e closet.",
+                    "caption": "Suite com closet"
+                },
+                {
+                    "photo": "casa de banho social",
+                    "vo": "E uma casa de banho social ampla.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "varanda com vista para a rua e o parque",
+                    "vo": "A varanda liga a sala, a cozinha e os dois quartos.",
+                    "caption": "Varanda ao parque"
+                },
+                {
+                    "photo": "ar condicionado / porta blindada",
+                    "vo": "Ar condicionado, fibra ótica, porta blindada e música ambiente.",
+                    "caption": "Ar condicionado"
+                },
+                {
+                    "photo": "garagem com ponto de carregamento",
+                    "vo": "Inclui garagem com ponto de carregamento elétrico e arrecadação.",
+                    "caption": "Garagem e carregador"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e noventa e nove mil euros. Para visitar, fale com a Paula Neves, da iad Portugal.",
+                    "caption": "299.000 € · Paula Neves · iad Portugal"
+                }
+            ],
+            "flags": [
+                "Área: o texto diz 126 m² habitáveis e os detalhes dizem 126 m² de área bruta. Usei 'mais de cento e vinte metros quadrados'; confirmar qual é a área correta.",
+                "Nos detalhes aparece 'property.feature.heating' (campo por traduzir) e o texto não fala em aquecimento, por isso ficou de fora.",
+                "Os detalhes indicam 'Cave', mas o texto não a descreve. Não a mencionei; a garagem e a arrecadação estão lá provavelmente."
+            ],
+            "message": "Boa tarde Sra. Paula Neves,\nO meu nome é João Ferreira.\n\nVi o apartamento T2 no Cadaval que tem à venda e preparei este vídeo de demonstração, só para si, a partir das fotos do anúncio. Não o partilhei em lado nenhum.\n\nFaço isto para consultores: um vídeo para cada imóvel novo em 24 horas, e nos meses com menos angariações refaço vídeos dos imóveis que já tem à venda, para não ficarem esquecidos. 100€/mês, até 10 vídeos, mas para os primeiros 10 consultores que aderirem agora fica a 50€/mês. O primeiro mês só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "f",
+            "title": "Apartamento 2 quartos de 126 m² em Cadaval",
+            "price": 299000,
+            "details": {
+                "Preço": "299 000 €",
+                "Localização": "Cadaval, 2550-184",
+                "Referência": "1047988",
+                "Área Bruta m²": "126",
+                "Quartos": 2,
+                "Ano de Construção": 2010,
+                "Certificado Energético": "C",
+                "Características": "2 casas de banho, Garagem, Estacionamento, Varanda, Cave, Elevador, Ar condicionado, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2010, Acesso para cadeira de rodas, Andar: 2, Porta blindada, Porteiro digital, Intercomunicador"
+            }
+        },
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Paula Neves - and phone number - +351917791557. Agency: iad Portugal.\nThe agent's photo is Paula Neves.png; the agency logo is logo.jpg.\nOn-screen hook for the first frame: «Dois quartos no Cadaval, com varanda virada ao parque.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada do edifício → «T2 no Cadaval»\n- entrada do edifício / elevador → «2.º andar com elevador»\n- hall de entrada → «Mais de 120 m²»\n- sala de estar e jantar → «Sala ampla»\n- cozinha equipada → «Cozinha equipada»\n- quarto principal com closet → «Suite com closet»\n- casa de banho social → «Duas casas de banho»\n- varanda com vista para a rua e o parque → «Varanda ao parque»\n- ar condicionado / porta blindada → «Ar condicionado»\n- garagem com ponto de carregamento → «Garagem e carregador»\n- end card → «299.000 € · Paula Neves · iad Portugal»\n\nHere are the house details:\n\nApartamento 2 quartos de 126 m² em Cadaval\nPreço\n299 000 €\nLocalização\nCadaval, 2550-184\nReferência\n1047988\nÁrea Bruta m²\n126\nQuartos\n2\nAno de Construção\n2010\nCertificado Energético\nC\nCaracterísticas\n2 casas de banho, Garagem, Estacionamento, Varanda, Cave, Elevador, Ar condicionado, Sala de jantar, Ligação TV, Fibra ótica, property.feature.heating, Construído em 2010, Acesso para cadeira de rodas, Andar: 2, Porta blindada, Porteiro digital, Intercomunicador\n\nDescrição\nCADAVAL - APARTAMENTO -T 2 de  126M² - GARAGEM - ESTACIONAMENTO\n\nLocalizado em Cadaval, num edifício de 5 pisos com elevador, este apartamento de 126 m² habitáveis, situado no 2.º andar, foi construído em 2010 e apresenta uma distribuição funcional com 3 assoalhadas bem organizadas.\n\nO apartamento dispõe de um hall de entrada com decor muito moderno que dá acesso às diferentes divisões: uma sala de estar/jantar  ampla com acesso em porta de vidro á cozinha equipada. Uma grande varanda que dá acesso a cozinha sala e aos dois quartos com vista para a rua principal e para o parque de lazer. Os dois quartos de areas generosas, um deles com wc e um closet que oferece uma solução de arrumação prática. Uma casa de banho social muito generosa.\nO imóvel está dotado de um conjunto de equipamentos de qualidade: ar condicionado, fibra ótica, televisão por cabo, porta blindada, musica ambiente e intercomunicador que garantem conforto e segurança. O edifício é acessível a pessoas com mobilidade reduzida. O apartamento inclui ainda uma garagem com um lugar de estacionamento onde tem um ponto de carregamento eletrico, bem como uma arrecadação, completando assim uma oferta prática e completa.\n\nPara organizar uma visita, entre em contacto connosco.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Apartamento T2 com varanda e garagem no Cadaval, num mercado de habitação em subida",
+            "summary": "Em Portugal, o preço mediano da habitação subiu 16,8% em 2025 e 19,8% no 1.º trimestre de 2026, segundo o INE. O INE não publica um valor próprio para o concelho do Cadaval.",
+            "timeline": [
+                {
+                    "label": "Preço mediano nacional: 2.076 €/m²",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Avaliação bancária mediana: 1.949 €/m²",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "Preço mediano nacional: 2.337 €/m²",
+                    "sublabel": "1.º trimestre 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano da habitação em Portugal (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida do preço mediano face a 2024",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano em Portugal (1.º trim. 2026)",
+                    "value": 2337,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida homóloga (1.º trim. 2026)",
+                    "value": 19.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Avaliação bancária mediana (2025)",
+                    "value": 1949,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida da avaliação bancária (2025)",
+                    "value": 17.3,
+                    "unit": "%"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Os preços da habitação em Portugal subiram quase 17% em 2025, segundo o INE",
+                "No 1.º trimestre de 2026, a subida homóloga chegou aos 19,8%",
+                "Em 2025, a banca avaliou as casas num valor mediano de 1.949 €/m², mais 17,3% do que em 2024",
+                "O Cadaval fica no distrito de Lisboa, na sub-região Oeste"
+            ],
+            "sources": [
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/",
+                "https://rr.pt/noticia/pais/2026/07/17/preco-mediano-da-habitacao-sobe-168-em-2025/478624/",
+                "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=804178838&att_display=n&att_download=y",
+                "https://executivedigest.sapo.pt/?p=709677",
+                "https://www.barlavento.pt/?p=390870"
+            ]
+        },
+        "suggested": {
+            "title": "T2 com varanda virada ao parque no Cadaval | 299.000 €",
+            "description": "Apartamento T2 com mais de 120 m² num 2.º andar com elevador e acesso para mobilidade reduzida, com varanda virada ao parque que liga a sala, a cozinha e os dois quartos. Tem suite com closet, cozinha equipada, ar condicionado, porta blindada, garagem com ponto de carregamento elétrico e arrecadação. Para marcar visita, fale com a Paula Neves, da IAD Portugal.",
+            "tags": [
+                "T2",
+                "apartamento à venda",
+                "Cadaval",
+                "imobiliário",
+                "casa com varanda",
+                "garagem",
+                "IAD Portugal",
+                "Paula Neves"
+            ]
+        },
+        "image_uploads": [],
+        "allowed_present": [
+            "video",
+            "over",
+            "split",
+            "animation"
+        ],
+        "formato": "auto"
+    },
+    "id": "listing-r1047988-8o3kp",
+    "created_at": "2026-10-15T15:28:11+00:00",
+    "updated_at": "2026-10-15T17:00:45+00:00",
+    "source_path": "clips/uploads/Xx6Wz99aMiOKqbeIgeNtAiZy470MPBHhgjPKkr4j.mp3",
+    "images": [
+        {
+            "id": "img_d284c284",
+            "path": "clips/uploads/MBZwHWeD3AJ3sdllQzG8x47BihjrxRsmCDac09Bi.jpg",
+            "description": "Sala de estar e jantar ampla, mesa de vidro, sofá castanho, TV na parede e porta de vidro ao fundo.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_edfb0dfa",
+            "path": "clips/uploads/J2sQPqKPuwBbFZ0UpTYfeumdSaxO3YunjeirySgw.jpg",
+            "description": "Cozinha equipada, placa de indução e bancada escura, com porta de vidro para a varanda ao fundo.",
+            "name": "01a13a25880102d23049d505c88af37c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ab99b3a0",
+            "path": "clips/uploads/NtbhfX3HsJnRFDMAAeIB1Zvsdr9G1AR08oQZkOSM.jpg",
+            "description": "Cozinha com ilha e bancos brancos, armários castanhos brilhantes, máquina de lavar e forno encastrado.",
+            "name": "01a13a3177e1d4fcfd8cf090e6c0441a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b599a139",
+            "path": "clips/uploads/PO8yctfMRuj7c1vhIQ3Tw5DajPzacKcssoTfoMIc.jpg",
+            "description": "Cozinha ampla com ilha central, bancos brancos, forno e micro-ondas encastrados e máquina de lavar loiça.",
+            "name": "01a13a31fd649de684baa3a1d9407b8d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_375bcdf8",
+            "path": "clips/uploads/u9PMC67BW0VEw29D79Gb9v0gVzBKVA5IkywJyv5J.jpg",
+            "description": "Cozinha vista da ilha: armários castanhos lacados, exaustor inox, placa, lava-loiça e máquina de lavar roupa.",
+            "name": "01a13a31fd51e573c02fe058c14cb19d.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5a15c490",
+            "path": "clips/uploads/jwIV5VqMSoKKsFPNeYPbbRreJqz4uVnyOclQW4yh.jpg",
+            "description": "Cozinha frontal: armários castanhos brilhantes, exaustor inox, bancada com eletrodomésticos, forno encastrado e frigorífico.",
+            "name": "01a13a31780bbf8aedc7b462b32075fa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7c3d59fc",
+            "path": "clips/uploads/fVNjemOhvtcCwCHDUneMQqAIdxg4ayupcNJJpMXn.jpg",
+            "description": "Cozinha com ilha cinzenta e bancos brancos, porta de vidro aberta para a varanda soalheira.",
+            "name": "01a13a3263289e938353b87de728761c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1b550557",
+            "path": "clips/uploads/PedO9k2xjpryQZkp4MTO3q3D4lUqHGW63E8B44CC.jpg",
+            "description": "Cozinha moderna com ilha, bancos brancos, forno encastrado e porta para o hall de entrada.",
+            "name": "01a13a32633368c1fc15b649c6faf970.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_adfc2fb5",
+            "path": "clips/uploads/6RYChbuMUsshL6eIhB0alFRqSwb7kc1813iYzSpP.jpg",
+            "description": "Cozinha comprida com ilha central e bancos, frigorífico inox e porta envidraçada para a varanda ao fundo.",
+            "name": "01a13a31780505c8f78a4d3c984e1db9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_b5a0b2a7",
+            "path": "clips/uploads/ZQQ1R6dw7o5AeGWLwnJxtiiNwuX9Etjsc2Tlhccg.jpg",
+            "description": "Cozinha equipada com Bimby, airfryer, exaustor inox e ilha, com janela para a varanda à direita.",
+            "name": "01a13a328ef1845c2936a769f659f55e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_7f9bfd8c",
+            "path": "clips/uploads/zAkHb6ZgnDdGXlbvUhrZhaThbFROqTygat8p3sUI.jpg",
+            "description": "Sala de estar e jantar com sofá castanho, mesa de vidro e porta de correr para a varanda; porta de vidro ao fundo.",
+            "name": "01a13a2587f26198f0256d5276807ee8.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_76fda658",
+            "path": "clips/uploads/dPibIZPNrYcjZCoDq1BI4mzxXLh1GCHdKG1elWEk.jpg",
+            "description": "Suite: closet com portas de correr em vidro branco e castanho ao lado da porta aberta da casa de banho.",
+            "name": "01a13a2587fc7e6c3e70b8a8989b948f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_89ca63fe",
+            "path": "clips/uploads/PDkzeIPt4jhAuYcEKuHns2m4481Wcs64XpClCcyt.jpg",
+            "description": "Cozinha equipada, vista rasante da bancada castanha brilhante, armários altos lacados e máquina de lavar roupa.",
+            "name": "01a13a2590de8bcde3542e0d7d49368a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8faa4d70",
+            "path": "clips/uploads/vBGqXTt4ezPKOwHZoI91kVG61RWP7XqWFTOcm4sQ.jpg",
+            "description": "Cozinha com ilha escura e bancos brancos, armários lacados, forno e frigorífico; porta para a varanda ao fundo.",
+            "name": "01a13a2590bbfc71a63f0eb2264fb603.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_5ec4dbce",
+            "path": "clips/uploads/tyBcA8RKyMIFoivTYwpmoUjH28NUldwhlE03A4Bz.jpg",
+            "description": "Varanda comprida em L, com piso cerâmico, árvores do parque e prédios amarelos sob céu azul.",
+            "name": "01a13a25904cd184dac18e5642984d5f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_26716137",
+            "path": "clips/uploads/o9s93orM35CYg1o77lc8hhzCbgiaEAyb8ZKYRjAC.jpg",
+            "description": "Varanda junto às portas de correr da sala, com redes mosquiteiras; vê-se o interior da cozinha.",
+            "name": "01a13a258f3eb33e2e257a50520f642f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_f7a65b41",
+            "path": "clips/uploads/nprpOH92ksvWDvCglSMnARVXfkCdRR5ryAUlsg2J.jpg",
+            "description": "Porta dupla de vidro fosco aberta da sala para a cozinha, com forno e micro-ondas encastrados.",
+            "name": "01a13a258ed7a2e937d50e8fb2ddf26f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ce932d68",
+            "path": "clips/uploads/Av6DWiqygGIRhi2cz9L4PRCnKYRMSzX176HSsPGi.jpg",
+            "description": "Corredor com piso flutuante, portas e roupeiro embutido em madeira clara, levando à sala ao fundo.",
+            "name": "01a13a258fe549fe7c8c7cfe4d714dc7.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_711e8c98",
+            "path": "clips/uploads/F9SBfkWQR4A1jQO7DgCLkkVipbhAJWxHCkYUV7Wl.jpg",
+            "description": "Casa de banho com base de duche, coluna de hidromassagem, móvel suspenso com lavatório de vidro e espelho.",
+            "name": "01a13a2587d8d59294450d6eb0686ca4.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ed64666c",
+            "path": "clips/uploads/lxxnT1eTnEWS7z7TqUH0yYPbimvwdmlLwAvoiliY.jpg",
+            "description": "Casa de banho ampla, vista geral do duche com coluna de hidromassagem, móvel suspenso e chão escuro.",
+            "name": "01a13a258ecb0c9f3a2d99144584bdcf.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7059b977",
+            "path": "clips/uploads/3hIjK8CGIcjThX3UYju4W1EoaNRS12oYD8AcFyU1.jpg",
+            "description": "Casa de banho social com banheira e resguardo de vidro, móvel suspenso branco e azulejo cinzento.",
+            "name": "01a13a258fd9a6faad5771640a0d33aa.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e0c1927e",
+            "path": "clips/uploads/E0R54pHGx7Jgj82P2eigNCw0OrsKeXaPTf4qo2ZB.jpg",
+            "description": "Hall de entrada com porta blindada, chão claro brilhante, parede de pedra decorativa e corredor.",
+            "name": "01a13a25902bf368b304055f2b7fe592.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_bd63218c",
+            "path": "clips/uploads/gipibhZjZmPU2nTmjFomioKjjKe7fPxAKooX7UAr.jpg",
+            "description": "Casa de banho da suite com espelho iluminado, móvel suspenso e faixa decorativa preta damasco.",
+            "name": "01a13a25881f4461eb075848afa3897e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_e483358d",
+            "path": "clips/uploads/yuYBrLijWDHv1U9Ept7Fh59eWqhsw0gC914kh9pU.jpg",
+            "description": "Casa de banho social ampla com sanita, bidé, móvel suspenso com tampo azul e faixa decorativa.",
+            "name": "01a13a258f0e9656715d4b93548d0274.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7fe14c6e",
+            "path": "clips/uploads/sfcGtNjpznLW9rv8cTPku1i96a0JoHPvWhX9AgUT.jpg",
+            "description": "Vista da entrada: cozinha equipada com ilha e bancos à esquerda, sala com televisão à direita.",
+            "name": "01a13a2591845dc4c04c3a3e0be54a11.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d5aa7dcb",
+            "path": "clips/uploads/Kkd04KidZ9MECdm8ztpUlxzRsde0a4bAeYWJIeYU.jpg",
+            "description": "Sala de estar e jantar ampla, sofá, televisão grande, mesa de vidro e porta para a varanda.",
+            "name": "01a13a258f021e5f9a2fde0ccb37d4e6.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_3f87f7d5",
+            "path": "clips/uploads/33Boahy11Z4s90e69d3UH8kj1GrZsFvKwi8UDthB.jpg",
+            "description": "Sala de estar com sofá castanho, painel decorativo iluminado e portas de vidro foscas.",
+            "name": "01a13a258fd91e9060c567eae855ae99.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_eadb24fd",
+            "path": "clips/uploads/VUpXTDEVOxNsIwqa2ytdjAIl60c2J02sCFPNAoLQ.jpg",
+            "description": "Zona de escritório e ginásio na sala, ar-condicionado, passadeira, porta de vidro e sofá.",
+            "name": "01a13a258e869e44375ecb75b328105f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1ecf1ecf",
+            "path": "clips/uploads/xLy0IwRrUMolw1feIvAWDGlSKJ1w03rJCnaWygEa.jpg",
+            "description": "Quarto com chão de madeira, parede às riscas, roupeiro embutido branco e ar-condicionado.",
+            "name": "01a13a31fda6c272cce3db936ba93a0c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ad29cea3",
+            "path": "clips/uploads/1JyMWssftSbDVr1alcCotyamD4vd4Ib2mVTSinPY.jpg",
+            "description": "Quarto amplo com chão de madeira, parede às riscas e porta de vidro para a varanda.",
+            "name": "01a13a3177e3ab6cec8b808d1014e12e.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8745145c",
+            "path": "clips/uploads/aAvbLrgulQmSvS7wCySg41N2CPySK3ubopD1kouw.jpg",
+            "description": "Quarto de casal com cama de cabeceira castanha estofada, sofá-cama, luzes de teto embutidas e pavimento de madeira.",
+            "name": "01a13a258e99bad3b95612aee197c05f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6b426730",
+            "path": "clips/uploads/4x9qObVtkzg7aW7tWdglVjUS7LJMQEmvnKkqnTIZ.jpg",
+            "description": "Hall de entrada com porta blindada, chão de mosaico brilhante, quadro na parede e vista para a sala.",
+            "name": "01a13a258f04009e844459612b25b504.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_30270d0a",
+            "path": "clips/uploads/4j2yqsvJxOQziABHKk6jpF8hzFZqpYlPpVv9LnKY.jpg",
+            "description": "Corredor de zona comum com papel de parede floral, chão escuro e porta aberta marcada com 'R', provavelmente arrecadação.",
+            "name": "01a13a258ed144a55c4a0ab0b56ce93c.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fa826c0f",
+            "path": "clips/uploads/O6n02YMXkiAPsiNpGH8rSrK8ZP2X6XcPc6He3YzH.jpg",
+            "description": "Hall de entrada com parede de pedra decorativa iluminada, seixos brancos no chão, intercomunicador e porta para a sala.",
+            "name": "01a13a2588294eaa0147cd8101a2db6a.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_45448a18",
+            "path": "clips/uploads/Be6jGD6KsZZ1HgX0gNDs3PPCdYoxBgAXfM7hQlcO.jpg",
+            "description": "Zona comum com porta de madeira com janela redonda, provavelmente acesso à garagem, e espelho decorativo de cristais.",
+            "name": "01a13a258850f7f99543c89573bee4d8.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6ba97231",
+            "path": "clips/uploads/cLir0yjBOiFWhDJFmnlW3jJEcGvW4aMHmu6dfjXj.jpg",
+            "description": "Corredor comum com chão escuro brilhante, papel de parede floral, portas de vidro de correr e porta 'U', provavelmente arrecadações.",
+            "name": "01a13a2587cf49d12dd2412098f3e067.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ba0253d9",
+            "path": "clips/uploads/FEzQcBMd5LN86jgUXs8X7LHcunR5aSyVsO4bk05u.jpg",
+            "description": "Entrada do prédio em tijolo à vista, com porta de vidro, intercomunicador, caixas de correio e árvores decorativas.",
+            "name": "01a13a259066a41600e65b2e86f2e8b3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9dc5abd4",
+            "path": "clips/uploads/Fu211DxPE6rzWhnmuTwZF4zuo0N8uhFBzY8ZCaPY.png",
+            "description": "Retrato da consultora Paula Neves, da iad Portugal.",
+            "name": "Paula Neves.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d0102598",
+            "path": "clips/uploads/nFFIaXXaBEbn1LdovdqEti4XHUH9ffAmqASEFDJv.jpg",
+            "description": "Logótipo da iad Portugal.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1047988-8o3kp/voz.mp3",
+    "transcript": {
+        "duration": 38.720001220703125,
+        "text": "Dois quartos no Cadaval, com varanda virada ao parque. Um segundo andar num edifício de 2010, com elevador e acesso para mobilidade reduzida. São mais de 120 metros quadrados. Sala de estar e jantar ampla, com porta de vidro para a cozinha equipada. Dois quartos generosos, um com casa de banho e closet. E uma casa de banho social ampla. A varanda liga a sala, a cozinha e os dois quartos. Ar-condicionado, fibra ótica, porta blindada e música ambiente. Inclui garagem com ponto de carregamento elétrico e arrecadação. 299 mil euros. Para visitar, fale com a Paula Neves, da IAD de Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Dois",
+                "start": 0,
+                "end": 0.36000001430511475
+            },
+            {
+                "word": "quartos",
+                "start": 0.36000001430511475,
+                "end": 0.6600000262260437
+            },
+            {
+                "word": "no",
+                "start": 0.6600000262260437,
+                "end": 0.7599999904632568
+            },
+            {
+                "word": "Cadaval",
+                "start": 0.7599999904632568,
+                "end": 1.2799999713897705
+            },
+            {
+                "word": "com",
+                "start": 1.340000033378601,
+                "end": 1.7400000095367432
+            },
+            {
+                "word": "varanda",
+                "start": 1.7400000095367432,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "virada",
+                "start": 1.9600000381469727,
+                "end": 2.359999895095825
+            },
+            {
+                "word": "ao",
+                "start": 2.359999895095825,
+                "end": 2.5799999237060547
+            },
+            {
+                "word": "parque",
+                "start": 2.5799999237060547,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "Um",
+                "start": 3.299999952316284,
+                "end": 3.4200000762939453
+            },
+            {
+                "word": "segundo",
+                "start": 3.4200000762939453,
+                "end": 3.7200000286102295
+            },
+            {
+                "word": "andar",
+                "start": 3.7200000286102295,
+                "end": 4.059999942779541
+            },
+            {
+                "word": "num",
+                "start": 4.059999942779541,
+                "end": 4.28000020980835
+            },
+            {
+                "word": "edifício",
+                "start": 4.28000020980835,
+                "end": 4.760000228881836
+            },
+            {
+                "word": "de",
+                "start": 4.760000228881836,
+                "end": 5.059999942779541
+            },
+            {
+                "word": "2010",
+                "start": 5.059999942779541,
+                "end": 5.820000171661377
+            },
+            {
+                "word": "com",
+                "start": 5.980000019073486,
+                "end": 6.119999885559082
+            },
+            {
+                "word": "elevador",
+                "start": 6.119999885559082,
+                "end": 6.619999885559082
+            },
+            {
+                "word": "e",
+                "start": 6.619999885559082,
+                "end": 6.900000095367432
+            },
+            {
+                "word": "acesso",
+                "start": 6.900000095367432,
+                "end": 7.199999809265137
+            },
+            {
+                "word": "para",
+                "start": 7.199999809265137,
+                "end": 7.420000076293945
+            },
+            {
+                "word": "mobilidade",
+                "start": 7.420000076293945,
+                "end": 7.880000114440918
+            },
+            {
+                "word": "reduzida",
+                "start": 7.880000114440918,
+                "end": 8.479999542236328
+            },
+            {
+                "word": "São",
+                "start": 8.9399995803833,
+                "end": 9.020000457763672
+            },
+            {
+                "word": "mais",
+                "start": 9.020000457763672,
+                "end": 9.239999771118164
+            },
+            {
+                "word": "de",
+                "start": 9.239999771118164,
+                "end": 9.539999961853027
+            },
+            {
+                "word": "120",
+                "start": 9.539999961853027,
+                "end": 10.079999923706055
+            },
+            {
+                "word": "metros",
+                "start": 10.079999923706055,
+                "end": 10.399999618530273
+            },
+            {
+                "word": "quadrados",
+                "start": 10.399999618530273,
+                "end": 10.899999618530273
+            },
+            {
+                "word": "Sala",
+                "start": 11.520000457763672,
+                "end": 11.579999923706055
+            },
+            {
+                "word": "de",
+                "start": 11.579999923706055,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "estar",
+                "start": 12.039999961853027,
+                "end": 12.039999961853027
+            },
+            {
+                "word": "e",
+                "start": 12.039999961853027,
+                "end": 12.180000305175781
+            },
+            {
+                "word": "jantar",
+                "start": 12.180000305175781,
+                "end": 12.460000038146973
+            },
+            {
+                "word": "ampla",
+                "start": 12.460000038146973,
+                "end": 13.039999961853027
+            },
+            {
+                "word": "com",
+                "start": 13.220000267028809,
+                "end": 13.4399995803833
+            },
+            {
+                "word": "porta",
+                "start": 13.4399995803833,
+                "end": 13.619999885559082
+            },
+            {
+                "word": "de",
+                "start": 13.619999885559082,
+                "end": 13.979999542236328
+            },
+            {
+                "word": "vidro",
+                "start": 13.979999542236328,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "para",
+                "start": 14.020000457763672,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "a",
+                "start": 14.239999771118164,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "cozinha",
+                "start": 14.5600004196167,
+                "end": 14.5600004196167
+            },
+            {
+                "word": "equipada",
+                "start": 14.5600004196167,
+                "end": 15.34000015258789
+            },
+            {
+                "word": "Dois",
+                "start": 15.65999984741211,
+                "end": 15.880000114440918
+            },
+            {
+                "word": "quartos",
+                "start": 15.880000114440918,
+                "end": 16.18000030517578
+            },
+            {
+                "word": "generosos",
+                "start": 16.18000030517578,
+                "end": 16.780000686645508
+            },
+            {
+                "word": "um",
+                "start": 17.219999313354492,
+                "end": 17.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 17.299999237060547,
+                "end": 17.600000381469727
+            },
+            {
+                "word": "casa",
+                "start": 17.600000381469727,
+                "end": 17.799999237060547
+            },
+            {
+                "word": "de",
+                "start": 17.799999237060547,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "banho",
+                "start": 18.18000030517578,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 18.18000030517578,
+                "end": 18.479999542236328
+            },
+            {
+                "word": "closet",
+                "start": 18.479999542236328,
+                "end": 18.899999618530273
+            },
+            {
+                "word": "E",
+                "start": 19.239999771118164,
+                "end": 19.399999618530273
+            },
+            {
+                "word": "uma",
+                "start": 19.399999618530273,
+                "end": 19.540000915527344
+            },
+            {
+                "word": "casa",
+                "start": 19.540000915527344,
+                "end": 19.700000762939453
+            },
+            {
+                "word": "de",
+                "start": 19.700000762939453,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "banho",
+                "start": 20.040000915527344,
+                "end": 20.040000915527344
+            },
+            {
+                "word": "social",
+                "start": 20.040000915527344,
+                "end": 20.540000915527344
+            },
+            {
+                "word": "ampla",
+                "start": 20.540000915527344,
+                "end": 21.100000381469727
+            },
+            {
+                "word": "A",
+                "start": 21.440000534057617,
+                "end": 21.65999984741211
+            },
+            {
+                "word": "varanda",
+                "start": 21.65999984741211,
+                "end": 21.84000015258789
+            },
+            {
+                "word": "liga",
+                "start": 21.84000015258789,
+                "end": 22.15999984741211
+            },
+            {
+                "word": "a",
+                "start": 22.15999984741211,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "sala",
+                "start": 22.700000762939453,
+                "end": 22.700000762939453
+            },
+            {
+                "word": "a",
+                "start": 22.920000076293945,
+                "end": 23.15999984741211
+            },
+            {
+                "word": "cozinha",
+                "start": 23.15999984741211,
+                "end": 23.360000610351562
+            },
+            {
+                "word": "e",
+                "start": 23.360000610351562,
+                "end": 23.600000381469727
+            },
+            {
+                "word": "os",
+                "start": 23.600000381469727,
+                "end": 23.799999237060547
+            },
+            {
+                "word": "dois",
+                "start": 23.799999237060547,
+                "end": 24.020000457763672
+            },
+            {
+                "word": "quartos",
+                "start": 24.020000457763672,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "Ar",
+                "start": 24.940000534057617,
+                "end": 24.979999542236328
+            },
+            {
+                "word": "condicionado",
+                "start": 24.979999542236328,
+                "end": 25.760000228881836
+            },
+            {
+                "word": "fibra",
+                "start": 26.18000030517578,
+                "end": 26.239999771118164
+            },
+            {
+                "word": "ótica",
+                "start": 26.239999771118164,
+                "end": 26.739999771118164
+            },
+            {
+                "word": "porta",
+                "start": 27.100000381469727,
+                "end": 27.139999389648438
+            },
+            {
+                "word": "blindada",
+                "start": 27.139999389648438,
+                "end": 27.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 27.739999771118164,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "música",
+                "start": 28.020000457763672,
+                "end": 28.34000015258789
+            },
+            {
+                "word": "ambiente",
+                "start": 28.34000015258789,
+                "end": 28.860000610351562
+            },
+            {
+                "word": "Inclui",
+                "start": 28.860000610351562,
+                "end": 29.6200008392334
+            },
+            {
+                "word": "garagem",
+                "start": 29.6200008392334,
+                "end": 30.15999984741211
+            },
+            {
+                "word": "com",
+                "start": 30.15999984741211,
+                "end": 30.34000015258789
+            },
+            {
+                "word": "ponto",
+                "start": 30.34000015258789,
+                "end": 30.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 30.540000915527344,
+                "end": 30.719999313354492
+            },
+            {
+                "word": "carregamento",
+                "start": 30.719999313354492,
+                "end": 31.100000381469727
+            },
+            {
+                "word": "elétrico",
+                "start": 31.100000381469727,
+                "end": 31.700000762939453
+            },
+            {
+                "word": "e",
+                "start": 31.700000762939453,
+                "end": 31.920000076293945
+            },
+            {
+                "word": "arrecadação",
+                "start": 31.920000076293945,
+                "end": 32.540000915527344
+            },
+            {
+                "word": "299",
+                "start": 33.36000061035156,
+                "end": 34.040000915527344
+            },
+            {
+                "word": "mil",
+                "start": 34.040000915527344,
+                "end": 34.400001525878906
+            },
+            {
+                "word": "euros",
+                "start": 34.400001525878906,
+                "end": 34.84000015258789
+            },
+            {
+                "word": "Para",
+                "start": 35.279998779296875,
+                "end": 35.34000015258789
+            },
+            {
+                "word": "visitar",
+                "start": 35.34000015258789,
+                "end": 35.91999816894531
+            },
+            {
+                "word": "fale",
+                "start": 36.2400016784668,
+                "end": 36.2400016784668
+            },
+            {
+                "word": "com",
+                "start": 36.2400016784668,
+                "end": 36.380001068115234
+            },
+            {
+                "word": "a",
+                "start": 36.380001068115234,
+                "end": 36.52000045776367
+            },
+            {
+                "word": "Paula",
+                "start": 36.52000045776367,
+                "end": 36.7599983215332
+            },
+            {
+                "word": "Neves",
+                "start": 36.7599983215332,
+                "end": 37.119998931884766
+            },
+            {
+                "word": "da",
+                "start": 37.279998779296875,
+                "end": 37.47999954223633
+            },
+            {
+                "word": "IAD",
+                "start": 37.47999954223633,
+                "end": 37.84000015258789
+            },
+            {
+                "word": "de",
+                "start": 37.84000015258789,
+                "end": 38.18000030517578
+            },
+            {
+                "word": "Portugal",
+                "start": 38.18000030517578,
+                "end": 38.47999954223633
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 38.720001220703125,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.622,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "T2 COM VARANDA AO PARQUE",
+                        "params": {
+                            "src": "img_5ec4dbce",
+                            "avatar": "img_9dc5abd4",
+                            "logo": "img_d0102598",
+                            "tag": "NOVO IMÓVEL",
+                            "price": "299.000 €",
+                            "location": "CADAVAL · OESTE",
+                            "title": "T2 NO CADAVAL",
+                            "facts": "126 m² · 2 quartos · 2 WC · garagem",
+                            "cta": "Ligue já +351 917 791 557",
+                            "name": "Paula Neves",
+                            "logoText": "iad Portugal",
+                            "logoSub": "Consultora imobiliária",
+                            "legal": "IAD PORTUGAL S.A. | AMI: 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.622,
+                "end": 5.949,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "2.º ANDAR COM ELEVADOR",
+                        "params": {
+                            "src": "img_ba0253d9",
+                            "src2": "img_6ba97231"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 5.949,
+                "end": 8.772,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "",
+                        "params": {
+                            "src": "img_fa826c0f",
+                            "title": "ACESSO FÁCIL",
+                            "items": [
+                                "Elevador",
+                                "Mobilidade reduzida",
+                                "Porteiro digital"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 8.772,
+                "end": 11.092,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "MAIS DE 120 M²",
+                        "params": {
+                            "src": "img_7fe14c6e",
+                            "src2": "img_ce932d68",
+                            "src3": "img_1b550557",
+                            "src4": "img_375bcdf8",
+                            "src5": "img_b5a0b2a7"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 11.092,
+                "end": 13.411,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "SALA AMPLA",
+                        "params": {
+                            "src": "img_d284c284",
+                            "src2": "img_7f9bfd8c",
+                            "src3": "img_d5aa7dcb",
+                            "src4": "img_3f87f7d5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 13.411,
+                "end": 15.73,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "COZINHA EQUIPADA",
+                        "params": {
+                            "src": "img_f7a65b41",
+                            "src2": "img_edfb0dfa",
+                            "src3": "img_b599a139",
+                            "src4": "img_ab99b3a0",
+                            "src5": "img_5a15c490"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.73,
+                "end": 19.36,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "SUITE COM CLOSET",
+                        "params": {
+                            "src": "img_8745145c",
+                            "src2": "img_1ecf1ecf",
+                            "src3": "img_76fda658",
+                            "src4": "img_bd63218c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.36,
+                "end": 21.578,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "DUAS CASAS DE BANHO",
+                        "params": {
+                            "src": "img_7059b977",
+                            "src2": "img_e483358d",
+                            "src3": "img_711e8c98",
+                            "src4": "img_ed64666c"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.578,
+                "end": 24.603,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "VARANDA AO PARQUE",
+                        "params": {
+                            "src": "img_26716137",
+                            "src2": "img_7c3d59fc",
+                            "src3": "img_adfc2fb5",
+                            "src4": "img_8faa4d70",
+                            "src5": "img_ad29cea3"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.603,
+                "end": 28.334,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-quatro-faixas",
+                        "text": "AR CONDICIONADO",
+                        "params": {
+                            "src": "img_eadb24fd",
+                            "src2": "img_e0c1927e",
+                            "src3": "img_6b426730",
+                            "src4": "img_89ca63fe"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 28.334,
+                "end": 30.603,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "GARAGEM E CARREGADOR",
+                        "params": {
+                            "src": "img_45448a18",
+                            "blur": 8,
+                            "charsPerSecond": 14
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.603,
+                "end": 32.438,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_30270d0a",
+                            "zoomFrom": 1.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 32.438,
+                "end": 38.72,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Paula Neves",
+                        "params": {
+                            "src": "img_9dc5abd4",
+                            "name": "Paula Neves",
+                            "phone": "+351 917 791 557",
+                            "email": "paula.neves@iadportugal.pt"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "error": null,
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-r1047988-8o3kp/clip.mp4",
+    "source_text": "Dois quartos no Cadaval, com varanda virada ao parque. Um segundo andar num edifício de 2010, com elevador e acesso para mobilidade reduzida. São mais de cento e vinte metros quadrados. Sala de estar e jantar ampla, com porta de vidro para a cozinha equipada. Dois quartos generosos, um com casa de banho e closet. E uma casa de banho social ampla. A varanda liga a sala, a cozinha e os dois quartos. Ar condicionado, fibra ótica, porta blindada e música ambiente. Inclui garagem com ponto de carregamento elétrico e arrecadação. Duzentos e noventa e nove mil euros. Para visitar, fale com a Paula Neves, da IAD de Portugal."
+}

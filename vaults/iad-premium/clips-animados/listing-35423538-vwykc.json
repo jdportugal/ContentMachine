@@ -1,0 +1,1298 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Casa térrea T2 no sopé do Montejunto, em Alenquer, por 294.000 €",
+    "meta": {
+        "listing": {
+            "url": "https://www.idealista.pt/imovel/35423538/",
+            "agent": "Nuno Narciso",
+            "phone": "+351933197327",
+            "email": "nuno.narciso@iadportugal.pt",
+            "licence": "11220",
+            "agency": "IAD Portugal",
+            "hook": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto.",
+            "voiceover": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto. Para comprar ou vender casa, fale com o Nuno Narciso da IAD Portugal. Fica em Cabanas do Chão, a poucos minutos de Abrigada e de Alenquer. Torres Vedras está perto, e Lisboa a menos de uma hora. Tudo num só piso, sem escadas. Sala e cozinha em open space, com saída para o pátio. Dois quartos com roupeiro, um deles em suite, e duas casas de banho. Lá fora, oitenta e sete metros de pátio, com tanque alentejano e churrasqueira. Estacionamento privativo, com portão e carregador para carro elétrico. Para primeira habitação, casa de campo ou arrendamento. Duzentos e noventa e quatro mil euros. Para visitar, fale com o Nuno Narciso, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da casa",
+                    "vo": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto.",
+                    "caption": "Cabanas do Chão, Alenquer"
+                },
+                {
+                    "photo": "rua da aldeia ou vista para a Serra de Montejunto",
+                    "vo": "Fica em Cabanas do Chão, a poucos minutos de Abrigada e de Alenquer.",
+                    "caption": "Perto de Abrigada e Alenquer"
+                },
+                {
+                    "photo": "vinhas ou paisagem envolvente",
+                    "vo": "Torres Vedras está perto, e Lisboa a menos de uma hora.",
+                    "caption": "Lisboa a menos de 1 hora"
+                },
+                {
+                    "photo": "sala",
+                    "vo": "Tudo num só piso, sem escadas.",
+                    "caption": "Tudo num só piso"
+                },
+                {
+                    "photo": "cozinha em open space com acesso ao pátio",
+                    "vo": "Sala e cozinha em open space, com saída para o pátio.",
+                    "caption": "Open space com pátio"
+                },
+                {
+                    "photo": "suite com roupeiro embutido",
+                    "vo": "Dois quartos com roupeiro, um deles em suite,",
+                    "caption": "Suite + 1 quarto"
+                },
+                {
+                    "photo": "casa de banho",
+                    "vo": "e duas casas de banho.",
+                    "caption": "Duas casas de banho"
+                },
+                {
+                    "photo": "pátio com tanque alentejano",
+                    "vo": "Lá fora, oitenta e sete metros de pátio, com tanque alentejano e churrasqueira.",
+                    "caption": "Tanque alentejano e churrasqueira"
+                },
+                {
+                    "photo": "estacionamento com portão e carregador elétrico",
+                    "vo": "Estacionamento privativo, com portão e carregador para carro elétrico.",
+                    "caption": "Carregador para carro elétrico"
+                },
+                {
+                    "photo": "telheiro com churrasqueira",
+                    "vo": "Para primeira habitação, casa de campo ou arrendamento.",
+                    "caption": "Disponibilidade imediata"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Duzentos e noventa e quatro mil euros. Para visitar, fale com o Nuno Narciso, da IAD Portugal.",
+                    "caption": "294.000 € · Nuno Narciso · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O texto diz 'a estrear' e 'totalmente remodelada', mas os detalhes dizem 'Segunda mão/bom estado'. No guião ficou só 'renovada'; 'a estrear' não foi usado.",
+                "Os números da área não batem certo: área útil de 60,58 m² e área bruta de 60 m² (a útil não pode ser maior que a bruta). A área interior ficou de fora.",
+                "Os detalhes dizem 'Em trâmite'. Não é claro se é licença ou outro processo. Confirmar antes de publicar.",
+                "Torres Vedras não aparece no anúncio. Foi incluído porque o cliente pediu, sem indicar distância. Confirmar se está bem.",
+                "A marca dos eletrodomésticos (Candy) ficou de fora, como pede o guia.",
+                "O cliente pediu tags. Sugestões: #MoradiaT2 #Alenquer #CabanasDoChão #Montejunto #CasaTérrea #CasaDeCampo #PertoDeLisboa #TorresVedras #Oeste #CasaÀVenda #Imobiliário"
+            ],
+            "message": "Bom dia Sra. Dulce, fiz este vídeo da sua moradia em Cabanas do Chão para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia geminada à venda em Abrigada e Cabanas de Torres",
+            "price": 294000,
+            "details": {
+                "Preço": "294 000 €",
+                "Localização": "Alenquer, Lisboa",
+                "Referência": "35423538",
+                "Área Bruta m²": "60",
+                "Quartos": "2",
+                "Características": "Moradia geminada, 1 andar, 60 m² área bruta, T2, 2 casas de banho, Lote de 147 m², Segunda mão/bom estado, Armários embutidos, Ar condicionado, Em trâmite"
+            }
+        },
+        "agent_photo": "clips/uploads/beb8a7f5fddac045a367e8418f2d9480d92b413b.jpg",
+        "listing_video": "clips/uploads/tQK9JjaW1Vd03affYWonaJYiYdXjCts9sMoEv0RG.mp4",
+        "after_intro": "clips/uploads/LOQ5E7tpbdLNflcZcmG8gykbNL1pJV8NwBjBxylz.mp4",
+        "videos_swapped": false,
+        "mix_photos": true,
+        "beat_opening": null,
+        "after_intro_line": "Para comprar ou vender casa, fale com o Nuno Narciso da IAD Portugal",
+        "script_notes": "client said \"Falar da zona tá perto Alenquer poucos km Torres Vedras de Lisboa  essas cenas\" and \"uma boa descrição e melhores tags para vender depressa\"",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Nuno Narciso - and phone number - +351 933 197 327. Agency: IAD Portugal. Show the licence number (11220) small on the outro card.\nThe agent's photo is Nuno Narciso.jpg; the agency logo is logo.png.\nOn-screen hook for the first frame: «Casa de aldeia renovada em Alenquer, no sopé de Montejunto.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da casa → «Cabanas do Chão, Alenquer»\n- rua da aldeia ou vista para a Serra de Montejunto → «Perto de Abrigada e Alenquer»\n- vinhas ou paisagem envolvente → «Lisboa a menos de 1 hora»\n- sala → «Tudo num só piso»\n- cozinha em open space com acesso ao pátio → «Open space com pátio»\n- suite com roupeiro embutido → «Suite + 1 quarto»\n- casa de banho → «Duas casas de banho»\n- pátio com tanque alentejano → «Tanque alentejano e churrasqueira»\n- estacionamento com portão e carregador elétrico → «Carregador para carro elétrico»\n- telheiro com churrasqueira → «Disponibilidade imediata»\n- end card → «294.000 € · Nuno Narciso · IAD Portugal»\n\nHere are the house details:\n\nMoradia geminada à venda em Abrigada e Cabanas de Torres\nPreço\n294 000 €\nLocalização\nAlenquer, Lisboa\nReferência\n35423538\nÁrea Bruta m²\n60\nQuartos\n2\nCaracterísticas\nMoradia geminada, 1 andar, 60 m² área bruta, T2, 2 casas de banho, Lote de 147 m², Segunda mão/bom estado, Armários embutidos, Ar condicionado, Em trâmite\n\nDescrição\nMoradia T2 térrea a estrear em Cabanas do Chão, Alenquer: uma casa tradicional portuguesa, totalmente remodelada. Suite, open space, cozinha equipada Candy, ar condicionado, tanque alentejano, churrasqueira e estacionamento privativo com carregador elétrico.\nMais fotos em breve!\n\nA HISTÓRIA DA CASA OLÍVIA\nNa Casas Pé Direito, cada casa tem nome próprio. Não é um capricho: tratamos cada uma como se fosse da família.\nSomos um projeto familiar. Procuramos casas com alma, muitas vezes esquecidas, e devolvemos-lhes vida com tempo, carinho e uma atenção ao detalhe que vem de anos a fazer as coisas com rigor. Escolhemos cada material, cada torneira e cada acabamento a pensar em quem lá vai viver: nas manhãs de sol no pátio, nos jantares em família junto à churrasqueira e no conforto de chegar a casa e sentir que tudo está no sítio certo.\nA Casa Olívia foi renovada com esse cuidado. É uma casa tranquila e luminosa, pronta para receber uma nova família e as histórias que ela lá vai criar.\n\nDESCRIÇÃO\nCasa tradicional portuguesa, totalmente remodelada e a estrear, que mantém o encanto da arquitetura de aldeia, e junta-lhe o conforto de hoje, com materiais de qualidade e acabamentos de muito bom gosto. Fica tudo num só piso, sem escadas, o que a torna confortável para todas as fases da vida.\n\nA sala e a cozinha formam um open space amplo, com acesso direto ao pátio. A cozinha está totalmente equipada com eletrodomésticos encastrados Candy.\n\nA zona privada fica separada da zona social por um hall de circulação e tem dois quartos:\n- uma suite com casa de banho privativa e roupeiro embutido, com saída direta para o pátio;\n- um segundo quarto com roupeiro embutido.\nHá ainda uma casa de banho completa de apoio. As casas de banho têm sanitários suspensos e linhas modernas. A casa tem ar condicionado.\n\nO exterior, com 87 m², é o verdadeiro cartão de visita da Casa Olívia. Tem tanque alentejano para os dias quentes e telheiro com churrasqueira para refeições ao ar livre com família e amigos. Tem também estacionamento privativo dentro da propriedade, com portão e ponto de carregamento para carro elétrico.\n\nIdeal como primeira habitação, casa de campo perto de Lisboa ou investimento para arrendamento. Disponibilidade imediata.\n\nCARACTERÍSTICAS PRINCIPAIS\n- Tipologia: T2 térrea (1 piso)\n- Área útil interior: 60,58 m²\n- Logradouro: 87 m²\n- Área total do terreno: 147 m²\n- Quartos: 1 suite + 1 quarto, com roupeiros embutidos\n- Casas de banho: 2\n- Estacionamento privativo, com carregador para veículo elétrico\n- Climatização: ar condicionado\n\nDISTRIBUIÇÃO\n- Sala e cozinha em open space\n- Suite: 11,05 m² + WC da suite: 3,79 m²\n- Quarto: 10,09 m²\n- WC social: 4,48 m²\n- Circulação: 5,10 m²\n\nLOCALIZAÇÃO\nCabanas do Chão, Alenquer: uma aldeia tranquila no sopé da Serra de Montejunto, rodeada de vinhas da região DOC Alenquer, com um microclima agradável. A Serra fica mesmo ali e oferece trilhos pedestres, a histórica Real Fábrica do Gelo e vistas largas sobre o Oeste.\n- A poucos minutos de Abrigada, onde tem farmácia, escola básica, jardim de infância, centro de saúde, restauração e comércio local.\n- A cerca de 10 minutos de Alenquer (sede de concelho), com supermercados, ginásio e oferta cultural.\n- A cerca de 25 minutos da A10 e da Estação de Comboios do Carregado.\n- A menos de 1 hora de Lisboa.\n\nCasa Olívia, uma casa da família Casas Pé Direito.\n\nMais fotos em breve!",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Casa de aldeia renovada em Cabanas de Chão, Alenquer, junto à Serra de Montejunto",
+            "summary": "Moradia térrea T2 renovada, com 87 m² de pátio, à venda por 294 mil euros em Cabanas de Chão (Alenquer), no sopé da Serra de Montejunto, uma paisagem protegida desde 1999.",
+            "timeline": [
+                {
+                    "label": "Serra de Montejunto classificada como Paisagem Protegida",
+                    "sublabel": "1999"
+                },
+                {
+                    "label": "Abrigada e Cabanas de Torres juntam-se numa só freguesia",
+                    "sublabel": "2013"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Altitude máxima da Serra de Montejunto",
+                    "value": 666,
+                    "unit": "m"
+                },
+                {
+                    "label": "Preço pedido pela moradia",
+                    "value": 294000,
+                    "unit": "€"
+                },
+                {
+                    "label": "Área do pátio",
+                    "value": 87,
+                    "unit": "m²"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Montejunto é o ponto mais alto da Estremadura (666 m)",
+                "A paisagem protegida abrange os concelhos de Alenquer e Cadaval",
+                "Faz parte da Rede Natura 2000",
+                "Cabanas de Chão pertence à freguesia de Abrigada e Cabanas de Torres",
+                "Casa num só piso: T2 com suite e duas casas de banho",
+                "Estacionamento privativo com carregador para carro elétrico"
+            ],
+            "sources": [
+                "https://en.wikipedia.org/wiki/Serra_de_Montejunto_Protected_Landscape",
+                "https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/11-1999-354677",
+                "https://diariodarepublica.pt/dr/detalhe/resolucao-conselho-ministros/84-2004-517613",
+                "https://lifecooler.com/artigo/atividades/paisagem-protegida-da-serra-de-montejunto/384115",
+                "https://peakvisor.com/park/paisagem-protegida-da-serra-de-montejunto.html",
+                "https://en.wikipedia.org/wiki/Abrigada_e_Cabanas_de_Torres",
+                "https://aldeiasportuguesas.pt/lisboa/alenquer/abrigada-e-cabanas-de-torres/",
+                "https://codigopostal.ciberforma.pt/dir/0/joao-maria-a-simoes/"
+            ]
+        },
+        "suggested": {
+            "title": "Casa térrea T2 no sopé do Montejunto, em Alenquer, por 294.000 €",
+            "description": "Tudo num só piso, no sopé do Montejunto, e com carregador para carro elétrico à porta.\n\nFica em Cabanas do Chão, a poucos minutos de Abrigada e de Alenquer. Torres Vedras fica perto e Lisboa a menos de uma hora: dá para viver no campo sem ficar longe da cidade.\nA casa de aldeia foi renovada e não tem escadas. A sala e a cozinha são em open space, com saída direta para o pátio. Tem dois quartos com roupeiro, um deles em suite, duas casas de banho e ar condicionado.\nLá fora há 87 m² de pátio com tanque alentejano e churrasqueira, e estacionamento privativo com portão ⚡\nServe como primeira habitação, casa de campo ou para arrendar.\n\nMoradia geminada T2 · Lote de 147 m² · 294.000 €\nRef. 35423538\n\nMarque a sua visita com o Nuno Narciso, da IAD Portugal: +351 933 197 327",
+            "tags": [
+                "alenquer",
+                "montejunto",
+                "casaavenda",
+                "moradiat2",
+                "casaterrea",
+                "casadecampo",
+                "torresvedras",
+                "abrigada",
+                "oeste",
+                "imobiliarioportugal",
+                "iadportugal",
+                "casasemlisboa"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-35423538-vwykc",
+    "created_at": "2026-10-21T10:37:47+00:00",
+    "updated_at": "2026-10-21T11:25:55+00:00",
+    "error": null,
+    "source_path": "clips/uploads/8LfjGzLNHQQ09xpgMNHp931Bffeeyv3UZBlU0MnR.mp3",
+    "images": [
+        {
+            "id": "img_3f48f8fe",
+            "path": "clips/uploads/adf50fbea7e19b127f962f0cb337a7e71806b0aa.jpg",
+            "description": "Pátio exterior com tanque alentejano em mosaico verde-água, churrasqueira de tijolo com lava-loiça, paredes brancas e céu azul.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_fbe2a056",
+            "path": "clips/uploads/015fe9a227c5dd9291634329df45108d33fa4a0a.jpg",
+            "description": "Cozinha em L em tons bege, com iluminação LED, forno, piso de madeira e porta envidraçada para o pátio.",
+            "name": "332274399.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_89948d8d",
+            "path": "clips/uploads/125444659b8905656cbefbe06f98784bbf73158b.jpg",
+            "description": "Casa de banho com bancada de madeira, dois lavatórios, espelhos ovais, torneiras cobre e duche aberto.",
+            "name": "332274393.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_17777fd2",
+            "path": "clips/uploads/4d02da8643553b633dff3b08ed4acc32332c40e1.jpg",
+            "description": "Casa de banho com azulejo verde, duche aberto com torneiras douradas, lavatório oval sobre móvel de madeira.",
+            "name": "332274441.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "vid_d3bec496",
+            "path": "clips/uploads/Yz0iBWWNfOqFxPQrf7jQsVqDg9MulpdVmrVDSuHR.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 3,6 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                2.4,
+                5.97
+            ]
+        },
+        {
+            "id": "vid_eede1560",
+            "path": "clips/uploads/PJc8YL7NQ2Diiu1vo0vTZwK4liuKSgenoh7AErF2.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 3,6 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                5.97,
+                9.53
+            ]
+        },
+        {
+            "id": "vid_e9ad80df",
+            "path": "clips/uploads/bvOlUdf2m6euzEmVjwn7ADB2aRTwScN3l2UxGXZJ.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 1,6 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                9.93,
+                11.53
+            ]
+        },
+        {
+            "id": "vid_8dfa5e33",
+            "path": "clips/uploads/OlI10mOdVF8D9d5hQkx4dfMRuwzdRCXZzpimIzJm.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 1,7 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                11.93,
+                13.63
+            ]
+        },
+        {
+            "id": "vid_4d02eec0",
+            "path": "clips/uploads/06I2aHIgEXZSf1t4NUx7JQOcGFMU5gcoMRTXhFYX.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 1,9 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                14.03,
+                15.9
+            ]
+        },
+        {
+            "id": "vid_43385b44",
+            "path": "clips/uploads/WDxQbPUYLffcsIjDiTBpCVaBhKfxOnSzhc54vM4W.mp4",
+            "description": "Imóvel: Excerto do vídeo do imóvel. (vídeo, 1,5 s)",
+            "name": "imovel.mp4",
+            "transparent": false,
+            "tone": "mixed",
+            "video": true,
+            "source": [
+                16.3,
+                17.83
+            ]
+        },
+        {
+            "id": "img_436506fb",
+            "path": "clips/uploads/beb8a7f5fddac045a367e8418f2d9480d92b413b.jpg",
+            "description": "Retrato do consultor Nuno Narciso, da IAD Portugal.",
+            "name": "Nuno Narciso.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ff75a1f0",
+            "path": "clips/uploads/3da131ba0e634afb9d71707c5beabb45d79c8b52.png",
+            "description": "Logótipo da IAD Portugal.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_5bf82459",
+            "path": "clips/uploads/6420ee335c8d1fc2a54313531f3626eb030db93f.jpg",
+            "description": "Faixa da IAD: Compra - Venda - Arrendamento, confie a sua casa à comunidade dos profissionais imobiliários.",
+            "name": "iad-faixa.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-35423538-vwykc/voz.mp3",
+    "transcript": {
+        "duration": 46.560001373291016,
+        "text": "Casa de aldeia renovada em Alenquer, no supé de Montejunto. Para comprar ou vender casa, falo com o Nuno Narciso, da IAD Portugal. Fica em Cabanas do Chão, a poucos minutos de Abrigada e de Alenquer. Torres Vedras está perto e Lisboa a menos de uma hora. Tudo num só piso, sem escadas. Sala e cozinha em open space, com saída para o pátio. Dois quartos com roupeiro, um deles em suite e duas casas de banho. Lá fora, 87 metros de pátio com tanca-lentejano e churrasqueira. Estacionamento privativo, com portão e carregador para carro elétrico. Para primeira habitação, casa de campo ou arrendamento. 294 mil euros. Para visitar, falo com o Nuno Narciso, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Casa",
+                "start": 0,
+                "end": 0.23999999463558197
+            },
+            {
+                "word": "de",
+                "start": 0.23999999463558197,
+                "end": 0.47999998927116394
+            },
+            {
+                "word": "aldeia",
+                "start": 0.47999998927116394,
+                "end": 0.7799999713897705
+            },
+            {
+                "word": "renovada",
+                "start": 0.7799999713897705,
+                "end": 1.3799999952316284
+            },
+            {
+                "word": "em",
+                "start": 1.3799999952316284,
+                "end": 1.559999942779541
+            },
+            {
+                "word": "Alenquer",
+                "start": 1.559999942779541,
+                "end": 2.059999942779541
+            },
+            {
+                "word": "no",
+                "start": 2.319999933242798,
+                "end": 2.4800000190734863
+            },
+            {
+                "word": "supé",
+                "start": 2.4800000190734863,
+                "end": 2.799999952316284
+            },
+            {
+                "word": "de",
+                "start": 2.799999952316284,
+                "end": 3.0199999809265137
+            },
+            {
+                "word": "Montejunto",
+                "start": 3.0199999809265137,
+                "end": 3.9000000953674316
+            },
+            {
+                "word": "Para",
+                "start": 4.119999885559082,
+                "end": 4.260000228881836
+            },
+            {
+                "word": "comprar",
+                "start": 4.260000228881836,
+                "end": 4.619999885559082
+            },
+            {
+                "word": "ou",
+                "start": 4.619999885559082,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "vender",
+                "start": 5.099999904632568,
+                "end": 5.099999904632568
+            },
+            {
+                "word": "casa",
+                "start": 5.099999904632568,
+                "end": 5.460000038146973
+            },
+            {
+                "word": "falo",
+                "start": 5.900000095367432,
+                "end": 5.940000057220459
+            },
+            {
+                "word": "com",
+                "start": 5.940000057220459,
+                "end": 6.099999904632568
+            },
+            {
+                "word": "o",
+                "start": 6.099999904632568,
+                "end": 6.400000095367432
+            },
+            {
+                "word": "Nuno",
+                "start": 6.400000095367432,
+                "end": 6.480000019073486
+            },
+            {
+                "word": "Narciso",
+                "start": 6.480000019073486,
+                "end": 7.079999923706055
+            },
+            {
+                "word": "da",
+                "start": 7.21999979019165,
+                "end": 7.420000076293945
+            },
+            {
+                "word": "IAD",
+                "start": 7.420000076293945,
+                "end": 7.840000152587891
+            },
+            {
+                "word": "Portugal",
+                "start": 7.840000152587891,
+                "end": 8.5600004196167
+            },
+            {
+                "word": "Fica",
+                "start": 9.199999809265137,
+                "end": 9.199999809265137
+            },
+            {
+                "word": "em",
+                "start": 9.199999809265137,
+                "end": 9.399999618530273
+            },
+            {
+                "word": "Cabanas",
+                "start": 9.399999618530273,
+                "end": 9.720000267028809
+            },
+            {
+                "word": "do",
+                "start": 9.720000267028809,
+                "end": 10.0600004196167
+            },
+            {
+                "word": "Chão",
+                "start": 10.0600004196167,
+                "end": 10.199999809265137
+            },
+            {
+                "word": "a",
+                "start": 10.479999542236328,
+                "end": 10.739999771118164
+            },
+            {
+                "word": "poucos",
+                "start": 10.739999771118164,
+                "end": 10.84000015258789
+            },
+            {
+                "word": "minutos",
+                "start": 10.84000015258789,
+                "end": 11.180000305175781
+            },
+            {
+                "word": "de",
+                "start": 11.180000305175781,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "Abrigada",
+                "start": 11.359999656677246,
+                "end": 11.880000114440918
+            },
+            {
+                "word": "e",
+                "start": 11.880000114440918,
+                "end": 12.100000381469727
+            },
+            {
+                "word": "de",
+                "start": 12.100000381469727,
+                "end": 12.420000076293945
+            },
+            {
+                "word": "Alenquer",
+                "start": 12.420000076293945,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "Torres",
+                "start": 13.260000228881836,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "Vedras",
+                "start": 13.460000038146973,
+                "end": 13.779999732971191
+            },
+            {
+                "word": "está",
+                "start": 13.779999732971191,
+                "end": 14.039999961853027
+            },
+            {
+                "word": "perto",
+                "start": 14.039999961853027,
+                "end": 14.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 14.380000114440918,
+                "end": 14.720000267028809
+            },
+            {
+                "word": "Lisboa",
+                "start": 14.720000267028809,
+                "end": 15.180000305175781
+            },
+            {
+                "word": "a",
+                "start": 15.180000305175781,
+                "end": 15.619999885559082
+            },
+            {
+                "word": "menos",
+                "start": 15.619999885559082,
+                "end": 15.720000267028809
+            },
+            {
+                "word": "de",
+                "start": 15.720000267028809,
+                "end": 15.979999542236328
+            },
+            {
+                "word": "uma",
+                "start": 15.979999542236328,
+                "end": 16.100000381469727
+            },
+            {
+                "word": "hora",
+                "start": 16.100000381469727,
+                "end": 16.31999969482422
+            },
+            {
+                "word": "Tudo",
+                "start": 16.81999969482422,
+                "end": 17.059999465942383
+            },
+            {
+                "word": "num",
+                "start": 17.059999465942383,
+                "end": 17.360000610351562
+            },
+            {
+                "word": "só",
+                "start": 17.360000610351562,
+                "end": 17.639999389648438
+            },
+            {
+                "word": "piso",
+                "start": 17.639999389648438,
+                "end": 17.920000076293945
+            },
+            {
+                "word": "sem",
+                "start": 18.299999237060547,
+                "end": 18.440000534057617
+            },
+            {
+                "word": "escadas",
+                "start": 18.440000534057617,
+                "end": 18.959999084472656
+            },
+            {
+                "word": "Sala",
+                "start": 19.579999923706055,
+                "end": 19.81999969482422
+            },
+            {
+                "word": "e",
+                "start": 19.81999969482422,
+                "end": 20.1200008392334
+            },
+            {
+                "word": "cozinha",
+                "start": 20.1200008392334,
+                "end": 20.360000610351562
+            },
+            {
+                "word": "em",
+                "start": 20.360000610351562,
+                "end": 20.68000030517578
+            },
+            {
+                "word": "open",
+                "start": 20.68000030517578,
+                "end": 21.020000457763672
+            },
+            {
+                "word": "space",
+                "start": 21.020000457763672,
+                "end": 21.399999618530273
+            },
+            {
+                "word": "com",
+                "start": 21.520000457763672,
+                "end": 21.760000228881836
+            },
+            {
+                "word": "saída",
+                "start": 21.760000228881836,
+                "end": 21.979999542236328
+            },
+            {
+                "word": "para",
+                "start": 21.979999542236328,
+                "end": 22.219999313354492
+            },
+            {
+                "word": "o",
+                "start": 22.219999313354492,
+                "end": 22.559999465942383
+            },
+            {
+                "word": "pátio",
+                "start": 22.559999465942383,
+                "end": 22.65999984741211
+            },
+            {
+                "word": "Dois",
+                "start": 23.3799991607666,
+                "end": 23.459999084472656
+            },
+            {
+                "word": "quartos",
+                "start": 23.459999084472656,
+                "end": 23.780000686645508
+            },
+            {
+                "word": "com",
+                "start": 23.780000686645508,
+                "end": 24
+            },
+            {
+                "word": "roupeiro",
+                "start": 24,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "um",
+                "start": 24.760000228881836,
+                "end": 24.84000015258789
+            },
+            {
+                "word": "deles",
+                "start": 24.84000015258789,
+                "end": 25.1200008392334
+            },
+            {
+                "word": "em",
+                "start": 25.1200008392334,
+                "end": 25.440000534057617
+            },
+            {
+                "word": "suite",
+                "start": 25.440000534057617,
+                "end": 25.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 25.739999771118164,
+                "end": 26.100000381469727
+            },
+            {
+                "word": "duas",
+                "start": 26.100000381469727,
+                "end": 26.440000534057617
+            },
+            {
+                "word": "casas",
+                "start": 26.440000534057617,
+                "end": 26.700000762939453
+            },
+            {
+                "word": "de",
+                "start": 26.700000762939453,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "banho",
+                "start": 27.020000457763672,
+                "end": 27.079999923706055
+            },
+            {
+                "word": "Lá",
+                "start": 27.459999084472656,
+                "end": 27.799999237060547
+            },
+            {
+                "word": "fora",
+                "start": 27.799999237060547,
+                "end": 28.079999923706055
+            },
+            {
+                "word": "87",
+                "start": 29,
+                "end": 29.200000762939453
+            },
+            {
+                "word": "metros",
+                "start": 29.200000762939453,
+                "end": 29.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 29.540000915527344,
+                "end": 30
+            },
+            {
+                "word": "pátio",
+                "start": 30,
+                "end": 30.079999923706055
+            },
+            {
+                "word": "com",
+                "start": 30.079999923706055,
+                "end": 30.440000534057617
+            },
+            {
+                "word": "tanca",
+                "start": 30.440000534057617,
+                "end": 30.700000762939453
+            },
+            {
+                "word": "lentejano",
+                "start": 30.700000762939453,
+                "end": 31.239999771118164
+            },
+            {
+                "word": "e",
+                "start": 31.239999771118164,
+                "end": 31.479999542236328
+            },
+            {
+                "word": "churrasqueira",
+                "start": 31.479999542236328,
+                "end": 32.099998474121094
+            },
+            {
+                "word": "Estacionamento",
+                "start": 32.7400016784668,
+                "end": 33.119998931884766
+            },
+            {
+                "word": "privativo",
+                "start": 33.119998931884766,
+                "end": 33.7599983215332
+            },
+            {
+                "word": "com",
+                "start": 33.880001068115234,
+                "end": 34.220001220703125
+            },
+            {
+                "word": "portão",
+                "start": 34.220001220703125,
+                "end": 34.41999816894531
+            },
+            {
+                "word": "e",
+                "start": 34.41999816894531,
+                "end": 34.7400016784668
+            },
+            {
+                "word": "carregador",
+                "start": 34.7400016784668,
+                "end": 35.15999984741211
+            },
+            {
+                "word": "para",
+                "start": 35.15999984741211,
+                "end": 35.47999954223633
+            },
+            {
+                "word": "carro",
+                "start": 35.47999954223633,
+                "end": 35.68000030517578
+            },
+            {
+                "word": "elétrico",
+                "start": 35.68000030517578,
+                "end": 36.560001373291016
+            },
+            {
+                "word": "Para",
+                "start": 36.779998779296875,
+                "end": 36.81999969482422
+            },
+            {
+                "word": "primeira",
+                "start": 36.81999969482422,
+                "end": 37.15999984741211
+            },
+            {
+                "word": "habitação",
+                "start": 37.15999984741211,
+                "end": 37.779998779296875
+            },
+            {
+                "word": "casa",
+                "start": 38.2599983215332,
+                "end": 38.279998779296875
+            },
+            {
+                "word": "de",
+                "start": 38.279998779296875,
+                "end": 38.7599983215332
+            },
+            {
+                "word": "campo",
+                "start": 38.7599983215332,
+                "end": 38.7599983215332
+            },
+            {
+                "word": "ou",
+                "start": 38.7599983215332,
+                "end": 39.099998474121094
+            },
+            {
+                "word": "arrendamento",
+                "start": 39.099998474121094,
+                "end": 39.720001220703125
+            },
+            {
+                "word": "294",
+                "start": 40.84000015258789,
+                "end": 41.52000045776367
+            },
+            {
+                "word": "mil",
+                "start": 41.52000045776367,
+                "end": 41.7400016784668
+            },
+            {
+                "word": "euros",
+                "start": 41.7400016784668,
+                "end": 42.13999938964844
+            },
+            {
+                "word": "Para",
+                "start": 42.70000076293945,
+                "end": 42.779998779296875
+            },
+            {
+                "word": "visitar",
+                "start": 42.779998779296875,
+                "end": 43.36000061035156
+            },
+            {
+                "word": "falo",
+                "start": 43.880001068115234,
+                "end": 43.900001525878906
+            },
+            {
+                "word": "com",
+                "start": 43.900001525878906,
+                "end": 44.060001373291016
+            },
+            {
+                "word": "o",
+                "start": 44.060001373291016,
+                "end": 44.29999923706055
+            },
+            {
+                "word": "Nuno",
+                "start": 44.29999923706055,
+                "end": 44.400001525878906
+            },
+            {
+                "word": "Narciso",
+                "start": 44.400001525878906,
+                "end": 45
+            },
+            {
+                "word": "da",
+                "start": 45.220001220703125,
+                "end": 45.400001525878906
+            },
+            {
+                "word": "IAD",
+                "start": 45.400001525878906,
+                "end": 45.779998779296875
+            },
+            {
+                "word": "Portugal",
+                "start": 45.779998779296875,
+                "end": 46.34000015258789
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 47.1330008392334,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 4.119999885559082,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-novo-revelacao",
+                        "text": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto",
+                        "params": {
+                            "src": "vid_d3bec496",
+                            "location": "Alenquer · Cabanas do Chão",
+                            "title": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto",
+                            "facts": "T2 · 1 piso · 2 WC · pátio 87 m²",
+                            "name": "Nuno Narciso",
+                            "cta": "+351 933 197 327",
+                            "logoText": "IAD Portugal",
+                            "legal": "IAD Portugal S.A. · AMI 11220"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 4.119999885559082,
+                "end": 9.132999885559082,
+                "present": "animation",
+                "background": "ink",
+                "punchWord": null,
+                "karaoke": false,
+                "plain": true,
+                "layers": [
+                    {
+                        "type": "video-intro",
+                        "text": "",
+                        "params": {
+                            "src": "clips/uploads/LOQ5E7tpbdLNflcZcmG8gykbNL1pJV8NwBjBxylz.mp4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.132999885559082,
+                "end": 12.666332885559083,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "persiana-revelacao",
+                        "text": "Cabanas do Chão, Alenquer",
+                        "params": {
+                            "src": "vid_eede1560",
+                            "eyebrow": "Perto de Abrigada e Alenquer"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.666332885559083,
+                "end": 14.199665885559083,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "letterbox-cinema",
+                        "text": "Lisboa a menos de 1 hora",
+                        "params": {
+                            "src": "vid_43385b44",
+                            "eyebrow": "Torres Vedras · Lisboa"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.199665885559083,
+                "end": 17.172999465942382,
+                "background": "ink",
+                "present": "animation",
+                "karaoke": false,
+                "punchWord": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "src": "vid_d3bec496",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.172999465942382,
+                "end": 19.07299946594238,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "plano-push-in",
+                        "text": "Tudo num só piso",
+                        "params": {
+                            "src": "vid_4d02eec0",
+                            "eyebrow": "Sem escadas",
+                            "move": "in"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.07299946594238,
+                "end": 23.672999465942382,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "moldura-galeria",
+                        "text": "Open space com pátio",
+                        "params": {
+                            "src": "img_fbe2a056",
+                            "eyebrow": "Sala e cozinha"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 23.672999465942382,
+                "end": 27.872999465942385,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "split-slide-duo",
+                        "text": "Duas casas de banho",
+                        "params": {
+                            "src": "img_89948d8d",
+                            "src2": "img_17777fd2",
+                            "label": "Suite + 1 quarto"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 27.872999465942385,
+                "end": 30.57299946594238,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "numero-destaque",
+                        "text": "87 m²",
+                        "params": {
+                            "src": "img_3f48f8fe",
+                            "label": "Pátio",
+                            "sub": "O exterior da casa"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 30.57299946594238,
+                "end": 33.17299946594238,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "luz-acender",
+                        "text": "Tanque alentejano e churrasqueira",
+                        "params": {
+                            "src": "img_3f48f8fe",
+                            "eyebrow": "Lá fora"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 33.17299946594238,
+                "end": 34.872999465942385,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "janela-arco",
+                        "text": "Carregador para carro elétrico",
+                        "params": {
+                            "src": "vid_8dfa5e33",
+                            "eyebrow": "Estacionamento privativo"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.872999465942385,
+                "end": 36.772999465942384,
+                "background": "ink",
+                "present": "animation",
+                "karaoke": false,
+                "punchWord": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "src": "vid_4d02eec0",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 36.772999465942384,
+                "end": 38.372999465942385,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Ideal para",
+                        "params": {
+                            "src": "vid_e9ad80df",
+                            "title": "Ideal para",
+                            "items": [
+                                "Primeira habitação: T2 térrea",
+                                "Casa de campo: perto de Lisboa",
+                                "Arrendamento: investimento",
+                                "Disponibilidade: imediata"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.372999465942385,
+                "end": 39.906332465942384,
+                "background": "ink",
+                "present": "animation",
+                "karaoke": false,
+                "punchWord": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "src": "vid_43385b44",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 39.906332465942384,
+                "end": 41.17299946594238,
+                "background": "ink",
+                "present": "animation",
+                "karaoke": false,
+                "punchWord": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "src": "vid_e9ad80df",
+                            "variant": "fullscreen"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.17299946594238,
+                "end": 43.772999465942384,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "preco-revelacao",
+                        "text": "294.000 €",
+                        "params": {
+                            "src": "img_3f48f8fe",
+                            "label": "Preço",
+                            "sub": "Moradia T2 · Alenquer"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 43.772999465942384,
+                "end": 47.13299946594238,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": false,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "img_436506fb",
+                        "params": {
+                            "src": "img_436506fb",
+                            "name": "Nuno Narciso",
+                            "phone": "+351 933 197 327",
+                            "ami": "11220",
+                            "banner": "img_5bf82459"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "navy-liso",
+        "voice_gap": {
+            "at": 8.56,
+            "seconds": 0.573
+        }
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/listing-35423538-vwykc/clip.mp4",
+    "source_text": "Casa de aldeia renovada em Alenquer, no sopé de Montejunto. Para comprar ou vender casa, fale com o Nuno Narciso da IAD Portugal. Fica em Cabanas do Chão, a poucos minutos de Abrigada e de Alenquer. Torres Vedras está perto, e Lisboa a menos de uma hora. Tudo num só piso, sem escadas. Sala e cozinha em open space, com saída para o pátio. Dois quartos com roupeiro, um deles em suite, e duas casas de banho. Lá fora, oitenta e sete metros de pátio, com tanque alentejano e churrasqueira. Estacionamento privativo, com portão e carregador para carro elétrico. Para primeira habitação, casa de campo ou arrendamento. Duzentos e noventa e quatro mil euros. Para visitar, fale com o Nuno Narciso, da IAD Portugal."
+}

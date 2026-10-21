@@ -78,6 +78,7 @@ modelos:
 passos:
   noticias_escrita: ''
   noticias_dicas: ''
+  noticias_topico: ''
   publicacoes_plano: ''
   shorts_selecao: ''
   clips_pesquisa: ''

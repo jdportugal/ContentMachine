@@ -9,45 +9,45 @@
 @source '../../app/Livewire';
 
 /* ============================================================
-   NEBULA — Futuristic Blue Design System (app UI)
-   Deep-space navy · molten-gold headlines · electric-blue accent.
+   PAPER — the app UI as a printed page
+   Warm paper stock · iron-gall ink · one deep teal accent.
    Token NAMES are kept stable (papyrus/vellum/ink/teal/gold) so
    the existing utility classes across every view re-skin at once;
-   only the VALUES change to Nebula.
+   only the VALUES change.
    ============================================================ */
 @theme {
-    /* Superfícies (navy / void) */
-    --color-papyrus: #05060E;   /* void — fundo principal */
-    --color-vellum: #0C1225;    /* panel — cartões / superfícies */
-    --color-surface: #111A38;   /* superfície elevada (hover, painéis internos) */
-    --color-shelf: #0A1030;     /* deep-navy — campo de contraste */
+    /* Superfícies (papel) */
+    --color-papyrus: #F3EEE3;   /* papel — fundo principal */
+    --color-vellum: #FBF8F1;    /* folha — cartões / superfícies */
+    --color-surface: #ECE5D6;   /* papel mais escuro (hover, painéis internos) */
+    --color-shelf: #E4DBC8;     /* cartão — campo de contraste */
 
-    /* Texto (branco-estelar sobre navy) */
-    --color-ink: #EAF0FF;       /* texto principal (star-white) */
-    --color-ink-soft: #A9B6D6;  /* texto secundário / filetes */
-    --color-ink-faint: #6C7AA6; /* notas ténues / meta */
+    /* Texto (tinta) */
+    --color-ink: #23201A;       /* tinta principal */
+    --color-ink-soft: #5C5547;  /* texto secundário / filetes */
+    --color-ink-faint: #8C8472; /* notas ténues / meta */
 
-    /* Acento primário (azul elétrico) */
-    --color-teal: #5A7BFF;      /* electric-blue — acento interativo (texto/bordas) */
-    --color-teal-deep: #2A3BEB; /* azul sólido (preenchimento de botões) */
+    /* Acento primário (tinta azul-petróleo) */
+    --color-teal: #2C5F63;      /* acento interativo (texto/bordas) */
+    --color-teal-deep: #1E4447; /* preenchimento de botões */
 
-    /* Ouro fundido + quente (títulos / ornamento) */
-    --color-gold: #FFB347;      /* molten-gold (mid) */
-    --color-leather: #FF7A3D;   /* laranja-quente (cauda do degradé) */
+    /* Ocre + couro (títulos / ornamento) */
+    --color-gold: #A06E1C;      /* ocre */
+    --color-leather: #8A4A2B;   /* couro */
 
-    /* Azul de sobrancelha (eyebrow) */
-    --color-star: #7DA2FF;
+    /* Etiquetas (eyebrow) */
+    --color-star: #7A6340;
 
     /* Estados */
-    --color-good: #12B76A;      /* sucesso / completo */
-    --color-warn: #FFB347;      /* aviso (ouro) */
-    --color-bad: #FF5C7A;       /* erro (glitter red) */
+    --color-good: #3D7A4C;      /* sucesso / completo */
+    --color-warn: #A8701A;      /* aviso */
+    --color-bad: #A93A3A;       /* erro */
 
-    /* Tipografia — duas famílias: Anton (display) + Space Grotesk (corpo) */
-    --font-display: 'Anton', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
-    --font-body: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-    --font-sc: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    /* Tipografia — Fraunces (display) + Source Serif 4 (corpo) + IBM Plex Mono */
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sc: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 @layer base {
@@ -66,47 +66,31 @@
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
     }
-    /* Display Anton — peso único (400), condensado, MAIÚSCULAS. */
     h1, h2, h3, h4 {
         font-family: var(--font-display);
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.005em;
-        line-height: 0.98;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        line-height: 1.08;
         text-wrap: balance;
     }
-    /* Títulos de página (h1) recebem o degradé de ouro fundido. */
-    h1 {
-        background-image: linear-gradient(100deg, #FFE59A 0%, var(--color-gold) 55%, var(--color-leather) 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
+    h1 { color: var(--color-ink); font-weight: 600; }
     p { text-wrap: pretty; }
 
-    ::selection { background: var(--color-leather); color: #05060E; }
+    ::selection { background: color-mix(in srgb, var(--color-gold) 35%, transparent); color: var(--color-ink); }
 
     [x-cloak] { display: none !important; }
 }
 
-/* ---------- Fundo Nebula (void + deep-field + starfield) ---------- */
+/* ---------- Fundo de papel (grão + vinheta suave) ---------- */
 .bg-nocturna {
-    background-color: #05060E;
+    background-color: var(--color-papyrus);
     background-image:
-        radial-gradient(120% 80% at 80% -10%, rgba(26, 43, 168, 0.45), transparent 55%),
-        radial-gradient(ellipse 120% 70% at 50% 0%, rgba(42, 59, 235, 0.10), transparent 60%),
-        radial-gradient(circle at 18% 30%, rgba(234, 240, 255, 0.55) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 72% 60%, rgba(175, 198, 255, 0.42) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 42% 82%, rgba(234, 240, 255, 0.34) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 88% 20%, rgba(207, 224, 255, 0.46) 0 1px, transparent 1.6px),
-        radial-gradient(circle at 30% 68%, rgba(207, 224, 255, 0.30) 0 1px, transparent 1.6px);
-    background-size:
-        auto, auto,
-        300px 300px, 380px 380px, 260px 260px, 500px 500px, 340px 340px;
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .18 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+        radial-gradient(130% 90% at 50% 0%, transparent 60%, rgba(120, 95, 55, 0.10) 100%);
     background-attachment: fixed;
 }
 
-/* Brilho ambiente nos cantos (substitui o "foxing" de papel). */
+/* ---------- Foxing (manchas de papel antigo nos cantos) ---------- */
 .foxing { position: relative; }
 .foxing::before {
     content: '';
@@ -115,9 +99,9 @@
     pointer-events: none;
     border-radius: inherit;
     background-image:
-        radial-gradient(ellipse 40px 24px at 10% 16%, rgba(90, 123, 255, 0.10), transparent 70%),
-        radial-gradient(ellipse 28px 18px at 90% 12%, rgba(255, 179, 71, 0.08), transparent 70%),
-        radial-gradient(ellipse 30px 20px at 82% 86%, rgba(90, 123, 255, 0.08), transparent 70%);
+        radial-gradient(ellipse 40px 24px at 6% 10%, rgba(160, 110, 28, 0.07), transparent 70%),
+        radial-gradient(ellipse 28px 18px at 94% 8%, rgba(138, 74, 43, 0.05), transparent 70%),
+        radial-gradient(ellipse 34px 22px at 90% 92%, rgba(160, 110, 28, 0.06), transparent 70%);
 }
 
 /* ---------- Moldura fina (sem gravura de papel) ---------- */
@@ -134,10 +118,10 @@
     pointer-events: none;
 }
 
-/* Sombra suave Nebula (substitui a sombra "gravura"). */
-.shadow-engraved { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); }
+/* Sombra de folha pousada sobre a mesa. */
+.shadow-engraved { box-shadow: 0 1px 2px rgba(60, 45, 20, 0.08), 0 8px 24px -12px rgba(60, 45, 20, 0.18); }
 
-/* ---------- Drop cap (ouro) ---------- */
+/* ---------- Drop cap (ocre) ---------- */
 .dropcap::first-letter {
     font-family: var(--font-display);
     float: left;
@@ -147,11 +131,11 @@
     color: var(--color-gold);
 }
 
-/* ---------- Eyebrow / etiquetas (Space Grotesk, azul) ---------- */
+/* ---------- Eyebrow / etiquetas (versaletes, sépia) ---------- */
 .eyebrow {
     font-family: var(--font-sc);
     font-weight: 600;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-star);
     font-size: 0.72rem;
@@ -160,14 +144,13 @@
 /* ---------- Aba de navegação (substitui a lombada de livro) ---------- */
 .book-spine {
     position: relative;
-    border-radius: 8px;
+    border-radius: 2px;
     background: linear-gradient(
         90deg,
-        color-mix(in srgb, var(--spine-color, #5A7BFF) 20%, transparent) 0%,
-        transparent 55%
+        color-mix(in srgb, var(--spine-color, #2C5F63) 12%, transparent) 0%,
+        transparent 70%
     );
-    box-shadow: inset 3px 0 0 0 var(--spine-color, #5A7BFF),
-                0 0 22px -6px color-mix(in srgb, var(--spine-color, #5A7BFF) 60%, transparent);
+    box-shadow: inset 3px 0 0 0 var(--spine-color, #2C5F63);
 }
 
 /* Selo / emblema circular */
@@ -197,7 +180,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(120% 90% at 50% 40%, rgba(10, 16, 48, 0.72), rgba(5, 6, 14, 0.9));
+    background: radial-gradient(120% 90% at 50% 40%, rgba(243, 238, 227, 0.82), rgba(228, 219, 200, 0.94));
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }
@@ -216,14 +199,10 @@
 }
 .cm-loader__msg {
     font-family: var(--font-display);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.02em;
     font-size: 1.15rem;
     line-height: 1.1;
-    background-image: linear-gradient(100deg, #FFE59A 0%, #FFB347 55%, #FF7A3D 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--color-ink);
 }
 .cm-loader__dots {
     margin-top: 0.5rem;

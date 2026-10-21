@@ -1,0 +1,1154 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Quinta com vinha, pomar e piscina em Viseu por 1,1 milhões",
+    "source_text": null,
+    "source_path": "clips/uploads/b9SXYIqI5zXURFPLy224KfzmNh1AZJQWmSZdQFkW.mp3",
+    "images": [
+        {
+            "id": "img_ed578514",
+            "path": "clips/uploads/akNPKtY9kLr3SmlwOeV3LuMOO1zLUcRb1VIj9D6v.png",
+            "description": "Logótipo da Anadvise Imóveis, by Anabela Sousa Mediação Imobiliária, letras douradas e azuis em fundo branco.",
+            "name": "logo.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_445dff35",
+            "path": "clips/uploads/noGVeDWQOn0gbmTH6UoFNlZ7PCsg9rGiJwXf9zL3.webp",
+            "description": "Vista aérea vertical da quinta: casa térrea com painéis solares, piscina, anexos, lago circular e jardim arborizado.",
+            "name": "2ed366d3-9be3-461f-b559-aa50aaf81391.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_424e835e",
+            "path": "clips/uploads/aUS0CSwoou3ieJOOVAc2UvCZyfek2gRcVsLIONNn.webp",
+            "description": "Vista aérea da quinta com socalcos de vinha e oliveiras, anexos, piscina e casa ao fundo entre pinhais.",
+            "name": "59d64806-1f4b-493f-89a3-40192317cd34.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_081bbec4",
+            "path": "clips/uploads/5ZPCvgL8hiz2Khe10UPIyDKw2DSnEnBxZIxeNmUn.webp",
+            "description": "Piscina no jardim com espreguiçadeiras, guarda-sóis coloridos e rede, rodeada de árvores e céu azul.",
+            "name": "01b4805d-cd25-47b5-9090-c8614266805b.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8cccafc2",
+            "path": "clips/uploads/RQwPujDG38VIdNxYnCegoOMjqBpGnSx02pRPZYZw.webp",
+            "description": "Pomar de laranjeiras e limoeiros junto à casa térrea amarela, com caminho em calçada de granito.",
+            "name": "5a1faf7c-e08a-4841-9b0e-531df69792cc.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_861f0b09",
+            "path": "clips/uploads/KXQkR3nyqziI1fXJl9vnpqYZPwPAWabeLLW4l2Hg.webp",
+            "description": "Pátio em calçada com banco de jardim, iúca, cato e lago circular ornamental com cisnes decorativos.",
+            "name": "325ae64f-e689-43d0-9f2f-c24fe4584e9f.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3b5a3480",
+            "path": "clips/uploads/sFfKn7ZgQVqhmkVXMEhbz76g1HsdTs1lFrtHzcGB.webp",
+            "description": "Churrasqueira coberta com forno a lenha, lava-loiça, mesa comprida e alfaias antigas penduradas no teto de madeira.",
+            "name": "74236ebf-18b6-416a-b5ad-57d0fc02b1aa.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_c831a2af",
+            "path": "clips/uploads/htLqlhug5cGM7hb2CzzY086BUbfq7QVIfoAQCFyP.webp",
+            "description": "Pátio em calçada com alpendre/telheiro de estacionamento: carro, motas e rede de descanso, junto à casa.",
+            "name": "a31b98ce-18fa-4e0c-a765-d2c2c236792b.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7df60c55",
+            "path": "clips/uploads/RZe4t4e8hxxQdnUMJO3aUH4fDylfDmqU0d5riaDs.webp",
+            "description": "Garagem aberta com vários carros, incluindo clássicos, e autocaravana estacionada no pátio em calçada.",
+            "name": "f89d06a8-c099-4ea9-afc1-3590235db562.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9e510b39",
+            "path": "clips/uploads/hfhcbLaugxGmuZG9TI544mE95qp0pNANi1AXjAtj.webp",
+            "description": "Sala de jogos envidraçada com mesa de bilhar, zona de ginásio com máquinas e mesa de refeições.",
+            "name": "c793ef29-062e-449c-b357-42169f1d6069.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b6e349e3",
+            "path": "clips/uploads/S3FKP31sQhw0BUmAhhP1cLxO9p0m8l0QYS9WBgXR.webp",
+            "description": "Escritório com estante de madeira, secretária, globo, aquário e mesa de jantar junto à janela com vista verde.",
+            "name": "de9db373-3530-4122-beea-911b4c6aac3b.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d6bf32ab",
+            "path": "clips/uploads/2GTy2rGtSsDMhqgzjsQtsOAqiqYAMrRKPACOAnQj.webp",
+            "description": "Casa de banho social com azulejo bege, sanita, bidé, lavatório branco e pequena janela.",
+            "name": "93dccaeb-1099-49d9-9c58-fe52ff6366dd.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9368c8fb",
+            "path": "clips/uploads/PafKNrgcwTocWxkqMgoA9BrnH2n6VCUxLhTqI9hv.webp",
+            "description": "Quarto amplo com roupeiro embutido, cama de colcha preta, tapete escuro e porta envidraçada para o exterior.",
+            "name": "adcd556a-ca56-4252-958b-4090d0caa694.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3d3212bc",
+            "path": "clips/uploads/Z1LLVS01URIkIBZixnoKJgqoeeNHT2NQH2L6THhN.webp",
+            "description": "Casa de banho com banheira de hidromassagem, resguardo de vidro, lavatório branco e janela para árvores.",
+            "name": "e41904b6-a5eb-41e1-be2a-c5b64a6276b9.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_38ec804f",
+            "path": "clips/uploads/fpSsFM6IphkOgw35GCwPZFSyoPXKPNBDz8nv6UWx.webp",
+            "description": "Suite principal com cama lilás, sofá, tapete branco e closet visível com roupa pendurada.",
+            "name": "52c4a896-8459-4ba4-9553-463136f0d36e.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e02f7695",
+            "path": "clips/uploads/JAWgKJaT5ZpQ6mwDHFOv3YvMTxI9suVbCs2psc1q.webp",
+            "description": "Suite principal luminosa, cortinas lilases, cama lilás, televisão e duas janelas grandes para o jardim.",
+            "name": "0c9894ae-7218-4d14-8d35-32b7dc2332c9.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_9134ea8a",
+            "path": "clips/uploads/4DiS0CLcbQbQaX1Kim8fXGXUpsxnLmu35IkxqtMS.webp",
+            "description": "Quarto com secretária, prateleiras de livros, mini-frigorífico e porta para casa de banho privativa.",
+            "name": "b6ed0d3c-fbeb-498b-bc27-413b93eb48c5.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d14933ba",
+            "path": "clips/uploads/Lr20PeOAWthd3L3SnrxOIZRiLdXXWSNXYzYXoUPV.webp",
+            "description": "Quarto com cama de casal branca, tapete azul e porta de vidro de correr para o pátio.",
+            "name": "2e2df80b-f291-429b-a472-8845150f2889.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_48cfc607",
+            "path": "clips/uploads/Irbnl33pKzLan2SwyxIkWrH69mJoNCOXkwN18EkE.webp",
+            "description": "Cozinha com mesa de jantar, salamandra a lenha, televisão e porta de correr aberta para a sala.",
+            "name": "b710621d-c1cd-4104-ab2f-43556d81f78e.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_22a22673",
+            "path": "clips/uploads/kI7PK7y8p8LRUoDIOTp8QuFZjPqVOLnmKjeSzRMi.webp",
+            "description": "Cozinha equipada ampla com salamandra, exaustor inox, frigorífico grande, máquina de lavar loiça e janela.",
+            "name": "3609569f-25dc-4424-a1d7-7ffd2ef11b1f.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f43a9b4b",
+            "path": "clips/uploads/hSivCF8mejZgOvTVzfUNZZPfsytIGuuSgwWoEvTj.webp",
+            "description": "Sala de estar com sofá preto, candeeiro suspenso dourado e tabuleiro de xadrez; portas de correr para salão.",
+            "name": "84d2fb07-4a50-49e2-8a05-80137f123c73.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_d5fbd7dd",
+            "path": "clips/uploads/LTRUjSIXoUC2U5NzHdLWu39HBAbxlFQqEUfco4P3.webp",
+            "description": "Sala ampla com mesa de jantar, lustre de cristal, lareira em pedra e sofá cinzento.",
+            "name": "b7517ae6-2419-43e9-a62a-6ca41ba5a7c2.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bfe07cbd",
+            "path": "clips/uploads/zFKb58mvFXQ2M8DBeQSQGuy3uvWBNkbZ2Jz3ZOBf.webp",
+            "description": "Sala de jantar e estar ampla com lareira em pedra, sofá cinzento e janelões com vista verde.",
+            "name": "c9b8529d-15e8-4258-b47c-f31cb37dd528.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ddbc585f",
+            "path": "clips/uploads/3HUtivZBNThzgyw27e7nYSYhrdoMAGLw8Lxb2JI0.webp",
+            "description": "Corredor decorado com escultura de cavalo, candeeiro branco e pequena sala de estar ao fundo.",
+            "name": "eb0609d5-16ab-4b6c-bc22-dce2ae7078a4.webp",
+            "transparent": true,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_92f814af",
+            "path": "clips/uploads/Uu5nyoR8XdZwRF1DWyR9z2cYTbdHJGDyEM5wScav.webp",
+            "description": "Vista aérea da quinta: casa térrea de telhado vermelho, piscina, painéis solares e vasto terreno arborizado.",
+            "name": "c9fb62e5-591c-44cc-bbc9-ce710ad19828.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_dad16566",
+            "path": "clips/uploads/6SlcRkVwZe7bYtaeJXoDsd6IUNFYCNq3N5HFliIj.webp",
+            "description": "Ginásio com passadeira, bicicletas, pesos e janelões para o jardim; decoração sugerida feita com IA.",
+            "name": "3ed46935-c906-49a0-a87d-013b259c6cc0.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_78ec06c2",
+            "path": "clips/uploads/zChugjOEUvdgG0Tq1fL4U1O9YGpuaHGpvtin0a39.webp",
+            "description": "Alpendre com churrasqueira e forno em pedra, mesa rústica posta; decoração sugerida feita com IA.",
+            "name": "6ba4ba4d-0998-4c64-84a4-815533b9b317.webp",
+            "transparent": true,
+            "tone": "dark",
+            "video": false
+        },
+        {
+            "id": "img_d124d332",
+            "path": "clips/uploads/cioyYFgH5IqBO2rvzTNE1N0V3wYCqtj1rnocezNP.webp",
+            "description": "Piscina com espreguiçadeiras, guarda-sóis às riscas e jardim; decoração sugerida feita com IA.",
+            "name": "main.webp",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_4fb06469",
+            "path": "clips/uploads/KB7x47v8iXPFat7brq94DVpTxcW6Gu9yalbjpZti.jpg",
+            "description": "Retrato da agente Anabela, de óculos, sorridente, camisa branca e colar dourado, fundo branco.",
+            "name": "Anabela.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the \"main\" as the intro image. Here are the house details:\nMoradia isolada/ Quinta de tipologia T3 + escritório para vender em Fragosela de Cima/ Viseu. No valor ficam incluídas as mobílias, cortinas, candeeiros, tapetes e algumas peças de decoração. Casa térrea com várias salas amplas, 3 quartos um suite com grande closet, escritório. Sala de jogos com ginásio. Terreno com 10.140m2  com árvores de fruto, oliveiras e vinha com uvas de mesa, tudo com rega autimatizada.  Propriedade com 4 poços, piscina, telheiro com churrasqueira e forno e lago com muita agua. Para além da garagem para 3 carros coberta tem ainda um  telheiro para colocar mais 3, podendo estacionar mais alguns no exterior. 8 painéis fotovoltaicos, promovendo eficiência energética e redução de custos. Varanda a toda a volta, oferecendo uma vista deslumbrante para a quinta e um ambiente tranquilo. Ótima exposição solar em todas as divisões, proporcionando luz natural durante todo o dia.  Sistema de ar condicionado para aquecimento e arrefecimento, garantindo conforto térmico em todas as estações do ano. Propriedade toda murada, com alarme.  Se procura um refúgio perfeito para viver ou investir, este é o imóvel que alia natureza, sustentabilidade e conforto moderno. Não perca esta oportunidade única! Marque já a sua visita 967728553. CONSULTE OS NOSSOS IMÓVEIS EM www.anadvise.com. 1.100.000",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Quinta à venda em Fragosela de Cima, Viseu",
+            "summary": "Quinta com mais de 10 mil m² de terreno, com vinha, pomar e lago, à venda mobilada por 1,1 milhões de euros. Fica em Fragosela, uma freguesia do concelho de Viseu com cerca de 2,5 mil habitantes.",
+            "timeline": [
+                {
+                    "label": "Censos: 2528 habitantes em Fragosela",
+                    "sublabel": "2021"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "População de Fragosela (Censos)",
+                    "value": 2528,
+                    "unit": "habitantes (2021)"
+                },
+                {
+                    "label": "Área da freguesia de Fragosela",
+                    "value": 10.82,
+                    "unit": "km²"
+                },
+                {
+                    "label": "Densidade populacional de Fragosela",
+                    "value": 233.6,
+                    "unit": "hab./km² (2021)"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Fragosela é uma freguesia do concelho de Viseu",
+                "Tem cerca de 10,8 km² e 2528 habitantes (Censos 2021)",
+                "A quinta tem mais de 10 mil m², com vinha, pomar, lago e oliveiras",
+                "Casa térrea com 3 quartos (1 suite com closet), escritório e sala de jogos com ginásio",
+                "Lá fora: piscina, churrasqueira com forno, 4 poços e painéis solares",
+                "Vende-se mobilada por 1 100 000 €"
+            ],
+            "sources": [
+                "https://pt.wikipedia.org/wiki/Fragosela",
+                "https://geoapi.pt/municipio/viseu/freguesia/fragosela",
+                "https://observador.pt/inovacao/eleicoes/autarquicas/viseu/concelho-viseu/freguesia-fragosela/",
+                "https://www.cm-viseu.pt/pt/municipio/freguesias/fragosela/"
+            ]
+        },
+        "suggested": {
+            "title": "Quinta com vinha, pomar e piscina em Viseu por 1,1 milhões",
+            "description": "Quinta mobilada em Fragosela de Cima, Viseu, com mais de 10 mil m² de terreno, vinha, pomar, oliveiras, lago e rega automática. A moradia térrea tem salas amplas, três quartos (um em suite com closet), escritório, sala de jogos com ginásio e varanda a toda a volta, com piscina, churrasqueira com forno, quatro poços e painéis solares. À venda por 1.100.000 €; para visitar, contacte a Anabela, da A& Advise Imóveis.",
+            "tags": [
+                "quinta à venda",
+                "Viseu",
+                "Fragosela",
+                "imobiliário",
+                "moradia com piscina",
+                "casa de campo",
+                "imóveis Portugal",
+                "A& Advise Imóveis"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-q1zr9",
+    "created_at": "2026-10-06T14:26:48+00:00",
+    "updated_at": "2026-10-06T14:31:23+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/b9SXYIqI5zXURFPLy224KfzmNh1AZJQWmSZdQFkW.mp3",
+    "transcript": {
+        "duration": 34.91999816894531,
+        "text": "Uma quinta em Viseu, com vinha, pumar e lago. Fica em Fragosela de Cima, com mais de 10 mil metros de terreno, oliveiras, árvores de fruto e rega automática. A casa é térrea, com várias salas amplas, três quartos, um deles suite com closet, escritório e sala de jogos com ginásio. Varanda à toda a volta, com vista para a quinta e sol em todas as divisões. Lá fora, piscina, churrasqueira com forno, quatro poços e painéis solares. Toda morada, com alarme. E vende-se mobilada, 1 milhão e 100 mil euros. Para visitar, fale com a Anabela, da A& Advise Imóveis.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.25999999046325684
+            },
+            {
+                "word": "quinta",
+                "start": 0.25999999046325684,
+                "end": 0.5199999809265137
+            },
+            {
+                "word": "em",
+                "start": 0.5199999809265137,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "Viseu",
+                "start": 0.800000011920929,
+                "end": 1.0199999809265137
+            },
+            {
+                "word": "com",
+                "start": 1.3200000524520874,
+                "end": 1.340000033378601
+            },
+            {
+                "word": "vinha",
+                "start": 1.340000033378601,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "pumar",
+                "start": 1.9800000190734863,
+                "end": 2.259999990463257
+            },
+            {
+                "word": "e",
+                "start": 2.259999990463257,
+                "end": 2.5999999046325684
+            },
+            {
+                "word": "lago",
+                "start": 2.5999999046325684,
+                "end": 2.9200000762939453
+            },
+            {
+                "word": "Fica",
+                "start": 3.380000114440918,
+                "end": 3.4200000762939453
+            },
+            {
+                "word": "em",
+                "start": 3.4200000762939453,
+                "end": 3.5799999237060547
+            },
+            {
+                "word": "Fragosela",
+                "start": 3.5799999237060547,
+                "end": 3.9800000190734863
+            },
+            {
+                "word": "de",
+                "start": 3.9800000190734863,
+                "end": 4.380000114440918
+            },
+            {
+                "word": "Cima",
+                "start": 4.380000114440918,
+                "end": 4.460000038146973
+            },
+            {
+                "word": "com",
+                "start": 4.639999866485596,
+                "end": 4.78000020980835
+            },
+            {
+                "word": "mais",
+                "start": 4.78000020980835,
+                "end": 4.940000057220459
+            },
+            {
+                "word": "de",
+                "start": 4.940000057220459,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "10",
+                "start": 5.239999771118164,
+                "end": 5.5
+            },
+            {
+                "word": "mil",
+                "start": 5.5,
+                "end": 5.679999828338623
+            },
+            {
+                "word": "metros",
+                "start": 5.679999828338623,
+                "end": 5.920000076293945
+            },
+            {
+                "word": "de",
+                "start": 5.920000076293945,
+                "end": 6.239999771118164
+            },
+            {
+                "word": "terreno",
+                "start": 6.239999771118164,
+                "end": 6.460000038146973
+            },
+            {
+                "word": "oliveiras",
+                "start": 6.800000190734863,
+                "end": 7.360000133514404
+            },
+            {
+                "word": "árvores",
+                "start": 7.840000152587891,
+                "end": 7.860000133514404
+            },
+            {
+                "word": "de",
+                "start": 7.860000133514404,
+                "end": 8.359999656677246
+            },
+            {
+                "word": "fruto",
+                "start": 8.359999656677246,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "e",
+                "start": 8.380000114440918,
+                "end": 8.699999809265137
+            },
+            {
+                "word": "rega",
+                "start": 8.699999809265137,
+                "end": 8.9399995803833
+            },
+            {
+                "word": "automática",
+                "start": 8.9399995803833,
+                "end": 9.5
+            },
+            {
+                "word": "A",
+                "start": 9.800000190734863,
+                "end": 9.899999618530273
+            },
+            {
+                "word": "casa",
+                "start": 9.899999618530273,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "é",
+                "start": 10.039999961853027,
+                "end": 10.220000267028809
+            },
+            {
+                "word": "térrea",
+                "start": 10.220000267028809,
+                "end": 10.600000381469727
+            },
+            {
+                "word": "com",
+                "start": 10.800000190734863,
+                "end": 11.020000457763672
+            },
+            {
+                "word": "várias",
+                "start": 11.020000457763672,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "salas",
+                "start": 11.359999656677246,
+                "end": 11.65999984741211
+            },
+            {
+                "word": "amplas",
+                "start": 11.65999984741211,
+                "end": 12.119999885559082
+            },
+            {
+                "word": "três",
+                "start": 12.5,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "quartos",
+                "start": 12.65999984741211,
+                "end": 13.100000381469727
+            },
+            {
+                "word": "um",
+                "start": 13.279999732971191,
+                "end": 13.399999618530273
+            },
+            {
+                "word": "deles",
+                "start": 13.399999618530273,
+                "end": 13.65999984741211
+            },
+            {
+                "word": "suite",
+                "start": 13.65999984741211,
+                "end": 14.020000457763672
+            },
+            {
+                "word": "com",
+                "start": 14.020000457763672,
+                "end": 14.239999771118164
+            },
+            {
+                "word": "closet",
+                "start": 14.239999771118164,
+                "end": 14.640000343322754
+            },
+            {
+                "word": "escritório",
+                "start": 15.180000305175781,
+                "end": 15.479999542236328
+            },
+            {
+                "word": "e",
+                "start": 15.479999542236328,
+                "end": 15.880000114440918
+            },
+            {
+                "word": "sala",
+                "start": 15.880000114440918,
+                "end": 16.079999923706055
+            },
+            {
+                "word": "de",
+                "start": 16.079999923706055,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "jogos",
+                "start": 16.479999542236328,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "com",
+                "start": 16.479999542236328,
+                "end": 16.760000228881836
+            },
+            {
+                "word": "ginásio",
+                "start": 16.760000228881836,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "Varanda",
+                "start": 17.559999465942383,
+                "end": 17.719999313354492
+            },
+            {
+                "word": "à",
+                "start": 17.719999313354492,
+                "end": 18.059999465942383
+            },
+            {
+                "word": "toda",
+                "start": 18.059999465942383,
+                "end": 18.18000030517578
+            },
+            {
+                "word": "a",
+                "start": 18.18000030517578,
+                "end": 18.5
+            },
+            {
+                "word": "volta",
+                "start": 18.5,
+                "end": 18.579999923706055
+            },
+            {
+                "word": "com",
+                "start": 18.700000762939453,
+                "end": 18.959999084472656
+            },
+            {
+                "word": "vista",
+                "start": 18.959999084472656,
+                "end": 19.139999389648438
+            },
+            {
+                "word": "para",
+                "start": 19.139999389648438,
+                "end": 19.360000610351562
+            },
+            {
+                "word": "a",
+                "start": 19.360000610351562,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "quinta",
+                "start": 19.739999771118164,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "e",
+                "start": 19.739999771118164,
+                "end": 20.1200008392334
+            },
+            {
+                "word": "sol",
+                "start": 20.1200008392334,
+                "end": 20.299999237060547
+            },
+            {
+                "word": "em",
+                "start": 20.299999237060547,
+                "end": 20.600000381469727
+            },
+            {
+                "word": "todas",
+                "start": 20.600000381469727,
+                "end": 20.8799991607666
+            },
+            {
+                "word": "as",
+                "start": 20.8799991607666,
+                "end": 21.15999984741211
+            },
+            {
+                "word": "divisões",
+                "start": 21.15999984741211,
+                "end": 21.579999923706055
+            },
+            {
+                "word": "Lá",
+                "start": 22,
+                "end": 22.079999923706055
+            },
+            {
+                "word": "fora",
+                "start": 22.079999923706055,
+                "end": 22.360000610351562
+            },
+            {
+                "word": "piscina",
+                "start": 22.8799991607666,
+                "end": 23
+            },
+            {
+                "word": "churrasqueira",
+                "start": 23.399999618530273,
+                "end": 23.700000762939453
+            },
+            {
+                "word": "com",
+                "start": 23.700000762939453,
+                "end": 24.100000381469727
+            },
+            {
+                "word": "forno",
+                "start": 24.100000381469727,
+                "end": 24.360000610351562
+            },
+            {
+                "word": "quatro",
+                "start": 24.799999237060547,
+                "end": 24.940000534057617
+            },
+            {
+                "word": "poços",
+                "start": 24.940000534057617,
+                "end": 25.299999237060547
+            },
+            {
+                "word": "e",
+                "start": 25.299999237060547,
+                "end": 25.579999923706055
+            },
+            {
+                "word": "painéis",
+                "start": 25.579999923706055,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "solares",
+                "start": 25.860000610351562,
+                "end": 26.299999237060547
+            },
+            {
+                "word": "Toda",
+                "start": 26.68000030517578,
+                "end": 26.940000534057617
+            },
+            {
+                "word": "morada",
+                "start": 26.940000534057617,
+                "end": 27.299999237060547
+            },
+            {
+                "word": "com",
+                "start": 27.479999542236328,
+                "end": 27.6200008392334
+            },
+            {
+                "word": "alarme",
+                "start": 27.6200008392334,
+                "end": 28.200000762939453
+            },
+            {
+                "word": "E",
+                "start": 28.200000762939453,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "vende",
+                "start": 28.399999618530273,
+                "end": 28.6200008392334
+            },
+            {
+                "word": "se",
+                "start": 28.6200008392334,
+                "end": 28.81999969482422
+            },
+            {
+                "word": "mobilada",
+                "start": 28.81999969482422,
+                "end": 29.34000015258789
+            },
+            {
+                "word": "1",
+                "start": 29.8799991607666,
+                "end": 29.8799991607666
+            },
+            {
+                "word": "milhão",
+                "start": 29.8799991607666,
+                "end": 30.18000030517578
+            },
+            {
+                "word": "e",
+                "start": 30.18000030517578,
+                "end": 30.399999618530273
+            },
+            {
+                "word": "100",
+                "start": 30.399999618530273,
+                "end": 30.639999389648438
+            },
+            {
+                "word": "mil",
+                "start": 30.639999389648438,
+                "end": 30.799999237060547
+            },
+            {
+                "word": "euros",
+                "start": 30.799999237060547,
+                "end": 31.15999984741211
+            },
+            {
+                "word": "Para",
+                "start": 31.579999923706055,
+                "end": 31.639999389648438
+            },
+            {
+                "word": "visitar",
+                "start": 31.639999389648438,
+                "end": 32.220001220703125
+            },
+            {
+                "word": "fale",
+                "start": 32.459999084472656,
+                "end": 32.459999084472656
+            },
+            {
+                "word": "com",
+                "start": 32.459999084472656,
+                "end": 32.619998931884766
+            },
+            {
+                "word": "a",
+                "start": 32.619998931884766,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "Anabela",
+                "start": 32.65999984741211,
+                "end": 33.099998474121094
+            },
+            {
+                "word": "da",
+                "start": 33.36000061035156,
+                "end": 33.5
+            },
+            {
+                "word": "A",
+                "start": 33.5,
+                "end": 33.68000030517578
+            },
+            {
+                "word": "",
+                "start": 33.68000030517578,
+                "end": 33.7400016784668
+            },
+            {
+                "word": "Advise",
+                "start": 33.7400016784668,
+                "end": 34.15999984741211
+            },
+            {
+                "word": "Imóveis",
+                "start": 34.15999984741211,
+                "end": 34.68000030517578
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 34.91999816894531,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 2.700000000000003,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Quinta com vinha e lago",
+                        "params": {
+                            "src": "img_d124d332",
+                            "avatar": "img_4fb06469",
+                            "logo": "img_ed578514",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Quinta T3 com vinha e lago",
+                            "price": "1.100.000 €",
+                            "location": "Viseu · 10.140 m² · 3 quartos",
+                            "agentName": "Anabela Sousa",
+                            "agentPhone": "+351 967 728 553",
+                            "footer": "Anadvise Imóveis | anadvise.com"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 2.700000000000003,
+                "end": 6.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Fragosela de Cima",
+                        "params": {
+                            "src": "img_424e835e",
+                            "title": "Fragosela de Cima",
+                            "items": [
+                                "10.140 m² de terreno",
+                                "Vinha e oliveiras",
+                                "Árvores de fruto"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.6,
+                "end": 9.7,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_8cccafc2",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 9.7,
+                "end": 12.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Salas amplas",
+                        "params": {
+                            "src": "img_f43a9b4b",
+                            "src2": "img_d5fbd7dd",
+                            "src3": "img_bfe07cbd",
+                            "src4": "img_ddbc585f",
+                            "src5": "img_48cfc607"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.4,
+                "end": 15.1,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_38ec804f",
+                            "src2": "img_e02f7695",
+                            "src3": "img_9368c8fb",
+                            "src4": "img_d14933ba"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 15.1,
+                "end": 17.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Escritório e ginásio",
+                        "params": {
+                            "src": "img_b6e349e3",
+                            "src2": "img_9e510b39",
+                            "src3": "img_dad16566",
+                            "src4": "img_9134ea8a"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.5,
+                "end": 21.9,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "VISTA PARA A QUINTA",
+                        "params": {
+                            "src": "img_92f814af",
+                            "blur": 8,
+                            "charsPerSecond": 12
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 21.9,
+                "end": 24.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_081bbec4",
+                            "zoom": 1.35
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 24.6,
+                "end": 26.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_3b5a3480",
+                            "src2": "img_445dff35",
+                            "angle": -8,
+                            "entrySeconds": 0.6
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 26.6,
+                "end": 29.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_c831a2af",
+                            "src2": "img_7df60c55",
+                            "src3": "img_861f0b09",
+                            "src4": "img_78ec06c2"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.4,
+                "end": 31.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Mobilada · € 1.100.000",
+                        "params": {
+                            "src": "img_22a22673",
+                            "src2": "img_3d3212bc",
+                            "src3": "img_d6bf32ab",
+                            "src4": "img_d5fbd7dd",
+                            "src5": "img_e02f7695"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 31.5,
+                "end": 34.91999816894531,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Fale com a Anabela",
+                        "params": {
+                            "src": "img_4fb06469",
+                            "logo": "img_ed578514",
+                            "name": "Anabela Sousa",
+                            "role": "Consultora imobiliária · Viseu",
+                            "buttons": "+351 967 728 553 | Marque a sua visita",
+                            "phone": "+351 967 728 553"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-q1zr9/clip.mp4",
+    "error": null
+}

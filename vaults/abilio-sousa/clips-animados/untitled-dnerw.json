@@ -1,0 +1,1182 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Moradia T4 com piscina interior a 650 m da Praia da Rocha",
+    "source_text": null,
+    "source_path": "clips/uploads/5UJIeISABrIgMooT49EZBH8ZAXLxbZnc3oampEzP.mp3",
+    "images": [
+        {
+            "id": "img_a2a36d78",
+            "path": "clips/uploads/bVDL0JO6W1mlAdpNt2qjfHqZX8f8je2cPM1zAJ0o.jpg",
+            "description": "Vista do telhado sobre o jardim com oliveiras, relvado, vedação branca e pequeno anexo; céu azul limpo.",
+            "name": "b30e5168-0047-45e6-a09b-9565d772637f.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_7d4e3831",
+            "path": "clips/uploads/y9s1tuJwNn4471Yh2QxRKey2T1TCXdJ0lxliCjHR.jpg",
+            "description": "Jardim amplo com relvado, pinheiros, oliveiras, palmeira e rochas decorativas; prédios ao fundo.",
+            "name": "73a42f68-547d-4efa-8516-6a839e033944.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a4f6d321",
+            "path": "clips/uploads/hO6NNCI23QKX2AR9vAnd2d1ii5roqWKITVO8yn41.jpg",
+            "description": "Jardim com caminho de pedras, palmeiras e canteiros; ao fundo, piscina com cobertura de vidro.",
+            "name": "4729cb92-c541-4eb0-a114-b843946eb428.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_797e0b47",
+            "path": "clips/uploads/yVYbBYOXm9DzBdy3pv3LvcpR6F12RMebzlavjRoB.jpg",
+            "description": "Jardim com palmeiras altas, lago com rochas e piscina coberta, com a moradia rosa ao fundo.",
+            "name": "6719ffe3-a1fe-4001-92cb-b3b21bdf520e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0607f46f",
+            "path": "clips/uploads/C3NT81XiuME0N5NJptiIQXv6k9ilY3RN2Hh1Rvx5.jpg",
+            "description": "Fachada da moradia rosa com grande palmeira, relvado, canteiros e escadaria larga para o alpendre.",
+            "name": "4526fd7a-765e-4f56-bc4f-4aee90475968.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_529482f0",
+            "path": "clips/uploads/c1UKJnFRtb87g9DgQQCHyDILVzxINQQKbiBwP2wo.jpg",
+            "description": "Fachada da moradia rosa com alpendre de colunas, portas envidraçadas, escadaria curva e relvado em frente.",
+            "name": "a5bf0d73-aa3e-4fbf-90a8-57da3c83ca1b.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_9627f437",
+            "path": "clips/uploads/0qVEZAsICvUB2FGHNQNJOAcASfwjmY4OpZJzZGo1.jpg",
+            "description": "Fachada da moradia rosa vista em ângulo, com alpendre amplo, chaminé, escadaria e relvado com palmeira.",
+            "name": "c4dcceba-c275-4bb5-a20d-ca28c683cd57.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_0776b868",
+            "path": "clips/uploads/nL7DWQYeSLnK5YIlyICkICYZIujiUlG39I9lqE19.jpg",
+            "description": "Alpendre coberto com churrasqueira em pedra e mesa de jardim; vista para a piscina coberta e palmeiras.",
+            "name": "3d567ff8-b0cb-4d75-9615-ec095acbdf6a.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_38bfa433",
+            "path": "clips/uploads/L7gLHaZOhEVpjPVIb8poTlluHL0CufyMTk5FouzE.jpg",
+            "description": "Moradia rosa com alpendre e escadaria curva, grande palmeira no relvado; piscina coberta ao fundo.",
+            "name": "23597100-25db-4139-a44b-2593a2d13a49.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_ba0f9a13",
+            "path": "clips/uploads/rUeRxPPFSZ4XeUcFiAFdjNagwxm4N7SlgI72R4bF.jpg",
+            "description": "Piscina com cobertura telescópica de vidro aberta, espreguiçadeiras azuis, relvado em frente e árvores ao fundo.",
+            "name": "26c201ea-3aa0-4a27-8e32-a5abb520019e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b4a413ac",
+            "path": "clips/uploads/8AH3Ul8uaRF3cEZys2h5qP9hwj6JyN4xxmbPVdBr.jpg",
+            "description": "Fachada da moradia rosa com alpendre e escadas, piscina em primeiro plano com cobertura retrátil e palmeiras.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_20fdfb7c",
+            "path": "clips/uploads/TyN5Qi7BJx2NKE1suMiDXdIYF2esxC2VPO5cC68H.jpg",
+            "description": "Logótipo RE/MAX Sun e Expogroup, com o balão RE/MAX, sobre fundo branco.",
+            "name": "logo.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_bebc1397",
+            "path": "clips/uploads/OcW4oXp9vP8pdcUXWZ0maoZ8qid85mO9bW8y8OoX.jpg",
+            "description": "Cave ampla com chão de tijoleira: carro estacionado, matraquilhos, mesa de bilhar e coleção de bonés.",
+            "name": "de79251e-d43c-45a3-bc47-21eca1a792b5.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_0ed3f1d0",
+            "path": "clips/uploads/bnr0eg41W8zJf0PQ2t6HsMyAMPP8oZdLtbPR979u.jpg",
+            "description": "Sala de jogos na cave com mesa de bilhar, candeeiros verdes, estantes com coleções e sofás.",
+            "name": "709b1f09-ea22-4343-b3a2-7acc0f3dc1c9.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_58599caa",
+            "path": "clips/uploads/fNQzG8DaL28MVdxpEodxWgSVJFsCYENWHujNO3vf.jpg",
+            "description": "Piscina coberta iluminada à noite com luz verde, estrutura de cobertura e jardim com luzes.",
+            "name": "37cc5cb9-1d3b-4eff-b75e-07c6f88c7229.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_1298ff7b",
+            "path": "clips/uploads/eAdOCBOrJwjEaDzwjnbv5iuprm3NBUMzpKr3jxdK.jpg",
+            "description": "Terraço amplo do piso superior com chão de tijoleira decorado, paredes rosa e céu azul.",
+            "name": "d904eb9b-3ae7-4c4d-bbe2-7653fb645a9d.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_a557a777",
+            "path": "clips/uploads/n2H9zscSlCdaO0vYZMPGucO5GcosC21p8EjtIcY6.jpg",
+            "description": "Vista elevada da piscina com cobertura, jardim com árvores e espreguiçadeiras, e prédios da Praia da Rocha ao fundo.",
+            "name": "1ff5eb5c-9a6c-4ed0-9f5d-70ed1da1f26e.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2ef102e0",
+            "path": "clips/uploads/UHO5LerTZk1tEWn7nmudJBqGCiC31xcnyAJaasDk.jpg",
+            "description": "Sala de estar com dois sofás vermelhos florais, quadro de mar emoldurado e tapete colorido.",
+            "name": "2a3b0fcd-0f6a-43d0-b2d8-b420aaf5da80.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_34ff71f5",
+            "path": "clips/uploads/6glYXGqI5DsH8I7Xz98YBzowgYvqJSv2czF0Q77s.jpg",
+            "description": "Quarto com duas camas de madeira juntas, cómoda de madeira e porta envidraçada com cortinados.",
+            "name": "56e955d3-31c0-47df-b9b2-83d51e2e4ae3.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_6b2a0a32",
+            "path": "clips/uploads/lgims1oMVo5ZGhT6iXIyuxiRnIHxIuIg49o9zWtY.jpg",
+            "description": "Suíte principal com cama de casal, cortinados elegantes, mesas de cabeceira e chão de madeira.",
+            "name": "26f3ee26-e4bc-40ad-9091-47b9c3b1f908.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_154625cd",
+            "path": "clips/uploads/F70t1mIzQ6wVG1zRAh6i1TpiETfPQXy53uNik30g.jpg",
+            "description": "Casa de banho em mármore rosa, com banheira, duplo lavatório, sanitários e cabine de duche hidromassagem.",
+            "name": "8f612962-0466-4f5f-b107-c1e6e75cdfd7.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_6287ab54",
+            "path": "clips/uploads/PIDa4ujCIDBCOCtiWZikYYmggS0vaMk1jmMlvDRq.jpg",
+            "description": "Closet com roupeiros brancos embutidos de alto a baixo, puxadores dourados, espelho e chão de madeira.",
+            "name": "f26bef7f-70e9-4114-b6f6-7c604e7a3739.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_b94dad71",
+            "path": "clips/uploads/G0BdeNf7H430bywvwPrXRdMCrUIYlE8C8YhZPgpu.jpg",
+            "description": "Quarto principal espaçoso, cama com cabeceira capitonada, chão de madeira e porta envidraçada para varanda.",
+            "name": "92822f95-8765-4706-afb6-6cbf0d2be71b.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_2fe52dc2",
+            "path": "clips/uploads/WmZCV80bBPugxiOVu6DD5QEgWy9NbKrsVeBsao8J.jpg",
+            "description": "Cozinha equipada em L, armários creme, forno, placa, máquina de lavar loiça e janela para o jardim.",
+            "name": "d3507a2d-1060-4a67-ad90-99d6994ff367.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_f71628a1",
+            "path": "clips/uploads/8VPzvOaJ9lX0CDkpRI34QovZarpKrPjYxTOff7OH.jpg",
+            "description": "Sala de jantar junto à sala de estar, mesa redonda, cristaleira de madeira, quadros e chão de madeira.",
+            "name": "d71a9560-83a0-4cde-8b56-ad1920814c46.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_d64350e9",
+            "path": "clips/uploads/JMWtWgNtmzx9J106tDLbBlTITa0S16cTyzNdtAqh.jpg",
+            "description": "Sala ampla de estar e jantar, lareira, estantes embutidas, sofá de pele creme e chão de madeira.",
+            "name": "69e35b0e-a1be-44e5-8419-fee826ec81db.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e485d66b",
+            "path": "clips/uploads/0ofkFPMpflyidMpEIBDYsr38FpjKJrfd1uFX8r9M.jpg",
+            "description": "Sala de estar com lareira à esquerda, grande sofá de pele creme, quadros clássicos e cristaleira.",
+            "name": "286d118c-fcea-4e8e-be47-0d8c1ca841ea.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_39e523d7",
+            "path": "clips/uploads/6ZFhYpaz06HHlA0mWljKLddMmpDUNu8lPuHqgz2v.jpg",
+            "description": "Hall de entrada em mármore, escadaria com corrimão verde, candeeiros de parede e corredor ao fundo.",
+            "name": "a3e7d2bb-8402-4b25-b89e-aee74d9785bb.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_3df3d379",
+            "path": "clips/uploads/gR6Mv6Zen2Mp2bldUbDG7WKdmirOaqHTfZNbyl0U.jpg",
+            "description": "Fachada da moradia rosa, porta dupla de madeira, ânforas com plantas e palmeiras sob céu azul.",
+            "name": "baf2ddcb-837f-4f3f-9515-58c58ae520f9.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e89ee39d",
+            "path": "clips/uploads/vlm5j0O0DEtooNeBeqXzOIUdUoWSIPzFzTbT8rZl.jpg",
+            "description": "Exterior da propriedade de esquina, muro de pedra com sebe, palmeira alta e moradia rosa atrás.",
+            "name": "a7d33fda-0d3b-4ce2-a2b6-cc1ce271f5bc.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_e5b361d0",
+            "path": "clips/uploads/rHHStCDKC0dmGViDbK1D4fGMkDwuPiEZIK8h45ue.png",
+            "description": "Retrato do agente, provavelmente Jorge do Carmo, de fato e com placa de prémio; logótipos RE/MAX e EXPOgroup.",
+            "name": "Jorge.png",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "meta": {
+        "background": "auto",
+        "lead": "",
+        "instructions": "Don't use the same animation twice in a row or to many times in one video.Use the main.jpg as the intro image. Here are the house details:\n2 600 000 €\nVenda\nid. 122881068-615\n359 m²\n\n4 Quartos\n\n5 WC\n\nC\n\nDescrição\nDetalhes\nMapa\nCaracterísticas\nDivisões\nContactar agente\nSimulador de Crédito\nFreguesias Próximas\nDescrição\n🏡 Fantástica Moradia T4 com Piscina Aquecida, Jardim e 3 Lotes – A 650 m da Praia da Rocha\n\nApresentamos esta magnífica moradia T4, inserida numa propriedade única com 2706 m², localizada numa zona tranquila e privilegiada, a apenas 650 metros da Praia da Rocha.\n\nUma propriedade pensada para proporcionar conforto, lazer e privacidade, com amplos espaços exteriores e diversas áreas de entretenimento.\n\n🌴 Espaço exterior\n\n\nA propriedade dispõe de:\n\n🔹 Jardins cuidadosamente cuidados\n\n🔹 Piscina coberta e aquecida, com caldeira a gás\n\n🔹 Lago e fonte\n\n🔹 Palmeiras\n\n🔹 Parque infantil\n\n🔹 Zona de refeições com churrasqueira\n\n🔹 Forno a lenha\n\n🔹 Arrecadação e casa da lenha\n\n🔹 2 cisternas com capacidade total de 80.000 litros\n\n\n🏠 Cave\n\n\nA cave foi pensada para lazer e entretenimento e inclui:\n\n🔹 Garagem com capacidade para 4 carros\n\n🔹 Sala de festas\n\n🔹 Ginásio\n\n🔹 Sala de jogos com mesa de snooker e mesa de poker\n\n🔹 Sala de estar com bar e salamandra\n\n🔹 Garrafeira\n\n🔹 Matraquilhos\n\n🔹 Despensa\n\n🔹 Vários roupeiros\n\n🔹 Casa de banho com duche\n\n\n🛋️ Rés-do-chão\n\n🔹 Hall de entrada\n\n🔹 Sala ampla com lareira e recuperador de calor\n\n🔹 Suite completa\n\n🔹 Quarto\n\n🔹 Casa de banho de serviço\n\n🔹 Cozinha totalmente equipada\n\n🔹 Lavandaria equipada com máquina de lavar roupa e máquina de secar\n\n🔹 Sala de refeições com acesso ao exterior\n\n🔹 Terraço com forno a lenha e barbecue\n\n🔹 Amplo terraço de lazer com vista para o jardim e piscina\n\n\n🛏️ 1.º Andar\n\n🔹 Hall\n\n🔹 Suite com closet\n\n🔹 Segunda suite com closet e iluminação natural\n\n🔹 Pequena sala de estar\n\n🔹 Acesso a um enorme terraço, ideal para desfrutar do espaço exterior\n\n\n✨ Conforto e qualidade\n\nA moradia dispõe ainda de:\n\n✔ Sistema de vigilância\n\n✔ Elevador com acesso à cave e ao piso superior\n\n✔ Ar condicionado com renovação de ar\n\n✔ Aquecimento central a óleo\n\n✔ Aspiração central\n\n✔ Mármore Alpinina e Lioz\n\n✔ Pavimento em carvalho francês\n\n\n📐 3 lotes com elevado potencial\n\nA propriedade está integrada em 3 lotes distintos:\n\n🔹 Lote de 1.033 m² – com 587 m² de área de construção já edificada\n\n🔹 Lote de 650 m² – com 80 m² de área de construção, onde se encontra implantada a piscina\n\n🔹 Lote de 980 m² – com possibilidade de construção de uma nova moradia com 330 m² de área de construção\n\n📍 Localização\n\n\nNuma zona tranquila, mas próxima de todas as comodidades, a apenas 650 metros da Praia da Rocha e a poucos minutos de restaurantes, comércio, serviços e restantes praias de Portimão.\n\n💡 Uma propriedade verdadeiramente diferenciadora, ideal para habitação própria, casa de férias ou investimento, com excelentes condições para rentabilização.\n\n📞 Venha conhecer esta propriedade única e descubra todo o seu potencial. \n\nDetalhes\nÁrea Bruta Privativa m²\n359\nÁrea Bruta m²\n742\nÁrea Total do Lote m²\n2 706\nÁrea Útil m²\n359\nQuartos\n4\nAno de Construção\n2002\nPiso\n- -\nWC/Casas de banho\n5\nElevador\nSim\nEstacionamento\n3+ Lugares\nCarregamento de Carros Elétricos\nSim",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "research": {
+            "topic": "Moradia T4 com três lotes junto à Praia da Rocha, Portimão, e o mercado da habitação no Algarve",
+            "summary": "Segundo o INE, o preço mediano da habitação em Portugal subiu 16,8% em 2025, para 2.076 €/m². O Algarve teve o segundo valor mais alto do país, com 3.139 €/m².",
+            "timeline": [
+                {
+                    "label": "Preço mediano nacional sobe 16,8%",
+                    "sublabel": "2025"
+                },
+                {
+                    "label": "INE divulga dados anuais da habitação",
+                    "sublabel": "abril de 2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Preço mediano nacional (2025)",
+                    "value": 2076,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Subida anual do preço nacional (2025)",
+                    "value": 16.8,
+                    "unit": "%"
+                },
+                {
+                    "label": "Preço mediano no Algarve (2025)",
+                    "value": 3139,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano em Loulé (2025)",
+                    "value": 3993,
+                    "unit": "€/m²"
+                },
+                {
+                    "label": "Preço mediano em Lagos (2025)",
+                    "value": 3801,
+                    "unit": "€/m²"
+                }
+            ],
+            "comparisons": [
+                {
+                    "title": "Algarve vs. média nacional (2025)",
+                    "left": {
+                        "title": "Algarve",
+                        "points": [
+                            "3.139 €/m²",
+                            "2.º preço mais alto entre as sub-regiões",
+                            "Loulé e Lagos entre os 5 concelhos mais caros"
+                        ]
+                    },
+                    "right": {
+                        "title": "Portugal",
+                        "points": [
+                            "2.076 €/m²",
+                            "Subida de 16,8% face a 2024",
+                            "Só a Grande Lisboa supera o Algarve (3.439 €/m²)"
+                        ]
+                    }
+                }
+            ],
+            "keyPoints": [
+                "Em 2025, o Algarve teve o segundo preço mediano mais alto do país, com 3.139 €/m²",
+                "Só a Grande Lisboa ficou acima, com 3.439 €/m²",
+                "Loulé (3.993 €/m²) e Lagos (3.801 €/m²) estão entre os 5 concelhos mais caros",
+                "Em 2025, o preço mediano nacional subiu 16,8%, para 2.076 €/m²"
+            ],
+            "sources": [
+                "https://www.idealista.pt/news/node/75156",
+                "https://dinheirovivo.dn.pt/economia/preos-das-casas-sobem-168-em-2025-para-2076-eurosm2",
+                "https://rr.pt/noticia/economia/2026/04/24/preco-das-casas-em-portugal-dispara-168-em-2025-e-agrava-crise-da-habitacao/468280/",
+                "https://postal.pt/algarve/algarve-teve-o-segundo-preco-mais-elevado-da-habitacao-em-2025/",
+                "https://observador.pt/2026/07/17/preco-mediano-de-alojamentos-familiares-aumentou-168-em-2025/"
+            ]
+        },
+        "suggested": {
+            "title": "Moradia T4 com piscina interior a 650 m da Praia da Rocha",
+            "description": "Moradia T4 em Portimão, num terreno com mais de 2.700 m² e três lotes, a 650 metros da Praia da Rocha, com jardins, palmeiras, lago e piscina coberta aquecida. Tem três suítes, sala com lareira, cave com garagem para quatro carros, ginásio, sala de festas e garrafeira, elevador em todos os pisos e um lote extra onde se pode construir outra moradia. Por 2.600.000 €, para visitar fale com o Jorge do Carmo, da RE/MAX Sun.",
+            "tags": [
+                "Portimão",
+                "Praia da Rocha",
+                "moradia de luxo",
+                "imobiliário Algarve",
+                "moradia T4",
+                "piscina aquecida",
+                "RE/MAX Sun",
+                "casas à venda"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "untitled-dnerw",
+    "created_at": "2026-10-07T10:07:46+00:00",
+    "updated_at": "2026-10-07T10:12:52+00:00",
+    "audio_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/private/clips/uploads/5UJIeISABrIgMooT49EZBH8ZAXLxbZnc3oampEzP.mp3",
+    "transcript": {
+        "duration": 44.93000030517578,
+        "text": "Três lotes a 650 metros da Praia da Rocha, uma moradia T4 em Portimão, numa propriedade com mais de 2.700 metros, jardins, palmeiras, lago e piscina coberta a aquecida. Três suítes, duas delas com closet, sala com lareira, cozinha equipada e terraços com vista para o jardim. Na cave, garagem para quatro carros, sala de festas, ginásio, sala de jogos e garrafeira. Elevador em todos os pisos, ar-condicionado e mármore. E um terceiro lote com possibilidade de construir mais uma moradia. 2.600.000 euros. Para visitar, fale com o Jorge do Carmo, da Remax Sun.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Três",
+                "start": 0,
+                "end": 0.3799999952316284
+            },
+            {
+                "word": "lotes",
+                "start": 0.3799999952316284,
+                "end": 0.800000011920929
+            },
+            {
+                "word": "a",
+                "start": 0.800000011920929,
+                "end": 1.1399999856948853
+            },
+            {
+                "word": "650",
+                "start": 1.1399999856948853,
+                "end": 1.9600000381469727
+            },
+            {
+                "word": "metros",
+                "start": 1.9600000381469727,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "da",
+                "start": 2.380000114440918,
+                "end": 2.6600000858306885
+            },
+            {
+                "word": "Praia",
+                "start": 2.6600000858306885,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "da",
+                "start": 2.8399999141693115,
+                "end": 3.259999990463257
+            },
+            {
+                "word": "Rocha",
+                "start": 3.259999990463257,
+                "end": 3.359999895095825
+            },
+            {
+                "word": "uma",
+                "start": 3.940000057220459,
+                "end": 4.340000152587891
+            },
+            {
+                "word": "moradia",
+                "start": 4.340000152587891,
+                "end": 4.639999866485596
+            },
+            {
+                "word": "T4",
+                "start": 4.639999866485596,
+                "end": 5.5
+            },
+            {
+                "word": "em",
+                "start": 5.5,
+                "end": 5.760000228881836
+            },
+            {
+                "word": "Portimão",
+                "start": 5.760000228881836,
+                "end": 6.159999847412109
+            },
+            {
+                "word": "numa",
+                "start": 6.659999847412109,
+                "end": 6.840000152587891
+            },
+            {
+                "word": "propriedade",
+                "start": 6.840000152587891,
+                "end": 7.460000038146973
+            },
+            {
+                "word": "com",
+                "start": 7.460000038146973,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "mais",
+                "start": 7.71999979019165,
+                "end": 7.940000057220459
+            },
+            {
+                "word": "de",
+                "start": 7.940000057220459,
+                "end": 8.380000114440918
+            },
+            {
+                "word": "2",
+                "start": 8.380000114440918,
+                "end": 8.619999885559082
+            },
+            {
+                "word": "700",
+                "start": 8.619999885559082,
+                "end": 9.119999885559082
+            },
+            {
+                "word": "metros",
+                "start": 9.119999885559082,
+                "end": 9.640000343322754
+            },
+            {
+                "word": "jardins",
+                "start": 10.220000267028809,
+                "end": 10.5
+            },
+            {
+                "word": "palmeiras",
+                "start": 11.039999961853027,
+                "end": 11.34000015258789
+            },
+            {
+                "word": "lago",
+                "start": 12.199999809265137,
+                "end": 12.199999809265137
+            },
+            {
+                "word": "e",
+                "start": 12.199999809265137,
+                "end": 12.65999984741211
+            },
+            {
+                "word": "piscina",
+                "start": 12.65999984741211,
+                "end": 12.9399995803833
+            },
+            {
+                "word": "coberta",
+                "start": 12.9399995803833,
+                "end": 13.359999656677246
+            },
+            {
+                "word": "a",
+                "start": 13.359999656677246,
+                "end": 13.460000038146973
+            },
+            {
+                "word": "aquecida",
+                "start": 13.460000038146973,
+                "end": 13.859999656677246
+            },
+            {
+                "word": "Três",
+                "start": 14.699999809265137,
+                "end": 14.859999656677246
+            },
+            {
+                "word": "suítes",
+                "start": 14.859999656677246,
+                "end": 15.300000190734863
+            },
+            {
+                "word": "duas",
+                "start": 15.800000190734863,
+                "end": 15.899999618530273
+            },
+            {
+                "word": "delas",
+                "start": 15.899999618530273,
+                "end": 16.239999771118164
+            },
+            {
+                "word": "com",
+                "start": 16.239999771118164,
+                "end": 16.479999542236328
+            },
+            {
+                "word": "closet",
+                "start": 16.479999542236328,
+                "end": 16.940000534057617
+            },
+            {
+                "word": "sala",
+                "start": 17.780000686645508,
+                "end": 17.780000686645508
+            },
+            {
+                "word": "com",
+                "start": 17.780000686645508,
+                "end": 18.1200008392334
+            },
+            {
+                "word": "lareira",
+                "start": 18.1200008392334,
+                "end": 18.360000610351562
+            },
+            {
+                "word": "cozinha",
+                "start": 19,
+                "end": 19
+            },
+            {
+                "word": "equipada",
+                "start": 19,
+                "end": 19.600000381469727
+            },
+            {
+                "word": "e",
+                "start": 19.600000381469727,
+                "end": 19.979999542236328
+            },
+            {
+                "word": "terraços",
+                "start": 19.979999542236328,
+                "end": 20.440000534057617
+            },
+            {
+                "word": "com",
+                "start": 20.440000534057617,
+                "end": 21.040000915527344
+            },
+            {
+                "word": "vista",
+                "start": 21.040000915527344,
+                "end": 21.360000610351562
+            },
+            {
+                "word": "para",
+                "start": 21.360000610351562,
+                "end": 21.579999923706055
+            },
+            {
+                "word": "o",
+                "start": 21.579999923706055,
+                "end": 21.8799991607666
+            },
+            {
+                "word": "jardim",
+                "start": 21.8799991607666,
+                "end": 21.959999084472656
+            },
+            {
+                "word": "Na",
+                "start": 22.65999984741211,
+                "end": 22.81999969482422
+            },
+            {
+                "word": "cave",
+                "start": 22.81999969482422,
+                "end": 23.100000381469727
+            },
+            {
+                "word": "garagem",
+                "start": 23.799999237060547,
+                "end": 23.979999542236328
+            },
+            {
+                "word": "para",
+                "start": 23.979999542236328,
+                "end": 24.15999984741211
+            },
+            {
+                "word": "quatro",
+                "start": 24.15999984741211,
+                "end": 24.459999084472656
+            },
+            {
+                "word": "carros",
+                "start": 24.459999084472656,
+                "end": 24.81999969482422
+            },
+            {
+                "word": "sala",
+                "start": 25.5,
+                "end": 25.5
+            },
+            {
+                "word": "de",
+                "start": 25.5,
+                "end": 25.860000610351562
+            },
+            {
+                "word": "festas",
+                "start": 25.860000610351562,
+                "end": 26.100000381469727
+            },
+            {
+                "word": "ginásio",
+                "start": 26.5,
+                "end": 26.899999618530273
+            },
+            {
+                "word": "sala",
+                "start": 27.540000915527344,
+                "end": 27.540000915527344
+            },
+            {
+                "word": "de",
+                "start": 27.540000915527344,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "jogos",
+                "start": 28.020000457763672,
+                "end": 28.020000457763672
+            },
+            {
+                "word": "e",
+                "start": 28.020000457763672,
+                "end": 28.399999618530273
+            },
+            {
+                "word": "garrafeira",
+                "start": 28.399999618530273,
+                "end": 28.940000534057617
+            },
+            {
+                "word": "Elevador",
+                "start": 29.65999984741211,
+                "end": 30.15999984741211
+            },
+            {
+                "word": "em",
+                "start": 30.15999984741211,
+                "end": 30.65999984741211
+            },
+            {
+                "word": "todos",
+                "start": 30.65999984741211,
+                "end": 30.959999084472656
+            },
+            {
+                "word": "os",
+                "start": 30.959999084472656,
+                "end": 31.280000686645508
+            },
+            {
+                "word": "pisos",
+                "start": 31.280000686645508,
+                "end": 31.440000534057617
+            },
+            {
+                "word": "ar",
+                "start": 32,
+                "end": 32
+            },
+            {
+                "word": "condicionado",
+                "start": 32,
+                "end": 32.65999984741211
+            },
+            {
+                "word": "e",
+                "start": 32.65999984741211,
+                "end": 33.15999984741211
+            },
+            {
+                "word": "mármore",
+                "start": 33.15999984741211,
+                "end": 33.5
+            },
+            {
+                "word": "E",
+                "start": 34.58000183105469,
+                "end": 34.58000183105469
+            },
+            {
+                "word": "um",
+                "start": 34.58000183105469,
+                "end": 34.720001220703125
+            },
+            {
+                "word": "terceiro",
+                "start": 34.720001220703125,
+                "end": 35.060001373291016
+            },
+            {
+                "word": "lote",
+                "start": 35.060001373291016,
+                "end": 35.5
+            },
+            {
+                "word": "com",
+                "start": 35.5,
+                "end": 35.619998931884766
+            },
+            {
+                "word": "possibilidade",
+                "start": 35.619998931884766,
+                "end": 36.29999923706055
+            },
+            {
+                "word": "de",
+                "start": 36.29999923706055,
+                "end": 36.540000915527344
+            },
+            {
+                "word": "construir",
+                "start": 36.540000915527344,
+                "end": 36.84000015258789
+            },
+            {
+                "word": "mais",
+                "start": 36.84000015258789,
+                "end": 37.34000015258789
+            },
+            {
+                "word": "uma",
+                "start": 37.34000015258789,
+                "end": 37.599998474121094
+            },
+            {
+                "word": "moradia",
+                "start": 37.599998474121094,
+                "end": 37.97999954223633
+            },
+            {
+                "word": "2",
+                "start": 38.97999954223633,
+                "end": 39.099998474121094
+            },
+            {
+                "word": "600",
+                "start": 39.099998474121094,
+                "end": 40.2400016784668
+            },
+            {
+                "word": "000",
+                "start": 40.2400016784668,
+                "end": 40.560001373291016
+            },
+            {
+                "word": "euros",
+                "start": 40.560001373291016,
+                "end": 40.959999084472656
+            },
+            {
+                "word": "Para",
+                "start": 41.599998474121094,
+                "end": 41.68000030517578
+            },
+            {
+                "word": "visitar",
+                "start": 41.68000030517578,
+                "end": 42.41999816894531
+            },
+            {
+                "word": "fale",
+                "start": 42.79999923706055,
+                "end": 42.79999923706055
+            },
+            {
+                "word": "com",
+                "start": 42.79999923706055,
+                "end": 42.959999084472656
+            },
+            {
+                "word": "o",
+                "start": 42.959999084472656,
+                "end": 43.13999938964844
+            },
+            {
+                "word": "Jorge",
+                "start": 43.13999938964844,
+                "end": 43.29999923706055
+            },
+            {
+                "word": "do",
+                "start": 43.29999923706055,
+                "end": 43.540000915527344
+            },
+            {
+                "word": "Carmo",
+                "start": 43.540000915527344,
+                "end": 43.779998779296875
+            },
+            {
+                "word": "da",
+                "start": 44.060001373291016,
+                "end": 44.220001220703125
+            },
+            {
+                "word": "Remax",
+                "start": 44.220001220703125,
+                "end": 44.63999938964844
+            },
+            {
+                "word": "Sun",
+                "start": 44.63999938964844,
+                "end": 44.900001525878906
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 44.93000030517578,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.4299999999999997,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imovel-revelacao",
+                        "text": "Três lotes junto à Praia da Rocha",
+                        "params": {
+                            "src": "img_b4a413ac",
+                            "avatar": "img_e5b361d0",
+                            "logo": "img_20fdfb7c",
+                            "price": "2.600.000 €",
+                            "eyebrow": "NOVO IMÓVEL",
+                            "title": "Moradia T4 à venda em Portimão",
+                            "location": "Portimão · 650 m da Praia da Rocha",
+                            "agentName": "Jorge do Carmo",
+                            "phone": "+351 969 338 152",
+                            "legal": "RE/MAX Sun · Expogroup"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.4299999999999997,
+                "end": 6.6,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "ecra-dividido-deslize",
+                        "text": "",
+                        "params": {
+                            "src": "img_0607f46f",
+                            "src2": "img_529482f0",
+                            "angle": "7",
+                            "entrySeconds": "0.5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 6.6,
+                "end": 10,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "zoom-out-impacto",
+                        "text": "",
+                        "params": {
+                            "src": "img_a557a777",
+                            "zoom": 1.4
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 10,
+                "end": 14.6,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Jardins, lago e piscina",
+                        "params": {
+                            "src": "img_7d4e3831",
+                            "src2": "img_a4f6d321",
+                            "src3": "img_797e0b47",
+                            "src4": "img_ba0f9a13",
+                            "src5": "img_58599caa"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 14.6,
+                "end": 17.6,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Três suítes, duas com closet",
+                        "params": {
+                            "src": "img_6b2a0a32",
+                            "src2": "img_b94dad71",
+                            "src3": "img_6287ab54",
+                            "src4": "img_34ff71f5"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 17.6,
+                "end": 22.5,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "grelha-quatro-imagens",
+                        "text": "",
+                        "params": {
+                            "src": "img_d64350e9",
+                            "src2": "img_2fe52dc2",
+                            "src3": "img_1298ff7b",
+                            "src4": "img_0776b868"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.5,
+                "end": 25.4,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "revelacao-imagem-zoom",
+                        "text": "",
+                        "params": {
+                            "src": "img_bebc1397",
+                            "revealSeconds": 0.6,
+                            "zoom": 1.15
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.4,
+                "end": 29.5,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-lista-pontos",
+                        "text": "Na cave",
+                        "params": {
+                            "src": "img_0ed3f1d0",
+                            "title": "Na cave",
+                            "items": [
+                                "Garagem para 4 carros",
+                                "Sala de festas",
+                                "Ginásio",
+                                "Sala de jogos",
+                                "Garrafeira"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 29.5,
+                "end": 34.4,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "leque-imagens",
+                        "text": "Elevador e mármore",
+                        "params": {
+                            "src": "img_39e523d7",
+                            "src2": "img_154625cd",
+                            "src3": "img_2ef102e0",
+                            "src4": "img_f71628a1",
+                            "src5": "img_e485d66b"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 34.4,
+                "end": 38.8,
+                "background": "ink",
+                "transitionIn": "whip",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "titulo-faixas-alternadas",
+                        "text": "Lote para nova moradia",
+                        "params": {
+                            "src": "img_a2a36d78",
+                            "src2": "img_e89ee39d",
+                            "src3": "img_38bfa433",
+                            "src4": "img_3df3d379"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 38.8,
+                "end": 41.5,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "imagem-desfoque-titulo",
+                        "text": "2.600.000 €",
+                        "params": {
+                            "src": "img_9627f437",
+                            "blur": 8,
+                            "charsPerSecond": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 41.5,
+                "end": 44.93,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "cut",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "agente-revelacao",
+                        "text": "Jorge do Carmo",
+                        "params": {
+                            "src": "img_e5b361d0",
+                            "logo": "img_20fdfb7c",
+                            "name": "Jorge do Carmo",
+                            "role": "Consultor imobiliário · RE/MAX Sun",
+                            "buttons": "+351 969 338 152 | Marque a sua visita",
+                            "phone": "+351 969 338 152"
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "blue-static-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/untitled-dnerw/clip.mp4",
+    "error": null
+}
