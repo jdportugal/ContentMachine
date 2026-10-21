@@ -34,7 +34,8 @@ return [
         'root' => env('PROJECTS_PATH', base_path('vaults')),      // where NEW project vaults live
         'registry' => storage_path('app/projects.json'),          // the project list (slug/name/path/language)
         'default_vault' => env('VAULT_PATH', base_path('vault')), // stable path of the seeded default project
-        'default_name' => 'Brand Machine',
+        'default_name' => 'Imocena',
+        'default_language' => 'pt',                                // narration, prompts and UI copy of the one project
     ],
 
     /*

@@ -1,166 +1,174 @@
-# Nebula — Futuristic Blue Design System
+# Real-Estate Agent Design System
 
-A deep-space visual language for **AI & automation education**. Starlit navy gradients, molten-gold headlines, and heavy condensed type. Built for course thumbnails, banners, hero slides, and a full social kit (feed / story / YouTube).
-
----
-
-## 1. Brand Personality
-
-| Trait | Expression |
-|---|---|
-| **Futuristic** | Deep-space gradients, starfields, subtle glow, electric blue |
-| **Bold** | Anton display type — heavy, condensed, all-caps |
-| **Energetic** | Molten gold→orange gradient on every headline |
-| **Trustworthy** | Dark, calm navy base; restrained palette; generous space |
-
-Voice: direct, encouraging, no jargon. Copy is short and action-led ("Start learning", "Swipe to learn →", "Automate everything").
+A self-contained guide for making social posts for real-estate agents. Every value is listed here, so you can build posts in any tool (Canva, Figma, Photoshop, HTML, AI generators).
 
 ---
 
-## 2. Color
+## 1. Brand in one line
+Bold, bright, approachable. One saturated colour field, an accent pill for the phone number, a straight diagonal "slash" between photo and colour, and heavy italic uppercase headlines.
 
-### Core palette
-| Token | Hex | Use |
+---
+
+## 2. Colour
+
+### Default theme: Manuel
+| Role | Hex | Use |
 |---|---|---|
-| `void` | `#05060E` | Page background, deepest point of gradients |
-| `deep-navy` | `#0A1030` | Mid-gradient, section fields |
-| `panel` | `#0C1225` | Cards, component surfaces |
-| `panel-alt` | `#0A0E1E` | Inner component wells |
-| `electric-blue` | `#2A3BEB` | Primary solid accent (buttons, PRO badge) — **tweakable** |
-| `star-white` | `#EAF0FF` | Primary text, star dots |
-| `success` | `#12B76A` | 100% / complete states |
+| Primary | `#05B8E6` | Main colour field, panels, backgrounds |
+| Primary deep | `#0A8FC0` | Secondary slab, eyebrows on light backgrounds |
+| Accent | `#F06052` | Phone pill, status tags, VENDIDO band **only** |
+| On primary | `#FFFFFF` | Text on primary |
+| On accent | `#FFFFFF` | Text on accent |
+| Ink | `#213D56` | Text on white or light backgrounds |
+| Surface | `#F7F8F8` | Light backgrounds |
+| Photo backdrop | `#B4B7B8` | Portrait background |
 
-### Signature gradients
-| Name | Value | Use |
-|---|---|---|
-| **Molten gold** | `linear-gradient(100deg, #FFE59A 0%, #FFB347 55%, #FF7A3D 100%)` | All display headlines (clipped to text), primary buttons |
-| **Nebula (cover)** | `linear-gradient(120deg, #05060E 0%, #0A1030 55%, #1a2ba8 140%)` | Full-bleed hero / cover backgrounds |
-| **Deep field** | `radial-gradient(120% 80% at 80% -10%, #16204d, transparent 55%)` layered over `void` | Ambient page glow |
-| **Card glow base** | `radial-gradient(130% 100% at 50% 130%, <hue-glow>, transparent 60%), linear-gradient(180deg,#0B0F22,#070A16)` | Thumbnail card backgrounds |
+### Other agent themes
+| Theme | Primary | Primary deep | Accent | On accent | Ink |
+|---|---|---|---|---|---|
+| Atlântico | `#0E6B74` | `#094D54` | `#F2A93B` | `#2A1A05` | `#0B2E33` |
+| Terracota | `#C4553C` | `#9C3F2B` | `#243B55` | `#FFFFFF` | `#2B1B17` |
+| Noite | `#1C2B45` | `#111B2E` | `#D9B45A` | `#1C2B45` | `#0E1626` |
+| Oliva | `#4F6B3A` | `#3A5029` | `#F2C14E` | `#26331C` | `#26331C` |
 
-### Glitter / topic hues
-Each course card gets a colored particle field. Assign one hue family per topic:
-
-| Family | Palette | Glow |
-|---|---|---|
-| Gold | `#FFD98A #FFB347 #FF8A4D` | `rgba(255,150,70,.55)` |
-| Purple | `#C77DFF #E0AAFF #9C7DFF` | `rgba(160,110,255,.5)` |
-| Blue | `#5A7BFF #8A6BFF #C77DFF` | `rgba(90,110,255,.55)` |
-| Teal | `#4DE0E0 #4DA6FF #8AE0FF` | `rgba(77,200,224,.45)` |
-| Red | `#FF8A4D #FF5C7A #FFC14D` | `rgba(255,110,90,.5)` |
-| Green | `#4DE08A #8AE04D #4DD0A6` | `rgba(80,220,140,.45)` |
-
-**Rule:** max one glitter hue per artifact. The base stays navy/void; color only enters through the particle field + bottom glow.
-
-### Text colors
-- Primary `#EAF0FF` · Muted `#A9B6D6` / `#B8C4E2` · Dim/meta `#8090B5` / `#6C7AA6` · Eyebrow-blue `#7DA2FF` / `#9FB4E8` · Warm sub-headline `#F2A64D`
+### Colour rules
+- Each post uses one primary and one accent. Don't mix themes.
+- The accent is rare: at most 1–2 accent elements per post.
+- Price tags are always white (`#FFFFFF`) with ink text.
+- To make a new theme, pick a primary that carries white headline type, and an accent that clearly stands out against it.
 
 ---
 
 ## 3. Typography
+**One font only: Poppins** (free on Google Fonts).
 
-Two families only.
+| Style | Weight | Case | Size on 1080 px wide post | Line height |
+|---|---|---|---|---|
+| Hero headline | 800 Italic | UPPERCASE | 132 px | 0.94 |
+| Headline 1 | 800 Italic | UPPERCASE | 88 px | 0.98 |
+| Headline 2 | 800 Italic | UPPERCASE | 64 px | 0.98 |
+| Headline 3 / price | 800 Italic | — | 44–88 px | 1 |
+| Phone number | 800 Italic | — | 32–60 px | 1 |
+| Body / facts | 500 Regular | Sentence | 30–34 px | 1.4 |
+| Eyebrow (location) | 600 | UPPERCASE, +14% tracking | 26 px | 1 |
+| Agent name | 700 | Title Case | 30–32 px | 1.2 |
+| Legal line | 600 | UPPERCASE, +4% tracking | 18 px | 1 |
 
-| Role | Font | Weight | Treatment |
-|---|---|---|---|
-| **Display** | Anton | 400 (only weight) | UPPERCASE, `line-height: .9`, molten-gold clip or star-white |
-| **UI / body** | Space Grotesk | 400–700 | Sentence or UPPERCASE for labels |
+---
 
-### Scale
-| Style | Font / size | Notes |
-|---|---|---|
-| Cover display | Anton `clamp(56px,9vw,132px)` / .9 | Gradient clip |
-| Hero headline | Space Grotesk 600 `clamp(30px,5.4vw,72px)` | Gradient clip; last word 700 |
-| Card / poster title | Anton 34px / .92 | Star-white + text-shadow over glitter |
-| Section heading | Space Grotesk 700 32px | `#EAF0FF` |
-| Body | Space Grotesk 400 16px / 1.6 | `#B8C4E2` |
-| Eyebrow / label | Space Grotesk 600 12–14px | `letter-spacing: .2–.24em`, UPPERCASE |
-| Meta / caption | Space Grotesk 500 12px | `letter-spacing: .14em`, dim |
+## 4. Shapes and motifs
+- **The slash:** a straight diagonal at about 11° that rises to the right. It separates photo from colour.
+  - Covers: portrait on the left, colour on the right, with a vertical slash between them.
+  - Posts and stories: a horizontal slash along the top edge of the colour panel (the left side sits about 12–14% lower than the right).
+- **Pill:** full-round capsule, accent fill. Used for the phone number, "NOVO IMÓVEL" tags and CTAs.
+- **Price tag:** white rectangle with square corners, placed on the seam where photo meets colour, aligned right.
+- **VENDIDO band:** full-width accent strip rotated −8°, with the word at 200 px.
+- **Date block:** white square with the weekday, a large day number and the month (`SÁB / 12 / OUT`).
+- **Avatar:** circle portrait with a 4 px white ring.
+- **Corners:** square everywhere, except pills and avatars.
+- **Never:** shadows, outlines, blur, decorative gradients, emoji, curves, icons.
+  - The only exception to "no gradients": a dark navy fade behind text sitting on a photo.
 
-**Gradient headline recipe** (reuse everywhere):
-```css
-font-family: 'Anton'; /* or Space Grotesk 600 for refined banners */
-text-transform: uppercase;
-background: linear-gradient(100deg,#FFE59A,#FFB347 55%,#FF7A3D);
--webkit-background-clip: text; background-clip: text; color: transparent;
+---
+
+## 5. Imagery
+- **Property photos:** bright, daylight, straight verticals, wide angle. Show the living room or the façade first.
+- **Portrait:** shoulders up, centred, flat light-grey studio backdrop, smiling, jacket.
+- **Logo:** the agent's network logo in white, placed only on the primary colour, at least 60 px tall.
+
+---
+
+## 6. Formats and layouts
+Outer margin on 1080 px artboards: **72 px**.
+
+### Facebook cover — 1640 × 624
+- **Left 720 px:** portrait, with the slash cut on its right edge. Name (44 px) and email sit bottom-left over a navy fade.
+- **Right side, stacked and vertically centred:**
+  - logo
+  - "O SEU CONSULTOR IMOBILIÁRIO!" (76 px)
+  - phone pill (60 px)
+- **Legal line:** bottom of the right side.
+
+### LinkedIn cover — 1584 × 396
+- Keep the left third clear, because the profile photo covers it. A primary-deep slab with the slash sits there.
+- **Right side, in a row:** logo | thin divider | headline (56 px) over the phone pill (40 px).
+
+### Post: Novo imóvel — 1080 × 1350
+1. **Top 900 px:** property photo. "NOVO IMÓVEL" pill at the top-left (64 px in from the edges).
+2. **Bottom 560 px:** primary panel with the slash on its top edge.
+3. **Price tag** on the seam, aligned right.
+4. **Inside the panel:**
+   - eyebrow: `LISBOA · ALVALADE`
+   - headline: `T3 COM VARANDA`
+   - facts: `120 m² · 3 quartos · 2 WC · garagem`
+5. **Footer:** avatar + name + phone, with the logo on the right.
+6. **Legal line** at the very bottom.
+
+### Post: Vendido — 1080 × 1350
+1. Full-bleed property photo.
+2. VENDIDO! band across the middle, rotated −8°.
+3. **Bottom 420 px:** primary panel with the slash. Location eyebrow + `OBRIGADO PELA CONFIANÇA!` (50 px).
+4. Footer and legal line, as in Novo imóvel.
+
+### Post: Casa aberta — 1080 × 1350
+1. **Full primary background:**
+   - logo at the top-right
+   - `CASA / ABERTA` (132 px)
+   - date block + time (`15h — 18h`) + address + `ENTRADA LIVRE`
+2. **Middle band:** property photo with the slash on its top edge.
+3. **Bottom 140 px:** white strip with avatar, name, legal line and the phone pill.
+
+### Story: Novo imóvel — 1080 × 1920
+- **Safe zone:** keep everything important between y 250 and y 1640.
+- **Photo:** the top 1200 px, with the "NOVO IMÓVEL" pill at y 250.
+- **Primary panel:** the bottom 820 px, with the slash on top and the price tag on the seam.
+- **In the panel:**
+  - eyebrow
+  - headline (96 px)
+  - facts
+  - CTA pill: `Ligue já +351 …`
+  - avatar + name + logo
+  - legal line
+
+### Story: Casa aberta — 1080 × 1920
+- **Full primary background, top to bottom:**
+  1. logo at y 250
+  2. `CASA / ABERTA` (150 px)
+  3. date block + time + address
+  4. photo band between two slashes
+  5. CTA pill: `Marque visita +351 …`
+  6. name + legal line
+
+---
+
+## 7. Copy (PT-PT)
+- **Register:** formal ("você"). Use *o seu*, *Ligue já*, *Marque visita*. Never *tu*.
+- **Headlines:** short and UPPERCASE. Use "!" only when celebrating.
+- **Status tags:** `NOVO IMÓVEL` · `VENDIDO!` · `CASA ABERTA` · `RESERVADO` · `BAIXOU DE PREÇO`
+- **Facts:** one line, separated by " · ", for example `120 m² · 3 quartos · 2 WC · garagem`.
+- **Price:** `450.000 €`, with a dot for thousands and a space before €.
+- **Phone:** `+351 963 050 290`, grouped 3-3-3.
+- **Dates:** `SÁB 12 OUT`. **Times:** `15h — 18h`.
+- **Location eyebrow:** `CIDADE · BAIRRO`
+- **Required on every post:** the legal line, e.g. `IAD PORTUGAL S.A. | AMI: 11220` (company + AMI licence).
+
+### Caption template
+```
+[STATUS] em [Bairro], [Cidade]!
+[Tipologia] com [destaque], [área] m².
+[Preço]
+Ligue já [telefone]
+[Nome do agente] · [Rede] · AMI [nº]
 ```
 
 ---
 
-## 4. Layout & Spacing
-
-- Content column: `max-width: 1120px`, centered, `padding: 0 48px`.
-- Section rhythm: `~72–80px` top padding; eyebrow → heading (`8px` gap) → content (`28px` gap).
-- Radii: cards `16px`, buttons `11px`, pills `999px`, large media `18px`.
-- Grids use `display:grid` + `gap` (16–24px), auto-fill `minmax(300px,1fr)` for cards. Never margin-spaced siblings.
-- Borders: `1px solid rgba(255,255,255,.07–.12)`. Card shadow: `0 20px 50px rgba(0,0,0,.4)`.
-
----
-
-## 5. Components
-
-### Buttons
-| Variant | Style |
-|---|---|
-| **Primary** | Molten-gold gradient bg, text `#0A0714`, `box-shadow:0 6px 24px rgba(255,138,61,.32)` |
-| **Electric** | Solid `electric-blue`, white text, blue glow shadow |
-| **Ghost** | `rgba(255,255,255,.04)` bg, `1px` white border, text `#DCE4FA` |
-| **Play** | 46px circle, translucent white bg + border, CSS triangle |
-
-All: `padding:13px 24px`, radius `11px`, Space Grotesk 600 15px.
-
-### Badges & tags
-- **Pills:** `DRAFT` (neutral translucent), `NEW` (gold gradient, dark text), `PRO` (electric blue), `COMPLETE` (green tint + border). Radius `999px`, 600/12px, `.06–.08em` tracking.
-- **Tags:** `rgba(125,162,255,.12)` bg, blue border, radius `8px`, 500/12px — e.g. Automation · No-code · Beginner.
-
-### Progress bar
-- Track: `rgba(255,255,255,.07)`, height 10–12px, radius `999px`.
-- Fill: molten-gold gradient in progress; **green gradient at 100%**. Optional `%` label to the right, 600/12–14px `#9AA8CC`.
-
-### Course card
-Media (16:8.4) with glitter field + optional top-left badge + centered Anton title → body block: title (SG 600/16), 2-line description (SG 400/13, `#8090B5`), progress bar + `%`. Radius `16px`, panel bg, big soft shadow.
-
----
-
-## 6. Effects
-
-- **Starfield:** absolutely-positioned circular dots (1–2.4px), hues `#ffffff #CFE0FF #AFC6FF`, opacity .3–1.0, `neb-twinkle` keyframe (2.5–6.5s). Density is tweakable; generated from a seeded RNG so positions stay stable across renders.
-- **Float:** `neb-float` (±7px, 3.5–4s) on play buttons and swipe-up CTAs.
-- **Glow:** gold/blue box-shadows on primary/electric buttons; radial glow at card bottoms.
-- **Glass:** `rgba(20,26,48,.72)` + `backdrop-filter: blur(4px)` on badges over imagery.
-- **Selection:** orange `#FF7A3D` on void.
-
----
-
-## 7. Artifact Specs
-
-| Artifact | Ratio / size | Layout |
-|---|---|---|
-| Cover | full-bleed | Nebula gradient + starfield, dual-line Anton (white + gold) |
-| Course card | 16:8.4 media | Glitter + centered Anton title; body + progress below |
-| Course hero | 16:9 | Centered gradient headline, floating play, warm subline |
-| Wide banner | 1280 × 260 | Single centered gradient headline |
-| Section title | 16:9 split | Left image (portrait/render), right electric-blue panel + numbered Anton headline |
-| Feed post | 1:1 | Brand tag → lesson label → Anton headline → body → CTA |
-| Story | 9:16 | Progress ticker, centered stacked Anton, floating swipe-up |
-| YouTube thumb | 16:9 split | Bold Anton hook (left) + creator face-cam slot (right) |
-
-**Imagery:** use striped placeholders with a monospace label (e.g. `PORTRAIT / 3D RENDER`, `CREATOR FACE-CAM`) until real assets are dropped in. Never fake photos with SVG.
-
----
-
-## 8. Tweakable Props
-
-| Prop | Type | Default | Effect |
-|---|---|---|---|
-| `showStars` | boolean | true | Toggles all starfields |
-| `starDensity` | int 20–180 | 80 | Star count across all fields |
-| `accentBlue` | color | `#2A3BEB` | Electric-blue accent (buttons, PRO badge, section panel, swatch) |
-
----
-
-## 9. Do & Don't
-
-**Do** — keep backgrounds navy/void; let color arrive through gold headlines + one glitter hue; use Anton uppercase for impact lines; keep copy short; space with grid + gap.
-
-**Don't** — mix multiple glitter hues in one artifact; use Anton for body text; drop headlines below 24px on 1920-wide slides; add extra accent colors; recreate third-party logos (use text + simple node shapes).
+## 8. Checklist before posting
+- [ ] One theme only: one primary and one accent
+- [ ] Poppins only; headlines 800 italic uppercase
+- [ ] The slash is present and rises to the right
+- [ ] Phone number in an accent pill
+- [ ] Price in a white tag (listing posts)
+- [ ] Legal line with the AMI number
+- [ ] 72 px margins; story content between y 250 and y 1640
+- [ ] No shadows, emoji, icons or decorative gradients

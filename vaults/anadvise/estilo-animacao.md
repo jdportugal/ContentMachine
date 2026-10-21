@@ -1,1 +1,0 @@
-Make sure the intro information allways includes the name of the agent - Anabela - and her phone number - +351 967 728 553

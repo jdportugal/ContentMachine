@@ -1,1 +1,0 @@
-Make sure the intro information allways includes the name of the agent - Anabela Batista - and her phone number - +351 967 361 580. After the property intro allways show the after intro video.

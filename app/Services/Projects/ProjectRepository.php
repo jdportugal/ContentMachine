@@ -160,7 +160,7 @@ class ProjectRepository
             slug: 'default',
             name: (string) config('contentmachine.projects.default_name', 'Brand Machine'),
             path: (string) config('contentmachine.projects.default_vault', base_path('vault')),
-            language: (string) config('app.locale', 'en'),
+            language: (string) config('contentmachine.projects.default_language', config('app.locale', 'en')),
         );
     }
 

@@ -1,0 +1,746 @@
+{
+    "status": "done",
+    "type": "animation",
+    "input_kind": "audio",
+    "title": "Village House in Póvoa e Meadas, Alentejo for €160,000",
+    "meta": {
+        "listing": {
+            "url": "https://www.iadportugal.pt/anuncio/casa-moradia-venda-nossa-senhora-da-graca-de-povoa-e-meadas-72m2/r1032852",
+            "agent": "Paulo Taborda",
+            "phone": "+351965135564",
+            "email": "",
+            "licence": "",
+            "agency": "IAD Portugal",
+            "hook": "Uma casa no centro da aldeia de Póvoa e Meadas.",
+            "voiceover": "Uma casa no centro da aldeia de Póvoa e Meadas. No coração do Alentejo, com ar puro e verdadeira vida de aldeia. Uma moradia geminada de dois pisos, rés-do-chão e primeiro andar, construída em 1970. Está em remodelação, com projeto para um T2 confortável. São setenta e dois metros de área, com varanda. Para viver, para fins de semana, ou para investir. Cento e sessenta mil euros. Para visitar, fale com o Paulo Taborda, da IAD Portugal.",
+            "scenes": [
+                {
+                    "photo": "fachada da casa na rua da aldeia",
+                    "vo": "Uma casa no centro da aldeia de Póvoa e Meadas.",
+                    "caption": "Póvoa e Meadas"
+                },
+                {
+                    "photo": "rua ou vista da aldeia",
+                    "vo": "No coração do Alentejo, com ar puro e verdadeira vida de aldeia.",
+                    "caption": "Coração do Alentejo"
+                },
+                {
+                    "photo": "fachada mostrando os dois pisos",
+                    "vo": "Uma moradia geminada de dois pisos, rés-do-chão e primeiro andar, construída em 1970.",
+                    "caption": "Dois pisos"
+                },
+                {
+                    "photo": "interior em obra",
+                    "vo": "Está em remodelação, com projeto para um T2 confortável.",
+                    "caption": "Em remodelação"
+                },
+                {
+                    "photo": "sala (imagem gerada do projeto)",
+                    "vo": "São setenta e dois metros de área,",
+                    "caption": "Imagem 3D do projeto"
+                },
+                {
+                    "photo": "varanda",
+                    "vo": "com varanda.",
+                    "caption": "Com varanda"
+                },
+                {
+                    "photo": "quarto (imagem gerada do projeto)",
+                    "vo": "Para viver, para fins de semana, ou para investir.",
+                    "caption": "Imagem 3D do projeto"
+                },
+                {
+                    "photo": "end card",
+                    "vo": "Cento e sessenta mil euros. Para visitar, fale com o Paulo Taborda, da IAD Portugal.",
+                    "caption": "160.000 € · Paulo Taborda · IAD Portugal"
+                }
+            ],
+            "flags": [
+                "O anúncio diz 'Foto gerada por IA': confirmar que fotos são reais e quais são imagens do projeto. As imagens do projeto levam a legenda 'Imagem 3D do projeto' e não podem ser apresentadas como estado atual.",
+                "A casa está em remodelação: confirmar se os 160.000 € incluem a remodelação terminada (T2 pronto) ou se é o preço no estado atual.",
+                "Nos detalhes aparece 'property.feature.heating' (campo por traduzir). Ficou de fora o aquecimento, falta confirmar se existe e de que tipo.",
+                "'Geminada' só aparece no título do anúncio, não na descrição. Confirmar antes de publicar.",
+                "Logo for IAD Portugal not found — add it by hand."
+            ],
+            "message": "Boa tarde Sr. Paulo, fiz este vídeo da sua moradia em Póvoa e Meadas para ver como os seus imóveis podem ficar em vídeo. É seu, pode publicar à vontade nas redes e no anúncio.\n\nCada imóvel novo que angariar recebe o vídeo até ao dia útil seguinte, e nos meses mais calmos refaço vídeos dos imóveis que já tem, para que voltem aos olhos dos compradores (até 10 vídeos por mês). O preço normal é 100€ + IVA por mês, mas para os próximos 10 clientes tenho um preço de lançamento de 75€ + IVA. Sem fidelização, e só paga depois de receber o primeiro vídeo.\n\nFaz sentido para si?",
+            "gender": "m",
+            "title": "Moradia geminada de 72 m² em Nossa Senhora da Graça de Póvoa e Meadas",
+            "price": 160000,
+            "details": {
+                "Preço": "160 000 €",
+                "Localização": "Nossa Senhora da Graça de Póvoa e Meadas, 7320-011",
+                "Referência": "1032852",
+                "Área Bruta m²": "72",
+                "Área Total do Lote m²": "36",
+                "Ano de Construção": 1970,
+                "Características": "72 m² área bruta, 72 m² úteis, Varanda, Ligação TV, property.feature.heating, Construído em 1970"
+            }
+        },
+        "agent_photo": null,
+        "script_notes": "",
+        "background": "auto",
+        "lead": "",
+        "instructions": "Make sure the intro information always includes the name of the agent - Paulo Taborda - and phone number - +351965135564. Agency: IAD Portugal.\nThe agent's photo is Paulo Taborda.png.\nOn-screen hook for the first frame: «Uma casa no centro da aldeia de Póvoa e Meadas.».\n\nSuggested scenes (photo → on-screen caption):\n- fachada da casa na rua da aldeia → «Póvoa e Meadas»\n- rua ou vista da aldeia → «Coração do Alentejo»\n- fachada mostrando os dois pisos → «Dois pisos»\n- interior em obra → «Em remodelação»\n- sala (imagem gerada do projeto) → «Imagem 3D do projeto»\n- varanda → «Com varanda»\n- quarto (imagem gerada do projeto) → «Imagem 3D do projeto»\n- end card → «160.000 € · Paulo Taborda · IAD Portugal»\n\nHere are the house details:\n\nMoradia geminada de 72 m² em Nossa Senhora da Graça de Póvoa e Meadas\nPreço\n160 000 €\nLocalização\nNossa Senhora da Graça de Póvoa e Meadas, 7320-011\nReferência\n1032852\nÁrea Bruta m²\n72\nÁrea Total do Lote m²\n36\nAno de Construção\n1970\nCaracterísticas\n72 m² área bruta, 72 m² úteis, Varanda, Ligação TV, property.feature.heating, Construído em 1970\n\nDescrição\nMORADIA T2 EM REMODELAÇÃO | PÓVOA E MEADAS \n\nNo coração do Alentejo, onde o tempo abranda e a vida ganha outra tranquilidade.\n\nMoradia de dois pisos, Rés-do-chão e 1.º andar.  Atualmente em remodelação, com projeto pensado para uma confortável configuração T2.\n\nLocalizada no centro da aldeia de Póvoa e Meadas, oferece a combinação cada vez mais procurada entre autenticidade, sossego e qualidade de vida.\n\nUm imóvel para quem procura uma casa com identidade, num ambiente de ar puro, tranquilidade e verdadeira vida de aldeia seja para habitação própria, refúgio de fim de semana ou investimento.\n\nUma casa em transformação. Um novo capítulo a começar. Foto gerada por IA.",
+        "fewer_images": false,
+        "no_images": false,
+        "only_reference_images": true,
+        "auto_finish": false,
+        "free_sfx": false,
+        "musica": "upbeat-corporate.mp3",
+        "musica_volume": 0.1,
+        "captions": "none",
+        "beat_opening": null,
+        "voice_takes": null,
+        "property": null,
+        "research": {
+            "topic": "Village house for sale in Póvoa e Meadas, Castelo de Vide (Alto Alentejo, Portugal)",
+            "summary": "A semi-detached two-storey house built in 1970 in the centre of Póvoa e Meadas is for sale at €160,000. It has 72 m² and a balcony, and a renovation project will make it a two-bedroom (T2) home. Póvoa e Meadas is a rural parish of Castelo de Vide in Portalegre district, near the Póvoa dam on the Nisa river.",
+            "timeline": [
+                {
+                    "label": "Póvoa dam on the Nisa river completed",
+                    "sublabel": "1928"
+                },
+                {
+                    "label": "House built",
+                    "sublabel": "1970"
+                },
+                {
+                    "label": "Being renovated, planned as a T2",
+                    "sublabel": "2026"
+                }
+            ],
+            "stats": [
+                {
+                    "label": "Asking price",
+                    "value": 160000,
+                    "unit": "EUR"
+                },
+                {
+                    "label": "Area with balcony",
+                    "value": 72,
+                    "unit": "m²"
+                },
+                {
+                    "label": "Floors",
+                    "value": 2,
+                    "unit": "floors"
+                },
+                {
+                    "label": "Parishes in Castelo de Vide municipality",
+                    "value": 4,
+                    "unit": "parishes"
+                }
+            ],
+            "comparisons": [],
+            "keyPoints": [
+                "Póvoa e Meadas (officially Nossa Senhora da Graça de Póvoa e Meadas) is one of the 4 parishes of Castelo de Vide",
+                "Castelo de Vide is in Portalegre district, in the Alto Alentejo",
+                "The Póvoa dam on the Nisa river, a tributary of the Tagus, was completed in 1928",
+                "Semi-detached house on two floors (ground and first), with a balcony",
+                "Can be a home, a weekend retreat or an investment"
+            ],
+            "sources": [
+                "https://www.infopedia.pt/artigos/$castelo-de-vide",
+                "https://aldeiasportuguesas.pt/portalegre/castelo-de-vide/",
+                "https://cnpgb.apambiente.pt/gr_barragens/gbingles/FichasIng/PovoafichaIng.htm",
+                "https://structurae.net/en/structures/povoa-dam"
+            ]
+        },
+        "suggested": {
+            "title": "Village House in Póvoa e Meadas, Alentejo for €160,000",
+            "description": "A 1970 village house in the centre of Póvoa e Meadas, priced at €160,000.\n\nSemi-detached, two floors: ground floor and first floor.\nNow being renovated, with a plan to turn it into a comfortable 2-bedroom home.\n72 m² · balcony · heating · TV connection\nClean air and real village life in the heart of the Alentejo.\nLive here, use it for weekends, or buy it as an investment.\n\nTo book a viewing, contact Paulo Taborda (IAD Portugal): +351965135564",
+            "tags": [
+                "realestate",
+                "portugal",
+                "alentejo",
+                "povoaemeadas",
+                "casteloDeVide",
+                "villagehouse",
+                "casaalentejana",
+                "imoveisportugal",
+                "moradia",
+                "investimentoimobiliario",
+                "iadportugal",
+                "propertyforsale"
+            ]
+        },
+        "image_uploads": []
+    },
+    "id": "listing-r1032852-u5gir",
+    "created_at": "2026-10-21T15:02:52+00:00",
+    "updated_at": "2026-10-21T15:21:38+00:00",
+    "error": null,
+    "source_path": "clips/uploads/SbkW40STsNzAcdI6w1EUUNZK3GiUGuBFBNVgYwVg.mp3",
+    "images": [
+        {
+            "id": "img_58a0dc39",
+            "path": "clips/uploads/gQy0G0SVwiC06EpE7IgtwQ28LUGFF2wdOG721wyg.jpg",
+            "description": "Front facade of renovated two-storey white townhouse, yellow trim, wooden door, balcony with iAD for-sale sign, cobbled street.",
+            "name": "main.jpg",
+            "transparent": false,
+            "tone": "light",
+            "video": false
+        },
+        {
+            "id": "img_72f896bb",
+            "path": "clips/uploads/uJ4XXQuTFiVTS4QOXdfs9Ih7OfuO95mjERHXN1DF.jpg",
+            "description": "Village street view in Alentejo: whitewashed houses with yellow trim, cobblestones, the house with for-sale sign and balcony.",
+            "name": "01a0e8358b8e3d20d8dae7ddbb4922ef.jpg",
+            "transparent": false,
+            "tone": "mixed",
+            "video": false
+        },
+        {
+            "id": "img_8316a535",
+            "path": "clips/uploads/ZEwIckGlAj0li1rLRpy4URmxwg0Ts6vFa1DWRtFy.png",
+            "description": "Retrato do consultor Paulo Taborda, da IAD Portugal.",
+            "name": "Paulo Taborda.png",
+            "transparent": true,
+            "tone": "mixed",
+            "video": false
+        }
+    ],
+    "audio_path": "/Users/joaoferreira/Desktop/imocena/storage/app/private/clips/uploads/SbkW40STsNzAcdI6w1EUUNZK3GiUGuBFBNVgYwVg.mp3",
+    "transcript": {
+        "duration": 31.84000015258789,
+        "text": "Uma casa no centro da aldeia de Póvoa e Meadas, no coração do Alentejo, com ar puro e verdadeira vida de aldeia. Uma moradia geminada de dois pisos, rés do chão e primeiro andar, construída em 1970. Está em remodelação, com projeto para um T2 confortável. São 72 metros de área com varanda, para viver, para fins de semana ou para investir. 160 mil euros. Para visitar, fale com o Paulo Taborda, da IAD Portugal.",
+        "language": "portuguese",
+        "words": [
+            {
+                "word": "Uma",
+                "start": 0,
+                "end": 0.20000000298023224
+            },
+            {
+                "word": "casa",
+                "start": 0.20000000298023224,
+                "end": 0.5799999833106995
+            },
+            {
+                "word": "no",
+                "start": 0.5799999833106995,
+                "end": 0.8999999761581421
+            },
+            {
+                "word": "centro",
+                "start": 0.8999999761581421,
+                "end": 1.1399999856948853
+            },
+            {
+                "word": "da",
+                "start": 1.1399999856948853,
+                "end": 1.5800000429153442
+            },
+            {
+                "word": "aldeia",
+                "start": 1.5800000429153442,
+                "end": 1.6200000047683716
+            },
+            {
+                "word": "de",
+                "start": 1.6200000047683716,
+                "end": 2.0199999809265137
+            },
+            {
+                "word": "Póvoa",
+                "start": 2.0199999809265137,
+                "end": 2.240000009536743
+            },
+            {
+                "word": "e",
+                "start": 2.240000009536743,
+                "end": 2.380000114440918
+            },
+            {
+                "word": "Meadas",
+                "start": 2.380000114440918,
+                "end": 2.8399999141693115
+            },
+            {
+                "word": "no",
+                "start": 3.3399999141693115,
+                "end": 3.5199999809265137
+            },
+            {
+                "word": "coração",
+                "start": 3.5199999809265137,
+                "end": 3.880000114440918
+            },
+            {
+                "word": "do",
+                "start": 3.880000114440918,
+                "end": 4.139999866485596
+            },
+            {
+                "word": "Alentejo",
+                "start": 4.139999866485596,
+                "end": 4.71999979019165
+            },
+            {
+                "word": "com",
+                "start": 5.119999885559082,
+                "end": 5.239999771118164
+            },
+            {
+                "word": "ar",
+                "start": 5.239999771118164,
+                "end": 5.519999980926514
+            },
+            {
+                "word": "puro",
+                "start": 5.519999980926514,
+                "end": 5.860000133514404
+            },
+            {
+                "word": "e",
+                "start": 5.860000133514404,
+                "end": 6.360000133514404
+            },
+            {
+                "word": "verdadeira",
+                "start": 6.360000133514404,
+                "end": 6.960000038146973
+            },
+            {
+                "word": "vida",
+                "start": 6.960000038146973,
+                "end": 7.21999979019165
+            },
+            {
+                "word": "de",
+                "start": 7.21999979019165,
+                "end": 7.71999979019165
+            },
+            {
+                "word": "aldeia",
+                "start": 7.71999979019165,
+                "end": 8.300000190734863
+            },
+            {
+                "word": "Uma",
+                "start": 8.4399995803833,
+                "end": 8.579999923706055
+            },
+            {
+                "word": "moradia",
+                "start": 8.579999923706055,
+                "end": 8.920000076293945
+            },
+            {
+                "word": "geminada",
+                "start": 8.920000076293945,
+                "end": 9.520000457763672
+            },
+            {
+                "word": "de",
+                "start": 9.520000457763672,
+                "end": 9.760000228881836
+            },
+            {
+                "word": "dois",
+                "start": 9.760000228881836,
+                "end": 10.039999961853027
+            },
+            {
+                "word": "pisos",
+                "start": 10.039999961853027,
+                "end": 10.479999542236328
+            },
+            {
+                "word": "rés",
+                "start": 10.9399995803833,
+                "end": 11.039999961853027
+            },
+            {
+                "word": "do",
+                "start": 11.039999961853027,
+                "end": 11.359999656677246
+            },
+            {
+                "word": "chão",
+                "start": 11.359999656677246,
+                "end": 11.399999618530273
+            },
+            {
+                "word": "e",
+                "start": 11.399999618530273,
+                "end": 11.65999984741211
+            },
+            {
+                "word": "primeiro",
+                "start": 11.65999984741211,
+                "end": 11.960000038146973
+            },
+            {
+                "word": "andar",
+                "start": 11.960000038146973,
+                "end": 12.279999732971191
+            },
+            {
+                "word": "construída",
+                "start": 12.720000267028809,
+                "end": 13.239999771118164
+            },
+            {
+                "word": "em",
+                "start": 13.239999771118164,
+                "end": 13.65999984741211
+            },
+            {
+                "word": "1970",
+                "start": 13.65999984741211,
+                "end": 14.84000015258789
+            },
+            {
+                "word": "Está",
+                "start": 15.479999542236328,
+                "end": 15.579999923706055
+            },
+            {
+                "word": "em",
+                "start": 15.579999923706055,
+                "end": 15.779999732971191
+            },
+            {
+                "word": "remodelação",
+                "start": 15.779999732971191,
+                "end": 16.399999618530273
+            },
+            {
+                "word": "com",
+                "start": 16.579999923706055,
+                "end": 16.959999084472656
+            },
+            {
+                "word": "projeto",
+                "start": 16.959999084472656,
+                "end": 17.34000015258789
+            },
+            {
+                "word": "para",
+                "start": 17.34000015258789,
+                "end": 17.540000915527344
+            },
+            {
+                "word": "um",
+                "start": 17.540000915527344,
+                "end": 17.780000686645508
+            },
+            {
+                "word": "T2",
+                "start": 17.780000686645508,
+                "end": 18.239999771118164
+            },
+            {
+                "word": "confortável",
+                "start": 18.239999771118164,
+                "end": 19
+            },
+            {
+                "word": "São",
+                "start": 19.700000762939453,
+                "end": 19.739999771118164
+            },
+            {
+                "word": "72",
+                "start": 19.739999771118164,
+                "end": 20.5
+            },
+            {
+                "word": "metros",
+                "start": 20.5,
+                "end": 20.84000015258789
+            },
+            {
+                "word": "de",
+                "start": 20.84000015258789,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "área",
+                "start": 21.34000015258789,
+                "end": 21.34000015258789
+            },
+            {
+                "word": "com",
+                "start": 21.34000015258789,
+                "end": 21.700000762939453
+            },
+            {
+                "word": "varanda",
+                "start": 21.700000762939453,
+                "end": 22.040000915527344
+            },
+            {
+                "word": "para",
+                "start": 22.639999389648438,
+                "end": 22.739999771118164
+            },
+            {
+                "word": "viver",
+                "start": 22.739999771118164,
+                "end": 23.18000030517578
+            },
+            {
+                "word": "para",
+                "start": 23.559999465942383,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "fins",
+                "start": 23.8799991607666,
+                "end": 23.8799991607666
+            },
+            {
+                "word": "de",
+                "start": 23.8799991607666,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "semana",
+                "start": 24.399999618530273,
+                "end": 24.399999618530273
+            },
+            {
+                "word": "ou",
+                "start": 24.399999618530273,
+                "end": 24.799999237060547
+            },
+            {
+                "word": "para",
+                "start": 24.799999237060547,
+                "end": 25.059999465942383
+            },
+            {
+                "word": "investir",
+                "start": 25.059999465942383,
+                "end": 25.3799991607666
+            },
+            {
+                "word": "160",
+                "start": 26.040000915527344,
+                "end": 26.739999771118164
+            },
+            {
+                "word": "mil",
+                "start": 26.739999771118164,
+                "end": 27.020000457763672
+            },
+            {
+                "word": "euros",
+                "start": 27.020000457763672,
+                "end": 27.360000610351562
+            },
+            {
+                "word": "Para",
+                "start": 27.360000610351562,
+                "end": 28
+            },
+            {
+                "word": "visitar",
+                "start": 28,
+                "end": 28.68000030517578
+            },
+            {
+                "word": "fale",
+                "start": 29.100000381469727,
+                "end": 29.100000381469727
+            },
+            {
+                "word": "com",
+                "start": 29.100000381469727,
+                "end": 29.260000228881836
+            },
+            {
+                "word": "o",
+                "start": 29.260000228881836,
+                "end": 29.5
+            },
+            {
+                "word": "Paulo",
+                "start": 29.5,
+                "end": 29.700000762939453
+            },
+            {
+                "word": "Taborda",
+                "start": 29.700000762939453,
+                "end": 30.260000228881836
+            },
+            {
+                "word": "da",
+                "start": 30.459999084472656,
+                "end": 30.6200008392334
+            },
+            {
+                "word": "IAD",
+                "start": 30.6200008392334,
+                "end": 31
+            },
+            {
+                "word": "Portugal",
+                "start": 31,
+                "end": 31.559999465942383
+            }
+        ],
+        "segments": []
+    },
+    "plan": {
+        "duration": 31.84000015258789,
+        "mode": "dense",
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "transparent": false,
+        "scenes": [
+            {
+                "start": 0,
+                "end": 3.3,
+                "background": "ink",
+                "transitionIn": "cut",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "particle-image-assemble",
+                        "text": "Uma casa no centro da aldeia de Póvoa e Meadas.",
+                        "params": {
+                            "src": "img_58a0dc39",
+                            "count": "1800"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 3.3,
+                "end": 12.6,
+                "background": "ink",
+                "transitionIn": "crossfade",
+                "transitionOut": "whip",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-slide-caption",
+                        "text": "Coração do Alentejo",
+                        "params": {
+                            "src": "img_72f896bb",
+                            "from": 1,
+                            "to": 1.12,
+                            "fit": "cover",
+                            "radius": 18,
+                            "label": "Póvoa e Meadas · Castelo de Vide",
+                            "panY": "-4"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 12.6,
+                "end": 19.4,
+                "background": "vellum",
+                "transitionIn": "slide",
+                "transitionOut": "zoom",
+                "karaoke": true,
+                "punchWord": "remodelação",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "timeline",
+                        "text": "",
+                        "params": {
+                            "caption": "Em remodelação",
+                            "items": [
+                                {
+                                    "label": "Built",
+                                    "sublabel": "1970"
+                                },
+                                {
+                                    "label": "Renovation",
+                                    "sublabel": "Underway"
+                                },
+                                {
+                                    "label": "T2 project",
+                                    "sublabel": "2 bedrooms",
+                                    "highlight": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 19.4,
+                "end": 22.5,
+                "background": "ink",
+                "transitionIn": "zoom",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": null,
+                "present": null,
+                "layers": [
+                    {
+                        "type": "image-reveal",
+                        "text": "",
+                        "params": {
+                            "src": "img_72f896bb",
+                            "caption": "72 m² · Com varanda",
+                            "variant": "zoom"
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 22.5,
+                "end": 25.9,
+                "background": "papyrus",
+                "transitionIn": "crossfade",
+                "transitionOut": "slide",
+                "karaoke": true,
+                "punchWord": "investir",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "bullet-list",
+                        "text": "",
+                        "params": {
+                            "title": "Ideal for",
+                            "items": [
+                                "Full-time home",
+                                "Weekend retreat",
+                                "Investment"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "start": 25.9,
+                "end": 31.84,
+                "background": "ink",
+                "transitionIn": "slide",
+                "transitionOut": "crossfade",
+                "karaoke": true,
+                "punchWord": "160 mil euros",
+                "present": null,
+                "layers": [
+                    {
+                        "type": "card",
+                        "text": "",
+                        "params": {
+                            "title": "160.000 € · Paulo Taborda · IAD Portugal",
+                            "lines": [
+                                "+351965135564",
+                                "Ref. 1032852"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "background": "particle-drift"
+    },
+    "output_path": "/Users/joaoferreira/Desktop/imocena/storage/app/clips/listing-r1032852-u5gir/clip.mp4"
+}
