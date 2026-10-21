@@ -243,10 +243,10 @@ class VfxLabTest extends TestCase
             // Both subtabs are reachable from either page.
             $page->assertSee(route('clips-animados.sfx'))
                 ->assertSee(route('clips-animados.vfx'))
-                ->assertSee('SFX Studio')
-                ->assertSee('VFX Lab')
+                ->assertSee('Estúdio SFX')
+                ->assertSee('Laboratório VFX')
                 // One consolidated sidebar entry, not two.
-                ->assertSee('Effects Studio')
+                ->assertSee('Estúdio de efeitos')
                 ->assertSee('SFX · VFX', false);
         }
     }

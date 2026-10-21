@@ -21,7 +21,7 @@ use Livewire\WithFileUploads;
  * Deliberately NOT in the side menu yet: reachable at /avatar-gen only.
  */
 #[Layout('components.layouts.app')]
-#[Title('Avatar Gen')]
+#[Title('Avatares')]
 class AvatarGen extends Component
 {
     use WithFileUploads;
@@ -44,11 +44,11 @@ class AvatarGen extends Component
             'video' => 'required|file|mimes:mp4,mov,webm,m4v|max:'.(self::VIDEO_MAX_MB * 1024),
             'audio' => 'required|file|mimes:mp3,wav,m4a,aac,ogg|max:51200',
         ], [
-            'video.required' => 'Pick the video whose lips should move.',
-            'video.mimes' => 'The video has to be .mp4, .mov, .webm or .m4v.',
-            'video.max' => 'The video has to be under '.self::VIDEO_MAX_MB.'MB.',
-            'audio.required' => 'Pick the audio to lip-sync to.',
-            'audio.mimes' => 'Unsupported audio format — use mp3, wav, m4a, aac or ogg.',
+            'video.required' => 'Escolha o vídeo cujos lábios se devem mexer.',
+            'video.mimes' => 'O vídeo tem de ser .mp4, .mov, .webm ou .m4v.',
+            'video.max' => 'O vídeo tem de ter menos de '.self::VIDEO_MAX_MB.'MB.',
+            'audio.required' => 'Escolha o áudio a sincronizar.',
+            'audio.mimes' => 'Formato de áudio não suportado — use mp3, wav, m4a, aac ou ogg.',
         ]);
 
         // Sync Lipsync 2 Pro documents no duration limit — the bill does. At
@@ -57,8 +57,8 @@ class AvatarGen extends Component
         $segundos = app(FfmpegVideoCompositor::class)->probeDuration($this->video->getRealPath());
         $maximo = self::maxSegundos();
         if ($segundos > $maximo) {
-            $this->addError('video', 'That video is '.round($segundos).'s — the ceiling is '.$maximo.'s (it would cost ≈$'
-                .number_format(GenerateLipsyncJob::preco($segundos), 2).'). Trim it, or raise FAL_LIPSYNC_MAX_SECONDS.');
+            $this->addError('video', 'Esse vídeo tem '.round($segundos).'s — o limite é '.$maximo.'s (custaria ≈$'
+                .number_format(GenerateLipsyncJob::preco($segundos), 2).'). Corte-o, ou aumente FAL_LIPSYNC_MAX_SECONDS.');
 
             return;
         }

@@ -25,7 +25,7 @@ use Livewire\WithFileUploads;
  * per-effect sound. Built-ins and custom effects share the same store.
  */
 #[Layout('components.layouts.app')]
-#[Title('SFX Studio')]
+#[Title('Estúdio SFX')]
 class ClipsAnimadosSfx extends Component
 {
     use WithFileUploads;
@@ -88,17 +88,17 @@ class ClipsAnimadosSfx extends Component
     {
         $this->validate(
             ['importFile' => 'required|file|max:51200'],
-            ['importFile.required' => 'Choose an export file first.'],
+            ['importFile.required' => 'Escolha primeiro um ficheiro exportado.'],
         );
 
         try {
             $payload = json_decode((string) file_get_contents($this->importFile->getRealPath()), true);
             if (! is_array($payload)) {
-                throw new \RuntimeException('The file is not valid JSON.');
+                throw new \RuntimeException('O ficheiro não é JSON válido.');
             }
             $n = $port->import($payload);
         } catch (\Throwable $e) {
-            $this->dispatch('toast', message: 'Import failed: '.$e->getMessage(), type: 'erro');
+            $this->dispatch('toast', message: 'A importação falhou: '.$e->getMessage(), type: 'erro');
 
             return;
         }
@@ -106,12 +106,12 @@ class ClipsAnimadosSfx extends Component
         $this->reset('importFile');
 
         if ($n === 0) {
-            $this->dispatch('toast', message: 'No effects found in that file.', type: 'erro');
+            $this->dispatch('toast', message: 'Não foram encontrados efeitos nesse ficheiro.', type: 'erro');
 
             return;
         }
 
-        $this->dispatch('toast', message: $n.' effect'.($n === 1 ? '' : 's').' imported — rendering previews…', type: 'ok');
+        $this->dispatch('toast', message: $n.' efeito'.($n === 1 ? '' : 's').' importado'.($n === 1 ? '' : 's').' — a renderizar pré-visualizações…', type: 'ok');
     }
 
     /**
@@ -186,8 +186,8 @@ class ClipsAnimadosSfx extends Component
         }
 
         $this->dispatch('toast', type: $n ? 'ok' : 'erro', message: $n
-            ? $n.' effect'.($n === 1 ? '' : 's').' being rewritten for portrait, half and landscape…'
-            : 'No live effects to rewrite.');
+            ? $n.' efeito'.($n === 1 ? '' : 's').' a ser reescrito'.($n === 1 ? '' : 's').' para vertical, meio ecrã e horizontal…'
+            : 'Não há efeitos ativos para reescrever.');
     }
 
     /** How many effects are sitting failed with a working version to go back to. */
@@ -223,8 +223,8 @@ class ClipsAnimadosSfx extends Component
         }
 
         $this->dispatch('toast', type: $n ? 'ok' : 'erro', message: $n
-            ? $n.' effect'.($n === 1 ? '' : 's').' brought back.'
-            : 'Nothing to bring back — no failed effect has a working version stored.');
+            ? $n.' efeito'.($n === 1 ? '' : 's').' recuperado'.($n === 1 ? '' : 's').'.'
+            : 'Nada a recuperar — nenhum efeito com falha tem uma versão funcional guardada.');
     }
 
     /** The last component known to work for an effect: its own, else its newest snapshot. */
@@ -314,8 +314,8 @@ class ClipsAnimadosSfx extends Component
         $this->validate(
             ['sfxEditPrompt' => 'required|string|min:8|max:600'],
             [
-                'sfxEditPrompt.required' => 'Describe the change you want.',
-                'sfxEditPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+                'sfxEditPrompt.required' => 'Descreva a alteração que quer.',
+                'sfxEditPrompt.min' => 'Dê um pouco mais de detalhe (pelo menos 8 caracteres).',
             ],
         );
 
@@ -342,7 +342,7 @@ class ClipsAnimadosSfx extends Component
             $effect = $this->effects()->create([
                 'prompt' => trim($this->sfxEditPrompt),
                 'slug' => $slug,
-                'display_name' => Str::title(str_replace('-', ' ', $slug)).' (custom)',
+                'display_name' => Str::title(str_replace('-', ' ', $slug)).' (personalizado)',
                 'description' => "Override of the built-in {$slug}.",
                 'param_schema' => '{}',
                 'tsx' => '',
@@ -564,13 +564,13 @@ class ClipsAnimadosSfx extends Component
         $this->validate(
             ['sfxPrompt' => 'required|string|min:8|max:600'],
             [
-                'sfxPrompt.required' => 'Describe the effect you want.',
-                'sfxPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+                'sfxPrompt.required' => 'Descreva o efeito que quer.',
+                'sfxPrompt.min' => 'Dê um pouco mais de detalhe (pelo menos 8 caracteres).',
             ],
         );
         $this->validate(
             ['sfxReference' => 'nullable|image|max:10240'],
-            ['sfxReference.image' => 'The reference must be an image.', 'sfxReference.max' => 'Image too large (max 10 MB).'],
+            ['sfxReference.image' => 'A referência tem de ser uma imagem.', 'sfxReference.max' => 'Imagem demasiado grande (máx. 10 MB).'],
         );
 
         $effect = $this->effects()->create([
@@ -653,8 +653,8 @@ class ClipsAnimadosSfx extends Component
             'usoImagens.*' => 'nullable|image|max:20480',
             'usoDuracao' => 'required|numeric|min:1|max:30',
         ], [
-            'usoImagens.*.image' => 'That is not an image.',
-            'usoImagens.*.max' => 'Image too large (max 20 MB).',
+            'usoImagens.*.image' => 'Isso não é uma imagem.',
+            'usoImagens.*.max' => 'Imagem demasiado grande (máx. 20 MB).',
         ]);
 
         $dir = $library->previewDir().'/uses';
@@ -778,9 +778,9 @@ class ClipsAnimadosSfx extends Component
         $this->validate(
             ['audioUpload' => 'required|file|mimetypes:audio/mpeg,audio/wav,audio/x-wav,audio/mp4,audio/aac,audio/ogg,audio/webm|max:10240'],
             [
-                'audioUpload.required' => 'Choose an audio file.',
-                'audioUpload.mimetypes' => 'That is not a supported audio file.',
-                'audioUpload.max' => 'Audio too large (max 10 MB).',
+                'audioUpload.required' => 'Escolha um ficheiro de áudio.',
+                'audioUpload.mimetypes' => 'Esse ficheiro de áudio não é suportado.',
+                'audioUpload.max' => 'Áudio demasiado grande (máx. 10 MB).',
             ],
         );
 
@@ -796,7 +796,7 @@ class ClipsAnimadosSfx extends Component
         }
         $this->validate(
             ['audioGenPrompt' => 'required|string|min:3|max:200'],
-            ['audioGenPrompt.required' => 'Describe the sound you want.'],
+            ['audioGenPrompt.required' => 'Descreva o som que quer.'],
         );
 
         // ponytail: sync HTTP call — short SFX return in a few seconds. Move to a
@@ -806,7 +806,7 @@ class ClipsAnimadosSfx extends Component
             $sfx->generate(trim($this->audioGenPrompt), $tmp);
             $this->effects()->putAudio($this->audioEditingSlug, $tmp, 'mp3');
         } catch (\Throwable $e) {
-            $this->addError('audioGenPrompt', 'Generation failed: '.$e->getMessage());
+            $this->addError('audioGenPrompt', 'A geração falhou: '.$e->getMessage());
 
             return;
         } finally {

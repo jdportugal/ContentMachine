@@ -22,10 +22,10 @@ class VfxStore
 {
     /** Aspect presets offered by the VFX Lab: key => [label, width, height]. */
     public const ASPECTS = [
-        '16:9' => ['label' => '16:9 · landscape', 'width' => 1920, 'height' => 1080],
+        '16:9' => ['label' => '16:9 · horizontal', 'width' => 1920, 'height' => 1080],
         '9:16' => ['label' => '9:16 · vertical', 'width' => 1080, 'height' => 1920],
-        '1:1' => ['label' => '1:1 · square', 'width' => 1080, 'height' => 1080],
-        '4:5' => ['label' => '4:5 · portrait', 'width' => 1080, 'height' => 1350],
+        '1:1' => ['label' => '1:1 · quadrado', 'width' => 1080, 'height' => 1080],
+        '4:5' => ['label' => '4:5 · retrato', 'width' => 1080, 'height' => 1350],
     ];
 
     public function __construct(private ProjectContext $context) {}

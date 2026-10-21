@@ -4,7 +4,7 @@
 <label class="cursor-pointer flex items-start gap-2 rounded-sm border p-3 transition {{ $semImagens ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
     <input type="checkbox" wire:model.live="semImagens" class="accent-teal mt-1" />
     <span>
-        <span class="block font-display text-lg text-ink leading-tight">No images</span>
-        <span class="block text-ink-soft text-xs">No pictures at all — nothing generated, nothing filmed, nothing to approve. Scenes carry cards, lists, charts and diagrams instead.</span>
+        <span class="block font-display text-lg text-ink leading-tight">Sem imagens</span>
+        <span class="block text-ink-soft text-xs">Nenhuma imagem — nada gerado, nada filmado, nada para aprovar. As cenas usam cartões, listas, gráficos e diagramas.</span>
     </span>
 </label>

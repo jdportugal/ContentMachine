@@ -17,7 +17,7 @@ use Livewire\Component;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 #[Layout('components.layouts.app')]
-#[Title('Settings')]
+#[Title('Definições')]
 class Definicoes extends Component
 {
     /** @var array<string,string> */
@@ -189,14 +189,20 @@ class Definicoes extends Component
             'conta.email' => ['required', 'string', 'email', 'max:255'],
             'conta.atual' => ['required', 'string'],
             'conta.nova' => ['nullable', 'string', 'min:12', 'confirmed'],
+        ], [
+            'conta.email.required' => 'Indique o email.',
+            'conta.email.email' => 'Indique um email válido.',
+            'conta.atual.required' => 'Indique a palavra-passe atual.',
+            'conta.nova.min' => 'A nova palavra-passe tem de ter pelo menos 12 caracteres.',
+            'conta.nova.confirmed' => 'As palavras-passe não coincidem.',
         ], attributes: [
             'conta.email' => 'email',
-            'conta.atual' => 'current password',
-            'conta.nova' => 'new password',
+            'conta.atual' => 'palavra-passe atual',
+            'conta.nova' => 'nova palavra-passe',
         ]);
 
         if (! Hash::check($this->conta['atual'], $utilizador->password)) {
-            throw ValidationException::withMessages(['conta.atual' => 'That is not your current password.']);
+            throw ValidationException::withMessages(['conta.atual' => 'Essa não é a sua palavra-passe atual.']);
         }
 
         $utilizador->email = $this->conta['email'];
@@ -236,7 +242,7 @@ class Definicoes extends Component
 
         $conta = $contas[0] ?? null;
         if (! is_array($conta)) {
-            $this->dispatch('toast', message: 'Zernio has no connected Instagram account yet — connect it on zernio.com first.', type: 'erro');
+            $this->dispatch('toast', message: 'O Zernio ainda não tem uma conta de Instagram ligada — ligue-a primeiro em zernio.com.', type: 'erro');
 
             return;
         }
@@ -244,7 +250,7 @@ class Definicoes extends Component
         $perfil = $conta['profileId'] ?? null; // expanded object or plain id
         $this->zernio['instagram'] = (string) ($conta['_id'] ?? '');
         $this->zernio['profile'] = (string) (is_array($perfil) ? ($perfil['_id'] ?? '') : ($perfil ?? ''));
-        $this->dispatch('toast', message: 'Zernio ids filled from @'.($conta['username'] ?? '?').' — remember to Save.');
+        $this->dispatch('toast', message: 'Ids do Zernio preenchidos a partir de @'.($conta['username'] ?? '?').' — não se esqueça de Guardar.');
     }
 
     /**
@@ -331,16 +337,16 @@ class Definicoes extends Component
         $opcoes = [];
 
         foreach (config('contentmachine.passos', []) as $passo => $meta) {
-            $lista = ['' => 'auto (default chain)'];
+            $lista = ['' => 'auto (cadeia por omissão)'];
 
             foreach (config('contentmachine.passos_fornecedores.'.$meta['kind'], []) as $fornecedor) {
                 if ($fornecedor === 'local') {
-                    $lista['local'] = 'local Whisper (no key needed)';
+                    $lista['local'] = 'Whisper local (sem chave)';
 
                     continue;
                 }
                 foreach ($this->chavesGuardadas[$fornecedor] ?? [] as $i => $chave) {
-                    $lista[$chave['id']] = $fornecedor.' · '.($chave['label'] ?: 'key '.($i + 1));
+                    $lista[$chave['id']] = $fornecedor.' · '.($chave['label'] ?: 'chave '.($i + 1));
                 }
             }
 
@@ -376,17 +382,17 @@ class Definicoes extends Component
 
     public function iniciarWorker(string $queue, QueueWorkers $workers): void
     {
-        $this->acaoWorker($workers, $queue, 'start', 'started', 'could not be started');
+        $this->acaoWorker($workers, $queue, 'start', 'iniciado', 'não pôde ser iniciado');
     }
 
     public function pararWorker(string $queue, QueueWorkers $workers): void
     {
-        $this->acaoWorker($workers, $queue, 'stop', 'stopped', 'was not running');
+        $this->acaoWorker($workers, $queue, 'stop', 'parado', 'não estava a correr');
     }
 
     public function reiniciarWorker(string $queue, QueueWorkers $workers): void
     {
-        $this->acaoWorker($workers, $queue, 'restart', 'restarted', 'could not be restarted');
+        $this->acaoWorker($workers, $queue, 'restart', 'reiniciado', 'não pôde ser reiniciado');
     }
 
     /**
@@ -400,7 +406,7 @@ class Definicoes extends Component
     private function acaoWorker(QueueWorkers $workers, string $queue, string $acao, string $ok, string $falha): void
     {
         if (! $workers->isQueue($queue)) {
-            $this->dispatch('toast', message: 'Unknown queue.', type: 'erro');
+            $this->dispatch('toast', message: 'Fila desconhecida.', type: 'erro');
 
             return;
         }
@@ -416,8 +422,8 @@ class Definicoes extends Component
         $this->dispatch(
             'toast',
             message: $feito
-                ? 'Worker for «'.$queue.'» '.$ok.'.'
-                : 'Worker for «'.$queue.'» '.$falha.'.',
+                ? 'Worker da fila «'.$queue.'» '.$ok.'.'
+                : 'Worker da fila «'.$queue.'» '.$falha.'.',
             type: $feito ? 'ok' : 'erro',
         );
     }

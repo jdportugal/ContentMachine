@@ -47,13 +47,13 @@ class ProjectResourcesPanel extends Component
             'agent.email' => 'nullable|email|max:120',
             'agent.licence' => 'nullable|string|max:60',
             'extras.*.description' => 'required|string|max:300',
-        ], ['extras.*.description.required' => 'Say what the image shows — the planner reads it.']);
+        ], ['extras.*.description.required' => 'Diga o que a imagem mostra — o planeador lê isto.']);
         $this->resources()->putAgent($this->agent);
         $this->resources()->putMusic($this->music);
         foreach ($this->extras as $e) {
             $this->resources()->describeImage($e['file'], $e['description']);
         }
-        $this->dispatch('toast', type: 'ok', message: 'Project resources saved.');
+        $this->dispatch('toast', type: 'ok', message: 'Recursos do projeto guardados.');
     }
 
     public function updatedAgentPhoto(): void
@@ -83,7 +83,7 @@ class ProjectResourcesPanel extends Component
         $this->validate([
             'newImage' => 'required|image|max:20480',
             'newImageDesc' => 'required|string|max:300',
-        ], ['newImageDesc.required' => 'Say what the image shows — the planner reads it.']);
+        ], ['newImageDesc.required' => 'Diga o que a imagem mostra — o planeador lê isto.']);
         $this->resources()->addImage($this->newImage->getRealPath(), $this->newImage->extension(), $this->newImageDesc);
         $this->reset('newImage', 'newImageDesc');
         $this->loadExtras();

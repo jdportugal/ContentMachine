@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Design System')]
+#[Title('Sistema de design')]
 class DesignSystem extends Component
 {
     use WithFileUploads;
@@ -52,14 +52,14 @@ class DesignSystem extends Component
         $this->validate([
             'ficheiro' => 'required|file|max:1024|mimetypes:text/plain,text/markdown,text/x-markdown',
         ], [
-            'ficheiro.required' => 'Choose a .md file.',
-            'ficheiro.max' => 'The file is too large (maximum 1 MB).',
-            'ficheiro.mimetypes' => 'The file must be Markdown/text (.md).',
-        ], ['ficheiro' => 'file']);
+            'ficheiro.required' => 'Escolha um ficheiro .md.',
+            'ficheiro.max' => 'O ficheiro é demasiado grande (máximo 1 MB).',
+            'ficheiro.mimetypes' => 'O ficheiro tem de ser Markdown/texto (.md).',
+        ], ['ficheiro' => 'ficheiro']);
 
         $this->conteudo = (string) file_get_contents($this->ficheiro->getRealPath());
         $this->ficheiro = null;
-        $this->dispatch('toast', message: 'File loaded — review and save.', type: 'ok');
+        $this->dispatch('toast', message: 'Ficheiro carregado — reveja e guarde.', type: 'ok');
     }
 
     public function guardar(DesignSystemRepository $design, DesignThemeExtractor $extractor): void
@@ -86,8 +86,8 @@ class DesignSystem extends Component
         $this->guardado = now()->timezone(config('app.timezone'))->translatedFormat('H:i');
         $this->atualizado = $design->updatedAt();
         $this->dispatch('toast', type: 'ok', message: $designMudou
-            ? 'Design system saved and theme extracted.'
-            : 'Animation instructions saved.');
+            ? 'Sistema de design guardado e tema extraído.'
+            : 'Instruções de animação guardadas.');
     }
 
     public function render()

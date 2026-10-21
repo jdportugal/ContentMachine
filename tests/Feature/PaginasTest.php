@@ -21,10 +21,10 @@ class PaginasTest extends TestCase
     {
         return [
             'portal' => ['/imoveis', 'Os meus vídeos'],
-            'animated-clips' => ['/clips-animados', 'Animated Clips'],
-            'assets' => ['/ativos', 'Assets'],
-            'design-system' => ['/design-system', 'Design System'],
-            'settings' => ['/definicoes', 'Settings'],
+            'animated-clips' => ['/clips-animados', 'Imóveis'],
+            'assets' => ['/ativos', 'Recursos'],
+            'design-system' => ['/design-system', 'Sistema de design'],
+            'settings' => ['/definicoes', 'Definições'],
         ];
     }
 

@@ -31,6 +31,7 @@ class AfterIntroSetting extends Component
     {
         $this->validate(
             ['afterIntroUpload' => 'required|file|max:1048576'],
+            ['afterIntroUpload.required' => 'Escolha um vídeo.', 'afterIntroUpload.file' => 'Escolha um vídeo.', 'afterIntroUpload.max' => 'O vídeo é demasiado grande (máx. 1 GB).'],
         );
         // ffprobe is the real check: a file it can't read as video would fail the render.
         try {
@@ -46,7 +47,7 @@ class AfterIntroSetting extends Component
 
     public function updatedAfterIntroLine(): void
     {
-        $this->validate(['afterIntroLine' => 'nullable|string|max:200']);
+        $this->validate(['afterIntroLine' => 'nullable|string|max:200'], ['afterIntroLine.max' => 'A frase pode ter no máximo 200 caracteres.']);
         $this->effects()->putAfterIntroLine($this->afterIntroLine);
     }
 

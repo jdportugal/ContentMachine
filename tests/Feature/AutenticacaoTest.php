@@ -199,7 +199,7 @@ class AutenticacaoTest extends TestCase
         $this->get('/register')
             ->assertOk()
             ->assertDontSee('Registration is closed')
-            ->assertSee('Create account');
+            ->assertSee('Criar conta');
     }
 
     public function test_registo_exige_password_forte_e_email_unico(): void

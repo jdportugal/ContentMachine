@@ -15,12 +15,12 @@
      x-show="open" x-cloak x-transition.opacity
      class="fixed inset-0 z-[60] bg-ink/95 backdrop-blur-sm flex items-center justify-center"
      @click.self="fechar()">
-    <button @click="fechar()" title="Close (Esc)"
+    <button @click="fechar()" title="Fechar (Esc)"
             class="absolute top-3 right-5 text-papyrus/70 hover:text-papyrus text-4xl leading-none">×</button>
-    <button x-show="i > 0" @click.stop="ant()" title="Previous (←)"
+    <button x-show="i > 0" @click.stop="ant()" title="Anterior (←)"
             class="absolute left-2 md:left-8 text-papyrus/60 hover:text-papyrus text-6xl leading-none select-none px-3">‹</button>
     <img :src="imgs[i]" class="max-h-[92vh] max-w-[88vw] object-contain rounded-sm shadow-2xl border border-papyrus/10">
-    <button x-show="i < imgs.length - 1" @click.stop="prox()" title="Next (→)"
+    <button x-show="i < imgs.length - 1" @click.stop="prox()" title="Seguinte (→)"
             class="absolute right-2 md:right-8 text-papyrus/60 hover:text-papyrus text-6xl leading-none select-none px-3">›</button>
     <div x-show="imgs.length > 1" x-text="(i + 1) + ' / ' + imgs.length"
          class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs text-papyrus/60"></div>

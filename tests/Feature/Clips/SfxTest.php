@@ -332,7 +332,7 @@ class SfxTest extends TestCase
         ]);
 
         Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
-            ->assertSee('Restore a working version')
+            ->assertSee('Repor uma versão funcional')
             ->call('reverterSfx', $effect->id(), 0);
 
         $depois = $this->effects()->find($effect->id());
@@ -1136,8 +1136,8 @@ class SfxTest extends TestCase
         Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
             ->call('abrirHistorico', $effect->id())
             ->assertSet('historyId', $effect->id())
-            ->assertSee('Version history')
-            ->assertSee('restore');
+            ->assertSee('Histórico de versões')
+            ->assertSee('repor');
     }
 
     public function test_detail_page_resolves_a_custom_effect(): void
@@ -1151,8 +1151,8 @@ class SfxTest extends TestCase
         Livewire::test(ClipsAnimadosSfx::class, ['key' => $effect->id()])
             ->assertSet('detailKey', $effect->id())
             ->assertSee('Neon Pulse')
-            ->assertSee('Refine with AI')
-            ->assertSee('Delete');
+            ->assertSee('Melhorar com IA')
+            ->assertSee('Apagar');
     }
 
     public function test_detail_page_resolves_a_builtin_by_slug(): void
@@ -1161,8 +1161,8 @@ class SfxTest extends TestCase
 
         Livewire::test(ClipsAnimadosSfx::class, ['key' => 'seal-stamp'])
             ->assertSet('detailKey', 'seal-stamp')
-            ->assertSee('built-in')
-            ->assertSee('Customize with AI');
+            ->assertSee('incorporado')
+            ->assertSee('Personalizar com IA');
     }
 
     public function test_deleting_from_the_detail_page_redirects_to_the_gallery(): void

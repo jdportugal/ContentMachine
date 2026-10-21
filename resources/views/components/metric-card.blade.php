@@ -3,7 +3,7 @@
     'value',
     'delta' => null,      // e.g.: +12.4  (percentage)
     'previous' => null,   // the same figure a day earlier, already formatted
-    'previousLabel' => 'yesterday',
+    'previousLabel' => 'ontem',
     'unit' => null,
     'accent' => '#2F5A85',
 ])
@@ -29,7 +29,7 @@
     @if ($delta !== null)
         <div class="mt-1.5 font-mono text-xs {{ $deltaColor }}">
             {{ $deltaArrow }} {{ $deltaNum !== null ? number_format(abs($deltaNum), 1).'%' : $delta }}
-            <span class="text-ink-faint">vs. previous period</span>
+            <span class="text-ink-faint">vs. período anterior</span>
         </div>
     @endif
 </div>

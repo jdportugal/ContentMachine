@@ -1,16 +1,16 @@
 <div>
     <x-page-header
         eyebrow="Tomus · IX"
-        title="Design System"
+        title="Sistema de design"
         cota="006.1 · ACM · '26"
-        lead="The brand identity applied to generated content — animated clips and posts. Stored in the vault and injected into the generators' prompts. It does not change the design of the application itself." />
+        lead="A identidade da marca aplicada ao conteúdo gerado — vídeos animados e publicações. Guardada no cofre e injetada nos prompts dos geradores. Não altera o design da própria aplicação." />
 
     <form wire:submit="guardar" class="space-y-6">
         {{-- Load a .md --}}
-        <x-panel eyebrow="Seed" title="Load design.md" glyph="⬆">
+        <x-panel eyebrow="Ponto de partida" title="Carregar design.md" glyph="⬆">
             <p class="text-ink-soft -mt-2 mb-4">
-                Load a Markdown file to fill the editor. Nothing is saved until you press
-                <span class="text-teal">Save</span> — so you can review first.
+                Carregue um ficheiro Markdown para preencher o editor. Nada é guardado até carregar em
+                <span class="text-teal">Guardar</span> — assim pode rever primeiro.
             </p>
             <div class="flex flex-wrap items-center gap-3">
                 <input type="file" wire:model="ficheiro" accept=".md,.markdown,text/markdown"
@@ -22,21 +22,21 @@
                         class="rounded-sm border border-ink-soft/25 bg-surface/40 px-4 py-2 text-ink font-body
                                hover:border-teal transition disabled:opacity-40"
                         @disabled(! $ficheiro)>
-                    Load into editor
+                    Carregar no editor
                 </button>
-                <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">receiving…</span>
+                <span wire:loading wire:target="ficheiro" class="text-ink-faint font-mono text-xs">a receber…</span>
             </div>
             @error('ficheiro') <p class="mt-2 text-sm" style="color:#A93A48">{{ $message }}</p> @enderror
         </x-panel>
 
         {{-- Editor --}}
-        <x-panel eyebrow="Brain" title="design-system.md" glyph="✎">
+        <x-panel eyebrow="Cérebro" title="design-system.md" glyph="✎">
             <div class="flex items-center justify-between gap-3 -mt-2 mb-3">
                 <p class="text-ink-soft">
-                    Free-form Markdown — voice, palette, typography, composition rules. The clearer it is, the better the generator follows it.
+                    Markdown livre — tom de voz, paleta, tipografia, regras de composição. Quanto mais claro, melhor o gerador o segue.
                 </p>
                 @if ($atualizado)
-                    <span class="shrink-0 font-mono text-[0.68rem] text-ink-faint">saved · {{ $atualizado }}</span>
+                    <span class="shrink-0 font-mono text-[0.68rem] text-ink-faint">guardado · {{ $atualizado }}</span>
                 @endif
             </div>
             <textarea wire:model="conteudo" rows="24" spellcheck="false"
@@ -47,14 +47,14 @@
         </x-panel>
 
         {{-- Per-project direction appended to every animation prompt. --}}
-        <x-panel eyebrow="Applied to animations" title="Animation instructions" glyph="✦">
+        <x-panel eyebrow="Aplicado às animações" title="Instruções de animação" glyph="✦">
             <p class="text-ink-soft -mt-2 mb-3">
-                Extra direction added to the end of the planner's prompt for <strong>every clip in this project</strong> —
-                the look, the pacing, what to avoid. This is how one project animates differently from another.
-                A single clip can override it from its own «instructions» box when you create it.
+                Indicações extra acrescentadas ao fim do prompt do planeador para <strong>todos os vídeos deste projeto</strong> —
+                o visual, o ritmo, o que evitar. É assim que um projeto se anima de forma diferente de outro.
+                Um vídeo pode substituí-las na sua própria caixa de «instruções» ao ser criado.
             </p>
             <textarea wire:model="estilo" rows="14" spellcheck="false"
-                      placeholder="e.g. Open on a dark frame. Prefer diagrams over charts. Never use the terminal layer. Keep captions to four words."
+                      placeholder="ex. Abrir com um fundo escuro. Preferir diagramas a gráficos. Nunca usar a camada de terminal. Legendas com no máximo quatro palavras."
                       class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-4 py-3
                              text-ink font-mono text-sm leading-relaxed resize-y
                              focus:border-teal focus:outline-none"></textarea>
@@ -63,14 +63,14 @@
 
         {{-- Extracted theme (what the animations will use) --}}
         @if ($tokens)
-            <x-panel eyebrow="Applied to animations" title="Extracted theme" glyph="❖">
+            <x-panel eyebrow="Aplicado às animações" title="Tema extraído" glyph="❖">
                 <p class="text-ink-soft -mt-2 mb-4">
-                    Colors, fonts and texture distilled from the design above. This is what the
-                    <span class="text-teal">Animated Clips</span> now use to match the brand.
+                    Cores, tipos de letra e textura extraídos do design acima. É isto que os vídeos de
+                    <span class="text-teal">Imóveis</span> usam agora para acompanhar a marca.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <div class="eyebrow mb-2">Palette</div>
+                        <div class="eyebrow mb-2">Paleta</div>
                         <div class="flex flex-wrap gap-2">
                             @foreach (($tokens['colors'] ?? []) as $nome => $cor)
                                 <div class="flex flex-col items-center gap-1">
@@ -81,12 +81,12 @@
                         </div>
                     </div>
                     <div>
-                        <div class="eyebrow mb-2">Typography &amp; texture</div>
+                        <div class="eyebrow mb-2">Tipografia e textura</div>
                         <dl class="font-mono text-sm space-y-1 text-ink-soft">
                             <div><span class="text-ink-faint">display:</span> {{ $tokens['fonts']['display'] ?? '—' }}</div>
                             <div><span class="text-ink-faint">body:</span> {{ $tokens['fonts']['body'] ?? '—' }}</div>
                             <div><span class="text-ink-faint">mono:</span> {{ $tokens['fonts']['mono'] ?? '—' }}</div>
-                            <div><span class="text-ink-faint">texture:</span> {{ $tokens['texture']['kind'] ?? 'paper' }}</div>
+                            <div><span class="text-ink-faint">textura:</span> {{ $tokens['texture']['kind'] ?? 'paper' }}</div>
                         </dl>
                     </div>
                 </div>
@@ -97,11 +97,11 @@
             <button type="submit" wire:loading.attr="disabled" wire:target="guardar"
                     class="rounded-sm border border-teal/50 bg-teal/10 px-5 py-2.5 text-ink font-display text-lg
                            hover:bg-teal/20 hover:border-teal transition disabled:opacity-50">
-                <span wire:loading.remove wire:target="guardar">Save</span>
-                <span wire:loading wire:target="guardar">Saving and extracting theme…</span>
+                <span wire:loading.remove wire:target="guardar">Guardar</span>
+                <span wire:loading wire:target="guardar">A guardar e a extrair o tema…</span>
             </button>
             @if ($guardado)
-                <span class="font-mono text-sm text-teal" wire:loading.remove wire:target="guardar">✓ saved at {{ $guardado }}</span>
+                <span class="font-mono text-sm text-teal" wire:loading.remove wire:target="guardar">✓ guardado às {{ $guardado }}</span>
             @endif
         </div>
     </form>

@@ -1,8 +1,8 @@
 {{-- Output frame for the clip. Same aspect presets the VFX Lab offers. --}}
 <div>
-    <label class="eyebrow block mb-2">Output format</label>
+    <label class="eyebrow block mb-2">Formato de saída</label>
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-        @foreach (array_merge(['auto' => ['label' => 'Match the video']], \App\Services\Clips\Store\VfxStore::ASPECTS) as $chave => $a)
+        @foreach (array_merge(['auto' => ['label' => 'Igual ao vídeo']], \App\Services\Clips\Store\VfxStore::ASPECTS) as $chave => $a)
             <label class="cursor-pointer flex flex-col items-center gap-1.5 rounded-sm border p-2 transition {{ $formato === $chave ? 'border-teal/50 bg-teal/5' : 'border-ink-soft/20 hover:border-ink-soft/40' }}">
                 {{-- .live, not deferred: the only selected-state feedback is the highlight
                      below, which is server-rendered — a deferred model leaves every option
@@ -19,6 +19,6 @@
             </label>
         @endforeach
     </div>
-    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">«Auto» composes at the video’s own shape. Any other crops the video to fill the chosen frame.</p>
+    <p class="mt-1 font-mono text-[0.6rem] text-ink-faint">«Auto» usa o formato do próprio vídeo. Qualquer outro corta o vídeo para preencher o formato escolhido.</p>
     @error('formato') <p class="mt-1 text-bad text-sm">{{ $message }}</p> @enderror
 </div>

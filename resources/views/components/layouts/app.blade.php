@@ -17,7 +17,7 @@
         {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
         <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
             <a href="{{ route('imoveis') }}" class="font-display text-2xl text-ink">Imocena</a>
-            <button type="button" @click="nav = !nav" aria-label="Toggle menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
+            <button type="button" @click="nav = !nav" aria-label="Abrir ou fechar o menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
         </header>
 
         {{-- Drawer backdrop (mobile) --}}
@@ -70,22 +70,22 @@
                     // unfold in the shelf while their parent is the active section.
                     $grupos = [
                         ['titulo' => null, 'itens' => [
-                            ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Imóveis',            'color' => '#F06052', 'glyph' => '⌂'],
+                            ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Portal do consultor',            'color' => '#F06052', 'glyph' => '⌂'],
                         ]],
                         ['titulo' => 'Criar', 'itens' => [
-                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],
-                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#05B8E6', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
-                                ['route' => 'clips-animados.sfx',         'label' => 'SFX Studio',  'match' => 'clips-animados.sfx*'],
-                                ['route' => 'clips-animados.vfx',         'label' => 'VFX Lab',     'match' => 'clips-animados.vfx*'],
-                                ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'match' => 'clips-animados.backgrounds'],
+                            ['route' => 'clips-animados',  'label' => 'Imóveis',           'sub' => 'Vídeos animados',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],
+                            ['route' => 'clips-animados.sfx', 'label' => 'Estúdio de efeitos', 'sub' => 'SFX · VFX · Fundos', 'color' => '#05B8E6', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
+                                ['route' => 'clips-animados.sfx',         'label' => 'Estúdio SFX',  'match' => 'clips-animados.sfx*'],
+                                ['route' => 'clips-animados.vfx',         'label' => 'Laboratório VFX', 'match' => 'clips-animados.vfx*'],
+                                ['route' => 'clips-animados.backgrounds', 'label' => 'Fundos',      'match' => 'clips-animados.backgrounds'],
                             ]],
                         ]],
                         ['titulo' => 'Biblioteca', 'itens' => [
-                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#05B8E6', 'glyph' => '♫'],
-                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#05B8E6', 'glyph' => '❖'],
+                            ['route' => 'ativos',          'label' => 'Recursos',          'sub' => 'Media · Música',      'color' => '#05B8E6', 'glyph' => '♫'],
+                            ['route' => 'design-system',   'label' => 'Sistema de design', 'sub' => 'Marca do tema',      'color' => '#05B8E6', 'glyph' => '❖'],
                         ]],
                         ['titulo' => null, 'itens' => [
-                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#05B8E6', 'glyph' => '⚙'],
+                            ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#05B8E6', 'glyph' => '⚙'],
                         ]],
                     ];
                     $n = 0; // running number across the whole shelf
@@ -202,7 +202,7 @@
                  class="rounded-sm px-4 py-2.5 font-mono text-sm shadow-engraved bg-surface flex items-start gap-2">
                 <span x-text="t.type === 'erro' ? '✕' : '✓'"></span>
                 <span x-text="t.message" class="flex-1 break-words"></span>
-                <button type="button" @click="toasts = toasts.filter(x => x.id !== t.id)" class="opacity-50 hover:opacity-100">×</button>
+                <button type="button" @click="toasts = toasts.filter(x => x.id !== t.id)" aria-label="Fechar" class="opacity-50 hover:opacity-100">×</button>
             </div>
         </template>
     </div>

@@ -49,7 +49,7 @@ class ClipsAnimadosTest extends TestCase
 
     public function test_dashboard_renders_with_title(): void
     {
-        $this->get('/clips-animados')->assertOk()->assertSee('Animated Clips')->assertSee('New clip');
+        $this->get('/clips-animados')->assertOk()->assertSee('Imóveis')->assertSee('Novo vídeo');
     }
 
     public function test_create_flow_makes_an_animation_project(): void
@@ -739,7 +739,7 @@ class ClipsAnimadosTest extends TestCase
         $lw = Livewire::test(ClipsAnimados::class)->call('editarClip', $p->id)->assertSet('listingVideoLength', fn ($l) => abs($l - 12) < 0.1);
         $this->assertCount(2, $lw->instance()->videoSlots(1));   // the fan shows two clips: two moments
 
-        $lw->call('abrirMomentos', 1)->assertSee('Choose from the property video')
+        $lw->call('abrirMomentos', 1)->assertSee('Escolher do vídeo do imóvel')
             ->call('usarMomentos', 1, [['start' => 2.0, 'end' => 3.0], ['start' => 7.0, 'end' => 10.0]])
             ->assertHasNoErrors()
             ->call('guardarPlano');
@@ -764,7 +764,7 @@ class ClipsAnimadosTest extends TestCase
         ]);
 
         Livewire::test(ClipsAnimados::class)
-            ->call('abrirMelhoriaClip', $p->id)->assertSee('No image is generated')
+            ->call('abrirMelhoriaClip', $p->id)->assertSee('Não é gerada nenhuma imagem')
             ->set('improveCardPrompt', 'Fala da barragem aqui perto')
             ->call('melhorarClip')->assertHasNoErrors();
 
@@ -873,7 +873,7 @@ class ClipsAnimadosTest extends TestCase
             ->assertSet('editAfterIntroLine', 'Se queres vender casa, fala com o Nuno')
             ->assertSet('editListingNotes', 'Destacar a vista.')
             ->assertSet('editMixPhotos', false)
-            ->assertSee('Listing link')->assertSee('After-intro line')->assertSee('Notes for the script')->assertSee('has one; upload to replace');
+            ->assertSee('Link do anúncio')->assertSee('Frase após a intro')->assertSee('Notas para o guião')->assertSee('já tem; carregue para substituir');
     }
 
     /** New notes: the script is written again from the listing — a fresh import. */

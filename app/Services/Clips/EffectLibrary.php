@@ -35,9 +35,9 @@ class EffectLibrary
     public const FORMAT_LANDSCAPE = 'landscape';
 
     public const FORMATS = [
-        self::FORMAT_PORTRAIT => 'Full portrait',
-        self::FORMAT_HALF => 'Half portrait',
-        self::FORMAT_LANDSCAPE => 'Landscape',
+        self::FORMAT_PORTRAIT => 'Vertical',
+        self::FORMAT_HALF => 'Meio ecrã',
+        self::FORMAT_LANDSCAPE => 'Horizontal',
     ];
 
     /** The pixel box of a format, from the project's portrait clip size. @return array{0:int,1:int} */

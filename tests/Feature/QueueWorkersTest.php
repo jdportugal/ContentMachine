@@ -209,7 +209,7 @@ class QueueWorkersTest extends TestCase
         Livewire::test(Definicoes::class)
             ->set('secao', 'workers')
             ->assertOk()
-            ->assertSee('Queue workers')
+            ->assertSee('Workers das filas')
             ->assertSee('media');
     }
 

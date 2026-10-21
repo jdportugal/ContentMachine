@@ -33,6 +33,10 @@ class Login extends Component
         $this->validate([
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+        ], [
+            'email.required' => 'Indique o email.',
+            'email.email' => 'Indique um email válido.',
+            'password.required' => 'Indique a palavra-passe.',
         ]);
 
         $this->garantirNaoBloqueado();
@@ -41,7 +45,7 @@ class Login extends Component
             RateLimiter::hit($this->chaveThrottle(), self::BLOQUEIO);
 
             throw ValidationException::withMessages([
-                'email' => 'Those credentials do not match our records.',
+                'email' => 'Email ou palavra-passe incorretos.',
             ]);
         }
 
@@ -60,7 +64,7 @@ class Login extends Component
         }
 
         throw ValidationException::withMessages([
-            'email' => 'Too many attempts. Try again in '.RateLimiter::availableIn($this->chaveThrottle()).' seconds.',
+            'email' => 'Demasiadas tentativas. Tente novamente daqui a '.RateLimiter::availableIn($this->chaveThrottle()).' segundos.',
         ]);
     }
 

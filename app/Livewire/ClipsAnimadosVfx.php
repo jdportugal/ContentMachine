@@ -18,7 +18,7 @@ use Livewire\Component;
  * download rather than a layer the planner can use.
  */
 #[Layout('components.layouts.app')]
-#[Title('VFX Lab')]
+#[Title('Laboratório VFX')]
 class ClipsAnimadosVfx extends Component
 {
     /** Longest render offered — past this a single clip ties up the queue for too long. */
@@ -44,9 +44,9 @@ class ClipsAnimadosVfx extends Component
             'aspect' => 'required|in:'.implode(',', array_keys(VfxStore::ASPECTS)),
             'duration' => 'required|numeric|min:1|max:'.self::MAX_DURATION,
         ], [
-            'prompt.required' => 'Describe the animation you want.',
-            'prompt.min' => 'Give a bit more detail (at least 8 characters).',
-            'duration.max' => 'Keep it to '.self::MAX_DURATION.' seconds or less.',
+            'prompt.required' => 'Descreva a animação que quer.',
+            'prompt.min' => 'Dê um pouco mais de detalhe (pelo menos 8 caracteres).',
+            'duration.max' => 'No máximo '.self::MAX_DURATION.' segundos.',
         ]);
 
         $size = VfxStore::ASPECTS[$this->aspect];

@@ -18,7 +18,7 @@
     @else
         <div class="shrink-0 w-14 text-center">
             <div class="font-display text-2xl leading-none {{ $toneClass }}">{{ $score ?? '—' }}</div>
-            <div class="eyebrow !text-[0.55rem]">score</div>
+            <div class="eyebrow !text-[0.55rem]">pontuação</div>
         </div>
     @endif
     <div class="min-w-0 flex-1">
@@ -27,9 +27,9 @@
             <x-badge tone="teal">{{ $item['tipo'] }}</x-badge>
             <span class="font-mono text-[0.62rem] text-ink-faint">{{ \Illuminate\Support\Carbon::parse($item['publicado_em'])->translatedFormat('d M') }}</span>
             @if ($metricas)
-                <span class="font-mono text-[0.62rem] text-ink-faint">· {{ number_format(($item['views'] ?? 0) / 1000, 1) }}k views</span>
+                <span class="font-mono text-[0.62rem] text-ink-faint">· {{ number_format(($item['views'] ?? 0) / 1000, 1) }}k visualizações</span>
                 @if (($item['outlier'] ?? 0) >= 1.5)
-                    <x-badge tone="gold">▲ {{ $item['outlier'] }}× median</x-badge>
+                    <x-badge tone="gold">▲ {{ $item['outlier'] }}× a mediana</x-badge>
                 @endif
             @endif
         </div>

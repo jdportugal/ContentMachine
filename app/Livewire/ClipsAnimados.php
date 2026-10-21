@@ -58,7 +58,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.app')]
-#[Title('Animated Clips')]
+#[Title('Imóveis')]
 class ClipsAnimados extends Component
 {
     use WithFileUploads;
@@ -102,7 +102,7 @@ class ClipsAnimados extends Component
         // normal "video + animations" form with that file already attached.
         if (($video = session('animado_video')) !== null) {
             $this->videoPronto = (string) $video;
-            $this->videoProntoNome = (string) session('animado_video_nome', 'Cut clip');
+            $this->videoProntoNome = (string) session('animado_video_nome', 'Vídeo cortado');
             session()->forget(['animado_video', 'animado_video_nome']);
             // The cut carries no music of its own; the picker below owns the choice.
             $this->musica = 'nenhuma';
@@ -274,9 +274,9 @@ class ClipsAnimados extends Component
             'newImage' => 'required|file|'.Media::mimesRule().'|max:102400',
             'newImageDesc' => 'nullable|string|max:200',
         ], [
-            'newImage.required' => 'Choose an image or video.',
-            'newImage.mimes' => 'The file must be an image or a video.',
-            'newImage.max' => 'The file is too large (maximum 100 MB).',
+            'newImage.required' => 'Escolha uma imagem ou um vídeo.',
+            'newImage.mimes' => 'O ficheiro tem de ser uma imagem ou um vídeo.',
+            'newImage.max' => 'O ficheiro é demasiado grande (máximo 100 MB).',
         ], ['newImage' => 'file', 'newImageDesc' => 'description']);
 
         $path = $this->newImage->store('clips/uploads');
@@ -299,7 +299,7 @@ class ClipsAnimados extends Component
     {
         $this->validate(
             ['newImages.*' => 'file|'.Media::mimesRule().'|max:102400'],
-            ['newImages.*.mimes' => 'Every file must be an image or a video.', 'newImages.*.max' => 'A file is too large (maximum 100 MB).'],
+            ['newImages.*.mimes' => 'Todos os ficheiros têm de ser imagens ou vídeos.', 'newImages.*.max' => 'Um dos ficheiros é demasiado grande (máximo 100 MB).'],
         );
 
         foreach ($this->newImages as $file) {
@@ -325,8 +325,8 @@ class ClipsAnimados extends Component
             return;
         }
         $this->validateOnly("imageReplace.$i", ["imageReplace.$i" => 'file|'.Media::mimesRule().'|max:102400'], [
-            "imageReplace.$i.mimes" => 'The file must be an image or a video.',
-            "imageReplace.$i.max" => 'The file is too large (maximum 100 MB).',
+            "imageReplace.$i.mimes" => 'O ficheiro tem de ser uma imagem ou um vídeo.',
+            "imageReplace.$i.max" => 'O ficheiro é demasiado grande (máximo 100 MB).',
         ]);
 
         $path = $value->store('clips/uploads');
@@ -360,12 +360,12 @@ class ClipsAnimados extends Component
     {
         // Every submit path passes here, so the instructions' ceiling is checked
         // once for all of them (the form caps it too; this is the trusted check).
-        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'The instructions are too long (maximum 10,000 characters).']);
+        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'As instruções são demasiado longas (máximo 10 000 caracteres).']);
 
         $temImagem = collect($this->images)->contains(fn ($i) => empty($i['video']));
         if ($this->soReferencias && ! $this->semImagens && ! $temImagem) {
             throw ValidationException::withMessages([
-                'newImages.*' => 'Only reference images is on but no image is attached — add the images (or untick the option).',
+                'newImages.*' => '«Só imagens de referência» está ligado mas não há imagens — adicione as imagens (ou desligue a opção).',
             ]);
         }
     }
@@ -472,8 +472,8 @@ class ClipsAnimados extends Component
         $this->validate(
             ['bgPrompt' => 'required|string|min:8|max:600'],
             [
-                'bgPrompt.required' => 'Describe the background you want.',
-                'bgPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+                'bgPrompt.required' => 'Descreva o fundo que quer.',
+                'bgPrompt.min' => 'Dê um pouco mais de detalhe (pelo menos 8 caracteres).',
             ],
         );
 
@@ -498,10 +498,10 @@ class ClipsAnimados extends Component
             'bgVideo' => 'required|file|mimetypes:video/mp4,video/quicktime|max:512000',
             'bgVideoName' => 'required|string|max:60',
         ], [
-            'bgVideo.required' => 'Choose a video file.',
-            'bgVideo.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
-            'bgVideo.max' => 'The video is too large (maximum 500 MB).',
-            'bgVideoName.required' => 'Give the background a name.',
+            'bgVideo.required' => 'Escolha um ficheiro de vídeo.',
+            'bgVideo.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
+            'bgVideo.max' => 'O vídeo é demasiado grande (máximo 500 MB).',
+            'bgVideoName.required' => 'Dê um nome ao fundo.',
         ], ['bgVideo' => 'video', 'bgVideoName' => 'name']);
 
         $name = trim($this->bgVideoName);
@@ -555,8 +555,8 @@ class ClipsAnimados extends Component
         $this->validate(
             ['bgEditPrompt' => 'required|string|min:8|max:600'],
             [
-                'bgEditPrompt.required' => 'Describe the change you want.',
-                'bgEditPrompt.min' => 'Give a bit more detail (at least 8 characters).',
+                'bgEditPrompt.required' => 'Descreva a alteração que quer.',
+                'bgEditPrompt.min' => 'Dê um pouco mais de detalhe (pelo menos 8 caracteres).',
             ],
         );
 
@@ -594,17 +594,17 @@ class ClipsAnimados extends Component
     {
         $this->validate(
             ['importBackgroundFile' => 'required|file|max:512000'],
-            ['importBackgroundFile.required' => 'Choose an export file first.'],
+            ['importBackgroundFile.required' => 'Escolha primeiro um ficheiro exportado.'],
         );
 
         try {
             $payload = json_decode((string) file_get_contents($this->importBackgroundFile->getRealPath()), true);
             if (! is_array($payload)) {
-                throw new \RuntimeException('The file is not valid JSON.');
+                throw new \RuntimeException('O ficheiro não é um JSON válido.');
             }
             $n = $port->import($payload);
         } catch (\Throwable $e) {
-            $this->dispatch('toast', message: 'Import failed: '.$e->getMessage(), type: 'erro');
+            $this->dispatch('toast', message: 'A importação falhou: '.$e->getMessage(), type: 'erro');
 
             return;
         }
@@ -614,7 +614,7 @@ class ClipsAnimados extends Component
 
         $this->dispatch(
             'toast',
-            message: $n === 0 ? 'No backgrounds found in that file.' : $n.' background'.($n === 1 ? '' : 's').' imported.',
+            message: $n === 0 ? 'Não foram encontrados fundos nesse ficheiro.' : $n.($n === 1 ? ' fundo importado.' : ' fundos importados.'),
             type: $n === 0 ? 'erro' : 'ok',
         );
     }
@@ -724,8 +724,8 @@ class ClipsAnimados extends Component
                 'listingAfterIntroLine' => 'nullable|string|max:200',
                 'listingNotes' => 'nullable|string|max:3000',
                 'listingMusic' => 'nullable|string|max:200',
-                'listingBeatOpening' => [fn ($a, $v, $fail) => $v && ! $this->listingVideo && ! $this->listingAfterIntro ? $fail('The beat-synced opening is cut from the property video — add one.') : null]],
-            ['listingUrl.required' => 'Paste the listing URL.', 'listingUrl.url' => 'That is not a valid URL.'],
+                'listingBeatOpening' => [fn ($a, $v, $fail) => $v && ! $this->listingVideo && ! $this->listingAfterIntro ? $fail('A abertura ao ritmo é cortada do vídeo do imóvel — adicione um.') : null]],
+            ['listingUrl.required' => 'Cole o URL do anúncio.', 'listingUrl.url' => 'Esse URL não é válido.'],
         );
 
         // The two videos in each other's field (the walkthrough as the after-intro): put them right.
@@ -853,9 +853,9 @@ class ClipsAnimados extends Component
         $this->validate($photos
             ? ['propertyPhotos' => 'required|array|min:1|max:15', 'propertyPhotos.*' => 'image|max:20480']
             : [], [
-                'propertyPhotos.required' => 'Add the photos to animate (up to 15).',
-                'propertyPhotos.max' => 'Up to 15 photos.',
-                'propertyPhotos.*.image' => 'Only photos (jpg, png, webp).',
+                'propertyPhotos.required' => 'Adicione as fotos a animar (até 15).',
+                'propertyPhotos.max' => 'Até 15 fotos.',
+                'propertyPhotos.*.image' => 'Só fotos (jpg, png, webp).',
             ]);
         $this->validate([
             'video' => ($photos ? 'nullable' : 'required').'|file|mimetypes:video/mp4,video/quicktime|max:1024000',
@@ -863,11 +863,11 @@ class ClipsAnimados extends Component
             'propertyVoice' => 'required|in:none,listing,upload',
             'audio' => ($this->propertyVoice === 'upload' ? 'required' : 'nullable').'|file|mimetypes:audio/*,video/webm,video/mp4|max:51200',
         ], [
-            'video.required' => 'Upload the walkthrough video (mp4 or mov).',
-            'video.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
-            'video.max' => 'The video is too large (maximum 1 GB).',
-            'propertyListingUrl.required' => 'Paste the listing URL — the voiceover is written from it.',
-            'audio.required' => 'Upload your voiceover (mp3, wav or m4a).',
+            'video.required' => 'Carregue o vídeo da visita (mp4 ou mov).',
+            'video.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
+            'video.max' => 'O vídeo é demasiado grande (máximo 1 GB).',
+            'propertyListingUrl.required' => 'Cole o URL do anúncio — a narração é escrita a partir dele.',
+            'audio.required' => 'Carregue a sua narração (mp3, wav ou m4a).',
         ]);
         $this->validate([
             'propertyAgent' => 'nullable|string|max:80',
@@ -960,7 +960,7 @@ class ClipsAnimados extends Component
         $short = $clean->contains(fn ($s) => $s['end'] - $s['start'] < 1.0);
         $overlap = $clean->contains(fn ($s, $i) => $i > 0 && $s['start'] < $clean[$i - 1]['end'] - 0.01);
         if ($clean->isEmpty() || $clean->count() > 10 || $overlap || $short) {
-            $this->addError('sections.'.$id, 'Mark 1 to 10 sections of 1–10 s each, without overlaps.');
+            $this->addError('sections.'.$id, 'Marque 1 a 10 excertos de 1–10 s cada, sem sobreposições.');
 
             return;
         }
@@ -998,16 +998,16 @@ class ClipsAnimados extends Component
         $info = trim(mb_substr($info, 0, 4000));
         $url = trim($url);
         if ($url !== '' && ! filter_var($url, FILTER_VALIDATE_URL)) {
-            $this->addError('narrate.'.$id, 'That listing link is not a valid URL.');
+            $this->addError('narrate.'.$id, 'Esse link do anúncio não é um URL válido.');
 
             return;
         }
         if ($info === '' && $url === '') {
-            $this->addError('narrate.'.$id, 'Paste the listing link or write the house details first.');
+            $this->addError('narrate.'.$id, 'Cole primeiro o link do anúncio ou escreva os detalhes da casa.');
 
             return;
         }
-        $p->update(['status' => ClipRecord::STATUS_IMPORTING, 'meta' => array_merge($p->meta, ['step' => 'Writing and narrating the voiceover'])]);
+        $p->update(['status' => ClipRecord::STATUS_IMPORTING, 'meta' => array_merge($p->meta, ['step' => 'A escrever e a gravar a narração'])]);
         NarratePropertyJob::dispatch($id, $info, $url);
     }
 
@@ -1120,7 +1120,7 @@ class ClipsAnimados extends Component
     {
         $this->validate(
             ["takeUploads.$id" => 'required|file|mimetypes:audio/*,video/webm,video/mp4|max:51200'],
-            ["takeUploads.$id.mimetypes" => 'Unsupported audio format. Upload mp3/wav/m4a.'],
+            ["takeUploads.$id.mimetypes" => 'Formato de áudio não suportado. Carregue mp3/wav/m4a.'],
         );
         $p = $this->clips()->find($id);
         if ($p && $p->status === ClipRecord::STATUS_CHOOSING_VOICE) {
@@ -1175,9 +1175,9 @@ class ClipsAnimados extends Component
             'text' => 'required_without:audio|nullable|string|max:5000',
             'audio' => 'nullable|file|mimetypes:audio/*,video/webm,video/mp4|max:51200',
         ], [
-            'text.required_without' => 'Write a text, record your voice or upload an audio file.',
-            'audio.mimetypes' => 'Unsupported audio format. Record again or upload mp3/wav/m4a.',
-            'audio.max' => 'The voiceover is too large (maximum 50 MB).',
+            'text.required_without' => 'Escreva um texto, grave a sua voz ou carregue um ficheiro de áudio.',
+            'audio.mimetypes' => 'Formato de áudio não suportado. Grave de novo ou carregue mp3/wav/m4a.',
+            'audio.max' => 'A narração é demasiado grande (máximo 50 MB).',
         ], ['text' => 'text', 'audio' => 'voiceover']);
 
         $this->validate($this->afterIntroRules());
@@ -1230,10 +1230,10 @@ class ClipsAnimados extends Component
             'allowedPresents.*' => 'in:video,over,split,animation',
             'formato' => 'required|in:auto,'.implode(',', array_keys(VfxStore::ASPECTS)),
         ], [
-            'video.required' => 'Upload a video (mp4 or mov).',
-            'video.mimetypes' => 'Unsupported video format. Use mp4 or mov.',
-            'video.max' => 'The video is too large (maximum 500 MB).',
-            'allowedPresents.min' => 'Choose at least one style.',
+            'video.required' => 'Carregue um vídeo (mp4 ou mov).',
+            'video.mimetypes' => 'Formato de vídeo não suportado. Use mp4 ou mov.',
+            'video.max' => 'O vídeo é demasiado grande (máximo 500 MB).',
+            'allowedPresents.min' => 'Escolha pelo menos um estilo.',
         ], ['video' => 'video']);
 
         $this->exigirImagensSeSoReferencias();
@@ -1451,8 +1451,8 @@ class ClipsAnimados extends Component
             return;
         }
         $this->validateOnly("reviewUploads.$key", ["reviewUploads.$key" => 'file|'.Media::mimesRule().'|max:102400'], [
-            "reviewUploads.$key.mimes" => 'The file must be an image or a video.',
-            "reviewUploads.$key.max" => 'The file is too large (maximum 100 MB).',
+            "reviewUploads.$key.mimes" => 'O ficheiro tem de ser uma imagem ou um vídeo.',
+            "reviewUploads.$key.max" => 'O ficheiro é demasiado grande (máximo 100 MB).',
         ]);
 
         $p = $this->clips()->findOrFail($this->reviewingId);
@@ -1940,7 +1940,7 @@ class ClipsAnimados extends Component
             RenderEffectSampleJob::dispatch($slug, (string) $effect->sample_text, $effect->sample_params ?? [], $formato);
         }
 
-        $this->dispatch('toast', type: 'ok', message: '«'.($effect->display_name ?: $slug).'» added to the SFX library.');
+        $this->dispatch('toast', type: 'ok', message: '«'.($effect->display_name ?: $slug).'» adicionado à biblioteca de SFX.');
     }
 
     // ---- per-scene image (see & replace in the scene editor) ----
@@ -2021,8 +2021,8 @@ class ClipsAnimados extends Component
             return;
         }
         $this->validateOnly("sceneImageUploads.$i", ["sceneImageUploads.$i" => 'file|'.Media::mimesRule().'|max:102400'], [
-            "sceneImageUploads.$i.mimes" => 'The file must be an image or a video.',
-            "sceneImageUploads.$i.max" => 'The file is too large (maximum 100 MB).',
+            "sceneImageUploads.$i.mimes" => 'O ficheiro tem de ser uma imagem ou um vídeo.',
+            "sceneImageUploads.$i.max" => 'O ficheiro é demasiado grande (máximo 100 MB).',
         ]);
 
         $path = $value->store('clips/uploads');
@@ -2182,7 +2182,7 @@ class ClipsAnimados extends Component
         $moments = array_slice(array_values(array_filter($moments, fn ($m) => is_numeric($m['start'] ?? null) && is_numeric($m['end'] ?? null)
             && $m['end'] > $m['start'] && $m['start'] >= 0 && $m['start'] < $length)), 0, count($slots));
         if ($moments === []) {
-            $this->addError("moments.$i", 'Mark at least one moment on the strip.');
+            $this->addError("moments.$i", 'Marque pelo menos um momento na faixa.');
 
             return;
         }
@@ -2228,12 +2228,12 @@ class ClipsAnimados extends Component
     {
         $decoded = json_decode($this->editPlanJson, true);
         if (! is_array($decoded)) {
-            $this->addError('editPlanJson', 'Invalid JSON: '.json_last_error_msg());
+            $this->addError('editPlanJson', 'JSON inválido: '.json_last_error_msg());
 
             return;
         }
         if (! isset($decoded['scenes']) || ! is_array($decoded['scenes'])) {
-            $this->addError('editPlanJson', 'The plan needs a "scenes" list.');
+            $this->addError('editPlanJson', 'O plano precisa de uma lista "scenes".');
 
             return;
         }
@@ -2247,7 +2247,7 @@ class ClipsAnimados extends Component
         $decoded['fps'] = (int) ($decoded['fps'] ?? $c['fps']);
 
         if ($decoded['duration'] <= 0) {
-            $this->addError('editPlanJson', 'The plan needs "duration" (seconds) greater than zero.');
+            $this->addError('editPlanJson', 'O plano precisa de "duration" (segundos) maior que zero.');
 
             return;
         }
@@ -2300,8 +2300,8 @@ class ClipsAnimados extends Component
             'editScenes.*.subtitles' => 'nullable|string|max:2000',
             'editScenes.*.present' => 'nullable|in:video,over,split,animation',
         ], [
-            'editScenes.min' => 'The clip needs at least one scene.',
-            'editScenes.*.end.gt' => 'The end must be greater than the start.',
+            'editScenes.min' => 'O vídeo precisa de pelo menos uma cena.',
+            'editScenes.*.end.gt' => 'O fim tem de ser maior que o início.',
         ]);
 
         $p = $this->clips()->findOrFail($this->editingId);
@@ -2519,10 +2519,10 @@ class ClipsAnimados extends Component
                 'allowedPresents.*' => 'in:video,over,split,animation',
                 'formato' => 'required|in:auto,'.implode(',', array_keys(VfxStore::ASPECTS)),
             ],
-            ['editTranscriptText.required' => 'The transcript cannot be empty.', 'allowedPresents.min' => 'Choose at least one style.'],
+            ['editTranscriptText.required' => 'A transcrição não pode estar vazia.', 'allowedPresents.min' => 'Escolha pelo menos um estilo.'],
         );
 
-        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'The instructions are too long (maximum 10,000 characters).']);
+        $this->validate(['instructions' => 'nullable|string|max:10000'], ['instructions.max' => 'As instruções são demasiado longas (máximo 10 000 caracteres).']);
 
         $p = $this->clips()->findOrFail($this->editingId);
         if ($this->editListing && $this->aplicarOpcoesDoAnuncio($p)) {

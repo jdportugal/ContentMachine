@@ -36,6 +36,14 @@ class Register extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:12', 'confirmed'],
+        ], [
+            'name.required' => 'Indique o seu nome.',
+            'email.required' => 'Indique o email.',
+            'email.email' => 'Indique um email válido.',
+            'email.unique' => 'Já existe uma conta com este email.',
+            'password.required' => 'Indique a palavra-passe.',
+            'password.min' => 'A palavra-passe tem de ter pelo menos 12 caracteres.',
+            'password.confirmed' => 'As palavras-passe não coincidem.',
         ]);
 
         $utilizador = User::create([

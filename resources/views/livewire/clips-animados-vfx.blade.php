@@ -1,26 +1,26 @@
 <div @if ($this->busy) wire:poll.3s @endif>
     <x-page-header
         eyebrow="Tomus · V"
-        title="VFX Lab"
+        title="Laboratório VFX"
         cota="741.6 · ACM · '26"
-        lead="Describe an animation, pick its proportions, get a finished video — in the brand's style — to drop into a long-form edit." />
+        lead="Descreva uma animação, escolha as proporções e receba um vídeo pronto — no estilo da marca — para usar numa edição longa." />
 
     @include('livewire.partials.studio-tabs')
 
-    <x-panel eyebrow="New" title="Generate a VFX" glyph="✧">
+    <x-panel eyebrow="Novo" title="Gerar um VFX" glyph="✧">
         <form wire:submit="gerarVfx" class="space-y-4">
             <div class="space-y-2">
-                <label class="eyebrow block">Describe the animation</label>
+                <label class="eyebrow block">Descreva a animação</label>
                 <textarea wire:model="prompt" rows="3"
-                          placeholder="e.g. the words CHAPTER ONE slam in from the left with a gold light sweep, then settle with a slow drift"
+                          placeholder="ex.: as palavras CAPÍTULO UM entram com força pela esquerda com um varrimento de luz dourada e depois assentam com um deslize lento"
                           class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-4 py-3 text-ink focus:border-teal/50 focus:outline-none"></textarea>
                 @error('prompt') <p class="text-bad text-sm">{{ $message }}</p> @enderror
-                <p class="font-mono text-[0.6rem] text-ink-faint">Include any on-screen text here — it is baked into the render.</p>
+                <p class="font-mono text-[0.6rem] text-ink-faint">Inclua aqui qualquer texto que deva aparecer no ecrã — fica gravado no vídeo.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="space-y-2">
-                    <label class="eyebrow block">Proportions</label>
+                    <label class="eyebrow block">Proporções</label>
                     <select wire:model="aspect"
                             class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none">
                         @foreach ($aspects as $key => $a)
@@ -31,19 +31,19 @@
                 </div>
 
                 <div class="space-y-2">
-                    <label class="eyebrow block">Length (seconds)</label>
+                    <label class="eyebrow block">Duração (segundos)</label>
                     <input type="number" wire:model="duration" min="1" max="{{ $maxDuration }}" step="0.5"
                            class="w-full bg-surface/40 border border-ink-soft/20 rounded-sm px-3 py-2 text-ink focus:border-teal/50 focus:outline-none" />
                     @error('duration') <p class="text-bad text-sm">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="space-y-2">
-                    <label class="eyebrow block">Background</label>
+                    <label class="eyebrow block">Fundo</label>
                     <label class="flex items-center gap-2 px-3 py-2 rounded-sm border border-ink-soft/20 bg-surface/40 cursor-pointer">
                         <input type="checkbox" wire:model="transparent" class="accent-teal" />
-                        <span class="font-mono text-[0.68rem] text-ink-soft">transparent (overlay)</span>
+                        <span class="font-mono text-[0.68rem] text-ink-soft">transparente (sobreposição)</span>
                     </label>
-                    <p class="font-mono text-[0.55rem] text-ink-faint">On → ProRes 4444 .mov with alpha. Off → .mp4 on the brand backdrop.</p>
+                    <p class="font-mono text-[0.55rem] text-ink-faint">Ativo → .mov ProRes 4444 com alfa. Desativado → .mp4 sobre o fundo da marca.</p>
                 </div>
             </div>
 
@@ -51,9 +51,9 @@
                 <button type="submit"
                         class="font-display text-lg px-6 py-2 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition"
                         wire:loading.attr="disabled" wire:target="gerarVfx">
-                    ✦ Generate
+                    ✦ Gerar
                 </button>
-                <span class="font-mono text-[0.6rem] text-ink-faint">Colours &amp; fonts are locked to the design system. Takes a couple of minutes.</span>
+                <span class="font-mono text-[0.6rem] text-ink-faint">As cores e os tipos de letra seguem o sistema de design. Demora uns minutos.</span>
             </div>
         </form>
     </x-panel>
@@ -61,8 +61,8 @@
     @if ($this->vfx->isNotEmpty())
         <div class="mt-8">
             <div class="flex items-baseline justify-between mb-4 gap-3">
-                <div class="eyebrow">Your VFX · {{ $this->vfx->count() }}</div>
-                <span class="font-mono text-[0.55rem] text-ink-faint">download and drop into your editor</span>
+                <div class="eyebrow">Os seus VFX · {{ $this->vfx->count() }}</div>
+                <span class="font-mono text-[0.55rem] text-ink-faint">descarregue e use no seu editor</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -82,7 +82,7 @@
                             @else
                                 <div class="text-center">
                                     <div class="h-1 w-20 mx-auto bg-surface/40 rounded-full overflow-hidden"><div class="h-full bg-teal/60 animate-pulse w-2/3"></div></div>
-                                    <p class="font-mono text-[0.55rem] text-ink-faint mt-2">Generating &amp; rendering…</p>
+                                    <p class="font-mono text-[0.55rem] text-ink-faint mt-2">A gerar e a renderizar…</p>
                                 </div>
                             @endif
                         </div>
@@ -91,33 +91,33 @@
                             <p class="text-ink text-sm line-clamp-2">{{ $v->prompt }}</p>
                             <p class="font-mono text-[0.55rem] text-ink-faint mt-1">
                                 {{ $v->get('aspect', '—') }} · {{ $v->get('width') }}×{{ $v->get('height') }} · {{ $v->get('duration') }}s
-                                @if ($v->get('transparent')) · <span class="text-teal">alpha</span> @endif
+                                @if ($v->get('transparent')) · <span class="text-teal">alfa</span> @endif
                             </p>
                             {{-- Which page it filmed. An AI-guessed URL is the likeliest
                                  thing to be wrong, so it is always shown. --}}
                             @if ($v->get('site_url'))
                                 <p class="font-mono text-[0.55rem] text-teal mt-1 truncate" title="{{ $v->get('site_url') }}">🎞 {{ $v->get('site_url') }}</p>
                             @elseif ($v->get('site_error'))
-                                <p class="font-mono text-[0.55rem] text-bad/80 mt-1">site capture failed — built without it</p>
+                                <p class="font-mono text-[0.55rem] text-bad/80 mt-1">a captura do site falhou — feito sem ela</p>
                             @endif
                         </div>
 
                         <div class="mt-3 flex flex-wrap gap-2">
                             @if ($v->status === 'active')
                                 <a href="{{ route('clips-animados.vfx-media', $v->id()) }}?download=1"
-                                   class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">⤓ Download .{{ $v->get('ext', 'mp4') }}</a>
+                                   class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-teal/50 text-teal hover:bg-teal/10 transition">⤓ Descarregar .{{ $v->get('ext', 'mp4') }}</a>
                             @endif
-                            <x-copy-btn :text="$v->prompt" />
+                            <x-copy-btn :text="$v->prompt" label="⧉ copiar descrição" />
                             <button type="button" wire:click="apagarVfx('{{ $v->id() }}')"
-                                    wire:confirm="Delete this VFX and its video?"
-                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕ Delete</button>
+                                    wire:confirm="Apagar este VFX e o respetivo vídeo?"
+                                    class="font-mono text-[0.7rem] px-3 py-1.5 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-bad hover:border-bad/40 transition">✕ Apagar</button>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
     @else
-        <x-empty-state class="mt-8" glyph="✧" title="No VFX yet"
-                       note="Describe an animation above and it will show up here, ready to download." />
+        <x-empty-state class="mt-8" glyph="✧" title="Ainda sem VFX"
+                       note="Descreva uma animação acima e ela aparece aqui, pronta a descarregar." />
     @endif
 </div>

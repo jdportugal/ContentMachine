@@ -241,9 +241,9 @@ class BackgroundsTest extends TestCase
         $this->actingAs(\App\Models\User::factory()->create())
             ->get(route('clips-animados.backgrounds'))
             ->assertOk()
-            ->assertSee('Backgrounds library')
-            ->assertSee('SFX Studio')      // the studio tab strip is on the page
-            ->assertSee('VFX Lab');
+            ->assertSee('Biblioteca de fundos')
+            ->assertSee('Estúdio SFX')      // the studio tab strip is on the page
+            ->assertSee('Laboratório VFX');
 
         // Landing there queues the missing preview, exactly as the in-page button did.
         Queue::assertPushed(\App\Jobs\Clips\RenderBackgroundSampleJob::class,

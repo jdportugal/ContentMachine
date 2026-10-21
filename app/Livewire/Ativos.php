@@ -16,7 +16,7 @@ use Livewire\WithFileUploads;
  * planner searches before asking the user or generating.
  */
 #[Layout('components.layouts.app')]
-#[Title('Assets')]
+#[Title('Recursos')]
 class Ativos extends Component
 {
     use WithFileUploads;
@@ -39,21 +39,21 @@ class Ativos extends Component
         $this->validate([
             'novaMusica' => 'required|file|mimes:mp3,wav,m4a,aac,ogg,flac|max:30720',
         ], [
-            'novaMusica.required' => 'Choose an audio file.',
-            'novaMusica.mimes' => 'Unsupported format (use mp3, wav, m4a, aac, ogg or flac).',
-            'novaMusica.max' => 'File too large (max. 30 MB).',
+            'novaMusica.required' => 'Escolha um ficheiro de áudio.',
+            'novaMusica.mimes' => 'Formato não suportado (use mp3, wav, m4a, aac, ogg ou flac).',
+            'novaMusica.max' => 'Ficheiro demasiado grande (máx. 30 MB).',
         ]);
 
         $lib->add($this->novaMusica->getRealPath(), $this->novaMusica->getClientOriginalName());
 
         $this->reset('novaMusica');
-        $this->notificar('Music added to the library.');
+        $this->notificar('Música adicionada à biblioteca.');
     }
 
     public function removerMusica(string $name, MusicLibrary $lib): void
     {
         $lib->remove($name);
-        $this->notificar('Music removed.');
+        $this->notificar('Música removida.');
     }
 
     /** A fresh selection replaces any half-described previous one. */
@@ -72,7 +72,7 @@ class Ativos extends Component
         }
         $this->validate(
             ['novasImagens.*' => 'file|'.Media::mimesRule().'|max:102400'],
-            ['novasImagens.*.mimes' => 'Only images and videos are allowed.', 'novasImagens.*.max' => 'Each file must be under 100 MB.'],
+            ['novasImagens.*.mimes' => 'Só são permitidas imagens e vídeos.', 'novasImagens.*.max' => 'Cada ficheiro tem de ter menos de 100 MB.'],
         );
 
         foreach ($files as $i => $f) {
@@ -80,7 +80,7 @@ class Ativos extends Component
         }
         $n = count($files);
         $this->reset('novasImagens', 'descricoes');
-        $this->notificar($n.' '.($n === 1 ? 'image' : 'images').' added to the library.');
+        $this->notificar($n.' '.($n === 1 ? 'imagem adicionada' : 'imagens adicionadas').' à biblioteca.');
     }
 
     public function descartarImagens(): void
@@ -92,13 +92,13 @@ class Ativos extends Component
     public function atualizarDescricao(string $id, string $descricao, ImageLibrary $lib): void
     {
         $lib->updateDescription($id, $descricao);
-        $this->notificar('Description updated.');
+        $this->notificar('Descrição atualizada.');
     }
 
     public function removerImagem(string $id, ImageLibrary $lib): void
     {
         $lib->remove($id);
-        $this->notificar('Image removed.');
+        $this->notificar('Imagem removida.');
     }
 
     public function render(MusicLibrary $lib, ImageLibrary $images)

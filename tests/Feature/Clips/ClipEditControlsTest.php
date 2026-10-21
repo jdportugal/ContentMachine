@@ -58,15 +58,15 @@ class ClipEditControlsTest extends TestCase
     {
         Livewire::test(ClipsAnimados::class)
             ->call('editarClip', $this->clip(ClipRecord::TYPE_OVERLAY, 'video')->id)
-            ->assertSee('subtitles spoken in this block')
-            ->assertSee('raw video only')
-            ->assertSee('Background music')          // music + volume, already there
-            ->assertDontSee('regenerate voiceover'); // a filmed clip has no TTS to redo
+            ->assertSee('legendas ditas neste bloco')
+            ->assertSee('só o vídeo — sem grafismos')
+            ->assertSee('Música de fundo')          // music + volume, already there
+            ->assertDontSee('Guardar e gerar de novo a narração'); // a filmed clip has no TTS to redo
 
         Livewire::test(ClipsAnimados::class)
             ->call('editarClip', $this->clip(ClipRecord::TYPE_ANIMATION, 'text')->id)
-            ->assertSee('Save and regenerate voiceover')
-            ->assertDontSee('raw video only');
+            ->assertSee('Guardar e gerar de novo a narração')
+            ->assertDontSee('só o vídeo — sem grafismos');
     }
 
     public function test_each_block_loads_the_subtitles_spoken_in_it(): void
