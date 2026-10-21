@@ -4,9 +4,7 @@ namespace App\Livewire;
 
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Leads\LeadVideo;
-use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectContext;
-use App\Services\Projects\ProjectRepository;
 use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +17,7 @@ use Livewire\Component;
 /**
  * The public site: one free video per listing. The agent only pastes the link —
  * name and phone come from the listing (leads:atualizar). The form starts the
- * studio's listing import in the leads project (config contentmachine.leads),
+ * studio's listing import in the app's one project,
  * then turns into the reel's progress and, once rendered, the video itself.
  * The lead is kept in the session so a reload finds it again.
  */
@@ -43,7 +41,7 @@ class Landing extends Component
         $this->leadId = session('lead_id');
     }
 
-    public function pedir(ListingImport $import, ProjectRepository $projects, ProjectActivator $activator, ProjectContext $context): void
+    public function pedir(ListingImport $import, ProjectContext $context): void
     {
         if ($this->site !== '') {
             $this->bot = true;
@@ -71,10 +69,6 @@ class Landing extends Component
         ]);
         RateLimiter::hit($chave, 3600);
 
-        $slug = config('contentmachine.leads.project');
-        if ($slug !== '' && ($projeto = $projects->find($slug))) {
-            $activator->activate($projeto);
-        }
         $clip = $import->start($this->anuncio, ['free_lead' => true]);
 
         $this->leadId = DB::table('leads')->insertGetId([

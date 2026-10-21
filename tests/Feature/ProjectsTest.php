@@ -52,27 +52,6 @@ class ProjectsTest extends TestCase
         $this->assertSame('pt', app()->getLocale());
     }
 
-    public function test_switcher_stores_the_selected_project_in_the_session(): void
-    {
-        $project = app(ProjectRepository::class)->create('Brand X', 'en');
-
-        Livewire::test(ProjectSwitcher::class)->call('trocar', $project->slug);
-
-        $this->assertSame($project->slug, session('project_slug'));
-    }
-
-    public function test_switcher_creates_a_project_and_switches_to_it(): void
-    {
-        Livewire::test(ProjectSwitcher::class)
-            ->set('newName', 'Second Brand')
-            ->set('newLanguage', 'pt')
-            ->call('criar')
-            ->assertHasNoErrors();
-
-        $this->assertTrue(app(ProjectRepository::class)->exists('second-brand'));
-        $this->assertSame('second-brand', session('project_slug'));
-    }
-
     public function test_settings_page_updates_the_active_project_language(): void
     {
         $repo = app(ProjectRepository::class);

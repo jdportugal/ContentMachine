@@ -55,25 +55,4 @@ class ProjectLanguageDefaultsTest extends TestCase
         $this->assertSame('English', ProjectLanguage::name());
     }
 
-    public function test_the_clips_screen_shows_states_in_english(): void
-    {
-        $this->comSessaoIniciada();
-
-        $fonte = app(ShortsPipeline::class)->criarFonte('/tmp/d.mp4', 'Interview');
-        app(VaultContract::class)->create(ShortsPipeline::CLIPES, [
-            'titulo' => 'A cut', 'tipo' => 'clip', 'fonte_path' => $fonte->path,
-            'inicio' => 0, 'fim' => 5, 'estado' => 'cortado',
-        ], 'A clip.');
-
-        $html = Livewire::test(Clips::class)
-            ->call('abrirFonte', $fonte->path)
-            ->assertDontSee('cortado')
-            ->assertDontSee('rascunho')
-            ->assertDontSee('nova')
-            ->html();
-
-        // Badges only — "cut" also appears in the page copy ("Automatic cutting…").
-        $this->assertMatchesRegularExpression('/>\s*cut\s*<\/span>/', $html);
-        $this->assertMatchesRegularExpression('/>\s*new\s*<\/span>/', $html);
-    }
 }

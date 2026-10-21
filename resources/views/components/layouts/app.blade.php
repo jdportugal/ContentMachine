@@ -16,7 +16,7 @@
     <div x-data="{ nav: false }" class="flex min-h-screen">
         {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
         <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
-            <a href="{{ route('imoveis') }}" class="font-display text-2xl text-teal tracking-wide" style="letter-spacing:.06em">Imocena</a>
+            <a href="{{ route('imoveis') }}" class="font-display text-2xl text-ink">Imocena</a>
             <button type="button" @click="nav = !nav" aria-label="Toggle menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
         </header>
 
@@ -33,9 +33,6 @@
                 </a>
             </div>
 
-            <div class="px-4 py-3 border-b border-ink-soft/15">
-                @livewire('project-switcher')
-            </div>
 
             {{-- Closing the drawer belongs to the DESTINATION links only: on the
                  <aside> it also swallowed taps on the project switcher, closing
@@ -70,44 +67,21 @@
                     $grupos = [
                         ['titulo' => null, 'itens' => [
                             ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Imóveis',            'color' => '#F06052', 'glyph' => '⌂'],
-                            ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#A06E1C', 'glyph' => '◆'],
                         ]],
-                        ['titulo' => 'Source', 'itens' => [
-                            ['route' => 'noticias',        'label' => 'News',              'sub' => 'Aggregator',         'color' => '#8C7330', 'glyph' => '✷'],
-                            ['route' => 'monitorizacao',   'label' => 'Monitoring',        'sub' => 'Social networks',    'color' => '#7A4A8C', 'glyph' => '◈'],
-                        ]],
-                        ['titulo' => 'Create', 'itens' => [
-                            ['route' => 'clips',           'label' => 'Content Transformer', 'sub' => 'Shorts · Posts · Repurpose', 'color' => '#2F5A85', 'glyph' => '▲', 'match' => ['clips', 'clips.*'], 'subs' => [
-                                ['route' => 'clips',           'label' => 'Shorts Generator',  'match' => 'clips'],
-                                ['route' => 'clips.posts',     'label' => 'Posts Generator'],
-                                ['route' => 'clips.repurpose', 'label' => 'Content Repurpose'],
-                            ]],
-                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#2C6E6E', 'glyph' => '✦', 'match' => ['clips-animados']],
-                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#3A7A68', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
+                        ['titulo' => 'Criar', 'itens' => [
+                            ['route' => 'clips-animados',  'label' => 'Animated Clips',    'sub' => 'Animation',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],
+                            ['route' => 'clips-animados.sfx', 'label' => 'Effects Studio', 'sub' => 'SFX · VFX · Backgrounds', 'color' => '#05B8E6', 'glyph' => '✶', 'match' => ['clips-animados.sfx*', 'clips-animados.vfx*', 'clips-animados.backgrounds'], 'subs' => [
                                 ['route' => 'clips-animados.sfx',         'label' => 'SFX Studio',  'match' => 'clips-animados.sfx*'],
                                 ['route' => 'clips-animados.vfx',         'label' => 'VFX Lab',     'match' => 'clips-animados.vfx*'],
                                 ['route' => 'clips-animados.backgrounds', 'label' => 'Backgrounds', 'match' => 'clips-animados.backgrounds'],
                             ]],
-                            ['route' => 'publicacoes',     'label' => 'Posts',             'sub' => 'Posts · Carousels',  'color' => '#5E5590', 'glyph' => '◇', 'match' => ['publicacoes', 'publicacoes.*'],
-                                // The workshop is one page per publication type — the types
-                                // live in config, so the shelf can't hardcode them.
-                                'subs' => collect(config('contentmachine.publicacoes.tipos', []))
-                                    ->map(fn ($t, $tipo) => [
-                                        'route' => 'publicacoes.oficina',
-                                        'params' => ['tipo' => $tipo],
-                                        'label' => $t['label'] ?? $tipo,
-                                    ])->values()->all(),
-                            ],
                         ]],
-                        ['titulo' => 'Library', 'itens' => [
-                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#3D7A4C', 'glyph' => '♫'],
-                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#A93A48', 'glyph' => '❖'],
-                        ]],
-                        ['titulo' => 'Publish', 'itens' => [
-                            ['route' => 'finished',        'label' => 'Finished',          'sub' => 'Scheduling · Posted', 'color' => '#A8552B', 'glyph' => '⬡'],
+                        ['titulo' => 'Biblioteca', 'itens' => [
+                            ['route' => 'ativos',          'label' => 'Assets',            'sub' => 'Media · Music',      'color' => '#05B8E6', 'glyph' => '♫'],
+                            ['route' => 'design-system',   'label' => 'Design System',     'sub' => 'Content brand',      'color' => '#05B8E6', 'glyph' => '❖'],
                         ]],
                         ['titulo' => null, 'itens' => [
-                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#3D6A85', 'glyph' => '⚙'],
+                            ['route' => 'definicoes',      'label' => 'Settings',          'sub' => 'Variables',          'color' => '#05B8E6', 'glyph' => '⚙'],
                         ]],
                     ];
                     $n = 0; // running number across the whole shelf
@@ -188,21 +162,11 @@
                 <form method="POST" action="{{ route('logout') }}" class="shrink-0">
                     @csrf
                     <button type="submit" class="font-mono text-[0.6rem] text-ink-faint hover:text-rust underline underline-offset-2 transition">
-                        Sign out
+                        Sair
                     </button>
                 </form>
             </div>
 
-            <div class="px-6 py-2.5 border-t border-ink-soft/15">
-                <div class="font-mono text-[0.6rem] text-ink-faint leading-relaxed">
-                    <div>BRAIN ·
-                        <a href="obsidian://open?path={{ rawurlencode(config('contentmachine.vault.path')) }}"
-                           class="text-teal underline decoration-teal/40 underline-offset-2 hover:decoration-teal transition"
-                           title="Open the vault in Obsidian">Obsidian Vault</a>
-                    </div>
-                    <div>006.3 · ACM · '26</div>
-                </div>
-            </div>
         </aside>
 
         {{-- ============ Content ============ --}}

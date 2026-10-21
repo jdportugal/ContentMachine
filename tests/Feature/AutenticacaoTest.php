@@ -31,9 +31,8 @@ class AutenticacaoTest extends TestCase
     public function test_visitante_e_redirecionado_para_o_login(): void
     {
         $this->get('/definicoes')->assertRedirect('/login');
-        $this->get('/painel')->assertRedirect('/login');
         $this->get('/imoveis')->assertRedirect('/login');
-        $this->get('/noticias')->assertRedirect('/login');
+        $this->get('/clips-animados')->assertRedirect('/login');
     }
 
     /** The media/file routes are not pages, and were open before — cover them too. */

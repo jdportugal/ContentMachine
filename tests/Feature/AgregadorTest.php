@@ -249,48 +249,6 @@ class AgregadorTest extends TestCase
         $this->assertGreaterThan(0, $resumo['por_plataforma']['youtube']);
     }
 
-    public function test_pagina_noticias_responde_200(): void
-    {
-        $this->get('/noticias')
-            ->assertOk()
-            ->assertSee('Aggregate now');
-    }
-
-    public function test_botao_agregar_agora_corre_e_mostra_dia(): void
-    {
-        Livewire::test(Noticias::class)
-            ->call('agregarAgora')
-            ->assertSet('diaSelecionado', '2026-07-14')
-            ->assertSee('Nick Saraev');
-    }
-
-    public function test_agregar_agora_despacha_job_e_nao_bloqueia(): void
-    {
-        Queue::fake();
-
-        Livewire::test(Noticias::class)
-            ->call('agregarAgora')
-            ->assertSet('aAgregar', true);
-
-        Queue::assertPushed(AgregarConteudoJob::class);
-    }
-
-    public function test_nao_agrega_de_novo_enquanto_a_anterior_nao_termina(): void
-    {
-        Queue::fake();
-
-        Livewire::test(Noticias::class)->call('agregarAgora')->assertSet('aAgregar', true);
-
-        // A second page (other tab, or a reload) must join the run in flight,
-        // never stack a second collection on the same vault.
-        Livewire::test(Noticias::class)
-            ->assertSet('aAgregar', true)
-            ->call('agregarAgora')
-            ->assertSet('aAgregar', true);
-
-        Queue::assertPushed(AgregarConteudoJob::class, 1);
-    }
-
     private function rrmdir(string $dir): void
     {
         if (! is_dir($dir)) {

@@ -8,9 +8,10 @@ use Closure;
 use Illuminate\Http\Request;
 
 /**
- * Resolves the active project (from the session) and switches the whole app at
- * it (vault + design-system + clip-style + model overlay + locale) via
- * ProjectActivator, before any Livewire component / service resolves the vault.
+ * Imocena has one project (config contentmachine.project, else the first in the
+ * registry): switches the whole app at it (vault + design-system + clip-style +
+ * model overlay + locale) via ProjectActivator, before any Livewire component /
+ * service resolves the vault.
  */
 class SetActiveProject
 {
@@ -21,7 +22,7 @@ class SetActiveProject
 
     public function handle(Request $request, Closure $next)
     {
-        $slug = (string) $request->session()->get('project_slug', '');
+        $slug = (string) config('contentmachine.project');
         $project = ($slug !== '' ? $this->projects->find($slug) : null) ?? $this->projects->default();
 
         $this->activator->activate($project);

@@ -477,13 +477,18 @@ return [
     ],
 
     /*
-    | Free-video leads from the public landing page. Their clips are made in this
-    | project (its style, music and end card). Leave it without an agent in
-    | Resources: a project agent replaces the listing's, and the lead's video must
-    | carry the lead's own agent. Empty = the default project.
+    | Imocena runs ONE project: every request and job uses it (SetActiveProject),
+    | whatever else the registry holds. Its style, music and end card shape every
+    | reel. Leave it without an agent in Resources: a project agent replaces the
+    | listing's, and each reel must carry the listing's own agent. Empty = the
+    | first project in the registry.
+    */
+    'project' => env('IMOCENA_PROJECT', ''),
+
+    /*
+    | Free-video leads from the public landing page.
     */
     'leads' => [
-        'project' => env('LEADS_PROJECT', ''),
         'per_hour' => (int) env('LEADS_PER_HOUR', 5),   // form submissions per IP
         'watermark' => env('LEADS_WATERMARK', 'IMOCENA · VÍDEO GRÁTIS'),   // across the free videos
     ],

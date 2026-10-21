@@ -438,8 +438,10 @@
 
                                 @if (!empty($sug['description']))
                                     <p class="mt-3 text-ink-soft text-sm leading-relaxed whitespace-pre-line">{{ $sug['description'] }}</p>
+                                    {{-- Built here: a double quote inside the :text attribute ended it early. --}}
+                                    @php $legenda = trim($sug['description'].PHP_EOL.PHP_EOL.collect($sug['tags'] ?? [])->map(fn ($t) => '#'.preg_replace('/\s+/u', '', ltrim($t, '#')))->implode(' ')); @endphp
                                     <x-copy-btn class="mt-2 font-mono text-[0.62rem] px-2 py-1 rounded-sm border border-ink-soft/20 text-ink-soft hover:text-teal hover:border-teal/40 transition"
-                                                :text="trim($sug['description']."\n\n".collect($sug['tags'] ?? [])->map(fn ($t) => '#'.preg_replace('/\s+/u', '', ltrim($t, '#')))->implode(' '))" label="⧉ copy caption + hashtags" />
+                                                :text="$legenda" label="⧉ copy caption + hashtags" />
                                 @endif
 
                                 @if (!empty($sug['tags']))
@@ -485,11 +487,6 @@
                                     @endif
                                     @if ($project->status === 'done' && $project->output_path)
                                         <a href="{{ route('clips-animados.media', ['id' => $project->id, 'download' => 1]) }}" class="text-teal hover:underline">↓ download</a>
-                                        @if ($project->finished)
-                                            <span class="text-good">✓ in Finished</span>
-                                        @else
-                                            <button type="button" wire:click="promover('{{ $project->id }}')" class="text-teal hover:underline">→ send to Finished</button>
-                                        @endif
                                     @endif
                                     <button type="button" wire:click="apagar('{{ $project->id }}')"
                                             wire:confirm="Delete this clip and its files? This action is permanent."
@@ -775,7 +772,6 @@
 
                     @include('livewire.partials.instructions-field')
 
-                    @include('livewire.partials.para-finalizados')
 
                     @include('livewire.partials.no-images')
 
@@ -834,7 +830,6 @@
 
                     @include('livewire.partials.instructions-field')
 
-                    @include('livewire.partials.para-finalizados')
 
                     @include('livewire.partials.no-images')
 
@@ -1351,7 +1346,6 @@
 
                 @include('livewire.partials.instructions-field')
 
-                @include('livewire.partials.para-finalizados')
 
                     @include('livewire.partials.no-images')
 
@@ -1591,5 +1585,5 @@
         }));
     </script>
     @endscript
-    @include('livewire.publicacoes._lightbox')
+    @include('livewire.partials.lightbox')
 </div>

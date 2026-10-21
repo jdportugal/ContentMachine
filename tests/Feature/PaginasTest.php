@@ -20,20 +20,9 @@ class PaginasTest extends TestCase
     public static function routes(): array
     {
         return [
-            'dashboard' => ['/painel', 'Dashboard'],
             'portal' => ['/imoveis', 'Os meus vídeos'],
-            'monitoring' => ['/monitorizacao', 'Monitoring'],
-            'clips' => ['/clips', 'Shorts Generator'],
             'animated-clips' => ['/clips-animados', 'Animated Clips'],
-            'posts' => ['/publicacoes', 'Posts'],
-            'workshop-post' => ['/publicacoes/post', 'Single-page posts'],
-            'workshop-quote' => ['/publicacoes/citacao', 'Quotes'],
-            'workshop-tip' => ['/publicacoes/dica', 'Quick tips'],
-            'workshop-carousel' => ['/publicacoes/carrossel', 'Carousels'],
-            'workshop-list' => ['/publicacoes/lista', 'Numbered lists'],
-            'workshop-summary' => ['/publicacoes/resumo-semana', 'Week in review'],
-            'drafts' => ['/finished', 'Finished'],
-            'news' => ['/noticias', 'News Aggregator'],
+            'assets' => ['/ativos', 'Assets'],
             'design-system' => ['/design-system', 'Design System'],
             'settings' => ['/definicoes', 'Settings'],
         ];
@@ -45,34 +34,5 @@ class PaginasTest extends TestCase
         $this->get($url)
             ->assertOk()
             ->assertSee($text);
-    }
-
-    public function test_monitoring_shows_latest_per_type(): void
-    {
-        $this->get('/monitorizacao?rede=youtube')
-            ->assertOk()
-            ->assertSee('Latest of each genre')
-            ->assertSee('Top performing posts');
-    }
-
-    public function test_dashboard_reads_drafts_from_vault(): void
-    {
-        // The seeded vault has examples → the dashboard shows the platforms section.
-        $this->get('/painel')
-            ->assertOk()
-            ->assertSee('recent performance', false);
-    }
-
-    public function test_dashboard_does_not_crash_with_the_real_drivers_and_no_apify_key(): void
-    {
-        // Regression: the dashboard used to call the live news driver, which throws
-        // when Apify isn't set → «/» returned 500. It must now read the stored report.
-        config([
-            'contentmachine.monitoring.driver' => 'ytdlp',
-            'contentmachine.news.driver' => 'api',
-            'services.apify.token' => null,
-        ]);
-
-        $this->get('/painel')->assertOk();
     }
 }

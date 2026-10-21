@@ -56,20 +56,4 @@ class ProjectCloneTest extends TestCase
         $this->assertNotSame($clonePreview, app(EffectLibrary::class)->previewPath('card'), 'previews never collide');
     }
 
-    public function test_the_switcher_clones_the_current_project_and_switches_to_it(): void
-    {
-        $orig = app(ProjectRepository::class)->create('Imob', 'pt');
-        session(['project_slug' => $orig->slug]);
-        $this->activate($orig->slug);
-
-        Livewire::test(ProjectSwitcher::class)
-            ->call('abrirClone')
-            ->assertSet('cloneName', 'Imob (copy)')
-            ->call('clonar')
-            ->assertHasNoErrors()
-            ->assertRedirect(route('painel'));
-
-        $this->assertSame('imob-copy', session('project_slug'));
-        $this->assertNotNull(app(ProjectRepository::class)->find('imob-copy'));
-    }
 }

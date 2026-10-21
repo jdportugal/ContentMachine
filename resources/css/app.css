@@ -11,8 +11,9 @@
 /* ============================================================
    IMOCENA — the iad premium look (navy · cyan · coral · ivory)
    The app keeps its token NAMES (papyrus/vellum/ink/teal/gold) so
-   every existing view re-skins at once: the portal is ivory paper
-   with navy ink; the public site uses navy/cyan/coral/ivory direct.
+   every existing view re-skins at once: like the public site, the
+   app is navy with ivory ink, cyan accents and coral buttons
+   (teal-deep = coral fill, with papyrus = navy text on it).
    ============================================================ */
 @theme {
     /* Marca */
@@ -25,31 +26,31 @@
     --color-ivory: #F4F1EA;     /* texto sobre navy / fundo claro */
 
     /* Superfícies (portal) */
-    --color-papyrus: #F4F1EA;   /* fundo principal */
-    --color-vellum: #FFFFFF;    /* cartões / superfícies */
-    --color-surface: #ECE8DF;   /* hover, painéis internos */
-    --color-shelf: #E2DDD1;     /* campo de contraste */
+    --color-papyrus: #0E1626;   /* fundo principal */
+    --color-vellum: #141F33;    /* cartões / superfícies */
+    --color-surface: #1B2638;   /* hover, painéis internos */
+    --color-shelf: #26324A;     /* campo de contraste */
 
     /* Texto */
-    --color-ink: #0E1626;
-    --color-ink-soft: #4A5263;
-    --color-ink-faint: #646C7A;
+    --color-ink: #F4F1EA;
+    --color-ink-soft: #C9CED6;
+    --color-ink-faint: #8B95A7;
 
     /* Acento interativo */
-    --color-teal: #076E8A;      /* texto/bordas interativas */
-    --color-teal-deep: #0E1626; /* preenchimento de botões */
+    --color-teal: #05B8E6;      /* texto/bordas interativas */
+    --color-teal-deep: #F06052; /* preenchimento de botões */
 
     /* Destaques (coral escurecido para texto pequeno sobre marfim) */
-    --color-gold: #C2412F;
-    --color-leather: #A33A2A;
+    --color-gold: #F06052;
+    --color-leather: #E2725F;
 
     /* Etiquetas (eyebrow) */
-    --color-star: #076E8A;
+    --color-star: #05B8E6;
 
     /* Estados */
-    --color-good: #2F7A4A;
-    --color-warn: #A8701A;
-    --color-bad: #B33A2A;
+    --color-good: #4CC38A;
+    --color-warn: #E8A33D;
+    --color-bad: #FF7A6B;
 
     /* Tipografia — Cormorant Garamond (títulos) + Poppins (corpo) */
     --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -122,7 +123,7 @@
 }
 
 /* Sombra de folha pousada sobre a mesa. */
-.shadow-engraved { box-shadow: 0 1px 2px rgba(60, 45, 20, 0.08), 0 8px 24px -12px rgba(60, 45, 20, 0.18); }
+.shadow-engraved { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 12px 30px -14px rgba(0, 0, 0, 0.6); }
 
 /* ---------- Drop cap (ocre) ---------- */
 .dropcap::first-letter {
@@ -183,7 +184,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(120% 90% at 50% 40%, rgba(244, 241, 234, 0.85), rgba(226, 221, 209, 0.94));
+    background: radial-gradient(120% 90% at 50% 40%, rgba(14, 22, 38, 0.86), rgba(10, 16, 28, 0.95));
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }

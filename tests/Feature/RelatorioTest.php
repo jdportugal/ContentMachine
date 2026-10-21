@@ -90,39 +90,6 @@ class RelatorioTest extends TestCase
         $this->assertSame('semana', $rel['modo']);
     }
 
-    public function test_criar_relatorio_persiste_nota_no_vault(): void
-    {
-        $hoje = Carbon::today()->toDateString();
-        $this->semearItem($hoje, 'youtube', 'a', ['ia'], ['https://fonte/1']);
-
-        Livewire::test(Noticias::class)
-            ->set('modoRelatorio', 'dia')
-            ->set('dataRelatorio', $hoje)
-            ->call('criarRelatorio')
-            ->assertSet('relatorio', fn ($v) => is_array($v) && $v['total'] === 1 && filled($v['redacao']))
-            // Ao criar, a vista passa a apontar para o relatório recém-arquivado.
-            ->assertSet('relatorioSelecionado', "noticias/relatorios/dia-{$hoje}.md");
-
-        $nota = $this->vault->get("noticias/relatorios/dia-{$hoje}.md");
-        $this->assertNotNull($nota);
-        $this->assertSame('relatorio', $nota->get('tipo'));
-        $this->assertNotEmpty($nota->get('dados'));
-    }
-
-    public function test_criar_relatorio_despacha_job_e_fica_a_gerar(): void
-    {
-        Queue::fake();
-
-        Livewire::test(Noticias::class)
-            ->set('modoRelatorio', 'dia')
-            ->set('dataRelatorio', Carbon::today()->toDateString())
-            ->call('criarRelatorio')
-            // Não bloqueia o pedido web: fica a gerar e sonda o worker.
-            ->assertSet('aGerar', true);
-
-        Queue::assertPushed(GerarRelatorioJob::class);
-    }
-
     /** Grava um relatório arquivado diretamente no vault (sem passar pela geração). */
     private function semearRelatorio(string $slug, string $modo, string $inicio, string $titulo, int $total): void
     {
@@ -138,30 +105,6 @@ class RelatorioTest extends TestCase
             'tags' => ['noticias', 'relatorio', $modo],
             'dados' => json_encode(['titulo' => $titulo, 'modo' => $modo, 'total' => $total, 'resumo' => 'x'], JSON_UNESCAPED_UNICODE),
         ], "# {$titulo}");
-    }
-
-    public function test_seletor_lista_relatorios_arquivados_e_abre_no_mais_recente(): void
-    {
-        $this->semearRelatorio('dia-2026-07-20', 'dia', '2026-07-20', 'Antigo', 3);
-        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Recente', 12);
-
-        Livewire::test(Noticias::class)
-            // Abre no mais recente por defeito.
-            ->assertSet('relatorioSelecionado', 'noticias/relatorios/dia-2026-07-22.md')
-            ->assertViewHas('relatoriosPassados', fn ($lista) => count($lista) === 2
-                && $lista[0]['path'] === 'noticias/relatorios/dia-2026-07-22.md')
-            // Mostra o mais recente.
-            ->assertViewHas('relatorio', fn ($r) => is_array($r) && $r['titulo'] === 'Recente');
-    }
-
-    public function test_selecionar_relatorio_antigo_carrega_esse_relatorio(): void
-    {
-        $this->semearRelatorio('dia-2026-07-20', 'dia', '2026-07-20', 'Antigo', 3);
-        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Recente', 12);
-
-        Livewire::test(Noticias::class)
-            ->set('relatorioSelecionado', 'noticias/relatorios/dia-2026-07-20.md')
-            ->assertViewHas('relatorio', fn ($r) => is_array($r) && $r['titulo'] === 'Antigo' && $r['total'] === 3);
     }
 
     // ───────────────────────── Tool tips (same pipeline, other write-up) ─────
@@ -231,83 +174,7 @@ class RelatorioTest extends TestCase
         $this->assertNotEmpty($rel['topicos']);
     }
 
-    public function test_dicas_arquivam_em_nota_propria_sem_sobrepor_o_relatorio_do_mesmo_dia(): void
-    {
-        $hoje = Carbon::today()->toDateString();
-        $this->semearItem($hoje, 'youtube', 'a', ['ia']);
-        $this->llmEspiao();
-
-        Livewire::test(Noticias::class)
-            ->set('dataRelatorio', $hoje)
-            ->call('criarRelatorio')                      // news (default kind)
-            ->set('tipoRelatorio', RelatorioBuilder::TIPO_DICAS)
-            ->call('criarRelatorio')                      // tips
-            ->assertSet('relatorioSelecionado', "noticias/relatorios/dicas-dia-{$hoje}.md");
-
-        $noticias = $this->vault->get("noticias/relatorios/dia-{$hoje}.md");
-        $dicas = $this->vault->get("noticias/relatorios/dicas-dia-{$hoje}.md");
-
-        $this->assertSame('relatorio', $noticias?->get('tipo'));
-        $this->assertSame('relatorio_dicas', $dicas?->get('tipo'));
-    }
-
     // ───────────────────────── Topic scripts (typed topic, researched on the web) ─────
-
-    public function test_topico_pesquisa_na_web_e_arquiva_guiao_proprio(): void
-    {
-        $llm = $this->llmEspiao();
-
-        Livewire::test(Noticias::class)
-            ->set('tipoRelatorio', RelatorioBuilder::TIPO_TOPICO)
-            ->set('topico', '  Claude Code hooks ')
-            ->call('criarRelatorio')
-            ->assertHasNoErrors()
-            ->assertSet('relatorioSelecionado', 'noticias/relatorios/topico-claude-code-hooks.md')
-            ->assertSee('Burning tokens?');
-
-        $nota = $this->vault->get('noticias/relatorios/topico-claude-code-hooks.md');
-        $this->assertSame('relatorio_topico', $nota?->get('tipo'));
-        $this->assertSame('Claude Code hooks', $nota?->get('titulo'));
-
-        // The prompt carries the topic, asks for web research and runs with tools on.
-        $this->assertStringContainsString('Claude Code hooks', (string) $llm->capturado);
-        $this->assertStringContainsString('web search', (string) $llm->capturado);
-        $this->assertStringContainsString('SHORT-FORM VIDEO SCRIPTS', (string) $llm->capturado);
-        $this->assertTrue($llm->comWeb);
-    }
-
-    public function test_topico_vazio_nao_dispara_nada(): void
-    {
-        Queue::fake();
-
-        Livewire::test(Noticias::class)
-            ->set('tipoRelatorio', RelatorioBuilder::TIPO_TOPICO)
-            ->set('topico', '   ')
-            ->call('criarRelatorio')
-            ->assertHasErrors('topico')
-            ->assertSet('aGerar', false);
-
-        Queue::assertNothingPushed();
-    }
-
-    public function test_o_seletor_de_arquivo_so_mostra_o_genero_escolhido(): void
-    {
-        $this->semearRelatorio('dia-2026-07-22', 'dia', '2026-07-22', 'Notícias', 12);
-        $this->vault->put('noticias/relatorios/dicas-dia-2026-07-22.md', [
-            'titulo' => 'Dicas', 'tipo' => 'relatorio_dicas', 'modo' => 'dia',
-            'inicio' => '2026-07-22', 'fim' => '2026-07-22', 'total' => 4,
-            'gerado_em' => '2026-07-22T10:00:00+00:00', 'estado' => 'arquivado',
-            'tags' => ['noticias', 'dicas', 'dia'],
-            'dados' => json_encode(['titulo' => 'Dicas', 'modo' => 'dia', 'total' => 4, 'resumo' => 'x']),
-        ], '# Dicas');
-
-        Livewire::test(Noticias::class)
-            ->assertViewHas('relatoriosPassados', fn ($l) => count($l) === 1)
-            ->assertViewHas('relatorio', fn ($r) => $r['titulo'] === 'Notícias')
-            ->set('tipoRelatorio', RelatorioBuilder::TIPO_DICAS)
-            ->assertViewHas('relatoriosPassados', fn ($l) => count($l) === 1)
-            ->assertViewHas('relatorio', fn ($r) => $r['titulo'] === 'Dicas');
-    }
 
     private function rrmdir(string $dir): void
     {

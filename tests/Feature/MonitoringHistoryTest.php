@@ -85,38 +85,4 @@ class MonitoringHistoryTest extends TestCase
         $this->assertSame(500, $anterior['metricas']['subscritores']);
     }
 
-    public function test_the_dashboard_shows_the_previous_day_under_the_totals(): void
-    {
-        Carbon::setTestNow('2026-08-20 09:00:00');
-
-        $this->history()->registar(
-            ['subscritores' => 1180, 'publicacoes' => 42, 'visualizacoes' => 90000, 'interacoes' => 1200],
-            [],
-            Carbon::parse('2026-08-19'),
-        );
-
-        $this->comSessaoIniciada();
-        Livewire::test(Painel::class)
-            ->assertSee('1.2k')       // 1,180 subscribers a day earlier, formatted like the headline
-            ->assertSee('42')         // posts
-            ->assertSee('90k')        // views, same formatting
-            ->assertSee('yesterday');
-
-        Carbon::setTestNow();
-    }
-
-    /** An older figure must never read as last night's — it gets its date instead. */
-    public function test_an_older_figure_is_labelled_with_its_date_not_yesterday(): void
-    {
-        Carbon::setTestNow('2026-08-20 09:00:00');
-
-        $this->history()->registar(['subscritores' => 500], [], Carbon::parse('2026-08-14'));
-
-        $this->comSessaoIniciada();
-        Livewire::test(Painel::class)
-            ->assertSee('14 Aug')
-            ->assertDontSee('yesterday');
-
-        Carbon::setTestNow();
-    }
 }

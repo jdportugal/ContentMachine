@@ -80,19 +80,6 @@ class MonitoringCollectionTest extends TestCase
         $this->fetcher()->atualizar('instagram', 'https://instagram.com/x/');
     }
 
-    /** ...and to the UI, so "no data" is distinguishable from "it broke". */
-    public function test_the_refresh_button_reports_why_it_failed(): void
-    {
-        Http::fake(['api.apify.com/*' => Http::response('nope', 401)]);
-        $this->definirPerfil('instagram', 'https://instagram.com/x/');
-
-        Livewire::test(Monitorizacao::class)
-            ->set('rede', 'instagram')
-            ->call('atualizar')
-            ->assertDispatched('toast', fn ($event, $params) => $params['type'] === 'erro'
-                && str_contains($params['message'], 'Apify failed'));
-    }
-
     /**
      * Actors report failures as dataset rows ({"error": "not_found"}). Mapping
      * one produced a fake post (md5 id, zero metrics) and the "successful" save
@@ -180,27 +167,6 @@ class MonitoringCollectionTest extends TestCase
         $this->assertArrayNotHasKey('linkedin', $resultado);
     }
 
-    public function test_collect_all_button_reports_a_per_network_summary(): void
-    {
-        $this->definirPerfil('instagram', 'https://instagram.com/x/');
-
-        Http::fake(['api.apify.com/*' => Http::response([
-            ['id' => 'p1', 'url' => 'https://instagram.com/p/1', 'likesCount' => 1],
-        ])]);
-
-        Livewire::test(Monitorizacao::class)
-            ->call('atualizarTodas')
-            ->assertDispatched('toast', fn ($event, $params) => str_contains($params['message'], 'instagram 1'));
-    }
-
-    public function test_collect_all_without_any_profile_url_says_so(): void
-    {
-        Livewire::test(Monitorizacao::class)
-            ->call('atualizarTodas')
-            ->assertDispatched('toast', fn ($event, $params) => $params['type'] === 'erro'
-                && str_contains($params['message'], 'No profile URLs set'));
-    }
-
     // ── the nightly command ──────────────────────────────────────────────
 
     public function test_the_collect_command_runs_and_reports_per_network(): void
@@ -223,26 +189,6 @@ class MonitoringCollectionTest extends TestCase
         Http::fake(['api.apify.com/*' => Http::response('boom', 500)]);
 
         $this->artisan('monitoring:collect')->assertExitCode(1);
-    }
-
-    /** The nightly run must actually be registered, not just the command exist. */
-    public function test_collection_is_scheduled_nightly_at_midnight(): void
-    {
-        $evento = $this->eventoAgendado();
-
-        $this->assertNotNull($evento, 'monitoring:collect is not scheduled');
-        $this->assertSame('0 0 * * *', $evento->expression);
-    }
-
-    /**
-     * "Midnight" must mean the operator's midnight. Two links have to hold: the
-     * scheduled run follows app.timezone, and app.timezone is settable from the
-     * environment. It used to be hardcoded to UTC, so a Lisbon user's nightly
-     * collection fired at 01:00 local for half the year.
-     */
-    public function test_the_nightly_run_follows_the_app_timezone(): void
-    {
-        $this->assertSame(config('app.timezone'), $this->eventoAgendado()->timezone);
     }
 
     public function test_the_app_timezone_can_be_set_from_the_environment(): void

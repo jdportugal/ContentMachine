@@ -4,22 +4,13 @@ use App\Livewire\Ativos;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\AvatarGen;
-use App\Livewire\Clips;
 use App\Livewire\ClipsAnimados;
 use App\Livewire\ClipsAnimadosSfx;
 use App\Livewire\ClipsAnimadosVfx;
-use App\Livewire\ContentRepurpose;
 use App\Livewire\Definicoes;
 use App\Livewire\Imoveis;
 use App\Livewire\Landing;
 use App\Livewire\DesignSystem;
-use App\Livewire\Monitorizacao;
-use App\Livewire\Noticias;
-use App\Livewire\Painel;
-use App\Livewire\PostsGenerator;
-use App\Livewire\Publicacoes\Oficina;
-use App\Livewire\Publicacoes\Publicacoes;
-use App\Livewire\Rascunhos;
 use App\Services\Avatars\AvatarStore;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\BackgroundPortability;
@@ -81,37 +72,8 @@ Route::post('/logout', function (Request $request) {
 // submissions are Livewire requests). Livewire re-applies Authenticate to update
 // requests for these components on its own — it is persistent middleware.
 Route::middleware('auth')->group(function () {
-    Route::livewire('/painel', Painel::class)->name('painel');
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
-    Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
-    Route::livewire('/clips', Clips::class)->name('clips');
-    // Content Transformer subtabs. Registered before '/clips/{slug}/video' so the
-    // literal segments are never swallowed by that wildcard.
-    Route::livewire('/clips/posts', PostsGenerator::class)->name('clips.posts');
-    Route::livewire('/clips/repurpose', ContentRepurpose::class)->name('clips.repurpose');
-
-    // Serve o vídeo do clip para pré-visualização. Devolve o melhor disponível:
-    // short final (com música > legendado) ou, se ainda só foi cortado, o corte cru.
-    // ?v=raw força o corte cru; ?v=final força o short legendado.
-    Route::get('/clips/{slug}/video', function (string $slug) {
-        $dir = storage_path('app/shorts/'.basename($slug));
-
-        $ordem = match (request('v')) {
-            'raw' => ['raw.mp4'],
-            'final' => ['final-music.mp4', 'final.mp4'],
-            default => ['final-music.mp4', 'final.mp4', 'raw.mp4'],
-        };
-
-        $path = collect($ordem)
-            ->map(fn ($f) => $dir.'/'.$f)
-            ->first(fn ($p) => is_file($p));
-
-        abort_unless($path !== null, 404);
-
-        return response()->file($path);
-    })->name('clips.video');
-
     // Serve uma faixa da biblioteca de música (storage/app/shorts/musicas) para pré-visualização.
     Route::get('/clips/musica/{name}', function (string $name) {
         $path = app(MusicLibrary::class)->pathFor($name);
@@ -356,11 +318,6 @@ Route::middleware('auth')->group(function () {
             : response()->file($path);
     })->name('avatar-gen.media');
 
-    Route::livewire('/publicacoes', Publicacoes::class)->name('publicacoes');
-    Route::livewire('/publicacoes/{tipo}', Oficina::class)->name('publicacoes.oficina');
-
-    Route::livewire('/finished', Rascunhos::class)->name('finished');
-    Route::livewire('/noticias', Noticias::class)->name('noticias');
     Route::livewire('/design-system', DesignSystem::class)->name('design-system');
     Route::livewire('/definicoes', Definicoes::class)->name('definicoes');
 });
