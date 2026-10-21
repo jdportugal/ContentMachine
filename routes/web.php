@@ -41,22 +41,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 // ── Public site ──────────────────────────────────────────────────────────────
-// The free-video landing page, and the signed links its email sends: a lead has
-// no account, so the signature is the key and LeadVideo activates their project.
+// The free-video landing page, and the signed link to the finished reel it shows:
+// a lead has no account, so the signature is the key and LeadVideo activates their project.
 Route::livewire('/', Landing::class)->name('home');
 
 Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
-    $row = $videos->lead($lead);
-    abort_unless($row && $videos->ficheiro($row), 404);
-
-    return view('lead-video', [
-        'nome' => strtok($row->nome, ' '),
-        'ficheiro' => URL::signedRoute('lead.video.ficheiro', ['lead' => $lead]),
-        'descarregar' => URL::signedRoute('lead.video.ficheiro', ['lead' => $lead, 'download' => 1]),
-    ]);
-})->middleware('signed')->name('lead.video');
-
-Route::get('/v/{lead}/mp4', function (int $lead, LeadVideo $videos) {
     $row = $videos->lead($lead);
     $ficheiro = $row ? $videos->ficheiro($row) : null;
     abort_unless($ficheiro, 404);
@@ -64,7 +53,7 @@ Route::get('/v/{lead}/mp4', function (int $lead, LeadVideo $videos) {
     return request()->boolean('download')
         ? response()->download($ficheiro, 'imocena-video.mp4')
         : response()->file($ficheiro);
-})->middleware('signed')->name('lead.video.ficheiro');
+})->middleware('signed')->name('lead.video');
 
 // ── Authentication ───────────────────────────────────────────────────────────
 // The way in and out. Everything else lives in the `auth` group below.

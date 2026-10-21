@@ -29,6 +29,6 @@ Schedule::command('monitoring:collect')
 Schedule::command('auto:tick')->everyMinute();
 
 /*
- * Free-video leads (landing page): email each one the link once their reel is rendered.
+ * Free-video leads (landing page): read the agent's name/phone off the listing and mark each reel ready or failed.
  */
-Schedule::command('leads:enviar')->everyMinute()->withoutOverlapping();
+Schedule::command('leads:atualizar')->everyMinute()->withoutOverlapping();

@@ -5,23 +5,28 @@
 
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
 
-    // Prices are placeholders until set: [PREÇO] / [N].
+    // Prices include VAT. Paid videos are sold by email until there is a checkout.
+    $comprar = fn (string $o) => 'mailto:'.config('mail.from.address').'?subject='.rawurlencode($o);
+    $limpo = 'Versão limpa, sem marca d’água';
     $planos = [
-        ['nome' => 'GRÁTIS', 'para' => 'Para experimentar com um imóvel seu.', 'qtd' => '1 vídeo', 'unidade' => 'oferta', 'preco' => '0 €', 'cta' => 'Pedir o vídeo grátis', 'href' => '#pedido', 'nota' => 'Sem cartão de crédito', 'inclui' => 'Inclui:', 'itens' => ['Estilo premium', 'Voz em português de Portugal', 'Cartão final com AMI', 'Sem marca d’água'], 'destaque' => false, 'coral' => true],
-        ['nome' => 'CONSULTOR', 'para' => 'Para quem angaria alguns imóveis por mês.', 'qtd' => '[N] vídeos', 'unidade' => '/mês', 'preco' => '[PREÇO] €/mês', 'cta' => 'Começar', 'href' => 'mailto:'.config('mail.from.address'), 'nota' => 'Cancela quando quiser', 'inclui' => 'Tudo no Grátis, mais:', 'itens' => ['Todos os estilos', 'A sua própria voz', 'Legenda e hashtags', 'Vídeo da visita guiada'], 'destaque' => false, 'coral' => false],
-        ['nome' => 'PROFISSIONAL', 'para' => 'Para consultores com carteira grande.', 'qtd' => '[N] vídeos', 'unidade' => '/mês', 'preco' => '[PREÇO] €/mês', 'cta' => 'Começar', 'href' => 'mailto:'.config('mail.from.address'), 'nota' => 'Cancela quando quiser', 'inclui' => 'Tudo no Consultor, mais:', 'itens' => ['Cores e logótipo da agência', 'Processamento prioritário', 'Vídeos extra a [PREÇO] €'], 'destaque' => true, 'coral' => false],
-        ['nome' => 'AGÊNCIA', 'para' => 'Para lojas e equipas da mesma rede.', 'qtd' => 'À medida', 'unidade' => '', 'preco' => 'Volume por loja', 'cta' => 'Falar connosco', 'href' => 'mailto:'.config('mail.from.address'), 'nota' => 'Resposta em 1 dia útil', 'inclui' => 'Tudo no Profissional, mais:', 'itens' => ['Vários consultores numa conta', 'Modelo com a marca da loja', 'Fatura única'], 'destaque' => false, 'coral' => false],
+        ['nome' => 'GRÁTIS', 'para' => 'Para experimentar com um imóvel seu.', 'preco' => '0 €', 'unidade' => '1 vídeo', 'porVideo' => 'Com marca d’água', 'cta' => 'Pedir o vídeo grátis', 'href' => '#pedido', 'itens' => ['Basta colar o link do anúncio', 'Voz em português de Portugal', 'Cartão final com AMI', 'Com marca d’água Imocena'], 'selo' => null, 'coral' => true],
+        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '29 €', 'unidade' => '1 vídeo', 'porVideo' => '29 € por vídeo', 'cta' => 'Comprar', 'href' => $comprar('Vídeo avulso (29 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 5', 'para' => 'Para as angariações do mês.', 'preco' => '120 €', 'unidade' => '5 vídeos', 'porVideo' => '24 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 5 (120 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '200 €', 'unidade' => '10 vídeos', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 10 (200 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '300 €', 'unidade' => '20 vídeos', 'porVideo' => '15 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 20 (300 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => 'MELHOR PREÇO', 'coral' => false],
     ];
 
     $faq = [
-        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito e o vídeo é seu, sem marca d’água, mesmo que não continue.'],
-        ['Como recebo o vídeo?', 'Por email, com um link para ver e descarregar o MP4 vertical, pronto a publicar.'],
+        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa custa 29 €, ou a partir de 15 € com um pack.'],
+        ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
         ['De que sites leem os anúncios?', 'RE/MAX, iad e idealista. Basta copiar o link da barra de endereço do anúncio.'],
-        ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Na sua conta pode também gravar o texto e usar a sua própria voz.'],
+        ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
         ['Posso alterar o texto da narração?', 'Na sua conta, sim: pode deixar uma nota (preço novo, algo a destacar) e o texto muda antes de ser gravado.'],
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
-        ['O que fazem com os meus dados?', 'Usamo-los só para criar e enviar o seu vídeo, de acordo com o RGPD. Pode pedir que os apaguemos a qualquer momento.'],
-        ['Posso pedir mais do que um vídeo grátis?', 'A oferta é de um vídeo por consultor. Para mais vídeos, crie uma conta e escolha um plano.'],
+        ['O que fazem com os meus dados?', 'Usamos os dados do anúncio só para criar o seu vídeo e o contactar sobre ele, de acordo com o RGPD. Pode pedir que os apaguemos a qualquer momento.'],
+        ['Posso pedir mais do que um vídeo grátis?', 'A oferta é de um vídeo grátis por anúncio, para experimentar. Depois, compre vídeos avulso (29 €) ou um pack de 5, 10 ou 20 vídeos.'],
+        ['Os packs expiram?', 'Os vídeos de um pack podem ser usados durante 12 meses a contar da compra.'],
+        ['Os preços incluem IVA?', 'Sim, todos os preços incluem IVA. Emitimos fatura com NIF.'],
     ];
 @endphp
 
@@ -63,56 +68,64 @@
                 <ul class="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-sm text-[#E4E6EA]">
                     <li class="flex items-center gap-2.5">{!! $check !!}Sem cartão de crédito</li>
                     <li class="flex items-center gap-2.5">{!! $check !!}Voz pt-PT, não brasileira</li>
-                    <li class="flex items-center gap-2.5">{!! $check !!}O vídeo é seu, sem marca d'água</li>
+                    <li class="flex items-center gap-2.5">{!! $check !!}Pronto a publicar</li>
                 </ul>
 
-                <div id="pedido" class="mt-10 max-w-[580px] scroll-mt-6 rounded-[18px] bg-ivory text-navy p-7 shadow-[0_30px_80px_-30px_rgba(0,0,0,.6)]">
-                    @if ($pedido)
-                        <div role="status" class="flex flex-col gap-3">
-                            <span class="font-display text-[32px] font-semibold leading-tight">Pedido recebido.</span>
-                            <p class="text-[15px] leading-relaxed text-ink-soft">Já estamos a ler o anúncio e a preparar o seu vídeo. Enviamos o link para <strong class="text-navy">{{ $email ?: 'o seu email' }}</strong> assim que estiver pronto.</p>
-                            <p class="text-sm text-ink-soft">Não recebeu? Veja a pasta de spam ou promoções.</p>
+                <div id="pedido" @if (($pedido['estado'] ?? null) === 'a-fazer') wire:poll.5s @endif
+                     class="mt-10 max-w-[580px] scroll-mt-6 rounded-[18px] bg-ivory text-navy p-7 shadow-[0_30px_80px_-30px_rgba(0,0,0,.6)]">
+                    @if (($pedido['estado'] ?? null) === 'pronto')
+                        <div class="flex flex-wrap gap-6 items-center">
+                            <video src="{{ $pedido['video'] }}" controls playsinline preload="metadata" class="w-[180px] aspect-[9/16] rounded-[14px] bg-navy"></video>
+                            <div class="flex-[1_1_220px] flex flex-col gap-3">
+                                <span class="text-xs tracking-[.28em] text-cyan-deep">O SEU VÍDEO ESTÁ PRONTO</span>
+                                <span class="font-display text-[32px] font-semibold leading-tight">Publique-o já.</span>
+                                <p class="text-sm leading-relaxed text-ink-soft">Esta versão leva a marca d’água Imocena. A versão limpa custa 29 €, ou a partir de 15 € com um pack.</p>
+                                <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-navy text-ivory font-semibold hover:bg-navy-3">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+                                    Descarregar MP4
+                                </a>
+                                <a href="#precos" class="text-sm font-medium text-navy underline underline-offset-2">Quero a versão limpa</a>
+                            </div>
+                        </div>
+                    @elseif (($pedido['estado'] ?? null) === 'a-fazer')
+                        <div role="status" class="flex flex-col gap-4">
+                            <span class="font-display text-[32px] font-semibold leading-tight">Estamos a fazer o seu vídeo.</span>
+                            <div class="h-1.5 rounded-full bg-shelf overflow-hidden"><div class="h-full bg-cyan-deep transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
+                            <p class="text-sm text-ink-soft"><strong class="text-navy font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui.</p>
+                        </div>
+                    @elseif (($pedido['estado'] ?? null) === 'falhou')
+                        <div role="alert" class="flex flex-col gap-3">
+                            <span class="font-display text-[32px] font-semibold leading-tight">Não conseguimos fazer este vídeo.</span>
+                            <p class="text-sm leading-relaxed text-ink-soft">Às vezes um anúncio não tem fotos ou dados suficientes. Já fomos avisados e vamos ver o que se passou.</p>
+                            <button type="button" wire:click="outro" class="self-start min-h-11 px-5 rounded-full border border-navy text-sm font-semibold">Tentar com outro anúncio</button>
                         </div>
                     @else
                         <form wire:submit="pedir" class="flex flex-col gap-3.5" novalidate>
                             <div class="flex flex-wrap justify-between items-baseline gap-3">
                                 <span class="font-display text-[28px] font-semibold">Peça o seu vídeo grátis</span>
-                                <span class="text-xs font-medium text-ink-soft">Leva 1 minuto</span>
+                                <span class="text-xs font-medium text-ink-soft">Só precisa do link</span>
                             </div>
-                            <label class="flex flex-col gap-1.5 text-[13px] font-medium">Link do anúncio
-                                <input type="url" wire:model="anuncio" placeholder="https://www.remax.pt/pt/imoveis/…" required
-                                       class="min-h-[50px] px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] font-normal text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
-                            </label>
+                            <label for="anuncio" class="text-[13px] font-medium">Link do anúncio</label>
+                            <div class="flex flex-wrap gap-2.5 -mt-2">
+                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="https://www.remax.pt/pt/imoveis/…" required
+                                       class="flex-[1_1_260px] min-w-0 min-h-14 px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
+                                <button type="submit" wire:loading.attr="disabled" wire:target="pedir"
+                                        class="min-h-14 px-6 rounded-full bg-navy text-ivory text-base font-semibold cursor-pointer hover:bg-navy-3 disabled:opacity-60">
+                                    <span wire:loading.remove wire:target="pedir">Criar vídeo grátis →</span>
+                                    <span wire:loading wire:target="pedir">A enviar…</span>
+                                </button>
+                            </div>
                             @error('anuncio') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
-                            <div class="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
-                                <label class="flex flex-col gap-1.5 text-[13px] font-medium">Nome
-                                    <input type="text" wire:model="nome" autocomplete="name" required class="min-h-[50px] px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] font-normal text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
-                                </label>
-                                <label class="flex flex-col gap-1.5 text-[13px] font-medium">Email
-                                    <input type="email" wire:model="email" autocomplete="email" required class="min-h-[50px] px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] font-normal text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
-                                </label>
-                                <label class="flex flex-col gap-1.5 text-[13px] font-medium">Telemóvel
-                                    <input type="tel" wire:model="telefone" autocomplete="tel" placeholder="9XX XXX XXX" required class="min-h-[50px] px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] font-normal text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
-                                </label>
-                            </div>
-                            @error('nome') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
-                            @error('email') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
-                            @error('telefone') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
                             {{-- Honeypot: invisible to people, tempting to bots. --}}
                             <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
                                 <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>
                             </div>
                             <label class="flex gap-2.5 items-start text-xs leading-normal text-ink-soft">
                                 <input type="checkbox" wire:model="consentimento" class="mt-0.5 w-[18px] h-[18px] shrink-0 accent-navy">
-                                <span>Aceito que a Imocena use estes dados para criar e enviar o vídeo, de acordo com a <a href="#" class="text-navy underline">Política de Privacidade</a> (RGPD).</span>
+                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="#" class="text-navy underline">Política de Privacidade</a> (RGPD).</span>
                             </label>
                             @error('consentimento') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
-                            <button type="submit" wire:loading.attr="disabled" wire:target="pedir"
-                                    class="min-h-14 rounded-full bg-navy text-ivory text-base font-semibold cursor-pointer hover:bg-navy-3 disabled:opacity-60">
-                                <span wire:loading.remove wire:target="pedir">Quero o meu vídeo grátis →</span>
-                                <span wire:loading wire:target="pedir">A enviar…</span>
-                            </button>
-                            <p class="text-xs text-ink-soft text-center">Recebe o vídeo por email. Lemos anúncios da RE/MAX, iad e idealista.</p>
+                            <p class="text-xs text-ink-soft">O nome, o contacto e as fotos vêm do anúncio. Lemos anúncios da RE/MAX, iad e idealista.</p>
                         </form>
                     @endif
                 </div>
@@ -266,8 +279,8 @@
                     ['AMI e agência no cartão final', 'Nome, telemóvel, agência e número de licença AMI no fecho de cada vídeo.', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M7 11h10"/>'],
                     ['Texto revisto por si', 'O preço baixou? A área do anúncio está errada? Na sua conta, escreve uma nota e o texto muda.', '<path d="M4 20h4L19 9l-4-4L4 16z"/>'],
                     ['Vertical, abaixo de 60 segundos', 'No formato certo para Reels, TikTok, Shorts e estados de WhatsApp.', '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'],
-                    ['As cores da sua agência', 'Logótipo e cores usados em todos os vídeos, nos planos pagos.', '<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>'],
-                    ['Sem marca d’água', 'O vídeo é seu. Publique onde quiser, quantas vezes quiser.', '<path d="M4 12v7h16v-7M12 3v12M7 8l5-5 5 5"/>'],
+                    ['As cores da sua agência', 'Logótipo e cores usados nos seus vídeos pagos.', '<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>'],
+                    ['Versão limpa a partir de 15 €', 'Sem marca d’água nos vídeos pagos. Publique onde quiser, quantas vezes quiser.', '<path d="M4 12v7h16v-7M12 3v12M7 8l5-5 5 5"/>'],
                 ] as [$titulo, $texto, $icone])
                     <div class="p-7 bg-ivory">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#076E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $icone !!}</svg>
@@ -284,36 +297,35 @@
         <div class="max-w-[1240px] mx-auto px-6 py-28">
             <div class="text-center max-w-[760px] mx-auto">
                 <div class="inline-flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">PREÇOS</span><span class="w-10 h-px bg-cyan"></span></div>
-                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">O primeiro é grátis. <em>Depois, escolha o ritmo.</em></h2>
+                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">O primeiro é grátis. <em>Depois, paga só os vídeos que faz.</em></h2>
             </div>
             <div class="mt-10 flex flex-wrap justify-center gap-3">
-                @foreach (['Sem fidelização', 'Fatura com NIF', 'Cancela quando quiser'] as $pill)
+                @foreach (['IVA incluído', 'Sem subscrição', 'Packs válidos 12 meses', 'Fatura com NIF'] as $pill)
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ivory/20 text-[13px] text-[#E4E6EA]">{!! $check !!}{{ $pill }}</span>
                 @endforeach
             </div>
-            <div class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 items-stretch">
+            <div class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-4 items-stretch">
                 @foreach ($planos as $p)
+                    @php $destaque = $p['selo'] !== null; @endphp
                     <div @class([
-                        'relative px-7 py-8 rounded-2xl flex flex-col',
-                        'bg-ivory text-navy border-2 border-cyan' => $p['destaque'],
-                        'bg-navy-2 text-ivory border border-ivory/10' => ! $p['destaque'],
+                        'relative px-6 py-8 rounded-2xl flex flex-col',
+                        'bg-ivory text-navy border-2 border-cyan' => $destaque,
+                        'bg-navy-2 text-ivory border border-ivory/10' => ! $destaque,
                     ])>
-                        @if ($p['destaque'])
-                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-coral text-navy text-[11px] font-semibold tracking-[.16em] whitespace-nowrap">MAIS ESCOLHIDO</span>
+                        @if ($destaque)
+                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-coral text-navy text-[11px] font-semibold tracking-[.16em] whitespace-nowrap">{{ $p['selo'] }}</span>
                         @endif
-                        <span @class(['text-xs font-medium tracking-[.28em]', 'text-cyan-deep' => $p['destaque'], 'text-cyan' => ! $p['destaque']])>{{ $p['nome'] }}</span>
-                        <p @class(['mt-2.5 text-sm leading-normal min-h-11', 'text-ink-soft' => $p['destaque'], 'text-[#C9CED6]' => ! $p['destaque']])>{{ $p['para'] }}</p>
-                        <div class="mt-5 flex items-baseline gap-2"><span class="font-display text-[52px] leading-none">{{ $p['qtd'] }}</span><span class="text-sm opacity-80">{{ $p['unidade'] }}</span></div>
-                        <div class="mt-2.5 text-sm opacity-80">{{ $p['preco'] }}</div>
+                        <span @class(['text-xs font-medium tracking-[.28em]', 'text-cyan-deep' => $destaque, 'text-cyan' => ! $destaque])>{{ $p['nome'] }}</span>
+                        <p @class(['mt-2.5 text-sm leading-normal min-h-11', 'text-ink-soft' => $destaque, 'text-[#C9CED6]' => ! $destaque])>{{ $p['para'] }}</p>
+                        <div class="mt-5 flex flex-col gap-1.5"><span class="font-display text-[52px] leading-none whitespace-nowrap">{{ $p['preco'] }}</span><span class="text-sm opacity-80">{{ $p['unidade'] }}</span></div>
+                        <div @class(['mt-2.5 text-sm font-medium', 'text-cyan-deep' => $destaque, 'text-cyan' => ! $destaque])>{{ $p['porVideo'] }}</div>
                         <a href="{{ $p['href'] }}" @class([
                             'mt-6 flex items-center justify-center min-h-[50px] rounded-full text-[15px] font-semibold',
                             'bg-coral text-navy' => $p['coral'],
-                            'bg-navy text-ivory' => $p['destaque'],
-                            'border border-ivory/35 text-ivory hover:bg-ivory/5' => ! $p['coral'] && ! $p['destaque'],
+                            'bg-navy text-ivory hover:bg-navy-3' => $destaque,
+                            'border border-ivory/35 text-ivory hover:bg-ivory/5' => ! $p['coral'] && ! $destaque,
                         ])>{{ $p['cta'] }}</a>
-                        <span class="mt-2.5 text-xs text-center opacity-80">{{ $p['nota'] }}</span>
-                        <div @class(['mt-6 pt-5 text-[13px] font-semibold border-t', 'border-[#D6D1C5]' => $p['destaque'], 'border-ivory/15' => ! $p['destaque']])>{{ $p['inclui'] }}</div>
-                        <ul @class(['mt-3 flex flex-col gap-2.5 text-sm', 'text-ink-soft' => $p['destaque'], 'text-[#C9CED6]' => ! $p['destaque']])>
+                        <ul @class(['mt-6 pt-5 border-t flex flex-col gap-2.5 text-sm', 'text-ink-soft border-[#D6D1C5]' => $destaque, 'text-[#C9CED6] border-ivory/15' => ! $destaque])>
                             @foreach ($p['itens'] as $item)
                                 <li class="flex gap-2.5 items-start">{!! $check !!}<span>{{ $item }}</span></li>
                             @endforeach
@@ -321,6 +333,7 @@
                     </div>
                 @endforeach
             </div>
+            <p class="mt-8 text-center text-sm text-[#AEB5C1]">Todos os preços incluem IVA. Equipas e agências com mais de 20 vídeos: <a href="{{ $comprar('Agência') }}" class="text-cyan underline underline-offset-2">fale connosco</a>.</p>
         </div>
     </section>
 
