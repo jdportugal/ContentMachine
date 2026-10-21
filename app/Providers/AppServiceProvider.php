@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // The active project for this process (defaults to the first registered).
         $this->app->singleton(ProjectContext::class);
+        $this->app->singleton(\App\Services\Themes\ThemeContext::class);
         // Singleton: the piece-context a job sets must be seen by every client.
         $this->app->singleton(CostLedger::class);
 

@@ -7,6 +7,7 @@ use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectContext;
 use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
+use App\Services\Themes\ThemeRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
@@ -69,7 +70,8 @@ class Landing extends Component
         ]);
         RateLimiter::hit($chave, 3600);
 
-        $clip = $import->start($this->anuncio, ['free_lead' => true]);
+        // Free videos always use the default theme, not whatever the studio is on.
+        $clip = $import->start($this->anuncio, ['free_lead' => true, 'theme' => app(ThemeRepository::class)->default()->slug]);
 
         $this->leadId = DB::table('leads')->insertGetId([
             'anuncio' => $this->anuncio,

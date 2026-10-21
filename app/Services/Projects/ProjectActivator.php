@@ -4,6 +4,7 @@ namespace App\Services\Projects;
 
 use App\Services\Settings\SettingsOverlay;
 use App\Services\Settings\SettingsRepository;
+use App\Services\Themes\ThemeContext;
 
 /**
  * Single place that switches the whole app to a project: the vault + the
@@ -29,6 +30,8 @@ class ProjectActivator
         // Re-apply this project's model config (keys are global) with a FRESH,
         // project-aware SettingsRepository, then set its language.
         $this->overlay->apply(app(SettingsRepository::class));
+        // The theme lives in the project's vault: re-point its design system and style guide.
+        app(ThemeContext::class)->apply();
         app()->setLocale($project->language !== '' ? $project->language : (string) config('app.locale', 'en'));
     }
 }

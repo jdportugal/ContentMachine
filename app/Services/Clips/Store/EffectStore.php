@@ -3,23 +3,24 @@
 namespace App\Services\Clips\Store;
 
 use App\Services\Projects\ProjectContext;
+use App\Services\Themes\ThemeContext;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
  * Vault-backed store for custom SFX. Each effect is one JSON file in the ACTIVE
- * project's vault (sfx/<id>.json); disallowed built-ins are a single JSON list
- * (sfx/_disabled-builtins.json). So SFX are per-project automatically and there
- * is no database. Replaces ClipEffect + DisabledBuiltinEffect.
+ * THEME's folder (themes/<slug>/sfx/<id>.json); disallowed built-ins are a single
+ * JSON list (sfx/_disabled-builtins.json). So SFX are per-theme automatically and
+ * there is no database. The after-intro line stays on the project.
  */
 class EffectStore
 {
-    public function __construct(private ProjectContext $context) {}
+    public function __construct(private ProjectContext $context, private ThemeContext $theme) {}
 
     public function dir(): string
     {
-        return rtrim($this->context->vaultPath(), '/').'/sfx';
+        return rtrim($this->theme->path(), '/').'/sfx';
     }
 
     public function path(string $id): string
@@ -206,7 +207,7 @@ class EffectStore
 
     public function audioDir(): string
     {
-        return rtrim($this->context->vaultPath(), '/').'/sfx-audio';
+        return rtrim($this->theme->path(), '/').'/sfx-audio';
     }
 
     /** Absolute path of the sound attached to $slug, or null. */
@@ -287,13 +288,13 @@ class EffectStore
     /** Absolute path of the mockup an effect was built from (sfx-refs/<id>.*), or null. */
     public function referencePath(string $id): ?string
     {
-        return (glob(rtrim($this->context->vaultPath(), '/').'/sfx-refs/'.$id.'.*') ?: [])[0] ?? null;
+        return (glob(rtrim($this->theme->path(), '/').'/sfx-refs/'.$id.'.*') ?: [])[0] ?? null;
     }
 
     /** Store $sourcePath as the reference mockup for effect $id. */
     public function putReference(string $id, string $sourcePath, string $ext): void
     {
-        $dir = rtrim($this->context->vaultPath(), '/').'/sfx-refs';
+        $dir = rtrim($this->theme->path(), '/').'/sfx-refs';
         @mkdir($dir, 0775, true);
         copy($sourcePath, $dir.'/'.$id.'.'.strtolower($ext ?: 'png'));
     }

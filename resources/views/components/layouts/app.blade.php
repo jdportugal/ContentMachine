@@ -33,6 +33,10 @@
                 </a>
             </div>
 
+            <div class="px-4 py-3 border-b border-ink-soft/15">
+                @livewire('theme-switcher')
+            </div>
+
 
             {{-- Closing the drawer belongs to the DESTINATION links only: on the
                  <aside> it also swallowed taps on the project switcher, closing

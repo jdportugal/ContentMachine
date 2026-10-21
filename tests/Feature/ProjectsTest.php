@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use App\Http\Middleware\SetActiveProject;
 use App\Livewire\Definicoes;
-use App\Livewire\ProjectSwitcher;
 use App\Services\Monitoring\MonitoringStore;
 use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
+use App\Services\Themes\ThemeRepository;
 use Illuminate\Http\Request;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -35,20 +35,24 @@ class ProjectsTest extends TestCase
         $this->assertTrue($repo->exists('brand-x'));
     }
 
-    public function test_middleware_repoints_the_whole_vault_surface_at_the_active_project(): void
+    public function test_middleware_uses_the_configured_project_and_the_chosen_theme(): void
     {
         $project = app(ProjectRepository::class)->create('Brand X', 'pt');
+        config(['contentmachine.project' => $project->slug]);
+        app(ProjectActivator::class)->activate($project);
+        $tema = app(ThemeRepository::class)->create('Verde');
 
-        $request = Request::create('/painel', 'GET');
+        $request = Request::create('/imoveis', 'GET');
         $request->setLaravelSession($this->app['session']->driver());
-        $request->session()->put('project_slug', $project->slug);
+        $request->session()->put('project_slug', 'ignored');
+        $request->session()->put('theme', $tema->slug);
 
         app(SetActiveProject::class)->handle($request, fn () => response('ok'));
 
         $this->assertSame($project->slug, app(ProjectContext::class)->current()->slug);
         $this->assertSame($project->path, config('contentmachine.vault.path'));
-        $this->assertSame($project->path.'/design-system.md', config('contentmachine.design_system.path'));
-        $this->assertSame($project->path.'/estilo-animacao.md', config('contentmachine.clips.style_md'));
+        $this->assertSame($project->path.'/themes/verde/design-system.md', config('contentmachine.design_system.path'));
+        $this->assertSame($project->path.'/themes/verde/estilo-animacao.md', config('contentmachine.clips.style_md'));
         $this->assertSame('pt', app()->getLocale());
     }
 
@@ -88,13 +92,14 @@ class ProjectsTest extends TestCase
         $this->assertSame('default-video', $store->itens('youtube')[0]['id']);
     }
 
-    public function test_activator_repoints_design_and_style_for_background_jobs(): void
+    public function test_activator_repoints_design_and_style_at_the_projects_theme(): void
     {
         $project = app(ProjectRepository::class)->create('Brand B', 'pt');
         app(ProjectActivator::class)->activate($project);
 
-        $this->assertSame($project->path.'/design-system.md', config('contentmachine.design_system.path'));
-        $this->assertSame($project->path.'/estilo-animacao.md', config('contentmachine.clips.style_md'));
+        $tema = $project->path.'/themes/'.config('contentmachine.themes.default');
+        $this->assertSame($tema.'/design-system.md', config('contentmachine.design_system.path'));
+        $this->assertSame($tema.'/estilo-animacao.md', config('contentmachine.clips.style_md'));
         $this->assertSame($project->path, config('contentmachine.vault.path'));
         $this->assertSame('pt', app()->getLocale());
     }

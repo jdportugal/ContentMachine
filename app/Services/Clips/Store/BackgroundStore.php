@@ -2,7 +2,7 @@
 
 namespace App\Services\Clips\Store;
 
-use App\Services\Projects\ProjectContext;
+use App\Services\Themes\ThemeContext;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -23,11 +23,11 @@ class BackgroundStore
 
     public const KIND_VIDEO = 'video';
 
-    public function __construct(private ProjectContext $context) {}
+    public function __construct(private ThemeContext $theme) {}
 
     public function dir(): string
     {
-        return rtrim($this->context->vaultPath(), '/').'/backgrounds';
+        return rtrim($this->theme->path(), '/').'/backgrounds';
     }
 
     public function path(string $id): string

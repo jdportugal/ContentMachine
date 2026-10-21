@@ -590,7 +590,12 @@ TSX;
      */
     public function previewVersion(string $slug, string $format = self::FORMAT_PORTRAIT): int
     {
-        return (int) @filemtime($this->previewPath($slug, $format));
+        // Uncached: the worker re-renders previews in another process, and PHP's stat
+        // cache would keep handing out the old mtime (and so the old URL).
+        $path = $this->previewPath($slug, $format);
+        clearstatcache(true, $path);
+
+        return (int) @filemtime($path);
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Jobs\Middleware\ActivateProject;
 use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectRepository;
+use App\Services\Themes\ThemeContext;
 
 /**
  * Carries the active project onto a queued job. Queue workers have no web
@@ -15,6 +16,8 @@ use App\Services\Projects\ProjectRepository;
 trait RunsInProject
 {
     public string $projectSlug = '';
+
+    public string $themeSlug = '';
 
     /**
      * Capture the current project — call from the job constructor (dispatch time).
@@ -28,7 +31,8 @@ trait RunsInProject
     protected function captureProject(): void
     {
         $this->projectSlug = app(ProjectContext::class)->current()->slug;
-        $this->middleware[] = new ActivateProject($this->projectSlug);
+        $this->themeSlug = app(ThemeContext::class)->current()->slug;
+        $this->middleware[] = new ActivateProject($this->projectSlug, $this->themeSlug);
     }
 
     /** Re-activate the captured project — call first thing in handle(). */

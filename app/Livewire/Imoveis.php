@@ -6,6 +6,8 @@ use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
+use App\Services\Themes\ThemeContext;
+use App\Services\Themes\ThemeRepository;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -29,6 +31,9 @@ class Imoveis extends Component
 
     public $foto = null;
 
+    /** The theme this video is made in (defaults to the studio's current one). */
+    public string $tema = '';
+
     /** Status → what the agent reads, and how far along the bar is. */
     public const ESTADOS = [
         ClipRecord::STATUS_IMPORTING => ['A ler o anúncio', 15],
@@ -39,13 +44,19 @@ class Imoveis extends Component
         ClipRecord::STATUS_RENDERING => ['A exportar o vídeo', 85],
     ];
 
-    public function criar(ListingImport $import): void
+    public function mount(ThemeContext $themes): void
+    {
+        $this->tema = $themes->current()->slug;
+    }
+
+    public function criar(ListingImport $import, ThemeRepository $themes): void
     {
         $this->anuncio = trim($this->anuncio);
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500', fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista.')],
             'notas' => 'nullable|string|max:3000',
             'foto' => 'nullable|image|max:10240',
+            'tema' => ['required', fn ($a, $v, $fail) => $themes->find($v) ? null : $fail('Escolha um dos temas.')],
         ], [
             'anuncio.required' => 'Cole o link do anúncio.',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
@@ -56,8 +67,9 @@ class Imoveis extends Component
         $import->start($this->anuncio, [
             'agent_photo' => $this->foto?->store('clips/uploads'),
             'script_notes' => trim($this->notas),
+            'theme' => $this->tema,
         ]);
-        $this->reset('anuncio', 'notas', 'foto');
+        $this->reset('anuncio', 'notas', 'foto');   // the theme stays as chosen
         unset($this->videos);
     }
 
@@ -72,6 +84,7 @@ class Imoveis extends Component
     {
         return view('livewire.imoveis', [
             'aDecorrer' => $this->videos->contains(fn (ClipRecord $c) => $c->isActive()),
+            'temas' => collect(app(ThemeRepository::class)->all())->mapWithKeys(fn ($t) => [$t->slug => $t->name]),
         ]);
     }
 }

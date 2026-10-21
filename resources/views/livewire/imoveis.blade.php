@@ -24,6 +24,15 @@
         </div>
         @error('anuncio') <p class="mt-2 text-sm text-coral">{{ $message }}</p> @enderror
 
+        <label class="mt-5 flex flex-wrap items-center gap-3 text-sm text-[#C9CED6]">Tema do vídeo
+            <select wire:model="tema" class="min-h-11 px-4 pr-9 rounded-full bg-navy-3 text-ivory border border-ivory/15 focus:outline-none focus:border-cyan">
+                @foreach ($temas as $slug => $nome)
+                    <option value="{{ $slug }}">{{ $nome }}</option>
+                @endforeach
+            </select>
+        </label>
+        @error('tema') <p class="mt-2 text-sm text-coral">{{ $message }}</p> @enderror
+
         <details class="mt-5 group">
             <summary class="inline-flex items-center gap-2 min-h-11 text-sm text-[#C9CED6] cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                 <span aria-hidden="true" class="transition-transform group-open:rotate-90">›</span> Notas para o texto e a sua foto (opcional)
@@ -80,6 +89,7 @@
                     <div class="p-4 flex flex-col gap-1 flex-1">
                         <h2 class="font-sans text-base font-semibold leading-snug tracking-normal">{{ $titulo }}</h2>
                         @if ($preco) <p class="text-sm text-ink-soft">{{ $preco }}</p> @endif
+                        <p class="text-xs text-teal">{{ $temas[$v->meta['theme'] ?? ''] ?? '' }}</p>
                         <p class="text-xs text-ink-faint">{{ \Illuminate\Support\Carbon::parse($v->created_at)->locale('pt_PT')->translatedFormat('j M Y, H:i') }}</p>
                         @if ($v->status === 'done')
                             <div class="mt-3 flex gap-2">

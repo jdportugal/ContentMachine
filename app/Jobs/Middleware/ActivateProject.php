@@ -3,7 +3,9 @@
 namespace App\Jobs\Middleware;
 
 use App\Services\Projects\ProjectActivator;
+use App\Services\Clips\Store\ClipStore;
 use App\Services\Projects\ProjectRepository;
+use App\Services\Themes\ThemeContext;
 use Closure;
 
 /**
@@ -21,7 +23,7 @@ use Closure;
  */
 class ActivateProject
 {
-    public function __construct(private readonly string $slug) {}
+    public function __construct(private readonly string $slug, private readonly string $theme = '') {}
 
     public function handle(object $job, Closure $next): mixed
     {
@@ -32,6 +34,20 @@ class ActivateProject
             }
         }
 
+        app(ThemeContext::class)->use($this->themeFor($job));
+
         return $next($job);
+    }
+
+    /**
+     * A clip's jobs use the clip's own theme, whatever the studio was on when they
+     * were queued; anything else (SFX, backgrounds, samples) the theme it was queued in.
+     */
+    private function themeFor(object $job): string
+    {
+        $id = $job->clipId ?? $job->projectId ?? null;
+        $clip = is_string($id) ? app(ClipStore::class)->find($id) : null;
+
+        return (string) ($clip?->meta['theme'] ?? $this->theme);
     }
 }

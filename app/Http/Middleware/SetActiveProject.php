@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Services\Projects\ProjectActivator;
 use App\Services\Projects\ProjectRepository;
+use App\Services\Themes\ThemeContext;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class SetActiveProject
         $project = ($slug !== '' ? $this->projects->find($slug) : null) ?? $this->projects->default();
 
         $this->activator->activate($project);
+        // The studio's chosen theme (ThemeSwitcher), else the default.
+        app(ThemeContext::class)->use((string) $request->session()->get('theme', ''));
 
         return $next($request);
     }

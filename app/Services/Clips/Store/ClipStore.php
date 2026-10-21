@@ -3,6 +3,7 @@
 namespace App\Services\Clips\Store;
 
 use App\Services\Projects\ProjectContext;
+use App\Services\Themes\ThemeContext;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -66,6 +67,9 @@ class ClipStore
         $id = $this->uniqueId((string) ($attrs['title'] ?? ''));
         $now = now()->toIso8601String();
 
+        // Every clip keeps the theme it was made in (the current one unless given):
+        // its jobs plan and render with that theme's design, SFX and backgrounds.
+        $attrs['meta'] = (array) ($attrs['meta'] ?? []) + ['theme' => app(ThemeContext::class)->current()->slug];
         $record = new ClipRecord($this, array_merge([
             'status' => ClipRecord::STATUS_DRAFT,
         ], $attrs, [

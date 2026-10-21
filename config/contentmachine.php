@@ -487,6 +487,15 @@ return [
     'project' => env('IMOCENA_PROJECT', ''),
 
     /*
+    | Themes: vault/themes/<slug>/ — each a design system with its own style guide,
+    | SFX and backgrounds. Each video is made in one (chosen per video); the
+    | default is used for free videos and wherever none was chosen.
+    */
+    'themes' => [
+        'default' => env('IMOCENA_THEME', 'iad-premium'),
+    ],
+
+    /*
     | Free-video leads from the public landing page.
     */
     'leads' => [

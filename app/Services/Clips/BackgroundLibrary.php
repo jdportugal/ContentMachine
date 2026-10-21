@@ -216,7 +216,12 @@ class BackgroundLibrary
     {
         $file = $this->previewFileFor($background);
 
-        return $file === null ? 0 : (int) @filemtime($file);
+        if ($file === null) {
+            return 0;
+        }
+        clearstatcache(true, $file);   // re-rendered by the worker: never the cached mtime
+
+        return (int) @filemtime($file);
     }
 
     /** The servable preview file for a background, or null if not ready. */
