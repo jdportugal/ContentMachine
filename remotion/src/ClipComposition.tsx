@@ -168,6 +168,20 @@ const LeadBanner: React.FC<{ text: string; fps: number }> = ({ text, fps }) => {
   );
 };
 
+// The free-video watermark: a large diagonal mark across the middle (hard to crop
+// out) plus a small one in the corner, on top of everything for the whole clip.
+const Watermark: React.FC<{ text: string }> = ({ text }) => {
+  const { width } = useVideoConfig();
+  const mark: React.CSSProperties = { fontFamily: "Poppins, Helvetica, Arial, sans-serif", fontWeight: 600, color: "#F4F1EA", whiteSpace: "nowrap", textShadow: "0 2px 12px rgba(14,22,38,0.55)" };
+
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ ...mark, fontSize: width * 0.062, letterSpacing: "0.18em", opacity: 0.32, rotate: "-24deg" }}>{text}</div>
+      <div style={{ ...mark, position: "absolute", right: width * 0.04, top: width * 0.04, fontSize: width * 0.024, letterSpacing: "0.24em", opacity: 0.75 }}>{text}</div>
+    </AbsoluteFill>
+  );
+};
+
 export const ClipComposition: React.FC<ClipProps> = ({
   fps,
   transparent,
@@ -181,6 +195,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
   captions,
   background,
   banner,
+  watermark,
   videoSrc,
   theme,
   format,
@@ -239,6 +254,7 @@ export const ClipComposition: React.FC<ClipProps> = ({
       )}
 
       {banner && typeof banner === "string" ? <LeadBanner text={banner} fps={effectiveFps} /> : null}
+      {watermark ? <Watermark text={watermark} /> : null}
     </AbsoluteFill>
   );
 };

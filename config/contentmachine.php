@@ -485,6 +485,7 @@ return [
     'leads' => [
         'project' => env('LEADS_PROJECT', ''),
         'per_hour' => (int) env('LEADS_PER_HOUR', 5),   // form submissions per IP
+        'watermark' => env('LEADS_WATERMARK', 'IMOCENA · VÍDEO GRÁTIS'),   // across the free videos
     ],
 
     /*

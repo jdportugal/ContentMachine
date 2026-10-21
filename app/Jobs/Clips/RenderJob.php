@@ -95,6 +95,11 @@ class RenderJob implements ShouldQueue
                 $plan['banner'] = $lead;
             }
 
+            // Free videos from the landing page carry the watermark; paid ones don't.
+            if (! empty($p->meta['free_lead'])) {
+                $plan['watermark'] = (string) config('contentmachine.leads.watermark');
+            }
+
             // Background music (mixed as a looping <Audio> track by Remotion).
             if ($track) {
                 $plan['musicSrc'] = $track;

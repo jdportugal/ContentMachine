@@ -75,7 +75,7 @@ class Landing extends Component
         if ($slug !== '' && ($projeto = $projects->find($slug))) {
             $activator->activate($projeto);
         }
-        $clip = $import->start($this->anuncio, ['lead' => true]);
+        $clip = $import->start($this->anuncio, ['free_lead' => true]);
 
         $this->leadId = DB::table('leads')->insertGetId([
             'anuncio' => $this->anuncio,

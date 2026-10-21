@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Jobs\Clips\ImportListingJob;
+use App\Jobs\Clips\RenderJob;
 use App\Livewire\Imoveis;
 use App\Livewire\Landing;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\Store\ClipStore;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +48,8 @@ class LeadsTest extends TestCase
         $this->assertSame($lead->id, session('lead_id'));
         $clip = app(ClipStore::class)->find($lead->clip_id);
         $this->assertSame(ClipRecord::STATUS_IMPORTING, $clip->status);
-        $this->assertTrue($clip->meta['lead']);
+        $this->assertTrue($clip->meta['free_lead']);
+        $this->assertArrayNotHasKey('lead', $clip->meta);   // meta.lead is the news banner
         $this->assertArrayNotHasKey('auto', $clip->meta);   // never auto-published
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->clipId === $clip->id && $j->url === self::ANUNCIO);
     }
@@ -161,6 +164,35 @@ class LeadsTest extends TestCase
         $this->artisan('leads:atualizar')->assertSuccessful();
 
         $this->assertNotNull(DB::table('leads')->value('falhou_em'));
+    }
+
+    public function test_only_free_videos_render_with_the_watermark(): void
+    {
+        $renderer = new class implements RemotionRenderer
+        {
+            public array $props = [];
+
+            public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
+            {
+                $this->props = $props;
+                @mkdir(dirname($outPath), 0777, true);
+                file_put_contents($outPath, 'X');
+
+                return $outPath;
+            }
+        };
+        $this->app->instance(RemotionRenderer::class, $renderer);
+        $plan = ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'mode' => 'dense', 'scenes' => []];
+        $store = app(ClipStore::class);
+
+        $gratis = $store->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['free_lead' => true, 'musica' => 'nenhuma']]);
+        $this->app->call([new RenderJob($gratis->id), 'handle']);
+        $this->assertSame('IMOCENA · VÍDEO GRÁTIS', $renderer->props['watermark']);
+        $this->assertArrayNotHasKey('banner', $renderer->props);
+
+        $pago = $store->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'nenhuma']]);
+        $this->app->call([new RenderJob($pago->id), 'handle']);
+        $this->assertArrayNotHasKey('watermark', $renderer->props);
     }
 
     public function test_the_portal_creates_a_listing_reel_and_lists_it(): void
