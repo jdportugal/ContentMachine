@@ -47,7 +47,7 @@ class Register extends Component
         Auth::login($utilizador);
         session()->regenerate();
 
-        $this->redirect(route('painel'), navigate: false);
+        $this->redirect(route('imoveis'), navigate: false);
     }
 
     public function render()

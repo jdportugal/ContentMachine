@@ -477,6 +477,17 @@ return [
     ],
 
     /*
+    | Free-video leads from the public landing page. Their clips are made in this
+    | project (its style, music and end card). Leave it without an agent in
+    | Resources: a project agent replaces the listing's, and the lead's video must
+    | carry the lead's own agent. Empty = the default project.
+    */
+    'leads' => [
+        'project' => env('LEADS_PROJECT', ''),
+        'per_hour' => (int) env('LEADS_PER_HOUR', 5),   // form submissions per IP
+    ],
+
+    /*
     | Listing → clip importer (Animated Clips · "From a listing"). Voices are
     | European-Portuguese ElevenLabs voices, picked by the agent's gender.
     | Stability is the Creative (0) / Natural (0.5) / Robust (1) setting.

@@ -50,7 +50,7 @@ class Login extends Component
         // before login stays valid afterwards (session fixation).
         session()->regenerate();
 
-        $this->redirectIntended(default: route('painel'), navigate: false);
+        $this->redirectIntended(default: route('imoveis'), navigate: false);
     }
 
     private function garantirNaoBloqueado(): void

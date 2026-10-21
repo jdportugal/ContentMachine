@@ -9,44 +9,53 @@
 @source '../../app/Livewire';
 
 /* ============================================================
-   PAPER — the app UI as a printed page
-   Warm paper stock · iron-gall ink · one deep teal accent.
-   Token NAMES are kept stable (papyrus/vellum/ink/teal/gold) so
-   the existing utility classes across every view re-skin at once;
-   only the VALUES change.
+   IMOCENA — the iad premium look (navy · cyan · coral · ivory)
+   The app keeps its token NAMES (papyrus/vellum/ink/teal/gold) so
+   every existing view re-skins at once: the portal is ivory paper
+   with navy ink; the public site uses navy/cyan/coral/ivory direct.
    ============================================================ */
 @theme {
-    /* Superfícies (papel) */
-    --color-papyrus: #F3EEE3;   /* papel — fundo principal */
-    --color-vellum: #FBF8F1;    /* folha — cartões / superfícies */
-    --color-surface: #ECE5D6;   /* papel mais escuro (hover, painéis internos) */
-    --color-shelf: #E4DBC8;     /* cartão — campo de contraste */
+    /* Marca */
+    --color-navy: #0E1626;      /* fundo do site / tinta principal */
+    --color-navy-2: #141F33;    /* cartões sobre navy */
+    --color-navy-3: #1B2638;    /* molduras / campos sobre navy */
+    --color-cyan: #05B8E6;      /* linhas e etiquetas sobre navy */
+    --color-cyan-deep: #076E8A; /* ciano legível sobre marfim */
+    --color-coral: #F06052;     /* botões e destaques (texto navy por cima) */
+    --color-ivory: #F4F1EA;     /* texto sobre navy / fundo claro */
 
-    /* Texto (tinta) */
-    --color-ink: #23201A;       /* tinta principal */
-    --color-ink-soft: #5C5547;  /* texto secundário / filetes */
-    --color-ink-faint: #8C8472; /* notas ténues / meta */
+    /* Superfícies (portal) */
+    --color-papyrus: #F4F1EA;   /* fundo principal */
+    --color-vellum: #FFFFFF;    /* cartões / superfícies */
+    --color-surface: #ECE8DF;   /* hover, painéis internos */
+    --color-shelf: #E2DDD1;     /* campo de contraste */
 
-    /* Acento primário (tinta azul-petróleo) */
-    --color-teal: #2C5F63;      /* acento interativo (texto/bordas) */
-    --color-teal-deep: #1E4447; /* preenchimento de botões */
+    /* Texto */
+    --color-ink: #0E1626;
+    --color-ink-soft: #4A5263;
+    --color-ink-faint: #646C7A;
 
-    /* Ocre + couro (títulos / ornamento) */
-    --color-gold: #A06E1C;      /* ocre */
-    --color-leather: #8A4A2B;   /* couro */
+    /* Acento interativo */
+    --color-teal: #076E8A;      /* texto/bordas interativas */
+    --color-teal-deep: #0E1626; /* preenchimento de botões */
+
+    /* Destaques (coral escurecido para texto pequeno sobre marfim) */
+    --color-gold: #C2412F;
+    --color-leather: #A33A2A;
 
     /* Etiquetas (eyebrow) */
-    --color-star: #7A6340;
+    --color-star: #076E8A;
 
     /* Estados */
-    --color-good: #3D7A4C;      /* sucesso / completo */
-    --color-warn: #A8701A;      /* aviso */
-    --color-bad: #A93A3A;       /* erro */
+    --color-good: #2F7A4A;
+    --color-warn: #A8701A;
+    --color-bad: #B33A2A;
 
-    /* Tipografia — Fraunces (display) + Source Serif 4 (corpo) + IBM Plex Mono */
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-    --font-sc: 'Source Serif 4', Georgia, serif;
+    /* Tipografia — Cormorant Garamond (títulos) + Poppins (corpo) */
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-body: 'Poppins', system-ui, sans-serif;
+    --font-sans: 'Poppins', system-ui, sans-serif;
+    --font-sc: 'Poppins', system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
@@ -54,7 +63,7 @@
     /* Escala tipográfica global — tudo assenta em rem, por isso aumentar a
        raiz aumenta texto e espaçamento de forma proporcional e coerente. */
     html {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     body {
@@ -81,14 +90,8 @@
     [x-cloak] { display: none !important; }
 }
 
-/* ---------- Fundo de papel (grão + vinheta suave) ---------- */
-.bg-nocturna {
-    background-color: var(--color-papyrus);
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .18 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-        radial-gradient(130% 90% at 50% 0%, transparent 60%, rgba(120, 95, 55, 0.10) 100%);
-    background-attachment: fixed;
-}
+/* ---------- Fundo (marfim liso) ---------- */
+.bg-nocturna { background-color: var(--color-papyrus); }
 
 /* ---------- Foxing (manchas de papel antigo nos cantos) ---------- */
 .foxing { position: relative; }
@@ -134,8 +137,8 @@
 /* ---------- Eyebrow / etiquetas (versaletes, sépia) ---------- */
 .eyebrow {
     font-family: var(--font-sc);
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--color-star);
     font-size: 0.72rem;
@@ -180,7 +183,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(120% 90% at 50% 40%, rgba(243, 238, 227, 0.82), rgba(228, 219, 200, 0.94));
+    background: radial-gradient(120% 90% at 50% 40%, rgba(244, 241, 234, 0.85), rgba(226, 221, 209, 0.94));
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }

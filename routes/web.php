@@ -10,6 +10,8 @@ use App\Livewire\ClipsAnimadosSfx;
 use App\Livewire\ClipsAnimadosVfx;
 use App\Livewire\ContentRepurpose;
 use App\Livewire\Definicoes;
+use App\Livewire\Imoveis;
+use App\Livewire\Landing;
 use App\Livewire\DesignSystem;
 use App\Livewire\Monitorizacao;
 use App\Livewire\Noticias;
@@ -28,6 +30,7 @@ use App\Services\Clips\Store\BackgroundStore;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectStore;
 use App\Services\Clips\Store\VfxStore;
+use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectResources;
 use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
@@ -35,6 +38,33 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+
+// ── Public site ──────────────────────────────────────────────────────────────
+// The free-video landing page, and the signed links its email sends: a lead has
+// no account, so the signature is the key and LeadVideo activates their project.
+Route::livewire('/', Landing::class)->name('home');
+
+Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
+    $row = $videos->lead($lead);
+    abort_unless($row && $videos->ficheiro($row), 404);
+
+    return view('lead-video', [
+        'nome' => strtok($row->nome, ' '),
+        'ficheiro' => URL::signedRoute('lead.video.ficheiro', ['lead' => $lead]),
+        'descarregar' => URL::signedRoute('lead.video.ficheiro', ['lead' => $lead, 'download' => 1]),
+    ]);
+})->middleware('signed')->name('lead.video');
+
+Route::get('/v/{lead}/mp4', function (int $lead, LeadVideo $videos) {
+    $row = $videos->lead($lead);
+    $ficheiro = $row ? $videos->ficheiro($row) : null;
+    abort_unless($ficheiro, 404);
+
+    return request()->boolean('download')
+        ? response()->download($ficheiro, 'imocena-video.mp4')
+        : response()->file($ficheiro);
+})->middleware('signed')->name('lead.video.ficheiro');
 
 // ── Authentication ───────────────────────────────────────────────────────────
 // The way in and out. Everything else lives in the `auth` group below.
@@ -51,7 +81,7 @@ Route::post('/logout', function (Request $request) {
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return redirect()->route('login');
+    return redirect()->route('home');
 })->name('logout');
 
 // ── The application ──────────────────────────────────────────────────────────
@@ -62,7 +92,8 @@ Route::post('/logout', function (Request $request) {
 // submissions are Livewire requests). Livewire re-applies Authenticate to update
 // requests for these components on its own — it is persistent middleware.
 Route::middleware('auth')->group(function () {
-    Route::livewire('/', Painel::class)->name('painel');
+    Route::livewire('/painel', Painel::class)->name('painel');
+    Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
     Route::livewire('/monitorizacao', Monitorizacao::class)->name('monitorizacao');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
     Route::livewire('/clips', Clips::class)->name('clips');

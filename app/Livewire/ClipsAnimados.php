@@ -40,6 +40,7 @@ use App\Services\Clips\TranscriptRebuilder;
 use App\Services\Costs\CostLedger;
 use App\Services\Projects\ProjectContext;
 use App\Services\Projects\ProjectResources;
+use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
 use App\Services\RealEstate\ListingScriptWriter;
 use App\Services\RealEstate\PropertyVideoAnalyzer;
@@ -727,30 +728,22 @@ class ClipsAnimados extends Component
             ['listingUrl.required' => 'Paste the listing URL.', 'listingUrl.url' => 'That is not a valid URL.'],
         );
 
-        $ref = basename((string) parse_url($this->listingUrl, PHP_URL_PATH)) ?: 'listing';
         // The two videos in each other's field (the walkthrough as the after-intro): put them right.
         [$property, $afterIntro] = [$this->listingVideo, $this->listingAfterIntro];
         $swapped = self::videosTrocados($property, $afterIntro);
         if ($swapped) {
             [$property, $afterIntro] = [$afterIntro, $property];
         }
-        $clip = $this->clips()->create([
-            'type' => ClipRecord::TYPE_ANIMATION,
-            'input_kind' => 'audio',
-            'status' => ClipRecord::STATUS_IMPORTING,
-            'title' => 'Listing '.$ref,
-            'meta' => ['listing' => ['url' => $this->listingUrl], 'agent_photo' => $this->listingAgentPhoto?->store('clips/uploads'),
-                'listing_video' => $property?->store('clips/uploads'),
-                'after_intro' => $afterIntro?->store('clips/uploads'),
-                'videos_swapped' => $swapped,
-                'mix_photos' => $property !== null && $this->listingMixPhotos,
-                'beat_opening' => $property !== null && $this->listingBeatOpening ? ['clips' => []] : null,
-                'after_intro_line' => trim($this->listingAfterIntroLine),
-                'script_notes' => trim($this->listingNotes)]
-                + ($this->listingMusic !== '' ? ['musica' => $this->listingMusic] : []),
-        ]);
-
-        ImportListingJob::dispatch($clip->id, $this->listingUrl);
+        app(ListingImport::class)->start($this->listingUrl, [
+            'agent_photo' => $this->listingAgentPhoto?->store('clips/uploads'),
+            'listing_video' => $property?->store('clips/uploads'),
+            'after_intro' => $afterIntro?->store('clips/uploads'),
+            'videos_swapped' => $swapped,
+            'mix_photos' => $property !== null && $this->listingMixPhotos,
+            'beat_opening' => $property !== null && $this->listingBeatOpening ? ['clips' => []] : null,
+            'after_intro_line' => trim($this->listingAfterIntroLine),
+            'script_notes' => trim($this->listingNotes)]
+            + ($this->listingMusic !== '' ? ['musica' => $this->listingMusic] : []));
         $this->reset('listingUrl', 'listingAgentPhoto', 'listingVideo', 'listingAfterIntro', 'listingNotes', 'listingMixPhotos', 'listingBeatOpening', 'listingMusic');
         $this->listingAfterIntroLine = app(EffectStore::class)->afterIntroLine();
     }

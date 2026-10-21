@@ -27,3 +27,8 @@ Schedule::command('monitoring:collect')
  * the command itself guards the once-a-day part.
  */
 Schedule::command('auto:tick')->everyMinute();
+
+/*
+ * Free-video leads (landing page): email each one the link once their reel is rendered.
+ */
+Schedule::command('leads:enviar')->everyMinute()->withoutOverlapping();

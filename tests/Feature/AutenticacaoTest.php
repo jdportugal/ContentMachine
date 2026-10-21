@@ -31,7 +31,8 @@ class AutenticacaoTest extends TestCase
     public function test_visitante_e_redirecionado_para_o_login(): void
     {
         $this->get('/definicoes')->assertRedirect('/login');
-        $this->get('/')->assertRedirect('/login');
+        $this->get('/painel')->assertRedirect('/login');
+        $this->get('/imoveis')->assertRedirect('/login');
         $this->get('/noticias')->assertRedirect('/login');
     }
 
@@ -150,7 +151,7 @@ class AutenticacaoTest extends TestCase
     {
         $this->actingAs($this->utilizador());
 
-        $this->post('/logout')->assertRedirect('/login');
+        $this->post('/logout')->assertRedirect('/');
         $this->assertFalse(Auth::check());
     }
 

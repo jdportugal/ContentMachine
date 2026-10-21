@@ -20,7 +20,8 @@ class PaginasTest extends TestCase
     public static function routes(): array
     {
         return [
-            'dashboard' => ['/', 'Dashboard'],
+            'dashboard' => ['/painel', 'Dashboard'],
+            'portal' => ['/imoveis', 'Os meus vídeos'],
             'monitoring' => ['/monitorizacao', 'Monitoring'],
             'clips' => ['/clips', 'Shorts Generator'],
             'animated-clips' => ['/clips-animados', 'Animated Clips'],
@@ -57,7 +58,7 @@ class PaginasTest extends TestCase
     public function test_dashboard_reads_drafts_from_vault(): void
     {
         // The seeded vault has examples → the dashboard shows the platforms section.
-        $this->get('/')
+        $this->get('/painel')
             ->assertOk()
             ->assertSee('recent performance', false);
     }
@@ -72,6 +73,6 @@ class PaginasTest extends TestCase
             'services.apify.token' => null,
         ]);
 
-        $this->get('/')->assertOk();
+        $this->get('/painel')->assertOk();
     }
 }

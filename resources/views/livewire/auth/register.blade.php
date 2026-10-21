@@ -1,6 +1,6 @@
 <div>
     <div class="text-center mb-6">
-        <span class="font-display text-2xl text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</span>
+        <span class="font-display text-4xl text-ink">Imocena</span>
         <span class="block eyebrow mt-1 text-[0.55rem]">Create an account</span>
     </div>
 

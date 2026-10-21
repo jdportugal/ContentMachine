@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="pt-PT" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Brand Machine' }} · AI Content Machines</title>
+    <title>{{ $title ?? 'Imocena' }} · Imocena</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -16,7 +16,7 @@
     <div x-data="{ nav: false }" class="flex min-h-screen">
         {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
         <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
-            <a href="{{ route('painel') }}" class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</a>
+            <a href="{{ route('imoveis') }}" class="font-display text-2xl text-teal tracking-wide" style="letter-spacing:.06em">Imocena</a>
             <button type="button" @click="nav = !nav" aria-label="Toggle menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
         </header>
 
@@ -27,9 +27,9 @@
         <aside x-bind:class="{ '!translate-x-0': nav }"
                class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
             <div class="px-6 py-3 border-b border-ink-soft/15">
-                <a href="{{ route('painel') }}" class="block">
-                    <span class="font-display text-lg text-teal tracking-wide" style="letter-spacing:.06em">Brand Machine</span>
-                    <span class="block eyebrow mt-0.5 text-[0.55rem]">AI Content Machines</span>
+                <a href="{{ route('imoveis') }}" class="block">
+                    <span class="font-display text-2xl text-ink">Imocena</span>
+                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Vídeos de imóveis</span>
                 </a>
             </div>
 
@@ -69,6 +69,7 @@
                     // unfold in the shelf while their parent is the active section.
                     $grupos = [
                         ['titulo' => null, 'itens' => [
+                            ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Imóveis',            'color' => '#F06052', 'glyph' => '⌂'],
                             ['route' => 'painel',          'label' => 'Dashboard',         'sub' => 'Overview',           'color' => '#A06E1C', 'glyph' => '◆'],
                         ]],
                         ['titulo' => 'Source', 'itens' => [
