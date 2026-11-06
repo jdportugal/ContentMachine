@@ -11,7 +11,7 @@ name: Publish image
 # in that situation; deploy/rebuild.sh builds on the host with no CI at all.
 on:
   push:
-    branches: [production]
+    branches: [production, imocena-production]
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Lowercase image name
         id: img
-        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/contentmachine" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "imocena-production" ]; then app=imocena; else app=contentmachine; fi
+          echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${app}" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
         with:
           context: .
