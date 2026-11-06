@@ -27,6 +27,7 @@ use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -45,6 +46,17 @@ Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
         ? response()->download($ficheiro, 'imocena-video.mp4')
         : response()->file($ficheiro);
 })->middleware('signed')->name('lead.video');
+
+// Promotional emails go only to leads with marketing_em set and marketing_cancelado_em
+// null, and each one links here (and in its List-Unsubscribe header). GET asks, POST
+// cancels — link scanners only GET — and POST is CSRF-exempt for one-click (RFC 8058).
+Route::match(['get', 'post'], '/emails/cancelar/{lead}', function (int $lead) {
+    if (request()->isMethod('post')) {
+        DB::table('leads')->where('id', $lead)->whereNull('marketing_cancelado_em')->update(['marketing_cancelado_em' => now()]);
+    }
+
+    return view('emails-cancelar', ['cancelado' => (bool) DB::table('leads')->where('id', $lead)->value('marketing_cancelado_em')]);
+})->middleware('signed')->name('lead.emails.cancelar');
 
 // ── Authentication ───────────────────────────────────────────────────────────
 // The way in and out. Everything else lives in the `auth` group below.

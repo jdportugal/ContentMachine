@@ -2,6 +2,10 @@
 
 return [
 
+    // Meta Pixel ID for the public site (empty = no pixel). Set META_PIXEL_ID.
+    'meta_pixel' => env('META_PIXEL_ID', ''),
+
+
     /*
     |--------------------------------------------------------------------------
     | Vault (the "brain" / memory — Obsidian)

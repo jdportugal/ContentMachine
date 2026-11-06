@@ -24,6 +24,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Resolve the active project (per session) and repoint the vault at it.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
+
+        // One-click unsubscribe (RFC 8058): the mail provider POSTs without a CSRF
+        // token. The route is signed, so the signature does that job.
+        $middleware->validateCsrfTokens(except: ['emails/cancelar/*']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

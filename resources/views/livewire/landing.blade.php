@@ -10,21 +10,31 @@
     $limpo = 'Versão limpa, sem marca d’água';
     $planos = [
         ['nome' => 'GRÁTIS', 'para' => 'Para experimentar com um imóvel seu.', 'preco' => '0 €', 'unidade' => '1 vídeo', 'porVideo' => 'Com marca d’água', 'cta' => 'Pedir o vídeo grátis', 'href' => '#pedido', 'itens' => ['Basta colar o link do anúncio', 'Voz em português de Portugal', 'Cartão final com AMI', 'Com marca d’água Imocena'], 'selo' => null, 'coral' => true],
-        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '29 €', 'unidade' => '1 vídeo', 'porVideo' => '29 € por vídeo', 'cta' => 'Comprar', 'href' => $comprar('Vídeo avulso (29 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
-        ['nome' => 'PACK 5', 'para' => 'Para as angariações do mês.', 'preco' => '120 €', 'unidade' => '5 vídeos', 'porVideo' => '24 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 5 (120 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => null, 'coral' => false],
-        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '200 €', 'unidade' => '10 vídeos', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 10 (200 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => null, 'coral' => false],
-        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '300 €', 'unidade' => '20 vídeos', 'porVideo' => '15 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 20 (300 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => 'MELHOR PREÇO', 'coral' => false],
+        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '20 €', 'unidade' => '1 vídeo', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar', 'href' => $comprar('Vídeo avulso (20 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '100 €', 'unidade' => '10 vídeos', 'porVideo' => '10 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 10 (100 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
+        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '175 €', 'unidade' => '20 vídeos', 'porVideo' => '8,75 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 20 (175 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
+    ];
+
+    // What the free video includes. Its value is the price of a paid video (20 €).
+    $stack = [
+        ['Reel vertical com menos de 60 segundos', 'Em 9:16, pronto para Reels, TikTok, Shorts e estados de WhatsApp.'],
+        ['Texto escrito a partir do anúncio', 'Preço, tipologia, área e certificado energético, ditos como um consultor os diria.'],
+        ['Narração em português de Portugal', 'Diz «T3», «m²» e «duzentos e noventa e cinco mil euros» como se diz cá.'],
+        ['Cartão final com os seus dados', 'Nome, telemóvel, agência e número AMI no fecho do vídeo.'],
+        ['Montagem com ar de agência premium', 'Tipografia editorial, câmara lenta e transições discretas.'],
+        ['MP4 para descarregar', 'Publique onde quiser ou envie ao proprietário.'],
     ];
 
     $faq = [
-        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa custa 29 €, ou a partir de 15 € com um pack.'],
-        ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
-        ['De que sites leem os anúncios?', 'RE/MAX, iad e idealista. Basta copiar o link da barra de endereço do anúncio.'],
+        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa custa 20 €, ou a partir de 8,75 € com um pack.'],
+        ['Quanto tempo demora?', 'Poucos minutos. Mantenha a página aberta: o vídeo aparece no mesmo sítio onde colou o link.'],
         ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
+        ['De que sites leem os anúncios?', 'RE/MAX, iad e idealista. Basta copiar o link da barra de endereço do anúncio.'],
+        ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
         ['Posso alterar o texto da narração?', 'Na sua conta, sim: pode deixar uma nota (preço novo, algo a destacar) e o texto muda antes de ser gravado.'],
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
         ['O que fazem com os meus dados?', 'Usamos os dados do anúncio só para criar o seu vídeo e o contactar sobre ele, de acordo com o RGPD. Pode pedir que os apaguemos a qualquer momento.'],
-        ['Posso pedir mais do que um vídeo grátis?', 'A oferta é de um vídeo grátis por anúncio, para experimentar. Depois, compre vídeos avulso (29 €) ou um pack de 5, 10 ou 20 vídeos.'],
+        ['Posso pedir mais do que um vídeo grátis?', 'A oferta é de um vídeo grátis por anúncio, para experimentar. Depois, compre vídeos avulso (20 €) ou um pack de 10 ou 20 vídeos.'],
         ['Os packs expiram?', 'Os vídeos de um pack podem ser usados durante 12 meses a contar da compra.'],
         ['Os preços incluem IVA?', 'Sim, todos os preços incluem IVA. Emitimos fatura com NIF.'],
     ];
@@ -33,11 +43,11 @@
 <div>
     {{-- Barra de oferta --}}
     <div class="bg-coral text-navy text-center px-4 py-2.5 text-sm">
-        <strong class="font-semibold">Oferta de lançamento:</strong> o vídeo do seu próximo imóvel é por nossa conta.
+        <strong class="font-semibold">Oferta de lançamento:</strong> 1 vídeo grátis por anúncio, sem cartão de crédito.
         <a href="#pedido" class="font-semibold underline underline-offset-2 text-navy">Pedir agora →</a>
     </div>
 
-    {{-- Navegação --}}
+    {{-- Navegação: só a marca e o pedido, sem links que tirem a pessoa da página --}}
     <header class="border-b border-ivory/10">
         <nav class="max-w-[1240px] mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
             <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline">
@@ -45,11 +55,7 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>
             </a>
             <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm">
-                <a href="#como" class="hidden md:inline text-[#D6D9DF] hover:text-ivory">Como funciona</a>
-                <a href="#exemplos" class="hidden md:inline text-[#D6D9DF] hover:text-ivory">Exemplos</a>
-                <a href="#precos" class="hidden md:inline text-[#D6D9DF] hover:text-ivory">Preços</a>
-                <a href="#faq" class="hidden md:inline text-[#D6D9DF] hover:text-ivory">Perguntas</a>
-                <a href="{{ route('login') }}" class="text-ivory font-medium">Entrar</a>
+                <a href="{{ route('login') }}" class="text-[#D6D9DF] hover:text-ivory">Entrar</a>
                 <a href="#pedido" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Vídeo grátis →</a>
             </div>
         </nav>
@@ -61,73 +67,86 @@
             <div class="flex-[1_1_520px] min-w-0">
                 <div class="flex items-center gap-3.5">
                     <span class="w-10 h-px bg-cyan"></span>
-                    <span class="text-xs tracking-[.32em] text-cyan">PARA CONSULTORES IMOBILIÁRIOS</span>
+                    <span class="text-xs tracking-[.32em] text-cyan">CONSULTORES IMOBILIÁRIOS EM PORTUGAL</span>
                 </div>
-                <h1 class="mt-6 font-display text-[clamp(52px,7vw,84px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, <em class="text-coral">grátis.</em></h1>
-                <p class="mt-7 max-w-[540px] text-lg leading-relaxed font-light text-[#C9CED6]">Envie-nos o link do anúncio. Devolvemos um reel vertical com narração em português de Portugal, as fotos do imóvel e o seu contacto no fim, pronto a publicar no Instagram e no TikTok.</p>
-                <ul class="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-sm text-[#E4E6EA]">
-                    <li class="flex items-center gap-2.5">{!! $check !!}Sem cartão de crédito</li>
-                    <li class="flex items-center gap-2.5">{!! $check !!}Voz pt-PT, não brasileira</li>
-                    <li class="flex items-center gap-2.5">{!! $check !!}Pronto a publicar</li>
-                </ul>
-
+                <h1 class="mt-6 font-display text-[clamp(48px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
+                <p class="mt-7 max-w-[540px] text-lg leading-relaxed font-light text-[#C9CED6]">Cole o link do anúncio. Em poucos minutos recebe um reel vertical com as fotos do imóvel, narração em português de Portugal e o seu contacto no fim. Sem filmar, sem editar, sem pagar.</p>
                 <div id="pedido" @if (($pedido['estado'] ?? null) === 'a-fazer') wire:poll.5s @endif
-                     class="mt-10 max-w-[580px] scroll-mt-6 rounded-[18px] bg-ivory text-navy p-7 shadow-[0_30px_80px_-30px_rgba(0,0,0,.6)]">
+                     class="mt-10 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
+                    <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                     @if (($pedido['estado'] ?? null) === 'pronto')
                         <div class="flex flex-wrap gap-6 items-center">
-                            <video src="{{ $pedido['video'] }}" controls playsinline preload="metadata" class="w-[180px] aspect-[9/16] rounded-[14px] bg-navy"></video>
+                            <video src="{{ $pedido['video'] }}" controls playsinline preload="metadata" class="w-[170px] aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10"></video>
                             <div class="flex-[1_1_220px] flex flex-col gap-3">
-                                <span class="text-xs tracking-[.28em] text-cyan-deep">O SEU VÍDEO ESTÁ PRONTO</span>
-                                <span class="font-display text-[32px] font-semibold leading-tight">Publique-o já.</span>
-                                <p class="text-sm leading-relaxed text-ink-soft">Esta versão leva a marca d’água Imocena. A versão limpa custa 29 €, ou a partir de 15 € com um pack.</p>
-                                <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-navy text-ivory font-semibold hover:bg-navy-3">
+                                <span class="text-xs tracking-[.28em] text-cyan">O SEU VÍDEO ESTÁ PRONTO</span>
+                                <span class="font-display text-[34px] leading-tight text-ivory">Publique-o já.</span>
+                                <p class="text-sm leading-relaxed text-[#C9CED6]">Esta versão leva a marca d’água Imocena. A versão limpa custa 20 €, ou a partir de 8,75 € com um pack.</p>
+                                <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
                                     Descarregar MP4
                                 </a>
-                                <a href="#precos" class="text-sm font-medium text-navy underline underline-offset-2">Quero a versão limpa</a>
+                                <a href="#precos" class="text-sm font-medium text-cyan underline underline-offset-2">Quero a versão limpa</a>
                             </div>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'a-fazer')
                         <div role="status" class="flex flex-col gap-4">
-                            <span class="font-display text-[32px] font-semibold leading-tight">Estamos a fazer o seu vídeo.</span>
-                            <div class="h-1.5 rounded-full bg-shelf overflow-hidden"><div class="h-full bg-cyan-deep transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
-                            <p class="text-sm text-ink-soft"><strong class="text-navy font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui.</p>
+                            <span class="font-display text-[32px] leading-tight text-ivory">Estamos a fazer o seu vídeo.</span>
+                            <div class="h-1.5 rounded-full bg-ivory/10 overflow-hidden"><div class="h-full bg-cyan transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
+                            <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui.</p>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'falhou')
                         <div role="alert" class="flex flex-col gap-3">
-                            <span class="font-display text-[32px] font-semibold leading-tight">Não conseguimos fazer este vídeo.</span>
-                            <p class="text-sm leading-relaxed text-ink-soft">Às vezes um anúncio não tem fotos ou dados suficientes. Já fomos avisados e vamos ver o que se passou.</p>
-                            <button type="button" wire:click="outro" class="self-start min-h-11 px-5 rounded-full border border-navy text-sm font-semibold">Tentar com outro anúncio</button>
+                            <span class="font-display text-[32px] leading-tight text-ivory">Não conseguimos fazer este vídeo.</span>
+                            <p class="text-sm leading-relaxed text-[#C9CED6]">Às vezes um anúncio não tem fotos ou dados suficientes. Já fomos avisados e vamos ver o que se passou.</p>
+                            <button type="button" wire:click="outro" class="self-start min-h-11 px-5 rounded-full border border-ivory/40 text-ivory text-sm font-semibold hover:bg-ivory/5">Tentar com outro anúncio</button>
                         </div>
                     @else
-                        <form wire:submit="pedir" class="flex flex-col gap-3.5" novalidate>
-                            <div class="flex flex-wrap justify-between items-baseline gap-3">
-                                <span class="font-display text-[28px] font-semibold">Peça o seu vídeo grátis</span>
-                                <span class="text-xs font-medium text-ink-soft">Só precisa do link</span>
+                        <form wire:submit="pedir" class="flex flex-col gap-4" novalidate>
+                            <div class="flex flex-wrap justify-between items-center gap-3">
+                                <label for="anuncio" class="font-display text-[26px] leading-tight text-ivory">Peça o seu vídeo grátis</label>
+                                <span class="px-3 py-1 rounded-full bg-coral/15 border border-coral/40 text-xs text-coral">Valor <s>20 €</s> · <strong class="font-semibold">hoje 0 €</strong></span>
                             </div>
-                            <label for="anuncio" class="text-[13px] font-medium">Link do anúncio</label>
-                            <div class="flex flex-wrap gap-2.5 -mt-2">
-                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="https://www.remax.pt/pt/imoveis/…" required
-                                       class="flex-[1_1_260px] min-w-0 min-h-14 px-4 rounded-[10px] border border-[#C8C3B8] bg-white text-[15px] text-navy focus:outline-none focus:border-cyan-deep focus:ring-2 focus:ring-cyan/30">
+                            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
+                                <svg class="hidden sm:block shrink-0 ml-4 text-[#8B95A7]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="Cole aqui o link do anúncio" required
+                                       class="flex-1 min-w-0 w-full min-h-12 px-3 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
                                 <button type="submit" wire:loading.attr="disabled" wire:target="pedir"
-                                        class="min-h-14 px-6 rounded-full bg-navy text-ivory text-base font-semibold cursor-pointer hover:bg-navy-3 disabled:opacity-60">
+                                        class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-coral text-navy text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:brightness-105 disabled:opacity-60">
                                     <span wire:loading.remove wire:target="pedir">Criar vídeo grátis →</span>
                                     <span wire:loading wire:target="pedir">A enviar…</span>
                                 </button>
                             </div>
-                            @error('anuncio') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
+                            @error('anuncio') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
                             {{-- Honeypot: invisible to people, tempting to bots. --}}
                             <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
                                 <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>
                             </div>
-                            <label class="flex gap-2.5 items-start text-xs leading-normal text-ink-soft">
-                                <input type="checkbox" wire:model="consentimento" class="mt-0.5 w-[18px] h-[18px] shrink-0 accent-navy">
-                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="#" class="text-navy underline">Política de Privacidade</a> (RGPD).</span>
+                            <label class="flex gap-2.5 items-start text-[11px] leading-snug text-[#AEB5C1]">
+                                <input type="checkbox" wire:model="consentimento" class="mt-px w-3.5 h-3.5 shrink-0 accent-cyan">
+                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="#" class="text-ivory underline">Política de Privacidade</a> (RGPD).</span>
                             </label>
-                            @error('consentimento') <p class="-mt-1.5 text-[13px] text-bad">{{ $message }}</p> @enderror
-                            <p class="text-xs text-ink-soft">O nome, o contacto e as fotos vêm do anúncio. Lemos anúncios da RE/MAX, iad e idealista.</p>
+                            @error('consentimento') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
+                            {{-- Promotional emails: a separate, optional, unticked opt-in (RGPD / Lei 41/2004). --}}
+                            <label class="-mt-1.5 flex gap-2.5 items-start text-[11px] leading-snug text-[#AEB5C1]">
+                                <input type="checkbox" wire:model.live="marketing" class="mt-px w-3.5 h-3.5 shrink-0 accent-cyan">
+                                <span>{{ \App\Livewire\Landing::MARKETING }} <span class="text-[#8B95A7]">(Opcional)</span></span>
+                            </label>
+                            @if ($marketing)
+                                <div class="-mt-1 pl-6">
+                                    <label for="email" class="sr-only">O seu email</label>
+                                    <input id="email" type="email" wire:model="email" placeholder="O seu email" autocomplete="email"
+                                           class="w-full min-h-11 px-4 rounded-full bg-navy border border-ivory/15 text-sm text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
+                                    @error('email') <p class="mt-1.5 text-[13px] text-coral">{{ $message }}</p> @enderror
+                                </div>
+                            @endif
+                            <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
+                                <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
+                                <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
+                                <span class="text-[#8B95A7]">Lê anúncios da RE/MAX, iad e idealista</span>
+                            </div>
                         </form>
                     @endif
+                    </div>
                 </div>
             </div>
 
@@ -180,25 +199,85 @@
         </div>
     </section>
 
+    {{-- O problema: o caminho de hoje contra o nosso --}}
+    <section class="bg-ivory text-navy">
+        <div class="max-w-[1240px] mx-auto px-6 pt-28 pb-8">
+            <div class="text-center max-w-[820px] mx-auto">
+                <span class="text-xs tracking-[.32em] text-cyan-deep">O PROBLEMA</span>
+                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Fotos já não chegam. <em>E editar vídeo não é o seu trabalho.</em></h2>
+            </div>
+            <div class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5">
+                <div class="px-8 py-9 rounded-2xl border border-[#D6D1C5]">
+                    <span class="text-xs font-medium tracking-[.28em] text-[#4B5563]">SEM IMOCENA</span>
+                    <ul class="mt-6 flex flex-col gap-4 text-[15px] leading-relaxed text-[#4B5563]">
+                        @foreach (['Filmar, escolher música, montar e legendar: horas por imóvel.', 'Ou esperar dias por um videógrafo e pagar cada saída.', 'Entretanto, o anúncio fica só com fotos.', 'Ferramentas genéricas com voz brasileira ou robótica.'] as $item)
+                            <li class="flex gap-3 items-start"><span aria-hidden="true" class="shrink-0 text-bad font-semibold">✕</span><span>{{ $item }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="px-8 py-9 rounded-2xl bg-white border-2 border-cyan">
+                    <span class="text-xs font-medium tracking-[.28em] text-cyan-deep">COM IMOCENA</span>
+                    <ul class="mt-6 flex flex-col gap-4 text-[15px] leading-relaxed">
+                        @foreach (['Cola o link do anúncio. Mais nada.', 'O reel fica pronto em poucos minutos.', 'Publica no mesmo dia em que angaria.', 'Voz em português de Portugal, com o seu contacto e AMI no fim.'] as $item)
+                            <li class="flex gap-3 items-start">{!! $check !!}<span>{{ $item }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- Como funciona --}}
     <section id="como" class="bg-ivory text-navy">
         <div class="max-w-[1240px] mx-auto px-6 py-28">
             <div class="text-center max-w-[760px] mx-auto">
                 <span class="text-xs tracking-[.32em] text-cyan-deep">COMO FUNCIONA</span>
-                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Do anúncio ao reel, <em>sem editar nada.</em></h2>
+                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Três passos. <em>Só um é seu.</em></h2>
             </div>
             <div class="mt-[72px] grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8">
                 @foreach ([
-                    ['01', 'Cole o link', 'Lemos o anúncio: fotos, preço, tipologia, área, certificado energético e os seus dados de contacto.'],
-                    ['02', 'Escrevemos e narramos', 'Um texto curto, como um consultor o diria, gravado em português de Portugal.'],
-                    ['03', 'Publique', 'Recebe o MP4 vertical. Publique no Instagram, no TikTok ou envie por WhatsApp ao proprietário.'],
+                    ['01', 'Cole o link', 'É a única coisa que faz. Lemos o anúncio: fotos, preço, tipologia, área, certificado e os seus dados de contacto.'],
+                    ['02', 'Escrevemos, narramos e montamos', 'Um texto curto, como um consultor o diria, gravado em português de Portugal. Leva poucos minutos.'],
+                    ['03', 'Publique', 'O vídeo aparece na página. Descarregue o MP4 e publique no Instagram, no TikTok ou envie ao proprietário.'],
                 ] as [$n, $titulo, $texto])
                     <div class="px-8 py-9 bg-white rounded border-t-[3px] border-coral">
                         <span class="font-display text-[72px] leading-[.8]">{{ $n }}</span>
                         <h3 class="mt-7 mb-2.5 font-sans text-xl font-semibold tracking-normal">{{ $titulo }}</h3>
-                        <p class="text-[15px] leading-[1.7] text-ink-soft">{{ $texto }}</p>
+                        <p class="text-[15px] leading-[1.7] text-[#4B5563]">{{ $texto }}</p>
                     </div>
                 @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- A oferta, empilhada --}}
+    <section>
+        <div class="max-w-[900px] mx-auto px-6 py-28">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">O QUE RECEBE GRÁTIS</span><span class="w-10 h-px bg-cyan"></span></div>
+                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">Tudo isto, <em>a partir de um link.</em></h2>
+            </div>
+            <div class="mt-14 rounded-2xl border border-ivory/15 bg-navy-2 overflow-hidden">
+                <ul class="divide-y divide-ivory/10">
+                    @foreach ($stack as [$titulo, $texto])
+                        <li class="px-7 py-5 flex gap-4 items-start">
+                            <span class="mt-0.5">{!! $check !!}</span>
+                            <div class="flex-1 min-w-0">
+                                <span class="block text-[17px] font-semibold text-ivory">{{ $titulo }}</span>
+                                <span class="block mt-1 text-sm leading-relaxed text-[#C9CED6]">{{ $texto }}</span>
+                            </div>
+                            <span class="shrink-0 text-xs tracking-[.2em] text-cyan">INCLUÍDO</span>
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="px-7 py-8 bg-ivory text-navy flex flex-wrap items-center justify-between gap-6">
+                    <div>
+                        <span class="block text-sm text-[#4B5563]">Valor de um vídeo: <s>20 €</s></span>
+                        <span class="block font-display text-[44px] leading-none mt-1">Hoje: 0 €</span>
+                        <span class="block mt-2 text-xs text-[#4B5563]">1 vídeo grátis por anúncio, com marca d’água Imocena.</span>
+                    </div>
+                    <a href="#pedido" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-coral text-navy text-base font-semibold hover:brightness-105">Quero o meu vídeo grátis →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -264,31 +343,13 @@
         </div>
     </section>
 
-    {{-- Feito para Portugal --}}
+    {{-- Sem risco --}}
     <section class="bg-ivory text-navy">
-        <div class="max-w-[1240px] mx-auto px-6 py-28 flex flex-wrap gap-16">
-            <div class="flex-[1_1_360px] min-w-0">
-                <span class="text-xs tracking-[.32em] text-cyan-deep">FEITO PARA PORTUGAL</span>
-                <h2 class="mt-4 font-display text-[clamp(40px,4.6vw,56px)] leading-[1.02] font-normal">Fala como os seus clientes. <em>Não como uma novela.</em></h2>
-                <p class="mt-6 text-base leading-[1.75] text-ink-soft">Cada detalhe foi pensado para o mercado português: da forma como se diz o preço ao número AMI no cartão final.</p>
-                <a href="#pedido" class="mt-8 inline-flex items-center min-h-[52px] px-6 rounded-full bg-navy text-ivory text-[15px] font-semibold hover:bg-navy-3">Experimentar grátis →</a>
-            </div>
-            <div class="flex-[1.4_1_560px] min-w-0 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-px bg-[#D6D1C5] border border-[#D6D1C5]">
-                @foreach ([
-                    ['Voz em português de Portugal', 'Diz «T3», «m²» e «duzentos e noventa e cinco mil euros» como se diz cá.', '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'],
-                    ['AMI e agência no cartão final', 'Nome, telemóvel, agência e número de licença AMI no fecho de cada vídeo.', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M7 11h10"/>'],
-                    ['Texto revisto por si', 'O preço baixou? A área do anúncio está errada? Na sua conta, escreve uma nota e o texto muda.', '<path d="M4 20h4L19 9l-4-4L4 16z"/>'],
-                    ['Vertical, abaixo de 60 segundos', 'No formato certo para Reels, TikTok, Shorts e estados de WhatsApp.', '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'],
-                    ['As cores da sua agência', 'Logótipo e cores usados nos seus vídeos pagos.', '<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>'],
-                    ['Versão limpa a partir de 15 €', 'Sem marca d’água nos vídeos pagos. Publique onde quiser, quantas vezes quiser.', '<path d="M4 12v7h16v-7M12 3v12M7 8l5-5 5 5"/>'],
-                ] as [$titulo, $texto, $icone])
-                    <div class="p-7 bg-ivory">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#076E8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $icone !!}</svg>
-                        <h3 class="mt-4 mb-1.5 font-sans text-[17px] font-semibold tracking-normal">{{ $titulo }}</h3>
-                        <p class="text-sm leading-[1.65] text-ink-soft">{{ $texto }}</p>
-                    </div>
-                @endforeach
-            </div>
+        <div class="max-w-[900px] mx-auto px-6 py-28 text-center">
+            <span class="text-xs tracking-[.32em] text-cyan-deep">SEM RISCO</span>
+            <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Veja o vídeo primeiro. <em>Pague só se gostar.</em></h2>
+            <p class="mt-6 mx-auto max-w-[620px] text-base leading-[1.75] text-[#4B5563]">O primeiro vídeo é grátis, sem cartão e sem compromisso. Se gostar, a versão limpa custa 20 €, ou desde 8,75 € com um pack. Se não gostar, não paga nada. E não há subscrição: os packs valem 12 meses e só os usa quando angariar.</p>
+            <a href="#pedido" class="mt-8 inline-flex items-center min-h-[52px] px-6 rounded-full bg-navy text-ivory text-[15px] font-semibold hover:bg-navy-3">Experimentar grátis →</a>
         </div>
     </section>
 
@@ -316,7 +377,7 @@
                             <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-coral text-navy text-[11px] font-semibold tracking-[.16em] whitespace-nowrap">{{ $p['selo'] }}</span>
                         @endif
                         <span @class(['text-xs font-medium tracking-[.28em]', 'text-cyan-deep' => $destaque, 'text-cyan' => ! $destaque])>{{ $p['nome'] }}</span>
-                        <p @class(['mt-2.5 text-sm leading-normal min-h-11', 'text-ink-soft' => $destaque, 'text-[#C9CED6]' => ! $destaque])>{{ $p['para'] }}</p>
+                        <p @class(['mt-2.5 text-sm leading-normal min-h-11', 'text-[#4B5563]' => $destaque, 'text-[#C9CED6]' => ! $destaque])>{{ $p['para'] }}</p>
                         <div class="mt-5 flex flex-col gap-1.5"><span class="font-display text-[52px] leading-none whitespace-nowrap">{{ $p['preco'] }}</span><span class="text-sm opacity-80">{{ $p['unidade'] }}</span></div>
                         <div @class(['mt-2.5 text-sm font-medium', 'text-cyan-deep' => $destaque, 'text-cyan' => ! $destaque])>{{ $p['porVideo'] }}</div>
                         <a href="{{ $p['href'] }}" @class([
@@ -325,7 +386,7 @@
                             'bg-navy text-ivory hover:bg-navy-3' => $destaque,
                             'border border-ivory/35 text-ivory hover:bg-ivory/5' => ! $p['coral'] && ! $destaque,
                         ])>{{ $p['cta'] }}</a>
-                        <ul @class(['mt-6 pt-5 border-t flex flex-col gap-2.5 text-sm', 'text-ink-soft border-[#D6D1C5]' => $destaque, 'text-[#C9CED6] border-ivory/15' => ! $destaque])>
+                        <ul @class(['mt-6 pt-5 border-t flex flex-col gap-2.5 text-sm', 'text-[#4B5563] border-[#D6D1C5]' => $destaque, 'text-[#C9CED6] border-ivory/15' => ! $destaque])>
                             @foreach ($p['itens'] as $item)
                                 <li class="flex gap-2.5 items-start">{!! $check !!}<span>{{ $item }}</span></li>
                             @endforeach
@@ -351,7 +412,7 @@
                             {{ $q }}
                             <span aria-hidden="true" class="shrink-0 w-7 h-7 rounded-full border border-navy flex items-center justify-center text-lg leading-none transition-transform group-open:rotate-45">+</span>
                         </summary>
-                        <p class="px-6 pb-5 text-sm leading-[1.7] text-ink-soft">{{ $a }}</p>
+                        <p class="px-6 pb-5 text-sm leading-[1.7] text-[#4B5563]">{{ $a }}</p>
                     </details>
                 @endforeach
             </div>
@@ -363,8 +424,8 @@
         <div class="relative overflow-hidden rounded-t-[64px] bg-navy">
             <div class="absolute inset-0 opacity-20 grayscale-[.4]" style="{{ $fotoStyle }}"></div>
             <div class="relative max-w-[900px] mx-auto px-6 py-28 text-center">
-                <h2 class="font-display text-[clamp(44px,6vw,72px)] leading-none font-normal text-ivory">O seu próximo imóvel merece <em class="text-coral">mais do que fotos.</em></h2>
-                <p class="mt-6 mx-auto max-w-[560px] text-[17px] leading-[1.7] font-light text-[#C9CED6]">Cole o link do anúncio e receba o primeiro vídeo sem pagar nada.</p>
+                <h2 class="font-display text-[clamp(44px,6vw,72px)] leading-none font-normal text-ivory">Cole o link agora. <em class="text-coral">Daqui a minutos tem o vídeo.</em></h2>
+                <p class="mt-6 mx-auto max-w-[560px] text-[17px] leading-[1.7] font-light text-[#C9CED6]">Um vídeo grátis por anúncio, sem cartão de crédito. Se não gostar, não perdeu nada.</p>
                 <a href="#pedido" class="mt-10 inline-flex items-center min-h-[60px] px-9 rounded-full bg-coral text-navy text-[17px] font-semibold hover:brightness-105">Quero o meu vídeo grátis →</a>
             </div>
         </div>
@@ -377,13 +438,6 @@
                 <span class="font-display text-[30px] font-medium">Imocena</span>
                 <p class="mt-3.5 max-w-[280px] text-sm leading-[1.7] text-[#AEB5C1]">Vídeos de imóveis para consultores portugueses, a partir do link do anúncio.</p>
             </div>
-            <nav aria-label="Produto" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
-                <span class="text-xs tracking-[.24em] text-ivory">PRODUTO</span>
-                <a href="#como" class="text-[#AEB5C1] hover:text-ivory">Como funciona</a>
-                <a href="#exemplos" class="text-[#AEB5C1] hover:text-ivory">Exemplos</a>
-                <a href="#precos" class="text-[#AEB5C1] hover:text-ivory">Preços</a>
-                <a href="#pedido" class="text-[#AEB5C1] hover:text-ivory">Vídeo grátis</a>
-            </nav>
             <nav aria-label="Conta" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
                 <span class="text-xs tracking-[.24em] text-ivory">CONTA</span>
                 <a href="{{ route('login') }}" class="text-[#AEB5C1] hover:text-ivory">Entrar</a>

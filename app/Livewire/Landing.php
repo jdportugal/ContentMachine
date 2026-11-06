@@ -23,12 +23,23 @@ use Livewire\Component;
  * The lead is kept in the session so a reload finds it again.
  */
 #[Layout('components.layouts.site')]
-#[Title('Imocena · O vídeo do seu imóvel, grátis')]
+#[Title('Imocena · O vídeo do seu imóvel, pronto em minutos. Grátis.')]
 class Landing extends Component
 {
+    /**
+     * The promotional-email opt-in, word for word. Stored with each consent as proof
+     * of what was agreed to, so change the wording here, never in the view.
+     */
+    public const MARKETING = 'Quero receber emails da Imocena com novidades, dicas e promoções. É opcional e pode cancelar a qualquer momento, com um clique em qualquer email.';
+
     public string $anuncio = '';
 
     public bool $consentimento = false;
+
+    /** Optional and never pre-ticked: the free video doesn't depend on it. */
+    public bool $marketing = false;
+
+    public string $email = '';
 
     /** Honeypot: hidden from people, filled by bots. */
     public string $site = '';
@@ -58,15 +69,18 @@ class Landing extends Component
         }
 
         $this->anuncio = trim($this->anuncio);
+        $this->email = trim($this->email);
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500',
                 fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista. Cole o link de um desses sites.'),
                 fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
             'consentimento' => 'accepted',
+            'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],
         ], [
             'anuncio.required' => 'Cole o link do anúncio.',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
             'consentimento.accepted' => 'Para criarmos o vídeo, precisamos do seu consentimento.',
+            'email.required' => 'Indique o email onde quer receber as novidades.',
         ]);
         RateLimiter::hit($chave, 3600);
 
@@ -79,17 +93,21 @@ class Landing extends Component
             'clip_id' => $clip->id,
             'ip' => (string) request()->ip(),
             'consentimento_em' => now(),
+            'email' => $this->marketing ? $this->email : null,
+            'marketing_em' => $this->marketing ? now() : null,
+            'marketing_texto' => $this->marketing ? self::MARKETING : null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         session(['lead_id' => $this->leadId]);
+        $this->dispatch('lead-criado', id: $this->leadId);
     }
 
     /** Ask for another listing's video (the session forgets the current one). */
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'leadId');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId');
     }
 
     /** The current lead's reel, as the hero card shows it. */

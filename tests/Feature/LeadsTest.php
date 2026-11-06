@@ -220,4 +220,48 @@ class LeadsTest extends TestCase
         Livewire::test(Imoveis::class)->set('anuncio', 'https://www.example.com/casa')->call('criar')->assertHasErrors('anuncio');
         Queue::assertNothingPushed();
     }
+
+    public function test_promotional_emails_are_an_optional_separate_opt_in(): void
+    {
+        Queue::fake();
+
+        $this->pedir()->assertHasNoErrors()->assertSet('marketing', false);
+        $lead = DB::table('leads')->sole();
+        $this->assertNull($lead->email);
+        $this->assertNull($lead->marketing_em);
+
+        session()->forget('lead_id');   // a fresh visitor, not the one whose video is in progress
+        Livewire::test(Landing::class)->assertDontSee('O seu email')
+            ->set('marketing', true)->assertSee('O seu email')
+            ->set(['anuncio' => self::ANUNCIO.'7', 'consentimento' => true])->call('pedir')
+            ->assertHasErrors(['email' => 'required']);
+    }
+
+    public function test_opting_in_records_the_email_time_and_exact_wording(): void
+    {
+        Queue::fake();
+
+        $this->pedir(['marketing' => true, 'email' => ' ana@exemplo.pt '])->assertHasNoErrors();
+
+        $lead = DB::table('leads')->sole();
+        $this->assertSame('ana@exemplo.pt', $lead->email);
+        $this->assertNotNull($lead->marketing_em);
+        $this->assertSame(Landing::MARKETING, $lead->marketing_texto);
+        $this->assertNull($lead->marketing_cancelado_em);
+    }
+
+    public function test_the_signed_link_cancels_promotional_emails_on_post_only(): void
+    {
+        Queue::fake();
+        $this->pedir(['marketing' => true, 'email' => 'ana@exemplo.pt']);
+        $id = DB::table('leads')->value('id');
+        $url = URL::signedRoute('lead.emails.cancelar', ['lead' => $id]);
+
+        $this->get('/emails/cancelar/'.$id)->assertForbidden();
+        $this->get($url)->assertOk()->assertSee('Cancelar os emails promocionais?');
+        $this->assertNull(DB::table('leads')->value('marketing_cancelado_em'));
+
+        $this->post($url)->assertOk()->assertSee('Já não vai receber emails promocionais.');
+        $this->assertNotNull(DB::table('leads')->value('marketing_cancelado_em'));
+    }
 }
