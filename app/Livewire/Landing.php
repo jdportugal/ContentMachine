@@ -88,8 +88,7 @@ class Landing extends Component
         // Free videos always use the default theme, not whatever the studio is on.
         $clip = $import->start($this->anuncio, ['free_lead' => true, 'theme' => app(ThemeRepository::class)->default()->slug]);
 
-        $this->leadId = DB::table('leads')->insertGetId([
-            'anuncio' => $this->anuncio,
+        $dados = [
             'projeto' => $context->current()->slug,
             'clip_id' => $clip->id,
             'ip' => (string) request()->ip(),
@@ -97,9 +96,17 @@ class Landing extends Component
             'email' => $this->marketing ? $this->email : null,
             'marketing_em' => $this->marketing ? now() : null,
             'marketing_texto' => $this->marketing ? self::MARKETING : null,
-            'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ];
+        // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
+        // failure is cleared and the new clip attached) rather than inserting a second.
+        $falhado = DB::table('leads')->where('anuncio', $this->anuncio)->whereNotNull('falhou_em')->first();
+        if ($falhado) {
+            DB::table('leads')->where('id', $falhado->id)->update($dados + ['falhou_em' => null, 'pronto_em' => null]);
+            $this->leadId = $falhado->id;
+        } else {
+            $this->leadId = DB::table('leads')->insertGetId($dados + ['anuncio' => $this->anuncio, 'created_at' => now()]);
+        }
         session(['lead_id' => $this->leadId]);
         $this->dispatch('lead-criado', id: $this->leadId);
     }

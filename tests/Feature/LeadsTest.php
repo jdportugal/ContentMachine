@@ -174,7 +174,9 @@ class LeadsTest extends TestCase
         Livewire::test(Landing::class)->call('outro');
         $this->pedir()->assertHasNoErrors('anuncio');
 
-        $this->assertSame(2, DB::table('leads')->where('anuncio', self::ANUNCIO)->count());
+        $row = DB::table('leads')->where('anuncio', self::ANUNCIO)->sole();
+        $this->assertNull($row->falhou_em);
+        $this->assertNotNull($row->clip_id);
     }
 
     public function test_only_free_videos_render_with_the_watermark(): void
