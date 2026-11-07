@@ -27,7 +27,7 @@ FROM php:8.4-cli AS app
 #  - Node 20 (Remotion CLI renders clips)
 #  - the shared libraries Remotion's headless Chrome needs at runtime
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        git unzip supervisor ca-certificates curl ffmpeg \
+        git unzip supervisor ca-certificates curl gnupg ffmpeg \
         python3 python3-pip \
         libsqlite3-dev libzip-dev libicu-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
         libnss3 libdbus-1-3 libatk1.0-0 libgbm1 libasound2 libxrandr2 libxkbcommon0 \
@@ -40,6 +40,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-install -j"$(nproc)" pdo pdo_sqlite bcmath pcntl zip intl gd mbstring \
     && pip3 install --no-cache-dir --break-system-packages --ignore-installed yt-dlp faster-whisper \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# A full Google Chrome for the idealista scraper (remotion/scripts/fetch-idealista.mjs):
+# idealista's bot check refuses Remotion's headless shell but passes a real Chrome.
+RUN curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update && apt-get install -y --no-install-recommends google-chrome-stable \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+ENV CHROME_PATH=/usr/bin/google-chrome
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
