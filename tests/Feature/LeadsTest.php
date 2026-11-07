@@ -166,6 +166,17 @@ class LeadsTest extends TestCase
         $this->assertNotNull(DB::table('leads')->value('falhou_em'));
     }
 
+    public function test_a_failed_attempt_does_not_use_up_the_free_video(): void
+    {
+        $this->leadCom(ClipRecord::STATUS_FAILED);
+        $this->artisan('leads:atualizar')->assertSuccessful();
+
+        Livewire::test(Landing::class)->call('outro');
+        $this->pedir()->assertHasNoErrors('anuncio');
+
+        $this->assertSame(2, DB::table('leads')->where('anuncio', self::ANUNCIO)->count());
+    }
+
     public function test_only_free_videos_render_with_the_watermark(): void
     {
         $renderer = new class implements RemotionRenderer
