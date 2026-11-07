@@ -24,8 +24,11 @@ database/database.sqlite
 *.sqlite
 *.sqlite3
 
-# Runtime content (lives on a volume, not baked in)
-vault
+# Runtime content (lives on a volume, not baked in) — except the themes, which
+# the image carries as a seed (Dockerfile copies them to /app/vault-seed; the
+# entrypoint syncs them into the vault volume at boot).
+vault/*
+!vault/themes
 vaults
 
 # Dev-only

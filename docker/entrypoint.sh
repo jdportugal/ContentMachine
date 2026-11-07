@@ -24,6 +24,14 @@ mkdir -p \
     database \
     bootstrap/cache
 
+# Themes: the image carries them (/app/vault-seed-themes); the vault is a volume,
+# so copy them in. Files the image ships win (a release updates a theme); files
+# only the volume has (themes made in the app) are left alone.
+if [ -d /app/vault-seed-themes ]; then
+    mkdir -p "${VAULT_PATH:-/app/vault}/themes"
+    cp -R /app/vault-seed-themes/. "${VAULT_PATH:-/app/vault}/themes/"
+fi
+
 # SQLite database file lives on the `database` volume.
 : "${DB_CONNECTION:=sqlite}"
 if [ "${DB_CONNECTION}" = "sqlite" ]; then

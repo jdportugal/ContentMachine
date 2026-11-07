@@ -66,6 +66,8 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-in
 # App source LAST + compiled assets from stage 1.
 COPY . .
 COPY --from=assets /build/public/build ./public/build
+# Themes travel with the image, outside the vault volume's mount point.
+RUN mv vault/themes /app/vault-seed-themes && rmdir vault 2>/dev/null || true
 RUN composer dump-autoload --optimize --no-dev
 
 # Baked build version (git sha) — powers the in-app "Check for updates" check.
