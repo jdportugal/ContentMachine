@@ -86,6 +86,10 @@ services:
       ASSET_URL: https://${DOMAIN}
       APP_TIMEZONE: Europe/Lisbon
       META_PIXEL_ID: "1127337756822112"
+      # Sonnet writes the listing scripts well at ~1/5 of the Opus price; the web
+      # image search is for talking-head clips, not listings (their photos come from the portal).
+      CLIPS_ANTHROPIC_MODEL: claude-sonnet-5-5
+      CLIPS_FETCH_IMAGES: "false"
       CLIPS_MAX_TOKENS: "${CLIPS_MAX_TOKENS}"
       CLIPS_LLM_TIMEOUT: "${CLIPS_LLM_TIMEOUT}"
       CLIPS_RENDER_TIMEOUT: "${CLIPS_RENDER_TIMEOUT}"
