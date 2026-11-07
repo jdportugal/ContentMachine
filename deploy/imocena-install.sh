@@ -145,6 +145,20 @@ log "starting…"; docker compose up -d
 # ── Auto-update: a host systemd timer pulls the latest image every 5 min and
 # recreates the app only if it changed (a no-op otherwise). Host-side, Docker
 # only — no in-container sidecar, network path, or shared token to go wrong.
+# The updater: pull, then swap the container only when no video is in flight —
+# a restart kills the render and the lead waits an hour for the retry.
+cat > /usr/local/bin/imocena-update <<'SH'
+#!/bin/sh
+cd /opt/brand-machine || exit 1
+docker compose pull --quiet
+if docker compose exec -T app php artisan tinker --execute='exit(DB::table("jobs")->whereNotNull("reserved_at")->exists() ? 1 : 0);' >/dev/null 2>&1; then
+    docker compose up -d
+else
+    echo "a job is running - deploy deferred to the next check"
+fi
+SH
+chmod +x /usr/local/bin/imocena-update
+
 if command -v systemctl >/dev/null 2>&1; then
   log "installing the auto-update timer…"
   cat > /etc/systemd/system/brand-machine-update.service <<UNIT
@@ -156,7 +170,7 @@ Requires=docker.service
 [Service]
 Type=oneshot
 WorkingDirectory=${DIR}
-ExecStart=/bin/sh -c 'docker compose pull --quiet && docker compose up -d'
+ExecStart=/usr/local/bin/imocena-update
 UNIT
   cat > /etc/systemd/system/brand-machine-update.timer <<UNIT
 [Unit]
