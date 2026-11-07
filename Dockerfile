@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j"$(nproc)" pdo pdo_sqlite bcmath pcntl zip intl gd mbstring \
-    && pip3 install --no-cache-dir --break-system-packages --ignore-installed yt-dlp faster-whisper \
+    && pip3 install --no-cache-dir --break-system-packages --ignore-installed yt-dlp "faster-whisper>=1.1" "huggingface_hub<1.0" "ctranslate2<5" \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # A full Google Chrome for the idealista scraper (remotion/scripts/fetch-idealista.mjs):
