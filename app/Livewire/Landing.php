@@ -85,8 +85,9 @@ class Landing extends Component
         ]);
         RateLimiter::hit($chave, 3600);
 
-        // Free videos always use the default theme, not whatever the studio is on.
-        $clip = $import->start($this->anuncio, ['free_lead' => true, 'theme' => app(ThemeRepository::class)->default()->slug]);
+        // Free videos use the portal's premium theme (iad-premium, remax-premium…),
+        // falling back to the default; never whatever the studio happens to be on.
+        $clip = $import->start($this->anuncio, ['free_lead' => true, 'theme' => app(ThemeRepository::class)->forPortal(ListingScraper::portal($this->anuncio))->slug]);
 
         $dados = [
             'projeto' => $context->current()->slug,

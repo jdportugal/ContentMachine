@@ -17,6 +17,17 @@ class ListingScraper
     }
 
     /** @return array See RemaxListingScraper::scrape(). */
+    /** The portal a listing URL belongs to: 'remax', 'iad', 'idealista' or null. */
+    public static function portal(string $url): ?string
+    {
+        return match (true) {
+            RemaxListingScraper::supports($url) => 'remax',
+            IadListingScraper::supports($url) => 'iad',
+            IdealistaListingScraper::supports($url) => 'idealista',
+            default => null,
+        };
+    }
+
     public function scrape(string $url): array
     {
         return match (true) {

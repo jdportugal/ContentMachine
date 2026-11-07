@@ -47,6 +47,15 @@ class ThemeRepository
         return $this->find($this->defaultSlug()) ?? $this->all()[0];
     }
 
+    /**
+     * The theme for a listing portal: '<portal>-premium' (iad-premium, remax-premium,
+     * idealista-premium) when that theme exists, else the default.
+     */
+    public function forPortal(?string $portal): Theme
+    {
+        return ($portal ? $this->find($portal.'-premium') : null) ?? $this->default();
+    }
+
     /** A new, empty theme: the Design System page and the Effects Studio fill it. */
     public function create(string $name): Theme
     {

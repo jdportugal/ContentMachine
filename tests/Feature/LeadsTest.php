@@ -166,6 +166,15 @@ class LeadsTest extends TestCase
         $this->assertNotNull(DB::table('leads')->value('falhou_em'));
     }
 
+    public function test_the_free_video_uses_the_portals_premium_theme_when_it_exists(): void
+    {
+        $themes = app(\App\Services\Themes\ThemeRepository::class);
+        $this->assertSame($themes->default()->slug, $themes->forPortal('remax')->slug, 'no remax-premium theme yet: the default');
+        $themes->create('iad-premium');
+        $this->assertSame('iad-premium', $themes->forPortal('iad')->slug);
+        $this->assertSame(\App\Services\RealEstate\ListingScraper::portal(self::ANUNCIO), 'remax');
+    }
+
     public function test_a_failed_attempt_does_not_use_up_the_free_video(): void
     {
         $this->leadCom(ClipRecord::STATUS_FAILED);
