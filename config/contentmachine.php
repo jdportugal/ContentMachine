@@ -503,7 +503,7 @@ return [
     | Free-video leads from the public landing page.
     */
     'leads' => [
-        'per_hour' => (int) env('LEADS_PER_HOUR', 5),   // form submissions per IP
+        'per_hour' => (int) env('LEADS_PER_HOUR', 10),   // form submissions per IP
         'watermark' => env('LEADS_WATERMARK', 'IMOCENA · VÍDEO GRÁTIS'),   // across the free videos
     ],
 

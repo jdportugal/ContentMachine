@@ -104,6 +104,8 @@ class Landing extends Component
         if ($falhado) {
             DB::table('leads')->where('id', $falhado->id)->update($dados + ['falhou_em' => null, 'pronto_em' => null]);
             $this->leadId = $falhado->id;
+            // A retry of our own failure is not the visitor's doing: give the attempt back.
+            RateLimiter::decrement($chave);
         } else {
             $this->leadId = DB::table('leads')->insertGetId($dados + ['anuncio' => $this->anuncio, 'created_at' => now()]);
         }
