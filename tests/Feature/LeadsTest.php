@@ -192,6 +192,9 @@ class LeadsTest extends TestCase
         $themes->create('iad-premium');
         $this->assertSame('iad-premium', $themes->forPortal('iad')->slug);
         $this->assertSame(\App\Services\RealEstate\ListingScraper::portal(self::ANUNCIO), 'remax');
+        // Imocena's demo listings have their own theme (vault/themes/demo-premium): never another network's brand.
+        $themes->create('demo-premium');
+        $this->assertSame('demo-premium', $themes->forPortal('demo')->slug);
     }
 
     public function test_a_failed_attempt_does_not_use_up_the_free_video(): void
