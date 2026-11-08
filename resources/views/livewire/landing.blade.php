@@ -169,7 +169,7 @@
             {{-- Leque de reels: o vídeo de demonstração a tocar, com dois momentos dele ao lado --}}
             <div class="flex-[1_1_480px] min-w-0 relative h-[760px] hidden md:block">
                 @if ($demoReel)
-                    @php $lado = [$frames[1] ?? null, $frames[4] ?? ($frames[count($frames) - 1] ?? null)]; if ($lado[0] && $lado[1] && $lado[0]['file'] === $lado[1]['file']) { $lado[1] = null; } @endphp
+                    @php /* side phones: an interior and the garden — two clearly different moments */ $lado = [$frames[2] ?? ($frames[1] ?? null), $frames[7] ?? ($frames[count($frames) - 2] ?? null)]; if ($lado[0] && $lado[1] && $lado[0]['file'] === $lado[1]['file']) { $lado[1] = null; } @endphp
                     @foreach ([['left-0 top-[100px] -rotate-[7deg]', $lado[0]], ['right-0 top-[120px] rotate-[7deg]', $lado[1]]] as [$pos, $frame])
                         <div class="absolute {{ $pos }} w-[230px] h-[498px] rounded-[38px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
                             <span class="absolute left-1/2 top-2.5 -translate-x-1/2 w-[68px] h-[20px] rounded-full bg-navy-3 z-10"></span>
