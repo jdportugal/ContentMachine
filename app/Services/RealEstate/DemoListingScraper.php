@@ -49,7 +49,7 @@ class DemoListingScraper
             'price' => $l['price'],
             'details' => ['Preço' => number_format($l['price'], 0, ',', ' ').' €'] + $l['details'],
             'photos' => array_map(fn ($f) => $base.$f, $l['photos']),
-            'agent' => ['name' => 'Imocena', 'phone' => '+351 232 000 000', 'photo' => rtrim((string) config('app.url'), '/').'/images/imocena-logo-empilhado.png', 'email' => 'info@imocena.com', 'licence' => ''],
+            'agent' => ['name' => 'Imocena', 'phone' => '+351 232 000 000', 'photo' => rtrim((string) config('app.url'), '/').'/images/imocena-demo-agente.png', 'email' => 'info@imocena.com', 'licence' => ''],
             'agency' => 'Imocena',
             'ami' => '',
         ];

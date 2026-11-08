@@ -8,7 +8,7 @@ set -eu
 slug="$1"; shift
 dir="/app/public/media/demo/$slug"; out="$dir/frames"
 mkdir -p "$out"
-ffmpeg -loglevel error -y -i "$dir/reel.mp4" -vf "fps=1,scale=180:-1,tile=9x4:padding=4:margin=4" "$out/sheet.jpg"
+ffmpeg -loglevel error -y -i "$dir/reel.mp4" -vf "fps=1,scale=180:-1,tile=9x8:padding=4:margin=4" -frames:v 1 "$out/sheet.jpg"
 i=0; json="["
 for spec in "$@"; do
   t="${spec%%|*}"; label="${spec#*|}"; i=$((i+1)); f=$(printf '%02d.jpg' "$i")
