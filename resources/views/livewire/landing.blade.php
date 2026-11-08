@@ -21,14 +21,26 @@
 
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
 
-    // Prices include VAT. Paid videos are sold by email until there is a checkout.
+    // Prices include VAT. Buying opens a Stripe Payment Link (config: contentmachine.stripe.links)
+    // carrying the visitor's free-video lead as client_reference_id, so a single video is
+    // delivered as that lead's clean render. Without a link, the button is an email.
     $comprar = fn (string $o) => 'mailto:'.config('mail.from.address').'?subject='.rawurlencode($o);
+    $leadAtual = session('lead_id');
+    $stripe = function (string $plano, string $assunto) use ($comprar, $leadAtual) {
+        $link = (string) config("contentmachine.stripe.links.$plano");
+        if ($link === '') {
+            return $comprar($assunto);
+        }
+        $params = array_filter(['client_reference_id' => $leadAtual ? 'lead-'.$leadAtual : null, 'locale' => 'pt']);
+
+        return $link.($params ? '?'.http_build_query($params) : '');
+    };
     $limpo = 'Versão limpa, sem marca d’água';
     $planos = [
         ['nome' => 'GRÁTIS', 'para' => 'Para experimentar com um imóvel seu.', 'preco' => '0 €', 'unidade' => '1 vídeo', 'porVideo' => 'Com marca d’água', 'cta' => 'Pedir o vídeo grátis', 'href' => '#pedido', 'itens' => ['Basta colar o link do anúncio', 'Voz em português de Portugal', 'Cartão final com AMI', 'Com marca d’água Imocena'], 'selo' => null, 'coral' => true],
-        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '20 €', 'unidade' => '1 vídeo', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar', 'href' => $comprar('Vídeo avulso (20 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
-        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '100 €', 'unidade' => '10 vídeos', 'porVideo' => '10 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 10 (100 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
-        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '175 €', 'unidade' => '20 vídeos', 'porVideo' => '8,75 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 20 (175 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
+        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '20 €', 'unidade' => '1 vídeo', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar', 'href' => $stripe('avulso', 'Vídeo avulso (20 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '100 €', 'unidade' => '10 vídeos', 'porVideo' => '10 € por vídeo', 'cta' => 'Comprar pack', 'href' => $stripe('pack10', 'Pack 10 (100 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
+        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '175 €', 'unidade' => '20 vídeos', 'porVideo' => '8,75 € por vídeo', 'cta' => 'Comprar pack', 'href' => $stripe('pack20', 'Pack 20 (175 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
     ];
 
     // What the free video includes. Its value is the price of a paid video (20 €).
@@ -101,7 +113,7 @@
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
                                     Descarregar MP4
                                 </a>
-                                <a href="#precos" class="text-sm font-medium text-cyan underline underline-offset-2">Quero a versão limpa</a>
+                                <a href="{{ $stripe('avulso', 'Vídeo avulso (20 €)') }}" class="text-sm font-medium text-cyan underline underline-offset-2">Quero a versão limpa (20 €)</a>
                             </div>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'a-fazer')

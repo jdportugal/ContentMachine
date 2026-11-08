@@ -508,6 +508,22 @@ return [
     ],
 
     /*
+    | Stripe. Selling runs on Payment Links made in the dashboard (no API key
+    | needed): the landing's buttons open them with the lead as client_reference_id,
+    | and the checkout.session.completed webhook (POST /stripe/webhook, verified with
+    | the endpoint's signing secret) records the purchase and fulfils it. Without the
+    | links the buttons fall back to a mailto:.
+    */
+    'stripe' => [
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET', ''),
+        'links' => [
+            'avulso' => env('STRIPE_LINK_AVULSO', ''),
+            'pack10' => env('STRIPE_LINK_PACK10', ''),
+            'pack20' => env('STRIPE_LINK_PACK20', ''),
+        ],
+    ],
+
+    /*
     | Listing → clip importer (Animated Clips · "From a listing"). Voices are
     | European-Portuguese ElevenLabs voices, picked by the agent's gender.
     | Stability is the Creative (0) / Natural (0.5) / Robust (1) setting.

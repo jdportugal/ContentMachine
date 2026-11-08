@@ -27,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // One-click unsubscribe (RFC 8058): the mail provider POSTs without a CSRF
         // token. The route is signed, so the signature does that job.
-        $middleware->validateCsrfTokens(except: ['emails/cancelar/*']);
+        $middleware->validateCsrfTokens(except: ['emails/cancelar/*', 'stripe/webhook']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

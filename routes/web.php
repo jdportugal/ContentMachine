@@ -23,6 +23,7 @@ use App\Services\Clips\Store\EffectStore;
 use App\Services\Clips\Store\VfxStore;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectResources;
+use App\Http\Controllers\StripeWebhookController;
 use App\Services\RealEstate\DemoListingScraper;
 use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
@@ -46,6 +47,15 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
 
     return view('demo-listing', ['listing' => $demo->scrape(url(DemoListingScraper::PATH.'/'.$slug)), 'reel' => $reel]);
 })->name('demo');
+
+// Stripe: the Payment Links' webhook, and where a buyer lands after paying.
+Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
+Route::get('/obrigado', function () {
+    $sessao = (string) request()->query('session_id', '');
+    $compra = $sessao !== '' ? DB::table('compras')->where('sessao', $sessao)->first() : null;
+
+    return view('obrigado', ['compra' => $compra, 'lead' => $compra?->lead_id ? DB::table('leads')->find($compra->lead_id) : null]);
+})->name('obrigado');
 
 Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
     $row = $videos->lead($lead);
