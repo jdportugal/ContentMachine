@@ -184,7 +184,7 @@
                     <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[650px] rounded-[48px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
                         <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[90px] h-[26px] rounded-full bg-navy-3 z-10"></span>
                         <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
-                               class="absolute inset-0 w-full h-full object-cover bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
+                               class="absolute inset-0 w-full h-full object-contain bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
                     </div>
                     <div class="absolute left-1/2 bottom-[30px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
                         <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
