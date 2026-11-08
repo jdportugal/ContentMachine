@@ -11,6 +11,13 @@
     $jardimStyle = $estilo($demoFoto('14-jardim-terraco.png'));
     $demoReel = is_file(public_path("media/demo/{$demoSlug}/reel.mp4")) ? asset("media/demo/{$demoSlug}/reel.mp4") : null;
     $demoUrl = route('demo', ['slug' => $demoSlug]);
+    // Stills taken from the reel at different moments: media/demo/<slug>/frames/frames.json lists
+    // [{file, time, label}, …] and is written by scripts/demo-frames.sh after each render.
+    $framesJson = public_path("media/demo/{$demoSlug}/frames/frames.json");
+    $frames = is_file($framesJson) ? (json_decode(file_get_contents($framesJson), true) ?: []) : [];
+    $frames = array_values(array_filter($frames, fn ($f) => is_file(public_path("media/demo/{$demoSlug}/frames/".($f['file'] ?? '')))));
+    $frameUrl = fn (array $f) => asset("media/demo/{$demoSlug}/frames/{$f['file']}");
+    $poster = $frames ? $frameUrl($frames[0]) : null;
 
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
 
@@ -159,41 +166,63 @@
                 </div>
             </div>
 
-            {{-- Leque de reels --}}
-            <div class="flex-[1_1_480px] min-w-0 relative h-[700px] hidden md:block" aria-hidden="true">
-                <div class="absolute left-0 top-[90px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 -rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]">
-                    <div class="absolute inset-x-0 top-0 h-[190px] saturate-[.85] brightness-90" style="{{ $fotoStyle }}"></div>
+            {{-- Leque de reels: o vídeo de demonstração a tocar, com dois momentos dele ao lado --}}
+            <div class="flex-[1_1_480px] min-w-0 relative h-[700px] hidden md:block">
+                @if ($demoReel)
+                    @php $lado = [$frames[min(2, max(0, count($frames) - 1))] ?? null, $frames[count($frames) - 2] ?? null]; @endphp
+                    @foreach ([['left-0 top-[90px] -rotate-[7deg]', $lado[0]], ['right-0 top-[110px] rotate-[7deg]', $lado[1]]] as [$pos, $frame])
+                        <div class="absolute {{ $pos }} w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
+                            @if ($frame)
+                                <img src="{{ $frameUrl($frame) }}" alt="" class="absolute inset-0 w-full h-full object-cover">
+                                <span class="absolute left-3 bottom-3 px-2 py-1 rounded-full bg-navy/70 text-[9px] tracking-[.2em] text-[#E4E6EA]">{{ $frame['time'] }}</span>
+                            @else
+                                <div class="absolute inset-0" style="{{ $fotoStyle }}"></div>
+                            @endif
+                        </div>
+                    @endforeach
+                    <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[534px] rounded-[32px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
+                        <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
+                               class="absolute inset-0 w-full h-full object-cover bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
+                    </div>
+                    <div class="absolute left-1/2 bottom-[60px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
+                        <span class="text-[13px] text-[#E4E6EA]">Feito pela Imocena em 7 minutos · <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a></span>
+                    </div>
+                @else
+                <div class="absolute left-0 top-[90px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 -rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
+                    <div class="absolute inset-x-0 top-0 h-[190px] saturate-[.85] brightness-90" style="{{ $jardimStyle }}"></div>
                     <div class="absolute inset-x-0 top-[140px] h-[50px] bg-gradient-to-b from-navy/0 to-navy"></div>
                     <div class="absolute inset-x-4 top-[230px] text-center flex flex-col items-center gap-2.5">
                         <span class="text-[8px] tracking-[.34em] text-cyan">PREÇO</span>
-                        <span class="font-display text-[44px] leading-none">167.000 €</span>
+                        <span class="font-display text-[44px] leading-none">295.000 €</span>
                         <span class="w-8 h-0.5 bg-coral"></span>
                         <span class="text-[8px] font-light tracking-[.2em]">PRONTO A UTILIZAR</span>
                     </div>
                 </div>
-                <div class="absolute right-0 top-[110px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)] flex flex-col items-center px-[18px] pt-14 pb-6 gap-3.5 text-center">
+                <div class="absolute right-0 top-[110px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)] flex flex-col items-center px-[18px] pt-14 pb-6 gap-3.5 text-center" aria-hidden="true">
                     <div class="w-[116px] h-[146px] bg-[#26324A] border border-cyan"></div>
                     <span class="text-[7px] tracking-[.34em] text-cyan">VISITAS POR MARCAÇÃO</span>
                     <span class="font-display text-[26px] leading-none">O seu nome</span>
                     <span class="px-3 py-1.5 border border-cyan text-[10px] tracking-[.14em]">+351 9XX XXX XXX</span>
                     <span class="mt-auto text-[8px] tracking-[.3em] opacity-70">AMI 00000</span>
                 </div>
-                <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[534px] rounded-[32px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
+                <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[534px] rounded-[32px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]" aria-hidden="true">
                     <div class="absolute inset-0 scale-[1.04] saturate-[.85] brightness-[.92]" style="{{ $fotoStyle }}"></div>
                     <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,22,38,.55)_0%,rgba(14,22,38,0)_28%,rgba(14,22,38,0)_46%,rgba(14,22,38,.94)_100%)]"></div>
-                    <div class="absolute top-[22px] inset-x-5 flex justify-between text-[7px] tracking-[.32em]"><span class="font-medium">A SUA AGÊNCIA</span><span class="font-light">REF. 171469</span></div>
-                    <span class="absolute top-[46px] left-5 px-2.5 py-1 bg-coral text-navy text-[8px] font-semibold tracking-[.24em]">EXCLUSIVO</span>
+                    <div class="absolute top-[22px] inset-x-5 flex justify-between text-[7px] tracking-[.32em]"><span class="font-medium">A SUA AGÊNCIA</span><span class="font-light">REF. 2019</span></div>
+                    <span class="absolute top-[46px] left-5 px-2.5 py-1 bg-coral text-navy text-[8px] font-semibold tracking-[.24em]">NOVO IMÓVEL</span>
                     <div class="absolute inset-x-5 bottom-12 flex flex-col gap-2.5">
-                        <div class="flex items-center gap-2"><span class="w-[22px] h-px bg-cyan"></span><span class="text-[8px] tracking-[.3em] text-cyan">CALDAS DA RAINHA · CENTRO</span></div>
-                        <span class="font-display text-[34px] leading-[1.02]">Escritório<br><em>remodelado</em> no centro</span>
-                        <span class="text-[8px] font-light tracking-[.18em] opacity-85">50 M² · CLASSE B- · ELEVADOR</span>
+                        <div class="flex items-center gap-2"><span class="w-[22px] h-px bg-cyan"></span><span class="text-[8px] tracking-[.3em] text-cyan">LAJEOSA · VISEU</span></div>
+                        <span class="font-display text-[34px] leading-[1.02]">Moradia T3<br><em>com jardim</em> e garagem</span>
+                        <span class="text-[8px] font-light tracking-[.18em] opacity-85">185 M² · CLASSE B · GARAGEM</span>
                     </div>
                     <div class="absolute inset-x-5 bottom-[22px] h-0.5 bg-ivory/25"><div class="w-[38%] h-full bg-cyan"></div></div>
                 </div>
-                <div class="absolute left-1/2 bottom-[60px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
+                <div class="absolute left-1/2 bottom-[60px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap" aria-hidden="true">
                     <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
-                    <span class="text-[13px] text-[#E4E6EA]">Narração: <em class="font-display text-base">«Em pleno centro das Caldas…»</em></span>
+                    <span class="text-[13px] text-[#E4E6EA]">Narração: <em class="font-display text-base">«Moradia em Lajeosa com vista para a serra…»</em></span>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -301,16 +330,21 @@
                 </div>
                 <p class="max-w-[380px] text-[15px] leading-[1.7] font-light text-[#C9CED6]">Câmara lenta, tipografia editorial e transições discretas. Menos de 60 segundos, em 9:16. <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">Ver o anúncio de exemplo →</a></p>
             </div>
-            @if ($demoReel)
-                <div class="mt-16 flex flex-wrap gap-8 items-center">
-                    <video src="{{ $demoReel }}" controls playsinline preload="metadata" class="w-[250px] aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10"></video>
-                    <div class="max-w-[420px]">
-                        <span class="text-xs tracking-[.32em] text-cyan">UM VÍDEO REAL, FEITO PELA IMOCENA</span>
-                        <p class="mt-3 text-[15px] leading-[1.7] font-light text-[#C9CED6]">Moradia T3 em Lajeosa, Viseu — um anúncio de demonstração. Do link ao MP4 sem ninguém tocar: texto, narração, montagem e cartão final.</p>
-                        <p class="mt-3 text-xs text-[#AEB5C1]">Imóvel fictício, imagens ilustrativas.</p>
-                    </div>
+            @if (count($frames) >= 4)
+                {{-- Momentos do vídeo de demonstração, tal como foi renderizado --}}
+                <div class="mt-16 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-5">
+                    @foreach ($frames as $i => $f)
+                        <figure>
+                            <a href="{{ $demoUrl }}" class="group relative block aspect-[9/16] overflow-hidden border border-ivory/10 rounded-[6px]">
+                                <img src="{{ $frameUrl($f) }}" alt="{{ $f['label'] }} — fotograma do vídeo de demonstração aos {{ $f['time'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700">
+                                <span class="absolute left-3 top-3 px-2 py-1 rounded-full bg-navy/70 text-[10px] tracking-[.2em] text-[#E4E6EA]">{{ $f['time'] }}</span>
+                            </a>
+                            <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">{{ sprintf('%02d', $i + 1) }} · {{ mb_strtoupper($f['label']) }}</figcaption>
+                        </figure>
+                    @endforeach
                 </div>
-            @endif
+                <p class="mt-6 text-xs text-[#AEB5C1]">Fotogramas do vídeo real da Moradia T3 em Lajeosa (imóvel de demonstração, imagens ilustrativas).</p>
+            @else
             <div class="mt-16 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5" aria-hidden="true">
                 <figure>
                     <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10">
@@ -359,6 +393,7 @@
                     <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">05 · CONTACTO</figcaption>
                 </figure>
             </div>
+            @endif
         </div>
     </section>
 
