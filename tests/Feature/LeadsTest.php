@@ -9,6 +9,7 @@ use App\Livewire\Landing;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Contracts\RemotionRenderer;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\RealEstate\ListingScraper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
@@ -33,6 +34,24 @@ class LeadsTest extends TestCase
     public function test_the_landing_page_is_public(): void
     {
         $this->get('/')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('Peça o seu vídeo grátis');
+    }
+
+    public function test_the_demo_listing_has_a_page_and_reads_without_fetching(): void
+    {
+        $this->get('/demo/moradia-lajeosa')->assertOk()->assertSee('Moradia T3')->assertSee('295 000 €')->assertSee('media/demo/moradia-lajeosa/01-fachada.png');
+        $this->get('/demo/nope')->assertNotFound();
+
+        $url = url('/demo/moradia-lajeosa');
+        $this->assertTrue(ListingScraper::supports($url));
+        $this->assertSame('demo', ListingScraper::portal($url));
+        $this->assertFalse(ListingScraper::supports('https://example.com/demo/moradia-lajeosa'));
+
+        $listing = app(ListingScraper::class)->scrape($url);
+        $this->assertSame('Imocena', $listing['agency']);
+        $this->assertCount(14, $listing['photos']);
+        $this->assertStringEndsWith('/media/demo/moradia-lajeosa/01-fachada.png', $listing['photos'][0]);
+        $this->assertSame('295 000 €', $listing['details']['Preço']);
+        $this->get('/')->assertSee('/demo/moradia-lajeosa');
     }
 
     public function test_the_link_alone_starts_the_listing_import(): void

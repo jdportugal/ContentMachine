@@ -1,7 +1,16 @@
 @php
-    // A property photo for the reel mock-ups: drop one at public/images/landing/imovel.jpg.
-    $foto = is_file(public_path('images/landing/imovel.jpg')) ? asset('images/landing/imovel.jpg') : null;
-    $fotoStyle = $foto ? "background-image:url('{$foto}');background-size:cover;background-position:center" : 'background:linear-gradient(160deg,#2A3A52,#141F33)';
+    // The reel mock-ups use the demo listing's photos (public/media/demo/moradia-lajeosa,
+    // generated, illustrative), falling back to public/images/landing/imovel.jpg, then a gradient.
+    $demoSlug = 'moradia-lajeosa';
+    $demoFoto = fn (string $f) => is_file(public_path("media/demo/{$demoSlug}/{$f}")) ? asset("media/demo/{$demoSlug}/{$f}")
+        : (is_file(public_path('images/landing/imovel.jpg')) ? asset('images/landing/imovel.jpg') : null);
+    $estilo = fn (?string $url) => $url ? "background-image:url('{$url}');background-size:cover;background-position:center" : 'background:linear-gradient(160deg,#2A3A52,#141F33)';
+    $fotoStyle = $estilo($demoFoto('01-fachada.png'));
+    $salaStyle = $estilo($demoFoto('03-sala.png'));
+    $cozinhaStyle = $estilo($demoFoto('06-cozinha.png'));
+    $jardimStyle = $estilo($demoFoto('14-jardim-terraco.png'));
+    $demoReel = is_file(public_path("media/demo/{$demoSlug}/reel.mp4")) ? asset("media/demo/{$demoSlug}/reel.mp4") : null;
+    $demoUrl = route('demo', ['slug' => $demoSlug]);
 
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
 
@@ -290,29 +299,39 @@
                     <div class="flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">O QUE RECEBE</span></div>
                     <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">Um reel com ar de <em>agência premium.</em></h2>
                 </div>
-                <p class="max-w-[380px] text-[15px] leading-[1.7] font-light text-[#C9CED6]">Câmara lenta, tipografia editorial e transições discretas. Menos de 60 segundos, em 9:16.</p>
+                <p class="max-w-[380px] text-[15px] leading-[1.7] font-light text-[#C9CED6]">Câmara lenta, tipografia editorial e transições discretas. Menos de 60 segundos, em 9:16. <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">Ver o anúncio de exemplo →</a></p>
             </div>
+            @if ($demoReel)
+                <div class="mt-16 flex flex-wrap gap-8 items-center">
+                    <video src="{{ $demoReel }}" controls playsinline preload="metadata" class="w-[250px] aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10"></video>
+                    <div class="max-w-[420px]">
+                        <span class="text-xs tracking-[.32em] text-cyan">UM VÍDEO REAL, FEITO PELA IMOCENA</span>
+                        <p class="mt-3 text-[15px] leading-[1.7] font-light text-[#C9CED6]">Moradia T3 em Lajeosa, Viseu — um anúncio de demonstração. Do link ao MP4 sem ninguém tocar: texto, narração, montagem e cartão final.</p>
+                        <p class="mt-3 text-xs text-[#AEB5C1]">Imóvel fictício, imagens ilustrativas.</p>
+                    </div>
+                </div>
+            @endif
             <div class="mt-16 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5" aria-hidden="true">
                 <figure>
                     <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10">
                         <div class="absolute inset-0 saturate-[.85] brightness-90" style="{{ $fotoStyle }}"></div>
                         <div class="absolute inset-0 bg-gradient-to-b from-navy/0 from-45% to-navy/95"></div>
-                        <span class="absolute inset-x-4 bottom-[22px] font-display text-[30px] leading-none">Escritório <em>remodelado</em></span>
+                        <span class="absolute inset-x-4 bottom-[22px] font-display text-[30px] leading-none">Moradia T3 <em>com jardim</em></span>
                     </div>
                     <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">01 · ABERTURA</figcaption>
                 </figure>
                 <figure>
                     <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10 flex flex-col gap-2 p-[18px]">
-                        <div class="flex-1 border border-cyan saturate-[.85] brightness-[.92]" style="{{ $fotoStyle }}"></div>
-                        <div class="flex-1 border border-cyan saturate-[.85] brightness-75" style="{{ $fotoStyle }}"></div>
-                        <span class="pt-1.5 text-[9px] tracking-[.3em] text-cyan text-center">LUZ NATURAL · DUAS FRENTES</span>
+                        <div class="flex-1 border border-cyan saturate-[.85] brightness-[.92]" style="{{ $salaStyle }}"></div>
+                        <div class="flex-1 border border-cyan saturate-[.85] brightness-75" style="{{ $cozinhaStyle }}"></div>
+                        <span class="pt-1.5 text-[9px] tracking-[.3em] text-cyan text-center">SALA · COZINHA</span>
                     </div>
                     <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">02 · DÍPTICO</figcaption>
                 </figure>
                 <figure>
                     <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10 px-[22px] py-7 flex flex-col justify-center gap-[18px]">
                         <span class="text-[9px] tracking-[.34em] text-cyan">FICHA DO IMÓVEL</span>
-                        @foreach (['ÁREA' => '50 m²', 'CERTIFICADO' => 'B-', 'PISO' => '2.º', 'ELEVADOR' => 'Sim'] as $k => $v)
+                        @foreach (['ÁREA' => '185 m²', 'CERTIFICADO' => 'B', 'LOTE' => '620 m²', 'GARAGEM' => 'Sim'] as $k => $v)
                             <div class="flex justify-between items-baseline {{ $loop->last ? '' : 'border-b border-ivory/20 pb-2.5' }}"><span class="text-[11px] font-light tracking-[.14em]">{{ $k }}</span><span class="font-display text-[26px] leading-none">{{ $v }}</span></div>
                         @endforeach
                     </div>
@@ -320,11 +339,11 @@
                 </figure>
                 <figure>
                     <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10">
-                        <div class="absolute inset-x-0 top-0 h-[44%] saturate-[.85] brightness-90" style="{{ $fotoStyle }}"></div>
+                        <div class="absolute inset-x-0 top-0 h-[44%] saturate-[.85] brightness-90" style="{{ $jardimStyle }}"></div>
                         <div class="absolute inset-x-0 top-[30%] h-[14%] bg-gradient-to-b from-navy/0 to-navy"></div>
                         <div class="absolute inset-x-3 top-[54%] flex flex-col items-center gap-3 text-center">
                             <span class="text-[9px] tracking-[.34em] text-cyan">PREÇO</span>
-                            <span class="font-display text-[44px] leading-none">167.000 €</span>
+                            <span class="font-display text-[44px] leading-none">295.000 €</span>
                             <span class="w-9 h-0.5 bg-coral"></span>
                         </div>
                     </div>

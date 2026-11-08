@@ -23,6 +23,7 @@ use App\Services\Clips\Store\EffectStore;
 use App\Services\Clips\Store\VfxStore;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectResources;
+use App\Services\RealEstate\DemoListingScraper;
 use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Http\Request;
@@ -36,6 +37,15 @@ use Illuminate\Support\Facades\URL;
 // The free-video landing page, and the signed link to the finished reel it shows:
 // a lead has no account, so the signature is the key and LeadVideo activates their project.
 Route::livewire('/', Landing::class)->name('home');
+
+// Imocena's own demo listings (fictional, generated photos): the page the
+// landing's example points at, and a link anyone can paste into the form.
+Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoListingScraper $demo) {
+    abort_unless(isset(DemoListingScraper::listings()[$slug]), 404);
+    $reel = is_file(public_path("media/demo/{$slug}/reel.mp4")) ? asset("media/demo/{$slug}/reel.mp4") : null;
+
+    return view('demo-listing', ['listing' => $demo->scrape(url(DemoListingScraper::PATH.'/'.$slug)), 'reel' => $reel]);
+})->name('demo');
 
 Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
     $row = $videos->lead($lead);
