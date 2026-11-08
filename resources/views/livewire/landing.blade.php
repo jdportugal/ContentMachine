@@ -167,24 +167,26 @@
             </div>
 
             {{-- Leque de reels: o vídeo de demonstração a tocar, com dois momentos dele ao lado --}}
-            <div class="flex-[1_1_480px] min-w-0 relative h-[700px] hidden md:block">
+            <div class="flex-[1_1_480px] min-w-0 relative h-[760px] hidden md:block">
                 @if ($demoReel)
-                    @php $lado = [$frames[min(2, max(0, count($frames) - 1))] ?? null, $frames[count($frames) - 2] ?? null]; @endphp
-                    @foreach ([['left-0 top-[90px] -rotate-[7deg]', $lado[0]], ['right-0 top-[110px] rotate-[7deg]', $lado[1]]] as [$pos, $frame])
-                        <div class="absolute {{ $pos }} w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
+                    @php $lado = [$frames[1] ?? null, $frames[4] ?? ($frames[count($frames) - 1] ?? null)]; if ($lado[0] && $lado[1] && $lado[0]['file'] === $lado[1]['file']) { $lado[1] = null; } @endphp
+                    @foreach ([['left-0 top-[100px] -rotate-[7deg]', $lado[0]], ['right-0 top-[120px] rotate-[7deg]', $lado[1]]] as [$pos, $frame])
+                        <div class="absolute {{ $pos }} w-[230px] h-[498px] rounded-[38px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
+                            <span class="absolute left-1/2 top-2.5 -translate-x-1/2 w-[68px] h-[20px] rounded-full bg-navy-3 z-10"></span>
                             @if ($frame)
                                 <img src="{{ $frameUrl($frame) }}" alt="" class="absolute inset-0 w-full h-full object-cover">
                                 <span class="absolute left-3 bottom-3 px-2 py-1 rounded-full bg-navy/70 text-[9px] tracking-[.2em] text-[#E4E6EA]">{{ $frame['time'] }}</span>
                             @else
-                                <div class="absolute inset-0" style="{{ $fotoStyle }}"></div>
+                                <div class="absolute inset-0" style="{{ $loop->first ? $salaStyle : $jardimStyle }}"></div>
                             @endif
                         </div>
                     @endforeach
-                    <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[534px] rounded-[32px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
+                    <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[650px] rounded-[48px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
+                        <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[90px] h-[26px] rounded-full bg-navy-3 z-10"></span>
                         <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
                                class="absolute inset-0 w-full h-full object-cover bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
                     </div>
-                    <div class="absolute left-1/2 bottom-[60px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
+                    <div class="absolute left-1/2 bottom-[30px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
                         <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
                         <span class="text-[13px] text-[#E4E6EA]">Feito pela Imocena em 7 minutos · <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a></span>
                     </div>
