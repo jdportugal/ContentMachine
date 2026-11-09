@@ -35,7 +35,8 @@ class ComprasTest extends TestCase
         return $extra + [
             'id' => 'cs_test_1', 'object' => 'checkout.session', 'payment_status' => 'paid', 'payment_link' => 'plink_1',
             'amount_total' => 2000, 'currency' => 'eur', 'metadata' => ['videos' => '1', 'app' => 'imocena'],
-            'customer_details' => ['email' => 'ana@exemplo.pt', 'name' => 'Ana Silva', 'tax_ids' => [['type' => 'eu_vat', 'value' => 'PT123456789']]],
+            'customer_details' => ['email' => 'ana@exemplo.pt', 'name' => 'Ana Silva', 'tax_ids' => []],
+            'custom_fields' => [['key' => 'nifvatparaafatura', 'type' => 'text', 'label' => ['type' => 'custom', 'custom' => 'NIF / VAT (para a fatura)'], 'text' => ['value' => ' PT123456789 ']]],
         ];
     }
 
