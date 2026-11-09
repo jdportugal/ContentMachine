@@ -8,6 +8,8 @@ $app = require __DIR__.'/../../bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
 $saida = rtrim($argv[1] ?? '/tmp/adspub', '/');
+$genero = ($argv[2] ?? 'f') === 'm' ? 'm' : 'f';   // the voice: f (default) or m
+$musicas = ['preco' => 'real-estate-2.mp3', 'minutos' => 'real-estate-4.mp3', 'simples' => 'real-estate-3.mp3'];
 @mkdir($saida, 0775, true);
 
 $cta = ['Experimente: o primeiro vídeo é grátis, em imocena ponto com.', 'Experimente: o primeiro vídeo é grátis, em imocena.com'];
@@ -35,21 +37,21 @@ $guioes = [
     ],
 ];
 
-$voz = config('contentmachine.real_estate.voices.m');
+$voz = config('contentmachine.real_estate.voices.'.$genero);
 $tts = app(App\Services\Clips\Api\ElevenLabsVoiceoverService::class);
 $fotos = ['03-sala.png', '01-fachada.png', '06-cozinha.png', '14-jardim-terraco.png'];
 
 foreach ($guioes as $variante => $linhas) {
     $secoes = [];
     foreach ($linhas as $i => [$falado, $legenda]) {
-        $ficheiro = "vo-$variante-".($i + 1).'.mp3';
+        $ficheiro = "vo-$genero-$variante-".($i + 1).'.mp3';
         if (! is_file("$saida/$ficheiro")) {
             $tts->synthesizeWith($falado, "$saida/$ficheiro", $voz['voice_id'], $voz['model'], $voz['stability'] ?? null);
         }
         $dur = (float) trim((string) shell_exec('ffprobe -v quiet -show_entries format=duration -of csv=p=0 '.escapeshellarg("$saida/$ficheiro")));
-        $secoes[] = ['segundos' => round($dur + ($i === 4 ? 1.6 : 0.35), 2), 'audio' => $ficheiro, 'legenda' => $legenda ?? $falado];
+        $secoes[] = ['segundos' => round($dur + ($i === 4 ? 1.4 : 0.15), 2), 'audio' => $ficheiro, 'legenda' => $legenda ?? $falado];
         echo "$variante ".($i + 1).": ".round($dur, 2)."s\n";
     }
-    file_put_contents("$saida/props-$variante.json", json_encode(['variante' => $variante, 'secoes' => $secoes, 'reel' => 'reel.mp4', 'fotos' => $fotos], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    file_put_contents("$saida/props-$variante.json", json_encode(['variante' => $variante, 'secoes' => $secoes, 'reel' => 'reel.mp4', 'fotos' => $fotos, 'musica' => is_file("$saida/{$musicas[$variante]}") ? $musicas[$variante] : null], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 }
 echo "PRONTO\n";

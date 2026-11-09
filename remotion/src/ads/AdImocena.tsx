@@ -27,6 +27,7 @@ export type AdProps = {
   variante: Variante;
   secoes: Secao[]; // 5: hook, agitate, demo, stack, cta
   reel: string | null; // the demo reel (public dir)
+  musica?: string | null; // a real-estate track under the voice
   fotos: string[]; // demo house photos (public dir)
 };
 
@@ -107,7 +108,8 @@ const Etiqueta: React.FC<{ children: React.ReactNode; cor?: string }> = ({ child
 
 /** An iPhone-ish frame playing the demo reel. */
 const Telemovel: React.FC<{ reel: string | null; largura: number; desde?: number; foto?: string }> = ({ reel, largura, desde = 0, foto }) => {
-  const altura = Math.round(largura * 2.08);
+  // Screen exactly 9:16 (the reel's shape), so nothing at its sides is cropped.
+  const altura = Math.round(largura * (1 - 0.07) * (16 / 9) + largura * 0.07);
   return (
     <div style={{ width: largura, height: altura, borderRadius: largura * 0.14, background: "#05070C", padding: largura * 0.035, boxShadow: "0 40px 120px rgba(0,0,0,.6), 0 0 0 3px #2A3446" }}>
       <div style={{ width: "100%", height: "100%", borderRadius: largura * 0.11, overflow: "hidden", position: "relative", background: C.navy }}>
@@ -143,8 +145,8 @@ const Demonstracao: React.FC = () => (
 // ── 1 · Hook ───────────────────────────────────────────────────────────────
 
 const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fotos }) => {
-  const a = useEntrada(2, 10);
-  const b = useEntrada(14);
+  const a = useEntrada(-5, 12);
+  const b = useEntrada(3);
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
@@ -159,10 +161,10 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
           </div>
         )}
         {variante === "minutos" && (() => {
-          const seg = Math.min(299, Math.floor(interpolate(f, [6, 60], [0, 299], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
+          const seg = Math.min(299, Math.floor(interpolate(f, [0, 26], [0, 299], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
           const mm = String(Math.floor(seg / 60)).padStart(2, "0");
           const ss = String(seg % 60).padStart(2, "0");
-          const arco = interpolate(f, [6, 60], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          const arco = interpolate(f, [0, 26], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
             <div style={{ textAlign: "center" }}>
               <Etiqueta>DO LINK AO VÍDEO</Etiqueta>
@@ -182,7 +184,7 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
         {variante === "simples" && (
           <div style={{ textAlign: "center", padding: "0 60px" }}>
             {["Sem filmar.", "Sem editar.", "Sem complicações."].map((t, i) => {
-              const e = spring({ frame: f - (4 + i * 14), fps: FPS, config: { damping: 14, mass: 0.7 } });
+              const e = spring({ frame: f - (i * 6 - 4), fps: FPS, config: { damping: 14, mass: 0.7 } });
               return (
                 <div key={t} style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: i === 2 ? 124 : 140, lineHeight: 1.12, whiteSpace: "nowrap", color: i === 2 ? C.coral : C.ivory, opacity: e, transform: `translateY(${(1 - e) * 40}px)` }}>{t}</div>
               );
@@ -344,7 +346,8 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
 
 // ── the ad ─────────────────────────────────────────────────────────────────
 
-export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos }) => {
+export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos, musica }) => {
+  const { durationInFrames } = useVideoConfig();
   loadThemeFonts("Cormorant Garamond", "Poppins");
   const blocos = [
     <Hook variante={variante} fotos={fotos} />,
@@ -356,6 +359,12 @@ export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos }) 
   let inicio = 0;
   return (
     <AbsoluteFill style={{ background: C.navy }}>
+      {musica && (
+        <Audio
+          src={src(musica)}
+          volume={(f) => interpolate(f, [0, 8, durationInFrames - 45, durationInFrames - 2], [0.35, 0.16, 0.16, 0.3], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) * interpolate(f, [durationInFrames - 12, durationInFrames], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
+        />
+      )}
       {secoes.map((s, i) => {
         const de = Math.round(inicio * FPS);
         const dur = Math.max(1, Math.round(s.segundos * FPS));
