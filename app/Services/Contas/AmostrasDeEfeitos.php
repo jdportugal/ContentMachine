@@ -40,8 +40,13 @@ class AmostrasDeEfeitos
         $pasta = (string) config('contentmachine.amostras.fotos', public_path('media/demo/moradia-lajeosa'));
         $fotos = glob(rtrim($pasta, '/').'/*.{png,jpg,jpeg,webp}', GLOB_BRACE) ?: [];
         sort($fotos);
+        // A varied three (inside, kitchen, outside) when the demo house has them; else the first three.
+        $preferidas = array_values(array_filter(array_map(
+            fn ($nome) => collect($fotos)->first(fn ($f) => pathinfo($f, PATHINFO_FILENAME) === $nome),
+            (array) config('contentmachine.amostras.escolha', ['03-sala', '06-cozinha', '14-jardim-terraco']),
+        )));
 
-        return array_slice($fotos, 0, 3);
+        return count($preferidas) >= 3 ? array_slice($preferidas, 0, 3) : array_slice($fotos, 0, 3);
     }
 
     /** Queue the sample of $slug for the current theme, once, unless it exists. */
