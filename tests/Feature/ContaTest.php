@@ -119,7 +119,9 @@ class ContaTest extends TestCase
             ['start' => 0, 'end' => 10, 'layers' => [['type' => 'duo-sobreposto', 'params' => ['src' => 'img_a', 'src2' => 'img_b', 'label' => 'Sala ampla']]]],
             ['start' => 10, 'end' => 30, 'layers' => [['type' => 'agente-revelacao', 'params' => ['src' => 'img_c', 'name' => 'Ana Velha', 'phone' => '+351 911 111 111', 'cta' => 'Ligue +351 911 111 111', 'legal' => 'IAD PORTUGAL | AMI: 11220']]]],
         ]];
-        $clip = app(ClipStore::class)->create(['type' => 'animation', 'title' => 'Moradia T3', 'plan' => $plan, 'status' => ClipRecord::STATUS_DONE, 'output_path' => '/tmp/x.mp4',
+        $mp4 = sys_get_temp_dir().'/cm-conta-'.uniqid().'.mp4';
+        file_put_contents($mp4, 'MP4');
+        $clip = app(ClipStore::class)->create(['type' => 'animation', 'title' => 'Moradia T3', 'plan' => $plan, 'status' => ClipRecord::STATUS_DONE, 'output_path' => $mp4,
             'images' => [
                 ['id' => 'img_a', 'path' => 'clips/uploads/teste-a.png', 'description' => 'Sala.'],
                 ['id' => 'img_b', 'path' => 'clips/uploads/teste-b.png', 'description' => 'Cozinha.'],

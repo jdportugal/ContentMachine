@@ -112,11 +112,11 @@ class EdicaoDeVideo
         if ($chave !== 'legal') {
             return $depois;
         }
-        if ($antes !== '' && str_contains($valor, $antes)) {
-            return trim(str_replace($antes, $depois, $valor));
-        }
         if (preg_match('/AMI[:\s]*\d+/i', $valor)) {
             return $depois === '' ? trim(preg_replace('/\s*[·|]?\s*AMI[:\s]*\d+/i', '', $valor)) : preg_replace('/AMI[:\s]*\d+/i', 'AMI '.$depois, $valor);
+        }
+        if ($antes !== '' && str_contains($valor, $antes)) {
+            return trim(str_replace($antes, $depois, $valor));
         }
 
         return $depois === '' ? $valor : trim($valor.' · AMI '.$depois, ' ·');
