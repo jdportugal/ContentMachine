@@ -85,8 +85,8 @@ const Legenda: React.FC<{ texto: string; segundos: number }> = ({ texto, segundo
   const atual = Math.min(palavras.length - 1, Math.floor((f / total) * palavras.length));
   const entrada = interpolate(f, [0, 6], [0, 1], { extrapolateRight: "clamp" });
   return (
-    <div style={{ position: "absolute", left: 70, right: 70, bottom: 230, textAlign: "center", opacity: entrada }}>
-      <p style={{ margin: 0, fontFamily: SANS, fontWeight: 700, fontSize: 58, lineHeight: 1.22, color: C.ivory, textShadow: "0 4px 24px rgba(0,0,0,.55)" }}>
+    <div style={{ position: "absolute", left: 60, right: 60, bottom: 170, textAlign: "center", opacity: entrada }}>
+      <p style={{ margin: 0, fontFamily: SANS, fontWeight: 700, fontSize: 62, lineHeight: 1.2, color: C.ivory, textShadow: "0 4px 24px rgba(0,0,0,.55)" }}>
         {palavras.map((p, i) => (
           <span key={i} style={{ color: i === atual ? C.coral : i < atual ? C.ivory : "rgba(244,241,234,.55)" }}>
             {p}{" "}
@@ -136,12 +136,12 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
     <AbsoluteFill>
       <FotoDeFundo foto={fotos[0]} escurecer={0.6} />
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 380 }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 300 }}>
         {variante === "preco" && (
           <div style={{ textAlign: "center" }}>
             <Etiqueta>CONSULTOR IMOBILIÁRIO?</Etiqueta>
-            <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 330, lineHeight: 0.9, color: C.coral, transform: `scale(${0.6 + 0.4 * a})`, opacity: a }}>10 €</div>
-            <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 52, letterSpacing: 14, color: C.ivory, opacity: b }}>POR VÍDEO</div>
+            <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 430, lineHeight: 0.9, color: C.coral, transform: `scale(${0.6 + 0.4 * a})`, opacity: a }}>10 €</div>
+            <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 66, letterSpacing: 16, color: C.ivory, opacity: b }}>POR VÍDEO</div>
           </div>
         )}
         {variante === "minutos" && (() => {
@@ -152,16 +152,16 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
           return (
             <div style={{ textAlign: "center" }}>
               <Etiqueta>DO LINK AO VÍDEO</Etiqueta>
-              <div style={{ position: "relative", width: 560, height: 560, margin: "40px auto 0", opacity: a, transform: `scale(${0.7 + 0.3 * a})` }}>
-                <svg width={560} height={560} style={{ position: "absolute", inset: 0, transform: "rotate(-90deg)" }}>
-                  <circle cx={280} cy={280} r={250} stroke="rgba(244,241,234,.15)" strokeWidth={22} fill="none" />
-                  <circle cx={280} cy={280} r={250} stroke={C.cyan} strokeWidth={22} fill="none" strokeLinecap="round" strokeDasharray={2 * Math.PI * 250} strokeDashoffset={2 * Math.PI * 250 * (1 - arco)} />
+              <div style={{ position: "relative", width: 640, height: 640, margin: "40px auto 0", opacity: a, transform: `scale(${0.7 + 0.3 * a})` }}>
+                <svg width={640} height={640} style={{ position: "absolute", inset: 0, transform: "rotate(-90deg)" }}>
+                  <circle cx={320} cy={320} r={290} stroke="rgba(244,241,234,.15)" strokeWidth={22} fill="none" />
+                  <circle cx={320} cy={320} r={290} stroke={C.cyan} strokeWidth={24} fill="none" strokeLinecap="round" strokeDasharray={2 * Math.PI * 290} strokeDashoffset={2 * Math.PI * 290 * (1 - arco)} />
                 </svg>
                 <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 150, color: C.ivory, fontVariantNumeric: "tabular-nums" }}>{mm}:{ss}</span>
+                  <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 170, color: C.ivory, fontVariantNumeric: "tabular-nums" }}>{mm}:{ss}</span>
                 </AbsoluteFill>
               </div>
-              <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 130, color: C.coral, opacity: b }}>em minutos</div>
+              <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 150, color: C.coral, opacity: b }}>em minutos</div>
             </div>
           );
         })()}
@@ -170,7 +170,7 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
             {["Sem filmar.", "Sem editar.", "Sem complicações."].map((t, i) => {
               const e = spring({ frame: f - (4 + i * 14), fps: FPS, config: { damping: 14, mass: 0.7 } });
               return (
-                <div key={t} style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: i === 2 ? 128 : 116, lineHeight: 1.12, color: i === 2 ? C.coral : C.ivory, opacity: e, transform: `translateX(${(1 - e) * -80}px)` }}>{t}</div>
+                <div key={t} style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: i === 2 ? 150 : 136, lineHeight: 1.14, color: i === 2 ? C.coral : C.ivory, opacity: e, transform: `translateX(${(1 - e) * -80}px)` }}>{t}</div>
               );
             })}
           </div>
@@ -197,8 +197,8 @@ const Linha: React.FC<{ de: number; icone: string; corIcone: string; children: R
   const e = useEntrada(de);
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 34, opacity: e, transform: `translateY(${(1 - e) * 30}px)` }}>
-      <span style={{ width: 92, height: 92, borderRadius: 46, background: corIcone, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 56, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icone}</span>
-      <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 58, color: C.ivory }}>{children}</span>
+      <span style={{ width: 110, height: 110, borderRadius: 55, background: corIcone, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 64, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icone}</span>
+      <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 64, color: C.ivory }}>{children}</span>
     </div>
   );
 };
@@ -209,11 +209,11 @@ const Agitar: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, f
     <AbsoluteFill>
       <FotoDeFundo foto={fotos[1]} escurecer={0.82} />
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 420 }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 300 }}>
         <div style={{ opacity: t }}>
           <Etiqueta cor={C.coral}>{variante === "simples" ? "NÃO PRECISA DE" : "À MODA ANTIGA"}</Etiqueta>
         </div>
-        <div style={{ marginTop: 60, display: "flex", flexDirection: "column", gap: 44 }}>
+        <div style={{ marginTop: 80, display: "flex", flexDirection: "column", gap: 64 }}>
           {variante === "preco" && (
             <>
               <Linha de={6} icone="✕" corIcone={C.coral}><Riscado de={30}>Videógrafo: centenas de €</Riscado></Linha>
@@ -261,8 +261,8 @@ const Demo: React.FC<{ reel: string | null; fotos: string[] }> = ({ reel, fotos 
         </div>
         <div style={{ textAlign: "center", marginTop: 26, fontFamily: SANS, fontSize: 32, color: C.cyan, letterSpacing: 4, opacity: interpolate(f, [30, 40], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>↓ VÍDEO PRONTO</div>
       </div>
-      <div style={{ position: "absolute", top: 450, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 18, opacity: tel, transform: `translateY(${(1 - tel) * 120}px) scale(${0.85 + 0.15 * tel})` }}>
-        <Telemovel reel={reel} largura={400} desde={2} foto={fotos[0]} />
+      <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: tel, transform: `translateY(${(1 - tel) * 120}px) scale(${0.85 + 0.15 * tel})` }}>
+        <Telemovel reel={reel} largura={470} desde={2} foto={fotos[0]} />
         <Demonstracao />
       </div>
     </AbsoluteFill>
@@ -282,17 +282,17 @@ const Stack: React.FC<{ variante: Variante; reel: string | null; fotos: string[]
   return (
     <AbsoluteFill style={{ background: C.navy }}>
       <Marca />
-      <div style={{ position: "absolute", top: 250, left: 70, display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
-        <Telemovel reel={reel} largura={330} desde={14} foto={fotos[2]} />
+      <div style={{ position: "absolute", top: 240, left: 50, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+        <Telemovel reel={reel} largura={470} desde={14} foto={fotos[2]} />
         <Demonstracao />
       </div>
-      <div style={{ position: "absolute", top: 330, left: 470, right: 50, display: "flex", flexDirection: "column", gap: 40 }}>
+      <div style={{ position: "absolute", top: 380, left: 570, right: 40, display: "flex", flexDirection: "column", gap: 56 }}>
         {itens.map((t, i) => {
           const e = spring({ frame: f - (4 + i * 9), fps: FPS, config: { damping: 14, mass: 0.7 } });
           return (
             <div key={t} style={{ display: "flex", alignItems: "center", gap: 22, opacity: e, transform: `translateX(${(1 - e) * 60}px)` }}>
               <span style={{ width: 64, height: 64, borderRadius: 32, background: C.cyan, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 38, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>✓</span>
-              <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 42, lineHeight: 1.15, color: C.ivory }}>{t}</span>
+              <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 44, lineHeight: 1.15, color: C.ivory }}>{t}</span>
             </div>
           );
         })}
@@ -313,15 +313,15 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
     <AbsoluteFill>
       <FotoDeFundo foto={fotos[3] ?? fotos[0]} escurecer={0.78} />
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 420, textAlign: "center" }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 160, textAlign: "center" }}>
         <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 40, letterSpacing: 10, color: C.cyan, opacity: a }}>EXPERIMENTE</div>
-        <div style={{ marginTop: 10, fontFamily: DISPLAY, fontWeight: 700, fontSize: 168, lineHeight: 0.95, color: C.ivory, opacity: a, transform: `scale(${0.8 + 0.2 * a})` }}>
+        <div style={{ marginTop: 10, fontFamily: DISPLAY, fontWeight: 700, fontSize: 200, lineHeight: 0.95, color: C.ivory, opacity: a, transform: `scale(${0.8 + 0.2 * a})` }}>
           1.º vídeo<br /><span style={{ color: C.coral }}>grátis</span>
         </div>
-        <div style={{ marginTop: 54, padding: "30px 70px", borderRadius: 80, background: C.coral, fontFamily: SANS, fontWeight: 700, fontSize: 60, color: C.navy, opacity: b, transform: `scale(${(0.8 + 0.2 * b) * pulso})` }}>imocena.com</div>
-        <div style={{ marginTop: 34, fontFamily: SANS, fontSize: 36, color: C.ivory, opacity: b }}>{selo}</div>
+        <div style={{ marginTop: 54, padding: "34px 80px", borderRadius: 90, background: C.coral, fontFamily: SANS, fontWeight: 700, fontSize: 68, color: C.navy, opacity: b, transform: `scale(${(0.8 + 0.2 * b) * pulso})` }}>imocena.com</div>
+        <div style={{ marginTop: 34, fontFamily: SANS, fontSize: 42, color: C.ivory, opacity: b }}>{selo}</div>
       </AbsoluteFill>
-      <div style={{ position: "absolute", bottom: 80, left: 60, right: 60, textAlign: "center", fontFamily: SANS, fontSize: 22, lineHeight: 1.4, color: C.soft }}>
+      <div style={{ position: "absolute", bottom: 80, left: 60, right: 60, textAlign: "center", fontFamily: SANS, fontSize: 26, lineHeight: 1.4, color: C.soft }}>
         10 € por vídeo no pack de 10 (100 €, IVA incl.). Vídeo grátis com marca d’água. Imóvel de demonstração.
       </div>
     </AbsoluteFill>
