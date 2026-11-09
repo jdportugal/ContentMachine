@@ -122,6 +122,20 @@ const Telemovel: React.FC<{ reel: string | null; largura: number; desde?: number
   );
 };
 
+/** Drawn marks: the fonts have no ✕ / ✓ glyphs (they render as empty boxes). */
+const Icone: React.FC<{ tipo: "x" | "v" | "link"; tamanho: number; cor: string }> = ({ tipo, tamanho, cor }) => (
+  <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" fill="none" stroke={cor} strokeWidth={tipo === "link" ? 2.2 : 3.4} strokeLinecap="round" strokeLinejoin="round">
+    {tipo === "x" && <path d="M6 6l12 12M18 6L6 18" />}
+    {tipo === "v" && <path d="M5 12.5l4.5 4.5L19 7.5" />}
+    {tipo === "link" && (
+      <>
+        <path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2" />
+        <path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" />
+      </>
+    )}
+  </svg>
+);
+
 const Demonstracao: React.FC = () => (
   <span style={{ fontFamily: SANS, fontSize: 22, color: C.soft, letterSpacing: 2 }}>IMÓVEL DE DEMONSTRAÇÃO</span>
 );
@@ -193,11 +207,11 @@ const Riscado: React.FC<{ de: number; children: React.ReactNode }> = ({ de, chil
   );
 };
 
-const Linha: React.FC<{ de: number; icone: string; corIcone: string; children: React.ReactNode }> = ({ de, icone, corIcone, children }) => {
+const Linha: React.FC<{ de: number; icone: "x" | "v"; corIcone: string; children: React.ReactNode }> = ({ de, icone, corIcone, children }) => {
   const e = useEntrada(de);
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 34, opacity: e, transform: `translateY(${(1 - e) * 30}px)` }}>
-      <span style={{ width: 110, height: 110, borderRadius: 55, background: corIcone, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 64, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icone}</span>
+      <span style={{ width: 110, height: 110, borderRadius: 55, background: corIcone, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 64, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><Icone tipo={icone} tamanho={60} cor={C.navy} /></span>
       <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 64, color: C.ivory }}>{children}</span>
     </div>
   );
@@ -216,23 +230,23 @@ const Agitar: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, f
         <div style={{ marginTop: 80, display: "flex", flexDirection: "column", gap: 64 }}>
           {variante === "preco" && (
             <>
-              <Linha de={6} icone="✕" corIcone={C.coral}><Riscado de={30}>Videógrafo: centenas de €</Riscado></Linha>
-              <Linha de={16} icone="✕" corIcone={C.coral}><Riscado de={40}>Dias à espera do vídeo</Riscado></Linha>
-              <Linha de={26} icone="✕" corIcone={C.coral}><Riscado de={50}>Marcar visita para filmar</Riscado></Linha>
+              <Linha de={6} icone="x" corIcone={C.coral}><Riscado de={30}>Videógrafo: centenas de €</Riscado></Linha>
+              <Linha de={16} icone="x" corIcone={C.coral}><Riscado de={40}>Dias à espera do vídeo</Riscado></Linha>
+              <Linha de={26} icone="x" corIcone={C.coral}><Riscado de={50}>Marcar visita para filmar</Riscado></Linha>
             </>
           )}
           {variante === "minutos" && (
             <>
-              <Linha de={6} icone="✕" corIcone={C.coral}><Riscado de={30}>3 a 5 dias de espera</Riscado></Linha>
-              <Linha de={16} icone="✕" corIcone={C.coral}><Riscado de={40}>Uma tarde a editar</Riscado></Linha>
-              <Linha de={26} icone="✕" corIcone={C.coral}><Riscado de={50}>O imóvel já vendeu</Riscado></Linha>
+              <Linha de={6} icone="x" corIcone={C.coral}><Riscado de={30}>3 a 5 dias de espera</Riscado></Linha>
+              <Linha de={16} icone="x" corIcone={C.coral}><Riscado de={40}>Uma tarde a editar</Riscado></Linha>
+              <Linha de={26} icone="x" corIcone={C.coral}><Riscado de={50}>O imóvel já vendeu</Riscado></Linha>
             </>
           )}
           {variante === "simples" && (
             <>
-              <Linha de={6} icone="✕" corIcone={C.coral}><Riscado de={30}>Câmara ou drone</Riscado></Linha>
-              <Linha de={16} icone="✕" corIcone={C.coral}><Riscado de={40}>Programas de edição</Riscado></Linha>
-              <Linha de={26} icone="✕" corIcone={C.coral}><Riscado de={50}>Gravar a sua voz</Riscado></Linha>
+              <Linha de={6} icone="x" corIcone={C.coral}><Riscado de={30}>Câmara ou drone</Riscado></Linha>
+              <Linha de={16} icone="x" corIcone={C.coral}><Riscado de={40}>Programas de edição</Riscado></Linha>
+              <Linha de={26} icone="x" corIcone={C.coral}><Riscado de={50}>Gravar a sua voz</Riscado></Linha>
             </>
           )}
         </div>
@@ -253,7 +267,7 @@ const Demo: React.FC<{ reel: string | null; fotos: string[] }> = ({ reel, fotos 
       <Marca />
       <div style={{ position: "absolute", top: 220, left: 80, right: 80 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18, height: 104, borderRadius: 52, background: C.ivory, padding: "0 40px", boxShadow: "0 20px 60px rgba(0,0,0,.35)" }}>
-          <span style={{ fontFamily: SANS, fontSize: 36, color: "#7C8696" }}>🔗</span>
+          <Icone tipo="link" tamanho={44} cor="#7C8696" />
           <span style={{ fontFamily: SANS, fontSize: 38, color: C.navy, whiteSpace: "nowrap", overflow: "hidden" }}>
             {link.slice(0, letras)}
             <span style={{ opacity: f % 20 < 10 ? 1 : 0, color: C.coral }}>|</span>
@@ -291,7 +305,7 @@ const Stack: React.FC<{ variante: Variante; reel: string | null; fotos: string[]
           const e = spring({ frame: f - (4 + i * 9), fps: FPS, config: { damping: 14, mass: 0.7 } });
           return (
             <div key={t} style={{ display: "flex", alignItems: "center", gap: 22, opacity: e, transform: `translateX(${(1 - e) * 60}px)` }}>
-              <span style={{ width: 64, height: 64, borderRadius: 32, background: C.cyan, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 38, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>✓</span>
+              <span style={{ width: 64, height: 64, borderRadius: 32, background: C.cyan, color: C.navy, fontFamily: SANS, fontWeight: 800, fontSize: 38, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><Icone tipo="v" tamanho={40} cor={C.navy} /></span>
               <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 44, lineHeight: 1.15, color: C.ivory }}>{t}</span>
             </div>
           );
