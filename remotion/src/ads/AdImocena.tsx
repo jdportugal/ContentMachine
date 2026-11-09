@@ -180,11 +180,11 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
           );
         })()}
         {variante === "simples" && (
-          <div style={{ textAlign: "left" }}>
+          <div style={{ textAlign: "center", padding: "0 60px" }}>
             {["Sem filmar.", "Sem editar.", "Sem complicações."].map((t, i) => {
               const e = spring({ frame: f - (4 + i * 14), fps: FPS, config: { damping: 14, mass: 0.7 } });
               return (
-                <div key={t} style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: i === 2 ? 150 : 136, lineHeight: 1.14, color: i === 2 ? C.coral : C.ivory, opacity: e, transform: `translateX(${(1 - e) * -80}px)` }}>{t}</div>
+                <div key={t} style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: i === 2 ? 124 : 140, lineHeight: 1.12, whiteSpace: "nowrap", color: i === 2 ? C.coral : C.ivory, opacity: e, transform: `translateY(${(1 - e) * 40}px)` }}>{t}</div>
               );
             })}
           </div>
