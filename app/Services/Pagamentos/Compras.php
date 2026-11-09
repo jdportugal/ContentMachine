@@ -32,9 +32,9 @@ class Compras
         $meta = (array) ($session['metadata'] ?? []);
         $detalhes = (array) ($session['customer_details'] ?? []);
         // NIF: the checkout's custom field "NIF / VAT (para a fatura)" first, else a tax ID Stripe collected.
-        $nif = collect((array) ($session['custom_fields'] ?? []))
-            ->first(fn ($f) => str_contains(strtolower((string) ($f['label']['custom'] ?? $f['key'] ?? '')), 'nif'))['text']['value']
-            ?? collect((array) ($detalhes['tax_ids'] ?? []))->pluck('value')->first();
+        $campoNif = collect((array) ($session['custom_fields'] ?? []))
+            ->first(fn ($f) => str_contains(strtolower((string) data_get($f, 'label.custom', data_get($f, 'key', ''))), 'nif'));
+        $nif = data_get($campoNif, 'text.value') ?? collect((array) ($detalhes['tax_ids'] ?? []))->pluck('value')->first();
         $nif = $nif !== null ? trim((string) $nif) : null;
         $leadId = self::leadId((string) ($session['client_reference_id'] ?? ''));
 
