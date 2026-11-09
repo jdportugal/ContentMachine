@@ -62,6 +62,12 @@ find storage/app -type f -size -4k 2>/dev/null | while IFS= read -r f; do
 done
 
 # Migrations (queue/session/cache/app tables). Safe to re-run.
+# Migrations: /app/database is a volume (it holds database.sqlite), so copy the
+# image's migration files into it first — otherwise new ones are never seen.
+if [ -d /app/database-seed-migrations ]; then
+    mkdir -p /app/database/migrations
+    cp -R /app/database-seed-migrations/. /app/database/migrations/
+fi
 php artisan migrate --force || true
 # public/storage symlink for the public disk.
 php artisan storage:link 2>/dev/null || true

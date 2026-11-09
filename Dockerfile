@@ -68,6 +68,9 @@ COPY . .
 COPY --from=assets /build/public/build ./public/build
 # Themes travel with the image, outside the vault volume's mount point.
 RUN mv vault/themes /app/vault-seed-themes && rmdir vault 2>/dev/null || true
+# database/ is a volume too (the SQLite file lives there), so migrations added after
+# the first deploy would never reach it: keep a copy outside and seed them at boot.
+RUN cp -R database/migrations /app/database-seed-migrations
 RUN composer dump-autoload --optimize --no-dev
 
 # Baked build version (git sha) — powers the in-app "Check for updates" check.
