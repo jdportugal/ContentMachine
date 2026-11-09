@@ -6,6 +6,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\AvatarGen;
 use App\Livewire\ClipsAnimados;
 use App\Livewire\Conta;
+use App\Livewire\EditarVideo;
 use App\Livewire\ClipsAnimadosSfx;
 use App\Livewire\ClipsAnimadosVfx;
 use App\Livewire\Definicoes;
@@ -124,13 +125,18 @@ Route::post('/logout', function (Request $request) {
 // requests for these components on its own — it is persistent middleware.
 // A customer's own area: their videos and credits. Everything after it is the studio.
 Route::livewire('/conta', Conta::class)->middleware('auth')->name('conta');
-// A track from the music library, for the account page's editor to preview.
-Route::get('/conta/musica/{name}', function (string $name) {
-    $path = app(MusicLibrary::class)->pathFor($name);
-    abort_unless($path !== null, 404);
+// A customer's video editor, and the pictures it shows (only their own videos').
+Route::livewire('/conta/videos/{lead}/editar', EditarVideo::class)->middleware('auth')->name('conta.editar');
+Route::get('/conta/videos/{lead}/imagens/{imagem}', function (int $lead, string $imagem, LeadVideo $videos) {
+    $registo = DB::table('leads')->where('id', $lead)->where('user_id', Auth::id())->first();
+    $clip = $registo ? $videos->clip($registo) : null;
+    $img = $clip ? collect($clip->images ?? [])->firstWhere('id', $imagem) : null;
+    $disco = Storage::disk(config('contentmachine.clips.disk'));
+    abort_unless($img && isset($img['path']) && $disco->exists($img['path']), 404);
 
-    return response()->file($path);
-})->middleware('auth')->name('conta.musica');
+    return response()->file($disco->path($img['path']), ['Cache-Control' => 'private, max-age=86400']);
+})->middleware('auth')->name('conta.imagem');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');

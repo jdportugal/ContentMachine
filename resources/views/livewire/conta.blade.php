@@ -1,4 +1,4 @@
-<main class="max-w-[1100px] mx-auto px-4 sm:px-6 py-8 sm:py-12" @if ($aDecorrer && ! $edicao) wire:poll.5s @endif>
+<main class="max-w-[1100px] mx-auto px-4 sm:px-6 py-8 sm:py-12" @if ($aDecorrer) wire:poll.5s @endif>
     <nav class="flex flex-wrap items-center justify-between gap-4">
         <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>
         <div class="flex items-center gap-4 text-sm">
@@ -49,72 +49,8 @@
         </div>
     </section>
 
-    {{-- Editor --}}
-    @if ($edicao)
-        <section class="mt-8 rounded-[18px] border border-cyan/40 bg-navy-3/70 p-5 sm:p-6" id="editor">
-            <div class="flex items-start justify-between gap-4">
-                <div>
-                    <span class="text-[11px] tracking-[.28em] text-cyan">EDITAR VÍDEO</span>
-                    <p class="mt-1 font-display text-[24px] text-ivory leading-tight">{{ $edicao['titulo'] }}</p>
-                </div>
-                <button type="button" wire:click="fecharEditor" class="min-h-11 px-4 rounded-full border border-ivory/30 text-ivory text-sm">Fechar</button>
-            </div>
-
-            <form wire:submit="guardarEdicao" class="mt-6 flex flex-col gap-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <label class="flex flex-col gap-2 md:col-span-2">
-                        <span class="text-sm text-ivory">Música</span>
-                        <select wire:model.live="musica" class="min-h-[48px] rounded-[12px] bg-navy border border-ivory/20 px-3 text-ivory">
-                            <option value="">Aleatória</option>
-                            <option value="nenhuma">Sem música</option>
-                            @foreach ($musicas as $m)
-                                <option value="{{ $m }}">{{ \Illuminate\Support\Str::of($m)->beforeLast('.')->replace(['-', '_'], ' ')->title() }}</option>
-                            @endforeach
-                        </select>
-                        @if ($musica !== '' && $musica !== 'nenhuma' && $musica !== 'aleatoria')
-                            <audio src="{{ route('conta.musica', ['name' => $musica]) }}" controls preload="none" class="w-full mt-1"></audio>
-                        @endif
-                        @error('musica') <span class="text-sm text-coral">{{ $message }}</span> @enderror
-                    </label>
-                    <label class="flex flex-col gap-2">
-                        <span class="text-sm text-ivory">Volume da música</span>
-                        <input type="range" min="0" max="0.4" step="0.02" wire:model="volume" class="accent-cyan mt-3">
-                        <span class="text-xs text-[#AEB5C1]">Baixo ← → alto (a narração fica sempre por cima)</span>
-                    </label>
-                </div>
-
-                <label class="flex flex-col gap-2 max-w-sm">
-                    <span class="text-sm text-ivory">Legendas da narração</span>
-                    <select wire:model="legendas" class="min-h-[48px] rounded-[12px] bg-navy border border-ivory/20 px-3 text-ivory">
-                        <option value="bottom">Em baixo</option>
-                        <option value="middle">Ao centro</option>
-                        <option value="top">Em cima</option>
-                        <option value="none">Sem legendas</option>
-                    </select>
-                </label>
-
-                @if ($campos)
-                    <div class="flex flex-col gap-3">
-                        <span class="text-sm text-ivory">Textos no ecrã</span>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            @foreach ($campos as $c)
-                                <label class="flex flex-col gap-1">
-                                    <span class="text-[11px] tracking-[.16em] text-[#AEB5C1]">CENA {{ $c['cena'] + 1 }}</span>
-                                    <input type="text" maxlength="160" wire:model="textos.{{ $loop->index }}" class="min-h-[44px] rounded-[10px] bg-navy border border-ivory/20 px-3 text-ivory focus:border-cyan focus:outline-none">
-                                </label>
-                            @endforeach
-                        </div>
-                        @error('textos.*') <span class="text-sm text-coral">{{ $message }}</span> @enderror
-                    </div>
-                @endif
-
-                @error('edicao') <p class="text-sm text-coral">{{ $message }}</p> @enderror
-                <div class="flex flex-wrap items-center gap-4">
-                    <button type="submit" class="min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105" wire:loading.attr="disabled" wire:target="guardarEdicao">Guardar e refazer o vídeo</button>
-                    <span class="text-xs text-[#AEB5C1]">Leva 3–4 minutos. A narração mantém-se. Pode editar mais {{ $edicao['restantes'] }} {{ $edicao['restantes'] === 1 ? 'vez' : 'vezes' }}.</span>
-                </div>
-            </form>
-        </section>
+    @if (session('editado'))
+        <p class="mt-8 rounded-[14px] border border-cyan/40 bg-cyan/5 p-4 text-sm text-ivory">{{ session('editado') }}</p>
     @endif
 
     <section class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -137,7 +73,7 @@
                     <span class="text-[11px] tracking-[.2em] {{ $v->limpo ? 'text-cyan' : 'text-[#AEB5C1]' }}">{{ $v->limpo ? 'SEM MARCA D’ÁGUA' : 'VERSÃO GRÁTIS (COM MARCA D’ÁGUA)' }}</span>
                     <div class="flex flex-wrap gap-2">
                         <a href="{{ $v->descarregar }}" class="inline-flex items-center min-h-11 px-4 rounded-full bg-coral text-navy text-sm font-semibold">Descarregar MP4</a>
-                        <button type="button" wire:click="abrirEditor({{ $v->id }})" x-on:click="$nextTick(() => document.getElementById('editor')?.scrollIntoView({behavior: 'smooth'}))" class="inline-flex items-center min-h-11 px-4 rounded-full border border-ivory/30 text-ivory text-sm">Editar</button>
+                        <a href="{{ route('conta.editar', ['lead' => $v->id]) }}" class="inline-flex items-center min-h-11 px-4 rounded-full border border-ivory/30 text-ivory text-sm">Editar{{ $v->edicoesRestantes ? ' · '.$v->edicoesRestantes.' grátis' : '' }}</a>
                     </div>
                     @unless ($v->limpo)
                         <a href="{{ $link('avulso', ['client_reference_id' => 'lead-'.$v->id]) }}" class="text-sm font-medium text-cyan underline underline-offset-2">Tirar a marca d’água · 20 €</a>

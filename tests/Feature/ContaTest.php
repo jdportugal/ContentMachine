@@ -4,15 +4,18 @@ namespace Tests\Feature;
 
 use App\Jobs\Clips\ImportListingJob;
 use App\Livewire\Auth\Login;
+use App\Jobs\Clips\RegenerateVoiceoverJob;
 use App\Livewire\Conta;
+use App\Livewire\EditarVideo;
 use App\Models\User;
 use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Contas\LinkDeAcesso;
-use App\Services\Contas\TextosDoVideo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\URL;
 use Livewire\Livewire;
@@ -105,64 +108,100 @@ class ContaTest extends TestCase
         $this->get('/conta')->assertRedirect('/login');
     }
 
-    /** An owned, rendered video with on-screen texts. */
+    /** An owned, rendered listing video: two scenes with pictures, an end card, a logo. */
     private function videoDe(User $user): object
     {
-        $plan = ['duration' => 3.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
-            ['layers' => [['effect' => 'card', 'params' => ['title' => 'Duas casa de banho', 'src' => '/x/y.jpg', 'value' => '620', 'items' => [['text' => 'Garagem', 'icon' => 'check']]]]]],
+        $disco = Storage::disk(config('contentmachine.clips.disk'));
+        foreach (['a', 'b', 'c', 'logo'] as $n) {
+            $disco->put("clips/uploads/teste-$n.png", 'PNG');
+        }
+        $plan = ['duration' => 30.0, 'width' => 1080, 'height' => 1920, 'fps' => 30, 'scenes' => [
+            ['start' => 0, 'end' => 10, 'layers' => [['type' => 'duo-sobreposto', 'params' => ['src' => 'img_a', 'src2' => 'img_b', 'label' => 'Sala ampla']]]],
+            ['start' => 10, 'end' => 30, 'layers' => [['type' => 'agente-revelacao', 'params' => ['src' => 'img_c', 'name' => 'Ana Velha', 'phone' => '+351 911 111 111', 'cta' => 'Ligue +351 911 111 111', 'legal' => 'IAD PORTUGAL | AMI: 11220']]]],
         ]];
-        $clip = app(ClipStore::class)->create(['type' => 'animation', 'title' => 'Moradia T3', 'plan' => $plan, 'status' => ClipRecord::STATUS_DONE, 'output_path' => '/tmp/x.mp4', 'meta' => ['listing' => true, 'musica' => 'aleatoria']]);
+        $clip = app(ClipStore::class)->create(['type' => 'animation', 'title' => 'Moradia T3', 'plan' => $plan, 'status' => ClipRecord::STATUS_DONE, 'output_path' => '/tmp/x.mp4',
+            'images' => [
+                ['id' => 'img_a', 'path' => 'clips/uploads/teste-a.png', 'description' => 'Sala.'],
+                ['id' => 'img_b', 'path' => 'clips/uploads/teste-b.png', 'description' => 'Cozinha.'],
+                ['id' => 'img_c', 'path' => 'clips/uploads/teste-c.png', 'description' => 'Retrato da consultora Ana Velha.'],
+                ['id' => 'img_logo', 'path' => 'clips/uploads/teste-logo.png', 'description' => 'Logótipo da iad.'],
+            ],
+            'meta' => ['musica' => 'aleatoria', 'listing' => ['agent' => 'Ana Velha', 'phone' => '+351 911 111 111', 'licence' => 'AMI 11220', 'voiceover' => str_repeat('Moradia com vista para a serra. ', 3)]]]);
         $id = DB::table('leads')->insertGetId(['user_id' => $user->id, 'anuncio' => 'https://www.remax.pt/pt/imoveis/x/'.uniqid(), 'projeto' => 'default', 'clip_id' => $clip->id, 'consentimento_em' => now(), 'created_at' => now(), 'updated_at' => now()]);
 
         return DB::table('leads')->find($id);
     }
 
-    public function test_only_plain_on_screen_texts_are_offered_for_editing(): void
+    public function test_the_editor_shows_voiceover_scenes_agent_and_music_on_its_own_page(): void
     {
-        $plan = ['scenes' => [['layers' => [['params' => ['title' => 'Sala ampla', 'src' => '/a.jpg', 'value' => '620', 'color' => '#ffffff', 'items' => [['text' => 'Garagem', 'icon' => 'check']]]]]]]];
+        $user = $this->cliente();
+        $lead = $this->videoDe($user);
 
-        $this->assertSame(['Sala ampla', 'Garagem'], array_column(TextosDoVideo::extrair($plan), 'valor'));
-        $novo = TextosDoVideo::aplicar($plan, ['scenes.0.layers.0.params.title' => '  Sala   grande ', 'scenes.0.layers.0.params.src' => '/etc/passwd', 'scenes.0.layers.0.params.items.0.text' => '']);
-        $this->assertSame('Sala grande', $novo['scenes'][0]['layers'][0]['params']['title']);
-        $this->assertSame('/a.jpg', $novo['scenes'][0]['layers'][0]['params']['src']);        // not a text: untouched
-        $this->assertSame('Garagem', $novo['scenes'][0]['layers'][0]['params']['items'][0]['text']);   // empty: kept
+        $this->actingAs($user)->get('/conta')->assertSee('/conta/videos/'.$lead->id.'/editar', false)->assertSee('2 grátis');
+        $this->get('/conta/videos/'.$lead->id.'/editar')->assertOk()
+            ->assertSee('Narração')->assertSee('Moradia com vista para a serra.')
+            ->assertSee('CENA 1')->assertSee('CENA 2')->assertSee('/conta/videos/'.$lead->id.'/imagens/img_a', false)
+            ->assertDontSee('Sala ampla')                       // scenes show pictures and effects, no text
+            ->assertSee('Licença AMI')->assertSee('Logótipo da agência')->assertSee('Escolher ficheiro de música')
+            ->assertSee('Edição 1 de 2');
+        $this->get('/conta/videos/'.$lead->id.'/imagens/img_a')->assertOk();
+
+        $outro = User::factory()->cliente()->create();
+        $this->actingAs($outro)->get('/conta/videos/'.$lead->id.'/editar')->assertNotFound();
+        $this->get('/conta/videos/'.$lead->id.'/imagens/img_a')->assertNotFound();
     }
 
-    public function test_a_customer_edits_music_captions_and_texts_and_the_video_is_made_again(): void
+    public function test_saving_swaps_pictures_updates_the_card_and_music_and_re_renders(): void
     {
         Queue::fake();
         $user = $this->cliente();
         $lead = $this->videoDe($user);
 
-        Livewire::actingAs($user)->test(Conta::class)
-            ->call('abrirEditor', $lead->id)
-            ->assertSet('textos', ['Duas casa de banho', 'Garagem'])
-            ->set('musica', 'nenhuma')->set('volume', 0.2)->set('legendas', 'top')
-            ->set('textos.0', 'Duas casas de banho')
-            ->call('guardarEdicao')->assertHasNoErrors()->assertSet('editar', null);
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->assertSet('nome', 'Ana Velha')->assertSet('licenca', '11220')
+            ->call('escolherFoto', 0, '0.src2', 'img_a')
+            ->set('nome', 'Ana Nova')->set('telefone', '+351 922 222 222')->set('licenca', '99999')
+            ->set('musica', UploadedFile::fake()->create('minha.mp3', 500, 'audio/mpeg'))
+            ->set('logo', UploadedFile::fake()->image('logo.png'))
+            ->call('guardar')->assertHasNoErrors()->assertRedirect('/conta');
 
         $clip = app(ClipStore::class)->find($lead->clip_id);
-        $this->assertSame('Duas casas de banho', $clip->plan['scenes'][0]['layers'][0]['params']['title']);
-        $this->assertSame('nenhuma', $clip->meta['musica']);
-        $this->assertSame(0.2, $clip->meta['musica_volume']);
-        $this->assertSame('top', $clip->meta['captions']);
+        $this->assertSame('img_a', $clip->plan['scenes'][0]['layers'][0]['params']['src2']);
+        $card = $clip->plan['scenes'][1]['layers'][0]['params'];
+        $this->assertSame('Ana Nova', $card['name']);
+        $this->assertSame('+351 922 222 222', $card['phone']);
+        $this->assertSame('Ligue +351 922 222 222', $card['cta']);
+        $this->assertSame('IAD PORTUGAL | AMI 99999', $card['legal']);
+        $this->assertNotSame('clips/uploads/teste-logo.png', collect($clip->images)->firstWhere('id', 'img_logo')['path']);
+        $this->assertSame('propria', $clip->meta['musica']);
+        $this->assertFileExists($clip->meta['musica_ficheiro']);
         $this->assertSame(1, $clip->meta['edicoes']);
         $this->assertSame(ClipRecord::STATUS_RENDERING, $clip->status);
-        Queue::assertPushed(RenderJob::class, fn ($j) => $j->projectId === $clip->id && ! $j->limpo);
+        Queue::assertPushed(RenderJob::class);              // same words: no new voice
+        Queue::assertNotPushed(RegenerateVoiceoverJob::class);
     }
 
-    public function test_nobody_edits_someone_elses_video(): void
+    public function test_a_new_voiceover_is_spoken_again_and_only_two_edits_are_free(): void
     {
         Queue::fake();
-        $dono = $this->cliente();
-        $lead = $this->videoDe($dono);
-        $outro = User::factory()->cliente()->create();
+        $user = $this->cliente();
+        $lead = $this->videoDe($user);
+        $texto = 'Uma moradia nova em Lajeosa, com jardim, garagem e vista desafogada para a serra.';
 
-        Livewire::actingAs($outro)->test(Conta::class)->call('abrirEditor', $lead->id)->assertSet('editar', null)
-            ->set('editar', $lead->id)->call('guardarEdicao');
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])->set('narracao', $texto)->call('guardar')->assertHasNoErrors();
+        Queue::assertPushed(RegenerateVoiceoverJob::class, fn ($j) => $j->text === $texto && ! $j->replan);
 
-        Queue::assertNothingPushed();
-        $this->assertSame('Duas casa de banho', app(ClipStore::class)->find($lead->clip_id)->plan['scenes'][0]['layers'][0]['params']['title']);
+        app(ClipStore::class)->find($lead->clip_id)->update(['status' => ClipRecord::STATUS_DONE]);
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])->assertSee('Edição 2 de 2')->call('guardar')->assertHasNoErrors();
+        app(ClipStore::class)->find($lead->clip_id)->update(['status' => ClipRecord::STATUS_DONE]);
+
+        // The third needs a video: none in the account → buy one; with one → spend it on two more.
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->assertSee('Comprar 1 vídeo (20 €) para mais 2 edições')->call('guardar')->assertHasErrors('guardar');
+        DB::table('compras')->insert(['user_id' => $user->id, 'sessao' => 'cs_x', 'total' => 2000, 'videos' => 1, 'created_at' => now(), 'updated_at' => now()]);
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->call('comprarEdicoes')->assertSee('Edição 3 de 4')->call('guardar')->assertHasNoErrors();
+        $this->assertSame(0, $user->creditos());
     }
 
     public function test_the_account_page_offers_one_video_and_the_packs(): void

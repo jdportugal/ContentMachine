@@ -231,6 +231,12 @@ class RenderJob implements ShouldQueue
         if ($choice === 'nenhuma') {
             return null;
         }
+        // A customer's own track (uploaded in their account's video editor).
+        if ($choice === 'propria') {
+            $propria = (string) ($p->meta['musica_ficheiro'] ?? '');
+
+            return $propria !== '' && is_file($propria) ? $propria : $music->randomPath();
+        }
         if ($choice === '' || $choice === 'aleatoria') {
             return $music->randomPath();
         }
