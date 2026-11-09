@@ -25,15 +25,35 @@
 
         {{-- 2 · Cenas --}}
         <section class="flex flex-col gap-4">
-            {!! $passo(2, 'Cenas', 'A imagem e o efeito de cada cena. Toque numa imagem para a trocar.') !!}
+            {!! $passo(2, 'Cenas', 'Cada cena com o seu efeito. Toque numa imagem para a trocar, ou mude o efeito.') !!}
             <ol class="flex flex-col gap-4">
                 @foreach ($cenas as $c)
                     <li class="rounded-[16px] border border-ivory/10 bg-navy-3/40 p-3" wire:key="cena-{{ $c['indice'] }}">
+                        @php
+                            $novoEfeito = ($efeitos[$c['indice']] ?? $c['slug']) !== $c['slug'] ? ($catalogo[$efeitos[$c['indice']]]['nome'] ?? null) : null;
+                        @endphp
                         <div class="flex items-center justify-between gap-3 px-1">
                             <span class="text-[11px] tracking-[.22em] text-[#AEB5C1]">CENA {{ $c['indice'] + 1 }}</span>
-                            <span class="text-xs text-cyan text-right">{{ $c['efeito'] }}</span>
+                            <span class="text-xs text-right {{ $novoEfeito ? 'text-[#AEB5C1] line-through' : 'text-cyan' }}">{{ $c['efeito'] }}</span>
                         </div>
-                        <div class="mt-3 grid {{ ['grid-cols-1', 'grid-cols-1', 'grid-cols-2', 'grid-cols-3'][min(3, count($c['fotos']))] }} gap-2">
+
+                        {{-- The effect in use: this scene's own seconds of the current video, looping while on screen. --}}
+                        @if ($filme && $c['fim'] > $c['inicio'])
+                            <div class="mt-3 relative mx-auto w-full max-w-[220px] aspect-[9/16] rounded-[10px] overflow-hidden bg-navy border border-ivory/10"
+                                 x-data="{ i: {{ $c['inicio'] }}, f: {{ $c['fim'] }} }"
+                                 x-intersect:enter="$refs.v.currentTime < i || $refs.v.currentTime >= f ? $refs.v.currentTime = i : null; $refs.v.play().catch(() => {})"
+                                 x-intersect:leave="$refs.v.pause()" wire:ignore>
+                                <video x-ref="v" src="{{ $filme }}#t={{ $c['inicio'] }},{{ $c['fim'] }}" muted playsinline preload="metadata"
+                                       x-on:timeupdate="if ($el.currentTime >= f - 0.05) { $el.currentTime = i; $el.play().catch(() => {}) }"
+                                       class="absolute inset-0 w-full h-full object-cover"></video>
+                                <span class="absolute left-2 top-2 rounded-full bg-navy/75 px-2 py-0.5 text-[10px] tracking-[.16em] text-ivory">NO VÍDEO ATUAL</span>
+                            </div>
+                        @endif
+
+                        @if ($novoEfeito)
+                            <p class="mt-3 rounded-[10px] border border-cyan/40 bg-cyan/5 px-3 py-2 text-sm text-ivory">Novo efeito: <span class="text-cyan">{{ $novoEfeito }}</span>. Vê-o quando o vídeo for refeito.</p>
+                        @endif
+                        <div class="mt-3 grid {{ ['grid-cols-1', 'grid-cols-1', 'grid-cols-2', 'grid-cols-3'][min(3, count($fotos[$c['indice']] ?? []))] }} gap-2">
                             @forelse ($fotos[$c['indice']] ?? [] as $onde => $id)
                                 @php $slot = \App\Livewire\EditarVideo::chave($c['indice'], $onde); @endphp
                                 <div class="flex flex-col gap-2">
@@ -73,6 +93,29 @@
                                 </div>
                             @endif
                         @endforeach
+
+                        {{-- Change the effect: only picture effects; the cards with information keep theirs. --}}
+                        @if ($c['trocavel'] && count($catalogo) > 1)
+                            @if ($aEscolherEfeito === $c['indice'])
+                                <div class="mt-3 rounded-[12px] border border-cyan/40 bg-navy p-3">
+                                    <p class="text-sm text-ivory">Escolha o efeito desta cena</p>
+                                    <div class="mt-2 grid grid-cols-2 gap-2">
+                                        @foreach ($catalogo as $slug => $e)
+                                            @php $escolhido = ($efeitos[$c['indice']] ?? $c['slug']) === $slug; @endphp
+                                            <button type="button" wire:click="escolherEfeito({{ $c['indice'] }}, '{{ $slug }}')"
+                                                    class="flex flex-col items-start gap-0.5 min-h-[56px] rounded-[10px] border px-3 py-2 text-left {{ $escolhido ? 'border-cyan bg-cyan/10' : 'border-ivory/15' }}">
+                                                <span class="text-sm leading-snug text-ivory">{{ $e['nome'] }}</span>
+                                                <span class="text-[11px] text-[#AEB5C1]">{{ count($e['imagens']) }} {{ count($e['imagens']) === 1 ? 'foto' : 'fotos' }}</span>
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                    <button type="button" wire:click="$set('aEscolherEfeito', null)" class="mt-2 w-full min-h-11 text-sm text-[#AEB5C1]">Fechar</button>
+                                </div>
+                            @else
+                                <button type="button" wire:click="$set('aEscolherEfeito', {{ $c['indice'] }})"
+                                        class="mt-3 w-full min-h-[48px] rounded-full border border-ivory/30 text-sm text-ivory">Mudar efeito</button>
+                            @endif
+                        @endif
                     </li>
                 @endforeach
             </ol>

@@ -61,7 +61,8 @@ class RenderJob implements ShouldQueue
                 : $renderer->render($plan, "$dir/clip.mp4");
             // Clear the previous failure: a clip that renders after a failed attempt
             // kept the old message and showed as done WITH an error next to it.
-            $atributos = ['output_path' => $out, 'status' => ClipRecord::STATUS_DONE, 'error' => null];
+            // The opening's length: the customer editor finds each scene's seconds in the video by it.
+            $atributos = ['output_path' => $out, 'status' => ClipRecord::STATUS_DONE, 'error' => null, 'meta' => array_merge((array) $p->refresh()->meta, ['abertura' => round((float) $opening, 3)])];
             // "Send straight to Finished": the same flag the promote button sets, set
             // here instead, so the clip lands in the hub without the extra click.
             if (! empty($p->meta['auto_finish'])) {

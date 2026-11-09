@@ -7,9 +7,11 @@ use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Contas\EdicaoDeVideo;
 use App\Services\Leads\LeadVideo;
+use App\Services\Themes\ThemeContext;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -54,13 +56,21 @@ class EditarVideo extends Component
     /** The scene whose picture is being swapped (its picker open). */
     public ?string $aTrocar = null;
 
+    /** @var array<int,string> scene => effect slug (changed ones are applied on save) */
+    public array $efeitos = [];
+
+    /** The scene whose effect list is open. */
+    public ?int $aEscolherEfeito = null;
+
     public function mount(int $lead): void
     {
         $this->lead = $lead;
         $clip = $this->clip() ?? abort(404);
         $listing = (array) ($clip->meta['listing'] ?? []);
         $this->narracao = (string) ($listing['voiceover'] ?? $clip->transcript['text'] ?? '');
-        $this->fotos = collect(EdicaoDeVideo::cenas($clip))->mapWithKeys(fn ($c) => [$c['indice'] => $c['fotos']])->all();
+        $cenas = collect(EdicaoDeVideo::cenas($clip));
+        $this->fotos = $cenas->mapWithKeys(fn ($c) => [$c['indice'] => $c['fotos']])->all();
+        $this->efeitos = $cenas->mapWithKeys(fn ($c) => [$c['indice'] => $c['slug']])->all();
         $this->nome = (string) ($listing['agent'] ?? '');
         $this->telefone = (string) ($listing['phone'] ?? '');
         $this->licenca = preg_replace('/\D/', '', (string) ($listing['licence'] ?? ''));
@@ -73,7 +83,51 @@ class EditarVideo extends Component
     {
         $lead = DB::table('leads')->where('id', $this->lead)->where('user_id', Auth::id())->first();
 
-        return $lead ? app(LeadVideo::class)->clip($lead) : null;
+        $clip = $lead ? app(LeadVideo::class)->clip($lead) : null;
+        // The clip's own theme: its effects (names, which can be swapped) live there.
+        if ($clip) {
+            app(ThemeContext::class)->use((string) ($clip->meta['theme'] ?? ''));
+        }
+
+        return $clip;
+    }
+
+    /** The listing's photos a customer can pick (not the logo, not the agent's portrait). @return array<int,string> */
+    private function galeria(ClipRecord $clip): array
+    {
+        return collect(EdicaoDeVideo::imagens($clip))
+            ->reject(fn ($i) => str_starts_with((string) ($i['description'] ?? ''), 'Logótipo') || str_starts_with((string) ($i['description'] ?? ''), 'Retrato'))
+            ->keys()->all();
+    }
+
+    /**
+     * Another picture effect for scene $cena. Its pictures carry over in order; an effect
+     * that shows more takes the listing's next unused photos (the customer can swap them).
+     */
+    public function escolherEfeito(int $cena, string $slug): void
+    {
+        $clip = $this->clip();
+        $catalogo = EdicaoDeVideo::efeitosDeFoto();
+        $atual = $clip ? collect(EdicaoDeVideo::cenas($clip))->firstWhere('indice', $cena) : null;
+        $this->aEscolherEfeito = null;
+        if (! $clip || ! isset($catalogo[$slug]) || ! $atual || ! $atual['trocavel']) {
+            return;
+        }
+        $daCena = collect($this->fotos[$cena] ?? [])->filter(fn ($id, $onde) => str_starts_with((string) $onde, '0.'));
+        $usadas = $daCena->values()->all();
+        $fila = array_values(array_unique(array_merge($usadas, array_diff($this->galeria($clip), $usadas))));
+        $novas = [];
+        foreach ($catalogo[$slug]['imagens'] as $n => $chave) {
+            $novas["0.$chave"] = $fila[$n] ?? $fila[0] ?? '';
+        }
+        $this->fotos[$cena] = array_merge(collect($this->fotos[$cena] ?? [])->reject(fn ($id, $onde) => str_starts_with((string) $onde, '0.'))->all(), $novas);
+        $this->efeitos[$cena] = $slug;
+        foreach (array_keys($this->novasFotos) as $chave) {
+            if (str_starts_with((string) $chave, 'c'.$cena.'_0_')) {
+                unset($this->novasFotos[$chave]);
+            }
+        }
+        $this->aTrocar = null;
     }
 
     /** The upload slot for scene $cena's picture at "layer.param". */
@@ -157,6 +211,13 @@ class EditarVideo extends Component
             $imagens[] = ['id' => $id, 'path' => $ficheiro->store('clips/uploads', config('contentmachine.clips.disk')), 'description' => 'Foto enviada pelo consultor.'];
             $this->fotos[(int) $cena][$onde] = $id;
         }
+        // A scene's new effect first: it decides which picture params the layer has.
+        foreach ($this->efeitos as $cena => $slug) {
+            if ($slug !== (string) ($plan['scenes'][(int) $cena]['layers'][0]['type'] ?? '')) {
+                $daCena = collect($this->fotos[(int) $cena] ?? [])->filter(fn ($id, $onde) => str_starts_with((string) $onde, '0.'))->values()->all();
+                [$plan] = EdicaoDeVideo::trocarEfeito($plan, (int) $cena, (string) $slug, $daCena);
+            }
+        }
         foreach ($this->fotos as $cena => $lugares) {
             foreach ($lugares as $onde => $id) {
                 $plan = EdicaoDeVideo::trocarFoto($plan, (int) $cena, (string) $onde, (string) $id);
@@ -219,7 +280,10 @@ class EditarVideo extends Component
         return view('livewire.editar-video', [
             'clip' => $clip,
             'cenas' => EdicaoDeVideo::cenas($clip),
-            'galeria' => collect($imagens)->reject(fn ($i) => str_starts_with((string) ($i['description'] ?? ''), 'Logótipo') || str_starts_with((string) ($i['description'] ?? ''), 'Retrato'))->keys()->all(),
+            'galeria' => $this->galeria($clip),
+            'catalogo' => EdicaoDeVideo::efeitosDeFoto(),
+            // The rendered video, for each scene to play its own seconds (the effect in use).
+            'filme' => ! $clip->isActive() && $clip->output_path && is_file($clip->output_path) ? URL::signedRoute('lead.video', ['lead' => $this->lead]) : null,
             'url' => $url,
             'logoAtual' => collect($imagens)->first(fn ($i) => str_starts_with((string) ($i['description'] ?? ''), 'Logótipo'))['id'] ?? null,
             'feitas' => EdicaoDeVideo::feitas($clip),

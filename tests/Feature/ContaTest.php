@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Clips\Store\EffectRecord;
+use App\Services\Clips\Store\EffectStore;
 use App\Services\Contas\LinkDeAcesso;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -204,6 +206,44 @@ class ContaTest extends TestCase
         Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
             ->call('comprarEdicoes')->assertSee('Edição 3 de 4')->call('guardar')->assertHasNoErrors();
         $this->assertSame(0, $user->creditos());
+    }
+
+    public function test_a_scene_shows_its_effect_and_takes_another_picture_effect(): void
+    {
+        Queue::fake();
+        $efeitos = app(EffectStore::class);
+        foreach ([
+            'duo-sobreposto' => ['Duo sobreposto', '{ "src": image, "src2": image, "label"?: string }'],
+            'triptico' => ['Tríptico', '{ "src": image, "src2": image, "src3": image }'],
+            'plano-push-in' => ['Plano com push-in', '{ "src": image, "eyebrow"?: string, "move"?: "in"|"out" }'],
+            'agente-revelacao' => ['Agente (fecho)', '{ "src": image, "name"?: string, "phone"?: string }'],
+        ] as $slug => [$nome, $esquema]) {
+            $efeitos->create(['slug' => $slug, 'display_name' => $nome, 'param_schema' => $esquema, 'status' => EffectRecord::STATUS_ACTIVE, 'prompt' => 'x', 'tsx' => 'x']);
+        }
+        $user = $this->cliente();
+        $lead = $this->videoDe($user);
+
+        // Picture effects can be swapped; the agent card keeps its own. Each scene plays its seconds of the video.
+        $editor = Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->assertSee('Duo sobreposto')->assertSee('Agente (fecho)')->assertSee('#t=0,10', false)->assertSee('#t=10,30', false);
+        $this->assertSame(1, substr_count($editor->html(), 'Mudar efeito'));
+
+        $editor->call('escolherEfeito', 1, 'triptico')->assertSet('efeitos.1', 'agente-revelacao')
+            ->call('escolherEfeito', 0, 'triptico')->assertSet('efeitos.0', 'triptico')
+            ->assertSee('Novo efeito:')
+            ->assertSet('fotos.0', ['0.src' => 'img_a', '0.src2' => 'img_b', '0.src3' => 'img_a'])
+            ->call('guardar')->assertHasNoErrors();
+
+        $camada = app(ClipStore::class)->find($lead->clip_id)->plan['scenes'][0]['layers'][0];
+        $this->assertSame('triptico', $camada['type']);
+        $this->assertSame(['src' => 'img_a', 'src2' => 'img_b', 'src3' => 'img_a'], $camada['params']);   // triptico has no caption
+        $this->assertSame('agente-revelacao', app(ClipStore::class)->find($lead->clip_id)->plan['scenes'][1]['layers'][0]['type']);
+
+        // Back to one picture, the caption carried as the new effect's own.
+        app(ClipStore::class)->find($lead->clip_id)->update(['status' => ClipRecord::STATUS_DONE]);
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->call('escolherEfeito', 0, 'plano-push-in')->assertSet('fotos.0', ['0.src' => 'img_a'])->call('guardar')->assertHasNoErrors();
+        $this->assertSame(['type' => 'plano-push-in', 'params' => ['src' => 'img_a']], array_intersect_key(app(ClipStore::class)->find($lead->clip_id)->plan['scenes'][0]['layers'][0], ['type' => 1, 'params' => 1]));
     }
 
     public function test_the_account_page_offers_one_video_and_the_packs(): void

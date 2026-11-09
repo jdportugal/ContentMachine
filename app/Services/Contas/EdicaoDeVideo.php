@@ -35,12 +35,16 @@ class EdicaoDeVideo
      * The scenes as the editor shows them: per scene, the pictures it uses (param => image id),
      * a video when it plays footage, and the effect's name. No text.
      *
-     * @return array<int,array{indice:int,efeito:string,fotos:array<string,string>,video:bool}>
+     * Also whether its effect can be swapped, and its seconds in the rendered video.
+     *
+     * @return array<int,array{indice:int,slug:string,efeito:string,fotos:array<string,string>,video:bool,trocavel:bool,inicio:float,fim:float}>
      */
     public static function cenas(ClipRecord $clip): array
     {
         $imagens = self::imagens($clip);
         $nomes = self::nomesDosEfeitos();
+        $trocaveis = self::efeitosDeFoto();
+        $abertura = self::abertura($clip);
         $out = [];
         foreach (($clip->plan['scenes'] ?? []) as $i => $cena) {
             $fotos = [];
@@ -53,7 +57,11 @@ class EdicaoDeVideo
                 }
             }
             $tipo = (string) ($cena['layers'][0]['type'] ?? $cena['layers'][0]['effect'] ?? '');
-            $out[] = ['indice' => (int) $i, 'efeito' => $nomes[$tipo] ?? Str::of($tipo)->replace('-', ' ')->ucfirst()->toString(), 'fotos' => $fotos, 'video' => $video];
+            $out[] = [
+                'indice' => (int) $i, 'slug' => $tipo, 'efeito' => $nomes[$tipo] ?? Str::of($tipo)->replace('-', ' ')->ucfirst()->toString(),
+                'fotos' => $fotos, 'video' => $video, 'trocavel' => isset($trocaveis[$tipo]),
+                'inicio' => round((float) ($cena['start'] ?? 0) + $abertura, 2), 'fim' => round((float) ($cena['end'] ?? 0) + $abertura, 2),
+            ];
         }
 
         return $out;
@@ -120,6 +128,97 @@ class EdicaoDeVideo
         }
 
         return $depois === '' ? $valor : trim($valor.' · AMI '.$depois, ' ·');
+    }
+
+    /** Caption params a picture effect may carry; anything else (name, price, facts…) makes it text-led. */
+    private const LEGENDAS = ['eyebrow', 'label', 'move'];
+
+    /**
+     * The effects a customer can swap a scene's effect for: enabled effects of the clip's
+     * theme that show pictures with at most a short caption. Text-led cards (the agent,
+     * the price, the opening, the key facts) stay as planned.
+     *
+     * @return array<string,array{nome:string,imagens:array<int,string>}> slug => name and its picture params, in order
+     */
+    public static function efeitosDeFoto(): array
+    {
+        try {
+            $efeitos = app(EffectStore::class)->enabled();
+        } catch (\Throwable) {
+            return [];
+        }
+        $out = [];
+        foreach ($efeitos as $e) {
+            $esquema = (string) $e->get('param_schema', '');
+            preg_match_all('/"(\w+)"(\??)\s*:\s*(\w+)/', $esquema, $m, PREG_SET_ORDER);
+            $imagens = [];
+            $outros = [];
+            foreach ($m as [, $chave, $opcional, $tipo]) {
+                if ($tipo === 'image' && $opcional === '') {
+                    $imagens[] = $chave;
+                } elseif ($tipo !== 'image' || $opcional === '') {
+                    $outros[] = $chave;
+                }
+            }
+            if ($imagens !== [] && array_diff($outros, self::LEGENDAS) === []) {
+                $out[(string) $e->slug] = ['nome' => (string) ($e->display_name ?: $e->slug), 'imagens' => $imagens];
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * Scene $cena with effect $slug instead: its picture params filled from $fotos
+     * (in order, then $extra pictures), the caption carried over, the timing untouched.
+     *
+     * @param  array<int,string>  $fotos  the scene's picture ids, in order
+     * @param  array<int,string>  $extra  more picture ids to use when the effect needs more
+     * @return array{0:array,1:array<string,string>} [plan, the scene's new "0.param" => image id]
+     */
+    public static function trocarEfeito(array $plan, int $cena, string $slug, array $fotos, array $extra = []): array
+    {
+        $efeito = self::efeitosDeFoto()[$slug] ?? null;
+        $camada = $plan['scenes'][$cena]['layers'][0] ?? null;
+        if (! $efeito || ! is_array($camada) || ! isset(self::efeitosDeFoto()[(string) ($camada['type'] ?? '')])) {
+            return [$plan, []];
+        }
+        $antigos = (array) ($camada['params'] ?? []);
+        $legenda = $antigos['eyebrow'] ?? $antigos['label'] ?? null;
+        $fila = array_values(array_unique(array_merge(array_values($fotos), $extra)));
+        $params = [];
+        $novas = [];
+        foreach ($efeito['imagens'] as $n => $chave) {
+            $params[$chave] = $fila[$n] ?? $fila[0] ?? '';
+            $novas["0.$chave"] = $params[$chave];
+        }
+        $esquema = (string) (app(EffectStore::class)->enabled()->firstWhere('slug', $slug)?->get('param_schema', '') ?? '');
+        if (is_string($legenda) && $legenda !== '') {
+            $params[str_contains($esquema, '"label"') ? 'label' : 'eyebrow'] = $legenda;
+        }
+        if (isset($antigos['move']) && str_contains($esquema, '"move"')) {
+            $params['move'] = $antigos['move'];
+        }
+        $camada['type'] = $slug;
+        $camada['params'] = $params;
+        $plan['scenes'][$cena]['layers'][0] = $camada;
+
+        return [$plan, $novas];
+    }
+
+    /** Seconds of music-only opening before the first scene in the rendered video. */
+    public static function abertura(ClipRecord $clip): float
+    {
+        if (isset($clip->meta['abertura'])) {
+            return (float) $clip->meta['abertura'];
+        }
+        if (empty($clip->meta['beat_opening']) || ! $clip->output_path || ! is_file($clip->output_path)) {
+            return 0.0;
+        }
+        // Rendered before the length was recorded: the video's length past the plan's.
+        $video = (float) rescue(fn () => \App\Services\RealEstate\PropertyVideoAnalyzer::probe($clip->output_path)['duration'] ?? 0, 0.0, false);
+
+        return max(0.0, round($video - (float) ($clip->plan['duration'] ?? $video), 3));
     }
 
     /** @return array<string,string> effect slug => display name */
