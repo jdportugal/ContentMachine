@@ -71,6 +71,7 @@
                     $grupos = [
                         ['titulo' => null, 'itens' => [
                             ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Portal do consultor',            'color' => '#F06052', 'glyph' => '⌂'],
+                            ['route' => 'clientes',        'label' => 'Clientes',          'sub' => 'Contas · vídeos',                'color' => '#F06052', 'glyph' => '☺'],
                         ]],
                         ['titulo' => 'Criar', 'itens' => [
                             ['route' => 'clips-animados',  'label' => 'Imóveis',           'sub' => 'Vídeos animados',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],

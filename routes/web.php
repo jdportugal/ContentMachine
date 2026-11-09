@@ -160,6 +160,7 @@ Route::get('/conta/amostras/{tema}/{efeito}', function (string $tema, string $ef
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
+    Route::livewire('/clientes', \App\Livewire\Clientes::class)->name('clientes');
     // Serve uma faixa da biblioteca de música (storage/app/shorts/musicas) para pré-visualização.
     Route::get('/clips/musica/{name}', function (string $name) {
         $path = app(MusicLibrary::class)->pathFor($name);
