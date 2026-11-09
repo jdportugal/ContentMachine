@@ -29,12 +29,13 @@
                 </div>
                 @error('anuncio') <p class="text-sm text-coral">{{ $message }}</p> @enderror
                 <p class="text-xs text-[#AEB5C1]">Sem marca d’água. Fica pronto em poucos minutos, aqui nesta página.</p>
+                <a href="{{ route('conta.novo') }}" class="inline-flex items-center gap-2 min-h-11 self-start text-sm font-medium text-cyan underline underline-offset-2">Juntar fotos, escrever a narração ou escolher a música →</a>
             </form>
         </section>
     @endif
 
     {{-- Buy more: always visible --}}
-    <section class="mt-6 rounded-[18px] border border-ivory/10 p-5 sm:p-6">
+    <section id="comprar" class="mt-6 rounded-[18px] border border-ivory/10 p-5 sm:p-6">
         <p class="font-display text-[22px] text-ivory">{{ $creditos > 0 ? 'Precisa de mais vídeos?' : 'Comprar vídeos' }}</p>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a href="{{ $link('avulso') }}" class="flex flex-col gap-1 rounded-[14px] border border-ivory/15 px-5 py-4 hover:border-cyan">

@@ -64,7 +64,11 @@ class ImportListingJob implements ShouldQueue
             $script = $writer->write($listing + ['notes' => (string) ($p->meta['script_notes'] ?? '')]);
             // An after-intro video (this listing's or the project's) comes with a line, said right after the intro.
             $effects = app(EffectStore::class);
-            if (! empty($p->meta['after_intro']) || $effects->afterIntroPath()) {
+            // A voiceover the customer wrote is said as written.
+            $propria = trim((string) ($p->meta['narracao_propria'] ?? ''));
+            if ($propria !== '') {
+                $script['voiceover'] = $propria;
+            } elseif (! empty($p->meta['after_intro']) || $effects->afterIntroPath()) {
                 $script['voiceover'] = ListingScriptWriter::withAfterIntroLine($script['voiceover'], $effects->afterIntroLineFor($p->meta ?? []));
             }
             $p->update(['title' => $script['title'] ?: $listing['title']]);
@@ -102,6 +106,15 @@ class ImportListingJob implements ShouldQueue
                     $opening = ['clips' => app(PropertyVideoAnalyzer::class)->bestClips($rooms, 5)];
                 }
             }
+            // Photos the customer added that are not in the listing: part of the gallery like the listing's.
+            $adicionadas = [];
+            foreach ((array) ($p->meta['fotos_extra'] ?? []) as $n => $caminho) {
+                if (is_string($caminho) && $this->disk()->exists($caminho)
+                    && ($foto = $this->store($this->disk()->get($caminho), 'adicional-'.($n + 1), 'Foto adicional do imóvel, enviada pelo consultor.'))) {
+                    $adicionadas[] = $foto;
+                }
+            }
+            $images = array_merge($images, $adicionadas);
             if (! $property && $images === []) {
                 throw new \RuntimeException('None of the listing photos could be downloaded.');
             }
@@ -135,6 +148,7 @@ class ImportListingJob implements ShouldQueue
                 $resources->images(),
             )));
             $images = array_merge($images, $extras);
+            $extras = array_merge($adicionadas, $extras);   // named in the instructions so the planner uses them
 
             $p->update([
                 'status' => $choose ? ClipRecord::STATUS_CHOOSING_VOICE : ($property ? ClipRecord::STATUS_ANALYZING : ClipRecord::STATUS_TRANSCRIBING),

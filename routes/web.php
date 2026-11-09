@@ -127,6 +127,15 @@ Route::post('/logout', function (Request $request) {
 Route::livewire('/conta', Conta::class)->middleware('auth')->name('conta');
 // A customer's video editor, and the pictures it shows (only their own videos').
 Route::livewire('/conta/videos/{lead}/editar', EditarVideo::class)->middleware('auth')->name('conta.editar');
+Route::livewire('/conta/novo', \App\Livewire\NovoVideoPagina::class)->middleware('auth')->name('conta.novo');
+
+// A track from the music library, for a customer to hear before choosing it.
+Route::get('/conta/musicas/{nome}', function (string $nome, \App\Services\Shorts\MusicLibrary $biblioteca) {
+    $ficheiro = $biblioteca->pathFor($nome);
+    abort_unless($ficheiro !== null, 404);
+
+    return response()->file($ficheiro, ['Cache-Control' => 'private, max-age=86400']);
+})->middleware('auth')->where('nome', '[A-Za-z0-9._-]+')->name('conta.musica');
 Route::get('/conta/videos/{lead}/imagens/{imagem}', function (int $lead, string $imagem, LeadVideo $videos) {
     $registo = DB::table('leads')->where('id', $lead)->where('user_id', Auth::id())->first();
     $clip = $registo ? $videos->clip($registo) : null;
