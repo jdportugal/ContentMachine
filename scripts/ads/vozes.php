@@ -15,7 +15,7 @@ $musicas = ['preco' => 'real-estate-2.mp3', 'minutos' => 'real-estate-4.mp3', 's
 $cta = ['Experimente: o primeiro vídeo é grátis, em imocena ponto com.', 'Experimente: o primeiro vídeo é grátis, em imocena.com'];
 $guioes = [
     'preco' => [
-        ['Consultor imobiliário? Um vídeo profissional do seu imóvel, por dez euros.', 'Consultor imobiliário? Um vídeo profissional do seu imóvel, por 10 €.'],
+        ['É consultor imobiliário? Um vídeo profissional do seu imóvel, por dez euros.', 'É consultor imobiliário? Um vídeo profissional do seu imóvel, por 10 €.'],
         ['Um videógrafo cobra centenas de euros, e ainda espera dias pelo vídeo.', null],
         ['Na Imocena, basta colar o link do anúncio. Nós fazemos o vídeo.', null],
         ['Com narração profissional, as fotos em movimento e o seu contacto no fim.', null],

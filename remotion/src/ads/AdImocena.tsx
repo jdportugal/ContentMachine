@@ -155,7 +155,7 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 300 }}>
         {variante === "preco" && (
           <div style={{ textAlign: "center" }}>
-            <Etiqueta>CONSULTOR IMOBILIÁRIO?</Etiqueta>
+            <Etiqueta>É CONSULTOR IMOBILIÁRIO?</Etiqueta>
             <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 430, lineHeight: 0.9, color: C.coral, transform: `scale(${0.6 + 0.4 * a})`, opacity: a }}>10 €</div>
             <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 66, letterSpacing: 16, color: C.ivory, opacity: b }}>POR VÍDEO</div>
           </div>
