@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Contas\TextosDoVideo;
+use App\Services\Shorts\MusicLibrary;
 use App\Services\Contas\LinkDeAcesso;
 use App\Services\Leads\LeadVideo;
 use App\Services\Pagamentos\Compras;
@@ -26,6 +29,95 @@ use Livewire\Component;
 class Conta extends Component
 {
     public string $anuncio = '';
+
+    /** The lead whose video is being edited (null: no editor open). */
+    public ?int $editar = null;
+
+    public string $musica = '';
+
+    public float $volume = 0.1;
+
+    public string $legendas = 'bottom';
+
+    /** @var array<int,string> on-screen texts, in TextosDoVideo::extrair() order */
+    public array $textos = [];
+
+    /** Re-renders a customer may ask for, per video. */
+    public const EDICOES = 10;
+
+    /** The customer's own lead and its clip, or null. */
+    private function meuClip(int $leadId): ?array
+    {
+        $lead = DB::table('leads')->where('id', $leadId)->where('user_id', Auth::id())->first();
+        $clip = $lead ? app(LeadVideo::class)->clip($lead) : null;
+
+        return $clip ? [$lead, $clip] : null;
+    }
+
+    public function abrirEditor(int $leadId): void
+    {
+        [, $clip] = $this->meuClip($leadId) ?? [null, null];
+        if (! $clip) {
+            return;
+        }
+        $this->editar = $leadId;
+        $this->musica = (string) ($clip->meta['musica'] ?? '');
+        $this->volume = (float) ($clip->meta['musica_volume'] ?? 0.1);
+        $this->legendas = in_array($clip->meta['captions'] ?? 'bottom', ClipRecord::CAPTIONS, true) ? $clip->meta['captions'] ?? 'bottom' : 'bottom';
+        $this->textos = array_column(TextosDoVideo::extrair((array) $clip->plan), 'valor');
+        $this->resetErrorBag();
+    }
+
+    public function fecharEditor(): void
+    {
+        $this->reset('editar', 'musica', 'volume', 'legendas', 'textos');
+    }
+
+    /** Save the changes and render the video again (same narration; ~3 minutes). */
+    public function guardarEdicao(MusicLibrary $biblioteca): void
+    {
+        [$lead, $clip] = $this->meuClip((int) $this->editar) ?? [null, null];
+        if (! $clip) {
+            return;
+        }
+        if ($clip->isActive()) {
+            $this->addError('edicao', 'Este vídeo ainda está a ser feito. Espere que termine.');
+
+            return;
+        }
+        $feitas = (int) ($clip->meta['edicoes'] ?? 0);
+        if ($feitas >= self::EDICOES) {
+            $this->addError('edicao', 'Já editou este vídeo '.self::EDICOES.' vezes. Fale connosco para mais alterações.');
+
+            return;
+        }
+        $nomes = array_column($biblioteca->all(), 'name');
+        $this->validate([
+            'musica' => ['nullable', fn ($a, $v, $fail) => $v === '' || in_array($v, ['aleatoria', 'nenhuma'], true) || in_array($v, $nomes, true) ? null : $fail('Escolha uma das músicas.')],
+            'volume' => 'numeric|min:0|max:0.4',
+            'legendas' => 'in:'.implode(',', ClipRecord::CAPTIONS),
+            'textos.*' => 'nullable|string|max:160',
+        ], ['textos.*.max' => 'Cada texto pode ter até 160 caracteres.']);
+
+        $meta = array_merge((array) $clip->meta, [
+            'musica' => $this->musica === '' ? 'aleatoria' : $this->musica,
+            'musica_volume' => round((float) $this->volume, 2),
+            'captions' => $this->legendas,
+            'edicoes' => $feitas + 1,
+        ]);
+        unset($meta['limpo_path']);   // a free video's clean copy is made again from the edited plan
+        $caminhos = array_column(TextosDoVideo::extrair((array) $clip->plan), 'caminho');
+        $novos = [];
+        foreach ($caminhos as $i => $caminho) {
+            if (isset($this->textos[$i])) {
+                $novos[$caminho] = (string) $this->textos[$i];
+            }
+        }
+        $clip->update(['plan' => TextosDoVideo::aplicar((array) $clip->plan, $novos), 'meta' => $meta, 'status' => ClipRecord::STATUS_RENDERING]);
+        DB::table('leads')->where('id', $lead->id)->update(['pronto_em' => null, 'updated_at' => now()]);
+        RenderJob::dispatch($clip->id);
+        $this->fecharEditor();
+    }
 
     public function usarCredito(ListingImport $import, ProjectContext $context, Compras $compras): void
     {
@@ -86,6 +178,8 @@ class Conta extends Component
             [$etapa, $pct] = Imoveis::ESTADOS[$clip?->status] ?? ['A preparar', 10];
 
             return (object) [
+                'id' => $lead->id,
+                'edicoes' => (int) ($clip?->meta['edicoes'] ?? 0),
                 'anuncio' => $lead->anuncio,
                 'titulo' => $clip?->title ?: $lead->anuncio,
                 'estado' => $pronto ? 'pronto' : (! $clip || $clip->status === ClipRecord::STATUS_FAILED ? 'falhou' : 'a-fazer'),
@@ -96,14 +190,20 @@ class Conta extends Component
             ];
         });
 
+        $link = fn (string $plano, array $extra = []) => (string) config("contentmachine.stripe.links.$plano") !== ''
+            ? config("contentmachine.stripe.links.$plano").'?'.http_build_query($extra + ['prefilled_email' => $user->email, 'locale' => 'pt'])
+            : 'mailto:'.config('mail.from.address');
+        [$editarLead, $editarClip] = $this->editar ? ($this->meuClip($this->editar) ?? [null, null]) : [null, null];
+
         return view('livewire.conta', [
+            'link' => $link,
+            'edicao' => $editarClip ? ['titulo' => $editarClip->title ?: $editarLead->anuncio, 'restantes' => self::EDICOES - (int) ($editarClip->meta['edicoes'] ?? 0)] : null,
+            'musicas' => $editarClip ? array_column(app(MusicLibrary::class)->all(), 'name') : [],
+            'campos' => $editarClip ? TextosDoVideo::extrair((array) $editarClip->plan) : [],
             'user' => $user,
             'creditos' => $user->creditos(),
             'videos' => $lista,
             'aDecorrer' => $lista->contains(fn ($v) => $v->estado === 'a-fazer'),
-            'comprar' => fn (string $plano) => (string) config("contentmachine.stripe.links.$plano") !== ''
-                ? config("contentmachine.stripe.links.$plano").'?'.http_build_query(['prefilled_email' => $user->email, 'locale' => 'pt'])
-                : 'mailto:'.config('mail.from.address'),
         ]);
     }
 }

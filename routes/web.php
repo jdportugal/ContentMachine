@@ -124,6 +124,13 @@ Route::post('/logout', function (Request $request) {
 // requests for these components on its own — it is persistent middleware.
 // A customer's own area: their videos and credits. Everything after it is the studio.
 Route::livewire('/conta', Conta::class)->middleware('auth')->name('conta');
+// A track from the music library, for the account page's editor to preview.
+Route::get('/conta/musica/{name}', function (string $name) {
+    $path = app(MusicLibrary::class)->pathFor($name);
+    abort_unless($path !== null, 404);
+
+    return response()->file($path);
+})->middleware('auth')->name('conta.musica');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
