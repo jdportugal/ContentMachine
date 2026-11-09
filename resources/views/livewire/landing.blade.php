@@ -103,8 +103,9 @@
                      class="mt-10 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                     @if (($pedido['estado'] ?? null) === 'pronto')
-                        <div class="flex flex-wrap gap-6 items-center">
-                            <video src="{{ $pedido['video'] }}" controls playsinline preload="metadata" class="w-[170px] aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10"></video>
+                        <div class="flex flex-col sm:flex-row gap-6 items-stretch sm:items-center">
+                            {{-- Phones: the reel fills the card's width (it is a phone-shaped video, so that is its natural size); desktop: a thumbnail beside the text. --}}
+                            <video src="{{ $pedido['video'] }}" controls playsinline preload="metadata" class="w-full sm:w-[170px] aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10 object-contain"></video>
                             <div class="flex-[1_1_220px] flex flex-col gap-3">
                                 <span class="text-xs tracking-[.28em] text-cyan">O SEU VÍDEO ESTÁ PRONTO</span>
                                 <span class="font-display text-[34px] leading-tight text-ivory">Publique-o já.</span>
@@ -178,6 +179,16 @@
                 </div>
             </div>
 
+            @if ($demoReel)
+                {{-- Telemóvel: o vídeo de demonstração a toda a largura, por baixo do texto --}}
+                <div class="w-full md:hidden">
+                    <div class="relative mx-auto max-w-[360px] aspect-[9/19.5] rounded-[40px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]">
+                        <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[84px] h-[24px] rounded-full bg-navy-3 z-10"></span>
+                        <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata" class="absolute inset-0 w-full h-full object-contain bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
+                    </div>
+                    <p class="mt-4 text-center text-[13px] text-[#C9CED6]">Feito pela Imocena em 7 minutos · <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a></p>
+                </div>
+            @endif
             {{-- Leque de reels: o vídeo de demonstração a tocar, com dois momentos dele ao lado --}}
             <div class="flex-[1_1_480px] min-w-0 relative h-[760px] hidden md:block">
                 @if ($demoReel)
