@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Jobs\Clips\RegenerateVoiceoverJob;
 use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Contas\AmostrasDeEfeitos;
 use App\Services\Contas\EdicaoDeVideo;
 use App\Services\Leads\LeadVideo;
 use App\Services\Themes\ThemeContext;
@@ -146,6 +147,29 @@ class EditarVideo extends Component
         $this->aTrocar = null;
     }
 
+    /**
+     * Each effect's sample URL in the clip's theme (null while it renders; asked for then).
+     *
+     * @param  array<int,string>  $slugs
+     * @return array<string,?string>
+     */
+    private function amostras(array $slugs): array
+    {
+        $tema = app(ThemeContext::class)->current()->slug;
+        $out = [];
+        foreach ($slugs as $slug) {
+            $ficheiro = AmostrasDeEfeitos::caminho($slug);
+            if (is_file($ficheiro)) {
+                $out[$slug] = route('conta.amostra', ['tema' => $tema, 'efeito' => $slug, 'v' => filemtime($ficheiro)]);
+            } else {
+                AmostrasDeEfeitos::pedir($slug);
+                $out[$slug] = null;
+            }
+        }
+
+        return $out;
+    }
+
     /** Spend one of the account's videos on two more edits of this one. */
     public function comprarEdicoes(): void
     {
@@ -281,7 +305,9 @@ class EditarVideo extends Component
             'clip' => $clip,
             'cenas' => EdicaoDeVideo::cenas($clip),
             'galeria' => $this->galeria($clip),
-            'catalogo' => EdicaoDeVideo::efeitosDeFoto(),
+            'catalogo' => $catalogo = EdicaoDeVideo::efeitosDeFoto(),
+            'amostras' => $amostras = $this->amostras(array_keys($catalogo)),
+            'aPrepararAmostras' => in_array(null, $amostras, true),
             // The rendered video, for each scene to play its own seconds (the effect in use).
             'filme' => ! $clip->isActive() && $clip->output_path && is_file($clip->output_path) ? URL::signedRoute('lead.video', ['lead' => $this->lead]) : null,
             'url' => $url,

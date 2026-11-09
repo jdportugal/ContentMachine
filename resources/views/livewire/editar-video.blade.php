@@ -2,7 +2,7 @@
     $restam = max(0, $permitidas - $feitas);
     $passo = fn (int $n, string $titulo, string $sub) => '<div class="flex items-start gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan/15 border border-cyan/50 text-cyan text-sm font-semibold flex items-center justify-center">'.$n.'</span><div><h2 class="font-display text-[26px] leading-tight text-ivory">'.e($titulo).'</h2><p class="mt-1 text-sm text-[#AEB5C1]">'.e($sub).'</p></div></div>';
 @endphp
-<main class="max-w-[760px] mx-auto px-4 sm:px-6 pt-6 pb-40">
+<main class="max-w-[1180px] mx-auto px-4 sm:px-6 pt-6 pb-40" @if ($aPrepararAmostras) wire:poll.15s.visible @endif>
     <nav class="flex items-center justify-between gap-3">
         <a href="{{ route('conta') }}" class="inline-flex items-center min-h-11 -ml-2 px-2 text-sm text-[#C9CED6]">← Os meus vídeos</a>
         <span class="text-[11px] tracking-[.24em] text-cyan">EDITAR VÍDEO</span>
@@ -13,7 +13,19 @@
         <p class="mt-6 rounded-[14px] border border-cyan/40 bg-cyan/5 p-4 text-sm text-ivory">Este vídeo está a ser feito. Pode editá-lo quando terminar.</p>
     @endif
 
-    <form wire:submit="guardar" class="mt-8 flex flex-col gap-12" novalidate>
+    <div class="mt-6 lg:grid lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-12 lg:items-start">
+    {{-- The current video: on top on phones, alongside the steps on wider screens. --}}
+    <aside class="lg:sticky lg:top-6">
+        <span class="block text-center lg:text-left text-[11px] tracking-[.24em] text-cyan">O VÍDEO ATUAL</span>
+        @if ($filme)
+            <video src="{{ $filme }}" controls playsinline preload="metadata" wire:ignore
+                   class="mt-2 mx-auto w-full max-w-[240px] lg:max-w-none aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10 object-contain"></video>
+        @else
+            <div class="mt-2 mx-auto w-full max-w-[240px] lg:max-w-none aspect-[9/16] rounded-[14px] bg-navy border border-ivory/10 flex items-center justify-center px-6 text-center text-sm text-[#AEB5C1]">A fazer o vídeo…</div>
+        @endif
+    </aside>
+
+    <form wire:submit="guardar" class="mt-10 lg:mt-0 flex flex-col gap-12 min-w-0" novalidate>
         {{-- 1 · Narração --}}
         <section class="flex flex-col gap-4">
             {!! $passo(1, 'Narração', 'O texto que a voz lê. Se o mudar, a voz é gravada de novo.') !!}
@@ -37,18 +49,44 @@
                             <span class="text-xs text-right {{ $novoEfeito ? 'text-[#AEB5C1] line-through' : 'text-cyan' }}">{{ $c['efeito'] }}</span>
                         </div>
 
-                        {{-- The effect in use: this scene's own seconds of the current video, looping while on screen. --}}
-                        @if ($filme && $c['fim'] > $c['inicio'])
-                            <div class="mt-3 relative mx-auto w-full max-w-[220px] aspect-[9/16] rounded-[10px] overflow-hidden bg-navy border border-ivory/10"
-                                 x-data="{ i: {{ $c['inicio'] }}, f: {{ $c['fim'] }} }"
-                                 x-intersect:enter="$refs.v.currentTime < i || $refs.v.currentTime >= f ? $refs.v.currentTime = i : null; $refs.v.play().catch(() => {})"
-                                 x-intersect:leave="$refs.v.pause()" wire:ignore>
-                                <video x-ref="v" src="{{ $filme }}#t={{ $c['inicio'] }},{{ $c['fim'] }}" muted playsinline preload="metadata"
-                                       x-on:timeupdate="if ($el.currentTime >= f - 0.05) { $el.currentTime = i; $el.play().catch(() => {}) }"
-                                       class="absolute inset-0 w-full h-full object-cover"></video>
-                                <span class="absolute left-2 top-2 rounded-full bg-navy/75 px-2 py-0.5 text-[10px] tracking-[.16em] text-ivory">NO VÍDEO ATUAL</span>
-                            </div>
-                        @endif
+                        {{-- Left: this scene's own seconds of the current video. Right: the effect it will have, as a sample. --}}
+                        @php
+                            $escolhido = $efeitos[$c['indice']] ?? $c['slug'];
+                            $amostra = $c['trocavel'] ? ($amostras[$escolhido] ?? null) : null;
+                        @endphp
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <figure class="flex flex-col gap-1.5">
+                                <figcaption class="text-[10px] tracking-[.18em] text-[#AEB5C1]">AGORA</figcaption>
+                                <div class="relative w-full aspect-[9/16] rounded-[10px] overflow-hidden bg-navy border border-ivory/10"
+                                     @if ($filme && $c['fim'] > $c['inicio'])
+                                     x-data="{ i: {{ $c['inicio'] }}, f: {{ $c['fim'] }} }"
+                                     x-intersect:enter="$refs.v.currentTime < i || $refs.v.currentTime >= f ? $refs.v.currentTime = i : null; $refs.v.play().catch(() => {})"
+                                     x-intersect:leave="$refs.v.pause()"
+                                     @endif
+                                     wire:ignore wire:key="agora-{{ $c['indice'] }}">
+                                    @if ($filme && $c['fim'] > $c['inicio'])
+                                        <video x-ref="v" src="{{ $filme }}#t={{ $c['inicio'] }},{{ $c['fim'] }}" muted playsinline preload="metadata"
+                                               x-on:timeupdate="if ($el.currentTime >= f - 0.05) { $el.currentTime = i; $el.play().catch(() => {}) }"
+                                               class="absolute inset-0 w-full h-full object-cover"></video>
+                                    @else
+                                        <span class="absolute inset-0 flex items-center justify-center px-3 text-center text-xs text-[#AEB5C1]">A fazer o vídeo…</span>
+                                    @endif
+                                </div>
+                            </figure>
+                            <figure class="flex flex-col gap-1.5">
+                                <figcaption class="text-[10px] tracking-[.18em] truncate {{ $novoEfeito ? 'text-cyan' : 'text-[#AEB5C1]' }}">{{ $novoEfeito ? 'NOVO EFEITO' : 'EFEITO' }}</figcaption>
+                                <div class="relative w-full aspect-[9/16] rounded-[10px] overflow-hidden bg-navy border {{ $novoEfeito ? 'border-cyan' : 'border-ivory/10' }}" wire:key="efeito-{{ $c['indice'] }}-{{ $escolhido }}">
+                                    @if ($amostra)
+                                        <video src="{{ $amostra }}" muted loop playsinline preload="none" x-data
+                                               x-intersect:enter="$el.play().catch(() => {})" x-intersect:leave="$el.pause()"
+                                               class="absolute inset-0 w-full h-full object-cover"></video>
+                                    @else
+                                        <span class="absolute inset-0 flex items-center justify-center px-3 text-center text-xs text-[#AEB5C1]">{{ $c['trocavel'] ? 'A preparar a amostra…' : 'Este cartão mantém o seu efeito.' }}</span>
+                                    @endif
+                                    <span class="absolute inset-x-0 bottom-0 px-2 py-1.5 bg-navy/80 text-[11px] leading-tight text-ivory">{{ $novoEfeito ?? $c['efeito'] }}</span>
+                                </div>
+                            </figure>
+                        </div>
 
                         @if ($novoEfeito)
                             <p class="mt-3 rounded-[10px] border border-cyan/40 bg-cyan/5 px-3 py-2 text-sm text-ivory">Novo efeito: <span class="text-cyan">{{ $novoEfeito }}</span>. Vê-o quando o vídeo for refeito.</p>
@@ -101,11 +139,20 @@
                                     <p class="text-sm text-ivory">Escolha o efeito desta cena</p>
                                     <div class="mt-2 grid grid-cols-2 gap-2">
                                         @foreach ($catalogo as $slug => $e)
-                                            @php $escolhido = ($efeitos[$c['indice']] ?? $c['slug']) === $slug; @endphp
-                                            <button type="button" wire:click="escolherEfeito({{ $c['indice'] }}, '{{ $slug }}')"
-                                                    class="flex flex-col items-start gap-0.5 min-h-[56px] rounded-[10px] border px-3 py-2 text-left {{ $escolhido ? 'border-cyan bg-cyan/10' : 'border-ivory/15' }}">
-                                                <span class="text-sm leading-snug text-ivory">{{ $e['nome'] }}</span>
-                                                <span class="text-[11px] text-[#AEB5C1]">{{ count($e['imagens']) }} {{ count($e['imagens']) === 1 ? 'foto' : 'fotos' }}</span>
+                                            @php $marcado = ($efeitos[$c['indice']] ?? $c['slug']) === $slug; @endphp
+                                            <button type="button" wire:click="escolherEfeito({{ $c['indice'] }}, '{{ $slug }}')" wire:key="opcao-{{ $c['indice'] }}-{{ $slug }}"
+                                                    class="flex flex-col items-start gap-1 rounded-[10px] border p-2 text-left {{ $marcado ? 'border-cyan bg-cyan/10' : 'border-ivory/15' }}">
+                                                <span class="relative block w-full aspect-[9/16] rounded-[8px] overflow-hidden bg-navy-3">
+                                                    @if ($amostras[$slug] ?? null)
+                                                        <video src="{{ $amostras[$slug] }}" muted loop playsinline preload="none" x-data
+                                                               x-intersect:enter="$el.play().catch(() => {})" x-intersect:leave="$el.pause()"
+                                                               class="absolute inset-0 w-full h-full object-cover"></video>
+                                                    @else
+                                                        <span class="absolute inset-0 flex items-center justify-center px-2 text-center text-[11px] text-[#AEB5C1]">A preparar a amostra…</span>
+                                                    @endif
+                                                </span>
+                                                <span class="px-1 text-sm leading-snug text-ivory">{{ $e['nome'] }}</span>
+                                                <span class="px-1 text-[11px] text-[#AEB5C1]">{{ count($e['imagens']) }} {{ count($e['imagens']) === 1 ? 'foto' : 'fotos' }}</span>
                                             </button>
                                         @endforeach
                                     </div>
@@ -183,10 +230,11 @@
             <p class="text-xs text-[#AEB5C1]">Use só música que tem direito a usar: as redes sociais silenciam vídeos com música protegida.</p>
         </section>
     </form>
+    </div>
 
     {{-- Save bar, fixed at the bottom (thumb reach on phones) --}}
     <div class="fixed inset-x-0 bottom-0 z-20 border-t border-ivory/10 bg-navy/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
-        <div class="max-w-[760px] mx-auto flex flex-col gap-2">
+        <div class="max-w-[760px] mx-auto lg:max-w-[1180px] lg:pl-[348px] lg:pr-6 flex flex-col gap-2">
             @error('guardar') <p class="text-sm text-coral">{{ $message }}</p> @enderror
             @if ($restam > 0)
                 <button type="button" wire:click="guardar" wire:loading.attr="disabled" wire:target="guardar,logo,musica,novasFotos" @disabled($aFazer)

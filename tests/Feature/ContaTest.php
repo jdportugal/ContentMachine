@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Jobs\Clips\ImportListingJob;
 use App\Livewire\Auth\Login;
 use App\Jobs\Clips\RegenerateVoiceoverJob;
+use App\Jobs\Clips\RenderAmostraJob;
 use App\Livewire\Conta;
 use App\Livewire\EditarVideo;
 use App\Models\User;
@@ -13,6 +14,7 @@ use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
 use App\Services\Clips\Store\EffectRecord;
 use App\Services\Clips\Store\EffectStore;
+use App\Services\Contas\AmostrasDeEfeitos;
 use App\Services\Contas\LinkDeAcesso;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -244,6 +246,55 @@ class ContaTest extends TestCase
         Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
             ->call('escolherEfeito', 0, 'plano-push-in')->assertSet('fotos.0', ['0.src' => 'img_a'])->call('guardar')->assertHasNoErrors();
         $this->assertSame(['type' => 'plano-push-in', 'params' => ['src' => 'img_a']], array_intersect_key(app(ClipStore::class)->find($lead->clip_id)->plan['scenes'][0]['layers'][0], ['type' => 1, 'params' => 1]));
+    }
+
+    public function test_each_picture_effect_gets_a_sample_with_the_demo_photos(): void
+    {
+        Queue::fake();
+        $dir = sys_get_temp_dir().'/cm-amostras-'.uniqid();
+        mkdir("$dir/fotos", 0777, true);
+        foreach (['01-sala.png', '02-cozinha.png', '03-jardim.png', '04-wc.png'] as $f) {
+            file_put_contents("$dir/fotos/$f", 'PNG');
+        }
+        config(['contentmachine.amostras.fotos' => "$dir/fotos", 'contentmachine.amostras.pasta' => "$dir/out"]);
+        $efeitos = app(EffectStore::class);
+        $efeitos->create(['slug' => 'duo-sobreposto', 'display_name' => 'Duo sobreposto', 'param_schema' => '{ "src": image, "src2": image, "label"?: string }', 'status' => EffectRecord::STATUS_ACTIVE, 'prompt' => 'x', 'tsx' => 'a']);
+        $efeitos->create(['slug' => 'janela-arco', 'display_name' => 'Janela em arco', 'param_schema' => '{ "src": image, "eyebrow"?: string }', 'status' => EffectRecord::STATUS_ACTIVE, 'prompt' => 'x', 'tsx' => 'b']);
+        $user = $this->cliente();
+        $lead = $this->videoDe($user);
+        $tema = app(\App\Services\Themes\ThemeContext::class)->current()->slug;
+
+        // The sample plan: the demo photos in the picture params, the caption it takes.
+        $plano = AmostrasDeEfeitos::plano('duo-sobreposto');
+        $this->assertSame("$dir/fotos/01-sala.png", $plano['animations'][0]['params']['src']);
+        $this->assertSame("$dir/fotos/02-cozinha.png", $plano['animations'][0]['params']['src2']);
+        $this->assertSame('Sala de estar', $plano['animations'][0]['params']['label']);
+        $this->assertSame('janela-arco', AmostrasDeEfeitos::plano('janela-arco')['animations'][0]['primitive']);
+
+        // Opening the editor asks for the missing samples, once each.
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])->assertSee('A preparar a amostra')->assertSee('O VÍDEO ATUAL');
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id]);
+        Queue::assertPushed(RenderAmostraJob::class, 2);
+        Queue::assertPushed(RenderAmostraJob::class, fn ($j) => $j->slug === 'janela-arco');
+
+        // Once rendered, the scene and the picker play it.
+        foreach (['duo-sobreposto', 'janela-arco'] as $slug) {
+            @mkdir(dirname(AmostrasDeEfeitos::caminho($slug)), 0777, true);
+            file_put_contents(AmostrasDeEfeitos::caminho($slug), 'MP4');
+        }
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->assertSee('/conta/amostras/'.$tema.'/duo-sobreposto', false)
+            ->call('escolherEfeito', 0, 'janela-arco')->assertSee('/conta/amostras/'.$tema.'/janela-arco', false);
+        $this->actingAs($user)->get('/conta/amostras/'.$tema.'/janela-arco')->assertOk();
+        $this->get('/conta/amostras/'.$tema.'/triptico')->assertNotFound();
+        auth()->logout();
+        $this->get('/conta/amostras/'.$tema.'/janela-arco')->assertRedirect();
+
+        // The command queues what is still missing in every theme.
+        @unlink(AmostrasDeEfeitos::caminho('janela-arco'));
+        \Illuminate\Support\Facades\Cache::flush();
+        $this->artisan('imocena:amostras')->assertSuccessful();
+        Queue::assertPushed(RenderAmostraJob::class, 3);
     }
 
     public function test_the_account_page_offers_one_video_and_the_packs(): void

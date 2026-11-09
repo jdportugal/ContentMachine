@@ -137,6 +137,16 @@ Route::get('/conta/videos/{lead}/imagens/{imagem}', function (int $lead, string 
     return response()->file($disco->path($img['path']), ['Cache-Control' => 'private, max-age=86400']);
 })->middleware('auth')->name('conta.imagem');
 
+// The sample of a picture effect in a theme (the editor's "how it looks"); 404 until rendered.
+Route::get('/conta/amostras/{tema}/{efeito}', function (string $tema, string $efeito) {
+    abort_unless(preg_match('/^[a-z0-9-]+$/', $tema.$efeito), 404);
+    app(\App\Services\Themes\ThemeContext::class)->use($tema);
+    $ficheiro = \App\Services\Contas\AmostrasDeEfeitos::caminho($efeito);
+    abort_unless(is_file($ficheiro), 404);
+
+    return response()->file($ficheiro, ['Cache-Control' => 'private, max-age=604800', 'Content-Type' => 'video/mp4']);
+})->middleware('auth')->name('conta.amostra');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
