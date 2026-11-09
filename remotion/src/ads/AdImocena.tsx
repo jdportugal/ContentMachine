@@ -278,7 +278,7 @@ const Demo: React.FC<{ reel: string | null; fotos: string[] }> = ({ reel, fotos 
         <div style={{ textAlign: "center", marginTop: 26, fontFamily: SANS, fontSize: 32, color: C.cyan, letterSpacing: 4, opacity: interpolate(f, [30, 40], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>↓ VÍDEO PRONTO</div>
       </div>
       <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: tel, transform: `translateY(${(1 - tel) * 120}px) scale(${0.85 + 0.15 * tel})` }}>
-        <Telemovel reel={reel} largura={470} desde={2} foto={fotos[0]} />
+        <Telemovel reel={reel} largura={540} desde={2} foto={fotos[0]} />
         <Demonstracao />
       </div>
     </AbsoluteFill>
