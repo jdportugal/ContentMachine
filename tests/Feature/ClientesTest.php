@@ -16,6 +16,12 @@ class ClientesTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_the_login_page_sends_someone_signed_in_to_their_area(): void
+    {
+        $this->actingAs(User::factory()->create())->get('/login')->assertRedirect('/imoveis');
+        $this->actingAs(User::factory()->cliente()->create())->get('/login')->assertRedirect('/conta');
+    }
+
     public function test_only_admins_see_the_page(): void
     {
         $this->get('/clientes')->assertRedirect('/login');

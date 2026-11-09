@@ -27,6 +27,9 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // The studio is the operator's; customers (buyers, signed in by email link) get /conta.
         $middleware->alias(['admin' => \App\Http\Middleware\SoAdmin::class]);
+        // Someone already signed in who opens /login goes to their own area, not the landing
+        // (which looked like the sign-in had silently failed).
+        $middleware->redirectUsersTo(fn () => auth()->user()?->isAdmin() ? route('imoveis') : route('conta'));
 
         // One-click unsubscribe (RFC 8058): the mail provider POSTs without a CSRF
         // token. The route is signed, so the signature does that job.
