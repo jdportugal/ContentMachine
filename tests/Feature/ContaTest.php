@@ -37,7 +37,7 @@ class ContaTest extends TestCase
 
         $enviados = app('mailer')->getSymfonyTransport()->messages();
         $this->assertCount(1, $enviados);
-        preg_match('#https?://[^"\s]+/entrar/'.$user->id.'[^"\s]*#', html_entity_decode($enviados[0]->toString()), $m);
+        preg_match('#https?://[^"\s]+/entrar/'.$user->id.'[^"\s]*#', html_entity_decode($enviados[0]->getOriginalMessage()->getHtmlBody()), $m);
         $this->assertNotEmpty($m);
 
         $this->get($m[0])->assertRedirect('/conta');

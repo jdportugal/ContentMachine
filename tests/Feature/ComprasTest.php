@@ -127,7 +127,7 @@ class ComprasTest extends TestCase
         // An email with the sign-in link went to the buyer.
         $enviados = app('mailer')->getSymfonyTransport()->messages();
         $this->assertCount(1, $enviados);
-        $this->assertStringContainsString('/entrar/'.$user->id, $enviados[0]->toString());
+        $this->assertStringContainsString('/entrar/'.$user->id, $enviados[0]->getOriginalMessage()->getHtmlBody());
 
         // Stripe retries: the same session is not recorded twice.
         $this->webhook($this->sessao(['client_reference_id' => 'lead-'.$lead->id]))->assertOk();

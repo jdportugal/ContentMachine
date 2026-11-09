@@ -17,7 +17,8 @@ class DemoListingScraper
     public static function supports(string $url): bool
     {
         $host = strtolower((string) parse_url($url, PHP_URL_HOST));
-        $app = strtolower((string) parse_url((string) config('app.url'), PHP_URL_HOST));
+        // Unit tests build scrapers without the framework: no config there, and no demo either.
+        $app = app()->bound('config') ? strtolower((string) parse_url((string) config('app.url'), PHP_URL_HOST)) : '';
         $slug = self::slug($url);
 
         return $slug !== null && in_array($host, array_filter([$app, 'imocena.com', 'www.imocena.com', 'localhost', '127.0.0.1']), true)
