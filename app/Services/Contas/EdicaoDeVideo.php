@@ -193,8 +193,9 @@ class EdicaoDeVideo
             $novas["0.$chave"] = $params[$chave];
         }
         $esquema = (string) (app(EffectStore::class)->enabled()->firstWhere('slug', $slug)?->get('param_schema', '') ?? '');
-        if (is_string($legenda) && $legenda !== '') {
-            $params[str_contains($esquema, '"label"') ? 'label' : 'eyebrow'] = $legenda;
+        $campo = str_contains($esquema, '"label"') ? 'label' : (str_contains($esquema, '"eyebrow"') ? 'eyebrow' : null);
+        if ($campo && is_string($legenda) && $legenda !== '') {
+            $params[$campo] = $legenda;
         }
         if (isset($antigos['move']) && str_contains($esquema, '"move"')) {
             $params['move'] = $antigos['move'];
