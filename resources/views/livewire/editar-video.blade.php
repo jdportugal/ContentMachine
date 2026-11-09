@@ -38,11 +38,11 @@
                                 @php $slot = \App\Livewire\EditarVideo::chave($c['indice'], $onde); @endphp
                                 <div class="flex flex-col gap-2">
                                     <button type="button" wire:click="$set('aTrocar', '{{ $c['indice'] }}|{{ $onde }}')"
-                                            class="relative block w-full aspect-[4/5] rounded-[10px] overflow-hidden bg-navy border {{ $aTrocar === $c['indice'].'|'.$onde ? 'border-cyan' : 'border-ivory/15' }}">
+                                            class="relative block w-full {{ count($fotos[$c['indice']] ?? []) === 1 ? 'aspect-[16/10]' : 'aspect-[4/5]' }} rounded-[10px] overflow-hidden bg-navy border {{ $aTrocar === $c['indice'].'|'.$onde ? 'border-cyan' : 'border-ivory/15' }}">
                                         @if (! empty($novasFotos[$slot]))
                                             <img src="{{ $novasFotos[$slot]->temporaryUrl() }}" alt="" class="absolute inset-0 w-full h-full object-cover">
                                         @else
-                                            <img src="{{ $url($id) }}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                                            <img src="{{ $url($id) }}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-[50%_30%]">
                                         @endif
                                         <span class="absolute inset-x-0 bottom-0 py-1.5 bg-navy/75 text-[11px] text-ivory">Trocar</span>
                                     </button>
