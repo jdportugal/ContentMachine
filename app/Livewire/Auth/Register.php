@@ -46,16 +46,21 @@ class Register extends Component
             'password.confirmed' => 'As palavras-passe não coincidem.',
         ]);
 
+        // The first account on a fresh install is the operator; every later sign-up is a
+        // customer (their own /conta) — a public form must never hand out the studio.
+        $primeira = ! User::query()->exists();
         $utilizador = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
+        $utilizador->is_admin = $primeira;
+        $utilizador->save();
 
         Auth::login($utilizador);
         session()->regenerate();
 
-        $this->redirect(route('imoveis'), navigate: false);
+        $this->redirect(route($primeira ? 'imoveis' : 'conta'), navigate: false);
     }
 
     public function render()

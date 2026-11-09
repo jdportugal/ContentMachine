@@ -216,9 +216,12 @@ class LeadsTest extends TestCase
         {
             public array $props = [];
 
+            public array $saidas = [];
+
             public function render(array $props, string $outPath, string $entry = 'src/index.ts', string $composition = 'ClipComposition'): string
             {
                 $this->props = $props;
+                $this->saidas[basename($outPath)] = $props;
                 @mkdir(dirname($outPath), 0777, true);
                 file_put_contents($outPath, 'X');
 
@@ -231,12 +234,20 @@ class LeadsTest extends TestCase
 
         $gratis = $store->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['free_lead' => true, 'musica' => 'nenhuma']]);
         $this->app->call([new RenderJob($gratis->id), 'handle']);
-        $this->assertSame('IMOCENA · VÍDEO GRÁTIS', $renderer->props['watermark']);
-        $this->assertArrayNotHasKey('banner', $renderer->props);
+        $this->assertSame('IMOCENA · VÍDEO GRÁTIS', $renderer->saidas['clip.mp4']['watermark']);
+        $this->assertArrayNotHasKey('banner', $renderer->saidas['clip.mp4']);
+        // …and its clean copy is rendered straight after (the sync queue runs it here), ready for a purchase.
+        $this->assertArrayNotHasKey('watermark', $renderer->saidas['clip-limpo.mp4']);
+        $gratis = $store->find($gratis->id);
+        $this->assertStringEndsWith('clip-limpo.mp4', $gratis->meta['limpo_path']);
+        $this->assertFalse($gratis->meta['limpo_pendente']);
+        $this->assertStringEndsWith('/clip.mp4', $gratis->output_path);   // the free one still serves the watermarked file
+        $renderer->saidas = [];
 
         $pago = $store->create(['type' => 'animation', 'input_kind' => 'audio', 'plan' => $plan, 'meta' => ['musica' => 'nenhuma']]);
         $this->app->call([new RenderJob($pago->id), 'handle']);
         $this->assertArrayNotHasKey('watermark', $renderer->props);
+        $this->assertArrayNotHasKey('clip-limpo.mp4', $renderer->saidas);   // paid videos need no second copy
     }
 
     public function test_the_portal_creates_a_listing_reel_and_lists_it(): void

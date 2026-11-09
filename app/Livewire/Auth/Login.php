@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\User;
+use App\Services\Contas\LinkDeAcesso;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -10,9 +12,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 /**
- * The sign-in screen. Single-tenant: there is no registration and no password
- * reset by email — the admin account is created by the deploy (EnsureAdminUser)
- * and its credentials are changed from Settings once you are in.
+ * The sign-in screen. Customers (buyers) sign in with a link emailed to them — no
+ * password; the operator signs in with the admin password (EnsureAdminUser).
  */
 #[Layout('components.layouts.guest')]
 class Login extends Component
@@ -54,7 +55,30 @@ class Login extends Component
         // before login stays valid afterwards (session fixation).
         session()->regenerate();
 
-        $this->redirectIntended(default: route('imoveis'), navigate: false);
+        $this->redirectIntended(default: route(Auth::user()->isAdmin() ? 'imoveis' : 'conta'), navigate: false);
+    }
+
+    /** True once a sign-in link was asked for (the same message whether or not the email has an account). */
+    public bool $linkEnviado = false;
+
+    /** Passwordless: email a sign-in link to a customer's account. */
+    public function enviarLink(LinkDeAcesso $contas): void
+    {
+        $this->validate(['email' => ['required', 'string', 'email']], [
+            'email.required' => 'Indique o email com que comprou.',
+            'email.email' => 'Indique um email válido.',
+        ]);
+        $chave = 'login-link:'.Str::lower($this->email).'|'.request()->ip();
+        if (RateLimiter::tooManyAttempts($chave, 3)) {
+            throw ValidationException::withMessages(['email' => 'Já enviámos links há pouco. Veja o seu email ou tente daqui a '.RateLimiter::availableIn($chave).' segundos.']);
+        }
+        RateLimiter::hit($chave, 600);
+
+        $user = User::query()->where('email', Str::lower(trim($this->email)))->first();
+        if ($user && ! $user->isAdmin()) {
+            $contas->enviar($user);
+        }
+        $this->linkEnviado = true;
     }
 
     private function garantirNaoBloqueado(): void

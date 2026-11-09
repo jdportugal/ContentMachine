@@ -13,9 +13,23 @@
             @error('email') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
         </div>
 
+        @if ($linkEnviado)
+            <p class="font-mono text-xs text-teal leading-relaxed">Se existir uma conta com este email, enviámos um link de acesso. Abra o email e clique no botão (válido 30 minutos).</p>
+        @endif
+        <button type="button" wire:click="enviarLink"
+                class="w-full font-mono text-xs uppercase tracking-wider px-3 py-2.5 rounded-sm bg-teal text-papyrus hover:brightness-110 transition disabled:opacity-50"
+                wire:loading.attr="disabled" wire:target="enviarLink">
+            <span wire:loading.remove wire:target="enviarLink">Enviar link de acesso por email</span>
+            <span wire:loading wire:target="enviarLink">A enviar…</span>
+        </button>
+        <p class="text-center font-mono text-[0.6rem] text-ink-faint">Clientes: sem palavra-passe, entre com o link que enviamos para o seu email.</p>
+
+        <details class="pt-2 border-t border-ink-soft/15">
+            <summary class="cursor-pointer font-mono text-[0.65rem] text-ink-soft py-2">Entrar com palavra-passe (equipa Imocena)</summary>
+        <div class="space-y-4 pt-2">
         <div>
             <label for="password" class="eyebrow block mb-1.5">Palavra-passe</label>
-            <input id="password" type="password" wire:model="password" required autocomplete="current-password"
+            <input id="password" type="password" wire:model="password" autocomplete="current-password"
                    class="w-full bg-papyrus/60 border border-ink-soft/25 rounded-sm px-3 py-2 text-ink font-mono text-sm focus:border-teal focus:outline-none">
             @error('password') <p class="mt-1.5 font-mono text-[0.65rem] text-rust">{{ $message }}</p> @enderror
         </div>
@@ -31,6 +45,8 @@
             <span wire:loading.remove wire:target="entrar">Entrar</span>
             <span wire:loading wire:target="entrar">A entrar…</span>
         </button>
+        </div>
+        </details>
 
         <p class="text-center font-mono text-[0.65rem] text-ink-faint">
             <a href="{{ route('home') }}" class="text-teal underline underline-offset-2">Voltar ao site</a>

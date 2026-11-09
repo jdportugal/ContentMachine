@@ -80,7 +80,10 @@ abstract class TestCase extends BaseTestCase
      */
     protected function comSessaoIniciada(): static
     {
-        return $this->actingAs(new User(['name' => 'Test', 'email' => 'test@example.test']));
+        $admin = new User(['name' => 'Test', 'email' => 'test@example.test']);
+        $admin->is_admin = true;
+
+        return $this->actingAs($admin);
     }
 
     protected function tearDown(): void

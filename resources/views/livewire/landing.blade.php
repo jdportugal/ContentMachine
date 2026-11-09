@@ -109,12 +109,18 @@
                             <div class="flex-[1_1_220px] flex flex-col gap-3">
                                 <span class="text-xs tracking-[.28em] text-cyan">O SEU VÍDEO ESTÁ PRONTO</span>
                                 <span class="font-display text-[34px] leading-tight text-ivory">Publique-o já.</span>
+                                @if (! empty($pedido['pago']))
+                                <p class="text-sm leading-relaxed text-[#C9CED6]">Versão sem marca d’água — já é sua. Também está na <a href="{{ route('conta') }}" class="text-cyan underline">sua conta</a>.</p>
+                                @else
                                 <p class="text-sm leading-relaxed text-[#C9CED6]">Esta versão leva a marca d’água Imocena. A versão limpa custa 20 €, ou a partir de 8,75 € com um pack.</p>
+                                @endif
                                 <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
                                     Descarregar MP4
                                 </a>
+                                @if (empty($pedido['pago']))
                                 <a href="{{ $stripe('avulso', 'Vídeo avulso (20 €)') }}" class="text-sm font-medium text-cyan underline underline-offset-2">Quero a versão limpa (20 €)</a>
+                                @endif
                             </div>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'a-fazer')

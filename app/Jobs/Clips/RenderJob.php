@@ -18,6 +18,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
 use Symfony\Component\Process\Process;
@@ -27,7 +28,12 @@ class RenderJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, RunsInProject;
 
     /** @param  ?float  $from  re-render only from this second (the ending), joined onto the clip already rendered */
-    public function __construct(public string $projectId, public ?float $from = null)
+    /**
+     * @param  bool  $limpo  render a free video's CLEAN copy (no watermark) to clip-limpo.mp4, next to the
+     *                       watermarked one, so a purchase can hand it over at once. Leaves the clip's status
+     *                       and output alone; a failure is logged, never shown as the clip failing.
+     */
+    public function __construct(public string $projectId, public ?float $from = null, public bool $limpo = false)
     {
         $this->captureProject();
     }
@@ -37,90 +43,18 @@ class RenderJob implements ShouldQueue
         $this->activateProject();
         $p = $store->findOrFail($this->projectId);
 
+        if ($this->limpo) {
+            $this->renderLimpo($store, $renderer, $music, $backgroundStore);
+
+            return;
+        }
+
         try {
             $p->update(['status' => ClipRecord::STATUS_RENDERING]);
 
             // (The shared remotion effects/backgrounds folders are filled with this project's by the renderer, under its lock.)
 
-            $dir = $store->storageDir($p->id);
-            @mkdir($dir, 0777, true);
-            $plan = $p->plan;
-            // Resolved once: a random pick must be the same track the opening was cut to.
-            $track = $this->resolveMusic($p, $music);
-            [$plan, $opening] = $this->prependOpening($plan, $p, $track);
-
-            // Karaoke captions read absolute word timestamps from the transcript.
-            $plan['words'] = $p->transcript['words'] ?? [];
-
-            // Resolve image-reveal layers' image ids to absolute file paths.
-            $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
-
-            // Attach each effect's sound (sfx-audio/<slug>.*) to the layers using it.
-            $plan['scenes'] = $this->attachEffectAudio($plan['scenes'], app(EffectStore::class));
-
-            // Resolve the chosen backdrop slug → a concrete component/video the
-            // renderer understands. A vanished/removed background drops to the theme.
-            $plan['background'] = $this->resolveBackground($plan['background'] ?? null, $backgroundStore);
-            if ($plan['background'] === null) {
-                unset($plan['background']);
-            }
-
-            $plan['audioSrc'] = $p->audio_path;
-
-            // An "after intro" video (SceneVisualFiller::insertAfterIntro): its scene names it by clips-disk
-            // path, and the voiceover waits for it where the plan says.
-            foreach ($plan['scenes'] as &$scene) {
-                if (! empty($scene['plain']) && is_string($src = $scene['layers'][0]['params']['src'] ?? null) && Storage::disk(config('contentmachine.clips.disk'))->exists($src)) {
-                    $scene['layers'][0]['params']['src'] = Storage::disk(config('contentmachine.clips.disk'))->path($src);
-                }
-            }
-            unset($scene);
-            if (($gap = $plan['voice_gap'] ?? null) && $gap['seconds'] > 0) {
-                $plan['audioSrc'] = $p->audio_path ? $this->openVoiceGap($p->audio_path, (float) $gap['at'], (float) $gap['seconds'], "$dir/voice-gap.m4a") : null;
-                $plan['words'] = array_map(fn ($w) => (float) $w['start'] >= $gap['at']
-                    ? array_merge($w, ['start' => $w['start'] + $gap['seconds'], 'end' => $w['end'] + $gap['seconds']]) : $w, $plan['words']);
-            }
-            // The voice starts when the music-only opening ends.
-            if ($opening > 0) {
-                $plan['audioSrc'] = $plan['audioSrc'] ? $this->delayVoice($plan['audioSrc'], $opening, "$dir/voice-opening.m4a") : null;
-                $plan['words'] = array_map(fn ($w) => array_merge($w, ['start' => $w['start'] + $opening, 'end' => $w['end'] + $opening]), $plan['words']);
-            }
-
-            // Where the karaoke captions sit — or none at all. Bottom is the default.
-            $captions = (string) ($p->meta['captions'] ?? 'bottom');
-            $plan['captions'] = in_array($captions, ClipRecord::CAPTIONS, true) ? $captions : 'bottom';
-
-            // The news LEAD, pinned on screen for the whole clip (opt-in per clip).
-            if (($lead = trim((string) ($p->meta['lead'] ?? ''))) !== '') {
-                $plan['banner'] = $lead;
-            }
-
-            // Free videos from the landing page carry the watermark; paid ones don't.
-            if (! empty($p->meta['free_lead'])) {
-                $plan['watermark'] = (string) config('contentmachine.leads.watermark');
-            }
-
-            // Background music (mixed as a looping <Audio> track by Remotion).
-            if ($track) {
-                $plan['musicSrc'] = $track;
-                $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
-                if ($opening > 0) {
-                    $plan['musicIntro'] = ['seconds' => $opening, 'volume' => (float) config('contentmachine.real_estate.opening_music_volume', 0.7)];
-                }
-            }
-
-            // Design System theme (colors/fonts/texture) — makes the animation
-            // match the brand. Null → the renderer uses the Brand Machine defaults.
-            if ($theme = app(DesignSystemRepository::class)->readTokens()) {
-                $plan['theme'] = $theme;
-            }
-
-            // Overlay clips: Remotion composites the source video per-scene (over / split /
-            // video / animation). Everything renders in one opaque pass — no ffmpeg step.
-            if ($p->type === ClipRecord::TYPE_OVERLAY) {
-                $plan['transparent'] = false;
-                $plan['videoSrc'] = Storage::disk(config('contentmachine.clips.disk'))->path($p->source_path);
-            }
+            [$plan, $opening, $dir, $track] = $this->montarPlano($p, $store, $music, $backgroundStore);
 
             $out = $this->from !== null && is_file("$dir/clip.mp4")
                 ? $this->renderTail($renderer, $plan, $dir, $this->from + $opening)
@@ -134,6 +68,12 @@ class RenderJob implements ShouldQueue
                 $atributos['finished'] = true;
             }
             $p->update($atributos);
+
+            // A free video: render its clean copy right away, so paying delivers it instantly.
+            if (! empty($p->meta['free_lead']) && $this->from === null) {
+                $p->update(['meta' => array_merge((array) $p->refresh()->meta, ['limpo_pendente' => true, 'musica_usada' => $track])]);
+                self::dispatch($p->id, null, true);
+            }
 
             // Auto clips: schedule on Blotato's next free slot as soon as the render lands.
             if (! empty($p->meta['auto']) && ! $p->get('publish_state')) {
@@ -154,6 +94,128 @@ class RenderJob implements ShouldQueue
             }
 
             throw $e;
+        }
+    }
+
+    /**
+     * Everything the renderer needs for this clip: the plan with the opening, captions, audio,
+     * background, music, theme and (for a free video, unless rendering its clean copy) the watermark.
+     *
+     * @return array{0: array<string,mixed>, 1: float, 2: string, 3: ?string}
+     */
+    private function montarPlano(ClipRecord $p, ClipStore $store, MusicLibrary $music, BackgroundStore $backgroundStore): array
+    {
+        $dir = $store->storageDir($p->id);
+        @mkdir($dir, 0777, true);
+        $plan = $p->plan;
+        // Resolved once: a random pick must be the same track the opening was cut to.
+        // A free video's clean copy reuses the track the watermarked one was cut to.
+        $usada = (string) ($p->meta['musica_usada'] ?? '');
+        $track = $this->limpo && $usada !== '' && is_file($usada) ? $usada : $this->resolveMusic($p, $music);
+        [$plan, $opening] = $this->prependOpening($plan, $p, $track);
+
+        // Karaoke captions read absolute word timestamps from the transcript.
+        $plan['words'] = $p->transcript['words'] ?? [];
+
+        // Resolve image-reveal layers' image ids to absolute file paths.
+        $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
+
+        // Attach each effect's sound (sfx-audio/<slug>.*) to the layers using it.
+        $plan['scenes'] = $this->attachEffectAudio($plan['scenes'], app(EffectStore::class));
+
+        // Resolve the chosen backdrop slug → a concrete component/video the
+        // renderer understands. A vanished/removed background drops to the theme.
+        $plan['background'] = $this->resolveBackground($plan['background'] ?? null, $backgroundStore);
+        if ($plan['background'] === null) {
+            unset($plan['background']);
+        }
+
+        $plan['audioSrc'] = $p->audio_path;
+
+        // An "after intro" video (SceneVisualFiller::insertAfterIntro): its scene names it by clips-disk
+        // path, and the voiceover waits for it where the plan says.
+        foreach ($plan['scenes'] as &$scene) {
+            if (! empty($scene['plain']) && is_string($src = $scene['layers'][0]['params']['src'] ?? null) && Storage::disk(config('contentmachine.clips.disk'))->exists($src)) {
+                $scene['layers'][0]['params']['src'] = Storage::disk(config('contentmachine.clips.disk'))->path($src);
+            }
+        }
+        unset($scene);
+        if (($gap = $plan['voice_gap'] ?? null) && $gap['seconds'] > 0) {
+            $plan['audioSrc'] = $p->audio_path ? $this->openVoiceGap($p->audio_path, (float) $gap['at'], (float) $gap['seconds'], "$dir/voice-gap.m4a") : null;
+            $plan['words'] = array_map(fn ($w) => (float) $w['start'] >= $gap['at']
+                ? array_merge($w, ['start' => $w['start'] + $gap['seconds'], 'end' => $w['end'] + $gap['seconds']]) : $w, $plan['words']);
+        }
+        // The voice starts when the music-only opening ends.
+        if ($opening > 0) {
+            $plan['audioSrc'] = $plan['audioSrc'] ? $this->delayVoice($plan['audioSrc'], $opening, "$dir/voice-opening.m4a") : null;
+            $plan['words'] = array_map(fn ($w) => array_merge($w, ['start' => $w['start'] + $opening, 'end' => $w['end'] + $opening]), $plan['words']);
+        }
+
+        // Where the karaoke captions sit — or none at all. Bottom is the default.
+        $captions = (string) ($p->meta['captions'] ?? 'bottom');
+        $plan['captions'] = in_array($captions, ClipRecord::CAPTIONS, true) ? $captions : 'bottom';
+
+        // The news LEAD, pinned on screen for the whole clip (opt-in per clip).
+        if (($lead = trim((string) ($p->meta['lead'] ?? ''))) !== '') {
+            $plan['banner'] = $lead;
+        }
+
+        // Free videos from the landing page carry the watermark; paid ones (and a free one's clean copy) don't.
+        if (! empty($p->meta['free_lead']) && ! $this->limpo) {
+            $plan['watermark'] = (string) config('contentmachine.leads.watermark');
+        }
+
+        // Background music (mixed as a looping <Audio> track by Remotion).
+        if ($track) {
+            $plan['musicSrc'] = $track;
+            $plan['musicVolume'] = (float) ($p->meta['musica_volume'] ?? 0.1);
+            if ($opening > 0) {
+                $plan['musicIntro'] = ['seconds' => $opening, 'volume' => (float) config('contentmachine.real_estate.opening_music_volume', 0.7)];
+            }
+        }
+
+        // Design System theme (colors/fonts/texture) — makes the animation
+        // match the brand. Null → the renderer uses the Brand Machine defaults.
+        if ($theme = app(DesignSystemRepository::class)->readTokens()) {
+            $plan['theme'] = $theme;
+        }
+
+        // Overlay clips: Remotion composites the source video per-scene (over / split /
+        // video / animation). Everything renders in one opaque pass — no ffmpeg step.
+        if ($p->type === ClipRecord::TYPE_OVERLAY) {
+            $plan['transparent'] = false;
+            $plan['videoSrc'] = Storage::disk(config('contentmachine.clips.disk'))->path($p->source_path);
+        }
+
+        return [$plan, $opening, $dir, $track];
+    }
+
+    /** The clean copy of a free video (see $limpo). Never touches the clip's status or output. */
+    private function renderLimpo(ClipStore $store, RemotionRenderer $renderer, MusicLibrary $music, BackgroundStore $backgroundStore): void
+    {
+        $p = $store->findOrFail($this->projectId);
+        try {
+            [$plan, , $dir] = $this->montarPlano($p, $store, $music, $backgroundStore);
+            $limpo = $renderer->render($plan, "$dir/clip-limpo.mp4");
+            $p->refresh();
+            $meta = array_merge((array) $p->meta, ['limpo_path' => $limpo, 'limpo_pendente' => false]);
+            $atributos = ['meta' => $meta];
+            // Paid while this was rendering: hand the clean file over now.
+            if (! empty($meta['pago'])) {
+                $atributos['output_path'] = $limpo;
+                $atributos['meta']['free_lead'] = false;
+            }
+            $p->update($atributos);
+        } catch (\Throwable $e) {
+            Log::warning('Cópia limpa falhou', ['clip' => $this->projectId, 'erro' => $e->getMessage()]);
+            $p->refresh();
+            $meta = array_merge((array) $p->meta, ['limpo_pendente' => false]);
+            $p->update(['meta' => $meta]);
+            // Paid and no clean copy: render the clip itself clean, the slow way.
+            if (! empty($meta['pago'])) {
+                $p->update(['meta' => array_merge($meta, ['free_lead' => false])]);
+                self::dispatch($p->id);
+            }
         }
     }
 

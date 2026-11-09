@@ -25,6 +25,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Resolve the active project (per session) and repoint the vault at it.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
 
+        // The studio is the operator's; customers (buyers, signed in by email link) get /conta.
+        $middleware->alias(['admin' => \App\Http\Middleware\SoAdmin::class]);
+
         // One-click unsubscribe (RFC 8058): the mail provider POSTs without a CSRF
         // token. The route is signed, so the signature does that job.
         $middleware->validateCsrfTokens(except: ['emails/cancelar/*', 'stripe/webhook']);

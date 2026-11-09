@@ -130,7 +130,7 @@ class Landing extends Component
         }
         $clip = $videos->clip($lead);
         if ($videos->ficheiro($lead)) {
-            return ['estado' => 'pronto',
+            return ['estado' => 'pronto', 'pago' => (bool) ($lead->pago_em ?? null) && empty($clip?->meta['free_lead']),
                 'video' => URL::signedRoute('lead.video', ['lead' => $lead->id]),
                 'descarregar' => URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1])];
         }

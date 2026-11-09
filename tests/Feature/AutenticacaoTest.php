@@ -21,11 +21,15 @@ class AutenticacaoTest extends TestCase
 
     private function utilizador(string $senha = 'a-very-long-password'): User
     {
-        return User::create([
+        $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@example.test',
             'password' => Hash::make($senha),
         ]);
+        $admin->is_admin = true;
+        $admin->save();
+
+        return $admin;
     }
 
     public function test_visitante_e_redirecionado_para_o_login(): void
@@ -189,6 +193,10 @@ class AutenticacaoTest extends TestCase
 
         $this->assertTrue(Auth::check());
         $this->assertSame(2, User::query()->count());
+        // A later sign-up is a customer: their own area, never the studio.
+        $this->assertFalse(Auth::user()->isAdmin());
+        $this->get('/definicoes')->assertRedirect('/conta');
+        $this->get('/conta')->assertOk();
     }
 
     /** The sign-up page never renders a "closed" state. */

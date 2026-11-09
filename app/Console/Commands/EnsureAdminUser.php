@@ -48,11 +48,13 @@ class EnsureAdminUser extends Command
         $email = (string) ($this->option('email') ?: env('ADMIN_EMAIL', 'admin@brand-machine.local'));
         $senha = (string) (env('ADMIN_PASSWORD') ?: Str::password(20, symbols: false));
 
-        User::create([
+        $admin = User::create([
             'name' => 'Admin',
             'email' => $email,
             'password' => Hash::make($senha),
         ]);
+        $admin->is_admin = true;
+        $admin->save();
 
         // Only persist a password we generated: one supplied by the operator is
         // already theirs to know, and writing it down adds a copy for no reason.

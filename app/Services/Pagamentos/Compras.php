@@ -4,6 +4,7 @@ namespace App\Services\Pagamentos;
 
 use App\Jobs\Clips\RenderJob;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Contas\LinkDeAcesso;
 use App\Services\Leads\LeadVideo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Log;
  */
 class Compras
 {
-    public function __construct(private LeadVideo $videos) {}
+    public function __construct(private LeadVideo $videos, private LinkDeAcesso $contas) {}
 
     /** @param  array<string,mixed>  $session  a Stripe checkout.session object */
     public function registar(array $session): ?object
@@ -38,7 +39,12 @@ class Compras
         $nif = $nif !== null ? trim((string) $nif) : null;
         $leadId = self::leadId((string) ($session['client_reference_id'] ?? ''));
 
+        // The buyer's account: their checkout email IS the login (passwordless).
+        $email = $detalhes['email'] ?? ($session['customer_email'] ?? null);
+        $user = $email ? $this->contas->contaPara((string) $email, $detalhes['name'] ?? null) : null;
+
         $compraId = DB::table('compras')->insertGetId([
+            'user_id' => $user?->id,
             'sessao' => $id,
             'payment_link' => $session['payment_link'] ?? null,
             'email' => $detalhes['email'] ?? ($session['customer_email'] ?? null),
@@ -53,8 +59,15 @@ class Compras
             'updated_at' => now(),
         ]);
 
+        if ($leadId && $user) {   // the free video they paid from is theirs now
+            DB::table('leads')->where('id', $leadId)->whereNull('user_id')->update(['user_id' => $user->id]);
+        }
         if ($leadId && (int) ($meta['videos'] ?? 0) === 1) {
             $this->entregarVideoLimpo($compraId, $leadId);
+        }
+        if ($user) {
+            $this->contas->enviar($user, 'Pagamento recebido — a sua conta Imocena',
+                'Obrigado pela compra. Os seus vídeos e créditos ficam na sua conta Imocena: entre com o botão abaixo (sem palavra-passe). O link é válido durante '.LinkDeAcesso::MINUTOS.' minutos; depois peça outro em imocena.com/login.');
         }
 
         Log::info('Compra registada', ['compra' => $compraId, 'sessao' => $id, 'videos' => $meta['videos'] ?? null, 'lead' => $leadId, 'total' => $session['amount_total'] ?? null]);
@@ -68,8 +81,12 @@ class Compras
         return preg_match('/^lead-(\d+)$/', $ref, $m) ? (int) $m[1] : null;
     }
 
-    /** Re-render the lead's clip without the watermark; the lead's link then serves the clean file. */
-    private function entregarVideoLimpo(int $compraId, int $leadId): void
+    /**
+     * The lead's clip, clean. Usually instant: the clean copy was rendered right after the
+     * free one (RenderJob $limpo). If it is still rendering, it is handed over when it lands;
+     * if there is none (older videos), the clip is re-rendered without the watermark.
+     */
+    public function entregarVideoLimpo(int $compraId, int $leadId): void
     {
         $lead = $this->videos->lead($leadId);
         $clip = $lead ? $this->videos->clip($lead) : null;   // activates the lead's project
@@ -78,10 +95,18 @@ class Compras
 
             return;
         }
-        $clip->update(['meta' => ['free_lead' => false] + $clip->meta, 'status' => ClipRecord::STATUS_RENDERING]);
-        RenderJob::dispatch($clip->id);
+        $meta = (array) $clip->meta;
+        $limpo = (string) ($meta['limpo_path'] ?? '');
+        if ($limpo !== '' && is_file($limpo)) {
+            $clip->update(['output_path' => $limpo, 'meta' => array_merge($meta, ['free_lead' => false, 'pago' => true])]);
+        } elseif (! empty($meta['limpo_pendente'])) {
+            $clip->update(['meta' => array_merge($meta, ['pago' => true])]);
+        } else {
+            $clip->update(['meta' => array_merge($meta, ['free_lead' => false, 'pago' => true]), 'status' => ClipRecord::STATUS_RENDERING]);
+            RenderJob::dispatch($clip->id);
+        }
 
         DB::table('leads')->where('id', $leadId)->update(['pago_em' => now(), 'updated_at' => now()]);
-        DB::table('compras')->where('id', $compraId)->update(['videos_usados' => 1, 'entregue_em' => now(), 'updated_at' => now()]);
+        DB::table('compras')->where('id', $compraId)->update(['videos_usados' => DB::raw('videos_usados + 1'), 'entregue_em' => now(), 'updated_at' => now()]);
     }
 }

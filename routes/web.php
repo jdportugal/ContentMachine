@@ -5,6 +5,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\AvatarGen;
 use App\Livewire\ClipsAnimados;
+use App\Livewire\Conta;
 use App\Livewire\ClipsAnimadosSfx;
 use App\Livewire\ClipsAnimadosVfx;
 use App\Livewire\Definicoes;
@@ -24,6 +25,7 @@ use App\Services\Clips\Store\VfxStore;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectResources;
 use App\Http\Controllers\StripeWebhookController;
+use App\Services\Contas\LinkDeAcesso;
 use App\Services\RealEstate\DemoListingScraper;
 use App\Services\RealEstate\PropertyVideoEditor;
 use App\Services\Shorts\MusicLibrary;
@@ -50,12 +52,29 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
 
 // Stripe: the Payment Links' webhook, and where a buyer lands after paying.
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
-Route::get('/obrigado', function () {
+Route::get('/obrigado', function (LinkDeAcesso $contas) {
     $sessao = (string) request()->query('session_id', '');
     $compra = $sessao !== '' ? DB::table('compras')->where('sessao', $sessao)->first() : null;
+    // Signed straight in: the checkout session id is only ever shown to the buyer, and it
+    // signs in once, within a day of paying. Later visits use the emailed link (/login).
+    if ($compra && $compra->user_id && ! $compra->login_em && now()->diffInHours($compra->created_at, true) < 24
+        && ($user = \App\Models\User::find($compra->user_id)) && ! $user->isAdmin()) {
+        $contas->entrar($user);
+        DB::table('compras')->where('id', $compra->id)->update(['login_em' => now()]);
+    }
+    $lead = $compra?->lead_id ? DB::table('leads')->find($compra->lead_id) : null;
 
-    return view('obrigado', ['compra' => $compra, 'lead' => $compra?->lead_id ? DB::table('leads')->find($compra->lead_id) : null]);
+    return view('obrigado', ['compra' => $compra, 'lead' => $lead, 'video' => $lead ? app(LeadVideo::class)->ficheiro($lead) : null]);
 })->name('obrigado');
+
+// Passwordless sign-in: the signed link from the email (or the thank-you page's own sign-in).
+Route::get('/entrar/{user}', function (int $user, LinkDeAcesso $contas) {
+    $conta = \App\Models\User::findOrFail($user);
+    abort_if($conta->isAdmin(), 403);   // the operator signs in with a password; links are for customers
+    $contas->entrar($conta);
+
+    return redirect()->route($conta->isAdmin() ? 'imoveis' : 'conta');
+})->middleware('signed')->name('entrar.link');
 
 Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
     $row = $videos->lead($lead);
@@ -103,7 +122,10 @@ Route::post('/logout', function (Request $request) {
 // group logs guests out of the sign-in and sign-up forms themselves (their form
 // submissions are Livewire requests). Livewire re-applies Authenticate to update
 // requests for these components on its own — it is persistent middleware.
-Route::middleware('auth')->group(function () {
+// A customer's own area: their videos and credits. Everything after it is the studio.
+Route::livewire('/conta', Conta::class)->middleware('auth')->name('conta');
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
     // Serve uma faixa da biblioteca de música (storage/app/shorts/musicas) para pré-visualização.
