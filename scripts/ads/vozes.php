@@ -22,7 +22,7 @@ $guioes = [
         $cta,
     ],
     'minutos' => [
-        ['Do link do anúncio a um vídeo pronto a publicar. Em minutos.', null],
+        ['É consultor imobiliário? O vídeo do seu imóvel, pronto a publicar em minutos.', null],
         ['Nada de esperar dias por um videógrafo, nem perder a tarde a editar.', null],
         ['Cole o link do imóvel: a Imocena escreve a narração, escolhe as fotos e monta o vídeo.', null],
         ['Pronto para o Instagram, o Facebook e o TikTok, com o seu contacto no fim.', null],

@@ -167,7 +167,7 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
           const arco = interpolate(f, [0, 26], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
             <div style={{ textAlign: "center" }}>
-              <Etiqueta>DO LINK AO VÍDEO</Etiqueta>
+              <Etiqueta>O VÍDEO DO SEU IMÓVEL</Etiqueta>
               <div style={{ position: "relative", width: 640, height: 640, margin: "40px auto 0", opacity: a, transform: `scale(${0.7 + 0.3 * a})` }}>
                 <svg width={640} height={640} style={{ position: "absolute", inset: 0, transform: "rotate(-90deg)" }}>
                   <circle cx={320} cy={320} r={290} stroke="rgba(244,241,234,.15)" strokeWidth={22} fill="none" />
