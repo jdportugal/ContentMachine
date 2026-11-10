@@ -24,6 +24,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Resolve the active project (per session) and repoint the vault at it.
         $middleware->web(append: [\App\Http\Middleware\SetActiveProject::class]);
+        // First-touch attribution (UTM, click ids, referrer) kept in the session.
+        $middleware->web(append: [\App\Http\Middleware\GuardarOrigem::class]);
+        // Set by the cookie banner and by Meta's pixel in the browser: read as they are.
+        $middleware->encryptCookies(except: ['imocena_cookies', '_fbp', '_fbc']);
 
         // The studio is the operator's; customers (buyers, signed in by email link) get /conta.
         $middleware->alias(['admin' => \App\Http\Middleware\SoAdmin::class]);

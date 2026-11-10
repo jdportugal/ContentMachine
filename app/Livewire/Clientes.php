@@ -109,6 +109,9 @@ class Clientes extends Component
                     'pago' => (int) (clone $compras)->sum('total'),
                     'oferecidos' => (int) (clone $compras)->where('payment_link', 'admin')->sum('videos'),
                     'desde' => $u->created_at,
+                    // First touch: the first purchase's, else their first video's.
+                    'origem' => \App\Services\Marketing\Origem::resumo((clone $compras)->whereNotNull('origem')->orderBy('id')->value('origem')
+                        ?? DB::table('leads')->where('user_id', $u->id)->whereNotNull('origem')->orderBy('id')->value('origem')),
                 ];
             });
 

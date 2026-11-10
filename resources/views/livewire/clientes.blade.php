@@ -52,7 +52,7 @@
                         <p class="truncate text-ink">{{ $c->email }}</p>
                         <p class="mt-0.5 font-mono text-[0.7rem] text-ink-faint">
                             desde {{ $c->desde?->format('d/m/Y') }} · {{ $c->videos }} {{ $c->videos === 1 ? 'vídeo feito' : 'vídeos feitos' }}
-                            · pagou {{ number_format($c->pago / 100, 2, ',', ' ') }} €@if ($c->oferecidos) · {{ $c->oferecidos }} oferecidos @endif
+                            · veio de {{ $c->origem }} · pagou {{ number_format($c->pago / 100, 2, ',', ' ') }} €@if ($c->oferecidos) · {{ $c->oferecidos }} oferecidos @endif
                         </p>
                     </div>
                     <div class="flex items-baseline gap-2">

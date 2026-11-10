@@ -5,6 +5,9 @@
     @elseif ($lead && ! $video)
         <meta http-equiv="refresh" content="8">
     @endif
+    @if (! empty($medir))
+        <script>window.imocenaMedicao && imocenaMedicao.compra(@js($medir));</script>
+    @endif
     <main class="max-w-[760px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div class="flex items-center justify-between gap-4">
             <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>

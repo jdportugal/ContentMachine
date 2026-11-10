@@ -51,7 +51,7 @@ class NovoVideo
         if ($existente) {
             DB::table('leads')->where('id', $existente->id)->update($dados);
         } else {
-            DB::table('leads')->insert($dados + ['anuncio' => $anuncio, 'created_at' => now()]);
+            DB::table('leads')->insert($dados + ['anuncio' => $anuncio, 'origem' => \App\Services\Marketing\Origem::json(), 'created_at' => now()]);
         }
         DB::table('compras')->where('id', $compra->id)->update(['videos_usados' => DB::raw('videos_usados + 1'), 'updated_at' => now()]);
 

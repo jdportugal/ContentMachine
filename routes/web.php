@@ -53,6 +53,8 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
 
 // Stripe: the Payment Links' webhook, and where a buyer lands after paying.
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
+Route::view('/privacidade', 'privacidade')->name('privacidade');
+
 Route::get('/obrigado', function (LinkDeAcesso $contas) {
     $sessao = (string) request()->query('session_id', '');
     $compra = $sessao !== '' ? DB::table('compras')->where('sessao', $sessao)->first() : null;
@@ -64,8 +66,22 @@ Route::get('/obrigado', function (LinkDeAcesso $contas) {
         DB::table('compras')->where('id', $compra->id)->update(['login_em' => now()]);
     }
     $lead = $compra?->lead_id ? DB::table('leads')->find($compra->lead_id) : null;
+    // Attribution: the buyer's first touch (this browser's, else the free video's).
+    if ($compra && ! $compra->origem && ($origem = \App\Services\Marketing\Origem::json() ?? $lead?->origem)) {
+        DB::table('compras')->where('id', $compra->id)->update(['origem' => $origem]);
+    }
+    // The purchase is reported to Meta and Google once: the page carries it for the
+    // browser tags (after cookie consent), and the server sends it to Meta too.
+    $medir = null;
+    if ($compra && ! $compra->medido_em) {
+        $medir = ['id' => 'compra-'.$compra->id, 'valor' => round($compra->total / 100, 2), 'moeda' => strtoupper((string) ($compra->moeda ?: 'eur')), 'videos' => (int) $compra->videos];
+        DB::table('compras')->where('id', $compra->id)->update(['medido_em' => now()]);
+        app(\App\Services\Marketing\MetaConversoes::class)->enviar('Purchase', $medir['id'],
+            ['value' => $medir['valor'], 'currency' => $medir['moeda'], 'num_items' => $medir['videos'], 'content_type' => 'product'],
+            $compra->email, json_decode((string) ($compra->origem ?? $origem ?? 'null'), true));
+    }
 
-    return view('obrigado', ['compra' => $compra, 'lead' => $lead, 'video' => $lead ? app(LeadVideo::class)->ficheiro($lead) : null]);
+    return view('obrigado', ['compra' => $compra, 'lead' => $lead, 'video' => $lead ? app(LeadVideo::class)->ficheiro($lead) : null, 'medir' => $medir]);
 })->name('obrigado');
 
 // Passwordless sign-in: the signed link from the email (or the thank-you page's own sign-in).

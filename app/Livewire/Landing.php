@@ -97,6 +97,7 @@ class Landing extends Component
             'email' => $this->marketing ? $this->email : null,
             'marketing_em' => $this->marketing ? now() : null,
             'marketing_texto' => $this->marketing ? self::MARKETING : null,
+            'origem' => \App\Services\Marketing\Origem::json(),
             'updated_at' => now(),
         ];
         // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
@@ -112,6 +113,8 @@ class Landing extends Component
         }
         session(['lead_id' => $this->leadId]);
         $this->dispatch('lead-criado', id: $this->leadId);
+        // The same Lead from the server (with the browser's event id, so Meta counts it once).
+        app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], $this->marketing ? $this->email : null, \App\Services\Marketing\Origem::atual());
     }
 
     /** Ask for another listing's video (the session forgets the current one). */

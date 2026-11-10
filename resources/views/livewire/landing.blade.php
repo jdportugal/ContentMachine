@@ -158,7 +158,7 @@
                             </div>
                             <label class="flex gap-2.5 items-start text-[11px] leading-snug text-[#AEB5C1]">
                                 <input type="checkbox" wire:model="consentimento" class="mt-px w-3.5 h-3.5 shrink-0 accent-cyan">
-                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="#" class="text-ivory underline">Política de Privacidade</a> (RGPD).</span>
+                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="{{ route('privacidade') }}" target="_blank" class="text-ivory underline">Política de Privacidade</a> (RGPD).</span>
                             </label>
                             @error('consentimento') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
                             {{-- Promotional emails: a separate, optional, unticked opt-in (RGPD / Lei 41/2004). --}}
@@ -531,7 +531,8 @@
                 <span class="text-xs tracking-[.24em] text-ivory">EMPRESA</span>
                 <a href="mailto:{{ config('mail.from.address') }}" class="text-[#AEB5C1] hover:text-ivory">Contactos</a>
                 <a href="#" class="text-[#AEB5C1] hover:text-ivory">Termos e condições</a>
-                <a href="#" class="text-[#AEB5C1] hover:text-ivory">Política de privacidade</a>
+                <a href="{{ route('privacidade') }}" class="text-[#AEB5C1] hover:text-ivory">Política de privacidade</a>
+                <a href="#" data-cookies class="text-[#AEB5C1] hover:text-ivory">Preferências de cookies</a>
                 <a href="https://www.livroreclamacoes.pt" rel="noopener" class="text-[#AEB5C1] hover:text-ivory">Livro de Reclamações</a>
             </nav>
         </div>

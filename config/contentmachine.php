@@ -4,6 +4,14 @@ return [
 
     // Meta Pixel ID for the public site (empty = no pixel). Set META_PIXEL_ID.
     'meta_pixel' => env('META_PIXEL_ID', ''),
+    // Server-side Meta events (Conversions API): the token from Events Manager. Empty = off.
+    'meta_capi' => [
+        'token' => env('META_CAPI_TOKEN', ''),
+        'test_code' => env('META_CAPI_TEST_CODE', ''),   // Events Manager → Test events
+        'version' => env('META_GRAPH_VERSION', 'v23.0'),
+    ],
+    // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
+    'ga4' => env('GA_MEASUREMENT_ID', ''),
 
 
     /*
