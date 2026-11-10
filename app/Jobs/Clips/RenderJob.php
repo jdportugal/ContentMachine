@@ -121,6 +121,9 @@ class RenderJob implements ShouldQueue
         // Resolve image-reveal layers' image ids to absolute file paths.
         $plan['scenes'] = $this->resolveImages($plan['scenes'] ?? [], $p);
 
+        // The agent's end card says "Consultora" for a woman: the effect's own default is "Consultor imobiliário".
+        $plan['scenes'] = self::comCargo($plan['scenes'], (string) ($p->meta['listing']['gender'] ?? ''));
+
         // Attach each effect's sound (sfx-audio/<slug>.*) to the layers using it.
         $plan['scenes'] = $this->attachEffectAudio($plan['scenes'], app(EffectStore::class));
 
@@ -218,6 +221,28 @@ class RenderJob implements ShouldQueue
                 self::dispatch($p->id);
             }
         }
+    }
+
+    /**
+     * The agent card's role line, by the agent's gender (from the listing). Only cards
+     * with a name and no role of their own; an unknown gender leaves the effect's default.
+     */
+    public static function comCargo(array $scenes, string $gender): array
+    {
+        if (! in_array($gender, ['f', 'm'], true)) {
+            return $scenes;
+        }
+        foreach ($scenes as &$scene) {
+            foreach ($scene['layers'] ?? [] as $k => $layer) {
+                $params = (array) ($layer['params'] ?? []);
+                if (trim((string) ($params['name'] ?? '')) !== '' && trim((string) ($params['role'] ?? '')) === '') {
+                    $scene['layers'][$k]['params']['role'] = $gender === 'f' ? 'Consultora imobiliária' : 'Consultor imobiliário';
+                }
+            }
+        }
+        unset($scene);
+
+        return $scenes;
     }
 
     /**
