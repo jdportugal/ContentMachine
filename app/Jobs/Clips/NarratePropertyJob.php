@@ -80,7 +80,7 @@ class NarratePropertyJob implements ShouldQueue
             $takes = [];
             for ($i = 0; $i < max(1, (int) ($voice['takes'] ?? 1)); $i++) {
                 $takes[] = $audio = 'clips/uploads/'.Str::random(40).'.mp3';
-                $tts->synthesizeWith($script['voiceover'], $disk->path($audio), $voice['voice_id'], $voice['model'], $voice['stability'] ?? null);
+                $tts->synthesizeWith(ListingScriptWriter::pronunciaFalada(ListingScriptWriter::tipologiaFalada($script['voiceover'])), $disk->path($audio), $voice['voice_id'], $voice['model'], $voice['stability'] ?? null);
             }
 
             $p = $store->findOrFail($this->clipId);

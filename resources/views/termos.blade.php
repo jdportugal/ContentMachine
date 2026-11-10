@@ -22,7 +22,7 @@
         </p>
 
         <h2 class="{{ $h2 }}">2. O serviço</h2>
-        <p class="{{ $p }}">A partir do link de um anúncio de imóvel (RE/MAX ou iad Portugal), fazemos um vídeo vertical com as fotos do anúncio, efeitos, música e uma narração em português de Portugal gerada por inteligência artificial, terminando com o seu nome e contacto. Pode juntar fotos, escrever a sua narração e escolher a música.</p>
+        <p class="{{ $p }}">A partir do link de um anúncio de imóvel (RE/MAX, iad Portugal ou eXp Portugal), fazemos um vídeo vertical com as fotos do anúncio, efeitos, música e uma narração em português de Portugal gerada por inteligência artificial, terminando com o seu nome e contacto. Pode juntar fotos, escrever a sua narração e escolher a música.</p>
         <p class="{{ $p }}">O texto da narração e as legendas são escritos automaticamente a partir do anúncio e podem conter erros. Antes de publicar, confirme que o preço, as áreas e as restantes informações estão corretos. A responsabilidade pelo anúncio e pelo que publica é sua.</p>
 
         <h2 class="{{ $h2 }}">3. Conta</h2>

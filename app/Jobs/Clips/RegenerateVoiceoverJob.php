@@ -50,7 +50,7 @@ class RegenerateVoiceoverJob implements ShouldQueue
             $p->update(['status' => ClipRecord::STATUS_TRANSCRIBING, 'error' => null]);
 
             // Spoken "IAD Portugal", never "iad" (voiced "IA de Portugal").
-            $text = ListingScriptWriter::iadFalado(trim((string) ($this->text ?? $p->transcript['text'] ?? '')));
+            $text = ListingScriptWriter::expFalado(ListingScriptWriter::iadFalado(trim((string) ($this->text ?? $p->transcript['text'] ?? ''))));
             if ($text === '') {
                 throw new \RuntimeException('The clip has no transcript to speak.');
             }
@@ -62,7 +62,7 @@ class RegenerateVoiceoverJob implements ShouldQueue
             // A listing clip keeps its narrator (picked by the agent's gender), not the default voice.
             $voice = isset($p->meta['listing']['gender']) ? config('contentmachine.real_estate.voices.'.$p->meta['listing']['gender']) : null;
             $audio = $voice
-                ? app(ElevenLabsVoiceoverService::class)->synthesizeWith($text, "$dir/voz.mp3", $voice['voice_id'], $voice['model'], $voice['stability'] ?? null)
+                ? app(ElevenLabsVoiceoverService::class)->synthesizeWith(ListingScriptWriter::pronunciaFalada(ListingScriptWriter::tipologiaFalada($text)), "$dir/voz.mp3", $voice['voice_id'], $voice['model'], $voice['stability'] ?? null)
                 : $tts->synthesize($text, "$dir/voz.mp3");
             $transcript = $stt->transcribe($audio);
             $after = (float) ($transcript['duration'] ?? 0.0);

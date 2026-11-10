@@ -50,7 +50,7 @@
             @error('notas') <p class="mt-2 text-sm text-coral">{{ $message }}</p> @enderror
             @error('foto') <p class="mt-2 text-sm text-coral">{{ $message }}</p> @enderror
         </details>
-        <p class="mt-4 text-xs text-[#AEB5C1]">Lemos anúncios da RE/MAX e da iad Portugal. O vídeo fica pronto aqui em poucos minutos.</p>
+        <p class="mt-4 text-xs text-[#AEB5C1]">Lemos anúncios da RE/MAX, da iad Portugal e da eXp Portugal. O vídeo fica pronto aqui em poucos minutos.</p>
     </form>
 
     {{-- Lista --}}

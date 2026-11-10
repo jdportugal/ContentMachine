@@ -1,0 +1,15 @@
+{
+    "status": "active",
+    "enabled": true,
+    "kind": "code",
+    "prompt": "dynamic black background",
+    "slug": "preto-dinamico",
+    "display_name": "Preto dinâmico",
+    "description": "Fundo preto profundo com brilhos cinzentos muito suaves que derivam lentamente e um ligeiro pulsar de luz, para um ambiente sóbrio, elegante e moderno.",
+    "tsx": "import React from \"react\";\nimport { AbsoluteFill, useCurrentFrame, interpolate, Easing } from \"remotion\";\nimport type { PrimitiveProps } from \"../primitives\";\n\nconst BASE = \"#000000\";\nconst GLOW = \"255, 255, 255\";\n\nconst DynamicBlack: React.FC<PrimitiveProps> = ({ fps }) => {\n  const frame = useCurrentFrame();\n  const t = frame / fps;\n  const TAU = Math.PI * 2;\n\n  // Seamless periodic phases (seconds per cycle)\n  const a = (t / 23) * TAU;\n  const b = (t / 31) * TAU;\n  const c = (t / 41) * TAU;\n\n  // Eased breathing pulse on a repeating 12s phase\n  const phase = (t % 12) / 12;\n  const breath = interpolate(phase, [0, 0.5, 1], [0, 1, 0], {\n    easing: Easing.inOut(Easing.sin),\n  });\n\n  const blobs = [\n    { x: 30 + 18 * Math.sin(a), y: 25 + 12 * Math.cos(b), r: 900, o: 0.07 + 0.03 * breath },\n    { x: 72 + 15 * Math.cos(b), y: 62 + 14 * Math.sin(c), r: 1000, o: 0.06 + 0.02 * Math.sin(a) },\n    { x: 45 + 20 * Math.sin(c), y: 88 + 8 * Math.cos(a), r: 800, o: 0.05 + 0.02 * Math.cos(b) },\n  ];\n\n  // Slow diagonal light sweep that loops every 41s\n  const sweepX = 50 + 60 * Math.sin(c);\n\n  return (\n    <AbsoluteFill style={{ backgroundColor: BASE, overflow: \"hidden\" }}>\n      {blobs.map((bl, i) => (\n        <AbsoluteFill\n          key={i}\n          style={{\n            background: `radial-gradient(${bl.r}px circle at ${bl.x}% ${bl.y}%, rgba(${GLOW}, ${bl.o}) 0%, rgba(${GLOW}, 0) 70%)`,\n          }}\n        />\n      ))}\n      <AbsoluteFill\n        style={{\n          background: `linear-gradient(115deg, rgba(${GLOW}, 0) ${sweepX - 25}%, rgba(${GLOW}, 0.025) ${sweepX}%, rgba(${GLOW}, 0) ${sweepX + 25}%)`,\n        }}\n      />\n      <AbsoluteFill\n        style={{\n          background: \"radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.75) 100%)\",\n        }}\n      />\n    </AbsoluteFill>\n  );\n};\n\nexport default DynamicBlack;",
+    "id": "bg-aurjmpw8",
+    "created_at": "2026-10-23T12:28:29+00:00",
+    "updated_at": "2026-10-23T14:04:46+00:00",
+    "preview_path": "/Users/joaoferreira/Desktop/ContentMachine/storage/app/clips/backgrounds/preto-dinamico-9c68d4d7-3dd16d.mp4",
+    "error": null
+}

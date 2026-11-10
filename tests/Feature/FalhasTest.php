@@ -60,8 +60,19 @@ class FalhasTest extends TestCase
         $this->assertFalse(ListingScraper::supports('https://www.idealista.pt/imovel/12345678/'));
         $this->get('/')->assertOk()->assertDontSee('idealista');
         Livewire::test(Landing::class)->set(['anuncio' => 'https://www.idealista.pt/imovel/12345678/'])->call('pedir')
-            ->assertHasErrors('anuncio')->assertSee('RE/MAX e da iad Portugal');
+            ->assertHasErrors('anuncio')->assertSee('RE/MAX, da iad Portugal e da eXp Portugal');
         Queue::assertNothingPushed();
+    }
+
+    public function test_exp_listings_are_read_with_their_own_premium_theme(): void
+    {
+        $url = 'https://andreiaramalho.expportugal.com/imoveis/gois/moradia/vila-nova-do-ceira-1';
+        $this->assertSame('exp', ListingScraper::portal($url));
+        $this->assertFileExists(base_path('vault/themes/exp-premium/theme.json'));   // ships with the image
+        $this->get('/')->assertOk()->assertSee('eXp Portugal');
+
+        Livewire::test(Landing::class)->set(['anuncio' => $url])->call('pedir')->assertHasNoErrors();
+        Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === $url);
     }
 
     public function test_a_failed_video_is_made_again_once_with_the_same_options_and_the_customer_sees_it_in_progress(): void

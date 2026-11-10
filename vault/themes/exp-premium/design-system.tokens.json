@@ -1,0 +1,31 @@
+{
+    "colors": {
+        "bg": "#161617",
+        "bgAlt": "#1F1F21",
+        "bgContrast": "#0E0E0F",
+        "textOnBg": "#FFFFFF",
+        "textOnContrast": "#FFFFFF",
+        "mutedOnBg": "#B4B4B8",
+        "mutedOnContrast": "rgba(255,255,255,0.72)",
+        "accent": "#FFFFFF",
+        "accent2": "#D4D4D6",
+        "accent3": "#8E8E93"
+    },
+    "fonts": {
+        "display": "Manrope",
+        "body": "Manrope",
+        "mono": "JetBrains Mono",
+        "displayWeight": 300,
+        "bodyWeight": 400
+    },
+    "texture": {
+        "kind": "solid"
+    },
+    "style": {
+        "headline": "flat",
+        "shadow": "soft",
+        "panelBorder": 0,
+        "sharp": false,
+        "uppercaseTitles": false
+    }
+}

@@ -27,7 +27,11 @@ class ListingScriptWriter
     {
         // Over a reel that's already cut: about 2.3 spoken words a second, a breath at each end.
         $words = $seconds ? (int) round(max(8, $seconds - 1.5) * 2.3) : null;
-        $length = $words ? 'At most '.$words.' words (it is spoken over a '.round($seconds).'-second reel and must end before it does).' : '70–110 words.';
+        // A chosen length (e.g. 55 s): ElevenLabs reads ~3 words a second (measured); the end card's few seconds left off.
+        $target = (float) ($listing['target_seconds'] ?? 0);
+        $length = $words ? 'At most '.$words.' words (it is spoken over a '.round($seconds).'-second reel and must end before it does).'
+            : ($target > 0 ? 'About '.($want = (int) round(($target - 4) * 3.0)).' words — this is a '.round($target).'-second video: the guide\'s 70–110 word target does NOT apply. Count the words; use every fact in the listing (rooms, areas, floors, outside, location) to reach it.' : '70–110 words.');
+        $span = $target > 0 && ! $words ? round($target).'-second' : '30–40 second';
         $guide = (string) file_get_contents(resource_path('prompts/real-estate-voiceover.md'));
         $details = collect($listing['details'])->map(fn ($v, $k) => "{$k}: {$v}")->implode("\n");
         $price = $listing['price'] !== null
@@ -37,7 +41,7 @@ class ListingScriptWriter
         $greeting = (int) now('Europe/Lisbon')->format('G') < 13 ? 'Bom dia' : 'Boa tarde';
 
         $system = <<<SYS
-        You write voiceovers for 30–40 second vertical real estate videos in European Portuguese (pt-PT).
+        You write voiceovers for {$span} vertical real estate videos in European Portuguese (pt-PT).
 
         Follow this guide strictly:
 
@@ -96,6 +100,10 @@ class ListingScriptWriter
                 throw new RuntimeException('The script writer kept a placeholder in the voiceover: '.Str::limit((string) $out['voiceover'], 200));
             }
         }
+        // A chosen length: the guide's usual 70–110 words pulls it short. One retry, told the count.
+        if (isset($want) && ($n = count(preg_split('/\s+/u', trim((string) ($out['voiceover'] ?? '')), -1, PREG_SPLIT_NO_EMPTY))) > 0 && $n < $want * 0.9) {
+            $out = $this->json((string) ($this->runClaude($user."\n\nYour previous voiceover had {$n} words; it must have about {$want}. Write it again, longer, with more of the listing's facts:\n".$out['voiceover'], $system, ['maxTurns' => 1])['result'] ?? '')) ?: $out;
+        }
         if (trim((string) ($out['voiceover'] ?? '')) === '') {
             throw new RuntimeException('The script writer returned no voiceover.');
         }
@@ -104,7 +112,7 @@ class ListingScriptWriter
             'title' => trim((string) ($out['title'] ?? $listing['title'])),
             'hook' => trim((string) ($out['hook'] ?? '')),
             // Spoken text: "RE/MAX" is read out with the slash ("re barra max").
-            'voiceover' => self::iadFalado(self::semBarra(trim((string) $out['voiceover']))),
+            'voiceover' => self::expFalado(self::iadFalado(self::semBarra(trim((string) $out['voiceover'])))),
             'scenes' => is_array($out['scenes'] ?? null) ? $out['scenes'] : [],
             'flags' => array_values(array_filter(array_map('strval', (array) ($out['flags'] ?? [])))),
             'message' => trim((string) ($out['message'] ?? '')),
@@ -118,7 +126,7 @@ class ListingScriptWriter
      */
     public static function withAfterIntroLine(string $voiceover, string $line): string
     {
-        $line = trim($line);
+        $line = self::expFalado(self::iadFalado(trim($line)));
         if ($line === '' || str_contains(Str::lower($voiceover), Str::lower(rtrim($line, '.!?')))) {
             return $voiceover;
         }
@@ -140,6 +148,40 @@ class ListingScriptWriter
     public static function iadFalado(string $text): string
     {
         return preg_replace('/\biad\b(?:\s+(?:de\s+)?Portugal\b)?/iu', 'IAD Portugal', $text);
+    }
+
+    /** Spoken eXp: "E X P", so ElevenLabs says the letters instead of reading it as a word. */
+    public static function expFalado(string $text): string
+    {
+        return preg_replace('/\bexp\b/iu', 'E X P', $text);
+    }
+
+    /**
+     * Words the voice gets wrong, spelled for speech (clients complained):
+     * "logradouro" came out as "lugar" (hyphenated spelling made it choppy), "Pegos" with an open e, "Vision" read in Portuguese.
+     */
+    private const PRONUNCIA = [
+        'logradouro' => 'logradôro',
+        'Pegos' => 'Pêgos',
+        'Vision' => 'Víjan',
+    ];
+
+    public static function pronunciaFalada(string $text): string
+    {
+        foreach (self::PRONUNCIA as $word => $said) {
+            $text = preg_replace('/\b'.preg_quote($word, '/').'\b/iu', $said, $text);
+        }
+
+        return $text;
+    }
+
+    /** Spoken "T2+1": "tê dois mais um" — as written, ElevenLabs says "T, um" or reads the letters. */
+    public static function tipologiaFalada(string $text): string
+    {
+        $n = ['zero', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez'];
+        $dito = fn (string $d) => $n[(int) $d] ?? $d;
+
+        return preg_replace_callback('/\bT(\d{1,2})(?:\s*\+\s*(\d{1,2}))?(?![\p{L}\p{N}])/iu', fn ($m) => 'tê '.$dito($m[1]).(isset($m[2]) ? ' mais '.$dito($m[2]) : ''), $text);
     }
 
     private function json(string $content): array

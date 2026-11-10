@@ -57,7 +57,7 @@
         ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa custa 20 €, ou a partir de 8,75 € com um pack.'],
         ['Quanto tempo demora?', 'Poucos minutos. Mantenha a página aberta: o vídeo aparece no mesmo sítio onde colou o link.'],
         ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
-        ['De que sites leem os anúncios?', 'RE/MAX e iad Portugal. Basta copiar o link da barra de endereço do anúncio.'],
+        ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal e eXp Portugal (incluindo os sites dos consultores eXp). Basta copiar o link da barra de endereço do anúncio.'],
         ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
         ['Posso alterar o texto da narração?', 'Na sua conta, sim: pode deixar uma nota (preço novo, algo a destacar) e o texto muda antes de ser gravado.'],
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
@@ -173,7 +173,7 @@
                             <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
                                 <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
                                 <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
-                                <span class="text-[#8B95A7]">Lê anúncios da RE/MAX e iad Portugal</span>
+                                <span class="text-[#8B95A7]">Lê anúncios da RE/MAX, iad e eXp</span>
                             </div>
                         </form>
                     @endif
@@ -260,6 +260,7 @@
             <span class="tracking-[.24em]">LÊ ANÚNCIOS DE</span>
             <span class="text-xl font-semibold text-[#E4E6EA]">RE/MAX</span>
             <span class="text-xl font-semibold text-[#E4E6EA]">iad Portugal</span>
+            <span class="text-xl font-semibold text-[#E4E6EA]">eXp Portugal</span>
         </div>
     </section>
 

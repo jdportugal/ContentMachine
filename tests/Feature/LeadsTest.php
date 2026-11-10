@@ -79,7 +79,7 @@ class LeadsTest extends TestCase
 
         $this->pedir(['anuncio' => 'https://www.example.com/casa'])
             ->assertHasErrors(['anuncio'])
-            ->assertSee('RE/MAX e da iad Portugal');
+            ->assertSee('RE/MAX, da iad Portugal e da eXp Portugal');
 
         $this->assertSame(0, DB::table('leads')->count());
         Queue::assertNothingPushed();
