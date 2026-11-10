@@ -145,10 +145,12 @@ class LeadsTest extends TestCase
         $this->get(URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1]))->assertOk()->assertDownload('imocena-video.mp4');
     }
 
-    public function test_a_failed_reel_says_so(): void
+    public function test_a_failed_reel_is_retried_first_and_only_then_says_so(): void
     {
         $this->leadCom(ClipRecord::STATUS_FAILED);
+        Livewire::test(Landing::class)->assertSee('A tentar outra vez')->assertDontSee('Não conseguimos fazer este vídeo');
 
+        DB::table('leads')->update(['falhou_em' => now()]);
         Livewire::test(Landing::class)->assertSee('Não conseguimos fazer este vídeo');
     }
 
@@ -176,12 +178,15 @@ class LeadsTest extends TestCase
         $this->assertNotNull(DB::table('leads')->value('pronto_em'));
     }
 
-    public function test_a_failed_lead_is_flagged(): void
+    public function test_a_failed_lead_is_made_again_once_and_then_flagged(): void
     {
         $this->leadCom(ClipRecord::STATUS_FAILED);
 
         $this->artisan('leads:atualizar')->assertSuccessful();
+        $this->assertNull(DB::table('leads')->value('falhou_em'));   // second attempt under way
 
+        app(ClipStore::class)->find(DB::table('leads')->value('clip_id'))->update(['status' => ClipRecord::STATUS_FAILED]);
+        $this->artisan('leads:atualizar')->assertSuccessful();
         $this->assertNotNull(DB::table('leads')->value('falhou_em'));
     }
 
@@ -200,7 +205,7 @@ class LeadsTest extends TestCase
     public function test_a_failed_attempt_does_not_use_up_the_free_video(): void
     {
         $this->leadCom(ClipRecord::STATUS_FAILED);
-        $this->artisan('leads:atualizar')->assertSuccessful();
+        DB::table('leads')->update(['falhou_em' => now()]);   // failed twice (see RecuperarVideo)
 
         Livewire::test(Landing::class)->call('outro');
         $this->pedir()->assertHasNoErrors('anuncio');
