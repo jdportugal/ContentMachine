@@ -156,13 +156,8 @@
                             <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
                                 <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>
                             </div>
+                            {{-- The one box: optional, unticked opt-in to new-listing alerts and news (RGPD / Lei 41/2004). --}}
                             <label class="flex gap-2.5 items-start text-[11px] leading-snug text-[#AEB5C1]">
-                                <input type="checkbox" wire:model="consentimento" class="mt-px w-3.5 h-3.5 shrink-0 accent-cyan">
-                                <span>Sou o consultor deste anúncio e aceito que a Imocena use os dados do anúncio (incluindo o meu nome e contacto) para criar o vídeo e me contactar sobre ele, de acordo com a <a href="{{ route('privacidade') }}" target="_blank" class="text-ivory underline">Política de Privacidade</a> (RGPD).</span>
-                            </label>
-                            @error('consentimento') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
-                            {{-- Promotional emails: a separate, optional, unticked opt-in (RGPD / Lei 41/2004). --}}
-                            <label class="-mt-1.5 flex gap-2.5 items-start text-[11px] leading-snug text-[#AEB5C1]">
                                 <input type="checkbox" wire:model.live="marketing" class="mt-px w-3.5 h-3.5 shrink-0 accent-cyan">
                                 <span>{{ \App\Livewire\Landing::MARKETING }} <span class="text-[#8B95A7]">(Opcional)</span></span>
                             </label>
@@ -174,6 +169,7 @@
                                     @error('email') <p class="mt-1.5 text-[13px] text-coral">{{ $message }}</p> @enderror
                                 </div>
                             @endif
+                            <p class="text-[11px] leading-snug text-[#8B95A7]">Ao pedir, confirma que é o consultor deste anúncio e aceita os <a href="{{ route('termos') }}" target="_blank" class="text-ivory underline">termos</a> e a <a href="{{ route('privacidade') }}" target="_blank" class="text-ivory underline">política de privacidade</a>.</p>
                             <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
                                 <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
                                 <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>

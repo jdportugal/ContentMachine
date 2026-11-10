@@ -16,11 +16,11 @@
 
         <h2 class="{{ $h2 }}">Que dados tratamos e porquê</h2>
         <ul class="mt-4 list-disc pl-5">
-            <li class="{{ $li }}"><strong class="text-ivory">Dados do anúncio</strong> que nos indica (fotos, descrição, preço, e o nome e contacto do consultor que constam do anúncio), para fazer o vídeo e o contactar sobre ele. Base: o pedido que nos faz e o seu consentimento no formulário.</li>
+            <li class="{{ $li }}"><strong class="text-ivory">Dados do anúncio</strong> que nos indica (fotos, descrição, preço, e o nome e contacto do consultor que constam do anúncio), para fazer o vídeo e o contactar sobre ele. Base: o pedido que nos faz (execução do serviço).</li>
             <li class="{{ $li }}"><strong class="text-ivory">Conta</strong>: email e nome, para entrar sem palavra-passe (link por email) e guardar os seus vídeos. Base: execução do serviço.</li>
             <li class="{{ $li }}"><strong class="text-ivory">Compras</strong>: nome, email, NIF e valor, para processar o pagamento e emitir a fatura. Os dados do cartão são tratados pelo Stripe e não chegam até nós. Base: contrato e obrigações legais.</li>
             <li class="{{ $li }}"><strong class="text-ivory">Conteúdos que envia</strong> (fotos, texto da narração, logótipo, música), só para fazer e editar os seus vídeos.</li>
-            <li class="{{ $li }}"><strong class="text-ivory">Emails de novidades</strong>, só se o pedir. Pode cancelar em qualquer email.</li>
+            <li class="{{ $li }}"><strong class="text-ivory">Avisos de imóveis novos e novidades</strong>, só se marcar a opção no pedido do vídeo: guardamos o seu email e consultamos uma vez por dia os seus anúncios públicos no portal, para o avisar quando publicar um imóvel novo. Base: o seu consentimento, que pode retirar com um clique em qualquer email.</li>
             <li class="{{ $li }}"><strong class="text-ivory">Origem da visita</strong> (por exemplo, a campanha ou o site de onde veio) e endereço IP, para segurança e para saber que canais trazem clientes. Base: interesse legítimo.</li>
             <li class="{{ $li }}"><strong class="text-ivory">Medição de anúncios</strong> (Meta e Google), só com a sua autorização no aviso de cookies. Ver abaixo.</li>
         </ul>

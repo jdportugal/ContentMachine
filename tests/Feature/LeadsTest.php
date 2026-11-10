@@ -77,8 +77,8 @@ class LeadsTest extends TestCase
     {
         Queue::fake();
 
-        $this->pedir(['anuncio' => 'https://www.example.com/casa', 'consentimento' => false])
-            ->assertHasErrors(['anuncio', 'consentimento'])
+        $this->pedir(['anuncio' => 'https://www.example.com/casa'])
+            ->assertHasErrors(['anuncio'])
             ->assertSee('RE/MAX, iad e idealista');
 
         $this->assertSame(0, DB::table('leads')->count());

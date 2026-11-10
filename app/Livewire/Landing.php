@@ -27,13 +27,15 @@ use Livewire\Component;
 class Landing extends Component
 {
     /**
-     * The promotional-email opt-in, word for word. Stored with each consent as proof
-     * of what was agreed to, so change the wording here, never in the view.
+     * The only box on the form, optional and never pre-ticked: new-listing alerts and
+     * news by email (RGPD / Lei 41/2004). Stored word for word with each consent as
+     * proof of what was agreed to, so change the wording here, never in the view.
      */
-    public const MARKETING = 'Quero receber emails da Imocena com novidades, dicas e promoções. É opcional e pode cancelar a qualquer momento, com um clique em qualquer email.';
+    public const MARKETING = 'Avisem-me por email quando eu publicar um imóvel novo, para fazer o vídeo dele (a Imocena consulta os meus anúncios públicos), e enviem-me novidades. Cancelo quando quiser, com um clique.';
 
     public string $anuncio = '';
 
+    /** Kept for old callers; the form now shows a notice under the button instead of a box (delivering the requested video is RGPD art. 6.º, n.º 1, b)). */
     public bool $consentimento = false;
 
     /** Optional and never pre-ticked: the free video doesn't depend on it. */
@@ -75,13 +77,11 @@ class Landing extends Component
                 fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista. Cole o link de um desses sites.'),
                 // A failed attempt does not use up the free video: only leads that did not fail count.
                 fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->whereNull('falhou_em')->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
-            'consentimento' => 'accepted',
             'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],
         ], [
             'anuncio.required' => 'Cole o link do anúncio.',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
-            'consentimento.accepted' => 'Para criarmos o vídeo, precisamos do seu consentimento.',
-            'email.required' => 'Indique o email onde quer receber as novidades.',
+            'email.required' => 'Indique o email onde quer receber os avisos.',
         ]);
         RateLimiter::hit($chave, 3600);
 

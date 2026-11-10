@@ -32,4 +32,19 @@ class LegalTest extends TestCase
 
         $this->actingAs(User::factory()->cliente()->create())->get('/conta')->assertOk()->assertSee('/termos', false);
     }
+
+    public function test_the_free_video_form_has_one_optional_box_and_a_notice(): void
+    {
+        $html = $this->get('/')->assertOk()
+            ->assertSee('Ao pedir, confirma que é o consultor deste anúncio')
+            ->assertSee('Avisem-me por email quando eu publicar um imóvel novo')->assertSee('(Opcional)')
+            ->getContent();
+        $form = substr($html, strpos($html, 'Peça o seu vídeo grátis'), 9000);
+        $this->assertSame(1, substr_count($form, 'type="checkbox"'), 'one box only');
+
+        // Nothing to tick to get the video.
+        \Illuminate\Support\Facades\Queue::fake();
+        \Livewire\Livewire::test(\App\Livewire\Landing::class)->set('anuncio', 'https://www.remax.pt/pt/imoveis/moradia-t3/515151')->call('pedir')->assertHasNoErrors();
+        $this->assertNotNull(\Illuminate\Support\Facades\DB::table('leads')->value('consentimento_em'));
+    }
 }
