@@ -194,12 +194,13 @@ class ContaTest extends TestCase
         mkdir($dir, 0777, true);
         file_put_contents($dir.'/lofi-animado.mp3', 'MP3');
         file_put_contents($dir.'/corporativo.mp3', 'MP3');
+        file_put_contents($dir.'/elevacao.mp3', 'MP3');
         $this->app->singleton(\App\Services\Shorts\MusicLibrary::class, fn () => new \App\Services\Shorts\MusicLibrary($dir));
         $user = $this->cliente();
         $lead = $this->videoDe($user);
 
         $this->actingAs($user)->get('/conta/videos/'.$lead->id.'/editar')->assertOk()
-            ->assertSee('Lofi animado')->assertSee('Corporativo')->assertSee('/conta/musicas/lofi-animado.mp3', false)->assertSee('Ouvir Lofi animado');
+            ->assertSee('Lofi animado')->assertSee('Corporativo')->assertSee('Elevação')->assertSee('/conta/musicas/lofi-animado.mp3', false)->assertSee('Ouvir Lofi animado');
         $this->get('/conta/musicas/lofi-animado.mp3')->assertOk();
 
         Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])

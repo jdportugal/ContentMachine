@@ -316,7 +316,10 @@ class EditarVideo extends Component
 
     public static function titulo(string $ficheiro): string
     {
-        return Str::of(pathinfo($ficheiro, PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish()->ucfirst()->toString();
+        $titulo = Str::of(pathinfo($ficheiro, PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish()->ucfirst()->toString();
+
+        // File names carry no accents; the Portuguese words they stand for do.
+        return strtr($titulo, ['Elevacao' => 'Elevação', 'Energetico' => 'Energético', 'Dinamico' => 'Dinâmico', 'Classico' => 'Clássico', 'Calmo' => 'Calmo']);
     }
 
     public function render(MusicLibrary $biblioteca)
