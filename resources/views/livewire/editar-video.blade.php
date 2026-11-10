@@ -211,10 +211,29 @@
 
         {{-- 4 · Música --}}
         <section class="flex flex-col gap-4">
-            {!! $passo(4, 'Música', 'Agora: '.$musicaAtual.'. Envie a sua (MP3, M4A ou WAV) ou retire a música.') !!}
+            {!! $passo(4, 'Música', 'Agora: '.$musicaAtual.'. Toque em ▶ para ouvir, escolha outra, envie a sua ou retire a música.') !!}
+            @if ($faixas !== [])
+                <div class="flex flex-col gap-2 {{ $semMusica || $musica ? 'opacity-40 pointer-events-none' : '' }}">
+                    @foreach ($faixas as $f)
+                        <div wire:key="faixa-{{ $f['nome'] }}" x-data
+                             class="flex items-center gap-3 min-h-[56px] rounded-[14px] border px-4 py-2 {{ $faixa === $f['nome'] ? 'border-cyan bg-cyan/10' : 'border-ivory/15' }}">
+                            <label class="flex flex-1 items-center gap-3 min-w-0 cursor-pointer">
+                                <input type="radio" wire:model.live="faixa" value="{{ $f['nome'] }}" class="w-5 h-5 accent-cyan">
+                                <span class="truncate text-[15px] text-ivory">{{ $f['titulo'] }}</span>
+                            </label>
+                            <audio x-ref="som" data-faixa src="{{ $f['ouvir'] }}" preload="none" wire:ignore
+                                   x-on:play="$el.closest('div').querySelector('[data-icone]').textContent = '❚❚'"
+                                   x-on:pause="$el.closest('div').querySelector('[data-icone]').textContent = '▶'"></audio>
+                            <button type="button" aria-label="Ouvir {{ $f['titulo'] }}"
+                                    x-on:click="document.querySelectorAll('audio[data-faixa]').forEach(o => o !== $refs.som && o.pause()); $refs.som.paused ? $refs.som.play() : $refs.som.pause()"
+                                    class="shrink-0 w-11 h-11 rounded-full border border-ivory/30 text-ivory text-sm flex items-center justify-center"><span data-icone>▶</span></button>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
             <label class="flex items-center justify-center min-h-[56px] rounded-[14px] border border-dashed border-ivory/30 text-sm text-ivory cursor-pointer {{ $semMusica ? 'opacity-40 pointer-events-none' : '' }}">
                 <input type="file" accept="audio/*" wire:model="musica" class="sr-only">
-                {{ $musica ? '♪ '.\Illuminate\Support\Str::limit($musica->getClientOriginalName(), 34) : 'Escolher ficheiro de música' }}
+                {{ $musica ? '♪ '.\Illuminate\Support\Str::limit($musica->getClientOriginalName(), 34) : 'Ou envie a sua música (MP3, M4A ou WAV)' }}
             </label>
             <div wire:loading wire:target="musica" class="text-xs text-[#AEB5C1]">A enviar…</div>
             @error('musica') <span class="text-sm text-coral">{{ $message }}</span> @enderror

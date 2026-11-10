@@ -148,7 +148,7 @@ class ContaTest extends TestCase
             ->assertSee('Narração')->assertSee('Moradia com vista para a serra.')
             ->assertSee('CENA 1')->assertSee('CENA 2')->assertSee('/conta/videos/'.$lead->id.'/imagens/img_a', false)
             ->assertDontSee('Sala ampla')                       // scenes show pictures and effects, no text
-            ->assertSee('Licença AMI')->assertSee('Logótipo da agência')->assertSee('Escolher ficheiro de música')
+            ->assertSee('Licença AMI')->assertSee('Logótipo da agência')->assertSee('Ou envie a sua música')
             ->assertSee('Edição 1 de 2');
         $this->get('/conta/videos/'.$lead->id.'/imagens/img_a')->assertOk();
 
@@ -185,6 +185,30 @@ class ContaTest extends TestCase
         $this->assertSame(ClipRecord::STATUS_RENDERING, $clip->status);
         Queue::assertPushed(RenderJob::class);              // same words: no new voice
         Queue::assertNotPushed(RegenerateVoiceoverJob::class);
+    }
+
+    public function test_the_editor_offers_the_imocena_tracks_to_hear_and_pick(): void
+    {
+        Queue::fake();
+        $dir = sys_get_temp_dir().'/cm-musicas-'.uniqid();
+        mkdir($dir, 0777, true);
+        file_put_contents($dir.'/lofi-animado.mp3', 'MP3');
+        file_put_contents($dir.'/corporativo.mp3', 'MP3');
+        $this->app->singleton(\App\Services\Shorts\MusicLibrary::class, fn () => new \App\Services\Shorts\MusicLibrary($dir));
+        $user = $this->cliente();
+        $lead = $this->videoDe($user);
+
+        $this->actingAs($user)->get('/conta/videos/'.$lead->id.'/editar')->assertOk()
+            ->assertSee('Lofi animado')->assertSee('Corporativo')->assertSee('/conta/musicas/lofi-animado.mp3', false)->assertSee('Ouvir Lofi animado');
+        $this->get('/conta/musicas/lofi-animado.mp3')->assertOk();
+
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])
+            ->assertSet('faixa', '')->set('faixa', 'lofi-animado.mp3')->call('guardar')->assertHasNoErrors();
+        $clip = app(ClipStore::class)->find($lead->clip_id);
+        $this->assertSame('lofi-animado.mp3', $clip->meta['musica']);
+
+        // Reopened, the chosen track is the current one.
+        Livewire::actingAs($user)->test(EditarVideo::class, ['lead' => $lead->id])->assertSet('faixa', 'lofi-animado.mp3')->assertSee('Agora: Lofi animado');
     }
 
     public function test_a_new_voiceover_is_spoken_again_and_only_two_edits_are_free(): void

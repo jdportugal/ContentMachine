@@ -66,7 +66,7 @@ class NovoVideoTest extends TestCase
         $this->actingAs($user)->get('/conta')->assertSee('/conta/novo', false);
         $this->get('/conta/novo')->assertOk()
             ->assertSee('O anúncio')->assertSee('Arraste as fotos para aqui')->assertSee('Escrevo eu')
-            ->assertSee('Manha Calma')->assertSee('/conta/musicas/manha-calma.mp3', false)->assertSee('Sem música')
+            ->assertSee('Manha calma')->assertSee('/conta/musicas/manha-calma.mp3', false)->assertSee('Sem música')
             ->assertSee('Usa 1 dos seus 1 vídeo');
         $this->get('/conta/musicas/manha-calma.mp3')->assertOk();
         $this->get('/conta/musicas/nao-existe.mp3')->assertNotFound();

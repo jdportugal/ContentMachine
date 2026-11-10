@@ -108,11 +108,7 @@ class NovoVideoPagina extends Component
     {
         return view('livewire.novo-video', [
             'creditos' => Auth::user()->creditos(),
-            'faixas' => array_map(fn ($f) => [
-                'nome' => $f['name'],
-                'titulo' => Str::of(pathinfo($f['name'], PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish()->title()->toString(),
-                'ouvir' => route('conta.musica', ['nome' => $f['name']]),
-            ], $biblioteca->all()),
+            'faixas' => EditarVideo::faixas($biblioteca),
         ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Services\Clips\Store\ClipRecord;
 use App\Services\Contas\AmostrasDeEfeitos;
 use App\Services\Contas\EdicaoDeVideo;
 use App\Services\Leads\LeadVideo;
+use App\Services\Shorts\MusicLibrary;
 use App\Services\Themes\ThemeContext;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,9 @@ class EditarVideo extends Component
 
     public bool $semMusica = false;
 
+    /** A track from the Imocena library ('' = keep the current music). */
+    public string $faixa = '';
+
     public float $volume = 0.1;
 
     /** The scene whose picture is being swapped (its picker open). */
@@ -76,6 +80,8 @@ class EditarVideo extends Component
         $this->telefone = (string) ($listing['phone'] ?? '');
         $this->licenca = preg_replace('/\D/', '', (string) ($listing['licence'] ?? ''));
         $this->semMusica = ($clip->meta['musica'] ?? '') === 'nenhuma';
+        $escolhida = (string) ($clip->meta['musica'] ?? '');
+        $this->faixa = in_array($escolhida, ['', 'aleatoria', 'propria', 'nenhuma'], true) ? '' : $escolhida;
         $this->volume = (float) ($clip->meta['musica_volume'] ?? 0.1);
     }
 
@@ -280,6 +286,9 @@ class EditarVideo extends Component
         } elseif ($this->musica) {
             $meta['musica_ficheiro'] = $disk->path($this->musica->store('clips/uploads', config('contentmachine.clips.disk')));
             $meta['musica'] = 'propria';
+        } elseif ($this->faixa !== '' && app(MusicLibrary::class)->pathFor($this->faixa) !== null) {
+            $meta['musica'] = basename($this->faixa);
+            unset($meta['musica_ficheiro']);
         } elseif (($meta['musica'] ?? '') === 'nenhuma') {
             $meta['musica'] = 'aleatoria';
         }
@@ -295,7 +304,22 @@ class EditarVideo extends Component
         $this->redirect(route('conta'), navigate: false);
     }
 
-    public function render()
+    /** The library's tracks, with a title and a link to hear each one. */
+    public static function faixas(MusicLibrary $biblioteca): array
+    {
+        return array_map(fn ($f) => [
+            'nome' => $f['name'],
+            'titulo' => self::titulo($f['name']),
+            'ouvir' => route('conta.musica', ['nome' => $f['name']]),
+        ], $biblioteca->all());
+    }
+
+    public static function titulo(string $ficheiro): string
+    {
+        return Str::of(pathinfo($ficheiro, PATHINFO_FILENAME))->replace(['-', '_'], ' ')->squish()->ucfirst()->toString();
+    }
+
+    public function render(MusicLibrary $biblioteca)
     {
         $clip = $this->clip() ?? abort(404);
         $imagens = EdicaoDeVideo::imagens($clip);
@@ -316,7 +340,13 @@ class EditarVideo extends Component
             'permitidas' => EdicaoDeVideo::permitidas($clip),
             'creditos' => Auth::user()->creditos(),
             'aFazer' => $clip->isActive(),
-            'musicaAtual' => ($clip->meta['musica'] ?? '') === 'propria' ? 'A sua música' : (($clip->meta['musica'] ?? '') === 'nenhuma' ? 'Sem música' : 'Música da Imocena'),
+            'musicaAtual' => match ($m = (string) ($clip->meta['musica'] ?? '')) {
+                'propria' => 'A sua música',
+                'nenhuma' => 'Sem música',
+                '', 'aleatoria' => isset($clip->meta['musica_usada']) ? self::titulo((string) $clip->meta['musica_usada']) : 'Música da Imocena',
+                default => self::titulo($m),
+            },
+            'faixas' => self::faixas($biblioteca),
             'comprar' => (string) config('contentmachine.stripe.links.avulso') !== ''
                 ? config('contentmachine.stripe.links.avulso').'?'.http_build_query(['prefilled_email' => Auth::user()->email, 'locale' => 'pt'])
                 : 'mailto:'.config('mail.from.address'),
