@@ -1,6 +1,6 @@
 @props(['codigo', 'titulo', 'texto'])
 {{-- Branded error page (404, 419, 500, 503): same look as the site, a way home and to the free video. --}}
-<x-layouts.site :title="'Imocena · '.$titulo">
+<x-layouts.site :title="'Imocena · '.strip_tags($titulo)">
     <main class="min-h-screen flex flex-col">
         <header class="max-w-[1240px] w-full mx-auto px-6 pt-8">
             <a href="{{ url('/') }}" class="inline-flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>

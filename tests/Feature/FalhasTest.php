@@ -52,7 +52,7 @@ class FalhasTest extends TestCase
     public function test_a_missing_page_is_branded_and_leads_back_to_the_free_video(): void
     {
         $this->get('/nao-existe-esta-pagina')->assertNotFound()
-            ->assertSee('Esta página')->assertSee('não existe.', false)->assertSee('Pedir o vídeo grátis')->assertSee('ERRO 404');
+            ->assertSee('Esta página')->assertSee('não existe.', false)->assertSee('Pedir o vídeo grátis')->assertSee('ERRO 404')->assertSee('<title>Imocena · Esta página não existe.</title>', false);
     }
 
     public function test_idealista_is_no_longer_offered_or_accepted(): void
