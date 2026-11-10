@@ -63,7 +63,7 @@ class NovoVideo
     {
         return [
             'anuncio' => ['required', 'url:https,http', 'max:500',
-                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista.')],
+                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM)],
         ];
     }
 

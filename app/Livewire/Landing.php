@@ -74,7 +74,7 @@ class Landing extends Component
         $this->email = trim($this->email);
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500',
-                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista. Cole o link de um desses sites.'),
+                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
                 // A failed attempt does not use up the free video: only leads that did not fail count.
                 fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->whereNull('falhou_em')->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
             'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],
@@ -137,8 +137,12 @@ class Landing extends Component
                 'video' => URL::signedRoute('lead.video', ['lead' => $lead->id]),
                 'descarregar' => URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1])];
         }
-        if (! $clip || $clip->status === ClipRecord::STATUS_FAILED) {
+        if ($lead->falhou_em) {
             return ['estado' => 'falhou'];
+        }
+        // A failed clip is made again automatically once (RecuperarVideo) before it counts as failed.
+        if (! $clip || $clip->status === ClipRecord::STATUS_FAILED) {
+            return ['estado' => 'a-fazer', 'etapa' => 'A tentar outra vez', 'pct' => 10];
         }
         [$etapa, $pct] = Imoveis::ESTADOS[$clip->status] ?? ['A preparar', 10];
 

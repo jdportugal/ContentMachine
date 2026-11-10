@@ -7,6 +7,10 @@ use App\Services\Contas\EdicaoDeVideo;
 use App\Services\Contas\LinkDeAcesso;
 use App\Services\Contas\NovoVideo;
 use App\Services\Leads\LeadVideo;
+use App\Services\RealEstate\ListingImport;
+use App\Services\RealEstate\ListingScraper;
+use App\Services\Themes\ThemeRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Livewire\Attributes\Layout;
@@ -35,20 +39,41 @@ class Conta extends Component
         $this->reset('anuncio');
     }
 
+    /** A video that failed (twice): try again. A paid one spends the video that was given back; a free one stays free. */
+    public function tentarDeNovo(int $leadId, NovoVideo $novo, ListingImport $import, ThemeRepository $temas): void
+    {
+        $user = Auth::user();
+        $lead = DB::table('leads')->where('id', $leadId)->where('user_id', $user->id)->whereNotNull('falhou_em')->first();
+        if (! $lead) {
+            return;
+        }
+        if ($lead->devolvido_em) {
+            if ($erro = $novo->criar($user, $lead->anuncio)) {
+                session()->flash('editado', $erro);
+            }
+
+            return;
+        }
+        $clip = $import->start($lead->anuncio, ['free_lead' => true, 'theme' => $temas->forPortal(ListingScraper::portal($lead->anuncio))->slug]);
+        DB::table('leads')->where('id', $lead->id)->update(['clip_id' => $clip->id, 'falhou_em' => null, 'pronto_em' => null, 'updated_at' => now()]);
+    }
+
     public function render(LeadVideo $videos)
     {
         $user = Auth::user();
         $lista = LinkDeAcesso::leads($user)->map(function ($lead) use ($videos) {
             $clip = $videos->clip($lead);
             $pronto = (bool) $videos->ficheiro($lead);
-            [$etapa, $pct] = Imoveis::ESTADOS[$clip?->status] ?? ['A preparar', 10];
+            // A failed clip is retried automatically (RecuperarVideo): only a lead marked failed is a failure.
+            [$etapa, $pct] = $clip && $clip->status !== ClipRecord::STATUS_FAILED ? (Imoveis::ESTADOS[$clip->status] ?? ['A preparar', 10]) : ['A tentar outra vez', 10];
 
             return (object) [
                 'id' => $lead->id,
                 'edicoesRestantes' => $clip ? max(0, EdicaoDeVideo::permitidas($clip) - EdicaoDeVideo::feitas($clip)) : 0,
                 'anuncio' => $lead->anuncio,
                 'titulo' => $clip?->title ?: $lead->anuncio,
-                'estado' => $pronto ? 'pronto' : (! $clip || $clip->status === ClipRecord::STATUS_FAILED ? 'falhou' : 'a-fazer'),
+                'estado' => $pronto ? 'pronto' : ($lead->falhou_em ? 'falhou' : 'a-fazer'),
+                'devolvido' => (bool) ($lead->devolvido_em ?? null),
                 'limpo' => $pronto && empty($clip?->meta['free_lead']),
                 'etapa' => $etapa, 'pct' => $pct,
                 'video' => $pronto ? URL::signedRoute('lead.video', ['lead' => $lead->id]) : null,

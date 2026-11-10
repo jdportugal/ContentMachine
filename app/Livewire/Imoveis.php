@@ -53,7 +53,7 @@ class Imoveis extends Component
     {
         $this->anuncio = trim($this->anuncio);
         $this->validate([
-            'anuncio' => ['required', 'url:https,http', 'max:500', fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail('Por agora lemos anúncios da RE/MAX, iad e idealista.')],
+            'anuncio' => ['required', 'url:https,http', 'max:500', fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM)],
             'notas' => 'nullable|string|max:3000',
             'foto' => 'nullable|image|max:10240',
             'tema' => ['required', fn ($a, $v, $fail) => $themes->find($v) ? null : $fail('Escolha um dos temas.')],

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Leads\LeadVideo;
+use App\Services\Leads\RecuperarVideo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 /**
  * Brings the free-video leads up to date for follow-up: the agent's name and phone
  * once the listing has been read, when the reel is ready, and when it failed (or
- * the clip vanished) so a human can pick it up.
+ * the clip vanished or got stuck), handing those to RecuperarVideo.
  */
 class AtualizarLeads extends Command
 {
@@ -19,7 +20,7 @@ class AtualizarLeads extends Command
 
     protected $description = 'Fill free-video leads in from their listing and mark their reels ready or failed';
 
-    public function handle(LeadVideo $videos): int
+    public function handle(LeadVideo $videos, RecuperarVideo $recuperar): int
     {
         $abertos = DB::table('leads')->whereNull('pronto_em')->whereNull('falhou_em')->whereNotNull('clip_id')->get();
 
@@ -31,9 +32,11 @@ class AtualizarLeads extends Command
                 'telefone' => $lead->telefone ?: ($listing['phone'] ?? null),
             ]);
 
-            if (! $clip || $clip->status === ClipRecord::STATUS_FAILED) {
-                $dados['falhou_em'] = now();
-                Log::warning('Free-video lead failed', ['lead' => $lead->id, 'anuncio' => $lead->anuncio, 'error' => $clip?->error]);
+            // Failed, vanished or stuck: retry once, then give the video back and tell everyone.
+            if (! $clip || $clip->status === ClipRecord::STATUS_FAILED || RecuperarVideo::preso($clip)) {
+                $resultado = $recuperar->tratar($lead, $clip);
+                Log::warning('Lead video failed', ['lead' => $lead->id, 'anuncio' => $lead->anuncio, 'error' => $clip?->error, 'resultado' => $resultado]);
+                $lead = DB::table('leads')->find($lead->id);
             } elseif ($videos->ficheiro($lead)) {
                 $dados['pronto_em'] = now();
             }

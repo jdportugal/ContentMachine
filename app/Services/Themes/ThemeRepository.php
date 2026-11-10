@@ -49,7 +49,7 @@ class ThemeRepository
 
     /**
      * The theme for a listing portal: '<portal>-premium' (iad-premium, remax-premium,
-     * idealista-premium) when that theme exists, else the default.
+     * …) when that theme exists, else the default.
      */
     public function forPortal(?string $portal): Theme
     {

@@ -63,7 +63,10 @@
                 @else
                     <div class="w-full aspect-[9/16] rounded-[12px] bg-navy flex flex-col items-center justify-center gap-4 px-6 text-center">
                         @if ($v->estado === 'falhou')
-                            <span class="text-sm text-coral">Não conseguimos fazer este vídeo. Já fomos avisados.</span>
+                            <span class="text-sm text-coral">Não conseguimos fazer este vídeo.</span>
+                            <span class="text-xs text-[#C9CED6]">{{ $v->devolvido ? 'O vídeo que usou já voltou para a sua conta.' : 'Já fomos avisados.' }} Às vezes o portal não deixa ler o anúncio à primeira.</span>
+                            <button type="button" wire:click="tentarDeNovo({{ $v->id }})" wire:loading.attr="disabled" wire:target="tentarDeNovo({{ $v->id }})"
+                                    class="min-h-11 px-5 rounded-full bg-coral text-navy text-sm font-semibold disabled:opacity-60">Tentar outra vez</button>
                         @else
                             <span class="text-sm text-ivory">{{ $v->etapa }}…</span>
                             <div class="w-full h-1.5 rounded-full bg-ivory/10 overflow-hidden"><div class="h-full bg-cyan transition-all duration-700" style="width: {{ $v->pct }}%"></div></div>

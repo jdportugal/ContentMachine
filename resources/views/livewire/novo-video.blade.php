@@ -13,7 +13,7 @@
     <form wire:submit="criar" class="mt-8 flex flex-col gap-12" novalidate>
         {{-- 1 · Link --}}
         <section class="flex flex-col gap-4">
-            {!! $passo(1, 'O anúncio', 'RE/MAX, iad ou idealista. Lemos as fotos, o preço e a descrição.') !!}
+            {!! $passo(1, 'O anúncio', 'RE/MAX ou iad Portugal. Lemos as fotos, o preço e a descrição.') !!}
             <input type="url" wire:model="anuncio" inputmode="url" placeholder="Cole aqui o link do anúncio"
                    class="w-full min-h-[56px] rounded-[14px] bg-navy border border-ivory/20 px-4 text-[16px] text-ivory placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
             @error('anuncio') <p class="text-sm text-coral">{{ $message }}</p> @enderror
