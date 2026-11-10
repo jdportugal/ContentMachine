@@ -38,6 +38,14 @@ class IadListingScraperTest extends TestCase
         ];
         $html = '<script type="application/json" id="__NUXT_DATA__">'.json_encode($flat).'</script>';
 
+        // Since Nov 2026 the query cache sits under data["vue-query-state"]: same listing, read the same.
+        $novo = $flat;
+        $novo[0] = ['data' => 1, 'state' => 33];
+        $novo[1] = ['vue-query-state' => 2];
+        $novo[33] = ['$si18n:resolved-locale' => 32];
+        $novoHtml = '<script type="application/json" id="__NUXT_DATA__">'.json_encode($novo).'</script>';
+        $this->assertSame(890000, (new IadListingScraper)->parse($novoHtml, 'https://www.iadportugal.pt/anuncio/x/r131752')['price']);
+
         $l = (new IadListingScraper)->parse($html, 'https://www.iadportugal.pt/anuncio/x/r131752');
 
         $this->assertSame(890000, $l['price']);

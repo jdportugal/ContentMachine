@@ -42,7 +42,8 @@ class IadListingScraper
             throw new RuntimeException('That page has no listing data — is it a single iad listing URL?');
         }
         $root = self::revive(json_decode($m[1], true) ?: []);
-        $l = collect($root['state']['$svue-query-state']['queries'] ?? [])
+        // The query cache moved (Nov 2026) from state["$svue-query-state"] to data["vue-query-state"]: read either.
+        $l = collect($root['data']['vue-query-state']['queries'] ?? $root['state']['$svue-query-state']['queries'] ?? [])
             ->first(fn ($q) => ($q['queryKey'][0] ?? null) === 'properties')['state']['data'] ?? null;
         if (! is_array($l) || empty($l['media']['photos'])) {
             throw new RuntimeException('Could not read the listing (no data or no photos on that page).');
