@@ -479,7 +479,7 @@
                     </div>
                 @endforeach
             </div>
-            <p class="mt-8 text-center text-sm text-[#AEB5C1]">Todos os preços incluem IVA. Equipas e agências com mais de 20 vídeos: <a href="{{ $comprar('Agência') }}" class="text-cyan underline underline-offset-2">fale connosco</a>.</p>
+            <p class="mt-8 text-center text-sm text-[#AEB5C1]">Todos os preços incluem IVA. Ao comprar, aceita os <a href="{{ route('termos') }}" class="text-cyan underline underline-offset-2">termos e condições</a> e pede que cada vídeo seja feito logo que o pedir. Equipas e agências com mais de 20 vídeos: <a href="{{ $comprar('Agência') }}" class="text-cyan underline underline-offset-2">fale connosco</a>.</p>
         </div>
     </section>
 
@@ -530,14 +530,16 @@
             <nav aria-label="Empresa" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
                 <span class="text-xs tracking-[.24em] text-ivory">EMPRESA</span>
                 <a href="mailto:{{ config('mail.from.address') }}" class="text-[#AEB5C1] hover:text-ivory">Contactos</a>
-                <a href="#" class="text-[#AEB5C1] hover:text-ivory">Termos e condições</a>
+                <a href="{{ route('termos') }}" class="text-[#AEB5C1] hover:text-ivory">Termos e condições</a>
                 <a href="{{ route('privacidade') }}" class="text-[#AEB5C1] hover:text-ivory">Política de privacidade</a>
                 <a href="#" data-cookies class="text-[#AEB5C1] hover:text-ivory">Preferências de cookies</a>
                 <a href="https://www.livroreclamacoes.pt" rel="noopener" class="text-[#AEB5C1] hover:text-ivory">Livro de Reclamações</a>
+                <a href="{{ route('termos') }}#reclamacoes" class="text-[#AEB5C1] hover:text-ivory">Resolução de litígios</a>
             </nav>
         </div>
         <div class="max-w-[1240px] mx-auto px-6 py-6 border-t border-ivory/10 flex flex-wrap justify-between gap-3 text-[13px] text-[#8B95A7]">
-            <span>© {{ date('Y') }} Imocena</span>
+            @php($empresa = config('contentmachine.empresa'))
+            <span>© {{ date('Y') }} {{ implode(' · ', array_filter(['Imocena', $empresa['nome'], $empresa['nif'] ? 'NIF '.$empresa['nif'] : null])) }}</span>
             <span>Feito em Portugal</span>
         </div>
     </footer>

@@ -522,6 +522,18 @@ return [
     | the endpoint's signing secret) records the purchase and fulfils it. Without the
     | links the buttons fall back to a mailto:.
     */
+    /*
+    | The legal entity behind Imocena, shown on the terms, the privacy page and
+    | the footer (Portuguese law: name, NIF, address, complaints book, RAL).
+    */
+    'empresa' => [
+        'nome' => env('EMPRESA_NOME', 'Eclipsingredients Unipessoal Lda'),
+        'nif' => env('EMPRESA_NIF', '517419122'),
+        'morada' => env('EMPRESA_MORADA', 'Travessa da Rua Camilo Castelo Branco, lote 92 B, 3500-393 Viseu'),
+        'ral_nome' => env('EMPRESA_RAL_NOME', 'CNIACC – Centro Nacional de Informação e Arbitragem de Conflitos de Consumo'),
+        'ral_url' => env('EMPRESA_RAL_URL', 'https://www.cniacc.pt'),
+    ],
+
     'stripe' => [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET', ''),
         'links' => [

@@ -1190,6 +1190,16 @@ class ClipsAnimadosTest extends TestCase
     public function test_reduce_images_halves_the_image_budget(): void
     {
         Queue::fake();
+        // Images need a configured generator; pin one instead of depending on a kie.ai key on the machine.
+        $this->app->instance(\App\Services\Clips\ClipImageGenerator::class, new class extends \App\Services\Clips\ClipImageGenerator
+        {
+            public function __construct() {}
+
+            public function configured(): bool
+            {
+                return true;
+            }
+        });
         config(['contentmachine.clips.image_every_seconds' => 10, 'contentmachine.clips.image_max' => 8]);
 
         $planner = new class extends FakeAnimationPlanner

@@ -154,6 +154,16 @@ class ClipsPipelineTest extends TestCase
 
     public function test_with_images_on_the_clip_pauses_to_offer_the_upload_step(): void
     {
+        // Images need a configured generator; pin one instead of depending on a kie.ai key on the machine.
+        $this->app->instance(\App\Services\Clips\ClipImageGenerator::class, new class extends \App\Services\Clips\ClipImageGenerator
+        {
+            public function __construct() {}
+
+            public function configured(): bool
+            {
+                return true;
+            }
+        });
         config()->set('contentmachine.clips.generate_images', true);
 
         $p = $this->store()->create([

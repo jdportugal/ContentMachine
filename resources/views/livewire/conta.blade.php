@@ -48,6 +48,7 @@
                 <span class="text-[11px] tracking-[.24em] text-cyan">PACK 20</span><span class="font-display text-[30px] leading-none text-ivory">175 €</span><span class="text-xs text-[#AEB5C1]">8,75 € por vídeo · 12 meses.</span>
             </a>
         </div>
+        <p class="mt-3 text-xs text-[#AEB5C1]">IVA incluído. Ao comprar, aceita os <a href="{{ route('termos') }}" class="text-cyan underline underline-offset-2">termos e condições</a>.</p>
     </section>
 
     @if (session('editado'))

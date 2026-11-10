@@ -3,6 +3,7 @@
         $h2 = 'mt-12 font-display text-[30px] leading-tight text-ivory';
         $p = 'mt-4 text-[16px] leading-relaxed text-[#C9CED6]';
         $li = 'mt-2 text-[16px] leading-relaxed text-[#C9CED6]';
+        $empresa = config('contentmachine.empresa');
     @endphp
     <main class="max-w-[760px] mx-auto px-5 sm:px-6 py-12 sm:py-16">
         <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>
@@ -11,7 +12,7 @@
         <p class="{{ $p }}">Última atualização: 10 de novembro de 2026.</p>
 
         <h2 class="{{ $h2 }}">Quem somos</h2>
-        <p class="{{ $p }}">A Imocena (imocena.com) faz vídeos de imóveis para consultores imobiliários a partir do link de um anúncio. É a responsável pelo tratamento dos dados descritos aqui. Contacto para qualquer assunto de privacidade: <a href="mailto:info@imocena.com" class="text-ivory underline">info@imocena.com</a>.</p>
+        <p class="{{ $p }}">A Imocena (imocena.com) faz vídeos de imóveis para consultores imobiliários a partir do link de um anúncio. O responsável pelo tratamento dos dados descritos aqui é {{ $empresa['nome'] ?: 'a Imocena' }}{{ $empresa['nif'] ? ', NIF '.$empresa['nif'] : '' }}{{ $empresa['morada'] ? ', com sede em '.$empresa['morada'] : '' }}. Contacto para qualquer assunto de privacidade: <a href="mailto:info@imocena.com" class="text-ivory underline">info@imocena.com</a>.</p>
 
         <h2 class="{{ $h2 }}">Que dados tratamos e porquê</h2>
         <ul class="mt-4 list-disc pl-5">
@@ -47,5 +48,6 @@
             <li class="{{ $li }}"><strong class="text-ivory">Medição</strong> (só se aceitar): Meta Pixel (_fbp, _fbc) e Google Analytics (_ga, _ga_*), para saber que anúncios trazem visitas, pedidos e compras. Quando aceita, também enviamos esses mesmos eventos à Meta a partir do nosso servidor.</li>
         </ul>
         <p class="{{ $p }}">Pode mudar a sua escolha em <a href="#" data-cookies class="text-ivory underline">Preferências de cookies</a>.</p>
+        <p class="{{ $p }}">Ver também os <a href="{{ route('termos') }}" class="text-ivory underline">termos e condições</a>.</p>
     </main>
 </x-layouts.site>

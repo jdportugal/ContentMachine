@@ -193,20 +193,29 @@ class MonitoringCollectionTest extends TestCase
 
     public function test_the_app_timezone_can_be_set_from_the_environment(): void
     {
-        $_ENV['APP_TIMEZONE'] = $_SERVER['APP_TIMEZONE'] = 'Europe/Lisbon';
-        putenv('APP_TIMEZONE=Europe/Lisbon');
+        // Whatever the machine running the tests has set is put back afterwards:
+        // leaving it unset broke every later test that formats a date.
+        $antes = [$_ENV['APP_TIMEZONE'] ?? null, $_SERVER['APP_TIMEZONE'] ?? null, getenv('APP_TIMEZONE')];
+        $repor = function () use ($antes) {
+            [$env, $server, $put] = $antes;
+            if ($env === null) { unset($_ENV['APP_TIMEZONE']); } else { $_ENV['APP_TIMEZONE'] = $env; }
+            if ($server === null) { unset($_SERVER['APP_TIMEZONE']); } else { $_SERVER['APP_TIMEZONE'] = $server; }
+            $put === false ? putenv('APP_TIMEZONE') : putenv('APP_TIMEZONE='.$put);
+        };
 
         try {
+            $_ENV['APP_TIMEZONE'] = $_SERVER['APP_TIMEZONE'] = 'Europe/Lisbon';
+            putenv('APP_TIMEZONE=Europe/Lisbon');
             // Re-evaluate the config file with the variable present.
-            $config = include base_path('config/app.php');
-            $this->assertSame('Europe/Lisbon', $config['timezone']);
-        } finally {
+            $this->assertSame('Europe/Lisbon', (include base_path('config/app.php'))['timezone']);
+
+            // ...and defaults to UTC when absent, so existing installs are unchanged.
             unset($_ENV['APP_TIMEZONE'], $_SERVER['APP_TIMEZONE']);
             putenv('APP_TIMEZONE');
+            $this->assertSame('UTC', (include base_path('config/app.php'))['timezone']);
+        } finally {
+            $repor();
         }
-
-        // ...and defaults to UTC when absent, so existing installs are unchanged.
-        $this->assertSame('UTC', (include base_path('config/app.php'))['timezone']);
     }
 
     private function eventoAgendado(): ?Event

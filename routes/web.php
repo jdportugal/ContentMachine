@@ -54,6 +54,7 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
 // Stripe: the Payment Links' webhook, and where a buyer lands after paying.
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 Route::view('/privacidade', 'privacidade')->name('privacidade');
+Route::view('/termos', 'termos')->name('termos');
 
 Route::get('/obrigado', function (LinkDeAcesso $contas) {
     $sessao = (string) request()->query('session_id', '');
