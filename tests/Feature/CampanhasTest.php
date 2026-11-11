@@ -156,9 +156,11 @@ class CampanhasTest extends TestCase
             ->assertSee('Falta ligar a conta de anúncios da Meta')->assertSee('META_ADS_TOKEN')
             ->assertSee('Visitas ao site')->assertDontSee('Impressões', false)->assertSee('Direto');
         Http::assertNothingSent();
+    }
 
-        // A token that cannot read ads: Meta's own message is shown, and nothing is cached.
-        config(['contentmachine.meta_capi.token' => 'tok-capi']);
+    public function test_a_token_that_cannot_read_ads_shows_what_meta_answered(): void
+    {
+        config(['contentmachine.meta_ads.token' => '', 'contentmachine.meta_capi.token' => 'tok-capi']);   // falls back to the Conversions API token
         Http::fake(['graph.facebook.com/*' => Http::response(['error' => ['message' => '(#200) Ad account owner has NOT grant ads_management or ads_read permission']], 403)]);
         Livewire::actingAs(User::factory()->create())->test(Campanhas::class)
             ->assertSee('A Meta não devolveu os resultados')->assertSee('ads_read permission');
