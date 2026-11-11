@@ -17,7 +17,7 @@ class PaginaDoConsultor
     private const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36';
 
     /** @return array{portal: string, chave: string, url: string}|null */
-    public function de(string $anuncio): ?array
+    public function de(string $anuncio, int $timeout = 30): ?array
     {
         $host = strtolower((string) parse_url($anuncio, PHP_URL_HOST));
         $caminho = (string) parse_url($anuncio, PHP_URL_PATH);
@@ -34,7 +34,7 @@ class PaginaDoConsultor
                     ? ['portal' => 'exp', 'chave' => 'exp:'.$sub, 'url' => 'https://'.$host.'/']
                     : null;
             case 'iad':
-                $nome = IadListingScraper::consultor($this->ler($anuncio));
+                $nome = IadListingScraper::consultor($this->ler($anuncio, $timeout));
 
                 return $nome ? ['portal' => 'iad', 'chave' => 'iad:'.strtolower($nome), 'url' => 'https://www.iadportugal.pt/consultor-imobiliario/'.$nome] : null;
         }
@@ -59,9 +59,38 @@ class PaginaDoConsultor
         };
     }
 
-    private function ler(string $url): string
+    /** The email the agent publishes on their page: RE/MAX and eXp show it, iad does not. */
+    public function email(array $pagina, int $timeout = 30): ?string
     {
-        return Http::timeout(30)->withHeaders(['User-Agent' => self::UA])->get($url)->throw()->body();
+        $email = match ($pagina['portal']) {
+            'remax' => self::emailRemax($this->ler($pagina['url'], $timeout)),
+            'exp' => self::emailExp($this->ler($pagina['url'], $timeout)),
+            default => null,
+        };
+
+        return $email && filter_var($email, FILTER_VALIDATE_EMAIL) ? mb_strtolower($email) : null;
+    }
+
+    public static function emailRemax(string $html): ?string
+    {
+        if (! preg_match('#<script id="__NEXT_DATA__"[^>]*>(.*?)</script>#s', $html, $m)) {
+            return null;
+        }
+        $agente = json_decode((string) base64_decode((string) (json_decode($m[1], true)['props']['pageProps']['agentEncoded'] ?? '')), true);
+
+        return trim((string) ($agente['email'] ?? '')) ?: null;
+    }
+
+    public static function emailExp(string $html): ?string
+    {
+        $flight = ExpListingScraper::flight($html);
+
+        return preg_match('/"contactFormEmail":"([^"\\]+@[^"\\]+)"/', $flight, $m) || preg_match('/"email":"([^"\\]+@[^"\\]+)"/', $flight, $m) ? trim($m[1]) : null;
+    }
+
+    private function ler(string $url, int $timeout = 30): string
+    {
+        return Http::timeout($timeout)->withHeaders(['User-Agent' => self::UA])->get($url)->throw()->body();
     }
 
     /** RE/MAX: the agent's active listings are in the page's Next.js data (first 10, newest first). */

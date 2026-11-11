@@ -37,12 +37,13 @@ class AlertasTest extends TestCase
             'email' => $email, 'marketing_em' => $email ? now() : null, 'created_at' => now(), 'updated_at' => now()]);
     }
 
-    private function remax(array $numeros): string
+    private function remax(array $numeros, ?string $email = null): string
     {
         $resultados = array_map(fn ($n) => ['listingTitle' => '125411383-'.$n, 'descriptionTags' => 'venda-apartamento-t2-gondomar-fanzeres',
             'regionName2' => 'Gondomar', 'regionName3' => 'Fânzeres'], $numeros);
 
         return '<html><script id="__NEXT_DATA__" type="application/json">'.json_encode(['props' => ['pageProps' => [
+            'agentEncoded' => base64_encode(json_encode(['name' => 'Carla Silva', 'email' => $email, 'email2' => null])),
             'relatedListingsEncoded' => base64_encode(json_encode(['activeListings' => ['results' => $resultados]]))]]]).'</script></html>';
     }
 
@@ -79,6 +80,7 @@ class AlertasTest extends TestCase
         $this->assertStringContainsString('utm_campaign=imovel-novo', $mail['html']);
         $this->assertStringContainsString('/emails/cancelar/'.$lead.'?signature=', $mail['cancelar']);
         $this->assertStringContainsString('Deixar de receber', $mail['html']);
+        $this->assertStringContainsString('a partir de 8,75 €', $mail['html']);   // it suggests a video, it does not promise a free one
         $this->assertSame('125411383-13', DB::table('avisos_imoveis')->sole()->anuncio_id);
 
         // One email a day at most: the next listing waits, then goes out.
@@ -180,9 +182,54 @@ class AlertasTest extends TestCase
         $this->assertNull(app(PaginaDoConsultor::class)->de('https://remax.pt/pt/imoveis/sem-referencia'));
     }
 
-    public function test_the_link_in_the_email_opens_the_form_with_the_listing_filled_in(): void
+    public function test_ticking_the_box_takes_the_email_from_the_listing_and_only_asks_when_there_is_none(): void
     {
-        Livewire::withQueryParams(['anuncio' => self::REMAX])->test(Landing::class)->assertSet('anuncio', self::REMAX);
+        \Illuminate\Support\Facades\Queue::fake();
+        $this->paginas[self::PAGINA_REMAX] = $this->remax([12], 'Carla.Silva@remax.pt');
+
+        Livewire::test(Landing::class)->set(['anuncio' => self::REMAX, 'marketing' => true])->call('pedir')->assertHasNoErrors();
+        $lead = DB::table('leads')->sole();
+        $this->assertSame(['carla.silva@remax.pt', 'remax:125411383'], [$lead->email, $lead->consultor]);
+        $this->assertNotNull($lead->marketing_em);
+
+        // Without the box nothing is read from the agent's page and no email is kept.
+        session()->forget('lead_id');
+        Livewire::test(Landing::class)->set(['anuncio' => 'https://brunocouto.expportugal.com/imoveis/penafiel/moradia/penafiel-3'])->call('pedir')->assertHasNoErrors();
+        $this->assertNull(DB::table('leads')->where('consultor', 'exp:brunocouto')->sole()->email);
+
+        // iad does not publish the email: the form asks for it.
+        session()->forget('lead_id');
+        $nuxt = [['data' => 1], ['vue-query-state' => 2], ['queries' => 3], [4], ['queryKey' => 5, 'state' => 7], [6], 'properties', ['data' => 8], ['agent' => 9], ['userName' => 10], 'ana.sousa'];
+        $this->paginas['https://www.iadportugal.pt/anuncio/t2-faro/r555001'] = '<script type="application/json" id="__NUXT_DATA__">'.json_encode($nuxt).'</script>';
+        Livewire::test(Landing::class)->set(['anuncio' => 'https://www.iadportugal.pt/anuncio/t2-faro/r555001', 'marketing' => true])->call('pedir')
+            ->assertHasErrors(['email' => 'required'])->assertSee('Não encontrámos o seu email no anúncio')
+            ->set('email', 'ana@sousa.pt')->call('pedir')->assertHasNoErrors();
+        $this->assertSame(['ana@sousa.pt', 'iad:ana.sousa'], (array) DB::table('leads')->where('consultor', 'iad:ana.sousa')->sole(['email', 'consultor']));
+
+        $this->assertSame('bruno@expportugal.com', PaginaDoConsultor::emailExp('<script>self.__next_f.push([1,'.json_encode('5:{"agent":{"name":"Bruno","email":"x@expportugal.com"},"contactFormEmail":"bruno@expportugal.com"}').'])</script>'));
+        $this->assertNull(PaginaDoConsultor::emailRemax('<html></html>'));
+    }
+
+    public function test_the_free_video_is_one_per_agent_and_the_next_listing_is_offered_a_paid_one(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake();
+        Livewire::test(Landing::class)->set('anuncio', self::REMAX)->call('pedir')->assertHasNoErrors();
+        $this->assertSame(1, DB::table('leads')->count());
+
+        // The same agent's next listing, typed in the form: no second free video.
+        session()->forget('lead_id');
+        $outro = 'https://remax.pt/pt/imoveis/venda-moradia-t3-gondomar/125411383-13';
+        Livewire::test(Landing::class)->set('anuncio', $outro)->call('pedir')->assertHasNoErrors()
+            ->assertSet('jaTeve', true)->assertSee('JÁ FEZ O SEU VÍDEO GRÁTIS')->assertSee('/conta/novo?anuncio='.urlencode($outro), false)->assertDontSee('Criar vídeo grátis')
+            ->call('outro')->assertSet('jaTeve', false)->assertSee('Criar vídeo grátis');
+        $this->assertSame(1, DB::table('leads')->count());
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\Clips\ImportListingJob::class, 1);
+
+        // The link in the alert email opens the same suggestion, not the free form.
+        Livewire::withQueryParams(['anuncio' => $outro])->test(Landing::class)->assertSet('anuncio', $outro)->assertSet('jaTeve', true)->assertSee('O vídeo grátis é um por consultor');
+        // An agent we do not know still gets the form, with the link filled in; a link from elsewhere is ignored.
+        $novo = 'https://remax.pt/pt/imoveis/venda-t1-porto/999990001-2';
+        Livewire::withQueryParams(['anuncio' => $novo])->test(Landing::class)->assertSet('anuncio', $novo)->assertSet('jaTeve', false)->assertSee('Criar vídeo grátis');
         Livewire::withQueryParams(['anuncio' => 'https://evil.example/x'])->test(Landing::class)->assertSet('anuncio', '');
     }
 }

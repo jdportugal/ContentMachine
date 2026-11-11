@@ -135,6 +135,18 @@
                             <p class="text-sm leading-relaxed text-[#C9CED6]">Tentámos duas vezes. Às vezes um anúncio não tem fotos ou dados suficientes, ou o portal não deixa lê-lo. Já fomos avisados e vamos ver o que se passou. Pode tentar outra vez com o mesmo link daqui a pouco, ou com outro anúncio.</p>
                             <button type="button" wire:click="outro" class="self-start min-h-11 px-5 rounded-full border border-ivory/40 text-ivory text-sm font-semibold hover:bg-ivory/5">Tentar com outro anúncio</button>
                         </div>
+                    @elseif ($jaTeve)
+                        <div class="flex flex-col gap-3">
+                            <span class="text-xs tracking-[.28em] text-cyan">JÁ FEZ O SEU VÍDEO GRÁTIS</span>
+                            <span class="font-display text-[32px] leading-tight text-ivory">O vídeo deste imóvel fica pronto em minutos.</span>
+                            <p class="text-sm leading-relaxed text-[#C9CED6]">O vídeo grátis é um por consultor. Com um vídeo comprado, este sai sem marca d’água e pode escolher as fotos, a narração e a música: 20 €, ou 10 € por vídeo no pack de 10.</p>
+                            <p class="truncate text-xs text-[#8B95A7]">{{ $anuncio }}</p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="{{ route('conta.novo', ['anuncio' => $anuncio]) }}" class="inline-flex items-center justify-center min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Fazer o vídeo na minha conta →</a>
+                                <a href="#precos" class="inline-flex items-center justify-center min-h-[52px] px-6 rounded-full border border-ivory/40 text-ivory font-semibold hover:bg-ivory/5">Ver preços</a>
+                            </div>
+                            <button type="button" wire:click="outro" class="self-start text-sm text-cyan underline underline-offset-2">Não é o seu anúncio? Usar outro link</button>
+                        </div>
                     @else
                         <form wire:submit="pedir" class="flex flex-col gap-4" novalidate>
                             <div class="flex flex-wrap justify-between items-center gap-3">
@@ -164,7 +176,7 @@
                             @if ($marketing)
                                 <div class="-mt-1 pl-6">
                                     <label for="email" class="sr-only">O seu email</label>
-                                    <input id="email" type="email" wire:model="email" placeholder="O seu email" autocomplete="email"
+                                    <input id="email" type="email" wire:model="email" placeholder="O seu email (opcional: usamos o do seu anúncio)" autocomplete="email"
                                            class="w-full min-h-11 px-4 rounded-full bg-navy border border-ivory/15 text-sm text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
                                     @error('email') <p class="mt-1.5 text-[13px] text-coral">{{ $message }}</p> @enderror
                                 </div>

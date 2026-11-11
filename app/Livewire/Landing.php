@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Alertas\PaginaDoConsultor;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectContext;
@@ -48,6 +49,9 @@ class Landing extends Component
 
     public ?int $leadId = null;
 
+    /** This listing's agent already had their free video: the card suggests a paid one instead of the form. */
+    public bool $jaTeve = false;
+
     public bool $bot = false;
 
     public function mount(): void
@@ -57,6 +61,7 @@ class Landing extends Component
         $anuncio = trim((string) request()->query('anuncio', ''));
         if ($anuncio !== '' && mb_strlen($anuncio) <= 500 && ListingScraper::supports($anuncio)) {
             $this->anuncio = $anuncio;
+            $this->jaTeve = self::jaTeveVideo($this->agente()['chave'] ?? null, $anuncio);
         }
     }
 
@@ -77,6 +82,12 @@ class Landing extends Component
 
         $this->anuncio = trim($this->anuncio);
         $this->email = trim($this->email);
+        // Who the agent is on the portal, and (for the alerts) the email they publish there:
+        // nothing to type when the listing has it.
+        $agente = ListingScraper::supports($this->anuncio) ? $this->agente() : null;
+        if ($this->marketing && $this->email === '' && $agente) {
+            $this->email = (string) rescue(fn () => app(PaginaDoConsultor::class)->email($agente, 8), '', report: false);
+        }
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500',
                 fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
@@ -86,8 +97,14 @@ class Landing extends Component
         ], [
             'anuncio.required' => 'Cole o link do anúncio.',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
-            'email.required' => 'Indique o email onde quer receber os avisos.',
+            'email.required' => 'Não encontrámos o seu email no anúncio. Escreva-o aqui para receber os avisos.',
         ]);
+        // The free video is one per agent: someone we already made a video for is shown how to get this one.
+        if (self::jaTeveVideo($agente['chave'] ?? null, $this->anuncio)) {
+            $this->jaTeve = true;
+
+            return;
+        }
         RateLimiter::hit($chave, 3600);
 
         // Free videos use the portal's premium theme (iad-premium, remax-premium…),
@@ -103,6 +120,7 @@ class Landing extends Component
             'marketing_em' => $this->marketing ? now() : null,
             'marketing_texto' => $this->marketing ? self::MARKETING : null,
             'origem' => \App\Services\Marketing\Origem::json(),
+            'consultor' => $agente['chave'] ?? null,
             'updated_at' => now(),
         ];
         // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
@@ -122,11 +140,23 @@ class Landing extends Component
         app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], $this->marketing ? $this->email : null, \App\Services\Marketing\Origem::atual());
     }
 
+    /** The agent's page on the portal for the listing in the form, or null (unknown, or the portal did not answer). */
+    private function agente(): ?array
+    {
+        return rescue(fn () => app(PaginaDoConsultor::class)->de($this->anuncio, 8), null, report: false);
+    }
+
+    /** Has this agent a video (free or paid, not failed) of another listing? */
+    public static function jaTeveVideo(?string $consultor, string $anuncio): bool
+    {
+        return $consultor !== null && DB::table('leads')->where('consultor', $consultor)->whereNull('falhou_em')->where('anuncio', '!=', $anuncio)->exists();
+    }
+
     /** Ask for another listing's video (the session forgets the current one). */
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId', 'jaTeve');
     }
 
     /** The current lead's reel, as the hero card shows it. */
