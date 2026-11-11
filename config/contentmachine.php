@@ -10,6 +10,13 @@ return [
         'test_code' => env('META_CAPI_TEST_CODE', ''),   // Events Manager → Test events
         'version' => env('META_GRAPH_VERSION', 'v23.0'),
     ],
+    // Meta ad results (impressions, clicks, spend) for the admin's campaign funnel: the ad
+    // account and a token that can read it (ads_read). Without a token of its own, the
+    // Conversions API token is tried. Empty account = the funnel shows the site only.
+    'meta_ads' => [
+        'conta' => env('META_AD_ACCOUNT_ID', '3244004625793829'),
+        'token' => env('META_ADS_TOKEN', ''),
+    ],
     // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
     'ga4' => env('GA_MEASUREMENT_ID', ''),
 
