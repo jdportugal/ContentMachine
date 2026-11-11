@@ -85,7 +85,7 @@ class PaginaDoConsultor
     {
         $flight = ExpListingScraper::flight($html);
 
-        return preg_match('/"contactFormEmail":"([^"\\]+@[^"\\]+)"/', $flight, $m) || preg_match('/"email":"([^"\\]+@[^"\\]+)"/', $flight, $m) ? trim($m[1]) : null;
+        return preg_match('/"contactFormEmail":"([^"\s]+@[^"\s]+)"/', $flight, $m) || preg_match('/"email":"([^"\s]+@[^"\s]+)"/', $flight, $m) ? trim($m[1]) : null;
     }
 
     private function ler(string $url, int $timeout = 30): string
