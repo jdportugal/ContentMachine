@@ -204,7 +204,7 @@ class AlertasTest extends TestCase
         Livewire::test(Landing::class)->set(['anuncio' => 'https://www.iadportugal.pt/anuncio/t2-faro/r555001', 'marketing' => true])->call('pedir')
             ->assertHasErrors(['email' => 'required'])->assertSee('Não encontrámos o seu email no anúncio')
             ->set('email', 'ana@sousa.pt')->call('pedir')->assertHasNoErrors();
-        $this->assertSame(['ana@sousa.pt', 'iad:ana.sousa'], (array) DB::table('leads')->where('consultor', 'iad:ana.sousa')->sole(['email', 'consultor']));
+        $this->assertSame('ana@sousa.pt', DB::table('leads')->where('consultor', 'iad:ana.sousa')->sole()->email);
 
         $this->assertSame('bruno@expportugal.com', PaginaDoConsultor::emailExp('<script>self.__next_f.push([1,'.json_encode('5:{"agent":{"name":"Bruno","email":"x@expportugal.com"},"contactFormEmail":"bruno@expportugal.com"}').'])</script>'));
         $this->assertNull(PaginaDoConsultor::emailRemax('<html></html>'));
