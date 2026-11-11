@@ -53,6 +53,11 @@ class Landing extends Component
     public function mount(): void
     {
         $this->leadId = session('lead_id');
+        // A link from a new-listing alert arrives with the listing already filled in.
+        $anuncio = trim((string) request()->query('anuncio', ''));
+        if ($anuncio !== '' && mb_strlen($anuncio) <= 500 && ListingScraper::supports($anuncio)) {
+            $this->anuncio = $anuncio;
+        }
     }
 
     public function pedir(ListingImport $import, ProjectContext $context): void

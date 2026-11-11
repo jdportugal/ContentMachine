@@ -110,6 +110,10 @@ Route::get('/v/{lead}', function (int $lead, LeadVideo $videos) {
 Route::match(['get', 'post'], '/emails/cancelar/{lead}', function (int $lead) {
     if (request()->isMethod('post')) {
         DB::table('leads')->where('id', $lead)->whereNull('marketing_cancelado_em')->update(['marketing_cancelado_em' => now()]);
+        // The same person may have asked on several listings: one click stops them all.
+        if ($email = DB::table('leads')->where('id', $lead)->value('email')) {
+            DB::table('leads')->where('email', $email)->whereNull('marketing_cancelado_em')->update(['marketing_cancelado_em' => now()]);
+        }
     }
 
     return view('emails-cancelar', ['cancelado' => (bool) DB::table('leads')->where('id', $lead)->value('marketing_cancelado_em')]);

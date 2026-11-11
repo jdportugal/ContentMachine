@@ -12,3 +12,8 @@ Artisan::command('inspire', function () {
  * Free-video leads (landing page): read the agent's name/phone off the listing and mark each reel ready or failed.
  */
 Schedule::command('leads:atualizar')->everyMinute()->withoutOverlapping();
+
+/*
+ * New-listing alerts: agents who ticked the box on the free-video form get an email when they publish a listing.
+ */
+Schedule::command('alertas:imoveis')->hourlyAt(7)->withoutOverlapping();

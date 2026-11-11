@@ -36,15 +36,34 @@ class IadListingScraper
         return $this->parse($html, $url);
     }
 
-    public function parse(string $html, string $url): array
+    /** The listing in the page's Nuxt payload, or null when the page has none. */
+    private static function dados(string $html): ?array
     {
         if (! preg_match('#<script[^>]*id="__NUXT_DATA__"[^>]*>(.*?)</script>#s', $html, $m)) {
-            throw new RuntimeException('That page has no listing data — is it a single iad listing URL?');
+            return null;
         }
         $root = self::revive(json_decode($m[1], true) ?: []);
         // The query cache moved (Nov 2026) from state["$svue-query-state"] to data["vue-query-state"]: read either.
         $l = collect($root['data']['vue-query-state']['queries'] ?? $root['state']['$svue-query-state']['queries'] ?? [])
             ->first(fn ($q) => ($q['queryKey'][0] ?? null) === 'properties')['state']['data'] ?? null;
+
+        return is_array($l) ? $l : null;
+    }
+
+    /** The listing agent's user name on iad (their page is /consultor-imobiliario/<user name>), or null. */
+    public static function consultor(string $html): ?string
+    {
+        $nome = trim((string) (self::dados($html)['agent']['userName'] ?? ''));
+
+        return preg_match('/^[a-z0-9._-]+$/i', $nome) ? $nome : null;
+    }
+
+    public function parse(string $html, string $url): array
+    {
+        if (! str_contains($html, '__NUXT_DATA__')) {
+            throw new RuntimeException('That page has no listing data — is it a single iad listing URL?');
+        }
+        $l = self::dados($html);
         if (! is_array($l) || empty($l['media']['photos'])) {
             throw new RuntimeException('Could not read the listing (no data or no photos on that page).');
         }

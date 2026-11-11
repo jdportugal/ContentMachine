@@ -17,6 +17,8 @@ return [
         'conta' => env('META_AD_ACCOUNT_ID', '3244004625793829'),
         'token' => env('META_ADS_TOKEN', ''),
     ],
+    // New-listing alerts (alertas:imoveis): the pause between two agents' pages.
+    'alertas' => ['pausa_ms' => (int) env('ALERTAS_PAUSA_MS', 1500)],
     // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
     'ga4' => env('GA_MEASUREMENT_ID', ''),
 
