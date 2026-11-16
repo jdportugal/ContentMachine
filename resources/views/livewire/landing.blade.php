@@ -63,14 +63,14 @@
 
     {{-- Navegação: só a marca e o pedido, sem links que tirem a pessoa da página --}}
     <header class="border-b border-ivory/10">
-        <nav class="max-w-[1240px] mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+        <nav class="max-w-[1240px] mx-auto px-6 py-3 md:py-5 flex items-center justify-between gap-4">
             <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline">
                 <span class="font-display text-[30px] font-medium">Imocena</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>
             </a>
             <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm">
-                <a href="{{ route('login') }}" class="text-[#D6D9DF] hover:text-ivory">Entrar</a>
-                <a href="#pedido" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Vídeo grátis →</a>
+                <a href="{{ route('login') }}" class="inline-flex items-center min-h-11 text-[#D6D9DF] hover:text-ivory">Entrar</a>
+                <a href="#pedido" class="hidden sm:inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Vídeo grátis →</a>
             </div>
         </nav>
     </header>
@@ -85,7 +85,7 @@
     @endphp
     {{-- Hero: 1) a agência; 2) a página dessa agência, com o vídeo no modelo dela e o formulário --}}
     <section class="relative overflow-hidden">
-        <div class="max-w-[1240px] mx-auto px-6 pt-12 pb-20 md:pt-16 md:pb-24 flex flex-wrap gap-x-14 gap-y-10 items-center">
+        <div class="max-w-[1240px] mx-auto px-6 pt-8 pb-16 md:pt-16 md:pb-24 flex flex-wrap gap-x-14 gap-y-10 items-center">
             <div class="flex-[1_1_520px] min-w-0">
             @if (! $passo2)
                 {{-- Passo 1: em que agência trabalha? --}}
@@ -93,8 +93,8 @@
                     <span class="w-10 h-px bg-cyan"></span>
                     <span class="text-xs tracking-[.32em] text-cyan">CONSULTORES IMOBILIÁRIOS EM PORTUGAL</span>
                 </div>
-                <h1 class="mt-6 font-display text-[clamp(44px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
-                <div id="pedido" class="mt-9 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
+                <h1 class="mt-5 font-display text-[clamp(38px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
+                <div id="pedido" class="mt-7 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-5 py-6 sm:px-7">
                         <h2 class="font-display text-[28px] leading-tight text-ivory">Para começar: em que agência trabalha?</h2>
                         <p class="mt-1.5 text-sm text-[#C9CED6]">Mostramos-lhe um vídeo com a imagem da sua agência.</p>
@@ -119,8 +119,25 @@
                     <span class="w-10 h-px bg-cyan"></span>
                     <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'Consultores imobiliários em Portugal' }}</span>
                 </div>
-                <h1 class="mt-6 font-display text-[clamp(40px,5.6vw,68px)] leading-[1] font-normal text-ivory">O vídeo do seu imóvel{{ $nomeAg ? ' '.$nomeAg : '' }}, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
-                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">Cole o link do seu anúncio{{ ! empty($ag['site']) ? ' em '.$ag['site'] : '' }}. Recebe um reel vertical com as fotos, narração em português de Portugal e o seu contacto no fim{{ $nomeAg ? ', com a imagem '.$ag['da'] : '' }}.</p>
+                <h1 class="mt-5 font-display text-[clamp(34px,5.6vw,68px)] leading-[1] font-normal text-ivory">O vídeo do seu imóvel{{ $nomeAg ? ' '.$nomeAg : '' }}, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
+                <p class="mt-4 text-base leading-relaxed font-light text-[#C9CED6] md:hidden">Cole o link do seu anúncio{{ ! empty($ag['site']) ? ' em '.$ag['site'] : '' }} e receba o vídeo aqui.</p>
+                <p class="hidden md:block mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">Cole o link do seu anúncio{{ ! empty($ag['site']) ? ' em '.$ag['site'] : '' }}. Recebe um reel vertical com as fotos, narração em português de Portugal e o seu contacto no fim{{ $nomeAg ? ', com a imagem '.$ag['da'] : '' }}.</p>
+                @if ($reelAg['url'] && $pedido === null)
+                    <div class="mt-6 flex items-center gap-4 md:hidden" wire:key="reel-m-{{ $agencia ?: 'geral' }}">
+                        <div class="relative shrink-0 w-[132px] aspect-[9/16] rounded-[18px] overflow-hidden bg-navy border-[4px] border-navy-3 shadow-[0_20px_40px_-16px_rgba(0,0,0,.8)]">
+                            <video src="{{ $reelAg['url'] }}" @if ($poster && ! $reelAg['proprio']) poster="{{ $poster }}" @endif autoplay muted loop playsinline preload="metadata"
+                                   class="absolute inset-0 w-full h-full object-cover bg-navy" aria-label="Vídeo de exemplo"
+                                   onclick="this.muted=false;this.controls=true;this.requestFullscreen&&this.requestFullscreen()"></video>
+                        </div>
+                        <div class="min-w-0 flex flex-col gap-2.5 text-sm text-[#E4E6EA]">
+                            <span class="text-[11px] tracking-[.22em] text-cyan uppercase">{{ $reelAg['proprio'] && $nomeAg ? 'Exemplo no modelo '.$nomeAg : 'Exemplo de vídeo' }}</span>
+                            <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
+                            <span class="flex items-center gap-2">{!! $check !!}Voz em português de Portugal</span>
+                            <span class="flex items-center gap-2">{!! $check !!}O seu contacto no fim</span>
+                            <span class="text-xs text-[#8B95A7]">Toque no vídeo para ver com som</span>
+                        </div>
+                    </div>
+                @endif
                 <div id="pedido" @if (($pedido['estado'] ?? null) === 'a-fazer') wire:poll.5s @endif
                      class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
@@ -177,7 +194,7 @@
                             </div>
                             <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
                                 <svg class="hidden sm:block shrink-0 ml-4 text-[#8B95A7]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
-                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="{{ ! empty($ag['site']) ? 'Cole aqui o link do anúncio ('.$ag['site'].')' : 'Cole aqui o link do anúncio' }}" required
+                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="{{ ! empty($ag['site']) ? 'Link do anúncio em '.$ag['site'] : 'Cole aqui o link do anúncio' }}" required
                                        class="flex-1 min-w-0 w-full min-h-12 px-3 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
                                 <button type="submit" wire:loading.attr="disabled" wire:target="pedir"
                                         class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-coral text-navy text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:brightness-105 disabled:opacity-60">
@@ -247,8 +264,8 @@
                     <span class="w-10 h-px bg-cyan"></span>
                     <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'A sua agência' }}</span>
                 </div>
-                <h1 class="mt-6 font-display text-[clamp(40px,5.6vw,68px)] leading-[1] font-normal text-ivory">{{ $nomeAg ? 'Ainda não lemos anúncios '.$ag['da'].'.' : 'Diga-nos qual é a sua agência.' }} <em class="text-coral">{{ $nomeAg ? 'Falta pouco.' : 'Juntamo-la.' }}</em></h1>
-                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp e KW, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Ao lado está um exemplo do que vai receber.</p>
+                <h1 class="mt-5 font-display text-[clamp(34px,5.6vw,68px)] leading-[1] font-normal text-ivory">{{ $nomeAg ? 'Ainda não lemos anúncios '.$ag['da'].'.' : 'Diga-nos qual é a sua agência.' }} <em class="text-coral">{{ $nomeAg ? 'Falta pouco.' : 'Juntamo-la.' }}</em></h1>
+                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp e KW, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Veja nesta página um exemplo do que vai receber.</p>
                 <div id="pedido" class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                         @if ($enviado === 'aviso')
@@ -284,7 +301,7 @@
 
             {{-- O vídeo: no modelo da agência quando o temos, senão o de demonstração --}}
             @if ($reelAg['url'])
-                <div class="flex-[1_1_320px] min-w-0 flex flex-col items-center" wire:key="reel-{{ $agencia ?: 'geral' }}">
+                <div @class(['flex-[1_1_320px] min-w-0 flex-col items-center', 'flex' => ! ($ag !== null && $lemos && $pedido === null), 'hidden md:flex' => $ag !== null && $lemos && $pedido === null]) wire:key="reel-{{ $agencia ?: 'geral' }}">
                     <div class="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[44px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
                         <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[88px] h-[25px] rounded-full bg-navy-3 z-10"></span>
                         <video src="{{ $reelAg['url'] }}" @if ($poster && ! $reelAg['proprio']) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
