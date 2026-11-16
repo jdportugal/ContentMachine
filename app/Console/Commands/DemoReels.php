@@ -18,7 +18,7 @@ use Illuminate\Console\Command;
  */
 class DemoReels extends Command
 {
-    protected $signature = 'imocena:demo-reels {agencias?* : só estas (remax, iad, exp, kw)} {--slug=moradia-lajeosa} {--espera=40 : minutos, no máximo, à espera dos vídeos}';
+    protected $signature = 'imocena:demo-reels {agencias?* : só estas (remax, iad, exp, kw, era, century21, zome)} {--slug=moradia-lajeosa} {--espera=40 : minutos, no máximo, à espera dos vídeos}';
 
     protected $description = 'Faz o vídeo de demonstração no modelo de cada agência, para a página de entrada';
 
@@ -37,7 +37,8 @@ class DemoReels extends Command
         $emCurso = [];
         foreach (Landing::AGENCIAS as $agencia => $a) {
             $tema = $temas->find($agencia.'-premium');
-            if (! $a['lemos'] || ! $tema || ($pedidas !== [] && ! in_array($agencia, $pedidas, true))) {
+            // Every agency with a theme of its own, read or not yet: its page shows what its video will look like.
+            if (! $tema || ($pedidas !== [] && ! in_array($agencia, $pedidas, true))) {
                 continue;
             }
             $emCurso[$agencia] = $import->start($url, ['theme' => $tema->slug, 'demo_reel' => $agencia])->id;

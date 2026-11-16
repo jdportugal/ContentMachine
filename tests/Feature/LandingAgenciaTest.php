@@ -100,6 +100,10 @@ class LandingAgenciaTest extends TestCase
 
     public function test_the_video_is_the_agencys_own_when_one_was_rendered(): void
     {
+        // Every agency on the first screen but "outra" has a template of its own, shipped with the image.
+        foreach (array_diff(array_keys(Landing::AGENCIAS), ['outra']) as $agencia) {
+            $this->assertFileExists(base_path("vault/themes/{$agencia}-premium/theme.json"));
+        }
         $this->assertSame(['url' => null, 'proprio' => false], Landing::demoReel('remax', 'sem-esta-pasta'));
 
         $pasta = public_path('media/demo/teste-'.uniqid());

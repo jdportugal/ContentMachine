@@ -69,6 +69,9 @@ if [ -d /app/database-seed-migrations ]; then
     cp -R /app/database-seed-migrations/. /app/database/migrations/
 fi
 php artisan migrate --force || true
+# A render cut short by the last restart still holds the Remotion lock (for up to an hour),
+# and every video would wait behind it: nothing is rendering at boot, so let it go.
+php artisan tinker --execute='Cache::lock("remotion-folder")->forceRelease();' >/dev/null 2>&1 || true
 # public/storage symlink for the public disk.
 php artisan storage:link 2>/dev/null || true
 

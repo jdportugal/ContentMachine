@@ -1,0 +1,31 @@
+{
+    "colors": {
+        "bg": "#00205B",
+        "bgAlt": "#0A2E73",
+        "bgContrast": "#001642",
+        "textOnBg": "#FFFFFF",
+        "textOnContrast": "#FFFFFF",
+        "mutedOnBg": "#CFD8EA",
+        "mutedOnContrast": "#CFD8EA",
+        "accent": "#C8102E",
+        "accent2": "#3B6CC4",
+        "accent3": "#E1E7F3"
+    },
+    "fonts": {
+        "display": "Urbanist",
+        "body": "Urbanist",
+        "mono": "DM Mono",
+        "displayWeight": 300,
+        "bodyWeight": 500
+    },
+    "texture": {
+        "kind": "solid"
+    },
+    "style": {
+        "headline": "flat",
+        "shadow": "soft",
+        "panelBorder": 0,
+        "sharp": false,
+        "uppercaseTitles": false
+    }
+}
