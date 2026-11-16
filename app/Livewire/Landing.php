@@ -10,6 +10,8 @@ use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
 use App\Services\Themes\ThemeRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Livewire\Attributes\Layout;
@@ -34,6 +36,34 @@ class Landing extends Component
      */
     public const MARKETING = 'Avisem-me por email quando eu publicar um imóvel novo, para fazer o vídeo dele (a Imocena consulta os meus anúncios públicos), e enviem-me novidades. Cancelo quando quiser, com um clique.';
 
+    /**
+     * The agencies the page asks about first. `lemos`: we read its listings (a key of
+     * ListingScraper::PORTAIS, so the free video comes out in '<key>-premium'); the
+     * others can leave an email to be told when we do. `site` is where the link comes from.
+     */
+    public const AGENCIAS = [
+        'remax' => ['nome' => 'RE/MAX', 'da' => 'da RE/MAX', 'site' => 'remax.pt', 'lemos' => true],
+        'iad' => ['nome' => 'iad Portugal', 'da' => 'da iad', 'site' => 'iadportugal.pt', 'lemos' => true],
+        'exp' => ['nome' => 'eXp Portugal', 'da' => 'da eXp', 'site' => 'expportugal.com', 'lemos' => true],
+        'kw' => ['nome' => 'KW Portugal', 'da' => 'da KW', 'site' => 'kwportugal.pt', 'lemos' => true],
+        'era' => ['nome' => 'ERA', 'da' => 'da ERA', 'site' => 'era.pt', 'lemos' => false],
+        'century21' => ['nome' => 'Century 21', 'da' => 'da Century 21', 'site' => 'century21.pt', 'lemos' => false],
+        'zome' => ['nome' => 'Zome', 'da' => 'da Zome', 'site' => 'zome.pt', 'lemos' => false],
+        'outra' => ['nome' => 'Outra agência', 'da' => 'da sua agência', 'site' => '', 'lemos' => false],
+    ];
+
+    /** The visitor's agency (a key of AGENCIAS), asked before anything else; '' until they pick. */
+    public string $agencia = '';
+
+    /** The email left to get the link later, or to be told when the agency is supported. */
+    public string $contacto = '';
+
+    /** "Outra agência": its name, as typed (optional). */
+    public string $nomeAgencia = '';
+
+    /** What the visitor was just told after leaving their email: 'lembrete' | 'aviso' | ''. */
+    public string $enviado = '';
+
     public string $anuncio = '';
 
     /** Kept for old callers; the form now shows a notice under the button instead of a box (delivering the requested video is RGPD art. 6.º, n.º 1, b)). */
@@ -57,10 +87,18 @@ class Landing extends Component
     public function mount(): void
     {
         $this->leadId = session('lead_id');
+        // ?agencia=remax (an ad or our own email can skip the question), else what they picked before.
+        $agencia = (string) request()->query('agencia', session('agencia', ''));
+        $this->agencia = isset(self::AGENCIAS[$agencia]) ? $agencia : '';
+        // Someone whose video is under way (or done) came by a link: their agency is the listing's.
+        if ($this->agencia === '' && $this->leadId && ($lead = DB::table('leads')->find($this->leadId))) {
+            $this->agencia = isset(self::AGENCIAS[$portal = (string) ($lead->agencia ?? ListingScraper::portal((string) $lead->anuncio))]) ? $portal : '';
+        }
         // A link from a new-listing alert arrives with the listing already filled in.
         $anuncio = trim((string) request()->query('anuncio', ''));
         if ($anuncio !== '' && mb_strlen($anuncio) <= 500 && ListingScraper::supports($anuncio)) {
             $this->anuncio = $anuncio;
+            $this->agencia = isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($anuncio)]) ? $portal : $this->agencia;
             $this->jaTeve = self::jaTeveVideo($this->agente()['chave'] ?? null, $anuncio);
         }
     }
@@ -85,6 +123,10 @@ class Landing extends Component
         // Who the agent is on the portal, and (for the alerts) the email they publish there:
         // nothing to type when the listing has it.
         $agente = ListingScraper::supports($this->anuncio) ? $this->agente() : null;
+        // A link from a site we do not read: kept (no personal data), so we know which sites people try.
+        if (filter_var($this->anuncio, FILTER_VALIDATE_URL) && ! ListingScraper::supports($this->anuncio)) {
+            $this->registar('link-recusado', ['anuncio' => mb_substr($this->anuncio, 0, 500)]);
+        }
         if ($this->marketing && $this->email === '' && $agente) {
             $this->email = (string) rescue(fn () => app(PaginaDoConsultor::class)->email($agente, 8), '', report: false);
         }
@@ -99,6 +141,9 @@ class Landing extends Component
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
             'email.required' => 'Não encontrámos o seu email no anúncio. Escreva-o aqui para receber os avisos.',
         ]);
+        if ($this->agencia === '' && isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($this->anuncio)])) {
+            $this->agencia = $portal;   // a link pasted without answering the question answers it
+        }
         // The free video is one per agent: someone we already made a video for is shown how to get this one.
         if (self::jaTeveVideo($agente['chave'] ?? null, $this->anuncio)) {
             $this->jaTeve = true;
@@ -121,6 +166,8 @@ class Landing extends Component
             'marketing_texto' => $this->marketing ? self::MARKETING : null,
             'origem' => \App\Services\Marketing\Origem::json(),
             'consultor' => $agente['chave'] ?? null,
+            // The listing's own portal says it best; the answer to the question otherwise (a demo listing).
+            'agencia' => isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($this->anuncio)]) ? $portal : ($this->agencia ?: null),
             'updated_at' => now(),
         ];
         // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
@@ -140,6 +187,92 @@ class Landing extends Component
         app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], $this->marketing ? $this->email : null, \App\Services\Marketing\Origem::atual());
     }
 
+    /** The first answer: the visitor's agency. The page that follows is theirs (its name, its template's video). */
+    public function escolher(string $agencia): void
+    {
+        if (! isset(self::AGENCIAS[$agencia])) {
+            return;
+        }
+        $this->agencia = $agencia;
+        $this->reset('enviado', 'contacto', 'nomeAgencia');
+        $this->resetErrorBag();
+        session(['agencia' => $agencia]);
+        $this->registar('escolha');
+        $this->dispatch('agencia-escolhida', agencia: $agencia);
+    }
+
+    /** Back to the question. */
+    public function trocar(): void
+    {
+        session()->forget('agencia');
+        $this->reset('agencia', 'enviado', 'contacto', 'nomeAgencia', 'anuncio', 'jaTeve');
+        $this->resetErrorBag();
+    }
+
+    /**
+     * An email instead of a link. An agency we read: the visitor has no link at hand, so we
+     * send them this page once, to do it later. One we do not read yet: we keep the email
+     * to tell them when we do. Asked for by them, used for that only.
+     */
+    public function lembrar(): void
+    {
+        if ($this->site !== '' || ! isset(self::AGENCIAS[$this->agencia])) {
+            $this->enviado = (self::AGENCIAS[$this->agencia]['lemos'] ?? true) ? 'lembrete' : 'aviso';   // a bot is told it worked
+
+            return;
+        }
+        $chave = 'lembrete:'.request()->ip();
+        if (RateLimiter::tooManyAttempts($chave, 5)) {
+            $this->addError('contacto', 'Recebemos muitos pedidos deste endereço. Tente novamente daqui a uma hora.');
+
+            return;
+        }
+        $this->contacto = trim($this->contacto);
+        $this->validate(['contacto' => ['required', 'email:rfc', 'max:255'], 'nomeAgencia' => ['nullable', 'string', 'max:120']],
+            ['contacto.required' => 'Escreva o seu email.', 'contacto.email' => 'Este email não parece estar certo.']);
+        RateLimiter::hit($chave, 3600);
+
+        $a = self::AGENCIAS[$this->agencia];
+        $this->registar($a['lemos'] ? 'lembrete' : 'aviso-agencia', ['email' => $this->contacto, 'nota' => trim($this->nomeAgencia) ?: null]);
+        if ($a['lemos']) {
+            $link = rtrim((string) config('app.url'), '/').'/?agencia='.$this->agencia.'&utm_source=imocena&utm_medium=email&utm_campaign=lembrete#pedido';
+            try {
+                Mail::html(view('emails.lembrete', ['agencia' => $a['nome'], 'link' => $link])->render(),
+                    fn ($m) => $m->to($this->contacto)->subject('O link para fazer o vídeo grátis do seu imóvel'));
+            } catch (\Throwable $e) {
+                Log::warning('Lembrete não enviado', ['erro' => $e->getMessage()]);
+                $this->addError('contacto', 'Não conseguimos enviar o email agora. Tente outra vez daqui a pouco.');
+
+                return;
+            }
+        }
+        $this->enviado = $a['lemos'] ? 'lembrete' : 'aviso';
+        $this->reset('contacto', 'nomeAgencia');
+    }
+
+    /** One row of what happened on the page; never in the way of the visitor. */
+    private function registar(string $tipo, array $dados = []): void
+    {
+        rescue(fn () => DB::table('landing_eventos')->insert($dados + [
+            'tipo' => $tipo,
+            'agencia' => $this->agencia !== '' ? $this->agencia : null,
+            'origem' => \App\Services\Marketing\Origem::json(),
+            'created_at' => now(),
+        ]), report: false);
+    }
+
+    /** The demo reel in the agency's own template when we have rendered one (imocena:demo-reels), else the general one. */
+    public static function demoReel(string $agencia, string $slug = 'moradia-lajeosa'): array
+    {
+        foreach (array_filter([$agencia !== '' ? "reel-{$agencia}.mp4" : null, 'reel.mp4']) as $ficheiro) {
+            if (is_file(public_path("media/demo/{$slug}/{$ficheiro}"))) {
+                return ['url' => asset("media/demo/{$slug}/{$ficheiro}"), 'proprio' => $ficheiro !== 'reel.mp4'];
+            }
+        }
+
+        return ['url' => null, 'proprio' => false];
+    }
+
     /** The agent's page on the portal for the listing in the form, or null (unknown, or the portal did not answer). */
     private function agente(): ?array
     {
@@ -156,7 +289,7 @@ class Landing extends Component
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId', 'jaTeve');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId', 'jaTeve', 'enviado');
     }
 
     /** The current lead's reel, as the hero card shows it. */
@@ -186,6 +319,6 @@ class Landing extends Component
 
     public function render(LeadVideo $videos)
     {
-        return view('livewire.landing', ['pedido' => $this->bot ? ['estado' => 'a-fazer', 'etapa' => 'A ler o anúncio', 'pct' => 15] : $this->pedido($videos)]);
+        return view('livewire.landing', ['ag' => self::AGENCIAS[$this->agencia] ?? null, 'pedido' => $this->bot ? ['estado' => 'a-fazer', 'etapa' => 'A ler o anúncio', 'pct' => 15] : $this->pedido($videos)]);
     }
 }

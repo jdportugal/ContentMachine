@@ -1,0 +1,29 @@
+name: Imocena tests
+
+# The app's own test suite on PHP 8.4 (what the image runs). Runs on work branches
+# before they are merged into imocena-production, and on demand.
+on:
+  push:
+    branches-ignore: [production, imocena-production, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, intl
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction --no-progress
+      - run: cp .env.example .env && php artisan key:generate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npm run build
+      - run: php artisan test

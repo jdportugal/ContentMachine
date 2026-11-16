@@ -1,15 +1,11 @@
 @php
-    // The reel mock-ups use the demo listing's photos (public/media/demo/moradia-lajeosa,
+    // The closing band uses the demo listing's facade (public/media/demo/moradia-lajeosa,
     // generated, illustrative), falling back to public/images/landing/imovel.jpg, then a gradient.
     $demoSlug = 'moradia-lajeosa';
     $demoFoto = fn (string $f) => is_file(public_path("media/demo/{$demoSlug}/{$f}")) ? asset("media/demo/{$demoSlug}/{$f}")
         : (is_file(public_path('images/landing/imovel.jpg')) ? asset('images/landing/imovel.jpg') : null);
     $estilo = fn (?string $url) => $url ? "background-image:url('{$url}');background-size:cover;background-position:center" : 'background:linear-gradient(160deg,#2A3A52,#141F33)';
     $fotoStyle = $estilo($demoFoto('01-fachada.png'));
-    $salaStyle = $estilo($demoFoto('03-sala.png'));
-    $cozinhaStyle = $estilo($demoFoto('06-cozinha.png'));
-    $jardimStyle = $estilo($demoFoto('14-jardim-terraco.png'));
-    $demoReel = is_file(public_path("media/demo/{$demoSlug}/reel.mp4")) ? asset("media/demo/{$demoSlug}/reel.mp4") : null;
     $demoUrl = route('demo', ['slug' => $demoSlug]);
     // Stills taken from the reel at different moments: media/demo/<slug>/frames/frames.json lists
     // [{file, time, label}, …] and is written by scripts/demo-frames.sh after each render.
@@ -41,16 +37,6 @@
         ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '20 €', 'unidade' => '1 vídeo', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar', 'href' => $stripe('avulso', 'Vídeo avulso (20 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
         ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '100 €', 'unidade' => '10 vídeos', 'porVideo' => '10 € por vídeo', 'cta' => 'Comprar pack', 'href' => $stripe('pack10', 'Pack 10 (100 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
         ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '175 €', 'unidade' => '20 vídeos', 'porVideo' => '8,75 € por vídeo', 'cta' => 'Comprar pack', 'href' => $stripe('pack20', 'Pack 20 (175 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
-    ];
-
-    // What the free video includes. Its value is the price of a paid video (20 €).
-    $stack = [
-        ['Reel vertical com menos de 60 segundos', 'Em 9:16, pronto para Reels, TikTok, Shorts e estados de WhatsApp.'],
-        ['Texto escrito a partir do anúncio', 'Preço, tipologia, área e certificado energético, ditos como um consultor os diria.'],
-        ['Narração em português de Portugal', 'Diz «T3», «m²» e «duzentos e noventa e cinco mil euros» como se diz cá.'],
-        ['Cartão final com os seus dados', 'Nome, telemóvel, agência e número AMI no fecho do vídeo.'],
-        ['Montagem com ar de agência premium', 'Tipografia editorial, câmara lenta e transições discretas.'],
-        ['MP4 para descarregar', 'Publique onde quiser ou envie ao proprietário.'],
     ];
 
     $faq = [
@@ -89,18 +75,54 @@
         </nav>
     </header>
 
-    {{-- Hero + formulário --}}
+    @php
+        // The page asks the agency first; after that (or with a request under way, or a link already
+        // filled in from an alert email) it is the short page: that agency's name, its video, the form.
+        $passo2 = $ag !== null || $pedido !== null || $jaTeve || $anuncio !== '';
+        $lemos = $ag['lemos'] ?? true;
+        $reelAg = \App\Livewire\Landing::demoReel($agencia, $demoSlug);
+        $nomeAg = $ag && $agencia !== 'outra' ? $ag['nome'] : null;
+    @endphp
+    {{-- Hero: 1) a agência; 2) a página dessa agência, com o vídeo no modelo dela e o formulário --}}
     <section class="relative overflow-hidden">
-        <div class="max-w-[1240px] mx-auto px-6 pt-16 pb-24 flex flex-wrap gap-14 items-center">
+        <div class="max-w-[1240px] mx-auto px-6 pt-12 pb-20 md:pt-16 md:pb-24 flex flex-wrap gap-x-14 gap-y-10 items-center">
             <div class="flex-[1_1_520px] min-w-0">
+            @if (! $passo2)
+                {{-- Passo 1: em que agência trabalha? --}}
                 <div class="flex items-center gap-3.5">
                     <span class="w-10 h-px bg-cyan"></span>
                     <span class="text-xs tracking-[.32em] text-cyan">CONSULTORES IMOBILIÁRIOS EM PORTUGAL</span>
                 </div>
-                <h1 class="mt-6 font-display text-[clamp(48px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
-                <p class="mt-7 max-w-[540px] text-lg leading-relaxed font-light text-[#C9CED6]">Cole o link do anúncio. Em poucos minutos recebe um reel vertical com as fotos do imóvel, narração em português de Portugal e o seu contacto no fim. Sem filmar, sem editar, sem pagar.</p>
+                <h1 class="mt-6 font-display text-[clamp(44px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
+                <div id="pedido" class="mt-9 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
+                    <div class="rounded-[21px] bg-navy-2 px-5 py-6 sm:px-7">
+                        <h2 class="font-display text-[28px] leading-tight text-ivory">Para começar: em que agência trabalha?</h2>
+                        <p class="mt-1.5 text-sm text-[#C9CED6]">Mostramos-lhe um vídeo com a imagem da sua agência.</p>
+                        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            @foreach (\App\Livewire\Landing::AGENCIAS as $chave => $a)
+                                <button type="button" wire:click="escolher('{{ $chave }}')" wire:loading.attr="disabled" wire:target="escolher"
+                                        class="min-h-[56px] px-3 rounded-[14px] bg-navy border border-ivory/15 text-[15px] font-semibold text-ivory cursor-pointer hover:border-cyan hover:bg-navy-3 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan/25 disabled:opacity-60 transition">
+                                    {{ $chave === 'outra' ? 'Outra' : $a['nome'] }}
+                                </button>
+                            @endforeach
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
+                            <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
+                            <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
+                            <span class="flex items-center gap-2">{!! $check !!}Voz em português de Portugal</span>
+                        </div>
+                    </div>
+                </div>
+            @elseif ($lemos || $pedido !== null)
+                {{-- Passo 2: a página da agência --}}
+                <div class="flex items-center gap-3.5">
+                    <span class="w-10 h-px bg-cyan"></span>
+                    <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'Consultores imobiliários em Portugal' }}</span>
+                </div>
+                <h1 class="mt-6 font-display text-[clamp(40px,5.6vw,68px)] leading-[1] font-normal text-ivory">O vídeo do seu imóvel{{ $nomeAg ? ' '.$nomeAg : '' }}, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
+                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">Cole o link do seu anúncio{{ ! empty($ag['site']) ? ' em '.$ag['site'] : '' }}. Recebe um reel vertical com as fotos, narração em português de Portugal e o seu contacto no fim{{ $nomeAg ? ', com a imagem '.$ag['da'] : '' }}.</p>
                 <div id="pedido" @if (($pedido['estado'] ?? null) === 'a-fazer') wire:poll.5s @endif
-                     class="mt-10 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
+                     class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                     @if (($pedido['estado'] ?? null) === 'pronto')
                         <div class="flex flex-col sm:flex-row gap-6 items-stretch sm:items-center">
@@ -155,7 +177,7 @@
                             </div>
                             <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
                                 <svg class="hidden sm:block shrink-0 ml-4 text-[#8B95A7]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
-                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="Cole aqui o link do anúncio" required
+                                <input id="anuncio" type="url" wire:model="anuncio" placeholder="{{ ! empty($ag['site']) ? 'Cole aqui o link do anúncio ('.$ag['site'].')' : 'Cole aqui o link do anúncio' }}" required
                                        class="flex-1 min-w-0 w-full min-h-12 px-3 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
                                 <button type="submit" wire:loading.attr="disabled" wire:target="pedir"
                                         class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-coral text-navy text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:brightness-105 disabled:opacity-60">
@@ -185,123 +207,105 @@
                             <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
                                 <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
                                 <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
-                                <span class="text-[#8B95A7]">Lê anúncios da RE/MAX, iad, eXp e KW</span>
+                                <span class="text-[#8B95A7]">{{ ! empty($ag['lemos']) ? 'Vídeo com a imagem '.$ag['da'] : 'Lê anúncios da RE/MAX, iad, eXp e KW' }}</span>
                             </div>
                         </form>
                     @endif
                     </div>
                 </div>
+                @if ($pedido === null && ! $jaTeve)
+                    {{-- Sem o link à mão (quem vem do telemóvel): um email com esta página, para fazer depois --}}
+                    <div class="mt-5 max-w-[600px]">
+                        @if ($enviado === 'lembrete')
+                            <p role="status" class="px-5 py-4 rounded-[14px] bg-cyan/10 border border-cyan/40 text-sm text-ivory">Enviámos-lhe o link. Veja o seu email quando estiver com o anúncio à frente.</p>
+                        @else
+                            <details class="group" @if ($errors->has('contacto')) open @endif>
+                                <summary class="inline-flex items-center gap-2 min-h-11 text-sm font-medium text-cyan cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                                    <span class="underline underline-offset-2">Não tem o link do anúncio à mão?</span>
+                                    <span aria-hidden="true" class="transition-transform group-open:rotate-90">›</span>
+                                </summary>
+                                <form wire:submit="lembrar" class="mt-2 flex flex-col gap-2.5" novalidate>
+                                    <p class="text-sm leading-relaxed text-[#C9CED6]">Deixe o seu email: enviamos-lhe já esta página, para fazer o vídeo quando estiver com o anúncio aberto. É um email só.</p>
+                                    <div class="flex flex-wrap sm:flex-nowrap gap-2">
+                                        <label for="contacto" class="sr-only">Email para receber o link</label>
+                                        <input id="contacto" type="email" wire:model="contacto" placeholder="Escreva o seu email" autocomplete="email" inputmode="email"
+                                               class="flex-1 min-w-0 w-full min-h-12 px-4 rounded-full bg-navy border border-ivory/15 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
+                                        <button type="submit" wire:loading.attr="disabled" wire:target="lembrar" class="w-full sm:w-auto shrink-0 min-h-12 px-5 rounded-full border border-ivory/40 text-ivory text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:bg-ivory/5 disabled:opacity-60">Enviar-me o link</button>
+                                    </div>
+                                    @error('contacto') <p class="text-[13px] text-coral">{{ $message }}</p> @enderror
+                                </form>
+                            </details>
+                        @endif
+                        @if ($ag !== null)
+                            <button type="button" wire:click="trocar" class="mt-1 min-h-11 text-sm text-[#AEB5C1] underline underline-offset-2 cursor-pointer hover:text-ivory">Não é {{ $ag['da'] }}? Trocar de agência</button>
+                        @endif
+                    </div>
+                @endif
+            @else
+                {{-- Passo 2, agência que ainda não lemos: o email, para avisar quando lermos --}}
+                <div class="flex items-center gap-3.5">
+                    <span class="w-10 h-px bg-cyan"></span>
+                    <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'A sua agência' }}</span>
+                </div>
+                <h1 class="mt-6 font-display text-[clamp(40px,5.6vw,68px)] leading-[1] font-normal text-ivory">{{ $nomeAg ? 'Ainda não lemos anúncios '.$ag['da'].'.' : 'Diga-nos qual é a sua agência.' }} <em class="text-coral">{{ $nomeAg ? 'Falta pouco.' : 'Juntamo-la.' }}</em></h1>
+                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp e KW, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Ao lado está um exemplo do que vai receber.</p>
+                <div id="pedido" class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
+                    <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
+                        @if ($enviado === 'aviso')
+                            <div role="status" class="flex flex-col gap-2">
+                                <span class="font-display text-[30px] leading-tight text-ivory">Fica combinado.</span>
+                                <p class="text-sm leading-relaxed text-[#C9CED6]">Avisamos por email assim que lermos os anúncios {{ $ag['da'] }}. Não usamos o seu email para mais nada.</p>
+                            </div>
+                        @else
+                            <form wire:submit="lembrar" class="flex flex-col gap-3.5" novalidate>
+                                <label for="contacto" class="font-display text-[26px] leading-tight text-ivory">Avisem-me quando estiver pronto</label>
+                                @if ($agencia === 'outra')
+                                    <label for="nomeAgencia" class="sr-only">A sua agência</label>
+                                    <input id="nomeAgencia" type="text" wire:model="nomeAgencia" placeholder="A sua agência (por exemplo, Decisões e Soluções)" maxlength="120"
+                                           class="w-full min-h-12 px-4 rounded-full bg-navy border border-ivory/15 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
+                                @endif
+                                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
+                                    <input id="contacto" type="email" wire:model="contacto" placeholder="O seu email" autocomplete="email" inputmode="email" required
+                                           class="flex-1 min-w-0 w-full min-h-12 px-3 sm:pl-5 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
+                                    <button type="submit" wire:loading.attr="disabled" wire:target="lembrar" class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-coral text-navy text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:brightness-105 disabled:opacity-60">Avisem-me →</button>
+                                </div>
+                                @error('contacto') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
+                                <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
+                                    <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>
+                                </div>
+                                <p class="text-[11px] leading-snug text-[#8B95A7]">Usamos o seu email só para este aviso, de acordo com a <a href="{{ route('privacidade') }}" target="_blank" class="text-ivory underline">política de privacidade</a>.</p>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+                <button type="button" wire:click="trocar" class="mt-4 min-h-11 text-sm text-cyan underline underline-offset-2 cursor-pointer">Tem anúncios na RE/MAX, iad, eXp ou KW? Escolher outra agência</button>
+            @endif
             </div>
 
-            @if ($demoReel)
-                {{-- Telemóvel: o vídeo de demonstração a toda a largura, por baixo do texto --}}
-                <div class="w-full md:hidden">
-                    <div class="relative mx-auto max-w-[360px] aspect-[9/19.5] rounded-[40px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]">
-                        <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[84px] h-[24px] rounded-full bg-navy-3 z-10"></span>
-                        <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata" class="absolute inset-0 w-full h-full object-contain bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
+            {{-- O vídeo: no modelo da agência quando o temos, senão o de demonstração --}}
+            @if ($reelAg['url'])
+                <div class="flex-[1_1_320px] min-w-0 flex flex-col items-center" wire:key="reel-{{ $agencia ?: 'geral' }}">
+                    <div class="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[44px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
+                        <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[88px] h-[25px] rounded-full bg-navy-3 z-10"></span>
+                        <video src="{{ $reelAg['url'] }}" @if ($poster && ! $reelAg['proprio']) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
+                               class="absolute inset-0 w-full h-full object-contain bg-navy" aria-label="Vídeo de exemplo: Moradia T3 em Lajeosa, Viseu"></video>
                     </div>
-                    <p class="mt-4 text-center text-[13px] text-[#C9CED6]">Feito pela Imocena em 7 minutos · <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a></p>
+                    <p class="mt-4 text-center text-[13px] text-[#C9CED6]">
+                        {{ $reelAg['proprio'] && $nomeAg ? 'Exemplo no modelo '.$nomeAg : 'Exemplo feito pela Imocena em 7 minutos' }} ·
+                        <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a>
+                    </p>
                 </div>
             @endif
-            {{-- Leque de reels: o vídeo de demonstração a tocar, com dois momentos dele ao lado --}}
-            <div class="flex-[1_1_480px] min-w-0 relative h-[760px] hidden md:block">
-                @if ($demoReel)
-                    @php /* side phones: an interior and the garden — two clearly different moments */ $lado = [$frames[2] ?? ($frames[1] ?? null), $frames[7] ?? ($frames[count($frames) - 2] ?? null)]; if ($lado[0] && $lado[1] && $lado[0]['file'] === $lado[1]['file']) { $lado[1] = null; } @endphp
-                    @foreach ([['left-0 top-[100px] -rotate-[7deg]', $lado[0]], ['right-0 top-[120px] rotate-[7deg]', $lado[1]]] as [$pos, $frame])
-                        <div class="absolute {{ $pos }} w-[230px] h-[498px] rounded-[38px] overflow-hidden bg-navy border-[6px] border-navy-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
-                            <span class="absolute left-1/2 top-2.5 -translate-x-1/2 w-[68px] h-[20px] rounded-full bg-navy-3 z-10"></span>
-                            @if ($frame)
-                                <img src="{{ $frameUrl($frame) }}" alt="" class="absolute inset-0 w-full h-full object-cover">
-                                <span class="absolute left-3 bottom-3 px-2 py-1 rounded-full bg-navy/70 text-[9px] tracking-[.2em] text-[#E4E6EA]">{{ $frame['time'] }}</span>
-                            @else
-                                <div class="absolute inset-0" style="{{ $loop->first ? $salaStyle : $jardimStyle }}"></div>
-                            @endif
-                        </div>
-                    @endforeach
-                    <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[650px] rounded-[48px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]">
-                        <span class="absolute left-1/2 top-3 -translate-x-1/2 w-[90px] h-[26px] rounded-full bg-navy-3 z-10"></span>
-                        <video src="{{ $demoReel }}" @if ($poster) poster="{{ $poster }}" @endif autoplay muted loop playsinline controls preload="metadata"
-                               class="absolute inset-0 w-full h-full object-contain bg-navy" aria-label="Vídeo de demonstração: Moradia T3 em Lajeosa, Viseu"></video>
-                    </div>
-                    <div class="absolute left-1/2 bottom-[30px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap">
-                        <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
-                        <span class="text-[13px] text-[#E4E6EA]">Feito pela Imocena em 7 minutos · <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">ver o anúncio</a></span>
-                    </div>
-                @else
-                <div class="absolute left-0 top-[90px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 -rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)]" aria-hidden="true">
-                    <div class="absolute inset-x-0 top-0 h-[190px] saturate-[.85] brightness-90" style="{{ $jardimStyle }}"></div>
-                    <div class="absolute inset-x-0 top-[140px] h-[50px] bg-gradient-to-b from-navy/0 to-navy"></div>
-                    <div class="absolute inset-x-4 top-[230px] text-center flex flex-col items-center gap-2.5">
-                        <span class="text-[8px] tracking-[.34em] text-cyan">PREÇO</span>
-                        <span class="font-display text-[44px] leading-none">295.000 €</span>
-                        <span class="w-8 h-0.5 bg-coral"></span>
-                        <span class="text-[8px] font-light tracking-[.2em]">PRONTO A UTILIZAR</span>
-                    </div>
-                </div>
-                <div class="absolute right-0 top-[110px] w-[236px] h-[420px] rounded-[26px] overflow-hidden bg-navy border-[6px] border-navy-3 rotate-[7deg] shadow-[0_30px_60px_-20px_rgba(0,0,0,.7)] flex flex-col items-center px-[18px] pt-14 pb-6 gap-3.5 text-center" aria-hidden="true">
-                    <div class="w-[116px] h-[146px] bg-[#26324A] border border-cyan"></div>
-                    <span class="text-[7px] tracking-[.34em] text-cyan">VISITAS POR MARCAÇÃO</span>
-                    <span class="font-display text-[26px] leading-none">O seu nome</span>
-                    <span class="px-3 py-1.5 border border-cyan text-[10px] tracking-[.14em]">+351 9XX XXX XXX</span>
-                    <span class="mt-auto text-[8px] tracking-[.3em] opacity-70">AMI 00000</span>
-                </div>
-                <div class="absolute left-1/2 top-0 -ml-[150px] w-[300px] h-[534px] rounded-[32px] overflow-hidden bg-navy border-[7px] border-navy-3 shadow-[0_40px_90px_-20px_rgba(0,0,0,.8)]" aria-hidden="true">
-                    <div class="absolute inset-0 scale-[1.04] saturate-[.85] brightness-[.92]" style="{{ $fotoStyle }}"></div>
-                    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,22,38,.55)_0%,rgba(14,22,38,0)_28%,rgba(14,22,38,0)_46%,rgba(14,22,38,.94)_100%)]"></div>
-                    <div class="absolute top-[22px] inset-x-5 flex justify-between text-[7px] tracking-[.32em]"><span class="font-medium">A SUA AGÊNCIA</span><span class="font-light">REF. 2019</span></div>
-                    <span class="absolute top-[46px] left-5 px-2.5 py-1 bg-coral text-navy text-[8px] font-semibold tracking-[.24em]">NOVO IMÓVEL</span>
-                    <div class="absolute inset-x-5 bottom-12 flex flex-col gap-2.5">
-                        <div class="flex items-center gap-2"><span class="w-[22px] h-px bg-cyan"></span><span class="text-[8px] tracking-[.3em] text-cyan">LAJEOSA · VISEU</span></div>
-                        <span class="font-display text-[34px] leading-[1.02]">Moradia T3<br><em>com jardim</em> e garagem</span>
-                        <span class="text-[8px] font-light tracking-[.18em] opacity-85">185 M² · CLASSE B · GARAGEM</span>
-                    </div>
-                    <div class="absolute inset-x-5 bottom-[22px] h-0.5 bg-ivory/25"><div class="w-[38%] h-full bg-cyan"></div></div>
-                </div>
-                <div class="absolute left-1/2 bottom-[60px] -translate-x-1/2 flex items-center gap-3 px-[18px] py-3 rounded-full bg-navy-3 border border-cyan/35 whitespace-nowrap" aria-hidden="true">
-                    <span class="w-2.5 h-2.5 rounded-full bg-cyan"></span>
-                    <span class="text-[13px] text-[#E4E6EA]">Narração: <em class="font-display text-base">«Moradia em Lajeosa com vista para a serra…»</em></span>
-                </div>
-                @endif
-            </div>
         </div>
     </section>
 
     {{-- Funciona com --}}
     <section class="border-y border-ivory/10">
-        <div class="max-w-[1240px] mx-auto px-6 py-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-[13px] text-[#AEB5C1]">
+        <div class="max-w-[1240px] mx-auto px-6 py-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[13px] text-[#AEB5C1]">
             <span class="tracking-[.24em]">LÊ ANÚNCIOS DE</span>
-            <span class="text-xl font-semibold text-[#E4E6EA]">RE/MAX</span>
-            <span class="text-xl font-semibold text-[#E4E6EA]">iad Portugal</span>
-            <span class="text-xl font-semibold text-[#E4E6EA]">eXp Portugal</span>
-            <span class="text-xl font-semibold text-[#E4E6EA]">KW Portugal</span>
-        </div>
-    </section>
-
-    {{-- O problema: o caminho de hoje contra o nosso --}}
-    <section class="bg-ivory text-navy">
-        <div class="max-w-[1240px] mx-auto px-6 pt-28 pb-8">
-            <div class="text-center max-w-[820px] mx-auto">
-                <span class="text-xs tracking-[.32em] text-cyan-deep">O PROBLEMA</span>
-                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Fotos já não chegam. <em>E editar vídeo não é o seu trabalho.</em></h2>
-            </div>
-            <div class="mt-14 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5">
-                <div class="px-8 py-9 rounded-2xl border border-[#D6D1C5]">
-                    <span class="text-xs font-medium tracking-[.28em] text-[#4B5563]">SEM IMOCENA</span>
-                    <ul class="mt-6 flex flex-col gap-4 text-[15px] leading-relaxed text-[#4B5563]">
-                        @foreach (['Filmar, escolher música, montar e legendar: horas por imóvel.', 'Ou esperar dias por um videógrafo e pagar cada saída.', 'Entretanto, o anúncio fica só com fotos.', 'Ferramentas genéricas com voz brasileira ou robótica.'] as $item)
-                            <li class="flex gap-3 items-start"><span aria-hidden="true" class="shrink-0 text-bad font-semibold">✕</span><span>{{ $item }}</span></li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="px-8 py-9 rounded-2xl bg-white border-2 border-cyan">
-                    <span class="text-xs font-medium tracking-[.28em] text-cyan-deep">COM IMOCENA</span>
-                    <ul class="mt-6 flex flex-col gap-4 text-[15px] leading-relaxed">
-                        @foreach (['Cola o link do anúncio. Mais nada.', 'O reel fica pronto em poucos minutos.', 'Publica no mesmo dia em que angaria.', 'Voz em português de Portugal, com o seu contacto e AMI no fim.'] as $item)
-                            <li class="flex gap-3 items-start">{!! $check !!}<span>{{ $item }}</span></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+            @foreach (\App\Services\RealEstate\ListingScraper::NOMES as $nome)
+                <span class="text-lg font-semibold text-[#E4E6EA]">{{ $nome }}</span>
+            @endforeach
         </div>
     </section>
 
@@ -311,6 +315,7 @@
             <div class="text-center max-w-[760px] mx-auto">
                 <span class="text-xs tracking-[.32em] text-cyan-deep">COMO FUNCIONA</span>
                 <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Três passos. <em>Só um é seu.</em></h2>
+                <p class="mt-5 text-[15px] text-[#4B5563]">Quer ver primeiro? <a href="{{ $demoUrl }}" class="text-cyan-deep underline underline-offset-2">Veja um anúncio de exemplo e o vídeo que fizemos dele</a>.</p>
             </div>
             <div class="mt-[72px] grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8">
                 @foreach ([
@@ -325,125 +330,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    </section>
-
-    {{-- A oferta, empilhada --}}
-    <section>
-        <div class="max-w-[900px] mx-auto px-6 py-28">
-            <div class="text-center">
-                <div class="inline-flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">O QUE RECEBE GRÁTIS</span><span class="w-10 h-px bg-cyan"></span></div>
-                <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">Tudo isto, <em>a partir de um link.</em></h2>
-            </div>
-            <div class="mt-14 rounded-2xl border border-ivory/15 bg-navy-2 overflow-hidden">
-                <ul class="divide-y divide-ivory/10">
-                    @foreach ($stack as [$titulo, $texto])
-                        <li class="px-7 py-5 flex gap-4 items-start">
-                            <span class="mt-0.5">{!! $check !!}</span>
-                            <div class="flex-1 min-w-0">
-                                <span class="block text-[17px] font-semibold text-ivory">{{ $titulo }}</span>
-                                <span class="block mt-1 text-sm leading-relaxed text-[#C9CED6]">{{ $texto }}</span>
-                            </div>
-                            <span class="shrink-0 text-xs tracking-[.2em] text-cyan">INCLUÍDO</span>
-                        </li>
-                    @endforeach
-                </ul>
-                <div class="px-7 py-8 bg-ivory text-navy flex flex-wrap items-center justify-between gap-6">
-                    <div>
-                        <span class="block text-sm text-[#4B5563]">Valor de um vídeo: <s>20 €</s></span>
-                        <span class="block font-display text-[44px] leading-none mt-1">Hoje: 0 €</span>
-                        <span class="block mt-2 text-xs text-[#4B5563]">1 vídeo grátis por anúncio, com marca d’água Imocena.</span>
-                    </div>
-                    <a href="#pedido" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-coral text-navy text-base font-semibold hover:brightness-105">Quero o meu vídeo grátis →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- O que recebe --}}
-    <section id="exemplos">
-        <div class="max-w-[1240px] mx-auto px-6 py-28">
-            <div class="flex flex-wrap justify-between items-end gap-6">
-                <div class="max-w-[640px]">
-                    <div class="flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">O QUE RECEBE</span></div>
-                    <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal text-ivory">Um reel com ar de <em>agência premium.</em></h2>
-                </div>
-                <p class="max-w-[380px] text-[15px] leading-[1.7] font-light text-[#C9CED6]">Câmara lenta, tipografia editorial e transições discretas. Menos de 60 segundos, em 9:16. <a href="{{ $demoUrl }}" class="text-cyan underline underline-offset-2">Ver o anúncio de exemplo →</a></p>
-            </div>
-            @if (count($frames) >= 4)
-                {{-- Momentos do vídeo de demonstração, tal como foi renderizado --}}
-                <div class="mt-16 grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-5">
-                    @foreach ($frames as $i => $f)
-                        <figure>
-                            <a href="{{ $demoUrl }}" class="group relative block aspect-[9/16] overflow-hidden border border-ivory/10 rounded-[6px]">
-                                <img src="{{ $frameUrl($f) }}" alt="{{ $f['label'] }} — fotograma do vídeo de demonstração aos {{ $f['time'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700">
-                                <span class="absolute left-3 top-3 px-2 py-1 rounded-full bg-navy/70 text-[10px] tracking-[.2em] text-[#E4E6EA]">{{ $f['time'] }}</span>
-                            </a>
-                            <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">{{ sprintf('%02d', $i + 1) }} · {{ mb_strtoupper($f['label']) }}</figcaption>
-                        </figure>
-                    @endforeach
-                </div>
-                <p class="mt-6 text-xs text-[#AEB5C1]">Fotogramas do vídeo real da Moradia T3 em Lajeosa (imóvel de demonstração, imagens ilustrativas).</p>
-            @else
-            <div class="mt-16 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5" aria-hidden="true">
-                <figure>
-                    <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10">
-                        <div class="absolute inset-0 saturate-[.85] brightness-90" style="{{ $fotoStyle }}"></div>
-                        <div class="absolute inset-0 bg-gradient-to-b from-navy/0 from-45% to-navy/95"></div>
-                        <span class="absolute inset-x-4 bottom-[22px] font-display text-[30px] leading-none">Moradia T3 <em>com jardim</em></span>
-                    </div>
-                    <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">01 · ABERTURA</figcaption>
-                </figure>
-                <figure>
-                    <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10 flex flex-col gap-2 p-[18px]">
-                        <div class="flex-1 border border-cyan saturate-[.85] brightness-[.92]" style="{{ $salaStyle }}"></div>
-                        <div class="flex-1 border border-cyan saturate-[.85] brightness-75" style="{{ $cozinhaStyle }}"></div>
-                        <span class="pt-1.5 text-[9px] tracking-[.3em] text-cyan text-center">SALA · COZINHA</span>
-                    </div>
-                    <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">02 · DÍPTICO</figcaption>
-                </figure>
-                <figure>
-                    <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10 px-[22px] py-7 flex flex-col justify-center gap-[18px]">
-                        <span class="text-[9px] tracking-[.34em] text-cyan">FICHA DO IMÓVEL</span>
-                        @foreach (['ÁREA' => '185 m²', 'CERTIFICADO' => 'B', 'LOTE' => '620 m²', 'GARAGEM' => 'Sim'] as $k => $v)
-                            <div class="flex justify-between items-baseline {{ $loop->last ? '' : 'border-b border-ivory/20 pb-2.5' }}"><span class="text-[11px] font-light tracking-[.14em]">{{ $k }}</span><span class="font-display text-[26px] leading-none">{{ $v }}</span></div>
-                        @endforeach
-                    </div>
-                    <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">03 · FICHA</figcaption>
-                </figure>
-                <figure>
-                    <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10">
-                        <div class="absolute inset-x-0 top-0 h-[44%] saturate-[.85] brightness-90" style="{{ $jardimStyle }}"></div>
-                        <div class="absolute inset-x-0 top-[30%] h-[14%] bg-gradient-to-b from-navy/0 to-navy"></div>
-                        <div class="absolute inset-x-3 top-[54%] flex flex-col items-center gap-3 text-center">
-                            <span class="text-[9px] tracking-[.34em] text-cyan">PREÇO</span>
-                            <span class="font-display text-[44px] leading-none">295.000 €</span>
-                            <span class="w-9 h-0.5 bg-coral"></span>
-                        </div>
-                    </div>
-                    <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">04 · PREÇO</figcaption>
-                </figure>
-                <figure>
-                    <div class="relative aspect-[9/16] overflow-hidden border border-ivory/10 flex flex-col items-center justify-center gap-3.5 p-5 text-center">
-                        <div class="w-24 h-[120px] bg-[#26324A] border border-cyan"></div>
-                        <span class="font-display text-[26px] leading-none">O seu nome</span>
-                        <span class="text-[9px] font-light tracking-[.24em] opacity-80">CONSULTOR IMOBILIÁRIO</span>
-                        <span class="px-3 py-2 border border-cyan text-[11px] tracking-[.12em]">+351 9XX XXX XXX</span>
-                    </div>
-                    <figcaption class="mt-3 text-xs tracking-[.24em] text-[#AEB5C1]">05 · CONTACTO</figcaption>
-                </figure>
-            </div>
-            @endif
-        </div>
-    </section>
-
-    {{-- Sem risco --}}
-    <section class="bg-ivory text-navy">
-        <div class="max-w-[900px] mx-auto px-6 py-28 text-center">
-            <span class="text-xs tracking-[.32em] text-cyan-deep">SEM RISCO</span>
-            <h2 class="mt-4 font-display text-[clamp(40px,5vw,60px)] leading-[1.02] font-normal">Veja o vídeo primeiro. <em>Pague só se gostar.</em></h2>
-            <p class="mt-6 mx-auto max-w-[620px] text-base leading-[1.75] text-[#4B5563]">O primeiro vídeo é grátis, sem cartão e sem compromisso. Se gostar, a versão limpa custa 20 €, ou desde 8,75 € com um pack. Se não gostar, não paga nada. E não há subscrição: os packs valem 12 meses e só os usa quando angariar.</p>
-            <a href="#pedido" class="mt-8 inline-flex items-center min-h-[52px] px-6 rounded-full bg-navy text-ivory text-[15px] font-semibold hover:bg-navy-3">Experimentar grátis →</a>
         </div>
     </section>
 

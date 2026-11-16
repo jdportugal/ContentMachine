@@ -33,7 +33,9 @@ class LeadsTest extends TestCase
 
     public function test_the_landing_page_is_public(): void
     {
-        $this->get('/')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('Peça o seu vídeo grátis');
+        // First the question; the form is on the agency's page.
+        $this->get('/')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('em que agência trabalha?')->assertDontSee('Peça o seu vídeo grátis');
+        $this->get('/?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')->assertSee('Peça o seu vídeo grátis')->assertSee('remax.pt');
     }
 
     public function test_the_demo_listing_has_a_page_and_reads_without_fetching(): void
@@ -291,7 +293,7 @@ class LeadsTest extends TestCase
         $this->assertNull($lead->marketing_em);
 
         session()->forget('lead_id');   // a fresh visitor, not the one whose video is in progress
-        Livewire::test(Landing::class)->assertDontSee('O seu email')
+        Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->assertDontSee('O seu email')
             ->set('marketing', true)->assertSee('O seu email')
             ->set(['anuncio' => self::ANUNCIO.'7', 'consentimento' => true])->call('pedir')
             ->assertHasErrors(['email' => 'required']);

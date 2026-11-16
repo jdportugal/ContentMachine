@@ -35,7 +35,7 @@ class LegalTest extends TestCase
 
     public function test_the_free_video_form_has_one_optional_box_and_a_notice(): void
     {
-        $html = $this->get('/')->assertOk()
+        $html = $this->get('/?agencia=remax')->assertOk()
             ->assertSee('Ao pedir, confirma que é o consultor deste anúncio')
             ->assertSee('Avisem-me por email quando eu publicar um imóvel novo')->assertSee('(Opcional)')
             ->getContent();

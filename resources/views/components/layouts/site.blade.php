@@ -44,6 +44,7 @@
         function quando(fn) { ativo ? fn() : fila.push(fn); }
         return {
             carregar, quando,
+            agencia(a) { quando(() => { window.fbq && fbq('trackCustom', 'EscolheuAgencia', { agencia: a }); window.gtag && gtag('event', 'select_content', { content_type: 'agencia', item_id: a }); }); },
             lead(id) { quando(() => { window.fbq && fbq('track', 'Lead', {}, { eventID: 'lead-' + id }); window.gtag && gtag('event', 'generate_lead', { lead_id: 'lead-' + id }); }); },
             compra(c) { quando(() => {
                 window.fbq && fbq('track', 'Purchase', { value: c.valor, currency: c.moeda, num_items: c.videos, content_type: 'product' }, { eventID: c.id });
@@ -52,7 +53,7 @@
         };
     })();
     if (document.cookie.split('; ').includes('imocena_cookies=sim')) imocenaMedicao.carregar();
-    document.addEventListener('livewire:init', () => Livewire.on('lead-criado', ({ id }) => imocenaMedicao.lead(id)));
+    document.addEventListener('livewire:init', () => { Livewire.on('lead-criado', ({ id }) => imocenaMedicao.lead(id)); Livewire.on('agencia-escolhida', ({ agencia }) => imocenaMedicao.agencia(agencia)); });
     </script>
     @endif
 
