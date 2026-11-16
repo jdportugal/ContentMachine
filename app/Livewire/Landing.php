@@ -47,7 +47,7 @@ class Landing extends Component
         'exp' => ['nome' => 'eXp Portugal', 'da' => 'da eXp', 'site' => 'expportugal.com', 'lemos' => true],
         'kw' => ['nome' => 'KW Portugal', 'da' => 'da KW', 'site' => 'kwportugal.pt', 'lemos' => true],
         'era' => ['nome' => 'ERA', 'da' => 'da ERA', 'site' => 'era.pt', 'lemos' => false],
-        'century21' => ['nome' => 'Century 21', 'da' => 'da Century 21', 'site' => 'century21.pt', 'lemos' => false],
+        'century21' => ['nome' => 'Century 21', 'da' => 'da Century 21', 'site' => 'century21.pt', 'lemos' => true],
         'zome' => ['nome' => 'Zome', 'da' => 'da Zome', 'site' => 'zome.pt', 'lemos' => false],
         'outra' => ['nome' => 'Outra agência', 'da' => 'da sua agência', 'site' => '', 'lemos' => false],
     ];

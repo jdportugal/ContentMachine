@@ -18,16 +18,17 @@ class ListingScraper
         'iad' => IadListingScraper::class,
         'exp' => ExpListingScraper::class,
         'kw' => KwListingScraper::class,
+        'century21' => Century21ListingScraper::class,
         'demo' => DemoListingScraper::class,
     ];
 
     /** The portals as a customer reads them, in the order they are listed on the site. */
-    public const NOMES = ['RE/MAX', 'iad Portugal', 'eXp Portugal', 'KW Portugal'];
+    public const NOMES = ['RE/MAX', 'iad Portugal', 'eXp Portugal', 'KW Portugal', 'Century 21'];
 
-    public const UNSUPPORTED = 'Only RE/MAX, iad, eXp and KW Portugal listings are supported.';
+    public const UNSUPPORTED = 'Only RE/MAX, iad, eXp, KW and Century 21 listings are supported.';
 
     /** What a customer is told when the link is from another site. */
-    public const MENSAGEM = 'Por agora lemos anúncios da RE/MAX, da iad Portugal, da eXp Portugal e da KW Portugal. Cole o link de um desses sites.';
+    public const MENSAGEM = 'Por agora lemos anúncios da RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal e da Century 21. Cole o link de um desses sites.';
 
     public static function supports(string $url): bool
     {
