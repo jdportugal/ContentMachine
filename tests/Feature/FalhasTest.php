@@ -75,6 +75,17 @@ class FalhasTest extends TestCase
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === $url);
     }
 
+    public function test_kw_listings_are_read_with_their_own_premium_theme(): void
+    {
+        $url = 'https://www.kwportugal.pt/pt/Imovel/Venda/Moradia/Setubal/Setubal/Azeitao/75048/KWPT-039614';
+        $this->assertSame('kw', ListingScraper::portal($url));
+        $this->assertFileExists(base_path('vault/themes/kw-premium/theme.json'));   // ships with the image
+        $this->get('/')->assertOk()->assertSee('KW Portugal');
+
+        Livewire::test(Landing::class)->set(['anuncio' => $url])->call('pedir')->assertHasNoErrors();
+        Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === $url);
+    }
+
     public function test_a_failed_video_is_made_again_once_with_the_same_options_and_the_customer_sees_it_in_progress(): void
     {
         [$user, $lead, $clip] = $this->videoPago();

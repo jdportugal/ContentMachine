@@ -112,7 +112,7 @@ class ListingScriptWriter
             'title' => trim((string) ($out['title'] ?? $listing['title'])),
             'hook' => trim((string) ($out['hook'] ?? '')),
             // Spoken text: "RE/MAX" is read out with the slash ("re barra max").
-            'voiceover' => self::expFalado(self::iadFalado(self::semBarra(trim((string) $out['voiceover'])))),
+            'voiceover' => self::kwFalado(self::expFalado(self::iadFalado(self::semBarra(trim((string) $out['voiceover']))))),
             'scenes' => is_array($out['scenes'] ?? null) ? $out['scenes'] : [],
             'flags' => array_values(array_filter(array_map('strval', (array) ($out['flags'] ?? [])))),
             'message' => trim((string) ($out['message'] ?? '')),
@@ -126,7 +126,7 @@ class ListingScriptWriter
      */
     public static function withAfterIntroLine(string $voiceover, string $line): string
     {
-        $line = self::expFalado(self::iadFalado(trim($line)));
+        $line = self::kwFalado(self::expFalado(self::iadFalado(trim($line))));
         if ($line === '' || str_contains(Str::lower($voiceover), Str::lower(rtrim($line, '.!?')))) {
             return $voiceover;
         }
@@ -154,6 +154,12 @@ class ListingScriptWriter
     public static function expFalado(string $text): string
     {
         return preg_replace('/\bexp\b/iu', 'E X P', $text);
+    }
+
+    /** Spoken KW: "Kapa Dâbliu", as it is said in Portugal — as written, ElevenLabs reads "quilowatt". */
+    public static function kwFalado(string $text): string
+    {
+        return preg_replace('/\bKW\b/u', 'Kapa Dâbliu', $text);
     }
 
     /**

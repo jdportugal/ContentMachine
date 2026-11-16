@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Services\RealEstate\KwListingScraper;
 use App\Services\RealEstate\ListingScraper;
+use App\Services\RealEstate\ListingScriptWriter;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -61,6 +62,12 @@ class KwListingScraperTest extends TestCase
         $this->assertSame('E', $l['details']['Certificado Energético']);
         $this->assertArrayNotHasKey('Suites', $l['details']);
         $this->assertArrayNotHasKey('Características', $l['details']);
+    }
+
+    public function test_the_voiceover_says_kw_as_letters(): void
+    {
+        $this->assertSame('fale com o Acácio da Kapa Dâbliu Select Cascais.', ListingScriptWriter::kwFalado('fale com o Acácio da KW Select Cascais.'));
+        $this->assertSame('consumo de 3 kW', ListingScriptWriter::kwFalado('consumo de 3 kW'));
     }
 
     public function test_kw_links_are_recognised_and_a_page_without_a_listing_is_refused(): void
