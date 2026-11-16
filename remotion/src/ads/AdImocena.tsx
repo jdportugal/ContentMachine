@@ -16,12 +16,22 @@ import { loadThemeFonts } from "../fonts";
 /**
  * An Imocena ad, Hormozi-style: Hook (the callout) → Agitate (the old way's cost)
  * → Demo (paste the link, get the reel) → Stack (what's in it) → CTA (first one free).
- * Three variants test one callout each: price, speed, no hassle.
+ * Three variants test one callout each: price, speed, no hassle. With `agencia`,
+ * the ad speaks to one network's agents: the hook names it, the demo pastes a link
+ * from its site and the phone plays the demo reel in its own template.
  */
 
 export type Variante = "preco" | "minutos" | "simples";
 
 export type Secao = { segundos: number; audio: string | null; legenda: string };
+
+/** The network an agency-specific ad is aimed at. */
+export type Agencia = {
+  nome: string; // as written on screen: "RE/MAX", "iad", "Century 21"
+  pergunta: string; // the hook's question: "É consultor da RE/MAX?"
+  link: string; // a listing link on its site, typed in the demo
+  cor: string; // its brand colour, for the name in the hook
+};
 
 export type AdProps = {
   variante: Variante;
@@ -29,6 +39,7 @@ export type AdProps = {
   reel: string | null; // the demo reel (public dir)
   musica?: string | null; // a real-estate track under the voice
   fotos: string[]; // demo house photos (public dir)
+  agencia?: Agencia | null;
 };
 
 const FPS = 30;
@@ -144,7 +155,22 @@ const Demonstracao: React.FC = () => (
 
 // ── 1 · Hook ───────────────────────────────────────────────────────────────
 
-const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fotos }) => {
+/** "É consultor da RE/MAX?": the network's name big, in its colour, so its agents stop scrolling. */
+const PerguntaAgencia: React.FC<{ agencia: Agencia }> = ({ agencia }) => {
+  const e = useEntrada(-6, 12);
+  const [antes, depois] = agencia.pergunta.split(agencia.nome);
+  return (
+    <div style={{ padding: "0 50px", opacity: e, transform: `translateY(${(1 - e) * 30}px)` }}>
+      <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 58, lineHeight: 1.1, color: C.ivory }}>{antes.trim()}</div>
+      <div style={{ marginTop: 18, display: "inline-block", padding: "10px 44px 16px", borderRadius: 24, background: agencia.cor, fontFamily: SANS, fontWeight: 800, fontSize: 112, lineHeight: 1.05, color: "#FFFFFF", whiteSpace: "nowrap" }}>
+        {agencia.nome}
+        <span style={{ fontWeight: 600 }}>{(depois ?? "").trim()}</span>
+      </div>
+    </div>
+  );
+};
+
+const Hook: React.FC<{ variante: Variante; fotos: string[]; agencia?: Agencia | null }> = ({ variante, fotos, agencia }) => {
   const a = useEntrada(-5, 12);
   const b = useEntrada(3);
   const f = useCurrentFrame();
@@ -155,7 +181,7 @@ const Hook: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, fot
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 300 }}>
         {variante === "preco" && (
           <div style={{ textAlign: "center" }}>
-            <Etiqueta>É CONSULTOR IMOBILIÁRIO?</Etiqueta>
+            {agencia ? <PerguntaAgencia agencia={agencia} /> : <Etiqueta>É CONSULTOR IMOBILIÁRIO?</Etiqueta>}
             <div style={{ marginTop: 30, fontFamily: DISPLAY, fontWeight: 700, fontSize: 430, lineHeight: 0.9, color: C.coral, transform: `scale(${0.6 + 0.4 * a})`, opacity: a }}>10 €</div>
             <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 66, letterSpacing: 16, color: C.ivory, opacity: b }}>POR VÍDEO</div>
           </div>
@@ -259,9 +285,9 @@ const Agitar: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, f
 
 // ── 3 · Demo: paste the link, get the reel ─────────────────────────────────
 
-const Demo: React.FC<{ reel: string | null; fotos: string[] }> = ({ reel, fotos }) => {
+const Demo: React.FC<{ reel: string | null; fotos: string[]; agencia?: Agencia | null }> = ({ reel, fotos, agencia }) => {
   const f = useCurrentFrame();
-  const link = "remax.pt/imoveis/moradia-t3-lajeosa";
+  const link = agencia?.link ?? "remax.pt/imoveis/moradia-t3-lajeosa";
   const letras = Math.floor(interpolate(f, [4, 34], [0, link.length], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
   const tel = useEntrada(30, 13);
   return (
@@ -287,10 +313,11 @@ const Demo: React.FC<{ reel: string | null; fotos: string[] }> = ({ reel, fotos 
 
 // ── 4 · Stack: what's in it ────────────────────────────────────────────────
 
-const Stack: React.FC<{ variante: Variante; reel: string | null; fotos: string[] }> = ({ variante, reel, fotos }) => {
+const Stack: React.FC<{ variante: Variante; reel: string | null; fotos: string[]; agencia?: Agencia | null }> = ({ variante, reel, fotos, agencia }) => {
   const f = useCurrentFrame();
-  const itens =
-    variante === "minutos"
+  const itens = agencia
+    ? [`Com a imagem da ${agencia.nome}`, "Narração profissional", "O seu contacto no fim", "Edite e refaça grátis"]
+    : variante === "minutos"
       ? ["Narração em português", "Fotos com movimento", "O seu contacto no fim", "Pronto para Reels e TikTok"]
       : variante === "simples"
         ? ["Narração profissional", "Música incluída", "As melhores fotos", "O seu contacto no fim"]
@@ -346,14 +373,14 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
 
 // ── the ad ─────────────────────────────────────────────────────────────────
 
-export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos, musica }) => {
+export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos, musica, agencia }) => {
   const { durationInFrames } = useVideoConfig();
   loadThemeFonts("Cormorant Garamond", "Poppins");
   const blocos = [
-    <Hook variante={variante} fotos={fotos} />,
+    <Hook variante={variante} fotos={fotos} agencia={agencia} />,
     <Agitar variante={variante} fotos={fotos} />,
-    <Demo reel={reel} fotos={fotos} />,
-    <Stack variante={variante} reel={reel} fotos={fotos} />,
+    <Demo reel={reel} fotos={fotos} agencia={agencia} />,
+    <Stack variante={variante} reel={reel} fotos={fotos} agencia={agencia} />,
     <CTA variante={variante} fotos={fotos} />,
   ];
   let inicio = 0;
