@@ -92,6 +92,7 @@ class LandingAgenciaTest extends TestCase
         Queue::assertNothingPushed();
 
         // A link pasted without answering the question answers it.
+        session()->forget('agencia');
         Livewire::test(Landing::class)->set('anuncio', 'https://www.iadportugal.pt/anuncio/t2-faro/r555001')->call('pedir')->assertHasNoErrors()->assertSet('agencia', 'iad');
         Queue::assertPushed(ImportListingJob::class, 1);
         $this->assertSame('iad', DB::table('leads')->sole()->agencia);

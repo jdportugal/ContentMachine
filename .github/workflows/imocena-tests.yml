@@ -20,6 +20,7 @@ jobs:
           php-version: '8.4'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, intl
           coverage: none
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - run: composer install --prefer-dist --no-interaction --no-progress
       - run: printf "APP_KEY=\nAPP_TIMEZONE=UTC\n" > .env && php artisan key:generate
       - uses: actions/setup-node@v4
