@@ -31,7 +31,7 @@ class MedicaoTest extends TestCase
 
     public function test_tags_wait_for_consent_and_the_privacy_page_explains_them(): void
     {
-        $this->get('/')->assertOk()
+        $this->get('/?agencia=remax')->assertOk()
             ->assertSee('id="cookies"', false)->assertSee('Aceitar')->assertSee('Rejeitar')
             ->assertSee("includes('imocena_cookies=sim')) imocenaMedicao.carregar()", false)   // loaded only with a yes
             ->assertSee('G-TESTE123')->assertSee('/privacidade', false)->assertSee('Preferências de cookies');

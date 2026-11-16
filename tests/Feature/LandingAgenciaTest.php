@@ -18,13 +18,13 @@ class LandingAgenciaTest extends TestCase
     public function test_the_page_asks_the_agency_first_and_then_shows_that_agencys_page(): void
     {
         Livewire::test(Landing::class)
-            ->assertSee('em que agência trabalha?')->assertSee('RE/MAX')->assertSee('KW Portugal')->assertSee('Century 21')->assertSee('Outra')
+            ->assertSee('Em que agência trabalha?')->assertSee('RE/MAX')->assertSee('KW Portugal')->assertSee('Century 21')->assertSee('Outra')
             ->assertDontSee('Criar vídeo grátis')
             ->call('escolher', 'kw')
             ->assertSet('agencia', 'kw')->assertDispatched('agencia-escolhida', agencia: 'kw')
             ->assertSee('O vídeo do seu imóvel KW Portugal')->assertSee('kwportugal.pt')->assertSee('Criar vídeo grátis')
             ->assertSee('Vídeo com a imagem da KW')->assertSee('Não é da KW? Trocar de agência')
-            ->call('trocar')->assertSet('agencia', '')->assertSee('em que agência trabalha?');
+            ->call('trocar')->assertSet('agencia', '')->assertSee('Em que agência trabalha?');
 
         $this->assertSame(['escolha', 'kw'], array_values((array) DB::table('landing_eventos')->select('tipo', 'agencia')->sole()));
         // An unknown key changes nothing.
@@ -39,7 +39,7 @@ class LandingAgenciaTest extends TestCase
 
         session()->forget('agencia');
         $this->get('/?agencia=exp')->assertOk()->assertSee('O vídeo do seu imóvel eXp Portugal');
-        $this->get('/?agencia=nope')->assertOk()->assertSee('em que agência trabalha?');
+        $this->get('/?agencia=nope')->assertOk()->assertSee('Em que agência trabalha?');
     }
 
     public function test_an_agency_we_do_not_read_yet_leaves_an_email_to_be_told(): void

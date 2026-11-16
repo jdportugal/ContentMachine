@@ -55,6 +55,52 @@
 @endphp
 
 <div>
+    @php
+        // The page asks the agency first; after that (or with a request under way, or a link already
+        // filled in from an alert email) it is the short page: that agency's name, its video, the form.
+        $passo2 = $ag !== null || $pedido !== null || $jaTeve || $anuncio !== '';
+        $lemos = $ag['lemos'] ?? true;
+        $reelAg = \App\Livewire\Landing::demoReel($agencia, $demoSlug);
+        $nomeAg = $ag && $agencia !== 'outra' ? $ag['nome'] : null;
+    @endphp
+    @if (! $passo2)
+    {{-- Passo 1: só a pergunta. Uma agência por mosaico, com o logótipo quando o temos
+         (public/images/agencias/<chave>.svg ou .png), senão o nome. Nada mais no ecrã. --}}
+    <main class="min-h-dvh flex flex-col" x-data
+          @keydown.window="if (! $event.metaKey && ! $event.ctrlKey && ! $event.altKey && ! ['INPUT','TEXTAREA'].includes($event.target.tagName)) { const i = 'abcdefgh'.indexOf($event.key.toLowerCase()); const b = i >= 0 ? $refs.mosaicos.querySelectorAll('button')[i] : null; if (b) b.click(); }">
+        <header class="px-6 py-5 flex items-center justify-between">
+            <span class="flex items-baseline gap-2.5 text-ivory">
+                <span class="font-display text-[26px] font-medium">Imocena</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>
+            </span>
+            <a href="{{ route('login') }}" class="inline-flex items-center min-h-11 text-sm text-[#AEB5C1] hover:text-ivory">Entrar</a>
+        </header>
+        <div class="flex-1 flex items-center">
+            <div id="pedido" class="w-full max-w-[880px] mx-auto px-6 pb-16">
+                <h1 class="font-display text-[clamp(34px,5.4vw,56px)] leading-[1.05] font-normal text-ivory">Em que agência trabalha?</h1>
+                <p class="mt-3 text-base md:text-lg font-light text-[#C9CED6]">Escolha a sua para ver o vídeo do seu imóvel com a imagem dela.</p>
+                <div x-ref="mosaicos" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    @foreach (\App\Livewire\Landing::AGENCIAS as $chave => $a)
+                        @php
+                            $logo = collect(['svg', 'png', 'webp'])->map(fn ($x) => "images/agencias/{$chave}.{$x}")->first(fn ($p) => is_file(public_path($p)));
+                            $rotulo = $chave === 'outra' ? 'Outra agência' : $a['nome'];
+                        @endphp
+                        <button type="button" wire:click="escolher('{{ $chave }}')" wire:loading.attr="disabled" wire:target="escolher" aria-label="{{ $rotulo }}"
+                                class="group relative h-[104px] md:h-[124px] px-4 rounded-[16px] bg-ivory border-2 border-transparent flex items-center justify-center cursor-pointer transition hover:border-cyan hover:-translate-y-0.5 focus:outline-none focus-visible:border-cyan focus-visible:ring-4 focus-visible:ring-cyan/30 disabled:opacity-60">
+                            <span aria-hidden="true" class="hidden md:flex absolute left-2.5 top-2.5 w-6 h-6 items-center justify-center rounded-md border border-navy/25 text-[11px] font-semibold text-navy/70 group-hover:bg-navy group-hover:text-ivory group-hover:border-navy">{{ chr(65 + $loop->index) }}</span>
+                            @if ($logo)
+                                <img src="{{ asset($logo) }}" alt="{{ $rotulo }}" class="max-h-[52px] md:max-h-[60px] max-w-[78%] object-contain">
+                            @else
+                                <span class="text-center text-[19px] md:text-[21px] leading-tight font-semibold tracking-tight text-navy">{{ $rotulo }}</span>
+                            @endif
+                        </button>
+                    @endforeach
+                </div>
+                <p wire:loading wire:target="escolher" class="mt-5 text-sm text-cyan">A abrir…</p>
+            </div>
+        </div>
+    </main>
+    @else
     {{-- Barra de oferta --}}
     <div class="bg-coral text-navy text-center px-4 py-2.5 text-sm">
         <strong class="font-semibold">Oferta de lançamento:</strong> 1 vídeo grátis por anúncio, sem cartão de crédito.
@@ -75,45 +121,11 @@
         </nav>
     </header>
 
-    @php
-        // The page asks the agency first; after that (or with a request under way, or a link already
-        // filled in from an alert email) it is the short page: that agency's name, its video, the form.
-        $passo2 = $ag !== null || $pedido !== null || $jaTeve || $anuncio !== '';
-        $lemos = $ag['lemos'] ?? true;
-        $reelAg = \App\Livewire\Landing::demoReel($agencia, $demoSlug);
-        $nomeAg = $ag && $agencia !== 'outra' ? $ag['nome'] : null;
-    @endphp
-    {{-- Hero: 1) a agência; 2) a página dessa agência, com o vídeo no modelo dela e o formulário --}}
+    {{-- Hero: a página da agência, com o vídeo no modelo dela e o formulário --}}
     <section class="relative overflow-hidden">
         <div class="max-w-[1240px] mx-auto px-6 pt-8 pb-16 md:pt-16 md:pb-24 flex flex-wrap gap-x-14 gap-y-10 items-center">
             <div class="flex-[1_1_520px] min-w-0">
-            @if (! $passo2)
-                {{-- Passo 1: em que agência trabalha? --}}
-                <div class="flex items-center gap-3.5">
-                    <span class="w-10 h-px bg-cyan"></span>
-                    <span class="text-xs tracking-[.32em] text-cyan">CONSULTORES IMOBILIÁRIOS EM PORTUGAL</span>
-                </div>
-                <h1 class="mt-5 font-display text-[clamp(38px,6.4vw,80px)] leading-[.98] font-normal text-ivory">O vídeo do seu imóvel, pronto em minutos. <em class="text-coral">Grátis.</em></h1>
-                <div id="pedido" class="mt-7 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
-                    <div class="rounded-[21px] bg-navy-2 px-5 py-6 sm:px-7">
-                        <h2 class="font-display text-[28px] leading-tight text-ivory">Para começar: em que agência trabalha?</h2>
-                        <p class="mt-1.5 text-sm text-[#C9CED6]">Mostramos-lhe um vídeo com a imagem da sua agência.</p>
-                        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            @foreach (\App\Livewire\Landing::AGENCIAS as $chave => $a)
-                                <button type="button" wire:click="escolher('{{ $chave }}')" wire:loading.attr="disabled" wire:target="escolher"
-                                        class="min-h-[56px] px-3 rounded-[14px] bg-navy border border-ivory/15 text-[15px] font-semibold text-ivory cursor-pointer hover:border-cyan hover:bg-navy-3 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan/25 disabled:opacity-60 transition">
-                                    {{ $chave === 'outra' ? 'Outra' : $a['nome'] }}
-                                </button>
-                            @endforeach
-                        </div>
-                        <div class="mt-5 pt-4 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
-                            <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
-                            <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
-                            <span class="flex items-center gap-2">{!! $check !!}Voz em português de Portugal</span>
-                        </div>
-                    </div>
-                </div>
-            @elseif ($lemos || $pedido !== null)
+            @if ($lemos || $pedido !== null)
                 {{-- Passo 2: a página da agência --}}
                 <div class="flex items-center gap-3.5">
                     <span class="w-10 h-px bg-cyan"></span>
@@ -455,4 +467,5 @@
             <span>Feito em Portugal</span>
         </div>
     </footer>
+    @endif
 </div>

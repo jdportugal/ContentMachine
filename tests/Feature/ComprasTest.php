@@ -52,7 +52,7 @@ class ComprasTest extends TestCase
 
     public function test_the_buy_buttons_open_the_payment_links_and_fall_back_to_email(): void
     {
-        $this->get('/')->assertOk()
+        $this->get('/?agencia=remax')->assertOk()
             ->assertSee('https://buy.stripe.com/avulso?locale=pt', false)
             ->assertSee('https://buy.stripe.com/pack10?locale=pt', false)
             ->assertSee('mailto:', false);   // pack20 has no link yet → email
