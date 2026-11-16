@@ -21,7 +21,7 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, intl
           coverage: none
       - run: composer install --prefer-dist --no-interaction --no-progress
-      - run: cp .env.example .env && php artisan key:generate
+      - run: printf "APP_KEY=\nAPP_TIMEZONE=UTC\n" > .env && php artisan key:generate
       - uses: actions/setup-node@v4
         with:
           node-version: 22
