@@ -30,6 +30,37 @@ class ListingScraper
     /** What a customer is told when the link is from another site. */
     public const MENSAGEM = 'Por agora lemos anúncios da RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal e da Century 21. Cole o link de um desses sites.';
 
+    /** What an agent is told when they paste their own page or a search instead of one property. */
+    public const NAO_E_IMOVEL = 'Este link é de uma página de consultor ou de uma pesquisa, não de um imóvel. Abra o imóvel que quer em vídeo e copie o link dessa página.';
+
+    /**
+     * A page on a portal we read that is not one property: an agent's or agency's page, or a
+     * search (RE/MAX: /comprar/…, /arrendar/…, ?s=…). Agents mix these up with a listing; caught
+     * when the link is pasted, so they are told at once instead of getting a failed video.
+     */
+    public static function naoEImovel(string $url): bool
+    {
+        $portal = self::portal($url);
+        if ($portal === null || $portal === 'demo') {
+            return false;
+        }
+        $path = strtolower(rtrim((string) parse_url($url, PHP_URL_PATH), '/'));
+        $query = (string) parse_url($url, PHP_URL_QUERY);
+        if ($path === '' || preg_match('#^/(pt|en)$#', $path)) {
+            return true;   // the portal's home page
+        }
+        // Agent and agency pages, on any portal.
+        if (preg_match('#/(agente|agentes|agent|agents|consultor|consultora|consultores|real-estate-agent|agente-imobiliario|officer|agencia|agencias|agency)(/|$)#', $path)) {
+            return true;
+        }
+        // RE/MAX searches (an agent's "my listings" link is one): /comprar/…, /arrendar/…, or a ?s= filter.
+        if ($portal === 'remax' && (preg_match('#/(comprar|arrendar)(/|$)#', $path) || preg_match('/(^|&)s=/', $query))) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function supports(string $url): bool
     {
         return self::portal($url) !== null;

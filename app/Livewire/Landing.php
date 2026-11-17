@@ -148,12 +148,17 @@ class Landing extends Component
         if (filter_var($this->anuncio, FILTER_VALIDATE_URL) && ! ListingScraper::supports($this->anuncio)) {
             $this->registar('link-recusado', ['anuncio' => mb_substr($this->anuncio, 0, 500)]);
         }
+        // An agent's own page or a search instead of one property (see ListingScraper::naoEImovel).
+        if (ListingScraper::naoEImovel($this->anuncio)) {
+            $this->registar('link-nao-imovel', ['anuncio' => mb_substr($this->anuncio, 0, 500)]);
+        }
         if ($this->marketing && $this->email === '' && $agente) {
             $this->email = (string) rescue(fn () => app(PaginaDoConsultor::class)->email($agente, 8), '', report: false);
         }
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500',
                 fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
+                fn ($a, $v, $fail) => ListingScraper::naoEImovel($v) ? $fail(ListingScraper::NAO_E_IMOVEL) : null,
                 // A failed attempt does not use up the free video: only leads that did not fail count.
                 fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->whereNull('falhou_em')->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
             'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],

@@ -64,7 +64,8 @@ class NovoVideo
     {
         return [
             'anuncio' => ['required', 'url:https,http', 'max:500',
-                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM)],
+                fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
+                fn ($a, $v, $fail) => ListingScraper::naoEImovel($v) ? $fail(ListingScraper::NAO_E_IMOVEL) : null],
         ];
     }
 
