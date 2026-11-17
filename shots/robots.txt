@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /conta
+Disallow: /v/
+Disallow: /obrigado
+Disallow: /entrar/
+Disallow: /emails/
+Disallow: /login
+Disallow: /register
+Disallow: /stripe/
+
+Sitemap: http://127.0.0.1:8000/sitemap.xml
