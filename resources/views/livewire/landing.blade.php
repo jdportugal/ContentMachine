@@ -234,7 +234,7 @@
                         <div role="status" class="flex flex-col gap-4">
                             <span class="font-display text-[32px] leading-tight text-ivory">Estamos a fazer o seu vídeo.</span>
                             <div class="h-1.5 rounded-full bg-ivory/10 overflow-hidden"><div class="h-full bg-cyan transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
-                            <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui@if (! empty($pedido['email'])) e enviamo-lo também para {{ $pedido['email'] }}@endif.</p>
+                            <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui{{ ! empty($pedido['email']) ? ' e enviamo-lo também para '.$pedido['email'] : '' }}.</p>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'falhou')
                         <div role="alert" class="flex flex-col gap-3">
