@@ -44,9 +44,13 @@ class AtualizarLeads extends Command
             if ($dados !== [] && $dados != array_filter(['nome' => $lead->nome, 'telefone' => $lead->telefone])) {
                 DB::table('leads')->where('id', $lead->id)->update($dados + ['updated_at' => now()]);
             }
-            // Made through a colleague's invite: the colleague's video comes out clean.
-            if (isset($dados['pronto_em']) && ! empty($lead->convidado_por)) {
-                rescue(fn () => $convites->recompensar(DB::table('leads')->find($lead->id)));
+            if (isset($dados['pronto_em'])) {
+                // "O vídeo do seu imóvel está pronto", to the email they left (if any).
+                rescue(fn () => app(\App\Services\Leads\AvisoPronto::class)->enviar(DB::table('leads')->find($lead->id)));
+                // Made through a colleague's invite: the colleague's video comes out clean.
+                if (! empty($lead->convidado_por)) {
+                    rescue(fn () => $convites->recompensar(DB::table('leads')->find($lead->id)));
+                }
             }
         }
 

@@ -40,7 +40,7 @@
     ];
 
     $faq = [
-        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa custa 20 €, ou a partir de 8,75 € com um pack.'],
+        ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa desse vídeo custa 10 € (oferta de lançamento). Os seguintes: 20 €, ou a partir de 8,75 € com um pack.'],
         ['Quanto tempo demora?', 'Poucos minutos. Mantenha a página aberta: o vídeo aparece no mesmo sítio onde colou o link.'],
         ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
         ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal, eXp Portugal (incluindo os sites dos consultores eXp), KW Portugal e Century 21. Basta copiar o link da barra de endereço do anúncio.'],
@@ -169,14 +169,24 @@
                                 @elseif (! empty($pedido['pago']))
                                 <p class="text-sm leading-relaxed text-[#C9CED6]">Versão sem marca d’água — já é sua. Também está na <a href="{{ route('conta') }}" class="text-cyan underline">sua conta</a>.</p>
                                 @else
-                                <p class="text-sm leading-relaxed text-[#C9CED6]">Esta versão leva a marca d’água Imocena. A versão limpa custa 20 €, ou a partir de 8,75 € com um pack.</p>
+                                <p class="text-sm leading-relaxed text-[#C9CED6]">Esta versão leva a marca d’água Imocena. <strong class="text-ivory font-medium">Oferta de lançamento:</strong> a versão limpa deste vídeo por 10 €.</p>
                                 @endif
                                 <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
                                     Descarregar MP4
                                 </a>
                                 @if (empty($pedido['pago']))
-                                <a href="{{ $stripe('avulso', 'Vídeo avulso (20 €)') }}" class="text-sm font-medium text-cyan underline underline-offset-2">Quero a versão limpa (20 €)</a>
+                                {{-- Launch offer: this video clean for 10 € (the ad's price), with the pack beside it. --}}
+                                <div class="flex flex-col sm:flex-row gap-2.5">
+                                    <a href="{{ $stripe('primeiro', 'Versão limpa do 1.º vídeo (10 €)') }}" class="flex-1 inline-flex flex-col items-center justify-center min-h-[52px] px-5 py-2 rounded-[18px] bg-ivory text-navy font-semibold hover:brightness-95 text-center">
+                                        <span>Versão limpa · 10 €</span>
+                                        <span class="text-[11px] font-normal text-[#3A4456]">este vídeo, sem marca d’água</span>
+                                    </a>
+                                    <a href="{{ $stripe('pack10', 'Pack 10 (100 €)') }}" class="flex-1 inline-flex flex-col items-center justify-center min-h-[52px] px-5 py-2 rounded-[18px] border border-ivory/40 text-ivory font-semibold hover:bg-ivory/5 text-center">
+                                        <span>Pack 10 · 10 €/vídeo</span>
+                                        <span class="text-[11px] font-normal text-[#AEB5C1]">100 € · para os próximos imóveis</span>
+                                    </a>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -224,7 +234,7 @@
                         <div role="status" class="flex flex-col gap-4">
                             <span class="font-display text-[32px] leading-tight text-ivory">Estamos a fazer o seu vídeo.</span>
                             <div class="h-1.5 rounded-full bg-ivory/10 overflow-hidden"><div class="h-full bg-cyan transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
-                            <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui.</p>
+                            <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui@if (! empty($pedido['email'])) e enviamo-lo também para {{ $pedido['email'] }}@endif.</p>
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'falhou')
                         <div role="alert" class="flex flex-col gap-3">
@@ -261,6 +271,12 @@
                                 </button>
                             </div>
                             @error('anuncio') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
+                            <div class="-mt-1">
+                                <label for="emailVideo" class="sr-only">O seu email, para receber o vídeo</label>
+                                <input id="emailVideo" type="email" wire:model="emailVideo" placeholder="O seu email, para lhe enviarmos o vídeo (opcional)" autocomplete="email" inputmode="email"
+                                       class="w-full min-h-11 px-4 rounded-full bg-navy border border-ivory/15 text-sm text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
+                                @error('emailVideo') <p class="mt-1.5 text-[13px] text-coral">{{ $message }}</p> @enderror
+                            </div>
                             {{-- Honeypot: invisible to people, tempting to bots. --}}
                             <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
                                 <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>

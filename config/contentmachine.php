@@ -547,6 +547,8 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET', ''),
         'links' => [
             'avulso' => env('STRIPE_LINK_AVULSO', ''),
+            // Launch offer: the clean version of the agent's first (free) video for 10 € (metadata videos=1, plano=primeiro).
+            'primeiro' => env('STRIPE_LINK_PRIMEIRO', 'https://buy.stripe.com/fZueVc1Qh7BEdZZ7TJcfK0b'),
             'pack10' => env('STRIPE_LINK_PACK10', ''),
             'pack20' => env('STRIPE_LINK_PACK20', ''),
         ],

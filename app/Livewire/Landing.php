@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Services\Alertas\PaginaDoConsultor;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Leads\AvisoPronto;
 use App\Services\Leads\Convites;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectContext;
@@ -75,6 +76,9 @@ class Landing extends Component
 
     public string $email = '';
 
+    /** Optional: where to send "o seu vídeo está pronto" (a service email, not marketing). */
+    public string $emailVideo = '';
+
     /** Honeypot: hidden from people, filled by bots. */
     public string $site = '';
 
@@ -141,6 +145,10 @@ class Landing extends Component
 
         $this->anuncio = trim($this->anuncio);
         $this->email = trim($this->email);
+        $this->emailVideo = mb_strtolower(trim($this->emailVideo));
+        if ($this->marketing && $this->email === '' && $this->emailVideo !== '') {
+            $this->email = $this->emailVideo;   // one address typed, both uses ticked
+        }
         // Who the agent is on the portal, and (for the alerts) the email they publish there:
         // nothing to type when the listing has it.
         $agente = ListingScraper::supports($this->anuncio) ? $this->agente() : null;
@@ -162,7 +170,9 @@ class Landing extends Component
                 // A failed attempt does not use up the free video: only leads that did not fail count.
                 fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->whereNull('falhou_em')->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
             'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],
+            'emailVideo' => ['nullable', 'email:rfc', 'max:255'],
         ], [
+            'emailVideo.email' => 'Este email não parece estar certo.',
             'anuncio.required' => 'Cole o link do anúncio.',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
             'email.required' => 'Não encontrámos o seu email no anúncio. Escreva-o aqui para receber os avisos.',
@@ -195,6 +205,8 @@ class Landing extends Component
             // The listing's own portal says it best; the answer to the question otherwise (a demo listing).
             'agencia' => isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($this->anuncio)]) ? $portal : ($this->agencia ?: null),
             'convidado_por' => $this->convidadoPor($agente['chave'] ?? null),
+            'email_video' => $this->emailVideo !== '' ? $this->emailVideo : null,
+            'convite_email' => $this->emailVideo !== '' ? $this->emailVideo : null,
             'updated_at' => now(),
         ];
         // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
@@ -400,7 +412,7 @@ class Landing extends Component
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'leadId', 'jaTeve', 'enviado');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'emailVideo', 'leadId', 'jaTeve', 'enviado');
     }
 
     /** The current lead's reel, as the hero card shows it. */
@@ -434,7 +446,7 @@ class Landing extends Component
         }
         [$etapa, $pct] = Imoveis::ESTADOS[$clip->status] ?? ['A preparar', 10];
 
-        return ['estado' => 'a-fazer', 'etapa' => $etapa, 'pct' => $pct];
+        return ['estado' => 'a-fazer', 'etapa' => $etapa, 'pct' => $pct, 'email' => AvisoPronto::destino($lead)];
     }
 
     public function render(LeadVideo $videos)
