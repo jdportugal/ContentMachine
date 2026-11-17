@@ -29,7 +29,11 @@ class GuiasTest extends TestCase
             $this->assertNotEmpty($g['faq'], "$slug: no FAQ");
             $this->assertStringContainsString('<h2 id="perguntas-frequentes">', $g['html']);
             $this->assertFileExists(public_path("images/og/$slug.png"));
+            $this->assertContains($g['tema'], Guias::TEMAS, "$slug: unknown theme");
         }
+        // One guide per target search, so the guides don't compete with each other.
+        $palavras = array_map(fn ($g) => mb_strtolower($g['palavra']), $guias);
+        $this->assertSame(array_unique($palavras), $palavras);
     }
 
     public function test_links_between_guides_point_to_guides_that_exist(): void

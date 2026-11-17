@@ -59,7 +59,7 @@ Route::view('/privacidade', 'privacidade')->name('privacidade');
 Route::get('/guias', function (\App\Services\Guias\Guias $guias) {
     $todos = $guias->todos();
 
-    return view('guias.index', ['guias' => $todos, 'esquema' => [[
+    return view('guias.index', ['temas' => $guias->porTema(), 'total' => count($todos), 'esquema' => [[
         '@context' => 'https://schema.org',
         '@type' => 'CollectionPage',
         'name' => 'Guias Imocena',
@@ -71,9 +71,7 @@ Route::get('/guias', function (\App\Services\Guias\Guias $guias) {
 Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $guias) {
     $guia = $guias->encontrar($slug);
     abort_if($guia === null, 404);
-    $outros = array_slice(array_values(array_filter($guias->todos(), fn ($g) => $g['slug'] !== $slug)), 0, 3);
-
-    return view('guias.artigo', ['guia' => $guia, 'outros' => $outros]);
+    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia)]);
 })->where('slug', '[a-z0-9-]+')->name('guias.ver');
 
 // For search engines: every public page, and the rules for crawlers.

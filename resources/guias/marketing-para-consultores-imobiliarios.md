@@ -1,8 +1,9 @@
 ---
 titulo: Marketing para consultores imobiliários: guia prático
-descricao: O marketing que um consultor imobiliário em Portugal consegue fazer sozinho: anúncio completo, vídeo, redes sociais, WhatsApp e Google, com uma rotina semanal.
+descricao: O marketing que um consultor imobiliário consegue fazer sozinho: anúncios completos, vídeo, redes sociais, WhatsApp e Google, numa rotina semanal.
 palavra: marketing consultor imobiliário
 resumo: O marketing de um consultor imobiliário assenta em cinco peças: anúncios completos nos portais, um vídeo por imóvel, presença regular no Instagram e no TikTok, uma lista de compradores no WhatsApp e um perfil no Google. Os compradores começam online: nos EUA, 51% encontraram a casa numa pesquisa na internet. Em Portugal, 7,59 milhões de pessoas usam redes sociais. A rotina semanal pesa mais do que o orçamento.
+tema: Marketing e marca
 publicado: 2026-11-17
 ---
 

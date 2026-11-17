@@ -3,6 +3,7 @@ titulo: Como angariar imóveis com vídeo
 descricao: Como usar o vídeo para angariar mais imóveis: o que mostrar ao proprietário na reunião, a promessa de marketing e o relatório que o faz ficar consigo.
 palavra: como angariar imóveis
 resumo: Para angariar com vídeo, leve à reunião com o proprietário um vídeo de um imóvel que já vendeu ou tem à venda e mostre onde ele foi publicado. Prometa um plano concreto (vídeo no portal, nas redes e no WhatsApp em 48 horas) e cumpra-o. O proprietário escolhe o consultor que lhe mostra como vai vender a casa, não o que só fala do preço.
+tema: Angariação
 publicado: 2026-11-17
 ---
 

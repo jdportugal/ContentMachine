@@ -3,6 +3,7 @@ titulo: Como pôr vídeo no anúncio do idealista (passo a passo)
 descricao: Onde carregar o vídeo no idealista/tools, que formatos aceita (até 750 MB, 6 vídeos por anúncio) e como fazer o vídeo do imóvel em minutos.
 palavra: vídeo no idealista
 resumo: No idealista, o vídeo carrega-se em idealista/tools, em Os teus imóveis > Editar > Multimédia > Vídeos > Novo. Cada anúncio aceita até 6 vídeos de até 750 MB, em MP4, MOV, AVI e outros formatos. O vídeo é um dos sete fatores que o idealista usa para calcular a qualidade do anúncio.
+tema: Portais
 publicado: 2026-11-17
 ---
 

@@ -3,6 +3,7 @@ titulo: Porque é que os anúncios com vídeo chegam a mais pessoas
 descricao: O vídeo melhora a qualidade do anúncio no idealista e é o formato com mais alcance no Instagram. Os números de 2026 e o que fazer com eles.
 palavra: anúncio imóvel com vídeo
 resumo: Um anúncio com vídeo chega a mais pessoas por dois caminhos. No idealista, o vídeo é um dos sete fatores da qualidade do anúncio. Nas redes sociais, o vídeo curto é o formato com mais alcance: em 2026, os Reels chegaram a mais seguidores do que as imagens e os carrosséis em todos os tamanhos de conta. Quem procura casa começa online. Em 2024, 51% dos compradores nos EUA encontraram a casa que compraram numa pesquisa na internet.
+tema: Vídeo de imóveis
 publicado: 2026-11-17
 ---
 

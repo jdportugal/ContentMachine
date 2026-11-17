@@ -3,6 +3,7 @@ titulo: TikTok para imobiliário em Portugal: por onde começar
 descricao: Vale a pena um consultor imobiliário estar no TikTok em Portugal? Quantas pessoas chega, o que publicar nas primeiras semanas e como reaproveitar os Reels.
 palavra: TikTok imobiliário
 resumo: Sim, vale a pena. Em Portugal, o TikTok chega a 4,11 milhões de adultos (46,8% dos maiores de 18 anos) e é a rede onde se passa mais tempo, cerca de 1 hora e 23 minutos por dia. Para começar, publique o mesmo vídeo vertical que faz para os Reels, três vezes por semana, e responda aos comentários. Não precisa de dançar.
+tema: Redes sociais
 publicado: 2026-11-17
 ---
 

@@ -26,6 +26,8 @@
             <a href="{{ route('home') }}" class="hover:text-ivory">Imocena</a>
             <span class="mx-1.5">›</span>
             <a href="{{ route('guias') }}" class="hover:text-ivory">Guias</a>
+            <span class="mx-1.5">›</span>
+            <a href="{{ route('guias') }}#{{ \Illuminate\Support\Str::slug($guia['tema']) }}" class="hover:text-ivory">{{ $guia['tema'] }}</a>
         </nav>
 
         <article>

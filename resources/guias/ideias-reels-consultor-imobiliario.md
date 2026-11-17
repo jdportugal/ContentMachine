@@ -1,8 +1,9 @@
 ---
 titulo: Reels para consultores imobiliários: 12 ideias que funcionam
-descricao: 12 ideias de Reels para consultores imobiliários em Portugal, do imóvel novo ao "vendido", com o que dizer nos primeiros segundos e com que frequência publicar.
+descricao: 12 ideias de Reels para consultores imobiliários em Portugal: do imóvel novo ao "vendido", o que dizer nos primeiros segundos e quando publicar.
 palavra: reels consultor imobiliário
 resumo: Os melhores Reels para um consultor imobiliário mostram imóveis reais, a zona onde trabalha e o processo de compra e venda. Comece por um Reel por cada imóvel novo e junte um sobre a zona ou uma dúvida comum por semana. Num estudo de 2026 com mais de 3 milhões de publicações, os Reels chegaram a mais seguidores do que as imagens e os carrosséis em todos os tamanhos de conta.
+tema: Redes sociais
 publicado: 2026-11-17
 ---
 

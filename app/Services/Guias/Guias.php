@@ -15,6 +15,8 @@ class Guias
 
     public const FAQ = 'Perguntas frequentes';
 
+    public const TEMAS = ['Vídeo de imóveis', 'Portais', 'Redes sociais', 'Angariação', 'Marketing e marca', 'Inteligência artificial', 'Por agência', 'Outros'];
+
     private ?array $todos = null;
 
     public function __construct(private ?string $pasta = null)
@@ -38,6 +40,26 @@ class Guias
         uasort($guias, fn ($a, $b) => [$b['publicado'], $a['titulo']] <=> [$a['publicado'], $b['titulo']]);
 
         return $this->todos = $guias;
+    }
+
+    /** The themes in reading order, each with its guides. @return array<string, list<array>> */
+    public function porTema(): array
+    {
+        $temas = array_fill_keys(self::TEMAS, []);
+        foreach ($this->todos() as $g) {
+            $temas[$g['tema']][] = $g;
+        }
+
+        return array_filter($temas);
+    }
+
+    /** Up to $n other guides, from the same theme first. @return list<array> */
+    public function relacionados(array $guia, int $n = 4): array
+    {
+        $outros = array_filter($this->todos(), fn ($g) => $g['slug'] !== $guia['slug']);
+        usort($outros, fn ($a, $b) => ($b['tema'] === $guia['tema']) <=> ($a['tema'] === $guia['tema']));
+
+        return array_slice($outros, 0, $n);
     }
 
     public function encontrar(string $slug): ?array
@@ -67,6 +89,7 @@ class Guias
             'titulo' => $meta['titulo'],
             'descricao' => $meta['descricao'],
             'palavra' => $meta['palavra'] ?? '',
+            'tema' => $meta['tema'] ?? 'Outros',
             'resumo' => $meta['resumo'] ?? '',
             'publicado' => $meta['publicado'] ?? date('Y-m-d', (int) filemtime($ficheiro)),
             'atualizado' => $meta['atualizado'] ?? ($meta['publicado'] ?? date('Y-m-d', (int) filemtime($ficheiro))),

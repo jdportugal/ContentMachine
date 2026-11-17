@@ -1,8 +1,9 @@
 ---
 titulo: Vídeo de imóvel com IA: o que é e quanto custa
-descricao: Como funciona um vídeo de imóvel feito com inteligência artificial, o que fica bem e mal, e quanto custa em Portugal comparado com filmar ou contratar um videógrafo.
+descricao: Como funciona um vídeo de imóvel feito com IA, o que fica bem e mal, e quanto custa em Portugal face a filmar ou contratar um videógrafo.
 palavra: vídeo imobiliário IA
 resumo: Um vídeo de imóvel com IA é montado automaticamente a partir das fotos e dos dados do anúncio, com um texto escrito e narrado por inteligência artificial. Fica pronto em minutos e custa uma fração de uma filmagem. Na Imocena, o primeiro vídeo é grátis e os seguintes custam 20 €, ou 10 € por vídeo num pack de 10 (IVA incluído). Não substitui uma filmagem em imóveis de luxo, mas permite ter vídeo em todos os anúncios.
+tema: Inteligência artificial
 publicado: 2026-11-17
 ---
 

@@ -3,6 +3,7 @@ titulo: Que formato de vídeo usar para imóveis no idealista, Instagram e Whats
 descricao: Vertical ou horizontal, MP4 ou MOV, quanto tempo: o formato de vídeo de imóveis que serve no idealista, nos Reels, no TikTok e no WhatsApp ao mesmo tempo.
 palavra: formato vídeo imóvel
 resumo: Para um vídeo de imóvel que sirva em todo o lado, use MP4, vertical (9:16) e entre 30 e 60 segundos. O idealista aceita MP4 até 750 MB e até 6 vídeos por anúncio. Os Reels do Instagram podem ter até 3 minutos. Um só ficheiro vertical serve para o portal, os Reels, o TikTok e o WhatsApp.
+tema: Vídeo de imóveis
 publicado: 2026-11-17
 ---
 
