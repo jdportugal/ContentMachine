@@ -73,7 +73,10 @@
                 <span class="font-display text-[26px] font-medium">Imocena</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>
             </span>
-            <a href="{{ route('login') }}" class="inline-flex items-center min-h-11 text-sm text-[#AEB5C1] hover:text-ivory">Entrar</a>
+            <span class="flex items-center gap-6">
+                <a href="{{ route('guias') }}" class="inline-flex items-center min-h-11 text-sm text-[#AEB5C1] hover:text-ivory">Guias</a>
+                <a href="{{ route('login') }}" class="inline-flex items-center min-h-11 text-sm text-[#AEB5C1] hover:text-ivory">Entrar</a>
+            </span>
         </header>
         <div class="flex-1 flex items-center">
             <div id="pedido" class="w-full max-w-[880px] mx-auto px-6 pb-16">
@@ -512,6 +515,13 @@
             <nav aria-label="Conta" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
                 <span class="text-xs tracking-[.24em] text-ivory">CONTA</span>
                 <a href="{{ route('login') }}" class="text-[#AEB5C1] hover:text-ivory">Entrar</a>
+            </nav>
+            <nav aria-label="Guias" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
+                <span class="text-xs tracking-[.24em] text-ivory">GUIAS</span>
+                @foreach (array_slice(app(\App\Services\Guias\Guias::class)->todos(), 0, 4) as $g)
+                    <a href="{{ route('guias.ver', $g['slug']) }}" class="text-[#AEB5C1] hover:text-ivory">{{ $g['titulo'] }}</a>
+                @endforeach
+                <a href="{{ route('guias') }}" class="text-ivory hover:text-cyan">Todos os guias →</a>
             </nav>
             <nav aria-label="Empresa" class="flex-[1_1_160px] flex flex-col gap-3 text-sm">
                 <span class="text-xs tracking-[.24em] text-ivory">EMPRESA</span>

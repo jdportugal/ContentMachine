@@ -19,6 +19,7 @@ class Canal
         'google-ads' => 'Anúncios Google',
         'google' => 'Google (pesquisa)',
         'convite' => 'Convites de colegas',
+        'guias' => 'Guias do site',
         'outro' => 'Outros sites e campanhas',
         'direto' => 'Direto',
     ];
@@ -46,6 +47,9 @@ class Canal
         }
         if ($fonte === 'convite') {
             return 'convite';   // an agent's invite link (Convites)
+        }
+        if ($fonte === 'guias') {
+            return 'guias';     // the "pedir o vídeo" button at the end of a /guias article
         }
         $pago = in_array($meio, self::MEIOS_PAGOS, true);
         if (in_array($fonte, self::FONTES_META, true)) {

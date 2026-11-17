@@ -1,10 +1,43 @@
+@props(['title' => null, 'description' => null, 'canonical' => null, 'ogImage' => null, 'ogType' => null, 'robots' => null, 'schema' => []])
 <!DOCTYPE html>
 <html lang="pt-PT" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Imocena' }}</title>
-    <meta name="description" content="Cole o link do anúncio e receba um reel do seu imóvel com narração em português de Portugal. O primeiro vídeo é grátis.">
+    @php
+        // Search and sharing: one canonical URL per page (no ?agencia, ?convite or utm_ copies),
+        // the description, Open Graph for WhatsApp/Facebook previews, and the page's JSON-LD.
+        $titulo = $title ?? 'Imocena';
+        $descricao = $description ?? 'Cole o link do anúncio e receba um reel do seu imóvel com narração em português de Portugal. O primeiro vídeo é grátis.';
+        $canonico = $canonical ?? url()->current();
+        $imagemOg = $ogImage ?? asset('images/og/imocena.png');
+        $esquemas = $schema ?? [];
+        if (request()->routeIs('home')) {
+            $esquemas = array_merge(\App\Support\Esquema::site(), $esquemas);
+        }
+    @endphp
+    <title>{{ $titulo }}</title>
+    <meta name="description" content="{{ $descricao }}">
+    <link rel="canonical" href="{{ $canonico }}">
+    @if (! empty($robots))
+    <meta name="robots" content="{{ $robots }}">
+    @endif
+    <meta property="og:site_name" content="Imocena">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:type" content="{{ $ogType ?? 'website' }}">
+    <meta property="og:title" content="{{ $titulo }}">
+    <meta property="og:description" content="{{ $descricao }}">
+    <meta property="og:url" content="{{ $canonico }}">
+    <meta property="og:image" content="{{ $imagemOg }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $titulo }}">
+    <meta name="twitter:description" content="{{ $descricao }}">
+    <meta name="twitter:image" content="{{ $imagemOg }}">
+    @foreach ($esquemas as $esquema)
+    <script type="application/ld+json">{!! json_encode($esquema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+    @endforeach
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

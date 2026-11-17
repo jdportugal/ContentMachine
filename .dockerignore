@@ -37,4 +37,5 @@ tests
 deploy
 *.md
 !Brand-Machine-design-system.md
+!resources/guias/*.md
 install.sh

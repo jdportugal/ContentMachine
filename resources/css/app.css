@@ -238,3 +238,21 @@
     .cm-loader__dots span { animation: none; opacity: 0.7; }
     .cm-loader-enter, .cm-loader-leave { animation: none; }
 }
+
+/* ── /guias: the article body (Markdown rendered to HTML) ───────────────── */
+.guia { color: #C9CED6; font-size: 17px; line-height: 1.75; }
+.guia h2 { margin-top: 3rem; font-family: var(--font-display); font-size: 32px; line-height: 1.15; color: var(--color-ivory); }
+.guia h3 { margin-top: 2rem; font-size: 19px; font-weight: 600; line-height: 1.35; color: var(--color-ivory); }
+.guia p { margin-top: 1rem; }
+.guia strong { color: var(--color-ivory); font-weight: 600; }
+.guia a { color: var(--color-ivory); text-decoration: underline; text-decoration-color: var(--color-cyan); text-underline-offset: 3px; }
+.guia a:hover { color: var(--color-cyan); }
+.guia ul, .guia ol { margin-top: 1rem; padding-left: 1.4rem; }
+.guia ul { list-style: disc; }
+.guia ol { list-style: decimal; }
+.guia li { margin-top: .5rem; }
+.guia li::marker { color: var(--color-cyan); }
+.guia table { margin-top: 1.5rem; width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; display: block; overflow-x: auto; }
+.guia th { text-align: left; font-weight: 600; color: var(--color-ivory); background: var(--color-navy-2); }
+.guia th, .guia td { padding: .7rem .9rem; border-bottom: 1px solid rgb(244 241 234 / .12); vertical-align: top; }
+.guia h2#fontes ~ ul { font-size: 14px; line-height: 1.6; }

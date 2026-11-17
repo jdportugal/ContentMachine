@@ -54,6 +54,57 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
 // Stripe: the Payment Links' webhook, and where a buyer lands after paying.
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 Route::view('/privacidade', 'privacidade')->name('privacidade');
+
+// Guides for agents (resources/guias/*.md), found through search and AI answers.
+Route::get('/guias', function (\App\Services\Guias\Guias $guias) {
+    $todos = $guias->todos();
+
+    return view('guias.index', ['guias' => $todos, 'esquema' => [[
+        '@context' => 'https://schema.org',
+        '@type' => 'CollectionPage',
+        'name' => 'Guias Imocena',
+        'url' => route('guias'),
+        'inLanguage' => 'pt-PT',
+        'hasPart' => array_values(array_map(fn ($g) => ['@type' => 'Article', 'headline' => $g['titulo'], 'url' => route('guias.ver', $g['slug'])], $todos)),
+    ]]]);
+})->name('guias');
+Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $guias) {
+    $guia = $guias->encontrar($slug);
+    abort_if($guia === null, 404);
+    $outros = array_slice(array_values(array_filter($guias->todos(), fn ($g) => $g['slug'] !== $slug)), 0, 3);
+
+    return view('guias.artigo', ['guia' => $guia, 'outros' => $outros]);
+})->where('slug', '[a-z0-9-]+')->name('guias.ver');
+
+// For search engines: every public page, and the rules for crawlers.
+Route::get('/sitemap.xml', function (\App\Services\Guias\Guias $guias) {
+    $urls = [['loc' => route('home'), 'lastmod' => null]];
+    $urls[] = ['loc' => route('guias'), 'lastmod' => collect($guias->todos())->max('atualizado')];
+    foreach ($guias->todos() as $g) {
+        $urls[] = ['loc' => route('guias.ver', $g['slug']), 'lastmod' => $g['atualizado']];
+    }
+    foreach (array_keys(DemoListingScraper::listings()) as $demo) {
+        $urls[] = ['loc' => route('demo', $demo), 'lastmod' => null];
+    }
+    $urls[] = ['loc' => route('termos'), 'lastmod' => null];
+    $urls[] = ['loc' => route('privacidade'), 'lastmod' => null];
+
+    return response()->view('sitemap', ['urls' => $urls])->header('Content-Type', 'application/xml; charset=UTF-8');
+})->name('sitemap');
+Route::get('/robots.txt', fn () => response(implode("\n", [
+    'User-agent: *',
+    'Disallow: /conta',
+    'Disallow: /v/',
+    'Disallow: /obrigado',
+    'Disallow: /entrar/',
+    'Disallow: /emails/',
+    'Disallow: /login',
+    'Disallow: /register',
+    'Disallow: /stripe/',
+    '',
+    'Sitemap: '.route('sitemap'),
+    '',
+]))->header('Content-Type', 'text/plain; charset=UTF-8'))->name('robots');
 Route::view('/termos', 'termos')->name('termos');
 
 Route::get('/obrigado', function (LinkDeAcesso $contas) {
