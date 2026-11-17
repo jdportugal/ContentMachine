@@ -32,6 +32,32 @@ class LeadVideo
         return app(ClipStore::class)->find($lead->clip_id);
     }
 
+    /**
+     * The lead's free video, clean (bought, or unlocked by an invite). Usually instant: the
+     * clean copy was rendered right after the free one (RenderJob $limpo). If it is still
+     * rendering, it is handed over when it lands (RenderJob reads meta.pago); if there is none
+     * (older videos), the clip is rendered again without the watermark. False: no clip.
+     */
+    public function limpar(object $lead): bool
+    {
+        $clip = $this->clip($lead);
+        if (! $clip) {
+            return false;
+        }
+        $meta = (array) $clip->meta;
+        $limpo = (string) ($meta['limpo_path'] ?? '');
+        if ($limpo !== '' && is_file($limpo)) {
+            $clip->update(['output_path' => $limpo, 'meta' => array_merge($meta, ['free_lead' => false, 'pago' => true])]);
+        } elseif (! empty($meta['limpo_pendente'])) {
+            $clip->update(['meta' => array_merge($meta, ['pago' => true])]);
+        } else {
+            $clip->update(['meta' => array_merge($meta, ['free_lead' => false, 'pago' => true]), 'status' => ClipRecord::STATUS_RENDERING]);
+            \App\Jobs\Clips\RenderJob::dispatch($clip->id);
+        }
+
+        return true;
+    }
+
     /** The rendered file, or null while it is still being made (or failed). */
     public function ficheiro(object $lead): ?string
     {

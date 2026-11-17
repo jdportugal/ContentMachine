@@ -20,7 +20,7 @@ class AtualizarLeads extends Command
 
     protected $description = 'Fill free-video leads in from their listing and mark their reels ready or failed';
 
-    public function handle(LeadVideo $videos, RecuperarVideo $recuperar): int
+    public function handle(LeadVideo $videos, RecuperarVideo $recuperar, \App\Services\Leads\Convites $convites): int
     {
         $abertos = DB::table('leads')->whereNull('pronto_em')->whereNull('falhou_em')->whereNotNull('clip_id')->get();
 
@@ -43,6 +43,10 @@ class AtualizarLeads extends Command
 
             if ($dados !== [] && $dados != array_filter(['nome' => $lead->nome, 'telefone' => $lead->telefone])) {
                 DB::table('leads')->where('id', $lead->id)->update($dados + ['updated_at' => now()]);
+            }
+            // Made through a colleague's invite: the colleague's video comes out clean.
+            if (isset($dados['pronto_em']) && ! empty($lead->convidado_por)) {
+                rescue(fn () => $convites->recompensar(DB::table('leads')->find($lead->id)));
             }
         }
 

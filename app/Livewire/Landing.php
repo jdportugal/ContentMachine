@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Services\Alertas\PaginaDoConsultor;
 use App\Services\Clips\Store\ClipRecord;
+use App\Services\Leads\Convites;
 use App\Services\Leads\LeadVideo;
 use App\Services\Projects\ProjectContext;
 use App\Services\RealEstate\ListingImport;
@@ -84,9 +85,29 @@ class Landing extends Component
 
     public bool $bot = false;
 
-    public function mount(): void
+    /** "Convide um colega" (Convites): the agent's name and email, then a colleague's email to send the invite to. */
+    public string $meuNome = '';
+
+    public string $meuEmail = '';
+
+    public string $emailColega = '';
+
+    /** The colleague the invite email just went to ('' when none). */
+    public string $conviteEnviado = '';
+
+    public function mount(Convites $convites): void
     {
         $this->leadId = session('lead_id');
+        // Arrived by a colleague's invite link: remember whose, for the video they ask for.
+        if (($codigo = request()->query('convite')) && ($quem = $convites->convidante((string) $codigo))) {
+            if (session('convite') !== $quem->convite) {
+                session(['convite' => $quem->convite]);
+                Convites::evento('convite-visita', $quem, ['nota' => 'convite '.$quem->convite]);
+            }
+            if (! request()->query('agencia') && ! session('agencia') && isset(self::AGENCIAS[(string) $quem->agencia])) {
+                session(['agencia' => $quem->agencia]);
+            }
+        }
         // ?agencia=remax (an ad or our own email can skip the question), else what they picked before.
         $agencia = (string) request()->query('agencia', session('agencia', ''));
         $this->agencia = isset(self::AGENCIAS[$agencia]) ? $agencia : '';
@@ -168,6 +189,7 @@ class Landing extends Component
             'consultor' => $agente['chave'] ?? null,
             // The listing's own portal says it best; the answer to the question otherwise (a demo listing).
             'agencia' => isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($this->anuncio)]) ? $portal : ($this->agencia ?: null),
+            'convidado_por' => $this->convidadoPor($agente['chave'] ?? null),
             'updated_at' => now(),
         ];
         // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
@@ -185,6 +207,90 @@ class Landing extends Component
         $this->dispatch('lead-criado', id: $this->leadId);
         // The same Lead from the server (with the browser's event id, so Meta counts it once).
         app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], $this->marketing ? $this->email : null, \App\Services\Marketing\Origem::atual());
+    }
+
+    /** The lead whose invite brought this visitor (kept in the session), unless it is the visitor's own. */
+    private function convidadoPor(?string $consultor): ?int
+    {
+        $quem = app(Convites::class)->convidante(session('convite'));
+        if (! $quem || ($consultor !== null && $quem->consultor === $consultor) || $quem->anuncio === $this->anuncio) {
+            return null;
+        }
+
+        return (int) $quem->id;
+    }
+
+    /**
+     * Step 1 of "convide um colega": where to send the clean video, and the name the
+     * colleague will see. Then the link to share appears (WhatsApp, copy, or our email).
+     */
+    public function ativarConvite(): void
+    {
+        $lead = $this->leadId ? DB::table('leads')->find($this->leadId) : null;
+        if (! $lead || ! Convites::porDesbloquear($lead) || $this->site !== '') {
+            return;
+        }
+        $this->meuNome = trim(preg_replace('/\s+/', ' ', $this->meuNome));
+        $this->meuEmail = trim($this->meuEmail);
+        $this->validate([
+            'meuNome' => ['required', 'string', 'min:2', 'max:60', 'not_regex:/(https?:|www\.|@|\/|\\\\)/i'],
+            'meuEmail' => ['required', 'email:rfc', 'max:255'],
+        ], [
+            'meuNome.required' => 'Escreva o seu nome: é o que o seu colega vê no convite.',
+            'meuNome.not_regex' => 'Escreva só o seu nome.',
+            'meuEmail.required' => 'Escreva o seu email: é para lá que enviamos a versão limpa.',
+            'meuEmail.email' => 'Este email não parece estar certo.',
+        ]);
+        DB::table('leads')->where('id', $lead->id)->update([
+            'convite_email' => $this->meuEmail,
+            'nome' => $lead->nome ?: $this->meuNome,
+            'updated_at' => now(),
+        ]);
+        session(['convite_nome' => $this->meuNome]);
+        app(Convites::class)->codigo($lead);
+        Convites::evento('convite-ativado', $lead, ['email' => $this->meuEmail]);
+    }
+
+    /** The agent shared the link (WhatsApp, or copied it): counted, nothing else. */
+    public function partilhou(string $como): void
+    {
+        $lead = $this->leadId ? DB::table('leads')->find($this->leadId) : null;
+        if ($lead && in_array($como, ['whatsapp', 'copiado'], true)) {
+            Convites::evento('convite-'.$como, $lead);
+        }
+    }
+
+    /** Step 2, optional: we email the invite to a colleague, in the agent's name. */
+    public function convidar(): void
+    {
+        $lead = $this->leadId ? DB::table('leads')->find($this->leadId) : null;
+        if (! $lead || empty($lead->convite) || $this->site !== '') {
+            return;
+        }
+        $chave = 'convite:'.request()->ip();
+        if (RateLimiter::tooManyAttempts($chave, 5) || DB::table('convites_enviados')->where('lead_id', $lead->id)->count() >= Convites::MAX_EMAILS) {
+            $this->addError('emailColega', 'Já enviámos muitos convites seus. Partilhe o link por WhatsApp.');
+
+            return;
+        }
+        $this->emailColega = mb_strtolower(trim($this->emailColega));
+        $this->validate(['emailColega' => ['required', 'email:rfc', 'max:255',
+            fn ($a, $v, $fail) => $v === mb_strtolower((string) $lead->convite_email) ? $fail('Este é o seu email. Escreva o do seu colega.') : null,
+            fn ($a, $v, $fail) => DB::table('convites_enviados')->where('lead_id', $lead->id)->where('email', $v)->exists() ? $fail('Já enviámos o convite a este colega.') : null,
+        ]], ['emailColega.required' => 'Escreva o email do seu colega.', 'emailColega.email' => 'Este email não parece estar certo.']);
+        RateLimiter::hit($chave, 3600);
+
+        try {
+            app(Convites::class)->enviarEmail($lead, $this->emailColega, (string) (session('convite_nome') ?: $lead->nome ?: 'Um colega'));
+        } catch (\Throwable $e) {
+            Log::warning('Convite não enviado', ['lead' => $lead->id, 'erro' => $e->getMessage()]);
+            $this->addError('emailColega', 'Não conseguimos enviar o email agora. Tente outra vez daqui a pouco.');
+
+            return;
+        }
+        Convites::evento('convite-email', $lead);
+        $this->conviteEnviado = $this->emailColega;
+        $this->reset('emailColega');
     }
 
     /** The first answer: the visitor's agency. The page that follows is theirs (its name, its template's video). */
@@ -301,9 +407,18 @@ class Landing extends Component
         }
         $clip = $videos->clip($lead);
         if ($videos->ficheiro($lead)) {
-            return ['estado' => 'pronto', 'pago' => (bool) ($lead->pago_em ?? null) && empty($clip?->meta['free_lead']),
+            $limpo = (! empty($lead->pago_em) || ! empty($lead->oferta_em)) && empty($clip?->meta['free_lead']);
+
+            return ['estado' => 'pronto', 'pago' => $limpo, 'oferta' => $limpo && empty($lead->pago_em),
                 'video' => URL::signedRoute('lead.video', ['lead' => $lead->id]),
-                'descarregar' => URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1])];
+                'descarregar' => URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1]),
+                // "Convide um colega": only while there is a watermark to take off.
+                'convite' => Convites::porDesbloquear($lead) ? [
+                    'ativo' => ! empty($lead->convite) && ! empty($lead->convite_email),
+                    'email' => $lead->convite_email,
+                    'link' => ! empty($lead->convite) ? app(Convites::class)->link($lead, 'link') : null,
+                    'whatsapp' => ! empty($lead->convite) ? 'https://wa.me/?text='.rawurlencode('Fiz o vídeo de um imóvel meu na Imocena em minutos, com narração e o meu contacto no fim. O primeiro é grátis, experimenta: '.app(Convites::class)->link($lead, 'whatsapp')) : null,
+                ] : null];
         }
         if ($lead->falhou_em) {
             return ['estado' => 'falhou'];
@@ -319,6 +434,10 @@ class Landing extends Component
 
     public function render(LeadVideo $videos)
     {
-        return view('livewire.landing', ['ag' => self::AGENCIAS[$this->agencia] ?? null, 'pedido' => $this->bot ? ['estado' => 'a-fazer', 'etapa' => 'A ler o anúncio', 'pct' => 15] : $this->pedido($videos)]);
+        // Arrived by an invite and not yet asked for a video: whose invite it is, for the offer bar.
+        $quem = $this->leadId === null ? app(Convites::class)->convidante(session('convite')) : null;
+        $convidadoPor = $quem ? trim((string) ($quem->nome ?: '')) : null;
+
+        return view('livewire.landing', ['convidadoPor' => $quem ? ($convidadoPor !== '' ? $convidadoPor : 'Um colega') : null, 'ag' => self::AGENCIAS[$this->agencia] ?? null, 'pedido' => $this->bot ? ['estado' => 'a-fazer', 'etapa' => 'A ler o anúncio', 'pct' => 15] : $this->pedido($videos)]);
     }
 }

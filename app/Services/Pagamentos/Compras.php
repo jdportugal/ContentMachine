@@ -2,8 +2,6 @@
 
 namespace App\Services\Pagamentos;
 
-use App\Jobs\Clips\RenderJob;
-use App\Services\Clips\Store\ClipRecord;
 use App\Services\Contas\LinkDeAcesso;
 use App\Services\Leads\LeadVideo;
 use Illuminate\Support\Facades\DB;
@@ -89,21 +87,10 @@ class Compras
     public function entregarVideoLimpo(int $compraId, int $leadId): void
     {
         $lead = $this->videos->lead($leadId);
-        $clip = $lead ? $this->videos->clip($lead) : null;   // activates the lead's project
-        if (! $clip) {
+        if (! $lead || ! $this->videos->limpar($lead)) {
             Log::warning('Compra sem clip para entregar', ['compra' => $compraId, 'lead' => $leadId]);
 
             return;
-        }
-        $meta = (array) $clip->meta;
-        $limpo = (string) ($meta['limpo_path'] ?? '');
-        if ($limpo !== '' && is_file($limpo)) {
-            $clip->update(['output_path' => $limpo, 'meta' => array_merge($meta, ['free_lead' => false, 'pago' => true])]);
-        } elseif (! empty($meta['limpo_pendente'])) {
-            $clip->update(['meta' => array_merge($meta, ['pago' => true])]);
-        } else {
-            $clip->update(['meta' => array_merge($meta, ['free_lead' => false, 'pago' => true]), 'status' => ClipRecord::STATUS_RENDERING]);
-            RenderJob::dispatch($clip->id);
         }
 
         DB::table('leads')->where('id', $leadId)->update(['pago_em' => now(), 'updated_at' => now()]);

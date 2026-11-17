@@ -18,6 +18,7 @@ class Canal
         'meta' => 'Facebook / Instagram (orgânico)',
         'google-ads' => 'Anúncios Google',
         'google' => 'Google (pesquisa)',
+        'convite' => 'Convites de colegas',
         'outro' => 'Outros sites e campanhas',
         'direto' => 'Direto',
     ];
@@ -42,6 +43,9 @@ class Canal
         $referer = mb_strtolower((string) ($o['referer'] ?? ''));
         if ($fonte === 'teste-interno') {
             return self::INTERNO;
+        }
+        if ($fonte === 'convite') {
+            return 'convite';   // an agent's invite link (Convites)
         }
         $pago = in_array($meio, self::MEIOS_PAGOS, true);
         if (in_array($fonte, self::FONTES_META, true)) {
