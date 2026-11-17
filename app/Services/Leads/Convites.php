@@ -95,7 +95,7 @@ class Convites
             return false;
         }
         $mesmo = (! empty($quem->consultor) && $quem->consultor === ($novo->consultor ?? null))
-            || (! empty($quem->nome) && ! empty($novo->nome) && mb_strtolower(trim($quem->nome)) === mb_strtolower(trim($novo->nome)));
+            || (self::nome($quem->nome ?? null) !== '' && self::nome($quem->nome ?? null) === self::nome($novo->nome ?? null));
         if ($mesmo) {
             Log::info('Convite ignorado: mesmo consultor', ['convidante' => $quem->id, 'lead' => $novo->id]);
             self::evento('convite-ignorado', $quem, ['nota' => 'lead '.$novo->id]);
@@ -120,6 +120,12 @@ class Convites
         }
 
         return true;
+    }
+
+    /** A name to compare: lower case, single spaces. */
+    private static function nome(?string $nome): string
+    {
+        return mb_strtolower(trim((string) preg_replace('/\s+/u', ' ', (string) $nome)));
     }
 
     /** One landing_eventos row for the invite funnel. */
