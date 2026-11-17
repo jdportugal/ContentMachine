@@ -1,0 +1,33 @@
+name: Shots convites
+on:
+  push:
+    branches: [screenshot-convites]
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, intl
+          coverage: none
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: composer install --prefer-dist --no-interaction --no-progress
+      - run: cp .env.example .env && printf "\nAPP_URL=http://127.0.0.1:8000\nAPP_ENV=local\nAPP_DEBUG=true\nAPP_TIMEZONE=UTC\nMAIL_MAILER=log\nQUEUE_CONNECTION=database\n" >> .env && php artisan key:generate && touch database/database.sqlite && php artisan migrate --force
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npm run build && npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: mkdir -p shots && ffmpeg -loglevel error -f lavfi -i "color=c=0x14243a:s=1080x1920:d=3" -vf "drawtext=text='VIDEO DO IMOVEL':fontcolor=white:fontsize=80:x=(w-tw)/2:y=(h-th)/2" -pix_fmt yuv420p shots/video.mp4
+      - run: |
+          php artisan serve --host=127.0.0.1 --port=8000 > serve.log 2>&1 &
+          sleep 4
+          OUT=$PWD/shots MP4=$PWD/shots/video.mp4 node scripts/shots/shots.mjs
+      - if: always()
+        run: tail -50 serve.log; tail -80 storage/logs/laravel.log || true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shots
+          path: shots/*.png
