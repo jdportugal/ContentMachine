@@ -20,7 +20,7 @@ class GuiasTest extends TestCase
     public function test_every_guide_is_complete(): void
     {
         $guias = $this->guias();
-        $this->assertGreaterThanOrEqual(8, count($guias));
+        $this->assertGreaterThanOrEqual(40, count($guias));
         foreach ($guias as $slug => $g) {
             $this->assertMatchesRegularExpression('/^[a-z0-9-]+$/', $slug);
             $this->assertLessThanOrEqual(160, mb_strlen($g['descricao']), "$slug: description too long");
@@ -96,6 +96,14 @@ class GuiasTest extends TestCase
             ->assertSee('"@type":"Organization"', false)
             ->assertSee('<meta property="og:image" content="'.asset('images/og/imocena.png').'">', false)
             ->assertSee(route('guias'), false);
+    }
+
+    public function test_an_agency_page_sends_its_button_to_that_agency(): void
+    {
+        $this->get('/guias/video-imoveis-remax')->assertOk()
+            ->assertSee('agencia=remax&amp;utm_source=guias', false)
+            ->assertSee('remax.pt');
+        $this->get('/guias')->assertSee('Por agência');
     }
 
     public function test_visits_from_a_guide_count_as_their_own_channel(): void

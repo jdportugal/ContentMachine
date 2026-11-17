@@ -71,7 +71,10 @@ Route::get('/guias', function (\App\Services\Guias\Guias $guias) {
 Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $guias) {
     $guia = $guias->encontrar($slug);
     abort_if($guia === null, 404);
-    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia)]);
+    // An agency's page shows that agency's example reel, and its button opens the form for that agency.
+    $reel = $guia['agencia'] ? Landing::demoReel($guia['agencia'])['url'] : null;
+
+    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia), 'reel' => $reel]);
 })->where('slug', '[a-z0-9-]+')->name('guias.ver');
 
 // For search engines: every public page, and the rules for crawlers.

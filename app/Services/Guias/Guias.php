@@ -90,6 +90,7 @@ class Guias
             'descricao' => $meta['descricao'],
             'palavra' => $meta['palavra'] ?? '',
             'tema' => $meta['tema'] ?? 'Outros',
+            'agencia' => $meta['agencia'] ?? null,
             'resumo' => $meta['resumo'] ?? '',
             'publicado' => $meta['publicado'] ?? date('Y-m-d', (int) filemtime($ficheiro)),
             'atualizado' => $meta['atualizado'] ?? ($meta['publicado'] ?? date('Y-m-d', (int) filemtime($ficheiro))),
