@@ -1,0 +1,35 @@
+name: Shots guias
+on:
+  push:
+    branches: [screenshot-guias]
+    paths-ignore: ['shots/**']
+permissions:
+  contents: write
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, intl
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction --no-progress
+      - run: cp .env.example .env && printf "\nAPP_URL=http://127.0.0.1:8000\nAPP_ENV=local\nAPP_DEBUG=true\nAPP_TIMEZONE=UTC\nMAIL_MAILER=log\n" >> .env && php artisan key:generate && touch database/database.sqlite && php artisan migrate --force
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npm run build && npm i --no-save playwright && npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p shots
+          php artisan serve --host=127.0.0.1 --port=8000 > serve.log 2>&1 &
+          sleep 4
+          curl -s http://127.0.0.1:8000/sitemap.xml > shots/sitemap.xml; curl -s http://127.0.0.1:8000/robots.txt > shots/robots.txt
+          curl -s http://127.0.0.1:8000/guias/video-no-anuncio-idealista | sed -n '/<head>/,/<\/head>/p' > shots/head-guia.html
+          OUT=$PWD/shots node scripts/shots/guias.mjs
+      - if: always()
+        run: tail -50 serve.log; tail -80 storage/logs/laravel.log || true
+      - run: |
+          git config user.name ci && git config user.email ci@users.noreply.github.com
+          git add -f shots/* && git commit -qm "shots" && git push origin HEAD:screenshot-guias
