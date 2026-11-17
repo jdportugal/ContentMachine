@@ -293,8 +293,9 @@ class LeadsTest extends TestCase
         $this->assertNull($lead->marketing_em);
 
         session()->forget('lead_id');   // a fresh visitor, not the one whose video is in progress
-        Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->assertDontSee('O seu email')
-            ->set('marketing', true)->assertSee('O seu email')
+        // The alerts address appears only once the box is ticked (the video-ready email is its own field).
+        Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->assertDontSee('usamos o do seu anúncio')
+            ->set('marketing', true)->assertSee('usamos o do seu anúncio')
             ->set(['anuncio' => self::ANUNCIO.'7', 'consentimento' => true])->call('pedir')
             ->assertHasErrors(['email' => 'required']);
     }
