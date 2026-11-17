@@ -15,7 +15,7 @@ Na área profissional, o idealista/tools. O caminho, segundo o [centro de ajuda 
 3. Entre em **Multimédia** e depois em **Vídeos**.
 4. Clique em **Novo** e carregue o ficheiro do vídeo.
 
-O vídeo fica na página de detalhe do anúncio, ao lado das fotos.
+Depois de carregado, o vídeo passa a fazer parte do anúncio.
 
 ## Que formatos e tamanhos aceita?
 
