@@ -43,7 +43,13 @@
                 </section>
             @endif
 
-            @if (! empty($reel))
+            @if (! empty($video))
+                {{-- The guide's own short (public/media/guias/<slug>.mp4, made on the server from its script). --}}
+                <figure class="mt-8">
+                    <video src="{{ $video }}" controls playsinline preload="metadata" class="w-full max-w-[320px] mx-auto aspect-[9/16] rounded-2xl bg-navy-2 border border-ivory/10"></video>
+                    <figcaption class="mt-3 text-center text-[13px] text-[#8B95A7]">Este guia em 45 segundos.</figcaption>
+                </figure>
+            @elseif (! empty($reel))
                 <figure class="mt-8">
                     <video src="{{ $reel }}" controls playsinline preload="metadata" class="w-full max-w-[320px] mx-auto aspect-[9/16] rounded-2xl bg-navy-2 border border-ivory/10"></video>
                     <figcaption class="mt-3 text-center text-[13px] text-[#8B95A7]">Exemplo de vídeo feito pela Imocena a partir de um anúncio de demonstração.</figcaption>

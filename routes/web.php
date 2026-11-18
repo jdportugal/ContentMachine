@@ -87,7 +87,10 @@ Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $g
     // An agency's page shows that agency's example reel, and its button opens the form for that agency.
     $reel = $guia['agencia'] ? Landing::demoReel($guia['agencia'])['url'] : null;
 
-    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia), 'reel' => $reel]);
+    // Its own short, once made (public/media/guias/<slug>.mp4 on the server).
+    $video = is_file(public_path("media/guias/{$slug}.mp4")) ? asset("media/guias/{$slug}.mp4") : null;
+
+    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia), 'reel' => $reel, 'video' => $video]);
 })->where('slug', '[a-z0-9-]+')->name('guias.ver');
 
 // For search engines: every public page, and the rules for crawlers.

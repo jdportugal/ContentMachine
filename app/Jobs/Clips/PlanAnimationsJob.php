@@ -107,6 +107,7 @@ class PlanAnimationsJob implements ShouldQueue
                     : self::REGRAS_SO_REFERENCIAS));
             }
 
+            config(['contentmachine.clips.abertura_propria' => ! empty($p->meta['abertura_propria'])]);
             $plan = $planner->plan($p->transcript, 'dense', [
                 'width' => $planW,
                 'height' => $planH,
@@ -160,8 +161,10 @@ class PlanAnimationsJob implements ShouldQueue
                 // The intro effect is bolted on AFTER planning (FinalizeClipPlanJob →
                 // enforceIntro), so an image-showing intro has no layer in the plan and
                 // would never be asked about — it just rendered empty. Ask for it here.
-                $requests = ImageRequests::withIntroVideo($requests, app(EffectLibrary::class), $p->images ?? []);
-                $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
+                if (empty($p->meta['abertura_propria'])) {   // no project intro card to feed (FinalizeClipPlanJob)
+                    $requests = ImageRequests::withIntroVideo($requests, app(EffectLibrary::class), $p->images ?? []);
+                    $requests = ImageRequests::withIntro($requests, app(EffectLibrary::class), $p->images ?? []);
+                }
 
                 // The animated intro needs a concept before anything else: the label is
                 // what the user reads AND what the library matcher uses to spot a

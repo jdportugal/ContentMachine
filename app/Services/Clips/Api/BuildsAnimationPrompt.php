@@ -57,13 +57,16 @@ trait BuildsAnimationPrompt
             $canGenerateImages = false;
         }
         // Intro effects: the FIRST scene should open with one of these (if any are marked).
-        $introSlugs = app(EffectLibrary::class)->introSlugs();
+        // A clip with its own opening and close (PlanAnimationsJob sets this for meta.abertura_propria)
+        // gets neither block: its instructions say how it opens and ends.
+        $proprio = (bool) config('contentmachine.clips.abertura_propria', false);
+        $introSlugs = $proprio ? [] : app(EffectLibrary::class)->introSlugs();
         $introBlock = empty($introSlugs) ? '' : "\n# OPENING (INTRO)\n"
             .'The FIRST scene MUST open the video with one of these INTRO effects as its main layer '
             .'(type = one of them), chosen to fit the topic: ['.implode(', ', $introSlugs).']. '
             ."Give it a short hook title, keep it brief, then move on to the content.\n";
         // Outro effects: the LAST scene should close with one of these.
-        $outroSlugs = app(EffectLibrary::class)->outroSlugs();
+        $outroSlugs = $proprio ? [] : app(EffectLibrary::class)->outroSlugs();
         $outroBlock = empty($outroSlugs) ? '' : "\n# CLOSING (OUTRO)\n"
             .'The LAST scene MUST close the video with one of these OUTRO effects as its main layer '
             .'(type = one of them), chosen to fit: ['.implode(', ', $outroSlugs).']. '

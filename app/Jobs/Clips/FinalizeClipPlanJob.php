@@ -161,6 +161,14 @@ class FinalizeClipPlanJob implements ShouldQueue
             // it one (prefer a transparent one — usually the logo) and force that
             // image-capable intro first.
             $intros = $library->introSlugs();
+            // A clip that opens and closes its own way (the blog's social videos: a different
+            // opening each, a call to action at the end) takes none of the project's intro or
+            // outro cards, which belong to listing videos.
+            $proprio = ! empty($p->meta['abertura_propria']);
+            $outros = $proprio ? [] : $library->outroSlugs();
+            if ($proprio) {
+                $intros = [];
+            }
 
             // ── Animated intro video ─────────────────────────────────────────
             // The user approved (or the library matched) an animated intro: the
@@ -179,7 +187,7 @@ class FinalizeClipPlanJob implements ShouldQueue
                     }
                     unset($l);
                 }
-                $plan = $filler->enforceOutro($plan, $library->outroSlugs());
+                $plan = $filler->enforceOutro($plan, $outros);
                 $plan = $filler->darkenPhotoScenes($plan, $imageSlugs);
                 $plan = app(EffectParamFiller::class)->fill($plan, $p->transcript ?? [], $p->images ?? [], $library, (string) ($p->meta['instructions'] ?? ''), array_merge($library->introSlugs(), $library->outroSlugs()));
                 // A fan/gallery with empty photo slots shows blank cards — top them up, now
@@ -222,7 +230,7 @@ class FinalizeClipPlanJob implements ShouldQueue
             $videoIds = collect($p->images ?? [])->filter(fn ($i) => ! empty($i['video']))->pluck('id')->all();
             $plan = $filler->enforceIntro($plan, $intros, $introImageId, $videoIds);
             // …and CLOSES with an outro (a contact card, a sign-off), if any are marked.
-            $plan = $filler->enforceOutro($plan, $library->outroSlugs());
+            $plan = $filler->enforceOutro($plan, $outros);
             $plan = $filler->darkenPhotoScenes($plan, $imageSlugs);
 
             // Template effects need every input (price, title, the agent's photo…);
