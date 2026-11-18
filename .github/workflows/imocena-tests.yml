@@ -13,6 +13,7 @@ permissions:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -27,4 +28,5 @@ jobs:
         with:
           node-version: 22
       - run: npm ci && npm run build
-      - run: php artisan test
+      - run: timeout 900 vendor/bin/phpunit --debug | grep -E 'Test (Prepared|Failed|Errored)|Tests:|FAILURES|ERRORS' | sed 's/^.*Test Prepared/P/' | tail -400
+        shell: bash -o pipefail {0}
