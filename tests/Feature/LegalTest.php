@@ -23,7 +23,7 @@ class LegalTest extends TestCase
 
     public function test_the_site_links_the_terms_complaints_book_and_company_everywhere_people_buy(): void
     {
-        $this->get('/?agencia=remax')->assertOk()
+        $this->get('/video-gratis?agencia=remax')->assertOk()
             ->assertSee('/termos', false)->assertDontSee('href="#" class="text-[#AEB5C1] hover:text-ivory">Termos', false)
             ->assertSee('Livro de Reclamações')->assertSee('Resolução de litígios')
             ->assertSee('Eclipsingredients Unipessoal Lda · NIF 517419122')
@@ -35,7 +35,7 @@ class LegalTest extends TestCase
 
     public function test_the_free_video_form_has_one_optional_box_and_a_notice(): void
     {
-        $html = $this->get('/?agencia=remax')->assertOk()
+        $html = $this->get('/video-gratis?agencia=remax')->assertOk()
             ->assertSee('Ao pedir, confirma que é o consultor deste anúncio')
             ->assertSee('Avisem-me por email quando eu publicar um imóvel novo')->assertSee('(Opcional)')
             ->getContent();

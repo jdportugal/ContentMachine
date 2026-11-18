@@ -2,7 +2,7 @@
     <main class="max-w-[1240px] mx-auto px-6 py-10">
         <nav class="flex flex-wrap items-center justify-between gap-4">
             <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>
-            <a href="{{ route('home') }}#pedido" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Fazer o vídeo do meu imóvel →</a>
+            <a href="{{ route('video') }}#pedido" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Fazer o vídeo do meu imóvel →</a>
         </nav>
 
         <div class="mt-10 flex flex-wrap items-end justify-between gap-6">

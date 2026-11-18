@@ -52,7 +52,7 @@ class ComprasTest extends TestCase
 
     public function test_the_buy_buttons_open_the_payment_links_and_fall_back_to_email(): void
     {
-        $this->get('/?agencia=remax')->assertOk()
+        $this->get('/video-gratis?agencia=remax')->assertOk()
             ->assertSee('https://buy.stripe.com/avulso?locale=pt', false)
             ->assertSee('https://buy.stripe.com/pack10?locale=pt', false)
             ->assertSee('mailto:', false);   // pack20 has no link yet → email
@@ -64,7 +64,7 @@ class ComprasTest extends TestCase
         Livewire::test(Landing::class)->set(['anuncio' => self::ANUNCIO, 'consentimento' => true])->call('pedir')->assertHasNoErrors();
         $lead = DB::table('leads')->sole();
 
-        $this->get('/')->assertSee('https://buy.stripe.com/avulso?client_reference_id=lead-'.$lead->id.'&amp;locale=pt', false);
+        $this->get('/video-gratis')->assertSee('https://buy.stripe.com/avulso?client_reference_id=lead-'.$lead->id.'&amp;locale=pt', false);
     }
 
     public function test_the_webhook_rejects_bad_signatures(): void

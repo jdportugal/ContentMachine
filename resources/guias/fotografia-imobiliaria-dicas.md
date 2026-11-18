@@ -3,7 +3,7 @@ titulo: Fotografia imobiliária: 15 dicas para fotos que vendem
 descricao: 15 dicas de fotografia imobiliária para consultores: preparar a casa, luz, ângulos, quantas fotos pôr no anúncio e a ordem certa.
 palavra: fotografia imobiliária dicas
 resumo: Boas fotos imobiliárias pedem luz natural com todas as luzes acesas, a câmara à altura do peito com as linhas verticais direitas, a lente grande-angular sem exagero e a casa arrumada. Abra o anúncio com a foto mais forte e siga a ordem de uma visita. As fotos são a base de tudo: do anúncio, do vídeo e dos posts nas redes.
-tema: Vídeo de imóveis
+tema: Fotografia e apresentação
 publicado: 2026-11-17
 ---
 

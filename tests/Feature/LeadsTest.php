@@ -34,8 +34,8 @@ class LeadsTest extends TestCase
     public function test_the_landing_page_is_public(): void
     {
         // First the question and nothing else; the form, prices and the rest are on the agency's page.
-        $this->get('/')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('Em que agência trabalha?')->assertDontSee('Peça o seu vídeo grátis')->assertDontSee('Perguntas frequentes')->assertDontSee('Oferta de lançamento');
-        $this->get('/?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')->assertSee('Peça o seu vídeo grátis')->assertSee('remax.pt');
+        $this->get('/video-gratis')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('Em que agência trabalha?')->assertDontSee('Peça o seu vídeo grátis')->assertDontSee('Perguntas frequentes')->assertDontSee('Oferta de lançamento');
+        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')->assertSee('Peça o seu vídeo grátis')->assertSee('remax.pt');
     }
 
     public function test_the_demo_listing_has_a_page_and_reads_without_fetching(): void
@@ -53,7 +53,7 @@ class LeadsTest extends TestCase
         $this->assertCount(14, $listing['photos']);
         $this->assertStringEndsWith('/media/demo/moradia-lajeosa/01-fachada.png', $listing['photos'][0]);
         $this->assertSame('295 000 €', $listing['details']['Preço']);
-        $this->get('/?agencia=remax')->assertSee('/demo/moradia-lajeosa');
+        $this->get('/video-gratis?agencia=remax')->assertSee('/demo/moradia-lajeosa');
     }
 
     public function test_the_link_alone_starts_the_listing_import(): void

@@ -40,7 +40,20 @@ use Illuminate\Support\Facades\URL;
 // ── Public site ──────────────────────────────────────────────────────────────
 // The free-video landing page, and the signed link to the finished reel it shows:
 // a lead has no account, so the signature is the key and LeadVideo activates their project.
-Route::livewire('/', Landing::class)->name('home');
+// The free-video form (the page the ads, emails, invites and guides send people to) lives at
+// /video-gratis; the home page presents Imocena and its blog. Anyone who reaches the home page
+// with a link meant for the form (ad tags, ?agencia=, ?convite=, ?anuncio=…) or with a video
+// under way is sent on to the form with the same query, so old links and live ads keep working.
+Route::livewire('/video-gratis', Landing::class)->name('video');
+Route::get('/', function (Request $request, \App\Services\Guias\Guias $guias) {
+    $query = (string) $request->server('QUERY_STRING', '');   // as sent: same order and encoding
+    if ($query !== '' || session()->has('lead_id')) {
+        return redirect()->to(route('video').($query !== '' ? '?'.$query : ''));
+    }
+
+    return view('inicio', ['guias' => $guias->todos(), 'temas' => $guias->porTema(), 'reel' => Landing::demoReel('')['url']]);
+})->name('home');
+Route::redirect('/blog', '/guias', 301);
 
 // Imocena's own demo listings (fictional, generated photos): the page the
 // landing's example points at, and a link anyone can paste into the form.
@@ -79,7 +92,7 @@ Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $g
 
 // For search engines: every public page, and the rules for crawlers.
 Route::get('/sitemap.xml', function (\App\Services\Guias\Guias $guias) {
-    $urls = [['loc' => route('home'), 'lastmod' => null]];
+    $urls = [['loc' => route('home'), 'lastmod' => null], ['loc' => route('video'), 'lastmod' => null]];
     $urls[] = ['loc' => route('guias'), 'lastmod' => collect($guias->todos())->max('atualizado')];
     foreach ($guias->todos() as $g) {
         $urls[] = ['loc' => route('guias.ver', $g['slug']), 'lastmod' => $g['atualizado']];

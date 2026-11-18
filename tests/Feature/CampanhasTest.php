@@ -65,11 +65,11 @@ class CampanhasTest extends TestCase
 
     public function test_a_visit_is_counted_once_per_session_and_not_for_robots_or_the_operator(): void
     {
-        $this->get('/'.self::ADS)->assertOk();
+        $this->get('/video-gratis'.self::ADS)->assertOk();
         $this->get('/termos')->assertOk();                      // same session: still one visit
         $visita = DB::table('visitas')->sole();
         $this->assertSame('meta-ads', $visita->canal);
-        $this->assertSame('/', $visita->pagina);
+        $this->assertSame('/video-gratis', $visita->pagina);
         $this->assertSame('preco-10-euros', json_decode($visita->origem, true)['utm_content']);
 
         $this->flushSession();
@@ -83,7 +83,7 @@ class CampanhasTest extends TestCase
 
         $this->flushSession();
         auth()->logout();
-        $this->get('/')->assertOk();
+        $this->get('/video-gratis')->assertOk();
         $this->assertSame('direto', DB::table('visitas')->orderByDesc('id')->value('canal'));
     }
 

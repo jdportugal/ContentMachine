@@ -16,7 +16,7 @@
             </a>
             <div class="flex items-center gap-6 text-sm">
                 <a href="{{ route('guias') }}" class="inline-flex items-center min-h-11 text-[#D6D9DF] hover:text-ivory">Guias</a>
-                <a href="{{ route('home') }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Vídeo grátis →</a>
+                <a href="{{ route('video') }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Vídeo grátis →</a>
             </div>
         </nav>
     </header>
@@ -57,7 +57,7 @@
             <span class="text-xs font-medium tracking-[.28em] text-cyan-deep">EXPERIMENTE GRÁTIS</span>
             <p class="mt-3 font-display text-[30px] leading-tight">Cole o link do seu anúncio. Daqui a minutos tem o vídeo.</p>
             <p class="mt-3 text-[15px] leading-relaxed text-[#4B5563]">Vídeo vertical com narração em português de Portugal e o seu contacto no fim. Para anúncios da RE/MAX, iad Portugal, eXp Portugal, KW Portugal e Century 21.</p>
-            <a href="{{ route('home') }}?{{ $guia['agencia'] ? 'agencia='.$guia['agencia'].'&' : '' }}utm_source=guias&utm_medium=organico&utm_campaign={{ $guia['slug'] }}" class="mt-6 inline-flex items-center min-h-[50px] px-7 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Pedir o vídeo grátis →</a>
+            <a href="{{ route('video') }}?{{ $guia['agencia'] ? 'agencia='.$guia['agencia'].'&' : '' }}utm_source=guias&utm_medium=organico&utm_campaign={{ $guia['slug'] }}" class="mt-6 inline-flex items-center min-h-[50px] px-7 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Pedir o vídeo grátis →</a>
         </aside>
 
         @if ($outros !== [])

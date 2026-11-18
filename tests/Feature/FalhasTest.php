@@ -58,7 +58,7 @@ class FalhasTest extends TestCase
     public function test_idealista_is_no_longer_offered_or_accepted(): void
     {
         $this->assertFalse(ListingScraper::supports('https://www.idealista.pt/imovel/12345678/'));
-        $this->get('/')->assertOk()->assertDontSee('idealista');
+        $this->get('/video-gratis')->assertOk()->assertDontSee('idealista');
         Livewire::test(Landing::class)->set(['anuncio' => 'https://www.idealista.pt/imovel/12345678/'])->call('pedir')
             ->assertHasErrors('anuncio')->assertSee('RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal e da Century 21');
         Queue::assertNothingPushed();
@@ -69,7 +69,7 @@ class FalhasTest extends TestCase
         $url = 'https://andreiaramalho.expportugal.com/imoveis/gois/moradia/vila-nova-do-ceira-1';
         $this->assertSame('exp', ListingScraper::portal($url));
         $this->assertFileExists(base_path('vault/themes/exp-premium/theme.json'));   // ships with the image
-        $this->get('/')->assertOk()->assertSee('eXp Portugal');
+        $this->get('/video-gratis')->assertOk()->assertSee('eXp Portugal');
 
         Livewire::test(Landing::class)->set(['anuncio' => $url])->call('pedir')->assertHasNoErrors();
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === $url);
@@ -80,7 +80,7 @@ class FalhasTest extends TestCase
         $url = 'https://www.kwportugal.pt/pt/Imovel/Venda/Moradia/Setubal/Setubal/Azeitao/75048/KWPT-039614';
         $this->assertSame('kw', ListingScraper::portal($url));
         $this->assertFileExists(base_path('vault/themes/kw-premium/theme.json'));   // ships with the image
-        $this->get('/')->assertOk()->assertSee('KW Portugal');
+        $this->get('/video-gratis')->assertOk()->assertSee('KW Portugal');
 
         Livewire::test(Landing::class)->set(['anuncio' => $url])->call('pedir')->assertHasNoErrors();
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === $url);

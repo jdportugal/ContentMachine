@@ -89,19 +89,41 @@ class GuiasTest extends TestCase
         $this->assertStringNotContainsString('Disallow: /guias', $robots);
     }
 
-    public function test_home_has_one_canonical_and_says_who_we_are(): void
+    public function test_home_has_one_canonical_says_who_we_are_and_shows_the_blog(): void
     {
-        $this->get('/?agencia=remax&utm_source=meta')->assertOk()
+        $guias = $this->guias();
+        $r = $this->get('/')->assertOk()
             ->assertSee('<link rel="canonical" href="'.url('/').'">', false)
             ->assertSee('"@type":"Organization"', false)
             ->assertSee('<meta property="og:image" content="'.asset('images/og/imocena.png').'">', false)
-            ->assertSee(route('guias'), false);
+            ->assertSee('id="blog"', false)
+            ->assertSee(route('guias'), false)
+            ->assertSee(route('video'), false)
+            ->assertDontSee('Em que agência trabalha?');
+        $r->assertSee(route('guias.ver', array_key_first($guias)), false);
+        $this->get('/blog')->assertRedirect('/guias');
+    }
+
+    public function test_links_meant_for_the_form_are_forwarded_to_it_with_their_query(): void
+    {
+        // The live ads, emails, invites and old guide buttons all point at the home page with a query.
+        foreach (['?agencia=remax&utm_source=meta&utm_medium=paid&fbclid=X', '?convite=abc', '?anuncio=https%3A%2F%2Fremax.pt%2F1-2', '?utm_source=imocena&utm_medium=email'] as $q) {
+            $this->get('/'.$q)->assertRedirect(route('video').$q);
+        }
+        // The first touch is kept from the home page's request, before the forward.
+        $this->assertSame('meta', session('origem')['utm_source']);
+        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')
+            ->assertSee('<link rel="canonical" href="'.route('video').'">', false);
+
+        // Someone with a video under way goes back to it.
+        $this->flushSession();
+        $this->withSession(['lead_id' => 1])->get('/')->assertRedirect(route('video'));
     }
 
     public function test_an_agency_page_sends_its_button_to_that_agency(): void
     {
         $this->get('/guias/video-imoveis-remax')->assertOk()
-            ->assertSee('agencia=remax&amp;utm_source=guias', false)
+            ->assertSee(route('video').'?agencia=remax&amp;utm_source=guias', false)
             ->assertSee('remax.pt');
         $this->get('/guias')->assertSee('Por agência');
     }

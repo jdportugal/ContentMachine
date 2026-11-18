@@ -72,7 +72,7 @@ class ConvitesTest extends TestCase
 
         // The colleague arrives by the link: counted, told who invited them, and their lead remembers it.
         Session::flush();
-        $this->get('/?convite='.$a->convite.'&agencia=remax&utm_source=convite&utm_medium=email&utm_campaign=convite-colega&utm_content='.$a->convite)
+        $this->get('/video-gratis?convite='.$a->convite.'&agencia=remax&utm_source=convite&utm_medium=email&utm_campaign=convite-colega&utm_content='.$a->convite)
             ->assertOk()->assertSee('Ana Silva ofereceu-lhe um vídeo grátis');
         $this->assertSame(1, DB::table('landing_eventos')->where('tipo', 'convite-visita')->count());
         $this->assertSame('convite', Canal::de(session('origem')));
@@ -128,7 +128,7 @@ class ConvitesTest extends TestCase
         $this->assertNull(DB::table('leads')->find($a->id)->convite);
 
         Session::flush();
-        $this->get('/?convite=nao-existe')->assertOk();
+        $this->get('/video-gratis?convite=nao-existe')->assertOk();
         $this->assertNull(session('convite'));
         $this->assertSame(0, DB::table('landing_eventos')->where('tipo', 'convite-visita')->count());
     }

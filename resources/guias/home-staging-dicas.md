@@ -3,7 +3,7 @@ titulo: Home staging: 12 dicas para preparar a casa para vender
 descricao: O que é o home staging e 12 dicas práticas para preparar uma casa para as fotos, o vídeo e as visitas, sem grandes obras nem grandes custos.
 palavra: home staging
 resumo: Home staging é preparar uma casa para venda de forma a que os compradores se imaginem a viver nela: arrumar, despersonalizar, reparar pequenos defeitos, melhorar a luz e organizar os espaços. Faz-se antes das fotos e do vídeo, porque são eles que decidem quem visita. A maior parte das melhorias custa pouco ou nada.
-tema: Vídeo de imóveis
+tema: Fotografia e apresentação
 publicado: 2026-11-17
 ---
 

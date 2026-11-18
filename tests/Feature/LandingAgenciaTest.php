@@ -35,11 +35,11 @@ class LandingAgenciaTest extends TestCase
     {
         Livewire::test(Landing::class)->call('escolher', 'iad');
         $this->assertSame('iad', session('agencia'));
-        $this->get('/')->assertOk()->assertSee('O vídeo do seu imóvel iad Portugal');
+        $this->get('/video-gratis')->assertOk()->assertSee('O vídeo do seu imóvel iad Portugal');
 
         session()->forget('agencia');
-        $this->get('/?agencia=exp')->assertOk()->assertSee('O vídeo do seu imóvel eXp Portugal');
-        $this->get('/?agencia=nope')->assertOk()->assertSee('Em que agência trabalha?');
+        $this->get('/video-gratis?agencia=exp')->assertOk()->assertSee('O vídeo do seu imóvel eXp Portugal');
+        $this->get('/video-gratis?agencia=nope')->assertOk()->assertSee('Em que agência trabalha?');
     }
 
     public function test_century21_agents_get_the_form_and_their_link_is_read(): void
@@ -82,7 +82,7 @@ class LandingAgenciaTest extends TestCase
         $this->assertCount(1, $enviados);
         $email = $enviados[0]->getOriginalMessage();
         $this->assertSame('ana@example.com', $email->getTo()[0]->getAddress());
-        $this->assertStringContainsString('/?agencia=remax&amp;utm_source=imocena&amp;utm_medium=email&amp;utm_campaign=lembrete#pedido', $email->getHtmlBody());
+        $this->assertStringContainsString('/video-gratis?agencia=remax&amp;utm_source=imocena&amp;utm_medium=email&amp;utm_campaign=lembrete#pedido', $email->getHtmlBody());
         $this->assertStringContainsString('RE/MAX', $email->getHtmlBody());
         $this->assertSame('ana@example.com', DB::table('landing_eventos')->where('tipo', 'lembrete')->value('email'));
 

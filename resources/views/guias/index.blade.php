@@ -9,7 +9,7 @@
                 <span class="font-display text-[30px] font-medium">Imocena</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>
             </a>
-            <a href="{{ route('home') }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy text-sm font-semibold hover:brightness-105">Vídeo grátis →</a>
+            <a href="{{ route('video') }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-coral text-navy text-sm font-semibold hover:brightness-105">Vídeo grátis →</a>
         </nav>
     </header>
 

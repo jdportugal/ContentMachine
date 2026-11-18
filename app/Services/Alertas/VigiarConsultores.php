@@ -114,7 +114,7 @@ class VigiarConsultores
     /** One email with the new listings (three at most), each with the link that starts its video. */
     private function avisar(object $c, array $anuncios): bool
     {
-        $base = rtrim((string) config('app.url'), '/').'/?utm_source=imocena&utm_medium=email&utm_campaign=imovel-novo';
+        $base = rtrim((string) config('app.url'), '/').'/video-gratis?utm_source=imocena&utm_medium=email&utm_campaign=imovel-novo';
         $itens = array_map(fn ($a) => ['titulo' => $a['titulo'] !== '' ? $a['titulo'] : 'Imóvel novo',
             'link' => $base.($a['url'] ? '&anuncio='.urlencode($a['url']) : '').'#pedido'], array_slice($anuncios, 0, 3));
         $cancelar = URL::signedRoute('lead.emails.cancelar', ['lead' => $c->lead_id]);

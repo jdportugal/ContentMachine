@@ -358,7 +358,7 @@ class Landing extends Component
         $a = self::AGENCIAS[$this->agencia];
         $this->registar($a['lemos'] ? 'lembrete' : 'aviso-agencia', ['email' => $this->contacto, 'nota' => trim($this->nomeAgencia) ?: null]);
         if ($a['lemos']) {
-            $link = rtrim((string) config('app.url'), '/').'/?agencia='.$this->agencia.'&utm_source=imocena&utm_medium=email&utm_campaign=lembrete#pedido';
+            $link = rtrim((string) config('app.url'), '/').'/video-gratis?agencia='.$this->agencia.'&utm_source=imocena&utm_medium=email&utm_campaign=lembrete#pedido';
             try {
                 Mail::html(view('emails.lembrete', ['agencia' => $a['nome'], 'link' => $link])->render(),
                     fn ($m) => $m->to($this->contacto)->subject('O link para fazer o vídeo grátis do seu imóvel'));

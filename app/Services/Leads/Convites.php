@@ -50,7 +50,7 @@ class Convites
             'utm_content' => $this->codigo($lead),
         ]);
 
-        return rtrim((string) config('app.url'), '/').'/?'.http_build_query($q);
+        return rtrim((string) config('app.url'), '/').'/video-gratis?'.http_build_query($q);
     }
 
     /** The lead an invite code belongs to, or null. */

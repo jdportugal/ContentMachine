@@ -15,7 +15,7 @@ class Guias
 
     public const FAQ = 'Perguntas frequentes';
 
-    public const TEMAS = ['Vídeo de imóveis', 'Portais', 'Redes sociais', 'Angariação', 'Marketing e marca', 'Inteligência artificial', 'Por agência', 'Outros'];
+    public const TEMAS = ['Fotografia e apresentação', 'Vídeo de imóveis', 'Portais', 'Redes sociais', 'Angariação', 'Marketing e marca', 'Inteligência artificial', 'Por agência', 'Outros'];
 
     private ?array $todos = null;
 

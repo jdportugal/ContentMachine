@@ -31,20 +31,20 @@ class MedicaoTest extends TestCase
 
     public function test_tags_wait_for_consent_and_the_privacy_page_explains_them(): void
     {
-        $this->get('/?agencia=remax')->assertOk()
+        $this->get('/video-gratis?agencia=remax')->assertOk()
             ->assertSee('id="cookies"', false)->assertSee('Aceitar')->assertSee('Rejeitar')
             ->assertSee("includes('imocena_cookies=sim')) imocenaMedicao.carregar()", false)   // loaded only with a yes
             ->assertSee('G-TESTE123')->assertSee('/privacidade', false)->assertSee('Preferências de cookies');
         $this->get('/privacidade')->assertOk()->assertSee('Política de privacidade')->assertSee('_fbp')->assertSee('cnpd.pt');
 
         config(['contentmachine.meta_pixel' => '', 'contentmachine.ga4' => '']);
-        $this->get('/')->assertOk()->assertDontSee('id="cookies"', false);   // nothing to ask about
+        $this->get('/video-gratis')->assertOk()->assertDontSee('id="cookies"', false);   // nothing to ask about
     }
 
     public function test_the_first_campaign_a_visitor_came_from_is_kept_on_their_lead(): void
     {
-        $this->get('/?utm_source=facebook&utm_medium=paid&utm_campaign=lancamento&utm_content=anuncio-a&fbclid=ABC123')->assertOk();
-        $this->get('/?utm_source=google&utm_campaign=outra')->assertOk();   // first touch wins
+        $this->get('/video-gratis?utm_source=facebook&utm_medium=paid&utm_campaign=lancamento&utm_content=anuncio-a&fbclid=ABC123')->assertOk();
+        $this->get('/video-gratis?utm_source=google&utm_campaign=outra')->assertOk();   // first touch wins
         $origem = session('origem');
         $this->assertSame('facebook', $origem['utm_source']);
         $this->assertStringStartsWith('fb.1.', $origem['fbc']);
