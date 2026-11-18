@@ -61,6 +61,23 @@ class ListingScraper
         return false;
     }
 
+    /**
+     * The pasted link, trimmed, as the listing's own page where a portal also shares it some
+     * other way. RE/MAX's "portfolio" share link (remax.pt/portfolio/<code>/<listing id>?a=…)
+     * shows the listing inside the agent's portfolio and has no listing data of its own: it
+     * becomes www.remax.pt/<listing id>, the listing's page.
+     */
+    public static function limpar(string $url): string
+    {
+        $url = trim($url);
+        if (self::portal($url) === 'remax'
+            && preg_match('#/portfolio/[^/]+/(\d{6,}-\d+)/?$#i', (string) parse_url($url, PHP_URL_PATH), $m)) {
+            return 'https://www.remax.pt/'.$m[1];
+        }
+
+        return $url;
+    }
+
     public static function supports(string $url): bool
     {
         return self::portal($url) !== null;

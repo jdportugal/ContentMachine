@@ -120,7 +120,7 @@ class Landing extends Component
             $this->agencia = isset(self::AGENCIAS[$portal = (string) ($lead->agencia ?? ListingScraper::portal((string) $lead->anuncio))]) ? $portal : '';
         }
         // A link from a new-listing alert arrives with the listing already filled in.
-        $anuncio = trim((string) request()->query('anuncio', ''));
+        $anuncio = ListingScraper::limpar((string) request()->query('anuncio', ''));
         if ($anuncio !== '' && mb_strlen($anuncio) <= 500 && ListingScraper::supports($anuncio)) {
             $this->anuncio = $anuncio;
             $this->agencia = isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($anuncio)]) ? $portal : $this->agencia;
@@ -143,7 +143,7 @@ class Landing extends Component
             return;
         }
 
-        $this->anuncio = trim($this->anuncio);
+        $this->anuncio = ListingScraper::limpar($this->anuncio);
         $this->email = trim($this->email);
         $this->emailVideo = mb_strtolower(trim($this->emailVideo));
         if ($this->marketing && $this->email === '' && $this->emailVideo !== '') {
