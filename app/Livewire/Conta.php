@@ -29,7 +29,7 @@ class Conta extends Component
 
     public function usarCredito(NovoVideo $novo): void
     {
-        $this->anuncio = trim($this->anuncio);
+        $this->anuncio = ListingScraper::limpar($this->anuncio);
         $this->validate(NovoVideo::regrasDoAnuncio(), NovoVideo::MENSAGENS_DO_ANUNCIO);
         if ($erro = $novo->criar(Auth::user(), $this->anuncio)) {
             $this->addError('anuncio', $erro);

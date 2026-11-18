@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\Contas\NovoVideo;
+use App\Services\RealEstate\ListingScraper;
 use App\Services\Shorts\MusicLibrary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -66,7 +67,7 @@ class NovoVideoPagina extends Component
 
     public function criar(NovoVideo $novo, MusicLibrary $biblioteca): void
     {
-        $this->anuncio = trim($this->anuncio);
+        $this->anuncio = ListingScraper::limpar($this->anuncio);
         $this->narracao = trim(preg_replace("/[ \t]+/", ' ', $this->narracao));
         $faixas = array_column($biblioteca->all(), 'name');
         $this->validate(NovoVideo::regrasDoAnuncio() + [

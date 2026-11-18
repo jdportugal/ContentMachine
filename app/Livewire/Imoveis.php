@@ -51,7 +51,7 @@ class Imoveis extends Component
 
     public function criar(ListingImport $import, ThemeRepository $themes): void
     {
-        $this->anuncio = trim($this->anuncio);
+        $this->anuncio = ListingScraper::limpar($this->anuncio);
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500', fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
                 fn ($a, $v, $fail) => ListingScraper::naoEImovel($v) ? $fail(ListingScraper::NAO_E_IMOVEL) : null],

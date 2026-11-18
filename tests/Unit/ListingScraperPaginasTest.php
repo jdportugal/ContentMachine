@@ -39,4 +39,22 @@ class ListingScraperPaginasTest extends TestCase
             $this->assertFalse(ListingScraper::naoEImovel($url), $url);
         }
     }
+
+    public function test_a_remax_portfolio_share_link_becomes_the_listing_link(): void
+    {
+        // The one that failed on 18 Nov; the agent then pasted www.remax.pt/127161012-12 and it worked.
+        $this->assertSame('https://www.remax.pt/127161012-12',
+            ListingScraper::limpar('  https://remax.pt/portfolio/qKz8/127161012-12?a=NnvLilljaTiZaL4Jqu3Mww '));
+        $this->assertSame('https://www.remax.pt/127161012-12', ListingScraper::limpar('https://www.remax.pt/pt/portfolio/qKz8/127161012-12/'));
+        $this->assertFalse(ListingScraper::naoEImovel(ListingScraper::limpar('https://remax.pt/portfolio/qKz8/127161012-12?a=x')));
+
+        // Everything else is only trimmed.
+        foreach ([
+            'https://remax.pt/pt/imoveis/venda-moradia-t3-braga-barcelos/126281088-16/t6nqohpolX-3oPlra70FcRI1c9HSOYca',
+            'https://www.century21.pt/comprar/apartamento/porto/12345',
+            'https://www.idealista.pt/portfolio/x/123456-7',
+        ] as $url) {
+            $this->assertSame($url, ListingScraper::limpar(" $url\n"));
+        }
+    }
 }
