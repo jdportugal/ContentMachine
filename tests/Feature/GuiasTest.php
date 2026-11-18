@@ -132,4 +132,24 @@ class GuiasTest extends TestCase
     {
         $this->assertSame('guias', Canal::de(['utm_source' => 'guias', 'utm_medium' => 'organico']));
     }
+
+    public function test_every_guide_has_a_video_script_that_ends_on_imocena(): void
+    {
+        $guioes = json_decode((string) file_get_contents(resource_path('guias/videos/guioes.json')), true);
+        $this->assertIsArray($guioes);
+        foreach (array_keys($this->guias()) as $slug) {
+            $v = $guioes[$slug] ?? null;
+            $this->assertIsArray($v, "$slug: no video script");
+            $palavras = str_word_count($v['guiao'], 0, 'ÀÁÂÃÇÉÊÍÓÔÕÚàáâãçéêíóôõú');
+            $this->assertGreaterThanOrEqual(55, $palavras, "$slug: script too short");
+            $this->assertLessThanOrEqual(110, $palavras, "$slug: script too long for a short");
+            $this->assertStringContainsString('imocena.com', $v['guiao'], "$slug: no call to action");
+            $this->assertNotSame('', $v['abertura']);
+            $this->assertLessThanOrEqual(3, count($v['imagens']), "$slug: too many AI images");
+        }
+        $instrucoes = \App\Console\Commands\VideosBlog::instrucoes($guioes['luz-natural-fotografar-casa']);
+        $this->assertStringContainsString('ABERTURA: antes-depois', $instrucoes);
+        $this->assertStringContainsString('imocena.com', $instrucoes);
+        $this->assertFileExists(resource_path('guias/videos/estilo.md'));
+    }
 }

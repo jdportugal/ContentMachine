@@ -38,4 +38,5 @@ deploy
 *.md
 !Brand-Machine-design-system.md
 !resources/guias/*.md
+!resources/guias/videos/estilo.md
 install.sh

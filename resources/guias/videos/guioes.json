@@ -1,0 +1,313 @@
+{
+  "_sobre": "Guião de cada vídeo curto do blog (9:16, 35-50 s, voz pt-PT, tema imocena-blog). 'abertura' diz como abre o vídeo, 'imagens' são as imagens geradas por IA (no máximo 3), 'guiao' é o texto narrado. Feitos no servidor com php artisan imocena:videos-blog.",
+  "luz-natural-fotografar-casa": {
+    "abertura": "antes-depois: abrir com duas imagens lado a lado, a mesma sala escura e depois luminosa, e o título «a diferença é a hora»",
+    "imagens": ["the same small Portuguese living room photographed twice side by side: left dim and grey at dusk, right bright with daylight through open windows, photoreal", "sunlit Portuguese townhouse facade with sun from the side, blue sky, photoreal"],
+    "guiao": "A mesma sala, duas fotos. A diferença é a hora. Fotografe os interiores quando entra mais luz, do fim da manhã ao meio da tarde, com os estores abertos e todas as luzes acesas, da mesma cor. Na fachada, o sol deve bater de frente ou de lado, nunca atrás da casa. Dia cinzento? Faça os interiores e volte com sol para o exterior. Boas fotos dão um bom anúncio e um bom vídeo. Para o vídeo do seu imóvel, cole o link do anúncio em imocena.com. Fica pronto em minutos, e o primeiro é grátis."
+  },
+  "erros-fotos-imoveis": {
+    "abertura": "erro: abrir com o texto grande «erro n.º 1» sobre uma imagem de uma sala torta, depois enumerar",
+    "imagens": ["real estate agent in her thirties holding a smartphone horizontally to photograph a bright living room, Portugal, photoreal", "tidy modern Portuguese bathroom with toilet lid closed and white towels, photoreal"],
+    "guiao": "Erro número um: paredes tortas. Segure o telemóvel direito e ligue a grelha. Erro dois: fotos escuras. Abra os estores, acenda as luzes e use o HDR. Erro três: fotografar de cima. Fique à altura do peito. E os clássicos: a sanita aberta, o seu reflexo no espelho, ímanes no frigorífico. Um minuto de arrumação muda o anúncio inteiro. Com as fotos certas, o vídeo do seu imóvel faz-se sozinho: cole o link do anúncio em imocena.com e receba-o em minutos. O primeiro é grátis."
+  },
+  "preparar-casa-para-fotografias": {
+    "abertura": "lista: abrir com uma lista que se vai riscando no ecrã, «antes das fotos»",
+    "imagens": ["homeowner tidying a kitchen counter, leaving only a fruit bowl, bright Portuguese apartment, photoreal", "neatly made bed with white linen in a bright bedroom, photoreal"],
+    "guiao": "Antes das fotos, a casa precisa de vinte minutos. Estores abertos e lâmpadas a funcionar. Fotografias de família guardadas. Bancadas da cozinha quase vazias, nada no frigorífico. Camas feitas com roupa clara. Na casa de banho, tampa da sanita em baixo e toalhas lisas. Lá fora, carros e caixotes fora da frente da casa. Envie esta lista ao proprietário dois dias antes. Depois das fotos, o vídeo: cole o link do anúncio em imocena.com e tem um vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "fotografar-divisoes-pequenas": {
+    "abertura": "pergunta: abrir com a pergunta em letras grandes sobre fundo navy, sem imagem, «quarto pequeno?»",
+    "imagens": ["small bright bedroom photographed from the corner at chest height, straight vertical lines, Portugal, photoreal"],
+    "guiao": "Quarto pequeno? Não o fotografe do meio. Encoste-se ao canto oposto à porta, à altura do peito, com o telemóvel direito. Assim apanha duas paredes e o máximo de chão. A grande angular ajuda, mas pouca: mantenha os móveis longe das margens. Tire uma cadeira, um tapete, o que estiver a mais, e acenda todas as luzes. Uma foto honesta vale mais do que uma divisão esticada. E para o vídeo do imóvel, cole o link do anúncio em imocena.com. Fica pronto em minutos, o primeiro é grátis."
+  },
+  "fotografar-cozinha-casa-de-banho": {
+    "abertura": "pormenor: abrir num grande plano de uma bancada de cozinha limpa com luz da janela",
+    "imagens": ["close-up of a clean stone kitchen countertop with a single bowl of oranges and window light, photoreal", "bright modern bathroom photographed diagonally from the doorway, white towels, photoreal"],
+    "guiao": "Cozinha e casa de banho são as divisões que os compradores mais examinam. Na cozinha, bancadas vazias, só uma taça de fruta, nada no lava-loiça. Na casa de banho, tampa em baixo, toalhas lisas e nada no lavatório. Fotografe na diagonal, para não aparecer no espelho, e junte um pormenor do que valoriza: a placa, o forno, o duche. Para transformar essas fotos num vídeo, cole o link do anúncio em imocena.com. Em minutos tem o vídeo narrado. O primeiro é grátis."
+  },
+  "fotografar-exterior-fachada": {
+    "abertura": "casa: abrir com uma fachada de moradia ao sol em aproximação lenta, título «a primeira foto»",
+    "imagens": ["white Portuguese villa facade in afternoon sun photographed at a 45 degree angle, no cars, blue sky, photoreal", "balcony with a small table and two chairs overlooking a town, photoreal"],
+    "guiao": "Numa moradia, a fachada é a primeira foto. Escolha a hora em que o sol lhe bate de frente ou de lado. Fotografe ligeiramente de lado, para dar profundidade, com o telemóvel direito e o céu a ocupar pouco da foto. Tire carros, caixotes e mangueiras da frente. Depois, o jardim, a varanda com uma mesa e duas cadeiras, e a vista. Com as fotos no anúncio, o vídeo é rápido: cole o link em imocena.com e receba-o narrado em minutos. O primeiro é grátis."
+  },
+  "editar-fotos-imoveis-telemovel": {
+    "abertura": "antes-depois: abrir com a mesma foto, torta e escura, e depois direita e clara",
+    "imagens": ["hands editing a real estate photo on a smartphone, adjusting brightness, living room on screen, photoreal"],
+    "guiao": "Editar as fotos de um imóvel tem uma regra: mostrar a casa como ela é, num bom dia. Pode endireitar as linhas, clarear as sombras, recuperar a janela e corrigir a cor das paredes. Não deve apagar humidade, trocar a vista nem esticar a divisão. Se mobilar uma sala vazia com mobiliário virtual, diga que é virtual. A visita tem de confirmar as fotos. E para pôr a casa em vídeo, cole o link do anúncio em imocena.com. Fica pronto em minutos, e o primeiro é grátis."
+  },
+  "ordem-das-fotos-anuncio": {
+    "abertura": "numero: abrir com o número grande «1.ª foto» e a frase «decide o clique»",
+    "imagens": ["bright Portuguese apartment living room with a sea view through large windows, photoreal"],
+    "guiao": "A primeira foto do anúncio decide o clique. É ela que aparece na lista de resultados, ao lado de dezenas de casas. Abra com a imagem mais forte: a fachada ao sol, a sala com vista, o jardim. Nunca com o corredor. Depois, siga a ordem de uma visita: entrada, sala, cozinha, quartos, casas de banho, exterior, e a planta no fim. O vídeo segue a mesma ordem. Cole o link do anúncio em imocena.com e receba o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "video-plano-sequencia-imovel": {
+    "abertura": "pessoa: abrir com uma consultora a entrar por uma porta com o telemóvel à altura do peito",
+    "imagens": ["real estate agent walking slowly through an apartment doorway filming with a smartphone on a gimbal, photoreal", "long bright hallway leading to a living room with sunlight, photoreal"],
+    "guiao": "Um vídeo numa só gravação mostra como as divisões se ligam. Antes de gravar, faça o percurso a pé e abra todas as portas. Comece à entrada e acabe no melhor sítio, a varanda ou a vista. Ande mais devagar do que lhe parece natural, pare um segundo à entrada de cada divisão e rode o corpo, não os braços. Um a dois minutos chegam. Para as redes, um vídeo curto funciona melhor: cole o link do anúncio em imocena.com e tem-no em minutos. O primeiro é grátis."
+  },
+  "estabilizar-video-telemovel": {
+    "abertura": "pergunta: abrir com «o seu vídeo treme?» em letras grandes que abanam e depois param",
+    "imagens": ["person holding a smartphone with both hands close to the chest, elbows tucked, filming an interior, photoreal"],
+    "guiao": "O seu vídeo treme? Três correções. Ligue a estabilização e use a lente principal, porque o zoom aumenta o tremor. Segure o telemóvel com as duas mãos, cotovelos junto ao corpo. E ande devagar, com os joelhos ligeiramente fletidos, rodando o corpo inteiro para virar. Um estabilizador ajuda, mas não faz milagres com passos rápidos. Sem tempo para gravar? Um vídeo feito com as fotos não treme. Cole o link do anúncio em imocena.com e receba-o em minutos. O primeiro é grátis."
+  },
+  "drone-imoveis-regras-portugal": {
+    "abertura": "casa: abrir com uma vista aérea de uma quinta com piscina",
+    "imagens": ["aerial view of a Portuguese countryside villa with a pool and olive trees, photoreal"],
+    "guiao": "Uma foto de drone mostra o terreno, a piscina e os acessos como nenhuma outra. Mas há regras. Em Portugal aplicam-se as regras europeias, fiscalizadas pela ANAC. A maior parte das fotos de imóveis cabe na categoria aberta: até cento e vinte metros de altura e nunca sobre ajuntamentos de pessoas. Drone com câmara, em regra, obriga a registar o operador. Confirme sempre na ANAC antes de voar. Depois, junte as fotos ao anúncio e cole o link em imocena.com: o vídeo fica pronto em minutos."
+  },
+  "despersonalizar-casa-para-vender": {
+    "abertura": "antes-depois: abrir com uma estante cheia de fotografias de família e depois a mesma estante neutra",
+    "imagens": ["living room shelf crowded with family photos and souvenirs, photoreal", "the same living room shelf with only a few books and a plant, calm and neutral, photoreal"],
+    "guiao": "O comprador quer imaginar a vida dele na casa, não a do proprietário. Por isso, antes das fotos e das visitas, guarde as fotografias de família, os diplomas, as coleções e os ímanes do frigorífico. Não é esvaziar a casa: é deixá-la neutra, com poucos móveis, algumas plantas e superfícies livres. Com o proprietário, fale com tato e proponha começar pelo que já vai para a mudança. Casa pronta, fotos tiradas: cole o link do anúncio em imocena.com e tem o vídeo em minutos."
+  },
+  "pequenas-reparacoes-antes-de-vender": {
+    "abertura": "pormenor: abrir num grande plano de uma torneira a pingar, com o texto «o que se vê, conta»",
+    "imagens": ["close-up of a dripping chrome kitchen tap, photoreal", "handyman tightening a door handle in a bright apartment, photoreal"],
+    "guiao": "Na visita, um puxador solto faz o comprador perguntar: o que mais estará mal? Antes de vender, troque as lâmpadas fundidas, aperte puxadores e dobradiças, arranje a torneira que pinga e o autoclismo que corre, limpe as juntas da casa de banho e tape os furos nas paredes. Humidade? Resolva a causa antes de pintar. Obras grandes raramente compensam. Com a casa cuidada, faça as fotos e cole o link do anúncio em imocena.com. O vídeo fica pronto em minutos, e o primeiro é grátis."
+  },
+  "home-staging-baixo-custo": {
+    "abertura": "numero: abrir com o número grande «menos de 100 €»",
+    "imagens": ["cozy living room refreshed with neutral cushions, a throw and a large plant, photoreal", "small balcony with a folding table and two chairs, photoreal"],
+    "guiao": "Home staging com menos de cem euros. Arrumar e tirar móveis a mais custa zero e é o que mais muda. Depois, lâmpadas todas da mesma cor, toalhas e roupa de cama brancas, almofadas neutras, plantas e um tapete simples. Na varanda, uma mesa e duas cadeiras mostram que se pode usar. Dê a cada divisão uma função clara. É nas casas mais baratas que um anúncio bem apresentado mais se destaca. Depois das fotos, cole o link do anúncio em imocena.com e receba o vídeo em minutos."
+  },
+  "home-staging-virtual": {
+    "abertura": "antes-depois: abrir com uma sala vazia e depois mobilada, com o selo «imagem virtual» no canto",
+    "imagens": ["empty bright living room with wooden floor and large windows, photoreal", "the same living room virtually staged with a neutral sofa, rug and plant, photoreal"],
+    "guiao": "Uma sala vazia parece pequena e fria. O home staging virtual mobila a foto e ajuda o comprador a perceber a escala. Três regras. Identifique a imagem como virtual, na própria foto e no anúncio. Mostre também a foto real logo a seguir. E nunca mude a casa: paredes, janelas, chão e vista ficam como são. Mobile só as divisões principais. As imagens virtuais também podem entrar no vídeo. Cole o link do anúncio em imocena.com e tem o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "preparar-casa-para-visitas": {
+    "abertura": "pessoa: abrir com uma consultora a abrir os estores de uma sala de manhã",
+    "imagens": ["real estate agent opening the blinds of a living room in the morning, sunlight flooding in, photoreal", "couple arriving at an apartment door for a viewing, welcomed by an agent, photoreal"],
+    "guiao": "A visita tem de confirmar as fotos. Quinze minutos antes: abra estores e cortinas e acenda todas as luzes. Areje a casa e acerte a temperatura. Nada de cozinhados fortes nem ambientadores intensos. Televisão desligada, camas feitas, loiça lavada, animais fora. E peça ao proprietário, com tato, para não estar presente. Depois, peça a opinião ao comprador e passe-a ao proprietário. As visitas começam no anúncio: cole o link em imocena.com e tenha o vídeo do imóvel em minutos. O primeiro é grátis."
+  },
+  "fotografar-casa-vazia": {
+    "abertura": "pergunta: abrir com «casa vazia?» sobre uma imagem de uma divisão vazia com eco visual",
+    "imagens": ["empty apartment room with afternoon light through a large window, wooden floor, photoreal"],
+    "guiao": "Casa vazia? Nas fotos parece mais pequena e fria. Compense assim: luz natural forte, fotografias de um canto para mostrar duas paredes e o chão, sempre com a janela na foto. Junte pormenores dos materiais, da vista e dos roupeiros. Leve uma planta grande e duas cadeiras para a varanda. Nas divisões principais, use mobiliário virtual, identificado. E deixe a narração contar o que a foto não diz: área, sol, zona. Cole o link do anúncio em imocena.com e tem esse vídeo em minutos."
+  },
+  "fotografia-imobiliaria-dicas": {
+    "abertura": "lista: abrir com «5 regras» a aparecer uma a uma sobre uma imagem de uma sala luminosa",
+    "imagens": ["bright Scandinavian-style Portuguese living room with straight vertical lines, photographed at chest height, photoreal"],
+    "guiao": "Cinco regras para boas fotos de imóveis. Luz natural, com todas as luzes acesas. Telemóvel à altura do peito. Linhas verticais direitas, com a grelha ligada. Grande angular, sem exagero. E a casa arrumada antes de começar. Depois, abra o anúncio com a foto mais forte e siga a ordem de uma visita. As fotos são a base de tudo: do anúncio, das redes e do vídeo. Com elas no anúncio, cole o link em imocena.com e receba o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "home-staging-dicas": {
+    "abertura": "casa: abrir com uma sala acolhedora e arrumada em aproximação lenta, título «home staging»",
+    "imagens": ["warm, tidy living room staged for sale with neutral cushions and a plant, photoreal", "staged bedroom with white linen and bedside lamps, photoreal"],
+    "guiao": "Home staging é preparar a casa para o comprador se imaginar a viver nela. Arrume e despersonalize. Repare o que se vê: lâmpadas, puxadores, juntas. Pinte as paredes marcadas em tons neutros. Abra estores e acenda as luzes. Dê a cada divisão uma função clara. Faz-se antes das fotos e do vídeo, porque são eles que decidem quem visita, e a maior parte custa pouco. Casa pronta? Cole o link do anúncio em imocena.com e tenha o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "como-filmar-imovel-com-telemovel": {
+    "abertura": "pessoa: abrir com um consultor a filmar na vertical numa cozinha luminosa",
+    "imagens": ["real estate agent filming vertically with a smartphone in a bright kitchen, photoreal"],
+    "guiao": "Filmar um imóvel com o telemóvel: na vertical, de dia, com luzes acesas e janelas abertas. Siga a ordem de uma visita: entrada, sala, cozinha, quartos, exterior. Faça planos de três a cinco segundos, com movimentos lentos, e o telemóvel à altura do peito. Um estabilizador barato ajuda muito. E se não tiver tempo para filmar? Há outra forma: cole o link do anúncio em imocena.com e receba um vídeo feito com as fotos, narrado em português, em poucos minutos. O primeiro é grátis."
+  },
+  "guiao-video-imovel": {
+    "abertura": "numero: abrir com «5 partes · 100 palavras»",
+    "imagens": ["real estate agent writing notes on a tablet in a cafe, photoreal"],
+    "guiao": "Um bom vídeo de imóvel tem cinco partes e cerca de cem palavras. Gancho: o preço, a zona ou o ponto mais forte. Três pontos que o comprador procura. A zona, com distâncias. Um pedido claro: envie mensagem para visitar. E o seu contacto. Frases curtas, como se falasse ao telefone, sem adjetivos vazios. Não quer escrever nem gravar? Cole o link do anúncio em imocena.com: escrevemos o guião, narramos em português de Portugal e montamos o vídeo em minutos."
+  },
+  "formato-de-video-para-imoveis": {
+    "abertura": "numero: abrir com «9:16» em letras enormes",
+    "imagens": ["smartphone showing a vertical property video on a desk next to a laptop, photoreal"],
+    "guiao": "Um só vídeo para todo o lado: MP4, vertical, nove por dezasseis, entre trinta e sessenta segundos. Serve nos Reels, no TikTok, nos Shorts e no WhatsApp. O idealista aceita até seis vídeos por anúncio, até setecentos e cinquenta megabytes cada. Grave ou monte uma vez e publique em todo o lado. Quer esse ficheiro sem editar nada? Cole o link do anúncio em imocena.com e receba o vídeo vertical, narrado em português de Portugal, em minutos. O primeiro é grátis."
+  },
+  "anuncios-com-video-chegam-a-mais-pessoas": {
+    "abertura": "pergunta: abrir com «porque é que o vídeo chega mais longe?»",
+    "imagens": ["woman scrolling property videos on her phone on a sofa, photoreal"],
+    "guiao": "Porque é que um anúncio com vídeo chega mais longe? Dois caminhos. No idealista, o vídeo é um dos sete fatores da qualidade do anúncio. Nas redes, o vídeo curto é o formato com mais alcance: em dois mil e vinte e seis, os Reels chegaram a mais seguidores do que as imagens e os carrosséis. E quem procura casa começa online. Um vídeo por imóvel deixou de ser um extra. Cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "tour-virtual-ou-video": {
+    "abertura": "antes-depois: abrir com um ecrã dividido, de um lado um tour 3D, do outro um vídeo vertical",
+    "imagens": ["laptop showing a 3D virtual tour of an apartment next to a phone playing a vertical property video, photoreal"],
+    "guiao": "Tour virtual ou vídeo? Fazem coisas diferentes. O vídeo atrai: passa nas redes, no WhatsApp e no portal, e chega a quem ainda não procura. O tour virtual serve quem já está interessado e quer explorar ao pormenor antes da visita. No idealista, contam como fatores separados. Se só puder ter um, comece pelo vídeo, porque é o que traz gente nova. E o vídeo é o mais fácil: cole o link do anúncio em imocena.com e receba-o em minutos."
+  },
+  "video-imovel-para-arrendar": {
+    "abertura": "pessoa: abrir com uma jovem a ver um vídeo de casa no telemóvel no metro",
+    "imagens": ["young woman watching an apartment video on her phone on a Lisbon tram, photoreal", "compact bright studio apartment with built-in wardrobes, photoreal"],
+    "guiao": "No arrendamento, o vídeo poupa visitas. O inquilino vê a casa toda antes de marcar, e só visita quem já gosta. Mostre a luz, a cozinha, os quartos, a arrumação e a zona. Diga a renda e as condições logo no início. Envie o vídeo a cada contacto antes de marcar a visita. Os mesmos trinta a sessenta segundos servem no portal, nas redes e no WhatsApp. Cole o link do anúncio em imocena.com e tenha o vídeo em minutos. O primeiro é grátis."
+  },
+  "video-imobiliario-com-ia": {
+    "abertura": "pergunta: abrir com «e se o vídeo se fizesse sozinho?»",
+    "imagens": ["real estate agent smiling at a laptop where a property video is being generated, modern office, photoreal"],
+    "guiao": "E se o vídeo do imóvel se fizesse sozinho? Com inteligência artificial, faz. O vídeo é montado a partir das fotos e dos dados do anúncio, com um texto escrito e narrado por IA. Fica pronto em minutos e custa uma fração de uma filmagem. Para Portugal, olhe para duas coisas: a voz em português de Portugal e se basta colar o link. Na Imocena, basta. Cole o link do anúncio em imocena.com e veja o resultado. O primeiro vídeo é grátis."
+  },
+  "angariar-imoveis-com-video": {
+    "abertura": "pessoa: abrir com um consultor a mostrar um vídeo no telemóvel a um proprietário numa sala",
+    "imagens": ["real estate agent showing a property video on a phone to an older homeowner at a dining table, Portugal, photoreal"],
+    "guiao": "O proprietário escolhe quem lhe mostra como vai vender a casa. Na reunião de angariação, leve um vídeo de um imóvel que já vendeu ou tem à venda e mostre onde foi publicado. Prometa um plano concreto: vídeo no portal, nas redes e no WhatsApp em quarenta e oito horas. E cumpra. Para ter esse vídeo pronto em minutos, cole o link do anúncio em imocena.com. O primeiro é grátis, e chega à reunião com uma prova, não com promessas."
+  },
+  "angariar-imoveis-em-exclusividade": {
+    "abertura": "erro: abrir com «pedir a exclusividade sem dar nada em troca» riscado",
+    "imagens": ["real estate agent and homeowner shaking hands over a signed document at a kitchen table, photoreal"],
+    "guiao": "Pedir a exclusividade sem dar nada em troca raramente resulta. Troque-a por compromissos escritos: fotos profissionais, vídeo do imóvel, anúncios pagos, relatório semanal e um prazo razoável. O proprietário dá a exclusividade a quem lhe mostra o que vai fazer e aceita ser avaliado por isso. Comece com prazos mais curtos e renove com resultados. O vídeo é a promessa mais fácil de cumprir: cole o link do anúncio em imocena.com e tenha-o em minutos."
+  },
+  "guiao-reuniao-angariacao": {
+    "abertura": "numero: abrir com «5 momentos» e uma linha do tempo",
+    "imagens": ["real estate agent listening to a couple of homeowners in their living room, notebook on lap, photoreal"],
+    "guiao": "Uma boa reunião de angariação tem cinco momentos. Ouvir: porquê vender e em que prazo. Ver a casa. Apresentar o estudo de mercado. Mostrar o plano de marketing, com exemplos reais. E pedir a decisão. Leve provas: fotos, vídeos e números de imóveis que já trabalhou. Um vídeo do próprio imóvel do proprietário causa ainda mais impacto: cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "objecoes-proprietarios-respostas": {
+    "abertura": "citacao: abrir com a frase de um proprietário em aspas grandes, «a sua comissão é muito alta»",
+    "imagens": ["homeowner with crossed arms talking to a real estate agent in a living room, photoreal"],
+    "guiao": "A sua comissão é muito alta. Já pensei vender sozinho. Por trás de quase todas as objeções há uma de três dúvidas: vai mesmo trabalhar a casa, o preço é justo, vale a comissão? Responda primeiro com uma pergunta, para perceber a dúvida real. Depois, com uma prova concreta: um anúncio, um vídeo, um resultado. Argumentos gerais não convencem. Uma prova que convence é o vídeo da casa dele: cole o link do anúncio em imocena.com e mostre-lho em minutos."
+  },
+  "conversa-baixar-preco-imovel": {
+    "abertura": "numero: abrir com um contador de visualizações e contactos a subir e as visitas paradas",
+    "imagens": ["real estate agent showing charts on a tablet to a homeowner, calm conversation, photoreal"],
+    "guiao": "A conversa sobre baixar o preço corre bem quando os números falam primeiro. Leve as visualizações, os contactos e as visitas do anúncio, o que disseram os compradores e os imóveis parecidos vendidos na zona. Proponha uma revisão concreta, com um prazo para voltar a avaliar. Os relatórios semanais preparam esta conversa semanas antes. E antes de mexer no preço, confirme que o anúncio tem tudo, incluindo vídeo: cole o link em imocena.com e tenha-o em minutos."
+  },
+  "relatorio-semanal-proprietario": {
+    "abertura": "lista: abrir com um relatório a preencher-se no ecrã, «sexta-feira, 17h»",
+    "imagens": ["phone screen showing a short weekly report message to a homeowner, numbers and bullet points, photoreal"],
+    "guiao": "O maior medo de um proprietário é que a casa esteja parada. Responda antes de ele ligar: um relatório curto, sempre no mesmo dia. O que fez esta semana. Os números: visualizações, contactos, visitas. O que dizem os compradores. A sua leitura. E a proposta para a semana seguinte. No primeiro relatório, envie o vídeo do imóvel: o proprietário partilha-o com a família. Cole o link do anúncio em imocena.com e tenha esse vídeo em minutos."
+  },
+  "custos-de-vender-casa": {
+    "abertura": "casa: abrir com uma casa portuguesa com placa «vende-se» e moedas a cair",
+    "imagens": ["Portuguese townhouse with a for sale sign on the balcony, photoreal"],
+    "guiao": "Quanto custa vender casa em Portugal? Os principais custos: a comissão da agência, em regra uma percentagem do preço mais IVA. O certificado energético. Alguns documentos, como a certidão do registo predial. O cancelamento da hipoteca, se houver. E as mais-valias, no IRS do ano seguinte, com exceções. Explique isto ao proprietário logo na primeira reunião. E mostre-lhe o que a comissão inclui, como o vídeo do imóvel: cole o link do anúncio em imocena.com e tenha-o em minutos."
+  },
+  "documentos-para-vender-casa": {
+    "abertura": "lista: abrir com uma pasta de documentos que se abre e uma lista a aparecer",
+    "imagens": ["folder of property documents and keys on a wooden table, photoreal"],
+    "guiao": "Que documentos são precisos para vender casa? Em regra: a caderneta predial urbana, a certidão do registo predial, a licença de utilização, a ficha técnica da habitação, para licenças posteriores a março de dois mil e quatro, e o certificado energético. Se houver hipoteca, a declaração do banco. Peça-os logo na angariação, para não atrasar a escritura. Enquanto isso, ponha a casa a circular: cole o link do anúncio em imocena.com e tenha o vídeo em minutos."
+  },
+  "visita-aberta-imovel": {
+    "abertura": "pessoa: abrir com várias pessoas a entrar numa casa num sábado de manhã",
+    "imagens": ["several visitors arriving at a bright Portuguese house on a Saturday morning open house, photoreal"],
+    "guiao": "Uma visita aberta junta vários compradores no mesmo período. Poupa tempo ao proprietário e mostra que há procura. Marque para um sábado de manhã. Divulgue com uma semana de antecedência, com o vídeo do imóvel. Prepare a casa como para as fotos. Registe quem entra e contacte todos no mesmo dia. O vídeo é o convite: cole o link do anúncio em imocena.com e tenha-o pronto em minutos, para as redes e o WhatsApp. O primeiro é grátis."
+  },
+  "como-conseguir-leads-imobiliario": {
+    "abertura": "pergunta: abrir com «de onde vêm os contactos?»",
+    "imagens": ["real estate agent answering a WhatsApp message on her phone in a cafe, photoreal"],
+    "guiao": "De onde vêm os contactos de um consultor? Primeiro, da rede pessoal, dos clientes antigos e das recomendações. Depois, dos portais, das redes com vídeo, do perfil no Google e dos anúncios pagos. Os proprietários chegam sobretudo pela rede, pela presença na zona e pela reputação. E em todos os casos, ganha quem responde primeiro. Um vídeo por imóvel alimenta os portais e as redes ao mesmo tempo: cole o link do anúncio em imocena.com e tenha-o em minutos."
+  },
+  "marketing-para-consultores-imobiliarios": {
+    "abertura": "numero: abrir com «51%» e a frase «encontraram a casa online»",
+    "imagens": ["couple looking at houses on a laptop at home in the evening, photoreal"],
+    "guiao": "Nos Estados Unidos, cinquenta e um por cento dos compradores encontraram a casa numa pesquisa online. O marketing de um consultor assenta em cinco peças: anúncios completos nos portais, um vídeo por imóvel, presença regular no Instagram e no TikTok, uma lista de compradores no WhatsApp e um perfil no Google. O vídeo liga tudo: serve o portal, as redes e o WhatsApp. Cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "marca-pessoal-consultor-imobiliario": {
+    "abertura": "pessoa: abrir com o retrato de uma consultora confiante numa rua do seu bairro",
+    "imagens": ["confident female real estate agent standing on a cobbled street in her Portuguese neighbourhood, photoreal"],
+    "guiao": "A sua marca pessoal é o que a sua zona diz quando ouve o seu nome. Constrói-se com três coisas. Uma zona e um tipo de cliente bem definidos. A mesma foto, nome e mensagem em todos os canais. E conteúdo regular que prova o que diz: imóveis, vendidos, testemunhos e conhecimento da zona. Um vídeo por cada imóvel é a forma mais simples de ser visto todas as semanas. Cole o link do anúncio em imocena.com e tenha-o em minutos."
+  },
+  "video-de-apresentacao-consultor": {
+    "abertura": "pessoa: abrir com um consultor a falar para a câmara do telemóvel num tripé",
+    "imagens": ["male real estate agent recording himself on a smartphone on a tripod, soft window light, photoreal"],
+    "guiao": "Um vídeo de apresentação responde a três perguntas: quem é, em que zona trabalha e porque o devem escolher. Quarenta e cinco a sessenta segundos, na vertical, com luz de frente e som limpo. Publique-o no idealista, no perfil do Instagram e no Google. É o vídeo que grava uma vez. Os dos imóveis são todas as semanas, e esses pode deixar connosco: cole o link do anúncio em imocena.com e tenha o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "google-perfil-empresa-consultor-imobiliario": {
+    "abertura": "pormenor: abrir num mapa com um pin que cai sobre um bairro",
+    "imagens": ["smartphone showing a map search with a real estate agent profile and star reviews, photoreal"],
+    "guiao": "Quando alguém pesquisa agente imobiliário na sua zona, aparece? O perfil de empresa no Google põe-no no mapa. Crie-o com o seu nome e a categoria de agente imobiliário, defina a zona, ponha fotos e o seu vídeo de apresentação, publique os imóveis novos e peça avaliações a cada cliente que fecha. Os vídeos dos imóveis também podem lá entrar: cole o link do anúncio em imocena.com e tenha-os em minutos. O primeiro é grátis."
+  },
+  "avaliacoes-clientes-consultor-imobiliario": {
+    "abertura": "pessoa: abrir com um casal feliz a receber as chaves à porta de casa",
+    "imagens": ["happy young couple receiving house keys from a real estate agent at the front door, photoreal"],
+    "guiao": "O melhor momento para pedir uma avaliação é o dia da escritura ou da entrega das chaves. O cliente está feliz e quer agradecer. Envie uma mensagem curta, com o link direto para a avaliação no Google e uma sugestão do que mencionar. Responda a todas, positivas e negativas, sem dados pessoais. As avaliações trazem os próximos clientes. Os vídeos dos imóveis também: cole o link do anúncio em imocena.com e tenha o vídeo em minutos. O primeiro é grátis."
+  },
+  "primeiros-90-dias-consultor-imobiliario": {
+    "abertura": "numero: abrir com «90 dias» e um calendário a avançar",
+    "imagens": ["new real estate agent planning on a wall calendar in a small office, photoreal"],
+    "guiao": "Os primeiros noventa dias de um consultor. Mês um: escolha uma zona e conheça-a a fundo, monte o WhatsApp Business, o Instagram e o perfil no Google. Mês dois: fale com todas as pessoas que já conhece. Mês três: as primeiras angariações e uma rotina semanal. Desde o primeiro imóvel, publique um vídeo, para a zona começar a ver o seu nome. Cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "calendario-conteudos-consultor-imobiliario": {
+    "abertura": "lista: abrir com uma semana em grelha a encher-se de publicações",
+    "imagens": ["weekly content calendar sketched on paper next to a phone, coffee and plant, photoreal"],
+    "guiao": "Um calendário de conteúdos que se cumpre. Três publicações por semana: um imóvel, um conteúdo sobre a zona e uma dúvida de compradores ou proprietários. Stories nos dias úteis. Um envio por semana à lista de WhatsApp. Ao fim de quatro semanas, repita o que funcionou e mude o resto. A publicação do imóvel é a mais fácil: cole o link do anúncio em imocena.com e tenha o vídeo em minutos. O primeiro é grátis."
+  },
+  "ideias-reels-consultor-imobiliario": {
+    "abertura": "lista: abrir com «ideias de Reels» a cair como cartões",
+    "imagens": ["real estate agent filming a vertical video in a sunny Portuguese neighbourhood square, photoreal"],
+    "guiao": "Ideias de Reels para consultores. Um Reel por cada imóvel novo. Um por semana sobre a zona: o café, a escola, o jardim. Uma dúvida comum: quanto custa vender, que documentos são precisos. Um imóvel vendido, com a história. Num estudo de dois mil e vinte e seis, os Reels chegaram a mais seguidores do que as imagens. O Reel do imóvel é o mais fácil: cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "instagram-para-consultores-imobiliarios": {
+    "abertura": "pormenor: abrir num grande plano de um perfil de Instagram de consultor no telemóvel",
+    "imagens": ["phone showing a tidy real estate agent Instagram profile grid with property photos, photoreal"],
+    "guiao": "Um Instagram de consultor que gera contactos. No nome do perfil, o seu nome e a zona. Na bio, o que faz e onde, e um botão de contacto. Destaques com imóveis, vendidos e testemunhos. Três publicações fixadas. Depois, um Reel por cada imóvel novo e um por semana sobre a zona. Em Portugal, o Instagram chega a mais de seis milhões de pessoas. O Reel do imóvel faz-se em minutos: cole o link do anúncio em imocena.com. O primeiro é grátis."
+  },
+  "tiktok-imobiliario-portugal": {
+    "abertura": "numero: abrir com «1h23 por dia»",
+    "imagens": ["young Portuguese adult scrolling TikTok-style vertical videos on a sofa at night, photoreal"],
+    "guiao": "Uma hora e vinte e três minutos por dia. É o tempo que se passa no TikTok em Portugal, a rede onde se passa mais tempo. E chega a mais de quatro milhões de adultos. Vale a pena para um consultor? Vale. Publique o mesmo vídeo vertical dos Reels, três vezes por semana, e responda aos comentários. Não precisa de dançar. Precisa de vídeos dos imóveis: cole o link do anúncio em imocena.com e tenha-os em minutos. O primeiro é grátis."
+  },
+  "youtube-para-consultores-imobiliarios": {
+    "abertura": "numero: abrir com «7,59 milhões»",
+    "imagens": ["family watching a house tour video on a TV in their living room, photoreal"],
+    "guiao": "Sete milhões e meio de pessoas. O YouTube é a plataforma com mais alcance em Portugal. Para um consultor, o caminho mais simples são os Shorts: o mesmo vídeo vertical dos Reels e do TikTok. Quando tiver tempo, vídeos longos que respondem a perguntas da zona, que continuam a ser encontrados durante anos. Comece pelos Shorts dos imóveis: cole o link do anúncio em imocena.com e tenha o vídeo em minutos. O primeiro é grátis."
+  },
+  "legendas-para-posts-de-imoveis": {
+    "abertura": "erro: abrir com uma legenda cheia de adjetivos, «fantástico, magnífico, único», a ser riscada",
+    "imagens": ["hands typing a short Instagram caption on a phone next to a property photo, photoreal"],
+    "guiao": "Fantástico, magnífico, único. Ninguém lê. Uma boa legenda começa pelo que faz parar: o preço e a zona, ou o ponto mais forte. Depois, dois ou três factos concretos. E acaba com um pedido claro: envie-me mensagem para marcar a visita. Frases curtas, e a zona por escrito, para aparecer em pesquisas locais. A legenda acompanha o vídeo: cole o link do anúncio em imocena.com e tenha o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "hashtags-imobiliario-portugal": {
+    "abertura": "pergunta: abrir com «quantas hashtags?» e um número a descer de 30 para 5",
+    "imagens": ["phone showing an Instagram post of a Portuguese apartment with a few local hashtags, photoreal"],
+    "guiao": "Quantas hashtags? Menos do que pensa. Três a cinco por publicação, específicas: a cidade e o bairro, o tipo de imóvel e uma hashtag sua. As genéricas, como casa ou realestate, perdem-se entre milhões. E a primeira linha da legenda e o vídeo pesam mais do que qualquer hashtag. Por isso, comece pelo vídeo: cole o link do anúncio em imocena.com e tenha-o em minutos, narrado em português de Portugal. O primeiro é grátis."
+  },
+  "anuncios-facebook-instagram-imoveis": {
+    "abertura": "pormenor: abrir num telemóvel a mostrar um anúncio patrocinado de uma casa",
+    "imagens": ["phone showing a sponsored vertical video ad of a house in a social feed, photoreal"],
+    "guiao": "Anunciar um imóvel no Facebook e no Instagram. Use o vídeo vertical do imóvel como anúncio. Escolha um objetivo de contactos ou de tráfego. Defina a zona e comece com um orçamento diário pequeno, durante cinco a sete dias. E meça o custo por contacto, não as visualizações. O anúncio vive do vídeo: cole o link do anúncio em imocena.com e tenha-o em minutos, pronto para usar. O primeiro é grátis."
+  },
+  "whatsapp-business-consultor-imobiliario": {
+    "abertura": "pormenor: abrir numa conversa de WhatsApp com um vídeo de imóvel a ser enviado",
+    "imagens": ["phone showing a WhatsApp Business chat with a property video being sent to a buyer, photoreal"],
+    "guiao": "O WhatsApp Business dá-lhe um perfil de empresa, respostas rápidas, etiquetas para separar compradores e proprietários, e mensagens de ausência. Use-o para responder depressa aos contactos dos portais, enviar o vídeo de cada imóvel aos compradores certos e manter os proprietários informados. Um vídeo diz mais do que dez fotos numa conversa: cole o link do anúncio em imocena.com e tenha-o em minutos. O primeiro é grátis."
+  },
+  "video-no-anuncio-idealista": {
+    "abertura": "numero: abrir com «6 vídeos por anúncio»",
+    "imagens": ["laptop showing a property listing page with a video upload panel, photoreal"],
+    "guiao": "No idealista, cada anúncio aceita até seis vídeos, até setecentos e cinquenta megabytes cada. Para os pôr, vá a Os teus imóveis, Editar, Multimédia, Vídeos, Novo. E vale a pena: o vídeo é um dos sete fatores que o idealista usa para medir a qualidade do anúncio. Falta-lhe o vídeo? Cole o link do anúncio em imocena.com e receba-o em minutos, em MP4, pronto a carregar. O primeiro é grátis."
+  },
+  "mais-contactos-no-idealista": {
+    "abertura": "numero: abrir com «7 fatores» a acenderem-se um a um",
+    "imagens": ["real estate agent at a desk checking listing statistics on a laptop, photoreal"],
+    "guiao": "Mais contactos no idealista. Complete os sete fatores da qualidade do anúncio: fotos, descrição, vídeo, planta, 3D ou tour virtual, morada e certificado energético. Escolha bem a primeira foto. Ponha o preço em linha com a zona. E responda depressa a quem contacta. O vídeo é o fator que mais falta nos anúncios: cole o link em imocena.com e tenha-o em minutos, pronto a carregar. O primeiro é grátis."
+  },
+  "descricao-de-imovel-exemplos": {
+    "abertura": "erro: abrir com «excelente apartamento» riscado e substituído por factos",
+    "imagens": ["laptop with a property description being written, coffee cup and floor plan beside it, photoreal"],
+    "guiao": "Excelente apartamento não diz nada. Uma boa descrição abre com a frase que resume o imóvel e o seu ponto mais forte. Descreve as divisões pela ordem de uma visita. Situa a zona com distâncias concretas. Inclui a classe energética. E termina com um pedido de contacto. Factos em vez de adjetivos. A descrição também pode virar narração: cole o link do anúncio em imocena.com e receba o vídeo narrado em minutos. O primeiro é grátis."
+  },
+  "prompts-chatgpt-consultor-imobiliario": {
+    "abertura": "pormenor: abrir num ecrã com um prompt a ser escrito, «escreve em português de Portugal»",
+    "imagens": ["laptop screen with an AI chat writing a real estate description, agent's hands on keyboard, photoreal"],
+    "guiao": "O ChatGPT poupa horas a um consultor, se lhe der factos. Comece sempre assim: escreve em português de Portugal, usa só os factos que te dou, não inventes. Depois, peça a descrição, cinco títulos, três legendas, o guião do vídeo ou a resposta a uma objeção. E reveja sempre: a IA tende a inventar pormenores. Do guião ao vídeo há um passo: cole o link do anúncio em imocena.com e tenha o vídeo narrado em minutos."
+  },
+  "ferramentas-ia-consultor-imobiliario": {
+    "abertura": "lista: abrir com cinco ícones de tarefas a aparecer, «5 tarefas»",
+    "imagens": ["real estate agent using several AI tools on a laptop and phone in a bright office, photoreal"],
+    "guiao": "A IA cobre cinco tarefas de um consultor. Escrever: descrições, legendas, mensagens. Fazer os vídeos dos imóveis. Melhorar fotos. Transcrever e resumir reuniões. E organizar contactos. Comece pela tarefa que lhe come mais horas por semana, e reveja sempre o resultado. Para a maioria, são os vídeos. Cole o link do anúncio em imocena.com e receba o vídeo, narrado em português de Portugal, em minutos. O primeiro é grátis."
+  },
+  "aparecer-no-chatgpt-consultor-imobiliario": {
+    "abertura": "pergunta: abrir com «quem é o melhor consultor da minha zona?» escrito num chat",
+    "imagens": ["person typing a question into an AI assistant on a phone, looking for a local real estate agent, photoreal"],
+    "guiao": "Quem é o melhor consultor da minha zona? Cada vez mais pessoas perguntam isto a assistentes de IA. Eles recomendam quem conseguem confirmar em várias fontes. Por isso: perfil no Google completo e com avaliações, o mesmo nome, zona e contacto em todos os canais, presença nas páginas da agência e conteúdo que responde a perguntas reais. Vídeos dos seus imóveis ajudam a ser visto: cole o link do anúncio em imocena.com e tenha-os em minutos."
+  },
+  "video-imoveis-remax": {
+    "abertura": "pessoa: abrir com uma consultora a copiar um link no telemóvel, texto «consultor RE/MAX?»",
+    "imagens": ["female real estate agent copying a property link on her smartphone, modern office, photoreal"],
+    "guiao": "Consultor RE/MAX? Tem um vídeo do seu imóvel a um link de distância. Copie o link da página do imóvel em remax.pt e cole-o em imocena.com. Em poucos minutos recebe um vídeo vertical, com as fotos do anúncio, narração em português de Portugal e, no fim, o seu nome, telemóvel e número AMI. Pronto para os Reels, o TikTok e o WhatsApp. O primeiro vídeo é grátis. Experimente com um imóvel seu."
+  },
+  "video-imoveis-iad": {
+    "abertura": "pessoa: abrir com um consultor a sair de casa com o telemóvel, texto «consultor iad?»",
+    "imagens": ["male real estate agent checking his phone outside a Portuguese apartment building, photoreal"],
+    "guiao": "Consultor iad? O vídeo do seu imóvel está a um link de distância. Copie o link da página do imóvel em iadportugal.pt e cole-o em imocena.com. Em poucos minutos recebe um vídeo vertical, com as fotos do anúncio, narração em português de Portugal e o seu nome, telemóvel e número AMI no fim. Pronto para as redes e o WhatsApp. O primeiro vídeo é grátis. Experimente com um imóvel seu."
+  },
+  "video-imoveis-exp": {
+    "abertura": "casa: abrir com uma moradia moderna ao fim da tarde, texto «consultor eXp?»",
+    "imagens": ["modern Portuguese house at dusk with interior lights on, photoreal"],
+    "guiao": "Consultor eXp? Faça o vídeo do seu imóvel sem filmar. Copie o link da página do imóvel em expportugal.com e cole-o em imocena.com. Em poucos minutos recebe um vídeo vertical com as fotos do anúncio, narração em português de Portugal e, no fim, o seu nome, telemóvel e número AMI. Para os Reels, o TikTok e o WhatsApp. O primeiro vídeo é grátis. Experimente com um imóvel seu."
+  },
+  "video-imoveis-kw": {
+    "abertura": "pormenor: abrir num grande plano de uma chave numa porta, texto «consultor KW?»",
+    "imagens": ["close-up of a key turning in a front door lock, warm light, photoreal"],
+    "guiao": "Consultor KW? Há uma forma mais rápida de ter o vídeo de cada imóvel. Copie o link da página do imóvel em kwportugal.pt e cole-o em imocena.com. Em poucos minutos recebe um vídeo vertical, com as fotos do anúncio, narração em português de Portugal e o seu nome, telemóvel e número AMI no fim. Pronto a publicar. O primeiro vídeo é grátis. Experimente com um imóvel seu."
+  },
+  "video-imoveis-century21": {
+    "abertura": "antes-depois: abrir com um anúncio só com fotos e, ao lado, o mesmo imóvel em vídeo, texto «consultor Century 21?»",
+    "imagens": ["phone showing a property photo gallery next to a phone playing a vertical property video, photoreal"],
+    "guiao": "Consultor Century 21? Transforme as fotos do anúncio num vídeo. Copie o link da página do imóvel em century21.pt e cole-o em imocena.com. Em poucos minutos recebe um vídeo vertical, narrado em português de Portugal, com o seu nome, telemóvel e número AMI no fim. Para os Reels, o TikTok, os Shorts e o WhatsApp. O primeiro vídeo é grátis. Experimente com um imóvel seu."
+  }
+}
