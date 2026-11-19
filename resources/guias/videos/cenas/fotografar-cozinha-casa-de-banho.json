@@ -1,0 +1,45 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:cozinha-bancada.jpg",
+   "eyebrow": "o que o comprador examina",
+   "titulo": "Cozinha e *casa de banho.*",
+   "fala": "Cozinha e casa de banho são as divisões que os compradores mais examinam."
+  },
+  {
+   "tipo": "lista",
+   "foto": "ia:cozinha-bancada.jpg",
+   "eyebrow": "na cozinha",
+   "titulo": "Bancadas *vazias*",
+   "itens": [
+    "Só uma *taça de fruta*",
+    "Nada no *lava-loiça*"
+   ],
+   "fala": "Na cozinha, bancadas vazias, só uma taça de fruta, nada no lava-loiça."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "na casa de banho",
+   "titulo": "Tudo *arrumado*",
+   "itens": [
+    "Tampa *em baixo*",
+    "Toalhas *lisas*",
+    "Lavatório *livre*"
+   ],
+   "fala": "Na casa de banho, tampa em baixo, toalhas lisas e nada no lavatório."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "o truque",
+   "titulo": "Fotografe *na diagonal.*",
+   "fala": "Fotografe na diagonal, para não aparecer no espelho, e junte um pormenor do que valoriza: a placa, o forno, o duche."
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:cozinha-bancada.jpg",
+   "fala": "Para transformar essas fotos num vídeo, cole o link do anúncio em imocena ponto com. Em minutos tem o vídeo narrado. O primeiro é grátis."
+  }
+ ]
+}

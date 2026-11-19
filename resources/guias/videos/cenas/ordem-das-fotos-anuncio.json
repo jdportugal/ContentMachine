@@ -1,0 +1,50 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "numero",
+   "foto": "ia:sala-vista-mar.jpg",
+   "eyebrow": "o anúncio",
+   "numero": "1.ª foto",
+   "titulo": "decide o *clique*",
+   "fala": "A primeira foto do anúncio decide o clique."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "na lista de resultados",
+   "titulo": "Ao lado de *dezenas* de casas.",
+   "fala": "É ela que aparece na lista de resultados, ao lado de dezenas de casas."
+  },
+  {
+   "tipo": "foto",
+   "foto": "ia:sala-vista-mar.jpg",
+   "eyebrow": "abra com a mais forte",
+   "titulo": "A fachada, a vista, *o jardim.*",
+   "fala": "Abra com a imagem mais forte: a fachada ao sol, a sala com vista, o jardim."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "nunca",
+   "titulo": "Abrir com o corredor",
+   "texto": "Siga a ordem de *uma visita.*",
+   "fala": "Nunca com o corredor. Depois, siga a ordem de uma visita:"
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "a ordem",
+   "titulo": "Como uma *visita*",
+   "itens": [
+    "Entrada e *sala*",
+    "Cozinha e *quartos*",
+    "Casas de banho e *exterior*",
+    "A planta *no fim*"
+   ],
+   "fala": "entrada, sala, cozinha, quartos, casas de banho, exterior, e a planta no fim. O vídeo segue a mesma ordem."
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:sala-vista-mar.jpg",
+   "fala": "Cole o link do anúncio em imocena ponto com e receba o vídeo narrado em minutos. O primeiro é grátis."
+  }
+ ]
+}

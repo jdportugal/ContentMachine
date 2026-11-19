@@ -1,0 +1,42 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:consultora-a-filmar.jpg",
+   "eyebrow": "vídeo",
+   "titulo": "Uma só *gravação.*",
+   "fala": "Um vídeo numa só gravação mostra como as divisões se ligam."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "antes de gravar",
+   "titulo": "O *percurso*",
+   "itens": [
+    "Faça-o *a pé*",
+    "Portas *abertas*",
+    "Acabe na *vista*"
+   ],
+   "fala": "Antes de gravar, faça o percurso a pé e abra todas as portas. Comece à entrada e acabe no melhor sítio, a varanda ou a vista."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "ao gravar",
+   "titulo": "Andar normalmente",
+   "texto": "Mais devagar. Rode o *corpo*, não os braços.",
+   "fala": "Ande mais devagar do que lhe parece natural, pare um segundo à entrada de cada divisão e rode o corpo, não os braços."
+  },
+  {
+   "tipo": "numero",
+   "foto": "ia:consultora-a-filmar.jpg",
+   "eyebrow": "duração",
+   "numero": "1 a 2 min",
+   "titulo": "*chegam*",
+   "fala": "Um a dois minutos chegam."
+  },
+  {
+   "tipo": "cta",
+   "fala": "Para as redes, um vídeo curto funciona melhor: cole o link do anúncio em imocena ponto com e tem-no em minutos. O primeiro é grátis."
+  }
+ ]
+}

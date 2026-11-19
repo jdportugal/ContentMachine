@@ -1,0 +1,41 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:quinta-drone.jpg",
+   "eyebrow": "drone",
+   "titulo": "O terreno *de cima.*",
+   "fala": "Uma foto de drone mostra o terreno, a piscina e os acessos como nenhuma outra. Mas há regras."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "em Portugal",
+   "titulo": "Regras europeias, *fiscalizadas pela ANAC.*",
+   "fala": "Em Portugal aplicam-se as regras europeias, fiscalizadas pela ANAC."
+  },
+  {
+   "tipo": "numero",
+   "foto": "ia:quinta-drone.jpg",
+   "eyebrow": "categoria aberta",
+   "numero": "120 m",
+   "titulo": "de altura, no *máximo*",
+   "fala": "A maior parte das fotos de imóveis cabe na categoria aberta: até cento e vinte metros de altura e nunca sobre ajuntamentos de pessoas."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "antes de voar",
+   "titulo": "*Confirme*",
+   "itens": [
+    "Registo do *operador*",
+    "Regras *na ANAC*"
+   ],
+   "fala": "Drone com câmara, em regra, obriga a registar o operador. Confirme sempre na ANAC antes de voar."
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:quinta-drone.jpg",
+   "fala": "Depois, junte as fotos ao anúncio e cole o link em imocena ponto com: o vídeo fica pronto em minutos."
+  }
+ ]
+}

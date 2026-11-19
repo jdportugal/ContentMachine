@@ -1,0 +1,46 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "pergunta",
+   "eyebrow": "fotografia",
+   "titulo": "Quarto *pequeno?*",
+   "fala": "Quarto pequeno? Não o fotografe do meio."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "do canto certo",
+   "titulo": "Onde se *pôr*",
+   "itens": [
+    "No canto *oposto à porta*",
+    "À altura do *peito*",
+    "Telemóvel *direito*"
+   ],
+   "fala": "Encoste-se ao canto oposto à porta, à altura do peito, com o telemóvel direito."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "o resultado",
+   "numero": "2 paredes",
+   "titulo": "e o máximo de *chão*",
+   "fala": "Assim apanha duas paredes e o máximo de chão."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "grande angular",
+   "titulo": "Quanto mais larga, melhor",
+   "texto": "Pouca. Móveis *longe das margens.*",
+   "fala": "A grande angular ajuda, mas pouca: mantenha os móveis longe das margens."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "menos é mais",
+   "titulo": "Tire o que está *a mais.*",
+   "fala": "Tire uma cadeira, um tapete, o que estiver a mais, e acenda todas as luzes. Uma foto honesta vale mais do que uma divisão esticada."
+  },
+  {
+   "tipo": "cta",
+   "fala": "E para o vídeo do imóvel, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, o primeiro é grátis."
+  }
+ ]
+}

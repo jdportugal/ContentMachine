@@ -1,0 +1,46 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "lista",
+   "eyebrow": "antes das fotos",
+   "titulo": "*20 minutos* de preparação",
+   "itens": [
+    "Estores *abertos*",
+    "Fotos de família *guardadas*",
+    "Bancadas *quase vazias*",
+    "Camas *feitas*"
+   ],
+   "fala": "Antes das fotos, a casa precisa de vinte minutos. Estores abertos e lâmpadas a funcionar. Fotografias de família guardadas."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "cozinha",
+   "titulo": "Nada no *frigorífico.*",
+   "fala": "Bancadas da cozinha quase vazias, nada no frigorífico. Camas feitas com roupa clara."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "casa de banho e exterior",
+   "titulo": "Os *pormenores*",
+   "itens": [
+    "Tampa da sanita *em baixo*",
+    "Toalhas *lisas*",
+    "Carros e caixotes *fora*"
+   ],
+   "fala": "Na casa de banho, tampa da sanita em baixo e toalhas lisas. Lá fora, carros e caixotes fora da frente da casa."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "ao proprietário",
+   "numero": "2 dias",
+   "titulo": "antes, envie *esta lista*",
+   "fala": "Envie esta lista ao proprietário dois dias antes."
+  },
+  {
+   "tipo": "cta",
+   "titulo": "Depois das fotos, *o vídeo.*",
+   "fala": "Depois das fotos, o vídeo: cole o link do anúncio em imocena ponto com e tem um vídeo narrado em minutos. O primeiro é grátis."
+  }
+ ]
+}

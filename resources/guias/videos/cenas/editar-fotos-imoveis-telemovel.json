@@ -1,0 +1,40 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "pergunta",
+   "eyebrow": "editar fotos",
+   "titulo": "A casa como é, *num bom dia.*",
+   "fala": "Editar as fotos de um imóvel tem uma regra: mostrar a casa como ela é, num bom dia."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "pode",
+   "titulo": "O que *pode* corrigir",
+   "itens": [
+    "Endireitar *as linhas*",
+    "Clarear *as sombras*",
+    "Recuperar *a janela*",
+    "Acertar *a cor*"
+   ],
+   "fala": "Pode endireitar as linhas, clarear as sombras, recuperar a janela e corrigir a cor das paredes."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "não pode",
+   "titulo": "Apagar a humidade",
+   "texto": "Nem trocar a vista, nem *esticar a divisão.*",
+   "fala": "Não deve apagar humidade, trocar a vista nem esticar a divisão."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "mobília virtual",
+   "titulo": "Diga que é *virtual.*",
+   "fala": "Se mobilar uma sala vazia com mobiliário virtual, diga que é virtual. A visita tem de confirmar as fotos."
+  },
+  {
+   "tipo": "cta",
+   "fala": "E para pôr a casa em vídeo, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, e o primeiro é grátis."
+  }
+ ]
+}

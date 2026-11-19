@@ -1,0 +1,42 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:moradia-fachada.jpg",
+   "eyebrow": "moradias",
+   "titulo": "A *primeira* foto.",
+   "fala": "Numa moradia, a fachada é a primeira foto."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "a hora",
+   "titulo": "Sol de frente *ou de lado.*",
+   "fala": "Escolha a hora em que o sol lhe bate de frente ou de lado."
+  },
+  {
+   "tipo": "lista",
+   "foto": "ia:moradia-fachada.jpg",
+   "eyebrow": "como fotografar",
+   "titulo": "Com *profundidade*",
+   "itens": [
+    "Ligeiramente *de lado*",
+    "Telemóvel *direito*",
+    "Pouco *céu*"
+   ],
+   "fala": "Fotografe ligeiramente de lado, para dar profundidade, com o telemóvel direito e o céu a ocupar pouco da foto."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "à frente da casa",
+   "titulo": "O carro não se nota",
+   "texto": "Carros, caixotes, mangueiras: *fora.*",
+   "fala": "Tire carros, caixotes e mangueiras da frente. Depois, o jardim, a varanda com uma mesa e duas cadeiras, e a vista."
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:moradia-fachada.jpg",
+   "fala": "Com as fotos no anúncio, o vídeo é rápido: cole o link em imocena ponto com e receba-o narrado em minutos. O primeiro é grátis."
+  }
+ ]
+}
