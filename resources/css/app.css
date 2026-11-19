@@ -243,6 +243,8 @@
 .guia { color: #C9CED6; font-size: 17px; line-height: 1.75; }
 .guia h2 { margin-top: 3rem; font-family: var(--font-display); font-size: 32px; line-height: 1.15; color: var(--color-ivory); }
 .guia h3 { margin-top: 2rem; font-size: 19px; font-weight: 600; line-height: 1.35; color: var(--color-ivory); }
+.guia .guia-foto { margin: 2.5rem 0 0; }
+.guia .guia-foto img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; border: 1px solid rgb(250 248 244 / 0.1); }
 .guia p { margin-top: 1rem; }
 .guia strong { color: var(--color-ivory); font-weight: 600; }
 .guia a { color: var(--color-ivory); text-decoration: underline; text-decoration-color: var(--color-cyan); text-underline-offset: 3px; }

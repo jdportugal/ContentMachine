@@ -5,7 +5,9 @@
     $form = route('video');
     $recentes = array_slice($guias, 0, 6);
     $aprender = $temas['Fotografia e apresentação'] ?? ($temas['Vídeo de imóveis'] ?? []);
-    $og = fn (array $g) => is_file(public_path("images/og/{$g['slug']}.png")) ? asset("images/og/{$g['slug']}.png") : asset('images/og/imocena.png');
+    // A card shows the guide's opening photo when it has one, else its text card.
+    $og = fn (array $g) => \App\Services\Guias\Guias::fotos($g['slug'])[0]
+        ?? (is_file(public_path("images/og/{$g['slug']}.png")) ? asset("images/og/{$g['slug']}.png") : asset('images/og/imocena.png'));
 @endphp
 <x-layouts.site
     title="Imocena · Vídeos de imóveis para consultores, a partir do link do anúncio"
@@ -139,7 +141,7 @@
                     @foreach ($recentes as $g)
                         <li>
                             <a href="{{ route('guias.ver', $g['slug']) }}" class="group h-full flex flex-col rounded-2xl overflow-hidden bg-white border border-[#DDD8CC] hover:border-cyan-deep">
-                                <img src="{{ $og($g) }}" alt="" loading="lazy" width="1200" height="630" class="w-full aspect-[1200/630] object-cover">
+                                <img src="{{ $og($g) }}" alt="" loading="lazy" width="1600" height="900" class="w-full aspect-[16/9] object-cover">
                                 <span class="p-6 flex flex-col flex-1">
                                     <span class="text-[11px] tracking-[.2em] text-cyan-deep uppercase">{{ $g['tema'] }}</span>
                                     <span class="mt-2 font-display text-[24px] leading-tight text-navy">{{ $g['titulo'] }}</span>

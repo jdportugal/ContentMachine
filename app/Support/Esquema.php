@@ -57,7 +57,7 @@ class Esquema
                 'wordCount' => $guia['palavras'],
                 'mainEntityOfPage' => $url,
                 'url' => $url,
-                'image' => asset('images/og/'.$guia['slug'].'.png'),
+                'image' => array_values(array_filter([\App\Services\Guias\Guias::fotos($guia['slug'])[0] ?? null, asset('images/og/'.$guia['slug'].'.png')])),
                 'author' => self::organizacao(),
                 'publisher' => self::organizacao(),
             ],

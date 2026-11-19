@@ -90,7 +90,11 @@ Route::get('/guias/{slug}', function (string $slug, \App\Services\Guias\Guias $g
     // Its own short, once made (public/media/guias/<slug>.mp4 on the server).
     $video = is_file(public_path("media/guias/{$slug}.mp4")) ? asset("media/guias/{$slug}.mp4") : null;
 
-    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia), 'reel' => $reel, 'video' => $video]);
+    // Its photos (imocena:fotos-blog): the first opens the article, the second goes in the text.
+    $fotos = \App\Services\Guias\Guias::fotos($slug);
+    $guia['html'] = \App\Services\Guias\Guias::comFotos($guia['html'], $fotos, $guia['titulo']);
+
+    return view('guias.artigo', ['guia' => $guia, 'outros' => $guias->relacionados($guia), 'reel' => $reel, 'video' => $video, 'fotos' => $fotos]);
 })->where('slug', '[a-z0-9-]+')->name('guias.ver');
 
 // For search engines: every public page, and the rules for crawlers.

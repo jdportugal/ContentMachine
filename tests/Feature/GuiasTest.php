@@ -152,4 +152,27 @@ class GuiasTest extends TestCase
         $this->assertStringContainsString('imocena.com', $instrucoes);
         $this->assertFileExists(resource_path('guias/videos/estilo.md'));
     }
+
+    public function test_a_guide_with_photos_opens_with_one_and_carries_the_second_in_its_text(): void
+    {
+        $slug = 'luz-natural-fotografar-casa';
+        $pasta = public_path('media/guias/fotos');
+        @mkdir($pasta, 0775, true);
+        $img = imagecreatetruecolor(32, 18);
+        foreach ([1, 2] as $n) {
+            imagejpeg($img, "{$pasta}/{$slug}-{$n}.jpg");
+        }
+        try {
+            $this->assertSame([asset("media/guias/fotos/{$slug}-1.jpg"), asset("media/guias/fotos/{$slug}-2.jpg")], Guias::fotos($slug));
+            $r = $this->get("/guias/{$slug}")->assertOk();
+            $html = $r->getContent();
+            $this->assertStringContainsString('src="'.asset("media/guias/fotos/{$slug}-1.jpg").'"', $html);
+            $this->assertStringContainsString('<figure class="guia-foto"><img src="'.asset("media/guias/fotos/{$slug}-2.jpg").'"', $html);
+        } finally {
+            foreach ([1, 2] as $n) {
+                @unlink("{$pasta}/{$slug}-{$n}.jpg");
+            }
+        }
+        $this->assertSame([], Guias::fotos($slug));
+    }
 }

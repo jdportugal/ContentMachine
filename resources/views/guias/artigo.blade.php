@@ -36,6 +36,10 @@
                 Por Imocena · <time datetime="{{ $guia['atualizado'] }}">Atualizado a {{ $data($guia['atualizado']) }}</time> · {{ max(1, (int) round($guia['palavras'] / 220)) }} min de leitura
             </p>
 
+            @if (! empty($fotos))
+                <img src="{{ $fotos[0] }}" alt="{{ $guia['titulo'] }}" width="1600" height="900" class="mt-8 w-full aspect-[16/9] object-cover rounded-2xl border border-ivory/10">
+            @endif
+
             @if ($guia['resumo'])
                 <section aria-label="Resposta curta" class="mt-8 p-6 rounded-2xl bg-navy-2 border border-cyan/40">
                     <span class="text-xs font-medium tracking-[.28em] text-cyan">RESPOSTA CURTA</span>

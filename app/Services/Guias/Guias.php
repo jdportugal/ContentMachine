@@ -62,6 +62,35 @@ class Guias
         return array_slice($outros, 0, $n);
     }
 
+    /**
+     * The guide's photos (public/media/guias/fotos/<slug>-<n>.jpg, made by
+     * imocena:fotos-blog): public URLs, the opening one first. @return list<string>
+     */
+    public static function fotos(string $slug): array
+    {
+        $fotos = [];
+        for ($n = 1; is_file(public_path("media/guias/fotos/{$slug}-{$n}.jpg")); $n++) {
+            $fotos[] = asset("media/guias/fotos/{$slug}-{$n}.jpg");
+        }
+
+        return $fotos;
+    }
+
+    /** The article's HTML with its second photo before the third section heading, if both exist. */
+    public static function comFotos(string $html, array $fotos, string $alt): string
+    {
+        if (count($fotos) < 2 || substr_count($html, '<h2') < 3) {
+            return $html;
+        }
+        $pos = -1;
+        for ($i = 0; $i < 3; $i++) {
+            $pos = strpos($html, '<h2', $pos + 1);
+        }
+        $figura = '<figure class="guia-foto"><img src="'.e($fotos[1]).'" alt="'.e($alt).'" loading="lazy" width="1600" height="900"></figure>';
+
+        return substr($html, 0, $pos).$figura.substr($html, $pos);
+    }
+
     public function encontrar(string $slug): ?array
     {
         return $this->todos()[$slug] ?? null;
