@@ -1,0 +1,50 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "numero",
+   "foto": "ia:sala-acolhedora.jpg",
+   "eyebrow": "home staging",
+   "numero": "< 100 €",
+   "titulo": "e a casa *muda*",
+   "fala": "Home staging com menos de cem euros."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "o que mais muda",
+   "numero": "0 €",
+   "titulo": "arrumar e tirar *móveis a mais*",
+   "fala": "Arrumar e tirar móveis a mais custa zero e é o que mais muda."
+  },
+  {
+   "tipo": "lista",
+   "foto": "ia:sala-acolhedora.jpg",
+   "eyebrow": "depois",
+   "titulo": "Pouco *dinheiro*",
+   "itens": [
+    "Lâmpadas da *mesma cor*",
+    "Toalhas e roupa *brancas*",
+    "Almofadas *neutras*",
+    "Plantas e *um tapete*"
+   ],
+   "fala": "Depois, lâmpadas todas da mesma cor, toalhas e roupa de cama brancas, almofadas neutras, plantas e um tapete simples."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "na varanda",
+   "titulo": "Uma mesa e *duas cadeiras.*",
+   "fala": "Na varanda, uma mesa e duas cadeiras mostram que se pode usar. Dê a cada divisão uma função clara."
+  },
+  {
+   "tipo": "foto",
+   "foto": "ia:sala-acolhedora.jpg",
+   "eyebrow": "casas mais baratas",
+   "titulo": "É aqui que um bom anúncio *mais se destaca.*",
+   "fala": "É nas casas mais baratas que um anúncio bem apresentado mais se destaca."
+  },
+  {
+   "tipo": "cta",
+   "fala": "Depois das fotos, cole o link do anúncio em imocena ponto com e receba o vídeo em minutos."
+  }
+ ]
+}

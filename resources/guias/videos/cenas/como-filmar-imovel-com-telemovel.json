@@ -1,0 +1,42 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:consultor-cozinha-filmar.jpg",
+   "eyebrow": "vídeo",
+   "titulo": "Filmar com *o telemóvel.*",
+   "fala": "Filmar um imóvel com o telemóvel: na vertical, de dia, com luzes acesas e janelas abertas."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "a ordem",
+   "titulo": "Como *uma visita*",
+   "itens": [
+    "Entrada e *sala*",
+    "Cozinha e *quartos*",
+    "*Exterior*"
+   ],
+   "fala": "Siga a ordem de uma visita: entrada, sala, cozinha, quartos, exterior."
+  },
+  {
+   "tipo": "numero",
+   "foto": "ia:consultor-cozinha-filmar.jpg",
+   "eyebrow": "cada plano",
+   "numero": "3 a 5 s",
+   "titulo": "movimentos *lentos*",
+   "fala": "Faça planos de três a cinco segundos, com movimentos lentos, e o telemóvel à altura do peito. Um estabilizador barato ajuda muito."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "sem tempo?",
+   "titulo": "Há *outra forma.*",
+   "fala": "E se não tiver tempo para filmar? Há outra forma:"
+  },
+  {
+   "tipo": "cta",
+   "titulo": "Feito com as fotos, *narrado.*",
+   "fala": "cole o link do anúncio em imocena ponto com e receba um vídeo feito com as fotos, narrado em português, em poucos minutos. O primeiro é grátis."
+  }
+ ]
+}

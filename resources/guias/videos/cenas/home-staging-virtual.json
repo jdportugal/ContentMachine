@@ -1,0 +1,40 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "antes-depois",
+   "foto": "ia:sala-vazia.jpg",
+   "fotoB": "ia:sala-mobilada-virtual.jpg",
+   "titulo": "Vazia, parece *pequena.*",
+   "fala": "Uma sala vazia parece pequena e fria. O home staging virtual mobila a foto e ajuda o comprador a perceber a escala."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "home staging virtual",
+   "titulo": "*Três* regras.",
+   "fala": "Três regras."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "regra 1 e 2",
+   "titulo": "*Diga* que é virtual",
+   "itens": [
+    "Na *foto* e no *anúncio*",
+    "A foto *real* logo a seguir"
+   ],
+   "fala": "Identifique a imagem como virtual, na própria foto e no anúncio. Mostre também a foto real logo a seguir."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "regra 3",
+   "titulo": "Mudar a casa",
+   "texto": "Paredes, janelas, chão e vista *ficam como são.*",
+   "fala": "E nunca mude a casa: paredes, janelas, chão e vista ficam como são. Mobile só as divisões principais."
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:sala-mobilada-virtual.jpg",
+   "fala": "As imagens virtuais também podem entrar no vídeo. Cole o link do anúncio em imocena ponto com e tem o vídeo narrado em minutos. O primeiro é grátis."
+  }
+ ]
+}

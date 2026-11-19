@@ -1,0 +1,50 @@
+{
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "foto",
+   "foto": "ia:consultora-estores.jpg",
+   "eyebrow": "visitas",
+   "titulo": "A visita confirma *as fotos.*",
+   "fala": "A visita tem de confirmar as fotos."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "antes da visita",
+   "numero": "15 min",
+   "titulo": "estores abertos, *luzes acesas*",
+   "fala": "Quinze minutos antes: abra estores e cortinas e acenda todas as luzes. Areje a casa e acerte a temperatura."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "cheiros",
+   "titulo": "Um ambientador forte",
+   "texto": "Nada de cozinhados nem *perfumes intensos.*",
+   "fala": "Nada de cozinhados fortes nem ambientadores intensos."
+  },
+  {
+   "tipo": "lista",
+   "foto": "ia:consultora-estores.jpg",
+   "eyebrow": "a casa",
+   "titulo": "Pronta *a mostrar*",
+   "itens": [
+    "Televisão *desligada*",
+    "Camas feitas, loiça *lavada*",
+    "Animais *fora*",
+    "Proprietário *ausente*"
+   ],
+   "fala": "Televisão desligada, camas feitas, loiça lavada, animais fora. E peça ao proprietário, com tato, para não estar presente."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "depois",
+   "titulo": "Passe a opinião *ao proprietário.*",
+   "fala": "Depois, peça a opinião ao comprador e passe-a ao proprietário."
+  },
+  {
+   "tipo": "cta",
+   "titulo": "As visitas começam *no anúncio.*",
+   "fala": "As visitas começam no anúncio: cole o link em imocena ponto com e tenha o vídeo do imóvel em minutos. O primeiro é grátis."
+  }
+ ]
+}

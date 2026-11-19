@@ -1,0 +1,49 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "numero",
+   "eyebrow": "fotos de imóveis",
+   "numero": "5 regras",
+   "titulo": "para *boas fotos*",
+   "fala": "Cinco regras para boas fotos de imóveis."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "as regras",
+   "titulo": "Antes do *clique*",
+   "itens": [
+    "Luz natural, *luzes acesas*",
+    "À altura do *peito*",
+    "Verticais *direitas*"
+   ],
+   "fala": "Luz natural, com todas as luzes acesas. Telemóvel à altura do peito. Linhas verticais direitas, com a grelha ligada."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "e ainda",
+   "titulo": "Mais *duas*",
+   "itens": [
+    "Grande angular, *sem exagero*",
+    "A casa *arrumada*"
+   ],
+   "fala": "Grande angular, sem exagero. E a casa arrumada antes de começar."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "no anúncio",
+   "titulo": "A foto mais forte *primeiro.*",
+   "fala": "Depois, abra o anúncio com a foto mais forte e siga a ordem de uma visita."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "a base de tudo",
+   "titulo": "Anúncio, redes *e vídeo.*",
+   "fala": "As fotos são a base de tudo: do anúncio, das redes e do vídeo."
+  },
+  {
+   "tipo": "cta",
+   "fala": "Com elas no anúncio, cole o link em imocena ponto com e receba o vídeo narrado em minutos. O primeiro é grátis."
+  }
+ ]
+}

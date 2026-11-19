@@ -1,0 +1,41 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "pergunta",
+   "eyebrow": "na visita",
+   "titulo": "O que mais *estará mal?*",
+   "fala": "Na visita, um puxador solto faz o comprador perguntar: o que mais estará mal?"
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "antes de vender",
+   "titulo": "Arranje o que *se vê*",
+   "itens": [
+    "Lâmpadas *fundidas*",
+    "Puxadores e *dobradiças*",
+    "A torneira que *pinga*",
+    "Furos nas *paredes*"
+   ],
+   "fala": "Antes de vender, troque as lâmpadas fundidas, aperte puxadores e dobradiças, arranje a torneira que pinga e o autoclismo que corre, limpe as juntas da casa de banho e tape os furos nas paredes."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "humidade?",
+   "titulo": "Pintar por cima",
+   "texto": "Resolva *a causa* antes de pintar.",
+   "fala": "Humidade? Resolva a causa antes de pintar."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "obras grandes",
+   "titulo": "Raramente *compensam.*",
+   "fala": "Obras grandes raramente compensam."
+  },
+  {
+   "tipo": "cta",
+   "titulo": "Casa cuidada, *vídeo pronto.*",
+   "fala": "Com a casa cuidada, faça as fotos e cole o link do anúncio em imocena ponto com. O vídeo fica pronto em minutos, e o primeiro é grátis."
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "imagens": "nenhuma",
+ "cenas": [
+  {
+   "tipo": "numero",
+   "eyebrow": "o formato",
+   "numero": "9:16",
+   "titulo": "um só vídeo *para todo o lado*",
+   "fala": "Um só vídeo para todo o lado: MP4, vertical, nove por dezasseis, entre trinta e sessenta segundos."
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "serve em",
+   "titulo": "*Todas* as redes",
+   "itens": [
+    "*Reels* e TikTok",
+    "*Shorts*",
+    "*WhatsApp*"
+   ],
+   "fala": "Serve nos Reels, no TikTok, nos Shorts e no WhatsApp."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "no idealista",
+   "numero": "6 vídeos",
+   "titulo": "por anúncio, até *750 MB*",
+   "fala": "O idealista aceita até seis vídeos por anúncio, até setecentos e cinquenta megabytes cada."
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "o segredo",
+   "titulo": "Faça uma vez, *publique em todo o lado.*",
+   "fala": "Grave ou monte uma vez e publique em todo o lado."
+  },
+  {
+   "tipo": "cta",
+   "titulo": "Vertical, *sem editar.*",
+   "fala": "Quer esse ficheiro sem editar nada? Cole o link do anúncio em imocena ponto com e receba o vídeo vertical, narrado em português de Portugal, em minutos. O primeiro é grátis."
+  }
+ ]
+}

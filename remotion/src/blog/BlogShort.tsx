@@ -171,7 +171,7 @@ const CenaNumero: React.FC<{ c: Cena }> = ({ c }) => {
       <Marca />
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 70px 260px", textAlign: "center" }}>
         {c.eyebrow && <Eyebrow centro>{c.eyebrow}</Eyebrow>}
-        <div style={{ marginTop: 20, fontFamily: DISPLAY, fontWeight: 700, fontSize: mostrado.length > 6 ? 230 : 330, lineHeight: 0.95, color: C.coral, opacity: a, transform: `scale(${0.7 + 0.3 * a})`, whiteSpace: "nowrap" }}>{mostrado}</div>
+        <div style={{ marginTop: 20, fontFamily: DISPLAY, fontWeight: 700, fontSize: Math.min(330, Math.floor(1750 / Math.max(4, (c.numero ?? "").length))), lineHeight: 0.95, color: C.coral, opacity: a, transform: `scale(${0.7 + 0.3 * a})`, whiteSpace: "nowrap" }}>{mostrado}</div>
         {c.titulo && <div style={{ marginTop: 30 }}><Titulo texto={c.titulo} tamanho={84} de={8} centro /></div>}
       </AbsoluteFill>
     </AbsoluteFill>
