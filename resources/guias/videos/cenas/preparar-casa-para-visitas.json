@@ -1,5 +1,8 @@
 {
  "imagens": "ia",
+ "fotos": {
+  "consultora-estores.jpg": "a female real estate agent in her thirties opening the blinds of a living room in the morning, sunlight flooding in"
+ },
  "cenas": [
   {
    "tipo": "foto",

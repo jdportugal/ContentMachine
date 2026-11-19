@@ -1,5 +1,8 @@
 {
  "imagens": "ia",
+ "fotos": {
+  "consultor-cozinha-filmar.jpg": "a male real estate agent in his forties filming vertically with a smartphone in a bright modern kitchen"
+ },
  "cenas": [
   {
    "tipo": "foto",

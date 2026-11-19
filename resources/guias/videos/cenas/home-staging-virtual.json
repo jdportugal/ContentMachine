@@ -1,5 +1,12 @@
 {
  "imagens": "ia",
+ "fotos": {
+  "sala-vazia.jpg": "an empty bright apartment living room with wooden floor, white walls and large windows, no furniture, no people",
+  "sala-mobilada-virtual.jpg": {
+   "prompt": "The same room, virtually staged with a neutral sofa, a light rug, a round coffee table and a large plant",
+   "de": "sala-vazia.jpg"
+  }
+ },
  "cenas": [
   {
    "tipo": "antes-depois",

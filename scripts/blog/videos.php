@@ -35,6 +35,31 @@ foreach ($slugs as $slug) {
     $dir = "/tmp/blogvid/{$slug}";
     @mkdir($dir, 0775, true);
 
+    // AI photos the scenes need and nobody has made yet: made with kie.ai (9:16), from
+    // "fotos": {"<file>.jpg": "prompt"} or {"<file>.jpg": {"prompt": "…", "de": "<other>.jpg"}}
+    // ("de": an edit of that other photo, for a before/after of the same room).
+    $pastaIa = public_path('media/guias/fotos/videos');
+    @mkdir($pastaIa, 0775, true);
+    foreach ((array) ($spec['fotos'] ?? []) as $nome => $pedido) {
+        $destino = $pastaIa.'/'.basename((string) $nome);
+        if (is_file($destino)) {
+            continue;
+        }
+        $kie = app(App\Services\Publicacoes\Rendering\KieClient::class);
+        $kie->passo = 'clips_imagens';
+        if (! $kie->configurado()) {
+            exit("{$slug}: falta a foto {$nome} e não há chave da kie.ai (Definições → Passos → imagens dos clips)\n");
+        }
+        $prompt = is_array($pedido) ? (string) ($pedido['prompt'] ?? '') : (string) $pedido;
+        $de = is_array($pedido) ? (string) ($pedido['de'] ?? '') : '';
+        $estilo = 'Realistic editorial photograph, Portugal, natural daylight, warm and calm, vertical 9:16 frame, no text, no captions, no logos, no watermarks';
+        $url = $de !== '' && is_file($pastaIa.'/'.basename($de))
+            ? $kie->edit($prompt.'. Keep the walls, windows, floor and view exactly the same.', '9:16', (string) file_get_contents($pastaIa.'/'.basename($de)), basename($de))
+            : $kie->generate($estilo.' — '.$prompt, '9:16');
+        App\Console\Commands\FotosBlog::guardarJpeg(Illuminate\Support\Facades\Http::timeout(90)->get($url)->body(), $destino);
+        echo "{$slug}: foto {$nome} feita\n";
+    }
+
     $cenas = [];
     foreach ($spec['cenas'] as $i => $c) {
         // The photo, copied next to the props (Remotion's public dir for this render).

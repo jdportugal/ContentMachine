@@ -1,5 +1,8 @@
 {
  "imagens": "ia",
+ "fotos": {
+  "sala-acolhedora.jpg": "cozy Portuguese living room refreshed with neutral linen cushions, a woven throw and a large green plant, soft daylight, no people"
+ },
  "cenas": [
   {
    "tipo": "numero",

@@ -1,5 +1,8 @@
 {
  "imagens": "ia",
+ "fotos": {
+  "quarto-staging.jpg": "a bedroom staged for sale with crisp white linen, two bedside lamps and a small plant, soft daylight, no people"
+ },
  "cenas": [
   {
    "tipo": "foto",
