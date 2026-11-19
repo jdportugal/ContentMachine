@@ -71,7 +71,9 @@ class PlanAnimationsJob implements ShouldQueue
             $camadas = self::camadasPermitidas($semImagens);
 
             // Deep-research the topic so visuals carry real context (not just the speech).
-            $facts = ($c['research'] ?? false) ? $research->research($p->transcript) : [];
+            // Not for a clip whose script is already sourced (the blog's shorts, meta.sem_pesquisa):
+            // research brings in figures nobody checked, which the planner then puts on screen.
+            $facts = ($c['research'] ?? false) && empty($p->meta['sem_pesquisa']) ? $research->research($p->transcript) : [];
             if (! empty($facts)) {
                 $p->update(['meta' => array_merge($p->meta ?? [], ['research' => $facts])]);
             }

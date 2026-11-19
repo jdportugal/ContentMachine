@@ -26,7 +26,13 @@ class VideosBlog extends Command
 
     public const BASE = 'demo-premium';
 
-    protected $signature = 'imocena:videos-blog {slugs?*} {--todos : todos os guias ainda sem vídeo} {--max=5 : no máximo, quantos começar} {--recolher : só copiar os prontos} {--refazer : começar de novo mesmo com vídeo}';
+    /** Built-ins a blog short has no use for. */
+    public const BUILTINS_FORA = ['video-intro', 'terminal', 'scatter-chart', 'line-chart', 'pie-chart', 'ambient'];
+
+    /** The theme's listing cards: price, agent, new-listing opening. */
+    public const SO_ANUNCIOS = ['preco-revelacao', 'agente-revelacao', 'imovel-novo-revelacao'];
+
+    protected $signature = 'imocena:videos-blog {slugs?*} {--todos : todos os guias ainda sem vídeo} {--max=5 : no máximo, quantos começar} {--recolher : só guardar os prontos como rascunhos} {--refazer : começar de novo mesmo com vídeo} {--publicar=* : pôr estes rascunhos, já vistos, na página do guia}';
 
     protected $description = 'Faz o vídeo curto de cada guia do blog, para as redes e para a página do guia';
 
@@ -35,14 +41,34 @@ class VideosBlog extends Command
         $registo = $this->registo();
         $estado = is_file($registo) ? (array) json_decode((string) file_get_contents($registo), true) : [];
         $pasta = public_path('media/guias');
-        @mkdir($pasta, 0775, true);
+        $rascunhos = public_path('media/guias/rascunhos');
+        @mkdir($rascunhos, 0775, true);
+
+        // Approved drafts go on their guide's page.
+        foreach ((array) $this->option('publicar') as $slug) {
+            $feitos = glob("{$rascunhos}/{$slug}-*.mp4") ?: [];
+            usort($feitos, fn ($a, $b) => filemtime($b) <=> filemtime($a));
+            if ($feitos === []) {
+                $this->error("{$slug}: sem rascunho");
+
+                continue;
+            }
+            copy($feitos[0], "{$pasta}/{$slug}.mp4");
+            $this->info("{$slug}: publicado na página do guia");
+        }
+        if ((array) $this->option('publicar') !== []) {
+            return self::SUCCESS;
+        }
 
         // Collect: finished clips go to the guide's page; failed ones are reported and forgotten.
         foreach ($estado as $slug => $id) {
             $clip = $clips->find((string) $id);
             if ($clip && $clip->status === ClipRecord::STATUS_DONE && $clip->output_path && is_file($clip->output_path)) {
-                copy($clip->output_path, "{$pasta}/{$slug}.mp4");
-                $this->info("{$slug}: pronto → media/guias/{$slug}.mp4");
+                // A draft first, at an unlisted address: it goes on the guide's page only
+                // with --publicar, once someone has watched it.
+                $nome = $slug.'-'.substr(md5($clip->id), 0, 8).'.mp4';
+                copy($clip->output_path, "{$rascunhos}/{$nome}");
+                $this->info("{$slug}: rascunho → ".asset("media/guias/rascunhos/{$nome}"));
                 unset($estado[$slug]);
             } elseif (! $clip || $clip->status === ClipRecord::STATUS_FAILED) {
                 $this->error("{$slug}: falhou".($clip?->error ? ' — '.mb_substr((string) $clip->error, 0, 200) : ''));
@@ -72,7 +98,8 @@ class VideosBlog extends Command
 
                 continue;
             }
-            if (isset($estado[$slug]) || (is_file("{$pasta}/{$slug}.mp4") && ! $this->option('refazer'))) {
+            $feito = is_file("{$pasta}/{$slug}.mp4") || (glob("{$rascunhos}/{$slug}-*.mp4") ?: []) !== [];
+            if (isset($estado[$slug]) || ($feito && ! $this->option('refazer'))) {
                 continue;   // under way, or already made
             }
             $clip = $clips->create([
@@ -85,9 +112,12 @@ class VideosBlog extends Command
                     'auto' => true,                 // no review step: images are generated as planned
                     'abertura_propria' => true,     // no listing intro or agent card (FinalizeClipPlanJob)
                     'fewer_images' => true,
+                    'sem_pesquisa' => true,         // the script's facts come from the guide, already sourced
                     'background' => 'auto',
                     'blog' => $slug,
                     'instructions' => self::instrucoes($v),
+                    // The listing videos' European-Portuguese voice, not the project's default.
+                    'voz' => (array) config('contentmachine.real_estate.voices.m'),
                 ],
             ]);
             TranscribeJob::dispatch($clip->id);
@@ -123,6 +153,19 @@ class VideosBlog extends Command
         @mkdir($dir, 0775, true);
         file_put_contents($dir.'/theme.json', json_encode(['name' => 'Imocena Blog'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         copy(resource_path('guias/videos/estilo.md'), $dir.'/estilo-animacao.md');
+
+        // The listing theme it copies keeps the general built-ins off (its videos are made of
+        // the listing's photos). A blog video has no photos: it needs text, lists, numbers,
+        // comparisons and generated images, and none of the listing-only cards.
+        @mkdir($dir.'/sfx', 0775, true);
+        file_put_contents($dir.'/sfx/_disabled-builtins.json', json_encode(self::BUILTINS_FORA, JSON_PRETTY_PRINT));
+        foreach (glob($dir.'/sfx/*.json') ?: [] as $f) {
+            $r = json_decode((string) file_get_contents($f), true);
+            if (is_array($r) && in_array($r['slug'] ?? '', self::SO_ANUNCIOS, true) && ($r['enabled'] ?? true)) {
+                $r['enabled'] = false;
+                file_put_contents($f, json_encode($r, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            }
+        }
 
         return self::TEMA;
     }

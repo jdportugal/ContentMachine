@@ -37,7 +37,12 @@ class TranscribeJob implements ShouldQueue
             $disk = Storage::disk(config('contentmachine.clips.disk'));
 
             if ($p->input_kind === 'text') {
-                $audio = $tts->synthesize($p->source_text, "$dir/voz.mp3");
+                // A clip may name its own voice (the blog's shorts use the listing videos'
+                // European-Portuguese Simão): the project's default voice drifts Brazilian.
+                $voz = (array) ($p->meta['voz'] ?? []);
+                $audio = ! empty($voz['voice_id']) && method_exists($tts, 'synthesizeWith')
+                    ? $tts->synthesizeWith($p->source_text, "$dir/voz.mp3", (string) $voz['voice_id'], (string) ($voz['model'] ?? 'eleven_multilingual_v2'), isset($voz['stability']) ? (float) $voz['stability'] : null)
+                    : $tts->synthesize($p->source_text, "$dir/voz.mp3");
             } elseif ($p->input_kind === 'video') {
                 $audio = $ff->extractAudio($disk->path($p->source_path), "$dir/audio.m4a");
             } else {
