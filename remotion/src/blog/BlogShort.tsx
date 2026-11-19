@@ -213,13 +213,13 @@ const CenaErro: React.FC<{ c: Cena }> = ({ c }) => {
     <AbsoluteFill>
       {c.foto ? <Foto foto={c.foto} escurecer={0.8} /> : <Fundo />}
       <Marca />
-      <div style={{ position: "absolute", left: 80, right: 80, top: 560, display: "flex", flexDirection: "column", gap: 40 }}>
+      <div style={{ position: "absolute", left: 80, right: 80, top: 0, bottom: 380, display: "flex", flexDirection: "column", justifyContent: "center", gap: 44 }}>
         <Eyebrow cor={C.coral}>{c.eyebrow ?? "erro comum"}</Eyebrow>
-        <div style={{ position: "relative", display: "inline-block", fontFamily: DISPLAY, fontWeight: 700, fontSize: 112, lineHeight: 1.05, color: r > 0.6 ? C.soft : C.ivory, opacity: e }}>
+        <div style={{ position: "relative", display: "inline-block", fontFamily: DISPLAY, fontWeight: 700, fontSize: 124, lineHeight: 1.05, color: r > 0.6 ? C.soft : C.ivory, opacity: e }}>
           «{c.titulo}»
           <span style={{ position: "absolute", left: -8, top: "52%", height: 10, borderRadius: 5, background: C.coral, width: `calc(${r * 100}% + 16px)` }} />
         </div>
-        {c.texto && <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 52, lineHeight: 1.3, color: C.ivory, opacity: interpolate(f, [26, 36], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}><Destaque texto={c.texto} /></div>}
+        {c.texto && <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 60, lineHeight: 1.3, color: C.ivory, opacity: interpolate(f, [26, 36], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}><Destaque texto={c.texto} /></div>}
       </div>
     </AbsoluteFill>
   );
@@ -232,7 +232,7 @@ const CenaLista: React.FC<{ c: Cena }> = ({ c }) => {
     <AbsoluteFill>
       <Foto foto={c.foto} escurecer={0.82} deslocar="esq" />
       <Marca />
-      <div style={{ position: "absolute", left: 80, right: 80, top: 420, display: "flex", flexDirection: "column", gap: 34 }}>
+      <div style={{ position: "absolute", left: 80, right: 80, top: 0, bottom: 380, display: "flex", flexDirection: "column", justifyContent: "center", gap: 34 }}>
         {c.eyebrow && <Eyebrow>{c.eyebrow}</Eyebrow>}
         {c.titulo && <Titulo texto={c.titulo} tamanho={104} />}
         <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 40 }}>
@@ -241,7 +241,7 @@ const CenaLista: React.FC<{ c: Cena }> = ({ c }) => {
             return (
               <div key={t} style={{ display: "flex", alignItems: "center", gap: 28, opacity: e, transform: `translateX(${(1 - e) * 60}px)` }}>
                 <span style={{ width: 72, height: 72, borderRadius: 18, border: `3px solid ${C.cyan}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><Visto tamanho={44} cor={C.cyan} /></span>
-                <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 50, lineHeight: 1.2, color: C.ivory }}><Destaque texto={t} /></span>
+                <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 56, lineHeight: 1.2, color: C.ivory }}><Destaque texto={t} /></span>
               </div>
             );
           })}
