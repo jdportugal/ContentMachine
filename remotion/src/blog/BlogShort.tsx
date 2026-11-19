@@ -85,14 +85,14 @@ const Foto: React.FC<{ foto?: string; escurecer?: number; deslocar?: "in" | "out
 const Eyebrow: React.FC<{ children: React.ReactNode; cor?: string; centro?: boolean }> = ({ children, cor = C.cyan, centro }) => (
   <div style={{ display: "flex", alignItems: "center", justifyContent: centro ? "center" : "flex-start", gap: 20 }}>
     <span style={{ width: 64, height: 2, background: cor }} />
-    <span style={{ fontFamily: SANS, fontSize: 28, letterSpacing: 8, color: cor, fontWeight: 600, textTransform: "uppercase" }}>{children}</span>
+    <span style={{ fontFamily: SANS, fontSize: 28, letterSpacing: 8, color: cor, fontWeight: 600, textTransform: "uppercase", textShadow: "0 2px 12px rgba(0,0,0,.6)" }}>{children}</span>
   </div>
 );
 
 const Titulo: React.FC<{ texto: string; tamanho?: number; de?: number; centro?: boolean }> = ({ texto, tamanho = 120, de = 0, centro }) => {
   const e = useEntrada(de, 13);
   return (
-    <div style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: tamanho, lineHeight: 1.0, color: C.ivory, textAlign: centro ? "center" : "left", opacity: e, transform: `translateY(${(1 - e) * 40}px)`, textWrap: "balance" as never }}>
+    <div style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: tamanho, lineHeight: 1.0, color: C.ivory, textAlign: centro ? "center" : "left", opacity: e, textShadow: "0 4px 30px rgba(0,0,0,.55)", transform: `translateY(${(1 - e) * 40}px)`, textWrap: "balance" as never }}>
       <Destaque texto={texto} />
     </div>
   );
@@ -128,7 +128,7 @@ const Visto: React.FC<{ tamanho: number; cor: string }> = ({ tamanho, cor }) => 
 
 const CenaFoto: React.FC<{ c: Cena }> = ({ c }) => (
   <AbsoluteFill>
-    <Foto foto={c.foto} escurecer={0.55} />
+    <Foto foto={c.foto} escurecer={0.72} />
     <Marca />
     <div style={{ position: "absolute", left: 80, right: 80, top: 760, display: "flex", flexDirection: "column", gap: 34 }}>
       {c.eyebrow && <Eyebrow>{c.eyebrow}</Eyebrow>}
@@ -194,7 +194,7 @@ const CenaAntesDepois: React.FC<{ c: Cena }> = ({ c }) => {
         {(c.fotoB ?? c.foto) && <Img src={src((c.fotoB ?? c.foto) as string)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${s})` }} />}
       </AbsoluteFill>
       <div style={{ position: "absolute", top: 0, bottom: 0, left: `${corte}%`, width: 6, marginLeft: -3, background: C.ivory, boxShadow: "0 0 30px rgba(0,0,0,.5)" }} />
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(14,22,38,.55) 0%, transparent 25%, transparent 50%, rgba(14,22,38,.92) 78%)" }} />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(14,22,38,.55) 0%, transparent 22%, rgba(14,22,38,.35) 40%, rgba(14,22,38,.9) 58%, rgba(14,22,38,.96) 100%)" }} />
       <Marca />
       {rotulo("ANTES", "l")}
       {rotulo("DEPOIS", "r")}
