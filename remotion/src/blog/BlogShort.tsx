@@ -69,7 +69,7 @@ const Fundo: React.FC = () => (
   <AbsoluteFill style={{ background: `radial-gradient(1100px 800px at 85% 0%, rgba(5,184,230,.16), transparent 60%), radial-gradient(900px 700px at 0% 100%, rgba(240,96,82,.12), transparent 60%), ${C.navy}` }} />
 );
 
-const Foto: React.FC<{ foto?: string; escurecer?: number; deslocar?: "in" | "out" | "esq" }> = ({ foto, escurecer = 0.62, deslocar = "in" }) => {
+const Foto: React.FC<{ foto?: string; escurecer?: number; deslocar?: "in" | "out" | "esq"; topo?: boolean }> = ({ foto, escurecer = 0.62, deslocar = "in", topo }) => {
   const f = useCurrentFrame();
   if (!foto) return <Fundo />;
   const s = deslocar === "out" ? interpolate(f, [0, 150], [1.2, 1.08], { extrapolateRight: "clamp" }) : interpolate(f, [0, 150], [1.06, 1.18], { extrapolateRight: "clamp" });
@@ -77,7 +77,7 @@ const Foto: React.FC<{ foto?: string; escurecer?: number; deslocar?: "in" | "out
   return (
     <AbsoluteFill>
       <Img src={src(foto)} style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${s}) translateX(${x}px)` }} />
-      <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(14,22,38,${escurecer - 0.15}) 0%, rgba(14,22,38,${escurecer}) 45%, rgba(14,22,38,${Math.min(1, escurecer + 0.25)}) 80%, ${C.navy} 100%)` }} />
+      <AbsoluteFill style={{ background: topo ? `linear-gradient(180deg, rgba(14,22,38,.45) 0%, rgba(14,22,38,.05) 10%, rgba(14,22,38,.08) 34%, rgba(14,22,38,.86) 47%, ${C.navy} 60%)` : `linear-gradient(180deg, rgba(14,22,38,${escurecer - 0.15}) 0%, rgba(14,22,38,${escurecer}) 45%, rgba(14,22,38,${Math.min(1, escurecer + 0.25)}) 80%, ${C.navy} 100%)` }} />
     </AbsoluteFill>
   );
 };
@@ -120,6 +120,9 @@ const Legenda: React.FC<{ texto: string; segundos: number }> = ({ texto, segundo
   );
 };
 
+/** Where the words go: under the photo when there is one, centred otherwise. */
+const zona = (foto?: string): React.CSSProperties => ({ position: "absolute", left: 80, right: 80, top: foto ? 900 : 0, bottom: foto ? 330 : 380, display: "flex", flexDirection: "column", justifyContent: "center" });
+
 const Visto: React.FC<{ tamanho: number; cor: string }> = ({ tamanho, cor }) => (
   <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" fill="none" stroke={cor} strokeWidth={3.2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );
@@ -143,13 +146,13 @@ const CenaPergunta: React.FC<{ c: Cena }> = ({ c }) => {
   const linha = interpolate(f, [10, 26], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill>
-      {c.foto ? <Foto foto={c.foto} escurecer={0.78} deslocar="out" /> : <Fundo />}
+      {c.foto ? <Foto foto={c.foto} deslocar="out" topo /> : <Fundo />}
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 80px 260px" }}>
+      <div style={{ ...zona(c.foto), alignItems: "center", left: 60, right: 60 }}>
         {c.eyebrow && <Eyebrow centro>{c.eyebrow}</Eyebrow>}
         <div style={{ marginTop: 40 }}><Titulo texto={c.titulo ?? ""} tamanho={150} centro /></div>
         <div style={{ marginTop: 40, height: 8, width: 360 * linha, borderRadius: 4, background: C.coral }} />
-      </AbsoluteFill>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -167,13 +170,13 @@ const CenaNumero: React.FC<{ c: Cena }> = ({ c }) => {
   }
   return (
     <AbsoluteFill>
-      {c.foto ? <Foto foto={c.foto} escurecer={0.8} /> : <Fundo />}
+      {c.foto ? <Foto foto={c.foto} topo /> : <Fundo />}
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 70px 260px", textAlign: "center" }}>
+      <div style={{ ...zona(c.foto), alignItems: "center", textAlign: "center", left: 60, right: 60 }}>
         {c.eyebrow && <Eyebrow centro>{c.eyebrow}</Eyebrow>}
         <div style={{ marginTop: 20, fontFamily: DISPLAY, fontWeight: 700, fontSize: Math.min(330, Math.floor(1750 / Math.max(4, (c.numero ?? "").length))), lineHeight: 0.95, color: C.coral, opacity: a, transform: `scale(${0.7 + 0.3 * a})`, whiteSpace: "nowrap" }}>{mostrado}</div>
         {c.titulo && <div style={{ marginTop: 30 }}><Titulo texto={c.titulo} tamanho={84} de={8} centro /></div>}
-      </AbsoluteFill>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -211,9 +214,9 @@ const CenaErro: React.FC<{ c: Cena }> = ({ c }) => {
   const e = useEntrada(0);
   return (
     <AbsoluteFill>
-      {c.foto ? <Foto foto={c.foto} escurecer={0.8} /> : <Fundo />}
+      {c.foto ? <Foto foto={c.foto} topo /> : <Fundo />}
       <Marca />
-      <div style={{ position: "absolute", left: 80, right: 80, top: 0, bottom: 380, display: "flex", flexDirection: "column", justifyContent: "center", gap: 44 }}>
+      <div style={{ ...zona(c.foto), gap: 40 }}>
         <Eyebrow cor={C.coral}>{c.eyebrow ?? "erro comum"}</Eyebrow>
         <div style={{ position: "relative", display: "inline-block", fontFamily: DISPLAY, fontWeight: 700, fontSize: 124, lineHeight: 1.05, color: r > 0.6 ? C.soft : C.ivory, opacity: e }}>
           «{c.titulo}»
@@ -230,9 +233,9 @@ const CenaLista: React.FC<{ c: Cena }> = ({ c }) => {
   const itens = (c.itens ?? []).slice(0, 4);
   return (
     <AbsoluteFill>
-      <Foto foto={c.foto} escurecer={0.82} deslocar="esq" />
+      <Foto foto={c.foto} deslocar="esq" topo />
       <Marca />
-      <div style={{ position: "absolute", left: 80, right: 80, top: 0, bottom: 380, display: "flex", flexDirection: "column", justifyContent: "center", gap: 34 }}>
+      <div style={{ ...zona(c.foto), top: c.foto ? 820 : 0, gap: 26 }}>
         {c.eyebrow && <Eyebrow>{c.eyebrow}</Eyebrow>}
         {c.titulo && <Titulo texto={c.titulo} tamanho={104} />}
         <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 40 }}>
@@ -281,16 +284,16 @@ const CenaCTA: React.FC<{ c: Cena }> = ({ c }) => {
   const pulso = 1 + 0.035 * Math.sin(f / 5);
   return (
     <AbsoluteFill>
-      <Foto foto={c.foto} escurecer={0.8} />
+      <Foto foto={c.foto} topo />
       <Marca />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", paddingBottom: 120, textAlign: "center" }}>
+      <div style={{ ...zona(c.foto), top: c.foto ? 860 : 0, bottom: c.foto ? 120 : 240, alignItems: "center", textAlign: "center", left: 0, right: 0 }}>
         <div style={{ opacity: a }}><Eyebrow centro>{c.eyebrow ?? "o vídeo do seu imóvel"}</Eyebrow></div>
         <div style={{ marginTop: 30, padding: "0 70px", fontFamily: DISPLAY, fontWeight: 700, fontSize: 132, lineHeight: 1.0, color: C.ivory, opacity: a, transform: `scale(${0.85 + 0.15 * a})` }}>
           <Destaque texto={c.titulo ?? "Pronto em *minutos.*"} />
         </div>
         <div style={{ marginTop: 64, padding: "36px 90px", borderRadius: 90, background: C.coral, fontFamily: SANS, fontWeight: 700, fontSize: 76, color: C.navy, opacity: b, transform: `scale(${(0.8 + 0.2 * b) * pulso})` }}>imocena.com</div>
         <div style={{ marginTop: 36, fontFamily: SANS, fontSize: 44, color: C.ivory, opacity: b }}>{c.texto ?? "Cole o link do anúncio. O primeiro é grátis."}</div>
-      </AbsoluteFill>
+      </div>
     </AbsoluteFill>
   );
 };
