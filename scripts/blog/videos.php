@@ -53,11 +53,23 @@ foreach ($slugs as $slug) {
         $prompt = is_array($pedido) ? (string) ($pedido['prompt'] ?? '') : (string) $pedido;
         $de = is_array($pedido) ? (string) ($pedido['de'] ?? '') : '';
         $estilo = 'Realistic editorial photograph, Portugal, natural daylight, warm and calm, vertical 9:16 frame, no text, no captions, no logos, no watermarks';
-        $url = $de !== '' && is_file($pastaIa.'/'.basename($de))
-            ? $kie->edit($prompt.'. Keep the walls, windows, floor and view exactly the same.', '9:16', (string) file_get_contents($pastaIa.'/'.basename($de)), basename($de))
-            : $kie->generate($estilo.' — '.$prompt, '9:16');
-        App\Console\Commands\FotosBlog::guardarJpeg(Illuminate\Support\Facades\Http::timeout(90)->get($url)->body(), $destino);
-        echo "{$slug}: foto {$nome} feita\n";
+        // kie sometimes times out: one more try, then this video waits for the next run.
+        for ($tentativa = 1; $tentativa <= 2 && ! is_file($destino); $tentativa++) {
+            try {
+                $url = $de !== '' && is_file($pastaIa.'/'.basename($de))
+                    ? $kie->edit($prompt.'. Keep the walls, windows, floor and view exactly the same.', '9:16', (string) file_get_contents($pastaIa.'/'.basename($de)), basename($de))
+                    : $kie->generate($estilo.' — '.$prompt, '9:16');
+                App\Console\Commands\FotosBlog::guardarJpeg(Illuminate\Support\Facades\Http::timeout(90)->get($url)->body(), $destino);
+                echo "{$slug}: foto {$nome} feita\n";
+            } catch (Throwable $e) {
+                echo "{$slug}: foto {$nome} falhou ({$tentativa}) — ".mb_substr($e->getMessage(), 0, 120)."\n";
+            }
+        }
+        if (! is_file($destino)) {
+            echo "{$slug}: fica para a próxima (sem a foto {$nome})\n";
+
+            continue 2;
+        }
     }
 
     $cenas = [];
