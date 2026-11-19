@@ -1,11 +1,16 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "filmar-maos.jpg": "a person holding a smartphone with both hands close to the chest, elbows tucked in, filming a bright interior",
+  "corredor-luz.jpg": "a long bright apartment hallway leading to a sunlit living room"
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "vídeo",
    "titulo": "O seu vídeo *treme?*",
-   "fala": "O seu vídeo treme? Três correções."
+   "fala": "O seu vídeo treme? Três correções.",
+   "foto": "ia:filmar-maos.jpg"
   },
   {
    "tipo": "erro",
@@ -22,7 +27,8 @@
     "Com as *duas mãos*",
     "Cotovelos *junto ao corpo*"
    ],
-   "fala": "Segure o telemóvel com as duas mãos, cotovelos junto ao corpo."
+   "fala": "Segure o telemóvel com as duas mãos, cotovelos junto ao corpo.",
+   "foto": "ia:filmar-maos.jpg"
   },
   {
    "tipo": "lista",
@@ -33,17 +39,20 @@
     "Joelhos *fletidos*",
     "Rode o *corpo inteiro*"
    ],
-   "fala": "E ande devagar, com os joelhos ligeiramente fletidos, rodando o corpo inteiro para virar."
+   "fala": "E ande devagar, com os joelhos ligeiramente fletidos, rodando o corpo inteiro para virar.",
+   "foto": "ia:corredor-luz.jpg"
   },
   {
    "tipo": "pergunta",
    "eyebrow": "sem tempo para gravar?",
    "titulo": "Feito com as fotos, *não treme.*",
-   "fala": "Um estabilizador ajuda, mas não faz milagres com passos rápidos. Sem tempo para gravar? Um vídeo feito com as fotos não treme."
+   "fala": "Um estabilizador ajuda, mas não faz milagres com passos rápidos. Sem tempo para gravar? Um vídeo feito com as fotos não treme.",
+   "foto": "ia:filmar-maos.jpg"
   },
   {
    "tipo": "cta",
-   "fala": "Cole o link do anúncio em imocena ponto com e receba-o em minutos. O primeiro é grátis."
+   "fala": "Cole o link do anúncio em imocena ponto com e receba-o em minutos. O primeiro é grátis.",
+   "foto": "ia:filmar-maos.jpg"
   }
  ]
 }

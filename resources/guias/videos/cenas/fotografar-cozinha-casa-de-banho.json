@@ -28,7 +28,8 @@
     "Toalhas *lisas*",
     "Lavatório *livre*"
    ],
-   "fala": "Na casa de banho, tampa em baixo, toalhas lisas e nada no lavatório."
+   "fala": "Na casa de banho, tampa em baixo, toalhas lisas e nada no lavatório.",
+   "foto": "ia:cozinha-bancada.jpg"
   },
   {
    "tipo": "pergunta",

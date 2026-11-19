@@ -21,7 +21,8 @@
     "Paredes em *tons neutros*",
     "Estores abertos, *luzes acesas*"
    ],
-   "fala": "Arrume e despersonalize. Repare o que se vê: lâmpadas, puxadores, juntas. Pinte as paredes marcadas em tons neutros. Abra estores e acenda as luzes."
+   "fala": "Arrume e despersonalize. Repare o que se vê: lâmpadas, puxadores, juntas. Pinte as paredes marcadas em tons neutros. Abra estores e acenda as luzes.",
+   "foto": "ia:quarto-staging.jpg"
   },
   {
    "tipo": "foto",
@@ -39,7 +40,8 @@
   {
    "tipo": "cta",
    "titulo": "Casa *pronta?*",
-   "fala": "Casa pronta? Cole o link do anúncio em imocena ponto com e tenha o vídeo narrado em minutos. O primeiro é grátis."
+   "fala": "Casa pronta? Cole o link do anúncio em imocena ponto com e tenha o vídeo narrado em minutos. O primeiro é grátis.",
+   "foto": "ia:quarto-staging.jpg"
   }
  ]
 }

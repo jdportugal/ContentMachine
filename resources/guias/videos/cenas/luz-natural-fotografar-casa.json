@@ -1,12 +1,58 @@
 {
-  "imagens": "ia",
-  "cenas": [
-    {"tipo": "antes-depois", "foto": "ia:luz-natural-sala.jpg", "titulo": "A diferença é a *hora.*", "fala": "A mesma sala, duas fotos. A diferença é a hora."},
-    {"tipo": "numero", "eyebrow": "interiores", "numero": "11h–16h", "titulo": "quando entra *mais luz*", "fala": "Fotografe os interiores quando entra mais luz, do fim da manhã ao meio da tarde,"},
-    {"tipo": "lista", "foto": "ia:luz-natural-sala.jpg", "eyebrow": "antes de fotografar", "titulo": "Prepare a *luz*", "itens": ["Estores *abertos*", "Todas as luzes *acesas*", "Lâmpadas da *mesma cor*"], "fala": "com os estores abertos e todas as luzes acesas, da mesma cor."},
-    {"tipo": "foto", "foto": "ia:luz-natural-fachada.jpg", "eyebrow": "exterior", "titulo": "Sol de frente ou de lado. *Nunca atrás.*", "fala": "Na fachada, o sol deve bater de frente ou de lado, nunca atrás da casa."},
-    {"tipo": "erro", "eyebrow": "dia cinzento?", "titulo": "Fotografo tudo hoje", "texto": "Interiores hoje. A fachada, *com sol.*", "fala": "Dia cinzento? Faça os interiores e volte com sol para o exterior."},
-    {"tipo": "pergunta", "eyebrow": "o resultado", "titulo": "Boas fotos, *bom vídeo.*", "fala": "Boas fotos dão um bom anúncio e um bom vídeo."},
-    {"tipo": "cta", "foto": "ia:luz-natural-sala.jpg", "titulo": "O vídeo do seu imóvel, *em minutos.*", "fala": "Para o vídeo do seu imóvel, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, e o primeiro é grátis."}
-  ]
+ "imagens": "ia",
+ "cenas": [
+  {
+   "tipo": "antes-depois",
+   "foto": "ia:luz-natural-sala.jpg",
+   "titulo": "A diferença é a *hora.*",
+   "fala": "A mesma sala, duas fotos. A diferença é a hora."
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "interiores",
+   "numero": "11h–16h",
+   "titulo": "quando entra *mais luz*",
+   "fala": "Fotografe os interiores quando entra mais luz, do fim da manhã ao meio da tarde,"
+  },
+  {
+   "tipo": "lista",
+   "foto": "ia:luz-natural-sala.jpg",
+   "eyebrow": "antes de fotografar",
+   "titulo": "Prepare a *luz*",
+   "itens": [
+    "Estores *abertos*",
+    "Todas as luzes *acesas*",
+    "Lâmpadas da *mesma cor*"
+   ],
+   "fala": "com os estores abertos e todas as luzes acesas, da mesma cor."
+  },
+  {
+   "tipo": "foto",
+   "foto": "ia:luz-natural-fachada.jpg",
+   "eyebrow": "exterior",
+   "titulo": "Sol de frente ou de lado. *Nunca atrás.*",
+   "fala": "Na fachada, o sol deve bater de frente ou de lado, nunca atrás da casa."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "dia cinzento?",
+   "titulo": "Fotografo tudo hoje",
+   "texto": "Interiores hoje. A fachada, *com sol.*",
+   "fala": "Dia cinzento? Faça os interiores e volte com sol para o exterior.",
+   "foto": "ia:luz-natural-sala.jpg"
+  },
+  {
+   "tipo": "pergunta",
+   "eyebrow": "o resultado",
+   "titulo": "Boas fotos, *bom vídeo.*",
+   "fala": "Boas fotos dão um bom anúncio e um bom vídeo.",
+   "foto": "ia:luz-natural-fachada.jpg"
+  },
+  {
+   "tipo": "cta",
+   "foto": "ia:luz-natural-sala.jpg",
+   "titulo": "O vídeo do seu imóvel, *em minutos.*",
+   "fala": "Para o vídeo do seu imóvel, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, e o primeiro é grátis."
+  }
+ ]
 }

@@ -29,14 +29,16 @@
     "Na *foto* e no *anúncio*",
     "A foto *real* logo a seguir"
    ],
-   "fala": "Identifique a imagem como virtual, na própria foto e no anúncio. Mostre também a foto real logo a seguir."
+   "fala": "Identifique a imagem como virtual, na própria foto e no anúncio. Mostre também a foto real logo a seguir.",
+   "foto": "ia:sala-vazia.jpg"
   },
   {
    "tipo": "erro",
    "eyebrow": "regra 3",
    "titulo": "Mudar a casa",
    "texto": "Paredes, janelas, chão e vista *ficam como são.*",
-   "fala": "E nunca mude a casa: paredes, janelas, chão e vista ficam como são. Mobile só as divisões principais."
+   "fala": "E nunca mude a casa: paredes, janelas, chão e vista ficam como são. Mobile só as divisões principais.",
+   "foto": "ia:sala-mobilada-virtual.jpg"
   },
   {
    "tipo": "cta",

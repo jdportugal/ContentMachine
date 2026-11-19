@@ -1,12 +1,17 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "consultora-tablet.jpg": "a female real estate agent writing notes on a tablet in a Lisbon cafe",
+  "consultora-telefone.jpg": "a real estate agent talking on the phone in front of a modern apartment building"
+ },
  "cenas": [
   {
    "tipo": "numero",
    "eyebrow": "o guião",
    "numero": "100 palavras",
    "titulo": "em *5 partes*",
-   "fala": "Um bom vídeo de imóvel tem cinco partes e cerca de cem palavras."
+   "fala": "Um bom vídeo de imóvel tem cinco partes e cerca de cem palavras.",
+   "foto": "ia:consultora-tablet.jpg"
   },
   {
    "tipo": "lista",
@@ -18,14 +23,16 @@
     "A *zona*, com distâncias",
     "Pedido *claro* e contacto"
    ],
-   "fala": "Gancho: o preço, a zona ou o ponto mais forte. Três pontos que o comprador procura. A zona, com distâncias. Um pedido claro: envie mensagem para visitar. E o seu contacto."
+   "fala": "Gancho: o preço, a zona ou o ponto mais forte. Três pontos que o comprador procura. A zona, com distâncias. Um pedido claro: envie mensagem para visitar. E o seu contacto.",
+   "foto": "ia:consultora-tablet.jpg"
   },
   {
    "tipo": "erro",
    "eyebrow": "o tom",
    "titulo": "Magnífico, deslumbrante, único",
    "texto": "Frases curtas, *como ao telefone.*",
-   "fala": "Frases curtas, como se falasse ao telefone, sem adjetivos vazios."
+   "fala": "Frases curtas, como se falasse ao telefone, sem adjetivos vazios.",
+   "foto": "ia:consultora-telefone.jpg"
   },
   {
    "tipo": "pergunta",
@@ -35,7 +42,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Cole o link do anúncio em imocena ponto com: escrevemos o guião, narramos em português de Portugal e montamos o vídeo em minutos."
+   "fala": "Cole o link do anúncio em imocena ponto com: escrevemos o guião, narramos em português de Portugal e montamos o vídeo em minutos.",
+   "foto": "ia:consultora-tablet.jpg"
   }
  ]
 }

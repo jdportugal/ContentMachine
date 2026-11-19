@@ -17,7 +17,8 @@
     "Portas *abertas*",
     "Acabe na *vista*"
    ],
-   "fala": "Antes de gravar, faça o percurso a pé e abra todas as portas. Comece à entrada e acabe no melhor sítio, a varanda ou a vista."
+   "fala": "Antes de gravar, faça o percurso a pé e abra todas as portas. Comece à entrada e acabe no melhor sítio, a varanda ou a vista.",
+   "foto": "ia:consultora-a-filmar.jpg"
   },
   {
    "tipo": "erro",
@@ -36,7 +37,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Para as redes, um vídeo curto funciona melhor: cole o link do anúncio em imocena ponto com e tem-no em minutos. O primeiro é grátis."
+   "fala": "Para as redes, um vídeo curto funciona melhor: cole o link do anúncio em imocena ponto com e tem-no em minutos. O primeiro é grátis.",
+   "foto": "ia:consultora-a-filmar.jpg"
   }
  ]
 }

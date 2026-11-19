@@ -1,11 +1,16 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "casa-vazia.jpg": "an empty apartment room with afternoon light through a large window, wooden floor, no furniture",
+  "varanda-cadeiras.jpg": "a small balcony with two chairs and a large plant, city view, sunny"
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "fotografia",
    "titulo": "Casa *vazia?*",
-   "fala": "Casa vazia? Nas fotos parece mais pequena e fria."
+   "fala": "Casa vazia? Nas fotos parece mais pequena e fria.",
+   "foto": "ia:casa-vazia.jpg"
   },
   {
    "tipo": "lista",
@@ -16,7 +21,8 @@
     "De um *canto*: duas paredes",
     "Sempre com *a janela*"
    ],
-   "fala": "Compense assim: luz natural forte, fotografias de um canto para mostrar duas paredes e o chão, sempre com a janela na foto."
+   "fala": "Compense assim: luz natural forte, fotografias de um canto para mostrar duas paredes e o chão, sempre com a janela na foto.",
+   "foto": "ia:casa-vazia.jpg"
   },
   {
    "tipo": "lista",
@@ -27,7 +33,8 @@
     "Uma planta *grande*",
     "Mobília virtual, *identificada*"
    ],
-   "fala": "Junte pormenores dos materiais, da vista e dos roupeiros. Leve uma planta grande e duas cadeiras para a varanda. Nas divisões principais, use mobiliário virtual, identificado."
+   "fala": "Junte pormenores dos materiais, da vista e dos roupeiros. Leve uma planta grande e duas cadeiras para a varanda. Nas divisões principais, use mobiliário virtual, identificado.",
+   "foto": "ia:varanda-cadeiras.jpg"
   },
   {
    "tipo": "pergunta",
@@ -37,7 +44,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Cole o link do anúncio em imocena ponto com e tem esse vídeo em minutos."
+   "fala": "Cole o link do anúncio em imocena ponto com e tem esse vídeo em minutos.",
+   "foto": "ia:casa-vazia.jpg"
   }
  ]
 }

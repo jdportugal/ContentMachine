@@ -1,12 +1,17 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "telemovel-video.jpg": "a smartphone on a desk showing a vertical video of a bright apartment, next to a laptop",
+  "redes-sociais.jpg": "a person scrolling short vertical videos of houses on a smartphone, close-up of hands"
+ },
  "cenas": [
   {
    "tipo": "numero",
    "eyebrow": "o formato",
    "numero": "9:16",
    "titulo": "um só vídeo *para todo o lado*",
-   "fala": "Um só vídeo para todo o lado: MP4, vertical, nove por dezasseis, entre trinta e sessenta segundos."
+   "fala": "Um só vídeo para todo o lado: MP4, vertical, nove por dezasseis, entre trinta e sessenta segundos.",
+   "foto": "ia:telemovel-video.jpg"
   },
   {
    "tipo": "lista",
@@ -17,7 +22,8 @@
     "*Shorts*",
     "*WhatsApp*"
    ],
-   "fala": "Serve nos Reels, no TikTok, nos Shorts e no WhatsApp."
+   "fala": "Serve nos Reels, no TikTok, nos Shorts e no WhatsApp.",
+   "foto": "ia:redes-sociais.jpg"
   },
   {
    "tipo": "numero",
@@ -30,12 +36,14 @@
    "tipo": "pergunta",
    "eyebrow": "o segredo",
    "titulo": "Faça uma vez, *publique em todo o lado.*",
-   "fala": "Grave ou monte uma vez e publique em todo o lado."
+   "fala": "Grave ou monte uma vez e publique em todo o lado.",
+   "foto": "ia:telemovel-video.jpg"
   },
   {
    "tipo": "cta",
    "titulo": "Vertical, *sem editar.*",
-   "fala": "Quer esse ficheiro sem editar nada? Cole o link do anúncio em imocena ponto com e receba o vídeo vertical, narrado em português de Portugal, em minutos. O primeiro é grátis."
+   "fala": "Quer esse ficheiro sem editar nada? Cole o link do anúncio em imocena ponto com e receba o vídeo vertical, narrado em português de Portugal, em minutos. O primeiro é grátis.",
+   "foto": "ia:telemovel-video.jpg"
   }
  ]
 }

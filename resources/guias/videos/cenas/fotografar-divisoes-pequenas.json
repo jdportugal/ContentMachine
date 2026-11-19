@@ -1,11 +1,16 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "quarto-pequeno.jpg": "a small bright bedroom photographed from the corner at chest height, straight vertical lines",
+  "consultora-canto.jpg": "a female real estate agent standing in the corner of a small room photographing it with a smartphone held at chest height"
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "fotografia",
    "titulo": "Quarto *pequeno?*",
-   "fala": "Quarto pequeno? Não o fotografe do meio."
+   "fala": "Quarto pequeno? Não o fotografe do meio.",
+   "foto": "ia:quarto-pequeno.jpg"
   },
   {
    "tipo": "lista",
@@ -16,14 +21,16 @@
     "À altura do *peito*",
     "Telemóvel *direito*"
    ],
-   "fala": "Encoste-se ao canto oposto à porta, à altura do peito, com o telemóvel direito."
+   "fala": "Encoste-se ao canto oposto à porta, à altura do peito, com o telemóvel direito.",
+   "foto": "ia:consultora-canto.jpg"
   },
   {
    "tipo": "numero",
    "eyebrow": "o resultado",
    "numero": "2 paredes",
    "titulo": "e o máximo de *chão*",
-   "fala": "Assim apanha duas paredes e o máximo de chão."
+   "fala": "Assim apanha duas paredes e o máximo de chão.",
+   "foto": "ia:quarto-pequeno.jpg"
   },
   {
    "tipo": "erro",
@@ -36,11 +43,13 @@
    "tipo": "pergunta",
    "eyebrow": "menos é mais",
    "titulo": "Tire o que está *a mais.*",
-   "fala": "Tire uma cadeira, um tapete, o que estiver a mais, e acenda todas as luzes. Uma foto honesta vale mais do que uma divisão esticada."
+   "fala": "Tire uma cadeira, um tapete, o que estiver a mais, e acenda todas as luzes. Uma foto honesta vale mais do que uma divisão esticada.",
+   "foto": "ia:quarto-pequeno.jpg"
   },
   {
    "tipo": "cta",
-   "fala": "E para o vídeo do imóvel, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, o primeiro é grátis."
+   "fala": "E para o vídeo do imóvel, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, o primeiro é grátis.",
+   "foto": "ia:quarto-pequeno.jpg"
   }
  ]
 }

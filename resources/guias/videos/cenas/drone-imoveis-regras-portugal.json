@@ -30,7 +30,8 @@
     "Registo do *operador*",
     "Regras *na ANAC*"
    ],
-   "fala": "Drone com câmara, em regra, obriga a registar o operador. Confirme sempre na ANAC antes de voar."
+   "fala": "Drone com câmara, em regra, obriga a registar o operador. Confirme sempre na ANAC antes de voar.",
+   "foto": "ia:quinta-drone.jpg"
   },
   {
    "tipo": "cta",

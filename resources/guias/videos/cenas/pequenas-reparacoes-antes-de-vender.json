@@ -1,11 +1,16 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "torneira.jpg": "close-up of a dripping chrome kitchen tap",
+  "reparar-puxador.jpg": "a handyman tightening a door handle in a bright apartment"
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "na visita",
    "titulo": "O que mais *estará mal?*",
-   "fala": "Na visita, um puxador solto faz o comprador perguntar: o que mais estará mal?"
+   "fala": "Na visita, um puxador solto faz o comprador perguntar: o que mais estará mal?",
+   "foto": "ia:torneira.jpg"
   },
   {
    "tipo": "lista",
@@ -17,14 +22,16 @@
     "A torneira que *pinga*",
     "Furos nas *paredes*"
    ],
-   "fala": "Antes de vender, troque as lâmpadas fundidas, aperte puxadores e dobradiças, arranje a torneira que pinga e o autoclismo que corre, limpe as juntas da casa de banho e tape os furos nas paredes."
+   "fala": "Antes de vender, troque as lâmpadas fundidas, aperte puxadores e dobradiças, arranje a torneira que pinga e o autoclismo que corre, limpe as juntas da casa de banho e tape os furos nas paredes.",
+   "foto": "ia:reparar-puxador.jpg"
   },
   {
    "tipo": "erro",
    "eyebrow": "humidade?",
    "titulo": "Pintar por cima",
    "texto": "Resolva *a causa* antes de pintar.",
-   "fala": "Humidade? Resolva a causa antes de pintar."
+   "fala": "Humidade? Resolva a causa antes de pintar.",
+   "foto": "ia:torneira.jpg"
   },
   {
    "tipo": "pergunta",
@@ -35,7 +42,8 @@
   {
    "tipo": "cta",
    "titulo": "Casa cuidada, *vídeo pronto.*",
-   "fala": "Com a casa cuidada, faça as fotos e cole o link do anúncio em imocena ponto com. O vídeo fica pronto em minutos, e o primeiro é grátis."
+   "fala": "Com a casa cuidada, faça as fotos e cole o link do anúncio em imocena ponto com. O vídeo fica pronto em minutos, e o primeiro é grátis.",
+   "foto": "ia:reparar-puxador.jpg"
   }
  ]
 }

@@ -36,7 +36,8 @@
    "tipo": "pergunta",
    "eyebrow": "na varanda",
    "titulo": "Uma mesa e *duas cadeiras.*",
-   "fala": "Na varanda, uma mesa e duas cadeiras mostram que se pode usar. Dê a cada divisão uma função clara."
+   "fala": "Na varanda, uma mesa e duas cadeiras mostram que se pode usar. Dê a cada divisão uma função clara.",
+   "foto": "ia:sala-acolhedora.jpg"
   },
   {
    "tipo": "foto",
@@ -47,7 +48,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Depois das fotos, cole o link do anúncio em imocena ponto com e receba o vídeo em minutos."
+   "fala": "Depois das fotos, cole o link do anúncio em imocena ponto com e receba o vídeo em minutos.",
+   "foto": "ia:sala-acolhedora.jpg"
   }
  ]
 }

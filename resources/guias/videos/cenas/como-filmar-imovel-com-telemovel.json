@@ -20,7 +20,8 @@
     "Cozinha e *quartos*",
     "*Exterior*"
    ],
-   "fala": "Siga a ordem de uma visita: entrada, sala, cozinha, quartos, exterior."
+   "fala": "Siga a ordem de uma visita: entrada, sala, cozinha, quartos, exterior.",
+   "foto": "ia:consultor-cozinha-filmar.jpg"
   },
   {
    "tipo": "numero",
@@ -39,7 +40,8 @@
   {
    "tipo": "cta",
    "titulo": "Feito com as fotos, *narrado.*",
-   "fala": "cole o link do anúncio em imocena ponto com e receba um vídeo feito com as fotos, narrado em português, em poucos minutos. O primeiro é grátis."
+   "fala": "cole o link do anúncio em imocena ponto com e receba um vídeo feito com as fotos, narrado em português, em poucos minutos. O primeiro é grátis.",
+   "foto": "ia:consultor-cozinha-filmar.jpg"
   }
  ]
 }

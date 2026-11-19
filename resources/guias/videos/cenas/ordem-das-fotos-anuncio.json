@@ -27,7 +27,8 @@
    "eyebrow": "nunca",
    "titulo": "Abrir com o corredor",
    "texto": "Siga a ordem de *uma visita.*",
-   "fala": "Nunca com o corredor. Depois, siga a ordem de uma visita:"
+   "fala": "Nunca com o corredor. Depois, siga a ordem de uma visita:",
+   "foto": "ia:sala-vista-mar.jpg"
   },
   {
    "tipo": "lista",
@@ -39,7 +40,8 @@
     "Casas de banho e *exterior*",
     "A planta *no fim*"
    ],
-   "fala": "entrada, sala, cozinha, quartos, casas de banho, exterior, e a planta no fim. O vídeo segue a mesma ordem."
+   "fala": "entrada, sala, cozinha, quartos, casas de banho, exterior, e a planta no fim. O vídeo segue a mesma ordem.",
+   "foto": "ia:sala-vista-mar.jpg"
   },
   {
    "tipo": "cta",

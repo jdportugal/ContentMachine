@@ -1,12 +1,17 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "sala-escandinava.jpg": "bright Scandinavian-style Portuguese living room with straight vertical lines, photographed at chest height",
+  "consultor-foto.jpg": "a male real estate agent photographing a kitchen with a smartphone, natural light"
+ },
  "cenas": [
   {
    "tipo": "numero",
    "eyebrow": "fotos de imóveis",
    "numero": "5 regras",
    "titulo": "para *boas fotos*",
-   "fala": "Cinco regras para boas fotos de imóveis."
+   "fala": "Cinco regras para boas fotos de imóveis.",
+   "foto": "ia:sala-escandinava.jpg"
   },
   {
    "tipo": "lista",
@@ -17,7 +22,8 @@
     "À altura do *peito*",
     "Verticais *direitas*"
    ],
-   "fala": "Luz natural, com todas as luzes acesas. Telemóvel à altura do peito. Linhas verticais direitas, com a grelha ligada."
+   "fala": "Luz natural, com todas as luzes acesas. Telemóvel à altura do peito. Linhas verticais direitas, com a grelha ligada.",
+   "foto": "ia:consultor-foto.jpg"
   },
   {
    "tipo": "lista",
@@ -27,13 +33,15 @@
     "Grande angular, *sem exagero*",
     "A casa *arrumada*"
    ],
-   "fala": "Grande angular, sem exagero. E a casa arrumada antes de começar."
+   "fala": "Grande angular, sem exagero. E a casa arrumada antes de começar.",
+   "foto": "ia:sala-escandinava.jpg"
   },
   {
    "tipo": "pergunta",
    "eyebrow": "no anúncio",
    "titulo": "A foto mais forte *primeiro.*",
-   "fala": "Depois, abra o anúncio com a foto mais forte e siga a ordem de uma visita."
+   "fala": "Depois, abra o anúncio com a foto mais forte e siga a ordem de uma visita.",
+   "foto": "ia:sala-escandinava.jpg"
   },
   {
    "tipo": "pergunta",
@@ -43,7 +51,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Com elas no anúncio, cole o link em imocena ponto com e receba o vídeo narrado em minutos. O primeiro é grátis."
+   "fala": "Com elas no anúncio, cole o link em imocena ponto com e receba o vídeo narrado em minutos. O primeiro é grátis.",
+   "foto": "ia:sala-escandinava.jpg"
   }
  ]
 }

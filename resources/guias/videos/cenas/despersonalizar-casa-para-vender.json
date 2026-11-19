@@ -1,11 +1,19 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "estante-cheia.jpg": "a living room shelf crowded with family photos and souvenirs",
+  "estante-neutra.jpg": {
+   "prompt": "The same shelf with only a few books and one plant, calm and neutral",
+   "de": "estante-cheia.jpg"
+  }
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "vender",
    "titulo": "A vida *do comprador*, não a do dono.",
-   "fala": "O comprador quer imaginar a vida dele na casa, não a do proprietário."
+   "fala": "O comprador quer imaginar a vida dele na casa, não a do proprietário.",
+   "foto": "ia:estante-cheia.jpg"
   },
   {
    "tipo": "lista",
@@ -16,14 +24,16 @@
     "Diplomas e *coleções*",
     "Ímanes do *frigorífico*"
    ],
-   "fala": "Por isso, antes das fotos e das visitas, guarde as fotografias de família, os diplomas, as coleções e os ímanes do frigorífico."
+   "fala": "Por isso, antes das fotos e das visitas, guarde as fotografias de família, os diplomas, as coleções e os ímanes do frigorífico.",
+   "foto": "ia:estante-cheia.jpg"
   },
   {
    "tipo": "erro",
    "eyebrow": "não é",
    "titulo": "Esvaziar a casa",
    "texto": "É deixá-la *neutra*: poucos móveis, plantas, superfícies livres.",
-   "fala": "Não é esvaziar a casa: é deixá-la neutra, com poucos móveis, algumas plantas e superfícies livres."
+   "fala": "Não é esvaziar a casa: é deixá-la neutra, com poucos móveis, algumas plantas e superfícies livres.",
+   "foto": "ia:estante-neutra.jpg"
   },
   {
    "tipo": "pergunta",
@@ -33,7 +43,8 @@
   },
   {
    "tipo": "cta",
-   "fala": "Casa pronta, fotos tiradas: cole o link do anúncio em imocena ponto com e tem o vídeo em minutos."
+   "fala": "Casa pronta, fotos tiradas: cole o link do anúncio em imocena ponto com e tem o vídeo em minutos.",
+   "foto": "ia:estante-neutra.jpg"
   }
  ]
 }

@@ -1,11 +1,16 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "editar-telemovel.jpg": "hands editing a real estate photo on a smartphone, adjusting brightness, a bright living room on the screen",
+  "sala-real.jpg": "an honest, bright photo of an ordinary Portuguese living room on a sunny day"
+ },
  "cenas": [
   {
    "tipo": "pergunta",
    "eyebrow": "editar fotos",
    "titulo": "A casa como é, *num bom dia.*",
-   "fala": "Editar as fotos de um imóvel tem uma regra: mostrar a casa como ela é, num bom dia."
+   "fala": "Editar as fotos de um imóvel tem uma regra: mostrar a casa como ela é, num bom dia.",
+   "foto": "ia:editar-telemovel.jpg"
   },
   {
    "tipo": "lista",
@@ -17,7 +22,8 @@
     "Recuperar *a janela*",
     "Acertar *a cor*"
    ],
-   "fala": "Pode endireitar as linhas, clarear as sombras, recuperar a janela e corrigir a cor das paredes."
+   "fala": "Pode endireitar as linhas, clarear as sombras, recuperar a janela e corrigir a cor das paredes.",
+   "foto": "ia:sala-real.jpg"
   },
   {
    "tipo": "erro",
@@ -30,11 +36,13 @@
    "tipo": "pergunta",
    "eyebrow": "mobília virtual",
    "titulo": "Diga que é *virtual.*",
-   "fala": "Se mobilar uma sala vazia com mobiliário virtual, diga que é virtual. A visita tem de confirmar as fotos."
+   "fala": "Se mobilar uma sala vazia com mobiliário virtual, diga que é virtual. A visita tem de confirmar as fotos.",
+   "foto": "ia:sala-real.jpg"
   },
   {
    "tipo": "cta",
-   "fala": "E para pôr a casa em vídeo, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, e o primeiro é grátis."
+   "fala": "E para pôr a casa em vídeo, cole o link do anúncio em imocena ponto com. Fica pronto em minutos, e o primeiro é grátis.",
+   "foto": "ia:editar-telemovel.jpg"
   }
  ]
 }

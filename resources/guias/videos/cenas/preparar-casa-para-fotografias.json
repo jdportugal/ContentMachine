@@ -1,5 +1,9 @@
 {
- "imagens": "nenhuma",
+ "imagens": "ia",
+ "fotos": {
+  "preparar-cozinha.jpg": "a homeowner tidying a kitchen counter, leaving only a fruit bowl, bright Portuguese apartment",
+  "preparar-quarto.jpg": "a neatly made bed with white linen in a bright bedroom, no people"
+ },
  "cenas": [
   {
    "tipo": "lista",
@@ -11,13 +15,15 @@
     "Bancadas *quase vazias*",
     "Camas *feitas*"
    ],
-   "fala": "Antes das fotos, a casa precisa de vinte minutos. Estores abertos e lâmpadas a funcionar. Fotografias de família guardadas."
+   "fala": "Antes das fotos, a casa precisa de vinte minutos. Estores abertos e lâmpadas a funcionar. Fotografias de família guardadas.",
+   "foto": "ia:preparar-cozinha.jpg"
   },
   {
    "tipo": "pergunta",
    "eyebrow": "cozinha",
    "titulo": "Nada no *frigorífico.*",
-   "fala": "Bancadas da cozinha quase vazias, nada no frigorífico. Camas feitas com roupa clara."
+   "fala": "Bancadas da cozinha quase vazias, nada no frigorífico. Camas feitas com roupa clara.",
+   "foto": "ia:preparar-cozinha.jpg"
   },
   {
    "tipo": "lista",
@@ -28,7 +34,8 @@
     "Toalhas *lisas*",
     "Carros e caixotes *fora*"
    ],
-   "fala": "Na casa de banho, tampa da sanita em baixo e toalhas lisas. Lá fora, carros e caixotes fora da frente da casa."
+   "fala": "Na casa de banho, tampa da sanita em baixo e toalhas lisas. Lá fora, carros e caixotes fora da frente da casa.",
+   "foto": "ia:preparar-quarto.jpg"
   },
   {
    "tipo": "numero",
@@ -40,7 +47,8 @@
   {
    "tipo": "cta",
    "titulo": "Depois das fotos, *o vídeo.*",
-   "fala": "Depois das fotos, o vídeo: cole o link do anúncio em imocena ponto com e tem um vídeo narrado em minutos. O primeiro é grátis."
+   "fala": "Depois das fotos, o vídeo: cole o link do anúncio em imocena ponto com e tem um vídeo narrado em minutos. O primeiro é grátis.",
+   "foto": "ia:preparar-cozinha.jpg"
   }
  ]
 }

@@ -1,11 +1,58 @@
 {
-  "imagens": "nenhuma",
-  "cenas": [
-    {"tipo": "erro", "eyebrow": "erro n.º 1", "titulo": "Paredes tortas", "texto": "Telemóvel *direito*, grelha ligada.", "fala": "Erro número um: paredes tortas. Segure o telemóvel direito e ligue a grelha."},
-    {"tipo": "erro", "eyebrow": "erro n.º 2", "titulo": "Fotos escuras", "texto": "Estores abertos, luzes acesas, *HDR.*", "fala": "Erro dois: fotos escuras. Abra os estores, acenda as luzes e use o HDR."},
-    {"tipo": "erro", "eyebrow": "erro n.º 3", "titulo": "Fotografar de cima", "texto": "Fique à altura do *peito.*", "fala": "Erro três: fotografar de cima. Fique à altura do peito."},
-    {"tipo": "lista", "eyebrow": "e os clássicos", "titulo": "Antes do *clique*", "itens": ["Sanita *fechada*", "Sem o seu *reflexo*", "Frigorífico *sem ímanes*"], "fala": "E os clássicos: a sanita aberta, o seu reflexo no espelho, ímanes no frigorífico."},
-    {"tipo": "numero", "eyebrow": "arrumação", "numero": "1 minuto", "titulo": "muda o anúncio *inteiro*", "fala": "Um minuto de arrumação muda o anúncio inteiro."},
-    {"tipo": "cta", "titulo": "O vídeo faz-se *sozinho.*", "fala": "Com as fotos certas, o vídeo do seu imóvel faz-se sozinho: cole o link do anúncio em imocena ponto com e receba-o em minutos. O primeiro é grátis."}
-  ]
+ "imagens": "ia",
+ "fotos": {
+  "erros-sala-torta.jpg": "a living room photographed with a tilted smartphone, crooked walls, slightly dim, realistic amateur listing photo",
+  "erros-wc-arrumada.jpg": "tidy modern Portuguese bathroom with the toilet lid closed and plain white towels, bright"
+ },
+ "cenas": [
+  {
+   "tipo": "erro",
+   "eyebrow": "erro n.º 1",
+   "titulo": "Paredes tortas",
+   "texto": "Telemóvel *direito*, grelha ligada.",
+   "fala": "Erro número um: paredes tortas. Segure o telemóvel direito e ligue a grelha.",
+   "foto": "ia:erros-sala-torta.jpg"
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "erro n.º 2",
+   "titulo": "Fotos escuras",
+   "texto": "Estores abertos, luzes acesas, *HDR.*",
+   "fala": "Erro dois: fotos escuras. Abra os estores, acenda as luzes e use o HDR."
+  },
+  {
+   "tipo": "erro",
+   "eyebrow": "erro n.º 3",
+   "titulo": "Fotografar de cima",
+   "texto": "Fique à altura do *peito.*",
+   "fala": "Erro três: fotografar de cima. Fique à altura do peito.",
+   "foto": "ia:erros-sala-torta.jpg"
+  },
+  {
+   "tipo": "lista",
+   "eyebrow": "e os clássicos",
+   "titulo": "Antes do *clique*",
+   "itens": [
+    "Sanita *fechada*",
+    "Sem o seu *reflexo*",
+    "Frigorífico *sem ímanes*"
+   ],
+   "fala": "E os clássicos: a sanita aberta, o seu reflexo no espelho, ímanes no frigorífico.",
+   "foto": "ia:erros-wc-arrumada.jpg"
+  },
+  {
+   "tipo": "numero",
+   "eyebrow": "arrumação",
+   "numero": "1 minuto",
+   "titulo": "muda o anúncio *inteiro*",
+   "fala": "Um minuto de arrumação muda o anúncio inteiro.",
+   "foto": "ia:erros-sala-torta.jpg"
+  },
+  {
+   "tipo": "cta",
+   "titulo": "O vídeo faz-se *sozinho.*",
+   "fala": "Com as fotos certas, o vídeo do seu imóvel faz-se sozinho: cole o link do anúncio em imocena ponto com e receba-o em minutos. O primeiro é grátis.",
+   "foto": "ia:erros-sala-torta.jpg"
+  }
+ ]
 }
