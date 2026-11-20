@@ -52,9 +52,37 @@ class NovoVideo
             DB::table('leads')->where('id', $existente->id)->update($dados);
         } else {
             DB::table('leads')->insert($dados + ['anuncio' => $anuncio, 'origem' => \App\Services\Marketing\Origem::json(), 'created_at' => now(),
-                'consultor' => rescue(fn () => app(\App\Services\Alertas\PaginaDoConsultor::class)->de($anuncio, 8), null, report: false)['chave'] ?? null]);
+                'consultor' => empty($opcoes['listing_manual'])
+                    ? (rescue(fn () => app(\App\Services\Alertas\PaginaDoConsultor::class)->de($anuncio, 8), null, report: false)['chave'] ?? null) : null]);
         }
         DB::table('compras')->where('id', $compra->id)->update(['videos_usados' => DB::raw('videos_usados + 1'), 'updated_at' => now()]);
+
+        return null;
+    }
+
+    /** The "link" a video made from uploaded files is filed under (unique; no portal reads it). */
+    public static function anuncioCarregado(): string
+    {
+        return 'https://imocena.com/carregado/'.\Illuminate\Support\Str::lower(\Illuminate\Support\Str::random(16));
+    }
+
+    public static function eCarregado(string $anuncio): bool
+    {
+        return str_starts_with($anuncio, 'https://imocena.com/carregado/');
+    }
+
+    /** The theme for a video without a link: the agency's (RE/MAX, Century 21…) when it is one we have, else the default. */
+    public static function portalDaAgencia(string $agencia): ?string
+    {
+        $a = \Illuminate\Support\Str::lower(\Illuminate\Support\Str::ascii($agencia));
+        $mapa = ['/\bre\s*\/?\s*max\b/' => 'remax', '/\bcentury\s*21\b/' => 'century21', '/\biad\b/' => 'iad', '/\bexp\b/' => 'exp',
+            '/\b(kw|keller williams)\b/' => 'kw', '/\bpredimed\b/' => 'predimed', '/\bera\b/' => 'era', '/\bzome\b/' => 'zome',
+            '/\bbussola\s*haus\b/' => 'bussolahaus', '/\bmy\s*best\s*houses\b/' => 'mybesthouses'];
+        foreach ($mapa as $padrao => $portal) {
+            if (preg_match($padrao, $a)) {
+                return $portal;
+            }
+        }
 
         return null;
     }

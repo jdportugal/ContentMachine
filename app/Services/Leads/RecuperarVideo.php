@@ -26,7 +26,8 @@ class RecuperarVideo
     public const STUCK_MINUTES = 40;
 
     /** The options a video was asked with, carried to the second attempt. */
-    private const OPCOES = ['fotos_extra', 'narracao_propria', 'musica', 'musica_ficheiro', 'theme', 'free_lead'];
+    private const OPCOES = ['fotos_extra', 'narracao_propria', 'musica', 'musica_ficheiro', 'theme', 'free_lead',
+        'listing_manual', 'listing_video', 'videos_carregados', 'mix_photos', 'agent_photo', 'licence'];
 
     public function __construct(private ListingImport $import, private LinkDeAcesso $links) {}
 

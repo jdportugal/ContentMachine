@@ -1,4 +1,5 @@
 @php
+    $semLink = $modo === 'ficheiros';
     $passo = fn (int $n, string $titulo, string $sub) => '<div class="flex items-start gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan/15 border border-cyan/50 text-cyan text-sm font-semibold flex items-center justify-center">'.$n.'</span><div><h2 class="font-display text-[26px] leading-tight text-ivory">'.e($titulo).'</h2><p class="mt-1 text-sm text-[#AEB5C1]">'.e($sub).'</p></div></div>';
     $opcao = fn (bool $on) => 'flex items-center gap-3 min-h-[56px] rounded-[14px] border px-4 py-3 cursor-pointer '.($on ? 'border-cyan bg-cyan/10' : 'border-ivory/15');
 @endphp
@@ -8,9 +9,20 @@
         <span class="text-[11px] tracking-[.24em] text-cyan">NOVO VÍDEO</span>
     </nav>
     <h1 class="mt-3 font-display text-[clamp(30px,7vw,44px)] leading-[1.06] text-ivory">Fazer um vídeo</h1>
-    <p class="mt-2 text-sm text-[#C9CED6]">Só o link é obrigatório. O resto é para o vídeo ficar como quer.</p>
+    <p class="mt-2 text-sm text-[#C9CED6]">{{ $semLink ? 'Sem link: junte as fotos e os vídeos do imóvel, a descrição e os seus dados.' : 'Só o link é obrigatório. O resto é para o vídeo ficar como quer.' }}</p>
+
+    {{-- Link or own files --}}
+    <div class="mt-6 grid grid-cols-2 gap-1 p-1 rounded-full border border-ivory/15 bg-navy" role="tablist">
+        <button type="button" role="tab" aria-selected="{{ $semLink ? 'false' : 'true' }}" wire:click="mudarModo('link')"
+                class="min-h-[48px] rounded-full px-3 text-[14px] font-medium {{ $semLink ? 'text-[#C9CED6]' : 'bg-cyan text-navy' }}">Tenho o link</button>
+        <button type="button" role="tab" aria-selected="{{ $semLink ? 'true' : 'false' }}" wire:click="mudarModo('ficheiros')"
+                class="min-h-[48px] rounded-full px-3 text-[14px] font-medium {{ $semLink ? 'bg-cyan text-navy' : 'text-[#C9CED6]' }}">Fotos e vídeos</button>
+    </div>
 
     <form wire:submit="criar" class="mt-8 flex flex-col gap-12" novalidate>
+        @if ($semLink)
+            @include('livewire.partials.novo-video-sem-link')
+        @else
         {{-- 1 · Link --}}
         <section class="flex flex-col gap-4">
             {!! $passo(1, 'O anúncio', 'RE/MAX, iad Portugal, eXp Portugal, KW Portugal, Century 21, Predimed, Bússola Haus ou My Best Houses. Lemos as fotos, o preço e a descrição.') !!}
@@ -48,13 +60,15 @@
             @endif
         </section>
 
-        {{-- 3 · Voiceover --}}
+        @endif
+
+        {{-- Voiceover --}}
         <section class="flex flex-col gap-4">
-            {!! $passo(3, 'Narração', 'O texto que a voz lê.') !!}
+            {!! $passo($semLink ? 4 : 3, 'Narração', 'O texto que a voz lê.') !!}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <label class="{{ $opcao($narrador === 'nos') }}">
                     <input type="radio" wire:model.live="narrador" value="nos" class="w-5 h-5 accent-cyan">
-                    <span class="flex flex-col"><span class="text-[15px] text-ivory">Escrevemos nós</span><span class="text-xs text-[#AEB5C1]">A partir do anúncio</span></span>
+                    <span class="flex flex-col"><span class="text-[15px] text-ivory">Escrevemos nós</span><span class="text-xs text-[#AEB5C1]">{{ $semLink ? 'A partir da sua descrição' : 'A partir do anúncio' }}</span></span>
                 </label>
                 <label class="{{ $opcao($narrador === 'eu') }}">
                     <input type="radio" wire:model.live="narrador" value="eu" class="w-5 h-5 accent-cyan">
@@ -71,7 +85,7 @@
 
         {{-- 4 · Music --}}
         <section class="flex flex-col gap-4">
-            {!! $passo(4, 'Música', 'Toque em ▶ para ouvir antes de escolher.') !!}
+            {!! $passo($semLink ? 5 : 4, 'Música', 'Toque em ▶ para ouvir antes de escolher.') !!}
             <div class="flex flex-col gap-2">
                 <label class="{{ $opcao($musica === 'aleatoria') }}">
                     <input type="radio" wire:model.live="musica" value="aleatoria" class="w-5 h-5 accent-cyan">
@@ -117,7 +131,7 @@
     <div class="fixed inset-x-0 bottom-0 z-20 border-t border-ivory/10 bg-navy/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
         <div class="max-w-[760px] mx-auto flex flex-col gap-2">
             @if ($creditos > 0)
-                <button type="button" wire:click="criar" wire:loading.attr="disabled" wire:target="criar,novas,ficheiroMusica"
+                <button type="button" wire:click="criar" wire:loading.attr="disabled" wire:target="criar,novas,ficheiroMusica,fotoConsultor"
                         class="w-full min-h-[56px] rounded-full bg-coral text-navy font-semibold text-[16px] disabled:opacity-50">
                     <span wire:loading.remove wire:target="criar">Criar vídeo</span>
                     <span wire:loading wire:target="criar">A criar…</span>

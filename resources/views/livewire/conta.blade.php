@@ -30,6 +30,7 @@
                 @error('anuncio') <p class="text-sm text-coral">{{ $message }}</p> @enderror
                 <p class="text-xs text-[#AEB5C1]">Sem marca d’água. Fica pronto em poucos minutos, aqui nesta página.</p>
                 <a href="{{ route('conta.novo') }}" class="inline-flex items-center gap-2 min-h-11 self-start text-sm font-medium text-cyan underline underline-offset-2">Juntar fotos, escrever a narração ou escolher a música →</a>
+                <a href="{{ route('conta.novo', ['modo' => 'ficheiros']) }}" class="inline-flex items-center gap-2 min-h-11 self-start text-sm font-medium text-cyan underline underline-offset-2">Não tem link? Carregue as fotos e os vídeos →</a>
             </form>
         </section>
     @endif

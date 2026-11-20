@@ -159,4 +159,115 @@ class NovoVideoTest extends TestCase
         $this->assertSame('manha-calma.mp3', $clip->meta['musica']);
         $this->assertStringContainsString('adicional-1.png', $clip->meta['instructions']);
     }
+
+    /** A video already made by this customer, showing their agent card and portrait. */
+    private function videoAnterior(User $user, \Illuminate\Contracts\Filesystem\Filesystem $disco): void
+    {
+        $disco->put('clips/uploads/retrato.png', $this->png(0x123456));
+        $clip = app(ClipStore::class)->create(['type' => 'animation', 'status' => 'done', 'title' => 'T2',
+            'images' => [['id' => 'img_ret', 'path' => 'clips/uploads/retrato.png', 'name' => 'Luis.png', 'description' => 'Retrato do consultor Luis Fraga, da RE/MAX Gold.']],
+            'meta' => ['listing' => ['url' => self::ANUNCIO, 'agent' => 'Luis Fraga', 'phone' => '+351912000111', 'email' => 'lf@remax.pt', 'licence' => '4719', 'agency' => 'RE/MAX Gold']]]);
+        DB::table('leads')->insert(['anuncio' => self::ANUNCIO, 'user_id' => $user->id, 'clip_id' => $clip->id, 'pago_em' => now(),
+            'projeto' => app(\App\Services\Projects\ProjectContext::class)->current()->slug, 'created_at' => now(), 'updated_at' => now()]);
+    }
+
+    public function test_without_a_link_the_page_asks_for_files_description_and_the_agent_prefilled(): void
+    {
+        $disco = Storage::fake(config('contentmachine.clips.disk'));
+        $user = $this->cliente(2);
+        $this->videoAnterior($user, $disco);
+
+        $this->actingAs($user)->get('/conta')->assertSee('/conta/novo?modo=ficheiros', false);
+        $this->get('/conta/novo?modo=ficheiros')->assertOk()
+            ->assertSee('Fotos e vídeos')->assertSee('Arraste as fotos e os vídeos para aqui')
+            ->assertSee('Descrição do imóvel')->assertSee('O consultor')
+            ->assertSee('Preenchido com os seus dados do último vídeo');
+
+        Livewire::actingAs($user)->test(NovoVideoPagina::class)
+            ->call('mudarModo', 'ficheiros')
+            ->assertSet('nome', 'Luis Fraga')->assertSet('telefone', '+351912000111')->assertSet('ami', '4719')->assertSet('agencia', 'RE/MAX Gold')
+            ->assertSet('fotoAtualCaminho', 'clips/uploads/retrato.png');
+    }
+
+    public function test_creating_without_a_link_sends_the_typed_listing_and_keeps_the_agent(): void
+    {
+        Queue::fake();
+        $disco = Storage::fake(config('contentmachine.clips.disk'));
+        $user = $this->cliente();
+        $this->videoAnterior($user, $disco);
+        $descricao = "Moradia T3 em Lajeosa do Dão\nCom 180 m² e jardim de 600 m². Sala com lareira, cozinha equipada, três quartos, garagem para dois carros.";
+
+        $c = Livewire::actingAs($user)->test(NovoVideoPagina::class)->call('mudarModo', 'ficheiros')
+            ->call('criar')->assertHasErrors('ficheiros')
+            ->set('novas', [UploadedFile::fake()->image('fachada.jpg'), UploadedFile::fake()->image('sala.jpg')])
+            ->assertCount('fotos', 2)
+            ->set('descricao', 'Curta.')->set('preco', '350 000')->set('nome', '')
+            ->call('criar')->assertHasErrors(['descricao', 'nome'])
+            ->set('descricao', $descricao)->set('nome', 'Luis Fraga')->set('ami', '4719')
+            ->call('criar')->assertHasNoErrors()->assertRedirect('/conta');
+
+        $lead = DB::table('leads')->where('id', '>', 1)->sole();
+        $this->assertStringStartsWith('https://imocena.com/carregado/', $lead->anuncio);
+        $this->assertNull($lead->consultor);
+        $meta = app(ClipStore::class)->find($lead->clip_id)->meta;
+        $this->assertSame($descricao, $meta['listing_manual']['description']);
+        $this->assertSame(350000, $meta['listing_manual']['price']);
+        $this->assertCount(2, $meta['listing_manual']['photos']);
+        $this->assertSame(['name' => 'Luis Fraga', 'phone' => '+351912000111', 'email' => 'lf@remax.pt'], $meta['listing_manual']['agent']);
+        $this->assertSame('RE/MAX Gold', $meta['listing_manual']['agency']);
+        $this->assertSame('4719', $meta['licence']);
+        $this->assertArrayNotHasKey('fotos_extra', $meta);
+        $this->assertArrayNotHasKey('listing_video', $meta);
+        $disco->assertExists($meta['agent_photo']);
+        $this->assertNotSame('clips/uploads/retrato.png', $meta['agent_photo']);   // a copy
+        $this->assertSame(0, $user->fresh()->creditos());
+
+        // Kept on the account: the next page starts from it, photo included.
+        $perfil = $user->fresh()->agente;
+        $this->assertSame('Luis Fraga', $perfil['nome']);
+        $disco->assertExists($perfil['foto']);
+        $this->actingAs($user->fresh())->get('/conta/foto-consultor')->assertOk();
+    }
+
+    public function test_the_agency_picks_the_theme(): void
+    {
+        $this->assertSame('remax', \App\Services\Contas\NovoVideo::portalDaAgencia('RE/MAX Gold'));
+        $this->assertSame('remax', \App\Services\Contas\NovoVideo::portalDaAgencia('Remax Vantagem'));
+        $this->assertSame('century21', \App\Services\Contas\NovoVideo::portalDaAgencia('Century 21 Lisboa'));
+        $this->assertSame('kw', \App\Services\Contas\NovoVideo::portalDaAgencia('KW Prime'));
+        $this->assertSame('era', \App\Services\Contas\NovoVideo::portalDaAgencia('ERA Cascais'));
+        $this->assertNull(\App\Services\Contas\NovoVideo::portalDaAgencia('Imobiliária Primera'));
+        $this->assertNull(\App\Services\Contas\NovoVideo::portalDaAgencia('Casas do Lis'));
+    }
+
+    public function test_the_import_uses_the_typed_listing_and_the_uploaded_photos(): void
+    {
+        Queue::fake();
+        $disco = Storage::fake(config('contentmachine.clips.disk'));
+        $disco->put('clips/uploads/f1.png', $this->png(0xFF0000));
+        $disco->put('clips/uploads/f2.png', $this->png(0x0000FF));
+        $disco->put('clips/uploads/eu.png', $this->png(0x00FFFF));
+        $clip = app(ClipStore::class)->create(['type' => 'animation', 'status' => 'importing', 'title' => 'x',
+            'meta' => ['listing' => ['url' => 'https://imocena.com/carregado/abc'], 'licence' => '4719', 'agent_photo' => 'clips/uploads/eu.png',
+                'listing_manual' => ['description' => "Moradia T3 em Lajeosa\nCom jardim.", 'price' => 350000, 'photos' => ['clips/uploads/f1.png', 'clips/uploads/f2.png'],
+                    'agent' => ['name' => 'Luis Fraga', 'phone' => '+351912000111', 'email' => 'lf@remax.pt'], 'agency' => 'RE/MAX Gold', 'ami' => '4719']]]);
+
+        $this->mock(ListingScraper::class)->shouldNotReceive('scrape');
+        $this->mock(ListingScriptWriter::class)->shouldReceive('write')->withArgs(fn ($l) => $l['title'] === 'Moradia T3 em Lajeosa' && $l['price'] === 350000
+            && $l['agency'] === 'RE/MAX Gold' && $l['agent']['name'] === 'Luis Fraga')->andReturn([
+                'title' => 'T3', 'flags' => [], 'agent_gender' => 'm', 'voiceover' => 'Texto.', 'hook' => '', 'scenes' => [], 'message' => '',
+            ]);
+        $this->mock(ElevenLabsVoiceoverService::class)->shouldReceive('synthesizeWith')->once();
+        $this->mock(AgencyLogoFinder::class)->shouldReceive('find')->andReturn(null);
+        config(['contentmachine.real_estate.voices.m.takes' => 1]);
+
+        app()->call([new ImportListingJob($clip->id, 'https://imocena.com/carregado/abc'), 'handle']);
+
+        $clip = app(ClipStore::class)->find($clip->id);
+        $nomes = collect($clip->images)->pluck('name')->all();
+        $this->assertSame(['main.png', 'foto-2.png', 'Luis Fraga.png'], array_slice($nomes, 0, 3));
+        $this->assertSame('Luis Fraga', $clip->meta['listing']['agent']);
+        $this->assertSame('4719', $clip->meta['listing']['licence']);
+        $this->assertSame('RE/MAX Gold', $clip->meta['listing']['agency']);
+    }
 }

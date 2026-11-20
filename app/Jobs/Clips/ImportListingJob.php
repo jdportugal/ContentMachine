@@ -52,7 +52,9 @@ class ImportListingJob implements ShouldQueue
         $p = $store->findOrFail($this->clipId);
 
         try {
-            $listing = $scraper->scrape($this->url);
+            // A listing the customer typed and uploaded themselves (no link): nothing to scrape.
+            $manual = is_array($p->meta['listing_manual'] ?? null) ? $p->meta['listing_manual'] : null;
+            $listing = $manual ? self::listingManual($manual) : $scraper->scrape($this->url);
             // The project's agent (one agent per project) stands in for the listing's.
             $resources = app(ProjectResources::class);
             $listing['agent'] = array_merge($listing['agent'], array_filter($resources->agent()));
@@ -94,11 +96,27 @@ class ImportListingJob implements ShouldQueue
             // A property walkthrough brings its own footage: no listing photos.
             // A listing video, when given, replaces the photos — the reel is its footage, cut per room —
             // unless the photos were asked to be mixed in.
-            $video = $property ? null : ($p->meta['listing_video'] ?? null);
-            $images = $property || ($video && empty($p->meta['mix_photos'])) ? [] : $this->photos($listing['photos']);
+            // The customer's own upload can bring several videos: each is cut per room the same way.
+            $videos = $property ? [] : array_values(array_unique(array_filter(
+                array_merge([$p->meta['listing_video'] ?? null], (array) ($p->meta['videos_carregados'] ?? [])),
+                fn ($v) => is_string($v) && $v !== '',
+            )));
+            $video = $videos[0] ?? null;
+            $images = $property || ($video && empty($p->meta['mix_photos'])) ? []
+                : ($manual ? $this->fotosLocais((array) ($manual['photos'] ?? [])) : $this->photos($listing['photos']));
             $opening = null;
             if ($video) {
-                $rooms = $this->roomClips($video, $listing['title'], $script['voiceover']);
+                $rooms = [];
+                foreach ($videos as $n => $v) {
+                    try {
+                        $rooms = array_merge($rooms, $this->roomClips($v, $listing['title'], $script['voiceover']));
+                    } catch (\RuntimeException $e) {
+                        // One unusable video among several (a logo, a black clip) is skipped; all of them failing is an error.
+                        if (count($videos) === 1 || ($n === count($videos) - 1 && $rooms === [] && $images === [])) {
+                            throw $e;
+                        }
+                    }
+                }
                 $images = array_merge($images, $rooms);
                 // A beat-synced opening: the best clips, music only, before the voice (RenderJob::prependOpening).
                 if (! empty($p->meta['beat_opening'])) {
@@ -272,6 +290,55 @@ class ImportListingJob implements ShouldQueue
         }
 
         return $images;
+    }
+
+    /**
+     * The photos the customer uploaded (paths on the clips disk), in their order; the first is "main".
+     *
+     * @param  list<string>  $paths
+     * @return list<array<string,mixed>>
+     */
+    private function fotosLocais(array $paths): array
+    {
+        $images = [];
+        foreach (array_values($paths) as $i => $path) {
+            if (is_string($path) && $this->disk()->exists($path)
+                && ($entry = $this->store($this->disk()->get($path), $i === 0 ? 'main' : 'foto-'.($i + 1)))) {
+                $images[] = $entry;
+            }
+        }
+
+        return $images;
+    }
+
+    /**
+     * The listing typed on the "Novo vídeo" page, in the scrapers' shape: the title is the
+     * description's first line, the price (if given) its only figure; the agent, agency and
+     * AMI as typed. The photos stay as paths (fotosLocais reads them).
+     *
+     * @param  array<string,mixed>  $m
+     * @return array<string,mixed>
+     */
+    public static function listingManual(array $m): array
+    {
+        $descricao = trim((string) ($m['description'] ?? ''));
+        $primeira = trim((string) strtok($descricao, "\n"));
+        $preco = isset($m['price']) && (int) $m['price'] > 0 ? (int) $m['price'] : null;
+        $agente = (array) ($m['agent'] ?? []);
+
+        return [
+            'url' => '',
+            'title' => Str::limit($primeira !== '' ? $primeira : 'Imóvel', 90, '…'),
+            'description' => $descricao,
+            'price' => $preco,
+            'details' => array_filter(['Preço' => $preco !== null ? number_format($preco, 0, ',', ' ').' €' : null]),
+            'photos' => [],
+            'videos' => [],
+            'agent' => ['name' => trim((string) ($agente['name'] ?? '')), 'phone' => trim((string) ($agente['phone'] ?? '')),
+                'email' => trim((string) ($agente['email'] ?? '')), 'photo' => null],
+            'agency' => trim((string) ($m['agency'] ?? '')),
+            'ami' => trim((string) ($m['ami'] ?? '')),
+        ];
     }
 
     /** @return array<string,mixed>|null */

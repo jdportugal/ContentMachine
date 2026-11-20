@@ -239,6 +239,15 @@ Route::get('/conta/videos/{lead}/imagens/{imagem}', function (int $lead, string 
     return response()->file($disco->path($img['path']), ['Cache-Control' => 'private, max-age=86400']);
 })->middleware('auth')->name('conta.imagem');
 
+// The agent's photo kept with the account (PerfilDoConsultor), shown on the "Novo vídeo" page.
+Route::get('/conta/foto-consultor', function () {
+    $caminho = (string) ((Auth::user()->agente ?? [])['foto'] ?? '');
+    $disco = Storage::disk(config('contentmachine.clips.disk'));
+    abort_unless($caminho !== '' && $disco->exists($caminho), 404);
+
+    return response()->file($disco->path($caminho), ['Cache-Control' => 'private, max-age=86400']);
+})->middleware('auth')->name('conta.foto-consultor');
+
 // The sample of a picture effect in a theme (the editor's "how it looks"); 404 until rendered.
 Route::get('/conta/amostras/{tema}/{efeito}', function (string $tema, string $efeito) {
     abort_unless(preg_match('/^[a-z0-9-]+$/', $tema.$efeito), 404);
