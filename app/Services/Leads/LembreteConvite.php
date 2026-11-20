@@ -78,6 +78,7 @@ class LembreteConvite
             'video' => URL::signedRoute('lead.video', ['lead' => $lead->id]),
             'whatsapp' => 'https://wa.me/?text='.rawurlencode($mensagem),
             'link' => $this->convites->link($lead, 'email-lembrete'),
+            'linkCurto' => preg_replace('#^https?://#', '', rtrim((string) config('app.url'), '/')).'/video-gratis?convite='.$this->convites->codigo($lead),
             'oferta' => AvisoPronto::stripe('primeiro', $lead),
             'cancelar' => $cancelar,
         ])->render();
