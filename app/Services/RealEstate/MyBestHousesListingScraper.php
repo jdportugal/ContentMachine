@@ -99,6 +99,10 @@ class MyBestHousesListingScraper
             $nome = self::texto($x->query('following-sibling::div[1]/p[1]', $img)->item(0));
             $fotoAgente = self::absoluto($img->getAttribute('src'), $url);
         }
+        // The brochure's picture can be a banner of both founders; the page's own contact card has the agent's headshot.
+        if ($nome !== '' && ($retrato = $x->query('//h3[normalize-space()="'.str_replace('"', '', $nome).'"]/preceding-sibling::div[1]//img')->item(0)) instanceof DOMElement) {
+            $fotoAgente = self::absoluto($retrato->getAttribute('src'), $url);
+        }
         foreach ($x->query('.//p', $folha) as $p) {
             $t = preg_replace('/[^\d+]/', '', self::texto($p));
             if (preg_match('/^(\+351)?[29]\d{8}$/', $t)) {

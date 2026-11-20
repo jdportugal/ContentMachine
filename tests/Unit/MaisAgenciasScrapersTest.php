@@ -58,7 +58,7 @@ class MaisAgenciasScrapersTest extends TestCase
     {
         $f = 'https://static.portadafrente.com/PF31803/l';
         $html = <<<HTML
-        <html><body><main><div class="inline-flex items-center rounded-full">Venda</div><h1>Apartamento T5 em Miraflores, Oeiras</h1>
+        <html><body><main><div class="inline-flex items-center rounded-full">Venda</div><h1>Apartamento T5 em Miraflores, Oeiras</h1><div class="text-center"><div class="relative w-32 h-32"><img src="/images/claudia-ribeiro.jpeg"></div><h3>Claudia David Ribeiro</h3><p>Co-founder</p></div>
         <img src="{$f}/11_Sala_02.jpg"><img src="{$f}/13_Suite_05.jpg"></main>
         <div id="print-root"><div class="print-brochure bg-white"><div class="flex"><img src="/assets/logo.png" class="h-12 invert"><div class="text-right text-sm"><p class="font-semibold">My Best Houses</p><p>+351 938 731 925</p></div></div>
         <div class="mb-6"><img src="{$f}/11_Sala_02.jpg" class="w-full"></div>
@@ -77,7 +77,7 @@ class MaisAgenciasScrapersTest extends TestCase
         $this->assertSame(1450000, $l['price']);
         $this->assertSame(["{$f}/11_Sala_02.jpg", "{$f}/13_Suite_05.jpg"], $l['photos']);
         $this->assertSame("O Vista Mirear situa-se em Miraflores.\n\n- Sala/cozinha com 53m2\n\nComodidades: piscina, elevador.", $l['description']);
-        $this->assertSame(['name' => 'Claudia David Ribeiro', 'phone' => '+351938731925', 'photo' => 'https://mybesthouses.com/images/claudia-ribeiro-founder.png'], $l['agent']);
+        $this->assertSame(['name' => 'Claudia David Ribeiro', 'phone' => '+351938731925', 'photo' => 'https://mybesthouses.com/images/claudia-ribeiro.jpeg'], $l['agent']);
         $this->assertSame('My Best Houses', $l['agency']);
         $d = $l['details'];
         $this->assertSame(['1 450 000 €', 'Venda', 'Apartamento T5', 'Miraflores', 189, 5, 2], [$d['Preço'], $d['Negócio'], $d['Tipo'], $d['Localização'], $d['Área Útil m²'], $d['Quartos'], $d['Casas de Banho']]);
