@@ -52,7 +52,12 @@ class Landing extends Component
         'century21' => ['nome' => 'Century 21', 'da' => 'da Century 21', 'site' => 'century21.pt', 'lemos' => true],
         'predimed' => ['nome' => 'Predimed', 'da' => 'da Predimed', 'site' => 'predimed.pt', 'lemos' => true],
         'zome' => ['nome' => 'Zome', 'da' => 'da Zome', 'site' => 'zome.pt', 'lemos' => false],
-        'outra' => ['nome' => 'Outra agência', 'da' => 'da sua agência', 'site' => '', 'lemos' => false],
+        // "Mais agências": a second screen, behind a tile on the first.
+        'bussolahaus' => ['nome' => 'Bússola Haus', 'da' => 'da Bússola Haus', 'site' => 'bussolatchaus.com', 'lemos' => true, 'mais' => true],
+        'homewize' => ['nome' => 'Homewize', 'da' => 'da Homewize', 'site' => 'homewize.pt', 'lemos' => false, 'mais' => true],
+        'mybesthouses' => ['nome' => 'My Best Houses', 'da' => 'da My Best Houses', 'site' => 'mybesthouses.com', 'lemos' => true, 'mais' => true],
+        'lisrenda' => ['nome' => 'Lisrenda', 'da' => 'da Lisrenda', 'site' => 'lisrenda.pt', 'lemos' => false, 'mais' => true],
+        'outra' => ['nome' => 'Outra agência', 'da' => 'da sua agência', 'site' => '', 'lemos' => false, 'mais' => true],
     ];
 
     /** The visitor's agency (a key of AGENCIAS), asked before anything else; '' until they pick. */
@@ -102,6 +107,10 @@ class Landing extends Component
 
     public function mount(Convites $convites): void
     {
+        // "Fazer vídeo grátis" on the home page (?escolher=1): always the question, whatever was picked or asked before.
+        if (request()->query('escolher')) {
+            session()->forget(['agencia', 'lead_id']);
+        }
         $this->leadId = session('lead_id');
         // Arrived by a colleague's invite link: remember whose, for the video they ask for.
         if (($codigo = request()->query('convite')) && ($quem = $convites->convidante((string) $codigo))) {

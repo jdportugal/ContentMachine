@@ -2,7 +2,7 @@
     // The home page: what Imocena is, an example, how it works, prices in short, and the blog.
     // Every "pedir" button goes to the free-video form (route 'video'), which is where the ads land.
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
-    $form = route('video');
+    $form = route('video', ['escolher' => 1]);
     $recentes = array_slice($guias, 0, 6);
     $aprender = $temas['Fotografia e apresentação'] ?? ($temas['Vídeo de imóveis'] ?? []);
     // A card shows the guide's opening photo when it has one, else its text card.
@@ -187,7 +187,7 @@
                         </div>
                     @endforeach
                 </div>
-                <p class="mt-6 text-sm text-[#AEB5C1]">IVA incluído, sem subscrição, fatura com NIF. <a href="{{ $form }}#precos" class="text-cyan underline underline-offset-2">Ver os planos em pormenor</a>.</p>
+                <p class="mt-6 text-sm text-[#AEB5C1]">IVA incluído, sem subscrição, fatura com NIF. <a href="{{ route('video') }}#precos" class="text-cyan underline underline-offset-2">Ver os planos em pormenor</a>.</p>
             </div>
         </section>
 

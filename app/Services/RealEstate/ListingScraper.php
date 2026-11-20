@@ -20,16 +20,18 @@ class ListingScraper
         'kw' => KwListingScraper::class,
         'century21' => Century21ListingScraper::class,
         'predimed' => PredimedListingScraper::class,
+        'bussolahaus' => BussolaHausListingScraper::class,
+        'mybesthouses' => MyBestHousesListingScraper::class,
         'demo' => DemoListingScraper::class,
     ];
 
     /** The portals as a customer reads them, in the order they are listed on the site. */
-    public const NOMES = ['RE/MAX', 'iad Portugal', 'eXp Portugal', 'KW Portugal', 'Century 21', 'Predimed'];
+    public const NOMES = ['RE/MAX', 'iad Portugal', 'eXp Portugal', 'KW Portugal', 'Century 21', 'Predimed', 'Bússola Haus', 'My Best Houses'];
 
-    public const UNSUPPORTED = 'Only RE/MAX, iad, eXp, KW, Century 21 and Predimed listings are supported.';
+    public const UNSUPPORTED = 'Only RE/MAX, iad, eXp, KW, Century 21, Predimed, Bússola Haus and My Best Houses listings are supported.';
 
     /** What a customer is told when the link is from another site. */
-    public const MENSAGEM = 'Por agora lemos anúncios da RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal, da Century 21 e da Predimed. Cole o link de um desses sites.';
+    public const MENSAGEM = 'Por agora lemos anúncios da RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal, da Century 21, da Predimed, da Bússola Haus e da My Best Houses. Cole o link de um desses sites.';
 
     /** What an agent is told when they paste their own page or a search instead of one property. */
     public const NAO_E_IMOVEL = 'Este link é de uma página de consultor ou de uma pesquisa, não de um imóvel. Abra o imóvel que quer em vídeo e copie o link dessa página.';
@@ -53,6 +55,13 @@ class ListingScraper
         // Predimed: a property is /Imovel/<code>; everything else (searches, /equipa, an agent's /nome.apelido) is not.
         if ($portal === 'predimed') {
             return PredimedListingScraper::codigo($url) === null;
+        }
+        // Bússola Haus (/property/<slug>/) and My Best Houses (/property/<id>): anything else is a page or a search.
+        if ($portal === 'bussolahaus') {
+            return ! BussolaHausListingScraper::eImovel($url);
+        }
+        if ($portal === 'mybesthouses') {
+            return ! MyBestHousesListingScraper::eImovel($url);
         }
         // Agent and agency pages, on any portal.
         if (preg_match('#/(agente|agentes|agent|agents|consultor|consultora|consultores|real-estate-agent|agente-imobiliario|officer|agencia|agencias|agency)(/|$)#', $path)) {

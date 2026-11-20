@@ -43,7 +43,7 @@
         ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa desse vídeo custa 10 € (oferta de lançamento). Os seguintes: 20 €, ou a partir de 8,75 € com um pack.'],
         ['Quanto tempo demora?', 'Poucos minutos. Mantenha a página aberta: o vídeo aparece no mesmo sítio onde colou o link.'],
         ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
-        ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal, eXp Portugal (incluindo os sites dos consultores eXp), KW Portugal, Century 21 e Predimed. Basta copiar o link da barra de endereço do anúncio.'],
+        ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal, eXp Portugal (incluindo os sites dos consultores eXp), KW Portugal, Century 21, Predimed, Bússola Haus e My Best Houses. Basta copiar o link da barra de endereço do anúncio.'],
         ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
         ['Posso alterar o texto da narração?', 'Na sua conta, sim: pode deixar uma nota (preço novo, algo a destacar) e o texto muda antes de ser gravado.'],
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
@@ -66,8 +66,7 @@
     @if (! $passo2)
     {{-- Passo 1: só a pergunta. Uma agência por mosaico, com o logótipo quando o temos
          (public/images/agencias/<chave>.svg ou .png), senão o nome. Nada mais no ecrã. --}}
-    <main class="min-h-dvh flex flex-col" x-data
-          @keydown.window="if (! $event.metaKey && ! $event.ctrlKey && ! $event.altKey && ! ['INPUT','TEXTAREA'].includes($event.target.tagName)) { const i = 'abcdefgh'.indexOf($event.key.toLowerCase()); const b = i >= 0 ? $refs.mosaicos.querySelectorAll('button')[i] : null; if (b) b.click(); }">
+    <main class="min-h-dvh flex flex-col" x-data="{ mais: false }">
         <header class="px-6 py-5 flex items-center justify-between">
             <span class="flex items-baseline gap-2.5 text-ivory">
                 <span class="font-display text-[26px] font-medium">Imocena</span>
@@ -82,15 +81,22 @@
             <div id="pedido" class="w-full max-w-[880px] mx-auto px-6 pb-16">
                 <h1 class="font-display text-[clamp(34px,5.4vw,56px)] leading-[1.05] font-normal text-ivory">Em que agência trabalha?</h1>
                 <p class="mt-3 text-base md:text-lg font-light text-[#C9CED6]">Escolha a sua para ver o vídeo do seu imóvel com a imagem dela.</p>
-                <div x-ref="mosaicos" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-                    @foreach (\App\Livewire\Landing::AGENCIAS as $chave => $a)
+                @php
+                    $mosaico = 'group relative h-[104px] md:h-[124px] px-4 rounded-[16px] bg-ivory border-2 border-transparent flex items-center justify-center cursor-pointer transition hover:border-cyan hover:-translate-y-0.5 focus:outline-none focus-visible:border-cyan focus-visible:ring-4 focus-visible:ring-cyan/30 disabled:opacity-60';
+                    $paginas = collect(\App\Livewire\Landing::AGENCIAS)->groupBy(fn ($a) => empty($a['mais']) ? 'principais' : 'mais', preserveKeys: true);
+                @endphp
+                @foreach (['principais', 'mais'] as $pagina)
+                <div @if ($pagina === 'mais') x-show="mais" x-cloak @else x-show="! mais" @endif class="mt-8">
+                    @if ($pagina === 'mais')
+                        <button type="button" @click="mais = false" class="mb-4 inline-flex items-center gap-2 min-h-11 text-sm text-cyan hover:text-ivory cursor-pointer">← Voltar</button>
+                    @endif
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    @foreach ($paginas[$pagina] as $chave => $a)
                         @php
                             $logo = collect(['svg', 'png', 'webp'])->map(fn ($x) => "images/agencias/{$chave}.{$x}")->first(fn ($p) => is_file(public_path($p)));
-                            $rotulo = $chave === 'outra' ? 'Outra agência' : $a['nome'];
+                            $rotulo = $a['nome'];
                         @endphp
-                        <button type="button" wire:click="escolher('{{ $chave }}')" wire:loading.attr="disabled" wire:target="escolher" aria-label="{{ $rotulo }}"
-                                class="group relative h-[104px] md:h-[124px] px-4 rounded-[16px] bg-ivory border-2 border-transparent flex items-center justify-center cursor-pointer transition hover:border-cyan hover:-translate-y-0.5 focus:outline-none focus-visible:border-cyan focus-visible:ring-4 focus-visible:ring-cyan/30 disabled:opacity-60">
-                            <span aria-hidden="true" class="hidden md:flex absolute left-2.5 top-2.5 w-6 h-6 items-center justify-center rounded-md border border-navy/25 text-[11px] font-semibold text-navy/70 group-hover:bg-navy group-hover:text-ivory group-hover:border-navy">{{ chr(65 + $loop->index) }}</span>
+                        <button type="button" wire:click="escolher('{{ $chave }}')" wire:loading.attr="disabled" wire:target="escolher" aria-label="{{ $rotulo }}" class="{{ $mosaico }}">
                             @if ($logo)
                                 <img src="{{ asset($logo) }}" alt="{{ $rotulo }}" class="max-h-[52px] md:max-h-[60px] max-w-[78%] object-contain">
                             @else
@@ -98,7 +104,14 @@
                             @endif
                         </button>
                     @endforeach
+                    @if ($pagina === 'principais')
+                        <button type="button" @click="mais = true" aria-label="Mais agências" class="{{ $mosaico }}">
+                            <span class="text-center text-[19px] md:text-[21px] leading-tight font-semibold tracking-tight text-navy">Mais agências <span aria-hidden="true">→</span></span>
+                        </button>
+                    @endif
+                    </div>
                 </div>
+                @endforeach
                 <p wire:loading wire:target="escolher" class="mt-5 text-sm text-cyan">A abrir…</p>
             </div>
         </div>
@@ -301,7 +314,7 @@
                             <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
                                 <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
                                 <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
-                                <span class="text-[#8B95A7]">{{ ! empty($ag['lemos']) ? 'Vídeo com a imagem '.$ag['da'] : 'Lê anúncios da RE/MAX, iad, eXp, KW, Century 21 e Predimed' }}</span>
+                                <span class="text-[#8B95A7]">{{ ! empty($ag['lemos']) ? 'Vídeo com a imagem '.$ag['da'] : 'Lê anúncios da RE/MAX, iad, eXp, KW, Century 21, Predimed e mais' }}</span>
                             </div>
                         </form>
                     @endif
@@ -342,7 +355,7 @@
                     <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'A sua agência' }}</span>
                 </div>
                 <h1 class="mt-5 font-display text-[clamp(34px,5.6vw,68px)] leading-[1] font-normal text-ivory">{{ $nomeAg ? 'Ainda não lemos anúncios '.$ag['da'].'.' : 'Diga-nos qual é a sua agência.' }} <em class="text-coral">{{ $nomeAg ? 'Falta pouco.' : 'Juntamo-la.' }}</em></h1>
-                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp, KW, Century 21 e Predimed, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Veja nesta página um exemplo do que vai receber.</p>
+                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp, KW, Century 21, Predimed, Bússola Haus e My Best Houses, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Veja nesta página um exemplo do que vai receber.</p>
                 <div id="pedido" class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                         @if ($enviado === 'aviso')
@@ -372,7 +385,7 @@
                         @endif
                     </div>
                 </div>
-                <button type="button" wire:click="trocar" class="mt-4 min-h-11 text-sm text-cyan underline underline-offset-2 cursor-pointer">Tem anúncios na RE/MAX, iad, eXp, KW, Century 21 ou Predimed? Escolher outra agência</button>
+                <button type="button" wire:click="trocar" class="mt-4 min-h-11 text-sm text-cyan underline underline-offset-2 cursor-pointer">Tem anúncios na RE/MAX, iad, eXp, KW, Century 21, Predimed, Bússola Haus ou My Best Houses? Escolher outra agência</button>
             @endif
             </div>
 

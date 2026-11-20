@@ -62,6 +62,23 @@ class LandingAgenciaTest extends TestCase
         $this->assertSame('predimed', DB::table('leads')->sole()->agencia);
     }
 
+    public function test_more_agencies_are_on_a_second_screen_and_the_home_page_always_asks_again(): void
+    {
+        Queue::fake();
+        Livewire::test(Landing::class)->assertSee('Mais agências')->assertSee('Bússola Haus')->assertSee('My Best Houses')->assertSee('Homewize')->assertSee('Lisrenda')
+            ->assertDontSee('abcdefgh')
+            ->call('escolher', 'bussolahaus')->assertSee('O vídeo do seu imóvel Bússola Haus')->assertSee('Criar vídeo grátis')
+            ->set('anuncio', 'https://bussolatchaus.com/property/apartamento-t2-a-venda-na-rua-dos-quarteis-58/')->call('pedir')->assertHasNoErrors();
+        $this->assertSame('bussolahaus', DB::table('leads')->sole()->agencia);
+        Livewire::test(Landing::class)->call('escolher', 'homewize')->assertSee('Ainda não lemos anúncios da Homewize.');
+
+        // The home page's "vídeo grátis" links ask again, even after an agency was picked and a video asked for.
+        $this->get('/')->assertSee('/video-gratis?escolher=1', false);
+        $this->get('/video-gratis?escolher=1')->assertOk()->assertSee('Em que agência trabalha?');
+        $this->assertNull(session('agencia'));
+        $this->assertNull(session('lead_id'));
+    }
+
     public function test_an_agency_we_do_not_read_yet_leaves_an_email_to_be_told(): void
     {
         Livewire::test(Landing::class)->call('escolher', 'era')
@@ -120,8 +137,8 @@ class LandingAgenciaTest extends TestCase
 
     public function test_the_video_is_the_agencys_own_when_one_was_rendered(): void
     {
-        // Every agency on the first screen but "outra" has a template of its own, shipped with the image.
-        foreach (array_diff(array_keys(Landing::AGENCIAS), ['outra']) as $agencia) {
+        // Every agency whose listings we read has a template of its own, shipped with the image.
+        foreach (array_keys(array_filter(Landing::AGENCIAS, fn ($a) => $a['lemos'])) as $agencia) {
             $this->assertFileExists(base_path("vault/themes/{$agencia}-premium/theme.json"));
         }
         $this->assertSame(['url' => null, 'proprio' => false], Landing::demoReel('remax', 'sem-esta-pasta'));
