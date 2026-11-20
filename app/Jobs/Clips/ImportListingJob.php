@@ -88,7 +88,13 @@ class ImportListingJob implements ShouldQueue
             // One narration, or several takes for the user to choose from by ear.
             $voice = config('contentmachine.real_estate.voices.'.$script['agent_gender']);
             $takes = [];
-            for ($i = 0; $narrate && $i < max(1, (int) ($voice['takes'] ?? 1)); $i++) {
+            // Their own voice, recorded or uploaded: it is the narration, no synthetic take.
+            $vozPropria = (string) ($p->meta['voz_propria'] ?? '');
+            $gravada = $narrate && $vozPropria !== '' && $this->disk()->exists($vozPropria);
+            if ($gravada) {
+                $takes[] = $this->vozEmMp3($vozPropria);
+            }
+            for ($i = 0; $narrate && ! $gravada && $i < max(1, (int) ($voice['takes'] ?? 1)); $i++) {
                 $takes[] = $audio = 'clips/uploads/'.Str::random(40).'.mp3';
                 $tts->synthesizeWith(ListingScriptWriter::pronunciaFalada(ListingScriptWriter::tipologiaFalada($script['voiceover'])), $this->disk()->path($audio), $voice['voice_id'], $voice['model'], $voice['stability'] ?? null);
             }
@@ -339,6 +345,20 @@ class ImportListingJob implements ShouldQueue
             'agency' => trim((string) ($m['agency'] ?? '')),
             'ami' => trim((string) ($m['ami'] ?? '')),
         ];
+    }
+
+    /**
+     * A recording from the browser (webm, m4a…) or an uploaded file, as an mp3 at an even
+     * loudness for the rest of the pipeline. If ffmpeg cannot read it, the file is used as is.
+     */
+    private function vozEmMp3(string $caminho): string
+    {
+        $destino = 'clips/uploads/'.Str::random(40).'.mp3';
+        $p = new \Symfony\Component\Process\Process(['ffmpeg', '-y', '-i', $this->disk()->path($caminho), '-vn', '-ac', '1', '-ar', '44100',
+            '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-b:a', '160k', $this->disk()->path($destino)], timeout: 300);
+        $p->run();
+
+        return $p->isSuccessful() && $this->disk()->exists($destino) && $this->disk()->size($destino) > 0 ? $destino : $caminho;
     }
 
     /** @return array<string,mixed>|null */

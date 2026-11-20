@@ -69,10 +69,14 @@ class NovoVideoPagina extends Component
     /** @var array<int,mixed> the batch being uploaded (dropped or picked), merged into $fotos */
     public array $novas = [];
 
-    /** 'nos' (we write it from the listing) or 'eu' (their own text). */
+    /** 'nos' (we write it from the listing), 'eu' (their own text, read by the voice) or 'gravo' (their own voice, recorded or uploaded). */
     public string $narrador = 'nos';
 
+    /** Their text: read by the voice ('eu'), or what they read when recording ('gravo', optional). */
     public string $narracao = '';
+
+    /** Their own voice: a recording made on the page, or an audio file. */
+    public $vozGravada = null;
 
     /** 'aleatoria', a library track's name, 'propria' or 'nenhuma'. */
     public string $musica = 'aleatoria';
@@ -139,6 +143,46 @@ class NovoVideoPagina extends Component
         $this->fotos = array_values($this->fotos);
     }
 
+    /**
+     * Our text, written now, for them to read when recording (or to edit and have the voice
+     * read): from the description typed here, or from the listing at the link.
+     */
+    public function sugerirTexto(ListingScraper $scraper, \App\Services\RealEstate\ListingScriptWriter $writer): void
+    {
+        $chave = 'sugerir-texto:'.Auth::id();
+        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($chave, 10)) {
+            $this->addError('narracao', 'Já pediu vários textos. Tente outra vez daqui a pouco.');
+
+            return;
+        }
+        \Illuminate\Support\Facades\RateLimiter::hit($chave, 3600);
+        if ($this->modo === 'ficheiros') {
+            if (mb_strlen(trim($this->descricao)) < 80) {
+                $this->addError('narracao', 'Escreva primeiro a descrição do imóvel (passo 2): o texto é feito a partir dela.');
+
+                return;
+            }
+            $listing = \App\Jobs\Clips\ImportListingJob::listingManual(['description' => $this->descricao, 'price' => (int) preg_replace('/\D/', '', $this->preco) ?: null,
+                'agent' => ['name' => $this->nome, 'phone' => $this->telefone, 'email' => $this->email], 'agency' => $this->agencia, 'ami' => $this->ami]);
+        } else {
+            $this->anuncio = ListingScraper::limpar($this->anuncio);
+            $this->validate(NovoVideo::regrasDoAnuncio(), NovoVideo::MENSAGENS_DO_ANUNCIO);
+            $listing = rescue(fn () => $scraper->scrape($this->anuncio), null, report: false);
+            if (! $listing) {
+                $this->addError('narracao', 'Não conseguimos ler o anúncio agora. Escreva o texto, ou tente outra vez.');
+
+                return;
+            }
+        }
+        $texto = trim((string) (rescue(fn () => $writer->write($listing), [], report: false)['voiceover'] ?? ''));
+        if ($texto === '') {
+            $this->addError('narracao', 'Não conseguimos escrever o texto agora. Tente outra vez.');
+
+            return;
+        }
+        $this->narracao = mb_substr($texto, 0, 1500);
+    }
+
     public function updatedFicheiroMusica(): void
     {
         $this->musica = 'propria';
@@ -158,8 +202,9 @@ class NovoVideoPagina extends Component
         $this->validate(($semLink ? $this->regrasSemLink() : NovoVideo::regrasDoAnuncio()) + [
             'fotos' => 'array|max:'.$this->maxFotos(),
             'fotos.*' => 'image|max:15360',
-            'narrador' => 'in:nos,eu',
-            'narracao' => $this->narrador === 'eu' ? 'required|string|min:40|max:1500' : 'nullable',
+            'narrador' => 'in:nos,eu,gravo',
+            'narracao' => $this->narrador === 'eu' ? 'required|string|min:40|max:1500' : 'nullable|string|max:1500',
+            'vozGravada' => $this->narrador === 'gravo' ? 'required|file|mimes:mp3,mpga,m4a,mp4,wav,aac,weba,webm,ogg,oga,opus,caf,mov,qt|max:51200' : 'nullable',
             'musica' => ['required', fn ($a, $v, $fail) => in_array($v, ['aleatoria', 'propria', 'nenhuma'], true) || in_array($v, $faixas, true) ? null : $fail('Escolha a música.')],
             'ficheiroMusica' => $this->musica === 'propria' ? 'required|file|mimes:mp3,m4a,wav,aac,mpga|max:20480' : 'nullable',
         ], NovoVideo::MENSAGENS_DO_ANUNCIO + self::MENSAGENS_SEM_LINK + [
@@ -167,6 +212,9 @@ class NovoVideoPagina extends Component
             'narracao.required' => 'Escreva o texto da narração, ou deixe-nos escrevê-lo.',
             'narracao.min' => 'A narração está demasiado curta.',
             'narracao.max' => 'A narração tem de ter até 1500 caracteres (cerca de 1 minuto).',
+            'vozGravada.required' => 'Grave a sua voz ou escolha um ficheiro de áudio.',
+            'vozGravada.mimes' => 'A gravação tem de ser um ficheiro de áudio (MP3, M4A, WAV ou WebM).',
+            'vozGravada.max' => 'A gravação tem de ter menos de 50 MB.',
             'ficheiroMusica.required' => 'Escolha o ficheiro de música.',
             'ficheiroMusica.mimes' => 'A música tem de ser MP3, M4A ou WAV.',
             'ficheiroMusica.max' => 'A música tem de ter menos de 20 MB.',
@@ -176,7 +224,8 @@ class NovoVideoPagina extends Component
         $fotos = array_map(fn ($f) => $f->store('clips/uploads', $disco), $this->fotos);
         $opcoes = [
             'fotos_extra' => $semLink ? [] : $fotos,
-            'narracao_propria' => $this->narrador === 'eu' ? $this->narracao : null,
+            'narracao_propria' => $this->narrador !== 'nos' && $this->narracao !== '' ? $this->narracao : null,
+            'voz_propria' => $this->narrador === 'gravo' ? $this->vozGravada->store('clips/uploads', $disco) : null,
             'musica' => $this->musica,
         ];
         if ($this->musica === 'propria') {

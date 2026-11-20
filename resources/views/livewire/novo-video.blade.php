@@ -64,8 +64,8 @@
 
         {{-- Voiceover --}}
         <section class="flex flex-col gap-4">
-            {!! $passo($semLink ? 4 : 3, 'Narração', 'O texto que a voz lê.') !!}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {!! $passo($semLink ? 4 : 3, 'Narração', 'Uma voz lê o texto, ou grave-o com a sua própria voz.') !!}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <label class="{{ $opcao($narrador === 'nos') }}">
                     <input type="radio" wire:model.live="narrador" value="nos" class="w-5 h-5 accent-cyan">
                     <span class="flex flex-col"><span class="text-[15px] text-ivory">Escrevemos nós</span><span class="text-xs text-[#AEB5C1]">{{ $semLink ? 'A partir da sua descrição' : 'A partir do anúncio' }}</span></span>
@@ -74,11 +74,22 @@
                     <input type="radio" wire:model.live="narrador" value="eu" class="w-5 h-5 accent-cyan">
                     <span class="flex flex-col"><span class="text-[15px] text-ivory">Escrevo eu</span><span class="text-xs text-[#AEB5C1]">A voz lê o seu texto</span></span>
                 </label>
+                <label class="{{ $opcao($narrador === 'gravo') }}">
+                    <input type="radio" wire:model.live="narrador" value="gravo" class="w-5 h-5 accent-cyan">
+                    <span class="flex flex-col"><span class="text-[15px] text-ivory">Gravo a minha voz</span><span class="text-xs text-[#AEB5C1]">Lê o texto e grava aqui</span></span>
+                </label>
             </div>
             @if ($narrador === 'eu')
+            <button type="button" wire:click="sugerirTexto" wire:loading.attr="disabled" wire:target="sugerirTexto"
+                    class="self-start inline-flex items-center gap-2 min-h-[44px] rounded-full border border-cyan/60 px-4 text-sm text-cyan disabled:opacity-60">
+                <span wire:loading.remove wire:target="sugerirTexto">✎ Escrever o texto por mim</span>
+                <span wire:loading wire:target="sugerirTexto">A escrever o texto… (uns segundos)</span>
+            </button>
                 <textarea wire:model="narracao" rows="8" maxlength="1500" placeholder="Ex.: Moradia T3 em Lajeosa, com jardim e vista para a serra…"
                           class="w-full rounded-[14px] bg-navy border border-ivory/20 p-4 text-[16px] leading-relaxed text-ivory placeholder:text-[#7C8696] focus:border-cyan focus:outline-none"></textarea>
                 <div class="flex justify-between text-xs text-[#AEB5C1]" x-data><span>Cerca de 1 minuto no máximo. Termine com o seu contacto.</span><span x-text="$wire.narracao.length + ' / 1500'"></span></div>
+            @elseif ($narrador === 'gravo')
+                @include('livewire.partials.novo-video-gravar')
             @endif
             @error('narracao') <p class="text-sm text-coral">{{ $message }}</p> @enderror
         </section>
@@ -131,7 +142,7 @@
     <div class="fixed inset-x-0 bottom-0 z-20 border-t border-ivory/10 bg-navy/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
         <div class="max-w-[760px] mx-auto flex flex-col gap-2">
             @if ($creditos > 0)
-                <button type="button" wire:click="criar" wire:loading.attr="disabled" wire:target="criar,novas,ficheiroMusica,fotoConsultor"
+                <button type="button" wire:click="criar" wire:loading.attr="disabled" wire:target="criar,novas,ficheiroMusica,fotoConsultor,vozGravada"
                         class="w-full min-h-[56px] rounded-full bg-coral text-navy font-semibold text-[16px] disabled:opacity-50">
                     <span wire:loading.remove wire:target="criar">Criar vídeo</span>
                     <span wire:loading wire:target="criar">A criar…</span>

@@ -270,4 +270,56 @@ class NovoVideoTest extends TestCase
         $this->assertSame('4719', $clip->meta['listing']['licence']);
         $this->assertSame('RE/MAX Gold', $clip->meta['listing']['agency']);
     }
+
+    public function test_their_own_recorded_voice_is_the_narration(): void
+    {
+        Queue::fake();
+        $disco = Storage::fake(config('contentmachine.clips.disk'));
+        $user = $this->cliente();
+
+        Livewire::actingAs($user)->test(NovoVideoPagina::class)
+            ->set('anuncio', self::ANUNCIO)->set('narrador', 'gravo')
+            ->assertSee('Gravo a minha voz')->assertSee('Escrever o texto por mim')
+            ->call('criar')->assertHasErrors('vozGravada')
+            ->set('vozGravada', UploadedFile::fake()->create('voz.mp3', 200, 'audio/mpeg'))
+            ->set('narracao', 'O texto que eu li.')
+            ->call('criar')->assertHasNoErrors()->assertRedirect('/conta');
+
+        $meta = app(ClipStore::class)->find(DB::table('leads')->value('clip_id'))->meta;
+        $disco->assertExists($meta['voz_propria']);
+        $this->assertSame('O texto que eu li.', $meta['narracao_propria']);
+
+        // In the import: no synthetic voice, their recording is the take.
+        $disco->put('clips/uploads/f1.png', $this->png());
+        $disco->put('clips/uploads/minha-voz.mp3', 'MP3');
+        $clip = app(ClipStore::class)->create(['type' => 'animation', 'status' => 'importing', 'title' => 'x',
+            'meta' => ['listing' => ['url' => 'https://imocena.com/carregado/v'], 'voz_propria' => 'clips/uploads/minha-voz.mp3',
+                'listing_manual' => ['description' => 'Moradia T3', 'photos' => ['clips/uploads/f1.png'], 'agent' => ['name' => 'Ana', 'phone' => '1'], 'agency' => 'RE/MAX']]]);
+        $this->mock(ListingScriptWriter::class)->shouldReceive('write')->andReturn([
+            'title' => 'T3', 'flags' => [], 'agent_gender' => 'f', 'voiceover' => 'Texto.', 'hook' => '', 'scenes' => [], 'message' => '',
+        ]);
+        $this->mock(ElevenLabsVoiceoverService::class)->shouldNotReceive('synthesizeWith');
+        $this->mock(AgencyLogoFinder::class)->shouldReceive('find')->andReturn(null);
+        config(['contentmachine.real_estate.voices.f.takes' => 3]);
+
+        app()->call([new ImportListingJob($clip->id, 'https://imocena.com/carregado/v'), 'handle']);
+
+        $clip = app(ClipStore::class)->find($clip->id);
+        $this->assertSame('transcribing', $clip->status);
+        $this->assertNotNull($clip->source_path);
+        $disco->assertExists($clip->source_path);
+    }
+
+    public function test_the_text_can_be_written_for_them_from_their_description(): void
+    {
+        $user = $this->cliente();
+        $this->mock(ListingScriptWriter::class)->shouldReceive('write')->once()
+            ->withArgs(fn ($l) => $l['title'] === 'Moradia T3 em Lajeosa do Dão' && $l['agent']['name'] === 'Luis Fraga')
+            ->andReturn(['voiceover' => 'Bom dia. Esta moradia T3 em Lajeosa do Dão…']);
+
+        Livewire::actingAs($user)->test(NovoVideoPagina::class)->call('mudarModo', 'ficheiros')->set('narrador', 'gravo')
+            ->call('sugerirTexto')->assertHasErrors('narracao')
+            ->set('descricao', "Moradia T3 em Lajeosa do Dão\n".str_repeat('Com jardim, lareira e garagem. ', 4))->set('nome', 'Luis Fraga')
+            ->call('sugerirTexto')->assertHasNoErrors()->assertSet('narracao', 'Bom dia. Esta moradia T3 em Lajeosa do Dão…');
+    }
 }
