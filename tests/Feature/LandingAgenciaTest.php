@@ -70,6 +70,7 @@ class LandingAgenciaTest extends TestCase
             ->call('escolher', 'bussolahaus')->assertSee('O vídeo do seu imóvel Bússola Haus')->assertSee('Criar vídeo grátis')
             ->set('anuncio', 'https://bussolatchaus.com/property/apartamento-t2-a-venda-na-rua-dos-quarteis-58/')->call('pedir')->assertHasNoErrors();
         $this->assertSame('bussolahaus', DB::table('leads')->sole()->agencia);
+        session()->forget('lead_id');
         Livewire::test(Landing::class)->call('escolher', 'homewize')->assertSee('Ainda não lemos anúncios da Homewize.');
 
         // The home page's "vídeo grátis" links ask again, even after an agency was picked and a video asked for.
