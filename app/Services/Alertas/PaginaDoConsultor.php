@@ -112,7 +112,10 @@ class PaginaDoConsultor
             $p = explode('-', $slug);
             $tipo = trim(ucfirst($p[1] ?? 'Imóvel').(preg_match('/^t\d/', $p[2] ?? '') ? ' '.strtoupper($p[2]) : ''));
             $local = trim((string) ($l['regionName3'] ?? '')) ?: trim((string) ($l['regionName2'] ?? ''));
-            $out[] = ['id' => $ref, 'titulo' => $tipo.($local !== '' ? ' em '.$local : ''), 'url' => $slug !== '' ? 'https://remax.pt/pt/imoveis/'.$slug.'/'.$ref : null];
+            $foto = trim((string) ($l['listingPictureUrl'] ?? ''));
+            $preco = (int) ($l['listingPrice'] ?? 0);
+            $out[] = ['id' => $ref, 'titulo' => $tipo.($local !== '' ? ' em '.$local : ''), 'url' => $slug !== '' ? 'https://remax.pt/pt/imoveis/'.$slug.'/'.$ref : null,
+                'foto' => $foto !== '' ? 'https://i.maxwork.pt/i/'.ltrim($foto, '/') : null, 'preco' => $preco > 0 ? $preco : null];
         }
 
         return $out;

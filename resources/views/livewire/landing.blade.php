@@ -276,6 +276,85 @@
                                 <label for="anuncio" class="font-display text-[26px] leading-tight text-ivory">Peça o seu vídeo grátis</label>
                                 <span class="px-3 py-1 rounded-full bg-coral/15 border border-coral/40 text-xs text-coral">Valor <s>20 €</s> · <strong class="font-semibold">hoje 0 €</strong></span>
                             </div>
+                            @if ($agencia === 'remax')
+                            {{-- RE/MAX: paste the link, or find the listing by the agent's name (RE/MAX's own agent search). --}}
+                            <div class="flex self-start p-1 rounded-full bg-navy border border-ivory/15 text-[13px]" role="tablist" aria-label="Como quer escolher o imóvel">
+                                <button type="button" role="tab" aria-selected="{{ $modo === 'link' ? 'true' : 'false' }}" wire:click="mudarModo('link')"
+                                        class="min-h-9 px-4 rounded-full cursor-pointer {{ $modo === 'link' ? 'bg-ivory text-navy font-semibold' : 'text-[#C9CED6] hover:text-ivory' }}">Colar o link</button>
+                                <button type="button" role="tab" aria-selected="{{ $modo === 'nome' ? 'true' : 'false' }}" wire:click="mudarModo('nome')"
+                                        class="min-h-9 px-4 rounded-full cursor-pointer {{ $modo === 'nome' ? 'bg-ivory text-navy font-semibold' : 'text-[#C9CED6] hover:text-ivory' }}">Procurar pelo meu nome</button>
+                            </div>
+                            @endif
+                            @if ($agencia === 'remax' && $modo === 'nome')
+                                <div class="flex flex-col gap-3">
+                                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
+                                        <label for="nomeConsultor" class="sr-only">O seu nome, como aparece na RE/MAX</label>
+                                        <input id="nomeConsultor" type="text" wire:model="nomeConsultor" wire:keydown.enter.prevent="procurarConsultor" placeholder="O seu nome, como aparece na RE/MAX" autocomplete="name" maxlength="80"
+                                               class="flex-1 min-w-0 w-full min-h-12 px-4 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
+                                        <button type="button" wire:click="procurarConsultor" wire:loading.attr="disabled" wire:target="procurarConsultor"
+                                                class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-coral text-navy text-[15px] font-semibold whitespace-nowrap cursor-pointer hover:brightness-105 disabled:opacity-60">
+                                            <span wire:loading.remove wire:target="procurarConsultor">Procurar →</span>
+                                            <span wire:loading wire:target="procurarConsultor">A procurar…</span>
+                                        </button>
+                                    </div>
+                                    @error('nomeConsultor') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
+                                    @if ($avisoProcura === 'sem-resultados')
+                                        <p class="text-[13px] text-[#C9CED6]">Não encontrámos ninguém com esse nome na RE/MAX. Experimente o primeiro e o último nome, ou cole o link do anúncio.</p>
+                                    @elseif ($avisoProcura === 'erro')
+                                        <p class="text-[13px] text-coral">Não conseguimos procurar agora. Cole o link do anúncio, por favor.</p>
+                                    @endif
+
+                                    @if ($consultores !== [] && $consultorEscolhido === '')
+                                        <p class="text-[13px] text-[#C9CED6]">É algum destes?</p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                            @foreach ($consultores as $c)
+                                                <button type="button" wire:key="c-{{ $c['id'] }}" wire:click="escolherConsultor('{{ $c['id'] }}')" wire:loading.attr="disabled" wire:target="escolherConsultor"
+                                                        class="flex items-center gap-3 p-2 rounded-[14px] bg-navy border border-ivory/15 text-left hover:border-cyan cursor-pointer disabled:opacity-60">
+                                                    @if ($c['foto'])
+                                                        <img src="{{ $c['foto'] }}" alt="" loading="lazy" class="w-11 h-11 rounded-full object-cover shrink-0 bg-ivory/10">
+                                                    @else
+                                                        <span class="w-11 h-11 rounded-full shrink-0 bg-ivory/10"></span>
+                                                    @endif
+                                                    <span class="min-w-0">
+                                                        <span class="block text-[15px] text-ivory truncate">{{ $c['nome'] }}</span>
+                                                        <span class="block text-[12px] text-[#8B95A7] truncate">{{ $c['agencia'] }}</span>
+                                                    </span>
+                                                </button>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <p wire:loading wire:target="escolherConsultor" class="text-[13px] text-cyan">A abrir os seus imóveis…</p>
+
+                                    @if ($consultorEscolhido !== '' && $avisoProcura === '')
+                                        @if ($imoveis === [])
+                                            <p class="text-[13px] text-[#C9CED6]">Não encontrámos imóveis à venda na sua página RE/MAX. Cole o link do anúncio, por favor.</p>
+                                        @else
+                                            <p class="text-[13px] text-[#C9CED6]">Escolha o imóvel para o vídeo:</p>
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                                @foreach ($imoveis as $i)
+                                                    <button type="button" wire:key="i-{{ $i['id'] }}" wire:click="escolherImovel('{{ $i['id'] }}')"
+                                                            class="flex flex-col rounded-[14px] overflow-hidden bg-navy border border-ivory/15 text-left hover:border-cyan cursor-pointer">
+                                                        @if ($i['foto'])
+                                                            <img src="{{ $i['foto'] }}" alt="" loading="lazy" class="w-full aspect-[4/3] object-cover bg-ivory/10">
+                                                        @else
+                                                            <span class="w-full aspect-[4/3] bg-ivory/10"></span>
+                                                        @endif
+                                                        <span class="p-2">
+                                                            <span class="block text-[13px] leading-snug text-ivory line-clamp-2">{{ $i['titulo'] }}</span>
+                                                            @if (! empty($i['preco']))<span class="block mt-0.5 text-[12px] text-[#8B95A7]">{{ number_format((int) $i['preco'], 0, ',', ' ') }} €</span>@endif
+                                                        </span>
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                            <p class="text-[12px] text-[#8B95A7]">Mostramos os seus imóveis mais recentes. Não está aqui? <button type="button" wire:click="mudarModo('link')" class="underline underline-offset-2 cursor-pointer">Cole o link do anúncio</button>.</p>
+                                        @endif
+                                        <button type="button" wire:click="$set('consultorEscolhido', '')" class="self-start text-[12px] text-cyan underline underline-offset-2 cursor-pointer">Não sou eu</button>
+                                    @endif
+                                </div>
+                            @else
+                            @if ($imovelEscolhido !== '')
+                                <p class="-mb-1 text-[13px] text-cyan">Imóvel escolhido: <span class="text-ivory">{{ $imovelEscolhido }}</span></p>
+                            @endif
                             <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
                                 <svg class="hidden sm:block shrink-0 ml-4 text-[#8B95A7]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
                                 <input id="anuncio" type="url" wire:model="anuncio" placeholder="{{ ! empty($ag['site']) ? 'Link do anúncio em '.$ag['site'] : 'Cole aqui o link do anúncio' }}" required
@@ -286,6 +365,7 @@
                                     <span wire:loading wire:target="pedir">A enviar…</span>
                                 </button>
                             </div>
+                            @endif
                             @error('anuncio') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
                             <div class="-mt-1">
                                 <label for="emailVideo" class="sr-only">O seu email, para receber o vídeo</label>

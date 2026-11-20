@@ -105,6 +105,26 @@ class Landing extends Component
     /** The colleague the invite email just went to ('' when none). */
     public string $conviteEnviado = '';
 
+    /** RE/MAX only: how the agent gives us the listing, 'link' (paste it) or 'nome' (find it by their name). */
+    public string $modo = 'link';
+
+    public string $nomeConsultor = '';
+
+    /** @var list<array{id: string, nome: string, agencia: string, foto: ?string}> */
+    public array $consultores = [];
+
+    /** The agent picked from the search (their RE/MAX number), and their newest listings. */
+    public string $consultorEscolhido = '';
+
+    /** @var list<array{id: string, titulo: string, url: ?string, foto: ?string, preco: ?int}> */
+    public array $imoveis = [];
+
+    /** The listing picked from their list, shown above the button. */
+    public string $imovelEscolhido = '';
+
+    /** 'sem-resultados' | 'erro' | '' after a search or a listing read. */
+    public string $avisoProcura = '';
+
     public function mount(Convites $convites): void
     {
         // "Fazer vídeo grátis" on the home page (?escolher=1): always the question, whatever was picked or asked before.
@@ -334,11 +354,80 @@ class Landing extends Component
         $this->dispatch('agencia-escolhida', agencia: $agencia);
     }
 
+    /** RE/MAX: switch between pasting the link and finding the listing by name. */
+    public function mudarModo(string $modo): void
+    {
+        $this->modo = $modo === 'nome' && $this->agencia === 'remax' ? 'nome' : 'link';
+        $this->resetErrorBag();
+        $this->avisoProcura = '';
+    }
+
+    /** RE/MAX's own agent search, by the name typed. */
+    public function procurarConsultor(\App\Services\RealEstate\RemaxConsultores $remax): void
+    {
+        $this->validate(['nomeConsultor' => 'required|string|min:3|max:80'], [
+            'nomeConsultor.required' => 'Escreva o seu nome.',
+            'nomeConsultor.min' => 'Escreva pelo menos o primeiro e o último nome.',
+        ]);
+        $this->reset('consultores', 'consultorEscolhido', 'imoveis', 'avisoProcura');
+        if (! RateLimiter::attempt('procura-remax:'.request()->ip(), 30, fn () => true, 3600)) {
+            $this->avisoProcura = 'erro';
+
+            return;
+        }
+        try {
+            $this->consultores = $remax->procurar($this->nomeConsultor);
+        } catch (\Throwable $e) {
+            report($e);
+            $this->avisoProcura = 'erro';
+
+            return;
+        }
+        $this->avisoProcura = $this->consultores === [] ? 'sem-resultados' : '';
+        $this->registar('procura-nome', ['nota' => count($this->consultores).' resultados']);
+    }
+
+    /** The agent picked themselves: their newest listings. */
+    public function escolherConsultor(string $id, \App\Services\RealEstate\RemaxConsultores $remax): void
+    {
+        if (! in_array($id, array_column($this->consultores, 'id'), true)) {
+            return;
+        }
+        $this->consultorEscolhido = $id;
+        $this->avisoProcura = '';
+        try {
+            $this->imoveis = $remax->imoveis($id);
+        } catch (\Throwable $e) {
+            report($e);
+            $this->imoveis = [];
+            $this->avisoProcura = 'erro';
+
+            return;
+        }
+        $this->registar('escolha-consultor', ['nota' => $id.' · '.count($this->imoveis).' imóveis']);
+    }
+
+    /** A listing picked from the agent's list: it becomes the link, ready for "Criar vídeo grátis". */
+    public function escolherImovel(string $ref): void
+    {
+        foreach ($this->imoveis as $i) {
+            if ($i['id'] === $ref && ! empty($i['url'])) {
+                $this->anuncio = $i['url'];
+                $this->imovelEscolhido = $i['titulo'].(! empty($i['preco']) ? ' · '.number_format((int) $i['preco'], 0, ',', ' ').' €' : '');
+                $this->modo = 'link';
+                $this->resetErrorBag();
+                $this->registar('escolha-imovel', ['anuncio' => $i['url']]);
+
+                return;
+            }
+        }
+    }
+
     /** Back to the question. */
     public function trocar(): void
     {
         session()->forget('agencia');
-        $this->reset('agencia', 'enviado', 'contacto', 'nomeAgencia', 'anuncio', 'jaTeve');
+        $this->reset('agencia', 'enviado', 'contacto', 'nomeAgencia', 'anuncio', 'jaTeve', 'modo', 'nomeConsultor', 'consultores', 'consultorEscolhido', 'imoveis', 'imovelEscolhido', 'avisoProcura');
         $this->resetErrorBag();
     }
 
