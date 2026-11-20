@@ -26,7 +26,7 @@ class RemaxConsultores
     /**
      * Agents whose name holds every word typed (accents and case ignored), best matches first.
      *
-     * @return list<array{id: string, nome: string, agencia: string, foto: ?string}>
+     * @return list<array{id: string, nome: string, agencia: string}>
      */
     public function procurar(string $nome): array
     {
@@ -43,7 +43,7 @@ class RemaxConsultores
         });
     }
 
-    /** @return list<array{id: string, nome: string, agencia: string, foto: ?string}> */
+    /** @return list<array{id: string, nome: string, agencia: string}> */
     public static function ordenar(array $resultados, string $nome): array
     {
         $palavras = array_values(array_filter(explode(' ', self::normal($nome))));
@@ -59,9 +59,8 @@ class RemaxConsultores
             if ($acertos === 0) {
                 continue;
             }
-            $foto = trim((string) ($r['userPictureURL'] ?? ''));
-            $out[] = ['id' => $id, 'nome' => $n, 'agencia' => trim((string) ($r['officeName'] ?? '')),
-                'foto' => $foto !== '' ? 'https://i.maxwork.pt/i/'.ltrim($foto, '/') : null, 'acertos' => $acertos];
+            // Name and office only: the agent's photo is not shown.
+            $out[] = ['id' => $id, 'nome' => $n, 'agencia' => trim((string) ($r['officeName'] ?? '')), 'acertos' => $acertos];
         }
         // Everyone who matches every word typed; if nobody does, the closest ones.
         $todos = array_values(array_filter($out, fn ($r) => $r['acertos'] === count($palavras)));

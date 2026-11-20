@@ -110,7 +110,7 @@ class Landing extends Component
 
     public string $nomeConsultor = '';
 
-    /** @var list<array{id: string, nome: string, agencia: string, foto: ?string}> */
+    /** @var list<array{id: string, nome: string, agencia: string}> */
     public array $consultores = [];
 
     /** The agent picked from the search (their RE/MAX number), and their newest listings. */

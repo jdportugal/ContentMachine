@@ -309,12 +309,7 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                             @foreach ($consultores as $c)
                                                 <button type="button" wire:key="c-{{ $c['id'] }}" wire:click="escolherConsultor('{{ $c['id'] }}')" wire:loading.attr="disabled" wire:target="escolherConsultor"
-                                                        class="flex items-center gap-3 p-2 rounded-[14px] bg-navy border border-ivory/15 text-left hover:border-cyan cursor-pointer disabled:opacity-60">
-                                                    @if ($c['foto'])
-                                                        <img src="{{ $c['foto'] }}" alt="" loading="lazy" class="w-11 h-11 rounded-full object-cover shrink-0 bg-ivory/10">
-                                                    @else
-                                                        <span class="w-11 h-11 rounded-full shrink-0 bg-ivory/10"></span>
-                                                    @endif
+                                                        class="flex items-center gap-3 px-4 py-3 rounded-[14px] bg-navy border border-ivory/15 text-left hover:border-cyan cursor-pointer disabled:opacity-60">
                                                     <span class="min-w-0">
                                                         <span class="block text-[15px] text-ivory truncate">{{ $c['nome'] }}</span>
                                                         <span class="block text-[12px] text-[#8B95A7] truncate">{{ $c['agencia'] }}</span>

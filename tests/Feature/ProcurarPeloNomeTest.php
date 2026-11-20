@@ -40,7 +40,7 @@ class ProcurarPeloNomeTest extends TestCase
     {
         $this->remax();
         $r = app(RemaxConsultores::class)->procurar('clelio garcia');
-        $this->assertSame([['id' => '126941022', 'nome' => 'Clélio Garcia', 'agencia' => 'RE/MAX Azor Estate', 'foto' => 'https://i.maxwork.pt/i/users/c.jpg']], $r);
+        $this->assertSame([['id' => '126941022', 'nome' => 'Clélio Garcia', 'agencia' => 'RE/MAX Azor Estate']], $r);
         $this->assertSame([], app(RemaxConsultores::class)->procurar('cl'));
     }
 
