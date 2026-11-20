@@ -167,7 +167,7 @@ class NovoVideoTest extends TestCase
         $clip = app(ClipStore::class)->create(['type' => 'animation', 'status' => 'done', 'title' => 'T2',
             'images' => [['id' => 'img_ret', 'path' => 'clips/uploads/retrato.png', 'name' => 'Luis.png', 'description' => 'Retrato do consultor Luis Fraga, da RE/MAX Gold.']],
             'meta' => ['listing' => ['url' => self::ANUNCIO, 'agent' => 'Luis Fraga', 'phone' => '+351912000111', 'email' => 'lf@remax.pt', 'licence' => '4719', 'agency' => 'RE/MAX Gold']]]);
-        DB::table('leads')->insert(['anuncio' => self::ANUNCIO, 'user_id' => $user->id, 'clip_id' => $clip->id, 'pago_em' => now(),
+        DB::table('leads')->insert(['anuncio' => self::ANUNCIO, 'user_id' => $user->id, 'clip_id' => $clip->id, 'pago_em' => now(), 'consentimento_em' => now(), 'ip' => '127.0.0.1',
             'projeto' => app(\App\Services\Projects\ProjectContext::class)->current()->slug, 'created_at' => now(), 'updated_at' => now()]);
     }
 

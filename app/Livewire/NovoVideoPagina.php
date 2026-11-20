@@ -149,6 +149,7 @@ class NovoVideoPagina extends Component
      */
     public function sugerirTexto(ListingScraper $scraper, \App\Services\RealEstate\ListingScriptWriter $writer): void
     {
+        $this->resetErrorBag('narracao');
         $chave = 'sugerir-texto:'.Auth::id();
         if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($chave, 10)) {
             $this->addError('narracao', 'Já pediu vários textos. Tente outra vez daqui a pouco.');
