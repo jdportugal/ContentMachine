@@ -172,4 +172,34 @@ class CampanhasTest extends TestCase
         Livewire::actingAs(User::factory()->create())->test(Campanhas::class)
             ->assertSee('nenhuma visita chegou com as etiquetas')->assertSee('utm_term={{ad.id}}');
     }
+
+    public function test_day_by_day_sets_each_day_against_the_last_and_today_against_yesterday_at_the_same_hour(): void
+    {
+        $this->travelTo(now()->setTime(13, 0));
+        $ad = ['utm_source' => 'meta', 'utm_medium' => 'paid', 'utm_content' => 'preco-10-euros'];
+        $em = fn ($quando) => ['created_at' => $quando, 'updated_at' => $quando];
+        foreach ([now()->subHours(2), now()->subDay()->subHours(3), now()->subDay()->addHours(5)] as $t) {
+            DB::table('visitas')->insert(['canal' => 'meta-ads', 'origem' => json_encode($ad), 'created_at' => $t]);
+            $this->lead('https://www.remax.pt/'.uniqid(), $ad, $em($t));
+        }
+        $this->lead('https://www.remax.pt/direto', null, $em(now()->subDay()->subHour()));
+        $this->lead('https://www.remax.pt/teste', ['utm_source' => 'teste-interno'], $em(now()->subHour()));   // our tests never count
+        DB::table('compras')->insert(['sessao' => 'cs_d', 'total' => 2000, 'videos' => 1, 'origem' => json_encode($ad)] + $em(now()->subDay()->subHours(2)));
+
+        $d = app(Funil::class)->diaADia(3);
+
+        $this->assertCount(3, $d['dias']);
+        $this->assertSame(now()->toDateString(), $d['dias'][0]['dia']->toDateString());
+        [$hoje, $ontem] = $d['dias'];
+        $this->assertSame([1, 1, 0, 1], [$hoje['visitas'], $hoje['pedidos'], $hoje['compras'], $hoje['pedidosTodos']]);
+        $this->assertSame([2, 2, 1, 2000, 3], [$ontem['visitas'], $ontem['pedidos'], $ontem['compras'], $ontem['receita'], $ontem['pedidosTodos']]);
+        // Yesterday until 13:00: the evening visit and video are left out.
+        $this->assertSame('13:00', $d['agora']['hora']);
+        $this->assertSame([1, 1, 1, 2], [$d['agora']['ontem']['visitas'], $d['agora']['ontem']['pedidos'], $d['agora']['ontem']['compras'], $d['agora']['ontem']['pedidosTodos']]);
+        $this->assertSame($hoje['pedidos'], $d['agora']['hoje']['pedidos']);
+
+        Http::fake();
+        Livewire::actingAs(User::factory()->create())->test(Campanhas::class)
+            ->assertSee('Dia a dia')->assertSee('Hoje até às 13:00')->assertSee('Ontem até às 13:00')->assertSee('Média dos 7 dias anteriores');
+    }
 }

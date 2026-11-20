@@ -1,6 +1,6 @@
 @php
     $eur = fn ($v) => $v === null ? '—' : number_format($v, 2, ',', ' ').' €';
-    $n = fn ($v) => number_format((int) $v, 0, ',', ' ');
+    $n = fn ($v) => number_format((int) round((float) $v), 0, ',', ' ');
     $pct = fn ($v) => $v === null ? '—' : (($v * 100 < 10 ? number_format($v * 100, 1, ',', ' ') : number_format($v * 100, 0)).' %');
     $th = 'px-3 py-2 text-right font-mono text-[0.68rem] uppercase tracking-wider text-ink-faint font-normal';
     $td = 'px-3 py-3 text-right tabular-nums text-ink';
@@ -115,6 +115,54 @@
                 </table>
             </div>
         @endif
+    </section>
+
+    {{-- Day by day: one day set against the one before (and today against yesterday at the same hour) --}}
+    @php
+        $linhaDia = function (string $rotulo, array $d, bool $forte = false) use ($n, $pct, $eur, $td) {
+            $cls = $forte ? ' font-semibold' : '';
+
+            return '<tr class="border-t border-ink-soft/10'.$cls.'"><td class="px-3 py-3 text-left text-ink whitespace-nowrap">'.e($rotulo).'</td>'
+                .'<td class="'.$td.'">'.$n($d['visitas']).'</td><td class="'.$td.'">'.$n($d['pedidos']).'</td>'
+                .'<td class="'.$td.'">'.$pct($d['visitas'] > 0 ? $d['pedidos'] / $d['visitas'] : null).'</td>'
+                .'<td class="'.$td.'">'.$n($d['compras']).'</td><td class="'.$td.'">'.$eur($d['receita'] / 100).'</td>'
+                .'<td class="'.$td.' border-l border-ink-soft/15">'.$n($d['pedidosTodos']).'</td><td class="'.$td.'">'.$n($d['comprasTodas']).'</td><td class="'.$td.'">'.$eur($d['receitaTodos'] / 100).'</td></tr>';
+        };
+        $semana = fn ($k) => array_sum(array_column(array_slice($dias['dias'], 1, 7), $k)) / max(1, count(array_slice($dias['dias'], 1, 7)));
+        $media = [];
+        foreach (['visitas', 'pedidos', 'compras', 'receita', 'pedidosTodos', 'comprasTodas', 'receitaTodos'] as $k) {
+            $media[$k] = $semana($k);
+        }
+    @endphp
+    <section class="mt-10">
+        <h2 class="font-display text-3xl">Dia a dia</h2>
+        <p class="mt-1 text-sm text-ink-soft">Cada dia ao lado dos anteriores. Hoje compara-se com ontem até à mesma hora, porque o dia ainda não acabou.</p>
+        <div class="mt-4 overflow-x-auto rounded-xl border border-ink-soft/15">
+            <table class="w-full min-w-[760px] text-sm">
+                <thead class="bg-surface/60">
+                    <tr>
+                        <th class="{{ $th }} text-left"></th>
+                        <th class="{{ $th }} text-center" colspan="5">Anúncios Meta</th>
+                        <th class="{{ $th }} text-center border-l border-ink-soft/15" colspan="3">Todos os canais</th>
+                    </tr>
+                    <tr>
+                        <th class="{{ $th }} text-left">Dia</th>
+                        <th class="{{ $th }}">Visitas</th><th class="{{ $th }}">Vídeos pedidos</th><th class="{{ $th }}">Visita → pedido</th><th class="{{ $th }}">Compras</th><th class="{{ $th }}">Receita</th>
+                        <th class="{{ $th }} border-l border-ink-soft/15">Vídeos pedidos</th><th class="{{ $th }}">Compras</th><th class="{{ $th }}">Receita</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {!! $linhaDia('Hoje até às '.$dias['agora']['hora'], $dias['agora']['hoje'], true) !!}
+                    {!! $linhaDia('Ontem até às '.$dias['agora']['hora'], $dias['agora']['ontem']) !!}
+                    <tr><td colspan="9" class="h-2 bg-surface/40"></td></tr>
+                    @foreach (array_slice($dias['dias'], 1) as $d)
+                        {!! $linhaDia(ucfirst($d['dia']->locale('pt')->isoFormat('ddd D/M')), $d) !!}
+                    @endforeach
+                    {!! $linhaDia('Média dos 7 dias anteriores', $media, true) !!}
+                </tbody>
+            </table>
+        </div>
+        <p class="mt-3 text-xs text-ink-faint">Os nossos testes (utm_source=teste-interno) não contam.</p>
     </section>
 
     {{-- By channel: everything that reaches the site, paid or not --}}

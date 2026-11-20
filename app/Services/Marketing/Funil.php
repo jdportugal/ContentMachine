@@ -119,6 +119,73 @@ class Funil
         return $gasto > 0 && $n > 0 ? $gasto / $n : null;
     }
 
+    /**
+     * Day by day, newest first, so one day can be set against the one before: the Meta ads
+     * channel (visits, free videos asked for, purchases, revenue in cents) and every channel
+     * together. 'agora' sets today so far against yesterday up to the same time of day.
+     *
+     * @return array{dias: list<array>, agora: array{hora: string, hoje: array, ontem: array}}
+     */
+    public function diaADia(int $dias = 14): array
+    {
+        $agora = now();
+        $de = $agora->copy()->startOfDay()->subDays($dias - 1);
+        $vazio = ['visitas' => 0, 'pedidos' => 0, 'compras' => 0, 'receita' => 0, 'pedidosTodos' => 0, 'comprasTodas' => 0, 'receitaTodos' => 0];
+        $porDia = [];
+        for ($d = $agora->copy()->startOfDay(); $d >= $de; $d = $d->copy()->subDay()) {
+            $porDia[$d->toDateString()] = ['dia' => $d->copy()] + $vazio;
+        }
+        $limiteOntem = $agora->copy()->subDay();
+        $ate = ['hoje' => $vazio, 'ontem' => $vazio];
+        $somar = function (string $quando, ?array $origem, string $passo, int $total = 0) use (&$porDia, &$ate, $agora, $limiteOntem) {
+            $canal = Canal::de($origem);
+            if ($canal === Canal::INTERNO) {
+                return;
+            }
+            $t = \Illuminate\Support\Carbon::parse($quando);
+            $dia = $t->toDateString();
+            if (! isset($porDia[$dia])) {
+                return;
+            }
+            $campos = $canal === Canal::META_ADS ? [$passo] : [];
+            if ($passo !== 'visitas') {
+                $campos[] = ['pedidos' => 'pedidosTodos', 'compras' => 'comprasTodas'][$passo];
+                if ($passo === 'compras') {
+                    $campos[] = 'receitaTodos';
+                }
+            }
+            if ($passo === 'compras' && $canal === Canal::META_ADS) {
+                $campos[] = 'receita';
+            }
+            $alvos = [&$porDia[$dia]];
+            if ($dia === $agora->toDateString()) {
+                $alvos[] = &$ate['hoje'];
+            } elseif ($dia === $limiteOntem->toDateString() && $t <= $limiteOntem) {
+                $alvos[] = &$ate['ontem'];
+            }
+            foreach ($alvos as &$linha) {
+                foreach ($campos as $c) {
+                    $linha[$c] += str_starts_with($c, 'receita') ? $total : 1;
+                }
+            }
+            unset($linha);
+        };
+        foreach (DB::table('visitas')->where('created_at', '>=', $de)->get(['origem', 'created_at']) as $v) {
+            $somar((string) $v->created_at, self::ler($v->origem), 'visitas');
+        }
+        foreach (DB::table('leads')->where('created_at', '>=', $de)->get(['origem', 'pago_em', 'created_at']) as $l) {
+            if ($l->pago_em && strtotime($l->pago_em) - strtotime($l->created_at) <= self::PAGO_DE_RAIZ) {
+                continue;
+            }
+            $somar((string) $l->created_at, self::ler($l->origem), 'pedidos');
+        }
+        foreach (DB::table('compras')->where('created_at', '>=', $de)->where('total', '>', 0)->get(['origem', 'total', 'created_at']) as $c) {
+            $somar((string) $c->created_at, self::ler($c->origem), 'compras', (int) $c->total);
+        }
+
+        return ['dias' => array_values($porDia), 'agora' => ['hora' => $agora->format('H:i'), 'hoje' => $ate['hoje'], 'ontem' => $ate['ontem']]];
+    }
+
     private static function ler(?string $origem): ?array
     {
         $o = $origem ? json_decode($origem, true) : null;

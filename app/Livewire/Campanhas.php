@@ -42,6 +42,7 @@ class Campanhas extends Component
 
         return view('livewire.campanhas', [
             'f' => $funil->calcular($de, now(), $this->fresco),
+            'dias' => $funil->diaADia(14),
             'periodos' => self::PERIODOS,
             'canaisNomes' => Canal::NOMES,
             'parametros' => Canal::PARAMETROS_META,
