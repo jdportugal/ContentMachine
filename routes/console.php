@@ -17,3 +17,11 @@ Schedule::command('leads:atualizar')->everyMinute()->withoutOverlapping();
  * New-listing alerts: agents who ticked the box on the free-video form get an email when they publish a listing.
  */
 Schedule::command('alertas:imoveis')->hourlyAt(7)->withoutOverlapping();
+
+/*
+ * Two days after a free video, agents who did nothing since (and agreed to be contacted) are reminded
+ * that inviting a colleague gets their video without the watermark. In the morning and late afternoon,
+ * not at night.
+ */
+Schedule::command('leads:lembrar-convite --enviar')->dailyAt('10:17')->withoutOverlapping();
+Schedule::command('leads:lembrar-convite --enviar')->dailyAt('17:47')->withoutOverlapping();
