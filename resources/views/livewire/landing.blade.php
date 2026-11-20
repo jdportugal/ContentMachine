@@ -43,7 +43,7 @@
         ['O primeiro vídeo é mesmo grátis?', 'Sim. Não pedimos cartão de crédito. O vídeo grátis leva a marca d’água Imocena; a versão limpa desse vídeo custa 10 € (oferta de lançamento). Os seguintes: 20 €, ou a partir de 8,75 € com um pack.'],
         ['Quanto tempo demora?', 'Poucos minutos. Mantenha a página aberta: o vídeo aparece no mesmo sítio onde colou o link.'],
         ['A voz soa mesmo portuguesa?', 'A narração é em português de Portugal. Nos vídeos pagos pode também gravar o texto e usar a sua própria voz.'],
-        ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal, eXp Portugal (incluindo os sites dos consultores eXp), KW Portugal e Century 21. Basta copiar o link da barra de endereço do anúncio.'],
+        ['De que sites leem os anúncios?', 'RE/MAX, iad Portugal, eXp Portugal (incluindo os sites dos consultores eXp), KW Portugal, Century 21 e Predimed. Basta copiar o link da barra de endereço do anúncio.'],
         ['Como recebo o vídeo?', 'Aparece nesta página assim que estiver pronto, com o botão para descarregar o MP4 vertical.'],
         ['Posso alterar o texto da narração?', 'Na sua conta, sim: pode deixar uma nota (preço novo, algo a destacar) e o texto muda antes de ser gravado.'],
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
@@ -301,7 +301,7 @@
                             <div class="pt-3 border-t border-ivory/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#C9CED6]">
                                 <span class="flex items-center gap-2">{!! $check !!}Sem cartão de crédito</span>
                                 <span class="flex items-center gap-2">{!! $check !!}Pronto em minutos</span>
-                                <span class="text-[#8B95A7]">{{ ! empty($ag['lemos']) ? 'Vídeo com a imagem '.$ag['da'] : 'Lê anúncios da RE/MAX, iad, eXp, KW e Century 21' }}</span>
+                                <span class="text-[#8B95A7]">{{ ! empty($ag['lemos']) ? 'Vídeo com a imagem '.$ag['da'] : 'Lê anúncios da RE/MAX, iad, eXp, KW, Century 21 e Predimed' }}</span>
                             </div>
                         </form>
                     @endif
@@ -342,7 +342,7 @@
                     <span class="text-xs tracking-[.32em] text-cyan uppercase">{{ $nomeAg ? 'Consultores '.$nomeAg : 'A sua agência' }}</span>
                 </div>
                 <h1 class="mt-5 font-display text-[clamp(34px,5.6vw,68px)] leading-[1] font-normal text-ivory">{{ $nomeAg ? 'Ainda não lemos anúncios '.$ag['da'].'.' : 'Diga-nos qual é a sua agência.' }} <em class="text-coral">{{ $nomeAg ? 'Falta pouco.' : 'Juntamo-la.' }}</em></h1>
-                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp, KW e Century 21, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Veja nesta página um exemplo do que vai receber.</p>
+                <p class="mt-5 max-w-[540px] text-[17px] leading-relaxed font-light text-[#C9CED6]">{{ $nomeAg ? 'Estamos a juntar a '.$nomeAg.'.' : 'Hoje lemos anúncios da RE/MAX, iad, eXp, KW, Century 21 e Predimed, e estamos a juntar mais agências.' }} Deixe o seu email e avisamos no dia em que puder fazer o seu vídeo grátis. Veja nesta página um exemplo do que vai receber.</p>
                 <div id="pedido" class="mt-8 max-w-[600px] scroll-mt-6 rounded-[22px] p-[1px] bg-gradient-to-br from-cyan/60 via-ivory/10 to-coral/50 shadow-[0_40px_90px_-30px_rgba(5,184,230,.35)]">
                     <div class="rounded-[21px] bg-navy-2 px-6 py-6 sm:px-7">
                         @if ($enviado === 'aviso')
@@ -372,7 +372,7 @@
                         @endif
                     </div>
                 </div>
-                <button type="button" wire:click="trocar" class="mt-4 min-h-11 text-sm text-cyan underline underline-offset-2 cursor-pointer">Tem anúncios na RE/MAX, iad, eXp, KW ou Century 21? Escolher outra agência</button>
+                <button type="button" wire:click="trocar" class="mt-4 min-h-11 text-sm text-cyan underline underline-offset-2 cursor-pointer">Tem anúncios na RE/MAX, iad, eXp, KW, Century 21 ou Predimed? Escolher outra agência</button>
             @endif
             </div>
 

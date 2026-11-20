@@ -52,6 +52,16 @@ class LandingAgenciaTest extends TestCase
         $this->assertSame('century21', DB::table('leads')->sole()->agencia);
     }
 
+    public function test_predimed_agents_get_the_form_and_their_link_is_read(): void
+    {
+        Queue::fake();
+        Livewire::test(Landing::class)->assertSee('Predimed')->call('escolher', 'predimed')
+            ->assertSee('O vídeo do seu imóvel Predimed')->assertSee('predimed.pt')->assertSee('Criar vídeo grátis')
+            ->set('anuncio', 'https://predimed.pt/Imovel/wgndg2')->call('pedir')->assertHasNoErrors();
+        Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === 'https://predimed.pt/Imovel/wgndg2');
+        $this->assertSame('predimed', DB::table('leads')->sole()->agencia);
+    }
+
     public function test_an_agency_we_do_not_read_yet_leaves_an_email_to_be_told(): void
     {
         Livewire::test(Landing::class)->call('escolher', 'era')

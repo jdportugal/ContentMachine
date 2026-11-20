@@ -60,7 +60,7 @@ class FalhasTest extends TestCase
         $this->assertFalse(ListingScraper::supports('https://www.idealista.pt/imovel/12345678/'));
         $this->get('/video-gratis')->assertOk()->assertDontSee('idealista');
         Livewire::test(Landing::class)->set(['anuncio' => 'https://www.idealista.pt/imovel/12345678/'])->call('pedir')
-            ->assertHasErrors('anuncio')->assertSee('RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal e da Century 21');
+            ->assertHasErrors('anuncio')->assertSee('RE/MAX, da iad Portugal, da eXp Portugal, da KW Portugal, da Century 21 e da Predimed');
         Queue::assertNothingPushed();
     }
 
