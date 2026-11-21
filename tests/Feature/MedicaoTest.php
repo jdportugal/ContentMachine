@@ -24,7 +24,7 @@ class MedicaoTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['contentmachine.meta_pixel' => '1127337756822112', 'contentmachine.ga4' => 'G-TESTE123', 'contentmachine.meta_capi.token' => 'tok', 'contentmachine.meta_capi.version' => 'v23.0']);
+        config(['contentmachine.meta_pixel' => '1127337756822112', 'contentmachine.ga4' => 'G-TESTE123', 'contentmachine.clarity' => 'clartest1', 'contentmachine.meta_capi.token' => 'tok', 'contentmachine.meta_capi.version' => 'v23.0']);
         Http::fake(['graph.facebook.com/*' => Http::response(['events_received' => 1])]);
         Queue::fake();
     }
@@ -34,10 +34,10 @@ class MedicaoTest extends TestCase
         $this->get('/video-gratis?agencia=remax')->assertOk()
             ->assertSee('id="cookies"', false)->assertSee('Aceitar')->assertSee('Rejeitar')
             ->assertSee("includes('imocena_cookies=sim')) imocenaMedicao.carregar()", false)   // loaded only with a yes
-            ->assertSee('G-TESTE123')->assertSee('/privacidade', false)->assertSee('Preferências de cookies');
-        $this->get('/privacidade')->assertOk()->assertSee('Política de privacidade')->assertSee('_fbp')->assertSee('cnpd.pt');
+            ->assertSee('G-TESTE123')->assertSee('clartest1')->assertSee('/privacidade', false)->assertSee('Preferências de cookies');
+        $this->get('/privacidade')->assertOk()->assertSee('Política de privacidade')->assertSee('_fbp')->assertSee('_clck')->assertSee('cnpd.pt');
 
-        config(['contentmachine.meta_pixel' => '', 'contentmachine.ga4' => '']);
+        config(['contentmachine.meta_pixel' => '', 'contentmachine.ga4' => '', 'contentmachine.clarity' => '']);
         $this->get('/video-gratis')->assertOk()->assertDontSee('id="cookies"', false);   // nothing to ask about
     }
 

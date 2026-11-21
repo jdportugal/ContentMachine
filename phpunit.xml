@@ -38,6 +38,7 @@
         <env name="PUBLICACOES_RENDER" value="svg"/>
         <env name="KIE_API_KEY" value=""/>
         <env name="PULSE_ENABLED" value="false"/>
+        <env name="CLARITY_ID" value=""/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
     </php>

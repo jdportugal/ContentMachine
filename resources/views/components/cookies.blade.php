@@ -1,9 +1,9 @@
-{{-- Cookie consent: measurement (Meta, Google) only after "Aceitar". The choice is kept a year;
+{{-- Cookie consent: measurement (Meta, Google, Clarity) only after "Aceitar". The choice is kept a year;
      any link with data-cookies reopens it ("Preferências de cookies" in the footer). --}}
 <div id="cookies" role="dialog" aria-live="polite" aria-label="Cookies" hidden
      class="fixed inset-x-3 bottom-3 sm:inset-x-auto sm:right-5 sm:bottom-5 sm:max-w-[420px] z-50 rounded-[18px] border border-ivory/15 bg-navy-2/95 backdrop-blur p-5 shadow-[0_20px_60px_rgba(0,0,0,.45)]">
     <p class="text-sm leading-relaxed text-[#C9CED6]">
-        Usamos cookies de medição (Meta e Google) para saber que anúncios trazem visitas e melhorar a Imocena.
+        Usamos cookies de medição (Meta, Google e Microsoft Clarity) para saber que anúncios trazem visitas e melhorar a Imocena.
         Só com a sua autorização. <a href="{{ route('privacidade') }}#cookies" class="text-ivory underline underline-offset-2">Saber mais</a>
     </p>
     <div class="mt-4 flex gap-2">

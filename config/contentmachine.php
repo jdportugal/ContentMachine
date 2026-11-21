@@ -21,6 +21,8 @@ return [
     'alertas' => ['pausa_ms' => (int) env('ALERTAS_PAUSA_MS', 1500)],
     // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
     'ga4' => env('GA_MEASUREMENT_ID', ''),
+    // Microsoft Clarity project id (session recordings and heatmaps, after consent). Empty = off.
+    'clarity' => env('CLARITY_ID', 'zhbmj2fuej'),
 
 
     /*

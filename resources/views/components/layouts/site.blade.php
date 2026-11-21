@@ -48,14 +48,15 @@
     @php
         $pixel = (string) config('contentmachine.meta_pixel');
         $ga4 = (string) config('contentmachine.ga4');
-        $medicao = $pixel !== '' || $ga4 !== '';
+        $clarity = (string) config('contentmachine.clarity');
+        $medicao = $pixel !== '' || $ga4 !== '' || $clarity !== '';
     @endphp
     @if ($medicao)
-    {{-- Measurement (Meta Pixel, Google Analytics) loads only after "Aceitar" on the cookie banner.
+    {{-- Measurement (Meta Pixel, Google Analytics, Microsoft Clarity) loads only after "Aceitar" on the cookie banner.
          Lead: a listing link accepted (Landing::pedir). Purchase: the thank-you page, once. --}}
     <script>
     window.imocenaMedicao = (function () {
-        const PIXEL = @js($pixel), GA4 = @js($ga4);
+        const PIXEL = @js($pixel), GA4 = @js($ga4), CLARITY = @js($clarity);
         let ativo = false;
         const fila = [];
         function carregar() {
@@ -71,16 +72,21 @@
                 gtag('consent', 'default', { ad_storage: 'granted', analytics_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });
                 gtag('config', GA4);
             }
+            if (CLARITY) {
+                (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script',CLARITY);
+                clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
+            }
             fila.splice(0).forEach(fn => fn());
         }
         // Each event runs now if measurement is on, or when the visitor accepts.
         function quando(fn) { ativo ? fn() : fila.push(fn); }
         return {
             carregar, quando,
-            agencia(a) { quando(() => { window.fbq && fbq('trackCustom', 'EscolheuAgencia', { agencia: a }); window.gtag && gtag('event', 'select_content', { content_type: 'agencia', item_id: a }); }); },
-            lead(id) { quando(() => { window.fbq && fbq('track', 'Lead', {}, { eventID: 'lead-' + id }); window.gtag && gtag('event', 'generate_lead', { lead_id: 'lead-' + id }); }); },
+            agencia(a) { quando(() => { window.fbq && fbq('trackCustom', 'EscolheuAgencia', { agencia: a }); window.gtag && gtag('event', 'select_content', { content_type: 'agencia', item_id: a }); if (window.clarity) { clarity('set', 'agencia', a); clarity('event', 'escolheu-agencia'); } }); },
+            lead(id) { quando(() => { window.fbq && fbq('track', 'Lead', {}, { eventID: 'lead-' + id }); window.gtag && gtag('event', 'generate_lead', { lead_id: 'lead-' + id }); if (window.clarity) { clarity('event', 'pediu-video'); clarity('upgrade', 'pediu-video'); } }); },
             compra(c) { quando(() => {
                 window.fbq && fbq('track', 'Purchase', { value: c.valor, currency: c.moeda, num_items: c.videos, content_type: 'product' }, { eventID: c.id });
+                if (window.clarity) { clarity('event', 'comprou'); clarity('upgrade', 'comprou'); }
                 window.gtag && gtag('event', 'purchase', { transaction_id: c.id, value: c.valor, currency: c.moeda, items: [{ item_id: 'videos-' + c.videos, item_name: c.videos > 1 ? 'Pack ' + c.videos + ' vídeos' : 'Vídeo', quantity: 1, price: c.valor }] });
             }); },
         };
