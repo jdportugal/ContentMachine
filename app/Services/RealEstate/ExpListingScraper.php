@@ -85,7 +85,9 @@ class ExpListingScraper
     /** All flight chunks, unescaped and joined: the RSC stream as the browser sees it. */
     public static function flight(string $html): string
     {
-        preg_match_all('/self\.__next_f\.push\(\[1,"((?:[^"\\\\]|\\\\.)*)"\]\)/s', $html, $m);
+        // Possessive: a long chunk (a long description) otherwise exhausts PCRE's JIT stack and
+        // preg_match_all gives up on the whole page.
+        preg_match_all('/self\.__next_f\.push\(\[1,"((?:[^"\\\\]++|\\\\.)*+)"\]\)/s', $html, $m);
 
         return implode('', array_map(fn ($s) => (string) json_decode('"'.$s.'"'), $m[1]));
     }

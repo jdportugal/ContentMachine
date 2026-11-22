@@ -59,6 +59,21 @@ class Century21ListingScraperTest extends TestCase
         $this->assertSame('Usado', $l['details']['Estado']);
     }
 
+    public function test_a_long_description_in_one_chunk_still_reads(): void
+    {
+        // C0537-00320: the whole stream came in one ~250 KB push(), and the old pattern ran out
+        // of PCRE's JIT stack, so the page looked empty.
+        $descricao = str_repeat('Moradia "T4" com piscina privativa \\ jardim.<br>', 5000);
+        $stream = '9:["$","$L21",null,{"property":'.json_encode(['title' => ['pt' => 'MORADIA T4'], 'description' => ['pt' => '$25'],
+            'images' => ['https://images.century21.pt/a.jpg', 'https://images.century21.pt/b.jpg']]).'}]'
+            ."\n25:T".dechex(strlen($descricao)).','.$descricao;
+        $html = '<script>self.__next_f.push([1,"0:{}"])</script><script>self.__next_f.push([1,'.json_encode($stream).'])</script>';
+
+        $r = (new Century21ListingScraper)->parse($html, self::URL);
+        $this->assertCount(2, $r['photos']);
+        $this->assertStringStartsWith('Moradia "T4" com piscina', $r['description']);
+    }
+
     public function test_a_hidden_price_is_on_request_and_the_agency_phone_stands_in(): void
     {
         $l = (new Century21ListingScraper)->parse($this->pagina([
