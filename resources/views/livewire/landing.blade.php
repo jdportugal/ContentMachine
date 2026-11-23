@@ -251,6 +251,19 @@
                             <span class="font-display text-[32px] leading-tight text-ivory">Estamos a fazer o seu vídeo.</span>
                             <div class="h-1.5 rounded-full bg-ivory/10 overflow-hidden"><div class="h-full bg-cyan transition-all duration-700" style="width: {{ $pedido['pct'] }}%"></div></div>
                             <p class="text-sm text-[#C9CED6]"><strong class="text-ivory font-medium">{{ $pedido['etapa'] }}…</strong> Leva poucos minutos. Mantenha esta página aberta: o vídeo aparece aqui{{ ! empty($pedido['email']) ? ' e enviamo-lo também para '.$pedido['email'] : '' }}.</p>
+                            @if (empty($pedido['email']))
+                                {{-- The email is asked for here, not on the form: once they see it working. --}}
+                                <form wire:submit="guardarEmailVideo" class="mt-2 p-4 rounded-[16px] bg-navy-2 border border-ivory/12 flex flex-col gap-2.5" novalidate>
+                                    <label for="emailVideo" class="font-display text-[22px] leading-tight text-ivory">Quer recebê-lo também por email?</label>
+                                    <p class="text-[13px] text-[#C9CED6]">Assim fica com o link, mesmo que feche esta página.</p>
+                                    <div class="flex flex-wrap sm:flex-nowrap gap-2">
+                                        <input id="emailVideo" type="email" wire:model="emailVideo" placeholder="O seu email" autocomplete="email" inputmode="email"
+                                               class="flex-1 min-w-0 w-full min-h-12 px-4 rounded-full bg-navy border border-ivory/20 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
+                                        <button type="submit" wire:loading.attr="disabled" wire:target="guardarEmailVideo" class="w-full sm:w-auto shrink-0 min-h-12 px-6 rounded-full bg-ivory text-navy text-[15px] font-semibold cursor-pointer disabled:opacity-60">Enviar</button>
+                                    </div>
+                                    @error('emailVideo') <p class="text-[13px] text-coral">{{ $message }}</p> @enderror
+                                </form>
+                            @endif
                         </div>
                     @elseif (($pedido['estado'] ?? null) === 'falhou')
                         <div role="alert" class="flex flex-col gap-3">
@@ -271,7 +284,8 @@
                             <button type="button" wire:click="outro" class="self-start text-sm text-cyan underline underline-offset-2">Não é o seu anúncio? Usar outro link</button>
                         </div>
                     @else
-                        <form wire:submit="pedir" class="flex flex-col gap-4" novalidate>
+                        <form wire:submit="pedir" class="flex flex-col gap-4" novalidate
+                              x-on:focar-link.window="$nextTick(() => { const i = document.getElementById('anuncio'); if (i) { i.scrollIntoView({ block: 'center', behavior: 'smooth' }); i.focus(); } })">
                             <div class="flex flex-wrap justify-between items-center gap-3">
                                 <label for="anuncio" class="font-display text-[26px] leading-tight text-ivory">Peça o seu vídeo grátis</label>
                                 <span class="px-3 py-1 rounded-full bg-coral/15 border border-coral/40 text-xs text-coral">Valor <s>20 €</s> · <strong class="font-semibold">hoje 0 €</strong></span>
@@ -350,7 +364,7 @@
                             @if ($imovelEscolhido !== '')
                                 <p class="-mb-1 text-[13px] text-cyan">Imóvel escolhido: <span class="text-ivory">{{ $imovelEscolhido }}</span></p>
                             @endif
-                            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border border-ivory/15 focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
+                            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-1.5 rounded-[18px] sm:rounded-full bg-navy border @error('anuncio') border-coral ring-4 ring-coral/20 @else border-ivory/15 @enderror focus-within:border-cyan focus-within:ring-4 focus-within:ring-cyan/15 transition">
                                 <svg class="hidden sm:block shrink-0 ml-4 text-[#8B95A7]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
                                 <input id="anuncio" type="url" wire:model="anuncio" placeholder="{{ ! empty($ag['site']) ? 'Link do anúncio em '.$ag['site'] : 'Cole aqui o link do anúncio' }}" required
                                        class="flex-1 min-w-0 w-full min-h-12 px-3 bg-transparent border-0 text-[15px] text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:ring-0">
@@ -362,12 +376,6 @@
                             </div>
                             @endif
                             @error('anuncio') <p class="-mt-1 text-[13px] text-coral">{{ $message }}</p> @enderror
-                            <div class="-mt-1">
-                                <label for="emailVideo" class="sr-only">O seu email, para receber o vídeo</label>
-                                <input id="emailVideo" type="email" wire:model="emailVideo" placeholder="O seu email, para lhe enviarmos o vídeo (opcional)" autocomplete="email" inputmode="email"
-                                       class="w-full min-h-11 px-4 rounded-full bg-navy border border-ivory/15 text-sm text-ivory placeholder:text-[#8B95A7] focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/15">
-                                @error('emailVideo') <p class="mt-1.5 text-[13px] text-coral">{{ $message }}</p> @enderror
-                            </div>
                             {{-- Honeypot: invisible to people, tempting to bots. --}}
                             <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden">
                                 <label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label>

@@ -92,6 +92,48 @@ class ListingScraper
         return $url;
     }
 
+    /** Short and share links (Google's "Partilhar", bit.ly, Facebook's l.php) lead to the listing. */
+    private const PARTILHA = ['share.google', 'g.co', 'goo.gl', 'maps.app.goo.gl', 'bit.ly', 'tinyurl.com', 't.co', 'ow.ly',
+        'l.facebook.com', 'lm.facebook.com', 'l.instagram.com', 'shorturl.at', 'cutt.ly'];
+
+    /** The address a share or short link ends up at; the link itself when it is not one or cannot be followed. */
+    public static function abrirPartilha(string $url): string
+    {
+        $url = trim($url);
+        if (! preg_match('#^https?://#i', $url) && preg_match('#^[\w.-]+\.[a-z]{2,}/#i', $url)) {
+            $url = 'https://'.$url;
+        }
+        $host = preg_replace('/^www\./', '', strtolower((string) parse_url($url, PHP_URL_HOST)));
+        if (! in_array($host, self::PARTILHA, true)) {
+            return $url;
+        }
+        parse_str((string) parse_url($url, PHP_URL_QUERY), $q);
+        if (! empty($q['u']) && filter_var($q['u'], FILTER_VALIDATE_URL)) {
+            return (string) $q['u'];   // l.facebook.com/l.php?u=…
+        }
+        try {
+            $historico = [];
+            \Illuminate\Support\Facades\Http::timeout(8)->withOptions(['allow_redirects' => ['max' => 6, 'track_redirects' => true],
+                'on_stats' => function ($s) use (&$historico) { $historico[] = (string) $s->getEffectiveUri(); }])
+                ->withHeaders(['User-Agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'])
+                ->get($url);
+            $fim = (string) end($historico);
+        } catch (\Throwable) {
+            return $url;
+        }
+        // Google sometimes stops at its own page with the target in ?url= or ?q=.
+        if (preg_match('#(^|\.)google\.#', (string) parse_url($fim, PHP_URL_HOST))) {
+            parse_str((string) parse_url($fim, PHP_URL_QUERY), $g);
+            foreach (['url', 'q', 'link'] as $k) {
+                if (! empty($g[$k]) && filter_var($g[$k], FILTER_VALIDATE_URL)) {
+                    return (string) $g[$k];
+                }
+            }
+        }
+
+        return $fim !== '' && filter_var($fim, FILTER_VALIDATE_URL) ? $fim : $url;
+    }
+
     public static function supports(string $url): bool
     {
         return self::portal($url) !== null;

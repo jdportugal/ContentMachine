@@ -96,6 +96,49 @@ class LeadsTest extends TestCase
         $this->assertSame(2, DB::table('leads')->where('anuncio', self::ANUNCIO)->count());
     }
 
+    public function test_pressing_create_with_no_link_points_to_the_link_box(): void
+    {
+        Queue::fake();
+        Livewire::test(Landing::class)->set(['consentimento' => true])->call('pedir')
+            ->assertHasErrors('anuncio')->assertSee('Primeiro cole aqui o link do anúncio')->assertDispatched('focar-link');
+        $this->assertSame(0, DB::table('leads')->count());
+    }
+
+    public function test_a_link_pasted_in_the_email_box_is_used_as_the_link(): void
+    {
+        Queue::fake();
+        Livewire::test(Landing::class)->set(['emailVideo' => self::ANUNCIO, 'consentimento' => true])->call('pedir')->assertHasNoErrors();
+        $lead = DB::table('leads')->sole();
+        $this->assertSame(self::ANUNCIO, $lead->anuncio);
+        $this->assertNull($lead->email_video);
+    }
+
+    public function test_a_link_pasted_in_the_name_search_is_used_as_the_link(): void
+    {
+        Queue::fake();
+        Livewire::test(Landing::class)->set(['agencia' => 'remax', 'modo' => 'nome', 'nomeConsultor' => self::ANUNCIO, 'consentimento' => true])
+            ->call('procurarConsultor')->assertSet('modo', 'link')->assertHasNoErrors();
+        $this->assertSame(self::ANUNCIO, DB::table('leads')->sole()->anuncio);
+    }
+
+    public function test_a_facebook_redirect_link_opens_to_the_listing(): void
+    {
+        $this->assertSame(self::ANUNCIO, ListingScraper::abrirPartilha('https://l.facebook.com/l.php?u='.urlencode(self::ANUNCIO).'&h=x'));
+        $this->assertSame(self::ANUNCIO, ListingScraper::abrirPartilha(self::ANUNCIO));
+        $this->assertFalse(Landing::pareceLink('Ana Silva'));
+        $this->assertFalse(Landing::pareceLink('ana@remax.pt'));
+        $this->assertTrue(Landing::pareceLink('https://share.google/QBpFkmZYdFpw1WdAe'));
+    }
+
+    public function test_the_email_is_asked_while_the_video_is_made_and_saved_on_the_lead(): void
+    {
+        Queue::fake();
+        $c = Livewire::test(Landing::class)->set(['anuncio' => self::ANUNCIO, 'consentimento' => true])->call('pedir');
+        $c->assertSee('Quer recebê-lo também por email?');
+        $c->set('emailVideo', 'Ana@Exemplo.pt')->call('guardarEmailVideo')->assertHasNoErrors();
+        $this->assertSame('ana@exemplo.pt', DB::table('leads')->sole()->email_video);
+    }
+
     public function test_the_honeypot_pretends_success_and_does_nothing(): void
     {
         Queue::fake();

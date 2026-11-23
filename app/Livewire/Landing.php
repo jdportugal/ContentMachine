@@ -173,7 +173,18 @@ class Landing extends Component
             return;
         }
 
-        $this->anuncio = ListingScraper::limpar($this->anuncio);
+        // A link pasted in the wrong box (the email one) still counts as the link.
+        if (trim($this->anuncio) === '' && self::pareceLink($this->emailVideo)) {
+            [$this->anuncio, $this->emailVideo] = [trim($this->emailVideo), ''];
+        }
+        if (trim($this->anuncio) === '') {
+            // Most people tap the coral button first: send them to the box, ready to paste.
+            $this->addError('anuncio', 'Primeiro cole aqui o link do anúncio ↑');
+            $this->dispatch('focar-link');
+
+            return;
+        }
+        $this->anuncio = ListingScraper::limpar(ListingScraper::abrirPartilha($this->anuncio));
         $this->email = trim($this->email);
         $this->emailVideo = mb_strtolower(trim($this->emailVideo));
         if ($this->marketing && $this->email === '' && $this->emailVideo !== '') {
@@ -201,7 +212,7 @@ class Landing extends Component
             'emailVideo' => ['nullable', 'email:rfc', 'max:255'],
         ], [
             'emailVideo.email' => 'Este email não parece estar certo.',
-            'anuncio.required' => 'Cole o link do anúncio.',
+            'anuncio.required' => 'Primeiro cole aqui o link do anúncio ↑',
             'anuncio.url' => 'Isto não parece um link. Copie-o da barra de endereço do anúncio.',
             'email.required' => 'Não encontrámos o seu email no anúncio. Escreva-o aqui para receber os avisos.',
         ]);
@@ -363,6 +374,14 @@ class Landing extends Component
     /** RE/MAX's own agent search, by the name typed. */
     public function procurarConsultor(\App\Services\RealEstate\RemaxConsultores $remax): void
     {
+        // A listing link pasted in the name box: use it as the link.
+        if (self::pareceLink($this->nomeConsultor)) {
+            [$this->anuncio, $this->nomeConsultor, $this->modo] = [trim($this->nomeConsultor), '', 'link'];
+            $this->resetErrorBag();
+            app()->call([$this, 'pedir']);
+
+            return;
+        }
         $this->validate(['nomeConsultor' => 'required|string|min:3|max:80'], [
             'nomeConsultor.required' => 'Escreva o seu nome.',
             'nomeConsultor.min' => 'Escreva pelo menos o primeiro e o último nome.',
@@ -513,6 +532,30 @@ class Landing extends Component
     }
 
     /** The current lead's reel, as the hero card shows it. */
+    /** Something that looks like a web address rather than a name or an email. */
+    public static function pareceLink(string $texto): bool
+    {
+        $t = trim($texto);
+
+        return $t !== '' && ! str_contains($t, ' ') && ! str_contains($t, '@')
+            && (bool) preg_match('#^(https?://|www\.)|\.(pt|com|net|google)(/|$)#i', $t);
+    }
+
+    /** "Enviamos-lhe o vídeo": the email asked for while the video is being made. */
+    public function guardarEmailVideo(): void
+    {
+        $this->emailVideo = mb_strtolower(trim($this->emailVideo));
+        $this->validate(['emailVideo' => ['required', 'email:rfc', 'max:255']], [
+            'emailVideo.required' => 'Escreva o seu email.',
+            'emailVideo.email' => 'Este email não parece estar certo.',
+        ]);
+        if ($this->leadId) {
+            $lead = DB::table('leads')->where('id', $this->leadId)->first(['convite_email']);
+            DB::table('leads')->where('id', $this->leadId)->update(['email_video' => $this->emailVideo,
+                'convite_email' => $lead?->convite_email ?: $this->emailVideo, 'updated_at' => now()]);
+        }
+    }
+
     private function pedido(LeadVideo $videos): ?array
     {
         $lead = $this->leadId ? $videos->lead($this->leadId) : null;
