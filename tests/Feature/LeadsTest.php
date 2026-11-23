@@ -99,7 +99,7 @@ class LeadsTest extends TestCase
     public function test_pressing_create_with_no_link_points_to_the_link_box(): void
     {
         Queue::fake();
-        Livewire::test(Landing::class)->set(['consentimento' => true])->call('pedir')
+        Livewire::test(Landing::class)->set(['agencia' => 'remax', 'consentimento' => true])->call('pedir')
             ->assertHasErrors('anuncio')->assertSee('Primeiro cole aqui o link do anúncio')->assertDispatched('focar-link');
         $this->assertSame(0, DB::table('leads')->count());
     }
