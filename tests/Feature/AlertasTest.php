@@ -220,8 +220,8 @@ class AlertasTest extends TestCase
         session()->forget('lead_id');
         $outro = 'https://remax.pt/pt/imoveis/venda-moradia-t3-gondomar/125411383-13';
         Livewire::test(Landing::class)->set('anuncio', $outro)->call('pedir')->assertHasNoErrors()
-            ->assertSet('jaTeve', true)->assertSee('JÁ FEZ O SEU VÍDEO GRÁTIS')->assertSee('/conta/novo?anuncio='.urlencode($outro), false)->assertDontSee('Criar vídeo grátis')
-            ->call('outro')->assertSet('jaTeve', false)->assertSee('Criar vídeo grátis');
+            ->assertSet('jaTeve', true)->assertSee('Já fez o seu vídeo grátis.')->assertSee('/conta/novo?anuncio='.urlencode($outro), false)->assertDontSee('Criar vídeo grátis')
+            ->call('outro')->assertSet('jaTeve', false)->assertDontSee('Já fez o seu vídeo grátis.');
         $this->assertSame(1, DB::table('leads')->count());
         \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\Clips\ImportListingJob::class, 1);
 

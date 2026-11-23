@@ -46,7 +46,10 @@ class LeadVideo
         }
         $meta = (array) $clip->meta;
         $limpo = (string) ($meta['limpo_path'] ?? '');
-        if ($limpo !== '' && is_file($limpo)) {
+        if ($clip->isActive()) {
+            // Still being made (a photos video made again with the contact): it comes out clean.
+            $clip->update(['meta' => array_merge($meta, ['free_lead' => false, 'pago' => true])]);
+        } elseif ($limpo !== '' && is_file($limpo)) {
             $clip->update(['output_path' => $limpo, 'meta' => array_merge($meta, ['free_lead' => false, 'pago' => true])]);
         } elseif (! empty($meta['limpo_pendente'])) {
             $clip->update(['meta' => array_merge($meta, ['pago' => true])]);

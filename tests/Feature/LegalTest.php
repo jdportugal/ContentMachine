@@ -35,12 +35,16 @@ class LegalTest extends TestCase
 
     public function test_the_free_video_form_has_one_optional_box_and_a_notice(): void
     {
-        $html = $this->get('/video-gratis?agencia=remax')->assertOk()
-            ->assertSee('Ao pedir, confirma que é o consultor deste anúncio')
-            ->assertSee('Avisem-me por email quando eu publicar um imóvel novo')->assertSee('(Opcional)')
-            ->getContent();
-        $form = substr($html, strpos($html, 'Peça o seu vídeo grátis'), 9000);
-        $this->assertSame(1, substr_count($form, 'type="checkbox"'), 'one box only');
+        // The link screen: a notice, nothing to tick.
+        $html = \Livewire\Livewire::withQueryParams(['agencia' => 'remax'])->test(\App\Livewire\Landing::class)->call('mudarModo', 'link')
+            ->assertSee('Ao pedir, confirma que é o consultor deste anúncio')->html();
+        $this->assertSame(0, substr_count($html, 'type="checkbox"'), 'nothing to tick');
+        // The one optional box comes with the email, while the video is made.
+        \Illuminate\Support\Facades\Queue::fake();
+        $html = \Livewire\Livewire::test(\App\Livewire\Landing::class)->set('anuncio', 'https://www.remax.pt/pt/imoveis/moradia-t3/515150')->call('pedir')
+            ->assertSee('Avisem-me por email quando eu publicar um imóvel novo')->assertSee('(Opcional)')->html();
+        $this->assertSame(1, substr_count($html, 'type="checkbox"'), 'one box only');
+        session()->forget('lead_id');
 
         // Nothing to tick to get the video.
         \Illuminate\Support\Facades\Queue::fake();

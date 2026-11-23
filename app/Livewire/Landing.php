@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\URL;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 /**
  * The public site: one free video per listing. The agent only pastes the link —
@@ -31,6 +32,11 @@ use Livewire\Component;
 #[Title('Imocena · O vídeo do seu imóvel, pronto em minutos. Grátis.')]
 class Landing extends Component
 {
+    use WithFileUploads;
+
+    /** Photos sent instead of a link ("Carregar fotos"). */
+    public const MAX_FOTOS = 30;
+
     /**
      * The only box on the form, optional and never pre-ticked: new-listing alerts and
      * news by email (RGPD / Lei 41/2004). Stored word for word with each consent as
@@ -88,6 +94,7 @@ class Landing extends Component
     /** Honeypot: hidden from people, filled by bots. */
     public string $site = '';
 
+    #[\Livewire\Attributes\Locked]
     public ?int $leadId = null;
 
     /** This listing's agent already had their free video: the card suggests a paid one instead of the form. */
@@ -105,8 +112,29 @@ class Landing extends Component
     /** The colleague the invite email just went to ('' when none). */
     public string $conviteEnviado = '';
 
-    /** RE/MAX only: how the agent gives us the listing, 'link' (paste it) or 'nome' (find it by their name). */
-    public string $modo = 'link';
+    /**
+     * Step 2, one question at a time: '' = "Qual é o imóvel?" (the four answers), then
+     * 'link' (paste it), 'nome' (find it by their name, RE/MAX only), 'fotos' (upload) or 'depois' (email me).
+     */
+    public string $modo = '';
+
+    /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
+    public array $fotos = [];
+
+    /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
+    public array $novasFotos = [];
+
+    /** One line with the photos ("T2 em Alvalade, 320 000 €"): what the narration says. */
+    public string $sobreFotos = '';
+
+    /** A video from uploaded photos has no contact at the end: asked for with the clean version. */
+    public string $nomeContacto = '';
+
+    public string $telefoneContacto = '';
+
+    public $fotoContacto = null;
+
+    public bool $pedirContacto = false;
 
     public string $nomeConsultor = '';
 
@@ -153,6 +181,7 @@ class Landing extends Component
         $anuncio = ListingScraper::limpar((string) request()->query('anuncio', ''));
         if ($anuncio !== '' && mb_strlen($anuncio) <= 500 && ListingScraper::supports($anuncio)) {
             $this->anuncio = $anuncio;
+            $this->modo = 'link';
             $this->agencia = isset(self::AGENCIAS[$portal = (string) ListingScraper::portal($anuncio)]) ? $portal : $this->agencia;
             $this->jaTeve = self::jaTeveVideo($this->agente()['chave'] ?? null, $anuncio);
         }
@@ -160,6 +189,7 @@ class Landing extends Component
 
     public function pedir(ListingImport $import, ProjectContext $context): void
     {
+        $this->modo = 'link';   // whatever went wrong is shown by the link box
         if ($this->site !== '') {
             $this->bot = true;
 
@@ -366,7 +396,11 @@ class Landing extends Component
     /** RE/MAX: switch between pasting the link and finding the listing by name. */
     public function mudarModo(string $modo): void
     {
-        $this->modo = $modo === 'nome' && $this->agencia === 'remax' ? 'nome' : 'link';
+        $this->modo = match (true) {
+            $modo === 'nome' && $this->agencia === 'remax' => 'nome',
+            in_array($modo, ['link', 'fotos', 'depois', ''], true) => $modo,
+            default => 'link',
+        };
         $this->resetErrorBag();
         $this->avisoProcura = '';
     }
@@ -434,6 +468,7 @@ class Landing extends Component
                 $this->modo = 'link';
                 $this->resetErrorBag();
                 $this->registar('escolha-imovel', ['anuncio' => $i['url']]);
+                app()->call([$this, 'pedir']);   // one tap: the listing is the answer
 
                 return;
             }
@@ -528,10 +563,110 @@ class Landing extends Component
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'emailVideo', 'leadId', 'jaTeve', 'enviado');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'emailVideo', 'leadId', 'jaTeve', 'enviado', 'modo', 'fotos', 'sobreFotos', 'imovelEscolhido', 'pedirContacto');
     }
 
     /** The current lead's reel, as the hero card shows it. */
+    /** Photos chosen (added to those already there, up to MAX_FOTOS). */
+    public function updatedNovasFotos(): void
+    {
+        $this->validate(['novasFotos.*' => 'image|max:15360'], [
+            'novasFotos.*.image' => 'Só fotos (JPG, PNG ou WebP).',
+            'novasFotos.*.max' => 'Cada foto tem de ter menos de 15 MB.',
+        ]);
+        $this->fotos = array_slice(array_merge($this->fotos, $this->novasFotos), 0, self::MAX_FOTOS);
+        $this->novasFotos = [];
+    }
+
+    public function tirarFoto(int $i): void
+    {
+        unset($this->fotos[$i]);
+        $this->fotos = array_values($this->fotos);
+    }
+
+    /** "Carregar fotos": a free video from the agent's own photos (no listing, so no contact at the end yet). */
+    public function criarComFotos(ListingImport $import, ProjectContext $context): void
+    {
+        if ($this->site !== '') {
+            $this->bot = true;
+
+            return;
+        }
+        if (count($this->fotos) < 3) {
+            $this->addError('fotos', 'Escolha pelo menos 3 fotos.');
+
+            return;
+        }
+        $this->sobreFotos = trim(preg_replace('/\s+/', ' ', $this->sobreFotos));
+        $this->validate(['sobreFotos' => ['required', 'string', 'min:4', 'max:300']], [
+            'sobreFotos.required' => 'Diga-nos o que é e onde fica.', 'sobreFotos.min' => 'Diga-nos o que é e onde fica.']);
+        $preco = preg_match('/(\d{1,3}(?:[ .]\d{3})+|\d{4,})\s*(?:€|eur)/iu', $this->sobreFotos, $m) ? (int) preg_replace('/\D/', '', $m[1]) : null;
+        $chave = 'lead:'.request()->ip();
+        if (RateLimiter::tooManyAttempts($chave, config('contentmachine.leads.per_hour'))) {
+            $this->addError('fotos', 'Recebemos muitos pedidos deste endereço. Tente novamente daqui a uma hora.');
+
+            return;
+        }
+        RateLimiter::hit($chave, 3600);
+        $disco = (string) config('contentmachine.clips.disk');
+        $caminhos = array_map(fn ($f) => $f->store('clips/uploads', $disco), $this->fotos);
+        $anuncio = \App\Services\Contas\NovoVideo::anuncioCarregado();
+        $portal = ListingScraper::portal('https://'.(self::AGENCIAS[$this->agencia]['site'] ?? '').'/') ?? $this->agencia;
+        $clip = $import->start($anuncio, ['free_lead' => true,
+            'listing_manual' => ['description' => $this->sobreFotos, 'price' => $preco, 'photos' => $caminhos, 'agent' => [], 'agency' => (string) (self::AGENCIAS[$this->agencia]['nome'] ?? '')],
+            'theme' => app(ThemeRepository::class)->forPortal((string) $portal)->slug]);
+        $this->leadId = DB::table('leads')->insertGetId([
+            'anuncio' => $anuncio, 'projeto' => $context->current()->slug, 'clip_id' => $clip->id, 'ip' => (string) request()->ip(),
+            'consentimento_em' => now(), 'origem' => \App\Services\Marketing\Origem::json(), 'agencia' => $this->agencia ?: null,
+            'convidado_por' => $this->convidadoPor(null), 'created_at' => now(), 'updated_at' => now(),
+        ]);
+        $this->reset('fotos', 'sobreFotos');
+        session(['lead_id' => $this->leadId]);
+        $this->registar('fotos-carregadas', ['nota' => count($caminhos).' fotos']);
+        $this->dispatch('lead-criado', id: $this->leadId);
+        app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], null, \App\Services\Marketing\Origem::atual());
+    }
+
+    /**
+     * A photos video and "Adicionar o meu contacto": the video is made again with the agent's
+     * name and phone at the end, then the clean version is paid for (the payment cleans this new one).
+     */
+    public function guardarContacto(ListingImport $import)
+    {
+        $lead = $this->leadId ? DB::table('leads')->find($this->leadId) : null;
+        $clip = $lead?->clip_id ? app(\App\Services\Clips\Store\ClipStore::class)->find($lead->clip_id) : null;
+        $meta = (array) ($clip?->meta ?? []);
+        if (! $lead || empty($meta['listing_manual'])) {
+            return null;
+        }
+        $this->nomeContacto = trim(preg_replace('/\s+/', ' ', $this->nomeContacto));
+        $this->telefoneContacto = trim($this->telefoneContacto);
+        $this->validate([
+            'nomeContacto' => ['required', 'string', 'min:2', 'max:60'],
+            'telefoneContacto' => ['required', 'string', 'max:30', 'regex:/^[+\d][\d\s().-]{7,}$/'],
+            'fotoContacto' => ['nullable', 'image', 'max:15360'],
+        ], [
+            'nomeContacto.required' => 'Escreva o seu nome.',
+            'telefoneContacto.required' => 'Escreva o seu telefone.',
+            'telefoneContacto.regex' => 'Este telefone não parece estar certo.',
+            'fotoContacto.image' => 'A foto tem de ser uma imagem.',
+        ]);
+        $manual = (array) $meta['listing_manual'];
+        $manual['agent'] = ['name' => $this->nomeContacto, 'phone' => $this->telefoneContacto];
+        $opcoes = array_filter(['free_lead' => true, 'listing_manual' => $manual, 'theme' => $meta['theme'] ?? null,
+            'agent_photo' => $this->fotoContacto?->store('clips/uploads', (string) config('contentmachine.clips.disk'))]);
+        $novo = $import->start($lead->anuncio, $opcoes);
+        DB::table('leads')->where('id', $lead->id)->update(['clip_id' => $novo->id, 'nome' => $this->nomeContacto, 'telefone' => $this->telefoneContacto,
+            'pronto_em' => null, 'updated_at' => now()]);
+        $this->pedirContacto = false;
+        $link = (string) config('contentmachine.stripe.links.primeiro');
+        if ($link === '') {
+            return null;
+        }
+
+        return redirect()->away($link.'?'.http_build_query(['client_reference_id' => 'lead-'.$lead->id, 'locale' => 'pt']));
+    }
+
     /** Something that looks like a web address rather than a name or an email. */
     public static function pareceLink(string $texto): bool
     {
@@ -551,7 +686,9 @@ class Landing extends Component
         ]);
         if ($this->leadId) {
             $lead = DB::table('leads')->where('id', $this->leadId)->first(['convite_email']);
-            DB::table('leads')->where('id', $this->leadId)->update(['email_video' => $this->emailVideo,
+            // The one optional box sits here now: ticked, the same email gets the new-listing alerts.
+            $alertas = $this->marketing ? ['email' => $this->emailVideo, 'marketing_em' => now(), 'marketing_texto' => self::MARKETING] : [];
+            DB::table('leads')->where('id', $this->leadId)->update($alertas + ['email_video' => $this->emailVideo,
                 'convite_email' => $lead?->convite_email ?: $this->emailVideo, 'updated_at' => now()]);
         }
     }
@@ -566,7 +703,10 @@ class Landing extends Component
         if ($videos->ficheiro($lead)) {
             $limpo = (! empty($lead->pago_em) || ! empty($lead->oferta_em)) && empty($clip?->meta['free_lead']);
 
+            $manual = (array) ($clip?->meta['listing_manual'] ?? []);
+
             return ['estado' => 'pronto', 'pago' => $limpo, 'oferta' => $limpo && empty($lead->pago_em),
+                'semContacto' => $manual !== [] && trim((string) ($manual['agent']['phone'] ?? '')) === '',
                 'video' => URL::signedRoute('lead.video', ['lead' => $lead->id]),
                 'descarregar' => URL::signedRoute('lead.video', ['lead' => $lead->id, 'download' => 1]),
                 // "Convide um colega": only while there is a watermark to take off.

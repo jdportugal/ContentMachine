@@ -56,9 +56,9 @@ class ProcurarPeloNomeTest extends TestCase
             ->call('escolherConsultor', '126941022')
             ->assertSee('Moradia T3 em Sé')->assertSee('250 000 €')->assertSee('Apartamento T2 em Praia da Vitória')
             ->call('escolherImovel', '126941022-22')
-            ->assertSet('modo', 'link')->assertSet('anuncio', 'https://remax.pt/pt/imoveis/venda-moradia-t3-angra-do-heroismo-se/126941022-22')
-            ->assertSee('Imóvel escolhido')
-            ->call('pedir')->assertHasNoErrors();
+            // One tap on the listing asks for its video.
+            ->assertHasNoErrors()->assertSet('anuncio', 'https://remax.pt/pt/imoveis/venda-moradia-t3-angra-do-heroismo-se/126941022-22')
+            ->assertSee('Estamos a fazer o seu vídeo');
 
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === 'https://remax.pt/pt/imoveis/venda-moradia-t3-angra-do-heroismo-se/126941022-22');
         $this->assertSame(['procura-nome', 'escolha-consultor', 'escolha-imovel'], DB::table('landing_eventos')->where('tipo', '!=', 'escolha')->orderBy('id')->pluck('tipo')->all());

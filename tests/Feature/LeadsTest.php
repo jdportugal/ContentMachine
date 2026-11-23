@@ -35,7 +35,8 @@ class LeadsTest extends TestCase
     {
         // First the question and nothing else; the form, prices and the rest are on the agency's page.
         $this->get('/video-gratis')->assertOk()->assertSee('O vídeo do seu imóvel')->assertSee('Em que agência trabalha?')->assertDontSee('Peça o seu vídeo grátis')->assertDontSee('Perguntas frequentes')->assertDontSee('Oferta de lançamento');
-        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')->assertSee('Peça o seu vídeo grátis')->assertSee('remax.pt');
+        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('Qual é o imóvel?')->assertSee('Tenho o link')->assertSee('Procurar pelo meu nome')
+            ->assertSee('Carregar fotos')->assertSee('Lembrar-me mais tarde')->assertDontSee('Perguntas frequentes');
     }
 
     public function test_the_demo_listing_has_a_page_and_reads_without_fetching(): void
@@ -53,7 +54,6 @@ class LeadsTest extends TestCase
         $this->assertCount(14, $listing['photos']);
         $this->assertStringEndsWith('/media/demo/moradia-lajeosa/01-fachada.png', $listing['photos'][0]);
         $this->assertSame('295 000 €', $listing['details']['Preço']);
-        $this->get('/video-gratis?agencia=remax')->assertSee('/demo/moradia-lajeosa');
     }
 
     public function test_the_link_alone_starts_the_listing_import(): void
@@ -183,7 +183,7 @@ class LeadsTest extends TestCase
 
         Livewire::test(Landing::class)
             ->assertSee('Publique-o já.')->assertSee('Descarregar MP4')
-            ->call('outro')->assertSee('Peça o seu vídeo grátis');
+            ->call('outro')->assertSee('Qual é o imóvel?');
         $this->assertNull(session('lead_id'));
 
         $this->get('/v/'.$lead->id)->assertForbidden();
@@ -336,11 +336,12 @@ class LeadsTest extends TestCase
         $this->assertNull($lead->marketing_em);
 
         session()->forget('lead_id');   // a fresh visitor, not the one whose video is in progress
-        // The alerts address appears only once the box is ticked (the video-ready email is its own field).
-        Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->assertDontSee('usamos o do seu anúncio')
-            ->set('marketing', true)->assertSee('usamos o do seu anúncio')
-            ->set(['anuncio' => self::ANUNCIO.'7', 'consentimento' => true])->call('pedir')
-            ->assertHasErrors(['email' => 'required']);
+        // The one box is on the waiting screen, with the email: ticked, that email gets the alerts.
+        $c = Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->set('anuncio', self::ANUNCIO.'7')->call('pedir')->assertHasNoErrors()
+            ->assertSee(Landing::MARKETING)->set(['emailVideo' => 'ana@exemplo.pt', 'marketing' => true])->call('guardarEmailVideo')->assertHasNoErrors();
+        $novo = DB::table('leads')->where('anuncio', 'like', '%7')->sole();
+        $this->assertSame('ana@exemplo.pt', $novo->email);
+        $this->assertNotNull($novo->marketing_em);
     }
 
     public function test_opting_in_records_the_email_time_and_exact_wording(): void

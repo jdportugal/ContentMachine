@@ -22,8 +22,11 @@ class LandingAgenciaTest extends TestCase
             ->assertDontSee('Criar vídeo grátis')
             ->call('escolher', 'kw')
             ->assertSet('agencia', 'kw')->assertDispatched('agencia-escolhida', agencia: 'kw')
-            ->assertSee('O vídeo do seu imóvel KW Portugal')->assertSee('kwportugal.pt')->assertSee('Criar vídeo grátis')
-            ->assertSee('Vídeo com a imagem da KW')->assertSee('Não é da KW? Trocar de agência')
+            // One question at a time: which listing, four short answers (the name search is RE/MAX only).
+            ->assertSee('Qual é o imóvel?')->assertSee('Tenho o link')->assertSee('Carregar fotos')->assertSee('Lembrar-me mais tarde')
+            ->assertDontSee('Procurar pelo meu nome')->assertDontSee('Criar vídeo grátis')->assertDontSee('Perguntas frequentes')
+            ->call('mudarModo', 'link')->assertSee('Cole o link')->assertSee('kwportugal.pt')->assertSee('Criar vídeo grátis')
+            ->call('mudarModo', '')->assertSee('Qual é o imóvel?')
             ->call('trocar')->assertSet('agencia', '')->assertSee('Em que agência trabalha?');
 
         $this->assertSame(['escolha', 'kw'], array_values((array) DB::table('landing_eventos')->select('tipo', 'agencia')->sole()));
@@ -35,10 +38,10 @@ class LandingAgenciaTest extends TestCase
     {
         Livewire::test(Landing::class)->call('escolher', 'iad');
         $this->assertSame('iad', session('agencia'));
-        $this->get('/video-gratis')->assertOk()->assertSee('O vídeo do seu imóvel iad Portugal');
+        $this->get('/video-gratis')->assertOk()->assertSee('Qual é o imóvel?')->assertSee('iad Portugal');
 
         session()->forget('agencia');
-        $this->get('/video-gratis?agencia=exp')->assertOk()->assertSee('O vídeo do seu imóvel eXp Portugal');
+        $this->get('/video-gratis?agencia=exp')->assertOk()->assertSee('Qual é o imóvel?')->assertSee('eXp Portugal');
         $this->get('/video-gratis?agencia=nope')->assertOk()->assertSee('Em que agência trabalha?');
     }
 
@@ -46,7 +49,7 @@ class LandingAgenciaTest extends TestCase
     {
         Queue::fake();
         Livewire::test(Landing::class)->call('escolher', 'century21')
-            ->assertSee('O vídeo do seu imóvel Century 21')->assertSee('century21.pt')->assertSee('Criar vídeo grátis')
+            ->call('mudarModo', 'link')->assertSee('century21.pt')->assertSee('Criar vídeo grátis')
             ->set('anuncio', 'https://century21.pt/comprar/C0242-02837')->call('pedir')->assertHasNoErrors();
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === 'https://century21.pt/comprar/C0242-02837');
         $this->assertSame('century21', DB::table('leads')->sole()->agencia);
@@ -56,7 +59,7 @@ class LandingAgenciaTest extends TestCase
     {
         Queue::fake();
         Livewire::test(Landing::class)->assertSee('Predimed')->call('escolher', 'predimed')
-            ->assertSee('O vídeo do seu imóvel Predimed')->assertSee('predimed.pt')->assertSee('Criar vídeo grátis')
+            ->call('mudarModo', 'link')->assertSee('predimed.pt')->assertSee('Criar vídeo grátis')
             ->set('anuncio', 'https://predimed.pt/Imovel/wgndg2')->call('pedir')->assertHasNoErrors();
         Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === 'https://predimed.pt/Imovel/wgndg2');
         $this->assertSame('predimed', DB::table('leads')->sole()->agencia);
@@ -67,7 +70,7 @@ class LandingAgenciaTest extends TestCase
         Queue::fake();
         Livewire::test(Landing::class)->assertSee('Mais agências')->assertSee('Bússola Haus')->assertSee('My Best Houses')->assertSee('Homewize')->assertSee('Lisrenda')
             ->assertDontSee('abcdefgh')
-            ->call('escolher', 'bussolahaus')->assertSee('O vídeo do seu imóvel Bússola Haus')->assertSee('Criar vídeo grátis')
+            ->call('escolher', 'bussolahaus')->assertSee('Bússola Haus')->assertSee('Qual é o imóvel?')
             ->set('anuncio', 'https://bussolatchaus.com/property/apartamento-t2-a-venda-na-rua-dos-quarteis-58/')->call('pedir')->assertHasNoErrors();
         $this->assertSame('bussolahaus', DB::table('leads')->sole()->agencia);
         session()->forget('lead_id');
@@ -102,7 +105,7 @@ class LandingAgenciaTest extends TestCase
     public function test_someone_without_the_link_at_hand_gets_the_page_by_email_once(): void
     {
         Livewire::test(Landing::class)->call('escolher', 'remax')
-            ->assertSee('Não tem o link do anúncio à mão?')
+            ->assertSee('Lembrar-me mais tarde')->call('mudarModo', 'depois')->assertSee('O seu email?')
             ->set('contacto', 'ana@example.com')->call('lembrar')->assertHasNoErrors()
             ->assertSet('enviado', 'lembrete')->assertSee('Enviámos-lhe o link.');
 

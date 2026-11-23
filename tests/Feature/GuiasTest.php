@@ -112,7 +112,7 @@ class GuiasTest extends TestCase
         }
         // The first touch is kept from the home page's request, before the forward.
         $this->assertSame('meta', session('origem')['utm_source']);
-        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('O vídeo do seu imóvel RE/MAX')
+        $this->get('/video-gratis?agencia=remax')->assertOk()->assertSee('Qual é o imóvel?')
             ->assertSee('<link rel="canonical" href="'.route('video').'">', false);
 
         // Someone with a video under way goes back to it.

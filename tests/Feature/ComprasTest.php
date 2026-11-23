@@ -50,21 +50,17 @@ class ComprasTest extends TestCase
         return $this->call('POST', '/stripe/webhook', [], [], [], ['HTTP_STRIPE_SIGNATURE' => $header ?? StripeWebhook::sign($payload, self::SECRET)], $payload);
     }
 
-    public function test_the_buy_buttons_open_the_payment_links_and_fall_back_to_email(): void
-    {
-        $this->get('/video-gratis?agencia=remax')->assertOk()
-            ->assertSee('https://buy.stripe.com/avulso?locale=pt', false)
-            ->assertSee('https://buy.stripe.com/pack10?locale=pt', false)
-            ->assertSee('mailto:', false);   // pack20 has no link yet → email
-    }
-
     public function test_a_visitor_with_a_free_video_carries_the_lead_into_checkout(): void
     {
         Queue::fake();
         Livewire::test(Landing::class)->set(['anuncio' => self::ANUNCIO, 'consentimento' => true])->call('pedir')->assertHasNoErrors();
         $lead = DB::table('leads')->sole();
+        $clip = app(\App\Services\Clips\Store\ClipStore::class)->find($lead->clip_id);
+        $clip->update(['status' => \App\Services\Clips\Store\ClipRecord::STATUS_DONE, 'output_path' => $f = tempnam(sys_get_temp_dir(), 'v')]);
+        file_put_contents($f, 'mp4');
 
-        $this->get('/video-gratis')->assertSee('https://buy.stripe.com/avulso?client_reference_id=lead-'.$lead->id.'&amp;locale=pt', false);
+        // The ready video's buttons: the pack carries the lead too; without a link, the button is an email.
+        $this->get('/video-gratis')->assertSee('https://buy.stripe.com/pack10?client_reference_id=lead-'.$lead->id.'&amp;locale=pt', false);
     }
 
     public function test_the_webhook_rejects_bad_signatures(): void
