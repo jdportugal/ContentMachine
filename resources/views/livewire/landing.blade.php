@@ -165,10 +165,10 @@
                             </button>
                         @else
                             <a href="{{ $stripe('primeiro', 'Versão limpa do 1.º vídeo (10 €)') }}" class="{{ $botao }} rounded-full flex-col !gap-0 py-2">
-                                <span>Tirar a marca d’água · 10 €</span><span class="text-xs font-normal opacity-75">Versão limpa · 10 €, este vídeo</span>
+                                <span>Tirar a marca d’água · 10 €</span><span class="text-xs font-normal opacity-75">este vídeo, sem marca</span>
                             </a>
                         @endif
-                        <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full border-[1.5px] border-ivory/35 text-ivory font-semibold hover:bg-ivory/5">↓ Descarregar MP4 <span class="hidden md:inline font-normal text-[#AEB5C1]">com marca d’água</span></a>
+                        <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full border-[1.5px] border-ivory/35 text-ivory font-semibold whitespace-nowrap hover:bg-ivory/5">↓ Descarregar MP4 <span class="hidden md:inline font-normal text-[#AEB5C1]">com marca d’água</span></a>
                         <div class="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 text-[13px]">
                             <a href="{{ $stripe('pack10', 'Pack 10 (100 €)') }}" class="text-cyan underline underline-offset-2">Pack 10 · 10 €/vídeo</a>
                             @if ($pedido['convite'] ?? null)
@@ -198,7 +198,7 @@
                             Foto (opcional)
                             <input type="file" accept="image/*" wire:model="fotoContacto" class="sr-only">
                         </label>
-                        <button type="submit" wire:loading.attr="disabled" wire:target="guardarContacto,fotoContacto" class="{{ $botao }} rounded-full">Continuar para pagamento · 10 €</button>
+                        <button type="submit" wire:loading.attr="disabled" wire:target="guardarContacto,fotoContacto" class="{{ $botao }} rounded-full whitespace-nowrap">Continuar para pagar · 10 €</button>
                         <p class="text-xs text-center text-[#8B95A7]">O vídeo é refeito com o seu contacto no fim, sem marca d’água.</p>
                     </form>
                 </div>
@@ -271,7 +271,7 @@
                 @endif
                 @error('novasFotos.*') <p class="text-[13px] text-coral">{{ $message }}</p> @enderror
                 @error('fotos') <p class="text-[13px] text-coral">{{ $message }}</p> @enderror
-                <input type="text" wire:model="sobreFotos" placeholder="O que é e onde? Ex.: T2 em Alvalade, 320 000 €" maxlength="300" class="{{ $linha }} !text-[17px]">
+                <input type="text" wire:model="sobreFotos" placeholder="O que é e onde? Ex.: T2 em Alvalade" maxlength="300" class="{{ $linha }} !text-[17px]">
                 @error('sobreFotos') <p class="-mt-2 text-[13px] text-coral">{{ $message }}</p> @enderror
                 <div aria-hidden="true" class="absolute -left-[9999px] w-px h-px overflow-hidden"><label>Site <input type="text" wire:model="site" tabindex="-1" autocomplete="off"></label></div>
                 <button type="submit" wire:loading.attr="disabled" wire:target="criarComFotos,novasFotos" class="{{ $botao }} self-start">

@@ -75,7 +75,7 @@ class VideoProntoTest extends TestCase
 
         session(['lead_id' => $lead->id]);
         Livewire::test(Landing::class)
-            ->assertSee('Versão limpa · 10 €')
+            ->assertSee('Tirar a marca d’água · 10 €')
             ->assertSee('https://buy.stripe.com/primeiro?client_reference_id=lead-'.$lead->id, false)
             ->assertSee('Pack 10 · 10 €/vídeo')
             ->assertDontSee('Quero a versão limpa (20 €)');
