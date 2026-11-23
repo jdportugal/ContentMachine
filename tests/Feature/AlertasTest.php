@@ -197,12 +197,12 @@ class AlertasTest extends TestCase
         Livewire::test(Landing::class)->set(['anuncio' => 'https://brunocouto.expportugal.com/imoveis/penafiel/moradia/penafiel-3'])->call('pedir')->assertHasNoErrors();
         $this->assertNull(DB::table('leads')->where('consultor', 'exp:brunocouto')->sole()->email);
 
-        // iad does not publish the email: the form asks for it.
+        // iad does not publish the email: it has to be typed (on the page, the box comes with the email field).
         session()->forget('lead_id');
         $nuxt = [['data' => 1], ['vue-query-state' => 2], ['queries' => 3], [4], ['queryKey' => 5, 'state' => 7], [6], 'properties', ['data' => 8], ['agent' => 9], ['userName' => 10], 'ana.sousa'];
         $this->paginas['https://www.iadportugal.pt/anuncio/t2-faro/r555001'] = '<script type="application/json" id="__NUXT_DATA__">'.json_encode($nuxt).'</script>';
         Livewire::test(Landing::class)->set(['anuncio' => 'https://www.iadportugal.pt/anuncio/t2-faro/r555001', 'marketing' => true])->call('pedir')
-            ->assertHasErrors(['email' => 'required'])->assertSee('Não encontrámos o seu email no anúncio')
+            ->assertHasErrors(['email' => 'required'])
             ->set('email', 'ana@sousa.pt')->call('pedir')->assertHasNoErrors();
         $this->assertSame('ana@sousa.pt', DB::table('leads')->where('consultor', 'iad:ana.sousa')->sole()->email);
 
