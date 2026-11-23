@@ -37,7 +37,7 @@ class LandingPassosTest extends TestCase
     {
         Queue::fake();
         $c = Livewire::withQueryParams(['agencia' => 'kw'])->test(Landing::class)
-            ->call('mudarModo', 'fotos')->assertSee('As fotos do imóvel')
+            ->call('mudarModo', 'fotos')->assertSee('Fotos ou vídeos do imóvel')
             ->set('novasFotos', $this->fotos(2))->assertCount('fotos', 2)
             ->call('criarComFotos')->assertHasErrors('fotos')
             ->set('novasFotos', $this->fotos(3))->assertCount('fotos', 5)
@@ -55,6 +55,21 @@ class LandingPassosTest extends TestCase
         $this->assertSame('T2 em Alvalade, 320 000 €', $meta['listing_manual']['description']);
         $this->assertSame(320000, $meta['listing_manual']['price']);
         Queue::assertPushed(ImportListingJob::class, 1);
+    }
+
+    public function test_a_video_of_the_property_is_enough_and_is_cut_per_room(): void
+    {
+        Queue::fake();
+        $filme = UploadedFile::fake()->create('casa.mp4', 2048, 'video/mp4');
+        Livewire::withQueryParams(['agencia' => 'remax'])->test(Landing::class)->call('mudarModo', 'fotos')
+            ->set('novasFotos', [$filme])->assertCount('videos', 1)->assertCount('fotos', 0)->assertSee('1 vídeo')
+            ->set('novasFotos', $this->fotos(2))->assertCount('fotos', 2)
+            ->set('sobreFotos', 'T3 em Braga')->call('criarComFotos')->assertHasNoErrors()->assertSee('Estamos a fazer o seu vídeo');
+
+        $meta = app(ClipStore::class)->find(DB::table('leads')->sole()->clip_id)->meta;
+        $this->assertNotEmpty($meta['listing_video']);
+        $this->assertTrue($meta['mix_photos']);
+        $this->assertCount(2, $meta['listing_manual']['photos']);
     }
 
     public function test_a_photos_video_asks_for_the_contact_with_the_clean_version(): void
@@ -105,6 +120,6 @@ class LandingPassosTest extends TestCase
     public function test_an_agency_we_do_not_read_can_still_use_photos(): void
     {
         Livewire::test(Landing::class)->call('escolher', 'era')->assertSee('Ou faça já o vídeo com as suas fotos')
-            ->call('mudarModo', 'fotos')->assertSee('As fotos do imóvel');
+            ->call('mudarModo', 'fotos')->assertSee('Fotos ou vídeos do imóvel');
     }
 }

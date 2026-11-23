@@ -251,16 +251,21 @@
 
         @elseif ($modo === 'fotos')
             <button type="button" wire:click="mudarModo('')" class="{{ $voltar }}">← Voltar</button>
-            <h1 class="mt-3 {{ $pergunta }}">As fotos do imóvel</h1>
+            <h1 class="mt-3 {{ $pergunta }}">Fotos ou vídeos do imóvel</h1>
             <form wire:submit="criarComFotos" class="mt-7 flex flex-col gap-4" novalidate>
                 <label class="flex flex-col items-center justify-center gap-1.5 h-[170px] rounded-[18px] border-2 border-dashed border-ivory/30 text-[#C9CED6] cursor-pointer hover:border-cyan">
-                    <span class="text-[17px] font-semibold text-ivory" wire:loading.remove wire:target="novasFotos">{{ $fotos ? 'Juntar mais fotos' : 'Escolher fotos' }}</span>
+                    <span class="text-[17px] font-semibold text-ivory" wire:loading.remove wire:target="novasFotos">{{ $fotos || $videos ? 'Juntar mais' : 'Escolher fotos ou vídeos' }}</span>
                     <span class="text-[17px] font-semibold text-cyan" wire:loading wire:target="novasFotos">A carregar…</span>
-                    <span class="text-sm">{{ count($fotos) }} de até {{ \App\Livewire\Landing::MAX_FOTOS }}</span>
-                    <input type="file" accept="image/*" multiple wire:model="novasFotos" class="sr-only">
+                    <span class="text-sm">{{ count($fotos) }} fotos{{ $videos ? ' · '.count($videos).' '.(count($videos) === 1 ? 'vídeo' : 'vídeos') : '' }}</span>
+                    <input type="file" accept="image/*,video/mp4,video/quicktime" multiple wire:model="novasFotos" class="sr-only">
                 </label>
-                @if ($fotos)
+                @if ($fotos || $videos)
                     <div class="flex flex-wrap gap-2">
+                        @foreach ($videos as $i => $v)
+                            <button type="button" wire:key="v-{{ $i }}" wire:click="tirarVideo({{ $i }})" class="w-[60px] h-[60px] rounded-[10px] bg-navy-2 border border-ivory/20 flex flex-col items-center justify-center text-ivory text-[11px] cursor-pointer hover:border-coral" aria-label="Tirar este vídeo">
+                                <span class="text-lg leading-none">▶</span>vídeo
+                            </button>
+                        @endforeach
                         @foreach ($fotos as $i => $f)
                             <button type="button" wire:key="f-{{ $i }}" wire:click="tirarFoto({{ $i }})" class="relative w-[60px] h-[60px] rounded-[10px] overflow-hidden cursor-pointer group" aria-label="Tirar esta foto">
                                 <img src="{{ $f->temporaryUrl() }}" alt="" class="w-full h-full object-cover">

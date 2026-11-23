@@ -37,6 +37,9 @@ class Landing extends Component
     /** Photos sent instead of a link ("Carregar fotos"). */
     public const MAX_FOTOS = 30;
 
+    /** Videos of the property sent with (or instead of) the photos: cut per room, like in the account. */
+    public const MAX_VIDEOS = 3;
+
     /**
      * The only box on the form, optional and never pre-ticked: new-listing alerts and
      * news by email (RGPD / Lei 41/2004). Stored word for word with each consent as
@@ -120,6 +123,9 @@ class Landing extends Component
 
     /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
     public array $fotos = [];
+
+    /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
+    public array $videos = [];
 
     /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
     public array $novasFotos = [];
@@ -563,19 +569,36 @@ class Landing extends Component
     public function outro(): void
     {
         session()->forget('lead_id');
-        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'emailVideo', 'leadId', 'jaTeve', 'enviado', 'modo', 'fotos', 'sobreFotos', 'imovelEscolhido', 'pedirContacto');
+        $this->reset('anuncio', 'consentimento', 'marketing', 'email', 'emailVideo', 'leadId', 'jaTeve', 'enviado', 'modo', 'fotos', 'videos', 'sobreFotos', 'imovelEscolhido', 'pedirContacto');
     }
 
     /** The current lead's reel, as the hero card shows it. */
     /** Photos chosen (added to those already there, up to MAX_FOTOS). */
     public function updatedNovasFotos(): void
     {
-        $this->validate(['novasFotos.*' => 'image|max:15360'], [
-            'novasFotos.*.image' => 'Só fotos (JPG, PNG ou WebP).',
-            'novasFotos.*.max' => 'Cada foto tem de ter menos de 15 MB.',
+        $this->validate(['novasFotos.*' => 'file|mimetypes:image/jpeg,image/png,image/webp,video/mp4,video/quicktime|max:512000'], [
+            'novasFotos.*.mimetypes' => 'Só fotos (JPG, PNG, WebP) e vídeos (MP4 ou MOV).',
+            'novasFotos.*.max' => 'Cada vídeo tem de ter menos de 500 MB.',
         ]);
-        $this->fotos = array_slice(array_merge($this->fotos, $this->novasFotos), 0, self::MAX_FOTOS);
+        foreach ($this->novasFotos as $f) {
+            if (str_starts_with((string) $f->getMimeType(), 'video/')) {
+                if (count($this->videos) < self::MAX_VIDEOS) {
+                    $this->videos[] = $f;
+                }
+            } elseif ($f->getSize() <= 15360 * 1024) {
+                $this->fotos[] = $f;
+            } else {
+                $this->addError('novasFotos', 'Cada foto tem de ter menos de 15 MB.');
+            }
+        }
+        $this->fotos = array_slice($this->fotos, 0, self::MAX_FOTOS);
         $this->novasFotos = [];
+    }
+
+    public function tirarVideo(int $i): void
+    {
+        unset($this->videos[$i]);
+        $this->videos = array_values($this->videos);
     }
 
     public function tirarFoto(int $i): void
@@ -592,8 +615,8 @@ class Landing extends Component
 
             return;
         }
-        if (count($this->fotos) < 3) {
-            $this->addError('fotos', 'Escolha pelo menos 3 fotos.');
+        if (count($this->fotos) < 3 && $this->videos === []) {
+            $this->addError('fotos', 'Escolha pelo menos 3 fotos ou um vídeo.');
 
             return;
         }
@@ -610,19 +633,22 @@ class Landing extends Component
         RateLimiter::hit($chave, 3600);
         $disco = (string) config('contentmachine.clips.disk');
         $caminhos = array_map(fn ($f) => $f->store('clips/uploads', $disco), $this->fotos);
+        $filmes = array_map(fn ($f) => $f->store('clips/uploads', $disco), $this->videos);
         $anuncio = \App\Services\Contas\NovoVideo::anuncioCarregado();
         $portal = ListingScraper::portal('https://'.(self::AGENCIAS[$this->agencia]['site'] ?? '').'/') ?? $this->agencia;
         $clip = $import->start($anuncio, ['free_lead' => true,
             'listing_manual' => ['description' => $this->sobreFotos, 'price' => $preco, 'photos' => $caminhos, 'agent' => [], 'agency' => (string) (self::AGENCIAS[$this->agencia]['nome'] ?? '')],
-            'theme' => app(ThemeRepository::class)->forPortal((string) $portal)->slug]);
+            'theme' => app(ThemeRepository::class)->forPortal((string) $portal)->slug]
+            // The videos are cut per room; with photos too, both are mixed (as in NovoVideoPagina).
+            + array_filter(['listing_video' => $filmes[0] ?? null, 'videos_carregados' => array_slice($filmes, 1), 'mix_photos' => $filmes !== [] && $caminhos !== []]));
         $this->leadId = DB::table('leads')->insertGetId([
             'anuncio' => $anuncio, 'projeto' => $context->current()->slug, 'clip_id' => $clip->id, 'ip' => (string) request()->ip(),
             'consentimento_em' => now(), 'origem' => \App\Services\Marketing\Origem::json(), 'agencia' => $this->agencia ?: null,
             'convidado_por' => $this->convidadoPor(null), 'created_at' => now(), 'updated_at' => now(),
         ]);
-        $this->reset('fotos', 'sobreFotos');
+        $this->reset('fotos', 'videos', 'sobreFotos');
         session(['lead_id' => $this->leadId]);
-        $this->registar('fotos-carregadas', ['nota' => count($caminhos).' fotos']);
+        $this->registar('fotos-carregadas', ['nota' => count($caminhos).' fotos'.($filmes ? ', '.count($filmes).' vídeos' : '')]);
         $this->dispatch('lead-criado', id: $this->leadId);
         app(\App\Services\Marketing\MetaConversoes::class)->enviar('Lead', 'lead-'.$this->leadId, [], null, \App\Services\Marketing\Origem::atual());
     }
@@ -654,6 +680,7 @@ class Landing extends Component
         $manual = (array) $meta['listing_manual'];
         $manual['agent'] = ['name' => $this->nomeContacto, 'phone' => $this->telefoneContacto];
         $opcoes = array_filter(['free_lead' => true, 'listing_manual' => $manual, 'theme' => $meta['theme'] ?? null,
+            'listing_video' => $meta['listing_video'] ?? null, 'videos_carregados' => $meta['videos_carregados'] ?? null, 'mix_photos' => $meta['mix_photos'] ?? null,
             'agent_photo' => $this->fotoContacto?->store('clips/uploads', (string) config('contentmachine.clips.disk'))]);
         $novo = $import->start($lead->anuncio, $opcoes);
         DB::table('leads')->where('id', $lead->id)->update(['clip_id' => $novo->id, 'nome' => $this->nomeContacto, 'telefone' => $this->telefoneContacto,
