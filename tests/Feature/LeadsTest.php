@@ -87,13 +87,13 @@ class LeadsTest extends TestCase
         Queue::assertNothingPushed();
     }
 
-    public function test_one_free_video_per_listing(): void
+    public function test_the_same_listing_can_be_asked_for_again(): void
     {
         Queue::fake();
-        $this->pedir();
+        $this->pedir()->assertHasNoErrors('anuncio');
 
-        $this->pedir()->assertHasErrors('anuncio');
-        $this->assertSame(1, DB::table('leads')->count());
+        $this->pedir()->assertHasNoErrors('anuncio');
+        $this->assertSame(2, DB::table('leads')->where('anuncio', self::ANUNCIO)->count());
     }
 
     public function test_the_honeypot_pretends_success_and_does_nothing(): void

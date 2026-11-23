@@ -27,12 +27,16 @@ class NovoVideo
         if ($user->creditos() < 1) {
             return 'Já não tem vídeos disponíveis. Compre um vídeo ou um pack.';
         }
-        $existente = DB::table('leads')->where('anuncio', $anuncio)->first();
-        if ($existente && $existente->user_id && (int) $existente->user_id !== (int) $user->id) {
-            return 'Este anúncio já tem um vídeo feito por outra conta. Fale connosco.';
+        // This account's own video of the listing first, else a free one nobody has claimed.
+        // Another account's video of the same listing does not stand in the way: a new one is made.
+        $existente = DB::table('leads')->where('anuncio', $anuncio)
+            ->where(fn ($q) => $q->where('user_id', $user->id)->orWhereNull('user_id'))
+            ->orderByRaw('user_id is null')->latest('id')->first();
+        if ($existente && $existente->pago_em && $opcoes === []) {
+            return 'Este anúncio já tem o vídeo limpo na sua conta.';
         }
         if ($existente && $existente->pago_em) {
-            return 'Este anúncio já tem o vídeo limpo na sua conta.';
+            $existente = null;   // asked again with changes: a new video, the old one stays
         }
         $compra = DB::table('compras')->where('user_id', $user->id)->whereColumn('videos_usados', '<', 'videos')->orderBy('id')->first();
 

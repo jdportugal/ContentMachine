@@ -196,9 +196,7 @@ class Landing extends Component
         $this->validate([
             'anuncio' => ['required', 'url:https,http', 'max:500',
                 fn ($a, $v, $fail) => ListingScraper::supports($v) ? null : $fail(ListingScraper::MENSAGEM),
-                fn ($a, $v, $fail) => ListingScraper::naoEImovel($v) ? $fail(ListingScraper::NAO_E_IMOVEL) : null,
-                // A failed attempt does not use up the free video: only leads that did not fail count.
-                fn ($a, $v, $fail) => DB::table('leads')->where('anuncio', $v)->whereNull('falhou_em')->exists() ? $fail('Já fizemos o vídeo grátis deste anúncio. Fale connosco para a versão limpa.') : null],
+                fn ($a, $v, $fail) => ListingScraper::naoEImovel($v) ? $fail(ListingScraper::NAO_E_IMOVEL) : null],
             'email' => ['exclude_unless:marketing,true', 'required', 'email:rfc', 'max:255'],
             'emailVideo' => ['nullable', 'email:rfc', 'max:255'],
         ], [
@@ -239,9 +237,9 @@ class Landing extends Component
             'convite_email' => $this->emailVideo !== '' ? $this->emailVideo : null,
             'updated_at' => now(),
         ];
-        // anuncio is UNIQUE: a retry after a failed attempt reuses that row (the
-        // failure is cleared and the new clip attached) rather than inserting a second.
-        $falhado = DB::table('leads')->where('anuncio', $this->anuncio)->whereNotNull('falhou_em')->first();
+        // The same listing may be asked for again (a new free video each time). A retry after a
+        // failed attempt still reuses that row (failure cleared, new clip attached).
+        $falhado = DB::table('leads')->where('anuncio', $this->anuncio)->whereNotNull('falhou_em')->whereNull('user_id')->latest('id')->first();
         if ($falhado) {
             DB::table('leads')->where('id', $falhado->id)->update($dados + ['falhou_em' => null, 'pronto_em' => null]);
             $this->leadId = $falhado->id;
