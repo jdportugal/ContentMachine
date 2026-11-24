@@ -2,11 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\Clips\ImportListingJob;
 use App\Livewire\Landing;
+use App\Services\Alertas\DemoDoImovel;
 use App\Services\Alertas\PaginaDoConsultor;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\URL;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -184,7 +187,7 @@ class AlertasTest extends TestCase
 
     public function test_ticking_the_box_takes_the_email_from_the_listing_and_only_asks_when_there_is_none(): void
     {
-        \Illuminate\Support\Facades\Queue::fake();
+        Queue::fake();
         $this->paginas[self::PAGINA_REMAX] = $this->remax([12], 'Carla.Silva@remax.pt');
 
         Livewire::test(Landing::class)->set(['anuncio' => self::REMAX, 'marketing' => true])->call('pedir')->assertHasNoErrors();
@@ -212,7 +215,7 @@ class AlertasTest extends TestCase
 
     public function test_the_free_video_is_one_per_agent_and_the_next_listing_is_offered_a_paid_one(): void
     {
-        \Illuminate\Support\Facades\Queue::fake();
+        Queue::fake();
         Livewire::test(Landing::class)->set('anuncio', self::REMAX)->call('pedir')->assertHasNoErrors();
         $this->assertSame(1, DB::table('leads')->count());
 
@@ -223,7 +226,7 @@ class AlertasTest extends TestCase
             ->assertSet('jaTeve', true)->assertSee('Já fez o seu vídeo grátis.')->assertSee('/conta/novo?anuncio='.urlencode($outro), false)->assertDontSee('Criar vídeo grátis')
             ->call('outro')->assertSet('jaTeve', false)->assertDontSee('Já fez o seu vídeo grátis.');
         $this->assertSame(1, DB::table('leads')->count());
-        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\Clips\ImportListingJob::class, 1);
+        Queue::assertPushed(ImportListingJob::class, 1);
 
         // The link in the alert email opens the same suggestion, not the free form.
         Livewire::withQueryParams(['anuncio' => $outro])->test(Landing::class)->assertSet('anuncio', $outro)->assertSet('jaTeve', true)->assertSee('O vídeo grátis é um por consultor');
@@ -231,5 +234,34 @@ class AlertasTest extends TestCase
         $novo = 'https://remax.pt/pt/imoveis/venda-t1-porto/999990001-2';
         Livewire::withQueryParams(['anuncio' => $novo])->test(Landing::class)->assertSet('anuncio', $novo)->assertSet('jaTeve', false)->assertSee('Criar vídeo grátis');
         Livewire::withQueryParams(['anuncio' => 'https://evil.example/x'])->test(Landing::class)->assertSet('anuncio', '');
+    }
+
+    public function test_with_a_demo_of_the_new_listing_the_email_leads_with_it(): void
+    {
+        $this->app->instance(DemoDoImovel::class, new class extends DemoDoImovel
+        {
+            public function __construct() {}
+
+            public function gerar(string $url): ?array
+            {
+                return ['slug' => 'abcdef0123456789', 'url' => $url, 'titulo' => 'Apartamento T2 em Fânzeres', 'video' => 'https://imocena.com/storage/demos/abcdef0123456789.mp4',
+                    'poster' => 'https://imocena.com/storage/demos/abcdef0123456789.jpg', 'pagina' => 'https://imocena.com/demo-video/abcdef0123456789'];
+            }
+        });
+        $this->lead(self::REMAX);
+        $this->paginas[self::PAGINA_REMAX] = $this->remax([12, 11]);
+        $this->artisan('alertas:imoveis')->assertSuccessful();
+
+        $this->paginas[self::PAGINA_REMAX] = $this->remax([14, 13, 12, 11]);
+        $this->artisan('alertas:imoveis')->expectsOutputToContain('avisos enviados: 1')->assertSuccessful();
+
+        $mail = collect($this->enviados())->sole();
+        $this->assertSame('Fizemos uma demonstração do vídeo do seu imóvel novo', $mail['assunto']);
+        $this->assertStringContainsString('https://imocena.com/demo-video/abcdef0123456789', $mail['html']);
+        $this->assertStringContainsString('https://imocena.com/storage/demos/abcdef0123456789.jpg', $mail['html']);
+        $this->assertStringContainsString('Ver a demonstração', $mail['html']);
+        $this->assertStringContainsString('Também publicou', $mail['html']);   // the second new listing keeps its link
+        $this->assertStringContainsString('anuncio='.urlencode('https://remax.pt/pt/imoveis/venda-apartamento-t2-gondomar-fanzeres/125411383-13'), $mail['html']);
+        $this->assertNotNull($mail['cancelar']);
     }
 }

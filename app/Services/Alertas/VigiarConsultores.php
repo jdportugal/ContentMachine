@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\URL;
  *  2. every hour the page is read; the first reading only records what is there;
  *  3. a listing that was not there before, and has no Imocena video yet, is emailed
  *     to the agent with a link that starts its video. One email a day at most.
+ *     The first such listing also gets a demo video (DemoDoImovel: its photos under
+ *     one recorded voice, no AI per video), shown at the top of the email.
  *
  * Only leads with marketing_em set and marketing_cancelado_em null are ever emailed,
  * and every email carries the one-click unsubscribe link.
@@ -28,7 +30,7 @@ class VigiarConsultores
 
     private const MAX_CONHECIDOS = 400;
 
-    public function __construct(private PaginaDoConsultor $paginas) {}
+    public function __construct(private PaginaDoConsultor $paginas, private DemoDoImovel $demos) {}
 
     /** Consenting leads not yet watched (and pages not found before, a few more times). */
     public function sincronizar(): int
@@ -118,10 +120,16 @@ class VigiarConsultores
         $itens = array_map(fn ($a) => ['titulo' => $a['titulo'] !== '' ? $a['titulo'] : 'Imóvel novo',
             'link' => $base.($a['url'] ? '&anuncio='.urlencode($a['url']) : '').'#pedido'], array_slice($anuncios, 0, 3));
         $cancelar = URL::signedRoute('lead.emails.cancelar', ['lead' => $c->lead_id]);
-        $assunto = count($anuncios) === 1 ? 'Publicou um imóvel novo. Quer o vídeo dele?' : 'Publicou '.count($anuncios).' imóveis novos. Quer os vídeos?';
+        $primeiro = collect($anuncios)->first(fn ($a) => (string) $a['url'] !== '');
+        $demo = $primeiro ? $this->demos->gerar((string) $primeiro['url']) : null;
+        $assunto = match (true) {
+            $demo !== null => 'Fizemos uma demonstração do vídeo do seu imóvel novo',
+            count($anuncios) === 1 => 'Publicou um imóvel novo. Quer o vídeo dele?',
+            default => 'Publicou '.count($anuncios).' imóveis novos. Quer os vídeos?',
+        };
 
         try {
-            Mail::html(view('emails.imovel-novo', ['nome' => trim((string) strtok((string) $c->nome, ' ')), 'itens' => $itens,
+            Mail::html(view('emails.imovel-novo', ['nome' => trim((string) strtok((string) $c->nome, ' ')), 'itens' => $itens, 'demo' => $demo,
                 'mais' => max(0, count($anuncios) - 3), 'cancelar' => $cancelar])->render(), function ($m) use ($c, $assunto, $cancelar) {
                     $m->to($c->email)->subject($assunto);
                     $m->getHeaders()->addTextHeader('List-Unsubscribe', '<'.$cancelar.'>');

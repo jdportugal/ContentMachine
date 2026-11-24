@@ -64,6 +64,15 @@ Route::get('/'.DemoListingScraper::PATH.'/{slug}', function (string $slug, DemoL
     return view('demo-listing', ['listing' => $demo->scrape(url(DemoListingScraper::PATH.'/'.$slug)), 'reel' => $reel]);
 })->name('demo');
 
+// The demo video made for a new listing (new-listing alert emails): photos + the one recorded
+// demo voice. Private (noindex); the slug is a hash of the listing URL.
+Route::get('/demo-video/{slug}', function (string $slug) {
+    $demo = \App\Services\Alertas\DemoDoImovel::info($slug) ?? abort(404);
+    $final = route('video').'?'.http_build_query(['anuncio' => $demo['url'], 'utm_source' => 'imocena', 'utm_medium' => 'email', 'utm_campaign' => 'demo-imovel']).'#pedido';
+
+    return view('demo-imovel', ['demo' => $demo, 'final' => $final]);
+})->name('demo.imovel');
+
 // Stripe: the Payment Links' webhook, and where a buyer lands after paying.
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 Route::view('/privacidade', 'privacidade')->name('privacidade');

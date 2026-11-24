@@ -18,12 +18,17 @@ return [
         'token' => env('META_ADS_TOKEN', ''),
     ],
     // New-listing alerts (alertas:imoveis): the pause between two agents' pages.
-    'alertas' => ['pausa_ms' => (int) env('ALERTAS_PAUSA_MS', 1500)],
+    // demo: the alert email carries a demo video of the new listing (its photos under one recorded
+    // voice, DemoDoImovel); demo_voz is that recording. No file there = the plain email, no demo.
+    'alertas' => [
+        'pausa_ms' => (int) env('ALERTAS_PAUSA_MS', 1500),
+        'demo' => (bool) env('ALERTAS_DEMO', true),
+        'demo_voz' => env('ALERTAS_DEMO_VOZ', storage_path('app/demo-voz/simao_demo_1.mp3')),
+    ],
     // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
     'ga4' => env('GA_MEASUREMENT_ID', ''),
     // Microsoft Clarity project id (session recordings and heatmaps, after consent). Empty = off.
     'clarity' => env('CLARITY_ID', 'zhbmj2fuej'),
-
 
     /*
     |--------------------------------------------------------------------------
