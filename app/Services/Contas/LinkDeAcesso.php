@@ -35,15 +35,16 @@ class LinkDeAcesso
         ]);
     }
 
-    public function url(User $user): string
+    /** $para: a page of the site to land on (a path, part of the signature); else their account. */
+    public function url(User $user, ?string $para = null, ?int $minutos = null): string
     {
-        return URL::temporarySignedRoute('entrar.link', now()->addMinutes(self::MINUTOS), ['user' => $user->id]);
+        return URL::temporarySignedRoute('entrar.link', now()->addMinutes($minutos ?? self::MINUTOS), ['user' => $user->id] + ($para ? ['para' => $para] : []));
     }
 
     /** Email the sign-in link. Never throws: a mail failure must not break a payment or a form. */
-    public function enviar(User $user, ?string $assunto = null, ?string $intro = null): void
+    public function enviar(User $user, ?string $assunto = null, ?string $intro = null, ?string $para = null, ?int $minutos = null): void
     {
-        $link = $this->url($user);
+        $link = $this->url($user, $para, $minutos);
         $assunto ??= 'O seu link de acesso à Imocena';
         $intro ??= 'Clique no botão para entrar na sua conta Imocena. O link é válido durante '.self::MINUTOS.' minutos.';
         try {

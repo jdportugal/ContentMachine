@@ -153,6 +153,7 @@ export interface ClipProps {
   background?: { kind: "code"; slug: string } | { kind: "video"; src: string };
   banner?: string; // the news LEAD — pinned on screen for the whole clip
   watermark?: string; // free-video watermark — across the frame for the whole clip
+  watermarkBig?: boolean; // a preview's mark: bigger and stronger
   // Which box the effects must lay out for. Only needed when the size alone
   // can't say it: a 1080×960 half-frame sample is wider than tall but is NOT
   // landscape. Real clips leave it out and it's derived from width/height.

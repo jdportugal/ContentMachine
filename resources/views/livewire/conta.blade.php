@@ -2,6 +2,9 @@
     <nav class="flex flex-wrap items-center justify-between gap-4">
         <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>
         <div class="flex items-center gap-4 text-sm">
+            @if ($user->veImoplanta())
+                <a href="{{ route('imoplanta') }}" class="min-h-11 inline-flex items-center px-4 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Imoplanta →</a>
+            @endif
             <span class="hidden sm:inline text-[#AEB5C1]">{{ $user->email }}</span>
             <form method="POST" action="{{ route('logout') }}">@csrf<button class="min-h-11 px-4 rounded-full border border-ivory/30 text-ivory hover:bg-ivory/5">Sair</button></form>
         </div>

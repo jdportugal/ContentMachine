@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>{{ $title ?? 'Imocena' }} · Imocena</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +19,7 @@
     <div x-data="{ nav: false }" class="flex min-h-screen">
         {{-- Mobile top bar (hamburger) — hidden on lg+ --}}
         <header class="lg:hidden fixed top-0 inset-x-0 z-30 h-14 flex items-center justify-between px-4 bg-vellum/95 backdrop-blur border-b border-ink-soft/15">
-            <a href="{{ route('imoveis') }}" class="font-display text-2xl text-ink">Imocena</a>
+            <a href="{{ route(auth()->user()?->can('admin') ? 'imoveis' : 'conta') }}" class="font-display text-2xl text-ink">Imocena</a>
             <button type="button" @click="nav = !nav" aria-label="Abrir ou fechar o menu" class="p-2 -mr-2 text-2xl leading-none text-ink">☰</button>
         </header>
 
@@ -25,17 +28,19 @@
 
         {{-- ============ Side shelf (navigation) — off-canvas drawer on mobile, static on lg+ ============ --}}
         <aside x-bind:class="{ '!translate-x-0': nav }"
-               class="w-64 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
+               class="w-72 shrink-0 border-r border-ink-soft/15 bg-vellum/95 lg:bg-vellum/40 flex flex-col fixed lg:sticky top-0 h-screen z-50 -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
             <div class="px-6 py-3 border-b border-ink-soft/15">
-                <a href="{{ route('imoveis') }}" class="block">
-                    <span class="font-display text-2xl text-ink">Imocena</span>
-                    <span class="block eyebrow mt-0.5 text-[0.55rem]">Vídeos de imóveis</span>
+                <a href="{{ route(auth()->user()?->can('admin') ? 'imoveis' : 'conta') }}" class="block">
+                    <span class="font-display text-3xl text-ink">Imocena</span>
+                    <span class="block eyebrow mt-0.5 text-[0.7rem]">Vídeos de imóveis</span>
                 </a>
             </div>
 
-            <div class="px-4 py-3 border-b border-ink-soft/15">
-                @livewire('theme-switcher')
-            </div>
+            @can('admin')
+                <div class="px-4 py-3 border-b border-ink-soft/15">
+                    @livewire('theme-switcher')
+                </div>
+            @endcan
 
 
             {{-- Closing the drawer belongs to the DESTINATION links only: on the
@@ -73,6 +78,7 @@
                             ['route' => 'imoveis',         'label' => 'Os meus vídeos',    'sub' => 'Portal do consultor',            'color' => '#F06052', 'glyph' => '⌂'],
                             ['route' => 'clientes',        'label' => 'Clientes',          'sub' => 'Contas · vídeos',                'color' => '#F06052', 'glyph' => '☺'],
                             ['route' => 'campanhas',       'label' => 'Campanhas',         'sub' => 'Funil · anúncios',               'color' => '#F06052', 'glyph' => '◔'],
+                            ['route' => 'imoplanta',       'label' => 'Imoplanta',         'sub' => 'Plantas → 3D → vídeo',         'color' => '#F06052', 'glyph' => '▦'],
                         ]],
                         ['titulo' => 'Criar', 'itens' => [
                             ['route' => 'clips-animados',  'label' => 'Imóveis',           'sub' => 'Vídeos animados',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],
@@ -87,9 +93,18 @@
                             ['route' => 'design-system',   'label' => 'Sistema de design', 'sub' => 'Marca do tema',      'color' => '#05B8E6', 'glyph' => '❖'],
                         ]],
                         ['titulo' => null, 'itens' => [
+                            ['route' => 'custos.imoplanta', 'label' => 'Custos Imoplanta', 'sub' => 'Custo vs. receita',  'color' => '#05B8E6', 'glyph' => '€'],
                             ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#05B8E6', 'glyph' => '⚙'],
                         ]],
                     ];
+                    // A customer here is in Imoplanta (their videos are at /conta): only that; the studio is for admins.
+                    if (! auth()->user()?->can('admin')) {
+                        $grupos = [['titulo' => null, 'itens' => array_values(array_filter($grupos[0]['itens'], fn ($i) => $i['route'] === 'imoplanta'))]];
+                    }
+                    // Imoplanta's tab, for now, only for the accounts in imoplanta.acesso.
+                    if (! auth()->user()?->veImoplanta()) {
+                        $grupos = array_map(fn ($g) => ['titulo' => $g['titulo'], 'itens' => array_values(array_filter($g['itens'], fn ($i) => $i['route'] !== 'imoplanta'))], $grupos);
+                    }
                     $n = 0; // running number across the whole shelf
                 @endphp
 
@@ -105,11 +120,11 @@
                     @if ($grupo['titulo'])
                         <button type="button" @click.stop="alternar('{{ $chave }}')"
                                 :aria-expanded="String(aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }}))"
-                                class="w-full flex items-center gap-1.5 px-6 pt-2 pb-0 eyebrow text-[0.55rem] text-ink-faint/70 hover:text-ink-soft transition">
-                            <span class="w-2 text-[0.5rem] leading-none"
+                                class="w-full flex items-center gap-1.5 px-6 pt-3 pb-1 eyebrow text-[0.7rem] text-ink-faint/70 hover:text-ink-soft transition">
+                            <span class="w-2.5 text-[0.65rem] leading-none"
                                   x-text="aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }}) ? '▾' : '▸'">▾</span>
                             <span>{{ $grupo['titulo'] }}</span>
-                            <span class="ml-auto normal-case tracking-normal font-mono text-[0.55rem]"
+                            <span class="ml-auto normal-case tracking-normal font-mono text-[0.7rem]"
                                   x-show="! aberto('{{ $chave }}', {{ $grupoAtivo ? 'true' : 'false' }})" x-cloak>{{ count($grupo['itens']) }}</span>
                         </button>
                     @elseif (! $loop->first)
@@ -125,22 +140,22 @@
                                  active ENTRY from an active sub or in-page tab. --}}
                             <a href="{{ route($item['route']) }}"
                                data-nav="entry" @if ($active)aria-current="page"@endif
-                               class="group flex items-center gap-3 pl-4 pr-4 py-0.5 mx-2 rounded-sm transition
+                               class="group flex items-center gap-3 pl-3 pr-4 py-2 mx-2 rounded-md transition
                                       {{ $active ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                                 <span class="w-1.5 self-stretch rounded-full transition-all"
                                       style="background: {{ $active ? $item['color'] : 'transparent' }}; box-shadow: {{ $active ? '0 0 8px '.$item['color'].'88' : 'none' }}"></span>
-                                <span class="w-5 text-center text-sm" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
+                                <span class="w-8 text-center text-2xl leading-none" style="color: {{ $item['color'] }}">{{ $item['glyph'] }}</span>
                                 <span class="flex-1 min-w-0">
-                                    <span class="block font-display text-base leading-tight">{{ $item['label'] }}</span>
-                                    <span class="block text-[0.62rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
+                                    <span class="block font-display text-xl leading-tight">{{ $item['label'] }}</span>
+                                    <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">{{ $item['sub'] }}</span>
                                 </span>
-                                <span class="font-mono text-[0.6rem] text-ink-faint">{{ str_pad($n++, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="font-mono text-xs text-ink-faint">{{ str_pad($n++, 2, '0', STR_PAD_LEFT) }}</span>
                             </a>
 
                             @if ($active && ! empty($item['subs']))
                                 {{-- ml-16 puts the rule between the glyph and the label column,
                                      so a sub's text lines up with its parent's title. --}}
-                                <div class="ml-16 mr-4 pl-3 border-l border-ink-soft/40 space-y-px py-0.5">
+                                <div class="ml-[4.5rem] mr-4 pl-3 border-l border-ink-soft/40 space-y-px py-0.5">
                                     @foreach ($item['subs'] as $sub)
                                         @php
                                             $subAtivo = request()->routeIs($sub['match'] ?? $sub['route'])
@@ -148,7 +163,7 @@
                                         @endphp
                                         <a href="{{ route($sub['route'], $sub['params'] ?? []) }}"
                                            data-nav="sub" @if ($subAtivo)aria-current="page"@endif
-                                           class="flex items-center gap-2 rounded-sm px-2 py-1 font-mono text-[0.62rem] transition
+                                           class="flex items-center gap-2 rounded-sm px-2 py-1.5 font-mono text-xs transition
                                                   {{ $subAtivo ? 'bg-surface/50 text-ink' : 'text-ink-faint hover:text-ink hover:bg-surface/30' }}">
                                             <span style="color: {{ $subAtivo ? $item['color'] : 'transparent' }}">·</span>
                                             <span class="truncate">{{ $sub['label'] }}</span>
@@ -161,13 +176,24 @@
                 @endforeach
             </nav>
 
+            {{-- The account's settings, for everyone (customers too), at the foot of the shelf. --}}
+            <a href="{{ route('conta') }}" data-nav="entry" @if (request()->routeIs('conta')) aria-current="page" @endif
+               class="mx-2 mt-1 flex items-center gap-3 pl-3 pr-4 py-2.5 rounded-md transition border-t border-ink-soft/15
+                      {{ request()->routeIs('conta') ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
+                <span class="w-1.5"></span>
+                <span class="w-8 text-center text-2xl leading-none text-[#05B8E6]">⚙</span>
+                <span class="flex-1 min-w-0">
+                    <span class="block font-display text-xl leading-tight">A minha conta</span>
+                    <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">Vídeos e créditos</span>
+                </span>
+            </a>
             <div class="px-6 py-2.5 border-t border-ink-soft/15 flex items-center justify-between gap-2">
-                <span class="font-mono text-[0.6rem] text-ink-faint truncate" title="{{ auth()->user()?->email }}">
+                <span class="font-mono text-xs text-ink-faint truncate" title="{{ auth()->user()?->email }}">
                     {{ auth()->user()?->email }}
                 </span>
                 <form method="POST" action="{{ route('logout') }}" class="shrink-0">
                     @csrf
-                    <button type="submit" class="font-mono text-[0.6rem] text-ink-faint hover:text-rust underline underline-offset-2 transition">
+                    <button type="submit" class="font-mono text-xs text-ink-faint hover:text-rust underline underline-offset-2 transition">
                         Sair
                     </button>
                 </form>

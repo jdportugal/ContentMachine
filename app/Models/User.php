@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -43,5 +44,24 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
             'agente' => 'array',
         ];
+    }
+
+    /** A customer for whom Imoplanta costs nothing (config imoplanta.gratis): prices show 0 €, no payment. */
+    public function imoplantaGratis(): bool
+    {
+        return in_array(strtolower((string) $this->email), (array) config('contentmachine.imoplanta.gratis'), true);
+    }
+
+    /** Imoplanta is open, for now, only to the accounts listed in imoplanta.acesso. */
+    public function veImoplanta(): bool
+    {
+        return in_array(strtolower((string) $this->email), (array) config('contentmachine.imoplanta.acesso'), true);
+    }
+
+    /** Imoplanta properties bought and not yet started, across their purchases (`compras.imoveis`). */
+    public function imoveisImoplantaDisponiveis(): int
+    {
+        return (int) \Illuminate\Support\Facades\DB::table('compras')->where('user_id', $this->id)
+            ->selectRaw('COALESCE(SUM(imoveis - imoveis_usados), 0) as n')->value('n');
     }
 }

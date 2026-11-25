@@ -58,7 +58,7 @@ class Login extends Component
         $this->redirectIntended(default: route(Auth::user()->isAdmin() ? 'imoveis' : 'conta'), navigate: false);
     }
 
-    /** True once a sign-in link was asked for (the same message whether or not the email has an account). */
+    /** True once a sign-in link was sent to an existing account (a new email gets its account and goes straight in). */
     public bool $linkEnviado = false;
 
     /** Passwordless: email a sign-in link to a customer's account. */
@@ -75,7 +75,13 @@ class Login extends Component
         RateLimiter::hit($chave, 600);
 
         $user = User::query()->where('email', Str::lower(trim($this->email)))->first();
-        if ($user && ! $user->isAdmin()) {
+        if (! $user) {   // a new address: its account, with no credits of any kind, and straight in
+            $contas->entrar($contas->contaPara($this->email));
+            $this->redirectIntended(default: route('conta'), navigate: false);
+
+            return;
+        }
+        if (! $user->isAdmin()) {
             $contas->enviar($user);
         }
         $this->linkEnviado = true;

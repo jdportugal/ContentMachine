@@ -303,6 +303,11 @@ return [
     // Unit prices (USD) used by the cost ledger. Adjust to your real plans.
     'custos' => [
         'kie_imagem' => env('CUSTO_KIE_IMAGEM', 0.04),          // per generated image
+        // Per-model image prices (kie reports the model on each task); others use kie_imagem.
+        'kie_modelos' => [
+            'google/nano-banana-edit' => (float) env('CUSTO_KIE_NANO_BANANA_EDIT', 0.02),
+            'nano-banana-pro' => (float) env('CUSTO_KIE_NANO_BANANA_PRO', 0.09),   // 18 credits at 1K/2K
+        ],
         'kie_video' => env('CUSTO_KIE_VIDEO', 0.40),            // per generated video (5s)
         'elevenlabs_1k_chars' => env('CUSTO_TTS_1K', 0.30),     // per 1k synthesized chars
         'apify_busca' => env('CUSTO_APIFY_BUSCA', 0.01),        // per image-search run
@@ -439,6 +444,8 @@ return [
         'clips_sfx' => ['label' => 'Clips · sound effects', 'kind' => 'tts'],
         'clips_imagens' => ['label' => 'Clips · scene images', 'kind' => 'image'],
         'publicacoes_cartoes' => ['label' => 'Posts · card rendering', 'kind' => 'image'],
+        'imoplanta_modelo' => ['label' => 'Imoplanta · plans → 3D model', 'kind' => 'llm'],
+        'imoplanta_imagens' => ['label' => 'Imoplanta · photoreal images', 'kind' => 'image'],
     ],
 
     // Providers each kind of step may be pinned to. 'local' is not an API key —
@@ -558,6 +565,78 @@ return [
             'primeiro' => env('STRIPE_LINK_PRIMEIRO', 'https://buy.stripe.com/fZueVc1Qh7BEdZZ7TJcfK0b'),
             'pack10' => env('STRIPE_LINK_PACK10', ''),
             'pack20' => env('STRIPE_LINK_PACK20', ''),
+            // Imoplanta (Payment Links with metadata imoveis=1|10|20, or extra=planta|video|ambos; the pages add
+            // client_reference_id=imoplanta-<property id> so the webhook knows which property it pays for).
+            'imoplanta1' => env('STRIPE_LINK_IMOPLANTA1', ''),
+            'imoplanta10' => env('STRIPE_LINK_IMOPLANTA10', ''),
+            'imoplanta20' => env('STRIPE_LINK_IMOPLANTA20', ''),
+            'extra_planta' => env('STRIPE_LINK_EXTRA_PLANTA', ''),
+            'extra_video' => env('STRIPE_LINK_EXTRA_VIDEO', ''),
+            'extra_ambos' => env('STRIPE_LINK_EXTRA_AMBOS', ''),
+        ],
+    ],
+
+    /*
+    | Imoplanta: house plans → interactive 3D model → planned shots → photoreal
+    | images → walkthrough video. Sold per property (one credit each: compras.imoveis),
+    | through Stripe Payment Links like the videos (stripe.links.imoplanta*). One
+    | credit is spent when the property starts (before any AI work). The 3D model is
+    | built in the customer's browser with three.js (resources/js/imoplanta/builder.js),
+    | which also renders each planned shot and uploads it: the server (no GPU) only
+    | runs the LLM and image-API steps. `custos` prices what each property really
+    | costs (LLM per model in USD per 1M tokens [input, output, cached input], Stripe's
+    | fee in EUR, the USD→EUR rate).
+    */
+    'imoplanta' => [
+        'planos' => [
+            // Prices shown on the pages; what is charged is the Payment Link's (stripe.links.imoplanta*).
+            'imoplanta1' => ['nome' => 'Imoplanta · 1 imóvel', 'imoveis' => 1, 'preco' => 5000],
+            'imoplanta10' => ['nome' => 'Imoplanta · 10 imóveis', 'imoveis' => 10, 'preco' => 40000],
+            'imoplanta20' => ['nome' => 'Imoplanta · 20 imóveis', 'imoveis' => 20, 'preco' => 60000],
+        ],
+        // Accounts that use Imoplanta as a normal customer, but at no cost: every price shows 0 € and nothing goes
+        // to Stripe (comma-separated emails).
+        'gratis' => array_values(array_filter(array_map(fn ($e) => strtolower(trim($e)), explode(',', (string) env('IMOPLANTA_GRATIS', 'joaodiogocferreira@gmail.com'))))),
+        // Step 4's add-ons, bought one at a time per property (cents, VAT included). Previews: the plan video's is
+        // one demo GIF for everyone (public/imoplanta/demo-planta.gif, no cost); the reel's is made when the
+        // walkthrough is done, watermarked, and buying it as previewed only re-renders it without the mark.
+        'previas' => (bool) env('IMOPLANTA_PREVIAS', true),
+        'marca_previa' => 'PRÉ-VISUALIZAÇÃO',
+        'extras' => [
+            'planta' => ['nome' => 'Vídeo da planta 3D', 'preco' => (int) env('IMOPLANTA_PRECO_PLANTA', 1500)],
+            'video' => ['nome' => 'Vídeo Imocena', 'preco' => (int) env('IMOPLANTA_PRECO_VIDEO', 1500)],
+            'ambos' => ['nome' => 'Vídeo da planta 3D + Vídeo Imocena', 'preco' => (int) env('IMOPLANTA_PRECO_AMBOS', 2000)],
+        ],
+        // Who has Imoplanta for now (the sidebar tab and the pages; admins can open the pages too). Comma-separated emails.
+        'acesso' => array_values(array_filter(array_map(fn ($e) => strtolower(trim($e)), explode(',', (string) env('IMOPLANTA_ACESSO', 'joaodiogocferreira@gmail.com'))))),
+        'refazer_3d' => 3,
+        'refazer_imagem' => 2,
+        'refazer_referencias' => 3,   // changes to the finishes board, and to each storey's 3D floor plan
+        'max_plantas' => 8,
+        'max_cameras' => (int) env('IMOPLANTA_MAX_CAMERAS', 10),
+        'disk' => env('IMOPLANTA_DISK', 'local'),
+        // The photo model: 'pro' = Nano Banana Pro at 2K (~$0.09/image, far more photographic),
+        // 'edit' = Nano Banana edit (~$0.02/image; kept placeholder blocks and a CGI look in tests).
+        'modelo_foto' => env('IMOPLANTA_MODELO_FOTO', 'pro'),
+        // The model that reads the plans and applies 3D changes (e.g. claude-fable-5-2); empty = the clips model.
+        'modelo_llm' => env('IMOPLANTA_MODELO_LLM'),
+        'custos' => [
+            'llm_mtok' => [
+                'claude-opus' => [5.00, 25.00, 0.50],
+                'claude-opus-5-5' => [4.00, 20.00, 0.20],
+                'claude-fable' => [8.00, 40.00, 0.20],      // Fable 5.2 (5.1 / 5 were 10 / 50)
+                'claude-mythos' => [8.00, 40.00, 0.20],
+                'claude-sonnet' => [3.00, 15.00, 0.30],
+                'claude-haiku' => [1.00, 5.00, 0.10],
+                'gpt-4o-mini' => [0.15, 0.60, 0.075],
+                'gpt-4o' => [2.50, 10.00, 1.25],
+                'gemini' => [0.30, 2.50, 0.03],
+                'deepseek' => [0.55, 2.19, 0.14],
+                '*' => [5.00, 25.00, 0.50],
+            ],
+            'stripe_pct' => (float) env('IMOPLANTA_STRIPE_PCT', 1.5),
+            'stripe_fixo' => (float) env('IMOPLANTA_STRIPE_FIXO', 0.25),
+            'eur_por_usd' => (float) env('IMOPLANTA_EUR_POR_USD', 0.92),
         ],
     ],
 

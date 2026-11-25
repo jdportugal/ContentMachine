@@ -49,4 +49,10 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /** An admin: the studio, its settings and API keys (the `admin` gate). */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => ['is_admin' => true]);
+    }
 }

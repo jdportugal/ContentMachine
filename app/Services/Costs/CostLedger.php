@@ -4,6 +4,7 @@ namespace App\Services\Costs;
 
 use App\Services\Projects\ProjectContext;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Ledger of what each piece of content COSTS in provider spend (kie.ai images,
@@ -21,20 +22,35 @@ class CostLedger
 
     private ?string $peca = null;
 
-    /** Declare the piece the following spends belong to (null clears it). */
-    public function contexto(?string $tipo, ?string $peca): void
+    /** Columns every following spend carries (e.g. the Imoplanta step), until the next contexto(). */
+    private array $marcas = [];
+
+    /** Optional columns a spend may fill (see the Imoplanta migration). */
+    private const EXTRAS = ['passo', 'modelo', 'tokens_entrada', 'tokens_saida', 'tokens_cache', 'unidades', 'moeda'];
+
+    /**
+     * Declare the piece the following spends belong to (null clears it), and
+     * optionally columns they all carry — `['passo' => 'render']` — so a client
+     * that knows nothing of the piece (KieClient) still records the step.
+     */
+    public function contexto(?string $tipo, ?string $peca, array $marcas = []): void
     {
         $this->tipo = $tipo;
         $this->peca = $peca;
+        $this->marcas = $marcas;
     }
 
-    /** Record one spend (USD) against the current piece. Zero/negative is ignored. */
-    public function registar(string $servico, float $custo, string $detalhe = ''): void
+    /**
+     * Record one spend against the current piece (USD unless `moeda` says
+     * otherwise). Zero/negative is ignored. $extra fills the optional columns
+     * (model, tokens, units…) and wins over the context's marks.
+     */
+    public function registar(string $servico, float $custo, string $detalhe = '', array $extra = []): void
     {
         if ($custo <= 0 || ! $this->pronto()) {
             return;
         }
-        DB::table('custos')->insert([
+        $linha = [
             'projeto' => app(ProjectContext::class)->current()->slug,
             'tipo' => $this->tipo ?? 'geral',
             'peca' => $this->peca ?? '',
@@ -42,7 +58,20 @@ class CostLedger
             'custo' => round($custo, 5),
             'detalhe' => $detalhe,
             'created_at' => now(),
-        ]);
+        ];
+        $extra = array_intersect_key(array_merge($this->marcas, $extra), array_flip(self::EXTRAS));
+        if ($extra !== [] && $this->temExtras()) {
+            $linha += $extra;
+        }
+        DB::table('custos')->insert($linha);
+    }
+
+    private ?bool $temExtras = null;
+
+    /** The optional columns arrived with Imoplanta; an older schema just records without them. */
+    private function temExtras(): bool
+    {
+        return $this->temExtras ??= Schema::hasColumn('custos', 'passo');
     }
 
     /** The ledger must NEVER break content work: no table (fresh install, tests
@@ -50,7 +79,7 @@ class CostLedger
     private function pronto(): bool
     {
         try {
-            return \Illuminate\Support\Facades\Schema::hasTable('custos');
+            return Schema::hasTable('custos');
         } catch (\Throwable) {
             return false;
         }

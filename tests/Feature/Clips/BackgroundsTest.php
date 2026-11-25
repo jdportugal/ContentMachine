@@ -3,7 +3,9 @@
 namespace Tests\Feature\Clips;
 
 use App\Jobs\Clips\GenerateBackgroundJob;
+use App\Jobs\Clips\RenderBackgroundSampleJob;
 use App\Livewire\ClipsAnimados;
+use App\Models\User;
 use App\Services\Clips\BackgroundGenerator;
 use App\Services\Clips\BackgroundLibrary;
 use App\Services\Clips\Store\BackgroundStore;
@@ -238,7 +240,7 @@ class BackgroundsTest extends TestCase
             'description' => '', 'tsx' => 'x', 'status' => EffectRecord::STATUS_ACTIVE, 'enabled' => true,
         ]);
 
-        $this->actingAs(\App\Models\User::factory()->create())
+        $this->actingAs(User::factory()->admin()->create())
             ->get(route('clips-animados.backgrounds'))
             ->assertOk()
             ->assertSee('Biblioteca de fundos')
@@ -246,7 +248,7 @@ class BackgroundsTest extends TestCase
             ->assertSee('Laboratório VFX');
 
         // Landing there queues the missing preview, exactly as the in-page button did.
-        Queue::assertPushed(\App\Jobs\Clips\RenderBackgroundSampleJob::class,
+        Queue::assertPushed(RenderBackgroundSampleJob::class,
             fn ($j) => $j->slug === 'drifty');
     }
 

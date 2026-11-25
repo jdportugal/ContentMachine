@@ -36,6 +36,7 @@ class Compras
         $nif = data_get($campoNif, 'text.value') ?? collect((array) ($detalhes['tax_ids'] ?? []))->pluck('value')->first();
         $nif = $nif !== null ? trim((string) $nif) : null;
         $leadId = self::leadId((string) ($session['client_reference_id'] ?? ''));
+        $imoplantaId = self::imoplantaId((string) ($session['client_reference_id'] ?? ''));
 
         // The buyer's account: their checkout email IS the login (passwordless).
         $email = $detalhes['email'] ?? ($session['customer_email'] ?? null);
@@ -51,7 +52,10 @@ class Compras
             'total' => (int) ($session['amount_total'] ?? 0),
             'moeda' => strtolower((string) ($session['currency'] ?? 'eur')),
             'videos' => (int) ($meta['videos'] ?? 0),
+            'imoveis' => (int) ($meta['imoveis'] ?? 0),
             'lead_id' => $leadId,
+            'imoplanta_id' => $imoplantaId,
+            'extra' => in_array($meta['extra'] ?? null, ['planta', 'video', 'ambos'], true) ? $meta['extra'] : null,
             'dados' => json_encode($session, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'created_at' => now(),
             'updated_at' => now(),
@@ -63,6 +67,10 @@ class Compras
         if ($leadId && (int) ($meta['videos'] ?? 0) === 1) {
             $this->entregarVideoLimpo($compraId, $leadId);
         }
+        // Imoplanta: the property it was bought for starts (a property credit), or its add-on does.
+        if ($user && ($imoplantaId || (int) ($meta['imoveis'] ?? 0) > 0)) {
+            app(\App\Services\Imoplanta\Imoplantas::class)->pago(DB::table('compras')->find($compraId), $user);
+        }
         if ($user) {
             $this->contas->enviar($user, 'Pagamento recebido — a sua conta Imocena',
                 'Obrigado pela compra. Os seus vídeos e créditos ficam na sua conta Imocena: entre com o botão abaixo (sem palavra-passe). O link é válido durante '.LinkDeAcesso::MINUTOS.' minutos; depois peça outro em imocena.com/login.');
@@ -71,6 +79,12 @@ class Compras
         Log::info('Compra registada', ['compra' => $compraId, 'sessao' => $id, 'videos' => $meta['videos'] ?? null, 'lead' => $leadId, 'total' => $session['amount_total'] ?? null]);
 
         return DB::table('compras')->find($compraId);
+    }
+
+    /** "imoplanta-7" (what Imoplanta's pages pass as client_reference_id) → 7. */
+    public static function imoplantaId(string $ref): ?int
+    {
+        return preg_match('/^imoplanta-(\d+)$/', $ref, $m) ? (int) $m[1] : null;
     }
 
     /** "lead-12" (what the landing passes as client_reference_id) → 12. */

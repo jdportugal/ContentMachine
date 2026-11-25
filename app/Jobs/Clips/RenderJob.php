@@ -168,6 +168,11 @@ class RenderJob implements ShouldQueue
         if (! empty($p->meta['free_lead']) && ! $this->limpo) {
             $plan['watermark'] = (string) config('contentmachine.leads.watermark');
         }
+        // An Imoplanta add-on's preview carries its own, bigger mark (until bought: then rendered without it).
+        if (! empty($p->meta['watermark']) && ! $this->limpo) {
+            $plan['watermark'] = (string) $p->meta['watermark'];
+            $plan['watermarkBig'] = ! empty($p->meta['watermark_grande']);
+        }
 
         // Background music (mixed as a looping <Audio> track by Remotion).
         if ($track) {

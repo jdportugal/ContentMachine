@@ -55,11 +55,19 @@ class ContaTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function test_the_link_form_does_not_reveal_who_has_an_account_and_never_mails_the_operator(): void
+    public function test_a_new_email_gets_an_account_with_no_credits_and_the_operator_is_never_mailed(): void
     {
         $admin = User::factory()->create(['email' => 'op@imocena.com']);
 
-        Livewire::test(Login::class)->set('email', 'ninguem@exemplo.pt')->call('enviarLink')->assertSet('linkEnviado', true);
+        // an address with no account: the account is made (no credits of any kind) and they are in
+        Livewire::test(Login::class)->set('email', 'Ninguem@Exemplo.pt')->call('enviarLink')->assertRedirect(route('conta'));
+        $novo = User::where('email', 'ninguem@exemplo.pt')->firstOrFail();
+        $this->assertAuthenticatedAs($novo);
+        $this->assertFalse($novo->isAdmin());
+        $this->assertSame(0, $novo->creditos());
+        $this->assertSame(0, $novo->imoveisImoplantaDisponiveis());
+        auth()->logout();
+
         Livewire::test(Login::class)->set('email', 'op@imocena.com')->call('enviarLink')->assertSet('linkEnviado', true);
 
         $this->assertCount(0, app('mailer')->getSymfonyTransport()->messages());
