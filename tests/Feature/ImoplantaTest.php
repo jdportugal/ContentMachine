@@ -1183,6 +1183,17 @@ class ImoplantaTest extends TestCase
         $this->assertSame('PLANTA', Storage::disk(config('contentmachine.clips.disk'))->get($clip->meta['imoplanta_planta']));
     }
 
+    public function test_test_accounts_keep_the_steps_on_the_finished_page_to_go_back(): void
+    {
+        $u = User::factory()->cliente()->create(['email' => 'teste@exemplo.pt']);
+        config(['contentmachine.imoplanta.gratis' => ['teste@exemplo.pt'], 'contentmachine.imoplanta.acesso' => ['teste@exemplo.pt']]);
+        $p = $this->noVideo($u);
+        $p->update(['video_estado' => 'pronto']);
+
+        $this->actingAs($u)->get(route('imoplanta.imovel', $p->id))->assertSee('O seu vídeo está pronto')->assertSee('PASSO 1');
+        $this->actingAs($u)->get(route('imoplanta.imovel', $p->id).'?passo=1')->assertOk()->assertSee('aria-current="step"', false)->assertDontSee('O seu vídeo está pronto');
+    }
+
     public function test_the_finished_page_says_the_video_is_ready_hides_the_steps_and_zips_scenes_photos_and_plans(): void
     {
         $u = User::factory()->cliente()->create();

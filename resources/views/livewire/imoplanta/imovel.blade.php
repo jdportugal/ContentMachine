@@ -18,7 +18,8 @@
     </div>
 
     {{-- The steps: done ones can be looked at again; later ones open as the work gets there. --}}
-    @if (! ($passo === 4 && $p->video))   {{-- the finished page: no more steps --}}
+    {{-- the finished page has no steps for customers; test accounts (admins, free accounts) keep them to go back --}}
+    @if (! ($passo === 4 && $p->video) || $admin || auth()->user()->imoplantaGratis())
     <nav aria-label="Passos" class="mt-6">
         <ol class="grid grid-cols-2 md:grid-cols-4 gap-2">
             @foreach ($passos as $n => $nome)
