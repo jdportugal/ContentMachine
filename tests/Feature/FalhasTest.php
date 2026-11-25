@@ -55,6 +55,14 @@ class FalhasTest extends TestCase
             ->assertSee('Esta página')->assertSee('não existe.', false)->assertSee('Pedir o vídeo grátis')->assertSee('ERRO 404')->assertSee('<title>Imocena · Esta página não existe.</title>', false);
     }
 
+    public function test_a_forbidden_page_is_branded_like_the_other_errors(): void
+    {
+        $this->actingAs(User::factory()->cliente()->create(['email' => 'sem-acesso@exemplo.pt']))
+            ->get('/plantas')->assertForbidden()
+            ->assertSee('ERRO 403')->assertSee('não está disponível.', false)->assertSee('Página inicial')
+            ->assertSee('<title>Imocena · Esta página não está disponível.</title>', false);
+    }
+
     public function test_idealista_is_no_longer_offered_or_accepted(): void
     {
         $this->assertFalse(ListingScraper::supports('https://www.idealista.pt/imovel/12345678/'));
