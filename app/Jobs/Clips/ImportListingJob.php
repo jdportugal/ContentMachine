@@ -52,10 +52,17 @@ class ImportListingJob implements ShouldQueue
         $p = $store->findOrFail($this->clipId);
 
         try {
-            $listing = $scraper->scrape($this->url);
-            // The project's agent (one agent per project) stands in for the listing's.
+            // An Imoplanta reel may come with its facts typed in instead of a listing link.
+            $listing = $p->meta['listing_manual'] ?? $scraper->scrape($this->url);
+            // The project's agent (one agent per project) stands in for the listing's — not on an Imoplanta
+            // customer's reel: the studio's agent, photo, logo and images are not theirs.
+            $deCliente = ! empty($p->meta['imoplanta']);
             $resources = app(ProjectResources::class);
-            $listing['agent'] = array_merge($listing['agent'], array_filter($resources->agent()));
+            if (! $deCliente) {
+                $listing['agent'] = array_merge($listing['agent'], array_filter($resources->agent()));
+            } else {   // the contact they typed wins over the listing's agent
+                $listing['agent'] = array_merge($listing['agent'], array_filter((array) ($p->meta['contacto'] ?? [])));
+            }
             // The licence (AMI) on the end card: the one typed with the clip, else the project's, else the listing's — else none.
             $listing['ami'] = trim((string) ($p->meta['licence'] ?? '')) ?: ($listing['agent']['licence'] ?? '') ?: (string) ($listing['ami'] ?? '');
             $agent = $listing['agent'];
@@ -102,14 +109,21 @@ class ImportListingJob implements ShouldQueue
                     $opening = ['clips' => app(PropertyVideoAnalyzer::class)->bestClips($rooms, 5)];
                 }
             }
+            // An Imoplanta reel: its plan video add-on (the home built up from above) as one more clip.
+            if (! empty($p->meta['imoplanta_planta']) && $this->disk()->exists($p->meta['imoplanta_planta'])) {
+                $path = $p->meta['imoplanta_planta'];
+                $secs = number_format(PropertyVideoAnalyzer::probe($this->disk()->path($path))['duration'], 1, ',', '');
+                $images[] = ['id' => 'vid_'.substr(md5($path), 0, 8), 'path' => $path, 'name' => 'planta-3d.mp4', 'transparent' => false, 'tone' => 'light', 'video' => true,
+                    'description' => "Planta 3D animada: a casa vista de cima, do terreno vazio às paredes e aos móveis, piso a piso (vídeo, {$secs} s). Um bom plano de abertura ou de fecho."];
+            }
             if (! $property && $images === []) {
                 throw new \RuntimeException('None of the listing photos could be downloaded.');
             }
 
-            $who = 'Retrato '.($script['agent_gender'] === 'f' ? 'da consultora' : 'do consultor')." {$agent['name']}, da {$agency}.";
+            $who = $agent['name'] === '' ? 'Retrato do contacto.' : 'Retrato '.($script['agent_gender'] === 'f' ? 'da consultora' : 'do consultor')." {$agent['name']}".($agency !== '' ? ", da {$agency}" : '').'.';
             // A photo uploaded with the URL wins over the project's, which wins over the listing's.
             $own = $p->meta['agent_photo'] ?? null;
-            $projectPhoto = $resources->agentPhotoPath();
+            $projectPhoto = $deCliente ? null : $resources->agentPhotoPath();
             $portrait = match (true) {
                 $own && $this->disk()->exists($own) => $this->store($this->disk()->get($own), $agent['name'], $who),
                 $projectPhoto !== null => $this->store((string) file_get_contents($projectPhoto), $agent['name'], $who),
@@ -122,8 +136,13 @@ class ImportListingJob implements ShouldQueue
                 $flags[] = 'Agent photo not found — add it by hand.';
             }
 
-            $projectLogo = $resources->logoPath();
-            $logo = $projectLogo ? $this->store((string) file_get_contents($projectLogo), 'logo', "Logótipo da {$agency}.") : $this->logo($logos, $agency);
+            $projectLogo = $deCliente ? null : $resources->logoPath();
+            $ownLogo = $p->meta['agency_logo'] ?? null;   // a logo uploaded with the clip (an Imoplanta reel's)
+            $logo = match (true) {
+                $ownLogo && $this->disk()->exists($ownLogo) => $this->store($this->disk()->get($ownLogo), 'logo', trim("Logótipo {$agency}")),
+                (bool) $projectLogo => $this->store((string) file_get_contents($projectLogo), 'logo', "Logótipo da {$agency}."),
+                default => $this->logo($logos, $agency),
+            };
             if ($logo) {
                 $images[] = $logo;
             } else {
@@ -132,7 +151,7 @@ class ImportListingJob implements ShouldQueue
 
             $extras = array_values(array_filter(array_map(
                 fn ($img) => $this->store((string) file_get_contents($img['path']), pathinfo($img['file'], PATHINFO_FILENAME), $img['description']),
-                $resources->images(),
+                $deCliente ? [] : $resources->images(),
             )));
             $images = array_merge($images, $extras);
 
@@ -380,7 +399,10 @@ class ImportListingJob implements ShouldQueue
         $extraList = collect($extras)->map(fn ($e) => "- {$e['name']}: {$e['description']}")->implode("\n");
 
         return trim(
-            "Make sure the intro information always includes the name of the agent - {$agent['name']} - and phone number - {$agent['phone']}. Agency: {$listing['agency']}.{$contacts}\n"
+            ($agent['name'] === '' && $listing['agency'] === ''
+                ? 'There is no agent or agency name: leave names off the intro and outro cards'
+                    .(($c = implode(', ', array_filter([$agent['phone'] !== '' ? "phone {$agent['phone']}" : '', ! empty($agent['email']) ? "email {$agent['email']}" : '']))) !== '' ? " — show only the contact: {$c}" : '').".\n"
+                : "Make sure the intro information always includes the name of the agent - {$agent['name']} - and phone number - {$agent['phone']}. Agency: {$listing['agency']}.{$contacts}\n")
             .($files ? implode('; ', $files).".\n" : '')
             .($extraList !== '' ? "The agent's own images — use them where they fit:\n{$extraList}\n" : '')
             ."On-screen hook for the first frame: «{$script['hook']}».\n"

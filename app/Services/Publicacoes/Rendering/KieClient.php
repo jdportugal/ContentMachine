@@ -50,6 +50,12 @@ class KieClient
         return $this->submeter($prompt, $proporcao, $refs);
     }
 
+    /** As submit(), at a set output resolution (nano-banana-pro: 1K | 2K | 4K). */
+    public function submitResolucao(string $prompt, string $proporcao, array $refs, string $resolucao): string
+    {
+        return $this->submeter($prompt, $proporcao, $refs, $resolucao);
+    }
+
     /** Poll a previously-submitted task until it finishes; returns the image URL. */
     public function poll(string $taskId): string
     {
@@ -82,6 +88,18 @@ class KieClient
         );
     }
 
+    /** Image → VIDEO, submitted only (poll with pollVideo()): several clips can run at once. */
+    public function submitVideo(string $prompt, string $imageUrl): string
+    {
+        $r = Http::timeout(60)->withToken($this->chave())
+            ->post($this->base().'/api/v1/jobs/createTask', [
+                'model' => (string) config('services.kie.video_model', 'kling-2.6/image-to-video'),
+                'input' => ['prompt' => Str::limit($prompt, 990, ''), 'image_urls' => [$imageUrl], 'sound' => false, 'duration' => '5'],
+            ]);
+
+        return $this->taskIdDe($r);
+    }
+
     /**
      * Start frame → end frame VIDEO: the camera move between two stills, with
      * whatever changes between them animated in. Kling 3.0 (default) takes both
@@ -89,12 +107,12 @@ class KieClient
      * and 5/10 s. Returns the taskId so several rooms can be submitted before any
      * is polled (see pollVideo()). Both URLs must be kie file URLs (see upload()).
      */
-    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5): string
+    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5, ?bool $som = null): string
     {
         $model = (string) config('contentmachine.real_estate.property.video_model', 'kling-3.0/video');
         $prompt = Str::limit($prompt, 2400, '');
         $input = str_starts_with($model, 'kling-3')
-            ? ['prompt' => $prompt, 'image_urls' => [$startUrl, $endUrl], 'sound' => (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
+            ? ['prompt' => $prompt, 'image_urls' => [$startUrl, $endUrl], 'sound' => $som ?? (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
             : array_filter(['prompt' => $prompt, 'image_url' => $startUrl, 'tail_image_url' => $endUrl, 'duration' => $seconds > 7 ? '10' : '5', 'negative_prompt' => $negative]);
 
         $r = Http::timeout(60)->withToken($this->chave())
@@ -115,6 +133,22 @@ class KieClient
                 'model' => (string) config('services.kie.exact_edit_model', 'google/nano-banana-edit'),
                 'input' => ['prompt' => $prompt, 'image_urls' => [$imageUrl], 'output_format' => 'png', 'image_size' => $aspect],
             ]);
+
+        return $this->taskIdDe($r);
+    }
+
+    /**
+     * The fallback image model, for when Nano Banana Pro keeps failing: Google's Nano Banana Edit with the same
+     * images (it takes several), or plain Nano Banana with none. Returns the taskId (poll()).
+     */
+    public function submitAlternativo(string $prompt, string $proporcao, array $refs = []): string
+    {
+        $refs = array_values(array_filter($refs));
+        $input = ['prompt' => $prompt, 'output_format' => 'png', 'image_size' => $proporcao] + ($refs ? ['image_urls' => $refs] : []);
+        $r = Http::timeout(60)->withToken($this->chave())->post($this->base().'/api/v1/jobs/createTask', [
+            'model' => $refs ? (string) config('services.kie.exact_edit_model', 'google/nano-banana-edit') : (string) config('services.kie.fallback_text_model', 'google/nano-banana'),
+            'input' => $input,
+        ]);
 
         return $this->taskIdDe($r);
     }
@@ -158,9 +192,12 @@ class KieClient
 
     // ------------------------------------------------------------------ HTTP
 
-    private function submeter(string $prompt, string $proporcao, array $refs): string
+    private function submeter(string $prompt, string $proporcao, array $refs, ?string $resolucao = null): string
     {
         $input = ['prompt' => $prompt, 'output_format' => 'png', 'aspect_ratio' => $proporcao];
+        if ($resolucao) {
+            $input['resolution'] = $resolucao;   // nano-banana-pro: 1K | 2K | 4K
+        }
         $refs = array_values(array_filter($refs));
         if ($refs !== []) {
             $input['image_input'] = $refs;
@@ -208,10 +245,12 @@ class KieClient
                     if ($url === '') {
                         throw new \RuntimeException('kie.ai: success without a URL.');
                     }
+                    $modelo = (string) $r->json('data.model', '');
                     app(CostLedger::class)->registar(
                         'kie.ai',
-                        $custo ?? (float) config('contentmachine.custos.kie_imagem', 0.04),
+                        $custo ?? (float) (config('contentmachine.custos.kie_modelos', [])[$modelo] ?? config('contentmachine.custos.kie_imagem', 0.04)),
                         $custo !== null ? 'video' : 'image',
+                        array_filter(['modelo' => $modelo, 'unidades' => 1]),
                     );
 
                     return $url;

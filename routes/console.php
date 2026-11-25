@@ -12,3 +12,8 @@ Artisan::command('inspire', function () {
  * Free-video leads (landing page): read the agent's name/phone off the listing and mark each reel ready or failed.
  */
 Schedule::command('leads:atualizar')->everyMinute()->withoutOverlapping();
+
+/*
+ * Paid videos: give the video back to the purchase when its reel failed.
+ */
+Schedule::command('videos:devolver')->everyMinute()->withoutOverlapping();

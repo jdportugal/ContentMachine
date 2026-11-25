@@ -25,7 +25,7 @@ class EnsureAdminUser extends Command
     protected $signature = 'app:ensure-admin
                             {--email= : Address for the admin account (default: ADMIN_EMAIL or admin@brand-machine.local)}';
 
-    protected $description = 'Create the admin account on a fresh install (no-op if any user exists)';
+    protected $description = 'Create the admin account on a fresh install (no-op if an admin exists)';
 
     /** Where the generated password is left for the operator to read once. */
     public const FICHEIRO_SENHA = 'app/admin_password';
@@ -33,8 +33,8 @@ class EnsureAdminUser extends Command
     public function handle(): int
     {
         try {
-            if (User::query()->exists()) {
-                $this->info('A user already exists — nothing to do.');
+            if (User::query()->where('is_admin', true)->exists()) {
+                $this->info('An admin already exists — nothing to do.');
 
                 return self::SUCCESS;
             }
@@ -48,11 +48,12 @@ class EnsureAdminUser extends Command
         $email = (string) ($this->option('email') ?: env('ADMIN_EMAIL', 'admin@brand-machine.local'));
         $senha = (string) (env('ADMIN_PASSWORD') ?: Str::password(20, symbols: false));
 
-        User::create([
+        (new User)->forceFill([
             'name' => 'Admin',
             'email' => $email,
             'password' => Hash::make($senha),
-        ]);
+            'is_admin' => true,
+        ])->save();
 
         // Only persist a password we generated: one supplied by the operator is
         // already theirs to know, and writing it down adds a copy for no reason.

@@ -2,12 +2,15 @@
 
 namespace App\Livewire;
 
+use App\Services\Billing\Stripe;
 use App\Services\Clips\Store\ClipRecord;
 use App\Services\Clips\Store\ClipStore;
+use App\Services\Projects\ProjectContext;
 use App\Services\RealEstate\ListingImport;
 use App\Services\RealEstate\ListingScraper;
 use App\Services\Themes\ThemeContext;
 use App\Services\Themes\ThemeRepository;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -18,6 +21,9 @@ use Livewire\WithFileUploads;
  * The agent's portal: paste a listing, get a reel. The studio's "From a listing"
  * form trimmed to what an agent needs (link, notes, own photo), in pt-PT, over
  * the same import pipeline; plus their listing reels with status and download.
+ *
+ * A customer spends one bought video per reel (from the purchase that expires
+ * first) and sees only their own; an admin makes them freely and sees them all.
  */
 #[Layout('components.layouts.app')]
 #[Title('Os meus vídeos')]
@@ -44,9 +50,24 @@ class Imoveis extends Component
         ClipRecord::STATUS_RENDERING => ['A exportar o vídeo', 85],
     ];
 
-    public function mount(ThemeContext $themes): void
+    /** After Stripe Checkout: what the customer reads about their payment. */
+    public ?string $pagamento = null;
+
+    public function mount(ThemeContext $themes, Stripe $stripe): void
     {
         $this->tema = $themes->current()->slug;
+
+        // Back from Checkout. The webhook records the purchase too; whichever comes
+        // first does it, so the videos are here even before the webhook arrives.
+        $id = (string) request()->query('pago', '');
+        if (preg_match('/^cs_[A-Za-z0-9_]+$/', $id)) {
+            $sessao = rescue(fn () => $stripe->sessao($id), [], report: true);
+            if (($sessao['client_reference_id'] ?? null) === (string) auth()->id()) {
+                $this->pagamento = $stripe->cumprir($sessao)
+                    ? 'Pagamento recebido. Os seus vídeos já estão disponíveis.'
+                    : 'Assim que o pagamento for confirmado, os vídeos ficam disponíveis aqui.';
+            }
+        }
     }
 
     public function criar(ListingImport $import, ThemeRepository $themes): void
@@ -64,20 +85,48 @@ class Imoveis extends Component
             'foto.max' => 'A foto tem de ter menos de 10 MB.',
         ]);
 
-        $import->start($this->anuncio, [
-            'agent_photo' => $this->foto?->store('clips/uploads'),
-            'script_notes' => trim($this->notas),
-            'theme' => $this->tema,
-        ]);
+        $user = auth()->user();
+        $semVideos = DB::transaction(function () use ($import, $user) {
+            $compra = $user->is_admin ? null : DB::table('compras')->where('user_id', $user->id)->where('tipo', 'videos')
+                ->where('restantes', '>', 0)->where('expira_em', '>', now())
+                ->orderBy('expira_em')->lockForUpdate()->first();
+            if (! $user->is_admin && ! $compra) {
+                return true;
+            }
+
+            $clip = $import->start($this->anuncio, [
+                'agent_photo' => $this->foto?->store('clips/uploads'),
+                'script_notes' => trim($this->notas),
+                'theme' => $this->tema,
+            ]);
+            if ($compra) {
+                DB::table('compras')->where('id', $compra->id)->decrement('restantes', 1, ['updated_at' => now()]);
+                DB::table('videos')->insert(['user_id' => $user->id, 'compra_id' => $compra->id, 'projeto' => app(ProjectContext::class)->current()->slug, 'clip_id' => $clip->id,
+                    'anuncio' => $this->anuncio, 'created_at' => now(), 'updated_at' => now()]);
+            }
+
+            return false;
+        });
+        if ($semVideos) {
+            $this->addError('anuncio', 'Não tem vídeos disponíveis. Compre um vídeo ou um pack abaixo.');
+
+            return;
+        }
+
         $this->reset('anuncio', 'notas', 'foto');   // the theme stays as chosen
         unset($this->videos);
     }
 
-    /** The listing reels, newest first. */
+    /** The listing reels, newest first: every one for an admin, a customer's own otherwise. */
     #[Computed]
     public function videos()
     {
-        return app(ClipStore::class)->all()->filter(fn (ClipRecord $c) => ! empty($c->meta['listing']))->values();
+        $user = auth()->user();
+        $meus = $user->is_admin ? null : DB::table('videos')->where('user_id', $user->id)->pluck('clip_id')->all();
+
+        return app(ClipStore::class)->all()
+            ->filter(fn (ClipRecord $c) => ! empty($c->meta['listing']) && ($meus === null || in_array($c->id, $meus, true)))
+            ->values();
     }
 
     public function render()
@@ -85,6 +134,8 @@ class Imoveis extends Component
         return view('livewire.imoveis', [
             'aDecorrer' => $this->videos->contains(fn (ClipRecord $c) => $c->isActive()),
             'temas' => collect(app(ThemeRepository::class)->all())->mapWithKeys(fn ($t) => [$t->slug => $t->name]),
+            'disponiveis' => auth()->user()->is_admin ? null : auth()->user()->videosDisponiveis(),
+            'planos' => config('contentmachine.planos'),
         ]);
     }
 }

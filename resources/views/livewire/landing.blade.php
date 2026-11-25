@@ -5,14 +5,18 @@
 
     $check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B8E6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5 9-10"/></svg>';
 
-    // Prices include VAT. Paid videos are sold by email until there is a checkout.
-    $comprar = fn (string $o) => 'mailto:'.config('mail.from.address').'?subject='.rawurlencode($o);
+    // Prices include VAT and come from config — what Stripe charges: «20 €», «8,75 €».
+    $pl = config('contentmachine.planos');
+    $eur = fn (int $c) => \Illuminate\Support\Number::currency($c / 100, 'EUR', 'pt_PT', precision: $c % 100 ? 2 : 0);
+    $porVideo = fn (string $k) => $eur((int) round($pl[$k]['preco'] / $pl[$k]['videos'])).' por vídeo';
+    // Agencies beyond the packs still talk to us by email.
+    $contacto = fn (string $o) => 'mailto:'.config('mail.from.address').'?subject='.rawurlencode($o);
     $limpo = 'Versão limpa, sem marca d’água';
     $planos = [
         ['nome' => 'GRÁTIS', 'para' => 'Para experimentar com um imóvel seu.', 'preco' => '0 €', 'unidade' => '1 vídeo', 'porVideo' => 'Com marca d’água', 'cta' => 'Pedir o vídeo grátis', 'href' => '#pedido', 'itens' => ['Basta colar o link do anúncio', 'Voz em português de Portugal', 'Cartão final com AMI', 'Com marca d’água Imocena'], 'selo' => null, 'coral' => true],
-        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => '20 €', 'unidade' => '1 vídeo', 'porVideo' => '20 € por vídeo', 'cta' => 'Comprar', 'href' => $comprar('Vídeo avulso (20 €)'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
-        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => '100 €', 'unidade' => '10 vídeos', 'porVideo' => '10 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 10 (100 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
-        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => '175 €', 'unidade' => '20 vídeos', 'porVideo' => '8,75 € por vídeo', 'cta' => 'Comprar pack', 'href' => $comprar('Pack 20 (175 €)'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
+        ['nome' => 'VÍDEO AVULSO', 'para' => 'Um imóvel, quando precisar.', 'preco' => $eur($pl['avulso']['preco']), 'unidade' => '1 vídeo', 'porVideo' => $porVideo('avulso'), 'cta' => 'Comprar', 'href' => route('comprar', 'avulso'), 'itens' => [$limpo, 'Voz em português de Portugal', 'Cartão final com AMI', 'Pronto para Reels e TikTok'], 'selo' => null, 'coral' => false],
+        ['nome' => 'PACK 10', 'para' => 'Para quem angaria todas as semanas.', 'preco' => $eur($pl['pack10']['preco']), 'unidade' => '10 vídeos', 'porVideo' => $porVideo('pack10'), 'cta' => 'Comprar pack', 'href' => route('comprar', 'pack10'), 'itens' => [$limpo, 'Válido 12 meses', 'Use quando angariar'], 'selo' => 'MAIS ESCOLHIDO', 'coral' => false],
+        ['nome' => 'PACK 20', 'para' => 'Para carteiras grandes e equipas.', 'preco' => $eur($pl['pack20']['preco']), 'unidade' => '20 vídeos', 'porVideo' => $porVideo('pack20'), 'cta' => 'Comprar pack', 'href' => route('comprar', 'pack20'), 'itens' => [$limpo, 'Válido 12 meses', 'O preço mais baixo por vídeo'], 'selo' => null, 'coral' => false],
     ];
 
     // What the free video includes. Its value is the price of a paid video (20 €).
@@ -394,7 +398,7 @@
                     </div>
                 @endforeach
             </div>
-            <p class="mt-8 text-center text-sm text-[#AEB5C1]">Todos os preços incluem IVA. Equipas e agências com mais de 20 vídeos: <a href="{{ $comprar('Agência') }}" class="text-cyan underline underline-offset-2">fale connosco</a>.</p>
+            <p class="mt-8 text-center text-sm text-[#AEB5C1]">Todos os preços incluem IVA. Equipas e agências com mais de 20 vídeos: <a href="{{ $contacto('Agência') }}" class="text-cyan underline underline-offset-2">fale connosco</a>.</p>
         </div>
     </section>
 

@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
 use App\Models\User;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +23,7 @@ class AutenticacaoTest extends TestCase
 
     private function utilizador(string $senha = 'a-very-long-password'): User
     {
-        return User::create([
+        return User::factory()->admin()->create([
             'name' => 'Admin',
             'email' => 'admin@example.test',
             'password' => Hash::make($senha),
@@ -64,7 +66,7 @@ class AutenticacaoTest extends TestCase
         $web = app('router')->getMiddlewareGroups()['web'] ?? [];
 
         $this->assertNotContains(
-            \Illuminate\Auth\Middleware\Authenticate::class,
+            Authenticate::class,
             $web,
             'Authenticate is on the `web` group, which Livewire also uses for '
             .'/livewire/update — guests can no longer sign in or register.'
@@ -80,7 +82,7 @@ class AutenticacaoTest extends TestCase
     {
         $this->get('/register')->assertOk();
 
-        Livewire::test(\App\Livewire\Auth\Register::class)
+        Livewire::test(Register::class)
             ->set('name', 'Guest')
             ->set('email', 'guest@example.test')
             ->set('password', 'a-very-long-password')
@@ -88,8 +90,11 @@ class AutenticacaoTest extends TestCase
             ->call('registar')
             ->assertHasNoErrors();
 
+        // A sign-up is a customer: their videos, never the studio or its API keys.
         $this->assertTrue(Auth::check());
-        $this->get('/definicoes')->assertOk();
+        $this->assertFalse(Auth::user()->is_admin);
+        $this->get('/imoveis')->assertOk();
+        $this->get('/definicoes')->assertForbidden();
     }
 
     public function test_credenciais_validas_iniciam_sessao(): void
@@ -159,7 +164,7 @@ class AutenticacaoTest extends TestCase
     /** On a fresh install, sign-up creates the first account and signs it in. */
     public function test_primeiro_registo_cria_a_conta(): void
     {
-        Livewire::test(\App\Livewire\Auth\Register::class)
+        Livewire::test(Register::class)
             ->set('name', 'Owner')
             ->set('email', 'owner@example.test')
             ->set('password', 'a-very-long-password')
@@ -179,7 +184,7 @@ class AutenticacaoTest extends TestCase
     {
         $this->utilizador();
 
-        Livewire::test(\App\Livewire\Auth\Register::class)
+        Livewire::test(Register::class)
             ->set('name', 'Colleague')
             ->set('email', 'colleague@example.test')
             ->set('password', 'a-very-long-password')
@@ -206,7 +211,7 @@ class AutenticacaoTest extends TestCase
     {
         $this->utilizador();
 
-        Livewire::test(\App\Livewire\Auth\Register::class)
+        Livewire::test(Register::class)
             ->set('name', 'Someone')
             ->set('email', 'admin@example.test') // already taken
             ->set('password', 'short')

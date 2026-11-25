@@ -43,7 +43,7 @@ trait RunsClaudeCli
     }
 
     /**
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      * @return array the parsed result envelope (has a `result` string)
      */
     protected function runClaude(string $user, ?string $system = null, array $opts = []): array
@@ -158,7 +158,7 @@ trait RunsClaudeCli
      * GPT (OpenAI). Same chat-completions shape as Tensorix — the clip prompts are
      * plain text in, text out, so any of the three can serve them.
      *
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      */
     private function runOpenAi(string $user, ?string $system, array $opts): array
     {
@@ -197,7 +197,7 @@ trait RunsClaudeCli
      * Call the authenticated `claude` CLI (subscription, no API key). Retries
      * transient failures (overload, streaming hiccups).
      *
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      * @return array the parsed result envelope (has a `result` string)
      */
     private function runClaudeCli(string $user, ?string $system, array $opts): array
@@ -240,6 +240,10 @@ trait RunsClaudeCli
         }
         $args[] = '--output-format';
         $args[] = 'json';
+        if (! empty($opts['model'])) {          // a caller's own model (e.g. Imoplanta's plan reader)
+            $args[] = '--model';
+            $args[] = (string) $opts['model'];
+        }
         if (isset($opts['maxTurns'])) {
             $args[] = '--max-turns';
             $args[] = (string) $opts['maxTurns'];
@@ -376,7 +380,7 @@ trait RunsClaudeCli
      * Enables web search when the caller requested web tools, so research-style
      * prompts keep working. Retries transient failures.
      *
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      * @return array{result:string}
      */
     private function runClaudeApi(string $user, ?string $system, array $opts): array
@@ -388,7 +392,7 @@ trait RunsClaudeCli
             // Clips get their own model key — these calls write code, the
             // aggregator's summarise news. Set CLIPS_ANTHROPIC_MODEL empty to
             // defer to the shared aggregation model instead.
-            'model' => (string) (config('contentmachine.clips.anthropic_model')
+            'model' => (string) (($opts['model'] ?? null) ?: config('contentmachine.clips.anthropic_model')
                 ?: config('contentmachine.aggregation.anthropic_model', 'claude-opus-4-8')),
             'max_tokens' => (int) config('contentmachine.clips.max_tokens', 16000),
             // Adaptive thinking, explicitly. Omitting `thinking` means the model
@@ -403,6 +407,9 @@ trait RunsClaudeCli
                 ['type' => 'text', 'text' => $user],
             ] : $user]],
         ];
+        if (preg_match('/^claude-(fable|mythos)/', $payload['model'])) {
+            unset($payload['thinking']);       // these always think; they take no `thinking` setting
+        }
         if ($system !== null && $system !== '') {
             $payload['system'] = $system;
         }
@@ -466,7 +473,12 @@ trait RunsClaudeCli
                 ->implode('');
 
             if (trim($texto) !== '') {
-                return ['result' => $texto];
+                // What it cost, for callers that price their calls (Imoplanta).
+                return ['result' => $texto, '_model' => $payload['model'], '_usage' => [
+                    'input' => (int) $r->json('usage.input_tokens') + (int) $r->json('usage.cache_creation_input_tokens'),
+                    'output' => (int) $r->json('usage.output_tokens'),
+                    'cached' => (int) $r->json('usage.cache_read_input_tokens'),
+                ]];
             }
 
             $lastError = 'empty response';
@@ -482,7 +494,7 @@ trait RunsClaudeCli
      * search is not available here, so research runs on the model's own knowledge.
      * Retries transient failures.
      *
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      * @return array{result:string}
      */
     private function runTensorx(string $user, ?string $system, array $opts): array
@@ -502,7 +514,7 @@ trait RunsClaudeCli
      * One OpenAI-compatible chat call (GPT, Tensorix/DeepSeek), retrying transient
      * failures, returned in the CLI's envelope shape ({result:string}).
      *
-     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int}  $opts
+     * @param  array{maxTurns?:int,allowedTools?:string,timeout?:int,model?:string}  $opts
      * @return array{result:string}
      */
     private function runChatCompletions(string $nome, string $baseUrl, string $key, string $model, string $user, ?string $system, array $opts, bool $vision = false, ?int $maxTokens = null): array
@@ -562,7 +574,11 @@ trait RunsClaudeCli
             if (trim($texto) !== '') {
                 // Carried so an unparseable answer downstream can say who wrote it
                 // and why they stopped, instead of the same sentence for all three.
-                return ['result' => $texto, 'stop_reason' => (string) $r->json('choices.0.finish_reason', '')];
+                return ['result' => $texto, 'stop_reason' => (string) $r->json('choices.0.finish_reason', ''), '_model' => $model, '_usage' => [
+                    'input' => (int) $r->json('usage.prompt_tokens') - (int) $r->json('usage.prompt_tokens_details.cached_tokens'),
+                    'output' => (int) $r->json('usage.completion_tokens'),
+                    'cached' => (int) $r->json('usage.prompt_tokens_details.cached_tokens'),
+                ]];
             }
 
             $lastError = 'empty response';

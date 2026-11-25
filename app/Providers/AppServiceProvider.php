@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Services\Aggregation\YtDlpRunner;
 use App\Services\Aggregation\YtDlpRunnerContract;
 use App\Services\Costs\CostLedger;
@@ -12,8 +13,10 @@ use App\Services\Publicacoes\Rendering\SvgSlideRenderer;
 use App\Services\Shorts\FontLibrary;
 use App\Services\Shorts\LocalVideoEngine;
 use App\Services\Shorts\MusicLibrary;
+use App\Services\Themes\ThemeContext;
 use App\Services\Vault\VaultContract;
 use App\Services\Vault\VaultRepository;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // The active project for this process (defaults to the first registered).
         $this->app->singleton(ProjectContext::class);
-        $this->app->singleton(\App\Services\Themes\ThemeContext::class);
+        $this->app->singleton(ThemeContext::class);
         // Singleton: the piece-context a job sets must be seen by every client.
         $this->app->singleton(CostLedger::class);
 
@@ -82,6 +85,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // The studio, its settings and every stored API key. Customers get only
+        // their own videos (routes/web.php).
+        Gate::define('admin', fn (User $user) => $user->is_admin);
+        Gate::define('imoplanta', fn (User $user) => $user->veImoplanta() || $user->is_admin);
     }
 }

@@ -4,7 +4,29 @@
             <span class="eyebrow">Portal do consultor</span>
             <h1 class="mt-2 font-display text-5xl font-medium leading-none">Os meus vídeos</h1>
         </div>
+        @if ($disponiveis !== null)
+            <p class="text-sm text-ink-soft"><strong class="font-display text-3xl text-ink">{{ $disponiveis }}</strong> {{ $disponiveis === 1 ? 'vídeo disponível' : 'vídeos disponíveis' }}</p>
+        @endif
     </div>
+
+    @if ($pagamento)
+        <p role="status" class="mt-6 rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">{{ $pagamento }}</p>
+    @endif
+
+    @if ($disponiveis === 0)
+        {{-- Nothing left to spend: the plans, straight to Stripe Checkout. --}}
+        <div class="mt-6 rounded-2xl border border-ink-soft/20 p-6">
+            <p class="font-display text-2xl">Compre vídeos sem marca d’água</p>
+            <p class="mt-1 text-sm text-ink-soft">IVA incluído. Os vídeos ficam disponíveis durante {{ config('contentmachine.planos_validade_meses') }} meses.</p>
+            <div class="mt-4 flex flex-wrap gap-3">
+                @foreach ($planos as $chave => $p)
+                    <a href="{{ route('comprar', $chave) }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-navy text-ivory text-sm font-semibold hover:bg-navy-3">
+                        {{ $p['nome'] }} · {{ \Illuminate\Support\Number::currency($p['preco'] / 100, 'EUR', 'pt_PT', precision: $p['preco'] % 100 ? 2 : 0) }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     {{-- Novo vídeo --}}
     <form wire:submit="criar" class="mt-8 rounded-2xl bg-navy-2 border border-ivory/10 text-ivory p-7 md:p-8">
@@ -71,7 +93,7 @@
                 <article wire:key="v-{{ $v->id }}" class="rounded-2xl overflow-hidden bg-navy-2 border border-ivory/10 flex flex-col">
                     <div class="relative aspect-[9/16] bg-navy-3">
                         @if ($v->status === 'done')
-                            <video src="{{ route('clips-animados.media', $v->id) }}" controls playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <video src="{{ route('imoveis.video', $v->id) }}" controls playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
                             <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#E3F0E7] text-[#22603A] text-xs font-semibold">Pronto</span>
                         @elseif ($v->status === 'failed')
                             <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center text-ivory">
@@ -93,7 +115,7 @@
                         <p class="text-xs text-ink-faint">{{ \Illuminate\Support\Carbon::parse($v->created_at)->locale('pt_PT')->translatedFormat('j M Y, H:i') }}</p>
                         @if ($v->status === 'done')
                             <div class="mt-3 flex gap-2">
-                                <a href="{{ route('clips-animados.media', ['id' => $v->id, 'download' => 1]) }}" class="flex-1 inline-flex items-center justify-center gap-2 min-h-11 rounded-full bg-coral text-navy text-sm font-semibold hover:brightness-105">
+                                <a href="{{ route('imoveis.video', ['id' => $v->id, 'download' => 1]) }}" class="flex-1 inline-flex items-center justify-center gap-2 min-h-11 rounded-full bg-coral text-navy text-sm font-semibold hover:brightness-105">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
                                     Descarregar
                                 </a>

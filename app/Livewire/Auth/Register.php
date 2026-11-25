@@ -9,15 +9,10 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 /**
- * Sign-up. Always available: anyone who reaches /register may create an account.
- *
- * There is deliberately no "registration closed" state — no flag, no invite
- * code, no first-run special case. Sign-up either works or the page does not
- * exist, and it works.
- *
- * WARNING: an account here can read every stored API key, so on a public URL
- * this is equivalent to leaving the dashboard open. Closing it again means
- * putting a gate back in front of this component (or removing the route).
+ * Sign-up for customers: anyone may create an account, which buys videos and
+ * sees only its own (the `admin` gate keeps the studio and its API keys to the
+ * accounts with is_admin — never set here). A guest sent here from a price card
+ * goes back to that checkout afterwards (the intended URL).
  */
 #[Layout('components.layouts.guest')]
 class Register extends Component
@@ -34,7 +29,7 @@ class Register extends Component
     {
         $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email', 'unique:user_emails,email'],
             'password' => ['required', 'string', 'min:12', 'confirmed'],
         ], [
             'name.required' => 'Indique o seu nome.',
@@ -55,7 +50,7 @@ class Register extends Component
         Auth::login($utilizador);
         session()->regenerate();
 
-        $this->redirect(route('imoveis'), navigate: false);
+        $this->redirectIntended(default: route('imoveis'), navigate: false);
     }
 
     public function render()

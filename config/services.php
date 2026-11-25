@@ -129,6 +129,14 @@ return [
         'base_url' => env('BLOTATO_BASE_URL', 'https://backend.blotato.com'),
     ],
 
+    // Stripe — Checkout for paid videos. The webhook secret is the endpoint's signing
+    // secret (whsec_…), for POST /stripe/webhook with checkout.session.completed,
+    // checkout.session.async_payment_succeeded and charge.refunded.
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
     // Zernio — comment/DM automations ("DM me GUIDE and I'll send the link").
     'zernio' => [
         'key' => env('ZERNIO_API_KEY'),

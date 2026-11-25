@@ -96,8 +96,13 @@ class RenderJob implements ShouldQueue
             }
 
             // Free videos from the landing page carry the watermark; paid ones don't.
+            // An Imoplanta add-on's preview carries its own, bigger mark.
             if (! empty($p->meta['free_lead'])) {
                 $plan['watermark'] = (string) config('contentmachine.leads.watermark');
+            }
+            if (! empty($p->meta['watermark'])) {
+                $plan['watermark'] = (string) $p->meta['watermark'];
+                $plan['watermarkBig'] = ! empty($p->meta['watermark_grande']);
             }
 
             // Background music (mixed as a looping <Audio> track by Remotion).
