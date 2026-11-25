@@ -61,8 +61,8 @@ class ImoplantaTest extends TestCase
             ->assertSee(route('plantas'), false)->assertSee("50\u{00A0}€")
             ->assertSee('EXTRAS OPCIONAIS')->assertDontSee("15\u{00A0}€")->assertDontSee("20\u{00A0}€");   // the add-ons: shown, not priced
         foreach (['capa.gif', 'passo-1-planta.gif', 'passo-2-modelo.gif', 'passo-3-acabamentos.gif', 'passo-4-fotos.gif', 'passo-5-video.gif', 'video-imocena.mp4', 'video-imocena.jpg'] as $f) {
-            $r->assertSee(asset('imoplanta/landing/'.$f), false);
-            $this->assertFileExists(public_path('imoplanta/landing/'.$f));
+            $r->assertSee(asset('imoplanta-demo/landing/'.$f), false);
+            $this->assertFileExists(public_path('imoplanta-demo/landing/'.$f));
         }
     }
 
@@ -1251,7 +1251,7 @@ class ImoplantaTest extends TestCase
         $p->update(['video_estado' => 'pronto']);
         Livewire::actingAs($u)->test(Imovel::class, ['imovel' => $p])->assertSee('$el.duration - $el.currentTime <= 4', false)
             ->assertSee('Mais dois vídeos deste imóvel')->assertSee('EXEMPLO')
-            ->assertSee(asset('imoplanta/demo-planta.gif'), false);                    // the plan video's preview: one demo GIF for everyone
+            ->assertSee(asset('imoplanta-demo/demo-planta.gif'), false);                    // the plan video's preview: one demo GIF for everyone
 
         $p->guardarExtra('planta', 'estado', 'pronto');
         $p->guardarExtra('video', 'estado', 'a_fazer');

@@ -450,7 +450,7 @@ class Imoplantas
 
     /**
      * The reel's watermarked preview, once, as soon as the walkthrough is done (the plan video's preview is one
-     * demo GIF for everyone, public/imoplanta/demo-planta.gif: nothing to make): the reel from what we know (the listing link given with the plans,
+     * demo GIF for everyone, public/imoplanta-demo/demo-planta.gif: nothing to make): the reel from what we know (the listing link given with the plans,
      * their notes). Each only if not bought already.
      */
     public function fazerPrevias(Imoplanta $p): void

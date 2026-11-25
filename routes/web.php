@@ -220,7 +220,7 @@ Route::match(['get', 'post'], '/emails/cancelar/{lead}', function (int $lead) {
 })->middleware('signed')->name('lead.emails.cancelar');
 
 
-// Imoplanta's landing page: the steps shown with GIFs of the demo flat (public/imoplanta/landing).
+// Imoplanta's landing page: the steps shown with GIFs of the demo flat (public/imoplanta-demo/landing).
 Route::view('/da-planta-ao-video', 'imoplanta.landing')->name('plantas.sobre');
 
 

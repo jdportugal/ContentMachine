@@ -63,6 +63,17 @@ class FalhasTest extends TestCase
             ->assertSee('<title>Imocena · Esta página não está disponível.</title>', false);
     }
 
+    public function test_no_public_folder_hides_a_page(): void
+    {
+        // The live server (php -S) serves any existing file or folder under public/ before Laravel sees the
+        // request, so a folder named like a route turns that page into the server's bare "Not Found".
+        $paginas = collect(app('router')->getRoutes())->map(fn ($r) => explode('/', $r->uri())[0])
+            ->filter(fn ($p) => $p !== '' && ! str_contains($p, '{'))->unique();
+        foreach ($paginas as $p) {
+            $this->assertDirectoryDoesNotExist(public_path($p), "public/{$p} hides the /{$p} page");
+        }
+    }
+
     public function test_idealista_is_no_longer_offered_or_accepted(): void
     {
         $this->assertFalse(ListingScraper::supports('https://www.idealista.pt/imovel/12345678/'));

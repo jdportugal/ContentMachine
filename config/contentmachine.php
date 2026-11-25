@@ -598,7 +598,7 @@ return [
         // to Stripe (comma-separated emails).
         'gratis' => array_values(array_filter(array_map(fn ($e) => strtolower(trim($e)), explode(',', (string) env('IMOPLANTA_GRATIS', 'joaodiogocferreira@gmail.com'))))),
         // Step 4's add-ons, bought one at a time per property (cents, VAT included). Previews: the plan video's is
-        // one demo GIF for everyone (public/imoplanta/demo-planta.gif, no cost); the reel's is made when the
+        // one demo GIF for everyone (public/imoplanta-demo/demo-planta.gif, no cost); the reel's is made when the
         // walkthrough is done, watermarked, and buying it as previewed only re-renders it without the mark.
         'previas' => (bool) env('IMOPLANTA_PREVIAS', true),
         'marca_previa' => 'PRÉ-VISUALIZAÇÃO',

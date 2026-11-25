@@ -1,9 +1,9 @@
 @php
     // Imoplanta's landing page: the steps, each shown with a GIF of the demo flat (made once from its real files:
-    // public/imoplanta/landing). The prices come from the config, so they stay in step with Checkout.
+    // public/imoplanta-demo/landing). The prices come from the config, so they stay in step with Checkout.
     $eur = fn (int $c) => \Illuminate\Support\Number::currency($c / 100, 'EUR', 'pt_PT', precision: $c % 100 ? 2 : 0);
     $planos = collect(config('contentmachine.imoplanta.planos'))->values();
-    $g = fn (string $f) => asset('imoplanta/landing/'.$f);
+    $g = fn (string $f) => asset('imoplanta-demo/landing/'.$f);
     $passos = [
         ['Envie as plantas', 'Uma imagem por piso, onde se leiam as cotas. Lemos as paredes, as portas, as janelas e as divisões, com as medidas, e montamos a casa.', 'passo-1-planta.gif', 'A planta do apartamento e a casa montada a partir dela.'],
         ['Veja a casa em 3D e escolha as vistas', 'Rode o modelo, peça correções por escrito e escolha onde ficam as câmaras: até '.config('contentmachine.imoplanta.max_cameras').', já colocadas na sala, na cozinha, num quarto e na casa de banho.', 'passo-2-modelo.gif', 'O modelo 3D do apartamento a rodar, visto de cima e sem teto.'],
@@ -73,7 +73,7 @@
         <p class="mt-2 max-w-2xl text-[15px] lg:text-[17px] text-[#4A5263]">São extras: não fazem parte do imóvel. Ficam disponíveis quando o vídeo de visita estiver pronto e junta-os só se quiser.</p>
         <div class="mt-8 grid gap-6 lg:grid-cols-2 items-start">
             <article class="rounded-[20px] bg-navy text-ivory p-6 lg:p-8 flex flex-col gap-4">
-                <div class="rounded-xl overflow-hidden bg-white"><img src="{{ asset('imoplanta/demo-planta.gif') }}" alt="A planta 3D a construir-se: o terreno vazio, depois o chão e as paredes, e por fim a mobília." loading="lazy" class="w-full max-h-[420px] object-contain"></div>
+                <div class="rounded-xl overflow-hidden bg-white"><img src="{{ asset('imoplanta-demo/demo-planta.gif') }}" alt="A planta 3D a construir-se: o terreno vazio, depois o chão e as paredes, e por fim a mobília." loading="lazy" class="w-full max-h-[420px] object-contain"></div>
                 <span class="self-start px-2.5 py-1 rounded-full bg-cyan/15 text-cyan text-[11px] tracking-[.18em]">EXTRA</span>
                 <h3 class="font-display text-[28px] leading-tight">Vídeo da planta 3D</h3>
                 <p class="text-sm leading-relaxed text-[#C9CED6]">A casa vista de cima: começa num terreno vazio, depois o chão e as paredes, e por fim os móveis a entrar no lugar. Todos os pisos, com som.</p>
