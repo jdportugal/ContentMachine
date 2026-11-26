@@ -40,19 +40,20 @@ class Realizador
                 .'taken from the air; a close-up where the house is cut off at the sides or the roof; the house mostly hidden '
                 .'by cars, trees, walls, scaffolding or people; night or very dark; blurry, heavily filtered, a collage, or '
                 .'text and logos over the picture; a very wide panorama; a vertical phone photo where the house is small.',
-            'frame' => 'Using this photo as the reference, show this same house as an aerial drone photograph: the camera '
-                .'raised to about 7 metres above the ground, standing on the same side of the house and facing the same '
-                .'direction, gently tilted down so the roof, the plot and the immediate surroundings are seen from above. '
-                .'Keep exactly the same: the architecture, facade, windows, doors, roof shape, colours, materials and '
-                .'proportions of the house, and the neighbouring buildings, street, trees and plants where they are. '
-                .'What only the higher view reveals (the roof surface, the garden or yard, the plots next door) is simple, '
-                .'tidy and consistent with the photo. Preserve the same time of day, light direction, shadows and weather. '
-                .'A natural, moderate drone angle, not top-down. A clean, photoreal real-estate aerial photograph with an '
-                .'empty, clear sky area and an image free of people, text and logos.',
-            'video' => 'Slow pedestal up, like a drone rising: the camera lifts steadily from the street-level view of the '
-                .'first frame, tilting gently down, and eases to rest exactly on the aerial view of the last frame. One '
-                .'continuous, slow, smooth move with no cuts. The house stays solid and identical throughout, with straight '
-                .'rooflines and an unchanged facade; the street, trees and neighbouring houses stay still; the same daylight '
+            'frame' => 'Using this photo as the reference, show the same scene as a photograph taken by a drone hovering '
+                .'directly above the spot where this photo was taken, only a few metres higher: just above the rooftops of the '
+                .'nearest buildings (about 7 metres up). The drone faces exactly the same direction as the original camera, so '
+                .'the composition stays the same: the same buildings on the same sides of the frame, the street or path '
+                .'leading away in the same direction, the same vanishing point, now seen gently from above (about 25 degrees '
+                .'down). Keep exactly the same: the architecture, facades, windows, doors, balconies, roof shapes, colours, '
+                .'materials and proportions of every building, and the trees, plants and parked cars where they are. What '
+                .'only the higher view reveals (roof tops, yards behind walls) is simple, tidy and consistent with the photo. '
+                .'Preserve the same time of day, light direction, shadows and weather. A clean, photoreal real-estate drone '
+                .'photograph, with the picture free of text, logos and watermarks.',
+            'video' => 'Slow drone ascent: the camera rises steadily from the street-level view of the first frame, drifting '
+                .'slightly back and tilting gently down, and eases to rest exactly on the aerial view of the last frame. One '
+                .'continuous, slow, smooth move with no cuts. Every building stays solid and identical throughout, with '
+                .'straight rooflines and unchanged facades; parked cars, trees and the street stay still; the same daylight '
                 .'from start to end.',
             'som' => ' Audio: quiet residential street ambience, a light breeze and distant birds; no music, no voices.',
         ],

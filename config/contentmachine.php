@@ -608,6 +608,8 @@ return [
         ],
         'editar_imagem' => 3,   // changes to the AI frame, per video
         'refazer_video' => 2,   // new versions of the clip, per video
+        // The photo check (Analista): a simple look at one photo, so the cheap vision model (Opus cost ~$0.20 a photo)
+        'modelo_analise' => env('FERRAMENTAS_MODELO_ANALISE', 'claude-haiku-5-5'),
     ],
 
     /*

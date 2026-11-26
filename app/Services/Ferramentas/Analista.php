@@ -31,7 +31,7 @@ class Analista
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         [$w, $h] = getimagesizefromstring($disk->get($f->original)) ?: [0, 0];
-        $problemas = max($w, $h) < self::LADO_MINIMO ? ['A fotografia tem pouca resolução ('.$w.'×'.$h.' px): use o original, com pelo menos '.self::LADO_MINIMO.' px de largura.'] : [];
+        $problemas = max($w, $h) < self::LADO_MINIMO ? ['A fotografia tem pouca resolução ('.$w.'×'.$h.' px): use o original, com pelo menos '.self::LADO_MINIMO.' px no lado maior.'] : [];
 
         $prompt = Realizador::PROMPTS[$f->ferramenta]['analise']."\n\n".<<<'TXT'
         Answer with ONLY this JSON, nothing else:
@@ -40,7 +40,8 @@ class Analista
         - problemas: at most 3 short sentences in European Portuguese, for the customer (an estate agent), plain words, no jargon; [] if none.
         - dica: one sentence in European Portuguese saying which photo would work better; "" when adequada is true.
         TXT;
-        $envelope = $this->runClaude($prompt, null, ['images' => [$disk->path($f->original)], 'maxTurns' => 3, 'timeout' => 120]);
+        $envelope = $this->runClaude($prompt, null, ['images' => [$disk->path($f->original)], 'maxTurns' => 3, 'timeout' => 120,
+            'model' => (string) config('contentmachine.ferramentas.modelo_analise')]);
         $this->custos->llm($envelope);
         $json = preg_match('/\{.*\}/s', (string) ($envelope['result'] ?? ''), $m) ? json_decode($m[0], true) : null;
         if (! is_array($json) || ! array_key_exists('adequada', $json)) {
