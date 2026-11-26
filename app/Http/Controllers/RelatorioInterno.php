@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 /**
  * The progress report as JSON, for the operator's tools, without a shell on the server:
@@ -118,12 +119,15 @@ class RelatorioInterno
                 'canal' => $canal,
                 'anuncio' => $o['utm_content'] ?? null,
                 'agencia' => $l->agencia ?? null,
+                'consultor' => $l->consultor ?? null,
                 'imovel' => parse_url((string) $l->anuncio, PHP_URL_HOST),
                 'email' => ! empty($l->email) || ! empty($l->email_video),
                 'marketing' => ! empty($l->marketing_em) && empty($l->marketing_cancelado_em),
                 'pronto' => ! empty($l->pronto_em),
                 'falhou' => ! empty($l->falhou_em),
                 'pago' => ! empty($l->pago_em),
+                // The video itself, for two days (the same signed link the "ready" email carries).
+                'video' => ! empty($l->pronto_em) ? URL::temporarySignedRoute('lead.video', now()->addDays(2), ['lead' => $l->id]) : null,
             ];
         }
         $porCanal = array_count_values(array_column($lista, 'canal'));
