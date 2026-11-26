@@ -21,7 +21,7 @@
         <div class="flex flex-col gap-5">
             <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">FERRAMENTAS IA</span></div>
             <h1 class="font-display text-[44px] lg:text-[64px] font-medium leading-[1.02] text-navy">Uma fotografia, um vídeo que vende</h1>
-            <p class="max-w-lg text-[16px] lg:text-[18px] leading-relaxed text-[#4A5263]">Vista de drone, movimento lateral, limpeza, remodelação, construção ou planta animada. Envie uma fotografia do imóvel, aprove a primeira e a última imagem, e recebe um vídeo curto.</p>
+            <p class="max-w-lg text-[16px] lg:text-[18px] leading-relaxed text-[#4A5263]">Vista de drone, movimento lateral, remodelação, construção ou planta animada, e fotografias limpas. Envie uma fotografia do imóvel, aprove as imagens e recebe o resultado em minutos.</p>
             <div class="flex flex-wrap items-center gap-4">
                 <a href="{{ $comecar }}" class="{{ $botao }}">Experimentar com uma fotografia →</a>
                 <a href="#ferramentas" class="min-h-11 inline-flex items-center text-sm font-semibold text-navy underline underline-offset-4">Ver as ferramentas</a>
@@ -46,8 +46,8 @@
     <section id="ferramentas" class="mt-20 lg:mt-28 scroll-mt-6">
         <div class="max-w-2xl">
             <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">AS FERRAMENTAS</span></div>
-            <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Seis vídeos, uma fotografia de cada vez</h2>
-            <p class="mt-3 text-[15px] lg:text-[17px] text-[#4A5263]">Cada vídeo dura {{ $ferramentas['lateral']['segundos'] }} a {{ $ferramentas['construcao']['segundos'] }} segundos, em alta definição, no formato da sua fotografia.</p>
+            <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Seis ferramentas, uma fotografia de cada vez</h2>
+            <p class="mt-3 text-[15px] lg:text-[17px] text-[#4A5263]">Os vídeos duram {{ $ferramentas['lateral']['segundos'] }} a {{ $ferramentas['construcao']['segundos'] }} segundos, em alta definição, no formato da sua fotografia.</p>
         </div>
 
         <ul class="mt-12 flex flex-col gap-16 lg:gap-24">
@@ -62,6 +62,8 @@
                     <div class="rounded-[20px] overflow-hidden bg-white border border-[#E4E1DA] shadow-[0_12px_32px_rgba(14,22,38,0.10)]">
                         @if ($ex['video'])
                             <video src="{{ $ex['video'] }}" poster="{{ $ex['poster'] }}" controls muted playsinline preload="none" class="w-full aspect-video object-cover bg-navy" aria-label="Exemplo: {{ $f['nome'] }}"></video>
+                        @elseif ($ex['poster'])   {{-- a photo tool (the cleanup): its example is a photo --}}
+                            <img src="{{ $ex['poster'] }}" alt="Exemplo: {{ $f['nome'] }}" loading="lazy" class="w-full aspect-video object-cover bg-navy">
                         @else
                             <div class="w-full aspect-video bg-navy"></div>
                         @endif

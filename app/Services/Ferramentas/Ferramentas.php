@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,direcao?:bool,retirar?:bool,exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,retirar?:bool,exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -35,9 +35,10 @@ class Ferramentas
                 'exemplo' => 'Ex.: o vidro da porta está torto, endireitar',
             ],
             'limpeza' => [
-                'nome' => 'Limpeza IA', 'linha' => 'Objetos e desarrumação desaparecem, fica o espaço limpo.',
-                'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai de cena, peça a peça, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
-                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Espaço limpo', 'ai' => ['fim'], 'segundos' => 10,
+                // a photo, not a video (user, 2026-11-26): no clip, the cleaned photo is the result
+                'nome' => 'Limpeza IA', 'linha' => 'A sua fotografia, sem a desarrumação e os objetos a mais.',
+                'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai da fotografia, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
+                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'video' => false,
                 'retirar' => true, 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
@@ -216,14 +217,17 @@ class Ferramentas
         return true;
     }
 
-    /** «Aprovar e criar vídeo»: the frames are fixed and the clip starts. */
+    /** «Aprovar e criar vídeo»: the frames are fixed and the clip starts («Aprovar fotografia»: a photo tool is done). */
     public function aprovar(FerramentaIa $f): bool
     {
+        $video = $f->tipo()['video'] ?? true;   // a photo tool (the cleanup) is done once its photo is approved
         if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::A_APROVAR)
-            ->update(['estado' => FerramentaIa::A_ANIMAR, 'pedido' => null, 'erro' => null, 'updated_at' => now()]) !== 1) {
+            ->update(['estado' => $video ? FerramentaIa::A_ANIMAR : FerramentaIa::PRONTO, 'pedido' => null, 'erro' => null, 'updated_at' => now()]) !== 1) {
             return false;
         }
-        FerramentaVideoJob::dispatch($f->id, false);
+        if ($video) {
+            FerramentaVideoJob::dispatch($f->id, false);
+        }
 
         return true;
     }
@@ -231,7 +235,7 @@ class Ferramentas
     /** A new version of the clip from the same frames, with the customer's note (up to refazer_video). */
     public function refazer(FerramentaIa $f, string $nota): bool
     {
-        if ($f->refeitosRestantes() < 1 && ! $f->user->is_admin) {
+        if (! ($f->tipo()['video'] ?? true) || ($f->refeitosRestantes() < 1 && ! $f->user->is_admin)) {
             return false;
         }
         if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::PRONTO)

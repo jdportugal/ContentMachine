@@ -70,16 +70,15 @@ class Realizador
                 .'stay still; the same daylight from start to end.',
             'som' => null,   // silent (the user's call, 2026-11-26): also the cheaper Kling price
         ],
-        // The cleanup: the photo, then the same view tidied (the AI's end frame, approved); Kling makes the clutter go,
-        // the camera fixed. `fim` takes the customer's own list (opcoes.retirar) at %s. Nano Banana Pro kept the
+        // The cleanup: a photo tool, no video (user, 2026-11-26): the same view tidied (the AI's frame, approved) is
+        // the result. `fim` takes the customer's own list (opcoes.retirar) at %s. Nano Banana Pro kept the
         // framing here (measured: 0.6 % scale, 0.3 % shift; Nano Banana Edit drifted more, 2.5 %).
         'limpeza' => [
-            'analise' => 'You check a real-estate photo before an AI "cleanup" video: the AI removes clutter and unwanted '
-                .'objects to show the space clean and tidy, and the video makes them disappear one by one with the camera '
-                .'fixed. Interiors and exteriors both work. A GOOD start: a sharp, well-lit photo of a room or of a house '
+            'analise' => 'You check a real-estate photo before an AI "cleanup": the AI removes clutter and unwanted '
+                .'objects from the photo to show the space clean and tidy, everything else unchanged. Interiors and exteriors both work. A GOOD start: a sharp, well-lit photo of a room or of a house '
                 .'exterior with visible clutter or unwanted items (boxes, clothes, bags, toys, cables, bins, rubbish, tools, '
                 .'personal items, cars in front of a facade). PROBLEMS to look for: a space that is already clean and tidy '
-                .'(say there is little to remove, so the video will change little); people in the picture; a floor plan, '
+                .'(say there is little to remove, so the photo will change little); people in the picture; a floor plan, '
                 .'drawing or screenshot; very dark, blurry or heavily filtered; text and logos over the picture; so much '
                 .'clutter that walls and floor are hidden (the AI would have to invent most of the room).',
             'fim' => 'Using this photo as the reference, show exactly the same space from exactly the same camera position, '
@@ -91,11 +90,6 @@ class Realizador
                 .'the ground, and the main furniture (sofas, beds, tables, chairs, wardrobes). Where something was removed, '
                 .'show the clean floor, wall or surface that was behind it, matching the rest. The same light, colours and '
                 .'white balance. A photoreal real-estate photograph, with the picture free of text, logos and watermarks.',
-            'video' => 'Locked-off shot: the camera does not move at all, no pan, no zoom. The space starts exactly as in the '
-                .'first frame and then, one after another, the clutter and loose objects gently fade away and disappear, '
-                .'until the space is exactly as clean and tidy as in the last frame. Walls, floor, windows, the furniture '
-                .'that stays and the light never change. Smooth and satisfying, one continuous shot with no cuts.',
-            'som' => ' Audio: a soft, light whoosh as each item disappears, over quiet room tone; no music, no voices.',
         ],
         // The side move, a real sideways travel (user, 2026-11-26: "it must always move the camera position"). From one
         // photo every video model (Kling 3.0 with any wording, Kling 2.6, Hailuo 2.3) often TURNS instead of moving: the

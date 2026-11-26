@@ -438,7 +438,7 @@ class FerramentasTest extends TestCase
         rmdir($dir);
     }
 
-    public function test_the_cleanup_tidies_the_photo_with_the_customers_list_then_a_10_second_clip_with_sound(): void
+    public function test_the_cleanup_is_a_photo_tidied_with_the_customers_list_and_no_video(): void
     {
         $this->kie();
         $u = $this->cliente(1);
@@ -448,19 +448,22 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->retirar($f, '  o carro e as caixas  '));
         Queue::fake();
         app(Ferramentas::class)->iniciar($f->refresh());
-        $this->assertFalse(app(Ferramentas::class)->retirar($f->refresh(), 'mais'));   // fixed once the frames are being made
+        $this->assertFalse(app(Ferramentas::class)->retirar($f->refresh(), 'mais'));   // fixed once the photo is being made
 
         app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
 
         $f->refresh();
-        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->inicio]);   // the start is the photo itself
+        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->inicio]);   // "before" is the photo itself
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
             && str_contains($r['input']['prompt'], 'The client also asks to remove: o carro e as caixas.'));
 
-        app(Ferramentas::class)->aprovar($f);
-        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
-        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && $r['input']['duration'] === '10' && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'Locked-off'));
-        $this->assertSame([['frames', 0.09], ['video', 1.51]], $this->custos($f));
+        $this->assertTrue(app(Ferramentas::class)->aprovar($f));
+        $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);   // done: no video
+        Queue::assertNotPushed(FerramentaVideoJob::class);
+        $this->assertFalse(app(Ferramentas::class)->refazer($f, ''));
+        $this->assertSame([['frames', 0.09]], $this->custos($f));
+        \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
+        $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()
+            ->assertSee('Descarregar fotografia limpa')->assertSee('Antes')->assertDontSee('Refazer vídeo');
     }
 }

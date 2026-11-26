@@ -1,7 +1,8 @@
 @php
     $v = $video;
     $estado = $v?->estado ?? \App\Models\FerramentaIa::RASCUNHO;
-    $passos = ['Fotografia', 'Imagens', 'Vídeo'];
+    $comVideo = $tipo['video'] ?? true;   // the cleanup: a photo tool, its approved photo is the result
+    $passos = $comVideo ? ['Fotografia', 'Imagens', 'Vídeo'] : ['Fotografia', 'Fotografia limpa', 'Pronta'];
     $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => 2, 'pronto' => 2][$estado];
     $ficheiro = fn (string $qual, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, ...$q, 'v' => substr(md5((string) $v->{$qual}), 0, 8)]);
     $quadrosIa = $tipo['ai'];
@@ -120,12 +121,13 @@
             @if (! $semVideos && $v)
                 <div class="flex flex-wrap items-center gap-4">
                     <button type="submit" wire:loading.attr="disabled" wire:target="criar, foto" @disabled($v->aAnalisar()) class="{{ $botao }}">
-                        <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : 'Criar imagens →' }}</span>
+                        <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : ($comVideo ? 'Criar imagens →' : 'Limpar fotografia →') }}</span>
                         <span wire:loading wire:target="criar">A enviar…</span>
                     </button>
                     <p class="text-xs text-[#6B7385]">
                         {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa 1 dos seus '.$disponiveis.' vídeos IA.' }}
-                        Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
+                        @if ($comVideo) Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
+                        @else Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações à fotografia. @endif
                     </p>
                 </div>
             @endif
@@ -144,7 +146,7 @@
     @elseif ($estado === 'a_enquadrar' || $estado === 'a_animar')
         <div class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] px-8 py-14 flex items-center justify-center gap-4 text-[#4A5263]" role="status">
             <span class="w-6 h-6 rounded-full border-[3px] border-[#E4E1DA] border-t-coral animate-spin"></span>
-            {{ $estado === 'a_enquadrar' ? 'A criar as imagens… costuma levar 1 a 2 minutos.' : 'A criar o vídeo… costuma levar 3 a 6 minutos. Pode fechar esta página e voltar mais tarde.' }}
+            {{ $estado === 'a_enquadrar' ? ($comVideo ? 'A criar as imagens…' : 'A limpar a fotografia…').' costuma levar 1 a 2 minutos.' : 'A criar o vídeo… costuma levar 3 a 6 minutos. Pode fechar esta página e voltar mais tarde.' }}
         </div>
 
     @elseif ($estado === 'a_aprovar')
@@ -188,8 +190,28 @@
             @endif
         </form>
         <div class="mt-6 flex flex-wrap items-center gap-4">
-            <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar e criar vídeo →</button>
-            <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra.</span>
+            @if ($comVideo)
+                <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar e criar vídeo →</button>
+                <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra.</span>
+            @else
+                <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar fotografia →</button>
+                <span class="text-xs text-[#6B7385]">Depois de aprovar, a fotografia fica pronta a descarregar.</span>
+            @endif
+        </div>
+
+    @elseif ($estado === 'pronto' && ! $comVideo)
+        {{-- before / after: drag the handle across the photo --}}
+        <div x-data="{ corte: 50 }" class="mt-6 relative w-full rounded-2xl overflow-hidden bg-navy select-none">
+            <img src="{{ $ficheiro('fim') }}" alt="{{ $tipo['fim'] }}" class="block w-full h-auto">
+            <img src="{{ $ficheiro('inicio') }}" alt="{{ $tipo['inicio'] }}" class="absolute inset-0 w-full h-full object-cover" :style="'clip-path: inset(0 ' + (100 - corte) + '% 0 0)'">
+            <span class="absolute inset-y-0 w-0.5 bg-white shadow" :style="'left:' + corte + '%'"></span>
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-navy/80 text-ivory text-xs font-semibold">Antes</span>
+            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-navy/80 text-ivory text-xs font-semibold">Depois</span>
+            <input type="range" min="0" max="100" x-model="corte" aria-label="Comparar antes e depois" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize">
+        </div>
+        <div class="mt-4 flex flex-wrap gap-3">
+            <a href="{{ $ficheiro('fim', ['baixar' => 1]) }}" class="inline-flex items-center {{ $botao }}">Descarregar fotografia limpa</a>
+            <a href="{{ $ficheiro('original', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Fotografia original</a>
         </div>
 
     @elseif ($estado === 'pronto')
