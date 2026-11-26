@@ -254,6 +254,7 @@ Route::livewire('/conta', Conta::class)->middleware('auth')->name('conta');
 // A customer's video editor, and the pictures it shows (only their own videos').
 Route::livewire('/conta/videos/{lead}/editar', EditarVideo::class)->middleware('auth')->name('conta.editar');
 Route::livewire('/conta/novo', \App\Livewire\NovoVideoPagina::class)->middleware('auth')->name('conta.novo');
+Route::livewire('/conta/definicoes', \App\Livewire\ContaDefinicoes::class)->middleware('auth')->name('conta.definicoes');
 
 // A track from the music library, for a customer to hear before choosing it.
 Route::get('/conta/musicas/{nome}', function (string $nome, \App\Services\Shorts\MusicLibrary $biblioteca) {

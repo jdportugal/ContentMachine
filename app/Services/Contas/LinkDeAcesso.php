@@ -19,11 +19,11 @@ class LinkDeAcesso
 {
     public const MINUTOS = 30;
 
-    /** The account for this email, made if needed — always a customer, never an admin. */
+    /** The account for this email (its own, or the one it is shared into), made if needed — always a customer, never an admin. */
     public function contaPara(string $email, ?string $nome = null): User
     {
         $email = Str::lower(trim($email));
-        $user = User::query()->where('email', $email)->first();
+        $user = User::porEmail($email);
         if ($user) {
             return $user;
         }
@@ -41,15 +41,18 @@ class LinkDeAcesso
         return URL::temporarySignedRoute('entrar.link', now()->addMinutes($minutos ?? self::MINUTOS), ['user' => $user->id] + ($para ? ['para' => $para] : []));
     }
 
-    /** Email the sign-in link. Never throws: a mail failure must not break a payment or a form. */
-    public function enviar(User $user, ?string $assunto = null, ?string $intro = null, ?string $para = null, ?int $minutos = null): void
+    /**
+     * Email the sign-in link. Never throws: a mail failure must not break a payment or a form.
+     * $destino: the address it goes to when not the account's own (an email the account is shared with).
+     */
+    public function enviar(User $user, ?string $assunto = null, ?string $intro = null, ?string $para = null, ?int $minutos = null, ?string $destino = null): void
     {
         $link = $this->url($user, $para, $minutos);
         $assunto ??= 'O seu link de acesso à Imocena';
         $intro ??= 'Clique no botão para entrar na sua conta Imocena. O link é válido durante '.self::MINUTOS.' minutos.';
         try {
-            Mail::html(view('emails.link-acesso', ['link' => $link, 'intro' => $intro, 'nome' => $user->name])->render(), function ($m) use ($user, $assunto) {
-                $m->to($user->email)->subject($assunto);
+            Mail::html(view('emails.link-acesso', ['link' => $link, 'intro' => $intro, 'nome' => $user->name])->render(), function ($m) use ($user, $assunto, $destino) {
+                $m->to($destino ?? $user->email)->subject($assunto);
             });
         } catch (\Throwable $e) {
             Log::warning('Link de acesso não enviado', ['user' => $user->id, 'erro' => $e->getMessage()]);

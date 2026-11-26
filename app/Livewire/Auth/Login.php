@@ -74,7 +74,8 @@ class Login extends Component
         }
         RateLimiter::hit($chave, 600);
 
-        $user = User::query()->where('email', Str::lower(trim($this->email)))->first();
+        $email = Str::lower(trim($this->email));
+        $user = User::porEmail($email);   // its own address, or one it is shared with
         if (! $user) {   // a new address: its account, with no credits of any kind, and straight in
             $contas->entrar($contas->contaPara($this->email));
             $this->redirectIntended(default: route('conta'), navigate: false);
@@ -82,7 +83,7 @@ class Login extends Component
             return;
         }
         if (! $user->isAdmin()) {
-            $contas->enviar($user);
+            $contas->enviar($user, destino: $email);   // to the inbox of whoever typed it
         }
         $this->linkEnviado = true;
     }

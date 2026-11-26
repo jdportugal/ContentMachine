@@ -96,10 +96,10 @@ class Comecar extends Component
 
         // A new email: its account, signed straight in (no email check, like the free video). One that already
         // has an account (with its videos and credits) gets the emailed sign-in link instead, back to this page.
-        $user = User::query()->where('email', $this->email)->first();
+        $user = User::porEmail($this->email);   // its own address, or one it is shared with
         if ($user) {
             if (! $user->isAdmin()) {
-                $contas->enviar($user, 'O seu link para continuar com as plantas', 'Clique no botão para entrar e continuar com as plantas do seu imóvel. O link é válido durante '.LinkDeAcesso::MINUTOS.' minutos.', route('plantas', absolute: false));
+                $contas->enviar($user, 'O seu link para continuar com as plantas', 'Clique no botão para entrar e continuar com as plantas do seu imóvel. O link é válido durante '.LinkDeAcesso::MINUTOS.' minutos.', route('plantas', absolute: false), destino: Str::lower(trim($this->email)));
             }
             $this->enviadoPara = $this->email;
 

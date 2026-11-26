@@ -24,6 +24,21 @@ class User extends Authenticatable
         return (bool) $this->is_admin;
     }
 
+    /** The account an email signs in to: its own address, or one it shares the account with (Definições da conta). */
+    public static function porEmail(string $email): ?self
+    {
+        $email = strtolower(trim($email));
+
+        return self::where('email', $email)->first()
+            ?? self::whereIn('id', \Illuminate\Support\Facades\DB::table('user_emails')->where('email', $email)->select('user_id'))->first();
+    }
+
+    /** The other emails that sign in to this account. @return list<string> */
+    public function emailsPartilhados(): array
+    {
+        return \Illuminate\Support\Facades\DB::table('user_emails')->where('user_id', $this->id)->orderBy('id')->pluck('email')->all();
+    }
+
     /** Videos bought and not yet used, across all their purchases. */
     public function creditos(): int
     {

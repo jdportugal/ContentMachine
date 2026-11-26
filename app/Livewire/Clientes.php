@@ -43,7 +43,7 @@ class Clientes extends Component
             'quantidade.min' => 'Pelo menos 1 vídeo.',
             'quantidade.max' => 'No máximo 200 de cada vez.',
         ]);
-        $existente = User::query()->where('email', $this->email)->first();
+        $existente = User::porEmail($this->email);   // an email shared into an account gives to that account
         if ($existente?->isAdmin()) {
             $this->addError('email', 'Este email é de um administrador: os vídeos de cliente não se aplicam.');
 

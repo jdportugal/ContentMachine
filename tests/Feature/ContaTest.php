@@ -117,6 +117,51 @@ class ContaTest extends TestCase
         Queue::assertPushed(ImportListingJob::class, 2);
     }
 
+    public function test_a_customer_shares_the_account_and_the_other_email_signs_in_to_it(): void
+    {
+        $ana = User::factory()->cliente()->create(['email' => 'ana@exemplo.pt']);
+        $rui = User::factory()->cliente()->create(['email' => 'rui@exemplo.pt']);
+
+        $this->actingAs($ana)->get(route('conta'))->assertSee('Definições da conta')->assertSee(route('conta.definicoes'), false);   // foot of the sidebar
+        $this->get(route('conta.definicoes'))->assertOk()->assertSee('Quem pode entrar nesta conta');
+
+        Livewire::actingAs($ana)->test(\App\Livewire\ContaDefinicoes::class)
+            ->set('email', ' Assistente@Exemplo.pt ')->call('adicionar')->assertHasNoErrors()->assertSee('assistente@exemplo.pt')
+            ->set('email', 'rui@exemplo.pt')->call('adicionar')->assertHasErrors(['email' => 'unique'])        // has its own account
+            ->set('email', 'assistente@exemplo.pt')->call('adicionar')->assertHasErrors(['email' => 'unique']);   // already here
+        Livewire::actingAs($rui)->test(\App\Livewire\ContaDefinicoes::class)->set('email', 'assistente@exemplo.pt')->call('adicionar')->assertHasErrors('email');
+        $this->assertSame(['assistente@exemplo.pt'], $ana->emailsPartilhados());
+        auth()->logout();
+
+        // the sign-in page: the link goes to the assistant's own inbox and opens Ana's account; no new account
+        Livewire::test(Login::class)->set('email', 'Assistente@exemplo.pt')->call('enviarLink')->assertSet('linkEnviado', true);
+        $enviados = app('mailer')->getSymfonyTransport()->messages();
+        $this->assertCount(1, $enviados);
+        $this->assertSame(['assistente@exemplo.pt'], array_map(fn ($a) => $a->getAddress(), $enviados[0]->getOriginalMessage()->getTo()));
+        preg_match('#https?://[^"\s]+/entrar/'.$ana->id.'[^"\s]*#', html_entity_decode($enviados[0]->getOriginalMessage()->getHtmlBody()), $m);
+        $this->get($m[0]);
+        $this->assertAuthenticatedAs($ana);
+        $this->assertSame(2, User::count());
+        auth()->logout();
+
+        // a purchase or videos given to the shared email land in Ana's account
+        $this->assertSame($ana->id, app(\App\Services\Contas\LinkDeAcesso::class)->contaPara('assistente@exemplo.pt')->id);
+
+        // removed: it no longer gets in
+        Livewire::actingAs($ana)->test(\App\Livewire\ContaDefinicoes::class)->call('remover', 'assistente@exemplo.pt');
+        $this->assertNull(User::porEmail('assistente@exemplo.pt'));
+        $this->assertSame($ana->id, User::porEmail('ANA@exemplo.pt')->id);
+    }
+
+    public function test_someone_else_cannot_remove_an_email_from_an_account_that_is_not_theirs(): void
+    {
+        $ana = User::factory()->create();
+        $rui = User::factory()->create();
+        Livewire::actingAs($ana)->test(\App\Livewire\ContaDefinicoes::class)->set('email', 'x@exemplo.pt')->call('adicionar');
+        Livewire::actingAs($rui)->test(\App\Livewire\ContaDefinicoes::class)->call('remover', 'x@exemplo.pt');
+        $this->assertSame(['x@exemplo.pt'], $ana->emailsPartilhados());
+    }
+
     public function test_no_credits_no_video(): void
     {
         Queue::fake();
