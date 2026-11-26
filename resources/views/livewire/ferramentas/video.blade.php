@@ -91,10 +91,10 @@
                     @endforeach
                 </fieldset>
             @endif
-            @if ($tipo['retirar'] ?? false)
+            @if ($tipo['campo'] ?? false)
                 <label class="flex flex-col gap-1.5 text-sm text-[#4A5263]">
-                    <span><span class="font-semibold text-ivory">O que quer retirar?</span> Opcional: já retiramos a desarrumação e os objetos soltos.</span>
-                    <input type="text" wire:model="retirar" maxlength="300" placeholder="Ex.: o carro em frente à garagem, as caixas no canto"
+                    <span><span class="font-semibold text-ivory">{{ $tipo['campo']['titulo'] }}</span> {{ $tipo['campo']['ajuda'] }}</span>
+                    <input type="text" wire:model="texto" maxlength="300" placeholder="{{ $tipo['campo']['exemplo'] }}"
                            class="min-h-[52px] px-4 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan">
                 </label>
             @endif

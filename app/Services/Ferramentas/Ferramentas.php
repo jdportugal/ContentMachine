@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,retirar?:bool,exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -39,12 +39,15 @@ class Ferramentas
                 'nome' => 'Limpeza IA', 'linha' => 'A sua fotografia, sem a desarrumação e os objetos a mais.',
                 'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai da fotografia, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
                 'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'video' => false,
-                'retirar' => true, 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
+                'campo' => ['titulo' => 'O que quer retirar?', 'ajuda' => 'Opcional: já retiramos a desarrumação e os objetos soltos.', 'exemplo' => 'Ex.: o carro em frente à garagem, as caixas no canto'],
+                'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da remodelação, do estado atual ao renovado.',
                 'texto' => 'Mostre o potencial de um imóvel para recuperar: a divisão transforma-se, em timelapse, numa versão remodelada. Pode dizer-nos o estilo que quer.',
                 'envio' => 'Fotografia da divisão a remodelar', 'inicio' => 'Estado atual', 'fim' => 'Remodelado', 'ai' => ['fim'], 'segundos' => 10,
+                'campo' => ['titulo' => 'Que estilo quer?', 'ajuda' => 'Opcional: sem indicação, fazemos uma remodelação atual, clara e neutra.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
+                'exemplo' => 'Ex.: o chão em madeira mais escura',
             ],
             'construcao' => [
                 'nome' => 'Construção IA', 'linha' => 'Operários constroem a casa, do terreno vazio ao fim.',
@@ -206,13 +209,13 @@ class Ferramentas
         return true;
     }
 
-    /** The cleanup's own list of things to take out (optional, on the draft: the end frame is made with it). */
-    public function retirar(FerramentaIa $f, string $texto): bool
+    /** The tool's own optional text (the cleanup: what to take out; the remodel: the style), on the draft: the AI frame is made with it. */
+    public function texto(FerramentaIa $f, string $texto): bool
     {
-        if (! ($f->tipo()['retirar'] ?? false) || $f->estado !== FerramentaIa::RASCUNHO) {
+        if (! isset($f->tipo()['campo']) || $f->estado !== FerramentaIa::RASCUNHO) {
             return false;
         }
-        $f->update(['opcoes' => [...($f->opcoes ?? []), 'retirar' => mb_substr(trim($texto), 0, 300)]]);
+        $f->update(['opcoes' => [...($f->opcoes ?? []), 'texto' => mb_substr(trim($texto), 0, 300)]]);
 
         return true;
     }

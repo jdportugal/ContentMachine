@@ -71,7 +71,7 @@ class Realizador
             'som' => null,   // silent (the user's call, 2026-11-26): also the cheaper Kling price
         ],
         // The cleanup: a photo tool, no video (user, 2026-11-26): the same view tidied (the AI's frame, approved) is
-        // the result. `fim` takes the customer's own list (opcoes.retirar) at %s. Nano Banana Pro kept the
+        // the result. `fim` takes the customer's own list (opcoes.texto, in `campo`) at %s. Nano Banana Pro kept the
         // framing here (measured: 0.6 % scale, 0.3 % shift; Nano Banana Edit drifted more, 2.5 %).
         'limpeza' => [
             'analise' => 'You check a real-estate photo before an AI "cleanup": the AI removes clutter and unwanted '
@@ -91,6 +91,7 @@ class Realizador
                 .'the ground, and the main furniture (sofas, beds, tables, chairs, wardrobes). Where something was removed, '
                 .'show the clean floor, wall or surface that was behind it, matching the rest. The same light, colours and '
                 .'white balance. A photoreal real-estate photograph, with the picture free of text, logos and watermarks.',
+            'campo' => ' The client also asks to remove: %s.',
         ],
         // The side move, a real sideways travel (user, 2026-11-26: "it must always move the camera position"). From one
         // photo every video model (Kling 3.0 with any wording, Kling 2.6, Hailuo 2.3) often TURNS instead of moving: the
@@ -122,6 +123,38 @@ class Realizador
                 .'throughout. One continuous move, no cuts, no zoom.',
             'som' => null,
         ],
+        // The remodel: the photo is the start, the AI draws the same room renovated (the architecture kept, every
+        // finish new, the customer's style in `campo`), Kling plays the works between them as a locked-off timelapse.
+        'remodelacao' => [
+            'analise' => 'You check a real-estate photo before it is turned into an AI "renovation timelapse": from this '
+                .'photo the AI draws the same space fully renovated, then a fixed-camera timelapse shows workers turning one '
+                .'into the other. Interiors work best; a house facade also works. A GOOD start: a sharp, well-lit photo of a '
+                .'room or facade that is dated, worn or in need of works (old tiles, stains, damaged walls, old fittings), '
+                .'the walls, floor and windows visible. PROBLEMS to look for: a space that is already new or recently '
+                .'renovated (say the change will be small); a floor plan, drawing or screenshot; people in the picture; very '
+                .'dark, blurry or heavily filtered; a close-up of one object or one wall, where the room cannot be read; a '
+                .'very wide panorama. Text, logos and watermarks over the picture are NOT a problem.',
+            // measured 2026-11-26: "renew everything" let the AI redraw the room (window moved, other camera); each
+            // thing renewed in its own place, the photo's own outline kept, holds it
+            'fim' => 'Edit this photo: the same room, renovated. The camera does not move: exactly the same viewpoint, lens, '
+                .'framing and crop, so the walls, corners, ceiling line and floor meet the edges of the picture exactly where '
+                .'they do now. Every window and door stays exactly where it is, at the same size and shape (new frames are '
+                .'fine). Each fitting is replaced by a new one of the same kind IN THE SAME PLACE and about the same size: '
+                .'a bath where the bath is, a toilet or bidet where it is, a sink where the sink is, kitchen units along the '
+                .'same walls. New finishes everywhere: smooth freshly painted walls and ceiling, new wall tiles where there '
+                .'are tiles, a new floor, new taps and light fittings, everything clean, in a current, bright and neutral '
+                .'style; at most a towel or a plant as decor.%s The same natural daylight from the same windows. A photoreal '
+                .'real-estate photograph, with the picture free of people, text, logos and watermarks.',
+            'campo' => ' The client wants this style: %s.',
+            'video' => 'Fast-motion renovation timelapse from a fixed camera on a tripod: the camera stays perfectly still for '
+                .'the whole shot. Workers in work clothes hurry in and out, sped up: they strip the old finishes and '
+                .'fittings, repair and plaster the walls, paint, lay the new floor, fit the new fittings and bring in the '
+                .'furniture, step by step, until the room is exactly as in the last frame, clean, finished and empty of '
+                .'people. The walls, windows and doors stay in place the whole time; the daylight flickers gently as the '
+                .'days pass. One continuous shot, no cuts.',
+            'som' => ' Sound, sped up with the picture: scraping, hammering, drills, a saw, tiles and planks set down, '
+                .'brushes and rollers, footsteps; it calms down at the end to a quiet, finished room. No music, no speech.',
+        ],
     ];
 
     public const PROMPT_ALTERAR = 'Change this image as asked, and nothing else: «%s». Keep everything else exactly as it is: '
@@ -151,9 +184,9 @@ class Realizador
             $refs[] = $this->kie->upload($disk->get($f->{$qual}), 'atual.png');
         } else {
             $prompt = self::PROMPTS[$f->ferramenta][$qual];
-            if ($f->ferramenta === 'limpeza') {
-                $extra = trim((string) ($f->opcoes['retirar'] ?? ''));
-                $prompt = sprintf($prompt, $extra !== '' ? ' The client also asks to remove: '.$extra.'.' : '');
+            if (isset(self::PROMPTS[$f->ferramenta]['campo'])) {   // the customer's own text, in the tool's words
+                $extra = trim((string) ($f->opcoes['texto'] ?? ''));
+                $prompt = sprintf($prompt, $extra !== '' ? sprintf(self::PROMPTS[$f->ferramenta]['campo'], $extra) : '');
             }
         }
         if ($tem($f->{$outro})) {

@@ -443,12 +443,12 @@ class FerramentasTest extends TestCase
         $this->kie();
         $u = $this->cliente(1);
         $f = app(Ferramentas::class)->criar($u, 'lateral', $this->foto());
-        $this->assertFalse(app(Ferramentas::class)->retirar($f, 'o carro'));   // only the cleanup has the list
+        $this->assertFalse(app(Ferramentas::class)->texto($f, 'o carro'));   // the side move has no text
         $f = app(Ferramentas::class)->criar($u, 'limpeza', $this->foto());
-        $this->assertTrue(app(Ferramentas::class)->retirar($f, '  o carro e as caixas  '));
+        $this->assertTrue(app(Ferramentas::class)->texto($f, '  o carro e as caixas  '));
         Queue::fake();
         app(Ferramentas::class)->iniciar($f->refresh());
-        $this->assertFalse(app(Ferramentas::class)->retirar($f->refresh(), 'mais'));   // fixed once the photo is being made
+        $this->assertFalse(app(Ferramentas::class)->texto($f->refresh(), 'mais'));   // fixed once the photo is being made
 
         app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
 
@@ -465,5 +465,28 @@ class FerramentasTest extends TestCase
         \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
         $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()
             ->assertSee('Descarregar fotografia limpa')->assertSee('Antes')->assertDontSee('Refazer vídeo');
+    }
+
+    public function test_the_remodel_draws_the_renovated_room_in_the_customers_style_and_plays_the_works_with_sound(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'remodelacao', $this->foto());
+        $this->assertTrue(app(Ferramentas::class)->texto($f, 'escandinavo'));
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+
+        $f->refresh();
+        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->inicio]);   // the start is the photo
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], 'The client wants this style: escandinavo.'));
+
+        $this->assertTrue(app(Ferramentas::class)->aprovar($f));
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'timelapse'));
+        $this->assertSame([['frames', 0.09], ['video', 1.51]], $this->custos($f));
     }
 }
