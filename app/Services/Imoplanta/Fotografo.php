@@ -160,7 +160,7 @@ class Fotografo
         $urlLote = $this->kie->upload($disk->get($tem('lote')), 'lote.png');
         $urlCheio = $this->kie->upload($disk->get($cheio), 'planta.png');
         $tentativa = fn () => $this->kie->submitFramesVideo(self::PROMPT_CONSTRUCAO.self::SOM_CONSTRUCAO, $urlLote, $urlCheio, self::NEGATIVO_MOBILIA, 10, true);
-        $url = self::comAlternativa($tentativa, $tentativa, fn ($t) => $this->kie->pollVideo($t));
+        $url = self::comAlternativa($tentativa, $tentativa, fn ($t) => $this->kie->pollVideo($t, $this->kie->precoKling(10, true)));
         $f = $p->pasta().'/aereo-'.$nivel.'-construcao-'.Str::random(6).'.mp4';
         $disk->put($f, Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());
         $p->guardarAereo($nivel, 'construcao', $f);

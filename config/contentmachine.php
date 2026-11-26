@@ -320,6 +320,8 @@ return [
             'nano-banana-pro' => (float) env('CUSTO_KIE_NANO_BANANA_PRO', 0.09),   // 18 credits at 1K/2K
         ],
         'kie_video' => env('CUSTO_KIE_VIDEO', 0.40),            // per generated video (5s)
+        // Kling 3.0 on kie.ai, mode pro (1080p), USD per second (kie.ai/kling-3-0, 2026-11-26): KieClient::precoKling()
+        'kling3_pro_s' => ['som' => (float) env('CUSTO_KLING3_SOM_S', 0.151), 'mudo' => (float) env('CUSTO_KLING3_MUDO_S', 0.101)],
         'elevenlabs_1k_chars' => env('CUSTO_TTS_1K', 0.30),     // per 1k synthesized chars
         'apify_busca' => env('CUSTO_APIFY_BUSCA', 0.01),        // per image-search run
         // fal.ai Sync Lipsync 2 Pro, billed per MINUTE of the finished video

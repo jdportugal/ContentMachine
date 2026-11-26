@@ -57,4 +57,24 @@ class KieClientPollingTest extends TestCase
         $this->expectExceptionMessageMatches('/generation failed/');
         app(KieClient::class)->generate('a prompt', '1:1');
     }
+
+    /** Kling 3.0 is priced per second (pro, 1080p): a clip is booked at its length × that price, not a flat fee. */
+    public function test_a_kling_3_clip_is_booked_at_seconds_times_the_per_second_price(): void
+    {
+        config(['services.kie.key' => 'test-key', 'services.kie.base_url' => 'https://api.kie.ai']);
+        $kie = app(KieClient::class);
+        $this->assertEqualsWithDelta(1.51, $kie->precoKling(10, true), 0.0001);
+        $this->assertEqualsWithDelta(2.265, $kie->precoKling(15, true), 0.0001);
+        $this->assertEqualsWithDelta(1.01, $kie->precoKling(10, false), 0.0001);
+
+        Http::fake(['*' => Http::response(['data' => ['state' => 'success', 'model' => 'kling-3.0/video',
+            'resultJson' => json_encode(['resultUrls' => ['https://v.example/1.mp4']])]])]);
+        $custos = [];
+        $this->mock(\App\Services\Costs\CostLedger::class, function ($m) use (&$custos) {
+            $m->shouldReceive('registar')->andReturnUsing(function ($servico, $custo) use (&$custos) { $custos[] = $custo; });
+        });
+
+        $this->assertSame('https://v.example/1.mp4', app(KieClient::class)->pollVideo('t1', 1.51));
+        $this->assertSame([1.51], $custos);
+    }
 }

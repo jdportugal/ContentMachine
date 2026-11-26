@@ -76,7 +76,7 @@ class AnimatePropertyJob implements ShouldQueue
             // and the clip with fewer problems is kept.
             $broke = null;   // kie.ai out of credits: nothing more can start
             for ($round = 1; $round <= 2 && $todo !== [] && ! $broke; $round++) {
-                $tasks = [];
+                $tasks = $segundos = [];
                 foreach ($todo as $i => $avoid) {
                     if ($broke) {
                         break;
@@ -92,6 +92,7 @@ class AnimatePropertyJob implements ShouldQueue
                         $prompt = PropertyVideoAnalyzer::videoPrompt($anim)
                             .($avoid !== [] ? ' A previous attempt went wrong — avoid exactly this: '.implode('; ', $avoid).'.' : '');
                         $tasks[$i] = $kie->submitFramesVideo($prompt, $start, $end, self::NEGATIVE, $seconds);
+                        $segundos[$i] = $seconds;
                     } catch (\Throwable $e) {
                         if (stripos($e->getMessage(), 'credits insufficient') !== false) {
                             $broke = 'kie.ai is out of credits';
@@ -107,7 +108,10 @@ class AnimatePropertyJob implements ShouldQueue
                     $anim = &$prop['rooms'][$i]['anim'];
                     try {
                         $rel = 'clips/uploads/'.Str::random(40).'.mp4';
-                        $disk->put($rel, Http::timeout(300)->get($kie->pollVideo($taskId))->throw()->body());
+                        // Kling 3.0 is priced per second; the 2.x models keep the flat config price
+                        $custo = str_starts_with((string) config('contentmachine.real_estate.property.video_model'), 'kling-3')
+                            ? $kie->precoKling(max(3, $segundos[$i] ?? 5), (bool) config('contentmachine.real_estate.property.sound', true)) : null;
+                        $disk->put($rel, Http::timeout(300)->get($kie->pollVideo($taskId, $custo))->throw()->body());
                     } catch (\Throwable $e) {
                         $flags[] = "{$prop['rooms'][$i]['room']}: the animation failed (".Str::limit($e->getMessage(), 120).')';
                         unset($anim);

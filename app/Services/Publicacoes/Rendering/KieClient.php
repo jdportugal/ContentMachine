@@ -107,9 +107,9 @@ class KieClient
      * and 5/10 s. Returns the taskId so several rooms can be submitted before any
      * is polled (see pollVideo()). Both URLs must be kie file URLs (see upload()).
      */
-    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5, ?bool $som = null): string
+    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5, ?bool $som = null, ?string $modelo = null): string
     {
-        $model = (string) config('contentmachine.real_estate.property.video_model', 'kling-3.0/video');
+        $model = $modelo ?? (string) config('contentmachine.real_estate.property.video_model', 'kling-3.0/video');
         $prompt = Str::limit($prompt, 2400, '');
         $input = str_starts_with($model, 'kling-3')
             ? ['prompt' => $prompt, 'image_urls' => [$startUrl, $endUrl], 'sound' => $som ?? (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
@@ -153,10 +153,19 @@ class KieClient
         return $this->taskIdDe($r);
     }
 
-    /** Poll a submitted video task until it finishes; returns the video URL. */
-    public function pollVideo(string $taskId): string
+    /**
+     * Poll a submitted video task until it finishes; returns the video URL. $custo is what the clip costs
+     * (precoKling() for Kling 3.0); without it, the flat contentmachine.custos.kie_video.
+     */
+    public function pollVideo(string $taskId, ?float $custo = null): string
     {
-        return $this->sondar($taskId, custo: (float) config('contentmachine.custos.kie_video', 0.40), tentativas: 450);
+        return $this->sondar($taskId, custo: $custo ?? (float) config('contentmachine.custos.kie_video', 0.40), tentativas: 450);
+    }
+
+    /** What a Kling 3.0 pro (1080p) clip costs on kie.ai, USD: its seconds × the per-second price, with or without sound. */
+    public function precoKling(int $segundos, bool $som): float
+    {
+        return $segundos * (float) config('contentmachine.custos.kling3_pro_s.'.($som ? 'som' : 'mudo'));
     }
 
     /**
