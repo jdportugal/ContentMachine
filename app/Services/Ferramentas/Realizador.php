@@ -24,62 +24,83 @@ class Realizador
     public const MODELO_VIDEO = 'kling-3.0/video';
 
     /**
-     * Per tool: `analise` (what makes a photo a good start; Analista), `frame` (Nano Banana Pro, the AI frame),
-     * `video` + `som` (Kling 3.0). Wording from the research (2026-11-26): Google's Nano Banana guide (say what changes
+     * Per tool: `analise` (what makes a photo a good start; Analista), `inicio` / `fim` (Nano Banana Pro, for each
+     * frame the AI makes), `video` + `som` (Kling 3.0; `som` null: a silent clip). Wording from the research (2026-11-26): Google's Nano Banana guide (say what changes
      * and what stays exactly the same, photographic terms like "aerial view", positive framing, no extreme angles) and
      * Kling camera guides (the move in the first words, one move, "slow, steady", easing to rest: the faster the
      * camera, the more Kling invents). kie's Kling 3.0 takes no negative prompt, so everything is said positively.
      */
     public const PROMPTS = [
         'drone' => [
-            'analise' => 'You check a real-estate photo before it is turned into an AI "drone rise" video: the video starts '
-                .'exactly at this photo and the camera rises to a low drone view about 7 metres up, looking at the same house. '
+            'analise' => 'You check a real-estate photo before it is turned into an AI drone video: from this photo the AI '
+                .'draws the house from the air, about 10 metres up, then the drone circles around it. '
                 .'A GOOD start: an exterior photo of a house or building taken from the ground (street, pavement, garden), '
                 .'the building whole or nearly whole in the frame, some sky above the roof, daylight, sharp. '
                 .'PROBLEMS to look for: an interior; a floor plan, drawing or 3D render screenshot of a plan; a photo already '
                 .'taken from the air; a close-up where the house is cut off at the sides or the roof; the house mostly hidden '
                 .'by cars, trees, walls, scaffolding or people; night or very dark; blurry, heavily filtered, a collage, or '
-                .'text and logos over the picture; a very wide panorama; a vertical phone photo where the house is small.',
-            'frame' => 'Using this photo as the reference, show the same scene as a photograph taken by a drone hovering '
-                .'directly above the spot where this photo was taken, only a few metres higher: just above the rooftops of the '
-                .'nearest buildings (about 7 metres up). The drone faces exactly the same direction as the original camera, so '
-                .'the composition stays the same: the same buildings on the same sides of the frame, the street or path '
-                .'leading away in the same direction, the same vanishing point, now seen gently from above (about 25 degrees '
-                .'down). Keep exactly the same: the architecture, facades, windows, doors, balconies, roof shapes, colours, '
-                .'materials and proportions of every building, and the trees, plants and parked cars where they are. What '
-                .'only the higher view reveals (roof tops, yards behind walls) is simple, tidy and consistent with the photo. '
-                .'Preserve the same time of day, light direction, shadows and weather. A clean, photoreal real-estate drone '
-                .'photograph, with the picture free of text, logos and watermarks.',
-            'video' => 'Slow drone ascent: the camera rises steadily from the street-level view of the first frame, drifting '
-                .'slightly back and tilting gently down, and eases to rest exactly on the aerial view of the last frame. One '
-                .'continuous, slow, smooth move with no cuts. Every building stays solid and identical throughout, with '
-                .'straight rooflines and unchanged facades; parked cars, trees and the street stay still; the same daylight '
-                .'from start to end.',
-            'som' => ' Audio: quiet residential street ambience, a light breeze and distant birds; no music, no voices.',
+                .'text and logos over the picture; a very wide panorama; a vertical phone photo where the house is small. '
+                .'Because the drone circles the house, it works best for a detached or end-of-row house with some space or '
+                .'garden around it; a house in a continuous row of attached houses on a narrow street is NOT ideal (say so: '
+                .'the drone can only show the front and the roofs).',
+            // the start: the house from the air, from the side the photo was taken, centred (the orbit turns around it)
+            'inicio' => 'Using this photo as the reference, show the same house as an aerial photograph taken by a drone '
+                .'about 10 metres up, on the same side of the house as the original camera and facing it, gently tilted down '
+                .'(about 30 degrees), with the main house of the photo in the centre of the frame and a little of its plot '
+                .'and the neighbouring buildings around it. Keep exactly the same: the architecture, facade, windows, doors, '
+                .'balconies, roof shape, colours, materials and proportions of the house, and the street, neighbouring '
+                .'buildings, trees, plants and parked cars where they are. What only the higher view reveals (the roof, the '
+                .'yard behind walls) is simple, tidy and consistent with the photo. Preserve the same time of day, light '
+                .'direction, shadows and weather. A clean, photoreal real-estate drone photograph, with the picture free of '
+                .'text, logos and watermarks.',
+            // the end: the same drone view after orbiting ~45° around the house
+            'fim' => 'The first image is a drone photograph of a house; the second is the original ground photo of it, for '
+                .'reference. Show the same house from the same drone height, distance and downward tilt, with the drone moved '
+                .'about 45 degrees around the house to the right (counter-clockwise seen from above), still pointing at the '
+                .'house so it stays in the centre of the frame. The house is exactly the same building: the same facade, '
+                .'windows, doors, roof shape, colours, materials and proportions, now seen a little more from its side, so '
+                .'more of its side wall and of the plot beside it shows. The street, neighbouring buildings, trees and parked '
+                .'cars are the same ones, shifted as the new angle requires. The sun is in the same place in the sky, so the '
+                .'shadows fall the same way on the ground. A clean, photoreal real-estate drone photograph, with the picture '
+                .'free of text, logos and watermarks.',
+            'video' => 'Slow drone orbit around the house: the camera circles smoothly to the right at a constant height, '
+                .'always pointing at the house so it stays in the centre, from the view of the first frame to the view of the '
+                .'last frame, easing to rest. One continuous, slow, steady arc with no cuts. The house and every building '
+                .'stay solid and identical, with straight rooflines and unchanged facades; parked cars, trees and the street '
+                .'stay still; the same daylight from start to end.',
+            'som' => null,   // silent (the user's call, 2026-11-26): also the cheaper Kling price
         ],
     ];
 
     public const PROMPT_ALTERAR = 'Change this image as asked, and nothing else: «%s». Keep everything else exactly as it is: '
-        .'the framing, the house, its surroundings, the light and the colours. The second image is the original photograph '
-        .'of the property, for reference: the house must stay true to it. Photoreal, no text, no watermark.';
+        .'the framing, the house, its surroundings, the light and the colours. The other images are the other frame of the video and '
+        .'its original photograph, for reference: the house must stay true to them. Photoreal, no text, no watermark.';
 
     public function __construct(private KieClient $kie) {}
 
-    /** The AI frame, new from the photo or with the customer's change ($pedido) to the current one. Returns its path. */
-    public function enquadrar(FerramentaIa $f, ?string $pedido = null): string
+    /**
+     * One AI frame ($qual: inicio|fim), new or with the customer's change ($pedido) to its current version. The
+     * references: the current frame (a change), the other frame when the AI made it too (so the two stay one house),
+     * then the customer's photo. Returns its path.
+     */
+    public function enquadrar(FerramentaIa $f, string $qual, ?string $pedido = null): string
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
         $original = $disk->get($f->original);
-        $urlOriginal = $this->kie->upload($original, 'foto.jpg');
-        $atual = $f->{$f->quadroIa()};
-        if ($pedido !== null && $atual && $disk->exists($atual)) {
+        $tem = fn (?string $c) => $c && $c !== $f->original && $disk->exists($c);
+        $outro = $qual === 'inicio' ? 'fim' : 'inicio';
+        $refs = [];
+        if ($pedido !== null && $tem($f->{$qual})) {
             $prompt = sprintf(self::PROMPT_ALTERAR, $pedido);
-            $refs = [$this->kie->upload($disk->get($atual), 'atual.png'), $urlOriginal];
+            $refs[] = $this->kie->upload($disk->get($f->{$qual}), 'atual.png');
         } else {
-            $prompt = self::PROMPTS[$f->ferramenta]['frame'];
-            $refs = [$urlOriginal];
+            $prompt = self::PROMPTS[$f->ferramenta][$qual];
         }
+        if ($tem($f->{$outro})) {
+            $refs[] = $this->kie->upload($disk->get($f->{$outro}), 'outro.png');
+        }
+        $refs[] = $this->kie->upload($original, 'foto.jpg');
         $proporcao = Fotografo::proporcao($original);
         $url = Fotografo::comAlternativa(
             fn () => $this->kie->submitResolucao($prompt, $proporcao, $refs, '2K'),
@@ -87,7 +108,7 @@ class Realizador
             fn ($t) => $this->kie->poll($t),
         );
         [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
-        $caminho = $f->pasta().'/quadro-'.Str::random(8).'.png';
+        $caminho = $f->pasta().'/'.$qual.'-'.Str::random(8).'.png';
         $disk->put($caminho, self::ajustar(Http::timeout(120)->retry(2, 2000)->get($url)->throw()->body(), $w, $h));
 
         return $caminho;
@@ -102,12 +123,13 @@ class Realizador
         $segundos = $f->tipo()['segundos'];
         $inicio = $this->kie->upload($disk->get($f->inicio), 'inicio.png');
         $fim = $this->kie->upload($disk->get($f->fim), 'fim.png');
-        $prompt = $p['video'].($nota ? ' The client also asks: '.$nota.'.' : '').$p['som'];
+        $som = ($p['som'] ?? null) !== null;
+        $prompt = $p['video'].($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');
         $erro = null;
         for ($i = 1; $i <= self::TENTATIVAS_VIDEO; $i++) {
             try {
-                $tarefa = $this->kie->submitFramesVideo($prompt, $inicio, $fim, '', $segundos, true, self::MODELO_VIDEO);
-                $url = $this->kie->pollVideo($tarefa, $this->kie->precoKling($segundos, true));
+                $tarefa = $this->kie->submitFramesVideo($prompt, $inicio, $fim, '', $segundos, $som, self::MODELO_VIDEO);
+                $url = $this->kie->pollVideo($tarefa, $this->kie->precoKling($segundos, $som));
                 $caminho = $f->pasta().'/video-'.Str::random(8).'.mp4';
                 $disk->put($caminho, Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());
 

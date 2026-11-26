@@ -51,8 +51,8 @@ class FerramentaIa extends Model
         return Ferramentas::lista()[$this->ferramenta];
     }
 
-    /** Which frame the AI makes: 'inicio' (construção) or 'fim'. */
-    public function quadroIa(): string
+    /** The frames the AI makes, in order: ['fim'], ['inicio'] (construção) or both (drone). */
+    public function quadrosIa(): array
     {
         return $this->tipo()['ai'];
     }

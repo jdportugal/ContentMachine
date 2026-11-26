@@ -427,10 +427,10 @@ Route::middleware('auth')->group(function () {
         Route::livewire('/ferramentas', FerramentasLista::class)->name('ferramentas');
         Route::livewire('/ferramentas/nova/{ferramenta}', FerramentasVideo::class)->name('ferramentas.nova');
         Route::livewire('/ferramentas/{video}', FerramentasVideo::class)->whereNumber('video')->name('ferramentas.video');
-        // A video's files, to its owner (or an admin): the photo, the frames, one AI frame version (n), the clip. ?baixar=1 saves it.
-        Route::get('/ferramentas/{video}/ficheiro/{qual}/{n?}', function (\App\Models\FerramentaIa $video, string $qual, ?int $n = null) {
+        // A video's files, to its owner (or an admin): the photo, the frames, the clip. ?baixar=1 saves it.
+        Route::get('/ferramentas/{video}/ficheiro/{qual}', function (\App\Models\FerramentaIa $video, string $qual) {
             abort_unless($video->user_id === Auth::id() || Auth::user()->is_admin, 404);
-            $path = $qual === 'versao' ? ($video->versoes[$n ?? -1] ?? null) : $video->{$qual};
+            $path = $video->{$qual};
             $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
             abort_unless($path && $disk->exists($path), 404);
             if (request()->boolean('baixar')) {
@@ -438,7 +438,7 @@ Route::middleware('auth')->group(function () {
             }
 
             return response()->file($disk->path($path), ['Cache-Control' => 'private, max-age=604800']);
-        })->whereNumber('video')->whereIn('qual', ['original', 'inicio', 'fim', 'versao', 'video'])->whereNumber('n')->name('ferramentas.ficheiro');
+        })->whereNumber('video')->whereIn('qual', ['original', 'inicio', 'fim', 'video'])->name('ferramentas.ficheiro');
     });
 });
 

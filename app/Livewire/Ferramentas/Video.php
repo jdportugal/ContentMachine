@@ -27,6 +27,9 @@ class Video extends Component
 
     public string $pedido = '';
 
+    /** Which AI frame the change is for (the last one by default). */
+    public string $alvo = '';
+
     public string $nota = '';
 
     public function mount(?string $ferramenta = null, ?FerramentaIa $video = null): void
@@ -77,7 +80,7 @@ class Video extends Component
     public function alterar(Ferramentas $ferramentas): void
     {
         $this->validate(['pedido' => 'required|string|max:500'], ['pedido.*' => 'Escreva o que quer mudar (até 500 caracteres).']);
-        if ($ferramentas->alterar($this->video, $this->pedido)) {
+        if ($ferramentas->alterar($this->video, $this->alvo ?: last($this->video->quadrosIa()), $this->pedido)) {
             $this->pedido = '';
         } else {
             $this->addError('pedido', 'Já não é possível alterar esta imagem.');
@@ -85,9 +88,9 @@ class Video extends Component
         $this->video->refresh();
     }
 
-    public function escolher(int $n, Ferramentas $ferramentas): void
+    public function escolher(string $qual, int $n, Ferramentas $ferramentas): void
     {
-        $ferramentas->escolherVersao($this->video, $n);
+        $ferramentas->escolherVersao($this->video, $qual, $n);
         $this->video->refresh();
     }
 

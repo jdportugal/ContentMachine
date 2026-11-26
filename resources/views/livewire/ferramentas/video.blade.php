@@ -2,8 +2,8 @@
     $v = $video;
     $estado = $v?->estado ?? \App\Models\FerramentaIa::RASCUNHO;
     $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => 2, 'pronto' => 2][$estado];
-    $ficheiro = fn (string $qual, ?int $n = null, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, $n, ...$q, 'v' => substr(md5((string) ($qual === 'versao' ? ($v->versoes[$n] ?? '') : $v->{$qual})), 0, 8)]);
-    $iaInicio = $tipo['ai'] === 'inicio';
+    $ficheiro = fn (string $qual, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, ...$q, 'v' => substr(md5((string) $v->{$qual}), 0, 8)]);
+    $quadrosIa = $tipo['ai'];
     $semVideos = $disponiveis === 0;
     $botao = 'min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105 disabled:opacity-60';
     $secundario = 'min-h-11 px-5 rounded-full border border-[#D9D5CC] text-navy text-sm font-semibold hover:bg-[#EDEAE3] disabled:opacity-60';
@@ -108,17 +108,18 @@
 
     @elseif ($estado === 'a_aprovar')
         <div class="mt-6 grid gap-5 md:grid-cols-2 items-start">
-            @foreach ([['inicio', 'Início · '.$tipo['inicio'], $iaInicio], ['fim', 'Fim · '.$tipo['fim'], ! $iaInicio]] as [$qual, $rotulo, $ia])
+            @foreach (['inicio' => 'Início · '.$tipo['inicio'], 'fim' => 'Fim · '.$tipo['fim']] as $qual => $rotulo)
+                @php $ia = in_array($qual, $quadrosIa, true); $versoes = $v->versoes[$qual] ?? []; @endphp
                 <figure class="rounded-2xl overflow-hidden bg-white border border-[#E4E1DA]">
                     <figcaption class="flex items-center justify-between px-4 py-3 text-sm">
                         <span class="font-semibold text-ivory">{{ $rotulo }}</span>
                         @if ($ia) <span class="px-2 py-0.5 rounded bg-cyan text-navy text-[11px] font-bold tracking-wider">IA</span> @endif
                     </figcaption>
                     <img src="{{ $ficheiro($qual) }}" alt="{{ $rotulo }}" class="w-full aspect-video object-cover bg-[#EDEAE3]">
-                    @if ($ia && count($v->versoes ?? []) > 1)
+                    @if ($ia && count($versoes) > 1)
                         <div class="flex flex-wrap gap-2 px-4 py-3">
-                            @foreach ($v->versoes as $n => $versao)
-                                <button type="button" wire:click="escolher({{ $n }})" class="px-3 py-1 rounded-md text-xs border {{ $versao === $v->{$qual} ? 'border-coral text-coral font-semibold' : 'border-[#D9D5CC] text-[#4A5263]' }}">Versão {{ $n + 1 }}</button>
+                            @foreach ($versoes as $n => $versao)
+                                <button type="button" wire:click="escolher('{{ $qual }}', {{ $n }})" class="px-3 py-1 rounded-md text-xs border {{ $versao === $v->{$qual} ? 'border-coral text-coral font-semibold' : 'border-[#D9D5CC] text-[#4A5263]' }}">Versão {{ $n + 1 }}</button>
                             @endforeach
                         </div>
                     @endif
@@ -126,8 +127,15 @@
             @endforeach
         </div>
         <form wire:submit="alterar" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-6 flex flex-col gap-3">
-            <h2 class="font-display text-2xl text-ivory">Quer mudar alguma coisa na imagem IA?</h2>
+            <h2 class="font-display text-2xl text-ivory">Quer mudar alguma coisa {{ count($quadrosIa) > 1 ? 'numa das imagens' : 'na imagem IA' }}?</h2>
             @if ($v->edicoesRestantes() > 0 || auth()->user()->is_admin)
+                @if (count($quadrosIa) > 1)
+                    <div class="flex flex-wrap gap-4 text-sm text-[#4A5263]">
+                        @foreach ($quadrosIa as $qual)
+                            <label class="flex items-center gap-2"><input type="radio" wire:model="alvo" value="{{ $qual }}" @checked(($alvo ?: last($quadrosIa)) === $qual)> {{ $qual === 'inicio' ? 'Início' : 'Fim' }} · {{ $tipo[$qual] }}</label>
+                        @endforeach
+                    </div>
+                @endif
                 <textarea wire:model="pedido" maxlength="500" class="{{ $campo }}" placeholder="Ex.: um pouco mais alto, mostrar também o quintal"></textarea>
                 @error('pedido') <span class="text-sm text-coral">{{ $message }}</span> @enderror
                 <div class="flex flex-wrap items-center gap-4">
@@ -140,15 +148,15 @@
         </form>
         <div class="mt-6 flex flex-wrap items-center gap-4">
             <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar e criar vídeo →</button>
-            <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra, com som.</span>
+            <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra.</span>
         </div>
 
     @elseif ($estado === 'pronto')
         <video src="{{ $ficheiro('video') }}" poster="{{ $ficheiro('inicio') }}" controls playsinline class="mt-6 w-full rounded-2xl bg-navy aspect-video"></video>
         <div class="mt-4 flex flex-wrap gap-3">
-            <a href="{{ $ficheiro('video', null, ['baixar' => 1]) }}" class="inline-flex items-center {{ $botao }}">Descarregar vídeo</a>
-            <a href="{{ $ficheiro('inicio', null, ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de início</a>
-            <a href="{{ $ficheiro('fim', null, ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de fim</a>
+            <a href="{{ $ficheiro('video', ['baixar' => 1]) }}" class="inline-flex items-center {{ $botao }}">Descarregar vídeo</a>
+            <a href="{{ $ficheiro('inicio', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de início</a>
+            <a href="{{ $ficheiro('fim', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de fim</a>
         </div>
         <form wire:submit="refazer" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-6 flex flex-col gap-3">
             <h2 class="font-display text-2xl text-ivory">Não ficou como queria?</h2>

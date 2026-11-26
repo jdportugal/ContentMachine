@@ -13,39 +13,39 @@ use Illuminate\Support\Facades\Storage;
 /**
  * The AI video tools: one photo (or a floor plan) → a start and an end frame the customer approves → one
  * Kling clip. Sold as packs of "vídeos IA" (compras.videos_ia), any tool. The texts here are what the landing
- * page and the customer pages show; `ai` is which frame the AI makes (the other is the customer's upload, or for
- * the plan, drawn by code); `segundos` is the clip length (it sets the worst-case cost: see the design doc).
+ * page and the customer pages show; `ai` lists the frames the AI makes, in order (any other is the customer's
+ * upload, or for the plan, drawn by code); `segundos` is the clip length (it sets the worst-case cost: see the design doc).
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:string,segundos:int}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int}> */
     public static function lista(): array
     {
         return [
             'drone' => [
-                'nome' => 'Vista drone', 'linha' => 'A câmara sobe do nível da rua até uma vista de drone baixa.',
-                'texto' => 'A partir de uma fotografia tirada da rua, a câmara eleva-se suavemente até alguns metros de altura e mostra a casa, o terreno e a envolvente, como um voo de drone.',
-                'envio' => 'Fotografia da fachada ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Vista de drone', 'ai' => 'fim', 'segundos' => 10,
+                'nome' => 'Vista drone', 'linha' => 'Um drone dá a volta à casa, visto do ar.',
+                'texto' => 'A partir de uma fotografia da casa, um drone sobrevoa-a e roda à sua volta, a mostrar a casa, o terreno e a envolvente vistos do ar.',
+                'envio' => 'Fotografia da fachada ou do exterior', 'inicio' => 'Vista aérea', 'fim' => 'Depois de rodar', 'ai' => ['inicio', 'fim'], 'segundos' => 10,
             ],
             'limpeza' => [
                 'nome' => 'Limpeza IA', 'linha' => 'Objetos e desarrumação desaparecem, fica o espaço limpo.',
                 'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai de cena, peça a peça, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
-                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Espaço limpo', 'ai' => 'fim', 'segundos' => 10,
+                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Espaço limpo', 'ai' => ['fim'], 'segundos' => 10,
             ],
             'remodelacao' => [
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da remodelação, do estado atual ao renovado.',
                 'texto' => 'Mostre o potencial de um imóvel para recuperar: a divisão transforma-se, em timelapse, numa versão remodelada. Pode dizer-nos o estilo que quer.',
-                'envio' => 'Fotografia da divisão a remodelar', 'inicio' => 'Estado atual', 'fim' => 'Remodelado', 'ai' => 'fim', 'segundos' => 10,
+                'envio' => 'Fotografia da divisão a remodelar', 'inicio' => 'Estado atual', 'fim' => 'Remodelado', 'ai' => ['fim'], 'segundos' => 10,
             ],
             'construcao' => [
                 'nome' => 'Construção IA', 'linha' => 'Operários constroem a casa, do terreno vazio ao fim.',
                 'texto' => 'Do terreno vazio à casa acabada, com operários em obra: fundações, estrutura, paredes, telhado e acabamentos, em timelapse. Ideal para construção nova.',
-                'envio' => 'Fotografia da casa acabada', 'inicio' => 'Terreno vazio', 'fim' => 'A sua fotografia', 'ai' => 'inicio', 'segundos' => 15,
+                'envio' => 'Fotografia da casa acabada', 'inicio' => 'Terreno vazio', 'fim' => 'A sua fotografia', 'ai' => ['inicio'], 'segundos' => 15,
             ],
             'planta' => [
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',
                 'texto' => 'Envie a planta de um piso. A casa aparece vista de cima: primeiro o chão e as paredes, depois a mobília a entrar no lugar, com som.',
-                'envio' => 'Planta do piso', 'inicio' => 'Terreno', 'fim' => 'Planta 3D', 'ai' => 'fim', 'segundos' => 10,
+                'envio' => 'Planta do piso', 'inicio' => 'Terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10,
             ],
         ];
     }
@@ -151,15 +151,15 @@ class Ferramentas
         });
     }
 
-    /** A change to the AI frame, in the customer's words (up to editar_imagem; admins without limit). */
-    public function alterar(FerramentaIa $f, string $pedido): bool
+    /** A change to one AI frame ($qual), in the customer's words (up to editar_imagem per video; admins without limit). */
+    public function alterar(FerramentaIa $f, string $qual, string $pedido): bool
     {
         $pedido = trim($pedido);
-        if ($pedido === '' || ($f->edicoesRestantes() < 1 && ! $f->user->is_admin)) {
+        if ($pedido === '' || ! in_array($qual, $f->quadrosIa(), true) || ($f->edicoesRestantes() < 1 && ! $f->user->is_admin)) {
             return false;
         }
         if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::A_APROVAR)
-            ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'edicoes' => DB::raw('edicoes + 1'), 'pedido' => $pedido, 'erro' => null, 'updated_at' => now()]) !== 1) {
+            ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'edicoes' => DB::raw('edicoes + 1'), 'pedido' => $pedido, 'alvo' => $qual, 'erro' => null, 'updated_at' => now()]) !== 1) {
             return false;
         }
         FerramentaFramesJob::dispatch($f->id, true);
@@ -173,14 +173,14 @@ class Ferramentas
         $f->update(['estado' => FerramentaIa::A_APROVAR, 'edicoes' => max(0, $f->edicoes - 1), 'erro' => $erro]);
     }
 
-    /** Picks which of the AI frames made goes into the video. */
-    public function escolherVersao(FerramentaIa $f, int $n): bool
+    /** Picks which version of an AI frame ($qual) goes into the video. */
+    public function escolherVersao(FerramentaIa $f, string $qual, int $n): bool
     {
-        $versao = ($f->versoes ?? [])[$n] ?? null;
+        $versao = ($f->versoes[$qual] ?? [])[$n] ?? null;
         if (! $versao || $f->estado !== FerramentaIa::A_APROVAR) {
             return false;
         }
-        $f->update([$f->quadroIa() => $versao]);
+        $f->update([$qual => $versao]);
 
         return true;
     }

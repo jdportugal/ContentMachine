@@ -134,7 +134,7 @@ class FerramentasTest extends TestCase
         $this->assertSame([2560, 1920, IMAGETYPE_JPEG], [$w, $h, $tipo]);
     }
 
-    public function test_drone_frames_keep_the_photo_as_start_and_make_the_end_with_nano_banana_pro(): void
+    public function test_drone_makes_both_frames_the_end_from_the_start_and_each_is_cut_to_the_photo(): void
     {
         $this->kie();
         $u = $this->cliente(1);
@@ -146,13 +146,17 @@ class FerramentasTest extends TestCase
 
         $f->refresh();
         $this->assertSame(FerramentaIa::A_APROVAR, $f->estado);
-        $this->assertSame($f->original, $f->inicio);
-        $this->assertNotNull($f->fim);
-        $this->assertSame([$f->fim], $f->versoes);
-        // cut to the photo's exact size, so Kling's two frames match
-        $this->assertSame([1600, 1000], array_slice(getimagesizefromstring(Storage::disk('local')->get($f->fim)), 0, 2));
-        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro' && $r['input']['resolution'] === '2K');
-        $this->assertSame([['frames', 0.09]], $this->custos($f));
+        $this->assertNotSame($f->original, $f->inicio);   // both frames are the AI's: the aerial view, then after orbiting
+        $this->assertSame(['inicio' => [$f->inicio], 'fim' => [$f->fim]], $f->versoes);
+        foreach ([$f->inicio, $f->fim] as $quadro) {   // cut to the photo's exact size, so Kling's two frames match
+            $this->assertSame([1600, 1000], array_slice(getimagesizefromstring(Storage::disk('local')->get($quadro)), 0, 2));
+        }
+        $pedidos = collect(Http::recorded())->map(fn ($r) => $r[0])->filter(fn ($r) => str_contains($r->url(), 'createTask'))->values();
+        $this->assertCount(2, $pedidos);
+        $this->assertTrue($pedidos->every(fn ($r) => $r['model'] === 'nano-banana-pro' && $r['input']['resolution'] === '2K'));
+        $this->assertCount(1, $pedidos[0]['input']['image_input']);   // the start: from the photo
+        $this->assertCount(2, $pedidos[1]['input']['image_input']);   // the end: from the start, and the photo
+        $this->assertSame([['frames', 0.09], ['frames', 0.09]], $this->custos($f));
     }
 
     public function test_failed_first_frames_refund_once_and_go_back_to_draft(): void
@@ -180,19 +184,20 @@ class FerramentasTest extends TestCase
         $f = $this->video($this->cliente(), FerramentaIa::A_APROVAR);
         $s = app(Ferramentas::class);
 
-        $this->assertFalse($s->alterar($f, '   '));   // nothing asked
+        $this->assertFalse($s->alterar($f, 'fim', '   '));   // nothing asked
+        $this->assertFalse($s->alterar($f, 'original', 'x'));   // the customer's photo is never changed
         foreach (range(1, 3) as $i) {
-            $this->assertTrue($s->alterar($f->refresh(), 'mais alto'));
+            $this->assertTrue($s->alterar($f->refresh(), 'fim', 'mais alto'));
             $s->devolverAlteracao($f->refresh(), 'x');   // failed: given back
             $this->assertSame($i - 1, $f->refresh()->edicoes);
-            $this->assertTrue($s->alterar($f->refresh(), 'mais alto'));
+            $this->assertTrue($s->alterar($f->refresh(), 'inicio', 'mais alto'));
             FerramentaIa::whereKey($f->id)->update(['estado' => FerramentaIa::A_APROVAR]);
         }
         $this->assertSame(3, $f->refresh()->edicoes);
-        $this->assertFalse($s->alterar($f, 'outra'));
+        $this->assertFalse($s->alterar($f, 'fim', 'outra'));
     }
 
-    public function test_frames_lock_once_approved_and_the_clip_is_kling_3_with_sound(): void
+    public function test_frames_lock_once_approved_and_the_drone_clip_is_kling_3_silent(): void
     {
         $this->kie();
         $f = $this->video($this->cliente(), FerramentaIa::A_APROVAR);
@@ -200,15 +205,15 @@ class FerramentasTest extends TestCase
         Queue::fake();
 
         $this->assertTrue(app(Ferramentas::class)->aprovar($f));
-        $this->assertFalse(app(Ferramentas::class)->alterar($f->refresh(), 'mais alto'));
+        $this->assertFalse(app(Ferramentas::class)->alterar($f->refresh(), 'fim', 'mais alto'));
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
 
         $f->refresh();
         $this->assertSame(FerramentaIa::PRONTO, $f->estado);
         $this->assertSame('mp4', Storage::disk('local')->get($f->video));
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && count($r['input']['image_urls']) === 2 && $r['input']['duration'] === '10' && $r['input']['sound'] === true && $r['input']['mode'] === 'pro');
-        $this->assertSame([['video', 1.51]], $this->custos($f));
+            && count($r['input']['image_urls']) === 2 && $r['input']['duration'] === '10' && $r['input']['sound'] === false && $r['input']['mode'] === 'pro');
+        $this->assertSame([['video', 1.01]], $this->custos($f));
     }
 
     public function test_two_new_versions_of_the_clip_and_a_failed_one_keeps_the_video(): void
