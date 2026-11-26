@@ -40,12 +40,16 @@
     @if ($estado === 'rascunho')
         <form wire:submit="criar" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-7 md:p-8 flex flex-col gap-5">
             {{-- drop a photo anywhere on the card (or click the preview); the counter stops the highlight flickering over children --}}
-            <div x-data="{ sobre: 0 }"
+            {{-- `carregar` covers the whole wait: the upload (with its %), then the server preparing it and the next page --}}
+            <div x-data="{ sobre: 0, carregar: false, progresso: 0 }"
                  x-on:dragenter.prevent="sobre++" x-on:dragover.prevent x-on:dragleave.prevent="sobre--"
-                 x-on:drop.prevent="sobre = 0; $event.dataTransfer.files.length && $wire.upload('foto', $event.dataTransfer.files[0])"
+                 x-on:drop.prevent="sobre = 0; if (! carregar && $event.dataTransfer.files.length) { carregar = true; progresso = 0;
+                     $wire.upload('foto', $event.dataTransfer.files[0], () => progresso = 100, () => carregar = false, (e) => progresso = e.detail.progress) }"
+                 x-on:livewire-upload-start="carregar = true; progresso = 0" x-on:livewire-upload-progress="progresso = $event.detail.progress"
+                 x-on:livewire-upload-finish="progresso = 100" x-on:livewire-upload-error="carregar = false"
                  :class="sobre > 0 && 'ring-2 ring-coral ring-offset-4 ring-offset-white'"
                  class="grid gap-6 md:grid-cols-2 items-center rounded-xl transition">
-                <button type="button" x-on:click="$refs.ficheiro.click()" aria-label="Escolher fotografia"
+                <button type="button" x-on:click="carregar || $refs.ficheiro.click()" aria-label="Escolher fotografia"
                         class="relative aspect-video rounded-xl overflow-hidden bg-[#EDEAE3] flex items-center justify-center {{ $foto || $v ? '' : 'border-2 border-dashed border-[#C9C4B8] hover:border-coral' }}">
                     @if ($foto && method_exists($foto, 'isPreviewable') && $foto->isPreviewable())
                         <img src="{{ $foto->temporaryUrl() }}" alt="A sua fotografia" class="w-full h-full object-cover">
@@ -58,7 +62,11 @@
                         </span>
                     @endif
                     <span x-show="sobre > 0" x-cloak class="absolute inset-0 flex items-center justify-center bg-navy/70 text-ivory font-semibold">Largue para carregar</span>
-                    <span wire:loading.flex wire:target="foto" class="absolute inset-0 items-center justify-center bg-white/80 text-sm font-semibold text-navy">A carregar…</span>
+                    <span x-show="carregar" x-cloak role="status" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/85 text-sm font-semibold text-navy">
+                        <span class="w-8 h-8 rounded-full border-[3px] border-[#E4E1DA] border-t-coral animate-spin"></span>
+                        <span x-text="progresso < 100 ? 'A carregar a fotografia… ' + progresso + '%' : 'A preparar a fotografia…'">A carregar a fotografia…</span>
+                        <span class="w-40 h-1.5 rounded-full bg-[#E4E1DA] overflow-hidden"><span class="block h-full bg-coral transition-all" :style="'width:' + progresso + '%'"></span></span>
+                    </span>
                 </button>
                 <div class="flex flex-col gap-2 text-[13px] text-[#4A5263]">
                     <span class="font-display text-2xl text-ivory">{{ $v ? 'A sua fotografia' : $tipo['envio'] }}</span>
@@ -68,7 +76,8 @@
                         {{ $v ? 'Trocar fotografia' : 'Escolher fotografia' }}
                         <input type="file" x-ref="ficheiro" accept="image/png,image/jpeg,image/webp" wire:model="foto" class="sr-only">
                     </label>
-                    @error('foto') <span class="text-sm text-coral">{{ $message }}</span> @enderror
+                    @error('foto') <span class="text-sm text-coral" x-init="carregar = false">{{ $message }}</span> @enderror
+                    @if ($v) <span wire:key="foto-{{ md5((string) $v->original) }}" x-init="carregar = false" hidden></span> @endif
                 </div>
             </div>
             @if ($tipo['direcao'] ?? false)
