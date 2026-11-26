@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,direcao?:bool}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,direcao?:bool,retirar?:bool,exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -26,16 +26,19 @@ class Ferramentas
                 'nome' => 'Vista drone', 'linha' => 'Um drone dá a volta à casa, visto do ar.',
                 'texto' => 'A partir de uma fotografia da casa, um drone sobrevoa-a e roda à sua volta, a mostrar a casa, o terreno e a envolvente vistos do ar.',
                 'envio' => 'Fotografia da fachada ou do exterior', 'inicio' => 'Vista aérea', 'fim' => 'Depois de rodar', 'ai' => ['inicio', 'fim'], 'segundos' => 10,
+                'exemplo' => 'Ex.: um pouco mais alto, mostrar também o quintal',
             ],
             'lateral' => [
                 'nome' => 'Movimento lateral', 'linha' => 'A câmara desliza devagar para o lado, como um gimbal em câmara lenta.',
                 'texto' => 'A partir de uma fotografia, a câmara desliza suavemente para a esquerda ou para a direita, com profundidade, como um plano de gimbal em câmara lenta. Funciona em interiores e exteriores.',
                 'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'direcao' => true,
+                'exemplo' => 'Ex.: o vidro da porta está torto, endireitar',
             ],
             'limpeza' => [
                 'nome' => 'Limpeza IA', 'linha' => 'Objetos e desarrumação desaparecem, fica o espaço limpo.',
                 'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai de cena, peça a peça, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
                 'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Espaço limpo', 'ai' => ['fim'], 'segundos' => 10,
+                'retirar' => true, 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da remodelação, do estado atual ao renovado.',
@@ -198,6 +201,17 @@ class Ferramentas
             return false;
         }
         $f->update(['opcoes' => [...($f->opcoes ?? []), 'direcao' => $direcao]]);
+
+        return true;
+    }
+
+    /** The cleanup's own list of things to take out (optional, on the draft: the end frame is made with it). */
+    public function retirar(FerramentaIa $f, string $texto): bool
+    {
+        if (! ($f->tipo()['retirar'] ?? false) || $f->estado !== FerramentaIa::RASCUNHO) {
+            return false;
+        }
+        $f->update(['opcoes' => [...($f->opcoes ?? []), 'retirar' => mb_substr(trim($texto), 0, 300)]]);
 
         return true;
     }

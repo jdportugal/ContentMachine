@@ -437,4 +437,30 @@ class FerramentasTest extends TestCase
         array_map('unlink', glob("$dir/*"));
         rmdir($dir);
     }
+
+    public function test_the_cleanup_tidies_the_photo_with_the_customers_list_then_a_10_second_clip_with_sound(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'lateral', $this->foto());
+        $this->assertFalse(app(Ferramentas::class)->retirar($f, 'o carro'));   // only the cleanup has the list
+        $f = app(Ferramentas::class)->criar($u, 'limpeza', $this->foto());
+        $this->assertTrue(app(Ferramentas::class)->retirar($f, '  o carro e as caixas  '));
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        $this->assertFalse(app(Ferramentas::class)->retirar($f->refresh(), 'mais'));   // fixed once the frames are being made
+
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+
+        $f->refresh();
+        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->inicio]);   // the start is the photo itself
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], 'The client also asks to remove: o carro e as caixas.'));
+
+        app(Ferramentas::class)->aprovar($f);
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && $r['input']['duration'] === '10' && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'Locked-off'));
+        $this->assertSame([['frames', 0.09], ['video', 1.51]], $this->custos($f));
+    }
 }

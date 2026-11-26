@@ -90,6 +90,13 @@
                     @endforeach
                 </fieldset>
             @endif
+            @if ($tipo['retirar'] ?? false)
+                <label class="flex flex-col gap-1.5 text-sm text-[#4A5263]">
+                    <span><span class="font-semibold text-ivory">O que quer retirar?</span> Opcional: já retiramos a desarrumação e os objetos soltos.</span>
+                    <input type="text" wire:model="retirar" maxlength="300" placeholder="Ex.: o carro em frente à garagem, as caixas no canto"
+                           class="min-h-[52px] px-4 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan">
+                </label>
+            @endif
             {{-- the photo check for this tool: a warning, never a block --}}
             @if ($v?->aAnalisar())
                 <p role="status" class="flex items-center gap-3 rounded-xl bg-[#F6F4EF] px-5 py-3 text-sm text-[#4A5263]">
@@ -170,7 +177,7 @@
                         @endforeach
                     </div>
                 @endif
-                <textarea wire:model="pedido" maxlength="500" class="{{ $campo }}" placeholder="Ex.: um pouco mais alto, mostrar também o quintal"></textarea>
+                <textarea wire:model="pedido" maxlength="500" class="{{ $campo }}" placeholder="{{ $tipo['exemplo'] ?? 'Ex.: o que quer mudar' }}"></textarea>
                 @error('pedido') <span class="text-sm text-coral">{{ $message }}</span> @enderror
                 <div class="flex flex-wrap items-center gap-4">
                     <button type="submit" wire:loading.attr="disabled" class="{{ $secundario }}">Pedir alteração</button>

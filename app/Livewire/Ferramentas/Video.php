@@ -30,6 +30,9 @@ class Video extends Component
     /** The side move's direction: esquerda | direita. */
     public string $direcao = 'direita';
 
+    /** The cleanup's optional list of things to take out. */
+    public string $retirar = '';
+
     /** Which AI frame the change is for (the last one by default). */
     public string $alvo = '';
 
@@ -42,6 +45,7 @@ class Video extends Component
             $this->video = $video;
             $this->ferramenta = $video->ferramenta;
             $this->direcao = $video->direcao();
+            $this->retirar = (string) ($video->opcoes['retirar'] ?? '');
         } else {
             abort_unless(isset(Ferramentas::disponiveis()[$ferramenta]), 404);
             $this->ferramenta = $ferramenta;
@@ -65,6 +69,7 @@ class Video extends Component
         }
         $this->video = $ferramentas->criar(auth()->user(), $this->ferramenta, $this->foto);
         $ferramentas->direcao($this->video, $this->direcao);
+        $ferramentas->retirar($this->video, $this->retirar);
         $this->foto = null;
 
         return $this->redirectRoute('ferramentas.video', $this->video->id, navigate: false);
@@ -86,6 +91,7 @@ class Video extends Component
 
             return;
         }
+        $ferramentas->retirar($this->video, $this->retirar);   // what they typed, even if the field never lost focus
         $ferramentas->iniciar($this->video);
         $this->video->refresh();
     }
