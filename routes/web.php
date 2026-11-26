@@ -417,6 +417,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::livewire('/imoveis', Imoveis::class)->name('imoveis');
     Route::livewire('/ativos', Ativos::class)->name('ativos');
     Route::livewire('/clientes', \App\Livewire\Clientes::class)->name('clientes');
+    Route::livewire('/videos', \App\Livewire\TodosVideos::class)->name('videos.todos');
     Route::livewire('/campanhas', \App\Livewire\Campanhas::class)->name('campanhas');
     // Serve uma faixa da biblioteca de música (storage/app/shorts/musicas) para pré-visualização.
     Route::get('/clips/musica/{name}', function (string $name) {
