@@ -25,6 +25,17 @@ return [
         'demo' => (bool) env('ALERTAS_DEMO', true),
         'demo_voz' => env('ALERTAS_DEMO_VOZ', storage_path('app/demo-voz/simao_demo_1.mp3')),
     ],
+    // The protected progress report (/interno/*): read with "Authorization: Bearer <token>".
+    // The token is RELATORIO_TOKEN, or else the file storage/app/relatorio_token; neither = off (404).
+    // inicio: when the running totals start; orcamento_diario: today's ad budget in €, for the
+    // runway; usd_eur: to put the USD cost ledger in euros; taxa_stripe: Stripe fees, a share of revenue.
+    'relatorio' => [
+        'token' => env('RELATORIO_TOKEN', ''),
+        'inicio' => env('RELATORIO_INICIO', '2026-11-18'),
+        'orcamento_diario' => (float) env('RELATORIO_ORCAMENTO_DIARIO', 20),
+        'usd_eur' => (float) env('RELATORIO_USD_EUR', 0.92),
+        'taxa_stripe' => (float) env('RELATORIO_TAXA_STRIPE', 0.04),
+    ],
     // Google Analytics 4 measurement id (G-XXXXXXX). Empty = off.
     'ga4' => env('GA_MEASUREMENT_ID', ''),
     // Microsoft Clarity project id (session recordings and heatmaps, after consent). Empty = off.
