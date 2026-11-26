@@ -102,6 +102,21 @@ class ContaTest extends TestCase
         $this->get('/conta')->assertOk()->assertSee('A ler o anúncio');
     }
 
+    public function test_a_listing_already_made_clean_in_the_account_can_be_made_again(): void
+    {
+        Queue::fake();
+        $user = $this->cliente(videos: 10);
+        $link = 'https://www.remax.pt/pt/imoveis/moradia-t3/999';
+
+        foreach ([1, 2] as $vez) {
+            Livewire::actingAs($user)->test(Conta::class)->set('anuncio', $link)->call('usarCredito')->assertHasNoErrors();
+        }
+
+        $this->assertSame(2, DB::table('leads')->where('anuncio', $link)->where('user_id', $user->id)->count());   // the first stays
+        $this->assertSame(8, $user->creditos());
+        Queue::assertPushed(ImportListingJob::class, 2);
+    }
+
     public function test_no_credits_no_video(): void
     {
         Queue::fake();

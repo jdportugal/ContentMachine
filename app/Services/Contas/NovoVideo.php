@@ -32,11 +32,8 @@ class NovoVideo
         $existente = DB::table('leads')->where('anuncio', $anuncio)
             ->where(fn ($q) => $q->where('user_id', $user->id)->orWhereNull('user_id'))
             ->orderByRaw('user_id is null')->latest('id')->first();
-        if ($existente && $existente->pago_em && $opcoes === []) {
-            return 'Este anúncio já tem o vídeo limpo na sua conta.';
-        }
         if ($existente && $existente->pago_em) {
-            $existente = null;   // asked again with changes: a new video, the old one stays
+            $existente = null;   // asked again (with or without changes): always a new video, the old one stays
         }
         $compra = DB::table('compras')->where('user_id', $user->id)->whereColumn('videos_usados', '<', 'videos')->orderBy('id')->first();
 

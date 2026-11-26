@@ -97,9 +97,12 @@
                             ['route' => 'definicoes',      'label' => 'Definições',        'sub' => 'Variáveis',          'color' => '#05B8E6', 'glyph' => '⚙'],
                         ]],
                     ];
-                    // A customer here is in Imoplanta (their videos are at /conta): only that; the studio is for admins.
+                    // A customer's dashboard: their videos (/conta, with making and editing one) and Imoplanta; the studio is for admins.
                     if (! auth()->user()?->can('admin')) {
-                        $grupos = [['titulo' => null, 'itens' => array_values(array_filter($grupos[0]['itens'], fn ($i) => $i['route'] === 'imoplanta'))]];
+                        $grupos = [['titulo' => null, 'itens' => [
+                            ['route' => 'conta', 'label' => 'Os meus vídeos', 'sub' => 'Vídeos e créditos', 'color' => '#F06052', 'glyph' => '▶'],
+                            ...array_values(array_filter($grupos[0]['itens'], fn ($i) => $i['route'] === 'imoplanta')),
+                        ]]];
                     }
                     // Imoplanta's tab, for now, only for the accounts in imoplanta.acesso.
                     if (! auth()->user()?->veImoplanta()) {
@@ -176,7 +179,8 @@
                 @endforeach
             </nav>
 
-            {{-- The account's settings, for everyone (customers too), at the foot of the shelf. --}}
+            {{-- The admin's own customer area (videos, credits), at the foot of the shelf; customers have it at the top. --}}
+            @can('admin')
             <a href="{{ route('conta') }}" data-nav="entry" @if (request()->routeIs('conta')) aria-current="page" @endif
                class="mx-2 mt-1 flex items-center gap-3 pl-3 pr-4 py-2.5 rounded-md transition border-t border-ink-soft/15
                       {{ request()->routeIs('conta') ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
@@ -187,6 +191,7 @@
                     <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">Vídeos e créditos</span>
                 </span>
             </a>
+            @endcan
             <div class="px-6 py-2.5 border-t border-ink-soft/15 flex items-center justify-between gap-2">
                 <span class="font-mono text-xs text-ink-faint truncate" title="{{ auth()->user()?->email }}">
                     {{ auth()->user()?->email }}

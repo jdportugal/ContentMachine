@@ -25,8 +25,8 @@ use Livewire\WithFileUploads;
  * scene, their contact on the cards, and the music (their own file). Two re-renders are
  * free; a credit buys two more.
  */
-#[Layout('components.layouts.site')]
-#[Title('Imocena · Editar vídeo')]
+#[Layout('components.layouts.app')]
+#[Title('Editar vídeo')]
 class EditarVideo extends Component
 {
     use WithFileUploads;

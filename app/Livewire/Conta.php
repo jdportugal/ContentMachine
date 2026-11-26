@@ -21,8 +21,8 @@ use Livewire\Component;
  * A customer's area: their videos (ready to download, clean once paid), their
  * credits from packs, and a form that spends a credit on a new listing.
  */
-#[Layout('components.layouts.site')]
-#[Title('Imocena · A minha conta')]
+#[Layout('components.layouts.app')]
+#[Title('A minha conta')]
 class Conta extends Component
 {
     public string $anuncio = '';

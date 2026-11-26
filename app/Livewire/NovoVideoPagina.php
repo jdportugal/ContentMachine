@@ -19,8 +19,8 @@ use Livewire\WithFileUploads;
  * Or no link at all: their own photos and videos, the description and the agent's
  * details (prefilled from the account or their last video).
  */
-#[Layout('components.layouts.site')]
-#[Title('Imocena · Novo vídeo')]
+#[Layout('components.layouts.app')]
+#[Title('Novo vídeo')]
 class NovoVideoPagina extends Component
 {
     use WithFileUploads;

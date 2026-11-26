@@ -1,16 +1,6 @@
-<main class="max-w-[1100px] mx-auto px-4 sm:px-6 py-8 sm:py-12" @if ($aDecorrer) wire:poll.5s @endif>
-    <nav class="flex flex-wrap items-center justify-between gap-4">
-        <a href="{{ route('home') }}" class="flex items-baseline gap-2.5 text-ivory no-underline"><span class="font-display text-[30px] font-medium">Imocena</span><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span></a>
-        <div class="flex items-center gap-4 text-sm">
-            @if ($user->veImoplanta())
-                <a href="{{ route('imoplanta') }}" class="min-h-11 inline-flex items-center px-4 rounded-full bg-coral text-navy font-semibold hover:brightness-105">Imoplanta →</a>
-            @endif
-            <span class="hidden sm:inline text-[#AEB5C1]">{{ $user->email }}</span>
-            <form method="POST" action="{{ route('logout') }}">@csrf<button class="min-h-11 px-4 rounded-full border border-ivory/30 text-ivory hover:bg-ivory/5">Sair</button></form>
-        </div>
-    </nav>
+<div class="max-w-[1100px]" @if ($aDecorrer) wire:poll.5s @endif>
 
-    <div class="mt-10 flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-wrap items-end justify-between gap-6">
         <div>
             <div class="flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">A MINHA CONTA</span></div>
             <h1 class="mt-4 font-display text-[clamp(36px,5vw,52px)] leading-[1.02] text-ivory">Os seus vídeos</h1>
@@ -93,4 +83,4 @@
             <p class="text-[#C9CED6]">Ainda não tem vídeos.</p>
         @endforelse
     </section>
-</main>
+</div>

@@ -3,7 +3,7 @@
     $passo = fn (int $n, string $titulo, string $sub) => '<div class="flex items-start gap-3"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan/15 border border-cyan/50 text-cyan text-sm font-semibold flex items-center justify-center">'.$n.'</span><div><h2 class="font-display text-[26px] leading-tight text-ivory">'.e($titulo).'</h2><p class="mt-1 text-sm text-[#AEB5C1]">'.e($sub).'</p></div></div>';
     $opcao = fn (bool $on) => 'flex items-center gap-3 min-h-[56px] rounded-[14px] border px-4 py-3 cursor-pointer '.($on ? 'border-cyan bg-cyan/10' : 'border-ivory/15');
 @endphp
-<main class="max-w-[760px] mx-auto px-4 sm:px-6 pt-6 pb-40">
+<div class="max-w-[760px] pb-40">
     <nav class="flex items-center justify-between gap-3">
         <a href="{{ route('conta') }}" class="inline-flex items-center min-h-11 -ml-2 px-2 text-sm text-[#C9CED6]">← Os meus vídeos</a>
         <span class="text-[11px] tracking-[.24em] text-cyan">NOVO VÍDEO</span>
@@ -154,4 +154,4 @@
             @endif
         </div>
     </div>
-</main>
+</div>
