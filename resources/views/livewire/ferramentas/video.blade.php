@@ -87,12 +87,12 @@
         </div>
 
     @elseif ($estado === 'a_aprovar')
-        <div class="mt-6 grid gap-5 md:grid-cols-2">
+        <div class="mt-6 grid gap-5 md:grid-cols-2 items-start">
             @foreach ([['inicio', 'Início · '.$tipo['inicio'], $iaInicio], ['fim', 'Fim · '.$tipo['fim'], ! $iaInicio]] as [$qual, $rotulo, $ia])
                 <figure class="rounded-2xl overflow-hidden bg-white border border-[#E4E1DA]">
                     <figcaption class="flex items-center justify-between px-4 py-3 text-sm">
                         <span class="font-semibold text-ivory">{{ $rotulo }}</span>
-                        <span class="{{ $ia ? 'px-2 py-0.5 rounded bg-cyan text-navy text-[11px] font-bold tracking-wider' : 'text-[#6B7385]' }}">{{ $ia ? 'IA' : 'a sua fotografia' }}</span>
+                        @if ($ia) <span class="px-2 py-0.5 rounded bg-cyan text-navy text-[11px] font-bold tracking-wider">IA</span> @endif
                     </figcaption>
                     <img src="{{ $ficheiro($qual) }}" alt="{{ $rotulo }}" class="w-full aspect-video object-cover bg-[#EDEAE3]">
                     @if ($ia && count($v->versoes ?? []) > 1)
