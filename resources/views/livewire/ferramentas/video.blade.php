@@ -39,24 +39,37 @@
 
     @if ($estado === 'rascunho')
         <form wire:submit="criar" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-7 md:p-8 flex flex-col gap-5">
-            <div class="grid gap-6 md:grid-cols-2 items-center">
-                <div class="aspect-video rounded-xl overflow-hidden bg-[#EDEAE3] flex items-center justify-center">
+            {{-- drop a photo anywhere on the card (or click the preview); the counter stops the highlight flickering over children --}}
+            <div x-data="{ sobre: 0 }"
+                 x-on:dragenter.prevent="sobre++" x-on:dragover.prevent x-on:dragleave.prevent="sobre--"
+                 x-on:drop.prevent="sobre = 0; $event.dataTransfer.files.length && $wire.upload('foto', $event.dataTransfer.files[0])"
+                 :class="sobre > 0 && 'ring-2 ring-coral ring-offset-4 ring-offset-white'"
+                 class="grid gap-6 md:grid-cols-2 items-center rounded-xl transition">
+                <button type="button" x-on:click="$refs.ficheiro.click()" aria-label="Escolher fotografia"
+                        class="relative aspect-video rounded-xl overflow-hidden bg-[#EDEAE3] flex items-center justify-center {{ $foto || $v ? '' : 'border-2 border-dashed border-[#C9C4B8] hover:border-coral' }}">
                     @if ($foto && method_exists($foto, 'isPreviewable') && $foto->isPreviewable())
                         <img src="{{ $foto->temporaryUrl() }}" alt="A sua fotografia" class="w-full h-full object-cover">
                     @elseif ($v)
                         <img src="{{ $ficheiro('original') }}" alt="A sua fotografia" class="w-full h-full object-cover">
                     @else
-                        <span class="text-sm text-[#6B7385] px-6 text-center">{{ $tipo['envio'] }}</span>
+                        <span class="flex flex-col items-center gap-2 px-6 text-center text-sm text-[#6B7385]">
+                            <span class="text-3xl leading-none text-coral" aria-hidden="true">⇪</span>
+                            <span><strong class="text-navy">Arraste a fotografia para aqui</strong><br>ou clique para escolher</span>
+                        </span>
                     @endif
-                </div>
-                <label class="flex flex-col gap-2 text-[13px] text-[#4A5263]">
+                    <span x-show="sobre > 0" x-cloak class="absolute inset-0 flex items-center justify-center bg-navy/70 text-ivory font-semibold">Largue para carregar</span>
+                    <span wire:loading.flex wire:target="foto" class="absolute inset-0 items-center justify-center bg-white/80 text-sm font-semibold text-navy">A carregar…</span>
+                </button>
+                <div class="flex flex-col gap-2 text-[13px] text-[#4A5263]">
                     <span class="font-display text-2xl text-ivory">{{ $v ? 'A sua fotografia' : $tipo['envio'] }}</span>
-                    <span>JPG, PNG ou WebP até 15 MB. Use a fotografia mais nítida que tiver.</span>
-                    <input type="file" accept="image/png,image/jpeg,image/webp" wire:model="foto"
-                           class="text-sm file:mr-3 file:min-h-11 file:px-4 file:rounded-full file:border-0 file:bg-[#EDEAE3] file:text-navy file:font-medium">
-                    <span wire:loading wire:target="foto" class="text-xs text-cyan">A carregar…</span>
+                    <span>Arraste a fotografia para este quadro ou escolha-a. JPG, PNG ou WebP até 15 MB. Use a fotografia mais nítida que tiver.</span>
+                    {{-- the browser's own file button speaks its language ("Choose file"): ours instead --}}
+                    <label class="self-start inline-flex items-center min-h-11 px-5 rounded-full bg-[#EDEAE3] text-navy text-sm font-semibold cursor-pointer hover:bg-[#E4E1DA] focus-within:ring-2 focus-within:ring-cyan">
+                        {{ $v ? 'Trocar fotografia' : 'Escolher fotografia' }}
+                        <input type="file" x-ref="ficheiro" accept="image/png,image/jpeg,image/webp" wire:model="foto" class="sr-only">
+                    </label>
                     @error('foto') <span class="text-sm text-coral">{{ $message }}</span> @enderror
-                </label>
+                </div>
             </div>
             @if ($tipo['direcao'] ?? false)
                 <fieldset class="flex flex-wrap items-center gap-3 text-sm text-[#4A5263]">
