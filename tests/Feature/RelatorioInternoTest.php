@@ -97,6 +97,8 @@ class RelatorioInternoTest extends TestCase
         $this->assertSame(1, $r['pedidos']['com_email']);
         $this->assertSame('meta-ads', $r['pedidos']['lista'][0]['canal']);
         $this->assertSame('www.remax.pt', $r['pedidos']['lista'][0]['imovel']);
+        $this->assertStringContainsString('/v/', $r['pedidos']['lista'][0]['video']);
+        $this->assertStringContainsString('signature=', $r['pedidos']['lista'][0]['video']);
         $this->assertSame(1, $r['compras']['total']);
         $this->assertEquals(100, $r['compras']['receita']);
         $this->assertEquals(18.7, $r['compras']['iva']);
