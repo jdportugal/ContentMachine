@@ -80,6 +80,7 @@
                             ['route' => 'videos.todos',    'label' => 'Todos os vídeos',   'sub' => 'De todos os clientes',           'color' => '#F06052', 'glyph' => '▶'],
                             ['route' => 'campanhas',       'label' => 'Campanhas',         'sub' => 'Funil · anúncios',               'color' => '#F06052', 'glyph' => '◔'],
                             ['route' => 'imoplanta',       'label' => 'Imoplanta',         'sub' => 'Plantas → 3D → vídeo',         'color' => '#F06052', 'glyph' => '▦'],
+                            ['route' => 'ferramentas',     'label' => 'Ferramentas IA',    'sub' => 'Fotografia → vídeo',           'color' => '#F06052', 'glyph' => '✧', 'match' => ['ferramentas*']],
                         ]],
                         ['titulo' => 'Criar', 'itens' => [
                             ['route' => 'clips-animados',  'label' => 'Imóveis',           'sub' => 'Vídeos animados',          'color' => '#05B8E6', 'glyph' => '✦', 'match' => ['clips-animados']],
@@ -102,10 +103,13 @@
                     if (! auth()->user()?->can('admin')) {
                         $grupos = [['titulo' => null, 'itens' => [
                             ['route' => 'conta', 'label' => 'Os meus vídeos', 'sub' => 'Vídeos e créditos', 'color' => '#F06052', 'glyph' => '▶', 'match' => ['conta', 'conta.novo', 'conta.editar']],
-                            ...array_values(array_filter($grupos[0]['itens'], fn ($i) => $i['route'] === 'imoplanta')),
+                            ...array_values(array_filter($grupos[0]['itens'], fn ($i) => in_array($i['route'], ['imoplanta', 'ferramentas'], true))),
                         ]]];
                     }
                     // Imoplanta's tab, for now, only for the accounts in imoplanta.acesso.
+                    if (! auth()->user()?->veFerramentas()) {
+                        $grupos = array_map(fn ($g) => ['titulo' => $g['titulo'], 'itens' => array_values(array_filter($g['itens'], fn ($i) => $i['route'] !== 'ferramentas'))], $grupos);
+                    }
                     if (! auth()->user()?->veImoplanta()) {
                         $grupos = array_map(fn ($g) => ['titulo' => $g['titulo'], 'itens' => array_values(array_filter($g['itens'], fn ($i) => $i['route'] !== 'imoplanta'))], $grupos);
                     }
@@ -207,7 +211,7 @@
 
         {{-- ============ Content ============ --}}
         {{-- the customer pages (account, Imoplanta) are light, like the public site --}}
-        <main @class(['flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0', 'claro' => request()->routeIs('conta*', 'imoplanta*')])>
+        <main @class(['flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0', 'claro' => request()->routeIs('conta*', 'imoplanta*', 'ferramentas*')])>
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 {{ $slot }}
             </div>

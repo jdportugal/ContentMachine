@@ -241,4 +241,68 @@ class FerramentasTest extends TestCase
             Ferramentas::link($u, 'ia10', $f));
         $this->assertSame(7, \App\Services\Pagamentos\Compras::ferramentaId('ferramenta-7'));
     }
+
+    public function test_only_the_listed_accounts_see_the_tools(): void
+    {
+        $outro = $this->cliente();
+        $joao = User::factory()->cliente()->create(['email' => 'joaodiogocferreira@gmail.com']);
+        config(['contentmachine.imoplanta.acesso' => ['joaodiogocferreira@gmail.com']]);
+
+        $this->actingAs($outro)->get(route('ferramentas'))->assertForbidden();
+        $this->actingAs($outro)->get(route('conta'))->assertDontSee(route('ferramentas'), false);
+        $this->actingAs($joao)->get(route('conta'))->assertSee(route('ferramentas'), false);
+        $this->actingAs($joao)->get(route('ferramentas'))->assertOk()->assertSee('Vista drone')->assertSee(route('ferramentas.nova', 'drone'), false);
+        $this->get(route('ferramentas.sobre'))->assertOk();   // the landing is public
+    }
+
+    public function test_customers_see_only_their_own_videos(): void
+    {
+        $dono = User::factory()->cliente()->create(['email' => 'joaodiogocferreira@gmail.com']);
+        $outro = User::factory()->cliente()->create(['email' => 'outro@example.com']);
+        config(['contentmachine.imoplanta.acesso' => ['joaodiogocferreira@gmail.com', 'outro@example.com']]);
+        $f = $this->video($dono);
+
+        $this->actingAs($outro)->get(route('ferramentas.video', $f->id))->assertForbidden();
+        $this->actingAs($outro)->get(route('ferramentas.ficheiro', [$f->id, 'original']))->assertNotFound();
+        $this->actingAs($dono)->get(route('ferramentas.ficheiro', [$f->id, 'original']))->assertOk();
+        $this->actingAs($dono)->get(route('ferramentas.video', $f->id))->assertOk();
+    }
+
+    public function test_upload_validates_and_creating_images_spends_one_video(): void
+    {
+        Queue::fake();
+        $u = $this->cliente(1);
+        \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
+
+        \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['ferramenta' => 'drone'])
+            ->set('foto', UploadedFile::fake()->create('nota.pdf', 100, 'application/pdf'))->call('criar')->assertHasErrors('foto');
+        $this->assertSame(0, FerramentaIa::count());
+
+        \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['ferramenta' => 'drone'])
+            ->set('foto', $this->foto())->call('criar')->assertRedirect(route('ferramentas.video', FerramentaIa::first()->id));
+        $this->assertSame(FerramentaIa::A_ENQUADRAR, FerramentaIa::first()->estado);
+        $this->assertSame(0, $u->videosIaDisponiveis());
+    }
+
+    public function test_with_no_videos_left_the_draft_keeps_the_photo_and_the_page_offers_the_packs(): void
+    {
+        Queue::fake();
+        $u = $this->cliente();
+        \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
+        $f = $this->video($u);
+
+        $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()
+            ->assertSee('Já não tem vídeos IA')->assertDontSee('Criar imagens →')
+            ->assertSee(e(Ferramentas::link($u, 'ia1', $f)), false)->assertSee("225\u{00A0}€");
+    }
+
+    public function test_back_from_paying_goes_to_the_video(): void
+    {
+        $u = $this->cliente();
+        $f = $this->video($u);
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_back', 'total' => 2500, 'videos_ia' => 1,
+            'dados' => json_encode(['client_reference_id' => 'ferramenta-'.$f->id]), 'created_at' => now(), 'updated_at' => now()]);
+
+        $this->actingAs($u)->get(route('obrigado', ['session_id' => 'cs_back']))->assertRedirect(route('ferramentas.video', $f->id));
+    }
 }

@@ -8,6 +8,7 @@
     $botao = 'inline-flex items-center justify-center min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105';
     $sobre = 'text-[11px] tracking-[.3em] text-[#0478A0]';
     $entrar = route('login');
+    $comecar = auth()->check() ? route('ferramentas') : route('login');
 @endphp
 <x-layouts.site title="Ferramentas IA · Vídeos de imóveis a partir de uma fotografia">
 <x-imoplanta.pagina>
@@ -22,7 +23,7 @@
             <h1 class="font-display text-[44px] lg:text-[64px] font-medium leading-[1.02] text-navy">Uma fotografia, um vídeo que vende</h1>
             <p class="max-w-lg text-[16px] lg:text-[18px] leading-relaxed text-[#4A5263]">Vista de drone, limpeza, remodelação, construção ou planta animada. Envie uma fotografia do imóvel, aprove a primeira e a última imagem, e recebe um vídeo curto com som.</p>
             <div class="flex flex-wrap items-center gap-4">
-                <a href="{{ $entrar }}" class="{{ $botao }}">Experimentar com uma fotografia →</a>
+                <a href="{{ $comecar }}" class="{{ $botao }}">Experimentar com uma fotografia →</a>
                 <a href="#ferramentas" class="min-h-11 inline-flex items-center text-sm font-semibold text-navy underline underline-offset-4">Ver as ferramentas</a>
             </div>
             <p class="text-sm text-[#4A5263]">{{ $eur($um['preco']) }} por vídeo, ou a partir de <strong class="text-navy">{{ $eur($packs->last()['preco'] / $packs->last()['videos']) }}</strong> num pack. Sem subscrição.</p>
@@ -94,7 +95,7 @@
             <h2 class="font-display text-[32px] lg:text-[42px] font-medium leading-tight">Tem uma fotografia? Comece agora.</h2>
             <p class="mt-2 text-[15px] text-[#C9CED6]">Precisa só do seu email. As imagens ficam prontas em poucos minutos.</p>
         </div>
-        <a href="{{ $entrar }}" class="{{ $botao }} shrink-0">Experimentar com uma fotografia →</a>
+        <a href="{{ $comecar }}" class="{{ $botao }} shrink-0">Experimentar com uma fotografia →</a>
     </section>
 </x-imoplanta.pagina>
 </x-layouts.site>

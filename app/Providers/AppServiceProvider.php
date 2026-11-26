@@ -89,5 +89,6 @@ class AppServiceProvider extends ServiceProvider
         // their own videos (routes/web.php).
         Gate::define('admin', fn (User $user) => $user->is_admin);
         Gate::define('imoplanta', fn (User $user) => $user->veImoplanta() || $user->is_admin);
+        Gate::define('ferramentas', fn (User $user) => $user->veFerramentas());
     }
 }

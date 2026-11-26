@@ -15,6 +15,8 @@ use App\Livewire\Imoplanta\Comecar as ImoplantaComecar;
 use App\Livewire\Imoplanta\Custos as ImoplantaCustos;
 use App\Livewire\Imoplanta\Imovel as ImoplantaImovel;
 use App\Livewire\Imoplanta\Lista as ImoplantaLista;
+use App\Livewire\Ferramentas\Lista as FerramentasLista;
+use App\Livewire\Ferramentas\Video as FerramentasVideo;
 use App\Livewire\Imoveis;
 use App\Livewire\Landing;
 use App\Models\Imoplanta;
@@ -172,6 +174,14 @@ Route::get('/obrigado', function (LinkDeAcesso $contas) {
         app(\App\Services\Marketing\MetaConversoes::class)->enviar('Purchase', $medir['id'],
             ['value' => $medir['valor'], 'currency' => $medir['moeda'], 'num_items' => $medir['videos'], 'content_type' => 'product'],
             $compra->email, json_decode((string) ($compra->origem ?? $origem ?? 'null'), true));
+    }
+
+    // Ferramentas IA: back to the video it was bought from (or the tools page for a pack bought there).
+    if ($compra && $compra->videos_ia > 0 && Auth::check()) {
+        $id = \App\Services\Pagamentos\Compras::ferramentaId((string) (json_decode((string) $compra->dados, true)['client_reference_id'] ?? ''));
+        $f = $id ? \App\Models\FerramentaIa::where('user_id', Auth::id())->find($id) : null;
+
+        return redirect($f ? route('ferramentas.video', $f->id) : route('ferramentas'))->with('pago', true);
     }
 
     // Imoplanta: back to what was bought (its webhook starts it): the property, or the list for a pack.
@@ -410,6 +420,25 @@ Route::middleware('auth')->group(function () {
                 ? response()->json(['ok' => true])
                 : response()->json(['ok' => false], 409);
         })->whereNumber('imovel')->whereNumber('nivel')->middleware('throttle:60,1')->name('imoplanta.aereo');
+    });
+
+    // Ferramentas IA (photo → approved frames → Kling clip), for now the same accounts as Imoplanta: the `ferramentas` gate.
+    Route::middleware('can:ferramentas')->group(function () {
+        Route::livewire('/ferramentas', FerramentasLista::class)->name('ferramentas');
+        Route::livewire('/ferramentas/nova/{ferramenta}', FerramentasVideo::class)->name('ferramentas.nova');
+        Route::livewire('/ferramentas/{video}', FerramentasVideo::class)->whereNumber('video')->name('ferramentas.video');
+        // A video's files, to its owner (or an admin): the photo, the frames, one AI frame version (n), the clip. ?baixar=1 saves it.
+        Route::get('/ferramentas/{video}/ficheiro/{qual}/{n?}', function (\App\Models\FerramentaIa $video, string $qual, ?int $n = null) {
+            abort_unless($video->user_id === Auth::id() || Auth::user()->is_admin, 404);
+            $path = $qual === 'versao' ? ($video->versoes[$n ?? -1] ?? null) : $video->{$qual};
+            $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+            abort_unless($path && $disk->exists($path), 404);
+            if (request()->boolean('baixar')) {
+                return response()->download($disk->path($path), 'imocena-'.$video->ferramenta.'-'.$video->id.'-'.$qual.'.'.pathinfo($path, PATHINFO_EXTENSION));
+            }
+
+            return response()->file($disk->path($path), ['Cache-Control' => 'private, max-age=604800']);
+        })->whereNumber('video')->whereIn('qual', ['original', 'inicio', 'fim', 'versao', 'video'])->whereNumber('n')->name('ferramentas.ficheiro');
     });
 });
 
