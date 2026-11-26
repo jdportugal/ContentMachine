@@ -10,7 +10,7 @@ Real-estate agents buy short AI videos made from one of their own photos (or a f
 |---|---|---|
 | `drone` | Vista drone | a silent drone orbit around the house, seen from the air (changed 2026-11-26: the user wants it rotating and with no sound) |
 | `lateral` | Movimento lateral | added 2026-11-26: a slow gimbal-style side slide, 5 s, silent, left or right as the customer picks |
-| `limpeza` | Limpeza IA | **a photo, not a video** (user, 2026-11-26): the same photo with the clutter and unwanted objects removed; a before/after slider and downloads. The customer can name extra things to remove. Price per use still to be decided by the user (now 1 photo per use) |
+| `limpeza` | Limpeza IA | **a photo, not a video** (user, 2026-11-26): the same photo with the clutter and unwanted objects removed; a before/after slider and downloads. The customer can name extra things to remove. It also freshens up (stains, mould, small damage): the user saw it on a real bathroom and approved it as is. Price per use still to be decided by the user (now 1 photo per use) |
 | `remodelacao` | Remodelação IA | a timelapse-like remodel, from the current state to a renovated one |
 | `construcao` | Construção IA | a timelapse of workers building the house, from an empty plot to the finished house |
 | `planta` | Planta animada | a 2D floor plan becomes a 3D plan that builds itself and fills with furniture (Imoplanta's plan video, standalone) |
