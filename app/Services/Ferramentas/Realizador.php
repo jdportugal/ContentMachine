@@ -142,9 +142,13 @@ class Realizador
                 .'fine). Each fitting is replaced by a new one of the same kind IN THE SAME PLACE and about the same size: '
                 .'a bath where the bath is, a toilet or bidet where it is, a sink where the sink is, kitchen units along the '
                 .'same walls. New finishes everywhere: smooth freshly painted walls and ceiling, new wall tiles where there '
-                .'are tiles, a new floor, new taps and light fittings, everything clean, in a current, bright and neutral '
-                .'style; at most a towel or a plant as decor.%s The same natural daylight from the same windows. A photoreal '
-                .'real-estate photograph, with the picture free of people, text, logos and watermarks.',
+                .'are tiles, a new floor, new taps and light fittings, everything clean. The new materials are modern and '
+                .'high-end: large-format porcelain tiles in warm white or light stone with thin joints, a matching '
+                .'large-format floor, sleek modern fittings, slim brushed or matt black taps; plain, calm surfaces in place '
+                .'of small patterned or chequered tiles; at most a towel or a plant as decor.%s The same natural daylight '
+                .'from the same windows. Only the materials and fittings change: laid over the original photo, the room\'s '
+                .'outline, the window, the door and each fitting line up exactly. A photoreal real-estate photograph, with '
+                .'the picture free of people, text, logos and watermarks.',
             'campo' => ' The client wants this style: %s.',
             // measured 2026-11-26: with the workers gone before the end and no step for the tiles, Kling faded the
             // last change in on its own; so every change is done by hands, row by row, and the workers stay to the end

@@ -46,7 +46,7 @@ class Ferramentas
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da remodelação, do estado atual ao renovado.',
                 'texto' => 'Mostre o potencial de um imóvel para recuperar: a divisão transforma-se, em timelapse, numa versão remodelada. Pode dizer-nos o estilo que quer.',
                 'envio' => 'Fotografia da divisão a remodelar', 'inicio' => 'Estado atual', 'fim' => 'Remodelado', 'ai' => ['fim'], 'segundos' => 10,
-                'campo' => ['titulo' => 'Que estilo quer?', 'ajuda' => 'Opcional: sem indicação, fazemos uma remodelação atual, clara e neutra.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
+                'campo' => ['titulo' => 'Que estilo quer?', 'ajuda' => 'Opcional: sem indicação, fazemos uma remodelação moderna, clara e de gama alta.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
                 'exemplo' => 'Ex.: o chão em madeira mais escura',
             ],
             'construcao' => [
