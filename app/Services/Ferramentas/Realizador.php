@@ -146,12 +146,17 @@ class Realizador
                 .'style; at most a towel or a plant as decor.%s The same natural daylight from the same windows. A photoreal '
                 .'real-estate photograph, with the picture free of people, text, logos and watermarks.',
             'campo' => ' The client wants this style: %s.',
+            // measured 2026-11-26: with the workers gone before the end and no step for the tiles, Kling faded the
+            // last change in on its own; so every change is done by hands, row by row, and the workers stay to the end
             'video' => 'Fast-motion renovation timelapse from a fixed camera on a tripod: the camera stays perfectly still for '
-                .'the whole shot. Workers in work clothes hurry in and out, sped up: they strip the old finishes and '
-                .'fittings, repair and plaster the walls, paint, lay the new floor, fit the new fittings and bring in the '
-                .'furniture, step by step, until the room is exactly as in the last frame, clean, finished and empty of '
-                .'people. The walls, windows and doors stay in place the whole time; the daylight flickers gently as the '
-                .'days pass. One continuous shot, no cuts.',
+                .'the whole shot. Two or three workers in work clothes are in the room from the first second to the last, '
+                .'sped up, and they do every change with their hands: they knock off the old tiles and carry out the old '
+                .'fittings, plaster and paint the walls, set the new tiles one row at a time from the bottom up, lay the new '
+                .'floor piece by piece, carry in and fit each new fitting, then wipe everything clean. Nothing changes by '
+                .'itself: no tile, wall finish, floor or fitting fades, morphs or appears without a worker putting it there. '
+                .'Only in the last second do the workers step out of the frame, leaving the room exactly as in the last '
+                .'frame. The walls, windows and doors stay in place the whole time; the daylight flickers gently as the days '
+                .'pass. One continuous shot, no cuts.',
             'som' => ' Sound, sped up with the picture: scraping, hammering, drills, a saw, tiles and planks set down, '
                 .'brushes and rollers, footsteps; it calms down at the end to a quiet, finished room. No music, no speech.',
         ],
