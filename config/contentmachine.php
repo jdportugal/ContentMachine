@@ -584,7 +584,28 @@ return [
             'extra_planta' => env('STRIPE_LINK_EXTRA_PLANTA', ''),
             'extra_video' => env('STRIPE_LINK_EXTRA_VIDEO', ''),
             'extra_ambos' => env('STRIPE_LINK_EXTRA_AMBOS', ''),
+            // Ferramentas IA (Payment Links with metadata videos_ia=1|10|20)
+            'ia1' => env('STRIPE_LINK_IA1', ''),
+            'ia10' => env('STRIPE_LINK_IA10', ''),
+            'ia20' => env('STRIPE_LINK_IA20', ''),
         ],
+    ],
+
+    /*
+    | Ferramentas IA: one photo (or a floor plan) → start and end frames the customer
+    | approves → one Kling clip. Sold as packs of "vídeos IA", any tool (compras.videos_ia).
+    | Worst case per video (4 images + 3 clips) is ~4.50 € (10 s), ~6.60 € (construção, 15 s):
+    | docs/superpowers/specs/2026-11-26-ferramentas-ia-design.md.
+    */
+    'ferramentas' => [
+        'packs' => [
+            // Prices shown on the pages; what is charged is the Payment Link's (stripe.links.ia*).
+            'ia1' => ['videos' => 1, 'preco' => (int) env('IA_PRECO_1', 2500)],
+            'ia10' => ['videos' => 10, 'preco' => (int) env('IA_PRECO_10', 22500)],
+            'ia20' => ['videos' => 20, 'preco' => (int) env('IA_PRECO_20', 40000)],
+        ],
+        'editar_imagem' => 3,   // changes to the AI frame, per video
+        'refazer_video' => 2,   // new versions of the clip, per video
     ],
 
     /*

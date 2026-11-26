@@ -222,6 +222,8 @@ Route::match(['get', 'post'], '/emails/cancelar/{lead}', function (int $lead) {
 
 // Imoplanta's landing page: the steps shown with GIFs of the demo flat (public/imoplanta-demo/landing).
 Route::view('/da-planta-ao-video', 'imoplanta.landing')->name('plantas.sobre');
+// Ferramentas IA's landing page: each tool with its example clip (public/exemplos-ia).
+Route::view('/ferramentas-ia', 'ferramentas.landing')->name('ferramentas.sobre');
 
 
 // ── Authentication ───────────────────────────────────────────────────────────
