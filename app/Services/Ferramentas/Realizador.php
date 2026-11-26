@@ -79,8 +79,9 @@ class Realizador
                 .'exterior with visible clutter or unwanted items (boxes, clothes, bags, toys, cables, bins, rubbish, tools, '
                 .'personal items, cars in front of a facade). PROBLEMS to look for: a space that is already clean and tidy '
                 .'(say there is little to remove, so the photo will change little); people in the picture; a floor plan, '
-                .'drawing or screenshot; very dark, blurry or heavily filtered; text and logos over the picture; so much '
-                .'clutter that walls and floor are hidden (the AI would have to invent most of the room).',
+                .'drawing or screenshot; very dark, blurry or heavily filtered; so much clutter that walls and floor are '
+                .'hidden (the AI would have to invent most of the room). Text, logos and watermarks over the picture are NOT '
+                .'a problem: the cleanup removes them too. The result is a photo, never a video: do not mention video.',
             'fim' => 'Using this photo as the reference, show exactly the same space from exactly the same camera position, '
                 .'lens and framing, after it has been cleaned and tidied for a property listing. Remove the clutter and '
                 .'unwanted items: loose objects on floors, tables, counters and shelves, clothes, bags, boxes, toys, cables, '
