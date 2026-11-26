@@ -5,19 +5,20 @@
             <div class="flex items-center gap-3.5"><span class="w-10 h-px bg-cyan"></span><span class="text-xs tracking-[.32em] text-cyan">A MINHA CONTA</span></div>
             <h1 class="mt-4 font-display text-[clamp(36px,5vw,52px)] leading-[1.02] text-ivory">Os seus vídeos</h1>
         </div>
-        <div class="text-right">
-            <span class="block text-[10px] tracking-[.3em] text-cyan">VÍDEOS DISPONÍVEIS</span>
+        {{-- the one dark block: how many videos are left --}}
+        <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
+            <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">VÍDEOS<br>DISPONÍVEIS</span>
             <span class="font-display text-[48px] leading-none text-ivory">{{ $creditos }}</span>
         </div>
     </div>
 
     {{-- Make a video with a credit --}}
     @if ($creditos > 0)
-        <section class="mt-8 rounded-[18px] border border-ivory/10 bg-navy-3/60 p-5 sm:p-6">
+        <section class="mt-8 rounded-[18px] bg-white border border-[#E4E1DA] p-5 sm:p-6">
             <form wire:submit="usarCredito" class="flex flex-col gap-3" novalidate>
                 <label for="anuncio" class="font-display text-[24px] text-ivory">Fazer um vídeo (usa 1 dos seus {{ $creditos }})</label>
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <input id="anuncio" type="url" wire:model="anuncio" placeholder="Cole aqui o link do anúncio" class="flex-1 min-h-[52px] rounded-full bg-navy border border-ivory/20 px-5 text-ivory placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
+                    <input id="anuncio" type="url" wire:model="anuncio" placeholder="Cole aqui o link do anúncio" class="flex-1 min-h-[52px] rounded-full bg-white border border-[#D9D5CC] px-5 text-navy placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
                     <button type="submit" class="min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105" wire:loading.attr="disabled">Criar vídeo →</button>
                 </div>
                 @error('anuncio') <p class="text-sm text-coral">{{ $message }}</p> @enderror
@@ -29,7 +30,7 @@
     @endif
 
     {{-- Buy more: always visible --}}
-    <section id="comprar" class="mt-6 rounded-[18px] border border-ivory/10 p-5 sm:p-6">
+    <section id="comprar" class="mt-6 rounded-[18px] bg-white border border-[#E4E1DA] p-5 sm:p-6">
         <p class="font-display text-[22px] text-ivory">{{ $creditos > 0 ? 'Precisa de mais vídeos?' : 'Comprar vídeos' }}</p>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a href="{{ $link('avulso') }}" class="flex flex-col gap-1 rounded-[14px] border border-ivory/15 px-5 py-4 hover:border-cyan">
@@ -51,7 +52,7 @@
 
     <section class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($videos as $v)
-            <article class="rounded-[18px] border border-ivory/10 bg-navy-3/40 p-4 flex flex-col gap-3" wire:key="video-{{ $v->id }}">
+            <article class="rounded-[18px] bg-white border border-[#E4E1DA] p-4 flex flex-col gap-3" wire:key="video-{{ $v->id }}">
                 @if ($v->estado === 'pronto')
                     <video src="{{ $v->video }}" controls playsinline preload="metadata" class="w-full aspect-[9/16] rounded-[12px] bg-navy object-contain"></video>
                 @else

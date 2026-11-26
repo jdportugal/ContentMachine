@@ -147,6 +147,23 @@ class Imoplantas
     }
 
     /**
+     * The five steps as the public page and the dashboard's welcome show them: title, text, its GIF of the demo
+     * flat (public/imoplanta-demo/landing) and the GIF's alt text.
+     *
+     * @return list<array{0:string,1:string,2:string,3:string}>
+     */
+    public static function passos(): array
+    {
+        return [
+            ['Envie as plantas', 'Uma imagem por piso, onde se leiam as cotas. Lemos as paredes, as portas, as janelas e as divisões, com as medidas, e montamos a casa.', 'passo-1-planta.gif', 'A planta do apartamento e a casa montada a partir dela.'],
+            ['Veja a casa em 3D e escolha as vistas', 'Rode o modelo, peça correções por escrito e escolha onde ficam as câmaras: até '.config('contentmachine.imoplanta.max_cameras').', já colocadas na sala, na cozinha, num quarto e na casa de banho.', 'passo-2-modelo.gif', 'O modelo 3D do apartamento a rodar, visto de cima e sem teto.'],
+            ['Escolha os acabamentos', 'Um quadro de materiais e a planta 3D realista de cada piso. Pode mudar os dois por escrito, até '.config('contentmachine.imoplanta.refazer_referencias').' vezes.', 'passo-3-acabamentos.gif', 'O quadro de acabamentos, o modelo visto de cima e a planta 3D realista.'],
+            ['Receba fotografias realistas', 'Cada câmara vira uma fotografia, com os acabamentos escolhidos. Se algo não estiver bem, peça a alteração: '.config('contentmachine.imoplanta.refazer_imagem').' por fotografia.', 'passo-4-fotos.gif', 'A vista do modelo 3D e a fotografia realista feita a partir dela, em três divisões.'],
+            ['E o vídeo de visita', 'As fotografias ganham movimento e juntam-se num vídeo de visita, pela ordem de quem entra na casa.', 'passo-5-video.gif', 'Excerto do vídeo de visita do apartamento.'],
+        ];
+    }
+
+    /**
      * Where a buy button goes: the Payment Link for $plano (stripe.links: imoplanta1|10|20, extra_planta|video|ambos)
      * with the property as client_reference_id (so the webhook knows what it paid for) and their email filled in.
      * Without the link configured, an email to us (as the video buttons do).

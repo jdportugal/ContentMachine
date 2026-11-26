@@ -258,3 +258,41 @@
 .guia th { text-align: left; font-weight: 600; color: var(--color-ivory); background: var(--color-navy-2); }
 .guia th, .guia td { padding: .7rem .9rem; border-bottom: 1px solid rgb(244 241 234 / .12); vertical-align: top; }
 .guia h2#fontes ~ ul { font-size: 14px; line-height: 1.6; }
+
+/* ---------- Customer pages (the account, Imoplanta): the public site's light page, navy cards on it ----------
+   .claro turns the portal's tokens light for the page; anything on a navy fill gets the dark tokens back, so a
+   card's text-ink / text-ink-soft stays light on it. */
+.claro {
+    --color-papyrus: #F6F4EF;
+    --color-vellum: #FFFFFF;
+    --color-surface: #EDEAE3;
+    --color-shelf: #E4E1DA;
+    --color-ink: #0E1626;
+    --color-ink-soft: #4A5263;
+    --color-ink-faint: #6B7385;
+    --color-teal: #076E8A;
+    --color-star: #0478A0;
+    background-color: var(--color-papyrus);
+    color: var(--color-ink);
+}
+.claro [class*="bg-navy"] {
+    --color-papyrus: #0E1626;
+    --color-vellum: #141F33;
+    --color-surface: #1B2638;
+    --color-shelf: #26324A;
+    --color-ink: #F4F1EA;
+    --color-ink-soft: #C9CED6;
+    --color-ink-faint: #8B95A7;
+    --color-teal: #05B8E6;
+    --color-star: #05B8E6;
+}
+/* The customer views were drawn on navy with literal light colours: on the light page (not on a navy fill)
+   they turn into the public site's navy text, greys and deep cyan. */
+.claro :is(.text-ivory, .text-\[\#F4F1EA\]):not([class*="bg-navy"], [class*="bg-navy"] *) { color: #0E1626; }
+.claro .text-\[\#C9CED6\]:not([class*="bg-navy"], [class*="bg-navy"] *) { color: #4A5263; }
+.claro :is(.text-\[\#AEB5C1\], .text-\[\#8B95A7\], .text-\[\#7C8696\]):not([class*="bg-navy"], [class*="bg-navy"] *) { color: #6B7385; }
+.claro .text-cyan:not([class*="bg-navy"], [class*="bg-navy"] *) { color: #0478A0; }
+.claro [class*="border-ivory/"]:not([class*="bg-navy"], [class*="bg-navy"] *) { border-color: #E4E1DA; }
+.claro [class*="hover:bg-ivory/"]:not([class*="bg-navy"], [class*="bg-navy"] *):hover { background-color: rgb(14 22 38 / 0.04); }
+/* see-through navy fills (made for a navy page) go muddy grey on the light one: solid card navy */
+.claro :is([class*="bg-navy-2/"], [class*="bg-navy-3/"]) { background-color: #141F33; }

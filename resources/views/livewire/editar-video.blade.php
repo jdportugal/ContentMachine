@@ -29,7 +29,7 @@
         <section class="flex flex-col gap-4">
             {!! $passo(1, 'Narração', 'O texto que a voz lê. Se o mudar, a voz é gravada de novo.') !!}
             <textarea wire:model="narracao" rows="10" maxlength="1500"
-                      class="w-full rounded-[14px] bg-navy border border-ivory/20 p-4 text-[16px] leading-relaxed text-ivory focus:border-cyan focus:outline-none"></textarea>
+                      class="w-full rounded-[14px] bg-white border border-[#D9D5CC] p-4 text-[16px] leading-relaxed text-navy focus:border-cyan focus:outline-none"></textarea>
             <div class="flex justify-between text-xs text-[#AEB5C1]" x-data><span>Cerca de 1 minuto no máximo.</span><span x-text="$wire.narracao.length + ' / 1500'"></span></div>
             @error('narracao') <p class="text-sm text-coral">{{ $message }}</p> @enderror
         </section>
@@ -114,7 +114,7 @@
                         @foreach ($fotos[$c['indice']] ?? [] as $onde => $id)
                             @if ($aTrocar === $c['indice'].'|'.$onde)
                                 @php $slot = \App\Livewire\EditarVideo::chave($c['indice'], $onde); @endphp
-                                <div class="mt-3 rounded-[12px] border border-cyan/40 bg-navy p-3">
+                                <div class="mt-3 rounded-[12px] border border-cyan/40 bg-white p-3">
                                     <p class="text-sm text-ivory">Escolha outra foto do anúncio</p>
                                     <div class="mt-2 flex gap-2 overflow-x-auto snap-x pb-2 -mx-1 px-1">
                                         @foreach ($galeria as $g)
@@ -136,7 +136,7 @@
                         {{-- Change the effect: only picture effects; the cards with information keep theirs. --}}
                         @if ($c['trocavel'] && count($catalogo) > 1)
                             @if ($aEscolherEfeito === $c['indice'])
-                                <div class="mt-3 rounded-[12px] border border-cyan/40 bg-navy p-3">
+                                <div class="mt-3 rounded-[12px] border border-cyan/40 bg-white p-3">
                                     <p class="text-sm text-ivory">Escolha o efeito desta cena</p>
                                     <div class="mt-2 grid grid-cols-2 gap-2">
                                         @foreach ($catalogo as $slug => $e)
@@ -175,17 +175,17 @@
             {!! $passo(3, 'Os seus dados', 'O que aparece no cartão final do vídeo.') !!}
             <label class="flex flex-col gap-1.5">
                 <span class="text-sm text-ivory">Nome</span>
-                <input type="text" wire:model="nome" autocomplete="name" class="min-h-[52px] rounded-[12px] bg-navy border border-ivory/20 px-4 text-[16px] text-ivory focus:border-cyan focus:outline-none">
+                <input type="text" wire:model="nome" autocomplete="name" class="min-h-[52px] rounded-[12px] bg-white border border-[#D9D5CC] px-4 text-[16px] text-navy focus:border-cyan focus:outline-none">
                 @error('nome') <span class="text-sm text-coral">{{ $message }}</span> @enderror
             </label>
             <label class="flex flex-col gap-1.5">
                 <span class="text-sm text-ivory">Telefone</span>
-                <input type="tel" wire:model="telefone" autocomplete="tel" inputmode="tel" class="min-h-[52px] rounded-[12px] bg-navy border border-ivory/20 px-4 text-[16px] text-ivory focus:border-cyan focus:outline-none">
+                <input type="tel" wire:model="telefone" autocomplete="tel" inputmode="tel" class="min-h-[52px] rounded-[12px] bg-white border border-[#D9D5CC] px-4 text-[16px] text-navy focus:border-cyan focus:outline-none">
                 @error('telefone') <span class="text-sm text-coral">{{ $message }}</span> @enderror
             </label>
             <label class="flex flex-col gap-1.5">
                 <span class="text-sm text-ivory">Licença AMI <span class="text-[#AEB5C1]">(só o número)</span></span>
-                <input type="text" wire:model="licenca" inputmode="numeric" placeholder="ex.: 11220" class="min-h-[52px] rounded-[12px] bg-navy border border-ivory/20 px-4 text-[16px] text-ivory focus:border-cyan focus:outline-none">
+                <input type="text" wire:model="licenca" inputmode="numeric" placeholder="ex.: 11220" class="min-h-[52px] rounded-[12px] bg-white border border-[#D9D5CC] px-4 text-[16px] text-navy focus:border-cyan focus:outline-none">
                 @error('licenca') <span class="text-sm text-coral">{{ $message }}</span> @enderror
             </label>
             <div class="flex flex-col gap-1.5">
@@ -252,7 +252,7 @@
     </form>
 
     {{-- Save bar, fixed at the bottom (thumb reach on phones) --}}
-    <div class="fixed inset-x-0 bottom-0 z-20 border-t border-ivory/10 bg-navy/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+    <div class="fixed inset-x-0 lg:left-72 bottom-0 z-20 border-t border-[#E4E1DA] bg-[#F6F4EF]/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
         <div class="max-w-[760px] mx-auto flex flex-col gap-2">
             @error('guardar') <p class="text-sm text-coral">{{ $message }}</p> @enderror
             @if ($restam > 0)

@@ -100,7 +100,7 @@
                     // A customer's dashboard: their videos (/conta, with making and editing one) and Imoplanta; the studio is for admins.
                     if (! auth()->user()?->can('admin')) {
                         $grupos = [['titulo' => null, 'itens' => [
-                            ['route' => 'conta', 'label' => 'Os meus vídeos', 'sub' => 'Vídeos e créditos', 'color' => '#F06052', 'glyph' => '▶'],
+                            ['route' => 'conta', 'label' => 'Os meus vídeos', 'sub' => 'Vídeos e créditos', 'color' => '#F06052', 'glyph' => '▶', 'match' => ['conta', 'conta.novo', 'conta.editar']],
                             ...array_values(array_filter($grupos[0]['itens'], fn ($i) => $i['route'] === 'imoplanta')),
                         ]]];
                     }
@@ -179,19 +179,17 @@
                 @endforeach
             </nav>
 
-            {{-- The admin's own customer area (videos, credits), at the foot of the shelf; customers have it at the top. --}}
-            @can('admin')
-            <a href="{{ route('conta') }}" data-nav="entry" @if (request()->routeIs('conta')) aria-current="page" @endif
+            {{-- The account's settings (sharing it with other emails), for everyone (customers too), at the foot of the shelf. --}}
+            <a href="{{ route('conta.definicoes') }}" data-nav="entry" @if (request()->routeIs('conta.definicoes')) aria-current="page" @endif
                class="mx-2 mt-1 flex items-center gap-3 pl-3 pr-4 py-2.5 rounded-md transition border-t border-ink-soft/15
-                      {{ request()->routeIs('conta') ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
+                      {{ request()->routeIs('conta.definicoes') ? 'bg-surface/70 text-ink' : 'text-ink-soft hover:bg-surface/40 hover:text-ink' }}">
                 <span class="w-1.5"></span>
                 <span class="w-8 text-center text-2xl leading-none text-[#05B8E6]">⚙</span>
                 <span class="flex-1 min-w-0">
-                    <span class="block font-display text-xl leading-tight">A minha conta</span>
-                    <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">Vídeos e créditos</span>
+                    <span class="block font-display text-xl leading-tight">Definições da conta</span>
+                    <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">Partilhar a conta</span>
                 </span>
             </a>
-            @endcan
             <div class="px-6 py-2.5 border-t border-ink-soft/15 flex items-center justify-between gap-2">
                 <span class="font-mono text-xs text-ink-faint truncate" title="{{ auth()->user()?->email }}">
                     {{ auth()->user()?->email }}
@@ -207,7 +205,8 @@
         </aside>
 
         {{-- ============ Content ============ --}}
-        <main class="flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0">
+        {{-- the customer pages (account, Imoplanta) are light, like the public site --}}
+        <main @class(['flex-1 min-w-0 overflow-x-hidden pt-14 lg:pt-0', 'claro' => request()->routeIs('conta*', 'imoplanta*')])>
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
                 {{ $slot }}
             </div>

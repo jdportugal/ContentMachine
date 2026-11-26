@@ -291,7 +291,7 @@ class ImoplantaTest extends TestCase
         $this->assertSame(Imoplanta::A_LER, $p->refresh()->estado);
         $this->assertSame(9, $u->imoveisImoplantaDisponiveis());
         $this->get('/plantas')->assertSee('imóveis disponíveis');               // the count in the top bar
-        $this->get(route('imoplanta'))->assertSee('imóveis disponíveis')->assertDontSee('Compre imóveis Imoplanta');   // packs only at 0, like the videos
+        $this->get(route('imoplanta'))->assertSee('IMÓVEIS<br>DISPONÍVEIS', false)->assertDontSee('Compre imóveis Imoplanta');   // packs only at 0, like the videos
         Livewire::test(\App\Livewire\Imoplanta\Comecar::class)->set('plano', 'inventado')->set('nome', 'Outra')
             ->set('plantas', [UploadedFile::fake()->image('p.png')])->call('enviar')->assertRedirect();   // with credit: straight to the editor
     }
@@ -327,7 +327,9 @@ class ImoplantaTest extends TestCase
         $u = User::factory()->cliente()->create();
         DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_v', 'total' => 10000, 'videos' => 10, 'created_at' => now(), 'updated_at' => now()]);   // video credits don't count
 
-        Livewire::actingAs($u)->test(Lista::class)->assertSee('Compre imóveis Imoplanta')
+        // not bought yet: what Imoplanta is, the five steps and the packs; no upload form
+        Livewire::actingAs($u)->test(Lista::class)->assertSee('Da planta ao vídeo do imóvel')->assertSee('Cinco passos, do papel ao vídeo')
+            ->assertSee('Comprar 1 imóvel')->assertSee('imoplanta-demo/landing/capa.gif')->assertDontSee('Criar modelo 3D')
             ->set('nome', 'Casa')->set('plantas', [UploadedFile::fake()->image('planta.png')])->call('criar')->assertHasErrors('plantas');
 
         $this->assertSame(0, Imoplanta::count());

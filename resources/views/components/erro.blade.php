@@ -14,7 +14,7 @@
                     <a href="{{ route('video') }}#pedido" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-coral text-navy text-[16px] font-semibold hover:brightness-105">Pedir o vídeo grátis →</a>
                     <a href="{{ url('/') }}" class="inline-flex items-center min-h-[56px] px-8 rounded-full border border-ivory/35 text-ivory text-[16px] hover:bg-ivory/5">Página inicial</a>
                 </div>
-                <p class="mt-10 text-sm text-[#8B95A7]">Precisa de ajuda? <a href="mailto:{{ config('mail.from.address') }}" class="text-ivory underline underline-offset-2">{{ config('mail.from.address') }}</a></p>
+                <p class="mt-10 text-sm text-[#8B95A7]">Precisa de ajuda? <a href="mailto:info@imocena.com" class="text-ivory underline underline-offset-2">info@imocena.com</a></p>
             </div>
         </section>
     </main>

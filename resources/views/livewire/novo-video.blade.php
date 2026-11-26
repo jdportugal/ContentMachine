@@ -12,7 +12,7 @@
     <p class="mt-2 text-sm text-[#C9CED6]">{{ $semLink ? 'Sem link: junte as fotos e os vídeos do imóvel, a descrição e os seus dados.' : 'Só o link é obrigatório. O resto é para o vídeo ficar como quer.' }}</p>
 
     {{-- Link or own files --}}
-    <div class="mt-6 grid grid-cols-2 gap-1 p-1 rounded-full border border-ivory/15 bg-navy" role="tablist">
+    <div class="mt-6 grid grid-cols-2 gap-1 p-1 rounded-full border border-[#E4E1DA] bg-white" role="tablist">
         <button type="button" role="tab" aria-selected="{{ $semLink ? 'false' : 'true' }}" wire:click="mudarModo('link')"
                 class="min-h-[48px] rounded-full px-3 text-[14px] font-medium {{ $semLink ? 'text-[#C9CED6]' : 'bg-cyan text-navy' }}">Tenho o link</button>
         <button type="button" role="tab" aria-selected="{{ $semLink ? 'true' : 'false' }}" wire:click="mudarModo('ficheiros')"
@@ -27,7 +27,7 @@
         <section class="flex flex-col gap-4">
             {!! $passo(1, 'O anúncio', 'RE/MAX, iad Portugal, eXp Portugal, KW Portugal, Century 21, Predimed, Bússola Haus ou My Best Houses. Lemos as fotos, o preço e a descrição.') !!}
             <input type="url" wire:model="anuncio" inputmode="url" placeholder="Cole aqui o link do anúncio"
-                   class="w-full min-h-[56px] rounded-[14px] bg-navy border border-ivory/20 px-4 text-[16px] text-ivory placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
+                   class="w-full min-h-[56px] rounded-[14px] bg-white border border-[#D9D5CC] px-4 text-[16px] text-navy placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
             @error('anuncio') <p class="text-sm text-coral">{{ $message }}</p> @enderror
         </section>
 
@@ -86,7 +86,7 @@
                 <span wire:loading wire:target="sugerirTexto">A escrever o texto… (uns segundos)</span>
             </button>
                 <textarea wire:model="narracao" rows="8" maxlength="1500" placeholder="Ex.: Moradia T3 em Lajeosa, com jardim e vista para a serra…"
-                          class="w-full rounded-[14px] bg-navy border border-ivory/20 p-4 text-[16px] leading-relaxed text-ivory placeholder:text-[#7C8696] focus:border-cyan focus:outline-none"></textarea>
+                          class="w-full rounded-[14px] bg-white border border-[#D9D5CC] p-4 text-[16px] leading-relaxed text-navy placeholder:text-[#7C8696] focus:border-cyan focus:outline-none"></textarea>
                 <div class="flex justify-between text-xs text-[#AEB5C1]" x-data><span>Cerca de 1 minuto no máximo. Termine com o seu contacto.</span><span x-text="$wire.narracao.length + ' / 1500'"></span></div>
             @elseif ($narrador === 'gravo')
                 @include('livewire.partials.novo-video-gravar')
@@ -139,7 +139,7 @@
     </form>
 
     {{-- Create bar, fixed at the bottom --}}
-    <div class="fixed inset-x-0 bottom-0 z-20 border-t border-ivory/10 bg-navy/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+    <div class="fixed inset-x-0 lg:left-72 bottom-0 z-20 border-t border-[#E4E1DA] bg-[#F6F4EF]/95 backdrop-blur px-4 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
         <div class="max-w-[760px] mx-auto flex flex-col gap-2">
             @if ($creditos > 0)
                 <button type="button" wire:click="criar" wire:loading.attr="disabled" wire:target="criar,novas,ficheiroMusica,fotoConsultor,vozGravada"
