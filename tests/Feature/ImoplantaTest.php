@@ -867,6 +867,46 @@ class ImoplantaTest extends TestCase
         $this->assertSame(1, collect(Http::recorded())->filter(fn ($x) => str_contains($x[0]->url(), 'createTask') && str_contains($x[0]['input']['prompt'], 'FINISHES BOARD'))->count());
     }
 
+    public function test_the_top_view_prompt_lists_each_room_where_it_is_and_only_its_pieces(): void
+    {
+        Queue::fake();
+        $u = User::factory()->cliente()->create();
+        $p = $this->imovel($u, ['estado' => Imoplanta::IMAGENS]);
+        $salas = [
+            ['uso' => 'circulacao', 'nome' => 'Hall', 'x' => [10, 30], 'y' => [5, 60], 'itens' => ['runner rug', 'potted plant']],
+            ['uso' => 'quarto', 'nome' => 'Quarto <b>1</b>', 'x' => [30, 70], 'y' => [5, 50], 'itens' => ['double bed', 'bedside table', 'bedside table', 'wardrobe']],
+            ['uso' => 'arrumos', 'nome' => '', 'x' => [70, 90], 'y' => [0, 20], 'itens' => []],
+            ['uso' => 'sala', 'x' => 'nope', 'y' => [0, 1], 'itens' => []],   // malformed: dropped
+        ];
+        $this->actingAs($u)->post(route('imoplanta.aereo', $p->id), ['render' => $this->png(), 'salas' => json_encode($salas)])->assertOk();
+        $guardadas = json_decode($p->refresh()->aereo(0, 'salas'), true);
+        $this->assertCount(3, $guardadas);
+        $this->assertSame('Quarto 1', $guardadas[1]['nome']);
+
+        $prompt = app(Fotografo::class)->promptPlanta('apartamento', 'oak floors', false, [], $guardadas);
+        $this->assertStringContainsString('- hallway, from 10% to 30% across and 5% to 60% down the image: runner rug, potted plant.', $prompt);
+        $this->assertStringContainsString('double bed, 2 × bedside table, wardrobe.', $prompt);
+        $this->assertStringContainsString('storage room, from 70% to 90% across and 0% to 20% down the image: nothing (bare floor).', $prompt);
+        $this->assertStringContainsString('ADD NOTHING', $prompt);
+        $this->assertStringNotContainsString('THE ROOMS on this floor:', $prompt);
+        $this->assertNull(Imoplantas::salasTopo('not json'));
+    }
+
+    public function test_furniture_drawn_on_the_plan_is_kept_with_its_room(): void
+    {
+        $casa = ImoplantaCasa::normalizar(['niveis' => [[
+            'paredes' => [['de' => [0, 0], 'a' => [4, 0]]],
+            'divisoes' => [
+                ['nome' => 'Quarto', 'uso' => 'quarto', 'poligono' => [[0, 0], [4, 0], [4, 3], [0, 3]],
+                    'moveis' => [['tipo' => 'roupeiro', 'poligono' => [[0, 0], [1.6, 0], [1.6, 0.6], [0, 0.6]]], ['tipo' => 'piano', 'poligono' => [[2, 2], [3, 2], [3, 3]]], ['tipo' => 'cama']]],
+                ['nome' => 'Hall', 'uso' => 'hall', 'poligono' => [[0, 3], [4, 3], [4, 4]]],
+            ],
+        ]]]);
+        $d = $casa['niveis'][0]['divisoes'];
+        $this->assertSame(['roupeiro', 'outro'], array_column($d[0]['moveis'], 'tipo'));   // unknown kind → outro, no footprint → dropped
+        $this->assertArrayNotHasKey('moveis', $d[1]);
+    }
+
     public function test_the_top_view_reference_is_made_once_from_the_browser_render_and_sent_with_every_photo(): void
     {
         Queue::fake();

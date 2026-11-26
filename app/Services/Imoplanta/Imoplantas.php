@@ -579,22 +579,54 @@ class Imoplantas
     }
 
     /**
+     * The browser's room list for a top view, kept to what the prompt uses: per room its use, name, extent in the
+     * picture (% from the left and from the top) and its pieces (short texts). Null when it isn't that.
+     */
+    public static function salasTopo(mixed $json): ?string
+    {
+        $salas = is_string($json) && strlen($json) < 60000 ? json_decode($json, true) : null;
+        if (! is_array($salas) || ! array_is_list($salas)) {
+            return null;
+        }
+        $pct = fn ($a) => is_array($a) && count($a) === 2 && is_numeric($a[0]) && is_numeric($a[1])
+            ? [max(0, min(100, (int) $a[0])), max(0, min(100, (int) $a[1]))] : null;
+        $limpas = [];
+        foreach (array_slice($salas, 0, 60) as $s) {
+            if (! is_array($s) || ! ($x = $pct($s['x'] ?? null)) || ! ($y = $pct($s['y'] ?? null))) {
+                continue;
+            }
+            $limpas[] = [
+                'uso' => in_array($s['uso'] ?? '', ImoplantaCasa::USOS, true) ? $s['uso'] : 'outro',
+                'nome' => mb_substr(strip_tags((string) ($s['nome'] ?? '')), 0, 60),
+                'x' => $x, 'y' => $y,
+                'itens' => array_values(array_map(fn ($i) => mb_substr(preg_replace('/[^\pL\pN ,.\-]/u', '', (string) $i), 0, 80),
+                    array_filter(array_slice((array) ($s['itens'] ?? []), 0, 30), 'is_string'))),
+            ];
+        }
+
+        return $limpas ? json_encode($limpas, JSON_UNESCAPED_UNICODE) : null;
+    }
+
+    /**
      * Stores the browser's top-view render of one storey (its realistic 3D floor plan's starting point), once,
      * and queues that floor plan straight away, so it is ready (or being made) before the photos need it.
+     * $salas: the browser's JSON of where each room is in the render and what it holds (Fotografo::promptPlanta).
      */
-    public function receberAereo(Imoplanta $p, UploadedFile $png, int $nivel): bool
+    public function receberAereo(Imoplanta $p, UploadedFile $png, int $nivel, mixed $salas = null): bool
     {
+        $salas = self::salasTopo($salas);
         $disco = config('contentmachine.imoplanta.disk');
         if (! in_array($p->estado, [Imoplanta::REFERENCIAS, Imoplanta::IMAGENS], true) || ! in_array($nivel, $p->niveisComPlanta(), true)) {
             return false;
         }
         $caminho = $png->storeAs($p->pasta().'/renders', 'aereo-'.$nivel.'-'.Str::random(8).'.png', $disco);
-        $ok = DB::transaction(function () use ($p, $nivel, $caminho, $disco) {
+        $ok = DB::transaction(function () use ($p, $nivel, $caminho, $disco, $salas) {
             $atual = Imoplanta::whereKey($p->id)->lockForUpdate()->first();
             if (($r = $atual->aereo($nivel, 'render')) && Storage::disk($disco)->exists($r)) {
                 return false;
             }
             $atual->guardarAereo($nivel, 'render', $caminho);
+            $atual->guardarAereo($nivel, 'salas', $salas);
             $atual->guardarAereo($nivel, 'estado', 'a_fazer');
 
             return true;

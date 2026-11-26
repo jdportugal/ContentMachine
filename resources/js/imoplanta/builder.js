@@ -107,10 +107,11 @@ function maiorRetangulo(p) {
 }
 /** What sits on one side of a room (k = 0: side along s at o = fixo; 1: along o at s = fixo), in local coordinates:
  * mau = metres of doors/glazing (x3), windows (x1) and missing wall (x3); t = the wall's thickness;
- * vaos = its openings, x1..x2 measured along the side from its centre. */
+ * vaos = its openings, x1..x2 measured along the side from its centre, plus the stretches with no wall at all
+ * (tipo 'aberto': open plan, or where an L-shaped room goes on); interior = only inner walls on it. */
 function ocupacao(k, fixo, a, b, paredes, loc) {
-    let coberto = 0, mau = 0, t = 0.12;
-    const vaos = [], c = (a + b) / 2;
+    let coberto = 0, mau = 0, t = 0.12, ext = 0;
+    const vaos = [], c = (a + b) / 2, trechos = [];
     for (const w of paredes) {
         const A = loc(w.de), B = loc(w.a), L = Math.hypot(B[0] - A[0], B[1] - A[1]);
         if (L < 0.05 || Math.abs(A[1 - k] - fixo) > 0.3 || Math.abs(B[1 - k] - fixo) > 0.3) continue;
@@ -118,6 +119,8 @@ function ocupacao(k, fixo, a, b, paredes, loc) {
         const ov = sob(A[k], B[k]);
         if (ov < 0.05) continue;
         coberto += ov;
+        if (w.exterior !== false) ext += ov;
+        trechos.push([Math.max(Math.min(A[k], B[k]), a), Math.min(Math.max(A[k], B[k]), b)]);
         t = Math.max(t, num(w.espessura, w.exterior === false ? 0.12 : 0.3));
         for (const o of w.aberturas || []) {
             const x = (s) => A[k] + (B[k] - A[k]) * s / L, p1 = x(o.pos), p2 = x(o.pos + o.largura), v = sob(p1, p2);
@@ -126,7 +129,12 @@ function ocupacao(k, fixo, a, b, paredes, loc) {
             vaos.push({ x1: Math.min(p1, p2) - c, x2: Math.max(p1, p2) - c, tipo: o.tipo, topo: num(o.peitoril, 0) + num(o.altura, 2.1) });
         }
     }
-    return { mau: mau + 3 * Math.max(0, b - a - coberto), t, vaos };
+    let fim = a;
+    for (const [x1, x2] of [...trechos.sort((p, q) => p[0] - q[0]), [b, b]]) {
+        if (x1 - fim >= 0.6) vaos.push({ x1: fim - c, x2: x1 - c, tipo: 'aberto', topo: 3 });
+        fim = Math.max(fim, x2);
+    }
+    return { mau: mau + 3 * Math.max(0, b - a - coberto), t, vaos, interior: coberto > 0.5 * (b - a) && ext < 0.05 };
 }
 
 /** The house's bounding box in plan metres [u1, v1, u2, v2] (walls only), as ImoplantaCasa::limites(). */
@@ -276,9 +284,16 @@ export function buildCasa(casa, opts = {}) {
 
     // ---------- low-poly furniture by room use, square to the room and backed against its quietest wall ----------
     // Room frame: its longest edge (plans are often drawn rotated). The room's largest rectangle in that frame
-    // holds the furniture; each side is scored by what sits on it (doors, glazing, windows, no wall at all)
-    // and the bed head, the sofa back and the kitchen run go against the least busy side that fits.
-    const mobilar = (div, z, paredes) => {
+    // holds the furniture; each side is scored by what sits on it (doors, glazing, windows, no wall at all).
+    // Furniture drawn on the plan (div.moveis) goes first, where it is drawn. Then, per room: a bedroom's wardrobe
+    // on an inner wall clear of windows, then the bed (an inner wall first); a living room's TV and the sofa facing
+    // it, then the dining table, each only where a way through the room stays open.
+    // Every room's list of pieces is kept (salas) for the top-view prompt: the AI makes those real and adds nothing.
+    const salas = [];
+    const mobilar = (div, z, paredes, nv) => {
+        const sala = { nivel: nv, uso: div.uso, nome: div.nome || '', poligono: div.poligono, itens: [], pecas: [] };
+        salas.push(sala);
+        const item = (nome) => sala.itens.push(nome);
         const poly = div.poligono, n = poly.length;
         let L0 = 0, e = [1, 0];
         poly.forEach((a, i) => {
@@ -286,45 +301,117 @@ export function buildCasa(casa, opts = {}) {
             if (L > L0) { L0 = L; e = [(b[0] - a[0]) / L, (b[1] - a[1]) / L]; }
         });
         const loc = (p) => [p[0] * e[0] + p[1] * e[1], -p[0] * e[1] + p[1] * e[0]];   // (along e, across e)
+        const mundo = (sl, ol) => [sl * e[0] - ol * e[1], sl * e[1] + ol * e[0]];
         const r = maiorRetangulo(poly.map(loc));
         if (!r) return;
         const [s1, o1, s2, o2] = r;
         // sides: along s at o = o1 / o2, along o at s = s1 / s2; dentro = the way into the room
         const lados = [[0, o1, s1, s2, 1], [0, o2, s1, s2, -1], [1, s1, o1, o2, 1], [1, s2, o1, o2, -1]]
             .map(([k, fixo, a, b, dentro]) => ({ k, fixo, a, b, dentro, len: b - a, fundo: k ? s2 - s1 : o2 - o1, ...ocupacao(k, fixo, a, b, paredes, loc) }));
+        const oposto = (l) => lados.find((o) => o.k === l.k && o !== l);
         const lado = (ok) => lados.filter(ok).sort((x, y) => x.mau - y.mau || y.len - x.len)[0];
-        const ocupado = [];   // footprints [s1, o1, s2, o2] of what stands on the floor (and the doors' swing)
+        const ocupado = [];   // footprints [s1, o1, s2, o2] of what stands on the floor, and the floor kept clear to use it
+        const solidos = [];   // only what stands on the floor (the way through is checked around these)
         // a piece in a side's frame: x along the side from its centre, y from the wall face into the room
         const rect = (l, x1, x2, y1, y2) => {
             const c = (l.a + l.b) / 2, q = l.fixo + l.dentro * (l.t / 2 + 0.02), p1 = q + l.dentro * y1, p2 = q + l.dentro * y2;
             const [m1, m2] = [Math.min(p1, p2), Math.max(p1, p2)];
             return l.k === 0 ? [c + x1, m1, c + x2, m2] : [m1, c + x1, m2, c + x2];
         };
+        /** A footprint [s1, o1, s2, o2] in a side's frame: [x1, x2, y1, y2] (rect's inverse). */
+        const noLado = (l, q) => {
+            const c = (l.a + l.b) / 2, f = l.fixo + l.dentro * (l.t / 2 + 0.02);
+            const [xa, xb, ya, yb] = l.k === 0 ? [q[0], q[2], q[1], q[3]] : [q[1], q[3], q[0], q[2]];
+            const [y1, y2] = [(ya - f) * l.dentro, (yb - f) * l.dentro];
+            return [xa - c, xb - c, Math.min(y1, y2), Math.max(y1, y2)];
+        };
+        /** The same side seen from a line y metres into the room, facing back at it: a free-standing piece's back. */
+        const virado = (l, y) => ({ ...l, dentro: -l.dentro, fixo: l.fixo + l.dentro * (l.t / 2 + 0.02 + y), t: -0.04, vaos: [] });
         const caixaLocal = ([a, b, c, d], za, zb, m) => caixaOrientada([0, 0], e, a, c, b, d, za, zb, m);
-        const peca = (l, x1, x2, y1, y2, za, zb, m) => { const q = rect(l, x1, x2, y1, y2); ocupado.push(q); caixaLocal(q, za, zb, m); };
+        const peca = (l, x1, x2, y1, y2, za, zb, m) => { const q = rect(l, x1, x2, y1, y2); ocupado.push(q); solidos.push(q); caixaLocal(q, za, zb, m); };
         const enfeite = (l, x1, x2, y1, y2, za, zb, m) => caixaLocal(rect(l, x1, x2, y1, y2), za, zb, m);   // on the wall / a rug: not in the way
         const espelho = (l, x1, x2, ...resto) => { peca(l, x1, x2, ...resto); peca(l, -x2, -x1, ...resto); };
         const livre = (q) => q[0] >= s1 - 0.01 && q[2] <= s2 + 0.01 && q[1] >= o1 - 0.01 && q[3] <= o2 + 0.01
             && !ocupado.some((o) => q[0] < o[2] && q[2] > o[0] && q[1] < o[3] && q[3] > o[1]);
         const semVao = (l, x1, x2) => !l.vaos.some((v) => v.x1 < x2 && v.x2 > x1);
+        /** How far from a side's end (fim -1: at a, 1: at b) the inner face of the wall across it is. */
+        const margem = (l, fim) => { const o = lados.find((x) => x.k !== l.k && Math.abs(x.fixo - (fim < 0 ? l.a : l.b)) < 1e-6); return (o ? Math.max(0.06, o.t / 2) : 0.06) + 0.02; };
         /**
          * First free spot for a w x d piece against a wall, least busy walls first, from each wall's middle out.
          * frente: the floor kept clear in front of it to use it (open a wardrobe, sit at a desk); that strip is
-         * reserved too, so nothing placed later stands in front of it.
+         * reserved too, so nothing placed later stands in front of it. ok(l, x) can turn a spot down.
          */
         const encaixar = (w, d, ok = () => true, frente = 0) => {
             for (const l of [...lados].sort((x, y) => x.mau - y.mau)) {
                 const m = l.len / 2 - 0.12 - w / 2;
-                if (m < 0 || l.fundo < d + Math.max(0.4, frente) || !ok(l)) continue;
+                if (m < 0 || l.fundo < d + Math.max(0.4, frente)) continue;
                 for (let off = 0; off <= m + 1e-6; off += 0.1) for (const x of off ? [off, -off] : [0]) {
-                    if (!livre(rect(l, x - w / 2, x + w / 2, 0, d + frente))) continue;
+                    if (!ok(l, x) || !livre(rect(l, x - w / 2, x + w / 2, 0, d + frente))) continue;
                     if (frente) ocupado.push(rect(l, x - w / 2, x + w / 2, d, d + frente));
                     return { l, x };
                 }
             }
             return null;
         };
-        const mundo = (sl, ol) => [sl * e[0] - ol * e[1], sl * e[1] + ol * e[0]];
+
+        // ---- the way through: a person (0.6 m wide) on a 10 cm grid must still get from every way in to every other
+        const G = 0.1, NS = Math.max(1, Math.round((s2 - s1) / G)), NO = Math.max(1, Math.round((o2 - o1) / G));
+        const andavel = (extra) => {
+            const sol = [...solidos, ...extra].map(([a, b, c, d]) => [a - 0.28, b - 0.28, c + 0.28, d + 0.28]), ok = new Uint8Array(NS * NO);
+            for (let i = 0; i < NS; i++) for (let j = 0; j < NO; j++) {
+                const s = s1 + (i + 0.5) * G, o = o1 + (j + 0.5) * G;
+                ok[i * NO + j] = s > s1 + 0.25 && s < s2 - 0.25 && o > o1 + 0.25 && o < o2 - 0.25 && !sol.some((q) => s > q[0] && s < q[2] && o > q[1] && o < q[3]) ? 1 : 0;
+            }
+            return ok;
+        };
+        // each way in: a door's middle, or every 0.3 m along an open side (any of them will do), 0.45 m into the room
+        const celula = (q) => Math.min(NS - 1, Math.max(0, Math.floor((q[0] - s1) / G))) * NO + Math.min(NO - 1, Math.max(0, Math.floor((q[1] - o1) / G)));
+        const entradas = lados.flatMap((l) => l.vaos.filter((v) => v.tipo !== 'janela').map((v) => {
+            const xs = v.tipo === 'aberto' ? Array.from({ length: Math.max(1, Math.floor((v.x2 - v.x1) / 0.3)) }, (_, i) => v.x1 + 0.15 + i * 0.3) : [(v.x1 + v.x2) / 2];
+            return xs.map((x) => celula(rect(l, x, x, 0.45, 0.45)));
+        }));
+        let base = null;   // the ways in that are open before the pieces being placed
+        const passa = (extra = []) => {
+            const ok = andavel(extra), alvo = entradas.filter((c) => c.some((k) => base[k])).map((c) => c.filter((k) => ok[k]));
+            if (alvo.some((c) => !c.length)) return false;
+            if (alvo.length < 2) return true;
+            const visto = new Uint8Array(NS * NO), fila = [...alvo[0]];
+            for (const k of fila) visto[k] = 1;
+            for (let h = 0; h < fila.length; h++) {
+                const i = Math.floor(fila[h] / NO), j = fila[h] % NO;
+                for (const [a, b] of [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]]) {
+                    const k = a * NO + b;
+                    if (a < 0 || b < 0 || a >= NS || b >= NO || visto[k] || !ok[k]) continue;
+                    visto[k] = 1;
+                    fila.push(k);
+                }
+            }
+            return alvo.every((c) => c.some((k) => visto[k]));
+        };
+
+        // ---- the pieces (x along a side from its centre, y from its wall face into the room)
+        const cama = (l, x, bw, bl, y = 0) => {
+            peca(l, x - bw / 2 - 0.05, x + bw / 2 + 0.05, y, y + 0.06, z, z + 1.0, 'nogueira');              // headboard
+            peca(l, x - bw / 2, x + bw / 2, y + 0.06, y + bl, z, z + 0.42, 'nogueira');
+            enfeite(l, x - bw / 2 + 0.02, x + bw / 2 - 0.02, y + 0.08, y + bl - 0.02, z + 0.42, z + 0.6, 'linho');
+            enfeite(l, x - bw / 2 + 0.03, x + bw / 2 - 0.03, y + 0.1, y + 0.55, z + 0.6, z + 0.7, 'linho');      // pillows
+            enfeite(l, x - bw / 2 - 0.02, x + bw / 2 + 0.02, y + bl * 0.62, y + bl + 0.02, z + 0.43, z + 0.62, 'tapete');   // throw
+            item(bw >= 1.3 ? 'double bed' : 'single bed');
+        };
+        const roupeiro = (l, x1, x2, y1 = 0, y2 = 0.6) => { peca(l, x1, x2, y1, y2, z, z + 2.2, 'lacado'); item('wardrobe'); };
+        const sofa = (l, x, w = 2.2, d = 0.92, y = 0) => {
+            const h = w / 2;
+            peca(l, x - h, x + h, y, y + d, z, z + 0.42, 'tecido');                                            // seat
+            enfeite(l, x - h, x + h, y, y + 0.22, z + 0.42, z + 0.82, 'tecido');                              // back
+            for (const sx of [-1, 1]) enfeite(l, x + sx * (h - 0.09) - 0.09, x + sx * (h - 0.09) + 0.09, y + 0.22, y + d, z + 0.42, z + 0.6, 'tecido');   // arms
+            for (const sx of [-1, 1]) enfeite(l, x + sx * h * 0.59 - 0.2, x + sx * h * 0.59 + 0.2, y + 0.25, y + 0.4, z + 0.6, z + 0.95, 'linho');      // cushions
+            item('sofa');
+        };
+        const tv = (l, x, y = 0, w = 1.8) => {
+            peca(l, x - w / 2, x + w / 2, y, y + 0.42, z, z + 0.5, 'nogueira');
+            enfeite(l, x - 0.6, x + 0.6, y, y + 0.05, z + 0.85, z + 1.55, 'vidro_vizinho');
+            item('TV unit with a flat TV');
+        };
         const cadeira = (l, x, y, costas) => {   // seat centred at (x, y); its back on the y side given by costas (+1 / -1)
             peca(l, x - 0.22, x + 0.22, y - 0.22, y + 0.22, z, z + 0.46, 'tecido');
             enfeite(l, x - 0.22, x + 0.22, y + costas * 0.17, y + costas * 0.22, z + 0.46, z + 0.9, 'tecido');
@@ -337,7 +424,11 @@ export function buildCasa(casa, opts = {}) {
                 cadeira(l, cx, y - d / 2 - 0.3, -1);
                 cadeira(l, cx, y + d / 2 + 0.3, 1);
             }
+            item(`table with ${2 * n} chairs`);
         };
+        // a table and its chairs as one block, and that block with room to pull the chairs out
+        const mesaBloco = (l, x, y, w, d) => rect(l, x - w / 2, x + w / 2, y - d / 2 - 0.52, y + d / 2 + 0.52);
+        const mesaZona = (l, x, y, w, d) => rect(l, x - w / 2 - 0.1, x + w / 2 + 0.1, y - d / 2 - 0.75, y + d / 2 + 0.75);
         const planta = () => {                    // a potted plant in the first free corner
             for (const [a, b] of [[s1, o1], [s2, o1], [s2, o2], [s1, o2]]) {
                 const cs = a + (a === s1 ? 0.38 : -0.38), co = b + (b === o1 ? 0.38 : -0.38), q = [cs - 0.25, co - 0.25, cs + 0.25, co + 0.25];
@@ -346,108 +437,260 @@ export function buildCasa(casa, opts = {}) {
                 const [u, v] = mundo(cs, co);
                 cilindro(u, v, z, z + 0.42, 0.19, 'vaso', 10);
                 bola(u, v, z + 0.95, 0.36, 1.5, 'folha');
+                item('potted plant');
                 return;
             }
         };
-        const quadro = (l, x, zc, w = 0.9) => { if (l && l.len >= w + 0.4 && semVao(l, x - w / 2, x + w / 2)) enfeite(l, x - w / 2, x + w / 2, 0, 0.03, zc, zc + 0.6, 'quadro'); };
+        const quadro = (l, x, zc, w = 0.9) => {
+            if (l && l.len >= w + 0.4 && semVao(l, x - w / 2, x + w / 2)) { enfeite(l, x - w / 2, x + w / 2, 0, 0.03, zc, zc + 0.6, 'quadro'); item('framed picture on the wall'); }
+        };
         const cortinas = () => {                  // a drape either side of each window and glass door
+            let k = 0;
             for (const l of lados) for (const v of l.vaos) {
                 if (v.tipo !== 'janela' && v.tipo !== 'envidracado') continue;
                 for (let [x1, x2] of [[v.x1 - 0.32, v.x1 - 0.03], [v.x2 + 0.03, v.x2 + 0.32]]) {
                     [x1, x2] = [Math.max(x1, -l.len / 2 + 0.08), Math.min(x2, l.len / 2 - 0.08)];
-                    if (x2 - x1 > 0.1) enfeite(l, x1, x2, 0.02, 0.1, z + 0.02, z + Math.min(2.6, v.topo + 0.25), 'cortina');
+                    if (x2 - x1 > 0.1) { enfeite(l, x1, x2, 0.02, 0.1, z + 0.02, z + Math.min(2.6, v.topo + 0.25), 'cortina'); k++; }
                 }
             }
+            if (k) item('curtains at the windows');
         };
-        const tapete = (w, d) => {                // a rug in the middle, w along the room's long axis
+        const tapete = (w, d, nome = 'rug') => {  // a rug in the middle, w along the room's long axis
             const cs = (s1 + s2) / 2, co = (o1 + o2) / 2, [hs, ho] = s2 - s1 >= o2 - o1 ? [w / 2, d / 2] : [d / 2, w / 2];
-            if (s2 - s1 > 2 * hs + 0.4 && o2 - o1 > 2 * ho + 0.4) caixaLocal([cs - hs, co - ho, cs + hs, co + ho], z, z + 0.012, 'tapete');
+            if (w > 0.3 && s2 - s1 > 2 * hs + 0.4 && o2 - o1 > 2 * ho + 0.4) { caixaLocal([cs - hs, co - ho, cs + hs, co + ho], z, z + 0.012, 'tapete'); item(nome); }
         };
-        // keep the doors' swing clear
-        for (const l of lados) for (const v of l.vaos) if (v.tipo !== 'janela') ocupado.push(rect(l, v.x1 - 0.05, v.x2 + 0.05, 0, 0.9));
+        // keep the doors' swing clear, and a short open side (a doorway with no door); a long one is the room running
+        // on into the next, kept passable by the way-through check instead
+        for (const l of lados) for (const v of l.vaos) {
+            if (v.tipo !== 'janela' && (v.tipo !== 'aberto' || v.x2 - v.x1 < 2)) ocupado.push(rect(l, v.x1 - 0.05, v.x2 + 0.05, 0, v.tipo === 'aberto' ? 0.6 : 0.9));
+        }
         const longo = Math.max(s2 - s1, o2 - o1);
+
+        // ---- furniture drawn on the plan: where it is drawn, backed against the nearest wall (a bed: its head)
+        const desenhado = new Set();
+        for (const m of div.moveis || []) {
+            if (!m.poligono || m.poligono.length < 3) continue;
+            const q = bbox(m.poligono.map(loc)), deitada = m.tipo === 'cama';
+            let melhor = null;
+            for (const l of lados) {
+                const [x1, x2, y1, y2] = noLado(l, q), ok = deitada ? x2 - x1 <= y2 - y1 + 0.05 : x2 - x1 >= y2 - y1 - 0.05;
+                const custo = Math.max(0, y1) + (ok ? 0 : 100);
+                if (!melhor || custo < melhor.custo) melhor = { l, x1, x2, y1, y2, custo };
+            }
+            const { l, x1, x2, y2 } = melhor, y = Math.max(0, melhor.y1), x = (x1 + x2) / 2, w = x2 - x1, d = y2 - y;
+            if (w < 0.2 || d < 0.2) continue;
+            desenhado.add(m.tipo);
+            if (m.tipo === 'cama') cama(l, x, w, d, y);
+            else if (m.tipo === 'roupeiro') roupeiro(l, x1, x2, y, y2);
+            else if (m.tipo === 'sofa') sofa(l, x, w, Math.min(d, 1.1), y);
+            else if (m.tipo === 'tv') tv(l, x, y, Math.max(1.0, w));
+            else if (m.tipo === 'mesa') {
+                const td = d > 1.3 ? d - 1.04 : d;   // drawn with its chairs, or the table alone
+                mesa(l, x, y + d / 2, d > 1.3 ? w : w, Math.max(0.6, td), Math.max(1, Math.floor(w / 0.6)));
+            } else if (m.tipo === 'bancada') {
+                peca(l, x1, x2, y, y2, z, z + 0.86, 'lacado');
+                enfeite(l, x1 - 0.01, x2 + 0.01, y, y2 + 0.03, z + 0.86, z + 0.9, 'ceramica');
+                item('run of kitchen units with worktop');
+            } else if (m.tipo === 'banheira') { peca(l, x1, x2, y, y2, z, z + 0.55, 'ceramica'); item('bathtub'); }
+            else if (m.tipo === 'duche') {
+                peca(l, x1, x2, y, y2, z, z + 0.05, 'ceramica');
+                enfeite(l, x1, x2, y2 - 0.01, y2, z + 0.05, z + 2.0, 'vidro');
+                item('shower with a glass screen');
+            } else if (m.tipo === 'sanita') {
+                peca(l, x - 0.2, x + 0.2, y, y + 0.18, z, z + 0.8, 'ceramica');
+                peca(l, x - 0.18, x + 0.18, y + 0.18, Math.max(y + 0.5, y2), z, z + 0.4, 'ceramica');
+                item('toilet');
+            } else if (m.tipo === 'lavatorio') {
+                peca(l, x1, x2, y, y2, z + 0.3, z + 0.8, 'nogueira');
+                enfeite(l, x1 - 0.01, x2 + 0.01, y, y2 + 0.04, z + 0.8, z + 0.85, 'ceramica');
+                enfeite(l, x1 + 0.05, x2 - 0.05, y, y + 0.02, z + 1.1, z + 1.9, 'vidro_vizinho');
+                item('washbasin with a mirror');
+            } else { peca(l, x1, x2, y, y2, z, z + 0.75, 'nogueira'); item('cabinet'); }
+        }
+        const temWc = ['banheira', 'duche', 'sanita', 'lavatorio'].some((t) => desenhado.has(t));
+        base = andavel([]);
 
         if (div.uso === 'quarto') {
             const casal = Math.min(s2 - s1, o2 - o1) >= 2.7, bw = casal ? 1.6 : 0.9, bl = casal ? 2.0 : 1.9;
-            const zonaCama = (l) => rect(l, -bw / 2 - 0.6, bw / 2 + 0.6, 0.06, bl + 0.7);   // the bed and room to get in and round its foot
-            // the bed's wall: the least busy one that still leaves a wardrobe a place with its doors free
-            const paredes = lados.filter((x) => x.len >= bw + 0.5 && x.fundo >= bl + 0.7).sort((x, y) => x.mau - y.mau || y.len - x.len);
-            const temRoupeiro = (l) => {
-                const n = ocupado.length;
-                ocupado.push(zonaCama(l));
-                const ok = [1.6, 1.2, 0.9].some((ww) => encaixar(ww, 0.6, () => true, 0.8));
-                ocupado.length = n;
-                return ok;
+            const porMau = [...lados].sort((x, y) => x.mau - y.mau || y.len - x.len);
+            // the bed: head against a wall, its foot and at least one side free to get in; first on an inner wall
+            // with room on both sides, never under a window while another wall will do
+            const lugarCama = () => {
+                for (const [nivel, [interior, ambos, janela]] of [[true, true, false], [false, true, false], [true, false, false], [false, false, false], [false, false, true]].entries()) {
+                    for (const l of porMau) {
+                        if (interior && !l.interior) continue;
+                        const m = l.len / 2 - Math.max(margem(l, -1), margem(l, 1)) - bw / 2 - 0.05;
+                        for (let off = 0; off <= m + 1e-6; off += 0.1) for (const x of off ? [off, -off] : [0]) {
+                            if (!janela && !semVao(l, x - bw / 2, x + bw / 2)) continue;
+                            if (!livre(rect(l, x - bw / 2 - 0.05, x + bw / 2 + 0.05, 0, bl)) || !livre(rect(l, x - bw / 2, x + bw / 2, bl, bl + 0.6))) continue;
+                            const lad = [-1, 1].filter((sx) => livre(rect(l, sx < 0 ? x - bw / 2 - 0.6 : x + bw / 2 + 0.05, sx < 0 ? x - bw / 2 - 0.05 : x + bw / 2 + 0.6, 0.3, bl)));
+                            if (lad.length === 2 || (!ambos && lad.length)) return { l, x, lad, nivel };
+                        }
+                    }
+                }
+                return null;
             };
-            const l = paredes.find(temRoupeiro) || paredes[0];
-            if (l) {
-                peca(l, -bw / 2 - 0.05, bw / 2 + 0.05, 0, 0.06, z, z + 1.0, 'nogueira');              // headboard
-                peca(l, -bw / 2, bw / 2, 0.06, bl, z, z + 0.42, 'nogueira');
-                enfeite(l, -bw / 2 + 0.02, bw / 2 - 0.02, 0.08, bl - 0.02, z + 0.42, z + 0.6, 'linho');
-                enfeite(l, -bw / 2 + 0.03, bw / 2 - 0.03, 0.1, 0.55, z + 0.6, z + 0.7, 'linho');      // pillows
-                enfeite(l, -bw / 2 - 0.02, bw / 2 + 0.02, bl * 0.62, bl + 0.02, z + 0.43, z + 0.62, 'tapete');   // throw
-                if (l.len >= bw + 1.3) espelho(l, bw / 2 + 0.12, bw / 2 + 0.57, 0, 0.42, z, z + 0.5, 'nogueira');
-                enfeite(l, -bw / 2 - 0.3, bw / 2 + 0.3, bl + 0.05, bl + 0.95, z, z + 0.012, 'tapete');
-                quadro(l, 0, z + 1.2, Math.min(1.2, bw));
-                ocupado.push(zonaCama(l));
+            // the wardrobe first: into a corner (or the middle) of an inner wall, over no window or door, its doors
+            // free to open, and only where the bed still has a place as good as without it (never under a window
+            // because of the wardrobe)
+            let roupa = null;
+            if (!desenhado.has('roupeiro')) {
+                const semRoupeiro = desenhado.has('cama') ? 0 : Math.max(3, lugarCama()?.nivel ?? 4);
+                procura: for (const interior of [true, false]) for (const ww of [1.6, 1.2, 0.9]) for (const l of porMau) {
+                    const xa = -l.len / 2 + margem(l, -1), xb = l.len / 2 - margem(l, 1);
+                    if ((interior && !l.interior) || l.fundo < 1.6 || xb - xa < ww) continue;
+                    for (const [x1, x2] of [[xa, xa + ww], [xb - ww, xb], [-ww / 2, ww / 2]]) {
+                        if (!semVao(l, x1 - 0.05, x2 + 0.05) || !livre(rect(l, x1, x2, 0, 1.4))) continue;
+                        const k = ocupado.length;
+                        ocupado.push(rect(l, x1, x2, 0, 1.4));
+                        if (desenhado.has('cama') || (lugarCama()?.nivel ?? 9) <= semRoupeiro) { roupa = { l, x1, x2 }; break procura; }
+                        ocupado.length = k;
+                    }
+                }
             }
-            // wardrobe: its doors need 0.8 m clear in front; narrower if it must be, none rather than in the way
-            for (const ww of [1.6, 1.2, 0.9]) {
-                const r = encaixar(ww, 0.6, () => true, 0.8);
-                if (r) { peca(r.l, r.x - ww / 2, r.x + ww / 2, 0, 0.6, z, z + 2.2, 'lacado'); break; }
+            if (!desenhado.has('cama')) {
+                const c = lugarCama() || (() => {   // nowhere free: the least busy wall that takes it, as before
+                    const l = lados.filter((x) => x.len >= bw + 0.5 && x.fundo >= bl + 0.7).sort((x, y) => x.mau - y.mau || y.len - x.len)[0];
+                    return l && { l, x: 0, lad: [-1, 1] };
+                })();
+                if (c) {
+                    const { l, x, lad } = c;
+                    cama(l, x, bw, bl);
+                    for (const sx of lad) {
+                        const [a, b] = sx < 0 ? [x - bw / 2 - 0.57, x - bw / 2 - 0.12] : [x + bw / 2 + 0.12, x + bw / 2 + 0.57];
+                        if (livre(rect(l, a, b, 0, 0.42))) { peca(l, a, b, 0, 0.42, z, z + 0.5, 'nogueira'); item('bedside table'); }
+                        ocupado.push(rect(l, sx < 0 ? x - bw / 2 - 0.6 : x + bw / 2, sx < 0 ? x - bw / 2 : x + bw / 2 + 0.6, 0.42, bl));
+                    }
+                    enfeite(l, x - bw / 2 - 0.3, x + bw / 2 + 0.3, bl + 0.05, bl + 0.95, z, z + 0.012, 'tapete');
+                    item('rug');
+                    quadro(l, x, z + 1.2, Math.min(1.2, bw));
+                    ocupado.push(rect(l, x - bw / 2, x + bw / 2, bl, bl + 0.6));
+                }
+            }
+            if (roupa) roupeiro(roupa.l, roupa.x1, roupa.x2);
+            else if (!desenhado.has('roupeiro')) {
+                // no place that also left the bed one: wherever it fits now, still over no window; none rather than in the way
+                for (const ww of [1.6, 1.2, 0.9]) {
+                    const r = encaixar(ww, 0.6, (l, x) => semVao(l, x - ww / 2 - 0.05, x + ww / 2 + 0.05), 0.8);
+                    if (r) { roupeiro(r.l, r.x - ww / 2, r.x + ww / 2); break; }
+                }
             }
             planta();
         } else if (div.uso === 'sala') {
-            const l = lado((x) => x.len >= 2.6 && x.fundo >= 3.0);
-            if (l) {
-                enfeite(l, -1.4, 1.4, 0.55, 2.55, z, z + 0.012, 'tapete');
-                peca(l, -1.1, 1.1, 0, 0.92, z, z + 0.42, 'tecido');                                     // seat
-                enfeite(l, -1.1, 1.1, 0, 0.22, z + 0.42, z + 0.82, 'tecido');                           // back
-                espelho(l, 0.92, 1.1, 0.22, 0.92, z + 0.42, z + 0.6, 'tecido');                         // arms
-                enfeite(l, -0.85, -0.45, 0.25, 0.4, z + 0.6, z + 0.95, 'linho');                        // cushions
-                enfeite(l, 0.45, 0.85, 0.25, 0.4, z + 0.6, z + 0.95, 'linho');
-                peca(l, -0.55, 0.55, 1.3, 1.9, z + 0.012, z + 0.4, 'nogueira');                         // coffee table
-                quadro(l, 0, z + 1.25, 1.2);
-                const op = lados.find((o) => o.k === l.k && o !== l);
-                if (l.fundo <= 5.5 && livre(rect(op, -0.9, 0.9, 0, 0.42))) {                             // TV wall
-                    peca(op, -0.9, 0.9, 0, 0.42, z, z + 0.5, 'nogueira');
-                    enfeite(op, -0.6, 0.6, 0, 0.05, z + 0.85, z + 1.55, 'vidro_vizinho');
-                } else if (l.fundo > 5.5 && l.len >= 2.6) mesa(l, 0, l.fundo - 1.6, 1.8, 0.9, 3);       // dining end
+            let centro = null;   // the sofa's middle: the dining table goes as far from it as it can
+            if (!desenhado.has('sofa') && !desenhado.has('tv')) {
+                // the TV on a wall with nothing behind it (no door, window or opening), the sofa facing it: against the
+                // opposite wall when the room is that deep, else free-standing ~2.4 m away; only where a way through stays
+                const opcoes = [];
+                for (const l of lados) {
+                    const op = oposto(l), prof = l.fundo - (l.t / 2 + 0.02) - (op.t / 2 + 0.02);   // face to face
+                    const mt = l.len / 2 - Math.max(margem(l, -1), margem(l, 1)) - 0.75, ms = l.len / 2 - Math.max(margem(l, -1), margem(l, 1)) - 1.0;
+                    if (mt < 0 || ms < 0) continue;
+                    // the sofa's back, from the TV wall: against the opposite wall when the room is that deep, else free-standing
+                    const fundos = [...(prof <= 4.3 ? [prof] : []), Math.min(3.75, prof - 0.65)].filter((Y) => Y >= 2.9);
+                    for (let x = -mt; x <= mt + 1e-6; x += 0.1) {
+                        if (!semVao(l, x - 0.8, x + 0.8)) continue;
+                        const xs = Math.max(-ms, Math.min(ms, x));   // the sofa square in front of the TV, or as near as it fits
+                        if (Math.abs(xs - x) > 0.6) continue;
+                        for (const Y of fundos) opcoes.push({ l, op, x, xs, Y, encostado: Y === prof, custo: (Y === prof ? 0 : 1) + 0.3 * l.mau + 0.15 * Math.abs(x) + Math.abs(xs - x) });
+                    }
+                }
+                opcoes.sort((a, b) => a.custo - b.custo);
+                const o = opcoes.find(({ l, x, xs, Y }) => {
+                    const sol = [rect(l, x - 0.75, x + 0.75, 0, 0.42), rect(l, xs - 1.0, xs + 1.0, Y - 0.92, Y)];
+                    return sol.every(livre) && passa(sol);
+                });
+                if (o) {
+                    const { l, x, xs, Y } = o;
+                    tv(l, x, 0, 1.5);
+                    sofa(o.encostado ? o.op : virado(l, Y), xs, 2.0);
+                    enfeite(l, xs - 1.3, xs + 1.3, Math.max(0.55, Y - 2.6), Y - 0.5, z, z + 0.012, 'tapete');
+                    item('rug');
+                    if (Y - 1.97 >= 0.8) { peca(l, xs - 0.5, xs + 0.5, Y - 1.97, Y - 1.42, z + 0.012, z + 0.4, 'nogueira'); item('coffee table'); }
+                    if (o.encostado) quadro(o.op, xs, z + 1.25, 1.2);
+                    ocupado.push(rect(l, Math.min(x, xs) - 0.9, Math.max(x, xs) + 0.9, 0.42, Y - 0.92));   // the view between them stays clear
+                    const q = rect(l, xs, xs, Y - 0.46, Y - 0.46);
+                    centro = [q[0], q[1]];
+                } else {
+                    // nowhere that keeps the way through (a small or busy room): the sofa on the quietest wall, the TV
+                    // opposite when it fits
+                    const l = lado((x) => x.len >= 2.6 && x.fundo >= 3.0);
+                    if (l) {
+                        enfeite(l, -1.4, 1.4, 0.55, 2.55, z, z + 0.012, 'tapete');
+                        item('rug');
+                        sofa(l, 0);
+                        peca(l, -0.55, 0.55, 1.3, 1.9, z + 0.012, z + 0.4, 'nogueira');
+                        item('coffee table');
+                        quadro(l, 0, z + 1.25, 1.2);
+                        const op = oposto(l);
+                        if (l.fundo <= 5.5 && livre(rect(op, -0.9, 0.9, 0, 0.42))) tv(op, 0);
+                        const q = rect(l, 0, 0, 0.46, 0.46);
+                        centro = [q[0], q[1]];
+                    }
+                }
+            }
+            // then the dining table, in a big enough room: where it and its chairs fit with room to pull them out,
+            // the way through kept, as far from the sofa as it can be
+            if (!desenhado.has('mesa') && (s2 - s1) * (o2 - o1) >= 16) {
+                procura: for (const [w, d, k] of [[1.8, 0.9, 3], [1.4, 0.8, 2]]) {
+                    const sitios = [];
+                    for (const l of [lados[0], lados[2]]) {   // along the room and across it
+                        for (let x = -l.len / 2; x <= l.len / 2; x += 0.2) for (let y = 0; y <= l.fundo; y += 0.2) {
+                            const q = mesaZona(l, x, y, w, d);
+                            if (livre(q)) sitios.push({ l, x, y, longe: centro ? Math.hypot((q[0] + q[2]) / 2 - centro[0], (q[1] + q[3]) / 2 - centro[1]) : 0 });
+                        }
+                    }
+                    sitios.sort((a, b) => b.longe - a.longe);
+                    for (const { l, x, y } of sitios.slice(0, 80)) {
+                        if (!passa([mesaBloco(l, x, y, w, d)])) continue;
+                        mesa(l, x, y, w, d, k);
+                        ocupado.push(mesaZona(l, x, y, w, d));
+                        break procura;
+                    }
+                }
             }
             planta();
             planta();
         } else if (div.uso === 'wc') {
-            // along the quietest wall, left to right: bath (long rooms) or shower, vanity with mirror, toilet
-            const l = lado((x) => x.len >= 1.4 && x.fundo >= 1.2);
-            if (!l) return;
-            const meio = l.len / 2 - 0.1;                                  // clear of the side walls
-            const banho = l.len >= 3.3 && l.fundo >= 1.7 ? 1.7 : l.len >= 2.3 ? 0.9 : 0;
-            const folga = (2 * meio - banho - 0.7 - 0.45) / (banho ? 2 : 1); // spread the pieces evenly
-            let x = -meio;
-            if (banho === 1.7) {
-                peca(l, x, x + 1.7, 0, 0.75, z, z + 0.55, 'ceramica');
-            } else if (banho) {
-                peca(l, x, x + 0.9, 0, 0.9, z, z + 0.05, 'ceramica');                             // shower tray
-                enfeite(l, x, x + 0.9, 0.89, 0.9, z + 0.05, z + 2.0, 'vidro');                    // glass screen
+            if (!temWc) {
+                // along the quietest wall, left to right: bath (long rooms) or shower, vanity with mirror, toilet
+                const l = lado((x) => x.len >= 1.4 && x.fundo >= 1.2);
+                if (l) {
+                    const meio = l.len / 2 - 0.1;                                  // clear of the side walls
+                    const banho = l.len >= 3.3 && l.fundo >= 1.7 ? 1.7 : l.len >= 2.3 ? 0.9 : 0;
+                    const folga = (2 * meio - banho - 0.7 - 0.45) / (banho ? 2 : 1); // spread the pieces evenly
+                    let x = -meio;
+                    if (banho === 1.7) {
+                        peca(l, x, x + 1.7, 0, 0.75, z, z + 0.55, 'ceramica');
+                        item('bathtub');
+                    } else if (banho) {
+                        peca(l, x, x + 0.9, 0, 0.9, z, z + 0.05, 'ceramica');                             // shower tray
+                        enfeite(l, x, x + 0.9, 0.89, 0.9, z + 0.05, z + 2.0, 'vidro');                    // glass screen
+                        item('shower with a glass screen');
+                    }
+                    x += banho + (banho ? folga : 0);
+                    peca(l, x, x + 0.7, 0, 0.46, z + 0.3, z + 0.8, 'nogueira');                           // vanity
+                    enfeite(l, x - 0.01, x + 0.71, 0, 0.5, z + 0.8, z + 0.85, 'ceramica');                // basin top
+                    enfeite(l, x + 0.05, x + 0.65, 0, 0.02, z + 1.1, z + 1.9, 'vidro_vizinho');           // mirror
+                    item('washbasin with a mirror');
+                    x += 0.7 + folga;
+                    peca(l, x, x + 0.4, 0, 0.18, z, z + 0.8, 'ceramica');                                 // cistern
+                    peca(l, x + 0.02, x + 0.38, 0.18, 0.66, z, z + 0.4, 'ceramica');                      // bowl
+                    item('toilet');
+                    // wall too short for a shower beside them: a corner shower on the opposite wall, if it has no door
+                    const op = oposto(l);
+                    if (!banho && l.fundo >= 2.0 && op.mau < 2 && op.len >= 1.1) {
+                        const m = op.len / 2 - 0.1;
+                        peca(op, m - 0.9, m, 0, 0.9, z, z + 0.05, 'ceramica');
+                        enfeite(op, m - 0.9, m, 0.89, 0.9, z + 0.05, z + 2.0, 'vidro');
+                        enfeite(op, m - 0.9, m - 0.89, 0, 0.89, z + 0.05, z + 2.0, 'vidro');
+                        item('shower with a glass screen');
+                    }
+                    if (l.fundo >= 1.6) { enfeite(l, -0.4, 0.4, 0.75, 1.3, z, z + 0.012, 'tapete'); item('bath mat'); }
+                    const t = encaixar(0.5, 0.05, (o) => o !== l);
+                    if (t) { enfeite(t.l, t.x - 0.25, t.x + 0.25, 0, 0.05, z + 1.0, z + 1.5, 'linho'); item('towel on the wall'); }
+                }
             }
-            x += banho + (banho ? folga : 0);
-            peca(l, x, x + 0.7, 0, 0.46, z + 0.3, z + 0.8, 'nogueira');                           // vanity
-            enfeite(l, x - 0.01, x + 0.71, 0, 0.5, z + 0.8, z + 0.85, 'ceramica');                // basin top
-            enfeite(l, x + 0.05, x + 0.65, 0, 0.02, z + 1.1, z + 1.9, 'vidro_vizinho');           // mirror
-            x += 0.7 + folga;
-            peca(l, x, x + 0.4, 0, 0.18, z, z + 0.8, 'ceramica');                                 // cistern
-            peca(l, x + 0.02, x + 0.38, 0.18, 0.66, z, z + 0.4, 'ceramica');                      // bowl
-            // wall too short for a shower beside them: a corner shower on the opposite wall, if it has no door
-            const op = lados.find((o) => o.k === l.k && o !== l);
-            if (!banho && l.fundo >= 2.0 && op.mau < 2 && op.len >= 1.1) {
-                const m = op.len / 2 - 0.1;
-                peca(op, m - 0.9, m, 0, 0.9, z, z + 0.05, 'ceramica');
-                enfeite(op, m - 0.9, m, 0.89, 0.9, z + 0.05, z + 2.0, 'vidro');
-                enfeite(op, m - 0.9, m - 0.89, 0, 0.89, z + 0.05, z + 2.0, 'vidro');
-            }
-            if (l.fundo >= 1.6) enfeite(l, -0.4, 0.4, 0.75, 1.3, z, z + 0.012, 'tapete');          // bath mat
-            const t = encaixar(0.5, 0.05, (o) => o !== l);
-            if (t) enfeite(t.l, t.x - 0.25, t.x + 0.25, 0, 0.05, z + 1.0, z + 1.5, 'linho');      // towel
         } else if (div.uso === 'cozinha') {
             // fitted units along the longest wall that is least broken up (openings per metre), split around its
             // doors; a galley at least 2.4 m wide gets a second run opposite; a table only in a big kitchen
@@ -463,21 +706,25 @@ export function buildCasa(casa, opts = {}) {
                     const frigo = principal && j === 0 && b - a >= 2.4, bb = frigo ? b - 0.7 : b;
                     peca(l, a, bb, 0, 0.6, z, z + 0.86, 'lacado');
                     enfeite(l, a - 0.01, bb + 0.01, 0, 0.63, z + 0.86, z + 0.9, 'ceramica');
-                    if (frigo) peca(l, b - 0.65, b, 0, 0.65, z, z + 2.0, 'lacado');                    // fridge column
-                    if (semVao(l, a, bb)) enfeite(l, a, bb, 0, 0.35, z + 1.45, z + 2.15, 'lacado');   // wall units
+                    item('run of kitchen units with worktop');
+                    if (frigo) { peca(l, b - 0.65, b, 0, 0.65, z, z + 2.0, 'lacado'); item('tall fridge'); }   // fridge column
+                    if (semVao(l, a, bb)) { enfeite(l, a, bb, 0, 0.35, z + 1.45, z + 2.15, 'lacado'); item('row of wall cabinets'); }
                     if (principal && j === 0 && bb - a >= 1.6) {
                         enfeite(l, a + 0.3, a + 0.9, 0.06, 0.56, z + 0.9, z + 0.906, 'vidro_vizinho'); // hob
                         enfeite(l, bb - 0.9, bb - 0.4, 0.1, 0.5, z + 0.9, z + 0.906, 'caixilho');      // sink
+                        item('hob and sink on the worktop');
                     }
                 });
             };
             const l = lados.filter((x) => x.len >= 1.8 && x.fundo >= 1.6).sort((x, y) => x.mau / x.len - y.mau / y.len || y.len - x.len)
                 .sort((x, y) => (y.len >= 2.4) - (x.len >= 2.4))[0];   // a wall long enough for a real run first
-            if (l) {
+            if (l && !desenhado.has('bancada')) {
                 bancada(l, true);
-                const op = lados.find((o) => o.k === l.k && o !== l);
-                if (l.fundo >= 2.4 && l.fundo < 3.6) bancada(op, false);
-                if (l.fundo >= 3.6 && l.len >= 2.2) mesa(l, 0, 0.63 + (l.fundo - 0.63) / 2, 1.2, 0.8, 2);
+                if (l.fundo >= 2.4 && l.fundo < 3.6) bancada(oposto(l), false);
+            }
+            if (l && !desenhado.has('mesa') && l.fundo >= 3.6 && l.len >= 2.2) {
+                const [x, y] = [0, 0.63 + (l.fundo - 0.63) / 2];
+                if (livre(mesaBloco(l, x, y, 1.2, 0.8)) && passa([mesaBloco(l, x, y, 1.2, 0.8)])) mesa(l, x, y, 1.2, 0.8, 2);
             }
             planta();
         } else if (div.uso === 'escritorio') {
@@ -486,10 +733,11 @@ export function buildCasa(casa, opts = {}) {
                 peca(r.l, r.x - 0.7, r.x + 0.7, 0, 0.7, z + 0.72, z + 0.76, 'nogueira');
                 for (const sx of [-1, 1]) peca(r.l, r.x + sx * 0.62 - 0.025, r.x + sx * 0.62 + 0.025, 0.05, 0.65, z, z + 0.72, 'nogueira');
                 cadeira(r.l, r.x, 1.05, 1);
+                item('desk with a chair');
                 quadro(r.l, r.x, z + 1.3);
             }
             const b = encaixar(1.0, 0.35, () => true, 0.6);
-            if (b) peca(b.l, b.x - 0.5, b.x + 0.5, 0, 0.35, z, z + 2.0, 'nogueira');               // bookcase
+            if (b) { peca(b.l, b.x - 0.5, b.x + 0.5, 0, 0.35, z, z + 2.0, 'nogueira'); item('bookcase'); }
             tapete(1.6, 1.2);
             planta();
         } else if (div.uso === 'lavandaria') {
@@ -499,9 +747,10 @@ export function buildCasa(casa, opts = {}) {
                 peca(r.l, r.x + 0.03, r.x + 0.65, 0, 0.62, z, z + 0.85, 'lacado');                    // dryer
                 enfeite(r.l, r.x - 0.67, r.x + 0.67, 0, 0.64, z + 0.85, z + 0.89, 'nogueira');        // worktop
                 enfeite(r.l, r.x - 0.6, r.x + 0.6, 0, 0.3, z + 1.5, z + 2.1, 'lacado');               // cupboard
+                item('washing machine and dryer under a worktop, a wall cupboard above');
             }
             const c = encaixar(0.6, 0.6, () => true, 0.6);
-            if (c) peca(c.l, c.x - 0.3, c.x + 0.3, 0, 0.6, z, z + 2.0, 'lacado');
+            if (c) { peca(c.l, c.x - 0.3, c.x + 0.3, 0, 0.6, z, z + 2.0, 'lacado'); item('tall cupboard'); }
         } else if (div.uso === 'arrumos' || div.uso === 'garagem') {
             const fundo = div.uso === 'garagem' ? 0.5 : 0.4, w = Math.min(div.uso === 'garagem' ? 3.0 : 2.4, longo - 0.4);
             const r = encaixar(w, fundo, () => true, 0.6);
@@ -512,25 +761,27 @@ export function buildCasa(casa, opts = {}) {
                     const bx = r.x - w / 2 + 0.1 + j * 0.5, h = 0.18 + (j % 4) * 0.45;
                     enfeite(r.l, bx, bx + 0.35, 0.05, fundo - 0.08, z + h, z + h + 0.25, j % 2 ? 'linho' : 'tecido');
                 }
+                item('shelving unit with boxes');
             }
         } else if (div.uso === 'hall') {
             const r = encaixar(1.0, 0.35, () => true, 0.5);
             if (r) {
                 peca(r.l, r.x - 0.5, r.x + 0.5, 0, 0.35, z, z + 0.8, 'nogueira');                    // console
                 enfeite(r.l, r.x - 0.4, r.x + 0.4, 0, 0.02, z + 1.15, z + 2.0, 'vidro_vizinho');      // mirror
+                item('narrow console table with a mirror above');
             }
             tapete(1.8, 1.0);
             planta();
         } else if (div.uso === 'circulacao') {
-            tapete(Math.max(0, longo - 0.8), 0.7);                                                    // runner
-            const l = [...lados].sort((x, y) => y.len - x.len)[0];
-            quadro(l, 0, z + 1.3);
+            tapete(Math.max(0, longo - 0.8), 0.7, 'runner rug');
+            quadro([...lados].sort((x, y) => y.len - x.len)[0], 0, z + 1.3);
             planta();
         } else {
             tapete(1.6, 1.2);
             planta();
         }
         if (['sala', 'quarto', 'escritorio', 'outro', 'hall'].includes(div.uso)) cortinas();
+        sala.pecas = solidos.map(([a, b, c, d]) => [[a, b], [c, b], [c, d], [a, d]].map(([s, o]) => mundo(s, o)));
     };
 
     const niveis = casa.niveis || [];
@@ -615,7 +866,7 @@ export function buildCasa(casa, opts = {}) {
         laje(recuar(contorno, 0.02), z0 - num(lv.laje, 0.15) - (i === 0 ? 0.05 : 0), z0 - 0.01, 'betao');
         (lv.divisoes || []).forEach((div, k) => {
             laje(div.poligono, z0 - 0.012, z0 - 0.003 * (k % 3), PAVIMENTOS[div.uso] || 'carvalho');
-            mobilar(div, z0, lv.paredes);
+            mobilar(div, z0, lv.paredes, i);
         });
         for (const w of lv.paredes) parede(w, z0, teto + 0.01, wk++);
         // a ceiling over every room, its underside a few mm under the slab/roof above and the walls running into it:
@@ -779,6 +1030,7 @@ export function buildCasa(casa, opts = {}) {
     raiz.userData.topo = TOPO;
     raiz.userData.chao = apto ? cotas[0] : 0;   // a flat's cameras stand on its floor
     raiz.userData.eixo = eixo;                    // the house's main wall direction (radians, mod 90°)
+    raiz.userData.salas = salas;                  // each room and the pieces put in it (the top-view prompt)
     return raiz;
 }
 

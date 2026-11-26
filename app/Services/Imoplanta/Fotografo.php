@@ -66,7 +66,8 @@ class Fotografo
             try {
                 $this->custos->contexto($p->id, 'references');
                 $divisoes = ($p->casa['niveis'][$nivel] ?? [])['divisoes'] ?? [];
-                $prompt = $this->promptPlanta($p->tipologia, $this->acabamentos->texto($p), (bool) $quadro, $divisoes);
+                $salas = json_decode((string) $p->aereo($nivel, 'salas'), true);
+                $prompt = $this->promptPlanta($p->tipologia, $this->acabamentos->texto($p), (bool) $quadro, $divisoes, is_array($salas) ? $salas : []);
                 $f = $this->gerar($render, $prompt, $quadro, null, $p->pasta().'/aereo-'.$nivel.'-'.Str::random(6).'.png', [],
                     self::proporcao(Storage::disk(config('contentmachine.imoplanta.disk'))->get($render)));
                 $p->guardarAereo($nivel, 'img', $f);
@@ -275,16 +276,35 @@ class Fotografo
         return $this->editar($img, $img->foto, $prompt, $quadro, $aereo, self::extras($p));
     }
 
-    /** The top-view reference: the plan in 3D, made photoreal. */
-    public function promptPlanta(string $tipologia, string $acabamentos, bool $quadro, array $divisoes = []): string
+    /**
+     * The top-view reference: the plan in 3D, made photoreal. $salas (from the browser's render: each room's place
+     * in the picture and its pieces) makes it an inventory: each room gets exactly its pieces, made real, and
+     * nothing else (the AI used to invent rooms, e.g. a bathroom in an entrance hall). Without it (renders from
+     * before), the room counts.
+     */
+    public function promptPlanta(string $tipologia, string $acabamentos, bool $quadro, array $divisoes = [], array $salas = []): string
     {
         $casa = $tipologia === 'apartamento' ? 'apartment' : 'house';
         $ref = $quadro ? ' The SECOND image is the finishes board: use exactly those materials, colours, door and frame styles.' : '';
-        // what each room is, so a rug in a hallway doesn't become a sofa or a dining table
-        $nomes = array_map(fn ($d) => self::DIVISOES[$d['uso'] ?? 'outro'] ?? 'room', $divisoes);
-        $lista = $nomes === [] ? '' : "\n\n        THE ROOMS on this floor: ".implode(', ', array_map(fn ($n, $k) => $n.' ×'.$k, array_keys(array_count_values($nomes)), array_count_values($nomes))).'. '
-            .'Furnish each room only as what it is. Hallways, landings and stair halls stay EMPTY: at most a runner rug on the floor, never a sofa, a table, chairs or kitchen units. '
-            .'Bedrooms have one bed and their wardrobe, no sofa. Only the kitchen has kitchen units, only the living room has sofas and a dining table.';
+        if ($salas) {
+            $linhas = array_map(function ($s) {
+                $nome = self::DIVISOES[$s['uso'] ?? 'outro'] ?? 'room';
+                $pecas = array_count_values($s['itens'] ?? []);
+                $lista = $pecas ? implode(', ', array_map(fn ($i, $n) => $n > 1 ? "{$n} × {$i}" : $i, array_keys($pecas), $pecas)) : 'nothing (bare floor)';
+
+                return "        - {$nome}, from {$s['x'][0]}% to {$s['x'][1]}% across and {$s['y'][0]}% to {$s['y'][1]}% down the image: {$lista}.";
+            }, $salas);
+            $lista = "\n\n        WHAT IS IN EACH ROOM (positions in the image, from its top-left corner); each room is exactly this, nothing more:\n"
+                .implode("\n", $linhas)."\n"
+                .'        A room keeps its use: never draw bathroom fittings, kitchen units, beds or sofas in a room whose list does not have them. '
+                .'Hallways and halls stay as open floor with only what their list says.';
+        } else {
+            // what each room is, so a rug in a hallway doesn't become a sofa or a dining table
+            $nomes = array_map(fn ($d) => self::DIVISOES[$d['uso'] ?? 'outro'] ?? 'room', $divisoes);
+            $lista = $nomes === [] ? '' : "\n\n        THE ROOMS on this floor: ".implode(', ', array_map(fn ($n, $k) => $n.' ×'.$k, array_keys(array_count_values($nomes)), array_count_values($nomes))).'. '
+                .'Furnish each room only as what it is. Hallways, landings and stair halls stay EMPTY: at most a runner rug on the floor, never a sofa, a table, chairs or kitchen units. '
+                .'Bedrooms have one bed and their wardrobe, no sofa. Only the kitchen has kitchen units, only the living room has sofas and a dining table.';
+        }
 
         return <<<PROMPT
         Turn this 3D render into a photorealistic 3D FLOOR PLAN of a newly built {$casa} in Portugal: the SAME floor plan, seen from directly above, the roof and ceilings removed, every room open to view, like a high-end real-estate 3D floor plan.
@@ -295,7 +315,7 @@ class Fotografo
         - every piece of furniture in the same place, size and orientation; do not add, remove or rearrange furniture.
         Straight down, no perspective, no tilt.{$lista}
 
-        REPLACE EVERY PLACEHOLDER with the real thing seen from above, keeping its footprint: grey and brown boxes are real furniture (beds with bedding and pillows, sofas with cushions, tables and chairs, wardrobes, kitchen units with a worktop, hob and sink, bathroom fittings); green circles on dark pots are real plants; flat light rectangles are woven rugs. Real floors with real texture in every room.{$ref} Finishes: {$acabamentos}
+        REPLACE EVERY PLACEHOLDER with the real thing seen from above, keeping its footprint: grey and brown boxes are real furniture (beds with bedding and pillows, sofas with cushions, tables and chairs, wardrobes, kitchen units with a worktop, hob and sink, bathroom fittings); green circles on dark pots are real plants; flat light rectangles are woven rugs. Make every piece look real and detailed (fabric folds, wood grain, stitching, soft shadows), but ADD NOTHING: no extra furniture, décor, plants, lamps, appliances or fittings where the render has no placeholder, and an empty floor area stays empty floor. Real floors with real texture in every room.{$ref} Finishes: {$acabamentos}
 
         Clean white walls with crisp tops, soft daylight from above with gentle shadows, true colours, sharp. No text, no labels, no dimensions, no people.
         PROMPT;

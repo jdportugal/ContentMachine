@@ -36,7 +36,10 @@ use RuntimeException;
  *                      "altura": 1.2}]
  *     }],
  *     "divisoes": [{"nome": "Sala", "uso": "sala|cozinha|quarto|wc|garagem|hall|escritorio|lavandaria|arrumos|circulacao|outro",
- *                   "poligono": [[u,v], …]}]
+ *                   "poligono": [[u,v], …],
+ *                   "moveis": [{"tipo": "roupeiro|cama|sofa|tv|mesa|bancada|banheira|duche|sanita|lavatorio|outro",
+ *                               "poligono": [[u,v], …]}]}]   // furniture and fittings DRAWN on the plan in this room,
+ *                                             // with their footprint as drawn; [] when the plan draws none
  *   }],
  *   "cobertura": [{"tipo": "plana|uma_agua|duas_aguas|quatro_aguas",
  *                  "poligono": [[u,v], …],      // pitched types use its bounding rectangle
@@ -67,6 +70,8 @@ class ImoplantaCasa
     public const ABERTURAS = ['janela', 'envidracado', 'porta', 'garagem', 'vao'];
 
     public const COBERTURAS = ['plana', 'uma_agua', 'duas_aguas', 'quatro_aguas'];
+
+    public const MOVEIS = ['roupeiro', 'cama', 'sofa', 'tv', 'mesa', 'bancada', 'banheira', 'duche', 'sanita', 'lavatorio', 'outro'];
 
     /** The schema above, for the LLM prompts. */
     public static function esquema(): string
@@ -122,7 +127,10 @@ class ImoplantaCasa
             $divisoes = [];
             foreach ((array) ($n['divisoes'] ?? []) as $d) {
                 if ($pol = self::poligono($d['poligono'] ?? null)) {
-                    $divisoes[] = ['nome' => (string) ($d['nome'] ?? ''), 'uso' => in_array($d['uso'] ?? '', self::USOS, true) ? $d['uso'] : 'outro', 'poligono' => $pol];
+                    $moveis = array_values(array_filter(array_map(fn ($m) => ($mp = self::poligono($m['poligono'] ?? null))
+                        ? ['tipo' => in_array($m['tipo'] ?? '', self::MOVEIS, true) ? $m['tipo'] : 'outro', 'poligono' => $mp] : null, (array) ($d['moveis'] ?? []))));
+                    $divisoes[] = ['nome' => (string) ($d['nome'] ?? ''), 'uso' => in_array($d['uso'] ?? '', self::USOS, true) ? $d['uso'] : 'outro', 'poligono' => $pol]
+                        + ($moveis ? ['moveis' => $moveis] : []);
                 }
             }
             if ($paredes === []) {

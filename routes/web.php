@@ -403,7 +403,7 @@ Route::middleware('auth')->group(function () {
                 return response()->json(['ok' => false, 'erro' => $v->errors()->first()], 422);
             }
 
-            return $imoplantas->receberAereo($imovel, $request->file('render'), $nivel ?? ImoplantaCasa::nivelPrincipal($imovel->casa ?? []))
+            return $imoplantas->receberAereo($imovel, $request->file('render'), $nivel ?? ImoplantaCasa::nivelPrincipal($imovel->casa ?? []), $request->input('salas'))
                 ? response()->json(['ok' => true])
                 : response()->json(['ok' => false], 409);
         })->whereNumber('imovel')->whereNumber('nivel')->middleware('throttle:60,1')->name('imoplanta.aereo');

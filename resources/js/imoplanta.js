@@ -15,7 +15,11 @@ async function enviarRenders(cena, pendentes, cfg, progresso) {
         for (const [k, img] of pendentes.entries()) {
             progresso(`A preparar as vistas: ${k + 1} de ${pendentes.length}… mantenha esta página aberta.`);
             const dados = new FormData();
-            dados.append('render', await (img.topo !== undefined ? foto.pngTopo(img.topo) : foto.png(img.camera)), `vista-${img.numero}.png`);
+            if (img.topo !== undefined) {
+                const { png, salas } = await foto.pngTopo(img.topo);
+                dados.append('render', png, `vista-${img.numero}.png`);
+                dados.append('salas', JSON.stringify(salas));
+            } else dados.append('render', await foto.png(img.camera), `vista-${img.numero}.png`);
             // redirect 'manual': an expired session's redirect to the login must count as a failure, not a 200
             const r = await fetch(img.envio, { method: 'POST', body: dados, redirect: 'manual', headers: { 'X-CSRF-TOKEN': cfg.csrf, Accept: 'application/json' } });
             if (!r.ok && r.status !== 409) falhas++;   // 409: already received (another tab) — fine

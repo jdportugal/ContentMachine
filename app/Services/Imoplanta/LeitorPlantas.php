@@ -50,6 +50,9 @@ class LeitorPlantas
            are "vao".
         4. Rooms: the space between their walls, with their use.
         5. Windows on their walls; sill heights and heights from the elevations/sections if given.
+        6. Furniture and fittings the plan DRAWS (built-in wardrobes, kitchen worktops, bathtubs, shower trays, toilets,
+           washbasins, beds, sofas, tables): each in its room's "moveis", with its footprint where it is drawn. Only what is
+           drawn: never invent furniture; a room with none drawn gets "moveis": [].
         Then:
         - A level per storey (cave below 0 if any). Roof from the elevations/sections:
           flat, single, gable or hipped, with its outline including overhangs.

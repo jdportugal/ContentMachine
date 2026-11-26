@@ -257,6 +257,8 @@ export function fotografo(c) {
          * Straight down onto storey `nivel`: the house alone (roof, ceilings, upper storeys, plot, trees and
          * neighbours off) on plain white, framed tight on its walls, at the house's own proportions (the nearest
          * ratio the image AI takes). A wide frame padded with lawn made the AI invent a bigger, different house.
+         * Returns the PNG and, per room of that storey, where it is in the picture (% from the left / top) and
+         * the pieces the builder put in it: the AI is told to make exactly those real and add nothing.
          */
         pngTopo: async (nivel) => {
             // turned so the house's walls run square to the frame (like a floor plan), framed on the walls
@@ -271,13 +273,19 @@ export function fotografo(c) {
             cam.up.set(si, 0, -co);                                       // screen right = the main wall direction
             cam.position.set(mx, c.topo + 100, mz);
             cam.lookAt(mx, 0, mz);
+            cam.updateMatrixWorld();
+            const pc = (u, v) => { const p = new THREE.Vector3(u, 0, v).project(cam); return [Math.round((p.x + 1) * 50), Math.round((1 - p.y) * 50)]; };
+            const salas = (c.grupo.userData.salas || []).filter((s) => s.nivel === nivel).map((s) => {
+                const pts = s.poligono.map(([u, v]) => pc(u, v)), xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+                return { uso: s.uso, nome: s.nome, x: [Math.min(...xs), Math.max(...xs)], y: [Math.min(...ys), Math.max(...ys)], itens: s.itens };
+            });
             const [cw, ch] = rw >= rh ? [1600, Math.round(1600 * rh / rw)] : [Math.round(1600 * rw / rh), 1600];
             const fundo = c.scene.background;
             c.scene.background = new THREE.Color(0xffffff);
             r.setSize(cw, ch, false);
             desenhar(c, r, cam, { telhado: false, piso: nivel, vegetacao: false, vizinhos: false, lote: false });
             try {
-                return await blob();
+                return { png: await blob(), salas };
             } finally {
                 c.scene.background = fundo;
                 r.setSize(...RENDER, false);
