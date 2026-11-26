@@ -30,7 +30,7 @@ class Ferramentas
             'lateral' => [
                 'nome' => 'Movimento lateral', 'linha' => 'A câmara desliza devagar para o lado, como um gimbal em câmara lenta.',
                 'texto' => 'A partir de uma fotografia, a câmara desliza suavemente para a esquerda ou para a direita, com profundidade, como um plano de gimbal em câmara lenta. Funciona em interiores e exteriores.',
-                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => '', 'ai' => [], 'segundos' => 5, 'direcao' => true,
+                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'direcao' => true,
             ],
             'limpeza' => [
                 'nome' => 'Limpeza IA', 'linha' => 'Objetos e desarrumação desaparecem, fica o espaço limpo.',
@@ -114,7 +114,7 @@ class Ferramentas
     }
 
     /**
-     * «Criar imagens» («Criar vídeo» for a tool with no AI frames): spends one video (the oldest purchase with any left; admins and free accounts spend none)
+     * «Criar imagens»: spends one video (the oldest purchase with any left; admins and free accounts spend none)
      * and starts the frames. Once: a second call finds it no longer a draft. False when there is no video left.
      */
     public function iniciar(FerramentaIa $f): bool
@@ -127,10 +127,8 @@ class Ferramentas
             if (! $semCusto && ! $compra) {
                 return false;
             }
-            $semQuadros = $f->quadrosIa() === [];   // the side move: the photo is the only frame, the clip comes at once
-            if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)->update([
-                'estado' => $semQuadros ? FerramentaIa::A_ANIMAR : FerramentaIa::A_ENQUADRAR, 'compra_id' => $compra?->id, 'erro' => null, 'updated_at' => now(),
-            ] + ($semQuadros ? ['inicio' => $f->original] : [])) !== 1) {
+            if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)
+                ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'compra_id' => $compra?->id, 'erro' => null, 'updated_at' => now()]) !== 1) {
                 return false;
             }
             if ($compra) {
@@ -140,7 +138,7 @@ class Ferramentas
             return true;
         });
         if ($ok) {
-            $f->quadrosIa() === [] ? FerramentaVideoJob::dispatch($f->id, false) : FerramentaFramesJob::dispatch($f->id, false);
+            FerramentaFramesJob::dispatch($f->id, false);
         }
 
         return $ok;
@@ -192,11 +190,11 @@ class Ferramentas
         return true;
     }
 
-    /** The side move's direction (esquerda|direita), while the customer can still change it: a draft or a finished video. */
+    /** The side move's direction (esquerda|direita), chosen on the draft: its end frame is built for it. */
     public function direcao(FerramentaIa $f, string $direcao): bool
     {
         if (! ($f->tipo()['direcao'] ?? false) || ! in_array($direcao, ['esquerda', 'direita'], true)
-            || ! in_array($f->estado, [FerramentaIa::RASCUNHO, FerramentaIa::PRONTO], true)) {
+            || $f->estado !== FerramentaIa::RASCUNHO) {   // the end frame is built for it: fixed once frames exist
             return false;
         }
         $f->update(['opcoes' => [...($f->opcoes ?? []), 'direcao' => $direcao]]);
@@ -231,17 +229,9 @@ class Ferramentas
         return true;
     }
 
-    /**
-     * A failed clip: the first goes back to the frames (a tool without frames: back to the draft, the video given
-     * back), a new version back to the video they had; none counts.
-     */
+    /** A failed clip: the first goes back to the frames, a new version back to the video they had; neither counts. */
     public function devolverVideo(FerramentaIa $f, bool $refazer, string $erro): void
     {
-        if (! $refazer && $f->quadrosIa() === []) {   // nothing was made for them at all: the video goes back
-            $this->devolver($f, 'Não conseguimos criar o vídeo. O vídeo foi devolvido à sua conta; pode tentar de novo.');
-
-            return;
-        }
         $refazer
             ? $f->update(['estado' => FerramentaIa::PRONTO, 'refeitos' => max(0, $f->refeitos - 1), 'erro' => $erro])
             : $f->update(['estado' => FerramentaIa::A_APROVAR, 'erro' => $erro]);

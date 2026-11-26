@@ -43,7 +43,10 @@ class FerramentaFramesJob implements ShouldQueue
                 $f->{$qual} = $novos[$qual];   // the next frame sees this one
                 $versoes[$qual] = [...($versoes[$qual] ?? []), $novos[$qual]];
             }
-            $fotos = array_fill_keys(array_diff(['inicio', 'fim'], $f->quadrosIa()), $f->original);   // the frame that is the photo
+            $fotos = [];   // a frame the AI doesn't make is the photo (the side move sets its own cut of it)
+            foreach (array_diff(['inicio', 'fim'], $f->quadrosIa()) as $qual) {
+                $fotos[$qual] = $f->{$qual} ?: $f->original;
+            }
             $f->refresh()->update([...$fotos, ...$novos, 'versoes' => $versoes, 'estado' => FerramentaIa::A_APROVAR, 'erro' => null]);
         } catch (\Throwable $e) {
             report($e);

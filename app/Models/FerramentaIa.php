@@ -51,7 +51,7 @@ class FerramentaIa extends Model
         return Ferramentas::lista()[$this->ferramenta];
     }
 
-    /** The frames the AI makes, in order: ['fim'], ['inicio'] (construção), both (drone) or none (the side move). */
+    /** The frames the AI makes, in order: ['fim'] (the side move: built from a depth map), ['inicio'] (construção) or both (drone). */
     public function quadrosIa(): array
     {
         return $this->tipo()['ai'];

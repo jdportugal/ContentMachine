@@ -46,7 +46,7 @@ Each video has a **fixed price**, so we cap what a video can cost us and price i
 | Tool | AI frame | Clip | Worst case (USD) | ≈ EUR |
 |---|---|---|---|---|
 | drone | both frames: the aerial view and the view after orbiting ~45° (3 changes shared) | 10 s, **silent** | 5×0.09 + 3×1.01 = 3.48 | 3.20 |
-| lateral | none: the photo is the start and Kling makes the move (the user picked this over two photo crops, which gave a flat pan, and an AI end frame, which moved objects around), so the customer approves the photo and the direction | 5 s, silent | 3×0.505 = 1.52 | 1.40 |
+| lateral | the end frame is BUILT: a depth map of the photo (NB Pro), the photo shifted by it (ffmpeg displace: near pixels ~7.5 % of the width, far ~0.8 %), cleaned by NB Pro with the original as reference; the start is the photo cut to the same window. From the photo alone every model (Kling 3.0/2.6, Hailuo 2.3) often turned instead of moving (measured) | 5 s, silent | 5×0.09 + 3×0.505 = 1.97 | 1.80 |
 | limpeza, remodelacao | end frame | 10 s, sound | 4×0.09 + 3×1.51 = 4.89 | 4.50 |
 | planta | end frame (3D plan); the start (empty plot) is drawn by code, free | 10 s, sound | 4.89 | 4.50 |
 | construcao | start frame (empty plot); the end frame is the customer's photo | **15 s**, sound (one clip, so it counts as 1 video) | 4×0.09 + 3×2.265 = 7.16 | 6.60 |

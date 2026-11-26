@@ -360,7 +360,7 @@ class FerramentasTest extends TestCase
         $this->actingAs($u)->get(route('obrigado', ['session_id' => 'cs_back']))->assertRedirect(route('ferramentas.video', $f->id));
     }
 
-    public function test_the_side_move_goes_from_the_photo_straight_to_a_5_second_silent_slide_in_the_chosen_direction(): void
+    public function test_the_side_move_builds_a_real_sideways_end_frame_from_a_depth_map_then_a_5_second_silent_clip(): void
     {
         $this->kie();
         $u = $this->cliente(1);
@@ -369,37 +369,72 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->direcao($f, 'esquerda'));
         $this->assertFalse(app(Ferramentas::class)->direcao($f, 'cima'));
         Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        $this->assertFalse(app(Ferramentas::class)->direcao($f->refresh(), 'direita'));   // fixed once the frames are being made
 
-        $this->assertTrue(app(Ferramentas::class)->iniciar($f->refresh()));
-        Queue::assertPushed(FerramentaVideoJob::class);
-        Queue::assertNotPushed(FerramentaFramesJob::class);   // no frames: the photo is the start
-        $this->assertSame([FerramentaIa::A_ANIMAR, $f->original], [$f->refresh()->estado, $f->inicio]);
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+
+        $f->refresh();
+        $this->assertSame(FerramentaIa::A_APROVAR, $f->estado);
+        $this->assertTrue(Storage::disk('local')->exists($f->pasta().'/profundidade.png'));
+        // both frames: the same window of the photo (1600 px wide, 92 %), the start a cut of it, the end built from it
+        $this->assertNotSame($f->original, $f->inicio);
+        $this->assertSame([1472, 1000], array_slice(getimagesizefromstring(Storage::disk('local')->get($f->inicio)), 0, 2));
+        $this->assertSame([1472, 1000], array_slice(getimagesizefromstring(Storage::disk('local')->get($f->fim)), 0, 2));
+        $pedidos = collect(Http::recorded())->map(fn ($r) => $r[0])->filter(fn ($r) => str_contains($r->url(), 'createTask'))->values();
+        $this->assertStringContainsString('depth map', $pedidos[0]['input']['prompt']);
+        $this->assertStringContainsString('warping artifacts', $pedidos[1]['input']['prompt']);
+        $this->assertSame([['frames', 0.09], ['frames', 0.09]], $this->custos($f));
+
+        app(Ferramentas::class)->aprovar($f);
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
-
         $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && count($r['input']['image_urls']) === 1 && $r['input']['duration'] === '5' && $r['input']['sound'] === false
-            && str_starts_with($r['input']['prompt'], 'Truck left'));
-        $this->assertSame([['video', 0.505]], $this->custos($f));
-
-        // a new version can go the other way
-        $this->assertTrue(app(Ferramentas::class)->direcao($f, 'direita'));
-        $this->assertTrue(app(Ferramentas::class)->refazer($f->refresh(), ''));
-        $this->assertFalse(app(Ferramentas::class)->direcao($f->refresh(), 'esquerda'));   // not while it is being made
+            && count($r['input']['image_urls']) === 2 && $r['input']['duration'] === '5' && $r['input']['sound'] === false
+            && str_contains($r['input']['prompt'], 'travels sideways to the left'));
+        $this->assertSame([['frames', 0.09], ['frames', 0.09], ['video', 0.505]], $this->custos($f));
     }
 
-    public function test_a_side_move_whose_first_video_fails_gives_the_video_back(): void
+    public function test_the_sideways_shift_moves_near_pixels_further_than_far_ones_the_way_the_camera_goes(): void
     {
-        $this->kie(falha: true);
-        $u = $this->cliente(1);
-        $f = app(Ferramentas::class)->criar($u, 'lateral', $this->foto());
-        Queue::fake();
-        app(Ferramentas::class)->iniciar($f->refresh());
-        $this->assertSame(0, $u->videosIaDisponiveis());
+        $dir = sys_get_temp_dir().'/deslocar-'.uniqid();
+        mkdir($dir);
+        // a photo of random vertical stripes (no repeating pattern to mistake one shift for another);
+        // depth: the left half far (black), the right half near (white)
+        mt_srand(7);
+        $foto = imagecreatetruecolor(1600, 1000);
+        for ($x = 0; $x < 1600; $x++) {
+            $v = mt_rand(0, 255);
+            imageline($foto, $x, 0, $x, 999, ($v << 16) | ($v << 8) | $v);
+        }
+        imagepng($foto, "$dir/foto.png");
+        $prof = imagecreatetruecolor(1600, 1000);
+        imagefilledrectangle($prof, 800, 0, 1599, 999, 0xFFFFFF);
+        imagepng($prof, "$dir/prof.png");
+        $desvio = function (string $fim, string $inicio, int $x0) {   // how far the stripes at $x0 moved (px)
+            $a = imagecreatefrompng($inicio);
+            $b = imagecreatefrompng($fim);
+            $melhor = [PHP_INT_MAX, 0];
+            foreach (range(-130, 130) as $d) {
+                $e = 0;
+                foreach (range($x0, $x0 + 200, 2) as $x) {
+                    $e += abs((imagecolorat($a, $x, 500) & 0xFF) - (imagecolorat($b, $x + $d, 500) & 0xFF));
+                }
+                $melhor = min($melhor, [$e, $d]);
+            }
 
-        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+            return $melhor[1];
+        };
 
-        $this->assertSame([FerramentaIa::RASCUNHO, null], [$f->refresh()->estado, $f->compra_id]);
-        $this->assertSame(1, $u->videosIaDisponiveis());
+        [$inicio, $fim] = \App\Services\Ferramentas\Realizador::deslocar("$dir/foto.png", "$dir/prof.png", false, $dir);
+        $longe = $desvio($fim, $inicio, 300);    // far, left half
+        $perto = $desvio($fim, $inicio, 1100);   // near, right half
+        $this->assertLessThan(0, $perto);        // moving right: the picture slides left
+        $this->assertLessThan(abs($perto), abs($longe) * 2.5);   // near pixels move several times further than far ones
+
+        [$inicio, $fim] = \App\Services\Ferramentas\Realizador::deslocar("$dir/foto.png", "$dir/prof.png", true, $dir);
+        $this->assertGreaterThan(0, $desvio($fim, $inicio, 1000));   // moving left: the picture slides right
+        array_map('unlink', glob("$dir/*"));
+        rmdir($dir);
     }
 }

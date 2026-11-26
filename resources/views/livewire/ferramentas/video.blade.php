@@ -1,9 +1,8 @@
 @php
     $v = $video;
     $estado = $v?->estado ?? \App\Models\FerramentaIa::RASCUNHO;
-    $semQuadros = $tipo['ai'] === [];   // the side move: no frames step, the photo goes straight to the clip
-    $passos = $semQuadros ? ['Fotografia', 'Vídeo'] : ['Fotografia', 'Imagens', 'Vídeo'];
-    $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => count($passos) - 1, 'pronto' => count($passos) - 1][$estado];
+    $passos = ['Fotografia', 'Imagens', 'Vídeo'];
+    $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => 2, 'pronto' => 2][$estado];
     $ficheiro = fn (string $qual, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, ...$q, 'v' => substr(md5((string) $v->{$qual}), 0, 8)]);
     $quadrosIa = $tipo['ai'];
     $semVideos = $disponiveis === 0;
@@ -114,12 +113,12 @@
             @if (! $semVideos && $v)
                 <div class="flex flex-wrap items-center gap-4">
                     <button type="submit" wire:loading.attr="disabled" wire:target="criar, foto" @disabled($v->aAnalisar()) class="{{ $botao }}">
-                        <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : ($semQuadros ? 'Criar vídeo →' : 'Criar imagens →') }}</span>
+                        <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : 'Criar imagens →' }}</span>
                         <span wire:loading wire:target="criar">A enviar…</span>
                     </button>
                     <p class="text-xs text-[#6B7385]">
                         {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa 1 dos seus '.$disponiveis.' vídeos IA.' }}
-                        {{ $semQuadros ? 'Inclui '.config('contentmachine.ferramentas.refazer_video').' novas versões do vídeo.' : 'Inclui '.config('contentmachine.ferramentas.editar_imagem').' alterações às imagens e '.config('contentmachine.ferramentas.refazer_video').' novas versões do vídeo.' }}
+                        Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
                     </p>
                 </div>
             @endif
@@ -190,30 +189,18 @@
         <video src="{{ $ficheiro('video') }}" poster="{{ $ficheiro('inicio') }}" controls playsinline class="mt-6 w-full rounded-2xl bg-navy aspect-video"></video>
         <div class="mt-4 flex flex-wrap gap-3">
             <a href="{{ $ficheiro('video', ['baixar' => 1]) }}" class="inline-flex items-center {{ $botao }}">Descarregar vídeo</a>
-            @unless ($semQuadros)
-                <a href="{{ $ficheiro('inicio', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de início</a>
-                <a href="{{ $ficheiro('fim', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de fim</a>
-            @endunless
+            <a href="{{ $ficheiro('inicio', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de início</a>
+            <a href="{{ $ficheiro('fim', ['baixar' => 1]) }}" class="inline-flex items-center {{ $secundario }}">Imagem de fim</a>
         </div>
         <form wire:submit="refazer" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-6 flex flex-col gap-3">
             <h2 class="font-display text-2xl text-ivory">Não ficou como queria?</h2>
             @if ($v->refeitosRestantes() > 0 || auth()->user()->is_admin)
-                @if ($tipo['direcao'] ?? false)
-                    <fieldset class="flex flex-wrap items-center gap-3 text-sm text-[#4A5263]">
-                        <legend class="sr-only">Direção do movimento</legend>
-                        <span class="font-semibold text-ivory">A câmara desliza</span>
-                        @foreach (['esquerda' => '← Para a esquerda', 'direita' => 'Para a direita →'] as $valor => $rotulo)
-                            <label class="inline-flex items-center gap-2 px-4 min-h-11 rounded-full border cursor-pointer {{ $direcao === $valor ? 'border-coral text-navy font-semibold bg-[#FDEDEB]' : 'border-[#D9D5CC]' }}">
-                                <input type="radio" wire:model.live="direcao" value="{{ $valor }}" class="sr-only"> {{ $rotulo }}
-                            </label>
-                        @endforeach
-                    </fieldset>
-                @endif
+                
                 <textarea wire:model="nota" maxlength="500" class="{{ $campo }}" placeholder="Opcional. Ex.: mais devagar"></textarea>
                 @error('nota') <span class="text-sm text-coral">{{ $message }}</span> @enderror
                 <div class="flex flex-wrap items-center gap-4">
                     <button type="submit" wire:loading.attr="disabled" class="{{ $secundario }}">Refazer vídeo</button>
-                    <span class="text-xs text-[#6B7385]">Restam {{ $v->refeitosRestantes() }} {{ $v->refeitosRestantes() === 1 ? 'nova versão' : 'novas versões' }}, sem custo. {{ $semQuadros ? 'Usa a mesma fotografia.' : 'Usa as mesmas imagens.' }}</span>
+                    <span class="text-xs text-[#6B7385]">Restam {{ $v->refeitosRestantes() }} {{ $v->refeitosRestantes() === 1 ? 'nova versão' : 'novas versões' }}, sem custo. Usa as mesmas imagens.</span>
                 </div>
             @else
                 <p class="text-sm text-[#6B7385]">Já usou as {{ config('contentmachine.ferramentas.refazer_video') }} novas versões deste vídeo. Para outro resultado, comece um vídeo novo.</p>

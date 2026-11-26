@@ -70,25 +70,34 @@ class Realizador
                 .'stay still; the same daylight from start to end.',
             'som' => null,   // silent (the user's call, 2026-11-26): also the cheaper Kling price
         ],
-        // The side move: the photo is the only frame and Kling makes the slide (tested 2026-11-26: two crops of the
-        // photo made a flat 2D pan; an AI end frame moved objects around; Kling alone had the real gimbal depth but
-        // went too far and invented things, so the move is kept to about a metre). %s = right | left.
+        // The side move, a real sideways travel (user, 2026-11-26: "it must always move the camera position"). From one
+        // photo every video model (Kling 3.0 with any wording, Kling 2.6, Hailuo 2.3) often TURNS instead of moving: the
+        // near and far parts shift alike (measured on tracked points against a depth map). So the end frame is built:
+        // a depth map of the photo (`profundidade`), the photo shifted by it (near pixels further than far ones: what
+        // a sideways move does), that cleaned by the AI where the warp bent things (`limpar`); the start is the photo
+        // cut to the same window. Kling then has to land there: measured as a real slide (near/far shift 1.6-1.7).
         'lateral' => [
-            'analise' => 'You check a real-estate photo before it is turned into an AI "gimbal slide" video: the camera glides '
-                .'steadily about one metre sideways from this exact view, like a gimbal slider shot in slow motion. It '
-                .'works for interiors and exteriors. A GOOD start: a sharp, well-lit, level photo with depth, some objects or '
-                .'furniture in front of a background (the parallax is what makes it beautiful). PROBLEMS to look for: a floor '
-                .'plan, drawing or screenshot; a close-up of a flat wall or of one object, with nothing behind it; people or '
+            'analise' => 'You check a real-estate photo before it is turned into an AI "gimbal slide" video: the camera travels '
+                .'about one metre sideways from this exact view, like a gimbal slider shot in slow motion. It works for '
+                .'interiors and exteriors. A GOOD start: a sharp, well-lit, level photo with depth, some objects or furniture '
+                .'in front of a background (the parallax is what makes it beautiful). PROBLEMS to look for: a floor plan, '
+                .'drawing or screenshot; a close-up of a flat wall or of one object, with nothing behind it; people or '
                 .'animals in the picture (they freeze or warp); blurry, very dark or heavily filtered; strongly tilted; a '
                 .'collage, or text and logos over the picture; a very wide panorama.',
-            // "half a metre, very slow, eases to rest" sometimes barely moved (user, 2026-11-26): about a metre, a
-            // constant pace that is clearly visible from the first frame to the last
-            'video' => 'Truck %1$s: a smooth gimbal slider shot in slow motion. From the very first frame the camera glides '
-                .'sideways to the %1$s at a steady, constant, clearly visible pace, about one metre over the whole shot, and '
-                .'keeps moving until the last frame. It keeps the same height and faces the same direction, with natural '
-                .'parallax between nearby objects and the background. Every object stays exactly as it is and where it is; '
-                .'the room or scene is the same one throughout, with the same light. One continuous move with no cuts, no '
-                .'zoom and no rotation.',
+            'profundidade' => 'Turn this photo into its depth map: a smooth grayscale image with exactly the same framing and '
+                .'composition, where the brightness of each pixel is its distance from the camera: the nearest surfaces pure '
+                .'white, the farthest pure black, smooth gradients along floors and walls that recede, crisp edges where an '
+                .'object stands in front of something further away. No colours, no textures, no shading from light, no text.',
+            'limpar' => 'The first image is a photo seen from a slightly moved camera, made by warping the second image (the '
+                .'original photo), so it has warping artifacts: some straight lines, door and window frames and glass panes '
+                .'are bent or wavy, and some edges are smeared or stretched. Repair those distorted areas so every straight '
+                .'line is straight and every object looks exactly like it does in the original photo. Keep the first image\'s '
+                .'viewpoint, framing and the positions of everything in it exactly as they are; same colours and light. '
+                .'Photoreal, with the picture free of text, logos and watermarks.',
+            'video' => 'Slow truck %1$s: a smooth gimbal slider shot in slow motion; the camera itself travels sideways to the '
+                .'%1$s at a steady pace from the first frame to the last frame, never turning, with natural parallax: things '
+                .'near the camera pass faster than the walls behind. Every object stays exactly as it is; the same light '
+                .'throughout. One continuous move, no cuts, no zoom.',
             'som' => null,
         ],
     ];
@@ -108,6 +117,9 @@ class Realizador
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
+        if ($f->ferramenta === 'lateral' && $pedido === null) {   // the side move's end frame is built, not drawn
+            return $this->lateral($f);
+        }
         $original = $disk->get($f->original);
         $tem = fn (?string $c) => $c && $c !== $f->original && $disk->exists($c);
         $outro = $qual === 'inicio' ? 'fim' : 'inicio';
@@ -122,28 +134,98 @@ class Realizador
             $refs[] = $this->kie->upload($disk->get($f->{$outro}), 'outro.png');
         }
         $refs[] = $this->kie->upload($original, 'foto.jpg');
-        $proporcao = Fotografo::proporcao($original);
+        [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
+
+        return $this->imagem($prompt, $refs, Fotografo::proporcao($original), $w, $h, $f->pasta().'/'.$qual.'-'.Str::random(8).'.png');
+    }
+
+    /** One Nano Banana Pro image (the fallback model if it keeps failing), cut to $w×$h, stored at $destino. */
+    private function imagem(string $prompt, array $refs, string $proporcao, int $w, int $h, string $destino): string
+    {
         $url = Fotografo::comAlternativa(
             fn () => $this->kie->submitResolucao($prompt, $proporcao, $refs, '2K'),
             fn () => $this->kie->submitAlternativo($prompt, $proporcao, $refs),
             fn ($t) => $this->kie->poll($t),
         );
-        [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
-        $caminho = $f->pasta().'/'.$qual.'-'.Str::random(8).'.png';
-        $disk->put($caminho, self::ajustar(Http::timeout(120)->retry(2, 2000)->get($url)->throw()->body(), $w, $h));
+        Storage::disk(config('contentmachine.imoplanta.disk'))->put($destino, self::ajustar(Http::timeout(120)->retry(2, 2000)->get($url)->throw()->body(), $w, $h));
 
-        return $caminho;
+        return $destino;
     }
 
-    /** The clip from the approved frames, or from the photo alone ($nota: the customer's wish for a new version). Returns its path. */
+    /** Working width of the side move's frames: the displacement map is 8-bit (±127 px), the near shift ~7 % of it. */
+    public const LARGURA_LATERAL = 1600;
+
+    /** Share of the width both side-move frames keep: the shift smears the edge it moves away from. */
+    public const JANELA_LATERAL = 0.92;
+
+    /**
+     * The side move's frames: the start is the photo cut to the window, the end is the same window after the camera
+     * has travelled sideways (the photo shifted by its depth map, then cleaned by the AI). Sets `inicio`; returns the end.
+     */
+    private function lateral(FerramentaIa $f): string
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        $p = self::PROMPTS['lateral'];
+        $original = $disk->get($f->original);
+        [$w0, $h0] = getimagesizefromstring($original) ?: [1600, 1200];
+        $prof = $f->pasta().'/profundidade.png';   // once per video: a new direction reuses it
+        if (! $disk->exists($prof)) {
+            $h = (int) (round($h0 * self::LARGURA_LATERAL / $w0 / 2) * 2);
+            $this->imagem($p['profundidade'], [$this->kie->upload($original, 'foto.jpg')], Fotografo::proporcao($original), self::LARGURA_LATERAL, $h, $prof);
+        }
+        $dir = sys_get_temp_dir().'/lateral-'.$f->id.'-'.Str::random(6);
+        @mkdir($dir);
+        try {
+            file_put_contents("$dir/foto.jpg", $original);
+            [$inicio, $fim] = self::deslocar("$dir/foto.jpg", $disk->path($prof), $f->direcao() === 'esquerda', $dir);
+            $caminhoInicio = $f->pasta().'/inicio-'.Str::random(8).'.png';
+            $disk->put($caminhoInicio, file_get_contents($inicio));
+            $f->update(['inicio' => $caminhoInicio]);
+            [$cw, $ch] = getimagesize($fim);
+            $deslocada = file_get_contents($fim);
+
+            $refs = [$this->kie->upload($deslocada, 'deslocada.png'), $this->kie->upload($original, 'foto.jpg')];   // the photo: what things really look like
+
+            return $this->imagem($p['limpar'], $refs, Fotografo::proporcao($deslocada), $cw, $ch,
+                $f->pasta().'/fim-'.Str::random(8).'.png');
+        } finally {
+            array_map('unlink', glob("$dir/*") ?: []);
+            @rmdir($dir);
+        }
+    }
+
+    /**
+     * The photo as seen after the camera moved sideways, from its depth map (white = near): every pixel shifts the
+     * way the camera's move pushes it, near ones (~7.5 % of the width) much further than far ones (~0.8 %). Returns
+     * [start, end] PNG paths in $dir, both cut to the same window, away from the smeared edge.
+     */
+    public static function deslocar(string $foto, string $profundidade, bool $esquerda, string $dir): array
+    {
+        [$w0, $h0] = getimagesize($foto);
+        $w = self::LARGURA_LATERAL;
+        $h = (int) (round($h0 * $w / $w0 / 2) * 2);
+        $cw = (int) (round($w * self::JANELA_LATERAL / 2) * 2);
+        $x = $esquerda ? $w - $cw : 0;   // moving right, the picture slides left: keep the left part (and the reverse)
+        // displace takes out(x) = in(x + map - 128): a right move reads from the right (map above 128), a left one from the left
+        $mapa = $esquerda ? 'val*-0.42+116' : 'val*0.42+140';   // far 12 px, near 119 px (of 1600)
+        $corre = fn (array $args) => (new \Symfony\Component\Process\Process(['ffmpeg', '-y', '-v', 'error', ...$args]))->setTimeout(120)->mustRun();
+        $corre(['-i', $foto, '-vf', "scale=$w:$h,crop=$cw:$h:$x:0", "$dir/inicio.png"]);
+        $corre(['-i', $foto, '-i', $profundidade, '-filter_complex',
+            "[0]scale=$w:$h,format=gbrp[m];[1]scale=$w:$h,format=gray,gblur=sigma=10,lut=c0='$mapa',format=gbrp[x];"
+            ."color=c=0x808080:s={$w}x{$h},format=gbrp[y];[m][x][y]displace=edge=smear,crop=$cw:$h:$x:0", '-frames:v', '1', "$dir/fim.png"]);
+
+        return ["$dir/inicio.png", "$dir/fim.png"];
+    }
+
+    /** The clip from the approved frames ($nota: the customer's wish for a new version). Returns its path. */
     public function animar(FerramentaIa $f, ?string $nota = null): string
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
         $p = self::PROMPTS[$f->ferramenta];
         $segundos = $f->tipo()['segundos'];
-        $inicio = $this->kie->upload($disk->get($f->inicio ?: $f->original), 'inicio.png');
-        $fim = $f->fim ? $this->kie->upload($disk->get($f->fim), 'fim.png') : null;   // none: Kling makes the move from the start
+        $inicio = $this->kie->upload($disk->get($f->inicio), 'inicio.png');
+        $fim = $this->kie->upload($disk->get($f->fim), 'fim.png');
         $som = ($p['som'] ?? null) !== null;
         $video = ($f->tipo()['direcao'] ?? false) ? sprintf($p['video'], $f->direcao() === 'esquerda' ? 'left' : 'right') : $p['video'];
         $prompt = $video.($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');

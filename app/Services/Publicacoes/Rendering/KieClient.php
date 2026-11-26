@@ -103,16 +103,16 @@ class KieClient
     /**
      * Start frame → end frame VIDEO: the camera move between two stills, with
      * whatever changes between them animated in. Kling 3.0 (default) takes both
-     * frames as image_urls (or only the start: Kling makes the move itself) and 3–15 s; Kling 2.x takes image_url + tail_image_url
+     * frames as image_urls and 3–15 s; Kling 2.x takes image_url + tail_image_url
      * and 5/10 s. Returns the taskId so several rooms can be submitted before any
      * is polled (see pollVideo()). Both URLs must be kie file URLs (see upload()).
      */
-    public function submitFramesVideo(string $prompt, string $startUrl, ?string $endUrl, string $negative = '', int $seconds = 5, ?bool $som = null, ?string $modelo = null): string
+    public function submitFramesVideo(string $prompt, string $startUrl, string $endUrl, string $negative = '', int $seconds = 5, ?bool $som = null, ?string $modelo = null): string
     {
         $model = $modelo ?? (string) config('contentmachine.real_estate.property.video_model', 'kling-3.0/video');
         $prompt = Str::limit($prompt, 2400, '');
         $input = str_starts_with($model, 'kling-3')
-            ? ['prompt' => $prompt, 'image_urls' => array_values(array_filter([$startUrl, $endUrl])), 'sound' => $som ?? (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
+            ? ['prompt' => $prompt, 'image_urls' => [$startUrl, $endUrl], 'sound' => $som ?? (bool) config('contentmachine.real_estate.property.sound', true), 'duration' => (string) max(3, min(15, $seconds)), 'mode' => 'pro', 'multi_shots' => false]
             : array_filter(['prompt' => $prompt, 'image_url' => $startUrl, 'tail_image_url' => $endUrl, 'duration' => $seconds > 7 ? '10' : '5', 'negative_prompt' => $negative]);
 
         $r = Http::timeout(60)->withToken($this->chave())
