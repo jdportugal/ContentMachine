@@ -9,6 +9,7 @@ Real-estate agents buy short AI videos made from one of their own photos (or a f
 | Key | Name shown | What the video shows |
 |---|---|---|
 | `drone` | Vista drone | a silent drone orbit around the house, seen from the air (changed 2026-11-26: the user wants it rotating and with no sound) |
+| `lateral` | Movimento lateral | added 2026-11-26: a slow gimbal-style side slide, 5 s, silent, left or right as the customer picks |
 | `limpeza` | Limpeza IA | unwanted objects and clutter vanish, leaving the space clean |
 | `remodelacao` | Remodelação IA | a timelapse-like remodel, from the current state to a renovated one |
 | `construcao` | Construção IA | a timelapse of workers building the house, from an empty plot to the finished house |
@@ -45,6 +46,7 @@ Each video has a **fixed price**, so we cap what a video can cost us and price i
 | Tool | AI frame | Clip | Worst case (USD) | ≈ EUR |
 |---|---|---|---|---|
 | drone | both frames: the aerial view and the view after orbiting ~45° (3 changes shared) | 10 s, **silent** | 5×0.09 + 3×1.01 = 3.48 | 3.20 |
+| lateral | none: the photo is the start and Kling makes the move (the user picked this over two photo crops, which gave a flat pan, and an AI end frame, which moved objects around), so the customer approves the photo and the direction | 5 s, silent | 3×0.505 = 1.52 | 1.40 |
 | limpeza, remodelacao | end frame | 10 s, sound | 4×0.09 + 3×1.51 = 4.89 | 4.50 |
 | planta | end frame (3D plan); the start (empty plot) is drawn by code, free | 10 s, sound | 4.89 | 4.50 |
 | construcao | start frame (empty plot); the end frame is the customer's photo | **15 s**, sound (one clip, so it counts as 1 video) | 4×0.09 + 3×2.265 = 7.16 | 6.60 |

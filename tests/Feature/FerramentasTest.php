@@ -359,4 +359,47 @@ class FerramentasTest extends TestCase
 
         $this->actingAs($u)->get(route('obrigado', ['session_id' => 'cs_back']))->assertRedirect(route('ferramentas.video', $f->id));
     }
+
+    public function test_the_side_move_goes_from_the_photo_straight_to_a_5_second_silent_slide_in_the_chosen_direction(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'lateral', $this->foto());
+        $this->assertSame('direita', $f->direcao());
+        $this->assertTrue(app(Ferramentas::class)->direcao($f, 'esquerda'));
+        $this->assertFalse(app(Ferramentas::class)->direcao($f, 'cima'));
+        Queue::fake();
+
+        $this->assertTrue(app(Ferramentas::class)->iniciar($f->refresh()));
+        Queue::assertPushed(FerramentaVideoJob::class);
+        Queue::assertNotPushed(FerramentaFramesJob::class);   // no frames: the photo is the start
+        $this->assertSame([FerramentaIa::A_ANIMAR, $f->original], [$f->refresh()->estado, $f->inicio]);
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+
+        $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && count($r['input']['image_urls']) === 1 && $r['input']['duration'] === '5' && $r['input']['sound'] === false
+            && str_starts_with($r['input']['prompt'], 'Slow truck left'));
+        $this->assertSame([['video', 0.505]], $this->custos($f));
+
+        // a new version can go the other way
+        $this->assertTrue(app(Ferramentas::class)->direcao($f, 'direita'));
+        $this->assertTrue(app(Ferramentas::class)->refazer($f->refresh(), ''));
+        $this->assertFalse(app(Ferramentas::class)->direcao($f->refresh(), 'esquerda'));   // not while it is being made
+    }
+
+    public function test_a_side_move_whose_first_video_fails_gives_the_video_back(): void
+    {
+        $this->kie(falha: true);
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'lateral', $this->foto());
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        $this->assertSame(0, $u->videosIaDisponiveis());
+
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+
+        $this->assertSame([FerramentaIa::RASCUNHO, null], [$f->refresh()->estado, $f->compra_id]);
+        $this->assertSame(1, $u->videosIaDisponiveis());
+    }
 }

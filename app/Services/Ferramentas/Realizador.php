@@ -70,6 +70,24 @@ class Realizador
                 .'stay still; the same daylight from start to end.',
             'som' => null,   // silent (the user's call, 2026-11-26): also the cheaper Kling price
         ],
+        // The side move: the photo is the only frame and Kling makes the slide (tested 2026-11-26: two crops of the
+        // photo made a flat 2D pan; an AI end frame moved objects around; Kling alone had the real gimbal depth but
+        // went too far and invented things, so the move is kept short and very slow). %s = right | left.
+        'lateral' => [
+            'analise' => 'You check a real-estate photo before it is turned into an AI "gimbal slide" video: the camera glides '
+                .'very slowly about half a metre sideways from this exact view, like a gimbal slider shot in slow motion. It '
+                .'works for interiors and exteriors. A GOOD start: a sharp, well-lit, level photo with depth, some objects or '
+                .'furniture in front of a background (the parallax is what makes it beautiful). PROBLEMS to look for: a floor '
+                .'plan, drawing or screenshot; a close-up of a flat wall or of one object, with nothing behind it; people or '
+                .'animals in the picture (they freeze or warp); blurry, very dark or heavily filtered; strongly tilted; a '
+                .'collage, or text and logos over the picture; a very wide panorama.',
+            'video' => 'Slow truck %1$s: a smooth gimbal slider shot in slow motion. The camera glides only about half a '
+                .'metre sideways to the %1$s at a very slow, steady pace, keeping the same height and facing the same '
+                .'direction, with gentle, natural parallax between nearby objects and the background, and eases to rest. '
+                .'Every object stays exactly as it is and where it is; the room or scene is the same one throughout, with '
+                .'the same light. One continuous move with no cuts, no zoom and no rotation.',
+            'som' => null,
+        ],
     ];
 
     public const PROMPT_ALTERAR = 'Change this image as asked, and nothing else: «%s». Keep everything else exactly as it is: '
@@ -114,17 +132,18 @@ class Realizador
         return $caminho;
     }
 
-    /** The clip from the approved frames ($nota: the customer's wish for a new version). Returns its path. */
+    /** The clip from the approved frames, or from the photo alone ($nota: the customer's wish for a new version). Returns its path. */
     public function animar(FerramentaIa $f, ?string $nota = null): string
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
         $p = self::PROMPTS[$f->ferramenta];
         $segundos = $f->tipo()['segundos'];
-        $inicio = $this->kie->upload($disk->get($f->inicio), 'inicio.png');
-        $fim = $this->kie->upload($disk->get($f->fim), 'fim.png');
+        $inicio = $this->kie->upload($disk->get($f->inicio ?: $f->original), 'inicio.png');
+        $fim = $f->fim ? $this->kie->upload($disk->get($f->fim), 'fim.png') : null;   // none: Kling makes the move from the start
         $som = ($p['som'] ?? null) !== null;
-        $prompt = $p['video'].($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');
+        $video = ($f->tipo()['direcao'] ?? false) ? sprintf($p['video'], $f->direcao() === 'esquerda' ? 'left' : 'right') : $p['video'];
+        $prompt = $video.($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');
         $erro = null;
         for ($i = 1; $i <= self::TENTATIVAS_VIDEO; $i++) {
             try {

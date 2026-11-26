@@ -27,6 +27,9 @@ class Video extends Component
 
     public string $pedido = '';
 
+    /** The side move's direction: esquerda | direita. */
+    public string $direcao = 'direita';
+
     /** Which AI frame the change is for (the last one by default). */
     public string $alvo = '';
 
@@ -38,6 +41,7 @@ class Video extends Component
             abort_unless($video->user_id === auth()->id() || auth()->user()->is_admin, 403);
             $this->video = $video;
             $this->ferramenta = $video->ferramenta;
+            $this->direcao = $video->direcao();
         } else {
             abort_unless(isset(Ferramentas::disponiveis()[$ferramenta]), 404);
             $this->ferramenta = $ferramenta;
@@ -60,9 +64,18 @@ class Video extends Component
             return null;
         }
         $this->video = $ferramentas->criar(auth()->user(), $this->ferramenta, $this->foto);
+        $ferramentas->direcao($this->video, $this->direcao);
         $this->foto = null;
 
         return $this->redirectRoute('ferramentas.video', $this->video->id, navigate: false);
+    }
+
+    public function updatedDirecao(Ferramentas $ferramentas): void
+    {
+        if ($this->video) {
+            $ferramentas->direcao($this->video, $this->direcao);
+            $this->video->refresh();
+        }
     }
 
     /** «Criar imagens»: one video spent and the frames start (none left: the draft stays and its page shows the packs). */

@@ -32,7 +32,7 @@ class FerramentaIa extends Model
 
     protected function casts(): array
     {
-        return ['versoes' => 'array', 'analise' => 'array'];
+        return ['versoes' => 'array', 'analise' => 'array', 'opcoes' => 'array'];
     }
 
     public function user(): BelongsTo
@@ -51,10 +51,16 @@ class FerramentaIa extends Model
         return Ferramentas::lista()[$this->ferramenta];
     }
 
-    /** The frames the AI makes, in order: ['fim'], ['inicio'] (construção) or both (drone). */
+    /** The frames the AI makes, in order: ['fim'], ['inicio'] (construção), both (drone) or none (the side move). */
     public function quadrosIa(): array
     {
         return $this->tipo()['ai'];
+    }
+
+    /** The side move's direction: direita unless the customer chose esquerda. */
+    public function direcao(): string
+    {
+        return ($this->opcoes['direcao'] ?? null) === 'esquerda' ? 'esquerda' : 'direita';
     }
 
     public function aTrabalhar(): bool
