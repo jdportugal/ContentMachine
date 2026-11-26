@@ -379,7 +379,7 @@ class FerramentasTest extends TestCase
         $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
             && count($r['input']['image_urls']) === 1 && $r['input']['duration'] === '5' && $r['input']['sound'] === false
-            && str_starts_with($r['input']['prompt'], 'Slow truck left'));
+            && str_starts_with($r['input']['prompt'], 'Truck left'));
         $this->assertSame([['video', 0.505]], $this->custos($f));
 
         // a new version can go the other way
