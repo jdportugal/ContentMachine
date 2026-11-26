@@ -70,25 +70,6 @@
         </ul>
     </section>
 
-    {{-- how it works: the customer approves the frames before any video is made --}}
-    <section class="mt-20 lg:mt-28">
-        <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">COMO FUNCIONA</span></div>
-        <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Vê o resultado antes do vídeo</h2>
-        <ol class="mt-8 grid gap-5 lg:grid-cols-3">
-            @foreach ([
-                ['Envie a fotografia', 'Escolha a ferramenta e envie uma fotografia do imóvel, ou a planta, no caso da planta animada.'],
-                ['Aprove as imagens', 'Mostramos a primeira e a última imagem do vídeo. Pode pedir alterações por escrito, até '.config('contentmachine.ferramentas.editar_imagem').' vezes. A sua fotografia nunca é alterada.'],
-                ['Receba o vídeo', 'Animamos de uma imagem para a outra, com som. Se não ficar como queria, pode pedir outra versão, até '.config('contentmachine.ferramentas.refazer_video').' vezes.'],
-            ] as $i => [$titulo, $texto])
-                <li class="rounded-[20px] bg-navy text-ivory p-6 lg:p-8 flex flex-col gap-3">
-                    <span class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-coral text-navy font-display text-xl">{{ $i + 1 }}</span>
-                    <h3 class="font-display text-[24px] leading-tight">{{ $titulo }}</h3>
-                    <p class="text-sm leading-relaxed text-[#C9CED6]">{{ $texto }}</p>
-                </li>
-            @endforeach
-        </ol>
-    </section>
-
     {{-- prices --}}
     <section class="mt-20 lg:mt-28">
         <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">PREÇOS</span></div>
