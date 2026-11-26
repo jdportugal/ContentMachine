@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-/** RE/MAX agents can find their listing by their name instead of pasting the link. */
+/** RE/MAX, iad and Century 21 agents can find their listing by their name instead of pasting the link. */
 class ProcurarPeloNomeTest extends TestCase
 {
     use RefreshDatabase;
@@ -75,5 +75,57 @@ class ProcurarPeloNomeTest extends TestCase
         Livewire::test(Landing::class)->call('escolher', 'remax')->call('mudarModo', 'nome')
             ->set('nomeConsultor', 'Ana Silva')->call('procurarConsultor')
             ->assertSet('avisoProcura', 'erro')->assertSee('Não conseguimos procurar agora');
+    }
+
+    public function test_an_iad_agent_finds_their_listing_by_name_even_typing_a_middle_name(): void
+    {
+        Cache::flush();
+        Queue::fake();
+        Http::fake([
+            // iad matches the whole name: "Sandra Marisa Silva" finds nobody, so it is asked again by the last word
+            'www.iadportugal.pt/api/agents?searchTerm=Sandra%20Marisa%20Silva*' => Http::response(['items' => [], 'totalItems' => 0]),
+            'www.iadportugal.pt/api/agents?searchTerm=Silva*' => Http::response(['items' => [
+                ['userName' => 'sandra.silva', 'fullName' => 'Sandra Silva', 'location' => ['place' => 'Ericeira']],
+                ['userName' => 'luis.silva', 'fullName' => 'Luis Silva', 'location' => ['place' => 'Porto']],
+                ['userName' => '<script>', 'fullName' => 'Sandra Má'],
+            ], 'totalItems' => 3]),
+            'www.iadportugal.pt/consultor-imobiliario/sandra.silva' => Http::response(
+                '<a href="/anuncio/terreno-venda-alvarinhos-4851m2/r953966">Terreno venda alvarinhos 4851m2</a>'),
+        ]);
+
+        Livewire::test(Landing::class)->call('escolher', 'iad')
+            ->assertSee('Procurar pelo meu nome')->call('mudarModo', 'nome')->assertSet('modo', 'nome')->assertSee('Como aparece na iad Portugal')
+            ->set('nomeConsultor', 'Sandra Marisa Silva')->call('procurarConsultor')
+            ->assertSee('Sandra Silva')->assertSee('iad Portugal · Ericeira')
+            ->call('escolherConsultor', 'sandra.silva');
+        $this->assertNotSame([], app(\App\Services\RealEstate\IadConsultores::class)->imoveis('sandra.silva'));
+        $this->assertSame([], app(\App\Services\RealEstate\IadConsultores::class)->imoveis('../etc'));
+    }
+
+    public function test_a_century_21_agent_finds_their_listing_by_name_and_asks_for_its_video(): void
+    {
+        Cache::flush();
+        Queue::fake();
+        Http::fake([
+            'century21.pt/api/agents*' => Http::response(['data' => [
+                ['handler' => 'sandra-asilva', 'name' => 'Sandra Silva', 'display_name' => null, 'agency' => ['name' => 'CENTURY 21 Realty Art M&J']],
+                ['handler' => 'rui-costa', 'name' => 'Rui Costa', 'agency' => ['name' => 'CENTURY 21 Lis']],
+            ], 'total' => 2]),
+            'century21.pt/api/properties*' => Http::response(['data' => [
+                ['reference' => 'C0223-10424', 'link' => 'https://www.century21.pt/ref/C0223-10424', 'title' => ['pt' => 'Apartamento T4 em Olivais, Lisboa', 'en' => 'Olivais'],
+                    'price' => 360000, 'price_hidden' => false, 'images' => ['https://images.century21.pt/a/1.jpg']],
+                ['reference' => 'C0223-10500', 'link' => 'https://www.century21.pt/ref/C0223-10500', 'title' => ['pt' => 'Moradia T3'], 'price' => 500000, 'price_hidden' => true, 'images' => []],
+            ], 'total' => 2]),
+        ]);
+
+        Livewire::test(Landing::class)->call('escolher', 'century21')
+            ->call('mudarModo', 'nome')->set('nomeConsultor', 'sandra silva')->call('procurarConsultor')
+            ->assertSee('Sandra Silva')->assertSee('CENTURY 21 Realty Art M&amp;J', false)->assertDontSee('Rui Costa')
+            ->call('escolherConsultor', 'sandra-asilva')
+            ->assertSee('Apartamento T4 em Olivais, Lisboa')->assertSee('360 000 €')->assertSee('Moradia T3')->assertDontSee('500 000 €')   // a hidden price stays hidden
+            ->call('escolherImovel', 'C0223-10424')
+            ->assertHasNoErrors()->assertSet('anuncio', 'https://www.century21.pt/ref/C0223-10424');
+
+        Queue::assertPushed(ImportListingJob::class, fn ($j) => $j->url === 'https://www.century21.pt/ref/C0223-10424');
     }
 }

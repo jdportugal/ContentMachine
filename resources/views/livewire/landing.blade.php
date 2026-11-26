@@ -62,6 +62,7 @@
         $lemos = $ag['lemos'] ?? true;
         $reelAg = \App\Livewire\Landing::demoReel($agencia, $demoSlug);
         $nomeAg = $ag && $agencia !== 'outra' ? $ag['nome'] : null;
+        $porNome = isset(\App\Services\RealEstate\ConsultoresPorNome::PORTAIS[$agencia ?? '']);   // RE/MAX, iad, Century 21: find the listing by the agent's name
     @endphp
     @if (! $passo2)
     {{-- Passo 1: só a pergunta. Uma agência por mosaico, com o logótipo quando o temos
@@ -312,11 +313,11 @@
                 @endif
             @endif
 
-        @elseif ($modo === 'nome' && $agencia === 'remax')
+        @elseif ($modo === 'nome' && $porNome)
             <button type="button" wire:click="mudarModo('')" class="{{ $voltar }}">← Voltar</button>
             <h1 class="mt-3 {{ $pergunta }}">O seu nome?</h1>
             <form wire:submit="procurarConsultor" class="mt-7 flex items-end gap-3" novalidate>
-                <input id="nomeConsultor" type="text" wire:model="nomeConsultor" placeholder="Como aparece na RE/MAX" autocomplete="name" maxlength="80" class="{{ $linha }} flex-1">
+                <input id="nomeConsultor" type="text" wire:model="nomeConsultor" placeholder="Como aparece na {{ $nomeAg }}" autocomplete="name" maxlength="80" class="{{ $linha }} flex-1">
                 <button type="submit" wire:loading.attr="disabled" wire:target="procurarConsultor" class="{{ $botao }} !min-h-[48px] !px-5">
                     <span wire:loading.remove wire:target="procurarConsultor">Procurar</span><span wire:loading wire:target="procurarConsultor">…</span>
                 </button>
@@ -388,11 +389,11 @@
             <h1 class="mt-3 {{ $pergunta }}">Qual é o imóvel?</h1>
             <div class="mt-7 flex flex-col gap-3">
                 <button type="button" wire:click="mudarModo('link')" class="{{ $opcao }}"><span class="{{ $letra }}">A</span>Tenho o link</button>
-                @if ($agencia === 'remax')
+                @if ($porNome)
                     <button type="button" wire:click="mudarModo('nome')" class="{{ $opcao }}"><span class="{{ $letra }}">B</span>Procurar pelo meu nome</button>
                 @endif
-                <button type="button" wire:click="mudarModo('fotos')" class="{{ $opcao }}"><span class="{{ $letra }}">{{ $agencia === 'remax' ? 'C' : 'B' }}</span>Carregar fotos</button>
-                <button type="button" wire:click="mudarModo('depois')" class="{{ $opcao }} !bg-transparent !text-ivory border-[1.5px] !border-dashed !border-ivory/30"><span class="{{ $letra }} !border-ivory/30 !text-[#8B95A7]">{{ $agencia === 'remax' ? 'D' : 'C' }}</span>Lembrar-me mais tarde</button>
+                <button type="button" wire:click="mudarModo('fotos')" class="{{ $opcao }}"><span class="{{ $letra }}">{{ $porNome ? 'C' : 'B' }}</span>Carregar fotos</button>
+                <button type="button" wire:click="mudarModo('depois')" class="{{ $opcao }} !bg-transparent !text-ivory border-[1.5px] !border-dashed !border-ivory/30"><span class="{{ $letra }} !border-ivory/30 !text-[#8B95A7]">{{ $porNome ? 'D' : 'C' }}</span>Lembrar-me mais tarde</button>
             </div>
             <p class="mt-6 text-[13px] text-[#8B95A7]">Grátis · sem cartão</p>
         @endif

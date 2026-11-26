@@ -403,7 +403,7 @@ class Landing extends Component
     public function mudarModo(string $modo): void
     {
         $this->modo = match (true) {
-            $modo === 'nome' && $this->agencia === 'remax' => 'nome',
+            $modo === 'nome' && \App\Services\RealEstate\ConsultoresPorNome::para($this->agencia) => 'nome',
             in_array($modo, ['link', 'fotos', 'depois', ''], true) => $modo,
             default => 'link',
         };
@@ -411,9 +411,13 @@ class Landing extends Component
         $this->avisoProcura = '';
     }
 
-    /** RE/MAX's own agent search, by the name typed. */
-    public function procurarConsultor(\App\Services\RealEstate\RemaxConsultores $remax): void
+    /** The agency's own agent search (RE/MAX, iad, Century 21: ConsultoresPorNome), by the name typed. */
+    public function procurarConsultor(): void
     {
+        $rede = \App\Services\RealEstate\ConsultoresPorNome::para($this->agencia);
+        if (! $rede) {
+            return;
+        }
         // A listing link pasted in the name box: use it as the link.
         if (self::pareceLink($this->nomeConsultor)) {
             [$this->anuncio, $this->nomeConsultor, $this->modo] = [trim($this->nomeConsultor), '', 'link'];
@@ -427,13 +431,13 @@ class Landing extends Component
             'nomeConsultor.min' => 'Escreva pelo menos o primeiro e o último nome.',
         ]);
         $this->reset('consultores', 'consultorEscolhido', 'imoveis', 'avisoProcura');
-        if (! RateLimiter::attempt('procura-remax:'.request()->ip(), 30, fn () => true, 3600)) {
+        if (! RateLimiter::attempt('procura-nome:'.request()->ip(), 30, fn () => true, 3600)) {
             $this->avisoProcura = 'erro';
 
             return;
         }
         try {
-            $this->consultores = $remax->procurar($this->nomeConsultor);
+            $this->consultores = $rede->procurar($this->nomeConsultor);
         } catch (\Throwable $e) {
             report($e);
             $this->avisoProcura = 'erro';
@@ -445,15 +449,16 @@ class Landing extends Component
     }
 
     /** The agent picked themselves: their newest listings. */
-    public function escolherConsultor(string $id, \App\Services\RealEstate\RemaxConsultores $remax): void
+    public function escolherConsultor(string $id): void
     {
-        if (! in_array($id, array_column($this->consultores, 'id'), true)) {
+        $rede = \App\Services\RealEstate\ConsultoresPorNome::para($this->agencia);
+        if (! $rede || ! in_array($id, array_column($this->consultores, 'id'), true)) {
             return;
         }
         $this->consultorEscolhido = $id;
         $this->avisoProcura = '';
         try {
-            $this->imoveis = $remax->imoveis($id);
+            $this->imoveis = $rede->imoveis($id);
         } catch (\Throwable $e) {
             report($e);
             $this->imoveis = [];
