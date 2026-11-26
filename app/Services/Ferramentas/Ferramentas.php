@@ -76,7 +76,7 @@ class Ferramentas
         return $f;
     }
 
-    /** A draft's photo replaced (only before anything is made from it). */
+    /** A draft's photo replaced (only before anything is made from it), and checked for its tool. */
     public function trocarFoto(FerramentaIa $f, UploadedFile $foto): void
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
@@ -85,7 +85,8 @@ class Ferramentas
         }
         $caminho = $f->pasta().'/original-'.\Illuminate\Support\Str::random(6).'.jpg';
         $disk->put($caminho, self::jpeg($foto->getRealPath()));
-        $f->update(['original' => $caminho]);
+        $f->update(['original' => $caminho, 'analise' => ['estado' => 'a_analisar'], 'erro' => null]);
+        \App\Jobs\Ferramentas\AnalisarFotoJob::dispatch($f->id, $caminho);
     }
 
     /** An image file as an upright JPEG, at most $lado px on its longest side. */

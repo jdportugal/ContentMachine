@@ -41,25 +41,37 @@ class Video extends Component
         }
     }
 
-    /** «Criar imagens»: the photo is kept as a draft, then one video is spent and the frames start (no video left: the packs show). */
-    public function criar(Ferramentas $ferramentas)
+    /** A photo chosen: kept as the draft at once (a new one gets its page) and checked for the tool while they look. */
+    public function updatedFoto(Ferramentas $ferramentas)
     {
-        if (! $this->video || $this->foto) {
-            $this->validate(['foto' => 'required|image|mimes:jpg,jpeg,png,webp|max:15360'], [
-                'foto.required' => 'Escolha uma fotografia.',
-                'foto.*' => 'A fotografia tem de ser uma imagem JPG, PNG ou WebP com menos de 15 MB.',
-            ]);
-            if ($this->video) {
-                abort_unless($this->video->estado === FerramentaIa::RASCUNHO, 409);
-                $ferramentas->trocarFoto($this->video, $this->foto);
-            } else {
-                $this->video = $ferramentas->criar(auth()->user(), $this->ferramenta, $this->foto);
-            }
+        $this->validate(['foto' => 'required|image|mimes:jpg,jpeg,png,webp|max:15360'], [
+            'foto.required' => 'Escolha uma fotografia.',
+            'foto.*' => 'A fotografia tem de ser uma imagem JPG, PNG ou WebP com menos de 15 MB.',
+        ]);
+        if ($this->video) {
+            abort_unless($this->video->estado === FerramentaIa::RASCUNHO, 409);
+            $ferramentas->trocarFoto($this->video, $this->foto);
             $this->foto = null;
+            $this->video->refresh();
+
+            return null;
         }
-        $ferramentas->iniciar($this->video);   // none left: the draft keeps the photo and its page shows the packs
+        $this->video = $ferramentas->criar(auth()->user(), $this->ferramenta, $this->foto);
+        $this->foto = null;
 
         return $this->redirectRoute('ferramentas.video', $this->video->id, navigate: false);
+    }
+
+    /** «Criar imagens»: one video spent and the frames start (none left: the draft stays and its page shows the packs). */
+    public function criar(Ferramentas $ferramentas): void
+    {
+        if (! $this->video) {
+            $this->addError('foto', 'Escolha uma fotografia.');
+
+            return;
+        }
+        $ferramentas->iniciar($this->video);
+        $this->video->refresh();
     }
 
     public function alterar(Ferramentas $ferramentas): void

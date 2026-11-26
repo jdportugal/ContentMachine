@@ -111,7 +111,7 @@ class FerramentasTest extends TestCase
 
         $this->assertFalse(app(Ferramentas::class)->iniciar($f));
         $this->assertSame(FerramentaIa::RASCUNHO, $f->refresh()->estado);
-        Queue::assertNothingPushed();
+        Queue::assertNotPushed(FerramentaFramesJob::class);
     }
 
     public function test_admins_and_free_accounts_spend_nothing(): void
@@ -268,20 +268,69 @@ class FerramentasTest extends TestCase
         $this->actingAs($dono)->get(route('ferramentas.video', $f->id))->assertOk();
     }
 
-    public function test_upload_validates_and_creating_images_spends_one_video(): void
+    public function test_upload_validates_then_is_checked_and_creating_images_spends_one_video(): void
     {
         Queue::fake();
         $u = $this->cliente(1);
         \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
 
         \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['ferramenta' => 'drone'])
-            ->set('foto', UploadedFile::fake()->create('nota.pdf', 100, 'application/pdf'))->call('criar')->assertHasErrors('foto');
+            ->set('foto', UploadedFile::fake()->create('nota.pdf', 100, 'application/pdf'))->assertHasErrors('foto');
         $this->assertSame(0, FerramentaIa::count());
 
         \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['ferramenta' => 'drone'])
-            ->set('foto', $this->foto())->call('criar')->assertRedirect(route('ferramentas.video', FerramentaIa::first()->id));
-        $this->assertSame(FerramentaIa::A_ENQUADRAR, FerramentaIa::first()->estado);
+            ->set('foto', $this->foto())->assertRedirect(route('ferramentas.video', FerramentaIa::first()->id));
+        $f = FerramentaIa::first();
+        $this->assertSame([FerramentaIa::RASCUNHO, 'a_analisar'], [$f->estado, $f->analise['estado']]);
+        Queue::assertPushed(\App\Jobs\Ferramentas\AnalisarFotoJob::class);
+        $this->assertSame(1, $u->videosIaDisponiveis());   // nothing spent by uploading
+
+        \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['video' => $f])->call('criar');
+        $this->assertSame(FerramentaIa::A_ENQUADRAR, $f->refresh()->estado);
         $this->assertSame(0, $u->videosIaDisponiveis());
+    }
+
+    public function test_a_photo_that_is_not_ideal_is_flagged_with_why_and_the_customer_can_still_go_on(): void
+    {
+        Queue::fake();
+        config(['services.anthropic.key' => 'sk-test']);
+        Http::fake(['api.anthropic.com/*' => Http::response(['content' => [['type' => 'text', 'text' => json_encode([
+            'adequada' => false, 'problemas' => ['A casa está cortada dos dois lados.'], 'dica' => 'Use uma fotografia tirada da rua com a casa inteira.',
+        ])]], 'usage' => ['input_tokens' => 1500, 'output_tokens' => 80]])]);
+        $u = $this->cliente(1);
+        \Illuminate\Support\Facades\Gate::define('ferramentas', fn () => true);
+        $f = $this->video($u);   // 1600 px: big enough
+
+        app()->call([new \App\Jobs\Ferramentas\AnalisarFotoJob($f->id, $f->original), 'handle']);
+
+        $f->refresh();
+        $this->assertTrue($f->fotoNaoIdeal());
+        $this->assertSame(['A casa está cortada dos dois lados.'], $f->analise['problemas']);
+        $this->assertNotEmpty(DB::table('custos')->where('tipo', 'ferramenta')->where('peca', (string) $f->id)->where('passo', 'analise')->get());
+        $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()
+            ->assertSee('Esta fotografia não é a ideal')->assertSee('A casa está cortada dos dois lados.')
+            ->assertSee('Continuar com esta fotografia');
+    }
+
+    public function test_a_small_photo_is_never_ideal_and_a_failed_check_blocks_nothing(): void
+    {
+        Queue::fake();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'drone', UploadedFile::fake()->image('pequena.jpg', 800, 500));
+        config(['services.anthropic.key' => 'sk-test']);
+        Http::fake(['api.anthropic.com/*' => Http::sequence()   // the first check answers; then the API is down
+            ->push(['content' => [['type' => 'text', 'text' => '{"adequada": true, "problemas": [], "dica": ""}']], 'usage' => ['input_tokens' => 1, 'output_tokens' => 1]])
+            ->whenEmpty(Http::response('down', 500))]);
+
+        app()->call([new \App\Jobs\Ferramentas\AnalisarFotoJob($f->id, $f->original), 'handle']);
+        $this->assertTrue($f->refresh()->fotoNaoIdeal());
+        $this->assertStringContainsString('800×500', $f->analise['problemas'][0]);
+
+        $g = $this->video($u);
+        app()->call([new \App\Jobs\Ferramentas\AnalisarFotoJob($g->id, $g->original), 'handle']);
+        $this->assertSame('falhou', $g->refresh()->analise['estado']);
+        $this->assertFalse($g->aAnalisar());
+        $this->assertFalse($g->fotoNaoIdeal());
     }
 
     public function test_with_no_videos_left_the_draft_keeps_the_photo_and_the_page_offers_the_packs(): void

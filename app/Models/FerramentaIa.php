@@ -32,7 +32,7 @@ class FerramentaIa extends Model
 
     protected function casts(): array
     {
-        return ['versoes' => 'array'];
+        return ['versoes' => 'array', 'analise' => 'array'];
     }
 
     public function user(): BelongsTo
@@ -60,6 +60,19 @@ class FerramentaIa extends Model
     public function aTrabalhar(): bool
     {
         return in_array($this->estado, [self::A_ENQUADRAR, self::A_ANIMAR], true);
+    }
+
+    /** The photo check is still running (AnalisarFotoJob). */
+    public function aAnalisar(): bool
+    {
+        // a queue that never ran it doesn't hold the customer back: after 2 minutes, no verdict
+        return ($this->analise['estado'] ?? null) === 'a_analisar' && $this->updated_at?->gt(now()->subMinutes(2));
+    }
+
+    /** The photo check found it isn't a good start for this tool (only a warning). */
+    public function fotoNaoIdeal(): bool
+    {
+        return ($this->analise['estado'] ?? null) === 'feito' && ! ($this->analise['adequada'] ?? true);
     }
 
     public function edicoesRestantes(): int

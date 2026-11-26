@@ -23,21 +23,38 @@ class Realizador
 
     public const MODELO_VIDEO = 'kling-3.0/video';
 
+    /**
+     * Per tool: `analise` (what makes a photo a good start; Analista), `frame` (Nano Banana Pro, the AI frame),
+     * `video` + `som` (Kling 3.0). Wording from the research (2026-11-26): Google's Nano Banana guide (say what changes
+     * and what stays exactly the same, photographic terms like "aerial view", positive framing, no extreme angles) and
+     * Kling camera guides (the move in the first words, one move, "slow, steady", easing to rest: the faster the
+     * camera, the more Kling invents). kie's Kling 3.0 takes no negative prompt, so everything is said positively.
+     */
     public const PROMPTS = [
         'drone' => [
-            'frame' => 'Turn this real-estate photograph into the same property seen from a low drone. Raise the camera to '
-                .'about 6 to 8 metres above the ground, on the same side and looking in the same direction, tilted slightly '
-                .'down so the roof, the plot and the immediate surroundings show. Keep the house exactly as it is: the same '
-                .'architecture, walls, windows, doors, roof, colours and materials. Keep the same neighbouring houses, street, '
-                .'trees and plants in their places. What the higher view reveals (garden, terrace, pool, roofs, the next plots) '
-                .'must be plain and consistent with the photo; invent nothing remarkable. Same time of day, same light and '
-                .'weather. A photoreal aerial photograph: no people added, no text, no watermark.',
-            'video' => 'A smooth real-estate drone shot. The camera starts exactly at the eye-level view of the first frame '
-                .'and rises slowly and steadily, drifting slightly forward and tilting down, to end exactly on the high view '
-                .'of the last frame. One continuous move, no cuts. The house, the street and everything around stay solid and '
-                .'unchanged; nothing appears, disappears or changes shape.',
-            'som' => ' Sound: a soft outdoor ambience, a light breeze and distant birds. No music, no voices.',
-            'negativo' => 'cuts, scene change, morphing buildings, house changing shape, extra buildings, people, text, watermark, flicker, fast motion, shaking',
+            'analise' => 'You check a real-estate photo before it is turned into an AI "drone rise" video: the video starts '
+                .'exactly at this photo and the camera rises to a low drone view about 7 metres up, looking at the same house. '
+                .'A GOOD start: an exterior photo of a house or building taken from the ground (street, pavement, garden), '
+                .'the building whole or nearly whole in the frame, some sky above the roof, daylight, sharp. '
+                .'PROBLEMS to look for: an interior; a floor plan, drawing or 3D render screenshot of a plan; a photo already '
+                .'taken from the air; a close-up where the house is cut off at the sides or the roof; the house mostly hidden '
+                .'by cars, trees, walls, scaffolding or people; night or very dark; blurry, heavily filtered, a collage, or '
+                .'text and logos over the picture; a very wide panorama; a vertical phone photo where the house is small.',
+            'frame' => 'Using this photo as the reference, show this same house as an aerial drone photograph: the camera '
+                .'raised to about 7 metres above the ground, standing on the same side of the house and facing the same '
+                .'direction, gently tilted down so the roof, the plot and the immediate surroundings are seen from above. '
+                .'Keep exactly the same: the architecture, facade, windows, doors, roof shape, colours, materials and '
+                .'proportions of the house, and the neighbouring buildings, street, trees and plants where they are. '
+                .'What only the higher view reveals (the roof surface, the garden or yard, the plots next door) is simple, '
+                .'tidy and consistent with the photo. Preserve the same time of day, light direction, shadows and weather. '
+                .'A natural, moderate drone angle, not top-down. A clean, photoreal real-estate aerial photograph with an '
+                .'empty, clear sky area and an image free of people, text and logos.',
+            'video' => 'Slow pedestal up, like a drone rising: the camera lifts steadily from the street-level view of the '
+                .'first frame, tilting gently down, and eases to rest exactly on the aerial view of the last frame. One '
+                .'continuous, slow, smooth move with no cuts. The house stays solid and identical throughout, with straight '
+                .'rooflines and an unchanged facade; the street, trees and neighbouring houses stay still; the same daylight '
+                .'from start to end.',
+            'som' => ' Audio: quiet residential street ambience, a light breeze and distant birds; no music, no voices.',
         ],
     ];
 
@@ -88,7 +105,7 @@ class Realizador
         $erro = null;
         for ($i = 1; $i <= self::TENTATIVAS_VIDEO; $i++) {
             try {
-                $tarefa = $this->kie->submitFramesVideo($prompt, $inicio, $fim, $p['negativo'], $segundos, true, self::MODELO_VIDEO);
+                $tarefa = $this->kie->submitFramesVideo($prompt, $inicio, $fim, '', $segundos, true, self::MODELO_VIDEO);
                 $url = $this->kie->pollVideo($tarefa, $this->kie->precoKling($segundos, true));
                 $caminho = $f->pasta().'/video-'.Str::random(8).'.mp4';
                 $disk->put($caminho, Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());

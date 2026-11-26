@@ -9,7 +9,7 @@
     $secundario = 'min-h-11 px-5 rounded-full border border-[#D9D5CC] text-navy text-sm font-semibold hover:bg-[#EDEAE3] disabled:opacity-60';
     $campo = 'w-full min-h-[88px] px-4 py-3 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan';
 @endphp
-<div @if ($v?->aTrabalhar()) wire:poll.5s @endif class="font-sans max-w-[1100px]">
+<div @if ($v?->aTrabalhar() || $v?->aAnalisar()) wire:poll.3s @endif class="font-sans max-w-[1100px]">
     <a href="{{ route('ferramentas') }}" class="text-sm text-ink-soft hover:text-ink">← Ferramentas IA</a>
     <div class="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -56,10 +56,30 @@
                     @error('foto') <span class="text-sm text-coral">{{ $message }}</span> @enderror
                 </label>
             </div>
-            @if (! $semVideos)
+            {{-- the photo check for this tool: a warning, never a block --}}
+            @if ($v?->aAnalisar())
+                <p role="status" class="flex items-center gap-3 rounded-xl bg-[#F6F4EF] px-5 py-3 text-sm text-[#4A5263]">
+                    <span class="w-4 h-4 rounded-full border-2 border-[#E4E1DA] border-t-coral animate-spin"></span>
+                    A analisar a fotografia para {{ mb_strtolower($tipo['nome']) }}…
+                </p>
+            @elseif ($v?->fotoNaoIdeal())
+                <div role="alert" class="rounded-xl bg-[#FBEBD9] text-[#6B3A0E] px-5 py-4 text-sm flex flex-col gap-2">
+                    <p class="font-semibold">Esta fotografia não é a ideal para {{ mb_strtolower($tipo['nome']) }}. O vídeo pode não ficar tão bom.</p>
+                    @if ($v->analise['problemas'] ?? [])
+                        <ul class="list-disc pl-5 flex flex-col gap-1">
+                            @foreach ($v->analise['problemas'] as $problema) <li>{{ $problema }}</li> @endforeach
+                        </ul>
+                    @endif
+                    @if ($v->analise['dica'] ?? '') <p><strong>Melhor:</strong> {{ $v->analise['dica'] }}</p> @endif
+                    <p>Pode trocar a fotografia acima, ou continuar com esta.</p>
+                </div>
+            @elseif (($v?->analise['estado'] ?? null) === 'feito')
+                <p class="rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">Boa fotografia para {{ mb_strtolower($tipo['nome']) }}.</p>
+            @endif
+            @if (! $semVideos && $v)
                 <div class="flex flex-wrap items-center gap-4">
-                    <button type="submit" wire:loading.attr="disabled" wire:target="criar, foto" class="{{ $botao }}">
-                        <span wire:loading.remove wire:target="criar">Criar imagens →</span>
+                    <button type="submit" wire:loading.attr="disabled" wire:target="criar, foto" @disabled($v->aAnalisar()) class="{{ $botao }}">
+                        <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : 'Criar imagens →' }}</span>
                         <span wire:loading wire:target="criar">A enviar…</span>
                     </button>
                     <p class="text-xs text-[#6B7385]">
