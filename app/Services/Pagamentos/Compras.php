@@ -53,6 +53,7 @@ class Compras
             'moeda' => strtolower((string) ($session['currency'] ?? 'eur')),
             'videos' => (int) ($meta['videos'] ?? 0),
             'imoveis' => (int) ($meta['imoveis'] ?? 0),
+            'videos_ia' => (int) ($meta['videos_ia'] ?? 0),
             'lead_id' => $leadId,
             'imoplanta_id' => $imoplantaId,
             'extra' => in_array($meta['extra'] ?? null, ['planta', 'video', 'ambos'], true) ? $meta['extra'] : null,
@@ -85,6 +86,12 @@ class Compras
     public static function imoplantaId(string $ref): ?int
     {
         return preg_match('/^imoplanta-(\d+)$/', $ref, $m) ? (int) $m[1] : null;
+    }
+
+    /** "ferramenta-7" (what the Ferramentas IA pages pass as client_reference_id) → 7. */
+    public static function ferramentaId(string $ref): ?int
+    {
+        return preg_match('/^ferramenta-(\d+)$/', $ref, $m) ? (int) $m[1] : null;
     }
 
     /** "lead-12" (what the landing passes as client_reference_id) → 12. */

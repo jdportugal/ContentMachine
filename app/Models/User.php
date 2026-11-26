@@ -73,6 +73,19 @@ class User extends Authenticatable
         return in_array(strtolower((string) $this->email), (array) config('contentmachine.imoplanta.acesso'), true);
     }
 
+    /** AI videos (Ferramentas IA) bought and not yet started, across their purchases (`compras.videos_ia`). */
+    public function videosIaDisponiveis(): int
+    {
+        return (int) \Illuminate\Support\Facades\DB::table('compras')->where('user_id', $this->id)
+            ->selectRaw('COALESCE(SUM(videos_ia - videos_ia_usados), 0) as n')->value('n');
+    }
+
+    /** Ferramentas IA is open, for now, to the same accounts as Imoplanta (imoplanta.acesso) and admins. */
+    public function veFerramentas(): bool
+    {
+        return $this->veImoplanta() || $this->is_admin;
+    }
+
     /** Imoplanta properties bought and not yet started, across their purchases (`compras.imoveis`). */
     public function imoveisImoplantaDisponiveis(): int
     {

@@ -2,6 +2,14 @@
 
 namespace App\Services\Ferramentas;
 
+use App\Jobs\Ferramentas\FerramentaFramesJob;
+use App\Jobs\Ferramentas\FerramentaVideoJob;
+use App\Models\FerramentaIa;
+use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 /**
  * The AI video tools: one photo (or a floor plan) → a start and an end frame the customer approves → one
  * Kling clip. Sold as packs of "vídeos IA" (compras.videos_ia), any tool. The texts here are what the landing
@@ -48,5 +56,180 @@ class Ferramentas
         $f = fn (string $ext) => is_file(public_path("exemplos-ia/{$ferramenta}.{$ext}")) ? asset("exemplos-ia/{$ferramenta}.{$ext}") : null;
 
         return ['video' => $f('mp4'), 'poster' => $f('jpg')];
+    }
+
+    /** The tools customers can use now: those the Realizador has prompts for (the others are on the landing only). */
+    public static function disponiveis(): array
+    {
+        return array_intersect_key(self::lista(), Realizador::PROMPTS);
+    }
+
+    /**
+     * A new draft from the customer's upload, stored as a JPEG (the longest side at most 2560 px, turned upright
+     * by its EXIF orientation: phone photos come sideways otherwise). Nothing is spent yet.
+     */
+    public function criar(User $user, string $ferramenta, UploadedFile $foto): FerramentaIa
+    {
+        $f = FerramentaIa::create(['user_id' => $user->id, 'ferramenta' => $ferramenta, 'estado' => FerramentaIa::RASCUNHO, 'original' => '']);
+        $this->trocarFoto($f, $foto);
+
+        return $f;
+    }
+
+    /** A draft's photo replaced (only before anything is made from it). */
+    public function trocarFoto(FerramentaIa $f, UploadedFile $foto): void
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        if ($f->original) {
+            $disk->delete($f->original);
+        }
+        $caminho = $f->pasta().'/original-'.\Illuminate\Support\Str::random(6).'.jpg';
+        $disk->put($caminho, self::jpeg($foto->getRealPath()));
+        $f->update(['original' => $caminho]);
+    }
+
+    /** An image file as an upright JPEG, at most $lado px on its longest side. */
+    public static function jpeg(string $ficheiro, int $lado = 2560): string
+    {
+        $im = @imagecreatefromstring((string) file_get_contents($ficheiro));
+        if (! $im) {
+            throw new \RuntimeException('Não conseguimos ler esta imagem.');
+        }
+        $orientacao = function_exists('exif_read_data') ? (int) (@exif_read_data($ficheiro)['Orientation'] ?? 1) : 1;
+        $im = match ($orientacao) { 3 => imagerotate($im, 180, 0), 6 => imagerotate($im, -90, 0), 8 => imagerotate($im, 90, 0), default => $im };
+        [$w, $h] = [imagesx($im), imagesy($im)];
+        if (max($w, $h) > $lado) {
+            $im = imagescale($im, (int) round($w * $lado / max($w, $h)), (int) round($h * $lado / max($w, $h)));
+        }
+        ob_start();
+        imagejpeg($im, null, 90);
+
+        return (string) ob_get_clean();
+    }
+
+    /**
+     * «Criar imagens»: spends one video (the oldest purchase with any left; admins and free accounts spend none)
+     * and starts the frames. Once: a second call finds it no longer a draft. False when there is no video left.
+     */
+    public function iniciar(FerramentaIa $f): bool
+    {
+        $user = $f->user;
+        $ok = DB::transaction(function () use ($f, $user) {
+            $semCusto = $user->is_admin || $user->imoplantaGratis();
+            $compra = $semCusto ? null : DB::table('compras')->where('user_id', $user->id)
+                ->whereColumn('videos_ia_usados', '<', 'videos_ia')->orderBy('id')->lockForUpdate()->first();
+            if (! $semCusto && ! $compra) {
+                return false;
+            }
+            if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)
+                ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'compra_id' => $compra?->id, 'erro' => null, 'updated_at' => now()]) !== 1) {
+                return false;
+            }
+            if ($compra) {
+                DB::table('compras')->where('id', $compra->id)->increment('videos_ia_usados', 1, ['updated_at' => now()]);
+            }
+
+            return true;
+        });
+        if ($ok) {
+            FerramentaFramesJob::dispatch($f->id, false);
+        }
+
+        return $ok;
+    }
+
+    /** The first frames failed for good: the video goes back to its purchase (once) and the draft keeps the photo. */
+    public function devolver(FerramentaIa $f, string $erro): void
+    {
+        DB::transaction(function () use ($f, $erro) {
+            $f = FerramentaIa::whereKey($f->id)->lockForUpdate()->first();
+            if ($f->compra_id) {
+                DB::table('compras')->where('id', $f->compra_id)->where('videos_ia_usados', '>', 0)->decrement('videos_ia_usados', 1, ['updated_at' => now()]);
+            }
+            $f->update(['estado' => FerramentaIa::RASCUNHO, 'compra_id' => null, 'erro' => $erro]);
+        });
+    }
+
+    /** A change to the AI frame, in the customer's words (up to editar_imagem; admins without limit). */
+    public function alterar(FerramentaIa $f, string $pedido): bool
+    {
+        $pedido = trim($pedido);
+        if ($pedido === '' || ($f->edicoesRestantes() < 1 && ! $f->user->is_admin)) {
+            return false;
+        }
+        if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::A_APROVAR)
+            ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'edicoes' => DB::raw('edicoes + 1'), 'pedido' => $pedido, 'erro' => null, 'updated_at' => now()]) !== 1) {
+            return false;
+        }
+        FerramentaFramesJob::dispatch($f->id, true);
+
+        return true;
+    }
+
+    /** A failed change: not counted, the frame stays as it was. */
+    public function devolverAlteracao(FerramentaIa $f, string $erro): void
+    {
+        $f->update(['estado' => FerramentaIa::A_APROVAR, 'edicoes' => max(0, $f->edicoes - 1), 'erro' => $erro]);
+    }
+
+    /** Picks which of the AI frames made goes into the video. */
+    public function escolherVersao(FerramentaIa $f, int $n): bool
+    {
+        $versao = ($f->versoes ?? [])[$n] ?? null;
+        if (! $versao || $f->estado !== FerramentaIa::A_APROVAR) {
+            return false;
+        }
+        $f->update([$f->quadroIa() => $versao]);
+
+        return true;
+    }
+
+    /** «Aprovar e criar vídeo»: the frames are fixed and the clip starts. */
+    public function aprovar(FerramentaIa $f): bool
+    {
+        if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::A_APROVAR)
+            ->update(['estado' => FerramentaIa::A_ANIMAR, 'pedido' => null, 'erro' => null, 'updated_at' => now()]) !== 1) {
+            return false;
+        }
+        FerramentaVideoJob::dispatch($f->id, false);
+
+        return true;
+    }
+
+    /** A new version of the clip from the same frames, with the customer's note (up to refazer_video). */
+    public function refazer(FerramentaIa $f, string $nota): bool
+    {
+        if ($f->refeitosRestantes() < 1 && ! $f->user->is_admin) {
+            return false;
+        }
+        if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::PRONTO)
+            ->update(['estado' => FerramentaIa::A_ANIMAR, 'refeitos' => DB::raw('refeitos + 1'), 'pedido' => trim($nota) ?: null, 'erro' => null, 'updated_at' => now()]) !== 1) {
+            return false;
+        }
+        FerramentaVideoJob::dispatch($f->id, true);
+
+        return true;
+    }
+
+    /** A failed clip: the first goes back to the frames, a new version back to the video they had; neither counts. */
+    public function devolverVideo(FerramentaIa $f, bool $refazer, string $erro): void
+    {
+        $refazer
+            ? $f->update(['estado' => FerramentaIa::PRONTO, 'refeitos' => max(0, $f->refeitos - 1), 'erro' => $erro])
+            : $f->update(['estado' => FerramentaIa::A_APROVAR, 'erro' => $erro]);
+    }
+
+    /**
+     * A pack's Payment Link (stripe.links.ia1|ia10|ia20) with the buyer's email and, bought from a video, that
+     * video as client_reference_id (so /obrigado brings them back to it). Without a link, an email to us.
+     */
+    public static function link(User $user, string $pack, ?FerramentaIa $f = null): string
+    {
+        $base = (string) config('contentmachine.stripe.links.'.$pack);
+        if ($base === '') {
+            return 'mailto:'.config('mail.from.address').'?subject='.rawurlencode('Vídeos IA · '.$pack);
+        }
+
+        return $base.'?'.http_build_query(array_filter(['client_reference_id' => $f ? 'ferramenta-'.$f->id : null, 'prefilled_email' => $user->email, 'locale' => 'pt']));
     }
 }
