@@ -501,7 +501,7 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->texto($f, 'um armazém moderno de 60 m2'));
         Queue::fake();
         app(Ferramentas::class)->iniciar($f->refresh());
-        $this->assertFalse(app(Ferramentas::class)->obra($f->refresh(), 'terreno'));  // fixed once the frames start
+        $this->assertFalse(app(Ferramentas::class)->obra($f->refresh(), 'exterior'));  // fixed once the frames start
         app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
 
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
@@ -514,20 +514,22 @@ class FerramentasTest extends TestCase
         $this->assertEqualsWithDelta(15 * 0.151, $this->custos($f)[1][1], 0.001);   // a build from the ground: 15 s
     }
 
-    public function test_the_new_build_draws_the_empty_plot_before_the_customers_house_and_builds_it_in_order(): void
+    public function test_the_new_build_draws_the_customers_house_on_their_plot_and_builds_it_in_order(): void
     {
         $this->kie();
         $u = $this->cliente(1);
         $f = app(Ferramentas::class)->criar($u, 'construcao', $this->foto());
+        $this->assertTrue(app(Ferramentas::class)->texto($f, 'moradia T3 de dois pisos'));
         Queue::fake();
         app(Ferramentas::class)->iniciar($f->refresh());
         app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
 
         $f->refresh();
-        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->fim]);   // the end is the customer's house
-        $this->assertNotSame($f->original, $f->inicio);
+        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->inicio]);   // the start is the plot
+        $this->assertNotSame($f->original, $f->fim);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
-            && str_contains($r['input']['prompt'], 'the same place before the house was built'));
+            && str_contains($r['input']['prompt'], 'The ground shows where the building goes')
+            && str_contains($r['input']['prompt'], 'The client describes what is built: moradia T3 de dois pisos.'));
         $this->assertTrue(app(Ferramentas::class)->aprovar($f));
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'

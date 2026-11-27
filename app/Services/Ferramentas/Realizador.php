@@ -227,60 +227,35 @@ class Realizador
                         .'hammering, drills, a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end '
                         .'to a quiet street. No music, no speech.',
                 ],
-                'terreno' => [
-                    'analise' => 'You check a photo before it is turned into an AI "construction timelapse": from this photo of a plot '
-                        .'the AI draws a new building on it, then a fixed-camera timelapse shows workers building it. A GOOD start: '
-                        .'an outdoor photo taken from the ground of an empty or cleared plot, its ground and edges visible (a road, '
-                        .'walls, fences, neighbours), daylight, sharp. Bare earth, weeds, foundations or marking stakes are what is '
-                        .'expected: they are NOT problems. PROBLEMS to look for: an interior; a floor plan, drawing or screenshot; '
-                        .'a photo from the air; ground so close up or overgrown that the plot cannot be read; people close to the '
-                        .'camera; night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture are '
-                        .'NOT a problem.',
-                    'fim' => 'Edit this photo: the same place after the works, with a finished new building on the plot. The camera '
-                        .'does not move: exactly the same viewpoint, lens, framing and crop. Everything outside the plot stays '
-                        .'exactly as it is: the road, the neighbouring houses, the trees beyond, the sky and the hills. The ground '
-                        .'shows where the building goes: on the cleared or levelled patch, on the foundations, slab or marked-out '
-                        .'stakes if there are any; otherwise in the middle of the plot, set back from the road like its neighbours, '
-                        .'sized to fit with space around it. It stays inside the plot, never past the road or the boundary walls. '
-                        .'The rest of the plot becomes a tidy garden, a drive and a path. Unless the client says otherwise: a modern '
-                        .'Portuguese house of one or two floors, white render, large dark-framed windows, a flat or low roof.%s The '
-                        .'same daylight and shadows. Laid over the original photo, the road, the neighbours and the horizon line '
-                        .'up exactly. A photoreal real-estate photograph, with the picture free of people, text, logos and '
-                        .'watermarks.',
-                    'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
-                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. '.self::OBRA_DE_RAIZ,
-                    'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, '
-                        .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
-                        .'finished place. No music, no speech.',
-                ],
             ],
         ],
-        // The new build: the customer has the finished house (a photo or a 3D render), the AI draws the plot before it
-        // (everything the build added taken away, the camera and the neighbours pinned), Kling builds it in real order
+        // The new build (user, 2026-11-27: "I want to give a terrain and it imagines the house there"): the photo is the
+        // plot, the AI draws the house where the ground shows it (the customer's description at %s), Kling builds it
         'construcao' => [
-            'analise' => 'You check a real-estate image before it is turned into an AI "construction timelapse": from this image '
-                .'of a finished house the AI draws the same plot empty, before the works, then a fixed-camera timelapse shows '
-                .'workers building the house from the ground. A GOOD start: an outdoor photo or 3D render, taken from the '
-                .'ground, of a new or recent house or building, whole or nearly whole in the frame, with some of its plot and '
-                .'the ground around it, daylight, sharp. PROBLEMS to look for: an interior; a floor plan, drawing or '
-                .'screenshot; a photo from the air; an old or worn house (say the Remodelação tool fits better); the house '
-                .'cut off at the sides or the roof, or mostly hidden by trees, cars or walls; people close to the camera; '
-                .'night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture are NOT a '
-                .'problem.',
-            'inicio' => 'Edit this image: the same place before the house was built. The camera does not move: exactly the '
-                .'same viewpoint, lens, framing and crop. Everything that is not part of this house and its plot stays '
-                .'exactly as it is: the road and its paving, the neighbouring buildings, the trees beyond, the hills, the sky, '
-                .'the poles and wires, and whatever stands in the foreground. The house and everything built with it (its '
-                .'garden, drive, paving, pool, plants, new walls and gates) are gone: in their place, the bare plot, levelled '
-                .'earth with patches of weeds, a few stones and tyre tracks, as a plot looks just before works start; what was '
-                .'hidden behind the house is filled in plainly and consistently with its surroundings (more sky, the hills, '
-                .'the backs of the neighbouring buildings). The same daylight and shadows. Laid over the original image, '
-                .'the road, the neighbours and the horizon line up exactly. A photoreal photograph, with the picture free of '
-                .'people, text, logos and watermarks.',
+            'analise' => 'You check a photo before it is turned into an AI "construction timelapse": from this photo of a plot '
+                .'the AI draws a new building on it, then a fixed-camera timelapse shows workers building it. A GOOD start: '
+                .'an outdoor photo taken from the ground of an empty or cleared plot, its ground and edges visible (a road, '
+                .'walls, fences, neighbours), daylight, sharp. Bare earth, weeds, foundations or marking stakes are what is '
+                .'expected: they are NOT problems. PROBLEMS to look for: an interior; a floor plan, drawing or screenshot; '
+                .'a photo from the air; ground so close up or overgrown that the plot cannot be read; people close to the '
+                .'camera; night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture are '
+                .'NOT a problem.',
+            'fim' => 'Edit this photo: the same place after the works, with a finished new building on the plot. The camera '
+                .'does not move: exactly the same viewpoint, lens, framing and crop. Everything outside the plot stays '
+                .'exactly as it is: the road, the neighbouring houses, the trees beyond, the sky and the hills. The ground '
+                .'shows where the building goes: on the cleared or levelled patch, on the foundations, slab or marked-out '
+                .'stakes if there are any; otherwise in the middle of the plot, set back from the road like its neighbours, '
+                .'sized to fit with space around it. It stays inside the plot, never past the road or the boundary walls. '
+                .'The rest of the plot becomes a tidy garden, a drive and a path. Unless the client says otherwise: a modern '
+                .'Portuguese house of one or two floors, white render, large dark-framed windows, a flat or low roof.%s The '
+                .'same daylight and shadows. Laid over the original photo, the road, the neighbours and the horizon line '
+                .'up exactly. A photoreal real-estate photograph, with the picture free of people, text, logos and '
+                .'watermarks.',
+            'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
             'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. '.self::OBRA_DE_RAIZ,
-            'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, a '
-                .'saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, finished '
-                .'place. No music, no speech.',
+            'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, '
+                .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
+                .'finished place. No music, no speech.',
         ],
     ];
 

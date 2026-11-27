@@ -43,24 +43,24 @@ class Ferramentas
                 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
-                'nome' => 'Remodelação IA', 'linha' => 'Timelapse da obra, do estado atual ao acabado: uma divisão, uma casa, uma ruína ou um terreno.',
-                'texto' => 'Mostre o potencial de um imóvel: em timelapse, os operários renovam uma divisão ou uma fachada, recuperam uma ruína ou constroem de raiz num terreno. Diga-nos o que quer ver construído.',
+                'nome' => 'Remodelação IA', 'linha' => 'Timelapse da obra, do estado atual ao acabado: uma divisão, uma casa ou uma ruína.',
+                'texto' => 'Mostre o potencial de um imóvel: em timelapse, os operários renovam uma divisão ou uma fachada, ou recuperam uma ruína. Diga-nos o que quer ver construído.',
                 'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10,
                 // the type of works (opcoes.obra), asked first (user, 2026-11-27); a build from the ground takes 15 s
                 'obras' => [
                     'interior' => ['nome' => 'Renovação interior', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
                     'exterior' => ['nome' => 'Fachada / casa completa', 'exemplo' => 'Ex.: reboco branco, caixilharia preta, telhado novo'],
                     'ruina' => ['nome' => 'Recuperar ruína', 'exemplo' => 'Ex.: moradia T2 de um piso, pedra à vista, telhado de telha', 'segundos' => 15],
-                    'terreno' => ['nome' => 'Construir no terreno', 'exemplo' => 'Ex.: moradia T3 de dois pisos, moderna, com piscina', 'segundos' => 15],
                 ],
                 'campo' => ['titulo' => 'Descreva a obra', 'ajuda' => 'Opcional: o que quer construído, o tamanho, o estilo. Sem indicação, fazemos uma obra moderna e de gama alta, à medida do espaço.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
                 'exemplo' => 'Ex.: o chão em madeira mais escura',
             ],
             'construcao' => [
-                'nome' => 'Construção IA', 'linha' => 'Operários constroem a casa, do terreno vazio ao fim.',
-                'texto' => 'Do terreno vazio à casa acabada, com operários em obra: fundações, estrutura, paredes, telhado e acabamentos, em timelapse. Ideal para construção nova.',
-                'envio' => 'Fotografia ou imagem 3D da casa acabada', 'inicio' => 'Terreno vazio', 'fim' => 'A sua fotografia', 'ai' => ['inicio'], 'segundos' => 15,
-                'exemplo' => 'Ex.: deixar o muro da esquerda, que já existia',
+                'nome' => 'Construção IA', 'linha' => 'Num terreno vazio, os operários constroem a casa de raiz.',
+                'texto' => 'Envie a fotografia de um terreno e diga-nos que casa quer: desenhamos a casa no sítio certo e, em timelapse, os operários preparam o terreno, fazem as fundações, a estrutura, as paredes, o telhado e os acabamentos.',
+                'envio' => 'Fotografia do terreno', 'inicio' => 'O terreno', 'fim' => 'A casa construída', 'ai' => ['fim'], 'segundos' => 15,
+                'campo' => ['titulo' => 'Que casa quer construir?', 'ajuda' => 'Opcional: os pisos, o tamanho, o estilo. Sem indicação, desenhamos uma moradia moderna à medida do terreno.', 'exemplo' => 'Ex.: moradia T3 de dois pisos, moderna, com piscina'],
+                'exemplo' => 'Ex.: a casa mais recuada da estrada',
             ],
             'planta' => [
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',
