@@ -72,7 +72,7 @@
                 @if ($v->estado === 'pronto')
                     <span class="text-[11px] tracking-[.2em] {{ $v->limpo ? 'text-cyan' : 'text-[#AEB5C1]' }}">{{ $v->limpo ? 'SEM MARCA D’ÁGUA' : 'VERSÃO GRÁTIS (COM MARCA D’ÁGUA)' }}</span>
                     <div class="flex flex-wrap gap-2">
-                        <a href="{{ $v->descarregar }}" class="inline-flex items-center min-h-11 px-4 rounded-full bg-coral text-navy text-sm font-semibold">Descarregar MP4</a>
+                        <x-descarregar :href="$v->descarregar" class="inline-flex items-center min-h-11 px-4 rounded-full bg-coral text-navy text-sm font-semibold">Descarregar MP4</x-descarregar>
                         <a href="{{ route('conta.editar', ['lead' => $v->id]) }}" class="inline-flex items-center min-h-11 px-4 rounded-full border border-ivory/30 text-ivory text-sm">Editar{{ $v->edicoesRestantes ? ' · '.$v->edicoesRestantes.' grátis' : '' }}</a>
                     </div>
                     @unless ($v->limpo)
