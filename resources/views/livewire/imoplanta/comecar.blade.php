@@ -37,7 +37,7 @@
         @auth
             <span class="flex items-center gap-3">
                 @if ($disponiveis)
-                    <a href="{{ route('imoplanta') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ivory/10 font-normal hover:bg-ivory/15"><strong class="font-semibold text-cyan">{{ $disponiveis }}</strong> {{ $disponiveis === 1 ? 'crédito de vídeo' : 'créditos de vídeo' }}</a>
+                    <a href="{{ route('imoplanta') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ivory/10 font-normal hover:bg-ivory/15"><strong class="font-semibold text-cyan">{{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }}</strong> {{ $disponiveis <= 1 ? 'crédito de vídeo' : 'créditos de vídeo' }}</a>
                 @endif
                 <a href="{{ route('imoplanta') }}" class="hover:text-cyan">{{ auth()->user()->email }}</a>
             </span>
@@ -227,14 +227,14 @@
                     $total = $gratis || $comCreditos ? 0 : $escolhido['preco'];
                 @endphp
                 @if ($comCreditos)
-                    <p class="pt-3.5 border-t border-ivory/10 text-sm text-[#C9CED6]">Usa <strong class="text-ivory">{{ \App\Services\Pagamentos\Creditos::IMOPLANTA }}</strong> dos seus {{ $disponiveis }} créditos de vídeo.</p>
+                    <p class="pt-3.5 border-t border-ivory/10 text-sm text-[#C9CED6]">Usa <strong class="text-ivory">{{ \App\Services\Pagamentos\Creditos::IMOPLANTA }}</strong> dos seus {{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }} créditos de vídeo.</p>
                 @elseif (! $gratis)
                     <fieldset class="flex flex-col gap-2 pt-3.5 border-t border-ivory/10">
-                        <legend class="mb-2 text-[13px] text-[#C9CED6]">Quantos imóveis?</legend>
+                        <legend class="mb-2 text-[13px] text-[#C9CED6]">Quantos créditos de vídeo? Cada imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }}.</legend>
                         @foreach ($planos as $chave => $pl)
                             <label class="flex items-center gap-3 min-h-12 px-3.5 rounded-xl border cursor-pointer {{ $plano === $chave ? 'border-cyan bg-cyan/10' : 'border-ivory/15 hover:border-ivory/30' }}">
                                 <input type="radio" wire:model.live="plano" value="{{ $chave }}" class="accent-cyan">
-                                <span class="flex-1 text-sm font-medium">{{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }} <span class="text-[11px] font-normal text-[#AEB5C1]">· {{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos</span></span>
+                                <span class="flex-1 text-sm font-medium">{{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo <span class="text-[11px] font-normal text-[#AEB5C1]">· {{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }}</span></span>
                                 <span class="text-right">
                                     <span class="block text-sm font-semibold">{{ $eur($pl['preco']) }}</span>
                                     @if ($pl['imoveis'] > 1)<span class="block text-[11px] text-[#AEB5C1]">{{ $eur(intdiv($pl['preco'], $pl['imoveis'])) }} por imóvel</span>@endif

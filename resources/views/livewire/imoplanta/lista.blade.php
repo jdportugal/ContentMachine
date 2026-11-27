@@ -15,7 +15,7 @@
             {{-- the one dark block: the video credits left (a property uses 5) --}}
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
                 <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
-                <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
+                <span class="font-display text-[48px] leading-none text-ivory">{{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }}</span>
             </div>
         @endif
     </div>
@@ -33,15 +33,8 @@
         {{-- Nothing left to spend: the packs, each its Stripe Payment Link (as the video packs on /conta). --}}
         <div class="mt-6 rounded-2xl border border-ink-soft/20 p-6">
             <p class="font-display text-2xl">Cada imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo</p>
-            <p class="mt-1 text-sm text-ink-soft">Tem {{ $disponiveis }}. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} alterações por IA e as imagens com {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações cada. IVA incluído.</p>
-            <div class="mt-4 flex flex-wrap gap-3">
-                @foreach ($planos as $chave => $pl)
-                    <a href="{{ \App\Services\Imoplanta\Imoplantas::link(auth()->user(), $chave) }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-navy text-ivory text-sm font-semibold hover:bg-navy-3">
-                        {{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }} · {{ \Illuminate\Support\Number::currency($pl['preco'] / 100, 'EUR', 'pt_PT', precision: 0) }} · {{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos
-                        @if ($pl['imoveis'] > 1) <span class="ml-2 text-xs font-normal opacity-80">({{ \Illuminate\Support\Number::currency($pl['preco'] / 100 / $pl['imoveis'], 'EUR', 'pt_PT', precision: 0) }}/imóvel)</span> @endif
-                    </a>
-                @endforeach
-            </div>
+            <p class="mt-1 text-sm text-ink-soft">Tem {{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }}. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} alterações por IA e as imagens com {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações cada. IVA incluído.</p>
+            @include('livewire.imoplanta.packs')
         </div>
     @endif
 
@@ -97,7 +90,7 @@
                 <span wire:loading.remove wire:target="criar">Criar modelo 3D →</span>
                 <span wire:loading wire:target="criar">A enviar…</span>
             </button>
-            <p class="text-xs text-[#AEB5C1]">{{ $gratis || $disponiveis === null ? 'Ao criar: 0 €.' : 'Ao criar, usa '.\App\Services\Pagamentos\Creditos::IMOPLANTA.' dos seus '.$disponiveis.' créditos de vídeo.' }}</p>
+            <p class="text-xs text-[#AEB5C1]">{{ $gratis || $disponiveis === null ? 'Ao criar: 0 €.' : 'Ao criar, usa '.\App\Services\Pagamentos\Creditos::IMOPLANTA.' dos seus '.\App\Services\Pagamentos\Creditos::txt($disponiveis).' créditos de vídeo.' }}</p>
         </div>
     </form>
     @endif

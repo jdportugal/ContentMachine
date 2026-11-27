@@ -147,7 +147,7 @@
                     <span wire:loading.remove wire:target="criar">Criar vídeo</span>
                     <span wire:loading wire:target="criar">A criar…</span>
                 </button>
-                <p class="text-center text-xs text-[#C9CED6]">Usa 1 dos seus {{ $creditos }} {{ $creditos === 1 ? 'vídeo' : 'vídeos' }} · sem marca d’água · 2 edições grátis</p>
+                <p class="text-center text-xs text-[#C9CED6]">Usa 1 dos seus {{ \App\Services\Pagamentos\Creditos::rotulo($creditos, false) }} · sem marca d’água · 2 edições grátis</p>
             @else
                 <a href="{{ route('conta') }}#comprar" class="w-full min-h-[56px] rounded-full bg-coral text-navy font-semibold flex items-center justify-center">Comprar vídeos para continuar</a>
                 <p class="text-center text-xs text-[#C9CED6]">Não tem vídeos disponíveis na conta.</p>

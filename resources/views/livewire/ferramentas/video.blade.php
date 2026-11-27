@@ -24,7 +24,7 @@
         @if ($disponiveis !== null && $estado === 'rascunho')
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
                 <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
-                <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
+                <span class="font-display text-[48px] leading-none text-ivory">{{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }}</span>
             </div>
         @endif
     </div>
@@ -140,7 +140,7 @@
                         <span wire:loading wire:target="criar">A enviar…</span>
                     </button>
                     <p class="text-xs text-[#6B7385]">
-                        {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa '.$custo.' dos seus '.$disponiveis.' créditos de vídeo.' }}
+                        {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa '.\App\Services\Pagamentos\Creditos::txt($custo).' dos seus '.\App\Services\Pagamentos\Creditos::txt($disponiveis).' créditos de vídeo.' }}
                         @if ($comVideo) Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
                         @else Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações à fotografia. @endif
                     </p>
@@ -149,8 +149,8 @@
         </form>
         @if ($semVideos)
             <section class="mt-6">
-                <h2 class="font-display text-3xl">{{ $tipo['nome'] }} usa {{ $custo }} {{ $custo === 1 ? 'crédito' : 'créditos' }} de vídeo</h2>
-                <p class="mt-1 text-sm text-ink-soft">{{ $v ? 'A sua fotografia fica guardada: depois de comprar, volta aqui para criar as imagens.' : 'Tem '.$disponiveis.'. Escolha um pack para continuar: os créditos servem para qualquer ferramenta e para os vídeos Imocena. IVA incluído.' }}</p>
+                <h2 class="font-display text-3xl">{{ $tipo['nome'] }} usa {{ \App\Services\Pagamentos\Creditos::rotulo($custo) }}</h2>
+                <p class="mt-1 text-sm text-ink-soft">{{ $v ? 'A sua fotografia fica guardada: depois de comprar, volta aqui para criar as imagens.' : 'Tem '.\App\Services\Pagamentos\Creditos::txt($disponiveis).'. Escolha um pack para continuar: os créditos servem para qualquer ferramenta e para os vídeos Imocena. IVA incluído.' }}</p>
                 @include('livewire.ferramentas.packs', ['video' => $v])
                 @if ($v)
                     <button type="button" wire:click="criar" class="mt-4 {{ $secundario }}">Já comprei: criar imagens</button>

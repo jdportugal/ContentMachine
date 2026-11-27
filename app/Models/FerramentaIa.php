@@ -32,7 +32,7 @@ class FerramentaIa extends Model
 
     protected function casts(): array
     {
-        return ['versoes' => 'array', 'analise' => 'array', 'opcoes' => 'array'];
+        return ['versoes' => 'array', 'analise' => 'array', 'opcoes' => 'array', 'creditos' => 'float'];
     }
 
     public function user(): BelongsTo

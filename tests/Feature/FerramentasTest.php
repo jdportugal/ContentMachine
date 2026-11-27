@@ -572,4 +572,22 @@ class FerramentasTest extends TestCase
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
             && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'overhead shot of a 3D floor plan'));
     }
+
+    public function test_credits_divide_into_tenths_the_cleanup_uses_one_and_gives_it_back_on_failure(): void
+    {
+        Queue::fake();
+        $u = User::factory()->cliente()->create();
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_d', 'total' => 2000, 'videos' => 1, 'created_at' => now(), 'updated_at' => now()]);
+        $f = app(Ferramentas::class)->criar($u, 'limpeza', $this->foto());
+
+        $this->assertTrue(app(Ferramentas::class)->iniciar($f));
+        $this->assertSame([0.9, 0.1], [$u->creditos(), $f->refresh()->creditos]);
+        $this->assertSame('0,9', \App\Services\Pagamentos\Creditos::txt($u->creditos()));
+        $this->assertSame('0,1 crédito de vídeo', \App\Services\Pagamentos\Creditos::rotulo(0.1));
+
+        app(Ferramentas::class)->devolver($f, 'falhou');
+        $this->assertSame(1, $u->creditos());   // whole again
+        $g = app(Ferramentas::class)->criar($u, 'drone', $this->foto());
+        $this->assertFalse(app(Ferramentas::class)->iniciar($g));   // the drone's 2 credits: not enough
+    }
 }

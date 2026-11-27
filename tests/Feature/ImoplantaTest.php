@@ -281,7 +281,7 @@ class ImoplantaTest extends TestCase
         $this->actingAs($u);
         $c = Livewire::test(\App\Livewire\Imoplanta\Comecar::class)
             ->set('nome', 'Casa')->set('plantas', [UploadedFile::fake()->image('planta.png')])->call('enviar')
-            ->assertSee('Quantos imóveis?')->assertSee('10 imóveis')->assertSee("40\u{00A0}€ por imóvel")
+            ->assertSee('Quantos créditos de vídeo?')->assertSee('10 imóveis')->assertSee("40\u{00A0}€ por imóvel")
             ->set('plano', 'imoplanta10')->assertSee("400\u{00A0}€")->assertSee('Os outros 45 ficam na sua conta')->assertSee('50 créditos');
         $p = Imoplanta::sole();
         $c->call('pagar')->assertRedirect(Imoplantas::link($u, 'imoplanta10', $p));
@@ -329,7 +329,7 @@ class ImoplantaTest extends TestCase
 
         // not bought yet: what Imoplanta is, the five steps and the packs; no upload form
         Livewire::actingAs($u)->test(Lista::class)->assertSee('Da planta ao vídeo do imóvel')->assertSee('Cinco passos, do papel ao vídeo')
-            ->assertSee('Comprar 1 imóvel')->assertSee('imoplanta-demo/landing/capa.gif')->assertDontSee('Criar modelo 3D')
+            ->assertSee('Comprar 5 créditos')->assertSee('imoplanta-demo/landing/capa.gif')->assertDontSee('Criar modelo 3D')
             ->set('nome', 'Casa')->set('plantas', [UploadedFile::fake()->image('planta.png')])->call('criar')->assertHasErrors('plantas');
 
         $this->assertSame(0, Imoplanta::count());
@@ -1651,7 +1651,7 @@ class ImoplantaTest extends TestCase
         $p = $this->imovel($u, ['estado' => Imoplanta::A_PAGAR, 'casa' => null, 'cameras' => null]);
 
         $c = Livewire::test(\App\Livewire\Imoplanta\Comecar::class)->assertSee('dos seus 10 créditos de vídeo')
-            ->assertDontSee("50\u{00A0}€")->assertDontSee('Quantos imóveis?');
+            ->assertDontSee("50\u{00A0}€")->assertDontSee('Quantos créditos de vídeo?');
         $c->call('pagar')->assertRedirect(route('imoplanta.imovel', $p->id));
         $this->assertSame([Imoplanta::A_LER, 5], [$p->refresh()->estado, $u->creditos()]);
 

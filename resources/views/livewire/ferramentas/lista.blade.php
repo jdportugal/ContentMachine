@@ -16,7 +16,7 @@
         @if ($disponiveis !== null)
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
                 <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
-                <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
+                <span class="font-display text-[48px] leading-none text-ivory">{{ \App\Services\Pagamentos\Creditos::txt($disponiveis) }}</span>
             </div>
         @endif
     </div>
@@ -35,7 +35,7 @@
                 <div class="p-4 flex flex-col gap-1">
                     <span class="font-display text-2xl leading-tight text-ivory">{{ $f['nome'] }}</span>
                     <span class="text-sm text-[#AEB5C1]">{{ $f['linha'] }}</span>
-                    <span class="mt-1 text-xs font-semibold text-cyan">{{ $f['creditos'] }} {{ $f['creditos'] === 1 ? 'crédito de vídeo' : 'créditos de vídeo' }}</span>
+                    <span class="mt-1 text-xs font-semibold text-cyan">{{ \App\Services\Pagamentos\Creditos::rotulo($f['creditos']) }}</span>
                 </div>
             </a>
         @endforeach

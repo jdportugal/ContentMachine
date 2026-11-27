@@ -40,10 +40,12 @@ class User extends Authenticatable
     }
 
     /** Video credits bought and not yet spent, across all their purchases (Pagamentos\Creditos: one balance for everything). */
-    public function creditos(): int
+    public function creditos(): int|float
     {
-        return (int) \Illuminate\Support\Facades\DB::table('compras')->where('user_id', $this->id)
-            ->selectRaw('COALESCE(SUM(videos - videos_usados), 0) as n')->value('n');
+        $n = round((float) \Illuminate\Support\Facades\DB::table('compras')->where('user_id', $this->id)
+            ->selectRaw('COALESCE(SUM(videos - videos_usados), 0) as n')->value('n'), 1);
+
+        return $n == (int) $n ? (int) $n : $n;   // whole credits stay whole (1, not 1.0); a tenth only after a 0.1 tool
     }
 
     /**

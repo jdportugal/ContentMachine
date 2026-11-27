@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,creditos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,creditos:float|int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -38,7 +38,7 @@ class Ferramentas
                 // a photo, not a video (user, 2026-11-26): no clip, the cleaned photo is the result
                 'nome' => 'Limpeza IA', 'linha' => 'A sua fotografia, sem a desarrumação e os objetos a mais.',
                 'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai da fotografia, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
-                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'creditos' => 1, 'video' => false,
+                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'creditos' => 0.1, 'video' => false,
                 'campo' => ['titulo' => 'O que quer retirar?', 'ajuda' => 'Opcional: já retiramos a desarrumação e os objetos soltos.', 'exemplo' => 'Ex.: o carro em frente à garagem, as caixas no canto'],
                 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],

@@ -15,7 +15,7 @@
             <h1 class="font-display text-[clamp(40px,5vw,60px)] font-medium leading-[1.02] text-ink">Da planta ao vídeo do imóvel</h1>
             <p class="max-w-xl text-[16px] leading-relaxed text-ink-soft">Envie as plantas de uma casa ou de um apartamento. Recebe o modelo 3D, fotografias realistas e um vídeo de visita, mesmo antes de a casa estar construída.</p>
             <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ \App\Services\Imoplanta\Imoplantas::link(auth()->user(), $primeiro['chave']) }}" class="inline-flex items-center min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105">Comprar 1 imóvel · {{ $eur($primeiro['preco']) }} →</a>
+                <a href="{{ \App\Services\Imoplanta\Imoplantas::link(auth()->user(), $primeiro['chave']) }}" class="inline-flex items-center min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105">Comprar {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos · {{ $eur($primeiro['preco']) }} →</a>
                 <a href="#precos" class="inline-flex items-center min-h-[52px] px-6 rounded-full border-[1.5px] border-ivory/30 text-ivory text-[15px] font-semibold hover:bg-ivory/5">Ver os packs</a>
             </div>
             <p class="text-sm text-ink-soft">A partir de <strong class="text-ink">{{ $eur($lista->last()['preco'] / $lista->last()['imoveis']) }}</strong> por imóvel. Sem subscrição. IVA incluído.</p>
@@ -58,15 +58,15 @@
     {{-- the packs --}}
     <section id="precos" class="mt-16 scroll-mt-20">
         <div class="{{ $sobre }}"><span class="w-10 h-px bg-cyan"></span>PREÇOS</div>
-        <h2 class="mt-3 font-display text-[clamp(30px,3.5vw,42px)] font-medium leading-tight text-ink">Paga por imóvel</h2>
+        <h2 class="mt-3 font-display text-[clamp(30px,3.5vw,42px)] font-medium leading-tight text-ink">Créditos de vídeo</h2>
         <p class="mt-2 max-w-2xl text-[15px] text-ink-soft">IVA incluído. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} correções, as fotografias e o vídeo de visita. Cada imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo: os créditos de um pack ficam na sua conta e servem também para os vídeos Imocena e as Ferramentas IA.</p>
         <div class="mt-6 grid gap-4 sm:grid-cols-3">
             @foreach ($lista as $pl)
                 <a href="{{ \App\Services\Imoplanta\Imoplantas::link(auth()->user(), $pl['chave']) }}"
                    class="rounded-[18px] border bg-white p-6 flex flex-col gap-1 {{ $loop->last ? 'border-coral hover:shadow-md' : 'border-[#E4E1DA] hover:border-cyan' }}">
-                    <span class="text-[11px] tracking-[.24em] {{ $loop->last ? 'text-coral' : 'text-cyan' }}">{{ $pl['imoveis'] === 1 ? '1 IMÓVEL' : $pl['imoveis'].' IMÓVEIS' }} · {{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} CRÉDITOS{{ $loop->last ? ' · MAIS VANTAJOSO' : '' }}</span>
+                    <span class="text-[11px] tracking-[.24em] {{ $loop->last ? 'text-coral' : 'text-cyan' }}">{{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} CRÉDITOS DE VÍDEO{{ $loop->last ? ' · MAIS VANTAJOSO' : '' }}</span>
                     <span class="mt-1 font-display text-[40px] leading-none text-ivory">{{ $eur($pl['preco']) }}</span>
-                    <span class="text-sm text-[#AEB5C1]">{{ $pl['imoveis'] > 1 ? $eur($pl['preco'] / $pl['imoveis']).' por imóvel' : 'Para um imóvel, agora.' }}</span>
+                    <span class="text-sm text-[#AEB5C1]">{{ $pl['imoveis'] > 1 ? $pl['imoveis'].' imóveis · '.$eur($pl['preco'] / $pl['imoveis']).' por imóvel' : '1 imóvel, agora.' }}</span>
                     <span class="mt-4 inline-flex items-center justify-center min-h-11 rounded-full {{ $loop->last ? 'bg-coral text-navy' : 'border border-ivory/30 text-ivory' }} text-sm font-semibold">Comprar →</span>
                 </a>
             @endforeach

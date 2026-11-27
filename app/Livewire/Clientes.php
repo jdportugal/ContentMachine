@@ -64,7 +64,7 @@ class Clientes extends Component
             'updated_at' => now(),
         ]);
         if ($this->enviarLink) {
-            rescue(fn () => $links->enviar($user, 'Tem '.$user->creditos().' '.($user->creditos() === 1 ? 'vídeo' : 'vídeos').' na sua conta Imocena',
+            rescue(fn () => $links->enviar($user, 'Tem '.\App\Services\Pagamentos\Creditos::rotulo($user->creditos()).' na sua conta Imocena',
                 'Juntámos '.$this->quantidade.' '.($this->quantidade === 1 ? 'vídeo' : 'vídeos').' à sua conta. Entre e cole o link de um anúncio para o fazer.'), report: true);
         }
         session()->flash('feito', ($existente ? '' : 'Conta criada. ').$this->quantidade.' '.($this->quantidade === 1 ? 'vídeo adicionado' : 'vídeos adicionados').' a '.$user->email.' (tem agora '.$user->creditos().').');
@@ -88,7 +88,7 @@ class Clientes extends Component
             DB::table('compras')->where('id', $c->id)->update(['videos_usados' => $c->videos_usados + $tirar, 'updated_at' => now()]);
             $falta -= $tirar;
         }
-        session()->flash('feito', 'Retirado. '.$user->email.' tem agora '.$user->creditos().'.');
+        session()->flash('feito', 'Retirado. '.$user->email.' tem agora '.\App\Services\Pagamentos\Creditos::rotulo($user->creditos()).'.');
     }
 
     public function render()

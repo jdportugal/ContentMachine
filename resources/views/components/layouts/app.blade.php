@@ -190,9 +190,9 @@
                 <a href="{{ route('conta') }}#comprar" data-nav="entry"
                    class="mx-2 mt-1 flex items-center gap-3 pl-3 pr-4 py-2.5 rounded-md transition border-t border-ink-soft/15 text-ink-soft hover:bg-surface/40 hover:text-ink">
                     <span class="w-1.5"></span>
-                    <span class="w-8 text-center font-display text-2xl leading-none text-[#05B8E6]">{{ $creditosNav }}</span>
+                    <span class="w-8 text-center font-display text-2xl leading-none text-[#05B8E6]">{{ \App\Services\Pagamentos\Creditos::txt($creditosNav) }}</span>
                     <span class="flex-1 min-w-0">
-                        <span class="block font-display text-xl leading-tight">{{ $creditosNav === 1 ? 'Crédito de vídeo' : 'Créditos de vídeo' }}</span>
+                        <span class="block font-display text-xl leading-tight">{{ $creditosNav <= 1 ? 'Crédito de vídeo' : 'Créditos de vídeo' }}</span>
                         <span class="block mt-0.5 text-[0.8rem] font-mono text-ink-faint truncate">Comprar mais</span>
                     </span>
                 </a>

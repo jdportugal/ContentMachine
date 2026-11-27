@@ -8,7 +8,7 @@
         {{-- the one dark block: how many videos are left --}}
         <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
             <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
-            <span class="font-display text-[48px] leading-none text-ivory">{{ $creditos }}</span>
+            <span class="font-display text-[48px] leading-none text-ivory">{{ \App\Services\Pagamentos\Creditos::txt($creditos) }}</span>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
     @if ($creditos > 0)
         <section class="mt-8 rounded-[18px] bg-white border border-[#E4E1DA] p-5 sm:p-6">
             <form wire:submit="usarCredito" class="flex flex-col gap-3" novalidate>
-                <label for="anuncio" class="font-display text-[24px] text-ivory">Fazer um vídeo (usa 1 dos seus {{ $creditos }} créditos)</label>
+                <label for="anuncio" class="font-display text-[24px] text-ivory">Fazer um vídeo (usa 1 dos seus {{ \App\Services\Pagamentos\Creditos::txt($creditos) }} créditos)</label>
                 <div class="flex flex-col sm:flex-row gap-3">
                     <input id="anuncio" type="url" wire:model="anuncio" placeholder="Cole aqui o link do anúncio" class="flex-1 min-h-[52px] rounded-full bg-white border border-[#D9D5CC] px-5 text-navy placeholder:text-[#7C8696] focus:border-cyan focus:outline-none">
                     <button type="submit" class="min-h-[52px] px-6 rounded-full bg-coral text-navy font-semibold hover:brightness-105" wire:loading.attr="disabled">Criar vídeo →</button>

@@ -27,7 +27,7 @@
                 <a href="{{ $comecar }}" class="{{ $botao }}">Experimentar com uma fotografia →</a>
                 <a href="#ferramentas" class="min-h-11 inline-flex items-center text-sm font-semibold text-navy underline underline-offset-4">Ver as ferramentas</a>
             </div>
-            <p class="text-sm text-[#4A5263]">Paga em créditos de vídeo: cada ferramenta usa os seus, a partir de {{ $menos }}. Um crédito a partir de <strong class="text-navy">{{ $eur((int) round($porCredito)) }}</strong> num pack. Sem subscrição.</p>
+            <p class="text-sm text-[#4A5263]">Paga em créditos de vídeo: cada ferramenta usa os seus, a partir de {{ \App\Services\Pagamentos\Creditos::txt($menos) }}. Um crédito a partir de <strong class="text-navy">{{ $eur((int) round($porCredito)) }}</strong> num pack. Sem subscrição.</p>
         </div>
         @php $capa = \App\Services\Ferramentas\Ferramentas::exemplo('drone'); @endphp
         <figure class="flex flex-col gap-3">
@@ -58,7 +58,7 @@
                     <div class="flex flex-col gap-3 {{ $loop->index % 2 ? 'lg:order-2' : '' }}">
                         <h3 class="font-display text-[30px] lg:text-[38px] font-medium leading-tight text-navy">{{ $f['nome'] }}</h3>
                         <p class="max-w-md text-[15px] lg:text-[17px] leading-relaxed text-[#4A5263]">{{ $f['texto'] }}</p>
-                        <p class="text-sm text-[#4A5263]">Envia: <strong class="text-navy">{{ mb_strtolower($f['envio']) }}</strong> · <strong class="text-navy">{{ $f['creditos'] }} {{ $f['creditos'] === 1 ? 'crédito' : 'créditos' }} de vídeo</strong></p>
+                        <p class="text-sm text-[#4A5263]">Envia: <strong class="text-navy">{{ mb_strtolower($f['envio']) }}</strong> · <strong class="text-navy">{{ \App\Services\Pagamentos\Creditos::rotulo($f['creditos']) }}</strong></p>
                     </div>
                     <div class="rounded-[20px] overflow-hidden bg-white border border-[#E4E1DA] shadow-[0_12px_32px_rgba(14,22,38,0.10)]">
                         @if ($ex['video'])
