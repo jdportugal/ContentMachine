@@ -38,7 +38,7 @@ class FerramentasTest extends TestCase
     {
         $u = User::factory()->cliente()->create();
         if ($videos) {
-            DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_'.uniqid(), 'total' => 22500, 'videos_ia' => $videos, 'created_at' => now(), 'updated_at' => now()]);
+            DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_'.uniqid(), 'total' => 22500, 'videos' => $videos * 3, 'created_at' => now(), 'updated_at' => now()]);
         }
 
         return $u;
@@ -86,8 +86,7 @@ class FerramentasTest extends TestCase
             'metadata' => ['videos_ia' => '10'], 'customer_details' => ['email' => $u->email],
         ]);
 
-        $this->assertSame(10, $u->videosIaDisponiveis());
-        $this->assertSame(0, $u->creditos());   // not Imocena videos
+        $this->assertSame(30, $u->creditos());   // an old AI video link: 3 video credits each (one balance now)
     }
 
     public function test_starting_spends_one_video_and_only_once(): void
@@ -99,7 +98,7 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->iniciar($f));
         $this->assertFalse(app(Ferramentas::class)->iniciar($f->refresh()));   // a double click
 
-        $this->assertSame(9, $u->videosIaDisponiveis());
+        $this->assertSame(28, $u->creditos());   // the drone uses 2 of the 30
         $this->assertSame(FerramentaIa::A_ENQUADRAR, $f->refresh()->estado);
         Queue::assertPushed(FerramentaFramesJob::class, 1);
     }
@@ -166,7 +165,7 @@ class FerramentasTest extends TestCase
         $f = $this->video($u);
         Queue::fake();
         app(Ferramentas::class)->iniciar($f);
-        $this->assertSame(0, $u->videosIaDisponiveis());
+        $this->assertSame(1, $u->creditos());
 
         app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
         app(Ferramentas::class)->devolver($f->refresh(), 'outra vez');   // a second failure report gives nothing more back
@@ -174,7 +173,7 @@ class FerramentasTest extends TestCase
         $f->refresh();
         $this->assertSame(FerramentaIa::RASCUNHO, $f->estado);
         $this->assertNull($f->compra_id);
-        $this->assertSame(1, $u->videosIaDisponiveis());
+        $this->assertSame(3, $u->creditos());   // its 2 credits back, once
         $this->assertNotNull($f->original);
     }
 
@@ -288,11 +287,11 @@ class FerramentasTest extends TestCase
         $f = FerramentaIa::first();
         $this->assertSame([FerramentaIa::RASCUNHO, 'a_analisar'], [$f->estado, $f->analise['estado']]);
         Queue::assertPushed(\App\Jobs\Ferramentas\AnalisarFotoJob::class);
-        $this->assertSame(1, $u->videosIaDisponiveis());   // nothing spent by uploading
+        $this->assertSame(3, $u->creditos());   // nothing spent by uploading
 
         \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['video' => $f])->call('criar');
         $this->assertSame(FerramentaIa::A_ENQUADRAR, $f->refresh()->estado);
-        $this->assertSame(0, $u->videosIaDisponiveis());
+        $this->assertSame(1, $u->creditos());
     }
 
     public function test_a_photo_that_is_not_ideal_is_flagged_with_why_and_the_customer_can_still_go_on(): void
@@ -346,15 +345,15 @@ class FerramentasTest extends TestCase
         $f = $this->video($u);
 
         $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()
-            ->assertSee('Já não tem vídeos IA')->assertDontSee('Criar imagens →')
-            ->assertSee(e(Ferramentas::link($u, 'ia1', $f)), false)->assertSee("225\u{00A0}€");
+            ->assertSee('Vista drone usa 2 créditos de vídeo')->assertDontSee('Criar imagens →')
+            ->assertSee(e(Ferramentas::link($u, 'avulso', $f)), false)->assertSee("100\u{00A0}€")->assertSee('10 CRÉDITOS DE VÍDEO');
     }
 
     public function test_back_from_paying_goes_to_the_video(): void
     {
         $u = $this->cliente();
         $f = $this->video($u);
-        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_back', 'total' => 2500, 'videos_ia' => 1,
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_back', 'total' => 2000, 'videos' => 1,
             'dados' => json_encode(['client_reference_id' => 'ferramenta-'.$f->id]), 'created_at' => now(), 'updated_at' => now()]);
 
         $this->actingAs($u)->get(route('obrigado', ['session_id' => 'cs_back']))->assertRedirect(route('ferramentas.video', $f->id));
@@ -541,7 +540,7 @@ class FerramentasTest extends TestCase
         $this->kie();
         $u = User::factory()->cliente()->create(['email' => 'joaodiogocferreira@gmail.com']);
         config(['contentmachine.imoplanta.acesso' => ['joaodiogocferreira@gmail.com']]);
-        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_p', 'total' => 2500, 'videos_ia' => 1, 'created_at' => now(), 'updated_at' => now()]);
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_p', 'total' => 2000, 'videos' => 2, 'created_at' => now(), 'updated_at' => now()]);
         $casa = ['niveis' => [['nome' => 'R/C', 'divisoes' => [['uso' => 'sala'], ['uso' => 'quarto']]]]];
         $this->mock(\App\Services\Imoplanta\LeitorPlantas::class)->shouldReceive('ler')->once()->andReturn($casa);
         $f = app(Ferramentas::class)->criar($u, 'planta', $this->foto());

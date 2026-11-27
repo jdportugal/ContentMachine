@@ -1,5 +1,5 @@
 {{-- not bought yet (and nothing on its way from a payment): what Imoplanta is, and the packs --}}
-@if (! $gratis && $disponiveis === 0 && $imoveis->isEmpty() && ! $pagamento)
+@if (! $gratis && $disponiveis !== null && $disponiveis < \App\Services\Pagamentos\Creditos::IMOPLANTA && $imoveis->isEmpty() && ! $pagamento)
 <div>
     @include('livewire.imoplanta.boas-vindas')
 </div>
@@ -12,9 +12,9 @@
             <p class="mt-3 max-w-2xl text-sm text-ink-soft">Carregue as plantas da casa. Fazemos o modelo 3D, que pode rodar e corrigir, escolhe onde ficam as câmaras e recebe fotografias realistas do imóvel.</p>
         </div>
         @if ($disponiveis !== null && ! $gratis)
-            {{-- the one dark block: how many properties are left --}}
+            {{-- the one dark block: the video credits left (a property uses 5) --}}
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
-                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">IMÓVEIS<br>DISPONÍVEIS</span>
+                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
                 <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
             </div>
         @endif
@@ -29,15 +29,15 @@
             <p class="font-display text-2xl">Cada imóvel custa <strong>0 €</strong></p>
             <p class="mt-1 text-sm text-ink-soft">Esta conta não paga: crie os imóveis que quiser. Inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} alterações por IA e as imagens com {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações cada.</p>
         </div>
-    @elseif ($disponiveis === 0)
+    @elseif ($disponiveis !== null && $disponiveis < \App\Services\Pagamentos\Creditos::IMOPLANTA)
         {{-- Nothing left to spend: the packs, each its Stripe Payment Link (as the video packs on /conta). --}}
         <div class="mt-6 rounded-2xl border border-ink-soft/20 p-6">
-            <p class="font-display text-2xl">Compre imóveis Imoplanta</p>
-            <p class="mt-1 text-sm text-ink-soft">Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} alterações por IA e as imagens com {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações cada. IVA incluído.</p>
+            <p class="font-display text-2xl">Cada imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo</p>
+            <p class="mt-1 text-sm text-ink-soft">Tem {{ $disponiveis }}. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} alterações por IA e as imagens com {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações cada. IVA incluído.</p>
             <div class="mt-4 flex flex-wrap gap-3">
                 @foreach ($planos as $chave => $pl)
                     <a href="{{ \App\Services\Imoplanta\Imoplantas::link(auth()->user(), $chave) }}" class="inline-flex items-center min-h-11 px-5 rounded-full bg-navy text-ivory text-sm font-semibold hover:bg-navy-3">
-                        {{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }} · {{ \Illuminate\Support\Number::currency($pl['preco'] / 100, 'EUR', 'pt_PT', precision: 0) }}
+                        {{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }} · {{ \Illuminate\Support\Number::currency($pl['preco'] / 100, 'EUR', 'pt_PT', precision: 0) }} · {{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos
                         @if ($pl['imoveis'] > 1) <span class="ml-2 text-xs font-normal opacity-80">({{ \Illuminate\Support\Number::currency($pl['preco'] / 100 / $pl['imoveis'], 'EUR', 'pt_PT', precision: 0) }}/imóvel)</span> @endif
                     </a>
                 @endforeach
@@ -46,7 +46,7 @@
     @endif
 
     {{-- the form only when there is a property to spend (free accounts and admins always) --}}
-    @if ($gratis || $disponiveis === null || $disponiveis > 0)
+    @if ($gratis || $disponiveis === null || $disponiveis >= \App\Services\Pagamentos\Creditos::IMOPLANTA)
     <form x-data wire:submit="criar" class="mt-8 rounded-2xl bg-white border border-[#E4E1DA] text-ivory p-7 md:p-8">
         <div class="flex items-center gap-3.5">
             <span class="w-10 h-px bg-cyan"></span>

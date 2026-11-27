@@ -91,8 +91,8 @@ class Imoplantas
     }
 
     /**
-     * Spends ONE property credit on a saved property — from their oldest purchase with one left
-     * (compras.imoveis); admins and free accounts (User::imoplantaGratis) spend none — and starts reading its
+     * Spends a property's 5 video credits (Pagamentos\Creditos, oldest purchases first) on a saved property; admins
+     * and free accounts (User::imoplantaGratis) spend none — and starts reading its
      * plans. Once: a second call finds it already started. False when there is no credit.
      */
     public function iniciar(Imoplanta $p): bool
@@ -100,19 +100,15 @@ class Imoplantas
         $user = $p->user;
         $ok = DB::transaction(function () use ($p, $user) {
             $semCusto = $user->is_admin || $user->imoplantaGratis();
-            $compra = $semCusto ? null : DB::table('compras')->where('user_id', $user->id)
-                ->whereColumn('imoveis_usados', '<', 'imoveis')->orderBy('id')->lockForUpdate()->first();
+            if (! Imoplanta::whereKey($p->id)->where('estado', Imoplanta::A_PAGAR)->lockForUpdate()->exists()) {
+                return false;
+            }
+            $compra = $semCusto ? null : app(\App\Services\Pagamentos\Creditos::class)->gastar($user, \App\Services\Pagamentos\Creditos::IMOPLANTA);
             if (! $semCusto && ! $compra) {
                 return false;
             }
-            if (Imoplanta::whereKey($p->id)->where('estado', Imoplanta::A_PAGAR)->update(['estado' => Imoplanta::A_LER, 'compra_id' => $compra?->id]) !== 1) {
-                return false;
-            }
-            if ($compra) {
-                DB::table('compras')->where('id', $compra->id)->increment('imoveis_usados', 1, ['updated_at' => now()]);
-            }
 
-            return true;
+            return Imoplanta::whereKey($p->id)->update(['estado' => Imoplanta::A_LER, 'compra_id' => $compra]) === 1;
         });
         if ($ok) {
             $this->custos->stripe($p->refresh());

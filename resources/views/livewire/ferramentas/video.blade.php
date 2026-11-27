@@ -6,7 +6,8 @@
     $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => 2, 'pronto' => 2][$estado];
     $ficheiro = fn (string $qual, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, ...$q, 'v' => substr(md5((string) $v->{$qual}), 0, 8)]);
     $quadrosIa = $tipo['ai'];
-    $semVideos = $disponiveis === 0;
+    $custo = $tipo['creditos'];
+    $semVideos = $disponiveis !== null && $disponiveis < $custo;   // fewer credits than this tool costs
     $botao = 'min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105 disabled:opacity-60';
     $secundario = 'min-h-11 px-5 rounded-full border border-[#D9D5CC] text-navy text-sm font-semibold hover:bg-[#EDEAE3] disabled:opacity-60';
     $campo = 'w-full min-h-[88px] px-4 py-3 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan';
@@ -22,7 +23,7 @@
         </div>
         @if ($disponiveis !== null && $estado === 'rascunho')
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
-                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">VÍDEOS IA<br>DISPONÍVEIS</span>
+                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
                 <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
             </div>
         @endif
@@ -139,7 +140,7 @@
                         <span wire:loading wire:target="criar">A enviar…</span>
                     </button>
                     <p class="text-xs text-[#6B7385]">
-                        {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa 1 dos seus '.$disponiveis.' vídeos IA.' }}
+                        {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa '.$custo.' dos seus '.$disponiveis.' créditos de vídeo.' }}
                         @if ($comVideo) Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
                         @else Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações à fotografia. @endif
                     </p>
@@ -148,8 +149,8 @@
         </form>
         @if ($semVideos)
             <section class="mt-6">
-                <h2 class="font-display text-3xl">Já não tem vídeos IA</h2>
-                <p class="mt-1 text-sm text-ink-soft">{{ $v ? 'A sua fotografia fica guardada: depois de comprar, volta aqui para criar as imagens.' : 'Escolha um pack para continuar. Cada vídeo serve para qualquer ferramenta. IVA incluído.' }}</p>
+                <h2 class="font-display text-3xl">{{ $tipo['nome'] }} usa {{ $custo }} {{ $custo === 1 ? 'crédito' : 'créditos' }} de vídeo</h2>
+                <p class="mt-1 text-sm text-ink-soft">{{ $v ? 'A sua fotografia fica guardada: depois de comprar, volta aqui para criar as imagens.' : 'Tem '.$disponiveis.'. Escolha um pack para continuar: os créditos servem para qualquer ferramenta e para os vídeos Imocena. IVA incluído.' }}</p>
                 @include('livewire.ferramentas.packs', ['video' => $v])
                 @if ($v)
                     <button type="button" wire:click="criar" class="mt-4 {{ $secundario }}">Já comprei: criar imagens</button>

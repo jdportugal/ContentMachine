@@ -65,7 +65,7 @@ class ContaTest extends TestCase
         $this->assertAuthenticatedAs($novo);
         $this->assertFalse($novo->isAdmin());
         $this->assertSame(0, $novo->creditos());
-        $this->assertSame(0, $novo->imoveisImoplantaDisponiveis());
+        $this->assertSame(0, intdiv($novo->creditos(), \App\Services\Pagamentos\Creditos::IMOPLANTA));
         auth()->logout();
 
         Livewire::test(Login::class)->set('email', 'op@imocena.com')->call('enviarLink')->assertSet('linkEnviado', true);

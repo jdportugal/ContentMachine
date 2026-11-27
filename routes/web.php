@@ -177,9 +177,10 @@ Route::get('/obrigado', function (LinkDeAcesso $contas) {
     }
 
     // Ferramentas IA: back to the video it was bought from (or the tools page for a pack bought there).
-    if ($compra && $compra->videos_ia > 0 && Auth::check()) {
-        $id = \App\Services\Pagamentos\Compras::ferramentaId((string) (json_decode((string) $compra->dados, true)['client_reference_id'] ?? ''));
-        $f = $id ? \App\Models\FerramentaIa::where('user_id', Auth::id())->find($id) : null;
+    // (The credits are one balance: a pack bought from an AI video carries it as ferramenta-<id>.)
+    $ferramenta = $compra ? \App\Services\Pagamentos\Compras::ferramentaId((string) (json_decode((string) $compra->dados, true)['client_reference_id'] ?? '')) : null;
+    if ($compra && ($ferramenta || $compra->videos_ia > 0) && Auth::check()) {
+        $f = $ferramenta ? \App\Models\FerramentaIa::where('user_id', Auth::id())->find($ferramenta) : null;
 
         return redirect($f ? route('ferramentas.video', $f->id) : route('ferramentas'))->with('pago', true);
     }

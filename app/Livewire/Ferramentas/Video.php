@@ -150,7 +150,7 @@ class Video extends Component
 
         return view('livewire.ferramentas.video', [
             'tipo' => Ferramentas::lista()[$this->ferramenta],
-            'disponiveis' => $user->is_admin || $user->imoplantaGratis() ? null : $user->videosIaDisponiveis(),
+            'disponiveis' => $user->is_admin || $user->imoplantaGratis() ? null : $user->creditos(),
             'packs' => config('contentmachine.ferramentas.packs'),
             'envios' => $this->enviosPlanta(),
         ]);

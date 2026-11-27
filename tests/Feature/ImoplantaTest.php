@@ -19,6 +19,7 @@ use App\Livewire\Imoplanta\Lista;
 use App\Models\Imoplanta;
 use App\Models\ImoplantaImagem;
 use App\Models\User;
+use App\Services\Pagamentos\Creditos;
 use App\Services\Imoplanta\ImoplantaCasa;
 use App\Services\Imoplanta\ImoplantaCustos;
 use App\Services\Imoplanta\Fotografo;
@@ -90,7 +91,7 @@ class ImoplantaTest extends TestCase
     private function comCreditos(User $u, int $n = 1, int $pack = 10, int $total = 40000): int
     {
         return DB::table('compras')->insertGetId(['user_id' => $u->id, 'sessao' => 'cs_'.uniqid(), 'email' => $u->email, 'total' => $total,
-            'imoveis' => $pack, 'imoveis_usados' => $pack - $n, 'created_at' => now(), 'updated_at' => now()]);
+            'videos' => $pack * Creditos::IMOPLANTA, 'videos_usados' => ($pack - $n) * Creditos::IMOPLANTA, 'imoveis' => $pack, 'imoveis_usados' => $pack, 'created_at' => now(), 'updated_at' => now()]);
     }
 
     /** A paid Payment Link checkout session, as Stripe sends it: the buyer's email, the link's metadata, our reference. */
@@ -139,14 +140,13 @@ class ImoplantaTest extends TestCase
         $this->assertSame([5000, 4000, 3000], collect(config('contentmachine.imoplanta.planos'))->map(fn ($p) => intdiv($p['preco'], $p['imoveis']))->values()->all());
     }
 
-    public function test_a_paid_pack_becomes_property_credits_not_videos(): void
+    public function test_a_paid_property_pack_becomes_video_credits(): void
     {
         $u = User::factory()->cliente()->create();
         $this->webhook($this->sessao($u, 'cs_1', 60000, ['imoveis' => '20']))->assertOk();
 
         $this->assertSame(20, (int) DB::table('compras')->sole()->imoveis);
-        $this->assertSame(20, $u->imoveisImoplantaDisponiveis());
-        $this->assertSame(0, $u->creditos());   // not video credits
+        $this->assertSame(100, $u->creditos());   // 20 properties = 100 video credits, one balance
     }
 
     // ── the public plans page: email → plans → payment ────────────────────
@@ -185,7 +185,7 @@ class ImoplantaTest extends TestCase
         $p->refresh();
         $this->assertSame(Imoplanta::A_LER, $p->estado);
         $this->assertSame(DB::table('compras')->sole()->id, $p->compra_id);
-        $this->assertSame(0, $u->imoveisImoplantaDisponiveis());
+        $this->assertSame(0, intdiv($u->creditos(), Creditos::IMOPLANTA));
         Queue::assertPushed(LerPlantasJob::class, 1);
 
         // back from Stripe (/obrigado): straight to the editor
@@ -282,16 +282,16 @@ class ImoplantaTest extends TestCase
         $c = Livewire::test(\App\Livewire\Imoplanta\Comecar::class)
             ->set('nome', 'Casa')->set('plantas', [UploadedFile::fake()->image('planta.png')])->call('enviar')
             ->assertSee('Quantos imóveis?')->assertSee('10 imóveis')->assertSee("40\u{00A0}€ por imóvel")
-            ->set('plano', 'imoplanta10')->assertSee("400\u{00A0}€")->assertSee('Os outros 9 ficam na sua conta');
+            ->set('plano', 'imoplanta10')->assertSee("400\u{00A0}€")->assertSee('Os outros 45 ficam na sua conta')->assertSee('50 créditos');
         $p = Imoplanta::sole();
         $c->call('pagar')->assertRedirect(Imoplantas::link($u, 'imoplanta10', $p));
 
         $this->webhook($this->sessao($u, 'cs_10', 40000, ['imoveis' => '10'], 'imoplanta-'.$p->id))->assertOk();
 
         $this->assertSame(Imoplanta::A_LER, $p->refresh()->estado);
-        $this->assertSame(9, $u->imoveisImoplantaDisponiveis());
-        $this->get('/plantas')->assertSee('imóveis disponíveis');               // the count in the top bar
-        $this->get(route('imoplanta'))->assertSee('IMÓVEIS<br>DISPONÍVEIS', false)->assertDontSee('Compre imóveis Imoplanta');   // packs only at 0, like the videos
+        $this->assertSame(9, intdiv($u->creditos(), Creditos::IMOPLANTA));
+        $this->get('/plantas')->assertSee('45</strong> créditos de vídeo', false);       // the count in the top bar
+        $this->get(route('imoplanta'))->assertSee('CRÉDITOS DE VÍDEO<br>DISPONÍVEIS', false)->assertDontSee('Cada imóvel usa 5 créditos de vídeo</p>', false);   // packs only below a property's 5
         Livewire::test(\App\Livewire\Imoplanta\Comecar::class)->set('plano', 'inventado')->set('nome', 'Outra')
             ->set('plantas', [UploadedFile::fake()->image('p.png')])->call('enviar')->assertRedirect();   // with credit: straight to the editor
     }
@@ -325,7 +325,7 @@ class ImoplantaTest extends TestCase
     {
         Queue::fake();
         $u = User::factory()->cliente()->create();
-        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_v', 'total' => 10000, 'videos' => 10, 'created_at' => now(), 'updated_at' => now()]);   // video credits don't count
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_v', 'total' => 2000, 'videos' => 4, 'created_at' => now(), 'updated_at' => now()]);   // fewer than a property's 5 credits
 
         // not bought yet: what Imoplanta is, the five steps and the packs; no upload form
         Livewire::actingAs($u)->test(Lista::class)->assertSee('Da planta ao vídeo do imóvel')->assertSee('Cinco passos, do papel ao vídeo')
@@ -347,7 +347,7 @@ class ImoplantaTest extends TestCase
             ->call('criar')->assertHasNoErrors()->assertRedirect();
 
         $p = Imoplanta::sole();
-        $this->assertSame([1, $compra, Imoplanta::A_LER, 2], [$u->imoveisImoplantaDisponiveis(), $p->compra_id, $p->estado, count($p->plantas)]);
+        $this->assertSame([1, $compra, Imoplanta::A_LER, 2], [intdiv($u->creditos(), Creditos::IMOPLANTA), $p->compra_id, $p->estado, count($p->plantas)]);
         Storage::disk('local')->assertExists($p->plantas[0]);
         Queue::assertPushed(LerPlantasJob::class, fn ($j) => $j->imovel === $p->id);
         // Stripe's fee on a €400 pack of 10, per credit: (1.5% × 400 + 0.25) / 10
@@ -1042,7 +1042,7 @@ class ImoplantaTest extends TestCase
         $this->webhook($sessao)->assertSuccessful();                                   // a repeated webhook starts nothing more
         Queue::assertPushed(PlantaVideoJob::class, 1);
         $this->assertSame('a_fazer', $p->refresh()->extra('planta'));
-        $this->assertSame(0, $u->imoveisImoplantaDisponiveis());              // not a property credit
+        $this->assertSame(0, intdiv($u->creditos(), Creditos::IMOPLANTA));              // not a property credit
 
         // the job: per storey one clip, bare plot → built and furnished; the storeys joined
         $tmp = sys_get_temp_dir().'/planta-'.uniqid().'.mp4';

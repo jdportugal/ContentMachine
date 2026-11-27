@@ -86,11 +86,11 @@
     <section class="mt-20 lg:mt-28">
         <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">PREÇOS</span></div>
         <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Paga por imóvel</h2>
-        <p class="mt-2 text-[15px] text-[#4A5263]">IVA incluído. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} correções, as fotografias e o vídeo de visita. Os imóveis de um pack ficam na sua conta até os usar.</p>
+        <p class="mt-2 text-[15px] text-[#4A5263]">IVA incluído. Cada imóvel inclui o modelo 3D com {{ config('contentmachine.imoplanta.refazer_3d') }} correções, as fotografias e o vídeo de visita, e usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo. Os créditos de um pack ficam na sua conta e servem também para os vídeos Imocena e as Ferramentas IA.</p>
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
             @foreach ($planos as $plano)
                 <div class="rounded-[20px] border {{ $loop->last ? 'border-coral bg-white' : 'border-[#E4E1DA] bg-white/60' }} p-6 flex flex-col gap-1">
-                    <span class="text-sm font-semibold text-navy">{{ $plano['imoveis'] === 1 ? '1 imóvel' : $plano['imoveis'].' imóveis' }}</span>
+                    <span class="text-sm font-semibold text-navy">{{ $plano['imoveis'] === 1 ? '1 imóvel' : $plano['imoveis'].' imóveis' }} · {{ $plano['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos de vídeo</span>
                     <span class="font-display text-[40px] leading-none text-navy">{{ $eur($plano['preco']) }}</span>
                     @if ($plano['imoveis'] > 1)
                         <span class="text-sm text-[#4A5263]">{{ $eur($plano['preco'] / $plano['imoveis']) }} por imóvel</span>

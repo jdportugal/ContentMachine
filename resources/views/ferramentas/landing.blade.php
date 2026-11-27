@@ -1,9 +1,10 @@
 @php
     // Ferramentas IA's landing page, built like Imoplanta's (imoplanta.landing): each tool with its example clip
-    // (public/exemplos-ia/<tool>.mp4, made once with the tool itself), how it works, the packs from the config.
+    // (public/exemplos-ia/<tool>.mp4, made once with the tool itself) and its price in video credits, the credit packs.
     $eur = fn (int $c) => \Illuminate\Support\Number::currency($c / 100, 'EUR', 'pt_PT', precision: $c % 100 ? 2 : 0);
     $packs = collect(config('contentmachine.ferramentas.packs'))->values();
-    $um = $packs->first();
+    $porCredito = $packs->last()['preco'] / $packs->last()['creditos'];   // the cheapest credit, in the biggest pack
+    $menos = min(array_column(\App\Services\Ferramentas\Ferramentas::lista(), 'creditos'));
     $ferramentas = \App\Services\Ferramentas\Ferramentas::lista();
     $botao = 'inline-flex items-center justify-center min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105';
     $sobre = 'text-[11px] tracking-[.3em] text-[#0478A0]';
@@ -26,7 +27,7 @@
                 <a href="{{ $comecar }}" class="{{ $botao }}">Experimentar com uma fotografia →</a>
                 <a href="#ferramentas" class="min-h-11 inline-flex items-center text-sm font-semibold text-navy underline underline-offset-4">Ver as ferramentas</a>
             </div>
-            <p class="text-sm text-[#4A5263]">{{ $eur($um['preco']) }} por vídeo, ou a partir de <strong class="text-navy">{{ $eur($packs->last()['preco'] / $packs->last()['videos']) }}</strong> num pack. Sem subscrição.</p>
+            <p class="text-sm text-[#4A5263]">Paga em créditos de vídeo: cada ferramenta usa os seus, a partir de {{ $menos }}. Um crédito a partir de <strong class="text-navy">{{ $eur((int) round($porCredito)) }}</strong> num pack. Sem subscrição.</p>
         </div>
         @php $capa = \App\Services\Ferramentas\Ferramentas::exemplo('drone'); @endphp
         <figure class="flex flex-col gap-3">
@@ -57,7 +58,7 @@
                     <div class="flex flex-col gap-3 {{ $loop->index % 2 ? 'lg:order-2' : '' }}">
                         <h3 class="font-display text-[30px] lg:text-[38px] font-medium leading-tight text-navy">{{ $f['nome'] }}</h3>
                         <p class="max-w-md text-[15px] lg:text-[17px] leading-relaxed text-[#4A5263]">{{ $f['texto'] }}</p>
-                        <p class="text-sm text-[#4A5263]">Envia: <strong class="text-navy">{{ mb_strtolower($f['envio']) }}</strong></p>
+                        <p class="text-sm text-[#4A5263]">Envia: <strong class="text-navy">{{ mb_strtolower($f['envio']) }}</strong> · <strong class="text-navy">{{ $f['creditos'] }} {{ $f['creditos'] === 1 ? 'crédito' : 'créditos' }} de vídeo</strong></p>
                     </div>
                     <div class="rounded-[20px] overflow-hidden bg-white border border-[#E4E1DA] shadow-[0_12px_32px_rgba(14,22,38,0.10)]">
                         @if ($ex['video'])
@@ -76,15 +77,15 @@
     {{-- prices --}}
     <section class="mt-20 lg:mt-28">
         <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">PREÇOS</span></div>
-        <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Paga por vídeo</h2>
-        <p class="mt-2 text-[15px] text-[#4A5263]">IVA incluído. Cada vídeo serve para qualquer ferramenta e inclui as alterações às imagens e as novas versões do vídeo. Os vídeos de um pack ficam na sua conta até os usar.</p>
+        <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Paga em créditos de vídeo</h2>
+        <p class="mt-2 text-[15px] text-[#4A5263]">IVA incluído. Os mesmos créditos dos vídeos Imocena e do Imoplanta. Cada ferramenta usa os seus créditos, com as alterações às imagens e as novas versões do vídeo incluídas. Os créditos ficam na sua conta até os usar.</p>
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
             @foreach ($packs as $pack)
                 <div class="rounded-[20px] border {{ $loop->last ? 'border-coral bg-white' : 'border-[#E4E1DA] bg-white/60' }} p-6 flex flex-col gap-1">
-                    <span class="text-sm font-semibold text-navy">{{ $pack['videos'] === 1 ? '1 vídeo' : $pack['videos'].' vídeos' }}</span>
+                    <span class="text-sm font-semibold text-navy">{{ $pack['creditos'] === 1 ? '1 crédito de vídeo' : $pack['creditos'].' créditos de vídeo' }}</span>
                     <span class="font-display text-[40px] leading-none text-navy">{{ $eur($pack['preco']) }}</span>
-                    @if ($pack['videos'] > 1)
-                        <span class="text-sm text-[#4A5263]">{{ $eur($pack['preco'] / $pack['videos']) }} por vídeo</span>
+                    @if ($pack['creditos'] > 1)
+                        <span class="text-sm text-[#4A5263]">{{ $eur((int) round($pack['preco'] / $pack['creditos'])) }} por crédito</span>
                     @endif
                 </div>
             @endforeach

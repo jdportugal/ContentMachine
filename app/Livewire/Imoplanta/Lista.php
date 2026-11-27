@@ -93,7 +93,7 @@ class Lista extends Component
 
         return view('livewire.imoplanta.lista', [
             'imoveis' => Imoplanta::query()->when(! $user->is_admin, fn ($q) => $q->where('user_id', $user->id))->with('imagens')->latest('id')->get(),
-            'disponiveis' => $user->is_admin ? null : $user->imoveisImoplantaDisponiveis(),
+            'disponiveis' => $user->is_admin ? null : $user->creditos(),
             'planos' => config('contentmachine.imoplanta.planos'),
             'gratis' => $user->imoplantaGratis(),
         ]);

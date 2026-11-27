@@ -131,7 +131,7 @@ class Comecar extends Component
         $user = Auth::user();
         $info = ['anuncio' => $this->anuncio, 'notas' => $this->notas];
 
-        if ($user->is_admin || $user->imoveisImoplantaDisponiveis() > 0) {
+        if ($user->is_admin || $user->creditos() >= \App\Services\Pagamentos\Creditos::IMOPLANTA) {
             $p = $imoplantas->criar($user, $this->nome, $this->plantas, $this->tipologia, $this->piso, $this->referencias, $info);
             if ($p) {
                 return $this->redirectRoute('imoplanta.imovel', $p->id);
@@ -185,7 +185,7 @@ class Comecar extends Component
             'pendente' => $pendente,
             'gratis' => (bool) Auth::user()?->imoplantaGratis(),
             'planos' => config('contentmachine.imoplanta.planos'),
-            'disponiveis' => Auth::check() && ! Auth::user()->is_admin && ! Auth::user()->imoplantaGratis() ? Auth::user()->imoveisImoplantaDisponiveis() : null,
+            'disponiveis' => Auth::check() && ! Auth::user()->is_admin && ! Auth::user()->imoplantaGratis() ? Auth::user()->creditos() : null,
             'imoveis' => Auth::check() ? Imoplanta::where('user_id', Auth::id())->where('estado', '!=', Imoplanta::A_PAGAR)->count() : 0,
         ]);
     }

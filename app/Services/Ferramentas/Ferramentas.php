@@ -12,40 +12,40 @@ use Illuminate\Support\Facades\Storage;
 
 /**
  * The AI video tools: one photo (or a floor plan) → a start and an end frame the customer approves → one
- * Kling clip. Sold as packs of "vídeos IA" (compras.videos_ia), any tool. The texts here are what the landing
+ * Kling clip. Paid in video credits (Pagamentos\Creditos), each tool its own `creditos`. The texts here are what the landing
  * page and the customer pages show; `ai` lists the frames the AI makes, in order (any other is the customer's
  * upload, or for the plan, drawn by code); `segundos` is the clip length (it sets the worst-case cost: see the design doc).
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,creditos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
     public static function lista(): array
     {
         return [
             'drone' => [
                 'nome' => 'Vista drone', 'linha' => 'Um drone dá a volta à casa, visto do ar.',
                 'texto' => 'A partir de uma fotografia da casa, um drone sobrevoa-a e roda à sua volta, a mostrar a casa, o terreno e a envolvente vistos do ar.',
-                'envio' => 'Fotografia da fachada ou do exterior', 'inicio' => 'Vista aérea', 'fim' => 'Depois de rodar', 'ai' => ['inicio', 'fim'], 'segundos' => 10,
+                'envio' => 'Fotografia da fachada ou do exterior', 'inicio' => 'Vista aérea', 'fim' => 'Depois de rodar', 'ai' => ['inicio', 'fim'], 'segundos' => 10, 'creditos' => 2,
                 'exemplo' => 'Ex.: um pouco mais alto, mostrar também o quintal',
             ],
             'lateral' => [
                 'nome' => 'Movimento lateral', 'linha' => 'A câmara desliza devagar para o lado, como um gimbal em câmara lenta.',
                 'texto' => 'A partir de uma fotografia, a câmara desliza suavemente para a esquerda ou para a direita, com profundidade, como um plano de gimbal em câmara lenta. Funciona em interiores e exteriores.',
-                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'direcao' => true,
+                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'creditos' => 2, 'direcao' => true,
                 'exemplo' => 'Ex.: o vidro da porta está torto, endireitar',
             ],
             'limpeza' => [
                 // a photo, not a video (user, 2026-11-26): no clip, the cleaned photo is the result
                 'nome' => 'Limpeza IA', 'linha' => 'A sua fotografia, sem a desarrumação e os objetos a mais.',
                 'texto' => 'Caixas, roupa, carros, caixotes do lixo: tudo o que distrai sai da fotografia, e o espaço fica arrumado e pronto a mostrar. As paredes, o chão e as janelas não mudam.',
-                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'video' => false,
+                'envio' => 'Fotografia da divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Fotografia limpa', 'ai' => ['fim'], 'segundos' => 0, 'creditos' => 1, 'video' => false,
                 'campo' => ['titulo' => 'O que quer retirar?', 'ajuda' => 'Opcional: já retiramos a desarrumação e os objetos soltos.', 'exemplo' => 'Ex.: o carro em frente à garagem, as caixas no canto'],
                 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da obra, do estado atual ao acabado: uma divisão, uma casa ou uma ruína.',
                 'texto' => 'Mostre o potencial de um imóvel: em timelapse, os operários renovam uma divisão ou uma fachada, ou recuperam uma ruína. Diga-nos o que quer ver construído.',
-                'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10,
+                'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 3,
                 // the type of works (opcoes.obra), asked first (user, 2026-11-27); a build from the ground takes 15 s
                 'obras' => [
                     'interior' => ['nome' => 'Renovação interior', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
@@ -58,7 +58,7 @@ class Ferramentas
             'construcao' => [
                 'nome' => 'Construção IA', 'linha' => 'Num terreno vazio, os operários constroem a casa de raiz.',
                 'texto' => 'Envie a fotografia de um terreno e diga-nos que casa quer: desenhamos a casa no sítio certo e, em timelapse, os operários preparam o terreno, fazem as fundações, a estrutura, as paredes, o telhado e os acabamentos.',
-                'envio' => 'Fotografia do terreno', 'inicio' => 'O terreno', 'fim' => 'A casa construída', 'ai' => ['fim'], 'segundos' => 15,
+                'envio' => 'Fotografia do terreno', 'inicio' => 'O terreno', 'fim' => 'A casa construída', 'ai' => ['fim'], 'segundos' => 15, 'creditos' => 3,
                 'campo' => ['titulo' => 'Que casa quer construir?', 'ajuda' => 'Opcional: os pisos, o tamanho, o estilo. Sem indicação, desenhamos uma moradia moderna à medida do terreno.', 'exemplo' => 'Ex.: moradia T3 de dois pisos, moderna, com piscina'],
                 'exemplo' => 'Ex.: a casa mais recuada da estrada',
             ],
@@ -67,7 +67,7 @@ class Ferramentas
                 // customer's browser, made real by the AI; the clip builds it from the bare footprint, then furnishes it
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',
                 'texto' => 'Envie a planta de um piso. A casa aparece vista de cima: primeiro o chão e as paredes, depois a mobília a entrar no lugar, com som.',
-                'envio' => 'Planta do piso (imagem)', 'inicio' => 'O terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10,
+                'envio' => 'Planta do piso (imagem)', 'inicio' => 'O terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 2,
                 'exemplo' => 'Ex.: chão de madeira clara em toda a casa',
             ],
         ];
@@ -132,28 +132,26 @@ class Ferramentas
     }
 
     /**
-     * «Criar imagens»: spends one video (the oldest purchase with any left; admins and free accounts spend none)
-     * and starts the frames. Once: a second call finds it no longer a draft. False when there is no video left.
+     * «Criar imagens»: spends the tool's video credits (Pagamentos\Creditos, oldest purchases first; admins and free
+     * accounts spend none) and starts the frames. Once: a second call finds it no longer a draft. False when the
+     * account has too few credits.
      */
     public function iniciar(FerramentaIa $f): bool
     {
         $user = $f->user;
-        $ok = DB::transaction(function () use ($f, $user) {
+        $n = $f->tipo()['creditos'];
+        $ok = DB::transaction(function () use ($f, $user, $n) {
             $semCusto = $user->is_admin || $user->imoplantaGratis();
-            $compra = $semCusto ? null : DB::table('compras')->where('user_id', $user->id)
-                ->whereColumn('videos_ia_usados', '<', 'videos_ia')->orderBy('id')->lockForUpdate()->first();
+            if (! FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)->lockForUpdate()->exists()) {
+                return false;
+            }
+            $compra = $semCusto ? null : app(\App\Services\Pagamentos\Creditos::class)->gastar($user, $n);
             if (! $semCusto && ! $compra) {
                 return false;
             }
-            if (FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)
-                ->update(['estado' => FerramentaIa::A_ENQUADRAR, 'compra_id' => $compra?->id, 'erro' => null, 'updated_at' => now()]) !== 1) {
-                return false;
-            }
-            if ($compra) {
-                DB::table('compras')->where('id', $compra->id)->increment('videos_ia_usados', 1, ['updated_at' => now()]);
-            }
 
-            return true;
+            return FerramentaIa::whereKey($f->id)->update(['estado' => FerramentaIa::A_ENQUADRAR, 'compra_id' => $compra,
+                'creditos' => $semCusto ? 0 : $n, 'erro' => null, 'updated_at' => now()]) === 1;
         });
         if ($ok) {
             FerramentaFramesJob::dispatch($f->id, false);
@@ -162,15 +160,15 @@ class Ferramentas
         return $ok;
     }
 
-    /** The first frames failed for good: the video goes back to its purchase (once) and the draft keeps the photo. */
+    /** The first frames failed for good: its credits go back (once) and the draft keeps the photo. */
     public function devolver(FerramentaIa $f, string $erro): void
     {
         DB::transaction(function () use ($f, $erro) {
             $f = FerramentaIa::whereKey($f->id)->lockForUpdate()->first();
-            if ($f->compra_id) {
-                DB::table('compras')->where('id', $f->compra_id)->where('videos_ia_usados', '>', 0)->decrement('videos_ia_usados', 1, ['updated_at' => now()]);
+            if ($f->compra_id && $f->creditos > 0) {
+                app(\App\Services\Pagamentos\Creditos::class)->devolver($f->user, $f->creditos);
             }
-            $f->update(['estado' => FerramentaIa::RASCUNHO, 'compra_id' => null, 'erro' => $erro]);
+            $f->update(['estado' => FerramentaIa::RASCUNHO, 'compra_id' => null, 'creditos' => 0, 'erro' => $erro]);
         });
     }
 
@@ -311,7 +309,7 @@ class Ferramentas
     }
 
     /**
-     * A pack's Payment Link (stripe.links.ia1|ia10|ia20) with the buyer's email and, bought from a video, that
+     * A credit pack's Payment Link (stripe.links.avulso|pack10|pack20) with the buyer's email and, bought from a video, that
      * video as client_reference_id (so /obrigado brings them back to it). Without a link, an email to us.
      */
     public static function link(User $user, string $pack, ?FerramentaIa $f = null): string

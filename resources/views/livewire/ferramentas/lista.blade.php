@@ -15,7 +15,7 @@
         </div>
         @if ($disponiveis !== null)
             <div class="rounded-[18px] bg-navy px-6 py-4 min-w-[200px] flex items-center justify-between gap-6">
-                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">VÍDEOS IA<br>DISPONÍVEIS</span>
+                <span class="text-[10px] tracking-[.3em] text-cyan leading-relaxed">CRÉDITOS DE VÍDEO<br>DISPONÍVEIS</span>
                 <span class="font-display text-[48px] leading-none text-ivory">{{ $disponiveis }}</span>
             </div>
         @endif
@@ -35,6 +35,7 @@
                 <div class="p-4 flex flex-col gap-1">
                     <span class="font-display text-2xl leading-tight text-ivory">{{ $f['nome'] }}</span>
                     <span class="text-sm text-[#AEB5C1]">{{ $f['linha'] }}</span>
+                    <span class="mt-1 text-xs font-semibold text-cyan">{{ $f['creditos'] }} {{ $f['creditos'] === 1 ? 'crédito de vídeo' : 'créditos de vídeo' }}</span>
                 </div>
             </a>
         @endforeach
@@ -61,8 +62,8 @@
 
     @if ($disponiveis !== null)
         <section id="packs" class="mt-12">
-            <h2 class="font-display text-3xl">Packs de vídeos IA</h2>
-            <p class="mt-1 text-sm text-ink-soft">Cada vídeo serve para qualquer ferramenta. IVA incluído.</p>
+            <h2 class="font-display text-3xl">Créditos de vídeo</h2>
+            <p class="mt-1 text-sm text-ink-soft">Os mesmos créditos dos vídeos Imocena e do Imoplanta: cada ferramenta usa os seus. IVA incluído.</p>
             @include('livewire.ferramentas.packs', ['video' => null])
         </section>
     @endif

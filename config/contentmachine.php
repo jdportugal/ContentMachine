@@ -595,16 +595,17 @@ return [
 
     /*
     | Ferramentas IA: one photo (or a floor plan) → start and end frames the customer
-    | approves → one Kling clip. Sold as packs of "vídeos IA", any tool (compras.videos_ia).
+    | approves → one Kling clip. Paid in video credits, each tool its own number (Pagamentos\Creditos).
     | Worst case per video (4 images + 3 clips) is ~4.50 € (10 s), ~6.60 € (construção, 15 s):
     | docs/superpowers/specs/2026-11-26-ferramentas-ia-design.md.
     */
     'ferramentas' => [
+        // One balance of video credits for everything (Pagamentos\Creditos): the AI tools are bought with the same packs as
+        // the Imocena videos; each tool costs its own credits (Ferramentas::lista). Prices shown; the Payment Link charges.
         'packs' => [
-            // Prices shown on the pages; what is charged is the Payment Link's (stripe.links.ia*).
-            'ia1' => ['videos' => 1, 'preco' => (int) env('IA_PRECO_1', 2500)],
-            'ia10' => ['videos' => 10, 'preco' => (int) env('IA_PRECO_10', 22500)],
-            'ia20' => ['videos' => 20, 'preco' => (int) env('IA_PRECO_20', 40000)],
+            'avulso' => ['creditos' => 1, 'preco' => 2000],
+            'pack10' => ['creditos' => 10, 'preco' => 10000],
+            'pack20' => ['creditos' => 20, 'preco' => 17500],
         ],
         'editar_imagem' => 3,   // changes to the AI frame, per video
         'refazer_video' => 2,   // new versions of the clip, per video

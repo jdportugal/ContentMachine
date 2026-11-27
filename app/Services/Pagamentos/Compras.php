@@ -51,9 +51,12 @@ class Compras
             'nif' => $nif,
             'total' => (int) ($session['amount_total'] ?? 0),
             'moeda' => strtolower((string) ($session['currency'] ?? 'eur')),
-            'videos' => (int) ($meta['videos'] ?? 0),
-            'imoveis' => (int) ($meta['imoveis'] ?? 0),
-            'videos_ia' => (int) ($meta['videos_ia'] ?? 0),
+            // one balance of video credits: an Imoplanta property's link (50 €) brings its 5 credits, an old AI video link
+            // its 3; the property / AI columns keep what was bought, already counted as spent
+            'videos' => (int) ($meta['videos'] ?? 0) + (int) ($meta['imoveis'] ?? 0) * Creditos::IMOPLANTA
+                + (int) ($meta['videos_ia'] ?? 0) * Creditos::VIDEO_IA_ANTIGO,
+            'imoveis' => (int) ($meta['imoveis'] ?? 0), 'imoveis_usados' => (int) ($meta['imoveis'] ?? 0),
+            'videos_ia' => (int) ($meta['videos_ia'] ?? 0), 'videos_ia_usados' => (int) ($meta['videos_ia'] ?? 0),
             'lead_id' => $leadId,
             'imoplanta_id' => $imoplantaId,
             'extra' => in_array($meta['extra'] ?? null, ['planta', 'video', 'ambos'], true) ? $meta['extra'] : null,

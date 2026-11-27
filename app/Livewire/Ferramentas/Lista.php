@@ -28,7 +28,7 @@ class Lista extends Component
 
         return view('livewire.ferramentas.lista', [
             'videos' => FerramentaIa::query()->when(! $user->is_admin, fn ($q) => $q->where('user_id', $user->id))->latest('id')->get(),
-            'disponiveis' => $user->is_admin || $user->imoplantaGratis() ? null : $user->videosIaDisponiveis(),
+            'disponiveis' => $user->is_admin || $user->imoplantaGratis() ? null : $user->creditos(),
             'ferramentas' => Ferramentas::disponiveis(),
             'packs' => config('contentmachine.ferramentas.packs'),
         ]);

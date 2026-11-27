@@ -37,7 +37,7 @@
         @auth
             <span class="flex items-center gap-3">
                 @if ($disponiveis)
-                    <a href="{{ route('imoplanta') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ivory/10 font-normal hover:bg-ivory/15"><strong class="font-semibold text-cyan">{{ $disponiveis }}</strong> {{ $disponiveis === 1 ? 'imóvel disponível' : 'imóveis disponíveis' }}</a>
+                    <a href="{{ route('imoplanta') }}" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ivory/10 font-normal hover:bg-ivory/15"><strong class="font-semibold text-cyan">{{ $disponiveis }}</strong> {{ $disponiveis === 1 ? 'crédito de vídeo' : 'créditos de vídeo' }}</a>
                 @endif
                 <a href="{{ route('imoplanta') }}" class="hover:text-cyan">{{ auth()->user()->email }}</a>
             </span>
@@ -228,7 +228,7 @@
                         @foreach ($planos as $chave => $pl)
                             <label class="flex items-center gap-3 min-h-12 px-3.5 rounded-xl border cursor-pointer {{ $plano === $chave ? 'border-cyan bg-cyan/10' : 'border-ivory/15 hover:border-ivory/30' }}">
                                 <input type="radio" wire:model.live="plano" value="{{ $chave }}" class="accent-cyan">
-                                <span class="flex-1 text-sm font-medium">{{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }}</span>
+                                <span class="flex-1 text-sm font-medium">{{ $pl['imoveis'] }} {{ $pl['imoveis'] === 1 ? 'imóvel' : 'imóveis' }} <span class="text-[11px] font-normal text-[#AEB5C1]">· {{ $pl['imoveis'] * \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos</span></span>
                                 <span class="text-right">
                                     <span class="block text-sm font-semibold">{{ $eur($pl['preco']) }}</span>
                                     @if ($pl['imoveis'] > 1)<span class="block text-[11px] text-[#AEB5C1]">{{ $eur(intdiv($pl['preco'], $pl['imoveis'])) }} por imóvel</span>@endif
@@ -236,7 +236,7 @@
                             </label>
                         @endforeach
                         @if ($escolhido['imoveis'] > 1)
-                            <p class="mt-1 text-xs text-[#AEB5C1]">Este imóvel usa 1. Os outros {{ $escolhido['imoveis'] - 1 }} ficam na sua conta até os usar.</p>
+                            <p class="mt-1 text-xs text-[#AEB5C1]">Este imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos. Os outros {{ ($escolhido['imoveis'] - 1) * \App\Services\Pagamentos\Creditos::IMOPLANTA }} ficam na sua conta: servem para outros imóveis, vídeos Imocena e Ferramentas IA.</p>
                         @endif
                     </fieldset>
                 @endunless
