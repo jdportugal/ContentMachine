@@ -195,23 +195,23 @@ class ComprasTest extends TestCase
     {
         config()->set('contentmachine.stripe.links.bf10', 'https://buy.stripe.com/bf10');
         config()->set('contentmachine.promocoes.black_friday.ate', now('Europe/Lisbon')->addDay()->toDateTimeString());
-        $this->get('/black-friday')->assertOk()->assertSee('Mais 25% de vídeos em todos os packs.')->assertSee('12,5 créditos de vídeo')
+        $this->get('/black-friday')->assertOk()->assertSee('Mais 25% de vídeos em todos os packs.')->assertSee('13 vídeos')
             ->assertSee('https://buy.stripe.com/bf10?locale=pt', false);
 
         $lead = $this->leadPronto(limpo: true);
         session(['lead_id' => $lead->id]);
         Livewire::withUrlParams([])->test(Landing::class)->set('blackFriday', true)
-            ->assertSee('Este vídeo + 11,5 créditos de vídeo')->assertSee('Este vídeo + 24 vídeos')
+            ->assertSee('Este vídeo + 12 vídeos')->assertSee('Este vídeo + 24 vídeos')
             ->assertDontSee('Tirar a marca d’água · 10 €')->assertDontSee('com marca d’água')->assertDontSee('Outro vídeo')
             ->assertSee('https://buy.stripe.com/bf10?client_reference_id=lead-'.$lead->id, false);
 
-        // paid: 12,5 credits, this video delivered clean with one of them
+        // paid: 13 videos, this video delivered clean with one of them
         $this->webhook($this->sessao(['client_reference_id' => 'lead-'.$lead->id, 'amount_total' => 10000,
-            'metadata' => ['videos' => '12.5', 'inclui_video' => '1']]))->assertOk();
+            'metadata' => ['videos' => '13', 'inclui_video' => '1']]))->assertOk();
         $compra = DB::table('compras')->sole();
-        $this->assertSame([12.5, 1], [(float) $compra->videos, (int) $compra->videos_usados]);
+        $this->assertSame([13, 1], [(int) $compra->videos, (int) $compra->videos_usados]);
         $this->assertNotNull(DB::table('leads')->value('pago_em'));
-        $this->assertSame(11.5, User::query()->where('email', 'ana@exemplo.pt')->sole()->creditos());
+        $this->assertSame(12, User::query()->where('email', 'ana@exemplo.pt')->sole()->creditos());
 
         // over: the page is the usual one
         config()->set('contentmachine.promocoes.black_friday.ate', now('Europe/Lisbon')->subMinute()->toDateTimeString());

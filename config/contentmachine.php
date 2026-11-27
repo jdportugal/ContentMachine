@@ -590,7 +590,6 @@ return [
             // Ferramentas IA (Payment Links with metadata videos_ia=1|10|20)
             // Black Friday 2026 (promocoes.black_friday): the same packs with 25% more credits, each with metadata
             // videos=<credits> and inclui_video=1 (bought from a free video, that video is delivered clean)
-            'bf1' => env('STRIPE_LINK_BF1', ''),
             'bf10' => env('STRIPE_LINK_BF10', ''),
             'bf20' => env('STRIPE_LINK_BF20', ''),
             'ia1' => env('STRIPE_LINK_IA1', ''),
@@ -607,14 +606,14 @@ return [
     */
     /*
     | Promotions. Black Friday 2026 (user, 2026-11-27): /black-friday, the free video as always, then only «este vídeo +
-    | N»: the usual packs, same prices, 25% more video credits (credits are in tenths: 1,3 / 12,5 / 25), until Sunday.
+    | N»: the packs at the same prices with 25% more videos, whole videos only (user: "not like half a video"): 10 → 13
+    | (12,5 rounded up), 20 → 25; a single video can't take 25% in whole videos, so it isn't in the promotion. Until Sunday.
     */
     'promocoes' => [
         'black_friday' => [
             'ate' => env('BLACK_FRIDAY_ATE', '2026-11-30 23:59:59'),   // Europe/Lisbon
             'packs' => [
-                'bf1' => ['creditos' => 1.3, 'antes' => 1, 'preco' => 2000],
-                'bf10' => ['creditos' => 12.5, 'antes' => 10, 'preco' => 10000],
+                'bf10' => ['creditos' => 13, 'antes' => 10, 'preco' => 10000],
                 'bf20' => ['creditos' => 25, 'antes' => 20, 'preco' => 17500],
             ],
         ],
