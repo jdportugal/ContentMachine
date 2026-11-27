@@ -390,7 +390,14 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
 export const AdImocena: React.FC<AdProps> = ({ variante, secoes, reel, fotos, musica, agencia }) => {
   const { durationInFrames } = useVideoConfig();
   loadThemeFonts("Cormorant Garamond", "Poppins");
-  const blocos = [
+  // Black Friday (user, 2026-11-27): the promo, then "just paste the link" with the demo, then the old way
+  const blocos = bf(variante) ? [
+    <Hook variante={variante} fotos={fotos} agencia={agencia} />,
+    <Demo reel={reel} fotos={fotos} agencia={agencia} />,
+    <Agitar variante={variante} fotos={fotos} />,
+    <Stack variante={variante} reel={reel} fotos={fotos} agencia={agencia} />,
+    <CTA variante={variante} fotos={fotos} />,
+  ] : [
     <Hook variante={variante} fotos={fotos} agencia={agencia} />,
     <Agitar variante={variante} fotos={fotos} />,
     <Demo reel={reel} fotos={fotos} agencia={agencia} />,
