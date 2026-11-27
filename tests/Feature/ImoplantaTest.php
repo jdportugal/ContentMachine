@@ -49,7 +49,7 @@ class ImoplantaTest extends TestCase
         parent::setUp();
         Storage::fake('local');
         config(['contentmachine.stripe.webhook_secret' => 'whsec_test']);
-        foreach (['imoplanta1', 'imoplanta10', 'imoplanta20', 'extra_planta', 'extra_video', 'extra_ambos'] as $plano) {
+        foreach (['imoplanta1', 'imoplanta5', 'imoplanta10', 'extra_planta', 'extra_video', 'extra_ambos'] as $plano) {
             config(['contentmachine.stripe.links.'.$plano => 'https://buy.stripe.com/test_'.$plano]);
         }
         // Imoplanta is open to one email for now (imoplanta.acesso); these tests are about Imoplanta itself
@@ -136,8 +136,8 @@ class ImoplantaTest extends TestCase
         $this->assertSame('https://buy.stripe.com/test_imoplanta1?prefilled_email=ana%40exemplo.pt&locale=pt', Imoplantas::link($u, 'imoplanta1'));   // a pack: no property
         config(['contentmachine.stripe.links.imoplanta20' => '']);
         $this->assertStringStartsWith('mailto:', Imoplantas::link($u, 'imoplanta20'));   // no link yet: an email to us, as the video buttons
-        // €50 / €40 / €30 per property (the prices shown; the link charges its own)
-        $this->assertSame([5000, 4000, 3000], collect(config('contentmachine.imoplanta.planos'))->map(fn ($p) => intdiv($p['preco'], $p['imoveis']))->values()->all());
+        // €50 / €45 / €40 per property, for 1, 5 or 10 (the prices shown; the link charges its own)
+        $this->assertSame([5000, 4500, 4000], collect(config('contentmachine.imoplanta.planos'))->map(fn ($p) => intdiv($p['preco'], $p['imoveis']))->values()->all());
     }
 
     public function test_a_paid_property_pack_becomes_video_credits(): void
@@ -1640,5 +1640,21 @@ class ImoplantaTest extends TestCase
         $this->assertSame([0.15, 0.60, 0.075], $c->precoLlm('gpt-4o-mini-2024'));
         $this->assertSame([2.5, 10.0, 1.25], $c->precoLlm('gpt-4o'));
         $this->assertSame([5.0, 25.0, 0.5], $c->precoLlm('some-unknown-model'));
+    }
+
+    public function test_with_enough_credits_the_last_step_shows_no_price_and_the_property_starts_with_credits(): void
+    {
+        Queue::fake();
+        $u = User::factory()->cliente()->create();
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_c', 'total' => 10000, 'videos' => 10, 'created_at' => now(), 'updated_at' => now()]);
+        $this->actingAs($u);
+        $p = $this->imovel($u, ['estado' => Imoplanta::A_PAGAR, 'casa' => null, 'cameras' => null]);
+
+        $c = Livewire::test(\App\Livewire\Imoplanta\Comecar::class)->assertSee('dos seus 10 créditos de vídeo')
+            ->assertDontSee("50\u{00A0}€")->assertDontSee('Quantos imóveis?');
+        $c->call('pagar')->assertRedirect(route('imoplanta.imovel', $p->id));
+        $this->assertSame([Imoplanta::A_LER, 5], [$p->refresh()->estado, $u->creditos()]);
+
+        $this->get(route('conta'))->assertSee('Créditos de vídeo')->assertSee('Comprar mais');   // the balance in the sidebar
     }
 }

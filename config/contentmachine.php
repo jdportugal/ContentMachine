@@ -581,6 +581,7 @@ return [
             // Imoplanta (Payment Links with metadata imoveis=1|10|20, or extra=planta|video|ambos; the pages add
             // client_reference_id=imoplanta-<property id> so the webhook knows which property it pays for).
             'imoplanta1' => env('STRIPE_LINK_IMOPLANTA1', ''),
+            'imoplanta5' => env('STRIPE_LINK_IMOPLANTA5', ''),
             'imoplanta10' => env('STRIPE_LINK_IMOPLANTA10', ''),
             'imoplanta20' => env('STRIPE_LINK_IMOPLANTA20', ''),
             'extra_planta' => env('STRIPE_LINK_EXTRA_PLANTA', ''),
@@ -627,9 +628,10 @@ return [
     'imoplanta' => [
         'planos' => [
             // Prices shown on the pages; what is charged is the Payment Link's (stripe.links.imoplanta*).
+            // shown only to who has fewer credits than a property's 5 (user, 2026-11-27): 1, 5 or 10, each with its credits
             'imoplanta1' => ['nome' => 'Imoplanta · 1 imóvel', 'imoveis' => 1, 'preco' => 5000],
+            'imoplanta5' => ['nome' => 'Imoplanta · 5 imóveis', 'imoveis' => 5, 'preco' => (int) env('IMOPLANTA_PRECO_5', 22500)],
             'imoplanta10' => ['nome' => 'Imoplanta · 10 imóveis', 'imoveis' => 10, 'preco' => 40000],
-            'imoplanta20' => ['nome' => 'Imoplanta · 20 imóveis', 'imoveis' => 20, 'preco' => 60000],
         ],
         // Accounts that use Imoplanta as a normal customer, but at no cost: every price shows 0 € and nothing goes
         // to Stripe (comma-separated emails).

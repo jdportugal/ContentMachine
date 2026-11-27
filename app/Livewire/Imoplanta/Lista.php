@@ -49,7 +49,7 @@ class Lista extends Component
 
         $p = $imoplantas->criar(auth()->user(), $this->nome, $this->plantas, $this->tipologia, $this->piso, $this->referencias);
         if (! $p) {
-            $this->addError('plantas', 'Não tem imóveis disponíveis. Compre um imóvel ou um pack abaixo.');
+            $this->addError('plantas', 'Um imóvel usa 5 créditos de vídeo e não tem que cheguem. Compre abaixo.');
 
             return null;
         }

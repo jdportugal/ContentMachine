@@ -32,7 +32,7 @@ class Comecar extends Component
     /** The pack the final step starts on: one property. */
     public const PLANO = 'imoplanta1';
 
-    /** The pack chosen on the final step (1, 10 or 20 properties, as on «Os meus vídeos»). */
+    /** The pack chosen on the final step (1, 5 or 10 properties), when the account has too few credits. */
     public string $plano = self::PLANO;
 
     public string $email = '';
@@ -151,10 +151,11 @@ class Comecar extends Component
         if (! $p) {
             return null;
         }
-        if (Auth::user()->imoplantaGratis()) {   // 0 €: no Stripe, it starts now
-            app(Imoplantas::class)->iniciar($p);
-
-            return $this->redirectRoute('imoplanta.imovel', $p->id);
+        // 0 €, or enough video credits (a property uses 5): no Stripe, it starts now
+        if (Auth::user()->imoplantaGratis() || Auth::user()->creditos() >= \App\Services\Pagamentos\Creditos::IMOPLANTA) {
+            if (app(Imoplantas::class)->iniciar($p) || Auth::user()->imoplantaGratis()) {
+                return $this->redirectRoute('imoplanta.imovel', $p->id);
+            }
         }
 
         $plano = isset(config('contentmachine.imoplanta.planos')[$this->plano]) ? $this->plano : self::PLANO;

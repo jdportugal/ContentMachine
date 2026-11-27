@@ -97,7 +97,7 @@
                 <span wire:loading.remove wire:target="criar">Criar modelo 3D →</span>
                 <span wire:loading wire:target="criar">A enviar…</span>
             </button>
-            <p class="text-xs text-[#AEB5C1]">{{ $gratis ? 'Ao criar: 0 €.' : 'Ao criar, usa 1 imóvel do seu saldo.' }}</p>
+            <p class="text-xs text-[#AEB5C1]">{{ $gratis || $disponiveis === null ? 'Ao criar: 0 €.' : 'Ao criar, usa '.\App\Services\Pagamentos\Creditos::IMOPLANTA.' dos seus '.$disponiveis.' créditos de vídeo.' }}</p>
         </div>
     </form>
     @endif

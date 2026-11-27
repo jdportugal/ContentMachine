@@ -221,8 +221,14 @@
                         <li class="flex gap-2.5">{!! $check !!}<span>{{ $i }}</span></li>
                     @endforeach
                 </ul>
-                @php $escolhido = $planos[$plano] ?? $planos[\App\Livewire\Imoplanta\Comecar::PLANO]; $total = $gratis ? 0 : $escolhido['preco']; @endphp
-                @unless ($gratis)
+                @php
+                    $escolhido = $planos[$plano] ?? $planos[\App\Livewire\Imoplanta\Comecar::PLANO];
+                    $comCreditos = ! $gratis && $disponiveis !== null && $disponiveis >= \App\Services\Pagamentos\Creditos::IMOPLANTA;   // no price: it uses credits
+                    $total = $gratis || $comCreditos ? 0 : $escolhido['preco'];
+                @endphp
+                @if ($comCreditos)
+                    <p class="pt-3.5 border-t border-ivory/10 text-sm text-[#C9CED6]">Usa <strong class="text-ivory">{{ \App\Services\Pagamentos\Creditos::IMOPLANTA }}</strong> dos seus {{ $disponiveis }} créditos de vídeo.</p>
+                @elseif (! $gratis)
                     <fieldset class="flex flex-col gap-2 pt-3.5 border-t border-ivory/10">
                         <legend class="mb-2 text-[13px] text-[#C9CED6]">Quantos imóveis?</legend>
                         @foreach ($planos as $chave => $pl)
@@ -239,11 +245,13 @@
                             <p class="mt-1 text-xs text-[#AEB5C1]">Este imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos. Os outros {{ ($escolhido['imoveis'] - 1) * \App\Services\Pagamentos\Creditos::IMOPLANTA }} ficam na sua conta: servem para outros imóveis, vídeos Imocena e Ferramentas IA.</p>
                         @endif
                     </fieldset>
-                @endunless
+                @endif
+                @unless ($comCreditos)
                 <div class="flex items-baseline justify-between pt-3.5 border-t border-ivory/10">
                     <span class="text-[13px] text-[#C9CED6]">Total, IVA incluído</span>
                     <strong class="font-display text-[38px] font-medium">{{ $eur($total) }}</strong>
                 </div>
+                @endunless
                 <button type="button" wire:click="pagar" wire:loading.attr="disabled" wire:target="pagar" class="{{ $botao }}">
                     <span wire:loading.remove wire:target="pagar">Criar o meu imóvel →</span>
                     <span wire:loading wire:target="pagar">Um momento…</span>
