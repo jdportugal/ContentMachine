@@ -63,9 +63,12 @@ class Ferramentas
                 'exemplo' => 'Ex.: a casa mais recuada da estrada',
             ],
             'planta' => [
+                // as Imoplanta's plan video (user, 2026-11-27): the plan read into a 3D model, rendered from above in the
+                // customer's browser, made real by the AI; the clip builds it from the bare footprint, then furnishes it
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',
                 'texto' => 'Envie a planta de um piso. A casa aparece vista de cima: primeiro o chão e as paredes, depois a mobília a entrar no lugar, com som.',
-                'envio' => 'Planta do piso', 'inicio' => 'Terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10,
+                'envio' => 'Planta do piso (imagem)', 'inicio' => 'O terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10,
+                'exemplo' => 'Ex.: chão de madeira clara em toda a casa',
             ],
         ];
     }
@@ -231,6 +234,31 @@ class Ferramentas
         }
 
         return true;
+    }
+
+    /**
+     * The plan's top-view render from the customer's browser (the 3D model read from their plan, drawn from above),
+     * once: the AI frames are made from it (FerramentaFramesJob again). False when it isn't waiting for one.
+     */
+    public function receberRender(FerramentaIa $f, UploadedFile $png, mixed $salas = null): bool
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        $ok = DB::transaction(function () use ($f, $png, $salas, $disk) {
+            $atual = FerramentaIa::whereKey($f->id)->lockForUpdate()->first();
+            if ($atual->ferramenta !== 'planta' || $atual->estado !== FerramentaIa::A_ENQUADRAR || empty($atual->opcoes['casa'])
+                || (($r = $atual->opcoes['render'] ?? null) && $disk->exists($r))) {
+                return false;
+            }
+            $caminho = $png->storeAs($atual->pasta(), 'render-'.\Illuminate\Support\Str::random(8).'.png', config('contentmachine.imoplanta.disk'));
+            $atual->update(['opcoes' => [...$atual->opcoes, 'render' => $caminho, 'salas' => json_decode((string) \App\Services\Imoplanta\Imoplantas::salasTopo($salas), true) ?? []]]);
+
+            return true;
+        });
+        if ($ok) {
+            FerramentaFramesJob::dispatch($f->id, false);
+        }
+
+        return $ok;
     }
 
     /** The tool's own optional text (the cleanup: what to take out; the remodel: the style), on the draft: the AI frame is made with it. */

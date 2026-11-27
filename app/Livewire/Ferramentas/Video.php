@@ -152,6 +152,23 @@ class Video extends Component
             'tipo' => Ferramentas::lista()[$this->ferramenta],
             'disponiveis' => $user->is_admin || $user->imoplantaGratis() ? null : $user->videosIaDisponiveis(),
             'packs' => config('contentmachine.ferramentas.packs'),
+            'envios' => $this->enviosPlanta(),
         ]);
+    }
+
+    /** The plan's 3D model, read and waiting for this browser to render it from above (imoplanta.js's uploader). */
+    private function enviosPlanta(): ?array
+    {
+        $v = $this->video;
+        $disk = \Illuminate\Support\Facades\Storage::disk(config('contentmachine.imoplanta.disk'));
+        if ($v?->ferramenta !== 'planta' || $v->estado !== FerramentaIa::A_ENQUADRAR || empty($v->opcoes['casa'])
+            || (($r = $v->opcoes['render'] ?? null) && $disk->exists($r))) {
+            return null;
+        }
+
+        return ['casa' => $v->opcoes['casa'], 'csrf' => csrf_token(), 'pendentes' => [[
+            'topo' => \App\Services\Imoplanta\ImoplantaCasa::nivelPrincipal($v->opcoes['casa']), 'numero' => 1,
+            'envio' => route('ferramentas.render', $v->id),
+        ]]];
     }
 }

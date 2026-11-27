@@ -535,4 +535,42 @@ class FerramentasTest extends TestCase
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
             && $r['input']['sound'] === true && $r['input']['duration'] === '15' && str_contains($r['input']['prompt'], 'the ground is prepared'));
     }
+
+    public function test_the_plan_is_read_into_3d_rendered_in_the_browser_made_real_and_built_in_the_clip(): void
+    {
+        $this->kie();
+        $u = User::factory()->cliente()->create(['email' => 'joaodiogocferreira@gmail.com']);
+        config(['contentmachine.imoplanta.acesso' => ['joaodiogocferreira@gmail.com']]);
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_p', 'total' => 2500, 'videos_ia' => 1, 'created_at' => now(), 'updated_at' => now()]);
+        $casa = ['niveis' => [['nome' => 'R/C', 'divisoes' => [['uso' => 'sala'], ['uso' => 'quarto']]]]];
+        $this->mock(\App\Services\Imoplanta\LeitorPlantas::class)->shouldReceive('ler')->once()->andReturn($casa);
+        $f = app(Ferramentas::class)->criar($u, 'planta', $this->foto());
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+
+        // first: the plan read into the 3D model; nothing drawn yet, the page now renders it from above
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+        $f->refresh();
+        $this->assertSame([FerramentaIa::A_ENQUADRAR, $casa], [$f->estado, $f->opcoes['casa']]);
+        Http::assertNotSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask'));
+        $this->actingAs($u)->get(route('ferramentas.video', $f->id))->assertOk()->assertSee('imoplantaEnvios', false)
+            ->assertSee('/render', false);
+
+        $png = UploadedFile::fake()->image('vista-1.png', 1600, 900);
+        $this->actingAs($u)->post(route('ferramentas.render', $f->id), ['render' => $png, 'salas' => '[]'])->assertOk();
+        $this->actingAs($u)->post(route('ferramentas.render', $f->id), ['render' => $png])->assertStatus(409);   // once
+        Queue::assertPushed(FerramentaFramesJob::class, 2);
+
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+        $f->refresh();
+        $this->assertSame(FerramentaIa::A_APROVAR, $f->estado);
+        $this->assertNotSame($f->original, $f->inicio);   // the bare footprint, drawn from the render
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], 'photorealistic 3D FLOOR PLAN'));
+
+        $this->assertTrue(app(Ferramentas::class)->aprovar($f));
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'overhead shot of a 3D floor plan'));
+    }
 }

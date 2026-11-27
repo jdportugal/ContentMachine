@@ -12,6 +12,7 @@
     $campo = 'w-full min-h-[88px] px-4 py-3 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan';
 @endphp
 <div @if ($v?->aTrabalhar() || $v?->aAnalisar()) wire:poll.3s @endif class="font-sans max-w-[1100px]">
+    @if ($ferramenta === 'planta') @vite('resources/js/imoplanta.js') @endif   {{-- the plan's 3D model, rendered here --}}
     <a href="{{ route('ferramentas') }}" class="text-sm text-ink-soft hover:text-ink">← Ferramentas IA</a>
     <div class="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -159,8 +160,18 @@
     @elseif ($estado === 'a_enquadrar' || $estado === 'a_animar')
         <div class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] px-8 py-14 flex items-center justify-center gap-4 text-[#4A5263]" role="status">
             <span class="w-6 h-6 rounded-full border-[3px] border-[#E4E1DA] border-t-coral animate-spin"></span>
-            {{ $estado === 'a_enquadrar' ? ($comVideo ? 'A criar as imagens…' : 'A limpar a fotografia…').' costuma levar 1 a 2 minutos.' : 'A criar o vídeo… costuma levar 3 a 6 minutos. Pode fechar esta página e voltar mais tarde.' }}
+            @if ($ferramenta === 'planta' && $estado === 'a_enquadrar')
+                {{ $envios ? 'A desenhar a planta em 3D… mantenha esta página aberta.' : (empty($v->opcoes['casa']) ? 'A ler a planta… costuma levar 2 a 4 minutos.' : 'A criar as imagens… costuma levar 1 a 2 minutos.') }}
+            @else
+                {{ $estado === 'a_enquadrar' ? ($comVideo ? 'A criar as imagens…' : 'A limpar a fotografia…').' costuma levar 1 a 2 minutos.' : 'A criar o vídeo… costuma levar 3 a 6 minutos. Pode fechar esta página e voltar mais tarde.' }}
+            @endif
         </div>
+        @if ($envios)
+            {{-- the 3D model drawn from above in this browser and sent (Imoplanta's uploader), then the AI frames start --}}
+            <div wire:ignore wire:key="planta-render-{{ $v->id }}" x-data="imoplantaEnvios(@js($envios))">
+                <p x-show="progresso" x-text="progresso" class="mt-3 text-sm text-ink-soft" role="status"></p>
+            </div>
+        @endif
 
     @elseif ($estado === 'a_aprovar')
         <div class="mt-6 grid gap-5 md:grid-cols-2 items-start">

@@ -257,7 +257,23 @@ class Realizador
                 .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
                 .'finished place. No music, no speech.',
         ],
+        // The animated plan: the frames are built (Realizador::planta), the clip is Imoplanta's plan video, 10 s with sound
+        'planta' => [
+            'analise' => 'You check an image before it is turned into an AI "animated floor plan": the AI reads the plan into a 3D '
+                .'model of the home, shows it from directly above, and the video builds it (floors, walls, then the furniture). '
+                .'A GOOD start: a clear 2D floor plan of ONE storey of a home (an architect\'s plan or an estate agent\'s plan), '
+                .'walls, doors and windows readable, ideally with the room names or dimensions, straight and sharp. '
+                .'PROBLEMS to look for: a photo of a house or a room instead of a plan; a 3D render; several storeys on one '
+                .'sheet (say only one will be used); a plan so small, blurry or skewed that the walls cannot be read; a '
+                .'site plan or elevation without the rooms. Text, logos and watermarks are NOT a problem.',
+            'video' => Fotografo::PROMPT_CONSTRUCAO,
+            'som' => Fotografo::SOM_CONSTRUCAO,
+        ],
     ];
+
+    /** The finishes for the plan when the customer has none (Imoplanta's finishes board isn't asked here). */
+    public const ACABAMENTOS_PLANTA = 'light oak wooden floors in the living room, hallways and bedrooms, large light-grey '
+        .'porcelain tiles in the kitchen and bathrooms, white walls, white doors, light neutral furniture.';
 
     /**
      * A building from the ground (ruína, terreno), in the order a real site goes (user, 2026-11-27: "we should always
@@ -308,6 +324,9 @@ class Realizador
         if ($f->ferramenta === 'lateral' && $pedido === null) {   // the side move's end frame is built, not drawn
             return $this->lateral($f);
         }
+        if ($f->ferramenta === 'planta' && $pedido === null) {    // the plan: from the browser's render of its 3D model
+            return $this->planta($f);
+        }
         $original = $disk->get($f->original);
         $tem = fn (?string $c) => $c && $c !== $f->original && $disk->exists($c);
         $outro = $qual === 'inicio' ? 'fim' : 'inicio';
@@ -330,6 +349,48 @@ class Realizador
         [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
 
         return $this->imagem($prompt, $refs, Fotografo::proporcao($original), $w, $h, $f->pasta().'/'.$qual.'-'.Str::random(8).'.png');
+    }
+
+    /**
+     * The plan's first step (FerramentaFramesJob, before any frame): the plan read into a 3D model, once, as Imoplanta
+     * does (Claude); the customer's page then renders it from above and sends it (Ferramentas::receberRender). True
+     * when that render is here and the frames can be made.
+     */
+    public function prepararPlanta(FerramentaIa $f): bool
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        if (($r = $f->opcoes['render'] ?? null) && $disk->exists($r)) {
+            return true;
+        }
+        if (empty($f->opcoes['casa'])) {
+            $casa = app(\App\Services\Imoplanta\LeitorPlantas::class)->ler([$disk->path($f->original)],
+                'The attached image is the floor plan of ONE storey of a home: read that storey only (if the sheet shows several, '
+                .'the main one), as one level.');
+            $f->update(['opcoes' => [...($f->opcoes ?? []), 'casa' => $casa]]);
+        }
+
+        return false;
+    }
+
+    /**
+     * The plan's frames: the end is the browser's top render made real (Imoplanta's 3D floor plan prompt, the rooms
+     * and what they hold from the render), the start is the bare footprint drawn from that render. Sets `inicio`.
+     */
+    private function planta(FerramentaIa $f): string
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        $render = $disk->get($f->opcoes['render']);
+        $casa = $f->opcoes['casa'];
+        $nivel = \App\Services\Imoplanta\ImoplantaCasa::nivelPrincipal($casa);
+        $inicio = $f->pasta().'/inicio-'.Str::random(8).'.png';
+        $disk->put($inicio, Fotografo::lote($render, $render));
+        $f->update(['inicio' => $inicio]);
+        $prompt = app(Fotografo::class)->promptPlanta('isolada', self::ACABAMENTOS_PLANTA, false,
+            $casa['niveis'][$nivel]['divisoes'] ?? [], $f->opcoes['salas'] ?? []);
+        [$w, $h] = getimagesizefromstring($render) ?: [1600, 900];
+
+        return $this->imagem($prompt, [$this->kie->upload($render, 'render.png')], Fotografo::proporcao($render), $w, $h,
+            $f->pasta().'/fim-'.Str::random(8).'.png');
     }
 
     /** One Nano Banana Pro image (the fallback model if it keeps failing), cut to $w×$h, stored at $destino. */

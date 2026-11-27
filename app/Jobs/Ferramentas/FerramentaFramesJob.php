@@ -23,7 +23,7 @@ class FerramentaFramesJob implements ShouldQueue
 
     public int $tries = 1;
 
-    public int $timeout = 900;
+    public int $timeout = 1500;   // the plan is first read into a 3D model (Claude, minutes)
 
     public function __construct(public int $video, public bool $alteracao)
     {
@@ -35,6 +35,9 @@ class FerramentaFramesJob implements ShouldQueue
         $f = FerramentaIa::findOrFail($this->video);
         $custos->contexto('ferramenta', (string) $f->id, ['passo' => $this->alteracao ? 'frames_edit' : 'frames']);
         try {
+            if ($f->ferramenta === 'planta' && ! $this->alteracao && ! $realizador->prepararPlanta($f)) {
+                return;   // the 3D model is read: the customer's page renders it from above and sends it, which runs this again
+            }
             $versoes = $f->versoes ?? [];
             $novos = [];
             // a change redoes its one frame; the first time, every AI frame in order (the end can build on the start)

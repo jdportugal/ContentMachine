@@ -439,6 +439,13 @@ Route::middleware('auth')->group(function () {
 
             return response()->file($disk->path($path), ['Cache-Control' => 'private, max-age=604800']);
         })->whereNumber('video')->whereIn('qual', ['original', 'inicio', 'fim', 'video'])->name('ferramentas.ficheiro');
+        // The animated plan's top-view render, from the customer's browser (its 3D model drawn from above): the frames start.
+        Route::post('/ferramentas/{video}/render', function (\App\Models\FerramentaIa $video, \Illuminate\Http\Request $request, \App\Services\Ferramentas\Ferramentas $ferramentas) {
+            abort_unless($video->user_id === Auth::id() || Auth::user()->is_admin, 404);
+            $request->validate(['render' => 'required|file|mimes:png|max:20480']);
+
+            return response()->json(null, $ferramentas->receberRender($video, $request->file('render'), $request->input('salas')) ? 200 : 409);
+        })->whereNumber('video')->name('ferramentas.render');
     });
 });
 
