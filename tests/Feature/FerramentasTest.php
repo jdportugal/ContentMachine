@@ -510,7 +510,7 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->aprovar($f->refresh()));
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && str_contains($r['input']['prompt'], 'repair the old stone walls'));
+            && str_contains($r['input']['prompt'], 'the bare structure, in full view'));
         $this->assertEqualsWithDelta(15 * 0.151, $this->custos($f)[1][1], 0.001);   // a build from the ground: 15 s
     }
 }

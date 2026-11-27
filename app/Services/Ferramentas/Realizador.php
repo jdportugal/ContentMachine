@@ -221,17 +221,8 @@ class Realizador
                         .'foreground line up exactly. A photoreal real-estate photograph, with the picture free of people, text, '
                         .'logos and watermarks.',
                     'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
-                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod: the camera stays perfectly still '
-                        .'for the whole shot. A crew of workers and a small excavator are on the plot from the first second to the '
-                        .'last, sped up, and they build everything with their hands and machines, step by step: they clear the '
-                        .'rubble and the weeds, repair the old stone walls stone by stone, dig and pour the foundations, raise the '
-                        .'new walls block by block with scaffolding around them, set the roof beams and lay the roof, fit the '
-                        .'windows and doors, render and paint, take the scaffolding down and pave the yard. The building grows from '
-                        .'the ground up; nothing changes by itself: no wall, roof, window or finish fades, morphs or appears '
-                        .'without workers building it. Only in the last second do the workers and the machine leave the frame, '
-                        .'leaving the place exactly as in the last frame. The street, the neighbouring houses and everything '
-                        .'outside the plot stay exactly in place the whole time; the daylight and shadows flicker as the days '
-                        .'pass. One continuous shot, no cuts.',
+                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. The sound old stone walls '
+                        .'stay standing the whole time and the new building rises inside and on them. '.self::OBRA_DE_RAIZ,
                     'som' => ' Sound, sped up with the picture: an excavator engine, stones and rubble tipped, a cement mixer, '
                         .'hammering, drills, a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end '
                         .'to a quiet street. No music, no speech.',
@@ -257,16 +248,7 @@ class Realizador
                         .'up exactly. A photoreal real-estate photograph, with the picture free of people, text, logos and '
                         .'watermarks.',
                     'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
-                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod: the camera stays perfectly still '
-                        .'for the whole shot. A crew of workers and a small excavator are on the plot from the first second to the '
-                        .'last, sped up, and they build everything with their hands and machines, step by step: they mark out and '
-                        .'dig the foundations, pour the concrete, raise the columns and walls block by block with scaffolding around '
-                        .'them, pour the slabs, lay the roof, fit the windows and doors, render and paint, take the scaffolding '
-                        .'down, then lay the drive and plant the garden. The building grows from the ground up; nothing changes by '
-                        .'itself: no wall, roof, window or finish fades, morphs or appears without workers building it. Only in the '
-                        .'last second do the workers and the machine leave the frame, leaving the place exactly as in the last '
-                        .'frame. The road, the neighbouring houses and everything outside the plot stay exactly in place the whole '
-                        .'time; the daylight and shadows flicker as the days pass. One continuous shot, no cuts.',
+                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. '.self::OBRA_DE_RAIZ,
                     'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, '
                         .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
                         .'finished place. No music, no speech.',
@@ -274,6 +256,29 @@ class Realizador
             ],
         ],
     ];
+
+    /**
+     * A building from the ground (ruína, terreno), in the order a real site goes (user, 2026-11-27: "we should always
+     * see preparing the ground and building the structure"). Timed beats for 15 s: untimed, Kling skipped the
+     * structure, hid it behind scaffolding and showed the finished house all at once.
+     */
+    public const OBRA_DE_RAIZ = 'The camera stays perfectly still for the whole shot; everything is sped up like a real building '
+        .'site filmed over months. A crew of workers in work clothes and hard hats and a small excavator are on the plot from '
+        .'the first second to the last, and the building goes up in this order, like a real construction: '
+        .'from 0 to 3 seconds, the ground is prepared: the rubble, stones and weeds are cleared, the excavator levels the '
+        .'ground and digs the foundation trenches; '
+        .'from 3 to 6 seconds, the foundations: steel rebar is laid in the trenches, concrete is poured from a mixer, the '
+        .'ground-floor slab is poured and smoothed; '
+        .'from 6 to 10 seconds, the bare structure, in full view with no scaffolding in front of it: grey reinforced-concrete '
+        .'columns rise in wooden formwork, the beams and the upper slab or roof beams are set on them, then the walls are '
+        .'built block by block between the columns, row by row, with the openings for the windows and doors left empty; '
+        .'from 10 to 13 seconds, the roof is covered, the windows and doors are fitted, and the walls are rendered and '
+        .'painted from scaffolding; '
+        .'from 13 to 15 seconds, the scaffolding comes down, the yard is paved, and only in the last second do the workers '
+        .'and the machine leave the frame, the place exactly as in the last frame. '
+        .'Every step is done by the workers: no wall, slab, roof, window or finish fades, morphs or appears by itself. The '
+        .'street, the neighbouring houses and everything outside the plot stay exactly in place the whole time; the daylight '
+        .'and shadows flicker as the days pass. One continuous shot, no cuts.';
 
     public const PROMPT_ALTERAR = 'Change this image as asked, and nothing else: «%s». Keep everything else exactly as it is: '
         .'the framing, the house, its surroundings, the light and the colours. The other images are the other frame of the video and '
