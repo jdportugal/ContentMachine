@@ -134,6 +134,8 @@
                 <p class="rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">Boa fotografia para {{ mb_strtolower($tipo['nome']) }}.</p>
             @endif
             @if (! $semVideos && $v)
+                {{-- AI results vary (user, 2026-11-27): said before any credit is spent, and in the terms (ponto 5) --}}
+                <p role="note" class="rounded-xl bg-[#FBEBD9] text-[#6B3A0E] px-5 py-3 text-sm"><strong>Resultado feito por IA.</strong> Os resultados da inteligência artificial variam de imagem para imagem e nem sempre ficam como espera: não garantimos um resultado específico. Os créditos usados não são devolvidos por o resultado não ser o que queria; só voltam à sua conta se não conseguirmos fazer o pedido. <a href="{{ route('termos') }}#creditos" class="underline">Termos</a></p>
                 <div class="flex flex-wrap items-center gap-4">
                     <button type="submit" wire:loading.attr="disabled" wire:target="criar, foto" @disabled($v->aAnalisar()) class="{{ $botao }}">
                         <span wire:loading.remove wire:target="criar">{{ $v->fotoNaoIdeal() ? 'Continuar com esta fotografia →' : ($comVideo ? 'Criar imagens →' : 'Limpar fotografia →') }}</span>
@@ -217,7 +219,7 @@
         <div class="mt-6 flex flex-wrap items-center gap-4">
             @if ($comVideo)
                 <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar e criar vídeo →</button>
-                <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra.</span>
+                <span class="text-xs text-[#6B7385]">Depois de aprovar, as imagens ficam fixas. O vídeo anima de uma para a outra; como é feito por IA, o movimento pode variar (tem {{ config('contentmachine.ferramentas.refazer_video') }} novas versões).</span>
             @else
                 <button type="button" wire:click="aprovar" wire:loading.attr="disabled" class="{{ $botao }}">Aprovar fotografia →</button>
                 <span class="text-xs text-[#6B7385]">Depois de aprovar, a fotografia fica pronta a descarregar.</span>

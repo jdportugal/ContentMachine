@@ -79,6 +79,7 @@
         <div class="flex items-center gap-3"><span class="w-8 h-0.5 bg-coral"></span><span class="{{ $sobre }}">PREÇOS</span></div>
         <h2 class="mt-3 font-display text-[34px] lg:text-[46px] font-medium leading-tight text-navy">Paga em créditos de vídeo</h2>
         <p class="mt-2 text-[15px] text-[#4A5263]">IVA incluído. Os mesmos créditos dos vídeos Imocena e do Imoplanta. Cada ferramenta usa os seus créditos, com as alterações às imagens e as novas versões do vídeo incluídas. Os créditos ficam na sua conta até os usar.</p>
+        <p class="mt-2 text-[13px] text-[#6B7385]">Os resultados são feitos por inteligência artificial e variam: não garantimos um resultado específico, e os créditos usados não são devolvidos por o resultado não ser o esperado (só se não conseguirmos fazer o pedido). <a href="{{ route('termos') }}#creditos" class="underline">Termos e condições</a>.</p>
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
             @foreach ($packs as $pack)
                 <div class="rounded-[20px] border {{ $loop->last ? 'border-coral bg-white' : 'border-[#E4E1DA] bg-white/60' }} p-6 flex flex-col gap-1">

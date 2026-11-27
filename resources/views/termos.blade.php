@@ -54,13 +54,14 @@
         </ul>
         <p class="{{ $p }}">Alguns extras do Imoplanta (o vídeo da planta 3D) são vendidos à parte, pelo preço indicado na página. Os preços incluem IVA à taxa legal. O pagamento é feito no Stripe, que trata os dados do cartão; não os recebemos. A fatura é enviada para o seu email com o NIF que indicar no pagamento. Não há mensalidades nem renovações automáticas.</p>
 
-        <h2 class="{{ $h2 }}">5. Usar os créditos</h2>
+        <h2 id="creditos" class="{{ $h2 }}">5. Usar os créditos</h2>
         <ul class="mt-4 list-disc pl-5">
             <li class="{{ $li }}">Os créditos ficam na sua conta e podem ser usados durante 12 meses a contar da compra. Usamos primeiro os créditos mais antigos.</li>
             <li class="{{ $li }}">Os créditos são gastos quando começamos a fazer o que pediu: o vídeo Imocena, o imóvel Imoplanta (antes de lermos as plantas) ou, nas Ferramentas IA, as imagens para aprovar.</li>
             <li class="{{ $li }}">Cada vídeo Imocena inclui 2 edições grátis (narração, fotos e efeitos, contacto, logótipo e música). Depois disso, refazer o vídeo gasta um crédito.</li>
             <li class="{{ $li }}">Cada imóvel Imoplanta inclui {{ config('contentmachine.imoplanta.refazer_3d') }} correções do modelo 3D e {{ config('contentmachine.imoplanta.refazer_imagem') }} alterações por fotografia. Cada uso das Ferramentas IA inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.</li>
-            <li class="{{ $li }}">Se não conseguirmos fazer o que pediu, os créditos usados voltam à sua conta.</li>
+            <li class="{{ $li }}">Se não conseguirmos fazer o que pediu (por exemplo, uma falha nossa ou do serviço de inteligência artificial), os créditos usados voltam à sua conta.</li>
+            <li class="{{ $li }}"><strong class="text-ivory">Resultados feitos por inteligência artificial.</strong> As imagens e os vídeos do Imoplanta e das Ferramentas IA são gerados por IA: o resultado varia de pedido para pedido, pode não corresponder ao que espera e pode ter erros ou diferenças em relação à fotografia, à planta ou ao pedido. Não garantimos um resultado específico. Por isso inclui alterações e novas versões, e nas Ferramentas IA aprova as imagens antes do vídeo. Os créditos usados não são devolvidos por o resultado não ser o que queria; só voltam se não conseguirmos fazer o pedido. Isto não afasta os direitos que a lei lhe dá como consumidor.</li>
             <li class="{{ $li }}">Os créditos não são convertidos em dinheiro nem transferidos para outra conta, exceto no caso do ponto 7.</li>
         </ul>
 

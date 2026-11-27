@@ -90,7 +90,7 @@
                 <span wire:loading.remove wire:target="criar">Criar modelo 3D →</span>
                 <span wire:loading wire:target="criar">A enviar…</span>
             </button>
-            <p class="text-xs text-[#AEB5C1]">{{ $gratis || $disponiveis === null ? 'Ao criar: 0 €.' : 'Ao criar, usa '.\App\Services\Pagamentos\Creditos::IMOPLANTA.' dos seus '.\App\Services\Pagamentos\Creditos::txt($disponiveis).' créditos de vídeo.' }}</p>
+            <p class="text-xs text-[#AEB5C1]">{{ $gratis || $disponiveis === null ? 'Ao criar: 0 €.' : 'Ao criar, usa '.\App\Services\Pagamentos\Creditos::IMOPLANTA.' dos seus '.\App\Services\Pagamentos\Creditos::txt($disponiveis).' créditos de vídeo.' }} As imagens são feitas por IA e podem variar: <a href="{{ route('termos') }}#creditos" class="underline">ver os termos</a>.</p>
         </div>
     </form>
     @endif
