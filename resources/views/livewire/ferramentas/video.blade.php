@@ -39,6 +39,19 @@
 
     @if ($estado === 'rascunho')
         <form wire:submit="criar" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-7 md:p-8 flex flex-col gap-5">
+            @if ($tipo['obras'] ?? false)
+                {{-- the type of works first: it says what the photo should show and what gets built --}}
+                <fieldset class="flex flex-col gap-3 text-sm text-[#4A5263]">
+                    <legend class="font-semibold text-ivory mb-3">Que obra quer mostrar?</legend>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($tipo['obras'] as $valor => $o)
+                            <label class="inline-flex items-center gap-2 px-4 min-h-11 rounded-full border cursor-pointer {{ $obra === $valor ? 'border-coral text-navy font-semibold bg-[#FDEDEB]' : 'border-[#D9D5CC]' }}">
+                                <input type="radio" wire:model.live="obra" value="{{ $valor }}" class="sr-only"> {{ $o['nome'] }}
+                            </label>
+                        @endforeach
+                    </div>
+                </fieldset>
+            @endif
             {{-- drop a photo anywhere on the card (or click the preview); the counter stops the highlight flickering over children --}}
             {{-- `carregar` covers the whole wait: the upload (with its %), then the server preparing it and the next page --}}
             <div x-data="{ sobre: 0, carregar: false, progresso: 0 }"
@@ -94,7 +107,7 @@
             @if ($tipo['campo'] ?? false)
                 <label class="flex flex-col gap-1.5 text-sm text-[#4A5263]">
                     <span><span class="font-semibold text-ivory">{{ $tipo['campo']['titulo'] }}</span> {{ $tipo['campo']['ajuda'] }}</span>
-                    <input type="text" wire:model="texto" maxlength="300" placeholder="{{ $tipo['campo']['exemplo'] }}"
+                    <input type="text" wire:model="texto" maxlength="300" placeholder="{{ $tipo['obras'][$obra]['exemplo'] ?? $tipo['campo']['exemplo'] }}"
                            class="min-h-[52px] px-4 rounded-[10px] bg-white text-navy text-[15px] border border-[#D9D5CC] focus:outline-none focus:ring-2 focus:ring-cyan">
                 </label>
             @endif

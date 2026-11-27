@@ -489,4 +489,28 @@ class FerramentasTest extends TestCase
             && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'timelapse'));
         $this->assertSame([['frames', 0.09], ['video', 1.51]], $this->custos($f));
     }
+
+    public function test_a_ruin_is_rebuilt_on_its_footprint_from_the_customers_description_in_a_longer_clip(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'remodelacao', $this->foto());
+        $this->assertSame('interior', $f->obra());                                  // interior unless chosen
+        $this->assertFalse(app(Ferramentas::class)->obra($f, 'castelo'));
+        $this->assertTrue(app(Ferramentas::class)->obra($f, 'ruina'));
+        $this->assertTrue(app(Ferramentas::class)->texto($f, 'um armazém moderno de 60 m2'));
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        $this->assertFalse(app(Ferramentas::class)->obra($f->refresh(), 'terreno'));  // fixed once the frames start
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], "on the ruin's footprint")
+            && str_contains($r['input']['prompt'], 'The client describes what is built: um armazém moderno de 60 m2.'));
+        $this->assertTrue(app(Ferramentas::class)->aprovar($f->refresh()));
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && str_contains($r['input']['prompt'], 'repair the old stone walls'));
+        $this->assertEqualsWithDelta(15 * 0.151, $this->custos($f)[1][1], 0.001);   // a build from the ground: 15 s
+    }
 }

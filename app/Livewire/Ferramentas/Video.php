@@ -30,6 +30,9 @@ class Video extends Component
     /** The side move's direction: esquerda | direita. */
     public string $direcao = 'direita';
 
+    /** The remodel's type of works (interior | exterior | ruina | terreno), asked before the photo. */
+    public string $obra = 'interior';
+
     /** The tool's optional text (its `campo`: what to take out, the style). */
     public string $texto = '';
 
@@ -45,6 +48,7 @@ class Video extends Component
             $this->video = $video;
             $this->ferramenta = $video->ferramenta;
             $this->direcao = $video->direcao();
+            $this->obra = $video->obra() ?? 'interior';
             $this->texto = (string) ($video->opcoes['texto'] ?? '');
         } else {
             abort_unless(isset(Ferramentas::disponiveis()[$ferramenta]), 404);
@@ -69,6 +73,7 @@ class Video extends Component
         }
         $this->video = $ferramentas->criar(auth()->user(), $this->ferramenta, $this->foto);
         $ferramentas->direcao($this->video, $this->direcao);
+        $ferramentas->obra($this->video, $this->obra);
         $ferramentas->texto($this->video, $this->texto);
         $this->foto = null;
 
@@ -79,6 +84,14 @@ class Video extends Component
     {
         if ($this->video) {
             $ferramentas->direcao($this->video, $this->direcao);
+            $this->video->refresh();
+        }
+    }
+
+    public function updatedObra(Ferramentas $ferramentas): void
+    {
+        if ($this->video) {
+            $ferramentas->obra($this->video, $this->obra);
             $this->video->refresh();
         }
     }

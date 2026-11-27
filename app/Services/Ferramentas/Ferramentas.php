@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -43,10 +43,17 @@ class Ferramentas
                 'exemplo' => 'Ex.: retirar também o caixote do lixo à esquerda',
             ],
             'remodelacao' => [
-                'nome' => 'Remodelação IA', 'linha' => 'Timelapse da remodelação, do estado atual ao renovado.',
-                'texto' => 'Mostre o potencial de um imóvel para recuperar: a divisão transforma-se, em timelapse, numa versão remodelada. Pode dizer-nos o estilo que quer.',
-                'envio' => 'Fotografia da divisão a remodelar', 'inicio' => 'Estado atual', 'fim' => 'Remodelado', 'ai' => ['fim'], 'segundos' => 10,
-                'campo' => ['titulo' => 'Que estilo quer?', 'ajuda' => 'Opcional: sem indicação, fazemos uma remodelação moderna, clara e de gama alta.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
+                'nome' => 'Remodelação IA', 'linha' => 'Timelapse da obra, do estado atual ao acabado: uma divisão, uma casa, uma ruína ou um terreno.',
+                'texto' => 'Mostre o potencial de um imóvel: em timelapse, os operários renovam uma divisão ou uma fachada, recuperam uma ruína ou constroem de raiz num terreno. Diga-nos o que quer ver construído.',
+                'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10,
+                // the type of works (opcoes.obra), asked first (user, 2026-11-27); a build from the ground takes 15 s
+                'obras' => [
+                    'interior' => ['nome' => 'Renovação interior', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
+                    'exterior' => ['nome' => 'Fachada / casa completa', 'exemplo' => 'Ex.: reboco branco, caixilharia preta, telhado novo'],
+                    'ruina' => ['nome' => 'Recuperar ruína', 'exemplo' => 'Ex.: moradia T2 de um piso, pedra à vista, telhado de telha', 'segundos' => 15],
+                    'terreno' => ['nome' => 'Construir no terreno', 'exemplo' => 'Ex.: moradia T3 de dois pisos, moderna, com piscina', 'segundos' => 15],
+                ],
+                'campo' => ['titulo' => 'Descreva a obra', 'ajuda' => 'Opcional: o que quer construído, o tamanho, o estilo. Sem indicação, fazemos uma obra moderna e de gama alta, à medida do espaço.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
                 'exemplo' => 'Ex.: o chão em madeira mais escura',
             ],
             'construcao' => [
@@ -205,6 +212,22 @@ class Ferramentas
             return false;
         }
         $f->update(['opcoes' => [...($f->opcoes ?? []), 'direcao' => $direcao]]);
+
+        return true;
+    }
+
+    /** The remodel's type of works, chosen on the draft: the photo is checked again for it (a ruin is no bad room). */
+    public function obra(FerramentaIa $f, string $obra): bool
+    {
+        if (! isset($f->tipo()['obras'][$obra]) || $f->estado !== FerramentaIa::RASCUNHO) {
+            return false;
+        }
+        $mudou = $f->obra() !== $obra;
+        $f->update(['opcoes' => [...($f->opcoes ?? []), 'obra' => $obra]]);
+        if ($mudou && $f->original) {
+            $f->update(['analise' => ['estado' => 'a_analisar']]);
+            \App\Jobs\Ferramentas\AnalisarFotoJob::dispatch($f->id, $f->original);
+        }
 
         return true;
     }

@@ -63,6 +63,20 @@ class FerramentaIa extends Model
         return ($this->opcoes['direcao'] ?? null) === 'esquerda' ? 'esquerda' : 'direita';
     }
 
+    /** The remodel's type of works (Ferramentas::lista()['remodelacao']['obras']): interior unless chosen. Null for other tools. */
+    public function obra(): ?string
+    {
+        $obras = $this->tipo()['obras'] ?? null;
+
+        return $obras ? (isset($obras[$this->opcoes['obra'] ?? '']) ? $this->opcoes['obra'] : array_key_first($obras)) : null;
+    }
+
+    /** The clip length: the tool's, or its type of works' (a build from the ground is longer). */
+    public function segundos(): int
+    {
+        return $this->tipo()['obras'][$this->obra()]['segundos'] ?? $this->tipo()['segundos'];
+    }
+
     public function aTrabalhar(): bool
     {
         return in_array($this->estado, [self::A_ENQUADRAR, self::A_ANIMAR], true);

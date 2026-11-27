@@ -163,12 +163,129 @@ class Realizador
                 .'pass. One continuous shot, no cuts.',
             'som' => ' Sound, sped up with the picture: scraping, hammering, drills, a saw, tiles and planks set down, '
                 .'brushes and rollers, footsteps; it calms down at the end to a quiet, finished room. No music, no speech.',
+            // the type of works (opcoes.obra, user 2026-11-27): each laid over the interior prompts above. Outside there
+            // is rarely a picture of the result, so the photo itself says where the building goes (the ruin's footprint,
+            // a cleared or levelled patch) and the camera, the street and the neighbours are pinned as they are; the
+            // 2026-11-26 ruin run drifted the camera and the building faded in, hence the build named step by step
+            'obras' => [
+                'exterior' => [
+                    'analise' => 'You check a real-estate photo before it is turned into an AI "renovation timelapse": from this '
+                        .'photo the AI draws the same building with its exterior renovated, then a fixed-camera timelapse shows '
+                        .'workers doing it. A GOOD start: an outdoor photo taken from the ground of a house or building that is '
+                        .'dated or worn (old render, stains, old windows, a tired roof), the facade whole or nearly whole in the '
+                        .'frame, daylight, sharp. PROBLEMS to look for: an interior; a floor plan, drawing or screenshot; a building '
+                        .'that is already new; the facade mostly hidden by trees, cars or scaffolding, or cut off; people in the '
+                        .'picture; night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture '
+                        .'are NOT a problem.',
+                    'fim' => 'Edit this photo: the same building with its exterior renovated. The camera does not move: exactly '
+                        .'the same viewpoint, lens, framing and crop. The building keeps exactly its volume, outline, number of '
+                        .'floors and roof shape, and every window and door stays exactly where it is, at the same size; the street, '
+                        .'the neighbouring buildings, the sky and everything around stay exactly as they are. Only the finishes '
+                        .'are new: smooth fresh render and paint, new window frames and doors, the roof repaired with new tiles, '
+                        .'clean gutters, a tidy front. Unless the client says otherwise: modern and high-end, light render, slim '
+                        .'dark window frames, a few plants.%s The same daylight and shadows. Laid over the original photo, the '
+                        .'building\'s outline, every window and door and the neighbours line up exactly. A photoreal real-estate '
+                        .'photograph, with the picture free of people, text, logos and watermarks.',
+                    'campo' => ' The client describes the works: %s.',
+                    'video' => 'Fast-motion renovation timelapse from a fixed camera on a tripod: the camera stays perfectly still '
+                        .'for the whole shot. Workers in work clothes are at the building from the first second to the last, sped '
+                        .'up, and they do every change with their hands: they put up scaffolding, chip off the old render, render '
+                        .'and paint the walls section by section, take out the old windows and fit the new ones, lay the new roof '
+                        .'tiles row by row, then take the scaffolding down. Nothing changes by itself: no wall, window, door or '
+                        .'roof fades, morphs or appears without a worker putting it there. Only in the last second do the workers '
+                        .'step out of the frame, leaving the building exactly as in the last frame. The street and the neighbouring '
+                        .'buildings stay exactly in place the whole time; the daylight and shadows flicker as the days pass. One '
+                        .'continuous shot, no cuts.',
+                    'som' => ' Sound, sped up with the picture: scaffolding clanking, chisels and hammers, drills, trowels, a cement '
+                        .'mixer, footsteps, street sounds; it calms down at the end to a quiet street. No music, no speech.',
+                ],
+                'ruina' => [
+                    'analise' => 'You check a photo before it is turned into an AI "ruin rebuild timelapse": from this photo the AI '
+                        .'draws a finished building where the ruin stands, then a fixed-camera timelapse shows workers building it. '
+                        .'A GOOD start: an outdoor photo taken from the ground of a ruin or the remains of a building (old stone '
+                        .'walls, a roofless shell, rubble) with its plot visible, daylight, sharp. A ruin, rubble, weeds and an '
+                        .'empty plot are what is expected: they are NOT problems. PROBLEMS to look for: an interior of a finished '
+                        .'house; a floor plan, drawing or screenshot; a photo from the air; the ruin mostly hidden or cut off so '
+                        .'its footprint cannot be read; people close to the camera; night, very dark or blurry; a very wide '
+                        .'panorama. Text, logos and watermarks over the picture are NOT a problem.',
+                    'fim' => 'Edit this photo: the same place after the works, with a finished building where the ruin stands. The '
+                        .'camera does not move: exactly the same viewpoint, lens, framing and crop. Everything outside the ruin\'s '
+                        .'plot stays exactly as it is: the street and its paving, the neighbouring houses, the towers and roofs '
+                        .'behind, the sky, the parked cars, the poles and wires, and whatever stands in the foreground. The ruin '
+                        .'shows where the building goes: the new building stands on the ruin\'s footprint, its walls rising where '
+                        .'the old walls stand (the sound old stone walls kept and repaired as part of it), and it stays inside the '
+                        .'plot, never past the line of the street. The open ground of the plot in front of it becomes a tidy yard '
+                        .'or entrance. Unless the client says otherwise: a modern renovation that respects the place, about the '
+                        .'height of its neighbours, the old stone repaired, clean light render, large dark-framed windows, a new '
+                        .'roof.%s The same daylight and shadows. Laid over the original photo, the street, the neighbours and the '
+                        .'foreground line up exactly. A photoreal real-estate photograph, with the picture free of people, text, '
+                        .'logos and watermarks.',
+                    'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
+                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod: the camera stays perfectly still '
+                        .'for the whole shot. A crew of workers and a small excavator are on the plot from the first second to the '
+                        .'last, sped up, and they build everything with their hands and machines, step by step: they clear the '
+                        .'rubble and the weeds, repair the old stone walls stone by stone, dig and pour the foundations, raise the '
+                        .'new walls block by block with scaffolding around them, set the roof beams and lay the roof, fit the '
+                        .'windows and doors, render and paint, take the scaffolding down and pave the yard. The building grows from '
+                        .'the ground up; nothing changes by itself: no wall, roof, window or finish fades, morphs or appears '
+                        .'without workers building it. Only in the last second do the workers and the machine leave the frame, '
+                        .'leaving the place exactly as in the last frame. The street, the neighbouring houses and everything '
+                        .'outside the plot stay exactly in place the whole time; the daylight and shadows flicker as the days '
+                        .'pass. One continuous shot, no cuts.',
+                    'som' => ' Sound, sped up with the picture: an excavator engine, stones and rubble tipped, a cement mixer, '
+                        .'hammering, drills, a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end '
+                        .'to a quiet street. No music, no speech.',
+                ],
+                'terreno' => [
+                    'analise' => 'You check a photo before it is turned into an AI "construction timelapse": from this photo of a plot '
+                        .'the AI draws a new building on it, then a fixed-camera timelapse shows workers building it. A GOOD start: '
+                        .'an outdoor photo taken from the ground of an empty or cleared plot, its ground and edges visible (a road, '
+                        .'walls, fences, neighbours), daylight, sharp. Bare earth, weeds, foundations or marking stakes are what is '
+                        .'expected: they are NOT problems. PROBLEMS to look for: an interior; a floor plan, drawing or screenshot; '
+                        .'a photo from the air; ground so close up or overgrown that the plot cannot be read; people close to the '
+                        .'camera; night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture are '
+                        .'NOT a problem.',
+                    'fim' => 'Edit this photo: the same place after the works, with a finished new building on the plot. The camera '
+                        .'does not move: exactly the same viewpoint, lens, framing and crop. Everything outside the plot stays '
+                        .'exactly as it is: the road, the neighbouring houses, the trees beyond, the sky and the hills. The ground '
+                        .'shows where the building goes: on the cleared or levelled patch, on the foundations, slab or marked-out '
+                        .'stakes if there are any; otherwise in the middle of the plot, set back from the road like its neighbours, '
+                        .'sized to fit with space around it. It stays inside the plot, never past the road or the boundary walls. '
+                        .'The rest of the plot becomes a tidy garden, a drive and a path. Unless the client says otherwise: a modern '
+                        .'Portuguese house of one or two floors, white render, large dark-framed windows, a flat or low roof.%s The '
+                        .'same daylight and shadows. Laid over the original photo, the road, the neighbours and the horizon line '
+                        .'up exactly. A photoreal real-estate photograph, with the picture free of people, text, logos and '
+                        .'watermarks.',
+                    'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
+                    'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod: the camera stays perfectly still '
+                        .'for the whole shot. A crew of workers and a small excavator are on the plot from the first second to the '
+                        .'last, sped up, and they build everything with their hands and machines, step by step: they mark out and '
+                        .'dig the foundations, pour the concrete, raise the columns and walls block by block with scaffolding around '
+                        .'them, pour the slabs, lay the roof, fit the windows and doors, render and paint, take the scaffolding '
+                        .'down, then lay the drive and plant the garden. The building grows from the ground up; nothing changes by '
+                        .'itself: no wall, roof, window or finish fades, morphs or appears without workers building it. Only in the '
+                        .'last second do the workers and the machine leave the frame, leaving the place exactly as in the last '
+                        .'frame. The road, the neighbouring houses and everything outside the plot stay exactly in place the whole '
+                        .'time; the daylight and shadows flicker as the days pass. One continuous shot, no cuts.',
+                    'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, '
+                        .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
+                        .'finished place. No music, no speech.',
+                ],
+            ],
         ],
     ];
 
     public const PROMPT_ALTERAR = 'Change this image as asked, and nothing else: «%s». Keep everything else exactly as it is: '
         .'the framing, the house, its surroundings, the light and the colours. The other images are the other frame of the video and '
         .'its original photograph, for reference: the house must stay true to them. Photoreal, no text, no watermark.';
+
+    /** A tool's prompts, with its type of works' own (the remodel's `obras`: a ruin is not a room) laid over them. */
+    public static function prompts(FerramentaIa $f): array
+    {
+        $p = self::PROMPTS[$f->ferramenta];
+
+        return [...$p, ...($p['obras'][$f->obra()] ?? [])];
+    }
 
     public function __construct(private KieClient $kie) {}
 
@@ -192,10 +309,11 @@ class Realizador
             $prompt = sprintf(self::PROMPT_ALTERAR, $pedido);
             $refs[] = $this->kie->upload($disk->get($f->{$qual}), 'atual.png');
         } else {
-            $prompt = self::PROMPTS[$f->ferramenta][$qual];
-            if (isset(self::PROMPTS[$f->ferramenta]['campo'])) {   // the customer's own text, in the tool's words
+            $p = self::prompts($f);
+            $prompt = $p[$qual];
+            if (isset($p['campo'])) {   // the customer's own text, in the tool's words
                 $extra = trim((string) ($f->opcoes['texto'] ?? ''));
-                $prompt = sprintf($prompt, $extra !== '' ? sprintf(self::PROMPTS[$f->ferramenta]['campo'], $extra) : '');
+                $prompt = sprintf($prompt, $extra !== '' ? sprintf($p['campo'], $extra) : '');
             }
         }
         if ($tem($f->{$outro})) {
@@ -290,8 +408,8 @@ class Realizador
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
-        $p = self::PROMPTS[$f->ferramenta];
-        $segundos = $f->tipo()['segundos'];
+        $p = self::prompts($f);
+        $segundos = $f->segundos();
         $inicio = $this->kie->upload($disk->get($f->inicio), 'inicio.png');
         $fim = $this->kie->upload($disk->get($f->fim), 'fim.png');
         $som = ($p['som'] ?? null) !== null;

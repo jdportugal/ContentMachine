@@ -33,7 +33,7 @@ class Analista
         [$w, $h] = getimagesizefromstring($disk->get($f->original)) ?: [0, 0];
         $problemas = max($w, $h) < self::LADO_MINIMO ? ['A fotografia tem pouca resolução ('.$w.'×'.$h.' px): use o original, com pelo menos '.self::LADO_MINIMO.' px no lado maior.'] : [];
 
-        $prompt = Realizador::PROMPTS[$f->ferramenta]['analise']."\n\n".<<<'TXT'
+        $prompt = Realizador::prompts($f)['analise']."\n\n".<<<'TXT'
         Answer with ONLY this JSON, nothing else:
         {"adequada": true|false, "problemas": ["…"], "dica": "…"}
         - adequada: false only when a problem would clearly hurt the video.

@@ -181,3 +181,27 @@ Each later tool is its own commit, and the user tests it with real photos before
 - Polling intervals.
 - File names.
 - Thumbnail generation.
+
+## Remodelação: type of works and the customer's description (2026-11-27)
+
+**Why:** most customers send the place as it is today (an old room, a worn facade, a ruin, an empty plot) with no
+picture of the result, so the AI must work out what gets built and where. The user asked for this inside Remodelação.
+
+**Flow:** the customer picks the type, then describes what should happen (optional). The photo is always the start
+frame; the AI draws the end frame; the customer approves it before the clip (that step catches a house drawn in the
+wrong spot).
+
+| Type (`opcoes.obra`) | Photo | End frame | Workers do |
+|---|---|---|---|
+| `interior` Renovação interior (default) | a room | today's remodel prompt | strip, tile, floor, fit |
+| `exterior` Fachada / casa completa | the house outside | same house, same volume, new facade, windows, roof | scaffolding, render, paint, windows, roof |
+| `ruina` Recuperar ruína | ruins | a finished house on the ruin's footprint, sound stone walls kept | clear, rebuild walls, roof, windows, render |
+| `terreno` Construir no terreno | empty plot | a new house where the ground shows it (cleared or levelled patch, foundations, stakes); else the plot's centre, sized to the plot | dig, foundations, structure, walls, roof, finishes |
+
+- The text box: "Descreva a obra" with examples per type. Empty → interior: modern high-end (today); exterior/ruína:
+  in keeping with the region; terreno: a modern Portuguese house, one or two floors, sized to the plot.
+- The photo check and the video prompt are per type; the photo check is told the type, so a ruin is not "a problem".
+- Still 10 s with sound for every type (one price). Construção IA (from a photo of the finished house) stays a separate
+  tool, later.
+
+**Approaches:** a type choice inside Remodelação (picked by the user) over separate tools per case.
