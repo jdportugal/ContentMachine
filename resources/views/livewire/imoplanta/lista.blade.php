@@ -123,5 +123,14 @@
             @endforeach
         </div>
     @endif
+
+    {{-- the credit packs, always at the foot (as on the AI tools' page and /conta); the block above has them when short --}}
+    @if (! $gratis && $disponiveis !== null && $disponiveis >= \App\Services\Pagamentos\Creditos::IMOPLANTA)
+        <section id="packs" class="mt-12">
+            <h2 class="font-display text-3xl">Créditos de vídeo</h2>
+            <p class="mt-1 text-sm text-ink-soft">Cada imóvel usa {{ \App\Services\Pagamentos\Creditos::IMOPLANTA }} créditos. Os mesmos créditos dos vídeos Imocena e das Ferramentas IA. IVA incluído.</p>
+            @include('livewire.imoplanta.packs')
+        </section>
+    @endif
 </div>
 @endif

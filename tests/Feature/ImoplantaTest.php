@@ -291,7 +291,8 @@ class ImoplantaTest extends TestCase
         $this->assertSame(Imoplanta::A_LER, $p->refresh()->estado);
         $this->assertSame(9, intdiv($u->creditos(), Creditos::IMOPLANTA));
         $this->get('/plantas')->assertSee('45</strong> créditos de vídeo', false);       // the count in the top bar
-        $this->get(route('imoplanta'))->assertSee('CRÉDITOS DE VÍDEO<br>DISPONÍVEIS', false)->assertDontSee('Cada imóvel usa 5 créditos de vídeo</p>', false);   // packs only below a property's 5
+        $this->get(route('imoplanta'))->assertSee('CRÉDITOS DE VÍDEO<br>DISPONÍVEIS', false)->assertDontSee('Cada imóvel usa 5 créditos de vídeo</p>', false)
+            ->assertSee('id="packs"', false)->assertSee('25 CRÉDITOS DE VÍDEO');   // with credits too, the packs at the foot, like the other pages
         Livewire::test(\App\Livewire\Imoplanta\Comecar::class)->set('plano', 'inventado')->set('nome', 'Outra')
             ->set('plantas', [UploadedFile::fake()->image('p.png')])->call('enviar')->assertRedirect();   // with credit: straight to the editor
     }
