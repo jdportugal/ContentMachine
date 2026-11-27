@@ -159,8 +159,26 @@ class Landing extends Component
     /** 'sem-resultados' | 'erro' | '' after a search or a listing read. */
     public string $avisoProcura = '';
 
-    public function mount(Convites $convites): void
+    /** Arrived by /black-friday while it runs: the promotion's packs, and only «este vídeo + N» on the result. */
+    public bool $blackFriday = false;
+
+    /** The Black Friday pack picked on a video with no contact yet: paid for once the contact is saved. */
+    public string $packBf = 'bf10';
+
+    /** The Black Friday promotion is on (config promocoes.black_friday.ate, Lisbon time). */
+    public static function blackFridayAtivo(): bool
     {
+        return now('Europe/Lisbon')->lte(\Illuminate\Support\Carbon::parse((string) config('contentmachine.promocoes.black_friday.ate'), 'Europe/Lisbon'));
+    }
+
+    public function mount(Convites $convites)
+    {
+        if (request()->routeIs('blackfriday')) {
+            if (! self::blackFridayAtivo()) {
+                return $this->redirectRoute('video', request()->query(), navigate: false);   // over: the usual page
+            }
+            $this->blackFriday = true;
+        }
         // "Fazer vídeo grátis" on the home page (?escolher=1): always the question, whatever was picked or asked before.
         if (request()->query('escolher')) {
             session()->forget(['agencia', 'lead_id']);
@@ -691,7 +709,7 @@ class Landing extends Component
         DB::table('leads')->where('id', $lead->id)->update(['clip_id' => $novo->id, 'nome' => $this->nomeContacto, 'telefone' => $this->telefoneContacto,
             'pronto_em' => null, 'updated_at' => now()]);
         $this->pedirContacto = false;
-        $link = (string) config('contentmachine.stripe.links.primeiro');
+        $link = (string) config('contentmachine.stripe.links.'.($this->blackFriday && isset(config('contentmachine.promocoes.black_friday.packs')[$this->packBf]) ? $this->packBf : 'primeiro'));
         if ($link === '') {
             return null;
         }

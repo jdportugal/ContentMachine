@@ -53,7 +53,7 @@ class Compras
             'moeda' => strtolower((string) ($session['currency'] ?? 'eur')),
             // one balance of video credits: an Imoplanta property's link (50 €) brings its 5 credits, an old AI video link
             // its 3; the property / AI columns keep what was bought, already counted as spent
-            'videos' => (int) ($meta['videos'] ?? 0) + (int) ($meta['imoveis'] ?? 0) * Creditos::IMOPLANTA
+            'videos' => round((float) str_replace(',', '.', (string) ($meta['videos'] ?? 0)), 1) + (int) ($meta['imoveis'] ?? 0) * Creditos::IMOPLANTA
                 + (int) ($meta['videos_ia'] ?? 0) * Creditos::VIDEO_IA_ANTIGO,
             'imoveis' => (int) ($meta['imoveis'] ?? 0), 'imoveis_usados' => (int) ($meta['imoveis'] ?? 0),
             'videos_ia' => (int) ($meta['videos_ia'] ?? 0), 'videos_ia_usados' => (int) ($meta['videos_ia'] ?? 0),
@@ -68,7 +68,8 @@ class Compras
         if ($leadId && $user) {   // the free video they paid from is theirs now
             DB::table('leads')->where('id', $leadId)->whereNull('user_id')->update(['user_id' => $user->id]);
         }
-        if ($leadId && (int) ($meta['videos'] ?? 0) === 1) {
+        // a single video, or a promotion's «este vídeo + N» (metadata inclui_video): the free video they paid from, clean
+        if ($leadId && ((int) ($meta['videos'] ?? 0) === 1 || ! empty($meta['inclui_video']))) {
             $this->entregarVideoLimpo($compraId, $leadId);
         }
         // Imoplanta: the property it was bought for starts (a property credit), or its add-on does.

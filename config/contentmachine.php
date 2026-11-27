@@ -588,6 +588,11 @@ return [
             'extra_video' => env('STRIPE_LINK_EXTRA_VIDEO', ''),
             'extra_ambos' => env('STRIPE_LINK_EXTRA_AMBOS', ''),
             // Ferramentas IA (Payment Links with metadata videos_ia=1|10|20)
+            // Black Friday 2026 (promocoes.black_friday): the same packs with 25% more credits, each with metadata
+            // videos=<credits> and inclui_video=1 (bought from a free video, that video is delivered clean)
+            'bf1' => env('STRIPE_LINK_BF1', ''),
+            'bf10' => env('STRIPE_LINK_BF10', ''),
+            'bf20' => env('STRIPE_LINK_BF20', ''),
             'ia1' => env('STRIPE_LINK_IA1', ''),
             'ia10' => env('STRIPE_LINK_IA10', ''),
             'ia20' => env('STRIPE_LINK_IA20', ''),
@@ -600,6 +605,21 @@ return [
     | Worst case per video (4 images + 3 clips) is ~4.50 € (10 s), ~6.60 € (construção, 15 s):
     | docs/superpowers/specs/2026-11-26-ferramentas-ia-design.md.
     */
+    /*
+    | Promotions. Black Friday 2026 (user, 2026-11-27): /black-friday, the free video as always, then only «este vídeo +
+    | N»: the usual packs, same prices, 25% more video credits (credits are in tenths: 1,3 / 12,5 / 25), until Sunday.
+    */
+    'promocoes' => [
+        'black_friday' => [
+            'ate' => env('BLACK_FRIDAY_ATE', '2026-11-30 23:59:59'),   // Europe/Lisbon
+            'packs' => [
+                'bf1' => ['creditos' => 1.3, 'antes' => 1, 'preco' => 2000],
+                'bf10' => ['creditos' => 12.5, 'antes' => 10, 'preco' => 10000],
+                'bf20' => ['creditos' => 25, 'antes' => 20, 'preco' => 17500],
+            ],
+        ],
+    ],
+
     'ferramentas' => [
         // One balance of video credits for everything (Pagamentos\Creditos): the AI tools are bought with the same packs as
         // the Imocena videos; each tool costs its own credits (Ferramentas::lista). Prices shown; the Payment Link charges.

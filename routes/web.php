@@ -58,6 +58,8 @@ use Illuminate\Support\Str;
 // with a link meant for the form (ad tags, ?agencia=, ?convite=, ?anuncio=…) or with a video
 // under way is sent on to the form with the same query, so old links and live ads keep working.
 Route::livewire('/video-gratis', Landing::class)->name('video');
+// Black Friday 2026: the same page, the promotion's packs (config promocoes.black_friday), until Sunday night.
+Route::livewire('/black-friday', Landing::class)->name('blackfriday');
 Route::get('/', function (Request $request, \App\Services\Guias\Guias $guias) {
     $query = (string) $request->server('QUERY_STRING', '');   // as sent: same order and encoding
     if ($query !== '' || session()->has('lead_id')) {

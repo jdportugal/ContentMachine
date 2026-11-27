@@ -78,8 +78,9 @@
                 <a href="{{ route('login') }}" class="inline-flex items-center min-h-11 text-sm text-[#AEB5C1] hover:text-ivory">Entrar</a>
             </span>
         </header>
+        @if ($blackFriday) @include('livewire.partials.black-friday', ['parte' => 'topo']) @endif
         <div class="flex-1 flex items-center">
-            <div id="pedido" class="w-full max-w-[880px] mx-auto px-6 pb-16">
+            <div id="pedido" class="w-full max-w-[880px] mx-auto px-6 pb-16 scroll-mt-6">
                 <h1 class="font-display text-[clamp(34px,5.4vw,56px)] leading-[1.05] font-normal text-ivory">Em que agência trabalha?</h1>
                 <p class="mt-3 text-base md:text-lg font-light text-[#C9CED6]">Escolha a sua para ver o vídeo do seu imóvel com a imagem dela.</p>
                 @php
@@ -135,7 +136,9 @@
     @endphp
     <main class="min-h-dvh flex flex-col">
         <div class="h-[3px] bg-ivory/10" aria-hidden="true"><div class="h-full bg-cyan transition-all duration-500" style="width: {{ $pct }}%"></div></div>
-        @if ($convidadoPor)
+        @if ($blackFriday)
+            @include('livewire.partials.black-friday', ['parte' => 'faixa'])
+        @elseif ($convidadoPor)
             <div class="bg-coral text-navy text-center px-4 py-2 text-sm"><strong class="font-semibold">{{ $convidadoPor }} ofereceu-lhe um vídeo grátis</strong> do seu imóvel, sem cartão de crédito.</div>
         @endif
         <header class="px-6 py-5 flex items-center justify-between">
@@ -159,6 +162,8 @@
                     @if (! empty($pedido['pago']))
                         <p class="text-sm text-[#C9CED6]">{{ ! empty($pedido['oferta']) ? 'Versão sem marca d’água, oferecida pelo convite ao seu colega. Obrigado!' : 'Versão sem marca d’água: já é sua.' }}</p>
                         <x-descarregar :href="$pedido['descarregar']" class="{{ $botao }} rounded-full">↓ Descarregar MP4</x-descarregar>
+                    @elseif ($blackFriday)
+                        @include('livewire.partials.black-friday', ['parte' => 'resultado'])
                     @else
                         @if (! empty($pedido['semContacto']))
                             <button type="button" wire:click="$set('pedirContacto', true)" class="{{ $botao }} rounded-full flex-col !gap-0 py-2">
