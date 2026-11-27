@@ -21,7 +21,9 @@ import { loadThemeFonts } from "../fonts";
  * from its site and the phone plays the demo reel in its own template.
  */
 
-export type Variante = "preco" | "minutos" | "simples";
+export type Variante = "preco" | "minutos" | "simples" | "bf-pack" | "bf-tempo";   // bf-*: Black Friday 2026
+
+const bf = (v: Variante) => v === "bf-pack" || v === "bf-tempo";
 
 export type Secao = { segundos: number; audio: string | null; legenda: string };
 
@@ -186,6 +188,14 @@ const Hook: React.FC<{ variante: Variante; fotos: string[]; agencia?: Agencia | 
             <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 66, letterSpacing: 16, color: C.ivory, opacity: b }}>POR VÍDEO</div>
           </div>
         )}
+        {bf(variante) && (
+          <div style={{ textAlign: "center" }}>
+            <Etiqueta>{variante === "bf-pack" ? "AGENTES IMOBILIÁRIOS" : "É CONSULTOR IMOBILIÁRIO?"}</Etiqueta>
+            <div style={{ marginTop: 40, display: "inline-block", padding: "8px 34px 12px", borderRadius: 18, background: C.ivory, fontFamily: SANS, fontWeight: 800, fontSize: 70, letterSpacing: 6, color: C.navy, opacity: b }}>BLACK FRIDAY</div>
+            <div style={{ marginTop: 10, fontFamily: DISPLAY, fontWeight: 700, fontSize: 380, lineHeight: 0.9, color: C.coral, transform: `scale(${0.6 + 0.4 * a})`, opacity: a }}>+25%</div>
+            <div style={{ marginTop: 18, fontFamily: SANS, fontWeight: 600, fontSize: 60, letterSpacing: 12, color: C.ivory, opacity: b }}>MAIS VÍDEOS</div>
+          </div>
+        )}
         {variante === "minutos" && (() => {
           const seg = Math.min(299, Math.floor(interpolate(f, [0, 26], [0, 299], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
           const mm = String(Math.floor(seg / 60)).padStart(2, "0");
@@ -256,14 +266,14 @@ const Agitar: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, f
           <Etiqueta cor={C.coral}>{variante === "simples" ? "NÃO PRECISA DE" : "À MODA ANTIGA"}</Etiqueta>
         </div>
         <div style={{ marginTop: 80, display: "flex", flexDirection: "column", gap: 64 }}>
-          {variante === "preco" && (
+          {(variante === "preco" || variante === "bf-pack") && (
             <>
               <Linha de={6} icone="x" corIcone={C.coral}><Riscado de={30}>Videógrafo: centenas de €</Riscado></Linha>
               <Linha de={16} icone="x" corIcone={C.coral}><Riscado de={40}>Dias à espera do vídeo</Riscado></Linha>
               <Linha de={26} icone="x" corIcone={C.coral}><Riscado de={50}>Marcar visita para filmar</Riscado></Linha>
             </>
           )}
-          {variante === "minutos" && (
+          {(variante === "minutos" || variante === "bf-tempo") && (
             <>
               <Linha de={6} icone="x" corIcone={C.coral}><Riscado de={30}>3 a 5 dias de espera</Riscado></Linha>
               <Linha de={16} icone="x" corIcone={C.coral}><Riscado de={40}>Uma tarde a editar</Riscado></Linha>
@@ -315,7 +325,9 @@ const Demo: React.FC<{ reel: string | null; fotos: string[]; agencia?: Agencia |
 
 const Stack: React.FC<{ variante: Variante; reel: string | null; fotos: string[]; agencia?: Agencia | null }> = ({ variante, reel, fotos, agencia }) => {
   const f = useCurrentFrame();
-  const itens = agencia
+  const itens = bf(variante)
+    ? ["Pack 10 → 13 vídeos", "Pack 20 → 25 vídeos", "Ao mesmo preço", "Só até domingo"]
+    : agencia
     ? [`Com a imagem da ${agencia.nome}`, "Narração profissional", "O seu contacto no fim", "Edite e refaça grátis"]
     : variante === "minutos"
       ? ["Narração em português", "Fotos com movimento", "O seu contacto no fim", "Pronto para Reels e TikTok"]
@@ -351,7 +363,7 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
   const b = useEntrada(12);
   const f = useCurrentFrame();
   const pulso = 1 + 0.04 * Math.sin(f / 5);
-  const selo = variante === "preco" ? "Depois, desde 10 € por vídeo" : variante === "minutos" ? "Pronto em minutos" : "Só precisa do link";
+  const selo = bf(variante) ? "Black Friday: +25% de vídeos até domingo" : variante === "preco" ? "Depois, desde 10 € por vídeo" : variante === "minutos" ? "Pronto em minutos" : "Só precisa do link";
   return (
     <AbsoluteFill>
       <FotoDeFundo foto={fotos[3] ?? fotos[0]} escurecer={0.78} />
@@ -365,7 +377,9 @@ const CTA: React.FC<{ variante: Variante; fotos: string[] }> = ({ variante, foto
         <div style={{ marginTop: 34, fontFamily: SANS, fontSize: 42, color: C.ivory, opacity: b }}>{selo}</div>
       </AbsoluteFill>
       <div style={{ position: "absolute", bottom: 80, left: 60, right: 60, textAlign: "center", fontFamily: SANS, fontSize: 26, lineHeight: 1.4, color: C.soft }}>
-        10 € por vídeo no pack de 10 (100 €, IVA incl.). Vídeo grátis com marca d’água. Imóvel de demonstração.
+        {bf(variante)
+          ? "Black Friday até 30/11: pack de 10 com 13 vídeos (100 €), pack de 20 com 25 (175 €), IVA incl. Vídeo grátis com marca d’água. Imóvel de demonstração."
+          : "10 € por vídeo no pack de 10 (100 €, IVA incl.). Vídeo grátis com marca d’água. Imóvel de demonstração."}
       </div>
     </AbsoluteFill>
   );

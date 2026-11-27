@@ -15,7 +15,7 @@ use App\Services\RealEstate\ListingScriptWriter;
 $saida = rtrim($argv[1] ?? '/tmp/adspub', '/');
 $genero = ($argv[2] ?? 'f') === 'm' ? 'm' : 'f';   // the voice: f (default) or m
 $redes = array_slice($argv, 3);
-$musicas = ['preco' => 'real-estate-2.mp3', 'minutos' => 'real-estate-4.mp3', 'simples' => 'real-estate-3.mp3'];
+$musicas = ['preco' => 'real-estate-2.mp3', 'minutos' => 'real-estate-4.mp3', 'simples' => 'real-estate-3.mp3', 'bf-pack' => 'real-estate-2.mp3', 'bf-tempo' => 'real-estate-4.mp3'];
 @mkdir($saida, 0775, true);
 
 $cta = ['Experimente: o primeiro vídeo é grátis, em imocena ponto com.', 'Experimente: o primeiro vídeo é grátis, em imocena.com'];
@@ -40,6 +40,24 @@ $guioes = [
         ['Só precisa do link do anúncio. A Imocena faz o resto.', null],
         ['Narração, música, as melhores fotos e o seu contacto, prontos a publicar.', null],
         $cta,
+    ],
+];
+// Black Friday 2026 (until Sunday 30/11): `php scripts/ads/vozes.php /tmp/adsbf f black-friday` makes only these two
+$ctaBf = ['Só até domingo. Experimente: o primeiro vídeo é grátis, em imocena ponto com.', 'Só até domingo. O 1.º vídeo é grátis, em imocena.com'];
+$blackFriday = [
+    'bf-pack' => [
+        ['Agentes imobiliários: é Black Friday na Imocena. Mais vinte e cinco por cento de vídeos, ao mesmo preço.', 'Agentes imobiliários: é Black Friday na Imocena. Mais 25% de vídeos, ao mesmo preço.'],
+        ['Um videógrafo cobra centenas de euros, e ainda espera dias pelo vídeo.', null],
+        ['Na Imocena, basta colar o link do anúncio. Nós fazemos o vídeo.', null],
+        ['O pack de dez passa a treze vídeos. O de vinte passa a vinte e cinco.', 'O pack de 10 passa a 13 vídeos. O de 20 passa a 25.'],
+        $ctaBf,
+    ],
+    'bf-tempo' => [
+        ['É consultor imobiliário? Este fim de semana, cada pack de vídeos dá mais vinte e cinco por cento.', 'É consultor imobiliário? Este fim de semana, cada pack de vídeos dá mais 25%.'],
+        ['Nada de esperar dias por um videógrafo, nem perder a tarde a editar.', null],
+        ['Cole o link do imóvel: a Imocena escreve a narração, escolhe as fotos e monta o vídeo.', null],
+        ['Na Black Friday, o pack de dez dá treze vídeos, e o de vinte dá vinte e cinco.', 'Na Black Friday, o pack de 10 dá 13 vídeos, e o de 20 dá 25.'],
+        $ctaBf,
     ],
 ];
 
@@ -83,7 +101,11 @@ $fazer = function (string $nome, string $variante, array $linhas, ?array $agenci
     ], fn ($v) => $v !== null), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 };
 
-if ($redes === []) {
+if ($redes === ['black-friday']) {
+    foreach ($blackFriday as $variante => $linhas) {
+        $fazer($variante, $variante, $linhas, null, 'reel.mp4');
+    }
+} elseif ($redes === []) {
     foreach ($guioes as $variante => $linhas) {
         $fazer($variante, $variante, $linhas, null, 'reel.mp4');
     }
