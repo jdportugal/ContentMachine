@@ -255,6 +255,33 @@ class Realizador
                 ],
             ],
         ],
+        // The new build: the customer has the finished house (a photo or a 3D render), the AI draws the plot before it
+        // (everything the build added taken away, the camera and the neighbours pinned), Kling builds it in real order
+        'construcao' => [
+            'analise' => 'You check a real-estate image before it is turned into an AI "construction timelapse": from this image '
+                .'of a finished house the AI draws the same plot empty, before the works, then a fixed-camera timelapse shows '
+                .'workers building the house from the ground. A GOOD start: an outdoor photo or 3D render, taken from the '
+                .'ground, of a new or recent house or building, whole or nearly whole in the frame, with some of its plot and '
+                .'the ground around it, daylight, sharp. PROBLEMS to look for: an interior; a floor plan, drawing or '
+                .'screenshot; a photo from the air; an old or worn house (say the Remodelação tool fits better); the house '
+                .'cut off at the sides or the roof, or mostly hidden by trees, cars or walls; people close to the camera; '
+                .'night, very dark or blurry; a very wide panorama. Text, logos and watermarks over the picture are NOT a '
+                .'problem.',
+            'inicio' => 'Edit this image: the same place before the house was built. The camera does not move: exactly the '
+                .'same viewpoint, lens, framing and crop. Everything that is not part of this house and its plot stays '
+                .'exactly as it is: the road and its paving, the neighbouring buildings, the trees beyond, the hills, the sky, '
+                .'the poles and wires, and whatever stands in the foreground. The house and everything built with it (its '
+                .'garden, drive, paving, pool, plants, new walls and gates) are gone: in their place, the bare plot, levelled '
+                .'earth with patches of weeds, a few stones and tyre tracks, as a plot looks just before works start; what was '
+                .'hidden behind the house is filled in plainly and consistently with its surroundings (more sky, the hills, '
+                .'the backs of the neighbouring buildings). The same daylight and shadows. Laid over the original image, '
+                .'the road, the neighbours and the horizon line up exactly. A photoreal photograph, with the picture free of '
+                .'people, text, logos and watermarks.',
+            'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. '.self::OBRA_DE_RAIZ,
+            'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, a '
+                .'saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, finished '
+                .'place. No music, no speech.',
+        ],
     ];
 
     /**

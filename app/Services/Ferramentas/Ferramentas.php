@@ -59,7 +59,8 @@ class Ferramentas
             'construcao' => [
                 'nome' => 'Construção IA', 'linha' => 'Operários constroem a casa, do terreno vazio ao fim.',
                 'texto' => 'Do terreno vazio à casa acabada, com operários em obra: fundações, estrutura, paredes, telhado e acabamentos, em timelapse. Ideal para construção nova.',
-                'envio' => 'Fotografia da casa acabada', 'inicio' => 'Terreno vazio', 'fim' => 'A sua fotografia', 'ai' => ['inicio'], 'segundos' => 15,
+                'envio' => 'Fotografia ou imagem 3D da casa acabada', 'inicio' => 'Terreno vazio', 'fim' => 'A sua fotografia', 'ai' => ['inicio'], 'segundos' => 15,
+                'exemplo' => 'Ex.: deixar o muro da esquerda, que já existia',
             ],
             'planta' => [
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',

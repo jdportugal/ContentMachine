@@ -513,4 +513,24 @@ class FerramentasTest extends TestCase
             && str_contains($r['input']['prompt'], 'the bare structure, in full view'));
         $this->assertEqualsWithDelta(15 * 0.151, $this->custos($f)[1][1], 0.001);   // a build from the ground: 15 s
     }
+
+    public function test_the_new_build_draws_the_empty_plot_before_the_customers_house_and_builds_it_in_order(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'construcao', $this->foto());
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+
+        $f->refresh();
+        $this->assertSame([FerramentaIa::A_APROVAR, $f->original], [$f->estado, $f->fim]);   // the end is the customer's house
+        $this->assertNotSame($f->original, $f->inicio);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], 'the same place before the house was built'));
+        $this->assertTrue(app(Ferramentas::class)->aprovar($f));
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && $r['input']['sound'] === true && $r['input']['duration'] === '15' && str_contains($r['input']['prompt'], 'the ground is prepared'));
+    }
 }
