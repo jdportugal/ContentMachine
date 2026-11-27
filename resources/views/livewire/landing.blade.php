@@ -158,7 +158,7 @@
                     <span class="hidden md:block font-display text-[44px] leading-none text-ivory">Publique-o já.</span>
                     @if (! empty($pedido['pago']))
                         <p class="text-sm text-[#C9CED6]">{{ ! empty($pedido['oferta']) ? 'Versão sem marca d’água, oferecida pelo convite ao seu colega. Obrigado!' : 'Versão sem marca d’água: já é sua.' }}</p>
-                        <a href="{{ $pedido['descarregar'] }}" class="{{ $botao }} rounded-full">↓ Descarregar MP4</a>
+                        <x-descarregar :href="$pedido['descarregar']" class="{{ $botao }} rounded-full">↓ Descarregar MP4</x-descarregar>
                     @else
                         @if (! empty($pedido['semContacto']))
                             <button type="button" wire:click="$set('pedirContacto', true)" class="{{ $botao }} rounded-full flex-col !gap-0 py-2">
@@ -169,7 +169,7 @@
                                 <span>Tirar a marca d’água · 10 €</span><span class="text-xs font-normal opacity-75">este vídeo, sem marca</span>
                             </a>
                         @endif
-                        <a href="{{ $pedido['descarregar'] }}" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full border-[1.5px] border-ivory/35 text-ivory font-semibold whitespace-nowrap hover:bg-ivory/5">↓ Descarregar MP4 <span class="hidden md:inline font-normal text-[#AEB5C1]">com marca d’água</span></a>
+                        <x-descarregar :href="$pedido['descarregar']" class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 rounded-full border-[1.5px] border-ivory/35 text-ivory font-semibold whitespace-nowrap hover:bg-ivory/5">↓ Descarregar MP4 <span class="hidden md:inline font-normal text-[#AEB5C1]">com marca d’água</span></x-descarregar>
                         <div class="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 text-[13px]">
                             <a href="{{ $stripe('pack10', 'Pack 10 (100 €)') }}" class="text-cyan underline underline-offset-2">Pack 10 · 10 €/vídeo</a>
                             @if ($pedido['convite'] ?? null)
