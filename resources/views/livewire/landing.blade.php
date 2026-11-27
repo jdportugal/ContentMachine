@@ -49,7 +49,7 @@
         ['Que dados aparecem no fim do vídeo?', 'O nome, o telemóvel, a agência e o número AMI que constam do anúncio.'],
         ['O que fazem com os meus dados?', 'Usamos os dados do anúncio só para criar o seu vídeo e o contactar sobre ele, de acordo com o RGPD. Pode pedir que os apaguemos a qualquer momento.'],
         ['Posso pedir mais do que um vídeo grátis?', 'A oferta é de um vídeo grátis por anúncio, para experimentar. Depois, compre vídeos avulso (20 €) ou um pack de 10 ou 20 vídeos.'],
-        ['Os packs expiram?', 'Os vídeos de um pack podem ser usados durante 12 meses a contar da compra.'],
+        ['Os créditos expiram?', 'Os créditos de vídeo de um pack podem ser usados durante 12 meses a contar da compra. 1 crédito = 1 vídeo; os mesmos créditos servem para o Imoplanta e as Ferramentas IA.'],
         ['Os preços incluem IVA?', 'Sim, todos os preços incluem IVA. Emitimos fatura com NIF.'],
     ];
 @endphp
