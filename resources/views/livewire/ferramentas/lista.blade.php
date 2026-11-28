@@ -25,17 +25,28 @@
         <p role="status" class="mt-6 rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">{{ $pagamento }}</p>
     @endif
 
-    <div class="mt-8 grid gap-5 grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
-        @foreach ($ferramentas as $chave => $f)
-            @php $ex = \App\Services\Ferramentas\Ferramentas::exemplo($chave); @endphp
-            <a href="{{ route('ferramentas.nova', $chave) }}" class="rounded-2xl overflow-hidden bg-white border border-[#E4E1DA] flex flex-col hover:border-coral hover:shadow-[0_12px_32px_rgba(14,22,38,0.08)]">
-                <div class="aspect-video bg-navy">
-                    @if ($ex['poster']) <img src="{{ $ex['poster'] }}" alt="" class="w-full h-full object-cover"> @endif
+    {{-- the tools, as on the landing: one demo each (the remodel per type of works), 3 × 3 on a computer --}}
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @foreach (\App\Services\Ferramentas\Ferramentas::demos() as $chave => $d)
+            @continue(! isset($ferramentas[$d['ferramenta']]))
+            @php $ex = \App\Services\Ferramentas\Ferramentas::exemplo($chave); $f = $ferramentas[$d['ferramenta']]; @endphp
+            <a href="{{ \App\Services\Ferramentas\Ferramentas::linkDemo($chave) }}" x-data
+               x-intersect:enter="$refs.v?.play().catch(() => {})" x-intersect:leave="$refs.v?.pause()"
+               class="rounded-2xl overflow-hidden bg-white border border-[#E4E1DA] flex flex-col hover:border-coral hover:shadow-[0_12px_32px_rgba(14,22,38,0.08)]">
+                <div class="relative aspect-video bg-navy">
+                    @if ($ex['video'])
+                        <video x-ref="v" src="{{ $ex['video'] }}" poster="{{ $ex['poster'] }}" muted loop playsinline preload="none" class="w-full h-full object-cover"></video>
+                    @endif
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-navy/85 text-ivory text-xs font-semibold">{{ \App\Services\Ferramentas\Ferramentas::formato($d['ferramenta']) }}</span>
                 </div>
-                <div class="p-4 flex flex-col gap-1">
-                    <span class="font-display text-2xl leading-tight text-ivory">{{ $f['nome'] }}</span>
-                    <span class="text-sm text-[#AEB5C1]">{{ $f['linha'] }}</span>
-                    <span class="mt-1 text-xs font-semibold text-cyan">{{ \App\Services\Pagamentos\Creditos::rotulo($f['creditos']) }}</span>
+                <div class="p-5 flex flex-col gap-2 grow">
+                    <span class="font-display text-2xl leading-tight text-ivory">{{ $d['nome'] }}</span>
+                    <span class="text-sm leading-relaxed text-[#AEB5C1] grow">{{ $d['texto'] }}</span>
+                    <span class="pt-1 text-xs text-[#AEB5C1]">Envia: <strong class="text-ivory">{{ mb_strtolower($f['envio']) }}</strong></span>
+                    <span class="flex items-center justify-between gap-3 pt-1">
+                        <span class="text-xs font-semibold text-cyan">{{ \App\Services\Pagamentos\Creditos::rotulo(\App\Services\Ferramentas\Ferramentas::creditosDemo($chave)) }}</span>
+                        <span class="text-sm font-semibold text-coral">Experimentar →</span>
+                    </span>
                 </div>
             </a>
         @endforeach

@@ -24,11 +24,12 @@ FROM php:8.4-cli AS app
 #  - ffmpeg (FfmpegVideoCompositor / Shorts), python3 + yt-dlp (aggregator)
 #  - faster-whisper (scripts/transcribe.py): transcription with NO OpenAI key.
 #    CPU-only (ctranslate2), models are downloaded on first use into ~/.cache.
+#  - python3-opencv (scripts/alinhar.py): AI frames put back on the photo's camera (Ferramentas IA)
 #  - Node 20 (Remotion CLI renders clips)
 #  - the shared libraries Remotion's headless Chrome needs at runtime
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git unzip supervisor ca-certificates curl gnupg ffmpeg \
-        python3 python3-pip \
+        python3 python3-pip python3-opencv \
         libsqlite3-dev libzip-dev libicu-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
         libnss3 libdbus-1-3 libatk1.0-0 libgbm1 libasound2 libxrandr2 libxkbcommon0 \
         libxfixes3 libxcomposite1 libxdamage1 libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2 \

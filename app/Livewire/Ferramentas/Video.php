@@ -27,7 +27,7 @@ class Video extends Component
 
     public string $pedido = '';
 
-    /** The side move's direction: esquerda | direita. */
+    /** A camera move's direction (the tool's `direcao` keys). */
     public string $direcao = 'direita';
 
     /** The remodel's type of works (interior | exterior | ruina | terreno), asked before the photo. */
@@ -53,6 +53,10 @@ class Video extends Component
         } else {
             abort_unless(isset(Ferramentas::disponiveis()[$ferramenta]), 404);
             $this->ferramenta = $ferramenta;
+            $this->direcao = (new FerramentaIa(['ferramenta' => $ferramenta]))->direcao();
+            if (isset(Ferramentas::lista()[$ferramenta]['obras'][request('obra')])) {   // from a demo: its type of works
+                $this->obra = request('obra');
+            }
         }
     }
 

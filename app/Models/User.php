@@ -69,13 +69,15 @@ class User extends Authenticatable
         return in_array(strtolower((string) $this->email), (array) config('contentmachine.imoplanta.gratis'), true);
     }
 
-    /** Imoplanta is open, for now, only to the accounts listed in imoplanta.acesso. */
+    /** Imoplanta is open to the accounts listed in imoplanta.acesso; "*" opens it to every account (user, 2026-11-28). */
     public function veImoplanta(): bool
     {
-        return in_array(strtolower((string) $this->email), (array) config('contentmachine.imoplanta.acesso'), true);
+        $acesso = (array) config('contentmachine.imoplanta.acesso');
+
+        return in_array('*', $acesso, true) || in_array(strtolower((string) $this->email), $acesso, true);
     }
 
-    /** Ferramentas IA is open, for now, to the same accounts as Imoplanta (imoplanta.acesso) and admins. */
+    /** Ferramentas IA is open to the same accounts as Imoplanta (imoplanta.acesso) and admins. */
     public function veFerramentas(): bool
     {
         return $this->veImoplanta() || $this->is_admin;

@@ -627,8 +627,10 @@ return [
             'pack10' => ['creditos' => 10, 'preco' => 10000],
             'pack20' => ['creditos' => 20, 'preco' => 17500],
         ],
-        'editar_imagem' => 3,   // changes to the AI frame, per video
-        'refazer_video' => 2,   // new versions of the clip, per video
+        'editar_imagem' => 2,   // changes to the AI frame, per video (user, 2026-11-28)
+        'refazer_video' => 1,   // new versions of the clip, per video (user, 2026-11-28)
+        // Who gets the "kie.ai out of credits" email (comma-separated); empty: every admin account
+        'alertas_email' => env('ALERTAS_EMAIL', ''),
         // The photo check (Analista): a simple look at one photo, so the cheap vision model (Opus cost ~$0.20 a photo)
         'modelo_analise' => env('FERRAMENTAS_MODELO_ANALISE', 'claude-haiku-5-5'),
     ],
@@ -665,8 +667,8 @@ return [
             'video' => ['nome' => 'Vídeo Imocena', 'preco' => (int) env('IMOPLANTA_PRECO_VIDEO', 1500)],
             'ambos' => ['nome' => 'Vídeo da planta 3D + Vídeo Imocena', 'preco' => (int) env('IMOPLANTA_PRECO_AMBOS', 2000)],
         ],
-        // Who has Imoplanta for now (the sidebar tab and the pages; admins can open the pages too). Comma-separated emails.
-        'acesso' => array_values(array_filter(array_map(fn ($e) => strtolower(trim($e)), explode(',', (string) env('IMOPLANTA_ACESSO', 'joaodiogocferreira@gmail.com'))))),
+        // Who has Imoplanta and Ferramentas IA (the sidebar tabs and the pages; admins always): comma-separated emails, or * for everyone (default).
+        'acesso' => array_values(array_filter(array_map(fn ($e) => strtolower(trim($e)), explode(',', (string) env('IMOPLANTA_ACESSO', '*'))))),
         'refazer_3d' => 3,
         'refazer_imagem' => 2,
         'refazer_referencias' => 3,   // changes to the finishes board, and to each storey's 3D floor plan

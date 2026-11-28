@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Ferramentas
 {
-    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,creditos:float|int,video?:bool,direcao?:bool,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int}>,exemplo?:string}> */
+    /** @return array<string, array{nome:string,linha:string,texto:string,envio:string,inicio:string,fim:string,ai:list<string>,segundos:int,creditos:float|int,video?:bool,direcao?:array<string,string>,campo?:array{titulo:string,ajuda:string,exemplo:string},obras?:array<string,array{nome:string,exemplo:string,segundos?:int,creditos?:float|int}>,exemplo?:string}> */
     public static function lista(): array
     {
         return [
@@ -31,8 +31,17 @@ class Ferramentas
             'lateral' => [
                 'nome' => 'Movimento lateral', 'linha' => 'A câmara desliza devagar para o lado, como um gimbal em câmara lenta.',
                 'texto' => 'A partir de uma fotografia, a câmara desliza suavemente para a esquerda ou para a direita, com profundidade, como um plano de gimbal em câmara lenta. Funciona em interiores e exteriores.',
-                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'creditos' => 2, 'direcao' => true,
+                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de deslizar', 'ai' => ['fim'], 'segundos' => 5, 'creditos' => 0.5,
+                'direcao' => ['esquerda' => '← Para a esquerda', 'direita' => 'Para a direita →'],
                 'exemplo' => 'Ex.: o vidro da porta está torto, endireitar',
+            ],
+            // the camera walks in or out (user, 2026-11-28: "it cannot look like we are zooming, but actually moving")
+            'avanco' => [
+                'nome' => 'Avançar ou recuar', 'linha' => 'A câmara avança ou recua devagar pelo espaço, como quem entra a pé.',
+                'texto' => 'A partir de uma fotografia, a câmara avança para dentro do espaço ou recua, devagar, com profundidade: o que está perto passa mais depressa do que o fundo, como num plano de gimbal. Não é um zoom. Funciona em interiores e exteriores.',
+                'envio' => 'Fotografia de uma divisão ou do exterior', 'inicio' => 'A sua fotografia', 'fim' => 'Depois de andar', 'ai' => ['fim'], 'segundos' => 5, 'creditos' => 0.5,
+                'direcao' => ['frente' => '↑ Para a frente', 'tras' => '↓ Para trás'],
+                'exemplo' => 'Ex.: a moldura da janela ficou torta, endireitar',
             ],
             'limpeza' => [
                 // a photo, not a video (user, 2026-11-26): no clip, the cleaned photo is the result
@@ -45,12 +54,12 @@ class Ferramentas
             'remodelacao' => [
                 'nome' => 'Remodelação IA', 'linha' => 'Timelapse da obra, do estado atual ao acabado: uma divisão, uma casa ou uma ruína.',
                 'texto' => 'Mostre o potencial de um imóvel: em timelapse, os operários renovam uma divisão ou uma fachada, ou recuperam uma ruína. Diga-nos o que quer ver construído.',
-                'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 3,
+                'envio' => 'Fotografia do espaço como está hoje', 'inicio' => 'Estado atual', 'fim' => 'Depois da obra', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 2.5,
                 // the type of works (opcoes.obra), asked first (user, 2026-11-27); a build from the ground takes 15 s
                 'obras' => [
-                    'interior' => ['nome' => 'Renovação interior', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
-                    'exterior' => ['nome' => 'Fachada / casa completa', 'exemplo' => 'Ex.: reboco branco, caixilharia preta, telhado novo'],
-                    'ruina' => ['nome' => 'Recuperar ruína', 'exemplo' => 'Ex.: moradia T2 de um piso, pedra à vista, telhado de telha', 'segundos' => 15],
+                    'interior' => ['nome' => 'Renovação interior', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco', 'segundos' => 12, 'creditos' => 2.5],   // 8 steps of 3 s, played twice as fast
+                    'exterior' => ['nome' => 'Fachada / casa completa', 'exemplo' => 'Ex.: reboco branco, caixilharia preta, telhado novo', 'creditos' => 2],
+                    'ruina' => ['nome' => 'Recuperar ruína', 'exemplo' => 'Ex.: moradia T2 de um piso, pedra à vista, telhado de telha', 'segundos' => 15, 'creditos' => 3],
                 ],
                 'campo' => ['titulo' => 'Descreva a obra', 'ajuda' => 'Opcional: o que quer construído, o tamanho, o estilo. Sem indicação, fazemos uma obra moderna e de gama alta, à medida do espaço.', 'exemplo' => 'Ex.: escandinavo, madeira clara, azulejo branco'],
                 'exemplo' => 'Ex.: o chão em madeira mais escura',
@@ -67,16 +76,123 @@ class Ferramentas
                 // customer's browser, made real by the AI; the clip builds it from the bare footprint, then furnishes it
                 'nome' => 'Planta animada', 'linha' => 'A planta 2D passa a 3D, ergue-se e enche-se de mobília.',
                 'texto' => 'Envie a planta de um piso. A casa aparece vista de cima: primeiro o chão e as paredes, depois a mobília a entrar no lugar, com som.',
-                'envio' => 'Planta do piso (imagem)', 'inicio' => 'O terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 2,
+                'envio' => 'Planta do piso (imagem)', 'inicio' => 'O terreno', 'fim' => 'Planta 3D', 'ai' => ['fim'], 'segundos' => 10, 'creditos' => 1,
                 'exemplo' => 'Ex.: chão de madeira clara em toda a casa',
             ],
         ];
     }
 
-    /** The example clip and poster a tool shows on the landing page (public/exemplos-ia/<tool>.mp4|.jpg), when made. */
-    public static function exemplo(string $ferramenta): array
+    /**
+     * The demos on the landing (a 3×3 grid) and on each tool: one clip per tool, the remodel one per type of works.
+     * Each made with the tool itself from a demo photo (public/exemplos-ia/<demo>.mp4 and its poster .jpg).
+     *
+     * @return array<string, array{ferramenta:string, nome:string, texto:string}>
+     */
+    public static function demos(): array
     {
-        $f = fn (string $ext) => is_file(public_path("exemplos-ia/{$ferramenta}.{$ext}")) ? asset("exemplos-ia/{$ferramenta}.{$ext}") : null;
+        return [
+            'drone' => ['ferramenta' => 'drone', 'nome' => 'Vista drone',
+                'texto' => 'Um voo de drone sem drone. A partir de uma fotografia da fachada, a câmara sobe e roda à volta da casa, a mostrar o telhado, o terreno e a envolvente.'],
+            'lateral' => ['ferramenta' => 'lateral', 'nome' => 'Movimento lateral',
+                'texto' => 'A fotografia ganha vida: a câmara desliza devagar para o lado, como num gimbal, e o que está perto passa à frente do fundo. Dá profundidade a salas, quartos e fachadas.'],
+            'avanco' => ['ferramenta' => 'avanco', 'nome' => 'Avançar ou recuar',
+                'texto' => 'A câmara entra na divisão, ou recua, como quem a visita a pé. Não é um zoom: os móveis à frente aproximam-se mais depressa do que a parede ao fundo, como numa filmagem real.'],
+            'remodelacao-interior' => ['ferramenta' => 'remodelacao', 'nome' => 'Remodelação interior',
+                'texto' => 'Mostre o potencial de uma casa por remodelar. Em timelapse, os operários tiram os azulejos antigos, rebocam, assentam o chão e montam os equipamentos, até à divisão acabada.'],
+            'remodelacao-exterior' => ['ferramenta' => 'remodelacao', 'nome' => 'Fachada renovada',
+                'texto' => 'Uma fachada gasta renovada à frente de quem vê: andaimes, reboco novo, janelas e telhado, tudo pela mão dos operários, até à casa pronta a vender.'],
+            'remodelacao-ruina' => ['ferramenta' => 'remodelacao', 'nome' => 'Recuperar uma ruína',
+                'texto' => 'Para ruínas e casas de pedra: o terreno é limpo, as fundações abertas, e a casa volta a erguer-se sobre as paredes antigas, passo a passo, até ficar habitável.'],
+            'construcao' => ['ferramenta' => 'construcao', 'nome' => 'Construção num terreno',
+                'texto' => 'Venda o terreno com a casa que lá cabe. Da fotografia do lote à casa pronta: fundações, estrutura, paredes, telhado e jardim, com a casa que descrever.'],
+            'planta' => ['ferramenta' => 'planta', 'nome' => 'Planta animada',
+                'texto' => 'A planta do imóvel feita maqueta 3D que se constrói sozinha: primeiro as paredes, depois o chão e, por fim, a mobília de cada divisão.'],
+            'limpeza' => ['ferramenta' => 'limpeza', 'nome' => 'Limpeza IA',
+                'texto' => 'Fotografias sem desarrumação: caixas, roupa, carros e caixotes do lixo saem da imagem, e as paredes, o chão e as janelas ficam exatamente iguais.'],
+        ];
+    }
+
+    /** What a tool takes and gives, for its label: a photo or a plan in, a video or a photo out. */
+    public static function formato(string $ferramenta): string
+    {
+        return ($ferramenta === 'planta' ? 'Planta' : 'Fotografia').' → '.((self::lista()[$ferramenta]['video'] ?? true) ? 'Vídeo' : 'Fotografia');
+    }
+
+    /**
+     * A failed step, in the log with everything needed to find it (the video, its tool and works, the customer), all
+     * under "Ferramentas IA". kie.ai out of credits is CRITICAL: every customer's video fails until it is topped up.
+     */
+    public static function registarFalha(string $passo, FerramentaIa|int $f, \Throwable $e): void
+    {
+        $f = $f instanceof FerramentaIa ? $f : FerramentaIa::find($f);
+        $contexto = ['video' => $f?->id, 'ferramenta' => $f?->ferramenta, 'obra' => $f?->obra(), 'user' => $f?->user_id,
+            'passo' => $passo, 'erro' => $e->getMessage(), 'exception' => $e];
+        if (! str_contains($e->getMessage(), 'Credits insufficient')) {
+            \Illuminate\Support\Facades\Log::error('Ferramentas IA: '.$passo.' falhou (vídeo '.$f?->id.', '.$f?->ferramenta.'): '.\Illuminate\Support\Str::limit($e->getMessage(), 200), $contexto);
+
+            return;
+        }
+        \Illuminate\Support\Facades\Log::critical('Ferramentas IA: KIE.AI SEM CRÉDITOS ('.$passo.', vídeo '.$f?->id.'). Carregar em kie.ai.', $contexto);
+        self::avisarSemCreditos();
+    }
+
+    /**
+     * kie.ai out of credits: an email to the admins (or ALERTAS_EMAIL), at most once an hour while it lasts (user,
+     * 2026-11-28). Never throws: the customer's refund must still happen.
+     */
+    public static function avisarSemCreditos(): void
+    {
+        if (! \Illuminate\Support\Facades\Cache::add('ferramentas:kie-sem-creditos', true, now()->addHour())) {
+            return;
+        }
+        $para = array_filter(explode(',', (string) config('contentmachine.ferramentas.alertas_email')))
+            ?: User::where('is_admin', true)->pluck('email')->all();
+        try {
+            foreach ($para as $email) {
+                \Illuminate\Support\Facades\Mail::raw("O kie.ai ficou sem créditos às ".now()->format('H:i')." de ".now()->format('d/m').".\n\n"
+                    ."Enquanto não carregar, todas as imagens e vídeos das Ferramentas IA falham (os clientes recebem os créditos de volta, mas ficam sem o vídeo).\n\n"
+                    ."Carregar em: https://kie.ai\n\nNo registo: grep \"SEM CRÉDITOS\" storage/logs/laravel.log",
+                    fn ($m) => $m->to(trim($email))->subject('⚠️ Imocena: kie.ai sem créditos, as Ferramentas IA estão paradas'));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Ferramentas IA: alerta de créditos não enviado', ['erro' => $e->getMessage()]);
+        }
+    }
+
+    /** A tool's price in credits, its type of works' own when it has one (user, 2026-11-28: priced by worst-case cost). */
+    public static function creditos(string $ferramenta, ?string $obra = null): float|int
+    {
+        $t = self::lista()[$ferramenta];
+
+        return $t['obras'][$obra ?? '']['creditos'] ?? $t['creditos'];
+    }
+
+    /** A demo's price in credits. */
+    public static function creditosDemo(string $demo): float|int
+    {
+        $d = self::demos()[$demo];
+
+        return self::creditos($d['ferramenta'], $d['ferramenta'] === 'remodelacao' ? substr($demo, strlen('remodelacao-')) : null);
+    }
+
+    /** A demo's link to its tool (the remodel's with its type of works chosen). */
+    public static function linkDemo(string $demo): string
+    {
+        $d = self::demos()[$demo];
+
+        return route('ferramentas.nova', [$d['ferramenta'], ...($d['ferramenta'] === 'remodelacao' ? ['obra' => substr($demo, strlen('remodelacao-'))] : [])]);
+    }
+
+    /** A tool's demo key: the remodel's follows its type of works. */
+    public static function demoDe(string $ferramenta, ?string $obra = null): string
+    {
+        return $ferramenta === 'remodelacao' ? 'remodelacao-'.($obra ?: 'interior') : $ferramenta;
+    }
+
+    /** A demo's clip and poster URLs (null when not made yet). */
+    public static function exemplo(string $demo): array
+    {
+        $f = fn (string $ext) => is_file(public_path("exemplos-ia/{$demo}.{$ext}")) ? asset("exemplos-ia/{$demo}.{$ext}") : null;
 
         return ['video' => $f('mp4'), 'poster' => $f('jpg')];
     }
@@ -139,7 +255,7 @@ class Ferramentas
     public function iniciar(FerramentaIa $f): bool
     {
         $user = $f->user;
-        $n = $f->tipo()['creditos'];
+        $n = $f->preco();
         $ok = DB::transaction(function () use ($f, $user, $n) {
             $semCusto = $user->is_admin || $user->imoplantaGratis();
             if (! FerramentaIa::whereKey($f->id)->where('estado', FerramentaIa::RASCUNHO)->lockForUpdate()->exists()) {
@@ -206,10 +322,10 @@ class Ferramentas
         return true;
     }
 
-    /** The side move's direction (esquerda|direita), chosen on the draft: its end frame is built for it. */
+    /** A camera move's direction (the tool's `direcao` keys), chosen on the draft: its end frame is built for it. */
     public function direcao(FerramentaIa $f, string $direcao): bool
     {
-        if (! ($f->tipo()['direcao'] ?? false) || ! in_array($direcao, ['esquerda', 'direita'], true)
+        if (! isset($f->tipo()['direcao'][$direcao])
             || $f->estado !== FerramentaIa::RASCUNHO) {   // the end frame is built for it: fixed once frames exist
             return false;
         }

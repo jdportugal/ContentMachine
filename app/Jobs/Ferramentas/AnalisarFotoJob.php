@@ -4,6 +4,7 @@ namespace App\Jobs\Ferramentas;
 
 use App\Jobs\Concerns\RunsInProject;
 use App\Models\FerramentaIa;
+use App\Services\Ferramentas\Ferramentas;
 use App\Services\Costs\CostLedger;
 use App\Services\Ferramentas\Analista;
 use Illuminate\Bus\Queueable;
@@ -35,7 +36,7 @@ class AnalisarFotoJob implements ShouldQueue
         try {
             $analise = $analista->analisar($f);
         } catch (\Throwable $e) {
-            report($e);
+            Ferramentas::registarFalha('análise da fotografia', $f, $e);
             $analise = ['estado' => 'falhou'];
         } finally {
             $custos->contexto(null, null);

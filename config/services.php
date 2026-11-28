@@ -73,6 +73,11 @@ return [
 
     // Clip Generator — LOCAL, standalone engine (ffmpeg + Whisper), with no
     // external API. Reimplements the logic of the Flask "ShortsCreator" service.
+    // Ferramentas IA: the python with OpenCV that puts AI frames back on the photo's camera (scripts/alinhar.py)
+    'ferramentas' => [
+        'python' => env('FERRAMENTAS_PYTHON', 'python3'),
+    ],
+
     'shorts' => [
         'ffmpeg' => env('FFMPEG_BINARY', 'ffmpeg'),
         'ffprobe' => env('FFPROBE_BINARY', 'ffprobe'),

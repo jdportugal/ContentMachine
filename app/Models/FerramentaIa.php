@@ -57,10 +57,13 @@ class FerramentaIa extends Model
         return $this->tipo()['ai'];
     }
 
-    /** The side move's direction: direita unless the customer chose esquerda. */
+    /** A camera move's direction (the tool's `direcao` keys): the customer's, else direita / the first one. */
     public function direcao(): string
     {
-        return ($this->opcoes['direcao'] ?? null) === 'esquerda' ? 'esquerda' : 'direita';
+        $opcoes = array_keys($this->tipo()['direcao'] ?? []);
+        $escolha = $this->opcoes['direcao'] ?? null;
+
+        return in_array($escolha, $opcoes, true) ? $escolha : (in_array('direita', $opcoes, true) || ! $opcoes ? 'direita' : $opcoes[0]);
     }
 
     /** The remodel's type of works (Ferramentas::lista()['remodelacao']['obras']): interior unless chosen. Null for other tools. */
@@ -93,6 +96,12 @@ class FerramentaIa extends Model
     public function fotoNaoIdeal(): bool
     {
         return ($this->analise['estado'] ?? null) === 'feito' && ! ($this->analise['adequada'] ?? true);
+    }
+
+    /** What this video costs in credits: its tool's, or its type of works' (Ferramentas::creditos). */
+    public function preco(): float|int
+    {
+        return \App\Services\Ferramentas\Ferramentas::creditos($this->ferramenta, $this->obra());
     }
 
     public function edicoesRestantes(): int

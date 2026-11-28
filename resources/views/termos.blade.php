@@ -39,7 +39,8 @@
             <li class="{{ $li }}"><strong class="text-ivory">Vídeo Imocena</strong> (a partir de um anúncio): 1 crédito.</li>
             <li class="{{ $li }}"><strong class="text-ivory">Imoplanta</strong>: {{ $c::IMOPLANTA }} créditos por imóvel.</li>
             @foreach ($ferramentas as $f)
-                <li class="{{ $li }}"><strong class="text-ivory">{{ $f['nome'] }}</strong> (Ferramentas IA): {{ $c::rotulo($f['creditos'], false) }}.</li>
+                @php $precos = array_unique(array_merge([$f['creditos']], array_column($f['obras'] ?? [], 'creditos'))); sort($precos); @endphp
+                <li class="{{ $li }}"><strong class="text-ivory">{{ $f['nome'] }}</strong> (Ferramentas IA): {{ count($precos) > 1 ? $c::txt(reset($precos)).' a '.$c::rotulo(end($precos), false).', conforme a obra' : $c::rotulo($f['creditos'], false) }}.</li>
             @endforeach
         </ul>
         <p class="{{ $p }}">Os créditos podem ser usados em frações de 0,1. Os packs:</p>

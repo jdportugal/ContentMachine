@@ -62,12 +62,19 @@ class FerramentasTest extends TestCase
     {
         config(['services.kie.key' => 'kie-test', 'services.kie.base_url' => 'https://api.kie.ai']);
         $png = UploadedFile::fake()->image('x.png', 1376, 768)->getContent();
+        static $mp4;   // a real clip: works clips are joined by ffmpeg
+        if (! $mp4) {
+            $c = sys_get_temp_dir().'/kie-clip-'.uniqid().'.mp4';
+            exec("ffmpeg -v error -y -f lavfi -i testsrc=s=160x90:d=1:r=24 -f lavfi -i sine=d=1 -shortest $c");
+            $mp4 = file_get_contents($c);
+            unlink($c);
+        }
         Http::fake([
             'kieai.redpandaai.co/*' => Http::response(['data' => ['downloadUrl' => 'https://files.test/up.png']]),
             'api.kie.ai/api/v1/jobs/createTask' => fn (HttpRequest $r) => Http::response(['data' => ['taskId' => str_contains($r['model'], 'kling') ? 'tv' : 'ti']]),
             'api.kie.ai/api/v1/jobs/recordInfo?taskId=tv' => Http::response(['data' => $falha ? ['state' => 'fail'] : ['state' => 'success', 'model' => 'kling-3.0/video', 'resultJson' => json_encode(['resultUrls' => ['https://files.test/clip.mp4']])]]),
             'api.kie.ai/api/v1/jobs/recordInfo*' => Http::response(['data' => $falha ? ['state' => 'fail'] : ['state' => 'success', 'model' => 'nano-banana-pro', 'resultJson' => json_encode(['resultUrls' => ['https://files.test/quadro.png']])]]),
-            'files.test/clip.mp4' => Http::response('mp4'),
+            'files.test/clip.mp4' => Http::response($mp4),
             'files.test/*' => Http::response($png),
         ]);
     }
@@ -177,7 +184,7 @@ class FerramentasTest extends TestCase
         $this->assertNotNull($f->original);
     }
 
-    public function test_three_frame_changes_then_no_more_and_a_failed_change_is_not_counted(): void
+    public function test_two_frame_changes_then_no_more_and_a_failed_change_is_not_counted(): void
     {
         Queue::fake();
         $f = $this->video($this->cliente(), FerramentaIa::A_APROVAR);
@@ -185,14 +192,15 @@ class FerramentasTest extends TestCase
 
         $this->assertFalse($s->alterar($f, 'fim', '   '));   // nothing asked
         $this->assertFalse($s->alterar($f, 'original', 'x'));   // the customer's photo is never changed
-        foreach (range(1, 3) as $i) {
+        $this->assertSame(2, config('contentmachine.ferramentas.editar_imagem'));
+        foreach (range(1, 2) as $i) {
             $this->assertTrue($s->alterar($f->refresh(), 'fim', 'mais alto'));
             $s->devolverAlteracao($f->refresh(), 'x');   // failed: given back
             $this->assertSame($i - 1, $f->refresh()->edicoes);
             $this->assertTrue($s->alterar($f->refresh(), 'inicio', 'mais alto'));
             FerramentaIa::whereKey($f->id)->update(['estado' => FerramentaIa::A_APROVAR]);
         }
-        $this->assertSame(3, $f->refresh()->edicoes);
+        $this->assertSame(2, $f->refresh()->edicoes);
         $this->assertFalse($s->alterar($f, 'fim', 'outra'));
     }
 
@@ -209,13 +217,13 @@ class FerramentasTest extends TestCase
 
         $f->refresh();
         $this->assertSame(FerramentaIa::PRONTO, $f->estado);
-        $this->assertSame('mp4', Storage::disk('local')->get($f->video));
+        $this->assertStringContainsString('ftyp', Storage::disk('local')->get($f->video));
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
             && count($r['input']['image_urls']) === 2 && $r['input']['duration'] === '10' && $r['input']['sound'] === false && $r['input']['mode'] === 'pro');
         $this->assertSame([['video', 1.01]], $this->custos($f));
     }
 
-    public function test_two_new_versions_of_the_clip_and_a_failed_one_keeps_the_video(): void
+    public function test_one_new_version_of_the_clip_and_a_failed_one_keeps_the_video(): void
     {
         $f = $this->video($this->cliente(), FerramentaIa::PRONTO);
         $f->update(['inicio' => $f->original, 'fim' => $f->original, 'video' => 'antigo.mp4']);
@@ -229,9 +237,8 @@ class FerramentasTest extends TestCase
         $this->assertSame([FerramentaIa::PRONTO, 'antigo.mp4', 0], [$f->estado, $f->video, $f->refeitos]);
         Http::assertSentCount(2 + 2 * 2);   // 2 uploads, then 2 Kling attempts (submit + poll), not 4
 
+        $this->assertSame(1, config('contentmachine.ferramentas.refazer_video'));
         $this->assertTrue(app(Ferramentas::class)->refazer($f, ''));
-        FerramentaIa::whereKey($f->id)->update(['estado' => FerramentaIa::PRONTO]);
-        $this->assertTrue(app(Ferramentas::class)->refazer($f->refresh(), ''));
         FerramentaIa::whereKey($f->id)->update(['estado' => FerramentaIa::PRONTO]);
         $this->assertFalse(app(Ferramentas::class)->refazer($f->refresh(), ''));
     }
@@ -291,7 +298,7 @@ class FerramentasTest extends TestCase
 
         \Livewire\Livewire::actingAs($u)->test(\App\Livewire\Ferramentas\Video::class, ['video' => $f])->call('criar');
         $this->assertSame(FerramentaIa::A_ENQUADRAR, $f->refresh()->estado);
-        $this->assertSame(1, $u->creditos());
+        $this->assertSame(1, $u->creditos());   // the drone: 2 credits
     }
 
     public function test_a_photo_that_is_not_ideal_is_flagged_with_why_and_the_customer_can_still_go_on(): void
@@ -437,6 +444,70 @@ class FerramentasTest extends TestCase
         rmdir($dir);
     }
 
+    public function test_the_walk_grows_near_things_much_more_than_far_ones_unlike_a_zoom(): void
+    {
+        $dir = sys_get_temp_dir().'/avancar-'.uniqid();
+        mkdir($dir);
+        mt_srand(7);   // random vertical stripes; depth: left half far (black), right half near (white)
+        $foto = imagecreatetruecolor(1600, 1000);
+        for ($x = 0; $x < 1600; $x += 6) {   // 6 px wide: the walk stretches them, 1 px ones blur the match
+            $v = mt_rand(0, 255);
+            imagefilledrectangle($foto, $x, 0, $x + 5, 999, ($v << 16) | ($v << 8) | $v);
+        }
+        imagepng($foto, "$dir/foto.png");
+        $prof = imagecreatetruecolor(1600, 1000);
+        imagefilledrectangle($prof, 800, 0, 1599, 999, 0xFFFFFF);
+        imagepng($prof, "$dir/prof.png");
+        $desvio = function (string $fim, string $inicio, int $x0) {   // how far the stripes at $x0 moved, on the middle row
+            $a = imagecreatefrompng($inicio);
+            $b = imagecreatefrompng($fim);
+            $melhor = [PHP_INT_MAX, 0];
+            foreach (range(-90, 90) as $d) {
+                $e = 0;
+                foreach (range($x0, $x0 + 120, 2) as $x) {
+                    $e += abs((imagecolorat($a, $x, 420) & 0xFF) - (imagecolorat($b, $x + $d, 420) & 0xFF));
+                }
+                $melhor = min($melhor, [$e, $d]);
+            }
+
+            return $melhor[1];
+        };
+
+        [$inicio, $fim] = \App\Services\Ferramentas\Realizador::avancar("$dir/foto.png", "$dir/prof.png", true, $dir);
+        $this->assertSame([1344, 840], array_slice(getimagesize($fim), 0, 2));   // both frames: the same centred window
+        $this->assertSame([1344, 840], array_slice(getimagesize($inicio), 0, 2));
+        // the window's centre is x 672; stripes ~400 px left of it (far) and ~300 px right of it (near)
+        $longe = $desvio($fim, $inicio, 210);
+        $perto = $desvio($fim, $inicio, 920);
+        $this->assertLessThan(0, $longe);   // forward: everything spreads out from the centre
+        $this->assertGreaterThan(0, $perto);
+        $this->assertGreaterThan(2 * abs($longe) / 400, $perto / 300);   // per pixel from the centre, near moves 2x+ more: no zoom
+
+        [$inicio, $fim] = \App\Services\Ferramentas\Realizador::avancar("$dir/foto.png", "$dir/prof.png", false, $dir);
+        $this->assertLessThan(0, $desvio($fim, $inicio, 920));   // back: it gathers in to the centre
+        array_map('unlink', glob("$dir/*"));
+        rmdir($dir);
+    }
+
+    public function test_the_walk_is_a_5_second_silent_clip_forward_or_back(): void
+    {
+        $this->kie();
+        $u = $this->cliente(1);
+        $f = app(Ferramentas::class)->criar($u, 'avanco', $this->foto());
+        $this->assertSame('frente', $f->direcao());
+        $this->assertFalse(app(Ferramentas::class)->direcao($f, 'esquerda'));   // not this tool's
+        $this->assertTrue(app(Ferramentas::class)->direcao($f, 'tras'));
+        Queue::fake();
+        app(Ferramentas::class)->iniciar($f->refresh());
+        app()->call([new FerramentaFramesJob($f->id, false), 'handle']);
+        $this->assertSame(FerramentaIa::A_APROVAR, $f->refresh()->estado);
+        app(Ferramentas::class)->aprovar($f);
+        app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
+            && $r['input']['duration'] === '5' && $r['input']['sound'] === false
+            && str_contains($r['input']['prompt'], 'travels backward through the space'));
+    }
+
     public function test_the_cleanup_is_a_photo_tidied_with_the_customers_list_and_no_video(): void
     {
         $this->kie();
@@ -486,7 +557,7 @@ class FerramentasTest extends TestCase
         $this->assertSame(FerramentaIa::PRONTO, $f->refresh()->estado);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
             && $r['input']['sound'] === true && str_contains($r['input']['prompt'], 'timelapse'));
-        $this->assertSame([['frames', 0.09], ['video', 1.51]], $this->custos($f));
+        $this->assertSame([['frames', 0.09], ...array_fill(0, 7, ['video', 0.09]), ...array_fill(0, 8, ['video', 0.453])], $this->custos($f));   // 7 stages drawn, then 8 steps of 3 s (played 2x: 12 s)
     }
 
     public function test_a_ruin_is_rebuilt_on_its_footprint_from_the_customers_description_in_a_longer_clip(): void
@@ -509,8 +580,9 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->aprovar($f->refresh()));
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && str_contains($r['input']['prompt'], 'the bare structure, in full view'));
-        $this->assertEqualsWithDelta(15 * 0.151, $this->custos($f)[1][1], 0.001);   // a build from the ground: 15 s
+            && str_contains($r['input']['prompt'], 'inside the old walls'));
+        $video = array_sum(array_column(array_filter($this->custos($f), fn ($c) => $c[0] === 'video'), 1));
+        $this->assertEqualsWithDelta(9 * 0.09 + 30 * 0.151, $video, 0.001);   // a build from the ground: 9 stages drawn, 10 steps of 3 s played 2x (15 s)
     }
 
     public function test_the_new_build_draws_the_customers_house_on_their_plot_and_builds_it_in_order(): void
@@ -532,7 +604,9 @@ class FerramentasTest extends TestCase
         $this->assertTrue(app(Ferramentas::class)->aprovar($f));
         app()->call([new FerramentaVideoJob($f->id, false), 'handle']);
         Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'kling-3.0/video'
-            && $r['input']['sound'] === true && $r['input']['duration'] === '15' && str_contains($r['input']['prompt'], 'the ground is prepared'));
+            && $r['input']['sound'] === true && $r['input']['duration'] === '3' && str_contains($r['input']['prompt'], 'digs the foundation trenches'));
+        Http::assertSent(fn (HttpRequest $r) => str_contains($r->url(), 'createTask') && $r['model'] === 'nano-banana-pro'
+            && str_contains($r['input']['prompt'], 'at an EARLIER moment of the works'));   // the stages drawn back from the approved house
     }
 
     public function test_the_plan_is_read_into_3d_rendered_in_the_browser_made_real_and_built_in_the_clip(): void
@@ -587,7 +661,50 @@ class FerramentasTest extends TestCase
 
         app(Ferramentas::class)->devolver($f, 'falhou');
         $this->assertSame(1, $u->creditos());   // whole again
-        $g = app(Ferramentas::class)->criar($u, 'drone', $this->foto());
-        $this->assertFalse(app(Ferramentas::class)->iniciar($g));   // the drone's 2 credits: not enough
+        $g = app(Ferramentas::class)->criar($u, 'construcao', $this->foto());
+        $this->assertFalse(app(Ferramentas::class)->iniciar($g));   // a build's 3 credits: not enough
+    }
+
+    public function test_each_type_of_works_has_its_own_price(): void
+    {
+        Queue::fake();
+        $u = User::factory()->cliente()->create();
+        DB::table('compras')->insert(['user_id' => $u->id, 'sessao' => 'cs_obras', 'total' => 10000, 'videos' => 10, 'created_at' => now(), 'updated_at' => now()]);
+        $gastou = function (string $obra) use ($u) {
+            $antes = $u->creditos();
+            $f = app(Ferramentas::class)->criar($u, 'remodelacao', $this->foto());
+            app(Ferramentas::class)->obra($f, $obra);
+            $this->assertTrue(app(Ferramentas::class)->iniciar($f->refresh()));
+
+            return round($antes - $u->creditos(), 1);
+        };
+        $this->assertSame([2.5, 2.0, 3.0], [$gastou('interior'), $gastou('exterior'), $gastou('ruina')]);
+        $this->assertSame([0.5, 0.5, 2, 1], [Ferramentas::creditos('lateral'), Ferramentas::creditos('avanco'), Ferramentas::creditos('drone'), Ferramentas::creditos('planta')]);
+        $this->assertSame(2, Ferramentas::creditosDemo('remodelacao-exterior'));
+    }
+
+    public function test_a_stopped_job_is_logged_with_its_video_and_refunded_and_no_kie_credits_is_critical(): void
+    {
+        Queue::fake();
+        \Illuminate\Support\Facades\Log::spy();
+        $u = $this->cliente(1);
+        $f = $this->video($u);
+        app(Ferramentas::class)->iniciar($f);
+        $antes = $u->creditos();
+
+        (new FerramentaFramesJob($f->id, false))->failed(new \RuntimeException('Job has timed out'));   // killed by the worker
+        $this->assertSame(FerramentaIa::RASCUNHO, $f->refresh()->estado);
+        $this->assertSame($antes + 2, $u->creditos());   // the drone's 2 credits back
+        \Illuminate\Support\Facades\Log::shouldHaveReceived('error')->withArgs(fn ($m, $c) => str_contains($m, 'Ferramentas IA') && $c['video'] === $f->id && $c['ferramenta'] === 'drone');
+
+        config(['mail.default' => 'array']);
+        User::factory()->create(['is_admin' => true, 'email' => 'admin@imocena.test']);
+        Ferramentas::registarFalha('vídeo', $f, new \RuntimeException('kie.ai: Credits insufficient : top up [code 402]'));
+        Ferramentas::registarFalha('vídeo', $f, new \RuntimeException('kie.ai: Credits insufficient : top up [code 402]'));
+        \Illuminate\Support\Facades\Log::shouldHaveReceived('critical')->withArgs(fn ($m) => str_contains($m, 'KIE.AI SEM CRÉDITOS'));
+        $enviados = app('mailer')->getSymfonyTransport()->messages();
+        $this->assertCount(1, $enviados);   // once an hour, not once per failed video
+        $this->assertSame('admin@imocena.test', $enviados[0]->getEnvelope()->getRecipients()[0]->getAddress());
+        $this->assertStringContainsString('kie.ai sem créditos', $enviados[0]->getOriginalMessage()->getSubject());
     }
 }

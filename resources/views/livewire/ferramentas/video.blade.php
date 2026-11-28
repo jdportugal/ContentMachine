@@ -6,7 +6,7 @@
     $passo = ['rascunho' => 0, 'a_enquadrar' => 1, 'a_aprovar' => 1, 'a_animar' => 2, 'pronto' => 2][$estado];
     $ficheiro = fn (string $qual, array $q = []) => route('ferramentas.ficheiro', [$v->id, $qual, ...$q, 'v' => substr(md5((string) $v->{$qual}), 0, 8)]);
     $quadrosIa = $tipo['ai'];
-    $custo = $tipo['creditos'];
+    $custo = \App\Services\Ferramentas\Ferramentas::creditos($ferramenta, $obra);   // the remodel: its type of works' price
     $semVideos = $disponiveis !== null && $disponiveis < $custo;   // fewer credits than this tool costs
     $botao = 'min-h-[52px] px-7 rounded-full bg-coral text-navy text-[15px] font-semibold hover:brightness-105 disabled:opacity-60';
     $secundario = 'min-h-11 px-5 rounded-full border border-[#D9D5CC] text-navy text-sm font-semibold hover:bg-[#EDEAE3] disabled:opacity-60';
@@ -40,6 +40,18 @@
     @endif
 
     @if ($estado === 'rascunho')
+        {{-- what this tool makes: its demo (the remodel's follows the chosen type of works) --}}
+        @php $demo = \App\Services\Ferramentas\Ferramentas::demoDe($ferramenta, $obra); $ex = \App\Services\Ferramentas\Ferramentas::exemplo($demo); @endphp
+        @if ($ex['video'])
+            <figure wire:key="demo-{{ $demo }}" class="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center rounded-2xl bg-white border border-[#E4E1DA] p-4 md:p-5">
+                <video src="{{ $ex['video'] }}" poster="{{ $ex['poster'] }}" autoplay muted loop playsinline class="w-full aspect-video object-cover rounded-xl bg-navy" aria-label="Exemplo: {{ \App\Services\Ferramentas\Ferramentas::demos()[$demo]['nome'] }}"></video>
+                <figcaption class="text-sm text-[#4A5263] flex flex-col gap-1.5">
+                    <span class="text-[11px] tracking-[.25em] text-[#0478A0]">EXEMPLO · {{ mb_strtoupper(\App\Services\Ferramentas\Ferramentas::formato($ferramenta)) }}</span>
+                    <span class="font-semibold text-navy">{{ \App\Services\Ferramentas\Ferramentas::demos()[$demo]['nome'] }}</span>
+                    <span>{{ \App\Services\Ferramentas\Ferramentas::demos()[$demo]['texto'] }}</span>
+                </figcaption>
+            </figure>
+        @endif
         <form wire:submit="criar" class="mt-6 rounded-2xl bg-white border border-[#E4E1DA] p-7 md:p-8 flex flex-col gap-5">
             @if ($tipo['obras'] ?? false)
                 {{-- the type of works first: it says what the photo should show and what gets built --}}
@@ -98,8 +110,8 @@
             @if ($tipo['direcao'] ?? false)
                 <fieldset class="flex flex-wrap items-center gap-3 text-sm text-[#4A5263]">
                     <legend class="sr-only">Direção do movimento</legend>
-                    <span class="font-semibold text-ivory">A câmara desliza</span>
-                    @foreach (['esquerda' => '← Para a esquerda', 'direita' => 'Para a direita →'] as $valor => $rotulo)
+                    <span class="font-semibold text-ivory">A câmara move-se</span>
+                    @foreach ($tipo['direcao'] as $valor => $rotulo)
                         <label class="inline-flex items-center gap-2 px-4 min-h-11 rounded-full border cursor-pointer {{ $direcao === $valor ? 'border-coral text-navy font-semibold bg-[#FDEDEB]' : 'border-[#D9D5CC]' }}">
                             <input type="radio" wire:model.live="direcao" value="{{ $valor }}" class="sr-only"> {{ $rotulo }}
                         </label>
@@ -131,7 +143,7 @@
                     <p>Pode trocar a fotografia acima, ou continuar com esta.</p>
                 </div>
             @elseif (($v?->analise['estado'] ?? null) === 'feito')
-                <p class="rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">Boa fotografia para {{ mb_strtolower($tipo['nome']) }}.</p>
+                <p class="rounded-xl bg-[#E3F0E7] text-[#22603A] px-5 py-3 text-sm font-medium">✓ Boa fotografia para {{ $comVideo ? 'este vídeo' : 'limpar' }}.</p>
             @endif
             @if (! $semVideos && $v)
                 {{-- AI results vary (user, 2026-11-27): said before any credit is spent, and in the terms (ponto 5) --}}
@@ -143,8 +155,9 @@
                     </button>
                     <p class="text-xs text-[#6B7385]">
                         {{ $disponiveis === null ? 'Esta conta não paga.' : 'Usa '.\App\Services\Pagamentos\Creditos::txt($custo).' dos seus '.\App\Services\Pagamentos\Creditos::txt($disponiveis).' créditos de vídeo.' }}
-                        @if ($comVideo) Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações às imagens e {{ config('contentmachine.ferramentas.refazer_video') }} novas versões do vídeo.
-                        @else Inclui {{ config('contentmachine.ferramentas.editar_imagem') }} alterações à fotografia. @endif
+                        @php $ed = config('contentmachine.ferramentas.editar_imagem'); $rf = config('contentmachine.ferramentas.refazer_video'); @endphp
+                        @if ($comVideo) Inclui {{ $ed }} {{ $ed === 1 ? 'alteração' : 'alterações' }} às imagens e {{ $rf }} {{ $rf === 1 ? 'nova versão' : 'novas versões' }} do vídeo.
+                        @else Inclui {{ $ed }} {{ $ed === 1 ? 'alteração' : 'alterações' }} à fotografia. @endif
                     </p>
                 </div>
             @endif
@@ -213,7 +226,7 @@
                     <span class="text-xs text-[#6B7385]">Restam {{ $v->edicoesRestantes() }} {{ $v->edicoesRestantes() === 1 ? 'alteração' : 'alterações' }}. A sua fotografia nunca é alterada.</span>
                 </div>
             @else
-                <p class="text-sm text-[#6B7385]">Já usou as {{ config('contentmachine.ferramentas.editar_imagem') }} alterações. Escolha acima a versão que prefere.</p>
+                <p class="text-sm text-[#6B7385]">Já usou {{ config('contentmachine.ferramentas.editar_imagem') === 1 ? 'a alteração' : 'as '.config('contentmachine.ferramentas.editar_imagem').' alterações' }}. Escolha acima a versão que prefere.</p>
             @endif
         </form>
         <div class="mt-6 flex flex-wrap items-center gap-4">
@@ -259,7 +272,7 @@
                     <span class="text-xs text-[#6B7385]">Restam {{ $v->refeitosRestantes() }} {{ $v->refeitosRestantes() === 1 ? 'nova versão' : 'novas versões' }}, sem custo. Usa as mesmas imagens.</span>
                 </div>
             @else
-                <p class="text-sm text-[#6B7385]">Já usou as {{ config('contentmachine.ferramentas.refazer_video') }} novas versões deste vídeo. Para outro resultado, comece um vídeo novo.</p>
+                <p class="text-sm text-[#6B7385]">Já usou {{ config('contentmachine.ferramentas.refazer_video') === 1 ? 'a nova versão' : 'as '.config('contentmachine.ferramentas.refazer_video').' novas versões' }} deste vídeo. Para outro resultado, comece um vídeo novo.</p>
             @endif
         </form>
     @endif

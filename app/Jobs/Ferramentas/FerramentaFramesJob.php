@@ -52,12 +52,23 @@ class FerramentaFramesJob implements ShouldQueue
             }
             $f->refresh()->update([...$fotos, ...$novos, 'versoes' => $versoes, 'estado' => FerramentaIa::A_APROVAR, 'erro' => null]);
         } catch (\Throwable $e) {
-            report($e);
+            Ferramentas::registarFalha($this->alteracao ? 'alteração de imagem' : 'imagens', $f, $e);
             $this->alteracao
                 ? $ferramentas->devolverAlteracao($f, 'Não conseguimos fazer esta alteração. Não foi descontada; pode pedir de novo.')
                 : $ferramentas->devolver($f, 'Não conseguimos criar as imagens. O vídeo foi devolvido à sua conta; pode tentar de novo.');
         } finally {
             $custos->contexto(null, null);
+        }
+    }
+
+    /** Killed (too long) or crashed outside handle(): logged, and the customer is given back what it cost, as above. */
+    public function failed(\Throwable $e): void
+    {
+        Ferramentas::registarFalha($this->alteracao ? 'alteração de imagem (parada)' : 'imagens (parada)', $this->video, $e);
+        if ($f = FerramentaIa::find($this->video)) {
+            $this->alteracao
+                ? app(Ferramentas::class)->devolverAlteracao($f, 'Não conseguimos fazer esta alteração. Não foi descontada; pode pedir de novo.')
+                : app(Ferramentas::class)->devolver($f, 'Não conseguimos criar as imagens. O vídeo foi devolvido à sua conta; pode tentar de novo.');
         }
     }
 }

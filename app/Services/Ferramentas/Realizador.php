@@ -121,6 +121,27 @@ class Realizador
                 .'%1$s at a steady pace from the first frame to the last frame, never turning, with natural parallax: things '
                 .'near the camera pass faster than the walls behind. Every object stays exactly as it is; the same light '
                 .'throughout. One continuous move, no cuts, no zoom.',
+            'sentidos' => ['esquerda' => 'left', 'direita' => 'right'],
+            'som' => null,
+        ],
+        // The walk in or out (user, 2026-11-28: "it cannot look like we are zooming in and out, but rather actually
+        // moving"): built like the side move. A zoom magnifies everything alike; a camera that moves forward makes the
+        // near things grow much more than the far wall. So the end frame is the photo pushed out from its centre by its
+        // depth (Realizador::avancar), the AI cleans the warp, and Kling travels to it.
+        'avanco' => [
+            'analise' => 'You check a real-estate photo before it is turned into an AI "gimbal walk" video: the camera travels '
+                .'slowly forward into the space, or back out of it, from this exact view, like a gimbal shot in slow motion. It '
+                .'works for interiors and exteriors. A GOOD start: a sharp, well-lit, level photo with depth, things near the '
+                .'camera in front of a background further away (the parallax is what makes it a real move). PROBLEMS to look '
+                .'for: a floor plan, drawing or screenshot; a close-up of a flat wall or of one object, with nothing behind it; '
+                .'people or animals in the picture (they freeze or warp); blurry, very dark or heavily filtered; strongly '
+                .'tilted; a collage, or text and logos over the picture; a very wide panorama.',
+            'video' => 'Slow dolly %1$s: a smooth gimbal shot in slow motion; the camera itself travels %1$s through the space '
+                .'at a steady walking pace from the first frame to the last frame, never turning and never zooming, with '
+                .'natural parallax: things near the camera grow or shrink and slide past the edges much faster than the walls '
+                .'and objects far away, which change size only a little. Every object stays exactly as it is; the same light '
+                .'throughout. One continuous move, no cuts.',
+            'sentidos' => ['frente' => 'forward', 'tras' => 'backward'],
             'som' => null,
         ],
         // The remodel: the photo is the start, the AI draws the same room renovated (the architecture kept, every
@@ -163,6 +184,24 @@ class Realizador
                 .'pass. One continuous shot, no cuts.',
             'som' => ' Sound, sped up with the picture: scraping, hammering, drills, a saw, tiles and planks set down, '
                 .'brushes and rollers, footsteps; it calms down at the end to a quiet, finished room. No music, no speech.',
+            'etapas' => [
+                ['segundos' => 3, 'demolir' => true, 'quadro' => 'the old tiles knocked off the top half of one wall, showing grey plaster; two workers at it, one with a hammer and chisel, one gathering broken tiles into a bucket; everything else as before',
+                    'video' => 'the workers knock the old tiles off one wall with a hammer and chisel, a few at a time'],
+                ['segundos' => 3, 'demolir' => true, 'quadro' => 'every old wall tile knocked off (bare grey plaster and patches of brick), the old fittings carried out, only capped pipe ends left in the wall; broken tiles and rubble on the floor; a worker carrying an old fitting towards the door',
+                    'video' => 'the workers knock off the rest of the tiles and carry the old fittings out one by one'],
+                ['segundos' => 3, 'demolir' => true, 'quadro' => 'the rubble shovelled away and the floor swept bare down to the grey screed; a worker sweeping, another wheeling a full wheelbarrow towards the door',
+                    'video' => 'the workers shovel the rubble into a wheelbarrow, wheel it out and sweep the floor'],
+                ['segundos' => 3, 'quadro' => 'the walls given a fresh smooth coat of grey plaster, the floor bare screed, none of the new tiles yet; two workers carrying the biggest new fitting into the room between them (if the finished room has a bath, a shower tray or a long kitchen unit, that one), holding it at both ends a little above the floor near its place, about to set it down; every other new fitting not in yet',
+                    'video' => 'the workers plaster the walls with trowels, patch by patch, then two of them carry the new fitting in through the door between them'],
+                ['segundos' => 3, 'quadro' => 'the biggest new fitting set in its place; the new large floor tiles laid on half of the floor, the rest bare screed, a few tiles waiting in an open box; one worker on his knees setting a tile on a bed of adhesive',
+                    'video' => 'the two workers lower the new fitting into its place and fix it, then a worker lays the floor tiles one by one, row by row'],
+                ['segundos' => 3, 'quadro' => 'the whole floor tiled; the new wall tiles laid up to half their height on every wall; a worker pressing a wall tile into place',
+                    'video' => 'the workers finish the floor and lay the wall tiles row by row from the bottom up'],
+                ['segundos' => 3, 'quadro' => 'all the new wall tiles laid up to the finished height and the walls above and the ceiling painted; the other new fittings not in yet, only pipe ends, except one: a worker walking in carrying it in his arms towards its place; tile boxes stacked in a corner',
+                    'video' => 'the workers lay the rest of the wall tiles row by row, paint the walls above with rollers, and one worker carries a new fitting in through the door in his arms'],
+                ['segundos' => 3, 'quadro' => null,
+                    'video' => 'the worker sets the fitting down in its place and fixes it, the workers carry in and fix the remaining small fittings, fit the taps and lights, take the boxes away, wipe everything clean, and walk out of the frame in the last second'],
+            ],
             // the type of works (opcoes.obra, user 2026-11-27): each laid over the interior prompts above. Outside there
             // is rarely a picture of the result, so the photo itself says where the building goes (the ruin's footprint,
             // a cleared or levelled patch) and the camera, the street and the neighbours are pinned as they are; the
@@ -198,6 +237,20 @@ class Realizador
                         .'continuous shot, no cuts.',
                     'som' => ' Sound, sped up with the picture: scaffolding clanking, chisels and hammers, drills, trowels, a cement '
                         .'mixer, footsteps, street sounds; it calms down at the end to a quiet street. No music, no speech.',
+                    'etapas' => [
+                        ['segundos' => 3, 'demolir' => true, 'quadro' => 'scaffolding put up along the whole facade; workers in hard hats on it fixing the last boards; the house itself still as before',
+                            'video' => 'the workers put up the scaffolding piece by piece along the facade'],
+                        ['segundos' => 3, 'demolir' => true, 'quadro' => 'the old render chipped off the walls behind the scaffolding, bare stone and brick showing, rubble on the pavement; workers on the scaffolding with hammers',
+                            'video' => 'the workers chip the old render off the walls, section by section'],
+                        ['segundos' => 3, 'quadro' => 'the walls rendered again in fresh, unpainted grey render; a worker on the scaffolding spreading the last section with a trowel',
+                            'video' => 'the workers render the walls section by section with trowels'],
+                        ['segundos' => 3, 'quadro' => 'the old windows taken out and the new frames fitted in most openings, the roof half re-tiled with stacks of new tiles on it; workers on the roof and at a window',
+                            'video' => 'the workers take out the old windows and fit the new ones, and lay the new roof tiles row by row'],
+                        ['segundos' => 4, 'quadro' => 'the walls painted, every new window and door fitted, the roof finished; the scaffolding still up, workers starting to take its top boards down',
+                            'video' => 'the workers paint the walls with rollers, fit the last windows and finish the roof'],
+                        ['segundos' => 4, 'quadro' => null,
+                            'video' => 'the workers take the scaffolding down piece by piece, sweep the pavement and walk out of the frame in the last second'],
+                    ],
                 ],
                 'ruina' => [
                     'analise' => 'You check a photo before it is turned into an AI "ruin rebuild timelapse": from this photo the AI '
@@ -223,9 +276,31 @@ class Realizador
                     'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
                     'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. The sound old stone walls '
                         .'stay standing the whole time and the new building rises inside and on them. '.self::OBRA_DE_RAIZ,
-                    'som' => ' Sound, sped up with the picture: an excavator engine, stones and rubble tipped, a cement mixer, '
+                    'som' => ' Sound, sped up with the picture: digging, stones and rubble tipped, concrete being mixed, '
                         .'hammering, drills, a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end '
                         .'to a quiet street. No music, no speech.',
+                    'etapas' => [
+                        ['segundos' => 3, 'demolir' => true, 'quadro' => 'the weeds and loose rubble cleared from inside the old stone walls (the sound old walls still standing), the ground bare; a small yellow excavator working in the middle of the plot, away from the camera, and workers in hard hats and hi-vis vests clearing the last of it',
+                            'video' => 'the small excavator, staying in the middle of the plot, and the workers clear the weeds and rubble from inside the old walls'],
+                        ['segundos' => 3, 'quadro' => 'foundation trenches dug inside and along the old walls, soil piled beside them; the excavator digging the last trench',
+                            'video' => 'the small excavator, staying in the middle of the plot, digs the foundation trenches bucket by bucket'],
+                        ['segundos' => 3, 'quadro' => 'steel rebar cages laid in all the trenches; two workers lowering the last cage in',
+                            'video' => 'the workers carry the steel rebar cages and lay them in the trenches one by one'],
+                        ['segundos' => 3, 'quadro' => 'the foundations and the ground-floor slab poured, grey and smooth, rebar starter bars sticking up where the columns go; a concrete mixer, workers smoothing the last corner with a float',
+                            'video' => 'the workers pour the concrete from the mixer and spread and smooth the slab'],
+                        ['segundos' => 3, 'quadro' => 'wooden formwork boxes standing at every column position on the slab, rebar sticking out of their tops; workers nailing the last box',
+                            'video' => 'the workers build the wooden formwork boxes for the columns one by one'],
+                        ['segundos' => 3, 'quadro' => 'the formwork taken off: grey concrete columns standing; the upper slab\'s formwork laid on timber props between them, workers on top laying steel mesh',
+                            'video' => 'the workers strip the formwork, set up the timber props and lay the upper slab\'s formwork and mesh'],
+                        ['segundos' => 3, 'quadro' => 'the upper slab poured; the new block walls laid between the columns up to half the ground-floor height; masons laying blocks with trowels and mortar',
+                            'video' => 'the masons lay the blocks row by row between the columns'],
+                        ['segundos' => 3, 'quadro' => 'the walls built up to the top inside and on the old stone walls, the window and door openings empty, the roof beams on; scaffolding along the front with workers on it',
+                            'video' => 'the masons finish the walls row by row, the workers set the roof beams and put up the scaffolding'],
+                        ['segundos' => 3, 'quadro' => 'the roof covered with tiles, the windows and doors fitted, the new walls rendered and painted; workers starting to take the scaffolding down; the yard still bare earth with a few piles of material',
+                            'video' => 'the workers lay the roof tiles row by row, fit the windows and doors, and render and paint the walls'],
+                        ['segundos' => 3, 'quadro' => null,
+                            'video' => 'the workers take the last scaffolding down, carry the leftover material away, pave the yard, and in the last second the workers walk out of the frame'],
+                    ],
                 ],
             ],
         ],
@@ -253,9 +328,31 @@ class Realizador
                 .'watermarks.',
             'campo' => ' The client describes what is built: %s. Follow it (its use, size and style) within the plot.',
             'video' => 'Fast-motion construction timelapse from a fixed camera on a tripod. '.self::OBRA_DE_RAIZ,
-            'som' => ' Sound, sped up with the picture: an excavator engine, a concrete pump and mixer, hammering, drills, '
+            'som' => ' Sound, sped up with the picture: digging, concrete being poured, hammering, drills, '
                 .'a saw, trowels on blocks, scaffolding clanking, footsteps; it calms down at the end to a quiet, '
                 .'finished place. No music, no speech.',
+            'etapas' => [
+                ['segundos' => 3, 'quadro' => 'the ground cleared and levelled, the house outline marked with orange stakes and string; a small yellow excavator levelling the last patch in the middle of the plot, away from the camera, two workers in hard hats and hi-vis vests stretching the string',
+                    'video' => 'the small excavator, staying in the middle of the plot, levels the ground and the workers mark the outline with stakes and string'],
+                ['segundos' => 3, 'quadro' => 'foundation trenches dug along the outline, soil piled beside them; the excavator digging the last trench',
+                    'video' => 'the small excavator, staying in the middle of the plot, digs the foundation trenches along the string bucket by bucket; then it drives away out of the back of the plot'],
+                ['segundos' => 3, 'quadro' => 'steel rebar cages laid in all the trenches; two workers lowering the last cage in',
+                    'video' => 'the workers carry the steel rebar cages and lay them in the trenches one by one'],
+                ['segundos' => 3, 'quadro' => 'the foundations and the ground-floor slab poured, grey and smooth, rebar starter bars sticking up where the columns go; a concrete mixer, workers smoothing the last corner with a float',
+                    'video' => 'the workers pour the concrete from the mixer and spread and smooth the slab'],
+                ['segundos' => 3, 'quadro' => 'wooden formwork boxes standing at every column position on the slab, rebar sticking out of their tops; workers nailing the last box',
+                    'video' => 'the workers build the wooden formwork boxes for the ground-floor columns one by one'],
+                ['segundos' => 3, 'quadro' => 'the formwork taken off: grey concrete columns standing; the upper slab\'s formwork laid on timber props between them, workers on top laying steel mesh',
+                    'video' => 'the workers strip the formwork, set up the timber props and lay the upper slab\'s formwork and mesh'],
+                ['segundos' => 3, 'quadro' => 'the upper slab poured; the ground-floor block walls laid between the columns up to half their height; masons laying blocks with trowels and mortar',
+                    'video' => 'the masons lay the ground-floor blocks row by row between the columns'],
+                ['segundos' => 3, 'quadro' => 'the ground-floor walls complete with empty window and door openings; on the upper floor the columns standing and the block walls half built; scaffolding along the front with masons on it',
+                    'video' => 'the masons finish the ground-floor walls, the workers raise the upper columns, put up the scaffolding and start the upper walls'],
+                ['segundos' => 3, 'quadro' => 'the house rendered and painted, its windows and doors fitted; workers taking the scaffolding down; along the road the new front wall built in blocks up to half its height by two workers, no gate yet; the rest of the plot bare earth',
+                    'video' => 'the masons finish the upper walls, the workers lay the roof tiles, render and paint the walls, fit the windows and doors, take the scaffolding down and start the front wall block by block'],
+                ['segundos' => 3, 'quadro' => null,
+                    'video' => 'the workers finish the front wall, fit the gate, pave the drive, lay the lawn and plant the garden, and in the last second the workers walk out of the frame'],
+            ],
         ],
         // The animated plan: the frames are built (Realizador::planta), the clip is Imoplanta's plan video, 10 s with sound
         'planta' => [
@@ -321,7 +418,7 @@ class Realizador
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
-        if ($f->ferramenta === 'lateral' && $pedido === null) {   // the side move's end frame is built, not drawn
+        if (in_array($f->ferramenta, ['lateral', 'avanco'], true) && $pedido === null) {   // a camera move's end frame is built, not drawn
             return $this->lateral($f);
         }
         if ($f->ferramenta === 'planta' && $pedido === null) {    // the plan: from the browser's render of its 3D model
@@ -347,8 +444,12 @@ class Realizador
         }
         $refs[] = $this->kie->upload($original, 'foto.jpg');
         [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
+        $novo = $this->imagem($prompt, $refs, Fotografo::proporcao($original), $w, $h, $f->pasta().'/'.$qual.'-'.Str::random(8).'.png');
+        if ($qual === 'fim' && in_array($f->ferramenta, self::NA_FOTO, true)) {   // the result on the photo's own camera
+            $this->alinhar($novo, [$f->original]);
+        }
 
-        return $this->imagem($prompt, $refs, Fotografo::proporcao($original), $w, $h, $f->pasta().'/'.$qual.'-'.Str::random(8).'.png');
+        return $novo;
     }
 
     /**
@@ -419,7 +520,7 @@ class Realizador
     private function lateral(FerramentaIa $f): string
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
-        $p = self::PROMPTS['lateral'];
+        $p = self::PROMPTS['lateral'];   // the depth map and the clean-up serve both moves
         $original = $disk->get($f->original);
         [$w0, $h0] = getimagesizefromstring($original) ?: [1600, 1200];
         $prof = $f->pasta().'/profundidade.png';   // once per video: a new direction reuses it
@@ -431,7 +532,9 @@ class Realizador
         @mkdir($dir);
         try {
             file_put_contents("$dir/foto.jpg", $original);
-            [$inicio, $fim] = self::deslocar("$dir/foto.jpg", $disk->path($prof), $f->direcao() === 'esquerda', $dir);
+            [$inicio, $fim] = $f->ferramenta === 'avanco'
+                ? self::avancar("$dir/foto.jpg", $disk->path($prof), $f->direcao() === 'frente', $dir)
+                : self::deslocar("$dir/foto.jpg", $disk->path($prof), $f->direcao() === 'esquerda', $dir);
             $caminhoInicio = $f->pasta().'/inicio-'.Str::random(8).'.png';
             $disk->put($caminhoInicio, file_get_contents($inicio));
             $f->update(['inicio' => $caminhoInicio]);
@@ -471,34 +574,235 @@ class Realizador
         return ["$dir/inicio.png", "$dir/fim.png"];
     }
 
-    /** The clip from the approved frames ($nota: the customer's wish for a new version). Returns its path. */
+    /** Share of the width both walk frames keep: walking back pulls in what lies past the photo's edge. */
+    public const JANELA_AVANCO = 0.84;
+
+    /**
+     * The photo as seen after the camera walked forward ($frente) or back, from its depth map (white = near): every
+     * pixel moves out from (in to) the centre by its distance from it times its nearness, near ones ~3x further than
+     * far ones, which a zoom (all alike) never does. Returns [start, end] PNG paths in $dir, both cut to the same
+     * centred window. At the window's edge a near pixel moves ~13 % of its distance, a far one ~4 %.
+     */
+    public static function avancar(string $foto, string $profundidade, bool $frente, string $dir): array
+    {
+        [$w0, $h0] = getimagesize($foto);
+        $w = self::LARGURA_LATERAL;
+        $h = (int) (round($h0 * $w / $w0 / 2) * 2);
+        $cw = (int) (round($w * self::JANELA_AVANCO / 2) * 2);
+        $ch = (int) (round($h * self::JANELA_AVANCO / 2) * 2);
+        [$x, $y] = [($w - $cw) / 2, ($h - $ch) / 2];
+        // displace: out(x) = in(x + map - 128); forward reads nearer the centre (the picture grows), back further out
+        $sinal = $frente ? '-' : '+';
+        $passo = "(36+90*p(X,Y)/255)/(W/2)";   // pixels per pixel from the centre: far 36, near 126 at the edge
+        $corre = fn (array $args) => (new \Symfony\Component\Process\Process(['ffmpeg', '-y', '-v', 'error', ...$args]))->setTimeout(120)->mustRun();
+        $corre(['-i', $foto, '-vf', "scale=$w:$h,crop=$cw:$ch:$x:$y", "$dir/inicio.png"]);
+        $corre(['-i', $foto, '-i', $profundidade, '-filter_complex',
+            "[0]scale=$w:$h,format=gbrp[m];[1]scale=$w:$h,format=gray,gblur=sigma=10,split[a][b];"
+            ."[a]geq=lum='clip(128{$sinal}(X-W/2)*$passo,0,255)',format=gbrp[x];"
+            ."[b]geq=lum='clip(128{$sinal}(Y-H/2)*$passo,0,255)',format=gbrp[y];"
+            ."[m][x][y]displace=edge=smear,crop=$cw:$ch:$x:$y", '-frames:v', '1', "$dir/fim.png"]);
+
+        return ["$dir/inicio.png", "$dir/fim.png"];
+    }
+
+    /**
+     * A demolition stage, drawn forward from the stage before (the photo first): the old things exist only there.
+     * First image: the stage before; second: the finished result. %s: what this stage shows.
+     */
+    public const PROMPT_ETAPA = 'Edit the first image: the same place one step further into the works. This is the same camera '
+        .'on a tripod a few days later: exactly the same viewpoint, lens, framing and crop, so every wall, corner, window, '
+        .'door, the floor line and everything not touched in this step stay exactly where and as they are in the first '
+        .'image. Change only what this step does: %s. What was done before stays done. Taking things out never changes the '
+        .'space itself: every wall, corner, recess and opening stays where it is, as the second image (the place when the '
+        .'works are finished) also shows. The workers are real people caught mid-task, holding the tools or materials they '
+        .'work with. The same daylight. A photoreal, unedited photograph of a real building site, free of text, logos and '
+        .'watermarks.';
+
+    /**
+     * A building stage, drawn BACKWARDS from the stage after it (the approved result first), so what is built keeps
+     * the result's footprint, shape and size: drawn forward, the stages drifted to another building and the clip
+     * jumped to the real one at the end (user, 2026-11-28). First image: the stage after; second: the place before
+     * the works. %s: what this stage shows.
+     */
+    public const PROMPT_ANTES = 'Edit the first image: the same place at an EARLIER moment of the works, a few days before. This '
+        .'is the same camera on a tripod: exactly the same viewpoint, lens, framing and crop. At that moment it looked like '
+        .'this: %s. So take away or undo whatever is not done yet at that moment, and keep everything that is: what is '
+        .'already built stays exactly in its place, with exactly its shape and size from the first image, only less '
+        .'finished. Everything outside the works (the street, the neighbours, the sky, the walls of the room) stays exactly '
+        .'as it is. The second image is the place before the works began, for reference (the ground, the old walls). The '
+        .'workers are real people caught mid-task, holding the tools or materials they work with. The same daylight. A '
+        .'photoreal, unedited photograph of a real building site, free of text, logos and watermarks.';
+
+    /** Tools whose result is the photo itself changed: their AI end frame must lie exactly on the photo's camera. */
+    public const NA_FOTO = ['remodelacao', 'construcao', 'limpeza'];
+
+    /**
+     * Puts an AI frame (a disk path) back on the camera of one of $refs (disk paths), in place: the image AI drifts the
+     * framing on each edit (an approved build ended 123 px lower and 4 % closer than its photo, and the clip jumped at
+     * the start: 2026-11-28). scripts/alinhar.py matches what did not change (the street, the neighbours, a window);
+     * with no sound match, or no OpenCV, the frame stays as it is and the video goes on. False when the frame had
+     * drifted so far that a big border had to be filled in: better redrawn.
+     */
+    private function alinhar(string $caminho, array $refs): bool
+    {
+        $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
+        $saida = sys_get_temp_dir().'/alinhado-'.Str::random(10).'.png';
+        try {
+            $r = (new \Symfony\Component\Process\Process([(string) config('services.ferramentas.python', 'python3'),
+                base_path('scripts/alinhar.py'), $saida, $disk->path($caminho), ...array_map(fn ($c) => $disk->path($c), $refs)]))
+                ->setTimeout(120)->mustRun();
+            $res = json_decode(trim($r->getOutput()), true) ?? [];
+            if (($res['ok'] ?? false) && is_file($saida)) {
+                $disk->put($caminho, file_get_contents($saida));
+            }
+
+            return ! ($res['grande'] ?? false);
+        } catch (\Throwable $e) {
+            Log::warning('Ferramentas IA: frame not aligned ('.$caminho.'): '.Str::limit($e->getMessage(), 300));
+
+            return true;
+        } finally {
+            @unlink($saida);
+        }
+    }
+
+    /** Works steps play this much faster than Kling made them: twice the steps, each a smaller change, so nothing
+     * rises or slides into place by itself (user, 2026-11-28: "things are just rising from the ground"). */
+    public const ACELERAR_OBRA = 2;
+
+    /** One works step for Kling, between two stage frames (%s: what the workers do in it). */
+    public const PROMPT_PASSO = 'Fast-motion timelapse of real building works from a fixed camera on a tripod: the camera stays '
+        .'perfectly still for the whole shot, everything sped up. In this step %s. Every change is made in view by the '
+        .'workers\' hands and tools, or by a machine only if this step names one, piece by piece: nothing fades, morphs or appears by itself, and nothing '
+        .'finished in the first frame changes. Everything outside the works stays exactly in place; the daylight flickers '
+        .'gently as the days pass. One continuous shot, no cuts.';
+
+    /**
+     * The clip from the approved frames ($nota: the customer's wish for a new version). Returns its path. Works
+     * (remodel, build) go in steps: Kling given only the before and after faded the foundations, walls and tiles in
+     * with no one placing them (user, 2026-11-28), so the AI draws each stage with the workers at it and Kling
+     * plays one step at a time; the steps are joined. Same seconds in all, so the same Kling price.
+     */
     public function animar(FerramentaIa $f, ?string $nota = null): string
     {
         $disk = Storage::disk(config('contentmachine.imoplanta.disk'));
         $this->configurado();
         $p = self::prompts($f);
-        $segundos = $f->segundos();
+        $som = ($p['som'] ?? null) !== null;
+        $pedido = ($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');
         $inicio = $this->kie->upload($disk->get($f->inicio), 'inicio.png');
         $fim = $this->kie->upload($disk->get($f->fim), 'fim.png');
-        $som = ($p['som'] ?? null) !== null;
-        $video = ($f->tipo()['direcao'] ?? false) ? sprintf($p['video'], $f->direcao() === 'esquerda' ? 'left' : 'right') : $p['video'];
-        $prompt = $video.($nota ? ' The client also asks: '.$nota.'.' : '').($p['som'] ?? '');
+        if (empty($p['etapas'])) {
+            $video = isset($p['sentidos']) ? sprintf($p['video'], $p['sentidos'][$f->direcao()]) : $p['video'];
+
+            return $this->guardar($f, $this->clip($video.$pedido, $inicio, $fim, $f->segundos(), $som));
+        }
+
+        // the stage frames: demolition forward from the photo, building backwards from the approved result; each put
+        // back on the camera of the frame it was drawn from (or the photo), so a chain of edits cannot drift
+        $original = $disk->get($f->inicio);
+        [$w, $h] = getimagesizefromstring($original) ?: [0, 0];
+        $n = count($p['etapas']);
+        $fimVideo = $f->pasta().'/fim-video-'.Str::random(8).'.png';   // an end frame approved before alignment existed
+        $disk->copy($f->fim, $fimVideo);
+        $this->alinhar($fimVideo, [$f->inicio]);
+        $fim = $this->kie->upload($disk->get($fimVideo), 'fim.png');
+        $quadros = [0 => $inicio, $n => $fim];
+        $caminhos = [0 => $f->inicio, $n => $fimVideo];
+        $desenhar = function (string $prompt, int $de, string $ref, int $i) use ($f, $disk, $original, $w, $h, &$quadros, &$caminhos) {
+            for ($vez = 1; $vez <= 2; $vez++) {   // a stage that drifted far is drawn once more rather than stretched
+                $c = $this->imagem($prompt, [$quadros[$de], $ref], Fotografo::proporcao($original), $w, $h,
+                    $f->pasta().'/etapa'.$i.'-'.Str::random(8).'.png');
+                if ($this->alinhar($c, [$caminhos[$de], $f->inicio])) {
+                    break;
+                }
+            }
+            $caminhos[$i] = $c;
+            $quadros[$i] = $this->kie->upload($disk->get($c), 'etapa.png');
+        };
+        $i = 1;
+        for (; $i < $n && ($p['etapas'][$i - 1]['demolir'] ?? false); $i++) {
+            $desenhar(sprintf(self::PROMPT_ETAPA, $p['etapas'][$i - 1]['quadro']), $i - 1, $fim, $i);
+        }
+        for ($j = $n - 1; $j >= $i; $j--) {
+            $desenhar(sprintf(self::PROMPT_ANTES, $p['etapas'][$j - 1]['quadro']), $j + 1, $inicio, $j);
+        }
+        ksort($quadros);
+
+        // every step submitted at once, then collected (a failed one is redone on its own)
+        $tarefas = [];
+        foreach ($p['etapas'] as $i => $e) {
+            $prompt = sprintf(self::PROMPT_PASSO, $e['video']).$pedido;
+            try {
+                $tarefas[$i] = $this->kie->submitFramesVideo($prompt, $quadros[$i], $quadros[$i + 1], '', $e['segundos'], $som, self::MODELO_VIDEO);
+            } catch (\Throwable) {
+                $tarefas[$i] = null;
+            }
+        }
+        $pasta = sys_get_temp_dir().'/obra-'.$f->id.'-'.Str::random(6);
+        @mkdir($pasta);
+        try {
+            $partes = [];
+            foreach ($p['etapas'] as $i => $e) {
+                $url = null;
+                if ($tarefas[$i] !== null) {
+                    try {
+                        $url = $this->kie->pollVideo($tarefas[$i], $this->kie->precoKling($e['segundos'], $som));
+                    } catch (\Throwable $erro) {
+                        Log::warning('Ferramentas IA: step '.($i + 1).' failed for video '.$f->id.': '.$erro->getMessage());
+                    }
+                }
+                $url ??= $this->clip(sprintf(self::PROMPT_PASSO, $e['video']).$pedido, $quadros[$i], $quadros[$i + 1], $e['segundos'], $som);
+                file_put_contents($partes[] = "$pasta/$i.mp4", Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());
+            }
+            $saida = "$pasta/obra.mp4";
+            self::juntar($partes, $saida, $som, self::ACELERAR_OBRA);
+            $caminho = $f->pasta().'/video-'.Str::random(8).'.mp4';
+            $disk->put($caminho, file_get_contents($saida));
+
+            return $caminho;
+        } finally {
+            array_map('unlink', glob("$pasta/*") ?: []);
+            @rmdir($pasta);
+        }
+    }
+
+    /** One Kling clip between two kie URLs, tried TENTATIVAS_VIDEO times. Returns its URL. */
+    private function clip(string $prompt, string $inicio, string $fim, int $segundos, bool $som): string
+    {
         $erro = null;
         for ($i = 1; $i <= self::TENTATIVAS_VIDEO; $i++) {
             try {
-                $tarefa = $this->kie->submitFramesVideo($prompt, $inicio, $fim, '', $segundos, $som, self::MODELO_VIDEO);
-                $url = $this->kie->pollVideo($tarefa, $this->kie->precoKling($segundos, $som));
-                $caminho = $f->pasta().'/video-'.Str::random(8).'.mp4';
-                $disk->put($caminho, Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());
-
-                return $caminho;
+                return $this->kie->pollVideo($this->kie->submitFramesVideo($prompt, $inicio, $fim, '', $segundos, $som, self::MODELO_VIDEO),
+                    $this->kie->precoKling($segundos, $som));
             } catch (\Throwable $e) {
                 $erro = $e;
-                Log::warning('Ferramentas IA: Kling attempt '.$i.' failed for video '.$f->id.': '.$e->getMessage());
+                Log::warning('Ferramentas IA: Kling attempt '.$i.' failed: '.$e->getMessage());
             }
         }
 
         throw $erro;
+    }
+
+    private function guardar(FerramentaIa $f, string $url): string
+    {
+        $caminho = $f->pasta().'/video-'.Str::random(8).'.mp4';
+        Storage::disk(config('contentmachine.imoplanta.disk'))->put($caminho, Http::timeout(300)->retry(2, 2000)->get($url)->throw()->body());
+
+        return $caminho;
+    }
+
+    /** The step clips joined into one (re-encoded: each step's last frame is the next one's first, so no jump), $vezes faster. */
+    public static function juntar(array $partes, string $saida, bool $som, int $vezes = 1): void
+    {
+        $n = count($partes);
+        $entradas = array_merge(...array_map(fn ($c) => ['-i', $c], $partes));
+        $fluxos = implode('', array_map(fn ($i) => "[$i:v]".($som ? "[$i:a]" : ''), range(0, $n - 1)));
+        $mapa = $som ? ['-map', '[v]', '-map', '[a]', '-c:a', 'aac'] : ['-map', '[v]'];
+        (new \Symfony\Component\Process\Process(['ffmpeg', '-y', '-v', 'error', ...$entradas, '-filter_complex',
+            $fluxos."concat=n=$n:v=1:a=".($som ? 1 : 0).'[vj]'.($som ? '[aj]' : '')
+            .";[vj]setpts=PTS/$vezes,fps=24[v]".($som ? ";[aj]atempo=$vezes"."[a]" : ''), ...$mapa,
+            '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', $saida]))->setTimeout(300)->mustRun();
     }
 
     /**

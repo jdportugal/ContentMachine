@@ -67,9 +67,10 @@ class ImoplantaTest extends TestCase
         }
     }
 
-    public function test_for_now_only_the_listed_email_has_imoplanta(): void
+    public function test_imoplanta_is_for_the_listed_emails_or_everyone_with_a_star(): void
     {
         \Illuminate\Support\Facades\Gate::define('imoplanta', fn (User $u) => $u->veImoplanta() || $u->is_admin);   // the real rule
+        config(['contentmachine.imoplanta.acesso' => ['joaodiogocferreira@gmail.com']]);
         $outro = User::factory()->cliente()->create();
         $joao = User::factory()->cliente()->create(['email' => 'joaodiogocferreira@gmail.com']);
         $p = $this->imovel($outro);
@@ -80,6 +81,10 @@ class ImoplantaTest extends TestCase
         $this->actingAs($joao)->get(route('conta'))->assertSee(route('imoplanta'), false);                      // from their account
         $this->actingAs($joao)->get(route('imoplanta'))->assertOk();
         $this->actingAs(User::factory()->create(['is_admin' => true]))->get(route('imoplanta'))->assertOk();   // admins can open it
+
+        config(['contentmachine.imoplanta.acesso' => ['*']]);   // open to everyone (user, 2026-11-28)
+        $this->assertTrue($outro->veImoplanta() && $outro->veFerramentas());
+        $this->actingAs($outro)->get(route('imoplanta'))->assertOk();
     }
 
     private function casa(): array

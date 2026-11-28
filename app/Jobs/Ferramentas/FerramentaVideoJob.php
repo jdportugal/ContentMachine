@@ -19,7 +19,7 @@ class FerramentaVideoJob implements ShouldQueue
 
     public int $tries = 1;
 
-    public int $timeout = 1800;
+    public int $timeout = 3000;   // a works clip: up to 9 stage images (some drawn twice) and 10 Kling steps; < QUEUE_TIMEOUT 3300
 
     public function __construct(public int $video, public bool $refazer)
     {
@@ -34,10 +34,19 @@ class FerramentaVideoJob implements ShouldQueue
             $video = $realizador->animar($f, $this->refazer ? $f->pedido : null);
             $f->update(['video' => $video, 'estado' => FerramentaIa::PRONTO, 'erro' => null]);
         } catch (\Throwable $e) {
-            report($e);
+            Ferramentas::registarFalha($this->refazer ? 'nova versão do vídeo' : 'vídeo', $f, $e);
             $ferramentas->devolverVideo($f, $this->refazer, 'Não conseguimos criar o vídeo. Não foi descontado; pode tentar de novo.');
         } finally {
             $custos->contexto(null, null);
+        }
+    }
+
+    /** Killed (too long) or crashed outside handle(): logged, and the customer is given back what it cost, as above. */
+    public function failed(\Throwable $e): void
+    {
+        Ferramentas::registarFalha($this->refazer ? 'nova versão do vídeo (parada)' : 'vídeo (parado)', $this->video, $e);
+        if ($f = FerramentaIa::find($this->video)) {
+            app(Ferramentas::class)->devolverVideo($f, $this->refazer, 'Não conseguimos criar o vídeo. Não foi descontado; pode tentar de novo.');
         }
     }
 }
