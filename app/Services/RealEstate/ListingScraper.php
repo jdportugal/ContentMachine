@@ -67,6 +67,11 @@ class ListingScraper
         if (preg_match('#/(agente|agentes|agent|agents|consultor|consultora|consultores|real-estate-agent|agente-imobiliario|officer|agencia|agencias|agency)(/|$)#', $path)) {
             return true;
         }
+        // iad: a property ends in /r<number> (/anuncio/<slug>/r148292, /pt/imovel/<slug>/r1234567); anything else is a
+        // search or a page — the one that failed twice on 28 Nov was a search, /anuncios/constancia_1408/venda/casa-moradia
+        if ($portal === 'iad') {
+            return ! preg_match('#/r\d+$#', $path);
+        }
         // RE/MAX searches (an agent's "my listings" link is one): /comprar/…, /arrendar/…, or a ?s= filter.
         if ($portal === 'remax' && (preg_match('#/(comprar|arrendar)(/|$)#', $path) || preg_match('/(^|&)s=/', $query))) {
             return true;
